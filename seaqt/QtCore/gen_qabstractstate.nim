@@ -108,21 +108,21 @@ proc activeChanged*(self: gen_qabstractstate_types.QAbstractState, active: bool)
   fcQAbstractState_activeChanged(self.h, active)
 
 type QAbstractStateactiveChangedSlot* = proc(active: bool)
-proc cQAbstractState_slot_callback_activeChanged(slot: int, active: bool) {.cdecl.} =
+proc fcQAbstractState_slot_callback_activeChanged(slot: int, active: bool) {.cdecl.} =
   let nimfunc = cast[ptr QAbstractStateactiveChangedSlot](cast[pointer](slot))
   let slotval1 = active
 
   nimfunc[](slotval1)
 
-proc cQAbstractState_slot_callback_activeChanged_release(slot: int) {.cdecl.} =
+proc fcQAbstractState_slot_callback_activeChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QAbstractStateactiveChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onactiveChanged*(self: gen_qabstractstate_types.QAbstractState, slot: QAbstractStateactiveChangedSlot) =
+proc onActiveChanged*(self: gen_qabstractstate_types.QAbstractState, slot: QAbstractStateactiveChangedSlot) =
   var tmp = new QAbstractStateactiveChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAbstractState_connect_activeChanged(self.h, cast[int](addr tmp[]), cQAbstractState_slot_callback_activeChanged, cQAbstractState_slot_callback_activeChanged_release)
+  fcQAbstractState_connect_activeChanged(self.h, cast[int](addr tmp[]), fcQAbstractState_slot_callback_activeChanged, fcQAbstractState_slot_callback_activeChanged_release)
 
 proc tr*(_: type gen_qabstractstate_types.QAbstractState, s: cstring, c: cstring): string =
   let v_ms = fcQAbstractState_tr2(s, c)

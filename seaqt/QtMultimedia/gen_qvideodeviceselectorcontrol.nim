@@ -128,27 +128,27 @@ proc selectedDeviceChanged*(self: gen_qvideodeviceselectorcontrol_types.QVideoDe
   fcQVideoDeviceSelectorControl_selectedDeviceChanged(self.h, index)
 
 type QVideoDeviceSelectorControlselectedDeviceChangedSlot* = proc(index: cint)
-proc cQVideoDeviceSelectorControl_slot_callback_selectedDeviceChanged(slot: int, index: cint) {.cdecl.} =
+proc fcQVideoDeviceSelectorControl_slot_callback_selectedDeviceChanged(slot: int, index: cint) {.cdecl.} =
   let nimfunc = cast[ptr QVideoDeviceSelectorControlselectedDeviceChangedSlot](cast[pointer](slot))
   let slotval1 = index
 
   nimfunc[](slotval1)
 
-proc cQVideoDeviceSelectorControl_slot_callback_selectedDeviceChanged_release(slot: int) {.cdecl.} =
+proc fcQVideoDeviceSelectorControl_slot_callback_selectedDeviceChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QVideoDeviceSelectorControlselectedDeviceChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onselectedDeviceChanged*(self: gen_qvideodeviceselectorcontrol_types.QVideoDeviceSelectorControl, slot: QVideoDeviceSelectorControlselectedDeviceChangedSlot) =
+proc onSelectedDeviceChanged*(self: gen_qvideodeviceselectorcontrol_types.QVideoDeviceSelectorControl, slot: QVideoDeviceSelectorControlselectedDeviceChangedSlot) =
   var tmp = new QVideoDeviceSelectorControlselectedDeviceChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQVideoDeviceSelectorControl_connect_selectedDeviceChanged(self.h, cast[int](addr tmp[]), cQVideoDeviceSelectorControl_slot_callback_selectedDeviceChanged, cQVideoDeviceSelectorControl_slot_callback_selectedDeviceChanged_release)
+  fcQVideoDeviceSelectorControl_connect_selectedDeviceChanged(self.h, cast[int](addr tmp[]), fcQVideoDeviceSelectorControl_slot_callback_selectedDeviceChanged, fcQVideoDeviceSelectorControl_slot_callback_selectedDeviceChanged_release)
 
 proc selectedDeviceChanged*(self: gen_qvideodeviceselectorcontrol_types.QVideoDeviceSelectorControl, name: openArray[char]): void =
   fcQVideoDeviceSelectorControl_selectedDeviceChangedWithName(self.h, struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))))
 
 type QVideoDeviceSelectorControlselectedDeviceChangedWithNameSlot* = proc(name: openArray[char])
-proc cQVideoDeviceSelectorControl_slot_callback_selectedDeviceChangedWithName(slot: int, name: struct_miqt_string) {.cdecl.} =
+proc fcQVideoDeviceSelectorControl_slot_callback_selectedDeviceChangedWithName(slot: int, name: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QVideoDeviceSelectorControlselectedDeviceChangedWithNameSlot](cast[pointer](slot))
   let vname_ms = name
   let vnamex_ret = string.fromBytes(vname_ms)
@@ -157,33 +157,33 @@ proc cQVideoDeviceSelectorControl_slot_callback_selectedDeviceChangedWithName(sl
 
   nimfunc[](slotval1)
 
-proc cQVideoDeviceSelectorControl_slot_callback_selectedDeviceChangedWithName_release(slot: int) {.cdecl.} =
+proc fcQVideoDeviceSelectorControl_slot_callback_selectedDeviceChangedWithName_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QVideoDeviceSelectorControlselectedDeviceChangedWithNameSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onselectedDeviceChanged*(self: gen_qvideodeviceselectorcontrol_types.QVideoDeviceSelectorControl, slot: QVideoDeviceSelectorControlselectedDeviceChangedWithNameSlot) =
+proc onSelectedDeviceChanged*(self: gen_qvideodeviceselectorcontrol_types.QVideoDeviceSelectorControl, slot: QVideoDeviceSelectorControlselectedDeviceChangedWithNameSlot) =
   var tmp = new QVideoDeviceSelectorControlselectedDeviceChangedWithNameSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQVideoDeviceSelectorControl_connect_selectedDeviceChangedWithName(self.h, cast[int](addr tmp[]), cQVideoDeviceSelectorControl_slot_callback_selectedDeviceChangedWithName, cQVideoDeviceSelectorControl_slot_callback_selectedDeviceChangedWithName_release)
+  fcQVideoDeviceSelectorControl_connect_selectedDeviceChangedWithName(self.h, cast[int](addr tmp[]), fcQVideoDeviceSelectorControl_slot_callback_selectedDeviceChangedWithName, fcQVideoDeviceSelectorControl_slot_callback_selectedDeviceChangedWithName_release)
 
 proc devicesChanged*(self: gen_qvideodeviceselectorcontrol_types.QVideoDeviceSelectorControl): void =
   fcQVideoDeviceSelectorControl_devicesChanged(self.h)
 
 type QVideoDeviceSelectorControldevicesChangedSlot* = proc()
-proc cQVideoDeviceSelectorControl_slot_callback_devicesChanged(slot: int) {.cdecl.} =
+proc fcQVideoDeviceSelectorControl_slot_callback_devicesChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QVideoDeviceSelectorControldevicesChangedSlot](cast[pointer](slot))
   nimfunc[]()
 
-proc cQVideoDeviceSelectorControl_slot_callback_devicesChanged_release(slot: int) {.cdecl.} =
+proc fcQVideoDeviceSelectorControl_slot_callback_devicesChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QVideoDeviceSelectorControldevicesChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc ondevicesChanged*(self: gen_qvideodeviceselectorcontrol_types.QVideoDeviceSelectorControl, slot: QVideoDeviceSelectorControldevicesChangedSlot) =
+proc onDevicesChanged*(self: gen_qvideodeviceselectorcontrol_types.QVideoDeviceSelectorControl, slot: QVideoDeviceSelectorControldevicesChangedSlot) =
   var tmp = new QVideoDeviceSelectorControldevicesChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQVideoDeviceSelectorControl_connect_devicesChanged(self.h, cast[int](addr tmp[]), cQVideoDeviceSelectorControl_slot_callback_devicesChanged, cQVideoDeviceSelectorControl_slot_callback_devicesChanged_release)
+  fcQVideoDeviceSelectorControl_connect_devicesChanged(self.h, cast[int](addr tmp[]), fcQVideoDeviceSelectorControl_slot_callback_devicesChanged, fcQVideoDeviceSelectorControl_slot_callback_devicesChanged_release)
 
 proc tr*(_: type gen_qvideodeviceselectorcontrol_types.QVideoDeviceSelectorControl, s: cstring, c: cstring): string =
   let v_ms = fcQVideoDeviceSelectorControl_tr2(s, c)

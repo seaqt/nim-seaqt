@@ -216,6 +216,7 @@ proc fcQPrinter_setPageMargins(self: pointer, left: float64, top: float64, right
 proc fcQPrinter_getPageMargins(self: pointer, left: ptr float64, top: ptr float64, right: ptr float64, bottom: ptr float64, unit: cint): void {.importc: "QPrinter_getPageMargins".}
 proc fcQPrinter_vtbl(self: pointer): pointer {.importc: "QPrinter_vtbl".}
 proc fcQPrinter_vdata(self: pointer): pointer {.importc: "QPrinter_vdata".}
+
 type cQPrinterVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   devType*: proc(self: pointer): cint {.cdecl, raises: [], gcsafe.}
@@ -501,6 +502,7 @@ type QPrintermetricProc* = proc(self: QPrinter, param1: cint): cint {.raises: []
 type QPrinterinitPainterProc* = proc(self: QPrinter, painter: gen_qpainter_types.QPainter): void {.raises: [], gcsafe.}
 type QPrinterredirectedProc* = proc(self: QPrinter, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.raises: [], gcsafe.}
 type QPrintersharedPainterProc* = proc(self: QPrinter): gen_qpainter_types.QPainter {.raises: [], gcsafe.}
+
 type QPrinterVTable* {.inheritable, pure.} = object
   vtbl: cQPrinterVTable
   devType*: QPrinterdevTypeProc
@@ -513,46 +515,63 @@ type QPrinterVTable* {.inheritable, pure.} = object
   initPainter*: QPrinterinitPainterProc
   redirected*: QPrinterredirectedProc
   sharedPainter*: QPrintersharedPainterProc
+
 proc QPrinterdevType*(self: gen_qprinter_types.QPrinter): cint =
   fcQPrinter_virtualbase_devType(self.h)
 
-proc cQPrinter_vtable_callback_devType(self: pointer): cint {.cdecl.} =
+proc QPrintersetPageSize*(self: gen_qprinter_types.QPrinter, pageSize: cint): void =
+  fcQPrinter_virtualbase_setPageSize(self.h, cint(pageSize))
+
+proc QPrintersetPageSizeMM*(self: gen_qprinter_types.QPrinter, size: gen_qsize_types.QSizeF): void =
+  fcQPrinter_virtualbase_setPageSizeMM(self.h, size.h)
+
+proc QPrinternewPage*(self: gen_qprinter_types.QPrinter): bool =
+  fcQPrinter_virtualbase_newPage(self.h)
+
+proc QPrinterpaintEngine*(self: gen_qprinter_types.QPrinter): gen_qpaintengine_types.QPaintEngine =
+  gen_qpaintengine_types.QPaintEngine(h: fcQPrinter_virtualbase_paintEngine(self.h), owned: false)
+
+proc QPrintersetMargins*(self: gen_qprinter_types.QPrinter, m: gen_qpagedpaintdevice_types.QPagedPaintDeviceMargins): void =
+  fcQPrinter_virtualbase_setMargins(self.h, m.h)
+
+proc QPrintermetric*(self: gen_qprinter_types.QPrinter, param1: cint): cint =
+  fcQPrinter_virtualbase_metric(self.h, cint(param1))
+
+proc QPrinterinitPainter*(self: gen_qprinter_types.QPrinter, painter: gen_qpainter_types.QPainter): void =
+  fcQPrinter_virtualbase_initPainter(self.h, painter.h)
+
+proc QPrinterredirected*(self: gen_qprinter_types.QPrinter, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice =
+  gen_qpaintdevice_types.QPaintDevice(h: fcQPrinter_virtualbase_redirected(self.h, offset.h), owned: false)
+
+proc QPrintersharedPainter*(self: gen_qprinter_types.QPrinter): gen_qpainter_types.QPainter =
+  gen_qpainter_types.QPainter(h: fcQPrinter_virtualbase_sharedPainter(self.h), owned: false)
+
+
+proc fcQPrinter_vtable_callback_devType(self: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QPrinterVTable](fcQPrinter_vdata(self))
   let self = QPrinter(h: self)
   var virtualReturn = vtbl[].devType(self)
   virtualReturn
 
-proc QPrintersetPageSize*(self: gen_qprinter_types.QPrinter, pageSize: cint): void =
-  fcQPrinter_virtualbase_setPageSize(self.h, cint(pageSize))
-
-proc cQPrinter_vtable_callback_setPageSize(self: pointer, pageSize: cint): void {.cdecl.} =
+proc fcQPrinter_vtable_callback_setPageSize(self: pointer, pageSize: cint): void {.cdecl.} =
   let vtbl = cast[ptr QPrinterVTable](fcQPrinter_vdata(self))
   let self = QPrinter(h: self)
   let slotval1 = cint(pageSize)
   vtbl[].setPageSize(self, slotval1)
 
-proc QPrintersetPageSizeMM*(self: gen_qprinter_types.QPrinter, size: gen_qsize_types.QSizeF): void =
-  fcQPrinter_virtualbase_setPageSizeMM(self.h, size.h)
-
-proc cQPrinter_vtable_callback_setPageSizeMM(self: pointer, size: pointer): void {.cdecl.} =
+proc fcQPrinter_vtable_callback_setPageSizeMM(self: pointer, size: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPrinterVTable](fcQPrinter_vdata(self))
   let self = QPrinter(h: self)
   let slotval1 = gen_qsize_types.QSizeF(h: size, owned: false)
   vtbl[].setPageSizeMM(self, slotval1)
 
-proc QPrinternewPage*(self: gen_qprinter_types.QPrinter): bool =
-  fcQPrinter_virtualbase_newPage(self.h)
-
-proc cQPrinter_vtable_callback_newPage(self: pointer): bool {.cdecl.} =
+proc fcQPrinter_vtable_callback_newPage(self: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QPrinterVTable](fcQPrinter_vdata(self))
   let self = QPrinter(h: self)
   var virtualReturn = vtbl[].newPage(self)
   virtualReturn
 
-proc QPrinterpaintEngine*(self: gen_qprinter_types.QPrinter): gen_qpaintengine_types.QPaintEngine =
-  gen_qpaintengine_types.QPaintEngine(h: fcQPrinter_virtualbase_paintEngine(self.h), owned: false)
-
-proc cQPrinter_vtable_callback_paintEngine(self: pointer): pointer {.cdecl.} =
+proc fcQPrinter_vtable_callback_paintEngine(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QPrinterVTable](fcQPrinter_vdata(self))
   let self = QPrinter(h: self)
   var virtualReturn = vtbl[].paintEngine(self)
@@ -561,38 +580,26 @@ proc cQPrinter_vtable_callback_paintEngine(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QPrintersetMargins*(self: gen_qprinter_types.QPrinter, m: gen_qpagedpaintdevice_types.QPagedPaintDeviceMargins): void =
-  fcQPrinter_virtualbase_setMargins(self.h, m.h)
-
-proc cQPrinter_vtable_callback_setMargins(self: pointer, m: pointer): void {.cdecl.} =
+proc fcQPrinter_vtable_callback_setMargins(self: pointer, m: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPrinterVTable](fcQPrinter_vdata(self))
   let self = QPrinter(h: self)
   let slotval1 = gen_qpagedpaintdevice_types.QPagedPaintDeviceMargins(h: m, owned: false)
   vtbl[].setMargins(self, slotval1)
 
-proc QPrintermetric*(self: gen_qprinter_types.QPrinter, param1: cint): cint =
-  fcQPrinter_virtualbase_metric(self.h, cint(param1))
-
-proc cQPrinter_vtable_callback_metric(self: pointer, param1: cint): cint {.cdecl.} =
+proc fcQPrinter_vtable_callback_metric(self: pointer, param1: cint): cint {.cdecl.} =
   let vtbl = cast[ptr QPrinterVTable](fcQPrinter_vdata(self))
   let self = QPrinter(h: self)
   let slotval1 = cint(param1)
   var virtualReturn = vtbl[].metric(self, slotval1)
   virtualReturn
 
-proc QPrinterinitPainter*(self: gen_qprinter_types.QPrinter, painter: gen_qpainter_types.QPainter): void =
-  fcQPrinter_virtualbase_initPainter(self.h, painter.h)
-
-proc cQPrinter_vtable_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
+proc fcQPrinter_vtable_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPrinterVTable](fcQPrinter_vdata(self))
   let self = QPrinter(h: self)
   let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
   vtbl[].initPainter(self, slotval1)
 
-proc QPrinterredirected*(self: gen_qprinter_types.QPrinter, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice =
-  gen_qpaintdevice_types.QPaintDevice(h: fcQPrinter_virtualbase_redirected(self.h, offset.h), owned: false)
-
-proc cQPrinter_vtable_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
+proc fcQPrinter_vtable_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QPrinterVTable](fcQPrinter_vdata(self))
   let self = QPrinter(h: self)
   let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
@@ -602,10 +609,7 @@ proc cQPrinter_vtable_callback_redirected(self: pointer, offset: pointer): point
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QPrintersharedPainter*(self: gen_qprinter_types.QPrinter): gen_qpainter_types.QPainter =
-  gen_qpainter_types.QPainter(h: fcQPrinter_virtualbase_sharedPainter(self.h), owned: false)
-
-proc cQPrinter_vtable_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
+proc fcQPrinter_vtable_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QPrinterVTable](fcQPrinter_vdata(self))
   let self = QPrinter(h: self)
   var virtualReturn = vtbl[].sharedPainter(self)
@@ -616,37 +620,49 @@ proc cQPrinter_vtable_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
 
 type VirtualQPrinter* {.inheritable.} = ref object of QPrinter
   vtbl*: cQPrinterVTable
+
 method devType*(self: VirtualQPrinter): cint {.base.} =
   QPrinterdevType(self[])
-proc cQPrinter_method_callback_devType(self: pointer): cint {.cdecl.} =
+method setPageSize*(self: VirtualQPrinter, pageSize: cint): void {.base.} =
+  QPrintersetPageSize(self[], pageSize)
+method setPageSizeMM*(self: VirtualQPrinter, size: gen_qsize_types.QSizeF): void {.base.} =
+  QPrintersetPageSizeMM(self[], size)
+method newPage*(self: VirtualQPrinter): bool {.base.} =
+  QPrinternewPage(self[])
+method paintEngine*(self: VirtualQPrinter): gen_qpaintengine_types.QPaintEngine {.base.} =
+  QPrinterpaintEngine(self[])
+method setMargins*(self: VirtualQPrinter, m: gen_qpagedpaintdevice_types.QPagedPaintDeviceMargins): void {.base.} =
+  QPrintersetMargins(self[], m)
+method metric*(self: VirtualQPrinter, param1: cint): cint {.base.} =
+  QPrintermetric(self[], param1)
+method initPainter*(self: VirtualQPrinter, painter: gen_qpainter_types.QPainter): void {.base.} =
+  QPrinterinitPainter(self[], painter)
+method redirected*(self: VirtualQPrinter, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.base.} =
+  QPrinterredirected(self[], offset)
+method sharedPainter*(self: VirtualQPrinter): gen_qpainter_types.QPainter {.base.} =
+  QPrintersharedPainter(self[])
+
+proc fcQPrinter_method_callback_devType(self: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQPrinter](fcQPrinter_vdata(self))
   var virtualReturn = inst.devType()
   virtualReturn
 
-method setPageSize*(self: VirtualQPrinter, pageSize: cint): void {.base.} =
-  QPrintersetPageSize(self[], pageSize)
-proc cQPrinter_method_callback_setPageSize(self: pointer, pageSize: cint): void {.cdecl.} =
+proc fcQPrinter_method_callback_setPageSize(self: pointer, pageSize: cint): void {.cdecl.} =
   let inst = cast[VirtualQPrinter](fcQPrinter_vdata(self))
   let slotval1 = cint(pageSize)
   inst.setPageSize(slotval1)
 
-method setPageSizeMM*(self: VirtualQPrinter, size: gen_qsize_types.QSizeF): void {.base.} =
-  QPrintersetPageSizeMM(self[], size)
-proc cQPrinter_method_callback_setPageSizeMM(self: pointer, size: pointer): void {.cdecl.} =
+proc fcQPrinter_method_callback_setPageSizeMM(self: pointer, size: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPrinter](fcQPrinter_vdata(self))
   let slotval1 = gen_qsize_types.QSizeF(h: size, owned: false)
   inst.setPageSizeMM(slotval1)
 
-method newPage*(self: VirtualQPrinter): bool {.base.} =
-  QPrinternewPage(self[])
-proc cQPrinter_method_callback_newPage(self: pointer): bool {.cdecl.} =
+proc fcQPrinter_method_callback_newPage(self: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQPrinter](fcQPrinter_vdata(self))
   var virtualReturn = inst.newPage()
   virtualReturn
 
-method paintEngine*(self: VirtualQPrinter): gen_qpaintengine_types.QPaintEngine {.base.} =
-  QPrinterpaintEngine(self[])
-proc cQPrinter_method_callback_paintEngine(self: pointer): pointer {.cdecl.} =
+proc fcQPrinter_method_callback_paintEngine(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQPrinter](fcQPrinter_vdata(self))
   var virtualReturn = inst.paintEngine()
   virtualReturn.owned = false # TODO move?
@@ -654,31 +670,23 @@ proc cQPrinter_method_callback_paintEngine(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-method setMargins*(self: VirtualQPrinter, m: gen_qpagedpaintdevice_types.QPagedPaintDeviceMargins): void {.base.} =
-  QPrintersetMargins(self[], m)
-proc cQPrinter_method_callback_setMargins(self: pointer, m: pointer): void {.cdecl.} =
+proc fcQPrinter_method_callback_setMargins(self: pointer, m: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPrinter](fcQPrinter_vdata(self))
   let slotval1 = gen_qpagedpaintdevice_types.QPagedPaintDeviceMargins(h: m, owned: false)
   inst.setMargins(slotval1)
 
-method metric*(self: VirtualQPrinter, param1: cint): cint {.base.} =
-  QPrintermetric(self[], param1)
-proc cQPrinter_method_callback_metric(self: pointer, param1: cint): cint {.cdecl.} =
+proc fcQPrinter_method_callback_metric(self: pointer, param1: cint): cint {.cdecl.} =
   let inst = cast[VirtualQPrinter](fcQPrinter_vdata(self))
   let slotval1 = cint(param1)
   var virtualReturn = inst.metric(slotval1)
   virtualReturn
 
-method initPainter*(self: VirtualQPrinter, painter: gen_qpainter_types.QPainter): void {.base.} =
-  QPrinterinitPainter(self[], painter)
-proc cQPrinter_method_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
+proc fcQPrinter_method_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPrinter](fcQPrinter_vdata(self))
   let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
   inst.initPainter(slotval1)
 
-method redirected*(self: VirtualQPrinter, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.base.} =
-  QPrinterredirected(self[], offset)
-proc cQPrinter_method_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
+proc fcQPrinter_method_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQPrinter](fcQPrinter_vdata(self))
   let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
   var virtualReturn = inst.redirected(slotval1)
@@ -687,15 +695,14 @@ proc cQPrinter_method_callback_redirected(self: pointer, offset: pointer): point
   virtualReturn.h = nil
   virtualReturn_h
 
-method sharedPainter*(self: VirtualQPrinter): gen_qpainter_types.QPainter {.base.} =
-  QPrintersharedPainter(self[])
-proc cQPrinter_method_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
+proc fcQPrinter_method_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQPrinter](fcQPrinter_vdata(self))
   var virtualReturn = inst.sharedPainter()
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
   virtualReturn_h
+
 
 proc setEngines*(self: gen_qprinter_types.QPrinter, printEngine: gen_qprintengine_types.QPrintEngine, paintEngine: gen_qpaintengine_types.QPaintEngine): void =
   fcQPrinter_protectedbase_setEngines(self.h, printEngine.h, paintEngine.h)
@@ -711,25 +718,25 @@ proc create*(T: type gen_qprinter_types.QPrinter,
     let vtbl = cast[ref QPrinterVTable](fcQPrinter_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].devType):
-    vtbl[].vtbl.devType = cQPrinter_vtable_callback_devType
+    vtbl[].vtbl.devType = fcQPrinter_vtable_callback_devType
   if not isNil(vtbl[].setPageSize):
-    vtbl[].vtbl.setPageSize = cQPrinter_vtable_callback_setPageSize
+    vtbl[].vtbl.setPageSize = fcQPrinter_vtable_callback_setPageSize
   if not isNil(vtbl[].setPageSizeMM):
-    vtbl[].vtbl.setPageSizeMM = cQPrinter_vtable_callback_setPageSizeMM
+    vtbl[].vtbl.setPageSizeMM = fcQPrinter_vtable_callback_setPageSizeMM
   if not isNil(vtbl[].newPage):
-    vtbl[].vtbl.newPage = cQPrinter_vtable_callback_newPage
+    vtbl[].vtbl.newPage = fcQPrinter_vtable_callback_newPage
   if not isNil(vtbl[].paintEngine):
-    vtbl[].vtbl.paintEngine = cQPrinter_vtable_callback_paintEngine
+    vtbl[].vtbl.paintEngine = fcQPrinter_vtable_callback_paintEngine
   if not isNil(vtbl[].setMargins):
-    vtbl[].vtbl.setMargins = cQPrinter_vtable_callback_setMargins
+    vtbl[].vtbl.setMargins = fcQPrinter_vtable_callback_setMargins
   if not isNil(vtbl[].metric):
-    vtbl[].vtbl.metric = cQPrinter_vtable_callback_metric
+    vtbl[].vtbl.metric = fcQPrinter_vtable_callback_metric
   if not isNil(vtbl[].initPainter):
-    vtbl[].vtbl.initPainter = cQPrinter_vtable_callback_initPainter
+    vtbl[].vtbl.initPainter = fcQPrinter_vtable_callback_initPainter
   if not isNil(vtbl[].redirected):
-    vtbl[].vtbl.redirected = cQPrinter_vtable_callback_redirected
+    vtbl[].vtbl.redirected = fcQPrinter_vtable_callback_redirected
   if not isNil(vtbl[].sharedPainter):
-    vtbl[].vtbl.sharedPainter = cQPrinter_vtable_callback_sharedPainter
+    vtbl[].vtbl.sharedPainter = fcQPrinter_vtable_callback_sharedPainter
   gen_qprinter_types.QPrinter(h: fcQPrinter_new(addr(vtbl[].vtbl), addr(vtbl[])), owned: true)
 
 proc create*(T: type gen_qprinter_types.QPrinter,
@@ -741,25 +748,25 @@ proc create*(T: type gen_qprinter_types.QPrinter,
     let vtbl = cast[ref QPrinterVTable](fcQPrinter_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].devType):
-    vtbl[].vtbl.devType = cQPrinter_vtable_callback_devType
+    vtbl[].vtbl.devType = fcQPrinter_vtable_callback_devType
   if not isNil(vtbl[].setPageSize):
-    vtbl[].vtbl.setPageSize = cQPrinter_vtable_callback_setPageSize
+    vtbl[].vtbl.setPageSize = fcQPrinter_vtable_callback_setPageSize
   if not isNil(vtbl[].setPageSizeMM):
-    vtbl[].vtbl.setPageSizeMM = cQPrinter_vtable_callback_setPageSizeMM
+    vtbl[].vtbl.setPageSizeMM = fcQPrinter_vtable_callback_setPageSizeMM
   if not isNil(vtbl[].newPage):
-    vtbl[].vtbl.newPage = cQPrinter_vtable_callback_newPage
+    vtbl[].vtbl.newPage = fcQPrinter_vtable_callback_newPage
   if not isNil(vtbl[].paintEngine):
-    vtbl[].vtbl.paintEngine = cQPrinter_vtable_callback_paintEngine
+    vtbl[].vtbl.paintEngine = fcQPrinter_vtable_callback_paintEngine
   if not isNil(vtbl[].setMargins):
-    vtbl[].vtbl.setMargins = cQPrinter_vtable_callback_setMargins
+    vtbl[].vtbl.setMargins = fcQPrinter_vtable_callback_setMargins
   if not isNil(vtbl[].metric):
-    vtbl[].vtbl.metric = cQPrinter_vtable_callback_metric
+    vtbl[].vtbl.metric = fcQPrinter_vtable_callback_metric
   if not isNil(vtbl[].initPainter):
-    vtbl[].vtbl.initPainter = cQPrinter_vtable_callback_initPainter
+    vtbl[].vtbl.initPainter = fcQPrinter_vtable_callback_initPainter
   if not isNil(vtbl[].redirected):
-    vtbl[].vtbl.redirected = cQPrinter_vtable_callback_redirected
+    vtbl[].vtbl.redirected = fcQPrinter_vtable_callback_redirected
   if not isNil(vtbl[].sharedPainter):
-    vtbl[].vtbl.sharedPainter = cQPrinter_vtable_callback_sharedPainter
+    vtbl[].vtbl.sharedPainter = fcQPrinter_vtable_callback_sharedPainter
   gen_qprinter_types.QPrinter(h: fcQPrinter_new2(addr(vtbl[].vtbl), addr(vtbl[]), printer.h), owned: true)
 
 proc create*(T: type gen_qprinter_types.QPrinter,
@@ -771,25 +778,25 @@ proc create*(T: type gen_qprinter_types.QPrinter,
     let vtbl = cast[ref QPrinterVTable](fcQPrinter_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].devType):
-    vtbl[].vtbl.devType = cQPrinter_vtable_callback_devType
+    vtbl[].vtbl.devType = fcQPrinter_vtable_callback_devType
   if not isNil(vtbl[].setPageSize):
-    vtbl[].vtbl.setPageSize = cQPrinter_vtable_callback_setPageSize
+    vtbl[].vtbl.setPageSize = fcQPrinter_vtable_callback_setPageSize
   if not isNil(vtbl[].setPageSizeMM):
-    vtbl[].vtbl.setPageSizeMM = cQPrinter_vtable_callback_setPageSizeMM
+    vtbl[].vtbl.setPageSizeMM = fcQPrinter_vtable_callback_setPageSizeMM
   if not isNil(vtbl[].newPage):
-    vtbl[].vtbl.newPage = cQPrinter_vtable_callback_newPage
+    vtbl[].vtbl.newPage = fcQPrinter_vtable_callback_newPage
   if not isNil(vtbl[].paintEngine):
-    vtbl[].vtbl.paintEngine = cQPrinter_vtable_callback_paintEngine
+    vtbl[].vtbl.paintEngine = fcQPrinter_vtable_callback_paintEngine
   if not isNil(vtbl[].setMargins):
-    vtbl[].vtbl.setMargins = cQPrinter_vtable_callback_setMargins
+    vtbl[].vtbl.setMargins = fcQPrinter_vtable_callback_setMargins
   if not isNil(vtbl[].metric):
-    vtbl[].vtbl.metric = cQPrinter_vtable_callback_metric
+    vtbl[].vtbl.metric = fcQPrinter_vtable_callback_metric
   if not isNil(vtbl[].initPainter):
-    vtbl[].vtbl.initPainter = cQPrinter_vtable_callback_initPainter
+    vtbl[].vtbl.initPainter = fcQPrinter_vtable_callback_initPainter
   if not isNil(vtbl[].redirected):
-    vtbl[].vtbl.redirected = cQPrinter_vtable_callback_redirected
+    vtbl[].vtbl.redirected = fcQPrinter_vtable_callback_redirected
   if not isNil(vtbl[].sharedPainter):
-    vtbl[].vtbl.sharedPainter = cQPrinter_vtable_callback_sharedPainter
+    vtbl[].vtbl.sharedPainter = fcQPrinter_vtable_callback_sharedPainter
   gen_qprinter_types.QPrinter(h: fcQPrinter_new3(addr(vtbl[].vtbl), addr(vtbl[]), cint(mode)), owned: true)
 
 proc create*(T: type gen_qprinter_types.QPrinter,
@@ -801,25 +808,25 @@ proc create*(T: type gen_qprinter_types.QPrinter,
     let vtbl = cast[ref QPrinterVTable](fcQPrinter_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].devType):
-    vtbl[].vtbl.devType = cQPrinter_vtable_callback_devType
+    vtbl[].vtbl.devType = fcQPrinter_vtable_callback_devType
   if not isNil(vtbl[].setPageSize):
-    vtbl[].vtbl.setPageSize = cQPrinter_vtable_callback_setPageSize
+    vtbl[].vtbl.setPageSize = fcQPrinter_vtable_callback_setPageSize
   if not isNil(vtbl[].setPageSizeMM):
-    vtbl[].vtbl.setPageSizeMM = cQPrinter_vtable_callback_setPageSizeMM
+    vtbl[].vtbl.setPageSizeMM = fcQPrinter_vtable_callback_setPageSizeMM
   if not isNil(vtbl[].newPage):
-    vtbl[].vtbl.newPage = cQPrinter_vtable_callback_newPage
+    vtbl[].vtbl.newPage = fcQPrinter_vtable_callback_newPage
   if not isNil(vtbl[].paintEngine):
-    vtbl[].vtbl.paintEngine = cQPrinter_vtable_callback_paintEngine
+    vtbl[].vtbl.paintEngine = fcQPrinter_vtable_callback_paintEngine
   if not isNil(vtbl[].setMargins):
-    vtbl[].vtbl.setMargins = cQPrinter_vtable_callback_setMargins
+    vtbl[].vtbl.setMargins = fcQPrinter_vtable_callback_setMargins
   if not isNil(vtbl[].metric):
-    vtbl[].vtbl.metric = cQPrinter_vtable_callback_metric
+    vtbl[].vtbl.metric = fcQPrinter_vtable_callback_metric
   if not isNil(vtbl[].initPainter):
-    vtbl[].vtbl.initPainter = cQPrinter_vtable_callback_initPainter
+    vtbl[].vtbl.initPainter = fcQPrinter_vtable_callback_initPainter
   if not isNil(vtbl[].redirected):
-    vtbl[].vtbl.redirected = cQPrinter_vtable_callback_redirected
+    vtbl[].vtbl.redirected = fcQPrinter_vtable_callback_redirected
   if not isNil(vtbl[].sharedPainter):
-    vtbl[].vtbl.sharedPainter = cQPrinter_vtable_callback_sharedPainter
+    vtbl[].vtbl.sharedPainter = fcQPrinter_vtable_callback_sharedPainter
   gen_qprinter_types.QPrinter(h: fcQPrinter_new4(addr(vtbl[].vtbl), addr(vtbl[]), printer.h, cint(mode)), owned: true)
 
 const cQPrinter_mvtbl = cQPrinterVTable(
@@ -827,16 +834,17 @@ const cQPrinter_mvtbl = cQPrinterVTable(
     let inst = cast[ptr typeof(VirtualQPrinter()[])](self.fcQPrinter_vtbl())
     inst[].h = nil
     inst[].owned = false,
-  devType: cQPrinter_method_callback_devType,
-  setPageSize: cQPrinter_method_callback_setPageSize,
-  setPageSizeMM: cQPrinter_method_callback_setPageSizeMM,
-  newPage: cQPrinter_method_callback_newPage,
-  paintEngine: cQPrinter_method_callback_paintEngine,
-  setMargins: cQPrinter_method_callback_setMargins,
-  metric: cQPrinter_method_callback_metric,
-  initPainter: cQPrinter_method_callback_initPainter,
-  redirected: cQPrinter_method_callback_redirected,
-  sharedPainter: cQPrinter_method_callback_sharedPainter,
+
+  devType: fcQPrinter_method_callback_devType,
+  setPageSize: fcQPrinter_method_callback_setPageSize,
+  setPageSizeMM: fcQPrinter_method_callback_setPageSizeMM,
+  newPage: fcQPrinter_method_callback_newPage,
+  paintEngine: fcQPrinter_method_callback_paintEngine,
+  setMargins: fcQPrinter_method_callback_setMargins,
+  metric: fcQPrinter_method_callback_metric,
+  initPainter: fcQPrinter_method_callback_initPainter,
+  redirected: fcQPrinter_method_callback_redirected,
+  sharedPainter: fcQPrinter_method_callback_sharedPainter,
 )
 proc create*(T: type gen_qprinter_types.QPrinter,
     inst: VirtualQPrinter) =

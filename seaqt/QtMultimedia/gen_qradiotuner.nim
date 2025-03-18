@@ -151,6 +151,7 @@ proc fcQRadioTuner_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string 
 proc fcQRadioTuner_searchAllStations1(self: pointer, searchMode: cint): void {.importc: "QRadioTuner_searchAllStations1".}
 proc fcQRadioTuner_vtbl(self: pointer): pointer {.importc: "QRadioTuner_vtbl".}
 proc fcQRadioTuner_vdata(self: pointer): pointer {.importc: "QRadioTuner_vdata".}
+
 type cQRadioTunerVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -314,167 +315,167 @@ proc stateChanged*(self: gen_qradiotuner_types.QRadioTuner, state: cint): void =
   fcQRadioTuner_stateChanged(self.h, cint(state))
 
 type QRadioTunerstateChangedSlot* = proc(state: cint)
-proc cQRadioTuner_slot_callback_stateChanged(slot: int, state: cint) {.cdecl.} =
+proc fcQRadioTuner_slot_callback_stateChanged(slot: int, state: cint) {.cdecl.} =
   let nimfunc = cast[ptr QRadioTunerstateChangedSlot](cast[pointer](slot))
   let slotval1 = cint(state)
 
   nimfunc[](slotval1)
 
-proc cQRadioTuner_slot_callback_stateChanged_release(slot: int) {.cdecl.} =
+proc fcQRadioTuner_slot_callback_stateChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QRadioTunerstateChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onstateChanged*(self: gen_qradiotuner_types.QRadioTuner, slot: QRadioTunerstateChangedSlot) =
+proc onStateChanged*(self: gen_qradiotuner_types.QRadioTuner, slot: QRadioTunerstateChangedSlot) =
   var tmp = new QRadioTunerstateChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQRadioTuner_connect_stateChanged(self.h, cast[int](addr tmp[]), cQRadioTuner_slot_callback_stateChanged, cQRadioTuner_slot_callback_stateChanged_release)
+  fcQRadioTuner_connect_stateChanged(self.h, cast[int](addr tmp[]), fcQRadioTuner_slot_callback_stateChanged, fcQRadioTuner_slot_callback_stateChanged_release)
 
 proc bandChanged*(self: gen_qradiotuner_types.QRadioTuner, band: cint): void =
   fcQRadioTuner_bandChanged(self.h, cint(band))
 
 type QRadioTunerbandChangedSlot* = proc(band: cint)
-proc cQRadioTuner_slot_callback_bandChanged(slot: int, band: cint) {.cdecl.} =
+proc fcQRadioTuner_slot_callback_bandChanged(slot: int, band: cint) {.cdecl.} =
   let nimfunc = cast[ptr QRadioTunerbandChangedSlot](cast[pointer](slot))
   let slotval1 = cint(band)
 
   nimfunc[](slotval1)
 
-proc cQRadioTuner_slot_callback_bandChanged_release(slot: int) {.cdecl.} =
+proc fcQRadioTuner_slot_callback_bandChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QRadioTunerbandChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onbandChanged*(self: gen_qradiotuner_types.QRadioTuner, slot: QRadioTunerbandChangedSlot) =
+proc onBandChanged*(self: gen_qradiotuner_types.QRadioTuner, slot: QRadioTunerbandChangedSlot) =
   var tmp = new QRadioTunerbandChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQRadioTuner_connect_bandChanged(self.h, cast[int](addr tmp[]), cQRadioTuner_slot_callback_bandChanged, cQRadioTuner_slot_callback_bandChanged_release)
+  fcQRadioTuner_connect_bandChanged(self.h, cast[int](addr tmp[]), fcQRadioTuner_slot_callback_bandChanged, fcQRadioTuner_slot_callback_bandChanged_release)
 
 proc frequencyChanged*(self: gen_qradiotuner_types.QRadioTuner, frequency: cint): void =
   fcQRadioTuner_frequencyChanged(self.h, frequency)
 
 type QRadioTunerfrequencyChangedSlot* = proc(frequency: cint)
-proc cQRadioTuner_slot_callback_frequencyChanged(slot: int, frequency: cint) {.cdecl.} =
+proc fcQRadioTuner_slot_callback_frequencyChanged(slot: int, frequency: cint) {.cdecl.} =
   let nimfunc = cast[ptr QRadioTunerfrequencyChangedSlot](cast[pointer](slot))
   let slotval1 = frequency
 
   nimfunc[](slotval1)
 
-proc cQRadioTuner_slot_callback_frequencyChanged_release(slot: int) {.cdecl.} =
+proc fcQRadioTuner_slot_callback_frequencyChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QRadioTunerfrequencyChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onfrequencyChanged*(self: gen_qradiotuner_types.QRadioTuner, slot: QRadioTunerfrequencyChangedSlot) =
+proc onFrequencyChanged*(self: gen_qradiotuner_types.QRadioTuner, slot: QRadioTunerfrequencyChangedSlot) =
   var tmp = new QRadioTunerfrequencyChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQRadioTuner_connect_frequencyChanged(self.h, cast[int](addr tmp[]), cQRadioTuner_slot_callback_frequencyChanged, cQRadioTuner_slot_callback_frequencyChanged_release)
+  fcQRadioTuner_connect_frequencyChanged(self.h, cast[int](addr tmp[]), fcQRadioTuner_slot_callback_frequencyChanged, fcQRadioTuner_slot_callback_frequencyChanged_release)
 
 proc stereoStatusChanged*(self: gen_qradiotuner_types.QRadioTuner, stereo: bool): void =
   fcQRadioTuner_stereoStatusChanged(self.h, stereo)
 
 type QRadioTunerstereoStatusChangedSlot* = proc(stereo: bool)
-proc cQRadioTuner_slot_callback_stereoStatusChanged(slot: int, stereo: bool) {.cdecl.} =
+proc fcQRadioTuner_slot_callback_stereoStatusChanged(slot: int, stereo: bool) {.cdecl.} =
   let nimfunc = cast[ptr QRadioTunerstereoStatusChangedSlot](cast[pointer](slot))
   let slotval1 = stereo
 
   nimfunc[](slotval1)
 
-proc cQRadioTuner_slot_callback_stereoStatusChanged_release(slot: int) {.cdecl.} =
+proc fcQRadioTuner_slot_callback_stereoStatusChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QRadioTunerstereoStatusChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onstereoStatusChanged*(self: gen_qradiotuner_types.QRadioTuner, slot: QRadioTunerstereoStatusChangedSlot) =
+proc onStereoStatusChanged*(self: gen_qradiotuner_types.QRadioTuner, slot: QRadioTunerstereoStatusChangedSlot) =
   var tmp = new QRadioTunerstereoStatusChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQRadioTuner_connect_stereoStatusChanged(self.h, cast[int](addr tmp[]), cQRadioTuner_slot_callback_stereoStatusChanged, cQRadioTuner_slot_callback_stereoStatusChanged_release)
+  fcQRadioTuner_connect_stereoStatusChanged(self.h, cast[int](addr tmp[]), fcQRadioTuner_slot_callback_stereoStatusChanged, fcQRadioTuner_slot_callback_stereoStatusChanged_release)
 
 proc searchingChanged*(self: gen_qradiotuner_types.QRadioTuner, searching: bool): void =
   fcQRadioTuner_searchingChanged(self.h, searching)
 
 type QRadioTunersearchingChangedSlot* = proc(searching: bool)
-proc cQRadioTuner_slot_callback_searchingChanged(slot: int, searching: bool) {.cdecl.} =
+proc fcQRadioTuner_slot_callback_searchingChanged(slot: int, searching: bool) {.cdecl.} =
   let nimfunc = cast[ptr QRadioTunersearchingChangedSlot](cast[pointer](slot))
   let slotval1 = searching
 
   nimfunc[](slotval1)
 
-proc cQRadioTuner_slot_callback_searchingChanged_release(slot: int) {.cdecl.} =
+proc fcQRadioTuner_slot_callback_searchingChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QRadioTunersearchingChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onsearchingChanged*(self: gen_qradiotuner_types.QRadioTuner, slot: QRadioTunersearchingChangedSlot) =
+proc onSearchingChanged*(self: gen_qradiotuner_types.QRadioTuner, slot: QRadioTunersearchingChangedSlot) =
   var tmp = new QRadioTunersearchingChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQRadioTuner_connect_searchingChanged(self.h, cast[int](addr tmp[]), cQRadioTuner_slot_callback_searchingChanged, cQRadioTuner_slot_callback_searchingChanged_release)
+  fcQRadioTuner_connect_searchingChanged(self.h, cast[int](addr tmp[]), fcQRadioTuner_slot_callback_searchingChanged, fcQRadioTuner_slot_callback_searchingChanged_release)
 
 proc signalStrengthChanged*(self: gen_qradiotuner_types.QRadioTuner, signalStrength: cint): void =
   fcQRadioTuner_signalStrengthChanged(self.h, signalStrength)
 
 type QRadioTunersignalStrengthChangedSlot* = proc(signalStrength: cint)
-proc cQRadioTuner_slot_callback_signalStrengthChanged(slot: int, signalStrength: cint) {.cdecl.} =
+proc fcQRadioTuner_slot_callback_signalStrengthChanged(slot: int, signalStrength: cint) {.cdecl.} =
   let nimfunc = cast[ptr QRadioTunersignalStrengthChangedSlot](cast[pointer](slot))
   let slotval1 = signalStrength
 
   nimfunc[](slotval1)
 
-proc cQRadioTuner_slot_callback_signalStrengthChanged_release(slot: int) {.cdecl.} =
+proc fcQRadioTuner_slot_callback_signalStrengthChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QRadioTunersignalStrengthChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onsignalStrengthChanged*(self: gen_qradiotuner_types.QRadioTuner, slot: QRadioTunersignalStrengthChangedSlot) =
+proc onSignalStrengthChanged*(self: gen_qradiotuner_types.QRadioTuner, slot: QRadioTunersignalStrengthChangedSlot) =
   var tmp = new QRadioTunersignalStrengthChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQRadioTuner_connect_signalStrengthChanged(self.h, cast[int](addr tmp[]), cQRadioTuner_slot_callback_signalStrengthChanged, cQRadioTuner_slot_callback_signalStrengthChanged_release)
+  fcQRadioTuner_connect_signalStrengthChanged(self.h, cast[int](addr tmp[]), fcQRadioTuner_slot_callback_signalStrengthChanged, fcQRadioTuner_slot_callback_signalStrengthChanged_release)
 
 proc volumeChanged*(self: gen_qradiotuner_types.QRadioTuner, volume: cint): void =
   fcQRadioTuner_volumeChanged(self.h, volume)
 
 type QRadioTunervolumeChangedSlot* = proc(volume: cint)
-proc cQRadioTuner_slot_callback_volumeChanged(slot: int, volume: cint) {.cdecl.} =
+proc fcQRadioTuner_slot_callback_volumeChanged(slot: int, volume: cint) {.cdecl.} =
   let nimfunc = cast[ptr QRadioTunervolumeChangedSlot](cast[pointer](slot))
   let slotval1 = volume
 
   nimfunc[](slotval1)
 
-proc cQRadioTuner_slot_callback_volumeChanged_release(slot: int) {.cdecl.} =
+proc fcQRadioTuner_slot_callback_volumeChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QRadioTunervolumeChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onvolumeChanged*(self: gen_qradiotuner_types.QRadioTuner, slot: QRadioTunervolumeChangedSlot) =
+proc onVolumeChanged*(self: gen_qradiotuner_types.QRadioTuner, slot: QRadioTunervolumeChangedSlot) =
   var tmp = new QRadioTunervolumeChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQRadioTuner_connect_volumeChanged(self.h, cast[int](addr tmp[]), cQRadioTuner_slot_callback_volumeChanged, cQRadioTuner_slot_callback_volumeChanged_release)
+  fcQRadioTuner_connect_volumeChanged(self.h, cast[int](addr tmp[]), fcQRadioTuner_slot_callback_volumeChanged, fcQRadioTuner_slot_callback_volumeChanged_release)
 
 proc mutedChanged*(self: gen_qradiotuner_types.QRadioTuner, muted: bool): void =
   fcQRadioTuner_mutedChanged(self.h, muted)
 
 type QRadioTunermutedChangedSlot* = proc(muted: bool)
-proc cQRadioTuner_slot_callback_mutedChanged(slot: int, muted: bool) {.cdecl.} =
+proc fcQRadioTuner_slot_callback_mutedChanged(slot: int, muted: bool) {.cdecl.} =
   let nimfunc = cast[ptr QRadioTunermutedChangedSlot](cast[pointer](slot))
   let slotval1 = muted
 
   nimfunc[](slotval1)
 
-proc cQRadioTuner_slot_callback_mutedChanged_release(slot: int) {.cdecl.} =
+proc fcQRadioTuner_slot_callback_mutedChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QRadioTunermutedChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onmutedChanged*(self: gen_qradiotuner_types.QRadioTuner, slot: QRadioTunermutedChangedSlot) =
+proc onMutedChanged*(self: gen_qradiotuner_types.QRadioTuner, slot: QRadioTunermutedChangedSlot) =
   var tmp = new QRadioTunermutedChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQRadioTuner_connect_mutedChanged(self.h, cast[int](addr tmp[]), cQRadioTuner_slot_callback_mutedChanged, cQRadioTuner_slot_callback_mutedChanged_release)
+  fcQRadioTuner_connect_mutedChanged(self.h, cast[int](addr tmp[]), fcQRadioTuner_slot_callback_mutedChanged, fcQRadioTuner_slot_callback_mutedChanged_release)
 
 proc stationFound*(self: gen_qradiotuner_types.QRadioTuner, frequency: cint, stationId: openArray[char]): void =
   fcQRadioTuner_stationFound(self.h, frequency, struct_miqt_string(data: if len(stationId) > 0: addr stationId[0] else: nil, len: csize_t(len(stationId))))
 
 type QRadioTunerstationFoundSlot* = proc(frequency: cint, stationId: openArray[char])
-proc cQRadioTuner_slot_callback_stationFound(slot: int, frequency: cint, stationId: struct_miqt_string) {.cdecl.} =
+proc fcQRadioTuner_slot_callback_stationFound(slot: int, frequency: cint, stationId: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QRadioTunerstationFoundSlot](cast[pointer](slot))
   let slotval1 = frequency
 
@@ -485,55 +486,55 @@ proc cQRadioTuner_slot_callback_stationFound(slot: int, frequency: cint, station
 
   nimfunc[](slotval1, slotval2)
 
-proc cQRadioTuner_slot_callback_stationFound_release(slot: int) {.cdecl.} =
+proc fcQRadioTuner_slot_callback_stationFound_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QRadioTunerstationFoundSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onstationFound*(self: gen_qradiotuner_types.QRadioTuner, slot: QRadioTunerstationFoundSlot) =
+proc onStationFound*(self: gen_qradiotuner_types.QRadioTuner, slot: QRadioTunerstationFoundSlot) =
   var tmp = new QRadioTunerstationFoundSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQRadioTuner_connect_stationFound(self.h, cast[int](addr tmp[]), cQRadioTuner_slot_callback_stationFound, cQRadioTuner_slot_callback_stationFound_release)
+  fcQRadioTuner_connect_stationFound(self.h, cast[int](addr tmp[]), fcQRadioTuner_slot_callback_stationFound, fcQRadioTuner_slot_callback_stationFound_release)
 
 proc antennaConnectedChanged*(self: gen_qradiotuner_types.QRadioTuner, connectionStatus: bool): void =
   fcQRadioTuner_antennaConnectedChanged(self.h, connectionStatus)
 
 type QRadioTunerantennaConnectedChangedSlot* = proc(connectionStatus: bool)
-proc cQRadioTuner_slot_callback_antennaConnectedChanged(slot: int, connectionStatus: bool) {.cdecl.} =
+proc fcQRadioTuner_slot_callback_antennaConnectedChanged(slot: int, connectionStatus: bool) {.cdecl.} =
   let nimfunc = cast[ptr QRadioTunerantennaConnectedChangedSlot](cast[pointer](slot))
   let slotval1 = connectionStatus
 
   nimfunc[](slotval1)
 
-proc cQRadioTuner_slot_callback_antennaConnectedChanged_release(slot: int) {.cdecl.} =
+proc fcQRadioTuner_slot_callback_antennaConnectedChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QRadioTunerantennaConnectedChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onantennaConnectedChanged*(self: gen_qradiotuner_types.QRadioTuner, slot: QRadioTunerantennaConnectedChangedSlot) =
+proc onAntennaConnectedChanged*(self: gen_qradiotuner_types.QRadioTuner, slot: QRadioTunerantennaConnectedChangedSlot) =
   var tmp = new QRadioTunerantennaConnectedChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQRadioTuner_connect_antennaConnectedChanged(self.h, cast[int](addr tmp[]), cQRadioTuner_slot_callback_antennaConnectedChanged, cQRadioTuner_slot_callback_antennaConnectedChanged_release)
+  fcQRadioTuner_connect_antennaConnectedChanged(self.h, cast[int](addr tmp[]), fcQRadioTuner_slot_callback_antennaConnectedChanged, fcQRadioTuner_slot_callback_antennaConnectedChanged_release)
 
 proc error*(self: gen_qradiotuner_types.QRadioTuner, error: cint): void =
   fcQRadioTuner_errorWithError(self.h, cint(error))
 
 type QRadioTunererrorWithErrorSlot* = proc(error: cint)
-proc cQRadioTuner_slot_callback_errorWithError(slot: int, error: cint) {.cdecl.} =
+proc fcQRadioTuner_slot_callback_errorWithError(slot: int, error: cint) {.cdecl.} =
   let nimfunc = cast[ptr QRadioTunererrorWithErrorSlot](cast[pointer](slot))
   let slotval1 = cint(error)
 
   nimfunc[](slotval1)
 
-proc cQRadioTuner_slot_callback_errorWithError_release(slot: int) {.cdecl.} =
+proc fcQRadioTuner_slot_callback_errorWithError_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QRadioTunererrorWithErrorSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onerror*(self: gen_qradiotuner_types.QRadioTuner, slot: QRadioTunererrorWithErrorSlot) =
+proc onError*(self: gen_qradiotuner_types.QRadioTuner, slot: QRadioTunererrorWithErrorSlot) =
   var tmp = new QRadioTunererrorWithErrorSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQRadioTuner_connect_errorWithError(self.h, cast[int](addr tmp[]), cQRadioTuner_slot_callback_errorWithError, cQRadioTuner_slot_callback_errorWithError_release)
+  fcQRadioTuner_connect_errorWithError(self.h, cast[int](addr tmp[]), fcQRadioTuner_slot_callback_errorWithError, fcQRadioTuner_slot_callback_errorWithError_release)
 
 proc tr*(_: type gen_qradiotuner_types.QRadioTuner, s: cstring, c: cstring): string =
   let v_ms = fcQRadioTuner_tr2(s, c)
@@ -577,6 +578,7 @@ type QRadioTunerchildEventProc* = proc(self: QRadioTuner, event: gen_qcoreevent_
 type QRadioTunercustomEventProc* = proc(self: QRadioTuner, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QRadioTunerconnectNotifyProc* = proc(self: QRadioTuner, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QRadioTunerdisconnectNotifyProc* = proc(self: QRadioTuner, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+
 type QRadioTunerVTable* {.inheritable, pure.} = object
   vtbl: cQRadioTunerVTable
   metaObject*: QRadioTunermetaObjectProc
@@ -594,10 +596,54 @@ type QRadioTunerVTable* {.inheritable, pure.} = object
   customEvent*: QRadioTunercustomEventProc
   connectNotify*: QRadioTunerconnectNotifyProc
   disconnectNotify*: QRadioTunerdisconnectNotifyProc
+
 proc QRadioTunermetaObject*(self: gen_qradiotuner_types.QRadioTuner): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQRadioTuner_virtualbase_metaObject(self.h), owned: false)
 
-proc cQRadioTuner_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
+proc QRadioTunermetacast*(self: gen_qradiotuner_types.QRadioTuner, param1: cstring): pointer =
+  fcQRadioTuner_virtualbase_metacast(self.h, param1)
+
+proc QRadioTunermetacall*(self: gen_qradiotuner_types.QRadioTuner, param1: cint, param2: cint, param3: pointer): cint =
+  fcQRadioTuner_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+proc QRadioTuneravailability*(self: gen_qradiotuner_types.QRadioTuner): cint =
+  cint(fcQRadioTuner_virtualbase_availability(self.h))
+
+proc QRadioTunerisAvailable*(self: gen_qradiotuner_types.QRadioTuner): bool =
+  fcQRadioTuner_virtualbase_isAvailable(self.h)
+
+proc QRadioTunerservice*(self: gen_qradiotuner_types.QRadioTuner): gen_qmediaservice_types.QMediaService =
+  gen_qmediaservice_types.QMediaService(h: fcQRadioTuner_virtualbase_service(self.h), owned: false)
+
+proc QRadioTunerbindX*(self: gen_qradiotuner_types.QRadioTuner, param1: gen_qobject_types.QObject): bool =
+  fcQRadioTuner_virtualbase_bindX(self.h, param1.h)
+
+proc QRadioTunerunbind*(self: gen_qradiotuner_types.QRadioTuner, param1: gen_qobject_types.QObject): void =
+  fcQRadioTuner_virtualbase_unbind(self.h, param1.h)
+
+proc QRadioTunerevent*(self: gen_qradiotuner_types.QRadioTuner, event: gen_qcoreevent_types.QEvent): bool =
+  fcQRadioTuner_virtualbase_event(self.h, event.h)
+
+proc QRadioTunereventFilter*(self: gen_qradiotuner_types.QRadioTuner, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
+  fcQRadioTuner_virtualbase_eventFilter(self.h, watched.h, event.h)
+
+proc QRadioTunertimerEvent*(self: gen_qradiotuner_types.QRadioTuner, event: gen_qcoreevent_types.QTimerEvent): void =
+  fcQRadioTuner_virtualbase_timerEvent(self.h, event.h)
+
+proc QRadioTunerchildEvent*(self: gen_qradiotuner_types.QRadioTuner, event: gen_qcoreevent_types.QChildEvent): void =
+  fcQRadioTuner_virtualbase_childEvent(self.h, event.h)
+
+proc QRadioTunercustomEvent*(self: gen_qradiotuner_types.QRadioTuner, event: gen_qcoreevent_types.QEvent): void =
+  fcQRadioTuner_virtualbase_customEvent(self.h, event.h)
+
+proc QRadioTunerconnectNotify*(self: gen_qradiotuner_types.QRadioTuner, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQRadioTuner_virtualbase_connectNotify(self.h, signal.h)
+
+proc QRadioTunerdisconnectNotify*(self: gen_qradiotuner_types.QRadioTuner, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQRadioTuner_virtualbase_disconnectNotify(self.h, signal.h)
+
+
+proc fcQRadioTuner_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QRadioTunerVTable](fcQRadioTuner_vdata(self))
   let self = QRadioTuner(h: self)
   var virtualReturn = vtbl[].metaObject(self)
@@ -606,20 +652,14 @@ proc cQRadioTuner_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QRadioTunermetacast*(self: gen_qradiotuner_types.QRadioTuner, param1: cstring): pointer =
-  fcQRadioTuner_virtualbase_metacast(self.h, param1)
-
-proc cQRadioTuner_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+proc fcQRadioTuner_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QRadioTunerVTable](fcQRadioTuner_vdata(self))
   let self = QRadioTuner(h: self)
   let slotval1 = (param1)
   var virtualReturn = vtbl[].metacast(self, slotval1)
   virtualReturn
 
-proc QRadioTunermetacall*(self: gen_qradiotuner_types.QRadioTuner, param1: cint, param2: cint, param3: pointer): cint =
-  fcQRadioTuner_virtualbase_metacall(self.h, cint(param1), param2, param3)
-
-proc cQRadioTuner_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+proc fcQRadioTuner_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QRadioTunerVTable](fcQRadioTuner_vdata(self))
   let self = QRadioTuner(h: self)
   let slotval1 = cint(param1)
@@ -628,28 +668,19 @@ proc cQRadioTuner_vtable_callback_metacall(self: pointer, param1: cint, param2: 
   var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QRadioTuneravailability*(self: gen_qradiotuner_types.QRadioTuner): cint =
-  cint(fcQRadioTuner_virtualbase_availability(self.h))
-
-proc cQRadioTuner_vtable_callback_availability(self: pointer): cint {.cdecl.} =
+proc fcQRadioTuner_vtable_callback_availability(self: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QRadioTunerVTable](fcQRadioTuner_vdata(self))
   let self = QRadioTuner(h: self)
   var virtualReturn = vtbl[].availability(self)
   cint(virtualReturn)
 
-proc QRadioTunerisAvailable*(self: gen_qradiotuner_types.QRadioTuner): bool =
-  fcQRadioTuner_virtualbase_isAvailable(self.h)
-
-proc cQRadioTuner_vtable_callback_isAvailable(self: pointer): bool {.cdecl.} =
+proc fcQRadioTuner_vtable_callback_isAvailable(self: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QRadioTunerVTable](fcQRadioTuner_vdata(self))
   let self = QRadioTuner(h: self)
   var virtualReturn = vtbl[].isAvailable(self)
   virtualReturn
 
-proc QRadioTunerservice*(self: gen_qradiotuner_types.QRadioTuner): gen_qmediaservice_types.QMediaService =
-  gen_qmediaservice_types.QMediaService(h: fcQRadioTuner_virtualbase_service(self.h), owned: false)
-
-proc cQRadioTuner_vtable_callback_service(self: pointer): pointer {.cdecl.} =
+proc fcQRadioTuner_vtable_callback_service(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QRadioTunerVTable](fcQRadioTuner_vdata(self))
   let self = QRadioTuner(h: self)
   var virtualReturn = vtbl[].service(self)
@@ -658,39 +689,27 @@ proc cQRadioTuner_vtable_callback_service(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QRadioTunerbindX*(self: gen_qradiotuner_types.QRadioTuner, param1: gen_qobject_types.QObject): bool =
-  fcQRadioTuner_virtualbase_bindX(self.h, param1.h)
-
-proc cQRadioTuner_vtable_callback_bindX(self: pointer, param1: pointer): bool {.cdecl.} =
+proc fcQRadioTuner_vtable_callback_bindX(self: pointer, param1: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QRadioTunerVTable](fcQRadioTuner_vdata(self))
   let self = QRadioTuner(h: self)
   let slotval1 = gen_qobject_types.QObject(h: param1, owned: false)
   var virtualReturn = vtbl[].bindX(self, slotval1)
   virtualReturn
 
-proc QRadioTunerunbind*(self: gen_qradiotuner_types.QRadioTuner, param1: gen_qobject_types.QObject): void =
-  fcQRadioTuner_virtualbase_unbind(self.h, param1.h)
-
-proc cQRadioTuner_vtable_callback_unbind(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQRadioTuner_vtable_callback_unbind(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QRadioTunerVTable](fcQRadioTuner_vdata(self))
   let self = QRadioTuner(h: self)
   let slotval1 = gen_qobject_types.QObject(h: param1, owned: false)
   vtbl[].unbind(self, slotval1)
 
-proc QRadioTunerevent*(self: gen_qradiotuner_types.QRadioTuner, event: gen_qcoreevent_types.QEvent): bool =
-  fcQRadioTuner_virtualbase_event(self.h, event.h)
-
-proc cQRadioTuner_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
+proc fcQRadioTuner_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QRadioTunerVTable](fcQRadioTuner_vdata(self))
   let self = QRadioTuner(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
-proc QRadioTunereventFilter*(self: gen_qradiotuner_types.QRadioTuner, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
-  fcQRadioTuner_virtualbase_eventFilter(self.h, watched.h, event.h)
-
-proc cQRadioTuner_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+proc fcQRadioTuner_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QRadioTunerVTable](fcQRadioTuner_vdata(self))
   let self = QRadioTuner(h: self)
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
@@ -698,46 +717,31 @@ proc cQRadioTuner_vtable_callback_eventFilter(self: pointer, watched: pointer, e
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
-proc QRadioTunertimerEvent*(self: gen_qradiotuner_types.QRadioTuner, event: gen_qcoreevent_types.QTimerEvent): void =
-  fcQRadioTuner_virtualbase_timerEvent(self.h, event.h)
-
-proc cQRadioTuner_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQRadioTuner_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QRadioTunerVTable](fcQRadioTuner_vdata(self))
   let self = QRadioTuner(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
-proc QRadioTunerchildEvent*(self: gen_qradiotuner_types.QRadioTuner, event: gen_qcoreevent_types.QChildEvent): void =
-  fcQRadioTuner_virtualbase_childEvent(self.h, event.h)
-
-proc cQRadioTuner_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQRadioTuner_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QRadioTunerVTable](fcQRadioTuner_vdata(self))
   let self = QRadioTuner(h: self)
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
-proc QRadioTunercustomEvent*(self: gen_qradiotuner_types.QRadioTuner, event: gen_qcoreevent_types.QEvent): void =
-  fcQRadioTuner_virtualbase_customEvent(self.h, event.h)
-
-proc cQRadioTuner_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQRadioTuner_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QRadioTunerVTable](fcQRadioTuner_vdata(self))
   let self = QRadioTuner(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
-proc QRadioTunerconnectNotify*(self: gen_qradiotuner_types.QRadioTuner, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQRadioTuner_virtualbase_connectNotify(self.h, signal.h)
-
-proc cQRadioTuner_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQRadioTuner_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QRadioTunerVTable](fcQRadioTuner_vdata(self))
   let self = QRadioTuner(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
-proc QRadioTunerdisconnectNotify*(self: gen_qradiotuner_types.QRadioTuner, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQRadioTuner_virtualbase_disconnectNotify(self.h, signal.h)
-
-proc cQRadioTuner_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQRadioTuner_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QRadioTunerVTable](fcQRadioTuner_vdata(self))
   let self = QRadioTuner(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
@@ -745,9 +749,39 @@ proc cQRadioTuner_vtable_callback_disconnectNotify(self: pointer, signal: pointe
 
 type VirtualQRadioTuner* {.inheritable.} = ref object of QRadioTuner
   vtbl*: cQRadioTunerVTable
+
 method metaObject*(self: VirtualQRadioTuner): gen_qobjectdefs_types.QMetaObject {.base.} =
   QRadioTunermetaObject(self[])
-proc cQRadioTuner_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
+method metacast*(self: VirtualQRadioTuner, param1: cstring): pointer {.base.} =
+  QRadioTunermetacast(self[], param1)
+method metacall*(self: VirtualQRadioTuner, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QRadioTunermetacall(self[], param1, param2, param3)
+method availability*(self: VirtualQRadioTuner): cint {.base.} =
+  QRadioTuneravailability(self[])
+method isAvailable*(self: VirtualQRadioTuner): bool {.base.} =
+  QRadioTunerisAvailable(self[])
+method service*(self: VirtualQRadioTuner): gen_qmediaservice_types.QMediaService {.base.} =
+  QRadioTunerservice(self[])
+method bindX*(self: VirtualQRadioTuner, param1: gen_qobject_types.QObject): bool {.base.} =
+  QRadioTunerbindX(self[], param1)
+method unbind*(self: VirtualQRadioTuner, param1: gen_qobject_types.QObject): void {.base.} =
+  QRadioTunerunbind(self[], param1)
+method event*(self: VirtualQRadioTuner, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QRadioTunerevent(self[], event)
+method eventFilter*(self: VirtualQRadioTuner, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QRadioTunereventFilter(self[], watched, event)
+method timerEvent*(self: VirtualQRadioTuner, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QRadioTunertimerEvent(self[], event)
+method childEvent*(self: VirtualQRadioTuner, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QRadioTunerchildEvent(self[], event)
+method customEvent*(self: VirtualQRadioTuner, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QRadioTunercustomEvent(self[], event)
+method connectNotify*(self: VirtualQRadioTuner, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QRadioTunerconnectNotify(self[], signal)
+method disconnectNotify*(self: VirtualQRadioTuner, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QRadioTunerdisconnectNotify(self[], signal)
+
+proc fcQRadioTuner_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQRadioTuner](fcQRadioTuner_vdata(self))
   var virtualReturn = inst.metaObject()
   virtualReturn.owned = false # TODO move?
@@ -755,17 +789,13 @@ proc cQRadioTuner_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-method metacast*(self: VirtualQRadioTuner, param1: cstring): pointer {.base.} =
-  QRadioTunermetacast(self[], param1)
-proc cQRadioTuner_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+proc fcQRadioTuner_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQRadioTuner](fcQRadioTuner_vdata(self))
   let slotval1 = (param1)
   var virtualReturn = inst.metacast(slotval1)
   virtualReturn
 
-method metacall*(self: VirtualQRadioTuner, param1: cint, param2: cint, param3: pointer): cint {.base.} =
-  QRadioTunermetacall(self[], param1, param2, param3)
-proc cQRadioTuner_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+proc fcQRadioTuner_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQRadioTuner](fcQRadioTuner_vdata(self))
   let slotval1 = cint(param1)
   let slotval2 = param2
@@ -773,23 +803,17 @@ proc cQRadioTuner_method_callback_metacall(self: pointer, param1: cint, param2: 
   var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
-method availability*(self: VirtualQRadioTuner): cint {.base.} =
-  QRadioTuneravailability(self[])
-proc cQRadioTuner_method_callback_availability(self: pointer): cint {.cdecl.} =
+proc fcQRadioTuner_method_callback_availability(self: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQRadioTuner](fcQRadioTuner_vdata(self))
   var virtualReturn = inst.availability()
   cint(virtualReturn)
 
-method isAvailable*(self: VirtualQRadioTuner): bool {.base.} =
-  QRadioTunerisAvailable(self[])
-proc cQRadioTuner_method_callback_isAvailable(self: pointer): bool {.cdecl.} =
+proc fcQRadioTuner_method_callback_isAvailable(self: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQRadioTuner](fcQRadioTuner_vdata(self))
   var virtualReturn = inst.isAvailable()
   virtualReturn
 
-method service*(self: VirtualQRadioTuner): gen_qmediaservice_types.QMediaService {.base.} =
-  QRadioTunerservice(self[])
-proc cQRadioTuner_method_callback_service(self: pointer): pointer {.cdecl.} =
+proc fcQRadioTuner_method_callback_service(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQRadioTuner](fcQRadioTuner_vdata(self))
   var virtualReturn = inst.service()
   virtualReturn.owned = false # TODO move?
@@ -797,72 +821,55 @@ proc cQRadioTuner_method_callback_service(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-method bindX*(self: VirtualQRadioTuner, param1: gen_qobject_types.QObject): bool {.base.} =
-  QRadioTunerbindX(self[], param1)
-proc cQRadioTuner_method_callback_bindX(self: pointer, param1: pointer): bool {.cdecl.} =
+proc fcQRadioTuner_method_callback_bindX(self: pointer, param1: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQRadioTuner](fcQRadioTuner_vdata(self))
   let slotval1 = gen_qobject_types.QObject(h: param1, owned: false)
   var virtualReturn = inst.bindX(slotval1)
   virtualReturn
 
-method unbind*(self: VirtualQRadioTuner, param1: gen_qobject_types.QObject): void {.base.} =
-  QRadioTunerunbind(self[], param1)
-proc cQRadioTuner_method_callback_unbind(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQRadioTuner_method_callback_unbind(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQRadioTuner](fcQRadioTuner_vdata(self))
   let slotval1 = gen_qobject_types.QObject(h: param1, owned: false)
   inst.unbind(slotval1)
 
-method event*(self: VirtualQRadioTuner, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QRadioTunerevent(self[], event)
-proc cQRadioTuner_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
+proc fcQRadioTuner_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQRadioTuner](fcQRadioTuner_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
-method eventFilter*(self: VirtualQRadioTuner, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QRadioTunereventFilter(self[], watched, event)
-proc cQRadioTuner_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+proc fcQRadioTuner_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQRadioTuner](fcQRadioTuner_vdata(self))
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
   let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
-method timerEvent*(self: VirtualQRadioTuner, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
-  QRadioTunertimerEvent(self[], event)
-proc cQRadioTuner_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQRadioTuner_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQRadioTuner](fcQRadioTuner_vdata(self))
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
-method childEvent*(self: VirtualQRadioTuner, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
-  QRadioTunerchildEvent(self[], event)
-proc cQRadioTuner_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQRadioTuner_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQRadioTuner](fcQRadioTuner_vdata(self))
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
-method customEvent*(self: VirtualQRadioTuner, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QRadioTunercustomEvent(self[], event)
-proc cQRadioTuner_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQRadioTuner_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQRadioTuner](fcQRadioTuner_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
-method connectNotify*(self: VirtualQRadioTuner, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QRadioTunerconnectNotify(self[], signal)
-proc cQRadioTuner_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQRadioTuner_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQRadioTuner](fcQRadioTuner_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
-method disconnectNotify*(self: VirtualQRadioTuner, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QRadioTunerdisconnectNotify(self[], signal)
-proc cQRadioTuner_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQRadioTuner_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQRadioTuner](fcQRadioTuner_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
+
 
 proc addPropertyWatch*(self: gen_qradiotuner_types.QRadioTuner, name: openArray[byte]): void =
   fcQRadioTuner_protectedbase_addPropertyWatch(self.h, struct_miqt_string(data: cast[cstring](if len(name) == 0: nil else: unsafeAddr name[0]), len: csize_t(len(name))))
@@ -890,35 +897,35 @@ proc create*(T: type gen_qradiotuner_types.QRadioTuner,
     let vtbl = cast[ref QRadioTunerVTable](fcQRadioTuner_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQRadioTuner_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQRadioTuner_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQRadioTuner_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQRadioTuner_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQRadioTuner_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQRadioTuner_vtable_callback_metacall
   if not isNil(vtbl[].availability):
-    vtbl[].vtbl.availability = cQRadioTuner_vtable_callback_availability
+    vtbl[].vtbl.availability = fcQRadioTuner_vtable_callback_availability
   if not isNil(vtbl[].isAvailable):
-    vtbl[].vtbl.isAvailable = cQRadioTuner_vtable_callback_isAvailable
+    vtbl[].vtbl.isAvailable = fcQRadioTuner_vtable_callback_isAvailable
   if not isNil(vtbl[].service):
-    vtbl[].vtbl.service = cQRadioTuner_vtable_callback_service
+    vtbl[].vtbl.service = fcQRadioTuner_vtable_callback_service
   if not isNil(vtbl[].bindX):
-    vtbl[].vtbl.bindX = cQRadioTuner_vtable_callback_bindX
+    vtbl[].vtbl.bindX = fcQRadioTuner_vtable_callback_bindX
   if not isNil(vtbl[].unbind):
-    vtbl[].vtbl.unbind = cQRadioTuner_vtable_callback_unbind
+    vtbl[].vtbl.unbind = fcQRadioTuner_vtable_callback_unbind
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQRadioTuner_vtable_callback_event
+    vtbl[].vtbl.event = fcQRadioTuner_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQRadioTuner_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQRadioTuner_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQRadioTuner_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQRadioTuner_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQRadioTuner_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQRadioTuner_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQRadioTuner_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQRadioTuner_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQRadioTuner_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQRadioTuner_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQRadioTuner_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQRadioTuner_vtable_callback_disconnectNotify
   gen_qradiotuner_types.QRadioTuner(h: fcQRadioTuner_new(addr(vtbl[].vtbl), addr(vtbl[])), owned: true)
 
 proc create*(T: type gen_qradiotuner_types.QRadioTuner,
@@ -930,35 +937,35 @@ proc create*(T: type gen_qradiotuner_types.QRadioTuner,
     let vtbl = cast[ref QRadioTunerVTable](fcQRadioTuner_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQRadioTuner_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQRadioTuner_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQRadioTuner_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQRadioTuner_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQRadioTuner_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQRadioTuner_vtable_callback_metacall
   if not isNil(vtbl[].availability):
-    vtbl[].vtbl.availability = cQRadioTuner_vtable_callback_availability
+    vtbl[].vtbl.availability = fcQRadioTuner_vtable_callback_availability
   if not isNil(vtbl[].isAvailable):
-    vtbl[].vtbl.isAvailable = cQRadioTuner_vtable_callback_isAvailable
+    vtbl[].vtbl.isAvailable = fcQRadioTuner_vtable_callback_isAvailable
   if not isNil(vtbl[].service):
-    vtbl[].vtbl.service = cQRadioTuner_vtable_callback_service
+    vtbl[].vtbl.service = fcQRadioTuner_vtable_callback_service
   if not isNil(vtbl[].bindX):
-    vtbl[].vtbl.bindX = cQRadioTuner_vtable_callback_bindX
+    vtbl[].vtbl.bindX = fcQRadioTuner_vtable_callback_bindX
   if not isNil(vtbl[].unbind):
-    vtbl[].vtbl.unbind = cQRadioTuner_vtable_callback_unbind
+    vtbl[].vtbl.unbind = fcQRadioTuner_vtable_callback_unbind
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQRadioTuner_vtable_callback_event
+    vtbl[].vtbl.event = fcQRadioTuner_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQRadioTuner_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQRadioTuner_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQRadioTuner_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQRadioTuner_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQRadioTuner_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQRadioTuner_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQRadioTuner_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQRadioTuner_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQRadioTuner_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQRadioTuner_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQRadioTuner_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQRadioTuner_vtable_callback_disconnectNotify
   gen_qradiotuner_types.QRadioTuner(h: fcQRadioTuner_new2(addr(vtbl[].vtbl), addr(vtbl[]), parent.h), owned: true)
 
 const cQRadioTuner_mvtbl = cQRadioTunerVTable(
@@ -966,21 +973,22 @@ const cQRadioTuner_mvtbl = cQRadioTunerVTable(
     let inst = cast[ptr typeof(VirtualQRadioTuner()[])](self.fcQRadioTuner_vtbl())
     inst[].h = nil
     inst[].owned = false,
-  metaObject: cQRadioTuner_method_callback_metaObject,
-  metacast: cQRadioTuner_method_callback_metacast,
-  metacall: cQRadioTuner_method_callback_metacall,
-  availability: cQRadioTuner_method_callback_availability,
-  isAvailable: cQRadioTuner_method_callback_isAvailable,
-  service: cQRadioTuner_method_callback_service,
-  bindX: cQRadioTuner_method_callback_bindX,
-  unbind: cQRadioTuner_method_callback_unbind,
-  event: cQRadioTuner_method_callback_event,
-  eventFilter: cQRadioTuner_method_callback_eventFilter,
-  timerEvent: cQRadioTuner_method_callback_timerEvent,
-  childEvent: cQRadioTuner_method_callback_childEvent,
-  customEvent: cQRadioTuner_method_callback_customEvent,
-  connectNotify: cQRadioTuner_method_callback_connectNotify,
-  disconnectNotify: cQRadioTuner_method_callback_disconnectNotify,
+
+  metaObject: fcQRadioTuner_method_callback_metaObject,
+  metacast: fcQRadioTuner_method_callback_metacast,
+  metacall: fcQRadioTuner_method_callback_metacall,
+  availability: fcQRadioTuner_method_callback_availability,
+  isAvailable: fcQRadioTuner_method_callback_isAvailable,
+  service: fcQRadioTuner_method_callback_service,
+  bindX: fcQRadioTuner_method_callback_bindX,
+  unbind: fcQRadioTuner_method_callback_unbind,
+  event: fcQRadioTuner_method_callback_event,
+  eventFilter: fcQRadioTuner_method_callback_eventFilter,
+  timerEvent: fcQRadioTuner_method_callback_timerEvent,
+  childEvent: fcQRadioTuner_method_callback_childEvent,
+  customEvent: fcQRadioTuner_method_callback_customEvent,
+  connectNotify: fcQRadioTuner_method_callback_connectNotify,
+  disconnectNotify: fcQRadioTuner_method_callback_disconnectNotify,
 )
 proc create*(T: type gen_qradiotuner_types.QRadioTuner,
     inst: VirtualQRadioTuner) =

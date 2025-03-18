@@ -115,6 +115,7 @@ proc fcQSGNode_setFlag2(self: pointer, param1: cint, param2: bool): void {.impor
 proc fcQSGNode_setFlags2(self: pointer, param1: cint, param2: bool): void {.importc: "QSGNode_setFlags2".}
 proc fcQSGNode_vtbl(self: pointer): pointer {.importc: "QSGNode_vtbl".}
 proc fcQSGNode_vdata(self: pointer): pointer {.importc: "QSGNode_vdata".}
+
 type cQSGNodeVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   isSubtreeBlocked*: proc(self: pointer): bool {.cdecl, raises: [], gcsafe.}
@@ -140,6 +141,7 @@ proc fcQSGGeometryNode_setInheritedOpacity(self: pointer, opacity: float64): voi
 proc fcQSGGeometryNode_inheritedOpacity(self: pointer): float64 {.importc: "QSGGeometryNode_inheritedOpacity".}
 proc fcQSGGeometryNode_vtbl(self: pointer): pointer {.importc: "QSGGeometryNode_vtbl".}
 proc fcQSGGeometryNode_vdata(self: pointer): pointer {.importc: "QSGGeometryNode_vdata".}
+
 type cQSGGeometryNodeVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   isSubtreeBlocked*: proc(self: pointer): bool {.cdecl, raises: [], gcsafe.}
@@ -153,6 +155,7 @@ proc fcQSGClipNode_setClipRect(self: pointer, clipRect: pointer): void {.importc
 proc fcQSGClipNode_clipRect(self: pointer): pointer {.importc: "QSGClipNode_clipRect".}
 proc fcQSGClipNode_vtbl(self: pointer): pointer {.importc: "QSGClipNode_vtbl".}
 proc fcQSGClipNode_vdata(self: pointer): pointer {.importc: "QSGClipNode_vdata".}
+
 type cQSGClipNodeVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   isSubtreeBlocked*: proc(self: pointer): bool {.cdecl, raises: [], gcsafe.}
@@ -166,6 +169,7 @@ proc fcQSGTransformNode_setCombinedMatrix(self: pointer, matrix: pointer): void 
 proc fcQSGTransformNode_combinedMatrix(self: pointer): pointer {.importc: "QSGTransformNode_combinedMatrix".}
 proc fcQSGTransformNode_vtbl(self: pointer): pointer {.importc: "QSGTransformNode_vtbl".}
 proc fcQSGTransformNode_vdata(self: pointer): pointer {.importc: "QSGTransformNode_vdata".}
+
 type cQSGTransformNodeVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   isSubtreeBlocked*: proc(self: pointer): bool {.cdecl, raises: [], gcsafe.}
@@ -175,6 +179,7 @@ proc fcQSGTransformNode_virtualbase_preprocess(self: pointer): void {.importc: "
 proc fcQSGTransformNode_new(vtbl, vdata: pointer): ptr cQSGTransformNode {.importc: "QSGTransformNode_new".}
 proc fcQSGRootNode_vtbl(self: pointer): pointer {.importc: "QSGRootNode_vtbl".}
 proc fcQSGRootNode_vdata(self: pointer): pointer {.importc: "QSGRootNode_vdata".}
+
 type cQSGRootNodeVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   isSubtreeBlocked*: proc(self: pointer): bool {.cdecl, raises: [], gcsafe.}
@@ -189,6 +194,7 @@ proc fcQSGOpacityNode_combinedOpacity(self: pointer): float64 {.importc: "QSGOpa
 proc fcQSGOpacityNode_isSubtreeBlocked(self: pointer): bool {.importc: "QSGOpacityNode_isSubtreeBlocked".}
 proc fcQSGOpacityNode_vtbl(self: pointer): pointer {.importc: "QSGOpacityNode_vtbl".}
 proc fcQSGOpacityNode_vdata(self: pointer): pointer {.importc: "QSGOpacityNode_vdata".}
+
 type cQSGOpacityNodeVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   isSubtreeBlocked*: proc(self: pointer): bool {.cdecl, raises: [], gcsafe.}
@@ -274,41 +280,47 @@ proc setFlags*(self: gen_qsgnode_types.QSGNode, param1: cint, param2: bool): voi
 
 type QSGNodeisSubtreeBlockedProc* = proc(self: QSGNode): bool {.raises: [], gcsafe.}
 type QSGNodepreprocessProc* = proc(self: QSGNode): void {.raises: [], gcsafe.}
+
 type QSGNodeVTable* {.inheritable, pure.} = object
   vtbl: cQSGNodeVTable
   isSubtreeBlocked*: QSGNodeisSubtreeBlockedProc
   preprocess*: QSGNodepreprocessProc
+
 proc QSGNodeisSubtreeBlocked*(self: gen_qsgnode_types.QSGNode): bool =
   fcQSGNode_virtualbase_isSubtreeBlocked(self.h)
 
-proc cQSGNode_vtable_callback_isSubtreeBlocked(self: pointer): bool {.cdecl.} =
+proc QSGNodepreprocess*(self: gen_qsgnode_types.QSGNode): void =
+  fcQSGNode_virtualbase_preprocess(self.h)
+
+
+proc fcQSGNode_vtable_callback_isSubtreeBlocked(self: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QSGNodeVTable](fcQSGNode_vdata(self))
   let self = QSGNode(h: self)
   var virtualReturn = vtbl[].isSubtreeBlocked(self)
   virtualReturn
 
-proc QSGNodepreprocess*(self: gen_qsgnode_types.QSGNode): void =
-  fcQSGNode_virtualbase_preprocess(self.h)
-
-proc cQSGNode_vtable_callback_preprocess(self: pointer): void {.cdecl.} =
+proc fcQSGNode_vtable_callback_preprocess(self: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSGNodeVTable](fcQSGNode_vdata(self))
   let self = QSGNode(h: self)
   vtbl[].preprocess(self)
 
 type VirtualQSGNode* {.inheritable.} = ref object of QSGNode
   vtbl*: cQSGNodeVTable
+
 method isSubtreeBlocked*(self: VirtualQSGNode): bool {.base.} =
   QSGNodeisSubtreeBlocked(self[])
-proc cQSGNode_method_callback_isSubtreeBlocked(self: pointer): bool {.cdecl.} =
+method preprocess*(self: VirtualQSGNode): void {.base.} =
+  QSGNodepreprocess(self[])
+
+proc fcQSGNode_method_callback_isSubtreeBlocked(self: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQSGNode](fcQSGNode_vdata(self))
   var virtualReturn = inst.isSubtreeBlocked()
   virtualReturn
 
-method preprocess*(self: VirtualQSGNode): void {.base.} =
-  QSGNodepreprocess(self[])
-proc cQSGNode_method_callback_preprocess(self: pointer): void {.cdecl.} =
+proc fcQSGNode_method_callback_preprocess(self: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSGNode](fcQSGNode_vdata(self))
   inst.preprocess()
+
 
 proc create*(T: type gen_qsgnode_types.QSGNode,
     vtbl: ref QSGNodeVTable = nil): gen_qsgnode_types.QSGNode =
@@ -318,9 +330,9 @@ proc create*(T: type gen_qsgnode_types.QSGNode,
     let vtbl = cast[ref QSGNodeVTable](fcQSGNode_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].isSubtreeBlocked):
-    vtbl[].vtbl.isSubtreeBlocked = cQSGNode_vtable_callback_isSubtreeBlocked
+    vtbl[].vtbl.isSubtreeBlocked = fcQSGNode_vtable_callback_isSubtreeBlocked
   if not isNil(vtbl[].preprocess):
-    vtbl[].vtbl.preprocess = cQSGNode_vtable_callback_preprocess
+    vtbl[].vtbl.preprocess = fcQSGNode_vtable_callback_preprocess
   gen_qsgnode_types.QSGNode(h: fcQSGNode_new(addr(vtbl[].vtbl), addr(vtbl[])), owned: true)
 
 const cQSGNode_mvtbl = cQSGNodeVTable(
@@ -328,8 +340,9 @@ const cQSGNode_mvtbl = cQSGNodeVTable(
     let inst = cast[ptr typeof(VirtualQSGNode()[])](self.fcQSGNode_vtbl())
     inst[].h = nil
     inst[].owned = false,
-  isSubtreeBlocked: cQSGNode_method_callback_isSubtreeBlocked,
-  preprocess: cQSGNode_method_callback_preprocess,
+
+  isSubtreeBlocked: fcQSGNode_method_callback_isSubtreeBlocked,
+  preprocess: fcQSGNode_method_callback_preprocess,
 )
 proc create*(T: type gen_qsgnode_types.QSGNode,
     inst: VirtualQSGNode) =
@@ -387,41 +400,47 @@ proc inheritedOpacity*(self: gen_qsgnode_types.QSGGeometryNode): float64 =
 
 type QSGGeometryNodeisSubtreeBlockedProc* = proc(self: QSGGeometryNode): bool {.raises: [], gcsafe.}
 type QSGGeometryNodepreprocessProc* = proc(self: QSGGeometryNode): void {.raises: [], gcsafe.}
+
 type QSGGeometryNodeVTable* {.inheritable, pure.} = object
   vtbl: cQSGGeometryNodeVTable
   isSubtreeBlocked*: QSGGeometryNodeisSubtreeBlockedProc
   preprocess*: QSGGeometryNodepreprocessProc
+
 proc QSGGeometryNodeisSubtreeBlocked*(self: gen_qsgnode_types.QSGGeometryNode): bool =
   fcQSGGeometryNode_virtualbase_isSubtreeBlocked(self.h)
 
-proc cQSGGeometryNode_vtable_callback_isSubtreeBlocked(self: pointer): bool {.cdecl.} =
+proc QSGGeometryNodepreprocess*(self: gen_qsgnode_types.QSGGeometryNode): void =
+  fcQSGGeometryNode_virtualbase_preprocess(self.h)
+
+
+proc fcQSGGeometryNode_vtable_callback_isSubtreeBlocked(self: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QSGGeometryNodeVTable](fcQSGGeometryNode_vdata(self))
   let self = QSGGeometryNode(h: self)
   var virtualReturn = vtbl[].isSubtreeBlocked(self)
   virtualReturn
 
-proc QSGGeometryNodepreprocess*(self: gen_qsgnode_types.QSGGeometryNode): void =
-  fcQSGGeometryNode_virtualbase_preprocess(self.h)
-
-proc cQSGGeometryNode_vtable_callback_preprocess(self: pointer): void {.cdecl.} =
+proc fcQSGGeometryNode_vtable_callback_preprocess(self: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSGGeometryNodeVTable](fcQSGGeometryNode_vdata(self))
   let self = QSGGeometryNode(h: self)
   vtbl[].preprocess(self)
 
 type VirtualQSGGeometryNode* {.inheritable.} = ref object of QSGGeometryNode
   vtbl*: cQSGGeometryNodeVTable
+
 method isSubtreeBlocked*(self: VirtualQSGGeometryNode): bool {.base.} =
   QSGGeometryNodeisSubtreeBlocked(self[])
-proc cQSGGeometryNode_method_callback_isSubtreeBlocked(self: pointer): bool {.cdecl.} =
+method preprocess*(self: VirtualQSGGeometryNode): void {.base.} =
+  QSGGeometryNodepreprocess(self[])
+
+proc fcQSGGeometryNode_method_callback_isSubtreeBlocked(self: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQSGGeometryNode](fcQSGGeometryNode_vdata(self))
   var virtualReturn = inst.isSubtreeBlocked()
   virtualReturn
 
-method preprocess*(self: VirtualQSGGeometryNode): void {.base.} =
-  QSGGeometryNodepreprocess(self[])
-proc cQSGGeometryNode_method_callback_preprocess(self: pointer): void {.cdecl.} =
+proc fcQSGGeometryNode_method_callback_preprocess(self: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSGGeometryNode](fcQSGGeometryNode_vdata(self))
   inst.preprocess()
+
 
 proc create*(T: type gen_qsgnode_types.QSGGeometryNode,
     vtbl: ref QSGGeometryNodeVTable = nil): gen_qsgnode_types.QSGGeometryNode =
@@ -431,9 +450,9 @@ proc create*(T: type gen_qsgnode_types.QSGGeometryNode,
     let vtbl = cast[ref QSGGeometryNodeVTable](fcQSGGeometryNode_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].isSubtreeBlocked):
-    vtbl[].vtbl.isSubtreeBlocked = cQSGGeometryNode_vtable_callback_isSubtreeBlocked
+    vtbl[].vtbl.isSubtreeBlocked = fcQSGGeometryNode_vtable_callback_isSubtreeBlocked
   if not isNil(vtbl[].preprocess):
-    vtbl[].vtbl.preprocess = cQSGGeometryNode_vtable_callback_preprocess
+    vtbl[].vtbl.preprocess = fcQSGGeometryNode_vtable_callback_preprocess
   gen_qsgnode_types.QSGGeometryNode(h: fcQSGGeometryNode_new(addr(vtbl[].vtbl), addr(vtbl[])), owned: true)
 
 const cQSGGeometryNode_mvtbl = cQSGGeometryNodeVTable(
@@ -441,8 +460,9 @@ const cQSGGeometryNode_mvtbl = cQSGGeometryNodeVTable(
     let inst = cast[ptr typeof(VirtualQSGGeometryNode()[])](self.fcQSGGeometryNode_vtbl())
     inst[].h = nil
     inst[].owned = false,
-  isSubtreeBlocked: cQSGGeometryNode_method_callback_isSubtreeBlocked,
-  preprocess: cQSGGeometryNode_method_callback_preprocess,
+
+  isSubtreeBlocked: fcQSGGeometryNode_method_callback_isSubtreeBlocked,
+  preprocess: fcQSGGeometryNode_method_callback_preprocess,
 )
 proc create*(T: type gen_qsgnode_types.QSGGeometryNode,
     inst: VirtualQSGGeometryNode) =
@@ -464,41 +484,47 @@ proc clipRect*(self: gen_qsgnode_types.QSGClipNode): gen_qrect_types.QRectF =
 
 type QSGClipNodeisSubtreeBlockedProc* = proc(self: QSGClipNode): bool {.raises: [], gcsafe.}
 type QSGClipNodepreprocessProc* = proc(self: QSGClipNode): void {.raises: [], gcsafe.}
+
 type QSGClipNodeVTable* {.inheritable, pure.} = object
   vtbl: cQSGClipNodeVTable
   isSubtreeBlocked*: QSGClipNodeisSubtreeBlockedProc
   preprocess*: QSGClipNodepreprocessProc
+
 proc QSGClipNodeisSubtreeBlocked*(self: gen_qsgnode_types.QSGClipNode): bool =
   fcQSGClipNode_virtualbase_isSubtreeBlocked(self.h)
 
-proc cQSGClipNode_vtable_callback_isSubtreeBlocked(self: pointer): bool {.cdecl.} =
+proc QSGClipNodepreprocess*(self: gen_qsgnode_types.QSGClipNode): void =
+  fcQSGClipNode_virtualbase_preprocess(self.h)
+
+
+proc fcQSGClipNode_vtable_callback_isSubtreeBlocked(self: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QSGClipNodeVTable](fcQSGClipNode_vdata(self))
   let self = QSGClipNode(h: self)
   var virtualReturn = vtbl[].isSubtreeBlocked(self)
   virtualReturn
 
-proc QSGClipNodepreprocess*(self: gen_qsgnode_types.QSGClipNode): void =
-  fcQSGClipNode_virtualbase_preprocess(self.h)
-
-proc cQSGClipNode_vtable_callback_preprocess(self: pointer): void {.cdecl.} =
+proc fcQSGClipNode_vtable_callback_preprocess(self: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSGClipNodeVTable](fcQSGClipNode_vdata(self))
   let self = QSGClipNode(h: self)
   vtbl[].preprocess(self)
 
 type VirtualQSGClipNode* {.inheritable.} = ref object of QSGClipNode
   vtbl*: cQSGClipNodeVTable
+
 method isSubtreeBlocked*(self: VirtualQSGClipNode): bool {.base.} =
   QSGClipNodeisSubtreeBlocked(self[])
-proc cQSGClipNode_method_callback_isSubtreeBlocked(self: pointer): bool {.cdecl.} =
+method preprocess*(self: VirtualQSGClipNode): void {.base.} =
+  QSGClipNodepreprocess(self[])
+
+proc fcQSGClipNode_method_callback_isSubtreeBlocked(self: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQSGClipNode](fcQSGClipNode_vdata(self))
   var virtualReturn = inst.isSubtreeBlocked()
   virtualReturn
 
-method preprocess*(self: VirtualQSGClipNode): void {.base.} =
-  QSGClipNodepreprocess(self[])
-proc cQSGClipNode_method_callback_preprocess(self: pointer): void {.cdecl.} =
+proc fcQSGClipNode_method_callback_preprocess(self: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSGClipNode](fcQSGClipNode_vdata(self))
   inst.preprocess()
+
 
 proc create*(T: type gen_qsgnode_types.QSGClipNode,
     vtbl: ref QSGClipNodeVTable = nil): gen_qsgnode_types.QSGClipNode =
@@ -508,9 +534,9 @@ proc create*(T: type gen_qsgnode_types.QSGClipNode,
     let vtbl = cast[ref QSGClipNodeVTable](fcQSGClipNode_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].isSubtreeBlocked):
-    vtbl[].vtbl.isSubtreeBlocked = cQSGClipNode_vtable_callback_isSubtreeBlocked
+    vtbl[].vtbl.isSubtreeBlocked = fcQSGClipNode_vtable_callback_isSubtreeBlocked
   if not isNil(vtbl[].preprocess):
-    vtbl[].vtbl.preprocess = cQSGClipNode_vtable_callback_preprocess
+    vtbl[].vtbl.preprocess = fcQSGClipNode_vtable_callback_preprocess
   gen_qsgnode_types.QSGClipNode(h: fcQSGClipNode_new(addr(vtbl[].vtbl), addr(vtbl[])), owned: true)
 
 const cQSGClipNode_mvtbl = cQSGClipNodeVTable(
@@ -518,8 +544,9 @@ const cQSGClipNode_mvtbl = cQSGClipNodeVTable(
     let inst = cast[ptr typeof(VirtualQSGClipNode()[])](self.fcQSGClipNode_vtbl())
     inst[].h = nil
     inst[].owned = false,
-  isSubtreeBlocked: cQSGClipNode_method_callback_isSubtreeBlocked,
-  preprocess: cQSGClipNode_method_callback_preprocess,
+
+  isSubtreeBlocked: fcQSGClipNode_method_callback_isSubtreeBlocked,
+  preprocess: fcQSGClipNode_method_callback_preprocess,
 )
 proc create*(T: type gen_qsgnode_types.QSGClipNode,
     inst: VirtualQSGClipNode) =
@@ -541,41 +568,47 @@ proc combinedMatrix*(self: gen_qsgnode_types.QSGTransformNode): gen_qmatrix4x4_t
 
 type QSGTransformNodeisSubtreeBlockedProc* = proc(self: QSGTransformNode): bool {.raises: [], gcsafe.}
 type QSGTransformNodepreprocessProc* = proc(self: QSGTransformNode): void {.raises: [], gcsafe.}
+
 type QSGTransformNodeVTable* {.inheritable, pure.} = object
   vtbl: cQSGTransformNodeVTable
   isSubtreeBlocked*: QSGTransformNodeisSubtreeBlockedProc
   preprocess*: QSGTransformNodepreprocessProc
+
 proc QSGTransformNodeisSubtreeBlocked*(self: gen_qsgnode_types.QSGTransformNode): bool =
   fcQSGTransformNode_virtualbase_isSubtreeBlocked(self.h)
 
-proc cQSGTransformNode_vtable_callback_isSubtreeBlocked(self: pointer): bool {.cdecl.} =
+proc QSGTransformNodepreprocess*(self: gen_qsgnode_types.QSGTransformNode): void =
+  fcQSGTransformNode_virtualbase_preprocess(self.h)
+
+
+proc fcQSGTransformNode_vtable_callback_isSubtreeBlocked(self: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QSGTransformNodeVTable](fcQSGTransformNode_vdata(self))
   let self = QSGTransformNode(h: self)
   var virtualReturn = vtbl[].isSubtreeBlocked(self)
   virtualReturn
 
-proc QSGTransformNodepreprocess*(self: gen_qsgnode_types.QSGTransformNode): void =
-  fcQSGTransformNode_virtualbase_preprocess(self.h)
-
-proc cQSGTransformNode_vtable_callback_preprocess(self: pointer): void {.cdecl.} =
+proc fcQSGTransformNode_vtable_callback_preprocess(self: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSGTransformNodeVTable](fcQSGTransformNode_vdata(self))
   let self = QSGTransformNode(h: self)
   vtbl[].preprocess(self)
 
 type VirtualQSGTransformNode* {.inheritable.} = ref object of QSGTransformNode
   vtbl*: cQSGTransformNodeVTable
+
 method isSubtreeBlocked*(self: VirtualQSGTransformNode): bool {.base.} =
   QSGTransformNodeisSubtreeBlocked(self[])
-proc cQSGTransformNode_method_callback_isSubtreeBlocked(self: pointer): bool {.cdecl.} =
+method preprocess*(self: VirtualQSGTransformNode): void {.base.} =
+  QSGTransformNodepreprocess(self[])
+
+proc fcQSGTransformNode_method_callback_isSubtreeBlocked(self: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQSGTransformNode](fcQSGTransformNode_vdata(self))
   var virtualReturn = inst.isSubtreeBlocked()
   virtualReturn
 
-method preprocess*(self: VirtualQSGTransformNode): void {.base.} =
-  QSGTransformNodepreprocess(self[])
-proc cQSGTransformNode_method_callback_preprocess(self: pointer): void {.cdecl.} =
+proc fcQSGTransformNode_method_callback_preprocess(self: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSGTransformNode](fcQSGTransformNode_vdata(self))
   inst.preprocess()
+
 
 proc create*(T: type gen_qsgnode_types.QSGTransformNode,
     vtbl: ref QSGTransformNodeVTable = nil): gen_qsgnode_types.QSGTransformNode =
@@ -585,9 +618,9 @@ proc create*(T: type gen_qsgnode_types.QSGTransformNode,
     let vtbl = cast[ref QSGTransformNodeVTable](fcQSGTransformNode_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].isSubtreeBlocked):
-    vtbl[].vtbl.isSubtreeBlocked = cQSGTransformNode_vtable_callback_isSubtreeBlocked
+    vtbl[].vtbl.isSubtreeBlocked = fcQSGTransformNode_vtable_callback_isSubtreeBlocked
   if not isNil(vtbl[].preprocess):
-    vtbl[].vtbl.preprocess = cQSGTransformNode_vtable_callback_preprocess
+    vtbl[].vtbl.preprocess = fcQSGTransformNode_vtable_callback_preprocess
   gen_qsgnode_types.QSGTransformNode(h: fcQSGTransformNode_new(addr(vtbl[].vtbl), addr(vtbl[])), owned: true)
 
 const cQSGTransformNode_mvtbl = cQSGTransformNodeVTable(
@@ -595,8 +628,9 @@ const cQSGTransformNode_mvtbl = cQSGTransformNodeVTable(
     let inst = cast[ptr typeof(VirtualQSGTransformNode()[])](self.fcQSGTransformNode_vtbl())
     inst[].h = nil
     inst[].owned = false,
-  isSubtreeBlocked: cQSGTransformNode_method_callback_isSubtreeBlocked,
-  preprocess: cQSGTransformNode_method_callback_preprocess,
+
+  isSubtreeBlocked: fcQSGTransformNode_method_callback_isSubtreeBlocked,
+  preprocess: fcQSGTransformNode_method_callback_preprocess,
 )
 proc create*(T: type gen_qsgnode_types.QSGTransformNode,
     inst: VirtualQSGTransformNode) =
@@ -606,41 +640,47 @@ proc create*(T: type gen_qsgnode_types.QSGTransformNode,
 
 type QSGRootNodeisSubtreeBlockedProc* = proc(self: QSGRootNode): bool {.raises: [], gcsafe.}
 type QSGRootNodepreprocessProc* = proc(self: QSGRootNode): void {.raises: [], gcsafe.}
+
 type QSGRootNodeVTable* {.inheritable, pure.} = object
   vtbl: cQSGRootNodeVTable
   isSubtreeBlocked*: QSGRootNodeisSubtreeBlockedProc
   preprocess*: QSGRootNodepreprocessProc
+
 proc QSGRootNodeisSubtreeBlocked*(self: gen_qsgnode_types.QSGRootNode): bool =
   fcQSGRootNode_virtualbase_isSubtreeBlocked(self.h)
 
-proc cQSGRootNode_vtable_callback_isSubtreeBlocked(self: pointer): bool {.cdecl.} =
+proc QSGRootNodepreprocess*(self: gen_qsgnode_types.QSGRootNode): void =
+  fcQSGRootNode_virtualbase_preprocess(self.h)
+
+
+proc fcQSGRootNode_vtable_callback_isSubtreeBlocked(self: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QSGRootNodeVTable](fcQSGRootNode_vdata(self))
   let self = QSGRootNode(h: self)
   var virtualReturn = vtbl[].isSubtreeBlocked(self)
   virtualReturn
 
-proc QSGRootNodepreprocess*(self: gen_qsgnode_types.QSGRootNode): void =
-  fcQSGRootNode_virtualbase_preprocess(self.h)
-
-proc cQSGRootNode_vtable_callback_preprocess(self: pointer): void {.cdecl.} =
+proc fcQSGRootNode_vtable_callback_preprocess(self: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSGRootNodeVTable](fcQSGRootNode_vdata(self))
   let self = QSGRootNode(h: self)
   vtbl[].preprocess(self)
 
 type VirtualQSGRootNode* {.inheritable.} = ref object of QSGRootNode
   vtbl*: cQSGRootNodeVTable
+
 method isSubtreeBlocked*(self: VirtualQSGRootNode): bool {.base.} =
   QSGRootNodeisSubtreeBlocked(self[])
-proc cQSGRootNode_method_callback_isSubtreeBlocked(self: pointer): bool {.cdecl.} =
+method preprocess*(self: VirtualQSGRootNode): void {.base.} =
+  QSGRootNodepreprocess(self[])
+
+proc fcQSGRootNode_method_callback_isSubtreeBlocked(self: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQSGRootNode](fcQSGRootNode_vdata(self))
   var virtualReturn = inst.isSubtreeBlocked()
   virtualReturn
 
-method preprocess*(self: VirtualQSGRootNode): void {.base.} =
-  QSGRootNodepreprocess(self[])
-proc cQSGRootNode_method_callback_preprocess(self: pointer): void {.cdecl.} =
+proc fcQSGRootNode_method_callback_preprocess(self: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSGRootNode](fcQSGRootNode_vdata(self))
   inst.preprocess()
+
 
 proc create*(T: type gen_qsgnode_types.QSGRootNode,
     vtbl: ref QSGRootNodeVTable = nil): gen_qsgnode_types.QSGRootNode =
@@ -650,9 +690,9 @@ proc create*(T: type gen_qsgnode_types.QSGRootNode,
     let vtbl = cast[ref QSGRootNodeVTable](fcQSGRootNode_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].isSubtreeBlocked):
-    vtbl[].vtbl.isSubtreeBlocked = cQSGRootNode_vtable_callback_isSubtreeBlocked
+    vtbl[].vtbl.isSubtreeBlocked = fcQSGRootNode_vtable_callback_isSubtreeBlocked
   if not isNil(vtbl[].preprocess):
-    vtbl[].vtbl.preprocess = cQSGRootNode_vtable_callback_preprocess
+    vtbl[].vtbl.preprocess = fcQSGRootNode_vtable_callback_preprocess
   gen_qsgnode_types.QSGRootNode(h: fcQSGRootNode_new(addr(vtbl[].vtbl), addr(vtbl[])), owned: true)
 
 const cQSGRootNode_mvtbl = cQSGRootNodeVTable(
@@ -660,8 +700,9 @@ const cQSGRootNode_mvtbl = cQSGRootNodeVTable(
     let inst = cast[ptr typeof(VirtualQSGRootNode()[])](self.fcQSGRootNode_vtbl())
     inst[].h = nil
     inst[].owned = false,
-  isSubtreeBlocked: cQSGRootNode_method_callback_isSubtreeBlocked,
-  preprocess: cQSGRootNode_method_callback_preprocess,
+
+  isSubtreeBlocked: fcQSGRootNode_method_callback_isSubtreeBlocked,
+  preprocess: fcQSGRootNode_method_callback_preprocess,
 )
 proc create*(T: type gen_qsgnode_types.QSGRootNode,
     inst: VirtualQSGRootNode) =
@@ -686,41 +727,47 @@ proc isSubtreeBlocked*(self: gen_qsgnode_types.QSGOpacityNode): bool =
 
 type QSGOpacityNodeisSubtreeBlockedProc* = proc(self: QSGOpacityNode): bool {.raises: [], gcsafe.}
 type QSGOpacityNodepreprocessProc* = proc(self: QSGOpacityNode): void {.raises: [], gcsafe.}
+
 type QSGOpacityNodeVTable* {.inheritable, pure.} = object
   vtbl: cQSGOpacityNodeVTable
   isSubtreeBlocked*: QSGOpacityNodeisSubtreeBlockedProc
   preprocess*: QSGOpacityNodepreprocessProc
+
 proc QSGOpacityNodeisSubtreeBlocked*(self: gen_qsgnode_types.QSGOpacityNode): bool =
   fcQSGOpacityNode_virtualbase_isSubtreeBlocked(self.h)
 
-proc cQSGOpacityNode_vtable_callback_isSubtreeBlocked(self: pointer): bool {.cdecl.} =
+proc QSGOpacityNodepreprocess*(self: gen_qsgnode_types.QSGOpacityNode): void =
+  fcQSGOpacityNode_virtualbase_preprocess(self.h)
+
+
+proc fcQSGOpacityNode_vtable_callback_isSubtreeBlocked(self: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QSGOpacityNodeVTable](fcQSGOpacityNode_vdata(self))
   let self = QSGOpacityNode(h: self)
   var virtualReturn = vtbl[].isSubtreeBlocked(self)
   virtualReturn
 
-proc QSGOpacityNodepreprocess*(self: gen_qsgnode_types.QSGOpacityNode): void =
-  fcQSGOpacityNode_virtualbase_preprocess(self.h)
-
-proc cQSGOpacityNode_vtable_callback_preprocess(self: pointer): void {.cdecl.} =
+proc fcQSGOpacityNode_vtable_callback_preprocess(self: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSGOpacityNodeVTable](fcQSGOpacityNode_vdata(self))
   let self = QSGOpacityNode(h: self)
   vtbl[].preprocess(self)
 
 type VirtualQSGOpacityNode* {.inheritable.} = ref object of QSGOpacityNode
   vtbl*: cQSGOpacityNodeVTable
+
 method isSubtreeBlocked*(self: VirtualQSGOpacityNode): bool {.base.} =
   QSGOpacityNodeisSubtreeBlocked(self[])
-proc cQSGOpacityNode_method_callback_isSubtreeBlocked(self: pointer): bool {.cdecl.} =
+method preprocess*(self: VirtualQSGOpacityNode): void {.base.} =
+  QSGOpacityNodepreprocess(self[])
+
+proc fcQSGOpacityNode_method_callback_isSubtreeBlocked(self: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQSGOpacityNode](fcQSGOpacityNode_vdata(self))
   var virtualReturn = inst.isSubtreeBlocked()
   virtualReturn
 
-method preprocess*(self: VirtualQSGOpacityNode): void {.base.} =
-  QSGOpacityNodepreprocess(self[])
-proc cQSGOpacityNode_method_callback_preprocess(self: pointer): void {.cdecl.} =
+proc fcQSGOpacityNode_method_callback_preprocess(self: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSGOpacityNode](fcQSGOpacityNode_vdata(self))
   inst.preprocess()
+
 
 proc create*(T: type gen_qsgnode_types.QSGOpacityNode,
     vtbl: ref QSGOpacityNodeVTable = nil): gen_qsgnode_types.QSGOpacityNode =
@@ -730,9 +777,9 @@ proc create*(T: type gen_qsgnode_types.QSGOpacityNode,
     let vtbl = cast[ref QSGOpacityNodeVTable](fcQSGOpacityNode_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].isSubtreeBlocked):
-    vtbl[].vtbl.isSubtreeBlocked = cQSGOpacityNode_vtable_callback_isSubtreeBlocked
+    vtbl[].vtbl.isSubtreeBlocked = fcQSGOpacityNode_vtable_callback_isSubtreeBlocked
   if not isNil(vtbl[].preprocess):
-    vtbl[].vtbl.preprocess = cQSGOpacityNode_vtable_callback_preprocess
+    vtbl[].vtbl.preprocess = fcQSGOpacityNode_vtable_callback_preprocess
   gen_qsgnode_types.QSGOpacityNode(h: fcQSGOpacityNode_new(addr(vtbl[].vtbl), addr(vtbl[])), owned: true)
 
 const cQSGOpacityNode_mvtbl = cQSGOpacityNodeVTable(
@@ -740,8 +787,9 @@ const cQSGOpacityNode_mvtbl = cQSGOpacityNodeVTable(
     let inst = cast[ptr typeof(VirtualQSGOpacityNode()[])](self.fcQSGOpacityNode_vtbl())
     inst[].h = nil
     inst[].owned = false,
-  isSubtreeBlocked: cQSGOpacityNode_method_callback_isSubtreeBlocked,
-  preprocess: cQSGOpacityNode_method_callback_preprocess,
+
+  isSubtreeBlocked: fcQSGOpacityNode_method_callback_isSubtreeBlocked,
+  preprocess: fcQSGOpacityNode_method_callback_preprocess,
 )
 proc create*(T: type gen_qsgnode_types.QSGOpacityNode,
     inst: VirtualQSGOpacityNode) =

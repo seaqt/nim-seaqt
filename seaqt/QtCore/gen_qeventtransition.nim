@@ -71,6 +71,7 @@ proc fcQEventTransition_trUtf82(s: cstring, c: cstring): struct_miqt_string {.im
 proc fcQEventTransition_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QEventTransition_trUtf83".}
 proc fcQEventTransition_vtbl(self: pointer): pointer {.importc: "QEventTransition_vtbl".}
 proc fcQEventTransition_vdata(self: pointer): pointer {.importc: "QEventTransition_vdata".}
+
 type cQEventTransitionVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -176,6 +177,7 @@ type QEventTransitionchildEventProc* = proc(self: QEventTransition, event: gen_q
 type QEventTransitioncustomEventProc* = proc(self: QEventTransition, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QEventTransitionconnectNotifyProc* = proc(self: QEventTransition, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QEventTransitiondisconnectNotifyProc* = proc(self: QEventTransition, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+
 type QEventTransitionVTable* {.inheritable, pure.} = object
   vtbl: cQEventTransitionVTable
   metaObject*: QEventTransitionmetaObjectProc
@@ -190,10 +192,45 @@ type QEventTransitionVTable* {.inheritable, pure.} = object
   customEvent*: QEventTransitioncustomEventProc
   connectNotify*: QEventTransitionconnectNotifyProc
   disconnectNotify*: QEventTransitiondisconnectNotifyProc
+
 proc QEventTransitionmetaObject*(self: gen_qeventtransition_types.QEventTransition): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQEventTransition_virtualbase_metaObject(self.h), owned: false)
 
-proc cQEventTransition_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
+proc QEventTransitionmetacast*(self: gen_qeventtransition_types.QEventTransition, param1: cstring): pointer =
+  fcQEventTransition_virtualbase_metacast(self.h, param1)
+
+proc QEventTransitionmetacall*(self: gen_qeventtransition_types.QEventTransition, param1: cint, param2: cint, param3: pointer): cint =
+  fcQEventTransition_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+proc QEventTransitioneventTest*(self: gen_qeventtransition_types.QEventTransition, event: gen_qcoreevent_types.QEvent): bool =
+  fcQEventTransition_virtualbase_eventTest(self.h, event.h)
+
+proc QEventTransitiononTransition*(self: gen_qeventtransition_types.QEventTransition, event: gen_qcoreevent_types.QEvent): void =
+  fcQEventTransition_virtualbase_onTransition(self.h, event.h)
+
+proc QEventTransitionevent*(self: gen_qeventtransition_types.QEventTransition, e: gen_qcoreevent_types.QEvent): bool =
+  fcQEventTransition_virtualbase_event(self.h, e.h)
+
+proc QEventTransitioneventFilter*(self: gen_qeventtransition_types.QEventTransition, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
+  fcQEventTransition_virtualbase_eventFilter(self.h, watched.h, event.h)
+
+proc QEventTransitiontimerEvent*(self: gen_qeventtransition_types.QEventTransition, event: gen_qcoreevent_types.QTimerEvent): void =
+  fcQEventTransition_virtualbase_timerEvent(self.h, event.h)
+
+proc QEventTransitionchildEvent*(self: gen_qeventtransition_types.QEventTransition, event: gen_qcoreevent_types.QChildEvent): void =
+  fcQEventTransition_virtualbase_childEvent(self.h, event.h)
+
+proc QEventTransitioncustomEvent*(self: gen_qeventtransition_types.QEventTransition, event: gen_qcoreevent_types.QEvent): void =
+  fcQEventTransition_virtualbase_customEvent(self.h, event.h)
+
+proc QEventTransitionconnectNotify*(self: gen_qeventtransition_types.QEventTransition, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQEventTransition_virtualbase_connectNotify(self.h, signal.h)
+
+proc QEventTransitiondisconnectNotify*(self: gen_qeventtransition_types.QEventTransition, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQEventTransition_virtualbase_disconnectNotify(self.h, signal.h)
+
+
+proc fcQEventTransition_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QEventTransitionVTable](fcQEventTransition_vdata(self))
   let self = QEventTransition(h: self)
   var virtualReturn = vtbl[].metaObject(self)
@@ -202,20 +239,14 @@ proc cQEventTransition_vtable_callback_metaObject(self: pointer): pointer {.cdec
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QEventTransitionmetacast*(self: gen_qeventtransition_types.QEventTransition, param1: cstring): pointer =
-  fcQEventTransition_virtualbase_metacast(self.h, param1)
-
-proc cQEventTransition_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+proc fcQEventTransition_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QEventTransitionVTable](fcQEventTransition_vdata(self))
   let self = QEventTransition(h: self)
   let slotval1 = (param1)
   var virtualReturn = vtbl[].metacast(self, slotval1)
   virtualReturn
 
-proc QEventTransitionmetacall*(self: gen_qeventtransition_types.QEventTransition, param1: cint, param2: cint, param3: pointer): cint =
-  fcQEventTransition_virtualbase_metacall(self.h, cint(param1), param2, param3)
-
-proc cQEventTransition_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+proc fcQEventTransition_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QEventTransitionVTable](fcQEventTransition_vdata(self))
   let self = QEventTransition(h: self)
   let slotval1 = cint(param1)
@@ -224,39 +255,27 @@ proc cQEventTransition_vtable_callback_metacall(self: pointer, param1: cint, par
   var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QEventTransitioneventTest*(self: gen_qeventtransition_types.QEventTransition, event: gen_qcoreevent_types.QEvent): bool =
-  fcQEventTransition_virtualbase_eventTest(self.h, event.h)
-
-proc cQEventTransition_vtable_callback_eventTest(self: pointer, event: pointer): bool {.cdecl.} =
+proc fcQEventTransition_vtable_callback_eventTest(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QEventTransitionVTable](fcQEventTransition_vdata(self))
   let self = QEventTransition(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].eventTest(self, slotval1)
   virtualReturn
 
-proc QEventTransitiononTransition*(self: gen_qeventtransition_types.QEventTransition, event: gen_qcoreevent_types.QEvent): void =
-  fcQEventTransition_virtualbase_onTransition(self.h, event.h)
-
-proc cQEventTransition_vtable_callback_onTransition(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQEventTransition_vtable_callback_onTransition(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QEventTransitionVTable](fcQEventTransition_vdata(self))
   let self = QEventTransition(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].onTransition(self, slotval1)
 
-proc QEventTransitionevent*(self: gen_qeventtransition_types.QEventTransition, e: gen_qcoreevent_types.QEvent): bool =
-  fcQEventTransition_virtualbase_event(self.h, e.h)
-
-proc cQEventTransition_vtable_callback_event(self: pointer, e: pointer): bool {.cdecl.} =
+proc fcQEventTransition_vtable_callback_event(self: pointer, e: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QEventTransitionVTable](fcQEventTransition_vdata(self))
   let self = QEventTransition(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: e, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
-proc QEventTransitioneventFilter*(self: gen_qeventtransition_types.QEventTransition, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
-  fcQEventTransition_virtualbase_eventFilter(self.h, watched.h, event.h)
-
-proc cQEventTransition_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+proc fcQEventTransition_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QEventTransitionVTable](fcQEventTransition_vdata(self))
   let self = QEventTransition(h: self)
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
@@ -264,46 +283,31 @@ proc cQEventTransition_vtable_callback_eventFilter(self: pointer, watched: point
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
-proc QEventTransitiontimerEvent*(self: gen_qeventtransition_types.QEventTransition, event: gen_qcoreevent_types.QTimerEvent): void =
-  fcQEventTransition_virtualbase_timerEvent(self.h, event.h)
-
-proc cQEventTransition_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQEventTransition_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QEventTransitionVTable](fcQEventTransition_vdata(self))
   let self = QEventTransition(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
-proc QEventTransitionchildEvent*(self: gen_qeventtransition_types.QEventTransition, event: gen_qcoreevent_types.QChildEvent): void =
-  fcQEventTransition_virtualbase_childEvent(self.h, event.h)
-
-proc cQEventTransition_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQEventTransition_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QEventTransitionVTable](fcQEventTransition_vdata(self))
   let self = QEventTransition(h: self)
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
-proc QEventTransitioncustomEvent*(self: gen_qeventtransition_types.QEventTransition, event: gen_qcoreevent_types.QEvent): void =
-  fcQEventTransition_virtualbase_customEvent(self.h, event.h)
-
-proc cQEventTransition_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQEventTransition_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QEventTransitionVTable](fcQEventTransition_vdata(self))
   let self = QEventTransition(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
-proc QEventTransitionconnectNotify*(self: gen_qeventtransition_types.QEventTransition, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQEventTransition_virtualbase_connectNotify(self.h, signal.h)
-
-proc cQEventTransition_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQEventTransition_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QEventTransitionVTable](fcQEventTransition_vdata(self))
   let self = QEventTransition(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
-proc QEventTransitiondisconnectNotify*(self: gen_qeventtransition_types.QEventTransition, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQEventTransition_virtualbase_disconnectNotify(self.h, signal.h)
-
-proc cQEventTransition_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQEventTransition_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QEventTransitionVTable](fcQEventTransition_vdata(self))
   let self = QEventTransition(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
@@ -311,9 +315,33 @@ proc cQEventTransition_vtable_callback_disconnectNotify(self: pointer, signal: p
 
 type VirtualQEventTransition* {.inheritable.} = ref object of QEventTransition
   vtbl*: cQEventTransitionVTable
+
 method metaObject*(self: VirtualQEventTransition): gen_qobjectdefs_types.QMetaObject {.base.} =
   QEventTransitionmetaObject(self[])
-proc cQEventTransition_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
+method metacast*(self: VirtualQEventTransition, param1: cstring): pointer {.base.} =
+  QEventTransitionmetacast(self[], param1)
+method metacall*(self: VirtualQEventTransition, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QEventTransitionmetacall(self[], param1, param2, param3)
+method eventTest*(self: VirtualQEventTransition, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QEventTransitioneventTest(self[], event)
+method onTransition*(self: VirtualQEventTransition, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QEventTransitiononTransition(self[], event)
+method event*(self: VirtualQEventTransition, e: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QEventTransitionevent(self[], e)
+method eventFilter*(self: VirtualQEventTransition, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QEventTransitioneventFilter(self[], watched, event)
+method timerEvent*(self: VirtualQEventTransition, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QEventTransitiontimerEvent(self[], event)
+method childEvent*(self: VirtualQEventTransition, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QEventTransitionchildEvent(self[], event)
+method customEvent*(self: VirtualQEventTransition, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QEventTransitioncustomEvent(self[], event)
+method connectNotify*(self: VirtualQEventTransition, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QEventTransitionconnectNotify(self[], signal)
+method disconnectNotify*(self: VirtualQEventTransition, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QEventTransitiondisconnectNotify(self[], signal)
+
+proc fcQEventTransition_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQEventTransition](fcQEventTransition_vdata(self))
   var virtualReturn = inst.metaObject()
   virtualReturn.owned = false # TODO move?
@@ -321,17 +349,13 @@ proc cQEventTransition_method_callback_metaObject(self: pointer): pointer {.cdec
   virtualReturn.h = nil
   virtualReturn_h
 
-method metacast*(self: VirtualQEventTransition, param1: cstring): pointer {.base.} =
-  QEventTransitionmetacast(self[], param1)
-proc cQEventTransition_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+proc fcQEventTransition_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQEventTransition](fcQEventTransition_vdata(self))
   let slotval1 = (param1)
   var virtualReturn = inst.metacast(slotval1)
   virtualReturn
 
-method metacall*(self: VirtualQEventTransition, param1: cint, param2: cint, param3: pointer): cint {.base.} =
-  QEventTransitionmetacall(self[], param1, param2, param3)
-proc cQEventTransition_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+proc fcQEventTransition_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQEventTransition](fcQEventTransition_vdata(self))
   let slotval1 = cint(param1)
   let slotval2 = param2
@@ -339,72 +363,55 @@ proc cQEventTransition_method_callback_metacall(self: pointer, param1: cint, par
   var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
-method eventTest*(self: VirtualQEventTransition, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QEventTransitioneventTest(self[], event)
-proc cQEventTransition_method_callback_eventTest(self: pointer, event: pointer): bool {.cdecl.} =
+proc fcQEventTransition_method_callback_eventTest(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQEventTransition](fcQEventTransition_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.eventTest(slotval1)
   virtualReturn
 
-method onTransition*(self: VirtualQEventTransition, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QEventTransitiononTransition(self[], event)
-proc cQEventTransition_method_callback_onTransition(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQEventTransition_method_callback_onTransition(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQEventTransition](fcQEventTransition_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.onTransition(slotval1)
 
-method event*(self: VirtualQEventTransition, e: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QEventTransitionevent(self[], e)
-proc cQEventTransition_method_callback_event(self: pointer, e: pointer): bool {.cdecl.} =
+proc fcQEventTransition_method_callback_event(self: pointer, e: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQEventTransition](fcQEventTransition_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: e, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
-method eventFilter*(self: VirtualQEventTransition, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QEventTransitioneventFilter(self[], watched, event)
-proc cQEventTransition_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+proc fcQEventTransition_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQEventTransition](fcQEventTransition_vdata(self))
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
   let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
-method timerEvent*(self: VirtualQEventTransition, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
-  QEventTransitiontimerEvent(self[], event)
-proc cQEventTransition_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQEventTransition_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQEventTransition](fcQEventTransition_vdata(self))
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
-method childEvent*(self: VirtualQEventTransition, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
-  QEventTransitionchildEvent(self[], event)
-proc cQEventTransition_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQEventTransition_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQEventTransition](fcQEventTransition_vdata(self))
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
-method customEvent*(self: VirtualQEventTransition, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QEventTransitioncustomEvent(self[], event)
-proc cQEventTransition_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQEventTransition_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQEventTransition](fcQEventTransition_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
-method connectNotify*(self: VirtualQEventTransition, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QEventTransitionconnectNotify(self[], signal)
-proc cQEventTransition_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQEventTransition_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQEventTransition](fcQEventTransition_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
-method disconnectNotify*(self: VirtualQEventTransition, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QEventTransitiondisconnectNotify(self[], signal)
-proc cQEventTransition_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQEventTransition_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQEventTransition](fcQEventTransition_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
+
 
 proc sender*(self: gen_qeventtransition_types.QEventTransition): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQEventTransition_protectedbase_sender(self.h), owned: false)
@@ -426,29 +433,29 @@ proc create*(T: type gen_qeventtransition_types.QEventTransition,
     let vtbl = cast[ref QEventTransitionVTable](fcQEventTransition_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQEventTransition_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQEventTransition_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQEventTransition_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQEventTransition_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQEventTransition_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQEventTransition_vtable_callback_metacall
   if not isNil(vtbl[].eventTest):
-    vtbl[].vtbl.eventTest = cQEventTransition_vtable_callback_eventTest
+    vtbl[].vtbl.eventTest = fcQEventTransition_vtable_callback_eventTest
   if not isNil(vtbl[].onTransition):
-    vtbl[].vtbl.onTransition = cQEventTransition_vtable_callback_onTransition
+    vtbl[].vtbl.onTransition = fcQEventTransition_vtable_callback_onTransition
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQEventTransition_vtable_callback_event
+    vtbl[].vtbl.event = fcQEventTransition_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQEventTransition_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQEventTransition_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQEventTransition_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQEventTransition_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQEventTransition_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQEventTransition_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQEventTransition_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQEventTransition_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQEventTransition_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQEventTransition_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQEventTransition_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQEventTransition_vtable_callback_disconnectNotify
   gen_qeventtransition_types.QEventTransition(h: fcQEventTransition_new(addr(vtbl[].vtbl), addr(vtbl[])), owned: true)
 
 proc create*(T: type gen_qeventtransition_types.QEventTransition,
@@ -460,29 +467,29 @@ proc create*(T: type gen_qeventtransition_types.QEventTransition,
     let vtbl = cast[ref QEventTransitionVTable](fcQEventTransition_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQEventTransition_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQEventTransition_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQEventTransition_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQEventTransition_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQEventTransition_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQEventTransition_vtable_callback_metacall
   if not isNil(vtbl[].eventTest):
-    vtbl[].vtbl.eventTest = cQEventTransition_vtable_callback_eventTest
+    vtbl[].vtbl.eventTest = fcQEventTransition_vtable_callback_eventTest
   if not isNil(vtbl[].onTransition):
-    vtbl[].vtbl.onTransition = cQEventTransition_vtable_callback_onTransition
+    vtbl[].vtbl.onTransition = fcQEventTransition_vtable_callback_onTransition
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQEventTransition_vtable_callback_event
+    vtbl[].vtbl.event = fcQEventTransition_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQEventTransition_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQEventTransition_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQEventTransition_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQEventTransition_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQEventTransition_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQEventTransition_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQEventTransition_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQEventTransition_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQEventTransition_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQEventTransition_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQEventTransition_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQEventTransition_vtable_callback_disconnectNotify
   gen_qeventtransition_types.QEventTransition(h: fcQEventTransition_new2(addr(vtbl[].vtbl), addr(vtbl[]), objectVal.h, cint(typeVal)), owned: true)
 
 proc create*(T: type gen_qeventtransition_types.QEventTransition,
@@ -494,29 +501,29 @@ proc create*(T: type gen_qeventtransition_types.QEventTransition,
     let vtbl = cast[ref QEventTransitionVTable](fcQEventTransition_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQEventTransition_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQEventTransition_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQEventTransition_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQEventTransition_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQEventTransition_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQEventTransition_vtable_callback_metacall
   if not isNil(vtbl[].eventTest):
-    vtbl[].vtbl.eventTest = cQEventTransition_vtable_callback_eventTest
+    vtbl[].vtbl.eventTest = fcQEventTransition_vtable_callback_eventTest
   if not isNil(vtbl[].onTransition):
-    vtbl[].vtbl.onTransition = cQEventTransition_vtable_callback_onTransition
+    vtbl[].vtbl.onTransition = fcQEventTransition_vtable_callback_onTransition
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQEventTransition_vtable_callback_event
+    vtbl[].vtbl.event = fcQEventTransition_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQEventTransition_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQEventTransition_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQEventTransition_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQEventTransition_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQEventTransition_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQEventTransition_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQEventTransition_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQEventTransition_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQEventTransition_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQEventTransition_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQEventTransition_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQEventTransition_vtable_callback_disconnectNotify
   gen_qeventtransition_types.QEventTransition(h: fcQEventTransition_new3(addr(vtbl[].vtbl), addr(vtbl[]), sourceState.h), owned: true)
 
 proc create*(T: type gen_qeventtransition_types.QEventTransition,
@@ -528,29 +535,29 @@ proc create*(T: type gen_qeventtransition_types.QEventTransition,
     let vtbl = cast[ref QEventTransitionVTable](fcQEventTransition_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQEventTransition_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQEventTransition_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQEventTransition_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQEventTransition_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQEventTransition_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQEventTransition_vtable_callback_metacall
   if not isNil(vtbl[].eventTest):
-    vtbl[].vtbl.eventTest = cQEventTransition_vtable_callback_eventTest
+    vtbl[].vtbl.eventTest = fcQEventTransition_vtable_callback_eventTest
   if not isNil(vtbl[].onTransition):
-    vtbl[].vtbl.onTransition = cQEventTransition_vtable_callback_onTransition
+    vtbl[].vtbl.onTransition = fcQEventTransition_vtable_callback_onTransition
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQEventTransition_vtable_callback_event
+    vtbl[].vtbl.event = fcQEventTransition_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQEventTransition_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQEventTransition_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQEventTransition_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQEventTransition_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQEventTransition_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQEventTransition_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQEventTransition_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQEventTransition_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQEventTransition_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQEventTransition_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQEventTransition_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQEventTransition_vtable_callback_disconnectNotify
   gen_qeventtransition_types.QEventTransition(h: fcQEventTransition_new4(addr(vtbl[].vtbl), addr(vtbl[]), objectVal.h, cint(typeVal), sourceState.h), owned: true)
 
 const cQEventTransition_mvtbl = cQEventTransitionVTable(
@@ -558,18 +565,19 @@ const cQEventTransition_mvtbl = cQEventTransitionVTable(
     let inst = cast[ptr typeof(VirtualQEventTransition()[])](self.fcQEventTransition_vtbl())
     inst[].h = nil
     inst[].owned = false,
-  metaObject: cQEventTransition_method_callback_metaObject,
-  metacast: cQEventTransition_method_callback_metacast,
-  metacall: cQEventTransition_method_callback_metacall,
-  eventTest: cQEventTransition_method_callback_eventTest,
-  onTransition: cQEventTransition_method_callback_onTransition,
-  event: cQEventTransition_method_callback_event,
-  eventFilter: cQEventTransition_method_callback_eventFilter,
-  timerEvent: cQEventTransition_method_callback_timerEvent,
-  childEvent: cQEventTransition_method_callback_childEvent,
-  customEvent: cQEventTransition_method_callback_customEvent,
-  connectNotify: cQEventTransition_method_callback_connectNotify,
-  disconnectNotify: cQEventTransition_method_callback_disconnectNotify,
+
+  metaObject: fcQEventTransition_method_callback_metaObject,
+  metacast: fcQEventTransition_method_callback_metacast,
+  metacall: fcQEventTransition_method_callback_metacall,
+  eventTest: fcQEventTransition_method_callback_eventTest,
+  onTransition: fcQEventTransition_method_callback_onTransition,
+  event: fcQEventTransition_method_callback_event,
+  eventFilter: fcQEventTransition_method_callback_eventFilter,
+  timerEvent: fcQEventTransition_method_callback_timerEvent,
+  childEvent: fcQEventTransition_method_callback_childEvent,
+  customEvent: fcQEventTransition_method_callback_customEvent,
+  connectNotify: fcQEventTransition_method_callback_connectNotify,
+  disconnectNotify: fcQEventTransition_method_callback_disconnectNotify,
 )
 proc create*(T: type gen_qeventtransition_types.QEventTransition,
     inst: VirtualQEventTransition) =

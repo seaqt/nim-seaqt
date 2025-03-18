@@ -140,6 +140,7 @@ proc fcQObject_destroyed1(self: pointer, param1: pointer): void {.importc: "QObj
 proc fcQObject_connect_destroyed1(self: pointer, slot: int, callback: proc (slot: int, param1: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QObject_connect_destroyed1".}
 proc fcQObject_vtbl(self: pointer): pointer {.importc: "QObject_vtbl".}
 proc fcQObject_vdata(self: pointer): pointer {.importc: "QObject_vdata".}
+
 type cQObjectVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -311,19 +312,19 @@ proc destroyed*(self: gen_qobject_types.QObject): void =
   fcQObject_destroyed(self.h)
 
 type QObjectdestroyedSlot* = proc()
-proc cQObject_slot_callback_destroyed(slot: int) {.cdecl.} =
+proc fcQObject_slot_callback_destroyed(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QObjectdestroyedSlot](cast[pointer](slot))
   nimfunc[]()
 
-proc cQObject_slot_callback_destroyed_release(slot: int) {.cdecl.} =
+proc fcQObject_slot_callback_destroyed_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QObjectdestroyedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc ondestroyed*(self: gen_qobject_types.QObject, slot: QObjectdestroyedSlot) =
+proc onDestroyed*(self: gen_qobject_types.QObject, slot: QObjectdestroyedSlot) =
   var tmp = new QObjectdestroyedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQObject_connect_destroyed(self.h, cast[int](addr tmp[]), cQObject_slot_callback_destroyed, cQObject_slot_callback_destroyed_release)
+  fcQObject_connect_destroyed(self.h, cast[int](addr tmp[]), fcQObject_slot_callback_destroyed, fcQObject_slot_callback_destroyed_release)
 
 proc parent*(self: gen_qobject_types.QObject): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQObject_parent(self.h), owned: false)
@@ -368,21 +369,21 @@ proc destroyed*(self: gen_qobject_types.QObject, param1: gen_qobject_types.QObje
   fcQObject_destroyed1(self.h, param1.h)
 
 type QObjectdestroyed1Slot* = proc(param1: gen_qobject_types.QObject)
-proc cQObject_slot_callback_destroyed1(slot: int, param1: pointer) {.cdecl.} =
+proc fcQObject_slot_callback_destroyed1(slot: int, param1: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QObjectdestroyed1Slot](cast[pointer](slot))
   let slotval1 = gen_qobject_types.QObject(h: param1, owned: false)
 
   nimfunc[](slotval1)
 
-proc cQObject_slot_callback_destroyed1_release(slot: int) {.cdecl.} =
+proc fcQObject_slot_callback_destroyed1_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QObjectdestroyed1Slot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc ondestroyed*(self: gen_qobject_types.QObject, slot: QObjectdestroyed1Slot) =
+proc onDestroyed*(self: gen_qobject_types.QObject, slot: QObjectdestroyed1Slot) =
   var tmp = new QObjectdestroyed1Slot
   tmp[] = slot
   GC_ref(tmp)
-  fcQObject_connect_destroyed1(self.h, cast[int](addr tmp[]), cQObject_slot_callback_destroyed1, cQObject_slot_callback_destroyed1_release)
+  fcQObject_connect_destroyed1(self.h, cast[int](addr tmp[]), fcQObject_slot_callback_destroyed1, fcQObject_slot_callback_destroyed1_release)
 
 type QObjectmetaObjectProc* = proc(self: QObject): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QObjectmetacastProc* = proc(self: QObject, param1: cstring): pointer {.raises: [], gcsafe.}
@@ -394,6 +395,7 @@ type QObjectchildEventProc* = proc(self: QObject, event: gen_qcoreevent_types.QC
 type QObjectcustomEventProc* = proc(self: QObject, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QObjectconnectNotifyProc* = proc(self: QObject, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QObjectdisconnectNotifyProc* = proc(self: QObject, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+
 type QObjectVTable* {.inheritable, pure.} = object
   vtbl: cQObjectVTable
   metaObject*: QObjectmetaObjectProc
@@ -406,10 +408,39 @@ type QObjectVTable* {.inheritable, pure.} = object
   customEvent*: QObjectcustomEventProc
   connectNotify*: QObjectconnectNotifyProc
   disconnectNotify*: QObjectdisconnectNotifyProc
+
 proc QObjectmetaObject*(self: gen_qobject_types.QObject): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQObject_virtualbase_metaObject(self.h), owned: false)
 
-proc cQObject_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
+proc QObjectmetacast*(self: gen_qobject_types.QObject, param1: cstring): pointer =
+  fcQObject_virtualbase_metacast(self.h, param1)
+
+proc QObjectmetacall*(self: gen_qobject_types.QObject, param1: cint, param2: cint, param3: pointer): cint =
+  fcQObject_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+proc QObjectevent*(self: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
+  fcQObject_virtualbase_event(self.h, event.h)
+
+proc QObjecteventFilter*(self: gen_qobject_types.QObject, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
+  fcQObject_virtualbase_eventFilter(self.h, watched.h, event.h)
+
+proc QObjecttimerEvent*(self: gen_qobject_types.QObject, event: gen_qcoreevent_types.QTimerEvent): void =
+  fcQObject_virtualbase_timerEvent(self.h, event.h)
+
+proc QObjectchildEvent*(self: gen_qobject_types.QObject, event: gen_qcoreevent_types.QChildEvent): void =
+  fcQObject_virtualbase_childEvent(self.h, event.h)
+
+proc QObjectcustomEvent*(self: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): void =
+  fcQObject_virtualbase_customEvent(self.h, event.h)
+
+proc QObjectconnectNotify*(self: gen_qobject_types.QObject, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQObject_virtualbase_connectNotify(self.h, signal.h)
+
+proc QObjectdisconnectNotify*(self: gen_qobject_types.QObject, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQObject_virtualbase_disconnectNotify(self.h, signal.h)
+
+
+proc fcQObject_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QObjectVTable](fcQObject_vdata(self))
   let self = QObject(h: self)
   var virtualReturn = vtbl[].metaObject(self)
@@ -418,20 +449,14 @@ proc cQObject_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QObjectmetacast*(self: gen_qobject_types.QObject, param1: cstring): pointer =
-  fcQObject_virtualbase_metacast(self.h, param1)
-
-proc cQObject_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+proc fcQObject_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QObjectVTable](fcQObject_vdata(self))
   let self = QObject(h: self)
   let slotval1 = (param1)
   var virtualReturn = vtbl[].metacast(self, slotval1)
   virtualReturn
 
-proc QObjectmetacall*(self: gen_qobject_types.QObject, param1: cint, param2: cint, param3: pointer): cint =
-  fcQObject_virtualbase_metacall(self.h, cint(param1), param2, param3)
-
-proc cQObject_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+proc fcQObject_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QObjectVTable](fcQObject_vdata(self))
   let self = QObject(h: self)
   let slotval1 = cint(param1)
@@ -440,20 +465,14 @@ proc cQObject_vtable_callback_metacall(self: pointer, param1: cint, param2: cint
   var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QObjectevent*(self: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
-  fcQObject_virtualbase_event(self.h, event.h)
-
-proc cQObject_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
+proc fcQObject_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QObjectVTable](fcQObject_vdata(self))
   let self = QObject(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
-proc QObjecteventFilter*(self: gen_qobject_types.QObject, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
-  fcQObject_virtualbase_eventFilter(self.h, watched.h, event.h)
-
-proc cQObject_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+proc fcQObject_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QObjectVTable](fcQObject_vdata(self))
   let self = QObject(h: self)
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
@@ -461,46 +480,31 @@ proc cQObject_vtable_callback_eventFilter(self: pointer, watched: pointer, event
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
-proc QObjecttimerEvent*(self: gen_qobject_types.QObject, event: gen_qcoreevent_types.QTimerEvent): void =
-  fcQObject_virtualbase_timerEvent(self.h, event.h)
-
-proc cQObject_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQObject_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QObjectVTable](fcQObject_vdata(self))
   let self = QObject(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
-proc QObjectchildEvent*(self: gen_qobject_types.QObject, event: gen_qcoreevent_types.QChildEvent): void =
-  fcQObject_virtualbase_childEvent(self.h, event.h)
-
-proc cQObject_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQObject_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QObjectVTable](fcQObject_vdata(self))
   let self = QObject(h: self)
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
-proc QObjectcustomEvent*(self: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): void =
-  fcQObject_virtualbase_customEvent(self.h, event.h)
-
-proc cQObject_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQObject_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QObjectVTable](fcQObject_vdata(self))
   let self = QObject(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
-proc QObjectconnectNotify*(self: gen_qobject_types.QObject, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQObject_virtualbase_connectNotify(self.h, signal.h)
-
-proc cQObject_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQObject_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QObjectVTable](fcQObject_vdata(self))
   let self = QObject(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
-proc QObjectdisconnectNotify*(self: gen_qobject_types.QObject, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQObject_virtualbase_disconnectNotify(self.h, signal.h)
-
-proc cQObject_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQObject_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QObjectVTable](fcQObject_vdata(self))
   let self = QObject(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
@@ -508,9 +512,29 @@ proc cQObject_vtable_callback_disconnectNotify(self: pointer, signal: pointer): 
 
 type VirtualQObject* {.inheritable.} = ref object of QObject
   vtbl*: cQObjectVTable
+
 method metaObject*(self: VirtualQObject): gen_qobjectdefs_types.QMetaObject {.base.} =
   QObjectmetaObject(self[])
-proc cQObject_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
+method metacast*(self: VirtualQObject, param1: cstring): pointer {.base.} =
+  QObjectmetacast(self[], param1)
+method metacall*(self: VirtualQObject, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QObjectmetacall(self[], param1, param2, param3)
+method event*(self: VirtualQObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QObjectevent(self[], event)
+method eventFilter*(self: VirtualQObject, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QObjecteventFilter(self[], watched, event)
+method timerEvent*(self: VirtualQObject, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QObjecttimerEvent(self[], event)
+method childEvent*(self: VirtualQObject, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QObjectchildEvent(self[], event)
+method customEvent*(self: VirtualQObject, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QObjectcustomEvent(self[], event)
+method connectNotify*(self: VirtualQObject, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QObjectconnectNotify(self[], signal)
+method disconnectNotify*(self: VirtualQObject, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QObjectdisconnectNotify(self[], signal)
+
+proc fcQObject_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQObject](fcQObject_vdata(self))
   var virtualReturn = inst.metaObject()
   virtualReturn.owned = false # TODO move?
@@ -518,17 +542,13 @@ proc cQObject_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-method metacast*(self: VirtualQObject, param1: cstring): pointer {.base.} =
-  QObjectmetacast(self[], param1)
-proc cQObject_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+proc fcQObject_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQObject](fcQObject_vdata(self))
   let slotval1 = (param1)
   var virtualReturn = inst.metacast(slotval1)
   virtualReturn
 
-method metacall*(self: VirtualQObject, param1: cint, param2: cint, param3: pointer): cint {.base.} =
-  QObjectmetacall(self[], param1, param2, param3)
-proc cQObject_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+proc fcQObject_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQObject](fcQObject_vdata(self))
   let slotval1 = cint(param1)
   let slotval2 = param2
@@ -536,57 +556,44 @@ proc cQObject_method_callback_metacall(self: pointer, param1: cint, param2: cint
   var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
-method event*(self: VirtualQObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QObjectevent(self[], event)
-proc cQObject_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
+proc fcQObject_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQObject](fcQObject_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
-method eventFilter*(self: VirtualQObject, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QObjecteventFilter(self[], watched, event)
-proc cQObject_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+proc fcQObject_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQObject](fcQObject_vdata(self))
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
   let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
-method timerEvent*(self: VirtualQObject, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
-  QObjecttimerEvent(self[], event)
-proc cQObject_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQObject_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQObject](fcQObject_vdata(self))
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
-method childEvent*(self: VirtualQObject, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
-  QObjectchildEvent(self[], event)
-proc cQObject_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQObject_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQObject](fcQObject_vdata(self))
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
-method customEvent*(self: VirtualQObject, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QObjectcustomEvent(self[], event)
-proc cQObject_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQObject_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQObject](fcQObject_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
-method connectNotify*(self: VirtualQObject, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QObjectconnectNotify(self[], signal)
-proc cQObject_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQObject_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQObject](fcQObject_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
-method disconnectNotify*(self: VirtualQObject, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QObjectdisconnectNotify(self[], signal)
-proc cQObject_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQObject_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQObject](fcQObject_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
+
 
 proc sender*(self: gen_qobject_types.QObject): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQObject_protectedbase_sender(self.h), owned: false)
@@ -608,25 +615,25 @@ proc create*(T: type gen_qobject_types.QObject,
     let vtbl = cast[ref QObjectVTable](fcQObject_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQObject_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQObject_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQObject_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQObject_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQObject_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQObject_vtable_callback_metacall
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQObject_vtable_callback_event
+    vtbl[].vtbl.event = fcQObject_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQObject_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQObject_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQObject_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQObject_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQObject_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQObject_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQObject_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQObject_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQObject_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQObject_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQObject_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQObject_vtable_callback_disconnectNotify
   gen_qobject_types.QObject(h: fcQObject_new(addr(vtbl[].vtbl), addr(vtbl[])), owned: true)
 
 proc create*(T: type gen_qobject_types.QObject,
@@ -638,25 +645,25 @@ proc create*(T: type gen_qobject_types.QObject,
     let vtbl = cast[ref QObjectVTable](fcQObject_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQObject_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQObject_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQObject_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQObject_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQObject_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQObject_vtable_callback_metacall
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQObject_vtable_callback_event
+    vtbl[].vtbl.event = fcQObject_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQObject_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQObject_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQObject_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQObject_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQObject_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQObject_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQObject_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQObject_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQObject_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQObject_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQObject_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQObject_vtable_callback_disconnectNotify
   gen_qobject_types.QObject(h: fcQObject_new2(addr(vtbl[].vtbl), addr(vtbl[]), parent.h), owned: true)
 
 const cQObject_mvtbl = cQObjectVTable(
@@ -664,16 +671,17 @@ const cQObject_mvtbl = cQObjectVTable(
     let inst = cast[ptr typeof(VirtualQObject()[])](self.fcQObject_vtbl())
     inst[].h = nil
     inst[].owned = false,
-  metaObject: cQObject_method_callback_metaObject,
-  metacast: cQObject_method_callback_metacast,
-  metacall: cQObject_method_callback_metacall,
-  event: cQObject_method_callback_event,
-  eventFilter: cQObject_method_callback_eventFilter,
-  timerEvent: cQObject_method_callback_timerEvent,
-  childEvent: cQObject_method_callback_childEvent,
-  customEvent: cQObject_method_callback_customEvent,
-  connectNotify: cQObject_method_callback_connectNotify,
-  disconnectNotify: cQObject_method_callback_disconnectNotify,
+
+  metaObject: fcQObject_method_callback_metaObject,
+  metacast: fcQObject_method_callback_metacast,
+  metacall: fcQObject_method_callback_metacall,
+  event: fcQObject_method_callback_event,
+  eventFilter: fcQObject_method_callback_eventFilter,
+  timerEvent: fcQObject_method_callback_timerEvent,
+  childEvent: fcQObject_method_callback_childEvent,
+  customEvent: fcQObject_method_callback_customEvent,
+  connectNotify: fcQObject_method_callback_connectNotify,
+  disconnectNotify: fcQObject_method_callback_disconnectNotify,
 )
 proc create*(T: type gen_qobject_types.QObject,
     inst: VirtualQObject) =

@@ -88,6 +88,7 @@ proc fcQGraphicsLayoutItem_setSizePolicy3(self: pointer, hPolicy: cint, vPolicy:
 proc fcQGraphicsLayoutItem_effectiveSizeHint2(self: pointer, which: cint, constraint: pointer): pointer {.importc: "QGraphicsLayoutItem_effectiveSizeHint2".}
 proc fcQGraphicsLayoutItem_vtbl(self: pointer): pointer {.importc: "QGraphicsLayoutItem_vtbl".}
 proc fcQGraphicsLayoutItem_vdata(self: pointer): pointer {.importc: "QGraphicsLayoutItem_vdata".}
+
 type cQGraphicsLayoutItemVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   setGeometry*: proc(self: pointer, rect: pointer): void {.cdecl, raises: [], gcsafe.}
@@ -218,25 +219,31 @@ type QGraphicsLayoutItemsetGeometryProc* = proc(self: QGraphicsLayoutItem, rect:
 type QGraphicsLayoutItemgetContentsMarginsProc* = proc(self: QGraphicsLayoutItem, left: ptr float64, top: ptr float64, right: ptr float64, bottom: ptr float64): void {.raises: [], gcsafe.}
 type QGraphicsLayoutItemupdateGeometryProc* = proc(self: QGraphicsLayoutItem): void {.raises: [], gcsafe.}
 type QGraphicsLayoutItemsizeHintProc* = proc(self: QGraphicsLayoutItem, which: cint, constraint: gen_qsize_types.QSizeF): gen_qsize_types.QSizeF {.raises: [], gcsafe.}
+
 type QGraphicsLayoutItemVTable* {.inheritable, pure.} = object
   vtbl: cQGraphicsLayoutItemVTable
   setGeometry*: QGraphicsLayoutItemsetGeometryProc
   getContentsMargins*: QGraphicsLayoutItemgetContentsMarginsProc
   updateGeometry*: QGraphicsLayoutItemupdateGeometryProc
   sizeHint*: QGraphicsLayoutItemsizeHintProc
+
 proc QGraphicsLayoutItemsetGeometry*(self: gen_qgraphicslayoutitem_types.QGraphicsLayoutItem, rect: gen_qrect_types.QRectF): void =
   fcQGraphicsLayoutItem_virtualbase_setGeometry(self.h, rect.h)
 
-proc cQGraphicsLayoutItem_vtable_callback_setGeometry(self: pointer, rect: pointer): void {.cdecl.} =
+proc QGraphicsLayoutItemgetContentsMargins*(self: gen_qgraphicslayoutitem_types.QGraphicsLayoutItem, left: ptr float64, top: ptr float64, right: ptr float64, bottom: ptr float64): void =
+  fcQGraphicsLayoutItem_virtualbase_getContentsMargins(self.h, left, top, right, bottom)
+
+proc QGraphicsLayoutItemupdateGeometry*(self: gen_qgraphicslayoutitem_types.QGraphicsLayoutItem): void =
+  fcQGraphicsLayoutItem_virtualbase_updateGeometry(self.h)
+
+
+proc fcQGraphicsLayoutItem_vtable_callback_setGeometry(self: pointer, rect: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsLayoutItemVTable](fcQGraphicsLayoutItem_vdata(self))
   let self = QGraphicsLayoutItem(h: self)
   let slotval1 = gen_qrect_types.QRectF(h: rect, owned: false)
   vtbl[].setGeometry(self, slotval1)
 
-proc QGraphicsLayoutItemgetContentsMargins*(self: gen_qgraphicslayoutitem_types.QGraphicsLayoutItem, left: ptr float64, top: ptr float64, right: ptr float64, bottom: ptr float64): void =
-  fcQGraphicsLayoutItem_virtualbase_getContentsMargins(self.h, left, top, right, bottom)
-
-proc cQGraphicsLayoutItem_vtable_callback_getContentsMargins(self: pointer, left: ptr float64, top: ptr float64, right: ptr float64, bottom: ptr float64): void {.cdecl.} =
+proc fcQGraphicsLayoutItem_vtable_callback_getContentsMargins(self: pointer, left: ptr float64, top: ptr float64, right: ptr float64, bottom: ptr float64): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsLayoutItemVTable](fcQGraphicsLayoutItem_vdata(self))
   let self = QGraphicsLayoutItem(h: self)
   let slotval1 = left
@@ -245,15 +252,12 @@ proc cQGraphicsLayoutItem_vtable_callback_getContentsMargins(self: pointer, left
   let slotval4 = bottom
   vtbl[].getContentsMargins(self, slotval1, slotval2, slotval3, slotval4)
 
-proc QGraphicsLayoutItemupdateGeometry*(self: gen_qgraphicslayoutitem_types.QGraphicsLayoutItem): void =
-  fcQGraphicsLayoutItem_virtualbase_updateGeometry(self.h)
-
-proc cQGraphicsLayoutItem_vtable_callback_updateGeometry(self: pointer): void {.cdecl.} =
+proc fcQGraphicsLayoutItem_vtable_callback_updateGeometry(self: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsLayoutItemVTable](fcQGraphicsLayoutItem_vdata(self))
   let self = QGraphicsLayoutItem(h: self)
   vtbl[].updateGeometry(self)
 
-proc cQGraphicsLayoutItem_vtable_callback_sizeHint(self: pointer, which: cint, constraint: pointer): pointer {.cdecl.} =
+proc fcQGraphicsLayoutItem_vtable_callback_sizeHint(self: pointer, which: cint, constraint: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QGraphicsLayoutItemVTable](fcQGraphicsLayoutItem_vdata(self))
   let self = QGraphicsLayoutItem(h: self)
   let slotval1 = cint(which)
@@ -266,16 +270,22 @@ proc cQGraphicsLayoutItem_vtable_callback_sizeHint(self: pointer, which: cint, c
 
 type VirtualQGraphicsLayoutItem* {.inheritable.} = ref object of QGraphicsLayoutItem
   vtbl*: cQGraphicsLayoutItemVTable
+
 method setGeometry*(self: VirtualQGraphicsLayoutItem, rect: gen_qrect_types.QRectF): void {.base.} =
   QGraphicsLayoutItemsetGeometry(self[], rect)
-proc cQGraphicsLayoutItem_method_callback_setGeometry(self: pointer, rect: pointer): void {.cdecl.} =
+method getContentsMargins*(self: VirtualQGraphicsLayoutItem, left: ptr float64, top: ptr float64, right: ptr float64, bottom: ptr float64): void {.base.} =
+  QGraphicsLayoutItemgetContentsMargins(self[], left, top, right, bottom)
+method updateGeometry*(self: VirtualQGraphicsLayoutItem): void {.base.} =
+  QGraphicsLayoutItemupdateGeometry(self[])
+method sizeHint*(self: VirtualQGraphicsLayoutItem, which: cint, constraint: gen_qsize_types.QSizeF): gen_qsize_types.QSizeF {.base.} =
+  raiseAssert("missing implementation of QGraphicsLayoutItem.sizeHint")
+
+proc fcQGraphicsLayoutItem_method_callback_setGeometry(self: pointer, rect: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsLayoutItem](fcQGraphicsLayoutItem_vdata(self))
   let slotval1 = gen_qrect_types.QRectF(h: rect, owned: false)
   inst.setGeometry(slotval1)
 
-method getContentsMargins*(self: VirtualQGraphicsLayoutItem, left: ptr float64, top: ptr float64, right: ptr float64, bottom: ptr float64): void {.base.} =
-  QGraphicsLayoutItemgetContentsMargins(self[], left, top, right, bottom)
-proc cQGraphicsLayoutItem_method_callback_getContentsMargins(self: pointer, left: ptr float64, top: ptr float64, right: ptr float64, bottom: ptr float64): void {.cdecl.} =
+proc fcQGraphicsLayoutItem_method_callback_getContentsMargins(self: pointer, left: ptr float64, top: ptr float64, right: ptr float64, bottom: ptr float64): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsLayoutItem](fcQGraphicsLayoutItem_vdata(self))
   let slotval1 = left
   let slotval2 = top
@@ -283,15 +293,11 @@ proc cQGraphicsLayoutItem_method_callback_getContentsMargins(self: pointer, left
   let slotval4 = bottom
   inst.getContentsMargins(slotval1, slotval2, slotval3, slotval4)
 
-method updateGeometry*(self: VirtualQGraphicsLayoutItem): void {.base.} =
-  QGraphicsLayoutItemupdateGeometry(self[])
-proc cQGraphicsLayoutItem_method_callback_updateGeometry(self: pointer): void {.cdecl.} =
+proc fcQGraphicsLayoutItem_method_callback_updateGeometry(self: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsLayoutItem](fcQGraphicsLayoutItem_vdata(self))
   inst.updateGeometry()
 
-method sizeHint*(self: VirtualQGraphicsLayoutItem, which: cint, constraint: gen_qsize_types.QSizeF): gen_qsize_types.QSizeF {.base.} =
-  raiseAssert("missing implementation of QGraphicsLayoutItem_virtualbase_sizeHint")
-proc cQGraphicsLayoutItem_method_callback_sizeHint(self: pointer, which: cint, constraint: pointer): pointer {.cdecl.} =
+proc fcQGraphicsLayoutItem_method_callback_sizeHint(self: pointer, which: cint, constraint: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsLayoutItem](fcQGraphicsLayoutItem_vdata(self))
   let slotval1 = cint(which)
   let slotval2 = gen_qsize_types.QSizeF(h: constraint, owned: false)
@@ -300,6 +306,7 @@ proc cQGraphicsLayoutItem_method_callback_sizeHint(self: pointer, which: cint, c
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
   virtualReturn_h
+
 
 proc setGraphicsItem*(self: gen_qgraphicslayoutitem_types.QGraphicsLayoutItem, item: gen_qgraphicsitem_types.QGraphicsItem): void =
   fcQGraphicsLayoutItem_protectedbase_setGraphicsItem(self.h, item.h)
@@ -315,13 +322,13 @@ proc create*(T: type gen_qgraphicslayoutitem_types.QGraphicsLayoutItem,
     let vtbl = cast[ref QGraphicsLayoutItemVTable](fcQGraphicsLayoutItem_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].setGeometry):
-    vtbl[].vtbl.setGeometry = cQGraphicsLayoutItem_vtable_callback_setGeometry
+    vtbl[].vtbl.setGeometry = fcQGraphicsLayoutItem_vtable_callback_setGeometry
   if not isNil(vtbl[].getContentsMargins):
-    vtbl[].vtbl.getContentsMargins = cQGraphicsLayoutItem_vtable_callback_getContentsMargins
+    vtbl[].vtbl.getContentsMargins = fcQGraphicsLayoutItem_vtable_callback_getContentsMargins
   if not isNil(vtbl[].updateGeometry):
-    vtbl[].vtbl.updateGeometry = cQGraphicsLayoutItem_vtable_callback_updateGeometry
+    vtbl[].vtbl.updateGeometry = fcQGraphicsLayoutItem_vtable_callback_updateGeometry
   if not isNil(vtbl[].sizeHint):
-    vtbl[].vtbl.sizeHint = cQGraphicsLayoutItem_vtable_callback_sizeHint
+    vtbl[].vtbl.sizeHint = fcQGraphicsLayoutItem_vtable_callback_sizeHint
   gen_qgraphicslayoutitem_types.QGraphicsLayoutItem(h: fcQGraphicsLayoutItem_new(addr(vtbl[].vtbl), addr(vtbl[])), owned: true)
 
 proc create*(T: type gen_qgraphicslayoutitem_types.QGraphicsLayoutItem,
@@ -333,13 +340,13 @@ proc create*(T: type gen_qgraphicslayoutitem_types.QGraphicsLayoutItem,
     let vtbl = cast[ref QGraphicsLayoutItemVTable](fcQGraphicsLayoutItem_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].setGeometry):
-    vtbl[].vtbl.setGeometry = cQGraphicsLayoutItem_vtable_callback_setGeometry
+    vtbl[].vtbl.setGeometry = fcQGraphicsLayoutItem_vtable_callback_setGeometry
   if not isNil(vtbl[].getContentsMargins):
-    vtbl[].vtbl.getContentsMargins = cQGraphicsLayoutItem_vtable_callback_getContentsMargins
+    vtbl[].vtbl.getContentsMargins = fcQGraphicsLayoutItem_vtable_callback_getContentsMargins
   if not isNil(vtbl[].updateGeometry):
-    vtbl[].vtbl.updateGeometry = cQGraphicsLayoutItem_vtable_callback_updateGeometry
+    vtbl[].vtbl.updateGeometry = fcQGraphicsLayoutItem_vtable_callback_updateGeometry
   if not isNil(vtbl[].sizeHint):
-    vtbl[].vtbl.sizeHint = cQGraphicsLayoutItem_vtable_callback_sizeHint
+    vtbl[].vtbl.sizeHint = fcQGraphicsLayoutItem_vtable_callback_sizeHint
   gen_qgraphicslayoutitem_types.QGraphicsLayoutItem(h: fcQGraphicsLayoutItem_new2(addr(vtbl[].vtbl), addr(vtbl[]), parent.h), owned: true)
 
 proc create*(T: type gen_qgraphicslayoutitem_types.QGraphicsLayoutItem,
@@ -351,13 +358,13 @@ proc create*(T: type gen_qgraphicslayoutitem_types.QGraphicsLayoutItem,
     let vtbl = cast[ref QGraphicsLayoutItemVTable](fcQGraphicsLayoutItem_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].setGeometry):
-    vtbl[].vtbl.setGeometry = cQGraphicsLayoutItem_vtable_callback_setGeometry
+    vtbl[].vtbl.setGeometry = fcQGraphicsLayoutItem_vtable_callback_setGeometry
   if not isNil(vtbl[].getContentsMargins):
-    vtbl[].vtbl.getContentsMargins = cQGraphicsLayoutItem_vtable_callback_getContentsMargins
+    vtbl[].vtbl.getContentsMargins = fcQGraphicsLayoutItem_vtable_callback_getContentsMargins
   if not isNil(vtbl[].updateGeometry):
-    vtbl[].vtbl.updateGeometry = cQGraphicsLayoutItem_vtable_callback_updateGeometry
+    vtbl[].vtbl.updateGeometry = fcQGraphicsLayoutItem_vtable_callback_updateGeometry
   if not isNil(vtbl[].sizeHint):
-    vtbl[].vtbl.sizeHint = cQGraphicsLayoutItem_vtable_callback_sizeHint
+    vtbl[].vtbl.sizeHint = fcQGraphicsLayoutItem_vtable_callback_sizeHint
   gen_qgraphicslayoutitem_types.QGraphicsLayoutItem(h: fcQGraphicsLayoutItem_new3(addr(vtbl[].vtbl), addr(vtbl[]), parent.h, isLayout), owned: true)
 
 const cQGraphicsLayoutItem_mvtbl = cQGraphicsLayoutItemVTable(
@@ -365,10 +372,11 @@ const cQGraphicsLayoutItem_mvtbl = cQGraphicsLayoutItemVTable(
     let inst = cast[ptr typeof(VirtualQGraphicsLayoutItem()[])](self.fcQGraphicsLayoutItem_vtbl())
     inst[].h = nil
     inst[].owned = false,
-  setGeometry: cQGraphicsLayoutItem_method_callback_setGeometry,
-  getContentsMargins: cQGraphicsLayoutItem_method_callback_getContentsMargins,
-  updateGeometry: cQGraphicsLayoutItem_method_callback_updateGeometry,
-  sizeHint: cQGraphicsLayoutItem_method_callback_sizeHint,
+
+  setGeometry: fcQGraphicsLayoutItem_method_callback_setGeometry,
+  getContentsMargins: fcQGraphicsLayoutItem_method_callback_getContentsMargins,
+  updateGeometry: fcQGraphicsLayoutItem_method_callback_updateGeometry,
+  sizeHint: fcQGraphicsLayoutItem_method_callback_sizeHint,
 )
 proc create*(T: type gen_qgraphicslayoutitem_types.QGraphicsLayoutItem,
     inst: VirtualQGraphicsLayoutItem) =

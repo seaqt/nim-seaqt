@@ -171,65 +171,65 @@ proc stateChanged*(self: gen_qaudiodecodercontrol_types.QAudioDecoderControl, ne
   fcQAudioDecoderControl_stateChanged(self.h, cint(newState))
 
 type QAudioDecoderControlstateChangedSlot* = proc(newState: cint)
-proc cQAudioDecoderControl_slot_callback_stateChanged(slot: int, newState: cint) {.cdecl.} =
+proc fcQAudioDecoderControl_slot_callback_stateChanged(slot: int, newState: cint) {.cdecl.} =
   let nimfunc = cast[ptr QAudioDecoderControlstateChangedSlot](cast[pointer](slot))
   let slotval1 = cint(newState)
 
   nimfunc[](slotval1)
 
-proc cQAudioDecoderControl_slot_callback_stateChanged_release(slot: int) {.cdecl.} =
+proc fcQAudioDecoderControl_slot_callback_stateChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QAudioDecoderControlstateChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onstateChanged*(self: gen_qaudiodecodercontrol_types.QAudioDecoderControl, slot: QAudioDecoderControlstateChangedSlot) =
+proc onStateChanged*(self: gen_qaudiodecodercontrol_types.QAudioDecoderControl, slot: QAudioDecoderControlstateChangedSlot) =
   var tmp = new QAudioDecoderControlstateChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAudioDecoderControl_connect_stateChanged(self.h, cast[int](addr tmp[]), cQAudioDecoderControl_slot_callback_stateChanged, cQAudioDecoderControl_slot_callback_stateChanged_release)
+  fcQAudioDecoderControl_connect_stateChanged(self.h, cast[int](addr tmp[]), fcQAudioDecoderControl_slot_callback_stateChanged, fcQAudioDecoderControl_slot_callback_stateChanged_release)
 
 proc formatChanged*(self: gen_qaudiodecodercontrol_types.QAudioDecoderControl, format: gen_qaudioformat_types.QAudioFormat): void =
   fcQAudioDecoderControl_formatChanged(self.h, format.h)
 
 type QAudioDecoderControlformatChangedSlot* = proc(format: gen_qaudioformat_types.QAudioFormat)
-proc cQAudioDecoderControl_slot_callback_formatChanged(slot: int, format: pointer) {.cdecl.} =
+proc fcQAudioDecoderControl_slot_callback_formatChanged(slot: int, format: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QAudioDecoderControlformatChangedSlot](cast[pointer](slot))
   let slotval1 = gen_qaudioformat_types.QAudioFormat(h: format, owned: false)
 
   nimfunc[](slotval1)
 
-proc cQAudioDecoderControl_slot_callback_formatChanged_release(slot: int) {.cdecl.} =
+proc fcQAudioDecoderControl_slot_callback_formatChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QAudioDecoderControlformatChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onformatChanged*(self: gen_qaudiodecodercontrol_types.QAudioDecoderControl, slot: QAudioDecoderControlformatChangedSlot) =
+proc onFormatChanged*(self: gen_qaudiodecodercontrol_types.QAudioDecoderControl, slot: QAudioDecoderControlformatChangedSlot) =
   var tmp = new QAudioDecoderControlformatChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAudioDecoderControl_connect_formatChanged(self.h, cast[int](addr tmp[]), cQAudioDecoderControl_slot_callback_formatChanged, cQAudioDecoderControl_slot_callback_formatChanged_release)
+  fcQAudioDecoderControl_connect_formatChanged(self.h, cast[int](addr tmp[]), fcQAudioDecoderControl_slot_callback_formatChanged, fcQAudioDecoderControl_slot_callback_formatChanged_release)
 
 proc sourceChanged*(self: gen_qaudiodecodercontrol_types.QAudioDecoderControl): void =
   fcQAudioDecoderControl_sourceChanged(self.h)
 
 type QAudioDecoderControlsourceChangedSlot* = proc()
-proc cQAudioDecoderControl_slot_callback_sourceChanged(slot: int) {.cdecl.} =
+proc fcQAudioDecoderControl_slot_callback_sourceChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QAudioDecoderControlsourceChangedSlot](cast[pointer](slot))
   nimfunc[]()
 
-proc cQAudioDecoderControl_slot_callback_sourceChanged_release(slot: int) {.cdecl.} =
+proc fcQAudioDecoderControl_slot_callback_sourceChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QAudioDecoderControlsourceChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onsourceChanged*(self: gen_qaudiodecodercontrol_types.QAudioDecoderControl, slot: QAudioDecoderControlsourceChangedSlot) =
+proc onSourceChanged*(self: gen_qaudiodecodercontrol_types.QAudioDecoderControl, slot: QAudioDecoderControlsourceChangedSlot) =
   var tmp = new QAudioDecoderControlsourceChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAudioDecoderControl_connect_sourceChanged(self.h, cast[int](addr tmp[]), cQAudioDecoderControl_slot_callback_sourceChanged, cQAudioDecoderControl_slot_callback_sourceChanged_release)
+  fcQAudioDecoderControl_connect_sourceChanged(self.h, cast[int](addr tmp[]), fcQAudioDecoderControl_slot_callback_sourceChanged, fcQAudioDecoderControl_slot_callback_sourceChanged_release)
 
 proc error*(self: gen_qaudiodecodercontrol_types.QAudioDecoderControl, error: cint, errorString: openArray[char]): void =
   fcQAudioDecoderControl_error(self.h, error, struct_miqt_string(data: if len(errorString) > 0: addr errorString[0] else: nil, len: csize_t(len(errorString))))
 
 type QAudioDecoderControlerrorSlot* = proc(error: cint, errorString: openArray[char])
-proc cQAudioDecoderControl_slot_callback_error(slot: int, error: cint, errorString: struct_miqt_string) {.cdecl.} =
+proc fcQAudioDecoderControl_slot_callback_error(slot: int, error: cint, errorString: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QAudioDecoderControlerrorSlot](cast[pointer](slot))
   let slotval1 = error
 
@@ -240,111 +240,111 @@ proc cQAudioDecoderControl_slot_callback_error(slot: int, error: cint, errorStri
 
   nimfunc[](slotval1, slotval2)
 
-proc cQAudioDecoderControl_slot_callback_error_release(slot: int) {.cdecl.} =
+proc fcQAudioDecoderControl_slot_callback_error_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QAudioDecoderControlerrorSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onerror*(self: gen_qaudiodecodercontrol_types.QAudioDecoderControl, slot: QAudioDecoderControlerrorSlot) =
+proc onError*(self: gen_qaudiodecodercontrol_types.QAudioDecoderControl, slot: QAudioDecoderControlerrorSlot) =
   var tmp = new QAudioDecoderControlerrorSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAudioDecoderControl_connect_error(self.h, cast[int](addr tmp[]), cQAudioDecoderControl_slot_callback_error, cQAudioDecoderControl_slot_callback_error_release)
+  fcQAudioDecoderControl_connect_error(self.h, cast[int](addr tmp[]), fcQAudioDecoderControl_slot_callback_error, fcQAudioDecoderControl_slot_callback_error_release)
 
 proc bufferReady*(self: gen_qaudiodecodercontrol_types.QAudioDecoderControl): void =
   fcQAudioDecoderControl_bufferReady(self.h)
 
 type QAudioDecoderControlbufferReadySlot* = proc()
-proc cQAudioDecoderControl_slot_callback_bufferReady(slot: int) {.cdecl.} =
+proc fcQAudioDecoderControl_slot_callback_bufferReady(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QAudioDecoderControlbufferReadySlot](cast[pointer](slot))
   nimfunc[]()
 
-proc cQAudioDecoderControl_slot_callback_bufferReady_release(slot: int) {.cdecl.} =
+proc fcQAudioDecoderControl_slot_callback_bufferReady_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QAudioDecoderControlbufferReadySlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onbufferReady*(self: gen_qaudiodecodercontrol_types.QAudioDecoderControl, slot: QAudioDecoderControlbufferReadySlot) =
+proc onBufferReady*(self: gen_qaudiodecodercontrol_types.QAudioDecoderControl, slot: QAudioDecoderControlbufferReadySlot) =
   var tmp = new QAudioDecoderControlbufferReadySlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAudioDecoderControl_connect_bufferReady(self.h, cast[int](addr tmp[]), cQAudioDecoderControl_slot_callback_bufferReady, cQAudioDecoderControl_slot_callback_bufferReady_release)
+  fcQAudioDecoderControl_connect_bufferReady(self.h, cast[int](addr tmp[]), fcQAudioDecoderControl_slot_callback_bufferReady, fcQAudioDecoderControl_slot_callback_bufferReady_release)
 
 proc bufferAvailableChanged*(self: gen_qaudiodecodercontrol_types.QAudioDecoderControl, available: bool): void =
   fcQAudioDecoderControl_bufferAvailableChanged(self.h, available)
 
 type QAudioDecoderControlbufferAvailableChangedSlot* = proc(available: bool)
-proc cQAudioDecoderControl_slot_callback_bufferAvailableChanged(slot: int, available: bool) {.cdecl.} =
+proc fcQAudioDecoderControl_slot_callback_bufferAvailableChanged(slot: int, available: bool) {.cdecl.} =
   let nimfunc = cast[ptr QAudioDecoderControlbufferAvailableChangedSlot](cast[pointer](slot))
   let slotval1 = available
 
   nimfunc[](slotval1)
 
-proc cQAudioDecoderControl_slot_callback_bufferAvailableChanged_release(slot: int) {.cdecl.} =
+proc fcQAudioDecoderControl_slot_callback_bufferAvailableChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QAudioDecoderControlbufferAvailableChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onbufferAvailableChanged*(self: gen_qaudiodecodercontrol_types.QAudioDecoderControl, slot: QAudioDecoderControlbufferAvailableChangedSlot) =
+proc onBufferAvailableChanged*(self: gen_qaudiodecodercontrol_types.QAudioDecoderControl, slot: QAudioDecoderControlbufferAvailableChangedSlot) =
   var tmp = new QAudioDecoderControlbufferAvailableChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAudioDecoderControl_connect_bufferAvailableChanged(self.h, cast[int](addr tmp[]), cQAudioDecoderControl_slot_callback_bufferAvailableChanged, cQAudioDecoderControl_slot_callback_bufferAvailableChanged_release)
+  fcQAudioDecoderControl_connect_bufferAvailableChanged(self.h, cast[int](addr tmp[]), fcQAudioDecoderControl_slot_callback_bufferAvailableChanged, fcQAudioDecoderControl_slot_callback_bufferAvailableChanged_release)
 
 proc finished*(self: gen_qaudiodecodercontrol_types.QAudioDecoderControl): void =
   fcQAudioDecoderControl_finished(self.h)
 
 type QAudioDecoderControlfinishedSlot* = proc()
-proc cQAudioDecoderControl_slot_callback_finished(slot: int) {.cdecl.} =
+proc fcQAudioDecoderControl_slot_callback_finished(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QAudioDecoderControlfinishedSlot](cast[pointer](slot))
   nimfunc[]()
 
-proc cQAudioDecoderControl_slot_callback_finished_release(slot: int) {.cdecl.} =
+proc fcQAudioDecoderControl_slot_callback_finished_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QAudioDecoderControlfinishedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onfinished*(self: gen_qaudiodecodercontrol_types.QAudioDecoderControl, slot: QAudioDecoderControlfinishedSlot) =
+proc onFinished*(self: gen_qaudiodecodercontrol_types.QAudioDecoderControl, slot: QAudioDecoderControlfinishedSlot) =
   var tmp = new QAudioDecoderControlfinishedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAudioDecoderControl_connect_finished(self.h, cast[int](addr tmp[]), cQAudioDecoderControl_slot_callback_finished, cQAudioDecoderControl_slot_callback_finished_release)
+  fcQAudioDecoderControl_connect_finished(self.h, cast[int](addr tmp[]), fcQAudioDecoderControl_slot_callback_finished, fcQAudioDecoderControl_slot_callback_finished_release)
 
 proc positionChanged*(self: gen_qaudiodecodercontrol_types.QAudioDecoderControl, position: clonglong): void =
   fcQAudioDecoderControl_positionChanged(self.h, position)
 
 type QAudioDecoderControlpositionChangedSlot* = proc(position: clonglong)
-proc cQAudioDecoderControl_slot_callback_positionChanged(slot: int, position: clonglong) {.cdecl.} =
+proc fcQAudioDecoderControl_slot_callback_positionChanged(slot: int, position: clonglong) {.cdecl.} =
   let nimfunc = cast[ptr QAudioDecoderControlpositionChangedSlot](cast[pointer](slot))
   let slotval1 = position
 
   nimfunc[](slotval1)
 
-proc cQAudioDecoderControl_slot_callback_positionChanged_release(slot: int) {.cdecl.} =
+proc fcQAudioDecoderControl_slot_callback_positionChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QAudioDecoderControlpositionChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onpositionChanged*(self: gen_qaudiodecodercontrol_types.QAudioDecoderControl, slot: QAudioDecoderControlpositionChangedSlot) =
+proc onPositionChanged*(self: gen_qaudiodecodercontrol_types.QAudioDecoderControl, slot: QAudioDecoderControlpositionChangedSlot) =
   var tmp = new QAudioDecoderControlpositionChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAudioDecoderControl_connect_positionChanged(self.h, cast[int](addr tmp[]), cQAudioDecoderControl_slot_callback_positionChanged, cQAudioDecoderControl_slot_callback_positionChanged_release)
+  fcQAudioDecoderControl_connect_positionChanged(self.h, cast[int](addr tmp[]), fcQAudioDecoderControl_slot_callback_positionChanged, fcQAudioDecoderControl_slot_callback_positionChanged_release)
 
 proc durationChanged*(self: gen_qaudiodecodercontrol_types.QAudioDecoderControl, duration: clonglong): void =
   fcQAudioDecoderControl_durationChanged(self.h, duration)
 
 type QAudioDecoderControldurationChangedSlot* = proc(duration: clonglong)
-proc cQAudioDecoderControl_slot_callback_durationChanged(slot: int, duration: clonglong) {.cdecl.} =
+proc fcQAudioDecoderControl_slot_callback_durationChanged(slot: int, duration: clonglong) {.cdecl.} =
   let nimfunc = cast[ptr QAudioDecoderControldurationChangedSlot](cast[pointer](slot))
   let slotval1 = duration
 
   nimfunc[](slotval1)
 
-proc cQAudioDecoderControl_slot_callback_durationChanged_release(slot: int) {.cdecl.} =
+proc fcQAudioDecoderControl_slot_callback_durationChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QAudioDecoderControldurationChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc ondurationChanged*(self: gen_qaudiodecodercontrol_types.QAudioDecoderControl, slot: QAudioDecoderControldurationChangedSlot) =
+proc onDurationChanged*(self: gen_qaudiodecodercontrol_types.QAudioDecoderControl, slot: QAudioDecoderControldurationChangedSlot) =
   var tmp = new QAudioDecoderControldurationChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAudioDecoderControl_connect_durationChanged(self.h, cast[int](addr tmp[]), cQAudioDecoderControl_slot_callback_durationChanged, cQAudioDecoderControl_slot_callback_durationChanged_release)
+  fcQAudioDecoderControl_connect_durationChanged(self.h, cast[int](addr tmp[]), fcQAudioDecoderControl_slot_callback_durationChanged, fcQAudioDecoderControl_slot_callback_durationChanged_release)
 
 proc tr*(_: type gen_qaudiodecodercontrol_types.QAudioDecoderControl, s: cstring, c: cstring): string =
   let v_ms = fcQAudioDecoderControl_tr2(s, c)

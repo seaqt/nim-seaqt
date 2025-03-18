@@ -204,6 +204,7 @@ proc fcQAbstractSocket_bind1(self: pointer, port: cushort): bool {.importc: "QAb
 proc fcQAbstractSocket_bind23(self: pointer, port: cushort, mode: cint): bool {.importc: "QAbstractSocket_bind23".}
 proc fcQAbstractSocket_vtbl(self: pointer): pointer {.importc: "QAbstractSocket_vtbl".}
 proc fcQAbstractSocket_vdata(self: pointer): pointer {.importc: "QAbstractSocket_vdata".}
+
 type cQAbstractSocketVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -444,121 +445,121 @@ proc hostFound*(self: gen_qabstractsocket_types.QAbstractSocket): void =
   fcQAbstractSocket_hostFound(self.h)
 
 type QAbstractSockethostFoundSlot* = proc()
-proc cQAbstractSocket_slot_callback_hostFound(slot: int) {.cdecl.} =
+proc fcQAbstractSocket_slot_callback_hostFound(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QAbstractSockethostFoundSlot](cast[pointer](slot))
   nimfunc[]()
 
-proc cQAbstractSocket_slot_callback_hostFound_release(slot: int) {.cdecl.} =
+proc fcQAbstractSocket_slot_callback_hostFound_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QAbstractSockethostFoundSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onhostFound*(self: gen_qabstractsocket_types.QAbstractSocket, slot: QAbstractSockethostFoundSlot) =
+proc onHostFound*(self: gen_qabstractsocket_types.QAbstractSocket, slot: QAbstractSockethostFoundSlot) =
   var tmp = new QAbstractSockethostFoundSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAbstractSocket_connect_hostFound(self.h, cast[int](addr tmp[]), cQAbstractSocket_slot_callback_hostFound, cQAbstractSocket_slot_callback_hostFound_release)
+  fcQAbstractSocket_connect_hostFound(self.h, cast[int](addr tmp[]), fcQAbstractSocket_slot_callback_hostFound, fcQAbstractSocket_slot_callback_hostFound_release)
 
 proc connected*(self: gen_qabstractsocket_types.QAbstractSocket): void =
   fcQAbstractSocket_connected(self.h)
 
 type QAbstractSocketconnectedSlot* = proc()
-proc cQAbstractSocket_slot_callback_connected(slot: int) {.cdecl.} =
+proc fcQAbstractSocket_slot_callback_connected(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QAbstractSocketconnectedSlot](cast[pointer](slot))
   nimfunc[]()
 
-proc cQAbstractSocket_slot_callback_connected_release(slot: int) {.cdecl.} =
+proc fcQAbstractSocket_slot_callback_connected_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QAbstractSocketconnectedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onconnected*(self: gen_qabstractsocket_types.QAbstractSocket, slot: QAbstractSocketconnectedSlot) =
+proc onConnected*(self: gen_qabstractsocket_types.QAbstractSocket, slot: QAbstractSocketconnectedSlot) =
   var tmp = new QAbstractSocketconnectedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAbstractSocket_connect_connected(self.h, cast[int](addr tmp[]), cQAbstractSocket_slot_callback_connected, cQAbstractSocket_slot_callback_connected_release)
+  fcQAbstractSocket_connect_connected(self.h, cast[int](addr tmp[]), fcQAbstractSocket_slot_callback_connected, fcQAbstractSocket_slot_callback_connected_release)
 
 proc disconnected*(self: gen_qabstractsocket_types.QAbstractSocket): void =
   fcQAbstractSocket_disconnected(self.h)
 
 type QAbstractSocketdisconnectedSlot* = proc()
-proc cQAbstractSocket_slot_callback_disconnected(slot: int) {.cdecl.} =
+proc fcQAbstractSocket_slot_callback_disconnected(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QAbstractSocketdisconnectedSlot](cast[pointer](slot))
   nimfunc[]()
 
-proc cQAbstractSocket_slot_callback_disconnected_release(slot: int) {.cdecl.} =
+proc fcQAbstractSocket_slot_callback_disconnected_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QAbstractSocketdisconnectedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc ondisconnected*(self: gen_qabstractsocket_types.QAbstractSocket, slot: QAbstractSocketdisconnectedSlot) =
+proc onDisconnected*(self: gen_qabstractsocket_types.QAbstractSocket, slot: QAbstractSocketdisconnectedSlot) =
   var tmp = new QAbstractSocketdisconnectedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAbstractSocket_connect_disconnected(self.h, cast[int](addr tmp[]), cQAbstractSocket_slot_callback_disconnected, cQAbstractSocket_slot_callback_disconnected_release)
+  fcQAbstractSocket_connect_disconnected(self.h, cast[int](addr tmp[]), fcQAbstractSocket_slot_callback_disconnected, fcQAbstractSocket_slot_callback_disconnected_release)
 
 proc stateChanged*(self: gen_qabstractsocket_types.QAbstractSocket, param1: cint): void =
   fcQAbstractSocket_stateChanged(self.h, cint(param1))
 
 type QAbstractSocketstateChangedSlot* = proc(param1: cint)
-proc cQAbstractSocket_slot_callback_stateChanged(slot: int, param1: cint) {.cdecl.} =
+proc fcQAbstractSocket_slot_callback_stateChanged(slot: int, param1: cint) {.cdecl.} =
   let nimfunc = cast[ptr QAbstractSocketstateChangedSlot](cast[pointer](slot))
   let slotval1 = cint(param1)
 
   nimfunc[](slotval1)
 
-proc cQAbstractSocket_slot_callback_stateChanged_release(slot: int) {.cdecl.} =
+proc fcQAbstractSocket_slot_callback_stateChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QAbstractSocketstateChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onstateChanged*(self: gen_qabstractsocket_types.QAbstractSocket, slot: QAbstractSocketstateChangedSlot) =
+proc onStateChanged*(self: gen_qabstractsocket_types.QAbstractSocket, slot: QAbstractSocketstateChangedSlot) =
   var tmp = new QAbstractSocketstateChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAbstractSocket_connect_stateChanged(self.h, cast[int](addr tmp[]), cQAbstractSocket_slot_callback_stateChanged, cQAbstractSocket_slot_callback_stateChanged_release)
+  fcQAbstractSocket_connect_stateChanged(self.h, cast[int](addr tmp[]), fcQAbstractSocket_slot_callback_stateChanged, fcQAbstractSocket_slot_callback_stateChanged_release)
 
 proc error*(self: gen_qabstractsocket_types.QAbstractSocket, param1: cint): void =
   fcQAbstractSocket_errorWithQAbstractSocketSocketError(self.h, cint(param1))
 
 type QAbstractSocketerrorWithQAbstractSocketSocketErrorSlot* = proc(param1: cint)
-proc cQAbstractSocket_slot_callback_errorWithQAbstractSocketSocketError(slot: int, param1: cint) {.cdecl.} =
+proc fcQAbstractSocket_slot_callback_errorWithQAbstractSocketSocketError(slot: int, param1: cint) {.cdecl.} =
   let nimfunc = cast[ptr QAbstractSocketerrorWithQAbstractSocketSocketErrorSlot](cast[pointer](slot))
   let slotval1 = cint(param1)
 
   nimfunc[](slotval1)
 
-proc cQAbstractSocket_slot_callback_errorWithQAbstractSocketSocketError_release(slot: int) {.cdecl.} =
+proc fcQAbstractSocket_slot_callback_errorWithQAbstractSocketSocketError_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QAbstractSocketerrorWithQAbstractSocketSocketErrorSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onerror*(self: gen_qabstractsocket_types.QAbstractSocket, slot: QAbstractSocketerrorWithQAbstractSocketSocketErrorSlot) =
+proc onError*(self: gen_qabstractsocket_types.QAbstractSocket, slot: QAbstractSocketerrorWithQAbstractSocketSocketErrorSlot) =
   var tmp = new QAbstractSocketerrorWithQAbstractSocketSocketErrorSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAbstractSocket_connect_errorWithQAbstractSocketSocketError(self.h, cast[int](addr tmp[]), cQAbstractSocket_slot_callback_errorWithQAbstractSocketSocketError, cQAbstractSocket_slot_callback_errorWithQAbstractSocketSocketError_release)
+  fcQAbstractSocket_connect_errorWithQAbstractSocketSocketError(self.h, cast[int](addr tmp[]), fcQAbstractSocket_slot_callback_errorWithQAbstractSocketSocketError, fcQAbstractSocket_slot_callback_errorWithQAbstractSocketSocketError_release)
 
 proc errorOccurred*(self: gen_qabstractsocket_types.QAbstractSocket, param1: cint): void =
   fcQAbstractSocket_errorOccurred(self.h, cint(param1))
 
 type QAbstractSocketerrorOccurredSlot* = proc(param1: cint)
-proc cQAbstractSocket_slot_callback_errorOccurred(slot: int, param1: cint) {.cdecl.} =
+proc fcQAbstractSocket_slot_callback_errorOccurred(slot: int, param1: cint) {.cdecl.} =
   let nimfunc = cast[ptr QAbstractSocketerrorOccurredSlot](cast[pointer](slot))
   let slotval1 = cint(param1)
 
   nimfunc[](slotval1)
 
-proc cQAbstractSocket_slot_callback_errorOccurred_release(slot: int) {.cdecl.} =
+proc fcQAbstractSocket_slot_callback_errorOccurred_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QAbstractSocketerrorOccurredSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onerrorOccurred*(self: gen_qabstractsocket_types.QAbstractSocket, slot: QAbstractSocketerrorOccurredSlot) =
+proc onErrorOccurred*(self: gen_qabstractsocket_types.QAbstractSocket, slot: QAbstractSocketerrorOccurredSlot) =
   var tmp = new QAbstractSocketerrorOccurredSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAbstractSocket_connect_errorOccurred(self.h, cast[int](addr tmp[]), cQAbstractSocket_slot_callback_errorOccurred, cQAbstractSocket_slot_callback_errorOccurred_release)
+  fcQAbstractSocket_connect_errorOccurred(self.h, cast[int](addr tmp[]), fcQAbstractSocket_slot_callback_errorOccurred, fcQAbstractSocket_slot_callback_errorOccurred_release)
 
 proc proxyAuthenticationRequired*(self: gen_qabstractsocket_types.QAbstractSocket, proxy: gen_qnetworkproxy_types.QNetworkProxy, authenticator: gen_qauthenticator_types.QAuthenticator): void =
   fcQAbstractSocket_proxyAuthenticationRequired(self.h, proxy.h, authenticator.h)
 
 type QAbstractSocketproxyAuthenticationRequiredSlot* = proc(proxy: gen_qnetworkproxy_types.QNetworkProxy, authenticator: gen_qauthenticator_types.QAuthenticator)
-proc cQAbstractSocket_slot_callback_proxyAuthenticationRequired(slot: int, proxy: pointer, authenticator: pointer) {.cdecl.} =
+proc fcQAbstractSocket_slot_callback_proxyAuthenticationRequired(slot: int, proxy: pointer, authenticator: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QAbstractSocketproxyAuthenticationRequiredSlot](cast[pointer](slot))
   let slotval1 = gen_qnetworkproxy_types.QNetworkProxy(h: proxy, owned: false)
 
@@ -566,15 +567,15 @@ proc cQAbstractSocket_slot_callback_proxyAuthenticationRequired(slot: int, proxy
 
   nimfunc[](slotval1, slotval2)
 
-proc cQAbstractSocket_slot_callback_proxyAuthenticationRequired_release(slot: int) {.cdecl.} =
+proc fcQAbstractSocket_slot_callback_proxyAuthenticationRequired_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QAbstractSocketproxyAuthenticationRequiredSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onproxyAuthenticationRequired*(self: gen_qabstractsocket_types.QAbstractSocket, slot: QAbstractSocketproxyAuthenticationRequiredSlot) =
+proc onProxyAuthenticationRequired*(self: gen_qabstractsocket_types.QAbstractSocket, slot: QAbstractSocketproxyAuthenticationRequiredSlot) =
   var tmp = new QAbstractSocketproxyAuthenticationRequiredSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAbstractSocket_connect_proxyAuthenticationRequired(self.h, cast[int](addr tmp[]), cQAbstractSocket_slot_callback_proxyAuthenticationRequired, cQAbstractSocket_slot_callback_proxyAuthenticationRequired_release)
+  fcQAbstractSocket_connect_proxyAuthenticationRequired(self.h, cast[int](addr tmp[]), fcQAbstractSocket_slot_callback_proxyAuthenticationRequired, fcQAbstractSocket_slot_callback_proxyAuthenticationRequired_release)
 
 proc tr*(_: type gen_qabstractsocket_types.QAbstractSocket, s: cstring, c: cstring): string =
   let v_ms = fcQAbstractSocket_tr2(s, c)
@@ -649,6 +650,7 @@ type QAbstractSocketchildEventProc* = proc(self: QAbstractSocket, event: gen_qco
 type QAbstractSocketcustomEventProc* = proc(self: QAbstractSocket, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QAbstractSocketconnectNotifyProc* = proc(self: QAbstractSocket, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QAbstractSocketdisconnectNotifyProc* = proc(self: QAbstractSocket, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+
 type QAbstractSocketVTable* {.inheritable, pure.} = object
   vtbl: cQAbstractSocketVTable
   metaObject*: QAbstractSocketmetaObjectProc
@@ -688,10 +690,120 @@ type QAbstractSocketVTable* {.inheritable, pure.} = object
   customEvent*: QAbstractSocketcustomEventProc
   connectNotify*: QAbstractSocketconnectNotifyProc
   disconnectNotify*: QAbstractSocketdisconnectNotifyProc
+
 proc QAbstractSocketmetaObject*(self: gen_qabstractsocket_types.QAbstractSocket): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQAbstractSocket_virtualbase_metaObject(self.h), owned: false)
 
-proc cQAbstractSocket_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
+proc QAbstractSocketmetacast*(self: gen_qabstractsocket_types.QAbstractSocket, param1: cstring): pointer =
+  fcQAbstractSocket_virtualbase_metacast(self.h, param1)
+
+proc QAbstractSocketmetacall*(self: gen_qabstractsocket_types.QAbstractSocket, param1: cint, param2: cint, param3: pointer): cint =
+  fcQAbstractSocket_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+proc QAbstractSocketresume*(self: gen_qabstractsocket_types.QAbstractSocket): void =
+  fcQAbstractSocket_virtualbase_resume(self.h)
+
+proc QAbstractSocketconnectToHost*(self: gen_qabstractsocket_types.QAbstractSocket, hostName: openArray[char], port: cushort, mode: cint, protocol: cint): void =
+  fcQAbstractSocket_virtualbase_connectToHost(self.h, struct_miqt_string(data: if len(hostName) > 0: addr hostName[0] else: nil, len: csize_t(len(hostName))), port, cint(mode), cint(protocol))
+
+proc QAbstractSocketconnectToHost*(self: gen_qabstractsocket_types.QAbstractSocket, address: gen_qhostaddress_types.QHostAddress, port: cushort, mode: cint): void =
+  fcQAbstractSocket_virtualbase_connectToHost2(self.h, address.h, port, cint(mode))
+
+proc QAbstractSocketdisconnectFromHost*(self: gen_qabstractsocket_types.QAbstractSocket): void =
+  fcQAbstractSocket_virtualbase_disconnectFromHost(self.h)
+
+proc QAbstractSocketbytesAvailable*(self: gen_qabstractsocket_types.QAbstractSocket): clonglong =
+  fcQAbstractSocket_virtualbase_bytesAvailable(self.h)
+
+proc QAbstractSocketbytesToWrite*(self: gen_qabstractsocket_types.QAbstractSocket): clonglong =
+  fcQAbstractSocket_virtualbase_bytesToWrite(self.h)
+
+proc QAbstractSocketcanReadLine*(self: gen_qabstractsocket_types.QAbstractSocket): bool =
+  fcQAbstractSocket_virtualbase_canReadLine(self.h)
+
+proc QAbstractSocketsetReadBufferSize*(self: gen_qabstractsocket_types.QAbstractSocket, size: clonglong): void =
+  fcQAbstractSocket_virtualbase_setReadBufferSize(self.h, size)
+
+proc QAbstractSocketsocketDescriptor*(self: gen_qabstractsocket_types.QAbstractSocket): uint =
+  fcQAbstractSocket_virtualbase_socketDescriptor(self.h)
+
+proc QAbstractSocketsetSocketDescriptor*(self: gen_qabstractsocket_types.QAbstractSocket, socketDescriptor: uint, state: cint, openMode: cint): bool =
+  fcQAbstractSocket_virtualbase_setSocketDescriptor(self.h, socketDescriptor, cint(state), cint(openMode))
+
+proc QAbstractSocketsetSocketOption*(self: gen_qabstractsocket_types.QAbstractSocket, option: cint, value: gen_qvariant_types.QVariant): void =
+  fcQAbstractSocket_virtualbase_setSocketOption(self.h, cint(option), value.h)
+
+proc QAbstractSocketsocketOption*(self: gen_qabstractsocket_types.QAbstractSocket, option: cint): gen_qvariant_types.QVariant =
+  gen_qvariant_types.QVariant(h: fcQAbstractSocket_virtualbase_socketOption(self.h, cint(option)), owned: true)
+
+proc QAbstractSocketclose*(self: gen_qabstractsocket_types.QAbstractSocket): void =
+  fcQAbstractSocket_virtualbase_close(self.h)
+
+proc QAbstractSocketisSequential*(self: gen_qabstractsocket_types.QAbstractSocket): bool =
+  fcQAbstractSocket_virtualbase_isSequential(self.h)
+
+proc QAbstractSocketatEnd*(self: gen_qabstractsocket_types.QAbstractSocket): bool =
+  fcQAbstractSocket_virtualbase_atEnd(self.h)
+
+proc QAbstractSocketwaitForConnected*(self: gen_qabstractsocket_types.QAbstractSocket, msecs: cint): bool =
+  fcQAbstractSocket_virtualbase_waitForConnected(self.h, msecs)
+
+proc QAbstractSocketwaitForReadyRead*(self: gen_qabstractsocket_types.QAbstractSocket, msecs: cint): bool =
+  fcQAbstractSocket_virtualbase_waitForReadyRead(self.h, msecs)
+
+proc QAbstractSocketwaitForBytesWritten*(self: gen_qabstractsocket_types.QAbstractSocket, msecs: cint): bool =
+  fcQAbstractSocket_virtualbase_waitForBytesWritten(self.h, msecs)
+
+proc QAbstractSocketwaitForDisconnected*(self: gen_qabstractsocket_types.QAbstractSocket, msecs: cint): bool =
+  fcQAbstractSocket_virtualbase_waitForDisconnected(self.h, msecs)
+
+proc QAbstractSocketreadData*(self: gen_qabstractsocket_types.QAbstractSocket, data: cstring, maxlen: clonglong): clonglong =
+  fcQAbstractSocket_virtualbase_readData(self.h, data, maxlen)
+
+proc QAbstractSocketreadLineData*(self: gen_qabstractsocket_types.QAbstractSocket, data: cstring, maxlen: clonglong): clonglong =
+  fcQAbstractSocket_virtualbase_readLineData(self.h, data, maxlen)
+
+proc QAbstractSocketwriteData*(self: gen_qabstractsocket_types.QAbstractSocket, data: cstring, len: clonglong): clonglong =
+  fcQAbstractSocket_virtualbase_writeData(self.h, data, len)
+
+proc QAbstractSocketopen*(self: gen_qabstractsocket_types.QAbstractSocket, mode: cint): bool =
+  fcQAbstractSocket_virtualbase_open(self.h, cint(mode))
+
+proc QAbstractSocketpos*(self: gen_qabstractsocket_types.QAbstractSocket): clonglong =
+  fcQAbstractSocket_virtualbase_pos(self.h)
+
+proc QAbstractSocketsize*(self: gen_qabstractsocket_types.QAbstractSocket): clonglong =
+  fcQAbstractSocket_virtualbase_size(self.h)
+
+proc QAbstractSocketseek*(self: gen_qabstractsocket_types.QAbstractSocket, pos: clonglong): bool =
+  fcQAbstractSocket_virtualbase_seek(self.h, pos)
+
+proc QAbstractSocketreset*(self: gen_qabstractsocket_types.QAbstractSocket): bool =
+  fcQAbstractSocket_virtualbase_reset(self.h)
+
+proc QAbstractSocketevent*(self: gen_qabstractsocket_types.QAbstractSocket, event: gen_qcoreevent_types.QEvent): bool =
+  fcQAbstractSocket_virtualbase_event(self.h, event.h)
+
+proc QAbstractSocketeventFilter*(self: gen_qabstractsocket_types.QAbstractSocket, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
+  fcQAbstractSocket_virtualbase_eventFilter(self.h, watched.h, event.h)
+
+proc QAbstractSockettimerEvent*(self: gen_qabstractsocket_types.QAbstractSocket, event: gen_qcoreevent_types.QTimerEvent): void =
+  fcQAbstractSocket_virtualbase_timerEvent(self.h, event.h)
+
+proc QAbstractSocketchildEvent*(self: gen_qabstractsocket_types.QAbstractSocket, event: gen_qcoreevent_types.QChildEvent): void =
+  fcQAbstractSocket_virtualbase_childEvent(self.h, event.h)
+
+proc QAbstractSocketcustomEvent*(self: gen_qabstractsocket_types.QAbstractSocket, event: gen_qcoreevent_types.QEvent): void =
+  fcQAbstractSocket_virtualbase_customEvent(self.h, event.h)
+
+proc QAbstractSocketconnectNotify*(self: gen_qabstractsocket_types.QAbstractSocket, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQAbstractSocket_virtualbase_connectNotify(self.h, signal.h)
+
+proc QAbstractSocketdisconnectNotify*(self: gen_qabstractsocket_types.QAbstractSocket, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQAbstractSocket_virtualbase_disconnectNotify(self.h, signal.h)
+
+
+proc fcQAbstractSocket_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QAbstractSocketVTable](fcQAbstractSocket_vdata(self))
   let self = QAbstractSocket(h: self)
   var virtualReturn = vtbl[].metaObject(self)
@@ -700,20 +812,14 @@ proc cQAbstractSocket_vtable_callback_metaObject(self: pointer): pointer {.cdecl
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QAbstractSocketmetacast*(self: gen_qabstractsocket_types.QAbstractSocket, param1: cstring): pointer =
-  fcQAbstractSocket_virtualbase_metacast(self.h, param1)
-
-proc cQAbstractSocket_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+proc fcQAbstractSocket_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QAbstractSocketVTable](fcQAbstractSocket_vdata(self))
   let self = QAbstractSocket(h: self)
   let slotval1 = (param1)
   var virtualReturn = vtbl[].metacast(self, slotval1)
   virtualReturn
 
-proc QAbstractSocketmetacall*(self: gen_qabstractsocket_types.QAbstractSocket, param1: cint, param2: cint, param3: pointer): cint =
-  fcQAbstractSocket_virtualbase_metacall(self.h, cint(param1), param2, param3)
-
-proc cQAbstractSocket_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+proc fcQAbstractSocket_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QAbstractSocketVTable](fcQAbstractSocket_vdata(self))
   let self = QAbstractSocket(h: self)
   let slotval1 = cint(param1)
@@ -722,18 +828,12 @@ proc cQAbstractSocket_vtable_callback_metacall(self: pointer, param1: cint, para
   var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QAbstractSocketresume*(self: gen_qabstractsocket_types.QAbstractSocket): void =
-  fcQAbstractSocket_virtualbase_resume(self.h)
-
-proc cQAbstractSocket_vtable_callback_resume(self: pointer): void {.cdecl.} =
+proc fcQAbstractSocket_vtable_callback_resume(self: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAbstractSocketVTable](fcQAbstractSocket_vdata(self))
   let self = QAbstractSocket(h: self)
   vtbl[].resume(self)
 
-proc QAbstractSocketconnectToHost*(self: gen_qabstractsocket_types.QAbstractSocket, hostName: openArray[char], port: cushort, mode: cint, protocol: cint): void =
-  fcQAbstractSocket_virtualbase_connectToHost(self.h, struct_miqt_string(data: if len(hostName) > 0: addr hostName[0] else: nil, len: csize_t(len(hostName))), port, cint(mode), cint(protocol))
-
-proc cQAbstractSocket_vtable_callback_connectToHost(self: pointer, hostName: struct_miqt_string, port: cushort, mode: cint, protocol: cint): void {.cdecl.} =
+proc fcQAbstractSocket_vtable_callback_connectToHost(self: pointer, hostName: struct_miqt_string, port: cushort, mode: cint, protocol: cint): void {.cdecl.} =
   let vtbl = cast[ptr QAbstractSocketVTable](fcQAbstractSocket_vdata(self))
   let self = QAbstractSocket(h: self)
   let vhostName_ms = hostName
@@ -745,10 +845,7 @@ proc cQAbstractSocket_vtable_callback_connectToHost(self: pointer, hostName: str
   let slotval4 = cint(protocol)
   vtbl[].connectToHost(self, slotval1, slotval2, slotval3, slotval4)
 
-proc QAbstractSocketconnectToHost*(self: gen_qabstractsocket_types.QAbstractSocket, address: gen_qhostaddress_types.QHostAddress, port: cushort, mode: cint): void =
-  fcQAbstractSocket_virtualbase_connectToHost2(self.h, address.h, port, cint(mode))
-
-proc cQAbstractSocket_vtable_callback_connectToHost2(self: pointer, address: pointer, port: cushort, mode: cint): void {.cdecl.} =
+proc fcQAbstractSocket_vtable_callback_connectToHost2(self: pointer, address: pointer, port: cushort, mode: cint): void {.cdecl.} =
   let vtbl = cast[ptr QAbstractSocketVTable](fcQAbstractSocket_vdata(self))
   let self = QAbstractSocket(h: self)
   let slotval1 = gen_qhostaddress_types.QHostAddress(h: address, owned: false)
@@ -756,63 +853,42 @@ proc cQAbstractSocket_vtable_callback_connectToHost2(self: pointer, address: poi
   let slotval3 = cint(mode)
   vtbl[].connectToHost2(self, slotval1, slotval2, slotval3)
 
-proc QAbstractSocketdisconnectFromHost*(self: gen_qabstractsocket_types.QAbstractSocket): void =
-  fcQAbstractSocket_virtualbase_disconnectFromHost(self.h)
-
-proc cQAbstractSocket_vtable_callback_disconnectFromHost(self: pointer): void {.cdecl.} =
+proc fcQAbstractSocket_vtable_callback_disconnectFromHost(self: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAbstractSocketVTable](fcQAbstractSocket_vdata(self))
   let self = QAbstractSocket(h: self)
   vtbl[].disconnectFromHost(self)
 
-proc QAbstractSocketbytesAvailable*(self: gen_qabstractsocket_types.QAbstractSocket): clonglong =
-  fcQAbstractSocket_virtualbase_bytesAvailable(self.h)
-
-proc cQAbstractSocket_vtable_callback_bytesAvailable(self: pointer): clonglong {.cdecl.} =
+proc fcQAbstractSocket_vtable_callback_bytesAvailable(self: pointer): clonglong {.cdecl.} =
   let vtbl = cast[ptr QAbstractSocketVTable](fcQAbstractSocket_vdata(self))
   let self = QAbstractSocket(h: self)
   var virtualReturn = vtbl[].bytesAvailable(self)
   virtualReturn
 
-proc QAbstractSocketbytesToWrite*(self: gen_qabstractsocket_types.QAbstractSocket): clonglong =
-  fcQAbstractSocket_virtualbase_bytesToWrite(self.h)
-
-proc cQAbstractSocket_vtable_callback_bytesToWrite(self: pointer): clonglong {.cdecl.} =
+proc fcQAbstractSocket_vtable_callback_bytesToWrite(self: pointer): clonglong {.cdecl.} =
   let vtbl = cast[ptr QAbstractSocketVTable](fcQAbstractSocket_vdata(self))
   let self = QAbstractSocket(h: self)
   var virtualReturn = vtbl[].bytesToWrite(self)
   virtualReturn
 
-proc QAbstractSocketcanReadLine*(self: gen_qabstractsocket_types.QAbstractSocket): bool =
-  fcQAbstractSocket_virtualbase_canReadLine(self.h)
-
-proc cQAbstractSocket_vtable_callback_canReadLine(self: pointer): bool {.cdecl.} =
+proc fcQAbstractSocket_vtable_callback_canReadLine(self: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QAbstractSocketVTable](fcQAbstractSocket_vdata(self))
   let self = QAbstractSocket(h: self)
   var virtualReturn = vtbl[].canReadLine(self)
   virtualReturn
 
-proc QAbstractSocketsetReadBufferSize*(self: gen_qabstractsocket_types.QAbstractSocket, size: clonglong): void =
-  fcQAbstractSocket_virtualbase_setReadBufferSize(self.h, size)
-
-proc cQAbstractSocket_vtable_callback_setReadBufferSize(self: pointer, size: clonglong): void {.cdecl.} =
+proc fcQAbstractSocket_vtable_callback_setReadBufferSize(self: pointer, size: clonglong): void {.cdecl.} =
   let vtbl = cast[ptr QAbstractSocketVTable](fcQAbstractSocket_vdata(self))
   let self = QAbstractSocket(h: self)
   let slotval1 = size
   vtbl[].setReadBufferSize(self, slotval1)
 
-proc QAbstractSocketsocketDescriptor*(self: gen_qabstractsocket_types.QAbstractSocket): uint =
-  fcQAbstractSocket_virtualbase_socketDescriptor(self.h)
-
-proc cQAbstractSocket_vtable_callback_socketDescriptor(self: pointer): uint {.cdecl.} =
+proc fcQAbstractSocket_vtable_callback_socketDescriptor(self: pointer): uint {.cdecl.} =
   let vtbl = cast[ptr QAbstractSocketVTable](fcQAbstractSocket_vdata(self))
   let self = QAbstractSocket(h: self)
   var virtualReturn = vtbl[].socketDescriptor(self)
   virtualReturn
 
-proc QAbstractSocketsetSocketDescriptor*(self: gen_qabstractsocket_types.QAbstractSocket, socketDescriptor: uint, state: cint, openMode: cint): bool =
-  fcQAbstractSocket_virtualbase_setSocketDescriptor(self.h, socketDescriptor, cint(state), cint(openMode))
-
-proc cQAbstractSocket_vtable_callback_setSocketDescriptor(self: pointer, socketDescriptor: uint, state: cint, openMode: cint): bool {.cdecl.} =
+proc fcQAbstractSocket_vtable_callback_setSocketDescriptor(self: pointer, socketDescriptor: uint, state: cint, openMode: cint): bool {.cdecl.} =
   let vtbl = cast[ptr QAbstractSocketVTable](fcQAbstractSocket_vdata(self))
   let self = QAbstractSocket(h: self)
   let slotval1 = socketDescriptor
@@ -821,20 +897,14 @@ proc cQAbstractSocket_vtable_callback_setSocketDescriptor(self: pointer, socketD
   var virtualReturn = vtbl[].setSocketDescriptor(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QAbstractSocketsetSocketOption*(self: gen_qabstractsocket_types.QAbstractSocket, option: cint, value: gen_qvariant_types.QVariant): void =
-  fcQAbstractSocket_virtualbase_setSocketOption(self.h, cint(option), value.h)
-
-proc cQAbstractSocket_vtable_callback_setSocketOption(self: pointer, option: cint, value: pointer): void {.cdecl.} =
+proc fcQAbstractSocket_vtable_callback_setSocketOption(self: pointer, option: cint, value: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAbstractSocketVTable](fcQAbstractSocket_vdata(self))
   let self = QAbstractSocket(h: self)
   let slotval1 = cint(option)
   let slotval2 = gen_qvariant_types.QVariant(h: value, owned: false)
   vtbl[].setSocketOption(self, slotval1, slotval2)
 
-proc QAbstractSocketsocketOption*(self: gen_qabstractsocket_types.QAbstractSocket, option: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQAbstractSocket_virtualbase_socketOption(self.h, cint(option)), owned: true)
-
-proc cQAbstractSocket_vtable_callback_socketOption(self: pointer, option: cint): pointer {.cdecl.} =
+proc fcQAbstractSocket_vtable_callback_socketOption(self: pointer, option: cint): pointer {.cdecl.} =
   let vtbl = cast[ptr QAbstractSocketVTable](fcQAbstractSocket_vdata(self))
   let self = QAbstractSocket(h: self)
   let slotval1 = cint(option)
@@ -844,76 +914,52 @@ proc cQAbstractSocket_vtable_callback_socketOption(self: pointer, option: cint):
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QAbstractSocketclose*(self: gen_qabstractsocket_types.QAbstractSocket): void =
-  fcQAbstractSocket_virtualbase_close(self.h)
-
-proc cQAbstractSocket_vtable_callback_close(self: pointer): void {.cdecl.} =
+proc fcQAbstractSocket_vtable_callback_close(self: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAbstractSocketVTable](fcQAbstractSocket_vdata(self))
   let self = QAbstractSocket(h: self)
   vtbl[].close(self)
 
-proc QAbstractSocketisSequential*(self: gen_qabstractsocket_types.QAbstractSocket): bool =
-  fcQAbstractSocket_virtualbase_isSequential(self.h)
-
-proc cQAbstractSocket_vtable_callback_isSequential(self: pointer): bool {.cdecl.} =
+proc fcQAbstractSocket_vtable_callback_isSequential(self: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QAbstractSocketVTable](fcQAbstractSocket_vdata(self))
   let self = QAbstractSocket(h: self)
   var virtualReturn = vtbl[].isSequential(self)
   virtualReturn
 
-proc QAbstractSocketatEnd*(self: gen_qabstractsocket_types.QAbstractSocket): bool =
-  fcQAbstractSocket_virtualbase_atEnd(self.h)
-
-proc cQAbstractSocket_vtable_callback_atEnd(self: pointer): bool {.cdecl.} =
+proc fcQAbstractSocket_vtable_callback_atEnd(self: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QAbstractSocketVTable](fcQAbstractSocket_vdata(self))
   let self = QAbstractSocket(h: self)
   var virtualReturn = vtbl[].atEnd(self)
   virtualReturn
 
-proc QAbstractSocketwaitForConnected*(self: gen_qabstractsocket_types.QAbstractSocket, msecs: cint): bool =
-  fcQAbstractSocket_virtualbase_waitForConnected(self.h, msecs)
-
-proc cQAbstractSocket_vtable_callback_waitForConnected(self: pointer, msecs: cint): bool {.cdecl.} =
+proc fcQAbstractSocket_vtable_callback_waitForConnected(self: pointer, msecs: cint): bool {.cdecl.} =
   let vtbl = cast[ptr QAbstractSocketVTable](fcQAbstractSocket_vdata(self))
   let self = QAbstractSocket(h: self)
   let slotval1 = msecs
   var virtualReturn = vtbl[].waitForConnected(self, slotval1)
   virtualReturn
 
-proc QAbstractSocketwaitForReadyRead*(self: gen_qabstractsocket_types.QAbstractSocket, msecs: cint): bool =
-  fcQAbstractSocket_virtualbase_waitForReadyRead(self.h, msecs)
-
-proc cQAbstractSocket_vtable_callback_waitForReadyRead(self: pointer, msecs: cint): bool {.cdecl.} =
+proc fcQAbstractSocket_vtable_callback_waitForReadyRead(self: pointer, msecs: cint): bool {.cdecl.} =
   let vtbl = cast[ptr QAbstractSocketVTable](fcQAbstractSocket_vdata(self))
   let self = QAbstractSocket(h: self)
   let slotval1 = msecs
   var virtualReturn = vtbl[].waitForReadyRead(self, slotval1)
   virtualReturn
 
-proc QAbstractSocketwaitForBytesWritten*(self: gen_qabstractsocket_types.QAbstractSocket, msecs: cint): bool =
-  fcQAbstractSocket_virtualbase_waitForBytesWritten(self.h, msecs)
-
-proc cQAbstractSocket_vtable_callback_waitForBytesWritten(self: pointer, msecs: cint): bool {.cdecl.} =
+proc fcQAbstractSocket_vtable_callback_waitForBytesWritten(self: pointer, msecs: cint): bool {.cdecl.} =
   let vtbl = cast[ptr QAbstractSocketVTable](fcQAbstractSocket_vdata(self))
   let self = QAbstractSocket(h: self)
   let slotval1 = msecs
   var virtualReturn = vtbl[].waitForBytesWritten(self, slotval1)
   virtualReturn
 
-proc QAbstractSocketwaitForDisconnected*(self: gen_qabstractsocket_types.QAbstractSocket, msecs: cint): bool =
-  fcQAbstractSocket_virtualbase_waitForDisconnected(self.h, msecs)
-
-proc cQAbstractSocket_vtable_callback_waitForDisconnected(self: pointer, msecs: cint): bool {.cdecl.} =
+proc fcQAbstractSocket_vtable_callback_waitForDisconnected(self: pointer, msecs: cint): bool {.cdecl.} =
   let vtbl = cast[ptr QAbstractSocketVTable](fcQAbstractSocket_vdata(self))
   let self = QAbstractSocket(h: self)
   let slotval1 = msecs
   var virtualReturn = vtbl[].waitForDisconnected(self, slotval1)
   virtualReturn
 
-proc QAbstractSocketreadData*(self: gen_qabstractsocket_types.QAbstractSocket, data: cstring, maxlen: clonglong): clonglong =
-  fcQAbstractSocket_virtualbase_readData(self.h, data, maxlen)
-
-proc cQAbstractSocket_vtable_callback_readData(self: pointer, data: cstring, maxlen: clonglong): clonglong {.cdecl.} =
+proc fcQAbstractSocket_vtable_callback_readData(self: pointer, data: cstring, maxlen: clonglong): clonglong {.cdecl.} =
   let vtbl = cast[ptr QAbstractSocketVTable](fcQAbstractSocket_vdata(self))
   let self = QAbstractSocket(h: self)
   let slotval1 = (data)
@@ -921,10 +967,7 @@ proc cQAbstractSocket_vtable_callback_readData(self: pointer, data: cstring, max
   var virtualReturn = vtbl[].readData(self, slotval1, slotval2)
   virtualReturn
 
-proc QAbstractSocketreadLineData*(self: gen_qabstractsocket_types.QAbstractSocket, data: cstring, maxlen: clonglong): clonglong =
-  fcQAbstractSocket_virtualbase_readLineData(self.h, data, maxlen)
-
-proc cQAbstractSocket_vtable_callback_readLineData(self: pointer, data: cstring, maxlen: clonglong): clonglong {.cdecl.} =
+proc fcQAbstractSocket_vtable_callback_readLineData(self: pointer, data: cstring, maxlen: clonglong): clonglong {.cdecl.} =
   let vtbl = cast[ptr QAbstractSocketVTable](fcQAbstractSocket_vdata(self))
   let self = QAbstractSocket(h: self)
   let slotval1 = (data)
@@ -932,10 +975,7 @@ proc cQAbstractSocket_vtable_callback_readLineData(self: pointer, data: cstring,
   var virtualReturn = vtbl[].readLineData(self, slotval1, slotval2)
   virtualReturn
 
-proc QAbstractSocketwriteData*(self: gen_qabstractsocket_types.QAbstractSocket, data: cstring, len: clonglong): clonglong =
-  fcQAbstractSocket_virtualbase_writeData(self.h, data, len)
-
-proc cQAbstractSocket_vtable_callback_writeData(self: pointer, data: cstring, len: clonglong): clonglong {.cdecl.} =
+proc fcQAbstractSocket_vtable_callback_writeData(self: pointer, data: cstring, len: clonglong): clonglong {.cdecl.} =
   let vtbl = cast[ptr QAbstractSocketVTable](fcQAbstractSocket_vdata(self))
   let self = QAbstractSocket(h: self)
   let slotval1 = (data)
@@ -943,67 +983,46 @@ proc cQAbstractSocket_vtable_callback_writeData(self: pointer, data: cstring, le
   var virtualReturn = vtbl[].writeData(self, slotval1, slotval2)
   virtualReturn
 
-proc QAbstractSocketopen*(self: gen_qabstractsocket_types.QAbstractSocket, mode: cint): bool =
-  fcQAbstractSocket_virtualbase_open(self.h, cint(mode))
-
-proc cQAbstractSocket_vtable_callback_open(self: pointer, mode: cint): bool {.cdecl.} =
+proc fcQAbstractSocket_vtable_callback_open(self: pointer, mode: cint): bool {.cdecl.} =
   let vtbl = cast[ptr QAbstractSocketVTable](fcQAbstractSocket_vdata(self))
   let self = QAbstractSocket(h: self)
   let slotval1 = cint(mode)
   var virtualReturn = vtbl[].open(self, slotval1)
   virtualReturn
 
-proc QAbstractSocketpos*(self: gen_qabstractsocket_types.QAbstractSocket): clonglong =
-  fcQAbstractSocket_virtualbase_pos(self.h)
-
-proc cQAbstractSocket_vtable_callback_pos(self: pointer): clonglong {.cdecl.} =
+proc fcQAbstractSocket_vtable_callback_pos(self: pointer): clonglong {.cdecl.} =
   let vtbl = cast[ptr QAbstractSocketVTable](fcQAbstractSocket_vdata(self))
   let self = QAbstractSocket(h: self)
   var virtualReturn = vtbl[].pos(self)
   virtualReturn
 
-proc QAbstractSocketsize*(self: gen_qabstractsocket_types.QAbstractSocket): clonglong =
-  fcQAbstractSocket_virtualbase_size(self.h)
-
-proc cQAbstractSocket_vtable_callback_size(self: pointer): clonglong {.cdecl.} =
+proc fcQAbstractSocket_vtable_callback_size(self: pointer): clonglong {.cdecl.} =
   let vtbl = cast[ptr QAbstractSocketVTable](fcQAbstractSocket_vdata(self))
   let self = QAbstractSocket(h: self)
   var virtualReturn = vtbl[].size(self)
   virtualReturn
 
-proc QAbstractSocketseek*(self: gen_qabstractsocket_types.QAbstractSocket, pos: clonglong): bool =
-  fcQAbstractSocket_virtualbase_seek(self.h, pos)
-
-proc cQAbstractSocket_vtable_callback_seek(self: pointer, pos: clonglong): bool {.cdecl.} =
+proc fcQAbstractSocket_vtable_callback_seek(self: pointer, pos: clonglong): bool {.cdecl.} =
   let vtbl = cast[ptr QAbstractSocketVTable](fcQAbstractSocket_vdata(self))
   let self = QAbstractSocket(h: self)
   let slotval1 = pos
   var virtualReturn = vtbl[].seek(self, slotval1)
   virtualReturn
 
-proc QAbstractSocketreset*(self: gen_qabstractsocket_types.QAbstractSocket): bool =
-  fcQAbstractSocket_virtualbase_reset(self.h)
-
-proc cQAbstractSocket_vtable_callback_reset(self: pointer): bool {.cdecl.} =
+proc fcQAbstractSocket_vtable_callback_reset(self: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QAbstractSocketVTable](fcQAbstractSocket_vdata(self))
   let self = QAbstractSocket(h: self)
   var virtualReturn = vtbl[].reset(self)
   virtualReturn
 
-proc QAbstractSocketevent*(self: gen_qabstractsocket_types.QAbstractSocket, event: gen_qcoreevent_types.QEvent): bool =
-  fcQAbstractSocket_virtualbase_event(self.h, event.h)
-
-proc cQAbstractSocket_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
+proc fcQAbstractSocket_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QAbstractSocketVTable](fcQAbstractSocket_vdata(self))
   let self = QAbstractSocket(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
-proc QAbstractSocketeventFilter*(self: gen_qabstractsocket_types.QAbstractSocket, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
-  fcQAbstractSocket_virtualbase_eventFilter(self.h, watched.h, event.h)
-
-proc cQAbstractSocket_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+proc fcQAbstractSocket_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QAbstractSocketVTable](fcQAbstractSocket_vdata(self))
   let self = QAbstractSocket(h: self)
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
@@ -1011,46 +1030,31 @@ proc cQAbstractSocket_vtable_callback_eventFilter(self: pointer, watched: pointe
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
-proc QAbstractSockettimerEvent*(self: gen_qabstractsocket_types.QAbstractSocket, event: gen_qcoreevent_types.QTimerEvent): void =
-  fcQAbstractSocket_virtualbase_timerEvent(self.h, event.h)
-
-proc cQAbstractSocket_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQAbstractSocket_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAbstractSocketVTable](fcQAbstractSocket_vdata(self))
   let self = QAbstractSocket(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
-proc QAbstractSocketchildEvent*(self: gen_qabstractsocket_types.QAbstractSocket, event: gen_qcoreevent_types.QChildEvent): void =
-  fcQAbstractSocket_virtualbase_childEvent(self.h, event.h)
-
-proc cQAbstractSocket_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQAbstractSocket_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAbstractSocketVTable](fcQAbstractSocket_vdata(self))
   let self = QAbstractSocket(h: self)
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
-proc QAbstractSocketcustomEvent*(self: gen_qabstractsocket_types.QAbstractSocket, event: gen_qcoreevent_types.QEvent): void =
-  fcQAbstractSocket_virtualbase_customEvent(self.h, event.h)
-
-proc cQAbstractSocket_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQAbstractSocket_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAbstractSocketVTable](fcQAbstractSocket_vdata(self))
   let self = QAbstractSocket(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
-proc QAbstractSocketconnectNotify*(self: gen_qabstractsocket_types.QAbstractSocket, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQAbstractSocket_virtualbase_connectNotify(self.h, signal.h)
-
-proc cQAbstractSocket_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQAbstractSocket_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAbstractSocketVTable](fcQAbstractSocket_vdata(self))
   let self = QAbstractSocket(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
-proc QAbstractSocketdisconnectNotify*(self: gen_qabstractsocket_types.QAbstractSocket, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQAbstractSocket_virtualbase_disconnectNotify(self.h, signal.h)
-
-proc cQAbstractSocket_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQAbstractSocket_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAbstractSocketVTable](fcQAbstractSocket_vdata(self))
   let self = QAbstractSocket(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
@@ -1058,9 +1062,83 @@ proc cQAbstractSocket_vtable_callback_disconnectNotify(self: pointer, signal: po
 
 type VirtualQAbstractSocket* {.inheritable.} = ref object of QAbstractSocket
   vtbl*: cQAbstractSocketVTable
+
 method metaObject*(self: VirtualQAbstractSocket): gen_qobjectdefs_types.QMetaObject {.base.} =
   QAbstractSocketmetaObject(self[])
-proc cQAbstractSocket_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
+method metacast*(self: VirtualQAbstractSocket, param1: cstring): pointer {.base.} =
+  QAbstractSocketmetacast(self[], param1)
+method metacall*(self: VirtualQAbstractSocket, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QAbstractSocketmetacall(self[], param1, param2, param3)
+method resume*(self: VirtualQAbstractSocket): void {.base.} =
+  QAbstractSocketresume(self[])
+method connectToHost*(self: VirtualQAbstractSocket, hostName: openArray[char], port: cushort, mode: cint, protocol: cint): void {.base.} =
+  QAbstractSocketconnectToHost(self[], hostName, port, mode, protocol)
+method connectToHost*(self: VirtualQAbstractSocket, address: gen_qhostaddress_types.QHostAddress, port: cushort, mode: cint): void {.base.} =
+  QAbstractSocketconnectToHost(self[], address, port, mode)
+method disconnectFromHost*(self: VirtualQAbstractSocket): void {.base.} =
+  QAbstractSocketdisconnectFromHost(self[])
+method bytesAvailable*(self: VirtualQAbstractSocket): clonglong {.base.} =
+  QAbstractSocketbytesAvailable(self[])
+method bytesToWrite*(self: VirtualQAbstractSocket): clonglong {.base.} =
+  QAbstractSocketbytesToWrite(self[])
+method canReadLine*(self: VirtualQAbstractSocket): bool {.base.} =
+  QAbstractSocketcanReadLine(self[])
+method setReadBufferSize*(self: VirtualQAbstractSocket, size: clonglong): void {.base.} =
+  QAbstractSocketsetReadBufferSize(self[], size)
+method socketDescriptor*(self: VirtualQAbstractSocket): uint {.base.} =
+  QAbstractSocketsocketDescriptor(self[])
+method setSocketDescriptor*(self: VirtualQAbstractSocket, socketDescriptor: uint, state: cint, openMode: cint): bool {.base.} =
+  QAbstractSocketsetSocketDescriptor(self[], socketDescriptor, state, openMode)
+method setSocketOption*(self: VirtualQAbstractSocket, option: cint, value: gen_qvariant_types.QVariant): void {.base.} =
+  QAbstractSocketsetSocketOption(self[], option, value)
+method socketOption*(self: VirtualQAbstractSocket, option: cint): gen_qvariant_types.QVariant {.base.} =
+  QAbstractSocketsocketOption(self[], option)
+method close*(self: VirtualQAbstractSocket): void {.base.} =
+  QAbstractSocketclose(self[])
+method isSequential*(self: VirtualQAbstractSocket): bool {.base.} =
+  QAbstractSocketisSequential(self[])
+method atEnd*(self: VirtualQAbstractSocket): bool {.base.} =
+  QAbstractSocketatEnd(self[])
+method waitForConnected*(self: VirtualQAbstractSocket, msecs: cint): bool {.base.} =
+  QAbstractSocketwaitForConnected(self[], msecs)
+method waitForReadyRead*(self: VirtualQAbstractSocket, msecs: cint): bool {.base.} =
+  QAbstractSocketwaitForReadyRead(self[], msecs)
+method waitForBytesWritten*(self: VirtualQAbstractSocket, msecs: cint): bool {.base.} =
+  QAbstractSocketwaitForBytesWritten(self[], msecs)
+method waitForDisconnected*(self: VirtualQAbstractSocket, msecs: cint): bool {.base.} =
+  QAbstractSocketwaitForDisconnected(self[], msecs)
+method readData*(self: VirtualQAbstractSocket, data: cstring, maxlen: clonglong): clonglong {.base.} =
+  QAbstractSocketreadData(self[], data, maxlen)
+method readLineData*(self: VirtualQAbstractSocket, data: cstring, maxlen: clonglong): clonglong {.base.} =
+  QAbstractSocketreadLineData(self[], data, maxlen)
+method writeData*(self: VirtualQAbstractSocket, data: cstring, len: clonglong): clonglong {.base.} =
+  QAbstractSocketwriteData(self[], data, len)
+method open*(self: VirtualQAbstractSocket, mode: cint): bool {.base.} =
+  QAbstractSocketopen(self[], mode)
+method pos*(self: VirtualQAbstractSocket): clonglong {.base.} =
+  QAbstractSocketpos(self[])
+method size*(self: VirtualQAbstractSocket): clonglong {.base.} =
+  QAbstractSocketsize(self[])
+method seek*(self: VirtualQAbstractSocket, pos: clonglong): bool {.base.} =
+  QAbstractSocketseek(self[], pos)
+method reset*(self: VirtualQAbstractSocket): bool {.base.} =
+  QAbstractSocketreset(self[])
+method event*(self: VirtualQAbstractSocket, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QAbstractSocketevent(self[], event)
+method eventFilter*(self: VirtualQAbstractSocket, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QAbstractSocketeventFilter(self[], watched, event)
+method timerEvent*(self: VirtualQAbstractSocket, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QAbstractSockettimerEvent(self[], event)
+method childEvent*(self: VirtualQAbstractSocket, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QAbstractSocketchildEvent(self[], event)
+method customEvent*(self: VirtualQAbstractSocket, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QAbstractSocketcustomEvent(self[], event)
+method connectNotify*(self: VirtualQAbstractSocket, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QAbstractSocketconnectNotify(self[], signal)
+method disconnectNotify*(self: VirtualQAbstractSocket, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QAbstractSocketdisconnectNotify(self[], signal)
+
+proc fcQAbstractSocket_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQAbstractSocket](fcQAbstractSocket_vdata(self))
   var virtualReturn = inst.metaObject()
   virtualReturn.owned = false # TODO move?
@@ -1068,17 +1146,13 @@ proc cQAbstractSocket_method_callback_metaObject(self: pointer): pointer {.cdecl
   virtualReturn.h = nil
   virtualReturn_h
 
-method metacast*(self: VirtualQAbstractSocket, param1: cstring): pointer {.base.} =
-  QAbstractSocketmetacast(self[], param1)
-proc cQAbstractSocket_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+proc fcQAbstractSocket_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQAbstractSocket](fcQAbstractSocket_vdata(self))
   let slotval1 = (param1)
   var virtualReturn = inst.metacast(slotval1)
   virtualReturn
 
-method metacall*(self: VirtualQAbstractSocket, param1: cint, param2: cint, param3: pointer): cint {.base.} =
-  QAbstractSocketmetacall(self[], param1, param2, param3)
-proc cQAbstractSocket_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+proc fcQAbstractSocket_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQAbstractSocket](fcQAbstractSocket_vdata(self))
   let slotval1 = cint(param1)
   let slotval2 = param2
@@ -1086,15 +1160,11 @@ proc cQAbstractSocket_method_callback_metacall(self: pointer, param1: cint, para
   var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
-method resume*(self: VirtualQAbstractSocket): void {.base.} =
-  QAbstractSocketresume(self[])
-proc cQAbstractSocket_method_callback_resume(self: pointer): void {.cdecl.} =
+proc fcQAbstractSocket_method_callback_resume(self: pointer): void {.cdecl.} =
   let inst = cast[VirtualQAbstractSocket](fcQAbstractSocket_vdata(self))
   inst.resume()
 
-method connectToHost*(self: VirtualQAbstractSocket, hostName: openArray[char], port: cushort, mode: cint, protocol: cint): void {.base.} =
-  QAbstractSocketconnectToHost(self[], hostName, port, mode, protocol)
-proc cQAbstractSocket_method_callback_connectToHost(self: pointer, hostName: struct_miqt_string, port: cushort, mode: cint, protocol: cint): void {.cdecl.} =
+proc fcQAbstractSocket_method_callback_connectToHost(self: pointer, hostName: struct_miqt_string, port: cushort, mode: cint, protocol: cint): void {.cdecl.} =
   let inst = cast[VirtualQAbstractSocket](fcQAbstractSocket_vdata(self))
   let vhostName_ms = hostName
   let vhostNamex_ret = string.fromBytes(vhostName_ms)
@@ -1105,59 +1175,43 @@ proc cQAbstractSocket_method_callback_connectToHost(self: pointer, hostName: str
   let slotval4 = cint(protocol)
   inst.connectToHost(slotval1, slotval2, slotval3, slotval4)
 
-method connectToHost*(self: VirtualQAbstractSocket, address: gen_qhostaddress_types.QHostAddress, port: cushort, mode: cint): void {.base.} =
-  QAbstractSocketconnectToHost(self[], address, port, mode)
-proc cQAbstractSocket_method_callback_connectToHost2(self: pointer, address: pointer, port: cushort, mode: cint): void {.cdecl.} =
+proc fcQAbstractSocket_method_callback_connectToHost2(self: pointer, address: pointer, port: cushort, mode: cint): void {.cdecl.} =
   let inst = cast[VirtualQAbstractSocket](fcQAbstractSocket_vdata(self))
   let slotval1 = gen_qhostaddress_types.QHostAddress(h: address, owned: false)
   let slotval2 = port
   let slotval3 = cint(mode)
   inst.connectToHost(slotval1, slotval2, slotval3)
 
-method disconnectFromHost*(self: VirtualQAbstractSocket): void {.base.} =
-  QAbstractSocketdisconnectFromHost(self[])
-proc cQAbstractSocket_method_callback_disconnectFromHost(self: pointer): void {.cdecl.} =
+proc fcQAbstractSocket_method_callback_disconnectFromHost(self: pointer): void {.cdecl.} =
   let inst = cast[VirtualQAbstractSocket](fcQAbstractSocket_vdata(self))
   inst.disconnectFromHost()
 
-method bytesAvailable*(self: VirtualQAbstractSocket): clonglong {.base.} =
-  QAbstractSocketbytesAvailable(self[])
-proc cQAbstractSocket_method_callback_bytesAvailable(self: pointer): clonglong {.cdecl.} =
+proc fcQAbstractSocket_method_callback_bytesAvailable(self: pointer): clonglong {.cdecl.} =
   let inst = cast[VirtualQAbstractSocket](fcQAbstractSocket_vdata(self))
   var virtualReturn = inst.bytesAvailable()
   virtualReturn
 
-method bytesToWrite*(self: VirtualQAbstractSocket): clonglong {.base.} =
-  QAbstractSocketbytesToWrite(self[])
-proc cQAbstractSocket_method_callback_bytesToWrite(self: pointer): clonglong {.cdecl.} =
+proc fcQAbstractSocket_method_callback_bytesToWrite(self: pointer): clonglong {.cdecl.} =
   let inst = cast[VirtualQAbstractSocket](fcQAbstractSocket_vdata(self))
   var virtualReturn = inst.bytesToWrite()
   virtualReturn
 
-method canReadLine*(self: VirtualQAbstractSocket): bool {.base.} =
-  QAbstractSocketcanReadLine(self[])
-proc cQAbstractSocket_method_callback_canReadLine(self: pointer): bool {.cdecl.} =
+proc fcQAbstractSocket_method_callback_canReadLine(self: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQAbstractSocket](fcQAbstractSocket_vdata(self))
   var virtualReturn = inst.canReadLine()
   virtualReturn
 
-method setReadBufferSize*(self: VirtualQAbstractSocket, size: clonglong): void {.base.} =
-  QAbstractSocketsetReadBufferSize(self[], size)
-proc cQAbstractSocket_method_callback_setReadBufferSize(self: pointer, size: clonglong): void {.cdecl.} =
+proc fcQAbstractSocket_method_callback_setReadBufferSize(self: pointer, size: clonglong): void {.cdecl.} =
   let inst = cast[VirtualQAbstractSocket](fcQAbstractSocket_vdata(self))
   let slotval1 = size
   inst.setReadBufferSize(slotval1)
 
-method socketDescriptor*(self: VirtualQAbstractSocket): uint {.base.} =
-  QAbstractSocketsocketDescriptor(self[])
-proc cQAbstractSocket_method_callback_socketDescriptor(self: pointer): uint {.cdecl.} =
+proc fcQAbstractSocket_method_callback_socketDescriptor(self: pointer): uint {.cdecl.} =
   let inst = cast[VirtualQAbstractSocket](fcQAbstractSocket_vdata(self))
   var virtualReturn = inst.socketDescriptor()
   virtualReturn
 
-method setSocketDescriptor*(self: VirtualQAbstractSocket, socketDescriptor: uint, state: cint, openMode: cint): bool {.base.} =
-  QAbstractSocketsetSocketDescriptor(self[], socketDescriptor, state, openMode)
-proc cQAbstractSocket_method_callback_setSocketDescriptor(self: pointer, socketDescriptor: uint, state: cint, openMode: cint): bool {.cdecl.} =
+proc fcQAbstractSocket_method_callback_setSocketDescriptor(self: pointer, socketDescriptor: uint, state: cint, openMode: cint): bool {.cdecl.} =
   let inst = cast[VirtualQAbstractSocket](fcQAbstractSocket_vdata(self))
   let slotval1 = socketDescriptor
   let slotval2 = cint(state)
@@ -1165,17 +1219,13 @@ proc cQAbstractSocket_method_callback_setSocketDescriptor(self: pointer, socketD
   var virtualReturn = inst.setSocketDescriptor(slotval1, slotval2, slotval3)
   virtualReturn
 
-method setSocketOption*(self: VirtualQAbstractSocket, option: cint, value: gen_qvariant_types.QVariant): void {.base.} =
-  QAbstractSocketsetSocketOption(self[], option, value)
-proc cQAbstractSocket_method_callback_setSocketOption(self: pointer, option: cint, value: pointer): void {.cdecl.} =
+proc fcQAbstractSocket_method_callback_setSocketOption(self: pointer, option: cint, value: pointer): void {.cdecl.} =
   let inst = cast[VirtualQAbstractSocket](fcQAbstractSocket_vdata(self))
   let slotval1 = cint(option)
   let slotval2 = gen_qvariant_types.QVariant(h: value, owned: false)
   inst.setSocketOption(slotval1, slotval2)
 
-method socketOption*(self: VirtualQAbstractSocket, option: cint): gen_qvariant_types.QVariant {.base.} =
-  QAbstractSocketsocketOption(self[], option)
-proc cQAbstractSocket_method_callback_socketOption(self: pointer, option: cint): pointer {.cdecl.} =
+proc fcQAbstractSocket_method_callback_socketOption(self: pointer, option: cint): pointer {.cdecl.} =
   let inst = cast[VirtualQAbstractSocket](fcQAbstractSocket_vdata(self))
   let slotval1 = cint(option)
   var virtualReturn = inst.socketOption(slotval1)
@@ -1184,173 +1234,130 @@ proc cQAbstractSocket_method_callback_socketOption(self: pointer, option: cint):
   virtualReturn.h = nil
   virtualReturn_h
 
-method close*(self: VirtualQAbstractSocket): void {.base.} =
-  QAbstractSocketclose(self[])
-proc cQAbstractSocket_method_callback_close(self: pointer): void {.cdecl.} =
+proc fcQAbstractSocket_method_callback_close(self: pointer): void {.cdecl.} =
   let inst = cast[VirtualQAbstractSocket](fcQAbstractSocket_vdata(self))
   inst.close()
 
-method isSequential*(self: VirtualQAbstractSocket): bool {.base.} =
-  QAbstractSocketisSequential(self[])
-proc cQAbstractSocket_method_callback_isSequential(self: pointer): bool {.cdecl.} =
+proc fcQAbstractSocket_method_callback_isSequential(self: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQAbstractSocket](fcQAbstractSocket_vdata(self))
   var virtualReturn = inst.isSequential()
   virtualReturn
 
-method atEnd*(self: VirtualQAbstractSocket): bool {.base.} =
-  QAbstractSocketatEnd(self[])
-proc cQAbstractSocket_method_callback_atEnd(self: pointer): bool {.cdecl.} =
+proc fcQAbstractSocket_method_callback_atEnd(self: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQAbstractSocket](fcQAbstractSocket_vdata(self))
   var virtualReturn = inst.atEnd()
   virtualReturn
 
-method waitForConnected*(self: VirtualQAbstractSocket, msecs: cint): bool {.base.} =
-  QAbstractSocketwaitForConnected(self[], msecs)
-proc cQAbstractSocket_method_callback_waitForConnected(self: pointer, msecs: cint): bool {.cdecl.} =
+proc fcQAbstractSocket_method_callback_waitForConnected(self: pointer, msecs: cint): bool {.cdecl.} =
   let inst = cast[VirtualQAbstractSocket](fcQAbstractSocket_vdata(self))
   let slotval1 = msecs
   var virtualReturn = inst.waitForConnected(slotval1)
   virtualReturn
 
-method waitForReadyRead*(self: VirtualQAbstractSocket, msecs: cint): bool {.base.} =
-  QAbstractSocketwaitForReadyRead(self[], msecs)
-proc cQAbstractSocket_method_callback_waitForReadyRead(self: pointer, msecs: cint): bool {.cdecl.} =
+proc fcQAbstractSocket_method_callback_waitForReadyRead(self: pointer, msecs: cint): bool {.cdecl.} =
   let inst = cast[VirtualQAbstractSocket](fcQAbstractSocket_vdata(self))
   let slotval1 = msecs
   var virtualReturn = inst.waitForReadyRead(slotval1)
   virtualReturn
 
-method waitForBytesWritten*(self: VirtualQAbstractSocket, msecs: cint): bool {.base.} =
-  QAbstractSocketwaitForBytesWritten(self[], msecs)
-proc cQAbstractSocket_method_callback_waitForBytesWritten(self: pointer, msecs: cint): bool {.cdecl.} =
+proc fcQAbstractSocket_method_callback_waitForBytesWritten(self: pointer, msecs: cint): bool {.cdecl.} =
   let inst = cast[VirtualQAbstractSocket](fcQAbstractSocket_vdata(self))
   let slotval1 = msecs
   var virtualReturn = inst.waitForBytesWritten(slotval1)
   virtualReturn
 
-method waitForDisconnected*(self: VirtualQAbstractSocket, msecs: cint): bool {.base.} =
-  QAbstractSocketwaitForDisconnected(self[], msecs)
-proc cQAbstractSocket_method_callback_waitForDisconnected(self: pointer, msecs: cint): bool {.cdecl.} =
+proc fcQAbstractSocket_method_callback_waitForDisconnected(self: pointer, msecs: cint): bool {.cdecl.} =
   let inst = cast[VirtualQAbstractSocket](fcQAbstractSocket_vdata(self))
   let slotval1 = msecs
   var virtualReturn = inst.waitForDisconnected(slotval1)
   virtualReturn
 
-method readData*(self: VirtualQAbstractSocket, data: cstring, maxlen: clonglong): clonglong {.base.} =
-  QAbstractSocketreadData(self[], data, maxlen)
-proc cQAbstractSocket_method_callback_readData(self: pointer, data: cstring, maxlen: clonglong): clonglong {.cdecl.} =
+proc fcQAbstractSocket_method_callback_readData(self: pointer, data: cstring, maxlen: clonglong): clonglong {.cdecl.} =
   let inst = cast[VirtualQAbstractSocket](fcQAbstractSocket_vdata(self))
   let slotval1 = (data)
   let slotval2 = maxlen
   var virtualReturn = inst.readData(slotval1, slotval2)
   virtualReturn
 
-method readLineData*(self: VirtualQAbstractSocket, data: cstring, maxlen: clonglong): clonglong {.base.} =
-  QAbstractSocketreadLineData(self[], data, maxlen)
-proc cQAbstractSocket_method_callback_readLineData(self: pointer, data: cstring, maxlen: clonglong): clonglong {.cdecl.} =
+proc fcQAbstractSocket_method_callback_readLineData(self: pointer, data: cstring, maxlen: clonglong): clonglong {.cdecl.} =
   let inst = cast[VirtualQAbstractSocket](fcQAbstractSocket_vdata(self))
   let slotval1 = (data)
   let slotval2 = maxlen
   var virtualReturn = inst.readLineData(slotval1, slotval2)
   virtualReturn
 
-method writeData*(self: VirtualQAbstractSocket, data: cstring, len: clonglong): clonglong {.base.} =
-  QAbstractSocketwriteData(self[], data, len)
-proc cQAbstractSocket_method_callback_writeData(self: pointer, data: cstring, len: clonglong): clonglong {.cdecl.} =
+proc fcQAbstractSocket_method_callback_writeData(self: pointer, data: cstring, len: clonglong): clonglong {.cdecl.} =
   let inst = cast[VirtualQAbstractSocket](fcQAbstractSocket_vdata(self))
   let slotval1 = (data)
   let slotval2 = len
   var virtualReturn = inst.writeData(slotval1, slotval2)
   virtualReturn
 
-method open*(self: VirtualQAbstractSocket, mode: cint): bool {.base.} =
-  QAbstractSocketopen(self[], mode)
-proc cQAbstractSocket_method_callback_open(self: pointer, mode: cint): bool {.cdecl.} =
+proc fcQAbstractSocket_method_callback_open(self: pointer, mode: cint): bool {.cdecl.} =
   let inst = cast[VirtualQAbstractSocket](fcQAbstractSocket_vdata(self))
   let slotval1 = cint(mode)
   var virtualReturn = inst.open(slotval1)
   virtualReturn
 
-method pos*(self: VirtualQAbstractSocket): clonglong {.base.} =
-  QAbstractSocketpos(self[])
-proc cQAbstractSocket_method_callback_pos(self: pointer): clonglong {.cdecl.} =
+proc fcQAbstractSocket_method_callback_pos(self: pointer): clonglong {.cdecl.} =
   let inst = cast[VirtualQAbstractSocket](fcQAbstractSocket_vdata(self))
   var virtualReturn = inst.pos()
   virtualReturn
 
-method size*(self: VirtualQAbstractSocket): clonglong {.base.} =
-  QAbstractSocketsize(self[])
-proc cQAbstractSocket_method_callback_size(self: pointer): clonglong {.cdecl.} =
+proc fcQAbstractSocket_method_callback_size(self: pointer): clonglong {.cdecl.} =
   let inst = cast[VirtualQAbstractSocket](fcQAbstractSocket_vdata(self))
   var virtualReturn = inst.size()
   virtualReturn
 
-method seek*(self: VirtualQAbstractSocket, pos: clonglong): bool {.base.} =
-  QAbstractSocketseek(self[], pos)
-proc cQAbstractSocket_method_callback_seek(self: pointer, pos: clonglong): bool {.cdecl.} =
+proc fcQAbstractSocket_method_callback_seek(self: pointer, pos: clonglong): bool {.cdecl.} =
   let inst = cast[VirtualQAbstractSocket](fcQAbstractSocket_vdata(self))
   let slotval1 = pos
   var virtualReturn = inst.seek(slotval1)
   virtualReturn
 
-method reset*(self: VirtualQAbstractSocket): bool {.base.} =
-  QAbstractSocketreset(self[])
-proc cQAbstractSocket_method_callback_reset(self: pointer): bool {.cdecl.} =
+proc fcQAbstractSocket_method_callback_reset(self: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQAbstractSocket](fcQAbstractSocket_vdata(self))
   var virtualReturn = inst.reset()
   virtualReturn
 
-method event*(self: VirtualQAbstractSocket, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QAbstractSocketevent(self[], event)
-proc cQAbstractSocket_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
+proc fcQAbstractSocket_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQAbstractSocket](fcQAbstractSocket_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
-method eventFilter*(self: VirtualQAbstractSocket, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QAbstractSocketeventFilter(self[], watched, event)
-proc cQAbstractSocket_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+proc fcQAbstractSocket_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQAbstractSocket](fcQAbstractSocket_vdata(self))
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
   let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
-method timerEvent*(self: VirtualQAbstractSocket, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
-  QAbstractSockettimerEvent(self[], event)
-proc cQAbstractSocket_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQAbstractSocket_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQAbstractSocket](fcQAbstractSocket_vdata(self))
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
-method childEvent*(self: VirtualQAbstractSocket, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
-  QAbstractSocketchildEvent(self[], event)
-proc cQAbstractSocket_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQAbstractSocket_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQAbstractSocket](fcQAbstractSocket_vdata(self))
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
-method customEvent*(self: VirtualQAbstractSocket, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QAbstractSocketcustomEvent(self[], event)
-proc cQAbstractSocket_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQAbstractSocket_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQAbstractSocket](fcQAbstractSocket_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
-method connectNotify*(self: VirtualQAbstractSocket, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QAbstractSocketconnectNotify(self[], signal)
-proc cQAbstractSocket_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQAbstractSocket_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQAbstractSocket](fcQAbstractSocket_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
-method disconnectNotify*(self: VirtualQAbstractSocket, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QAbstractSocketdisconnectNotify(self[], signal)
-proc cQAbstractSocket_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQAbstractSocket_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQAbstractSocket](fcQAbstractSocket_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
+
 
 proc setSocketState*(self: gen_qabstractsocket_types.QAbstractSocket, state: cint): void =
   fcQAbstractSocket_protectedbase_setSocketState(self.h, cint(state))
@@ -1400,79 +1407,79 @@ proc create*(T: type gen_qabstractsocket_types.QAbstractSocket,
     let vtbl = cast[ref QAbstractSocketVTable](fcQAbstractSocket_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQAbstractSocket_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQAbstractSocket_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQAbstractSocket_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQAbstractSocket_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQAbstractSocket_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQAbstractSocket_vtable_callback_metacall
   if not isNil(vtbl[].resume):
-    vtbl[].vtbl.resume = cQAbstractSocket_vtable_callback_resume
+    vtbl[].vtbl.resume = fcQAbstractSocket_vtable_callback_resume
   if not isNil(vtbl[].connectToHost):
-    vtbl[].vtbl.connectToHost = cQAbstractSocket_vtable_callback_connectToHost
+    vtbl[].vtbl.connectToHost = fcQAbstractSocket_vtable_callback_connectToHost
   if not isNil(vtbl[].connectToHost2):
-    vtbl[].vtbl.connectToHost2 = cQAbstractSocket_vtable_callback_connectToHost2
+    vtbl[].vtbl.connectToHost2 = fcQAbstractSocket_vtable_callback_connectToHost2
   if not isNil(vtbl[].disconnectFromHost):
-    vtbl[].vtbl.disconnectFromHost = cQAbstractSocket_vtable_callback_disconnectFromHost
+    vtbl[].vtbl.disconnectFromHost = fcQAbstractSocket_vtable_callback_disconnectFromHost
   if not isNil(vtbl[].bytesAvailable):
-    vtbl[].vtbl.bytesAvailable = cQAbstractSocket_vtable_callback_bytesAvailable
+    vtbl[].vtbl.bytesAvailable = fcQAbstractSocket_vtable_callback_bytesAvailable
   if not isNil(vtbl[].bytesToWrite):
-    vtbl[].vtbl.bytesToWrite = cQAbstractSocket_vtable_callback_bytesToWrite
+    vtbl[].vtbl.bytesToWrite = fcQAbstractSocket_vtable_callback_bytesToWrite
   if not isNil(vtbl[].canReadLine):
-    vtbl[].vtbl.canReadLine = cQAbstractSocket_vtable_callback_canReadLine
+    vtbl[].vtbl.canReadLine = fcQAbstractSocket_vtable_callback_canReadLine
   if not isNil(vtbl[].setReadBufferSize):
-    vtbl[].vtbl.setReadBufferSize = cQAbstractSocket_vtable_callback_setReadBufferSize
+    vtbl[].vtbl.setReadBufferSize = fcQAbstractSocket_vtable_callback_setReadBufferSize
   if not isNil(vtbl[].socketDescriptor):
-    vtbl[].vtbl.socketDescriptor = cQAbstractSocket_vtable_callback_socketDescriptor
+    vtbl[].vtbl.socketDescriptor = fcQAbstractSocket_vtable_callback_socketDescriptor
   if not isNil(vtbl[].setSocketDescriptor):
-    vtbl[].vtbl.setSocketDescriptor = cQAbstractSocket_vtable_callback_setSocketDescriptor
+    vtbl[].vtbl.setSocketDescriptor = fcQAbstractSocket_vtable_callback_setSocketDescriptor
   if not isNil(vtbl[].setSocketOption):
-    vtbl[].vtbl.setSocketOption = cQAbstractSocket_vtable_callback_setSocketOption
+    vtbl[].vtbl.setSocketOption = fcQAbstractSocket_vtable_callback_setSocketOption
   if not isNil(vtbl[].socketOption):
-    vtbl[].vtbl.socketOption = cQAbstractSocket_vtable_callback_socketOption
+    vtbl[].vtbl.socketOption = fcQAbstractSocket_vtable_callback_socketOption
   if not isNil(vtbl[].close):
-    vtbl[].vtbl.close = cQAbstractSocket_vtable_callback_close
+    vtbl[].vtbl.close = fcQAbstractSocket_vtable_callback_close
   if not isNil(vtbl[].isSequential):
-    vtbl[].vtbl.isSequential = cQAbstractSocket_vtable_callback_isSequential
+    vtbl[].vtbl.isSequential = fcQAbstractSocket_vtable_callback_isSequential
   if not isNil(vtbl[].atEnd):
-    vtbl[].vtbl.atEnd = cQAbstractSocket_vtable_callback_atEnd
+    vtbl[].vtbl.atEnd = fcQAbstractSocket_vtable_callback_atEnd
   if not isNil(vtbl[].waitForConnected):
-    vtbl[].vtbl.waitForConnected = cQAbstractSocket_vtable_callback_waitForConnected
+    vtbl[].vtbl.waitForConnected = fcQAbstractSocket_vtable_callback_waitForConnected
   if not isNil(vtbl[].waitForReadyRead):
-    vtbl[].vtbl.waitForReadyRead = cQAbstractSocket_vtable_callback_waitForReadyRead
+    vtbl[].vtbl.waitForReadyRead = fcQAbstractSocket_vtable_callback_waitForReadyRead
   if not isNil(vtbl[].waitForBytesWritten):
-    vtbl[].vtbl.waitForBytesWritten = cQAbstractSocket_vtable_callback_waitForBytesWritten
+    vtbl[].vtbl.waitForBytesWritten = fcQAbstractSocket_vtable_callback_waitForBytesWritten
   if not isNil(vtbl[].waitForDisconnected):
-    vtbl[].vtbl.waitForDisconnected = cQAbstractSocket_vtable_callback_waitForDisconnected
+    vtbl[].vtbl.waitForDisconnected = fcQAbstractSocket_vtable_callback_waitForDisconnected
   if not isNil(vtbl[].readData):
-    vtbl[].vtbl.readData = cQAbstractSocket_vtable_callback_readData
+    vtbl[].vtbl.readData = fcQAbstractSocket_vtable_callback_readData
   if not isNil(vtbl[].readLineData):
-    vtbl[].vtbl.readLineData = cQAbstractSocket_vtable_callback_readLineData
+    vtbl[].vtbl.readLineData = fcQAbstractSocket_vtable_callback_readLineData
   if not isNil(vtbl[].writeData):
-    vtbl[].vtbl.writeData = cQAbstractSocket_vtable_callback_writeData
+    vtbl[].vtbl.writeData = fcQAbstractSocket_vtable_callback_writeData
   if not isNil(vtbl[].open):
-    vtbl[].vtbl.open = cQAbstractSocket_vtable_callback_open
+    vtbl[].vtbl.open = fcQAbstractSocket_vtable_callback_open
   if not isNil(vtbl[].pos):
-    vtbl[].vtbl.pos = cQAbstractSocket_vtable_callback_pos
+    vtbl[].vtbl.pos = fcQAbstractSocket_vtable_callback_pos
   if not isNil(vtbl[].size):
-    vtbl[].vtbl.size = cQAbstractSocket_vtable_callback_size
+    vtbl[].vtbl.size = fcQAbstractSocket_vtable_callback_size
   if not isNil(vtbl[].seek):
-    vtbl[].vtbl.seek = cQAbstractSocket_vtable_callback_seek
+    vtbl[].vtbl.seek = fcQAbstractSocket_vtable_callback_seek
   if not isNil(vtbl[].reset):
-    vtbl[].vtbl.reset = cQAbstractSocket_vtable_callback_reset
+    vtbl[].vtbl.reset = fcQAbstractSocket_vtable_callback_reset
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQAbstractSocket_vtable_callback_event
+    vtbl[].vtbl.event = fcQAbstractSocket_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQAbstractSocket_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQAbstractSocket_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQAbstractSocket_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQAbstractSocket_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQAbstractSocket_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQAbstractSocket_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQAbstractSocket_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQAbstractSocket_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQAbstractSocket_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQAbstractSocket_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQAbstractSocket_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQAbstractSocket_vtable_callback_disconnectNotify
   gen_qabstractsocket_types.QAbstractSocket(h: fcQAbstractSocket_new(addr(vtbl[].vtbl), addr(vtbl[]), cint(socketType), parent.h), owned: true)
 
 const cQAbstractSocket_mvtbl = cQAbstractSocketVTable(
@@ -1480,43 +1487,44 @@ const cQAbstractSocket_mvtbl = cQAbstractSocketVTable(
     let inst = cast[ptr typeof(VirtualQAbstractSocket()[])](self.fcQAbstractSocket_vtbl())
     inst[].h = nil
     inst[].owned = false,
-  metaObject: cQAbstractSocket_method_callback_metaObject,
-  metacast: cQAbstractSocket_method_callback_metacast,
-  metacall: cQAbstractSocket_method_callback_metacall,
-  resume: cQAbstractSocket_method_callback_resume,
-  connectToHost: cQAbstractSocket_method_callback_connectToHost,
-  connectToHost2: cQAbstractSocket_method_callback_connectToHost2,
-  disconnectFromHost: cQAbstractSocket_method_callback_disconnectFromHost,
-  bytesAvailable: cQAbstractSocket_method_callback_bytesAvailable,
-  bytesToWrite: cQAbstractSocket_method_callback_bytesToWrite,
-  canReadLine: cQAbstractSocket_method_callback_canReadLine,
-  setReadBufferSize: cQAbstractSocket_method_callback_setReadBufferSize,
-  socketDescriptor: cQAbstractSocket_method_callback_socketDescriptor,
-  setSocketDescriptor: cQAbstractSocket_method_callback_setSocketDescriptor,
-  setSocketOption: cQAbstractSocket_method_callback_setSocketOption,
-  socketOption: cQAbstractSocket_method_callback_socketOption,
-  close: cQAbstractSocket_method_callback_close,
-  isSequential: cQAbstractSocket_method_callback_isSequential,
-  atEnd: cQAbstractSocket_method_callback_atEnd,
-  waitForConnected: cQAbstractSocket_method_callback_waitForConnected,
-  waitForReadyRead: cQAbstractSocket_method_callback_waitForReadyRead,
-  waitForBytesWritten: cQAbstractSocket_method_callback_waitForBytesWritten,
-  waitForDisconnected: cQAbstractSocket_method_callback_waitForDisconnected,
-  readData: cQAbstractSocket_method_callback_readData,
-  readLineData: cQAbstractSocket_method_callback_readLineData,
-  writeData: cQAbstractSocket_method_callback_writeData,
-  open: cQAbstractSocket_method_callback_open,
-  pos: cQAbstractSocket_method_callback_pos,
-  size: cQAbstractSocket_method_callback_size,
-  seek: cQAbstractSocket_method_callback_seek,
-  reset: cQAbstractSocket_method_callback_reset,
-  event: cQAbstractSocket_method_callback_event,
-  eventFilter: cQAbstractSocket_method_callback_eventFilter,
-  timerEvent: cQAbstractSocket_method_callback_timerEvent,
-  childEvent: cQAbstractSocket_method_callback_childEvent,
-  customEvent: cQAbstractSocket_method_callback_customEvent,
-  connectNotify: cQAbstractSocket_method_callback_connectNotify,
-  disconnectNotify: cQAbstractSocket_method_callback_disconnectNotify,
+
+  metaObject: fcQAbstractSocket_method_callback_metaObject,
+  metacast: fcQAbstractSocket_method_callback_metacast,
+  metacall: fcQAbstractSocket_method_callback_metacall,
+  resume: fcQAbstractSocket_method_callback_resume,
+  connectToHost: fcQAbstractSocket_method_callback_connectToHost,
+  connectToHost2: fcQAbstractSocket_method_callback_connectToHost2,
+  disconnectFromHost: fcQAbstractSocket_method_callback_disconnectFromHost,
+  bytesAvailable: fcQAbstractSocket_method_callback_bytesAvailable,
+  bytesToWrite: fcQAbstractSocket_method_callback_bytesToWrite,
+  canReadLine: fcQAbstractSocket_method_callback_canReadLine,
+  setReadBufferSize: fcQAbstractSocket_method_callback_setReadBufferSize,
+  socketDescriptor: fcQAbstractSocket_method_callback_socketDescriptor,
+  setSocketDescriptor: fcQAbstractSocket_method_callback_setSocketDescriptor,
+  setSocketOption: fcQAbstractSocket_method_callback_setSocketOption,
+  socketOption: fcQAbstractSocket_method_callback_socketOption,
+  close: fcQAbstractSocket_method_callback_close,
+  isSequential: fcQAbstractSocket_method_callback_isSequential,
+  atEnd: fcQAbstractSocket_method_callback_atEnd,
+  waitForConnected: fcQAbstractSocket_method_callback_waitForConnected,
+  waitForReadyRead: fcQAbstractSocket_method_callback_waitForReadyRead,
+  waitForBytesWritten: fcQAbstractSocket_method_callback_waitForBytesWritten,
+  waitForDisconnected: fcQAbstractSocket_method_callback_waitForDisconnected,
+  readData: fcQAbstractSocket_method_callback_readData,
+  readLineData: fcQAbstractSocket_method_callback_readLineData,
+  writeData: fcQAbstractSocket_method_callback_writeData,
+  open: fcQAbstractSocket_method_callback_open,
+  pos: fcQAbstractSocket_method_callback_pos,
+  size: fcQAbstractSocket_method_callback_size,
+  seek: fcQAbstractSocket_method_callback_seek,
+  reset: fcQAbstractSocket_method_callback_reset,
+  event: fcQAbstractSocket_method_callback_event,
+  eventFilter: fcQAbstractSocket_method_callback_eventFilter,
+  timerEvent: fcQAbstractSocket_method_callback_timerEvent,
+  childEvent: fcQAbstractSocket_method_callback_childEvent,
+  customEvent: fcQAbstractSocket_method_callback_customEvent,
+  connectNotify: fcQAbstractSocket_method_callback_connectNotify,
+  disconnectNotify: fcQAbstractSocket_method_callback_disconnectNotify,
 )
 proc create*(T: type gen_qabstractsocket_types.QAbstractSocket,
     socketType: cint, parent: gen_qobject_types.QObject,

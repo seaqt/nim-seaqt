@@ -109,6 +109,7 @@ proc fcQColumnView_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc
 proc fcQColumnView_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QColumnView_trUtf83".}
 proc fcQColumnView_vtbl(self: pointer): pointer {.importc: "QColumnView_vtbl".}
 proc fcQColumnView_vdata(self: pointer): pointer {.importc: "QColumnView_vdata".}
+
 type cQColumnViewVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -355,21 +356,21 @@ proc updatePreviewWidget*(self: gen_qcolumnview_types.QColumnView, index: gen_qa
   fcQColumnView_updatePreviewWidget(self.h, index.h)
 
 type QColumnViewupdatePreviewWidgetSlot* = proc(index: gen_qabstractitemmodel_types.QModelIndex)
-proc cQColumnView_slot_callback_updatePreviewWidget(slot: int, index: pointer) {.cdecl.} =
+proc fcQColumnView_slot_callback_updatePreviewWidget(slot: int, index: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QColumnViewupdatePreviewWidgetSlot](cast[pointer](slot))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
 
   nimfunc[](slotval1)
 
-proc cQColumnView_slot_callback_updatePreviewWidget_release(slot: int) {.cdecl.} =
+proc fcQColumnView_slot_callback_updatePreviewWidget_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QColumnViewupdatePreviewWidgetSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onupdatePreviewWidget*(self: gen_qcolumnview_types.QColumnView, slot: QColumnViewupdatePreviewWidgetSlot) =
+proc onUpdatePreviewWidget*(self: gen_qcolumnview_types.QColumnView, slot: QColumnViewupdatePreviewWidgetSlot) =
   var tmp = new QColumnViewupdatePreviewWidgetSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQColumnView_connect_updatePreviewWidget(self.h, cast[int](addr tmp[]), cQColumnView_slot_callback_updatePreviewWidget, cQColumnView_slot_callback_updatePreviewWidget_release)
+  fcQColumnView_connect_updatePreviewWidget(self.h, cast[int](addr tmp[]), fcQColumnView_slot_callback_updatePreviewWidget, fcQColumnView_slot_callback_updatePreviewWidget_release)
 
 proc indexAt*(self: gen_qcolumnview_types.QColumnView, point: gen_qpoint_types.QPoint): gen_qabstractitemmodel_types.QModelIndex =
   gen_qabstractitemmodel_types.QModelIndex(h: fcQColumnView_indexAt(self.h, point.h), owned: true)
@@ -540,6 +541,7 @@ type QColumnViewchildEventProc* = proc(self: QColumnView, event: gen_qcoreevent_
 type QColumnViewcustomEventProc* = proc(self: QColumnView, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QColumnViewconnectNotifyProc* = proc(self: QColumnView, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QColumnViewdisconnectNotifyProc* = proc(self: QColumnView, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+
 type QColumnViewVTable* {.inheritable, pure.} = object
   vtbl: cQColumnViewVTable
   metaObject*: QColumnViewmetaObjectProc
@@ -635,10 +637,298 @@ type QColumnViewVTable* {.inheritable, pure.} = object
   customEvent*: QColumnViewcustomEventProc
   connectNotify*: QColumnViewconnectNotifyProc
   disconnectNotify*: QColumnViewdisconnectNotifyProc
+
 proc QColumnViewmetaObject*(self: gen_qcolumnview_types.QColumnView): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQColumnView_virtualbase_metaObject(self.h), owned: false)
 
-proc cQColumnView_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
+proc QColumnViewmetacast*(self: gen_qcolumnview_types.QColumnView, param1: cstring): pointer =
+  fcQColumnView_virtualbase_metacast(self.h, param1)
+
+proc QColumnViewmetacall*(self: gen_qcolumnview_types.QColumnView, param1: cint, param2: cint, param3: pointer): cint =
+  fcQColumnView_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+proc QColumnViewindexAt*(self: gen_qcolumnview_types.QColumnView, point: gen_qpoint_types.QPoint): gen_qabstractitemmodel_types.QModelIndex =
+  gen_qabstractitemmodel_types.QModelIndex(h: fcQColumnView_virtualbase_indexAt(self.h, point.h), owned: true)
+
+proc QColumnViewscrollTo*(self: gen_qcolumnview_types.QColumnView, index: gen_qabstractitemmodel_types.QModelIndex, hint: cint): void =
+  fcQColumnView_virtualbase_scrollTo(self.h, index.h, cint(hint))
+
+proc QColumnViewsizeHint*(self: gen_qcolumnview_types.QColumnView): gen_qsize_types.QSize =
+  gen_qsize_types.QSize(h: fcQColumnView_virtualbase_sizeHint(self.h), owned: true)
+
+proc QColumnViewvisualRect*(self: gen_qcolumnview_types.QColumnView, index: gen_qabstractitemmodel_types.QModelIndex): gen_qrect_types.QRect =
+  gen_qrect_types.QRect(h: fcQColumnView_virtualbase_visualRect(self.h, index.h), owned: true)
+
+proc QColumnViewsetModel*(self: gen_qcolumnview_types.QColumnView, model: gen_qabstractitemmodel_types.QAbstractItemModel): void =
+  fcQColumnView_virtualbase_setModel(self.h, model.h)
+
+proc QColumnViewsetSelectionModel*(self: gen_qcolumnview_types.QColumnView, selectionModel: gen_qitemselectionmodel_types.QItemSelectionModel): void =
+  fcQColumnView_virtualbase_setSelectionModel(self.h, selectionModel.h)
+
+proc QColumnViewsetRootIndex*(self: gen_qcolumnview_types.QColumnView, index: gen_qabstractitemmodel_types.QModelIndex): void =
+  fcQColumnView_virtualbase_setRootIndex(self.h, index.h)
+
+proc QColumnViewselectAll*(self: gen_qcolumnview_types.QColumnView): void =
+  fcQColumnView_virtualbase_selectAll(self.h)
+
+proc QColumnViewisIndexHidden*(self: gen_qcolumnview_types.QColumnView, index: gen_qabstractitemmodel_types.QModelIndex): bool =
+  fcQColumnView_virtualbase_isIndexHidden(self.h, index.h)
+
+proc QColumnViewmoveCursor*(self: gen_qcolumnview_types.QColumnView, cursorAction: cint, modifiers: cint): gen_qabstractitemmodel_types.QModelIndex =
+  gen_qabstractitemmodel_types.QModelIndex(h: fcQColumnView_virtualbase_moveCursor(self.h, cint(cursorAction), cint(modifiers)), owned: true)
+
+proc QColumnViewresizeEvent*(self: gen_qcolumnview_types.QColumnView, event: gen_qevent_types.QResizeEvent): void =
+  fcQColumnView_virtualbase_resizeEvent(self.h, event.h)
+
+proc QColumnViewsetSelection*(self: gen_qcolumnview_types.QColumnView, rect: gen_qrect_types.QRect, command: cint): void =
+  fcQColumnView_virtualbase_setSelection(self.h, rect.h, cint(command))
+
+proc QColumnViewvisualRegionForSelection*(self: gen_qcolumnview_types.QColumnView, selection: gen_qitemselectionmodel_types.QItemSelection): gen_qregion_types.QRegion =
+  gen_qregion_types.QRegion(h: fcQColumnView_virtualbase_visualRegionForSelection(self.h, selection.h), owned: true)
+
+proc QColumnViewhorizontalOffset*(self: gen_qcolumnview_types.QColumnView): cint =
+  fcQColumnView_virtualbase_horizontalOffset(self.h)
+
+proc QColumnViewverticalOffset*(self: gen_qcolumnview_types.QColumnView): cint =
+  fcQColumnView_virtualbase_verticalOffset(self.h)
+
+proc QColumnViewrowsInserted*(self: gen_qcolumnview_types.QColumnView, parent: gen_qabstractitemmodel_types.QModelIndex, start: cint, endVal: cint): void =
+  fcQColumnView_virtualbase_rowsInserted(self.h, parent.h, start, endVal)
+
+proc QColumnViewcurrentChanged*(self: gen_qcolumnview_types.QColumnView, current: gen_qabstractitemmodel_types.QModelIndex, previous: gen_qabstractitemmodel_types.QModelIndex): void =
+  fcQColumnView_virtualbase_currentChanged(self.h, current.h, previous.h)
+
+proc QColumnViewscrollContentsBy*(self: gen_qcolumnview_types.QColumnView, dx: cint, dy: cint): void =
+  fcQColumnView_virtualbase_scrollContentsBy(self.h, dx, dy)
+
+proc QColumnViewcreateColumn*(self: gen_qcolumnview_types.QColumnView, rootIndex: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemview_types.QAbstractItemView =
+  gen_qabstractitemview_types.QAbstractItemView(h: fcQColumnView_virtualbase_createColumn(self.h, rootIndex.h), owned: false)
+
+proc QColumnViewkeyboardSearch*(self: gen_qcolumnview_types.QColumnView, search: openArray[char]): void =
+  fcQColumnView_virtualbase_keyboardSearch(self.h, struct_miqt_string(data: if len(search) > 0: addr search[0] else: nil, len: csize_t(len(search))))
+
+proc QColumnViewsizeHintForRow*(self: gen_qcolumnview_types.QColumnView, row: cint): cint =
+  fcQColumnView_virtualbase_sizeHintForRow(self.h, row)
+
+proc QColumnViewsizeHintForColumn*(self: gen_qcolumnview_types.QColumnView, column: cint): cint =
+  fcQColumnView_virtualbase_sizeHintForColumn(self.h, column)
+
+proc QColumnViewinputMethodQuery*(self: gen_qcolumnview_types.QColumnView, query: cint): gen_qvariant_types.QVariant =
+  gen_qvariant_types.QVariant(h: fcQColumnView_virtualbase_inputMethodQuery(self.h, cint(query)), owned: true)
+
+proc QColumnViewreset*(self: gen_qcolumnview_types.QColumnView): void =
+  fcQColumnView_virtualbase_reset(self.h)
+
+proc QColumnViewdoItemsLayout*(self: gen_qcolumnview_types.QColumnView): void =
+  fcQColumnView_virtualbase_doItemsLayout(self.h)
+
+proc QColumnViewdataChanged*(self: gen_qcolumnview_types.QColumnView, topLeft: gen_qabstractitemmodel_types.QModelIndex, bottomRight: gen_qabstractitemmodel_types.QModelIndex, roles: openArray[cint]): void =
+  var roles_CArray = newSeq[cint](len(roles))
+  for i in 0..<len(roles):
+    roles_CArray[i] = roles[i]
+
+  fcQColumnView_virtualbase_dataChanged(self.h, topLeft.h, bottomRight.h, struct_miqt_array(len: csize_t(len(roles)), data: if len(roles) == 0: nil else: addr(roles_CArray[0])))
+
+proc QColumnViewrowsAboutToBeRemoved*(self: gen_qcolumnview_types.QColumnView, parent: gen_qabstractitemmodel_types.QModelIndex, start: cint, endVal: cint): void =
+  fcQColumnView_virtualbase_rowsAboutToBeRemoved(self.h, parent.h, start, endVal)
+
+proc QColumnViewselectionChanged*(self: gen_qcolumnview_types.QColumnView, selected: gen_qitemselectionmodel_types.QItemSelection, deselected: gen_qitemselectionmodel_types.QItemSelection): void =
+  fcQColumnView_virtualbase_selectionChanged(self.h, selected.h, deselected.h)
+
+proc QColumnViewupdateEditorData*(self: gen_qcolumnview_types.QColumnView): void =
+  fcQColumnView_virtualbase_updateEditorData(self.h)
+
+proc QColumnViewupdateEditorGeometries*(self: gen_qcolumnview_types.QColumnView): void =
+  fcQColumnView_virtualbase_updateEditorGeometries(self.h)
+
+proc QColumnViewupdateGeometries*(self: gen_qcolumnview_types.QColumnView): void =
+  fcQColumnView_virtualbase_updateGeometries(self.h)
+
+proc QColumnViewverticalScrollbarAction*(self: gen_qcolumnview_types.QColumnView, action: cint): void =
+  fcQColumnView_virtualbase_verticalScrollbarAction(self.h, action)
+
+proc QColumnViewhorizontalScrollbarAction*(self: gen_qcolumnview_types.QColumnView, action: cint): void =
+  fcQColumnView_virtualbase_horizontalScrollbarAction(self.h, action)
+
+proc QColumnViewverticalScrollbarValueChanged*(self: gen_qcolumnview_types.QColumnView, value: cint): void =
+  fcQColumnView_virtualbase_verticalScrollbarValueChanged(self.h, value)
+
+proc QColumnViewhorizontalScrollbarValueChanged*(self: gen_qcolumnview_types.QColumnView, value: cint): void =
+  fcQColumnView_virtualbase_horizontalScrollbarValueChanged(self.h, value)
+
+proc QColumnViewcloseEditor*(self: gen_qcolumnview_types.QColumnView, editor: gen_qwidget_types.QWidget, hint: cint): void =
+  fcQColumnView_virtualbase_closeEditor(self.h, editor.h, cint(hint))
+
+proc QColumnViewcommitData*(self: gen_qcolumnview_types.QColumnView, editor: gen_qwidget_types.QWidget): void =
+  fcQColumnView_virtualbase_commitData(self.h, editor.h)
+
+proc QColumnVieweditorDestroyed*(self: gen_qcolumnview_types.QColumnView, editor: gen_qobject_types.QObject): void =
+  fcQColumnView_virtualbase_editorDestroyed(self.h, editor.h)
+
+proc QColumnViewselectedIndexes*(self: gen_qcolumnview_types.QColumnView): seq[gen_qabstractitemmodel_types.QModelIndex] =
+  var v_ma = fcQColumnView_virtualbase_selectedIndexes(self.h)
+  var vx_ret = newSeq[gen_qabstractitemmodel_types.QModelIndex](int(v_ma.len))
+  let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
+  for i in 0 ..< v_ma.len:
+    vx_ret[i] = gen_qabstractitemmodel_types.QModelIndex(h: v_outCast[i], owned: true)
+  c_free(v_ma.data)
+  vx_ret
+
+proc QColumnViewedit*(self: gen_qcolumnview_types.QColumnView, index: gen_qabstractitemmodel_types.QModelIndex, trigger: cint, event: gen_qcoreevent_types.QEvent): bool =
+  fcQColumnView_virtualbase_edit2(self.h, index.h, cint(trigger), event.h)
+
+proc QColumnViewselectionCommand*(self: gen_qcolumnview_types.QColumnView, index: gen_qabstractitemmodel_types.QModelIndex, event: gen_qcoreevent_types.QEvent): cint =
+  cint(fcQColumnView_virtualbase_selectionCommand(self.h, index.h, event.h))
+
+proc QColumnViewstartDrag*(self: gen_qcolumnview_types.QColumnView, supportedActions: cint): void =
+  fcQColumnView_virtualbase_startDrag(self.h, cint(supportedActions))
+
+proc QColumnViewviewOptions*(self: gen_qcolumnview_types.QColumnView): gen_qstyleoption_types.QStyleOptionViewItem =
+  gen_qstyleoption_types.QStyleOptionViewItem(h: fcQColumnView_virtualbase_viewOptions(self.h), owned: true)
+
+proc QColumnViewfocusNextPrevChild*(self: gen_qcolumnview_types.QColumnView, next: bool): bool =
+  fcQColumnView_virtualbase_focusNextPrevChild(self.h, next)
+
+proc QColumnViewevent*(self: gen_qcolumnview_types.QColumnView, event: gen_qcoreevent_types.QEvent): bool =
+  fcQColumnView_virtualbase_event(self.h, event.h)
+
+proc QColumnViewviewportEvent*(self: gen_qcolumnview_types.QColumnView, event: gen_qcoreevent_types.QEvent): bool =
+  fcQColumnView_virtualbase_viewportEvent(self.h, event.h)
+
+proc QColumnViewmousePressEvent*(self: gen_qcolumnview_types.QColumnView, event: gen_qevent_types.QMouseEvent): void =
+  fcQColumnView_virtualbase_mousePressEvent(self.h, event.h)
+
+proc QColumnViewmouseMoveEvent*(self: gen_qcolumnview_types.QColumnView, event: gen_qevent_types.QMouseEvent): void =
+  fcQColumnView_virtualbase_mouseMoveEvent(self.h, event.h)
+
+proc QColumnViewmouseReleaseEvent*(self: gen_qcolumnview_types.QColumnView, event: gen_qevent_types.QMouseEvent): void =
+  fcQColumnView_virtualbase_mouseReleaseEvent(self.h, event.h)
+
+proc QColumnViewmouseDoubleClickEvent*(self: gen_qcolumnview_types.QColumnView, event: gen_qevent_types.QMouseEvent): void =
+  fcQColumnView_virtualbase_mouseDoubleClickEvent(self.h, event.h)
+
+proc QColumnViewdragEnterEvent*(self: gen_qcolumnview_types.QColumnView, event: gen_qevent_types.QDragEnterEvent): void =
+  fcQColumnView_virtualbase_dragEnterEvent(self.h, event.h)
+
+proc QColumnViewdragMoveEvent*(self: gen_qcolumnview_types.QColumnView, event: gen_qevent_types.QDragMoveEvent): void =
+  fcQColumnView_virtualbase_dragMoveEvent(self.h, event.h)
+
+proc QColumnViewdragLeaveEvent*(self: gen_qcolumnview_types.QColumnView, event: gen_qevent_types.QDragLeaveEvent): void =
+  fcQColumnView_virtualbase_dragLeaveEvent(self.h, event.h)
+
+proc QColumnViewdropEvent*(self: gen_qcolumnview_types.QColumnView, event: gen_qevent_types.QDropEvent): void =
+  fcQColumnView_virtualbase_dropEvent(self.h, event.h)
+
+proc QColumnViewfocusInEvent*(self: gen_qcolumnview_types.QColumnView, event: gen_qevent_types.QFocusEvent): void =
+  fcQColumnView_virtualbase_focusInEvent(self.h, event.h)
+
+proc QColumnViewfocusOutEvent*(self: gen_qcolumnview_types.QColumnView, event: gen_qevent_types.QFocusEvent): void =
+  fcQColumnView_virtualbase_focusOutEvent(self.h, event.h)
+
+proc QColumnViewkeyPressEvent*(self: gen_qcolumnview_types.QColumnView, event: gen_qevent_types.QKeyEvent): void =
+  fcQColumnView_virtualbase_keyPressEvent(self.h, event.h)
+
+proc QColumnViewtimerEvent*(self: gen_qcolumnview_types.QColumnView, event: gen_qcoreevent_types.QTimerEvent): void =
+  fcQColumnView_virtualbase_timerEvent(self.h, event.h)
+
+proc QColumnViewinputMethodEvent*(self: gen_qcolumnview_types.QColumnView, event: gen_qevent_types.QInputMethodEvent): void =
+  fcQColumnView_virtualbase_inputMethodEvent(self.h, event.h)
+
+proc QColumnVieweventFilter*(self: gen_qcolumnview_types.QColumnView, objectVal: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
+  fcQColumnView_virtualbase_eventFilter(self.h, objectVal.h, event.h)
+
+proc QColumnViewviewportSizeHint*(self: gen_qcolumnview_types.QColumnView): gen_qsize_types.QSize =
+  gen_qsize_types.QSize(h: fcQColumnView_virtualbase_viewportSizeHint(self.h), owned: true)
+
+proc QColumnViewminimumSizeHint*(self: gen_qcolumnview_types.QColumnView): gen_qsize_types.QSize =
+  gen_qsize_types.QSize(h: fcQColumnView_virtualbase_minimumSizeHint(self.h), owned: true)
+
+proc QColumnViewsetupViewport*(self: gen_qcolumnview_types.QColumnView, viewport: gen_qwidget_types.QWidget): void =
+  fcQColumnView_virtualbase_setupViewport(self.h, viewport.h)
+
+proc QColumnViewpaintEvent*(self: gen_qcolumnview_types.QColumnView, param1: gen_qevent_types.QPaintEvent): void =
+  fcQColumnView_virtualbase_paintEvent(self.h, param1.h)
+
+proc QColumnViewwheelEvent*(self: gen_qcolumnview_types.QColumnView, param1: gen_qevent_types.QWheelEvent): void =
+  fcQColumnView_virtualbase_wheelEvent(self.h, param1.h)
+
+proc QColumnViewcontextMenuEvent*(self: gen_qcolumnview_types.QColumnView, param1: gen_qevent_types.QContextMenuEvent): void =
+  fcQColumnView_virtualbase_contextMenuEvent(self.h, param1.h)
+
+proc QColumnViewchangeEvent*(self: gen_qcolumnview_types.QColumnView, param1: gen_qcoreevent_types.QEvent): void =
+  fcQColumnView_virtualbase_changeEvent(self.h, param1.h)
+
+proc QColumnViewdevType*(self: gen_qcolumnview_types.QColumnView): cint =
+  fcQColumnView_virtualbase_devType(self.h)
+
+proc QColumnViewsetVisible*(self: gen_qcolumnview_types.QColumnView, visible: bool): void =
+  fcQColumnView_virtualbase_setVisible(self.h, visible)
+
+proc QColumnViewheightForWidth*(self: gen_qcolumnview_types.QColumnView, param1: cint): cint =
+  fcQColumnView_virtualbase_heightForWidth(self.h, param1)
+
+proc QColumnViewhasHeightForWidth*(self: gen_qcolumnview_types.QColumnView): bool =
+  fcQColumnView_virtualbase_hasHeightForWidth(self.h)
+
+proc QColumnViewpaintEngine*(self: gen_qcolumnview_types.QColumnView): gen_qpaintengine_types.QPaintEngine =
+  gen_qpaintengine_types.QPaintEngine(h: fcQColumnView_virtualbase_paintEngine(self.h), owned: false)
+
+proc QColumnViewkeyReleaseEvent*(self: gen_qcolumnview_types.QColumnView, event: gen_qevent_types.QKeyEvent): void =
+  fcQColumnView_virtualbase_keyReleaseEvent(self.h, event.h)
+
+proc QColumnViewenterEvent*(self: gen_qcolumnview_types.QColumnView, event: gen_qcoreevent_types.QEvent): void =
+  fcQColumnView_virtualbase_enterEvent(self.h, event.h)
+
+proc QColumnViewleaveEvent*(self: gen_qcolumnview_types.QColumnView, event: gen_qcoreevent_types.QEvent): void =
+  fcQColumnView_virtualbase_leaveEvent(self.h, event.h)
+
+proc QColumnViewmoveEvent*(self: gen_qcolumnview_types.QColumnView, event: gen_qevent_types.QMoveEvent): void =
+  fcQColumnView_virtualbase_moveEvent(self.h, event.h)
+
+proc QColumnViewcloseEvent*(self: gen_qcolumnview_types.QColumnView, event: gen_qevent_types.QCloseEvent): void =
+  fcQColumnView_virtualbase_closeEvent(self.h, event.h)
+
+proc QColumnViewtabletEvent*(self: gen_qcolumnview_types.QColumnView, event: gen_qevent_types.QTabletEvent): void =
+  fcQColumnView_virtualbase_tabletEvent(self.h, event.h)
+
+proc QColumnViewactionEvent*(self: gen_qcolumnview_types.QColumnView, event: gen_qevent_types.QActionEvent): void =
+  fcQColumnView_virtualbase_actionEvent(self.h, event.h)
+
+proc QColumnViewshowEvent*(self: gen_qcolumnview_types.QColumnView, event: gen_qevent_types.QShowEvent): void =
+  fcQColumnView_virtualbase_showEvent(self.h, event.h)
+
+proc QColumnViewhideEvent*(self: gen_qcolumnview_types.QColumnView, event: gen_qevent_types.QHideEvent): void =
+  fcQColumnView_virtualbase_hideEvent(self.h, event.h)
+
+proc QColumnViewnativeEvent*(self: gen_qcolumnview_types.QColumnView, eventType: openArray[byte], message: pointer, resultVal: ptr clong): bool =
+  fcQColumnView_virtualbase_nativeEvent(self.h, struct_miqt_string(data: cast[cstring](if len(eventType) == 0: nil else: unsafeAddr eventType[0]), len: csize_t(len(eventType))), message, resultVal)
+
+proc QColumnViewmetric*(self: gen_qcolumnview_types.QColumnView, param1: cint): cint =
+  fcQColumnView_virtualbase_metric(self.h, cint(param1))
+
+proc QColumnViewinitPainter*(self: gen_qcolumnview_types.QColumnView, painter: gen_qpainter_types.QPainter): void =
+  fcQColumnView_virtualbase_initPainter(self.h, painter.h)
+
+proc QColumnViewredirected*(self: gen_qcolumnview_types.QColumnView, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice =
+  gen_qpaintdevice_types.QPaintDevice(h: fcQColumnView_virtualbase_redirected(self.h, offset.h), owned: false)
+
+proc QColumnViewsharedPainter*(self: gen_qcolumnview_types.QColumnView): gen_qpainter_types.QPainter =
+  gen_qpainter_types.QPainter(h: fcQColumnView_virtualbase_sharedPainter(self.h), owned: false)
+
+proc QColumnViewchildEvent*(self: gen_qcolumnview_types.QColumnView, event: gen_qcoreevent_types.QChildEvent): void =
+  fcQColumnView_virtualbase_childEvent(self.h, event.h)
+
+proc QColumnViewcustomEvent*(self: gen_qcolumnview_types.QColumnView, event: gen_qcoreevent_types.QEvent): void =
+  fcQColumnView_virtualbase_customEvent(self.h, event.h)
+
+proc QColumnViewconnectNotify*(self: gen_qcolumnview_types.QColumnView, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQColumnView_virtualbase_connectNotify(self.h, signal.h)
+
+proc QColumnViewdisconnectNotify*(self: gen_qcolumnview_types.QColumnView, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQColumnView_virtualbase_disconnectNotify(self.h, signal.h)
+
+
+proc fcQColumnView_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QColumnViewVTable](fcQColumnView_vdata(self))
   let self = QColumnView(h: self)
   var virtualReturn = vtbl[].metaObject(self)
@@ -647,20 +937,14 @@ proc cQColumnView_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QColumnViewmetacast*(self: gen_qcolumnview_types.QColumnView, param1: cstring): pointer =
-  fcQColumnView_virtualbase_metacast(self.h, param1)
-
-proc cQColumnView_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+proc fcQColumnView_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QColumnViewVTable](fcQColumnView_vdata(self))
   let self = QColumnView(h: self)
   let slotval1 = (param1)
   var virtualReturn = vtbl[].metacast(self, slotval1)
   virtualReturn
 
-proc QColumnViewmetacall*(self: gen_qcolumnview_types.QColumnView, param1: cint, param2: cint, param3: pointer): cint =
-  fcQColumnView_virtualbase_metacall(self.h, cint(param1), param2, param3)
-
-proc cQColumnView_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+proc fcQColumnView_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QColumnViewVTable](fcQColumnView_vdata(self))
   let self = QColumnView(h: self)
   let slotval1 = cint(param1)
@@ -669,10 +953,7 @@ proc cQColumnView_vtable_callback_metacall(self: pointer, param1: cint, param2: 
   var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QColumnViewindexAt*(self: gen_qcolumnview_types.QColumnView, point: gen_qpoint_types.QPoint): gen_qabstractitemmodel_types.QModelIndex =
-  gen_qabstractitemmodel_types.QModelIndex(h: fcQColumnView_virtualbase_indexAt(self.h, point.h), owned: true)
-
-proc cQColumnView_vtable_callback_indexAt(self: pointer, point: pointer): pointer {.cdecl.} =
+proc fcQColumnView_vtable_callback_indexAt(self: pointer, point: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QColumnViewVTable](fcQColumnView_vdata(self))
   let self = QColumnView(h: self)
   let slotval1 = gen_qpoint_types.QPoint(h: point, owned: false)
@@ -682,20 +963,14 @@ proc cQColumnView_vtable_callback_indexAt(self: pointer, point: pointer): pointe
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QColumnViewscrollTo*(self: gen_qcolumnview_types.QColumnView, index: gen_qabstractitemmodel_types.QModelIndex, hint: cint): void =
-  fcQColumnView_virtualbase_scrollTo(self.h, index.h, cint(hint))
-
-proc cQColumnView_vtable_callback_scrollTo(self: pointer, index: pointer, hint: cint): void {.cdecl.} =
+proc fcQColumnView_vtable_callback_scrollTo(self: pointer, index: pointer, hint: cint): void {.cdecl.} =
   let vtbl = cast[ptr QColumnViewVTable](fcQColumnView_vdata(self))
   let self = QColumnView(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   let slotval2 = cint(hint)
   vtbl[].scrollTo(self, slotval1, slotval2)
 
-proc QColumnViewsizeHint*(self: gen_qcolumnview_types.QColumnView): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQColumnView_virtualbase_sizeHint(self.h), owned: true)
-
-proc cQColumnView_vtable_callback_sizeHint(self: pointer): pointer {.cdecl.} =
+proc fcQColumnView_vtable_callback_sizeHint(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QColumnViewVTable](fcQColumnView_vdata(self))
   let self = QColumnView(h: self)
   var virtualReturn = vtbl[].sizeHint(self)
@@ -704,10 +979,7 @@ proc cQColumnView_vtable_callback_sizeHint(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QColumnViewvisualRect*(self: gen_qcolumnview_types.QColumnView, index: gen_qabstractitemmodel_types.QModelIndex): gen_qrect_types.QRect =
-  gen_qrect_types.QRect(h: fcQColumnView_virtualbase_visualRect(self.h, index.h), owned: true)
-
-proc cQColumnView_vtable_callback_visualRect(self: pointer, index: pointer): pointer {.cdecl.} =
+proc fcQColumnView_vtable_callback_visualRect(self: pointer, index: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QColumnViewVTable](fcQColumnView_vdata(self))
   let self = QColumnView(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
@@ -717,55 +989,37 @@ proc cQColumnView_vtable_callback_visualRect(self: pointer, index: pointer): poi
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QColumnViewsetModel*(self: gen_qcolumnview_types.QColumnView, model: gen_qabstractitemmodel_types.QAbstractItemModel): void =
-  fcQColumnView_virtualbase_setModel(self.h, model.h)
-
-proc cQColumnView_vtable_callback_setModel(self: pointer, model: pointer): void {.cdecl.} =
+proc fcQColumnView_vtable_callback_setModel(self: pointer, model: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QColumnViewVTable](fcQColumnView_vdata(self))
   let self = QColumnView(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QAbstractItemModel(h: model, owned: false)
   vtbl[].setModel(self, slotval1)
 
-proc QColumnViewsetSelectionModel*(self: gen_qcolumnview_types.QColumnView, selectionModel: gen_qitemselectionmodel_types.QItemSelectionModel): void =
-  fcQColumnView_virtualbase_setSelectionModel(self.h, selectionModel.h)
-
-proc cQColumnView_vtable_callback_setSelectionModel(self: pointer, selectionModel: pointer): void {.cdecl.} =
+proc fcQColumnView_vtable_callback_setSelectionModel(self: pointer, selectionModel: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QColumnViewVTable](fcQColumnView_vdata(self))
   let self = QColumnView(h: self)
   let slotval1 = gen_qitemselectionmodel_types.QItemSelectionModel(h: selectionModel, owned: false)
   vtbl[].setSelectionModel(self, slotval1)
 
-proc QColumnViewsetRootIndex*(self: gen_qcolumnview_types.QColumnView, index: gen_qabstractitemmodel_types.QModelIndex): void =
-  fcQColumnView_virtualbase_setRootIndex(self.h, index.h)
-
-proc cQColumnView_vtable_callback_setRootIndex(self: pointer, index: pointer): void {.cdecl.} =
+proc fcQColumnView_vtable_callback_setRootIndex(self: pointer, index: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QColumnViewVTable](fcQColumnView_vdata(self))
   let self = QColumnView(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   vtbl[].setRootIndex(self, slotval1)
 
-proc QColumnViewselectAll*(self: gen_qcolumnview_types.QColumnView): void =
-  fcQColumnView_virtualbase_selectAll(self.h)
-
-proc cQColumnView_vtable_callback_selectAll(self: pointer): void {.cdecl.} =
+proc fcQColumnView_vtable_callback_selectAll(self: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QColumnViewVTable](fcQColumnView_vdata(self))
   let self = QColumnView(h: self)
   vtbl[].selectAll(self)
 
-proc QColumnViewisIndexHidden*(self: gen_qcolumnview_types.QColumnView, index: gen_qabstractitemmodel_types.QModelIndex): bool =
-  fcQColumnView_virtualbase_isIndexHidden(self.h, index.h)
-
-proc cQColumnView_vtable_callback_isIndexHidden(self: pointer, index: pointer): bool {.cdecl.} =
+proc fcQColumnView_vtable_callback_isIndexHidden(self: pointer, index: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QColumnViewVTable](fcQColumnView_vdata(self))
   let self = QColumnView(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var virtualReturn = vtbl[].isIndexHidden(self, slotval1)
   virtualReturn
 
-proc QColumnViewmoveCursor*(self: gen_qcolumnview_types.QColumnView, cursorAction: cint, modifiers: cint): gen_qabstractitemmodel_types.QModelIndex =
-  gen_qabstractitemmodel_types.QModelIndex(h: fcQColumnView_virtualbase_moveCursor(self.h, cint(cursorAction), cint(modifiers)), owned: true)
-
-proc cQColumnView_vtable_callback_moveCursor(self: pointer, cursorAction: cint, modifiers: cint): pointer {.cdecl.} =
+proc fcQColumnView_vtable_callback_moveCursor(self: pointer, cursorAction: cint, modifiers: cint): pointer {.cdecl.} =
   let vtbl = cast[ptr QColumnViewVTable](fcQColumnView_vdata(self))
   let self = QColumnView(h: self)
   let slotval1 = cint(cursorAction)
@@ -776,29 +1030,20 @@ proc cQColumnView_vtable_callback_moveCursor(self: pointer, cursorAction: cint, 
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QColumnViewresizeEvent*(self: gen_qcolumnview_types.QColumnView, event: gen_qevent_types.QResizeEvent): void =
-  fcQColumnView_virtualbase_resizeEvent(self.h, event.h)
-
-proc cQColumnView_vtable_callback_resizeEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQColumnView_vtable_callback_resizeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QColumnViewVTable](fcQColumnView_vdata(self))
   let self = QColumnView(h: self)
   let slotval1 = gen_qevent_types.QResizeEvent(h: event, owned: false)
   vtbl[].resizeEvent(self, slotval1)
 
-proc QColumnViewsetSelection*(self: gen_qcolumnview_types.QColumnView, rect: gen_qrect_types.QRect, command: cint): void =
-  fcQColumnView_virtualbase_setSelection(self.h, rect.h, cint(command))
-
-proc cQColumnView_vtable_callback_setSelection(self: pointer, rect: pointer, command: cint): void {.cdecl.} =
+proc fcQColumnView_vtable_callback_setSelection(self: pointer, rect: pointer, command: cint): void {.cdecl.} =
   let vtbl = cast[ptr QColumnViewVTable](fcQColumnView_vdata(self))
   let self = QColumnView(h: self)
   let slotval1 = gen_qrect_types.QRect(h: rect, owned: false)
   let slotval2 = cint(command)
   vtbl[].setSelection(self, slotval1, slotval2)
 
-proc QColumnViewvisualRegionForSelection*(self: gen_qcolumnview_types.QColumnView, selection: gen_qitemselectionmodel_types.QItemSelection): gen_qregion_types.QRegion =
-  gen_qregion_types.QRegion(h: fcQColumnView_virtualbase_visualRegionForSelection(self.h, selection.h), owned: true)
-
-proc cQColumnView_vtable_callback_visualRegionForSelection(self: pointer, selection: pointer): pointer {.cdecl.} =
+proc fcQColumnView_vtable_callback_visualRegionForSelection(self: pointer, selection: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QColumnViewVTable](fcQColumnView_vdata(self))
   let self = QColumnView(h: self)
   let slotval1 = gen_qitemselectionmodel_types.QItemSelection(h: selection, owned: false)
@@ -808,28 +1053,19 @@ proc cQColumnView_vtable_callback_visualRegionForSelection(self: pointer, select
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QColumnViewhorizontalOffset*(self: gen_qcolumnview_types.QColumnView): cint =
-  fcQColumnView_virtualbase_horizontalOffset(self.h)
-
-proc cQColumnView_vtable_callback_horizontalOffset(self: pointer): cint {.cdecl.} =
+proc fcQColumnView_vtable_callback_horizontalOffset(self: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QColumnViewVTable](fcQColumnView_vdata(self))
   let self = QColumnView(h: self)
   var virtualReturn = vtbl[].horizontalOffset(self)
   virtualReturn
 
-proc QColumnViewverticalOffset*(self: gen_qcolumnview_types.QColumnView): cint =
-  fcQColumnView_virtualbase_verticalOffset(self.h)
-
-proc cQColumnView_vtable_callback_verticalOffset(self: pointer): cint {.cdecl.} =
+proc fcQColumnView_vtable_callback_verticalOffset(self: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QColumnViewVTable](fcQColumnView_vdata(self))
   let self = QColumnView(h: self)
   var virtualReturn = vtbl[].verticalOffset(self)
   virtualReturn
 
-proc QColumnViewrowsInserted*(self: gen_qcolumnview_types.QColumnView, parent: gen_qabstractitemmodel_types.QModelIndex, start: cint, endVal: cint): void =
-  fcQColumnView_virtualbase_rowsInserted(self.h, parent.h, start, endVal)
-
-proc cQColumnView_vtable_callback_rowsInserted(self: pointer, parent: pointer, start: cint, endVal: cint): void {.cdecl.} =
+proc fcQColumnView_vtable_callback_rowsInserted(self: pointer, parent: pointer, start: cint, endVal: cint): void {.cdecl.} =
   let vtbl = cast[ptr QColumnViewVTable](fcQColumnView_vdata(self))
   let self = QColumnView(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
@@ -837,30 +1073,21 @@ proc cQColumnView_vtable_callback_rowsInserted(self: pointer, parent: pointer, s
   let slotval3 = endVal
   vtbl[].rowsInserted(self, slotval1, slotval2, slotval3)
 
-proc QColumnViewcurrentChanged*(self: gen_qcolumnview_types.QColumnView, current: gen_qabstractitemmodel_types.QModelIndex, previous: gen_qabstractitemmodel_types.QModelIndex): void =
-  fcQColumnView_virtualbase_currentChanged(self.h, current.h, previous.h)
-
-proc cQColumnView_vtable_callback_currentChanged(self: pointer, current: pointer, previous: pointer): void {.cdecl.} =
+proc fcQColumnView_vtable_callback_currentChanged(self: pointer, current: pointer, previous: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QColumnViewVTable](fcQColumnView_vdata(self))
   let self = QColumnView(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: current, owned: false)
   let slotval2 = gen_qabstractitemmodel_types.QModelIndex(h: previous, owned: false)
   vtbl[].currentChanged(self, slotval1, slotval2)
 
-proc QColumnViewscrollContentsBy*(self: gen_qcolumnview_types.QColumnView, dx: cint, dy: cint): void =
-  fcQColumnView_virtualbase_scrollContentsBy(self.h, dx, dy)
-
-proc cQColumnView_vtable_callback_scrollContentsBy(self: pointer, dx: cint, dy: cint): void {.cdecl.} =
+proc fcQColumnView_vtable_callback_scrollContentsBy(self: pointer, dx: cint, dy: cint): void {.cdecl.} =
   let vtbl = cast[ptr QColumnViewVTable](fcQColumnView_vdata(self))
   let self = QColumnView(h: self)
   let slotval1 = dx
   let slotval2 = dy
   vtbl[].scrollContentsBy(self, slotval1, slotval2)
 
-proc QColumnViewcreateColumn*(self: gen_qcolumnview_types.QColumnView, rootIndex: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemview_types.QAbstractItemView =
-  gen_qabstractitemview_types.QAbstractItemView(h: fcQColumnView_virtualbase_createColumn(self.h, rootIndex.h), owned: false)
-
-proc cQColumnView_vtable_callback_createColumn(self: pointer, rootIndex: pointer): pointer {.cdecl.} =
+proc fcQColumnView_vtable_callback_createColumn(self: pointer, rootIndex: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QColumnViewVTable](fcQColumnView_vdata(self))
   let self = QColumnView(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: rootIndex, owned: false)
@@ -870,10 +1097,7 @@ proc cQColumnView_vtable_callback_createColumn(self: pointer, rootIndex: pointer
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QColumnViewkeyboardSearch*(self: gen_qcolumnview_types.QColumnView, search: openArray[char]): void =
-  fcQColumnView_virtualbase_keyboardSearch(self.h, struct_miqt_string(data: if len(search) > 0: addr search[0] else: nil, len: csize_t(len(search))))
-
-proc cQColumnView_vtable_callback_keyboardSearch(self: pointer, search: struct_miqt_string): void {.cdecl.} =
+proc fcQColumnView_vtable_callback_keyboardSearch(self: pointer, search: struct_miqt_string): void {.cdecl.} =
   let vtbl = cast[ptr QColumnViewVTable](fcQColumnView_vdata(self))
   let self = QColumnView(h: self)
   let vsearch_ms = search
@@ -882,30 +1106,21 @@ proc cQColumnView_vtable_callback_keyboardSearch(self: pointer, search: struct_m
   let slotval1 = vsearchx_ret
   vtbl[].keyboardSearch(self, slotval1)
 
-proc QColumnViewsizeHintForRow*(self: gen_qcolumnview_types.QColumnView, row: cint): cint =
-  fcQColumnView_virtualbase_sizeHintForRow(self.h, row)
-
-proc cQColumnView_vtable_callback_sizeHintForRow(self: pointer, row: cint): cint {.cdecl.} =
+proc fcQColumnView_vtable_callback_sizeHintForRow(self: pointer, row: cint): cint {.cdecl.} =
   let vtbl = cast[ptr QColumnViewVTable](fcQColumnView_vdata(self))
   let self = QColumnView(h: self)
   let slotval1 = row
   var virtualReturn = vtbl[].sizeHintForRow(self, slotval1)
   virtualReturn
 
-proc QColumnViewsizeHintForColumn*(self: gen_qcolumnview_types.QColumnView, column: cint): cint =
-  fcQColumnView_virtualbase_sizeHintForColumn(self.h, column)
-
-proc cQColumnView_vtable_callback_sizeHintForColumn(self: pointer, column: cint): cint {.cdecl.} =
+proc fcQColumnView_vtable_callback_sizeHintForColumn(self: pointer, column: cint): cint {.cdecl.} =
   let vtbl = cast[ptr QColumnViewVTable](fcQColumnView_vdata(self))
   let self = QColumnView(h: self)
   let slotval1 = column
   var virtualReturn = vtbl[].sizeHintForColumn(self, slotval1)
   virtualReturn
 
-proc QColumnViewinputMethodQuery*(self: gen_qcolumnview_types.QColumnView, query: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQColumnView_virtualbase_inputMethodQuery(self.h, cint(query)), owned: true)
-
-proc cQColumnView_vtable_callback_inputMethodQuery(self: pointer, query: cint): pointer {.cdecl.} =
+proc fcQColumnView_vtable_callback_inputMethodQuery(self: pointer, query: cint): pointer {.cdecl.} =
   let vtbl = cast[ptr QColumnViewVTable](fcQColumnView_vdata(self))
   let self = QColumnView(h: self)
   let slotval1 = cint(query)
@@ -915,30 +1130,17 @@ proc cQColumnView_vtable_callback_inputMethodQuery(self: pointer, query: cint): 
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QColumnViewreset*(self: gen_qcolumnview_types.QColumnView): void =
-  fcQColumnView_virtualbase_reset(self.h)
-
-proc cQColumnView_vtable_callback_reset(self: pointer): void {.cdecl.} =
+proc fcQColumnView_vtable_callback_reset(self: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QColumnViewVTable](fcQColumnView_vdata(self))
   let self = QColumnView(h: self)
   vtbl[].reset(self)
 
-proc QColumnViewdoItemsLayout*(self: gen_qcolumnview_types.QColumnView): void =
-  fcQColumnView_virtualbase_doItemsLayout(self.h)
-
-proc cQColumnView_vtable_callback_doItemsLayout(self: pointer): void {.cdecl.} =
+proc fcQColumnView_vtable_callback_doItemsLayout(self: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QColumnViewVTable](fcQColumnView_vdata(self))
   let self = QColumnView(h: self)
   vtbl[].doItemsLayout(self)
 
-proc QColumnViewdataChanged*(self: gen_qcolumnview_types.QColumnView, topLeft: gen_qabstractitemmodel_types.QModelIndex, bottomRight: gen_qabstractitemmodel_types.QModelIndex, roles: openArray[cint]): void =
-  var roles_CArray = newSeq[cint](len(roles))
-  for i in 0..<len(roles):
-    roles_CArray[i] = roles[i]
-
-  fcQColumnView_virtualbase_dataChanged(self.h, topLeft.h, bottomRight.h, struct_miqt_array(len: csize_t(len(roles)), data: if len(roles) == 0: nil else: addr(roles_CArray[0])))
-
-proc cQColumnView_vtable_callback_dataChanged(self: pointer, topLeft: pointer, bottomRight: pointer, roles: struct_miqt_array): void {.cdecl.} =
+proc fcQColumnView_vtable_callback_dataChanged(self: pointer, topLeft: pointer, bottomRight: pointer, roles: struct_miqt_array): void {.cdecl.} =
   let vtbl = cast[ptr QColumnViewVTable](fcQColumnView_vdata(self))
   let self = QColumnView(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: topLeft, owned: false)
@@ -952,10 +1154,7 @@ proc cQColumnView_vtable_callback_dataChanged(self: pointer, topLeft: pointer, b
   let slotval3 = vrolesx_ret
   vtbl[].dataChanged(self, slotval1, slotval2, slotval3)
 
-proc QColumnViewrowsAboutToBeRemoved*(self: gen_qcolumnview_types.QColumnView, parent: gen_qabstractitemmodel_types.QModelIndex, start: cint, endVal: cint): void =
-  fcQColumnView_virtualbase_rowsAboutToBeRemoved(self.h, parent.h, start, endVal)
-
-proc cQColumnView_vtable_callback_rowsAboutToBeRemoved(self: pointer, parent: pointer, start: cint, endVal: cint): void {.cdecl.} =
+proc fcQColumnView_vtable_callback_rowsAboutToBeRemoved(self: pointer, parent: pointer, start: cint, endVal: cint): void {.cdecl.} =
   let vtbl = cast[ptr QColumnViewVTable](fcQColumnView_vdata(self))
   let self = QColumnView(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
@@ -963,114 +1162,72 @@ proc cQColumnView_vtable_callback_rowsAboutToBeRemoved(self: pointer, parent: po
   let slotval3 = endVal
   vtbl[].rowsAboutToBeRemoved(self, slotval1, slotval2, slotval3)
 
-proc QColumnViewselectionChanged*(self: gen_qcolumnview_types.QColumnView, selected: gen_qitemselectionmodel_types.QItemSelection, deselected: gen_qitemselectionmodel_types.QItemSelection): void =
-  fcQColumnView_virtualbase_selectionChanged(self.h, selected.h, deselected.h)
-
-proc cQColumnView_vtable_callback_selectionChanged(self: pointer, selected: pointer, deselected: pointer): void {.cdecl.} =
+proc fcQColumnView_vtable_callback_selectionChanged(self: pointer, selected: pointer, deselected: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QColumnViewVTable](fcQColumnView_vdata(self))
   let self = QColumnView(h: self)
   let slotval1 = gen_qitemselectionmodel_types.QItemSelection(h: selected, owned: false)
   let slotval2 = gen_qitemselectionmodel_types.QItemSelection(h: deselected, owned: false)
   vtbl[].selectionChanged(self, slotval1, slotval2)
 
-proc QColumnViewupdateEditorData*(self: gen_qcolumnview_types.QColumnView): void =
-  fcQColumnView_virtualbase_updateEditorData(self.h)
-
-proc cQColumnView_vtable_callback_updateEditorData(self: pointer): void {.cdecl.} =
+proc fcQColumnView_vtable_callback_updateEditorData(self: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QColumnViewVTable](fcQColumnView_vdata(self))
   let self = QColumnView(h: self)
   vtbl[].updateEditorData(self)
 
-proc QColumnViewupdateEditorGeometries*(self: gen_qcolumnview_types.QColumnView): void =
-  fcQColumnView_virtualbase_updateEditorGeometries(self.h)
-
-proc cQColumnView_vtable_callback_updateEditorGeometries(self: pointer): void {.cdecl.} =
+proc fcQColumnView_vtable_callback_updateEditorGeometries(self: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QColumnViewVTable](fcQColumnView_vdata(self))
   let self = QColumnView(h: self)
   vtbl[].updateEditorGeometries(self)
 
-proc QColumnViewupdateGeometries*(self: gen_qcolumnview_types.QColumnView): void =
-  fcQColumnView_virtualbase_updateGeometries(self.h)
-
-proc cQColumnView_vtable_callback_updateGeometries(self: pointer): void {.cdecl.} =
+proc fcQColumnView_vtable_callback_updateGeometries(self: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QColumnViewVTable](fcQColumnView_vdata(self))
   let self = QColumnView(h: self)
   vtbl[].updateGeometries(self)
 
-proc QColumnViewverticalScrollbarAction*(self: gen_qcolumnview_types.QColumnView, action: cint): void =
-  fcQColumnView_virtualbase_verticalScrollbarAction(self.h, action)
-
-proc cQColumnView_vtable_callback_verticalScrollbarAction(self: pointer, action: cint): void {.cdecl.} =
+proc fcQColumnView_vtable_callback_verticalScrollbarAction(self: pointer, action: cint): void {.cdecl.} =
   let vtbl = cast[ptr QColumnViewVTable](fcQColumnView_vdata(self))
   let self = QColumnView(h: self)
   let slotval1 = action
   vtbl[].verticalScrollbarAction(self, slotval1)
 
-proc QColumnViewhorizontalScrollbarAction*(self: gen_qcolumnview_types.QColumnView, action: cint): void =
-  fcQColumnView_virtualbase_horizontalScrollbarAction(self.h, action)
-
-proc cQColumnView_vtable_callback_horizontalScrollbarAction(self: pointer, action: cint): void {.cdecl.} =
+proc fcQColumnView_vtable_callback_horizontalScrollbarAction(self: pointer, action: cint): void {.cdecl.} =
   let vtbl = cast[ptr QColumnViewVTable](fcQColumnView_vdata(self))
   let self = QColumnView(h: self)
   let slotval1 = action
   vtbl[].horizontalScrollbarAction(self, slotval1)
 
-proc QColumnViewverticalScrollbarValueChanged*(self: gen_qcolumnview_types.QColumnView, value: cint): void =
-  fcQColumnView_virtualbase_verticalScrollbarValueChanged(self.h, value)
-
-proc cQColumnView_vtable_callback_verticalScrollbarValueChanged(self: pointer, value: cint): void {.cdecl.} =
+proc fcQColumnView_vtable_callback_verticalScrollbarValueChanged(self: pointer, value: cint): void {.cdecl.} =
   let vtbl = cast[ptr QColumnViewVTable](fcQColumnView_vdata(self))
   let self = QColumnView(h: self)
   let slotval1 = value
   vtbl[].verticalScrollbarValueChanged(self, slotval1)
 
-proc QColumnViewhorizontalScrollbarValueChanged*(self: gen_qcolumnview_types.QColumnView, value: cint): void =
-  fcQColumnView_virtualbase_horizontalScrollbarValueChanged(self.h, value)
-
-proc cQColumnView_vtable_callback_horizontalScrollbarValueChanged(self: pointer, value: cint): void {.cdecl.} =
+proc fcQColumnView_vtable_callback_horizontalScrollbarValueChanged(self: pointer, value: cint): void {.cdecl.} =
   let vtbl = cast[ptr QColumnViewVTable](fcQColumnView_vdata(self))
   let self = QColumnView(h: self)
   let slotval1 = value
   vtbl[].horizontalScrollbarValueChanged(self, slotval1)
 
-proc QColumnViewcloseEditor*(self: gen_qcolumnview_types.QColumnView, editor: gen_qwidget_types.QWidget, hint: cint): void =
-  fcQColumnView_virtualbase_closeEditor(self.h, editor.h, cint(hint))
-
-proc cQColumnView_vtable_callback_closeEditor(self: pointer, editor: pointer, hint: cint): void {.cdecl.} =
+proc fcQColumnView_vtable_callback_closeEditor(self: pointer, editor: pointer, hint: cint): void {.cdecl.} =
   let vtbl = cast[ptr QColumnViewVTable](fcQColumnView_vdata(self))
   let self = QColumnView(h: self)
   let slotval1 = gen_qwidget_types.QWidget(h: editor, owned: false)
   let slotval2 = cint(hint)
   vtbl[].closeEditor(self, slotval1, slotval2)
 
-proc QColumnViewcommitData*(self: gen_qcolumnview_types.QColumnView, editor: gen_qwidget_types.QWidget): void =
-  fcQColumnView_virtualbase_commitData(self.h, editor.h)
-
-proc cQColumnView_vtable_callback_commitData(self: pointer, editor: pointer): void {.cdecl.} =
+proc fcQColumnView_vtable_callback_commitData(self: pointer, editor: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QColumnViewVTable](fcQColumnView_vdata(self))
   let self = QColumnView(h: self)
   let slotval1 = gen_qwidget_types.QWidget(h: editor, owned: false)
   vtbl[].commitData(self, slotval1)
 
-proc QColumnVieweditorDestroyed*(self: gen_qcolumnview_types.QColumnView, editor: gen_qobject_types.QObject): void =
-  fcQColumnView_virtualbase_editorDestroyed(self.h, editor.h)
-
-proc cQColumnView_vtable_callback_editorDestroyed(self: pointer, editor: pointer): void {.cdecl.} =
+proc fcQColumnView_vtable_callback_editorDestroyed(self: pointer, editor: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QColumnViewVTable](fcQColumnView_vdata(self))
   let self = QColumnView(h: self)
   let slotval1 = gen_qobject_types.QObject(h: editor, owned: false)
   vtbl[].editorDestroyed(self, slotval1)
 
-proc QColumnViewselectedIndexes*(self: gen_qcolumnview_types.QColumnView): seq[gen_qabstractitemmodel_types.QModelIndex] =
-  var v_ma = fcQColumnView_virtualbase_selectedIndexes(self.h)
-  var vx_ret = newSeq[gen_qabstractitemmodel_types.QModelIndex](int(v_ma.len))
-  let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
-  for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qabstractitemmodel_types.QModelIndex(h: v_outCast[i], owned: true)
-  c_free(v_ma.data)
-  vx_ret
-
-proc cQColumnView_vtable_callback_selectedIndexes(self: pointer): struct_miqt_array {.cdecl.} =
+proc fcQColumnView_vtable_callback_selectedIndexes(self: pointer): struct_miqt_array {.cdecl.} =
   let vtbl = cast[ptr QColumnViewVTable](fcQColumnView_vdata(self))
   let self = QColumnView(h: self)
   var virtualReturn = vtbl[].selectedIndexes(self)
@@ -1083,10 +1240,7 @@ proc cQColumnView_vtable_callback_selectedIndexes(self: pointer): struct_miqt_ar
 
   struct_miqt_array(len: csize_t(len(virtualReturn)), data: if len(virtualReturn) == 0: nil else: addr(virtualReturn_CArray[0]))
 
-proc QColumnViewedit*(self: gen_qcolumnview_types.QColumnView, index: gen_qabstractitemmodel_types.QModelIndex, trigger: cint, event: gen_qcoreevent_types.QEvent): bool =
-  fcQColumnView_virtualbase_edit2(self.h, index.h, cint(trigger), event.h)
-
-proc cQColumnView_vtable_callback_edit2(self: pointer, index: pointer, trigger: cint, event: pointer): bool {.cdecl.} =
+proc fcQColumnView_vtable_callback_edit2(self: pointer, index: pointer, trigger: cint, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QColumnViewVTable](fcQColumnView_vdata(self))
   let self = QColumnView(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
@@ -1095,10 +1249,7 @@ proc cQColumnView_vtable_callback_edit2(self: pointer, index: pointer, trigger: 
   var virtualReturn = vtbl[].edit2(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QColumnViewselectionCommand*(self: gen_qcolumnview_types.QColumnView, index: gen_qabstractitemmodel_types.QModelIndex, event: gen_qcoreevent_types.QEvent): cint =
-  cint(fcQColumnView_virtualbase_selectionCommand(self.h, index.h, event.h))
-
-proc cQColumnView_vtable_callback_selectionCommand(self: pointer, index: pointer, event: pointer): cint {.cdecl.} =
+proc fcQColumnView_vtable_callback_selectionCommand(self: pointer, index: pointer, event: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QColumnViewVTable](fcQColumnView_vdata(self))
   let self = QColumnView(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
@@ -1106,19 +1257,13 @@ proc cQColumnView_vtable_callback_selectionCommand(self: pointer, index: pointer
   var virtualReturn = vtbl[].selectionCommand(self, slotval1, slotval2)
   cint(virtualReturn)
 
-proc QColumnViewstartDrag*(self: gen_qcolumnview_types.QColumnView, supportedActions: cint): void =
-  fcQColumnView_virtualbase_startDrag(self.h, cint(supportedActions))
-
-proc cQColumnView_vtable_callback_startDrag(self: pointer, supportedActions: cint): void {.cdecl.} =
+proc fcQColumnView_vtable_callback_startDrag(self: pointer, supportedActions: cint): void {.cdecl.} =
   let vtbl = cast[ptr QColumnViewVTable](fcQColumnView_vdata(self))
   let self = QColumnView(h: self)
   let slotval1 = cint(supportedActions)
   vtbl[].startDrag(self, slotval1)
 
-proc QColumnViewviewOptions*(self: gen_qcolumnview_types.QColumnView): gen_qstyleoption_types.QStyleOptionViewItem =
-  gen_qstyleoption_types.QStyleOptionViewItem(h: fcQColumnView_virtualbase_viewOptions(self.h), owned: true)
-
-proc cQColumnView_vtable_callback_viewOptions(self: pointer): pointer {.cdecl.} =
+proc fcQColumnView_vtable_callback_viewOptions(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QColumnViewVTable](fcQColumnView_vdata(self))
   let self = QColumnView(h: self)
   var virtualReturn = vtbl[].viewOptions(self)
@@ -1127,157 +1272,106 @@ proc cQColumnView_vtable_callback_viewOptions(self: pointer): pointer {.cdecl.} 
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QColumnViewfocusNextPrevChild*(self: gen_qcolumnview_types.QColumnView, next: bool): bool =
-  fcQColumnView_virtualbase_focusNextPrevChild(self.h, next)
-
-proc cQColumnView_vtable_callback_focusNextPrevChild(self: pointer, next: bool): bool {.cdecl.} =
+proc fcQColumnView_vtable_callback_focusNextPrevChild(self: pointer, next: bool): bool {.cdecl.} =
   let vtbl = cast[ptr QColumnViewVTable](fcQColumnView_vdata(self))
   let self = QColumnView(h: self)
   let slotval1 = next
   var virtualReturn = vtbl[].focusNextPrevChild(self, slotval1)
   virtualReturn
 
-proc QColumnViewevent*(self: gen_qcolumnview_types.QColumnView, event: gen_qcoreevent_types.QEvent): bool =
-  fcQColumnView_virtualbase_event(self.h, event.h)
-
-proc cQColumnView_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
+proc fcQColumnView_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QColumnViewVTable](fcQColumnView_vdata(self))
   let self = QColumnView(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
-proc QColumnViewviewportEvent*(self: gen_qcolumnview_types.QColumnView, event: gen_qcoreevent_types.QEvent): bool =
-  fcQColumnView_virtualbase_viewportEvent(self.h, event.h)
-
-proc cQColumnView_vtable_callback_viewportEvent(self: pointer, event: pointer): bool {.cdecl.} =
+proc fcQColumnView_vtable_callback_viewportEvent(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QColumnViewVTable](fcQColumnView_vdata(self))
   let self = QColumnView(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].viewportEvent(self, slotval1)
   virtualReturn
 
-proc QColumnViewmousePressEvent*(self: gen_qcolumnview_types.QColumnView, event: gen_qevent_types.QMouseEvent): void =
-  fcQColumnView_virtualbase_mousePressEvent(self.h, event.h)
-
-proc cQColumnView_vtable_callback_mousePressEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQColumnView_vtable_callback_mousePressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QColumnViewVTable](fcQColumnView_vdata(self))
   let self = QColumnView(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mousePressEvent(self, slotval1)
 
-proc QColumnViewmouseMoveEvent*(self: gen_qcolumnview_types.QColumnView, event: gen_qevent_types.QMouseEvent): void =
-  fcQColumnView_virtualbase_mouseMoveEvent(self.h, event.h)
-
-proc cQColumnView_vtable_callback_mouseMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQColumnView_vtable_callback_mouseMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QColumnViewVTable](fcQColumnView_vdata(self))
   let self = QColumnView(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseMoveEvent(self, slotval1)
 
-proc QColumnViewmouseReleaseEvent*(self: gen_qcolumnview_types.QColumnView, event: gen_qevent_types.QMouseEvent): void =
-  fcQColumnView_virtualbase_mouseReleaseEvent(self.h, event.h)
-
-proc cQColumnView_vtable_callback_mouseReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQColumnView_vtable_callback_mouseReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QColumnViewVTable](fcQColumnView_vdata(self))
   let self = QColumnView(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseReleaseEvent(self, slotval1)
 
-proc QColumnViewmouseDoubleClickEvent*(self: gen_qcolumnview_types.QColumnView, event: gen_qevent_types.QMouseEvent): void =
-  fcQColumnView_virtualbase_mouseDoubleClickEvent(self.h, event.h)
-
-proc cQColumnView_vtable_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQColumnView_vtable_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QColumnViewVTable](fcQColumnView_vdata(self))
   let self = QColumnView(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseDoubleClickEvent(self, slotval1)
 
-proc QColumnViewdragEnterEvent*(self: gen_qcolumnview_types.QColumnView, event: gen_qevent_types.QDragEnterEvent): void =
-  fcQColumnView_virtualbase_dragEnterEvent(self.h, event.h)
-
-proc cQColumnView_vtable_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQColumnView_vtable_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QColumnViewVTable](fcQColumnView_vdata(self))
   let self = QColumnView(h: self)
   let slotval1 = gen_qevent_types.QDragEnterEvent(h: event, owned: false)
   vtbl[].dragEnterEvent(self, slotval1)
 
-proc QColumnViewdragMoveEvent*(self: gen_qcolumnview_types.QColumnView, event: gen_qevent_types.QDragMoveEvent): void =
-  fcQColumnView_virtualbase_dragMoveEvent(self.h, event.h)
-
-proc cQColumnView_vtable_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQColumnView_vtable_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QColumnViewVTable](fcQColumnView_vdata(self))
   let self = QColumnView(h: self)
   let slotval1 = gen_qevent_types.QDragMoveEvent(h: event, owned: false)
   vtbl[].dragMoveEvent(self, slotval1)
 
-proc QColumnViewdragLeaveEvent*(self: gen_qcolumnview_types.QColumnView, event: gen_qevent_types.QDragLeaveEvent): void =
-  fcQColumnView_virtualbase_dragLeaveEvent(self.h, event.h)
-
-proc cQColumnView_vtable_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQColumnView_vtable_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QColumnViewVTable](fcQColumnView_vdata(self))
   let self = QColumnView(h: self)
   let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event, owned: false)
   vtbl[].dragLeaveEvent(self, slotval1)
 
-proc QColumnViewdropEvent*(self: gen_qcolumnview_types.QColumnView, event: gen_qevent_types.QDropEvent): void =
-  fcQColumnView_virtualbase_dropEvent(self.h, event.h)
-
-proc cQColumnView_vtable_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQColumnView_vtable_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QColumnViewVTable](fcQColumnView_vdata(self))
   let self = QColumnView(h: self)
   let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
   vtbl[].dropEvent(self, slotval1)
 
-proc QColumnViewfocusInEvent*(self: gen_qcolumnview_types.QColumnView, event: gen_qevent_types.QFocusEvent): void =
-  fcQColumnView_virtualbase_focusInEvent(self.h, event.h)
-
-proc cQColumnView_vtable_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQColumnView_vtable_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QColumnViewVTable](fcQColumnView_vdata(self))
   let self = QColumnView(h: self)
   let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusInEvent(self, slotval1)
 
-proc QColumnViewfocusOutEvent*(self: gen_qcolumnview_types.QColumnView, event: gen_qevent_types.QFocusEvent): void =
-  fcQColumnView_virtualbase_focusOutEvent(self.h, event.h)
-
-proc cQColumnView_vtable_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQColumnView_vtable_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QColumnViewVTable](fcQColumnView_vdata(self))
   let self = QColumnView(h: self)
   let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusOutEvent(self, slotval1)
 
-proc QColumnViewkeyPressEvent*(self: gen_qcolumnview_types.QColumnView, event: gen_qevent_types.QKeyEvent): void =
-  fcQColumnView_virtualbase_keyPressEvent(self.h, event.h)
-
-proc cQColumnView_vtable_callback_keyPressEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQColumnView_vtable_callback_keyPressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QColumnViewVTable](fcQColumnView_vdata(self))
   let self = QColumnView(h: self)
   let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   vtbl[].keyPressEvent(self, slotval1)
 
-proc QColumnViewtimerEvent*(self: gen_qcolumnview_types.QColumnView, event: gen_qcoreevent_types.QTimerEvent): void =
-  fcQColumnView_virtualbase_timerEvent(self.h, event.h)
-
-proc cQColumnView_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQColumnView_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QColumnViewVTable](fcQColumnView_vdata(self))
   let self = QColumnView(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
-proc QColumnViewinputMethodEvent*(self: gen_qcolumnview_types.QColumnView, event: gen_qevent_types.QInputMethodEvent): void =
-  fcQColumnView_virtualbase_inputMethodEvent(self.h, event.h)
-
-proc cQColumnView_vtable_callback_inputMethodEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQColumnView_vtable_callback_inputMethodEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QColumnViewVTable](fcQColumnView_vdata(self))
   let self = QColumnView(h: self)
   let slotval1 = gen_qevent_types.QInputMethodEvent(h: event, owned: false)
   vtbl[].inputMethodEvent(self, slotval1)
 
-proc QColumnVieweventFilter*(self: gen_qcolumnview_types.QColumnView, objectVal: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
-  fcQColumnView_virtualbase_eventFilter(self.h, objectVal.h, event.h)
-
-proc cQColumnView_vtable_callback_eventFilter(self: pointer, objectVal: pointer, event: pointer): bool {.cdecl.} =
+proc fcQColumnView_vtable_callback_eventFilter(self: pointer, objectVal: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QColumnViewVTable](fcQColumnView_vdata(self))
   let self = QColumnView(h: self)
   let slotval1 = gen_qobject_types.QObject(h: objectVal, owned: false)
@@ -1285,10 +1379,7 @@ proc cQColumnView_vtable_callback_eventFilter(self: pointer, objectVal: pointer,
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
-proc QColumnViewviewportSizeHint*(self: gen_qcolumnview_types.QColumnView): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQColumnView_virtualbase_viewportSizeHint(self.h), owned: true)
-
-proc cQColumnView_vtable_callback_viewportSizeHint(self: pointer): pointer {.cdecl.} =
+proc fcQColumnView_vtable_callback_viewportSizeHint(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QColumnViewVTable](fcQColumnView_vdata(self))
   let self = QColumnView(h: self)
   var virtualReturn = vtbl[].viewportSizeHint(self)
@@ -1297,10 +1388,7 @@ proc cQColumnView_vtable_callback_viewportSizeHint(self: pointer): pointer {.cde
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QColumnViewminimumSizeHint*(self: gen_qcolumnview_types.QColumnView): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQColumnView_virtualbase_minimumSizeHint(self.h), owned: true)
-
-proc cQColumnView_vtable_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
+proc fcQColumnView_vtable_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QColumnViewVTable](fcQColumnView_vdata(self))
   let self = QColumnView(h: self)
   var virtualReturn = vtbl[].minimumSizeHint(self)
@@ -1309,92 +1397,62 @@ proc cQColumnView_vtable_callback_minimumSizeHint(self: pointer): pointer {.cdec
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QColumnViewsetupViewport*(self: gen_qcolumnview_types.QColumnView, viewport: gen_qwidget_types.QWidget): void =
-  fcQColumnView_virtualbase_setupViewport(self.h, viewport.h)
-
-proc cQColumnView_vtable_callback_setupViewport(self: pointer, viewport: pointer): void {.cdecl.} =
+proc fcQColumnView_vtable_callback_setupViewport(self: pointer, viewport: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QColumnViewVTable](fcQColumnView_vdata(self))
   let self = QColumnView(h: self)
   let slotval1 = gen_qwidget_types.QWidget(h: viewport, owned: false)
   vtbl[].setupViewport(self, slotval1)
 
-proc QColumnViewpaintEvent*(self: gen_qcolumnview_types.QColumnView, param1: gen_qevent_types.QPaintEvent): void =
-  fcQColumnView_virtualbase_paintEvent(self.h, param1.h)
-
-proc cQColumnView_vtable_callback_paintEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQColumnView_vtable_callback_paintEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QColumnViewVTable](fcQColumnView_vdata(self))
   let self = QColumnView(h: self)
   let slotval1 = gen_qevent_types.QPaintEvent(h: param1, owned: false)
   vtbl[].paintEvent(self, slotval1)
 
-proc QColumnViewwheelEvent*(self: gen_qcolumnview_types.QColumnView, param1: gen_qevent_types.QWheelEvent): void =
-  fcQColumnView_virtualbase_wheelEvent(self.h, param1.h)
-
-proc cQColumnView_vtable_callback_wheelEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQColumnView_vtable_callback_wheelEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QColumnViewVTable](fcQColumnView_vdata(self))
   let self = QColumnView(h: self)
   let slotval1 = gen_qevent_types.QWheelEvent(h: param1, owned: false)
   vtbl[].wheelEvent(self, slotval1)
 
-proc QColumnViewcontextMenuEvent*(self: gen_qcolumnview_types.QColumnView, param1: gen_qevent_types.QContextMenuEvent): void =
-  fcQColumnView_virtualbase_contextMenuEvent(self.h, param1.h)
-
-proc cQColumnView_vtable_callback_contextMenuEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQColumnView_vtable_callback_contextMenuEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QColumnViewVTable](fcQColumnView_vdata(self))
   let self = QColumnView(h: self)
   let slotval1 = gen_qevent_types.QContextMenuEvent(h: param1, owned: false)
   vtbl[].contextMenuEvent(self, slotval1)
 
-proc QColumnViewchangeEvent*(self: gen_qcolumnview_types.QColumnView, param1: gen_qcoreevent_types.QEvent): void =
-  fcQColumnView_virtualbase_changeEvent(self.h, param1.h)
-
-proc cQColumnView_vtable_callback_changeEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQColumnView_vtable_callback_changeEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QColumnViewVTable](fcQColumnView_vdata(self))
   let self = QColumnView(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
   vtbl[].changeEvent(self, slotval1)
 
-proc QColumnViewdevType*(self: gen_qcolumnview_types.QColumnView): cint =
-  fcQColumnView_virtualbase_devType(self.h)
-
-proc cQColumnView_vtable_callback_devType(self: pointer): cint {.cdecl.} =
+proc fcQColumnView_vtable_callback_devType(self: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QColumnViewVTable](fcQColumnView_vdata(self))
   let self = QColumnView(h: self)
   var virtualReturn = vtbl[].devType(self)
   virtualReturn
 
-proc QColumnViewsetVisible*(self: gen_qcolumnview_types.QColumnView, visible: bool): void =
-  fcQColumnView_virtualbase_setVisible(self.h, visible)
-
-proc cQColumnView_vtable_callback_setVisible(self: pointer, visible: bool): void {.cdecl.} =
+proc fcQColumnView_vtable_callback_setVisible(self: pointer, visible: bool): void {.cdecl.} =
   let vtbl = cast[ptr QColumnViewVTable](fcQColumnView_vdata(self))
   let self = QColumnView(h: self)
   let slotval1 = visible
   vtbl[].setVisible(self, slotval1)
 
-proc QColumnViewheightForWidth*(self: gen_qcolumnview_types.QColumnView, param1: cint): cint =
-  fcQColumnView_virtualbase_heightForWidth(self.h, param1)
-
-proc cQColumnView_vtable_callback_heightForWidth(self: pointer, param1: cint): cint {.cdecl.} =
+proc fcQColumnView_vtable_callback_heightForWidth(self: pointer, param1: cint): cint {.cdecl.} =
   let vtbl = cast[ptr QColumnViewVTable](fcQColumnView_vdata(self))
   let self = QColumnView(h: self)
   let slotval1 = param1
   var virtualReturn = vtbl[].heightForWidth(self, slotval1)
   virtualReturn
 
-proc QColumnViewhasHeightForWidth*(self: gen_qcolumnview_types.QColumnView): bool =
-  fcQColumnView_virtualbase_hasHeightForWidth(self.h)
-
-proc cQColumnView_vtable_callback_hasHeightForWidth(self: pointer): bool {.cdecl.} =
+proc fcQColumnView_vtable_callback_hasHeightForWidth(self: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QColumnViewVTable](fcQColumnView_vdata(self))
   let self = QColumnView(h: self)
   var virtualReturn = vtbl[].hasHeightForWidth(self)
   virtualReturn
 
-proc QColumnViewpaintEngine*(self: gen_qcolumnview_types.QColumnView): gen_qpaintengine_types.QPaintEngine =
-  gen_qpaintengine_types.QPaintEngine(h: fcQColumnView_virtualbase_paintEngine(self.h), owned: false)
-
-proc cQColumnView_vtable_callback_paintEngine(self: pointer): pointer {.cdecl.} =
+proc fcQColumnView_vtable_callback_paintEngine(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QColumnViewVTable](fcQColumnView_vdata(self))
   let self = QColumnView(h: self)
   var virtualReturn = vtbl[].paintEngine(self)
@@ -1403,91 +1461,61 @@ proc cQColumnView_vtable_callback_paintEngine(self: pointer): pointer {.cdecl.} 
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QColumnViewkeyReleaseEvent*(self: gen_qcolumnview_types.QColumnView, event: gen_qevent_types.QKeyEvent): void =
-  fcQColumnView_virtualbase_keyReleaseEvent(self.h, event.h)
-
-proc cQColumnView_vtable_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQColumnView_vtable_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QColumnViewVTable](fcQColumnView_vdata(self))
   let self = QColumnView(h: self)
   let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   vtbl[].keyReleaseEvent(self, slotval1)
 
-proc QColumnViewenterEvent*(self: gen_qcolumnview_types.QColumnView, event: gen_qcoreevent_types.QEvent): void =
-  fcQColumnView_virtualbase_enterEvent(self.h, event.h)
-
-proc cQColumnView_vtable_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQColumnView_vtable_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QColumnViewVTable](fcQColumnView_vdata(self))
   let self = QColumnView(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].enterEvent(self, slotval1)
 
-proc QColumnViewleaveEvent*(self: gen_qcolumnview_types.QColumnView, event: gen_qcoreevent_types.QEvent): void =
-  fcQColumnView_virtualbase_leaveEvent(self.h, event.h)
-
-proc cQColumnView_vtable_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQColumnView_vtable_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QColumnViewVTable](fcQColumnView_vdata(self))
   let self = QColumnView(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].leaveEvent(self, slotval1)
 
-proc QColumnViewmoveEvent*(self: gen_qcolumnview_types.QColumnView, event: gen_qevent_types.QMoveEvent): void =
-  fcQColumnView_virtualbase_moveEvent(self.h, event.h)
-
-proc cQColumnView_vtable_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQColumnView_vtable_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QColumnViewVTable](fcQColumnView_vdata(self))
   let self = QColumnView(h: self)
   let slotval1 = gen_qevent_types.QMoveEvent(h: event, owned: false)
   vtbl[].moveEvent(self, slotval1)
 
-proc QColumnViewcloseEvent*(self: gen_qcolumnview_types.QColumnView, event: gen_qevent_types.QCloseEvent): void =
-  fcQColumnView_virtualbase_closeEvent(self.h, event.h)
-
-proc cQColumnView_vtable_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQColumnView_vtable_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QColumnViewVTable](fcQColumnView_vdata(self))
   let self = QColumnView(h: self)
   let slotval1 = gen_qevent_types.QCloseEvent(h: event, owned: false)
   vtbl[].closeEvent(self, slotval1)
 
-proc QColumnViewtabletEvent*(self: gen_qcolumnview_types.QColumnView, event: gen_qevent_types.QTabletEvent): void =
-  fcQColumnView_virtualbase_tabletEvent(self.h, event.h)
-
-proc cQColumnView_vtable_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQColumnView_vtable_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QColumnViewVTable](fcQColumnView_vdata(self))
   let self = QColumnView(h: self)
   let slotval1 = gen_qevent_types.QTabletEvent(h: event, owned: false)
   vtbl[].tabletEvent(self, slotval1)
 
-proc QColumnViewactionEvent*(self: gen_qcolumnview_types.QColumnView, event: gen_qevent_types.QActionEvent): void =
-  fcQColumnView_virtualbase_actionEvent(self.h, event.h)
-
-proc cQColumnView_vtable_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQColumnView_vtable_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QColumnViewVTable](fcQColumnView_vdata(self))
   let self = QColumnView(h: self)
   let slotval1 = gen_qevent_types.QActionEvent(h: event, owned: false)
   vtbl[].actionEvent(self, slotval1)
 
-proc QColumnViewshowEvent*(self: gen_qcolumnview_types.QColumnView, event: gen_qevent_types.QShowEvent): void =
-  fcQColumnView_virtualbase_showEvent(self.h, event.h)
-
-proc cQColumnView_vtable_callback_showEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQColumnView_vtable_callback_showEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QColumnViewVTable](fcQColumnView_vdata(self))
   let self = QColumnView(h: self)
   let slotval1 = gen_qevent_types.QShowEvent(h: event, owned: false)
   vtbl[].showEvent(self, slotval1)
 
-proc QColumnViewhideEvent*(self: gen_qcolumnview_types.QColumnView, event: gen_qevent_types.QHideEvent): void =
-  fcQColumnView_virtualbase_hideEvent(self.h, event.h)
-
-proc cQColumnView_vtable_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQColumnView_vtable_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QColumnViewVTable](fcQColumnView_vdata(self))
   let self = QColumnView(h: self)
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   vtbl[].hideEvent(self, slotval1)
 
-proc QColumnViewnativeEvent*(self: gen_qcolumnview_types.QColumnView, eventType: openArray[byte], message: pointer, resultVal: ptr clong): bool =
-  fcQColumnView_virtualbase_nativeEvent(self.h, struct_miqt_string(data: cast[cstring](if len(eventType) == 0: nil else: unsafeAddr eventType[0]), len: csize_t(len(eventType))), message, resultVal)
-
-proc cQColumnView_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr clong): bool {.cdecl.} =
+proc fcQColumnView_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr clong): bool {.cdecl.} =
   let vtbl = cast[ptr QColumnViewVTable](fcQColumnView_vdata(self))
   let self = QColumnView(h: self)
   var veventType_bytearray = eventType
@@ -1499,29 +1527,20 @@ proc cQColumnView_vtable_callback_nativeEvent(self: pointer, eventType: struct_m
   var virtualReturn = vtbl[].nativeEvent(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QColumnViewmetric*(self: gen_qcolumnview_types.QColumnView, param1: cint): cint =
-  fcQColumnView_virtualbase_metric(self.h, cint(param1))
-
-proc cQColumnView_vtable_callback_metric(self: pointer, param1: cint): cint {.cdecl.} =
+proc fcQColumnView_vtable_callback_metric(self: pointer, param1: cint): cint {.cdecl.} =
   let vtbl = cast[ptr QColumnViewVTable](fcQColumnView_vdata(self))
   let self = QColumnView(h: self)
   let slotval1 = cint(param1)
   var virtualReturn = vtbl[].metric(self, slotval1)
   virtualReturn
 
-proc QColumnViewinitPainter*(self: gen_qcolumnview_types.QColumnView, painter: gen_qpainter_types.QPainter): void =
-  fcQColumnView_virtualbase_initPainter(self.h, painter.h)
-
-proc cQColumnView_vtable_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
+proc fcQColumnView_vtable_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QColumnViewVTable](fcQColumnView_vdata(self))
   let self = QColumnView(h: self)
   let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
   vtbl[].initPainter(self, slotval1)
 
-proc QColumnViewredirected*(self: gen_qcolumnview_types.QColumnView, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice =
-  gen_qpaintdevice_types.QPaintDevice(h: fcQColumnView_virtualbase_redirected(self.h, offset.h), owned: false)
-
-proc cQColumnView_vtable_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
+proc fcQColumnView_vtable_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QColumnViewVTable](fcQColumnView_vdata(self))
   let self = QColumnView(h: self)
   let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
@@ -1531,10 +1550,7 @@ proc cQColumnView_vtable_callback_redirected(self: pointer, offset: pointer): po
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QColumnViewsharedPainter*(self: gen_qcolumnview_types.QColumnView): gen_qpainter_types.QPainter =
-  gen_qpainter_types.QPainter(h: fcQColumnView_virtualbase_sharedPainter(self.h), owned: false)
-
-proc cQColumnView_vtable_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
+proc fcQColumnView_vtable_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QColumnViewVTable](fcQColumnView_vdata(self))
   let self = QColumnView(h: self)
   var virtualReturn = vtbl[].sharedPainter(self)
@@ -1543,37 +1559,25 @@ proc cQColumnView_vtable_callback_sharedPainter(self: pointer): pointer {.cdecl.
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QColumnViewchildEvent*(self: gen_qcolumnview_types.QColumnView, event: gen_qcoreevent_types.QChildEvent): void =
-  fcQColumnView_virtualbase_childEvent(self.h, event.h)
-
-proc cQColumnView_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQColumnView_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QColumnViewVTable](fcQColumnView_vdata(self))
   let self = QColumnView(h: self)
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
-proc QColumnViewcustomEvent*(self: gen_qcolumnview_types.QColumnView, event: gen_qcoreevent_types.QEvent): void =
-  fcQColumnView_virtualbase_customEvent(self.h, event.h)
-
-proc cQColumnView_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQColumnView_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QColumnViewVTable](fcQColumnView_vdata(self))
   let self = QColumnView(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
-proc QColumnViewconnectNotify*(self: gen_qcolumnview_types.QColumnView, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQColumnView_virtualbase_connectNotify(self.h, signal.h)
-
-proc cQColumnView_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQColumnView_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QColumnViewVTable](fcQColumnView_vdata(self))
   let self = QColumnView(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
-proc QColumnViewdisconnectNotify*(self: gen_qcolumnview_types.QColumnView, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQColumnView_virtualbase_disconnectNotify(self.h, signal.h)
-
-proc cQColumnView_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQColumnView_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QColumnViewVTable](fcQColumnView_vdata(self))
   let self = QColumnView(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
@@ -1581,9 +1585,195 @@ proc cQColumnView_vtable_callback_disconnectNotify(self: pointer, signal: pointe
 
 type VirtualQColumnView* {.inheritable.} = ref object of QColumnView
   vtbl*: cQColumnViewVTable
+
 method metaObject*(self: VirtualQColumnView): gen_qobjectdefs_types.QMetaObject {.base.} =
   QColumnViewmetaObject(self[])
-proc cQColumnView_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
+method metacast*(self: VirtualQColumnView, param1: cstring): pointer {.base.} =
+  QColumnViewmetacast(self[], param1)
+method metacall*(self: VirtualQColumnView, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QColumnViewmetacall(self[], param1, param2, param3)
+method indexAt*(self: VirtualQColumnView, point: gen_qpoint_types.QPoint): gen_qabstractitemmodel_types.QModelIndex {.base.} =
+  QColumnViewindexAt(self[], point)
+method scrollTo*(self: VirtualQColumnView, index: gen_qabstractitemmodel_types.QModelIndex, hint: cint): void {.base.} =
+  QColumnViewscrollTo(self[], index, hint)
+method sizeHint*(self: VirtualQColumnView): gen_qsize_types.QSize {.base.} =
+  QColumnViewsizeHint(self[])
+method visualRect*(self: VirtualQColumnView, index: gen_qabstractitemmodel_types.QModelIndex): gen_qrect_types.QRect {.base.} =
+  QColumnViewvisualRect(self[], index)
+method setModel*(self: VirtualQColumnView, model: gen_qabstractitemmodel_types.QAbstractItemModel): void {.base.} =
+  QColumnViewsetModel(self[], model)
+method setSelectionModel*(self: VirtualQColumnView, selectionModel: gen_qitemselectionmodel_types.QItemSelectionModel): void {.base.} =
+  QColumnViewsetSelectionModel(self[], selectionModel)
+method setRootIndex*(self: VirtualQColumnView, index: gen_qabstractitemmodel_types.QModelIndex): void {.base.} =
+  QColumnViewsetRootIndex(self[], index)
+method selectAll*(self: VirtualQColumnView): void {.base.} =
+  QColumnViewselectAll(self[])
+method isIndexHidden*(self: VirtualQColumnView, index: gen_qabstractitemmodel_types.QModelIndex): bool {.base.} =
+  QColumnViewisIndexHidden(self[], index)
+method moveCursor*(self: VirtualQColumnView, cursorAction: cint, modifiers: cint): gen_qabstractitemmodel_types.QModelIndex {.base.} =
+  QColumnViewmoveCursor(self[], cursorAction, modifiers)
+method resizeEvent*(self: VirtualQColumnView, event: gen_qevent_types.QResizeEvent): void {.base.} =
+  QColumnViewresizeEvent(self[], event)
+method setSelection*(self: VirtualQColumnView, rect: gen_qrect_types.QRect, command: cint): void {.base.} =
+  QColumnViewsetSelection(self[], rect, command)
+method visualRegionForSelection*(self: VirtualQColumnView, selection: gen_qitemselectionmodel_types.QItemSelection): gen_qregion_types.QRegion {.base.} =
+  QColumnViewvisualRegionForSelection(self[], selection)
+method horizontalOffset*(self: VirtualQColumnView): cint {.base.} =
+  QColumnViewhorizontalOffset(self[])
+method verticalOffset*(self: VirtualQColumnView): cint {.base.} =
+  QColumnViewverticalOffset(self[])
+method rowsInserted*(self: VirtualQColumnView, parent: gen_qabstractitemmodel_types.QModelIndex, start: cint, endVal: cint): void {.base.} =
+  QColumnViewrowsInserted(self[], parent, start, endVal)
+method currentChanged*(self: VirtualQColumnView, current: gen_qabstractitemmodel_types.QModelIndex, previous: gen_qabstractitemmodel_types.QModelIndex): void {.base.} =
+  QColumnViewcurrentChanged(self[], current, previous)
+method scrollContentsBy*(self: VirtualQColumnView, dx: cint, dy: cint): void {.base.} =
+  QColumnViewscrollContentsBy(self[], dx, dy)
+method createColumn*(self: VirtualQColumnView, rootIndex: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemview_types.QAbstractItemView {.base.} =
+  QColumnViewcreateColumn(self[], rootIndex)
+method keyboardSearch*(self: VirtualQColumnView, search: openArray[char]): void {.base.} =
+  QColumnViewkeyboardSearch(self[], search)
+method sizeHintForRow*(self: VirtualQColumnView, row: cint): cint {.base.} =
+  QColumnViewsizeHintForRow(self[], row)
+method sizeHintForColumn*(self: VirtualQColumnView, column: cint): cint {.base.} =
+  QColumnViewsizeHintForColumn(self[], column)
+method inputMethodQuery*(self: VirtualQColumnView, query: cint): gen_qvariant_types.QVariant {.base.} =
+  QColumnViewinputMethodQuery(self[], query)
+method reset*(self: VirtualQColumnView): void {.base.} =
+  QColumnViewreset(self[])
+method doItemsLayout*(self: VirtualQColumnView): void {.base.} =
+  QColumnViewdoItemsLayout(self[])
+method dataChanged*(self: VirtualQColumnView, topLeft: gen_qabstractitemmodel_types.QModelIndex, bottomRight: gen_qabstractitemmodel_types.QModelIndex, roles: openArray[cint]): void {.base.} =
+  QColumnViewdataChanged(self[], topLeft, bottomRight, roles)
+method rowsAboutToBeRemoved*(self: VirtualQColumnView, parent: gen_qabstractitemmodel_types.QModelIndex, start: cint, endVal: cint): void {.base.} =
+  QColumnViewrowsAboutToBeRemoved(self[], parent, start, endVal)
+method selectionChanged*(self: VirtualQColumnView, selected: gen_qitemselectionmodel_types.QItemSelection, deselected: gen_qitemselectionmodel_types.QItemSelection): void {.base.} =
+  QColumnViewselectionChanged(self[], selected, deselected)
+method updateEditorData*(self: VirtualQColumnView): void {.base.} =
+  QColumnViewupdateEditorData(self[])
+method updateEditorGeometries*(self: VirtualQColumnView): void {.base.} =
+  QColumnViewupdateEditorGeometries(self[])
+method updateGeometries*(self: VirtualQColumnView): void {.base.} =
+  QColumnViewupdateGeometries(self[])
+method verticalScrollbarAction*(self: VirtualQColumnView, action: cint): void {.base.} =
+  QColumnViewverticalScrollbarAction(self[], action)
+method horizontalScrollbarAction*(self: VirtualQColumnView, action: cint): void {.base.} =
+  QColumnViewhorizontalScrollbarAction(self[], action)
+method verticalScrollbarValueChanged*(self: VirtualQColumnView, value: cint): void {.base.} =
+  QColumnViewverticalScrollbarValueChanged(self[], value)
+method horizontalScrollbarValueChanged*(self: VirtualQColumnView, value: cint): void {.base.} =
+  QColumnViewhorizontalScrollbarValueChanged(self[], value)
+method closeEditor*(self: VirtualQColumnView, editor: gen_qwidget_types.QWidget, hint: cint): void {.base.} =
+  QColumnViewcloseEditor(self[], editor, hint)
+method commitData*(self: VirtualQColumnView, editor: gen_qwidget_types.QWidget): void {.base.} =
+  QColumnViewcommitData(self[], editor)
+method editorDestroyed*(self: VirtualQColumnView, editor: gen_qobject_types.QObject): void {.base.} =
+  QColumnVieweditorDestroyed(self[], editor)
+method selectedIndexes*(self: VirtualQColumnView): seq[gen_qabstractitemmodel_types.QModelIndex] {.base.} =
+  QColumnViewselectedIndexes(self[])
+method edit*(self: VirtualQColumnView, index: gen_qabstractitemmodel_types.QModelIndex, trigger: cint, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QColumnViewedit(self[], index, trigger, event)
+method selectionCommand*(self: VirtualQColumnView, index: gen_qabstractitemmodel_types.QModelIndex, event: gen_qcoreevent_types.QEvent): cint {.base.} =
+  QColumnViewselectionCommand(self[], index, event)
+method startDrag*(self: VirtualQColumnView, supportedActions: cint): void {.base.} =
+  QColumnViewstartDrag(self[], supportedActions)
+method viewOptions*(self: VirtualQColumnView): gen_qstyleoption_types.QStyleOptionViewItem {.base.} =
+  QColumnViewviewOptions(self[])
+method focusNextPrevChild*(self: VirtualQColumnView, next: bool): bool {.base.} =
+  QColumnViewfocusNextPrevChild(self[], next)
+method event*(self: VirtualQColumnView, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QColumnViewevent(self[], event)
+method viewportEvent*(self: VirtualQColumnView, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QColumnViewviewportEvent(self[], event)
+method mousePressEvent*(self: VirtualQColumnView, event: gen_qevent_types.QMouseEvent): void {.base.} =
+  QColumnViewmousePressEvent(self[], event)
+method mouseMoveEvent*(self: VirtualQColumnView, event: gen_qevent_types.QMouseEvent): void {.base.} =
+  QColumnViewmouseMoveEvent(self[], event)
+method mouseReleaseEvent*(self: VirtualQColumnView, event: gen_qevent_types.QMouseEvent): void {.base.} =
+  QColumnViewmouseReleaseEvent(self[], event)
+method mouseDoubleClickEvent*(self: VirtualQColumnView, event: gen_qevent_types.QMouseEvent): void {.base.} =
+  QColumnViewmouseDoubleClickEvent(self[], event)
+method dragEnterEvent*(self: VirtualQColumnView, event: gen_qevent_types.QDragEnterEvent): void {.base.} =
+  QColumnViewdragEnterEvent(self[], event)
+method dragMoveEvent*(self: VirtualQColumnView, event: gen_qevent_types.QDragMoveEvent): void {.base.} =
+  QColumnViewdragMoveEvent(self[], event)
+method dragLeaveEvent*(self: VirtualQColumnView, event: gen_qevent_types.QDragLeaveEvent): void {.base.} =
+  QColumnViewdragLeaveEvent(self[], event)
+method dropEvent*(self: VirtualQColumnView, event: gen_qevent_types.QDropEvent): void {.base.} =
+  QColumnViewdropEvent(self[], event)
+method focusInEvent*(self: VirtualQColumnView, event: gen_qevent_types.QFocusEvent): void {.base.} =
+  QColumnViewfocusInEvent(self[], event)
+method focusOutEvent*(self: VirtualQColumnView, event: gen_qevent_types.QFocusEvent): void {.base.} =
+  QColumnViewfocusOutEvent(self[], event)
+method keyPressEvent*(self: VirtualQColumnView, event: gen_qevent_types.QKeyEvent): void {.base.} =
+  QColumnViewkeyPressEvent(self[], event)
+method timerEvent*(self: VirtualQColumnView, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QColumnViewtimerEvent(self[], event)
+method inputMethodEvent*(self: VirtualQColumnView, event: gen_qevent_types.QInputMethodEvent): void {.base.} =
+  QColumnViewinputMethodEvent(self[], event)
+method eventFilter*(self: VirtualQColumnView, objectVal: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QColumnVieweventFilter(self[], objectVal, event)
+method viewportSizeHint*(self: VirtualQColumnView): gen_qsize_types.QSize {.base.} =
+  QColumnViewviewportSizeHint(self[])
+method minimumSizeHint*(self: VirtualQColumnView): gen_qsize_types.QSize {.base.} =
+  QColumnViewminimumSizeHint(self[])
+method setupViewport*(self: VirtualQColumnView, viewport: gen_qwidget_types.QWidget): void {.base.} =
+  QColumnViewsetupViewport(self[], viewport)
+method paintEvent*(self: VirtualQColumnView, param1: gen_qevent_types.QPaintEvent): void {.base.} =
+  QColumnViewpaintEvent(self[], param1)
+method wheelEvent*(self: VirtualQColumnView, param1: gen_qevent_types.QWheelEvent): void {.base.} =
+  QColumnViewwheelEvent(self[], param1)
+method contextMenuEvent*(self: VirtualQColumnView, param1: gen_qevent_types.QContextMenuEvent): void {.base.} =
+  QColumnViewcontextMenuEvent(self[], param1)
+method changeEvent*(self: VirtualQColumnView, param1: gen_qcoreevent_types.QEvent): void {.base.} =
+  QColumnViewchangeEvent(self[], param1)
+method devType*(self: VirtualQColumnView): cint {.base.} =
+  QColumnViewdevType(self[])
+method setVisible*(self: VirtualQColumnView, visible: bool): void {.base.} =
+  QColumnViewsetVisible(self[], visible)
+method heightForWidth*(self: VirtualQColumnView, param1: cint): cint {.base.} =
+  QColumnViewheightForWidth(self[], param1)
+method hasHeightForWidth*(self: VirtualQColumnView): bool {.base.} =
+  QColumnViewhasHeightForWidth(self[])
+method paintEngine*(self: VirtualQColumnView): gen_qpaintengine_types.QPaintEngine {.base.} =
+  QColumnViewpaintEngine(self[])
+method keyReleaseEvent*(self: VirtualQColumnView, event: gen_qevent_types.QKeyEvent): void {.base.} =
+  QColumnViewkeyReleaseEvent(self[], event)
+method enterEvent*(self: VirtualQColumnView, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QColumnViewenterEvent(self[], event)
+method leaveEvent*(self: VirtualQColumnView, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QColumnViewleaveEvent(self[], event)
+method moveEvent*(self: VirtualQColumnView, event: gen_qevent_types.QMoveEvent): void {.base.} =
+  QColumnViewmoveEvent(self[], event)
+method closeEvent*(self: VirtualQColumnView, event: gen_qevent_types.QCloseEvent): void {.base.} =
+  QColumnViewcloseEvent(self[], event)
+method tabletEvent*(self: VirtualQColumnView, event: gen_qevent_types.QTabletEvent): void {.base.} =
+  QColumnViewtabletEvent(self[], event)
+method actionEvent*(self: VirtualQColumnView, event: gen_qevent_types.QActionEvent): void {.base.} =
+  QColumnViewactionEvent(self[], event)
+method showEvent*(self: VirtualQColumnView, event: gen_qevent_types.QShowEvent): void {.base.} =
+  QColumnViewshowEvent(self[], event)
+method hideEvent*(self: VirtualQColumnView, event: gen_qevent_types.QHideEvent): void {.base.} =
+  QColumnViewhideEvent(self[], event)
+method nativeEvent*(self: VirtualQColumnView, eventType: openArray[byte], message: pointer, resultVal: ptr clong): bool {.base.} =
+  QColumnViewnativeEvent(self[], eventType, message, resultVal)
+method metric*(self: VirtualQColumnView, param1: cint): cint {.base.} =
+  QColumnViewmetric(self[], param1)
+method initPainter*(self: VirtualQColumnView, painter: gen_qpainter_types.QPainter): void {.base.} =
+  QColumnViewinitPainter(self[], painter)
+method redirected*(self: VirtualQColumnView, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.base.} =
+  QColumnViewredirected(self[], offset)
+method sharedPainter*(self: VirtualQColumnView): gen_qpainter_types.QPainter {.base.} =
+  QColumnViewsharedPainter(self[])
+method childEvent*(self: VirtualQColumnView, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QColumnViewchildEvent(self[], event)
+method customEvent*(self: VirtualQColumnView, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QColumnViewcustomEvent(self[], event)
+method connectNotify*(self: VirtualQColumnView, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QColumnViewconnectNotify(self[], signal)
+method disconnectNotify*(self: VirtualQColumnView, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QColumnViewdisconnectNotify(self[], signal)
+
+proc fcQColumnView_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQColumnView](fcQColumnView_vdata(self))
   var virtualReturn = inst.metaObject()
   virtualReturn.owned = false # TODO move?
@@ -1591,17 +1781,13 @@ proc cQColumnView_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-method metacast*(self: VirtualQColumnView, param1: cstring): pointer {.base.} =
-  QColumnViewmetacast(self[], param1)
-proc cQColumnView_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+proc fcQColumnView_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQColumnView](fcQColumnView_vdata(self))
   let slotval1 = (param1)
   var virtualReturn = inst.metacast(slotval1)
   virtualReturn
 
-method metacall*(self: VirtualQColumnView, param1: cint, param2: cint, param3: pointer): cint {.base.} =
-  QColumnViewmetacall(self[], param1, param2, param3)
-proc cQColumnView_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+proc fcQColumnView_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQColumnView](fcQColumnView_vdata(self))
   let slotval1 = cint(param1)
   let slotval2 = param2
@@ -1609,9 +1795,7 @@ proc cQColumnView_method_callback_metacall(self: pointer, param1: cint, param2: 
   var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
-method indexAt*(self: VirtualQColumnView, point: gen_qpoint_types.QPoint): gen_qabstractitemmodel_types.QModelIndex {.base.} =
-  QColumnViewindexAt(self[], point)
-proc cQColumnView_method_callback_indexAt(self: pointer, point: pointer): pointer {.cdecl.} =
+proc fcQColumnView_method_callback_indexAt(self: pointer, point: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQColumnView](fcQColumnView_vdata(self))
   let slotval1 = gen_qpoint_types.QPoint(h: point, owned: false)
   var virtualReturn = inst.indexAt(slotval1)
@@ -1620,17 +1804,13 @@ proc cQColumnView_method_callback_indexAt(self: pointer, point: pointer): pointe
   virtualReturn.h = nil
   virtualReturn_h
 
-method scrollTo*(self: VirtualQColumnView, index: gen_qabstractitemmodel_types.QModelIndex, hint: cint): void {.base.} =
-  QColumnViewscrollTo(self[], index, hint)
-proc cQColumnView_method_callback_scrollTo(self: pointer, index: pointer, hint: cint): void {.cdecl.} =
+proc fcQColumnView_method_callback_scrollTo(self: pointer, index: pointer, hint: cint): void {.cdecl.} =
   let inst = cast[VirtualQColumnView](fcQColumnView_vdata(self))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   let slotval2 = cint(hint)
   inst.scrollTo(slotval1, slotval2)
 
-method sizeHint*(self: VirtualQColumnView): gen_qsize_types.QSize {.base.} =
-  QColumnViewsizeHint(self[])
-proc cQColumnView_method_callback_sizeHint(self: pointer): pointer {.cdecl.} =
+proc fcQColumnView_method_callback_sizeHint(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQColumnView](fcQColumnView_vdata(self))
   var virtualReturn = inst.sizeHint()
   virtualReturn.owned = false # TODO move?
@@ -1638,9 +1818,7 @@ proc cQColumnView_method_callback_sizeHint(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-method visualRect*(self: VirtualQColumnView, index: gen_qabstractitemmodel_types.QModelIndex): gen_qrect_types.QRect {.base.} =
-  QColumnViewvisualRect(self[], index)
-proc cQColumnView_method_callback_visualRect(self: pointer, index: pointer): pointer {.cdecl.} =
+proc fcQColumnView_method_callback_visualRect(self: pointer, index: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQColumnView](fcQColumnView_vdata(self))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var virtualReturn = inst.visualRect(slotval1)
@@ -1649,44 +1827,32 @@ proc cQColumnView_method_callback_visualRect(self: pointer, index: pointer): poi
   virtualReturn.h = nil
   virtualReturn_h
 
-method setModel*(self: VirtualQColumnView, model: gen_qabstractitemmodel_types.QAbstractItemModel): void {.base.} =
-  QColumnViewsetModel(self[], model)
-proc cQColumnView_method_callback_setModel(self: pointer, model: pointer): void {.cdecl.} =
+proc fcQColumnView_method_callback_setModel(self: pointer, model: pointer): void {.cdecl.} =
   let inst = cast[VirtualQColumnView](fcQColumnView_vdata(self))
   let slotval1 = gen_qabstractitemmodel_types.QAbstractItemModel(h: model, owned: false)
   inst.setModel(slotval1)
 
-method setSelectionModel*(self: VirtualQColumnView, selectionModel: gen_qitemselectionmodel_types.QItemSelectionModel): void {.base.} =
-  QColumnViewsetSelectionModel(self[], selectionModel)
-proc cQColumnView_method_callback_setSelectionModel(self: pointer, selectionModel: pointer): void {.cdecl.} =
+proc fcQColumnView_method_callback_setSelectionModel(self: pointer, selectionModel: pointer): void {.cdecl.} =
   let inst = cast[VirtualQColumnView](fcQColumnView_vdata(self))
   let slotval1 = gen_qitemselectionmodel_types.QItemSelectionModel(h: selectionModel, owned: false)
   inst.setSelectionModel(slotval1)
 
-method setRootIndex*(self: VirtualQColumnView, index: gen_qabstractitemmodel_types.QModelIndex): void {.base.} =
-  QColumnViewsetRootIndex(self[], index)
-proc cQColumnView_method_callback_setRootIndex(self: pointer, index: pointer): void {.cdecl.} =
+proc fcQColumnView_method_callback_setRootIndex(self: pointer, index: pointer): void {.cdecl.} =
   let inst = cast[VirtualQColumnView](fcQColumnView_vdata(self))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   inst.setRootIndex(slotval1)
 
-method selectAll*(self: VirtualQColumnView): void {.base.} =
-  QColumnViewselectAll(self[])
-proc cQColumnView_method_callback_selectAll(self: pointer): void {.cdecl.} =
+proc fcQColumnView_method_callback_selectAll(self: pointer): void {.cdecl.} =
   let inst = cast[VirtualQColumnView](fcQColumnView_vdata(self))
   inst.selectAll()
 
-method isIndexHidden*(self: VirtualQColumnView, index: gen_qabstractitemmodel_types.QModelIndex): bool {.base.} =
-  QColumnViewisIndexHidden(self[], index)
-proc cQColumnView_method_callback_isIndexHidden(self: pointer, index: pointer): bool {.cdecl.} =
+proc fcQColumnView_method_callback_isIndexHidden(self: pointer, index: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQColumnView](fcQColumnView_vdata(self))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var virtualReturn = inst.isIndexHidden(slotval1)
   virtualReturn
 
-method moveCursor*(self: VirtualQColumnView, cursorAction: cint, modifiers: cint): gen_qabstractitemmodel_types.QModelIndex {.base.} =
-  QColumnViewmoveCursor(self[], cursorAction, modifiers)
-proc cQColumnView_method_callback_moveCursor(self: pointer, cursorAction: cint, modifiers: cint): pointer {.cdecl.} =
+proc fcQColumnView_method_callback_moveCursor(self: pointer, cursorAction: cint, modifiers: cint): pointer {.cdecl.} =
   let inst = cast[VirtualQColumnView](fcQColumnView_vdata(self))
   let slotval1 = cint(cursorAction)
   let slotval2 = cint(modifiers)
@@ -1696,24 +1862,18 @@ proc cQColumnView_method_callback_moveCursor(self: pointer, cursorAction: cint, 
   virtualReturn.h = nil
   virtualReturn_h
 
-method resizeEvent*(self: VirtualQColumnView, event: gen_qevent_types.QResizeEvent): void {.base.} =
-  QColumnViewresizeEvent(self[], event)
-proc cQColumnView_method_callback_resizeEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQColumnView_method_callback_resizeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQColumnView](fcQColumnView_vdata(self))
   let slotval1 = gen_qevent_types.QResizeEvent(h: event, owned: false)
   inst.resizeEvent(slotval1)
 
-method setSelection*(self: VirtualQColumnView, rect: gen_qrect_types.QRect, command: cint): void {.base.} =
-  QColumnViewsetSelection(self[], rect, command)
-proc cQColumnView_method_callback_setSelection(self: pointer, rect: pointer, command: cint): void {.cdecl.} =
+proc fcQColumnView_method_callback_setSelection(self: pointer, rect: pointer, command: cint): void {.cdecl.} =
   let inst = cast[VirtualQColumnView](fcQColumnView_vdata(self))
   let slotval1 = gen_qrect_types.QRect(h: rect, owned: false)
   let slotval2 = cint(command)
   inst.setSelection(slotval1, slotval2)
 
-method visualRegionForSelection*(self: VirtualQColumnView, selection: gen_qitemselectionmodel_types.QItemSelection): gen_qregion_types.QRegion {.base.} =
-  QColumnViewvisualRegionForSelection(self[], selection)
-proc cQColumnView_method_callback_visualRegionForSelection(self: pointer, selection: pointer): pointer {.cdecl.} =
+proc fcQColumnView_method_callback_visualRegionForSelection(self: pointer, selection: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQColumnView](fcQColumnView_vdata(self))
   let slotval1 = gen_qitemselectionmodel_types.QItemSelection(h: selection, owned: false)
   var virtualReturn = inst.visualRegionForSelection(slotval1)
@@ -1722,48 +1882,36 @@ proc cQColumnView_method_callback_visualRegionForSelection(self: pointer, select
   virtualReturn.h = nil
   virtualReturn_h
 
-method horizontalOffset*(self: VirtualQColumnView): cint {.base.} =
-  QColumnViewhorizontalOffset(self[])
-proc cQColumnView_method_callback_horizontalOffset(self: pointer): cint {.cdecl.} =
+proc fcQColumnView_method_callback_horizontalOffset(self: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQColumnView](fcQColumnView_vdata(self))
   var virtualReturn = inst.horizontalOffset()
   virtualReturn
 
-method verticalOffset*(self: VirtualQColumnView): cint {.base.} =
-  QColumnViewverticalOffset(self[])
-proc cQColumnView_method_callback_verticalOffset(self: pointer): cint {.cdecl.} =
+proc fcQColumnView_method_callback_verticalOffset(self: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQColumnView](fcQColumnView_vdata(self))
   var virtualReturn = inst.verticalOffset()
   virtualReturn
 
-method rowsInserted*(self: VirtualQColumnView, parent: gen_qabstractitemmodel_types.QModelIndex, start: cint, endVal: cint): void {.base.} =
-  QColumnViewrowsInserted(self[], parent, start, endVal)
-proc cQColumnView_method_callback_rowsInserted(self: pointer, parent: pointer, start: cint, endVal: cint): void {.cdecl.} =
+proc fcQColumnView_method_callback_rowsInserted(self: pointer, parent: pointer, start: cint, endVal: cint): void {.cdecl.} =
   let inst = cast[VirtualQColumnView](fcQColumnView_vdata(self))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   let slotval2 = start
   let slotval3 = endVal
   inst.rowsInserted(slotval1, slotval2, slotval3)
 
-method currentChanged*(self: VirtualQColumnView, current: gen_qabstractitemmodel_types.QModelIndex, previous: gen_qabstractitemmodel_types.QModelIndex): void {.base.} =
-  QColumnViewcurrentChanged(self[], current, previous)
-proc cQColumnView_method_callback_currentChanged(self: pointer, current: pointer, previous: pointer): void {.cdecl.} =
+proc fcQColumnView_method_callback_currentChanged(self: pointer, current: pointer, previous: pointer): void {.cdecl.} =
   let inst = cast[VirtualQColumnView](fcQColumnView_vdata(self))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: current, owned: false)
   let slotval2 = gen_qabstractitemmodel_types.QModelIndex(h: previous, owned: false)
   inst.currentChanged(slotval1, slotval2)
 
-method scrollContentsBy*(self: VirtualQColumnView, dx: cint, dy: cint): void {.base.} =
-  QColumnViewscrollContentsBy(self[], dx, dy)
-proc cQColumnView_method_callback_scrollContentsBy(self: pointer, dx: cint, dy: cint): void {.cdecl.} =
+proc fcQColumnView_method_callback_scrollContentsBy(self: pointer, dx: cint, dy: cint): void {.cdecl.} =
   let inst = cast[VirtualQColumnView](fcQColumnView_vdata(self))
   let slotval1 = dx
   let slotval2 = dy
   inst.scrollContentsBy(slotval1, slotval2)
 
-method createColumn*(self: VirtualQColumnView, rootIndex: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemview_types.QAbstractItemView {.base.} =
-  QColumnViewcreateColumn(self[], rootIndex)
-proc cQColumnView_method_callback_createColumn(self: pointer, rootIndex: pointer): pointer {.cdecl.} =
+proc fcQColumnView_method_callback_createColumn(self: pointer, rootIndex: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQColumnView](fcQColumnView_vdata(self))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: rootIndex, owned: false)
   var virtualReturn = inst.createColumn(slotval1)
@@ -1772,9 +1920,7 @@ proc cQColumnView_method_callback_createColumn(self: pointer, rootIndex: pointer
   virtualReturn.h = nil
   virtualReturn_h
 
-method keyboardSearch*(self: VirtualQColumnView, search: openArray[char]): void {.base.} =
-  QColumnViewkeyboardSearch(self[], search)
-proc cQColumnView_method_callback_keyboardSearch(self: pointer, search: struct_miqt_string): void {.cdecl.} =
+proc fcQColumnView_method_callback_keyboardSearch(self: pointer, search: struct_miqt_string): void {.cdecl.} =
   let inst = cast[VirtualQColumnView](fcQColumnView_vdata(self))
   let vsearch_ms = search
   let vsearchx_ret = string.fromBytes(vsearch_ms)
@@ -1782,25 +1928,19 @@ proc cQColumnView_method_callback_keyboardSearch(self: pointer, search: struct_m
   let slotval1 = vsearchx_ret
   inst.keyboardSearch(slotval1)
 
-method sizeHintForRow*(self: VirtualQColumnView, row: cint): cint {.base.} =
-  QColumnViewsizeHintForRow(self[], row)
-proc cQColumnView_method_callback_sizeHintForRow(self: pointer, row: cint): cint {.cdecl.} =
+proc fcQColumnView_method_callback_sizeHintForRow(self: pointer, row: cint): cint {.cdecl.} =
   let inst = cast[VirtualQColumnView](fcQColumnView_vdata(self))
   let slotval1 = row
   var virtualReturn = inst.sizeHintForRow(slotval1)
   virtualReturn
 
-method sizeHintForColumn*(self: VirtualQColumnView, column: cint): cint {.base.} =
-  QColumnViewsizeHintForColumn(self[], column)
-proc cQColumnView_method_callback_sizeHintForColumn(self: pointer, column: cint): cint {.cdecl.} =
+proc fcQColumnView_method_callback_sizeHintForColumn(self: pointer, column: cint): cint {.cdecl.} =
   let inst = cast[VirtualQColumnView](fcQColumnView_vdata(self))
   let slotval1 = column
   var virtualReturn = inst.sizeHintForColumn(slotval1)
   virtualReturn
 
-method inputMethodQuery*(self: VirtualQColumnView, query: cint): gen_qvariant_types.QVariant {.base.} =
-  QColumnViewinputMethodQuery(self[], query)
-proc cQColumnView_method_callback_inputMethodQuery(self: pointer, query: cint): pointer {.cdecl.} =
+proc fcQColumnView_method_callback_inputMethodQuery(self: pointer, query: cint): pointer {.cdecl.} =
   let inst = cast[VirtualQColumnView](fcQColumnView_vdata(self))
   let slotval1 = cint(query)
   var virtualReturn = inst.inputMethodQuery(slotval1)
@@ -1809,21 +1949,15 @@ proc cQColumnView_method_callback_inputMethodQuery(self: pointer, query: cint): 
   virtualReturn.h = nil
   virtualReturn_h
 
-method reset*(self: VirtualQColumnView): void {.base.} =
-  QColumnViewreset(self[])
-proc cQColumnView_method_callback_reset(self: pointer): void {.cdecl.} =
+proc fcQColumnView_method_callback_reset(self: pointer): void {.cdecl.} =
   let inst = cast[VirtualQColumnView](fcQColumnView_vdata(self))
   inst.reset()
 
-method doItemsLayout*(self: VirtualQColumnView): void {.base.} =
-  QColumnViewdoItemsLayout(self[])
-proc cQColumnView_method_callback_doItemsLayout(self: pointer): void {.cdecl.} =
+proc fcQColumnView_method_callback_doItemsLayout(self: pointer): void {.cdecl.} =
   let inst = cast[VirtualQColumnView](fcQColumnView_vdata(self))
   inst.doItemsLayout()
 
-method dataChanged*(self: VirtualQColumnView, topLeft: gen_qabstractitemmodel_types.QModelIndex, bottomRight: gen_qabstractitemmodel_types.QModelIndex, roles: openArray[cint]): void {.base.} =
-  QColumnViewdataChanged(self[], topLeft, bottomRight, roles)
-proc cQColumnView_method_callback_dataChanged(self: pointer, topLeft: pointer, bottomRight: pointer, roles: struct_miqt_array): void {.cdecl.} =
+proc fcQColumnView_method_callback_dataChanged(self: pointer, topLeft: pointer, bottomRight: pointer, roles: struct_miqt_array): void {.cdecl.} =
   let inst = cast[VirtualQColumnView](fcQColumnView_vdata(self))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: topLeft, owned: false)
   let slotval2 = gen_qabstractitemmodel_types.QModelIndex(h: bottomRight, owned: false)
@@ -1836,94 +1970,68 @@ proc cQColumnView_method_callback_dataChanged(self: pointer, topLeft: pointer, b
   let slotval3 = vrolesx_ret
   inst.dataChanged(slotval1, slotval2, slotval3)
 
-method rowsAboutToBeRemoved*(self: VirtualQColumnView, parent: gen_qabstractitemmodel_types.QModelIndex, start: cint, endVal: cint): void {.base.} =
-  QColumnViewrowsAboutToBeRemoved(self[], parent, start, endVal)
-proc cQColumnView_method_callback_rowsAboutToBeRemoved(self: pointer, parent: pointer, start: cint, endVal: cint): void {.cdecl.} =
+proc fcQColumnView_method_callback_rowsAboutToBeRemoved(self: pointer, parent: pointer, start: cint, endVal: cint): void {.cdecl.} =
   let inst = cast[VirtualQColumnView](fcQColumnView_vdata(self))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   let slotval2 = start
   let slotval3 = endVal
   inst.rowsAboutToBeRemoved(slotval1, slotval2, slotval3)
 
-method selectionChanged*(self: VirtualQColumnView, selected: gen_qitemselectionmodel_types.QItemSelection, deselected: gen_qitemselectionmodel_types.QItemSelection): void {.base.} =
-  QColumnViewselectionChanged(self[], selected, deselected)
-proc cQColumnView_method_callback_selectionChanged(self: pointer, selected: pointer, deselected: pointer): void {.cdecl.} =
+proc fcQColumnView_method_callback_selectionChanged(self: pointer, selected: pointer, deselected: pointer): void {.cdecl.} =
   let inst = cast[VirtualQColumnView](fcQColumnView_vdata(self))
   let slotval1 = gen_qitemselectionmodel_types.QItemSelection(h: selected, owned: false)
   let slotval2 = gen_qitemselectionmodel_types.QItemSelection(h: deselected, owned: false)
   inst.selectionChanged(slotval1, slotval2)
 
-method updateEditorData*(self: VirtualQColumnView): void {.base.} =
-  QColumnViewupdateEditorData(self[])
-proc cQColumnView_method_callback_updateEditorData(self: pointer): void {.cdecl.} =
+proc fcQColumnView_method_callback_updateEditorData(self: pointer): void {.cdecl.} =
   let inst = cast[VirtualQColumnView](fcQColumnView_vdata(self))
   inst.updateEditorData()
 
-method updateEditorGeometries*(self: VirtualQColumnView): void {.base.} =
-  QColumnViewupdateEditorGeometries(self[])
-proc cQColumnView_method_callback_updateEditorGeometries(self: pointer): void {.cdecl.} =
+proc fcQColumnView_method_callback_updateEditorGeometries(self: pointer): void {.cdecl.} =
   let inst = cast[VirtualQColumnView](fcQColumnView_vdata(self))
   inst.updateEditorGeometries()
 
-method updateGeometries*(self: VirtualQColumnView): void {.base.} =
-  QColumnViewupdateGeometries(self[])
-proc cQColumnView_method_callback_updateGeometries(self: pointer): void {.cdecl.} =
+proc fcQColumnView_method_callback_updateGeometries(self: pointer): void {.cdecl.} =
   let inst = cast[VirtualQColumnView](fcQColumnView_vdata(self))
   inst.updateGeometries()
 
-method verticalScrollbarAction*(self: VirtualQColumnView, action: cint): void {.base.} =
-  QColumnViewverticalScrollbarAction(self[], action)
-proc cQColumnView_method_callback_verticalScrollbarAction(self: pointer, action: cint): void {.cdecl.} =
+proc fcQColumnView_method_callback_verticalScrollbarAction(self: pointer, action: cint): void {.cdecl.} =
   let inst = cast[VirtualQColumnView](fcQColumnView_vdata(self))
   let slotval1 = action
   inst.verticalScrollbarAction(slotval1)
 
-method horizontalScrollbarAction*(self: VirtualQColumnView, action: cint): void {.base.} =
-  QColumnViewhorizontalScrollbarAction(self[], action)
-proc cQColumnView_method_callback_horizontalScrollbarAction(self: pointer, action: cint): void {.cdecl.} =
+proc fcQColumnView_method_callback_horizontalScrollbarAction(self: pointer, action: cint): void {.cdecl.} =
   let inst = cast[VirtualQColumnView](fcQColumnView_vdata(self))
   let slotval1 = action
   inst.horizontalScrollbarAction(slotval1)
 
-method verticalScrollbarValueChanged*(self: VirtualQColumnView, value: cint): void {.base.} =
-  QColumnViewverticalScrollbarValueChanged(self[], value)
-proc cQColumnView_method_callback_verticalScrollbarValueChanged(self: pointer, value: cint): void {.cdecl.} =
+proc fcQColumnView_method_callback_verticalScrollbarValueChanged(self: pointer, value: cint): void {.cdecl.} =
   let inst = cast[VirtualQColumnView](fcQColumnView_vdata(self))
   let slotval1 = value
   inst.verticalScrollbarValueChanged(slotval1)
 
-method horizontalScrollbarValueChanged*(self: VirtualQColumnView, value: cint): void {.base.} =
-  QColumnViewhorizontalScrollbarValueChanged(self[], value)
-proc cQColumnView_method_callback_horizontalScrollbarValueChanged(self: pointer, value: cint): void {.cdecl.} =
+proc fcQColumnView_method_callback_horizontalScrollbarValueChanged(self: pointer, value: cint): void {.cdecl.} =
   let inst = cast[VirtualQColumnView](fcQColumnView_vdata(self))
   let slotval1 = value
   inst.horizontalScrollbarValueChanged(slotval1)
 
-method closeEditor*(self: VirtualQColumnView, editor: gen_qwidget_types.QWidget, hint: cint): void {.base.} =
-  QColumnViewcloseEditor(self[], editor, hint)
-proc cQColumnView_method_callback_closeEditor(self: pointer, editor: pointer, hint: cint): void {.cdecl.} =
+proc fcQColumnView_method_callback_closeEditor(self: pointer, editor: pointer, hint: cint): void {.cdecl.} =
   let inst = cast[VirtualQColumnView](fcQColumnView_vdata(self))
   let slotval1 = gen_qwidget_types.QWidget(h: editor, owned: false)
   let slotval2 = cint(hint)
   inst.closeEditor(slotval1, slotval2)
 
-method commitData*(self: VirtualQColumnView, editor: gen_qwidget_types.QWidget): void {.base.} =
-  QColumnViewcommitData(self[], editor)
-proc cQColumnView_method_callback_commitData(self: pointer, editor: pointer): void {.cdecl.} =
+proc fcQColumnView_method_callback_commitData(self: pointer, editor: pointer): void {.cdecl.} =
   let inst = cast[VirtualQColumnView](fcQColumnView_vdata(self))
   let slotval1 = gen_qwidget_types.QWidget(h: editor, owned: false)
   inst.commitData(slotval1)
 
-method editorDestroyed*(self: VirtualQColumnView, editor: gen_qobject_types.QObject): void {.base.} =
-  QColumnVieweditorDestroyed(self[], editor)
-proc cQColumnView_method_callback_editorDestroyed(self: pointer, editor: pointer): void {.cdecl.} =
+proc fcQColumnView_method_callback_editorDestroyed(self: pointer, editor: pointer): void {.cdecl.} =
   let inst = cast[VirtualQColumnView](fcQColumnView_vdata(self))
   let slotval1 = gen_qobject_types.QObject(h: editor, owned: false)
   inst.editorDestroyed(slotval1)
 
-method selectedIndexes*(self: VirtualQColumnView): seq[gen_qabstractitemmodel_types.QModelIndex] {.base.} =
-  QColumnViewselectedIndexes(self[])
-proc cQColumnView_method_callback_selectedIndexes(self: pointer): struct_miqt_array {.cdecl.} =
+proc fcQColumnView_method_callback_selectedIndexes(self: pointer): struct_miqt_array {.cdecl.} =
   let inst = cast[VirtualQColumnView](fcQColumnView_vdata(self))
   var virtualReturn = inst.selectedIndexes()
   var virtualReturn_CArray = cast[ptr UncheckedArray[pointer]](if len(virtualReturn) > 0: c_malloc(c_sizet(sizeof(pointer) * len(virtualReturn))) else: nil)
@@ -1935,9 +2043,7 @@ proc cQColumnView_method_callback_selectedIndexes(self: pointer): struct_miqt_ar
 
   struct_miqt_array(len: csize_t(len(virtualReturn)), data: if len(virtualReturn) == 0: nil else: addr(virtualReturn_CArray[0]))
 
-method edit*(self: VirtualQColumnView, index: gen_qabstractitemmodel_types.QModelIndex, trigger: cint, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QColumnViewedit(self[], index, trigger, event)
-proc cQColumnView_method_callback_edit2(self: pointer, index: pointer, trigger: cint, event: pointer): bool {.cdecl.} =
+proc fcQColumnView_method_callback_edit2(self: pointer, index: pointer, trigger: cint, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQColumnView](fcQColumnView_vdata(self))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   let slotval2 = cint(trigger)
@@ -1945,25 +2051,19 @@ proc cQColumnView_method_callback_edit2(self: pointer, index: pointer, trigger: 
   var virtualReturn = inst.edit(slotval1, slotval2, slotval3)
   virtualReturn
 
-method selectionCommand*(self: VirtualQColumnView, index: gen_qabstractitemmodel_types.QModelIndex, event: gen_qcoreevent_types.QEvent): cint {.base.} =
-  QColumnViewselectionCommand(self[], index, event)
-proc cQColumnView_method_callback_selectionCommand(self: pointer, index: pointer, event: pointer): cint {.cdecl.} =
+proc fcQColumnView_method_callback_selectionCommand(self: pointer, index: pointer, event: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQColumnView](fcQColumnView_vdata(self))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.selectionCommand(slotval1, slotval2)
   cint(virtualReturn)
 
-method startDrag*(self: VirtualQColumnView, supportedActions: cint): void {.base.} =
-  QColumnViewstartDrag(self[], supportedActions)
-proc cQColumnView_method_callback_startDrag(self: pointer, supportedActions: cint): void {.cdecl.} =
+proc fcQColumnView_method_callback_startDrag(self: pointer, supportedActions: cint): void {.cdecl.} =
   let inst = cast[VirtualQColumnView](fcQColumnView_vdata(self))
   let slotval1 = cint(supportedActions)
   inst.startDrag(slotval1)
 
-method viewOptions*(self: VirtualQColumnView): gen_qstyleoption_types.QStyleOptionViewItem {.base.} =
-  QColumnViewviewOptions(self[])
-proc cQColumnView_method_callback_viewOptions(self: pointer): pointer {.cdecl.} =
+proc fcQColumnView_method_callback_viewOptions(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQColumnView](fcQColumnView_vdata(self))
   var virtualReturn = inst.viewOptions()
   virtualReturn.owned = false # TODO move?
@@ -1971,133 +2071,97 @@ proc cQColumnView_method_callback_viewOptions(self: pointer): pointer {.cdecl.} 
   virtualReturn.h = nil
   virtualReturn_h
 
-method focusNextPrevChild*(self: VirtualQColumnView, next: bool): bool {.base.} =
-  QColumnViewfocusNextPrevChild(self[], next)
-proc cQColumnView_method_callback_focusNextPrevChild(self: pointer, next: bool): bool {.cdecl.} =
+proc fcQColumnView_method_callback_focusNextPrevChild(self: pointer, next: bool): bool {.cdecl.} =
   let inst = cast[VirtualQColumnView](fcQColumnView_vdata(self))
   let slotval1 = next
   var virtualReturn = inst.focusNextPrevChild(slotval1)
   virtualReturn
 
-method event*(self: VirtualQColumnView, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QColumnViewevent(self[], event)
-proc cQColumnView_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
+proc fcQColumnView_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQColumnView](fcQColumnView_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
-method viewportEvent*(self: VirtualQColumnView, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QColumnViewviewportEvent(self[], event)
-proc cQColumnView_method_callback_viewportEvent(self: pointer, event: pointer): bool {.cdecl.} =
+proc fcQColumnView_method_callback_viewportEvent(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQColumnView](fcQColumnView_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.viewportEvent(slotval1)
   virtualReturn
 
-method mousePressEvent*(self: VirtualQColumnView, event: gen_qevent_types.QMouseEvent): void {.base.} =
-  QColumnViewmousePressEvent(self[], event)
-proc cQColumnView_method_callback_mousePressEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQColumnView_method_callback_mousePressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQColumnView](fcQColumnView_vdata(self))
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mousePressEvent(slotval1)
 
-method mouseMoveEvent*(self: VirtualQColumnView, event: gen_qevent_types.QMouseEvent): void {.base.} =
-  QColumnViewmouseMoveEvent(self[], event)
-proc cQColumnView_method_callback_mouseMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQColumnView_method_callback_mouseMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQColumnView](fcQColumnView_vdata(self))
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mouseMoveEvent(slotval1)
 
-method mouseReleaseEvent*(self: VirtualQColumnView, event: gen_qevent_types.QMouseEvent): void {.base.} =
-  QColumnViewmouseReleaseEvent(self[], event)
-proc cQColumnView_method_callback_mouseReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQColumnView_method_callback_mouseReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQColumnView](fcQColumnView_vdata(self))
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mouseReleaseEvent(slotval1)
 
-method mouseDoubleClickEvent*(self: VirtualQColumnView, event: gen_qevent_types.QMouseEvent): void {.base.} =
-  QColumnViewmouseDoubleClickEvent(self[], event)
-proc cQColumnView_method_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQColumnView_method_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQColumnView](fcQColumnView_vdata(self))
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mouseDoubleClickEvent(slotval1)
 
-method dragEnterEvent*(self: VirtualQColumnView, event: gen_qevent_types.QDragEnterEvent): void {.base.} =
-  QColumnViewdragEnterEvent(self[], event)
-proc cQColumnView_method_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQColumnView_method_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQColumnView](fcQColumnView_vdata(self))
   let slotval1 = gen_qevent_types.QDragEnterEvent(h: event, owned: false)
   inst.dragEnterEvent(slotval1)
 
-method dragMoveEvent*(self: VirtualQColumnView, event: gen_qevent_types.QDragMoveEvent): void {.base.} =
-  QColumnViewdragMoveEvent(self[], event)
-proc cQColumnView_method_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQColumnView_method_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQColumnView](fcQColumnView_vdata(self))
   let slotval1 = gen_qevent_types.QDragMoveEvent(h: event, owned: false)
   inst.dragMoveEvent(slotval1)
 
-method dragLeaveEvent*(self: VirtualQColumnView, event: gen_qevent_types.QDragLeaveEvent): void {.base.} =
-  QColumnViewdragLeaveEvent(self[], event)
-proc cQColumnView_method_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQColumnView_method_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQColumnView](fcQColumnView_vdata(self))
   let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event, owned: false)
   inst.dragLeaveEvent(slotval1)
 
-method dropEvent*(self: VirtualQColumnView, event: gen_qevent_types.QDropEvent): void {.base.} =
-  QColumnViewdropEvent(self[], event)
-proc cQColumnView_method_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQColumnView_method_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQColumnView](fcQColumnView_vdata(self))
   let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
   inst.dropEvent(slotval1)
 
-method focusInEvent*(self: VirtualQColumnView, event: gen_qevent_types.QFocusEvent): void {.base.} =
-  QColumnViewfocusInEvent(self[], event)
-proc cQColumnView_method_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQColumnView_method_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQColumnView](fcQColumnView_vdata(self))
   let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   inst.focusInEvent(slotval1)
 
-method focusOutEvent*(self: VirtualQColumnView, event: gen_qevent_types.QFocusEvent): void {.base.} =
-  QColumnViewfocusOutEvent(self[], event)
-proc cQColumnView_method_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQColumnView_method_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQColumnView](fcQColumnView_vdata(self))
   let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   inst.focusOutEvent(slotval1)
 
-method keyPressEvent*(self: VirtualQColumnView, event: gen_qevent_types.QKeyEvent): void {.base.} =
-  QColumnViewkeyPressEvent(self[], event)
-proc cQColumnView_method_callback_keyPressEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQColumnView_method_callback_keyPressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQColumnView](fcQColumnView_vdata(self))
   let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   inst.keyPressEvent(slotval1)
 
-method timerEvent*(self: VirtualQColumnView, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
-  QColumnViewtimerEvent(self[], event)
-proc cQColumnView_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQColumnView_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQColumnView](fcQColumnView_vdata(self))
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
-method inputMethodEvent*(self: VirtualQColumnView, event: gen_qevent_types.QInputMethodEvent): void {.base.} =
-  QColumnViewinputMethodEvent(self[], event)
-proc cQColumnView_method_callback_inputMethodEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQColumnView_method_callback_inputMethodEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQColumnView](fcQColumnView_vdata(self))
   let slotval1 = gen_qevent_types.QInputMethodEvent(h: event, owned: false)
   inst.inputMethodEvent(slotval1)
 
-method eventFilter*(self: VirtualQColumnView, objectVal: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QColumnVieweventFilter(self[], objectVal, event)
-proc cQColumnView_method_callback_eventFilter(self: pointer, objectVal: pointer, event: pointer): bool {.cdecl.} =
+proc fcQColumnView_method_callback_eventFilter(self: pointer, objectVal: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQColumnView](fcQColumnView_vdata(self))
   let slotval1 = gen_qobject_types.QObject(h: objectVal, owned: false)
   let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
-method viewportSizeHint*(self: VirtualQColumnView): gen_qsize_types.QSize {.base.} =
-  QColumnViewviewportSizeHint(self[])
-proc cQColumnView_method_callback_viewportSizeHint(self: pointer): pointer {.cdecl.} =
+proc fcQColumnView_method_callback_viewportSizeHint(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQColumnView](fcQColumnView_vdata(self))
   var virtualReturn = inst.viewportSizeHint()
   virtualReturn.owned = false # TODO move?
@@ -2105,9 +2169,7 @@ proc cQColumnView_method_callback_viewportSizeHint(self: pointer): pointer {.cde
   virtualReturn.h = nil
   virtualReturn_h
 
-method minimumSizeHint*(self: VirtualQColumnView): gen_qsize_types.QSize {.base.} =
-  QColumnViewminimumSizeHint(self[])
-proc cQColumnView_method_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
+proc fcQColumnView_method_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQColumnView](fcQColumnView_vdata(self))
   var virtualReturn = inst.minimumSizeHint()
   virtualReturn.owned = false # TODO move?
@@ -2115,73 +2177,53 @@ proc cQColumnView_method_callback_minimumSizeHint(self: pointer): pointer {.cdec
   virtualReturn.h = nil
   virtualReturn_h
 
-method setupViewport*(self: VirtualQColumnView, viewport: gen_qwidget_types.QWidget): void {.base.} =
-  QColumnViewsetupViewport(self[], viewport)
-proc cQColumnView_method_callback_setupViewport(self: pointer, viewport: pointer): void {.cdecl.} =
+proc fcQColumnView_method_callback_setupViewport(self: pointer, viewport: pointer): void {.cdecl.} =
   let inst = cast[VirtualQColumnView](fcQColumnView_vdata(self))
   let slotval1 = gen_qwidget_types.QWidget(h: viewport, owned: false)
   inst.setupViewport(slotval1)
 
-method paintEvent*(self: VirtualQColumnView, param1: gen_qevent_types.QPaintEvent): void {.base.} =
-  QColumnViewpaintEvent(self[], param1)
-proc cQColumnView_method_callback_paintEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQColumnView_method_callback_paintEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQColumnView](fcQColumnView_vdata(self))
   let slotval1 = gen_qevent_types.QPaintEvent(h: param1, owned: false)
   inst.paintEvent(slotval1)
 
-method wheelEvent*(self: VirtualQColumnView, param1: gen_qevent_types.QWheelEvent): void {.base.} =
-  QColumnViewwheelEvent(self[], param1)
-proc cQColumnView_method_callback_wheelEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQColumnView_method_callback_wheelEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQColumnView](fcQColumnView_vdata(self))
   let slotval1 = gen_qevent_types.QWheelEvent(h: param1, owned: false)
   inst.wheelEvent(slotval1)
 
-method contextMenuEvent*(self: VirtualQColumnView, param1: gen_qevent_types.QContextMenuEvent): void {.base.} =
-  QColumnViewcontextMenuEvent(self[], param1)
-proc cQColumnView_method_callback_contextMenuEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQColumnView_method_callback_contextMenuEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQColumnView](fcQColumnView_vdata(self))
   let slotval1 = gen_qevent_types.QContextMenuEvent(h: param1, owned: false)
   inst.contextMenuEvent(slotval1)
 
-method changeEvent*(self: VirtualQColumnView, param1: gen_qcoreevent_types.QEvent): void {.base.} =
-  QColumnViewchangeEvent(self[], param1)
-proc cQColumnView_method_callback_changeEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQColumnView_method_callback_changeEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQColumnView](fcQColumnView_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
   inst.changeEvent(slotval1)
 
-method devType*(self: VirtualQColumnView): cint {.base.} =
-  QColumnViewdevType(self[])
-proc cQColumnView_method_callback_devType(self: pointer): cint {.cdecl.} =
+proc fcQColumnView_method_callback_devType(self: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQColumnView](fcQColumnView_vdata(self))
   var virtualReturn = inst.devType()
   virtualReturn
 
-method setVisible*(self: VirtualQColumnView, visible: bool): void {.base.} =
-  QColumnViewsetVisible(self[], visible)
-proc cQColumnView_method_callback_setVisible(self: pointer, visible: bool): void {.cdecl.} =
+proc fcQColumnView_method_callback_setVisible(self: pointer, visible: bool): void {.cdecl.} =
   let inst = cast[VirtualQColumnView](fcQColumnView_vdata(self))
   let slotval1 = visible
   inst.setVisible(slotval1)
 
-method heightForWidth*(self: VirtualQColumnView, param1: cint): cint {.base.} =
-  QColumnViewheightForWidth(self[], param1)
-proc cQColumnView_method_callback_heightForWidth(self: pointer, param1: cint): cint {.cdecl.} =
+proc fcQColumnView_method_callback_heightForWidth(self: pointer, param1: cint): cint {.cdecl.} =
   let inst = cast[VirtualQColumnView](fcQColumnView_vdata(self))
   let slotval1 = param1
   var virtualReturn = inst.heightForWidth(slotval1)
   virtualReturn
 
-method hasHeightForWidth*(self: VirtualQColumnView): bool {.base.} =
-  QColumnViewhasHeightForWidth(self[])
-proc cQColumnView_method_callback_hasHeightForWidth(self: pointer): bool {.cdecl.} =
+proc fcQColumnView_method_callback_hasHeightForWidth(self: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQColumnView](fcQColumnView_vdata(self))
   var virtualReturn = inst.hasHeightForWidth()
   virtualReturn
 
-method paintEngine*(self: VirtualQColumnView): gen_qpaintengine_types.QPaintEngine {.base.} =
-  QColumnViewpaintEngine(self[])
-proc cQColumnView_method_callback_paintEngine(self: pointer): pointer {.cdecl.} =
+proc fcQColumnView_method_callback_paintEngine(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQColumnView](fcQColumnView_vdata(self))
   var virtualReturn = inst.paintEngine()
   virtualReturn.owned = false # TODO move?
@@ -2189,72 +2231,52 @@ proc cQColumnView_method_callback_paintEngine(self: pointer): pointer {.cdecl.} 
   virtualReturn.h = nil
   virtualReturn_h
 
-method keyReleaseEvent*(self: VirtualQColumnView, event: gen_qevent_types.QKeyEvent): void {.base.} =
-  QColumnViewkeyReleaseEvent(self[], event)
-proc cQColumnView_method_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQColumnView_method_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQColumnView](fcQColumnView_vdata(self))
   let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   inst.keyReleaseEvent(slotval1)
 
-method enterEvent*(self: VirtualQColumnView, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QColumnViewenterEvent(self[], event)
-proc cQColumnView_method_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQColumnView_method_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQColumnView](fcQColumnView_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.enterEvent(slotval1)
 
-method leaveEvent*(self: VirtualQColumnView, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QColumnViewleaveEvent(self[], event)
-proc cQColumnView_method_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQColumnView_method_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQColumnView](fcQColumnView_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.leaveEvent(slotval1)
 
-method moveEvent*(self: VirtualQColumnView, event: gen_qevent_types.QMoveEvent): void {.base.} =
-  QColumnViewmoveEvent(self[], event)
-proc cQColumnView_method_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQColumnView_method_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQColumnView](fcQColumnView_vdata(self))
   let slotval1 = gen_qevent_types.QMoveEvent(h: event, owned: false)
   inst.moveEvent(slotval1)
 
-method closeEvent*(self: VirtualQColumnView, event: gen_qevent_types.QCloseEvent): void {.base.} =
-  QColumnViewcloseEvent(self[], event)
-proc cQColumnView_method_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQColumnView_method_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQColumnView](fcQColumnView_vdata(self))
   let slotval1 = gen_qevent_types.QCloseEvent(h: event, owned: false)
   inst.closeEvent(slotval1)
 
-method tabletEvent*(self: VirtualQColumnView, event: gen_qevent_types.QTabletEvent): void {.base.} =
-  QColumnViewtabletEvent(self[], event)
-proc cQColumnView_method_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQColumnView_method_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQColumnView](fcQColumnView_vdata(self))
   let slotval1 = gen_qevent_types.QTabletEvent(h: event, owned: false)
   inst.tabletEvent(slotval1)
 
-method actionEvent*(self: VirtualQColumnView, event: gen_qevent_types.QActionEvent): void {.base.} =
-  QColumnViewactionEvent(self[], event)
-proc cQColumnView_method_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQColumnView_method_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQColumnView](fcQColumnView_vdata(self))
   let slotval1 = gen_qevent_types.QActionEvent(h: event, owned: false)
   inst.actionEvent(slotval1)
 
-method showEvent*(self: VirtualQColumnView, event: gen_qevent_types.QShowEvent): void {.base.} =
-  QColumnViewshowEvent(self[], event)
-proc cQColumnView_method_callback_showEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQColumnView_method_callback_showEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQColumnView](fcQColumnView_vdata(self))
   let slotval1 = gen_qevent_types.QShowEvent(h: event, owned: false)
   inst.showEvent(slotval1)
 
-method hideEvent*(self: VirtualQColumnView, event: gen_qevent_types.QHideEvent): void {.base.} =
-  QColumnViewhideEvent(self[], event)
-proc cQColumnView_method_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQColumnView_method_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQColumnView](fcQColumnView_vdata(self))
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   inst.hideEvent(slotval1)
 
-method nativeEvent*(self: VirtualQColumnView, eventType: openArray[byte], message: pointer, resultVal: ptr clong): bool {.base.} =
-  QColumnViewnativeEvent(self[], eventType, message, resultVal)
-proc cQColumnView_method_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr clong): bool {.cdecl.} =
+proc fcQColumnView_method_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr clong): bool {.cdecl.} =
   let inst = cast[VirtualQColumnView](fcQColumnView_vdata(self))
   var veventType_bytearray = eventType
   var veventTypex_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](veventType_bytearray.data), 0, int(veventType_bytearray.len)-1))
@@ -2265,24 +2287,18 @@ proc cQColumnView_method_callback_nativeEvent(self: pointer, eventType: struct_m
   var virtualReturn = inst.nativeEvent(slotval1, slotval2, slotval3)
   virtualReturn
 
-method metric*(self: VirtualQColumnView, param1: cint): cint {.base.} =
-  QColumnViewmetric(self[], param1)
-proc cQColumnView_method_callback_metric(self: pointer, param1: cint): cint {.cdecl.} =
+proc fcQColumnView_method_callback_metric(self: pointer, param1: cint): cint {.cdecl.} =
   let inst = cast[VirtualQColumnView](fcQColumnView_vdata(self))
   let slotval1 = cint(param1)
   var virtualReturn = inst.metric(slotval1)
   virtualReturn
 
-method initPainter*(self: VirtualQColumnView, painter: gen_qpainter_types.QPainter): void {.base.} =
-  QColumnViewinitPainter(self[], painter)
-proc cQColumnView_method_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
+proc fcQColumnView_method_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
   let inst = cast[VirtualQColumnView](fcQColumnView_vdata(self))
   let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
   inst.initPainter(slotval1)
 
-method redirected*(self: VirtualQColumnView, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.base.} =
-  QColumnViewredirected(self[], offset)
-proc cQColumnView_method_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
+proc fcQColumnView_method_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQColumnView](fcQColumnView_vdata(self))
   let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
   var virtualReturn = inst.redirected(slotval1)
@@ -2291,9 +2307,7 @@ proc cQColumnView_method_callback_redirected(self: pointer, offset: pointer): po
   virtualReturn.h = nil
   virtualReturn_h
 
-method sharedPainter*(self: VirtualQColumnView): gen_qpainter_types.QPainter {.base.} =
-  QColumnViewsharedPainter(self[])
-proc cQColumnView_method_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
+proc fcQColumnView_method_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQColumnView](fcQColumnView_vdata(self))
   var virtualReturn = inst.sharedPainter()
   virtualReturn.owned = false # TODO move?
@@ -2301,33 +2315,26 @@ proc cQColumnView_method_callback_sharedPainter(self: pointer): pointer {.cdecl.
   virtualReturn.h = nil
   virtualReturn_h
 
-method childEvent*(self: VirtualQColumnView, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
-  QColumnViewchildEvent(self[], event)
-proc cQColumnView_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQColumnView_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQColumnView](fcQColumnView_vdata(self))
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
-method customEvent*(self: VirtualQColumnView, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QColumnViewcustomEvent(self[], event)
-proc cQColumnView_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQColumnView_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQColumnView](fcQColumnView_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
-method connectNotify*(self: VirtualQColumnView, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QColumnViewconnectNotify(self[], signal)
-proc cQColumnView_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQColumnView_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQColumnView](fcQColumnView_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
-method disconnectNotify*(self: VirtualQColumnView, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QColumnViewdisconnectNotify(self[], signal)
-proc cQColumnView_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQColumnView_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQColumnView](fcQColumnView_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
+
 
 proc initializeColumn*(self: gen_qcolumnview_types.QColumnView, column: gen_qabstractitemview_types.QAbstractItemView): void =
   fcQColumnView_protectedbase_initializeColumn(self.h, column.h)
@@ -2425,191 +2432,191 @@ proc create*(T: type gen_qcolumnview_types.QColumnView,
     let vtbl = cast[ref QColumnViewVTable](fcQColumnView_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQColumnView_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQColumnView_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQColumnView_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQColumnView_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQColumnView_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQColumnView_vtable_callback_metacall
   if not isNil(vtbl[].indexAt):
-    vtbl[].vtbl.indexAt = cQColumnView_vtable_callback_indexAt
+    vtbl[].vtbl.indexAt = fcQColumnView_vtable_callback_indexAt
   if not isNil(vtbl[].scrollTo):
-    vtbl[].vtbl.scrollTo = cQColumnView_vtable_callback_scrollTo
+    vtbl[].vtbl.scrollTo = fcQColumnView_vtable_callback_scrollTo
   if not isNil(vtbl[].sizeHint):
-    vtbl[].vtbl.sizeHint = cQColumnView_vtable_callback_sizeHint
+    vtbl[].vtbl.sizeHint = fcQColumnView_vtable_callback_sizeHint
   if not isNil(vtbl[].visualRect):
-    vtbl[].vtbl.visualRect = cQColumnView_vtable_callback_visualRect
+    vtbl[].vtbl.visualRect = fcQColumnView_vtable_callback_visualRect
   if not isNil(vtbl[].setModel):
-    vtbl[].vtbl.setModel = cQColumnView_vtable_callback_setModel
+    vtbl[].vtbl.setModel = fcQColumnView_vtable_callback_setModel
   if not isNil(vtbl[].setSelectionModel):
-    vtbl[].vtbl.setSelectionModel = cQColumnView_vtable_callback_setSelectionModel
+    vtbl[].vtbl.setSelectionModel = fcQColumnView_vtable_callback_setSelectionModel
   if not isNil(vtbl[].setRootIndex):
-    vtbl[].vtbl.setRootIndex = cQColumnView_vtable_callback_setRootIndex
+    vtbl[].vtbl.setRootIndex = fcQColumnView_vtable_callback_setRootIndex
   if not isNil(vtbl[].selectAll):
-    vtbl[].vtbl.selectAll = cQColumnView_vtable_callback_selectAll
+    vtbl[].vtbl.selectAll = fcQColumnView_vtable_callback_selectAll
   if not isNil(vtbl[].isIndexHidden):
-    vtbl[].vtbl.isIndexHidden = cQColumnView_vtable_callback_isIndexHidden
+    vtbl[].vtbl.isIndexHidden = fcQColumnView_vtable_callback_isIndexHidden
   if not isNil(vtbl[].moveCursor):
-    vtbl[].vtbl.moveCursor = cQColumnView_vtable_callback_moveCursor
+    vtbl[].vtbl.moveCursor = fcQColumnView_vtable_callback_moveCursor
   if not isNil(vtbl[].resizeEvent):
-    vtbl[].vtbl.resizeEvent = cQColumnView_vtable_callback_resizeEvent
+    vtbl[].vtbl.resizeEvent = fcQColumnView_vtable_callback_resizeEvent
   if not isNil(vtbl[].setSelection):
-    vtbl[].vtbl.setSelection = cQColumnView_vtable_callback_setSelection
+    vtbl[].vtbl.setSelection = fcQColumnView_vtable_callback_setSelection
   if not isNil(vtbl[].visualRegionForSelection):
-    vtbl[].vtbl.visualRegionForSelection = cQColumnView_vtable_callback_visualRegionForSelection
+    vtbl[].vtbl.visualRegionForSelection = fcQColumnView_vtable_callback_visualRegionForSelection
   if not isNil(vtbl[].horizontalOffset):
-    vtbl[].vtbl.horizontalOffset = cQColumnView_vtable_callback_horizontalOffset
+    vtbl[].vtbl.horizontalOffset = fcQColumnView_vtable_callback_horizontalOffset
   if not isNil(vtbl[].verticalOffset):
-    vtbl[].vtbl.verticalOffset = cQColumnView_vtable_callback_verticalOffset
+    vtbl[].vtbl.verticalOffset = fcQColumnView_vtable_callback_verticalOffset
   if not isNil(vtbl[].rowsInserted):
-    vtbl[].vtbl.rowsInserted = cQColumnView_vtable_callback_rowsInserted
+    vtbl[].vtbl.rowsInserted = fcQColumnView_vtable_callback_rowsInserted
   if not isNil(vtbl[].currentChanged):
-    vtbl[].vtbl.currentChanged = cQColumnView_vtable_callback_currentChanged
+    vtbl[].vtbl.currentChanged = fcQColumnView_vtable_callback_currentChanged
   if not isNil(vtbl[].scrollContentsBy):
-    vtbl[].vtbl.scrollContentsBy = cQColumnView_vtable_callback_scrollContentsBy
+    vtbl[].vtbl.scrollContentsBy = fcQColumnView_vtable_callback_scrollContentsBy
   if not isNil(vtbl[].createColumn):
-    vtbl[].vtbl.createColumn = cQColumnView_vtable_callback_createColumn
+    vtbl[].vtbl.createColumn = fcQColumnView_vtable_callback_createColumn
   if not isNil(vtbl[].keyboardSearch):
-    vtbl[].vtbl.keyboardSearch = cQColumnView_vtable_callback_keyboardSearch
+    vtbl[].vtbl.keyboardSearch = fcQColumnView_vtable_callback_keyboardSearch
   if not isNil(vtbl[].sizeHintForRow):
-    vtbl[].vtbl.sizeHintForRow = cQColumnView_vtable_callback_sizeHintForRow
+    vtbl[].vtbl.sizeHintForRow = fcQColumnView_vtable_callback_sizeHintForRow
   if not isNil(vtbl[].sizeHintForColumn):
-    vtbl[].vtbl.sizeHintForColumn = cQColumnView_vtable_callback_sizeHintForColumn
+    vtbl[].vtbl.sizeHintForColumn = fcQColumnView_vtable_callback_sizeHintForColumn
   if not isNil(vtbl[].inputMethodQuery):
-    vtbl[].vtbl.inputMethodQuery = cQColumnView_vtable_callback_inputMethodQuery
+    vtbl[].vtbl.inputMethodQuery = fcQColumnView_vtable_callback_inputMethodQuery
   if not isNil(vtbl[].reset):
-    vtbl[].vtbl.reset = cQColumnView_vtable_callback_reset
+    vtbl[].vtbl.reset = fcQColumnView_vtable_callback_reset
   if not isNil(vtbl[].doItemsLayout):
-    vtbl[].vtbl.doItemsLayout = cQColumnView_vtable_callback_doItemsLayout
+    vtbl[].vtbl.doItemsLayout = fcQColumnView_vtable_callback_doItemsLayout
   if not isNil(vtbl[].dataChanged):
-    vtbl[].vtbl.dataChanged = cQColumnView_vtable_callback_dataChanged
+    vtbl[].vtbl.dataChanged = fcQColumnView_vtable_callback_dataChanged
   if not isNil(vtbl[].rowsAboutToBeRemoved):
-    vtbl[].vtbl.rowsAboutToBeRemoved = cQColumnView_vtable_callback_rowsAboutToBeRemoved
+    vtbl[].vtbl.rowsAboutToBeRemoved = fcQColumnView_vtable_callback_rowsAboutToBeRemoved
   if not isNil(vtbl[].selectionChanged):
-    vtbl[].vtbl.selectionChanged = cQColumnView_vtable_callback_selectionChanged
+    vtbl[].vtbl.selectionChanged = fcQColumnView_vtable_callback_selectionChanged
   if not isNil(vtbl[].updateEditorData):
-    vtbl[].vtbl.updateEditorData = cQColumnView_vtable_callback_updateEditorData
+    vtbl[].vtbl.updateEditorData = fcQColumnView_vtable_callback_updateEditorData
   if not isNil(vtbl[].updateEditorGeometries):
-    vtbl[].vtbl.updateEditorGeometries = cQColumnView_vtable_callback_updateEditorGeometries
+    vtbl[].vtbl.updateEditorGeometries = fcQColumnView_vtable_callback_updateEditorGeometries
   if not isNil(vtbl[].updateGeometries):
-    vtbl[].vtbl.updateGeometries = cQColumnView_vtable_callback_updateGeometries
+    vtbl[].vtbl.updateGeometries = fcQColumnView_vtable_callback_updateGeometries
   if not isNil(vtbl[].verticalScrollbarAction):
-    vtbl[].vtbl.verticalScrollbarAction = cQColumnView_vtable_callback_verticalScrollbarAction
+    vtbl[].vtbl.verticalScrollbarAction = fcQColumnView_vtable_callback_verticalScrollbarAction
   if not isNil(vtbl[].horizontalScrollbarAction):
-    vtbl[].vtbl.horizontalScrollbarAction = cQColumnView_vtable_callback_horizontalScrollbarAction
+    vtbl[].vtbl.horizontalScrollbarAction = fcQColumnView_vtable_callback_horizontalScrollbarAction
   if not isNil(vtbl[].verticalScrollbarValueChanged):
-    vtbl[].vtbl.verticalScrollbarValueChanged = cQColumnView_vtable_callback_verticalScrollbarValueChanged
+    vtbl[].vtbl.verticalScrollbarValueChanged = fcQColumnView_vtable_callback_verticalScrollbarValueChanged
   if not isNil(vtbl[].horizontalScrollbarValueChanged):
-    vtbl[].vtbl.horizontalScrollbarValueChanged = cQColumnView_vtable_callback_horizontalScrollbarValueChanged
+    vtbl[].vtbl.horizontalScrollbarValueChanged = fcQColumnView_vtable_callback_horizontalScrollbarValueChanged
   if not isNil(vtbl[].closeEditor):
-    vtbl[].vtbl.closeEditor = cQColumnView_vtable_callback_closeEditor
+    vtbl[].vtbl.closeEditor = fcQColumnView_vtable_callback_closeEditor
   if not isNil(vtbl[].commitData):
-    vtbl[].vtbl.commitData = cQColumnView_vtable_callback_commitData
+    vtbl[].vtbl.commitData = fcQColumnView_vtable_callback_commitData
   if not isNil(vtbl[].editorDestroyed):
-    vtbl[].vtbl.editorDestroyed = cQColumnView_vtable_callback_editorDestroyed
+    vtbl[].vtbl.editorDestroyed = fcQColumnView_vtable_callback_editorDestroyed
   if not isNil(vtbl[].selectedIndexes):
-    vtbl[].vtbl.selectedIndexes = cQColumnView_vtable_callback_selectedIndexes
+    vtbl[].vtbl.selectedIndexes = fcQColumnView_vtable_callback_selectedIndexes
   if not isNil(vtbl[].edit2):
-    vtbl[].vtbl.edit2 = cQColumnView_vtable_callback_edit2
+    vtbl[].vtbl.edit2 = fcQColumnView_vtable_callback_edit2
   if not isNil(vtbl[].selectionCommand):
-    vtbl[].vtbl.selectionCommand = cQColumnView_vtable_callback_selectionCommand
+    vtbl[].vtbl.selectionCommand = fcQColumnView_vtable_callback_selectionCommand
   if not isNil(vtbl[].startDrag):
-    vtbl[].vtbl.startDrag = cQColumnView_vtable_callback_startDrag
+    vtbl[].vtbl.startDrag = fcQColumnView_vtable_callback_startDrag
   if not isNil(vtbl[].viewOptions):
-    vtbl[].vtbl.viewOptions = cQColumnView_vtable_callback_viewOptions
+    vtbl[].vtbl.viewOptions = fcQColumnView_vtable_callback_viewOptions
   if not isNil(vtbl[].focusNextPrevChild):
-    vtbl[].vtbl.focusNextPrevChild = cQColumnView_vtable_callback_focusNextPrevChild
+    vtbl[].vtbl.focusNextPrevChild = fcQColumnView_vtable_callback_focusNextPrevChild
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQColumnView_vtable_callback_event
+    vtbl[].vtbl.event = fcQColumnView_vtable_callback_event
   if not isNil(vtbl[].viewportEvent):
-    vtbl[].vtbl.viewportEvent = cQColumnView_vtable_callback_viewportEvent
+    vtbl[].vtbl.viewportEvent = fcQColumnView_vtable_callback_viewportEvent
   if not isNil(vtbl[].mousePressEvent):
-    vtbl[].vtbl.mousePressEvent = cQColumnView_vtable_callback_mousePressEvent
+    vtbl[].vtbl.mousePressEvent = fcQColumnView_vtable_callback_mousePressEvent
   if not isNil(vtbl[].mouseMoveEvent):
-    vtbl[].vtbl.mouseMoveEvent = cQColumnView_vtable_callback_mouseMoveEvent
+    vtbl[].vtbl.mouseMoveEvent = fcQColumnView_vtable_callback_mouseMoveEvent
   if not isNil(vtbl[].mouseReleaseEvent):
-    vtbl[].vtbl.mouseReleaseEvent = cQColumnView_vtable_callback_mouseReleaseEvent
+    vtbl[].vtbl.mouseReleaseEvent = fcQColumnView_vtable_callback_mouseReleaseEvent
   if not isNil(vtbl[].mouseDoubleClickEvent):
-    vtbl[].vtbl.mouseDoubleClickEvent = cQColumnView_vtable_callback_mouseDoubleClickEvent
+    vtbl[].vtbl.mouseDoubleClickEvent = fcQColumnView_vtable_callback_mouseDoubleClickEvent
   if not isNil(vtbl[].dragEnterEvent):
-    vtbl[].vtbl.dragEnterEvent = cQColumnView_vtable_callback_dragEnterEvent
+    vtbl[].vtbl.dragEnterEvent = fcQColumnView_vtable_callback_dragEnterEvent
   if not isNil(vtbl[].dragMoveEvent):
-    vtbl[].vtbl.dragMoveEvent = cQColumnView_vtable_callback_dragMoveEvent
+    vtbl[].vtbl.dragMoveEvent = fcQColumnView_vtable_callback_dragMoveEvent
   if not isNil(vtbl[].dragLeaveEvent):
-    vtbl[].vtbl.dragLeaveEvent = cQColumnView_vtable_callback_dragLeaveEvent
+    vtbl[].vtbl.dragLeaveEvent = fcQColumnView_vtable_callback_dragLeaveEvent
   if not isNil(vtbl[].dropEvent):
-    vtbl[].vtbl.dropEvent = cQColumnView_vtable_callback_dropEvent
+    vtbl[].vtbl.dropEvent = fcQColumnView_vtable_callback_dropEvent
   if not isNil(vtbl[].focusInEvent):
-    vtbl[].vtbl.focusInEvent = cQColumnView_vtable_callback_focusInEvent
+    vtbl[].vtbl.focusInEvent = fcQColumnView_vtable_callback_focusInEvent
   if not isNil(vtbl[].focusOutEvent):
-    vtbl[].vtbl.focusOutEvent = cQColumnView_vtable_callback_focusOutEvent
+    vtbl[].vtbl.focusOutEvent = fcQColumnView_vtable_callback_focusOutEvent
   if not isNil(vtbl[].keyPressEvent):
-    vtbl[].vtbl.keyPressEvent = cQColumnView_vtable_callback_keyPressEvent
+    vtbl[].vtbl.keyPressEvent = fcQColumnView_vtable_callback_keyPressEvent
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQColumnView_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQColumnView_vtable_callback_timerEvent
   if not isNil(vtbl[].inputMethodEvent):
-    vtbl[].vtbl.inputMethodEvent = cQColumnView_vtable_callback_inputMethodEvent
+    vtbl[].vtbl.inputMethodEvent = fcQColumnView_vtable_callback_inputMethodEvent
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQColumnView_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQColumnView_vtable_callback_eventFilter
   if not isNil(vtbl[].viewportSizeHint):
-    vtbl[].vtbl.viewportSizeHint = cQColumnView_vtable_callback_viewportSizeHint
+    vtbl[].vtbl.viewportSizeHint = fcQColumnView_vtable_callback_viewportSizeHint
   if not isNil(vtbl[].minimumSizeHint):
-    vtbl[].vtbl.minimumSizeHint = cQColumnView_vtable_callback_minimumSizeHint
+    vtbl[].vtbl.minimumSizeHint = fcQColumnView_vtable_callback_minimumSizeHint
   if not isNil(vtbl[].setupViewport):
-    vtbl[].vtbl.setupViewport = cQColumnView_vtable_callback_setupViewport
+    vtbl[].vtbl.setupViewport = fcQColumnView_vtable_callback_setupViewport
   if not isNil(vtbl[].paintEvent):
-    vtbl[].vtbl.paintEvent = cQColumnView_vtable_callback_paintEvent
+    vtbl[].vtbl.paintEvent = fcQColumnView_vtable_callback_paintEvent
   if not isNil(vtbl[].wheelEvent):
-    vtbl[].vtbl.wheelEvent = cQColumnView_vtable_callback_wheelEvent
+    vtbl[].vtbl.wheelEvent = fcQColumnView_vtable_callback_wheelEvent
   if not isNil(vtbl[].contextMenuEvent):
-    vtbl[].vtbl.contextMenuEvent = cQColumnView_vtable_callback_contextMenuEvent
+    vtbl[].vtbl.contextMenuEvent = fcQColumnView_vtable_callback_contextMenuEvent
   if not isNil(vtbl[].changeEvent):
-    vtbl[].vtbl.changeEvent = cQColumnView_vtable_callback_changeEvent
+    vtbl[].vtbl.changeEvent = fcQColumnView_vtable_callback_changeEvent
   if not isNil(vtbl[].devType):
-    vtbl[].vtbl.devType = cQColumnView_vtable_callback_devType
+    vtbl[].vtbl.devType = fcQColumnView_vtable_callback_devType
   if not isNil(vtbl[].setVisible):
-    vtbl[].vtbl.setVisible = cQColumnView_vtable_callback_setVisible
+    vtbl[].vtbl.setVisible = fcQColumnView_vtable_callback_setVisible
   if not isNil(vtbl[].heightForWidth):
-    vtbl[].vtbl.heightForWidth = cQColumnView_vtable_callback_heightForWidth
+    vtbl[].vtbl.heightForWidth = fcQColumnView_vtable_callback_heightForWidth
   if not isNil(vtbl[].hasHeightForWidth):
-    vtbl[].vtbl.hasHeightForWidth = cQColumnView_vtable_callback_hasHeightForWidth
+    vtbl[].vtbl.hasHeightForWidth = fcQColumnView_vtable_callback_hasHeightForWidth
   if not isNil(vtbl[].paintEngine):
-    vtbl[].vtbl.paintEngine = cQColumnView_vtable_callback_paintEngine
+    vtbl[].vtbl.paintEngine = fcQColumnView_vtable_callback_paintEngine
   if not isNil(vtbl[].keyReleaseEvent):
-    vtbl[].vtbl.keyReleaseEvent = cQColumnView_vtable_callback_keyReleaseEvent
+    vtbl[].vtbl.keyReleaseEvent = fcQColumnView_vtable_callback_keyReleaseEvent
   if not isNil(vtbl[].enterEvent):
-    vtbl[].vtbl.enterEvent = cQColumnView_vtable_callback_enterEvent
+    vtbl[].vtbl.enterEvent = fcQColumnView_vtable_callback_enterEvent
   if not isNil(vtbl[].leaveEvent):
-    vtbl[].vtbl.leaveEvent = cQColumnView_vtable_callback_leaveEvent
+    vtbl[].vtbl.leaveEvent = fcQColumnView_vtable_callback_leaveEvent
   if not isNil(vtbl[].moveEvent):
-    vtbl[].vtbl.moveEvent = cQColumnView_vtable_callback_moveEvent
+    vtbl[].vtbl.moveEvent = fcQColumnView_vtable_callback_moveEvent
   if not isNil(vtbl[].closeEvent):
-    vtbl[].vtbl.closeEvent = cQColumnView_vtable_callback_closeEvent
+    vtbl[].vtbl.closeEvent = fcQColumnView_vtable_callback_closeEvent
   if not isNil(vtbl[].tabletEvent):
-    vtbl[].vtbl.tabletEvent = cQColumnView_vtable_callback_tabletEvent
+    vtbl[].vtbl.tabletEvent = fcQColumnView_vtable_callback_tabletEvent
   if not isNil(vtbl[].actionEvent):
-    vtbl[].vtbl.actionEvent = cQColumnView_vtable_callback_actionEvent
+    vtbl[].vtbl.actionEvent = fcQColumnView_vtable_callback_actionEvent
   if not isNil(vtbl[].showEvent):
-    vtbl[].vtbl.showEvent = cQColumnView_vtable_callback_showEvent
+    vtbl[].vtbl.showEvent = fcQColumnView_vtable_callback_showEvent
   if not isNil(vtbl[].hideEvent):
-    vtbl[].vtbl.hideEvent = cQColumnView_vtable_callback_hideEvent
+    vtbl[].vtbl.hideEvent = fcQColumnView_vtable_callback_hideEvent
   if not isNil(vtbl[].nativeEvent):
-    vtbl[].vtbl.nativeEvent = cQColumnView_vtable_callback_nativeEvent
+    vtbl[].vtbl.nativeEvent = fcQColumnView_vtable_callback_nativeEvent
   if not isNil(vtbl[].metric):
-    vtbl[].vtbl.metric = cQColumnView_vtable_callback_metric
+    vtbl[].vtbl.metric = fcQColumnView_vtable_callback_metric
   if not isNil(vtbl[].initPainter):
-    vtbl[].vtbl.initPainter = cQColumnView_vtable_callback_initPainter
+    vtbl[].vtbl.initPainter = fcQColumnView_vtable_callback_initPainter
   if not isNil(vtbl[].redirected):
-    vtbl[].vtbl.redirected = cQColumnView_vtable_callback_redirected
+    vtbl[].vtbl.redirected = fcQColumnView_vtable_callback_redirected
   if not isNil(vtbl[].sharedPainter):
-    vtbl[].vtbl.sharedPainter = cQColumnView_vtable_callback_sharedPainter
+    vtbl[].vtbl.sharedPainter = fcQColumnView_vtable_callback_sharedPainter
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQColumnView_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQColumnView_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQColumnView_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQColumnView_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQColumnView_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQColumnView_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQColumnView_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQColumnView_vtable_callback_disconnectNotify
   gen_qcolumnview_types.QColumnView(h: fcQColumnView_new(addr(vtbl[].vtbl), addr(vtbl[]), parent.h), owned: true)
 
 proc create*(T: type gen_qcolumnview_types.QColumnView,
@@ -2620,191 +2627,191 @@ proc create*(T: type gen_qcolumnview_types.QColumnView,
     let vtbl = cast[ref QColumnViewVTable](fcQColumnView_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQColumnView_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQColumnView_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQColumnView_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQColumnView_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQColumnView_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQColumnView_vtable_callback_metacall
   if not isNil(vtbl[].indexAt):
-    vtbl[].vtbl.indexAt = cQColumnView_vtable_callback_indexAt
+    vtbl[].vtbl.indexAt = fcQColumnView_vtable_callback_indexAt
   if not isNil(vtbl[].scrollTo):
-    vtbl[].vtbl.scrollTo = cQColumnView_vtable_callback_scrollTo
+    vtbl[].vtbl.scrollTo = fcQColumnView_vtable_callback_scrollTo
   if not isNil(vtbl[].sizeHint):
-    vtbl[].vtbl.sizeHint = cQColumnView_vtable_callback_sizeHint
+    vtbl[].vtbl.sizeHint = fcQColumnView_vtable_callback_sizeHint
   if not isNil(vtbl[].visualRect):
-    vtbl[].vtbl.visualRect = cQColumnView_vtable_callback_visualRect
+    vtbl[].vtbl.visualRect = fcQColumnView_vtable_callback_visualRect
   if not isNil(vtbl[].setModel):
-    vtbl[].vtbl.setModel = cQColumnView_vtable_callback_setModel
+    vtbl[].vtbl.setModel = fcQColumnView_vtable_callback_setModel
   if not isNil(vtbl[].setSelectionModel):
-    vtbl[].vtbl.setSelectionModel = cQColumnView_vtable_callback_setSelectionModel
+    vtbl[].vtbl.setSelectionModel = fcQColumnView_vtable_callback_setSelectionModel
   if not isNil(vtbl[].setRootIndex):
-    vtbl[].vtbl.setRootIndex = cQColumnView_vtable_callback_setRootIndex
+    vtbl[].vtbl.setRootIndex = fcQColumnView_vtable_callback_setRootIndex
   if not isNil(vtbl[].selectAll):
-    vtbl[].vtbl.selectAll = cQColumnView_vtable_callback_selectAll
+    vtbl[].vtbl.selectAll = fcQColumnView_vtable_callback_selectAll
   if not isNil(vtbl[].isIndexHidden):
-    vtbl[].vtbl.isIndexHidden = cQColumnView_vtable_callback_isIndexHidden
+    vtbl[].vtbl.isIndexHidden = fcQColumnView_vtable_callback_isIndexHidden
   if not isNil(vtbl[].moveCursor):
-    vtbl[].vtbl.moveCursor = cQColumnView_vtable_callback_moveCursor
+    vtbl[].vtbl.moveCursor = fcQColumnView_vtable_callback_moveCursor
   if not isNil(vtbl[].resizeEvent):
-    vtbl[].vtbl.resizeEvent = cQColumnView_vtable_callback_resizeEvent
+    vtbl[].vtbl.resizeEvent = fcQColumnView_vtable_callback_resizeEvent
   if not isNil(vtbl[].setSelection):
-    vtbl[].vtbl.setSelection = cQColumnView_vtable_callback_setSelection
+    vtbl[].vtbl.setSelection = fcQColumnView_vtable_callback_setSelection
   if not isNil(vtbl[].visualRegionForSelection):
-    vtbl[].vtbl.visualRegionForSelection = cQColumnView_vtable_callback_visualRegionForSelection
+    vtbl[].vtbl.visualRegionForSelection = fcQColumnView_vtable_callback_visualRegionForSelection
   if not isNil(vtbl[].horizontalOffset):
-    vtbl[].vtbl.horizontalOffset = cQColumnView_vtable_callback_horizontalOffset
+    vtbl[].vtbl.horizontalOffset = fcQColumnView_vtable_callback_horizontalOffset
   if not isNil(vtbl[].verticalOffset):
-    vtbl[].vtbl.verticalOffset = cQColumnView_vtable_callback_verticalOffset
+    vtbl[].vtbl.verticalOffset = fcQColumnView_vtable_callback_verticalOffset
   if not isNil(vtbl[].rowsInserted):
-    vtbl[].vtbl.rowsInserted = cQColumnView_vtable_callback_rowsInserted
+    vtbl[].vtbl.rowsInserted = fcQColumnView_vtable_callback_rowsInserted
   if not isNil(vtbl[].currentChanged):
-    vtbl[].vtbl.currentChanged = cQColumnView_vtable_callback_currentChanged
+    vtbl[].vtbl.currentChanged = fcQColumnView_vtable_callback_currentChanged
   if not isNil(vtbl[].scrollContentsBy):
-    vtbl[].vtbl.scrollContentsBy = cQColumnView_vtable_callback_scrollContentsBy
+    vtbl[].vtbl.scrollContentsBy = fcQColumnView_vtable_callback_scrollContentsBy
   if not isNil(vtbl[].createColumn):
-    vtbl[].vtbl.createColumn = cQColumnView_vtable_callback_createColumn
+    vtbl[].vtbl.createColumn = fcQColumnView_vtable_callback_createColumn
   if not isNil(vtbl[].keyboardSearch):
-    vtbl[].vtbl.keyboardSearch = cQColumnView_vtable_callback_keyboardSearch
+    vtbl[].vtbl.keyboardSearch = fcQColumnView_vtable_callback_keyboardSearch
   if not isNil(vtbl[].sizeHintForRow):
-    vtbl[].vtbl.sizeHintForRow = cQColumnView_vtable_callback_sizeHintForRow
+    vtbl[].vtbl.sizeHintForRow = fcQColumnView_vtable_callback_sizeHintForRow
   if not isNil(vtbl[].sizeHintForColumn):
-    vtbl[].vtbl.sizeHintForColumn = cQColumnView_vtable_callback_sizeHintForColumn
+    vtbl[].vtbl.sizeHintForColumn = fcQColumnView_vtable_callback_sizeHintForColumn
   if not isNil(vtbl[].inputMethodQuery):
-    vtbl[].vtbl.inputMethodQuery = cQColumnView_vtable_callback_inputMethodQuery
+    vtbl[].vtbl.inputMethodQuery = fcQColumnView_vtable_callback_inputMethodQuery
   if not isNil(vtbl[].reset):
-    vtbl[].vtbl.reset = cQColumnView_vtable_callback_reset
+    vtbl[].vtbl.reset = fcQColumnView_vtable_callback_reset
   if not isNil(vtbl[].doItemsLayout):
-    vtbl[].vtbl.doItemsLayout = cQColumnView_vtable_callback_doItemsLayout
+    vtbl[].vtbl.doItemsLayout = fcQColumnView_vtable_callback_doItemsLayout
   if not isNil(vtbl[].dataChanged):
-    vtbl[].vtbl.dataChanged = cQColumnView_vtable_callback_dataChanged
+    vtbl[].vtbl.dataChanged = fcQColumnView_vtable_callback_dataChanged
   if not isNil(vtbl[].rowsAboutToBeRemoved):
-    vtbl[].vtbl.rowsAboutToBeRemoved = cQColumnView_vtable_callback_rowsAboutToBeRemoved
+    vtbl[].vtbl.rowsAboutToBeRemoved = fcQColumnView_vtable_callback_rowsAboutToBeRemoved
   if not isNil(vtbl[].selectionChanged):
-    vtbl[].vtbl.selectionChanged = cQColumnView_vtable_callback_selectionChanged
+    vtbl[].vtbl.selectionChanged = fcQColumnView_vtable_callback_selectionChanged
   if not isNil(vtbl[].updateEditorData):
-    vtbl[].vtbl.updateEditorData = cQColumnView_vtable_callback_updateEditorData
+    vtbl[].vtbl.updateEditorData = fcQColumnView_vtable_callback_updateEditorData
   if not isNil(vtbl[].updateEditorGeometries):
-    vtbl[].vtbl.updateEditorGeometries = cQColumnView_vtable_callback_updateEditorGeometries
+    vtbl[].vtbl.updateEditorGeometries = fcQColumnView_vtable_callback_updateEditorGeometries
   if not isNil(vtbl[].updateGeometries):
-    vtbl[].vtbl.updateGeometries = cQColumnView_vtable_callback_updateGeometries
+    vtbl[].vtbl.updateGeometries = fcQColumnView_vtable_callback_updateGeometries
   if not isNil(vtbl[].verticalScrollbarAction):
-    vtbl[].vtbl.verticalScrollbarAction = cQColumnView_vtable_callback_verticalScrollbarAction
+    vtbl[].vtbl.verticalScrollbarAction = fcQColumnView_vtable_callback_verticalScrollbarAction
   if not isNil(vtbl[].horizontalScrollbarAction):
-    vtbl[].vtbl.horizontalScrollbarAction = cQColumnView_vtable_callback_horizontalScrollbarAction
+    vtbl[].vtbl.horizontalScrollbarAction = fcQColumnView_vtable_callback_horizontalScrollbarAction
   if not isNil(vtbl[].verticalScrollbarValueChanged):
-    vtbl[].vtbl.verticalScrollbarValueChanged = cQColumnView_vtable_callback_verticalScrollbarValueChanged
+    vtbl[].vtbl.verticalScrollbarValueChanged = fcQColumnView_vtable_callback_verticalScrollbarValueChanged
   if not isNil(vtbl[].horizontalScrollbarValueChanged):
-    vtbl[].vtbl.horizontalScrollbarValueChanged = cQColumnView_vtable_callback_horizontalScrollbarValueChanged
+    vtbl[].vtbl.horizontalScrollbarValueChanged = fcQColumnView_vtable_callback_horizontalScrollbarValueChanged
   if not isNil(vtbl[].closeEditor):
-    vtbl[].vtbl.closeEditor = cQColumnView_vtable_callback_closeEditor
+    vtbl[].vtbl.closeEditor = fcQColumnView_vtable_callback_closeEditor
   if not isNil(vtbl[].commitData):
-    vtbl[].vtbl.commitData = cQColumnView_vtable_callback_commitData
+    vtbl[].vtbl.commitData = fcQColumnView_vtable_callback_commitData
   if not isNil(vtbl[].editorDestroyed):
-    vtbl[].vtbl.editorDestroyed = cQColumnView_vtable_callback_editorDestroyed
+    vtbl[].vtbl.editorDestroyed = fcQColumnView_vtable_callback_editorDestroyed
   if not isNil(vtbl[].selectedIndexes):
-    vtbl[].vtbl.selectedIndexes = cQColumnView_vtable_callback_selectedIndexes
+    vtbl[].vtbl.selectedIndexes = fcQColumnView_vtable_callback_selectedIndexes
   if not isNil(vtbl[].edit2):
-    vtbl[].vtbl.edit2 = cQColumnView_vtable_callback_edit2
+    vtbl[].vtbl.edit2 = fcQColumnView_vtable_callback_edit2
   if not isNil(vtbl[].selectionCommand):
-    vtbl[].vtbl.selectionCommand = cQColumnView_vtable_callback_selectionCommand
+    vtbl[].vtbl.selectionCommand = fcQColumnView_vtable_callback_selectionCommand
   if not isNil(vtbl[].startDrag):
-    vtbl[].vtbl.startDrag = cQColumnView_vtable_callback_startDrag
+    vtbl[].vtbl.startDrag = fcQColumnView_vtable_callback_startDrag
   if not isNil(vtbl[].viewOptions):
-    vtbl[].vtbl.viewOptions = cQColumnView_vtable_callback_viewOptions
+    vtbl[].vtbl.viewOptions = fcQColumnView_vtable_callback_viewOptions
   if not isNil(vtbl[].focusNextPrevChild):
-    vtbl[].vtbl.focusNextPrevChild = cQColumnView_vtable_callback_focusNextPrevChild
+    vtbl[].vtbl.focusNextPrevChild = fcQColumnView_vtable_callback_focusNextPrevChild
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQColumnView_vtable_callback_event
+    vtbl[].vtbl.event = fcQColumnView_vtable_callback_event
   if not isNil(vtbl[].viewportEvent):
-    vtbl[].vtbl.viewportEvent = cQColumnView_vtable_callback_viewportEvent
+    vtbl[].vtbl.viewportEvent = fcQColumnView_vtable_callback_viewportEvent
   if not isNil(vtbl[].mousePressEvent):
-    vtbl[].vtbl.mousePressEvent = cQColumnView_vtable_callback_mousePressEvent
+    vtbl[].vtbl.mousePressEvent = fcQColumnView_vtable_callback_mousePressEvent
   if not isNil(vtbl[].mouseMoveEvent):
-    vtbl[].vtbl.mouseMoveEvent = cQColumnView_vtable_callback_mouseMoveEvent
+    vtbl[].vtbl.mouseMoveEvent = fcQColumnView_vtable_callback_mouseMoveEvent
   if not isNil(vtbl[].mouseReleaseEvent):
-    vtbl[].vtbl.mouseReleaseEvent = cQColumnView_vtable_callback_mouseReleaseEvent
+    vtbl[].vtbl.mouseReleaseEvent = fcQColumnView_vtable_callback_mouseReleaseEvent
   if not isNil(vtbl[].mouseDoubleClickEvent):
-    vtbl[].vtbl.mouseDoubleClickEvent = cQColumnView_vtable_callback_mouseDoubleClickEvent
+    vtbl[].vtbl.mouseDoubleClickEvent = fcQColumnView_vtable_callback_mouseDoubleClickEvent
   if not isNil(vtbl[].dragEnterEvent):
-    vtbl[].vtbl.dragEnterEvent = cQColumnView_vtable_callback_dragEnterEvent
+    vtbl[].vtbl.dragEnterEvent = fcQColumnView_vtable_callback_dragEnterEvent
   if not isNil(vtbl[].dragMoveEvent):
-    vtbl[].vtbl.dragMoveEvent = cQColumnView_vtable_callback_dragMoveEvent
+    vtbl[].vtbl.dragMoveEvent = fcQColumnView_vtable_callback_dragMoveEvent
   if not isNil(vtbl[].dragLeaveEvent):
-    vtbl[].vtbl.dragLeaveEvent = cQColumnView_vtable_callback_dragLeaveEvent
+    vtbl[].vtbl.dragLeaveEvent = fcQColumnView_vtable_callback_dragLeaveEvent
   if not isNil(vtbl[].dropEvent):
-    vtbl[].vtbl.dropEvent = cQColumnView_vtable_callback_dropEvent
+    vtbl[].vtbl.dropEvent = fcQColumnView_vtable_callback_dropEvent
   if not isNil(vtbl[].focusInEvent):
-    vtbl[].vtbl.focusInEvent = cQColumnView_vtable_callback_focusInEvent
+    vtbl[].vtbl.focusInEvent = fcQColumnView_vtable_callback_focusInEvent
   if not isNil(vtbl[].focusOutEvent):
-    vtbl[].vtbl.focusOutEvent = cQColumnView_vtable_callback_focusOutEvent
+    vtbl[].vtbl.focusOutEvent = fcQColumnView_vtable_callback_focusOutEvent
   if not isNil(vtbl[].keyPressEvent):
-    vtbl[].vtbl.keyPressEvent = cQColumnView_vtable_callback_keyPressEvent
+    vtbl[].vtbl.keyPressEvent = fcQColumnView_vtable_callback_keyPressEvent
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQColumnView_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQColumnView_vtable_callback_timerEvent
   if not isNil(vtbl[].inputMethodEvent):
-    vtbl[].vtbl.inputMethodEvent = cQColumnView_vtable_callback_inputMethodEvent
+    vtbl[].vtbl.inputMethodEvent = fcQColumnView_vtable_callback_inputMethodEvent
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQColumnView_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQColumnView_vtable_callback_eventFilter
   if not isNil(vtbl[].viewportSizeHint):
-    vtbl[].vtbl.viewportSizeHint = cQColumnView_vtable_callback_viewportSizeHint
+    vtbl[].vtbl.viewportSizeHint = fcQColumnView_vtable_callback_viewportSizeHint
   if not isNil(vtbl[].minimumSizeHint):
-    vtbl[].vtbl.minimumSizeHint = cQColumnView_vtable_callback_minimumSizeHint
+    vtbl[].vtbl.minimumSizeHint = fcQColumnView_vtable_callback_minimumSizeHint
   if not isNil(vtbl[].setupViewport):
-    vtbl[].vtbl.setupViewport = cQColumnView_vtable_callback_setupViewport
+    vtbl[].vtbl.setupViewport = fcQColumnView_vtable_callback_setupViewport
   if not isNil(vtbl[].paintEvent):
-    vtbl[].vtbl.paintEvent = cQColumnView_vtable_callback_paintEvent
+    vtbl[].vtbl.paintEvent = fcQColumnView_vtable_callback_paintEvent
   if not isNil(vtbl[].wheelEvent):
-    vtbl[].vtbl.wheelEvent = cQColumnView_vtable_callback_wheelEvent
+    vtbl[].vtbl.wheelEvent = fcQColumnView_vtable_callback_wheelEvent
   if not isNil(vtbl[].contextMenuEvent):
-    vtbl[].vtbl.contextMenuEvent = cQColumnView_vtable_callback_contextMenuEvent
+    vtbl[].vtbl.contextMenuEvent = fcQColumnView_vtable_callback_contextMenuEvent
   if not isNil(vtbl[].changeEvent):
-    vtbl[].vtbl.changeEvent = cQColumnView_vtable_callback_changeEvent
+    vtbl[].vtbl.changeEvent = fcQColumnView_vtable_callback_changeEvent
   if not isNil(vtbl[].devType):
-    vtbl[].vtbl.devType = cQColumnView_vtable_callback_devType
+    vtbl[].vtbl.devType = fcQColumnView_vtable_callback_devType
   if not isNil(vtbl[].setVisible):
-    vtbl[].vtbl.setVisible = cQColumnView_vtable_callback_setVisible
+    vtbl[].vtbl.setVisible = fcQColumnView_vtable_callback_setVisible
   if not isNil(vtbl[].heightForWidth):
-    vtbl[].vtbl.heightForWidth = cQColumnView_vtable_callback_heightForWidth
+    vtbl[].vtbl.heightForWidth = fcQColumnView_vtable_callback_heightForWidth
   if not isNil(vtbl[].hasHeightForWidth):
-    vtbl[].vtbl.hasHeightForWidth = cQColumnView_vtable_callback_hasHeightForWidth
+    vtbl[].vtbl.hasHeightForWidth = fcQColumnView_vtable_callback_hasHeightForWidth
   if not isNil(vtbl[].paintEngine):
-    vtbl[].vtbl.paintEngine = cQColumnView_vtable_callback_paintEngine
+    vtbl[].vtbl.paintEngine = fcQColumnView_vtable_callback_paintEngine
   if not isNil(vtbl[].keyReleaseEvent):
-    vtbl[].vtbl.keyReleaseEvent = cQColumnView_vtable_callback_keyReleaseEvent
+    vtbl[].vtbl.keyReleaseEvent = fcQColumnView_vtable_callback_keyReleaseEvent
   if not isNil(vtbl[].enterEvent):
-    vtbl[].vtbl.enterEvent = cQColumnView_vtable_callback_enterEvent
+    vtbl[].vtbl.enterEvent = fcQColumnView_vtable_callback_enterEvent
   if not isNil(vtbl[].leaveEvent):
-    vtbl[].vtbl.leaveEvent = cQColumnView_vtable_callback_leaveEvent
+    vtbl[].vtbl.leaveEvent = fcQColumnView_vtable_callback_leaveEvent
   if not isNil(vtbl[].moveEvent):
-    vtbl[].vtbl.moveEvent = cQColumnView_vtable_callback_moveEvent
+    vtbl[].vtbl.moveEvent = fcQColumnView_vtable_callback_moveEvent
   if not isNil(vtbl[].closeEvent):
-    vtbl[].vtbl.closeEvent = cQColumnView_vtable_callback_closeEvent
+    vtbl[].vtbl.closeEvent = fcQColumnView_vtable_callback_closeEvent
   if not isNil(vtbl[].tabletEvent):
-    vtbl[].vtbl.tabletEvent = cQColumnView_vtable_callback_tabletEvent
+    vtbl[].vtbl.tabletEvent = fcQColumnView_vtable_callback_tabletEvent
   if not isNil(vtbl[].actionEvent):
-    vtbl[].vtbl.actionEvent = cQColumnView_vtable_callback_actionEvent
+    vtbl[].vtbl.actionEvent = fcQColumnView_vtable_callback_actionEvent
   if not isNil(vtbl[].showEvent):
-    vtbl[].vtbl.showEvent = cQColumnView_vtable_callback_showEvent
+    vtbl[].vtbl.showEvent = fcQColumnView_vtable_callback_showEvent
   if not isNil(vtbl[].hideEvent):
-    vtbl[].vtbl.hideEvent = cQColumnView_vtable_callback_hideEvent
+    vtbl[].vtbl.hideEvent = fcQColumnView_vtable_callback_hideEvent
   if not isNil(vtbl[].nativeEvent):
-    vtbl[].vtbl.nativeEvent = cQColumnView_vtable_callback_nativeEvent
+    vtbl[].vtbl.nativeEvent = fcQColumnView_vtable_callback_nativeEvent
   if not isNil(vtbl[].metric):
-    vtbl[].vtbl.metric = cQColumnView_vtable_callback_metric
+    vtbl[].vtbl.metric = fcQColumnView_vtable_callback_metric
   if not isNil(vtbl[].initPainter):
-    vtbl[].vtbl.initPainter = cQColumnView_vtable_callback_initPainter
+    vtbl[].vtbl.initPainter = fcQColumnView_vtable_callback_initPainter
   if not isNil(vtbl[].redirected):
-    vtbl[].vtbl.redirected = cQColumnView_vtable_callback_redirected
+    vtbl[].vtbl.redirected = fcQColumnView_vtable_callback_redirected
   if not isNil(vtbl[].sharedPainter):
-    vtbl[].vtbl.sharedPainter = cQColumnView_vtable_callback_sharedPainter
+    vtbl[].vtbl.sharedPainter = fcQColumnView_vtable_callback_sharedPainter
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQColumnView_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQColumnView_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQColumnView_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQColumnView_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQColumnView_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQColumnView_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQColumnView_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQColumnView_vtable_callback_disconnectNotify
   gen_qcolumnview_types.QColumnView(h: fcQColumnView_new2(addr(vtbl[].vtbl), addr(vtbl[])), owned: true)
 
 const cQColumnView_mvtbl = cQColumnViewVTable(
@@ -2812,99 +2819,100 @@ const cQColumnView_mvtbl = cQColumnViewVTable(
     let inst = cast[ptr typeof(VirtualQColumnView()[])](self.fcQColumnView_vtbl())
     inst[].h = nil
     inst[].owned = false,
-  metaObject: cQColumnView_method_callback_metaObject,
-  metacast: cQColumnView_method_callback_metacast,
-  metacall: cQColumnView_method_callback_metacall,
-  indexAt: cQColumnView_method_callback_indexAt,
-  scrollTo: cQColumnView_method_callback_scrollTo,
-  sizeHint: cQColumnView_method_callback_sizeHint,
-  visualRect: cQColumnView_method_callback_visualRect,
-  setModel: cQColumnView_method_callback_setModel,
-  setSelectionModel: cQColumnView_method_callback_setSelectionModel,
-  setRootIndex: cQColumnView_method_callback_setRootIndex,
-  selectAll: cQColumnView_method_callback_selectAll,
-  isIndexHidden: cQColumnView_method_callback_isIndexHidden,
-  moveCursor: cQColumnView_method_callback_moveCursor,
-  resizeEvent: cQColumnView_method_callback_resizeEvent,
-  setSelection: cQColumnView_method_callback_setSelection,
-  visualRegionForSelection: cQColumnView_method_callback_visualRegionForSelection,
-  horizontalOffset: cQColumnView_method_callback_horizontalOffset,
-  verticalOffset: cQColumnView_method_callback_verticalOffset,
-  rowsInserted: cQColumnView_method_callback_rowsInserted,
-  currentChanged: cQColumnView_method_callback_currentChanged,
-  scrollContentsBy: cQColumnView_method_callback_scrollContentsBy,
-  createColumn: cQColumnView_method_callback_createColumn,
-  keyboardSearch: cQColumnView_method_callback_keyboardSearch,
-  sizeHintForRow: cQColumnView_method_callback_sizeHintForRow,
-  sizeHintForColumn: cQColumnView_method_callback_sizeHintForColumn,
-  inputMethodQuery: cQColumnView_method_callback_inputMethodQuery,
-  reset: cQColumnView_method_callback_reset,
-  doItemsLayout: cQColumnView_method_callback_doItemsLayout,
-  dataChanged: cQColumnView_method_callback_dataChanged,
-  rowsAboutToBeRemoved: cQColumnView_method_callback_rowsAboutToBeRemoved,
-  selectionChanged: cQColumnView_method_callback_selectionChanged,
-  updateEditorData: cQColumnView_method_callback_updateEditorData,
-  updateEditorGeometries: cQColumnView_method_callback_updateEditorGeometries,
-  updateGeometries: cQColumnView_method_callback_updateGeometries,
-  verticalScrollbarAction: cQColumnView_method_callback_verticalScrollbarAction,
-  horizontalScrollbarAction: cQColumnView_method_callback_horizontalScrollbarAction,
-  verticalScrollbarValueChanged: cQColumnView_method_callback_verticalScrollbarValueChanged,
-  horizontalScrollbarValueChanged: cQColumnView_method_callback_horizontalScrollbarValueChanged,
-  closeEditor: cQColumnView_method_callback_closeEditor,
-  commitData: cQColumnView_method_callback_commitData,
-  editorDestroyed: cQColumnView_method_callback_editorDestroyed,
-  selectedIndexes: cQColumnView_method_callback_selectedIndexes,
-  edit2: cQColumnView_method_callback_edit2,
-  selectionCommand: cQColumnView_method_callback_selectionCommand,
-  startDrag: cQColumnView_method_callback_startDrag,
-  viewOptions: cQColumnView_method_callback_viewOptions,
-  focusNextPrevChild: cQColumnView_method_callback_focusNextPrevChild,
-  event: cQColumnView_method_callback_event,
-  viewportEvent: cQColumnView_method_callback_viewportEvent,
-  mousePressEvent: cQColumnView_method_callback_mousePressEvent,
-  mouseMoveEvent: cQColumnView_method_callback_mouseMoveEvent,
-  mouseReleaseEvent: cQColumnView_method_callback_mouseReleaseEvent,
-  mouseDoubleClickEvent: cQColumnView_method_callback_mouseDoubleClickEvent,
-  dragEnterEvent: cQColumnView_method_callback_dragEnterEvent,
-  dragMoveEvent: cQColumnView_method_callback_dragMoveEvent,
-  dragLeaveEvent: cQColumnView_method_callback_dragLeaveEvent,
-  dropEvent: cQColumnView_method_callback_dropEvent,
-  focusInEvent: cQColumnView_method_callback_focusInEvent,
-  focusOutEvent: cQColumnView_method_callback_focusOutEvent,
-  keyPressEvent: cQColumnView_method_callback_keyPressEvent,
-  timerEvent: cQColumnView_method_callback_timerEvent,
-  inputMethodEvent: cQColumnView_method_callback_inputMethodEvent,
-  eventFilter: cQColumnView_method_callback_eventFilter,
-  viewportSizeHint: cQColumnView_method_callback_viewportSizeHint,
-  minimumSizeHint: cQColumnView_method_callback_minimumSizeHint,
-  setupViewport: cQColumnView_method_callback_setupViewport,
-  paintEvent: cQColumnView_method_callback_paintEvent,
-  wheelEvent: cQColumnView_method_callback_wheelEvent,
-  contextMenuEvent: cQColumnView_method_callback_contextMenuEvent,
-  changeEvent: cQColumnView_method_callback_changeEvent,
-  devType: cQColumnView_method_callback_devType,
-  setVisible: cQColumnView_method_callback_setVisible,
-  heightForWidth: cQColumnView_method_callback_heightForWidth,
-  hasHeightForWidth: cQColumnView_method_callback_hasHeightForWidth,
-  paintEngine: cQColumnView_method_callback_paintEngine,
-  keyReleaseEvent: cQColumnView_method_callback_keyReleaseEvent,
-  enterEvent: cQColumnView_method_callback_enterEvent,
-  leaveEvent: cQColumnView_method_callback_leaveEvent,
-  moveEvent: cQColumnView_method_callback_moveEvent,
-  closeEvent: cQColumnView_method_callback_closeEvent,
-  tabletEvent: cQColumnView_method_callback_tabletEvent,
-  actionEvent: cQColumnView_method_callback_actionEvent,
-  showEvent: cQColumnView_method_callback_showEvent,
-  hideEvent: cQColumnView_method_callback_hideEvent,
-  nativeEvent: cQColumnView_method_callback_nativeEvent,
-  metric: cQColumnView_method_callback_metric,
-  initPainter: cQColumnView_method_callback_initPainter,
-  redirected: cQColumnView_method_callback_redirected,
-  sharedPainter: cQColumnView_method_callback_sharedPainter,
-  childEvent: cQColumnView_method_callback_childEvent,
-  customEvent: cQColumnView_method_callback_customEvent,
-  connectNotify: cQColumnView_method_callback_connectNotify,
-  disconnectNotify: cQColumnView_method_callback_disconnectNotify,
+
+  metaObject: fcQColumnView_method_callback_metaObject,
+  metacast: fcQColumnView_method_callback_metacast,
+  metacall: fcQColumnView_method_callback_metacall,
+  indexAt: fcQColumnView_method_callback_indexAt,
+  scrollTo: fcQColumnView_method_callback_scrollTo,
+  sizeHint: fcQColumnView_method_callback_sizeHint,
+  visualRect: fcQColumnView_method_callback_visualRect,
+  setModel: fcQColumnView_method_callback_setModel,
+  setSelectionModel: fcQColumnView_method_callback_setSelectionModel,
+  setRootIndex: fcQColumnView_method_callback_setRootIndex,
+  selectAll: fcQColumnView_method_callback_selectAll,
+  isIndexHidden: fcQColumnView_method_callback_isIndexHidden,
+  moveCursor: fcQColumnView_method_callback_moveCursor,
+  resizeEvent: fcQColumnView_method_callback_resizeEvent,
+  setSelection: fcQColumnView_method_callback_setSelection,
+  visualRegionForSelection: fcQColumnView_method_callback_visualRegionForSelection,
+  horizontalOffset: fcQColumnView_method_callback_horizontalOffset,
+  verticalOffset: fcQColumnView_method_callback_verticalOffset,
+  rowsInserted: fcQColumnView_method_callback_rowsInserted,
+  currentChanged: fcQColumnView_method_callback_currentChanged,
+  scrollContentsBy: fcQColumnView_method_callback_scrollContentsBy,
+  createColumn: fcQColumnView_method_callback_createColumn,
+  keyboardSearch: fcQColumnView_method_callback_keyboardSearch,
+  sizeHintForRow: fcQColumnView_method_callback_sizeHintForRow,
+  sizeHintForColumn: fcQColumnView_method_callback_sizeHintForColumn,
+  inputMethodQuery: fcQColumnView_method_callback_inputMethodQuery,
+  reset: fcQColumnView_method_callback_reset,
+  doItemsLayout: fcQColumnView_method_callback_doItemsLayout,
+  dataChanged: fcQColumnView_method_callback_dataChanged,
+  rowsAboutToBeRemoved: fcQColumnView_method_callback_rowsAboutToBeRemoved,
+  selectionChanged: fcQColumnView_method_callback_selectionChanged,
+  updateEditorData: fcQColumnView_method_callback_updateEditorData,
+  updateEditorGeometries: fcQColumnView_method_callback_updateEditorGeometries,
+  updateGeometries: fcQColumnView_method_callback_updateGeometries,
+  verticalScrollbarAction: fcQColumnView_method_callback_verticalScrollbarAction,
+  horizontalScrollbarAction: fcQColumnView_method_callback_horizontalScrollbarAction,
+  verticalScrollbarValueChanged: fcQColumnView_method_callback_verticalScrollbarValueChanged,
+  horizontalScrollbarValueChanged: fcQColumnView_method_callback_horizontalScrollbarValueChanged,
+  closeEditor: fcQColumnView_method_callback_closeEditor,
+  commitData: fcQColumnView_method_callback_commitData,
+  editorDestroyed: fcQColumnView_method_callback_editorDestroyed,
+  selectedIndexes: fcQColumnView_method_callback_selectedIndexes,
+  edit2: fcQColumnView_method_callback_edit2,
+  selectionCommand: fcQColumnView_method_callback_selectionCommand,
+  startDrag: fcQColumnView_method_callback_startDrag,
+  viewOptions: fcQColumnView_method_callback_viewOptions,
+  focusNextPrevChild: fcQColumnView_method_callback_focusNextPrevChild,
+  event: fcQColumnView_method_callback_event,
+  viewportEvent: fcQColumnView_method_callback_viewportEvent,
+  mousePressEvent: fcQColumnView_method_callback_mousePressEvent,
+  mouseMoveEvent: fcQColumnView_method_callback_mouseMoveEvent,
+  mouseReleaseEvent: fcQColumnView_method_callback_mouseReleaseEvent,
+  mouseDoubleClickEvent: fcQColumnView_method_callback_mouseDoubleClickEvent,
+  dragEnterEvent: fcQColumnView_method_callback_dragEnterEvent,
+  dragMoveEvent: fcQColumnView_method_callback_dragMoveEvent,
+  dragLeaveEvent: fcQColumnView_method_callback_dragLeaveEvent,
+  dropEvent: fcQColumnView_method_callback_dropEvent,
+  focusInEvent: fcQColumnView_method_callback_focusInEvent,
+  focusOutEvent: fcQColumnView_method_callback_focusOutEvent,
+  keyPressEvent: fcQColumnView_method_callback_keyPressEvent,
+  timerEvent: fcQColumnView_method_callback_timerEvent,
+  inputMethodEvent: fcQColumnView_method_callback_inputMethodEvent,
+  eventFilter: fcQColumnView_method_callback_eventFilter,
+  viewportSizeHint: fcQColumnView_method_callback_viewportSizeHint,
+  minimumSizeHint: fcQColumnView_method_callback_minimumSizeHint,
+  setupViewport: fcQColumnView_method_callback_setupViewport,
+  paintEvent: fcQColumnView_method_callback_paintEvent,
+  wheelEvent: fcQColumnView_method_callback_wheelEvent,
+  contextMenuEvent: fcQColumnView_method_callback_contextMenuEvent,
+  changeEvent: fcQColumnView_method_callback_changeEvent,
+  devType: fcQColumnView_method_callback_devType,
+  setVisible: fcQColumnView_method_callback_setVisible,
+  heightForWidth: fcQColumnView_method_callback_heightForWidth,
+  hasHeightForWidth: fcQColumnView_method_callback_hasHeightForWidth,
+  paintEngine: fcQColumnView_method_callback_paintEngine,
+  keyReleaseEvent: fcQColumnView_method_callback_keyReleaseEvent,
+  enterEvent: fcQColumnView_method_callback_enterEvent,
+  leaveEvent: fcQColumnView_method_callback_leaveEvent,
+  moveEvent: fcQColumnView_method_callback_moveEvent,
+  closeEvent: fcQColumnView_method_callback_closeEvent,
+  tabletEvent: fcQColumnView_method_callback_tabletEvent,
+  actionEvent: fcQColumnView_method_callback_actionEvent,
+  showEvent: fcQColumnView_method_callback_showEvent,
+  hideEvent: fcQColumnView_method_callback_hideEvent,
+  nativeEvent: fcQColumnView_method_callback_nativeEvent,
+  metric: fcQColumnView_method_callback_metric,
+  initPainter: fcQColumnView_method_callback_initPainter,
+  redirected: fcQColumnView_method_callback_redirected,
+  sharedPainter: fcQColumnView_method_callback_sharedPainter,
+  childEvent: fcQColumnView_method_callback_childEvent,
+  customEvent: fcQColumnView_method_callback_customEvent,
+  connectNotify: fcQColumnView_method_callback_connectNotify,
+  disconnectNotify: fcQColumnView_method_callback_disconnectNotify,
 )
 proc create*(T: type gen_qcolumnview_types.QColumnView,
     parent: gen_qwidget_types.QWidget,

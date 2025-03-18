@@ -100,6 +100,7 @@ proc fcQStackedLayout_trUtf82(s: cstring, c: cstring): struct_miqt_string {.impo
 proc fcQStackedLayout_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QStackedLayout_trUtf83".}
 proc fcQStackedLayout_vtbl(self: pointer): pointer {.importc: "QStackedLayout_vtbl".}
 proc fcQStackedLayout_vdata(self: pointer): pointer {.importc: "QStackedLayout_vdata".}
+
 type cQStackedLayoutVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -249,41 +250,41 @@ proc widgetRemoved*(self: gen_qstackedlayout_types.QStackedLayout, index: cint):
   fcQStackedLayout_widgetRemoved(self.h, index)
 
 type QStackedLayoutwidgetRemovedSlot* = proc(index: cint)
-proc cQStackedLayout_slot_callback_widgetRemoved(slot: int, index: cint) {.cdecl.} =
+proc fcQStackedLayout_slot_callback_widgetRemoved(slot: int, index: cint) {.cdecl.} =
   let nimfunc = cast[ptr QStackedLayoutwidgetRemovedSlot](cast[pointer](slot))
   let slotval1 = index
 
   nimfunc[](slotval1)
 
-proc cQStackedLayout_slot_callback_widgetRemoved_release(slot: int) {.cdecl.} =
+proc fcQStackedLayout_slot_callback_widgetRemoved_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QStackedLayoutwidgetRemovedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onwidgetRemoved*(self: gen_qstackedlayout_types.QStackedLayout, slot: QStackedLayoutwidgetRemovedSlot) =
+proc onWidgetRemoved*(self: gen_qstackedlayout_types.QStackedLayout, slot: QStackedLayoutwidgetRemovedSlot) =
   var tmp = new QStackedLayoutwidgetRemovedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQStackedLayout_connect_widgetRemoved(self.h, cast[int](addr tmp[]), cQStackedLayout_slot_callback_widgetRemoved, cQStackedLayout_slot_callback_widgetRemoved_release)
+  fcQStackedLayout_connect_widgetRemoved(self.h, cast[int](addr tmp[]), fcQStackedLayout_slot_callback_widgetRemoved, fcQStackedLayout_slot_callback_widgetRemoved_release)
 
 proc currentChanged*(self: gen_qstackedlayout_types.QStackedLayout, index: cint): void =
   fcQStackedLayout_currentChanged(self.h, index)
 
 type QStackedLayoutcurrentChangedSlot* = proc(index: cint)
-proc cQStackedLayout_slot_callback_currentChanged(slot: int, index: cint) {.cdecl.} =
+proc fcQStackedLayout_slot_callback_currentChanged(slot: int, index: cint) {.cdecl.} =
   let nimfunc = cast[ptr QStackedLayoutcurrentChangedSlot](cast[pointer](slot))
   let slotval1 = index
 
   nimfunc[](slotval1)
 
-proc cQStackedLayout_slot_callback_currentChanged_release(slot: int) {.cdecl.} =
+proc fcQStackedLayout_slot_callback_currentChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QStackedLayoutcurrentChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc oncurrentChanged*(self: gen_qstackedlayout_types.QStackedLayout, slot: QStackedLayoutcurrentChangedSlot) =
+proc onCurrentChanged*(self: gen_qstackedlayout_types.QStackedLayout, slot: QStackedLayoutcurrentChangedSlot) =
   var tmp = new QStackedLayoutcurrentChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQStackedLayout_connect_currentChanged(self.h, cast[int](addr tmp[]), cQStackedLayout_slot_callback_currentChanged, cQStackedLayout_slot_callback_currentChanged_release)
+  fcQStackedLayout_connect_currentChanged(self.h, cast[int](addr tmp[]), fcQStackedLayout_slot_callback_currentChanged, fcQStackedLayout_slot_callback_currentChanged_release)
 
 proc setCurrentIndex*(self: gen_qstackedlayout_types.QStackedLayout, index: cint): void =
   fcQStackedLayout_setCurrentIndex(self.h, index)
@@ -345,6 +346,7 @@ type QStackedLayoutdisconnectNotifyProc* = proc(self: QStackedLayout, signal: ge
 type QStackedLayoutminimumHeightForWidthProc* = proc(self: QStackedLayout, param1: cint): cint {.raises: [], gcsafe.}
 type QStackedLayoutwidgetProc* = proc(self: QStackedLayout): gen_qwidget_types.QWidget {.raises: [], gcsafe.}
 type QStackedLayoutspacerItemProc* = proc(self: QStackedLayout): gen_qlayoutitem_types.QSpacerItem {.raises: [], gcsafe.}
+
 type QStackedLayoutVTable* {.inheritable, pure.} = object
   vtbl: cQStackedLayoutVTable
   metaObject*: QStackedLayoutmetaObjectProc
@@ -377,10 +379,99 @@ type QStackedLayoutVTable* {.inheritable, pure.} = object
   minimumHeightForWidth*: QStackedLayoutminimumHeightForWidthProc
   widget*: QStackedLayoutwidgetProc
   spacerItem*: QStackedLayoutspacerItemProc
+
 proc QStackedLayoutmetaObject*(self: gen_qstackedlayout_types.QStackedLayout): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQStackedLayout_virtualbase_metaObject(self.h), owned: false)
 
-proc cQStackedLayout_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
+proc QStackedLayoutmetacast*(self: gen_qstackedlayout_types.QStackedLayout, param1: cstring): pointer =
+  fcQStackedLayout_virtualbase_metacast(self.h, param1)
+
+proc QStackedLayoutmetacall*(self: gen_qstackedlayout_types.QStackedLayout, param1: cint, param2: cint, param3: pointer): cint =
+  fcQStackedLayout_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+proc QStackedLayoutcount*(self: gen_qstackedlayout_types.QStackedLayout): cint =
+  fcQStackedLayout_virtualbase_count(self.h)
+
+proc QStackedLayoutaddItem*(self: gen_qstackedlayout_types.QStackedLayout, item: gen_qlayoutitem_types.QLayoutItem): void =
+  fcQStackedLayout_virtualbase_addItem(self.h, item.h)
+
+proc QStackedLayoutsizeHint*(self: gen_qstackedlayout_types.QStackedLayout): gen_qsize_types.QSize =
+  gen_qsize_types.QSize(h: fcQStackedLayout_virtualbase_sizeHint(self.h), owned: true)
+
+proc QStackedLayoutminimumSize*(self: gen_qstackedlayout_types.QStackedLayout): gen_qsize_types.QSize =
+  gen_qsize_types.QSize(h: fcQStackedLayout_virtualbase_minimumSize(self.h), owned: true)
+
+proc QStackedLayoutitemAt*(self: gen_qstackedlayout_types.QStackedLayout, param1: cint): gen_qlayoutitem_types.QLayoutItem =
+  gen_qlayoutitem_types.QLayoutItem(h: fcQStackedLayout_virtualbase_itemAt(self.h, param1), owned: false)
+
+proc QStackedLayouttakeAt*(self: gen_qstackedlayout_types.QStackedLayout, param1: cint): gen_qlayoutitem_types.QLayoutItem =
+  gen_qlayoutitem_types.QLayoutItem(h: fcQStackedLayout_virtualbase_takeAt(self.h, param1), owned: false)
+
+proc QStackedLayoutsetGeometry*(self: gen_qstackedlayout_types.QStackedLayout, rect: gen_qrect_types.QRect): void =
+  fcQStackedLayout_virtualbase_setGeometry(self.h, rect.h)
+
+proc QStackedLayouthasHeightForWidth*(self: gen_qstackedlayout_types.QStackedLayout): bool =
+  fcQStackedLayout_virtualbase_hasHeightForWidth(self.h)
+
+proc QStackedLayoutheightForWidth*(self: gen_qstackedlayout_types.QStackedLayout, width: cint): cint =
+  fcQStackedLayout_virtualbase_heightForWidth(self.h, width)
+
+proc QStackedLayoutinvalidate*(self: gen_qstackedlayout_types.QStackedLayout): void =
+  fcQStackedLayout_virtualbase_invalidate(self.h)
+
+proc QStackedLayoutgeometry*(self: gen_qstackedlayout_types.QStackedLayout): gen_qrect_types.QRect =
+  gen_qrect_types.QRect(h: fcQStackedLayout_virtualbase_geometry(self.h), owned: true)
+
+proc QStackedLayoutexpandingDirections*(self: gen_qstackedlayout_types.QStackedLayout): cint =
+  cint(fcQStackedLayout_virtualbase_expandingDirections(self.h))
+
+proc QStackedLayoutmaximumSize*(self: gen_qstackedlayout_types.QStackedLayout): gen_qsize_types.QSize =
+  gen_qsize_types.QSize(h: fcQStackedLayout_virtualbase_maximumSize(self.h), owned: true)
+
+proc QStackedLayoutindexOf*(self: gen_qstackedlayout_types.QStackedLayout, param1: gen_qwidget_types.QWidget): cint =
+  fcQStackedLayout_virtualbase_indexOf(self.h, param1.h)
+
+proc QStackedLayoutisEmpty*(self: gen_qstackedlayout_types.QStackedLayout): bool =
+  fcQStackedLayout_virtualbase_isEmpty(self.h)
+
+proc QStackedLayoutcontrolTypes*(self: gen_qstackedlayout_types.QStackedLayout): cint =
+  cint(fcQStackedLayout_virtualbase_controlTypes(self.h))
+
+proc QStackedLayoutlayout*(self: gen_qstackedlayout_types.QStackedLayout): gen_qlayout_types.QLayout =
+  gen_qlayout_types.QLayout(h: fcQStackedLayout_virtualbase_layout(self.h), owned: false)
+
+proc QStackedLayoutchildEvent*(self: gen_qstackedlayout_types.QStackedLayout, e: gen_qcoreevent_types.QChildEvent): void =
+  fcQStackedLayout_virtualbase_childEvent(self.h, e.h)
+
+proc QStackedLayoutevent*(self: gen_qstackedlayout_types.QStackedLayout, event: gen_qcoreevent_types.QEvent): bool =
+  fcQStackedLayout_virtualbase_event(self.h, event.h)
+
+proc QStackedLayouteventFilter*(self: gen_qstackedlayout_types.QStackedLayout, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
+  fcQStackedLayout_virtualbase_eventFilter(self.h, watched.h, event.h)
+
+proc QStackedLayouttimerEvent*(self: gen_qstackedlayout_types.QStackedLayout, event: gen_qcoreevent_types.QTimerEvent): void =
+  fcQStackedLayout_virtualbase_timerEvent(self.h, event.h)
+
+proc QStackedLayoutcustomEvent*(self: gen_qstackedlayout_types.QStackedLayout, event: gen_qcoreevent_types.QEvent): void =
+  fcQStackedLayout_virtualbase_customEvent(self.h, event.h)
+
+proc QStackedLayoutconnectNotify*(self: gen_qstackedlayout_types.QStackedLayout, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQStackedLayout_virtualbase_connectNotify(self.h, signal.h)
+
+proc QStackedLayoutdisconnectNotify*(self: gen_qstackedlayout_types.QStackedLayout, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQStackedLayout_virtualbase_disconnectNotify(self.h, signal.h)
+
+proc QStackedLayoutminimumHeightForWidth*(self: gen_qstackedlayout_types.QStackedLayout, param1: cint): cint =
+  fcQStackedLayout_virtualbase_minimumHeightForWidth(self.h, param1)
+
+proc QStackedLayoutwidget*(self: gen_qstackedlayout_types.QStackedLayout): gen_qwidget_types.QWidget =
+  gen_qwidget_types.QWidget(h: fcQStackedLayout_virtualbase_widget(self.h), owned: false)
+
+proc QStackedLayoutspacerItem*(self: gen_qstackedlayout_types.QStackedLayout): gen_qlayoutitem_types.QSpacerItem =
+  gen_qlayoutitem_types.QSpacerItem(h: fcQStackedLayout_virtualbase_spacerItem(self.h), owned: false)
+
+
+proc fcQStackedLayout_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QStackedLayoutVTable](fcQStackedLayout_vdata(self))
   let self = QStackedLayout(h: self)
   var virtualReturn = vtbl[].metaObject(self)
@@ -389,20 +480,14 @@ proc cQStackedLayout_vtable_callback_metaObject(self: pointer): pointer {.cdecl.
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QStackedLayoutmetacast*(self: gen_qstackedlayout_types.QStackedLayout, param1: cstring): pointer =
-  fcQStackedLayout_virtualbase_metacast(self.h, param1)
-
-proc cQStackedLayout_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+proc fcQStackedLayout_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QStackedLayoutVTable](fcQStackedLayout_vdata(self))
   let self = QStackedLayout(h: self)
   let slotval1 = (param1)
   var virtualReturn = vtbl[].metacast(self, slotval1)
   virtualReturn
 
-proc QStackedLayoutmetacall*(self: gen_qstackedlayout_types.QStackedLayout, param1: cint, param2: cint, param3: pointer): cint =
-  fcQStackedLayout_virtualbase_metacall(self.h, cint(param1), param2, param3)
-
-proc cQStackedLayout_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+proc fcQStackedLayout_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QStackedLayoutVTable](fcQStackedLayout_vdata(self))
   let self = QStackedLayout(h: self)
   let slotval1 = cint(param1)
@@ -411,28 +496,19 @@ proc cQStackedLayout_vtable_callback_metacall(self: pointer, param1: cint, param
   var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QStackedLayoutcount*(self: gen_qstackedlayout_types.QStackedLayout): cint =
-  fcQStackedLayout_virtualbase_count(self.h)
-
-proc cQStackedLayout_vtable_callback_count(self: pointer): cint {.cdecl.} =
+proc fcQStackedLayout_vtable_callback_count(self: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QStackedLayoutVTable](fcQStackedLayout_vdata(self))
   let self = QStackedLayout(h: self)
   var virtualReturn = vtbl[].count(self)
   virtualReturn
 
-proc QStackedLayoutaddItem*(self: gen_qstackedlayout_types.QStackedLayout, item: gen_qlayoutitem_types.QLayoutItem): void =
-  fcQStackedLayout_virtualbase_addItem(self.h, item.h)
-
-proc cQStackedLayout_vtable_callback_addItem(self: pointer, item: pointer): void {.cdecl.} =
+proc fcQStackedLayout_vtable_callback_addItem(self: pointer, item: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QStackedLayoutVTable](fcQStackedLayout_vdata(self))
   let self = QStackedLayout(h: self)
   let slotval1 = gen_qlayoutitem_types.QLayoutItem(h: item, owned: false)
   vtbl[].addItem(self, slotval1)
 
-proc QStackedLayoutsizeHint*(self: gen_qstackedlayout_types.QStackedLayout): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQStackedLayout_virtualbase_sizeHint(self.h), owned: true)
-
-proc cQStackedLayout_vtable_callback_sizeHint(self: pointer): pointer {.cdecl.} =
+proc fcQStackedLayout_vtable_callback_sizeHint(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QStackedLayoutVTable](fcQStackedLayout_vdata(self))
   let self = QStackedLayout(h: self)
   var virtualReturn = vtbl[].sizeHint(self)
@@ -441,10 +517,7 @@ proc cQStackedLayout_vtable_callback_sizeHint(self: pointer): pointer {.cdecl.} 
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QStackedLayoutminimumSize*(self: gen_qstackedlayout_types.QStackedLayout): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQStackedLayout_virtualbase_minimumSize(self.h), owned: true)
-
-proc cQStackedLayout_vtable_callback_minimumSize(self: pointer): pointer {.cdecl.} =
+proc fcQStackedLayout_vtable_callback_minimumSize(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QStackedLayoutVTable](fcQStackedLayout_vdata(self))
   let self = QStackedLayout(h: self)
   var virtualReturn = vtbl[].minimumSize(self)
@@ -453,10 +526,7 @@ proc cQStackedLayout_vtable_callback_minimumSize(self: pointer): pointer {.cdecl
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QStackedLayoutitemAt*(self: gen_qstackedlayout_types.QStackedLayout, param1: cint): gen_qlayoutitem_types.QLayoutItem =
-  gen_qlayoutitem_types.QLayoutItem(h: fcQStackedLayout_virtualbase_itemAt(self.h, param1), owned: false)
-
-proc cQStackedLayout_vtable_callback_itemAt(self: pointer, param1: cint): pointer {.cdecl.} =
+proc fcQStackedLayout_vtable_callback_itemAt(self: pointer, param1: cint): pointer {.cdecl.} =
   let vtbl = cast[ptr QStackedLayoutVTable](fcQStackedLayout_vdata(self))
   let self = QStackedLayout(h: self)
   let slotval1 = param1
@@ -466,10 +536,7 @@ proc cQStackedLayout_vtable_callback_itemAt(self: pointer, param1: cint): pointe
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QStackedLayouttakeAt*(self: gen_qstackedlayout_types.QStackedLayout, param1: cint): gen_qlayoutitem_types.QLayoutItem =
-  gen_qlayoutitem_types.QLayoutItem(h: fcQStackedLayout_virtualbase_takeAt(self.h, param1), owned: false)
-
-proc cQStackedLayout_vtable_callback_takeAt(self: pointer, param1: cint): pointer {.cdecl.} =
+proc fcQStackedLayout_vtable_callback_takeAt(self: pointer, param1: cint): pointer {.cdecl.} =
   let vtbl = cast[ptr QStackedLayoutVTable](fcQStackedLayout_vdata(self))
   let self = QStackedLayout(h: self)
   let slotval1 = param1
@@ -479,46 +546,31 @@ proc cQStackedLayout_vtable_callback_takeAt(self: pointer, param1: cint): pointe
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QStackedLayoutsetGeometry*(self: gen_qstackedlayout_types.QStackedLayout, rect: gen_qrect_types.QRect): void =
-  fcQStackedLayout_virtualbase_setGeometry(self.h, rect.h)
-
-proc cQStackedLayout_vtable_callback_setGeometry(self: pointer, rect: pointer): void {.cdecl.} =
+proc fcQStackedLayout_vtable_callback_setGeometry(self: pointer, rect: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QStackedLayoutVTable](fcQStackedLayout_vdata(self))
   let self = QStackedLayout(h: self)
   let slotval1 = gen_qrect_types.QRect(h: rect, owned: false)
   vtbl[].setGeometry(self, slotval1)
 
-proc QStackedLayouthasHeightForWidth*(self: gen_qstackedlayout_types.QStackedLayout): bool =
-  fcQStackedLayout_virtualbase_hasHeightForWidth(self.h)
-
-proc cQStackedLayout_vtable_callback_hasHeightForWidth(self: pointer): bool {.cdecl.} =
+proc fcQStackedLayout_vtable_callback_hasHeightForWidth(self: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QStackedLayoutVTable](fcQStackedLayout_vdata(self))
   let self = QStackedLayout(h: self)
   var virtualReturn = vtbl[].hasHeightForWidth(self)
   virtualReturn
 
-proc QStackedLayoutheightForWidth*(self: gen_qstackedlayout_types.QStackedLayout, width: cint): cint =
-  fcQStackedLayout_virtualbase_heightForWidth(self.h, width)
-
-proc cQStackedLayout_vtable_callback_heightForWidth(self: pointer, width: cint): cint {.cdecl.} =
+proc fcQStackedLayout_vtable_callback_heightForWidth(self: pointer, width: cint): cint {.cdecl.} =
   let vtbl = cast[ptr QStackedLayoutVTable](fcQStackedLayout_vdata(self))
   let self = QStackedLayout(h: self)
   let slotval1 = width
   var virtualReturn = vtbl[].heightForWidth(self, slotval1)
   virtualReturn
 
-proc QStackedLayoutinvalidate*(self: gen_qstackedlayout_types.QStackedLayout): void =
-  fcQStackedLayout_virtualbase_invalidate(self.h)
-
-proc cQStackedLayout_vtable_callback_invalidate(self: pointer): void {.cdecl.} =
+proc fcQStackedLayout_vtable_callback_invalidate(self: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QStackedLayoutVTable](fcQStackedLayout_vdata(self))
   let self = QStackedLayout(h: self)
   vtbl[].invalidate(self)
 
-proc QStackedLayoutgeometry*(self: gen_qstackedlayout_types.QStackedLayout): gen_qrect_types.QRect =
-  gen_qrect_types.QRect(h: fcQStackedLayout_virtualbase_geometry(self.h), owned: true)
-
-proc cQStackedLayout_vtable_callback_geometry(self: pointer): pointer {.cdecl.} =
+proc fcQStackedLayout_vtable_callback_geometry(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QStackedLayoutVTable](fcQStackedLayout_vdata(self))
   let self = QStackedLayout(h: self)
   var virtualReturn = vtbl[].geometry(self)
@@ -527,19 +579,13 @@ proc cQStackedLayout_vtable_callback_geometry(self: pointer): pointer {.cdecl.} 
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QStackedLayoutexpandingDirections*(self: gen_qstackedlayout_types.QStackedLayout): cint =
-  cint(fcQStackedLayout_virtualbase_expandingDirections(self.h))
-
-proc cQStackedLayout_vtable_callback_expandingDirections(self: pointer): cint {.cdecl.} =
+proc fcQStackedLayout_vtable_callback_expandingDirections(self: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QStackedLayoutVTable](fcQStackedLayout_vdata(self))
   let self = QStackedLayout(h: self)
   var virtualReturn = vtbl[].expandingDirections(self)
   cint(virtualReturn)
 
-proc QStackedLayoutmaximumSize*(self: gen_qstackedlayout_types.QStackedLayout): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQStackedLayout_virtualbase_maximumSize(self.h), owned: true)
-
-proc cQStackedLayout_vtable_callback_maximumSize(self: pointer): pointer {.cdecl.} =
+proc fcQStackedLayout_vtable_callback_maximumSize(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QStackedLayoutVTable](fcQStackedLayout_vdata(self))
   let self = QStackedLayout(h: self)
   var virtualReturn = vtbl[].maximumSize(self)
@@ -548,38 +594,26 @@ proc cQStackedLayout_vtable_callback_maximumSize(self: pointer): pointer {.cdecl
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QStackedLayoutindexOf*(self: gen_qstackedlayout_types.QStackedLayout, param1: gen_qwidget_types.QWidget): cint =
-  fcQStackedLayout_virtualbase_indexOf(self.h, param1.h)
-
-proc cQStackedLayout_vtable_callback_indexOf(self: pointer, param1: pointer): cint {.cdecl.} =
+proc fcQStackedLayout_vtable_callback_indexOf(self: pointer, param1: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QStackedLayoutVTable](fcQStackedLayout_vdata(self))
   let self = QStackedLayout(h: self)
   let slotval1 = gen_qwidget_types.QWidget(h: param1, owned: false)
   var virtualReturn = vtbl[].indexOf(self, slotval1)
   virtualReturn
 
-proc QStackedLayoutisEmpty*(self: gen_qstackedlayout_types.QStackedLayout): bool =
-  fcQStackedLayout_virtualbase_isEmpty(self.h)
-
-proc cQStackedLayout_vtable_callback_isEmpty(self: pointer): bool {.cdecl.} =
+proc fcQStackedLayout_vtable_callback_isEmpty(self: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QStackedLayoutVTable](fcQStackedLayout_vdata(self))
   let self = QStackedLayout(h: self)
   var virtualReturn = vtbl[].isEmpty(self)
   virtualReturn
 
-proc QStackedLayoutcontrolTypes*(self: gen_qstackedlayout_types.QStackedLayout): cint =
-  cint(fcQStackedLayout_virtualbase_controlTypes(self.h))
-
-proc cQStackedLayout_vtable_callback_controlTypes(self: pointer): cint {.cdecl.} =
+proc fcQStackedLayout_vtable_callback_controlTypes(self: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QStackedLayoutVTable](fcQStackedLayout_vdata(self))
   let self = QStackedLayout(h: self)
   var virtualReturn = vtbl[].controlTypes(self)
   cint(virtualReturn)
 
-proc QStackedLayoutlayout*(self: gen_qstackedlayout_types.QStackedLayout): gen_qlayout_types.QLayout =
-  gen_qlayout_types.QLayout(h: fcQStackedLayout_virtualbase_layout(self.h), owned: false)
-
-proc cQStackedLayout_vtable_callback_layout(self: pointer): pointer {.cdecl.} =
+proc fcQStackedLayout_vtable_callback_layout(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QStackedLayoutVTable](fcQStackedLayout_vdata(self))
   let self = QStackedLayout(h: self)
   var virtualReturn = vtbl[].layout(self)
@@ -588,29 +622,20 @@ proc cQStackedLayout_vtable_callback_layout(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QStackedLayoutchildEvent*(self: gen_qstackedlayout_types.QStackedLayout, e: gen_qcoreevent_types.QChildEvent): void =
-  fcQStackedLayout_virtualbase_childEvent(self.h, e.h)
-
-proc cQStackedLayout_vtable_callback_childEvent(self: pointer, e: pointer): void {.cdecl.} =
+proc fcQStackedLayout_vtable_callback_childEvent(self: pointer, e: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QStackedLayoutVTable](fcQStackedLayout_vdata(self))
   let self = QStackedLayout(h: self)
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: e, owned: false)
   vtbl[].childEvent(self, slotval1)
 
-proc QStackedLayoutevent*(self: gen_qstackedlayout_types.QStackedLayout, event: gen_qcoreevent_types.QEvent): bool =
-  fcQStackedLayout_virtualbase_event(self.h, event.h)
-
-proc cQStackedLayout_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
+proc fcQStackedLayout_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QStackedLayoutVTable](fcQStackedLayout_vdata(self))
   let self = QStackedLayout(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
-proc QStackedLayouteventFilter*(self: gen_qstackedlayout_types.QStackedLayout, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
-  fcQStackedLayout_virtualbase_eventFilter(self.h, watched.h, event.h)
-
-proc cQStackedLayout_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+proc fcQStackedLayout_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QStackedLayoutVTable](fcQStackedLayout_vdata(self))
   let self = QStackedLayout(h: self)
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
@@ -618,56 +643,38 @@ proc cQStackedLayout_vtable_callback_eventFilter(self: pointer, watched: pointer
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
-proc QStackedLayouttimerEvent*(self: gen_qstackedlayout_types.QStackedLayout, event: gen_qcoreevent_types.QTimerEvent): void =
-  fcQStackedLayout_virtualbase_timerEvent(self.h, event.h)
-
-proc cQStackedLayout_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQStackedLayout_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QStackedLayoutVTable](fcQStackedLayout_vdata(self))
   let self = QStackedLayout(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
-proc QStackedLayoutcustomEvent*(self: gen_qstackedlayout_types.QStackedLayout, event: gen_qcoreevent_types.QEvent): void =
-  fcQStackedLayout_virtualbase_customEvent(self.h, event.h)
-
-proc cQStackedLayout_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQStackedLayout_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QStackedLayoutVTable](fcQStackedLayout_vdata(self))
   let self = QStackedLayout(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
-proc QStackedLayoutconnectNotify*(self: gen_qstackedlayout_types.QStackedLayout, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQStackedLayout_virtualbase_connectNotify(self.h, signal.h)
-
-proc cQStackedLayout_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQStackedLayout_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QStackedLayoutVTable](fcQStackedLayout_vdata(self))
   let self = QStackedLayout(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
-proc QStackedLayoutdisconnectNotify*(self: gen_qstackedlayout_types.QStackedLayout, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQStackedLayout_virtualbase_disconnectNotify(self.h, signal.h)
-
-proc cQStackedLayout_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQStackedLayout_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QStackedLayoutVTable](fcQStackedLayout_vdata(self))
   let self = QStackedLayout(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
-proc QStackedLayoutminimumHeightForWidth*(self: gen_qstackedlayout_types.QStackedLayout, param1: cint): cint =
-  fcQStackedLayout_virtualbase_minimumHeightForWidth(self.h, param1)
-
-proc cQStackedLayout_vtable_callback_minimumHeightForWidth(self: pointer, param1: cint): cint {.cdecl.} =
+proc fcQStackedLayout_vtable_callback_minimumHeightForWidth(self: pointer, param1: cint): cint {.cdecl.} =
   let vtbl = cast[ptr QStackedLayoutVTable](fcQStackedLayout_vdata(self))
   let self = QStackedLayout(h: self)
   let slotval1 = param1
   var virtualReturn = vtbl[].minimumHeightForWidth(self, slotval1)
   virtualReturn
 
-proc QStackedLayoutwidget*(self: gen_qstackedlayout_types.QStackedLayout): gen_qwidget_types.QWidget =
-  gen_qwidget_types.QWidget(h: fcQStackedLayout_virtualbase_widget(self.h), owned: false)
-
-proc cQStackedLayout_vtable_callback_widget(self: pointer): pointer {.cdecl.} =
+proc fcQStackedLayout_vtable_callback_widget(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QStackedLayoutVTable](fcQStackedLayout_vdata(self))
   let self = QStackedLayout(h: self)
   var virtualReturn = vtbl[].widget(self)
@@ -676,10 +683,7 @@ proc cQStackedLayout_vtable_callback_widget(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QStackedLayoutspacerItem*(self: gen_qstackedlayout_types.QStackedLayout): gen_qlayoutitem_types.QSpacerItem =
-  gen_qlayoutitem_types.QSpacerItem(h: fcQStackedLayout_virtualbase_spacerItem(self.h), owned: false)
-
-proc cQStackedLayout_vtable_callback_spacerItem(self: pointer): pointer {.cdecl.} =
+proc fcQStackedLayout_vtable_callback_spacerItem(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QStackedLayoutVTable](fcQStackedLayout_vdata(self))
   let self = QStackedLayout(h: self)
   var virtualReturn = vtbl[].spacerItem(self)
@@ -690,9 +694,69 @@ proc cQStackedLayout_vtable_callback_spacerItem(self: pointer): pointer {.cdecl.
 
 type VirtualQStackedLayout* {.inheritable.} = ref object of QStackedLayout
   vtbl*: cQStackedLayoutVTable
+
 method metaObject*(self: VirtualQStackedLayout): gen_qobjectdefs_types.QMetaObject {.base.} =
   QStackedLayoutmetaObject(self[])
-proc cQStackedLayout_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
+method metacast*(self: VirtualQStackedLayout, param1: cstring): pointer {.base.} =
+  QStackedLayoutmetacast(self[], param1)
+method metacall*(self: VirtualQStackedLayout, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QStackedLayoutmetacall(self[], param1, param2, param3)
+method count*(self: VirtualQStackedLayout): cint {.base.} =
+  QStackedLayoutcount(self[])
+method addItem*(self: VirtualQStackedLayout, item: gen_qlayoutitem_types.QLayoutItem): void {.base.} =
+  QStackedLayoutaddItem(self[], item)
+method sizeHint*(self: VirtualQStackedLayout): gen_qsize_types.QSize {.base.} =
+  QStackedLayoutsizeHint(self[])
+method minimumSize*(self: VirtualQStackedLayout): gen_qsize_types.QSize {.base.} =
+  QStackedLayoutminimumSize(self[])
+method itemAt*(self: VirtualQStackedLayout, param1: cint): gen_qlayoutitem_types.QLayoutItem {.base.} =
+  QStackedLayoutitemAt(self[], param1)
+method takeAt*(self: VirtualQStackedLayout, param1: cint): gen_qlayoutitem_types.QLayoutItem {.base.} =
+  QStackedLayouttakeAt(self[], param1)
+method setGeometry*(self: VirtualQStackedLayout, rect: gen_qrect_types.QRect): void {.base.} =
+  QStackedLayoutsetGeometry(self[], rect)
+method hasHeightForWidth*(self: VirtualQStackedLayout): bool {.base.} =
+  QStackedLayouthasHeightForWidth(self[])
+method heightForWidth*(self: VirtualQStackedLayout, width: cint): cint {.base.} =
+  QStackedLayoutheightForWidth(self[], width)
+method invalidate*(self: VirtualQStackedLayout): void {.base.} =
+  QStackedLayoutinvalidate(self[])
+method geometry*(self: VirtualQStackedLayout): gen_qrect_types.QRect {.base.} =
+  QStackedLayoutgeometry(self[])
+method expandingDirections*(self: VirtualQStackedLayout): cint {.base.} =
+  QStackedLayoutexpandingDirections(self[])
+method maximumSize*(self: VirtualQStackedLayout): gen_qsize_types.QSize {.base.} =
+  QStackedLayoutmaximumSize(self[])
+method indexOf*(self: VirtualQStackedLayout, param1: gen_qwidget_types.QWidget): cint {.base.} =
+  QStackedLayoutindexOf(self[], param1)
+method isEmpty*(self: VirtualQStackedLayout): bool {.base.} =
+  QStackedLayoutisEmpty(self[])
+method controlTypes*(self: VirtualQStackedLayout): cint {.base.} =
+  QStackedLayoutcontrolTypes(self[])
+method layout*(self: VirtualQStackedLayout): gen_qlayout_types.QLayout {.base.} =
+  QStackedLayoutlayout(self[])
+method childEvent*(self: VirtualQStackedLayout, e: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QStackedLayoutchildEvent(self[], e)
+method event*(self: VirtualQStackedLayout, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QStackedLayoutevent(self[], event)
+method eventFilter*(self: VirtualQStackedLayout, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QStackedLayouteventFilter(self[], watched, event)
+method timerEvent*(self: VirtualQStackedLayout, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QStackedLayouttimerEvent(self[], event)
+method customEvent*(self: VirtualQStackedLayout, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QStackedLayoutcustomEvent(self[], event)
+method connectNotify*(self: VirtualQStackedLayout, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QStackedLayoutconnectNotify(self[], signal)
+method disconnectNotify*(self: VirtualQStackedLayout, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QStackedLayoutdisconnectNotify(self[], signal)
+method minimumHeightForWidth*(self: VirtualQStackedLayout, param1: cint): cint {.base.} =
+  QStackedLayoutminimumHeightForWidth(self[], param1)
+method widget*(self: VirtualQStackedLayout): gen_qwidget_types.QWidget {.base.} =
+  QStackedLayoutwidget(self[])
+method spacerItem*(self: VirtualQStackedLayout): gen_qlayoutitem_types.QSpacerItem {.base.} =
+  QStackedLayoutspacerItem(self[])
+
+proc fcQStackedLayout_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQStackedLayout](fcQStackedLayout_vdata(self))
   var virtualReturn = inst.metaObject()
   virtualReturn.owned = false # TODO move?
@@ -700,17 +764,13 @@ proc cQStackedLayout_method_callback_metaObject(self: pointer): pointer {.cdecl.
   virtualReturn.h = nil
   virtualReturn_h
 
-method metacast*(self: VirtualQStackedLayout, param1: cstring): pointer {.base.} =
-  QStackedLayoutmetacast(self[], param1)
-proc cQStackedLayout_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+proc fcQStackedLayout_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQStackedLayout](fcQStackedLayout_vdata(self))
   let slotval1 = (param1)
   var virtualReturn = inst.metacast(slotval1)
   virtualReturn
 
-method metacall*(self: VirtualQStackedLayout, param1: cint, param2: cint, param3: pointer): cint {.base.} =
-  QStackedLayoutmetacall(self[], param1, param2, param3)
-proc cQStackedLayout_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+proc fcQStackedLayout_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQStackedLayout](fcQStackedLayout_vdata(self))
   let slotval1 = cint(param1)
   let slotval2 = param2
@@ -718,23 +778,17 @@ proc cQStackedLayout_method_callback_metacall(self: pointer, param1: cint, param
   var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
-method count*(self: VirtualQStackedLayout): cint {.base.} =
-  QStackedLayoutcount(self[])
-proc cQStackedLayout_method_callback_count(self: pointer): cint {.cdecl.} =
+proc fcQStackedLayout_method_callback_count(self: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQStackedLayout](fcQStackedLayout_vdata(self))
   var virtualReturn = inst.count()
   virtualReturn
 
-method addItem*(self: VirtualQStackedLayout, item: gen_qlayoutitem_types.QLayoutItem): void {.base.} =
-  QStackedLayoutaddItem(self[], item)
-proc cQStackedLayout_method_callback_addItem(self: pointer, item: pointer): void {.cdecl.} =
+proc fcQStackedLayout_method_callback_addItem(self: pointer, item: pointer): void {.cdecl.} =
   let inst = cast[VirtualQStackedLayout](fcQStackedLayout_vdata(self))
   let slotval1 = gen_qlayoutitem_types.QLayoutItem(h: item, owned: false)
   inst.addItem(slotval1)
 
-method sizeHint*(self: VirtualQStackedLayout): gen_qsize_types.QSize {.base.} =
-  QStackedLayoutsizeHint(self[])
-proc cQStackedLayout_method_callback_sizeHint(self: pointer): pointer {.cdecl.} =
+proc fcQStackedLayout_method_callback_sizeHint(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQStackedLayout](fcQStackedLayout_vdata(self))
   var virtualReturn = inst.sizeHint()
   virtualReturn.owned = false # TODO move?
@@ -742,9 +796,7 @@ proc cQStackedLayout_method_callback_sizeHint(self: pointer): pointer {.cdecl.} 
   virtualReturn.h = nil
   virtualReturn_h
 
-method minimumSize*(self: VirtualQStackedLayout): gen_qsize_types.QSize {.base.} =
-  QStackedLayoutminimumSize(self[])
-proc cQStackedLayout_method_callback_minimumSize(self: pointer): pointer {.cdecl.} =
+proc fcQStackedLayout_method_callback_minimumSize(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQStackedLayout](fcQStackedLayout_vdata(self))
   var virtualReturn = inst.minimumSize()
   virtualReturn.owned = false # TODO move?
@@ -752,9 +804,7 @@ proc cQStackedLayout_method_callback_minimumSize(self: pointer): pointer {.cdecl
   virtualReturn.h = nil
   virtualReturn_h
 
-method itemAt*(self: VirtualQStackedLayout, param1: cint): gen_qlayoutitem_types.QLayoutItem {.base.} =
-  QStackedLayoutitemAt(self[], param1)
-proc cQStackedLayout_method_callback_itemAt(self: pointer, param1: cint): pointer {.cdecl.} =
+proc fcQStackedLayout_method_callback_itemAt(self: pointer, param1: cint): pointer {.cdecl.} =
   let inst = cast[VirtualQStackedLayout](fcQStackedLayout_vdata(self))
   let slotval1 = param1
   var virtualReturn = inst.itemAt(slotval1)
@@ -763,9 +813,7 @@ proc cQStackedLayout_method_callback_itemAt(self: pointer, param1: cint): pointe
   virtualReturn.h = nil
   virtualReturn_h
 
-method takeAt*(self: VirtualQStackedLayout, param1: cint): gen_qlayoutitem_types.QLayoutItem {.base.} =
-  QStackedLayouttakeAt(self[], param1)
-proc cQStackedLayout_method_callback_takeAt(self: pointer, param1: cint): pointer {.cdecl.} =
+proc fcQStackedLayout_method_callback_takeAt(self: pointer, param1: cint): pointer {.cdecl.} =
   let inst = cast[VirtualQStackedLayout](fcQStackedLayout_vdata(self))
   let slotval1 = param1
   var virtualReturn = inst.takeAt(slotval1)
@@ -774,37 +822,27 @@ proc cQStackedLayout_method_callback_takeAt(self: pointer, param1: cint): pointe
   virtualReturn.h = nil
   virtualReturn_h
 
-method setGeometry*(self: VirtualQStackedLayout, rect: gen_qrect_types.QRect): void {.base.} =
-  QStackedLayoutsetGeometry(self[], rect)
-proc cQStackedLayout_method_callback_setGeometry(self: pointer, rect: pointer): void {.cdecl.} =
+proc fcQStackedLayout_method_callback_setGeometry(self: pointer, rect: pointer): void {.cdecl.} =
   let inst = cast[VirtualQStackedLayout](fcQStackedLayout_vdata(self))
   let slotval1 = gen_qrect_types.QRect(h: rect, owned: false)
   inst.setGeometry(slotval1)
 
-method hasHeightForWidth*(self: VirtualQStackedLayout): bool {.base.} =
-  QStackedLayouthasHeightForWidth(self[])
-proc cQStackedLayout_method_callback_hasHeightForWidth(self: pointer): bool {.cdecl.} =
+proc fcQStackedLayout_method_callback_hasHeightForWidth(self: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQStackedLayout](fcQStackedLayout_vdata(self))
   var virtualReturn = inst.hasHeightForWidth()
   virtualReturn
 
-method heightForWidth*(self: VirtualQStackedLayout, width: cint): cint {.base.} =
-  QStackedLayoutheightForWidth(self[], width)
-proc cQStackedLayout_method_callback_heightForWidth(self: pointer, width: cint): cint {.cdecl.} =
+proc fcQStackedLayout_method_callback_heightForWidth(self: pointer, width: cint): cint {.cdecl.} =
   let inst = cast[VirtualQStackedLayout](fcQStackedLayout_vdata(self))
   let slotval1 = width
   var virtualReturn = inst.heightForWidth(slotval1)
   virtualReturn
 
-method invalidate*(self: VirtualQStackedLayout): void {.base.} =
-  QStackedLayoutinvalidate(self[])
-proc cQStackedLayout_method_callback_invalidate(self: pointer): void {.cdecl.} =
+proc fcQStackedLayout_method_callback_invalidate(self: pointer): void {.cdecl.} =
   let inst = cast[VirtualQStackedLayout](fcQStackedLayout_vdata(self))
   inst.invalidate()
 
-method geometry*(self: VirtualQStackedLayout): gen_qrect_types.QRect {.base.} =
-  QStackedLayoutgeometry(self[])
-proc cQStackedLayout_method_callback_geometry(self: pointer): pointer {.cdecl.} =
+proc fcQStackedLayout_method_callback_geometry(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQStackedLayout](fcQStackedLayout_vdata(self))
   var virtualReturn = inst.geometry()
   virtualReturn.owned = false # TODO move?
@@ -812,16 +850,12 @@ proc cQStackedLayout_method_callback_geometry(self: pointer): pointer {.cdecl.} 
   virtualReturn.h = nil
   virtualReturn_h
 
-method expandingDirections*(self: VirtualQStackedLayout): cint {.base.} =
-  QStackedLayoutexpandingDirections(self[])
-proc cQStackedLayout_method_callback_expandingDirections(self: pointer): cint {.cdecl.} =
+proc fcQStackedLayout_method_callback_expandingDirections(self: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQStackedLayout](fcQStackedLayout_vdata(self))
   var virtualReturn = inst.expandingDirections()
   cint(virtualReturn)
 
-method maximumSize*(self: VirtualQStackedLayout): gen_qsize_types.QSize {.base.} =
-  QStackedLayoutmaximumSize(self[])
-proc cQStackedLayout_method_callback_maximumSize(self: pointer): pointer {.cdecl.} =
+proc fcQStackedLayout_method_callback_maximumSize(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQStackedLayout](fcQStackedLayout_vdata(self))
   var virtualReturn = inst.maximumSize()
   virtualReturn.owned = false # TODO move?
@@ -829,31 +863,23 @@ proc cQStackedLayout_method_callback_maximumSize(self: pointer): pointer {.cdecl
   virtualReturn.h = nil
   virtualReturn_h
 
-method indexOf*(self: VirtualQStackedLayout, param1: gen_qwidget_types.QWidget): cint {.base.} =
-  QStackedLayoutindexOf(self[], param1)
-proc cQStackedLayout_method_callback_indexOf(self: pointer, param1: pointer): cint {.cdecl.} =
+proc fcQStackedLayout_method_callback_indexOf(self: pointer, param1: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQStackedLayout](fcQStackedLayout_vdata(self))
   let slotval1 = gen_qwidget_types.QWidget(h: param1, owned: false)
   var virtualReturn = inst.indexOf(slotval1)
   virtualReturn
 
-method isEmpty*(self: VirtualQStackedLayout): bool {.base.} =
-  QStackedLayoutisEmpty(self[])
-proc cQStackedLayout_method_callback_isEmpty(self: pointer): bool {.cdecl.} =
+proc fcQStackedLayout_method_callback_isEmpty(self: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQStackedLayout](fcQStackedLayout_vdata(self))
   var virtualReturn = inst.isEmpty()
   virtualReturn
 
-method controlTypes*(self: VirtualQStackedLayout): cint {.base.} =
-  QStackedLayoutcontrolTypes(self[])
-proc cQStackedLayout_method_callback_controlTypes(self: pointer): cint {.cdecl.} =
+proc fcQStackedLayout_method_callback_controlTypes(self: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQStackedLayout](fcQStackedLayout_vdata(self))
   var virtualReturn = inst.controlTypes()
   cint(virtualReturn)
 
-method layout*(self: VirtualQStackedLayout): gen_qlayout_types.QLayout {.base.} =
-  QStackedLayoutlayout(self[])
-proc cQStackedLayout_method_callback_layout(self: pointer): pointer {.cdecl.} =
+proc fcQStackedLayout_method_callback_layout(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQStackedLayout](fcQStackedLayout_vdata(self))
   var virtualReturn = inst.layout()
   virtualReturn.owned = false # TODO move?
@@ -861,69 +887,51 @@ proc cQStackedLayout_method_callback_layout(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-method childEvent*(self: VirtualQStackedLayout, e: gen_qcoreevent_types.QChildEvent): void {.base.} =
-  QStackedLayoutchildEvent(self[], e)
-proc cQStackedLayout_method_callback_childEvent(self: pointer, e: pointer): void {.cdecl.} =
+proc fcQStackedLayout_method_callback_childEvent(self: pointer, e: pointer): void {.cdecl.} =
   let inst = cast[VirtualQStackedLayout](fcQStackedLayout_vdata(self))
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: e, owned: false)
   inst.childEvent(slotval1)
 
-method event*(self: VirtualQStackedLayout, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QStackedLayoutevent(self[], event)
-proc cQStackedLayout_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
+proc fcQStackedLayout_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQStackedLayout](fcQStackedLayout_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
-method eventFilter*(self: VirtualQStackedLayout, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QStackedLayouteventFilter(self[], watched, event)
-proc cQStackedLayout_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+proc fcQStackedLayout_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQStackedLayout](fcQStackedLayout_vdata(self))
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
   let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
-method timerEvent*(self: VirtualQStackedLayout, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
-  QStackedLayouttimerEvent(self[], event)
-proc cQStackedLayout_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQStackedLayout_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQStackedLayout](fcQStackedLayout_vdata(self))
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
-method customEvent*(self: VirtualQStackedLayout, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QStackedLayoutcustomEvent(self[], event)
-proc cQStackedLayout_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQStackedLayout_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQStackedLayout](fcQStackedLayout_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
-method connectNotify*(self: VirtualQStackedLayout, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QStackedLayoutconnectNotify(self[], signal)
-proc cQStackedLayout_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQStackedLayout_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQStackedLayout](fcQStackedLayout_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
-method disconnectNotify*(self: VirtualQStackedLayout, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QStackedLayoutdisconnectNotify(self[], signal)
-proc cQStackedLayout_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQStackedLayout_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQStackedLayout](fcQStackedLayout_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
 
-method minimumHeightForWidth*(self: VirtualQStackedLayout, param1: cint): cint {.base.} =
-  QStackedLayoutminimumHeightForWidth(self[], param1)
-proc cQStackedLayout_method_callback_minimumHeightForWidth(self: pointer, param1: cint): cint {.cdecl.} =
+proc fcQStackedLayout_method_callback_minimumHeightForWidth(self: pointer, param1: cint): cint {.cdecl.} =
   let inst = cast[VirtualQStackedLayout](fcQStackedLayout_vdata(self))
   let slotval1 = param1
   var virtualReturn = inst.minimumHeightForWidth(slotval1)
   virtualReturn
 
-method widget*(self: VirtualQStackedLayout): gen_qwidget_types.QWidget {.base.} =
-  QStackedLayoutwidget(self[])
-proc cQStackedLayout_method_callback_widget(self: pointer): pointer {.cdecl.} =
+proc fcQStackedLayout_method_callback_widget(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQStackedLayout](fcQStackedLayout_vdata(self))
   var virtualReturn = inst.widget()
   virtualReturn.owned = false # TODO move?
@@ -931,15 +939,14 @@ proc cQStackedLayout_method_callback_widget(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-method spacerItem*(self: VirtualQStackedLayout): gen_qlayoutitem_types.QSpacerItem {.base.} =
-  QStackedLayoutspacerItem(self[])
-proc cQStackedLayout_method_callback_spacerItem(self: pointer): pointer {.cdecl.} =
+proc fcQStackedLayout_method_callback_spacerItem(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQStackedLayout](fcQStackedLayout_vdata(self))
   var virtualReturn = inst.spacerItem()
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
   virtualReturn_h
+
 
 proc widgetEvent*(self: gen_qstackedlayout_types.QStackedLayout, param1: gen_qcoreevent_types.QEvent): void =
   fcQStackedLayout_protectedbase_widgetEvent(self.h, param1.h)
@@ -977,65 +984,65 @@ proc create*(T: type gen_qstackedlayout_types.QStackedLayout,
     let vtbl = cast[ref QStackedLayoutVTable](fcQStackedLayout_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQStackedLayout_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQStackedLayout_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQStackedLayout_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQStackedLayout_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQStackedLayout_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQStackedLayout_vtable_callback_metacall
   if not isNil(vtbl[].count):
-    vtbl[].vtbl.count = cQStackedLayout_vtable_callback_count
+    vtbl[].vtbl.count = fcQStackedLayout_vtable_callback_count
   if not isNil(vtbl[].addItem):
-    vtbl[].vtbl.addItem = cQStackedLayout_vtable_callback_addItem
+    vtbl[].vtbl.addItem = fcQStackedLayout_vtable_callback_addItem
   if not isNil(vtbl[].sizeHint):
-    vtbl[].vtbl.sizeHint = cQStackedLayout_vtable_callback_sizeHint
+    vtbl[].vtbl.sizeHint = fcQStackedLayout_vtable_callback_sizeHint
   if not isNil(vtbl[].minimumSize):
-    vtbl[].vtbl.minimumSize = cQStackedLayout_vtable_callback_minimumSize
+    vtbl[].vtbl.minimumSize = fcQStackedLayout_vtable_callback_minimumSize
   if not isNil(vtbl[].itemAt):
-    vtbl[].vtbl.itemAt = cQStackedLayout_vtable_callback_itemAt
+    vtbl[].vtbl.itemAt = fcQStackedLayout_vtable_callback_itemAt
   if not isNil(vtbl[].takeAt):
-    vtbl[].vtbl.takeAt = cQStackedLayout_vtable_callback_takeAt
+    vtbl[].vtbl.takeAt = fcQStackedLayout_vtable_callback_takeAt
   if not isNil(vtbl[].setGeometry):
-    vtbl[].vtbl.setGeometry = cQStackedLayout_vtable_callback_setGeometry
+    vtbl[].vtbl.setGeometry = fcQStackedLayout_vtable_callback_setGeometry
   if not isNil(vtbl[].hasHeightForWidth):
-    vtbl[].vtbl.hasHeightForWidth = cQStackedLayout_vtable_callback_hasHeightForWidth
+    vtbl[].vtbl.hasHeightForWidth = fcQStackedLayout_vtable_callback_hasHeightForWidth
   if not isNil(vtbl[].heightForWidth):
-    vtbl[].vtbl.heightForWidth = cQStackedLayout_vtable_callback_heightForWidth
+    vtbl[].vtbl.heightForWidth = fcQStackedLayout_vtable_callback_heightForWidth
   if not isNil(vtbl[].invalidate):
-    vtbl[].vtbl.invalidate = cQStackedLayout_vtable_callback_invalidate
+    vtbl[].vtbl.invalidate = fcQStackedLayout_vtable_callback_invalidate
   if not isNil(vtbl[].geometry):
-    vtbl[].vtbl.geometry = cQStackedLayout_vtable_callback_geometry
+    vtbl[].vtbl.geometry = fcQStackedLayout_vtable_callback_geometry
   if not isNil(vtbl[].expandingDirections):
-    vtbl[].vtbl.expandingDirections = cQStackedLayout_vtable_callback_expandingDirections
+    vtbl[].vtbl.expandingDirections = fcQStackedLayout_vtable_callback_expandingDirections
   if not isNil(vtbl[].maximumSize):
-    vtbl[].vtbl.maximumSize = cQStackedLayout_vtable_callback_maximumSize
+    vtbl[].vtbl.maximumSize = fcQStackedLayout_vtable_callback_maximumSize
   if not isNil(vtbl[].indexOf):
-    vtbl[].vtbl.indexOf = cQStackedLayout_vtable_callback_indexOf
+    vtbl[].vtbl.indexOf = fcQStackedLayout_vtable_callback_indexOf
   if not isNil(vtbl[].isEmpty):
-    vtbl[].vtbl.isEmpty = cQStackedLayout_vtable_callback_isEmpty
+    vtbl[].vtbl.isEmpty = fcQStackedLayout_vtable_callback_isEmpty
   if not isNil(vtbl[].controlTypes):
-    vtbl[].vtbl.controlTypes = cQStackedLayout_vtable_callback_controlTypes
+    vtbl[].vtbl.controlTypes = fcQStackedLayout_vtable_callback_controlTypes
   if not isNil(vtbl[].layout):
-    vtbl[].vtbl.layout = cQStackedLayout_vtable_callback_layout
+    vtbl[].vtbl.layout = fcQStackedLayout_vtable_callback_layout
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQStackedLayout_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQStackedLayout_vtable_callback_childEvent
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQStackedLayout_vtable_callback_event
+    vtbl[].vtbl.event = fcQStackedLayout_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQStackedLayout_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQStackedLayout_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQStackedLayout_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQStackedLayout_vtable_callback_timerEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQStackedLayout_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQStackedLayout_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQStackedLayout_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQStackedLayout_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQStackedLayout_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQStackedLayout_vtable_callback_disconnectNotify
   if not isNil(vtbl[].minimumHeightForWidth):
-    vtbl[].vtbl.minimumHeightForWidth = cQStackedLayout_vtable_callback_minimumHeightForWidth
+    vtbl[].vtbl.minimumHeightForWidth = fcQStackedLayout_vtable_callback_minimumHeightForWidth
   if not isNil(vtbl[].widget):
-    vtbl[].vtbl.widget = cQStackedLayout_vtable_callback_widget
+    vtbl[].vtbl.widget = fcQStackedLayout_vtable_callback_widget
   if not isNil(vtbl[].spacerItem):
-    vtbl[].vtbl.spacerItem = cQStackedLayout_vtable_callback_spacerItem
+    vtbl[].vtbl.spacerItem = fcQStackedLayout_vtable_callback_spacerItem
   gen_qstackedlayout_types.QStackedLayout(h: fcQStackedLayout_new(addr(vtbl[].vtbl), addr(vtbl[]), parent.h), owned: true)
 
 proc create*(T: type gen_qstackedlayout_types.QStackedLayout,
@@ -1046,65 +1053,65 @@ proc create*(T: type gen_qstackedlayout_types.QStackedLayout,
     let vtbl = cast[ref QStackedLayoutVTable](fcQStackedLayout_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQStackedLayout_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQStackedLayout_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQStackedLayout_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQStackedLayout_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQStackedLayout_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQStackedLayout_vtable_callback_metacall
   if not isNil(vtbl[].count):
-    vtbl[].vtbl.count = cQStackedLayout_vtable_callback_count
+    vtbl[].vtbl.count = fcQStackedLayout_vtable_callback_count
   if not isNil(vtbl[].addItem):
-    vtbl[].vtbl.addItem = cQStackedLayout_vtable_callback_addItem
+    vtbl[].vtbl.addItem = fcQStackedLayout_vtable_callback_addItem
   if not isNil(vtbl[].sizeHint):
-    vtbl[].vtbl.sizeHint = cQStackedLayout_vtable_callback_sizeHint
+    vtbl[].vtbl.sizeHint = fcQStackedLayout_vtable_callback_sizeHint
   if not isNil(vtbl[].minimumSize):
-    vtbl[].vtbl.minimumSize = cQStackedLayout_vtable_callback_minimumSize
+    vtbl[].vtbl.minimumSize = fcQStackedLayout_vtable_callback_minimumSize
   if not isNil(vtbl[].itemAt):
-    vtbl[].vtbl.itemAt = cQStackedLayout_vtable_callback_itemAt
+    vtbl[].vtbl.itemAt = fcQStackedLayout_vtable_callback_itemAt
   if not isNil(vtbl[].takeAt):
-    vtbl[].vtbl.takeAt = cQStackedLayout_vtable_callback_takeAt
+    vtbl[].vtbl.takeAt = fcQStackedLayout_vtable_callback_takeAt
   if not isNil(vtbl[].setGeometry):
-    vtbl[].vtbl.setGeometry = cQStackedLayout_vtable_callback_setGeometry
+    vtbl[].vtbl.setGeometry = fcQStackedLayout_vtable_callback_setGeometry
   if not isNil(vtbl[].hasHeightForWidth):
-    vtbl[].vtbl.hasHeightForWidth = cQStackedLayout_vtable_callback_hasHeightForWidth
+    vtbl[].vtbl.hasHeightForWidth = fcQStackedLayout_vtable_callback_hasHeightForWidth
   if not isNil(vtbl[].heightForWidth):
-    vtbl[].vtbl.heightForWidth = cQStackedLayout_vtable_callback_heightForWidth
+    vtbl[].vtbl.heightForWidth = fcQStackedLayout_vtable_callback_heightForWidth
   if not isNil(vtbl[].invalidate):
-    vtbl[].vtbl.invalidate = cQStackedLayout_vtable_callback_invalidate
+    vtbl[].vtbl.invalidate = fcQStackedLayout_vtable_callback_invalidate
   if not isNil(vtbl[].geometry):
-    vtbl[].vtbl.geometry = cQStackedLayout_vtable_callback_geometry
+    vtbl[].vtbl.geometry = fcQStackedLayout_vtable_callback_geometry
   if not isNil(vtbl[].expandingDirections):
-    vtbl[].vtbl.expandingDirections = cQStackedLayout_vtable_callback_expandingDirections
+    vtbl[].vtbl.expandingDirections = fcQStackedLayout_vtable_callback_expandingDirections
   if not isNil(vtbl[].maximumSize):
-    vtbl[].vtbl.maximumSize = cQStackedLayout_vtable_callback_maximumSize
+    vtbl[].vtbl.maximumSize = fcQStackedLayout_vtable_callback_maximumSize
   if not isNil(vtbl[].indexOf):
-    vtbl[].vtbl.indexOf = cQStackedLayout_vtable_callback_indexOf
+    vtbl[].vtbl.indexOf = fcQStackedLayout_vtable_callback_indexOf
   if not isNil(vtbl[].isEmpty):
-    vtbl[].vtbl.isEmpty = cQStackedLayout_vtable_callback_isEmpty
+    vtbl[].vtbl.isEmpty = fcQStackedLayout_vtable_callback_isEmpty
   if not isNil(vtbl[].controlTypes):
-    vtbl[].vtbl.controlTypes = cQStackedLayout_vtable_callback_controlTypes
+    vtbl[].vtbl.controlTypes = fcQStackedLayout_vtable_callback_controlTypes
   if not isNil(vtbl[].layout):
-    vtbl[].vtbl.layout = cQStackedLayout_vtable_callback_layout
+    vtbl[].vtbl.layout = fcQStackedLayout_vtable_callback_layout
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQStackedLayout_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQStackedLayout_vtable_callback_childEvent
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQStackedLayout_vtable_callback_event
+    vtbl[].vtbl.event = fcQStackedLayout_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQStackedLayout_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQStackedLayout_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQStackedLayout_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQStackedLayout_vtable_callback_timerEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQStackedLayout_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQStackedLayout_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQStackedLayout_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQStackedLayout_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQStackedLayout_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQStackedLayout_vtable_callback_disconnectNotify
   if not isNil(vtbl[].minimumHeightForWidth):
-    vtbl[].vtbl.minimumHeightForWidth = cQStackedLayout_vtable_callback_minimumHeightForWidth
+    vtbl[].vtbl.minimumHeightForWidth = fcQStackedLayout_vtable_callback_minimumHeightForWidth
   if not isNil(vtbl[].widget):
-    vtbl[].vtbl.widget = cQStackedLayout_vtable_callback_widget
+    vtbl[].vtbl.widget = fcQStackedLayout_vtable_callback_widget
   if not isNil(vtbl[].spacerItem):
-    vtbl[].vtbl.spacerItem = cQStackedLayout_vtable_callback_spacerItem
+    vtbl[].vtbl.spacerItem = fcQStackedLayout_vtable_callback_spacerItem
   gen_qstackedlayout_types.QStackedLayout(h: fcQStackedLayout_new2(addr(vtbl[].vtbl), addr(vtbl[])), owned: true)
 
 proc create*(T: type gen_qstackedlayout_types.QStackedLayout,
@@ -1116,65 +1123,65 @@ proc create*(T: type gen_qstackedlayout_types.QStackedLayout,
     let vtbl = cast[ref QStackedLayoutVTable](fcQStackedLayout_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQStackedLayout_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQStackedLayout_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQStackedLayout_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQStackedLayout_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQStackedLayout_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQStackedLayout_vtable_callback_metacall
   if not isNil(vtbl[].count):
-    vtbl[].vtbl.count = cQStackedLayout_vtable_callback_count
+    vtbl[].vtbl.count = fcQStackedLayout_vtable_callback_count
   if not isNil(vtbl[].addItem):
-    vtbl[].vtbl.addItem = cQStackedLayout_vtable_callback_addItem
+    vtbl[].vtbl.addItem = fcQStackedLayout_vtable_callback_addItem
   if not isNil(vtbl[].sizeHint):
-    vtbl[].vtbl.sizeHint = cQStackedLayout_vtable_callback_sizeHint
+    vtbl[].vtbl.sizeHint = fcQStackedLayout_vtable_callback_sizeHint
   if not isNil(vtbl[].minimumSize):
-    vtbl[].vtbl.minimumSize = cQStackedLayout_vtable_callback_minimumSize
+    vtbl[].vtbl.minimumSize = fcQStackedLayout_vtable_callback_minimumSize
   if not isNil(vtbl[].itemAt):
-    vtbl[].vtbl.itemAt = cQStackedLayout_vtable_callback_itemAt
+    vtbl[].vtbl.itemAt = fcQStackedLayout_vtable_callback_itemAt
   if not isNil(vtbl[].takeAt):
-    vtbl[].vtbl.takeAt = cQStackedLayout_vtable_callback_takeAt
+    vtbl[].vtbl.takeAt = fcQStackedLayout_vtable_callback_takeAt
   if not isNil(vtbl[].setGeometry):
-    vtbl[].vtbl.setGeometry = cQStackedLayout_vtable_callback_setGeometry
+    vtbl[].vtbl.setGeometry = fcQStackedLayout_vtable_callback_setGeometry
   if not isNil(vtbl[].hasHeightForWidth):
-    vtbl[].vtbl.hasHeightForWidth = cQStackedLayout_vtable_callback_hasHeightForWidth
+    vtbl[].vtbl.hasHeightForWidth = fcQStackedLayout_vtable_callback_hasHeightForWidth
   if not isNil(vtbl[].heightForWidth):
-    vtbl[].vtbl.heightForWidth = cQStackedLayout_vtable_callback_heightForWidth
+    vtbl[].vtbl.heightForWidth = fcQStackedLayout_vtable_callback_heightForWidth
   if not isNil(vtbl[].invalidate):
-    vtbl[].vtbl.invalidate = cQStackedLayout_vtable_callback_invalidate
+    vtbl[].vtbl.invalidate = fcQStackedLayout_vtable_callback_invalidate
   if not isNil(vtbl[].geometry):
-    vtbl[].vtbl.geometry = cQStackedLayout_vtable_callback_geometry
+    vtbl[].vtbl.geometry = fcQStackedLayout_vtable_callback_geometry
   if not isNil(vtbl[].expandingDirections):
-    vtbl[].vtbl.expandingDirections = cQStackedLayout_vtable_callback_expandingDirections
+    vtbl[].vtbl.expandingDirections = fcQStackedLayout_vtable_callback_expandingDirections
   if not isNil(vtbl[].maximumSize):
-    vtbl[].vtbl.maximumSize = cQStackedLayout_vtable_callback_maximumSize
+    vtbl[].vtbl.maximumSize = fcQStackedLayout_vtable_callback_maximumSize
   if not isNil(vtbl[].indexOf):
-    vtbl[].vtbl.indexOf = cQStackedLayout_vtable_callback_indexOf
+    vtbl[].vtbl.indexOf = fcQStackedLayout_vtable_callback_indexOf
   if not isNil(vtbl[].isEmpty):
-    vtbl[].vtbl.isEmpty = cQStackedLayout_vtable_callback_isEmpty
+    vtbl[].vtbl.isEmpty = fcQStackedLayout_vtable_callback_isEmpty
   if not isNil(vtbl[].controlTypes):
-    vtbl[].vtbl.controlTypes = cQStackedLayout_vtable_callback_controlTypes
+    vtbl[].vtbl.controlTypes = fcQStackedLayout_vtable_callback_controlTypes
   if not isNil(vtbl[].layout):
-    vtbl[].vtbl.layout = cQStackedLayout_vtable_callback_layout
+    vtbl[].vtbl.layout = fcQStackedLayout_vtable_callback_layout
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQStackedLayout_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQStackedLayout_vtable_callback_childEvent
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQStackedLayout_vtable_callback_event
+    vtbl[].vtbl.event = fcQStackedLayout_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQStackedLayout_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQStackedLayout_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQStackedLayout_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQStackedLayout_vtable_callback_timerEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQStackedLayout_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQStackedLayout_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQStackedLayout_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQStackedLayout_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQStackedLayout_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQStackedLayout_vtable_callback_disconnectNotify
   if not isNil(vtbl[].minimumHeightForWidth):
-    vtbl[].vtbl.minimumHeightForWidth = cQStackedLayout_vtable_callback_minimumHeightForWidth
+    vtbl[].vtbl.minimumHeightForWidth = fcQStackedLayout_vtable_callback_minimumHeightForWidth
   if not isNil(vtbl[].widget):
-    vtbl[].vtbl.widget = cQStackedLayout_vtable_callback_widget
+    vtbl[].vtbl.widget = fcQStackedLayout_vtable_callback_widget
   if not isNil(vtbl[].spacerItem):
-    vtbl[].vtbl.spacerItem = cQStackedLayout_vtable_callback_spacerItem
+    vtbl[].vtbl.spacerItem = fcQStackedLayout_vtable_callback_spacerItem
   gen_qstackedlayout_types.QStackedLayout(h: fcQStackedLayout_new3(addr(vtbl[].vtbl), addr(vtbl[]), parentLayout.h), owned: true)
 
 const cQStackedLayout_mvtbl = cQStackedLayoutVTable(
@@ -1182,36 +1189,37 @@ const cQStackedLayout_mvtbl = cQStackedLayoutVTable(
     let inst = cast[ptr typeof(VirtualQStackedLayout()[])](self.fcQStackedLayout_vtbl())
     inst[].h = nil
     inst[].owned = false,
-  metaObject: cQStackedLayout_method_callback_metaObject,
-  metacast: cQStackedLayout_method_callback_metacast,
-  metacall: cQStackedLayout_method_callback_metacall,
-  count: cQStackedLayout_method_callback_count,
-  addItem: cQStackedLayout_method_callback_addItem,
-  sizeHint: cQStackedLayout_method_callback_sizeHint,
-  minimumSize: cQStackedLayout_method_callback_minimumSize,
-  itemAt: cQStackedLayout_method_callback_itemAt,
-  takeAt: cQStackedLayout_method_callback_takeAt,
-  setGeometry: cQStackedLayout_method_callback_setGeometry,
-  hasHeightForWidth: cQStackedLayout_method_callback_hasHeightForWidth,
-  heightForWidth: cQStackedLayout_method_callback_heightForWidth,
-  invalidate: cQStackedLayout_method_callback_invalidate,
-  geometry: cQStackedLayout_method_callback_geometry,
-  expandingDirections: cQStackedLayout_method_callback_expandingDirections,
-  maximumSize: cQStackedLayout_method_callback_maximumSize,
-  indexOf: cQStackedLayout_method_callback_indexOf,
-  isEmpty: cQStackedLayout_method_callback_isEmpty,
-  controlTypes: cQStackedLayout_method_callback_controlTypes,
-  layout: cQStackedLayout_method_callback_layout,
-  childEvent: cQStackedLayout_method_callback_childEvent,
-  event: cQStackedLayout_method_callback_event,
-  eventFilter: cQStackedLayout_method_callback_eventFilter,
-  timerEvent: cQStackedLayout_method_callback_timerEvent,
-  customEvent: cQStackedLayout_method_callback_customEvent,
-  connectNotify: cQStackedLayout_method_callback_connectNotify,
-  disconnectNotify: cQStackedLayout_method_callback_disconnectNotify,
-  minimumHeightForWidth: cQStackedLayout_method_callback_minimumHeightForWidth,
-  widget: cQStackedLayout_method_callback_widget,
-  spacerItem: cQStackedLayout_method_callback_spacerItem,
+
+  metaObject: fcQStackedLayout_method_callback_metaObject,
+  metacast: fcQStackedLayout_method_callback_metacast,
+  metacall: fcQStackedLayout_method_callback_metacall,
+  count: fcQStackedLayout_method_callback_count,
+  addItem: fcQStackedLayout_method_callback_addItem,
+  sizeHint: fcQStackedLayout_method_callback_sizeHint,
+  minimumSize: fcQStackedLayout_method_callback_minimumSize,
+  itemAt: fcQStackedLayout_method_callback_itemAt,
+  takeAt: fcQStackedLayout_method_callback_takeAt,
+  setGeometry: fcQStackedLayout_method_callback_setGeometry,
+  hasHeightForWidth: fcQStackedLayout_method_callback_hasHeightForWidth,
+  heightForWidth: fcQStackedLayout_method_callback_heightForWidth,
+  invalidate: fcQStackedLayout_method_callback_invalidate,
+  geometry: fcQStackedLayout_method_callback_geometry,
+  expandingDirections: fcQStackedLayout_method_callback_expandingDirections,
+  maximumSize: fcQStackedLayout_method_callback_maximumSize,
+  indexOf: fcQStackedLayout_method_callback_indexOf,
+  isEmpty: fcQStackedLayout_method_callback_isEmpty,
+  controlTypes: fcQStackedLayout_method_callback_controlTypes,
+  layout: fcQStackedLayout_method_callback_layout,
+  childEvent: fcQStackedLayout_method_callback_childEvent,
+  event: fcQStackedLayout_method_callback_event,
+  eventFilter: fcQStackedLayout_method_callback_eventFilter,
+  timerEvent: fcQStackedLayout_method_callback_timerEvent,
+  customEvent: fcQStackedLayout_method_callback_customEvent,
+  connectNotify: fcQStackedLayout_method_callback_connectNotify,
+  disconnectNotify: fcQStackedLayout_method_callback_disconnectNotify,
+  minimumHeightForWidth: fcQStackedLayout_method_callback_minimumHeightForWidth,
+  widget: fcQStackedLayout_method_callback_widget,
+  spacerItem: fcQStackedLayout_method_callback_spacerItem,
 )
 proc create*(T: type gen_qstackedlayout_types.QStackedLayout,
     parent: gen_qwidget_types.QWidget,

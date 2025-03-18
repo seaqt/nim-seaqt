@@ -70,6 +70,7 @@ proc fcQSGOpaqueTextureMaterial_setAnisotropyLevel(self: pointer, level: cint): 
 proc fcQSGOpaqueTextureMaterial_anisotropyLevel(self: pointer): cint {.importc: "QSGOpaqueTextureMaterial_anisotropyLevel".}
 proc fcQSGOpaqueTextureMaterial_vtbl(self: pointer): pointer {.importc: "QSGOpaqueTextureMaterial_vtbl".}
 proc fcQSGOpaqueTextureMaterial_vdata(self: pointer): pointer {.importc: "QSGOpaqueTextureMaterial_vdata".}
+
 type cQSGOpaqueTextureMaterialVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   typeX*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -130,15 +131,24 @@ proc anisotropyLevel*(self: gen_qsgtexturematerial_types.QSGOpaqueTextureMateria
 type QSGOpaqueTextureMaterialtypeXProc* = proc(self: QSGOpaqueTextureMaterial): gen_qsgmaterialtype_types.QSGMaterialType {.raises: [], gcsafe.}
 type QSGOpaqueTextureMaterialcreateShaderProc* = proc(self: QSGOpaqueTextureMaterial): gen_qsgmaterialshader_types.QSGMaterialShader {.raises: [], gcsafe.}
 type QSGOpaqueTextureMaterialcompareProc* = proc(self: QSGOpaqueTextureMaterial, other: gen_qsgmaterial_types.QSGMaterial): cint {.raises: [], gcsafe.}
+
 type QSGOpaqueTextureMaterialVTable* {.inheritable, pure.} = object
   vtbl: cQSGOpaqueTextureMaterialVTable
   typeX*: QSGOpaqueTextureMaterialtypeXProc
   createShader*: QSGOpaqueTextureMaterialcreateShaderProc
   compare*: QSGOpaqueTextureMaterialcompareProc
+
 proc QSGOpaqueTextureMaterialtypeX*(self: gen_qsgtexturematerial_types.QSGOpaqueTextureMaterial): gen_qsgmaterialtype_types.QSGMaterialType =
   gen_qsgmaterialtype_types.QSGMaterialType(h: fcQSGOpaqueTextureMaterial_virtualbase_typeX(self.h), owned: false)
 
-proc cQSGOpaqueTextureMaterial_vtable_callback_typeX(self: pointer): pointer {.cdecl.} =
+proc QSGOpaqueTextureMaterialcreateShader*(self: gen_qsgtexturematerial_types.QSGOpaqueTextureMaterial): gen_qsgmaterialshader_types.QSGMaterialShader =
+  gen_qsgmaterialshader_types.QSGMaterialShader(h: fcQSGOpaqueTextureMaterial_virtualbase_createShader(self.h), owned: false)
+
+proc QSGOpaqueTextureMaterialcompare*(self: gen_qsgtexturematerial_types.QSGOpaqueTextureMaterial, other: gen_qsgmaterial_types.QSGMaterial): cint =
+  fcQSGOpaqueTextureMaterial_virtualbase_compare(self.h, other.h)
+
+
+proc fcQSGOpaqueTextureMaterial_vtable_callback_typeX(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QSGOpaqueTextureMaterialVTable](fcQSGOpaqueTextureMaterial_vdata(self))
   let self = QSGOpaqueTextureMaterial(h: self)
   var virtualReturn = vtbl[].typeX(self)
@@ -147,10 +157,7 @@ proc cQSGOpaqueTextureMaterial_vtable_callback_typeX(self: pointer): pointer {.c
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QSGOpaqueTextureMaterialcreateShader*(self: gen_qsgtexturematerial_types.QSGOpaqueTextureMaterial): gen_qsgmaterialshader_types.QSGMaterialShader =
-  gen_qsgmaterialshader_types.QSGMaterialShader(h: fcQSGOpaqueTextureMaterial_virtualbase_createShader(self.h), owned: false)
-
-proc cQSGOpaqueTextureMaterial_vtable_callback_createShader(self: pointer): pointer {.cdecl.} =
+proc fcQSGOpaqueTextureMaterial_vtable_callback_createShader(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QSGOpaqueTextureMaterialVTable](fcQSGOpaqueTextureMaterial_vdata(self))
   let self = QSGOpaqueTextureMaterial(h: self)
   var virtualReturn = vtbl[].createShader(self)
@@ -159,10 +166,7 @@ proc cQSGOpaqueTextureMaterial_vtable_callback_createShader(self: pointer): poin
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QSGOpaqueTextureMaterialcompare*(self: gen_qsgtexturematerial_types.QSGOpaqueTextureMaterial, other: gen_qsgmaterial_types.QSGMaterial): cint =
-  fcQSGOpaqueTextureMaterial_virtualbase_compare(self.h, other.h)
-
-proc cQSGOpaqueTextureMaterial_vtable_callback_compare(self: pointer, other: pointer): cint {.cdecl.} =
+proc fcQSGOpaqueTextureMaterial_vtable_callback_compare(self: pointer, other: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QSGOpaqueTextureMaterialVTable](fcQSGOpaqueTextureMaterial_vdata(self))
   let self = QSGOpaqueTextureMaterial(h: self)
   let slotval1 = gen_qsgmaterial_types.QSGMaterial(h: other, owned: false)
@@ -171,9 +175,15 @@ proc cQSGOpaqueTextureMaterial_vtable_callback_compare(self: pointer, other: poi
 
 type VirtualQSGOpaqueTextureMaterial* {.inheritable.} = ref object of QSGOpaqueTextureMaterial
   vtbl*: cQSGOpaqueTextureMaterialVTable
+
 method typeX*(self: VirtualQSGOpaqueTextureMaterial): gen_qsgmaterialtype_types.QSGMaterialType {.base.} =
   QSGOpaqueTextureMaterialtypeX(self[])
-proc cQSGOpaqueTextureMaterial_method_callback_typeX(self: pointer): pointer {.cdecl.} =
+method createShader*(self: VirtualQSGOpaqueTextureMaterial): gen_qsgmaterialshader_types.QSGMaterialShader {.base.} =
+  QSGOpaqueTextureMaterialcreateShader(self[])
+method compare*(self: VirtualQSGOpaqueTextureMaterial, other: gen_qsgmaterial_types.QSGMaterial): cint {.base.} =
+  QSGOpaqueTextureMaterialcompare(self[], other)
+
+proc fcQSGOpaqueTextureMaterial_method_callback_typeX(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQSGOpaqueTextureMaterial](fcQSGOpaqueTextureMaterial_vdata(self))
   var virtualReturn = inst.typeX()
   virtualReturn.owned = false # TODO move?
@@ -181,9 +191,7 @@ proc cQSGOpaqueTextureMaterial_method_callback_typeX(self: pointer): pointer {.c
   virtualReturn.h = nil
   virtualReturn_h
 
-method createShader*(self: VirtualQSGOpaqueTextureMaterial): gen_qsgmaterialshader_types.QSGMaterialShader {.base.} =
-  QSGOpaqueTextureMaterialcreateShader(self[])
-proc cQSGOpaqueTextureMaterial_method_callback_createShader(self: pointer): pointer {.cdecl.} =
+proc fcQSGOpaqueTextureMaterial_method_callback_createShader(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQSGOpaqueTextureMaterial](fcQSGOpaqueTextureMaterial_vdata(self))
   var virtualReturn = inst.createShader()
   virtualReturn.owned = false # TODO move?
@@ -191,13 +199,12 @@ proc cQSGOpaqueTextureMaterial_method_callback_createShader(self: pointer): poin
   virtualReturn.h = nil
   virtualReturn_h
 
-method compare*(self: VirtualQSGOpaqueTextureMaterial, other: gen_qsgmaterial_types.QSGMaterial): cint {.base.} =
-  QSGOpaqueTextureMaterialcompare(self[], other)
-proc cQSGOpaqueTextureMaterial_method_callback_compare(self: pointer, other: pointer): cint {.cdecl.} =
+proc fcQSGOpaqueTextureMaterial_method_callback_compare(self: pointer, other: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQSGOpaqueTextureMaterial](fcQSGOpaqueTextureMaterial_vdata(self))
   let slotval1 = gen_qsgmaterial_types.QSGMaterial(h: other, owned: false)
   var virtualReturn = inst.compare(slotval1)
   virtualReturn
+
 
 proc create*(T: type gen_qsgtexturematerial_types.QSGOpaqueTextureMaterial,
     vtbl: ref QSGOpaqueTextureMaterialVTable = nil): gen_qsgtexturematerial_types.QSGOpaqueTextureMaterial =
@@ -207,11 +214,11 @@ proc create*(T: type gen_qsgtexturematerial_types.QSGOpaqueTextureMaterial,
     let vtbl = cast[ref QSGOpaqueTextureMaterialVTable](fcQSGOpaqueTextureMaterial_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].typeX):
-    vtbl[].vtbl.typeX = cQSGOpaqueTextureMaterial_vtable_callback_typeX
+    vtbl[].vtbl.typeX = fcQSGOpaqueTextureMaterial_vtable_callback_typeX
   if not isNil(vtbl[].createShader):
-    vtbl[].vtbl.createShader = cQSGOpaqueTextureMaterial_vtable_callback_createShader
+    vtbl[].vtbl.createShader = fcQSGOpaqueTextureMaterial_vtable_callback_createShader
   if not isNil(vtbl[].compare):
-    vtbl[].vtbl.compare = cQSGOpaqueTextureMaterial_vtable_callback_compare
+    vtbl[].vtbl.compare = fcQSGOpaqueTextureMaterial_vtable_callback_compare
   gen_qsgtexturematerial_types.QSGOpaqueTextureMaterial(h: fcQSGOpaqueTextureMaterial_new(addr(vtbl[].vtbl), addr(vtbl[])), owned: true)
 
 const cQSGOpaqueTextureMaterial_mvtbl = cQSGOpaqueTextureMaterialVTable(
@@ -219,9 +226,10 @@ const cQSGOpaqueTextureMaterial_mvtbl = cQSGOpaqueTextureMaterialVTable(
     let inst = cast[ptr typeof(VirtualQSGOpaqueTextureMaterial()[])](self.fcQSGOpaqueTextureMaterial_vtbl())
     inst[].h = nil
     inst[].owned = false,
-  typeX: cQSGOpaqueTextureMaterial_method_callback_typeX,
-  createShader: cQSGOpaqueTextureMaterial_method_callback_createShader,
-  compare: cQSGOpaqueTextureMaterial_method_callback_compare,
+
+  typeX: fcQSGOpaqueTextureMaterial_method_callback_typeX,
+  createShader: fcQSGOpaqueTextureMaterial_method_callback_createShader,
+  compare: fcQSGOpaqueTextureMaterial_method_callback_compare,
 )
 proc create*(T: type gen_qsgtexturematerial_types.QSGOpaqueTextureMaterial,
     inst: VirtualQSGOpaqueTextureMaterial) =

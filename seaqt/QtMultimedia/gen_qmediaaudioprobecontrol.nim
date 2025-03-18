@@ -98,39 +98,39 @@ proc audioBufferProbed*(self: gen_qmediaaudioprobecontrol_types.QMediaAudioProbe
   fcQMediaAudioProbeControl_audioBufferProbed(self.h, buffer.h)
 
 type QMediaAudioProbeControlaudioBufferProbedSlot* = proc(buffer: gen_qaudiobuffer_types.QAudioBuffer)
-proc cQMediaAudioProbeControl_slot_callback_audioBufferProbed(slot: int, buffer: pointer) {.cdecl.} =
+proc fcQMediaAudioProbeControl_slot_callback_audioBufferProbed(slot: int, buffer: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QMediaAudioProbeControlaudioBufferProbedSlot](cast[pointer](slot))
   let slotval1 = gen_qaudiobuffer_types.QAudioBuffer(h: buffer, owned: false)
 
   nimfunc[](slotval1)
 
-proc cQMediaAudioProbeControl_slot_callback_audioBufferProbed_release(slot: int) {.cdecl.} =
+proc fcQMediaAudioProbeControl_slot_callback_audioBufferProbed_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QMediaAudioProbeControlaudioBufferProbedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onaudioBufferProbed*(self: gen_qmediaaudioprobecontrol_types.QMediaAudioProbeControl, slot: QMediaAudioProbeControlaudioBufferProbedSlot) =
+proc onAudioBufferProbed*(self: gen_qmediaaudioprobecontrol_types.QMediaAudioProbeControl, slot: QMediaAudioProbeControlaudioBufferProbedSlot) =
   var tmp = new QMediaAudioProbeControlaudioBufferProbedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQMediaAudioProbeControl_connect_audioBufferProbed(self.h, cast[int](addr tmp[]), cQMediaAudioProbeControl_slot_callback_audioBufferProbed, cQMediaAudioProbeControl_slot_callback_audioBufferProbed_release)
+  fcQMediaAudioProbeControl_connect_audioBufferProbed(self.h, cast[int](addr tmp[]), fcQMediaAudioProbeControl_slot_callback_audioBufferProbed, fcQMediaAudioProbeControl_slot_callback_audioBufferProbed_release)
 
 proc flush*(self: gen_qmediaaudioprobecontrol_types.QMediaAudioProbeControl): void =
   fcQMediaAudioProbeControl_flush(self.h)
 
 type QMediaAudioProbeControlflushSlot* = proc()
-proc cQMediaAudioProbeControl_slot_callback_flush(slot: int) {.cdecl.} =
+proc fcQMediaAudioProbeControl_slot_callback_flush(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QMediaAudioProbeControlflushSlot](cast[pointer](slot))
   nimfunc[]()
 
-proc cQMediaAudioProbeControl_slot_callback_flush_release(slot: int) {.cdecl.} =
+proc fcQMediaAudioProbeControl_slot_callback_flush_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QMediaAudioProbeControlflushSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onflush*(self: gen_qmediaaudioprobecontrol_types.QMediaAudioProbeControl, slot: QMediaAudioProbeControlflushSlot) =
+proc onFlush*(self: gen_qmediaaudioprobecontrol_types.QMediaAudioProbeControl, slot: QMediaAudioProbeControlflushSlot) =
   var tmp = new QMediaAudioProbeControlflushSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQMediaAudioProbeControl_connect_flush(self.h, cast[int](addr tmp[]), cQMediaAudioProbeControl_slot_callback_flush, cQMediaAudioProbeControl_slot_callback_flush_release)
+  fcQMediaAudioProbeControl_connect_flush(self.h, cast[int](addr tmp[]), fcQMediaAudioProbeControl_slot_callback_flush, fcQMediaAudioProbeControl_slot_callback_flush_release)
 
 proc tr*(_: type gen_qmediaaudioprobecontrol_types.QMediaAudioProbeControl, s: cstring, c: cstring): string =
   let v_ms = fcQMediaAudioProbeControl_tr2(s, c)

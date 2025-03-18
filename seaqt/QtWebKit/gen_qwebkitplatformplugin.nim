@@ -294,7 +294,7 @@ proc selectItem*(self: gen_qwebkitplatformplugin_types.QWebSelectMethod, index: 
   fcQWebSelectMethod_selectItem(self.h, index, allowMultiplySelections, shift)
 
 type QWebSelectMethodselectItemSlot* = proc(index: cint, allowMultiplySelections: bool, shift: bool)
-proc cQWebSelectMethod_slot_callback_selectItem(slot: int, index: cint, allowMultiplySelections: bool, shift: bool) {.cdecl.} =
+proc fcQWebSelectMethod_slot_callback_selectItem(slot: int, index: cint, allowMultiplySelections: bool, shift: bool) {.cdecl.} =
   let nimfunc = cast[ptr QWebSelectMethodselectItemSlot](cast[pointer](slot))
   let slotval1 = index
 
@@ -304,33 +304,33 @@ proc cQWebSelectMethod_slot_callback_selectItem(slot: int, index: cint, allowMul
 
   nimfunc[](slotval1, slotval2, slotval3)
 
-proc cQWebSelectMethod_slot_callback_selectItem_release(slot: int) {.cdecl.} =
+proc fcQWebSelectMethod_slot_callback_selectItem_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QWebSelectMethodselectItemSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onselectItem*(self: gen_qwebkitplatformplugin_types.QWebSelectMethod, slot: QWebSelectMethodselectItemSlot) =
+proc onSelectItem*(self: gen_qwebkitplatformplugin_types.QWebSelectMethod, slot: QWebSelectMethodselectItemSlot) =
   var tmp = new QWebSelectMethodselectItemSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQWebSelectMethod_connect_selectItem(self.h, cast[int](addr tmp[]), cQWebSelectMethod_slot_callback_selectItem, cQWebSelectMethod_slot_callback_selectItem_release)
+  fcQWebSelectMethod_connect_selectItem(self.h, cast[int](addr tmp[]), fcQWebSelectMethod_slot_callback_selectItem, fcQWebSelectMethod_slot_callback_selectItem_release)
 
 proc didHide*(self: gen_qwebkitplatformplugin_types.QWebSelectMethod): void =
   fcQWebSelectMethod_didHide(self.h)
 
 type QWebSelectMethoddidHideSlot* = proc()
-proc cQWebSelectMethod_slot_callback_didHide(slot: int) {.cdecl.} =
+proc fcQWebSelectMethod_slot_callback_didHide(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QWebSelectMethoddidHideSlot](cast[pointer](slot))
   nimfunc[]()
 
-proc cQWebSelectMethod_slot_callback_didHide_release(slot: int) {.cdecl.} =
+proc fcQWebSelectMethod_slot_callback_didHide_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QWebSelectMethoddidHideSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc ondidHide*(self: gen_qwebkitplatformplugin_types.QWebSelectMethod, slot: QWebSelectMethoddidHideSlot) =
+proc onDidHide*(self: gen_qwebkitplatformplugin_types.QWebSelectMethod, slot: QWebSelectMethoddidHideSlot) =
   var tmp = new QWebSelectMethoddidHideSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQWebSelectMethod_connect_didHide(self.h, cast[int](addr tmp[]), cQWebSelectMethod_slot_callback_didHide, cQWebSelectMethod_slot_callback_didHide_release)
+  fcQWebSelectMethod_connect_didHide(self.h, cast[int](addr tmp[]), fcQWebSelectMethod_slot_callback_didHide, fcQWebSelectMethod_slot_callback_didHide_release)
 
 proc tr*(_: type gen_qwebkitplatformplugin_types.QWebSelectMethod, s: cstring, c: cstring): string =
   let v_ms = fcQWebSelectMethod_tr2(s, c)
@@ -419,37 +419,37 @@ proc notificationClosed*(self: gen_qwebkitplatformplugin_types.QWebNotificationP
   fcQWebNotificationPresenter_notificationClosed(self.h)
 
 type QWebNotificationPresenternotificationClosedSlot* = proc()
-proc cQWebNotificationPresenter_slot_callback_notificationClosed(slot: int) {.cdecl.} =
+proc fcQWebNotificationPresenter_slot_callback_notificationClosed(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QWebNotificationPresenternotificationClosedSlot](cast[pointer](slot))
   nimfunc[]()
 
-proc cQWebNotificationPresenter_slot_callback_notificationClosed_release(slot: int) {.cdecl.} =
+proc fcQWebNotificationPresenter_slot_callback_notificationClosed_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QWebNotificationPresenternotificationClosedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onnotificationClosed*(self: gen_qwebkitplatformplugin_types.QWebNotificationPresenter, slot: QWebNotificationPresenternotificationClosedSlot) =
+proc onNotificationClosed*(self: gen_qwebkitplatformplugin_types.QWebNotificationPresenter, slot: QWebNotificationPresenternotificationClosedSlot) =
   var tmp = new QWebNotificationPresenternotificationClosedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQWebNotificationPresenter_connect_notificationClosed(self.h, cast[int](addr tmp[]), cQWebNotificationPresenter_slot_callback_notificationClosed, cQWebNotificationPresenter_slot_callback_notificationClosed_release)
+  fcQWebNotificationPresenter_connect_notificationClosed(self.h, cast[int](addr tmp[]), fcQWebNotificationPresenter_slot_callback_notificationClosed, fcQWebNotificationPresenter_slot_callback_notificationClosed_release)
 
 proc notificationClicked*(self: gen_qwebkitplatformplugin_types.QWebNotificationPresenter): void =
   fcQWebNotificationPresenter_notificationClicked(self.h)
 
 type QWebNotificationPresenternotificationClickedSlot* = proc()
-proc cQWebNotificationPresenter_slot_callback_notificationClicked(slot: int) {.cdecl.} =
+proc fcQWebNotificationPresenter_slot_callback_notificationClicked(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QWebNotificationPresenternotificationClickedSlot](cast[pointer](slot))
   nimfunc[]()
 
-proc cQWebNotificationPresenter_slot_callback_notificationClicked_release(slot: int) {.cdecl.} =
+proc fcQWebNotificationPresenter_slot_callback_notificationClicked_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QWebNotificationPresenternotificationClickedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onnotificationClicked*(self: gen_qwebkitplatformplugin_types.QWebNotificationPresenter, slot: QWebNotificationPresenternotificationClickedSlot) =
+proc onNotificationClicked*(self: gen_qwebkitplatformplugin_types.QWebNotificationPresenter, slot: QWebNotificationPresenternotificationClickedSlot) =
   var tmp = new QWebNotificationPresenternotificationClickedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQWebNotificationPresenter_connect_notificationClicked(self.h, cast[int](addr tmp[]), cQWebNotificationPresenter_slot_callback_notificationClicked, cQWebNotificationPresenter_slot_callback_notificationClicked_release)
+  fcQWebNotificationPresenter_connect_notificationClicked(self.h, cast[int](addr tmp[]), fcQWebNotificationPresenter_slot_callback_notificationClicked, fcQWebNotificationPresenter_slot_callback_notificationClicked_release)
 
 proc tr*(_: type gen_qwebkitplatformplugin_types.QWebNotificationPresenter, s: cstring, c: cstring): string =
   let v_ms = fcQWebNotificationPresenter_tr2(s, c)

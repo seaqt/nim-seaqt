@@ -64,6 +64,7 @@ proc fcQGenericPlugin_trUtf82(s: cstring, c: cstring): struct_miqt_string {.impo
 proc fcQGenericPlugin_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QGenericPlugin_trUtf83".}
 proc fcQGenericPlugin_vtbl(self: pointer): pointer {.importc: "QGenericPlugin_vtbl".}
 proc fcQGenericPlugin_vdata(self: pointer): pointer {.importc: "QGenericPlugin_vdata".}
+
 type cQGenericPluginVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -154,6 +155,7 @@ type QGenericPluginchildEventProc* = proc(self: QGenericPlugin, event: gen_qcore
 type QGenericPlugincustomEventProc* = proc(self: QGenericPlugin, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QGenericPluginconnectNotifyProc* = proc(self: QGenericPlugin, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QGenericPlugindisconnectNotifyProc* = proc(self: QGenericPlugin, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+
 type QGenericPluginVTable* {.inheritable, pure.} = object
   vtbl: cQGenericPluginVTable
   metaObject*: QGenericPluginmetaObjectProc
@@ -167,10 +169,39 @@ type QGenericPluginVTable* {.inheritable, pure.} = object
   customEvent*: QGenericPlugincustomEventProc
   connectNotify*: QGenericPluginconnectNotifyProc
   disconnectNotify*: QGenericPlugindisconnectNotifyProc
+
 proc QGenericPluginmetaObject*(self: gen_qgenericplugin_types.QGenericPlugin): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQGenericPlugin_virtualbase_metaObject(self.h), owned: false)
 
-proc cQGenericPlugin_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
+proc QGenericPluginmetacast*(self: gen_qgenericplugin_types.QGenericPlugin, param1: cstring): pointer =
+  fcQGenericPlugin_virtualbase_metacast(self.h, param1)
+
+proc QGenericPluginmetacall*(self: gen_qgenericplugin_types.QGenericPlugin, param1: cint, param2: cint, param3: pointer): cint =
+  fcQGenericPlugin_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+proc QGenericPluginevent*(self: gen_qgenericplugin_types.QGenericPlugin, event: gen_qcoreevent_types.QEvent): bool =
+  fcQGenericPlugin_virtualbase_event(self.h, event.h)
+
+proc QGenericPlugineventFilter*(self: gen_qgenericplugin_types.QGenericPlugin, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
+  fcQGenericPlugin_virtualbase_eventFilter(self.h, watched.h, event.h)
+
+proc QGenericPlugintimerEvent*(self: gen_qgenericplugin_types.QGenericPlugin, event: gen_qcoreevent_types.QTimerEvent): void =
+  fcQGenericPlugin_virtualbase_timerEvent(self.h, event.h)
+
+proc QGenericPluginchildEvent*(self: gen_qgenericplugin_types.QGenericPlugin, event: gen_qcoreevent_types.QChildEvent): void =
+  fcQGenericPlugin_virtualbase_childEvent(self.h, event.h)
+
+proc QGenericPlugincustomEvent*(self: gen_qgenericplugin_types.QGenericPlugin, event: gen_qcoreevent_types.QEvent): void =
+  fcQGenericPlugin_virtualbase_customEvent(self.h, event.h)
+
+proc QGenericPluginconnectNotify*(self: gen_qgenericplugin_types.QGenericPlugin, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQGenericPlugin_virtualbase_connectNotify(self.h, signal.h)
+
+proc QGenericPlugindisconnectNotify*(self: gen_qgenericplugin_types.QGenericPlugin, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQGenericPlugin_virtualbase_disconnectNotify(self.h, signal.h)
+
+
+proc fcQGenericPlugin_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QGenericPluginVTable](fcQGenericPlugin_vdata(self))
   let self = QGenericPlugin(h: self)
   var virtualReturn = vtbl[].metaObject(self)
@@ -179,20 +210,14 @@ proc cQGenericPlugin_vtable_callback_metaObject(self: pointer): pointer {.cdecl.
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QGenericPluginmetacast*(self: gen_qgenericplugin_types.QGenericPlugin, param1: cstring): pointer =
-  fcQGenericPlugin_virtualbase_metacast(self.h, param1)
-
-proc cQGenericPlugin_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+proc fcQGenericPlugin_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QGenericPluginVTable](fcQGenericPlugin_vdata(self))
   let self = QGenericPlugin(h: self)
   let slotval1 = (param1)
   var virtualReturn = vtbl[].metacast(self, slotval1)
   virtualReturn
 
-proc QGenericPluginmetacall*(self: gen_qgenericplugin_types.QGenericPlugin, param1: cint, param2: cint, param3: pointer): cint =
-  fcQGenericPlugin_virtualbase_metacall(self.h, cint(param1), param2, param3)
-
-proc cQGenericPlugin_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+proc fcQGenericPlugin_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QGenericPluginVTable](fcQGenericPlugin_vdata(self))
   let self = QGenericPlugin(h: self)
   let slotval1 = cint(param1)
@@ -201,7 +226,7 @@ proc cQGenericPlugin_vtable_callback_metacall(self: pointer, param1: cint, param
   var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc cQGenericPlugin_vtable_callback_createX(self: pointer, name: struct_miqt_string, spec: struct_miqt_string): pointer {.cdecl.} =
+proc fcQGenericPlugin_vtable_callback_createX(self: pointer, name: struct_miqt_string, spec: struct_miqt_string): pointer {.cdecl.} =
   let vtbl = cast[ptr QGenericPluginVTable](fcQGenericPlugin_vdata(self))
   let self = QGenericPlugin(h: self)
   let vname_ms = name
@@ -218,20 +243,14 @@ proc cQGenericPlugin_vtable_callback_createX(self: pointer, name: struct_miqt_st
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QGenericPluginevent*(self: gen_qgenericplugin_types.QGenericPlugin, event: gen_qcoreevent_types.QEvent): bool =
-  fcQGenericPlugin_virtualbase_event(self.h, event.h)
-
-proc cQGenericPlugin_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
+proc fcQGenericPlugin_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QGenericPluginVTable](fcQGenericPlugin_vdata(self))
   let self = QGenericPlugin(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
-proc QGenericPlugineventFilter*(self: gen_qgenericplugin_types.QGenericPlugin, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
-  fcQGenericPlugin_virtualbase_eventFilter(self.h, watched.h, event.h)
-
-proc cQGenericPlugin_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+proc fcQGenericPlugin_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QGenericPluginVTable](fcQGenericPlugin_vdata(self))
   let self = QGenericPlugin(h: self)
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
@@ -239,46 +258,31 @@ proc cQGenericPlugin_vtable_callback_eventFilter(self: pointer, watched: pointer
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
-proc QGenericPlugintimerEvent*(self: gen_qgenericplugin_types.QGenericPlugin, event: gen_qcoreevent_types.QTimerEvent): void =
-  fcQGenericPlugin_virtualbase_timerEvent(self.h, event.h)
-
-proc cQGenericPlugin_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQGenericPlugin_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGenericPluginVTable](fcQGenericPlugin_vdata(self))
   let self = QGenericPlugin(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
-proc QGenericPluginchildEvent*(self: gen_qgenericplugin_types.QGenericPlugin, event: gen_qcoreevent_types.QChildEvent): void =
-  fcQGenericPlugin_virtualbase_childEvent(self.h, event.h)
-
-proc cQGenericPlugin_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQGenericPlugin_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGenericPluginVTable](fcQGenericPlugin_vdata(self))
   let self = QGenericPlugin(h: self)
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
-proc QGenericPlugincustomEvent*(self: gen_qgenericplugin_types.QGenericPlugin, event: gen_qcoreevent_types.QEvent): void =
-  fcQGenericPlugin_virtualbase_customEvent(self.h, event.h)
-
-proc cQGenericPlugin_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQGenericPlugin_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGenericPluginVTable](fcQGenericPlugin_vdata(self))
   let self = QGenericPlugin(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
-proc QGenericPluginconnectNotify*(self: gen_qgenericplugin_types.QGenericPlugin, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQGenericPlugin_virtualbase_connectNotify(self.h, signal.h)
-
-proc cQGenericPlugin_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQGenericPlugin_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGenericPluginVTable](fcQGenericPlugin_vdata(self))
   let self = QGenericPlugin(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
-proc QGenericPlugindisconnectNotify*(self: gen_qgenericplugin_types.QGenericPlugin, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQGenericPlugin_virtualbase_disconnectNotify(self.h, signal.h)
-
-proc cQGenericPlugin_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQGenericPlugin_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGenericPluginVTable](fcQGenericPlugin_vdata(self))
   let self = QGenericPlugin(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
@@ -286,9 +290,31 @@ proc cQGenericPlugin_vtable_callback_disconnectNotify(self: pointer, signal: poi
 
 type VirtualQGenericPlugin* {.inheritable.} = ref object of QGenericPlugin
   vtbl*: cQGenericPluginVTable
+
 method metaObject*(self: VirtualQGenericPlugin): gen_qobjectdefs_types.QMetaObject {.base.} =
   QGenericPluginmetaObject(self[])
-proc cQGenericPlugin_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
+method metacast*(self: VirtualQGenericPlugin, param1: cstring): pointer {.base.} =
+  QGenericPluginmetacast(self[], param1)
+method metacall*(self: VirtualQGenericPlugin, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QGenericPluginmetacall(self[], param1, param2, param3)
+method createX*(self: VirtualQGenericPlugin, name: openArray[char], spec: openArray[char]): gen_qobject_types.QObject {.base.} =
+  raiseAssert("missing implementation of QGenericPlugin.createX")
+method event*(self: VirtualQGenericPlugin, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QGenericPluginevent(self[], event)
+method eventFilter*(self: VirtualQGenericPlugin, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QGenericPlugineventFilter(self[], watched, event)
+method timerEvent*(self: VirtualQGenericPlugin, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QGenericPlugintimerEvent(self[], event)
+method childEvent*(self: VirtualQGenericPlugin, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QGenericPluginchildEvent(self[], event)
+method customEvent*(self: VirtualQGenericPlugin, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QGenericPlugincustomEvent(self[], event)
+method connectNotify*(self: VirtualQGenericPlugin, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QGenericPluginconnectNotify(self[], signal)
+method disconnectNotify*(self: VirtualQGenericPlugin, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QGenericPlugindisconnectNotify(self[], signal)
+
+proc fcQGenericPlugin_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGenericPlugin](fcQGenericPlugin_vdata(self))
   var virtualReturn = inst.metaObject()
   virtualReturn.owned = false # TODO move?
@@ -296,17 +322,13 @@ proc cQGenericPlugin_method_callback_metaObject(self: pointer): pointer {.cdecl.
   virtualReturn.h = nil
   virtualReturn_h
 
-method metacast*(self: VirtualQGenericPlugin, param1: cstring): pointer {.base.} =
-  QGenericPluginmetacast(self[], param1)
-proc cQGenericPlugin_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+proc fcQGenericPlugin_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQGenericPlugin](fcQGenericPlugin_vdata(self))
   let slotval1 = (param1)
   var virtualReturn = inst.metacast(slotval1)
   virtualReturn
 
-method metacall*(self: VirtualQGenericPlugin, param1: cint, param2: cint, param3: pointer): cint {.base.} =
-  QGenericPluginmetacall(self[], param1, param2, param3)
-proc cQGenericPlugin_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+proc fcQGenericPlugin_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQGenericPlugin](fcQGenericPlugin_vdata(self))
   let slotval1 = cint(param1)
   let slotval2 = param2
@@ -314,9 +336,7 @@ proc cQGenericPlugin_method_callback_metacall(self: pointer, param1: cint, param
   var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
-method createX*(self: VirtualQGenericPlugin, name: openArray[char], spec: openArray[char]): gen_qobject_types.QObject {.base.} =
-  raiseAssert("missing implementation of QGenericPlugin_virtualbase_create")
-proc cQGenericPlugin_method_callback_createX(self: pointer, name: struct_miqt_string, spec: struct_miqt_string): pointer {.cdecl.} =
+proc fcQGenericPlugin_method_callback_createX(self: pointer, name: struct_miqt_string, spec: struct_miqt_string): pointer {.cdecl.} =
   let inst = cast[VirtualQGenericPlugin](fcQGenericPlugin_vdata(self))
   let vname_ms = name
   let vnamex_ret = string.fromBytes(vname_ms)
@@ -332,57 +352,44 @@ proc cQGenericPlugin_method_callback_createX(self: pointer, name: struct_miqt_st
   virtualReturn.h = nil
   virtualReturn_h
 
-method event*(self: VirtualQGenericPlugin, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QGenericPluginevent(self[], event)
-proc cQGenericPlugin_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
+proc fcQGenericPlugin_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQGenericPlugin](fcQGenericPlugin_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
-method eventFilter*(self: VirtualQGenericPlugin, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QGenericPlugineventFilter(self[], watched, event)
-proc cQGenericPlugin_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+proc fcQGenericPlugin_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQGenericPlugin](fcQGenericPlugin_vdata(self))
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
   let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
-method timerEvent*(self: VirtualQGenericPlugin, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
-  QGenericPlugintimerEvent(self[], event)
-proc cQGenericPlugin_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQGenericPlugin_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGenericPlugin](fcQGenericPlugin_vdata(self))
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
-method childEvent*(self: VirtualQGenericPlugin, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
-  QGenericPluginchildEvent(self[], event)
-proc cQGenericPlugin_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQGenericPlugin_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGenericPlugin](fcQGenericPlugin_vdata(self))
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
-method customEvent*(self: VirtualQGenericPlugin, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QGenericPlugincustomEvent(self[], event)
-proc cQGenericPlugin_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQGenericPlugin_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGenericPlugin](fcQGenericPlugin_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
-method connectNotify*(self: VirtualQGenericPlugin, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QGenericPluginconnectNotify(self[], signal)
-proc cQGenericPlugin_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQGenericPlugin_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGenericPlugin](fcQGenericPlugin_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
-method disconnectNotify*(self: VirtualQGenericPlugin, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QGenericPlugindisconnectNotify(self[], signal)
-proc cQGenericPlugin_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQGenericPlugin_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGenericPlugin](fcQGenericPlugin_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
+
 
 proc sender*(self: gen_qgenericplugin_types.QGenericPlugin): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQGenericPlugin_protectedbase_sender(self.h), owned: false)
@@ -404,27 +411,27 @@ proc create*(T: type gen_qgenericplugin_types.QGenericPlugin,
     let vtbl = cast[ref QGenericPluginVTable](fcQGenericPlugin_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQGenericPlugin_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQGenericPlugin_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQGenericPlugin_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQGenericPlugin_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQGenericPlugin_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQGenericPlugin_vtable_callback_metacall
   if not isNil(vtbl[].createX):
-    vtbl[].vtbl.createX = cQGenericPlugin_vtable_callback_createX
+    vtbl[].vtbl.createX = fcQGenericPlugin_vtable_callback_createX
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQGenericPlugin_vtable_callback_event
+    vtbl[].vtbl.event = fcQGenericPlugin_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQGenericPlugin_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQGenericPlugin_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQGenericPlugin_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQGenericPlugin_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQGenericPlugin_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQGenericPlugin_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQGenericPlugin_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQGenericPlugin_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQGenericPlugin_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQGenericPlugin_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQGenericPlugin_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQGenericPlugin_vtable_callback_disconnectNotify
   gen_qgenericplugin_types.QGenericPlugin(h: fcQGenericPlugin_new(addr(vtbl[].vtbl), addr(vtbl[])), owned: true)
 
 proc create*(T: type gen_qgenericplugin_types.QGenericPlugin,
@@ -436,27 +443,27 @@ proc create*(T: type gen_qgenericplugin_types.QGenericPlugin,
     let vtbl = cast[ref QGenericPluginVTable](fcQGenericPlugin_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQGenericPlugin_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQGenericPlugin_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQGenericPlugin_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQGenericPlugin_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQGenericPlugin_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQGenericPlugin_vtable_callback_metacall
   if not isNil(vtbl[].createX):
-    vtbl[].vtbl.createX = cQGenericPlugin_vtable_callback_createX
+    vtbl[].vtbl.createX = fcQGenericPlugin_vtable_callback_createX
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQGenericPlugin_vtable_callback_event
+    vtbl[].vtbl.event = fcQGenericPlugin_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQGenericPlugin_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQGenericPlugin_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQGenericPlugin_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQGenericPlugin_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQGenericPlugin_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQGenericPlugin_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQGenericPlugin_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQGenericPlugin_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQGenericPlugin_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQGenericPlugin_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQGenericPlugin_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQGenericPlugin_vtable_callback_disconnectNotify
   gen_qgenericplugin_types.QGenericPlugin(h: fcQGenericPlugin_new2(addr(vtbl[].vtbl), addr(vtbl[]), parent.h), owned: true)
 
 const cQGenericPlugin_mvtbl = cQGenericPluginVTable(
@@ -464,17 +471,18 @@ const cQGenericPlugin_mvtbl = cQGenericPluginVTable(
     let inst = cast[ptr typeof(VirtualQGenericPlugin()[])](self.fcQGenericPlugin_vtbl())
     inst[].h = nil
     inst[].owned = false,
-  metaObject: cQGenericPlugin_method_callback_metaObject,
-  metacast: cQGenericPlugin_method_callback_metacast,
-  metacall: cQGenericPlugin_method_callback_metacall,
-  createX: cQGenericPlugin_method_callback_createX,
-  event: cQGenericPlugin_method_callback_event,
-  eventFilter: cQGenericPlugin_method_callback_eventFilter,
-  timerEvent: cQGenericPlugin_method_callback_timerEvent,
-  childEvent: cQGenericPlugin_method_callback_childEvent,
-  customEvent: cQGenericPlugin_method_callback_customEvent,
-  connectNotify: cQGenericPlugin_method_callback_connectNotify,
-  disconnectNotify: cQGenericPlugin_method_callback_disconnectNotify,
+
+  metaObject: fcQGenericPlugin_method_callback_metaObject,
+  metacast: fcQGenericPlugin_method_callback_metacast,
+  metacall: fcQGenericPlugin_method_callback_metacall,
+  createX: fcQGenericPlugin_method_callback_createX,
+  event: fcQGenericPlugin_method_callback_event,
+  eventFilter: fcQGenericPlugin_method_callback_eventFilter,
+  timerEvent: fcQGenericPlugin_method_callback_timerEvent,
+  childEvent: fcQGenericPlugin_method_callback_childEvent,
+  customEvent: fcQGenericPlugin_method_callback_customEvent,
+  connectNotify: fcQGenericPlugin_method_callback_connectNotify,
+  disconnectNotify: fcQGenericPlugin_method_callback_disconnectNotify,
 )
 proc create*(T: type gen_qgenericplugin_types.QGenericPlugin,
     inst: VirtualQGenericPlugin) =

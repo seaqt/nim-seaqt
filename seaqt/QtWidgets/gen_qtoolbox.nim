@@ -107,6 +107,7 @@ proc fcQToolBox_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "
 proc fcQToolBox_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QToolBox_trUtf83".}
 proc fcQToolBox_vtbl(self: pointer): pointer {.importc: "QToolBox_vtbl".}
 proc fcQToolBox_vdata(self: pointer): pointer {.importc: "QToolBox_vdata".}
+
 type cQToolBoxVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -320,21 +321,21 @@ proc currentChanged*(self: gen_qtoolbox_types.QToolBox, index: cint): void =
   fcQToolBox_currentChanged(self.h, index)
 
 type QToolBoxcurrentChangedSlot* = proc(index: cint)
-proc cQToolBox_slot_callback_currentChanged(slot: int, index: cint) {.cdecl.} =
+proc fcQToolBox_slot_callback_currentChanged(slot: int, index: cint) {.cdecl.} =
   let nimfunc = cast[ptr QToolBoxcurrentChangedSlot](cast[pointer](slot))
   let slotval1 = index
 
   nimfunc[](slotval1)
 
-proc cQToolBox_slot_callback_currentChanged_release(slot: int) {.cdecl.} =
+proc fcQToolBox_slot_callback_currentChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QToolBoxcurrentChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc oncurrentChanged*(self: gen_qtoolbox_types.QToolBox, slot: QToolBoxcurrentChangedSlot) =
+proc onCurrentChanged*(self: gen_qtoolbox_types.QToolBox, slot: QToolBoxcurrentChangedSlot) =
   var tmp = new QToolBoxcurrentChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQToolBox_connect_currentChanged(self.h, cast[int](addr tmp[]), cQToolBox_slot_callback_currentChanged, cQToolBox_slot_callback_currentChanged_release)
+  fcQToolBox_connect_currentChanged(self.h, cast[int](addr tmp[]), fcQToolBox_slot_callback_currentChanged, fcQToolBox_slot_callback_currentChanged_release)
 
 proc tr*(_: type gen_qtoolbox_types.QToolBox, s: cstring, c: cstring): string =
   let v_ms = fcQToolBox_tr2(s, c)
@@ -412,6 +413,7 @@ type QToolBoxchildEventProc* = proc(self: QToolBox, event: gen_qcoreevent_types.
 type QToolBoxcustomEventProc* = proc(self: QToolBox, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QToolBoxconnectNotifyProc* = proc(self: QToolBox, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QToolBoxdisconnectNotifyProc* = proc(self: QToolBox, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+
 type QToolBoxVTable* {.inheritable, pure.} = object
   vtbl: cQToolBoxVTable
   metaObject*: QToolBoxmetaObjectProc
@@ -466,10 +468,165 @@ type QToolBoxVTable* {.inheritable, pure.} = object
   customEvent*: QToolBoxcustomEventProc
   connectNotify*: QToolBoxconnectNotifyProc
   disconnectNotify*: QToolBoxdisconnectNotifyProc
+
 proc QToolBoxmetaObject*(self: gen_qtoolbox_types.QToolBox): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQToolBox_virtualbase_metaObject(self.h), owned: false)
 
-proc cQToolBox_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
+proc QToolBoxmetacast*(self: gen_qtoolbox_types.QToolBox, param1: cstring): pointer =
+  fcQToolBox_virtualbase_metacast(self.h, param1)
+
+proc QToolBoxmetacall*(self: gen_qtoolbox_types.QToolBox, param1: cint, param2: cint, param3: pointer): cint =
+  fcQToolBox_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+proc QToolBoxevent*(self: gen_qtoolbox_types.QToolBox, e: gen_qcoreevent_types.QEvent): bool =
+  fcQToolBox_virtualbase_event(self.h, e.h)
+
+proc QToolBoxitemInserted*(self: gen_qtoolbox_types.QToolBox, index: cint): void =
+  fcQToolBox_virtualbase_itemInserted(self.h, index)
+
+proc QToolBoxitemRemoved*(self: gen_qtoolbox_types.QToolBox, index: cint): void =
+  fcQToolBox_virtualbase_itemRemoved(self.h, index)
+
+proc QToolBoxshowEvent*(self: gen_qtoolbox_types.QToolBox, e: gen_qevent_types.QShowEvent): void =
+  fcQToolBox_virtualbase_showEvent(self.h, e.h)
+
+proc QToolBoxchangeEvent*(self: gen_qtoolbox_types.QToolBox, param1: gen_qcoreevent_types.QEvent): void =
+  fcQToolBox_virtualbase_changeEvent(self.h, param1.h)
+
+proc QToolBoxsizeHint*(self: gen_qtoolbox_types.QToolBox): gen_qsize_types.QSize =
+  gen_qsize_types.QSize(h: fcQToolBox_virtualbase_sizeHint(self.h), owned: true)
+
+proc QToolBoxpaintEvent*(self: gen_qtoolbox_types.QToolBox, param1: gen_qevent_types.QPaintEvent): void =
+  fcQToolBox_virtualbase_paintEvent(self.h, param1.h)
+
+proc QToolBoxdevType*(self: gen_qtoolbox_types.QToolBox): cint =
+  fcQToolBox_virtualbase_devType(self.h)
+
+proc QToolBoxsetVisible*(self: gen_qtoolbox_types.QToolBox, visible: bool): void =
+  fcQToolBox_virtualbase_setVisible(self.h, visible)
+
+proc QToolBoxminimumSizeHint*(self: gen_qtoolbox_types.QToolBox): gen_qsize_types.QSize =
+  gen_qsize_types.QSize(h: fcQToolBox_virtualbase_minimumSizeHint(self.h), owned: true)
+
+proc QToolBoxheightForWidth*(self: gen_qtoolbox_types.QToolBox, param1: cint): cint =
+  fcQToolBox_virtualbase_heightForWidth(self.h, param1)
+
+proc QToolBoxhasHeightForWidth*(self: gen_qtoolbox_types.QToolBox): bool =
+  fcQToolBox_virtualbase_hasHeightForWidth(self.h)
+
+proc QToolBoxpaintEngine*(self: gen_qtoolbox_types.QToolBox): gen_qpaintengine_types.QPaintEngine =
+  gen_qpaintengine_types.QPaintEngine(h: fcQToolBox_virtualbase_paintEngine(self.h), owned: false)
+
+proc QToolBoxmousePressEvent*(self: gen_qtoolbox_types.QToolBox, event: gen_qevent_types.QMouseEvent): void =
+  fcQToolBox_virtualbase_mousePressEvent(self.h, event.h)
+
+proc QToolBoxmouseReleaseEvent*(self: gen_qtoolbox_types.QToolBox, event: gen_qevent_types.QMouseEvent): void =
+  fcQToolBox_virtualbase_mouseReleaseEvent(self.h, event.h)
+
+proc QToolBoxmouseDoubleClickEvent*(self: gen_qtoolbox_types.QToolBox, event: gen_qevent_types.QMouseEvent): void =
+  fcQToolBox_virtualbase_mouseDoubleClickEvent(self.h, event.h)
+
+proc QToolBoxmouseMoveEvent*(self: gen_qtoolbox_types.QToolBox, event: gen_qevent_types.QMouseEvent): void =
+  fcQToolBox_virtualbase_mouseMoveEvent(self.h, event.h)
+
+proc QToolBoxwheelEvent*(self: gen_qtoolbox_types.QToolBox, event: gen_qevent_types.QWheelEvent): void =
+  fcQToolBox_virtualbase_wheelEvent(self.h, event.h)
+
+proc QToolBoxkeyPressEvent*(self: gen_qtoolbox_types.QToolBox, event: gen_qevent_types.QKeyEvent): void =
+  fcQToolBox_virtualbase_keyPressEvent(self.h, event.h)
+
+proc QToolBoxkeyReleaseEvent*(self: gen_qtoolbox_types.QToolBox, event: gen_qevent_types.QKeyEvent): void =
+  fcQToolBox_virtualbase_keyReleaseEvent(self.h, event.h)
+
+proc QToolBoxfocusInEvent*(self: gen_qtoolbox_types.QToolBox, event: gen_qevent_types.QFocusEvent): void =
+  fcQToolBox_virtualbase_focusInEvent(self.h, event.h)
+
+proc QToolBoxfocusOutEvent*(self: gen_qtoolbox_types.QToolBox, event: gen_qevent_types.QFocusEvent): void =
+  fcQToolBox_virtualbase_focusOutEvent(self.h, event.h)
+
+proc QToolBoxenterEvent*(self: gen_qtoolbox_types.QToolBox, event: gen_qcoreevent_types.QEvent): void =
+  fcQToolBox_virtualbase_enterEvent(self.h, event.h)
+
+proc QToolBoxleaveEvent*(self: gen_qtoolbox_types.QToolBox, event: gen_qcoreevent_types.QEvent): void =
+  fcQToolBox_virtualbase_leaveEvent(self.h, event.h)
+
+proc QToolBoxmoveEvent*(self: gen_qtoolbox_types.QToolBox, event: gen_qevent_types.QMoveEvent): void =
+  fcQToolBox_virtualbase_moveEvent(self.h, event.h)
+
+proc QToolBoxresizeEvent*(self: gen_qtoolbox_types.QToolBox, event: gen_qevent_types.QResizeEvent): void =
+  fcQToolBox_virtualbase_resizeEvent(self.h, event.h)
+
+proc QToolBoxcloseEvent*(self: gen_qtoolbox_types.QToolBox, event: gen_qevent_types.QCloseEvent): void =
+  fcQToolBox_virtualbase_closeEvent(self.h, event.h)
+
+proc QToolBoxcontextMenuEvent*(self: gen_qtoolbox_types.QToolBox, event: gen_qevent_types.QContextMenuEvent): void =
+  fcQToolBox_virtualbase_contextMenuEvent(self.h, event.h)
+
+proc QToolBoxtabletEvent*(self: gen_qtoolbox_types.QToolBox, event: gen_qevent_types.QTabletEvent): void =
+  fcQToolBox_virtualbase_tabletEvent(self.h, event.h)
+
+proc QToolBoxactionEvent*(self: gen_qtoolbox_types.QToolBox, event: gen_qevent_types.QActionEvent): void =
+  fcQToolBox_virtualbase_actionEvent(self.h, event.h)
+
+proc QToolBoxdragEnterEvent*(self: gen_qtoolbox_types.QToolBox, event: gen_qevent_types.QDragEnterEvent): void =
+  fcQToolBox_virtualbase_dragEnterEvent(self.h, event.h)
+
+proc QToolBoxdragMoveEvent*(self: gen_qtoolbox_types.QToolBox, event: gen_qevent_types.QDragMoveEvent): void =
+  fcQToolBox_virtualbase_dragMoveEvent(self.h, event.h)
+
+proc QToolBoxdragLeaveEvent*(self: gen_qtoolbox_types.QToolBox, event: gen_qevent_types.QDragLeaveEvent): void =
+  fcQToolBox_virtualbase_dragLeaveEvent(self.h, event.h)
+
+proc QToolBoxdropEvent*(self: gen_qtoolbox_types.QToolBox, event: gen_qevent_types.QDropEvent): void =
+  fcQToolBox_virtualbase_dropEvent(self.h, event.h)
+
+proc QToolBoxhideEvent*(self: gen_qtoolbox_types.QToolBox, event: gen_qevent_types.QHideEvent): void =
+  fcQToolBox_virtualbase_hideEvent(self.h, event.h)
+
+proc QToolBoxnativeEvent*(self: gen_qtoolbox_types.QToolBox, eventType: openArray[byte], message: pointer, resultVal: ptr clong): bool =
+  fcQToolBox_virtualbase_nativeEvent(self.h, struct_miqt_string(data: cast[cstring](if len(eventType) == 0: nil else: unsafeAddr eventType[0]), len: csize_t(len(eventType))), message, resultVal)
+
+proc QToolBoxmetric*(self: gen_qtoolbox_types.QToolBox, param1: cint): cint =
+  fcQToolBox_virtualbase_metric(self.h, cint(param1))
+
+proc QToolBoxinitPainter*(self: gen_qtoolbox_types.QToolBox, painter: gen_qpainter_types.QPainter): void =
+  fcQToolBox_virtualbase_initPainter(self.h, painter.h)
+
+proc QToolBoxredirected*(self: gen_qtoolbox_types.QToolBox, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice =
+  gen_qpaintdevice_types.QPaintDevice(h: fcQToolBox_virtualbase_redirected(self.h, offset.h), owned: false)
+
+proc QToolBoxsharedPainter*(self: gen_qtoolbox_types.QToolBox): gen_qpainter_types.QPainter =
+  gen_qpainter_types.QPainter(h: fcQToolBox_virtualbase_sharedPainter(self.h), owned: false)
+
+proc QToolBoxinputMethodEvent*(self: gen_qtoolbox_types.QToolBox, param1: gen_qevent_types.QInputMethodEvent): void =
+  fcQToolBox_virtualbase_inputMethodEvent(self.h, param1.h)
+
+proc QToolBoxinputMethodQuery*(self: gen_qtoolbox_types.QToolBox, param1: cint): gen_qvariant_types.QVariant =
+  gen_qvariant_types.QVariant(h: fcQToolBox_virtualbase_inputMethodQuery(self.h, cint(param1)), owned: true)
+
+proc QToolBoxfocusNextPrevChild*(self: gen_qtoolbox_types.QToolBox, next: bool): bool =
+  fcQToolBox_virtualbase_focusNextPrevChild(self.h, next)
+
+proc QToolBoxeventFilter*(self: gen_qtoolbox_types.QToolBox, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
+  fcQToolBox_virtualbase_eventFilter(self.h, watched.h, event.h)
+
+proc QToolBoxtimerEvent*(self: gen_qtoolbox_types.QToolBox, event: gen_qcoreevent_types.QTimerEvent): void =
+  fcQToolBox_virtualbase_timerEvent(self.h, event.h)
+
+proc QToolBoxchildEvent*(self: gen_qtoolbox_types.QToolBox, event: gen_qcoreevent_types.QChildEvent): void =
+  fcQToolBox_virtualbase_childEvent(self.h, event.h)
+
+proc QToolBoxcustomEvent*(self: gen_qtoolbox_types.QToolBox, event: gen_qcoreevent_types.QEvent): void =
+  fcQToolBox_virtualbase_customEvent(self.h, event.h)
+
+proc QToolBoxconnectNotify*(self: gen_qtoolbox_types.QToolBox, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQToolBox_virtualbase_connectNotify(self.h, signal.h)
+
+proc QToolBoxdisconnectNotify*(self: gen_qtoolbox_types.QToolBox, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQToolBox_virtualbase_disconnectNotify(self.h, signal.h)
+
+
+proc fcQToolBox_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QToolBoxVTable](fcQToolBox_vdata(self))
   let self = QToolBox(h: self)
   var virtualReturn = vtbl[].metaObject(self)
@@ -478,20 +635,14 @@ proc cQToolBox_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QToolBoxmetacast*(self: gen_qtoolbox_types.QToolBox, param1: cstring): pointer =
-  fcQToolBox_virtualbase_metacast(self.h, param1)
-
-proc cQToolBox_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+proc fcQToolBox_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QToolBoxVTable](fcQToolBox_vdata(self))
   let self = QToolBox(h: self)
   let slotval1 = (param1)
   var virtualReturn = vtbl[].metacast(self, slotval1)
   virtualReturn
 
-proc QToolBoxmetacall*(self: gen_qtoolbox_types.QToolBox, param1: cint, param2: cint, param3: pointer): cint =
-  fcQToolBox_virtualbase_metacall(self.h, cint(param1), param2, param3)
-
-proc cQToolBox_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+proc fcQToolBox_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QToolBoxVTable](fcQToolBox_vdata(self))
   let self = QToolBox(h: self)
   let slotval1 = cint(param1)
@@ -500,56 +651,38 @@ proc cQToolBox_vtable_callback_metacall(self: pointer, param1: cint, param2: cin
   var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QToolBoxevent*(self: gen_qtoolbox_types.QToolBox, e: gen_qcoreevent_types.QEvent): bool =
-  fcQToolBox_virtualbase_event(self.h, e.h)
-
-proc cQToolBox_vtable_callback_event(self: pointer, e: pointer): bool {.cdecl.} =
+proc fcQToolBox_vtable_callback_event(self: pointer, e: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QToolBoxVTable](fcQToolBox_vdata(self))
   let self = QToolBox(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: e, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
-proc QToolBoxitemInserted*(self: gen_qtoolbox_types.QToolBox, index: cint): void =
-  fcQToolBox_virtualbase_itemInserted(self.h, index)
-
-proc cQToolBox_vtable_callback_itemInserted(self: pointer, index: cint): void {.cdecl.} =
+proc fcQToolBox_vtable_callback_itemInserted(self: pointer, index: cint): void {.cdecl.} =
   let vtbl = cast[ptr QToolBoxVTable](fcQToolBox_vdata(self))
   let self = QToolBox(h: self)
   let slotval1 = index
   vtbl[].itemInserted(self, slotval1)
 
-proc QToolBoxitemRemoved*(self: gen_qtoolbox_types.QToolBox, index: cint): void =
-  fcQToolBox_virtualbase_itemRemoved(self.h, index)
-
-proc cQToolBox_vtable_callback_itemRemoved(self: pointer, index: cint): void {.cdecl.} =
+proc fcQToolBox_vtable_callback_itemRemoved(self: pointer, index: cint): void {.cdecl.} =
   let vtbl = cast[ptr QToolBoxVTable](fcQToolBox_vdata(self))
   let self = QToolBox(h: self)
   let slotval1 = index
   vtbl[].itemRemoved(self, slotval1)
 
-proc QToolBoxshowEvent*(self: gen_qtoolbox_types.QToolBox, e: gen_qevent_types.QShowEvent): void =
-  fcQToolBox_virtualbase_showEvent(self.h, e.h)
-
-proc cQToolBox_vtable_callback_showEvent(self: pointer, e: pointer): void {.cdecl.} =
+proc fcQToolBox_vtable_callback_showEvent(self: pointer, e: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QToolBoxVTable](fcQToolBox_vdata(self))
   let self = QToolBox(h: self)
   let slotval1 = gen_qevent_types.QShowEvent(h: e, owned: false)
   vtbl[].showEvent(self, slotval1)
 
-proc QToolBoxchangeEvent*(self: gen_qtoolbox_types.QToolBox, param1: gen_qcoreevent_types.QEvent): void =
-  fcQToolBox_virtualbase_changeEvent(self.h, param1.h)
-
-proc cQToolBox_vtable_callback_changeEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQToolBox_vtable_callback_changeEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QToolBoxVTable](fcQToolBox_vdata(self))
   let self = QToolBox(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
   vtbl[].changeEvent(self, slotval1)
 
-proc QToolBoxsizeHint*(self: gen_qtoolbox_types.QToolBox): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQToolBox_virtualbase_sizeHint(self.h), owned: true)
-
-proc cQToolBox_vtable_callback_sizeHint(self: pointer): pointer {.cdecl.} =
+proc fcQToolBox_vtable_callback_sizeHint(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QToolBoxVTable](fcQToolBox_vdata(self))
   let self = QToolBox(h: self)
   var virtualReturn = vtbl[].sizeHint(self)
@@ -558,37 +691,25 @@ proc cQToolBox_vtable_callback_sizeHint(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QToolBoxpaintEvent*(self: gen_qtoolbox_types.QToolBox, param1: gen_qevent_types.QPaintEvent): void =
-  fcQToolBox_virtualbase_paintEvent(self.h, param1.h)
-
-proc cQToolBox_vtable_callback_paintEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQToolBox_vtable_callback_paintEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QToolBoxVTable](fcQToolBox_vdata(self))
   let self = QToolBox(h: self)
   let slotval1 = gen_qevent_types.QPaintEvent(h: param1, owned: false)
   vtbl[].paintEvent(self, slotval1)
 
-proc QToolBoxdevType*(self: gen_qtoolbox_types.QToolBox): cint =
-  fcQToolBox_virtualbase_devType(self.h)
-
-proc cQToolBox_vtable_callback_devType(self: pointer): cint {.cdecl.} =
+proc fcQToolBox_vtable_callback_devType(self: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QToolBoxVTable](fcQToolBox_vdata(self))
   let self = QToolBox(h: self)
   var virtualReturn = vtbl[].devType(self)
   virtualReturn
 
-proc QToolBoxsetVisible*(self: gen_qtoolbox_types.QToolBox, visible: bool): void =
-  fcQToolBox_virtualbase_setVisible(self.h, visible)
-
-proc cQToolBox_vtable_callback_setVisible(self: pointer, visible: bool): void {.cdecl.} =
+proc fcQToolBox_vtable_callback_setVisible(self: pointer, visible: bool): void {.cdecl.} =
   let vtbl = cast[ptr QToolBoxVTable](fcQToolBox_vdata(self))
   let self = QToolBox(h: self)
   let slotval1 = visible
   vtbl[].setVisible(self, slotval1)
 
-proc QToolBoxminimumSizeHint*(self: gen_qtoolbox_types.QToolBox): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQToolBox_virtualbase_minimumSizeHint(self.h), owned: true)
-
-proc cQToolBox_vtable_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
+proc fcQToolBox_vtable_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QToolBoxVTable](fcQToolBox_vdata(self))
   let self = QToolBox(h: self)
   var virtualReturn = vtbl[].minimumSizeHint(self)
@@ -597,29 +718,20 @@ proc cQToolBox_vtable_callback_minimumSizeHint(self: pointer): pointer {.cdecl.}
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QToolBoxheightForWidth*(self: gen_qtoolbox_types.QToolBox, param1: cint): cint =
-  fcQToolBox_virtualbase_heightForWidth(self.h, param1)
-
-proc cQToolBox_vtable_callback_heightForWidth(self: pointer, param1: cint): cint {.cdecl.} =
+proc fcQToolBox_vtable_callback_heightForWidth(self: pointer, param1: cint): cint {.cdecl.} =
   let vtbl = cast[ptr QToolBoxVTable](fcQToolBox_vdata(self))
   let self = QToolBox(h: self)
   let slotval1 = param1
   var virtualReturn = vtbl[].heightForWidth(self, slotval1)
   virtualReturn
 
-proc QToolBoxhasHeightForWidth*(self: gen_qtoolbox_types.QToolBox): bool =
-  fcQToolBox_virtualbase_hasHeightForWidth(self.h)
-
-proc cQToolBox_vtable_callback_hasHeightForWidth(self: pointer): bool {.cdecl.} =
+proc fcQToolBox_vtable_callback_hasHeightForWidth(self: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QToolBoxVTable](fcQToolBox_vdata(self))
   let self = QToolBox(h: self)
   var virtualReturn = vtbl[].hasHeightForWidth(self)
   virtualReturn
 
-proc QToolBoxpaintEngine*(self: gen_qtoolbox_types.QToolBox): gen_qpaintengine_types.QPaintEngine =
-  gen_qpaintengine_types.QPaintEngine(h: fcQToolBox_virtualbase_paintEngine(self.h), owned: false)
-
-proc cQToolBox_vtable_callback_paintEngine(self: pointer): pointer {.cdecl.} =
+proc fcQToolBox_vtable_callback_paintEngine(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QToolBoxVTable](fcQToolBox_vdata(self))
   let self = QToolBox(h: self)
   var virtualReturn = vtbl[].paintEngine(self)
@@ -628,208 +740,139 @@ proc cQToolBox_vtable_callback_paintEngine(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QToolBoxmousePressEvent*(self: gen_qtoolbox_types.QToolBox, event: gen_qevent_types.QMouseEvent): void =
-  fcQToolBox_virtualbase_mousePressEvent(self.h, event.h)
-
-proc cQToolBox_vtable_callback_mousePressEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQToolBox_vtable_callback_mousePressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QToolBoxVTable](fcQToolBox_vdata(self))
   let self = QToolBox(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mousePressEvent(self, slotval1)
 
-proc QToolBoxmouseReleaseEvent*(self: gen_qtoolbox_types.QToolBox, event: gen_qevent_types.QMouseEvent): void =
-  fcQToolBox_virtualbase_mouseReleaseEvent(self.h, event.h)
-
-proc cQToolBox_vtable_callback_mouseReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQToolBox_vtable_callback_mouseReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QToolBoxVTable](fcQToolBox_vdata(self))
   let self = QToolBox(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseReleaseEvent(self, slotval1)
 
-proc QToolBoxmouseDoubleClickEvent*(self: gen_qtoolbox_types.QToolBox, event: gen_qevent_types.QMouseEvent): void =
-  fcQToolBox_virtualbase_mouseDoubleClickEvent(self.h, event.h)
-
-proc cQToolBox_vtable_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQToolBox_vtable_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QToolBoxVTable](fcQToolBox_vdata(self))
   let self = QToolBox(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseDoubleClickEvent(self, slotval1)
 
-proc QToolBoxmouseMoveEvent*(self: gen_qtoolbox_types.QToolBox, event: gen_qevent_types.QMouseEvent): void =
-  fcQToolBox_virtualbase_mouseMoveEvent(self.h, event.h)
-
-proc cQToolBox_vtable_callback_mouseMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQToolBox_vtable_callback_mouseMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QToolBoxVTable](fcQToolBox_vdata(self))
   let self = QToolBox(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseMoveEvent(self, slotval1)
 
-proc QToolBoxwheelEvent*(self: gen_qtoolbox_types.QToolBox, event: gen_qevent_types.QWheelEvent): void =
-  fcQToolBox_virtualbase_wheelEvent(self.h, event.h)
-
-proc cQToolBox_vtable_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQToolBox_vtable_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QToolBoxVTable](fcQToolBox_vdata(self))
   let self = QToolBox(h: self)
   let slotval1 = gen_qevent_types.QWheelEvent(h: event, owned: false)
   vtbl[].wheelEvent(self, slotval1)
 
-proc QToolBoxkeyPressEvent*(self: gen_qtoolbox_types.QToolBox, event: gen_qevent_types.QKeyEvent): void =
-  fcQToolBox_virtualbase_keyPressEvent(self.h, event.h)
-
-proc cQToolBox_vtable_callback_keyPressEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQToolBox_vtable_callback_keyPressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QToolBoxVTable](fcQToolBox_vdata(self))
   let self = QToolBox(h: self)
   let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   vtbl[].keyPressEvent(self, slotval1)
 
-proc QToolBoxkeyReleaseEvent*(self: gen_qtoolbox_types.QToolBox, event: gen_qevent_types.QKeyEvent): void =
-  fcQToolBox_virtualbase_keyReleaseEvent(self.h, event.h)
-
-proc cQToolBox_vtable_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQToolBox_vtable_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QToolBoxVTable](fcQToolBox_vdata(self))
   let self = QToolBox(h: self)
   let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   vtbl[].keyReleaseEvent(self, slotval1)
 
-proc QToolBoxfocusInEvent*(self: gen_qtoolbox_types.QToolBox, event: gen_qevent_types.QFocusEvent): void =
-  fcQToolBox_virtualbase_focusInEvent(self.h, event.h)
-
-proc cQToolBox_vtable_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQToolBox_vtable_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QToolBoxVTable](fcQToolBox_vdata(self))
   let self = QToolBox(h: self)
   let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusInEvent(self, slotval1)
 
-proc QToolBoxfocusOutEvent*(self: gen_qtoolbox_types.QToolBox, event: gen_qevent_types.QFocusEvent): void =
-  fcQToolBox_virtualbase_focusOutEvent(self.h, event.h)
-
-proc cQToolBox_vtable_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQToolBox_vtable_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QToolBoxVTable](fcQToolBox_vdata(self))
   let self = QToolBox(h: self)
   let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusOutEvent(self, slotval1)
 
-proc QToolBoxenterEvent*(self: gen_qtoolbox_types.QToolBox, event: gen_qcoreevent_types.QEvent): void =
-  fcQToolBox_virtualbase_enterEvent(self.h, event.h)
-
-proc cQToolBox_vtable_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQToolBox_vtable_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QToolBoxVTable](fcQToolBox_vdata(self))
   let self = QToolBox(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].enterEvent(self, slotval1)
 
-proc QToolBoxleaveEvent*(self: gen_qtoolbox_types.QToolBox, event: gen_qcoreevent_types.QEvent): void =
-  fcQToolBox_virtualbase_leaveEvent(self.h, event.h)
-
-proc cQToolBox_vtable_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQToolBox_vtable_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QToolBoxVTable](fcQToolBox_vdata(self))
   let self = QToolBox(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].leaveEvent(self, slotval1)
 
-proc QToolBoxmoveEvent*(self: gen_qtoolbox_types.QToolBox, event: gen_qevent_types.QMoveEvent): void =
-  fcQToolBox_virtualbase_moveEvent(self.h, event.h)
-
-proc cQToolBox_vtable_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQToolBox_vtable_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QToolBoxVTable](fcQToolBox_vdata(self))
   let self = QToolBox(h: self)
   let slotval1 = gen_qevent_types.QMoveEvent(h: event, owned: false)
   vtbl[].moveEvent(self, slotval1)
 
-proc QToolBoxresizeEvent*(self: gen_qtoolbox_types.QToolBox, event: gen_qevent_types.QResizeEvent): void =
-  fcQToolBox_virtualbase_resizeEvent(self.h, event.h)
-
-proc cQToolBox_vtable_callback_resizeEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQToolBox_vtable_callback_resizeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QToolBoxVTable](fcQToolBox_vdata(self))
   let self = QToolBox(h: self)
   let slotval1 = gen_qevent_types.QResizeEvent(h: event, owned: false)
   vtbl[].resizeEvent(self, slotval1)
 
-proc QToolBoxcloseEvent*(self: gen_qtoolbox_types.QToolBox, event: gen_qevent_types.QCloseEvent): void =
-  fcQToolBox_virtualbase_closeEvent(self.h, event.h)
-
-proc cQToolBox_vtable_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQToolBox_vtable_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QToolBoxVTable](fcQToolBox_vdata(self))
   let self = QToolBox(h: self)
   let slotval1 = gen_qevent_types.QCloseEvent(h: event, owned: false)
   vtbl[].closeEvent(self, slotval1)
 
-proc QToolBoxcontextMenuEvent*(self: gen_qtoolbox_types.QToolBox, event: gen_qevent_types.QContextMenuEvent): void =
-  fcQToolBox_virtualbase_contextMenuEvent(self.h, event.h)
-
-proc cQToolBox_vtable_callback_contextMenuEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQToolBox_vtable_callback_contextMenuEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QToolBoxVTable](fcQToolBox_vdata(self))
   let self = QToolBox(h: self)
   let slotval1 = gen_qevent_types.QContextMenuEvent(h: event, owned: false)
   vtbl[].contextMenuEvent(self, slotval1)
 
-proc QToolBoxtabletEvent*(self: gen_qtoolbox_types.QToolBox, event: gen_qevent_types.QTabletEvent): void =
-  fcQToolBox_virtualbase_tabletEvent(self.h, event.h)
-
-proc cQToolBox_vtable_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQToolBox_vtable_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QToolBoxVTable](fcQToolBox_vdata(self))
   let self = QToolBox(h: self)
   let slotval1 = gen_qevent_types.QTabletEvent(h: event, owned: false)
   vtbl[].tabletEvent(self, slotval1)
 
-proc QToolBoxactionEvent*(self: gen_qtoolbox_types.QToolBox, event: gen_qevent_types.QActionEvent): void =
-  fcQToolBox_virtualbase_actionEvent(self.h, event.h)
-
-proc cQToolBox_vtable_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQToolBox_vtable_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QToolBoxVTable](fcQToolBox_vdata(self))
   let self = QToolBox(h: self)
   let slotval1 = gen_qevent_types.QActionEvent(h: event, owned: false)
   vtbl[].actionEvent(self, slotval1)
 
-proc QToolBoxdragEnterEvent*(self: gen_qtoolbox_types.QToolBox, event: gen_qevent_types.QDragEnterEvent): void =
-  fcQToolBox_virtualbase_dragEnterEvent(self.h, event.h)
-
-proc cQToolBox_vtable_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQToolBox_vtable_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QToolBoxVTable](fcQToolBox_vdata(self))
   let self = QToolBox(h: self)
   let slotval1 = gen_qevent_types.QDragEnterEvent(h: event, owned: false)
   vtbl[].dragEnterEvent(self, slotval1)
 
-proc QToolBoxdragMoveEvent*(self: gen_qtoolbox_types.QToolBox, event: gen_qevent_types.QDragMoveEvent): void =
-  fcQToolBox_virtualbase_dragMoveEvent(self.h, event.h)
-
-proc cQToolBox_vtable_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQToolBox_vtable_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QToolBoxVTable](fcQToolBox_vdata(self))
   let self = QToolBox(h: self)
   let slotval1 = gen_qevent_types.QDragMoveEvent(h: event, owned: false)
   vtbl[].dragMoveEvent(self, slotval1)
 
-proc QToolBoxdragLeaveEvent*(self: gen_qtoolbox_types.QToolBox, event: gen_qevent_types.QDragLeaveEvent): void =
-  fcQToolBox_virtualbase_dragLeaveEvent(self.h, event.h)
-
-proc cQToolBox_vtable_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQToolBox_vtable_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QToolBoxVTable](fcQToolBox_vdata(self))
   let self = QToolBox(h: self)
   let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event, owned: false)
   vtbl[].dragLeaveEvent(self, slotval1)
 
-proc QToolBoxdropEvent*(self: gen_qtoolbox_types.QToolBox, event: gen_qevent_types.QDropEvent): void =
-  fcQToolBox_virtualbase_dropEvent(self.h, event.h)
-
-proc cQToolBox_vtable_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQToolBox_vtable_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QToolBoxVTable](fcQToolBox_vdata(self))
   let self = QToolBox(h: self)
   let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
   vtbl[].dropEvent(self, slotval1)
 
-proc QToolBoxhideEvent*(self: gen_qtoolbox_types.QToolBox, event: gen_qevent_types.QHideEvent): void =
-  fcQToolBox_virtualbase_hideEvent(self.h, event.h)
-
-proc cQToolBox_vtable_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQToolBox_vtable_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QToolBoxVTable](fcQToolBox_vdata(self))
   let self = QToolBox(h: self)
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   vtbl[].hideEvent(self, slotval1)
 
-proc QToolBoxnativeEvent*(self: gen_qtoolbox_types.QToolBox, eventType: openArray[byte], message: pointer, resultVal: ptr clong): bool =
-  fcQToolBox_virtualbase_nativeEvent(self.h, struct_miqt_string(data: cast[cstring](if len(eventType) == 0: nil else: unsafeAddr eventType[0]), len: csize_t(len(eventType))), message, resultVal)
-
-proc cQToolBox_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr clong): bool {.cdecl.} =
+proc fcQToolBox_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr clong): bool {.cdecl.} =
   let vtbl = cast[ptr QToolBoxVTable](fcQToolBox_vdata(self))
   let self = QToolBox(h: self)
   var veventType_bytearray = eventType
@@ -841,29 +884,20 @@ proc cQToolBox_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt
   var virtualReturn = vtbl[].nativeEvent(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QToolBoxmetric*(self: gen_qtoolbox_types.QToolBox, param1: cint): cint =
-  fcQToolBox_virtualbase_metric(self.h, cint(param1))
-
-proc cQToolBox_vtable_callback_metric(self: pointer, param1: cint): cint {.cdecl.} =
+proc fcQToolBox_vtable_callback_metric(self: pointer, param1: cint): cint {.cdecl.} =
   let vtbl = cast[ptr QToolBoxVTable](fcQToolBox_vdata(self))
   let self = QToolBox(h: self)
   let slotval1 = cint(param1)
   var virtualReturn = vtbl[].metric(self, slotval1)
   virtualReturn
 
-proc QToolBoxinitPainter*(self: gen_qtoolbox_types.QToolBox, painter: gen_qpainter_types.QPainter): void =
-  fcQToolBox_virtualbase_initPainter(self.h, painter.h)
-
-proc cQToolBox_vtable_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
+proc fcQToolBox_vtable_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QToolBoxVTable](fcQToolBox_vdata(self))
   let self = QToolBox(h: self)
   let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
   vtbl[].initPainter(self, slotval1)
 
-proc QToolBoxredirected*(self: gen_qtoolbox_types.QToolBox, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice =
-  gen_qpaintdevice_types.QPaintDevice(h: fcQToolBox_virtualbase_redirected(self.h, offset.h), owned: false)
-
-proc cQToolBox_vtable_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
+proc fcQToolBox_vtable_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QToolBoxVTable](fcQToolBox_vdata(self))
   let self = QToolBox(h: self)
   let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
@@ -873,10 +907,7 @@ proc cQToolBox_vtable_callback_redirected(self: pointer, offset: pointer): point
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QToolBoxsharedPainter*(self: gen_qtoolbox_types.QToolBox): gen_qpainter_types.QPainter =
-  gen_qpainter_types.QPainter(h: fcQToolBox_virtualbase_sharedPainter(self.h), owned: false)
-
-proc cQToolBox_vtable_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
+proc fcQToolBox_vtable_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QToolBoxVTable](fcQToolBox_vdata(self))
   let self = QToolBox(h: self)
   var virtualReturn = vtbl[].sharedPainter(self)
@@ -885,19 +916,13 @@ proc cQToolBox_vtable_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QToolBoxinputMethodEvent*(self: gen_qtoolbox_types.QToolBox, param1: gen_qevent_types.QInputMethodEvent): void =
-  fcQToolBox_virtualbase_inputMethodEvent(self.h, param1.h)
-
-proc cQToolBox_vtable_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQToolBox_vtable_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QToolBoxVTable](fcQToolBox_vdata(self))
   let self = QToolBox(h: self)
   let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1, owned: false)
   vtbl[].inputMethodEvent(self, slotval1)
 
-proc QToolBoxinputMethodQuery*(self: gen_qtoolbox_types.QToolBox, param1: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQToolBox_virtualbase_inputMethodQuery(self.h, cint(param1)), owned: true)
-
-proc cQToolBox_vtable_callback_inputMethodQuery(self: pointer, param1: cint): pointer {.cdecl.} =
+proc fcQToolBox_vtable_callback_inputMethodQuery(self: pointer, param1: cint): pointer {.cdecl.} =
   let vtbl = cast[ptr QToolBoxVTable](fcQToolBox_vdata(self))
   let self = QToolBox(h: self)
   let slotval1 = cint(param1)
@@ -907,20 +932,14 @@ proc cQToolBox_vtable_callback_inputMethodQuery(self: pointer, param1: cint): po
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QToolBoxfocusNextPrevChild*(self: gen_qtoolbox_types.QToolBox, next: bool): bool =
-  fcQToolBox_virtualbase_focusNextPrevChild(self.h, next)
-
-proc cQToolBox_vtable_callback_focusNextPrevChild(self: pointer, next: bool): bool {.cdecl.} =
+proc fcQToolBox_vtable_callback_focusNextPrevChild(self: pointer, next: bool): bool {.cdecl.} =
   let vtbl = cast[ptr QToolBoxVTable](fcQToolBox_vdata(self))
   let self = QToolBox(h: self)
   let slotval1 = next
   var virtualReturn = vtbl[].focusNextPrevChild(self, slotval1)
   virtualReturn
 
-proc QToolBoxeventFilter*(self: gen_qtoolbox_types.QToolBox, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
-  fcQToolBox_virtualbase_eventFilter(self.h, watched.h, event.h)
-
-proc cQToolBox_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+proc fcQToolBox_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QToolBoxVTable](fcQToolBox_vdata(self))
   let self = QToolBox(h: self)
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
@@ -928,46 +947,31 @@ proc cQToolBox_vtable_callback_eventFilter(self: pointer, watched: pointer, even
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
-proc QToolBoxtimerEvent*(self: gen_qtoolbox_types.QToolBox, event: gen_qcoreevent_types.QTimerEvent): void =
-  fcQToolBox_virtualbase_timerEvent(self.h, event.h)
-
-proc cQToolBox_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQToolBox_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QToolBoxVTable](fcQToolBox_vdata(self))
   let self = QToolBox(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
-proc QToolBoxchildEvent*(self: gen_qtoolbox_types.QToolBox, event: gen_qcoreevent_types.QChildEvent): void =
-  fcQToolBox_virtualbase_childEvent(self.h, event.h)
-
-proc cQToolBox_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQToolBox_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QToolBoxVTable](fcQToolBox_vdata(self))
   let self = QToolBox(h: self)
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
-proc QToolBoxcustomEvent*(self: gen_qtoolbox_types.QToolBox, event: gen_qcoreevent_types.QEvent): void =
-  fcQToolBox_virtualbase_customEvent(self.h, event.h)
-
-proc cQToolBox_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQToolBox_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QToolBoxVTable](fcQToolBox_vdata(self))
   let self = QToolBox(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
-proc QToolBoxconnectNotify*(self: gen_qtoolbox_types.QToolBox, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQToolBox_virtualbase_connectNotify(self.h, signal.h)
-
-proc cQToolBox_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQToolBox_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QToolBoxVTable](fcQToolBox_vdata(self))
   let self = QToolBox(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
-proc QToolBoxdisconnectNotify*(self: gen_qtoolbox_types.QToolBox, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQToolBox_virtualbase_disconnectNotify(self.h, signal.h)
-
-proc cQToolBox_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQToolBox_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QToolBoxVTable](fcQToolBox_vdata(self))
   let self = QToolBox(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
@@ -975,9 +979,113 @@ proc cQToolBox_vtable_callback_disconnectNotify(self: pointer, signal: pointer):
 
 type VirtualQToolBox* {.inheritable.} = ref object of QToolBox
   vtbl*: cQToolBoxVTable
+
 method metaObject*(self: VirtualQToolBox): gen_qobjectdefs_types.QMetaObject {.base.} =
   QToolBoxmetaObject(self[])
-proc cQToolBox_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
+method metacast*(self: VirtualQToolBox, param1: cstring): pointer {.base.} =
+  QToolBoxmetacast(self[], param1)
+method metacall*(self: VirtualQToolBox, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QToolBoxmetacall(self[], param1, param2, param3)
+method event*(self: VirtualQToolBox, e: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QToolBoxevent(self[], e)
+method itemInserted*(self: VirtualQToolBox, index: cint): void {.base.} =
+  QToolBoxitemInserted(self[], index)
+method itemRemoved*(self: VirtualQToolBox, index: cint): void {.base.} =
+  QToolBoxitemRemoved(self[], index)
+method showEvent*(self: VirtualQToolBox, e: gen_qevent_types.QShowEvent): void {.base.} =
+  QToolBoxshowEvent(self[], e)
+method changeEvent*(self: VirtualQToolBox, param1: gen_qcoreevent_types.QEvent): void {.base.} =
+  QToolBoxchangeEvent(self[], param1)
+method sizeHint*(self: VirtualQToolBox): gen_qsize_types.QSize {.base.} =
+  QToolBoxsizeHint(self[])
+method paintEvent*(self: VirtualQToolBox, param1: gen_qevent_types.QPaintEvent): void {.base.} =
+  QToolBoxpaintEvent(self[], param1)
+method devType*(self: VirtualQToolBox): cint {.base.} =
+  QToolBoxdevType(self[])
+method setVisible*(self: VirtualQToolBox, visible: bool): void {.base.} =
+  QToolBoxsetVisible(self[], visible)
+method minimumSizeHint*(self: VirtualQToolBox): gen_qsize_types.QSize {.base.} =
+  QToolBoxminimumSizeHint(self[])
+method heightForWidth*(self: VirtualQToolBox, param1: cint): cint {.base.} =
+  QToolBoxheightForWidth(self[], param1)
+method hasHeightForWidth*(self: VirtualQToolBox): bool {.base.} =
+  QToolBoxhasHeightForWidth(self[])
+method paintEngine*(self: VirtualQToolBox): gen_qpaintengine_types.QPaintEngine {.base.} =
+  QToolBoxpaintEngine(self[])
+method mousePressEvent*(self: VirtualQToolBox, event: gen_qevent_types.QMouseEvent): void {.base.} =
+  QToolBoxmousePressEvent(self[], event)
+method mouseReleaseEvent*(self: VirtualQToolBox, event: gen_qevent_types.QMouseEvent): void {.base.} =
+  QToolBoxmouseReleaseEvent(self[], event)
+method mouseDoubleClickEvent*(self: VirtualQToolBox, event: gen_qevent_types.QMouseEvent): void {.base.} =
+  QToolBoxmouseDoubleClickEvent(self[], event)
+method mouseMoveEvent*(self: VirtualQToolBox, event: gen_qevent_types.QMouseEvent): void {.base.} =
+  QToolBoxmouseMoveEvent(self[], event)
+method wheelEvent*(self: VirtualQToolBox, event: gen_qevent_types.QWheelEvent): void {.base.} =
+  QToolBoxwheelEvent(self[], event)
+method keyPressEvent*(self: VirtualQToolBox, event: gen_qevent_types.QKeyEvent): void {.base.} =
+  QToolBoxkeyPressEvent(self[], event)
+method keyReleaseEvent*(self: VirtualQToolBox, event: gen_qevent_types.QKeyEvent): void {.base.} =
+  QToolBoxkeyReleaseEvent(self[], event)
+method focusInEvent*(self: VirtualQToolBox, event: gen_qevent_types.QFocusEvent): void {.base.} =
+  QToolBoxfocusInEvent(self[], event)
+method focusOutEvent*(self: VirtualQToolBox, event: gen_qevent_types.QFocusEvent): void {.base.} =
+  QToolBoxfocusOutEvent(self[], event)
+method enterEvent*(self: VirtualQToolBox, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QToolBoxenterEvent(self[], event)
+method leaveEvent*(self: VirtualQToolBox, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QToolBoxleaveEvent(self[], event)
+method moveEvent*(self: VirtualQToolBox, event: gen_qevent_types.QMoveEvent): void {.base.} =
+  QToolBoxmoveEvent(self[], event)
+method resizeEvent*(self: VirtualQToolBox, event: gen_qevent_types.QResizeEvent): void {.base.} =
+  QToolBoxresizeEvent(self[], event)
+method closeEvent*(self: VirtualQToolBox, event: gen_qevent_types.QCloseEvent): void {.base.} =
+  QToolBoxcloseEvent(self[], event)
+method contextMenuEvent*(self: VirtualQToolBox, event: gen_qevent_types.QContextMenuEvent): void {.base.} =
+  QToolBoxcontextMenuEvent(self[], event)
+method tabletEvent*(self: VirtualQToolBox, event: gen_qevent_types.QTabletEvent): void {.base.} =
+  QToolBoxtabletEvent(self[], event)
+method actionEvent*(self: VirtualQToolBox, event: gen_qevent_types.QActionEvent): void {.base.} =
+  QToolBoxactionEvent(self[], event)
+method dragEnterEvent*(self: VirtualQToolBox, event: gen_qevent_types.QDragEnterEvent): void {.base.} =
+  QToolBoxdragEnterEvent(self[], event)
+method dragMoveEvent*(self: VirtualQToolBox, event: gen_qevent_types.QDragMoveEvent): void {.base.} =
+  QToolBoxdragMoveEvent(self[], event)
+method dragLeaveEvent*(self: VirtualQToolBox, event: gen_qevent_types.QDragLeaveEvent): void {.base.} =
+  QToolBoxdragLeaveEvent(self[], event)
+method dropEvent*(self: VirtualQToolBox, event: gen_qevent_types.QDropEvent): void {.base.} =
+  QToolBoxdropEvent(self[], event)
+method hideEvent*(self: VirtualQToolBox, event: gen_qevent_types.QHideEvent): void {.base.} =
+  QToolBoxhideEvent(self[], event)
+method nativeEvent*(self: VirtualQToolBox, eventType: openArray[byte], message: pointer, resultVal: ptr clong): bool {.base.} =
+  QToolBoxnativeEvent(self[], eventType, message, resultVal)
+method metric*(self: VirtualQToolBox, param1: cint): cint {.base.} =
+  QToolBoxmetric(self[], param1)
+method initPainter*(self: VirtualQToolBox, painter: gen_qpainter_types.QPainter): void {.base.} =
+  QToolBoxinitPainter(self[], painter)
+method redirected*(self: VirtualQToolBox, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.base.} =
+  QToolBoxredirected(self[], offset)
+method sharedPainter*(self: VirtualQToolBox): gen_qpainter_types.QPainter {.base.} =
+  QToolBoxsharedPainter(self[])
+method inputMethodEvent*(self: VirtualQToolBox, param1: gen_qevent_types.QInputMethodEvent): void {.base.} =
+  QToolBoxinputMethodEvent(self[], param1)
+method inputMethodQuery*(self: VirtualQToolBox, param1: cint): gen_qvariant_types.QVariant {.base.} =
+  QToolBoxinputMethodQuery(self[], param1)
+method focusNextPrevChild*(self: VirtualQToolBox, next: bool): bool {.base.} =
+  QToolBoxfocusNextPrevChild(self[], next)
+method eventFilter*(self: VirtualQToolBox, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QToolBoxeventFilter(self[], watched, event)
+method timerEvent*(self: VirtualQToolBox, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QToolBoxtimerEvent(self[], event)
+method childEvent*(self: VirtualQToolBox, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QToolBoxchildEvent(self[], event)
+method customEvent*(self: VirtualQToolBox, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QToolBoxcustomEvent(self[], event)
+method connectNotify*(self: VirtualQToolBox, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QToolBoxconnectNotify(self[], signal)
+method disconnectNotify*(self: VirtualQToolBox, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QToolBoxdisconnectNotify(self[], signal)
+
+proc fcQToolBox_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQToolBox](fcQToolBox_vdata(self))
   var virtualReturn = inst.metaObject()
   virtualReturn.owned = false # TODO move?
@@ -985,17 +1093,13 @@ proc cQToolBox_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-method metacast*(self: VirtualQToolBox, param1: cstring): pointer {.base.} =
-  QToolBoxmetacast(self[], param1)
-proc cQToolBox_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+proc fcQToolBox_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQToolBox](fcQToolBox_vdata(self))
   let slotval1 = (param1)
   var virtualReturn = inst.metacast(slotval1)
   virtualReturn
 
-method metacall*(self: VirtualQToolBox, param1: cint, param2: cint, param3: pointer): cint {.base.} =
-  QToolBoxmetacall(self[], param1, param2, param3)
-proc cQToolBox_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+proc fcQToolBox_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQToolBox](fcQToolBox_vdata(self))
   let slotval1 = cint(param1)
   let slotval2 = param2
@@ -1003,45 +1107,33 @@ proc cQToolBox_method_callback_metacall(self: pointer, param1: cint, param2: cin
   var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
-method event*(self: VirtualQToolBox, e: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QToolBoxevent(self[], e)
-proc cQToolBox_method_callback_event(self: pointer, e: pointer): bool {.cdecl.} =
+proc fcQToolBox_method_callback_event(self: pointer, e: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQToolBox](fcQToolBox_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: e, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
-method itemInserted*(self: VirtualQToolBox, index: cint): void {.base.} =
-  QToolBoxitemInserted(self[], index)
-proc cQToolBox_method_callback_itemInserted(self: pointer, index: cint): void {.cdecl.} =
+proc fcQToolBox_method_callback_itemInserted(self: pointer, index: cint): void {.cdecl.} =
   let inst = cast[VirtualQToolBox](fcQToolBox_vdata(self))
   let slotval1 = index
   inst.itemInserted(slotval1)
 
-method itemRemoved*(self: VirtualQToolBox, index: cint): void {.base.} =
-  QToolBoxitemRemoved(self[], index)
-proc cQToolBox_method_callback_itemRemoved(self: pointer, index: cint): void {.cdecl.} =
+proc fcQToolBox_method_callback_itemRemoved(self: pointer, index: cint): void {.cdecl.} =
   let inst = cast[VirtualQToolBox](fcQToolBox_vdata(self))
   let slotval1 = index
   inst.itemRemoved(slotval1)
 
-method showEvent*(self: VirtualQToolBox, e: gen_qevent_types.QShowEvent): void {.base.} =
-  QToolBoxshowEvent(self[], e)
-proc cQToolBox_method_callback_showEvent(self: pointer, e: pointer): void {.cdecl.} =
+proc fcQToolBox_method_callback_showEvent(self: pointer, e: pointer): void {.cdecl.} =
   let inst = cast[VirtualQToolBox](fcQToolBox_vdata(self))
   let slotval1 = gen_qevent_types.QShowEvent(h: e, owned: false)
   inst.showEvent(slotval1)
 
-method changeEvent*(self: VirtualQToolBox, param1: gen_qcoreevent_types.QEvent): void {.base.} =
-  QToolBoxchangeEvent(self[], param1)
-proc cQToolBox_method_callback_changeEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQToolBox_method_callback_changeEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQToolBox](fcQToolBox_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
   inst.changeEvent(slotval1)
 
-method sizeHint*(self: VirtualQToolBox): gen_qsize_types.QSize {.base.} =
-  QToolBoxsizeHint(self[])
-proc cQToolBox_method_callback_sizeHint(self: pointer): pointer {.cdecl.} =
+proc fcQToolBox_method_callback_sizeHint(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQToolBox](fcQToolBox_vdata(self))
   var virtualReturn = inst.sizeHint()
   virtualReturn.owned = false # TODO move?
@@ -1049,30 +1141,22 @@ proc cQToolBox_method_callback_sizeHint(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-method paintEvent*(self: VirtualQToolBox, param1: gen_qevent_types.QPaintEvent): void {.base.} =
-  QToolBoxpaintEvent(self[], param1)
-proc cQToolBox_method_callback_paintEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQToolBox_method_callback_paintEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQToolBox](fcQToolBox_vdata(self))
   let slotval1 = gen_qevent_types.QPaintEvent(h: param1, owned: false)
   inst.paintEvent(slotval1)
 
-method devType*(self: VirtualQToolBox): cint {.base.} =
-  QToolBoxdevType(self[])
-proc cQToolBox_method_callback_devType(self: pointer): cint {.cdecl.} =
+proc fcQToolBox_method_callback_devType(self: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQToolBox](fcQToolBox_vdata(self))
   var virtualReturn = inst.devType()
   virtualReturn
 
-method setVisible*(self: VirtualQToolBox, visible: bool): void {.base.} =
-  QToolBoxsetVisible(self[], visible)
-proc cQToolBox_method_callback_setVisible(self: pointer, visible: bool): void {.cdecl.} =
+proc fcQToolBox_method_callback_setVisible(self: pointer, visible: bool): void {.cdecl.} =
   let inst = cast[VirtualQToolBox](fcQToolBox_vdata(self))
   let slotval1 = visible
   inst.setVisible(slotval1)
 
-method minimumSizeHint*(self: VirtualQToolBox): gen_qsize_types.QSize {.base.} =
-  QToolBoxminimumSizeHint(self[])
-proc cQToolBox_method_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
+proc fcQToolBox_method_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQToolBox](fcQToolBox_vdata(self))
   var virtualReturn = inst.minimumSizeHint()
   virtualReturn.owned = false # TODO move?
@@ -1080,24 +1164,18 @@ proc cQToolBox_method_callback_minimumSizeHint(self: pointer): pointer {.cdecl.}
   virtualReturn.h = nil
   virtualReturn_h
 
-method heightForWidth*(self: VirtualQToolBox, param1: cint): cint {.base.} =
-  QToolBoxheightForWidth(self[], param1)
-proc cQToolBox_method_callback_heightForWidth(self: pointer, param1: cint): cint {.cdecl.} =
+proc fcQToolBox_method_callback_heightForWidth(self: pointer, param1: cint): cint {.cdecl.} =
   let inst = cast[VirtualQToolBox](fcQToolBox_vdata(self))
   let slotval1 = param1
   var virtualReturn = inst.heightForWidth(slotval1)
   virtualReturn
 
-method hasHeightForWidth*(self: VirtualQToolBox): bool {.base.} =
-  QToolBoxhasHeightForWidth(self[])
-proc cQToolBox_method_callback_hasHeightForWidth(self: pointer): bool {.cdecl.} =
+proc fcQToolBox_method_callback_hasHeightForWidth(self: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQToolBox](fcQToolBox_vdata(self))
   var virtualReturn = inst.hasHeightForWidth()
   virtualReturn
 
-method paintEngine*(self: VirtualQToolBox): gen_qpaintengine_types.QPaintEngine {.base.} =
-  QToolBoxpaintEngine(self[])
-proc cQToolBox_method_callback_paintEngine(self: pointer): pointer {.cdecl.} =
+proc fcQToolBox_method_callback_paintEngine(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQToolBox](fcQToolBox_vdata(self))
   var virtualReturn = inst.paintEngine()
   virtualReturn.owned = false # TODO move?
@@ -1105,163 +1183,117 @@ proc cQToolBox_method_callback_paintEngine(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-method mousePressEvent*(self: VirtualQToolBox, event: gen_qevent_types.QMouseEvent): void {.base.} =
-  QToolBoxmousePressEvent(self[], event)
-proc cQToolBox_method_callback_mousePressEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQToolBox_method_callback_mousePressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQToolBox](fcQToolBox_vdata(self))
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mousePressEvent(slotval1)
 
-method mouseReleaseEvent*(self: VirtualQToolBox, event: gen_qevent_types.QMouseEvent): void {.base.} =
-  QToolBoxmouseReleaseEvent(self[], event)
-proc cQToolBox_method_callback_mouseReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQToolBox_method_callback_mouseReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQToolBox](fcQToolBox_vdata(self))
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mouseReleaseEvent(slotval1)
 
-method mouseDoubleClickEvent*(self: VirtualQToolBox, event: gen_qevent_types.QMouseEvent): void {.base.} =
-  QToolBoxmouseDoubleClickEvent(self[], event)
-proc cQToolBox_method_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQToolBox_method_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQToolBox](fcQToolBox_vdata(self))
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mouseDoubleClickEvent(slotval1)
 
-method mouseMoveEvent*(self: VirtualQToolBox, event: gen_qevent_types.QMouseEvent): void {.base.} =
-  QToolBoxmouseMoveEvent(self[], event)
-proc cQToolBox_method_callback_mouseMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQToolBox_method_callback_mouseMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQToolBox](fcQToolBox_vdata(self))
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mouseMoveEvent(slotval1)
 
-method wheelEvent*(self: VirtualQToolBox, event: gen_qevent_types.QWheelEvent): void {.base.} =
-  QToolBoxwheelEvent(self[], event)
-proc cQToolBox_method_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQToolBox_method_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQToolBox](fcQToolBox_vdata(self))
   let slotval1 = gen_qevent_types.QWheelEvent(h: event, owned: false)
   inst.wheelEvent(slotval1)
 
-method keyPressEvent*(self: VirtualQToolBox, event: gen_qevent_types.QKeyEvent): void {.base.} =
-  QToolBoxkeyPressEvent(self[], event)
-proc cQToolBox_method_callback_keyPressEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQToolBox_method_callback_keyPressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQToolBox](fcQToolBox_vdata(self))
   let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   inst.keyPressEvent(slotval1)
 
-method keyReleaseEvent*(self: VirtualQToolBox, event: gen_qevent_types.QKeyEvent): void {.base.} =
-  QToolBoxkeyReleaseEvent(self[], event)
-proc cQToolBox_method_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQToolBox_method_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQToolBox](fcQToolBox_vdata(self))
   let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   inst.keyReleaseEvent(slotval1)
 
-method focusInEvent*(self: VirtualQToolBox, event: gen_qevent_types.QFocusEvent): void {.base.} =
-  QToolBoxfocusInEvent(self[], event)
-proc cQToolBox_method_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQToolBox_method_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQToolBox](fcQToolBox_vdata(self))
   let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   inst.focusInEvent(slotval1)
 
-method focusOutEvent*(self: VirtualQToolBox, event: gen_qevent_types.QFocusEvent): void {.base.} =
-  QToolBoxfocusOutEvent(self[], event)
-proc cQToolBox_method_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQToolBox_method_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQToolBox](fcQToolBox_vdata(self))
   let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   inst.focusOutEvent(slotval1)
 
-method enterEvent*(self: VirtualQToolBox, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QToolBoxenterEvent(self[], event)
-proc cQToolBox_method_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQToolBox_method_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQToolBox](fcQToolBox_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.enterEvent(slotval1)
 
-method leaveEvent*(self: VirtualQToolBox, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QToolBoxleaveEvent(self[], event)
-proc cQToolBox_method_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQToolBox_method_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQToolBox](fcQToolBox_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.leaveEvent(slotval1)
 
-method moveEvent*(self: VirtualQToolBox, event: gen_qevent_types.QMoveEvent): void {.base.} =
-  QToolBoxmoveEvent(self[], event)
-proc cQToolBox_method_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQToolBox_method_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQToolBox](fcQToolBox_vdata(self))
   let slotval1 = gen_qevent_types.QMoveEvent(h: event, owned: false)
   inst.moveEvent(slotval1)
 
-method resizeEvent*(self: VirtualQToolBox, event: gen_qevent_types.QResizeEvent): void {.base.} =
-  QToolBoxresizeEvent(self[], event)
-proc cQToolBox_method_callback_resizeEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQToolBox_method_callback_resizeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQToolBox](fcQToolBox_vdata(self))
   let slotval1 = gen_qevent_types.QResizeEvent(h: event, owned: false)
   inst.resizeEvent(slotval1)
 
-method closeEvent*(self: VirtualQToolBox, event: gen_qevent_types.QCloseEvent): void {.base.} =
-  QToolBoxcloseEvent(self[], event)
-proc cQToolBox_method_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQToolBox_method_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQToolBox](fcQToolBox_vdata(self))
   let slotval1 = gen_qevent_types.QCloseEvent(h: event, owned: false)
   inst.closeEvent(slotval1)
 
-method contextMenuEvent*(self: VirtualQToolBox, event: gen_qevent_types.QContextMenuEvent): void {.base.} =
-  QToolBoxcontextMenuEvent(self[], event)
-proc cQToolBox_method_callback_contextMenuEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQToolBox_method_callback_contextMenuEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQToolBox](fcQToolBox_vdata(self))
   let slotval1 = gen_qevent_types.QContextMenuEvent(h: event, owned: false)
   inst.contextMenuEvent(slotval1)
 
-method tabletEvent*(self: VirtualQToolBox, event: gen_qevent_types.QTabletEvent): void {.base.} =
-  QToolBoxtabletEvent(self[], event)
-proc cQToolBox_method_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQToolBox_method_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQToolBox](fcQToolBox_vdata(self))
   let slotval1 = gen_qevent_types.QTabletEvent(h: event, owned: false)
   inst.tabletEvent(slotval1)
 
-method actionEvent*(self: VirtualQToolBox, event: gen_qevent_types.QActionEvent): void {.base.} =
-  QToolBoxactionEvent(self[], event)
-proc cQToolBox_method_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQToolBox_method_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQToolBox](fcQToolBox_vdata(self))
   let slotval1 = gen_qevent_types.QActionEvent(h: event, owned: false)
   inst.actionEvent(slotval1)
 
-method dragEnterEvent*(self: VirtualQToolBox, event: gen_qevent_types.QDragEnterEvent): void {.base.} =
-  QToolBoxdragEnterEvent(self[], event)
-proc cQToolBox_method_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQToolBox_method_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQToolBox](fcQToolBox_vdata(self))
   let slotval1 = gen_qevent_types.QDragEnterEvent(h: event, owned: false)
   inst.dragEnterEvent(slotval1)
 
-method dragMoveEvent*(self: VirtualQToolBox, event: gen_qevent_types.QDragMoveEvent): void {.base.} =
-  QToolBoxdragMoveEvent(self[], event)
-proc cQToolBox_method_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQToolBox_method_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQToolBox](fcQToolBox_vdata(self))
   let slotval1 = gen_qevent_types.QDragMoveEvent(h: event, owned: false)
   inst.dragMoveEvent(slotval1)
 
-method dragLeaveEvent*(self: VirtualQToolBox, event: gen_qevent_types.QDragLeaveEvent): void {.base.} =
-  QToolBoxdragLeaveEvent(self[], event)
-proc cQToolBox_method_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQToolBox_method_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQToolBox](fcQToolBox_vdata(self))
   let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event, owned: false)
   inst.dragLeaveEvent(slotval1)
 
-method dropEvent*(self: VirtualQToolBox, event: gen_qevent_types.QDropEvent): void {.base.} =
-  QToolBoxdropEvent(self[], event)
-proc cQToolBox_method_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQToolBox_method_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQToolBox](fcQToolBox_vdata(self))
   let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
   inst.dropEvent(slotval1)
 
-method hideEvent*(self: VirtualQToolBox, event: gen_qevent_types.QHideEvent): void {.base.} =
-  QToolBoxhideEvent(self[], event)
-proc cQToolBox_method_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQToolBox_method_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQToolBox](fcQToolBox_vdata(self))
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   inst.hideEvent(slotval1)
 
-method nativeEvent*(self: VirtualQToolBox, eventType: openArray[byte], message: pointer, resultVal: ptr clong): bool {.base.} =
-  QToolBoxnativeEvent(self[], eventType, message, resultVal)
-proc cQToolBox_method_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr clong): bool {.cdecl.} =
+proc fcQToolBox_method_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr clong): bool {.cdecl.} =
   let inst = cast[VirtualQToolBox](fcQToolBox_vdata(self))
   var veventType_bytearray = eventType
   var veventTypex_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](veventType_bytearray.data), 0, int(veventType_bytearray.len)-1))
@@ -1272,24 +1304,18 @@ proc cQToolBox_method_callback_nativeEvent(self: pointer, eventType: struct_miqt
   var virtualReturn = inst.nativeEvent(slotval1, slotval2, slotval3)
   virtualReturn
 
-method metric*(self: VirtualQToolBox, param1: cint): cint {.base.} =
-  QToolBoxmetric(self[], param1)
-proc cQToolBox_method_callback_metric(self: pointer, param1: cint): cint {.cdecl.} =
+proc fcQToolBox_method_callback_metric(self: pointer, param1: cint): cint {.cdecl.} =
   let inst = cast[VirtualQToolBox](fcQToolBox_vdata(self))
   let slotval1 = cint(param1)
   var virtualReturn = inst.metric(slotval1)
   virtualReturn
 
-method initPainter*(self: VirtualQToolBox, painter: gen_qpainter_types.QPainter): void {.base.} =
-  QToolBoxinitPainter(self[], painter)
-proc cQToolBox_method_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
+proc fcQToolBox_method_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
   let inst = cast[VirtualQToolBox](fcQToolBox_vdata(self))
   let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
   inst.initPainter(slotval1)
 
-method redirected*(self: VirtualQToolBox, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.base.} =
-  QToolBoxredirected(self[], offset)
-proc cQToolBox_method_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
+proc fcQToolBox_method_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQToolBox](fcQToolBox_vdata(self))
   let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
   var virtualReturn = inst.redirected(slotval1)
@@ -1298,9 +1324,7 @@ proc cQToolBox_method_callback_redirected(self: pointer, offset: pointer): point
   virtualReturn.h = nil
   virtualReturn_h
 
-method sharedPainter*(self: VirtualQToolBox): gen_qpainter_types.QPainter {.base.} =
-  QToolBoxsharedPainter(self[])
-proc cQToolBox_method_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
+proc fcQToolBox_method_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQToolBox](fcQToolBox_vdata(self))
   var virtualReturn = inst.sharedPainter()
   virtualReturn.owned = false # TODO move?
@@ -1308,16 +1332,12 @@ proc cQToolBox_method_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-method inputMethodEvent*(self: VirtualQToolBox, param1: gen_qevent_types.QInputMethodEvent): void {.base.} =
-  QToolBoxinputMethodEvent(self[], param1)
-proc cQToolBox_method_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQToolBox_method_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQToolBox](fcQToolBox_vdata(self))
   let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1, owned: false)
   inst.inputMethodEvent(slotval1)
 
-method inputMethodQuery*(self: VirtualQToolBox, param1: cint): gen_qvariant_types.QVariant {.base.} =
-  QToolBoxinputMethodQuery(self[], param1)
-proc cQToolBox_method_callback_inputMethodQuery(self: pointer, param1: cint): pointer {.cdecl.} =
+proc fcQToolBox_method_callback_inputMethodQuery(self: pointer, param1: cint): pointer {.cdecl.} =
   let inst = cast[VirtualQToolBox](fcQToolBox_vdata(self))
   let slotval1 = cint(param1)
   var virtualReturn = inst.inputMethodQuery(slotval1)
@@ -1326,57 +1346,44 @@ proc cQToolBox_method_callback_inputMethodQuery(self: pointer, param1: cint): po
   virtualReturn.h = nil
   virtualReturn_h
 
-method focusNextPrevChild*(self: VirtualQToolBox, next: bool): bool {.base.} =
-  QToolBoxfocusNextPrevChild(self[], next)
-proc cQToolBox_method_callback_focusNextPrevChild(self: pointer, next: bool): bool {.cdecl.} =
+proc fcQToolBox_method_callback_focusNextPrevChild(self: pointer, next: bool): bool {.cdecl.} =
   let inst = cast[VirtualQToolBox](fcQToolBox_vdata(self))
   let slotval1 = next
   var virtualReturn = inst.focusNextPrevChild(slotval1)
   virtualReturn
 
-method eventFilter*(self: VirtualQToolBox, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QToolBoxeventFilter(self[], watched, event)
-proc cQToolBox_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+proc fcQToolBox_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQToolBox](fcQToolBox_vdata(self))
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
   let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
-method timerEvent*(self: VirtualQToolBox, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
-  QToolBoxtimerEvent(self[], event)
-proc cQToolBox_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQToolBox_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQToolBox](fcQToolBox_vdata(self))
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
-method childEvent*(self: VirtualQToolBox, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
-  QToolBoxchildEvent(self[], event)
-proc cQToolBox_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQToolBox_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQToolBox](fcQToolBox_vdata(self))
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
-method customEvent*(self: VirtualQToolBox, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QToolBoxcustomEvent(self[], event)
-proc cQToolBox_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQToolBox_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQToolBox](fcQToolBox_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
-method connectNotify*(self: VirtualQToolBox, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QToolBoxconnectNotify(self[], signal)
-proc cQToolBox_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQToolBox_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQToolBox](fcQToolBox_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
-method disconnectNotify*(self: VirtualQToolBox, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QToolBoxdisconnectNotify(self[], signal)
-proc cQToolBox_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQToolBox_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQToolBox](fcQToolBox_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
+
 
 proc drawFrame*(self: gen_qtoolbox_types.QToolBox, param1: gen_qpainter_types.QPainter): void =
   fcQToolBox_protectedbase_drawFrame(self.h, param1.h)
@@ -1420,109 +1427,109 @@ proc create*(T: type gen_qtoolbox_types.QToolBox,
     let vtbl = cast[ref QToolBoxVTable](fcQToolBox_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQToolBox_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQToolBox_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQToolBox_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQToolBox_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQToolBox_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQToolBox_vtable_callback_metacall
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQToolBox_vtable_callback_event
+    vtbl[].vtbl.event = fcQToolBox_vtable_callback_event
   if not isNil(vtbl[].itemInserted):
-    vtbl[].vtbl.itemInserted = cQToolBox_vtable_callback_itemInserted
+    vtbl[].vtbl.itemInserted = fcQToolBox_vtable_callback_itemInserted
   if not isNil(vtbl[].itemRemoved):
-    vtbl[].vtbl.itemRemoved = cQToolBox_vtable_callback_itemRemoved
+    vtbl[].vtbl.itemRemoved = fcQToolBox_vtable_callback_itemRemoved
   if not isNil(vtbl[].showEvent):
-    vtbl[].vtbl.showEvent = cQToolBox_vtable_callback_showEvent
+    vtbl[].vtbl.showEvent = fcQToolBox_vtable_callback_showEvent
   if not isNil(vtbl[].changeEvent):
-    vtbl[].vtbl.changeEvent = cQToolBox_vtable_callback_changeEvent
+    vtbl[].vtbl.changeEvent = fcQToolBox_vtable_callback_changeEvent
   if not isNil(vtbl[].sizeHint):
-    vtbl[].vtbl.sizeHint = cQToolBox_vtable_callback_sizeHint
+    vtbl[].vtbl.sizeHint = fcQToolBox_vtable_callback_sizeHint
   if not isNil(vtbl[].paintEvent):
-    vtbl[].vtbl.paintEvent = cQToolBox_vtable_callback_paintEvent
+    vtbl[].vtbl.paintEvent = fcQToolBox_vtable_callback_paintEvent
   if not isNil(vtbl[].devType):
-    vtbl[].vtbl.devType = cQToolBox_vtable_callback_devType
+    vtbl[].vtbl.devType = fcQToolBox_vtable_callback_devType
   if not isNil(vtbl[].setVisible):
-    vtbl[].vtbl.setVisible = cQToolBox_vtable_callback_setVisible
+    vtbl[].vtbl.setVisible = fcQToolBox_vtable_callback_setVisible
   if not isNil(vtbl[].minimumSizeHint):
-    vtbl[].vtbl.minimumSizeHint = cQToolBox_vtable_callback_minimumSizeHint
+    vtbl[].vtbl.minimumSizeHint = fcQToolBox_vtable_callback_minimumSizeHint
   if not isNil(vtbl[].heightForWidth):
-    vtbl[].vtbl.heightForWidth = cQToolBox_vtable_callback_heightForWidth
+    vtbl[].vtbl.heightForWidth = fcQToolBox_vtable_callback_heightForWidth
   if not isNil(vtbl[].hasHeightForWidth):
-    vtbl[].vtbl.hasHeightForWidth = cQToolBox_vtable_callback_hasHeightForWidth
+    vtbl[].vtbl.hasHeightForWidth = fcQToolBox_vtable_callback_hasHeightForWidth
   if not isNil(vtbl[].paintEngine):
-    vtbl[].vtbl.paintEngine = cQToolBox_vtable_callback_paintEngine
+    vtbl[].vtbl.paintEngine = fcQToolBox_vtable_callback_paintEngine
   if not isNil(vtbl[].mousePressEvent):
-    vtbl[].vtbl.mousePressEvent = cQToolBox_vtable_callback_mousePressEvent
+    vtbl[].vtbl.mousePressEvent = fcQToolBox_vtable_callback_mousePressEvent
   if not isNil(vtbl[].mouseReleaseEvent):
-    vtbl[].vtbl.mouseReleaseEvent = cQToolBox_vtable_callback_mouseReleaseEvent
+    vtbl[].vtbl.mouseReleaseEvent = fcQToolBox_vtable_callback_mouseReleaseEvent
   if not isNil(vtbl[].mouseDoubleClickEvent):
-    vtbl[].vtbl.mouseDoubleClickEvent = cQToolBox_vtable_callback_mouseDoubleClickEvent
+    vtbl[].vtbl.mouseDoubleClickEvent = fcQToolBox_vtable_callback_mouseDoubleClickEvent
   if not isNil(vtbl[].mouseMoveEvent):
-    vtbl[].vtbl.mouseMoveEvent = cQToolBox_vtable_callback_mouseMoveEvent
+    vtbl[].vtbl.mouseMoveEvent = fcQToolBox_vtable_callback_mouseMoveEvent
   if not isNil(vtbl[].wheelEvent):
-    vtbl[].vtbl.wheelEvent = cQToolBox_vtable_callback_wheelEvent
+    vtbl[].vtbl.wheelEvent = fcQToolBox_vtable_callback_wheelEvent
   if not isNil(vtbl[].keyPressEvent):
-    vtbl[].vtbl.keyPressEvent = cQToolBox_vtable_callback_keyPressEvent
+    vtbl[].vtbl.keyPressEvent = fcQToolBox_vtable_callback_keyPressEvent
   if not isNil(vtbl[].keyReleaseEvent):
-    vtbl[].vtbl.keyReleaseEvent = cQToolBox_vtable_callback_keyReleaseEvent
+    vtbl[].vtbl.keyReleaseEvent = fcQToolBox_vtable_callback_keyReleaseEvent
   if not isNil(vtbl[].focusInEvent):
-    vtbl[].vtbl.focusInEvent = cQToolBox_vtable_callback_focusInEvent
+    vtbl[].vtbl.focusInEvent = fcQToolBox_vtable_callback_focusInEvent
   if not isNil(vtbl[].focusOutEvent):
-    vtbl[].vtbl.focusOutEvent = cQToolBox_vtable_callback_focusOutEvent
+    vtbl[].vtbl.focusOutEvent = fcQToolBox_vtable_callback_focusOutEvent
   if not isNil(vtbl[].enterEvent):
-    vtbl[].vtbl.enterEvent = cQToolBox_vtable_callback_enterEvent
+    vtbl[].vtbl.enterEvent = fcQToolBox_vtable_callback_enterEvent
   if not isNil(vtbl[].leaveEvent):
-    vtbl[].vtbl.leaveEvent = cQToolBox_vtable_callback_leaveEvent
+    vtbl[].vtbl.leaveEvent = fcQToolBox_vtable_callback_leaveEvent
   if not isNil(vtbl[].moveEvent):
-    vtbl[].vtbl.moveEvent = cQToolBox_vtable_callback_moveEvent
+    vtbl[].vtbl.moveEvent = fcQToolBox_vtable_callback_moveEvent
   if not isNil(vtbl[].resizeEvent):
-    vtbl[].vtbl.resizeEvent = cQToolBox_vtable_callback_resizeEvent
+    vtbl[].vtbl.resizeEvent = fcQToolBox_vtable_callback_resizeEvent
   if not isNil(vtbl[].closeEvent):
-    vtbl[].vtbl.closeEvent = cQToolBox_vtable_callback_closeEvent
+    vtbl[].vtbl.closeEvent = fcQToolBox_vtable_callback_closeEvent
   if not isNil(vtbl[].contextMenuEvent):
-    vtbl[].vtbl.contextMenuEvent = cQToolBox_vtable_callback_contextMenuEvent
+    vtbl[].vtbl.contextMenuEvent = fcQToolBox_vtable_callback_contextMenuEvent
   if not isNil(vtbl[].tabletEvent):
-    vtbl[].vtbl.tabletEvent = cQToolBox_vtable_callback_tabletEvent
+    vtbl[].vtbl.tabletEvent = fcQToolBox_vtable_callback_tabletEvent
   if not isNil(vtbl[].actionEvent):
-    vtbl[].vtbl.actionEvent = cQToolBox_vtable_callback_actionEvent
+    vtbl[].vtbl.actionEvent = fcQToolBox_vtable_callback_actionEvent
   if not isNil(vtbl[].dragEnterEvent):
-    vtbl[].vtbl.dragEnterEvent = cQToolBox_vtable_callback_dragEnterEvent
+    vtbl[].vtbl.dragEnterEvent = fcQToolBox_vtable_callback_dragEnterEvent
   if not isNil(vtbl[].dragMoveEvent):
-    vtbl[].vtbl.dragMoveEvent = cQToolBox_vtable_callback_dragMoveEvent
+    vtbl[].vtbl.dragMoveEvent = fcQToolBox_vtable_callback_dragMoveEvent
   if not isNil(vtbl[].dragLeaveEvent):
-    vtbl[].vtbl.dragLeaveEvent = cQToolBox_vtable_callback_dragLeaveEvent
+    vtbl[].vtbl.dragLeaveEvent = fcQToolBox_vtable_callback_dragLeaveEvent
   if not isNil(vtbl[].dropEvent):
-    vtbl[].vtbl.dropEvent = cQToolBox_vtable_callback_dropEvent
+    vtbl[].vtbl.dropEvent = fcQToolBox_vtable_callback_dropEvent
   if not isNil(vtbl[].hideEvent):
-    vtbl[].vtbl.hideEvent = cQToolBox_vtable_callback_hideEvent
+    vtbl[].vtbl.hideEvent = fcQToolBox_vtable_callback_hideEvent
   if not isNil(vtbl[].nativeEvent):
-    vtbl[].vtbl.nativeEvent = cQToolBox_vtable_callback_nativeEvent
+    vtbl[].vtbl.nativeEvent = fcQToolBox_vtable_callback_nativeEvent
   if not isNil(vtbl[].metric):
-    vtbl[].vtbl.metric = cQToolBox_vtable_callback_metric
+    vtbl[].vtbl.metric = fcQToolBox_vtable_callback_metric
   if not isNil(vtbl[].initPainter):
-    vtbl[].vtbl.initPainter = cQToolBox_vtable_callback_initPainter
+    vtbl[].vtbl.initPainter = fcQToolBox_vtable_callback_initPainter
   if not isNil(vtbl[].redirected):
-    vtbl[].vtbl.redirected = cQToolBox_vtable_callback_redirected
+    vtbl[].vtbl.redirected = fcQToolBox_vtable_callback_redirected
   if not isNil(vtbl[].sharedPainter):
-    vtbl[].vtbl.sharedPainter = cQToolBox_vtable_callback_sharedPainter
+    vtbl[].vtbl.sharedPainter = fcQToolBox_vtable_callback_sharedPainter
   if not isNil(vtbl[].inputMethodEvent):
-    vtbl[].vtbl.inputMethodEvent = cQToolBox_vtable_callback_inputMethodEvent
+    vtbl[].vtbl.inputMethodEvent = fcQToolBox_vtable_callback_inputMethodEvent
   if not isNil(vtbl[].inputMethodQuery):
-    vtbl[].vtbl.inputMethodQuery = cQToolBox_vtable_callback_inputMethodQuery
+    vtbl[].vtbl.inputMethodQuery = fcQToolBox_vtable_callback_inputMethodQuery
   if not isNil(vtbl[].focusNextPrevChild):
-    vtbl[].vtbl.focusNextPrevChild = cQToolBox_vtable_callback_focusNextPrevChild
+    vtbl[].vtbl.focusNextPrevChild = fcQToolBox_vtable_callback_focusNextPrevChild
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQToolBox_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQToolBox_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQToolBox_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQToolBox_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQToolBox_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQToolBox_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQToolBox_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQToolBox_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQToolBox_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQToolBox_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQToolBox_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQToolBox_vtable_callback_disconnectNotify
   gen_qtoolbox_types.QToolBox(h: fcQToolBox_new(addr(vtbl[].vtbl), addr(vtbl[]), parent.h), owned: true)
 
 proc create*(T: type gen_qtoolbox_types.QToolBox,
@@ -1533,109 +1540,109 @@ proc create*(T: type gen_qtoolbox_types.QToolBox,
     let vtbl = cast[ref QToolBoxVTable](fcQToolBox_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQToolBox_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQToolBox_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQToolBox_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQToolBox_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQToolBox_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQToolBox_vtable_callback_metacall
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQToolBox_vtable_callback_event
+    vtbl[].vtbl.event = fcQToolBox_vtable_callback_event
   if not isNil(vtbl[].itemInserted):
-    vtbl[].vtbl.itemInserted = cQToolBox_vtable_callback_itemInserted
+    vtbl[].vtbl.itemInserted = fcQToolBox_vtable_callback_itemInserted
   if not isNil(vtbl[].itemRemoved):
-    vtbl[].vtbl.itemRemoved = cQToolBox_vtable_callback_itemRemoved
+    vtbl[].vtbl.itemRemoved = fcQToolBox_vtable_callback_itemRemoved
   if not isNil(vtbl[].showEvent):
-    vtbl[].vtbl.showEvent = cQToolBox_vtable_callback_showEvent
+    vtbl[].vtbl.showEvent = fcQToolBox_vtable_callback_showEvent
   if not isNil(vtbl[].changeEvent):
-    vtbl[].vtbl.changeEvent = cQToolBox_vtable_callback_changeEvent
+    vtbl[].vtbl.changeEvent = fcQToolBox_vtable_callback_changeEvent
   if not isNil(vtbl[].sizeHint):
-    vtbl[].vtbl.sizeHint = cQToolBox_vtable_callback_sizeHint
+    vtbl[].vtbl.sizeHint = fcQToolBox_vtable_callback_sizeHint
   if not isNil(vtbl[].paintEvent):
-    vtbl[].vtbl.paintEvent = cQToolBox_vtable_callback_paintEvent
+    vtbl[].vtbl.paintEvent = fcQToolBox_vtable_callback_paintEvent
   if not isNil(vtbl[].devType):
-    vtbl[].vtbl.devType = cQToolBox_vtable_callback_devType
+    vtbl[].vtbl.devType = fcQToolBox_vtable_callback_devType
   if not isNil(vtbl[].setVisible):
-    vtbl[].vtbl.setVisible = cQToolBox_vtable_callback_setVisible
+    vtbl[].vtbl.setVisible = fcQToolBox_vtable_callback_setVisible
   if not isNil(vtbl[].minimumSizeHint):
-    vtbl[].vtbl.minimumSizeHint = cQToolBox_vtable_callback_minimumSizeHint
+    vtbl[].vtbl.minimumSizeHint = fcQToolBox_vtable_callback_minimumSizeHint
   if not isNil(vtbl[].heightForWidth):
-    vtbl[].vtbl.heightForWidth = cQToolBox_vtable_callback_heightForWidth
+    vtbl[].vtbl.heightForWidth = fcQToolBox_vtable_callback_heightForWidth
   if not isNil(vtbl[].hasHeightForWidth):
-    vtbl[].vtbl.hasHeightForWidth = cQToolBox_vtable_callback_hasHeightForWidth
+    vtbl[].vtbl.hasHeightForWidth = fcQToolBox_vtable_callback_hasHeightForWidth
   if not isNil(vtbl[].paintEngine):
-    vtbl[].vtbl.paintEngine = cQToolBox_vtable_callback_paintEngine
+    vtbl[].vtbl.paintEngine = fcQToolBox_vtable_callback_paintEngine
   if not isNil(vtbl[].mousePressEvent):
-    vtbl[].vtbl.mousePressEvent = cQToolBox_vtable_callback_mousePressEvent
+    vtbl[].vtbl.mousePressEvent = fcQToolBox_vtable_callback_mousePressEvent
   if not isNil(vtbl[].mouseReleaseEvent):
-    vtbl[].vtbl.mouseReleaseEvent = cQToolBox_vtable_callback_mouseReleaseEvent
+    vtbl[].vtbl.mouseReleaseEvent = fcQToolBox_vtable_callback_mouseReleaseEvent
   if not isNil(vtbl[].mouseDoubleClickEvent):
-    vtbl[].vtbl.mouseDoubleClickEvent = cQToolBox_vtable_callback_mouseDoubleClickEvent
+    vtbl[].vtbl.mouseDoubleClickEvent = fcQToolBox_vtable_callback_mouseDoubleClickEvent
   if not isNil(vtbl[].mouseMoveEvent):
-    vtbl[].vtbl.mouseMoveEvent = cQToolBox_vtable_callback_mouseMoveEvent
+    vtbl[].vtbl.mouseMoveEvent = fcQToolBox_vtable_callback_mouseMoveEvent
   if not isNil(vtbl[].wheelEvent):
-    vtbl[].vtbl.wheelEvent = cQToolBox_vtable_callback_wheelEvent
+    vtbl[].vtbl.wheelEvent = fcQToolBox_vtable_callback_wheelEvent
   if not isNil(vtbl[].keyPressEvent):
-    vtbl[].vtbl.keyPressEvent = cQToolBox_vtable_callback_keyPressEvent
+    vtbl[].vtbl.keyPressEvent = fcQToolBox_vtable_callback_keyPressEvent
   if not isNil(vtbl[].keyReleaseEvent):
-    vtbl[].vtbl.keyReleaseEvent = cQToolBox_vtable_callback_keyReleaseEvent
+    vtbl[].vtbl.keyReleaseEvent = fcQToolBox_vtable_callback_keyReleaseEvent
   if not isNil(vtbl[].focusInEvent):
-    vtbl[].vtbl.focusInEvent = cQToolBox_vtable_callback_focusInEvent
+    vtbl[].vtbl.focusInEvent = fcQToolBox_vtable_callback_focusInEvent
   if not isNil(vtbl[].focusOutEvent):
-    vtbl[].vtbl.focusOutEvent = cQToolBox_vtable_callback_focusOutEvent
+    vtbl[].vtbl.focusOutEvent = fcQToolBox_vtable_callback_focusOutEvent
   if not isNil(vtbl[].enterEvent):
-    vtbl[].vtbl.enterEvent = cQToolBox_vtable_callback_enterEvent
+    vtbl[].vtbl.enterEvent = fcQToolBox_vtable_callback_enterEvent
   if not isNil(vtbl[].leaveEvent):
-    vtbl[].vtbl.leaveEvent = cQToolBox_vtable_callback_leaveEvent
+    vtbl[].vtbl.leaveEvent = fcQToolBox_vtable_callback_leaveEvent
   if not isNil(vtbl[].moveEvent):
-    vtbl[].vtbl.moveEvent = cQToolBox_vtable_callback_moveEvent
+    vtbl[].vtbl.moveEvent = fcQToolBox_vtable_callback_moveEvent
   if not isNil(vtbl[].resizeEvent):
-    vtbl[].vtbl.resizeEvent = cQToolBox_vtable_callback_resizeEvent
+    vtbl[].vtbl.resizeEvent = fcQToolBox_vtable_callback_resizeEvent
   if not isNil(vtbl[].closeEvent):
-    vtbl[].vtbl.closeEvent = cQToolBox_vtable_callback_closeEvent
+    vtbl[].vtbl.closeEvent = fcQToolBox_vtable_callback_closeEvent
   if not isNil(vtbl[].contextMenuEvent):
-    vtbl[].vtbl.contextMenuEvent = cQToolBox_vtable_callback_contextMenuEvent
+    vtbl[].vtbl.contextMenuEvent = fcQToolBox_vtable_callback_contextMenuEvent
   if not isNil(vtbl[].tabletEvent):
-    vtbl[].vtbl.tabletEvent = cQToolBox_vtable_callback_tabletEvent
+    vtbl[].vtbl.tabletEvent = fcQToolBox_vtable_callback_tabletEvent
   if not isNil(vtbl[].actionEvent):
-    vtbl[].vtbl.actionEvent = cQToolBox_vtable_callback_actionEvent
+    vtbl[].vtbl.actionEvent = fcQToolBox_vtable_callback_actionEvent
   if not isNil(vtbl[].dragEnterEvent):
-    vtbl[].vtbl.dragEnterEvent = cQToolBox_vtable_callback_dragEnterEvent
+    vtbl[].vtbl.dragEnterEvent = fcQToolBox_vtable_callback_dragEnterEvent
   if not isNil(vtbl[].dragMoveEvent):
-    vtbl[].vtbl.dragMoveEvent = cQToolBox_vtable_callback_dragMoveEvent
+    vtbl[].vtbl.dragMoveEvent = fcQToolBox_vtable_callback_dragMoveEvent
   if not isNil(vtbl[].dragLeaveEvent):
-    vtbl[].vtbl.dragLeaveEvent = cQToolBox_vtable_callback_dragLeaveEvent
+    vtbl[].vtbl.dragLeaveEvent = fcQToolBox_vtable_callback_dragLeaveEvent
   if not isNil(vtbl[].dropEvent):
-    vtbl[].vtbl.dropEvent = cQToolBox_vtable_callback_dropEvent
+    vtbl[].vtbl.dropEvent = fcQToolBox_vtable_callback_dropEvent
   if not isNil(vtbl[].hideEvent):
-    vtbl[].vtbl.hideEvent = cQToolBox_vtable_callback_hideEvent
+    vtbl[].vtbl.hideEvent = fcQToolBox_vtable_callback_hideEvent
   if not isNil(vtbl[].nativeEvent):
-    vtbl[].vtbl.nativeEvent = cQToolBox_vtable_callback_nativeEvent
+    vtbl[].vtbl.nativeEvent = fcQToolBox_vtable_callback_nativeEvent
   if not isNil(vtbl[].metric):
-    vtbl[].vtbl.metric = cQToolBox_vtable_callback_metric
+    vtbl[].vtbl.metric = fcQToolBox_vtable_callback_metric
   if not isNil(vtbl[].initPainter):
-    vtbl[].vtbl.initPainter = cQToolBox_vtable_callback_initPainter
+    vtbl[].vtbl.initPainter = fcQToolBox_vtable_callback_initPainter
   if not isNil(vtbl[].redirected):
-    vtbl[].vtbl.redirected = cQToolBox_vtable_callback_redirected
+    vtbl[].vtbl.redirected = fcQToolBox_vtable_callback_redirected
   if not isNil(vtbl[].sharedPainter):
-    vtbl[].vtbl.sharedPainter = cQToolBox_vtable_callback_sharedPainter
+    vtbl[].vtbl.sharedPainter = fcQToolBox_vtable_callback_sharedPainter
   if not isNil(vtbl[].inputMethodEvent):
-    vtbl[].vtbl.inputMethodEvent = cQToolBox_vtable_callback_inputMethodEvent
+    vtbl[].vtbl.inputMethodEvent = fcQToolBox_vtable_callback_inputMethodEvent
   if not isNil(vtbl[].inputMethodQuery):
-    vtbl[].vtbl.inputMethodQuery = cQToolBox_vtable_callback_inputMethodQuery
+    vtbl[].vtbl.inputMethodQuery = fcQToolBox_vtable_callback_inputMethodQuery
   if not isNil(vtbl[].focusNextPrevChild):
-    vtbl[].vtbl.focusNextPrevChild = cQToolBox_vtable_callback_focusNextPrevChild
+    vtbl[].vtbl.focusNextPrevChild = fcQToolBox_vtable_callback_focusNextPrevChild
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQToolBox_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQToolBox_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQToolBox_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQToolBox_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQToolBox_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQToolBox_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQToolBox_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQToolBox_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQToolBox_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQToolBox_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQToolBox_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQToolBox_vtable_callback_disconnectNotify
   gen_qtoolbox_types.QToolBox(h: fcQToolBox_new2(addr(vtbl[].vtbl), addr(vtbl[])), owned: true)
 
 proc create*(T: type gen_qtoolbox_types.QToolBox,
@@ -1647,109 +1654,109 @@ proc create*(T: type gen_qtoolbox_types.QToolBox,
     let vtbl = cast[ref QToolBoxVTable](fcQToolBox_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQToolBox_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQToolBox_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQToolBox_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQToolBox_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQToolBox_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQToolBox_vtable_callback_metacall
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQToolBox_vtable_callback_event
+    vtbl[].vtbl.event = fcQToolBox_vtable_callback_event
   if not isNil(vtbl[].itemInserted):
-    vtbl[].vtbl.itemInserted = cQToolBox_vtable_callback_itemInserted
+    vtbl[].vtbl.itemInserted = fcQToolBox_vtable_callback_itemInserted
   if not isNil(vtbl[].itemRemoved):
-    vtbl[].vtbl.itemRemoved = cQToolBox_vtable_callback_itemRemoved
+    vtbl[].vtbl.itemRemoved = fcQToolBox_vtable_callback_itemRemoved
   if not isNil(vtbl[].showEvent):
-    vtbl[].vtbl.showEvent = cQToolBox_vtable_callback_showEvent
+    vtbl[].vtbl.showEvent = fcQToolBox_vtable_callback_showEvent
   if not isNil(vtbl[].changeEvent):
-    vtbl[].vtbl.changeEvent = cQToolBox_vtable_callback_changeEvent
+    vtbl[].vtbl.changeEvent = fcQToolBox_vtable_callback_changeEvent
   if not isNil(vtbl[].sizeHint):
-    vtbl[].vtbl.sizeHint = cQToolBox_vtable_callback_sizeHint
+    vtbl[].vtbl.sizeHint = fcQToolBox_vtable_callback_sizeHint
   if not isNil(vtbl[].paintEvent):
-    vtbl[].vtbl.paintEvent = cQToolBox_vtable_callback_paintEvent
+    vtbl[].vtbl.paintEvent = fcQToolBox_vtable_callback_paintEvent
   if not isNil(vtbl[].devType):
-    vtbl[].vtbl.devType = cQToolBox_vtable_callback_devType
+    vtbl[].vtbl.devType = fcQToolBox_vtable_callback_devType
   if not isNil(vtbl[].setVisible):
-    vtbl[].vtbl.setVisible = cQToolBox_vtable_callback_setVisible
+    vtbl[].vtbl.setVisible = fcQToolBox_vtable_callback_setVisible
   if not isNil(vtbl[].minimumSizeHint):
-    vtbl[].vtbl.minimumSizeHint = cQToolBox_vtable_callback_minimumSizeHint
+    vtbl[].vtbl.minimumSizeHint = fcQToolBox_vtable_callback_minimumSizeHint
   if not isNil(vtbl[].heightForWidth):
-    vtbl[].vtbl.heightForWidth = cQToolBox_vtable_callback_heightForWidth
+    vtbl[].vtbl.heightForWidth = fcQToolBox_vtable_callback_heightForWidth
   if not isNil(vtbl[].hasHeightForWidth):
-    vtbl[].vtbl.hasHeightForWidth = cQToolBox_vtable_callback_hasHeightForWidth
+    vtbl[].vtbl.hasHeightForWidth = fcQToolBox_vtable_callback_hasHeightForWidth
   if not isNil(vtbl[].paintEngine):
-    vtbl[].vtbl.paintEngine = cQToolBox_vtable_callback_paintEngine
+    vtbl[].vtbl.paintEngine = fcQToolBox_vtable_callback_paintEngine
   if not isNil(vtbl[].mousePressEvent):
-    vtbl[].vtbl.mousePressEvent = cQToolBox_vtable_callback_mousePressEvent
+    vtbl[].vtbl.mousePressEvent = fcQToolBox_vtable_callback_mousePressEvent
   if not isNil(vtbl[].mouseReleaseEvent):
-    vtbl[].vtbl.mouseReleaseEvent = cQToolBox_vtable_callback_mouseReleaseEvent
+    vtbl[].vtbl.mouseReleaseEvent = fcQToolBox_vtable_callback_mouseReleaseEvent
   if not isNil(vtbl[].mouseDoubleClickEvent):
-    vtbl[].vtbl.mouseDoubleClickEvent = cQToolBox_vtable_callback_mouseDoubleClickEvent
+    vtbl[].vtbl.mouseDoubleClickEvent = fcQToolBox_vtable_callback_mouseDoubleClickEvent
   if not isNil(vtbl[].mouseMoveEvent):
-    vtbl[].vtbl.mouseMoveEvent = cQToolBox_vtable_callback_mouseMoveEvent
+    vtbl[].vtbl.mouseMoveEvent = fcQToolBox_vtable_callback_mouseMoveEvent
   if not isNil(vtbl[].wheelEvent):
-    vtbl[].vtbl.wheelEvent = cQToolBox_vtable_callback_wheelEvent
+    vtbl[].vtbl.wheelEvent = fcQToolBox_vtable_callback_wheelEvent
   if not isNil(vtbl[].keyPressEvent):
-    vtbl[].vtbl.keyPressEvent = cQToolBox_vtable_callback_keyPressEvent
+    vtbl[].vtbl.keyPressEvent = fcQToolBox_vtable_callback_keyPressEvent
   if not isNil(vtbl[].keyReleaseEvent):
-    vtbl[].vtbl.keyReleaseEvent = cQToolBox_vtable_callback_keyReleaseEvent
+    vtbl[].vtbl.keyReleaseEvent = fcQToolBox_vtable_callback_keyReleaseEvent
   if not isNil(vtbl[].focusInEvent):
-    vtbl[].vtbl.focusInEvent = cQToolBox_vtable_callback_focusInEvent
+    vtbl[].vtbl.focusInEvent = fcQToolBox_vtable_callback_focusInEvent
   if not isNil(vtbl[].focusOutEvent):
-    vtbl[].vtbl.focusOutEvent = cQToolBox_vtable_callback_focusOutEvent
+    vtbl[].vtbl.focusOutEvent = fcQToolBox_vtable_callback_focusOutEvent
   if not isNil(vtbl[].enterEvent):
-    vtbl[].vtbl.enterEvent = cQToolBox_vtable_callback_enterEvent
+    vtbl[].vtbl.enterEvent = fcQToolBox_vtable_callback_enterEvent
   if not isNil(vtbl[].leaveEvent):
-    vtbl[].vtbl.leaveEvent = cQToolBox_vtable_callback_leaveEvent
+    vtbl[].vtbl.leaveEvent = fcQToolBox_vtable_callback_leaveEvent
   if not isNil(vtbl[].moveEvent):
-    vtbl[].vtbl.moveEvent = cQToolBox_vtable_callback_moveEvent
+    vtbl[].vtbl.moveEvent = fcQToolBox_vtable_callback_moveEvent
   if not isNil(vtbl[].resizeEvent):
-    vtbl[].vtbl.resizeEvent = cQToolBox_vtable_callback_resizeEvent
+    vtbl[].vtbl.resizeEvent = fcQToolBox_vtable_callback_resizeEvent
   if not isNil(vtbl[].closeEvent):
-    vtbl[].vtbl.closeEvent = cQToolBox_vtable_callback_closeEvent
+    vtbl[].vtbl.closeEvent = fcQToolBox_vtable_callback_closeEvent
   if not isNil(vtbl[].contextMenuEvent):
-    vtbl[].vtbl.contextMenuEvent = cQToolBox_vtable_callback_contextMenuEvent
+    vtbl[].vtbl.contextMenuEvent = fcQToolBox_vtable_callback_contextMenuEvent
   if not isNil(vtbl[].tabletEvent):
-    vtbl[].vtbl.tabletEvent = cQToolBox_vtable_callback_tabletEvent
+    vtbl[].vtbl.tabletEvent = fcQToolBox_vtable_callback_tabletEvent
   if not isNil(vtbl[].actionEvent):
-    vtbl[].vtbl.actionEvent = cQToolBox_vtable_callback_actionEvent
+    vtbl[].vtbl.actionEvent = fcQToolBox_vtable_callback_actionEvent
   if not isNil(vtbl[].dragEnterEvent):
-    vtbl[].vtbl.dragEnterEvent = cQToolBox_vtable_callback_dragEnterEvent
+    vtbl[].vtbl.dragEnterEvent = fcQToolBox_vtable_callback_dragEnterEvent
   if not isNil(vtbl[].dragMoveEvent):
-    vtbl[].vtbl.dragMoveEvent = cQToolBox_vtable_callback_dragMoveEvent
+    vtbl[].vtbl.dragMoveEvent = fcQToolBox_vtable_callback_dragMoveEvent
   if not isNil(vtbl[].dragLeaveEvent):
-    vtbl[].vtbl.dragLeaveEvent = cQToolBox_vtable_callback_dragLeaveEvent
+    vtbl[].vtbl.dragLeaveEvent = fcQToolBox_vtable_callback_dragLeaveEvent
   if not isNil(vtbl[].dropEvent):
-    vtbl[].vtbl.dropEvent = cQToolBox_vtable_callback_dropEvent
+    vtbl[].vtbl.dropEvent = fcQToolBox_vtable_callback_dropEvent
   if not isNil(vtbl[].hideEvent):
-    vtbl[].vtbl.hideEvent = cQToolBox_vtable_callback_hideEvent
+    vtbl[].vtbl.hideEvent = fcQToolBox_vtable_callback_hideEvent
   if not isNil(vtbl[].nativeEvent):
-    vtbl[].vtbl.nativeEvent = cQToolBox_vtable_callback_nativeEvent
+    vtbl[].vtbl.nativeEvent = fcQToolBox_vtable_callback_nativeEvent
   if not isNil(vtbl[].metric):
-    vtbl[].vtbl.metric = cQToolBox_vtable_callback_metric
+    vtbl[].vtbl.metric = fcQToolBox_vtable_callback_metric
   if not isNil(vtbl[].initPainter):
-    vtbl[].vtbl.initPainter = cQToolBox_vtable_callback_initPainter
+    vtbl[].vtbl.initPainter = fcQToolBox_vtable_callback_initPainter
   if not isNil(vtbl[].redirected):
-    vtbl[].vtbl.redirected = cQToolBox_vtable_callback_redirected
+    vtbl[].vtbl.redirected = fcQToolBox_vtable_callback_redirected
   if not isNil(vtbl[].sharedPainter):
-    vtbl[].vtbl.sharedPainter = cQToolBox_vtable_callback_sharedPainter
+    vtbl[].vtbl.sharedPainter = fcQToolBox_vtable_callback_sharedPainter
   if not isNil(vtbl[].inputMethodEvent):
-    vtbl[].vtbl.inputMethodEvent = cQToolBox_vtable_callback_inputMethodEvent
+    vtbl[].vtbl.inputMethodEvent = fcQToolBox_vtable_callback_inputMethodEvent
   if not isNil(vtbl[].inputMethodQuery):
-    vtbl[].vtbl.inputMethodQuery = cQToolBox_vtable_callback_inputMethodQuery
+    vtbl[].vtbl.inputMethodQuery = fcQToolBox_vtable_callback_inputMethodQuery
   if not isNil(vtbl[].focusNextPrevChild):
-    vtbl[].vtbl.focusNextPrevChild = cQToolBox_vtable_callback_focusNextPrevChild
+    vtbl[].vtbl.focusNextPrevChild = fcQToolBox_vtable_callback_focusNextPrevChild
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQToolBox_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQToolBox_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQToolBox_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQToolBox_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQToolBox_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQToolBox_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQToolBox_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQToolBox_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQToolBox_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQToolBox_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQToolBox_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQToolBox_vtable_callback_disconnectNotify
   gen_qtoolbox_types.QToolBox(h: fcQToolBox_new3(addr(vtbl[].vtbl), addr(vtbl[]), parent.h, cint(f)), owned: true)
 
 const cQToolBox_mvtbl = cQToolBoxVTable(
@@ -1757,58 +1764,59 @@ const cQToolBox_mvtbl = cQToolBoxVTable(
     let inst = cast[ptr typeof(VirtualQToolBox()[])](self.fcQToolBox_vtbl())
     inst[].h = nil
     inst[].owned = false,
-  metaObject: cQToolBox_method_callback_metaObject,
-  metacast: cQToolBox_method_callback_metacast,
-  metacall: cQToolBox_method_callback_metacall,
-  event: cQToolBox_method_callback_event,
-  itemInserted: cQToolBox_method_callback_itemInserted,
-  itemRemoved: cQToolBox_method_callback_itemRemoved,
-  showEvent: cQToolBox_method_callback_showEvent,
-  changeEvent: cQToolBox_method_callback_changeEvent,
-  sizeHint: cQToolBox_method_callback_sizeHint,
-  paintEvent: cQToolBox_method_callback_paintEvent,
-  devType: cQToolBox_method_callback_devType,
-  setVisible: cQToolBox_method_callback_setVisible,
-  minimumSizeHint: cQToolBox_method_callback_minimumSizeHint,
-  heightForWidth: cQToolBox_method_callback_heightForWidth,
-  hasHeightForWidth: cQToolBox_method_callback_hasHeightForWidth,
-  paintEngine: cQToolBox_method_callback_paintEngine,
-  mousePressEvent: cQToolBox_method_callback_mousePressEvent,
-  mouseReleaseEvent: cQToolBox_method_callback_mouseReleaseEvent,
-  mouseDoubleClickEvent: cQToolBox_method_callback_mouseDoubleClickEvent,
-  mouseMoveEvent: cQToolBox_method_callback_mouseMoveEvent,
-  wheelEvent: cQToolBox_method_callback_wheelEvent,
-  keyPressEvent: cQToolBox_method_callback_keyPressEvent,
-  keyReleaseEvent: cQToolBox_method_callback_keyReleaseEvent,
-  focusInEvent: cQToolBox_method_callback_focusInEvent,
-  focusOutEvent: cQToolBox_method_callback_focusOutEvent,
-  enterEvent: cQToolBox_method_callback_enterEvent,
-  leaveEvent: cQToolBox_method_callback_leaveEvent,
-  moveEvent: cQToolBox_method_callback_moveEvent,
-  resizeEvent: cQToolBox_method_callback_resizeEvent,
-  closeEvent: cQToolBox_method_callback_closeEvent,
-  contextMenuEvent: cQToolBox_method_callback_contextMenuEvent,
-  tabletEvent: cQToolBox_method_callback_tabletEvent,
-  actionEvent: cQToolBox_method_callback_actionEvent,
-  dragEnterEvent: cQToolBox_method_callback_dragEnterEvent,
-  dragMoveEvent: cQToolBox_method_callback_dragMoveEvent,
-  dragLeaveEvent: cQToolBox_method_callback_dragLeaveEvent,
-  dropEvent: cQToolBox_method_callback_dropEvent,
-  hideEvent: cQToolBox_method_callback_hideEvent,
-  nativeEvent: cQToolBox_method_callback_nativeEvent,
-  metric: cQToolBox_method_callback_metric,
-  initPainter: cQToolBox_method_callback_initPainter,
-  redirected: cQToolBox_method_callback_redirected,
-  sharedPainter: cQToolBox_method_callback_sharedPainter,
-  inputMethodEvent: cQToolBox_method_callback_inputMethodEvent,
-  inputMethodQuery: cQToolBox_method_callback_inputMethodQuery,
-  focusNextPrevChild: cQToolBox_method_callback_focusNextPrevChild,
-  eventFilter: cQToolBox_method_callback_eventFilter,
-  timerEvent: cQToolBox_method_callback_timerEvent,
-  childEvent: cQToolBox_method_callback_childEvent,
-  customEvent: cQToolBox_method_callback_customEvent,
-  connectNotify: cQToolBox_method_callback_connectNotify,
-  disconnectNotify: cQToolBox_method_callback_disconnectNotify,
+
+  metaObject: fcQToolBox_method_callback_metaObject,
+  metacast: fcQToolBox_method_callback_metacast,
+  metacall: fcQToolBox_method_callback_metacall,
+  event: fcQToolBox_method_callback_event,
+  itemInserted: fcQToolBox_method_callback_itemInserted,
+  itemRemoved: fcQToolBox_method_callback_itemRemoved,
+  showEvent: fcQToolBox_method_callback_showEvent,
+  changeEvent: fcQToolBox_method_callback_changeEvent,
+  sizeHint: fcQToolBox_method_callback_sizeHint,
+  paintEvent: fcQToolBox_method_callback_paintEvent,
+  devType: fcQToolBox_method_callback_devType,
+  setVisible: fcQToolBox_method_callback_setVisible,
+  minimumSizeHint: fcQToolBox_method_callback_minimumSizeHint,
+  heightForWidth: fcQToolBox_method_callback_heightForWidth,
+  hasHeightForWidth: fcQToolBox_method_callback_hasHeightForWidth,
+  paintEngine: fcQToolBox_method_callback_paintEngine,
+  mousePressEvent: fcQToolBox_method_callback_mousePressEvent,
+  mouseReleaseEvent: fcQToolBox_method_callback_mouseReleaseEvent,
+  mouseDoubleClickEvent: fcQToolBox_method_callback_mouseDoubleClickEvent,
+  mouseMoveEvent: fcQToolBox_method_callback_mouseMoveEvent,
+  wheelEvent: fcQToolBox_method_callback_wheelEvent,
+  keyPressEvent: fcQToolBox_method_callback_keyPressEvent,
+  keyReleaseEvent: fcQToolBox_method_callback_keyReleaseEvent,
+  focusInEvent: fcQToolBox_method_callback_focusInEvent,
+  focusOutEvent: fcQToolBox_method_callback_focusOutEvent,
+  enterEvent: fcQToolBox_method_callback_enterEvent,
+  leaveEvent: fcQToolBox_method_callback_leaveEvent,
+  moveEvent: fcQToolBox_method_callback_moveEvent,
+  resizeEvent: fcQToolBox_method_callback_resizeEvent,
+  closeEvent: fcQToolBox_method_callback_closeEvent,
+  contextMenuEvent: fcQToolBox_method_callback_contextMenuEvent,
+  tabletEvent: fcQToolBox_method_callback_tabletEvent,
+  actionEvent: fcQToolBox_method_callback_actionEvent,
+  dragEnterEvent: fcQToolBox_method_callback_dragEnterEvent,
+  dragMoveEvent: fcQToolBox_method_callback_dragMoveEvent,
+  dragLeaveEvent: fcQToolBox_method_callback_dragLeaveEvent,
+  dropEvent: fcQToolBox_method_callback_dropEvent,
+  hideEvent: fcQToolBox_method_callback_hideEvent,
+  nativeEvent: fcQToolBox_method_callback_nativeEvent,
+  metric: fcQToolBox_method_callback_metric,
+  initPainter: fcQToolBox_method_callback_initPainter,
+  redirected: fcQToolBox_method_callback_redirected,
+  sharedPainter: fcQToolBox_method_callback_sharedPainter,
+  inputMethodEvent: fcQToolBox_method_callback_inputMethodEvent,
+  inputMethodQuery: fcQToolBox_method_callback_inputMethodQuery,
+  focusNextPrevChild: fcQToolBox_method_callback_focusNextPrevChild,
+  eventFilter: fcQToolBox_method_callback_eventFilter,
+  timerEvent: fcQToolBox_method_callback_timerEvent,
+  childEvent: fcQToolBox_method_callback_childEvent,
+  customEvent: fcQToolBox_method_callback_customEvent,
+  connectNotify: fcQToolBox_method_callback_connectNotify,
+  disconnectNotify: fcQToolBox_method_callback_disconnectNotify,
 )
 proc create*(T: type gen_qtoolbox_types.QToolBox,
     parent: gen_qwidget_types.QWidget,

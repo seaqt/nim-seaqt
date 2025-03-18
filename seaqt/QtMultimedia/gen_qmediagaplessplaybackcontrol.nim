@@ -120,59 +120,59 @@ proc crossfadeTimeChanged*(self: gen_qmediagaplessplaybackcontrol_types.QMediaGa
   fcQMediaGaplessPlaybackControl_crossfadeTimeChanged(self.h, crossfadeTime)
 
 type QMediaGaplessPlaybackControlcrossfadeTimeChangedSlot* = proc(crossfadeTime: float64)
-proc cQMediaGaplessPlaybackControl_slot_callback_crossfadeTimeChanged(slot: int, crossfadeTime: float64) {.cdecl.} =
+proc fcQMediaGaplessPlaybackControl_slot_callback_crossfadeTimeChanged(slot: int, crossfadeTime: float64) {.cdecl.} =
   let nimfunc = cast[ptr QMediaGaplessPlaybackControlcrossfadeTimeChangedSlot](cast[pointer](slot))
   let slotval1 = crossfadeTime
 
   nimfunc[](slotval1)
 
-proc cQMediaGaplessPlaybackControl_slot_callback_crossfadeTimeChanged_release(slot: int) {.cdecl.} =
+proc fcQMediaGaplessPlaybackControl_slot_callback_crossfadeTimeChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QMediaGaplessPlaybackControlcrossfadeTimeChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc oncrossfadeTimeChanged*(self: gen_qmediagaplessplaybackcontrol_types.QMediaGaplessPlaybackControl, slot: QMediaGaplessPlaybackControlcrossfadeTimeChangedSlot) =
+proc onCrossfadeTimeChanged*(self: gen_qmediagaplessplaybackcontrol_types.QMediaGaplessPlaybackControl, slot: QMediaGaplessPlaybackControlcrossfadeTimeChangedSlot) =
   var tmp = new QMediaGaplessPlaybackControlcrossfadeTimeChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQMediaGaplessPlaybackControl_connect_crossfadeTimeChanged(self.h, cast[int](addr tmp[]), cQMediaGaplessPlaybackControl_slot_callback_crossfadeTimeChanged, cQMediaGaplessPlaybackControl_slot_callback_crossfadeTimeChanged_release)
+  fcQMediaGaplessPlaybackControl_connect_crossfadeTimeChanged(self.h, cast[int](addr tmp[]), fcQMediaGaplessPlaybackControl_slot_callback_crossfadeTimeChanged, fcQMediaGaplessPlaybackControl_slot_callback_crossfadeTimeChanged_release)
 
 proc nextMediaChanged*(self: gen_qmediagaplessplaybackcontrol_types.QMediaGaplessPlaybackControl, media: gen_qmediacontent_types.QMediaContent): void =
   fcQMediaGaplessPlaybackControl_nextMediaChanged(self.h, media.h)
 
 type QMediaGaplessPlaybackControlnextMediaChangedSlot* = proc(media: gen_qmediacontent_types.QMediaContent)
-proc cQMediaGaplessPlaybackControl_slot_callback_nextMediaChanged(slot: int, media: pointer) {.cdecl.} =
+proc fcQMediaGaplessPlaybackControl_slot_callback_nextMediaChanged(slot: int, media: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QMediaGaplessPlaybackControlnextMediaChangedSlot](cast[pointer](slot))
   let slotval1 = gen_qmediacontent_types.QMediaContent(h: media, owned: false)
 
   nimfunc[](slotval1)
 
-proc cQMediaGaplessPlaybackControl_slot_callback_nextMediaChanged_release(slot: int) {.cdecl.} =
+proc fcQMediaGaplessPlaybackControl_slot_callback_nextMediaChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QMediaGaplessPlaybackControlnextMediaChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onnextMediaChanged*(self: gen_qmediagaplessplaybackcontrol_types.QMediaGaplessPlaybackControl, slot: QMediaGaplessPlaybackControlnextMediaChangedSlot) =
+proc onNextMediaChanged*(self: gen_qmediagaplessplaybackcontrol_types.QMediaGaplessPlaybackControl, slot: QMediaGaplessPlaybackControlnextMediaChangedSlot) =
   var tmp = new QMediaGaplessPlaybackControlnextMediaChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQMediaGaplessPlaybackControl_connect_nextMediaChanged(self.h, cast[int](addr tmp[]), cQMediaGaplessPlaybackControl_slot_callback_nextMediaChanged, cQMediaGaplessPlaybackControl_slot_callback_nextMediaChanged_release)
+  fcQMediaGaplessPlaybackControl_connect_nextMediaChanged(self.h, cast[int](addr tmp[]), fcQMediaGaplessPlaybackControl_slot_callback_nextMediaChanged, fcQMediaGaplessPlaybackControl_slot_callback_nextMediaChanged_release)
 
 proc advancedToNextMedia*(self: gen_qmediagaplessplaybackcontrol_types.QMediaGaplessPlaybackControl): void =
   fcQMediaGaplessPlaybackControl_advancedToNextMedia(self.h)
 
 type QMediaGaplessPlaybackControladvancedToNextMediaSlot* = proc()
-proc cQMediaGaplessPlaybackControl_slot_callback_advancedToNextMedia(slot: int) {.cdecl.} =
+proc fcQMediaGaplessPlaybackControl_slot_callback_advancedToNextMedia(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QMediaGaplessPlaybackControladvancedToNextMediaSlot](cast[pointer](slot))
   nimfunc[]()
 
-proc cQMediaGaplessPlaybackControl_slot_callback_advancedToNextMedia_release(slot: int) {.cdecl.} =
+proc fcQMediaGaplessPlaybackControl_slot_callback_advancedToNextMedia_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QMediaGaplessPlaybackControladvancedToNextMediaSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onadvancedToNextMedia*(self: gen_qmediagaplessplaybackcontrol_types.QMediaGaplessPlaybackControl, slot: QMediaGaplessPlaybackControladvancedToNextMediaSlot) =
+proc onAdvancedToNextMedia*(self: gen_qmediagaplessplaybackcontrol_types.QMediaGaplessPlaybackControl, slot: QMediaGaplessPlaybackControladvancedToNextMediaSlot) =
   var tmp = new QMediaGaplessPlaybackControladvancedToNextMediaSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQMediaGaplessPlaybackControl_connect_advancedToNextMedia(self.h, cast[int](addr tmp[]), cQMediaGaplessPlaybackControl_slot_callback_advancedToNextMedia, cQMediaGaplessPlaybackControl_slot_callback_advancedToNextMedia_release)
+  fcQMediaGaplessPlaybackControl_connect_advancedToNextMedia(self.h, cast[int](addr tmp[]), fcQMediaGaplessPlaybackControl_slot_callback_advancedToNextMedia, fcQMediaGaplessPlaybackControl_slot_callback_advancedToNextMedia_release)
 
 proc tr*(_: type gen_qmediagaplessplaybackcontrol_types.QMediaGaplessPlaybackControl, s: cstring, c: cstring): string =
   let v_ms = fcQMediaGaplessPlaybackControl_tr2(s, c)

@@ -93,6 +93,7 @@ proc fcQState_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QS
 proc fcQState_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QState_trUtf83".}
 proc fcQState_vtbl(self: pointer): pointer {.importc: "QState_vtbl".}
 proc fcQState_vdata(self: pointer): pointer {.importc: "QState_vdata".}
+
 type cQStateVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -228,6 +229,7 @@ type QStatechildEventProc* = proc(self: QState, event: gen_qcoreevent_types.QChi
 type QStatecustomEventProc* = proc(self: QState, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QStateconnectNotifyProc* = proc(self: QState, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QStatedisconnectNotifyProc* = proc(self: QState, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+
 type QStateVTable* {.inheritable, pure.} = object
   vtbl: cQStateVTable
   metaObject*: QStatemetaObjectProc
@@ -242,10 +244,45 @@ type QStateVTable* {.inheritable, pure.} = object
   customEvent*: QStatecustomEventProc
   connectNotify*: QStateconnectNotifyProc
   disconnectNotify*: QStatedisconnectNotifyProc
+
 proc QStatemetaObject*(self: gen_qstate_types.QState): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQState_virtualbase_metaObject(self.h), owned: false)
 
-proc cQState_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
+proc QStatemetacast*(self: gen_qstate_types.QState, param1: cstring): pointer =
+  fcQState_virtualbase_metacast(self.h, param1)
+
+proc QStatemetacall*(self: gen_qstate_types.QState, param1: cint, param2: cint, param3: pointer): cint =
+  fcQState_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+proc QStateonEntry*(self: gen_qstate_types.QState, event: gen_qcoreevent_types.QEvent): void =
+  fcQState_virtualbase_onEntry(self.h, event.h)
+
+proc QStateonExit*(self: gen_qstate_types.QState, event: gen_qcoreevent_types.QEvent): void =
+  fcQState_virtualbase_onExit(self.h, event.h)
+
+proc QStateevent*(self: gen_qstate_types.QState, e: gen_qcoreevent_types.QEvent): bool =
+  fcQState_virtualbase_event(self.h, e.h)
+
+proc QStateeventFilter*(self: gen_qstate_types.QState, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
+  fcQState_virtualbase_eventFilter(self.h, watched.h, event.h)
+
+proc QStatetimerEvent*(self: gen_qstate_types.QState, event: gen_qcoreevent_types.QTimerEvent): void =
+  fcQState_virtualbase_timerEvent(self.h, event.h)
+
+proc QStatechildEvent*(self: gen_qstate_types.QState, event: gen_qcoreevent_types.QChildEvent): void =
+  fcQState_virtualbase_childEvent(self.h, event.h)
+
+proc QStatecustomEvent*(self: gen_qstate_types.QState, event: gen_qcoreevent_types.QEvent): void =
+  fcQState_virtualbase_customEvent(self.h, event.h)
+
+proc QStateconnectNotify*(self: gen_qstate_types.QState, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQState_virtualbase_connectNotify(self.h, signal.h)
+
+proc QStatedisconnectNotify*(self: gen_qstate_types.QState, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQState_virtualbase_disconnectNotify(self.h, signal.h)
+
+
+proc fcQState_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QStateVTable](fcQState_vdata(self))
   let self = QState(h: self)
   var virtualReturn = vtbl[].metaObject(self)
@@ -254,20 +291,14 @@ proc cQState_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QStatemetacast*(self: gen_qstate_types.QState, param1: cstring): pointer =
-  fcQState_virtualbase_metacast(self.h, param1)
-
-proc cQState_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+proc fcQState_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QStateVTable](fcQState_vdata(self))
   let self = QState(h: self)
   let slotval1 = (param1)
   var virtualReturn = vtbl[].metacast(self, slotval1)
   virtualReturn
 
-proc QStatemetacall*(self: gen_qstate_types.QState, param1: cint, param2: cint, param3: pointer): cint =
-  fcQState_virtualbase_metacall(self.h, cint(param1), param2, param3)
-
-proc cQState_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+proc fcQState_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QStateVTable](fcQState_vdata(self))
   let self = QState(h: self)
   let slotval1 = cint(param1)
@@ -276,38 +307,26 @@ proc cQState_vtable_callback_metacall(self: pointer, param1: cint, param2: cint,
   var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QStateonEntry*(self: gen_qstate_types.QState, event: gen_qcoreevent_types.QEvent): void =
-  fcQState_virtualbase_onEntry(self.h, event.h)
-
-proc cQState_vtable_callback_onEntry(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQState_vtable_callback_onEntry(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QStateVTable](fcQState_vdata(self))
   let self = QState(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].onEntry(self, slotval1)
 
-proc QStateonExit*(self: gen_qstate_types.QState, event: gen_qcoreevent_types.QEvent): void =
-  fcQState_virtualbase_onExit(self.h, event.h)
-
-proc cQState_vtable_callback_onExit(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQState_vtable_callback_onExit(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QStateVTable](fcQState_vdata(self))
   let self = QState(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].onExit(self, slotval1)
 
-proc QStateevent*(self: gen_qstate_types.QState, e: gen_qcoreevent_types.QEvent): bool =
-  fcQState_virtualbase_event(self.h, e.h)
-
-proc cQState_vtable_callback_event(self: pointer, e: pointer): bool {.cdecl.} =
+proc fcQState_vtable_callback_event(self: pointer, e: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QStateVTable](fcQState_vdata(self))
   let self = QState(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: e, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
-proc QStateeventFilter*(self: gen_qstate_types.QState, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
-  fcQState_virtualbase_eventFilter(self.h, watched.h, event.h)
-
-proc cQState_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+proc fcQState_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QStateVTable](fcQState_vdata(self))
   let self = QState(h: self)
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
@@ -315,46 +334,31 @@ proc cQState_vtable_callback_eventFilter(self: pointer, watched: pointer, event:
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
-proc QStatetimerEvent*(self: gen_qstate_types.QState, event: gen_qcoreevent_types.QTimerEvent): void =
-  fcQState_virtualbase_timerEvent(self.h, event.h)
-
-proc cQState_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQState_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QStateVTable](fcQState_vdata(self))
   let self = QState(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
-proc QStatechildEvent*(self: gen_qstate_types.QState, event: gen_qcoreevent_types.QChildEvent): void =
-  fcQState_virtualbase_childEvent(self.h, event.h)
-
-proc cQState_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQState_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QStateVTable](fcQState_vdata(self))
   let self = QState(h: self)
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
-proc QStatecustomEvent*(self: gen_qstate_types.QState, event: gen_qcoreevent_types.QEvent): void =
-  fcQState_virtualbase_customEvent(self.h, event.h)
-
-proc cQState_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQState_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QStateVTable](fcQState_vdata(self))
   let self = QState(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
-proc QStateconnectNotify*(self: gen_qstate_types.QState, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQState_virtualbase_connectNotify(self.h, signal.h)
-
-proc cQState_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQState_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QStateVTable](fcQState_vdata(self))
   let self = QState(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
-proc QStatedisconnectNotify*(self: gen_qstate_types.QState, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQState_virtualbase_disconnectNotify(self.h, signal.h)
-
-proc cQState_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQState_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QStateVTable](fcQState_vdata(self))
   let self = QState(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
@@ -362,9 +366,33 @@ proc cQState_vtable_callback_disconnectNotify(self: pointer, signal: pointer): v
 
 type VirtualQState* {.inheritable.} = ref object of QState
   vtbl*: cQStateVTable
+
 method metaObject*(self: VirtualQState): gen_qobjectdefs_types.QMetaObject {.base.} =
   QStatemetaObject(self[])
-proc cQState_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
+method metacast*(self: VirtualQState, param1: cstring): pointer {.base.} =
+  QStatemetacast(self[], param1)
+method metacall*(self: VirtualQState, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QStatemetacall(self[], param1, param2, param3)
+method onEntry*(self: VirtualQState, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QStateonEntry(self[], event)
+method onExit*(self: VirtualQState, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QStateonExit(self[], event)
+method event*(self: VirtualQState, e: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QStateevent(self[], e)
+method eventFilter*(self: VirtualQState, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QStateeventFilter(self[], watched, event)
+method timerEvent*(self: VirtualQState, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QStatetimerEvent(self[], event)
+method childEvent*(self: VirtualQState, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QStatechildEvent(self[], event)
+method customEvent*(self: VirtualQState, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QStatecustomEvent(self[], event)
+method connectNotify*(self: VirtualQState, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QStateconnectNotify(self[], signal)
+method disconnectNotify*(self: VirtualQState, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QStatedisconnectNotify(self[], signal)
+
+proc fcQState_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQState](fcQState_vdata(self))
   var virtualReturn = inst.metaObject()
   virtualReturn.owned = false # TODO move?
@@ -372,17 +400,13 @@ proc cQState_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-method metacast*(self: VirtualQState, param1: cstring): pointer {.base.} =
-  QStatemetacast(self[], param1)
-proc cQState_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+proc fcQState_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQState](fcQState_vdata(self))
   let slotval1 = (param1)
   var virtualReturn = inst.metacast(slotval1)
   virtualReturn
 
-method metacall*(self: VirtualQState, param1: cint, param2: cint, param3: pointer): cint {.base.} =
-  QStatemetacall(self[], param1, param2, param3)
-proc cQState_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+proc fcQState_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQState](fcQState_vdata(self))
   let slotval1 = cint(param1)
   let slotval2 = param2
@@ -390,71 +414,54 @@ proc cQState_method_callback_metacall(self: pointer, param1: cint, param2: cint,
   var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
-method onEntry*(self: VirtualQState, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QStateonEntry(self[], event)
-proc cQState_method_callback_onEntry(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQState_method_callback_onEntry(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQState](fcQState_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.onEntry(slotval1)
 
-method onExit*(self: VirtualQState, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QStateonExit(self[], event)
-proc cQState_method_callback_onExit(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQState_method_callback_onExit(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQState](fcQState_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.onExit(slotval1)
 
-method event*(self: VirtualQState, e: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QStateevent(self[], e)
-proc cQState_method_callback_event(self: pointer, e: pointer): bool {.cdecl.} =
+proc fcQState_method_callback_event(self: pointer, e: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQState](fcQState_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: e, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
-method eventFilter*(self: VirtualQState, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QStateeventFilter(self[], watched, event)
-proc cQState_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+proc fcQState_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQState](fcQState_vdata(self))
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
   let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
-method timerEvent*(self: VirtualQState, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
-  QStatetimerEvent(self[], event)
-proc cQState_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQState_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQState](fcQState_vdata(self))
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
-method childEvent*(self: VirtualQState, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
-  QStatechildEvent(self[], event)
-proc cQState_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQState_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQState](fcQState_vdata(self))
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
-method customEvent*(self: VirtualQState, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QStatecustomEvent(self[], event)
-proc cQState_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQState_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQState](fcQState_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
-method connectNotify*(self: VirtualQState, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QStateconnectNotify(self[], signal)
-proc cQState_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQState_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQState](fcQState_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
-method disconnectNotify*(self: VirtualQState, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QStatedisconnectNotify(self[], signal)
-proc cQState_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQState_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQState](fcQState_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
+
 
 proc sender*(self: gen_qstate_types.QState): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQState_protectedbase_sender(self.h), owned: false)
@@ -476,29 +483,29 @@ proc create*(T: type gen_qstate_types.QState,
     let vtbl = cast[ref QStateVTable](fcQState_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQState_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQState_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQState_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQState_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQState_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQState_vtable_callback_metacall
   if not isNil(vtbl[].onEntry):
-    vtbl[].vtbl.onEntry = cQState_vtable_callback_onEntry
+    vtbl[].vtbl.onEntry = fcQState_vtable_callback_onEntry
   if not isNil(vtbl[].onExit):
-    vtbl[].vtbl.onExit = cQState_vtable_callback_onExit
+    vtbl[].vtbl.onExit = fcQState_vtable_callback_onExit
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQState_vtable_callback_event
+    vtbl[].vtbl.event = fcQState_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQState_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQState_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQState_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQState_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQState_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQState_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQState_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQState_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQState_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQState_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQState_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQState_vtable_callback_disconnectNotify
   gen_qstate_types.QState(h: fcQState_new(addr(vtbl[].vtbl), addr(vtbl[])), owned: true)
 
 proc create*(T: type gen_qstate_types.QState,
@@ -510,29 +517,29 @@ proc create*(T: type gen_qstate_types.QState,
     let vtbl = cast[ref QStateVTable](fcQState_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQState_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQState_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQState_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQState_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQState_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQState_vtable_callback_metacall
   if not isNil(vtbl[].onEntry):
-    vtbl[].vtbl.onEntry = cQState_vtable_callback_onEntry
+    vtbl[].vtbl.onEntry = fcQState_vtable_callback_onEntry
   if not isNil(vtbl[].onExit):
-    vtbl[].vtbl.onExit = cQState_vtable_callback_onExit
+    vtbl[].vtbl.onExit = fcQState_vtable_callback_onExit
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQState_vtable_callback_event
+    vtbl[].vtbl.event = fcQState_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQState_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQState_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQState_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQState_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQState_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQState_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQState_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQState_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQState_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQState_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQState_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQState_vtable_callback_disconnectNotify
   gen_qstate_types.QState(h: fcQState_new2(addr(vtbl[].vtbl), addr(vtbl[]), cint(childMode)), owned: true)
 
 proc create*(T: type gen_qstate_types.QState,
@@ -544,29 +551,29 @@ proc create*(T: type gen_qstate_types.QState,
     let vtbl = cast[ref QStateVTable](fcQState_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQState_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQState_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQState_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQState_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQState_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQState_vtable_callback_metacall
   if not isNil(vtbl[].onEntry):
-    vtbl[].vtbl.onEntry = cQState_vtable_callback_onEntry
+    vtbl[].vtbl.onEntry = fcQState_vtable_callback_onEntry
   if not isNil(vtbl[].onExit):
-    vtbl[].vtbl.onExit = cQState_vtable_callback_onExit
+    vtbl[].vtbl.onExit = fcQState_vtable_callback_onExit
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQState_vtable_callback_event
+    vtbl[].vtbl.event = fcQState_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQState_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQState_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQState_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQState_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQState_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQState_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQState_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQState_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQState_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQState_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQState_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQState_vtable_callback_disconnectNotify
   gen_qstate_types.QState(h: fcQState_new3(addr(vtbl[].vtbl), addr(vtbl[]), parent.h), owned: true)
 
 proc create*(T: type gen_qstate_types.QState,
@@ -578,29 +585,29 @@ proc create*(T: type gen_qstate_types.QState,
     let vtbl = cast[ref QStateVTable](fcQState_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQState_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQState_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQState_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQState_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQState_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQState_vtable_callback_metacall
   if not isNil(vtbl[].onEntry):
-    vtbl[].vtbl.onEntry = cQState_vtable_callback_onEntry
+    vtbl[].vtbl.onEntry = fcQState_vtable_callback_onEntry
   if not isNil(vtbl[].onExit):
-    vtbl[].vtbl.onExit = cQState_vtable_callback_onExit
+    vtbl[].vtbl.onExit = fcQState_vtable_callback_onExit
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQState_vtable_callback_event
+    vtbl[].vtbl.event = fcQState_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQState_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQState_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQState_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQState_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQState_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQState_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQState_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQState_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQState_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQState_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQState_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQState_vtable_callback_disconnectNotify
   gen_qstate_types.QState(h: fcQState_new4(addr(vtbl[].vtbl), addr(vtbl[]), cint(childMode), parent.h), owned: true)
 
 const cQState_mvtbl = cQStateVTable(
@@ -608,18 +615,19 @@ const cQState_mvtbl = cQStateVTable(
     let inst = cast[ptr typeof(VirtualQState()[])](self.fcQState_vtbl())
     inst[].h = nil
     inst[].owned = false,
-  metaObject: cQState_method_callback_metaObject,
-  metacast: cQState_method_callback_metacast,
-  metacall: cQState_method_callback_metacall,
-  onEntry: cQState_method_callback_onEntry,
-  onExit: cQState_method_callback_onExit,
-  event: cQState_method_callback_event,
-  eventFilter: cQState_method_callback_eventFilter,
-  timerEvent: cQState_method_callback_timerEvent,
-  childEvent: cQState_method_callback_childEvent,
-  customEvent: cQState_method_callback_customEvent,
-  connectNotify: cQState_method_callback_connectNotify,
-  disconnectNotify: cQState_method_callback_disconnectNotify,
+
+  metaObject: fcQState_method_callback_metaObject,
+  metacast: fcQState_method_callback_metacast,
+  metacall: fcQState_method_callback_metacall,
+  onEntry: fcQState_method_callback_onEntry,
+  onExit: fcQState_method_callback_onExit,
+  event: fcQState_method_callback_event,
+  eventFilter: fcQState_method_callback_eventFilter,
+  timerEvent: fcQState_method_callback_timerEvent,
+  childEvent: fcQState_method_callback_childEvent,
+  customEvent: fcQState_method_callback_customEvent,
+  connectNotify: fcQState_method_callback_connectNotify,
+  disconnectNotify: fcQState_method_callback_disconnectNotify,
 )
 proc create*(T: type gen_qstate_types.QState,
     inst: VirtualQState) =

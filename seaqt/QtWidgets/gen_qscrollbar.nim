@@ -85,6 +85,7 @@ proc fcQScrollBar_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc:
 proc fcQScrollBar_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QScrollBar_trUtf83".}
 proc fcQScrollBar_vtbl(self: pointer): pointer {.importc: "QScrollBar_vtbl".}
 proc fcQScrollBar_vdata(self: pointer): pointer {.importc: "QScrollBar_vdata".}
+
 type cQScrollBarVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -309,6 +310,7 @@ type QScrollBarchildEventProc* = proc(self: QScrollBar, event: gen_qcoreevent_ty
 type QScrollBarcustomEventProc* = proc(self: QScrollBar, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QScrollBarconnectNotifyProc* = proc(self: QScrollBar, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QScrollBardisconnectNotifyProc* = proc(self: QScrollBar, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+
 type QScrollBarVTable* {.inheritable, pure.} = object
   vtbl: cQScrollBarVTable
   metaObject*: QScrollBarmetaObjectProc
@@ -362,10 +364,162 @@ type QScrollBarVTable* {.inheritable, pure.} = object
   customEvent*: QScrollBarcustomEventProc
   connectNotify*: QScrollBarconnectNotifyProc
   disconnectNotify*: QScrollBardisconnectNotifyProc
+
 proc QScrollBarmetaObject*(self: gen_qscrollbar_types.QScrollBar): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQScrollBar_virtualbase_metaObject(self.h), owned: false)
 
-proc cQScrollBar_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
+proc QScrollBarmetacast*(self: gen_qscrollbar_types.QScrollBar, param1: cstring): pointer =
+  fcQScrollBar_virtualbase_metacast(self.h, param1)
+
+proc QScrollBarmetacall*(self: gen_qscrollbar_types.QScrollBar, param1: cint, param2: cint, param3: pointer): cint =
+  fcQScrollBar_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+proc QScrollBarsizeHint*(self: gen_qscrollbar_types.QScrollBar): gen_qsize_types.QSize =
+  gen_qsize_types.QSize(h: fcQScrollBar_virtualbase_sizeHint(self.h), owned: true)
+
+proc QScrollBarevent*(self: gen_qscrollbar_types.QScrollBar, event: gen_qcoreevent_types.QEvent): bool =
+  fcQScrollBar_virtualbase_event(self.h, event.h)
+
+proc QScrollBarwheelEvent*(self: gen_qscrollbar_types.QScrollBar, param1: gen_qevent_types.QWheelEvent): void =
+  fcQScrollBar_virtualbase_wheelEvent(self.h, param1.h)
+
+proc QScrollBarpaintEvent*(self: gen_qscrollbar_types.QScrollBar, param1: gen_qevent_types.QPaintEvent): void =
+  fcQScrollBar_virtualbase_paintEvent(self.h, param1.h)
+
+proc QScrollBarmousePressEvent*(self: gen_qscrollbar_types.QScrollBar, param1: gen_qevent_types.QMouseEvent): void =
+  fcQScrollBar_virtualbase_mousePressEvent(self.h, param1.h)
+
+proc QScrollBarmouseReleaseEvent*(self: gen_qscrollbar_types.QScrollBar, param1: gen_qevent_types.QMouseEvent): void =
+  fcQScrollBar_virtualbase_mouseReleaseEvent(self.h, param1.h)
+
+proc QScrollBarmouseMoveEvent*(self: gen_qscrollbar_types.QScrollBar, param1: gen_qevent_types.QMouseEvent): void =
+  fcQScrollBar_virtualbase_mouseMoveEvent(self.h, param1.h)
+
+proc QScrollBarhideEvent*(self: gen_qscrollbar_types.QScrollBar, param1: gen_qevent_types.QHideEvent): void =
+  fcQScrollBar_virtualbase_hideEvent(self.h, param1.h)
+
+proc QScrollBarsliderChange*(self: gen_qscrollbar_types.QScrollBar, change: cint): void =
+  fcQScrollBar_virtualbase_sliderChange(self.h, cint(change))
+
+proc QScrollBarcontextMenuEvent*(self: gen_qscrollbar_types.QScrollBar, param1: gen_qevent_types.QContextMenuEvent): void =
+  fcQScrollBar_virtualbase_contextMenuEvent(self.h, param1.h)
+
+proc QScrollBarkeyPressEvent*(self: gen_qscrollbar_types.QScrollBar, ev: gen_qevent_types.QKeyEvent): void =
+  fcQScrollBar_virtualbase_keyPressEvent(self.h, ev.h)
+
+proc QScrollBartimerEvent*(self: gen_qscrollbar_types.QScrollBar, param1: gen_qcoreevent_types.QTimerEvent): void =
+  fcQScrollBar_virtualbase_timerEvent(self.h, param1.h)
+
+proc QScrollBarchangeEvent*(self: gen_qscrollbar_types.QScrollBar, e: gen_qcoreevent_types.QEvent): void =
+  fcQScrollBar_virtualbase_changeEvent(self.h, e.h)
+
+proc QScrollBardevType*(self: gen_qscrollbar_types.QScrollBar): cint =
+  fcQScrollBar_virtualbase_devType(self.h)
+
+proc QScrollBarsetVisible*(self: gen_qscrollbar_types.QScrollBar, visible: bool): void =
+  fcQScrollBar_virtualbase_setVisible(self.h, visible)
+
+proc QScrollBarminimumSizeHint*(self: gen_qscrollbar_types.QScrollBar): gen_qsize_types.QSize =
+  gen_qsize_types.QSize(h: fcQScrollBar_virtualbase_minimumSizeHint(self.h), owned: true)
+
+proc QScrollBarheightForWidth*(self: gen_qscrollbar_types.QScrollBar, param1: cint): cint =
+  fcQScrollBar_virtualbase_heightForWidth(self.h, param1)
+
+proc QScrollBarhasHeightForWidth*(self: gen_qscrollbar_types.QScrollBar): bool =
+  fcQScrollBar_virtualbase_hasHeightForWidth(self.h)
+
+proc QScrollBarpaintEngine*(self: gen_qscrollbar_types.QScrollBar): gen_qpaintengine_types.QPaintEngine =
+  gen_qpaintengine_types.QPaintEngine(h: fcQScrollBar_virtualbase_paintEngine(self.h), owned: false)
+
+proc QScrollBarmouseDoubleClickEvent*(self: gen_qscrollbar_types.QScrollBar, event: gen_qevent_types.QMouseEvent): void =
+  fcQScrollBar_virtualbase_mouseDoubleClickEvent(self.h, event.h)
+
+proc QScrollBarkeyReleaseEvent*(self: gen_qscrollbar_types.QScrollBar, event: gen_qevent_types.QKeyEvent): void =
+  fcQScrollBar_virtualbase_keyReleaseEvent(self.h, event.h)
+
+proc QScrollBarfocusInEvent*(self: gen_qscrollbar_types.QScrollBar, event: gen_qevent_types.QFocusEvent): void =
+  fcQScrollBar_virtualbase_focusInEvent(self.h, event.h)
+
+proc QScrollBarfocusOutEvent*(self: gen_qscrollbar_types.QScrollBar, event: gen_qevent_types.QFocusEvent): void =
+  fcQScrollBar_virtualbase_focusOutEvent(self.h, event.h)
+
+proc QScrollBarenterEvent*(self: gen_qscrollbar_types.QScrollBar, event: gen_qcoreevent_types.QEvent): void =
+  fcQScrollBar_virtualbase_enterEvent(self.h, event.h)
+
+proc QScrollBarleaveEvent*(self: gen_qscrollbar_types.QScrollBar, event: gen_qcoreevent_types.QEvent): void =
+  fcQScrollBar_virtualbase_leaveEvent(self.h, event.h)
+
+proc QScrollBarmoveEvent*(self: gen_qscrollbar_types.QScrollBar, event: gen_qevent_types.QMoveEvent): void =
+  fcQScrollBar_virtualbase_moveEvent(self.h, event.h)
+
+proc QScrollBarresizeEvent*(self: gen_qscrollbar_types.QScrollBar, event: gen_qevent_types.QResizeEvent): void =
+  fcQScrollBar_virtualbase_resizeEvent(self.h, event.h)
+
+proc QScrollBarcloseEvent*(self: gen_qscrollbar_types.QScrollBar, event: gen_qevent_types.QCloseEvent): void =
+  fcQScrollBar_virtualbase_closeEvent(self.h, event.h)
+
+proc QScrollBartabletEvent*(self: gen_qscrollbar_types.QScrollBar, event: gen_qevent_types.QTabletEvent): void =
+  fcQScrollBar_virtualbase_tabletEvent(self.h, event.h)
+
+proc QScrollBaractionEvent*(self: gen_qscrollbar_types.QScrollBar, event: gen_qevent_types.QActionEvent): void =
+  fcQScrollBar_virtualbase_actionEvent(self.h, event.h)
+
+proc QScrollBardragEnterEvent*(self: gen_qscrollbar_types.QScrollBar, event: gen_qevent_types.QDragEnterEvent): void =
+  fcQScrollBar_virtualbase_dragEnterEvent(self.h, event.h)
+
+proc QScrollBardragMoveEvent*(self: gen_qscrollbar_types.QScrollBar, event: gen_qevent_types.QDragMoveEvent): void =
+  fcQScrollBar_virtualbase_dragMoveEvent(self.h, event.h)
+
+proc QScrollBardragLeaveEvent*(self: gen_qscrollbar_types.QScrollBar, event: gen_qevent_types.QDragLeaveEvent): void =
+  fcQScrollBar_virtualbase_dragLeaveEvent(self.h, event.h)
+
+proc QScrollBardropEvent*(self: gen_qscrollbar_types.QScrollBar, event: gen_qevent_types.QDropEvent): void =
+  fcQScrollBar_virtualbase_dropEvent(self.h, event.h)
+
+proc QScrollBarshowEvent*(self: gen_qscrollbar_types.QScrollBar, event: gen_qevent_types.QShowEvent): void =
+  fcQScrollBar_virtualbase_showEvent(self.h, event.h)
+
+proc QScrollBarnativeEvent*(self: gen_qscrollbar_types.QScrollBar, eventType: openArray[byte], message: pointer, resultVal: ptr clong): bool =
+  fcQScrollBar_virtualbase_nativeEvent(self.h, struct_miqt_string(data: cast[cstring](if len(eventType) == 0: nil else: unsafeAddr eventType[0]), len: csize_t(len(eventType))), message, resultVal)
+
+proc QScrollBarmetric*(self: gen_qscrollbar_types.QScrollBar, param1: cint): cint =
+  fcQScrollBar_virtualbase_metric(self.h, cint(param1))
+
+proc QScrollBarinitPainter*(self: gen_qscrollbar_types.QScrollBar, painter: gen_qpainter_types.QPainter): void =
+  fcQScrollBar_virtualbase_initPainter(self.h, painter.h)
+
+proc QScrollBarredirected*(self: gen_qscrollbar_types.QScrollBar, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice =
+  gen_qpaintdevice_types.QPaintDevice(h: fcQScrollBar_virtualbase_redirected(self.h, offset.h), owned: false)
+
+proc QScrollBarsharedPainter*(self: gen_qscrollbar_types.QScrollBar): gen_qpainter_types.QPainter =
+  gen_qpainter_types.QPainter(h: fcQScrollBar_virtualbase_sharedPainter(self.h), owned: false)
+
+proc QScrollBarinputMethodEvent*(self: gen_qscrollbar_types.QScrollBar, param1: gen_qevent_types.QInputMethodEvent): void =
+  fcQScrollBar_virtualbase_inputMethodEvent(self.h, param1.h)
+
+proc QScrollBarinputMethodQuery*(self: gen_qscrollbar_types.QScrollBar, param1: cint): gen_qvariant_types.QVariant =
+  gen_qvariant_types.QVariant(h: fcQScrollBar_virtualbase_inputMethodQuery(self.h, cint(param1)), owned: true)
+
+proc QScrollBarfocusNextPrevChild*(self: gen_qscrollbar_types.QScrollBar, next: bool): bool =
+  fcQScrollBar_virtualbase_focusNextPrevChild(self.h, next)
+
+proc QScrollBareventFilter*(self: gen_qscrollbar_types.QScrollBar, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
+  fcQScrollBar_virtualbase_eventFilter(self.h, watched.h, event.h)
+
+proc QScrollBarchildEvent*(self: gen_qscrollbar_types.QScrollBar, event: gen_qcoreevent_types.QChildEvent): void =
+  fcQScrollBar_virtualbase_childEvent(self.h, event.h)
+
+proc QScrollBarcustomEvent*(self: gen_qscrollbar_types.QScrollBar, event: gen_qcoreevent_types.QEvent): void =
+  fcQScrollBar_virtualbase_customEvent(self.h, event.h)
+
+proc QScrollBarconnectNotify*(self: gen_qscrollbar_types.QScrollBar, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQScrollBar_virtualbase_connectNotify(self.h, signal.h)
+
+proc QScrollBardisconnectNotify*(self: gen_qscrollbar_types.QScrollBar, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQScrollBar_virtualbase_disconnectNotify(self.h, signal.h)
+
+
+proc fcQScrollBar_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QScrollBarVTable](fcQScrollBar_vdata(self))
   let self = QScrollBar(h: self)
   var virtualReturn = vtbl[].metaObject(self)
@@ -374,20 +528,14 @@ proc cQScrollBar_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QScrollBarmetacast*(self: gen_qscrollbar_types.QScrollBar, param1: cstring): pointer =
-  fcQScrollBar_virtualbase_metacast(self.h, param1)
-
-proc cQScrollBar_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+proc fcQScrollBar_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QScrollBarVTable](fcQScrollBar_vdata(self))
   let self = QScrollBar(h: self)
   let slotval1 = (param1)
   var virtualReturn = vtbl[].metacast(self, slotval1)
   virtualReturn
 
-proc QScrollBarmetacall*(self: gen_qscrollbar_types.QScrollBar, param1: cint, param2: cint, param3: pointer): cint =
-  fcQScrollBar_virtualbase_metacall(self.h, cint(param1), param2, param3)
-
-proc cQScrollBar_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+proc fcQScrollBar_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QScrollBarVTable](fcQScrollBar_vdata(self))
   let self = QScrollBar(h: self)
   let slotval1 = cint(param1)
@@ -396,10 +544,7 @@ proc cQScrollBar_vtable_callback_metacall(self: pointer, param1: cint, param2: c
   var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QScrollBarsizeHint*(self: gen_qscrollbar_types.QScrollBar): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQScrollBar_virtualbase_sizeHint(self.h), owned: true)
-
-proc cQScrollBar_vtable_callback_sizeHint(self: pointer): pointer {.cdecl.} =
+proc fcQScrollBar_vtable_callback_sizeHint(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QScrollBarVTable](fcQScrollBar_vdata(self))
   let self = QScrollBar(h: self)
   var virtualReturn = vtbl[].sizeHint(self)
@@ -408,137 +553,92 @@ proc cQScrollBar_vtable_callback_sizeHint(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QScrollBarevent*(self: gen_qscrollbar_types.QScrollBar, event: gen_qcoreevent_types.QEvent): bool =
-  fcQScrollBar_virtualbase_event(self.h, event.h)
-
-proc cQScrollBar_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
+proc fcQScrollBar_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QScrollBarVTable](fcQScrollBar_vdata(self))
   let self = QScrollBar(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
-proc QScrollBarwheelEvent*(self: gen_qscrollbar_types.QScrollBar, param1: gen_qevent_types.QWheelEvent): void =
-  fcQScrollBar_virtualbase_wheelEvent(self.h, param1.h)
-
-proc cQScrollBar_vtable_callback_wheelEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQScrollBar_vtable_callback_wheelEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QScrollBarVTable](fcQScrollBar_vdata(self))
   let self = QScrollBar(h: self)
   let slotval1 = gen_qevent_types.QWheelEvent(h: param1, owned: false)
   vtbl[].wheelEvent(self, slotval1)
 
-proc QScrollBarpaintEvent*(self: gen_qscrollbar_types.QScrollBar, param1: gen_qevent_types.QPaintEvent): void =
-  fcQScrollBar_virtualbase_paintEvent(self.h, param1.h)
-
-proc cQScrollBar_vtable_callback_paintEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQScrollBar_vtable_callback_paintEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QScrollBarVTable](fcQScrollBar_vdata(self))
   let self = QScrollBar(h: self)
   let slotval1 = gen_qevent_types.QPaintEvent(h: param1, owned: false)
   vtbl[].paintEvent(self, slotval1)
 
-proc QScrollBarmousePressEvent*(self: gen_qscrollbar_types.QScrollBar, param1: gen_qevent_types.QMouseEvent): void =
-  fcQScrollBar_virtualbase_mousePressEvent(self.h, param1.h)
-
-proc cQScrollBar_vtable_callback_mousePressEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQScrollBar_vtable_callback_mousePressEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QScrollBarVTable](fcQScrollBar_vdata(self))
   let self = QScrollBar(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: param1, owned: false)
   vtbl[].mousePressEvent(self, slotval1)
 
-proc QScrollBarmouseReleaseEvent*(self: gen_qscrollbar_types.QScrollBar, param1: gen_qevent_types.QMouseEvent): void =
-  fcQScrollBar_virtualbase_mouseReleaseEvent(self.h, param1.h)
-
-proc cQScrollBar_vtable_callback_mouseReleaseEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQScrollBar_vtable_callback_mouseReleaseEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QScrollBarVTable](fcQScrollBar_vdata(self))
   let self = QScrollBar(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: param1, owned: false)
   vtbl[].mouseReleaseEvent(self, slotval1)
 
-proc QScrollBarmouseMoveEvent*(self: gen_qscrollbar_types.QScrollBar, param1: gen_qevent_types.QMouseEvent): void =
-  fcQScrollBar_virtualbase_mouseMoveEvent(self.h, param1.h)
-
-proc cQScrollBar_vtable_callback_mouseMoveEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQScrollBar_vtable_callback_mouseMoveEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QScrollBarVTable](fcQScrollBar_vdata(self))
   let self = QScrollBar(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: param1, owned: false)
   vtbl[].mouseMoveEvent(self, slotval1)
 
-proc QScrollBarhideEvent*(self: gen_qscrollbar_types.QScrollBar, param1: gen_qevent_types.QHideEvent): void =
-  fcQScrollBar_virtualbase_hideEvent(self.h, param1.h)
-
-proc cQScrollBar_vtable_callback_hideEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQScrollBar_vtable_callback_hideEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QScrollBarVTable](fcQScrollBar_vdata(self))
   let self = QScrollBar(h: self)
   let slotval1 = gen_qevent_types.QHideEvent(h: param1, owned: false)
   vtbl[].hideEvent(self, slotval1)
 
-proc QScrollBarsliderChange*(self: gen_qscrollbar_types.QScrollBar, change: cint): void =
-  fcQScrollBar_virtualbase_sliderChange(self.h, cint(change))
-
-proc cQScrollBar_vtable_callback_sliderChange(self: pointer, change: cint): void {.cdecl.} =
+proc fcQScrollBar_vtable_callback_sliderChange(self: pointer, change: cint): void {.cdecl.} =
   let vtbl = cast[ptr QScrollBarVTable](fcQScrollBar_vdata(self))
   let self = QScrollBar(h: self)
   let slotval1 = cint(change)
   vtbl[].sliderChange(self, slotval1)
 
-proc QScrollBarcontextMenuEvent*(self: gen_qscrollbar_types.QScrollBar, param1: gen_qevent_types.QContextMenuEvent): void =
-  fcQScrollBar_virtualbase_contextMenuEvent(self.h, param1.h)
-
-proc cQScrollBar_vtable_callback_contextMenuEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQScrollBar_vtable_callback_contextMenuEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QScrollBarVTable](fcQScrollBar_vdata(self))
   let self = QScrollBar(h: self)
   let slotval1 = gen_qevent_types.QContextMenuEvent(h: param1, owned: false)
   vtbl[].contextMenuEvent(self, slotval1)
 
-proc QScrollBarkeyPressEvent*(self: gen_qscrollbar_types.QScrollBar, ev: gen_qevent_types.QKeyEvent): void =
-  fcQScrollBar_virtualbase_keyPressEvent(self.h, ev.h)
-
-proc cQScrollBar_vtable_callback_keyPressEvent(self: pointer, ev: pointer): void {.cdecl.} =
+proc fcQScrollBar_vtable_callback_keyPressEvent(self: pointer, ev: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QScrollBarVTable](fcQScrollBar_vdata(self))
   let self = QScrollBar(h: self)
   let slotval1 = gen_qevent_types.QKeyEvent(h: ev, owned: false)
   vtbl[].keyPressEvent(self, slotval1)
 
-proc QScrollBartimerEvent*(self: gen_qscrollbar_types.QScrollBar, param1: gen_qcoreevent_types.QTimerEvent): void =
-  fcQScrollBar_virtualbase_timerEvent(self.h, param1.h)
-
-proc cQScrollBar_vtable_callback_timerEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQScrollBar_vtable_callback_timerEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QScrollBarVTable](fcQScrollBar_vdata(self))
   let self = QScrollBar(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: param1, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
-proc QScrollBarchangeEvent*(self: gen_qscrollbar_types.QScrollBar, e: gen_qcoreevent_types.QEvent): void =
-  fcQScrollBar_virtualbase_changeEvent(self.h, e.h)
-
-proc cQScrollBar_vtable_callback_changeEvent(self: pointer, e: pointer): void {.cdecl.} =
+proc fcQScrollBar_vtable_callback_changeEvent(self: pointer, e: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QScrollBarVTable](fcQScrollBar_vdata(self))
   let self = QScrollBar(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: e, owned: false)
   vtbl[].changeEvent(self, slotval1)
 
-proc QScrollBardevType*(self: gen_qscrollbar_types.QScrollBar): cint =
-  fcQScrollBar_virtualbase_devType(self.h)
-
-proc cQScrollBar_vtable_callback_devType(self: pointer): cint {.cdecl.} =
+proc fcQScrollBar_vtable_callback_devType(self: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QScrollBarVTable](fcQScrollBar_vdata(self))
   let self = QScrollBar(h: self)
   var virtualReturn = vtbl[].devType(self)
   virtualReturn
 
-proc QScrollBarsetVisible*(self: gen_qscrollbar_types.QScrollBar, visible: bool): void =
-  fcQScrollBar_virtualbase_setVisible(self.h, visible)
-
-proc cQScrollBar_vtable_callback_setVisible(self: pointer, visible: bool): void {.cdecl.} =
+proc fcQScrollBar_vtable_callback_setVisible(self: pointer, visible: bool): void {.cdecl.} =
   let vtbl = cast[ptr QScrollBarVTable](fcQScrollBar_vdata(self))
   let self = QScrollBar(h: self)
   let slotval1 = visible
   vtbl[].setVisible(self, slotval1)
 
-proc QScrollBarminimumSizeHint*(self: gen_qscrollbar_types.QScrollBar): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQScrollBar_virtualbase_minimumSizeHint(self.h), owned: true)
-
-proc cQScrollBar_vtable_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
+proc fcQScrollBar_vtable_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QScrollBarVTable](fcQScrollBar_vdata(self))
   let self = QScrollBar(h: self)
   var virtualReturn = vtbl[].minimumSizeHint(self)
@@ -547,29 +647,20 @@ proc cQScrollBar_vtable_callback_minimumSizeHint(self: pointer): pointer {.cdecl
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QScrollBarheightForWidth*(self: gen_qscrollbar_types.QScrollBar, param1: cint): cint =
-  fcQScrollBar_virtualbase_heightForWidth(self.h, param1)
-
-proc cQScrollBar_vtable_callback_heightForWidth(self: pointer, param1: cint): cint {.cdecl.} =
+proc fcQScrollBar_vtable_callback_heightForWidth(self: pointer, param1: cint): cint {.cdecl.} =
   let vtbl = cast[ptr QScrollBarVTable](fcQScrollBar_vdata(self))
   let self = QScrollBar(h: self)
   let slotval1 = param1
   var virtualReturn = vtbl[].heightForWidth(self, slotval1)
   virtualReturn
 
-proc QScrollBarhasHeightForWidth*(self: gen_qscrollbar_types.QScrollBar): bool =
-  fcQScrollBar_virtualbase_hasHeightForWidth(self.h)
-
-proc cQScrollBar_vtable_callback_hasHeightForWidth(self: pointer): bool {.cdecl.} =
+proc fcQScrollBar_vtable_callback_hasHeightForWidth(self: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QScrollBarVTable](fcQScrollBar_vdata(self))
   let self = QScrollBar(h: self)
   var virtualReturn = vtbl[].hasHeightForWidth(self)
   virtualReturn
 
-proc QScrollBarpaintEngine*(self: gen_qscrollbar_types.QScrollBar): gen_qpaintengine_types.QPaintEngine =
-  gen_qpaintengine_types.QPaintEngine(h: fcQScrollBar_virtualbase_paintEngine(self.h), owned: false)
-
-proc cQScrollBar_vtable_callback_paintEngine(self: pointer): pointer {.cdecl.} =
+proc fcQScrollBar_vtable_callback_paintEngine(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QScrollBarVTable](fcQScrollBar_vdata(self))
   let self = QScrollBar(h: self)
   var virtualReturn = vtbl[].paintEngine(self)
@@ -578,154 +669,103 @@ proc cQScrollBar_vtable_callback_paintEngine(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QScrollBarmouseDoubleClickEvent*(self: gen_qscrollbar_types.QScrollBar, event: gen_qevent_types.QMouseEvent): void =
-  fcQScrollBar_virtualbase_mouseDoubleClickEvent(self.h, event.h)
-
-proc cQScrollBar_vtable_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQScrollBar_vtable_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QScrollBarVTable](fcQScrollBar_vdata(self))
   let self = QScrollBar(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseDoubleClickEvent(self, slotval1)
 
-proc QScrollBarkeyReleaseEvent*(self: gen_qscrollbar_types.QScrollBar, event: gen_qevent_types.QKeyEvent): void =
-  fcQScrollBar_virtualbase_keyReleaseEvent(self.h, event.h)
-
-proc cQScrollBar_vtable_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQScrollBar_vtable_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QScrollBarVTable](fcQScrollBar_vdata(self))
   let self = QScrollBar(h: self)
   let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   vtbl[].keyReleaseEvent(self, slotval1)
 
-proc QScrollBarfocusInEvent*(self: gen_qscrollbar_types.QScrollBar, event: gen_qevent_types.QFocusEvent): void =
-  fcQScrollBar_virtualbase_focusInEvent(self.h, event.h)
-
-proc cQScrollBar_vtable_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQScrollBar_vtable_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QScrollBarVTable](fcQScrollBar_vdata(self))
   let self = QScrollBar(h: self)
   let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusInEvent(self, slotval1)
 
-proc QScrollBarfocusOutEvent*(self: gen_qscrollbar_types.QScrollBar, event: gen_qevent_types.QFocusEvent): void =
-  fcQScrollBar_virtualbase_focusOutEvent(self.h, event.h)
-
-proc cQScrollBar_vtable_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQScrollBar_vtable_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QScrollBarVTable](fcQScrollBar_vdata(self))
   let self = QScrollBar(h: self)
   let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusOutEvent(self, slotval1)
 
-proc QScrollBarenterEvent*(self: gen_qscrollbar_types.QScrollBar, event: gen_qcoreevent_types.QEvent): void =
-  fcQScrollBar_virtualbase_enterEvent(self.h, event.h)
-
-proc cQScrollBar_vtable_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQScrollBar_vtable_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QScrollBarVTable](fcQScrollBar_vdata(self))
   let self = QScrollBar(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].enterEvent(self, slotval1)
 
-proc QScrollBarleaveEvent*(self: gen_qscrollbar_types.QScrollBar, event: gen_qcoreevent_types.QEvent): void =
-  fcQScrollBar_virtualbase_leaveEvent(self.h, event.h)
-
-proc cQScrollBar_vtable_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQScrollBar_vtable_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QScrollBarVTable](fcQScrollBar_vdata(self))
   let self = QScrollBar(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].leaveEvent(self, slotval1)
 
-proc QScrollBarmoveEvent*(self: gen_qscrollbar_types.QScrollBar, event: gen_qevent_types.QMoveEvent): void =
-  fcQScrollBar_virtualbase_moveEvent(self.h, event.h)
-
-proc cQScrollBar_vtable_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQScrollBar_vtable_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QScrollBarVTable](fcQScrollBar_vdata(self))
   let self = QScrollBar(h: self)
   let slotval1 = gen_qevent_types.QMoveEvent(h: event, owned: false)
   vtbl[].moveEvent(self, slotval1)
 
-proc QScrollBarresizeEvent*(self: gen_qscrollbar_types.QScrollBar, event: gen_qevent_types.QResizeEvent): void =
-  fcQScrollBar_virtualbase_resizeEvent(self.h, event.h)
-
-proc cQScrollBar_vtable_callback_resizeEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQScrollBar_vtable_callback_resizeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QScrollBarVTable](fcQScrollBar_vdata(self))
   let self = QScrollBar(h: self)
   let slotval1 = gen_qevent_types.QResizeEvent(h: event, owned: false)
   vtbl[].resizeEvent(self, slotval1)
 
-proc QScrollBarcloseEvent*(self: gen_qscrollbar_types.QScrollBar, event: gen_qevent_types.QCloseEvent): void =
-  fcQScrollBar_virtualbase_closeEvent(self.h, event.h)
-
-proc cQScrollBar_vtable_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQScrollBar_vtable_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QScrollBarVTable](fcQScrollBar_vdata(self))
   let self = QScrollBar(h: self)
   let slotval1 = gen_qevent_types.QCloseEvent(h: event, owned: false)
   vtbl[].closeEvent(self, slotval1)
 
-proc QScrollBartabletEvent*(self: gen_qscrollbar_types.QScrollBar, event: gen_qevent_types.QTabletEvent): void =
-  fcQScrollBar_virtualbase_tabletEvent(self.h, event.h)
-
-proc cQScrollBar_vtable_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQScrollBar_vtable_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QScrollBarVTable](fcQScrollBar_vdata(self))
   let self = QScrollBar(h: self)
   let slotval1 = gen_qevent_types.QTabletEvent(h: event, owned: false)
   vtbl[].tabletEvent(self, slotval1)
 
-proc QScrollBaractionEvent*(self: gen_qscrollbar_types.QScrollBar, event: gen_qevent_types.QActionEvent): void =
-  fcQScrollBar_virtualbase_actionEvent(self.h, event.h)
-
-proc cQScrollBar_vtable_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQScrollBar_vtable_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QScrollBarVTable](fcQScrollBar_vdata(self))
   let self = QScrollBar(h: self)
   let slotval1 = gen_qevent_types.QActionEvent(h: event, owned: false)
   vtbl[].actionEvent(self, slotval1)
 
-proc QScrollBardragEnterEvent*(self: gen_qscrollbar_types.QScrollBar, event: gen_qevent_types.QDragEnterEvent): void =
-  fcQScrollBar_virtualbase_dragEnterEvent(self.h, event.h)
-
-proc cQScrollBar_vtable_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQScrollBar_vtable_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QScrollBarVTable](fcQScrollBar_vdata(self))
   let self = QScrollBar(h: self)
   let slotval1 = gen_qevent_types.QDragEnterEvent(h: event, owned: false)
   vtbl[].dragEnterEvent(self, slotval1)
 
-proc QScrollBardragMoveEvent*(self: gen_qscrollbar_types.QScrollBar, event: gen_qevent_types.QDragMoveEvent): void =
-  fcQScrollBar_virtualbase_dragMoveEvent(self.h, event.h)
-
-proc cQScrollBar_vtable_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQScrollBar_vtable_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QScrollBarVTable](fcQScrollBar_vdata(self))
   let self = QScrollBar(h: self)
   let slotval1 = gen_qevent_types.QDragMoveEvent(h: event, owned: false)
   vtbl[].dragMoveEvent(self, slotval1)
 
-proc QScrollBardragLeaveEvent*(self: gen_qscrollbar_types.QScrollBar, event: gen_qevent_types.QDragLeaveEvent): void =
-  fcQScrollBar_virtualbase_dragLeaveEvent(self.h, event.h)
-
-proc cQScrollBar_vtable_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQScrollBar_vtable_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QScrollBarVTable](fcQScrollBar_vdata(self))
   let self = QScrollBar(h: self)
   let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event, owned: false)
   vtbl[].dragLeaveEvent(self, slotval1)
 
-proc QScrollBardropEvent*(self: gen_qscrollbar_types.QScrollBar, event: gen_qevent_types.QDropEvent): void =
-  fcQScrollBar_virtualbase_dropEvent(self.h, event.h)
-
-proc cQScrollBar_vtable_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQScrollBar_vtable_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QScrollBarVTable](fcQScrollBar_vdata(self))
   let self = QScrollBar(h: self)
   let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
   vtbl[].dropEvent(self, slotval1)
 
-proc QScrollBarshowEvent*(self: gen_qscrollbar_types.QScrollBar, event: gen_qevent_types.QShowEvent): void =
-  fcQScrollBar_virtualbase_showEvent(self.h, event.h)
-
-proc cQScrollBar_vtable_callback_showEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQScrollBar_vtable_callback_showEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QScrollBarVTable](fcQScrollBar_vdata(self))
   let self = QScrollBar(h: self)
   let slotval1 = gen_qevent_types.QShowEvent(h: event, owned: false)
   vtbl[].showEvent(self, slotval1)
 
-proc QScrollBarnativeEvent*(self: gen_qscrollbar_types.QScrollBar, eventType: openArray[byte], message: pointer, resultVal: ptr clong): bool =
-  fcQScrollBar_virtualbase_nativeEvent(self.h, struct_miqt_string(data: cast[cstring](if len(eventType) == 0: nil else: unsafeAddr eventType[0]), len: csize_t(len(eventType))), message, resultVal)
-
-proc cQScrollBar_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr clong): bool {.cdecl.} =
+proc fcQScrollBar_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr clong): bool {.cdecl.} =
   let vtbl = cast[ptr QScrollBarVTable](fcQScrollBar_vdata(self))
   let self = QScrollBar(h: self)
   var veventType_bytearray = eventType
@@ -737,29 +777,20 @@ proc cQScrollBar_vtable_callback_nativeEvent(self: pointer, eventType: struct_mi
   var virtualReturn = vtbl[].nativeEvent(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QScrollBarmetric*(self: gen_qscrollbar_types.QScrollBar, param1: cint): cint =
-  fcQScrollBar_virtualbase_metric(self.h, cint(param1))
-
-proc cQScrollBar_vtable_callback_metric(self: pointer, param1: cint): cint {.cdecl.} =
+proc fcQScrollBar_vtable_callback_metric(self: pointer, param1: cint): cint {.cdecl.} =
   let vtbl = cast[ptr QScrollBarVTable](fcQScrollBar_vdata(self))
   let self = QScrollBar(h: self)
   let slotval1 = cint(param1)
   var virtualReturn = vtbl[].metric(self, slotval1)
   virtualReturn
 
-proc QScrollBarinitPainter*(self: gen_qscrollbar_types.QScrollBar, painter: gen_qpainter_types.QPainter): void =
-  fcQScrollBar_virtualbase_initPainter(self.h, painter.h)
-
-proc cQScrollBar_vtable_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
+proc fcQScrollBar_vtable_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QScrollBarVTable](fcQScrollBar_vdata(self))
   let self = QScrollBar(h: self)
   let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
   vtbl[].initPainter(self, slotval1)
 
-proc QScrollBarredirected*(self: gen_qscrollbar_types.QScrollBar, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice =
-  gen_qpaintdevice_types.QPaintDevice(h: fcQScrollBar_virtualbase_redirected(self.h, offset.h), owned: false)
-
-proc cQScrollBar_vtable_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
+proc fcQScrollBar_vtable_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QScrollBarVTable](fcQScrollBar_vdata(self))
   let self = QScrollBar(h: self)
   let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
@@ -769,10 +800,7 @@ proc cQScrollBar_vtable_callback_redirected(self: pointer, offset: pointer): poi
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QScrollBarsharedPainter*(self: gen_qscrollbar_types.QScrollBar): gen_qpainter_types.QPainter =
-  gen_qpainter_types.QPainter(h: fcQScrollBar_virtualbase_sharedPainter(self.h), owned: false)
-
-proc cQScrollBar_vtable_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
+proc fcQScrollBar_vtable_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QScrollBarVTable](fcQScrollBar_vdata(self))
   let self = QScrollBar(h: self)
   var virtualReturn = vtbl[].sharedPainter(self)
@@ -781,19 +809,13 @@ proc cQScrollBar_vtable_callback_sharedPainter(self: pointer): pointer {.cdecl.}
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QScrollBarinputMethodEvent*(self: gen_qscrollbar_types.QScrollBar, param1: gen_qevent_types.QInputMethodEvent): void =
-  fcQScrollBar_virtualbase_inputMethodEvent(self.h, param1.h)
-
-proc cQScrollBar_vtable_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQScrollBar_vtable_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QScrollBarVTable](fcQScrollBar_vdata(self))
   let self = QScrollBar(h: self)
   let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1, owned: false)
   vtbl[].inputMethodEvent(self, slotval1)
 
-proc QScrollBarinputMethodQuery*(self: gen_qscrollbar_types.QScrollBar, param1: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQScrollBar_virtualbase_inputMethodQuery(self.h, cint(param1)), owned: true)
-
-proc cQScrollBar_vtable_callback_inputMethodQuery(self: pointer, param1: cint): pointer {.cdecl.} =
+proc fcQScrollBar_vtable_callback_inputMethodQuery(self: pointer, param1: cint): pointer {.cdecl.} =
   let vtbl = cast[ptr QScrollBarVTable](fcQScrollBar_vdata(self))
   let self = QScrollBar(h: self)
   let slotval1 = cint(param1)
@@ -803,20 +825,14 @@ proc cQScrollBar_vtable_callback_inputMethodQuery(self: pointer, param1: cint): 
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QScrollBarfocusNextPrevChild*(self: gen_qscrollbar_types.QScrollBar, next: bool): bool =
-  fcQScrollBar_virtualbase_focusNextPrevChild(self.h, next)
-
-proc cQScrollBar_vtable_callback_focusNextPrevChild(self: pointer, next: bool): bool {.cdecl.} =
+proc fcQScrollBar_vtable_callback_focusNextPrevChild(self: pointer, next: bool): bool {.cdecl.} =
   let vtbl = cast[ptr QScrollBarVTable](fcQScrollBar_vdata(self))
   let self = QScrollBar(h: self)
   let slotval1 = next
   var virtualReturn = vtbl[].focusNextPrevChild(self, slotval1)
   virtualReturn
 
-proc QScrollBareventFilter*(self: gen_qscrollbar_types.QScrollBar, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
-  fcQScrollBar_virtualbase_eventFilter(self.h, watched.h, event.h)
-
-proc cQScrollBar_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+proc fcQScrollBar_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QScrollBarVTable](fcQScrollBar_vdata(self))
   let self = QScrollBar(h: self)
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
@@ -824,37 +840,25 @@ proc cQScrollBar_vtable_callback_eventFilter(self: pointer, watched: pointer, ev
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
-proc QScrollBarchildEvent*(self: gen_qscrollbar_types.QScrollBar, event: gen_qcoreevent_types.QChildEvent): void =
-  fcQScrollBar_virtualbase_childEvent(self.h, event.h)
-
-proc cQScrollBar_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQScrollBar_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QScrollBarVTable](fcQScrollBar_vdata(self))
   let self = QScrollBar(h: self)
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
-proc QScrollBarcustomEvent*(self: gen_qscrollbar_types.QScrollBar, event: gen_qcoreevent_types.QEvent): void =
-  fcQScrollBar_virtualbase_customEvent(self.h, event.h)
-
-proc cQScrollBar_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQScrollBar_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QScrollBarVTable](fcQScrollBar_vdata(self))
   let self = QScrollBar(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
-proc QScrollBarconnectNotify*(self: gen_qscrollbar_types.QScrollBar, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQScrollBar_virtualbase_connectNotify(self.h, signal.h)
-
-proc cQScrollBar_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQScrollBar_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QScrollBarVTable](fcQScrollBar_vdata(self))
   let self = QScrollBar(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
-proc QScrollBardisconnectNotify*(self: gen_qscrollbar_types.QScrollBar, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQScrollBar_virtualbase_disconnectNotify(self.h, signal.h)
-
-proc cQScrollBar_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQScrollBar_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QScrollBarVTable](fcQScrollBar_vdata(self))
   let self = QScrollBar(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
@@ -862,9 +866,111 @@ proc cQScrollBar_vtable_callback_disconnectNotify(self: pointer, signal: pointer
 
 type VirtualQScrollBar* {.inheritable.} = ref object of QScrollBar
   vtbl*: cQScrollBarVTable
+
 method metaObject*(self: VirtualQScrollBar): gen_qobjectdefs_types.QMetaObject {.base.} =
   QScrollBarmetaObject(self[])
-proc cQScrollBar_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
+method metacast*(self: VirtualQScrollBar, param1: cstring): pointer {.base.} =
+  QScrollBarmetacast(self[], param1)
+method metacall*(self: VirtualQScrollBar, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QScrollBarmetacall(self[], param1, param2, param3)
+method sizeHint*(self: VirtualQScrollBar): gen_qsize_types.QSize {.base.} =
+  QScrollBarsizeHint(self[])
+method event*(self: VirtualQScrollBar, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QScrollBarevent(self[], event)
+method wheelEvent*(self: VirtualQScrollBar, param1: gen_qevent_types.QWheelEvent): void {.base.} =
+  QScrollBarwheelEvent(self[], param1)
+method paintEvent*(self: VirtualQScrollBar, param1: gen_qevent_types.QPaintEvent): void {.base.} =
+  QScrollBarpaintEvent(self[], param1)
+method mousePressEvent*(self: VirtualQScrollBar, param1: gen_qevent_types.QMouseEvent): void {.base.} =
+  QScrollBarmousePressEvent(self[], param1)
+method mouseReleaseEvent*(self: VirtualQScrollBar, param1: gen_qevent_types.QMouseEvent): void {.base.} =
+  QScrollBarmouseReleaseEvent(self[], param1)
+method mouseMoveEvent*(self: VirtualQScrollBar, param1: gen_qevent_types.QMouseEvent): void {.base.} =
+  QScrollBarmouseMoveEvent(self[], param1)
+method hideEvent*(self: VirtualQScrollBar, param1: gen_qevent_types.QHideEvent): void {.base.} =
+  QScrollBarhideEvent(self[], param1)
+method sliderChange*(self: VirtualQScrollBar, change: cint): void {.base.} =
+  QScrollBarsliderChange(self[], change)
+method contextMenuEvent*(self: VirtualQScrollBar, param1: gen_qevent_types.QContextMenuEvent): void {.base.} =
+  QScrollBarcontextMenuEvent(self[], param1)
+method keyPressEvent*(self: VirtualQScrollBar, ev: gen_qevent_types.QKeyEvent): void {.base.} =
+  QScrollBarkeyPressEvent(self[], ev)
+method timerEvent*(self: VirtualQScrollBar, param1: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QScrollBartimerEvent(self[], param1)
+method changeEvent*(self: VirtualQScrollBar, e: gen_qcoreevent_types.QEvent): void {.base.} =
+  QScrollBarchangeEvent(self[], e)
+method devType*(self: VirtualQScrollBar): cint {.base.} =
+  QScrollBardevType(self[])
+method setVisible*(self: VirtualQScrollBar, visible: bool): void {.base.} =
+  QScrollBarsetVisible(self[], visible)
+method minimumSizeHint*(self: VirtualQScrollBar): gen_qsize_types.QSize {.base.} =
+  QScrollBarminimumSizeHint(self[])
+method heightForWidth*(self: VirtualQScrollBar, param1: cint): cint {.base.} =
+  QScrollBarheightForWidth(self[], param1)
+method hasHeightForWidth*(self: VirtualQScrollBar): bool {.base.} =
+  QScrollBarhasHeightForWidth(self[])
+method paintEngine*(self: VirtualQScrollBar): gen_qpaintengine_types.QPaintEngine {.base.} =
+  QScrollBarpaintEngine(self[])
+method mouseDoubleClickEvent*(self: VirtualQScrollBar, event: gen_qevent_types.QMouseEvent): void {.base.} =
+  QScrollBarmouseDoubleClickEvent(self[], event)
+method keyReleaseEvent*(self: VirtualQScrollBar, event: gen_qevent_types.QKeyEvent): void {.base.} =
+  QScrollBarkeyReleaseEvent(self[], event)
+method focusInEvent*(self: VirtualQScrollBar, event: gen_qevent_types.QFocusEvent): void {.base.} =
+  QScrollBarfocusInEvent(self[], event)
+method focusOutEvent*(self: VirtualQScrollBar, event: gen_qevent_types.QFocusEvent): void {.base.} =
+  QScrollBarfocusOutEvent(self[], event)
+method enterEvent*(self: VirtualQScrollBar, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QScrollBarenterEvent(self[], event)
+method leaveEvent*(self: VirtualQScrollBar, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QScrollBarleaveEvent(self[], event)
+method moveEvent*(self: VirtualQScrollBar, event: gen_qevent_types.QMoveEvent): void {.base.} =
+  QScrollBarmoveEvent(self[], event)
+method resizeEvent*(self: VirtualQScrollBar, event: gen_qevent_types.QResizeEvent): void {.base.} =
+  QScrollBarresizeEvent(self[], event)
+method closeEvent*(self: VirtualQScrollBar, event: gen_qevent_types.QCloseEvent): void {.base.} =
+  QScrollBarcloseEvent(self[], event)
+method tabletEvent*(self: VirtualQScrollBar, event: gen_qevent_types.QTabletEvent): void {.base.} =
+  QScrollBartabletEvent(self[], event)
+method actionEvent*(self: VirtualQScrollBar, event: gen_qevent_types.QActionEvent): void {.base.} =
+  QScrollBaractionEvent(self[], event)
+method dragEnterEvent*(self: VirtualQScrollBar, event: gen_qevent_types.QDragEnterEvent): void {.base.} =
+  QScrollBardragEnterEvent(self[], event)
+method dragMoveEvent*(self: VirtualQScrollBar, event: gen_qevent_types.QDragMoveEvent): void {.base.} =
+  QScrollBardragMoveEvent(self[], event)
+method dragLeaveEvent*(self: VirtualQScrollBar, event: gen_qevent_types.QDragLeaveEvent): void {.base.} =
+  QScrollBardragLeaveEvent(self[], event)
+method dropEvent*(self: VirtualQScrollBar, event: gen_qevent_types.QDropEvent): void {.base.} =
+  QScrollBardropEvent(self[], event)
+method showEvent*(self: VirtualQScrollBar, event: gen_qevent_types.QShowEvent): void {.base.} =
+  QScrollBarshowEvent(self[], event)
+method nativeEvent*(self: VirtualQScrollBar, eventType: openArray[byte], message: pointer, resultVal: ptr clong): bool {.base.} =
+  QScrollBarnativeEvent(self[], eventType, message, resultVal)
+method metric*(self: VirtualQScrollBar, param1: cint): cint {.base.} =
+  QScrollBarmetric(self[], param1)
+method initPainter*(self: VirtualQScrollBar, painter: gen_qpainter_types.QPainter): void {.base.} =
+  QScrollBarinitPainter(self[], painter)
+method redirected*(self: VirtualQScrollBar, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.base.} =
+  QScrollBarredirected(self[], offset)
+method sharedPainter*(self: VirtualQScrollBar): gen_qpainter_types.QPainter {.base.} =
+  QScrollBarsharedPainter(self[])
+method inputMethodEvent*(self: VirtualQScrollBar, param1: gen_qevent_types.QInputMethodEvent): void {.base.} =
+  QScrollBarinputMethodEvent(self[], param1)
+method inputMethodQuery*(self: VirtualQScrollBar, param1: cint): gen_qvariant_types.QVariant {.base.} =
+  QScrollBarinputMethodQuery(self[], param1)
+method focusNextPrevChild*(self: VirtualQScrollBar, next: bool): bool {.base.} =
+  QScrollBarfocusNextPrevChild(self[], next)
+method eventFilter*(self: VirtualQScrollBar, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QScrollBareventFilter(self[], watched, event)
+method childEvent*(self: VirtualQScrollBar, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QScrollBarchildEvent(self[], event)
+method customEvent*(self: VirtualQScrollBar, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QScrollBarcustomEvent(self[], event)
+method connectNotify*(self: VirtualQScrollBar, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QScrollBarconnectNotify(self[], signal)
+method disconnectNotify*(self: VirtualQScrollBar, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QScrollBardisconnectNotify(self[], signal)
+
+proc fcQScrollBar_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQScrollBar](fcQScrollBar_vdata(self))
   var virtualReturn = inst.metaObject()
   virtualReturn.owned = false # TODO move?
@@ -872,17 +978,13 @@ proc cQScrollBar_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-method metacast*(self: VirtualQScrollBar, param1: cstring): pointer {.base.} =
-  QScrollBarmetacast(self[], param1)
-proc cQScrollBar_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+proc fcQScrollBar_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQScrollBar](fcQScrollBar_vdata(self))
   let slotval1 = (param1)
   var virtualReturn = inst.metacast(slotval1)
   virtualReturn
 
-method metacall*(self: VirtualQScrollBar, param1: cint, param2: cint, param3: pointer): cint {.base.} =
-  QScrollBarmetacall(self[], param1, param2, param3)
-proc cQScrollBar_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+proc fcQScrollBar_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQScrollBar](fcQScrollBar_vdata(self))
   let slotval1 = cint(param1)
   let slotval2 = param2
@@ -890,9 +992,7 @@ proc cQScrollBar_method_callback_metacall(self: pointer, param1: cint, param2: c
   var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
-method sizeHint*(self: VirtualQScrollBar): gen_qsize_types.QSize {.base.} =
-  QScrollBarsizeHint(self[])
-proc cQScrollBar_method_callback_sizeHint(self: pointer): pointer {.cdecl.} =
+proc fcQScrollBar_method_callback_sizeHint(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQScrollBar](fcQScrollBar_vdata(self))
   var virtualReturn = inst.sizeHint()
   virtualReturn.owned = false # TODO move?
@@ -900,108 +1000,78 @@ proc cQScrollBar_method_callback_sizeHint(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-method event*(self: VirtualQScrollBar, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QScrollBarevent(self[], event)
-proc cQScrollBar_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
+proc fcQScrollBar_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQScrollBar](fcQScrollBar_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
-method wheelEvent*(self: VirtualQScrollBar, param1: gen_qevent_types.QWheelEvent): void {.base.} =
-  QScrollBarwheelEvent(self[], param1)
-proc cQScrollBar_method_callback_wheelEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQScrollBar_method_callback_wheelEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQScrollBar](fcQScrollBar_vdata(self))
   let slotval1 = gen_qevent_types.QWheelEvent(h: param1, owned: false)
   inst.wheelEvent(slotval1)
 
-method paintEvent*(self: VirtualQScrollBar, param1: gen_qevent_types.QPaintEvent): void {.base.} =
-  QScrollBarpaintEvent(self[], param1)
-proc cQScrollBar_method_callback_paintEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQScrollBar_method_callback_paintEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQScrollBar](fcQScrollBar_vdata(self))
   let slotval1 = gen_qevent_types.QPaintEvent(h: param1, owned: false)
   inst.paintEvent(slotval1)
 
-method mousePressEvent*(self: VirtualQScrollBar, param1: gen_qevent_types.QMouseEvent): void {.base.} =
-  QScrollBarmousePressEvent(self[], param1)
-proc cQScrollBar_method_callback_mousePressEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQScrollBar_method_callback_mousePressEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQScrollBar](fcQScrollBar_vdata(self))
   let slotval1 = gen_qevent_types.QMouseEvent(h: param1, owned: false)
   inst.mousePressEvent(slotval1)
 
-method mouseReleaseEvent*(self: VirtualQScrollBar, param1: gen_qevent_types.QMouseEvent): void {.base.} =
-  QScrollBarmouseReleaseEvent(self[], param1)
-proc cQScrollBar_method_callback_mouseReleaseEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQScrollBar_method_callback_mouseReleaseEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQScrollBar](fcQScrollBar_vdata(self))
   let slotval1 = gen_qevent_types.QMouseEvent(h: param1, owned: false)
   inst.mouseReleaseEvent(slotval1)
 
-method mouseMoveEvent*(self: VirtualQScrollBar, param1: gen_qevent_types.QMouseEvent): void {.base.} =
-  QScrollBarmouseMoveEvent(self[], param1)
-proc cQScrollBar_method_callback_mouseMoveEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQScrollBar_method_callback_mouseMoveEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQScrollBar](fcQScrollBar_vdata(self))
   let slotval1 = gen_qevent_types.QMouseEvent(h: param1, owned: false)
   inst.mouseMoveEvent(slotval1)
 
-method hideEvent*(self: VirtualQScrollBar, param1: gen_qevent_types.QHideEvent): void {.base.} =
-  QScrollBarhideEvent(self[], param1)
-proc cQScrollBar_method_callback_hideEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQScrollBar_method_callback_hideEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQScrollBar](fcQScrollBar_vdata(self))
   let slotval1 = gen_qevent_types.QHideEvent(h: param1, owned: false)
   inst.hideEvent(slotval1)
 
-method sliderChange*(self: VirtualQScrollBar, change: cint): void {.base.} =
-  QScrollBarsliderChange(self[], change)
-proc cQScrollBar_method_callback_sliderChange(self: pointer, change: cint): void {.cdecl.} =
+proc fcQScrollBar_method_callback_sliderChange(self: pointer, change: cint): void {.cdecl.} =
   let inst = cast[VirtualQScrollBar](fcQScrollBar_vdata(self))
   let slotval1 = cint(change)
   inst.sliderChange(slotval1)
 
-method contextMenuEvent*(self: VirtualQScrollBar, param1: gen_qevent_types.QContextMenuEvent): void {.base.} =
-  QScrollBarcontextMenuEvent(self[], param1)
-proc cQScrollBar_method_callback_contextMenuEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQScrollBar_method_callback_contextMenuEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQScrollBar](fcQScrollBar_vdata(self))
   let slotval1 = gen_qevent_types.QContextMenuEvent(h: param1, owned: false)
   inst.contextMenuEvent(slotval1)
 
-method keyPressEvent*(self: VirtualQScrollBar, ev: gen_qevent_types.QKeyEvent): void {.base.} =
-  QScrollBarkeyPressEvent(self[], ev)
-proc cQScrollBar_method_callback_keyPressEvent(self: pointer, ev: pointer): void {.cdecl.} =
+proc fcQScrollBar_method_callback_keyPressEvent(self: pointer, ev: pointer): void {.cdecl.} =
   let inst = cast[VirtualQScrollBar](fcQScrollBar_vdata(self))
   let slotval1 = gen_qevent_types.QKeyEvent(h: ev, owned: false)
   inst.keyPressEvent(slotval1)
 
-method timerEvent*(self: VirtualQScrollBar, param1: gen_qcoreevent_types.QTimerEvent): void {.base.} =
-  QScrollBartimerEvent(self[], param1)
-proc cQScrollBar_method_callback_timerEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQScrollBar_method_callback_timerEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQScrollBar](fcQScrollBar_vdata(self))
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: param1, owned: false)
   inst.timerEvent(slotval1)
 
-method changeEvent*(self: VirtualQScrollBar, e: gen_qcoreevent_types.QEvent): void {.base.} =
-  QScrollBarchangeEvent(self[], e)
-proc cQScrollBar_method_callback_changeEvent(self: pointer, e: pointer): void {.cdecl.} =
+proc fcQScrollBar_method_callback_changeEvent(self: pointer, e: pointer): void {.cdecl.} =
   let inst = cast[VirtualQScrollBar](fcQScrollBar_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: e, owned: false)
   inst.changeEvent(slotval1)
 
-method devType*(self: VirtualQScrollBar): cint {.base.} =
-  QScrollBardevType(self[])
-proc cQScrollBar_method_callback_devType(self: pointer): cint {.cdecl.} =
+proc fcQScrollBar_method_callback_devType(self: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQScrollBar](fcQScrollBar_vdata(self))
   var virtualReturn = inst.devType()
   virtualReturn
 
-method setVisible*(self: VirtualQScrollBar, visible: bool): void {.base.} =
-  QScrollBarsetVisible(self[], visible)
-proc cQScrollBar_method_callback_setVisible(self: pointer, visible: bool): void {.cdecl.} =
+proc fcQScrollBar_method_callback_setVisible(self: pointer, visible: bool): void {.cdecl.} =
   let inst = cast[VirtualQScrollBar](fcQScrollBar_vdata(self))
   let slotval1 = visible
   inst.setVisible(slotval1)
 
-method minimumSizeHint*(self: VirtualQScrollBar): gen_qsize_types.QSize {.base.} =
-  QScrollBarminimumSizeHint(self[])
-proc cQScrollBar_method_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
+proc fcQScrollBar_method_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQScrollBar](fcQScrollBar_vdata(self))
   var virtualReturn = inst.minimumSizeHint()
   virtualReturn.owned = false # TODO move?
@@ -1009,24 +1079,18 @@ proc cQScrollBar_method_callback_minimumSizeHint(self: pointer): pointer {.cdecl
   virtualReturn.h = nil
   virtualReturn_h
 
-method heightForWidth*(self: VirtualQScrollBar, param1: cint): cint {.base.} =
-  QScrollBarheightForWidth(self[], param1)
-proc cQScrollBar_method_callback_heightForWidth(self: pointer, param1: cint): cint {.cdecl.} =
+proc fcQScrollBar_method_callback_heightForWidth(self: pointer, param1: cint): cint {.cdecl.} =
   let inst = cast[VirtualQScrollBar](fcQScrollBar_vdata(self))
   let slotval1 = param1
   var virtualReturn = inst.heightForWidth(slotval1)
   virtualReturn
 
-method hasHeightForWidth*(self: VirtualQScrollBar): bool {.base.} =
-  QScrollBarhasHeightForWidth(self[])
-proc cQScrollBar_method_callback_hasHeightForWidth(self: pointer): bool {.cdecl.} =
+proc fcQScrollBar_method_callback_hasHeightForWidth(self: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQScrollBar](fcQScrollBar_vdata(self))
   var virtualReturn = inst.hasHeightForWidth()
   virtualReturn
 
-method paintEngine*(self: VirtualQScrollBar): gen_qpaintengine_types.QPaintEngine {.base.} =
-  QScrollBarpaintEngine(self[])
-proc cQScrollBar_method_callback_paintEngine(self: pointer): pointer {.cdecl.} =
+proc fcQScrollBar_method_callback_paintEngine(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQScrollBar](fcQScrollBar_vdata(self))
   var virtualReturn = inst.paintEngine()
   virtualReturn.owned = false # TODO move?
@@ -1034,121 +1098,87 @@ proc cQScrollBar_method_callback_paintEngine(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-method mouseDoubleClickEvent*(self: VirtualQScrollBar, event: gen_qevent_types.QMouseEvent): void {.base.} =
-  QScrollBarmouseDoubleClickEvent(self[], event)
-proc cQScrollBar_method_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQScrollBar_method_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQScrollBar](fcQScrollBar_vdata(self))
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mouseDoubleClickEvent(slotval1)
 
-method keyReleaseEvent*(self: VirtualQScrollBar, event: gen_qevent_types.QKeyEvent): void {.base.} =
-  QScrollBarkeyReleaseEvent(self[], event)
-proc cQScrollBar_method_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQScrollBar_method_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQScrollBar](fcQScrollBar_vdata(self))
   let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   inst.keyReleaseEvent(slotval1)
 
-method focusInEvent*(self: VirtualQScrollBar, event: gen_qevent_types.QFocusEvent): void {.base.} =
-  QScrollBarfocusInEvent(self[], event)
-proc cQScrollBar_method_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQScrollBar_method_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQScrollBar](fcQScrollBar_vdata(self))
   let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   inst.focusInEvent(slotval1)
 
-method focusOutEvent*(self: VirtualQScrollBar, event: gen_qevent_types.QFocusEvent): void {.base.} =
-  QScrollBarfocusOutEvent(self[], event)
-proc cQScrollBar_method_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQScrollBar_method_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQScrollBar](fcQScrollBar_vdata(self))
   let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   inst.focusOutEvent(slotval1)
 
-method enterEvent*(self: VirtualQScrollBar, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QScrollBarenterEvent(self[], event)
-proc cQScrollBar_method_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQScrollBar_method_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQScrollBar](fcQScrollBar_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.enterEvent(slotval1)
 
-method leaveEvent*(self: VirtualQScrollBar, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QScrollBarleaveEvent(self[], event)
-proc cQScrollBar_method_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQScrollBar_method_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQScrollBar](fcQScrollBar_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.leaveEvent(slotval1)
 
-method moveEvent*(self: VirtualQScrollBar, event: gen_qevent_types.QMoveEvent): void {.base.} =
-  QScrollBarmoveEvent(self[], event)
-proc cQScrollBar_method_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQScrollBar_method_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQScrollBar](fcQScrollBar_vdata(self))
   let slotval1 = gen_qevent_types.QMoveEvent(h: event, owned: false)
   inst.moveEvent(slotval1)
 
-method resizeEvent*(self: VirtualQScrollBar, event: gen_qevent_types.QResizeEvent): void {.base.} =
-  QScrollBarresizeEvent(self[], event)
-proc cQScrollBar_method_callback_resizeEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQScrollBar_method_callback_resizeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQScrollBar](fcQScrollBar_vdata(self))
   let slotval1 = gen_qevent_types.QResizeEvent(h: event, owned: false)
   inst.resizeEvent(slotval1)
 
-method closeEvent*(self: VirtualQScrollBar, event: gen_qevent_types.QCloseEvent): void {.base.} =
-  QScrollBarcloseEvent(self[], event)
-proc cQScrollBar_method_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQScrollBar_method_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQScrollBar](fcQScrollBar_vdata(self))
   let slotval1 = gen_qevent_types.QCloseEvent(h: event, owned: false)
   inst.closeEvent(slotval1)
 
-method tabletEvent*(self: VirtualQScrollBar, event: gen_qevent_types.QTabletEvent): void {.base.} =
-  QScrollBartabletEvent(self[], event)
-proc cQScrollBar_method_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQScrollBar_method_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQScrollBar](fcQScrollBar_vdata(self))
   let slotval1 = gen_qevent_types.QTabletEvent(h: event, owned: false)
   inst.tabletEvent(slotval1)
 
-method actionEvent*(self: VirtualQScrollBar, event: gen_qevent_types.QActionEvent): void {.base.} =
-  QScrollBaractionEvent(self[], event)
-proc cQScrollBar_method_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQScrollBar_method_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQScrollBar](fcQScrollBar_vdata(self))
   let slotval1 = gen_qevent_types.QActionEvent(h: event, owned: false)
   inst.actionEvent(slotval1)
 
-method dragEnterEvent*(self: VirtualQScrollBar, event: gen_qevent_types.QDragEnterEvent): void {.base.} =
-  QScrollBardragEnterEvent(self[], event)
-proc cQScrollBar_method_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQScrollBar_method_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQScrollBar](fcQScrollBar_vdata(self))
   let slotval1 = gen_qevent_types.QDragEnterEvent(h: event, owned: false)
   inst.dragEnterEvent(slotval1)
 
-method dragMoveEvent*(self: VirtualQScrollBar, event: gen_qevent_types.QDragMoveEvent): void {.base.} =
-  QScrollBardragMoveEvent(self[], event)
-proc cQScrollBar_method_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQScrollBar_method_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQScrollBar](fcQScrollBar_vdata(self))
   let slotval1 = gen_qevent_types.QDragMoveEvent(h: event, owned: false)
   inst.dragMoveEvent(slotval1)
 
-method dragLeaveEvent*(self: VirtualQScrollBar, event: gen_qevent_types.QDragLeaveEvent): void {.base.} =
-  QScrollBardragLeaveEvent(self[], event)
-proc cQScrollBar_method_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQScrollBar_method_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQScrollBar](fcQScrollBar_vdata(self))
   let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event, owned: false)
   inst.dragLeaveEvent(slotval1)
 
-method dropEvent*(self: VirtualQScrollBar, event: gen_qevent_types.QDropEvent): void {.base.} =
-  QScrollBardropEvent(self[], event)
-proc cQScrollBar_method_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQScrollBar_method_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQScrollBar](fcQScrollBar_vdata(self))
   let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
   inst.dropEvent(slotval1)
 
-method showEvent*(self: VirtualQScrollBar, event: gen_qevent_types.QShowEvent): void {.base.} =
-  QScrollBarshowEvent(self[], event)
-proc cQScrollBar_method_callback_showEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQScrollBar_method_callback_showEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQScrollBar](fcQScrollBar_vdata(self))
   let slotval1 = gen_qevent_types.QShowEvent(h: event, owned: false)
   inst.showEvent(slotval1)
 
-method nativeEvent*(self: VirtualQScrollBar, eventType: openArray[byte], message: pointer, resultVal: ptr clong): bool {.base.} =
-  QScrollBarnativeEvent(self[], eventType, message, resultVal)
-proc cQScrollBar_method_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr clong): bool {.cdecl.} =
+proc fcQScrollBar_method_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr clong): bool {.cdecl.} =
   let inst = cast[VirtualQScrollBar](fcQScrollBar_vdata(self))
   var veventType_bytearray = eventType
   var veventTypex_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](veventType_bytearray.data), 0, int(veventType_bytearray.len)-1))
@@ -1159,24 +1189,18 @@ proc cQScrollBar_method_callback_nativeEvent(self: pointer, eventType: struct_mi
   var virtualReturn = inst.nativeEvent(slotval1, slotval2, slotval3)
   virtualReturn
 
-method metric*(self: VirtualQScrollBar, param1: cint): cint {.base.} =
-  QScrollBarmetric(self[], param1)
-proc cQScrollBar_method_callback_metric(self: pointer, param1: cint): cint {.cdecl.} =
+proc fcQScrollBar_method_callback_metric(self: pointer, param1: cint): cint {.cdecl.} =
   let inst = cast[VirtualQScrollBar](fcQScrollBar_vdata(self))
   let slotval1 = cint(param1)
   var virtualReturn = inst.metric(slotval1)
   virtualReturn
 
-method initPainter*(self: VirtualQScrollBar, painter: gen_qpainter_types.QPainter): void {.base.} =
-  QScrollBarinitPainter(self[], painter)
-proc cQScrollBar_method_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
+proc fcQScrollBar_method_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
   let inst = cast[VirtualQScrollBar](fcQScrollBar_vdata(self))
   let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
   inst.initPainter(slotval1)
 
-method redirected*(self: VirtualQScrollBar, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.base.} =
-  QScrollBarredirected(self[], offset)
-proc cQScrollBar_method_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
+proc fcQScrollBar_method_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQScrollBar](fcQScrollBar_vdata(self))
   let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
   var virtualReturn = inst.redirected(slotval1)
@@ -1185,9 +1209,7 @@ proc cQScrollBar_method_callback_redirected(self: pointer, offset: pointer): poi
   virtualReturn.h = nil
   virtualReturn_h
 
-method sharedPainter*(self: VirtualQScrollBar): gen_qpainter_types.QPainter {.base.} =
-  QScrollBarsharedPainter(self[])
-proc cQScrollBar_method_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
+proc fcQScrollBar_method_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQScrollBar](fcQScrollBar_vdata(self))
   var virtualReturn = inst.sharedPainter()
   virtualReturn.owned = false # TODO move?
@@ -1195,16 +1217,12 @@ proc cQScrollBar_method_callback_sharedPainter(self: pointer): pointer {.cdecl.}
   virtualReturn.h = nil
   virtualReturn_h
 
-method inputMethodEvent*(self: VirtualQScrollBar, param1: gen_qevent_types.QInputMethodEvent): void {.base.} =
-  QScrollBarinputMethodEvent(self[], param1)
-proc cQScrollBar_method_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQScrollBar_method_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQScrollBar](fcQScrollBar_vdata(self))
   let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1, owned: false)
   inst.inputMethodEvent(slotval1)
 
-method inputMethodQuery*(self: VirtualQScrollBar, param1: cint): gen_qvariant_types.QVariant {.base.} =
-  QScrollBarinputMethodQuery(self[], param1)
-proc cQScrollBar_method_callback_inputMethodQuery(self: pointer, param1: cint): pointer {.cdecl.} =
+proc fcQScrollBar_method_callback_inputMethodQuery(self: pointer, param1: cint): pointer {.cdecl.} =
   let inst = cast[VirtualQScrollBar](fcQScrollBar_vdata(self))
   let slotval1 = cint(param1)
   var virtualReturn = inst.inputMethodQuery(slotval1)
@@ -1213,50 +1231,39 @@ proc cQScrollBar_method_callback_inputMethodQuery(self: pointer, param1: cint): 
   virtualReturn.h = nil
   virtualReturn_h
 
-method focusNextPrevChild*(self: VirtualQScrollBar, next: bool): bool {.base.} =
-  QScrollBarfocusNextPrevChild(self[], next)
-proc cQScrollBar_method_callback_focusNextPrevChild(self: pointer, next: bool): bool {.cdecl.} =
+proc fcQScrollBar_method_callback_focusNextPrevChild(self: pointer, next: bool): bool {.cdecl.} =
   let inst = cast[VirtualQScrollBar](fcQScrollBar_vdata(self))
   let slotval1 = next
   var virtualReturn = inst.focusNextPrevChild(slotval1)
   virtualReturn
 
-method eventFilter*(self: VirtualQScrollBar, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QScrollBareventFilter(self[], watched, event)
-proc cQScrollBar_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+proc fcQScrollBar_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQScrollBar](fcQScrollBar_vdata(self))
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
   let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
-method childEvent*(self: VirtualQScrollBar, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
-  QScrollBarchildEvent(self[], event)
-proc cQScrollBar_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQScrollBar_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQScrollBar](fcQScrollBar_vdata(self))
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
-method customEvent*(self: VirtualQScrollBar, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QScrollBarcustomEvent(self[], event)
-proc cQScrollBar_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQScrollBar_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQScrollBar](fcQScrollBar_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
-method connectNotify*(self: VirtualQScrollBar, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QScrollBarconnectNotify(self[], signal)
-proc cQScrollBar_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQScrollBar_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQScrollBar](fcQScrollBar_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
-method disconnectNotify*(self: VirtualQScrollBar, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QScrollBardisconnectNotify(self[], signal)
-proc cQScrollBar_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQScrollBar_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQScrollBar](fcQScrollBar_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
+
 
 proc initStyleOption*(self: gen_qscrollbar_types.QScrollBar, option: gen_qstyleoption_types.QStyleOptionSlider): void =
   fcQScrollBar_protectedbase_initStyleOption(self.h, option.h)
@@ -1303,107 +1310,107 @@ proc create*(T: type gen_qscrollbar_types.QScrollBar,
     let vtbl = cast[ref QScrollBarVTable](fcQScrollBar_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQScrollBar_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQScrollBar_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQScrollBar_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQScrollBar_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQScrollBar_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQScrollBar_vtable_callback_metacall
   if not isNil(vtbl[].sizeHint):
-    vtbl[].vtbl.sizeHint = cQScrollBar_vtable_callback_sizeHint
+    vtbl[].vtbl.sizeHint = fcQScrollBar_vtable_callback_sizeHint
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQScrollBar_vtable_callback_event
+    vtbl[].vtbl.event = fcQScrollBar_vtable_callback_event
   if not isNil(vtbl[].wheelEvent):
-    vtbl[].vtbl.wheelEvent = cQScrollBar_vtable_callback_wheelEvent
+    vtbl[].vtbl.wheelEvent = fcQScrollBar_vtable_callback_wheelEvent
   if not isNil(vtbl[].paintEvent):
-    vtbl[].vtbl.paintEvent = cQScrollBar_vtable_callback_paintEvent
+    vtbl[].vtbl.paintEvent = fcQScrollBar_vtable_callback_paintEvent
   if not isNil(vtbl[].mousePressEvent):
-    vtbl[].vtbl.mousePressEvent = cQScrollBar_vtable_callback_mousePressEvent
+    vtbl[].vtbl.mousePressEvent = fcQScrollBar_vtable_callback_mousePressEvent
   if not isNil(vtbl[].mouseReleaseEvent):
-    vtbl[].vtbl.mouseReleaseEvent = cQScrollBar_vtable_callback_mouseReleaseEvent
+    vtbl[].vtbl.mouseReleaseEvent = fcQScrollBar_vtable_callback_mouseReleaseEvent
   if not isNil(vtbl[].mouseMoveEvent):
-    vtbl[].vtbl.mouseMoveEvent = cQScrollBar_vtable_callback_mouseMoveEvent
+    vtbl[].vtbl.mouseMoveEvent = fcQScrollBar_vtable_callback_mouseMoveEvent
   if not isNil(vtbl[].hideEvent):
-    vtbl[].vtbl.hideEvent = cQScrollBar_vtable_callback_hideEvent
+    vtbl[].vtbl.hideEvent = fcQScrollBar_vtable_callback_hideEvent
   if not isNil(vtbl[].sliderChange):
-    vtbl[].vtbl.sliderChange = cQScrollBar_vtable_callback_sliderChange
+    vtbl[].vtbl.sliderChange = fcQScrollBar_vtable_callback_sliderChange
   if not isNil(vtbl[].contextMenuEvent):
-    vtbl[].vtbl.contextMenuEvent = cQScrollBar_vtable_callback_contextMenuEvent
+    vtbl[].vtbl.contextMenuEvent = fcQScrollBar_vtable_callback_contextMenuEvent
   if not isNil(vtbl[].keyPressEvent):
-    vtbl[].vtbl.keyPressEvent = cQScrollBar_vtable_callback_keyPressEvent
+    vtbl[].vtbl.keyPressEvent = fcQScrollBar_vtable_callback_keyPressEvent
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQScrollBar_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQScrollBar_vtable_callback_timerEvent
   if not isNil(vtbl[].changeEvent):
-    vtbl[].vtbl.changeEvent = cQScrollBar_vtable_callback_changeEvent
+    vtbl[].vtbl.changeEvent = fcQScrollBar_vtable_callback_changeEvent
   if not isNil(vtbl[].devType):
-    vtbl[].vtbl.devType = cQScrollBar_vtable_callback_devType
+    vtbl[].vtbl.devType = fcQScrollBar_vtable_callback_devType
   if not isNil(vtbl[].setVisible):
-    vtbl[].vtbl.setVisible = cQScrollBar_vtable_callback_setVisible
+    vtbl[].vtbl.setVisible = fcQScrollBar_vtable_callback_setVisible
   if not isNil(vtbl[].minimumSizeHint):
-    vtbl[].vtbl.minimumSizeHint = cQScrollBar_vtable_callback_minimumSizeHint
+    vtbl[].vtbl.minimumSizeHint = fcQScrollBar_vtable_callback_minimumSizeHint
   if not isNil(vtbl[].heightForWidth):
-    vtbl[].vtbl.heightForWidth = cQScrollBar_vtable_callback_heightForWidth
+    vtbl[].vtbl.heightForWidth = fcQScrollBar_vtable_callback_heightForWidth
   if not isNil(vtbl[].hasHeightForWidth):
-    vtbl[].vtbl.hasHeightForWidth = cQScrollBar_vtable_callback_hasHeightForWidth
+    vtbl[].vtbl.hasHeightForWidth = fcQScrollBar_vtable_callback_hasHeightForWidth
   if not isNil(vtbl[].paintEngine):
-    vtbl[].vtbl.paintEngine = cQScrollBar_vtable_callback_paintEngine
+    vtbl[].vtbl.paintEngine = fcQScrollBar_vtable_callback_paintEngine
   if not isNil(vtbl[].mouseDoubleClickEvent):
-    vtbl[].vtbl.mouseDoubleClickEvent = cQScrollBar_vtable_callback_mouseDoubleClickEvent
+    vtbl[].vtbl.mouseDoubleClickEvent = fcQScrollBar_vtable_callback_mouseDoubleClickEvent
   if not isNil(vtbl[].keyReleaseEvent):
-    vtbl[].vtbl.keyReleaseEvent = cQScrollBar_vtable_callback_keyReleaseEvent
+    vtbl[].vtbl.keyReleaseEvent = fcQScrollBar_vtable_callback_keyReleaseEvent
   if not isNil(vtbl[].focusInEvent):
-    vtbl[].vtbl.focusInEvent = cQScrollBar_vtable_callback_focusInEvent
+    vtbl[].vtbl.focusInEvent = fcQScrollBar_vtable_callback_focusInEvent
   if not isNil(vtbl[].focusOutEvent):
-    vtbl[].vtbl.focusOutEvent = cQScrollBar_vtable_callback_focusOutEvent
+    vtbl[].vtbl.focusOutEvent = fcQScrollBar_vtable_callback_focusOutEvent
   if not isNil(vtbl[].enterEvent):
-    vtbl[].vtbl.enterEvent = cQScrollBar_vtable_callback_enterEvent
+    vtbl[].vtbl.enterEvent = fcQScrollBar_vtable_callback_enterEvent
   if not isNil(vtbl[].leaveEvent):
-    vtbl[].vtbl.leaveEvent = cQScrollBar_vtable_callback_leaveEvent
+    vtbl[].vtbl.leaveEvent = fcQScrollBar_vtable_callback_leaveEvent
   if not isNil(vtbl[].moveEvent):
-    vtbl[].vtbl.moveEvent = cQScrollBar_vtable_callback_moveEvent
+    vtbl[].vtbl.moveEvent = fcQScrollBar_vtable_callback_moveEvent
   if not isNil(vtbl[].resizeEvent):
-    vtbl[].vtbl.resizeEvent = cQScrollBar_vtable_callback_resizeEvent
+    vtbl[].vtbl.resizeEvent = fcQScrollBar_vtable_callback_resizeEvent
   if not isNil(vtbl[].closeEvent):
-    vtbl[].vtbl.closeEvent = cQScrollBar_vtable_callback_closeEvent
+    vtbl[].vtbl.closeEvent = fcQScrollBar_vtable_callback_closeEvent
   if not isNil(vtbl[].tabletEvent):
-    vtbl[].vtbl.tabletEvent = cQScrollBar_vtable_callback_tabletEvent
+    vtbl[].vtbl.tabletEvent = fcQScrollBar_vtable_callback_tabletEvent
   if not isNil(vtbl[].actionEvent):
-    vtbl[].vtbl.actionEvent = cQScrollBar_vtable_callback_actionEvent
+    vtbl[].vtbl.actionEvent = fcQScrollBar_vtable_callback_actionEvent
   if not isNil(vtbl[].dragEnterEvent):
-    vtbl[].vtbl.dragEnterEvent = cQScrollBar_vtable_callback_dragEnterEvent
+    vtbl[].vtbl.dragEnterEvent = fcQScrollBar_vtable_callback_dragEnterEvent
   if not isNil(vtbl[].dragMoveEvent):
-    vtbl[].vtbl.dragMoveEvent = cQScrollBar_vtable_callback_dragMoveEvent
+    vtbl[].vtbl.dragMoveEvent = fcQScrollBar_vtable_callback_dragMoveEvent
   if not isNil(vtbl[].dragLeaveEvent):
-    vtbl[].vtbl.dragLeaveEvent = cQScrollBar_vtable_callback_dragLeaveEvent
+    vtbl[].vtbl.dragLeaveEvent = fcQScrollBar_vtable_callback_dragLeaveEvent
   if not isNil(vtbl[].dropEvent):
-    vtbl[].vtbl.dropEvent = cQScrollBar_vtable_callback_dropEvent
+    vtbl[].vtbl.dropEvent = fcQScrollBar_vtable_callback_dropEvent
   if not isNil(vtbl[].showEvent):
-    vtbl[].vtbl.showEvent = cQScrollBar_vtable_callback_showEvent
+    vtbl[].vtbl.showEvent = fcQScrollBar_vtable_callback_showEvent
   if not isNil(vtbl[].nativeEvent):
-    vtbl[].vtbl.nativeEvent = cQScrollBar_vtable_callback_nativeEvent
+    vtbl[].vtbl.nativeEvent = fcQScrollBar_vtable_callback_nativeEvent
   if not isNil(vtbl[].metric):
-    vtbl[].vtbl.metric = cQScrollBar_vtable_callback_metric
+    vtbl[].vtbl.metric = fcQScrollBar_vtable_callback_metric
   if not isNil(vtbl[].initPainter):
-    vtbl[].vtbl.initPainter = cQScrollBar_vtable_callback_initPainter
+    vtbl[].vtbl.initPainter = fcQScrollBar_vtable_callback_initPainter
   if not isNil(vtbl[].redirected):
-    vtbl[].vtbl.redirected = cQScrollBar_vtable_callback_redirected
+    vtbl[].vtbl.redirected = fcQScrollBar_vtable_callback_redirected
   if not isNil(vtbl[].sharedPainter):
-    vtbl[].vtbl.sharedPainter = cQScrollBar_vtable_callback_sharedPainter
+    vtbl[].vtbl.sharedPainter = fcQScrollBar_vtable_callback_sharedPainter
   if not isNil(vtbl[].inputMethodEvent):
-    vtbl[].vtbl.inputMethodEvent = cQScrollBar_vtable_callback_inputMethodEvent
+    vtbl[].vtbl.inputMethodEvent = fcQScrollBar_vtable_callback_inputMethodEvent
   if not isNil(vtbl[].inputMethodQuery):
-    vtbl[].vtbl.inputMethodQuery = cQScrollBar_vtable_callback_inputMethodQuery
+    vtbl[].vtbl.inputMethodQuery = fcQScrollBar_vtable_callback_inputMethodQuery
   if not isNil(vtbl[].focusNextPrevChild):
-    vtbl[].vtbl.focusNextPrevChild = cQScrollBar_vtable_callback_focusNextPrevChild
+    vtbl[].vtbl.focusNextPrevChild = fcQScrollBar_vtable_callback_focusNextPrevChild
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQScrollBar_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQScrollBar_vtable_callback_eventFilter
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQScrollBar_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQScrollBar_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQScrollBar_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQScrollBar_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQScrollBar_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQScrollBar_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQScrollBar_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQScrollBar_vtable_callback_disconnectNotify
   gen_qscrollbar_types.QScrollBar(h: fcQScrollBar_new(addr(vtbl[].vtbl), addr(vtbl[]), parent.h), owned: true)
 
 proc create*(T: type gen_qscrollbar_types.QScrollBar,
@@ -1414,107 +1421,107 @@ proc create*(T: type gen_qscrollbar_types.QScrollBar,
     let vtbl = cast[ref QScrollBarVTable](fcQScrollBar_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQScrollBar_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQScrollBar_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQScrollBar_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQScrollBar_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQScrollBar_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQScrollBar_vtable_callback_metacall
   if not isNil(vtbl[].sizeHint):
-    vtbl[].vtbl.sizeHint = cQScrollBar_vtable_callback_sizeHint
+    vtbl[].vtbl.sizeHint = fcQScrollBar_vtable_callback_sizeHint
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQScrollBar_vtable_callback_event
+    vtbl[].vtbl.event = fcQScrollBar_vtable_callback_event
   if not isNil(vtbl[].wheelEvent):
-    vtbl[].vtbl.wheelEvent = cQScrollBar_vtable_callback_wheelEvent
+    vtbl[].vtbl.wheelEvent = fcQScrollBar_vtable_callback_wheelEvent
   if not isNil(vtbl[].paintEvent):
-    vtbl[].vtbl.paintEvent = cQScrollBar_vtable_callback_paintEvent
+    vtbl[].vtbl.paintEvent = fcQScrollBar_vtable_callback_paintEvent
   if not isNil(vtbl[].mousePressEvent):
-    vtbl[].vtbl.mousePressEvent = cQScrollBar_vtable_callback_mousePressEvent
+    vtbl[].vtbl.mousePressEvent = fcQScrollBar_vtable_callback_mousePressEvent
   if not isNil(vtbl[].mouseReleaseEvent):
-    vtbl[].vtbl.mouseReleaseEvent = cQScrollBar_vtable_callback_mouseReleaseEvent
+    vtbl[].vtbl.mouseReleaseEvent = fcQScrollBar_vtable_callback_mouseReleaseEvent
   if not isNil(vtbl[].mouseMoveEvent):
-    vtbl[].vtbl.mouseMoveEvent = cQScrollBar_vtable_callback_mouseMoveEvent
+    vtbl[].vtbl.mouseMoveEvent = fcQScrollBar_vtable_callback_mouseMoveEvent
   if not isNil(vtbl[].hideEvent):
-    vtbl[].vtbl.hideEvent = cQScrollBar_vtable_callback_hideEvent
+    vtbl[].vtbl.hideEvent = fcQScrollBar_vtable_callback_hideEvent
   if not isNil(vtbl[].sliderChange):
-    vtbl[].vtbl.sliderChange = cQScrollBar_vtable_callback_sliderChange
+    vtbl[].vtbl.sliderChange = fcQScrollBar_vtable_callback_sliderChange
   if not isNil(vtbl[].contextMenuEvent):
-    vtbl[].vtbl.contextMenuEvent = cQScrollBar_vtable_callback_contextMenuEvent
+    vtbl[].vtbl.contextMenuEvent = fcQScrollBar_vtable_callback_contextMenuEvent
   if not isNil(vtbl[].keyPressEvent):
-    vtbl[].vtbl.keyPressEvent = cQScrollBar_vtable_callback_keyPressEvent
+    vtbl[].vtbl.keyPressEvent = fcQScrollBar_vtable_callback_keyPressEvent
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQScrollBar_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQScrollBar_vtable_callback_timerEvent
   if not isNil(vtbl[].changeEvent):
-    vtbl[].vtbl.changeEvent = cQScrollBar_vtable_callback_changeEvent
+    vtbl[].vtbl.changeEvent = fcQScrollBar_vtable_callback_changeEvent
   if not isNil(vtbl[].devType):
-    vtbl[].vtbl.devType = cQScrollBar_vtable_callback_devType
+    vtbl[].vtbl.devType = fcQScrollBar_vtable_callback_devType
   if not isNil(vtbl[].setVisible):
-    vtbl[].vtbl.setVisible = cQScrollBar_vtable_callback_setVisible
+    vtbl[].vtbl.setVisible = fcQScrollBar_vtable_callback_setVisible
   if not isNil(vtbl[].minimumSizeHint):
-    vtbl[].vtbl.minimumSizeHint = cQScrollBar_vtable_callback_minimumSizeHint
+    vtbl[].vtbl.minimumSizeHint = fcQScrollBar_vtable_callback_minimumSizeHint
   if not isNil(vtbl[].heightForWidth):
-    vtbl[].vtbl.heightForWidth = cQScrollBar_vtable_callback_heightForWidth
+    vtbl[].vtbl.heightForWidth = fcQScrollBar_vtable_callback_heightForWidth
   if not isNil(vtbl[].hasHeightForWidth):
-    vtbl[].vtbl.hasHeightForWidth = cQScrollBar_vtable_callback_hasHeightForWidth
+    vtbl[].vtbl.hasHeightForWidth = fcQScrollBar_vtable_callback_hasHeightForWidth
   if not isNil(vtbl[].paintEngine):
-    vtbl[].vtbl.paintEngine = cQScrollBar_vtable_callback_paintEngine
+    vtbl[].vtbl.paintEngine = fcQScrollBar_vtable_callback_paintEngine
   if not isNil(vtbl[].mouseDoubleClickEvent):
-    vtbl[].vtbl.mouseDoubleClickEvent = cQScrollBar_vtable_callback_mouseDoubleClickEvent
+    vtbl[].vtbl.mouseDoubleClickEvent = fcQScrollBar_vtable_callback_mouseDoubleClickEvent
   if not isNil(vtbl[].keyReleaseEvent):
-    vtbl[].vtbl.keyReleaseEvent = cQScrollBar_vtable_callback_keyReleaseEvent
+    vtbl[].vtbl.keyReleaseEvent = fcQScrollBar_vtable_callback_keyReleaseEvent
   if not isNil(vtbl[].focusInEvent):
-    vtbl[].vtbl.focusInEvent = cQScrollBar_vtable_callback_focusInEvent
+    vtbl[].vtbl.focusInEvent = fcQScrollBar_vtable_callback_focusInEvent
   if not isNil(vtbl[].focusOutEvent):
-    vtbl[].vtbl.focusOutEvent = cQScrollBar_vtable_callback_focusOutEvent
+    vtbl[].vtbl.focusOutEvent = fcQScrollBar_vtable_callback_focusOutEvent
   if not isNil(vtbl[].enterEvent):
-    vtbl[].vtbl.enterEvent = cQScrollBar_vtable_callback_enterEvent
+    vtbl[].vtbl.enterEvent = fcQScrollBar_vtable_callback_enterEvent
   if not isNil(vtbl[].leaveEvent):
-    vtbl[].vtbl.leaveEvent = cQScrollBar_vtable_callback_leaveEvent
+    vtbl[].vtbl.leaveEvent = fcQScrollBar_vtable_callback_leaveEvent
   if not isNil(vtbl[].moveEvent):
-    vtbl[].vtbl.moveEvent = cQScrollBar_vtable_callback_moveEvent
+    vtbl[].vtbl.moveEvent = fcQScrollBar_vtable_callback_moveEvent
   if not isNil(vtbl[].resizeEvent):
-    vtbl[].vtbl.resizeEvent = cQScrollBar_vtable_callback_resizeEvent
+    vtbl[].vtbl.resizeEvent = fcQScrollBar_vtable_callback_resizeEvent
   if not isNil(vtbl[].closeEvent):
-    vtbl[].vtbl.closeEvent = cQScrollBar_vtable_callback_closeEvent
+    vtbl[].vtbl.closeEvent = fcQScrollBar_vtable_callback_closeEvent
   if not isNil(vtbl[].tabletEvent):
-    vtbl[].vtbl.tabletEvent = cQScrollBar_vtable_callback_tabletEvent
+    vtbl[].vtbl.tabletEvent = fcQScrollBar_vtable_callback_tabletEvent
   if not isNil(vtbl[].actionEvent):
-    vtbl[].vtbl.actionEvent = cQScrollBar_vtable_callback_actionEvent
+    vtbl[].vtbl.actionEvent = fcQScrollBar_vtable_callback_actionEvent
   if not isNil(vtbl[].dragEnterEvent):
-    vtbl[].vtbl.dragEnterEvent = cQScrollBar_vtable_callback_dragEnterEvent
+    vtbl[].vtbl.dragEnterEvent = fcQScrollBar_vtable_callback_dragEnterEvent
   if not isNil(vtbl[].dragMoveEvent):
-    vtbl[].vtbl.dragMoveEvent = cQScrollBar_vtable_callback_dragMoveEvent
+    vtbl[].vtbl.dragMoveEvent = fcQScrollBar_vtable_callback_dragMoveEvent
   if not isNil(vtbl[].dragLeaveEvent):
-    vtbl[].vtbl.dragLeaveEvent = cQScrollBar_vtable_callback_dragLeaveEvent
+    vtbl[].vtbl.dragLeaveEvent = fcQScrollBar_vtable_callback_dragLeaveEvent
   if not isNil(vtbl[].dropEvent):
-    vtbl[].vtbl.dropEvent = cQScrollBar_vtable_callback_dropEvent
+    vtbl[].vtbl.dropEvent = fcQScrollBar_vtable_callback_dropEvent
   if not isNil(vtbl[].showEvent):
-    vtbl[].vtbl.showEvent = cQScrollBar_vtable_callback_showEvent
+    vtbl[].vtbl.showEvent = fcQScrollBar_vtable_callback_showEvent
   if not isNil(vtbl[].nativeEvent):
-    vtbl[].vtbl.nativeEvent = cQScrollBar_vtable_callback_nativeEvent
+    vtbl[].vtbl.nativeEvent = fcQScrollBar_vtable_callback_nativeEvent
   if not isNil(vtbl[].metric):
-    vtbl[].vtbl.metric = cQScrollBar_vtable_callback_metric
+    vtbl[].vtbl.metric = fcQScrollBar_vtable_callback_metric
   if not isNil(vtbl[].initPainter):
-    vtbl[].vtbl.initPainter = cQScrollBar_vtable_callback_initPainter
+    vtbl[].vtbl.initPainter = fcQScrollBar_vtable_callback_initPainter
   if not isNil(vtbl[].redirected):
-    vtbl[].vtbl.redirected = cQScrollBar_vtable_callback_redirected
+    vtbl[].vtbl.redirected = fcQScrollBar_vtable_callback_redirected
   if not isNil(vtbl[].sharedPainter):
-    vtbl[].vtbl.sharedPainter = cQScrollBar_vtable_callback_sharedPainter
+    vtbl[].vtbl.sharedPainter = fcQScrollBar_vtable_callback_sharedPainter
   if not isNil(vtbl[].inputMethodEvent):
-    vtbl[].vtbl.inputMethodEvent = cQScrollBar_vtable_callback_inputMethodEvent
+    vtbl[].vtbl.inputMethodEvent = fcQScrollBar_vtable_callback_inputMethodEvent
   if not isNil(vtbl[].inputMethodQuery):
-    vtbl[].vtbl.inputMethodQuery = cQScrollBar_vtable_callback_inputMethodQuery
+    vtbl[].vtbl.inputMethodQuery = fcQScrollBar_vtable_callback_inputMethodQuery
   if not isNil(vtbl[].focusNextPrevChild):
-    vtbl[].vtbl.focusNextPrevChild = cQScrollBar_vtable_callback_focusNextPrevChild
+    vtbl[].vtbl.focusNextPrevChild = fcQScrollBar_vtable_callback_focusNextPrevChild
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQScrollBar_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQScrollBar_vtable_callback_eventFilter
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQScrollBar_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQScrollBar_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQScrollBar_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQScrollBar_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQScrollBar_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQScrollBar_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQScrollBar_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQScrollBar_vtable_callback_disconnectNotify
   gen_qscrollbar_types.QScrollBar(h: fcQScrollBar_new2(addr(vtbl[].vtbl), addr(vtbl[])), owned: true)
 
 proc create*(T: type gen_qscrollbar_types.QScrollBar,
@@ -1526,107 +1533,107 @@ proc create*(T: type gen_qscrollbar_types.QScrollBar,
     let vtbl = cast[ref QScrollBarVTable](fcQScrollBar_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQScrollBar_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQScrollBar_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQScrollBar_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQScrollBar_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQScrollBar_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQScrollBar_vtable_callback_metacall
   if not isNil(vtbl[].sizeHint):
-    vtbl[].vtbl.sizeHint = cQScrollBar_vtable_callback_sizeHint
+    vtbl[].vtbl.sizeHint = fcQScrollBar_vtable_callback_sizeHint
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQScrollBar_vtable_callback_event
+    vtbl[].vtbl.event = fcQScrollBar_vtable_callback_event
   if not isNil(vtbl[].wheelEvent):
-    vtbl[].vtbl.wheelEvent = cQScrollBar_vtable_callback_wheelEvent
+    vtbl[].vtbl.wheelEvent = fcQScrollBar_vtable_callback_wheelEvent
   if not isNil(vtbl[].paintEvent):
-    vtbl[].vtbl.paintEvent = cQScrollBar_vtable_callback_paintEvent
+    vtbl[].vtbl.paintEvent = fcQScrollBar_vtable_callback_paintEvent
   if not isNil(vtbl[].mousePressEvent):
-    vtbl[].vtbl.mousePressEvent = cQScrollBar_vtable_callback_mousePressEvent
+    vtbl[].vtbl.mousePressEvent = fcQScrollBar_vtable_callback_mousePressEvent
   if not isNil(vtbl[].mouseReleaseEvent):
-    vtbl[].vtbl.mouseReleaseEvent = cQScrollBar_vtable_callback_mouseReleaseEvent
+    vtbl[].vtbl.mouseReleaseEvent = fcQScrollBar_vtable_callback_mouseReleaseEvent
   if not isNil(vtbl[].mouseMoveEvent):
-    vtbl[].vtbl.mouseMoveEvent = cQScrollBar_vtable_callback_mouseMoveEvent
+    vtbl[].vtbl.mouseMoveEvent = fcQScrollBar_vtable_callback_mouseMoveEvent
   if not isNil(vtbl[].hideEvent):
-    vtbl[].vtbl.hideEvent = cQScrollBar_vtable_callback_hideEvent
+    vtbl[].vtbl.hideEvent = fcQScrollBar_vtable_callback_hideEvent
   if not isNil(vtbl[].sliderChange):
-    vtbl[].vtbl.sliderChange = cQScrollBar_vtable_callback_sliderChange
+    vtbl[].vtbl.sliderChange = fcQScrollBar_vtable_callback_sliderChange
   if not isNil(vtbl[].contextMenuEvent):
-    vtbl[].vtbl.contextMenuEvent = cQScrollBar_vtable_callback_contextMenuEvent
+    vtbl[].vtbl.contextMenuEvent = fcQScrollBar_vtable_callback_contextMenuEvent
   if not isNil(vtbl[].keyPressEvent):
-    vtbl[].vtbl.keyPressEvent = cQScrollBar_vtable_callback_keyPressEvent
+    vtbl[].vtbl.keyPressEvent = fcQScrollBar_vtable_callback_keyPressEvent
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQScrollBar_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQScrollBar_vtable_callback_timerEvent
   if not isNil(vtbl[].changeEvent):
-    vtbl[].vtbl.changeEvent = cQScrollBar_vtable_callback_changeEvent
+    vtbl[].vtbl.changeEvent = fcQScrollBar_vtable_callback_changeEvent
   if not isNil(vtbl[].devType):
-    vtbl[].vtbl.devType = cQScrollBar_vtable_callback_devType
+    vtbl[].vtbl.devType = fcQScrollBar_vtable_callback_devType
   if not isNil(vtbl[].setVisible):
-    vtbl[].vtbl.setVisible = cQScrollBar_vtable_callback_setVisible
+    vtbl[].vtbl.setVisible = fcQScrollBar_vtable_callback_setVisible
   if not isNil(vtbl[].minimumSizeHint):
-    vtbl[].vtbl.minimumSizeHint = cQScrollBar_vtable_callback_minimumSizeHint
+    vtbl[].vtbl.minimumSizeHint = fcQScrollBar_vtable_callback_minimumSizeHint
   if not isNil(vtbl[].heightForWidth):
-    vtbl[].vtbl.heightForWidth = cQScrollBar_vtable_callback_heightForWidth
+    vtbl[].vtbl.heightForWidth = fcQScrollBar_vtable_callback_heightForWidth
   if not isNil(vtbl[].hasHeightForWidth):
-    vtbl[].vtbl.hasHeightForWidth = cQScrollBar_vtable_callback_hasHeightForWidth
+    vtbl[].vtbl.hasHeightForWidth = fcQScrollBar_vtable_callback_hasHeightForWidth
   if not isNil(vtbl[].paintEngine):
-    vtbl[].vtbl.paintEngine = cQScrollBar_vtable_callback_paintEngine
+    vtbl[].vtbl.paintEngine = fcQScrollBar_vtable_callback_paintEngine
   if not isNil(vtbl[].mouseDoubleClickEvent):
-    vtbl[].vtbl.mouseDoubleClickEvent = cQScrollBar_vtable_callback_mouseDoubleClickEvent
+    vtbl[].vtbl.mouseDoubleClickEvent = fcQScrollBar_vtable_callback_mouseDoubleClickEvent
   if not isNil(vtbl[].keyReleaseEvent):
-    vtbl[].vtbl.keyReleaseEvent = cQScrollBar_vtable_callback_keyReleaseEvent
+    vtbl[].vtbl.keyReleaseEvent = fcQScrollBar_vtable_callback_keyReleaseEvent
   if not isNil(vtbl[].focusInEvent):
-    vtbl[].vtbl.focusInEvent = cQScrollBar_vtable_callback_focusInEvent
+    vtbl[].vtbl.focusInEvent = fcQScrollBar_vtable_callback_focusInEvent
   if not isNil(vtbl[].focusOutEvent):
-    vtbl[].vtbl.focusOutEvent = cQScrollBar_vtable_callback_focusOutEvent
+    vtbl[].vtbl.focusOutEvent = fcQScrollBar_vtable_callback_focusOutEvent
   if not isNil(vtbl[].enterEvent):
-    vtbl[].vtbl.enterEvent = cQScrollBar_vtable_callback_enterEvent
+    vtbl[].vtbl.enterEvent = fcQScrollBar_vtable_callback_enterEvent
   if not isNil(vtbl[].leaveEvent):
-    vtbl[].vtbl.leaveEvent = cQScrollBar_vtable_callback_leaveEvent
+    vtbl[].vtbl.leaveEvent = fcQScrollBar_vtable_callback_leaveEvent
   if not isNil(vtbl[].moveEvent):
-    vtbl[].vtbl.moveEvent = cQScrollBar_vtable_callback_moveEvent
+    vtbl[].vtbl.moveEvent = fcQScrollBar_vtable_callback_moveEvent
   if not isNil(vtbl[].resizeEvent):
-    vtbl[].vtbl.resizeEvent = cQScrollBar_vtable_callback_resizeEvent
+    vtbl[].vtbl.resizeEvent = fcQScrollBar_vtable_callback_resizeEvent
   if not isNil(vtbl[].closeEvent):
-    vtbl[].vtbl.closeEvent = cQScrollBar_vtable_callback_closeEvent
+    vtbl[].vtbl.closeEvent = fcQScrollBar_vtable_callback_closeEvent
   if not isNil(vtbl[].tabletEvent):
-    vtbl[].vtbl.tabletEvent = cQScrollBar_vtable_callback_tabletEvent
+    vtbl[].vtbl.tabletEvent = fcQScrollBar_vtable_callback_tabletEvent
   if not isNil(vtbl[].actionEvent):
-    vtbl[].vtbl.actionEvent = cQScrollBar_vtable_callback_actionEvent
+    vtbl[].vtbl.actionEvent = fcQScrollBar_vtable_callback_actionEvent
   if not isNil(vtbl[].dragEnterEvent):
-    vtbl[].vtbl.dragEnterEvent = cQScrollBar_vtable_callback_dragEnterEvent
+    vtbl[].vtbl.dragEnterEvent = fcQScrollBar_vtable_callback_dragEnterEvent
   if not isNil(vtbl[].dragMoveEvent):
-    vtbl[].vtbl.dragMoveEvent = cQScrollBar_vtable_callback_dragMoveEvent
+    vtbl[].vtbl.dragMoveEvent = fcQScrollBar_vtable_callback_dragMoveEvent
   if not isNil(vtbl[].dragLeaveEvent):
-    vtbl[].vtbl.dragLeaveEvent = cQScrollBar_vtable_callback_dragLeaveEvent
+    vtbl[].vtbl.dragLeaveEvent = fcQScrollBar_vtable_callback_dragLeaveEvent
   if not isNil(vtbl[].dropEvent):
-    vtbl[].vtbl.dropEvent = cQScrollBar_vtable_callback_dropEvent
+    vtbl[].vtbl.dropEvent = fcQScrollBar_vtable_callback_dropEvent
   if not isNil(vtbl[].showEvent):
-    vtbl[].vtbl.showEvent = cQScrollBar_vtable_callback_showEvent
+    vtbl[].vtbl.showEvent = fcQScrollBar_vtable_callback_showEvent
   if not isNil(vtbl[].nativeEvent):
-    vtbl[].vtbl.nativeEvent = cQScrollBar_vtable_callback_nativeEvent
+    vtbl[].vtbl.nativeEvent = fcQScrollBar_vtable_callback_nativeEvent
   if not isNil(vtbl[].metric):
-    vtbl[].vtbl.metric = cQScrollBar_vtable_callback_metric
+    vtbl[].vtbl.metric = fcQScrollBar_vtable_callback_metric
   if not isNil(vtbl[].initPainter):
-    vtbl[].vtbl.initPainter = cQScrollBar_vtable_callback_initPainter
+    vtbl[].vtbl.initPainter = fcQScrollBar_vtable_callback_initPainter
   if not isNil(vtbl[].redirected):
-    vtbl[].vtbl.redirected = cQScrollBar_vtable_callback_redirected
+    vtbl[].vtbl.redirected = fcQScrollBar_vtable_callback_redirected
   if not isNil(vtbl[].sharedPainter):
-    vtbl[].vtbl.sharedPainter = cQScrollBar_vtable_callback_sharedPainter
+    vtbl[].vtbl.sharedPainter = fcQScrollBar_vtable_callback_sharedPainter
   if not isNil(vtbl[].inputMethodEvent):
-    vtbl[].vtbl.inputMethodEvent = cQScrollBar_vtable_callback_inputMethodEvent
+    vtbl[].vtbl.inputMethodEvent = fcQScrollBar_vtable_callback_inputMethodEvent
   if not isNil(vtbl[].inputMethodQuery):
-    vtbl[].vtbl.inputMethodQuery = cQScrollBar_vtable_callback_inputMethodQuery
+    vtbl[].vtbl.inputMethodQuery = fcQScrollBar_vtable_callback_inputMethodQuery
   if not isNil(vtbl[].focusNextPrevChild):
-    vtbl[].vtbl.focusNextPrevChild = cQScrollBar_vtable_callback_focusNextPrevChild
+    vtbl[].vtbl.focusNextPrevChild = fcQScrollBar_vtable_callback_focusNextPrevChild
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQScrollBar_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQScrollBar_vtable_callback_eventFilter
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQScrollBar_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQScrollBar_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQScrollBar_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQScrollBar_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQScrollBar_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQScrollBar_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQScrollBar_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQScrollBar_vtable_callback_disconnectNotify
   gen_qscrollbar_types.QScrollBar(h: fcQScrollBar_new3(addr(vtbl[].vtbl), addr(vtbl[]), cint(param1)), owned: true)
 
 proc create*(T: type gen_qscrollbar_types.QScrollBar,
@@ -1638,107 +1645,107 @@ proc create*(T: type gen_qscrollbar_types.QScrollBar,
     let vtbl = cast[ref QScrollBarVTable](fcQScrollBar_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQScrollBar_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQScrollBar_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQScrollBar_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQScrollBar_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQScrollBar_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQScrollBar_vtable_callback_metacall
   if not isNil(vtbl[].sizeHint):
-    vtbl[].vtbl.sizeHint = cQScrollBar_vtable_callback_sizeHint
+    vtbl[].vtbl.sizeHint = fcQScrollBar_vtable_callback_sizeHint
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQScrollBar_vtable_callback_event
+    vtbl[].vtbl.event = fcQScrollBar_vtable_callback_event
   if not isNil(vtbl[].wheelEvent):
-    vtbl[].vtbl.wheelEvent = cQScrollBar_vtable_callback_wheelEvent
+    vtbl[].vtbl.wheelEvent = fcQScrollBar_vtable_callback_wheelEvent
   if not isNil(vtbl[].paintEvent):
-    vtbl[].vtbl.paintEvent = cQScrollBar_vtable_callback_paintEvent
+    vtbl[].vtbl.paintEvent = fcQScrollBar_vtable_callback_paintEvent
   if not isNil(vtbl[].mousePressEvent):
-    vtbl[].vtbl.mousePressEvent = cQScrollBar_vtable_callback_mousePressEvent
+    vtbl[].vtbl.mousePressEvent = fcQScrollBar_vtable_callback_mousePressEvent
   if not isNil(vtbl[].mouseReleaseEvent):
-    vtbl[].vtbl.mouseReleaseEvent = cQScrollBar_vtable_callback_mouseReleaseEvent
+    vtbl[].vtbl.mouseReleaseEvent = fcQScrollBar_vtable_callback_mouseReleaseEvent
   if not isNil(vtbl[].mouseMoveEvent):
-    vtbl[].vtbl.mouseMoveEvent = cQScrollBar_vtable_callback_mouseMoveEvent
+    vtbl[].vtbl.mouseMoveEvent = fcQScrollBar_vtable_callback_mouseMoveEvent
   if not isNil(vtbl[].hideEvent):
-    vtbl[].vtbl.hideEvent = cQScrollBar_vtable_callback_hideEvent
+    vtbl[].vtbl.hideEvent = fcQScrollBar_vtable_callback_hideEvent
   if not isNil(vtbl[].sliderChange):
-    vtbl[].vtbl.sliderChange = cQScrollBar_vtable_callback_sliderChange
+    vtbl[].vtbl.sliderChange = fcQScrollBar_vtable_callback_sliderChange
   if not isNil(vtbl[].contextMenuEvent):
-    vtbl[].vtbl.contextMenuEvent = cQScrollBar_vtable_callback_contextMenuEvent
+    vtbl[].vtbl.contextMenuEvent = fcQScrollBar_vtable_callback_contextMenuEvent
   if not isNil(vtbl[].keyPressEvent):
-    vtbl[].vtbl.keyPressEvent = cQScrollBar_vtable_callback_keyPressEvent
+    vtbl[].vtbl.keyPressEvent = fcQScrollBar_vtable_callback_keyPressEvent
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQScrollBar_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQScrollBar_vtable_callback_timerEvent
   if not isNil(vtbl[].changeEvent):
-    vtbl[].vtbl.changeEvent = cQScrollBar_vtable_callback_changeEvent
+    vtbl[].vtbl.changeEvent = fcQScrollBar_vtable_callback_changeEvent
   if not isNil(vtbl[].devType):
-    vtbl[].vtbl.devType = cQScrollBar_vtable_callback_devType
+    vtbl[].vtbl.devType = fcQScrollBar_vtable_callback_devType
   if not isNil(vtbl[].setVisible):
-    vtbl[].vtbl.setVisible = cQScrollBar_vtable_callback_setVisible
+    vtbl[].vtbl.setVisible = fcQScrollBar_vtable_callback_setVisible
   if not isNil(vtbl[].minimumSizeHint):
-    vtbl[].vtbl.minimumSizeHint = cQScrollBar_vtable_callback_minimumSizeHint
+    vtbl[].vtbl.minimumSizeHint = fcQScrollBar_vtable_callback_minimumSizeHint
   if not isNil(vtbl[].heightForWidth):
-    vtbl[].vtbl.heightForWidth = cQScrollBar_vtable_callback_heightForWidth
+    vtbl[].vtbl.heightForWidth = fcQScrollBar_vtable_callback_heightForWidth
   if not isNil(vtbl[].hasHeightForWidth):
-    vtbl[].vtbl.hasHeightForWidth = cQScrollBar_vtable_callback_hasHeightForWidth
+    vtbl[].vtbl.hasHeightForWidth = fcQScrollBar_vtable_callback_hasHeightForWidth
   if not isNil(vtbl[].paintEngine):
-    vtbl[].vtbl.paintEngine = cQScrollBar_vtable_callback_paintEngine
+    vtbl[].vtbl.paintEngine = fcQScrollBar_vtable_callback_paintEngine
   if not isNil(vtbl[].mouseDoubleClickEvent):
-    vtbl[].vtbl.mouseDoubleClickEvent = cQScrollBar_vtable_callback_mouseDoubleClickEvent
+    vtbl[].vtbl.mouseDoubleClickEvent = fcQScrollBar_vtable_callback_mouseDoubleClickEvent
   if not isNil(vtbl[].keyReleaseEvent):
-    vtbl[].vtbl.keyReleaseEvent = cQScrollBar_vtable_callback_keyReleaseEvent
+    vtbl[].vtbl.keyReleaseEvent = fcQScrollBar_vtable_callback_keyReleaseEvent
   if not isNil(vtbl[].focusInEvent):
-    vtbl[].vtbl.focusInEvent = cQScrollBar_vtable_callback_focusInEvent
+    vtbl[].vtbl.focusInEvent = fcQScrollBar_vtable_callback_focusInEvent
   if not isNil(vtbl[].focusOutEvent):
-    vtbl[].vtbl.focusOutEvent = cQScrollBar_vtable_callback_focusOutEvent
+    vtbl[].vtbl.focusOutEvent = fcQScrollBar_vtable_callback_focusOutEvent
   if not isNil(vtbl[].enterEvent):
-    vtbl[].vtbl.enterEvent = cQScrollBar_vtable_callback_enterEvent
+    vtbl[].vtbl.enterEvent = fcQScrollBar_vtable_callback_enterEvent
   if not isNil(vtbl[].leaveEvent):
-    vtbl[].vtbl.leaveEvent = cQScrollBar_vtable_callback_leaveEvent
+    vtbl[].vtbl.leaveEvent = fcQScrollBar_vtable_callback_leaveEvent
   if not isNil(vtbl[].moveEvent):
-    vtbl[].vtbl.moveEvent = cQScrollBar_vtable_callback_moveEvent
+    vtbl[].vtbl.moveEvent = fcQScrollBar_vtable_callback_moveEvent
   if not isNil(vtbl[].resizeEvent):
-    vtbl[].vtbl.resizeEvent = cQScrollBar_vtable_callback_resizeEvent
+    vtbl[].vtbl.resizeEvent = fcQScrollBar_vtable_callback_resizeEvent
   if not isNil(vtbl[].closeEvent):
-    vtbl[].vtbl.closeEvent = cQScrollBar_vtable_callback_closeEvent
+    vtbl[].vtbl.closeEvent = fcQScrollBar_vtable_callback_closeEvent
   if not isNil(vtbl[].tabletEvent):
-    vtbl[].vtbl.tabletEvent = cQScrollBar_vtable_callback_tabletEvent
+    vtbl[].vtbl.tabletEvent = fcQScrollBar_vtable_callback_tabletEvent
   if not isNil(vtbl[].actionEvent):
-    vtbl[].vtbl.actionEvent = cQScrollBar_vtable_callback_actionEvent
+    vtbl[].vtbl.actionEvent = fcQScrollBar_vtable_callback_actionEvent
   if not isNil(vtbl[].dragEnterEvent):
-    vtbl[].vtbl.dragEnterEvent = cQScrollBar_vtable_callback_dragEnterEvent
+    vtbl[].vtbl.dragEnterEvent = fcQScrollBar_vtable_callback_dragEnterEvent
   if not isNil(vtbl[].dragMoveEvent):
-    vtbl[].vtbl.dragMoveEvent = cQScrollBar_vtable_callback_dragMoveEvent
+    vtbl[].vtbl.dragMoveEvent = fcQScrollBar_vtable_callback_dragMoveEvent
   if not isNil(vtbl[].dragLeaveEvent):
-    vtbl[].vtbl.dragLeaveEvent = cQScrollBar_vtable_callback_dragLeaveEvent
+    vtbl[].vtbl.dragLeaveEvent = fcQScrollBar_vtable_callback_dragLeaveEvent
   if not isNil(vtbl[].dropEvent):
-    vtbl[].vtbl.dropEvent = cQScrollBar_vtable_callback_dropEvent
+    vtbl[].vtbl.dropEvent = fcQScrollBar_vtable_callback_dropEvent
   if not isNil(vtbl[].showEvent):
-    vtbl[].vtbl.showEvent = cQScrollBar_vtable_callback_showEvent
+    vtbl[].vtbl.showEvent = fcQScrollBar_vtable_callback_showEvent
   if not isNil(vtbl[].nativeEvent):
-    vtbl[].vtbl.nativeEvent = cQScrollBar_vtable_callback_nativeEvent
+    vtbl[].vtbl.nativeEvent = fcQScrollBar_vtable_callback_nativeEvent
   if not isNil(vtbl[].metric):
-    vtbl[].vtbl.metric = cQScrollBar_vtable_callback_metric
+    vtbl[].vtbl.metric = fcQScrollBar_vtable_callback_metric
   if not isNil(vtbl[].initPainter):
-    vtbl[].vtbl.initPainter = cQScrollBar_vtable_callback_initPainter
+    vtbl[].vtbl.initPainter = fcQScrollBar_vtable_callback_initPainter
   if not isNil(vtbl[].redirected):
-    vtbl[].vtbl.redirected = cQScrollBar_vtable_callback_redirected
+    vtbl[].vtbl.redirected = fcQScrollBar_vtable_callback_redirected
   if not isNil(vtbl[].sharedPainter):
-    vtbl[].vtbl.sharedPainter = cQScrollBar_vtable_callback_sharedPainter
+    vtbl[].vtbl.sharedPainter = fcQScrollBar_vtable_callback_sharedPainter
   if not isNil(vtbl[].inputMethodEvent):
-    vtbl[].vtbl.inputMethodEvent = cQScrollBar_vtable_callback_inputMethodEvent
+    vtbl[].vtbl.inputMethodEvent = fcQScrollBar_vtable_callback_inputMethodEvent
   if not isNil(vtbl[].inputMethodQuery):
-    vtbl[].vtbl.inputMethodQuery = cQScrollBar_vtable_callback_inputMethodQuery
+    vtbl[].vtbl.inputMethodQuery = fcQScrollBar_vtable_callback_inputMethodQuery
   if not isNil(vtbl[].focusNextPrevChild):
-    vtbl[].vtbl.focusNextPrevChild = cQScrollBar_vtable_callback_focusNextPrevChild
+    vtbl[].vtbl.focusNextPrevChild = fcQScrollBar_vtable_callback_focusNextPrevChild
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQScrollBar_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQScrollBar_vtable_callback_eventFilter
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQScrollBar_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQScrollBar_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQScrollBar_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQScrollBar_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQScrollBar_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQScrollBar_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQScrollBar_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQScrollBar_vtable_callback_disconnectNotify
   gen_qscrollbar_types.QScrollBar(h: fcQScrollBar_new4(addr(vtbl[].vtbl), addr(vtbl[]), cint(param1), parent.h), owned: true)
 
 const cQScrollBar_mvtbl = cQScrollBarVTable(
@@ -1746,57 +1753,58 @@ const cQScrollBar_mvtbl = cQScrollBarVTable(
     let inst = cast[ptr typeof(VirtualQScrollBar()[])](self.fcQScrollBar_vtbl())
     inst[].h = nil
     inst[].owned = false,
-  metaObject: cQScrollBar_method_callback_metaObject,
-  metacast: cQScrollBar_method_callback_metacast,
-  metacall: cQScrollBar_method_callback_metacall,
-  sizeHint: cQScrollBar_method_callback_sizeHint,
-  event: cQScrollBar_method_callback_event,
-  wheelEvent: cQScrollBar_method_callback_wheelEvent,
-  paintEvent: cQScrollBar_method_callback_paintEvent,
-  mousePressEvent: cQScrollBar_method_callback_mousePressEvent,
-  mouseReleaseEvent: cQScrollBar_method_callback_mouseReleaseEvent,
-  mouseMoveEvent: cQScrollBar_method_callback_mouseMoveEvent,
-  hideEvent: cQScrollBar_method_callback_hideEvent,
-  sliderChange: cQScrollBar_method_callback_sliderChange,
-  contextMenuEvent: cQScrollBar_method_callback_contextMenuEvent,
-  keyPressEvent: cQScrollBar_method_callback_keyPressEvent,
-  timerEvent: cQScrollBar_method_callback_timerEvent,
-  changeEvent: cQScrollBar_method_callback_changeEvent,
-  devType: cQScrollBar_method_callback_devType,
-  setVisible: cQScrollBar_method_callback_setVisible,
-  minimumSizeHint: cQScrollBar_method_callback_minimumSizeHint,
-  heightForWidth: cQScrollBar_method_callback_heightForWidth,
-  hasHeightForWidth: cQScrollBar_method_callback_hasHeightForWidth,
-  paintEngine: cQScrollBar_method_callback_paintEngine,
-  mouseDoubleClickEvent: cQScrollBar_method_callback_mouseDoubleClickEvent,
-  keyReleaseEvent: cQScrollBar_method_callback_keyReleaseEvent,
-  focusInEvent: cQScrollBar_method_callback_focusInEvent,
-  focusOutEvent: cQScrollBar_method_callback_focusOutEvent,
-  enterEvent: cQScrollBar_method_callback_enterEvent,
-  leaveEvent: cQScrollBar_method_callback_leaveEvent,
-  moveEvent: cQScrollBar_method_callback_moveEvent,
-  resizeEvent: cQScrollBar_method_callback_resizeEvent,
-  closeEvent: cQScrollBar_method_callback_closeEvent,
-  tabletEvent: cQScrollBar_method_callback_tabletEvent,
-  actionEvent: cQScrollBar_method_callback_actionEvent,
-  dragEnterEvent: cQScrollBar_method_callback_dragEnterEvent,
-  dragMoveEvent: cQScrollBar_method_callback_dragMoveEvent,
-  dragLeaveEvent: cQScrollBar_method_callback_dragLeaveEvent,
-  dropEvent: cQScrollBar_method_callback_dropEvent,
-  showEvent: cQScrollBar_method_callback_showEvent,
-  nativeEvent: cQScrollBar_method_callback_nativeEvent,
-  metric: cQScrollBar_method_callback_metric,
-  initPainter: cQScrollBar_method_callback_initPainter,
-  redirected: cQScrollBar_method_callback_redirected,
-  sharedPainter: cQScrollBar_method_callback_sharedPainter,
-  inputMethodEvent: cQScrollBar_method_callback_inputMethodEvent,
-  inputMethodQuery: cQScrollBar_method_callback_inputMethodQuery,
-  focusNextPrevChild: cQScrollBar_method_callback_focusNextPrevChild,
-  eventFilter: cQScrollBar_method_callback_eventFilter,
-  childEvent: cQScrollBar_method_callback_childEvent,
-  customEvent: cQScrollBar_method_callback_customEvent,
-  connectNotify: cQScrollBar_method_callback_connectNotify,
-  disconnectNotify: cQScrollBar_method_callback_disconnectNotify,
+
+  metaObject: fcQScrollBar_method_callback_metaObject,
+  metacast: fcQScrollBar_method_callback_metacast,
+  metacall: fcQScrollBar_method_callback_metacall,
+  sizeHint: fcQScrollBar_method_callback_sizeHint,
+  event: fcQScrollBar_method_callback_event,
+  wheelEvent: fcQScrollBar_method_callback_wheelEvent,
+  paintEvent: fcQScrollBar_method_callback_paintEvent,
+  mousePressEvent: fcQScrollBar_method_callback_mousePressEvent,
+  mouseReleaseEvent: fcQScrollBar_method_callback_mouseReleaseEvent,
+  mouseMoveEvent: fcQScrollBar_method_callback_mouseMoveEvent,
+  hideEvent: fcQScrollBar_method_callback_hideEvent,
+  sliderChange: fcQScrollBar_method_callback_sliderChange,
+  contextMenuEvent: fcQScrollBar_method_callback_contextMenuEvent,
+  keyPressEvent: fcQScrollBar_method_callback_keyPressEvent,
+  timerEvent: fcQScrollBar_method_callback_timerEvent,
+  changeEvent: fcQScrollBar_method_callback_changeEvent,
+  devType: fcQScrollBar_method_callback_devType,
+  setVisible: fcQScrollBar_method_callback_setVisible,
+  minimumSizeHint: fcQScrollBar_method_callback_minimumSizeHint,
+  heightForWidth: fcQScrollBar_method_callback_heightForWidth,
+  hasHeightForWidth: fcQScrollBar_method_callback_hasHeightForWidth,
+  paintEngine: fcQScrollBar_method_callback_paintEngine,
+  mouseDoubleClickEvent: fcQScrollBar_method_callback_mouseDoubleClickEvent,
+  keyReleaseEvent: fcQScrollBar_method_callback_keyReleaseEvent,
+  focusInEvent: fcQScrollBar_method_callback_focusInEvent,
+  focusOutEvent: fcQScrollBar_method_callback_focusOutEvent,
+  enterEvent: fcQScrollBar_method_callback_enterEvent,
+  leaveEvent: fcQScrollBar_method_callback_leaveEvent,
+  moveEvent: fcQScrollBar_method_callback_moveEvent,
+  resizeEvent: fcQScrollBar_method_callback_resizeEvent,
+  closeEvent: fcQScrollBar_method_callback_closeEvent,
+  tabletEvent: fcQScrollBar_method_callback_tabletEvent,
+  actionEvent: fcQScrollBar_method_callback_actionEvent,
+  dragEnterEvent: fcQScrollBar_method_callback_dragEnterEvent,
+  dragMoveEvent: fcQScrollBar_method_callback_dragMoveEvent,
+  dragLeaveEvent: fcQScrollBar_method_callback_dragLeaveEvent,
+  dropEvent: fcQScrollBar_method_callback_dropEvent,
+  showEvent: fcQScrollBar_method_callback_showEvent,
+  nativeEvent: fcQScrollBar_method_callback_nativeEvent,
+  metric: fcQScrollBar_method_callback_metric,
+  initPainter: fcQScrollBar_method_callback_initPainter,
+  redirected: fcQScrollBar_method_callback_redirected,
+  sharedPainter: fcQScrollBar_method_callback_sharedPainter,
+  inputMethodEvent: fcQScrollBar_method_callback_inputMethodEvent,
+  inputMethodQuery: fcQScrollBar_method_callback_inputMethodQuery,
+  focusNextPrevChild: fcQScrollBar_method_callback_focusNextPrevChild,
+  eventFilter: fcQScrollBar_method_callback_eventFilter,
+  childEvent: fcQScrollBar_method_callback_childEvent,
+  customEvent: fcQScrollBar_method_callback_customEvent,
+  connectNotify: fcQScrollBar_method_callback_connectNotify,
+  disconnectNotify: fcQScrollBar_method_callback_disconnectNotify,
 )
 proc create*(T: type gen_qscrollbar_types.QScrollBar,
     parent: gen_qwidget_types.QWidget,

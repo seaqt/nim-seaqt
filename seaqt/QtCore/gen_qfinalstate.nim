@@ -67,6 +67,7 @@ proc fcQFinalState_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc
 proc fcQFinalState_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QFinalState_trUtf83".}
 proc fcQFinalState_vtbl(self: pointer): pointer {.importc: "QFinalState_vtbl".}
 proc fcQFinalState_vdata(self: pointer): pointer {.importc: "QFinalState_vdata".}
+
 type cQFinalStateVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -158,6 +159,7 @@ type QFinalStatechildEventProc* = proc(self: QFinalState, event: gen_qcoreevent_
 type QFinalStatecustomEventProc* = proc(self: QFinalState, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QFinalStateconnectNotifyProc* = proc(self: QFinalState, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QFinalStatedisconnectNotifyProc* = proc(self: QFinalState, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+
 type QFinalStateVTable* {.inheritable, pure.} = object
   vtbl: cQFinalStateVTable
   metaObject*: QFinalStatemetaObjectProc
@@ -172,10 +174,45 @@ type QFinalStateVTable* {.inheritable, pure.} = object
   customEvent*: QFinalStatecustomEventProc
   connectNotify*: QFinalStateconnectNotifyProc
   disconnectNotify*: QFinalStatedisconnectNotifyProc
+
 proc QFinalStatemetaObject*(self: gen_qfinalstate_types.QFinalState): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQFinalState_virtualbase_metaObject(self.h), owned: false)
 
-proc cQFinalState_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
+proc QFinalStatemetacast*(self: gen_qfinalstate_types.QFinalState, param1: cstring): pointer =
+  fcQFinalState_virtualbase_metacast(self.h, param1)
+
+proc QFinalStatemetacall*(self: gen_qfinalstate_types.QFinalState, param1: cint, param2: cint, param3: pointer): cint =
+  fcQFinalState_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+proc QFinalStateonEntry*(self: gen_qfinalstate_types.QFinalState, event: gen_qcoreevent_types.QEvent): void =
+  fcQFinalState_virtualbase_onEntry(self.h, event.h)
+
+proc QFinalStateonExit*(self: gen_qfinalstate_types.QFinalState, event: gen_qcoreevent_types.QEvent): void =
+  fcQFinalState_virtualbase_onExit(self.h, event.h)
+
+proc QFinalStateevent*(self: gen_qfinalstate_types.QFinalState, e: gen_qcoreevent_types.QEvent): bool =
+  fcQFinalState_virtualbase_event(self.h, e.h)
+
+proc QFinalStateeventFilter*(self: gen_qfinalstate_types.QFinalState, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
+  fcQFinalState_virtualbase_eventFilter(self.h, watched.h, event.h)
+
+proc QFinalStatetimerEvent*(self: gen_qfinalstate_types.QFinalState, event: gen_qcoreevent_types.QTimerEvent): void =
+  fcQFinalState_virtualbase_timerEvent(self.h, event.h)
+
+proc QFinalStatechildEvent*(self: gen_qfinalstate_types.QFinalState, event: gen_qcoreevent_types.QChildEvent): void =
+  fcQFinalState_virtualbase_childEvent(self.h, event.h)
+
+proc QFinalStatecustomEvent*(self: gen_qfinalstate_types.QFinalState, event: gen_qcoreevent_types.QEvent): void =
+  fcQFinalState_virtualbase_customEvent(self.h, event.h)
+
+proc QFinalStateconnectNotify*(self: gen_qfinalstate_types.QFinalState, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQFinalState_virtualbase_connectNotify(self.h, signal.h)
+
+proc QFinalStatedisconnectNotify*(self: gen_qfinalstate_types.QFinalState, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQFinalState_virtualbase_disconnectNotify(self.h, signal.h)
+
+
+proc fcQFinalState_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QFinalStateVTable](fcQFinalState_vdata(self))
   let self = QFinalState(h: self)
   var virtualReturn = vtbl[].metaObject(self)
@@ -184,20 +221,14 @@ proc cQFinalState_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QFinalStatemetacast*(self: gen_qfinalstate_types.QFinalState, param1: cstring): pointer =
-  fcQFinalState_virtualbase_metacast(self.h, param1)
-
-proc cQFinalState_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+proc fcQFinalState_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QFinalStateVTable](fcQFinalState_vdata(self))
   let self = QFinalState(h: self)
   let slotval1 = (param1)
   var virtualReturn = vtbl[].metacast(self, slotval1)
   virtualReturn
 
-proc QFinalStatemetacall*(self: gen_qfinalstate_types.QFinalState, param1: cint, param2: cint, param3: pointer): cint =
-  fcQFinalState_virtualbase_metacall(self.h, cint(param1), param2, param3)
-
-proc cQFinalState_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+proc fcQFinalState_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QFinalStateVTable](fcQFinalState_vdata(self))
   let self = QFinalState(h: self)
   let slotval1 = cint(param1)
@@ -206,38 +237,26 @@ proc cQFinalState_vtable_callback_metacall(self: pointer, param1: cint, param2: 
   var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QFinalStateonEntry*(self: gen_qfinalstate_types.QFinalState, event: gen_qcoreevent_types.QEvent): void =
-  fcQFinalState_virtualbase_onEntry(self.h, event.h)
-
-proc cQFinalState_vtable_callback_onEntry(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQFinalState_vtable_callback_onEntry(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFinalStateVTable](fcQFinalState_vdata(self))
   let self = QFinalState(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].onEntry(self, slotval1)
 
-proc QFinalStateonExit*(self: gen_qfinalstate_types.QFinalState, event: gen_qcoreevent_types.QEvent): void =
-  fcQFinalState_virtualbase_onExit(self.h, event.h)
-
-proc cQFinalState_vtable_callback_onExit(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQFinalState_vtable_callback_onExit(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFinalStateVTable](fcQFinalState_vdata(self))
   let self = QFinalState(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].onExit(self, slotval1)
 
-proc QFinalStateevent*(self: gen_qfinalstate_types.QFinalState, e: gen_qcoreevent_types.QEvent): bool =
-  fcQFinalState_virtualbase_event(self.h, e.h)
-
-proc cQFinalState_vtable_callback_event(self: pointer, e: pointer): bool {.cdecl.} =
+proc fcQFinalState_vtable_callback_event(self: pointer, e: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QFinalStateVTable](fcQFinalState_vdata(self))
   let self = QFinalState(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: e, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
-proc QFinalStateeventFilter*(self: gen_qfinalstate_types.QFinalState, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
-  fcQFinalState_virtualbase_eventFilter(self.h, watched.h, event.h)
-
-proc cQFinalState_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+proc fcQFinalState_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QFinalStateVTable](fcQFinalState_vdata(self))
   let self = QFinalState(h: self)
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
@@ -245,46 +264,31 @@ proc cQFinalState_vtable_callback_eventFilter(self: pointer, watched: pointer, e
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
-proc QFinalStatetimerEvent*(self: gen_qfinalstate_types.QFinalState, event: gen_qcoreevent_types.QTimerEvent): void =
-  fcQFinalState_virtualbase_timerEvent(self.h, event.h)
-
-proc cQFinalState_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQFinalState_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFinalStateVTable](fcQFinalState_vdata(self))
   let self = QFinalState(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
-proc QFinalStatechildEvent*(self: gen_qfinalstate_types.QFinalState, event: gen_qcoreevent_types.QChildEvent): void =
-  fcQFinalState_virtualbase_childEvent(self.h, event.h)
-
-proc cQFinalState_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQFinalState_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFinalStateVTable](fcQFinalState_vdata(self))
   let self = QFinalState(h: self)
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
-proc QFinalStatecustomEvent*(self: gen_qfinalstate_types.QFinalState, event: gen_qcoreevent_types.QEvent): void =
-  fcQFinalState_virtualbase_customEvent(self.h, event.h)
-
-proc cQFinalState_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQFinalState_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFinalStateVTable](fcQFinalState_vdata(self))
   let self = QFinalState(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
-proc QFinalStateconnectNotify*(self: gen_qfinalstate_types.QFinalState, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQFinalState_virtualbase_connectNotify(self.h, signal.h)
-
-proc cQFinalState_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQFinalState_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFinalStateVTable](fcQFinalState_vdata(self))
   let self = QFinalState(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
-proc QFinalStatedisconnectNotify*(self: gen_qfinalstate_types.QFinalState, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQFinalState_virtualbase_disconnectNotify(self.h, signal.h)
-
-proc cQFinalState_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQFinalState_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFinalStateVTable](fcQFinalState_vdata(self))
   let self = QFinalState(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
@@ -292,9 +296,33 @@ proc cQFinalState_vtable_callback_disconnectNotify(self: pointer, signal: pointe
 
 type VirtualQFinalState* {.inheritable.} = ref object of QFinalState
   vtbl*: cQFinalStateVTable
+
 method metaObject*(self: VirtualQFinalState): gen_qobjectdefs_types.QMetaObject {.base.} =
   QFinalStatemetaObject(self[])
-proc cQFinalState_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
+method metacast*(self: VirtualQFinalState, param1: cstring): pointer {.base.} =
+  QFinalStatemetacast(self[], param1)
+method metacall*(self: VirtualQFinalState, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QFinalStatemetacall(self[], param1, param2, param3)
+method onEntry*(self: VirtualQFinalState, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QFinalStateonEntry(self[], event)
+method onExit*(self: VirtualQFinalState, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QFinalStateonExit(self[], event)
+method event*(self: VirtualQFinalState, e: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QFinalStateevent(self[], e)
+method eventFilter*(self: VirtualQFinalState, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QFinalStateeventFilter(self[], watched, event)
+method timerEvent*(self: VirtualQFinalState, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QFinalStatetimerEvent(self[], event)
+method childEvent*(self: VirtualQFinalState, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QFinalStatechildEvent(self[], event)
+method customEvent*(self: VirtualQFinalState, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QFinalStatecustomEvent(self[], event)
+method connectNotify*(self: VirtualQFinalState, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QFinalStateconnectNotify(self[], signal)
+method disconnectNotify*(self: VirtualQFinalState, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QFinalStatedisconnectNotify(self[], signal)
+
+proc fcQFinalState_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQFinalState](fcQFinalState_vdata(self))
   var virtualReturn = inst.metaObject()
   virtualReturn.owned = false # TODO move?
@@ -302,17 +330,13 @@ proc cQFinalState_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-method metacast*(self: VirtualQFinalState, param1: cstring): pointer {.base.} =
-  QFinalStatemetacast(self[], param1)
-proc cQFinalState_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+proc fcQFinalState_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQFinalState](fcQFinalState_vdata(self))
   let slotval1 = (param1)
   var virtualReturn = inst.metacast(slotval1)
   virtualReturn
 
-method metacall*(self: VirtualQFinalState, param1: cint, param2: cint, param3: pointer): cint {.base.} =
-  QFinalStatemetacall(self[], param1, param2, param3)
-proc cQFinalState_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+proc fcQFinalState_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQFinalState](fcQFinalState_vdata(self))
   let slotval1 = cint(param1)
   let slotval2 = param2
@@ -320,71 +344,54 @@ proc cQFinalState_method_callback_metacall(self: pointer, param1: cint, param2: 
   var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
-method onEntry*(self: VirtualQFinalState, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QFinalStateonEntry(self[], event)
-proc cQFinalState_method_callback_onEntry(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQFinalState_method_callback_onEntry(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFinalState](fcQFinalState_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.onEntry(slotval1)
 
-method onExit*(self: VirtualQFinalState, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QFinalStateonExit(self[], event)
-proc cQFinalState_method_callback_onExit(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQFinalState_method_callback_onExit(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFinalState](fcQFinalState_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.onExit(slotval1)
 
-method event*(self: VirtualQFinalState, e: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QFinalStateevent(self[], e)
-proc cQFinalState_method_callback_event(self: pointer, e: pointer): bool {.cdecl.} =
+proc fcQFinalState_method_callback_event(self: pointer, e: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQFinalState](fcQFinalState_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: e, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
-method eventFilter*(self: VirtualQFinalState, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QFinalStateeventFilter(self[], watched, event)
-proc cQFinalState_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+proc fcQFinalState_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQFinalState](fcQFinalState_vdata(self))
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
   let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
-method timerEvent*(self: VirtualQFinalState, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
-  QFinalStatetimerEvent(self[], event)
-proc cQFinalState_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQFinalState_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFinalState](fcQFinalState_vdata(self))
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
-method childEvent*(self: VirtualQFinalState, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
-  QFinalStatechildEvent(self[], event)
-proc cQFinalState_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQFinalState_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFinalState](fcQFinalState_vdata(self))
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
-method customEvent*(self: VirtualQFinalState, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QFinalStatecustomEvent(self[], event)
-proc cQFinalState_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQFinalState_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFinalState](fcQFinalState_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
-method connectNotify*(self: VirtualQFinalState, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QFinalStateconnectNotify(self[], signal)
-proc cQFinalState_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQFinalState_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFinalState](fcQFinalState_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
-method disconnectNotify*(self: VirtualQFinalState, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QFinalStatedisconnectNotify(self[], signal)
-proc cQFinalState_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQFinalState_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFinalState](fcQFinalState_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
+
 
 proc sender*(self: gen_qfinalstate_types.QFinalState): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQFinalState_protectedbase_sender(self.h), owned: false)
@@ -406,29 +413,29 @@ proc create*(T: type gen_qfinalstate_types.QFinalState,
     let vtbl = cast[ref QFinalStateVTable](fcQFinalState_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQFinalState_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQFinalState_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQFinalState_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQFinalState_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQFinalState_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQFinalState_vtable_callback_metacall
   if not isNil(vtbl[].onEntry):
-    vtbl[].vtbl.onEntry = cQFinalState_vtable_callback_onEntry
+    vtbl[].vtbl.onEntry = fcQFinalState_vtable_callback_onEntry
   if not isNil(vtbl[].onExit):
-    vtbl[].vtbl.onExit = cQFinalState_vtable_callback_onExit
+    vtbl[].vtbl.onExit = fcQFinalState_vtable_callback_onExit
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQFinalState_vtable_callback_event
+    vtbl[].vtbl.event = fcQFinalState_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQFinalState_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQFinalState_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQFinalState_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQFinalState_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQFinalState_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQFinalState_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQFinalState_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQFinalState_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQFinalState_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQFinalState_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQFinalState_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQFinalState_vtable_callback_disconnectNotify
   gen_qfinalstate_types.QFinalState(h: fcQFinalState_new(addr(vtbl[].vtbl), addr(vtbl[])), owned: true)
 
 proc create*(T: type gen_qfinalstate_types.QFinalState,
@@ -440,29 +447,29 @@ proc create*(T: type gen_qfinalstate_types.QFinalState,
     let vtbl = cast[ref QFinalStateVTable](fcQFinalState_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQFinalState_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQFinalState_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQFinalState_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQFinalState_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQFinalState_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQFinalState_vtable_callback_metacall
   if not isNil(vtbl[].onEntry):
-    vtbl[].vtbl.onEntry = cQFinalState_vtable_callback_onEntry
+    vtbl[].vtbl.onEntry = fcQFinalState_vtable_callback_onEntry
   if not isNil(vtbl[].onExit):
-    vtbl[].vtbl.onExit = cQFinalState_vtable_callback_onExit
+    vtbl[].vtbl.onExit = fcQFinalState_vtable_callback_onExit
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQFinalState_vtable_callback_event
+    vtbl[].vtbl.event = fcQFinalState_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQFinalState_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQFinalState_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQFinalState_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQFinalState_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQFinalState_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQFinalState_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQFinalState_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQFinalState_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQFinalState_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQFinalState_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQFinalState_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQFinalState_vtable_callback_disconnectNotify
   gen_qfinalstate_types.QFinalState(h: fcQFinalState_new2(addr(vtbl[].vtbl), addr(vtbl[]), parent.h), owned: true)
 
 const cQFinalState_mvtbl = cQFinalStateVTable(
@@ -470,18 +477,19 @@ const cQFinalState_mvtbl = cQFinalStateVTable(
     let inst = cast[ptr typeof(VirtualQFinalState()[])](self.fcQFinalState_vtbl())
     inst[].h = nil
     inst[].owned = false,
-  metaObject: cQFinalState_method_callback_metaObject,
-  metacast: cQFinalState_method_callback_metacast,
-  metacall: cQFinalState_method_callback_metacall,
-  onEntry: cQFinalState_method_callback_onEntry,
-  onExit: cQFinalState_method_callback_onExit,
-  event: cQFinalState_method_callback_event,
-  eventFilter: cQFinalState_method_callback_eventFilter,
-  timerEvent: cQFinalState_method_callback_timerEvent,
-  childEvent: cQFinalState_method_callback_childEvent,
-  customEvent: cQFinalState_method_callback_customEvent,
-  connectNotify: cQFinalState_method_callback_connectNotify,
-  disconnectNotify: cQFinalState_method_callback_disconnectNotify,
+
+  metaObject: fcQFinalState_method_callback_metaObject,
+  metacast: fcQFinalState_method_callback_metacast,
+  metacall: fcQFinalState_method_callback_metacall,
+  onEntry: fcQFinalState_method_callback_onEntry,
+  onExit: fcQFinalState_method_callback_onExit,
+  event: fcQFinalState_method_callback_event,
+  eventFilter: fcQFinalState_method_callback_eventFilter,
+  timerEvent: fcQFinalState_method_callback_timerEvent,
+  childEvent: fcQFinalState_method_callback_childEvent,
+  customEvent: fcQFinalState_method_callback_customEvent,
+  connectNotify: fcQFinalState_method_callback_connectNotify,
+  disconnectNotify: fcQFinalState_method_callback_disconnectNotify,
 )
 proc create*(T: type gen_qfinalstate_types.QFinalState,
     inst: VirtualQFinalState) =

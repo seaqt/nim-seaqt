@@ -75,6 +75,7 @@ proc fcQMouseEventTransition_trUtf82(s: cstring, c: cstring): struct_miqt_string
 proc fcQMouseEventTransition_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QMouseEventTransition_trUtf83".}
 proc fcQMouseEventTransition_vtbl(self: pointer): pointer {.importc: "QMouseEventTransition_vtbl".}
 proc fcQMouseEventTransition_vdata(self: pointer): pointer {.importc: "QMouseEventTransition_vdata".}
+
 type cQMouseEventTransitionVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -186,6 +187,7 @@ type QMouseEventTransitionchildEventProc* = proc(self: QMouseEventTransition, ev
 type QMouseEventTransitioncustomEventProc* = proc(self: QMouseEventTransition, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QMouseEventTransitionconnectNotifyProc* = proc(self: QMouseEventTransition, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QMouseEventTransitiondisconnectNotifyProc* = proc(self: QMouseEventTransition, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+
 type QMouseEventTransitionVTable* {.inheritable, pure.} = object
   vtbl: cQMouseEventTransitionVTable
   metaObject*: QMouseEventTransitionmetaObjectProc
@@ -200,10 +202,45 @@ type QMouseEventTransitionVTable* {.inheritable, pure.} = object
   customEvent*: QMouseEventTransitioncustomEventProc
   connectNotify*: QMouseEventTransitionconnectNotifyProc
   disconnectNotify*: QMouseEventTransitiondisconnectNotifyProc
+
 proc QMouseEventTransitionmetaObject*(self: gen_qmouseeventtransition_types.QMouseEventTransition): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQMouseEventTransition_virtualbase_metaObject(self.h), owned: false)
 
-proc cQMouseEventTransition_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
+proc QMouseEventTransitionmetacast*(self: gen_qmouseeventtransition_types.QMouseEventTransition, param1: cstring): pointer =
+  fcQMouseEventTransition_virtualbase_metacast(self.h, param1)
+
+proc QMouseEventTransitionmetacall*(self: gen_qmouseeventtransition_types.QMouseEventTransition, param1: cint, param2: cint, param3: pointer): cint =
+  fcQMouseEventTransition_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+proc QMouseEventTransitiononTransition*(self: gen_qmouseeventtransition_types.QMouseEventTransition, event: gen_qcoreevent_types.QEvent): void =
+  fcQMouseEventTransition_virtualbase_onTransition(self.h, event.h)
+
+proc QMouseEventTransitioneventTest*(self: gen_qmouseeventtransition_types.QMouseEventTransition, event: gen_qcoreevent_types.QEvent): bool =
+  fcQMouseEventTransition_virtualbase_eventTest(self.h, event.h)
+
+proc QMouseEventTransitionevent*(self: gen_qmouseeventtransition_types.QMouseEventTransition, e: gen_qcoreevent_types.QEvent): bool =
+  fcQMouseEventTransition_virtualbase_event(self.h, e.h)
+
+proc QMouseEventTransitioneventFilter*(self: gen_qmouseeventtransition_types.QMouseEventTransition, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
+  fcQMouseEventTransition_virtualbase_eventFilter(self.h, watched.h, event.h)
+
+proc QMouseEventTransitiontimerEvent*(self: gen_qmouseeventtransition_types.QMouseEventTransition, event: gen_qcoreevent_types.QTimerEvent): void =
+  fcQMouseEventTransition_virtualbase_timerEvent(self.h, event.h)
+
+proc QMouseEventTransitionchildEvent*(self: gen_qmouseeventtransition_types.QMouseEventTransition, event: gen_qcoreevent_types.QChildEvent): void =
+  fcQMouseEventTransition_virtualbase_childEvent(self.h, event.h)
+
+proc QMouseEventTransitioncustomEvent*(self: gen_qmouseeventtransition_types.QMouseEventTransition, event: gen_qcoreevent_types.QEvent): void =
+  fcQMouseEventTransition_virtualbase_customEvent(self.h, event.h)
+
+proc QMouseEventTransitionconnectNotify*(self: gen_qmouseeventtransition_types.QMouseEventTransition, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQMouseEventTransition_virtualbase_connectNotify(self.h, signal.h)
+
+proc QMouseEventTransitiondisconnectNotify*(self: gen_qmouseeventtransition_types.QMouseEventTransition, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQMouseEventTransition_virtualbase_disconnectNotify(self.h, signal.h)
+
+
+proc fcQMouseEventTransition_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QMouseEventTransitionVTable](fcQMouseEventTransition_vdata(self))
   let self = QMouseEventTransition(h: self)
   var virtualReturn = vtbl[].metaObject(self)
@@ -212,20 +249,14 @@ proc cQMouseEventTransition_vtable_callback_metaObject(self: pointer): pointer {
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QMouseEventTransitionmetacast*(self: gen_qmouseeventtransition_types.QMouseEventTransition, param1: cstring): pointer =
-  fcQMouseEventTransition_virtualbase_metacast(self.h, param1)
-
-proc cQMouseEventTransition_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+proc fcQMouseEventTransition_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QMouseEventTransitionVTable](fcQMouseEventTransition_vdata(self))
   let self = QMouseEventTransition(h: self)
   let slotval1 = (param1)
   var virtualReturn = vtbl[].metacast(self, slotval1)
   virtualReturn
 
-proc QMouseEventTransitionmetacall*(self: gen_qmouseeventtransition_types.QMouseEventTransition, param1: cint, param2: cint, param3: pointer): cint =
-  fcQMouseEventTransition_virtualbase_metacall(self.h, cint(param1), param2, param3)
-
-proc cQMouseEventTransition_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+proc fcQMouseEventTransition_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QMouseEventTransitionVTable](fcQMouseEventTransition_vdata(self))
   let self = QMouseEventTransition(h: self)
   let slotval1 = cint(param1)
@@ -234,39 +265,27 @@ proc cQMouseEventTransition_vtable_callback_metacall(self: pointer, param1: cint
   var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QMouseEventTransitiononTransition*(self: gen_qmouseeventtransition_types.QMouseEventTransition, event: gen_qcoreevent_types.QEvent): void =
-  fcQMouseEventTransition_virtualbase_onTransition(self.h, event.h)
-
-proc cQMouseEventTransition_vtable_callback_onTransition(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQMouseEventTransition_vtable_callback_onTransition(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMouseEventTransitionVTable](fcQMouseEventTransition_vdata(self))
   let self = QMouseEventTransition(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].onTransition(self, slotval1)
 
-proc QMouseEventTransitioneventTest*(self: gen_qmouseeventtransition_types.QMouseEventTransition, event: gen_qcoreevent_types.QEvent): bool =
-  fcQMouseEventTransition_virtualbase_eventTest(self.h, event.h)
-
-proc cQMouseEventTransition_vtable_callback_eventTest(self: pointer, event: pointer): bool {.cdecl.} =
+proc fcQMouseEventTransition_vtable_callback_eventTest(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QMouseEventTransitionVTable](fcQMouseEventTransition_vdata(self))
   let self = QMouseEventTransition(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].eventTest(self, slotval1)
   virtualReturn
 
-proc QMouseEventTransitionevent*(self: gen_qmouseeventtransition_types.QMouseEventTransition, e: gen_qcoreevent_types.QEvent): bool =
-  fcQMouseEventTransition_virtualbase_event(self.h, e.h)
-
-proc cQMouseEventTransition_vtable_callback_event(self: pointer, e: pointer): bool {.cdecl.} =
+proc fcQMouseEventTransition_vtable_callback_event(self: pointer, e: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QMouseEventTransitionVTable](fcQMouseEventTransition_vdata(self))
   let self = QMouseEventTransition(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: e, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
-proc QMouseEventTransitioneventFilter*(self: gen_qmouseeventtransition_types.QMouseEventTransition, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
-  fcQMouseEventTransition_virtualbase_eventFilter(self.h, watched.h, event.h)
-
-proc cQMouseEventTransition_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+proc fcQMouseEventTransition_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QMouseEventTransitionVTable](fcQMouseEventTransition_vdata(self))
   let self = QMouseEventTransition(h: self)
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
@@ -274,46 +293,31 @@ proc cQMouseEventTransition_vtable_callback_eventFilter(self: pointer, watched: 
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
-proc QMouseEventTransitiontimerEvent*(self: gen_qmouseeventtransition_types.QMouseEventTransition, event: gen_qcoreevent_types.QTimerEvent): void =
-  fcQMouseEventTransition_virtualbase_timerEvent(self.h, event.h)
-
-proc cQMouseEventTransition_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQMouseEventTransition_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMouseEventTransitionVTable](fcQMouseEventTransition_vdata(self))
   let self = QMouseEventTransition(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
-proc QMouseEventTransitionchildEvent*(self: gen_qmouseeventtransition_types.QMouseEventTransition, event: gen_qcoreevent_types.QChildEvent): void =
-  fcQMouseEventTransition_virtualbase_childEvent(self.h, event.h)
-
-proc cQMouseEventTransition_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQMouseEventTransition_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMouseEventTransitionVTable](fcQMouseEventTransition_vdata(self))
   let self = QMouseEventTransition(h: self)
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
-proc QMouseEventTransitioncustomEvent*(self: gen_qmouseeventtransition_types.QMouseEventTransition, event: gen_qcoreevent_types.QEvent): void =
-  fcQMouseEventTransition_virtualbase_customEvent(self.h, event.h)
-
-proc cQMouseEventTransition_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQMouseEventTransition_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMouseEventTransitionVTable](fcQMouseEventTransition_vdata(self))
   let self = QMouseEventTransition(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
-proc QMouseEventTransitionconnectNotify*(self: gen_qmouseeventtransition_types.QMouseEventTransition, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQMouseEventTransition_virtualbase_connectNotify(self.h, signal.h)
-
-proc cQMouseEventTransition_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQMouseEventTransition_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMouseEventTransitionVTable](fcQMouseEventTransition_vdata(self))
   let self = QMouseEventTransition(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
-proc QMouseEventTransitiondisconnectNotify*(self: gen_qmouseeventtransition_types.QMouseEventTransition, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQMouseEventTransition_virtualbase_disconnectNotify(self.h, signal.h)
-
-proc cQMouseEventTransition_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQMouseEventTransition_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMouseEventTransitionVTable](fcQMouseEventTransition_vdata(self))
   let self = QMouseEventTransition(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
@@ -321,9 +325,33 @@ proc cQMouseEventTransition_vtable_callback_disconnectNotify(self: pointer, sign
 
 type VirtualQMouseEventTransition* {.inheritable.} = ref object of QMouseEventTransition
   vtbl*: cQMouseEventTransitionVTable
+
 method metaObject*(self: VirtualQMouseEventTransition): gen_qobjectdefs_types.QMetaObject {.base.} =
   QMouseEventTransitionmetaObject(self[])
-proc cQMouseEventTransition_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
+method metacast*(self: VirtualQMouseEventTransition, param1: cstring): pointer {.base.} =
+  QMouseEventTransitionmetacast(self[], param1)
+method metacall*(self: VirtualQMouseEventTransition, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QMouseEventTransitionmetacall(self[], param1, param2, param3)
+method onTransition*(self: VirtualQMouseEventTransition, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QMouseEventTransitiononTransition(self[], event)
+method eventTest*(self: VirtualQMouseEventTransition, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QMouseEventTransitioneventTest(self[], event)
+method event*(self: VirtualQMouseEventTransition, e: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QMouseEventTransitionevent(self[], e)
+method eventFilter*(self: VirtualQMouseEventTransition, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QMouseEventTransitioneventFilter(self[], watched, event)
+method timerEvent*(self: VirtualQMouseEventTransition, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QMouseEventTransitiontimerEvent(self[], event)
+method childEvent*(self: VirtualQMouseEventTransition, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QMouseEventTransitionchildEvent(self[], event)
+method customEvent*(self: VirtualQMouseEventTransition, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QMouseEventTransitioncustomEvent(self[], event)
+method connectNotify*(self: VirtualQMouseEventTransition, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QMouseEventTransitionconnectNotify(self[], signal)
+method disconnectNotify*(self: VirtualQMouseEventTransition, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QMouseEventTransitiondisconnectNotify(self[], signal)
+
+proc fcQMouseEventTransition_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQMouseEventTransition](fcQMouseEventTransition_vdata(self))
   var virtualReturn = inst.metaObject()
   virtualReturn.owned = false # TODO move?
@@ -331,17 +359,13 @@ proc cQMouseEventTransition_method_callback_metaObject(self: pointer): pointer {
   virtualReturn.h = nil
   virtualReturn_h
 
-method metacast*(self: VirtualQMouseEventTransition, param1: cstring): pointer {.base.} =
-  QMouseEventTransitionmetacast(self[], param1)
-proc cQMouseEventTransition_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+proc fcQMouseEventTransition_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQMouseEventTransition](fcQMouseEventTransition_vdata(self))
   let slotval1 = (param1)
   var virtualReturn = inst.metacast(slotval1)
   virtualReturn
 
-method metacall*(self: VirtualQMouseEventTransition, param1: cint, param2: cint, param3: pointer): cint {.base.} =
-  QMouseEventTransitionmetacall(self[], param1, param2, param3)
-proc cQMouseEventTransition_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+proc fcQMouseEventTransition_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQMouseEventTransition](fcQMouseEventTransition_vdata(self))
   let slotval1 = cint(param1)
   let slotval2 = param2
@@ -349,72 +373,55 @@ proc cQMouseEventTransition_method_callback_metacall(self: pointer, param1: cint
   var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
-method onTransition*(self: VirtualQMouseEventTransition, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QMouseEventTransitiononTransition(self[], event)
-proc cQMouseEventTransition_method_callback_onTransition(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQMouseEventTransition_method_callback_onTransition(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMouseEventTransition](fcQMouseEventTransition_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.onTransition(slotval1)
 
-method eventTest*(self: VirtualQMouseEventTransition, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QMouseEventTransitioneventTest(self[], event)
-proc cQMouseEventTransition_method_callback_eventTest(self: pointer, event: pointer): bool {.cdecl.} =
+proc fcQMouseEventTransition_method_callback_eventTest(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQMouseEventTransition](fcQMouseEventTransition_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.eventTest(slotval1)
   virtualReturn
 
-method event*(self: VirtualQMouseEventTransition, e: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QMouseEventTransitionevent(self[], e)
-proc cQMouseEventTransition_method_callback_event(self: pointer, e: pointer): bool {.cdecl.} =
+proc fcQMouseEventTransition_method_callback_event(self: pointer, e: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQMouseEventTransition](fcQMouseEventTransition_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: e, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
-method eventFilter*(self: VirtualQMouseEventTransition, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QMouseEventTransitioneventFilter(self[], watched, event)
-proc cQMouseEventTransition_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+proc fcQMouseEventTransition_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQMouseEventTransition](fcQMouseEventTransition_vdata(self))
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
   let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
-method timerEvent*(self: VirtualQMouseEventTransition, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
-  QMouseEventTransitiontimerEvent(self[], event)
-proc cQMouseEventTransition_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQMouseEventTransition_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMouseEventTransition](fcQMouseEventTransition_vdata(self))
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
-method childEvent*(self: VirtualQMouseEventTransition, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
-  QMouseEventTransitionchildEvent(self[], event)
-proc cQMouseEventTransition_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQMouseEventTransition_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMouseEventTransition](fcQMouseEventTransition_vdata(self))
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
-method customEvent*(self: VirtualQMouseEventTransition, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QMouseEventTransitioncustomEvent(self[], event)
-proc cQMouseEventTransition_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQMouseEventTransition_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMouseEventTransition](fcQMouseEventTransition_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
-method connectNotify*(self: VirtualQMouseEventTransition, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QMouseEventTransitionconnectNotify(self[], signal)
-proc cQMouseEventTransition_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQMouseEventTransition_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMouseEventTransition](fcQMouseEventTransition_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
-method disconnectNotify*(self: VirtualQMouseEventTransition, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QMouseEventTransitiondisconnectNotify(self[], signal)
-proc cQMouseEventTransition_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQMouseEventTransition_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMouseEventTransition](fcQMouseEventTransition_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
+
 
 proc sender*(self: gen_qmouseeventtransition_types.QMouseEventTransition): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQMouseEventTransition_protectedbase_sender(self.h), owned: false)
@@ -436,29 +443,29 @@ proc create*(T: type gen_qmouseeventtransition_types.QMouseEventTransition,
     let vtbl = cast[ref QMouseEventTransitionVTable](fcQMouseEventTransition_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQMouseEventTransition_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQMouseEventTransition_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQMouseEventTransition_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQMouseEventTransition_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQMouseEventTransition_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQMouseEventTransition_vtable_callback_metacall
   if not isNil(vtbl[].onTransition):
-    vtbl[].vtbl.onTransition = cQMouseEventTransition_vtable_callback_onTransition
+    vtbl[].vtbl.onTransition = fcQMouseEventTransition_vtable_callback_onTransition
   if not isNil(vtbl[].eventTest):
-    vtbl[].vtbl.eventTest = cQMouseEventTransition_vtable_callback_eventTest
+    vtbl[].vtbl.eventTest = fcQMouseEventTransition_vtable_callback_eventTest
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQMouseEventTransition_vtable_callback_event
+    vtbl[].vtbl.event = fcQMouseEventTransition_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQMouseEventTransition_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQMouseEventTransition_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQMouseEventTransition_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQMouseEventTransition_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQMouseEventTransition_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQMouseEventTransition_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQMouseEventTransition_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQMouseEventTransition_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQMouseEventTransition_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQMouseEventTransition_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQMouseEventTransition_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQMouseEventTransition_vtable_callback_disconnectNotify
   gen_qmouseeventtransition_types.QMouseEventTransition(h: fcQMouseEventTransition_new(addr(vtbl[].vtbl), addr(vtbl[])), owned: true)
 
 proc create*(T: type gen_qmouseeventtransition_types.QMouseEventTransition,
@@ -470,29 +477,29 @@ proc create*(T: type gen_qmouseeventtransition_types.QMouseEventTransition,
     let vtbl = cast[ref QMouseEventTransitionVTable](fcQMouseEventTransition_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQMouseEventTransition_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQMouseEventTransition_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQMouseEventTransition_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQMouseEventTransition_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQMouseEventTransition_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQMouseEventTransition_vtable_callback_metacall
   if not isNil(vtbl[].onTransition):
-    vtbl[].vtbl.onTransition = cQMouseEventTransition_vtable_callback_onTransition
+    vtbl[].vtbl.onTransition = fcQMouseEventTransition_vtable_callback_onTransition
   if not isNil(vtbl[].eventTest):
-    vtbl[].vtbl.eventTest = cQMouseEventTransition_vtable_callback_eventTest
+    vtbl[].vtbl.eventTest = fcQMouseEventTransition_vtable_callback_eventTest
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQMouseEventTransition_vtable_callback_event
+    vtbl[].vtbl.event = fcQMouseEventTransition_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQMouseEventTransition_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQMouseEventTransition_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQMouseEventTransition_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQMouseEventTransition_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQMouseEventTransition_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQMouseEventTransition_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQMouseEventTransition_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQMouseEventTransition_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQMouseEventTransition_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQMouseEventTransition_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQMouseEventTransition_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQMouseEventTransition_vtable_callback_disconnectNotify
   gen_qmouseeventtransition_types.QMouseEventTransition(h: fcQMouseEventTransition_new2(addr(vtbl[].vtbl), addr(vtbl[]), objectVal.h, cint(typeVal), cint(button)), owned: true)
 
 proc create*(T: type gen_qmouseeventtransition_types.QMouseEventTransition,
@@ -504,29 +511,29 @@ proc create*(T: type gen_qmouseeventtransition_types.QMouseEventTransition,
     let vtbl = cast[ref QMouseEventTransitionVTable](fcQMouseEventTransition_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQMouseEventTransition_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQMouseEventTransition_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQMouseEventTransition_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQMouseEventTransition_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQMouseEventTransition_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQMouseEventTransition_vtable_callback_metacall
   if not isNil(vtbl[].onTransition):
-    vtbl[].vtbl.onTransition = cQMouseEventTransition_vtable_callback_onTransition
+    vtbl[].vtbl.onTransition = fcQMouseEventTransition_vtable_callback_onTransition
   if not isNil(vtbl[].eventTest):
-    vtbl[].vtbl.eventTest = cQMouseEventTransition_vtable_callback_eventTest
+    vtbl[].vtbl.eventTest = fcQMouseEventTransition_vtable_callback_eventTest
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQMouseEventTransition_vtable_callback_event
+    vtbl[].vtbl.event = fcQMouseEventTransition_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQMouseEventTransition_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQMouseEventTransition_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQMouseEventTransition_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQMouseEventTransition_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQMouseEventTransition_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQMouseEventTransition_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQMouseEventTransition_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQMouseEventTransition_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQMouseEventTransition_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQMouseEventTransition_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQMouseEventTransition_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQMouseEventTransition_vtable_callback_disconnectNotify
   gen_qmouseeventtransition_types.QMouseEventTransition(h: fcQMouseEventTransition_new3(addr(vtbl[].vtbl), addr(vtbl[]), sourceState.h), owned: true)
 
 proc create*(T: type gen_qmouseeventtransition_types.QMouseEventTransition,
@@ -538,29 +545,29 @@ proc create*(T: type gen_qmouseeventtransition_types.QMouseEventTransition,
     let vtbl = cast[ref QMouseEventTransitionVTable](fcQMouseEventTransition_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQMouseEventTransition_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQMouseEventTransition_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQMouseEventTransition_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQMouseEventTransition_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQMouseEventTransition_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQMouseEventTransition_vtable_callback_metacall
   if not isNil(vtbl[].onTransition):
-    vtbl[].vtbl.onTransition = cQMouseEventTransition_vtable_callback_onTransition
+    vtbl[].vtbl.onTransition = fcQMouseEventTransition_vtable_callback_onTransition
   if not isNil(vtbl[].eventTest):
-    vtbl[].vtbl.eventTest = cQMouseEventTransition_vtable_callback_eventTest
+    vtbl[].vtbl.eventTest = fcQMouseEventTransition_vtable_callback_eventTest
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQMouseEventTransition_vtable_callback_event
+    vtbl[].vtbl.event = fcQMouseEventTransition_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQMouseEventTransition_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQMouseEventTransition_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQMouseEventTransition_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQMouseEventTransition_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQMouseEventTransition_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQMouseEventTransition_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQMouseEventTransition_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQMouseEventTransition_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQMouseEventTransition_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQMouseEventTransition_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQMouseEventTransition_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQMouseEventTransition_vtable_callback_disconnectNotify
   gen_qmouseeventtransition_types.QMouseEventTransition(h: fcQMouseEventTransition_new4(addr(vtbl[].vtbl), addr(vtbl[]), objectVal.h, cint(typeVal), cint(button), sourceState.h), owned: true)
 
 const cQMouseEventTransition_mvtbl = cQMouseEventTransitionVTable(
@@ -568,18 +575,19 @@ const cQMouseEventTransition_mvtbl = cQMouseEventTransitionVTable(
     let inst = cast[ptr typeof(VirtualQMouseEventTransition()[])](self.fcQMouseEventTransition_vtbl())
     inst[].h = nil
     inst[].owned = false,
-  metaObject: cQMouseEventTransition_method_callback_metaObject,
-  metacast: cQMouseEventTransition_method_callback_metacast,
-  metacall: cQMouseEventTransition_method_callback_metacall,
-  onTransition: cQMouseEventTransition_method_callback_onTransition,
-  eventTest: cQMouseEventTransition_method_callback_eventTest,
-  event: cQMouseEventTransition_method_callback_event,
-  eventFilter: cQMouseEventTransition_method_callback_eventFilter,
-  timerEvent: cQMouseEventTransition_method_callback_timerEvent,
-  childEvent: cQMouseEventTransition_method_callback_childEvent,
-  customEvent: cQMouseEventTransition_method_callback_customEvent,
-  connectNotify: cQMouseEventTransition_method_callback_connectNotify,
-  disconnectNotify: cQMouseEventTransition_method_callback_disconnectNotify,
+
+  metaObject: fcQMouseEventTransition_method_callback_metaObject,
+  metacast: fcQMouseEventTransition_method_callback_metacast,
+  metacall: fcQMouseEventTransition_method_callback_metacall,
+  onTransition: fcQMouseEventTransition_method_callback_onTransition,
+  eventTest: fcQMouseEventTransition_method_callback_eventTest,
+  event: fcQMouseEventTransition_method_callback_event,
+  eventFilter: fcQMouseEventTransition_method_callback_eventFilter,
+  timerEvent: fcQMouseEventTransition_method_callback_timerEvent,
+  childEvent: fcQMouseEventTransition_method_callback_childEvent,
+  customEvent: fcQMouseEventTransition_method_callback_customEvent,
+  connectNotify: fcQMouseEventTransition_method_callback_connectNotify,
+  disconnectNotify: fcQMouseEventTransition_method_callback_disconnectNotify,
 )
 proc create*(T: type gen_qmouseeventtransition_types.QMouseEventTransition,
     inst: VirtualQMouseEventTransition) =

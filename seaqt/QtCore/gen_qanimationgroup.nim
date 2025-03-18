@@ -73,6 +73,7 @@ proc fcQAnimationGroup_trUtf82(s: cstring, c: cstring): struct_miqt_string {.imp
 proc fcQAnimationGroup_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QAnimationGroup_trUtf83".}
 proc fcQAnimationGroup_vtbl(self: pointer): pointer {.importc: "QAnimationGroup_vtbl".}
 proc fcQAnimationGroup_vdata(self: pointer): pointer {.importc: "QAnimationGroup_vdata".}
+
 type cQAnimationGroupVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -192,6 +193,7 @@ type QAnimationGroupchildEventProc* = proc(self: QAnimationGroup, event: gen_qco
 type QAnimationGroupcustomEventProc* = proc(self: QAnimationGroup, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QAnimationGroupconnectNotifyProc* = proc(self: QAnimationGroup, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QAnimationGroupdisconnectNotifyProc* = proc(self: QAnimationGroup, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+
 type QAnimationGroupVTable* {.inheritable, pure.} = object
   vtbl: cQAnimationGroupVTable
   metaObject*: QAnimationGroupmetaObjectProc
@@ -208,10 +210,45 @@ type QAnimationGroupVTable* {.inheritable, pure.} = object
   customEvent*: QAnimationGroupcustomEventProc
   connectNotify*: QAnimationGroupconnectNotifyProc
   disconnectNotify*: QAnimationGroupdisconnectNotifyProc
+
 proc QAnimationGroupmetaObject*(self: gen_qanimationgroup_types.QAnimationGroup): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQAnimationGroup_virtualbase_metaObject(self.h), owned: false)
 
-proc cQAnimationGroup_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
+proc QAnimationGroupmetacast*(self: gen_qanimationgroup_types.QAnimationGroup, param1: cstring): pointer =
+  fcQAnimationGroup_virtualbase_metacast(self.h, param1)
+
+proc QAnimationGroupmetacall*(self: gen_qanimationgroup_types.QAnimationGroup, param1: cint, param2: cint, param3: pointer): cint =
+  fcQAnimationGroup_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+proc QAnimationGroupevent*(self: gen_qanimationgroup_types.QAnimationGroup, event: gen_qcoreevent_types.QEvent): bool =
+  fcQAnimationGroup_virtualbase_event(self.h, event.h)
+
+proc QAnimationGroupupdateState*(self: gen_qanimationgroup_types.QAnimationGroup, newState: cint, oldState: cint): void =
+  fcQAnimationGroup_virtualbase_updateState(self.h, cint(newState), cint(oldState))
+
+proc QAnimationGroupupdateDirection*(self: gen_qanimationgroup_types.QAnimationGroup, direction: cint): void =
+  fcQAnimationGroup_virtualbase_updateDirection(self.h, cint(direction))
+
+proc QAnimationGroupeventFilter*(self: gen_qanimationgroup_types.QAnimationGroup, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
+  fcQAnimationGroup_virtualbase_eventFilter(self.h, watched.h, event.h)
+
+proc QAnimationGrouptimerEvent*(self: gen_qanimationgroup_types.QAnimationGroup, event: gen_qcoreevent_types.QTimerEvent): void =
+  fcQAnimationGroup_virtualbase_timerEvent(self.h, event.h)
+
+proc QAnimationGroupchildEvent*(self: gen_qanimationgroup_types.QAnimationGroup, event: gen_qcoreevent_types.QChildEvent): void =
+  fcQAnimationGroup_virtualbase_childEvent(self.h, event.h)
+
+proc QAnimationGroupcustomEvent*(self: gen_qanimationgroup_types.QAnimationGroup, event: gen_qcoreevent_types.QEvent): void =
+  fcQAnimationGroup_virtualbase_customEvent(self.h, event.h)
+
+proc QAnimationGroupconnectNotify*(self: gen_qanimationgroup_types.QAnimationGroup, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQAnimationGroup_virtualbase_connectNotify(self.h, signal.h)
+
+proc QAnimationGroupdisconnectNotify*(self: gen_qanimationgroup_types.QAnimationGroup, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQAnimationGroup_virtualbase_disconnectNotify(self.h, signal.h)
+
+
+proc fcQAnimationGroup_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QAnimationGroupVTable](fcQAnimationGroup_vdata(self))
   let self = QAnimationGroup(h: self)
   var virtualReturn = vtbl[].metaObject(self)
@@ -220,20 +257,14 @@ proc cQAnimationGroup_vtable_callback_metaObject(self: pointer): pointer {.cdecl
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QAnimationGroupmetacast*(self: gen_qanimationgroup_types.QAnimationGroup, param1: cstring): pointer =
-  fcQAnimationGroup_virtualbase_metacast(self.h, param1)
-
-proc cQAnimationGroup_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+proc fcQAnimationGroup_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QAnimationGroupVTable](fcQAnimationGroup_vdata(self))
   let self = QAnimationGroup(h: self)
   let slotval1 = (param1)
   var virtualReturn = vtbl[].metacast(self, slotval1)
   virtualReturn
 
-proc QAnimationGroupmetacall*(self: gen_qanimationgroup_types.QAnimationGroup, param1: cint, param2: cint, param3: pointer): cint =
-  fcQAnimationGroup_virtualbase_metacall(self.h, cint(param1), param2, param3)
-
-proc cQAnimationGroup_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+proc fcQAnimationGroup_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QAnimationGroupVTable](fcQAnimationGroup_vdata(self))
   let self = QAnimationGroup(h: self)
   let slotval1 = cint(param1)
@@ -242,51 +273,39 @@ proc cQAnimationGroup_vtable_callback_metacall(self: pointer, param1: cint, para
   var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QAnimationGroupevent*(self: gen_qanimationgroup_types.QAnimationGroup, event: gen_qcoreevent_types.QEvent): bool =
-  fcQAnimationGroup_virtualbase_event(self.h, event.h)
-
-proc cQAnimationGroup_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
+proc fcQAnimationGroup_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QAnimationGroupVTable](fcQAnimationGroup_vdata(self))
   let self = QAnimationGroup(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
-proc cQAnimationGroup_vtable_callback_duration(self: pointer): cint {.cdecl.} =
+proc fcQAnimationGroup_vtable_callback_duration(self: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QAnimationGroupVTable](fcQAnimationGroup_vdata(self))
   let self = QAnimationGroup(h: self)
   var virtualReturn = vtbl[].duration(self)
   virtualReturn
 
-proc cQAnimationGroup_vtable_callback_updateCurrentTime(self: pointer, currentTime: cint): void {.cdecl.} =
+proc fcQAnimationGroup_vtable_callback_updateCurrentTime(self: pointer, currentTime: cint): void {.cdecl.} =
   let vtbl = cast[ptr QAnimationGroupVTable](fcQAnimationGroup_vdata(self))
   let self = QAnimationGroup(h: self)
   let slotval1 = currentTime
   vtbl[].updateCurrentTime(self, slotval1)
 
-proc QAnimationGroupupdateState*(self: gen_qanimationgroup_types.QAnimationGroup, newState: cint, oldState: cint): void =
-  fcQAnimationGroup_virtualbase_updateState(self.h, cint(newState), cint(oldState))
-
-proc cQAnimationGroup_vtable_callback_updateState(self: pointer, newState: cint, oldState: cint): void {.cdecl.} =
+proc fcQAnimationGroup_vtable_callback_updateState(self: pointer, newState: cint, oldState: cint): void {.cdecl.} =
   let vtbl = cast[ptr QAnimationGroupVTable](fcQAnimationGroup_vdata(self))
   let self = QAnimationGroup(h: self)
   let slotval1 = cint(newState)
   let slotval2 = cint(oldState)
   vtbl[].updateState(self, slotval1, slotval2)
 
-proc QAnimationGroupupdateDirection*(self: gen_qanimationgroup_types.QAnimationGroup, direction: cint): void =
-  fcQAnimationGroup_virtualbase_updateDirection(self.h, cint(direction))
-
-proc cQAnimationGroup_vtable_callback_updateDirection(self: pointer, direction: cint): void {.cdecl.} =
+proc fcQAnimationGroup_vtable_callback_updateDirection(self: pointer, direction: cint): void {.cdecl.} =
   let vtbl = cast[ptr QAnimationGroupVTable](fcQAnimationGroup_vdata(self))
   let self = QAnimationGroup(h: self)
   let slotval1 = cint(direction)
   vtbl[].updateDirection(self, slotval1)
 
-proc QAnimationGroupeventFilter*(self: gen_qanimationgroup_types.QAnimationGroup, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
-  fcQAnimationGroup_virtualbase_eventFilter(self.h, watched.h, event.h)
-
-proc cQAnimationGroup_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+proc fcQAnimationGroup_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QAnimationGroupVTable](fcQAnimationGroup_vdata(self))
   let self = QAnimationGroup(h: self)
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
@@ -294,46 +313,31 @@ proc cQAnimationGroup_vtable_callback_eventFilter(self: pointer, watched: pointe
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
-proc QAnimationGrouptimerEvent*(self: gen_qanimationgroup_types.QAnimationGroup, event: gen_qcoreevent_types.QTimerEvent): void =
-  fcQAnimationGroup_virtualbase_timerEvent(self.h, event.h)
-
-proc cQAnimationGroup_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQAnimationGroup_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAnimationGroupVTable](fcQAnimationGroup_vdata(self))
   let self = QAnimationGroup(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
-proc QAnimationGroupchildEvent*(self: gen_qanimationgroup_types.QAnimationGroup, event: gen_qcoreevent_types.QChildEvent): void =
-  fcQAnimationGroup_virtualbase_childEvent(self.h, event.h)
-
-proc cQAnimationGroup_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQAnimationGroup_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAnimationGroupVTable](fcQAnimationGroup_vdata(self))
   let self = QAnimationGroup(h: self)
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
-proc QAnimationGroupcustomEvent*(self: gen_qanimationgroup_types.QAnimationGroup, event: gen_qcoreevent_types.QEvent): void =
-  fcQAnimationGroup_virtualbase_customEvent(self.h, event.h)
-
-proc cQAnimationGroup_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQAnimationGroup_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAnimationGroupVTable](fcQAnimationGroup_vdata(self))
   let self = QAnimationGroup(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
-proc QAnimationGroupconnectNotify*(self: gen_qanimationgroup_types.QAnimationGroup, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQAnimationGroup_virtualbase_connectNotify(self.h, signal.h)
-
-proc cQAnimationGroup_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQAnimationGroup_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAnimationGroupVTable](fcQAnimationGroup_vdata(self))
   let self = QAnimationGroup(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
-proc QAnimationGroupdisconnectNotify*(self: gen_qanimationgroup_types.QAnimationGroup, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQAnimationGroup_virtualbase_disconnectNotify(self.h, signal.h)
-
-proc cQAnimationGroup_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQAnimationGroup_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAnimationGroupVTable](fcQAnimationGroup_vdata(self))
   let self = QAnimationGroup(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
@@ -341,9 +345,37 @@ proc cQAnimationGroup_vtable_callback_disconnectNotify(self: pointer, signal: po
 
 type VirtualQAnimationGroup* {.inheritable.} = ref object of QAnimationGroup
   vtbl*: cQAnimationGroupVTable
+
 method metaObject*(self: VirtualQAnimationGroup): gen_qobjectdefs_types.QMetaObject {.base.} =
   QAnimationGroupmetaObject(self[])
-proc cQAnimationGroup_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
+method metacast*(self: VirtualQAnimationGroup, param1: cstring): pointer {.base.} =
+  QAnimationGroupmetacast(self[], param1)
+method metacall*(self: VirtualQAnimationGroup, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QAnimationGroupmetacall(self[], param1, param2, param3)
+method event*(self: VirtualQAnimationGroup, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QAnimationGroupevent(self[], event)
+method duration*(self: VirtualQAnimationGroup): cint {.base.} =
+  raiseAssert("missing implementation of QAnimationGroup.duration")
+method updateCurrentTime*(self: VirtualQAnimationGroup, currentTime: cint): void {.base.} =
+  raiseAssert("missing implementation of QAnimationGroup.updateCurrentTime")
+method updateState*(self: VirtualQAnimationGroup, newState: cint, oldState: cint): void {.base.} =
+  QAnimationGroupupdateState(self[], newState, oldState)
+method updateDirection*(self: VirtualQAnimationGroup, direction: cint): void {.base.} =
+  QAnimationGroupupdateDirection(self[], direction)
+method eventFilter*(self: VirtualQAnimationGroup, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QAnimationGroupeventFilter(self[], watched, event)
+method timerEvent*(self: VirtualQAnimationGroup, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QAnimationGrouptimerEvent(self[], event)
+method childEvent*(self: VirtualQAnimationGroup, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QAnimationGroupchildEvent(self[], event)
+method customEvent*(self: VirtualQAnimationGroup, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QAnimationGroupcustomEvent(self[], event)
+method connectNotify*(self: VirtualQAnimationGroup, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QAnimationGroupconnectNotify(self[], signal)
+method disconnectNotify*(self: VirtualQAnimationGroup, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QAnimationGroupdisconnectNotify(self[], signal)
+
+proc fcQAnimationGroup_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQAnimationGroup](fcQAnimationGroup_vdata(self))
   var virtualReturn = inst.metaObject()
   virtualReturn.owned = false # TODO move?
@@ -351,17 +383,13 @@ proc cQAnimationGroup_method_callback_metaObject(self: pointer): pointer {.cdecl
   virtualReturn.h = nil
   virtualReturn_h
 
-method metacast*(self: VirtualQAnimationGroup, param1: cstring): pointer {.base.} =
-  QAnimationGroupmetacast(self[], param1)
-proc cQAnimationGroup_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+proc fcQAnimationGroup_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQAnimationGroup](fcQAnimationGroup_vdata(self))
   let slotval1 = (param1)
   var virtualReturn = inst.metacast(slotval1)
   virtualReturn
 
-method metacall*(self: VirtualQAnimationGroup, param1: cint, param2: cint, param3: pointer): cint {.base.} =
-  QAnimationGroupmetacall(self[], param1, param2, param3)
-proc cQAnimationGroup_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+proc fcQAnimationGroup_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQAnimationGroup](fcQAnimationGroup_vdata(self))
   let slotval1 = cint(param1)
   let slotval2 = param2
@@ -369,86 +397,65 @@ proc cQAnimationGroup_method_callback_metacall(self: pointer, param1: cint, para
   var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
-method event*(self: VirtualQAnimationGroup, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QAnimationGroupevent(self[], event)
-proc cQAnimationGroup_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
+proc fcQAnimationGroup_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQAnimationGroup](fcQAnimationGroup_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
-method duration*(self: VirtualQAnimationGroup): cint {.base.} =
-  raiseAssert("missing implementation of QAnimationGroup_virtualbase_duration")
-proc cQAnimationGroup_method_callback_duration(self: pointer): cint {.cdecl.} =
+proc fcQAnimationGroup_method_callback_duration(self: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQAnimationGroup](fcQAnimationGroup_vdata(self))
   var virtualReturn = inst.duration()
   virtualReturn
 
-method updateCurrentTime*(self: VirtualQAnimationGroup, currentTime: cint): void {.base.} =
-  raiseAssert("missing implementation of QAnimationGroup_virtualbase_updateCurrentTime")
-proc cQAnimationGroup_method_callback_updateCurrentTime(self: pointer, currentTime: cint): void {.cdecl.} =
+proc fcQAnimationGroup_method_callback_updateCurrentTime(self: pointer, currentTime: cint): void {.cdecl.} =
   let inst = cast[VirtualQAnimationGroup](fcQAnimationGroup_vdata(self))
   let slotval1 = currentTime
   inst.updateCurrentTime(slotval1)
 
-method updateState*(self: VirtualQAnimationGroup, newState: cint, oldState: cint): void {.base.} =
-  QAnimationGroupupdateState(self[], newState, oldState)
-proc cQAnimationGroup_method_callback_updateState(self: pointer, newState: cint, oldState: cint): void {.cdecl.} =
+proc fcQAnimationGroup_method_callback_updateState(self: pointer, newState: cint, oldState: cint): void {.cdecl.} =
   let inst = cast[VirtualQAnimationGroup](fcQAnimationGroup_vdata(self))
   let slotval1 = cint(newState)
   let slotval2 = cint(oldState)
   inst.updateState(slotval1, slotval2)
 
-method updateDirection*(self: VirtualQAnimationGroup, direction: cint): void {.base.} =
-  QAnimationGroupupdateDirection(self[], direction)
-proc cQAnimationGroup_method_callback_updateDirection(self: pointer, direction: cint): void {.cdecl.} =
+proc fcQAnimationGroup_method_callback_updateDirection(self: pointer, direction: cint): void {.cdecl.} =
   let inst = cast[VirtualQAnimationGroup](fcQAnimationGroup_vdata(self))
   let slotval1 = cint(direction)
   inst.updateDirection(slotval1)
 
-method eventFilter*(self: VirtualQAnimationGroup, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QAnimationGroupeventFilter(self[], watched, event)
-proc cQAnimationGroup_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+proc fcQAnimationGroup_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQAnimationGroup](fcQAnimationGroup_vdata(self))
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
   let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
-method timerEvent*(self: VirtualQAnimationGroup, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
-  QAnimationGrouptimerEvent(self[], event)
-proc cQAnimationGroup_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQAnimationGroup_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQAnimationGroup](fcQAnimationGroup_vdata(self))
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
-method childEvent*(self: VirtualQAnimationGroup, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
-  QAnimationGroupchildEvent(self[], event)
-proc cQAnimationGroup_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQAnimationGroup_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQAnimationGroup](fcQAnimationGroup_vdata(self))
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
-method customEvent*(self: VirtualQAnimationGroup, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QAnimationGroupcustomEvent(self[], event)
-proc cQAnimationGroup_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQAnimationGroup_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQAnimationGroup](fcQAnimationGroup_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
-method connectNotify*(self: VirtualQAnimationGroup, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QAnimationGroupconnectNotify(self[], signal)
-proc cQAnimationGroup_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQAnimationGroup_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQAnimationGroup](fcQAnimationGroup_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
-method disconnectNotify*(self: VirtualQAnimationGroup, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QAnimationGroupdisconnectNotify(self[], signal)
-proc cQAnimationGroup_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQAnimationGroup_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQAnimationGroup](fcQAnimationGroup_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
+
 
 proc sender*(self: gen_qanimationgroup_types.QAnimationGroup): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQAnimationGroup_protectedbase_sender(self.h), owned: false)
@@ -470,33 +477,33 @@ proc create*(T: type gen_qanimationgroup_types.QAnimationGroup,
     let vtbl = cast[ref QAnimationGroupVTable](fcQAnimationGroup_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQAnimationGroup_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQAnimationGroup_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQAnimationGroup_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQAnimationGroup_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQAnimationGroup_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQAnimationGroup_vtable_callback_metacall
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQAnimationGroup_vtable_callback_event
+    vtbl[].vtbl.event = fcQAnimationGroup_vtable_callback_event
   if not isNil(vtbl[].duration):
-    vtbl[].vtbl.duration = cQAnimationGroup_vtable_callback_duration
+    vtbl[].vtbl.duration = fcQAnimationGroup_vtable_callback_duration
   if not isNil(vtbl[].updateCurrentTime):
-    vtbl[].vtbl.updateCurrentTime = cQAnimationGroup_vtable_callback_updateCurrentTime
+    vtbl[].vtbl.updateCurrentTime = fcQAnimationGroup_vtable_callback_updateCurrentTime
   if not isNil(vtbl[].updateState):
-    vtbl[].vtbl.updateState = cQAnimationGroup_vtable_callback_updateState
+    vtbl[].vtbl.updateState = fcQAnimationGroup_vtable_callback_updateState
   if not isNil(vtbl[].updateDirection):
-    vtbl[].vtbl.updateDirection = cQAnimationGroup_vtable_callback_updateDirection
+    vtbl[].vtbl.updateDirection = fcQAnimationGroup_vtable_callback_updateDirection
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQAnimationGroup_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQAnimationGroup_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQAnimationGroup_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQAnimationGroup_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQAnimationGroup_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQAnimationGroup_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQAnimationGroup_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQAnimationGroup_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQAnimationGroup_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQAnimationGroup_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQAnimationGroup_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQAnimationGroup_vtable_callback_disconnectNotify
   gen_qanimationgroup_types.QAnimationGroup(h: fcQAnimationGroup_new(addr(vtbl[].vtbl), addr(vtbl[])), owned: true)
 
 proc create*(T: type gen_qanimationgroup_types.QAnimationGroup,
@@ -508,33 +515,33 @@ proc create*(T: type gen_qanimationgroup_types.QAnimationGroup,
     let vtbl = cast[ref QAnimationGroupVTable](fcQAnimationGroup_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQAnimationGroup_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQAnimationGroup_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQAnimationGroup_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQAnimationGroup_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQAnimationGroup_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQAnimationGroup_vtable_callback_metacall
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQAnimationGroup_vtable_callback_event
+    vtbl[].vtbl.event = fcQAnimationGroup_vtable_callback_event
   if not isNil(vtbl[].duration):
-    vtbl[].vtbl.duration = cQAnimationGroup_vtable_callback_duration
+    vtbl[].vtbl.duration = fcQAnimationGroup_vtable_callback_duration
   if not isNil(vtbl[].updateCurrentTime):
-    vtbl[].vtbl.updateCurrentTime = cQAnimationGroup_vtable_callback_updateCurrentTime
+    vtbl[].vtbl.updateCurrentTime = fcQAnimationGroup_vtable_callback_updateCurrentTime
   if not isNil(vtbl[].updateState):
-    vtbl[].vtbl.updateState = cQAnimationGroup_vtable_callback_updateState
+    vtbl[].vtbl.updateState = fcQAnimationGroup_vtable_callback_updateState
   if not isNil(vtbl[].updateDirection):
-    vtbl[].vtbl.updateDirection = cQAnimationGroup_vtable_callback_updateDirection
+    vtbl[].vtbl.updateDirection = fcQAnimationGroup_vtable_callback_updateDirection
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQAnimationGroup_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQAnimationGroup_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQAnimationGroup_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQAnimationGroup_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQAnimationGroup_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQAnimationGroup_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQAnimationGroup_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQAnimationGroup_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQAnimationGroup_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQAnimationGroup_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQAnimationGroup_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQAnimationGroup_vtable_callback_disconnectNotify
   gen_qanimationgroup_types.QAnimationGroup(h: fcQAnimationGroup_new2(addr(vtbl[].vtbl), addr(vtbl[]), parent.h), owned: true)
 
 const cQAnimationGroup_mvtbl = cQAnimationGroupVTable(
@@ -542,20 +549,21 @@ const cQAnimationGroup_mvtbl = cQAnimationGroupVTable(
     let inst = cast[ptr typeof(VirtualQAnimationGroup()[])](self.fcQAnimationGroup_vtbl())
     inst[].h = nil
     inst[].owned = false,
-  metaObject: cQAnimationGroup_method_callback_metaObject,
-  metacast: cQAnimationGroup_method_callback_metacast,
-  metacall: cQAnimationGroup_method_callback_metacall,
-  event: cQAnimationGroup_method_callback_event,
-  duration: cQAnimationGroup_method_callback_duration,
-  updateCurrentTime: cQAnimationGroup_method_callback_updateCurrentTime,
-  updateState: cQAnimationGroup_method_callback_updateState,
-  updateDirection: cQAnimationGroup_method_callback_updateDirection,
-  eventFilter: cQAnimationGroup_method_callback_eventFilter,
-  timerEvent: cQAnimationGroup_method_callback_timerEvent,
-  childEvent: cQAnimationGroup_method_callback_childEvent,
-  customEvent: cQAnimationGroup_method_callback_customEvent,
-  connectNotify: cQAnimationGroup_method_callback_connectNotify,
-  disconnectNotify: cQAnimationGroup_method_callback_disconnectNotify,
+
+  metaObject: fcQAnimationGroup_method_callback_metaObject,
+  metacast: fcQAnimationGroup_method_callback_metacast,
+  metacall: fcQAnimationGroup_method_callback_metacall,
+  event: fcQAnimationGroup_method_callback_event,
+  duration: fcQAnimationGroup_method_callback_duration,
+  updateCurrentTime: fcQAnimationGroup_method_callback_updateCurrentTime,
+  updateState: fcQAnimationGroup_method_callback_updateState,
+  updateDirection: fcQAnimationGroup_method_callback_updateDirection,
+  eventFilter: fcQAnimationGroup_method_callback_eventFilter,
+  timerEvent: fcQAnimationGroup_method_callback_timerEvent,
+  childEvent: fcQAnimationGroup_method_callback_childEvent,
+  customEvent: fcQAnimationGroup_method_callback_customEvent,
+  connectNotify: fcQAnimationGroup_method_callback_connectNotify,
+  disconnectNotify: fcQAnimationGroup_method_callback_disconnectNotify,
 )
 proc create*(T: type gen_qanimationgroup_types.QAnimationGroup,
     inst: VirtualQAnimationGroup) =

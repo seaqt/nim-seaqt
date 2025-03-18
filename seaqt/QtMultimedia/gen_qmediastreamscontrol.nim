@@ -126,37 +126,37 @@ proc streamsChanged*(self: gen_qmediastreamscontrol_types.QMediaStreamsControl):
   fcQMediaStreamsControl_streamsChanged(self.h)
 
 type QMediaStreamsControlstreamsChangedSlot* = proc()
-proc cQMediaStreamsControl_slot_callback_streamsChanged(slot: int) {.cdecl.} =
+proc fcQMediaStreamsControl_slot_callback_streamsChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QMediaStreamsControlstreamsChangedSlot](cast[pointer](slot))
   nimfunc[]()
 
-proc cQMediaStreamsControl_slot_callback_streamsChanged_release(slot: int) {.cdecl.} =
+proc fcQMediaStreamsControl_slot_callback_streamsChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QMediaStreamsControlstreamsChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onstreamsChanged*(self: gen_qmediastreamscontrol_types.QMediaStreamsControl, slot: QMediaStreamsControlstreamsChangedSlot) =
+proc onStreamsChanged*(self: gen_qmediastreamscontrol_types.QMediaStreamsControl, slot: QMediaStreamsControlstreamsChangedSlot) =
   var tmp = new QMediaStreamsControlstreamsChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQMediaStreamsControl_connect_streamsChanged(self.h, cast[int](addr tmp[]), cQMediaStreamsControl_slot_callback_streamsChanged, cQMediaStreamsControl_slot_callback_streamsChanged_release)
+  fcQMediaStreamsControl_connect_streamsChanged(self.h, cast[int](addr tmp[]), fcQMediaStreamsControl_slot_callback_streamsChanged, fcQMediaStreamsControl_slot_callback_streamsChanged_release)
 
 proc activeStreamsChanged*(self: gen_qmediastreamscontrol_types.QMediaStreamsControl): void =
   fcQMediaStreamsControl_activeStreamsChanged(self.h)
 
 type QMediaStreamsControlactiveStreamsChangedSlot* = proc()
-proc cQMediaStreamsControl_slot_callback_activeStreamsChanged(slot: int) {.cdecl.} =
+proc fcQMediaStreamsControl_slot_callback_activeStreamsChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QMediaStreamsControlactiveStreamsChangedSlot](cast[pointer](slot))
   nimfunc[]()
 
-proc cQMediaStreamsControl_slot_callback_activeStreamsChanged_release(slot: int) {.cdecl.} =
+proc fcQMediaStreamsControl_slot_callback_activeStreamsChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QMediaStreamsControlactiveStreamsChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onactiveStreamsChanged*(self: gen_qmediastreamscontrol_types.QMediaStreamsControl, slot: QMediaStreamsControlactiveStreamsChangedSlot) =
+proc onActiveStreamsChanged*(self: gen_qmediastreamscontrol_types.QMediaStreamsControl, slot: QMediaStreamsControlactiveStreamsChangedSlot) =
   var tmp = new QMediaStreamsControlactiveStreamsChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQMediaStreamsControl_connect_activeStreamsChanged(self.h, cast[int](addr tmp[]), cQMediaStreamsControl_slot_callback_activeStreamsChanged, cQMediaStreamsControl_slot_callback_activeStreamsChanged_release)
+  fcQMediaStreamsControl_connect_activeStreamsChanged(self.h, cast[int](addr tmp[]), fcQMediaStreamsControl_slot_callback_activeStreamsChanged, fcQMediaStreamsControl_slot_callback_activeStreamsChanged_release)
 
 proc tr*(_: type gen_qmediastreamscontrol_types.QMediaStreamsControl, s: cstring, c: cstring): string =
   let v_ms = fcQMediaStreamsControl_tr2(s, c)

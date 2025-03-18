@@ -155,6 +155,7 @@ proc fcQWebView_setRenderHint2(self: pointer, hint: cint, enabled: bool): void {
 proc fcQWebView_findText2(self: pointer, subString: struct_miqt_string, options: cint): bool {.importc: "QWebView_findText2".}
 proc fcQWebView_vtbl(self: pointer): pointer {.importc: "QWebView_vtbl".}
 proc fcQWebView_vdata(self: pointer): pointer {.importc: "QWebView_vdata".}
+
 type cQWebViewVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -408,65 +409,65 @@ proc loadStarted*(self: gen_qwebview_types.QWebView): void =
   fcQWebView_loadStarted(self.h)
 
 type QWebViewloadStartedSlot* = proc()
-proc cQWebView_slot_callback_loadStarted(slot: int) {.cdecl.} =
+proc fcQWebView_slot_callback_loadStarted(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QWebViewloadStartedSlot](cast[pointer](slot))
   nimfunc[]()
 
-proc cQWebView_slot_callback_loadStarted_release(slot: int) {.cdecl.} =
+proc fcQWebView_slot_callback_loadStarted_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QWebViewloadStartedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onloadStarted*(self: gen_qwebview_types.QWebView, slot: QWebViewloadStartedSlot) =
+proc onLoadStarted*(self: gen_qwebview_types.QWebView, slot: QWebViewloadStartedSlot) =
   var tmp = new QWebViewloadStartedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQWebView_connect_loadStarted(self.h, cast[int](addr tmp[]), cQWebView_slot_callback_loadStarted, cQWebView_slot_callback_loadStarted_release)
+  fcQWebView_connect_loadStarted(self.h, cast[int](addr tmp[]), fcQWebView_slot_callback_loadStarted, fcQWebView_slot_callback_loadStarted_release)
 
 proc loadProgress*(self: gen_qwebview_types.QWebView, progress: cint): void =
   fcQWebView_loadProgress(self.h, progress)
 
 type QWebViewloadProgressSlot* = proc(progress: cint)
-proc cQWebView_slot_callback_loadProgress(slot: int, progress: cint) {.cdecl.} =
+proc fcQWebView_slot_callback_loadProgress(slot: int, progress: cint) {.cdecl.} =
   let nimfunc = cast[ptr QWebViewloadProgressSlot](cast[pointer](slot))
   let slotval1 = progress
 
   nimfunc[](slotval1)
 
-proc cQWebView_slot_callback_loadProgress_release(slot: int) {.cdecl.} =
+proc fcQWebView_slot_callback_loadProgress_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QWebViewloadProgressSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onloadProgress*(self: gen_qwebview_types.QWebView, slot: QWebViewloadProgressSlot) =
+proc onLoadProgress*(self: gen_qwebview_types.QWebView, slot: QWebViewloadProgressSlot) =
   var tmp = new QWebViewloadProgressSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQWebView_connect_loadProgress(self.h, cast[int](addr tmp[]), cQWebView_slot_callback_loadProgress, cQWebView_slot_callback_loadProgress_release)
+  fcQWebView_connect_loadProgress(self.h, cast[int](addr tmp[]), fcQWebView_slot_callback_loadProgress, fcQWebView_slot_callback_loadProgress_release)
 
 proc loadFinished*(self: gen_qwebview_types.QWebView, param1: bool): void =
   fcQWebView_loadFinished(self.h, param1)
 
 type QWebViewloadFinishedSlot* = proc(param1: bool)
-proc cQWebView_slot_callback_loadFinished(slot: int, param1: bool) {.cdecl.} =
+proc fcQWebView_slot_callback_loadFinished(slot: int, param1: bool) {.cdecl.} =
   let nimfunc = cast[ptr QWebViewloadFinishedSlot](cast[pointer](slot))
   let slotval1 = param1
 
   nimfunc[](slotval1)
 
-proc cQWebView_slot_callback_loadFinished_release(slot: int) {.cdecl.} =
+proc fcQWebView_slot_callback_loadFinished_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QWebViewloadFinishedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onloadFinished*(self: gen_qwebview_types.QWebView, slot: QWebViewloadFinishedSlot) =
+proc onLoadFinished*(self: gen_qwebview_types.QWebView, slot: QWebViewloadFinishedSlot) =
   var tmp = new QWebViewloadFinishedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQWebView_connect_loadFinished(self.h, cast[int](addr tmp[]), cQWebView_slot_callback_loadFinished, cQWebView_slot_callback_loadFinished_release)
+  fcQWebView_connect_loadFinished(self.h, cast[int](addr tmp[]), fcQWebView_slot_callback_loadFinished, fcQWebView_slot_callback_loadFinished_release)
 
 proc titleChanged*(self: gen_qwebview_types.QWebView, title: openArray[char]): void =
   fcQWebView_titleChanged(self.h, struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))))
 
 type QWebViewtitleChangedSlot* = proc(title: openArray[char])
-proc cQWebView_slot_callback_titleChanged(slot: int, title: struct_miqt_string) {.cdecl.} =
+proc fcQWebView_slot_callback_titleChanged(slot: int, title: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QWebViewtitleChangedSlot](cast[pointer](slot))
   let vtitle_ms = title
   let vtitlex_ret = string.fromBytes(vtitle_ms)
@@ -475,21 +476,21 @@ proc cQWebView_slot_callback_titleChanged(slot: int, title: struct_miqt_string) 
 
   nimfunc[](slotval1)
 
-proc cQWebView_slot_callback_titleChanged_release(slot: int) {.cdecl.} =
+proc fcQWebView_slot_callback_titleChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QWebViewtitleChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc ontitleChanged*(self: gen_qwebview_types.QWebView, slot: QWebViewtitleChangedSlot) =
+proc onTitleChanged*(self: gen_qwebview_types.QWebView, slot: QWebViewtitleChangedSlot) =
   var tmp = new QWebViewtitleChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQWebView_connect_titleChanged(self.h, cast[int](addr tmp[]), cQWebView_slot_callback_titleChanged, cQWebView_slot_callback_titleChanged_release)
+  fcQWebView_connect_titleChanged(self.h, cast[int](addr tmp[]), fcQWebView_slot_callback_titleChanged, fcQWebView_slot_callback_titleChanged_release)
 
 proc statusBarMessage*(self: gen_qwebview_types.QWebView, text: openArray[char]): void =
   fcQWebView_statusBarMessage(self.h, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
 
 type QWebViewstatusBarMessageSlot* = proc(text: openArray[char])
-proc cQWebView_slot_callback_statusBarMessage(slot: int, text: struct_miqt_string) {.cdecl.} =
+proc fcQWebView_slot_callback_statusBarMessage(slot: int, text: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QWebViewstatusBarMessageSlot](cast[pointer](slot))
   let vtext_ms = text
   let vtextx_ret = string.fromBytes(vtext_ms)
@@ -498,91 +499,91 @@ proc cQWebView_slot_callback_statusBarMessage(slot: int, text: struct_miqt_strin
 
   nimfunc[](slotval1)
 
-proc cQWebView_slot_callback_statusBarMessage_release(slot: int) {.cdecl.} =
+proc fcQWebView_slot_callback_statusBarMessage_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QWebViewstatusBarMessageSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onstatusBarMessage*(self: gen_qwebview_types.QWebView, slot: QWebViewstatusBarMessageSlot) =
+proc onStatusBarMessage*(self: gen_qwebview_types.QWebView, slot: QWebViewstatusBarMessageSlot) =
   var tmp = new QWebViewstatusBarMessageSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQWebView_connect_statusBarMessage(self.h, cast[int](addr tmp[]), cQWebView_slot_callback_statusBarMessage, cQWebView_slot_callback_statusBarMessage_release)
+  fcQWebView_connect_statusBarMessage(self.h, cast[int](addr tmp[]), fcQWebView_slot_callback_statusBarMessage, fcQWebView_slot_callback_statusBarMessage_release)
 
 proc linkClicked*(self: gen_qwebview_types.QWebView, param1: gen_qurl_types.QUrl): void =
   fcQWebView_linkClicked(self.h, param1.h)
 
 type QWebViewlinkClickedSlot* = proc(param1: gen_qurl_types.QUrl)
-proc cQWebView_slot_callback_linkClicked(slot: int, param1: pointer) {.cdecl.} =
+proc fcQWebView_slot_callback_linkClicked(slot: int, param1: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QWebViewlinkClickedSlot](cast[pointer](slot))
   let slotval1 = gen_qurl_types.QUrl(h: param1, owned: false)
 
   nimfunc[](slotval1)
 
-proc cQWebView_slot_callback_linkClicked_release(slot: int) {.cdecl.} =
+proc fcQWebView_slot_callback_linkClicked_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QWebViewlinkClickedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onlinkClicked*(self: gen_qwebview_types.QWebView, slot: QWebViewlinkClickedSlot) =
+proc onLinkClicked*(self: gen_qwebview_types.QWebView, slot: QWebViewlinkClickedSlot) =
   var tmp = new QWebViewlinkClickedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQWebView_connect_linkClicked(self.h, cast[int](addr tmp[]), cQWebView_slot_callback_linkClicked, cQWebView_slot_callback_linkClicked_release)
+  fcQWebView_connect_linkClicked(self.h, cast[int](addr tmp[]), fcQWebView_slot_callback_linkClicked, fcQWebView_slot_callback_linkClicked_release)
 
 proc selectionChanged*(self: gen_qwebview_types.QWebView): void =
   fcQWebView_selectionChanged(self.h)
 
 type QWebViewselectionChangedSlot* = proc()
-proc cQWebView_slot_callback_selectionChanged(slot: int) {.cdecl.} =
+proc fcQWebView_slot_callback_selectionChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QWebViewselectionChangedSlot](cast[pointer](slot))
   nimfunc[]()
 
-proc cQWebView_slot_callback_selectionChanged_release(slot: int) {.cdecl.} =
+proc fcQWebView_slot_callback_selectionChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QWebViewselectionChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onselectionChanged*(self: gen_qwebview_types.QWebView, slot: QWebViewselectionChangedSlot) =
+proc onSelectionChanged*(self: gen_qwebview_types.QWebView, slot: QWebViewselectionChangedSlot) =
   var tmp = new QWebViewselectionChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQWebView_connect_selectionChanged(self.h, cast[int](addr tmp[]), cQWebView_slot_callback_selectionChanged, cQWebView_slot_callback_selectionChanged_release)
+  fcQWebView_connect_selectionChanged(self.h, cast[int](addr tmp[]), fcQWebView_slot_callback_selectionChanged, fcQWebView_slot_callback_selectionChanged_release)
 
 proc iconChanged*(self: gen_qwebview_types.QWebView): void =
   fcQWebView_iconChanged(self.h)
 
 type QWebViewiconChangedSlot* = proc()
-proc cQWebView_slot_callback_iconChanged(slot: int) {.cdecl.} =
+proc fcQWebView_slot_callback_iconChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QWebViewiconChangedSlot](cast[pointer](slot))
   nimfunc[]()
 
-proc cQWebView_slot_callback_iconChanged_release(slot: int) {.cdecl.} =
+proc fcQWebView_slot_callback_iconChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QWebViewiconChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc oniconChanged*(self: gen_qwebview_types.QWebView, slot: QWebViewiconChangedSlot) =
+proc onIconChanged*(self: gen_qwebview_types.QWebView, slot: QWebViewiconChangedSlot) =
   var tmp = new QWebViewiconChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQWebView_connect_iconChanged(self.h, cast[int](addr tmp[]), cQWebView_slot_callback_iconChanged, cQWebView_slot_callback_iconChanged_release)
+  fcQWebView_connect_iconChanged(self.h, cast[int](addr tmp[]), fcQWebView_slot_callback_iconChanged, fcQWebView_slot_callback_iconChanged_release)
 
 proc urlChanged*(self: gen_qwebview_types.QWebView, param1: gen_qurl_types.QUrl): void =
   fcQWebView_urlChanged(self.h, param1.h)
 
 type QWebViewurlChangedSlot* = proc(param1: gen_qurl_types.QUrl)
-proc cQWebView_slot_callback_urlChanged(slot: int, param1: pointer) {.cdecl.} =
+proc fcQWebView_slot_callback_urlChanged(slot: int, param1: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QWebViewurlChangedSlot](cast[pointer](slot))
   let slotval1 = gen_qurl_types.QUrl(h: param1, owned: false)
 
   nimfunc[](slotval1)
 
-proc cQWebView_slot_callback_urlChanged_release(slot: int) {.cdecl.} =
+proc fcQWebView_slot_callback_urlChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QWebViewurlChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onurlChanged*(self: gen_qwebview_types.QWebView, slot: QWebViewurlChangedSlot) =
+proc onUrlChanged*(self: gen_qwebview_types.QWebView, slot: QWebViewurlChangedSlot) =
   var tmp = new QWebViewurlChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQWebView_connect_urlChanged(self.h, cast[int](addr tmp[]), cQWebView_slot_callback_urlChanged, cQWebView_slot_callback_urlChanged_release)
+  fcQWebView_connect_urlChanged(self.h, cast[int](addr tmp[]), fcQWebView_slot_callback_urlChanged, fcQWebView_slot_callback_urlChanged_release)
 
 proc tr*(_: type gen_qwebview_types.QWebView, s: cstring, c: cstring): string =
   let v_ms = fcQWebView_tr2(s, c)
@@ -683,6 +684,7 @@ type QWebViewchildEventProc* = proc(self: QWebView, event: gen_qcoreevent_types.
 type QWebViewcustomEventProc* = proc(self: QWebView, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QWebViewconnectNotifyProc* = proc(self: QWebView, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QWebViewdisconnectNotifyProc* = proc(self: QWebView, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+
 type QWebViewVTable* {.inheritable, pure.} = object
   vtbl: cQWebViewVTable
   metaObject*: QWebViewmetaObjectProc
@@ -736,10 +738,162 @@ type QWebViewVTable* {.inheritable, pure.} = object
   customEvent*: QWebViewcustomEventProc
   connectNotify*: QWebViewconnectNotifyProc
   disconnectNotify*: QWebViewdisconnectNotifyProc
+
 proc QWebViewmetaObject*(self: gen_qwebview_types.QWebView): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQWebView_virtualbase_metaObject(self.h), owned: false)
 
-proc cQWebView_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
+proc QWebViewmetacast*(self: gen_qwebview_types.QWebView, param1: cstring): pointer =
+  fcQWebView_virtualbase_metacast(self.h, param1)
+
+proc QWebViewmetacall*(self: gen_qwebview_types.QWebView, param1: cint, param2: cint, param3: pointer): cint =
+  fcQWebView_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+proc QWebViewinputMethodQuery*(self: gen_qwebview_types.QWebView, property: cint): gen_qvariant_types.QVariant =
+  gen_qvariant_types.QVariant(h: fcQWebView_virtualbase_inputMethodQuery(self.h, cint(property)), owned: true)
+
+proc QWebViewsizeHint*(self: gen_qwebview_types.QWebView): gen_qsize_types.QSize =
+  gen_qsize_types.QSize(h: fcQWebView_virtualbase_sizeHint(self.h), owned: true)
+
+proc QWebViewevent*(self: gen_qwebview_types.QWebView, param1: gen_qcoreevent_types.QEvent): bool =
+  fcQWebView_virtualbase_event(self.h, param1.h)
+
+proc QWebViewresizeEvent*(self: gen_qwebview_types.QWebView, param1: gen_qevent_types.QResizeEvent): void =
+  fcQWebView_virtualbase_resizeEvent(self.h, param1.h)
+
+proc QWebViewpaintEvent*(self: gen_qwebview_types.QWebView, param1: gen_qevent_types.QPaintEvent): void =
+  fcQWebView_virtualbase_paintEvent(self.h, param1.h)
+
+proc QWebViewcreateWindow*(self: gen_qwebview_types.QWebView, typeVal: cint): gen_qwebview_types.QWebView =
+  gen_qwebview_types.QWebView(h: fcQWebView_virtualbase_createWindow(self.h, cint(typeVal)), owned: false)
+
+proc QWebViewchangeEvent*(self: gen_qwebview_types.QWebView, param1: gen_qcoreevent_types.QEvent): void =
+  fcQWebView_virtualbase_changeEvent(self.h, param1.h)
+
+proc QWebViewmouseMoveEvent*(self: gen_qwebview_types.QWebView, param1: gen_qevent_types.QMouseEvent): void =
+  fcQWebView_virtualbase_mouseMoveEvent(self.h, param1.h)
+
+proc QWebViewmousePressEvent*(self: gen_qwebview_types.QWebView, param1: gen_qevent_types.QMouseEvent): void =
+  fcQWebView_virtualbase_mousePressEvent(self.h, param1.h)
+
+proc QWebViewmouseDoubleClickEvent*(self: gen_qwebview_types.QWebView, param1: gen_qevent_types.QMouseEvent): void =
+  fcQWebView_virtualbase_mouseDoubleClickEvent(self.h, param1.h)
+
+proc QWebViewmouseReleaseEvent*(self: gen_qwebview_types.QWebView, param1: gen_qevent_types.QMouseEvent): void =
+  fcQWebView_virtualbase_mouseReleaseEvent(self.h, param1.h)
+
+proc QWebViewcontextMenuEvent*(self: gen_qwebview_types.QWebView, param1: gen_qevent_types.QContextMenuEvent): void =
+  fcQWebView_virtualbase_contextMenuEvent(self.h, param1.h)
+
+proc QWebViewwheelEvent*(self: gen_qwebview_types.QWebView, param1: gen_qevent_types.QWheelEvent): void =
+  fcQWebView_virtualbase_wheelEvent(self.h, param1.h)
+
+proc QWebViewkeyPressEvent*(self: gen_qwebview_types.QWebView, param1: gen_qevent_types.QKeyEvent): void =
+  fcQWebView_virtualbase_keyPressEvent(self.h, param1.h)
+
+proc QWebViewkeyReleaseEvent*(self: gen_qwebview_types.QWebView, param1: gen_qevent_types.QKeyEvent): void =
+  fcQWebView_virtualbase_keyReleaseEvent(self.h, param1.h)
+
+proc QWebViewdragEnterEvent*(self: gen_qwebview_types.QWebView, param1: gen_qevent_types.QDragEnterEvent): void =
+  fcQWebView_virtualbase_dragEnterEvent(self.h, param1.h)
+
+proc QWebViewdragLeaveEvent*(self: gen_qwebview_types.QWebView, param1: gen_qevent_types.QDragLeaveEvent): void =
+  fcQWebView_virtualbase_dragLeaveEvent(self.h, param1.h)
+
+proc QWebViewdragMoveEvent*(self: gen_qwebview_types.QWebView, param1: gen_qevent_types.QDragMoveEvent): void =
+  fcQWebView_virtualbase_dragMoveEvent(self.h, param1.h)
+
+proc QWebViewdropEvent*(self: gen_qwebview_types.QWebView, param1: gen_qevent_types.QDropEvent): void =
+  fcQWebView_virtualbase_dropEvent(self.h, param1.h)
+
+proc QWebViewfocusInEvent*(self: gen_qwebview_types.QWebView, param1: gen_qevent_types.QFocusEvent): void =
+  fcQWebView_virtualbase_focusInEvent(self.h, param1.h)
+
+proc QWebViewfocusOutEvent*(self: gen_qwebview_types.QWebView, param1: gen_qevent_types.QFocusEvent): void =
+  fcQWebView_virtualbase_focusOutEvent(self.h, param1.h)
+
+proc QWebViewinputMethodEvent*(self: gen_qwebview_types.QWebView, param1: gen_qevent_types.QInputMethodEvent): void =
+  fcQWebView_virtualbase_inputMethodEvent(self.h, param1.h)
+
+proc QWebViewfocusNextPrevChild*(self: gen_qwebview_types.QWebView, next: bool): bool =
+  fcQWebView_virtualbase_focusNextPrevChild(self.h, next)
+
+proc QWebViewdevType*(self: gen_qwebview_types.QWebView): cint =
+  fcQWebView_virtualbase_devType(self.h)
+
+proc QWebViewsetVisible*(self: gen_qwebview_types.QWebView, visible: bool): void =
+  fcQWebView_virtualbase_setVisible(self.h, visible)
+
+proc QWebViewminimumSizeHint*(self: gen_qwebview_types.QWebView): gen_qsize_types.QSize =
+  gen_qsize_types.QSize(h: fcQWebView_virtualbase_minimumSizeHint(self.h), owned: true)
+
+proc QWebViewheightForWidth*(self: gen_qwebview_types.QWebView, param1: cint): cint =
+  fcQWebView_virtualbase_heightForWidth(self.h, param1)
+
+proc QWebViewhasHeightForWidth*(self: gen_qwebview_types.QWebView): bool =
+  fcQWebView_virtualbase_hasHeightForWidth(self.h)
+
+proc QWebViewpaintEngine*(self: gen_qwebview_types.QWebView): gen_qpaintengine_types.QPaintEngine =
+  gen_qpaintengine_types.QPaintEngine(h: fcQWebView_virtualbase_paintEngine(self.h), owned: false)
+
+proc QWebViewenterEvent*(self: gen_qwebview_types.QWebView, event: gen_qcoreevent_types.QEvent): void =
+  fcQWebView_virtualbase_enterEvent(self.h, event.h)
+
+proc QWebViewleaveEvent*(self: gen_qwebview_types.QWebView, event: gen_qcoreevent_types.QEvent): void =
+  fcQWebView_virtualbase_leaveEvent(self.h, event.h)
+
+proc QWebViewmoveEvent*(self: gen_qwebview_types.QWebView, event: gen_qevent_types.QMoveEvent): void =
+  fcQWebView_virtualbase_moveEvent(self.h, event.h)
+
+proc QWebViewcloseEvent*(self: gen_qwebview_types.QWebView, event: gen_qevent_types.QCloseEvent): void =
+  fcQWebView_virtualbase_closeEvent(self.h, event.h)
+
+proc QWebViewtabletEvent*(self: gen_qwebview_types.QWebView, event: gen_qevent_types.QTabletEvent): void =
+  fcQWebView_virtualbase_tabletEvent(self.h, event.h)
+
+proc QWebViewactionEvent*(self: gen_qwebview_types.QWebView, event: gen_qevent_types.QActionEvent): void =
+  fcQWebView_virtualbase_actionEvent(self.h, event.h)
+
+proc QWebViewshowEvent*(self: gen_qwebview_types.QWebView, event: gen_qevent_types.QShowEvent): void =
+  fcQWebView_virtualbase_showEvent(self.h, event.h)
+
+proc QWebViewhideEvent*(self: gen_qwebview_types.QWebView, event: gen_qevent_types.QHideEvent): void =
+  fcQWebView_virtualbase_hideEvent(self.h, event.h)
+
+proc QWebViewnativeEvent*(self: gen_qwebview_types.QWebView, eventType: openArray[byte], message: pointer, resultVal: ptr clong): bool =
+  fcQWebView_virtualbase_nativeEvent(self.h, struct_miqt_string(data: cast[cstring](if len(eventType) == 0: nil else: unsafeAddr eventType[0]), len: csize_t(len(eventType))), message, resultVal)
+
+proc QWebViewmetric*(self: gen_qwebview_types.QWebView, param1: cint): cint =
+  fcQWebView_virtualbase_metric(self.h, cint(param1))
+
+proc QWebViewinitPainter*(self: gen_qwebview_types.QWebView, painter: gen_qpainter_types.QPainter): void =
+  fcQWebView_virtualbase_initPainter(self.h, painter.h)
+
+proc QWebViewredirected*(self: gen_qwebview_types.QWebView, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice =
+  gen_qpaintdevice_types.QPaintDevice(h: fcQWebView_virtualbase_redirected(self.h, offset.h), owned: false)
+
+proc QWebViewsharedPainter*(self: gen_qwebview_types.QWebView): gen_qpainter_types.QPainter =
+  gen_qpainter_types.QPainter(h: fcQWebView_virtualbase_sharedPainter(self.h), owned: false)
+
+proc QWebVieweventFilter*(self: gen_qwebview_types.QWebView, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
+  fcQWebView_virtualbase_eventFilter(self.h, watched.h, event.h)
+
+proc QWebViewtimerEvent*(self: gen_qwebview_types.QWebView, event: gen_qcoreevent_types.QTimerEvent): void =
+  fcQWebView_virtualbase_timerEvent(self.h, event.h)
+
+proc QWebViewchildEvent*(self: gen_qwebview_types.QWebView, event: gen_qcoreevent_types.QChildEvent): void =
+  fcQWebView_virtualbase_childEvent(self.h, event.h)
+
+proc QWebViewcustomEvent*(self: gen_qwebview_types.QWebView, event: gen_qcoreevent_types.QEvent): void =
+  fcQWebView_virtualbase_customEvent(self.h, event.h)
+
+proc QWebViewconnectNotify*(self: gen_qwebview_types.QWebView, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQWebView_virtualbase_connectNotify(self.h, signal.h)
+
+proc QWebViewdisconnectNotify*(self: gen_qwebview_types.QWebView, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQWebView_virtualbase_disconnectNotify(self.h, signal.h)
+
+
+proc fcQWebView_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QWebViewVTable](fcQWebView_vdata(self))
   let self = QWebView(h: self)
   var virtualReturn = vtbl[].metaObject(self)
@@ -748,20 +902,14 @@ proc cQWebView_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QWebViewmetacast*(self: gen_qwebview_types.QWebView, param1: cstring): pointer =
-  fcQWebView_virtualbase_metacast(self.h, param1)
-
-proc cQWebView_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+proc fcQWebView_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QWebViewVTable](fcQWebView_vdata(self))
   let self = QWebView(h: self)
   let slotval1 = (param1)
   var virtualReturn = vtbl[].metacast(self, slotval1)
   virtualReturn
 
-proc QWebViewmetacall*(self: gen_qwebview_types.QWebView, param1: cint, param2: cint, param3: pointer): cint =
-  fcQWebView_virtualbase_metacall(self.h, cint(param1), param2, param3)
-
-proc cQWebView_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+proc fcQWebView_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QWebViewVTable](fcQWebView_vdata(self))
   let self = QWebView(h: self)
   let slotval1 = cint(param1)
@@ -770,10 +918,7 @@ proc cQWebView_vtable_callback_metacall(self: pointer, param1: cint, param2: cin
   var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QWebViewinputMethodQuery*(self: gen_qwebview_types.QWebView, property: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQWebView_virtualbase_inputMethodQuery(self.h, cint(property)), owned: true)
-
-proc cQWebView_vtable_callback_inputMethodQuery(self: pointer, property: cint): pointer {.cdecl.} =
+proc fcQWebView_vtable_callback_inputMethodQuery(self: pointer, property: cint): pointer {.cdecl.} =
   let vtbl = cast[ptr QWebViewVTable](fcQWebView_vdata(self))
   let self = QWebView(h: self)
   let slotval1 = cint(property)
@@ -783,10 +928,7 @@ proc cQWebView_vtable_callback_inputMethodQuery(self: pointer, property: cint): 
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QWebViewsizeHint*(self: gen_qwebview_types.QWebView): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQWebView_virtualbase_sizeHint(self.h), owned: true)
-
-proc cQWebView_vtable_callback_sizeHint(self: pointer): pointer {.cdecl.} =
+proc fcQWebView_vtable_callback_sizeHint(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QWebViewVTable](fcQWebView_vdata(self))
   let self = QWebView(h: self)
   var virtualReturn = vtbl[].sizeHint(self)
@@ -795,38 +937,26 @@ proc cQWebView_vtable_callback_sizeHint(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QWebViewevent*(self: gen_qwebview_types.QWebView, param1: gen_qcoreevent_types.QEvent): bool =
-  fcQWebView_virtualbase_event(self.h, param1.h)
-
-proc cQWebView_vtable_callback_event(self: pointer, param1: pointer): bool {.cdecl.} =
+proc fcQWebView_vtable_callback_event(self: pointer, param1: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QWebViewVTable](fcQWebView_vdata(self))
   let self = QWebView(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
-proc QWebViewresizeEvent*(self: gen_qwebview_types.QWebView, param1: gen_qevent_types.QResizeEvent): void =
-  fcQWebView_virtualbase_resizeEvent(self.h, param1.h)
-
-proc cQWebView_vtable_callback_resizeEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQWebView_vtable_callback_resizeEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWebViewVTable](fcQWebView_vdata(self))
   let self = QWebView(h: self)
   let slotval1 = gen_qevent_types.QResizeEvent(h: param1, owned: false)
   vtbl[].resizeEvent(self, slotval1)
 
-proc QWebViewpaintEvent*(self: gen_qwebview_types.QWebView, param1: gen_qevent_types.QPaintEvent): void =
-  fcQWebView_virtualbase_paintEvent(self.h, param1.h)
-
-proc cQWebView_vtable_callback_paintEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQWebView_vtable_callback_paintEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWebViewVTable](fcQWebView_vdata(self))
   let self = QWebView(h: self)
   let slotval1 = gen_qevent_types.QPaintEvent(h: param1, owned: false)
   vtbl[].paintEvent(self, slotval1)
 
-proc QWebViewcreateWindow*(self: gen_qwebview_types.QWebView, typeVal: cint): gen_qwebview_types.QWebView =
-  gen_qwebview_types.QWebView(h: fcQWebView_virtualbase_createWindow(self.h, cint(typeVal)), owned: false)
-
-proc cQWebView_vtable_callback_createWindow(self: pointer, typeVal: cint): pointer {.cdecl.} =
+proc fcQWebView_vtable_callback_createWindow(self: pointer, typeVal: cint): pointer {.cdecl.} =
   let vtbl = cast[ptr QWebViewVTable](fcQWebView_vdata(self))
   let self = QWebView(h: self)
   let slotval1 = cint(typeVal)
@@ -836,182 +966,122 @@ proc cQWebView_vtable_callback_createWindow(self: pointer, typeVal: cint): point
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QWebViewchangeEvent*(self: gen_qwebview_types.QWebView, param1: gen_qcoreevent_types.QEvent): void =
-  fcQWebView_virtualbase_changeEvent(self.h, param1.h)
-
-proc cQWebView_vtable_callback_changeEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQWebView_vtable_callback_changeEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWebViewVTable](fcQWebView_vdata(self))
   let self = QWebView(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
   vtbl[].changeEvent(self, slotval1)
 
-proc QWebViewmouseMoveEvent*(self: gen_qwebview_types.QWebView, param1: gen_qevent_types.QMouseEvent): void =
-  fcQWebView_virtualbase_mouseMoveEvent(self.h, param1.h)
-
-proc cQWebView_vtable_callback_mouseMoveEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQWebView_vtable_callback_mouseMoveEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWebViewVTable](fcQWebView_vdata(self))
   let self = QWebView(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: param1, owned: false)
   vtbl[].mouseMoveEvent(self, slotval1)
 
-proc QWebViewmousePressEvent*(self: gen_qwebview_types.QWebView, param1: gen_qevent_types.QMouseEvent): void =
-  fcQWebView_virtualbase_mousePressEvent(self.h, param1.h)
-
-proc cQWebView_vtable_callback_mousePressEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQWebView_vtable_callback_mousePressEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWebViewVTable](fcQWebView_vdata(self))
   let self = QWebView(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: param1, owned: false)
   vtbl[].mousePressEvent(self, slotval1)
 
-proc QWebViewmouseDoubleClickEvent*(self: gen_qwebview_types.QWebView, param1: gen_qevent_types.QMouseEvent): void =
-  fcQWebView_virtualbase_mouseDoubleClickEvent(self.h, param1.h)
-
-proc cQWebView_vtable_callback_mouseDoubleClickEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQWebView_vtable_callback_mouseDoubleClickEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWebViewVTable](fcQWebView_vdata(self))
   let self = QWebView(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: param1, owned: false)
   vtbl[].mouseDoubleClickEvent(self, slotval1)
 
-proc QWebViewmouseReleaseEvent*(self: gen_qwebview_types.QWebView, param1: gen_qevent_types.QMouseEvent): void =
-  fcQWebView_virtualbase_mouseReleaseEvent(self.h, param1.h)
-
-proc cQWebView_vtable_callback_mouseReleaseEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQWebView_vtable_callback_mouseReleaseEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWebViewVTable](fcQWebView_vdata(self))
   let self = QWebView(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: param1, owned: false)
   vtbl[].mouseReleaseEvent(self, slotval1)
 
-proc QWebViewcontextMenuEvent*(self: gen_qwebview_types.QWebView, param1: gen_qevent_types.QContextMenuEvent): void =
-  fcQWebView_virtualbase_contextMenuEvent(self.h, param1.h)
-
-proc cQWebView_vtable_callback_contextMenuEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQWebView_vtable_callback_contextMenuEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWebViewVTable](fcQWebView_vdata(self))
   let self = QWebView(h: self)
   let slotval1 = gen_qevent_types.QContextMenuEvent(h: param1, owned: false)
   vtbl[].contextMenuEvent(self, slotval1)
 
-proc QWebViewwheelEvent*(self: gen_qwebview_types.QWebView, param1: gen_qevent_types.QWheelEvent): void =
-  fcQWebView_virtualbase_wheelEvent(self.h, param1.h)
-
-proc cQWebView_vtable_callback_wheelEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQWebView_vtable_callback_wheelEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWebViewVTable](fcQWebView_vdata(self))
   let self = QWebView(h: self)
   let slotval1 = gen_qevent_types.QWheelEvent(h: param1, owned: false)
   vtbl[].wheelEvent(self, slotval1)
 
-proc QWebViewkeyPressEvent*(self: gen_qwebview_types.QWebView, param1: gen_qevent_types.QKeyEvent): void =
-  fcQWebView_virtualbase_keyPressEvent(self.h, param1.h)
-
-proc cQWebView_vtable_callback_keyPressEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQWebView_vtable_callback_keyPressEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWebViewVTable](fcQWebView_vdata(self))
   let self = QWebView(h: self)
   let slotval1 = gen_qevent_types.QKeyEvent(h: param1, owned: false)
   vtbl[].keyPressEvent(self, slotval1)
 
-proc QWebViewkeyReleaseEvent*(self: gen_qwebview_types.QWebView, param1: gen_qevent_types.QKeyEvent): void =
-  fcQWebView_virtualbase_keyReleaseEvent(self.h, param1.h)
-
-proc cQWebView_vtable_callback_keyReleaseEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQWebView_vtable_callback_keyReleaseEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWebViewVTable](fcQWebView_vdata(self))
   let self = QWebView(h: self)
   let slotval1 = gen_qevent_types.QKeyEvent(h: param1, owned: false)
   vtbl[].keyReleaseEvent(self, slotval1)
 
-proc QWebViewdragEnterEvent*(self: gen_qwebview_types.QWebView, param1: gen_qevent_types.QDragEnterEvent): void =
-  fcQWebView_virtualbase_dragEnterEvent(self.h, param1.h)
-
-proc cQWebView_vtable_callback_dragEnterEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQWebView_vtable_callback_dragEnterEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWebViewVTable](fcQWebView_vdata(self))
   let self = QWebView(h: self)
   let slotval1 = gen_qevent_types.QDragEnterEvent(h: param1, owned: false)
   vtbl[].dragEnterEvent(self, slotval1)
 
-proc QWebViewdragLeaveEvent*(self: gen_qwebview_types.QWebView, param1: gen_qevent_types.QDragLeaveEvent): void =
-  fcQWebView_virtualbase_dragLeaveEvent(self.h, param1.h)
-
-proc cQWebView_vtable_callback_dragLeaveEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQWebView_vtable_callback_dragLeaveEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWebViewVTable](fcQWebView_vdata(self))
   let self = QWebView(h: self)
   let slotval1 = gen_qevent_types.QDragLeaveEvent(h: param1, owned: false)
   vtbl[].dragLeaveEvent(self, slotval1)
 
-proc QWebViewdragMoveEvent*(self: gen_qwebview_types.QWebView, param1: gen_qevent_types.QDragMoveEvent): void =
-  fcQWebView_virtualbase_dragMoveEvent(self.h, param1.h)
-
-proc cQWebView_vtable_callback_dragMoveEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQWebView_vtable_callback_dragMoveEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWebViewVTable](fcQWebView_vdata(self))
   let self = QWebView(h: self)
   let slotval1 = gen_qevent_types.QDragMoveEvent(h: param1, owned: false)
   vtbl[].dragMoveEvent(self, slotval1)
 
-proc QWebViewdropEvent*(self: gen_qwebview_types.QWebView, param1: gen_qevent_types.QDropEvent): void =
-  fcQWebView_virtualbase_dropEvent(self.h, param1.h)
-
-proc cQWebView_vtable_callback_dropEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQWebView_vtable_callback_dropEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWebViewVTable](fcQWebView_vdata(self))
   let self = QWebView(h: self)
   let slotval1 = gen_qevent_types.QDropEvent(h: param1, owned: false)
   vtbl[].dropEvent(self, slotval1)
 
-proc QWebViewfocusInEvent*(self: gen_qwebview_types.QWebView, param1: gen_qevent_types.QFocusEvent): void =
-  fcQWebView_virtualbase_focusInEvent(self.h, param1.h)
-
-proc cQWebView_vtable_callback_focusInEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQWebView_vtable_callback_focusInEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWebViewVTable](fcQWebView_vdata(self))
   let self = QWebView(h: self)
   let slotval1 = gen_qevent_types.QFocusEvent(h: param1, owned: false)
   vtbl[].focusInEvent(self, slotval1)
 
-proc QWebViewfocusOutEvent*(self: gen_qwebview_types.QWebView, param1: gen_qevent_types.QFocusEvent): void =
-  fcQWebView_virtualbase_focusOutEvent(self.h, param1.h)
-
-proc cQWebView_vtable_callback_focusOutEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQWebView_vtable_callback_focusOutEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWebViewVTable](fcQWebView_vdata(self))
   let self = QWebView(h: self)
   let slotval1 = gen_qevent_types.QFocusEvent(h: param1, owned: false)
   vtbl[].focusOutEvent(self, slotval1)
 
-proc QWebViewinputMethodEvent*(self: gen_qwebview_types.QWebView, param1: gen_qevent_types.QInputMethodEvent): void =
-  fcQWebView_virtualbase_inputMethodEvent(self.h, param1.h)
-
-proc cQWebView_vtable_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQWebView_vtable_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWebViewVTable](fcQWebView_vdata(self))
   let self = QWebView(h: self)
   let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1, owned: false)
   vtbl[].inputMethodEvent(self, slotval1)
 
-proc QWebViewfocusNextPrevChild*(self: gen_qwebview_types.QWebView, next: bool): bool =
-  fcQWebView_virtualbase_focusNextPrevChild(self.h, next)
-
-proc cQWebView_vtable_callback_focusNextPrevChild(self: pointer, next: bool): bool {.cdecl.} =
+proc fcQWebView_vtable_callback_focusNextPrevChild(self: pointer, next: bool): bool {.cdecl.} =
   let vtbl = cast[ptr QWebViewVTable](fcQWebView_vdata(self))
   let self = QWebView(h: self)
   let slotval1 = next
   var virtualReturn = vtbl[].focusNextPrevChild(self, slotval1)
   virtualReturn
 
-proc QWebViewdevType*(self: gen_qwebview_types.QWebView): cint =
-  fcQWebView_virtualbase_devType(self.h)
-
-proc cQWebView_vtable_callback_devType(self: pointer): cint {.cdecl.} =
+proc fcQWebView_vtable_callback_devType(self: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QWebViewVTable](fcQWebView_vdata(self))
   let self = QWebView(h: self)
   var virtualReturn = vtbl[].devType(self)
   virtualReturn
 
-proc QWebViewsetVisible*(self: gen_qwebview_types.QWebView, visible: bool): void =
-  fcQWebView_virtualbase_setVisible(self.h, visible)
-
-proc cQWebView_vtable_callback_setVisible(self: pointer, visible: bool): void {.cdecl.} =
+proc fcQWebView_vtable_callback_setVisible(self: pointer, visible: bool): void {.cdecl.} =
   let vtbl = cast[ptr QWebViewVTable](fcQWebView_vdata(self))
   let self = QWebView(h: self)
   let slotval1 = visible
   vtbl[].setVisible(self, slotval1)
 
-proc QWebViewminimumSizeHint*(self: gen_qwebview_types.QWebView): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQWebView_virtualbase_minimumSizeHint(self.h), owned: true)
-
-proc cQWebView_vtable_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
+proc fcQWebView_vtable_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QWebViewVTable](fcQWebView_vdata(self))
   let self = QWebView(h: self)
   var virtualReturn = vtbl[].minimumSizeHint(self)
@@ -1020,29 +1090,20 @@ proc cQWebView_vtable_callback_minimumSizeHint(self: pointer): pointer {.cdecl.}
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QWebViewheightForWidth*(self: gen_qwebview_types.QWebView, param1: cint): cint =
-  fcQWebView_virtualbase_heightForWidth(self.h, param1)
-
-proc cQWebView_vtable_callback_heightForWidth(self: pointer, param1: cint): cint {.cdecl.} =
+proc fcQWebView_vtable_callback_heightForWidth(self: pointer, param1: cint): cint {.cdecl.} =
   let vtbl = cast[ptr QWebViewVTable](fcQWebView_vdata(self))
   let self = QWebView(h: self)
   let slotval1 = param1
   var virtualReturn = vtbl[].heightForWidth(self, slotval1)
   virtualReturn
 
-proc QWebViewhasHeightForWidth*(self: gen_qwebview_types.QWebView): bool =
-  fcQWebView_virtualbase_hasHeightForWidth(self.h)
-
-proc cQWebView_vtable_callback_hasHeightForWidth(self: pointer): bool {.cdecl.} =
+proc fcQWebView_vtable_callback_hasHeightForWidth(self: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QWebViewVTable](fcQWebView_vdata(self))
   let self = QWebView(h: self)
   var virtualReturn = vtbl[].hasHeightForWidth(self)
   virtualReturn
 
-proc QWebViewpaintEngine*(self: gen_qwebview_types.QWebView): gen_qpaintengine_types.QPaintEngine =
-  gen_qpaintengine_types.QPaintEngine(h: fcQWebView_virtualbase_paintEngine(self.h), owned: false)
-
-proc cQWebView_vtable_callback_paintEngine(self: pointer): pointer {.cdecl.} =
+proc fcQWebView_vtable_callback_paintEngine(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QWebViewVTable](fcQWebView_vdata(self))
   let self = QWebView(h: self)
   var virtualReturn = vtbl[].paintEngine(self)
@@ -1051,82 +1112,55 @@ proc cQWebView_vtable_callback_paintEngine(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QWebViewenterEvent*(self: gen_qwebview_types.QWebView, event: gen_qcoreevent_types.QEvent): void =
-  fcQWebView_virtualbase_enterEvent(self.h, event.h)
-
-proc cQWebView_vtable_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQWebView_vtable_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWebViewVTable](fcQWebView_vdata(self))
   let self = QWebView(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].enterEvent(self, slotval1)
 
-proc QWebViewleaveEvent*(self: gen_qwebview_types.QWebView, event: gen_qcoreevent_types.QEvent): void =
-  fcQWebView_virtualbase_leaveEvent(self.h, event.h)
-
-proc cQWebView_vtable_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQWebView_vtable_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWebViewVTable](fcQWebView_vdata(self))
   let self = QWebView(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].leaveEvent(self, slotval1)
 
-proc QWebViewmoveEvent*(self: gen_qwebview_types.QWebView, event: gen_qevent_types.QMoveEvent): void =
-  fcQWebView_virtualbase_moveEvent(self.h, event.h)
-
-proc cQWebView_vtable_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQWebView_vtable_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWebViewVTable](fcQWebView_vdata(self))
   let self = QWebView(h: self)
   let slotval1 = gen_qevent_types.QMoveEvent(h: event, owned: false)
   vtbl[].moveEvent(self, slotval1)
 
-proc QWebViewcloseEvent*(self: gen_qwebview_types.QWebView, event: gen_qevent_types.QCloseEvent): void =
-  fcQWebView_virtualbase_closeEvent(self.h, event.h)
-
-proc cQWebView_vtable_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQWebView_vtable_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWebViewVTable](fcQWebView_vdata(self))
   let self = QWebView(h: self)
   let slotval1 = gen_qevent_types.QCloseEvent(h: event, owned: false)
   vtbl[].closeEvent(self, slotval1)
 
-proc QWebViewtabletEvent*(self: gen_qwebview_types.QWebView, event: gen_qevent_types.QTabletEvent): void =
-  fcQWebView_virtualbase_tabletEvent(self.h, event.h)
-
-proc cQWebView_vtable_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQWebView_vtable_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWebViewVTable](fcQWebView_vdata(self))
   let self = QWebView(h: self)
   let slotval1 = gen_qevent_types.QTabletEvent(h: event, owned: false)
   vtbl[].tabletEvent(self, slotval1)
 
-proc QWebViewactionEvent*(self: gen_qwebview_types.QWebView, event: gen_qevent_types.QActionEvent): void =
-  fcQWebView_virtualbase_actionEvent(self.h, event.h)
-
-proc cQWebView_vtable_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQWebView_vtable_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWebViewVTable](fcQWebView_vdata(self))
   let self = QWebView(h: self)
   let slotval1 = gen_qevent_types.QActionEvent(h: event, owned: false)
   vtbl[].actionEvent(self, slotval1)
 
-proc QWebViewshowEvent*(self: gen_qwebview_types.QWebView, event: gen_qevent_types.QShowEvent): void =
-  fcQWebView_virtualbase_showEvent(self.h, event.h)
-
-proc cQWebView_vtable_callback_showEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQWebView_vtable_callback_showEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWebViewVTable](fcQWebView_vdata(self))
   let self = QWebView(h: self)
   let slotval1 = gen_qevent_types.QShowEvent(h: event, owned: false)
   vtbl[].showEvent(self, slotval1)
 
-proc QWebViewhideEvent*(self: gen_qwebview_types.QWebView, event: gen_qevent_types.QHideEvent): void =
-  fcQWebView_virtualbase_hideEvent(self.h, event.h)
-
-proc cQWebView_vtable_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQWebView_vtable_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWebViewVTable](fcQWebView_vdata(self))
   let self = QWebView(h: self)
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   vtbl[].hideEvent(self, slotval1)
 
-proc QWebViewnativeEvent*(self: gen_qwebview_types.QWebView, eventType: openArray[byte], message: pointer, resultVal: ptr clong): bool =
-  fcQWebView_virtualbase_nativeEvent(self.h, struct_miqt_string(data: cast[cstring](if len(eventType) == 0: nil else: unsafeAddr eventType[0]), len: csize_t(len(eventType))), message, resultVal)
-
-proc cQWebView_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr clong): bool {.cdecl.} =
+proc fcQWebView_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr clong): bool {.cdecl.} =
   let vtbl = cast[ptr QWebViewVTable](fcQWebView_vdata(self))
   let self = QWebView(h: self)
   var veventType_bytearray = eventType
@@ -1138,29 +1172,20 @@ proc cQWebView_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt
   var virtualReturn = vtbl[].nativeEvent(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QWebViewmetric*(self: gen_qwebview_types.QWebView, param1: cint): cint =
-  fcQWebView_virtualbase_metric(self.h, cint(param1))
-
-proc cQWebView_vtable_callback_metric(self: pointer, param1: cint): cint {.cdecl.} =
+proc fcQWebView_vtable_callback_metric(self: pointer, param1: cint): cint {.cdecl.} =
   let vtbl = cast[ptr QWebViewVTable](fcQWebView_vdata(self))
   let self = QWebView(h: self)
   let slotval1 = cint(param1)
   var virtualReturn = vtbl[].metric(self, slotval1)
   virtualReturn
 
-proc QWebViewinitPainter*(self: gen_qwebview_types.QWebView, painter: gen_qpainter_types.QPainter): void =
-  fcQWebView_virtualbase_initPainter(self.h, painter.h)
-
-proc cQWebView_vtable_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
+proc fcQWebView_vtable_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWebViewVTable](fcQWebView_vdata(self))
   let self = QWebView(h: self)
   let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
   vtbl[].initPainter(self, slotval1)
 
-proc QWebViewredirected*(self: gen_qwebview_types.QWebView, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice =
-  gen_qpaintdevice_types.QPaintDevice(h: fcQWebView_virtualbase_redirected(self.h, offset.h), owned: false)
-
-proc cQWebView_vtable_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
+proc fcQWebView_vtable_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QWebViewVTable](fcQWebView_vdata(self))
   let self = QWebView(h: self)
   let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
@@ -1170,10 +1195,7 @@ proc cQWebView_vtable_callback_redirected(self: pointer, offset: pointer): point
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QWebViewsharedPainter*(self: gen_qwebview_types.QWebView): gen_qpainter_types.QPainter =
-  gen_qpainter_types.QPainter(h: fcQWebView_virtualbase_sharedPainter(self.h), owned: false)
-
-proc cQWebView_vtable_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
+proc fcQWebView_vtable_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QWebViewVTable](fcQWebView_vdata(self))
   let self = QWebView(h: self)
   var virtualReturn = vtbl[].sharedPainter(self)
@@ -1182,10 +1204,7 @@ proc cQWebView_vtable_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QWebVieweventFilter*(self: gen_qwebview_types.QWebView, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
-  fcQWebView_virtualbase_eventFilter(self.h, watched.h, event.h)
-
-proc cQWebView_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+proc fcQWebView_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QWebViewVTable](fcQWebView_vdata(self))
   let self = QWebView(h: self)
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
@@ -1193,46 +1212,31 @@ proc cQWebView_vtable_callback_eventFilter(self: pointer, watched: pointer, even
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
-proc QWebViewtimerEvent*(self: gen_qwebview_types.QWebView, event: gen_qcoreevent_types.QTimerEvent): void =
-  fcQWebView_virtualbase_timerEvent(self.h, event.h)
-
-proc cQWebView_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQWebView_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWebViewVTable](fcQWebView_vdata(self))
   let self = QWebView(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
-proc QWebViewchildEvent*(self: gen_qwebview_types.QWebView, event: gen_qcoreevent_types.QChildEvent): void =
-  fcQWebView_virtualbase_childEvent(self.h, event.h)
-
-proc cQWebView_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQWebView_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWebViewVTable](fcQWebView_vdata(self))
   let self = QWebView(h: self)
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
-proc QWebViewcustomEvent*(self: gen_qwebview_types.QWebView, event: gen_qcoreevent_types.QEvent): void =
-  fcQWebView_virtualbase_customEvent(self.h, event.h)
-
-proc cQWebView_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQWebView_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWebViewVTable](fcQWebView_vdata(self))
   let self = QWebView(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
-proc QWebViewconnectNotify*(self: gen_qwebview_types.QWebView, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQWebView_virtualbase_connectNotify(self.h, signal.h)
-
-proc cQWebView_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQWebView_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWebViewVTable](fcQWebView_vdata(self))
   let self = QWebView(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
-proc QWebViewdisconnectNotify*(self: gen_qwebview_types.QWebView, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQWebView_virtualbase_disconnectNotify(self.h, signal.h)
-
-proc cQWebView_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQWebView_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWebViewVTable](fcQWebView_vdata(self))
   let self = QWebView(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
@@ -1240,9 +1244,111 @@ proc cQWebView_vtable_callback_disconnectNotify(self: pointer, signal: pointer):
 
 type VirtualQWebView* {.inheritable.} = ref object of QWebView
   vtbl*: cQWebViewVTable
+
 method metaObject*(self: VirtualQWebView): gen_qobjectdefs_types.QMetaObject {.base.} =
   QWebViewmetaObject(self[])
-proc cQWebView_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
+method metacast*(self: VirtualQWebView, param1: cstring): pointer {.base.} =
+  QWebViewmetacast(self[], param1)
+method metacall*(self: VirtualQWebView, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QWebViewmetacall(self[], param1, param2, param3)
+method inputMethodQuery*(self: VirtualQWebView, property: cint): gen_qvariant_types.QVariant {.base.} =
+  QWebViewinputMethodQuery(self[], property)
+method sizeHint*(self: VirtualQWebView): gen_qsize_types.QSize {.base.} =
+  QWebViewsizeHint(self[])
+method event*(self: VirtualQWebView, param1: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QWebViewevent(self[], param1)
+method resizeEvent*(self: VirtualQWebView, param1: gen_qevent_types.QResizeEvent): void {.base.} =
+  QWebViewresizeEvent(self[], param1)
+method paintEvent*(self: VirtualQWebView, param1: gen_qevent_types.QPaintEvent): void {.base.} =
+  QWebViewpaintEvent(self[], param1)
+method createWindow*(self: VirtualQWebView, typeVal: cint): gen_qwebview_types.QWebView {.base.} =
+  QWebViewcreateWindow(self[], typeVal)
+method changeEvent*(self: VirtualQWebView, param1: gen_qcoreevent_types.QEvent): void {.base.} =
+  QWebViewchangeEvent(self[], param1)
+method mouseMoveEvent*(self: VirtualQWebView, param1: gen_qevent_types.QMouseEvent): void {.base.} =
+  QWebViewmouseMoveEvent(self[], param1)
+method mousePressEvent*(self: VirtualQWebView, param1: gen_qevent_types.QMouseEvent): void {.base.} =
+  QWebViewmousePressEvent(self[], param1)
+method mouseDoubleClickEvent*(self: VirtualQWebView, param1: gen_qevent_types.QMouseEvent): void {.base.} =
+  QWebViewmouseDoubleClickEvent(self[], param1)
+method mouseReleaseEvent*(self: VirtualQWebView, param1: gen_qevent_types.QMouseEvent): void {.base.} =
+  QWebViewmouseReleaseEvent(self[], param1)
+method contextMenuEvent*(self: VirtualQWebView, param1: gen_qevent_types.QContextMenuEvent): void {.base.} =
+  QWebViewcontextMenuEvent(self[], param1)
+method wheelEvent*(self: VirtualQWebView, param1: gen_qevent_types.QWheelEvent): void {.base.} =
+  QWebViewwheelEvent(self[], param1)
+method keyPressEvent*(self: VirtualQWebView, param1: gen_qevent_types.QKeyEvent): void {.base.} =
+  QWebViewkeyPressEvent(self[], param1)
+method keyReleaseEvent*(self: VirtualQWebView, param1: gen_qevent_types.QKeyEvent): void {.base.} =
+  QWebViewkeyReleaseEvent(self[], param1)
+method dragEnterEvent*(self: VirtualQWebView, param1: gen_qevent_types.QDragEnterEvent): void {.base.} =
+  QWebViewdragEnterEvent(self[], param1)
+method dragLeaveEvent*(self: VirtualQWebView, param1: gen_qevent_types.QDragLeaveEvent): void {.base.} =
+  QWebViewdragLeaveEvent(self[], param1)
+method dragMoveEvent*(self: VirtualQWebView, param1: gen_qevent_types.QDragMoveEvent): void {.base.} =
+  QWebViewdragMoveEvent(self[], param1)
+method dropEvent*(self: VirtualQWebView, param1: gen_qevent_types.QDropEvent): void {.base.} =
+  QWebViewdropEvent(self[], param1)
+method focusInEvent*(self: VirtualQWebView, param1: gen_qevent_types.QFocusEvent): void {.base.} =
+  QWebViewfocusInEvent(self[], param1)
+method focusOutEvent*(self: VirtualQWebView, param1: gen_qevent_types.QFocusEvent): void {.base.} =
+  QWebViewfocusOutEvent(self[], param1)
+method inputMethodEvent*(self: VirtualQWebView, param1: gen_qevent_types.QInputMethodEvent): void {.base.} =
+  QWebViewinputMethodEvent(self[], param1)
+method focusNextPrevChild*(self: VirtualQWebView, next: bool): bool {.base.} =
+  QWebViewfocusNextPrevChild(self[], next)
+method devType*(self: VirtualQWebView): cint {.base.} =
+  QWebViewdevType(self[])
+method setVisible*(self: VirtualQWebView, visible: bool): void {.base.} =
+  QWebViewsetVisible(self[], visible)
+method minimumSizeHint*(self: VirtualQWebView): gen_qsize_types.QSize {.base.} =
+  QWebViewminimumSizeHint(self[])
+method heightForWidth*(self: VirtualQWebView, param1: cint): cint {.base.} =
+  QWebViewheightForWidth(self[], param1)
+method hasHeightForWidth*(self: VirtualQWebView): bool {.base.} =
+  QWebViewhasHeightForWidth(self[])
+method paintEngine*(self: VirtualQWebView): gen_qpaintengine_types.QPaintEngine {.base.} =
+  QWebViewpaintEngine(self[])
+method enterEvent*(self: VirtualQWebView, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QWebViewenterEvent(self[], event)
+method leaveEvent*(self: VirtualQWebView, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QWebViewleaveEvent(self[], event)
+method moveEvent*(self: VirtualQWebView, event: gen_qevent_types.QMoveEvent): void {.base.} =
+  QWebViewmoveEvent(self[], event)
+method closeEvent*(self: VirtualQWebView, event: gen_qevent_types.QCloseEvent): void {.base.} =
+  QWebViewcloseEvent(self[], event)
+method tabletEvent*(self: VirtualQWebView, event: gen_qevent_types.QTabletEvent): void {.base.} =
+  QWebViewtabletEvent(self[], event)
+method actionEvent*(self: VirtualQWebView, event: gen_qevent_types.QActionEvent): void {.base.} =
+  QWebViewactionEvent(self[], event)
+method showEvent*(self: VirtualQWebView, event: gen_qevent_types.QShowEvent): void {.base.} =
+  QWebViewshowEvent(self[], event)
+method hideEvent*(self: VirtualQWebView, event: gen_qevent_types.QHideEvent): void {.base.} =
+  QWebViewhideEvent(self[], event)
+method nativeEvent*(self: VirtualQWebView, eventType: openArray[byte], message: pointer, resultVal: ptr clong): bool {.base.} =
+  QWebViewnativeEvent(self[], eventType, message, resultVal)
+method metric*(self: VirtualQWebView, param1: cint): cint {.base.} =
+  QWebViewmetric(self[], param1)
+method initPainter*(self: VirtualQWebView, painter: gen_qpainter_types.QPainter): void {.base.} =
+  QWebViewinitPainter(self[], painter)
+method redirected*(self: VirtualQWebView, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.base.} =
+  QWebViewredirected(self[], offset)
+method sharedPainter*(self: VirtualQWebView): gen_qpainter_types.QPainter {.base.} =
+  QWebViewsharedPainter(self[])
+method eventFilter*(self: VirtualQWebView, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QWebVieweventFilter(self[], watched, event)
+method timerEvent*(self: VirtualQWebView, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QWebViewtimerEvent(self[], event)
+method childEvent*(self: VirtualQWebView, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QWebViewchildEvent(self[], event)
+method customEvent*(self: VirtualQWebView, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QWebViewcustomEvent(self[], event)
+method connectNotify*(self: VirtualQWebView, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QWebViewconnectNotify(self[], signal)
+method disconnectNotify*(self: VirtualQWebView, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QWebViewdisconnectNotify(self[], signal)
+
+proc fcQWebView_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQWebView](fcQWebView_vdata(self))
   var virtualReturn = inst.metaObject()
   virtualReturn.owned = false # TODO move?
@@ -1250,17 +1356,13 @@ proc cQWebView_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-method metacast*(self: VirtualQWebView, param1: cstring): pointer {.base.} =
-  QWebViewmetacast(self[], param1)
-proc cQWebView_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+proc fcQWebView_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQWebView](fcQWebView_vdata(self))
   let slotval1 = (param1)
   var virtualReturn = inst.metacast(slotval1)
   virtualReturn
 
-method metacall*(self: VirtualQWebView, param1: cint, param2: cint, param3: pointer): cint {.base.} =
-  QWebViewmetacall(self[], param1, param2, param3)
-proc cQWebView_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+proc fcQWebView_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQWebView](fcQWebView_vdata(self))
   let slotval1 = cint(param1)
   let slotval2 = param2
@@ -1268,9 +1370,7 @@ proc cQWebView_method_callback_metacall(self: pointer, param1: cint, param2: cin
   var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
-method inputMethodQuery*(self: VirtualQWebView, property: cint): gen_qvariant_types.QVariant {.base.} =
-  QWebViewinputMethodQuery(self[], property)
-proc cQWebView_method_callback_inputMethodQuery(self: pointer, property: cint): pointer {.cdecl.} =
+proc fcQWebView_method_callback_inputMethodQuery(self: pointer, property: cint): pointer {.cdecl.} =
   let inst = cast[VirtualQWebView](fcQWebView_vdata(self))
   let slotval1 = cint(property)
   var virtualReturn = inst.inputMethodQuery(slotval1)
@@ -1279,9 +1379,7 @@ proc cQWebView_method_callback_inputMethodQuery(self: pointer, property: cint): 
   virtualReturn.h = nil
   virtualReturn_h
 
-method sizeHint*(self: VirtualQWebView): gen_qsize_types.QSize {.base.} =
-  QWebViewsizeHint(self[])
-proc cQWebView_method_callback_sizeHint(self: pointer): pointer {.cdecl.} =
+proc fcQWebView_method_callback_sizeHint(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQWebView](fcQWebView_vdata(self))
   var virtualReturn = inst.sizeHint()
   virtualReturn.owned = false # TODO move?
@@ -1289,31 +1387,23 @@ proc cQWebView_method_callback_sizeHint(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-method event*(self: VirtualQWebView, param1: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QWebViewevent(self[], param1)
-proc cQWebView_method_callback_event(self: pointer, param1: pointer): bool {.cdecl.} =
+proc fcQWebView_method_callback_event(self: pointer, param1: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQWebView](fcQWebView_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
-method resizeEvent*(self: VirtualQWebView, param1: gen_qevent_types.QResizeEvent): void {.base.} =
-  QWebViewresizeEvent(self[], param1)
-proc cQWebView_method_callback_resizeEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQWebView_method_callback_resizeEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQWebView](fcQWebView_vdata(self))
   let slotval1 = gen_qevent_types.QResizeEvent(h: param1, owned: false)
   inst.resizeEvent(slotval1)
 
-method paintEvent*(self: VirtualQWebView, param1: gen_qevent_types.QPaintEvent): void {.base.} =
-  QWebViewpaintEvent(self[], param1)
-proc cQWebView_method_callback_paintEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQWebView_method_callback_paintEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQWebView](fcQWebView_vdata(self))
   let slotval1 = gen_qevent_types.QPaintEvent(h: param1, owned: false)
   inst.paintEvent(slotval1)
 
-method createWindow*(self: VirtualQWebView, typeVal: cint): gen_qwebview_types.QWebView {.base.} =
-  QWebViewcreateWindow(self[], typeVal)
-proc cQWebView_method_callback_createWindow(self: pointer, typeVal: cint): pointer {.cdecl.} =
+proc fcQWebView_method_callback_createWindow(self: pointer, typeVal: cint): pointer {.cdecl.} =
   let inst = cast[VirtualQWebView](fcQWebView_vdata(self))
   let slotval1 = cint(typeVal)
   var virtualReturn = inst.createWindow(slotval1)
@@ -1322,143 +1412,103 @@ proc cQWebView_method_callback_createWindow(self: pointer, typeVal: cint): point
   virtualReturn.h = nil
   virtualReturn_h
 
-method changeEvent*(self: VirtualQWebView, param1: gen_qcoreevent_types.QEvent): void {.base.} =
-  QWebViewchangeEvent(self[], param1)
-proc cQWebView_method_callback_changeEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQWebView_method_callback_changeEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQWebView](fcQWebView_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
   inst.changeEvent(slotval1)
 
-method mouseMoveEvent*(self: VirtualQWebView, param1: gen_qevent_types.QMouseEvent): void {.base.} =
-  QWebViewmouseMoveEvent(self[], param1)
-proc cQWebView_method_callback_mouseMoveEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQWebView_method_callback_mouseMoveEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQWebView](fcQWebView_vdata(self))
   let slotval1 = gen_qevent_types.QMouseEvent(h: param1, owned: false)
   inst.mouseMoveEvent(slotval1)
 
-method mousePressEvent*(self: VirtualQWebView, param1: gen_qevent_types.QMouseEvent): void {.base.} =
-  QWebViewmousePressEvent(self[], param1)
-proc cQWebView_method_callback_mousePressEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQWebView_method_callback_mousePressEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQWebView](fcQWebView_vdata(self))
   let slotval1 = gen_qevent_types.QMouseEvent(h: param1, owned: false)
   inst.mousePressEvent(slotval1)
 
-method mouseDoubleClickEvent*(self: VirtualQWebView, param1: gen_qevent_types.QMouseEvent): void {.base.} =
-  QWebViewmouseDoubleClickEvent(self[], param1)
-proc cQWebView_method_callback_mouseDoubleClickEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQWebView_method_callback_mouseDoubleClickEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQWebView](fcQWebView_vdata(self))
   let slotval1 = gen_qevent_types.QMouseEvent(h: param1, owned: false)
   inst.mouseDoubleClickEvent(slotval1)
 
-method mouseReleaseEvent*(self: VirtualQWebView, param1: gen_qevent_types.QMouseEvent): void {.base.} =
-  QWebViewmouseReleaseEvent(self[], param1)
-proc cQWebView_method_callback_mouseReleaseEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQWebView_method_callback_mouseReleaseEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQWebView](fcQWebView_vdata(self))
   let slotval1 = gen_qevent_types.QMouseEvent(h: param1, owned: false)
   inst.mouseReleaseEvent(slotval1)
 
-method contextMenuEvent*(self: VirtualQWebView, param1: gen_qevent_types.QContextMenuEvent): void {.base.} =
-  QWebViewcontextMenuEvent(self[], param1)
-proc cQWebView_method_callback_contextMenuEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQWebView_method_callback_contextMenuEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQWebView](fcQWebView_vdata(self))
   let slotval1 = gen_qevent_types.QContextMenuEvent(h: param1, owned: false)
   inst.contextMenuEvent(slotval1)
 
-method wheelEvent*(self: VirtualQWebView, param1: gen_qevent_types.QWheelEvent): void {.base.} =
-  QWebViewwheelEvent(self[], param1)
-proc cQWebView_method_callback_wheelEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQWebView_method_callback_wheelEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQWebView](fcQWebView_vdata(self))
   let slotval1 = gen_qevent_types.QWheelEvent(h: param1, owned: false)
   inst.wheelEvent(slotval1)
 
-method keyPressEvent*(self: VirtualQWebView, param1: gen_qevent_types.QKeyEvent): void {.base.} =
-  QWebViewkeyPressEvent(self[], param1)
-proc cQWebView_method_callback_keyPressEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQWebView_method_callback_keyPressEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQWebView](fcQWebView_vdata(self))
   let slotval1 = gen_qevent_types.QKeyEvent(h: param1, owned: false)
   inst.keyPressEvent(slotval1)
 
-method keyReleaseEvent*(self: VirtualQWebView, param1: gen_qevent_types.QKeyEvent): void {.base.} =
-  QWebViewkeyReleaseEvent(self[], param1)
-proc cQWebView_method_callback_keyReleaseEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQWebView_method_callback_keyReleaseEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQWebView](fcQWebView_vdata(self))
   let slotval1 = gen_qevent_types.QKeyEvent(h: param1, owned: false)
   inst.keyReleaseEvent(slotval1)
 
-method dragEnterEvent*(self: VirtualQWebView, param1: gen_qevent_types.QDragEnterEvent): void {.base.} =
-  QWebViewdragEnterEvent(self[], param1)
-proc cQWebView_method_callback_dragEnterEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQWebView_method_callback_dragEnterEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQWebView](fcQWebView_vdata(self))
   let slotval1 = gen_qevent_types.QDragEnterEvent(h: param1, owned: false)
   inst.dragEnterEvent(slotval1)
 
-method dragLeaveEvent*(self: VirtualQWebView, param1: gen_qevent_types.QDragLeaveEvent): void {.base.} =
-  QWebViewdragLeaveEvent(self[], param1)
-proc cQWebView_method_callback_dragLeaveEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQWebView_method_callback_dragLeaveEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQWebView](fcQWebView_vdata(self))
   let slotval1 = gen_qevent_types.QDragLeaveEvent(h: param1, owned: false)
   inst.dragLeaveEvent(slotval1)
 
-method dragMoveEvent*(self: VirtualQWebView, param1: gen_qevent_types.QDragMoveEvent): void {.base.} =
-  QWebViewdragMoveEvent(self[], param1)
-proc cQWebView_method_callback_dragMoveEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQWebView_method_callback_dragMoveEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQWebView](fcQWebView_vdata(self))
   let slotval1 = gen_qevent_types.QDragMoveEvent(h: param1, owned: false)
   inst.dragMoveEvent(slotval1)
 
-method dropEvent*(self: VirtualQWebView, param1: gen_qevent_types.QDropEvent): void {.base.} =
-  QWebViewdropEvent(self[], param1)
-proc cQWebView_method_callback_dropEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQWebView_method_callback_dropEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQWebView](fcQWebView_vdata(self))
   let slotval1 = gen_qevent_types.QDropEvent(h: param1, owned: false)
   inst.dropEvent(slotval1)
 
-method focusInEvent*(self: VirtualQWebView, param1: gen_qevent_types.QFocusEvent): void {.base.} =
-  QWebViewfocusInEvent(self[], param1)
-proc cQWebView_method_callback_focusInEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQWebView_method_callback_focusInEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQWebView](fcQWebView_vdata(self))
   let slotval1 = gen_qevent_types.QFocusEvent(h: param1, owned: false)
   inst.focusInEvent(slotval1)
 
-method focusOutEvent*(self: VirtualQWebView, param1: gen_qevent_types.QFocusEvent): void {.base.} =
-  QWebViewfocusOutEvent(self[], param1)
-proc cQWebView_method_callback_focusOutEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQWebView_method_callback_focusOutEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQWebView](fcQWebView_vdata(self))
   let slotval1 = gen_qevent_types.QFocusEvent(h: param1, owned: false)
   inst.focusOutEvent(slotval1)
 
-method inputMethodEvent*(self: VirtualQWebView, param1: gen_qevent_types.QInputMethodEvent): void {.base.} =
-  QWebViewinputMethodEvent(self[], param1)
-proc cQWebView_method_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQWebView_method_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQWebView](fcQWebView_vdata(self))
   let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1, owned: false)
   inst.inputMethodEvent(slotval1)
 
-method focusNextPrevChild*(self: VirtualQWebView, next: bool): bool {.base.} =
-  QWebViewfocusNextPrevChild(self[], next)
-proc cQWebView_method_callback_focusNextPrevChild(self: pointer, next: bool): bool {.cdecl.} =
+proc fcQWebView_method_callback_focusNextPrevChild(self: pointer, next: bool): bool {.cdecl.} =
   let inst = cast[VirtualQWebView](fcQWebView_vdata(self))
   let slotval1 = next
   var virtualReturn = inst.focusNextPrevChild(slotval1)
   virtualReturn
 
-method devType*(self: VirtualQWebView): cint {.base.} =
-  QWebViewdevType(self[])
-proc cQWebView_method_callback_devType(self: pointer): cint {.cdecl.} =
+proc fcQWebView_method_callback_devType(self: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQWebView](fcQWebView_vdata(self))
   var virtualReturn = inst.devType()
   virtualReturn
 
-method setVisible*(self: VirtualQWebView, visible: bool): void {.base.} =
-  QWebViewsetVisible(self[], visible)
-proc cQWebView_method_callback_setVisible(self: pointer, visible: bool): void {.cdecl.} =
+proc fcQWebView_method_callback_setVisible(self: pointer, visible: bool): void {.cdecl.} =
   let inst = cast[VirtualQWebView](fcQWebView_vdata(self))
   let slotval1 = visible
   inst.setVisible(slotval1)
 
-method minimumSizeHint*(self: VirtualQWebView): gen_qsize_types.QSize {.base.} =
-  QWebViewminimumSizeHint(self[])
-proc cQWebView_method_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
+proc fcQWebView_method_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQWebView](fcQWebView_vdata(self))
   var virtualReturn = inst.minimumSizeHint()
   virtualReturn.owned = false # TODO move?
@@ -1466,24 +1516,18 @@ proc cQWebView_method_callback_minimumSizeHint(self: pointer): pointer {.cdecl.}
   virtualReturn.h = nil
   virtualReturn_h
 
-method heightForWidth*(self: VirtualQWebView, param1: cint): cint {.base.} =
-  QWebViewheightForWidth(self[], param1)
-proc cQWebView_method_callback_heightForWidth(self: pointer, param1: cint): cint {.cdecl.} =
+proc fcQWebView_method_callback_heightForWidth(self: pointer, param1: cint): cint {.cdecl.} =
   let inst = cast[VirtualQWebView](fcQWebView_vdata(self))
   let slotval1 = param1
   var virtualReturn = inst.heightForWidth(slotval1)
   virtualReturn
 
-method hasHeightForWidth*(self: VirtualQWebView): bool {.base.} =
-  QWebViewhasHeightForWidth(self[])
-proc cQWebView_method_callback_hasHeightForWidth(self: pointer): bool {.cdecl.} =
+proc fcQWebView_method_callback_hasHeightForWidth(self: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQWebView](fcQWebView_vdata(self))
   var virtualReturn = inst.hasHeightForWidth()
   virtualReturn
 
-method paintEngine*(self: VirtualQWebView): gen_qpaintengine_types.QPaintEngine {.base.} =
-  QWebViewpaintEngine(self[])
-proc cQWebView_method_callback_paintEngine(self: pointer): pointer {.cdecl.} =
+proc fcQWebView_method_callback_paintEngine(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQWebView](fcQWebView_vdata(self))
   var virtualReturn = inst.paintEngine()
   virtualReturn.owned = false # TODO move?
@@ -1491,65 +1535,47 @@ proc cQWebView_method_callback_paintEngine(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-method enterEvent*(self: VirtualQWebView, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QWebViewenterEvent(self[], event)
-proc cQWebView_method_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQWebView_method_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQWebView](fcQWebView_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.enterEvent(slotval1)
 
-method leaveEvent*(self: VirtualQWebView, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QWebViewleaveEvent(self[], event)
-proc cQWebView_method_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQWebView_method_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQWebView](fcQWebView_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.leaveEvent(slotval1)
 
-method moveEvent*(self: VirtualQWebView, event: gen_qevent_types.QMoveEvent): void {.base.} =
-  QWebViewmoveEvent(self[], event)
-proc cQWebView_method_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQWebView_method_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQWebView](fcQWebView_vdata(self))
   let slotval1 = gen_qevent_types.QMoveEvent(h: event, owned: false)
   inst.moveEvent(slotval1)
 
-method closeEvent*(self: VirtualQWebView, event: gen_qevent_types.QCloseEvent): void {.base.} =
-  QWebViewcloseEvent(self[], event)
-proc cQWebView_method_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQWebView_method_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQWebView](fcQWebView_vdata(self))
   let slotval1 = gen_qevent_types.QCloseEvent(h: event, owned: false)
   inst.closeEvent(slotval1)
 
-method tabletEvent*(self: VirtualQWebView, event: gen_qevent_types.QTabletEvent): void {.base.} =
-  QWebViewtabletEvent(self[], event)
-proc cQWebView_method_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQWebView_method_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQWebView](fcQWebView_vdata(self))
   let slotval1 = gen_qevent_types.QTabletEvent(h: event, owned: false)
   inst.tabletEvent(slotval1)
 
-method actionEvent*(self: VirtualQWebView, event: gen_qevent_types.QActionEvent): void {.base.} =
-  QWebViewactionEvent(self[], event)
-proc cQWebView_method_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQWebView_method_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQWebView](fcQWebView_vdata(self))
   let slotval1 = gen_qevent_types.QActionEvent(h: event, owned: false)
   inst.actionEvent(slotval1)
 
-method showEvent*(self: VirtualQWebView, event: gen_qevent_types.QShowEvent): void {.base.} =
-  QWebViewshowEvent(self[], event)
-proc cQWebView_method_callback_showEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQWebView_method_callback_showEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQWebView](fcQWebView_vdata(self))
   let slotval1 = gen_qevent_types.QShowEvent(h: event, owned: false)
   inst.showEvent(slotval1)
 
-method hideEvent*(self: VirtualQWebView, event: gen_qevent_types.QHideEvent): void {.base.} =
-  QWebViewhideEvent(self[], event)
-proc cQWebView_method_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQWebView_method_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQWebView](fcQWebView_vdata(self))
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   inst.hideEvent(slotval1)
 
-method nativeEvent*(self: VirtualQWebView, eventType: openArray[byte], message: pointer, resultVal: ptr clong): bool {.base.} =
-  QWebViewnativeEvent(self[], eventType, message, resultVal)
-proc cQWebView_method_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr clong): bool {.cdecl.} =
+proc fcQWebView_method_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr clong): bool {.cdecl.} =
   let inst = cast[VirtualQWebView](fcQWebView_vdata(self))
   var veventType_bytearray = eventType
   var veventTypex_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](veventType_bytearray.data), 0, int(veventType_bytearray.len)-1))
@@ -1560,24 +1586,18 @@ proc cQWebView_method_callback_nativeEvent(self: pointer, eventType: struct_miqt
   var virtualReturn = inst.nativeEvent(slotval1, slotval2, slotval3)
   virtualReturn
 
-method metric*(self: VirtualQWebView, param1: cint): cint {.base.} =
-  QWebViewmetric(self[], param1)
-proc cQWebView_method_callback_metric(self: pointer, param1: cint): cint {.cdecl.} =
+proc fcQWebView_method_callback_metric(self: pointer, param1: cint): cint {.cdecl.} =
   let inst = cast[VirtualQWebView](fcQWebView_vdata(self))
   let slotval1 = cint(param1)
   var virtualReturn = inst.metric(slotval1)
   virtualReturn
 
-method initPainter*(self: VirtualQWebView, painter: gen_qpainter_types.QPainter): void {.base.} =
-  QWebViewinitPainter(self[], painter)
-proc cQWebView_method_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
+proc fcQWebView_method_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
   let inst = cast[VirtualQWebView](fcQWebView_vdata(self))
   let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
   inst.initPainter(slotval1)
 
-method redirected*(self: VirtualQWebView, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.base.} =
-  QWebViewredirected(self[], offset)
-proc cQWebView_method_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
+proc fcQWebView_method_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQWebView](fcQWebView_vdata(self))
   let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
   var virtualReturn = inst.redirected(slotval1)
@@ -1586,9 +1606,7 @@ proc cQWebView_method_callback_redirected(self: pointer, offset: pointer): point
   virtualReturn.h = nil
   virtualReturn_h
 
-method sharedPainter*(self: VirtualQWebView): gen_qpainter_types.QPainter {.base.} =
-  QWebViewsharedPainter(self[])
-proc cQWebView_method_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
+proc fcQWebView_method_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQWebView](fcQWebView_vdata(self))
   var virtualReturn = inst.sharedPainter()
   virtualReturn.owned = false # TODO move?
@@ -1596,49 +1614,38 @@ proc cQWebView_method_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-method eventFilter*(self: VirtualQWebView, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QWebVieweventFilter(self[], watched, event)
-proc cQWebView_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+proc fcQWebView_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQWebView](fcQWebView_vdata(self))
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
   let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
-method timerEvent*(self: VirtualQWebView, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
-  QWebViewtimerEvent(self[], event)
-proc cQWebView_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQWebView_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQWebView](fcQWebView_vdata(self))
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
-method childEvent*(self: VirtualQWebView, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
-  QWebViewchildEvent(self[], event)
-proc cQWebView_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQWebView_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQWebView](fcQWebView_vdata(self))
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
-method customEvent*(self: VirtualQWebView, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QWebViewcustomEvent(self[], event)
-proc cQWebView_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQWebView_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQWebView](fcQWebView_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
-method connectNotify*(self: VirtualQWebView, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QWebViewconnectNotify(self[], signal)
-proc cQWebView_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQWebView_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQWebView](fcQWebView_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
-method disconnectNotify*(self: VirtualQWebView, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QWebViewdisconnectNotify(self[], signal)
-proc cQWebView_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQWebView_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQWebView](fcQWebView_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
+
 
 proc updateMicroFocus*(self: gen_qwebview_types.QWebView): void =
   fcQWebView_protectedbase_updateMicroFocus(self.h)
@@ -1676,107 +1683,107 @@ proc create*(T: type gen_qwebview_types.QWebView,
     let vtbl = cast[ref QWebViewVTable](fcQWebView_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQWebView_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQWebView_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQWebView_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQWebView_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQWebView_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQWebView_vtable_callback_metacall
   if not isNil(vtbl[].inputMethodQuery):
-    vtbl[].vtbl.inputMethodQuery = cQWebView_vtable_callback_inputMethodQuery
+    vtbl[].vtbl.inputMethodQuery = fcQWebView_vtable_callback_inputMethodQuery
   if not isNil(vtbl[].sizeHint):
-    vtbl[].vtbl.sizeHint = cQWebView_vtable_callback_sizeHint
+    vtbl[].vtbl.sizeHint = fcQWebView_vtable_callback_sizeHint
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQWebView_vtable_callback_event
+    vtbl[].vtbl.event = fcQWebView_vtable_callback_event
   if not isNil(vtbl[].resizeEvent):
-    vtbl[].vtbl.resizeEvent = cQWebView_vtable_callback_resizeEvent
+    vtbl[].vtbl.resizeEvent = fcQWebView_vtable_callback_resizeEvent
   if not isNil(vtbl[].paintEvent):
-    vtbl[].vtbl.paintEvent = cQWebView_vtable_callback_paintEvent
+    vtbl[].vtbl.paintEvent = fcQWebView_vtable_callback_paintEvent
   if not isNil(vtbl[].createWindow):
-    vtbl[].vtbl.createWindow = cQWebView_vtable_callback_createWindow
+    vtbl[].vtbl.createWindow = fcQWebView_vtable_callback_createWindow
   if not isNil(vtbl[].changeEvent):
-    vtbl[].vtbl.changeEvent = cQWebView_vtable_callback_changeEvent
+    vtbl[].vtbl.changeEvent = fcQWebView_vtable_callback_changeEvent
   if not isNil(vtbl[].mouseMoveEvent):
-    vtbl[].vtbl.mouseMoveEvent = cQWebView_vtable_callback_mouseMoveEvent
+    vtbl[].vtbl.mouseMoveEvent = fcQWebView_vtable_callback_mouseMoveEvent
   if not isNil(vtbl[].mousePressEvent):
-    vtbl[].vtbl.mousePressEvent = cQWebView_vtable_callback_mousePressEvent
+    vtbl[].vtbl.mousePressEvent = fcQWebView_vtable_callback_mousePressEvent
   if not isNil(vtbl[].mouseDoubleClickEvent):
-    vtbl[].vtbl.mouseDoubleClickEvent = cQWebView_vtable_callback_mouseDoubleClickEvent
+    vtbl[].vtbl.mouseDoubleClickEvent = fcQWebView_vtable_callback_mouseDoubleClickEvent
   if not isNil(vtbl[].mouseReleaseEvent):
-    vtbl[].vtbl.mouseReleaseEvent = cQWebView_vtable_callback_mouseReleaseEvent
+    vtbl[].vtbl.mouseReleaseEvent = fcQWebView_vtable_callback_mouseReleaseEvent
   if not isNil(vtbl[].contextMenuEvent):
-    vtbl[].vtbl.contextMenuEvent = cQWebView_vtable_callback_contextMenuEvent
+    vtbl[].vtbl.contextMenuEvent = fcQWebView_vtable_callback_contextMenuEvent
   if not isNil(vtbl[].wheelEvent):
-    vtbl[].vtbl.wheelEvent = cQWebView_vtable_callback_wheelEvent
+    vtbl[].vtbl.wheelEvent = fcQWebView_vtable_callback_wheelEvent
   if not isNil(vtbl[].keyPressEvent):
-    vtbl[].vtbl.keyPressEvent = cQWebView_vtable_callback_keyPressEvent
+    vtbl[].vtbl.keyPressEvent = fcQWebView_vtable_callback_keyPressEvent
   if not isNil(vtbl[].keyReleaseEvent):
-    vtbl[].vtbl.keyReleaseEvent = cQWebView_vtable_callback_keyReleaseEvent
+    vtbl[].vtbl.keyReleaseEvent = fcQWebView_vtable_callback_keyReleaseEvent
   if not isNil(vtbl[].dragEnterEvent):
-    vtbl[].vtbl.dragEnterEvent = cQWebView_vtable_callback_dragEnterEvent
+    vtbl[].vtbl.dragEnterEvent = fcQWebView_vtable_callback_dragEnterEvent
   if not isNil(vtbl[].dragLeaveEvent):
-    vtbl[].vtbl.dragLeaveEvent = cQWebView_vtable_callback_dragLeaveEvent
+    vtbl[].vtbl.dragLeaveEvent = fcQWebView_vtable_callback_dragLeaveEvent
   if not isNil(vtbl[].dragMoveEvent):
-    vtbl[].vtbl.dragMoveEvent = cQWebView_vtable_callback_dragMoveEvent
+    vtbl[].vtbl.dragMoveEvent = fcQWebView_vtable_callback_dragMoveEvent
   if not isNil(vtbl[].dropEvent):
-    vtbl[].vtbl.dropEvent = cQWebView_vtable_callback_dropEvent
+    vtbl[].vtbl.dropEvent = fcQWebView_vtable_callback_dropEvent
   if not isNil(vtbl[].focusInEvent):
-    vtbl[].vtbl.focusInEvent = cQWebView_vtable_callback_focusInEvent
+    vtbl[].vtbl.focusInEvent = fcQWebView_vtable_callback_focusInEvent
   if not isNil(vtbl[].focusOutEvent):
-    vtbl[].vtbl.focusOutEvent = cQWebView_vtable_callback_focusOutEvent
+    vtbl[].vtbl.focusOutEvent = fcQWebView_vtable_callback_focusOutEvent
   if not isNil(vtbl[].inputMethodEvent):
-    vtbl[].vtbl.inputMethodEvent = cQWebView_vtable_callback_inputMethodEvent
+    vtbl[].vtbl.inputMethodEvent = fcQWebView_vtable_callback_inputMethodEvent
   if not isNil(vtbl[].focusNextPrevChild):
-    vtbl[].vtbl.focusNextPrevChild = cQWebView_vtable_callback_focusNextPrevChild
+    vtbl[].vtbl.focusNextPrevChild = fcQWebView_vtable_callback_focusNextPrevChild
   if not isNil(vtbl[].devType):
-    vtbl[].vtbl.devType = cQWebView_vtable_callback_devType
+    vtbl[].vtbl.devType = fcQWebView_vtable_callback_devType
   if not isNil(vtbl[].setVisible):
-    vtbl[].vtbl.setVisible = cQWebView_vtable_callback_setVisible
+    vtbl[].vtbl.setVisible = fcQWebView_vtable_callback_setVisible
   if not isNil(vtbl[].minimumSizeHint):
-    vtbl[].vtbl.minimumSizeHint = cQWebView_vtable_callback_minimumSizeHint
+    vtbl[].vtbl.minimumSizeHint = fcQWebView_vtable_callback_minimumSizeHint
   if not isNil(vtbl[].heightForWidth):
-    vtbl[].vtbl.heightForWidth = cQWebView_vtable_callback_heightForWidth
+    vtbl[].vtbl.heightForWidth = fcQWebView_vtable_callback_heightForWidth
   if not isNil(vtbl[].hasHeightForWidth):
-    vtbl[].vtbl.hasHeightForWidth = cQWebView_vtable_callback_hasHeightForWidth
+    vtbl[].vtbl.hasHeightForWidth = fcQWebView_vtable_callback_hasHeightForWidth
   if not isNil(vtbl[].paintEngine):
-    vtbl[].vtbl.paintEngine = cQWebView_vtable_callback_paintEngine
+    vtbl[].vtbl.paintEngine = fcQWebView_vtable_callback_paintEngine
   if not isNil(vtbl[].enterEvent):
-    vtbl[].vtbl.enterEvent = cQWebView_vtable_callback_enterEvent
+    vtbl[].vtbl.enterEvent = fcQWebView_vtable_callback_enterEvent
   if not isNil(vtbl[].leaveEvent):
-    vtbl[].vtbl.leaveEvent = cQWebView_vtable_callback_leaveEvent
+    vtbl[].vtbl.leaveEvent = fcQWebView_vtable_callback_leaveEvent
   if not isNil(vtbl[].moveEvent):
-    vtbl[].vtbl.moveEvent = cQWebView_vtable_callback_moveEvent
+    vtbl[].vtbl.moveEvent = fcQWebView_vtable_callback_moveEvent
   if not isNil(vtbl[].closeEvent):
-    vtbl[].vtbl.closeEvent = cQWebView_vtable_callback_closeEvent
+    vtbl[].vtbl.closeEvent = fcQWebView_vtable_callback_closeEvent
   if not isNil(vtbl[].tabletEvent):
-    vtbl[].vtbl.tabletEvent = cQWebView_vtable_callback_tabletEvent
+    vtbl[].vtbl.tabletEvent = fcQWebView_vtable_callback_tabletEvent
   if not isNil(vtbl[].actionEvent):
-    vtbl[].vtbl.actionEvent = cQWebView_vtable_callback_actionEvent
+    vtbl[].vtbl.actionEvent = fcQWebView_vtable_callback_actionEvent
   if not isNil(vtbl[].showEvent):
-    vtbl[].vtbl.showEvent = cQWebView_vtable_callback_showEvent
+    vtbl[].vtbl.showEvent = fcQWebView_vtable_callback_showEvent
   if not isNil(vtbl[].hideEvent):
-    vtbl[].vtbl.hideEvent = cQWebView_vtable_callback_hideEvent
+    vtbl[].vtbl.hideEvent = fcQWebView_vtable_callback_hideEvent
   if not isNil(vtbl[].nativeEvent):
-    vtbl[].vtbl.nativeEvent = cQWebView_vtable_callback_nativeEvent
+    vtbl[].vtbl.nativeEvent = fcQWebView_vtable_callback_nativeEvent
   if not isNil(vtbl[].metric):
-    vtbl[].vtbl.metric = cQWebView_vtable_callback_metric
+    vtbl[].vtbl.metric = fcQWebView_vtable_callback_metric
   if not isNil(vtbl[].initPainter):
-    vtbl[].vtbl.initPainter = cQWebView_vtable_callback_initPainter
+    vtbl[].vtbl.initPainter = fcQWebView_vtable_callback_initPainter
   if not isNil(vtbl[].redirected):
-    vtbl[].vtbl.redirected = cQWebView_vtable_callback_redirected
+    vtbl[].vtbl.redirected = fcQWebView_vtable_callback_redirected
   if not isNil(vtbl[].sharedPainter):
-    vtbl[].vtbl.sharedPainter = cQWebView_vtable_callback_sharedPainter
+    vtbl[].vtbl.sharedPainter = fcQWebView_vtable_callback_sharedPainter
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQWebView_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQWebView_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQWebView_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQWebView_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQWebView_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQWebView_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQWebView_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQWebView_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQWebView_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQWebView_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQWebView_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQWebView_vtable_callback_disconnectNotify
   gen_qwebview_types.QWebView(h: fcQWebView_new(addr(vtbl[].vtbl), addr(vtbl[]), parent.h), owned: true)
 
 proc create*(T: type gen_qwebview_types.QWebView,
@@ -1787,107 +1794,107 @@ proc create*(T: type gen_qwebview_types.QWebView,
     let vtbl = cast[ref QWebViewVTable](fcQWebView_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQWebView_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQWebView_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQWebView_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQWebView_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQWebView_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQWebView_vtable_callback_metacall
   if not isNil(vtbl[].inputMethodQuery):
-    vtbl[].vtbl.inputMethodQuery = cQWebView_vtable_callback_inputMethodQuery
+    vtbl[].vtbl.inputMethodQuery = fcQWebView_vtable_callback_inputMethodQuery
   if not isNil(vtbl[].sizeHint):
-    vtbl[].vtbl.sizeHint = cQWebView_vtable_callback_sizeHint
+    vtbl[].vtbl.sizeHint = fcQWebView_vtable_callback_sizeHint
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQWebView_vtable_callback_event
+    vtbl[].vtbl.event = fcQWebView_vtable_callback_event
   if not isNil(vtbl[].resizeEvent):
-    vtbl[].vtbl.resizeEvent = cQWebView_vtable_callback_resizeEvent
+    vtbl[].vtbl.resizeEvent = fcQWebView_vtable_callback_resizeEvent
   if not isNil(vtbl[].paintEvent):
-    vtbl[].vtbl.paintEvent = cQWebView_vtable_callback_paintEvent
+    vtbl[].vtbl.paintEvent = fcQWebView_vtable_callback_paintEvent
   if not isNil(vtbl[].createWindow):
-    vtbl[].vtbl.createWindow = cQWebView_vtable_callback_createWindow
+    vtbl[].vtbl.createWindow = fcQWebView_vtable_callback_createWindow
   if not isNil(vtbl[].changeEvent):
-    vtbl[].vtbl.changeEvent = cQWebView_vtable_callback_changeEvent
+    vtbl[].vtbl.changeEvent = fcQWebView_vtable_callback_changeEvent
   if not isNil(vtbl[].mouseMoveEvent):
-    vtbl[].vtbl.mouseMoveEvent = cQWebView_vtable_callback_mouseMoveEvent
+    vtbl[].vtbl.mouseMoveEvent = fcQWebView_vtable_callback_mouseMoveEvent
   if not isNil(vtbl[].mousePressEvent):
-    vtbl[].vtbl.mousePressEvent = cQWebView_vtable_callback_mousePressEvent
+    vtbl[].vtbl.mousePressEvent = fcQWebView_vtable_callback_mousePressEvent
   if not isNil(vtbl[].mouseDoubleClickEvent):
-    vtbl[].vtbl.mouseDoubleClickEvent = cQWebView_vtable_callback_mouseDoubleClickEvent
+    vtbl[].vtbl.mouseDoubleClickEvent = fcQWebView_vtable_callback_mouseDoubleClickEvent
   if not isNil(vtbl[].mouseReleaseEvent):
-    vtbl[].vtbl.mouseReleaseEvent = cQWebView_vtable_callback_mouseReleaseEvent
+    vtbl[].vtbl.mouseReleaseEvent = fcQWebView_vtable_callback_mouseReleaseEvent
   if not isNil(vtbl[].contextMenuEvent):
-    vtbl[].vtbl.contextMenuEvent = cQWebView_vtable_callback_contextMenuEvent
+    vtbl[].vtbl.contextMenuEvent = fcQWebView_vtable_callback_contextMenuEvent
   if not isNil(vtbl[].wheelEvent):
-    vtbl[].vtbl.wheelEvent = cQWebView_vtable_callback_wheelEvent
+    vtbl[].vtbl.wheelEvent = fcQWebView_vtable_callback_wheelEvent
   if not isNil(vtbl[].keyPressEvent):
-    vtbl[].vtbl.keyPressEvent = cQWebView_vtable_callback_keyPressEvent
+    vtbl[].vtbl.keyPressEvent = fcQWebView_vtable_callback_keyPressEvent
   if not isNil(vtbl[].keyReleaseEvent):
-    vtbl[].vtbl.keyReleaseEvent = cQWebView_vtable_callback_keyReleaseEvent
+    vtbl[].vtbl.keyReleaseEvent = fcQWebView_vtable_callback_keyReleaseEvent
   if not isNil(vtbl[].dragEnterEvent):
-    vtbl[].vtbl.dragEnterEvent = cQWebView_vtable_callback_dragEnterEvent
+    vtbl[].vtbl.dragEnterEvent = fcQWebView_vtable_callback_dragEnterEvent
   if not isNil(vtbl[].dragLeaveEvent):
-    vtbl[].vtbl.dragLeaveEvent = cQWebView_vtable_callback_dragLeaveEvent
+    vtbl[].vtbl.dragLeaveEvent = fcQWebView_vtable_callback_dragLeaveEvent
   if not isNil(vtbl[].dragMoveEvent):
-    vtbl[].vtbl.dragMoveEvent = cQWebView_vtable_callback_dragMoveEvent
+    vtbl[].vtbl.dragMoveEvent = fcQWebView_vtable_callback_dragMoveEvent
   if not isNil(vtbl[].dropEvent):
-    vtbl[].vtbl.dropEvent = cQWebView_vtable_callback_dropEvent
+    vtbl[].vtbl.dropEvent = fcQWebView_vtable_callback_dropEvent
   if not isNil(vtbl[].focusInEvent):
-    vtbl[].vtbl.focusInEvent = cQWebView_vtable_callback_focusInEvent
+    vtbl[].vtbl.focusInEvent = fcQWebView_vtable_callback_focusInEvent
   if not isNil(vtbl[].focusOutEvent):
-    vtbl[].vtbl.focusOutEvent = cQWebView_vtable_callback_focusOutEvent
+    vtbl[].vtbl.focusOutEvent = fcQWebView_vtable_callback_focusOutEvent
   if not isNil(vtbl[].inputMethodEvent):
-    vtbl[].vtbl.inputMethodEvent = cQWebView_vtable_callback_inputMethodEvent
+    vtbl[].vtbl.inputMethodEvent = fcQWebView_vtable_callback_inputMethodEvent
   if not isNil(vtbl[].focusNextPrevChild):
-    vtbl[].vtbl.focusNextPrevChild = cQWebView_vtable_callback_focusNextPrevChild
+    vtbl[].vtbl.focusNextPrevChild = fcQWebView_vtable_callback_focusNextPrevChild
   if not isNil(vtbl[].devType):
-    vtbl[].vtbl.devType = cQWebView_vtable_callback_devType
+    vtbl[].vtbl.devType = fcQWebView_vtable_callback_devType
   if not isNil(vtbl[].setVisible):
-    vtbl[].vtbl.setVisible = cQWebView_vtable_callback_setVisible
+    vtbl[].vtbl.setVisible = fcQWebView_vtable_callback_setVisible
   if not isNil(vtbl[].minimumSizeHint):
-    vtbl[].vtbl.minimumSizeHint = cQWebView_vtable_callback_minimumSizeHint
+    vtbl[].vtbl.minimumSizeHint = fcQWebView_vtable_callback_minimumSizeHint
   if not isNil(vtbl[].heightForWidth):
-    vtbl[].vtbl.heightForWidth = cQWebView_vtable_callback_heightForWidth
+    vtbl[].vtbl.heightForWidth = fcQWebView_vtable_callback_heightForWidth
   if not isNil(vtbl[].hasHeightForWidth):
-    vtbl[].vtbl.hasHeightForWidth = cQWebView_vtable_callback_hasHeightForWidth
+    vtbl[].vtbl.hasHeightForWidth = fcQWebView_vtable_callback_hasHeightForWidth
   if not isNil(vtbl[].paintEngine):
-    vtbl[].vtbl.paintEngine = cQWebView_vtable_callback_paintEngine
+    vtbl[].vtbl.paintEngine = fcQWebView_vtable_callback_paintEngine
   if not isNil(vtbl[].enterEvent):
-    vtbl[].vtbl.enterEvent = cQWebView_vtable_callback_enterEvent
+    vtbl[].vtbl.enterEvent = fcQWebView_vtable_callback_enterEvent
   if not isNil(vtbl[].leaveEvent):
-    vtbl[].vtbl.leaveEvent = cQWebView_vtable_callback_leaveEvent
+    vtbl[].vtbl.leaveEvent = fcQWebView_vtable_callback_leaveEvent
   if not isNil(vtbl[].moveEvent):
-    vtbl[].vtbl.moveEvent = cQWebView_vtable_callback_moveEvent
+    vtbl[].vtbl.moveEvent = fcQWebView_vtable_callback_moveEvent
   if not isNil(vtbl[].closeEvent):
-    vtbl[].vtbl.closeEvent = cQWebView_vtable_callback_closeEvent
+    vtbl[].vtbl.closeEvent = fcQWebView_vtable_callback_closeEvent
   if not isNil(vtbl[].tabletEvent):
-    vtbl[].vtbl.tabletEvent = cQWebView_vtable_callback_tabletEvent
+    vtbl[].vtbl.tabletEvent = fcQWebView_vtable_callback_tabletEvent
   if not isNil(vtbl[].actionEvent):
-    vtbl[].vtbl.actionEvent = cQWebView_vtable_callback_actionEvent
+    vtbl[].vtbl.actionEvent = fcQWebView_vtable_callback_actionEvent
   if not isNil(vtbl[].showEvent):
-    vtbl[].vtbl.showEvent = cQWebView_vtable_callback_showEvent
+    vtbl[].vtbl.showEvent = fcQWebView_vtable_callback_showEvent
   if not isNil(vtbl[].hideEvent):
-    vtbl[].vtbl.hideEvent = cQWebView_vtable_callback_hideEvent
+    vtbl[].vtbl.hideEvent = fcQWebView_vtable_callback_hideEvent
   if not isNil(vtbl[].nativeEvent):
-    vtbl[].vtbl.nativeEvent = cQWebView_vtable_callback_nativeEvent
+    vtbl[].vtbl.nativeEvent = fcQWebView_vtable_callback_nativeEvent
   if not isNil(vtbl[].metric):
-    vtbl[].vtbl.metric = cQWebView_vtable_callback_metric
+    vtbl[].vtbl.metric = fcQWebView_vtable_callback_metric
   if not isNil(vtbl[].initPainter):
-    vtbl[].vtbl.initPainter = cQWebView_vtable_callback_initPainter
+    vtbl[].vtbl.initPainter = fcQWebView_vtable_callback_initPainter
   if not isNil(vtbl[].redirected):
-    vtbl[].vtbl.redirected = cQWebView_vtable_callback_redirected
+    vtbl[].vtbl.redirected = fcQWebView_vtable_callback_redirected
   if not isNil(vtbl[].sharedPainter):
-    vtbl[].vtbl.sharedPainter = cQWebView_vtable_callback_sharedPainter
+    vtbl[].vtbl.sharedPainter = fcQWebView_vtable_callback_sharedPainter
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQWebView_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQWebView_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQWebView_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQWebView_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQWebView_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQWebView_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQWebView_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQWebView_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQWebView_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQWebView_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQWebView_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQWebView_vtable_callback_disconnectNotify
   gen_qwebview_types.QWebView(h: fcQWebView_new2(addr(vtbl[].vtbl), addr(vtbl[])), owned: true)
 
 const cQWebView_mvtbl = cQWebViewVTable(
@@ -1895,57 +1902,58 @@ const cQWebView_mvtbl = cQWebViewVTable(
     let inst = cast[ptr typeof(VirtualQWebView()[])](self.fcQWebView_vtbl())
     inst[].h = nil
     inst[].owned = false,
-  metaObject: cQWebView_method_callback_metaObject,
-  metacast: cQWebView_method_callback_metacast,
-  metacall: cQWebView_method_callback_metacall,
-  inputMethodQuery: cQWebView_method_callback_inputMethodQuery,
-  sizeHint: cQWebView_method_callback_sizeHint,
-  event: cQWebView_method_callback_event,
-  resizeEvent: cQWebView_method_callback_resizeEvent,
-  paintEvent: cQWebView_method_callback_paintEvent,
-  createWindow: cQWebView_method_callback_createWindow,
-  changeEvent: cQWebView_method_callback_changeEvent,
-  mouseMoveEvent: cQWebView_method_callback_mouseMoveEvent,
-  mousePressEvent: cQWebView_method_callback_mousePressEvent,
-  mouseDoubleClickEvent: cQWebView_method_callback_mouseDoubleClickEvent,
-  mouseReleaseEvent: cQWebView_method_callback_mouseReleaseEvent,
-  contextMenuEvent: cQWebView_method_callback_contextMenuEvent,
-  wheelEvent: cQWebView_method_callback_wheelEvent,
-  keyPressEvent: cQWebView_method_callback_keyPressEvent,
-  keyReleaseEvent: cQWebView_method_callback_keyReleaseEvent,
-  dragEnterEvent: cQWebView_method_callback_dragEnterEvent,
-  dragLeaveEvent: cQWebView_method_callback_dragLeaveEvent,
-  dragMoveEvent: cQWebView_method_callback_dragMoveEvent,
-  dropEvent: cQWebView_method_callback_dropEvent,
-  focusInEvent: cQWebView_method_callback_focusInEvent,
-  focusOutEvent: cQWebView_method_callback_focusOutEvent,
-  inputMethodEvent: cQWebView_method_callback_inputMethodEvent,
-  focusNextPrevChild: cQWebView_method_callback_focusNextPrevChild,
-  devType: cQWebView_method_callback_devType,
-  setVisible: cQWebView_method_callback_setVisible,
-  minimumSizeHint: cQWebView_method_callback_minimumSizeHint,
-  heightForWidth: cQWebView_method_callback_heightForWidth,
-  hasHeightForWidth: cQWebView_method_callback_hasHeightForWidth,
-  paintEngine: cQWebView_method_callback_paintEngine,
-  enterEvent: cQWebView_method_callback_enterEvent,
-  leaveEvent: cQWebView_method_callback_leaveEvent,
-  moveEvent: cQWebView_method_callback_moveEvent,
-  closeEvent: cQWebView_method_callback_closeEvent,
-  tabletEvent: cQWebView_method_callback_tabletEvent,
-  actionEvent: cQWebView_method_callback_actionEvent,
-  showEvent: cQWebView_method_callback_showEvent,
-  hideEvent: cQWebView_method_callback_hideEvent,
-  nativeEvent: cQWebView_method_callback_nativeEvent,
-  metric: cQWebView_method_callback_metric,
-  initPainter: cQWebView_method_callback_initPainter,
-  redirected: cQWebView_method_callback_redirected,
-  sharedPainter: cQWebView_method_callback_sharedPainter,
-  eventFilter: cQWebView_method_callback_eventFilter,
-  timerEvent: cQWebView_method_callback_timerEvent,
-  childEvent: cQWebView_method_callback_childEvent,
-  customEvent: cQWebView_method_callback_customEvent,
-  connectNotify: cQWebView_method_callback_connectNotify,
-  disconnectNotify: cQWebView_method_callback_disconnectNotify,
+
+  metaObject: fcQWebView_method_callback_metaObject,
+  metacast: fcQWebView_method_callback_metacast,
+  metacall: fcQWebView_method_callback_metacall,
+  inputMethodQuery: fcQWebView_method_callback_inputMethodQuery,
+  sizeHint: fcQWebView_method_callback_sizeHint,
+  event: fcQWebView_method_callback_event,
+  resizeEvent: fcQWebView_method_callback_resizeEvent,
+  paintEvent: fcQWebView_method_callback_paintEvent,
+  createWindow: fcQWebView_method_callback_createWindow,
+  changeEvent: fcQWebView_method_callback_changeEvent,
+  mouseMoveEvent: fcQWebView_method_callback_mouseMoveEvent,
+  mousePressEvent: fcQWebView_method_callback_mousePressEvent,
+  mouseDoubleClickEvent: fcQWebView_method_callback_mouseDoubleClickEvent,
+  mouseReleaseEvent: fcQWebView_method_callback_mouseReleaseEvent,
+  contextMenuEvent: fcQWebView_method_callback_contextMenuEvent,
+  wheelEvent: fcQWebView_method_callback_wheelEvent,
+  keyPressEvent: fcQWebView_method_callback_keyPressEvent,
+  keyReleaseEvent: fcQWebView_method_callback_keyReleaseEvent,
+  dragEnterEvent: fcQWebView_method_callback_dragEnterEvent,
+  dragLeaveEvent: fcQWebView_method_callback_dragLeaveEvent,
+  dragMoveEvent: fcQWebView_method_callback_dragMoveEvent,
+  dropEvent: fcQWebView_method_callback_dropEvent,
+  focusInEvent: fcQWebView_method_callback_focusInEvent,
+  focusOutEvent: fcQWebView_method_callback_focusOutEvent,
+  inputMethodEvent: fcQWebView_method_callback_inputMethodEvent,
+  focusNextPrevChild: fcQWebView_method_callback_focusNextPrevChild,
+  devType: fcQWebView_method_callback_devType,
+  setVisible: fcQWebView_method_callback_setVisible,
+  minimumSizeHint: fcQWebView_method_callback_minimumSizeHint,
+  heightForWidth: fcQWebView_method_callback_heightForWidth,
+  hasHeightForWidth: fcQWebView_method_callback_hasHeightForWidth,
+  paintEngine: fcQWebView_method_callback_paintEngine,
+  enterEvent: fcQWebView_method_callback_enterEvent,
+  leaveEvent: fcQWebView_method_callback_leaveEvent,
+  moveEvent: fcQWebView_method_callback_moveEvent,
+  closeEvent: fcQWebView_method_callback_closeEvent,
+  tabletEvent: fcQWebView_method_callback_tabletEvent,
+  actionEvent: fcQWebView_method_callback_actionEvent,
+  showEvent: fcQWebView_method_callback_showEvent,
+  hideEvent: fcQWebView_method_callback_hideEvent,
+  nativeEvent: fcQWebView_method_callback_nativeEvent,
+  metric: fcQWebView_method_callback_metric,
+  initPainter: fcQWebView_method_callback_initPainter,
+  redirected: fcQWebView_method_callback_redirected,
+  sharedPainter: fcQWebView_method_callback_sharedPainter,
+  eventFilter: fcQWebView_method_callback_eventFilter,
+  timerEvent: fcQWebView_method_callback_timerEvent,
+  childEvent: fcQWebView_method_callback_childEvent,
+  customEvent: fcQWebView_method_callback_customEvent,
+  connectNotify: fcQWebView_method_callback_connectNotify,
+  disconnectNotify: fcQWebView_method_callback_disconnectNotify,
 )
 proc create*(T: type gen_qwebview_types.QWebView,
     parent: gen_qwidget_types.QWidget,

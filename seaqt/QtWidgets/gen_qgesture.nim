@@ -100,6 +100,7 @@ proc fcQGesture_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "
 proc fcQGesture_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QGesture_trUtf83".}
 proc fcQGesture_vtbl(self: pointer): pointer {.importc: "QGesture_vtbl".}
 proc fcQGesture_vdata(self: pointer): pointer {.importc: "QGesture_vdata".}
+
 type cQGestureVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -147,6 +148,7 @@ proc fcQPanGesture_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc
 proc fcQPanGesture_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QPanGesture_trUtf83".}
 proc fcQPanGesture_vtbl(self: pointer): pointer {.importc: "QPanGesture_vtbl".}
 proc fcQPanGesture_vdata(self: pointer): pointer {.importc: "QPanGesture_vdata".}
+
 type cQPanGestureVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -209,6 +211,7 @@ proc fcQPinchGesture_trUtf82(s: cstring, c: cstring): struct_miqt_string {.impor
 proc fcQPinchGesture_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QPinchGesture_trUtf83".}
 proc fcQPinchGesture_vtbl(self: pointer): pointer {.importc: "QPinchGesture_vtbl".}
 proc fcQPinchGesture_vdata(self: pointer): pointer {.importc: "QPinchGesture_vdata".}
+
 type cQPinchGestureVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -253,6 +256,7 @@ proc fcQSwipeGesture_trUtf82(s: cstring, c: cstring): struct_miqt_string {.impor
 proc fcQSwipeGesture_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QSwipeGesture_trUtf83".}
 proc fcQSwipeGesture_vtbl(self: pointer): pointer {.importc: "QSwipeGesture_vtbl".}
 proc fcQSwipeGesture_vdata(self: pointer): pointer {.importc: "QSwipeGesture_vdata".}
+
 type cQSwipeGestureVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -295,6 +299,7 @@ proc fcQTapGesture_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc
 proc fcQTapGesture_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QTapGesture_trUtf83".}
 proc fcQTapGesture_vtbl(self: pointer): pointer {.importc: "QTapGesture_vtbl".}
 proc fcQTapGesture_vdata(self: pointer): pointer {.importc: "QTapGesture_vdata".}
+
 type cQTapGestureVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -339,6 +344,7 @@ proc fcQTapAndHoldGesture_trUtf82(s: cstring, c: cstring): struct_miqt_string {.
 proc fcQTapAndHoldGesture_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QTapAndHoldGesture_trUtf83".}
 proc fcQTapAndHoldGesture_vtbl(self: pointer): pointer {.importc: "QTapAndHoldGesture_vtbl".}
 proc fcQTapAndHoldGesture_vdata(self: pointer): pointer {.importc: "QTapAndHoldGesture_vdata".}
+
 type cQTapAndHoldGestureVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -465,6 +471,7 @@ type QGesturechildEventProc* = proc(self: QGesture, event: gen_qcoreevent_types.
 type QGesturecustomEventProc* = proc(self: QGesture, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QGestureconnectNotifyProc* = proc(self: QGesture, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QGesturedisconnectNotifyProc* = proc(self: QGesture, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+
 type QGestureVTable* {.inheritable, pure.} = object
   vtbl: cQGestureVTable
   metaObject*: QGesturemetaObjectProc
@@ -477,10 +484,39 @@ type QGestureVTable* {.inheritable, pure.} = object
   customEvent*: QGesturecustomEventProc
   connectNotify*: QGestureconnectNotifyProc
   disconnectNotify*: QGesturedisconnectNotifyProc
+
 proc QGesturemetaObject*(self: gen_qgesture_types.QGesture): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQGesture_virtualbase_metaObject(self.h), owned: false)
 
-proc cQGesture_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
+proc QGesturemetacast*(self: gen_qgesture_types.QGesture, param1: cstring): pointer =
+  fcQGesture_virtualbase_metacast(self.h, param1)
+
+proc QGesturemetacall*(self: gen_qgesture_types.QGesture, param1: cint, param2: cint, param3: pointer): cint =
+  fcQGesture_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+proc QGestureevent*(self: gen_qgesture_types.QGesture, event: gen_qcoreevent_types.QEvent): bool =
+  fcQGesture_virtualbase_event(self.h, event.h)
+
+proc QGestureeventFilter*(self: gen_qgesture_types.QGesture, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
+  fcQGesture_virtualbase_eventFilter(self.h, watched.h, event.h)
+
+proc QGesturetimerEvent*(self: gen_qgesture_types.QGesture, event: gen_qcoreevent_types.QTimerEvent): void =
+  fcQGesture_virtualbase_timerEvent(self.h, event.h)
+
+proc QGesturechildEvent*(self: gen_qgesture_types.QGesture, event: gen_qcoreevent_types.QChildEvent): void =
+  fcQGesture_virtualbase_childEvent(self.h, event.h)
+
+proc QGesturecustomEvent*(self: gen_qgesture_types.QGesture, event: gen_qcoreevent_types.QEvent): void =
+  fcQGesture_virtualbase_customEvent(self.h, event.h)
+
+proc QGestureconnectNotify*(self: gen_qgesture_types.QGesture, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQGesture_virtualbase_connectNotify(self.h, signal.h)
+
+proc QGesturedisconnectNotify*(self: gen_qgesture_types.QGesture, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQGesture_virtualbase_disconnectNotify(self.h, signal.h)
+
+
+proc fcQGesture_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QGestureVTable](fcQGesture_vdata(self))
   let self = QGesture(h: self)
   var virtualReturn = vtbl[].metaObject(self)
@@ -489,20 +525,14 @@ proc cQGesture_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QGesturemetacast*(self: gen_qgesture_types.QGesture, param1: cstring): pointer =
-  fcQGesture_virtualbase_metacast(self.h, param1)
-
-proc cQGesture_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+proc fcQGesture_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QGestureVTable](fcQGesture_vdata(self))
   let self = QGesture(h: self)
   let slotval1 = (param1)
   var virtualReturn = vtbl[].metacast(self, slotval1)
   virtualReturn
 
-proc QGesturemetacall*(self: gen_qgesture_types.QGesture, param1: cint, param2: cint, param3: pointer): cint =
-  fcQGesture_virtualbase_metacall(self.h, cint(param1), param2, param3)
-
-proc cQGesture_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+proc fcQGesture_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QGestureVTable](fcQGesture_vdata(self))
   let self = QGesture(h: self)
   let slotval1 = cint(param1)
@@ -511,20 +541,14 @@ proc cQGesture_vtable_callback_metacall(self: pointer, param1: cint, param2: cin
   var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QGestureevent*(self: gen_qgesture_types.QGesture, event: gen_qcoreevent_types.QEvent): bool =
-  fcQGesture_virtualbase_event(self.h, event.h)
-
-proc cQGesture_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
+proc fcQGesture_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QGestureVTable](fcQGesture_vdata(self))
   let self = QGesture(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
-proc QGestureeventFilter*(self: gen_qgesture_types.QGesture, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
-  fcQGesture_virtualbase_eventFilter(self.h, watched.h, event.h)
-
-proc cQGesture_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+proc fcQGesture_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QGestureVTable](fcQGesture_vdata(self))
   let self = QGesture(h: self)
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
@@ -532,46 +556,31 @@ proc cQGesture_vtable_callback_eventFilter(self: pointer, watched: pointer, even
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
-proc QGesturetimerEvent*(self: gen_qgesture_types.QGesture, event: gen_qcoreevent_types.QTimerEvent): void =
-  fcQGesture_virtualbase_timerEvent(self.h, event.h)
-
-proc cQGesture_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQGesture_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGestureVTable](fcQGesture_vdata(self))
   let self = QGesture(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
-proc QGesturechildEvent*(self: gen_qgesture_types.QGesture, event: gen_qcoreevent_types.QChildEvent): void =
-  fcQGesture_virtualbase_childEvent(self.h, event.h)
-
-proc cQGesture_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQGesture_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGestureVTable](fcQGesture_vdata(self))
   let self = QGesture(h: self)
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
-proc QGesturecustomEvent*(self: gen_qgesture_types.QGesture, event: gen_qcoreevent_types.QEvent): void =
-  fcQGesture_virtualbase_customEvent(self.h, event.h)
-
-proc cQGesture_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQGesture_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGestureVTable](fcQGesture_vdata(self))
   let self = QGesture(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
-proc QGestureconnectNotify*(self: gen_qgesture_types.QGesture, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQGesture_virtualbase_connectNotify(self.h, signal.h)
-
-proc cQGesture_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQGesture_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGestureVTable](fcQGesture_vdata(self))
   let self = QGesture(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
-proc QGesturedisconnectNotify*(self: gen_qgesture_types.QGesture, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQGesture_virtualbase_disconnectNotify(self.h, signal.h)
-
-proc cQGesture_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQGesture_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGestureVTable](fcQGesture_vdata(self))
   let self = QGesture(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
@@ -579,9 +588,29 @@ proc cQGesture_vtable_callback_disconnectNotify(self: pointer, signal: pointer):
 
 type VirtualQGesture* {.inheritable.} = ref object of QGesture
   vtbl*: cQGestureVTable
+
 method metaObject*(self: VirtualQGesture): gen_qobjectdefs_types.QMetaObject {.base.} =
   QGesturemetaObject(self[])
-proc cQGesture_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
+method metacast*(self: VirtualQGesture, param1: cstring): pointer {.base.} =
+  QGesturemetacast(self[], param1)
+method metacall*(self: VirtualQGesture, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QGesturemetacall(self[], param1, param2, param3)
+method event*(self: VirtualQGesture, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QGestureevent(self[], event)
+method eventFilter*(self: VirtualQGesture, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QGestureeventFilter(self[], watched, event)
+method timerEvent*(self: VirtualQGesture, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QGesturetimerEvent(self[], event)
+method childEvent*(self: VirtualQGesture, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QGesturechildEvent(self[], event)
+method customEvent*(self: VirtualQGesture, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QGesturecustomEvent(self[], event)
+method connectNotify*(self: VirtualQGesture, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QGestureconnectNotify(self[], signal)
+method disconnectNotify*(self: VirtualQGesture, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QGesturedisconnectNotify(self[], signal)
+
+proc fcQGesture_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGesture](fcQGesture_vdata(self))
   var virtualReturn = inst.metaObject()
   virtualReturn.owned = false # TODO move?
@@ -589,17 +618,13 @@ proc cQGesture_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-method metacast*(self: VirtualQGesture, param1: cstring): pointer {.base.} =
-  QGesturemetacast(self[], param1)
-proc cQGesture_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+proc fcQGesture_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQGesture](fcQGesture_vdata(self))
   let slotval1 = (param1)
   var virtualReturn = inst.metacast(slotval1)
   virtualReturn
 
-method metacall*(self: VirtualQGesture, param1: cint, param2: cint, param3: pointer): cint {.base.} =
-  QGesturemetacall(self[], param1, param2, param3)
-proc cQGesture_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+proc fcQGesture_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQGesture](fcQGesture_vdata(self))
   let slotval1 = cint(param1)
   let slotval2 = param2
@@ -607,57 +632,44 @@ proc cQGesture_method_callback_metacall(self: pointer, param1: cint, param2: cin
   var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
-method event*(self: VirtualQGesture, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QGestureevent(self[], event)
-proc cQGesture_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
+proc fcQGesture_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQGesture](fcQGesture_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
-method eventFilter*(self: VirtualQGesture, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QGestureeventFilter(self[], watched, event)
-proc cQGesture_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+proc fcQGesture_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQGesture](fcQGesture_vdata(self))
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
   let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
-method timerEvent*(self: VirtualQGesture, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
-  QGesturetimerEvent(self[], event)
-proc cQGesture_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQGesture_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGesture](fcQGesture_vdata(self))
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
-method childEvent*(self: VirtualQGesture, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
-  QGesturechildEvent(self[], event)
-proc cQGesture_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQGesture_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGesture](fcQGesture_vdata(self))
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
-method customEvent*(self: VirtualQGesture, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QGesturecustomEvent(self[], event)
-proc cQGesture_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQGesture_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGesture](fcQGesture_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
-method connectNotify*(self: VirtualQGesture, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QGestureconnectNotify(self[], signal)
-proc cQGesture_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQGesture_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGesture](fcQGesture_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
-method disconnectNotify*(self: VirtualQGesture, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QGesturedisconnectNotify(self[], signal)
-proc cQGesture_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQGesture_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGesture](fcQGesture_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
+
 
 proc sender*(self: gen_qgesture_types.QGesture): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQGesture_protectedbase_sender(self.h), owned: false)
@@ -679,25 +691,25 @@ proc create*(T: type gen_qgesture_types.QGesture,
     let vtbl = cast[ref QGestureVTable](fcQGesture_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQGesture_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQGesture_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQGesture_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQGesture_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQGesture_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQGesture_vtable_callback_metacall
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQGesture_vtable_callback_event
+    vtbl[].vtbl.event = fcQGesture_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQGesture_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQGesture_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQGesture_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQGesture_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQGesture_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQGesture_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQGesture_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQGesture_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQGesture_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQGesture_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQGesture_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQGesture_vtable_callback_disconnectNotify
   gen_qgesture_types.QGesture(h: fcQGesture_new(addr(vtbl[].vtbl), addr(vtbl[])), owned: true)
 
 proc create*(T: type gen_qgesture_types.QGesture,
@@ -709,25 +721,25 @@ proc create*(T: type gen_qgesture_types.QGesture,
     let vtbl = cast[ref QGestureVTable](fcQGesture_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQGesture_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQGesture_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQGesture_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQGesture_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQGesture_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQGesture_vtable_callback_metacall
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQGesture_vtable_callback_event
+    vtbl[].vtbl.event = fcQGesture_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQGesture_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQGesture_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQGesture_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQGesture_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQGesture_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQGesture_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQGesture_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQGesture_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQGesture_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQGesture_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQGesture_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQGesture_vtable_callback_disconnectNotify
   gen_qgesture_types.QGesture(h: fcQGesture_new2(addr(vtbl[].vtbl), addr(vtbl[]), parent.h), owned: true)
 
 const cQGesture_mvtbl = cQGestureVTable(
@@ -735,16 +747,17 @@ const cQGesture_mvtbl = cQGestureVTable(
     let inst = cast[ptr typeof(VirtualQGesture()[])](self.fcQGesture_vtbl())
     inst[].h = nil
     inst[].owned = false,
-  metaObject: cQGesture_method_callback_metaObject,
-  metacast: cQGesture_method_callback_metacast,
-  metacall: cQGesture_method_callback_metacall,
-  event: cQGesture_method_callback_event,
-  eventFilter: cQGesture_method_callback_eventFilter,
-  timerEvent: cQGesture_method_callback_timerEvent,
-  childEvent: cQGesture_method_callback_childEvent,
-  customEvent: cQGesture_method_callback_customEvent,
-  connectNotify: cQGesture_method_callback_connectNotify,
-  disconnectNotify: cQGesture_method_callback_disconnectNotify,
+
+  metaObject: fcQGesture_method_callback_metaObject,
+  metacast: fcQGesture_method_callback_metacast,
+  metacall: fcQGesture_method_callback_metacall,
+  event: fcQGesture_method_callback_event,
+  eventFilter: fcQGesture_method_callback_eventFilter,
+  timerEvent: fcQGesture_method_callback_timerEvent,
+  childEvent: fcQGesture_method_callback_childEvent,
+  customEvent: fcQGesture_method_callback_customEvent,
+  connectNotify: fcQGesture_method_callback_connectNotify,
+  disconnectNotify: fcQGesture_method_callback_disconnectNotify,
 )
 proc create*(T: type gen_qgesture_types.QGesture,
     inst: VirtualQGesture) =
@@ -837,6 +850,7 @@ type QPanGesturechildEventProc* = proc(self: QPanGesture, event: gen_qcoreevent_
 type QPanGesturecustomEventProc* = proc(self: QPanGesture, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QPanGestureconnectNotifyProc* = proc(self: QPanGesture, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QPanGesturedisconnectNotifyProc* = proc(self: QPanGesture, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+
 type QPanGestureVTable* {.inheritable, pure.} = object
   vtbl: cQPanGestureVTable
   metaObject*: QPanGesturemetaObjectProc
@@ -849,10 +863,39 @@ type QPanGestureVTable* {.inheritable, pure.} = object
   customEvent*: QPanGesturecustomEventProc
   connectNotify*: QPanGestureconnectNotifyProc
   disconnectNotify*: QPanGesturedisconnectNotifyProc
+
 proc QPanGesturemetaObject*(self: gen_qgesture_types.QPanGesture): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQPanGesture_virtualbase_metaObject(self.h), owned: false)
 
-proc cQPanGesture_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
+proc QPanGesturemetacast*(self: gen_qgesture_types.QPanGesture, param1: cstring): pointer =
+  fcQPanGesture_virtualbase_metacast(self.h, param1)
+
+proc QPanGesturemetacall*(self: gen_qgesture_types.QPanGesture, param1: cint, param2: cint, param3: pointer): cint =
+  fcQPanGesture_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+proc QPanGestureevent*(self: gen_qgesture_types.QPanGesture, event: gen_qcoreevent_types.QEvent): bool =
+  fcQPanGesture_virtualbase_event(self.h, event.h)
+
+proc QPanGestureeventFilter*(self: gen_qgesture_types.QPanGesture, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
+  fcQPanGesture_virtualbase_eventFilter(self.h, watched.h, event.h)
+
+proc QPanGesturetimerEvent*(self: gen_qgesture_types.QPanGesture, event: gen_qcoreevent_types.QTimerEvent): void =
+  fcQPanGesture_virtualbase_timerEvent(self.h, event.h)
+
+proc QPanGesturechildEvent*(self: gen_qgesture_types.QPanGesture, event: gen_qcoreevent_types.QChildEvent): void =
+  fcQPanGesture_virtualbase_childEvent(self.h, event.h)
+
+proc QPanGesturecustomEvent*(self: gen_qgesture_types.QPanGesture, event: gen_qcoreevent_types.QEvent): void =
+  fcQPanGesture_virtualbase_customEvent(self.h, event.h)
+
+proc QPanGestureconnectNotify*(self: gen_qgesture_types.QPanGesture, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQPanGesture_virtualbase_connectNotify(self.h, signal.h)
+
+proc QPanGesturedisconnectNotify*(self: gen_qgesture_types.QPanGesture, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQPanGesture_virtualbase_disconnectNotify(self.h, signal.h)
+
+
+proc fcQPanGesture_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QPanGestureVTable](fcQPanGesture_vdata(self))
   let self = QPanGesture(h: self)
   var virtualReturn = vtbl[].metaObject(self)
@@ -861,20 +904,14 @@ proc cQPanGesture_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QPanGesturemetacast*(self: gen_qgesture_types.QPanGesture, param1: cstring): pointer =
-  fcQPanGesture_virtualbase_metacast(self.h, param1)
-
-proc cQPanGesture_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+proc fcQPanGesture_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QPanGestureVTable](fcQPanGesture_vdata(self))
   let self = QPanGesture(h: self)
   let slotval1 = (param1)
   var virtualReturn = vtbl[].metacast(self, slotval1)
   virtualReturn
 
-proc QPanGesturemetacall*(self: gen_qgesture_types.QPanGesture, param1: cint, param2: cint, param3: pointer): cint =
-  fcQPanGesture_virtualbase_metacall(self.h, cint(param1), param2, param3)
-
-proc cQPanGesture_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+proc fcQPanGesture_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QPanGestureVTable](fcQPanGesture_vdata(self))
   let self = QPanGesture(h: self)
   let slotval1 = cint(param1)
@@ -883,20 +920,14 @@ proc cQPanGesture_vtable_callback_metacall(self: pointer, param1: cint, param2: 
   var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QPanGestureevent*(self: gen_qgesture_types.QPanGesture, event: gen_qcoreevent_types.QEvent): bool =
-  fcQPanGesture_virtualbase_event(self.h, event.h)
-
-proc cQPanGesture_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
+proc fcQPanGesture_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QPanGestureVTable](fcQPanGesture_vdata(self))
   let self = QPanGesture(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
-proc QPanGestureeventFilter*(self: gen_qgesture_types.QPanGesture, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
-  fcQPanGesture_virtualbase_eventFilter(self.h, watched.h, event.h)
-
-proc cQPanGesture_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+proc fcQPanGesture_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QPanGestureVTable](fcQPanGesture_vdata(self))
   let self = QPanGesture(h: self)
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
@@ -904,46 +935,31 @@ proc cQPanGesture_vtable_callback_eventFilter(self: pointer, watched: pointer, e
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
-proc QPanGesturetimerEvent*(self: gen_qgesture_types.QPanGesture, event: gen_qcoreevent_types.QTimerEvent): void =
-  fcQPanGesture_virtualbase_timerEvent(self.h, event.h)
-
-proc cQPanGesture_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQPanGesture_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPanGestureVTable](fcQPanGesture_vdata(self))
   let self = QPanGesture(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
-proc QPanGesturechildEvent*(self: gen_qgesture_types.QPanGesture, event: gen_qcoreevent_types.QChildEvent): void =
-  fcQPanGesture_virtualbase_childEvent(self.h, event.h)
-
-proc cQPanGesture_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQPanGesture_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPanGestureVTable](fcQPanGesture_vdata(self))
   let self = QPanGesture(h: self)
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
-proc QPanGesturecustomEvent*(self: gen_qgesture_types.QPanGesture, event: gen_qcoreevent_types.QEvent): void =
-  fcQPanGesture_virtualbase_customEvent(self.h, event.h)
-
-proc cQPanGesture_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQPanGesture_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPanGestureVTable](fcQPanGesture_vdata(self))
   let self = QPanGesture(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
-proc QPanGestureconnectNotify*(self: gen_qgesture_types.QPanGesture, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQPanGesture_virtualbase_connectNotify(self.h, signal.h)
-
-proc cQPanGesture_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQPanGesture_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPanGestureVTable](fcQPanGesture_vdata(self))
   let self = QPanGesture(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
-proc QPanGesturedisconnectNotify*(self: gen_qgesture_types.QPanGesture, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQPanGesture_virtualbase_disconnectNotify(self.h, signal.h)
-
-proc cQPanGesture_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQPanGesture_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPanGestureVTable](fcQPanGesture_vdata(self))
   let self = QPanGesture(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
@@ -951,9 +967,29 @@ proc cQPanGesture_vtable_callback_disconnectNotify(self: pointer, signal: pointe
 
 type VirtualQPanGesture* {.inheritable.} = ref object of QPanGesture
   vtbl*: cQPanGestureVTable
+
 method metaObject*(self: VirtualQPanGesture): gen_qobjectdefs_types.QMetaObject {.base.} =
   QPanGesturemetaObject(self[])
-proc cQPanGesture_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
+method metacast*(self: VirtualQPanGesture, param1: cstring): pointer {.base.} =
+  QPanGesturemetacast(self[], param1)
+method metacall*(self: VirtualQPanGesture, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QPanGesturemetacall(self[], param1, param2, param3)
+method event*(self: VirtualQPanGesture, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QPanGestureevent(self[], event)
+method eventFilter*(self: VirtualQPanGesture, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QPanGestureeventFilter(self[], watched, event)
+method timerEvent*(self: VirtualQPanGesture, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QPanGesturetimerEvent(self[], event)
+method childEvent*(self: VirtualQPanGesture, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QPanGesturechildEvent(self[], event)
+method customEvent*(self: VirtualQPanGesture, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QPanGesturecustomEvent(self[], event)
+method connectNotify*(self: VirtualQPanGesture, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QPanGestureconnectNotify(self[], signal)
+method disconnectNotify*(self: VirtualQPanGesture, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QPanGesturedisconnectNotify(self[], signal)
+
+proc fcQPanGesture_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQPanGesture](fcQPanGesture_vdata(self))
   var virtualReturn = inst.metaObject()
   virtualReturn.owned = false # TODO move?
@@ -961,17 +997,13 @@ proc cQPanGesture_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-method metacast*(self: VirtualQPanGesture, param1: cstring): pointer {.base.} =
-  QPanGesturemetacast(self[], param1)
-proc cQPanGesture_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+proc fcQPanGesture_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQPanGesture](fcQPanGesture_vdata(self))
   let slotval1 = (param1)
   var virtualReturn = inst.metacast(slotval1)
   virtualReturn
 
-method metacall*(self: VirtualQPanGesture, param1: cint, param2: cint, param3: pointer): cint {.base.} =
-  QPanGesturemetacall(self[], param1, param2, param3)
-proc cQPanGesture_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+proc fcQPanGesture_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQPanGesture](fcQPanGesture_vdata(self))
   let slotval1 = cint(param1)
   let slotval2 = param2
@@ -979,57 +1011,44 @@ proc cQPanGesture_method_callback_metacall(self: pointer, param1: cint, param2: 
   var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
-method event*(self: VirtualQPanGesture, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QPanGestureevent(self[], event)
-proc cQPanGesture_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
+proc fcQPanGesture_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQPanGesture](fcQPanGesture_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
-method eventFilter*(self: VirtualQPanGesture, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QPanGestureeventFilter(self[], watched, event)
-proc cQPanGesture_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+proc fcQPanGesture_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQPanGesture](fcQPanGesture_vdata(self))
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
   let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
-method timerEvent*(self: VirtualQPanGesture, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
-  QPanGesturetimerEvent(self[], event)
-proc cQPanGesture_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQPanGesture_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPanGesture](fcQPanGesture_vdata(self))
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
-method childEvent*(self: VirtualQPanGesture, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
-  QPanGesturechildEvent(self[], event)
-proc cQPanGesture_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQPanGesture_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPanGesture](fcQPanGesture_vdata(self))
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
-method customEvent*(self: VirtualQPanGesture, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QPanGesturecustomEvent(self[], event)
-proc cQPanGesture_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQPanGesture_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPanGesture](fcQPanGesture_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
-method connectNotify*(self: VirtualQPanGesture, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QPanGestureconnectNotify(self[], signal)
-proc cQPanGesture_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQPanGesture_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPanGesture](fcQPanGesture_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
-method disconnectNotify*(self: VirtualQPanGesture, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QPanGesturedisconnectNotify(self[], signal)
-proc cQPanGesture_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQPanGesture_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPanGesture](fcQPanGesture_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
+
 
 proc sender*(self: gen_qgesture_types.QPanGesture): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQPanGesture_protectedbase_sender(self.h), owned: false)
@@ -1051,25 +1070,25 @@ proc create*(T: type gen_qgesture_types.QPanGesture,
     let vtbl = cast[ref QPanGestureVTable](fcQPanGesture_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQPanGesture_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQPanGesture_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQPanGesture_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQPanGesture_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQPanGesture_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQPanGesture_vtable_callback_metacall
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQPanGesture_vtable_callback_event
+    vtbl[].vtbl.event = fcQPanGesture_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQPanGesture_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQPanGesture_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQPanGesture_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQPanGesture_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQPanGesture_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQPanGesture_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQPanGesture_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQPanGesture_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQPanGesture_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQPanGesture_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQPanGesture_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQPanGesture_vtable_callback_disconnectNotify
   gen_qgesture_types.QPanGesture(h: fcQPanGesture_new(addr(vtbl[].vtbl), addr(vtbl[])), owned: true)
 
 proc create*(T: type gen_qgesture_types.QPanGesture,
@@ -1081,25 +1100,25 @@ proc create*(T: type gen_qgesture_types.QPanGesture,
     let vtbl = cast[ref QPanGestureVTable](fcQPanGesture_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQPanGesture_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQPanGesture_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQPanGesture_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQPanGesture_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQPanGesture_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQPanGesture_vtable_callback_metacall
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQPanGesture_vtable_callback_event
+    vtbl[].vtbl.event = fcQPanGesture_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQPanGesture_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQPanGesture_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQPanGesture_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQPanGesture_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQPanGesture_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQPanGesture_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQPanGesture_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQPanGesture_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQPanGesture_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQPanGesture_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQPanGesture_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQPanGesture_vtable_callback_disconnectNotify
   gen_qgesture_types.QPanGesture(h: fcQPanGesture_new2(addr(vtbl[].vtbl), addr(vtbl[]), parent.h), owned: true)
 
 const cQPanGesture_mvtbl = cQPanGestureVTable(
@@ -1107,16 +1126,17 @@ const cQPanGesture_mvtbl = cQPanGestureVTable(
     let inst = cast[ptr typeof(VirtualQPanGesture()[])](self.fcQPanGesture_vtbl())
     inst[].h = nil
     inst[].owned = false,
-  metaObject: cQPanGesture_method_callback_metaObject,
-  metacast: cQPanGesture_method_callback_metacast,
-  metacall: cQPanGesture_method_callback_metacall,
-  event: cQPanGesture_method_callback_event,
-  eventFilter: cQPanGesture_method_callback_eventFilter,
-  timerEvent: cQPanGesture_method_callback_timerEvent,
-  childEvent: cQPanGesture_method_callback_childEvent,
-  customEvent: cQPanGesture_method_callback_customEvent,
-  connectNotify: cQPanGesture_method_callback_connectNotify,
-  disconnectNotify: cQPanGesture_method_callback_disconnectNotify,
+
+  metaObject: fcQPanGesture_method_callback_metaObject,
+  metacast: fcQPanGesture_method_callback_metacast,
+  metacall: fcQPanGesture_method_callback_metacall,
+  event: fcQPanGesture_method_callback_event,
+  eventFilter: fcQPanGesture_method_callback_eventFilter,
+  timerEvent: fcQPanGesture_method_callback_timerEvent,
+  childEvent: fcQPanGesture_method_callback_childEvent,
+  customEvent: fcQPanGesture_method_callback_customEvent,
+  connectNotify: fcQPanGesture_method_callback_connectNotify,
+  disconnectNotify: fcQPanGesture_method_callback_disconnectNotify,
 )
 proc create*(T: type gen_qgesture_types.QPanGesture,
     inst: VirtualQPanGesture) =
@@ -1254,6 +1274,7 @@ type QPinchGesturechildEventProc* = proc(self: QPinchGesture, event: gen_qcoreev
 type QPinchGesturecustomEventProc* = proc(self: QPinchGesture, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QPinchGestureconnectNotifyProc* = proc(self: QPinchGesture, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QPinchGesturedisconnectNotifyProc* = proc(self: QPinchGesture, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+
 type QPinchGestureVTable* {.inheritable, pure.} = object
   vtbl: cQPinchGestureVTable
   metaObject*: QPinchGesturemetaObjectProc
@@ -1266,10 +1287,39 @@ type QPinchGestureVTable* {.inheritable, pure.} = object
   customEvent*: QPinchGesturecustomEventProc
   connectNotify*: QPinchGestureconnectNotifyProc
   disconnectNotify*: QPinchGesturedisconnectNotifyProc
+
 proc QPinchGesturemetaObject*(self: gen_qgesture_types.QPinchGesture): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQPinchGesture_virtualbase_metaObject(self.h), owned: false)
 
-proc cQPinchGesture_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
+proc QPinchGesturemetacast*(self: gen_qgesture_types.QPinchGesture, param1: cstring): pointer =
+  fcQPinchGesture_virtualbase_metacast(self.h, param1)
+
+proc QPinchGesturemetacall*(self: gen_qgesture_types.QPinchGesture, param1: cint, param2: cint, param3: pointer): cint =
+  fcQPinchGesture_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+proc QPinchGestureevent*(self: gen_qgesture_types.QPinchGesture, event: gen_qcoreevent_types.QEvent): bool =
+  fcQPinchGesture_virtualbase_event(self.h, event.h)
+
+proc QPinchGestureeventFilter*(self: gen_qgesture_types.QPinchGesture, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
+  fcQPinchGesture_virtualbase_eventFilter(self.h, watched.h, event.h)
+
+proc QPinchGesturetimerEvent*(self: gen_qgesture_types.QPinchGesture, event: gen_qcoreevent_types.QTimerEvent): void =
+  fcQPinchGesture_virtualbase_timerEvent(self.h, event.h)
+
+proc QPinchGesturechildEvent*(self: gen_qgesture_types.QPinchGesture, event: gen_qcoreevent_types.QChildEvent): void =
+  fcQPinchGesture_virtualbase_childEvent(self.h, event.h)
+
+proc QPinchGesturecustomEvent*(self: gen_qgesture_types.QPinchGesture, event: gen_qcoreevent_types.QEvent): void =
+  fcQPinchGesture_virtualbase_customEvent(self.h, event.h)
+
+proc QPinchGestureconnectNotify*(self: gen_qgesture_types.QPinchGesture, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQPinchGesture_virtualbase_connectNotify(self.h, signal.h)
+
+proc QPinchGesturedisconnectNotify*(self: gen_qgesture_types.QPinchGesture, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQPinchGesture_virtualbase_disconnectNotify(self.h, signal.h)
+
+
+proc fcQPinchGesture_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QPinchGestureVTable](fcQPinchGesture_vdata(self))
   let self = QPinchGesture(h: self)
   var virtualReturn = vtbl[].metaObject(self)
@@ -1278,20 +1328,14 @@ proc cQPinchGesture_vtable_callback_metaObject(self: pointer): pointer {.cdecl.}
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QPinchGesturemetacast*(self: gen_qgesture_types.QPinchGesture, param1: cstring): pointer =
-  fcQPinchGesture_virtualbase_metacast(self.h, param1)
-
-proc cQPinchGesture_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+proc fcQPinchGesture_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QPinchGestureVTable](fcQPinchGesture_vdata(self))
   let self = QPinchGesture(h: self)
   let slotval1 = (param1)
   var virtualReturn = vtbl[].metacast(self, slotval1)
   virtualReturn
 
-proc QPinchGesturemetacall*(self: gen_qgesture_types.QPinchGesture, param1: cint, param2: cint, param3: pointer): cint =
-  fcQPinchGesture_virtualbase_metacall(self.h, cint(param1), param2, param3)
-
-proc cQPinchGesture_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+proc fcQPinchGesture_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QPinchGestureVTable](fcQPinchGesture_vdata(self))
   let self = QPinchGesture(h: self)
   let slotval1 = cint(param1)
@@ -1300,20 +1344,14 @@ proc cQPinchGesture_vtable_callback_metacall(self: pointer, param1: cint, param2
   var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QPinchGestureevent*(self: gen_qgesture_types.QPinchGesture, event: gen_qcoreevent_types.QEvent): bool =
-  fcQPinchGesture_virtualbase_event(self.h, event.h)
-
-proc cQPinchGesture_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
+proc fcQPinchGesture_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QPinchGestureVTable](fcQPinchGesture_vdata(self))
   let self = QPinchGesture(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
-proc QPinchGestureeventFilter*(self: gen_qgesture_types.QPinchGesture, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
-  fcQPinchGesture_virtualbase_eventFilter(self.h, watched.h, event.h)
-
-proc cQPinchGesture_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+proc fcQPinchGesture_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QPinchGestureVTable](fcQPinchGesture_vdata(self))
   let self = QPinchGesture(h: self)
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
@@ -1321,46 +1359,31 @@ proc cQPinchGesture_vtable_callback_eventFilter(self: pointer, watched: pointer,
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
-proc QPinchGesturetimerEvent*(self: gen_qgesture_types.QPinchGesture, event: gen_qcoreevent_types.QTimerEvent): void =
-  fcQPinchGesture_virtualbase_timerEvent(self.h, event.h)
-
-proc cQPinchGesture_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQPinchGesture_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPinchGestureVTable](fcQPinchGesture_vdata(self))
   let self = QPinchGesture(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
-proc QPinchGesturechildEvent*(self: gen_qgesture_types.QPinchGesture, event: gen_qcoreevent_types.QChildEvent): void =
-  fcQPinchGesture_virtualbase_childEvent(self.h, event.h)
-
-proc cQPinchGesture_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQPinchGesture_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPinchGestureVTable](fcQPinchGesture_vdata(self))
   let self = QPinchGesture(h: self)
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
-proc QPinchGesturecustomEvent*(self: gen_qgesture_types.QPinchGesture, event: gen_qcoreevent_types.QEvent): void =
-  fcQPinchGesture_virtualbase_customEvent(self.h, event.h)
-
-proc cQPinchGesture_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQPinchGesture_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPinchGestureVTable](fcQPinchGesture_vdata(self))
   let self = QPinchGesture(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
-proc QPinchGestureconnectNotify*(self: gen_qgesture_types.QPinchGesture, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQPinchGesture_virtualbase_connectNotify(self.h, signal.h)
-
-proc cQPinchGesture_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQPinchGesture_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPinchGestureVTable](fcQPinchGesture_vdata(self))
   let self = QPinchGesture(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
-proc QPinchGesturedisconnectNotify*(self: gen_qgesture_types.QPinchGesture, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQPinchGesture_virtualbase_disconnectNotify(self.h, signal.h)
-
-proc cQPinchGesture_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQPinchGesture_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPinchGestureVTable](fcQPinchGesture_vdata(self))
   let self = QPinchGesture(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
@@ -1368,9 +1391,29 @@ proc cQPinchGesture_vtable_callback_disconnectNotify(self: pointer, signal: poin
 
 type VirtualQPinchGesture* {.inheritable.} = ref object of QPinchGesture
   vtbl*: cQPinchGestureVTable
+
 method metaObject*(self: VirtualQPinchGesture): gen_qobjectdefs_types.QMetaObject {.base.} =
   QPinchGesturemetaObject(self[])
-proc cQPinchGesture_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
+method metacast*(self: VirtualQPinchGesture, param1: cstring): pointer {.base.} =
+  QPinchGesturemetacast(self[], param1)
+method metacall*(self: VirtualQPinchGesture, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QPinchGesturemetacall(self[], param1, param2, param3)
+method event*(self: VirtualQPinchGesture, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QPinchGestureevent(self[], event)
+method eventFilter*(self: VirtualQPinchGesture, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QPinchGestureeventFilter(self[], watched, event)
+method timerEvent*(self: VirtualQPinchGesture, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QPinchGesturetimerEvent(self[], event)
+method childEvent*(self: VirtualQPinchGesture, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QPinchGesturechildEvent(self[], event)
+method customEvent*(self: VirtualQPinchGesture, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QPinchGesturecustomEvent(self[], event)
+method connectNotify*(self: VirtualQPinchGesture, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QPinchGestureconnectNotify(self[], signal)
+method disconnectNotify*(self: VirtualQPinchGesture, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QPinchGesturedisconnectNotify(self[], signal)
+
+proc fcQPinchGesture_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQPinchGesture](fcQPinchGesture_vdata(self))
   var virtualReturn = inst.metaObject()
   virtualReturn.owned = false # TODO move?
@@ -1378,17 +1421,13 @@ proc cQPinchGesture_method_callback_metaObject(self: pointer): pointer {.cdecl.}
   virtualReturn.h = nil
   virtualReturn_h
 
-method metacast*(self: VirtualQPinchGesture, param1: cstring): pointer {.base.} =
-  QPinchGesturemetacast(self[], param1)
-proc cQPinchGesture_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+proc fcQPinchGesture_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQPinchGesture](fcQPinchGesture_vdata(self))
   let slotval1 = (param1)
   var virtualReturn = inst.metacast(slotval1)
   virtualReturn
 
-method metacall*(self: VirtualQPinchGesture, param1: cint, param2: cint, param3: pointer): cint {.base.} =
-  QPinchGesturemetacall(self[], param1, param2, param3)
-proc cQPinchGesture_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+proc fcQPinchGesture_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQPinchGesture](fcQPinchGesture_vdata(self))
   let slotval1 = cint(param1)
   let slotval2 = param2
@@ -1396,57 +1435,44 @@ proc cQPinchGesture_method_callback_metacall(self: pointer, param1: cint, param2
   var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
-method event*(self: VirtualQPinchGesture, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QPinchGestureevent(self[], event)
-proc cQPinchGesture_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
+proc fcQPinchGesture_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQPinchGesture](fcQPinchGesture_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
-method eventFilter*(self: VirtualQPinchGesture, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QPinchGestureeventFilter(self[], watched, event)
-proc cQPinchGesture_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+proc fcQPinchGesture_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQPinchGesture](fcQPinchGesture_vdata(self))
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
   let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
-method timerEvent*(self: VirtualQPinchGesture, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
-  QPinchGesturetimerEvent(self[], event)
-proc cQPinchGesture_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQPinchGesture_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPinchGesture](fcQPinchGesture_vdata(self))
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
-method childEvent*(self: VirtualQPinchGesture, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
-  QPinchGesturechildEvent(self[], event)
-proc cQPinchGesture_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQPinchGesture_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPinchGesture](fcQPinchGesture_vdata(self))
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
-method customEvent*(self: VirtualQPinchGesture, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QPinchGesturecustomEvent(self[], event)
-proc cQPinchGesture_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQPinchGesture_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPinchGesture](fcQPinchGesture_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
-method connectNotify*(self: VirtualQPinchGesture, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QPinchGestureconnectNotify(self[], signal)
-proc cQPinchGesture_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQPinchGesture_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPinchGesture](fcQPinchGesture_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
-method disconnectNotify*(self: VirtualQPinchGesture, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QPinchGesturedisconnectNotify(self[], signal)
-proc cQPinchGesture_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQPinchGesture_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPinchGesture](fcQPinchGesture_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
+
 
 proc sender*(self: gen_qgesture_types.QPinchGesture): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQPinchGesture_protectedbase_sender(self.h), owned: false)
@@ -1468,25 +1494,25 @@ proc create*(T: type gen_qgesture_types.QPinchGesture,
     let vtbl = cast[ref QPinchGestureVTable](fcQPinchGesture_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQPinchGesture_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQPinchGesture_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQPinchGesture_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQPinchGesture_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQPinchGesture_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQPinchGesture_vtable_callback_metacall
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQPinchGesture_vtable_callback_event
+    vtbl[].vtbl.event = fcQPinchGesture_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQPinchGesture_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQPinchGesture_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQPinchGesture_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQPinchGesture_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQPinchGesture_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQPinchGesture_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQPinchGesture_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQPinchGesture_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQPinchGesture_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQPinchGesture_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQPinchGesture_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQPinchGesture_vtable_callback_disconnectNotify
   gen_qgesture_types.QPinchGesture(h: fcQPinchGesture_new(addr(vtbl[].vtbl), addr(vtbl[])), owned: true)
 
 proc create*(T: type gen_qgesture_types.QPinchGesture,
@@ -1498,25 +1524,25 @@ proc create*(T: type gen_qgesture_types.QPinchGesture,
     let vtbl = cast[ref QPinchGestureVTable](fcQPinchGesture_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQPinchGesture_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQPinchGesture_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQPinchGesture_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQPinchGesture_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQPinchGesture_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQPinchGesture_vtable_callback_metacall
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQPinchGesture_vtable_callback_event
+    vtbl[].vtbl.event = fcQPinchGesture_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQPinchGesture_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQPinchGesture_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQPinchGesture_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQPinchGesture_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQPinchGesture_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQPinchGesture_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQPinchGesture_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQPinchGesture_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQPinchGesture_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQPinchGesture_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQPinchGesture_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQPinchGesture_vtable_callback_disconnectNotify
   gen_qgesture_types.QPinchGesture(h: fcQPinchGesture_new2(addr(vtbl[].vtbl), addr(vtbl[]), parent.h), owned: true)
 
 const cQPinchGesture_mvtbl = cQPinchGestureVTable(
@@ -1524,16 +1550,17 @@ const cQPinchGesture_mvtbl = cQPinchGestureVTable(
     let inst = cast[ptr typeof(VirtualQPinchGesture()[])](self.fcQPinchGesture_vtbl())
     inst[].h = nil
     inst[].owned = false,
-  metaObject: cQPinchGesture_method_callback_metaObject,
-  metacast: cQPinchGesture_method_callback_metacast,
-  metacall: cQPinchGesture_method_callback_metacall,
-  event: cQPinchGesture_method_callback_event,
-  eventFilter: cQPinchGesture_method_callback_eventFilter,
-  timerEvent: cQPinchGesture_method_callback_timerEvent,
-  childEvent: cQPinchGesture_method_callback_childEvent,
-  customEvent: cQPinchGesture_method_callback_customEvent,
-  connectNotify: cQPinchGesture_method_callback_connectNotify,
-  disconnectNotify: cQPinchGesture_method_callback_disconnectNotify,
+
+  metaObject: fcQPinchGesture_method_callback_metaObject,
+  metacast: fcQPinchGesture_method_callback_metacast,
+  metacall: fcQPinchGesture_method_callback_metacall,
+  event: fcQPinchGesture_method_callback_event,
+  eventFilter: fcQPinchGesture_method_callback_eventFilter,
+  timerEvent: fcQPinchGesture_method_callback_timerEvent,
+  childEvent: fcQPinchGesture_method_callback_childEvent,
+  customEvent: fcQPinchGesture_method_callback_customEvent,
+  connectNotify: fcQPinchGesture_method_callback_connectNotify,
+  disconnectNotify: fcQPinchGesture_method_callback_disconnectNotify,
 )
 proc create*(T: type gen_qgesture_types.QPinchGesture,
     inst: VirtualQPinchGesture) =
@@ -1617,6 +1644,7 @@ type QSwipeGesturechildEventProc* = proc(self: QSwipeGesture, event: gen_qcoreev
 type QSwipeGesturecustomEventProc* = proc(self: QSwipeGesture, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QSwipeGestureconnectNotifyProc* = proc(self: QSwipeGesture, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QSwipeGesturedisconnectNotifyProc* = proc(self: QSwipeGesture, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+
 type QSwipeGestureVTable* {.inheritable, pure.} = object
   vtbl: cQSwipeGestureVTable
   metaObject*: QSwipeGesturemetaObjectProc
@@ -1629,10 +1657,39 @@ type QSwipeGestureVTable* {.inheritable, pure.} = object
   customEvent*: QSwipeGesturecustomEventProc
   connectNotify*: QSwipeGestureconnectNotifyProc
   disconnectNotify*: QSwipeGesturedisconnectNotifyProc
+
 proc QSwipeGesturemetaObject*(self: gen_qgesture_types.QSwipeGesture): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQSwipeGesture_virtualbase_metaObject(self.h), owned: false)
 
-proc cQSwipeGesture_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
+proc QSwipeGesturemetacast*(self: gen_qgesture_types.QSwipeGesture, param1: cstring): pointer =
+  fcQSwipeGesture_virtualbase_metacast(self.h, param1)
+
+proc QSwipeGesturemetacall*(self: gen_qgesture_types.QSwipeGesture, param1: cint, param2: cint, param3: pointer): cint =
+  fcQSwipeGesture_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+proc QSwipeGestureevent*(self: gen_qgesture_types.QSwipeGesture, event: gen_qcoreevent_types.QEvent): bool =
+  fcQSwipeGesture_virtualbase_event(self.h, event.h)
+
+proc QSwipeGestureeventFilter*(self: gen_qgesture_types.QSwipeGesture, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
+  fcQSwipeGesture_virtualbase_eventFilter(self.h, watched.h, event.h)
+
+proc QSwipeGesturetimerEvent*(self: gen_qgesture_types.QSwipeGesture, event: gen_qcoreevent_types.QTimerEvent): void =
+  fcQSwipeGesture_virtualbase_timerEvent(self.h, event.h)
+
+proc QSwipeGesturechildEvent*(self: gen_qgesture_types.QSwipeGesture, event: gen_qcoreevent_types.QChildEvent): void =
+  fcQSwipeGesture_virtualbase_childEvent(self.h, event.h)
+
+proc QSwipeGesturecustomEvent*(self: gen_qgesture_types.QSwipeGesture, event: gen_qcoreevent_types.QEvent): void =
+  fcQSwipeGesture_virtualbase_customEvent(self.h, event.h)
+
+proc QSwipeGestureconnectNotify*(self: gen_qgesture_types.QSwipeGesture, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQSwipeGesture_virtualbase_connectNotify(self.h, signal.h)
+
+proc QSwipeGesturedisconnectNotify*(self: gen_qgesture_types.QSwipeGesture, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQSwipeGesture_virtualbase_disconnectNotify(self.h, signal.h)
+
+
+proc fcQSwipeGesture_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QSwipeGestureVTable](fcQSwipeGesture_vdata(self))
   let self = QSwipeGesture(h: self)
   var virtualReturn = vtbl[].metaObject(self)
@@ -1641,20 +1698,14 @@ proc cQSwipeGesture_vtable_callback_metaObject(self: pointer): pointer {.cdecl.}
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QSwipeGesturemetacast*(self: gen_qgesture_types.QSwipeGesture, param1: cstring): pointer =
-  fcQSwipeGesture_virtualbase_metacast(self.h, param1)
-
-proc cQSwipeGesture_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+proc fcQSwipeGesture_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QSwipeGestureVTable](fcQSwipeGesture_vdata(self))
   let self = QSwipeGesture(h: self)
   let slotval1 = (param1)
   var virtualReturn = vtbl[].metacast(self, slotval1)
   virtualReturn
 
-proc QSwipeGesturemetacall*(self: gen_qgesture_types.QSwipeGesture, param1: cint, param2: cint, param3: pointer): cint =
-  fcQSwipeGesture_virtualbase_metacall(self.h, cint(param1), param2, param3)
-
-proc cQSwipeGesture_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+proc fcQSwipeGesture_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QSwipeGestureVTable](fcQSwipeGesture_vdata(self))
   let self = QSwipeGesture(h: self)
   let slotval1 = cint(param1)
@@ -1663,20 +1714,14 @@ proc cQSwipeGesture_vtable_callback_metacall(self: pointer, param1: cint, param2
   var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QSwipeGestureevent*(self: gen_qgesture_types.QSwipeGesture, event: gen_qcoreevent_types.QEvent): bool =
-  fcQSwipeGesture_virtualbase_event(self.h, event.h)
-
-proc cQSwipeGesture_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
+proc fcQSwipeGesture_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QSwipeGestureVTable](fcQSwipeGesture_vdata(self))
   let self = QSwipeGesture(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
-proc QSwipeGestureeventFilter*(self: gen_qgesture_types.QSwipeGesture, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
-  fcQSwipeGesture_virtualbase_eventFilter(self.h, watched.h, event.h)
-
-proc cQSwipeGesture_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+proc fcQSwipeGesture_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QSwipeGestureVTable](fcQSwipeGesture_vdata(self))
   let self = QSwipeGesture(h: self)
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
@@ -1684,46 +1729,31 @@ proc cQSwipeGesture_vtable_callback_eventFilter(self: pointer, watched: pointer,
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
-proc QSwipeGesturetimerEvent*(self: gen_qgesture_types.QSwipeGesture, event: gen_qcoreevent_types.QTimerEvent): void =
-  fcQSwipeGesture_virtualbase_timerEvent(self.h, event.h)
-
-proc cQSwipeGesture_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQSwipeGesture_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSwipeGestureVTable](fcQSwipeGesture_vdata(self))
   let self = QSwipeGesture(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
-proc QSwipeGesturechildEvent*(self: gen_qgesture_types.QSwipeGesture, event: gen_qcoreevent_types.QChildEvent): void =
-  fcQSwipeGesture_virtualbase_childEvent(self.h, event.h)
-
-proc cQSwipeGesture_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQSwipeGesture_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSwipeGestureVTable](fcQSwipeGesture_vdata(self))
   let self = QSwipeGesture(h: self)
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
-proc QSwipeGesturecustomEvent*(self: gen_qgesture_types.QSwipeGesture, event: gen_qcoreevent_types.QEvent): void =
-  fcQSwipeGesture_virtualbase_customEvent(self.h, event.h)
-
-proc cQSwipeGesture_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQSwipeGesture_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSwipeGestureVTable](fcQSwipeGesture_vdata(self))
   let self = QSwipeGesture(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
-proc QSwipeGestureconnectNotify*(self: gen_qgesture_types.QSwipeGesture, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQSwipeGesture_virtualbase_connectNotify(self.h, signal.h)
-
-proc cQSwipeGesture_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQSwipeGesture_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSwipeGestureVTable](fcQSwipeGesture_vdata(self))
   let self = QSwipeGesture(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
-proc QSwipeGesturedisconnectNotify*(self: gen_qgesture_types.QSwipeGesture, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQSwipeGesture_virtualbase_disconnectNotify(self.h, signal.h)
-
-proc cQSwipeGesture_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQSwipeGesture_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSwipeGestureVTable](fcQSwipeGesture_vdata(self))
   let self = QSwipeGesture(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
@@ -1731,9 +1761,29 @@ proc cQSwipeGesture_vtable_callback_disconnectNotify(self: pointer, signal: poin
 
 type VirtualQSwipeGesture* {.inheritable.} = ref object of QSwipeGesture
   vtbl*: cQSwipeGestureVTable
+
 method metaObject*(self: VirtualQSwipeGesture): gen_qobjectdefs_types.QMetaObject {.base.} =
   QSwipeGesturemetaObject(self[])
-proc cQSwipeGesture_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
+method metacast*(self: VirtualQSwipeGesture, param1: cstring): pointer {.base.} =
+  QSwipeGesturemetacast(self[], param1)
+method metacall*(self: VirtualQSwipeGesture, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QSwipeGesturemetacall(self[], param1, param2, param3)
+method event*(self: VirtualQSwipeGesture, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QSwipeGestureevent(self[], event)
+method eventFilter*(self: VirtualQSwipeGesture, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QSwipeGestureeventFilter(self[], watched, event)
+method timerEvent*(self: VirtualQSwipeGesture, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QSwipeGesturetimerEvent(self[], event)
+method childEvent*(self: VirtualQSwipeGesture, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QSwipeGesturechildEvent(self[], event)
+method customEvent*(self: VirtualQSwipeGesture, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QSwipeGesturecustomEvent(self[], event)
+method connectNotify*(self: VirtualQSwipeGesture, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QSwipeGestureconnectNotify(self[], signal)
+method disconnectNotify*(self: VirtualQSwipeGesture, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QSwipeGesturedisconnectNotify(self[], signal)
+
+proc fcQSwipeGesture_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQSwipeGesture](fcQSwipeGesture_vdata(self))
   var virtualReturn = inst.metaObject()
   virtualReturn.owned = false # TODO move?
@@ -1741,17 +1791,13 @@ proc cQSwipeGesture_method_callback_metaObject(self: pointer): pointer {.cdecl.}
   virtualReturn.h = nil
   virtualReturn_h
 
-method metacast*(self: VirtualQSwipeGesture, param1: cstring): pointer {.base.} =
-  QSwipeGesturemetacast(self[], param1)
-proc cQSwipeGesture_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+proc fcQSwipeGesture_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQSwipeGesture](fcQSwipeGesture_vdata(self))
   let slotval1 = (param1)
   var virtualReturn = inst.metacast(slotval1)
   virtualReturn
 
-method metacall*(self: VirtualQSwipeGesture, param1: cint, param2: cint, param3: pointer): cint {.base.} =
-  QSwipeGesturemetacall(self[], param1, param2, param3)
-proc cQSwipeGesture_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+proc fcQSwipeGesture_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQSwipeGesture](fcQSwipeGesture_vdata(self))
   let slotval1 = cint(param1)
   let slotval2 = param2
@@ -1759,57 +1805,44 @@ proc cQSwipeGesture_method_callback_metacall(self: pointer, param1: cint, param2
   var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
-method event*(self: VirtualQSwipeGesture, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QSwipeGestureevent(self[], event)
-proc cQSwipeGesture_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
+proc fcQSwipeGesture_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQSwipeGesture](fcQSwipeGesture_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
-method eventFilter*(self: VirtualQSwipeGesture, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QSwipeGestureeventFilter(self[], watched, event)
-proc cQSwipeGesture_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+proc fcQSwipeGesture_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQSwipeGesture](fcQSwipeGesture_vdata(self))
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
   let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
-method timerEvent*(self: VirtualQSwipeGesture, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
-  QSwipeGesturetimerEvent(self[], event)
-proc cQSwipeGesture_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQSwipeGesture_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSwipeGesture](fcQSwipeGesture_vdata(self))
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
-method childEvent*(self: VirtualQSwipeGesture, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
-  QSwipeGesturechildEvent(self[], event)
-proc cQSwipeGesture_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQSwipeGesture_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSwipeGesture](fcQSwipeGesture_vdata(self))
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
-method customEvent*(self: VirtualQSwipeGesture, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QSwipeGesturecustomEvent(self[], event)
-proc cQSwipeGesture_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQSwipeGesture_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSwipeGesture](fcQSwipeGesture_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
-method connectNotify*(self: VirtualQSwipeGesture, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QSwipeGestureconnectNotify(self[], signal)
-proc cQSwipeGesture_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQSwipeGesture_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSwipeGesture](fcQSwipeGesture_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
-method disconnectNotify*(self: VirtualQSwipeGesture, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QSwipeGesturedisconnectNotify(self[], signal)
-proc cQSwipeGesture_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQSwipeGesture_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSwipeGesture](fcQSwipeGesture_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
+
 
 proc sender*(self: gen_qgesture_types.QSwipeGesture): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQSwipeGesture_protectedbase_sender(self.h), owned: false)
@@ -1831,25 +1864,25 @@ proc create*(T: type gen_qgesture_types.QSwipeGesture,
     let vtbl = cast[ref QSwipeGestureVTable](fcQSwipeGesture_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQSwipeGesture_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQSwipeGesture_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQSwipeGesture_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQSwipeGesture_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQSwipeGesture_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQSwipeGesture_vtable_callback_metacall
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQSwipeGesture_vtable_callback_event
+    vtbl[].vtbl.event = fcQSwipeGesture_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQSwipeGesture_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQSwipeGesture_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQSwipeGesture_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQSwipeGesture_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQSwipeGesture_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQSwipeGesture_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQSwipeGesture_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQSwipeGesture_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQSwipeGesture_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQSwipeGesture_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQSwipeGesture_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQSwipeGesture_vtable_callback_disconnectNotify
   gen_qgesture_types.QSwipeGesture(h: fcQSwipeGesture_new(addr(vtbl[].vtbl), addr(vtbl[])), owned: true)
 
 proc create*(T: type gen_qgesture_types.QSwipeGesture,
@@ -1861,25 +1894,25 @@ proc create*(T: type gen_qgesture_types.QSwipeGesture,
     let vtbl = cast[ref QSwipeGestureVTable](fcQSwipeGesture_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQSwipeGesture_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQSwipeGesture_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQSwipeGesture_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQSwipeGesture_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQSwipeGesture_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQSwipeGesture_vtable_callback_metacall
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQSwipeGesture_vtable_callback_event
+    vtbl[].vtbl.event = fcQSwipeGesture_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQSwipeGesture_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQSwipeGesture_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQSwipeGesture_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQSwipeGesture_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQSwipeGesture_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQSwipeGesture_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQSwipeGesture_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQSwipeGesture_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQSwipeGesture_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQSwipeGesture_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQSwipeGesture_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQSwipeGesture_vtable_callback_disconnectNotify
   gen_qgesture_types.QSwipeGesture(h: fcQSwipeGesture_new2(addr(vtbl[].vtbl), addr(vtbl[]), parent.h), owned: true)
 
 const cQSwipeGesture_mvtbl = cQSwipeGestureVTable(
@@ -1887,16 +1920,17 @@ const cQSwipeGesture_mvtbl = cQSwipeGestureVTable(
     let inst = cast[ptr typeof(VirtualQSwipeGesture()[])](self.fcQSwipeGesture_vtbl())
     inst[].h = nil
     inst[].owned = false,
-  metaObject: cQSwipeGesture_method_callback_metaObject,
-  metacast: cQSwipeGesture_method_callback_metacast,
-  metacall: cQSwipeGesture_method_callback_metacall,
-  event: cQSwipeGesture_method_callback_event,
-  eventFilter: cQSwipeGesture_method_callback_eventFilter,
-  timerEvent: cQSwipeGesture_method_callback_timerEvent,
-  childEvent: cQSwipeGesture_method_callback_childEvent,
-  customEvent: cQSwipeGesture_method_callback_customEvent,
-  connectNotify: cQSwipeGesture_method_callback_connectNotify,
-  disconnectNotify: cQSwipeGesture_method_callback_disconnectNotify,
+
+  metaObject: fcQSwipeGesture_method_callback_metaObject,
+  metacast: fcQSwipeGesture_method_callback_metacast,
+  metacall: fcQSwipeGesture_method_callback_metacall,
+  event: fcQSwipeGesture_method_callback_event,
+  eventFilter: fcQSwipeGesture_method_callback_eventFilter,
+  timerEvent: fcQSwipeGesture_method_callback_timerEvent,
+  childEvent: fcQSwipeGesture_method_callback_childEvent,
+  customEvent: fcQSwipeGesture_method_callback_customEvent,
+  connectNotify: fcQSwipeGesture_method_callback_connectNotify,
+  disconnectNotify: fcQSwipeGesture_method_callback_disconnectNotify,
 )
 proc create*(T: type gen_qgesture_types.QSwipeGesture,
     inst: VirtualQSwipeGesture) =
@@ -1974,6 +2008,7 @@ type QTapGesturechildEventProc* = proc(self: QTapGesture, event: gen_qcoreevent_
 type QTapGesturecustomEventProc* = proc(self: QTapGesture, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QTapGestureconnectNotifyProc* = proc(self: QTapGesture, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QTapGesturedisconnectNotifyProc* = proc(self: QTapGesture, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+
 type QTapGestureVTable* {.inheritable, pure.} = object
   vtbl: cQTapGestureVTable
   metaObject*: QTapGesturemetaObjectProc
@@ -1986,10 +2021,39 @@ type QTapGestureVTable* {.inheritable, pure.} = object
   customEvent*: QTapGesturecustomEventProc
   connectNotify*: QTapGestureconnectNotifyProc
   disconnectNotify*: QTapGesturedisconnectNotifyProc
+
 proc QTapGesturemetaObject*(self: gen_qgesture_types.QTapGesture): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQTapGesture_virtualbase_metaObject(self.h), owned: false)
 
-proc cQTapGesture_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
+proc QTapGesturemetacast*(self: gen_qgesture_types.QTapGesture, param1: cstring): pointer =
+  fcQTapGesture_virtualbase_metacast(self.h, param1)
+
+proc QTapGesturemetacall*(self: gen_qgesture_types.QTapGesture, param1: cint, param2: cint, param3: pointer): cint =
+  fcQTapGesture_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+proc QTapGestureevent*(self: gen_qgesture_types.QTapGesture, event: gen_qcoreevent_types.QEvent): bool =
+  fcQTapGesture_virtualbase_event(self.h, event.h)
+
+proc QTapGestureeventFilter*(self: gen_qgesture_types.QTapGesture, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
+  fcQTapGesture_virtualbase_eventFilter(self.h, watched.h, event.h)
+
+proc QTapGesturetimerEvent*(self: gen_qgesture_types.QTapGesture, event: gen_qcoreevent_types.QTimerEvent): void =
+  fcQTapGesture_virtualbase_timerEvent(self.h, event.h)
+
+proc QTapGesturechildEvent*(self: gen_qgesture_types.QTapGesture, event: gen_qcoreevent_types.QChildEvent): void =
+  fcQTapGesture_virtualbase_childEvent(self.h, event.h)
+
+proc QTapGesturecustomEvent*(self: gen_qgesture_types.QTapGesture, event: gen_qcoreevent_types.QEvent): void =
+  fcQTapGesture_virtualbase_customEvent(self.h, event.h)
+
+proc QTapGestureconnectNotify*(self: gen_qgesture_types.QTapGesture, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQTapGesture_virtualbase_connectNotify(self.h, signal.h)
+
+proc QTapGesturedisconnectNotify*(self: gen_qgesture_types.QTapGesture, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQTapGesture_virtualbase_disconnectNotify(self.h, signal.h)
+
+
+proc fcQTapGesture_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QTapGestureVTable](fcQTapGesture_vdata(self))
   let self = QTapGesture(h: self)
   var virtualReturn = vtbl[].metaObject(self)
@@ -1998,20 +2062,14 @@ proc cQTapGesture_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QTapGesturemetacast*(self: gen_qgesture_types.QTapGesture, param1: cstring): pointer =
-  fcQTapGesture_virtualbase_metacast(self.h, param1)
-
-proc cQTapGesture_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+proc fcQTapGesture_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QTapGestureVTable](fcQTapGesture_vdata(self))
   let self = QTapGesture(h: self)
   let slotval1 = (param1)
   var virtualReturn = vtbl[].metacast(self, slotval1)
   virtualReturn
 
-proc QTapGesturemetacall*(self: gen_qgesture_types.QTapGesture, param1: cint, param2: cint, param3: pointer): cint =
-  fcQTapGesture_virtualbase_metacall(self.h, cint(param1), param2, param3)
-
-proc cQTapGesture_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+proc fcQTapGesture_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QTapGestureVTable](fcQTapGesture_vdata(self))
   let self = QTapGesture(h: self)
   let slotval1 = cint(param1)
@@ -2020,20 +2078,14 @@ proc cQTapGesture_vtable_callback_metacall(self: pointer, param1: cint, param2: 
   var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QTapGestureevent*(self: gen_qgesture_types.QTapGesture, event: gen_qcoreevent_types.QEvent): bool =
-  fcQTapGesture_virtualbase_event(self.h, event.h)
-
-proc cQTapGesture_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
+proc fcQTapGesture_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QTapGestureVTable](fcQTapGesture_vdata(self))
   let self = QTapGesture(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
-proc QTapGestureeventFilter*(self: gen_qgesture_types.QTapGesture, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
-  fcQTapGesture_virtualbase_eventFilter(self.h, watched.h, event.h)
-
-proc cQTapGesture_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+proc fcQTapGesture_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QTapGestureVTable](fcQTapGesture_vdata(self))
   let self = QTapGesture(h: self)
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
@@ -2041,46 +2093,31 @@ proc cQTapGesture_vtable_callback_eventFilter(self: pointer, watched: pointer, e
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
-proc QTapGesturetimerEvent*(self: gen_qgesture_types.QTapGesture, event: gen_qcoreevent_types.QTimerEvent): void =
-  fcQTapGesture_virtualbase_timerEvent(self.h, event.h)
-
-proc cQTapGesture_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQTapGesture_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTapGestureVTable](fcQTapGesture_vdata(self))
   let self = QTapGesture(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
-proc QTapGesturechildEvent*(self: gen_qgesture_types.QTapGesture, event: gen_qcoreevent_types.QChildEvent): void =
-  fcQTapGesture_virtualbase_childEvent(self.h, event.h)
-
-proc cQTapGesture_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQTapGesture_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTapGestureVTable](fcQTapGesture_vdata(self))
   let self = QTapGesture(h: self)
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
-proc QTapGesturecustomEvent*(self: gen_qgesture_types.QTapGesture, event: gen_qcoreevent_types.QEvent): void =
-  fcQTapGesture_virtualbase_customEvent(self.h, event.h)
-
-proc cQTapGesture_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQTapGesture_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTapGestureVTable](fcQTapGesture_vdata(self))
   let self = QTapGesture(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
-proc QTapGestureconnectNotify*(self: gen_qgesture_types.QTapGesture, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQTapGesture_virtualbase_connectNotify(self.h, signal.h)
-
-proc cQTapGesture_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQTapGesture_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTapGestureVTable](fcQTapGesture_vdata(self))
   let self = QTapGesture(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
-proc QTapGesturedisconnectNotify*(self: gen_qgesture_types.QTapGesture, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQTapGesture_virtualbase_disconnectNotify(self.h, signal.h)
-
-proc cQTapGesture_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQTapGesture_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTapGestureVTable](fcQTapGesture_vdata(self))
   let self = QTapGesture(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
@@ -2088,9 +2125,29 @@ proc cQTapGesture_vtable_callback_disconnectNotify(self: pointer, signal: pointe
 
 type VirtualQTapGesture* {.inheritable.} = ref object of QTapGesture
   vtbl*: cQTapGestureVTable
+
 method metaObject*(self: VirtualQTapGesture): gen_qobjectdefs_types.QMetaObject {.base.} =
   QTapGesturemetaObject(self[])
-proc cQTapGesture_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
+method metacast*(self: VirtualQTapGesture, param1: cstring): pointer {.base.} =
+  QTapGesturemetacast(self[], param1)
+method metacall*(self: VirtualQTapGesture, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QTapGesturemetacall(self[], param1, param2, param3)
+method event*(self: VirtualQTapGesture, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QTapGestureevent(self[], event)
+method eventFilter*(self: VirtualQTapGesture, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QTapGestureeventFilter(self[], watched, event)
+method timerEvent*(self: VirtualQTapGesture, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QTapGesturetimerEvent(self[], event)
+method childEvent*(self: VirtualQTapGesture, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QTapGesturechildEvent(self[], event)
+method customEvent*(self: VirtualQTapGesture, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QTapGesturecustomEvent(self[], event)
+method connectNotify*(self: VirtualQTapGesture, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QTapGestureconnectNotify(self[], signal)
+method disconnectNotify*(self: VirtualQTapGesture, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QTapGesturedisconnectNotify(self[], signal)
+
+proc fcQTapGesture_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQTapGesture](fcQTapGesture_vdata(self))
   var virtualReturn = inst.metaObject()
   virtualReturn.owned = false # TODO move?
@@ -2098,17 +2155,13 @@ proc cQTapGesture_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-method metacast*(self: VirtualQTapGesture, param1: cstring): pointer {.base.} =
-  QTapGesturemetacast(self[], param1)
-proc cQTapGesture_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+proc fcQTapGesture_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQTapGesture](fcQTapGesture_vdata(self))
   let slotval1 = (param1)
   var virtualReturn = inst.metacast(slotval1)
   virtualReturn
 
-method metacall*(self: VirtualQTapGesture, param1: cint, param2: cint, param3: pointer): cint {.base.} =
-  QTapGesturemetacall(self[], param1, param2, param3)
-proc cQTapGesture_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+proc fcQTapGesture_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQTapGesture](fcQTapGesture_vdata(self))
   let slotval1 = cint(param1)
   let slotval2 = param2
@@ -2116,57 +2169,44 @@ proc cQTapGesture_method_callback_metacall(self: pointer, param1: cint, param2: 
   var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
-method event*(self: VirtualQTapGesture, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QTapGestureevent(self[], event)
-proc cQTapGesture_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
+proc fcQTapGesture_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQTapGesture](fcQTapGesture_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
-method eventFilter*(self: VirtualQTapGesture, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QTapGestureeventFilter(self[], watched, event)
-proc cQTapGesture_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+proc fcQTapGesture_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQTapGesture](fcQTapGesture_vdata(self))
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
   let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
-method timerEvent*(self: VirtualQTapGesture, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
-  QTapGesturetimerEvent(self[], event)
-proc cQTapGesture_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQTapGesture_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTapGesture](fcQTapGesture_vdata(self))
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
-method childEvent*(self: VirtualQTapGesture, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
-  QTapGesturechildEvent(self[], event)
-proc cQTapGesture_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQTapGesture_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTapGesture](fcQTapGesture_vdata(self))
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
-method customEvent*(self: VirtualQTapGesture, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QTapGesturecustomEvent(self[], event)
-proc cQTapGesture_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQTapGesture_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTapGesture](fcQTapGesture_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
-method connectNotify*(self: VirtualQTapGesture, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QTapGestureconnectNotify(self[], signal)
-proc cQTapGesture_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQTapGesture_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTapGesture](fcQTapGesture_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
-method disconnectNotify*(self: VirtualQTapGesture, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QTapGesturedisconnectNotify(self[], signal)
-proc cQTapGesture_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQTapGesture_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTapGesture](fcQTapGesture_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
+
 
 proc sender*(self: gen_qgesture_types.QTapGesture): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQTapGesture_protectedbase_sender(self.h), owned: false)
@@ -2188,25 +2228,25 @@ proc create*(T: type gen_qgesture_types.QTapGesture,
     let vtbl = cast[ref QTapGestureVTable](fcQTapGesture_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQTapGesture_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQTapGesture_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQTapGesture_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQTapGesture_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQTapGesture_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQTapGesture_vtable_callback_metacall
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQTapGesture_vtable_callback_event
+    vtbl[].vtbl.event = fcQTapGesture_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQTapGesture_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQTapGesture_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQTapGesture_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQTapGesture_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQTapGesture_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQTapGesture_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQTapGesture_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQTapGesture_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQTapGesture_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQTapGesture_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQTapGesture_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQTapGesture_vtable_callback_disconnectNotify
   gen_qgesture_types.QTapGesture(h: fcQTapGesture_new(addr(vtbl[].vtbl), addr(vtbl[])), owned: true)
 
 proc create*(T: type gen_qgesture_types.QTapGesture,
@@ -2218,25 +2258,25 @@ proc create*(T: type gen_qgesture_types.QTapGesture,
     let vtbl = cast[ref QTapGestureVTable](fcQTapGesture_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQTapGesture_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQTapGesture_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQTapGesture_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQTapGesture_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQTapGesture_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQTapGesture_vtable_callback_metacall
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQTapGesture_vtable_callback_event
+    vtbl[].vtbl.event = fcQTapGesture_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQTapGesture_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQTapGesture_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQTapGesture_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQTapGesture_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQTapGesture_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQTapGesture_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQTapGesture_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQTapGesture_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQTapGesture_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQTapGesture_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQTapGesture_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQTapGesture_vtable_callback_disconnectNotify
   gen_qgesture_types.QTapGesture(h: fcQTapGesture_new2(addr(vtbl[].vtbl), addr(vtbl[]), parent.h), owned: true)
 
 const cQTapGesture_mvtbl = cQTapGestureVTable(
@@ -2244,16 +2284,17 @@ const cQTapGesture_mvtbl = cQTapGestureVTable(
     let inst = cast[ptr typeof(VirtualQTapGesture()[])](self.fcQTapGesture_vtbl())
     inst[].h = nil
     inst[].owned = false,
-  metaObject: cQTapGesture_method_callback_metaObject,
-  metacast: cQTapGesture_method_callback_metacast,
-  metacall: cQTapGesture_method_callback_metacall,
-  event: cQTapGesture_method_callback_event,
-  eventFilter: cQTapGesture_method_callback_eventFilter,
-  timerEvent: cQTapGesture_method_callback_timerEvent,
-  childEvent: cQTapGesture_method_callback_childEvent,
-  customEvent: cQTapGesture_method_callback_customEvent,
-  connectNotify: cQTapGesture_method_callback_connectNotify,
-  disconnectNotify: cQTapGesture_method_callback_disconnectNotify,
+
+  metaObject: fcQTapGesture_method_callback_metaObject,
+  metacast: fcQTapGesture_method_callback_metacast,
+  metacall: fcQTapGesture_method_callback_metacall,
+  event: fcQTapGesture_method_callback_event,
+  eventFilter: fcQTapGesture_method_callback_eventFilter,
+  timerEvent: fcQTapGesture_method_callback_timerEvent,
+  childEvent: fcQTapGesture_method_callback_childEvent,
+  customEvent: fcQTapGesture_method_callback_customEvent,
+  connectNotify: fcQTapGesture_method_callback_connectNotify,
+  disconnectNotify: fcQTapGesture_method_callback_disconnectNotify,
 )
 proc create*(T: type gen_qgesture_types.QTapGesture,
     inst: VirtualQTapGesture) =
@@ -2337,6 +2378,7 @@ type QTapAndHoldGesturechildEventProc* = proc(self: QTapAndHoldGesture, event: g
 type QTapAndHoldGesturecustomEventProc* = proc(self: QTapAndHoldGesture, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QTapAndHoldGestureconnectNotifyProc* = proc(self: QTapAndHoldGesture, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QTapAndHoldGesturedisconnectNotifyProc* = proc(self: QTapAndHoldGesture, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+
 type QTapAndHoldGestureVTable* {.inheritable, pure.} = object
   vtbl: cQTapAndHoldGestureVTable
   metaObject*: QTapAndHoldGesturemetaObjectProc
@@ -2349,10 +2391,39 @@ type QTapAndHoldGestureVTable* {.inheritable, pure.} = object
   customEvent*: QTapAndHoldGesturecustomEventProc
   connectNotify*: QTapAndHoldGestureconnectNotifyProc
   disconnectNotify*: QTapAndHoldGesturedisconnectNotifyProc
+
 proc QTapAndHoldGesturemetaObject*(self: gen_qgesture_types.QTapAndHoldGesture): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQTapAndHoldGesture_virtualbase_metaObject(self.h), owned: false)
 
-proc cQTapAndHoldGesture_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
+proc QTapAndHoldGesturemetacast*(self: gen_qgesture_types.QTapAndHoldGesture, param1: cstring): pointer =
+  fcQTapAndHoldGesture_virtualbase_metacast(self.h, param1)
+
+proc QTapAndHoldGesturemetacall*(self: gen_qgesture_types.QTapAndHoldGesture, param1: cint, param2: cint, param3: pointer): cint =
+  fcQTapAndHoldGesture_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+proc QTapAndHoldGestureevent*(self: gen_qgesture_types.QTapAndHoldGesture, event: gen_qcoreevent_types.QEvent): bool =
+  fcQTapAndHoldGesture_virtualbase_event(self.h, event.h)
+
+proc QTapAndHoldGestureeventFilter*(self: gen_qgesture_types.QTapAndHoldGesture, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
+  fcQTapAndHoldGesture_virtualbase_eventFilter(self.h, watched.h, event.h)
+
+proc QTapAndHoldGesturetimerEvent*(self: gen_qgesture_types.QTapAndHoldGesture, event: gen_qcoreevent_types.QTimerEvent): void =
+  fcQTapAndHoldGesture_virtualbase_timerEvent(self.h, event.h)
+
+proc QTapAndHoldGesturechildEvent*(self: gen_qgesture_types.QTapAndHoldGesture, event: gen_qcoreevent_types.QChildEvent): void =
+  fcQTapAndHoldGesture_virtualbase_childEvent(self.h, event.h)
+
+proc QTapAndHoldGesturecustomEvent*(self: gen_qgesture_types.QTapAndHoldGesture, event: gen_qcoreevent_types.QEvent): void =
+  fcQTapAndHoldGesture_virtualbase_customEvent(self.h, event.h)
+
+proc QTapAndHoldGestureconnectNotify*(self: gen_qgesture_types.QTapAndHoldGesture, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQTapAndHoldGesture_virtualbase_connectNotify(self.h, signal.h)
+
+proc QTapAndHoldGesturedisconnectNotify*(self: gen_qgesture_types.QTapAndHoldGesture, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQTapAndHoldGesture_virtualbase_disconnectNotify(self.h, signal.h)
+
+
+proc fcQTapAndHoldGesture_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QTapAndHoldGestureVTable](fcQTapAndHoldGesture_vdata(self))
   let self = QTapAndHoldGesture(h: self)
   var virtualReturn = vtbl[].metaObject(self)
@@ -2361,20 +2432,14 @@ proc cQTapAndHoldGesture_vtable_callback_metaObject(self: pointer): pointer {.cd
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QTapAndHoldGesturemetacast*(self: gen_qgesture_types.QTapAndHoldGesture, param1: cstring): pointer =
-  fcQTapAndHoldGesture_virtualbase_metacast(self.h, param1)
-
-proc cQTapAndHoldGesture_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+proc fcQTapAndHoldGesture_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QTapAndHoldGestureVTable](fcQTapAndHoldGesture_vdata(self))
   let self = QTapAndHoldGesture(h: self)
   let slotval1 = (param1)
   var virtualReturn = vtbl[].metacast(self, slotval1)
   virtualReturn
 
-proc QTapAndHoldGesturemetacall*(self: gen_qgesture_types.QTapAndHoldGesture, param1: cint, param2: cint, param3: pointer): cint =
-  fcQTapAndHoldGesture_virtualbase_metacall(self.h, cint(param1), param2, param3)
-
-proc cQTapAndHoldGesture_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+proc fcQTapAndHoldGesture_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QTapAndHoldGestureVTable](fcQTapAndHoldGesture_vdata(self))
   let self = QTapAndHoldGesture(h: self)
   let slotval1 = cint(param1)
@@ -2383,20 +2448,14 @@ proc cQTapAndHoldGesture_vtable_callback_metacall(self: pointer, param1: cint, p
   var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QTapAndHoldGestureevent*(self: gen_qgesture_types.QTapAndHoldGesture, event: gen_qcoreevent_types.QEvent): bool =
-  fcQTapAndHoldGesture_virtualbase_event(self.h, event.h)
-
-proc cQTapAndHoldGesture_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
+proc fcQTapAndHoldGesture_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QTapAndHoldGestureVTable](fcQTapAndHoldGesture_vdata(self))
   let self = QTapAndHoldGesture(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
-proc QTapAndHoldGestureeventFilter*(self: gen_qgesture_types.QTapAndHoldGesture, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
-  fcQTapAndHoldGesture_virtualbase_eventFilter(self.h, watched.h, event.h)
-
-proc cQTapAndHoldGesture_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+proc fcQTapAndHoldGesture_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QTapAndHoldGestureVTable](fcQTapAndHoldGesture_vdata(self))
   let self = QTapAndHoldGesture(h: self)
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
@@ -2404,46 +2463,31 @@ proc cQTapAndHoldGesture_vtable_callback_eventFilter(self: pointer, watched: poi
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
-proc QTapAndHoldGesturetimerEvent*(self: gen_qgesture_types.QTapAndHoldGesture, event: gen_qcoreevent_types.QTimerEvent): void =
-  fcQTapAndHoldGesture_virtualbase_timerEvent(self.h, event.h)
-
-proc cQTapAndHoldGesture_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQTapAndHoldGesture_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTapAndHoldGestureVTable](fcQTapAndHoldGesture_vdata(self))
   let self = QTapAndHoldGesture(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
-proc QTapAndHoldGesturechildEvent*(self: gen_qgesture_types.QTapAndHoldGesture, event: gen_qcoreevent_types.QChildEvent): void =
-  fcQTapAndHoldGesture_virtualbase_childEvent(self.h, event.h)
-
-proc cQTapAndHoldGesture_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQTapAndHoldGesture_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTapAndHoldGestureVTable](fcQTapAndHoldGesture_vdata(self))
   let self = QTapAndHoldGesture(h: self)
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
-proc QTapAndHoldGesturecustomEvent*(self: gen_qgesture_types.QTapAndHoldGesture, event: gen_qcoreevent_types.QEvent): void =
-  fcQTapAndHoldGesture_virtualbase_customEvent(self.h, event.h)
-
-proc cQTapAndHoldGesture_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQTapAndHoldGesture_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTapAndHoldGestureVTable](fcQTapAndHoldGesture_vdata(self))
   let self = QTapAndHoldGesture(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
-proc QTapAndHoldGestureconnectNotify*(self: gen_qgesture_types.QTapAndHoldGesture, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQTapAndHoldGesture_virtualbase_connectNotify(self.h, signal.h)
-
-proc cQTapAndHoldGesture_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQTapAndHoldGesture_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTapAndHoldGestureVTable](fcQTapAndHoldGesture_vdata(self))
   let self = QTapAndHoldGesture(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
-proc QTapAndHoldGesturedisconnectNotify*(self: gen_qgesture_types.QTapAndHoldGesture, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQTapAndHoldGesture_virtualbase_disconnectNotify(self.h, signal.h)
-
-proc cQTapAndHoldGesture_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQTapAndHoldGesture_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTapAndHoldGestureVTable](fcQTapAndHoldGesture_vdata(self))
   let self = QTapAndHoldGesture(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
@@ -2451,9 +2495,29 @@ proc cQTapAndHoldGesture_vtable_callback_disconnectNotify(self: pointer, signal:
 
 type VirtualQTapAndHoldGesture* {.inheritable.} = ref object of QTapAndHoldGesture
   vtbl*: cQTapAndHoldGestureVTable
+
 method metaObject*(self: VirtualQTapAndHoldGesture): gen_qobjectdefs_types.QMetaObject {.base.} =
   QTapAndHoldGesturemetaObject(self[])
-proc cQTapAndHoldGesture_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
+method metacast*(self: VirtualQTapAndHoldGesture, param1: cstring): pointer {.base.} =
+  QTapAndHoldGesturemetacast(self[], param1)
+method metacall*(self: VirtualQTapAndHoldGesture, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QTapAndHoldGesturemetacall(self[], param1, param2, param3)
+method event*(self: VirtualQTapAndHoldGesture, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QTapAndHoldGestureevent(self[], event)
+method eventFilter*(self: VirtualQTapAndHoldGesture, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QTapAndHoldGestureeventFilter(self[], watched, event)
+method timerEvent*(self: VirtualQTapAndHoldGesture, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QTapAndHoldGesturetimerEvent(self[], event)
+method childEvent*(self: VirtualQTapAndHoldGesture, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QTapAndHoldGesturechildEvent(self[], event)
+method customEvent*(self: VirtualQTapAndHoldGesture, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QTapAndHoldGesturecustomEvent(self[], event)
+method connectNotify*(self: VirtualQTapAndHoldGesture, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QTapAndHoldGestureconnectNotify(self[], signal)
+method disconnectNotify*(self: VirtualQTapAndHoldGesture, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QTapAndHoldGesturedisconnectNotify(self[], signal)
+
+proc fcQTapAndHoldGesture_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQTapAndHoldGesture](fcQTapAndHoldGesture_vdata(self))
   var virtualReturn = inst.metaObject()
   virtualReturn.owned = false # TODO move?
@@ -2461,17 +2525,13 @@ proc cQTapAndHoldGesture_method_callback_metaObject(self: pointer): pointer {.cd
   virtualReturn.h = nil
   virtualReturn_h
 
-method metacast*(self: VirtualQTapAndHoldGesture, param1: cstring): pointer {.base.} =
-  QTapAndHoldGesturemetacast(self[], param1)
-proc cQTapAndHoldGesture_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+proc fcQTapAndHoldGesture_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQTapAndHoldGesture](fcQTapAndHoldGesture_vdata(self))
   let slotval1 = (param1)
   var virtualReturn = inst.metacast(slotval1)
   virtualReturn
 
-method metacall*(self: VirtualQTapAndHoldGesture, param1: cint, param2: cint, param3: pointer): cint {.base.} =
-  QTapAndHoldGesturemetacall(self[], param1, param2, param3)
-proc cQTapAndHoldGesture_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+proc fcQTapAndHoldGesture_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQTapAndHoldGesture](fcQTapAndHoldGesture_vdata(self))
   let slotval1 = cint(param1)
   let slotval2 = param2
@@ -2479,57 +2539,44 @@ proc cQTapAndHoldGesture_method_callback_metacall(self: pointer, param1: cint, p
   var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
-method event*(self: VirtualQTapAndHoldGesture, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QTapAndHoldGestureevent(self[], event)
-proc cQTapAndHoldGesture_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
+proc fcQTapAndHoldGesture_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQTapAndHoldGesture](fcQTapAndHoldGesture_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
-method eventFilter*(self: VirtualQTapAndHoldGesture, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QTapAndHoldGestureeventFilter(self[], watched, event)
-proc cQTapAndHoldGesture_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+proc fcQTapAndHoldGesture_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQTapAndHoldGesture](fcQTapAndHoldGesture_vdata(self))
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
   let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
-method timerEvent*(self: VirtualQTapAndHoldGesture, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
-  QTapAndHoldGesturetimerEvent(self[], event)
-proc cQTapAndHoldGesture_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQTapAndHoldGesture_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTapAndHoldGesture](fcQTapAndHoldGesture_vdata(self))
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
-method childEvent*(self: VirtualQTapAndHoldGesture, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
-  QTapAndHoldGesturechildEvent(self[], event)
-proc cQTapAndHoldGesture_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQTapAndHoldGesture_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTapAndHoldGesture](fcQTapAndHoldGesture_vdata(self))
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
-method customEvent*(self: VirtualQTapAndHoldGesture, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QTapAndHoldGesturecustomEvent(self[], event)
-proc cQTapAndHoldGesture_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQTapAndHoldGesture_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTapAndHoldGesture](fcQTapAndHoldGesture_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
-method connectNotify*(self: VirtualQTapAndHoldGesture, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QTapAndHoldGestureconnectNotify(self[], signal)
-proc cQTapAndHoldGesture_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQTapAndHoldGesture_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTapAndHoldGesture](fcQTapAndHoldGesture_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
-method disconnectNotify*(self: VirtualQTapAndHoldGesture, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QTapAndHoldGesturedisconnectNotify(self[], signal)
-proc cQTapAndHoldGesture_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQTapAndHoldGesture_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTapAndHoldGesture](fcQTapAndHoldGesture_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
+
 
 proc sender*(self: gen_qgesture_types.QTapAndHoldGesture): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQTapAndHoldGesture_protectedbase_sender(self.h), owned: false)
@@ -2551,25 +2598,25 @@ proc create*(T: type gen_qgesture_types.QTapAndHoldGesture,
     let vtbl = cast[ref QTapAndHoldGestureVTable](fcQTapAndHoldGesture_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQTapAndHoldGesture_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQTapAndHoldGesture_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQTapAndHoldGesture_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQTapAndHoldGesture_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQTapAndHoldGesture_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQTapAndHoldGesture_vtable_callback_metacall
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQTapAndHoldGesture_vtable_callback_event
+    vtbl[].vtbl.event = fcQTapAndHoldGesture_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQTapAndHoldGesture_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQTapAndHoldGesture_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQTapAndHoldGesture_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQTapAndHoldGesture_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQTapAndHoldGesture_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQTapAndHoldGesture_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQTapAndHoldGesture_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQTapAndHoldGesture_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQTapAndHoldGesture_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQTapAndHoldGesture_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQTapAndHoldGesture_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQTapAndHoldGesture_vtable_callback_disconnectNotify
   gen_qgesture_types.QTapAndHoldGesture(h: fcQTapAndHoldGesture_new(addr(vtbl[].vtbl), addr(vtbl[])), owned: true)
 
 proc create*(T: type gen_qgesture_types.QTapAndHoldGesture,
@@ -2581,25 +2628,25 @@ proc create*(T: type gen_qgesture_types.QTapAndHoldGesture,
     let vtbl = cast[ref QTapAndHoldGestureVTable](fcQTapAndHoldGesture_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQTapAndHoldGesture_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQTapAndHoldGesture_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQTapAndHoldGesture_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQTapAndHoldGesture_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQTapAndHoldGesture_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQTapAndHoldGesture_vtable_callback_metacall
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQTapAndHoldGesture_vtable_callback_event
+    vtbl[].vtbl.event = fcQTapAndHoldGesture_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQTapAndHoldGesture_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQTapAndHoldGesture_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQTapAndHoldGesture_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQTapAndHoldGesture_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQTapAndHoldGesture_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQTapAndHoldGesture_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQTapAndHoldGesture_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQTapAndHoldGesture_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQTapAndHoldGesture_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQTapAndHoldGesture_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQTapAndHoldGesture_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQTapAndHoldGesture_vtable_callback_disconnectNotify
   gen_qgesture_types.QTapAndHoldGesture(h: fcQTapAndHoldGesture_new2(addr(vtbl[].vtbl), addr(vtbl[]), parent.h), owned: true)
 
 const cQTapAndHoldGesture_mvtbl = cQTapAndHoldGestureVTable(
@@ -2607,16 +2654,17 @@ const cQTapAndHoldGesture_mvtbl = cQTapAndHoldGestureVTable(
     let inst = cast[ptr typeof(VirtualQTapAndHoldGesture()[])](self.fcQTapAndHoldGesture_vtbl())
     inst[].h = nil
     inst[].owned = false,
-  metaObject: cQTapAndHoldGesture_method_callback_metaObject,
-  metacast: cQTapAndHoldGesture_method_callback_metacast,
-  metacall: cQTapAndHoldGesture_method_callback_metacall,
-  event: cQTapAndHoldGesture_method_callback_event,
-  eventFilter: cQTapAndHoldGesture_method_callback_eventFilter,
-  timerEvent: cQTapAndHoldGesture_method_callback_timerEvent,
-  childEvent: cQTapAndHoldGesture_method_callback_childEvent,
-  customEvent: cQTapAndHoldGesture_method_callback_customEvent,
-  connectNotify: cQTapAndHoldGesture_method_callback_connectNotify,
-  disconnectNotify: cQTapAndHoldGesture_method_callback_disconnectNotify,
+
+  metaObject: fcQTapAndHoldGesture_method_callback_metaObject,
+  metacast: fcQTapAndHoldGesture_method_callback_metacast,
+  metacall: fcQTapAndHoldGesture_method_callback_metacall,
+  event: fcQTapAndHoldGesture_method_callback_event,
+  eventFilter: fcQTapAndHoldGesture_method_callback_eventFilter,
+  timerEvent: fcQTapAndHoldGesture_method_callback_timerEvent,
+  childEvent: fcQTapAndHoldGesture_method_callback_childEvent,
+  customEvent: fcQTapAndHoldGesture_method_callback_customEvent,
+  connectNotify: fcQTapAndHoldGesture_method_callback_connectNotify,
+  disconnectNotify: fcQTapAndHoldGesture_method_callback_disconnectNotify,
 )
 proc create*(T: type gen_qgesture_types.QTapAndHoldGesture,
     inst: VirtualQTapAndHoldGesture) =

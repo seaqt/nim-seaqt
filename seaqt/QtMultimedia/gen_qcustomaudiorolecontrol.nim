@@ -118,7 +118,7 @@ proc customAudioRoleChanged*(self: gen_qcustomaudiorolecontrol_types.QCustomAudi
   fcQCustomAudioRoleControl_customAudioRoleChanged(self.h, struct_miqt_string(data: if len(role) > 0: addr role[0] else: nil, len: csize_t(len(role))))
 
 type QCustomAudioRoleControlcustomAudioRoleChangedSlot* = proc(role: openArray[char])
-proc cQCustomAudioRoleControl_slot_callback_customAudioRoleChanged(slot: int, role: struct_miqt_string) {.cdecl.} =
+proc fcQCustomAudioRoleControl_slot_callback_customAudioRoleChanged(slot: int, role: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QCustomAudioRoleControlcustomAudioRoleChangedSlot](cast[pointer](slot))
   let vrole_ms = role
   let vrolex_ret = string.fromBytes(vrole_ms)
@@ -127,15 +127,15 @@ proc cQCustomAudioRoleControl_slot_callback_customAudioRoleChanged(slot: int, ro
 
   nimfunc[](slotval1)
 
-proc cQCustomAudioRoleControl_slot_callback_customAudioRoleChanged_release(slot: int) {.cdecl.} =
+proc fcQCustomAudioRoleControl_slot_callback_customAudioRoleChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QCustomAudioRoleControlcustomAudioRoleChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc oncustomAudioRoleChanged*(self: gen_qcustomaudiorolecontrol_types.QCustomAudioRoleControl, slot: QCustomAudioRoleControlcustomAudioRoleChangedSlot) =
+proc onCustomAudioRoleChanged*(self: gen_qcustomaudiorolecontrol_types.QCustomAudioRoleControl, slot: QCustomAudioRoleControlcustomAudioRoleChangedSlot) =
   var tmp = new QCustomAudioRoleControlcustomAudioRoleChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQCustomAudioRoleControl_connect_customAudioRoleChanged(self.h, cast[int](addr tmp[]), cQCustomAudioRoleControl_slot_callback_customAudioRoleChanged, cQCustomAudioRoleControl_slot_callback_customAudioRoleChanged_release)
+  fcQCustomAudioRoleControl_connect_customAudioRoleChanged(self.h, cast[int](addr tmp[]), fcQCustomAudioRoleControl_slot_callback_customAudioRoleChanged, fcQCustomAudioRoleControl_slot_callback_customAudioRoleChanged_release)
 
 proc tr*(_: type gen_qcustomaudiorolecontrol_types.QCustomAudioRoleControl, s: cstring, c: cstring): string =
   let v_ms = fcQCustomAudioRoleControl_tr2(s, c)

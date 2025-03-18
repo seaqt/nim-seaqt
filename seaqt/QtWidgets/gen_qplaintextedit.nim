@@ -214,6 +214,7 @@ proc fcQPlainTextEdit_zoomIn1(self: pointer, range: cint): void {.importc: "QPla
 proc fcQPlainTextEdit_zoomOut1(self: pointer, range: cint): void {.importc: "QPlainTextEdit_zoomOut1".}
 proc fcQPlainTextEdit_vtbl(self: pointer): pointer {.importc: "QPlainTextEdit_vtbl".}
 proc fcQPlainTextEdit_vdata(self: pointer): pointer {.importc: "QPlainTextEdit_vdata".}
+
 type cQPlainTextEditVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -379,6 +380,7 @@ proc fcQPlainTextDocumentLayout_trUtf82(s: cstring, c: cstring): struct_miqt_str
 proc fcQPlainTextDocumentLayout_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QPlainTextDocumentLayout_trUtf83".}
 proc fcQPlainTextDocumentLayout_vtbl(self: pointer): pointer {.importc: "QPlainTextDocumentLayout_vtbl".}
 proc fcQPlainTextDocumentLayout_vdata(self: pointer): pointer {.importc: "QPlainTextDocumentLayout_vdata".}
+
 type cQPlainTextDocumentLayoutVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -690,121 +692,121 @@ proc textChanged*(self: gen_qplaintextedit_types.QPlainTextEdit): void =
   fcQPlainTextEdit_textChanged(self.h)
 
 type QPlainTextEdittextChangedSlot* = proc()
-proc cQPlainTextEdit_slot_callback_textChanged(slot: int) {.cdecl.} =
+proc fcQPlainTextEdit_slot_callback_textChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QPlainTextEdittextChangedSlot](cast[pointer](slot))
   nimfunc[]()
 
-proc cQPlainTextEdit_slot_callback_textChanged_release(slot: int) {.cdecl.} =
+proc fcQPlainTextEdit_slot_callback_textChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QPlainTextEdittextChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc ontextChanged*(self: gen_qplaintextedit_types.QPlainTextEdit, slot: QPlainTextEdittextChangedSlot) =
+proc onTextChanged*(self: gen_qplaintextedit_types.QPlainTextEdit, slot: QPlainTextEdittextChangedSlot) =
   var tmp = new QPlainTextEdittextChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQPlainTextEdit_connect_textChanged(self.h, cast[int](addr tmp[]), cQPlainTextEdit_slot_callback_textChanged, cQPlainTextEdit_slot_callback_textChanged_release)
+  fcQPlainTextEdit_connect_textChanged(self.h, cast[int](addr tmp[]), fcQPlainTextEdit_slot_callback_textChanged, fcQPlainTextEdit_slot_callback_textChanged_release)
 
 proc undoAvailable*(self: gen_qplaintextedit_types.QPlainTextEdit, b: bool): void =
   fcQPlainTextEdit_undoAvailable(self.h, b)
 
 type QPlainTextEditundoAvailableSlot* = proc(b: bool)
-proc cQPlainTextEdit_slot_callback_undoAvailable(slot: int, b: bool) {.cdecl.} =
+proc fcQPlainTextEdit_slot_callback_undoAvailable(slot: int, b: bool) {.cdecl.} =
   let nimfunc = cast[ptr QPlainTextEditundoAvailableSlot](cast[pointer](slot))
   let slotval1 = b
 
   nimfunc[](slotval1)
 
-proc cQPlainTextEdit_slot_callback_undoAvailable_release(slot: int) {.cdecl.} =
+proc fcQPlainTextEdit_slot_callback_undoAvailable_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QPlainTextEditundoAvailableSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onundoAvailable*(self: gen_qplaintextedit_types.QPlainTextEdit, slot: QPlainTextEditundoAvailableSlot) =
+proc onUndoAvailable*(self: gen_qplaintextedit_types.QPlainTextEdit, slot: QPlainTextEditundoAvailableSlot) =
   var tmp = new QPlainTextEditundoAvailableSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQPlainTextEdit_connect_undoAvailable(self.h, cast[int](addr tmp[]), cQPlainTextEdit_slot_callback_undoAvailable, cQPlainTextEdit_slot_callback_undoAvailable_release)
+  fcQPlainTextEdit_connect_undoAvailable(self.h, cast[int](addr tmp[]), fcQPlainTextEdit_slot_callback_undoAvailable, fcQPlainTextEdit_slot_callback_undoAvailable_release)
 
 proc redoAvailable*(self: gen_qplaintextedit_types.QPlainTextEdit, b: bool): void =
   fcQPlainTextEdit_redoAvailable(self.h, b)
 
 type QPlainTextEditredoAvailableSlot* = proc(b: bool)
-proc cQPlainTextEdit_slot_callback_redoAvailable(slot: int, b: bool) {.cdecl.} =
+proc fcQPlainTextEdit_slot_callback_redoAvailable(slot: int, b: bool) {.cdecl.} =
   let nimfunc = cast[ptr QPlainTextEditredoAvailableSlot](cast[pointer](slot))
   let slotval1 = b
 
   nimfunc[](slotval1)
 
-proc cQPlainTextEdit_slot_callback_redoAvailable_release(slot: int) {.cdecl.} =
+proc fcQPlainTextEdit_slot_callback_redoAvailable_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QPlainTextEditredoAvailableSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onredoAvailable*(self: gen_qplaintextedit_types.QPlainTextEdit, slot: QPlainTextEditredoAvailableSlot) =
+proc onRedoAvailable*(self: gen_qplaintextedit_types.QPlainTextEdit, slot: QPlainTextEditredoAvailableSlot) =
   var tmp = new QPlainTextEditredoAvailableSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQPlainTextEdit_connect_redoAvailable(self.h, cast[int](addr tmp[]), cQPlainTextEdit_slot_callback_redoAvailable, cQPlainTextEdit_slot_callback_redoAvailable_release)
+  fcQPlainTextEdit_connect_redoAvailable(self.h, cast[int](addr tmp[]), fcQPlainTextEdit_slot_callback_redoAvailable, fcQPlainTextEdit_slot_callback_redoAvailable_release)
 
 proc copyAvailable*(self: gen_qplaintextedit_types.QPlainTextEdit, b: bool): void =
   fcQPlainTextEdit_copyAvailable(self.h, b)
 
 type QPlainTextEditcopyAvailableSlot* = proc(b: bool)
-proc cQPlainTextEdit_slot_callback_copyAvailable(slot: int, b: bool) {.cdecl.} =
+proc fcQPlainTextEdit_slot_callback_copyAvailable(slot: int, b: bool) {.cdecl.} =
   let nimfunc = cast[ptr QPlainTextEditcopyAvailableSlot](cast[pointer](slot))
   let slotval1 = b
 
   nimfunc[](slotval1)
 
-proc cQPlainTextEdit_slot_callback_copyAvailable_release(slot: int) {.cdecl.} =
+proc fcQPlainTextEdit_slot_callback_copyAvailable_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QPlainTextEditcopyAvailableSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc oncopyAvailable*(self: gen_qplaintextedit_types.QPlainTextEdit, slot: QPlainTextEditcopyAvailableSlot) =
+proc onCopyAvailable*(self: gen_qplaintextedit_types.QPlainTextEdit, slot: QPlainTextEditcopyAvailableSlot) =
   var tmp = new QPlainTextEditcopyAvailableSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQPlainTextEdit_connect_copyAvailable(self.h, cast[int](addr tmp[]), cQPlainTextEdit_slot_callback_copyAvailable, cQPlainTextEdit_slot_callback_copyAvailable_release)
+  fcQPlainTextEdit_connect_copyAvailable(self.h, cast[int](addr tmp[]), fcQPlainTextEdit_slot_callback_copyAvailable, fcQPlainTextEdit_slot_callback_copyAvailable_release)
 
 proc selectionChanged*(self: gen_qplaintextedit_types.QPlainTextEdit): void =
   fcQPlainTextEdit_selectionChanged(self.h)
 
 type QPlainTextEditselectionChangedSlot* = proc()
-proc cQPlainTextEdit_slot_callback_selectionChanged(slot: int) {.cdecl.} =
+proc fcQPlainTextEdit_slot_callback_selectionChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QPlainTextEditselectionChangedSlot](cast[pointer](slot))
   nimfunc[]()
 
-proc cQPlainTextEdit_slot_callback_selectionChanged_release(slot: int) {.cdecl.} =
+proc fcQPlainTextEdit_slot_callback_selectionChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QPlainTextEditselectionChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onselectionChanged*(self: gen_qplaintextedit_types.QPlainTextEdit, slot: QPlainTextEditselectionChangedSlot) =
+proc onSelectionChanged*(self: gen_qplaintextedit_types.QPlainTextEdit, slot: QPlainTextEditselectionChangedSlot) =
   var tmp = new QPlainTextEditselectionChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQPlainTextEdit_connect_selectionChanged(self.h, cast[int](addr tmp[]), cQPlainTextEdit_slot_callback_selectionChanged, cQPlainTextEdit_slot_callback_selectionChanged_release)
+  fcQPlainTextEdit_connect_selectionChanged(self.h, cast[int](addr tmp[]), fcQPlainTextEdit_slot_callback_selectionChanged, fcQPlainTextEdit_slot_callback_selectionChanged_release)
 
 proc cursorPositionChanged*(self: gen_qplaintextedit_types.QPlainTextEdit): void =
   fcQPlainTextEdit_cursorPositionChanged(self.h)
 
 type QPlainTextEditcursorPositionChangedSlot* = proc()
-proc cQPlainTextEdit_slot_callback_cursorPositionChanged(slot: int) {.cdecl.} =
+proc fcQPlainTextEdit_slot_callback_cursorPositionChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QPlainTextEditcursorPositionChangedSlot](cast[pointer](slot))
   nimfunc[]()
 
-proc cQPlainTextEdit_slot_callback_cursorPositionChanged_release(slot: int) {.cdecl.} =
+proc fcQPlainTextEdit_slot_callback_cursorPositionChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QPlainTextEditcursorPositionChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc oncursorPositionChanged*(self: gen_qplaintextedit_types.QPlainTextEdit, slot: QPlainTextEditcursorPositionChangedSlot) =
+proc onCursorPositionChanged*(self: gen_qplaintextedit_types.QPlainTextEdit, slot: QPlainTextEditcursorPositionChangedSlot) =
   var tmp = new QPlainTextEditcursorPositionChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQPlainTextEdit_connect_cursorPositionChanged(self.h, cast[int](addr tmp[]), cQPlainTextEdit_slot_callback_cursorPositionChanged, cQPlainTextEdit_slot_callback_cursorPositionChanged_release)
+  fcQPlainTextEdit_connect_cursorPositionChanged(self.h, cast[int](addr tmp[]), fcQPlainTextEdit_slot_callback_cursorPositionChanged, fcQPlainTextEdit_slot_callback_cursorPositionChanged_release)
 
 proc updateRequest*(self: gen_qplaintextedit_types.QPlainTextEdit, rect: gen_qrect_types.QRect, dy: cint): void =
   fcQPlainTextEdit_updateRequest(self.h, rect.h, dy)
 
 type QPlainTextEditupdateRequestSlot* = proc(rect: gen_qrect_types.QRect, dy: cint)
-proc cQPlainTextEdit_slot_callback_updateRequest(slot: int, rect: pointer, dy: cint) {.cdecl.} =
+proc fcQPlainTextEdit_slot_callback_updateRequest(slot: int, rect: pointer, dy: cint) {.cdecl.} =
   let nimfunc = cast[ptr QPlainTextEditupdateRequestSlot](cast[pointer](slot))
   let slotval1 = gen_qrect_types.QRect(h: rect, owned: false)
 
@@ -812,55 +814,55 @@ proc cQPlainTextEdit_slot_callback_updateRequest(slot: int, rect: pointer, dy: c
 
   nimfunc[](slotval1, slotval2)
 
-proc cQPlainTextEdit_slot_callback_updateRequest_release(slot: int) {.cdecl.} =
+proc fcQPlainTextEdit_slot_callback_updateRequest_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QPlainTextEditupdateRequestSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onupdateRequest*(self: gen_qplaintextedit_types.QPlainTextEdit, slot: QPlainTextEditupdateRequestSlot) =
+proc onUpdateRequest*(self: gen_qplaintextedit_types.QPlainTextEdit, slot: QPlainTextEditupdateRequestSlot) =
   var tmp = new QPlainTextEditupdateRequestSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQPlainTextEdit_connect_updateRequest(self.h, cast[int](addr tmp[]), cQPlainTextEdit_slot_callback_updateRequest, cQPlainTextEdit_slot_callback_updateRequest_release)
+  fcQPlainTextEdit_connect_updateRequest(self.h, cast[int](addr tmp[]), fcQPlainTextEdit_slot_callback_updateRequest, fcQPlainTextEdit_slot_callback_updateRequest_release)
 
 proc blockCountChanged*(self: gen_qplaintextedit_types.QPlainTextEdit, newBlockCount: cint): void =
   fcQPlainTextEdit_blockCountChanged(self.h, newBlockCount)
 
 type QPlainTextEditblockCountChangedSlot* = proc(newBlockCount: cint)
-proc cQPlainTextEdit_slot_callback_blockCountChanged(slot: int, newBlockCount: cint) {.cdecl.} =
+proc fcQPlainTextEdit_slot_callback_blockCountChanged(slot: int, newBlockCount: cint) {.cdecl.} =
   let nimfunc = cast[ptr QPlainTextEditblockCountChangedSlot](cast[pointer](slot))
   let slotval1 = newBlockCount
 
   nimfunc[](slotval1)
 
-proc cQPlainTextEdit_slot_callback_blockCountChanged_release(slot: int) {.cdecl.} =
+proc fcQPlainTextEdit_slot_callback_blockCountChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QPlainTextEditblockCountChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onblockCountChanged*(self: gen_qplaintextedit_types.QPlainTextEdit, slot: QPlainTextEditblockCountChangedSlot) =
+proc onBlockCountChanged*(self: gen_qplaintextedit_types.QPlainTextEdit, slot: QPlainTextEditblockCountChangedSlot) =
   var tmp = new QPlainTextEditblockCountChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQPlainTextEdit_connect_blockCountChanged(self.h, cast[int](addr tmp[]), cQPlainTextEdit_slot_callback_blockCountChanged, cQPlainTextEdit_slot_callback_blockCountChanged_release)
+  fcQPlainTextEdit_connect_blockCountChanged(self.h, cast[int](addr tmp[]), fcQPlainTextEdit_slot_callback_blockCountChanged, fcQPlainTextEdit_slot_callback_blockCountChanged_release)
 
 proc modificationChanged*(self: gen_qplaintextedit_types.QPlainTextEdit, param1: bool): void =
   fcQPlainTextEdit_modificationChanged(self.h, param1)
 
 type QPlainTextEditmodificationChangedSlot* = proc(param1: bool)
-proc cQPlainTextEdit_slot_callback_modificationChanged(slot: int, param1: bool) {.cdecl.} =
+proc fcQPlainTextEdit_slot_callback_modificationChanged(slot: int, param1: bool) {.cdecl.} =
   let nimfunc = cast[ptr QPlainTextEditmodificationChangedSlot](cast[pointer](slot))
   let slotval1 = param1
 
   nimfunc[](slotval1)
 
-proc cQPlainTextEdit_slot_callback_modificationChanged_release(slot: int) {.cdecl.} =
+proc fcQPlainTextEdit_slot_callback_modificationChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QPlainTextEditmodificationChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onmodificationChanged*(self: gen_qplaintextedit_types.QPlainTextEdit, slot: QPlainTextEditmodificationChangedSlot) =
+proc onModificationChanged*(self: gen_qplaintextedit_types.QPlainTextEdit, slot: QPlainTextEditmodificationChangedSlot) =
   var tmp = new QPlainTextEditmodificationChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQPlainTextEdit_connect_modificationChanged(self.h, cast[int](addr tmp[]), cQPlainTextEdit_slot_callback_modificationChanged, cQPlainTextEdit_slot_callback_modificationChanged_release)
+  fcQPlainTextEdit_connect_modificationChanged(self.h, cast[int](addr tmp[]), fcQPlainTextEdit_slot_callback_modificationChanged, fcQPlainTextEdit_slot_callback_modificationChanged_release)
 
 proc tr*(_: type gen_qplaintextedit_types.QPlainTextEdit, s: cstring, c: cstring): string =
   let v_ms = fcQPlainTextEdit_tr2(s, c)
@@ -963,6 +965,7 @@ type QPlainTextEditchildEventProc* = proc(self: QPlainTextEdit, event: gen_qcore
 type QPlainTextEditcustomEventProc* = proc(self: QPlainTextEdit, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QPlainTextEditconnectNotifyProc* = proc(self: QPlainTextEdit, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QPlainTextEditdisconnectNotifyProc* = proc(self: QPlainTextEdit, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+
 type QPlainTextEditVTable* {.inheritable, pure.} = object
   vtbl: cQPlainTextEditVTable
   metaObject*: QPlainTextEditmetaObjectProc
@@ -1024,10 +1027,186 @@ type QPlainTextEditVTable* {.inheritable, pure.} = object
   customEvent*: QPlainTextEditcustomEventProc
   connectNotify*: QPlainTextEditconnectNotifyProc
   disconnectNotify*: QPlainTextEditdisconnectNotifyProc
+
 proc QPlainTextEditmetaObject*(self: gen_qplaintextedit_types.QPlainTextEdit): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQPlainTextEdit_virtualbase_metaObject(self.h), owned: false)
 
-proc cQPlainTextEdit_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
+proc QPlainTextEditmetacast*(self: gen_qplaintextedit_types.QPlainTextEdit, param1: cstring): pointer =
+  fcQPlainTextEdit_virtualbase_metacast(self.h, param1)
+
+proc QPlainTextEditmetacall*(self: gen_qplaintextedit_types.QPlainTextEdit, param1: cint, param2: cint, param3: pointer): cint =
+  fcQPlainTextEdit_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+proc QPlainTextEditloadResource*(self: gen_qplaintextedit_types.QPlainTextEdit, typeVal: cint, name: gen_qurl_types.QUrl): gen_qvariant_types.QVariant =
+  gen_qvariant_types.QVariant(h: fcQPlainTextEdit_virtualbase_loadResource(self.h, typeVal, name.h), owned: true)
+
+proc QPlainTextEditinputMethodQuery*(self: gen_qplaintextedit_types.QPlainTextEdit, property: cint): gen_qvariant_types.QVariant =
+  gen_qvariant_types.QVariant(h: fcQPlainTextEdit_virtualbase_inputMethodQuery(self.h, cint(property)), owned: true)
+
+proc QPlainTextEditevent*(self: gen_qplaintextedit_types.QPlainTextEdit, e: gen_qcoreevent_types.QEvent): bool =
+  fcQPlainTextEdit_virtualbase_event(self.h, e.h)
+
+proc QPlainTextEdittimerEvent*(self: gen_qplaintextedit_types.QPlainTextEdit, e: gen_qcoreevent_types.QTimerEvent): void =
+  fcQPlainTextEdit_virtualbase_timerEvent(self.h, e.h)
+
+proc QPlainTextEditkeyPressEvent*(self: gen_qplaintextedit_types.QPlainTextEdit, e: gen_qevent_types.QKeyEvent): void =
+  fcQPlainTextEdit_virtualbase_keyPressEvent(self.h, e.h)
+
+proc QPlainTextEditkeyReleaseEvent*(self: gen_qplaintextedit_types.QPlainTextEdit, e: gen_qevent_types.QKeyEvent): void =
+  fcQPlainTextEdit_virtualbase_keyReleaseEvent(self.h, e.h)
+
+proc QPlainTextEditresizeEvent*(self: gen_qplaintextedit_types.QPlainTextEdit, e: gen_qevent_types.QResizeEvent): void =
+  fcQPlainTextEdit_virtualbase_resizeEvent(self.h, e.h)
+
+proc QPlainTextEditpaintEvent*(self: gen_qplaintextedit_types.QPlainTextEdit, e: gen_qevent_types.QPaintEvent): void =
+  fcQPlainTextEdit_virtualbase_paintEvent(self.h, e.h)
+
+proc QPlainTextEditmousePressEvent*(self: gen_qplaintextedit_types.QPlainTextEdit, e: gen_qevent_types.QMouseEvent): void =
+  fcQPlainTextEdit_virtualbase_mousePressEvent(self.h, e.h)
+
+proc QPlainTextEditmouseMoveEvent*(self: gen_qplaintextedit_types.QPlainTextEdit, e: gen_qevent_types.QMouseEvent): void =
+  fcQPlainTextEdit_virtualbase_mouseMoveEvent(self.h, e.h)
+
+proc QPlainTextEditmouseReleaseEvent*(self: gen_qplaintextedit_types.QPlainTextEdit, e: gen_qevent_types.QMouseEvent): void =
+  fcQPlainTextEdit_virtualbase_mouseReleaseEvent(self.h, e.h)
+
+proc QPlainTextEditmouseDoubleClickEvent*(self: gen_qplaintextedit_types.QPlainTextEdit, e: gen_qevent_types.QMouseEvent): void =
+  fcQPlainTextEdit_virtualbase_mouseDoubleClickEvent(self.h, e.h)
+
+proc QPlainTextEditfocusNextPrevChild*(self: gen_qplaintextedit_types.QPlainTextEdit, next: bool): bool =
+  fcQPlainTextEdit_virtualbase_focusNextPrevChild(self.h, next)
+
+proc QPlainTextEditcontextMenuEvent*(self: gen_qplaintextedit_types.QPlainTextEdit, e: gen_qevent_types.QContextMenuEvent): void =
+  fcQPlainTextEdit_virtualbase_contextMenuEvent(self.h, e.h)
+
+proc QPlainTextEditdragEnterEvent*(self: gen_qplaintextedit_types.QPlainTextEdit, e: gen_qevent_types.QDragEnterEvent): void =
+  fcQPlainTextEdit_virtualbase_dragEnterEvent(self.h, e.h)
+
+proc QPlainTextEditdragLeaveEvent*(self: gen_qplaintextedit_types.QPlainTextEdit, e: gen_qevent_types.QDragLeaveEvent): void =
+  fcQPlainTextEdit_virtualbase_dragLeaveEvent(self.h, e.h)
+
+proc QPlainTextEditdragMoveEvent*(self: gen_qplaintextedit_types.QPlainTextEdit, e: gen_qevent_types.QDragMoveEvent): void =
+  fcQPlainTextEdit_virtualbase_dragMoveEvent(self.h, e.h)
+
+proc QPlainTextEditdropEvent*(self: gen_qplaintextedit_types.QPlainTextEdit, e: gen_qevent_types.QDropEvent): void =
+  fcQPlainTextEdit_virtualbase_dropEvent(self.h, e.h)
+
+proc QPlainTextEditfocusInEvent*(self: gen_qplaintextedit_types.QPlainTextEdit, e: gen_qevent_types.QFocusEvent): void =
+  fcQPlainTextEdit_virtualbase_focusInEvent(self.h, e.h)
+
+proc QPlainTextEditfocusOutEvent*(self: gen_qplaintextedit_types.QPlainTextEdit, e: gen_qevent_types.QFocusEvent): void =
+  fcQPlainTextEdit_virtualbase_focusOutEvent(self.h, e.h)
+
+proc QPlainTextEditshowEvent*(self: gen_qplaintextedit_types.QPlainTextEdit, param1: gen_qevent_types.QShowEvent): void =
+  fcQPlainTextEdit_virtualbase_showEvent(self.h, param1.h)
+
+proc QPlainTextEditchangeEvent*(self: gen_qplaintextedit_types.QPlainTextEdit, e: gen_qcoreevent_types.QEvent): void =
+  fcQPlainTextEdit_virtualbase_changeEvent(self.h, e.h)
+
+proc QPlainTextEditwheelEvent*(self: gen_qplaintextedit_types.QPlainTextEdit, e: gen_qevent_types.QWheelEvent): void =
+  fcQPlainTextEdit_virtualbase_wheelEvent(self.h, e.h)
+
+proc QPlainTextEditcreateMimeDataFromSelection*(self: gen_qplaintextedit_types.QPlainTextEdit): gen_qmimedata_types.QMimeData =
+  gen_qmimedata_types.QMimeData(h: fcQPlainTextEdit_virtualbase_createMimeDataFromSelection(self.h), owned: false)
+
+proc QPlainTextEditcanInsertFromMimeData*(self: gen_qplaintextedit_types.QPlainTextEdit, source: gen_qmimedata_types.QMimeData): bool =
+  fcQPlainTextEdit_virtualbase_canInsertFromMimeData(self.h, source.h)
+
+proc QPlainTextEditinsertFromMimeData*(self: gen_qplaintextedit_types.QPlainTextEdit, source: gen_qmimedata_types.QMimeData): void =
+  fcQPlainTextEdit_virtualbase_insertFromMimeData(self.h, source.h)
+
+proc QPlainTextEditinputMethodEvent*(self: gen_qplaintextedit_types.QPlainTextEdit, param1: gen_qevent_types.QInputMethodEvent): void =
+  fcQPlainTextEdit_virtualbase_inputMethodEvent(self.h, param1.h)
+
+proc QPlainTextEditscrollContentsBy*(self: gen_qplaintextedit_types.QPlainTextEdit, dx: cint, dy: cint): void =
+  fcQPlainTextEdit_virtualbase_scrollContentsBy(self.h, dx, dy)
+
+proc QPlainTextEditdoSetTextCursor*(self: gen_qplaintextedit_types.QPlainTextEdit, cursor: gen_qtextcursor_types.QTextCursor): void =
+  fcQPlainTextEdit_virtualbase_doSetTextCursor(self.h, cursor.h)
+
+proc QPlainTextEditminimumSizeHint*(self: gen_qplaintextedit_types.QPlainTextEdit): gen_qsize_types.QSize =
+  gen_qsize_types.QSize(h: fcQPlainTextEdit_virtualbase_minimumSizeHint(self.h), owned: true)
+
+proc QPlainTextEditsizeHint*(self: gen_qplaintextedit_types.QPlainTextEdit): gen_qsize_types.QSize =
+  gen_qsize_types.QSize(h: fcQPlainTextEdit_virtualbase_sizeHint(self.h), owned: true)
+
+proc QPlainTextEditsetupViewport*(self: gen_qplaintextedit_types.QPlainTextEdit, viewport: gen_qwidget_types.QWidget): void =
+  fcQPlainTextEdit_virtualbase_setupViewport(self.h, viewport.h)
+
+proc QPlainTextEditeventFilter*(self: gen_qplaintextedit_types.QPlainTextEdit, param1: gen_qobject_types.QObject, param2: gen_qcoreevent_types.QEvent): bool =
+  fcQPlainTextEdit_virtualbase_eventFilter(self.h, param1.h, param2.h)
+
+proc QPlainTextEditviewportEvent*(self: gen_qplaintextedit_types.QPlainTextEdit, param1: gen_qcoreevent_types.QEvent): bool =
+  fcQPlainTextEdit_virtualbase_viewportEvent(self.h, param1.h)
+
+proc QPlainTextEditviewportSizeHint*(self: gen_qplaintextedit_types.QPlainTextEdit): gen_qsize_types.QSize =
+  gen_qsize_types.QSize(h: fcQPlainTextEdit_virtualbase_viewportSizeHint(self.h), owned: true)
+
+proc QPlainTextEditdevType*(self: gen_qplaintextedit_types.QPlainTextEdit): cint =
+  fcQPlainTextEdit_virtualbase_devType(self.h)
+
+proc QPlainTextEditsetVisible*(self: gen_qplaintextedit_types.QPlainTextEdit, visible: bool): void =
+  fcQPlainTextEdit_virtualbase_setVisible(self.h, visible)
+
+proc QPlainTextEditheightForWidth*(self: gen_qplaintextedit_types.QPlainTextEdit, param1: cint): cint =
+  fcQPlainTextEdit_virtualbase_heightForWidth(self.h, param1)
+
+proc QPlainTextEdithasHeightForWidth*(self: gen_qplaintextedit_types.QPlainTextEdit): bool =
+  fcQPlainTextEdit_virtualbase_hasHeightForWidth(self.h)
+
+proc QPlainTextEditpaintEngine*(self: gen_qplaintextedit_types.QPlainTextEdit): gen_qpaintengine_types.QPaintEngine =
+  gen_qpaintengine_types.QPaintEngine(h: fcQPlainTextEdit_virtualbase_paintEngine(self.h), owned: false)
+
+proc QPlainTextEditenterEvent*(self: gen_qplaintextedit_types.QPlainTextEdit, event: gen_qcoreevent_types.QEvent): void =
+  fcQPlainTextEdit_virtualbase_enterEvent(self.h, event.h)
+
+proc QPlainTextEditleaveEvent*(self: gen_qplaintextedit_types.QPlainTextEdit, event: gen_qcoreevent_types.QEvent): void =
+  fcQPlainTextEdit_virtualbase_leaveEvent(self.h, event.h)
+
+proc QPlainTextEditmoveEvent*(self: gen_qplaintextedit_types.QPlainTextEdit, event: gen_qevent_types.QMoveEvent): void =
+  fcQPlainTextEdit_virtualbase_moveEvent(self.h, event.h)
+
+proc QPlainTextEditcloseEvent*(self: gen_qplaintextedit_types.QPlainTextEdit, event: gen_qevent_types.QCloseEvent): void =
+  fcQPlainTextEdit_virtualbase_closeEvent(self.h, event.h)
+
+proc QPlainTextEdittabletEvent*(self: gen_qplaintextedit_types.QPlainTextEdit, event: gen_qevent_types.QTabletEvent): void =
+  fcQPlainTextEdit_virtualbase_tabletEvent(self.h, event.h)
+
+proc QPlainTextEditactionEvent*(self: gen_qplaintextedit_types.QPlainTextEdit, event: gen_qevent_types.QActionEvent): void =
+  fcQPlainTextEdit_virtualbase_actionEvent(self.h, event.h)
+
+proc QPlainTextEdithideEvent*(self: gen_qplaintextedit_types.QPlainTextEdit, event: gen_qevent_types.QHideEvent): void =
+  fcQPlainTextEdit_virtualbase_hideEvent(self.h, event.h)
+
+proc QPlainTextEditnativeEvent*(self: gen_qplaintextedit_types.QPlainTextEdit, eventType: openArray[byte], message: pointer, resultVal: ptr clong): bool =
+  fcQPlainTextEdit_virtualbase_nativeEvent(self.h, struct_miqt_string(data: cast[cstring](if len(eventType) == 0: nil else: unsafeAddr eventType[0]), len: csize_t(len(eventType))), message, resultVal)
+
+proc QPlainTextEditmetric*(self: gen_qplaintextedit_types.QPlainTextEdit, param1: cint): cint =
+  fcQPlainTextEdit_virtualbase_metric(self.h, cint(param1))
+
+proc QPlainTextEditinitPainter*(self: gen_qplaintextedit_types.QPlainTextEdit, painter: gen_qpainter_types.QPainter): void =
+  fcQPlainTextEdit_virtualbase_initPainter(self.h, painter.h)
+
+proc QPlainTextEditredirected*(self: gen_qplaintextedit_types.QPlainTextEdit, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice =
+  gen_qpaintdevice_types.QPaintDevice(h: fcQPlainTextEdit_virtualbase_redirected(self.h, offset.h), owned: false)
+
+proc QPlainTextEditsharedPainter*(self: gen_qplaintextedit_types.QPlainTextEdit): gen_qpainter_types.QPainter =
+  gen_qpainter_types.QPainter(h: fcQPlainTextEdit_virtualbase_sharedPainter(self.h), owned: false)
+
+proc QPlainTextEditchildEvent*(self: gen_qplaintextedit_types.QPlainTextEdit, event: gen_qcoreevent_types.QChildEvent): void =
+  fcQPlainTextEdit_virtualbase_childEvent(self.h, event.h)
+
+proc QPlainTextEditcustomEvent*(self: gen_qplaintextedit_types.QPlainTextEdit, event: gen_qcoreevent_types.QEvent): void =
+  fcQPlainTextEdit_virtualbase_customEvent(self.h, event.h)
+
+proc QPlainTextEditconnectNotify*(self: gen_qplaintextedit_types.QPlainTextEdit, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQPlainTextEdit_virtualbase_connectNotify(self.h, signal.h)
+
+proc QPlainTextEditdisconnectNotify*(self: gen_qplaintextedit_types.QPlainTextEdit, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQPlainTextEdit_virtualbase_disconnectNotify(self.h, signal.h)
+
+
+proc fcQPlainTextEdit_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QPlainTextEditVTable](fcQPlainTextEdit_vdata(self))
   let self = QPlainTextEdit(h: self)
   var virtualReturn = vtbl[].metaObject(self)
@@ -1036,20 +1215,14 @@ proc cQPlainTextEdit_vtable_callback_metaObject(self: pointer): pointer {.cdecl.
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QPlainTextEditmetacast*(self: gen_qplaintextedit_types.QPlainTextEdit, param1: cstring): pointer =
-  fcQPlainTextEdit_virtualbase_metacast(self.h, param1)
-
-proc cQPlainTextEdit_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+proc fcQPlainTextEdit_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QPlainTextEditVTable](fcQPlainTextEdit_vdata(self))
   let self = QPlainTextEdit(h: self)
   let slotval1 = (param1)
   var virtualReturn = vtbl[].metacast(self, slotval1)
   virtualReturn
 
-proc QPlainTextEditmetacall*(self: gen_qplaintextedit_types.QPlainTextEdit, param1: cint, param2: cint, param3: pointer): cint =
-  fcQPlainTextEdit_virtualbase_metacall(self.h, cint(param1), param2, param3)
-
-proc cQPlainTextEdit_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+proc fcQPlainTextEdit_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QPlainTextEditVTable](fcQPlainTextEdit_vdata(self))
   let self = QPlainTextEdit(h: self)
   let slotval1 = cint(param1)
@@ -1058,10 +1231,7 @@ proc cQPlainTextEdit_vtable_callback_metacall(self: pointer, param1: cint, param
   var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QPlainTextEditloadResource*(self: gen_qplaintextedit_types.QPlainTextEdit, typeVal: cint, name: gen_qurl_types.QUrl): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQPlainTextEdit_virtualbase_loadResource(self.h, typeVal, name.h), owned: true)
-
-proc cQPlainTextEdit_vtable_callback_loadResource(self: pointer, typeVal: cint, name: pointer): pointer {.cdecl.} =
+proc fcQPlainTextEdit_vtable_callback_loadResource(self: pointer, typeVal: cint, name: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QPlainTextEditVTable](fcQPlainTextEdit_vdata(self))
   let self = QPlainTextEdit(h: self)
   let slotval1 = typeVal
@@ -1072,10 +1242,7 @@ proc cQPlainTextEdit_vtable_callback_loadResource(self: pointer, typeVal: cint, 
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QPlainTextEditinputMethodQuery*(self: gen_qplaintextedit_types.QPlainTextEdit, property: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQPlainTextEdit_virtualbase_inputMethodQuery(self.h, cint(property)), owned: true)
-
-proc cQPlainTextEdit_vtable_callback_inputMethodQuery(self: pointer, property: cint): pointer {.cdecl.} =
+proc fcQPlainTextEdit_vtable_callback_inputMethodQuery(self: pointer, property: cint): pointer {.cdecl.} =
   let vtbl = cast[ptr QPlainTextEditVTable](fcQPlainTextEdit_vdata(self))
   let self = QPlainTextEdit(h: self)
   let slotval1 = cint(property)
@@ -1085,201 +1252,135 @@ proc cQPlainTextEdit_vtable_callback_inputMethodQuery(self: pointer, property: c
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QPlainTextEditevent*(self: gen_qplaintextedit_types.QPlainTextEdit, e: gen_qcoreevent_types.QEvent): bool =
-  fcQPlainTextEdit_virtualbase_event(self.h, e.h)
-
-proc cQPlainTextEdit_vtable_callback_event(self: pointer, e: pointer): bool {.cdecl.} =
+proc fcQPlainTextEdit_vtable_callback_event(self: pointer, e: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QPlainTextEditVTable](fcQPlainTextEdit_vdata(self))
   let self = QPlainTextEdit(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: e, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
-proc QPlainTextEdittimerEvent*(self: gen_qplaintextedit_types.QPlainTextEdit, e: gen_qcoreevent_types.QTimerEvent): void =
-  fcQPlainTextEdit_virtualbase_timerEvent(self.h, e.h)
-
-proc cQPlainTextEdit_vtable_callback_timerEvent(self: pointer, e: pointer): void {.cdecl.} =
+proc fcQPlainTextEdit_vtable_callback_timerEvent(self: pointer, e: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPlainTextEditVTable](fcQPlainTextEdit_vdata(self))
   let self = QPlainTextEdit(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: e, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
-proc QPlainTextEditkeyPressEvent*(self: gen_qplaintextedit_types.QPlainTextEdit, e: gen_qevent_types.QKeyEvent): void =
-  fcQPlainTextEdit_virtualbase_keyPressEvent(self.h, e.h)
-
-proc cQPlainTextEdit_vtable_callback_keyPressEvent(self: pointer, e: pointer): void {.cdecl.} =
+proc fcQPlainTextEdit_vtable_callback_keyPressEvent(self: pointer, e: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPlainTextEditVTable](fcQPlainTextEdit_vdata(self))
   let self = QPlainTextEdit(h: self)
   let slotval1 = gen_qevent_types.QKeyEvent(h: e, owned: false)
   vtbl[].keyPressEvent(self, slotval1)
 
-proc QPlainTextEditkeyReleaseEvent*(self: gen_qplaintextedit_types.QPlainTextEdit, e: gen_qevent_types.QKeyEvent): void =
-  fcQPlainTextEdit_virtualbase_keyReleaseEvent(self.h, e.h)
-
-proc cQPlainTextEdit_vtable_callback_keyReleaseEvent(self: pointer, e: pointer): void {.cdecl.} =
+proc fcQPlainTextEdit_vtable_callback_keyReleaseEvent(self: pointer, e: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPlainTextEditVTable](fcQPlainTextEdit_vdata(self))
   let self = QPlainTextEdit(h: self)
   let slotval1 = gen_qevent_types.QKeyEvent(h: e, owned: false)
   vtbl[].keyReleaseEvent(self, slotval1)
 
-proc QPlainTextEditresizeEvent*(self: gen_qplaintextedit_types.QPlainTextEdit, e: gen_qevent_types.QResizeEvent): void =
-  fcQPlainTextEdit_virtualbase_resizeEvent(self.h, e.h)
-
-proc cQPlainTextEdit_vtable_callback_resizeEvent(self: pointer, e: pointer): void {.cdecl.} =
+proc fcQPlainTextEdit_vtable_callback_resizeEvent(self: pointer, e: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPlainTextEditVTable](fcQPlainTextEdit_vdata(self))
   let self = QPlainTextEdit(h: self)
   let slotval1 = gen_qevent_types.QResizeEvent(h: e, owned: false)
   vtbl[].resizeEvent(self, slotval1)
 
-proc QPlainTextEditpaintEvent*(self: gen_qplaintextedit_types.QPlainTextEdit, e: gen_qevent_types.QPaintEvent): void =
-  fcQPlainTextEdit_virtualbase_paintEvent(self.h, e.h)
-
-proc cQPlainTextEdit_vtable_callback_paintEvent(self: pointer, e: pointer): void {.cdecl.} =
+proc fcQPlainTextEdit_vtable_callback_paintEvent(self: pointer, e: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPlainTextEditVTable](fcQPlainTextEdit_vdata(self))
   let self = QPlainTextEdit(h: self)
   let slotval1 = gen_qevent_types.QPaintEvent(h: e, owned: false)
   vtbl[].paintEvent(self, slotval1)
 
-proc QPlainTextEditmousePressEvent*(self: gen_qplaintextedit_types.QPlainTextEdit, e: gen_qevent_types.QMouseEvent): void =
-  fcQPlainTextEdit_virtualbase_mousePressEvent(self.h, e.h)
-
-proc cQPlainTextEdit_vtable_callback_mousePressEvent(self: pointer, e: pointer): void {.cdecl.} =
+proc fcQPlainTextEdit_vtable_callback_mousePressEvent(self: pointer, e: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPlainTextEditVTable](fcQPlainTextEdit_vdata(self))
   let self = QPlainTextEdit(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: e, owned: false)
   vtbl[].mousePressEvent(self, slotval1)
 
-proc QPlainTextEditmouseMoveEvent*(self: gen_qplaintextedit_types.QPlainTextEdit, e: gen_qevent_types.QMouseEvent): void =
-  fcQPlainTextEdit_virtualbase_mouseMoveEvent(self.h, e.h)
-
-proc cQPlainTextEdit_vtable_callback_mouseMoveEvent(self: pointer, e: pointer): void {.cdecl.} =
+proc fcQPlainTextEdit_vtable_callback_mouseMoveEvent(self: pointer, e: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPlainTextEditVTable](fcQPlainTextEdit_vdata(self))
   let self = QPlainTextEdit(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: e, owned: false)
   vtbl[].mouseMoveEvent(self, slotval1)
 
-proc QPlainTextEditmouseReleaseEvent*(self: gen_qplaintextedit_types.QPlainTextEdit, e: gen_qevent_types.QMouseEvent): void =
-  fcQPlainTextEdit_virtualbase_mouseReleaseEvent(self.h, e.h)
-
-proc cQPlainTextEdit_vtable_callback_mouseReleaseEvent(self: pointer, e: pointer): void {.cdecl.} =
+proc fcQPlainTextEdit_vtable_callback_mouseReleaseEvent(self: pointer, e: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPlainTextEditVTable](fcQPlainTextEdit_vdata(self))
   let self = QPlainTextEdit(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: e, owned: false)
   vtbl[].mouseReleaseEvent(self, slotval1)
 
-proc QPlainTextEditmouseDoubleClickEvent*(self: gen_qplaintextedit_types.QPlainTextEdit, e: gen_qevent_types.QMouseEvent): void =
-  fcQPlainTextEdit_virtualbase_mouseDoubleClickEvent(self.h, e.h)
-
-proc cQPlainTextEdit_vtable_callback_mouseDoubleClickEvent(self: pointer, e: pointer): void {.cdecl.} =
+proc fcQPlainTextEdit_vtable_callback_mouseDoubleClickEvent(self: pointer, e: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPlainTextEditVTable](fcQPlainTextEdit_vdata(self))
   let self = QPlainTextEdit(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: e, owned: false)
   vtbl[].mouseDoubleClickEvent(self, slotval1)
 
-proc QPlainTextEditfocusNextPrevChild*(self: gen_qplaintextedit_types.QPlainTextEdit, next: bool): bool =
-  fcQPlainTextEdit_virtualbase_focusNextPrevChild(self.h, next)
-
-proc cQPlainTextEdit_vtable_callback_focusNextPrevChild(self: pointer, next: bool): bool {.cdecl.} =
+proc fcQPlainTextEdit_vtable_callback_focusNextPrevChild(self: pointer, next: bool): bool {.cdecl.} =
   let vtbl = cast[ptr QPlainTextEditVTable](fcQPlainTextEdit_vdata(self))
   let self = QPlainTextEdit(h: self)
   let slotval1 = next
   var virtualReturn = vtbl[].focusNextPrevChild(self, slotval1)
   virtualReturn
 
-proc QPlainTextEditcontextMenuEvent*(self: gen_qplaintextedit_types.QPlainTextEdit, e: gen_qevent_types.QContextMenuEvent): void =
-  fcQPlainTextEdit_virtualbase_contextMenuEvent(self.h, e.h)
-
-proc cQPlainTextEdit_vtable_callback_contextMenuEvent(self: pointer, e: pointer): void {.cdecl.} =
+proc fcQPlainTextEdit_vtable_callback_contextMenuEvent(self: pointer, e: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPlainTextEditVTable](fcQPlainTextEdit_vdata(self))
   let self = QPlainTextEdit(h: self)
   let slotval1 = gen_qevent_types.QContextMenuEvent(h: e, owned: false)
   vtbl[].contextMenuEvent(self, slotval1)
 
-proc QPlainTextEditdragEnterEvent*(self: gen_qplaintextedit_types.QPlainTextEdit, e: gen_qevent_types.QDragEnterEvent): void =
-  fcQPlainTextEdit_virtualbase_dragEnterEvent(self.h, e.h)
-
-proc cQPlainTextEdit_vtable_callback_dragEnterEvent(self: pointer, e: pointer): void {.cdecl.} =
+proc fcQPlainTextEdit_vtable_callback_dragEnterEvent(self: pointer, e: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPlainTextEditVTable](fcQPlainTextEdit_vdata(self))
   let self = QPlainTextEdit(h: self)
   let slotval1 = gen_qevent_types.QDragEnterEvent(h: e, owned: false)
   vtbl[].dragEnterEvent(self, slotval1)
 
-proc QPlainTextEditdragLeaveEvent*(self: gen_qplaintextedit_types.QPlainTextEdit, e: gen_qevent_types.QDragLeaveEvent): void =
-  fcQPlainTextEdit_virtualbase_dragLeaveEvent(self.h, e.h)
-
-proc cQPlainTextEdit_vtable_callback_dragLeaveEvent(self: pointer, e: pointer): void {.cdecl.} =
+proc fcQPlainTextEdit_vtable_callback_dragLeaveEvent(self: pointer, e: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPlainTextEditVTable](fcQPlainTextEdit_vdata(self))
   let self = QPlainTextEdit(h: self)
   let slotval1 = gen_qevent_types.QDragLeaveEvent(h: e, owned: false)
   vtbl[].dragLeaveEvent(self, slotval1)
 
-proc QPlainTextEditdragMoveEvent*(self: gen_qplaintextedit_types.QPlainTextEdit, e: gen_qevent_types.QDragMoveEvent): void =
-  fcQPlainTextEdit_virtualbase_dragMoveEvent(self.h, e.h)
-
-proc cQPlainTextEdit_vtable_callback_dragMoveEvent(self: pointer, e: pointer): void {.cdecl.} =
+proc fcQPlainTextEdit_vtable_callback_dragMoveEvent(self: pointer, e: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPlainTextEditVTable](fcQPlainTextEdit_vdata(self))
   let self = QPlainTextEdit(h: self)
   let slotval1 = gen_qevent_types.QDragMoveEvent(h: e, owned: false)
   vtbl[].dragMoveEvent(self, slotval1)
 
-proc QPlainTextEditdropEvent*(self: gen_qplaintextedit_types.QPlainTextEdit, e: gen_qevent_types.QDropEvent): void =
-  fcQPlainTextEdit_virtualbase_dropEvent(self.h, e.h)
-
-proc cQPlainTextEdit_vtable_callback_dropEvent(self: pointer, e: pointer): void {.cdecl.} =
+proc fcQPlainTextEdit_vtable_callback_dropEvent(self: pointer, e: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPlainTextEditVTable](fcQPlainTextEdit_vdata(self))
   let self = QPlainTextEdit(h: self)
   let slotval1 = gen_qevent_types.QDropEvent(h: e, owned: false)
   vtbl[].dropEvent(self, slotval1)
 
-proc QPlainTextEditfocusInEvent*(self: gen_qplaintextedit_types.QPlainTextEdit, e: gen_qevent_types.QFocusEvent): void =
-  fcQPlainTextEdit_virtualbase_focusInEvent(self.h, e.h)
-
-proc cQPlainTextEdit_vtable_callback_focusInEvent(self: pointer, e: pointer): void {.cdecl.} =
+proc fcQPlainTextEdit_vtable_callback_focusInEvent(self: pointer, e: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPlainTextEditVTable](fcQPlainTextEdit_vdata(self))
   let self = QPlainTextEdit(h: self)
   let slotval1 = gen_qevent_types.QFocusEvent(h: e, owned: false)
   vtbl[].focusInEvent(self, slotval1)
 
-proc QPlainTextEditfocusOutEvent*(self: gen_qplaintextedit_types.QPlainTextEdit, e: gen_qevent_types.QFocusEvent): void =
-  fcQPlainTextEdit_virtualbase_focusOutEvent(self.h, e.h)
-
-proc cQPlainTextEdit_vtable_callback_focusOutEvent(self: pointer, e: pointer): void {.cdecl.} =
+proc fcQPlainTextEdit_vtable_callback_focusOutEvent(self: pointer, e: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPlainTextEditVTable](fcQPlainTextEdit_vdata(self))
   let self = QPlainTextEdit(h: self)
   let slotval1 = gen_qevent_types.QFocusEvent(h: e, owned: false)
   vtbl[].focusOutEvent(self, slotval1)
 
-proc QPlainTextEditshowEvent*(self: gen_qplaintextedit_types.QPlainTextEdit, param1: gen_qevent_types.QShowEvent): void =
-  fcQPlainTextEdit_virtualbase_showEvent(self.h, param1.h)
-
-proc cQPlainTextEdit_vtable_callback_showEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQPlainTextEdit_vtable_callback_showEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPlainTextEditVTable](fcQPlainTextEdit_vdata(self))
   let self = QPlainTextEdit(h: self)
   let slotval1 = gen_qevent_types.QShowEvent(h: param1, owned: false)
   vtbl[].showEvent(self, slotval1)
 
-proc QPlainTextEditchangeEvent*(self: gen_qplaintextedit_types.QPlainTextEdit, e: gen_qcoreevent_types.QEvent): void =
-  fcQPlainTextEdit_virtualbase_changeEvent(self.h, e.h)
-
-proc cQPlainTextEdit_vtable_callback_changeEvent(self: pointer, e: pointer): void {.cdecl.} =
+proc fcQPlainTextEdit_vtable_callback_changeEvent(self: pointer, e: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPlainTextEditVTable](fcQPlainTextEdit_vdata(self))
   let self = QPlainTextEdit(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: e, owned: false)
   vtbl[].changeEvent(self, slotval1)
 
-proc QPlainTextEditwheelEvent*(self: gen_qplaintextedit_types.QPlainTextEdit, e: gen_qevent_types.QWheelEvent): void =
-  fcQPlainTextEdit_virtualbase_wheelEvent(self.h, e.h)
-
-proc cQPlainTextEdit_vtable_callback_wheelEvent(self: pointer, e: pointer): void {.cdecl.} =
+proc fcQPlainTextEdit_vtable_callback_wheelEvent(self: pointer, e: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPlainTextEditVTable](fcQPlainTextEdit_vdata(self))
   let self = QPlainTextEdit(h: self)
   let slotval1 = gen_qevent_types.QWheelEvent(h: e, owned: false)
   vtbl[].wheelEvent(self, slotval1)
 
-proc QPlainTextEditcreateMimeDataFromSelection*(self: gen_qplaintextedit_types.QPlainTextEdit): gen_qmimedata_types.QMimeData =
-  gen_qmimedata_types.QMimeData(h: fcQPlainTextEdit_virtualbase_createMimeDataFromSelection(self.h), owned: false)
-
-proc cQPlainTextEdit_vtable_callback_createMimeDataFromSelection(self: pointer): pointer {.cdecl.} =
+proc fcQPlainTextEdit_vtable_callback_createMimeDataFromSelection(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QPlainTextEditVTable](fcQPlainTextEdit_vdata(self))
   let self = QPlainTextEdit(h: self)
   var virtualReturn = vtbl[].createMimeDataFromSelection(self)
@@ -1288,57 +1389,39 @@ proc cQPlainTextEdit_vtable_callback_createMimeDataFromSelection(self: pointer):
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QPlainTextEditcanInsertFromMimeData*(self: gen_qplaintextedit_types.QPlainTextEdit, source: gen_qmimedata_types.QMimeData): bool =
-  fcQPlainTextEdit_virtualbase_canInsertFromMimeData(self.h, source.h)
-
-proc cQPlainTextEdit_vtable_callback_canInsertFromMimeData(self: pointer, source: pointer): bool {.cdecl.} =
+proc fcQPlainTextEdit_vtable_callback_canInsertFromMimeData(self: pointer, source: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QPlainTextEditVTable](fcQPlainTextEdit_vdata(self))
   let self = QPlainTextEdit(h: self)
   let slotval1 = gen_qmimedata_types.QMimeData(h: source, owned: false)
   var virtualReturn = vtbl[].canInsertFromMimeData(self, slotval1)
   virtualReturn
 
-proc QPlainTextEditinsertFromMimeData*(self: gen_qplaintextedit_types.QPlainTextEdit, source: gen_qmimedata_types.QMimeData): void =
-  fcQPlainTextEdit_virtualbase_insertFromMimeData(self.h, source.h)
-
-proc cQPlainTextEdit_vtable_callback_insertFromMimeData(self: pointer, source: pointer): void {.cdecl.} =
+proc fcQPlainTextEdit_vtable_callback_insertFromMimeData(self: pointer, source: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPlainTextEditVTable](fcQPlainTextEdit_vdata(self))
   let self = QPlainTextEdit(h: self)
   let slotval1 = gen_qmimedata_types.QMimeData(h: source, owned: false)
   vtbl[].insertFromMimeData(self, slotval1)
 
-proc QPlainTextEditinputMethodEvent*(self: gen_qplaintextedit_types.QPlainTextEdit, param1: gen_qevent_types.QInputMethodEvent): void =
-  fcQPlainTextEdit_virtualbase_inputMethodEvent(self.h, param1.h)
-
-proc cQPlainTextEdit_vtable_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQPlainTextEdit_vtable_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPlainTextEditVTable](fcQPlainTextEdit_vdata(self))
   let self = QPlainTextEdit(h: self)
   let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1, owned: false)
   vtbl[].inputMethodEvent(self, slotval1)
 
-proc QPlainTextEditscrollContentsBy*(self: gen_qplaintextedit_types.QPlainTextEdit, dx: cint, dy: cint): void =
-  fcQPlainTextEdit_virtualbase_scrollContentsBy(self.h, dx, dy)
-
-proc cQPlainTextEdit_vtable_callback_scrollContentsBy(self: pointer, dx: cint, dy: cint): void {.cdecl.} =
+proc fcQPlainTextEdit_vtable_callback_scrollContentsBy(self: pointer, dx: cint, dy: cint): void {.cdecl.} =
   let vtbl = cast[ptr QPlainTextEditVTable](fcQPlainTextEdit_vdata(self))
   let self = QPlainTextEdit(h: self)
   let slotval1 = dx
   let slotval2 = dy
   vtbl[].scrollContentsBy(self, slotval1, slotval2)
 
-proc QPlainTextEditdoSetTextCursor*(self: gen_qplaintextedit_types.QPlainTextEdit, cursor: gen_qtextcursor_types.QTextCursor): void =
-  fcQPlainTextEdit_virtualbase_doSetTextCursor(self.h, cursor.h)
-
-proc cQPlainTextEdit_vtable_callback_doSetTextCursor(self: pointer, cursor: pointer): void {.cdecl.} =
+proc fcQPlainTextEdit_vtable_callback_doSetTextCursor(self: pointer, cursor: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPlainTextEditVTable](fcQPlainTextEdit_vdata(self))
   let self = QPlainTextEdit(h: self)
   let slotval1 = gen_qtextcursor_types.QTextCursor(h: cursor, owned: false)
   vtbl[].doSetTextCursor(self, slotval1)
 
-proc QPlainTextEditminimumSizeHint*(self: gen_qplaintextedit_types.QPlainTextEdit): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQPlainTextEdit_virtualbase_minimumSizeHint(self.h), owned: true)
-
-proc cQPlainTextEdit_vtable_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
+proc fcQPlainTextEdit_vtable_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QPlainTextEditVTable](fcQPlainTextEdit_vdata(self))
   let self = QPlainTextEdit(h: self)
   var virtualReturn = vtbl[].minimumSizeHint(self)
@@ -1347,10 +1430,7 @@ proc cQPlainTextEdit_vtable_callback_minimumSizeHint(self: pointer): pointer {.c
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QPlainTextEditsizeHint*(self: gen_qplaintextedit_types.QPlainTextEdit): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQPlainTextEdit_virtualbase_sizeHint(self.h), owned: true)
-
-proc cQPlainTextEdit_vtable_callback_sizeHint(self: pointer): pointer {.cdecl.} =
+proc fcQPlainTextEdit_vtable_callback_sizeHint(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QPlainTextEditVTable](fcQPlainTextEdit_vdata(self))
   let self = QPlainTextEdit(h: self)
   var virtualReturn = vtbl[].sizeHint(self)
@@ -1359,19 +1439,13 @@ proc cQPlainTextEdit_vtable_callback_sizeHint(self: pointer): pointer {.cdecl.} 
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QPlainTextEditsetupViewport*(self: gen_qplaintextedit_types.QPlainTextEdit, viewport: gen_qwidget_types.QWidget): void =
-  fcQPlainTextEdit_virtualbase_setupViewport(self.h, viewport.h)
-
-proc cQPlainTextEdit_vtable_callback_setupViewport(self: pointer, viewport: pointer): void {.cdecl.} =
+proc fcQPlainTextEdit_vtable_callback_setupViewport(self: pointer, viewport: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPlainTextEditVTable](fcQPlainTextEdit_vdata(self))
   let self = QPlainTextEdit(h: self)
   let slotval1 = gen_qwidget_types.QWidget(h: viewport, owned: false)
   vtbl[].setupViewport(self, slotval1)
 
-proc QPlainTextEditeventFilter*(self: gen_qplaintextedit_types.QPlainTextEdit, param1: gen_qobject_types.QObject, param2: gen_qcoreevent_types.QEvent): bool =
-  fcQPlainTextEdit_virtualbase_eventFilter(self.h, param1.h, param2.h)
-
-proc cQPlainTextEdit_vtable_callback_eventFilter(self: pointer, param1: pointer, param2: pointer): bool {.cdecl.} =
+proc fcQPlainTextEdit_vtable_callback_eventFilter(self: pointer, param1: pointer, param2: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QPlainTextEditVTable](fcQPlainTextEdit_vdata(self))
   let self = QPlainTextEdit(h: self)
   let slotval1 = gen_qobject_types.QObject(h: param1, owned: false)
@@ -1379,20 +1453,14 @@ proc cQPlainTextEdit_vtable_callback_eventFilter(self: pointer, param1: pointer,
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
-proc QPlainTextEditviewportEvent*(self: gen_qplaintextedit_types.QPlainTextEdit, param1: gen_qcoreevent_types.QEvent): bool =
-  fcQPlainTextEdit_virtualbase_viewportEvent(self.h, param1.h)
-
-proc cQPlainTextEdit_vtable_callback_viewportEvent(self: pointer, param1: pointer): bool {.cdecl.} =
+proc fcQPlainTextEdit_vtable_callback_viewportEvent(self: pointer, param1: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QPlainTextEditVTable](fcQPlainTextEdit_vdata(self))
   let self = QPlainTextEdit(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
   var virtualReturn = vtbl[].viewportEvent(self, slotval1)
   virtualReturn
 
-proc QPlainTextEditviewportSizeHint*(self: gen_qplaintextedit_types.QPlainTextEdit): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQPlainTextEdit_virtualbase_viewportSizeHint(self.h), owned: true)
-
-proc cQPlainTextEdit_vtable_callback_viewportSizeHint(self: pointer): pointer {.cdecl.} =
+proc fcQPlainTextEdit_vtable_callback_viewportSizeHint(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QPlainTextEditVTable](fcQPlainTextEdit_vdata(self))
   let self = QPlainTextEdit(h: self)
   var virtualReturn = vtbl[].viewportSizeHint(self)
@@ -1401,47 +1469,32 @@ proc cQPlainTextEdit_vtable_callback_viewportSizeHint(self: pointer): pointer {.
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QPlainTextEditdevType*(self: gen_qplaintextedit_types.QPlainTextEdit): cint =
-  fcQPlainTextEdit_virtualbase_devType(self.h)
-
-proc cQPlainTextEdit_vtable_callback_devType(self: pointer): cint {.cdecl.} =
+proc fcQPlainTextEdit_vtable_callback_devType(self: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QPlainTextEditVTable](fcQPlainTextEdit_vdata(self))
   let self = QPlainTextEdit(h: self)
   var virtualReturn = vtbl[].devType(self)
   virtualReturn
 
-proc QPlainTextEditsetVisible*(self: gen_qplaintextedit_types.QPlainTextEdit, visible: bool): void =
-  fcQPlainTextEdit_virtualbase_setVisible(self.h, visible)
-
-proc cQPlainTextEdit_vtable_callback_setVisible(self: pointer, visible: bool): void {.cdecl.} =
+proc fcQPlainTextEdit_vtable_callback_setVisible(self: pointer, visible: bool): void {.cdecl.} =
   let vtbl = cast[ptr QPlainTextEditVTable](fcQPlainTextEdit_vdata(self))
   let self = QPlainTextEdit(h: self)
   let slotval1 = visible
   vtbl[].setVisible(self, slotval1)
 
-proc QPlainTextEditheightForWidth*(self: gen_qplaintextedit_types.QPlainTextEdit, param1: cint): cint =
-  fcQPlainTextEdit_virtualbase_heightForWidth(self.h, param1)
-
-proc cQPlainTextEdit_vtable_callback_heightForWidth(self: pointer, param1: cint): cint {.cdecl.} =
+proc fcQPlainTextEdit_vtable_callback_heightForWidth(self: pointer, param1: cint): cint {.cdecl.} =
   let vtbl = cast[ptr QPlainTextEditVTable](fcQPlainTextEdit_vdata(self))
   let self = QPlainTextEdit(h: self)
   let slotval1 = param1
   var virtualReturn = vtbl[].heightForWidth(self, slotval1)
   virtualReturn
 
-proc QPlainTextEdithasHeightForWidth*(self: gen_qplaintextedit_types.QPlainTextEdit): bool =
-  fcQPlainTextEdit_virtualbase_hasHeightForWidth(self.h)
-
-proc cQPlainTextEdit_vtable_callback_hasHeightForWidth(self: pointer): bool {.cdecl.} =
+proc fcQPlainTextEdit_vtable_callback_hasHeightForWidth(self: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QPlainTextEditVTable](fcQPlainTextEdit_vdata(self))
   let self = QPlainTextEdit(h: self)
   var virtualReturn = vtbl[].hasHeightForWidth(self)
   virtualReturn
 
-proc QPlainTextEditpaintEngine*(self: gen_qplaintextedit_types.QPlainTextEdit): gen_qpaintengine_types.QPaintEngine =
-  gen_qpaintengine_types.QPaintEngine(h: fcQPlainTextEdit_virtualbase_paintEngine(self.h), owned: false)
-
-proc cQPlainTextEdit_vtable_callback_paintEngine(self: pointer): pointer {.cdecl.} =
+proc fcQPlainTextEdit_vtable_callback_paintEngine(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QPlainTextEditVTable](fcQPlainTextEdit_vdata(self))
   let self = QPlainTextEdit(h: self)
   var virtualReturn = vtbl[].paintEngine(self)
@@ -1450,73 +1503,49 @@ proc cQPlainTextEdit_vtable_callback_paintEngine(self: pointer): pointer {.cdecl
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QPlainTextEditenterEvent*(self: gen_qplaintextedit_types.QPlainTextEdit, event: gen_qcoreevent_types.QEvent): void =
-  fcQPlainTextEdit_virtualbase_enterEvent(self.h, event.h)
-
-proc cQPlainTextEdit_vtable_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQPlainTextEdit_vtable_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPlainTextEditVTable](fcQPlainTextEdit_vdata(self))
   let self = QPlainTextEdit(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].enterEvent(self, slotval1)
 
-proc QPlainTextEditleaveEvent*(self: gen_qplaintextedit_types.QPlainTextEdit, event: gen_qcoreevent_types.QEvent): void =
-  fcQPlainTextEdit_virtualbase_leaveEvent(self.h, event.h)
-
-proc cQPlainTextEdit_vtable_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQPlainTextEdit_vtable_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPlainTextEditVTable](fcQPlainTextEdit_vdata(self))
   let self = QPlainTextEdit(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].leaveEvent(self, slotval1)
 
-proc QPlainTextEditmoveEvent*(self: gen_qplaintextedit_types.QPlainTextEdit, event: gen_qevent_types.QMoveEvent): void =
-  fcQPlainTextEdit_virtualbase_moveEvent(self.h, event.h)
-
-proc cQPlainTextEdit_vtable_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQPlainTextEdit_vtable_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPlainTextEditVTable](fcQPlainTextEdit_vdata(self))
   let self = QPlainTextEdit(h: self)
   let slotval1 = gen_qevent_types.QMoveEvent(h: event, owned: false)
   vtbl[].moveEvent(self, slotval1)
 
-proc QPlainTextEditcloseEvent*(self: gen_qplaintextedit_types.QPlainTextEdit, event: gen_qevent_types.QCloseEvent): void =
-  fcQPlainTextEdit_virtualbase_closeEvent(self.h, event.h)
-
-proc cQPlainTextEdit_vtable_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQPlainTextEdit_vtable_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPlainTextEditVTable](fcQPlainTextEdit_vdata(self))
   let self = QPlainTextEdit(h: self)
   let slotval1 = gen_qevent_types.QCloseEvent(h: event, owned: false)
   vtbl[].closeEvent(self, slotval1)
 
-proc QPlainTextEdittabletEvent*(self: gen_qplaintextedit_types.QPlainTextEdit, event: gen_qevent_types.QTabletEvent): void =
-  fcQPlainTextEdit_virtualbase_tabletEvent(self.h, event.h)
-
-proc cQPlainTextEdit_vtable_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQPlainTextEdit_vtable_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPlainTextEditVTable](fcQPlainTextEdit_vdata(self))
   let self = QPlainTextEdit(h: self)
   let slotval1 = gen_qevent_types.QTabletEvent(h: event, owned: false)
   vtbl[].tabletEvent(self, slotval1)
 
-proc QPlainTextEditactionEvent*(self: gen_qplaintextedit_types.QPlainTextEdit, event: gen_qevent_types.QActionEvent): void =
-  fcQPlainTextEdit_virtualbase_actionEvent(self.h, event.h)
-
-proc cQPlainTextEdit_vtable_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQPlainTextEdit_vtable_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPlainTextEditVTable](fcQPlainTextEdit_vdata(self))
   let self = QPlainTextEdit(h: self)
   let slotval1 = gen_qevent_types.QActionEvent(h: event, owned: false)
   vtbl[].actionEvent(self, slotval1)
 
-proc QPlainTextEdithideEvent*(self: gen_qplaintextedit_types.QPlainTextEdit, event: gen_qevent_types.QHideEvent): void =
-  fcQPlainTextEdit_virtualbase_hideEvent(self.h, event.h)
-
-proc cQPlainTextEdit_vtable_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQPlainTextEdit_vtable_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPlainTextEditVTable](fcQPlainTextEdit_vdata(self))
   let self = QPlainTextEdit(h: self)
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   vtbl[].hideEvent(self, slotval1)
 
-proc QPlainTextEditnativeEvent*(self: gen_qplaintextedit_types.QPlainTextEdit, eventType: openArray[byte], message: pointer, resultVal: ptr clong): bool =
-  fcQPlainTextEdit_virtualbase_nativeEvent(self.h, struct_miqt_string(data: cast[cstring](if len(eventType) == 0: nil else: unsafeAddr eventType[0]), len: csize_t(len(eventType))), message, resultVal)
-
-proc cQPlainTextEdit_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr clong): bool {.cdecl.} =
+proc fcQPlainTextEdit_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr clong): bool {.cdecl.} =
   let vtbl = cast[ptr QPlainTextEditVTable](fcQPlainTextEdit_vdata(self))
   let self = QPlainTextEdit(h: self)
   var veventType_bytearray = eventType
@@ -1528,29 +1557,20 @@ proc cQPlainTextEdit_vtable_callback_nativeEvent(self: pointer, eventType: struc
   var virtualReturn = vtbl[].nativeEvent(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QPlainTextEditmetric*(self: gen_qplaintextedit_types.QPlainTextEdit, param1: cint): cint =
-  fcQPlainTextEdit_virtualbase_metric(self.h, cint(param1))
-
-proc cQPlainTextEdit_vtable_callback_metric(self: pointer, param1: cint): cint {.cdecl.} =
+proc fcQPlainTextEdit_vtable_callback_metric(self: pointer, param1: cint): cint {.cdecl.} =
   let vtbl = cast[ptr QPlainTextEditVTable](fcQPlainTextEdit_vdata(self))
   let self = QPlainTextEdit(h: self)
   let slotval1 = cint(param1)
   var virtualReturn = vtbl[].metric(self, slotval1)
   virtualReturn
 
-proc QPlainTextEditinitPainter*(self: gen_qplaintextedit_types.QPlainTextEdit, painter: gen_qpainter_types.QPainter): void =
-  fcQPlainTextEdit_virtualbase_initPainter(self.h, painter.h)
-
-proc cQPlainTextEdit_vtable_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
+proc fcQPlainTextEdit_vtable_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPlainTextEditVTable](fcQPlainTextEdit_vdata(self))
   let self = QPlainTextEdit(h: self)
   let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
   vtbl[].initPainter(self, slotval1)
 
-proc QPlainTextEditredirected*(self: gen_qplaintextedit_types.QPlainTextEdit, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice =
-  gen_qpaintdevice_types.QPaintDevice(h: fcQPlainTextEdit_virtualbase_redirected(self.h, offset.h), owned: false)
-
-proc cQPlainTextEdit_vtable_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
+proc fcQPlainTextEdit_vtable_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QPlainTextEditVTable](fcQPlainTextEdit_vdata(self))
   let self = QPlainTextEdit(h: self)
   let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
@@ -1560,10 +1580,7 @@ proc cQPlainTextEdit_vtable_callback_redirected(self: pointer, offset: pointer):
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QPlainTextEditsharedPainter*(self: gen_qplaintextedit_types.QPlainTextEdit): gen_qpainter_types.QPainter =
-  gen_qpainter_types.QPainter(h: fcQPlainTextEdit_virtualbase_sharedPainter(self.h), owned: false)
-
-proc cQPlainTextEdit_vtable_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
+proc fcQPlainTextEdit_vtable_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QPlainTextEditVTable](fcQPlainTextEdit_vdata(self))
   let self = QPlainTextEdit(h: self)
   var virtualReturn = vtbl[].sharedPainter(self)
@@ -1572,37 +1589,25 @@ proc cQPlainTextEdit_vtable_callback_sharedPainter(self: pointer): pointer {.cde
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QPlainTextEditchildEvent*(self: gen_qplaintextedit_types.QPlainTextEdit, event: gen_qcoreevent_types.QChildEvent): void =
-  fcQPlainTextEdit_virtualbase_childEvent(self.h, event.h)
-
-proc cQPlainTextEdit_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQPlainTextEdit_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPlainTextEditVTable](fcQPlainTextEdit_vdata(self))
   let self = QPlainTextEdit(h: self)
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
-proc QPlainTextEditcustomEvent*(self: gen_qplaintextedit_types.QPlainTextEdit, event: gen_qcoreevent_types.QEvent): void =
-  fcQPlainTextEdit_virtualbase_customEvent(self.h, event.h)
-
-proc cQPlainTextEdit_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQPlainTextEdit_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPlainTextEditVTable](fcQPlainTextEdit_vdata(self))
   let self = QPlainTextEdit(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
-proc QPlainTextEditconnectNotify*(self: gen_qplaintextedit_types.QPlainTextEdit, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQPlainTextEdit_virtualbase_connectNotify(self.h, signal.h)
-
-proc cQPlainTextEdit_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQPlainTextEdit_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPlainTextEditVTable](fcQPlainTextEdit_vdata(self))
   let self = QPlainTextEdit(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
-proc QPlainTextEditdisconnectNotify*(self: gen_qplaintextedit_types.QPlainTextEdit, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQPlainTextEdit_virtualbase_disconnectNotify(self.h, signal.h)
-
-proc cQPlainTextEdit_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQPlainTextEdit_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPlainTextEditVTable](fcQPlainTextEdit_vdata(self))
   let self = QPlainTextEdit(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
@@ -1610,9 +1615,127 @@ proc cQPlainTextEdit_vtable_callback_disconnectNotify(self: pointer, signal: poi
 
 type VirtualQPlainTextEdit* {.inheritable.} = ref object of QPlainTextEdit
   vtbl*: cQPlainTextEditVTable
+
 method metaObject*(self: VirtualQPlainTextEdit): gen_qobjectdefs_types.QMetaObject {.base.} =
   QPlainTextEditmetaObject(self[])
-proc cQPlainTextEdit_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
+method metacast*(self: VirtualQPlainTextEdit, param1: cstring): pointer {.base.} =
+  QPlainTextEditmetacast(self[], param1)
+method metacall*(self: VirtualQPlainTextEdit, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QPlainTextEditmetacall(self[], param1, param2, param3)
+method loadResource*(self: VirtualQPlainTextEdit, typeVal: cint, name: gen_qurl_types.QUrl): gen_qvariant_types.QVariant {.base.} =
+  QPlainTextEditloadResource(self[], typeVal, name)
+method inputMethodQuery*(self: VirtualQPlainTextEdit, property: cint): gen_qvariant_types.QVariant {.base.} =
+  QPlainTextEditinputMethodQuery(self[], property)
+method event*(self: VirtualQPlainTextEdit, e: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QPlainTextEditevent(self[], e)
+method timerEvent*(self: VirtualQPlainTextEdit, e: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QPlainTextEdittimerEvent(self[], e)
+method keyPressEvent*(self: VirtualQPlainTextEdit, e: gen_qevent_types.QKeyEvent): void {.base.} =
+  QPlainTextEditkeyPressEvent(self[], e)
+method keyReleaseEvent*(self: VirtualQPlainTextEdit, e: gen_qevent_types.QKeyEvent): void {.base.} =
+  QPlainTextEditkeyReleaseEvent(self[], e)
+method resizeEvent*(self: VirtualQPlainTextEdit, e: gen_qevent_types.QResizeEvent): void {.base.} =
+  QPlainTextEditresizeEvent(self[], e)
+method paintEvent*(self: VirtualQPlainTextEdit, e: gen_qevent_types.QPaintEvent): void {.base.} =
+  QPlainTextEditpaintEvent(self[], e)
+method mousePressEvent*(self: VirtualQPlainTextEdit, e: gen_qevent_types.QMouseEvent): void {.base.} =
+  QPlainTextEditmousePressEvent(self[], e)
+method mouseMoveEvent*(self: VirtualQPlainTextEdit, e: gen_qevent_types.QMouseEvent): void {.base.} =
+  QPlainTextEditmouseMoveEvent(self[], e)
+method mouseReleaseEvent*(self: VirtualQPlainTextEdit, e: gen_qevent_types.QMouseEvent): void {.base.} =
+  QPlainTextEditmouseReleaseEvent(self[], e)
+method mouseDoubleClickEvent*(self: VirtualQPlainTextEdit, e: gen_qevent_types.QMouseEvent): void {.base.} =
+  QPlainTextEditmouseDoubleClickEvent(self[], e)
+method focusNextPrevChild*(self: VirtualQPlainTextEdit, next: bool): bool {.base.} =
+  QPlainTextEditfocusNextPrevChild(self[], next)
+method contextMenuEvent*(self: VirtualQPlainTextEdit, e: gen_qevent_types.QContextMenuEvent): void {.base.} =
+  QPlainTextEditcontextMenuEvent(self[], e)
+method dragEnterEvent*(self: VirtualQPlainTextEdit, e: gen_qevent_types.QDragEnterEvent): void {.base.} =
+  QPlainTextEditdragEnterEvent(self[], e)
+method dragLeaveEvent*(self: VirtualQPlainTextEdit, e: gen_qevent_types.QDragLeaveEvent): void {.base.} =
+  QPlainTextEditdragLeaveEvent(self[], e)
+method dragMoveEvent*(self: VirtualQPlainTextEdit, e: gen_qevent_types.QDragMoveEvent): void {.base.} =
+  QPlainTextEditdragMoveEvent(self[], e)
+method dropEvent*(self: VirtualQPlainTextEdit, e: gen_qevent_types.QDropEvent): void {.base.} =
+  QPlainTextEditdropEvent(self[], e)
+method focusInEvent*(self: VirtualQPlainTextEdit, e: gen_qevent_types.QFocusEvent): void {.base.} =
+  QPlainTextEditfocusInEvent(self[], e)
+method focusOutEvent*(self: VirtualQPlainTextEdit, e: gen_qevent_types.QFocusEvent): void {.base.} =
+  QPlainTextEditfocusOutEvent(self[], e)
+method showEvent*(self: VirtualQPlainTextEdit, param1: gen_qevent_types.QShowEvent): void {.base.} =
+  QPlainTextEditshowEvent(self[], param1)
+method changeEvent*(self: VirtualQPlainTextEdit, e: gen_qcoreevent_types.QEvent): void {.base.} =
+  QPlainTextEditchangeEvent(self[], e)
+method wheelEvent*(self: VirtualQPlainTextEdit, e: gen_qevent_types.QWheelEvent): void {.base.} =
+  QPlainTextEditwheelEvent(self[], e)
+method createMimeDataFromSelection*(self: VirtualQPlainTextEdit): gen_qmimedata_types.QMimeData {.base.} =
+  QPlainTextEditcreateMimeDataFromSelection(self[])
+method canInsertFromMimeData*(self: VirtualQPlainTextEdit, source: gen_qmimedata_types.QMimeData): bool {.base.} =
+  QPlainTextEditcanInsertFromMimeData(self[], source)
+method insertFromMimeData*(self: VirtualQPlainTextEdit, source: gen_qmimedata_types.QMimeData): void {.base.} =
+  QPlainTextEditinsertFromMimeData(self[], source)
+method inputMethodEvent*(self: VirtualQPlainTextEdit, param1: gen_qevent_types.QInputMethodEvent): void {.base.} =
+  QPlainTextEditinputMethodEvent(self[], param1)
+method scrollContentsBy*(self: VirtualQPlainTextEdit, dx: cint, dy: cint): void {.base.} =
+  QPlainTextEditscrollContentsBy(self[], dx, dy)
+method doSetTextCursor*(self: VirtualQPlainTextEdit, cursor: gen_qtextcursor_types.QTextCursor): void {.base.} =
+  QPlainTextEditdoSetTextCursor(self[], cursor)
+method minimumSizeHint*(self: VirtualQPlainTextEdit): gen_qsize_types.QSize {.base.} =
+  QPlainTextEditminimumSizeHint(self[])
+method sizeHint*(self: VirtualQPlainTextEdit): gen_qsize_types.QSize {.base.} =
+  QPlainTextEditsizeHint(self[])
+method setupViewport*(self: VirtualQPlainTextEdit, viewport: gen_qwidget_types.QWidget): void {.base.} =
+  QPlainTextEditsetupViewport(self[], viewport)
+method eventFilter*(self: VirtualQPlainTextEdit, param1: gen_qobject_types.QObject, param2: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QPlainTextEditeventFilter(self[], param1, param2)
+method viewportEvent*(self: VirtualQPlainTextEdit, param1: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QPlainTextEditviewportEvent(self[], param1)
+method viewportSizeHint*(self: VirtualQPlainTextEdit): gen_qsize_types.QSize {.base.} =
+  QPlainTextEditviewportSizeHint(self[])
+method devType*(self: VirtualQPlainTextEdit): cint {.base.} =
+  QPlainTextEditdevType(self[])
+method setVisible*(self: VirtualQPlainTextEdit, visible: bool): void {.base.} =
+  QPlainTextEditsetVisible(self[], visible)
+method heightForWidth*(self: VirtualQPlainTextEdit, param1: cint): cint {.base.} =
+  QPlainTextEditheightForWidth(self[], param1)
+method hasHeightForWidth*(self: VirtualQPlainTextEdit): bool {.base.} =
+  QPlainTextEdithasHeightForWidth(self[])
+method paintEngine*(self: VirtualQPlainTextEdit): gen_qpaintengine_types.QPaintEngine {.base.} =
+  QPlainTextEditpaintEngine(self[])
+method enterEvent*(self: VirtualQPlainTextEdit, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QPlainTextEditenterEvent(self[], event)
+method leaveEvent*(self: VirtualQPlainTextEdit, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QPlainTextEditleaveEvent(self[], event)
+method moveEvent*(self: VirtualQPlainTextEdit, event: gen_qevent_types.QMoveEvent): void {.base.} =
+  QPlainTextEditmoveEvent(self[], event)
+method closeEvent*(self: VirtualQPlainTextEdit, event: gen_qevent_types.QCloseEvent): void {.base.} =
+  QPlainTextEditcloseEvent(self[], event)
+method tabletEvent*(self: VirtualQPlainTextEdit, event: gen_qevent_types.QTabletEvent): void {.base.} =
+  QPlainTextEdittabletEvent(self[], event)
+method actionEvent*(self: VirtualQPlainTextEdit, event: gen_qevent_types.QActionEvent): void {.base.} =
+  QPlainTextEditactionEvent(self[], event)
+method hideEvent*(self: VirtualQPlainTextEdit, event: gen_qevent_types.QHideEvent): void {.base.} =
+  QPlainTextEdithideEvent(self[], event)
+method nativeEvent*(self: VirtualQPlainTextEdit, eventType: openArray[byte], message: pointer, resultVal: ptr clong): bool {.base.} =
+  QPlainTextEditnativeEvent(self[], eventType, message, resultVal)
+method metric*(self: VirtualQPlainTextEdit, param1: cint): cint {.base.} =
+  QPlainTextEditmetric(self[], param1)
+method initPainter*(self: VirtualQPlainTextEdit, painter: gen_qpainter_types.QPainter): void {.base.} =
+  QPlainTextEditinitPainter(self[], painter)
+method redirected*(self: VirtualQPlainTextEdit, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.base.} =
+  QPlainTextEditredirected(self[], offset)
+method sharedPainter*(self: VirtualQPlainTextEdit): gen_qpainter_types.QPainter {.base.} =
+  QPlainTextEditsharedPainter(self[])
+method childEvent*(self: VirtualQPlainTextEdit, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QPlainTextEditchildEvent(self[], event)
+method customEvent*(self: VirtualQPlainTextEdit, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QPlainTextEditcustomEvent(self[], event)
+method connectNotify*(self: VirtualQPlainTextEdit, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QPlainTextEditconnectNotify(self[], signal)
+method disconnectNotify*(self: VirtualQPlainTextEdit, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QPlainTextEditdisconnectNotify(self[], signal)
+
+proc fcQPlainTextEdit_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQPlainTextEdit](fcQPlainTextEdit_vdata(self))
   var virtualReturn = inst.metaObject()
   virtualReturn.owned = false # TODO move?
@@ -1620,17 +1743,13 @@ proc cQPlainTextEdit_method_callback_metaObject(self: pointer): pointer {.cdecl.
   virtualReturn.h = nil
   virtualReturn_h
 
-method metacast*(self: VirtualQPlainTextEdit, param1: cstring): pointer {.base.} =
-  QPlainTextEditmetacast(self[], param1)
-proc cQPlainTextEdit_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+proc fcQPlainTextEdit_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQPlainTextEdit](fcQPlainTextEdit_vdata(self))
   let slotval1 = (param1)
   var virtualReturn = inst.metacast(slotval1)
   virtualReturn
 
-method metacall*(self: VirtualQPlainTextEdit, param1: cint, param2: cint, param3: pointer): cint {.base.} =
-  QPlainTextEditmetacall(self[], param1, param2, param3)
-proc cQPlainTextEdit_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+proc fcQPlainTextEdit_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQPlainTextEdit](fcQPlainTextEdit_vdata(self))
   let slotval1 = cint(param1)
   let slotval2 = param2
@@ -1638,9 +1757,7 @@ proc cQPlainTextEdit_method_callback_metacall(self: pointer, param1: cint, param
   var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
-method loadResource*(self: VirtualQPlainTextEdit, typeVal: cint, name: gen_qurl_types.QUrl): gen_qvariant_types.QVariant {.base.} =
-  QPlainTextEditloadResource(self[], typeVal, name)
-proc cQPlainTextEdit_method_callback_loadResource(self: pointer, typeVal: cint, name: pointer): pointer {.cdecl.} =
+proc fcQPlainTextEdit_method_callback_loadResource(self: pointer, typeVal: cint, name: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQPlainTextEdit](fcQPlainTextEdit_vdata(self))
   let slotval1 = typeVal
   let slotval2 = gen_qurl_types.QUrl(h: name, owned: false)
@@ -1650,9 +1767,7 @@ proc cQPlainTextEdit_method_callback_loadResource(self: pointer, typeVal: cint, 
   virtualReturn.h = nil
   virtualReturn_h
 
-method inputMethodQuery*(self: VirtualQPlainTextEdit, property: cint): gen_qvariant_types.QVariant {.base.} =
-  QPlainTextEditinputMethodQuery(self[], property)
-proc cQPlainTextEdit_method_callback_inputMethodQuery(self: pointer, property: cint): pointer {.cdecl.} =
+proc fcQPlainTextEdit_method_callback_inputMethodQuery(self: pointer, property: cint): pointer {.cdecl.} =
   let inst = cast[VirtualQPlainTextEdit](fcQPlainTextEdit_vdata(self))
   let slotval1 = cint(property)
   var virtualReturn = inst.inputMethodQuery(slotval1)
@@ -1661,158 +1776,114 @@ proc cQPlainTextEdit_method_callback_inputMethodQuery(self: pointer, property: c
   virtualReturn.h = nil
   virtualReturn_h
 
-method event*(self: VirtualQPlainTextEdit, e: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QPlainTextEditevent(self[], e)
-proc cQPlainTextEdit_method_callback_event(self: pointer, e: pointer): bool {.cdecl.} =
+proc fcQPlainTextEdit_method_callback_event(self: pointer, e: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQPlainTextEdit](fcQPlainTextEdit_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: e, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
-method timerEvent*(self: VirtualQPlainTextEdit, e: gen_qcoreevent_types.QTimerEvent): void {.base.} =
-  QPlainTextEdittimerEvent(self[], e)
-proc cQPlainTextEdit_method_callback_timerEvent(self: pointer, e: pointer): void {.cdecl.} =
+proc fcQPlainTextEdit_method_callback_timerEvent(self: pointer, e: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPlainTextEdit](fcQPlainTextEdit_vdata(self))
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: e, owned: false)
   inst.timerEvent(slotval1)
 
-method keyPressEvent*(self: VirtualQPlainTextEdit, e: gen_qevent_types.QKeyEvent): void {.base.} =
-  QPlainTextEditkeyPressEvent(self[], e)
-proc cQPlainTextEdit_method_callback_keyPressEvent(self: pointer, e: pointer): void {.cdecl.} =
+proc fcQPlainTextEdit_method_callback_keyPressEvent(self: pointer, e: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPlainTextEdit](fcQPlainTextEdit_vdata(self))
   let slotval1 = gen_qevent_types.QKeyEvent(h: e, owned: false)
   inst.keyPressEvent(slotval1)
 
-method keyReleaseEvent*(self: VirtualQPlainTextEdit, e: gen_qevent_types.QKeyEvent): void {.base.} =
-  QPlainTextEditkeyReleaseEvent(self[], e)
-proc cQPlainTextEdit_method_callback_keyReleaseEvent(self: pointer, e: pointer): void {.cdecl.} =
+proc fcQPlainTextEdit_method_callback_keyReleaseEvent(self: pointer, e: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPlainTextEdit](fcQPlainTextEdit_vdata(self))
   let slotval1 = gen_qevent_types.QKeyEvent(h: e, owned: false)
   inst.keyReleaseEvent(slotval1)
 
-method resizeEvent*(self: VirtualQPlainTextEdit, e: gen_qevent_types.QResizeEvent): void {.base.} =
-  QPlainTextEditresizeEvent(self[], e)
-proc cQPlainTextEdit_method_callback_resizeEvent(self: pointer, e: pointer): void {.cdecl.} =
+proc fcQPlainTextEdit_method_callback_resizeEvent(self: pointer, e: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPlainTextEdit](fcQPlainTextEdit_vdata(self))
   let slotval1 = gen_qevent_types.QResizeEvent(h: e, owned: false)
   inst.resizeEvent(slotval1)
 
-method paintEvent*(self: VirtualQPlainTextEdit, e: gen_qevent_types.QPaintEvent): void {.base.} =
-  QPlainTextEditpaintEvent(self[], e)
-proc cQPlainTextEdit_method_callback_paintEvent(self: pointer, e: pointer): void {.cdecl.} =
+proc fcQPlainTextEdit_method_callback_paintEvent(self: pointer, e: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPlainTextEdit](fcQPlainTextEdit_vdata(self))
   let slotval1 = gen_qevent_types.QPaintEvent(h: e, owned: false)
   inst.paintEvent(slotval1)
 
-method mousePressEvent*(self: VirtualQPlainTextEdit, e: gen_qevent_types.QMouseEvent): void {.base.} =
-  QPlainTextEditmousePressEvent(self[], e)
-proc cQPlainTextEdit_method_callback_mousePressEvent(self: pointer, e: pointer): void {.cdecl.} =
+proc fcQPlainTextEdit_method_callback_mousePressEvent(self: pointer, e: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPlainTextEdit](fcQPlainTextEdit_vdata(self))
   let slotval1 = gen_qevent_types.QMouseEvent(h: e, owned: false)
   inst.mousePressEvent(slotval1)
 
-method mouseMoveEvent*(self: VirtualQPlainTextEdit, e: gen_qevent_types.QMouseEvent): void {.base.} =
-  QPlainTextEditmouseMoveEvent(self[], e)
-proc cQPlainTextEdit_method_callback_mouseMoveEvent(self: pointer, e: pointer): void {.cdecl.} =
+proc fcQPlainTextEdit_method_callback_mouseMoveEvent(self: pointer, e: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPlainTextEdit](fcQPlainTextEdit_vdata(self))
   let slotval1 = gen_qevent_types.QMouseEvent(h: e, owned: false)
   inst.mouseMoveEvent(slotval1)
 
-method mouseReleaseEvent*(self: VirtualQPlainTextEdit, e: gen_qevent_types.QMouseEvent): void {.base.} =
-  QPlainTextEditmouseReleaseEvent(self[], e)
-proc cQPlainTextEdit_method_callback_mouseReleaseEvent(self: pointer, e: pointer): void {.cdecl.} =
+proc fcQPlainTextEdit_method_callback_mouseReleaseEvent(self: pointer, e: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPlainTextEdit](fcQPlainTextEdit_vdata(self))
   let slotval1 = gen_qevent_types.QMouseEvent(h: e, owned: false)
   inst.mouseReleaseEvent(slotval1)
 
-method mouseDoubleClickEvent*(self: VirtualQPlainTextEdit, e: gen_qevent_types.QMouseEvent): void {.base.} =
-  QPlainTextEditmouseDoubleClickEvent(self[], e)
-proc cQPlainTextEdit_method_callback_mouseDoubleClickEvent(self: pointer, e: pointer): void {.cdecl.} =
+proc fcQPlainTextEdit_method_callback_mouseDoubleClickEvent(self: pointer, e: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPlainTextEdit](fcQPlainTextEdit_vdata(self))
   let slotval1 = gen_qevent_types.QMouseEvent(h: e, owned: false)
   inst.mouseDoubleClickEvent(slotval1)
 
-method focusNextPrevChild*(self: VirtualQPlainTextEdit, next: bool): bool {.base.} =
-  QPlainTextEditfocusNextPrevChild(self[], next)
-proc cQPlainTextEdit_method_callback_focusNextPrevChild(self: pointer, next: bool): bool {.cdecl.} =
+proc fcQPlainTextEdit_method_callback_focusNextPrevChild(self: pointer, next: bool): bool {.cdecl.} =
   let inst = cast[VirtualQPlainTextEdit](fcQPlainTextEdit_vdata(self))
   let slotval1 = next
   var virtualReturn = inst.focusNextPrevChild(slotval1)
   virtualReturn
 
-method contextMenuEvent*(self: VirtualQPlainTextEdit, e: gen_qevent_types.QContextMenuEvent): void {.base.} =
-  QPlainTextEditcontextMenuEvent(self[], e)
-proc cQPlainTextEdit_method_callback_contextMenuEvent(self: pointer, e: pointer): void {.cdecl.} =
+proc fcQPlainTextEdit_method_callback_contextMenuEvent(self: pointer, e: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPlainTextEdit](fcQPlainTextEdit_vdata(self))
   let slotval1 = gen_qevent_types.QContextMenuEvent(h: e, owned: false)
   inst.contextMenuEvent(slotval1)
 
-method dragEnterEvent*(self: VirtualQPlainTextEdit, e: gen_qevent_types.QDragEnterEvent): void {.base.} =
-  QPlainTextEditdragEnterEvent(self[], e)
-proc cQPlainTextEdit_method_callback_dragEnterEvent(self: pointer, e: pointer): void {.cdecl.} =
+proc fcQPlainTextEdit_method_callback_dragEnterEvent(self: pointer, e: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPlainTextEdit](fcQPlainTextEdit_vdata(self))
   let slotval1 = gen_qevent_types.QDragEnterEvent(h: e, owned: false)
   inst.dragEnterEvent(slotval1)
 
-method dragLeaveEvent*(self: VirtualQPlainTextEdit, e: gen_qevent_types.QDragLeaveEvent): void {.base.} =
-  QPlainTextEditdragLeaveEvent(self[], e)
-proc cQPlainTextEdit_method_callback_dragLeaveEvent(self: pointer, e: pointer): void {.cdecl.} =
+proc fcQPlainTextEdit_method_callback_dragLeaveEvent(self: pointer, e: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPlainTextEdit](fcQPlainTextEdit_vdata(self))
   let slotval1 = gen_qevent_types.QDragLeaveEvent(h: e, owned: false)
   inst.dragLeaveEvent(slotval1)
 
-method dragMoveEvent*(self: VirtualQPlainTextEdit, e: gen_qevent_types.QDragMoveEvent): void {.base.} =
-  QPlainTextEditdragMoveEvent(self[], e)
-proc cQPlainTextEdit_method_callback_dragMoveEvent(self: pointer, e: pointer): void {.cdecl.} =
+proc fcQPlainTextEdit_method_callback_dragMoveEvent(self: pointer, e: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPlainTextEdit](fcQPlainTextEdit_vdata(self))
   let slotval1 = gen_qevent_types.QDragMoveEvent(h: e, owned: false)
   inst.dragMoveEvent(slotval1)
 
-method dropEvent*(self: VirtualQPlainTextEdit, e: gen_qevent_types.QDropEvent): void {.base.} =
-  QPlainTextEditdropEvent(self[], e)
-proc cQPlainTextEdit_method_callback_dropEvent(self: pointer, e: pointer): void {.cdecl.} =
+proc fcQPlainTextEdit_method_callback_dropEvent(self: pointer, e: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPlainTextEdit](fcQPlainTextEdit_vdata(self))
   let slotval1 = gen_qevent_types.QDropEvent(h: e, owned: false)
   inst.dropEvent(slotval1)
 
-method focusInEvent*(self: VirtualQPlainTextEdit, e: gen_qevent_types.QFocusEvent): void {.base.} =
-  QPlainTextEditfocusInEvent(self[], e)
-proc cQPlainTextEdit_method_callback_focusInEvent(self: pointer, e: pointer): void {.cdecl.} =
+proc fcQPlainTextEdit_method_callback_focusInEvent(self: pointer, e: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPlainTextEdit](fcQPlainTextEdit_vdata(self))
   let slotval1 = gen_qevent_types.QFocusEvent(h: e, owned: false)
   inst.focusInEvent(slotval1)
 
-method focusOutEvent*(self: VirtualQPlainTextEdit, e: gen_qevent_types.QFocusEvent): void {.base.} =
-  QPlainTextEditfocusOutEvent(self[], e)
-proc cQPlainTextEdit_method_callback_focusOutEvent(self: pointer, e: pointer): void {.cdecl.} =
+proc fcQPlainTextEdit_method_callback_focusOutEvent(self: pointer, e: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPlainTextEdit](fcQPlainTextEdit_vdata(self))
   let slotval1 = gen_qevent_types.QFocusEvent(h: e, owned: false)
   inst.focusOutEvent(slotval1)
 
-method showEvent*(self: VirtualQPlainTextEdit, param1: gen_qevent_types.QShowEvent): void {.base.} =
-  QPlainTextEditshowEvent(self[], param1)
-proc cQPlainTextEdit_method_callback_showEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQPlainTextEdit_method_callback_showEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPlainTextEdit](fcQPlainTextEdit_vdata(self))
   let slotval1 = gen_qevent_types.QShowEvent(h: param1, owned: false)
   inst.showEvent(slotval1)
 
-method changeEvent*(self: VirtualQPlainTextEdit, e: gen_qcoreevent_types.QEvent): void {.base.} =
-  QPlainTextEditchangeEvent(self[], e)
-proc cQPlainTextEdit_method_callback_changeEvent(self: pointer, e: pointer): void {.cdecl.} =
+proc fcQPlainTextEdit_method_callback_changeEvent(self: pointer, e: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPlainTextEdit](fcQPlainTextEdit_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: e, owned: false)
   inst.changeEvent(slotval1)
 
-method wheelEvent*(self: VirtualQPlainTextEdit, e: gen_qevent_types.QWheelEvent): void {.base.} =
-  QPlainTextEditwheelEvent(self[], e)
-proc cQPlainTextEdit_method_callback_wheelEvent(self: pointer, e: pointer): void {.cdecl.} =
+proc fcQPlainTextEdit_method_callback_wheelEvent(self: pointer, e: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPlainTextEdit](fcQPlainTextEdit_vdata(self))
   let slotval1 = gen_qevent_types.QWheelEvent(h: e, owned: false)
   inst.wheelEvent(slotval1)
 
-method createMimeDataFromSelection*(self: VirtualQPlainTextEdit): gen_qmimedata_types.QMimeData {.base.} =
-  QPlainTextEditcreateMimeDataFromSelection(self[])
-proc cQPlainTextEdit_method_callback_createMimeDataFromSelection(self: pointer): pointer {.cdecl.} =
+proc fcQPlainTextEdit_method_callback_createMimeDataFromSelection(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQPlainTextEdit](fcQPlainTextEdit_vdata(self))
   var virtualReturn = inst.createMimeDataFromSelection()
   virtualReturn.owned = false # TODO move?
@@ -1820,46 +1891,34 @@ proc cQPlainTextEdit_method_callback_createMimeDataFromSelection(self: pointer):
   virtualReturn.h = nil
   virtualReturn_h
 
-method canInsertFromMimeData*(self: VirtualQPlainTextEdit, source: gen_qmimedata_types.QMimeData): bool {.base.} =
-  QPlainTextEditcanInsertFromMimeData(self[], source)
-proc cQPlainTextEdit_method_callback_canInsertFromMimeData(self: pointer, source: pointer): bool {.cdecl.} =
+proc fcQPlainTextEdit_method_callback_canInsertFromMimeData(self: pointer, source: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQPlainTextEdit](fcQPlainTextEdit_vdata(self))
   let slotval1 = gen_qmimedata_types.QMimeData(h: source, owned: false)
   var virtualReturn = inst.canInsertFromMimeData(slotval1)
   virtualReturn
 
-method insertFromMimeData*(self: VirtualQPlainTextEdit, source: gen_qmimedata_types.QMimeData): void {.base.} =
-  QPlainTextEditinsertFromMimeData(self[], source)
-proc cQPlainTextEdit_method_callback_insertFromMimeData(self: pointer, source: pointer): void {.cdecl.} =
+proc fcQPlainTextEdit_method_callback_insertFromMimeData(self: pointer, source: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPlainTextEdit](fcQPlainTextEdit_vdata(self))
   let slotval1 = gen_qmimedata_types.QMimeData(h: source, owned: false)
   inst.insertFromMimeData(slotval1)
 
-method inputMethodEvent*(self: VirtualQPlainTextEdit, param1: gen_qevent_types.QInputMethodEvent): void {.base.} =
-  QPlainTextEditinputMethodEvent(self[], param1)
-proc cQPlainTextEdit_method_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQPlainTextEdit_method_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPlainTextEdit](fcQPlainTextEdit_vdata(self))
   let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1, owned: false)
   inst.inputMethodEvent(slotval1)
 
-method scrollContentsBy*(self: VirtualQPlainTextEdit, dx: cint, dy: cint): void {.base.} =
-  QPlainTextEditscrollContentsBy(self[], dx, dy)
-proc cQPlainTextEdit_method_callback_scrollContentsBy(self: pointer, dx: cint, dy: cint): void {.cdecl.} =
+proc fcQPlainTextEdit_method_callback_scrollContentsBy(self: pointer, dx: cint, dy: cint): void {.cdecl.} =
   let inst = cast[VirtualQPlainTextEdit](fcQPlainTextEdit_vdata(self))
   let slotval1 = dx
   let slotval2 = dy
   inst.scrollContentsBy(slotval1, slotval2)
 
-method doSetTextCursor*(self: VirtualQPlainTextEdit, cursor: gen_qtextcursor_types.QTextCursor): void {.base.} =
-  QPlainTextEditdoSetTextCursor(self[], cursor)
-proc cQPlainTextEdit_method_callback_doSetTextCursor(self: pointer, cursor: pointer): void {.cdecl.} =
+proc fcQPlainTextEdit_method_callback_doSetTextCursor(self: pointer, cursor: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPlainTextEdit](fcQPlainTextEdit_vdata(self))
   let slotval1 = gen_qtextcursor_types.QTextCursor(h: cursor, owned: false)
   inst.doSetTextCursor(slotval1)
 
-method minimumSizeHint*(self: VirtualQPlainTextEdit): gen_qsize_types.QSize {.base.} =
-  QPlainTextEditminimumSizeHint(self[])
-proc cQPlainTextEdit_method_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
+proc fcQPlainTextEdit_method_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQPlainTextEdit](fcQPlainTextEdit_vdata(self))
   var virtualReturn = inst.minimumSizeHint()
   virtualReturn.owned = false # TODO move?
@@ -1867,9 +1926,7 @@ proc cQPlainTextEdit_method_callback_minimumSizeHint(self: pointer): pointer {.c
   virtualReturn.h = nil
   virtualReturn_h
 
-method sizeHint*(self: VirtualQPlainTextEdit): gen_qsize_types.QSize {.base.} =
-  QPlainTextEditsizeHint(self[])
-proc cQPlainTextEdit_method_callback_sizeHint(self: pointer): pointer {.cdecl.} =
+proc fcQPlainTextEdit_method_callback_sizeHint(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQPlainTextEdit](fcQPlainTextEdit_vdata(self))
   var virtualReturn = inst.sizeHint()
   virtualReturn.owned = false # TODO move?
@@ -1877,33 +1934,25 @@ proc cQPlainTextEdit_method_callback_sizeHint(self: pointer): pointer {.cdecl.} 
   virtualReturn.h = nil
   virtualReturn_h
 
-method setupViewport*(self: VirtualQPlainTextEdit, viewport: gen_qwidget_types.QWidget): void {.base.} =
-  QPlainTextEditsetupViewport(self[], viewport)
-proc cQPlainTextEdit_method_callback_setupViewport(self: pointer, viewport: pointer): void {.cdecl.} =
+proc fcQPlainTextEdit_method_callback_setupViewport(self: pointer, viewport: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPlainTextEdit](fcQPlainTextEdit_vdata(self))
   let slotval1 = gen_qwidget_types.QWidget(h: viewport, owned: false)
   inst.setupViewport(slotval1)
 
-method eventFilter*(self: VirtualQPlainTextEdit, param1: gen_qobject_types.QObject, param2: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QPlainTextEditeventFilter(self[], param1, param2)
-proc cQPlainTextEdit_method_callback_eventFilter(self: pointer, param1: pointer, param2: pointer): bool {.cdecl.} =
+proc fcQPlainTextEdit_method_callback_eventFilter(self: pointer, param1: pointer, param2: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQPlainTextEdit](fcQPlainTextEdit_vdata(self))
   let slotval1 = gen_qobject_types.QObject(h: param1, owned: false)
   let slotval2 = gen_qcoreevent_types.QEvent(h: param2, owned: false)
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
-method viewportEvent*(self: VirtualQPlainTextEdit, param1: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QPlainTextEditviewportEvent(self[], param1)
-proc cQPlainTextEdit_method_callback_viewportEvent(self: pointer, param1: pointer): bool {.cdecl.} =
+proc fcQPlainTextEdit_method_callback_viewportEvent(self: pointer, param1: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQPlainTextEdit](fcQPlainTextEdit_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
   var virtualReturn = inst.viewportEvent(slotval1)
   virtualReturn
 
-method viewportSizeHint*(self: VirtualQPlainTextEdit): gen_qsize_types.QSize {.base.} =
-  QPlainTextEditviewportSizeHint(self[])
-proc cQPlainTextEdit_method_callback_viewportSizeHint(self: pointer): pointer {.cdecl.} =
+proc fcQPlainTextEdit_method_callback_viewportSizeHint(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQPlainTextEdit](fcQPlainTextEdit_vdata(self))
   var virtualReturn = inst.viewportSizeHint()
   virtualReturn.owned = false # TODO move?
@@ -1911,38 +1960,28 @@ proc cQPlainTextEdit_method_callback_viewportSizeHint(self: pointer): pointer {.
   virtualReturn.h = nil
   virtualReturn_h
 
-method devType*(self: VirtualQPlainTextEdit): cint {.base.} =
-  QPlainTextEditdevType(self[])
-proc cQPlainTextEdit_method_callback_devType(self: pointer): cint {.cdecl.} =
+proc fcQPlainTextEdit_method_callback_devType(self: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQPlainTextEdit](fcQPlainTextEdit_vdata(self))
   var virtualReturn = inst.devType()
   virtualReturn
 
-method setVisible*(self: VirtualQPlainTextEdit, visible: bool): void {.base.} =
-  QPlainTextEditsetVisible(self[], visible)
-proc cQPlainTextEdit_method_callback_setVisible(self: pointer, visible: bool): void {.cdecl.} =
+proc fcQPlainTextEdit_method_callback_setVisible(self: pointer, visible: bool): void {.cdecl.} =
   let inst = cast[VirtualQPlainTextEdit](fcQPlainTextEdit_vdata(self))
   let slotval1 = visible
   inst.setVisible(slotval1)
 
-method heightForWidth*(self: VirtualQPlainTextEdit, param1: cint): cint {.base.} =
-  QPlainTextEditheightForWidth(self[], param1)
-proc cQPlainTextEdit_method_callback_heightForWidth(self: pointer, param1: cint): cint {.cdecl.} =
+proc fcQPlainTextEdit_method_callback_heightForWidth(self: pointer, param1: cint): cint {.cdecl.} =
   let inst = cast[VirtualQPlainTextEdit](fcQPlainTextEdit_vdata(self))
   let slotval1 = param1
   var virtualReturn = inst.heightForWidth(slotval1)
   virtualReturn
 
-method hasHeightForWidth*(self: VirtualQPlainTextEdit): bool {.base.} =
-  QPlainTextEdithasHeightForWidth(self[])
-proc cQPlainTextEdit_method_callback_hasHeightForWidth(self: pointer): bool {.cdecl.} =
+proc fcQPlainTextEdit_method_callback_hasHeightForWidth(self: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQPlainTextEdit](fcQPlainTextEdit_vdata(self))
   var virtualReturn = inst.hasHeightForWidth()
   virtualReturn
 
-method paintEngine*(self: VirtualQPlainTextEdit): gen_qpaintengine_types.QPaintEngine {.base.} =
-  QPlainTextEditpaintEngine(self[])
-proc cQPlainTextEdit_method_callback_paintEngine(self: pointer): pointer {.cdecl.} =
+proc fcQPlainTextEdit_method_callback_paintEngine(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQPlainTextEdit](fcQPlainTextEdit_vdata(self))
   var virtualReturn = inst.paintEngine()
   virtualReturn.owned = false # TODO move?
@@ -1950,58 +1989,42 @@ proc cQPlainTextEdit_method_callback_paintEngine(self: pointer): pointer {.cdecl
   virtualReturn.h = nil
   virtualReturn_h
 
-method enterEvent*(self: VirtualQPlainTextEdit, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QPlainTextEditenterEvent(self[], event)
-proc cQPlainTextEdit_method_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQPlainTextEdit_method_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPlainTextEdit](fcQPlainTextEdit_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.enterEvent(slotval1)
 
-method leaveEvent*(self: VirtualQPlainTextEdit, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QPlainTextEditleaveEvent(self[], event)
-proc cQPlainTextEdit_method_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQPlainTextEdit_method_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPlainTextEdit](fcQPlainTextEdit_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.leaveEvent(slotval1)
 
-method moveEvent*(self: VirtualQPlainTextEdit, event: gen_qevent_types.QMoveEvent): void {.base.} =
-  QPlainTextEditmoveEvent(self[], event)
-proc cQPlainTextEdit_method_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQPlainTextEdit_method_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPlainTextEdit](fcQPlainTextEdit_vdata(self))
   let slotval1 = gen_qevent_types.QMoveEvent(h: event, owned: false)
   inst.moveEvent(slotval1)
 
-method closeEvent*(self: VirtualQPlainTextEdit, event: gen_qevent_types.QCloseEvent): void {.base.} =
-  QPlainTextEditcloseEvent(self[], event)
-proc cQPlainTextEdit_method_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQPlainTextEdit_method_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPlainTextEdit](fcQPlainTextEdit_vdata(self))
   let slotval1 = gen_qevent_types.QCloseEvent(h: event, owned: false)
   inst.closeEvent(slotval1)
 
-method tabletEvent*(self: VirtualQPlainTextEdit, event: gen_qevent_types.QTabletEvent): void {.base.} =
-  QPlainTextEdittabletEvent(self[], event)
-proc cQPlainTextEdit_method_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQPlainTextEdit_method_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPlainTextEdit](fcQPlainTextEdit_vdata(self))
   let slotval1 = gen_qevent_types.QTabletEvent(h: event, owned: false)
   inst.tabletEvent(slotval1)
 
-method actionEvent*(self: VirtualQPlainTextEdit, event: gen_qevent_types.QActionEvent): void {.base.} =
-  QPlainTextEditactionEvent(self[], event)
-proc cQPlainTextEdit_method_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQPlainTextEdit_method_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPlainTextEdit](fcQPlainTextEdit_vdata(self))
   let slotval1 = gen_qevent_types.QActionEvent(h: event, owned: false)
   inst.actionEvent(slotval1)
 
-method hideEvent*(self: VirtualQPlainTextEdit, event: gen_qevent_types.QHideEvent): void {.base.} =
-  QPlainTextEdithideEvent(self[], event)
-proc cQPlainTextEdit_method_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQPlainTextEdit_method_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPlainTextEdit](fcQPlainTextEdit_vdata(self))
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   inst.hideEvent(slotval1)
 
-method nativeEvent*(self: VirtualQPlainTextEdit, eventType: openArray[byte], message: pointer, resultVal: ptr clong): bool {.base.} =
-  QPlainTextEditnativeEvent(self[], eventType, message, resultVal)
-proc cQPlainTextEdit_method_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr clong): bool {.cdecl.} =
+proc fcQPlainTextEdit_method_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr clong): bool {.cdecl.} =
   let inst = cast[VirtualQPlainTextEdit](fcQPlainTextEdit_vdata(self))
   var veventType_bytearray = eventType
   var veventTypex_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](veventType_bytearray.data), 0, int(veventType_bytearray.len)-1))
@@ -2012,24 +2035,18 @@ proc cQPlainTextEdit_method_callback_nativeEvent(self: pointer, eventType: struc
   var virtualReturn = inst.nativeEvent(slotval1, slotval2, slotval3)
   virtualReturn
 
-method metric*(self: VirtualQPlainTextEdit, param1: cint): cint {.base.} =
-  QPlainTextEditmetric(self[], param1)
-proc cQPlainTextEdit_method_callback_metric(self: pointer, param1: cint): cint {.cdecl.} =
+proc fcQPlainTextEdit_method_callback_metric(self: pointer, param1: cint): cint {.cdecl.} =
   let inst = cast[VirtualQPlainTextEdit](fcQPlainTextEdit_vdata(self))
   let slotval1 = cint(param1)
   var virtualReturn = inst.metric(slotval1)
   virtualReturn
 
-method initPainter*(self: VirtualQPlainTextEdit, painter: gen_qpainter_types.QPainter): void {.base.} =
-  QPlainTextEditinitPainter(self[], painter)
-proc cQPlainTextEdit_method_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
+proc fcQPlainTextEdit_method_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPlainTextEdit](fcQPlainTextEdit_vdata(self))
   let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
   inst.initPainter(slotval1)
 
-method redirected*(self: VirtualQPlainTextEdit, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.base.} =
-  QPlainTextEditredirected(self[], offset)
-proc cQPlainTextEdit_method_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
+proc fcQPlainTextEdit_method_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQPlainTextEdit](fcQPlainTextEdit_vdata(self))
   let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
   var virtualReturn = inst.redirected(slotval1)
@@ -2038,9 +2055,7 @@ proc cQPlainTextEdit_method_callback_redirected(self: pointer, offset: pointer):
   virtualReturn.h = nil
   virtualReturn_h
 
-method sharedPainter*(self: VirtualQPlainTextEdit): gen_qpainter_types.QPainter {.base.} =
-  QPlainTextEditsharedPainter(self[])
-proc cQPlainTextEdit_method_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
+proc fcQPlainTextEdit_method_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQPlainTextEdit](fcQPlainTextEdit_vdata(self))
   var virtualReturn = inst.sharedPainter()
   virtualReturn.owned = false # TODO move?
@@ -2048,33 +2063,26 @@ proc cQPlainTextEdit_method_callback_sharedPainter(self: pointer): pointer {.cde
   virtualReturn.h = nil
   virtualReturn_h
 
-method childEvent*(self: VirtualQPlainTextEdit, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
-  QPlainTextEditchildEvent(self[], event)
-proc cQPlainTextEdit_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQPlainTextEdit_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPlainTextEdit](fcQPlainTextEdit_vdata(self))
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
-method customEvent*(self: VirtualQPlainTextEdit, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QPlainTextEditcustomEvent(self[], event)
-proc cQPlainTextEdit_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQPlainTextEdit_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPlainTextEdit](fcQPlainTextEdit_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
-method connectNotify*(self: VirtualQPlainTextEdit, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QPlainTextEditconnectNotify(self[], signal)
-proc cQPlainTextEdit_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQPlainTextEdit_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPlainTextEdit](fcQPlainTextEdit_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
-method disconnectNotify*(self: VirtualQPlainTextEdit, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QPlainTextEditdisconnectNotify(self[], signal)
-proc cQPlainTextEdit_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQPlainTextEdit_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPlainTextEdit](fcQPlainTextEdit_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
+
 
 proc firstVisibleBlock*(self: gen_qplaintextedit_types.QPlainTextEdit): gen_qtextobject_types.QTextBlock =
   gen_qtextobject_types.QTextBlock(h: fcQPlainTextEdit_protectedbase_firstVisibleBlock(self.h), owned: true)
@@ -2142,123 +2150,123 @@ proc create*(T: type gen_qplaintextedit_types.QPlainTextEdit,
     let vtbl = cast[ref QPlainTextEditVTable](fcQPlainTextEdit_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQPlainTextEdit_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQPlainTextEdit_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQPlainTextEdit_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQPlainTextEdit_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQPlainTextEdit_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQPlainTextEdit_vtable_callback_metacall
   if not isNil(vtbl[].loadResource):
-    vtbl[].vtbl.loadResource = cQPlainTextEdit_vtable_callback_loadResource
+    vtbl[].vtbl.loadResource = fcQPlainTextEdit_vtable_callback_loadResource
   if not isNil(vtbl[].inputMethodQuery):
-    vtbl[].vtbl.inputMethodQuery = cQPlainTextEdit_vtable_callback_inputMethodQuery
+    vtbl[].vtbl.inputMethodQuery = fcQPlainTextEdit_vtable_callback_inputMethodQuery
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQPlainTextEdit_vtable_callback_event
+    vtbl[].vtbl.event = fcQPlainTextEdit_vtable_callback_event
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQPlainTextEdit_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQPlainTextEdit_vtable_callback_timerEvent
   if not isNil(vtbl[].keyPressEvent):
-    vtbl[].vtbl.keyPressEvent = cQPlainTextEdit_vtable_callback_keyPressEvent
+    vtbl[].vtbl.keyPressEvent = fcQPlainTextEdit_vtable_callback_keyPressEvent
   if not isNil(vtbl[].keyReleaseEvent):
-    vtbl[].vtbl.keyReleaseEvent = cQPlainTextEdit_vtable_callback_keyReleaseEvent
+    vtbl[].vtbl.keyReleaseEvent = fcQPlainTextEdit_vtable_callback_keyReleaseEvent
   if not isNil(vtbl[].resizeEvent):
-    vtbl[].vtbl.resizeEvent = cQPlainTextEdit_vtable_callback_resizeEvent
+    vtbl[].vtbl.resizeEvent = fcQPlainTextEdit_vtable_callback_resizeEvent
   if not isNil(vtbl[].paintEvent):
-    vtbl[].vtbl.paintEvent = cQPlainTextEdit_vtable_callback_paintEvent
+    vtbl[].vtbl.paintEvent = fcQPlainTextEdit_vtable_callback_paintEvent
   if not isNil(vtbl[].mousePressEvent):
-    vtbl[].vtbl.mousePressEvent = cQPlainTextEdit_vtable_callback_mousePressEvent
+    vtbl[].vtbl.mousePressEvent = fcQPlainTextEdit_vtable_callback_mousePressEvent
   if not isNil(vtbl[].mouseMoveEvent):
-    vtbl[].vtbl.mouseMoveEvent = cQPlainTextEdit_vtable_callback_mouseMoveEvent
+    vtbl[].vtbl.mouseMoveEvent = fcQPlainTextEdit_vtable_callback_mouseMoveEvent
   if not isNil(vtbl[].mouseReleaseEvent):
-    vtbl[].vtbl.mouseReleaseEvent = cQPlainTextEdit_vtable_callback_mouseReleaseEvent
+    vtbl[].vtbl.mouseReleaseEvent = fcQPlainTextEdit_vtable_callback_mouseReleaseEvent
   if not isNil(vtbl[].mouseDoubleClickEvent):
-    vtbl[].vtbl.mouseDoubleClickEvent = cQPlainTextEdit_vtable_callback_mouseDoubleClickEvent
+    vtbl[].vtbl.mouseDoubleClickEvent = fcQPlainTextEdit_vtable_callback_mouseDoubleClickEvent
   if not isNil(vtbl[].focusNextPrevChild):
-    vtbl[].vtbl.focusNextPrevChild = cQPlainTextEdit_vtable_callback_focusNextPrevChild
+    vtbl[].vtbl.focusNextPrevChild = fcQPlainTextEdit_vtable_callback_focusNextPrevChild
   if not isNil(vtbl[].contextMenuEvent):
-    vtbl[].vtbl.contextMenuEvent = cQPlainTextEdit_vtable_callback_contextMenuEvent
+    vtbl[].vtbl.contextMenuEvent = fcQPlainTextEdit_vtable_callback_contextMenuEvent
   if not isNil(vtbl[].dragEnterEvent):
-    vtbl[].vtbl.dragEnterEvent = cQPlainTextEdit_vtable_callback_dragEnterEvent
+    vtbl[].vtbl.dragEnterEvent = fcQPlainTextEdit_vtable_callback_dragEnterEvent
   if not isNil(vtbl[].dragLeaveEvent):
-    vtbl[].vtbl.dragLeaveEvent = cQPlainTextEdit_vtable_callback_dragLeaveEvent
+    vtbl[].vtbl.dragLeaveEvent = fcQPlainTextEdit_vtable_callback_dragLeaveEvent
   if not isNil(vtbl[].dragMoveEvent):
-    vtbl[].vtbl.dragMoveEvent = cQPlainTextEdit_vtable_callback_dragMoveEvent
+    vtbl[].vtbl.dragMoveEvent = fcQPlainTextEdit_vtable_callback_dragMoveEvent
   if not isNil(vtbl[].dropEvent):
-    vtbl[].vtbl.dropEvent = cQPlainTextEdit_vtable_callback_dropEvent
+    vtbl[].vtbl.dropEvent = fcQPlainTextEdit_vtable_callback_dropEvent
   if not isNil(vtbl[].focusInEvent):
-    vtbl[].vtbl.focusInEvent = cQPlainTextEdit_vtable_callback_focusInEvent
+    vtbl[].vtbl.focusInEvent = fcQPlainTextEdit_vtable_callback_focusInEvent
   if not isNil(vtbl[].focusOutEvent):
-    vtbl[].vtbl.focusOutEvent = cQPlainTextEdit_vtable_callback_focusOutEvent
+    vtbl[].vtbl.focusOutEvent = fcQPlainTextEdit_vtable_callback_focusOutEvent
   if not isNil(vtbl[].showEvent):
-    vtbl[].vtbl.showEvent = cQPlainTextEdit_vtable_callback_showEvent
+    vtbl[].vtbl.showEvent = fcQPlainTextEdit_vtable_callback_showEvent
   if not isNil(vtbl[].changeEvent):
-    vtbl[].vtbl.changeEvent = cQPlainTextEdit_vtable_callback_changeEvent
+    vtbl[].vtbl.changeEvent = fcQPlainTextEdit_vtable_callback_changeEvent
   if not isNil(vtbl[].wheelEvent):
-    vtbl[].vtbl.wheelEvent = cQPlainTextEdit_vtable_callback_wheelEvent
+    vtbl[].vtbl.wheelEvent = fcQPlainTextEdit_vtable_callback_wheelEvent
   if not isNil(vtbl[].createMimeDataFromSelection):
-    vtbl[].vtbl.createMimeDataFromSelection = cQPlainTextEdit_vtable_callback_createMimeDataFromSelection
+    vtbl[].vtbl.createMimeDataFromSelection = fcQPlainTextEdit_vtable_callback_createMimeDataFromSelection
   if not isNil(vtbl[].canInsertFromMimeData):
-    vtbl[].vtbl.canInsertFromMimeData = cQPlainTextEdit_vtable_callback_canInsertFromMimeData
+    vtbl[].vtbl.canInsertFromMimeData = fcQPlainTextEdit_vtable_callback_canInsertFromMimeData
   if not isNil(vtbl[].insertFromMimeData):
-    vtbl[].vtbl.insertFromMimeData = cQPlainTextEdit_vtable_callback_insertFromMimeData
+    vtbl[].vtbl.insertFromMimeData = fcQPlainTextEdit_vtable_callback_insertFromMimeData
   if not isNil(vtbl[].inputMethodEvent):
-    vtbl[].vtbl.inputMethodEvent = cQPlainTextEdit_vtable_callback_inputMethodEvent
+    vtbl[].vtbl.inputMethodEvent = fcQPlainTextEdit_vtable_callback_inputMethodEvent
   if not isNil(vtbl[].scrollContentsBy):
-    vtbl[].vtbl.scrollContentsBy = cQPlainTextEdit_vtable_callback_scrollContentsBy
+    vtbl[].vtbl.scrollContentsBy = fcQPlainTextEdit_vtable_callback_scrollContentsBy
   if not isNil(vtbl[].doSetTextCursor):
-    vtbl[].vtbl.doSetTextCursor = cQPlainTextEdit_vtable_callback_doSetTextCursor
+    vtbl[].vtbl.doSetTextCursor = fcQPlainTextEdit_vtable_callback_doSetTextCursor
   if not isNil(vtbl[].minimumSizeHint):
-    vtbl[].vtbl.minimumSizeHint = cQPlainTextEdit_vtable_callback_minimumSizeHint
+    vtbl[].vtbl.minimumSizeHint = fcQPlainTextEdit_vtable_callback_minimumSizeHint
   if not isNil(vtbl[].sizeHint):
-    vtbl[].vtbl.sizeHint = cQPlainTextEdit_vtable_callback_sizeHint
+    vtbl[].vtbl.sizeHint = fcQPlainTextEdit_vtable_callback_sizeHint
   if not isNil(vtbl[].setupViewport):
-    vtbl[].vtbl.setupViewport = cQPlainTextEdit_vtable_callback_setupViewport
+    vtbl[].vtbl.setupViewport = fcQPlainTextEdit_vtable_callback_setupViewport
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQPlainTextEdit_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQPlainTextEdit_vtable_callback_eventFilter
   if not isNil(vtbl[].viewportEvent):
-    vtbl[].vtbl.viewportEvent = cQPlainTextEdit_vtable_callback_viewportEvent
+    vtbl[].vtbl.viewportEvent = fcQPlainTextEdit_vtable_callback_viewportEvent
   if not isNil(vtbl[].viewportSizeHint):
-    vtbl[].vtbl.viewportSizeHint = cQPlainTextEdit_vtable_callback_viewportSizeHint
+    vtbl[].vtbl.viewportSizeHint = fcQPlainTextEdit_vtable_callback_viewportSizeHint
   if not isNil(vtbl[].devType):
-    vtbl[].vtbl.devType = cQPlainTextEdit_vtable_callback_devType
+    vtbl[].vtbl.devType = fcQPlainTextEdit_vtable_callback_devType
   if not isNil(vtbl[].setVisible):
-    vtbl[].vtbl.setVisible = cQPlainTextEdit_vtable_callback_setVisible
+    vtbl[].vtbl.setVisible = fcQPlainTextEdit_vtable_callback_setVisible
   if not isNil(vtbl[].heightForWidth):
-    vtbl[].vtbl.heightForWidth = cQPlainTextEdit_vtable_callback_heightForWidth
+    vtbl[].vtbl.heightForWidth = fcQPlainTextEdit_vtable_callback_heightForWidth
   if not isNil(vtbl[].hasHeightForWidth):
-    vtbl[].vtbl.hasHeightForWidth = cQPlainTextEdit_vtable_callback_hasHeightForWidth
+    vtbl[].vtbl.hasHeightForWidth = fcQPlainTextEdit_vtable_callback_hasHeightForWidth
   if not isNil(vtbl[].paintEngine):
-    vtbl[].vtbl.paintEngine = cQPlainTextEdit_vtable_callback_paintEngine
+    vtbl[].vtbl.paintEngine = fcQPlainTextEdit_vtable_callback_paintEngine
   if not isNil(vtbl[].enterEvent):
-    vtbl[].vtbl.enterEvent = cQPlainTextEdit_vtable_callback_enterEvent
+    vtbl[].vtbl.enterEvent = fcQPlainTextEdit_vtable_callback_enterEvent
   if not isNil(vtbl[].leaveEvent):
-    vtbl[].vtbl.leaveEvent = cQPlainTextEdit_vtable_callback_leaveEvent
+    vtbl[].vtbl.leaveEvent = fcQPlainTextEdit_vtable_callback_leaveEvent
   if not isNil(vtbl[].moveEvent):
-    vtbl[].vtbl.moveEvent = cQPlainTextEdit_vtable_callback_moveEvent
+    vtbl[].vtbl.moveEvent = fcQPlainTextEdit_vtable_callback_moveEvent
   if not isNil(vtbl[].closeEvent):
-    vtbl[].vtbl.closeEvent = cQPlainTextEdit_vtable_callback_closeEvent
+    vtbl[].vtbl.closeEvent = fcQPlainTextEdit_vtable_callback_closeEvent
   if not isNil(vtbl[].tabletEvent):
-    vtbl[].vtbl.tabletEvent = cQPlainTextEdit_vtable_callback_tabletEvent
+    vtbl[].vtbl.tabletEvent = fcQPlainTextEdit_vtable_callback_tabletEvent
   if not isNil(vtbl[].actionEvent):
-    vtbl[].vtbl.actionEvent = cQPlainTextEdit_vtable_callback_actionEvent
+    vtbl[].vtbl.actionEvent = fcQPlainTextEdit_vtable_callback_actionEvent
   if not isNil(vtbl[].hideEvent):
-    vtbl[].vtbl.hideEvent = cQPlainTextEdit_vtable_callback_hideEvent
+    vtbl[].vtbl.hideEvent = fcQPlainTextEdit_vtable_callback_hideEvent
   if not isNil(vtbl[].nativeEvent):
-    vtbl[].vtbl.nativeEvent = cQPlainTextEdit_vtable_callback_nativeEvent
+    vtbl[].vtbl.nativeEvent = fcQPlainTextEdit_vtable_callback_nativeEvent
   if not isNil(vtbl[].metric):
-    vtbl[].vtbl.metric = cQPlainTextEdit_vtable_callback_metric
+    vtbl[].vtbl.metric = fcQPlainTextEdit_vtable_callback_metric
   if not isNil(vtbl[].initPainter):
-    vtbl[].vtbl.initPainter = cQPlainTextEdit_vtable_callback_initPainter
+    vtbl[].vtbl.initPainter = fcQPlainTextEdit_vtable_callback_initPainter
   if not isNil(vtbl[].redirected):
-    vtbl[].vtbl.redirected = cQPlainTextEdit_vtable_callback_redirected
+    vtbl[].vtbl.redirected = fcQPlainTextEdit_vtable_callback_redirected
   if not isNil(vtbl[].sharedPainter):
-    vtbl[].vtbl.sharedPainter = cQPlainTextEdit_vtable_callback_sharedPainter
+    vtbl[].vtbl.sharedPainter = fcQPlainTextEdit_vtable_callback_sharedPainter
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQPlainTextEdit_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQPlainTextEdit_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQPlainTextEdit_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQPlainTextEdit_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQPlainTextEdit_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQPlainTextEdit_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQPlainTextEdit_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQPlainTextEdit_vtable_callback_disconnectNotify
   gen_qplaintextedit_types.QPlainTextEdit(h: fcQPlainTextEdit_new(addr(vtbl[].vtbl), addr(vtbl[]), parent.h), owned: true)
 
 proc create*(T: type gen_qplaintextedit_types.QPlainTextEdit,
@@ -2269,123 +2277,123 @@ proc create*(T: type gen_qplaintextedit_types.QPlainTextEdit,
     let vtbl = cast[ref QPlainTextEditVTable](fcQPlainTextEdit_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQPlainTextEdit_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQPlainTextEdit_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQPlainTextEdit_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQPlainTextEdit_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQPlainTextEdit_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQPlainTextEdit_vtable_callback_metacall
   if not isNil(vtbl[].loadResource):
-    vtbl[].vtbl.loadResource = cQPlainTextEdit_vtable_callback_loadResource
+    vtbl[].vtbl.loadResource = fcQPlainTextEdit_vtable_callback_loadResource
   if not isNil(vtbl[].inputMethodQuery):
-    vtbl[].vtbl.inputMethodQuery = cQPlainTextEdit_vtable_callback_inputMethodQuery
+    vtbl[].vtbl.inputMethodQuery = fcQPlainTextEdit_vtable_callback_inputMethodQuery
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQPlainTextEdit_vtable_callback_event
+    vtbl[].vtbl.event = fcQPlainTextEdit_vtable_callback_event
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQPlainTextEdit_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQPlainTextEdit_vtable_callback_timerEvent
   if not isNil(vtbl[].keyPressEvent):
-    vtbl[].vtbl.keyPressEvent = cQPlainTextEdit_vtable_callback_keyPressEvent
+    vtbl[].vtbl.keyPressEvent = fcQPlainTextEdit_vtable_callback_keyPressEvent
   if not isNil(vtbl[].keyReleaseEvent):
-    vtbl[].vtbl.keyReleaseEvent = cQPlainTextEdit_vtable_callback_keyReleaseEvent
+    vtbl[].vtbl.keyReleaseEvent = fcQPlainTextEdit_vtable_callback_keyReleaseEvent
   if not isNil(vtbl[].resizeEvent):
-    vtbl[].vtbl.resizeEvent = cQPlainTextEdit_vtable_callback_resizeEvent
+    vtbl[].vtbl.resizeEvent = fcQPlainTextEdit_vtable_callback_resizeEvent
   if not isNil(vtbl[].paintEvent):
-    vtbl[].vtbl.paintEvent = cQPlainTextEdit_vtable_callback_paintEvent
+    vtbl[].vtbl.paintEvent = fcQPlainTextEdit_vtable_callback_paintEvent
   if not isNil(vtbl[].mousePressEvent):
-    vtbl[].vtbl.mousePressEvent = cQPlainTextEdit_vtable_callback_mousePressEvent
+    vtbl[].vtbl.mousePressEvent = fcQPlainTextEdit_vtable_callback_mousePressEvent
   if not isNil(vtbl[].mouseMoveEvent):
-    vtbl[].vtbl.mouseMoveEvent = cQPlainTextEdit_vtable_callback_mouseMoveEvent
+    vtbl[].vtbl.mouseMoveEvent = fcQPlainTextEdit_vtable_callback_mouseMoveEvent
   if not isNil(vtbl[].mouseReleaseEvent):
-    vtbl[].vtbl.mouseReleaseEvent = cQPlainTextEdit_vtable_callback_mouseReleaseEvent
+    vtbl[].vtbl.mouseReleaseEvent = fcQPlainTextEdit_vtable_callback_mouseReleaseEvent
   if not isNil(vtbl[].mouseDoubleClickEvent):
-    vtbl[].vtbl.mouseDoubleClickEvent = cQPlainTextEdit_vtable_callback_mouseDoubleClickEvent
+    vtbl[].vtbl.mouseDoubleClickEvent = fcQPlainTextEdit_vtable_callback_mouseDoubleClickEvent
   if not isNil(vtbl[].focusNextPrevChild):
-    vtbl[].vtbl.focusNextPrevChild = cQPlainTextEdit_vtable_callback_focusNextPrevChild
+    vtbl[].vtbl.focusNextPrevChild = fcQPlainTextEdit_vtable_callback_focusNextPrevChild
   if not isNil(vtbl[].contextMenuEvent):
-    vtbl[].vtbl.contextMenuEvent = cQPlainTextEdit_vtable_callback_contextMenuEvent
+    vtbl[].vtbl.contextMenuEvent = fcQPlainTextEdit_vtable_callback_contextMenuEvent
   if not isNil(vtbl[].dragEnterEvent):
-    vtbl[].vtbl.dragEnterEvent = cQPlainTextEdit_vtable_callback_dragEnterEvent
+    vtbl[].vtbl.dragEnterEvent = fcQPlainTextEdit_vtable_callback_dragEnterEvent
   if not isNil(vtbl[].dragLeaveEvent):
-    vtbl[].vtbl.dragLeaveEvent = cQPlainTextEdit_vtable_callback_dragLeaveEvent
+    vtbl[].vtbl.dragLeaveEvent = fcQPlainTextEdit_vtable_callback_dragLeaveEvent
   if not isNil(vtbl[].dragMoveEvent):
-    vtbl[].vtbl.dragMoveEvent = cQPlainTextEdit_vtable_callback_dragMoveEvent
+    vtbl[].vtbl.dragMoveEvent = fcQPlainTextEdit_vtable_callback_dragMoveEvent
   if not isNil(vtbl[].dropEvent):
-    vtbl[].vtbl.dropEvent = cQPlainTextEdit_vtable_callback_dropEvent
+    vtbl[].vtbl.dropEvent = fcQPlainTextEdit_vtable_callback_dropEvent
   if not isNil(vtbl[].focusInEvent):
-    vtbl[].vtbl.focusInEvent = cQPlainTextEdit_vtable_callback_focusInEvent
+    vtbl[].vtbl.focusInEvent = fcQPlainTextEdit_vtable_callback_focusInEvent
   if not isNil(vtbl[].focusOutEvent):
-    vtbl[].vtbl.focusOutEvent = cQPlainTextEdit_vtable_callback_focusOutEvent
+    vtbl[].vtbl.focusOutEvent = fcQPlainTextEdit_vtable_callback_focusOutEvent
   if not isNil(vtbl[].showEvent):
-    vtbl[].vtbl.showEvent = cQPlainTextEdit_vtable_callback_showEvent
+    vtbl[].vtbl.showEvent = fcQPlainTextEdit_vtable_callback_showEvent
   if not isNil(vtbl[].changeEvent):
-    vtbl[].vtbl.changeEvent = cQPlainTextEdit_vtable_callback_changeEvent
+    vtbl[].vtbl.changeEvent = fcQPlainTextEdit_vtable_callback_changeEvent
   if not isNil(vtbl[].wheelEvent):
-    vtbl[].vtbl.wheelEvent = cQPlainTextEdit_vtable_callback_wheelEvent
+    vtbl[].vtbl.wheelEvent = fcQPlainTextEdit_vtable_callback_wheelEvent
   if not isNil(vtbl[].createMimeDataFromSelection):
-    vtbl[].vtbl.createMimeDataFromSelection = cQPlainTextEdit_vtable_callback_createMimeDataFromSelection
+    vtbl[].vtbl.createMimeDataFromSelection = fcQPlainTextEdit_vtable_callback_createMimeDataFromSelection
   if not isNil(vtbl[].canInsertFromMimeData):
-    vtbl[].vtbl.canInsertFromMimeData = cQPlainTextEdit_vtable_callback_canInsertFromMimeData
+    vtbl[].vtbl.canInsertFromMimeData = fcQPlainTextEdit_vtable_callback_canInsertFromMimeData
   if not isNil(vtbl[].insertFromMimeData):
-    vtbl[].vtbl.insertFromMimeData = cQPlainTextEdit_vtable_callback_insertFromMimeData
+    vtbl[].vtbl.insertFromMimeData = fcQPlainTextEdit_vtable_callback_insertFromMimeData
   if not isNil(vtbl[].inputMethodEvent):
-    vtbl[].vtbl.inputMethodEvent = cQPlainTextEdit_vtable_callback_inputMethodEvent
+    vtbl[].vtbl.inputMethodEvent = fcQPlainTextEdit_vtable_callback_inputMethodEvent
   if not isNil(vtbl[].scrollContentsBy):
-    vtbl[].vtbl.scrollContentsBy = cQPlainTextEdit_vtable_callback_scrollContentsBy
+    vtbl[].vtbl.scrollContentsBy = fcQPlainTextEdit_vtable_callback_scrollContentsBy
   if not isNil(vtbl[].doSetTextCursor):
-    vtbl[].vtbl.doSetTextCursor = cQPlainTextEdit_vtable_callback_doSetTextCursor
+    vtbl[].vtbl.doSetTextCursor = fcQPlainTextEdit_vtable_callback_doSetTextCursor
   if not isNil(vtbl[].minimumSizeHint):
-    vtbl[].vtbl.minimumSizeHint = cQPlainTextEdit_vtable_callback_minimumSizeHint
+    vtbl[].vtbl.minimumSizeHint = fcQPlainTextEdit_vtable_callback_minimumSizeHint
   if not isNil(vtbl[].sizeHint):
-    vtbl[].vtbl.sizeHint = cQPlainTextEdit_vtable_callback_sizeHint
+    vtbl[].vtbl.sizeHint = fcQPlainTextEdit_vtable_callback_sizeHint
   if not isNil(vtbl[].setupViewport):
-    vtbl[].vtbl.setupViewport = cQPlainTextEdit_vtable_callback_setupViewport
+    vtbl[].vtbl.setupViewport = fcQPlainTextEdit_vtable_callback_setupViewport
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQPlainTextEdit_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQPlainTextEdit_vtable_callback_eventFilter
   if not isNil(vtbl[].viewportEvent):
-    vtbl[].vtbl.viewportEvent = cQPlainTextEdit_vtable_callback_viewportEvent
+    vtbl[].vtbl.viewportEvent = fcQPlainTextEdit_vtable_callback_viewportEvent
   if not isNil(vtbl[].viewportSizeHint):
-    vtbl[].vtbl.viewportSizeHint = cQPlainTextEdit_vtable_callback_viewportSizeHint
+    vtbl[].vtbl.viewportSizeHint = fcQPlainTextEdit_vtable_callback_viewportSizeHint
   if not isNil(vtbl[].devType):
-    vtbl[].vtbl.devType = cQPlainTextEdit_vtable_callback_devType
+    vtbl[].vtbl.devType = fcQPlainTextEdit_vtable_callback_devType
   if not isNil(vtbl[].setVisible):
-    vtbl[].vtbl.setVisible = cQPlainTextEdit_vtable_callback_setVisible
+    vtbl[].vtbl.setVisible = fcQPlainTextEdit_vtable_callback_setVisible
   if not isNil(vtbl[].heightForWidth):
-    vtbl[].vtbl.heightForWidth = cQPlainTextEdit_vtable_callback_heightForWidth
+    vtbl[].vtbl.heightForWidth = fcQPlainTextEdit_vtable_callback_heightForWidth
   if not isNil(vtbl[].hasHeightForWidth):
-    vtbl[].vtbl.hasHeightForWidth = cQPlainTextEdit_vtable_callback_hasHeightForWidth
+    vtbl[].vtbl.hasHeightForWidth = fcQPlainTextEdit_vtable_callback_hasHeightForWidth
   if not isNil(vtbl[].paintEngine):
-    vtbl[].vtbl.paintEngine = cQPlainTextEdit_vtable_callback_paintEngine
+    vtbl[].vtbl.paintEngine = fcQPlainTextEdit_vtable_callback_paintEngine
   if not isNil(vtbl[].enterEvent):
-    vtbl[].vtbl.enterEvent = cQPlainTextEdit_vtable_callback_enterEvent
+    vtbl[].vtbl.enterEvent = fcQPlainTextEdit_vtable_callback_enterEvent
   if not isNil(vtbl[].leaveEvent):
-    vtbl[].vtbl.leaveEvent = cQPlainTextEdit_vtable_callback_leaveEvent
+    vtbl[].vtbl.leaveEvent = fcQPlainTextEdit_vtable_callback_leaveEvent
   if not isNil(vtbl[].moveEvent):
-    vtbl[].vtbl.moveEvent = cQPlainTextEdit_vtable_callback_moveEvent
+    vtbl[].vtbl.moveEvent = fcQPlainTextEdit_vtable_callback_moveEvent
   if not isNil(vtbl[].closeEvent):
-    vtbl[].vtbl.closeEvent = cQPlainTextEdit_vtable_callback_closeEvent
+    vtbl[].vtbl.closeEvent = fcQPlainTextEdit_vtable_callback_closeEvent
   if not isNil(vtbl[].tabletEvent):
-    vtbl[].vtbl.tabletEvent = cQPlainTextEdit_vtable_callback_tabletEvent
+    vtbl[].vtbl.tabletEvent = fcQPlainTextEdit_vtable_callback_tabletEvent
   if not isNil(vtbl[].actionEvent):
-    vtbl[].vtbl.actionEvent = cQPlainTextEdit_vtable_callback_actionEvent
+    vtbl[].vtbl.actionEvent = fcQPlainTextEdit_vtable_callback_actionEvent
   if not isNil(vtbl[].hideEvent):
-    vtbl[].vtbl.hideEvent = cQPlainTextEdit_vtable_callback_hideEvent
+    vtbl[].vtbl.hideEvent = fcQPlainTextEdit_vtable_callback_hideEvent
   if not isNil(vtbl[].nativeEvent):
-    vtbl[].vtbl.nativeEvent = cQPlainTextEdit_vtable_callback_nativeEvent
+    vtbl[].vtbl.nativeEvent = fcQPlainTextEdit_vtable_callback_nativeEvent
   if not isNil(vtbl[].metric):
-    vtbl[].vtbl.metric = cQPlainTextEdit_vtable_callback_metric
+    vtbl[].vtbl.metric = fcQPlainTextEdit_vtable_callback_metric
   if not isNil(vtbl[].initPainter):
-    vtbl[].vtbl.initPainter = cQPlainTextEdit_vtable_callback_initPainter
+    vtbl[].vtbl.initPainter = fcQPlainTextEdit_vtable_callback_initPainter
   if not isNil(vtbl[].redirected):
-    vtbl[].vtbl.redirected = cQPlainTextEdit_vtable_callback_redirected
+    vtbl[].vtbl.redirected = fcQPlainTextEdit_vtable_callback_redirected
   if not isNil(vtbl[].sharedPainter):
-    vtbl[].vtbl.sharedPainter = cQPlainTextEdit_vtable_callback_sharedPainter
+    vtbl[].vtbl.sharedPainter = fcQPlainTextEdit_vtable_callback_sharedPainter
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQPlainTextEdit_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQPlainTextEdit_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQPlainTextEdit_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQPlainTextEdit_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQPlainTextEdit_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQPlainTextEdit_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQPlainTextEdit_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQPlainTextEdit_vtable_callback_disconnectNotify
   gen_qplaintextedit_types.QPlainTextEdit(h: fcQPlainTextEdit_new2(addr(vtbl[].vtbl), addr(vtbl[])), owned: true)
 
 proc create*(T: type gen_qplaintextedit_types.QPlainTextEdit,
@@ -2397,123 +2405,123 @@ proc create*(T: type gen_qplaintextedit_types.QPlainTextEdit,
     let vtbl = cast[ref QPlainTextEditVTable](fcQPlainTextEdit_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQPlainTextEdit_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQPlainTextEdit_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQPlainTextEdit_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQPlainTextEdit_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQPlainTextEdit_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQPlainTextEdit_vtable_callback_metacall
   if not isNil(vtbl[].loadResource):
-    vtbl[].vtbl.loadResource = cQPlainTextEdit_vtable_callback_loadResource
+    vtbl[].vtbl.loadResource = fcQPlainTextEdit_vtable_callback_loadResource
   if not isNil(vtbl[].inputMethodQuery):
-    vtbl[].vtbl.inputMethodQuery = cQPlainTextEdit_vtable_callback_inputMethodQuery
+    vtbl[].vtbl.inputMethodQuery = fcQPlainTextEdit_vtable_callback_inputMethodQuery
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQPlainTextEdit_vtable_callback_event
+    vtbl[].vtbl.event = fcQPlainTextEdit_vtable_callback_event
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQPlainTextEdit_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQPlainTextEdit_vtable_callback_timerEvent
   if not isNil(vtbl[].keyPressEvent):
-    vtbl[].vtbl.keyPressEvent = cQPlainTextEdit_vtable_callback_keyPressEvent
+    vtbl[].vtbl.keyPressEvent = fcQPlainTextEdit_vtable_callback_keyPressEvent
   if not isNil(vtbl[].keyReleaseEvent):
-    vtbl[].vtbl.keyReleaseEvent = cQPlainTextEdit_vtable_callback_keyReleaseEvent
+    vtbl[].vtbl.keyReleaseEvent = fcQPlainTextEdit_vtable_callback_keyReleaseEvent
   if not isNil(vtbl[].resizeEvent):
-    vtbl[].vtbl.resizeEvent = cQPlainTextEdit_vtable_callback_resizeEvent
+    vtbl[].vtbl.resizeEvent = fcQPlainTextEdit_vtable_callback_resizeEvent
   if not isNil(vtbl[].paintEvent):
-    vtbl[].vtbl.paintEvent = cQPlainTextEdit_vtable_callback_paintEvent
+    vtbl[].vtbl.paintEvent = fcQPlainTextEdit_vtable_callback_paintEvent
   if not isNil(vtbl[].mousePressEvent):
-    vtbl[].vtbl.mousePressEvent = cQPlainTextEdit_vtable_callback_mousePressEvent
+    vtbl[].vtbl.mousePressEvent = fcQPlainTextEdit_vtable_callback_mousePressEvent
   if not isNil(vtbl[].mouseMoveEvent):
-    vtbl[].vtbl.mouseMoveEvent = cQPlainTextEdit_vtable_callback_mouseMoveEvent
+    vtbl[].vtbl.mouseMoveEvent = fcQPlainTextEdit_vtable_callback_mouseMoveEvent
   if not isNil(vtbl[].mouseReleaseEvent):
-    vtbl[].vtbl.mouseReleaseEvent = cQPlainTextEdit_vtable_callback_mouseReleaseEvent
+    vtbl[].vtbl.mouseReleaseEvent = fcQPlainTextEdit_vtable_callback_mouseReleaseEvent
   if not isNil(vtbl[].mouseDoubleClickEvent):
-    vtbl[].vtbl.mouseDoubleClickEvent = cQPlainTextEdit_vtable_callback_mouseDoubleClickEvent
+    vtbl[].vtbl.mouseDoubleClickEvent = fcQPlainTextEdit_vtable_callback_mouseDoubleClickEvent
   if not isNil(vtbl[].focusNextPrevChild):
-    vtbl[].vtbl.focusNextPrevChild = cQPlainTextEdit_vtable_callback_focusNextPrevChild
+    vtbl[].vtbl.focusNextPrevChild = fcQPlainTextEdit_vtable_callback_focusNextPrevChild
   if not isNil(vtbl[].contextMenuEvent):
-    vtbl[].vtbl.contextMenuEvent = cQPlainTextEdit_vtable_callback_contextMenuEvent
+    vtbl[].vtbl.contextMenuEvent = fcQPlainTextEdit_vtable_callback_contextMenuEvent
   if not isNil(vtbl[].dragEnterEvent):
-    vtbl[].vtbl.dragEnterEvent = cQPlainTextEdit_vtable_callback_dragEnterEvent
+    vtbl[].vtbl.dragEnterEvent = fcQPlainTextEdit_vtable_callback_dragEnterEvent
   if not isNil(vtbl[].dragLeaveEvent):
-    vtbl[].vtbl.dragLeaveEvent = cQPlainTextEdit_vtable_callback_dragLeaveEvent
+    vtbl[].vtbl.dragLeaveEvent = fcQPlainTextEdit_vtable_callback_dragLeaveEvent
   if not isNil(vtbl[].dragMoveEvent):
-    vtbl[].vtbl.dragMoveEvent = cQPlainTextEdit_vtable_callback_dragMoveEvent
+    vtbl[].vtbl.dragMoveEvent = fcQPlainTextEdit_vtable_callback_dragMoveEvent
   if not isNil(vtbl[].dropEvent):
-    vtbl[].vtbl.dropEvent = cQPlainTextEdit_vtable_callback_dropEvent
+    vtbl[].vtbl.dropEvent = fcQPlainTextEdit_vtable_callback_dropEvent
   if not isNil(vtbl[].focusInEvent):
-    vtbl[].vtbl.focusInEvent = cQPlainTextEdit_vtable_callback_focusInEvent
+    vtbl[].vtbl.focusInEvent = fcQPlainTextEdit_vtable_callback_focusInEvent
   if not isNil(vtbl[].focusOutEvent):
-    vtbl[].vtbl.focusOutEvent = cQPlainTextEdit_vtable_callback_focusOutEvent
+    vtbl[].vtbl.focusOutEvent = fcQPlainTextEdit_vtable_callback_focusOutEvent
   if not isNil(vtbl[].showEvent):
-    vtbl[].vtbl.showEvent = cQPlainTextEdit_vtable_callback_showEvent
+    vtbl[].vtbl.showEvent = fcQPlainTextEdit_vtable_callback_showEvent
   if not isNil(vtbl[].changeEvent):
-    vtbl[].vtbl.changeEvent = cQPlainTextEdit_vtable_callback_changeEvent
+    vtbl[].vtbl.changeEvent = fcQPlainTextEdit_vtable_callback_changeEvent
   if not isNil(vtbl[].wheelEvent):
-    vtbl[].vtbl.wheelEvent = cQPlainTextEdit_vtable_callback_wheelEvent
+    vtbl[].vtbl.wheelEvent = fcQPlainTextEdit_vtable_callback_wheelEvent
   if not isNil(vtbl[].createMimeDataFromSelection):
-    vtbl[].vtbl.createMimeDataFromSelection = cQPlainTextEdit_vtable_callback_createMimeDataFromSelection
+    vtbl[].vtbl.createMimeDataFromSelection = fcQPlainTextEdit_vtable_callback_createMimeDataFromSelection
   if not isNil(vtbl[].canInsertFromMimeData):
-    vtbl[].vtbl.canInsertFromMimeData = cQPlainTextEdit_vtable_callback_canInsertFromMimeData
+    vtbl[].vtbl.canInsertFromMimeData = fcQPlainTextEdit_vtable_callback_canInsertFromMimeData
   if not isNil(vtbl[].insertFromMimeData):
-    vtbl[].vtbl.insertFromMimeData = cQPlainTextEdit_vtable_callback_insertFromMimeData
+    vtbl[].vtbl.insertFromMimeData = fcQPlainTextEdit_vtable_callback_insertFromMimeData
   if not isNil(vtbl[].inputMethodEvent):
-    vtbl[].vtbl.inputMethodEvent = cQPlainTextEdit_vtable_callback_inputMethodEvent
+    vtbl[].vtbl.inputMethodEvent = fcQPlainTextEdit_vtable_callback_inputMethodEvent
   if not isNil(vtbl[].scrollContentsBy):
-    vtbl[].vtbl.scrollContentsBy = cQPlainTextEdit_vtable_callback_scrollContentsBy
+    vtbl[].vtbl.scrollContentsBy = fcQPlainTextEdit_vtable_callback_scrollContentsBy
   if not isNil(vtbl[].doSetTextCursor):
-    vtbl[].vtbl.doSetTextCursor = cQPlainTextEdit_vtable_callback_doSetTextCursor
+    vtbl[].vtbl.doSetTextCursor = fcQPlainTextEdit_vtable_callback_doSetTextCursor
   if not isNil(vtbl[].minimumSizeHint):
-    vtbl[].vtbl.minimumSizeHint = cQPlainTextEdit_vtable_callback_minimumSizeHint
+    vtbl[].vtbl.minimumSizeHint = fcQPlainTextEdit_vtable_callback_minimumSizeHint
   if not isNil(vtbl[].sizeHint):
-    vtbl[].vtbl.sizeHint = cQPlainTextEdit_vtable_callback_sizeHint
+    vtbl[].vtbl.sizeHint = fcQPlainTextEdit_vtable_callback_sizeHint
   if not isNil(vtbl[].setupViewport):
-    vtbl[].vtbl.setupViewport = cQPlainTextEdit_vtable_callback_setupViewport
+    vtbl[].vtbl.setupViewport = fcQPlainTextEdit_vtable_callback_setupViewport
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQPlainTextEdit_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQPlainTextEdit_vtable_callback_eventFilter
   if not isNil(vtbl[].viewportEvent):
-    vtbl[].vtbl.viewportEvent = cQPlainTextEdit_vtable_callback_viewportEvent
+    vtbl[].vtbl.viewportEvent = fcQPlainTextEdit_vtable_callback_viewportEvent
   if not isNil(vtbl[].viewportSizeHint):
-    vtbl[].vtbl.viewportSizeHint = cQPlainTextEdit_vtable_callback_viewportSizeHint
+    vtbl[].vtbl.viewportSizeHint = fcQPlainTextEdit_vtable_callback_viewportSizeHint
   if not isNil(vtbl[].devType):
-    vtbl[].vtbl.devType = cQPlainTextEdit_vtable_callback_devType
+    vtbl[].vtbl.devType = fcQPlainTextEdit_vtable_callback_devType
   if not isNil(vtbl[].setVisible):
-    vtbl[].vtbl.setVisible = cQPlainTextEdit_vtable_callback_setVisible
+    vtbl[].vtbl.setVisible = fcQPlainTextEdit_vtable_callback_setVisible
   if not isNil(vtbl[].heightForWidth):
-    vtbl[].vtbl.heightForWidth = cQPlainTextEdit_vtable_callback_heightForWidth
+    vtbl[].vtbl.heightForWidth = fcQPlainTextEdit_vtable_callback_heightForWidth
   if not isNil(vtbl[].hasHeightForWidth):
-    vtbl[].vtbl.hasHeightForWidth = cQPlainTextEdit_vtable_callback_hasHeightForWidth
+    vtbl[].vtbl.hasHeightForWidth = fcQPlainTextEdit_vtable_callback_hasHeightForWidth
   if not isNil(vtbl[].paintEngine):
-    vtbl[].vtbl.paintEngine = cQPlainTextEdit_vtable_callback_paintEngine
+    vtbl[].vtbl.paintEngine = fcQPlainTextEdit_vtable_callback_paintEngine
   if not isNil(vtbl[].enterEvent):
-    vtbl[].vtbl.enterEvent = cQPlainTextEdit_vtable_callback_enterEvent
+    vtbl[].vtbl.enterEvent = fcQPlainTextEdit_vtable_callback_enterEvent
   if not isNil(vtbl[].leaveEvent):
-    vtbl[].vtbl.leaveEvent = cQPlainTextEdit_vtable_callback_leaveEvent
+    vtbl[].vtbl.leaveEvent = fcQPlainTextEdit_vtable_callback_leaveEvent
   if not isNil(vtbl[].moveEvent):
-    vtbl[].vtbl.moveEvent = cQPlainTextEdit_vtable_callback_moveEvent
+    vtbl[].vtbl.moveEvent = fcQPlainTextEdit_vtable_callback_moveEvent
   if not isNil(vtbl[].closeEvent):
-    vtbl[].vtbl.closeEvent = cQPlainTextEdit_vtable_callback_closeEvent
+    vtbl[].vtbl.closeEvent = fcQPlainTextEdit_vtable_callback_closeEvent
   if not isNil(vtbl[].tabletEvent):
-    vtbl[].vtbl.tabletEvent = cQPlainTextEdit_vtable_callback_tabletEvent
+    vtbl[].vtbl.tabletEvent = fcQPlainTextEdit_vtable_callback_tabletEvent
   if not isNil(vtbl[].actionEvent):
-    vtbl[].vtbl.actionEvent = cQPlainTextEdit_vtable_callback_actionEvent
+    vtbl[].vtbl.actionEvent = fcQPlainTextEdit_vtable_callback_actionEvent
   if not isNil(vtbl[].hideEvent):
-    vtbl[].vtbl.hideEvent = cQPlainTextEdit_vtable_callback_hideEvent
+    vtbl[].vtbl.hideEvent = fcQPlainTextEdit_vtable_callback_hideEvent
   if not isNil(vtbl[].nativeEvent):
-    vtbl[].vtbl.nativeEvent = cQPlainTextEdit_vtable_callback_nativeEvent
+    vtbl[].vtbl.nativeEvent = fcQPlainTextEdit_vtable_callback_nativeEvent
   if not isNil(vtbl[].metric):
-    vtbl[].vtbl.metric = cQPlainTextEdit_vtable_callback_metric
+    vtbl[].vtbl.metric = fcQPlainTextEdit_vtable_callback_metric
   if not isNil(vtbl[].initPainter):
-    vtbl[].vtbl.initPainter = cQPlainTextEdit_vtable_callback_initPainter
+    vtbl[].vtbl.initPainter = fcQPlainTextEdit_vtable_callback_initPainter
   if not isNil(vtbl[].redirected):
-    vtbl[].vtbl.redirected = cQPlainTextEdit_vtable_callback_redirected
+    vtbl[].vtbl.redirected = fcQPlainTextEdit_vtable_callback_redirected
   if not isNil(vtbl[].sharedPainter):
-    vtbl[].vtbl.sharedPainter = cQPlainTextEdit_vtable_callback_sharedPainter
+    vtbl[].vtbl.sharedPainter = fcQPlainTextEdit_vtable_callback_sharedPainter
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQPlainTextEdit_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQPlainTextEdit_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQPlainTextEdit_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQPlainTextEdit_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQPlainTextEdit_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQPlainTextEdit_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQPlainTextEdit_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQPlainTextEdit_vtable_callback_disconnectNotify
   gen_qplaintextedit_types.QPlainTextEdit(h: fcQPlainTextEdit_new3(addr(vtbl[].vtbl), addr(vtbl[]), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))), owned: true)
 
 proc create*(T: type gen_qplaintextedit_types.QPlainTextEdit,
@@ -2525,123 +2533,123 @@ proc create*(T: type gen_qplaintextedit_types.QPlainTextEdit,
     let vtbl = cast[ref QPlainTextEditVTable](fcQPlainTextEdit_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQPlainTextEdit_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQPlainTextEdit_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQPlainTextEdit_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQPlainTextEdit_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQPlainTextEdit_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQPlainTextEdit_vtable_callback_metacall
   if not isNil(vtbl[].loadResource):
-    vtbl[].vtbl.loadResource = cQPlainTextEdit_vtable_callback_loadResource
+    vtbl[].vtbl.loadResource = fcQPlainTextEdit_vtable_callback_loadResource
   if not isNil(vtbl[].inputMethodQuery):
-    vtbl[].vtbl.inputMethodQuery = cQPlainTextEdit_vtable_callback_inputMethodQuery
+    vtbl[].vtbl.inputMethodQuery = fcQPlainTextEdit_vtable_callback_inputMethodQuery
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQPlainTextEdit_vtable_callback_event
+    vtbl[].vtbl.event = fcQPlainTextEdit_vtable_callback_event
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQPlainTextEdit_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQPlainTextEdit_vtable_callback_timerEvent
   if not isNil(vtbl[].keyPressEvent):
-    vtbl[].vtbl.keyPressEvent = cQPlainTextEdit_vtable_callback_keyPressEvent
+    vtbl[].vtbl.keyPressEvent = fcQPlainTextEdit_vtable_callback_keyPressEvent
   if not isNil(vtbl[].keyReleaseEvent):
-    vtbl[].vtbl.keyReleaseEvent = cQPlainTextEdit_vtable_callback_keyReleaseEvent
+    vtbl[].vtbl.keyReleaseEvent = fcQPlainTextEdit_vtable_callback_keyReleaseEvent
   if not isNil(vtbl[].resizeEvent):
-    vtbl[].vtbl.resizeEvent = cQPlainTextEdit_vtable_callback_resizeEvent
+    vtbl[].vtbl.resizeEvent = fcQPlainTextEdit_vtable_callback_resizeEvent
   if not isNil(vtbl[].paintEvent):
-    vtbl[].vtbl.paintEvent = cQPlainTextEdit_vtable_callback_paintEvent
+    vtbl[].vtbl.paintEvent = fcQPlainTextEdit_vtable_callback_paintEvent
   if not isNil(vtbl[].mousePressEvent):
-    vtbl[].vtbl.mousePressEvent = cQPlainTextEdit_vtable_callback_mousePressEvent
+    vtbl[].vtbl.mousePressEvent = fcQPlainTextEdit_vtable_callback_mousePressEvent
   if not isNil(vtbl[].mouseMoveEvent):
-    vtbl[].vtbl.mouseMoveEvent = cQPlainTextEdit_vtable_callback_mouseMoveEvent
+    vtbl[].vtbl.mouseMoveEvent = fcQPlainTextEdit_vtable_callback_mouseMoveEvent
   if not isNil(vtbl[].mouseReleaseEvent):
-    vtbl[].vtbl.mouseReleaseEvent = cQPlainTextEdit_vtable_callback_mouseReleaseEvent
+    vtbl[].vtbl.mouseReleaseEvent = fcQPlainTextEdit_vtable_callback_mouseReleaseEvent
   if not isNil(vtbl[].mouseDoubleClickEvent):
-    vtbl[].vtbl.mouseDoubleClickEvent = cQPlainTextEdit_vtable_callback_mouseDoubleClickEvent
+    vtbl[].vtbl.mouseDoubleClickEvent = fcQPlainTextEdit_vtable_callback_mouseDoubleClickEvent
   if not isNil(vtbl[].focusNextPrevChild):
-    vtbl[].vtbl.focusNextPrevChild = cQPlainTextEdit_vtable_callback_focusNextPrevChild
+    vtbl[].vtbl.focusNextPrevChild = fcQPlainTextEdit_vtable_callback_focusNextPrevChild
   if not isNil(vtbl[].contextMenuEvent):
-    vtbl[].vtbl.contextMenuEvent = cQPlainTextEdit_vtable_callback_contextMenuEvent
+    vtbl[].vtbl.contextMenuEvent = fcQPlainTextEdit_vtable_callback_contextMenuEvent
   if not isNil(vtbl[].dragEnterEvent):
-    vtbl[].vtbl.dragEnterEvent = cQPlainTextEdit_vtable_callback_dragEnterEvent
+    vtbl[].vtbl.dragEnterEvent = fcQPlainTextEdit_vtable_callback_dragEnterEvent
   if not isNil(vtbl[].dragLeaveEvent):
-    vtbl[].vtbl.dragLeaveEvent = cQPlainTextEdit_vtable_callback_dragLeaveEvent
+    vtbl[].vtbl.dragLeaveEvent = fcQPlainTextEdit_vtable_callback_dragLeaveEvent
   if not isNil(vtbl[].dragMoveEvent):
-    vtbl[].vtbl.dragMoveEvent = cQPlainTextEdit_vtable_callback_dragMoveEvent
+    vtbl[].vtbl.dragMoveEvent = fcQPlainTextEdit_vtable_callback_dragMoveEvent
   if not isNil(vtbl[].dropEvent):
-    vtbl[].vtbl.dropEvent = cQPlainTextEdit_vtable_callback_dropEvent
+    vtbl[].vtbl.dropEvent = fcQPlainTextEdit_vtable_callback_dropEvent
   if not isNil(vtbl[].focusInEvent):
-    vtbl[].vtbl.focusInEvent = cQPlainTextEdit_vtable_callback_focusInEvent
+    vtbl[].vtbl.focusInEvent = fcQPlainTextEdit_vtable_callback_focusInEvent
   if not isNil(vtbl[].focusOutEvent):
-    vtbl[].vtbl.focusOutEvent = cQPlainTextEdit_vtable_callback_focusOutEvent
+    vtbl[].vtbl.focusOutEvent = fcQPlainTextEdit_vtable_callback_focusOutEvent
   if not isNil(vtbl[].showEvent):
-    vtbl[].vtbl.showEvent = cQPlainTextEdit_vtable_callback_showEvent
+    vtbl[].vtbl.showEvent = fcQPlainTextEdit_vtable_callback_showEvent
   if not isNil(vtbl[].changeEvent):
-    vtbl[].vtbl.changeEvent = cQPlainTextEdit_vtable_callback_changeEvent
+    vtbl[].vtbl.changeEvent = fcQPlainTextEdit_vtable_callback_changeEvent
   if not isNil(vtbl[].wheelEvent):
-    vtbl[].vtbl.wheelEvent = cQPlainTextEdit_vtable_callback_wheelEvent
+    vtbl[].vtbl.wheelEvent = fcQPlainTextEdit_vtable_callback_wheelEvent
   if not isNil(vtbl[].createMimeDataFromSelection):
-    vtbl[].vtbl.createMimeDataFromSelection = cQPlainTextEdit_vtable_callback_createMimeDataFromSelection
+    vtbl[].vtbl.createMimeDataFromSelection = fcQPlainTextEdit_vtable_callback_createMimeDataFromSelection
   if not isNil(vtbl[].canInsertFromMimeData):
-    vtbl[].vtbl.canInsertFromMimeData = cQPlainTextEdit_vtable_callback_canInsertFromMimeData
+    vtbl[].vtbl.canInsertFromMimeData = fcQPlainTextEdit_vtable_callback_canInsertFromMimeData
   if not isNil(vtbl[].insertFromMimeData):
-    vtbl[].vtbl.insertFromMimeData = cQPlainTextEdit_vtable_callback_insertFromMimeData
+    vtbl[].vtbl.insertFromMimeData = fcQPlainTextEdit_vtable_callback_insertFromMimeData
   if not isNil(vtbl[].inputMethodEvent):
-    vtbl[].vtbl.inputMethodEvent = cQPlainTextEdit_vtable_callback_inputMethodEvent
+    vtbl[].vtbl.inputMethodEvent = fcQPlainTextEdit_vtable_callback_inputMethodEvent
   if not isNil(vtbl[].scrollContentsBy):
-    vtbl[].vtbl.scrollContentsBy = cQPlainTextEdit_vtable_callback_scrollContentsBy
+    vtbl[].vtbl.scrollContentsBy = fcQPlainTextEdit_vtable_callback_scrollContentsBy
   if not isNil(vtbl[].doSetTextCursor):
-    vtbl[].vtbl.doSetTextCursor = cQPlainTextEdit_vtable_callback_doSetTextCursor
+    vtbl[].vtbl.doSetTextCursor = fcQPlainTextEdit_vtable_callback_doSetTextCursor
   if not isNil(vtbl[].minimumSizeHint):
-    vtbl[].vtbl.minimumSizeHint = cQPlainTextEdit_vtable_callback_minimumSizeHint
+    vtbl[].vtbl.minimumSizeHint = fcQPlainTextEdit_vtable_callback_minimumSizeHint
   if not isNil(vtbl[].sizeHint):
-    vtbl[].vtbl.sizeHint = cQPlainTextEdit_vtable_callback_sizeHint
+    vtbl[].vtbl.sizeHint = fcQPlainTextEdit_vtable_callback_sizeHint
   if not isNil(vtbl[].setupViewport):
-    vtbl[].vtbl.setupViewport = cQPlainTextEdit_vtable_callback_setupViewport
+    vtbl[].vtbl.setupViewport = fcQPlainTextEdit_vtable_callback_setupViewport
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQPlainTextEdit_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQPlainTextEdit_vtable_callback_eventFilter
   if not isNil(vtbl[].viewportEvent):
-    vtbl[].vtbl.viewportEvent = cQPlainTextEdit_vtable_callback_viewportEvent
+    vtbl[].vtbl.viewportEvent = fcQPlainTextEdit_vtable_callback_viewportEvent
   if not isNil(vtbl[].viewportSizeHint):
-    vtbl[].vtbl.viewportSizeHint = cQPlainTextEdit_vtable_callback_viewportSizeHint
+    vtbl[].vtbl.viewportSizeHint = fcQPlainTextEdit_vtable_callback_viewportSizeHint
   if not isNil(vtbl[].devType):
-    vtbl[].vtbl.devType = cQPlainTextEdit_vtable_callback_devType
+    vtbl[].vtbl.devType = fcQPlainTextEdit_vtable_callback_devType
   if not isNil(vtbl[].setVisible):
-    vtbl[].vtbl.setVisible = cQPlainTextEdit_vtable_callback_setVisible
+    vtbl[].vtbl.setVisible = fcQPlainTextEdit_vtable_callback_setVisible
   if not isNil(vtbl[].heightForWidth):
-    vtbl[].vtbl.heightForWidth = cQPlainTextEdit_vtable_callback_heightForWidth
+    vtbl[].vtbl.heightForWidth = fcQPlainTextEdit_vtable_callback_heightForWidth
   if not isNil(vtbl[].hasHeightForWidth):
-    vtbl[].vtbl.hasHeightForWidth = cQPlainTextEdit_vtable_callback_hasHeightForWidth
+    vtbl[].vtbl.hasHeightForWidth = fcQPlainTextEdit_vtable_callback_hasHeightForWidth
   if not isNil(vtbl[].paintEngine):
-    vtbl[].vtbl.paintEngine = cQPlainTextEdit_vtable_callback_paintEngine
+    vtbl[].vtbl.paintEngine = fcQPlainTextEdit_vtable_callback_paintEngine
   if not isNil(vtbl[].enterEvent):
-    vtbl[].vtbl.enterEvent = cQPlainTextEdit_vtable_callback_enterEvent
+    vtbl[].vtbl.enterEvent = fcQPlainTextEdit_vtable_callback_enterEvent
   if not isNil(vtbl[].leaveEvent):
-    vtbl[].vtbl.leaveEvent = cQPlainTextEdit_vtable_callback_leaveEvent
+    vtbl[].vtbl.leaveEvent = fcQPlainTextEdit_vtable_callback_leaveEvent
   if not isNil(vtbl[].moveEvent):
-    vtbl[].vtbl.moveEvent = cQPlainTextEdit_vtable_callback_moveEvent
+    vtbl[].vtbl.moveEvent = fcQPlainTextEdit_vtable_callback_moveEvent
   if not isNil(vtbl[].closeEvent):
-    vtbl[].vtbl.closeEvent = cQPlainTextEdit_vtable_callback_closeEvent
+    vtbl[].vtbl.closeEvent = fcQPlainTextEdit_vtable_callback_closeEvent
   if not isNil(vtbl[].tabletEvent):
-    vtbl[].vtbl.tabletEvent = cQPlainTextEdit_vtable_callback_tabletEvent
+    vtbl[].vtbl.tabletEvent = fcQPlainTextEdit_vtable_callback_tabletEvent
   if not isNil(vtbl[].actionEvent):
-    vtbl[].vtbl.actionEvent = cQPlainTextEdit_vtable_callback_actionEvent
+    vtbl[].vtbl.actionEvent = fcQPlainTextEdit_vtable_callback_actionEvent
   if not isNil(vtbl[].hideEvent):
-    vtbl[].vtbl.hideEvent = cQPlainTextEdit_vtable_callback_hideEvent
+    vtbl[].vtbl.hideEvent = fcQPlainTextEdit_vtable_callback_hideEvent
   if not isNil(vtbl[].nativeEvent):
-    vtbl[].vtbl.nativeEvent = cQPlainTextEdit_vtable_callback_nativeEvent
+    vtbl[].vtbl.nativeEvent = fcQPlainTextEdit_vtable_callback_nativeEvent
   if not isNil(vtbl[].metric):
-    vtbl[].vtbl.metric = cQPlainTextEdit_vtable_callback_metric
+    vtbl[].vtbl.metric = fcQPlainTextEdit_vtable_callback_metric
   if not isNil(vtbl[].initPainter):
-    vtbl[].vtbl.initPainter = cQPlainTextEdit_vtable_callback_initPainter
+    vtbl[].vtbl.initPainter = fcQPlainTextEdit_vtable_callback_initPainter
   if not isNil(vtbl[].redirected):
-    vtbl[].vtbl.redirected = cQPlainTextEdit_vtable_callback_redirected
+    vtbl[].vtbl.redirected = fcQPlainTextEdit_vtable_callback_redirected
   if not isNil(vtbl[].sharedPainter):
-    vtbl[].vtbl.sharedPainter = cQPlainTextEdit_vtable_callback_sharedPainter
+    vtbl[].vtbl.sharedPainter = fcQPlainTextEdit_vtable_callback_sharedPainter
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQPlainTextEdit_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQPlainTextEdit_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQPlainTextEdit_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQPlainTextEdit_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQPlainTextEdit_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQPlainTextEdit_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQPlainTextEdit_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQPlainTextEdit_vtable_callback_disconnectNotify
   gen_qplaintextedit_types.QPlainTextEdit(h: fcQPlainTextEdit_new4(addr(vtbl[].vtbl), addr(vtbl[]), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), parent.h), owned: true)
 
 const cQPlainTextEdit_mvtbl = cQPlainTextEditVTable(
@@ -2649,65 +2657,66 @@ const cQPlainTextEdit_mvtbl = cQPlainTextEditVTable(
     let inst = cast[ptr typeof(VirtualQPlainTextEdit()[])](self.fcQPlainTextEdit_vtbl())
     inst[].h = nil
     inst[].owned = false,
-  metaObject: cQPlainTextEdit_method_callback_metaObject,
-  metacast: cQPlainTextEdit_method_callback_metacast,
-  metacall: cQPlainTextEdit_method_callback_metacall,
-  loadResource: cQPlainTextEdit_method_callback_loadResource,
-  inputMethodQuery: cQPlainTextEdit_method_callback_inputMethodQuery,
-  event: cQPlainTextEdit_method_callback_event,
-  timerEvent: cQPlainTextEdit_method_callback_timerEvent,
-  keyPressEvent: cQPlainTextEdit_method_callback_keyPressEvent,
-  keyReleaseEvent: cQPlainTextEdit_method_callback_keyReleaseEvent,
-  resizeEvent: cQPlainTextEdit_method_callback_resizeEvent,
-  paintEvent: cQPlainTextEdit_method_callback_paintEvent,
-  mousePressEvent: cQPlainTextEdit_method_callback_mousePressEvent,
-  mouseMoveEvent: cQPlainTextEdit_method_callback_mouseMoveEvent,
-  mouseReleaseEvent: cQPlainTextEdit_method_callback_mouseReleaseEvent,
-  mouseDoubleClickEvent: cQPlainTextEdit_method_callback_mouseDoubleClickEvent,
-  focusNextPrevChild: cQPlainTextEdit_method_callback_focusNextPrevChild,
-  contextMenuEvent: cQPlainTextEdit_method_callback_contextMenuEvent,
-  dragEnterEvent: cQPlainTextEdit_method_callback_dragEnterEvent,
-  dragLeaveEvent: cQPlainTextEdit_method_callback_dragLeaveEvent,
-  dragMoveEvent: cQPlainTextEdit_method_callback_dragMoveEvent,
-  dropEvent: cQPlainTextEdit_method_callback_dropEvent,
-  focusInEvent: cQPlainTextEdit_method_callback_focusInEvent,
-  focusOutEvent: cQPlainTextEdit_method_callback_focusOutEvent,
-  showEvent: cQPlainTextEdit_method_callback_showEvent,
-  changeEvent: cQPlainTextEdit_method_callback_changeEvent,
-  wheelEvent: cQPlainTextEdit_method_callback_wheelEvent,
-  createMimeDataFromSelection: cQPlainTextEdit_method_callback_createMimeDataFromSelection,
-  canInsertFromMimeData: cQPlainTextEdit_method_callback_canInsertFromMimeData,
-  insertFromMimeData: cQPlainTextEdit_method_callback_insertFromMimeData,
-  inputMethodEvent: cQPlainTextEdit_method_callback_inputMethodEvent,
-  scrollContentsBy: cQPlainTextEdit_method_callback_scrollContentsBy,
-  doSetTextCursor: cQPlainTextEdit_method_callback_doSetTextCursor,
-  minimumSizeHint: cQPlainTextEdit_method_callback_minimumSizeHint,
-  sizeHint: cQPlainTextEdit_method_callback_sizeHint,
-  setupViewport: cQPlainTextEdit_method_callback_setupViewport,
-  eventFilter: cQPlainTextEdit_method_callback_eventFilter,
-  viewportEvent: cQPlainTextEdit_method_callback_viewportEvent,
-  viewportSizeHint: cQPlainTextEdit_method_callback_viewportSizeHint,
-  devType: cQPlainTextEdit_method_callback_devType,
-  setVisible: cQPlainTextEdit_method_callback_setVisible,
-  heightForWidth: cQPlainTextEdit_method_callback_heightForWidth,
-  hasHeightForWidth: cQPlainTextEdit_method_callback_hasHeightForWidth,
-  paintEngine: cQPlainTextEdit_method_callback_paintEngine,
-  enterEvent: cQPlainTextEdit_method_callback_enterEvent,
-  leaveEvent: cQPlainTextEdit_method_callback_leaveEvent,
-  moveEvent: cQPlainTextEdit_method_callback_moveEvent,
-  closeEvent: cQPlainTextEdit_method_callback_closeEvent,
-  tabletEvent: cQPlainTextEdit_method_callback_tabletEvent,
-  actionEvent: cQPlainTextEdit_method_callback_actionEvent,
-  hideEvent: cQPlainTextEdit_method_callback_hideEvent,
-  nativeEvent: cQPlainTextEdit_method_callback_nativeEvent,
-  metric: cQPlainTextEdit_method_callback_metric,
-  initPainter: cQPlainTextEdit_method_callback_initPainter,
-  redirected: cQPlainTextEdit_method_callback_redirected,
-  sharedPainter: cQPlainTextEdit_method_callback_sharedPainter,
-  childEvent: cQPlainTextEdit_method_callback_childEvent,
-  customEvent: cQPlainTextEdit_method_callback_customEvent,
-  connectNotify: cQPlainTextEdit_method_callback_connectNotify,
-  disconnectNotify: cQPlainTextEdit_method_callback_disconnectNotify,
+
+  metaObject: fcQPlainTextEdit_method_callback_metaObject,
+  metacast: fcQPlainTextEdit_method_callback_metacast,
+  metacall: fcQPlainTextEdit_method_callback_metacall,
+  loadResource: fcQPlainTextEdit_method_callback_loadResource,
+  inputMethodQuery: fcQPlainTextEdit_method_callback_inputMethodQuery,
+  event: fcQPlainTextEdit_method_callback_event,
+  timerEvent: fcQPlainTextEdit_method_callback_timerEvent,
+  keyPressEvent: fcQPlainTextEdit_method_callback_keyPressEvent,
+  keyReleaseEvent: fcQPlainTextEdit_method_callback_keyReleaseEvent,
+  resizeEvent: fcQPlainTextEdit_method_callback_resizeEvent,
+  paintEvent: fcQPlainTextEdit_method_callback_paintEvent,
+  mousePressEvent: fcQPlainTextEdit_method_callback_mousePressEvent,
+  mouseMoveEvent: fcQPlainTextEdit_method_callback_mouseMoveEvent,
+  mouseReleaseEvent: fcQPlainTextEdit_method_callback_mouseReleaseEvent,
+  mouseDoubleClickEvent: fcQPlainTextEdit_method_callback_mouseDoubleClickEvent,
+  focusNextPrevChild: fcQPlainTextEdit_method_callback_focusNextPrevChild,
+  contextMenuEvent: fcQPlainTextEdit_method_callback_contextMenuEvent,
+  dragEnterEvent: fcQPlainTextEdit_method_callback_dragEnterEvent,
+  dragLeaveEvent: fcQPlainTextEdit_method_callback_dragLeaveEvent,
+  dragMoveEvent: fcQPlainTextEdit_method_callback_dragMoveEvent,
+  dropEvent: fcQPlainTextEdit_method_callback_dropEvent,
+  focusInEvent: fcQPlainTextEdit_method_callback_focusInEvent,
+  focusOutEvent: fcQPlainTextEdit_method_callback_focusOutEvent,
+  showEvent: fcQPlainTextEdit_method_callback_showEvent,
+  changeEvent: fcQPlainTextEdit_method_callback_changeEvent,
+  wheelEvent: fcQPlainTextEdit_method_callback_wheelEvent,
+  createMimeDataFromSelection: fcQPlainTextEdit_method_callback_createMimeDataFromSelection,
+  canInsertFromMimeData: fcQPlainTextEdit_method_callback_canInsertFromMimeData,
+  insertFromMimeData: fcQPlainTextEdit_method_callback_insertFromMimeData,
+  inputMethodEvent: fcQPlainTextEdit_method_callback_inputMethodEvent,
+  scrollContentsBy: fcQPlainTextEdit_method_callback_scrollContentsBy,
+  doSetTextCursor: fcQPlainTextEdit_method_callback_doSetTextCursor,
+  minimumSizeHint: fcQPlainTextEdit_method_callback_minimumSizeHint,
+  sizeHint: fcQPlainTextEdit_method_callback_sizeHint,
+  setupViewport: fcQPlainTextEdit_method_callback_setupViewport,
+  eventFilter: fcQPlainTextEdit_method_callback_eventFilter,
+  viewportEvent: fcQPlainTextEdit_method_callback_viewportEvent,
+  viewportSizeHint: fcQPlainTextEdit_method_callback_viewportSizeHint,
+  devType: fcQPlainTextEdit_method_callback_devType,
+  setVisible: fcQPlainTextEdit_method_callback_setVisible,
+  heightForWidth: fcQPlainTextEdit_method_callback_heightForWidth,
+  hasHeightForWidth: fcQPlainTextEdit_method_callback_hasHeightForWidth,
+  paintEngine: fcQPlainTextEdit_method_callback_paintEngine,
+  enterEvent: fcQPlainTextEdit_method_callback_enterEvent,
+  leaveEvent: fcQPlainTextEdit_method_callback_leaveEvent,
+  moveEvent: fcQPlainTextEdit_method_callback_moveEvent,
+  closeEvent: fcQPlainTextEdit_method_callback_closeEvent,
+  tabletEvent: fcQPlainTextEdit_method_callback_tabletEvent,
+  actionEvent: fcQPlainTextEdit_method_callback_actionEvent,
+  hideEvent: fcQPlainTextEdit_method_callback_hideEvent,
+  nativeEvent: fcQPlainTextEdit_method_callback_nativeEvent,
+  metric: fcQPlainTextEdit_method_callback_metric,
+  initPainter: fcQPlainTextEdit_method_callback_initPainter,
+  redirected: fcQPlainTextEdit_method_callback_redirected,
+  sharedPainter: fcQPlainTextEdit_method_callback_sharedPainter,
+  childEvent: fcQPlainTextEdit_method_callback_childEvent,
+  customEvent: fcQPlainTextEdit_method_callback_customEvent,
+  connectNotify: fcQPlainTextEdit_method_callback_connectNotify,
+  disconnectNotify: fcQPlainTextEdit_method_callback_disconnectNotify,
 )
 proc create*(T: type gen_qplaintextedit_types.QPlainTextEdit,
     parent: gen_qwidget_types.QWidget,
@@ -2833,6 +2842,7 @@ type QPlainTextDocumentLayoutchildEventProc* = proc(self: QPlainTextDocumentLayo
 type QPlainTextDocumentLayoutcustomEventProc* = proc(self: QPlainTextDocumentLayout, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QPlainTextDocumentLayoutconnectNotifyProc* = proc(self: QPlainTextDocumentLayout, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QPlainTextDocumentLayoutdisconnectNotifyProc* = proc(self: QPlainTextDocumentLayout, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+
 type QPlainTextDocumentLayoutVTable* {.inheritable, pure.} = object
   vtbl: cQPlainTextDocumentLayoutVTable
   metaObject*: QPlainTextDocumentLayoutmetaObjectProc
@@ -2855,10 +2865,69 @@ type QPlainTextDocumentLayoutVTable* {.inheritable, pure.} = object
   customEvent*: QPlainTextDocumentLayoutcustomEventProc
   connectNotify*: QPlainTextDocumentLayoutconnectNotifyProc
   disconnectNotify*: QPlainTextDocumentLayoutdisconnectNotifyProc
+
 proc QPlainTextDocumentLayoutmetaObject*(self: gen_qplaintextedit_types.QPlainTextDocumentLayout): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQPlainTextDocumentLayout_virtualbase_metaObject(self.h), owned: false)
 
-proc cQPlainTextDocumentLayout_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
+proc QPlainTextDocumentLayoutmetacast*(self: gen_qplaintextedit_types.QPlainTextDocumentLayout, param1: cstring): pointer =
+  fcQPlainTextDocumentLayout_virtualbase_metacast(self.h, param1)
+
+proc QPlainTextDocumentLayoutmetacall*(self: gen_qplaintextedit_types.QPlainTextDocumentLayout, param1: cint, param2: cint, param3: pointer): cint =
+  fcQPlainTextDocumentLayout_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+proc QPlainTextDocumentLayoutdraw*(self: gen_qplaintextedit_types.QPlainTextDocumentLayout, param1: gen_qpainter_types.QPainter, param2: gen_qabstracttextdocumentlayout_types.QAbstractTextDocumentLayoutPaintContext): void =
+  fcQPlainTextDocumentLayout_virtualbase_draw(self.h, param1.h, param2.h)
+
+proc QPlainTextDocumentLayouthitTest*(self: gen_qplaintextedit_types.QPlainTextDocumentLayout, param1: gen_qpoint_types.QPointF, param2: cint): cint =
+  fcQPlainTextDocumentLayout_virtualbase_hitTest(self.h, param1.h, cint(param2))
+
+proc QPlainTextDocumentLayoutpageCount*(self: gen_qplaintextedit_types.QPlainTextDocumentLayout): cint =
+  fcQPlainTextDocumentLayout_virtualbase_pageCount(self.h)
+
+proc QPlainTextDocumentLayoutdocumentSize*(self: gen_qplaintextedit_types.QPlainTextDocumentLayout): gen_qsize_types.QSizeF =
+  gen_qsize_types.QSizeF(h: fcQPlainTextDocumentLayout_virtualbase_documentSize(self.h), owned: true)
+
+proc QPlainTextDocumentLayoutframeBoundingRect*(self: gen_qplaintextedit_types.QPlainTextDocumentLayout, param1: gen_qtextobject_types.QTextFrame): gen_qrect_types.QRectF =
+  gen_qrect_types.QRectF(h: fcQPlainTextDocumentLayout_virtualbase_frameBoundingRect(self.h, param1.h), owned: true)
+
+proc QPlainTextDocumentLayoutblockBoundingRect*(self: gen_qplaintextedit_types.QPlainTextDocumentLayout, blockVal: gen_qtextobject_types.QTextBlock): gen_qrect_types.QRectF =
+  gen_qrect_types.QRectF(h: fcQPlainTextDocumentLayout_virtualbase_blockBoundingRect(self.h, blockVal.h), owned: true)
+
+proc QPlainTextDocumentLayoutdocumentChanged*(self: gen_qplaintextedit_types.QPlainTextDocumentLayout, fromVal: cint, param2: cint, charsAdded: cint): void =
+  fcQPlainTextDocumentLayout_virtualbase_documentChanged(self.h, fromVal, param2, charsAdded)
+
+proc QPlainTextDocumentLayoutresizeInlineObject*(self: gen_qplaintextedit_types.QPlainTextDocumentLayout, item: gen_qtextlayout_types.QTextInlineObject, posInDocument: cint, format: gen_qtextformat_types.QTextFormat): void =
+  fcQPlainTextDocumentLayout_virtualbase_resizeInlineObject(self.h, item.h, posInDocument, format.h)
+
+proc QPlainTextDocumentLayoutpositionInlineObject*(self: gen_qplaintextedit_types.QPlainTextDocumentLayout, item: gen_qtextlayout_types.QTextInlineObject, posInDocument: cint, format: gen_qtextformat_types.QTextFormat): void =
+  fcQPlainTextDocumentLayout_virtualbase_positionInlineObject(self.h, item.h, posInDocument, format.h)
+
+proc QPlainTextDocumentLayoutdrawInlineObject*(self: gen_qplaintextedit_types.QPlainTextDocumentLayout, painter: gen_qpainter_types.QPainter, rect: gen_qrect_types.QRectF, objectVal: gen_qtextlayout_types.QTextInlineObject, posInDocument: cint, format: gen_qtextformat_types.QTextFormat): void =
+  fcQPlainTextDocumentLayout_virtualbase_drawInlineObject(self.h, painter.h, rect.h, objectVal.h, posInDocument, format.h)
+
+proc QPlainTextDocumentLayoutevent*(self: gen_qplaintextedit_types.QPlainTextDocumentLayout, event: gen_qcoreevent_types.QEvent): bool =
+  fcQPlainTextDocumentLayout_virtualbase_event(self.h, event.h)
+
+proc QPlainTextDocumentLayouteventFilter*(self: gen_qplaintextedit_types.QPlainTextDocumentLayout, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
+  fcQPlainTextDocumentLayout_virtualbase_eventFilter(self.h, watched.h, event.h)
+
+proc QPlainTextDocumentLayouttimerEvent*(self: gen_qplaintextedit_types.QPlainTextDocumentLayout, event: gen_qcoreevent_types.QTimerEvent): void =
+  fcQPlainTextDocumentLayout_virtualbase_timerEvent(self.h, event.h)
+
+proc QPlainTextDocumentLayoutchildEvent*(self: gen_qplaintextedit_types.QPlainTextDocumentLayout, event: gen_qcoreevent_types.QChildEvent): void =
+  fcQPlainTextDocumentLayout_virtualbase_childEvent(self.h, event.h)
+
+proc QPlainTextDocumentLayoutcustomEvent*(self: gen_qplaintextedit_types.QPlainTextDocumentLayout, event: gen_qcoreevent_types.QEvent): void =
+  fcQPlainTextDocumentLayout_virtualbase_customEvent(self.h, event.h)
+
+proc QPlainTextDocumentLayoutconnectNotify*(self: gen_qplaintextedit_types.QPlainTextDocumentLayout, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQPlainTextDocumentLayout_virtualbase_connectNotify(self.h, signal.h)
+
+proc QPlainTextDocumentLayoutdisconnectNotify*(self: gen_qplaintextedit_types.QPlainTextDocumentLayout, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQPlainTextDocumentLayout_virtualbase_disconnectNotify(self.h, signal.h)
+
+
+proc fcQPlainTextDocumentLayout_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QPlainTextDocumentLayoutVTable](fcQPlainTextDocumentLayout_vdata(self))
   let self = QPlainTextDocumentLayout(h: self)
   var virtualReturn = vtbl[].metaObject(self)
@@ -2867,20 +2936,14 @@ proc cQPlainTextDocumentLayout_vtable_callback_metaObject(self: pointer): pointe
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QPlainTextDocumentLayoutmetacast*(self: gen_qplaintextedit_types.QPlainTextDocumentLayout, param1: cstring): pointer =
-  fcQPlainTextDocumentLayout_virtualbase_metacast(self.h, param1)
-
-proc cQPlainTextDocumentLayout_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+proc fcQPlainTextDocumentLayout_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QPlainTextDocumentLayoutVTable](fcQPlainTextDocumentLayout_vdata(self))
   let self = QPlainTextDocumentLayout(h: self)
   let slotval1 = (param1)
   var virtualReturn = vtbl[].metacast(self, slotval1)
   virtualReturn
 
-proc QPlainTextDocumentLayoutmetacall*(self: gen_qplaintextedit_types.QPlainTextDocumentLayout, param1: cint, param2: cint, param3: pointer): cint =
-  fcQPlainTextDocumentLayout_virtualbase_metacall(self.h, cint(param1), param2, param3)
-
-proc cQPlainTextDocumentLayout_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+proc fcQPlainTextDocumentLayout_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QPlainTextDocumentLayoutVTable](fcQPlainTextDocumentLayout_vdata(self))
   let self = QPlainTextDocumentLayout(h: self)
   let slotval1 = cint(param1)
@@ -2889,20 +2952,14 @@ proc cQPlainTextDocumentLayout_vtable_callback_metacall(self: pointer, param1: c
   var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QPlainTextDocumentLayoutdraw*(self: gen_qplaintextedit_types.QPlainTextDocumentLayout, param1: gen_qpainter_types.QPainter, param2: gen_qabstracttextdocumentlayout_types.QAbstractTextDocumentLayoutPaintContext): void =
-  fcQPlainTextDocumentLayout_virtualbase_draw(self.h, param1.h, param2.h)
-
-proc cQPlainTextDocumentLayout_vtable_callback_draw(self: pointer, param1: pointer, param2: pointer): void {.cdecl.} =
+proc fcQPlainTextDocumentLayout_vtable_callback_draw(self: pointer, param1: pointer, param2: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPlainTextDocumentLayoutVTable](fcQPlainTextDocumentLayout_vdata(self))
   let self = QPlainTextDocumentLayout(h: self)
   let slotval1 = gen_qpainter_types.QPainter(h: param1, owned: false)
   let slotval2 = gen_qabstracttextdocumentlayout_types.QAbstractTextDocumentLayoutPaintContext(h: param2, owned: false)
   vtbl[].draw(self, slotval1, slotval2)
 
-proc QPlainTextDocumentLayouthitTest*(self: gen_qplaintextedit_types.QPlainTextDocumentLayout, param1: gen_qpoint_types.QPointF, param2: cint): cint =
-  fcQPlainTextDocumentLayout_virtualbase_hitTest(self.h, param1.h, cint(param2))
-
-proc cQPlainTextDocumentLayout_vtable_callback_hitTest(self: pointer, param1: pointer, param2: cint): cint {.cdecl.} =
+proc fcQPlainTextDocumentLayout_vtable_callback_hitTest(self: pointer, param1: pointer, param2: cint): cint {.cdecl.} =
   let vtbl = cast[ptr QPlainTextDocumentLayoutVTable](fcQPlainTextDocumentLayout_vdata(self))
   let self = QPlainTextDocumentLayout(h: self)
   let slotval1 = gen_qpoint_types.QPointF(h: param1, owned: false)
@@ -2910,19 +2967,13 @@ proc cQPlainTextDocumentLayout_vtable_callback_hitTest(self: pointer, param1: po
   var virtualReturn = vtbl[].hitTest(self, slotval1, slotval2)
   virtualReturn
 
-proc QPlainTextDocumentLayoutpageCount*(self: gen_qplaintextedit_types.QPlainTextDocumentLayout): cint =
-  fcQPlainTextDocumentLayout_virtualbase_pageCount(self.h)
-
-proc cQPlainTextDocumentLayout_vtable_callback_pageCount(self: pointer): cint {.cdecl.} =
+proc fcQPlainTextDocumentLayout_vtable_callback_pageCount(self: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QPlainTextDocumentLayoutVTable](fcQPlainTextDocumentLayout_vdata(self))
   let self = QPlainTextDocumentLayout(h: self)
   var virtualReturn = vtbl[].pageCount(self)
   virtualReturn
 
-proc QPlainTextDocumentLayoutdocumentSize*(self: gen_qplaintextedit_types.QPlainTextDocumentLayout): gen_qsize_types.QSizeF =
-  gen_qsize_types.QSizeF(h: fcQPlainTextDocumentLayout_virtualbase_documentSize(self.h), owned: true)
-
-proc cQPlainTextDocumentLayout_vtable_callback_documentSize(self: pointer): pointer {.cdecl.} =
+proc fcQPlainTextDocumentLayout_vtable_callback_documentSize(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QPlainTextDocumentLayoutVTable](fcQPlainTextDocumentLayout_vdata(self))
   let self = QPlainTextDocumentLayout(h: self)
   var virtualReturn = vtbl[].documentSize(self)
@@ -2931,10 +2982,7 @@ proc cQPlainTextDocumentLayout_vtable_callback_documentSize(self: pointer): poin
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QPlainTextDocumentLayoutframeBoundingRect*(self: gen_qplaintextedit_types.QPlainTextDocumentLayout, param1: gen_qtextobject_types.QTextFrame): gen_qrect_types.QRectF =
-  gen_qrect_types.QRectF(h: fcQPlainTextDocumentLayout_virtualbase_frameBoundingRect(self.h, param1.h), owned: true)
-
-proc cQPlainTextDocumentLayout_vtable_callback_frameBoundingRect(self: pointer, param1: pointer): pointer {.cdecl.} =
+proc fcQPlainTextDocumentLayout_vtable_callback_frameBoundingRect(self: pointer, param1: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QPlainTextDocumentLayoutVTable](fcQPlainTextDocumentLayout_vdata(self))
   let self = QPlainTextDocumentLayout(h: self)
   let slotval1 = gen_qtextobject_types.QTextFrame(h: param1, owned: false)
@@ -2944,10 +2992,7 @@ proc cQPlainTextDocumentLayout_vtable_callback_frameBoundingRect(self: pointer, 
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QPlainTextDocumentLayoutblockBoundingRect*(self: gen_qplaintextedit_types.QPlainTextDocumentLayout, blockVal: gen_qtextobject_types.QTextBlock): gen_qrect_types.QRectF =
-  gen_qrect_types.QRectF(h: fcQPlainTextDocumentLayout_virtualbase_blockBoundingRect(self.h, blockVal.h), owned: true)
-
-proc cQPlainTextDocumentLayout_vtable_callback_blockBoundingRect(self: pointer, blockVal: pointer): pointer {.cdecl.} =
+proc fcQPlainTextDocumentLayout_vtable_callback_blockBoundingRect(self: pointer, blockVal: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QPlainTextDocumentLayoutVTable](fcQPlainTextDocumentLayout_vdata(self))
   let self = QPlainTextDocumentLayout(h: self)
   let slotval1 = gen_qtextobject_types.QTextBlock(h: blockVal, owned: false)
@@ -2957,10 +3002,7 @@ proc cQPlainTextDocumentLayout_vtable_callback_blockBoundingRect(self: pointer, 
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QPlainTextDocumentLayoutdocumentChanged*(self: gen_qplaintextedit_types.QPlainTextDocumentLayout, fromVal: cint, param2: cint, charsAdded: cint): void =
-  fcQPlainTextDocumentLayout_virtualbase_documentChanged(self.h, fromVal, param2, charsAdded)
-
-proc cQPlainTextDocumentLayout_vtable_callback_documentChanged(self: pointer, fromVal: cint, param2: cint, charsAdded: cint): void {.cdecl.} =
+proc fcQPlainTextDocumentLayout_vtable_callback_documentChanged(self: pointer, fromVal: cint, param2: cint, charsAdded: cint): void {.cdecl.} =
   let vtbl = cast[ptr QPlainTextDocumentLayoutVTable](fcQPlainTextDocumentLayout_vdata(self))
   let self = QPlainTextDocumentLayout(h: self)
   let slotval1 = fromVal
@@ -2968,10 +3010,7 @@ proc cQPlainTextDocumentLayout_vtable_callback_documentChanged(self: pointer, fr
   let slotval3 = charsAdded
   vtbl[].documentChanged(self, slotval1, slotval2, slotval3)
 
-proc QPlainTextDocumentLayoutresizeInlineObject*(self: gen_qplaintextedit_types.QPlainTextDocumentLayout, item: gen_qtextlayout_types.QTextInlineObject, posInDocument: cint, format: gen_qtextformat_types.QTextFormat): void =
-  fcQPlainTextDocumentLayout_virtualbase_resizeInlineObject(self.h, item.h, posInDocument, format.h)
-
-proc cQPlainTextDocumentLayout_vtable_callback_resizeInlineObject(self: pointer, item: pointer, posInDocument: cint, format: pointer): void {.cdecl.} =
+proc fcQPlainTextDocumentLayout_vtable_callback_resizeInlineObject(self: pointer, item: pointer, posInDocument: cint, format: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPlainTextDocumentLayoutVTable](fcQPlainTextDocumentLayout_vdata(self))
   let self = QPlainTextDocumentLayout(h: self)
   let slotval1 = gen_qtextlayout_types.QTextInlineObject(h: item, owned: true)
@@ -2979,10 +3018,7 @@ proc cQPlainTextDocumentLayout_vtable_callback_resizeInlineObject(self: pointer,
   let slotval3 = gen_qtextformat_types.QTextFormat(h: format, owned: false)
   vtbl[].resizeInlineObject(self, slotval1, slotval2, slotval3)
 
-proc QPlainTextDocumentLayoutpositionInlineObject*(self: gen_qplaintextedit_types.QPlainTextDocumentLayout, item: gen_qtextlayout_types.QTextInlineObject, posInDocument: cint, format: gen_qtextformat_types.QTextFormat): void =
-  fcQPlainTextDocumentLayout_virtualbase_positionInlineObject(self.h, item.h, posInDocument, format.h)
-
-proc cQPlainTextDocumentLayout_vtable_callback_positionInlineObject(self: pointer, item: pointer, posInDocument: cint, format: pointer): void {.cdecl.} =
+proc fcQPlainTextDocumentLayout_vtable_callback_positionInlineObject(self: pointer, item: pointer, posInDocument: cint, format: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPlainTextDocumentLayoutVTable](fcQPlainTextDocumentLayout_vdata(self))
   let self = QPlainTextDocumentLayout(h: self)
   let slotval1 = gen_qtextlayout_types.QTextInlineObject(h: item, owned: true)
@@ -2990,10 +3026,7 @@ proc cQPlainTextDocumentLayout_vtable_callback_positionInlineObject(self: pointe
   let slotval3 = gen_qtextformat_types.QTextFormat(h: format, owned: false)
   vtbl[].positionInlineObject(self, slotval1, slotval2, slotval3)
 
-proc QPlainTextDocumentLayoutdrawInlineObject*(self: gen_qplaintextedit_types.QPlainTextDocumentLayout, painter: gen_qpainter_types.QPainter, rect: gen_qrect_types.QRectF, objectVal: gen_qtextlayout_types.QTextInlineObject, posInDocument: cint, format: gen_qtextformat_types.QTextFormat): void =
-  fcQPlainTextDocumentLayout_virtualbase_drawInlineObject(self.h, painter.h, rect.h, objectVal.h, posInDocument, format.h)
-
-proc cQPlainTextDocumentLayout_vtable_callback_drawInlineObject(self: pointer, painter: pointer, rect: pointer, objectVal: pointer, posInDocument: cint, format: pointer): void {.cdecl.} =
+proc fcQPlainTextDocumentLayout_vtable_callback_drawInlineObject(self: pointer, painter: pointer, rect: pointer, objectVal: pointer, posInDocument: cint, format: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPlainTextDocumentLayoutVTable](fcQPlainTextDocumentLayout_vdata(self))
   let self = QPlainTextDocumentLayout(h: self)
   let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
@@ -3003,20 +3036,14 @@ proc cQPlainTextDocumentLayout_vtable_callback_drawInlineObject(self: pointer, p
   let slotval5 = gen_qtextformat_types.QTextFormat(h: format, owned: false)
   vtbl[].drawInlineObject(self, slotval1, slotval2, slotval3, slotval4, slotval5)
 
-proc QPlainTextDocumentLayoutevent*(self: gen_qplaintextedit_types.QPlainTextDocumentLayout, event: gen_qcoreevent_types.QEvent): bool =
-  fcQPlainTextDocumentLayout_virtualbase_event(self.h, event.h)
-
-proc cQPlainTextDocumentLayout_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
+proc fcQPlainTextDocumentLayout_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QPlainTextDocumentLayoutVTable](fcQPlainTextDocumentLayout_vdata(self))
   let self = QPlainTextDocumentLayout(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
-proc QPlainTextDocumentLayouteventFilter*(self: gen_qplaintextedit_types.QPlainTextDocumentLayout, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
-  fcQPlainTextDocumentLayout_virtualbase_eventFilter(self.h, watched.h, event.h)
-
-proc cQPlainTextDocumentLayout_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+proc fcQPlainTextDocumentLayout_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QPlainTextDocumentLayoutVTable](fcQPlainTextDocumentLayout_vdata(self))
   let self = QPlainTextDocumentLayout(h: self)
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
@@ -3024,46 +3051,31 @@ proc cQPlainTextDocumentLayout_vtable_callback_eventFilter(self: pointer, watche
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
-proc QPlainTextDocumentLayouttimerEvent*(self: gen_qplaintextedit_types.QPlainTextDocumentLayout, event: gen_qcoreevent_types.QTimerEvent): void =
-  fcQPlainTextDocumentLayout_virtualbase_timerEvent(self.h, event.h)
-
-proc cQPlainTextDocumentLayout_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQPlainTextDocumentLayout_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPlainTextDocumentLayoutVTable](fcQPlainTextDocumentLayout_vdata(self))
   let self = QPlainTextDocumentLayout(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
-proc QPlainTextDocumentLayoutchildEvent*(self: gen_qplaintextedit_types.QPlainTextDocumentLayout, event: gen_qcoreevent_types.QChildEvent): void =
-  fcQPlainTextDocumentLayout_virtualbase_childEvent(self.h, event.h)
-
-proc cQPlainTextDocumentLayout_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQPlainTextDocumentLayout_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPlainTextDocumentLayoutVTable](fcQPlainTextDocumentLayout_vdata(self))
   let self = QPlainTextDocumentLayout(h: self)
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
-proc QPlainTextDocumentLayoutcustomEvent*(self: gen_qplaintextedit_types.QPlainTextDocumentLayout, event: gen_qcoreevent_types.QEvent): void =
-  fcQPlainTextDocumentLayout_virtualbase_customEvent(self.h, event.h)
-
-proc cQPlainTextDocumentLayout_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQPlainTextDocumentLayout_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPlainTextDocumentLayoutVTable](fcQPlainTextDocumentLayout_vdata(self))
   let self = QPlainTextDocumentLayout(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
-proc QPlainTextDocumentLayoutconnectNotify*(self: gen_qplaintextedit_types.QPlainTextDocumentLayout, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQPlainTextDocumentLayout_virtualbase_connectNotify(self.h, signal.h)
-
-proc cQPlainTextDocumentLayout_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQPlainTextDocumentLayout_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPlainTextDocumentLayoutVTable](fcQPlainTextDocumentLayout_vdata(self))
   let self = QPlainTextDocumentLayout(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
-proc QPlainTextDocumentLayoutdisconnectNotify*(self: gen_qplaintextedit_types.QPlainTextDocumentLayout, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQPlainTextDocumentLayout_virtualbase_disconnectNotify(self.h, signal.h)
-
-proc cQPlainTextDocumentLayout_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQPlainTextDocumentLayout_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPlainTextDocumentLayoutVTable](fcQPlainTextDocumentLayout_vdata(self))
   let self = QPlainTextDocumentLayout(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
@@ -3071,9 +3083,49 @@ proc cQPlainTextDocumentLayout_vtable_callback_disconnectNotify(self: pointer, s
 
 type VirtualQPlainTextDocumentLayout* {.inheritable.} = ref object of QPlainTextDocumentLayout
   vtbl*: cQPlainTextDocumentLayoutVTable
+
 method metaObject*(self: VirtualQPlainTextDocumentLayout): gen_qobjectdefs_types.QMetaObject {.base.} =
   QPlainTextDocumentLayoutmetaObject(self[])
-proc cQPlainTextDocumentLayout_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
+method metacast*(self: VirtualQPlainTextDocumentLayout, param1: cstring): pointer {.base.} =
+  QPlainTextDocumentLayoutmetacast(self[], param1)
+method metacall*(self: VirtualQPlainTextDocumentLayout, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QPlainTextDocumentLayoutmetacall(self[], param1, param2, param3)
+method draw*(self: VirtualQPlainTextDocumentLayout, param1: gen_qpainter_types.QPainter, param2: gen_qabstracttextdocumentlayout_types.QAbstractTextDocumentLayoutPaintContext): void {.base.} =
+  QPlainTextDocumentLayoutdraw(self[], param1, param2)
+method hitTest*(self: VirtualQPlainTextDocumentLayout, param1: gen_qpoint_types.QPointF, param2: cint): cint {.base.} =
+  QPlainTextDocumentLayouthitTest(self[], param1, param2)
+method pageCount*(self: VirtualQPlainTextDocumentLayout): cint {.base.} =
+  QPlainTextDocumentLayoutpageCount(self[])
+method documentSize*(self: VirtualQPlainTextDocumentLayout): gen_qsize_types.QSizeF {.base.} =
+  QPlainTextDocumentLayoutdocumentSize(self[])
+method frameBoundingRect*(self: VirtualQPlainTextDocumentLayout, param1: gen_qtextobject_types.QTextFrame): gen_qrect_types.QRectF {.base.} =
+  QPlainTextDocumentLayoutframeBoundingRect(self[], param1)
+method blockBoundingRect*(self: VirtualQPlainTextDocumentLayout, blockVal: gen_qtextobject_types.QTextBlock): gen_qrect_types.QRectF {.base.} =
+  QPlainTextDocumentLayoutblockBoundingRect(self[], blockVal)
+method documentChanged*(self: VirtualQPlainTextDocumentLayout, fromVal: cint, param2: cint, charsAdded: cint): void {.base.} =
+  QPlainTextDocumentLayoutdocumentChanged(self[], fromVal, param2, charsAdded)
+method resizeInlineObject*(self: VirtualQPlainTextDocumentLayout, item: gen_qtextlayout_types.QTextInlineObject, posInDocument: cint, format: gen_qtextformat_types.QTextFormat): void {.base.} =
+  QPlainTextDocumentLayoutresizeInlineObject(self[], item, posInDocument, format)
+method positionInlineObject*(self: VirtualQPlainTextDocumentLayout, item: gen_qtextlayout_types.QTextInlineObject, posInDocument: cint, format: gen_qtextformat_types.QTextFormat): void {.base.} =
+  QPlainTextDocumentLayoutpositionInlineObject(self[], item, posInDocument, format)
+method drawInlineObject*(self: VirtualQPlainTextDocumentLayout, painter: gen_qpainter_types.QPainter, rect: gen_qrect_types.QRectF, objectVal: gen_qtextlayout_types.QTextInlineObject, posInDocument: cint, format: gen_qtextformat_types.QTextFormat): void {.base.} =
+  QPlainTextDocumentLayoutdrawInlineObject(self[], painter, rect, objectVal, posInDocument, format)
+method event*(self: VirtualQPlainTextDocumentLayout, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QPlainTextDocumentLayoutevent(self[], event)
+method eventFilter*(self: VirtualQPlainTextDocumentLayout, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QPlainTextDocumentLayouteventFilter(self[], watched, event)
+method timerEvent*(self: VirtualQPlainTextDocumentLayout, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QPlainTextDocumentLayouttimerEvent(self[], event)
+method childEvent*(self: VirtualQPlainTextDocumentLayout, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QPlainTextDocumentLayoutchildEvent(self[], event)
+method customEvent*(self: VirtualQPlainTextDocumentLayout, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QPlainTextDocumentLayoutcustomEvent(self[], event)
+method connectNotify*(self: VirtualQPlainTextDocumentLayout, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QPlainTextDocumentLayoutconnectNotify(self[], signal)
+method disconnectNotify*(self: VirtualQPlainTextDocumentLayout, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QPlainTextDocumentLayoutdisconnectNotify(self[], signal)
+
+proc fcQPlainTextDocumentLayout_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQPlainTextDocumentLayout](fcQPlainTextDocumentLayout_vdata(self))
   var virtualReturn = inst.metaObject()
   virtualReturn.owned = false # TODO move?
@@ -3081,17 +3133,13 @@ proc cQPlainTextDocumentLayout_method_callback_metaObject(self: pointer): pointe
   virtualReturn.h = nil
   virtualReturn_h
 
-method metacast*(self: VirtualQPlainTextDocumentLayout, param1: cstring): pointer {.base.} =
-  QPlainTextDocumentLayoutmetacast(self[], param1)
-proc cQPlainTextDocumentLayout_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+proc fcQPlainTextDocumentLayout_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQPlainTextDocumentLayout](fcQPlainTextDocumentLayout_vdata(self))
   let slotval1 = (param1)
   var virtualReturn = inst.metacast(slotval1)
   virtualReturn
 
-method metacall*(self: VirtualQPlainTextDocumentLayout, param1: cint, param2: cint, param3: pointer): cint {.base.} =
-  QPlainTextDocumentLayoutmetacall(self[], param1, param2, param3)
-proc cQPlainTextDocumentLayout_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+proc fcQPlainTextDocumentLayout_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQPlainTextDocumentLayout](fcQPlainTextDocumentLayout_vdata(self))
   let slotval1 = cint(param1)
   let slotval2 = param2
@@ -3099,33 +3147,25 @@ proc cQPlainTextDocumentLayout_method_callback_metacall(self: pointer, param1: c
   var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
-method draw*(self: VirtualQPlainTextDocumentLayout, param1: gen_qpainter_types.QPainter, param2: gen_qabstracttextdocumentlayout_types.QAbstractTextDocumentLayoutPaintContext): void {.base.} =
-  QPlainTextDocumentLayoutdraw(self[], param1, param2)
-proc cQPlainTextDocumentLayout_method_callback_draw(self: pointer, param1: pointer, param2: pointer): void {.cdecl.} =
+proc fcQPlainTextDocumentLayout_method_callback_draw(self: pointer, param1: pointer, param2: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPlainTextDocumentLayout](fcQPlainTextDocumentLayout_vdata(self))
   let slotval1 = gen_qpainter_types.QPainter(h: param1, owned: false)
   let slotval2 = gen_qabstracttextdocumentlayout_types.QAbstractTextDocumentLayoutPaintContext(h: param2, owned: false)
   inst.draw(slotval1, slotval2)
 
-method hitTest*(self: VirtualQPlainTextDocumentLayout, param1: gen_qpoint_types.QPointF, param2: cint): cint {.base.} =
-  QPlainTextDocumentLayouthitTest(self[], param1, param2)
-proc cQPlainTextDocumentLayout_method_callback_hitTest(self: pointer, param1: pointer, param2: cint): cint {.cdecl.} =
+proc fcQPlainTextDocumentLayout_method_callback_hitTest(self: pointer, param1: pointer, param2: cint): cint {.cdecl.} =
   let inst = cast[VirtualQPlainTextDocumentLayout](fcQPlainTextDocumentLayout_vdata(self))
   let slotval1 = gen_qpoint_types.QPointF(h: param1, owned: false)
   let slotval2 = cint(param2)
   var virtualReturn = inst.hitTest(slotval1, slotval2)
   virtualReturn
 
-method pageCount*(self: VirtualQPlainTextDocumentLayout): cint {.base.} =
-  QPlainTextDocumentLayoutpageCount(self[])
-proc cQPlainTextDocumentLayout_method_callback_pageCount(self: pointer): cint {.cdecl.} =
+proc fcQPlainTextDocumentLayout_method_callback_pageCount(self: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQPlainTextDocumentLayout](fcQPlainTextDocumentLayout_vdata(self))
   var virtualReturn = inst.pageCount()
   virtualReturn
 
-method documentSize*(self: VirtualQPlainTextDocumentLayout): gen_qsize_types.QSizeF {.base.} =
-  QPlainTextDocumentLayoutdocumentSize(self[])
-proc cQPlainTextDocumentLayout_method_callback_documentSize(self: pointer): pointer {.cdecl.} =
+proc fcQPlainTextDocumentLayout_method_callback_documentSize(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQPlainTextDocumentLayout](fcQPlainTextDocumentLayout_vdata(self))
   var virtualReturn = inst.documentSize()
   virtualReturn.owned = false # TODO move?
@@ -3133,9 +3173,7 @@ proc cQPlainTextDocumentLayout_method_callback_documentSize(self: pointer): poin
   virtualReturn.h = nil
   virtualReturn_h
 
-method frameBoundingRect*(self: VirtualQPlainTextDocumentLayout, param1: gen_qtextobject_types.QTextFrame): gen_qrect_types.QRectF {.base.} =
-  QPlainTextDocumentLayoutframeBoundingRect(self[], param1)
-proc cQPlainTextDocumentLayout_method_callback_frameBoundingRect(self: pointer, param1: pointer): pointer {.cdecl.} =
+proc fcQPlainTextDocumentLayout_method_callback_frameBoundingRect(self: pointer, param1: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQPlainTextDocumentLayout](fcQPlainTextDocumentLayout_vdata(self))
   let slotval1 = gen_qtextobject_types.QTextFrame(h: param1, owned: false)
   var virtualReturn = inst.frameBoundingRect(slotval1)
@@ -3144,9 +3182,7 @@ proc cQPlainTextDocumentLayout_method_callback_frameBoundingRect(self: pointer, 
   virtualReturn.h = nil
   virtualReturn_h
 
-method blockBoundingRect*(self: VirtualQPlainTextDocumentLayout, blockVal: gen_qtextobject_types.QTextBlock): gen_qrect_types.QRectF {.base.} =
-  QPlainTextDocumentLayoutblockBoundingRect(self[], blockVal)
-proc cQPlainTextDocumentLayout_method_callback_blockBoundingRect(self: pointer, blockVal: pointer): pointer {.cdecl.} =
+proc fcQPlainTextDocumentLayout_method_callback_blockBoundingRect(self: pointer, blockVal: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQPlainTextDocumentLayout](fcQPlainTextDocumentLayout_vdata(self))
   let slotval1 = gen_qtextobject_types.QTextBlock(h: blockVal, owned: false)
   var virtualReturn = inst.blockBoundingRect(slotval1)
@@ -3155,36 +3191,28 @@ proc cQPlainTextDocumentLayout_method_callback_blockBoundingRect(self: pointer, 
   virtualReturn.h = nil
   virtualReturn_h
 
-method documentChanged*(self: VirtualQPlainTextDocumentLayout, fromVal: cint, param2: cint, charsAdded: cint): void {.base.} =
-  QPlainTextDocumentLayoutdocumentChanged(self[], fromVal, param2, charsAdded)
-proc cQPlainTextDocumentLayout_method_callback_documentChanged(self: pointer, fromVal: cint, param2: cint, charsAdded: cint): void {.cdecl.} =
+proc fcQPlainTextDocumentLayout_method_callback_documentChanged(self: pointer, fromVal: cint, param2: cint, charsAdded: cint): void {.cdecl.} =
   let inst = cast[VirtualQPlainTextDocumentLayout](fcQPlainTextDocumentLayout_vdata(self))
   let slotval1 = fromVal
   let slotval2 = param2
   let slotval3 = charsAdded
   inst.documentChanged(slotval1, slotval2, slotval3)
 
-method resizeInlineObject*(self: VirtualQPlainTextDocumentLayout, item: gen_qtextlayout_types.QTextInlineObject, posInDocument: cint, format: gen_qtextformat_types.QTextFormat): void {.base.} =
-  QPlainTextDocumentLayoutresizeInlineObject(self[], item, posInDocument, format)
-proc cQPlainTextDocumentLayout_method_callback_resizeInlineObject(self: pointer, item: pointer, posInDocument: cint, format: pointer): void {.cdecl.} =
+proc fcQPlainTextDocumentLayout_method_callback_resizeInlineObject(self: pointer, item: pointer, posInDocument: cint, format: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPlainTextDocumentLayout](fcQPlainTextDocumentLayout_vdata(self))
   let slotval1 = gen_qtextlayout_types.QTextInlineObject(h: item, owned: true)
   let slotval2 = posInDocument
   let slotval3 = gen_qtextformat_types.QTextFormat(h: format, owned: false)
   inst.resizeInlineObject(slotval1, slotval2, slotval3)
 
-method positionInlineObject*(self: VirtualQPlainTextDocumentLayout, item: gen_qtextlayout_types.QTextInlineObject, posInDocument: cint, format: gen_qtextformat_types.QTextFormat): void {.base.} =
-  QPlainTextDocumentLayoutpositionInlineObject(self[], item, posInDocument, format)
-proc cQPlainTextDocumentLayout_method_callback_positionInlineObject(self: pointer, item: pointer, posInDocument: cint, format: pointer): void {.cdecl.} =
+proc fcQPlainTextDocumentLayout_method_callback_positionInlineObject(self: pointer, item: pointer, posInDocument: cint, format: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPlainTextDocumentLayout](fcQPlainTextDocumentLayout_vdata(self))
   let slotval1 = gen_qtextlayout_types.QTextInlineObject(h: item, owned: true)
   let slotval2 = posInDocument
   let slotval3 = gen_qtextformat_types.QTextFormat(h: format, owned: false)
   inst.positionInlineObject(slotval1, slotval2, slotval3)
 
-method drawInlineObject*(self: VirtualQPlainTextDocumentLayout, painter: gen_qpainter_types.QPainter, rect: gen_qrect_types.QRectF, objectVal: gen_qtextlayout_types.QTextInlineObject, posInDocument: cint, format: gen_qtextformat_types.QTextFormat): void {.base.} =
-  QPlainTextDocumentLayoutdrawInlineObject(self[], painter, rect, objectVal, posInDocument, format)
-proc cQPlainTextDocumentLayout_method_callback_drawInlineObject(self: pointer, painter: pointer, rect: pointer, objectVal: pointer, posInDocument: cint, format: pointer): void {.cdecl.} =
+proc fcQPlainTextDocumentLayout_method_callback_drawInlineObject(self: pointer, painter: pointer, rect: pointer, objectVal: pointer, posInDocument: cint, format: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPlainTextDocumentLayout](fcQPlainTextDocumentLayout_vdata(self))
   let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
   let slotval2 = gen_qrect_types.QRectF(h: rect, owned: false)
@@ -3193,57 +3221,44 @@ proc cQPlainTextDocumentLayout_method_callback_drawInlineObject(self: pointer, p
   let slotval5 = gen_qtextformat_types.QTextFormat(h: format, owned: false)
   inst.drawInlineObject(slotval1, slotval2, slotval3, slotval4, slotval5)
 
-method event*(self: VirtualQPlainTextDocumentLayout, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QPlainTextDocumentLayoutevent(self[], event)
-proc cQPlainTextDocumentLayout_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
+proc fcQPlainTextDocumentLayout_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQPlainTextDocumentLayout](fcQPlainTextDocumentLayout_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
-method eventFilter*(self: VirtualQPlainTextDocumentLayout, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QPlainTextDocumentLayouteventFilter(self[], watched, event)
-proc cQPlainTextDocumentLayout_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+proc fcQPlainTextDocumentLayout_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQPlainTextDocumentLayout](fcQPlainTextDocumentLayout_vdata(self))
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
   let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
-method timerEvent*(self: VirtualQPlainTextDocumentLayout, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
-  QPlainTextDocumentLayouttimerEvent(self[], event)
-proc cQPlainTextDocumentLayout_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQPlainTextDocumentLayout_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPlainTextDocumentLayout](fcQPlainTextDocumentLayout_vdata(self))
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
-method childEvent*(self: VirtualQPlainTextDocumentLayout, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
-  QPlainTextDocumentLayoutchildEvent(self[], event)
-proc cQPlainTextDocumentLayout_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQPlainTextDocumentLayout_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPlainTextDocumentLayout](fcQPlainTextDocumentLayout_vdata(self))
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
-method customEvent*(self: VirtualQPlainTextDocumentLayout, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QPlainTextDocumentLayoutcustomEvent(self[], event)
-proc cQPlainTextDocumentLayout_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQPlainTextDocumentLayout_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPlainTextDocumentLayout](fcQPlainTextDocumentLayout_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
-method connectNotify*(self: VirtualQPlainTextDocumentLayout, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QPlainTextDocumentLayoutconnectNotify(self[], signal)
-proc cQPlainTextDocumentLayout_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQPlainTextDocumentLayout_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPlainTextDocumentLayout](fcQPlainTextDocumentLayout_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
-method disconnectNotify*(self: VirtualQPlainTextDocumentLayout, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QPlainTextDocumentLayoutdisconnectNotify(self[], signal)
-proc cQPlainTextDocumentLayout_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQPlainTextDocumentLayout_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPlainTextDocumentLayout](fcQPlainTextDocumentLayout_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
+
 
 proc formatIndex*(self: gen_qplaintextedit_types.QPlainTextDocumentLayout, pos: cint): cint =
   fcQPlainTextDocumentLayout_protectedbase_formatIndex(self.h, pos)
@@ -3272,45 +3287,45 @@ proc create*(T: type gen_qplaintextedit_types.QPlainTextDocumentLayout,
     let vtbl = cast[ref QPlainTextDocumentLayoutVTable](fcQPlainTextDocumentLayout_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQPlainTextDocumentLayout_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQPlainTextDocumentLayout_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQPlainTextDocumentLayout_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQPlainTextDocumentLayout_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQPlainTextDocumentLayout_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQPlainTextDocumentLayout_vtable_callback_metacall
   if not isNil(vtbl[].draw):
-    vtbl[].vtbl.draw = cQPlainTextDocumentLayout_vtable_callback_draw
+    vtbl[].vtbl.draw = fcQPlainTextDocumentLayout_vtable_callback_draw
   if not isNil(vtbl[].hitTest):
-    vtbl[].vtbl.hitTest = cQPlainTextDocumentLayout_vtable_callback_hitTest
+    vtbl[].vtbl.hitTest = fcQPlainTextDocumentLayout_vtable_callback_hitTest
   if not isNil(vtbl[].pageCount):
-    vtbl[].vtbl.pageCount = cQPlainTextDocumentLayout_vtable_callback_pageCount
+    vtbl[].vtbl.pageCount = fcQPlainTextDocumentLayout_vtable_callback_pageCount
   if not isNil(vtbl[].documentSize):
-    vtbl[].vtbl.documentSize = cQPlainTextDocumentLayout_vtable_callback_documentSize
+    vtbl[].vtbl.documentSize = fcQPlainTextDocumentLayout_vtable_callback_documentSize
   if not isNil(vtbl[].frameBoundingRect):
-    vtbl[].vtbl.frameBoundingRect = cQPlainTextDocumentLayout_vtable_callback_frameBoundingRect
+    vtbl[].vtbl.frameBoundingRect = fcQPlainTextDocumentLayout_vtable_callback_frameBoundingRect
   if not isNil(vtbl[].blockBoundingRect):
-    vtbl[].vtbl.blockBoundingRect = cQPlainTextDocumentLayout_vtable_callback_blockBoundingRect
+    vtbl[].vtbl.blockBoundingRect = fcQPlainTextDocumentLayout_vtable_callback_blockBoundingRect
   if not isNil(vtbl[].documentChanged):
-    vtbl[].vtbl.documentChanged = cQPlainTextDocumentLayout_vtable_callback_documentChanged
+    vtbl[].vtbl.documentChanged = fcQPlainTextDocumentLayout_vtable_callback_documentChanged
   if not isNil(vtbl[].resizeInlineObject):
-    vtbl[].vtbl.resizeInlineObject = cQPlainTextDocumentLayout_vtable_callback_resizeInlineObject
+    vtbl[].vtbl.resizeInlineObject = fcQPlainTextDocumentLayout_vtable_callback_resizeInlineObject
   if not isNil(vtbl[].positionInlineObject):
-    vtbl[].vtbl.positionInlineObject = cQPlainTextDocumentLayout_vtable_callback_positionInlineObject
+    vtbl[].vtbl.positionInlineObject = fcQPlainTextDocumentLayout_vtable_callback_positionInlineObject
   if not isNil(vtbl[].drawInlineObject):
-    vtbl[].vtbl.drawInlineObject = cQPlainTextDocumentLayout_vtable_callback_drawInlineObject
+    vtbl[].vtbl.drawInlineObject = fcQPlainTextDocumentLayout_vtable_callback_drawInlineObject
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQPlainTextDocumentLayout_vtable_callback_event
+    vtbl[].vtbl.event = fcQPlainTextDocumentLayout_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQPlainTextDocumentLayout_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQPlainTextDocumentLayout_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQPlainTextDocumentLayout_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQPlainTextDocumentLayout_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQPlainTextDocumentLayout_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQPlainTextDocumentLayout_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQPlainTextDocumentLayout_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQPlainTextDocumentLayout_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQPlainTextDocumentLayout_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQPlainTextDocumentLayout_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQPlainTextDocumentLayout_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQPlainTextDocumentLayout_vtable_callback_disconnectNotify
   gen_qplaintextedit_types.QPlainTextDocumentLayout(h: fcQPlainTextDocumentLayout_new(addr(vtbl[].vtbl), addr(vtbl[]), document.h), owned: true)
 
 const cQPlainTextDocumentLayout_mvtbl = cQPlainTextDocumentLayoutVTable(
@@ -3318,26 +3333,27 @@ const cQPlainTextDocumentLayout_mvtbl = cQPlainTextDocumentLayoutVTable(
     let inst = cast[ptr typeof(VirtualQPlainTextDocumentLayout()[])](self.fcQPlainTextDocumentLayout_vtbl())
     inst[].h = nil
     inst[].owned = false,
-  metaObject: cQPlainTextDocumentLayout_method_callback_metaObject,
-  metacast: cQPlainTextDocumentLayout_method_callback_metacast,
-  metacall: cQPlainTextDocumentLayout_method_callback_metacall,
-  draw: cQPlainTextDocumentLayout_method_callback_draw,
-  hitTest: cQPlainTextDocumentLayout_method_callback_hitTest,
-  pageCount: cQPlainTextDocumentLayout_method_callback_pageCount,
-  documentSize: cQPlainTextDocumentLayout_method_callback_documentSize,
-  frameBoundingRect: cQPlainTextDocumentLayout_method_callback_frameBoundingRect,
-  blockBoundingRect: cQPlainTextDocumentLayout_method_callback_blockBoundingRect,
-  documentChanged: cQPlainTextDocumentLayout_method_callback_documentChanged,
-  resizeInlineObject: cQPlainTextDocumentLayout_method_callback_resizeInlineObject,
-  positionInlineObject: cQPlainTextDocumentLayout_method_callback_positionInlineObject,
-  drawInlineObject: cQPlainTextDocumentLayout_method_callback_drawInlineObject,
-  event: cQPlainTextDocumentLayout_method_callback_event,
-  eventFilter: cQPlainTextDocumentLayout_method_callback_eventFilter,
-  timerEvent: cQPlainTextDocumentLayout_method_callback_timerEvent,
-  childEvent: cQPlainTextDocumentLayout_method_callback_childEvent,
-  customEvent: cQPlainTextDocumentLayout_method_callback_customEvent,
-  connectNotify: cQPlainTextDocumentLayout_method_callback_connectNotify,
-  disconnectNotify: cQPlainTextDocumentLayout_method_callback_disconnectNotify,
+
+  metaObject: fcQPlainTextDocumentLayout_method_callback_metaObject,
+  metacast: fcQPlainTextDocumentLayout_method_callback_metacast,
+  metacall: fcQPlainTextDocumentLayout_method_callback_metacall,
+  draw: fcQPlainTextDocumentLayout_method_callback_draw,
+  hitTest: fcQPlainTextDocumentLayout_method_callback_hitTest,
+  pageCount: fcQPlainTextDocumentLayout_method_callback_pageCount,
+  documentSize: fcQPlainTextDocumentLayout_method_callback_documentSize,
+  frameBoundingRect: fcQPlainTextDocumentLayout_method_callback_frameBoundingRect,
+  blockBoundingRect: fcQPlainTextDocumentLayout_method_callback_blockBoundingRect,
+  documentChanged: fcQPlainTextDocumentLayout_method_callback_documentChanged,
+  resizeInlineObject: fcQPlainTextDocumentLayout_method_callback_resizeInlineObject,
+  positionInlineObject: fcQPlainTextDocumentLayout_method_callback_positionInlineObject,
+  drawInlineObject: fcQPlainTextDocumentLayout_method_callback_drawInlineObject,
+  event: fcQPlainTextDocumentLayout_method_callback_event,
+  eventFilter: fcQPlainTextDocumentLayout_method_callback_eventFilter,
+  timerEvent: fcQPlainTextDocumentLayout_method_callback_timerEvent,
+  childEvent: fcQPlainTextDocumentLayout_method_callback_childEvent,
+  customEvent: fcQPlainTextDocumentLayout_method_callback_customEvent,
+  connectNotify: fcQPlainTextDocumentLayout_method_callback_connectNotify,
+  disconnectNotify: fcQPlainTextDocumentLayout_method_callback_disconnectNotify,
 )
 proc create*(T: type gen_qplaintextedit_types.QPlainTextDocumentLayout,
     document: gen_qtextdocument_types.QTextDocument,

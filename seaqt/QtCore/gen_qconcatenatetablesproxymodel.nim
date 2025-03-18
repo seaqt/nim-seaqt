@@ -94,6 +94,7 @@ proc fcQConcatenateTablesProxyModel_trUtf82(s: cstring, c: cstring): struct_miqt
 proc fcQConcatenateTablesProxyModel_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QConcatenateTablesProxyModel_trUtf83".}
 proc fcQConcatenateTablesProxyModel_vtbl(self: pointer): pointer {.importc: "QConcatenateTablesProxyModel_vtbl".}
 proc fcQConcatenateTablesProxyModel_vdata(self: pointer): pointer {.importc: "QConcatenateTablesProxyModel_vdata".}
+
 type cQConcatenateTablesProxyModelVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -404,6 +405,7 @@ type QConcatenateTablesProxyModelchildEventProc* = proc(self: QConcatenateTables
 type QConcatenateTablesProxyModelcustomEventProc* = proc(self: QConcatenateTablesProxyModel, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QConcatenateTablesProxyModelconnectNotifyProc* = proc(self: QConcatenateTablesProxyModel, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QConcatenateTablesProxyModeldisconnectNotifyProc* = proc(self: QConcatenateTablesProxyModel, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+
 type QConcatenateTablesProxyModelVTable* {.inheritable, pure.} = object
   vtbl: cQConcatenateTablesProxyModelVTable
   metaObject*: QConcatenateTablesProxyModelmetaObjectProc
@@ -450,65 +452,21 @@ type QConcatenateTablesProxyModelVTable* {.inheritable, pure.} = object
   customEvent*: QConcatenateTablesProxyModelcustomEventProc
   connectNotify*: QConcatenateTablesProxyModelconnectNotifyProc
   disconnectNotify*: QConcatenateTablesProxyModeldisconnectNotifyProc
+
 proc QConcatenateTablesProxyModelmetaObject*(self: gen_qconcatenatetablesproxymodel_types.QConcatenateTablesProxyModel): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQConcatenateTablesProxyModel_virtualbase_metaObject(self.h), owned: false)
-
-proc cQConcatenateTablesProxyModel_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
-  let vtbl = cast[ptr QConcatenateTablesProxyModelVTable](fcQConcatenateTablesProxyModel_vdata(self))
-  let self = QConcatenateTablesProxyModel(h: self)
-  var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.owned = false # TODO move?
-  let virtualReturn_h = virtualReturn.h
-  virtualReturn.h = nil
-  virtualReturn_h
 
 proc QConcatenateTablesProxyModelmetacast*(self: gen_qconcatenatetablesproxymodel_types.QConcatenateTablesProxyModel, param1: cstring): pointer =
   fcQConcatenateTablesProxyModel_virtualbase_metacast(self.h, param1)
 
-proc cQConcatenateTablesProxyModel_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
-  let vtbl = cast[ptr QConcatenateTablesProxyModelVTable](fcQConcatenateTablesProxyModel_vdata(self))
-  let self = QConcatenateTablesProxyModel(h: self)
-  let slotval1 = (param1)
-  var virtualReturn = vtbl[].metacast(self, slotval1)
-  virtualReturn
-
 proc QConcatenateTablesProxyModelmetacall*(self: gen_qconcatenatetablesproxymodel_types.QConcatenateTablesProxyModel, param1: cint, param2: cint, param3: pointer): cint =
   fcQConcatenateTablesProxyModel_virtualbase_metacall(self.h, cint(param1), param2, param3)
-
-proc cQConcatenateTablesProxyModel_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
-  let vtbl = cast[ptr QConcatenateTablesProxyModelVTable](fcQConcatenateTablesProxyModel_vdata(self))
-  let self = QConcatenateTablesProxyModel(h: self)
-  let slotval1 = cint(param1)
-  let slotval2 = param2
-  let slotval3 = param3
-  var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
-  virtualReturn
 
 proc QConcatenateTablesProxyModeldata*(self: gen_qconcatenatetablesproxymodel_types.QConcatenateTablesProxyModel, index: gen_qabstractitemmodel_types.QModelIndex, role: cint): gen_qvariant_types.QVariant =
   gen_qvariant_types.QVariant(h: fcQConcatenateTablesProxyModel_virtualbase_data(self.h, index.h, role), owned: true)
 
-proc cQConcatenateTablesProxyModel_vtable_callback_data(self: pointer, index: pointer, role: cint): pointer {.cdecl.} =
-  let vtbl = cast[ptr QConcatenateTablesProxyModelVTable](fcQConcatenateTablesProxyModel_vdata(self))
-  let self = QConcatenateTablesProxyModel(h: self)
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
-  let slotval2 = role
-  var virtualReturn = vtbl[].data(self, slotval1, slotval2)
-  virtualReturn.owned = false # TODO move?
-  let virtualReturn_h = virtualReturn.h
-  virtualReturn.h = nil
-  virtualReturn_h
-
 proc QConcatenateTablesProxyModelsetData*(self: gen_qconcatenatetablesproxymodel_types.QConcatenateTablesProxyModel, index: gen_qabstractitemmodel_types.QModelIndex, value: gen_qvariant_types.QVariant, role: cint): bool =
   fcQConcatenateTablesProxyModel_virtualbase_setData(self.h, index.h, value.h, role)
-
-proc cQConcatenateTablesProxyModel_vtable_callback_setData(self: pointer, index: pointer, value: pointer, role: cint): bool {.cdecl.} =
-  let vtbl = cast[ptr QConcatenateTablesProxyModelVTable](fcQConcatenateTablesProxyModel_vdata(self))
-  let self = QConcatenateTablesProxyModel(h: self)
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
-  let slotval2 = gen_qvariant_types.QVariant(h: value, owned: false)
-  let slotval3 = role
-  var virtualReturn = vtbl[].setData(self, slotval1, slotval2, slotval3)
-  virtualReturn
 
 proc QConcatenateTablesProxyModelitemData*(self: gen_qconcatenatetablesproxymodel_types.QConcatenateTablesProxyModel, proxyIndex: gen_qabstractitemmodel_types.QModelIndex): Table[cint,gen_qvariant_types.QVariant] =
   var v_mm = fcQConcatenateTablesProxyModel_virtualbase_itemData(self.h, proxyIndex.h)
@@ -525,7 +483,212 @@ proc QConcatenateTablesProxyModelitemData*(self: gen_qconcatenatetablesproxymode
   c_free(v_mm.values)
   vx_ret
 
-proc cQConcatenateTablesProxyModel_vtable_callback_itemData(self: pointer, proxyIndex: pointer): struct_miqt_map {.cdecl.} =
+proc QConcatenateTablesProxyModelsetItemData*(self: gen_qconcatenatetablesproxymodel_types.QConcatenateTablesProxyModel, index: gen_qabstractitemmodel_types.QModelIndex, roles: Table[cint,gen_qvariant_types.QVariant]): bool =
+  var roles_Keys_CArray = newSeq[cint](len(roles))
+  var roles_Values_CArray = newSeq[pointer](len(roles))
+  var roles_ctr = 0
+  for roles_k in roles.keys():
+    roles_Keys_CArray[roles_ctr] = roles_k
+    roles_ctr += 1
+  roles_ctr = 0
+  for roles_v in roles.values():
+    roles_Values_CArray[roles_ctr] = roles_v.h
+    roles_ctr += 1
+
+  fcQConcatenateTablesProxyModel_virtualbase_setItemData(self.h, index.h, struct_miqt_map(len: csize_t(len(roles)),keys: if len(roles) == 0: nil else: addr(roles_Keys_CArray[0]), values: if len(roles) == 0: nil else: addr(roles_Values_CArray[0]),))
+
+proc QConcatenateTablesProxyModelflags*(self: gen_qconcatenatetablesproxymodel_types.QConcatenateTablesProxyModel, index: gen_qabstractitemmodel_types.QModelIndex): cint =
+  cint(fcQConcatenateTablesProxyModel_virtualbase_flags(self.h, index.h))
+
+proc QConcatenateTablesProxyModelindex*(self: gen_qconcatenatetablesproxymodel_types.QConcatenateTablesProxyModel, row: cint, column: cint, parent: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex =
+  gen_qabstractitemmodel_types.QModelIndex(h: fcQConcatenateTablesProxyModel_virtualbase_index(self.h, row, column, parent.h), owned: true)
+
+proc QConcatenateTablesProxyModelparent*(self: gen_qconcatenatetablesproxymodel_types.QConcatenateTablesProxyModel, index: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex =
+  gen_qabstractitemmodel_types.QModelIndex(h: fcQConcatenateTablesProxyModel_virtualbase_parent(self.h, index.h), owned: true)
+
+proc QConcatenateTablesProxyModelrowCount*(self: gen_qconcatenatetablesproxymodel_types.QConcatenateTablesProxyModel, parent: gen_qabstractitemmodel_types.QModelIndex): cint =
+  fcQConcatenateTablesProxyModel_virtualbase_rowCount(self.h, parent.h)
+
+proc QConcatenateTablesProxyModelheaderData*(self: gen_qconcatenatetablesproxymodel_types.QConcatenateTablesProxyModel, section: cint, orientation: cint, role: cint): gen_qvariant_types.QVariant =
+  gen_qvariant_types.QVariant(h: fcQConcatenateTablesProxyModel_virtualbase_headerData(self.h, section, cint(orientation), role), owned: true)
+
+proc QConcatenateTablesProxyModelcolumnCount*(self: gen_qconcatenatetablesproxymodel_types.QConcatenateTablesProxyModel, parent: gen_qabstractitemmodel_types.QModelIndex): cint =
+  fcQConcatenateTablesProxyModel_virtualbase_columnCount(self.h, parent.h)
+
+proc QConcatenateTablesProxyModelmimeTypes*(self: gen_qconcatenatetablesproxymodel_types.QConcatenateTablesProxyModel): seq[string] =
+  var v_ma = fcQConcatenateTablesProxyModel_virtualbase_mimeTypes(self.h)
+  var vx_ret = newSeq[string](int(v_ma.len))
+  let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
+  for i in 0 ..< v_ma.len:
+    let vx_lv_ms = v_outCast[i]
+    let vx_lvx_ret = string.fromBytes(vx_lv_ms)
+    c_free(vx_lv_ms.data)
+    vx_ret[i] = vx_lvx_ret
+  c_free(v_ma.data)
+  vx_ret
+
+proc QConcatenateTablesProxyModelmimeData*(self: gen_qconcatenatetablesproxymodel_types.QConcatenateTablesProxyModel, indexes: openArray[gen_qabstractitemmodel_types.QModelIndex]): gen_qmimedata_types.QMimeData =
+  var indexes_CArray = newSeq[pointer](len(indexes))
+  for i in 0..<len(indexes):
+    indexes_CArray[i] = indexes[i].h
+
+  gen_qmimedata_types.QMimeData(h: fcQConcatenateTablesProxyModel_virtualbase_mimeData(self.h, struct_miqt_array(len: csize_t(len(indexes)), data: if len(indexes) == 0: nil else: addr(indexes_CArray[0]))), owned: false)
+
+proc QConcatenateTablesProxyModelcanDropMimeData*(self: gen_qconcatenatetablesproxymodel_types.QConcatenateTablesProxyModel, data: gen_qmimedata_types.QMimeData, action: cint, row: cint, column: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool =
+  fcQConcatenateTablesProxyModel_virtualbase_canDropMimeData(self.h, data.h, cint(action), row, column, parent.h)
+
+proc QConcatenateTablesProxyModeldropMimeData*(self: gen_qconcatenatetablesproxymodel_types.QConcatenateTablesProxyModel, data: gen_qmimedata_types.QMimeData, action: cint, row: cint, column: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool =
+  fcQConcatenateTablesProxyModel_virtualbase_dropMimeData(self.h, data.h, cint(action), row, column, parent.h)
+
+proc QConcatenateTablesProxyModelspan*(self: gen_qconcatenatetablesproxymodel_types.QConcatenateTablesProxyModel, index: gen_qabstractitemmodel_types.QModelIndex): gen_qsize_types.QSize =
+  gen_qsize_types.QSize(h: fcQConcatenateTablesProxyModel_virtualbase_span(self.h, index.h), owned: true)
+
+proc QConcatenateTablesProxyModelsibling*(self: gen_qconcatenatetablesproxymodel_types.QConcatenateTablesProxyModel, row: cint, column: cint, idx: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex =
+  gen_qabstractitemmodel_types.QModelIndex(h: fcQConcatenateTablesProxyModel_virtualbase_sibling(self.h, row, column, idx.h), owned: true)
+
+proc QConcatenateTablesProxyModelhasChildren*(self: gen_qconcatenatetablesproxymodel_types.QConcatenateTablesProxyModel, parent: gen_qabstractitemmodel_types.QModelIndex): bool =
+  fcQConcatenateTablesProxyModel_virtualbase_hasChildren(self.h, parent.h)
+
+proc QConcatenateTablesProxyModelsetHeaderData*(self: gen_qconcatenatetablesproxymodel_types.QConcatenateTablesProxyModel, section: cint, orientation: cint, value: gen_qvariant_types.QVariant, role: cint): bool =
+  fcQConcatenateTablesProxyModel_virtualbase_setHeaderData(self.h, section, cint(orientation), value.h, role)
+
+proc QConcatenateTablesProxyModelsupportedDropActions*(self: gen_qconcatenatetablesproxymodel_types.QConcatenateTablesProxyModel): cint =
+  cint(fcQConcatenateTablesProxyModel_virtualbase_supportedDropActions(self.h))
+
+proc QConcatenateTablesProxyModelsupportedDragActions*(self: gen_qconcatenatetablesproxymodel_types.QConcatenateTablesProxyModel): cint =
+  cint(fcQConcatenateTablesProxyModel_virtualbase_supportedDragActions(self.h))
+
+proc QConcatenateTablesProxyModelinsertRows*(self: gen_qconcatenatetablesproxymodel_types.QConcatenateTablesProxyModel, row: cint, count: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool =
+  fcQConcatenateTablesProxyModel_virtualbase_insertRows(self.h, row, count, parent.h)
+
+proc QConcatenateTablesProxyModelinsertColumns*(self: gen_qconcatenatetablesproxymodel_types.QConcatenateTablesProxyModel, column: cint, count: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool =
+  fcQConcatenateTablesProxyModel_virtualbase_insertColumns(self.h, column, count, parent.h)
+
+proc QConcatenateTablesProxyModelremoveRows*(self: gen_qconcatenatetablesproxymodel_types.QConcatenateTablesProxyModel, row: cint, count: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool =
+  fcQConcatenateTablesProxyModel_virtualbase_removeRows(self.h, row, count, parent.h)
+
+proc QConcatenateTablesProxyModelremoveColumns*(self: gen_qconcatenatetablesproxymodel_types.QConcatenateTablesProxyModel, column: cint, count: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool =
+  fcQConcatenateTablesProxyModel_virtualbase_removeColumns(self.h, column, count, parent.h)
+
+proc QConcatenateTablesProxyModelmoveRows*(self: gen_qconcatenatetablesproxymodel_types.QConcatenateTablesProxyModel, sourceParent: gen_qabstractitemmodel_types.QModelIndex, sourceRow: cint, count: cint, destinationParent: gen_qabstractitemmodel_types.QModelIndex, destinationChild: cint): bool =
+  fcQConcatenateTablesProxyModel_virtualbase_moveRows(self.h, sourceParent.h, sourceRow, count, destinationParent.h, destinationChild)
+
+proc QConcatenateTablesProxyModelmoveColumns*(self: gen_qconcatenatetablesproxymodel_types.QConcatenateTablesProxyModel, sourceParent: gen_qabstractitemmodel_types.QModelIndex, sourceColumn: cint, count: cint, destinationParent: gen_qabstractitemmodel_types.QModelIndex, destinationChild: cint): bool =
+  fcQConcatenateTablesProxyModel_virtualbase_moveColumns(self.h, sourceParent.h, sourceColumn, count, destinationParent.h, destinationChild)
+
+proc QConcatenateTablesProxyModelfetchMore*(self: gen_qconcatenatetablesproxymodel_types.QConcatenateTablesProxyModel, parent: gen_qabstractitemmodel_types.QModelIndex): void =
+  fcQConcatenateTablesProxyModel_virtualbase_fetchMore(self.h, parent.h)
+
+proc QConcatenateTablesProxyModelcanFetchMore*(self: gen_qconcatenatetablesproxymodel_types.QConcatenateTablesProxyModel, parent: gen_qabstractitemmodel_types.QModelIndex): bool =
+  fcQConcatenateTablesProxyModel_virtualbase_canFetchMore(self.h, parent.h)
+
+proc QConcatenateTablesProxyModelsort*(self: gen_qconcatenatetablesproxymodel_types.QConcatenateTablesProxyModel, column: cint, order: cint): void =
+  fcQConcatenateTablesProxyModel_virtualbase_sort(self.h, column, cint(order))
+
+proc QConcatenateTablesProxyModelbuddy*(self: gen_qconcatenatetablesproxymodel_types.QConcatenateTablesProxyModel, index: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex =
+  gen_qabstractitemmodel_types.QModelIndex(h: fcQConcatenateTablesProxyModel_virtualbase_buddy(self.h, index.h), owned: true)
+
+proc QConcatenateTablesProxyModelmatch*(self: gen_qconcatenatetablesproxymodel_types.QConcatenateTablesProxyModel, start: gen_qabstractitemmodel_types.QModelIndex, role: cint, value: gen_qvariant_types.QVariant, hits: cint, flags: cint): seq[gen_qabstractitemmodel_types.QModelIndex] =
+  var v_ma = fcQConcatenateTablesProxyModel_virtualbase_match(self.h, start.h, role, value.h, hits, cint(flags))
+  var vx_ret = newSeq[gen_qabstractitemmodel_types.QModelIndex](int(v_ma.len))
+  let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
+  for i in 0 ..< v_ma.len:
+    vx_ret[i] = gen_qabstractitemmodel_types.QModelIndex(h: v_outCast[i], owned: true)
+  c_free(v_ma.data)
+  vx_ret
+
+proc QConcatenateTablesProxyModelroleNames*(self: gen_qconcatenatetablesproxymodel_types.QConcatenateTablesProxyModel): Table[cint,seq[byte]] =
+  var v_mm = fcQConcatenateTablesProxyModel_virtualbase_roleNames(self.h)
+  var vx_ret: Table[cint, seq[byte]]
+  var v_Keys = cast[ptr UncheckedArray[cint]](v_mm.keys)
+  var v_Values = cast[ptr UncheckedArray[struct_miqt_string]](v_mm.values)
+  for i in 0..<v_mm.len:
+    var v_entry_Key = v_Keys[i]
+
+    var vx_hashval_bytearray = v_Values[i]
+    var vx_hashvalx_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](vx_hashval_bytearray.data), 0, int(vx_hashval_bytearray.len)-1))
+    c_free(vx_hashval_bytearray.data)
+    var v_entry_Value = vx_hashvalx_ret
+
+    vx_ret[v_entry_Key] = v_entry_Value
+  c_free(v_mm.keys)
+  c_free(v_mm.values)
+  vx_ret
+
+proc QConcatenateTablesProxyModelsubmit*(self: gen_qconcatenatetablesproxymodel_types.QConcatenateTablesProxyModel): bool =
+  fcQConcatenateTablesProxyModel_virtualbase_submit(self.h)
+
+proc QConcatenateTablesProxyModelrevert*(self: gen_qconcatenatetablesproxymodel_types.QConcatenateTablesProxyModel): void =
+  fcQConcatenateTablesProxyModel_virtualbase_revert(self.h)
+
+proc QConcatenateTablesProxyModelevent*(self: gen_qconcatenatetablesproxymodel_types.QConcatenateTablesProxyModel, event: gen_qcoreevent_types.QEvent): bool =
+  fcQConcatenateTablesProxyModel_virtualbase_event(self.h, event.h)
+
+proc QConcatenateTablesProxyModeleventFilter*(self: gen_qconcatenatetablesproxymodel_types.QConcatenateTablesProxyModel, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
+  fcQConcatenateTablesProxyModel_virtualbase_eventFilter(self.h, watched.h, event.h)
+
+proc QConcatenateTablesProxyModeltimerEvent*(self: gen_qconcatenatetablesproxymodel_types.QConcatenateTablesProxyModel, event: gen_qcoreevent_types.QTimerEvent): void =
+  fcQConcatenateTablesProxyModel_virtualbase_timerEvent(self.h, event.h)
+
+proc QConcatenateTablesProxyModelchildEvent*(self: gen_qconcatenatetablesproxymodel_types.QConcatenateTablesProxyModel, event: gen_qcoreevent_types.QChildEvent): void =
+  fcQConcatenateTablesProxyModel_virtualbase_childEvent(self.h, event.h)
+
+proc QConcatenateTablesProxyModelcustomEvent*(self: gen_qconcatenatetablesproxymodel_types.QConcatenateTablesProxyModel, event: gen_qcoreevent_types.QEvent): void =
+  fcQConcatenateTablesProxyModel_virtualbase_customEvent(self.h, event.h)
+
+proc QConcatenateTablesProxyModelconnectNotify*(self: gen_qconcatenatetablesproxymodel_types.QConcatenateTablesProxyModel, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQConcatenateTablesProxyModel_virtualbase_connectNotify(self.h, signal.h)
+
+proc QConcatenateTablesProxyModeldisconnectNotify*(self: gen_qconcatenatetablesproxymodel_types.QConcatenateTablesProxyModel, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQConcatenateTablesProxyModel_virtualbase_disconnectNotify(self.h, signal.h)
+
+
+proc fcQConcatenateTablesProxyModel_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QConcatenateTablesProxyModelVTable](fcQConcatenateTablesProxyModel_vdata(self))
+  let self = QConcatenateTablesProxyModel(h: self)
+  var virtualReturn = vtbl[].metaObject(self)
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+proc fcQConcatenateTablesProxyModel_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+  let vtbl = cast[ptr QConcatenateTablesProxyModelVTable](fcQConcatenateTablesProxyModel_vdata(self))
+  let self = QConcatenateTablesProxyModel(h: self)
+  let slotval1 = (param1)
+  var virtualReturn = vtbl[].metacast(self, slotval1)
+  virtualReturn
+
+proc fcQConcatenateTablesProxyModel_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QConcatenateTablesProxyModelVTable](fcQConcatenateTablesProxyModel_vdata(self))
+  let self = QConcatenateTablesProxyModel(h: self)
+  let slotval1 = cint(param1)
+  let slotval2 = param2
+  let slotval3 = param3
+  var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
+  virtualReturn
+
+proc fcQConcatenateTablesProxyModel_vtable_callback_data(self: pointer, index: pointer, role: cint): pointer {.cdecl.} =
+  let vtbl = cast[ptr QConcatenateTablesProxyModelVTable](fcQConcatenateTablesProxyModel_vdata(self))
+  let self = QConcatenateTablesProxyModel(h: self)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
+  let slotval2 = role
+  var virtualReturn = vtbl[].data(self, slotval1, slotval2)
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+proc fcQConcatenateTablesProxyModel_vtable_callback_setData(self: pointer, index: pointer, value: pointer, role: cint): bool {.cdecl.} =
+  let vtbl = cast[ptr QConcatenateTablesProxyModelVTable](fcQConcatenateTablesProxyModel_vdata(self))
+  let self = QConcatenateTablesProxyModel(h: self)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
+  let slotval2 = gen_qvariant_types.QVariant(h: value, owned: false)
+  let slotval3 = role
+  var virtualReturn = vtbl[].setData(self, slotval1, slotval2, slotval3)
+  virtualReturn
+
+proc fcQConcatenateTablesProxyModel_vtable_callback_itemData(self: pointer, proxyIndex: pointer): struct_miqt_map {.cdecl.} =
   let vtbl = cast[ptr QConcatenateTablesProxyModelVTable](fcQConcatenateTablesProxyModel_vdata(self))
   let self = QConcatenateTablesProxyModel(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: proxyIndex, owned: false)
@@ -546,21 +709,7 @@ proc cQConcatenateTablesProxyModel_vtable_callback_itemData(self: pointer, proxy
 
   struct_miqt_map(len: csize_t(len(virtualReturn)),keys: if len(virtualReturn) == 0: nil else: addr(virtualReturn_Keys_CArray[0]), values: if len(virtualReturn) == 0: nil else: addr(virtualReturn_Values_CArray[0]),)
 
-proc QConcatenateTablesProxyModelsetItemData*(self: gen_qconcatenatetablesproxymodel_types.QConcatenateTablesProxyModel, index: gen_qabstractitemmodel_types.QModelIndex, roles: Table[cint,gen_qvariant_types.QVariant]): bool =
-  var roles_Keys_CArray = newSeq[cint](len(roles))
-  var roles_Values_CArray = newSeq[pointer](len(roles))
-  var roles_ctr = 0
-  for roles_k in roles.keys():
-    roles_Keys_CArray[roles_ctr] = roles_k
-    roles_ctr += 1
-  roles_ctr = 0
-  for roles_v in roles.values():
-    roles_Values_CArray[roles_ctr] = roles_v.h
-    roles_ctr += 1
-
-  fcQConcatenateTablesProxyModel_virtualbase_setItemData(self.h, index.h, struct_miqt_map(len: csize_t(len(roles)),keys: if len(roles) == 0: nil else: addr(roles_Keys_CArray[0]), values: if len(roles) == 0: nil else: addr(roles_Values_CArray[0]),))
-
-proc cQConcatenateTablesProxyModel_vtable_callback_setItemData(self: pointer, index: pointer, roles: struct_miqt_map): bool {.cdecl.} =
+proc fcQConcatenateTablesProxyModel_vtable_callback_setItemData(self: pointer, index: pointer, roles: struct_miqt_map): bool {.cdecl.} =
   let vtbl = cast[ptr QConcatenateTablesProxyModelVTable](fcQConcatenateTablesProxyModel_vdata(self))
   let self = QConcatenateTablesProxyModel(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
@@ -580,20 +729,14 @@ proc cQConcatenateTablesProxyModel_vtable_callback_setItemData(self: pointer, in
   var virtualReturn = vtbl[].setItemData(self, slotval1, slotval2)
   virtualReturn
 
-proc QConcatenateTablesProxyModelflags*(self: gen_qconcatenatetablesproxymodel_types.QConcatenateTablesProxyModel, index: gen_qabstractitemmodel_types.QModelIndex): cint =
-  cint(fcQConcatenateTablesProxyModel_virtualbase_flags(self.h, index.h))
-
-proc cQConcatenateTablesProxyModel_vtable_callback_flags(self: pointer, index: pointer): cint {.cdecl.} =
+proc fcQConcatenateTablesProxyModel_vtable_callback_flags(self: pointer, index: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QConcatenateTablesProxyModelVTable](fcQConcatenateTablesProxyModel_vdata(self))
   let self = QConcatenateTablesProxyModel(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var virtualReturn = vtbl[].flags(self, slotval1)
   cint(virtualReturn)
 
-proc QConcatenateTablesProxyModelindex*(self: gen_qconcatenatetablesproxymodel_types.QConcatenateTablesProxyModel, row: cint, column: cint, parent: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex =
-  gen_qabstractitemmodel_types.QModelIndex(h: fcQConcatenateTablesProxyModel_virtualbase_index(self.h, row, column, parent.h), owned: true)
-
-proc cQConcatenateTablesProxyModel_vtable_callback_index(self: pointer, row: cint, column: cint, parent: pointer): pointer {.cdecl.} =
+proc fcQConcatenateTablesProxyModel_vtable_callback_index(self: pointer, row: cint, column: cint, parent: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QConcatenateTablesProxyModelVTable](fcQConcatenateTablesProxyModel_vdata(self))
   let self = QConcatenateTablesProxyModel(h: self)
   let slotval1 = row
@@ -605,10 +748,7 @@ proc cQConcatenateTablesProxyModel_vtable_callback_index(self: pointer, row: cin
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QConcatenateTablesProxyModelparent*(self: gen_qconcatenatetablesproxymodel_types.QConcatenateTablesProxyModel, index: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex =
-  gen_qabstractitemmodel_types.QModelIndex(h: fcQConcatenateTablesProxyModel_virtualbase_parent(self.h, index.h), owned: true)
-
-proc cQConcatenateTablesProxyModel_vtable_callback_parent(self: pointer, index: pointer): pointer {.cdecl.} =
+proc fcQConcatenateTablesProxyModel_vtable_callback_parent(self: pointer, index: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QConcatenateTablesProxyModelVTable](fcQConcatenateTablesProxyModel_vdata(self))
   let self = QConcatenateTablesProxyModel(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
@@ -618,20 +758,14 @@ proc cQConcatenateTablesProxyModel_vtable_callback_parent(self: pointer, index: 
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QConcatenateTablesProxyModelrowCount*(self: gen_qconcatenatetablesproxymodel_types.QConcatenateTablesProxyModel, parent: gen_qabstractitemmodel_types.QModelIndex): cint =
-  fcQConcatenateTablesProxyModel_virtualbase_rowCount(self.h, parent.h)
-
-proc cQConcatenateTablesProxyModel_vtable_callback_rowCount(self: pointer, parent: pointer): cint {.cdecl.} =
+proc fcQConcatenateTablesProxyModel_vtable_callback_rowCount(self: pointer, parent: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QConcatenateTablesProxyModelVTable](fcQConcatenateTablesProxyModel_vdata(self))
   let self = QConcatenateTablesProxyModel(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   var virtualReturn = vtbl[].rowCount(self, slotval1)
   virtualReturn
 
-proc QConcatenateTablesProxyModelheaderData*(self: gen_qconcatenatetablesproxymodel_types.QConcatenateTablesProxyModel, section: cint, orientation: cint, role: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQConcatenateTablesProxyModel_virtualbase_headerData(self.h, section, cint(orientation), role), owned: true)
-
-proc cQConcatenateTablesProxyModel_vtable_callback_headerData(self: pointer, section: cint, orientation: cint, role: cint): pointer {.cdecl.} =
+proc fcQConcatenateTablesProxyModel_vtable_callback_headerData(self: pointer, section: cint, orientation: cint, role: cint): pointer {.cdecl.} =
   let vtbl = cast[ptr QConcatenateTablesProxyModelVTable](fcQConcatenateTablesProxyModel_vdata(self))
   let self = QConcatenateTablesProxyModel(h: self)
   let slotval1 = section
@@ -643,29 +777,14 @@ proc cQConcatenateTablesProxyModel_vtable_callback_headerData(self: pointer, sec
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QConcatenateTablesProxyModelcolumnCount*(self: gen_qconcatenatetablesproxymodel_types.QConcatenateTablesProxyModel, parent: gen_qabstractitemmodel_types.QModelIndex): cint =
-  fcQConcatenateTablesProxyModel_virtualbase_columnCount(self.h, parent.h)
-
-proc cQConcatenateTablesProxyModel_vtable_callback_columnCount(self: pointer, parent: pointer): cint {.cdecl.} =
+proc fcQConcatenateTablesProxyModel_vtable_callback_columnCount(self: pointer, parent: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QConcatenateTablesProxyModelVTable](fcQConcatenateTablesProxyModel_vdata(self))
   let self = QConcatenateTablesProxyModel(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   var virtualReturn = vtbl[].columnCount(self, slotval1)
   virtualReturn
 
-proc QConcatenateTablesProxyModelmimeTypes*(self: gen_qconcatenatetablesproxymodel_types.QConcatenateTablesProxyModel): seq[string] =
-  var v_ma = fcQConcatenateTablesProxyModel_virtualbase_mimeTypes(self.h)
-  var vx_ret = newSeq[string](int(v_ma.len))
-  let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
-  for i in 0 ..< v_ma.len:
-    let vx_lv_ms = v_outCast[i]
-    let vx_lvx_ret = string.fromBytes(vx_lv_ms)
-    c_free(vx_lv_ms.data)
-    vx_ret[i] = vx_lvx_ret
-  c_free(v_ma.data)
-  vx_ret
-
-proc cQConcatenateTablesProxyModel_vtable_callback_mimeTypes(self: pointer): struct_miqt_array {.cdecl.} =
+proc fcQConcatenateTablesProxyModel_vtable_callback_mimeTypes(self: pointer): struct_miqt_array {.cdecl.} =
   let vtbl = cast[ptr QConcatenateTablesProxyModelVTable](fcQConcatenateTablesProxyModel_vdata(self))
   let self = QConcatenateTablesProxyModel(h: self)
   var virtualReturn = vtbl[].mimeTypes(self)
@@ -677,14 +796,7 @@ proc cQConcatenateTablesProxyModel_vtable_callback_mimeTypes(self: pointer): str
 
   struct_miqt_array(len: csize_t(len(virtualReturn)), data: if len(virtualReturn) == 0: nil else: addr(virtualReturn_CArray[0]))
 
-proc QConcatenateTablesProxyModelmimeData*(self: gen_qconcatenatetablesproxymodel_types.QConcatenateTablesProxyModel, indexes: openArray[gen_qabstractitemmodel_types.QModelIndex]): gen_qmimedata_types.QMimeData =
-  var indexes_CArray = newSeq[pointer](len(indexes))
-  for i in 0..<len(indexes):
-    indexes_CArray[i] = indexes[i].h
-
-  gen_qmimedata_types.QMimeData(h: fcQConcatenateTablesProxyModel_virtualbase_mimeData(self.h, struct_miqt_array(len: csize_t(len(indexes)), data: if len(indexes) == 0: nil else: addr(indexes_CArray[0]))), owned: false)
-
-proc cQConcatenateTablesProxyModel_vtable_callback_mimeData(self: pointer, indexes: struct_miqt_array): pointer {.cdecl.} =
+proc fcQConcatenateTablesProxyModel_vtable_callback_mimeData(self: pointer, indexes: struct_miqt_array): pointer {.cdecl.} =
   let vtbl = cast[ptr QConcatenateTablesProxyModelVTable](fcQConcatenateTablesProxyModel_vdata(self))
   let self = QConcatenateTablesProxyModel(h: self)
   var vindexes_ma = indexes
@@ -700,10 +812,7 @@ proc cQConcatenateTablesProxyModel_vtable_callback_mimeData(self: pointer, index
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QConcatenateTablesProxyModelcanDropMimeData*(self: gen_qconcatenatetablesproxymodel_types.QConcatenateTablesProxyModel, data: gen_qmimedata_types.QMimeData, action: cint, row: cint, column: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool =
-  fcQConcatenateTablesProxyModel_virtualbase_canDropMimeData(self.h, data.h, cint(action), row, column, parent.h)
-
-proc cQConcatenateTablesProxyModel_vtable_callback_canDropMimeData(self: pointer, data: pointer, action: cint, row: cint, column: cint, parent: pointer): bool {.cdecl.} =
+proc fcQConcatenateTablesProxyModel_vtable_callback_canDropMimeData(self: pointer, data: pointer, action: cint, row: cint, column: cint, parent: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QConcatenateTablesProxyModelVTable](fcQConcatenateTablesProxyModel_vdata(self))
   let self = QConcatenateTablesProxyModel(h: self)
   let slotval1 = gen_qmimedata_types.QMimeData(h: data, owned: false)
@@ -714,10 +823,7 @@ proc cQConcatenateTablesProxyModel_vtable_callback_canDropMimeData(self: pointer
   var virtualReturn = vtbl[].canDropMimeData(self, slotval1, slotval2, slotval3, slotval4, slotval5)
   virtualReturn
 
-proc QConcatenateTablesProxyModeldropMimeData*(self: gen_qconcatenatetablesproxymodel_types.QConcatenateTablesProxyModel, data: gen_qmimedata_types.QMimeData, action: cint, row: cint, column: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool =
-  fcQConcatenateTablesProxyModel_virtualbase_dropMimeData(self.h, data.h, cint(action), row, column, parent.h)
-
-proc cQConcatenateTablesProxyModel_vtable_callback_dropMimeData(self: pointer, data: pointer, action: cint, row: cint, column: cint, parent: pointer): bool {.cdecl.} =
+proc fcQConcatenateTablesProxyModel_vtable_callback_dropMimeData(self: pointer, data: pointer, action: cint, row: cint, column: cint, parent: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QConcatenateTablesProxyModelVTable](fcQConcatenateTablesProxyModel_vdata(self))
   let self = QConcatenateTablesProxyModel(h: self)
   let slotval1 = gen_qmimedata_types.QMimeData(h: data, owned: false)
@@ -728,10 +834,7 @@ proc cQConcatenateTablesProxyModel_vtable_callback_dropMimeData(self: pointer, d
   var virtualReturn = vtbl[].dropMimeData(self, slotval1, slotval2, slotval3, slotval4, slotval5)
   virtualReturn
 
-proc QConcatenateTablesProxyModelspan*(self: gen_qconcatenatetablesproxymodel_types.QConcatenateTablesProxyModel, index: gen_qabstractitemmodel_types.QModelIndex): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQConcatenateTablesProxyModel_virtualbase_span(self.h, index.h), owned: true)
-
-proc cQConcatenateTablesProxyModel_vtable_callback_span(self: pointer, index: pointer): pointer {.cdecl.} =
+proc fcQConcatenateTablesProxyModel_vtable_callback_span(self: pointer, index: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QConcatenateTablesProxyModelVTable](fcQConcatenateTablesProxyModel_vdata(self))
   let self = QConcatenateTablesProxyModel(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
@@ -741,10 +844,7 @@ proc cQConcatenateTablesProxyModel_vtable_callback_span(self: pointer, index: po
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QConcatenateTablesProxyModelsibling*(self: gen_qconcatenatetablesproxymodel_types.QConcatenateTablesProxyModel, row: cint, column: cint, idx: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex =
-  gen_qabstractitemmodel_types.QModelIndex(h: fcQConcatenateTablesProxyModel_virtualbase_sibling(self.h, row, column, idx.h), owned: true)
-
-proc cQConcatenateTablesProxyModel_vtable_callback_sibling(self: pointer, row: cint, column: cint, idx: pointer): pointer {.cdecl.} =
+proc fcQConcatenateTablesProxyModel_vtable_callback_sibling(self: pointer, row: cint, column: cint, idx: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QConcatenateTablesProxyModelVTable](fcQConcatenateTablesProxyModel_vdata(self))
   let self = QConcatenateTablesProxyModel(h: self)
   let slotval1 = row
@@ -756,20 +856,14 @@ proc cQConcatenateTablesProxyModel_vtable_callback_sibling(self: pointer, row: c
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QConcatenateTablesProxyModelhasChildren*(self: gen_qconcatenatetablesproxymodel_types.QConcatenateTablesProxyModel, parent: gen_qabstractitemmodel_types.QModelIndex): bool =
-  fcQConcatenateTablesProxyModel_virtualbase_hasChildren(self.h, parent.h)
-
-proc cQConcatenateTablesProxyModel_vtable_callback_hasChildren(self: pointer, parent: pointer): bool {.cdecl.} =
+proc fcQConcatenateTablesProxyModel_vtable_callback_hasChildren(self: pointer, parent: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QConcatenateTablesProxyModelVTable](fcQConcatenateTablesProxyModel_vdata(self))
   let self = QConcatenateTablesProxyModel(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   var virtualReturn = vtbl[].hasChildren(self, slotval1)
   virtualReturn
 
-proc QConcatenateTablesProxyModelsetHeaderData*(self: gen_qconcatenatetablesproxymodel_types.QConcatenateTablesProxyModel, section: cint, orientation: cint, value: gen_qvariant_types.QVariant, role: cint): bool =
-  fcQConcatenateTablesProxyModel_virtualbase_setHeaderData(self.h, section, cint(orientation), value.h, role)
-
-proc cQConcatenateTablesProxyModel_vtable_callback_setHeaderData(self: pointer, section: cint, orientation: cint, value: pointer, role: cint): bool {.cdecl.} =
+proc fcQConcatenateTablesProxyModel_vtable_callback_setHeaderData(self: pointer, section: cint, orientation: cint, value: pointer, role: cint): bool {.cdecl.} =
   let vtbl = cast[ptr QConcatenateTablesProxyModelVTable](fcQConcatenateTablesProxyModel_vdata(self))
   let self = QConcatenateTablesProxyModel(h: self)
   let slotval1 = section
@@ -779,28 +873,19 @@ proc cQConcatenateTablesProxyModel_vtable_callback_setHeaderData(self: pointer, 
   var virtualReturn = vtbl[].setHeaderData(self, slotval1, slotval2, slotval3, slotval4)
   virtualReturn
 
-proc QConcatenateTablesProxyModelsupportedDropActions*(self: gen_qconcatenatetablesproxymodel_types.QConcatenateTablesProxyModel): cint =
-  cint(fcQConcatenateTablesProxyModel_virtualbase_supportedDropActions(self.h))
-
-proc cQConcatenateTablesProxyModel_vtable_callback_supportedDropActions(self: pointer): cint {.cdecl.} =
+proc fcQConcatenateTablesProxyModel_vtable_callback_supportedDropActions(self: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QConcatenateTablesProxyModelVTable](fcQConcatenateTablesProxyModel_vdata(self))
   let self = QConcatenateTablesProxyModel(h: self)
   var virtualReturn = vtbl[].supportedDropActions(self)
   cint(virtualReturn)
 
-proc QConcatenateTablesProxyModelsupportedDragActions*(self: gen_qconcatenatetablesproxymodel_types.QConcatenateTablesProxyModel): cint =
-  cint(fcQConcatenateTablesProxyModel_virtualbase_supportedDragActions(self.h))
-
-proc cQConcatenateTablesProxyModel_vtable_callback_supportedDragActions(self: pointer): cint {.cdecl.} =
+proc fcQConcatenateTablesProxyModel_vtable_callback_supportedDragActions(self: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QConcatenateTablesProxyModelVTable](fcQConcatenateTablesProxyModel_vdata(self))
   let self = QConcatenateTablesProxyModel(h: self)
   var virtualReturn = vtbl[].supportedDragActions(self)
   cint(virtualReturn)
 
-proc QConcatenateTablesProxyModelinsertRows*(self: gen_qconcatenatetablesproxymodel_types.QConcatenateTablesProxyModel, row: cint, count: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool =
-  fcQConcatenateTablesProxyModel_virtualbase_insertRows(self.h, row, count, parent.h)
-
-proc cQConcatenateTablesProxyModel_vtable_callback_insertRows(self: pointer, row: cint, count: cint, parent: pointer): bool {.cdecl.} =
+proc fcQConcatenateTablesProxyModel_vtable_callback_insertRows(self: pointer, row: cint, count: cint, parent: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QConcatenateTablesProxyModelVTable](fcQConcatenateTablesProxyModel_vdata(self))
   let self = QConcatenateTablesProxyModel(h: self)
   let slotval1 = row
@@ -809,10 +894,7 @@ proc cQConcatenateTablesProxyModel_vtable_callback_insertRows(self: pointer, row
   var virtualReturn = vtbl[].insertRows(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QConcatenateTablesProxyModelinsertColumns*(self: gen_qconcatenatetablesproxymodel_types.QConcatenateTablesProxyModel, column: cint, count: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool =
-  fcQConcatenateTablesProxyModel_virtualbase_insertColumns(self.h, column, count, parent.h)
-
-proc cQConcatenateTablesProxyModel_vtable_callback_insertColumns(self: pointer, column: cint, count: cint, parent: pointer): bool {.cdecl.} =
+proc fcQConcatenateTablesProxyModel_vtable_callback_insertColumns(self: pointer, column: cint, count: cint, parent: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QConcatenateTablesProxyModelVTable](fcQConcatenateTablesProxyModel_vdata(self))
   let self = QConcatenateTablesProxyModel(h: self)
   let slotval1 = column
@@ -821,10 +903,7 @@ proc cQConcatenateTablesProxyModel_vtable_callback_insertColumns(self: pointer, 
   var virtualReturn = vtbl[].insertColumns(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QConcatenateTablesProxyModelremoveRows*(self: gen_qconcatenatetablesproxymodel_types.QConcatenateTablesProxyModel, row: cint, count: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool =
-  fcQConcatenateTablesProxyModel_virtualbase_removeRows(self.h, row, count, parent.h)
-
-proc cQConcatenateTablesProxyModel_vtable_callback_removeRows(self: pointer, row: cint, count: cint, parent: pointer): bool {.cdecl.} =
+proc fcQConcatenateTablesProxyModel_vtable_callback_removeRows(self: pointer, row: cint, count: cint, parent: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QConcatenateTablesProxyModelVTable](fcQConcatenateTablesProxyModel_vdata(self))
   let self = QConcatenateTablesProxyModel(h: self)
   let slotval1 = row
@@ -833,10 +912,7 @@ proc cQConcatenateTablesProxyModel_vtable_callback_removeRows(self: pointer, row
   var virtualReturn = vtbl[].removeRows(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QConcatenateTablesProxyModelremoveColumns*(self: gen_qconcatenatetablesproxymodel_types.QConcatenateTablesProxyModel, column: cint, count: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool =
-  fcQConcatenateTablesProxyModel_virtualbase_removeColumns(self.h, column, count, parent.h)
-
-proc cQConcatenateTablesProxyModel_vtable_callback_removeColumns(self: pointer, column: cint, count: cint, parent: pointer): bool {.cdecl.} =
+proc fcQConcatenateTablesProxyModel_vtable_callback_removeColumns(self: pointer, column: cint, count: cint, parent: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QConcatenateTablesProxyModelVTable](fcQConcatenateTablesProxyModel_vdata(self))
   let self = QConcatenateTablesProxyModel(h: self)
   let slotval1 = column
@@ -845,10 +921,7 @@ proc cQConcatenateTablesProxyModel_vtable_callback_removeColumns(self: pointer, 
   var virtualReturn = vtbl[].removeColumns(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QConcatenateTablesProxyModelmoveRows*(self: gen_qconcatenatetablesproxymodel_types.QConcatenateTablesProxyModel, sourceParent: gen_qabstractitemmodel_types.QModelIndex, sourceRow: cint, count: cint, destinationParent: gen_qabstractitemmodel_types.QModelIndex, destinationChild: cint): bool =
-  fcQConcatenateTablesProxyModel_virtualbase_moveRows(self.h, sourceParent.h, sourceRow, count, destinationParent.h, destinationChild)
-
-proc cQConcatenateTablesProxyModel_vtable_callback_moveRows(self: pointer, sourceParent: pointer, sourceRow: cint, count: cint, destinationParent: pointer, destinationChild: cint): bool {.cdecl.} =
+proc fcQConcatenateTablesProxyModel_vtable_callback_moveRows(self: pointer, sourceParent: pointer, sourceRow: cint, count: cint, destinationParent: pointer, destinationChild: cint): bool {.cdecl.} =
   let vtbl = cast[ptr QConcatenateTablesProxyModelVTable](fcQConcatenateTablesProxyModel_vdata(self))
   let self = QConcatenateTablesProxyModel(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: sourceParent, owned: false)
@@ -859,10 +932,7 @@ proc cQConcatenateTablesProxyModel_vtable_callback_moveRows(self: pointer, sourc
   var virtualReturn = vtbl[].moveRows(self, slotval1, slotval2, slotval3, slotval4, slotval5)
   virtualReturn
 
-proc QConcatenateTablesProxyModelmoveColumns*(self: gen_qconcatenatetablesproxymodel_types.QConcatenateTablesProxyModel, sourceParent: gen_qabstractitemmodel_types.QModelIndex, sourceColumn: cint, count: cint, destinationParent: gen_qabstractitemmodel_types.QModelIndex, destinationChild: cint): bool =
-  fcQConcatenateTablesProxyModel_virtualbase_moveColumns(self.h, sourceParent.h, sourceColumn, count, destinationParent.h, destinationChild)
-
-proc cQConcatenateTablesProxyModel_vtable_callback_moveColumns(self: pointer, sourceParent: pointer, sourceColumn: cint, count: cint, destinationParent: pointer, destinationChild: cint): bool {.cdecl.} =
+proc fcQConcatenateTablesProxyModel_vtable_callback_moveColumns(self: pointer, sourceParent: pointer, sourceColumn: cint, count: cint, destinationParent: pointer, destinationChild: cint): bool {.cdecl.} =
   let vtbl = cast[ptr QConcatenateTablesProxyModelVTable](fcQConcatenateTablesProxyModel_vdata(self))
   let self = QConcatenateTablesProxyModel(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: sourceParent, owned: false)
@@ -873,39 +943,27 @@ proc cQConcatenateTablesProxyModel_vtable_callback_moveColumns(self: pointer, so
   var virtualReturn = vtbl[].moveColumns(self, slotval1, slotval2, slotval3, slotval4, slotval5)
   virtualReturn
 
-proc QConcatenateTablesProxyModelfetchMore*(self: gen_qconcatenatetablesproxymodel_types.QConcatenateTablesProxyModel, parent: gen_qabstractitemmodel_types.QModelIndex): void =
-  fcQConcatenateTablesProxyModel_virtualbase_fetchMore(self.h, parent.h)
-
-proc cQConcatenateTablesProxyModel_vtable_callback_fetchMore(self: pointer, parent: pointer): void {.cdecl.} =
+proc fcQConcatenateTablesProxyModel_vtable_callback_fetchMore(self: pointer, parent: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QConcatenateTablesProxyModelVTable](fcQConcatenateTablesProxyModel_vdata(self))
   let self = QConcatenateTablesProxyModel(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   vtbl[].fetchMore(self, slotval1)
 
-proc QConcatenateTablesProxyModelcanFetchMore*(self: gen_qconcatenatetablesproxymodel_types.QConcatenateTablesProxyModel, parent: gen_qabstractitemmodel_types.QModelIndex): bool =
-  fcQConcatenateTablesProxyModel_virtualbase_canFetchMore(self.h, parent.h)
-
-proc cQConcatenateTablesProxyModel_vtable_callback_canFetchMore(self: pointer, parent: pointer): bool {.cdecl.} =
+proc fcQConcatenateTablesProxyModel_vtable_callback_canFetchMore(self: pointer, parent: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QConcatenateTablesProxyModelVTable](fcQConcatenateTablesProxyModel_vdata(self))
   let self = QConcatenateTablesProxyModel(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   var virtualReturn = vtbl[].canFetchMore(self, slotval1)
   virtualReturn
 
-proc QConcatenateTablesProxyModelsort*(self: gen_qconcatenatetablesproxymodel_types.QConcatenateTablesProxyModel, column: cint, order: cint): void =
-  fcQConcatenateTablesProxyModel_virtualbase_sort(self.h, column, cint(order))
-
-proc cQConcatenateTablesProxyModel_vtable_callback_sort(self: pointer, column: cint, order: cint): void {.cdecl.} =
+proc fcQConcatenateTablesProxyModel_vtable_callback_sort(self: pointer, column: cint, order: cint): void {.cdecl.} =
   let vtbl = cast[ptr QConcatenateTablesProxyModelVTable](fcQConcatenateTablesProxyModel_vdata(self))
   let self = QConcatenateTablesProxyModel(h: self)
   let slotval1 = column
   let slotval2 = cint(order)
   vtbl[].sort(self, slotval1, slotval2)
 
-proc QConcatenateTablesProxyModelbuddy*(self: gen_qconcatenatetablesproxymodel_types.QConcatenateTablesProxyModel, index: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex =
-  gen_qabstractitemmodel_types.QModelIndex(h: fcQConcatenateTablesProxyModel_virtualbase_buddy(self.h, index.h), owned: true)
-
-proc cQConcatenateTablesProxyModel_vtable_callback_buddy(self: pointer, index: pointer): pointer {.cdecl.} =
+proc fcQConcatenateTablesProxyModel_vtable_callback_buddy(self: pointer, index: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QConcatenateTablesProxyModelVTable](fcQConcatenateTablesProxyModel_vdata(self))
   let self = QConcatenateTablesProxyModel(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
@@ -915,16 +973,7 @@ proc cQConcatenateTablesProxyModel_vtable_callback_buddy(self: pointer, index: p
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QConcatenateTablesProxyModelmatch*(self: gen_qconcatenatetablesproxymodel_types.QConcatenateTablesProxyModel, start: gen_qabstractitemmodel_types.QModelIndex, role: cint, value: gen_qvariant_types.QVariant, hits: cint, flags: cint): seq[gen_qabstractitemmodel_types.QModelIndex] =
-  var v_ma = fcQConcatenateTablesProxyModel_virtualbase_match(self.h, start.h, role, value.h, hits, cint(flags))
-  var vx_ret = newSeq[gen_qabstractitemmodel_types.QModelIndex](int(v_ma.len))
-  let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
-  for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qabstractitemmodel_types.QModelIndex(h: v_outCast[i], owned: true)
-  c_free(v_ma.data)
-  vx_ret
-
-proc cQConcatenateTablesProxyModel_vtable_callback_match(self: pointer, start: pointer, role: cint, value: pointer, hits: cint, flags: cint): struct_miqt_array {.cdecl.} =
+proc fcQConcatenateTablesProxyModel_vtable_callback_match(self: pointer, start: pointer, role: cint, value: pointer, hits: cint, flags: cint): struct_miqt_array {.cdecl.} =
   let vtbl = cast[ptr QConcatenateTablesProxyModelVTable](fcQConcatenateTablesProxyModel_vdata(self))
   let self = QConcatenateTablesProxyModel(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: start, owned: false)
@@ -942,25 +991,7 @@ proc cQConcatenateTablesProxyModel_vtable_callback_match(self: pointer, start: p
 
   struct_miqt_array(len: csize_t(len(virtualReturn)), data: if len(virtualReturn) == 0: nil else: addr(virtualReturn_CArray[0]))
 
-proc QConcatenateTablesProxyModelroleNames*(self: gen_qconcatenatetablesproxymodel_types.QConcatenateTablesProxyModel): Table[cint,seq[byte]] =
-  var v_mm = fcQConcatenateTablesProxyModel_virtualbase_roleNames(self.h)
-  var vx_ret: Table[cint, seq[byte]]
-  var v_Keys = cast[ptr UncheckedArray[cint]](v_mm.keys)
-  var v_Values = cast[ptr UncheckedArray[struct_miqt_string]](v_mm.values)
-  for i in 0..<v_mm.len:
-    var v_entry_Key = v_Keys[i]
-
-    var vx_hashval_bytearray = v_Values[i]
-    var vx_hashvalx_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](vx_hashval_bytearray.data), 0, int(vx_hashval_bytearray.len)-1))
-    c_free(vx_hashval_bytearray.data)
-    var v_entry_Value = vx_hashvalx_ret
-
-    vx_ret[v_entry_Key] = v_entry_Value
-  c_free(v_mm.keys)
-  c_free(v_mm.values)
-  vx_ret
-
-proc cQConcatenateTablesProxyModel_vtable_callback_roleNames(self: pointer): struct_miqt_map {.cdecl.} =
+proc fcQConcatenateTablesProxyModel_vtable_callback_roleNames(self: pointer): struct_miqt_map {.cdecl.} =
   let vtbl = cast[ptr QConcatenateTablesProxyModelVTable](fcQConcatenateTablesProxyModel_vdata(self))
   let self = QConcatenateTablesProxyModel(h: self)
   var virtualReturn = vtbl[].roleNames(self)
@@ -979,37 +1010,25 @@ proc cQConcatenateTablesProxyModel_vtable_callback_roleNames(self: pointer): str
 
   struct_miqt_map(len: csize_t(len(virtualReturn)),keys: if len(virtualReturn) == 0: nil else: addr(virtualReturn_Keys_CArray[0]), values: if len(virtualReturn) == 0: nil else: addr(virtualReturn_Values_CArray[0]),)
 
-proc QConcatenateTablesProxyModelsubmit*(self: gen_qconcatenatetablesproxymodel_types.QConcatenateTablesProxyModel): bool =
-  fcQConcatenateTablesProxyModel_virtualbase_submit(self.h)
-
-proc cQConcatenateTablesProxyModel_vtable_callback_submit(self: pointer): bool {.cdecl.} =
+proc fcQConcatenateTablesProxyModel_vtable_callback_submit(self: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QConcatenateTablesProxyModelVTable](fcQConcatenateTablesProxyModel_vdata(self))
   let self = QConcatenateTablesProxyModel(h: self)
   var virtualReturn = vtbl[].submit(self)
   virtualReturn
 
-proc QConcatenateTablesProxyModelrevert*(self: gen_qconcatenatetablesproxymodel_types.QConcatenateTablesProxyModel): void =
-  fcQConcatenateTablesProxyModel_virtualbase_revert(self.h)
-
-proc cQConcatenateTablesProxyModel_vtable_callback_revert(self: pointer): void {.cdecl.} =
+proc fcQConcatenateTablesProxyModel_vtable_callback_revert(self: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QConcatenateTablesProxyModelVTable](fcQConcatenateTablesProxyModel_vdata(self))
   let self = QConcatenateTablesProxyModel(h: self)
   vtbl[].revert(self)
 
-proc QConcatenateTablesProxyModelevent*(self: gen_qconcatenatetablesproxymodel_types.QConcatenateTablesProxyModel, event: gen_qcoreevent_types.QEvent): bool =
-  fcQConcatenateTablesProxyModel_virtualbase_event(self.h, event.h)
-
-proc cQConcatenateTablesProxyModel_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
+proc fcQConcatenateTablesProxyModel_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QConcatenateTablesProxyModelVTable](fcQConcatenateTablesProxyModel_vdata(self))
   let self = QConcatenateTablesProxyModel(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
-proc QConcatenateTablesProxyModeleventFilter*(self: gen_qconcatenatetablesproxymodel_types.QConcatenateTablesProxyModel, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
-  fcQConcatenateTablesProxyModel_virtualbase_eventFilter(self.h, watched.h, event.h)
-
-proc cQConcatenateTablesProxyModel_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+proc fcQConcatenateTablesProxyModel_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QConcatenateTablesProxyModelVTable](fcQConcatenateTablesProxyModel_vdata(self))
   let self = QConcatenateTablesProxyModel(h: self)
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
@@ -1017,46 +1036,31 @@ proc cQConcatenateTablesProxyModel_vtable_callback_eventFilter(self: pointer, wa
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
-proc QConcatenateTablesProxyModeltimerEvent*(self: gen_qconcatenatetablesproxymodel_types.QConcatenateTablesProxyModel, event: gen_qcoreevent_types.QTimerEvent): void =
-  fcQConcatenateTablesProxyModel_virtualbase_timerEvent(self.h, event.h)
-
-proc cQConcatenateTablesProxyModel_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQConcatenateTablesProxyModel_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QConcatenateTablesProxyModelVTable](fcQConcatenateTablesProxyModel_vdata(self))
   let self = QConcatenateTablesProxyModel(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
-proc QConcatenateTablesProxyModelchildEvent*(self: gen_qconcatenatetablesproxymodel_types.QConcatenateTablesProxyModel, event: gen_qcoreevent_types.QChildEvent): void =
-  fcQConcatenateTablesProxyModel_virtualbase_childEvent(self.h, event.h)
-
-proc cQConcatenateTablesProxyModel_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQConcatenateTablesProxyModel_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QConcatenateTablesProxyModelVTable](fcQConcatenateTablesProxyModel_vdata(self))
   let self = QConcatenateTablesProxyModel(h: self)
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
-proc QConcatenateTablesProxyModelcustomEvent*(self: gen_qconcatenatetablesproxymodel_types.QConcatenateTablesProxyModel, event: gen_qcoreevent_types.QEvent): void =
-  fcQConcatenateTablesProxyModel_virtualbase_customEvent(self.h, event.h)
-
-proc cQConcatenateTablesProxyModel_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQConcatenateTablesProxyModel_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QConcatenateTablesProxyModelVTable](fcQConcatenateTablesProxyModel_vdata(self))
   let self = QConcatenateTablesProxyModel(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
-proc QConcatenateTablesProxyModelconnectNotify*(self: gen_qconcatenatetablesproxymodel_types.QConcatenateTablesProxyModel, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQConcatenateTablesProxyModel_virtualbase_connectNotify(self.h, signal.h)
-
-proc cQConcatenateTablesProxyModel_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQConcatenateTablesProxyModel_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QConcatenateTablesProxyModelVTable](fcQConcatenateTablesProxyModel_vdata(self))
   let self = QConcatenateTablesProxyModel(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
-proc QConcatenateTablesProxyModeldisconnectNotify*(self: gen_qconcatenatetablesproxymodel_types.QConcatenateTablesProxyModel, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQConcatenateTablesProxyModel_virtualbase_disconnectNotify(self.h, signal.h)
-
-proc cQConcatenateTablesProxyModel_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQConcatenateTablesProxyModel_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QConcatenateTablesProxyModelVTable](fcQConcatenateTablesProxyModel_vdata(self))
   let self = QConcatenateTablesProxyModel(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
@@ -1064,9 +1068,97 @@ proc cQConcatenateTablesProxyModel_vtable_callback_disconnectNotify(self: pointe
 
 type VirtualQConcatenateTablesProxyModel* {.inheritable.} = ref object of QConcatenateTablesProxyModel
   vtbl*: cQConcatenateTablesProxyModelVTable
+
 method metaObject*(self: VirtualQConcatenateTablesProxyModel): gen_qobjectdefs_types.QMetaObject {.base.} =
   QConcatenateTablesProxyModelmetaObject(self[])
-proc cQConcatenateTablesProxyModel_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
+method metacast*(self: VirtualQConcatenateTablesProxyModel, param1: cstring): pointer {.base.} =
+  QConcatenateTablesProxyModelmetacast(self[], param1)
+method metacall*(self: VirtualQConcatenateTablesProxyModel, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QConcatenateTablesProxyModelmetacall(self[], param1, param2, param3)
+method data*(self: VirtualQConcatenateTablesProxyModel, index: gen_qabstractitemmodel_types.QModelIndex, role: cint): gen_qvariant_types.QVariant {.base.} =
+  QConcatenateTablesProxyModeldata(self[], index, role)
+method setData*(self: VirtualQConcatenateTablesProxyModel, index: gen_qabstractitemmodel_types.QModelIndex, value: gen_qvariant_types.QVariant, role: cint): bool {.base.} =
+  QConcatenateTablesProxyModelsetData(self[], index, value, role)
+method itemData*(self: VirtualQConcatenateTablesProxyModel, proxyIndex: gen_qabstractitemmodel_types.QModelIndex): Table[cint,gen_qvariant_types.QVariant] {.base.} =
+  QConcatenateTablesProxyModelitemData(self[], proxyIndex)
+method setItemData*(self: VirtualQConcatenateTablesProxyModel, index: gen_qabstractitemmodel_types.QModelIndex, roles: Table[cint,gen_qvariant_types.QVariant]): bool {.base.} =
+  QConcatenateTablesProxyModelsetItemData(self[], index, roles)
+method flags*(self: VirtualQConcatenateTablesProxyModel, index: gen_qabstractitemmodel_types.QModelIndex): cint {.base.} =
+  QConcatenateTablesProxyModelflags(self[], index)
+method index*(self: VirtualQConcatenateTablesProxyModel, row: cint, column: cint, parent: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex {.base.} =
+  QConcatenateTablesProxyModelindex(self[], row, column, parent)
+method parent*(self: VirtualQConcatenateTablesProxyModel, index: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex {.base.} =
+  QConcatenateTablesProxyModelparent(self[], index)
+method rowCount*(self: VirtualQConcatenateTablesProxyModel, parent: gen_qabstractitemmodel_types.QModelIndex): cint {.base.} =
+  QConcatenateTablesProxyModelrowCount(self[], parent)
+method headerData*(self: VirtualQConcatenateTablesProxyModel, section: cint, orientation: cint, role: cint): gen_qvariant_types.QVariant {.base.} =
+  QConcatenateTablesProxyModelheaderData(self[], section, orientation, role)
+method columnCount*(self: VirtualQConcatenateTablesProxyModel, parent: gen_qabstractitemmodel_types.QModelIndex): cint {.base.} =
+  QConcatenateTablesProxyModelcolumnCount(self[], parent)
+method mimeTypes*(self: VirtualQConcatenateTablesProxyModel): seq[string] {.base.} =
+  QConcatenateTablesProxyModelmimeTypes(self[])
+method mimeData*(self: VirtualQConcatenateTablesProxyModel, indexes: openArray[gen_qabstractitemmodel_types.QModelIndex]): gen_qmimedata_types.QMimeData {.base.} =
+  QConcatenateTablesProxyModelmimeData(self[], indexes)
+method canDropMimeData*(self: VirtualQConcatenateTablesProxyModel, data: gen_qmimedata_types.QMimeData, action: cint, row: cint, column: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool {.base.} =
+  QConcatenateTablesProxyModelcanDropMimeData(self[], data, action, row, column, parent)
+method dropMimeData*(self: VirtualQConcatenateTablesProxyModel, data: gen_qmimedata_types.QMimeData, action: cint, row: cint, column: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool {.base.} =
+  QConcatenateTablesProxyModeldropMimeData(self[], data, action, row, column, parent)
+method span*(self: VirtualQConcatenateTablesProxyModel, index: gen_qabstractitemmodel_types.QModelIndex): gen_qsize_types.QSize {.base.} =
+  QConcatenateTablesProxyModelspan(self[], index)
+method sibling*(self: VirtualQConcatenateTablesProxyModel, row: cint, column: cint, idx: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex {.base.} =
+  QConcatenateTablesProxyModelsibling(self[], row, column, idx)
+method hasChildren*(self: VirtualQConcatenateTablesProxyModel, parent: gen_qabstractitemmodel_types.QModelIndex): bool {.base.} =
+  QConcatenateTablesProxyModelhasChildren(self[], parent)
+method setHeaderData*(self: VirtualQConcatenateTablesProxyModel, section: cint, orientation: cint, value: gen_qvariant_types.QVariant, role: cint): bool {.base.} =
+  QConcatenateTablesProxyModelsetHeaderData(self[], section, orientation, value, role)
+method supportedDropActions*(self: VirtualQConcatenateTablesProxyModel): cint {.base.} =
+  QConcatenateTablesProxyModelsupportedDropActions(self[])
+method supportedDragActions*(self: VirtualQConcatenateTablesProxyModel): cint {.base.} =
+  QConcatenateTablesProxyModelsupportedDragActions(self[])
+method insertRows*(self: VirtualQConcatenateTablesProxyModel, row: cint, count: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool {.base.} =
+  QConcatenateTablesProxyModelinsertRows(self[], row, count, parent)
+method insertColumns*(self: VirtualQConcatenateTablesProxyModel, column: cint, count: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool {.base.} =
+  QConcatenateTablesProxyModelinsertColumns(self[], column, count, parent)
+method removeRows*(self: VirtualQConcatenateTablesProxyModel, row: cint, count: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool {.base.} =
+  QConcatenateTablesProxyModelremoveRows(self[], row, count, parent)
+method removeColumns*(self: VirtualQConcatenateTablesProxyModel, column: cint, count: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool {.base.} =
+  QConcatenateTablesProxyModelremoveColumns(self[], column, count, parent)
+method moveRows*(self: VirtualQConcatenateTablesProxyModel, sourceParent: gen_qabstractitemmodel_types.QModelIndex, sourceRow: cint, count: cint, destinationParent: gen_qabstractitemmodel_types.QModelIndex, destinationChild: cint): bool {.base.} =
+  QConcatenateTablesProxyModelmoveRows(self[], sourceParent, sourceRow, count, destinationParent, destinationChild)
+method moveColumns*(self: VirtualQConcatenateTablesProxyModel, sourceParent: gen_qabstractitemmodel_types.QModelIndex, sourceColumn: cint, count: cint, destinationParent: gen_qabstractitemmodel_types.QModelIndex, destinationChild: cint): bool {.base.} =
+  QConcatenateTablesProxyModelmoveColumns(self[], sourceParent, sourceColumn, count, destinationParent, destinationChild)
+method fetchMore*(self: VirtualQConcatenateTablesProxyModel, parent: gen_qabstractitemmodel_types.QModelIndex): void {.base.} =
+  QConcatenateTablesProxyModelfetchMore(self[], parent)
+method canFetchMore*(self: VirtualQConcatenateTablesProxyModel, parent: gen_qabstractitemmodel_types.QModelIndex): bool {.base.} =
+  QConcatenateTablesProxyModelcanFetchMore(self[], parent)
+method sort*(self: VirtualQConcatenateTablesProxyModel, column: cint, order: cint): void {.base.} =
+  QConcatenateTablesProxyModelsort(self[], column, order)
+method buddy*(self: VirtualQConcatenateTablesProxyModel, index: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex {.base.} =
+  QConcatenateTablesProxyModelbuddy(self[], index)
+method match*(self: VirtualQConcatenateTablesProxyModel, start: gen_qabstractitemmodel_types.QModelIndex, role: cint, value: gen_qvariant_types.QVariant, hits: cint, flags: cint): seq[gen_qabstractitemmodel_types.QModelIndex] {.base.} =
+  QConcatenateTablesProxyModelmatch(self[], start, role, value, hits, flags)
+method roleNames*(self: VirtualQConcatenateTablesProxyModel): Table[cint,seq[byte]] {.base.} =
+  QConcatenateTablesProxyModelroleNames(self[])
+method submit*(self: VirtualQConcatenateTablesProxyModel): bool {.base.} =
+  QConcatenateTablesProxyModelsubmit(self[])
+method revert*(self: VirtualQConcatenateTablesProxyModel): void {.base.} =
+  QConcatenateTablesProxyModelrevert(self[])
+method event*(self: VirtualQConcatenateTablesProxyModel, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QConcatenateTablesProxyModelevent(self[], event)
+method eventFilter*(self: VirtualQConcatenateTablesProxyModel, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QConcatenateTablesProxyModeleventFilter(self[], watched, event)
+method timerEvent*(self: VirtualQConcatenateTablesProxyModel, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QConcatenateTablesProxyModeltimerEvent(self[], event)
+method childEvent*(self: VirtualQConcatenateTablesProxyModel, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QConcatenateTablesProxyModelchildEvent(self[], event)
+method customEvent*(self: VirtualQConcatenateTablesProxyModel, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QConcatenateTablesProxyModelcustomEvent(self[], event)
+method connectNotify*(self: VirtualQConcatenateTablesProxyModel, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QConcatenateTablesProxyModelconnectNotify(self[], signal)
+method disconnectNotify*(self: VirtualQConcatenateTablesProxyModel, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QConcatenateTablesProxyModeldisconnectNotify(self[], signal)
+
+proc fcQConcatenateTablesProxyModel_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQConcatenateTablesProxyModel](fcQConcatenateTablesProxyModel_vdata(self))
   var virtualReturn = inst.metaObject()
   virtualReturn.owned = false # TODO move?
@@ -1074,17 +1166,13 @@ proc cQConcatenateTablesProxyModel_method_callback_metaObject(self: pointer): po
   virtualReturn.h = nil
   virtualReturn_h
 
-method metacast*(self: VirtualQConcatenateTablesProxyModel, param1: cstring): pointer {.base.} =
-  QConcatenateTablesProxyModelmetacast(self[], param1)
-proc cQConcatenateTablesProxyModel_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+proc fcQConcatenateTablesProxyModel_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQConcatenateTablesProxyModel](fcQConcatenateTablesProxyModel_vdata(self))
   let slotval1 = (param1)
   var virtualReturn = inst.metacast(slotval1)
   virtualReturn
 
-method metacall*(self: VirtualQConcatenateTablesProxyModel, param1: cint, param2: cint, param3: pointer): cint {.base.} =
-  QConcatenateTablesProxyModelmetacall(self[], param1, param2, param3)
-proc cQConcatenateTablesProxyModel_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+proc fcQConcatenateTablesProxyModel_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQConcatenateTablesProxyModel](fcQConcatenateTablesProxyModel_vdata(self))
   let slotval1 = cint(param1)
   let slotval2 = param2
@@ -1092,9 +1180,7 @@ proc cQConcatenateTablesProxyModel_method_callback_metacall(self: pointer, param
   var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
-method data*(self: VirtualQConcatenateTablesProxyModel, index: gen_qabstractitemmodel_types.QModelIndex, role: cint): gen_qvariant_types.QVariant {.base.} =
-  QConcatenateTablesProxyModeldata(self[], index, role)
-proc cQConcatenateTablesProxyModel_method_callback_data(self: pointer, index: pointer, role: cint): pointer {.cdecl.} =
+proc fcQConcatenateTablesProxyModel_method_callback_data(self: pointer, index: pointer, role: cint): pointer {.cdecl.} =
   let inst = cast[VirtualQConcatenateTablesProxyModel](fcQConcatenateTablesProxyModel_vdata(self))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   let slotval2 = role
@@ -1104,9 +1190,7 @@ proc cQConcatenateTablesProxyModel_method_callback_data(self: pointer, index: po
   virtualReturn.h = nil
   virtualReturn_h
 
-method setData*(self: VirtualQConcatenateTablesProxyModel, index: gen_qabstractitemmodel_types.QModelIndex, value: gen_qvariant_types.QVariant, role: cint): bool {.base.} =
-  QConcatenateTablesProxyModelsetData(self[], index, value, role)
-proc cQConcatenateTablesProxyModel_method_callback_setData(self: pointer, index: pointer, value: pointer, role: cint): bool {.cdecl.} =
+proc fcQConcatenateTablesProxyModel_method_callback_setData(self: pointer, index: pointer, value: pointer, role: cint): bool {.cdecl.} =
   let inst = cast[VirtualQConcatenateTablesProxyModel](fcQConcatenateTablesProxyModel_vdata(self))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   let slotval2 = gen_qvariant_types.QVariant(h: value, owned: false)
@@ -1114,9 +1198,7 @@ proc cQConcatenateTablesProxyModel_method_callback_setData(self: pointer, index:
   var virtualReturn = inst.setData(slotval1, slotval2, slotval3)
   virtualReturn
 
-method itemData*(self: VirtualQConcatenateTablesProxyModel, proxyIndex: gen_qabstractitemmodel_types.QModelIndex): Table[cint,gen_qvariant_types.QVariant] {.base.} =
-  QConcatenateTablesProxyModelitemData(self[], proxyIndex)
-proc cQConcatenateTablesProxyModel_method_callback_itemData(self: pointer, proxyIndex: pointer): struct_miqt_map {.cdecl.} =
+proc fcQConcatenateTablesProxyModel_method_callback_itemData(self: pointer, proxyIndex: pointer): struct_miqt_map {.cdecl.} =
   let inst = cast[VirtualQConcatenateTablesProxyModel](fcQConcatenateTablesProxyModel_vdata(self))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: proxyIndex, owned: false)
   var virtualReturn = inst.itemData(slotval1)
@@ -1136,9 +1218,7 @@ proc cQConcatenateTablesProxyModel_method_callback_itemData(self: pointer, proxy
 
   struct_miqt_map(len: csize_t(len(virtualReturn)),keys: if len(virtualReturn) == 0: nil else: addr(virtualReturn_Keys_CArray[0]), values: if len(virtualReturn) == 0: nil else: addr(virtualReturn_Values_CArray[0]),)
 
-method setItemData*(self: VirtualQConcatenateTablesProxyModel, index: gen_qabstractitemmodel_types.QModelIndex, roles: Table[cint,gen_qvariant_types.QVariant]): bool {.base.} =
-  QConcatenateTablesProxyModelsetItemData(self[], index, roles)
-proc cQConcatenateTablesProxyModel_method_callback_setItemData(self: pointer, index: pointer, roles: struct_miqt_map): bool {.cdecl.} =
+proc fcQConcatenateTablesProxyModel_method_callback_setItemData(self: pointer, index: pointer, roles: struct_miqt_map): bool {.cdecl.} =
   let inst = cast[VirtualQConcatenateTablesProxyModel](fcQConcatenateTablesProxyModel_vdata(self))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var vroles_mm = roles
@@ -1157,17 +1237,13 @@ proc cQConcatenateTablesProxyModel_method_callback_setItemData(self: pointer, in
   var virtualReturn = inst.setItemData(slotval1, slotval2)
   virtualReturn
 
-method flags*(self: VirtualQConcatenateTablesProxyModel, index: gen_qabstractitemmodel_types.QModelIndex): cint {.base.} =
-  QConcatenateTablesProxyModelflags(self[], index)
-proc cQConcatenateTablesProxyModel_method_callback_flags(self: pointer, index: pointer): cint {.cdecl.} =
+proc fcQConcatenateTablesProxyModel_method_callback_flags(self: pointer, index: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQConcatenateTablesProxyModel](fcQConcatenateTablesProxyModel_vdata(self))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var virtualReturn = inst.flags(slotval1)
   cint(virtualReturn)
 
-method index*(self: VirtualQConcatenateTablesProxyModel, row: cint, column: cint, parent: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex {.base.} =
-  QConcatenateTablesProxyModelindex(self[], row, column, parent)
-proc cQConcatenateTablesProxyModel_method_callback_index(self: pointer, row: cint, column: cint, parent: pointer): pointer {.cdecl.} =
+proc fcQConcatenateTablesProxyModel_method_callback_index(self: pointer, row: cint, column: cint, parent: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQConcatenateTablesProxyModel](fcQConcatenateTablesProxyModel_vdata(self))
   let slotval1 = row
   let slotval2 = column
@@ -1178,9 +1254,7 @@ proc cQConcatenateTablesProxyModel_method_callback_index(self: pointer, row: cin
   virtualReturn.h = nil
   virtualReturn_h
 
-method parent*(self: VirtualQConcatenateTablesProxyModel, index: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex {.base.} =
-  QConcatenateTablesProxyModelparent(self[], index)
-proc cQConcatenateTablesProxyModel_method_callback_parent(self: pointer, index: pointer): pointer {.cdecl.} =
+proc fcQConcatenateTablesProxyModel_method_callback_parent(self: pointer, index: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQConcatenateTablesProxyModel](fcQConcatenateTablesProxyModel_vdata(self))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var virtualReturn = inst.parent(slotval1)
@@ -1189,17 +1263,13 @@ proc cQConcatenateTablesProxyModel_method_callback_parent(self: pointer, index: 
   virtualReturn.h = nil
   virtualReturn_h
 
-method rowCount*(self: VirtualQConcatenateTablesProxyModel, parent: gen_qabstractitemmodel_types.QModelIndex): cint {.base.} =
-  QConcatenateTablesProxyModelrowCount(self[], parent)
-proc cQConcatenateTablesProxyModel_method_callback_rowCount(self: pointer, parent: pointer): cint {.cdecl.} =
+proc fcQConcatenateTablesProxyModel_method_callback_rowCount(self: pointer, parent: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQConcatenateTablesProxyModel](fcQConcatenateTablesProxyModel_vdata(self))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   var virtualReturn = inst.rowCount(slotval1)
   virtualReturn
 
-method headerData*(self: VirtualQConcatenateTablesProxyModel, section: cint, orientation: cint, role: cint): gen_qvariant_types.QVariant {.base.} =
-  QConcatenateTablesProxyModelheaderData(self[], section, orientation, role)
-proc cQConcatenateTablesProxyModel_method_callback_headerData(self: pointer, section: cint, orientation: cint, role: cint): pointer {.cdecl.} =
+proc fcQConcatenateTablesProxyModel_method_callback_headerData(self: pointer, section: cint, orientation: cint, role: cint): pointer {.cdecl.} =
   let inst = cast[VirtualQConcatenateTablesProxyModel](fcQConcatenateTablesProxyModel_vdata(self))
   let slotval1 = section
   let slotval2 = cint(orientation)
@@ -1210,17 +1280,13 @@ proc cQConcatenateTablesProxyModel_method_callback_headerData(self: pointer, sec
   virtualReturn.h = nil
   virtualReturn_h
 
-method columnCount*(self: VirtualQConcatenateTablesProxyModel, parent: gen_qabstractitemmodel_types.QModelIndex): cint {.base.} =
-  QConcatenateTablesProxyModelcolumnCount(self[], parent)
-proc cQConcatenateTablesProxyModel_method_callback_columnCount(self: pointer, parent: pointer): cint {.cdecl.} =
+proc fcQConcatenateTablesProxyModel_method_callback_columnCount(self: pointer, parent: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQConcatenateTablesProxyModel](fcQConcatenateTablesProxyModel_vdata(self))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   var virtualReturn = inst.columnCount(slotval1)
   virtualReturn
 
-method mimeTypes*(self: VirtualQConcatenateTablesProxyModel): seq[string] {.base.} =
-  QConcatenateTablesProxyModelmimeTypes(self[])
-proc cQConcatenateTablesProxyModel_method_callback_mimeTypes(self: pointer): struct_miqt_array {.cdecl.} =
+proc fcQConcatenateTablesProxyModel_method_callback_mimeTypes(self: pointer): struct_miqt_array {.cdecl.} =
   let inst = cast[VirtualQConcatenateTablesProxyModel](fcQConcatenateTablesProxyModel_vdata(self))
   var virtualReturn = inst.mimeTypes()
   var virtualReturn_CArray = cast[ptr UncheckedArray[struct_miqt_string]](if len(virtualReturn) > 0: c_malloc(c_sizet(sizeof(struct_miqt_string) * len(virtualReturn))) else: nil)
@@ -1231,9 +1297,7 @@ proc cQConcatenateTablesProxyModel_method_callback_mimeTypes(self: pointer): str
 
   struct_miqt_array(len: csize_t(len(virtualReturn)), data: if len(virtualReturn) == 0: nil else: addr(virtualReturn_CArray[0]))
 
-method mimeData*(self: VirtualQConcatenateTablesProxyModel, indexes: openArray[gen_qabstractitemmodel_types.QModelIndex]): gen_qmimedata_types.QMimeData {.base.} =
-  QConcatenateTablesProxyModelmimeData(self[], indexes)
-proc cQConcatenateTablesProxyModel_method_callback_mimeData(self: pointer, indexes: struct_miqt_array): pointer {.cdecl.} =
+proc fcQConcatenateTablesProxyModel_method_callback_mimeData(self: pointer, indexes: struct_miqt_array): pointer {.cdecl.} =
   let inst = cast[VirtualQConcatenateTablesProxyModel](fcQConcatenateTablesProxyModel_vdata(self))
   var vindexes_ma = indexes
   var vindexesx_ret = newSeq[gen_qabstractitemmodel_types.QModelIndex](int(vindexes_ma.len))
@@ -1248,9 +1312,7 @@ proc cQConcatenateTablesProxyModel_method_callback_mimeData(self: pointer, index
   virtualReturn.h = nil
   virtualReturn_h
 
-method canDropMimeData*(self: VirtualQConcatenateTablesProxyModel, data: gen_qmimedata_types.QMimeData, action: cint, row: cint, column: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool {.base.} =
-  QConcatenateTablesProxyModelcanDropMimeData(self[], data, action, row, column, parent)
-proc cQConcatenateTablesProxyModel_method_callback_canDropMimeData(self: pointer, data: pointer, action: cint, row: cint, column: cint, parent: pointer): bool {.cdecl.} =
+proc fcQConcatenateTablesProxyModel_method_callback_canDropMimeData(self: pointer, data: pointer, action: cint, row: cint, column: cint, parent: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQConcatenateTablesProxyModel](fcQConcatenateTablesProxyModel_vdata(self))
   let slotval1 = gen_qmimedata_types.QMimeData(h: data, owned: false)
   let slotval2 = cint(action)
@@ -1260,9 +1322,7 @@ proc cQConcatenateTablesProxyModel_method_callback_canDropMimeData(self: pointer
   var virtualReturn = inst.canDropMimeData(slotval1, slotval2, slotval3, slotval4, slotval5)
   virtualReturn
 
-method dropMimeData*(self: VirtualQConcatenateTablesProxyModel, data: gen_qmimedata_types.QMimeData, action: cint, row: cint, column: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool {.base.} =
-  QConcatenateTablesProxyModeldropMimeData(self[], data, action, row, column, parent)
-proc cQConcatenateTablesProxyModel_method_callback_dropMimeData(self: pointer, data: pointer, action: cint, row: cint, column: cint, parent: pointer): bool {.cdecl.} =
+proc fcQConcatenateTablesProxyModel_method_callback_dropMimeData(self: pointer, data: pointer, action: cint, row: cint, column: cint, parent: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQConcatenateTablesProxyModel](fcQConcatenateTablesProxyModel_vdata(self))
   let slotval1 = gen_qmimedata_types.QMimeData(h: data, owned: false)
   let slotval2 = cint(action)
@@ -1272,9 +1332,7 @@ proc cQConcatenateTablesProxyModel_method_callback_dropMimeData(self: pointer, d
   var virtualReturn = inst.dropMimeData(slotval1, slotval2, slotval3, slotval4, slotval5)
   virtualReturn
 
-method span*(self: VirtualQConcatenateTablesProxyModel, index: gen_qabstractitemmodel_types.QModelIndex): gen_qsize_types.QSize {.base.} =
-  QConcatenateTablesProxyModelspan(self[], index)
-proc cQConcatenateTablesProxyModel_method_callback_span(self: pointer, index: pointer): pointer {.cdecl.} =
+proc fcQConcatenateTablesProxyModel_method_callback_span(self: pointer, index: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQConcatenateTablesProxyModel](fcQConcatenateTablesProxyModel_vdata(self))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var virtualReturn = inst.span(slotval1)
@@ -1283,9 +1341,7 @@ proc cQConcatenateTablesProxyModel_method_callback_span(self: pointer, index: po
   virtualReturn.h = nil
   virtualReturn_h
 
-method sibling*(self: VirtualQConcatenateTablesProxyModel, row: cint, column: cint, idx: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex {.base.} =
-  QConcatenateTablesProxyModelsibling(self[], row, column, idx)
-proc cQConcatenateTablesProxyModel_method_callback_sibling(self: pointer, row: cint, column: cint, idx: pointer): pointer {.cdecl.} =
+proc fcQConcatenateTablesProxyModel_method_callback_sibling(self: pointer, row: cint, column: cint, idx: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQConcatenateTablesProxyModel](fcQConcatenateTablesProxyModel_vdata(self))
   let slotval1 = row
   let slotval2 = column
@@ -1296,17 +1352,13 @@ proc cQConcatenateTablesProxyModel_method_callback_sibling(self: pointer, row: c
   virtualReturn.h = nil
   virtualReturn_h
 
-method hasChildren*(self: VirtualQConcatenateTablesProxyModel, parent: gen_qabstractitemmodel_types.QModelIndex): bool {.base.} =
-  QConcatenateTablesProxyModelhasChildren(self[], parent)
-proc cQConcatenateTablesProxyModel_method_callback_hasChildren(self: pointer, parent: pointer): bool {.cdecl.} =
+proc fcQConcatenateTablesProxyModel_method_callback_hasChildren(self: pointer, parent: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQConcatenateTablesProxyModel](fcQConcatenateTablesProxyModel_vdata(self))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   var virtualReturn = inst.hasChildren(slotval1)
   virtualReturn
 
-method setHeaderData*(self: VirtualQConcatenateTablesProxyModel, section: cint, orientation: cint, value: gen_qvariant_types.QVariant, role: cint): bool {.base.} =
-  QConcatenateTablesProxyModelsetHeaderData(self[], section, orientation, value, role)
-proc cQConcatenateTablesProxyModel_method_callback_setHeaderData(self: pointer, section: cint, orientation: cint, value: pointer, role: cint): bool {.cdecl.} =
+proc fcQConcatenateTablesProxyModel_method_callback_setHeaderData(self: pointer, section: cint, orientation: cint, value: pointer, role: cint): bool {.cdecl.} =
   let inst = cast[VirtualQConcatenateTablesProxyModel](fcQConcatenateTablesProxyModel_vdata(self))
   let slotval1 = section
   let slotval2 = cint(orientation)
@@ -1315,23 +1367,17 @@ proc cQConcatenateTablesProxyModel_method_callback_setHeaderData(self: pointer, 
   var virtualReturn = inst.setHeaderData(slotval1, slotval2, slotval3, slotval4)
   virtualReturn
 
-method supportedDropActions*(self: VirtualQConcatenateTablesProxyModel): cint {.base.} =
-  QConcatenateTablesProxyModelsupportedDropActions(self[])
-proc cQConcatenateTablesProxyModel_method_callback_supportedDropActions(self: pointer): cint {.cdecl.} =
+proc fcQConcatenateTablesProxyModel_method_callback_supportedDropActions(self: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQConcatenateTablesProxyModel](fcQConcatenateTablesProxyModel_vdata(self))
   var virtualReturn = inst.supportedDropActions()
   cint(virtualReturn)
 
-method supportedDragActions*(self: VirtualQConcatenateTablesProxyModel): cint {.base.} =
-  QConcatenateTablesProxyModelsupportedDragActions(self[])
-proc cQConcatenateTablesProxyModel_method_callback_supportedDragActions(self: pointer): cint {.cdecl.} =
+proc fcQConcatenateTablesProxyModel_method_callback_supportedDragActions(self: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQConcatenateTablesProxyModel](fcQConcatenateTablesProxyModel_vdata(self))
   var virtualReturn = inst.supportedDragActions()
   cint(virtualReturn)
 
-method insertRows*(self: VirtualQConcatenateTablesProxyModel, row: cint, count: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool {.base.} =
-  QConcatenateTablesProxyModelinsertRows(self[], row, count, parent)
-proc cQConcatenateTablesProxyModel_method_callback_insertRows(self: pointer, row: cint, count: cint, parent: pointer): bool {.cdecl.} =
+proc fcQConcatenateTablesProxyModel_method_callback_insertRows(self: pointer, row: cint, count: cint, parent: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQConcatenateTablesProxyModel](fcQConcatenateTablesProxyModel_vdata(self))
   let slotval1 = row
   let slotval2 = count
@@ -1339,9 +1385,7 @@ proc cQConcatenateTablesProxyModel_method_callback_insertRows(self: pointer, row
   var virtualReturn = inst.insertRows(slotval1, slotval2, slotval3)
   virtualReturn
 
-method insertColumns*(self: VirtualQConcatenateTablesProxyModel, column: cint, count: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool {.base.} =
-  QConcatenateTablesProxyModelinsertColumns(self[], column, count, parent)
-proc cQConcatenateTablesProxyModel_method_callback_insertColumns(self: pointer, column: cint, count: cint, parent: pointer): bool {.cdecl.} =
+proc fcQConcatenateTablesProxyModel_method_callback_insertColumns(self: pointer, column: cint, count: cint, parent: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQConcatenateTablesProxyModel](fcQConcatenateTablesProxyModel_vdata(self))
   let slotval1 = column
   let slotval2 = count
@@ -1349,9 +1393,7 @@ proc cQConcatenateTablesProxyModel_method_callback_insertColumns(self: pointer, 
   var virtualReturn = inst.insertColumns(slotval1, slotval2, slotval3)
   virtualReturn
 
-method removeRows*(self: VirtualQConcatenateTablesProxyModel, row: cint, count: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool {.base.} =
-  QConcatenateTablesProxyModelremoveRows(self[], row, count, parent)
-proc cQConcatenateTablesProxyModel_method_callback_removeRows(self: pointer, row: cint, count: cint, parent: pointer): bool {.cdecl.} =
+proc fcQConcatenateTablesProxyModel_method_callback_removeRows(self: pointer, row: cint, count: cint, parent: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQConcatenateTablesProxyModel](fcQConcatenateTablesProxyModel_vdata(self))
   let slotval1 = row
   let slotval2 = count
@@ -1359,9 +1401,7 @@ proc cQConcatenateTablesProxyModel_method_callback_removeRows(self: pointer, row
   var virtualReturn = inst.removeRows(slotval1, slotval2, slotval3)
   virtualReturn
 
-method removeColumns*(self: VirtualQConcatenateTablesProxyModel, column: cint, count: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool {.base.} =
-  QConcatenateTablesProxyModelremoveColumns(self[], column, count, parent)
-proc cQConcatenateTablesProxyModel_method_callback_removeColumns(self: pointer, column: cint, count: cint, parent: pointer): bool {.cdecl.} =
+proc fcQConcatenateTablesProxyModel_method_callback_removeColumns(self: pointer, column: cint, count: cint, parent: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQConcatenateTablesProxyModel](fcQConcatenateTablesProxyModel_vdata(self))
   let slotval1 = column
   let slotval2 = count
@@ -1369,9 +1409,7 @@ proc cQConcatenateTablesProxyModel_method_callback_removeColumns(self: pointer, 
   var virtualReturn = inst.removeColumns(slotval1, slotval2, slotval3)
   virtualReturn
 
-method moveRows*(self: VirtualQConcatenateTablesProxyModel, sourceParent: gen_qabstractitemmodel_types.QModelIndex, sourceRow: cint, count: cint, destinationParent: gen_qabstractitemmodel_types.QModelIndex, destinationChild: cint): bool {.base.} =
-  QConcatenateTablesProxyModelmoveRows(self[], sourceParent, sourceRow, count, destinationParent, destinationChild)
-proc cQConcatenateTablesProxyModel_method_callback_moveRows(self: pointer, sourceParent: pointer, sourceRow: cint, count: cint, destinationParent: pointer, destinationChild: cint): bool {.cdecl.} =
+proc fcQConcatenateTablesProxyModel_method_callback_moveRows(self: pointer, sourceParent: pointer, sourceRow: cint, count: cint, destinationParent: pointer, destinationChild: cint): bool {.cdecl.} =
   let inst = cast[VirtualQConcatenateTablesProxyModel](fcQConcatenateTablesProxyModel_vdata(self))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: sourceParent, owned: false)
   let slotval2 = sourceRow
@@ -1381,9 +1419,7 @@ proc cQConcatenateTablesProxyModel_method_callback_moveRows(self: pointer, sourc
   var virtualReturn = inst.moveRows(slotval1, slotval2, slotval3, slotval4, slotval5)
   virtualReturn
 
-method moveColumns*(self: VirtualQConcatenateTablesProxyModel, sourceParent: gen_qabstractitemmodel_types.QModelIndex, sourceColumn: cint, count: cint, destinationParent: gen_qabstractitemmodel_types.QModelIndex, destinationChild: cint): bool {.base.} =
-  QConcatenateTablesProxyModelmoveColumns(self[], sourceParent, sourceColumn, count, destinationParent, destinationChild)
-proc cQConcatenateTablesProxyModel_method_callback_moveColumns(self: pointer, sourceParent: pointer, sourceColumn: cint, count: cint, destinationParent: pointer, destinationChild: cint): bool {.cdecl.} =
+proc fcQConcatenateTablesProxyModel_method_callback_moveColumns(self: pointer, sourceParent: pointer, sourceColumn: cint, count: cint, destinationParent: pointer, destinationChild: cint): bool {.cdecl.} =
   let inst = cast[VirtualQConcatenateTablesProxyModel](fcQConcatenateTablesProxyModel_vdata(self))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: sourceParent, owned: false)
   let slotval2 = sourceColumn
@@ -1393,32 +1429,24 @@ proc cQConcatenateTablesProxyModel_method_callback_moveColumns(self: pointer, so
   var virtualReturn = inst.moveColumns(slotval1, slotval2, slotval3, slotval4, slotval5)
   virtualReturn
 
-method fetchMore*(self: VirtualQConcatenateTablesProxyModel, parent: gen_qabstractitemmodel_types.QModelIndex): void {.base.} =
-  QConcatenateTablesProxyModelfetchMore(self[], parent)
-proc cQConcatenateTablesProxyModel_method_callback_fetchMore(self: pointer, parent: pointer): void {.cdecl.} =
+proc fcQConcatenateTablesProxyModel_method_callback_fetchMore(self: pointer, parent: pointer): void {.cdecl.} =
   let inst = cast[VirtualQConcatenateTablesProxyModel](fcQConcatenateTablesProxyModel_vdata(self))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   inst.fetchMore(slotval1)
 
-method canFetchMore*(self: VirtualQConcatenateTablesProxyModel, parent: gen_qabstractitemmodel_types.QModelIndex): bool {.base.} =
-  QConcatenateTablesProxyModelcanFetchMore(self[], parent)
-proc cQConcatenateTablesProxyModel_method_callback_canFetchMore(self: pointer, parent: pointer): bool {.cdecl.} =
+proc fcQConcatenateTablesProxyModel_method_callback_canFetchMore(self: pointer, parent: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQConcatenateTablesProxyModel](fcQConcatenateTablesProxyModel_vdata(self))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   var virtualReturn = inst.canFetchMore(slotval1)
   virtualReturn
 
-method sort*(self: VirtualQConcatenateTablesProxyModel, column: cint, order: cint): void {.base.} =
-  QConcatenateTablesProxyModelsort(self[], column, order)
-proc cQConcatenateTablesProxyModel_method_callback_sort(self: pointer, column: cint, order: cint): void {.cdecl.} =
+proc fcQConcatenateTablesProxyModel_method_callback_sort(self: pointer, column: cint, order: cint): void {.cdecl.} =
   let inst = cast[VirtualQConcatenateTablesProxyModel](fcQConcatenateTablesProxyModel_vdata(self))
   let slotval1 = column
   let slotval2 = cint(order)
   inst.sort(slotval1, slotval2)
 
-method buddy*(self: VirtualQConcatenateTablesProxyModel, index: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex {.base.} =
-  QConcatenateTablesProxyModelbuddy(self[], index)
-proc cQConcatenateTablesProxyModel_method_callback_buddy(self: pointer, index: pointer): pointer {.cdecl.} =
+proc fcQConcatenateTablesProxyModel_method_callback_buddy(self: pointer, index: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQConcatenateTablesProxyModel](fcQConcatenateTablesProxyModel_vdata(self))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var virtualReturn = inst.buddy(slotval1)
@@ -1427,9 +1455,7 @@ proc cQConcatenateTablesProxyModel_method_callback_buddy(self: pointer, index: p
   virtualReturn.h = nil
   virtualReturn_h
 
-method match*(self: VirtualQConcatenateTablesProxyModel, start: gen_qabstractitemmodel_types.QModelIndex, role: cint, value: gen_qvariant_types.QVariant, hits: cint, flags: cint): seq[gen_qabstractitemmodel_types.QModelIndex] {.base.} =
-  QConcatenateTablesProxyModelmatch(self[], start, role, value, hits, flags)
-proc cQConcatenateTablesProxyModel_method_callback_match(self: pointer, start: pointer, role: cint, value: pointer, hits: cint, flags: cint): struct_miqt_array {.cdecl.} =
+proc fcQConcatenateTablesProxyModel_method_callback_match(self: pointer, start: pointer, role: cint, value: pointer, hits: cint, flags: cint): struct_miqt_array {.cdecl.} =
   let inst = cast[VirtualQConcatenateTablesProxyModel](fcQConcatenateTablesProxyModel_vdata(self))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: start, owned: false)
   let slotval2 = role
@@ -1446,9 +1472,7 @@ proc cQConcatenateTablesProxyModel_method_callback_match(self: pointer, start: p
 
   struct_miqt_array(len: csize_t(len(virtualReturn)), data: if len(virtualReturn) == 0: nil else: addr(virtualReturn_CArray[0]))
 
-method roleNames*(self: VirtualQConcatenateTablesProxyModel): Table[cint,seq[byte]] {.base.} =
-  QConcatenateTablesProxyModelroleNames(self[])
-proc cQConcatenateTablesProxyModel_method_callback_roleNames(self: pointer): struct_miqt_map {.cdecl.} =
+proc fcQConcatenateTablesProxyModel_method_callback_roleNames(self: pointer): struct_miqt_map {.cdecl.} =
   let inst = cast[VirtualQConcatenateTablesProxyModel](fcQConcatenateTablesProxyModel_vdata(self))
   var virtualReturn = inst.roleNames()
   var virtualReturn_Keys_CArray = cast[ptr UncheckedArray[cint]](if len(virtualReturn) > 0: c_malloc(csize_t(sizeof(cint) * len(virtualReturn))) else: nil)
@@ -1466,70 +1490,53 @@ proc cQConcatenateTablesProxyModel_method_callback_roleNames(self: pointer): str
 
   struct_miqt_map(len: csize_t(len(virtualReturn)),keys: if len(virtualReturn) == 0: nil else: addr(virtualReturn_Keys_CArray[0]), values: if len(virtualReturn) == 0: nil else: addr(virtualReturn_Values_CArray[0]),)
 
-method submit*(self: VirtualQConcatenateTablesProxyModel): bool {.base.} =
-  QConcatenateTablesProxyModelsubmit(self[])
-proc cQConcatenateTablesProxyModel_method_callback_submit(self: pointer): bool {.cdecl.} =
+proc fcQConcatenateTablesProxyModel_method_callback_submit(self: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQConcatenateTablesProxyModel](fcQConcatenateTablesProxyModel_vdata(self))
   var virtualReturn = inst.submit()
   virtualReturn
 
-method revert*(self: VirtualQConcatenateTablesProxyModel): void {.base.} =
-  QConcatenateTablesProxyModelrevert(self[])
-proc cQConcatenateTablesProxyModel_method_callback_revert(self: pointer): void {.cdecl.} =
+proc fcQConcatenateTablesProxyModel_method_callback_revert(self: pointer): void {.cdecl.} =
   let inst = cast[VirtualQConcatenateTablesProxyModel](fcQConcatenateTablesProxyModel_vdata(self))
   inst.revert()
 
-method event*(self: VirtualQConcatenateTablesProxyModel, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QConcatenateTablesProxyModelevent(self[], event)
-proc cQConcatenateTablesProxyModel_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
+proc fcQConcatenateTablesProxyModel_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQConcatenateTablesProxyModel](fcQConcatenateTablesProxyModel_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
-method eventFilter*(self: VirtualQConcatenateTablesProxyModel, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QConcatenateTablesProxyModeleventFilter(self[], watched, event)
-proc cQConcatenateTablesProxyModel_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+proc fcQConcatenateTablesProxyModel_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQConcatenateTablesProxyModel](fcQConcatenateTablesProxyModel_vdata(self))
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
   let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
-method timerEvent*(self: VirtualQConcatenateTablesProxyModel, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
-  QConcatenateTablesProxyModeltimerEvent(self[], event)
-proc cQConcatenateTablesProxyModel_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQConcatenateTablesProxyModel_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQConcatenateTablesProxyModel](fcQConcatenateTablesProxyModel_vdata(self))
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
-method childEvent*(self: VirtualQConcatenateTablesProxyModel, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
-  QConcatenateTablesProxyModelchildEvent(self[], event)
-proc cQConcatenateTablesProxyModel_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQConcatenateTablesProxyModel_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQConcatenateTablesProxyModel](fcQConcatenateTablesProxyModel_vdata(self))
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
-method customEvent*(self: VirtualQConcatenateTablesProxyModel, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QConcatenateTablesProxyModelcustomEvent(self[], event)
-proc cQConcatenateTablesProxyModel_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQConcatenateTablesProxyModel_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQConcatenateTablesProxyModel](fcQConcatenateTablesProxyModel_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
-method connectNotify*(self: VirtualQConcatenateTablesProxyModel, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QConcatenateTablesProxyModelconnectNotify(self[], signal)
-proc cQConcatenateTablesProxyModel_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQConcatenateTablesProxyModel_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQConcatenateTablesProxyModel](fcQConcatenateTablesProxyModel_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
-method disconnectNotify*(self: VirtualQConcatenateTablesProxyModel, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QConcatenateTablesProxyModeldisconnectNotify(self[], signal)
-proc cQConcatenateTablesProxyModel_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQConcatenateTablesProxyModel_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQConcatenateTablesProxyModel](fcQConcatenateTablesProxyModel_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
+
 
 proc resetInternalData*(self: gen_qconcatenatetablesproxymodel_types.QConcatenateTablesProxyModel): void =
   fcQConcatenateTablesProxyModel_protectedbase_resetInternalData(self.h)
@@ -1632,93 +1639,93 @@ proc create*(T: type gen_qconcatenatetablesproxymodel_types.QConcatenateTablesPr
     let vtbl = cast[ref QConcatenateTablesProxyModelVTable](fcQConcatenateTablesProxyModel_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQConcatenateTablesProxyModel_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQConcatenateTablesProxyModel_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQConcatenateTablesProxyModel_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQConcatenateTablesProxyModel_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQConcatenateTablesProxyModel_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQConcatenateTablesProxyModel_vtable_callback_metacall
   if not isNil(vtbl[].data):
-    vtbl[].vtbl.data = cQConcatenateTablesProxyModel_vtable_callback_data
+    vtbl[].vtbl.data = fcQConcatenateTablesProxyModel_vtable_callback_data
   if not isNil(vtbl[].setData):
-    vtbl[].vtbl.setData = cQConcatenateTablesProxyModel_vtable_callback_setData
+    vtbl[].vtbl.setData = fcQConcatenateTablesProxyModel_vtable_callback_setData
   if not isNil(vtbl[].itemData):
-    vtbl[].vtbl.itemData = cQConcatenateTablesProxyModel_vtable_callback_itemData
+    vtbl[].vtbl.itemData = fcQConcatenateTablesProxyModel_vtable_callback_itemData
   if not isNil(vtbl[].setItemData):
-    vtbl[].vtbl.setItemData = cQConcatenateTablesProxyModel_vtable_callback_setItemData
+    vtbl[].vtbl.setItemData = fcQConcatenateTablesProxyModel_vtable_callback_setItemData
   if not isNil(vtbl[].flags):
-    vtbl[].vtbl.flags = cQConcatenateTablesProxyModel_vtable_callback_flags
+    vtbl[].vtbl.flags = fcQConcatenateTablesProxyModel_vtable_callback_flags
   if not isNil(vtbl[].index):
-    vtbl[].vtbl.index = cQConcatenateTablesProxyModel_vtable_callback_index
+    vtbl[].vtbl.index = fcQConcatenateTablesProxyModel_vtable_callback_index
   if not isNil(vtbl[].parent):
-    vtbl[].vtbl.parent = cQConcatenateTablesProxyModel_vtable_callback_parent
+    vtbl[].vtbl.parent = fcQConcatenateTablesProxyModel_vtable_callback_parent
   if not isNil(vtbl[].rowCount):
-    vtbl[].vtbl.rowCount = cQConcatenateTablesProxyModel_vtable_callback_rowCount
+    vtbl[].vtbl.rowCount = fcQConcatenateTablesProxyModel_vtable_callback_rowCount
   if not isNil(vtbl[].headerData):
-    vtbl[].vtbl.headerData = cQConcatenateTablesProxyModel_vtable_callback_headerData
+    vtbl[].vtbl.headerData = fcQConcatenateTablesProxyModel_vtable_callback_headerData
   if not isNil(vtbl[].columnCount):
-    vtbl[].vtbl.columnCount = cQConcatenateTablesProxyModel_vtable_callback_columnCount
+    vtbl[].vtbl.columnCount = fcQConcatenateTablesProxyModel_vtable_callback_columnCount
   if not isNil(vtbl[].mimeTypes):
-    vtbl[].vtbl.mimeTypes = cQConcatenateTablesProxyModel_vtable_callback_mimeTypes
+    vtbl[].vtbl.mimeTypes = fcQConcatenateTablesProxyModel_vtable_callback_mimeTypes
   if not isNil(vtbl[].mimeData):
-    vtbl[].vtbl.mimeData = cQConcatenateTablesProxyModel_vtable_callback_mimeData
+    vtbl[].vtbl.mimeData = fcQConcatenateTablesProxyModel_vtable_callback_mimeData
   if not isNil(vtbl[].canDropMimeData):
-    vtbl[].vtbl.canDropMimeData = cQConcatenateTablesProxyModel_vtable_callback_canDropMimeData
+    vtbl[].vtbl.canDropMimeData = fcQConcatenateTablesProxyModel_vtable_callback_canDropMimeData
   if not isNil(vtbl[].dropMimeData):
-    vtbl[].vtbl.dropMimeData = cQConcatenateTablesProxyModel_vtable_callback_dropMimeData
+    vtbl[].vtbl.dropMimeData = fcQConcatenateTablesProxyModel_vtable_callback_dropMimeData
   if not isNil(vtbl[].span):
-    vtbl[].vtbl.span = cQConcatenateTablesProxyModel_vtable_callback_span
+    vtbl[].vtbl.span = fcQConcatenateTablesProxyModel_vtable_callback_span
   if not isNil(vtbl[].sibling):
-    vtbl[].vtbl.sibling = cQConcatenateTablesProxyModel_vtable_callback_sibling
+    vtbl[].vtbl.sibling = fcQConcatenateTablesProxyModel_vtable_callback_sibling
   if not isNil(vtbl[].hasChildren):
-    vtbl[].vtbl.hasChildren = cQConcatenateTablesProxyModel_vtable_callback_hasChildren
+    vtbl[].vtbl.hasChildren = fcQConcatenateTablesProxyModel_vtable_callback_hasChildren
   if not isNil(vtbl[].setHeaderData):
-    vtbl[].vtbl.setHeaderData = cQConcatenateTablesProxyModel_vtable_callback_setHeaderData
+    vtbl[].vtbl.setHeaderData = fcQConcatenateTablesProxyModel_vtable_callback_setHeaderData
   if not isNil(vtbl[].supportedDropActions):
-    vtbl[].vtbl.supportedDropActions = cQConcatenateTablesProxyModel_vtable_callback_supportedDropActions
+    vtbl[].vtbl.supportedDropActions = fcQConcatenateTablesProxyModel_vtable_callback_supportedDropActions
   if not isNil(vtbl[].supportedDragActions):
-    vtbl[].vtbl.supportedDragActions = cQConcatenateTablesProxyModel_vtable_callback_supportedDragActions
+    vtbl[].vtbl.supportedDragActions = fcQConcatenateTablesProxyModel_vtable_callback_supportedDragActions
   if not isNil(vtbl[].insertRows):
-    vtbl[].vtbl.insertRows = cQConcatenateTablesProxyModel_vtable_callback_insertRows
+    vtbl[].vtbl.insertRows = fcQConcatenateTablesProxyModel_vtable_callback_insertRows
   if not isNil(vtbl[].insertColumns):
-    vtbl[].vtbl.insertColumns = cQConcatenateTablesProxyModel_vtable_callback_insertColumns
+    vtbl[].vtbl.insertColumns = fcQConcatenateTablesProxyModel_vtable_callback_insertColumns
   if not isNil(vtbl[].removeRows):
-    vtbl[].vtbl.removeRows = cQConcatenateTablesProxyModel_vtable_callback_removeRows
+    vtbl[].vtbl.removeRows = fcQConcatenateTablesProxyModel_vtable_callback_removeRows
   if not isNil(vtbl[].removeColumns):
-    vtbl[].vtbl.removeColumns = cQConcatenateTablesProxyModel_vtable_callback_removeColumns
+    vtbl[].vtbl.removeColumns = fcQConcatenateTablesProxyModel_vtable_callback_removeColumns
   if not isNil(vtbl[].moveRows):
-    vtbl[].vtbl.moveRows = cQConcatenateTablesProxyModel_vtable_callback_moveRows
+    vtbl[].vtbl.moveRows = fcQConcatenateTablesProxyModel_vtable_callback_moveRows
   if not isNil(vtbl[].moveColumns):
-    vtbl[].vtbl.moveColumns = cQConcatenateTablesProxyModel_vtable_callback_moveColumns
+    vtbl[].vtbl.moveColumns = fcQConcatenateTablesProxyModel_vtable_callback_moveColumns
   if not isNil(vtbl[].fetchMore):
-    vtbl[].vtbl.fetchMore = cQConcatenateTablesProxyModel_vtable_callback_fetchMore
+    vtbl[].vtbl.fetchMore = fcQConcatenateTablesProxyModel_vtable_callback_fetchMore
   if not isNil(vtbl[].canFetchMore):
-    vtbl[].vtbl.canFetchMore = cQConcatenateTablesProxyModel_vtable_callback_canFetchMore
+    vtbl[].vtbl.canFetchMore = fcQConcatenateTablesProxyModel_vtable_callback_canFetchMore
   if not isNil(vtbl[].sort):
-    vtbl[].vtbl.sort = cQConcatenateTablesProxyModel_vtable_callback_sort
+    vtbl[].vtbl.sort = fcQConcatenateTablesProxyModel_vtable_callback_sort
   if not isNil(vtbl[].buddy):
-    vtbl[].vtbl.buddy = cQConcatenateTablesProxyModel_vtable_callback_buddy
+    vtbl[].vtbl.buddy = fcQConcatenateTablesProxyModel_vtable_callback_buddy
   if not isNil(vtbl[].match):
-    vtbl[].vtbl.match = cQConcatenateTablesProxyModel_vtable_callback_match
+    vtbl[].vtbl.match = fcQConcatenateTablesProxyModel_vtable_callback_match
   if not isNil(vtbl[].roleNames):
-    vtbl[].vtbl.roleNames = cQConcatenateTablesProxyModel_vtable_callback_roleNames
+    vtbl[].vtbl.roleNames = fcQConcatenateTablesProxyModel_vtable_callback_roleNames
   if not isNil(vtbl[].submit):
-    vtbl[].vtbl.submit = cQConcatenateTablesProxyModel_vtable_callback_submit
+    vtbl[].vtbl.submit = fcQConcatenateTablesProxyModel_vtable_callback_submit
   if not isNil(vtbl[].revert):
-    vtbl[].vtbl.revert = cQConcatenateTablesProxyModel_vtable_callback_revert
+    vtbl[].vtbl.revert = fcQConcatenateTablesProxyModel_vtable_callback_revert
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQConcatenateTablesProxyModel_vtable_callback_event
+    vtbl[].vtbl.event = fcQConcatenateTablesProxyModel_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQConcatenateTablesProxyModel_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQConcatenateTablesProxyModel_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQConcatenateTablesProxyModel_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQConcatenateTablesProxyModel_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQConcatenateTablesProxyModel_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQConcatenateTablesProxyModel_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQConcatenateTablesProxyModel_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQConcatenateTablesProxyModel_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQConcatenateTablesProxyModel_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQConcatenateTablesProxyModel_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQConcatenateTablesProxyModel_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQConcatenateTablesProxyModel_vtable_callback_disconnectNotify
   gen_qconcatenatetablesproxymodel_types.QConcatenateTablesProxyModel(h: fcQConcatenateTablesProxyModel_new(addr(vtbl[].vtbl), addr(vtbl[])), owned: true)
 
 proc create*(T: type gen_qconcatenatetablesproxymodel_types.QConcatenateTablesProxyModel,
@@ -1730,93 +1737,93 @@ proc create*(T: type gen_qconcatenatetablesproxymodel_types.QConcatenateTablesPr
     let vtbl = cast[ref QConcatenateTablesProxyModelVTable](fcQConcatenateTablesProxyModel_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQConcatenateTablesProxyModel_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQConcatenateTablesProxyModel_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQConcatenateTablesProxyModel_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQConcatenateTablesProxyModel_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQConcatenateTablesProxyModel_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQConcatenateTablesProxyModel_vtable_callback_metacall
   if not isNil(vtbl[].data):
-    vtbl[].vtbl.data = cQConcatenateTablesProxyModel_vtable_callback_data
+    vtbl[].vtbl.data = fcQConcatenateTablesProxyModel_vtable_callback_data
   if not isNil(vtbl[].setData):
-    vtbl[].vtbl.setData = cQConcatenateTablesProxyModel_vtable_callback_setData
+    vtbl[].vtbl.setData = fcQConcatenateTablesProxyModel_vtable_callback_setData
   if not isNil(vtbl[].itemData):
-    vtbl[].vtbl.itemData = cQConcatenateTablesProxyModel_vtable_callback_itemData
+    vtbl[].vtbl.itemData = fcQConcatenateTablesProxyModel_vtable_callback_itemData
   if not isNil(vtbl[].setItemData):
-    vtbl[].vtbl.setItemData = cQConcatenateTablesProxyModel_vtable_callback_setItemData
+    vtbl[].vtbl.setItemData = fcQConcatenateTablesProxyModel_vtable_callback_setItemData
   if not isNil(vtbl[].flags):
-    vtbl[].vtbl.flags = cQConcatenateTablesProxyModel_vtable_callback_flags
+    vtbl[].vtbl.flags = fcQConcatenateTablesProxyModel_vtable_callback_flags
   if not isNil(vtbl[].index):
-    vtbl[].vtbl.index = cQConcatenateTablesProxyModel_vtable_callback_index
+    vtbl[].vtbl.index = fcQConcatenateTablesProxyModel_vtable_callback_index
   if not isNil(vtbl[].parent):
-    vtbl[].vtbl.parent = cQConcatenateTablesProxyModel_vtable_callback_parent
+    vtbl[].vtbl.parent = fcQConcatenateTablesProxyModel_vtable_callback_parent
   if not isNil(vtbl[].rowCount):
-    vtbl[].vtbl.rowCount = cQConcatenateTablesProxyModel_vtable_callback_rowCount
+    vtbl[].vtbl.rowCount = fcQConcatenateTablesProxyModel_vtable_callback_rowCount
   if not isNil(vtbl[].headerData):
-    vtbl[].vtbl.headerData = cQConcatenateTablesProxyModel_vtable_callback_headerData
+    vtbl[].vtbl.headerData = fcQConcatenateTablesProxyModel_vtable_callback_headerData
   if not isNil(vtbl[].columnCount):
-    vtbl[].vtbl.columnCount = cQConcatenateTablesProxyModel_vtable_callback_columnCount
+    vtbl[].vtbl.columnCount = fcQConcatenateTablesProxyModel_vtable_callback_columnCount
   if not isNil(vtbl[].mimeTypes):
-    vtbl[].vtbl.mimeTypes = cQConcatenateTablesProxyModel_vtable_callback_mimeTypes
+    vtbl[].vtbl.mimeTypes = fcQConcatenateTablesProxyModel_vtable_callback_mimeTypes
   if not isNil(vtbl[].mimeData):
-    vtbl[].vtbl.mimeData = cQConcatenateTablesProxyModel_vtable_callback_mimeData
+    vtbl[].vtbl.mimeData = fcQConcatenateTablesProxyModel_vtable_callback_mimeData
   if not isNil(vtbl[].canDropMimeData):
-    vtbl[].vtbl.canDropMimeData = cQConcatenateTablesProxyModel_vtable_callback_canDropMimeData
+    vtbl[].vtbl.canDropMimeData = fcQConcatenateTablesProxyModel_vtable_callback_canDropMimeData
   if not isNil(vtbl[].dropMimeData):
-    vtbl[].vtbl.dropMimeData = cQConcatenateTablesProxyModel_vtable_callback_dropMimeData
+    vtbl[].vtbl.dropMimeData = fcQConcatenateTablesProxyModel_vtable_callback_dropMimeData
   if not isNil(vtbl[].span):
-    vtbl[].vtbl.span = cQConcatenateTablesProxyModel_vtable_callback_span
+    vtbl[].vtbl.span = fcQConcatenateTablesProxyModel_vtable_callback_span
   if not isNil(vtbl[].sibling):
-    vtbl[].vtbl.sibling = cQConcatenateTablesProxyModel_vtable_callback_sibling
+    vtbl[].vtbl.sibling = fcQConcatenateTablesProxyModel_vtable_callback_sibling
   if not isNil(vtbl[].hasChildren):
-    vtbl[].vtbl.hasChildren = cQConcatenateTablesProxyModel_vtable_callback_hasChildren
+    vtbl[].vtbl.hasChildren = fcQConcatenateTablesProxyModel_vtable_callback_hasChildren
   if not isNil(vtbl[].setHeaderData):
-    vtbl[].vtbl.setHeaderData = cQConcatenateTablesProxyModel_vtable_callback_setHeaderData
+    vtbl[].vtbl.setHeaderData = fcQConcatenateTablesProxyModel_vtable_callback_setHeaderData
   if not isNil(vtbl[].supportedDropActions):
-    vtbl[].vtbl.supportedDropActions = cQConcatenateTablesProxyModel_vtable_callback_supportedDropActions
+    vtbl[].vtbl.supportedDropActions = fcQConcatenateTablesProxyModel_vtable_callback_supportedDropActions
   if not isNil(vtbl[].supportedDragActions):
-    vtbl[].vtbl.supportedDragActions = cQConcatenateTablesProxyModel_vtable_callback_supportedDragActions
+    vtbl[].vtbl.supportedDragActions = fcQConcatenateTablesProxyModel_vtable_callback_supportedDragActions
   if not isNil(vtbl[].insertRows):
-    vtbl[].vtbl.insertRows = cQConcatenateTablesProxyModel_vtable_callback_insertRows
+    vtbl[].vtbl.insertRows = fcQConcatenateTablesProxyModel_vtable_callback_insertRows
   if not isNil(vtbl[].insertColumns):
-    vtbl[].vtbl.insertColumns = cQConcatenateTablesProxyModel_vtable_callback_insertColumns
+    vtbl[].vtbl.insertColumns = fcQConcatenateTablesProxyModel_vtable_callback_insertColumns
   if not isNil(vtbl[].removeRows):
-    vtbl[].vtbl.removeRows = cQConcatenateTablesProxyModel_vtable_callback_removeRows
+    vtbl[].vtbl.removeRows = fcQConcatenateTablesProxyModel_vtable_callback_removeRows
   if not isNil(vtbl[].removeColumns):
-    vtbl[].vtbl.removeColumns = cQConcatenateTablesProxyModel_vtable_callback_removeColumns
+    vtbl[].vtbl.removeColumns = fcQConcatenateTablesProxyModel_vtable_callback_removeColumns
   if not isNil(vtbl[].moveRows):
-    vtbl[].vtbl.moveRows = cQConcatenateTablesProxyModel_vtable_callback_moveRows
+    vtbl[].vtbl.moveRows = fcQConcatenateTablesProxyModel_vtable_callback_moveRows
   if not isNil(vtbl[].moveColumns):
-    vtbl[].vtbl.moveColumns = cQConcatenateTablesProxyModel_vtable_callback_moveColumns
+    vtbl[].vtbl.moveColumns = fcQConcatenateTablesProxyModel_vtable_callback_moveColumns
   if not isNil(vtbl[].fetchMore):
-    vtbl[].vtbl.fetchMore = cQConcatenateTablesProxyModel_vtable_callback_fetchMore
+    vtbl[].vtbl.fetchMore = fcQConcatenateTablesProxyModel_vtable_callback_fetchMore
   if not isNil(vtbl[].canFetchMore):
-    vtbl[].vtbl.canFetchMore = cQConcatenateTablesProxyModel_vtable_callback_canFetchMore
+    vtbl[].vtbl.canFetchMore = fcQConcatenateTablesProxyModel_vtable_callback_canFetchMore
   if not isNil(vtbl[].sort):
-    vtbl[].vtbl.sort = cQConcatenateTablesProxyModel_vtable_callback_sort
+    vtbl[].vtbl.sort = fcQConcatenateTablesProxyModel_vtable_callback_sort
   if not isNil(vtbl[].buddy):
-    vtbl[].vtbl.buddy = cQConcatenateTablesProxyModel_vtable_callback_buddy
+    vtbl[].vtbl.buddy = fcQConcatenateTablesProxyModel_vtable_callback_buddy
   if not isNil(vtbl[].match):
-    vtbl[].vtbl.match = cQConcatenateTablesProxyModel_vtable_callback_match
+    vtbl[].vtbl.match = fcQConcatenateTablesProxyModel_vtable_callback_match
   if not isNil(vtbl[].roleNames):
-    vtbl[].vtbl.roleNames = cQConcatenateTablesProxyModel_vtable_callback_roleNames
+    vtbl[].vtbl.roleNames = fcQConcatenateTablesProxyModel_vtable_callback_roleNames
   if not isNil(vtbl[].submit):
-    vtbl[].vtbl.submit = cQConcatenateTablesProxyModel_vtable_callback_submit
+    vtbl[].vtbl.submit = fcQConcatenateTablesProxyModel_vtable_callback_submit
   if not isNil(vtbl[].revert):
-    vtbl[].vtbl.revert = cQConcatenateTablesProxyModel_vtable_callback_revert
+    vtbl[].vtbl.revert = fcQConcatenateTablesProxyModel_vtable_callback_revert
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQConcatenateTablesProxyModel_vtable_callback_event
+    vtbl[].vtbl.event = fcQConcatenateTablesProxyModel_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQConcatenateTablesProxyModel_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQConcatenateTablesProxyModel_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQConcatenateTablesProxyModel_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQConcatenateTablesProxyModel_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQConcatenateTablesProxyModel_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQConcatenateTablesProxyModel_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQConcatenateTablesProxyModel_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQConcatenateTablesProxyModel_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQConcatenateTablesProxyModel_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQConcatenateTablesProxyModel_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQConcatenateTablesProxyModel_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQConcatenateTablesProxyModel_vtable_callback_disconnectNotify
   gen_qconcatenatetablesproxymodel_types.QConcatenateTablesProxyModel(h: fcQConcatenateTablesProxyModel_new2(addr(vtbl[].vtbl), addr(vtbl[]), parent.h), owned: true)
 
 const cQConcatenateTablesProxyModel_mvtbl = cQConcatenateTablesProxyModelVTable(
@@ -1824,50 +1831,51 @@ const cQConcatenateTablesProxyModel_mvtbl = cQConcatenateTablesProxyModelVTable(
     let inst = cast[ptr typeof(VirtualQConcatenateTablesProxyModel()[])](self.fcQConcatenateTablesProxyModel_vtbl())
     inst[].h = nil
     inst[].owned = false,
-  metaObject: cQConcatenateTablesProxyModel_method_callback_metaObject,
-  metacast: cQConcatenateTablesProxyModel_method_callback_metacast,
-  metacall: cQConcatenateTablesProxyModel_method_callback_metacall,
-  data: cQConcatenateTablesProxyModel_method_callback_data,
-  setData: cQConcatenateTablesProxyModel_method_callback_setData,
-  itemData: cQConcatenateTablesProxyModel_method_callback_itemData,
-  setItemData: cQConcatenateTablesProxyModel_method_callback_setItemData,
-  flags: cQConcatenateTablesProxyModel_method_callback_flags,
-  index: cQConcatenateTablesProxyModel_method_callback_index,
-  parent: cQConcatenateTablesProxyModel_method_callback_parent,
-  rowCount: cQConcatenateTablesProxyModel_method_callback_rowCount,
-  headerData: cQConcatenateTablesProxyModel_method_callback_headerData,
-  columnCount: cQConcatenateTablesProxyModel_method_callback_columnCount,
-  mimeTypes: cQConcatenateTablesProxyModel_method_callback_mimeTypes,
-  mimeData: cQConcatenateTablesProxyModel_method_callback_mimeData,
-  canDropMimeData: cQConcatenateTablesProxyModel_method_callback_canDropMimeData,
-  dropMimeData: cQConcatenateTablesProxyModel_method_callback_dropMimeData,
-  span: cQConcatenateTablesProxyModel_method_callback_span,
-  sibling: cQConcatenateTablesProxyModel_method_callback_sibling,
-  hasChildren: cQConcatenateTablesProxyModel_method_callback_hasChildren,
-  setHeaderData: cQConcatenateTablesProxyModel_method_callback_setHeaderData,
-  supportedDropActions: cQConcatenateTablesProxyModel_method_callback_supportedDropActions,
-  supportedDragActions: cQConcatenateTablesProxyModel_method_callback_supportedDragActions,
-  insertRows: cQConcatenateTablesProxyModel_method_callback_insertRows,
-  insertColumns: cQConcatenateTablesProxyModel_method_callback_insertColumns,
-  removeRows: cQConcatenateTablesProxyModel_method_callback_removeRows,
-  removeColumns: cQConcatenateTablesProxyModel_method_callback_removeColumns,
-  moveRows: cQConcatenateTablesProxyModel_method_callback_moveRows,
-  moveColumns: cQConcatenateTablesProxyModel_method_callback_moveColumns,
-  fetchMore: cQConcatenateTablesProxyModel_method_callback_fetchMore,
-  canFetchMore: cQConcatenateTablesProxyModel_method_callback_canFetchMore,
-  sort: cQConcatenateTablesProxyModel_method_callback_sort,
-  buddy: cQConcatenateTablesProxyModel_method_callback_buddy,
-  match: cQConcatenateTablesProxyModel_method_callback_match,
-  roleNames: cQConcatenateTablesProxyModel_method_callback_roleNames,
-  submit: cQConcatenateTablesProxyModel_method_callback_submit,
-  revert: cQConcatenateTablesProxyModel_method_callback_revert,
-  event: cQConcatenateTablesProxyModel_method_callback_event,
-  eventFilter: cQConcatenateTablesProxyModel_method_callback_eventFilter,
-  timerEvent: cQConcatenateTablesProxyModel_method_callback_timerEvent,
-  childEvent: cQConcatenateTablesProxyModel_method_callback_childEvent,
-  customEvent: cQConcatenateTablesProxyModel_method_callback_customEvent,
-  connectNotify: cQConcatenateTablesProxyModel_method_callback_connectNotify,
-  disconnectNotify: cQConcatenateTablesProxyModel_method_callback_disconnectNotify,
+
+  metaObject: fcQConcatenateTablesProxyModel_method_callback_metaObject,
+  metacast: fcQConcatenateTablesProxyModel_method_callback_metacast,
+  metacall: fcQConcatenateTablesProxyModel_method_callback_metacall,
+  data: fcQConcatenateTablesProxyModel_method_callback_data,
+  setData: fcQConcatenateTablesProxyModel_method_callback_setData,
+  itemData: fcQConcatenateTablesProxyModel_method_callback_itemData,
+  setItemData: fcQConcatenateTablesProxyModel_method_callback_setItemData,
+  flags: fcQConcatenateTablesProxyModel_method_callback_flags,
+  index: fcQConcatenateTablesProxyModel_method_callback_index,
+  parent: fcQConcatenateTablesProxyModel_method_callback_parent,
+  rowCount: fcQConcatenateTablesProxyModel_method_callback_rowCount,
+  headerData: fcQConcatenateTablesProxyModel_method_callback_headerData,
+  columnCount: fcQConcatenateTablesProxyModel_method_callback_columnCount,
+  mimeTypes: fcQConcatenateTablesProxyModel_method_callback_mimeTypes,
+  mimeData: fcQConcatenateTablesProxyModel_method_callback_mimeData,
+  canDropMimeData: fcQConcatenateTablesProxyModel_method_callback_canDropMimeData,
+  dropMimeData: fcQConcatenateTablesProxyModel_method_callback_dropMimeData,
+  span: fcQConcatenateTablesProxyModel_method_callback_span,
+  sibling: fcQConcatenateTablesProxyModel_method_callback_sibling,
+  hasChildren: fcQConcatenateTablesProxyModel_method_callback_hasChildren,
+  setHeaderData: fcQConcatenateTablesProxyModel_method_callback_setHeaderData,
+  supportedDropActions: fcQConcatenateTablesProxyModel_method_callback_supportedDropActions,
+  supportedDragActions: fcQConcatenateTablesProxyModel_method_callback_supportedDragActions,
+  insertRows: fcQConcatenateTablesProxyModel_method_callback_insertRows,
+  insertColumns: fcQConcatenateTablesProxyModel_method_callback_insertColumns,
+  removeRows: fcQConcatenateTablesProxyModel_method_callback_removeRows,
+  removeColumns: fcQConcatenateTablesProxyModel_method_callback_removeColumns,
+  moveRows: fcQConcatenateTablesProxyModel_method_callback_moveRows,
+  moveColumns: fcQConcatenateTablesProxyModel_method_callback_moveColumns,
+  fetchMore: fcQConcatenateTablesProxyModel_method_callback_fetchMore,
+  canFetchMore: fcQConcatenateTablesProxyModel_method_callback_canFetchMore,
+  sort: fcQConcatenateTablesProxyModel_method_callback_sort,
+  buddy: fcQConcatenateTablesProxyModel_method_callback_buddy,
+  match: fcQConcatenateTablesProxyModel_method_callback_match,
+  roleNames: fcQConcatenateTablesProxyModel_method_callback_roleNames,
+  submit: fcQConcatenateTablesProxyModel_method_callback_submit,
+  revert: fcQConcatenateTablesProxyModel_method_callback_revert,
+  event: fcQConcatenateTablesProxyModel_method_callback_event,
+  eventFilter: fcQConcatenateTablesProxyModel_method_callback_eventFilter,
+  timerEvent: fcQConcatenateTablesProxyModel_method_callback_timerEvent,
+  childEvent: fcQConcatenateTablesProxyModel_method_callback_childEvent,
+  customEvent: fcQConcatenateTablesProxyModel_method_callback_customEvent,
+  connectNotify: fcQConcatenateTablesProxyModel_method_callback_connectNotify,
+  disconnectNotify: fcQConcatenateTablesProxyModel_method_callback_disconnectNotify,
 )
 proc create*(T: type gen_qconcatenatetablesproxymodel_types.QConcatenateTablesProxyModel,
     inst: VirtualQConcatenateTablesProxyModel) =

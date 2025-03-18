@@ -230,187 +230,187 @@ proc stateChanged*(self: gen_qradiotunercontrol_types.QRadioTunerControl, state:
   fcQRadioTunerControl_stateChanged(self.h, cint(state))
 
 type QRadioTunerControlstateChangedSlot* = proc(state: cint)
-proc cQRadioTunerControl_slot_callback_stateChanged(slot: int, state: cint) {.cdecl.} =
+proc fcQRadioTunerControl_slot_callback_stateChanged(slot: int, state: cint) {.cdecl.} =
   let nimfunc = cast[ptr QRadioTunerControlstateChangedSlot](cast[pointer](slot))
   let slotval1 = cint(state)
 
   nimfunc[](slotval1)
 
-proc cQRadioTunerControl_slot_callback_stateChanged_release(slot: int) {.cdecl.} =
+proc fcQRadioTunerControl_slot_callback_stateChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QRadioTunerControlstateChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onstateChanged*(self: gen_qradiotunercontrol_types.QRadioTunerControl, slot: QRadioTunerControlstateChangedSlot) =
+proc onStateChanged*(self: gen_qradiotunercontrol_types.QRadioTunerControl, slot: QRadioTunerControlstateChangedSlot) =
   var tmp = new QRadioTunerControlstateChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQRadioTunerControl_connect_stateChanged(self.h, cast[int](addr tmp[]), cQRadioTunerControl_slot_callback_stateChanged, cQRadioTunerControl_slot_callback_stateChanged_release)
+  fcQRadioTunerControl_connect_stateChanged(self.h, cast[int](addr tmp[]), fcQRadioTunerControl_slot_callback_stateChanged, fcQRadioTunerControl_slot_callback_stateChanged_release)
 
 proc bandChanged*(self: gen_qradiotunercontrol_types.QRadioTunerControl, band: cint): void =
   fcQRadioTunerControl_bandChanged(self.h, cint(band))
 
 type QRadioTunerControlbandChangedSlot* = proc(band: cint)
-proc cQRadioTunerControl_slot_callback_bandChanged(slot: int, band: cint) {.cdecl.} =
+proc fcQRadioTunerControl_slot_callback_bandChanged(slot: int, band: cint) {.cdecl.} =
   let nimfunc = cast[ptr QRadioTunerControlbandChangedSlot](cast[pointer](slot))
   let slotval1 = cint(band)
 
   nimfunc[](slotval1)
 
-proc cQRadioTunerControl_slot_callback_bandChanged_release(slot: int) {.cdecl.} =
+proc fcQRadioTunerControl_slot_callback_bandChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QRadioTunerControlbandChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onbandChanged*(self: gen_qradiotunercontrol_types.QRadioTunerControl, slot: QRadioTunerControlbandChangedSlot) =
+proc onBandChanged*(self: gen_qradiotunercontrol_types.QRadioTunerControl, slot: QRadioTunerControlbandChangedSlot) =
   var tmp = new QRadioTunerControlbandChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQRadioTunerControl_connect_bandChanged(self.h, cast[int](addr tmp[]), cQRadioTunerControl_slot_callback_bandChanged, cQRadioTunerControl_slot_callback_bandChanged_release)
+  fcQRadioTunerControl_connect_bandChanged(self.h, cast[int](addr tmp[]), fcQRadioTunerControl_slot_callback_bandChanged, fcQRadioTunerControl_slot_callback_bandChanged_release)
 
 proc frequencyChanged*(self: gen_qradiotunercontrol_types.QRadioTunerControl, frequency: cint): void =
   fcQRadioTunerControl_frequencyChanged(self.h, frequency)
 
 type QRadioTunerControlfrequencyChangedSlot* = proc(frequency: cint)
-proc cQRadioTunerControl_slot_callback_frequencyChanged(slot: int, frequency: cint) {.cdecl.} =
+proc fcQRadioTunerControl_slot_callback_frequencyChanged(slot: int, frequency: cint) {.cdecl.} =
   let nimfunc = cast[ptr QRadioTunerControlfrequencyChangedSlot](cast[pointer](slot))
   let slotval1 = frequency
 
   nimfunc[](slotval1)
 
-proc cQRadioTunerControl_slot_callback_frequencyChanged_release(slot: int) {.cdecl.} =
+proc fcQRadioTunerControl_slot_callback_frequencyChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QRadioTunerControlfrequencyChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onfrequencyChanged*(self: gen_qradiotunercontrol_types.QRadioTunerControl, slot: QRadioTunerControlfrequencyChangedSlot) =
+proc onFrequencyChanged*(self: gen_qradiotunercontrol_types.QRadioTunerControl, slot: QRadioTunerControlfrequencyChangedSlot) =
   var tmp = new QRadioTunerControlfrequencyChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQRadioTunerControl_connect_frequencyChanged(self.h, cast[int](addr tmp[]), cQRadioTunerControl_slot_callback_frequencyChanged, cQRadioTunerControl_slot_callback_frequencyChanged_release)
+  fcQRadioTunerControl_connect_frequencyChanged(self.h, cast[int](addr tmp[]), fcQRadioTunerControl_slot_callback_frequencyChanged, fcQRadioTunerControl_slot_callback_frequencyChanged_release)
 
 proc stereoStatusChanged*(self: gen_qradiotunercontrol_types.QRadioTunerControl, stereo: bool): void =
   fcQRadioTunerControl_stereoStatusChanged(self.h, stereo)
 
 type QRadioTunerControlstereoStatusChangedSlot* = proc(stereo: bool)
-proc cQRadioTunerControl_slot_callback_stereoStatusChanged(slot: int, stereo: bool) {.cdecl.} =
+proc fcQRadioTunerControl_slot_callback_stereoStatusChanged(slot: int, stereo: bool) {.cdecl.} =
   let nimfunc = cast[ptr QRadioTunerControlstereoStatusChangedSlot](cast[pointer](slot))
   let slotval1 = stereo
 
   nimfunc[](slotval1)
 
-proc cQRadioTunerControl_slot_callback_stereoStatusChanged_release(slot: int) {.cdecl.} =
+proc fcQRadioTunerControl_slot_callback_stereoStatusChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QRadioTunerControlstereoStatusChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onstereoStatusChanged*(self: gen_qradiotunercontrol_types.QRadioTunerControl, slot: QRadioTunerControlstereoStatusChangedSlot) =
+proc onStereoStatusChanged*(self: gen_qradiotunercontrol_types.QRadioTunerControl, slot: QRadioTunerControlstereoStatusChangedSlot) =
   var tmp = new QRadioTunerControlstereoStatusChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQRadioTunerControl_connect_stereoStatusChanged(self.h, cast[int](addr tmp[]), cQRadioTunerControl_slot_callback_stereoStatusChanged, cQRadioTunerControl_slot_callback_stereoStatusChanged_release)
+  fcQRadioTunerControl_connect_stereoStatusChanged(self.h, cast[int](addr tmp[]), fcQRadioTunerControl_slot_callback_stereoStatusChanged, fcQRadioTunerControl_slot_callback_stereoStatusChanged_release)
 
 proc searchingChanged*(self: gen_qradiotunercontrol_types.QRadioTunerControl, searching: bool): void =
   fcQRadioTunerControl_searchingChanged(self.h, searching)
 
 type QRadioTunerControlsearchingChangedSlot* = proc(searching: bool)
-proc cQRadioTunerControl_slot_callback_searchingChanged(slot: int, searching: bool) {.cdecl.} =
+proc fcQRadioTunerControl_slot_callback_searchingChanged(slot: int, searching: bool) {.cdecl.} =
   let nimfunc = cast[ptr QRadioTunerControlsearchingChangedSlot](cast[pointer](slot))
   let slotval1 = searching
 
   nimfunc[](slotval1)
 
-proc cQRadioTunerControl_slot_callback_searchingChanged_release(slot: int) {.cdecl.} =
+proc fcQRadioTunerControl_slot_callback_searchingChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QRadioTunerControlsearchingChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onsearchingChanged*(self: gen_qradiotunercontrol_types.QRadioTunerControl, slot: QRadioTunerControlsearchingChangedSlot) =
+proc onSearchingChanged*(self: gen_qradiotunercontrol_types.QRadioTunerControl, slot: QRadioTunerControlsearchingChangedSlot) =
   var tmp = new QRadioTunerControlsearchingChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQRadioTunerControl_connect_searchingChanged(self.h, cast[int](addr tmp[]), cQRadioTunerControl_slot_callback_searchingChanged, cQRadioTunerControl_slot_callback_searchingChanged_release)
+  fcQRadioTunerControl_connect_searchingChanged(self.h, cast[int](addr tmp[]), fcQRadioTunerControl_slot_callback_searchingChanged, fcQRadioTunerControl_slot_callback_searchingChanged_release)
 
 proc signalStrengthChanged*(self: gen_qradiotunercontrol_types.QRadioTunerControl, signalStrength: cint): void =
   fcQRadioTunerControl_signalStrengthChanged(self.h, signalStrength)
 
 type QRadioTunerControlsignalStrengthChangedSlot* = proc(signalStrength: cint)
-proc cQRadioTunerControl_slot_callback_signalStrengthChanged(slot: int, signalStrength: cint) {.cdecl.} =
+proc fcQRadioTunerControl_slot_callback_signalStrengthChanged(slot: int, signalStrength: cint) {.cdecl.} =
   let nimfunc = cast[ptr QRadioTunerControlsignalStrengthChangedSlot](cast[pointer](slot))
   let slotval1 = signalStrength
 
   nimfunc[](slotval1)
 
-proc cQRadioTunerControl_slot_callback_signalStrengthChanged_release(slot: int) {.cdecl.} =
+proc fcQRadioTunerControl_slot_callback_signalStrengthChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QRadioTunerControlsignalStrengthChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onsignalStrengthChanged*(self: gen_qradiotunercontrol_types.QRadioTunerControl, slot: QRadioTunerControlsignalStrengthChangedSlot) =
+proc onSignalStrengthChanged*(self: gen_qradiotunercontrol_types.QRadioTunerControl, slot: QRadioTunerControlsignalStrengthChangedSlot) =
   var tmp = new QRadioTunerControlsignalStrengthChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQRadioTunerControl_connect_signalStrengthChanged(self.h, cast[int](addr tmp[]), cQRadioTunerControl_slot_callback_signalStrengthChanged, cQRadioTunerControl_slot_callback_signalStrengthChanged_release)
+  fcQRadioTunerControl_connect_signalStrengthChanged(self.h, cast[int](addr tmp[]), fcQRadioTunerControl_slot_callback_signalStrengthChanged, fcQRadioTunerControl_slot_callback_signalStrengthChanged_release)
 
 proc volumeChanged*(self: gen_qradiotunercontrol_types.QRadioTunerControl, volume: cint): void =
   fcQRadioTunerControl_volumeChanged(self.h, volume)
 
 type QRadioTunerControlvolumeChangedSlot* = proc(volume: cint)
-proc cQRadioTunerControl_slot_callback_volumeChanged(slot: int, volume: cint) {.cdecl.} =
+proc fcQRadioTunerControl_slot_callback_volumeChanged(slot: int, volume: cint) {.cdecl.} =
   let nimfunc = cast[ptr QRadioTunerControlvolumeChangedSlot](cast[pointer](slot))
   let slotval1 = volume
 
   nimfunc[](slotval1)
 
-proc cQRadioTunerControl_slot_callback_volumeChanged_release(slot: int) {.cdecl.} =
+proc fcQRadioTunerControl_slot_callback_volumeChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QRadioTunerControlvolumeChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onvolumeChanged*(self: gen_qradiotunercontrol_types.QRadioTunerControl, slot: QRadioTunerControlvolumeChangedSlot) =
+proc onVolumeChanged*(self: gen_qradiotunercontrol_types.QRadioTunerControl, slot: QRadioTunerControlvolumeChangedSlot) =
   var tmp = new QRadioTunerControlvolumeChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQRadioTunerControl_connect_volumeChanged(self.h, cast[int](addr tmp[]), cQRadioTunerControl_slot_callback_volumeChanged, cQRadioTunerControl_slot_callback_volumeChanged_release)
+  fcQRadioTunerControl_connect_volumeChanged(self.h, cast[int](addr tmp[]), fcQRadioTunerControl_slot_callback_volumeChanged, fcQRadioTunerControl_slot_callback_volumeChanged_release)
 
 proc mutedChanged*(self: gen_qradiotunercontrol_types.QRadioTunerControl, muted: bool): void =
   fcQRadioTunerControl_mutedChanged(self.h, muted)
 
 type QRadioTunerControlmutedChangedSlot* = proc(muted: bool)
-proc cQRadioTunerControl_slot_callback_mutedChanged(slot: int, muted: bool) {.cdecl.} =
+proc fcQRadioTunerControl_slot_callback_mutedChanged(slot: int, muted: bool) {.cdecl.} =
   let nimfunc = cast[ptr QRadioTunerControlmutedChangedSlot](cast[pointer](slot))
   let slotval1 = muted
 
   nimfunc[](slotval1)
 
-proc cQRadioTunerControl_slot_callback_mutedChanged_release(slot: int) {.cdecl.} =
+proc fcQRadioTunerControl_slot_callback_mutedChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QRadioTunerControlmutedChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onmutedChanged*(self: gen_qradiotunercontrol_types.QRadioTunerControl, slot: QRadioTunerControlmutedChangedSlot) =
+proc onMutedChanged*(self: gen_qradiotunercontrol_types.QRadioTunerControl, slot: QRadioTunerControlmutedChangedSlot) =
   var tmp = new QRadioTunerControlmutedChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQRadioTunerControl_connect_mutedChanged(self.h, cast[int](addr tmp[]), cQRadioTunerControl_slot_callback_mutedChanged, cQRadioTunerControl_slot_callback_mutedChanged_release)
+  fcQRadioTunerControl_connect_mutedChanged(self.h, cast[int](addr tmp[]), fcQRadioTunerControl_slot_callback_mutedChanged, fcQRadioTunerControl_slot_callback_mutedChanged_release)
 
 proc error*(self: gen_qradiotunercontrol_types.QRadioTunerControl, err: cint): void =
   fcQRadioTunerControl_errorWithErr(self.h, cint(err))
 
 type QRadioTunerControlerrorWithErrSlot* = proc(err: cint)
-proc cQRadioTunerControl_slot_callback_errorWithErr(slot: int, err: cint) {.cdecl.} =
+proc fcQRadioTunerControl_slot_callback_errorWithErr(slot: int, err: cint) {.cdecl.} =
   let nimfunc = cast[ptr QRadioTunerControlerrorWithErrSlot](cast[pointer](slot))
   let slotval1 = cint(err)
 
   nimfunc[](slotval1)
 
-proc cQRadioTunerControl_slot_callback_errorWithErr_release(slot: int) {.cdecl.} =
+proc fcQRadioTunerControl_slot_callback_errorWithErr_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QRadioTunerControlerrorWithErrSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onerror*(self: gen_qradiotunercontrol_types.QRadioTunerControl, slot: QRadioTunerControlerrorWithErrSlot) =
+proc onError*(self: gen_qradiotunercontrol_types.QRadioTunerControl, slot: QRadioTunerControlerrorWithErrSlot) =
   var tmp = new QRadioTunerControlerrorWithErrSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQRadioTunerControl_connect_errorWithErr(self.h, cast[int](addr tmp[]), cQRadioTunerControl_slot_callback_errorWithErr, cQRadioTunerControl_slot_callback_errorWithErr_release)
+  fcQRadioTunerControl_connect_errorWithErr(self.h, cast[int](addr tmp[]), fcQRadioTunerControl_slot_callback_errorWithErr, fcQRadioTunerControl_slot_callback_errorWithErr_release)
 
 proc stationFound*(self: gen_qradiotunercontrol_types.QRadioTunerControl, frequency: cint, stationId: openArray[char]): void =
   fcQRadioTunerControl_stationFound(self.h, frequency, struct_miqt_string(data: if len(stationId) > 0: addr stationId[0] else: nil, len: csize_t(len(stationId))))
 
 type QRadioTunerControlstationFoundSlot* = proc(frequency: cint, stationId: openArray[char])
-proc cQRadioTunerControl_slot_callback_stationFound(slot: int, frequency: cint, stationId: struct_miqt_string) {.cdecl.} =
+proc fcQRadioTunerControl_slot_callback_stationFound(slot: int, frequency: cint, stationId: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QRadioTunerControlstationFoundSlot](cast[pointer](slot))
   let slotval1 = frequency
 
@@ -421,35 +421,35 @@ proc cQRadioTunerControl_slot_callback_stationFound(slot: int, frequency: cint, 
 
   nimfunc[](slotval1, slotval2)
 
-proc cQRadioTunerControl_slot_callback_stationFound_release(slot: int) {.cdecl.} =
+proc fcQRadioTunerControl_slot_callback_stationFound_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QRadioTunerControlstationFoundSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onstationFound*(self: gen_qradiotunercontrol_types.QRadioTunerControl, slot: QRadioTunerControlstationFoundSlot) =
+proc onStationFound*(self: gen_qradiotunercontrol_types.QRadioTunerControl, slot: QRadioTunerControlstationFoundSlot) =
   var tmp = new QRadioTunerControlstationFoundSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQRadioTunerControl_connect_stationFound(self.h, cast[int](addr tmp[]), cQRadioTunerControl_slot_callback_stationFound, cQRadioTunerControl_slot_callback_stationFound_release)
+  fcQRadioTunerControl_connect_stationFound(self.h, cast[int](addr tmp[]), fcQRadioTunerControl_slot_callback_stationFound, fcQRadioTunerControl_slot_callback_stationFound_release)
 
 proc antennaConnectedChanged*(self: gen_qradiotunercontrol_types.QRadioTunerControl, connectionStatus: bool): void =
   fcQRadioTunerControl_antennaConnectedChanged(self.h, connectionStatus)
 
 type QRadioTunerControlantennaConnectedChangedSlot* = proc(connectionStatus: bool)
-proc cQRadioTunerControl_slot_callback_antennaConnectedChanged(slot: int, connectionStatus: bool) {.cdecl.} =
+proc fcQRadioTunerControl_slot_callback_antennaConnectedChanged(slot: int, connectionStatus: bool) {.cdecl.} =
   let nimfunc = cast[ptr QRadioTunerControlantennaConnectedChangedSlot](cast[pointer](slot))
   let slotval1 = connectionStatus
 
   nimfunc[](slotval1)
 
-proc cQRadioTunerControl_slot_callback_antennaConnectedChanged_release(slot: int) {.cdecl.} =
+proc fcQRadioTunerControl_slot_callback_antennaConnectedChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QRadioTunerControlantennaConnectedChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onantennaConnectedChanged*(self: gen_qradiotunercontrol_types.QRadioTunerControl, slot: QRadioTunerControlantennaConnectedChangedSlot) =
+proc onAntennaConnectedChanged*(self: gen_qradiotunercontrol_types.QRadioTunerControl, slot: QRadioTunerControlantennaConnectedChangedSlot) =
   var tmp = new QRadioTunerControlantennaConnectedChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQRadioTunerControl_connect_antennaConnectedChanged(self.h, cast[int](addr tmp[]), cQRadioTunerControl_slot_callback_antennaConnectedChanged, cQRadioTunerControl_slot_callback_antennaConnectedChanged_release)
+  fcQRadioTunerControl_connect_antennaConnectedChanged(self.h, cast[int](addr tmp[]), fcQRadioTunerControl_slot_callback_antennaConnectedChanged, fcQRadioTunerControl_slot_callback_antennaConnectedChanged_release)
 
 proc tr*(_: type gen_qradiotunercontrol_types.QRadioTunerControl, s: cstring, c: cstring): string =
   let v_ms = fcQRadioTunerControl_tr2(s, c)

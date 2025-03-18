@@ -231,6 +231,7 @@ proc fcQMessageBox_critical7(parent: pointer, title: struct_miqt_string, text: s
 proc fcQMessageBox_critical8(parent: pointer, title: struct_miqt_string, text: struct_miqt_string, button0Text: struct_miqt_string, button1Text: struct_miqt_string, button2Text: struct_miqt_string, defaultButtonNumber: cint, escapeButtonNumber: cint): cint {.importc: "QMessageBox_critical8".}
 proc fcQMessageBox_vtbl(self: pointer): pointer {.importc: "QMessageBox_vtbl".}
 proc fcQMessageBox_vdata(self: pointer): pointer {.importc: "QMessageBox_vdata".}
+
 type cQMessageBoxVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -575,21 +576,21 @@ proc buttonClicked*(self: gen_qmessagebox_types.QMessageBox, button: gen_qabstra
   fcQMessageBox_buttonClicked(self.h, button.h)
 
 type QMessageBoxbuttonClickedSlot* = proc(button: gen_qabstractbutton_types.QAbstractButton)
-proc cQMessageBox_slot_callback_buttonClicked(slot: int, button: pointer) {.cdecl.} =
+proc fcQMessageBox_slot_callback_buttonClicked(slot: int, button: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QMessageBoxbuttonClickedSlot](cast[pointer](slot))
   let slotval1 = gen_qabstractbutton_types.QAbstractButton(h: button, owned: false)
 
   nimfunc[](slotval1)
 
-proc cQMessageBox_slot_callback_buttonClicked_release(slot: int) {.cdecl.} =
+proc fcQMessageBox_slot_callback_buttonClicked_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QMessageBoxbuttonClickedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onbuttonClicked*(self: gen_qmessagebox_types.QMessageBox, slot: QMessageBoxbuttonClickedSlot) =
+proc onButtonClicked*(self: gen_qmessagebox_types.QMessageBox, slot: QMessageBoxbuttonClickedSlot) =
   var tmp = new QMessageBoxbuttonClickedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQMessageBox_connect_buttonClicked(self.h, cast[int](addr tmp[]), cQMessageBox_slot_callback_buttonClicked, cQMessageBox_slot_callback_buttonClicked_release)
+  fcQMessageBox_connect_buttonClicked(self.h, cast[int](addr tmp[]), fcQMessageBox_slot_callback_buttonClicked, fcQMessageBox_slot_callback_buttonClicked_release)
 
 proc tr*(_: type gen_qmessagebox_types.QMessageBox, s: cstring, c: cstring): string =
   let v_ms = fcQMessageBox_tr2(s, c)
@@ -766,6 +767,7 @@ type QMessageBoxchildEventProc* = proc(self: QMessageBox, event: gen_qcoreevent_
 type QMessageBoxcustomEventProc* = proc(self: QMessageBox, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QMessageBoxconnectNotifyProc* = proc(self: QMessageBox, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QMessageBoxdisconnectNotifyProc* = proc(self: QMessageBox, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+
 type QMessageBoxVTable* {.inheritable, pure.} = object
   vtbl: cQMessageBoxVTable
   metaObject*: QMessageBoxmetaObjectProc
@@ -823,10 +825,174 @@ type QMessageBoxVTable* {.inheritable, pure.} = object
   customEvent*: QMessageBoxcustomEventProc
   connectNotify*: QMessageBoxconnectNotifyProc
   disconnectNotify*: QMessageBoxdisconnectNotifyProc
+
 proc QMessageBoxmetaObject*(self: gen_qmessagebox_types.QMessageBox): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQMessageBox_virtualbase_metaObject(self.h), owned: false)
 
-proc cQMessageBox_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
+proc QMessageBoxmetacast*(self: gen_qmessagebox_types.QMessageBox, param1: cstring): pointer =
+  fcQMessageBox_virtualbase_metacast(self.h, param1)
+
+proc QMessageBoxmetacall*(self: gen_qmessagebox_types.QMessageBox, param1: cint, param2: cint, param3: pointer): cint =
+  fcQMessageBox_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+proc QMessageBoxevent*(self: gen_qmessagebox_types.QMessageBox, e: gen_qcoreevent_types.QEvent): bool =
+  fcQMessageBox_virtualbase_event(self.h, e.h)
+
+proc QMessageBoxresizeEvent*(self: gen_qmessagebox_types.QMessageBox, event: gen_qevent_types.QResizeEvent): void =
+  fcQMessageBox_virtualbase_resizeEvent(self.h, event.h)
+
+proc QMessageBoxshowEvent*(self: gen_qmessagebox_types.QMessageBox, event: gen_qevent_types.QShowEvent): void =
+  fcQMessageBox_virtualbase_showEvent(self.h, event.h)
+
+proc QMessageBoxcloseEvent*(self: gen_qmessagebox_types.QMessageBox, event: gen_qevent_types.QCloseEvent): void =
+  fcQMessageBox_virtualbase_closeEvent(self.h, event.h)
+
+proc QMessageBoxkeyPressEvent*(self: gen_qmessagebox_types.QMessageBox, event: gen_qevent_types.QKeyEvent): void =
+  fcQMessageBox_virtualbase_keyPressEvent(self.h, event.h)
+
+proc QMessageBoxchangeEvent*(self: gen_qmessagebox_types.QMessageBox, event: gen_qcoreevent_types.QEvent): void =
+  fcQMessageBox_virtualbase_changeEvent(self.h, event.h)
+
+proc QMessageBoxsetVisible*(self: gen_qmessagebox_types.QMessageBox, visible: bool): void =
+  fcQMessageBox_virtualbase_setVisible(self.h, visible)
+
+proc QMessageBoxsizeHint*(self: gen_qmessagebox_types.QMessageBox): gen_qsize_types.QSize =
+  gen_qsize_types.QSize(h: fcQMessageBox_virtualbase_sizeHint(self.h), owned: true)
+
+proc QMessageBoxminimumSizeHint*(self: gen_qmessagebox_types.QMessageBox): gen_qsize_types.QSize =
+  gen_qsize_types.QSize(h: fcQMessageBox_virtualbase_minimumSizeHint(self.h), owned: true)
+
+proc QMessageBoxopen*(self: gen_qmessagebox_types.QMessageBox): void =
+  fcQMessageBox_virtualbase_open(self.h)
+
+proc QMessageBoxexec*(self: gen_qmessagebox_types.QMessageBox): cint =
+  fcQMessageBox_virtualbase_exec(self.h)
+
+proc QMessageBoxdone*(self: gen_qmessagebox_types.QMessageBox, param1: cint): void =
+  fcQMessageBox_virtualbase_done(self.h, param1)
+
+proc QMessageBoxaccept*(self: gen_qmessagebox_types.QMessageBox): void =
+  fcQMessageBox_virtualbase_accept(self.h)
+
+proc QMessageBoxreject*(self: gen_qmessagebox_types.QMessageBox): void =
+  fcQMessageBox_virtualbase_reject(self.h)
+
+proc QMessageBoxcontextMenuEvent*(self: gen_qmessagebox_types.QMessageBox, param1: gen_qevent_types.QContextMenuEvent): void =
+  fcQMessageBox_virtualbase_contextMenuEvent(self.h, param1.h)
+
+proc QMessageBoxeventFilter*(self: gen_qmessagebox_types.QMessageBox, param1: gen_qobject_types.QObject, param2: gen_qcoreevent_types.QEvent): bool =
+  fcQMessageBox_virtualbase_eventFilter(self.h, param1.h, param2.h)
+
+proc QMessageBoxdevType*(self: gen_qmessagebox_types.QMessageBox): cint =
+  fcQMessageBox_virtualbase_devType(self.h)
+
+proc QMessageBoxheightForWidth*(self: gen_qmessagebox_types.QMessageBox, param1: cint): cint =
+  fcQMessageBox_virtualbase_heightForWidth(self.h, param1)
+
+proc QMessageBoxhasHeightForWidth*(self: gen_qmessagebox_types.QMessageBox): bool =
+  fcQMessageBox_virtualbase_hasHeightForWidth(self.h)
+
+proc QMessageBoxpaintEngine*(self: gen_qmessagebox_types.QMessageBox): gen_qpaintengine_types.QPaintEngine =
+  gen_qpaintengine_types.QPaintEngine(h: fcQMessageBox_virtualbase_paintEngine(self.h), owned: false)
+
+proc QMessageBoxmousePressEvent*(self: gen_qmessagebox_types.QMessageBox, event: gen_qevent_types.QMouseEvent): void =
+  fcQMessageBox_virtualbase_mousePressEvent(self.h, event.h)
+
+proc QMessageBoxmouseReleaseEvent*(self: gen_qmessagebox_types.QMessageBox, event: gen_qevent_types.QMouseEvent): void =
+  fcQMessageBox_virtualbase_mouseReleaseEvent(self.h, event.h)
+
+proc QMessageBoxmouseDoubleClickEvent*(self: gen_qmessagebox_types.QMessageBox, event: gen_qevent_types.QMouseEvent): void =
+  fcQMessageBox_virtualbase_mouseDoubleClickEvent(self.h, event.h)
+
+proc QMessageBoxmouseMoveEvent*(self: gen_qmessagebox_types.QMessageBox, event: gen_qevent_types.QMouseEvent): void =
+  fcQMessageBox_virtualbase_mouseMoveEvent(self.h, event.h)
+
+proc QMessageBoxwheelEvent*(self: gen_qmessagebox_types.QMessageBox, event: gen_qevent_types.QWheelEvent): void =
+  fcQMessageBox_virtualbase_wheelEvent(self.h, event.h)
+
+proc QMessageBoxkeyReleaseEvent*(self: gen_qmessagebox_types.QMessageBox, event: gen_qevent_types.QKeyEvent): void =
+  fcQMessageBox_virtualbase_keyReleaseEvent(self.h, event.h)
+
+proc QMessageBoxfocusInEvent*(self: gen_qmessagebox_types.QMessageBox, event: gen_qevent_types.QFocusEvent): void =
+  fcQMessageBox_virtualbase_focusInEvent(self.h, event.h)
+
+proc QMessageBoxfocusOutEvent*(self: gen_qmessagebox_types.QMessageBox, event: gen_qevent_types.QFocusEvent): void =
+  fcQMessageBox_virtualbase_focusOutEvent(self.h, event.h)
+
+proc QMessageBoxenterEvent*(self: gen_qmessagebox_types.QMessageBox, event: gen_qcoreevent_types.QEvent): void =
+  fcQMessageBox_virtualbase_enterEvent(self.h, event.h)
+
+proc QMessageBoxleaveEvent*(self: gen_qmessagebox_types.QMessageBox, event: gen_qcoreevent_types.QEvent): void =
+  fcQMessageBox_virtualbase_leaveEvent(self.h, event.h)
+
+proc QMessageBoxpaintEvent*(self: gen_qmessagebox_types.QMessageBox, event: gen_qevent_types.QPaintEvent): void =
+  fcQMessageBox_virtualbase_paintEvent(self.h, event.h)
+
+proc QMessageBoxmoveEvent*(self: gen_qmessagebox_types.QMessageBox, event: gen_qevent_types.QMoveEvent): void =
+  fcQMessageBox_virtualbase_moveEvent(self.h, event.h)
+
+proc QMessageBoxtabletEvent*(self: gen_qmessagebox_types.QMessageBox, event: gen_qevent_types.QTabletEvent): void =
+  fcQMessageBox_virtualbase_tabletEvent(self.h, event.h)
+
+proc QMessageBoxactionEvent*(self: gen_qmessagebox_types.QMessageBox, event: gen_qevent_types.QActionEvent): void =
+  fcQMessageBox_virtualbase_actionEvent(self.h, event.h)
+
+proc QMessageBoxdragEnterEvent*(self: gen_qmessagebox_types.QMessageBox, event: gen_qevent_types.QDragEnterEvent): void =
+  fcQMessageBox_virtualbase_dragEnterEvent(self.h, event.h)
+
+proc QMessageBoxdragMoveEvent*(self: gen_qmessagebox_types.QMessageBox, event: gen_qevent_types.QDragMoveEvent): void =
+  fcQMessageBox_virtualbase_dragMoveEvent(self.h, event.h)
+
+proc QMessageBoxdragLeaveEvent*(self: gen_qmessagebox_types.QMessageBox, event: gen_qevent_types.QDragLeaveEvent): void =
+  fcQMessageBox_virtualbase_dragLeaveEvent(self.h, event.h)
+
+proc QMessageBoxdropEvent*(self: gen_qmessagebox_types.QMessageBox, event: gen_qevent_types.QDropEvent): void =
+  fcQMessageBox_virtualbase_dropEvent(self.h, event.h)
+
+proc QMessageBoxhideEvent*(self: gen_qmessagebox_types.QMessageBox, event: gen_qevent_types.QHideEvent): void =
+  fcQMessageBox_virtualbase_hideEvent(self.h, event.h)
+
+proc QMessageBoxnativeEvent*(self: gen_qmessagebox_types.QMessageBox, eventType: openArray[byte], message: pointer, resultVal: ptr clong): bool =
+  fcQMessageBox_virtualbase_nativeEvent(self.h, struct_miqt_string(data: cast[cstring](if len(eventType) == 0: nil else: unsafeAddr eventType[0]), len: csize_t(len(eventType))), message, resultVal)
+
+proc QMessageBoxmetric*(self: gen_qmessagebox_types.QMessageBox, param1: cint): cint =
+  fcQMessageBox_virtualbase_metric(self.h, cint(param1))
+
+proc QMessageBoxinitPainter*(self: gen_qmessagebox_types.QMessageBox, painter: gen_qpainter_types.QPainter): void =
+  fcQMessageBox_virtualbase_initPainter(self.h, painter.h)
+
+proc QMessageBoxredirected*(self: gen_qmessagebox_types.QMessageBox, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice =
+  gen_qpaintdevice_types.QPaintDevice(h: fcQMessageBox_virtualbase_redirected(self.h, offset.h), owned: false)
+
+proc QMessageBoxsharedPainter*(self: gen_qmessagebox_types.QMessageBox): gen_qpainter_types.QPainter =
+  gen_qpainter_types.QPainter(h: fcQMessageBox_virtualbase_sharedPainter(self.h), owned: false)
+
+proc QMessageBoxinputMethodEvent*(self: gen_qmessagebox_types.QMessageBox, param1: gen_qevent_types.QInputMethodEvent): void =
+  fcQMessageBox_virtualbase_inputMethodEvent(self.h, param1.h)
+
+proc QMessageBoxinputMethodQuery*(self: gen_qmessagebox_types.QMessageBox, param1: cint): gen_qvariant_types.QVariant =
+  gen_qvariant_types.QVariant(h: fcQMessageBox_virtualbase_inputMethodQuery(self.h, cint(param1)), owned: true)
+
+proc QMessageBoxfocusNextPrevChild*(self: gen_qmessagebox_types.QMessageBox, next: bool): bool =
+  fcQMessageBox_virtualbase_focusNextPrevChild(self.h, next)
+
+proc QMessageBoxtimerEvent*(self: gen_qmessagebox_types.QMessageBox, event: gen_qcoreevent_types.QTimerEvent): void =
+  fcQMessageBox_virtualbase_timerEvent(self.h, event.h)
+
+proc QMessageBoxchildEvent*(self: gen_qmessagebox_types.QMessageBox, event: gen_qcoreevent_types.QChildEvent): void =
+  fcQMessageBox_virtualbase_childEvent(self.h, event.h)
+
+proc QMessageBoxcustomEvent*(self: gen_qmessagebox_types.QMessageBox, event: gen_qcoreevent_types.QEvent): void =
+  fcQMessageBox_virtualbase_customEvent(self.h, event.h)
+
+proc QMessageBoxconnectNotify*(self: gen_qmessagebox_types.QMessageBox, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQMessageBox_virtualbase_connectNotify(self.h, signal.h)
+
+proc QMessageBoxdisconnectNotify*(self: gen_qmessagebox_types.QMessageBox, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQMessageBox_virtualbase_disconnectNotify(self.h, signal.h)
+
+
+proc fcQMessageBox_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self))
   let self = QMessageBox(h: self)
   var virtualReturn = vtbl[].metaObject(self)
@@ -835,20 +1001,14 @@ proc cQMessageBox_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QMessageBoxmetacast*(self: gen_qmessagebox_types.QMessageBox, param1: cstring): pointer =
-  fcQMessageBox_virtualbase_metacast(self.h, param1)
-
-proc cQMessageBox_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+proc fcQMessageBox_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self))
   let self = QMessageBox(h: self)
   let slotval1 = (param1)
   var virtualReturn = vtbl[].metacast(self, slotval1)
   virtualReturn
 
-proc QMessageBoxmetacall*(self: gen_qmessagebox_types.QMessageBox, param1: cint, param2: cint, param3: pointer): cint =
-  fcQMessageBox_virtualbase_metacall(self.h, cint(param1), param2, param3)
-
-proc cQMessageBox_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+proc fcQMessageBox_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self))
   let self = QMessageBox(h: self)
   let slotval1 = cint(param1)
@@ -857,74 +1017,50 @@ proc cQMessageBox_vtable_callback_metacall(self: pointer, param1: cint, param2: 
   var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QMessageBoxevent*(self: gen_qmessagebox_types.QMessageBox, e: gen_qcoreevent_types.QEvent): bool =
-  fcQMessageBox_virtualbase_event(self.h, e.h)
-
-proc cQMessageBox_vtable_callback_event(self: pointer, e: pointer): bool {.cdecl.} =
+proc fcQMessageBox_vtable_callback_event(self: pointer, e: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self))
   let self = QMessageBox(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: e, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
-proc QMessageBoxresizeEvent*(self: gen_qmessagebox_types.QMessageBox, event: gen_qevent_types.QResizeEvent): void =
-  fcQMessageBox_virtualbase_resizeEvent(self.h, event.h)
-
-proc cQMessageBox_vtable_callback_resizeEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQMessageBox_vtable_callback_resizeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self))
   let self = QMessageBox(h: self)
   let slotval1 = gen_qevent_types.QResizeEvent(h: event, owned: false)
   vtbl[].resizeEvent(self, slotval1)
 
-proc QMessageBoxshowEvent*(self: gen_qmessagebox_types.QMessageBox, event: gen_qevent_types.QShowEvent): void =
-  fcQMessageBox_virtualbase_showEvent(self.h, event.h)
-
-proc cQMessageBox_vtable_callback_showEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQMessageBox_vtable_callback_showEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self))
   let self = QMessageBox(h: self)
   let slotval1 = gen_qevent_types.QShowEvent(h: event, owned: false)
   vtbl[].showEvent(self, slotval1)
 
-proc QMessageBoxcloseEvent*(self: gen_qmessagebox_types.QMessageBox, event: gen_qevent_types.QCloseEvent): void =
-  fcQMessageBox_virtualbase_closeEvent(self.h, event.h)
-
-proc cQMessageBox_vtable_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQMessageBox_vtable_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self))
   let self = QMessageBox(h: self)
   let slotval1 = gen_qevent_types.QCloseEvent(h: event, owned: false)
   vtbl[].closeEvent(self, slotval1)
 
-proc QMessageBoxkeyPressEvent*(self: gen_qmessagebox_types.QMessageBox, event: gen_qevent_types.QKeyEvent): void =
-  fcQMessageBox_virtualbase_keyPressEvent(self.h, event.h)
-
-proc cQMessageBox_vtable_callback_keyPressEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQMessageBox_vtable_callback_keyPressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self))
   let self = QMessageBox(h: self)
   let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   vtbl[].keyPressEvent(self, slotval1)
 
-proc QMessageBoxchangeEvent*(self: gen_qmessagebox_types.QMessageBox, event: gen_qcoreevent_types.QEvent): void =
-  fcQMessageBox_virtualbase_changeEvent(self.h, event.h)
-
-proc cQMessageBox_vtable_callback_changeEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQMessageBox_vtable_callback_changeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self))
   let self = QMessageBox(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].changeEvent(self, slotval1)
 
-proc QMessageBoxsetVisible*(self: gen_qmessagebox_types.QMessageBox, visible: bool): void =
-  fcQMessageBox_virtualbase_setVisible(self.h, visible)
-
-proc cQMessageBox_vtable_callback_setVisible(self: pointer, visible: bool): void {.cdecl.} =
+proc fcQMessageBox_vtable_callback_setVisible(self: pointer, visible: bool): void {.cdecl.} =
   let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self))
   let self = QMessageBox(h: self)
   let slotval1 = visible
   vtbl[].setVisible(self, slotval1)
 
-proc QMessageBoxsizeHint*(self: gen_qmessagebox_types.QMessageBox): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQMessageBox_virtualbase_sizeHint(self.h), owned: true)
-
-proc cQMessageBox_vtable_callback_sizeHint(self: pointer): pointer {.cdecl.} =
+proc fcQMessageBox_vtable_callback_sizeHint(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self))
   let self = QMessageBox(h: self)
   var virtualReturn = vtbl[].sizeHint(self)
@@ -933,10 +1069,7 @@ proc cQMessageBox_vtable_callback_sizeHint(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QMessageBoxminimumSizeHint*(self: gen_qmessagebox_types.QMessageBox): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQMessageBox_virtualbase_minimumSizeHint(self.h), owned: true)
-
-proc cQMessageBox_vtable_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
+proc fcQMessageBox_vtable_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self))
   let self = QMessageBox(h: self)
   var virtualReturn = vtbl[].minimumSizeHint(self)
@@ -945,61 +1078,40 @@ proc cQMessageBox_vtable_callback_minimumSizeHint(self: pointer): pointer {.cdec
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QMessageBoxopen*(self: gen_qmessagebox_types.QMessageBox): void =
-  fcQMessageBox_virtualbase_open(self.h)
-
-proc cQMessageBox_vtable_callback_open(self: pointer): void {.cdecl.} =
+proc fcQMessageBox_vtable_callback_open(self: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self))
   let self = QMessageBox(h: self)
   vtbl[].open(self)
 
-proc QMessageBoxexec*(self: gen_qmessagebox_types.QMessageBox): cint =
-  fcQMessageBox_virtualbase_exec(self.h)
-
-proc cQMessageBox_vtable_callback_exec(self: pointer): cint {.cdecl.} =
+proc fcQMessageBox_vtable_callback_exec(self: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self))
   let self = QMessageBox(h: self)
   var virtualReturn = vtbl[].exec(self)
   virtualReturn
 
-proc QMessageBoxdone*(self: gen_qmessagebox_types.QMessageBox, param1: cint): void =
-  fcQMessageBox_virtualbase_done(self.h, param1)
-
-proc cQMessageBox_vtable_callback_done(self: pointer, param1: cint): void {.cdecl.} =
+proc fcQMessageBox_vtable_callback_done(self: pointer, param1: cint): void {.cdecl.} =
   let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self))
   let self = QMessageBox(h: self)
   let slotval1 = param1
   vtbl[].done(self, slotval1)
 
-proc QMessageBoxaccept*(self: gen_qmessagebox_types.QMessageBox): void =
-  fcQMessageBox_virtualbase_accept(self.h)
-
-proc cQMessageBox_vtable_callback_accept(self: pointer): void {.cdecl.} =
+proc fcQMessageBox_vtable_callback_accept(self: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self))
   let self = QMessageBox(h: self)
   vtbl[].accept(self)
 
-proc QMessageBoxreject*(self: gen_qmessagebox_types.QMessageBox): void =
-  fcQMessageBox_virtualbase_reject(self.h)
-
-proc cQMessageBox_vtable_callback_reject(self: pointer): void {.cdecl.} =
+proc fcQMessageBox_vtable_callback_reject(self: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self))
   let self = QMessageBox(h: self)
   vtbl[].reject(self)
 
-proc QMessageBoxcontextMenuEvent*(self: gen_qmessagebox_types.QMessageBox, param1: gen_qevent_types.QContextMenuEvent): void =
-  fcQMessageBox_virtualbase_contextMenuEvent(self.h, param1.h)
-
-proc cQMessageBox_vtable_callback_contextMenuEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQMessageBox_vtable_callback_contextMenuEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self))
   let self = QMessageBox(h: self)
   let slotval1 = gen_qevent_types.QContextMenuEvent(h: param1, owned: false)
   vtbl[].contextMenuEvent(self, slotval1)
 
-proc QMessageBoxeventFilter*(self: gen_qmessagebox_types.QMessageBox, param1: gen_qobject_types.QObject, param2: gen_qcoreevent_types.QEvent): bool =
-  fcQMessageBox_virtualbase_eventFilter(self.h, param1.h, param2.h)
-
-proc cQMessageBox_vtable_callback_eventFilter(self: pointer, param1: pointer, param2: pointer): bool {.cdecl.} =
+proc fcQMessageBox_vtable_callback_eventFilter(self: pointer, param1: pointer, param2: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self))
   let self = QMessageBox(h: self)
   let slotval1 = gen_qobject_types.QObject(h: param1, owned: false)
@@ -1007,38 +1119,26 @@ proc cQMessageBox_vtable_callback_eventFilter(self: pointer, param1: pointer, pa
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
-proc QMessageBoxdevType*(self: gen_qmessagebox_types.QMessageBox): cint =
-  fcQMessageBox_virtualbase_devType(self.h)
-
-proc cQMessageBox_vtable_callback_devType(self: pointer): cint {.cdecl.} =
+proc fcQMessageBox_vtable_callback_devType(self: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self))
   let self = QMessageBox(h: self)
   var virtualReturn = vtbl[].devType(self)
   virtualReturn
 
-proc QMessageBoxheightForWidth*(self: gen_qmessagebox_types.QMessageBox, param1: cint): cint =
-  fcQMessageBox_virtualbase_heightForWidth(self.h, param1)
-
-proc cQMessageBox_vtable_callback_heightForWidth(self: pointer, param1: cint): cint {.cdecl.} =
+proc fcQMessageBox_vtable_callback_heightForWidth(self: pointer, param1: cint): cint {.cdecl.} =
   let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self))
   let self = QMessageBox(h: self)
   let slotval1 = param1
   var virtualReturn = vtbl[].heightForWidth(self, slotval1)
   virtualReturn
 
-proc QMessageBoxhasHeightForWidth*(self: gen_qmessagebox_types.QMessageBox): bool =
-  fcQMessageBox_virtualbase_hasHeightForWidth(self.h)
-
-proc cQMessageBox_vtable_callback_hasHeightForWidth(self: pointer): bool {.cdecl.} =
+proc fcQMessageBox_vtable_callback_hasHeightForWidth(self: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self))
   let self = QMessageBox(h: self)
   var virtualReturn = vtbl[].hasHeightForWidth(self)
   virtualReturn
 
-proc QMessageBoxpaintEngine*(self: gen_qmessagebox_types.QMessageBox): gen_qpaintengine_types.QPaintEngine =
-  gen_qpaintengine_types.QPaintEngine(h: fcQMessageBox_virtualbase_paintEngine(self.h), owned: false)
-
-proc cQMessageBox_vtable_callback_paintEngine(self: pointer): pointer {.cdecl.} =
+proc fcQMessageBox_vtable_callback_paintEngine(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self))
   let self = QMessageBox(h: self)
   var virtualReturn = vtbl[].paintEngine(self)
@@ -1047,181 +1147,121 @@ proc cQMessageBox_vtable_callback_paintEngine(self: pointer): pointer {.cdecl.} 
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QMessageBoxmousePressEvent*(self: gen_qmessagebox_types.QMessageBox, event: gen_qevent_types.QMouseEvent): void =
-  fcQMessageBox_virtualbase_mousePressEvent(self.h, event.h)
-
-proc cQMessageBox_vtable_callback_mousePressEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQMessageBox_vtable_callback_mousePressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self))
   let self = QMessageBox(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mousePressEvent(self, slotval1)
 
-proc QMessageBoxmouseReleaseEvent*(self: gen_qmessagebox_types.QMessageBox, event: gen_qevent_types.QMouseEvent): void =
-  fcQMessageBox_virtualbase_mouseReleaseEvent(self.h, event.h)
-
-proc cQMessageBox_vtable_callback_mouseReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQMessageBox_vtable_callback_mouseReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self))
   let self = QMessageBox(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseReleaseEvent(self, slotval1)
 
-proc QMessageBoxmouseDoubleClickEvent*(self: gen_qmessagebox_types.QMessageBox, event: gen_qevent_types.QMouseEvent): void =
-  fcQMessageBox_virtualbase_mouseDoubleClickEvent(self.h, event.h)
-
-proc cQMessageBox_vtable_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQMessageBox_vtable_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self))
   let self = QMessageBox(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseDoubleClickEvent(self, slotval1)
 
-proc QMessageBoxmouseMoveEvent*(self: gen_qmessagebox_types.QMessageBox, event: gen_qevent_types.QMouseEvent): void =
-  fcQMessageBox_virtualbase_mouseMoveEvent(self.h, event.h)
-
-proc cQMessageBox_vtable_callback_mouseMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQMessageBox_vtable_callback_mouseMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self))
   let self = QMessageBox(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseMoveEvent(self, slotval1)
 
-proc QMessageBoxwheelEvent*(self: gen_qmessagebox_types.QMessageBox, event: gen_qevent_types.QWheelEvent): void =
-  fcQMessageBox_virtualbase_wheelEvent(self.h, event.h)
-
-proc cQMessageBox_vtable_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQMessageBox_vtable_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self))
   let self = QMessageBox(h: self)
   let slotval1 = gen_qevent_types.QWheelEvent(h: event, owned: false)
   vtbl[].wheelEvent(self, slotval1)
 
-proc QMessageBoxkeyReleaseEvent*(self: gen_qmessagebox_types.QMessageBox, event: gen_qevent_types.QKeyEvent): void =
-  fcQMessageBox_virtualbase_keyReleaseEvent(self.h, event.h)
-
-proc cQMessageBox_vtable_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQMessageBox_vtable_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self))
   let self = QMessageBox(h: self)
   let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   vtbl[].keyReleaseEvent(self, slotval1)
 
-proc QMessageBoxfocusInEvent*(self: gen_qmessagebox_types.QMessageBox, event: gen_qevent_types.QFocusEvent): void =
-  fcQMessageBox_virtualbase_focusInEvent(self.h, event.h)
-
-proc cQMessageBox_vtable_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQMessageBox_vtable_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self))
   let self = QMessageBox(h: self)
   let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusInEvent(self, slotval1)
 
-proc QMessageBoxfocusOutEvent*(self: gen_qmessagebox_types.QMessageBox, event: gen_qevent_types.QFocusEvent): void =
-  fcQMessageBox_virtualbase_focusOutEvent(self.h, event.h)
-
-proc cQMessageBox_vtable_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQMessageBox_vtable_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self))
   let self = QMessageBox(h: self)
   let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusOutEvent(self, slotval1)
 
-proc QMessageBoxenterEvent*(self: gen_qmessagebox_types.QMessageBox, event: gen_qcoreevent_types.QEvent): void =
-  fcQMessageBox_virtualbase_enterEvent(self.h, event.h)
-
-proc cQMessageBox_vtable_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQMessageBox_vtable_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self))
   let self = QMessageBox(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].enterEvent(self, slotval1)
 
-proc QMessageBoxleaveEvent*(self: gen_qmessagebox_types.QMessageBox, event: gen_qcoreevent_types.QEvent): void =
-  fcQMessageBox_virtualbase_leaveEvent(self.h, event.h)
-
-proc cQMessageBox_vtable_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQMessageBox_vtable_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self))
   let self = QMessageBox(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].leaveEvent(self, slotval1)
 
-proc QMessageBoxpaintEvent*(self: gen_qmessagebox_types.QMessageBox, event: gen_qevent_types.QPaintEvent): void =
-  fcQMessageBox_virtualbase_paintEvent(self.h, event.h)
-
-proc cQMessageBox_vtable_callback_paintEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQMessageBox_vtable_callback_paintEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self))
   let self = QMessageBox(h: self)
   let slotval1 = gen_qevent_types.QPaintEvent(h: event, owned: false)
   vtbl[].paintEvent(self, slotval1)
 
-proc QMessageBoxmoveEvent*(self: gen_qmessagebox_types.QMessageBox, event: gen_qevent_types.QMoveEvent): void =
-  fcQMessageBox_virtualbase_moveEvent(self.h, event.h)
-
-proc cQMessageBox_vtable_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQMessageBox_vtable_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self))
   let self = QMessageBox(h: self)
   let slotval1 = gen_qevent_types.QMoveEvent(h: event, owned: false)
   vtbl[].moveEvent(self, slotval1)
 
-proc QMessageBoxtabletEvent*(self: gen_qmessagebox_types.QMessageBox, event: gen_qevent_types.QTabletEvent): void =
-  fcQMessageBox_virtualbase_tabletEvent(self.h, event.h)
-
-proc cQMessageBox_vtable_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQMessageBox_vtable_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self))
   let self = QMessageBox(h: self)
   let slotval1 = gen_qevent_types.QTabletEvent(h: event, owned: false)
   vtbl[].tabletEvent(self, slotval1)
 
-proc QMessageBoxactionEvent*(self: gen_qmessagebox_types.QMessageBox, event: gen_qevent_types.QActionEvent): void =
-  fcQMessageBox_virtualbase_actionEvent(self.h, event.h)
-
-proc cQMessageBox_vtable_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQMessageBox_vtable_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self))
   let self = QMessageBox(h: self)
   let slotval1 = gen_qevent_types.QActionEvent(h: event, owned: false)
   vtbl[].actionEvent(self, slotval1)
 
-proc QMessageBoxdragEnterEvent*(self: gen_qmessagebox_types.QMessageBox, event: gen_qevent_types.QDragEnterEvent): void =
-  fcQMessageBox_virtualbase_dragEnterEvent(self.h, event.h)
-
-proc cQMessageBox_vtable_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQMessageBox_vtable_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self))
   let self = QMessageBox(h: self)
   let slotval1 = gen_qevent_types.QDragEnterEvent(h: event, owned: false)
   vtbl[].dragEnterEvent(self, slotval1)
 
-proc QMessageBoxdragMoveEvent*(self: gen_qmessagebox_types.QMessageBox, event: gen_qevent_types.QDragMoveEvent): void =
-  fcQMessageBox_virtualbase_dragMoveEvent(self.h, event.h)
-
-proc cQMessageBox_vtable_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQMessageBox_vtable_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self))
   let self = QMessageBox(h: self)
   let slotval1 = gen_qevent_types.QDragMoveEvent(h: event, owned: false)
   vtbl[].dragMoveEvent(self, slotval1)
 
-proc QMessageBoxdragLeaveEvent*(self: gen_qmessagebox_types.QMessageBox, event: gen_qevent_types.QDragLeaveEvent): void =
-  fcQMessageBox_virtualbase_dragLeaveEvent(self.h, event.h)
-
-proc cQMessageBox_vtable_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQMessageBox_vtable_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self))
   let self = QMessageBox(h: self)
   let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event, owned: false)
   vtbl[].dragLeaveEvent(self, slotval1)
 
-proc QMessageBoxdropEvent*(self: gen_qmessagebox_types.QMessageBox, event: gen_qevent_types.QDropEvent): void =
-  fcQMessageBox_virtualbase_dropEvent(self.h, event.h)
-
-proc cQMessageBox_vtable_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQMessageBox_vtable_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self))
   let self = QMessageBox(h: self)
   let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
   vtbl[].dropEvent(self, slotval1)
 
-proc QMessageBoxhideEvent*(self: gen_qmessagebox_types.QMessageBox, event: gen_qevent_types.QHideEvent): void =
-  fcQMessageBox_virtualbase_hideEvent(self.h, event.h)
-
-proc cQMessageBox_vtable_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQMessageBox_vtable_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self))
   let self = QMessageBox(h: self)
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   vtbl[].hideEvent(self, slotval1)
 
-proc QMessageBoxnativeEvent*(self: gen_qmessagebox_types.QMessageBox, eventType: openArray[byte], message: pointer, resultVal: ptr clong): bool =
-  fcQMessageBox_virtualbase_nativeEvent(self.h, struct_miqt_string(data: cast[cstring](if len(eventType) == 0: nil else: unsafeAddr eventType[0]), len: csize_t(len(eventType))), message, resultVal)
-
-proc cQMessageBox_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr clong): bool {.cdecl.} =
+proc fcQMessageBox_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr clong): bool {.cdecl.} =
   let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self))
   let self = QMessageBox(h: self)
   var veventType_bytearray = eventType
@@ -1233,29 +1273,20 @@ proc cQMessageBox_vtable_callback_nativeEvent(self: pointer, eventType: struct_m
   var virtualReturn = vtbl[].nativeEvent(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QMessageBoxmetric*(self: gen_qmessagebox_types.QMessageBox, param1: cint): cint =
-  fcQMessageBox_virtualbase_metric(self.h, cint(param1))
-
-proc cQMessageBox_vtable_callback_metric(self: pointer, param1: cint): cint {.cdecl.} =
+proc fcQMessageBox_vtable_callback_metric(self: pointer, param1: cint): cint {.cdecl.} =
   let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self))
   let self = QMessageBox(h: self)
   let slotval1 = cint(param1)
   var virtualReturn = vtbl[].metric(self, slotval1)
   virtualReturn
 
-proc QMessageBoxinitPainter*(self: gen_qmessagebox_types.QMessageBox, painter: gen_qpainter_types.QPainter): void =
-  fcQMessageBox_virtualbase_initPainter(self.h, painter.h)
-
-proc cQMessageBox_vtable_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
+proc fcQMessageBox_vtable_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self))
   let self = QMessageBox(h: self)
   let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
   vtbl[].initPainter(self, slotval1)
 
-proc QMessageBoxredirected*(self: gen_qmessagebox_types.QMessageBox, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice =
-  gen_qpaintdevice_types.QPaintDevice(h: fcQMessageBox_virtualbase_redirected(self.h, offset.h), owned: false)
-
-proc cQMessageBox_vtable_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
+proc fcQMessageBox_vtable_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self))
   let self = QMessageBox(h: self)
   let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
@@ -1265,10 +1296,7 @@ proc cQMessageBox_vtable_callback_redirected(self: pointer, offset: pointer): po
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QMessageBoxsharedPainter*(self: gen_qmessagebox_types.QMessageBox): gen_qpainter_types.QPainter =
-  gen_qpainter_types.QPainter(h: fcQMessageBox_virtualbase_sharedPainter(self.h), owned: false)
-
-proc cQMessageBox_vtable_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
+proc fcQMessageBox_vtable_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self))
   let self = QMessageBox(h: self)
   var virtualReturn = vtbl[].sharedPainter(self)
@@ -1277,19 +1305,13 @@ proc cQMessageBox_vtable_callback_sharedPainter(self: pointer): pointer {.cdecl.
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QMessageBoxinputMethodEvent*(self: gen_qmessagebox_types.QMessageBox, param1: gen_qevent_types.QInputMethodEvent): void =
-  fcQMessageBox_virtualbase_inputMethodEvent(self.h, param1.h)
-
-proc cQMessageBox_vtable_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQMessageBox_vtable_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self))
   let self = QMessageBox(h: self)
   let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1, owned: false)
   vtbl[].inputMethodEvent(self, slotval1)
 
-proc QMessageBoxinputMethodQuery*(self: gen_qmessagebox_types.QMessageBox, param1: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQMessageBox_virtualbase_inputMethodQuery(self.h, cint(param1)), owned: true)
-
-proc cQMessageBox_vtable_callback_inputMethodQuery(self: pointer, param1: cint): pointer {.cdecl.} =
+proc fcQMessageBox_vtable_callback_inputMethodQuery(self: pointer, param1: cint): pointer {.cdecl.} =
   let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self))
   let self = QMessageBox(h: self)
   let slotval1 = cint(param1)
@@ -1299,56 +1321,38 @@ proc cQMessageBox_vtable_callback_inputMethodQuery(self: pointer, param1: cint):
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QMessageBoxfocusNextPrevChild*(self: gen_qmessagebox_types.QMessageBox, next: bool): bool =
-  fcQMessageBox_virtualbase_focusNextPrevChild(self.h, next)
-
-proc cQMessageBox_vtable_callback_focusNextPrevChild(self: pointer, next: bool): bool {.cdecl.} =
+proc fcQMessageBox_vtable_callback_focusNextPrevChild(self: pointer, next: bool): bool {.cdecl.} =
   let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self))
   let self = QMessageBox(h: self)
   let slotval1 = next
   var virtualReturn = vtbl[].focusNextPrevChild(self, slotval1)
   virtualReturn
 
-proc QMessageBoxtimerEvent*(self: gen_qmessagebox_types.QMessageBox, event: gen_qcoreevent_types.QTimerEvent): void =
-  fcQMessageBox_virtualbase_timerEvent(self.h, event.h)
-
-proc cQMessageBox_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQMessageBox_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self))
   let self = QMessageBox(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
-proc QMessageBoxchildEvent*(self: gen_qmessagebox_types.QMessageBox, event: gen_qcoreevent_types.QChildEvent): void =
-  fcQMessageBox_virtualbase_childEvent(self.h, event.h)
-
-proc cQMessageBox_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQMessageBox_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self))
   let self = QMessageBox(h: self)
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
-proc QMessageBoxcustomEvent*(self: gen_qmessagebox_types.QMessageBox, event: gen_qcoreevent_types.QEvent): void =
-  fcQMessageBox_virtualbase_customEvent(self.h, event.h)
-
-proc cQMessageBox_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQMessageBox_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self))
   let self = QMessageBox(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
-proc QMessageBoxconnectNotify*(self: gen_qmessagebox_types.QMessageBox, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQMessageBox_virtualbase_connectNotify(self.h, signal.h)
-
-proc cQMessageBox_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQMessageBox_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self))
   let self = QMessageBox(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
-proc QMessageBoxdisconnectNotify*(self: gen_qmessagebox_types.QMessageBox, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQMessageBox_virtualbase_disconnectNotify(self.h, signal.h)
-
-proc cQMessageBox_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQMessageBox_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self))
   let self = QMessageBox(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
@@ -1356,9 +1360,119 @@ proc cQMessageBox_vtable_callback_disconnectNotify(self: pointer, signal: pointe
 
 type VirtualQMessageBox* {.inheritable.} = ref object of QMessageBox
   vtbl*: cQMessageBoxVTable
+
 method metaObject*(self: VirtualQMessageBox): gen_qobjectdefs_types.QMetaObject {.base.} =
   QMessageBoxmetaObject(self[])
-proc cQMessageBox_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
+method metacast*(self: VirtualQMessageBox, param1: cstring): pointer {.base.} =
+  QMessageBoxmetacast(self[], param1)
+method metacall*(self: VirtualQMessageBox, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QMessageBoxmetacall(self[], param1, param2, param3)
+method event*(self: VirtualQMessageBox, e: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QMessageBoxevent(self[], e)
+method resizeEvent*(self: VirtualQMessageBox, event: gen_qevent_types.QResizeEvent): void {.base.} =
+  QMessageBoxresizeEvent(self[], event)
+method showEvent*(self: VirtualQMessageBox, event: gen_qevent_types.QShowEvent): void {.base.} =
+  QMessageBoxshowEvent(self[], event)
+method closeEvent*(self: VirtualQMessageBox, event: gen_qevent_types.QCloseEvent): void {.base.} =
+  QMessageBoxcloseEvent(self[], event)
+method keyPressEvent*(self: VirtualQMessageBox, event: gen_qevent_types.QKeyEvent): void {.base.} =
+  QMessageBoxkeyPressEvent(self[], event)
+method changeEvent*(self: VirtualQMessageBox, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QMessageBoxchangeEvent(self[], event)
+method setVisible*(self: VirtualQMessageBox, visible: bool): void {.base.} =
+  QMessageBoxsetVisible(self[], visible)
+method sizeHint*(self: VirtualQMessageBox): gen_qsize_types.QSize {.base.} =
+  QMessageBoxsizeHint(self[])
+method minimumSizeHint*(self: VirtualQMessageBox): gen_qsize_types.QSize {.base.} =
+  QMessageBoxminimumSizeHint(self[])
+method open*(self: VirtualQMessageBox): void {.base.} =
+  QMessageBoxopen(self[])
+method exec*(self: VirtualQMessageBox): cint {.base.} =
+  QMessageBoxexec(self[])
+method done*(self: VirtualQMessageBox, param1: cint): void {.base.} =
+  QMessageBoxdone(self[], param1)
+method accept*(self: VirtualQMessageBox): void {.base.} =
+  QMessageBoxaccept(self[])
+method reject*(self: VirtualQMessageBox): void {.base.} =
+  QMessageBoxreject(self[])
+method contextMenuEvent*(self: VirtualQMessageBox, param1: gen_qevent_types.QContextMenuEvent): void {.base.} =
+  QMessageBoxcontextMenuEvent(self[], param1)
+method eventFilter*(self: VirtualQMessageBox, param1: gen_qobject_types.QObject, param2: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QMessageBoxeventFilter(self[], param1, param2)
+method devType*(self: VirtualQMessageBox): cint {.base.} =
+  QMessageBoxdevType(self[])
+method heightForWidth*(self: VirtualQMessageBox, param1: cint): cint {.base.} =
+  QMessageBoxheightForWidth(self[], param1)
+method hasHeightForWidth*(self: VirtualQMessageBox): bool {.base.} =
+  QMessageBoxhasHeightForWidth(self[])
+method paintEngine*(self: VirtualQMessageBox): gen_qpaintengine_types.QPaintEngine {.base.} =
+  QMessageBoxpaintEngine(self[])
+method mousePressEvent*(self: VirtualQMessageBox, event: gen_qevent_types.QMouseEvent): void {.base.} =
+  QMessageBoxmousePressEvent(self[], event)
+method mouseReleaseEvent*(self: VirtualQMessageBox, event: gen_qevent_types.QMouseEvent): void {.base.} =
+  QMessageBoxmouseReleaseEvent(self[], event)
+method mouseDoubleClickEvent*(self: VirtualQMessageBox, event: gen_qevent_types.QMouseEvent): void {.base.} =
+  QMessageBoxmouseDoubleClickEvent(self[], event)
+method mouseMoveEvent*(self: VirtualQMessageBox, event: gen_qevent_types.QMouseEvent): void {.base.} =
+  QMessageBoxmouseMoveEvent(self[], event)
+method wheelEvent*(self: VirtualQMessageBox, event: gen_qevent_types.QWheelEvent): void {.base.} =
+  QMessageBoxwheelEvent(self[], event)
+method keyReleaseEvent*(self: VirtualQMessageBox, event: gen_qevent_types.QKeyEvent): void {.base.} =
+  QMessageBoxkeyReleaseEvent(self[], event)
+method focusInEvent*(self: VirtualQMessageBox, event: gen_qevent_types.QFocusEvent): void {.base.} =
+  QMessageBoxfocusInEvent(self[], event)
+method focusOutEvent*(self: VirtualQMessageBox, event: gen_qevent_types.QFocusEvent): void {.base.} =
+  QMessageBoxfocusOutEvent(self[], event)
+method enterEvent*(self: VirtualQMessageBox, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QMessageBoxenterEvent(self[], event)
+method leaveEvent*(self: VirtualQMessageBox, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QMessageBoxleaveEvent(self[], event)
+method paintEvent*(self: VirtualQMessageBox, event: gen_qevent_types.QPaintEvent): void {.base.} =
+  QMessageBoxpaintEvent(self[], event)
+method moveEvent*(self: VirtualQMessageBox, event: gen_qevent_types.QMoveEvent): void {.base.} =
+  QMessageBoxmoveEvent(self[], event)
+method tabletEvent*(self: VirtualQMessageBox, event: gen_qevent_types.QTabletEvent): void {.base.} =
+  QMessageBoxtabletEvent(self[], event)
+method actionEvent*(self: VirtualQMessageBox, event: gen_qevent_types.QActionEvent): void {.base.} =
+  QMessageBoxactionEvent(self[], event)
+method dragEnterEvent*(self: VirtualQMessageBox, event: gen_qevent_types.QDragEnterEvent): void {.base.} =
+  QMessageBoxdragEnterEvent(self[], event)
+method dragMoveEvent*(self: VirtualQMessageBox, event: gen_qevent_types.QDragMoveEvent): void {.base.} =
+  QMessageBoxdragMoveEvent(self[], event)
+method dragLeaveEvent*(self: VirtualQMessageBox, event: gen_qevent_types.QDragLeaveEvent): void {.base.} =
+  QMessageBoxdragLeaveEvent(self[], event)
+method dropEvent*(self: VirtualQMessageBox, event: gen_qevent_types.QDropEvent): void {.base.} =
+  QMessageBoxdropEvent(self[], event)
+method hideEvent*(self: VirtualQMessageBox, event: gen_qevent_types.QHideEvent): void {.base.} =
+  QMessageBoxhideEvent(self[], event)
+method nativeEvent*(self: VirtualQMessageBox, eventType: openArray[byte], message: pointer, resultVal: ptr clong): bool {.base.} =
+  QMessageBoxnativeEvent(self[], eventType, message, resultVal)
+method metric*(self: VirtualQMessageBox, param1: cint): cint {.base.} =
+  QMessageBoxmetric(self[], param1)
+method initPainter*(self: VirtualQMessageBox, painter: gen_qpainter_types.QPainter): void {.base.} =
+  QMessageBoxinitPainter(self[], painter)
+method redirected*(self: VirtualQMessageBox, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.base.} =
+  QMessageBoxredirected(self[], offset)
+method sharedPainter*(self: VirtualQMessageBox): gen_qpainter_types.QPainter {.base.} =
+  QMessageBoxsharedPainter(self[])
+method inputMethodEvent*(self: VirtualQMessageBox, param1: gen_qevent_types.QInputMethodEvent): void {.base.} =
+  QMessageBoxinputMethodEvent(self[], param1)
+method inputMethodQuery*(self: VirtualQMessageBox, param1: cint): gen_qvariant_types.QVariant {.base.} =
+  QMessageBoxinputMethodQuery(self[], param1)
+method focusNextPrevChild*(self: VirtualQMessageBox, next: bool): bool {.base.} =
+  QMessageBoxfocusNextPrevChild(self[], next)
+method timerEvent*(self: VirtualQMessageBox, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QMessageBoxtimerEvent(self[], event)
+method childEvent*(self: VirtualQMessageBox, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QMessageBoxchildEvent(self[], event)
+method customEvent*(self: VirtualQMessageBox, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QMessageBoxcustomEvent(self[], event)
+method connectNotify*(self: VirtualQMessageBox, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QMessageBoxconnectNotify(self[], signal)
+method disconnectNotify*(self: VirtualQMessageBox, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QMessageBoxdisconnectNotify(self[], signal)
+
+proc fcQMessageBox_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self))
   var virtualReturn = inst.metaObject()
   virtualReturn.owned = false # TODO move?
@@ -1366,17 +1480,13 @@ proc cQMessageBox_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-method metacast*(self: VirtualQMessageBox, param1: cstring): pointer {.base.} =
-  QMessageBoxmetacast(self[], param1)
-proc cQMessageBox_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+proc fcQMessageBox_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self))
   let slotval1 = (param1)
   var virtualReturn = inst.metacast(slotval1)
   virtualReturn
 
-method metacall*(self: VirtualQMessageBox, param1: cint, param2: cint, param3: pointer): cint {.base.} =
-  QMessageBoxmetacall(self[], param1, param2, param3)
-proc cQMessageBox_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+proc fcQMessageBox_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self))
   let slotval1 = cint(param1)
   let slotval2 = param2
@@ -1384,59 +1494,43 @@ proc cQMessageBox_method_callback_metacall(self: pointer, param1: cint, param2: 
   var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
-method event*(self: VirtualQMessageBox, e: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QMessageBoxevent(self[], e)
-proc cQMessageBox_method_callback_event(self: pointer, e: pointer): bool {.cdecl.} =
+proc fcQMessageBox_method_callback_event(self: pointer, e: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: e, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
-method resizeEvent*(self: VirtualQMessageBox, event: gen_qevent_types.QResizeEvent): void {.base.} =
-  QMessageBoxresizeEvent(self[], event)
-proc cQMessageBox_method_callback_resizeEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQMessageBox_method_callback_resizeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self))
   let slotval1 = gen_qevent_types.QResizeEvent(h: event, owned: false)
   inst.resizeEvent(slotval1)
 
-method showEvent*(self: VirtualQMessageBox, event: gen_qevent_types.QShowEvent): void {.base.} =
-  QMessageBoxshowEvent(self[], event)
-proc cQMessageBox_method_callback_showEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQMessageBox_method_callback_showEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self))
   let slotval1 = gen_qevent_types.QShowEvent(h: event, owned: false)
   inst.showEvent(slotval1)
 
-method closeEvent*(self: VirtualQMessageBox, event: gen_qevent_types.QCloseEvent): void {.base.} =
-  QMessageBoxcloseEvent(self[], event)
-proc cQMessageBox_method_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQMessageBox_method_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self))
   let slotval1 = gen_qevent_types.QCloseEvent(h: event, owned: false)
   inst.closeEvent(slotval1)
 
-method keyPressEvent*(self: VirtualQMessageBox, event: gen_qevent_types.QKeyEvent): void {.base.} =
-  QMessageBoxkeyPressEvent(self[], event)
-proc cQMessageBox_method_callback_keyPressEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQMessageBox_method_callback_keyPressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self))
   let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   inst.keyPressEvent(slotval1)
 
-method changeEvent*(self: VirtualQMessageBox, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QMessageBoxchangeEvent(self[], event)
-proc cQMessageBox_method_callback_changeEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQMessageBox_method_callback_changeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.changeEvent(slotval1)
 
-method setVisible*(self: VirtualQMessageBox, visible: bool): void {.base.} =
-  QMessageBoxsetVisible(self[], visible)
-proc cQMessageBox_method_callback_setVisible(self: pointer, visible: bool): void {.cdecl.} =
+proc fcQMessageBox_method_callback_setVisible(self: pointer, visible: bool): void {.cdecl.} =
   let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self))
   let slotval1 = visible
   inst.setVisible(slotval1)
 
-method sizeHint*(self: VirtualQMessageBox): gen_qsize_types.QSize {.base.} =
-  QMessageBoxsizeHint(self[])
-proc cQMessageBox_method_callback_sizeHint(self: pointer): pointer {.cdecl.} =
+proc fcQMessageBox_method_callback_sizeHint(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self))
   var virtualReturn = inst.sizeHint()
   virtualReturn.owned = false # TODO move?
@@ -1444,9 +1538,7 @@ proc cQMessageBox_method_callback_sizeHint(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-method minimumSizeHint*(self: VirtualQMessageBox): gen_qsize_types.QSize {.base.} =
-  QMessageBoxminimumSizeHint(self[])
-proc cQMessageBox_method_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
+proc fcQMessageBox_method_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self))
   var virtualReturn = inst.minimumSizeHint()
   virtualReturn.owned = false # TODO move?
@@ -1454,79 +1546,57 @@ proc cQMessageBox_method_callback_minimumSizeHint(self: pointer): pointer {.cdec
   virtualReturn.h = nil
   virtualReturn_h
 
-method open*(self: VirtualQMessageBox): void {.base.} =
-  QMessageBoxopen(self[])
-proc cQMessageBox_method_callback_open(self: pointer): void {.cdecl.} =
+proc fcQMessageBox_method_callback_open(self: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self))
   inst.open()
 
-method exec*(self: VirtualQMessageBox): cint {.base.} =
-  QMessageBoxexec(self[])
-proc cQMessageBox_method_callback_exec(self: pointer): cint {.cdecl.} =
+proc fcQMessageBox_method_callback_exec(self: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self))
   var virtualReturn = inst.exec()
   virtualReturn
 
-method done*(self: VirtualQMessageBox, param1: cint): void {.base.} =
-  QMessageBoxdone(self[], param1)
-proc cQMessageBox_method_callback_done(self: pointer, param1: cint): void {.cdecl.} =
+proc fcQMessageBox_method_callback_done(self: pointer, param1: cint): void {.cdecl.} =
   let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self))
   let slotval1 = param1
   inst.done(slotval1)
 
-method accept*(self: VirtualQMessageBox): void {.base.} =
-  QMessageBoxaccept(self[])
-proc cQMessageBox_method_callback_accept(self: pointer): void {.cdecl.} =
+proc fcQMessageBox_method_callback_accept(self: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self))
   inst.accept()
 
-method reject*(self: VirtualQMessageBox): void {.base.} =
-  QMessageBoxreject(self[])
-proc cQMessageBox_method_callback_reject(self: pointer): void {.cdecl.} =
+proc fcQMessageBox_method_callback_reject(self: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self))
   inst.reject()
 
-method contextMenuEvent*(self: VirtualQMessageBox, param1: gen_qevent_types.QContextMenuEvent): void {.base.} =
-  QMessageBoxcontextMenuEvent(self[], param1)
-proc cQMessageBox_method_callback_contextMenuEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQMessageBox_method_callback_contextMenuEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self))
   let slotval1 = gen_qevent_types.QContextMenuEvent(h: param1, owned: false)
   inst.contextMenuEvent(slotval1)
 
-method eventFilter*(self: VirtualQMessageBox, param1: gen_qobject_types.QObject, param2: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QMessageBoxeventFilter(self[], param1, param2)
-proc cQMessageBox_method_callback_eventFilter(self: pointer, param1: pointer, param2: pointer): bool {.cdecl.} =
+proc fcQMessageBox_method_callback_eventFilter(self: pointer, param1: pointer, param2: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self))
   let slotval1 = gen_qobject_types.QObject(h: param1, owned: false)
   let slotval2 = gen_qcoreevent_types.QEvent(h: param2, owned: false)
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
-method devType*(self: VirtualQMessageBox): cint {.base.} =
-  QMessageBoxdevType(self[])
-proc cQMessageBox_method_callback_devType(self: pointer): cint {.cdecl.} =
+proc fcQMessageBox_method_callback_devType(self: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self))
   var virtualReturn = inst.devType()
   virtualReturn
 
-method heightForWidth*(self: VirtualQMessageBox, param1: cint): cint {.base.} =
-  QMessageBoxheightForWidth(self[], param1)
-proc cQMessageBox_method_callback_heightForWidth(self: pointer, param1: cint): cint {.cdecl.} =
+proc fcQMessageBox_method_callback_heightForWidth(self: pointer, param1: cint): cint {.cdecl.} =
   let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self))
   let slotval1 = param1
   var virtualReturn = inst.heightForWidth(slotval1)
   virtualReturn
 
-method hasHeightForWidth*(self: VirtualQMessageBox): bool {.base.} =
-  QMessageBoxhasHeightForWidth(self[])
-proc cQMessageBox_method_callback_hasHeightForWidth(self: pointer): bool {.cdecl.} =
+proc fcQMessageBox_method_callback_hasHeightForWidth(self: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self))
   var virtualReturn = inst.hasHeightForWidth()
   virtualReturn
 
-method paintEngine*(self: VirtualQMessageBox): gen_qpaintengine_types.QPaintEngine {.base.} =
-  QMessageBoxpaintEngine(self[])
-proc cQMessageBox_method_callback_paintEngine(self: pointer): pointer {.cdecl.} =
+proc fcQMessageBox_method_callback_paintEngine(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self))
   var virtualReturn = inst.paintEngine()
   virtualReturn.owned = false # TODO move?
@@ -1534,142 +1604,102 @@ proc cQMessageBox_method_callback_paintEngine(self: pointer): pointer {.cdecl.} 
   virtualReturn.h = nil
   virtualReturn_h
 
-method mousePressEvent*(self: VirtualQMessageBox, event: gen_qevent_types.QMouseEvent): void {.base.} =
-  QMessageBoxmousePressEvent(self[], event)
-proc cQMessageBox_method_callback_mousePressEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQMessageBox_method_callback_mousePressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self))
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mousePressEvent(slotval1)
 
-method mouseReleaseEvent*(self: VirtualQMessageBox, event: gen_qevent_types.QMouseEvent): void {.base.} =
-  QMessageBoxmouseReleaseEvent(self[], event)
-proc cQMessageBox_method_callback_mouseReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQMessageBox_method_callback_mouseReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self))
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mouseReleaseEvent(slotval1)
 
-method mouseDoubleClickEvent*(self: VirtualQMessageBox, event: gen_qevent_types.QMouseEvent): void {.base.} =
-  QMessageBoxmouseDoubleClickEvent(self[], event)
-proc cQMessageBox_method_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQMessageBox_method_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self))
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mouseDoubleClickEvent(slotval1)
 
-method mouseMoveEvent*(self: VirtualQMessageBox, event: gen_qevent_types.QMouseEvent): void {.base.} =
-  QMessageBoxmouseMoveEvent(self[], event)
-proc cQMessageBox_method_callback_mouseMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQMessageBox_method_callback_mouseMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self))
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mouseMoveEvent(slotval1)
 
-method wheelEvent*(self: VirtualQMessageBox, event: gen_qevent_types.QWheelEvent): void {.base.} =
-  QMessageBoxwheelEvent(self[], event)
-proc cQMessageBox_method_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQMessageBox_method_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self))
   let slotval1 = gen_qevent_types.QWheelEvent(h: event, owned: false)
   inst.wheelEvent(slotval1)
 
-method keyReleaseEvent*(self: VirtualQMessageBox, event: gen_qevent_types.QKeyEvent): void {.base.} =
-  QMessageBoxkeyReleaseEvent(self[], event)
-proc cQMessageBox_method_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQMessageBox_method_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self))
   let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   inst.keyReleaseEvent(slotval1)
 
-method focusInEvent*(self: VirtualQMessageBox, event: gen_qevent_types.QFocusEvent): void {.base.} =
-  QMessageBoxfocusInEvent(self[], event)
-proc cQMessageBox_method_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQMessageBox_method_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self))
   let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   inst.focusInEvent(slotval1)
 
-method focusOutEvent*(self: VirtualQMessageBox, event: gen_qevent_types.QFocusEvent): void {.base.} =
-  QMessageBoxfocusOutEvent(self[], event)
-proc cQMessageBox_method_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQMessageBox_method_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self))
   let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   inst.focusOutEvent(slotval1)
 
-method enterEvent*(self: VirtualQMessageBox, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QMessageBoxenterEvent(self[], event)
-proc cQMessageBox_method_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQMessageBox_method_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.enterEvent(slotval1)
 
-method leaveEvent*(self: VirtualQMessageBox, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QMessageBoxleaveEvent(self[], event)
-proc cQMessageBox_method_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQMessageBox_method_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.leaveEvent(slotval1)
 
-method paintEvent*(self: VirtualQMessageBox, event: gen_qevent_types.QPaintEvent): void {.base.} =
-  QMessageBoxpaintEvent(self[], event)
-proc cQMessageBox_method_callback_paintEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQMessageBox_method_callback_paintEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self))
   let slotval1 = gen_qevent_types.QPaintEvent(h: event, owned: false)
   inst.paintEvent(slotval1)
 
-method moveEvent*(self: VirtualQMessageBox, event: gen_qevent_types.QMoveEvent): void {.base.} =
-  QMessageBoxmoveEvent(self[], event)
-proc cQMessageBox_method_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQMessageBox_method_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self))
   let slotval1 = gen_qevent_types.QMoveEvent(h: event, owned: false)
   inst.moveEvent(slotval1)
 
-method tabletEvent*(self: VirtualQMessageBox, event: gen_qevent_types.QTabletEvent): void {.base.} =
-  QMessageBoxtabletEvent(self[], event)
-proc cQMessageBox_method_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQMessageBox_method_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self))
   let slotval1 = gen_qevent_types.QTabletEvent(h: event, owned: false)
   inst.tabletEvent(slotval1)
 
-method actionEvent*(self: VirtualQMessageBox, event: gen_qevent_types.QActionEvent): void {.base.} =
-  QMessageBoxactionEvent(self[], event)
-proc cQMessageBox_method_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQMessageBox_method_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self))
   let slotval1 = gen_qevent_types.QActionEvent(h: event, owned: false)
   inst.actionEvent(slotval1)
 
-method dragEnterEvent*(self: VirtualQMessageBox, event: gen_qevent_types.QDragEnterEvent): void {.base.} =
-  QMessageBoxdragEnterEvent(self[], event)
-proc cQMessageBox_method_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQMessageBox_method_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self))
   let slotval1 = gen_qevent_types.QDragEnterEvent(h: event, owned: false)
   inst.dragEnterEvent(slotval1)
 
-method dragMoveEvent*(self: VirtualQMessageBox, event: gen_qevent_types.QDragMoveEvent): void {.base.} =
-  QMessageBoxdragMoveEvent(self[], event)
-proc cQMessageBox_method_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQMessageBox_method_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self))
   let slotval1 = gen_qevent_types.QDragMoveEvent(h: event, owned: false)
   inst.dragMoveEvent(slotval1)
 
-method dragLeaveEvent*(self: VirtualQMessageBox, event: gen_qevent_types.QDragLeaveEvent): void {.base.} =
-  QMessageBoxdragLeaveEvent(self[], event)
-proc cQMessageBox_method_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQMessageBox_method_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self))
   let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event, owned: false)
   inst.dragLeaveEvent(slotval1)
 
-method dropEvent*(self: VirtualQMessageBox, event: gen_qevent_types.QDropEvent): void {.base.} =
-  QMessageBoxdropEvent(self[], event)
-proc cQMessageBox_method_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQMessageBox_method_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self))
   let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
   inst.dropEvent(slotval1)
 
-method hideEvent*(self: VirtualQMessageBox, event: gen_qevent_types.QHideEvent): void {.base.} =
-  QMessageBoxhideEvent(self[], event)
-proc cQMessageBox_method_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQMessageBox_method_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self))
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   inst.hideEvent(slotval1)
 
-method nativeEvent*(self: VirtualQMessageBox, eventType: openArray[byte], message: pointer, resultVal: ptr clong): bool {.base.} =
-  QMessageBoxnativeEvent(self[], eventType, message, resultVal)
-proc cQMessageBox_method_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr clong): bool {.cdecl.} =
+proc fcQMessageBox_method_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr clong): bool {.cdecl.} =
   let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self))
   var veventType_bytearray = eventType
   var veventTypex_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](veventType_bytearray.data), 0, int(veventType_bytearray.len)-1))
@@ -1680,24 +1710,18 @@ proc cQMessageBox_method_callback_nativeEvent(self: pointer, eventType: struct_m
   var virtualReturn = inst.nativeEvent(slotval1, slotval2, slotval3)
   virtualReturn
 
-method metric*(self: VirtualQMessageBox, param1: cint): cint {.base.} =
-  QMessageBoxmetric(self[], param1)
-proc cQMessageBox_method_callback_metric(self: pointer, param1: cint): cint {.cdecl.} =
+proc fcQMessageBox_method_callback_metric(self: pointer, param1: cint): cint {.cdecl.} =
   let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self))
   let slotval1 = cint(param1)
   var virtualReturn = inst.metric(slotval1)
   virtualReturn
 
-method initPainter*(self: VirtualQMessageBox, painter: gen_qpainter_types.QPainter): void {.base.} =
-  QMessageBoxinitPainter(self[], painter)
-proc cQMessageBox_method_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
+proc fcQMessageBox_method_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self))
   let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
   inst.initPainter(slotval1)
 
-method redirected*(self: VirtualQMessageBox, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.base.} =
-  QMessageBoxredirected(self[], offset)
-proc cQMessageBox_method_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
+proc fcQMessageBox_method_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self))
   let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
   var virtualReturn = inst.redirected(slotval1)
@@ -1706,9 +1730,7 @@ proc cQMessageBox_method_callback_redirected(self: pointer, offset: pointer): po
   virtualReturn.h = nil
   virtualReturn_h
 
-method sharedPainter*(self: VirtualQMessageBox): gen_qpainter_types.QPainter {.base.} =
-  QMessageBoxsharedPainter(self[])
-proc cQMessageBox_method_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
+proc fcQMessageBox_method_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self))
   var virtualReturn = inst.sharedPainter()
   virtualReturn.owned = false # TODO move?
@@ -1716,16 +1738,12 @@ proc cQMessageBox_method_callback_sharedPainter(self: pointer): pointer {.cdecl.
   virtualReturn.h = nil
   virtualReturn_h
 
-method inputMethodEvent*(self: VirtualQMessageBox, param1: gen_qevent_types.QInputMethodEvent): void {.base.} =
-  QMessageBoxinputMethodEvent(self[], param1)
-proc cQMessageBox_method_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQMessageBox_method_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self))
   let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1, owned: false)
   inst.inputMethodEvent(slotval1)
 
-method inputMethodQuery*(self: VirtualQMessageBox, param1: cint): gen_qvariant_types.QVariant {.base.} =
-  QMessageBoxinputMethodQuery(self[], param1)
-proc cQMessageBox_method_callback_inputMethodQuery(self: pointer, param1: cint): pointer {.cdecl.} =
+proc fcQMessageBox_method_callback_inputMethodQuery(self: pointer, param1: cint): pointer {.cdecl.} =
   let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self))
   let slotval1 = cint(param1)
   var virtualReturn = inst.inputMethodQuery(slotval1)
@@ -1734,48 +1752,37 @@ proc cQMessageBox_method_callback_inputMethodQuery(self: pointer, param1: cint):
   virtualReturn.h = nil
   virtualReturn_h
 
-method focusNextPrevChild*(self: VirtualQMessageBox, next: bool): bool {.base.} =
-  QMessageBoxfocusNextPrevChild(self[], next)
-proc cQMessageBox_method_callback_focusNextPrevChild(self: pointer, next: bool): bool {.cdecl.} =
+proc fcQMessageBox_method_callback_focusNextPrevChild(self: pointer, next: bool): bool {.cdecl.} =
   let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self))
   let slotval1 = next
   var virtualReturn = inst.focusNextPrevChild(slotval1)
   virtualReturn
 
-method timerEvent*(self: VirtualQMessageBox, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
-  QMessageBoxtimerEvent(self[], event)
-proc cQMessageBox_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQMessageBox_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self))
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
-method childEvent*(self: VirtualQMessageBox, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
-  QMessageBoxchildEvent(self[], event)
-proc cQMessageBox_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQMessageBox_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self))
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
-method customEvent*(self: VirtualQMessageBox, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QMessageBoxcustomEvent(self[], event)
-proc cQMessageBox_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQMessageBox_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
-method connectNotify*(self: VirtualQMessageBox, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QMessageBoxconnectNotify(self[], signal)
-proc cQMessageBox_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQMessageBox_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
-method disconnectNotify*(self: VirtualQMessageBox, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QMessageBoxdisconnectNotify(self[], signal)
-proc cQMessageBox_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQMessageBox_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
+
 
 proc adjustPosition*(self: gen_qmessagebox_types.QMessageBox, param1: gen_qwidget_types.QWidget): void =
   fcQMessageBox_protectedbase_adjustPosition(self.h, param1.h)
@@ -1816,115 +1823,115 @@ proc create*(T: type gen_qmessagebox_types.QMessageBox,
     let vtbl = cast[ref QMessageBoxVTable](fcQMessageBox_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQMessageBox_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQMessageBox_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQMessageBox_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQMessageBox_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQMessageBox_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQMessageBox_vtable_callback_metacall
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQMessageBox_vtable_callback_event
+    vtbl[].vtbl.event = fcQMessageBox_vtable_callback_event
   if not isNil(vtbl[].resizeEvent):
-    vtbl[].vtbl.resizeEvent = cQMessageBox_vtable_callback_resizeEvent
+    vtbl[].vtbl.resizeEvent = fcQMessageBox_vtable_callback_resizeEvent
   if not isNil(vtbl[].showEvent):
-    vtbl[].vtbl.showEvent = cQMessageBox_vtable_callback_showEvent
+    vtbl[].vtbl.showEvent = fcQMessageBox_vtable_callback_showEvent
   if not isNil(vtbl[].closeEvent):
-    vtbl[].vtbl.closeEvent = cQMessageBox_vtable_callback_closeEvent
+    vtbl[].vtbl.closeEvent = fcQMessageBox_vtable_callback_closeEvent
   if not isNil(vtbl[].keyPressEvent):
-    vtbl[].vtbl.keyPressEvent = cQMessageBox_vtable_callback_keyPressEvent
+    vtbl[].vtbl.keyPressEvent = fcQMessageBox_vtable_callback_keyPressEvent
   if not isNil(vtbl[].changeEvent):
-    vtbl[].vtbl.changeEvent = cQMessageBox_vtable_callback_changeEvent
+    vtbl[].vtbl.changeEvent = fcQMessageBox_vtable_callback_changeEvent
   if not isNil(vtbl[].setVisible):
-    vtbl[].vtbl.setVisible = cQMessageBox_vtable_callback_setVisible
+    vtbl[].vtbl.setVisible = fcQMessageBox_vtable_callback_setVisible
   if not isNil(vtbl[].sizeHint):
-    vtbl[].vtbl.sizeHint = cQMessageBox_vtable_callback_sizeHint
+    vtbl[].vtbl.sizeHint = fcQMessageBox_vtable_callback_sizeHint
   if not isNil(vtbl[].minimumSizeHint):
-    vtbl[].vtbl.minimumSizeHint = cQMessageBox_vtable_callback_minimumSizeHint
+    vtbl[].vtbl.minimumSizeHint = fcQMessageBox_vtable_callback_minimumSizeHint
   if not isNil(vtbl[].open):
-    vtbl[].vtbl.open = cQMessageBox_vtable_callback_open
+    vtbl[].vtbl.open = fcQMessageBox_vtable_callback_open
   if not isNil(vtbl[].exec):
-    vtbl[].vtbl.exec = cQMessageBox_vtable_callback_exec
+    vtbl[].vtbl.exec = fcQMessageBox_vtable_callback_exec
   if not isNil(vtbl[].done):
-    vtbl[].vtbl.done = cQMessageBox_vtable_callback_done
+    vtbl[].vtbl.done = fcQMessageBox_vtable_callback_done
   if not isNil(vtbl[].accept):
-    vtbl[].vtbl.accept = cQMessageBox_vtable_callback_accept
+    vtbl[].vtbl.accept = fcQMessageBox_vtable_callback_accept
   if not isNil(vtbl[].reject):
-    vtbl[].vtbl.reject = cQMessageBox_vtable_callback_reject
+    vtbl[].vtbl.reject = fcQMessageBox_vtable_callback_reject
   if not isNil(vtbl[].contextMenuEvent):
-    vtbl[].vtbl.contextMenuEvent = cQMessageBox_vtable_callback_contextMenuEvent
+    vtbl[].vtbl.contextMenuEvent = fcQMessageBox_vtable_callback_contextMenuEvent
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQMessageBox_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQMessageBox_vtable_callback_eventFilter
   if not isNil(vtbl[].devType):
-    vtbl[].vtbl.devType = cQMessageBox_vtable_callback_devType
+    vtbl[].vtbl.devType = fcQMessageBox_vtable_callback_devType
   if not isNil(vtbl[].heightForWidth):
-    vtbl[].vtbl.heightForWidth = cQMessageBox_vtable_callback_heightForWidth
+    vtbl[].vtbl.heightForWidth = fcQMessageBox_vtable_callback_heightForWidth
   if not isNil(vtbl[].hasHeightForWidth):
-    vtbl[].vtbl.hasHeightForWidth = cQMessageBox_vtable_callback_hasHeightForWidth
+    vtbl[].vtbl.hasHeightForWidth = fcQMessageBox_vtable_callback_hasHeightForWidth
   if not isNil(vtbl[].paintEngine):
-    vtbl[].vtbl.paintEngine = cQMessageBox_vtable_callback_paintEngine
+    vtbl[].vtbl.paintEngine = fcQMessageBox_vtable_callback_paintEngine
   if not isNil(vtbl[].mousePressEvent):
-    vtbl[].vtbl.mousePressEvent = cQMessageBox_vtable_callback_mousePressEvent
+    vtbl[].vtbl.mousePressEvent = fcQMessageBox_vtable_callback_mousePressEvent
   if not isNil(vtbl[].mouseReleaseEvent):
-    vtbl[].vtbl.mouseReleaseEvent = cQMessageBox_vtable_callback_mouseReleaseEvent
+    vtbl[].vtbl.mouseReleaseEvent = fcQMessageBox_vtable_callback_mouseReleaseEvent
   if not isNil(vtbl[].mouseDoubleClickEvent):
-    vtbl[].vtbl.mouseDoubleClickEvent = cQMessageBox_vtable_callback_mouseDoubleClickEvent
+    vtbl[].vtbl.mouseDoubleClickEvent = fcQMessageBox_vtable_callback_mouseDoubleClickEvent
   if not isNil(vtbl[].mouseMoveEvent):
-    vtbl[].vtbl.mouseMoveEvent = cQMessageBox_vtable_callback_mouseMoveEvent
+    vtbl[].vtbl.mouseMoveEvent = fcQMessageBox_vtable_callback_mouseMoveEvent
   if not isNil(vtbl[].wheelEvent):
-    vtbl[].vtbl.wheelEvent = cQMessageBox_vtable_callback_wheelEvent
+    vtbl[].vtbl.wheelEvent = fcQMessageBox_vtable_callback_wheelEvent
   if not isNil(vtbl[].keyReleaseEvent):
-    vtbl[].vtbl.keyReleaseEvent = cQMessageBox_vtable_callback_keyReleaseEvent
+    vtbl[].vtbl.keyReleaseEvent = fcQMessageBox_vtable_callback_keyReleaseEvent
   if not isNil(vtbl[].focusInEvent):
-    vtbl[].vtbl.focusInEvent = cQMessageBox_vtable_callback_focusInEvent
+    vtbl[].vtbl.focusInEvent = fcQMessageBox_vtable_callback_focusInEvent
   if not isNil(vtbl[].focusOutEvent):
-    vtbl[].vtbl.focusOutEvent = cQMessageBox_vtable_callback_focusOutEvent
+    vtbl[].vtbl.focusOutEvent = fcQMessageBox_vtable_callback_focusOutEvent
   if not isNil(vtbl[].enterEvent):
-    vtbl[].vtbl.enterEvent = cQMessageBox_vtable_callback_enterEvent
+    vtbl[].vtbl.enterEvent = fcQMessageBox_vtable_callback_enterEvent
   if not isNil(vtbl[].leaveEvent):
-    vtbl[].vtbl.leaveEvent = cQMessageBox_vtable_callback_leaveEvent
+    vtbl[].vtbl.leaveEvent = fcQMessageBox_vtable_callback_leaveEvent
   if not isNil(vtbl[].paintEvent):
-    vtbl[].vtbl.paintEvent = cQMessageBox_vtable_callback_paintEvent
+    vtbl[].vtbl.paintEvent = fcQMessageBox_vtable_callback_paintEvent
   if not isNil(vtbl[].moveEvent):
-    vtbl[].vtbl.moveEvent = cQMessageBox_vtable_callback_moveEvent
+    vtbl[].vtbl.moveEvent = fcQMessageBox_vtable_callback_moveEvent
   if not isNil(vtbl[].tabletEvent):
-    vtbl[].vtbl.tabletEvent = cQMessageBox_vtable_callback_tabletEvent
+    vtbl[].vtbl.tabletEvent = fcQMessageBox_vtable_callback_tabletEvent
   if not isNil(vtbl[].actionEvent):
-    vtbl[].vtbl.actionEvent = cQMessageBox_vtable_callback_actionEvent
+    vtbl[].vtbl.actionEvent = fcQMessageBox_vtable_callback_actionEvent
   if not isNil(vtbl[].dragEnterEvent):
-    vtbl[].vtbl.dragEnterEvent = cQMessageBox_vtable_callback_dragEnterEvent
+    vtbl[].vtbl.dragEnterEvent = fcQMessageBox_vtable_callback_dragEnterEvent
   if not isNil(vtbl[].dragMoveEvent):
-    vtbl[].vtbl.dragMoveEvent = cQMessageBox_vtable_callback_dragMoveEvent
+    vtbl[].vtbl.dragMoveEvent = fcQMessageBox_vtable_callback_dragMoveEvent
   if not isNil(vtbl[].dragLeaveEvent):
-    vtbl[].vtbl.dragLeaveEvent = cQMessageBox_vtable_callback_dragLeaveEvent
+    vtbl[].vtbl.dragLeaveEvent = fcQMessageBox_vtable_callback_dragLeaveEvent
   if not isNil(vtbl[].dropEvent):
-    vtbl[].vtbl.dropEvent = cQMessageBox_vtable_callback_dropEvent
+    vtbl[].vtbl.dropEvent = fcQMessageBox_vtable_callback_dropEvent
   if not isNil(vtbl[].hideEvent):
-    vtbl[].vtbl.hideEvent = cQMessageBox_vtable_callback_hideEvent
+    vtbl[].vtbl.hideEvent = fcQMessageBox_vtable_callback_hideEvent
   if not isNil(vtbl[].nativeEvent):
-    vtbl[].vtbl.nativeEvent = cQMessageBox_vtable_callback_nativeEvent
+    vtbl[].vtbl.nativeEvent = fcQMessageBox_vtable_callback_nativeEvent
   if not isNil(vtbl[].metric):
-    vtbl[].vtbl.metric = cQMessageBox_vtable_callback_metric
+    vtbl[].vtbl.metric = fcQMessageBox_vtable_callback_metric
   if not isNil(vtbl[].initPainter):
-    vtbl[].vtbl.initPainter = cQMessageBox_vtable_callback_initPainter
+    vtbl[].vtbl.initPainter = fcQMessageBox_vtable_callback_initPainter
   if not isNil(vtbl[].redirected):
-    vtbl[].vtbl.redirected = cQMessageBox_vtable_callback_redirected
+    vtbl[].vtbl.redirected = fcQMessageBox_vtable_callback_redirected
   if not isNil(vtbl[].sharedPainter):
-    vtbl[].vtbl.sharedPainter = cQMessageBox_vtable_callback_sharedPainter
+    vtbl[].vtbl.sharedPainter = fcQMessageBox_vtable_callback_sharedPainter
   if not isNil(vtbl[].inputMethodEvent):
-    vtbl[].vtbl.inputMethodEvent = cQMessageBox_vtable_callback_inputMethodEvent
+    vtbl[].vtbl.inputMethodEvent = fcQMessageBox_vtable_callback_inputMethodEvent
   if not isNil(vtbl[].inputMethodQuery):
-    vtbl[].vtbl.inputMethodQuery = cQMessageBox_vtable_callback_inputMethodQuery
+    vtbl[].vtbl.inputMethodQuery = fcQMessageBox_vtable_callback_inputMethodQuery
   if not isNil(vtbl[].focusNextPrevChild):
-    vtbl[].vtbl.focusNextPrevChild = cQMessageBox_vtable_callback_focusNextPrevChild
+    vtbl[].vtbl.focusNextPrevChild = fcQMessageBox_vtable_callback_focusNextPrevChild
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQMessageBox_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQMessageBox_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQMessageBox_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQMessageBox_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQMessageBox_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQMessageBox_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQMessageBox_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQMessageBox_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQMessageBox_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQMessageBox_vtable_callback_disconnectNotify
   gen_qmessagebox_types.QMessageBox(h: fcQMessageBox_new(addr(vtbl[].vtbl), addr(vtbl[]), parent.h), owned: true)
 
 proc create*(T: type gen_qmessagebox_types.QMessageBox,
@@ -1935,115 +1942,115 @@ proc create*(T: type gen_qmessagebox_types.QMessageBox,
     let vtbl = cast[ref QMessageBoxVTable](fcQMessageBox_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQMessageBox_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQMessageBox_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQMessageBox_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQMessageBox_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQMessageBox_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQMessageBox_vtable_callback_metacall
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQMessageBox_vtable_callback_event
+    vtbl[].vtbl.event = fcQMessageBox_vtable_callback_event
   if not isNil(vtbl[].resizeEvent):
-    vtbl[].vtbl.resizeEvent = cQMessageBox_vtable_callback_resizeEvent
+    vtbl[].vtbl.resizeEvent = fcQMessageBox_vtable_callback_resizeEvent
   if not isNil(vtbl[].showEvent):
-    vtbl[].vtbl.showEvent = cQMessageBox_vtable_callback_showEvent
+    vtbl[].vtbl.showEvent = fcQMessageBox_vtable_callback_showEvent
   if not isNil(vtbl[].closeEvent):
-    vtbl[].vtbl.closeEvent = cQMessageBox_vtable_callback_closeEvent
+    vtbl[].vtbl.closeEvent = fcQMessageBox_vtable_callback_closeEvent
   if not isNil(vtbl[].keyPressEvent):
-    vtbl[].vtbl.keyPressEvent = cQMessageBox_vtable_callback_keyPressEvent
+    vtbl[].vtbl.keyPressEvent = fcQMessageBox_vtable_callback_keyPressEvent
   if not isNil(vtbl[].changeEvent):
-    vtbl[].vtbl.changeEvent = cQMessageBox_vtable_callback_changeEvent
+    vtbl[].vtbl.changeEvent = fcQMessageBox_vtable_callback_changeEvent
   if not isNil(vtbl[].setVisible):
-    vtbl[].vtbl.setVisible = cQMessageBox_vtable_callback_setVisible
+    vtbl[].vtbl.setVisible = fcQMessageBox_vtable_callback_setVisible
   if not isNil(vtbl[].sizeHint):
-    vtbl[].vtbl.sizeHint = cQMessageBox_vtable_callback_sizeHint
+    vtbl[].vtbl.sizeHint = fcQMessageBox_vtable_callback_sizeHint
   if not isNil(vtbl[].minimumSizeHint):
-    vtbl[].vtbl.minimumSizeHint = cQMessageBox_vtable_callback_minimumSizeHint
+    vtbl[].vtbl.minimumSizeHint = fcQMessageBox_vtable_callback_minimumSizeHint
   if not isNil(vtbl[].open):
-    vtbl[].vtbl.open = cQMessageBox_vtable_callback_open
+    vtbl[].vtbl.open = fcQMessageBox_vtable_callback_open
   if not isNil(vtbl[].exec):
-    vtbl[].vtbl.exec = cQMessageBox_vtable_callback_exec
+    vtbl[].vtbl.exec = fcQMessageBox_vtable_callback_exec
   if not isNil(vtbl[].done):
-    vtbl[].vtbl.done = cQMessageBox_vtable_callback_done
+    vtbl[].vtbl.done = fcQMessageBox_vtable_callback_done
   if not isNil(vtbl[].accept):
-    vtbl[].vtbl.accept = cQMessageBox_vtable_callback_accept
+    vtbl[].vtbl.accept = fcQMessageBox_vtable_callback_accept
   if not isNil(vtbl[].reject):
-    vtbl[].vtbl.reject = cQMessageBox_vtable_callback_reject
+    vtbl[].vtbl.reject = fcQMessageBox_vtable_callback_reject
   if not isNil(vtbl[].contextMenuEvent):
-    vtbl[].vtbl.contextMenuEvent = cQMessageBox_vtable_callback_contextMenuEvent
+    vtbl[].vtbl.contextMenuEvent = fcQMessageBox_vtable_callback_contextMenuEvent
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQMessageBox_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQMessageBox_vtable_callback_eventFilter
   if not isNil(vtbl[].devType):
-    vtbl[].vtbl.devType = cQMessageBox_vtable_callback_devType
+    vtbl[].vtbl.devType = fcQMessageBox_vtable_callback_devType
   if not isNil(vtbl[].heightForWidth):
-    vtbl[].vtbl.heightForWidth = cQMessageBox_vtable_callback_heightForWidth
+    vtbl[].vtbl.heightForWidth = fcQMessageBox_vtable_callback_heightForWidth
   if not isNil(vtbl[].hasHeightForWidth):
-    vtbl[].vtbl.hasHeightForWidth = cQMessageBox_vtable_callback_hasHeightForWidth
+    vtbl[].vtbl.hasHeightForWidth = fcQMessageBox_vtable_callback_hasHeightForWidth
   if not isNil(vtbl[].paintEngine):
-    vtbl[].vtbl.paintEngine = cQMessageBox_vtable_callback_paintEngine
+    vtbl[].vtbl.paintEngine = fcQMessageBox_vtable_callback_paintEngine
   if not isNil(vtbl[].mousePressEvent):
-    vtbl[].vtbl.mousePressEvent = cQMessageBox_vtable_callback_mousePressEvent
+    vtbl[].vtbl.mousePressEvent = fcQMessageBox_vtable_callback_mousePressEvent
   if not isNil(vtbl[].mouseReleaseEvent):
-    vtbl[].vtbl.mouseReleaseEvent = cQMessageBox_vtable_callback_mouseReleaseEvent
+    vtbl[].vtbl.mouseReleaseEvent = fcQMessageBox_vtable_callback_mouseReleaseEvent
   if not isNil(vtbl[].mouseDoubleClickEvent):
-    vtbl[].vtbl.mouseDoubleClickEvent = cQMessageBox_vtable_callback_mouseDoubleClickEvent
+    vtbl[].vtbl.mouseDoubleClickEvent = fcQMessageBox_vtable_callback_mouseDoubleClickEvent
   if not isNil(vtbl[].mouseMoveEvent):
-    vtbl[].vtbl.mouseMoveEvent = cQMessageBox_vtable_callback_mouseMoveEvent
+    vtbl[].vtbl.mouseMoveEvent = fcQMessageBox_vtable_callback_mouseMoveEvent
   if not isNil(vtbl[].wheelEvent):
-    vtbl[].vtbl.wheelEvent = cQMessageBox_vtable_callback_wheelEvent
+    vtbl[].vtbl.wheelEvent = fcQMessageBox_vtable_callback_wheelEvent
   if not isNil(vtbl[].keyReleaseEvent):
-    vtbl[].vtbl.keyReleaseEvent = cQMessageBox_vtable_callback_keyReleaseEvent
+    vtbl[].vtbl.keyReleaseEvent = fcQMessageBox_vtable_callback_keyReleaseEvent
   if not isNil(vtbl[].focusInEvent):
-    vtbl[].vtbl.focusInEvent = cQMessageBox_vtable_callback_focusInEvent
+    vtbl[].vtbl.focusInEvent = fcQMessageBox_vtable_callback_focusInEvent
   if not isNil(vtbl[].focusOutEvent):
-    vtbl[].vtbl.focusOutEvent = cQMessageBox_vtable_callback_focusOutEvent
+    vtbl[].vtbl.focusOutEvent = fcQMessageBox_vtable_callback_focusOutEvent
   if not isNil(vtbl[].enterEvent):
-    vtbl[].vtbl.enterEvent = cQMessageBox_vtable_callback_enterEvent
+    vtbl[].vtbl.enterEvent = fcQMessageBox_vtable_callback_enterEvent
   if not isNil(vtbl[].leaveEvent):
-    vtbl[].vtbl.leaveEvent = cQMessageBox_vtable_callback_leaveEvent
+    vtbl[].vtbl.leaveEvent = fcQMessageBox_vtable_callback_leaveEvent
   if not isNil(vtbl[].paintEvent):
-    vtbl[].vtbl.paintEvent = cQMessageBox_vtable_callback_paintEvent
+    vtbl[].vtbl.paintEvent = fcQMessageBox_vtable_callback_paintEvent
   if not isNil(vtbl[].moveEvent):
-    vtbl[].vtbl.moveEvent = cQMessageBox_vtable_callback_moveEvent
+    vtbl[].vtbl.moveEvent = fcQMessageBox_vtable_callback_moveEvent
   if not isNil(vtbl[].tabletEvent):
-    vtbl[].vtbl.tabletEvent = cQMessageBox_vtable_callback_tabletEvent
+    vtbl[].vtbl.tabletEvent = fcQMessageBox_vtable_callback_tabletEvent
   if not isNil(vtbl[].actionEvent):
-    vtbl[].vtbl.actionEvent = cQMessageBox_vtable_callback_actionEvent
+    vtbl[].vtbl.actionEvent = fcQMessageBox_vtable_callback_actionEvent
   if not isNil(vtbl[].dragEnterEvent):
-    vtbl[].vtbl.dragEnterEvent = cQMessageBox_vtable_callback_dragEnterEvent
+    vtbl[].vtbl.dragEnterEvent = fcQMessageBox_vtable_callback_dragEnterEvent
   if not isNil(vtbl[].dragMoveEvent):
-    vtbl[].vtbl.dragMoveEvent = cQMessageBox_vtable_callback_dragMoveEvent
+    vtbl[].vtbl.dragMoveEvent = fcQMessageBox_vtable_callback_dragMoveEvent
   if not isNil(vtbl[].dragLeaveEvent):
-    vtbl[].vtbl.dragLeaveEvent = cQMessageBox_vtable_callback_dragLeaveEvent
+    vtbl[].vtbl.dragLeaveEvent = fcQMessageBox_vtable_callback_dragLeaveEvent
   if not isNil(vtbl[].dropEvent):
-    vtbl[].vtbl.dropEvent = cQMessageBox_vtable_callback_dropEvent
+    vtbl[].vtbl.dropEvent = fcQMessageBox_vtable_callback_dropEvent
   if not isNil(vtbl[].hideEvent):
-    vtbl[].vtbl.hideEvent = cQMessageBox_vtable_callback_hideEvent
+    vtbl[].vtbl.hideEvent = fcQMessageBox_vtable_callback_hideEvent
   if not isNil(vtbl[].nativeEvent):
-    vtbl[].vtbl.nativeEvent = cQMessageBox_vtable_callback_nativeEvent
+    vtbl[].vtbl.nativeEvent = fcQMessageBox_vtable_callback_nativeEvent
   if not isNil(vtbl[].metric):
-    vtbl[].vtbl.metric = cQMessageBox_vtable_callback_metric
+    vtbl[].vtbl.metric = fcQMessageBox_vtable_callback_metric
   if not isNil(vtbl[].initPainter):
-    vtbl[].vtbl.initPainter = cQMessageBox_vtable_callback_initPainter
+    vtbl[].vtbl.initPainter = fcQMessageBox_vtable_callback_initPainter
   if not isNil(vtbl[].redirected):
-    vtbl[].vtbl.redirected = cQMessageBox_vtable_callback_redirected
+    vtbl[].vtbl.redirected = fcQMessageBox_vtable_callback_redirected
   if not isNil(vtbl[].sharedPainter):
-    vtbl[].vtbl.sharedPainter = cQMessageBox_vtable_callback_sharedPainter
+    vtbl[].vtbl.sharedPainter = fcQMessageBox_vtable_callback_sharedPainter
   if not isNil(vtbl[].inputMethodEvent):
-    vtbl[].vtbl.inputMethodEvent = cQMessageBox_vtable_callback_inputMethodEvent
+    vtbl[].vtbl.inputMethodEvent = fcQMessageBox_vtable_callback_inputMethodEvent
   if not isNil(vtbl[].inputMethodQuery):
-    vtbl[].vtbl.inputMethodQuery = cQMessageBox_vtable_callback_inputMethodQuery
+    vtbl[].vtbl.inputMethodQuery = fcQMessageBox_vtable_callback_inputMethodQuery
   if not isNil(vtbl[].focusNextPrevChild):
-    vtbl[].vtbl.focusNextPrevChild = cQMessageBox_vtable_callback_focusNextPrevChild
+    vtbl[].vtbl.focusNextPrevChild = fcQMessageBox_vtable_callback_focusNextPrevChild
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQMessageBox_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQMessageBox_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQMessageBox_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQMessageBox_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQMessageBox_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQMessageBox_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQMessageBox_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQMessageBox_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQMessageBox_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQMessageBox_vtable_callback_disconnectNotify
   gen_qmessagebox_types.QMessageBox(h: fcQMessageBox_new2(addr(vtbl[].vtbl), addr(vtbl[])), owned: true)
 
 proc create*(T: type gen_qmessagebox_types.QMessageBox,
@@ -2055,115 +2062,115 @@ proc create*(T: type gen_qmessagebox_types.QMessageBox,
     let vtbl = cast[ref QMessageBoxVTable](fcQMessageBox_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQMessageBox_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQMessageBox_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQMessageBox_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQMessageBox_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQMessageBox_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQMessageBox_vtable_callback_metacall
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQMessageBox_vtable_callback_event
+    vtbl[].vtbl.event = fcQMessageBox_vtable_callback_event
   if not isNil(vtbl[].resizeEvent):
-    vtbl[].vtbl.resizeEvent = cQMessageBox_vtable_callback_resizeEvent
+    vtbl[].vtbl.resizeEvent = fcQMessageBox_vtable_callback_resizeEvent
   if not isNil(vtbl[].showEvent):
-    vtbl[].vtbl.showEvent = cQMessageBox_vtable_callback_showEvent
+    vtbl[].vtbl.showEvent = fcQMessageBox_vtable_callback_showEvent
   if not isNil(vtbl[].closeEvent):
-    vtbl[].vtbl.closeEvent = cQMessageBox_vtable_callback_closeEvent
+    vtbl[].vtbl.closeEvent = fcQMessageBox_vtable_callback_closeEvent
   if not isNil(vtbl[].keyPressEvent):
-    vtbl[].vtbl.keyPressEvent = cQMessageBox_vtable_callback_keyPressEvent
+    vtbl[].vtbl.keyPressEvent = fcQMessageBox_vtable_callback_keyPressEvent
   if not isNil(vtbl[].changeEvent):
-    vtbl[].vtbl.changeEvent = cQMessageBox_vtable_callback_changeEvent
+    vtbl[].vtbl.changeEvent = fcQMessageBox_vtable_callback_changeEvent
   if not isNil(vtbl[].setVisible):
-    vtbl[].vtbl.setVisible = cQMessageBox_vtable_callback_setVisible
+    vtbl[].vtbl.setVisible = fcQMessageBox_vtable_callback_setVisible
   if not isNil(vtbl[].sizeHint):
-    vtbl[].vtbl.sizeHint = cQMessageBox_vtable_callback_sizeHint
+    vtbl[].vtbl.sizeHint = fcQMessageBox_vtable_callback_sizeHint
   if not isNil(vtbl[].minimumSizeHint):
-    vtbl[].vtbl.minimumSizeHint = cQMessageBox_vtable_callback_minimumSizeHint
+    vtbl[].vtbl.minimumSizeHint = fcQMessageBox_vtable_callback_minimumSizeHint
   if not isNil(vtbl[].open):
-    vtbl[].vtbl.open = cQMessageBox_vtable_callback_open
+    vtbl[].vtbl.open = fcQMessageBox_vtable_callback_open
   if not isNil(vtbl[].exec):
-    vtbl[].vtbl.exec = cQMessageBox_vtable_callback_exec
+    vtbl[].vtbl.exec = fcQMessageBox_vtable_callback_exec
   if not isNil(vtbl[].done):
-    vtbl[].vtbl.done = cQMessageBox_vtable_callback_done
+    vtbl[].vtbl.done = fcQMessageBox_vtable_callback_done
   if not isNil(vtbl[].accept):
-    vtbl[].vtbl.accept = cQMessageBox_vtable_callback_accept
+    vtbl[].vtbl.accept = fcQMessageBox_vtable_callback_accept
   if not isNil(vtbl[].reject):
-    vtbl[].vtbl.reject = cQMessageBox_vtable_callback_reject
+    vtbl[].vtbl.reject = fcQMessageBox_vtable_callback_reject
   if not isNil(vtbl[].contextMenuEvent):
-    vtbl[].vtbl.contextMenuEvent = cQMessageBox_vtable_callback_contextMenuEvent
+    vtbl[].vtbl.contextMenuEvent = fcQMessageBox_vtable_callback_contextMenuEvent
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQMessageBox_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQMessageBox_vtable_callback_eventFilter
   if not isNil(vtbl[].devType):
-    vtbl[].vtbl.devType = cQMessageBox_vtable_callback_devType
+    vtbl[].vtbl.devType = fcQMessageBox_vtable_callback_devType
   if not isNil(vtbl[].heightForWidth):
-    vtbl[].vtbl.heightForWidth = cQMessageBox_vtable_callback_heightForWidth
+    vtbl[].vtbl.heightForWidth = fcQMessageBox_vtable_callback_heightForWidth
   if not isNil(vtbl[].hasHeightForWidth):
-    vtbl[].vtbl.hasHeightForWidth = cQMessageBox_vtable_callback_hasHeightForWidth
+    vtbl[].vtbl.hasHeightForWidth = fcQMessageBox_vtable_callback_hasHeightForWidth
   if not isNil(vtbl[].paintEngine):
-    vtbl[].vtbl.paintEngine = cQMessageBox_vtable_callback_paintEngine
+    vtbl[].vtbl.paintEngine = fcQMessageBox_vtable_callback_paintEngine
   if not isNil(vtbl[].mousePressEvent):
-    vtbl[].vtbl.mousePressEvent = cQMessageBox_vtable_callback_mousePressEvent
+    vtbl[].vtbl.mousePressEvent = fcQMessageBox_vtable_callback_mousePressEvent
   if not isNil(vtbl[].mouseReleaseEvent):
-    vtbl[].vtbl.mouseReleaseEvent = cQMessageBox_vtable_callback_mouseReleaseEvent
+    vtbl[].vtbl.mouseReleaseEvent = fcQMessageBox_vtable_callback_mouseReleaseEvent
   if not isNil(vtbl[].mouseDoubleClickEvent):
-    vtbl[].vtbl.mouseDoubleClickEvent = cQMessageBox_vtable_callback_mouseDoubleClickEvent
+    vtbl[].vtbl.mouseDoubleClickEvent = fcQMessageBox_vtable_callback_mouseDoubleClickEvent
   if not isNil(vtbl[].mouseMoveEvent):
-    vtbl[].vtbl.mouseMoveEvent = cQMessageBox_vtable_callback_mouseMoveEvent
+    vtbl[].vtbl.mouseMoveEvent = fcQMessageBox_vtable_callback_mouseMoveEvent
   if not isNil(vtbl[].wheelEvent):
-    vtbl[].vtbl.wheelEvent = cQMessageBox_vtable_callback_wheelEvent
+    vtbl[].vtbl.wheelEvent = fcQMessageBox_vtable_callback_wheelEvent
   if not isNil(vtbl[].keyReleaseEvent):
-    vtbl[].vtbl.keyReleaseEvent = cQMessageBox_vtable_callback_keyReleaseEvent
+    vtbl[].vtbl.keyReleaseEvent = fcQMessageBox_vtable_callback_keyReleaseEvent
   if not isNil(vtbl[].focusInEvent):
-    vtbl[].vtbl.focusInEvent = cQMessageBox_vtable_callback_focusInEvent
+    vtbl[].vtbl.focusInEvent = fcQMessageBox_vtable_callback_focusInEvent
   if not isNil(vtbl[].focusOutEvent):
-    vtbl[].vtbl.focusOutEvent = cQMessageBox_vtable_callback_focusOutEvent
+    vtbl[].vtbl.focusOutEvent = fcQMessageBox_vtable_callback_focusOutEvent
   if not isNil(vtbl[].enterEvent):
-    vtbl[].vtbl.enterEvent = cQMessageBox_vtable_callback_enterEvent
+    vtbl[].vtbl.enterEvent = fcQMessageBox_vtable_callback_enterEvent
   if not isNil(vtbl[].leaveEvent):
-    vtbl[].vtbl.leaveEvent = cQMessageBox_vtable_callback_leaveEvent
+    vtbl[].vtbl.leaveEvent = fcQMessageBox_vtable_callback_leaveEvent
   if not isNil(vtbl[].paintEvent):
-    vtbl[].vtbl.paintEvent = cQMessageBox_vtable_callback_paintEvent
+    vtbl[].vtbl.paintEvent = fcQMessageBox_vtable_callback_paintEvent
   if not isNil(vtbl[].moveEvent):
-    vtbl[].vtbl.moveEvent = cQMessageBox_vtable_callback_moveEvent
+    vtbl[].vtbl.moveEvent = fcQMessageBox_vtable_callback_moveEvent
   if not isNil(vtbl[].tabletEvent):
-    vtbl[].vtbl.tabletEvent = cQMessageBox_vtable_callback_tabletEvent
+    vtbl[].vtbl.tabletEvent = fcQMessageBox_vtable_callback_tabletEvent
   if not isNil(vtbl[].actionEvent):
-    vtbl[].vtbl.actionEvent = cQMessageBox_vtable_callback_actionEvent
+    vtbl[].vtbl.actionEvent = fcQMessageBox_vtable_callback_actionEvent
   if not isNil(vtbl[].dragEnterEvent):
-    vtbl[].vtbl.dragEnterEvent = cQMessageBox_vtable_callback_dragEnterEvent
+    vtbl[].vtbl.dragEnterEvent = fcQMessageBox_vtable_callback_dragEnterEvent
   if not isNil(vtbl[].dragMoveEvent):
-    vtbl[].vtbl.dragMoveEvent = cQMessageBox_vtable_callback_dragMoveEvent
+    vtbl[].vtbl.dragMoveEvent = fcQMessageBox_vtable_callback_dragMoveEvent
   if not isNil(vtbl[].dragLeaveEvent):
-    vtbl[].vtbl.dragLeaveEvent = cQMessageBox_vtable_callback_dragLeaveEvent
+    vtbl[].vtbl.dragLeaveEvent = fcQMessageBox_vtable_callback_dragLeaveEvent
   if not isNil(vtbl[].dropEvent):
-    vtbl[].vtbl.dropEvent = cQMessageBox_vtable_callback_dropEvent
+    vtbl[].vtbl.dropEvent = fcQMessageBox_vtable_callback_dropEvent
   if not isNil(vtbl[].hideEvent):
-    vtbl[].vtbl.hideEvent = cQMessageBox_vtable_callback_hideEvent
+    vtbl[].vtbl.hideEvent = fcQMessageBox_vtable_callback_hideEvent
   if not isNil(vtbl[].nativeEvent):
-    vtbl[].vtbl.nativeEvent = cQMessageBox_vtable_callback_nativeEvent
+    vtbl[].vtbl.nativeEvent = fcQMessageBox_vtable_callback_nativeEvent
   if not isNil(vtbl[].metric):
-    vtbl[].vtbl.metric = cQMessageBox_vtable_callback_metric
+    vtbl[].vtbl.metric = fcQMessageBox_vtable_callback_metric
   if not isNil(vtbl[].initPainter):
-    vtbl[].vtbl.initPainter = cQMessageBox_vtable_callback_initPainter
+    vtbl[].vtbl.initPainter = fcQMessageBox_vtable_callback_initPainter
   if not isNil(vtbl[].redirected):
-    vtbl[].vtbl.redirected = cQMessageBox_vtable_callback_redirected
+    vtbl[].vtbl.redirected = fcQMessageBox_vtable_callback_redirected
   if not isNil(vtbl[].sharedPainter):
-    vtbl[].vtbl.sharedPainter = cQMessageBox_vtable_callback_sharedPainter
+    vtbl[].vtbl.sharedPainter = fcQMessageBox_vtable_callback_sharedPainter
   if not isNil(vtbl[].inputMethodEvent):
-    vtbl[].vtbl.inputMethodEvent = cQMessageBox_vtable_callback_inputMethodEvent
+    vtbl[].vtbl.inputMethodEvent = fcQMessageBox_vtable_callback_inputMethodEvent
   if not isNil(vtbl[].inputMethodQuery):
-    vtbl[].vtbl.inputMethodQuery = cQMessageBox_vtable_callback_inputMethodQuery
+    vtbl[].vtbl.inputMethodQuery = fcQMessageBox_vtable_callback_inputMethodQuery
   if not isNil(vtbl[].focusNextPrevChild):
-    vtbl[].vtbl.focusNextPrevChild = cQMessageBox_vtable_callback_focusNextPrevChild
+    vtbl[].vtbl.focusNextPrevChild = fcQMessageBox_vtable_callback_focusNextPrevChild
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQMessageBox_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQMessageBox_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQMessageBox_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQMessageBox_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQMessageBox_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQMessageBox_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQMessageBox_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQMessageBox_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQMessageBox_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQMessageBox_vtable_callback_disconnectNotify
   gen_qmessagebox_types.QMessageBox(h: fcQMessageBox_new3(addr(vtbl[].vtbl), addr(vtbl[]), cint(icon), struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))), owned: true)
 
 proc create*(T: type gen_qmessagebox_types.QMessageBox,
@@ -2175,115 +2182,115 @@ proc create*(T: type gen_qmessagebox_types.QMessageBox,
     let vtbl = cast[ref QMessageBoxVTable](fcQMessageBox_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQMessageBox_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQMessageBox_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQMessageBox_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQMessageBox_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQMessageBox_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQMessageBox_vtable_callback_metacall
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQMessageBox_vtable_callback_event
+    vtbl[].vtbl.event = fcQMessageBox_vtable_callback_event
   if not isNil(vtbl[].resizeEvent):
-    vtbl[].vtbl.resizeEvent = cQMessageBox_vtable_callback_resizeEvent
+    vtbl[].vtbl.resizeEvent = fcQMessageBox_vtable_callback_resizeEvent
   if not isNil(vtbl[].showEvent):
-    vtbl[].vtbl.showEvent = cQMessageBox_vtable_callback_showEvent
+    vtbl[].vtbl.showEvent = fcQMessageBox_vtable_callback_showEvent
   if not isNil(vtbl[].closeEvent):
-    vtbl[].vtbl.closeEvent = cQMessageBox_vtable_callback_closeEvent
+    vtbl[].vtbl.closeEvent = fcQMessageBox_vtable_callback_closeEvent
   if not isNil(vtbl[].keyPressEvent):
-    vtbl[].vtbl.keyPressEvent = cQMessageBox_vtable_callback_keyPressEvent
+    vtbl[].vtbl.keyPressEvent = fcQMessageBox_vtable_callback_keyPressEvent
   if not isNil(vtbl[].changeEvent):
-    vtbl[].vtbl.changeEvent = cQMessageBox_vtable_callback_changeEvent
+    vtbl[].vtbl.changeEvent = fcQMessageBox_vtable_callback_changeEvent
   if not isNil(vtbl[].setVisible):
-    vtbl[].vtbl.setVisible = cQMessageBox_vtable_callback_setVisible
+    vtbl[].vtbl.setVisible = fcQMessageBox_vtable_callback_setVisible
   if not isNil(vtbl[].sizeHint):
-    vtbl[].vtbl.sizeHint = cQMessageBox_vtable_callback_sizeHint
+    vtbl[].vtbl.sizeHint = fcQMessageBox_vtable_callback_sizeHint
   if not isNil(vtbl[].minimumSizeHint):
-    vtbl[].vtbl.minimumSizeHint = cQMessageBox_vtable_callback_minimumSizeHint
+    vtbl[].vtbl.minimumSizeHint = fcQMessageBox_vtable_callback_minimumSizeHint
   if not isNil(vtbl[].open):
-    vtbl[].vtbl.open = cQMessageBox_vtable_callback_open
+    vtbl[].vtbl.open = fcQMessageBox_vtable_callback_open
   if not isNil(vtbl[].exec):
-    vtbl[].vtbl.exec = cQMessageBox_vtable_callback_exec
+    vtbl[].vtbl.exec = fcQMessageBox_vtable_callback_exec
   if not isNil(vtbl[].done):
-    vtbl[].vtbl.done = cQMessageBox_vtable_callback_done
+    vtbl[].vtbl.done = fcQMessageBox_vtable_callback_done
   if not isNil(vtbl[].accept):
-    vtbl[].vtbl.accept = cQMessageBox_vtable_callback_accept
+    vtbl[].vtbl.accept = fcQMessageBox_vtable_callback_accept
   if not isNil(vtbl[].reject):
-    vtbl[].vtbl.reject = cQMessageBox_vtable_callback_reject
+    vtbl[].vtbl.reject = fcQMessageBox_vtable_callback_reject
   if not isNil(vtbl[].contextMenuEvent):
-    vtbl[].vtbl.contextMenuEvent = cQMessageBox_vtable_callback_contextMenuEvent
+    vtbl[].vtbl.contextMenuEvent = fcQMessageBox_vtable_callback_contextMenuEvent
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQMessageBox_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQMessageBox_vtable_callback_eventFilter
   if not isNil(vtbl[].devType):
-    vtbl[].vtbl.devType = cQMessageBox_vtable_callback_devType
+    vtbl[].vtbl.devType = fcQMessageBox_vtable_callback_devType
   if not isNil(vtbl[].heightForWidth):
-    vtbl[].vtbl.heightForWidth = cQMessageBox_vtable_callback_heightForWidth
+    vtbl[].vtbl.heightForWidth = fcQMessageBox_vtable_callback_heightForWidth
   if not isNil(vtbl[].hasHeightForWidth):
-    vtbl[].vtbl.hasHeightForWidth = cQMessageBox_vtable_callback_hasHeightForWidth
+    vtbl[].vtbl.hasHeightForWidth = fcQMessageBox_vtable_callback_hasHeightForWidth
   if not isNil(vtbl[].paintEngine):
-    vtbl[].vtbl.paintEngine = cQMessageBox_vtable_callback_paintEngine
+    vtbl[].vtbl.paintEngine = fcQMessageBox_vtable_callback_paintEngine
   if not isNil(vtbl[].mousePressEvent):
-    vtbl[].vtbl.mousePressEvent = cQMessageBox_vtable_callback_mousePressEvent
+    vtbl[].vtbl.mousePressEvent = fcQMessageBox_vtable_callback_mousePressEvent
   if not isNil(vtbl[].mouseReleaseEvent):
-    vtbl[].vtbl.mouseReleaseEvent = cQMessageBox_vtable_callback_mouseReleaseEvent
+    vtbl[].vtbl.mouseReleaseEvent = fcQMessageBox_vtable_callback_mouseReleaseEvent
   if not isNil(vtbl[].mouseDoubleClickEvent):
-    vtbl[].vtbl.mouseDoubleClickEvent = cQMessageBox_vtable_callback_mouseDoubleClickEvent
+    vtbl[].vtbl.mouseDoubleClickEvent = fcQMessageBox_vtable_callback_mouseDoubleClickEvent
   if not isNil(vtbl[].mouseMoveEvent):
-    vtbl[].vtbl.mouseMoveEvent = cQMessageBox_vtable_callback_mouseMoveEvent
+    vtbl[].vtbl.mouseMoveEvent = fcQMessageBox_vtable_callback_mouseMoveEvent
   if not isNil(vtbl[].wheelEvent):
-    vtbl[].vtbl.wheelEvent = cQMessageBox_vtable_callback_wheelEvent
+    vtbl[].vtbl.wheelEvent = fcQMessageBox_vtable_callback_wheelEvent
   if not isNil(vtbl[].keyReleaseEvent):
-    vtbl[].vtbl.keyReleaseEvent = cQMessageBox_vtable_callback_keyReleaseEvent
+    vtbl[].vtbl.keyReleaseEvent = fcQMessageBox_vtable_callback_keyReleaseEvent
   if not isNil(vtbl[].focusInEvent):
-    vtbl[].vtbl.focusInEvent = cQMessageBox_vtable_callback_focusInEvent
+    vtbl[].vtbl.focusInEvent = fcQMessageBox_vtable_callback_focusInEvent
   if not isNil(vtbl[].focusOutEvent):
-    vtbl[].vtbl.focusOutEvent = cQMessageBox_vtable_callback_focusOutEvent
+    vtbl[].vtbl.focusOutEvent = fcQMessageBox_vtable_callback_focusOutEvent
   if not isNil(vtbl[].enterEvent):
-    vtbl[].vtbl.enterEvent = cQMessageBox_vtable_callback_enterEvent
+    vtbl[].vtbl.enterEvent = fcQMessageBox_vtable_callback_enterEvent
   if not isNil(vtbl[].leaveEvent):
-    vtbl[].vtbl.leaveEvent = cQMessageBox_vtable_callback_leaveEvent
+    vtbl[].vtbl.leaveEvent = fcQMessageBox_vtable_callback_leaveEvent
   if not isNil(vtbl[].paintEvent):
-    vtbl[].vtbl.paintEvent = cQMessageBox_vtable_callback_paintEvent
+    vtbl[].vtbl.paintEvent = fcQMessageBox_vtable_callback_paintEvent
   if not isNil(vtbl[].moveEvent):
-    vtbl[].vtbl.moveEvent = cQMessageBox_vtable_callback_moveEvent
+    vtbl[].vtbl.moveEvent = fcQMessageBox_vtable_callback_moveEvent
   if not isNil(vtbl[].tabletEvent):
-    vtbl[].vtbl.tabletEvent = cQMessageBox_vtable_callback_tabletEvent
+    vtbl[].vtbl.tabletEvent = fcQMessageBox_vtable_callback_tabletEvent
   if not isNil(vtbl[].actionEvent):
-    vtbl[].vtbl.actionEvent = cQMessageBox_vtable_callback_actionEvent
+    vtbl[].vtbl.actionEvent = fcQMessageBox_vtable_callback_actionEvent
   if not isNil(vtbl[].dragEnterEvent):
-    vtbl[].vtbl.dragEnterEvent = cQMessageBox_vtable_callback_dragEnterEvent
+    vtbl[].vtbl.dragEnterEvent = fcQMessageBox_vtable_callback_dragEnterEvent
   if not isNil(vtbl[].dragMoveEvent):
-    vtbl[].vtbl.dragMoveEvent = cQMessageBox_vtable_callback_dragMoveEvent
+    vtbl[].vtbl.dragMoveEvent = fcQMessageBox_vtable_callback_dragMoveEvent
   if not isNil(vtbl[].dragLeaveEvent):
-    vtbl[].vtbl.dragLeaveEvent = cQMessageBox_vtable_callback_dragLeaveEvent
+    vtbl[].vtbl.dragLeaveEvent = fcQMessageBox_vtable_callback_dragLeaveEvent
   if not isNil(vtbl[].dropEvent):
-    vtbl[].vtbl.dropEvent = cQMessageBox_vtable_callback_dropEvent
+    vtbl[].vtbl.dropEvent = fcQMessageBox_vtable_callback_dropEvent
   if not isNil(vtbl[].hideEvent):
-    vtbl[].vtbl.hideEvent = cQMessageBox_vtable_callback_hideEvent
+    vtbl[].vtbl.hideEvent = fcQMessageBox_vtable_callback_hideEvent
   if not isNil(vtbl[].nativeEvent):
-    vtbl[].vtbl.nativeEvent = cQMessageBox_vtable_callback_nativeEvent
+    vtbl[].vtbl.nativeEvent = fcQMessageBox_vtable_callback_nativeEvent
   if not isNil(vtbl[].metric):
-    vtbl[].vtbl.metric = cQMessageBox_vtable_callback_metric
+    vtbl[].vtbl.metric = fcQMessageBox_vtable_callback_metric
   if not isNil(vtbl[].initPainter):
-    vtbl[].vtbl.initPainter = cQMessageBox_vtable_callback_initPainter
+    vtbl[].vtbl.initPainter = fcQMessageBox_vtable_callback_initPainter
   if not isNil(vtbl[].redirected):
-    vtbl[].vtbl.redirected = cQMessageBox_vtable_callback_redirected
+    vtbl[].vtbl.redirected = fcQMessageBox_vtable_callback_redirected
   if not isNil(vtbl[].sharedPainter):
-    vtbl[].vtbl.sharedPainter = cQMessageBox_vtable_callback_sharedPainter
+    vtbl[].vtbl.sharedPainter = fcQMessageBox_vtable_callback_sharedPainter
   if not isNil(vtbl[].inputMethodEvent):
-    vtbl[].vtbl.inputMethodEvent = cQMessageBox_vtable_callback_inputMethodEvent
+    vtbl[].vtbl.inputMethodEvent = fcQMessageBox_vtable_callback_inputMethodEvent
   if not isNil(vtbl[].inputMethodQuery):
-    vtbl[].vtbl.inputMethodQuery = cQMessageBox_vtable_callback_inputMethodQuery
+    vtbl[].vtbl.inputMethodQuery = fcQMessageBox_vtable_callback_inputMethodQuery
   if not isNil(vtbl[].focusNextPrevChild):
-    vtbl[].vtbl.focusNextPrevChild = cQMessageBox_vtable_callback_focusNextPrevChild
+    vtbl[].vtbl.focusNextPrevChild = fcQMessageBox_vtable_callback_focusNextPrevChild
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQMessageBox_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQMessageBox_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQMessageBox_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQMessageBox_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQMessageBox_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQMessageBox_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQMessageBox_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQMessageBox_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQMessageBox_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQMessageBox_vtable_callback_disconnectNotify
   gen_qmessagebox_types.QMessageBox(h: fcQMessageBox_new4(addr(vtbl[].vtbl), addr(vtbl[]), struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), cint(icon), button0, button1, button2), owned: true)
 
 proc create*(T: type gen_qmessagebox_types.QMessageBox,
@@ -2295,115 +2302,115 @@ proc create*(T: type gen_qmessagebox_types.QMessageBox,
     let vtbl = cast[ref QMessageBoxVTable](fcQMessageBox_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQMessageBox_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQMessageBox_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQMessageBox_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQMessageBox_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQMessageBox_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQMessageBox_vtable_callback_metacall
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQMessageBox_vtable_callback_event
+    vtbl[].vtbl.event = fcQMessageBox_vtable_callback_event
   if not isNil(vtbl[].resizeEvent):
-    vtbl[].vtbl.resizeEvent = cQMessageBox_vtable_callback_resizeEvent
+    vtbl[].vtbl.resizeEvent = fcQMessageBox_vtable_callback_resizeEvent
   if not isNil(vtbl[].showEvent):
-    vtbl[].vtbl.showEvent = cQMessageBox_vtable_callback_showEvent
+    vtbl[].vtbl.showEvent = fcQMessageBox_vtable_callback_showEvent
   if not isNil(vtbl[].closeEvent):
-    vtbl[].vtbl.closeEvent = cQMessageBox_vtable_callback_closeEvent
+    vtbl[].vtbl.closeEvent = fcQMessageBox_vtable_callback_closeEvent
   if not isNil(vtbl[].keyPressEvent):
-    vtbl[].vtbl.keyPressEvent = cQMessageBox_vtable_callback_keyPressEvent
+    vtbl[].vtbl.keyPressEvent = fcQMessageBox_vtable_callback_keyPressEvent
   if not isNil(vtbl[].changeEvent):
-    vtbl[].vtbl.changeEvent = cQMessageBox_vtable_callback_changeEvent
+    vtbl[].vtbl.changeEvent = fcQMessageBox_vtable_callback_changeEvent
   if not isNil(vtbl[].setVisible):
-    vtbl[].vtbl.setVisible = cQMessageBox_vtable_callback_setVisible
+    vtbl[].vtbl.setVisible = fcQMessageBox_vtable_callback_setVisible
   if not isNil(vtbl[].sizeHint):
-    vtbl[].vtbl.sizeHint = cQMessageBox_vtable_callback_sizeHint
+    vtbl[].vtbl.sizeHint = fcQMessageBox_vtable_callback_sizeHint
   if not isNil(vtbl[].minimumSizeHint):
-    vtbl[].vtbl.minimumSizeHint = cQMessageBox_vtable_callback_minimumSizeHint
+    vtbl[].vtbl.minimumSizeHint = fcQMessageBox_vtable_callback_minimumSizeHint
   if not isNil(vtbl[].open):
-    vtbl[].vtbl.open = cQMessageBox_vtable_callback_open
+    vtbl[].vtbl.open = fcQMessageBox_vtable_callback_open
   if not isNil(vtbl[].exec):
-    vtbl[].vtbl.exec = cQMessageBox_vtable_callback_exec
+    vtbl[].vtbl.exec = fcQMessageBox_vtable_callback_exec
   if not isNil(vtbl[].done):
-    vtbl[].vtbl.done = cQMessageBox_vtable_callback_done
+    vtbl[].vtbl.done = fcQMessageBox_vtable_callback_done
   if not isNil(vtbl[].accept):
-    vtbl[].vtbl.accept = cQMessageBox_vtable_callback_accept
+    vtbl[].vtbl.accept = fcQMessageBox_vtable_callback_accept
   if not isNil(vtbl[].reject):
-    vtbl[].vtbl.reject = cQMessageBox_vtable_callback_reject
+    vtbl[].vtbl.reject = fcQMessageBox_vtable_callback_reject
   if not isNil(vtbl[].contextMenuEvent):
-    vtbl[].vtbl.contextMenuEvent = cQMessageBox_vtable_callback_contextMenuEvent
+    vtbl[].vtbl.contextMenuEvent = fcQMessageBox_vtable_callback_contextMenuEvent
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQMessageBox_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQMessageBox_vtable_callback_eventFilter
   if not isNil(vtbl[].devType):
-    vtbl[].vtbl.devType = cQMessageBox_vtable_callback_devType
+    vtbl[].vtbl.devType = fcQMessageBox_vtable_callback_devType
   if not isNil(vtbl[].heightForWidth):
-    vtbl[].vtbl.heightForWidth = cQMessageBox_vtable_callback_heightForWidth
+    vtbl[].vtbl.heightForWidth = fcQMessageBox_vtable_callback_heightForWidth
   if not isNil(vtbl[].hasHeightForWidth):
-    vtbl[].vtbl.hasHeightForWidth = cQMessageBox_vtable_callback_hasHeightForWidth
+    vtbl[].vtbl.hasHeightForWidth = fcQMessageBox_vtable_callback_hasHeightForWidth
   if not isNil(vtbl[].paintEngine):
-    vtbl[].vtbl.paintEngine = cQMessageBox_vtable_callback_paintEngine
+    vtbl[].vtbl.paintEngine = fcQMessageBox_vtable_callback_paintEngine
   if not isNil(vtbl[].mousePressEvent):
-    vtbl[].vtbl.mousePressEvent = cQMessageBox_vtable_callback_mousePressEvent
+    vtbl[].vtbl.mousePressEvent = fcQMessageBox_vtable_callback_mousePressEvent
   if not isNil(vtbl[].mouseReleaseEvent):
-    vtbl[].vtbl.mouseReleaseEvent = cQMessageBox_vtable_callback_mouseReleaseEvent
+    vtbl[].vtbl.mouseReleaseEvent = fcQMessageBox_vtable_callback_mouseReleaseEvent
   if not isNil(vtbl[].mouseDoubleClickEvent):
-    vtbl[].vtbl.mouseDoubleClickEvent = cQMessageBox_vtable_callback_mouseDoubleClickEvent
+    vtbl[].vtbl.mouseDoubleClickEvent = fcQMessageBox_vtable_callback_mouseDoubleClickEvent
   if not isNil(vtbl[].mouseMoveEvent):
-    vtbl[].vtbl.mouseMoveEvent = cQMessageBox_vtable_callback_mouseMoveEvent
+    vtbl[].vtbl.mouseMoveEvent = fcQMessageBox_vtable_callback_mouseMoveEvent
   if not isNil(vtbl[].wheelEvent):
-    vtbl[].vtbl.wheelEvent = cQMessageBox_vtable_callback_wheelEvent
+    vtbl[].vtbl.wheelEvent = fcQMessageBox_vtable_callback_wheelEvent
   if not isNil(vtbl[].keyReleaseEvent):
-    vtbl[].vtbl.keyReleaseEvent = cQMessageBox_vtable_callback_keyReleaseEvent
+    vtbl[].vtbl.keyReleaseEvent = fcQMessageBox_vtable_callback_keyReleaseEvent
   if not isNil(vtbl[].focusInEvent):
-    vtbl[].vtbl.focusInEvent = cQMessageBox_vtable_callback_focusInEvent
+    vtbl[].vtbl.focusInEvent = fcQMessageBox_vtable_callback_focusInEvent
   if not isNil(vtbl[].focusOutEvent):
-    vtbl[].vtbl.focusOutEvent = cQMessageBox_vtable_callback_focusOutEvent
+    vtbl[].vtbl.focusOutEvent = fcQMessageBox_vtable_callback_focusOutEvent
   if not isNil(vtbl[].enterEvent):
-    vtbl[].vtbl.enterEvent = cQMessageBox_vtable_callback_enterEvent
+    vtbl[].vtbl.enterEvent = fcQMessageBox_vtable_callback_enterEvent
   if not isNil(vtbl[].leaveEvent):
-    vtbl[].vtbl.leaveEvent = cQMessageBox_vtable_callback_leaveEvent
+    vtbl[].vtbl.leaveEvent = fcQMessageBox_vtable_callback_leaveEvent
   if not isNil(vtbl[].paintEvent):
-    vtbl[].vtbl.paintEvent = cQMessageBox_vtable_callback_paintEvent
+    vtbl[].vtbl.paintEvent = fcQMessageBox_vtable_callback_paintEvent
   if not isNil(vtbl[].moveEvent):
-    vtbl[].vtbl.moveEvent = cQMessageBox_vtable_callback_moveEvent
+    vtbl[].vtbl.moveEvent = fcQMessageBox_vtable_callback_moveEvent
   if not isNil(vtbl[].tabletEvent):
-    vtbl[].vtbl.tabletEvent = cQMessageBox_vtable_callback_tabletEvent
+    vtbl[].vtbl.tabletEvent = fcQMessageBox_vtable_callback_tabletEvent
   if not isNil(vtbl[].actionEvent):
-    vtbl[].vtbl.actionEvent = cQMessageBox_vtable_callback_actionEvent
+    vtbl[].vtbl.actionEvent = fcQMessageBox_vtable_callback_actionEvent
   if not isNil(vtbl[].dragEnterEvent):
-    vtbl[].vtbl.dragEnterEvent = cQMessageBox_vtable_callback_dragEnterEvent
+    vtbl[].vtbl.dragEnterEvent = fcQMessageBox_vtable_callback_dragEnterEvent
   if not isNil(vtbl[].dragMoveEvent):
-    vtbl[].vtbl.dragMoveEvent = cQMessageBox_vtable_callback_dragMoveEvent
+    vtbl[].vtbl.dragMoveEvent = fcQMessageBox_vtable_callback_dragMoveEvent
   if not isNil(vtbl[].dragLeaveEvent):
-    vtbl[].vtbl.dragLeaveEvent = cQMessageBox_vtable_callback_dragLeaveEvent
+    vtbl[].vtbl.dragLeaveEvent = fcQMessageBox_vtable_callback_dragLeaveEvent
   if not isNil(vtbl[].dropEvent):
-    vtbl[].vtbl.dropEvent = cQMessageBox_vtable_callback_dropEvent
+    vtbl[].vtbl.dropEvent = fcQMessageBox_vtable_callback_dropEvent
   if not isNil(vtbl[].hideEvent):
-    vtbl[].vtbl.hideEvent = cQMessageBox_vtable_callback_hideEvent
+    vtbl[].vtbl.hideEvent = fcQMessageBox_vtable_callback_hideEvent
   if not isNil(vtbl[].nativeEvent):
-    vtbl[].vtbl.nativeEvent = cQMessageBox_vtable_callback_nativeEvent
+    vtbl[].vtbl.nativeEvent = fcQMessageBox_vtable_callback_nativeEvent
   if not isNil(vtbl[].metric):
-    vtbl[].vtbl.metric = cQMessageBox_vtable_callback_metric
+    vtbl[].vtbl.metric = fcQMessageBox_vtable_callback_metric
   if not isNil(vtbl[].initPainter):
-    vtbl[].vtbl.initPainter = cQMessageBox_vtable_callback_initPainter
+    vtbl[].vtbl.initPainter = fcQMessageBox_vtable_callback_initPainter
   if not isNil(vtbl[].redirected):
-    vtbl[].vtbl.redirected = cQMessageBox_vtable_callback_redirected
+    vtbl[].vtbl.redirected = fcQMessageBox_vtable_callback_redirected
   if not isNil(vtbl[].sharedPainter):
-    vtbl[].vtbl.sharedPainter = cQMessageBox_vtable_callback_sharedPainter
+    vtbl[].vtbl.sharedPainter = fcQMessageBox_vtable_callback_sharedPainter
   if not isNil(vtbl[].inputMethodEvent):
-    vtbl[].vtbl.inputMethodEvent = cQMessageBox_vtable_callback_inputMethodEvent
+    vtbl[].vtbl.inputMethodEvent = fcQMessageBox_vtable_callback_inputMethodEvent
   if not isNil(vtbl[].inputMethodQuery):
-    vtbl[].vtbl.inputMethodQuery = cQMessageBox_vtable_callback_inputMethodQuery
+    vtbl[].vtbl.inputMethodQuery = fcQMessageBox_vtable_callback_inputMethodQuery
   if not isNil(vtbl[].focusNextPrevChild):
-    vtbl[].vtbl.focusNextPrevChild = cQMessageBox_vtable_callback_focusNextPrevChild
+    vtbl[].vtbl.focusNextPrevChild = fcQMessageBox_vtable_callback_focusNextPrevChild
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQMessageBox_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQMessageBox_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQMessageBox_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQMessageBox_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQMessageBox_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQMessageBox_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQMessageBox_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQMessageBox_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQMessageBox_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQMessageBox_vtable_callback_disconnectNotify
   gen_qmessagebox_types.QMessageBox(h: fcQMessageBox_new5(addr(vtbl[].vtbl), addr(vtbl[]), cint(icon), struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), cint(buttons)), owned: true)
 
 proc create*(T: type gen_qmessagebox_types.QMessageBox,
@@ -2415,115 +2422,115 @@ proc create*(T: type gen_qmessagebox_types.QMessageBox,
     let vtbl = cast[ref QMessageBoxVTable](fcQMessageBox_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQMessageBox_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQMessageBox_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQMessageBox_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQMessageBox_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQMessageBox_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQMessageBox_vtable_callback_metacall
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQMessageBox_vtable_callback_event
+    vtbl[].vtbl.event = fcQMessageBox_vtable_callback_event
   if not isNil(vtbl[].resizeEvent):
-    vtbl[].vtbl.resizeEvent = cQMessageBox_vtable_callback_resizeEvent
+    vtbl[].vtbl.resizeEvent = fcQMessageBox_vtable_callback_resizeEvent
   if not isNil(vtbl[].showEvent):
-    vtbl[].vtbl.showEvent = cQMessageBox_vtable_callback_showEvent
+    vtbl[].vtbl.showEvent = fcQMessageBox_vtable_callback_showEvent
   if not isNil(vtbl[].closeEvent):
-    vtbl[].vtbl.closeEvent = cQMessageBox_vtable_callback_closeEvent
+    vtbl[].vtbl.closeEvent = fcQMessageBox_vtable_callback_closeEvent
   if not isNil(vtbl[].keyPressEvent):
-    vtbl[].vtbl.keyPressEvent = cQMessageBox_vtable_callback_keyPressEvent
+    vtbl[].vtbl.keyPressEvent = fcQMessageBox_vtable_callback_keyPressEvent
   if not isNil(vtbl[].changeEvent):
-    vtbl[].vtbl.changeEvent = cQMessageBox_vtable_callback_changeEvent
+    vtbl[].vtbl.changeEvent = fcQMessageBox_vtable_callback_changeEvent
   if not isNil(vtbl[].setVisible):
-    vtbl[].vtbl.setVisible = cQMessageBox_vtable_callback_setVisible
+    vtbl[].vtbl.setVisible = fcQMessageBox_vtable_callback_setVisible
   if not isNil(vtbl[].sizeHint):
-    vtbl[].vtbl.sizeHint = cQMessageBox_vtable_callback_sizeHint
+    vtbl[].vtbl.sizeHint = fcQMessageBox_vtable_callback_sizeHint
   if not isNil(vtbl[].minimumSizeHint):
-    vtbl[].vtbl.minimumSizeHint = cQMessageBox_vtable_callback_minimumSizeHint
+    vtbl[].vtbl.minimumSizeHint = fcQMessageBox_vtable_callback_minimumSizeHint
   if not isNil(vtbl[].open):
-    vtbl[].vtbl.open = cQMessageBox_vtable_callback_open
+    vtbl[].vtbl.open = fcQMessageBox_vtable_callback_open
   if not isNil(vtbl[].exec):
-    vtbl[].vtbl.exec = cQMessageBox_vtable_callback_exec
+    vtbl[].vtbl.exec = fcQMessageBox_vtable_callback_exec
   if not isNil(vtbl[].done):
-    vtbl[].vtbl.done = cQMessageBox_vtable_callback_done
+    vtbl[].vtbl.done = fcQMessageBox_vtable_callback_done
   if not isNil(vtbl[].accept):
-    vtbl[].vtbl.accept = cQMessageBox_vtable_callback_accept
+    vtbl[].vtbl.accept = fcQMessageBox_vtable_callback_accept
   if not isNil(vtbl[].reject):
-    vtbl[].vtbl.reject = cQMessageBox_vtable_callback_reject
+    vtbl[].vtbl.reject = fcQMessageBox_vtable_callback_reject
   if not isNil(vtbl[].contextMenuEvent):
-    vtbl[].vtbl.contextMenuEvent = cQMessageBox_vtable_callback_contextMenuEvent
+    vtbl[].vtbl.contextMenuEvent = fcQMessageBox_vtable_callback_contextMenuEvent
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQMessageBox_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQMessageBox_vtable_callback_eventFilter
   if not isNil(vtbl[].devType):
-    vtbl[].vtbl.devType = cQMessageBox_vtable_callback_devType
+    vtbl[].vtbl.devType = fcQMessageBox_vtable_callback_devType
   if not isNil(vtbl[].heightForWidth):
-    vtbl[].vtbl.heightForWidth = cQMessageBox_vtable_callback_heightForWidth
+    vtbl[].vtbl.heightForWidth = fcQMessageBox_vtable_callback_heightForWidth
   if not isNil(vtbl[].hasHeightForWidth):
-    vtbl[].vtbl.hasHeightForWidth = cQMessageBox_vtable_callback_hasHeightForWidth
+    vtbl[].vtbl.hasHeightForWidth = fcQMessageBox_vtable_callback_hasHeightForWidth
   if not isNil(vtbl[].paintEngine):
-    vtbl[].vtbl.paintEngine = cQMessageBox_vtable_callback_paintEngine
+    vtbl[].vtbl.paintEngine = fcQMessageBox_vtable_callback_paintEngine
   if not isNil(vtbl[].mousePressEvent):
-    vtbl[].vtbl.mousePressEvent = cQMessageBox_vtable_callback_mousePressEvent
+    vtbl[].vtbl.mousePressEvent = fcQMessageBox_vtable_callback_mousePressEvent
   if not isNil(vtbl[].mouseReleaseEvent):
-    vtbl[].vtbl.mouseReleaseEvent = cQMessageBox_vtable_callback_mouseReleaseEvent
+    vtbl[].vtbl.mouseReleaseEvent = fcQMessageBox_vtable_callback_mouseReleaseEvent
   if not isNil(vtbl[].mouseDoubleClickEvent):
-    vtbl[].vtbl.mouseDoubleClickEvent = cQMessageBox_vtable_callback_mouseDoubleClickEvent
+    vtbl[].vtbl.mouseDoubleClickEvent = fcQMessageBox_vtable_callback_mouseDoubleClickEvent
   if not isNil(vtbl[].mouseMoveEvent):
-    vtbl[].vtbl.mouseMoveEvent = cQMessageBox_vtable_callback_mouseMoveEvent
+    vtbl[].vtbl.mouseMoveEvent = fcQMessageBox_vtable_callback_mouseMoveEvent
   if not isNil(vtbl[].wheelEvent):
-    vtbl[].vtbl.wheelEvent = cQMessageBox_vtable_callback_wheelEvent
+    vtbl[].vtbl.wheelEvent = fcQMessageBox_vtable_callback_wheelEvent
   if not isNil(vtbl[].keyReleaseEvent):
-    vtbl[].vtbl.keyReleaseEvent = cQMessageBox_vtable_callback_keyReleaseEvent
+    vtbl[].vtbl.keyReleaseEvent = fcQMessageBox_vtable_callback_keyReleaseEvent
   if not isNil(vtbl[].focusInEvent):
-    vtbl[].vtbl.focusInEvent = cQMessageBox_vtable_callback_focusInEvent
+    vtbl[].vtbl.focusInEvent = fcQMessageBox_vtable_callback_focusInEvent
   if not isNil(vtbl[].focusOutEvent):
-    vtbl[].vtbl.focusOutEvent = cQMessageBox_vtable_callback_focusOutEvent
+    vtbl[].vtbl.focusOutEvent = fcQMessageBox_vtable_callback_focusOutEvent
   if not isNil(vtbl[].enterEvent):
-    vtbl[].vtbl.enterEvent = cQMessageBox_vtable_callback_enterEvent
+    vtbl[].vtbl.enterEvent = fcQMessageBox_vtable_callback_enterEvent
   if not isNil(vtbl[].leaveEvent):
-    vtbl[].vtbl.leaveEvent = cQMessageBox_vtable_callback_leaveEvent
+    vtbl[].vtbl.leaveEvent = fcQMessageBox_vtable_callback_leaveEvent
   if not isNil(vtbl[].paintEvent):
-    vtbl[].vtbl.paintEvent = cQMessageBox_vtable_callback_paintEvent
+    vtbl[].vtbl.paintEvent = fcQMessageBox_vtable_callback_paintEvent
   if not isNil(vtbl[].moveEvent):
-    vtbl[].vtbl.moveEvent = cQMessageBox_vtable_callback_moveEvent
+    vtbl[].vtbl.moveEvent = fcQMessageBox_vtable_callback_moveEvent
   if not isNil(vtbl[].tabletEvent):
-    vtbl[].vtbl.tabletEvent = cQMessageBox_vtable_callback_tabletEvent
+    vtbl[].vtbl.tabletEvent = fcQMessageBox_vtable_callback_tabletEvent
   if not isNil(vtbl[].actionEvent):
-    vtbl[].vtbl.actionEvent = cQMessageBox_vtable_callback_actionEvent
+    vtbl[].vtbl.actionEvent = fcQMessageBox_vtable_callback_actionEvent
   if not isNil(vtbl[].dragEnterEvent):
-    vtbl[].vtbl.dragEnterEvent = cQMessageBox_vtable_callback_dragEnterEvent
+    vtbl[].vtbl.dragEnterEvent = fcQMessageBox_vtable_callback_dragEnterEvent
   if not isNil(vtbl[].dragMoveEvent):
-    vtbl[].vtbl.dragMoveEvent = cQMessageBox_vtable_callback_dragMoveEvent
+    vtbl[].vtbl.dragMoveEvent = fcQMessageBox_vtable_callback_dragMoveEvent
   if not isNil(vtbl[].dragLeaveEvent):
-    vtbl[].vtbl.dragLeaveEvent = cQMessageBox_vtable_callback_dragLeaveEvent
+    vtbl[].vtbl.dragLeaveEvent = fcQMessageBox_vtable_callback_dragLeaveEvent
   if not isNil(vtbl[].dropEvent):
-    vtbl[].vtbl.dropEvent = cQMessageBox_vtable_callback_dropEvent
+    vtbl[].vtbl.dropEvent = fcQMessageBox_vtable_callback_dropEvent
   if not isNil(vtbl[].hideEvent):
-    vtbl[].vtbl.hideEvent = cQMessageBox_vtable_callback_hideEvent
+    vtbl[].vtbl.hideEvent = fcQMessageBox_vtable_callback_hideEvent
   if not isNil(vtbl[].nativeEvent):
-    vtbl[].vtbl.nativeEvent = cQMessageBox_vtable_callback_nativeEvent
+    vtbl[].vtbl.nativeEvent = fcQMessageBox_vtable_callback_nativeEvent
   if not isNil(vtbl[].metric):
-    vtbl[].vtbl.metric = cQMessageBox_vtable_callback_metric
+    vtbl[].vtbl.metric = fcQMessageBox_vtable_callback_metric
   if not isNil(vtbl[].initPainter):
-    vtbl[].vtbl.initPainter = cQMessageBox_vtable_callback_initPainter
+    vtbl[].vtbl.initPainter = fcQMessageBox_vtable_callback_initPainter
   if not isNil(vtbl[].redirected):
-    vtbl[].vtbl.redirected = cQMessageBox_vtable_callback_redirected
+    vtbl[].vtbl.redirected = fcQMessageBox_vtable_callback_redirected
   if not isNil(vtbl[].sharedPainter):
-    vtbl[].vtbl.sharedPainter = cQMessageBox_vtable_callback_sharedPainter
+    vtbl[].vtbl.sharedPainter = fcQMessageBox_vtable_callback_sharedPainter
   if not isNil(vtbl[].inputMethodEvent):
-    vtbl[].vtbl.inputMethodEvent = cQMessageBox_vtable_callback_inputMethodEvent
+    vtbl[].vtbl.inputMethodEvent = fcQMessageBox_vtable_callback_inputMethodEvent
   if not isNil(vtbl[].inputMethodQuery):
-    vtbl[].vtbl.inputMethodQuery = cQMessageBox_vtable_callback_inputMethodQuery
+    vtbl[].vtbl.inputMethodQuery = fcQMessageBox_vtable_callback_inputMethodQuery
   if not isNil(vtbl[].focusNextPrevChild):
-    vtbl[].vtbl.focusNextPrevChild = cQMessageBox_vtable_callback_focusNextPrevChild
+    vtbl[].vtbl.focusNextPrevChild = fcQMessageBox_vtable_callback_focusNextPrevChild
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQMessageBox_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQMessageBox_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQMessageBox_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQMessageBox_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQMessageBox_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQMessageBox_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQMessageBox_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQMessageBox_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQMessageBox_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQMessageBox_vtable_callback_disconnectNotify
   gen_qmessagebox_types.QMessageBox(h: fcQMessageBox_new6(addr(vtbl[].vtbl), addr(vtbl[]), cint(icon), struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), cint(buttons), parent.h), owned: true)
 
 proc create*(T: type gen_qmessagebox_types.QMessageBox,
@@ -2535,115 +2542,115 @@ proc create*(T: type gen_qmessagebox_types.QMessageBox,
     let vtbl = cast[ref QMessageBoxVTable](fcQMessageBox_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQMessageBox_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQMessageBox_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQMessageBox_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQMessageBox_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQMessageBox_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQMessageBox_vtable_callback_metacall
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQMessageBox_vtable_callback_event
+    vtbl[].vtbl.event = fcQMessageBox_vtable_callback_event
   if not isNil(vtbl[].resizeEvent):
-    vtbl[].vtbl.resizeEvent = cQMessageBox_vtable_callback_resizeEvent
+    vtbl[].vtbl.resizeEvent = fcQMessageBox_vtable_callback_resizeEvent
   if not isNil(vtbl[].showEvent):
-    vtbl[].vtbl.showEvent = cQMessageBox_vtable_callback_showEvent
+    vtbl[].vtbl.showEvent = fcQMessageBox_vtable_callback_showEvent
   if not isNil(vtbl[].closeEvent):
-    vtbl[].vtbl.closeEvent = cQMessageBox_vtable_callback_closeEvent
+    vtbl[].vtbl.closeEvent = fcQMessageBox_vtable_callback_closeEvent
   if not isNil(vtbl[].keyPressEvent):
-    vtbl[].vtbl.keyPressEvent = cQMessageBox_vtable_callback_keyPressEvent
+    vtbl[].vtbl.keyPressEvent = fcQMessageBox_vtable_callback_keyPressEvent
   if not isNil(vtbl[].changeEvent):
-    vtbl[].vtbl.changeEvent = cQMessageBox_vtable_callback_changeEvent
+    vtbl[].vtbl.changeEvent = fcQMessageBox_vtable_callback_changeEvent
   if not isNil(vtbl[].setVisible):
-    vtbl[].vtbl.setVisible = cQMessageBox_vtable_callback_setVisible
+    vtbl[].vtbl.setVisible = fcQMessageBox_vtable_callback_setVisible
   if not isNil(vtbl[].sizeHint):
-    vtbl[].vtbl.sizeHint = cQMessageBox_vtable_callback_sizeHint
+    vtbl[].vtbl.sizeHint = fcQMessageBox_vtable_callback_sizeHint
   if not isNil(vtbl[].minimumSizeHint):
-    vtbl[].vtbl.minimumSizeHint = cQMessageBox_vtable_callback_minimumSizeHint
+    vtbl[].vtbl.minimumSizeHint = fcQMessageBox_vtable_callback_minimumSizeHint
   if not isNil(vtbl[].open):
-    vtbl[].vtbl.open = cQMessageBox_vtable_callback_open
+    vtbl[].vtbl.open = fcQMessageBox_vtable_callback_open
   if not isNil(vtbl[].exec):
-    vtbl[].vtbl.exec = cQMessageBox_vtable_callback_exec
+    vtbl[].vtbl.exec = fcQMessageBox_vtable_callback_exec
   if not isNil(vtbl[].done):
-    vtbl[].vtbl.done = cQMessageBox_vtable_callback_done
+    vtbl[].vtbl.done = fcQMessageBox_vtable_callback_done
   if not isNil(vtbl[].accept):
-    vtbl[].vtbl.accept = cQMessageBox_vtable_callback_accept
+    vtbl[].vtbl.accept = fcQMessageBox_vtable_callback_accept
   if not isNil(vtbl[].reject):
-    vtbl[].vtbl.reject = cQMessageBox_vtable_callback_reject
+    vtbl[].vtbl.reject = fcQMessageBox_vtable_callback_reject
   if not isNil(vtbl[].contextMenuEvent):
-    vtbl[].vtbl.contextMenuEvent = cQMessageBox_vtable_callback_contextMenuEvent
+    vtbl[].vtbl.contextMenuEvent = fcQMessageBox_vtable_callback_contextMenuEvent
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQMessageBox_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQMessageBox_vtable_callback_eventFilter
   if not isNil(vtbl[].devType):
-    vtbl[].vtbl.devType = cQMessageBox_vtable_callback_devType
+    vtbl[].vtbl.devType = fcQMessageBox_vtable_callback_devType
   if not isNil(vtbl[].heightForWidth):
-    vtbl[].vtbl.heightForWidth = cQMessageBox_vtable_callback_heightForWidth
+    vtbl[].vtbl.heightForWidth = fcQMessageBox_vtable_callback_heightForWidth
   if not isNil(vtbl[].hasHeightForWidth):
-    vtbl[].vtbl.hasHeightForWidth = cQMessageBox_vtable_callback_hasHeightForWidth
+    vtbl[].vtbl.hasHeightForWidth = fcQMessageBox_vtable_callback_hasHeightForWidth
   if not isNil(vtbl[].paintEngine):
-    vtbl[].vtbl.paintEngine = cQMessageBox_vtable_callback_paintEngine
+    vtbl[].vtbl.paintEngine = fcQMessageBox_vtable_callback_paintEngine
   if not isNil(vtbl[].mousePressEvent):
-    vtbl[].vtbl.mousePressEvent = cQMessageBox_vtable_callback_mousePressEvent
+    vtbl[].vtbl.mousePressEvent = fcQMessageBox_vtable_callback_mousePressEvent
   if not isNil(vtbl[].mouseReleaseEvent):
-    vtbl[].vtbl.mouseReleaseEvent = cQMessageBox_vtable_callback_mouseReleaseEvent
+    vtbl[].vtbl.mouseReleaseEvent = fcQMessageBox_vtable_callback_mouseReleaseEvent
   if not isNil(vtbl[].mouseDoubleClickEvent):
-    vtbl[].vtbl.mouseDoubleClickEvent = cQMessageBox_vtable_callback_mouseDoubleClickEvent
+    vtbl[].vtbl.mouseDoubleClickEvent = fcQMessageBox_vtable_callback_mouseDoubleClickEvent
   if not isNil(vtbl[].mouseMoveEvent):
-    vtbl[].vtbl.mouseMoveEvent = cQMessageBox_vtable_callback_mouseMoveEvent
+    vtbl[].vtbl.mouseMoveEvent = fcQMessageBox_vtable_callback_mouseMoveEvent
   if not isNil(vtbl[].wheelEvent):
-    vtbl[].vtbl.wheelEvent = cQMessageBox_vtable_callback_wheelEvent
+    vtbl[].vtbl.wheelEvent = fcQMessageBox_vtable_callback_wheelEvent
   if not isNil(vtbl[].keyReleaseEvent):
-    vtbl[].vtbl.keyReleaseEvent = cQMessageBox_vtable_callback_keyReleaseEvent
+    vtbl[].vtbl.keyReleaseEvent = fcQMessageBox_vtable_callback_keyReleaseEvent
   if not isNil(vtbl[].focusInEvent):
-    vtbl[].vtbl.focusInEvent = cQMessageBox_vtable_callback_focusInEvent
+    vtbl[].vtbl.focusInEvent = fcQMessageBox_vtable_callback_focusInEvent
   if not isNil(vtbl[].focusOutEvent):
-    vtbl[].vtbl.focusOutEvent = cQMessageBox_vtable_callback_focusOutEvent
+    vtbl[].vtbl.focusOutEvent = fcQMessageBox_vtable_callback_focusOutEvent
   if not isNil(vtbl[].enterEvent):
-    vtbl[].vtbl.enterEvent = cQMessageBox_vtable_callback_enterEvent
+    vtbl[].vtbl.enterEvent = fcQMessageBox_vtable_callback_enterEvent
   if not isNil(vtbl[].leaveEvent):
-    vtbl[].vtbl.leaveEvent = cQMessageBox_vtable_callback_leaveEvent
+    vtbl[].vtbl.leaveEvent = fcQMessageBox_vtable_callback_leaveEvent
   if not isNil(vtbl[].paintEvent):
-    vtbl[].vtbl.paintEvent = cQMessageBox_vtable_callback_paintEvent
+    vtbl[].vtbl.paintEvent = fcQMessageBox_vtable_callback_paintEvent
   if not isNil(vtbl[].moveEvent):
-    vtbl[].vtbl.moveEvent = cQMessageBox_vtable_callback_moveEvent
+    vtbl[].vtbl.moveEvent = fcQMessageBox_vtable_callback_moveEvent
   if not isNil(vtbl[].tabletEvent):
-    vtbl[].vtbl.tabletEvent = cQMessageBox_vtable_callback_tabletEvent
+    vtbl[].vtbl.tabletEvent = fcQMessageBox_vtable_callback_tabletEvent
   if not isNil(vtbl[].actionEvent):
-    vtbl[].vtbl.actionEvent = cQMessageBox_vtable_callback_actionEvent
+    vtbl[].vtbl.actionEvent = fcQMessageBox_vtable_callback_actionEvent
   if not isNil(vtbl[].dragEnterEvent):
-    vtbl[].vtbl.dragEnterEvent = cQMessageBox_vtable_callback_dragEnterEvent
+    vtbl[].vtbl.dragEnterEvent = fcQMessageBox_vtable_callback_dragEnterEvent
   if not isNil(vtbl[].dragMoveEvent):
-    vtbl[].vtbl.dragMoveEvent = cQMessageBox_vtable_callback_dragMoveEvent
+    vtbl[].vtbl.dragMoveEvent = fcQMessageBox_vtable_callback_dragMoveEvent
   if not isNil(vtbl[].dragLeaveEvent):
-    vtbl[].vtbl.dragLeaveEvent = cQMessageBox_vtable_callback_dragLeaveEvent
+    vtbl[].vtbl.dragLeaveEvent = fcQMessageBox_vtable_callback_dragLeaveEvent
   if not isNil(vtbl[].dropEvent):
-    vtbl[].vtbl.dropEvent = cQMessageBox_vtable_callback_dropEvent
+    vtbl[].vtbl.dropEvent = fcQMessageBox_vtable_callback_dropEvent
   if not isNil(vtbl[].hideEvent):
-    vtbl[].vtbl.hideEvent = cQMessageBox_vtable_callback_hideEvent
+    vtbl[].vtbl.hideEvent = fcQMessageBox_vtable_callback_hideEvent
   if not isNil(vtbl[].nativeEvent):
-    vtbl[].vtbl.nativeEvent = cQMessageBox_vtable_callback_nativeEvent
+    vtbl[].vtbl.nativeEvent = fcQMessageBox_vtable_callback_nativeEvent
   if not isNil(vtbl[].metric):
-    vtbl[].vtbl.metric = cQMessageBox_vtable_callback_metric
+    vtbl[].vtbl.metric = fcQMessageBox_vtable_callback_metric
   if not isNil(vtbl[].initPainter):
-    vtbl[].vtbl.initPainter = cQMessageBox_vtable_callback_initPainter
+    vtbl[].vtbl.initPainter = fcQMessageBox_vtable_callback_initPainter
   if not isNil(vtbl[].redirected):
-    vtbl[].vtbl.redirected = cQMessageBox_vtable_callback_redirected
+    vtbl[].vtbl.redirected = fcQMessageBox_vtable_callback_redirected
   if not isNil(vtbl[].sharedPainter):
-    vtbl[].vtbl.sharedPainter = cQMessageBox_vtable_callback_sharedPainter
+    vtbl[].vtbl.sharedPainter = fcQMessageBox_vtable_callback_sharedPainter
   if not isNil(vtbl[].inputMethodEvent):
-    vtbl[].vtbl.inputMethodEvent = cQMessageBox_vtable_callback_inputMethodEvent
+    vtbl[].vtbl.inputMethodEvent = fcQMessageBox_vtable_callback_inputMethodEvent
   if not isNil(vtbl[].inputMethodQuery):
-    vtbl[].vtbl.inputMethodQuery = cQMessageBox_vtable_callback_inputMethodQuery
+    vtbl[].vtbl.inputMethodQuery = fcQMessageBox_vtable_callback_inputMethodQuery
   if not isNil(vtbl[].focusNextPrevChild):
-    vtbl[].vtbl.focusNextPrevChild = cQMessageBox_vtable_callback_focusNextPrevChild
+    vtbl[].vtbl.focusNextPrevChild = fcQMessageBox_vtable_callback_focusNextPrevChild
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQMessageBox_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQMessageBox_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQMessageBox_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQMessageBox_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQMessageBox_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQMessageBox_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQMessageBox_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQMessageBox_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQMessageBox_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQMessageBox_vtable_callback_disconnectNotify
   gen_qmessagebox_types.QMessageBox(h: fcQMessageBox_new7(addr(vtbl[].vtbl), addr(vtbl[]), cint(icon), struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), cint(buttons), parent.h, cint(flags)), owned: true)
 
 proc create*(T: type gen_qmessagebox_types.QMessageBox,
@@ -2655,115 +2662,115 @@ proc create*(T: type gen_qmessagebox_types.QMessageBox,
     let vtbl = cast[ref QMessageBoxVTable](fcQMessageBox_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQMessageBox_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQMessageBox_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQMessageBox_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQMessageBox_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQMessageBox_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQMessageBox_vtable_callback_metacall
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQMessageBox_vtable_callback_event
+    vtbl[].vtbl.event = fcQMessageBox_vtable_callback_event
   if not isNil(vtbl[].resizeEvent):
-    vtbl[].vtbl.resizeEvent = cQMessageBox_vtable_callback_resizeEvent
+    vtbl[].vtbl.resizeEvent = fcQMessageBox_vtable_callback_resizeEvent
   if not isNil(vtbl[].showEvent):
-    vtbl[].vtbl.showEvent = cQMessageBox_vtable_callback_showEvent
+    vtbl[].vtbl.showEvent = fcQMessageBox_vtable_callback_showEvent
   if not isNil(vtbl[].closeEvent):
-    vtbl[].vtbl.closeEvent = cQMessageBox_vtable_callback_closeEvent
+    vtbl[].vtbl.closeEvent = fcQMessageBox_vtable_callback_closeEvent
   if not isNil(vtbl[].keyPressEvent):
-    vtbl[].vtbl.keyPressEvent = cQMessageBox_vtable_callback_keyPressEvent
+    vtbl[].vtbl.keyPressEvent = fcQMessageBox_vtable_callback_keyPressEvent
   if not isNil(vtbl[].changeEvent):
-    vtbl[].vtbl.changeEvent = cQMessageBox_vtable_callback_changeEvent
+    vtbl[].vtbl.changeEvent = fcQMessageBox_vtable_callback_changeEvent
   if not isNil(vtbl[].setVisible):
-    vtbl[].vtbl.setVisible = cQMessageBox_vtable_callback_setVisible
+    vtbl[].vtbl.setVisible = fcQMessageBox_vtable_callback_setVisible
   if not isNil(vtbl[].sizeHint):
-    vtbl[].vtbl.sizeHint = cQMessageBox_vtable_callback_sizeHint
+    vtbl[].vtbl.sizeHint = fcQMessageBox_vtable_callback_sizeHint
   if not isNil(vtbl[].minimumSizeHint):
-    vtbl[].vtbl.minimumSizeHint = cQMessageBox_vtable_callback_minimumSizeHint
+    vtbl[].vtbl.minimumSizeHint = fcQMessageBox_vtable_callback_minimumSizeHint
   if not isNil(vtbl[].open):
-    vtbl[].vtbl.open = cQMessageBox_vtable_callback_open
+    vtbl[].vtbl.open = fcQMessageBox_vtable_callback_open
   if not isNil(vtbl[].exec):
-    vtbl[].vtbl.exec = cQMessageBox_vtable_callback_exec
+    vtbl[].vtbl.exec = fcQMessageBox_vtable_callback_exec
   if not isNil(vtbl[].done):
-    vtbl[].vtbl.done = cQMessageBox_vtable_callback_done
+    vtbl[].vtbl.done = fcQMessageBox_vtable_callback_done
   if not isNil(vtbl[].accept):
-    vtbl[].vtbl.accept = cQMessageBox_vtable_callback_accept
+    vtbl[].vtbl.accept = fcQMessageBox_vtable_callback_accept
   if not isNil(vtbl[].reject):
-    vtbl[].vtbl.reject = cQMessageBox_vtable_callback_reject
+    vtbl[].vtbl.reject = fcQMessageBox_vtable_callback_reject
   if not isNil(vtbl[].contextMenuEvent):
-    vtbl[].vtbl.contextMenuEvent = cQMessageBox_vtable_callback_contextMenuEvent
+    vtbl[].vtbl.contextMenuEvent = fcQMessageBox_vtable_callback_contextMenuEvent
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQMessageBox_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQMessageBox_vtable_callback_eventFilter
   if not isNil(vtbl[].devType):
-    vtbl[].vtbl.devType = cQMessageBox_vtable_callback_devType
+    vtbl[].vtbl.devType = fcQMessageBox_vtable_callback_devType
   if not isNil(vtbl[].heightForWidth):
-    vtbl[].vtbl.heightForWidth = cQMessageBox_vtable_callback_heightForWidth
+    vtbl[].vtbl.heightForWidth = fcQMessageBox_vtable_callback_heightForWidth
   if not isNil(vtbl[].hasHeightForWidth):
-    vtbl[].vtbl.hasHeightForWidth = cQMessageBox_vtable_callback_hasHeightForWidth
+    vtbl[].vtbl.hasHeightForWidth = fcQMessageBox_vtable_callback_hasHeightForWidth
   if not isNil(vtbl[].paintEngine):
-    vtbl[].vtbl.paintEngine = cQMessageBox_vtable_callback_paintEngine
+    vtbl[].vtbl.paintEngine = fcQMessageBox_vtable_callback_paintEngine
   if not isNil(vtbl[].mousePressEvent):
-    vtbl[].vtbl.mousePressEvent = cQMessageBox_vtable_callback_mousePressEvent
+    vtbl[].vtbl.mousePressEvent = fcQMessageBox_vtable_callback_mousePressEvent
   if not isNil(vtbl[].mouseReleaseEvent):
-    vtbl[].vtbl.mouseReleaseEvent = cQMessageBox_vtable_callback_mouseReleaseEvent
+    vtbl[].vtbl.mouseReleaseEvent = fcQMessageBox_vtable_callback_mouseReleaseEvent
   if not isNil(vtbl[].mouseDoubleClickEvent):
-    vtbl[].vtbl.mouseDoubleClickEvent = cQMessageBox_vtable_callback_mouseDoubleClickEvent
+    vtbl[].vtbl.mouseDoubleClickEvent = fcQMessageBox_vtable_callback_mouseDoubleClickEvent
   if not isNil(vtbl[].mouseMoveEvent):
-    vtbl[].vtbl.mouseMoveEvent = cQMessageBox_vtable_callback_mouseMoveEvent
+    vtbl[].vtbl.mouseMoveEvent = fcQMessageBox_vtable_callback_mouseMoveEvent
   if not isNil(vtbl[].wheelEvent):
-    vtbl[].vtbl.wheelEvent = cQMessageBox_vtable_callback_wheelEvent
+    vtbl[].vtbl.wheelEvent = fcQMessageBox_vtable_callback_wheelEvent
   if not isNil(vtbl[].keyReleaseEvent):
-    vtbl[].vtbl.keyReleaseEvent = cQMessageBox_vtable_callback_keyReleaseEvent
+    vtbl[].vtbl.keyReleaseEvent = fcQMessageBox_vtable_callback_keyReleaseEvent
   if not isNil(vtbl[].focusInEvent):
-    vtbl[].vtbl.focusInEvent = cQMessageBox_vtable_callback_focusInEvent
+    vtbl[].vtbl.focusInEvent = fcQMessageBox_vtable_callback_focusInEvent
   if not isNil(vtbl[].focusOutEvent):
-    vtbl[].vtbl.focusOutEvent = cQMessageBox_vtable_callback_focusOutEvent
+    vtbl[].vtbl.focusOutEvent = fcQMessageBox_vtable_callback_focusOutEvent
   if not isNil(vtbl[].enterEvent):
-    vtbl[].vtbl.enterEvent = cQMessageBox_vtable_callback_enterEvent
+    vtbl[].vtbl.enterEvent = fcQMessageBox_vtable_callback_enterEvent
   if not isNil(vtbl[].leaveEvent):
-    vtbl[].vtbl.leaveEvent = cQMessageBox_vtable_callback_leaveEvent
+    vtbl[].vtbl.leaveEvent = fcQMessageBox_vtable_callback_leaveEvent
   if not isNil(vtbl[].paintEvent):
-    vtbl[].vtbl.paintEvent = cQMessageBox_vtable_callback_paintEvent
+    vtbl[].vtbl.paintEvent = fcQMessageBox_vtable_callback_paintEvent
   if not isNil(vtbl[].moveEvent):
-    vtbl[].vtbl.moveEvent = cQMessageBox_vtable_callback_moveEvent
+    vtbl[].vtbl.moveEvent = fcQMessageBox_vtable_callback_moveEvent
   if not isNil(vtbl[].tabletEvent):
-    vtbl[].vtbl.tabletEvent = cQMessageBox_vtable_callback_tabletEvent
+    vtbl[].vtbl.tabletEvent = fcQMessageBox_vtable_callback_tabletEvent
   if not isNil(vtbl[].actionEvent):
-    vtbl[].vtbl.actionEvent = cQMessageBox_vtable_callback_actionEvent
+    vtbl[].vtbl.actionEvent = fcQMessageBox_vtable_callback_actionEvent
   if not isNil(vtbl[].dragEnterEvent):
-    vtbl[].vtbl.dragEnterEvent = cQMessageBox_vtable_callback_dragEnterEvent
+    vtbl[].vtbl.dragEnterEvent = fcQMessageBox_vtable_callback_dragEnterEvent
   if not isNil(vtbl[].dragMoveEvent):
-    vtbl[].vtbl.dragMoveEvent = cQMessageBox_vtable_callback_dragMoveEvent
+    vtbl[].vtbl.dragMoveEvent = fcQMessageBox_vtable_callback_dragMoveEvent
   if not isNil(vtbl[].dragLeaveEvent):
-    vtbl[].vtbl.dragLeaveEvent = cQMessageBox_vtable_callback_dragLeaveEvent
+    vtbl[].vtbl.dragLeaveEvent = fcQMessageBox_vtable_callback_dragLeaveEvent
   if not isNil(vtbl[].dropEvent):
-    vtbl[].vtbl.dropEvent = cQMessageBox_vtable_callback_dropEvent
+    vtbl[].vtbl.dropEvent = fcQMessageBox_vtable_callback_dropEvent
   if not isNil(vtbl[].hideEvent):
-    vtbl[].vtbl.hideEvent = cQMessageBox_vtable_callback_hideEvent
+    vtbl[].vtbl.hideEvent = fcQMessageBox_vtable_callback_hideEvent
   if not isNil(vtbl[].nativeEvent):
-    vtbl[].vtbl.nativeEvent = cQMessageBox_vtable_callback_nativeEvent
+    vtbl[].vtbl.nativeEvent = fcQMessageBox_vtable_callback_nativeEvent
   if not isNil(vtbl[].metric):
-    vtbl[].vtbl.metric = cQMessageBox_vtable_callback_metric
+    vtbl[].vtbl.metric = fcQMessageBox_vtable_callback_metric
   if not isNil(vtbl[].initPainter):
-    vtbl[].vtbl.initPainter = cQMessageBox_vtable_callback_initPainter
+    vtbl[].vtbl.initPainter = fcQMessageBox_vtable_callback_initPainter
   if not isNil(vtbl[].redirected):
-    vtbl[].vtbl.redirected = cQMessageBox_vtable_callback_redirected
+    vtbl[].vtbl.redirected = fcQMessageBox_vtable_callback_redirected
   if not isNil(vtbl[].sharedPainter):
-    vtbl[].vtbl.sharedPainter = cQMessageBox_vtable_callback_sharedPainter
+    vtbl[].vtbl.sharedPainter = fcQMessageBox_vtable_callback_sharedPainter
   if not isNil(vtbl[].inputMethodEvent):
-    vtbl[].vtbl.inputMethodEvent = cQMessageBox_vtable_callback_inputMethodEvent
+    vtbl[].vtbl.inputMethodEvent = fcQMessageBox_vtable_callback_inputMethodEvent
   if not isNil(vtbl[].inputMethodQuery):
-    vtbl[].vtbl.inputMethodQuery = cQMessageBox_vtable_callback_inputMethodQuery
+    vtbl[].vtbl.inputMethodQuery = fcQMessageBox_vtable_callback_inputMethodQuery
   if not isNil(vtbl[].focusNextPrevChild):
-    vtbl[].vtbl.focusNextPrevChild = cQMessageBox_vtable_callback_focusNextPrevChild
+    vtbl[].vtbl.focusNextPrevChild = fcQMessageBox_vtable_callback_focusNextPrevChild
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQMessageBox_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQMessageBox_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQMessageBox_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQMessageBox_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQMessageBox_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQMessageBox_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQMessageBox_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQMessageBox_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQMessageBox_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQMessageBox_vtable_callback_disconnectNotify
   gen_qmessagebox_types.QMessageBox(h: fcQMessageBox_new8(addr(vtbl[].vtbl), addr(vtbl[]), struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), cint(icon), button0, button1, button2, parent.h), owned: true)
 
 proc create*(T: type gen_qmessagebox_types.QMessageBox,
@@ -2775,115 +2782,115 @@ proc create*(T: type gen_qmessagebox_types.QMessageBox,
     let vtbl = cast[ref QMessageBoxVTable](fcQMessageBox_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQMessageBox_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQMessageBox_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQMessageBox_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQMessageBox_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQMessageBox_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQMessageBox_vtable_callback_metacall
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQMessageBox_vtable_callback_event
+    vtbl[].vtbl.event = fcQMessageBox_vtable_callback_event
   if not isNil(vtbl[].resizeEvent):
-    vtbl[].vtbl.resizeEvent = cQMessageBox_vtable_callback_resizeEvent
+    vtbl[].vtbl.resizeEvent = fcQMessageBox_vtable_callback_resizeEvent
   if not isNil(vtbl[].showEvent):
-    vtbl[].vtbl.showEvent = cQMessageBox_vtable_callback_showEvent
+    vtbl[].vtbl.showEvent = fcQMessageBox_vtable_callback_showEvent
   if not isNil(vtbl[].closeEvent):
-    vtbl[].vtbl.closeEvent = cQMessageBox_vtable_callback_closeEvent
+    vtbl[].vtbl.closeEvent = fcQMessageBox_vtable_callback_closeEvent
   if not isNil(vtbl[].keyPressEvent):
-    vtbl[].vtbl.keyPressEvent = cQMessageBox_vtable_callback_keyPressEvent
+    vtbl[].vtbl.keyPressEvent = fcQMessageBox_vtable_callback_keyPressEvent
   if not isNil(vtbl[].changeEvent):
-    vtbl[].vtbl.changeEvent = cQMessageBox_vtable_callback_changeEvent
+    vtbl[].vtbl.changeEvent = fcQMessageBox_vtable_callback_changeEvent
   if not isNil(vtbl[].setVisible):
-    vtbl[].vtbl.setVisible = cQMessageBox_vtable_callback_setVisible
+    vtbl[].vtbl.setVisible = fcQMessageBox_vtable_callback_setVisible
   if not isNil(vtbl[].sizeHint):
-    vtbl[].vtbl.sizeHint = cQMessageBox_vtable_callback_sizeHint
+    vtbl[].vtbl.sizeHint = fcQMessageBox_vtable_callback_sizeHint
   if not isNil(vtbl[].minimumSizeHint):
-    vtbl[].vtbl.minimumSizeHint = cQMessageBox_vtable_callback_minimumSizeHint
+    vtbl[].vtbl.minimumSizeHint = fcQMessageBox_vtable_callback_minimumSizeHint
   if not isNil(vtbl[].open):
-    vtbl[].vtbl.open = cQMessageBox_vtable_callback_open
+    vtbl[].vtbl.open = fcQMessageBox_vtable_callback_open
   if not isNil(vtbl[].exec):
-    vtbl[].vtbl.exec = cQMessageBox_vtable_callback_exec
+    vtbl[].vtbl.exec = fcQMessageBox_vtable_callback_exec
   if not isNil(vtbl[].done):
-    vtbl[].vtbl.done = cQMessageBox_vtable_callback_done
+    vtbl[].vtbl.done = fcQMessageBox_vtable_callback_done
   if not isNil(vtbl[].accept):
-    vtbl[].vtbl.accept = cQMessageBox_vtable_callback_accept
+    vtbl[].vtbl.accept = fcQMessageBox_vtable_callback_accept
   if not isNil(vtbl[].reject):
-    vtbl[].vtbl.reject = cQMessageBox_vtable_callback_reject
+    vtbl[].vtbl.reject = fcQMessageBox_vtable_callback_reject
   if not isNil(vtbl[].contextMenuEvent):
-    vtbl[].vtbl.contextMenuEvent = cQMessageBox_vtable_callback_contextMenuEvent
+    vtbl[].vtbl.contextMenuEvent = fcQMessageBox_vtable_callback_contextMenuEvent
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQMessageBox_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQMessageBox_vtable_callback_eventFilter
   if not isNil(vtbl[].devType):
-    vtbl[].vtbl.devType = cQMessageBox_vtable_callback_devType
+    vtbl[].vtbl.devType = fcQMessageBox_vtable_callback_devType
   if not isNil(vtbl[].heightForWidth):
-    vtbl[].vtbl.heightForWidth = cQMessageBox_vtable_callback_heightForWidth
+    vtbl[].vtbl.heightForWidth = fcQMessageBox_vtable_callback_heightForWidth
   if not isNil(vtbl[].hasHeightForWidth):
-    vtbl[].vtbl.hasHeightForWidth = cQMessageBox_vtable_callback_hasHeightForWidth
+    vtbl[].vtbl.hasHeightForWidth = fcQMessageBox_vtable_callback_hasHeightForWidth
   if not isNil(vtbl[].paintEngine):
-    vtbl[].vtbl.paintEngine = cQMessageBox_vtable_callback_paintEngine
+    vtbl[].vtbl.paintEngine = fcQMessageBox_vtable_callback_paintEngine
   if not isNil(vtbl[].mousePressEvent):
-    vtbl[].vtbl.mousePressEvent = cQMessageBox_vtable_callback_mousePressEvent
+    vtbl[].vtbl.mousePressEvent = fcQMessageBox_vtable_callback_mousePressEvent
   if not isNil(vtbl[].mouseReleaseEvent):
-    vtbl[].vtbl.mouseReleaseEvent = cQMessageBox_vtable_callback_mouseReleaseEvent
+    vtbl[].vtbl.mouseReleaseEvent = fcQMessageBox_vtable_callback_mouseReleaseEvent
   if not isNil(vtbl[].mouseDoubleClickEvent):
-    vtbl[].vtbl.mouseDoubleClickEvent = cQMessageBox_vtable_callback_mouseDoubleClickEvent
+    vtbl[].vtbl.mouseDoubleClickEvent = fcQMessageBox_vtable_callback_mouseDoubleClickEvent
   if not isNil(vtbl[].mouseMoveEvent):
-    vtbl[].vtbl.mouseMoveEvent = cQMessageBox_vtable_callback_mouseMoveEvent
+    vtbl[].vtbl.mouseMoveEvent = fcQMessageBox_vtable_callback_mouseMoveEvent
   if not isNil(vtbl[].wheelEvent):
-    vtbl[].vtbl.wheelEvent = cQMessageBox_vtable_callback_wheelEvent
+    vtbl[].vtbl.wheelEvent = fcQMessageBox_vtable_callback_wheelEvent
   if not isNil(vtbl[].keyReleaseEvent):
-    vtbl[].vtbl.keyReleaseEvent = cQMessageBox_vtable_callback_keyReleaseEvent
+    vtbl[].vtbl.keyReleaseEvent = fcQMessageBox_vtable_callback_keyReleaseEvent
   if not isNil(vtbl[].focusInEvent):
-    vtbl[].vtbl.focusInEvent = cQMessageBox_vtable_callback_focusInEvent
+    vtbl[].vtbl.focusInEvent = fcQMessageBox_vtable_callback_focusInEvent
   if not isNil(vtbl[].focusOutEvent):
-    vtbl[].vtbl.focusOutEvent = cQMessageBox_vtable_callback_focusOutEvent
+    vtbl[].vtbl.focusOutEvent = fcQMessageBox_vtable_callback_focusOutEvent
   if not isNil(vtbl[].enterEvent):
-    vtbl[].vtbl.enterEvent = cQMessageBox_vtable_callback_enterEvent
+    vtbl[].vtbl.enterEvent = fcQMessageBox_vtable_callback_enterEvent
   if not isNil(vtbl[].leaveEvent):
-    vtbl[].vtbl.leaveEvent = cQMessageBox_vtable_callback_leaveEvent
+    vtbl[].vtbl.leaveEvent = fcQMessageBox_vtable_callback_leaveEvent
   if not isNil(vtbl[].paintEvent):
-    vtbl[].vtbl.paintEvent = cQMessageBox_vtable_callback_paintEvent
+    vtbl[].vtbl.paintEvent = fcQMessageBox_vtable_callback_paintEvent
   if not isNil(vtbl[].moveEvent):
-    vtbl[].vtbl.moveEvent = cQMessageBox_vtable_callback_moveEvent
+    vtbl[].vtbl.moveEvent = fcQMessageBox_vtable_callback_moveEvent
   if not isNil(vtbl[].tabletEvent):
-    vtbl[].vtbl.tabletEvent = cQMessageBox_vtable_callback_tabletEvent
+    vtbl[].vtbl.tabletEvent = fcQMessageBox_vtable_callback_tabletEvent
   if not isNil(vtbl[].actionEvent):
-    vtbl[].vtbl.actionEvent = cQMessageBox_vtable_callback_actionEvent
+    vtbl[].vtbl.actionEvent = fcQMessageBox_vtable_callback_actionEvent
   if not isNil(vtbl[].dragEnterEvent):
-    vtbl[].vtbl.dragEnterEvent = cQMessageBox_vtable_callback_dragEnterEvent
+    vtbl[].vtbl.dragEnterEvent = fcQMessageBox_vtable_callback_dragEnterEvent
   if not isNil(vtbl[].dragMoveEvent):
-    vtbl[].vtbl.dragMoveEvent = cQMessageBox_vtable_callback_dragMoveEvent
+    vtbl[].vtbl.dragMoveEvent = fcQMessageBox_vtable_callback_dragMoveEvent
   if not isNil(vtbl[].dragLeaveEvent):
-    vtbl[].vtbl.dragLeaveEvent = cQMessageBox_vtable_callback_dragLeaveEvent
+    vtbl[].vtbl.dragLeaveEvent = fcQMessageBox_vtable_callback_dragLeaveEvent
   if not isNil(vtbl[].dropEvent):
-    vtbl[].vtbl.dropEvent = cQMessageBox_vtable_callback_dropEvent
+    vtbl[].vtbl.dropEvent = fcQMessageBox_vtable_callback_dropEvent
   if not isNil(vtbl[].hideEvent):
-    vtbl[].vtbl.hideEvent = cQMessageBox_vtable_callback_hideEvent
+    vtbl[].vtbl.hideEvent = fcQMessageBox_vtable_callback_hideEvent
   if not isNil(vtbl[].nativeEvent):
-    vtbl[].vtbl.nativeEvent = cQMessageBox_vtable_callback_nativeEvent
+    vtbl[].vtbl.nativeEvent = fcQMessageBox_vtable_callback_nativeEvent
   if not isNil(vtbl[].metric):
-    vtbl[].vtbl.metric = cQMessageBox_vtable_callback_metric
+    vtbl[].vtbl.metric = fcQMessageBox_vtable_callback_metric
   if not isNil(vtbl[].initPainter):
-    vtbl[].vtbl.initPainter = cQMessageBox_vtable_callback_initPainter
+    vtbl[].vtbl.initPainter = fcQMessageBox_vtable_callback_initPainter
   if not isNil(vtbl[].redirected):
-    vtbl[].vtbl.redirected = cQMessageBox_vtable_callback_redirected
+    vtbl[].vtbl.redirected = fcQMessageBox_vtable_callback_redirected
   if not isNil(vtbl[].sharedPainter):
-    vtbl[].vtbl.sharedPainter = cQMessageBox_vtable_callback_sharedPainter
+    vtbl[].vtbl.sharedPainter = fcQMessageBox_vtable_callback_sharedPainter
   if not isNil(vtbl[].inputMethodEvent):
-    vtbl[].vtbl.inputMethodEvent = cQMessageBox_vtable_callback_inputMethodEvent
+    vtbl[].vtbl.inputMethodEvent = fcQMessageBox_vtable_callback_inputMethodEvent
   if not isNil(vtbl[].inputMethodQuery):
-    vtbl[].vtbl.inputMethodQuery = cQMessageBox_vtable_callback_inputMethodQuery
+    vtbl[].vtbl.inputMethodQuery = fcQMessageBox_vtable_callback_inputMethodQuery
   if not isNil(vtbl[].focusNextPrevChild):
-    vtbl[].vtbl.focusNextPrevChild = cQMessageBox_vtable_callback_focusNextPrevChild
+    vtbl[].vtbl.focusNextPrevChild = fcQMessageBox_vtable_callback_focusNextPrevChild
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQMessageBox_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQMessageBox_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQMessageBox_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQMessageBox_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQMessageBox_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQMessageBox_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQMessageBox_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQMessageBox_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQMessageBox_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQMessageBox_vtable_callback_disconnectNotify
   gen_qmessagebox_types.QMessageBox(h: fcQMessageBox_new9(addr(vtbl[].vtbl), addr(vtbl[]), struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), cint(icon), button0, button1, button2, parent.h, cint(f)), owned: true)
 
 const cQMessageBox_mvtbl = cQMessageBoxVTable(
@@ -2891,61 +2898,62 @@ const cQMessageBox_mvtbl = cQMessageBoxVTable(
     let inst = cast[ptr typeof(VirtualQMessageBox()[])](self.fcQMessageBox_vtbl())
     inst[].h = nil
     inst[].owned = false,
-  metaObject: cQMessageBox_method_callback_metaObject,
-  metacast: cQMessageBox_method_callback_metacast,
-  metacall: cQMessageBox_method_callback_metacall,
-  event: cQMessageBox_method_callback_event,
-  resizeEvent: cQMessageBox_method_callback_resizeEvent,
-  showEvent: cQMessageBox_method_callback_showEvent,
-  closeEvent: cQMessageBox_method_callback_closeEvent,
-  keyPressEvent: cQMessageBox_method_callback_keyPressEvent,
-  changeEvent: cQMessageBox_method_callback_changeEvent,
-  setVisible: cQMessageBox_method_callback_setVisible,
-  sizeHint: cQMessageBox_method_callback_sizeHint,
-  minimumSizeHint: cQMessageBox_method_callback_minimumSizeHint,
-  open: cQMessageBox_method_callback_open,
-  exec: cQMessageBox_method_callback_exec,
-  done: cQMessageBox_method_callback_done,
-  accept: cQMessageBox_method_callback_accept,
-  reject: cQMessageBox_method_callback_reject,
-  contextMenuEvent: cQMessageBox_method_callback_contextMenuEvent,
-  eventFilter: cQMessageBox_method_callback_eventFilter,
-  devType: cQMessageBox_method_callback_devType,
-  heightForWidth: cQMessageBox_method_callback_heightForWidth,
-  hasHeightForWidth: cQMessageBox_method_callback_hasHeightForWidth,
-  paintEngine: cQMessageBox_method_callback_paintEngine,
-  mousePressEvent: cQMessageBox_method_callback_mousePressEvent,
-  mouseReleaseEvent: cQMessageBox_method_callback_mouseReleaseEvent,
-  mouseDoubleClickEvent: cQMessageBox_method_callback_mouseDoubleClickEvent,
-  mouseMoveEvent: cQMessageBox_method_callback_mouseMoveEvent,
-  wheelEvent: cQMessageBox_method_callback_wheelEvent,
-  keyReleaseEvent: cQMessageBox_method_callback_keyReleaseEvent,
-  focusInEvent: cQMessageBox_method_callback_focusInEvent,
-  focusOutEvent: cQMessageBox_method_callback_focusOutEvent,
-  enterEvent: cQMessageBox_method_callback_enterEvent,
-  leaveEvent: cQMessageBox_method_callback_leaveEvent,
-  paintEvent: cQMessageBox_method_callback_paintEvent,
-  moveEvent: cQMessageBox_method_callback_moveEvent,
-  tabletEvent: cQMessageBox_method_callback_tabletEvent,
-  actionEvent: cQMessageBox_method_callback_actionEvent,
-  dragEnterEvent: cQMessageBox_method_callback_dragEnterEvent,
-  dragMoveEvent: cQMessageBox_method_callback_dragMoveEvent,
-  dragLeaveEvent: cQMessageBox_method_callback_dragLeaveEvent,
-  dropEvent: cQMessageBox_method_callback_dropEvent,
-  hideEvent: cQMessageBox_method_callback_hideEvent,
-  nativeEvent: cQMessageBox_method_callback_nativeEvent,
-  metric: cQMessageBox_method_callback_metric,
-  initPainter: cQMessageBox_method_callback_initPainter,
-  redirected: cQMessageBox_method_callback_redirected,
-  sharedPainter: cQMessageBox_method_callback_sharedPainter,
-  inputMethodEvent: cQMessageBox_method_callback_inputMethodEvent,
-  inputMethodQuery: cQMessageBox_method_callback_inputMethodQuery,
-  focusNextPrevChild: cQMessageBox_method_callback_focusNextPrevChild,
-  timerEvent: cQMessageBox_method_callback_timerEvent,
-  childEvent: cQMessageBox_method_callback_childEvent,
-  customEvent: cQMessageBox_method_callback_customEvent,
-  connectNotify: cQMessageBox_method_callback_connectNotify,
-  disconnectNotify: cQMessageBox_method_callback_disconnectNotify,
+
+  metaObject: fcQMessageBox_method_callback_metaObject,
+  metacast: fcQMessageBox_method_callback_metacast,
+  metacall: fcQMessageBox_method_callback_metacall,
+  event: fcQMessageBox_method_callback_event,
+  resizeEvent: fcQMessageBox_method_callback_resizeEvent,
+  showEvent: fcQMessageBox_method_callback_showEvent,
+  closeEvent: fcQMessageBox_method_callback_closeEvent,
+  keyPressEvent: fcQMessageBox_method_callback_keyPressEvent,
+  changeEvent: fcQMessageBox_method_callback_changeEvent,
+  setVisible: fcQMessageBox_method_callback_setVisible,
+  sizeHint: fcQMessageBox_method_callback_sizeHint,
+  minimumSizeHint: fcQMessageBox_method_callback_minimumSizeHint,
+  open: fcQMessageBox_method_callback_open,
+  exec: fcQMessageBox_method_callback_exec,
+  done: fcQMessageBox_method_callback_done,
+  accept: fcQMessageBox_method_callback_accept,
+  reject: fcQMessageBox_method_callback_reject,
+  contextMenuEvent: fcQMessageBox_method_callback_contextMenuEvent,
+  eventFilter: fcQMessageBox_method_callback_eventFilter,
+  devType: fcQMessageBox_method_callback_devType,
+  heightForWidth: fcQMessageBox_method_callback_heightForWidth,
+  hasHeightForWidth: fcQMessageBox_method_callback_hasHeightForWidth,
+  paintEngine: fcQMessageBox_method_callback_paintEngine,
+  mousePressEvent: fcQMessageBox_method_callback_mousePressEvent,
+  mouseReleaseEvent: fcQMessageBox_method_callback_mouseReleaseEvent,
+  mouseDoubleClickEvent: fcQMessageBox_method_callback_mouseDoubleClickEvent,
+  mouseMoveEvent: fcQMessageBox_method_callback_mouseMoveEvent,
+  wheelEvent: fcQMessageBox_method_callback_wheelEvent,
+  keyReleaseEvent: fcQMessageBox_method_callback_keyReleaseEvent,
+  focusInEvent: fcQMessageBox_method_callback_focusInEvent,
+  focusOutEvent: fcQMessageBox_method_callback_focusOutEvent,
+  enterEvent: fcQMessageBox_method_callback_enterEvent,
+  leaveEvent: fcQMessageBox_method_callback_leaveEvent,
+  paintEvent: fcQMessageBox_method_callback_paintEvent,
+  moveEvent: fcQMessageBox_method_callback_moveEvent,
+  tabletEvent: fcQMessageBox_method_callback_tabletEvent,
+  actionEvent: fcQMessageBox_method_callback_actionEvent,
+  dragEnterEvent: fcQMessageBox_method_callback_dragEnterEvent,
+  dragMoveEvent: fcQMessageBox_method_callback_dragMoveEvent,
+  dragLeaveEvent: fcQMessageBox_method_callback_dragLeaveEvent,
+  dropEvent: fcQMessageBox_method_callback_dropEvent,
+  hideEvent: fcQMessageBox_method_callback_hideEvent,
+  nativeEvent: fcQMessageBox_method_callback_nativeEvent,
+  metric: fcQMessageBox_method_callback_metric,
+  initPainter: fcQMessageBox_method_callback_initPainter,
+  redirected: fcQMessageBox_method_callback_redirected,
+  sharedPainter: fcQMessageBox_method_callback_sharedPainter,
+  inputMethodEvent: fcQMessageBox_method_callback_inputMethodEvent,
+  inputMethodQuery: fcQMessageBox_method_callback_inputMethodQuery,
+  focusNextPrevChild: fcQMessageBox_method_callback_focusNextPrevChild,
+  timerEvent: fcQMessageBox_method_callback_timerEvent,
+  childEvent: fcQMessageBox_method_callback_childEvent,
+  customEvent: fcQMessageBox_method_callback_customEvent,
+  connectNotify: fcQMessageBox_method_callback_connectNotify,
+  disconnectNotify: fcQMessageBox_method_callback_disconnectNotify,
 )
 proc create*(T: type gen_qmessagebox_types.QMessageBox,
     parent: gen_qwidget_types.QWidget,

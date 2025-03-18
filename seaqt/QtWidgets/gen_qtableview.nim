@@ -144,6 +144,7 @@ proc fcQTableView_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc:
 proc fcQTableView_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QTableView_trUtf83".}
 proc fcQTableView_vtbl(self: pointer): pointer {.importc: "QTableView_vtbl".}
 proc fcQTableView_vdata(self: pointer): pointer {.importc: "QTableView_vdata".}
+
 type cQTableViewVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -652,6 +653,7 @@ type QTableViewchildEventProc* = proc(self: QTableView, event: gen_qcoreevent_ty
 type QTableViewcustomEventProc* = proc(self: QTableView, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QTableViewconnectNotifyProc* = proc(self: QTableView, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QTableViewdisconnectNotifyProc* = proc(self: QTableView, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+
 type QTableViewVTable* {.inheritable, pure.} = object
   vtbl: cQTableViewVTable
   metaObject*: QTableViewmetaObjectProc
@@ -746,205 +748,63 @@ type QTableViewVTable* {.inheritable, pure.} = object
   customEvent*: QTableViewcustomEventProc
   connectNotify*: QTableViewconnectNotifyProc
   disconnectNotify*: QTableViewdisconnectNotifyProc
+
 proc QTableViewmetaObject*(self: gen_qtableview_types.QTableView): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQTableView_virtualbase_metaObject(self.h), owned: false)
-
-proc cQTableView_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
-  let vtbl = cast[ptr QTableViewVTable](fcQTableView_vdata(self))
-  let self = QTableView(h: self)
-  var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.owned = false # TODO move?
-  let virtualReturn_h = virtualReturn.h
-  virtualReturn.h = nil
-  virtualReturn_h
 
 proc QTableViewmetacast*(self: gen_qtableview_types.QTableView, param1: cstring): pointer =
   fcQTableView_virtualbase_metacast(self.h, param1)
 
-proc cQTableView_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
-  let vtbl = cast[ptr QTableViewVTable](fcQTableView_vdata(self))
-  let self = QTableView(h: self)
-  let slotval1 = (param1)
-  var virtualReturn = vtbl[].metacast(self, slotval1)
-  virtualReturn
-
 proc QTableViewmetacall*(self: gen_qtableview_types.QTableView, param1: cint, param2: cint, param3: pointer): cint =
   fcQTableView_virtualbase_metacall(self.h, cint(param1), param2, param3)
-
-proc cQTableView_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
-  let vtbl = cast[ptr QTableViewVTable](fcQTableView_vdata(self))
-  let self = QTableView(h: self)
-  let slotval1 = cint(param1)
-  let slotval2 = param2
-  let slotval3 = param3
-  var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
-  virtualReturn
 
 proc QTableViewsetModel*(self: gen_qtableview_types.QTableView, model: gen_qabstractitemmodel_types.QAbstractItemModel): void =
   fcQTableView_virtualbase_setModel(self.h, model.h)
 
-proc cQTableView_vtable_callback_setModel(self: pointer, model: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QTableViewVTable](fcQTableView_vdata(self))
-  let self = QTableView(h: self)
-  let slotval1 = gen_qabstractitemmodel_types.QAbstractItemModel(h: model, owned: false)
-  vtbl[].setModel(self, slotval1)
-
 proc QTableViewsetRootIndex*(self: gen_qtableview_types.QTableView, index: gen_qabstractitemmodel_types.QModelIndex): void =
   fcQTableView_virtualbase_setRootIndex(self.h, index.h)
-
-proc cQTableView_vtable_callback_setRootIndex(self: pointer, index: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QTableViewVTable](fcQTableView_vdata(self))
-  let self = QTableView(h: self)
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
-  vtbl[].setRootIndex(self, slotval1)
 
 proc QTableViewsetSelectionModel*(self: gen_qtableview_types.QTableView, selectionModel: gen_qitemselectionmodel_types.QItemSelectionModel): void =
   fcQTableView_virtualbase_setSelectionModel(self.h, selectionModel.h)
 
-proc cQTableView_vtable_callback_setSelectionModel(self: pointer, selectionModel: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QTableViewVTable](fcQTableView_vdata(self))
-  let self = QTableView(h: self)
-  let slotval1 = gen_qitemselectionmodel_types.QItemSelectionModel(h: selectionModel, owned: false)
-  vtbl[].setSelectionModel(self, slotval1)
-
 proc QTableViewdoItemsLayout*(self: gen_qtableview_types.QTableView): void =
   fcQTableView_virtualbase_doItemsLayout(self.h)
-
-proc cQTableView_vtable_callback_doItemsLayout(self: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QTableViewVTable](fcQTableView_vdata(self))
-  let self = QTableView(h: self)
-  vtbl[].doItemsLayout(self)
 
 proc QTableViewvisualRect*(self: gen_qtableview_types.QTableView, index: gen_qabstractitemmodel_types.QModelIndex): gen_qrect_types.QRect =
   gen_qrect_types.QRect(h: fcQTableView_virtualbase_visualRect(self.h, index.h), owned: true)
 
-proc cQTableView_vtable_callback_visualRect(self: pointer, index: pointer): pointer {.cdecl.} =
-  let vtbl = cast[ptr QTableViewVTable](fcQTableView_vdata(self))
-  let self = QTableView(h: self)
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
-  var virtualReturn = vtbl[].visualRect(self, slotval1)
-  virtualReturn.owned = false # TODO move?
-  let virtualReturn_h = virtualReturn.h
-  virtualReturn.h = nil
-  virtualReturn_h
-
 proc QTableViewscrollTo*(self: gen_qtableview_types.QTableView, index: gen_qabstractitemmodel_types.QModelIndex, hint: cint): void =
   fcQTableView_virtualbase_scrollTo(self.h, index.h, cint(hint))
-
-proc cQTableView_vtable_callback_scrollTo(self: pointer, index: pointer, hint: cint): void {.cdecl.} =
-  let vtbl = cast[ptr QTableViewVTable](fcQTableView_vdata(self))
-  let self = QTableView(h: self)
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
-  let slotval2 = cint(hint)
-  vtbl[].scrollTo(self, slotval1, slotval2)
 
 proc QTableViewindexAt*(self: gen_qtableview_types.QTableView, p: gen_qpoint_types.QPoint): gen_qabstractitemmodel_types.QModelIndex =
   gen_qabstractitemmodel_types.QModelIndex(h: fcQTableView_virtualbase_indexAt(self.h, p.h), owned: true)
 
-proc cQTableView_vtable_callback_indexAt(self: pointer, p: pointer): pointer {.cdecl.} =
-  let vtbl = cast[ptr QTableViewVTable](fcQTableView_vdata(self))
-  let self = QTableView(h: self)
-  let slotval1 = gen_qpoint_types.QPoint(h: p, owned: false)
-  var virtualReturn = vtbl[].indexAt(self, slotval1)
-  virtualReturn.owned = false # TODO move?
-  let virtualReturn_h = virtualReturn.h
-  virtualReturn.h = nil
-  virtualReturn_h
-
 proc QTableViewscrollContentsBy*(self: gen_qtableview_types.QTableView, dx: cint, dy: cint): void =
   fcQTableView_virtualbase_scrollContentsBy(self.h, dx, dy)
-
-proc cQTableView_vtable_callback_scrollContentsBy(self: pointer, dx: cint, dy: cint): void {.cdecl.} =
-  let vtbl = cast[ptr QTableViewVTable](fcQTableView_vdata(self))
-  let self = QTableView(h: self)
-  let slotval1 = dx
-  let slotval2 = dy
-  vtbl[].scrollContentsBy(self, slotval1, slotval2)
 
 proc QTableViewviewOptions*(self: gen_qtableview_types.QTableView): gen_qstyleoption_types.QStyleOptionViewItem =
   gen_qstyleoption_types.QStyleOptionViewItem(h: fcQTableView_virtualbase_viewOptions(self.h), owned: true)
 
-proc cQTableView_vtable_callback_viewOptions(self: pointer): pointer {.cdecl.} =
-  let vtbl = cast[ptr QTableViewVTable](fcQTableView_vdata(self))
-  let self = QTableView(h: self)
-  var virtualReturn = vtbl[].viewOptions(self)
-  virtualReturn.owned = false # TODO move?
-  let virtualReturn_h = virtualReturn.h
-  virtualReturn.h = nil
-  virtualReturn_h
-
 proc QTableViewpaintEvent*(self: gen_qtableview_types.QTableView, e: gen_qevent_types.QPaintEvent): void =
   fcQTableView_virtualbase_paintEvent(self.h, e.h)
-
-proc cQTableView_vtable_callback_paintEvent(self: pointer, e: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QTableViewVTable](fcQTableView_vdata(self))
-  let self = QTableView(h: self)
-  let slotval1 = gen_qevent_types.QPaintEvent(h: e, owned: false)
-  vtbl[].paintEvent(self, slotval1)
 
 proc QTableViewtimerEvent*(self: gen_qtableview_types.QTableView, event: gen_qcoreevent_types.QTimerEvent): void =
   fcQTableView_virtualbase_timerEvent(self.h, event.h)
 
-proc cQTableView_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QTableViewVTable](fcQTableView_vdata(self))
-  let self = QTableView(h: self)
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
-  vtbl[].timerEvent(self, slotval1)
-
 proc QTableViewhorizontalOffset*(self: gen_qtableview_types.QTableView): cint =
   fcQTableView_virtualbase_horizontalOffset(self.h)
-
-proc cQTableView_vtable_callback_horizontalOffset(self: pointer): cint {.cdecl.} =
-  let vtbl = cast[ptr QTableViewVTable](fcQTableView_vdata(self))
-  let self = QTableView(h: self)
-  var virtualReturn = vtbl[].horizontalOffset(self)
-  virtualReturn
 
 proc QTableViewverticalOffset*(self: gen_qtableview_types.QTableView): cint =
   fcQTableView_virtualbase_verticalOffset(self.h)
 
-proc cQTableView_vtable_callback_verticalOffset(self: pointer): cint {.cdecl.} =
-  let vtbl = cast[ptr QTableViewVTable](fcQTableView_vdata(self))
-  let self = QTableView(h: self)
-  var virtualReturn = vtbl[].verticalOffset(self)
-  virtualReturn
-
 proc QTableViewmoveCursor*(self: gen_qtableview_types.QTableView, cursorAction: cint, modifiers: cint): gen_qabstractitemmodel_types.QModelIndex =
   gen_qabstractitemmodel_types.QModelIndex(h: fcQTableView_virtualbase_moveCursor(self.h, cint(cursorAction), cint(modifiers)), owned: true)
-
-proc cQTableView_vtable_callback_moveCursor(self: pointer, cursorAction: cint, modifiers: cint): pointer {.cdecl.} =
-  let vtbl = cast[ptr QTableViewVTable](fcQTableView_vdata(self))
-  let self = QTableView(h: self)
-  let slotval1 = cint(cursorAction)
-  let slotval2 = cint(modifiers)
-  var virtualReturn = vtbl[].moveCursor(self, slotval1, slotval2)
-  virtualReturn.owned = false # TODO move?
-  let virtualReturn_h = virtualReturn.h
-  virtualReturn.h = nil
-  virtualReturn_h
 
 proc QTableViewsetSelection*(self: gen_qtableview_types.QTableView, rect: gen_qrect_types.QRect, command: cint): void =
   fcQTableView_virtualbase_setSelection(self.h, rect.h, cint(command))
 
-proc cQTableView_vtable_callback_setSelection(self: pointer, rect: pointer, command: cint): void {.cdecl.} =
-  let vtbl = cast[ptr QTableViewVTable](fcQTableView_vdata(self))
-  let self = QTableView(h: self)
-  let slotval1 = gen_qrect_types.QRect(h: rect, owned: false)
-  let slotval2 = cint(command)
-  vtbl[].setSelection(self, slotval1, slotval2)
-
 proc QTableViewvisualRegionForSelection*(self: gen_qtableview_types.QTableView, selection: gen_qitemselectionmodel_types.QItemSelection): gen_qregion_types.QRegion =
   gen_qregion_types.QRegion(h: fcQTableView_virtualbase_visualRegionForSelection(self.h, selection.h), owned: true)
-
-proc cQTableView_vtable_callback_visualRegionForSelection(self: pointer, selection: pointer): pointer {.cdecl.} =
-  let vtbl = cast[ptr QTableViewVTable](fcQTableView_vdata(self))
-  let self = QTableView(h: self)
-  let slotval1 = gen_qitemselectionmodel_types.QItemSelection(h: selection, owned: false)
-  var virtualReturn = vtbl[].visualRegionForSelection(self, slotval1)
-  virtualReturn.owned = false # TODO move?
-  let virtualReturn_h = virtualReturn.h
-  virtualReturn.h = nil
-  virtualReturn_h
 
 proc QTableViewselectedIndexes*(self: gen_qtableview_types.QTableView): seq[gen_qabstractitemmodel_types.QModelIndex] =
   var v_ma = fcQTableView_virtualbase_selectedIndexes(self.h)
@@ -955,7 +815,371 @@ proc QTableViewselectedIndexes*(self: gen_qtableview_types.QTableView): seq[gen_
   c_free(v_ma.data)
   vx_ret
 
-proc cQTableView_vtable_callback_selectedIndexes(self: pointer): struct_miqt_array {.cdecl.} =
+proc QTableViewupdateGeometries*(self: gen_qtableview_types.QTableView): void =
+  fcQTableView_virtualbase_updateGeometries(self.h)
+
+proc QTableViewviewportSizeHint*(self: gen_qtableview_types.QTableView): gen_qsize_types.QSize =
+  gen_qsize_types.QSize(h: fcQTableView_virtualbase_viewportSizeHint(self.h), owned: true)
+
+proc QTableViewsizeHintForRow*(self: gen_qtableview_types.QTableView, row: cint): cint =
+  fcQTableView_virtualbase_sizeHintForRow(self.h, row)
+
+proc QTableViewsizeHintForColumn*(self: gen_qtableview_types.QTableView, column: cint): cint =
+  fcQTableView_virtualbase_sizeHintForColumn(self.h, column)
+
+proc QTableViewverticalScrollbarAction*(self: gen_qtableview_types.QTableView, action: cint): void =
+  fcQTableView_virtualbase_verticalScrollbarAction(self.h, action)
+
+proc QTableViewhorizontalScrollbarAction*(self: gen_qtableview_types.QTableView, action: cint): void =
+  fcQTableView_virtualbase_horizontalScrollbarAction(self.h, action)
+
+proc QTableViewisIndexHidden*(self: gen_qtableview_types.QTableView, index: gen_qabstractitemmodel_types.QModelIndex): bool =
+  fcQTableView_virtualbase_isIndexHidden(self.h, index.h)
+
+proc QTableViewselectionChanged*(self: gen_qtableview_types.QTableView, selected: gen_qitemselectionmodel_types.QItemSelection, deselected: gen_qitemselectionmodel_types.QItemSelection): void =
+  fcQTableView_virtualbase_selectionChanged(self.h, selected.h, deselected.h)
+
+proc QTableViewcurrentChanged*(self: gen_qtableview_types.QTableView, current: gen_qabstractitemmodel_types.QModelIndex, previous: gen_qabstractitemmodel_types.QModelIndex): void =
+  fcQTableView_virtualbase_currentChanged(self.h, current.h, previous.h)
+
+proc QTableViewkeyboardSearch*(self: gen_qtableview_types.QTableView, search: openArray[char]): void =
+  fcQTableView_virtualbase_keyboardSearch(self.h, struct_miqt_string(data: if len(search) > 0: addr search[0] else: nil, len: csize_t(len(search))))
+
+proc QTableViewinputMethodQuery*(self: gen_qtableview_types.QTableView, query: cint): gen_qvariant_types.QVariant =
+  gen_qvariant_types.QVariant(h: fcQTableView_virtualbase_inputMethodQuery(self.h, cint(query)), owned: true)
+
+proc QTableViewreset*(self: gen_qtableview_types.QTableView): void =
+  fcQTableView_virtualbase_reset(self.h)
+
+proc QTableViewselectAll*(self: gen_qtableview_types.QTableView): void =
+  fcQTableView_virtualbase_selectAll(self.h)
+
+proc QTableViewdataChanged*(self: gen_qtableview_types.QTableView, topLeft: gen_qabstractitemmodel_types.QModelIndex, bottomRight: gen_qabstractitemmodel_types.QModelIndex, roles: openArray[cint]): void =
+  var roles_CArray = newSeq[cint](len(roles))
+  for i in 0..<len(roles):
+    roles_CArray[i] = roles[i]
+
+  fcQTableView_virtualbase_dataChanged(self.h, topLeft.h, bottomRight.h, struct_miqt_array(len: csize_t(len(roles)), data: if len(roles) == 0: nil else: addr(roles_CArray[0])))
+
+proc QTableViewrowsInserted*(self: gen_qtableview_types.QTableView, parent: gen_qabstractitemmodel_types.QModelIndex, start: cint, endVal: cint): void =
+  fcQTableView_virtualbase_rowsInserted(self.h, parent.h, start, endVal)
+
+proc QTableViewrowsAboutToBeRemoved*(self: gen_qtableview_types.QTableView, parent: gen_qabstractitemmodel_types.QModelIndex, start: cint, endVal: cint): void =
+  fcQTableView_virtualbase_rowsAboutToBeRemoved(self.h, parent.h, start, endVal)
+
+proc QTableViewupdateEditorData*(self: gen_qtableview_types.QTableView): void =
+  fcQTableView_virtualbase_updateEditorData(self.h)
+
+proc QTableViewupdateEditorGeometries*(self: gen_qtableview_types.QTableView): void =
+  fcQTableView_virtualbase_updateEditorGeometries(self.h)
+
+proc QTableViewverticalScrollbarValueChanged*(self: gen_qtableview_types.QTableView, value: cint): void =
+  fcQTableView_virtualbase_verticalScrollbarValueChanged(self.h, value)
+
+proc QTableViewhorizontalScrollbarValueChanged*(self: gen_qtableview_types.QTableView, value: cint): void =
+  fcQTableView_virtualbase_horizontalScrollbarValueChanged(self.h, value)
+
+proc QTableViewcloseEditor*(self: gen_qtableview_types.QTableView, editor: gen_qwidget_types.QWidget, hint: cint): void =
+  fcQTableView_virtualbase_closeEditor(self.h, editor.h, cint(hint))
+
+proc QTableViewcommitData*(self: gen_qtableview_types.QTableView, editor: gen_qwidget_types.QWidget): void =
+  fcQTableView_virtualbase_commitData(self.h, editor.h)
+
+proc QTableVieweditorDestroyed*(self: gen_qtableview_types.QTableView, editor: gen_qobject_types.QObject): void =
+  fcQTableView_virtualbase_editorDestroyed(self.h, editor.h)
+
+proc QTableViewedit*(self: gen_qtableview_types.QTableView, index: gen_qabstractitemmodel_types.QModelIndex, trigger: cint, event: gen_qcoreevent_types.QEvent): bool =
+  fcQTableView_virtualbase_edit2(self.h, index.h, cint(trigger), event.h)
+
+proc QTableViewselectionCommand*(self: gen_qtableview_types.QTableView, index: gen_qabstractitemmodel_types.QModelIndex, event: gen_qcoreevent_types.QEvent): cint =
+  cint(fcQTableView_virtualbase_selectionCommand(self.h, index.h, event.h))
+
+proc QTableViewstartDrag*(self: gen_qtableview_types.QTableView, supportedActions: cint): void =
+  fcQTableView_virtualbase_startDrag(self.h, cint(supportedActions))
+
+proc QTableViewfocusNextPrevChild*(self: gen_qtableview_types.QTableView, next: bool): bool =
+  fcQTableView_virtualbase_focusNextPrevChild(self.h, next)
+
+proc QTableViewevent*(self: gen_qtableview_types.QTableView, event: gen_qcoreevent_types.QEvent): bool =
+  fcQTableView_virtualbase_event(self.h, event.h)
+
+proc QTableViewviewportEvent*(self: gen_qtableview_types.QTableView, event: gen_qcoreevent_types.QEvent): bool =
+  fcQTableView_virtualbase_viewportEvent(self.h, event.h)
+
+proc QTableViewmousePressEvent*(self: gen_qtableview_types.QTableView, event: gen_qevent_types.QMouseEvent): void =
+  fcQTableView_virtualbase_mousePressEvent(self.h, event.h)
+
+proc QTableViewmouseMoveEvent*(self: gen_qtableview_types.QTableView, event: gen_qevent_types.QMouseEvent): void =
+  fcQTableView_virtualbase_mouseMoveEvent(self.h, event.h)
+
+proc QTableViewmouseReleaseEvent*(self: gen_qtableview_types.QTableView, event: gen_qevent_types.QMouseEvent): void =
+  fcQTableView_virtualbase_mouseReleaseEvent(self.h, event.h)
+
+proc QTableViewmouseDoubleClickEvent*(self: gen_qtableview_types.QTableView, event: gen_qevent_types.QMouseEvent): void =
+  fcQTableView_virtualbase_mouseDoubleClickEvent(self.h, event.h)
+
+proc QTableViewdragEnterEvent*(self: gen_qtableview_types.QTableView, event: gen_qevent_types.QDragEnterEvent): void =
+  fcQTableView_virtualbase_dragEnterEvent(self.h, event.h)
+
+proc QTableViewdragMoveEvent*(self: gen_qtableview_types.QTableView, event: gen_qevent_types.QDragMoveEvent): void =
+  fcQTableView_virtualbase_dragMoveEvent(self.h, event.h)
+
+proc QTableViewdragLeaveEvent*(self: gen_qtableview_types.QTableView, event: gen_qevent_types.QDragLeaveEvent): void =
+  fcQTableView_virtualbase_dragLeaveEvent(self.h, event.h)
+
+proc QTableViewdropEvent*(self: gen_qtableview_types.QTableView, event: gen_qevent_types.QDropEvent): void =
+  fcQTableView_virtualbase_dropEvent(self.h, event.h)
+
+proc QTableViewfocusInEvent*(self: gen_qtableview_types.QTableView, event: gen_qevent_types.QFocusEvent): void =
+  fcQTableView_virtualbase_focusInEvent(self.h, event.h)
+
+proc QTableViewfocusOutEvent*(self: gen_qtableview_types.QTableView, event: gen_qevent_types.QFocusEvent): void =
+  fcQTableView_virtualbase_focusOutEvent(self.h, event.h)
+
+proc QTableViewkeyPressEvent*(self: gen_qtableview_types.QTableView, event: gen_qevent_types.QKeyEvent): void =
+  fcQTableView_virtualbase_keyPressEvent(self.h, event.h)
+
+proc QTableViewresizeEvent*(self: gen_qtableview_types.QTableView, event: gen_qevent_types.QResizeEvent): void =
+  fcQTableView_virtualbase_resizeEvent(self.h, event.h)
+
+proc QTableViewinputMethodEvent*(self: gen_qtableview_types.QTableView, event: gen_qevent_types.QInputMethodEvent): void =
+  fcQTableView_virtualbase_inputMethodEvent(self.h, event.h)
+
+proc QTableVieweventFilter*(self: gen_qtableview_types.QTableView, objectVal: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
+  fcQTableView_virtualbase_eventFilter(self.h, objectVal.h, event.h)
+
+proc QTableViewminimumSizeHint*(self: gen_qtableview_types.QTableView): gen_qsize_types.QSize =
+  gen_qsize_types.QSize(h: fcQTableView_virtualbase_minimumSizeHint(self.h), owned: true)
+
+proc QTableViewsizeHint*(self: gen_qtableview_types.QTableView): gen_qsize_types.QSize =
+  gen_qsize_types.QSize(h: fcQTableView_virtualbase_sizeHint(self.h), owned: true)
+
+proc QTableViewsetupViewport*(self: gen_qtableview_types.QTableView, viewport: gen_qwidget_types.QWidget): void =
+  fcQTableView_virtualbase_setupViewport(self.h, viewport.h)
+
+proc QTableViewwheelEvent*(self: gen_qtableview_types.QTableView, param1: gen_qevent_types.QWheelEvent): void =
+  fcQTableView_virtualbase_wheelEvent(self.h, param1.h)
+
+proc QTableViewcontextMenuEvent*(self: gen_qtableview_types.QTableView, param1: gen_qevent_types.QContextMenuEvent): void =
+  fcQTableView_virtualbase_contextMenuEvent(self.h, param1.h)
+
+proc QTableViewchangeEvent*(self: gen_qtableview_types.QTableView, param1: gen_qcoreevent_types.QEvent): void =
+  fcQTableView_virtualbase_changeEvent(self.h, param1.h)
+
+proc QTableViewdevType*(self: gen_qtableview_types.QTableView): cint =
+  fcQTableView_virtualbase_devType(self.h)
+
+proc QTableViewsetVisible*(self: gen_qtableview_types.QTableView, visible: bool): void =
+  fcQTableView_virtualbase_setVisible(self.h, visible)
+
+proc QTableViewheightForWidth*(self: gen_qtableview_types.QTableView, param1: cint): cint =
+  fcQTableView_virtualbase_heightForWidth(self.h, param1)
+
+proc QTableViewhasHeightForWidth*(self: gen_qtableview_types.QTableView): bool =
+  fcQTableView_virtualbase_hasHeightForWidth(self.h)
+
+proc QTableViewpaintEngine*(self: gen_qtableview_types.QTableView): gen_qpaintengine_types.QPaintEngine =
+  gen_qpaintengine_types.QPaintEngine(h: fcQTableView_virtualbase_paintEngine(self.h), owned: false)
+
+proc QTableViewkeyReleaseEvent*(self: gen_qtableview_types.QTableView, event: gen_qevent_types.QKeyEvent): void =
+  fcQTableView_virtualbase_keyReleaseEvent(self.h, event.h)
+
+proc QTableViewenterEvent*(self: gen_qtableview_types.QTableView, event: gen_qcoreevent_types.QEvent): void =
+  fcQTableView_virtualbase_enterEvent(self.h, event.h)
+
+proc QTableViewleaveEvent*(self: gen_qtableview_types.QTableView, event: gen_qcoreevent_types.QEvent): void =
+  fcQTableView_virtualbase_leaveEvent(self.h, event.h)
+
+proc QTableViewmoveEvent*(self: gen_qtableview_types.QTableView, event: gen_qevent_types.QMoveEvent): void =
+  fcQTableView_virtualbase_moveEvent(self.h, event.h)
+
+proc QTableViewcloseEvent*(self: gen_qtableview_types.QTableView, event: gen_qevent_types.QCloseEvent): void =
+  fcQTableView_virtualbase_closeEvent(self.h, event.h)
+
+proc QTableViewtabletEvent*(self: gen_qtableview_types.QTableView, event: gen_qevent_types.QTabletEvent): void =
+  fcQTableView_virtualbase_tabletEvent(self.h, event.h)
+
+proc QTableViewactionEvent*(self: gen_qtableview_types.QTableView, event: gen_qevent_types.QActionEvent): void =
+  fcQTableView_virtualbase_actionEvent(self.h, event.h)
+
+proc QTableViewshowEvent*(self: gen_qtableview_types.QTableView, event: gen_qevent_types.QShowEvent): void =
+  fcQTableView_virtualbase_showEvent(self.h, event.h)
+
+proc QTableViewhideEvent*(self: gen_qtableview_types.QTableView, event: gen_qevent_types.QHideEvent): void =
+  fcQTableView_virtualbase_hideEvent(self.h, event.h)
+
+proc QTableViewnativeEvent*(self: gen_qtableview_types.QTableView, eventType: openArray[byte], message: pointer, resultVal: ptr clong): bool =
+  fcQTableView_virtualbase_nativeEvent(self.h, struct_miqt_string(data: cast[cstring](if len(eventType) == 0: nil else: unsafeAddr eventType[0]), len: csize_t(len(eventType))), message, resultVal)
+
+proc QTableViewmetric*(self: gen_qtableview_types.QTableView, param1: cint): cint =
+  fcQTableView_virtualbase_metric(self.h, cint(param1))
+
+proc QTableViewinitPainter*(self: gen_qtableview_types.QTableView, painter: gen_qpainter_types.QPainter): void =
+  fcQTableView_virtualbase_initPainter(self.h, painter.h)
+
+proc QTableViewredirected*(self: gen_qtableview_types.QTableView, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice =
+  gen_qpaintdevice_types.QPaintDevice(h: fcQTableView_virtualbase_redirected(self.h, offset.h), owned: false)
+
+proc QTableViewsharedPainter*(self: gen_qtableview_types.QTableView): gen_qpainter_types.QPainter =
+  gen_qpainter_types.QPainter(h: fcQTableView_virtualbase_sharedPainter(self.h), owned: false)
+
+proc QTableViewchildEvent*(self: gen_qtableview_types.QTableView, event: gen_qcoreevent_types.QChildEvent): void =
+  fcQTableView_virtualbase_childEvent(self.h, event.h)
+
+proc QTableViewcustomEvent*(self: gen_qtableview_types.QTableView, event: gen_qcoreevent_types.QEvent): void =
+  fcQTableView_virtualbase_customEvent(self.h, event.h)
+
+proc QTableViewconnectNotify*(self: gen_qtableview_types.QTableView, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQTableView_virtualbase_connectNotify(self.h, signal.h)
+
+proc QTableViewdisconnectNotify*(self: gen_qtableview_types.QTableView, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQTableView_virtualbase_disconnectNotify(self.h, signal.h)
+
+
+proc fcQTableView_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QTableViewVTable](fcQTableView_vdata(self))
+  let self = QTableView(h: self)
+  var virtualReturn = vtbl[].metaObject(self)
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+proc fcQTableView_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+  let vtbl = cast[ptr QTableViewVTable](fcQTableView_vdata(self))
+  let self = QTableView(h: self)
+  let slotval1 = (param1)
+  var virtualReturn = vtbl[].metacast(self, slotval1)
+  virtualReturn
+
+proc fcQTableView_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QTableViewVTable](fcQTableView_vdata(self))
+  let self = QTableView(h: self)
+  let slotval1 = cint(param1)
+  let slotval2 = param2
+  let slotval3 = param3
+  var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
+  virtualReturn
+
+proc fcQTableView_vtable_callback_setModel(self: pointer, model: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QTableViewVTable](fcQTableView_vdata(self))
+  let self = QTableView(h: self)
+  let slotval1 = gen_qabstractitemmodel_types.QAbstractItemModel(h: model, owned: false)
+  vtbl[].setModel(self, slotval1)
+
+proc fcQTableView_vtable_callback_setRootIndex(self: pointer, index: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QTableViewVTable](fcQTableView_vdata(self))
+  let self = QTableView(h: self)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
+  vtbl[].setRootIndex(self, slotval1)
+
+proc fcQTableView_vtable_callback_setSelectionModel(self: pointer, selectionModel: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QTableViewVTable](fcQTableView_vdata(self))
+  let self = QTableView(h: self)
+  let slotval1 = gen_qitemselectionmodel_types.QItemSelectionModel(h: selectionModel, owned: false)
+  vtbl[].setSelectionModel(self, slotval1)
+
+proc fcQTableView_vtable_callback_doItemsLayout(self: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QTableViewVTable](fcQTableView_vdata(self))
+  let self = QTableView(h: self)
+  vtbl[].doItemsLayout(self)
+
+proc fcQTableView_vtable_callback_visualRect(self: pointer, index: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QTableViewVTable](fcQTableView_vdata(self))
+  let self = QTableView(h: self)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
+  var virtualReturn = vtbl[].visualRect(self, slotval1)
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+proc fcQTableView_vtable_callback_scrollTo(self: pointer, index: pointer, hint: cint): void {.cdecl.} =
+  let vtbl = cast[ptr QTableViewVTable](fcQTableView_vdata(self))
+  let self = QTableView(h: self)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
+  let slotval2 = cint(hint)
+  vtbl[].scrollTo(self, slotval1, slotval2)
+
+proc fcQTableView_vtable_callback_indexAt(self: pointer, p: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QTableViewVTable](fcQTableView_vdata(self))
+  let self = QTableView(h: self)
+  let slotval1 = gen_qpoint_types.QPoint(h: p, owned: false)
+  var virtualReturn = vtbl[].indexAt(self, slotval1)
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+proc fcQTableView_vtable_callback_scrollContentsBy(self: pointer, dx: cint, dy: cint): void {.cdecl.} =
+  let vtbl = cast[ptr QTableViewVTable](fcQTableView_vdata(self))
+  let self = QTableView(h: self)
+  let slotval1 = dx
+  let slotval2 = dy
+  vtbl[].scrollContentsBy(self, slotval1, slotval2)
+
+proc fcQTableView_vtable_callback_viewOptions(self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QTableViewVTable](fcQTableView_vdata(self))
+  let self = QTableView(h: self)
+  var virtualReturn = vtbl[].viewOptions(self)
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+proc fcQTableView_vtable_callback_paintEvent(self: pointer, e: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QTableViewVTable](fcQTableView_vdata(self))
+  let self = QTableView(h: self)
+  let slotval1 = gen_qevent_types.QPaintEvent(h: e, owned: false)
+  vtbl[].paintEvent(self, slotval1)
+
+proc fcQTableView_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QTableViewVTable](fcQTableView_vdata(self))
+  let self = QTableView(h: self)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
+  vtbl[].timerEvent(self, slotval1)
+
+proc fcQTableView_vtable_callback_horizontalOffset(self: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QTableViewVTable](fcQTableView_vdata(self))
+  let self = QTableView(h: self)
+  var virtualReturn = vtbl[].horizontalOffset(self)
+  virtualReturn
+
+proc fcQTableView_vtable_callback_verticalOffset(self: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QTableViewVTable](fcQTableView_vdata(self))
+  let self = QTableView(h: self)
+  var virtualReturn = vtbl[].verticalOffset(self)
+  virtualReturn
+
+proc fcQTableView_vtable_callback_moveCursor(self: pointer, cursorAction: cint, modifiers: cint): pointer {.cdecl.} =
+  let vtbl = cast[ptr QTableViewVTable](fcQTableView_vdata(self))
+  let self = QTableView(h: self)
+  let slotval1 = cint(cursorAction)
+  let slotval2 = cint(modifiers)
+  var virtualReturn = vtbl[].moveCursor(self, slotval1, slotval2)
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+proc fcQTableView_vtable_callback_setSelection(self: pointer, rect: pointer, command: cint): void {.cdecl.} =
+  let vtbl = cast[ptr QTableViewVTable](fcQTableView_vdata(self))
+  let self = QTableView(h: self)
+  let slotval1 = gen_qrect_types.QRect(h: rect, owned: false)
+  let slotval2 = cint(command)
+  vtbl[].setSelection(self, slotval1, slotval2)
+
+proc fcQTableView_vtable_callback_visualRegionForSelection(self: pointer, selection: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QTableViewVTable](fcQTableView_vdata(self))
+  let self = QTableView(h: self)
+  let slotval1 = gen_qitemselectionmodel_types.QItemSelection(h: selection, owned: false)
+  var virtualReturn = vtbl[].visualRegionForSelection(self, slotval1)
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+proc fcQTableView_vtable_callback_selectedIndexes(self: pointer): struct_miqt_array {.cdecl.} =
   let vtbl = cast[ptr QTableViewVTable](fcQTableView_vdata(self))
   let self = QTableView(h: self)
   var virtualReturn = vtbl[].selectedIndexes(self)
@@ -968,18 +1192,12 @@ proc cQTableView_vtable_callback_selectedIndexes(self: pointer): struct_miqt_arr
 
   struct_miqt_array(len: csize_t(len(virtualReturn)), data: if len(virtualReturn) == 0: nil else: addr(virtualReturn_CArray[0]))
 
-proc QTableViewupdateGeometries*(self: gen_qtableview_types.QTableView): void =
-  fcQTableView_virtualbase_updateGeometries(self.h)
-
-proc cQTableView_vtable_callback_updateGeometries(self: pointer): void {.cdecl.} =
+proc fcQTableView_vtable_callback_updateGeometries(self: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTableViewVTable](fcQTableView_vdata(self))
   let self = QTableView(h: self)
   vtbl[].updateGeometries(self)
 
-proc QTableViewviewportSizeHint*(self: gen_qtableview_types.QTableView): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQTableView_virtualbase_viewportSizeHint(self.h), owned: true)
-
-proc cQTableView_vtable_callback_viewportSizeHint(self: pointer): pointer {.cdecl.} =
+proc fcQTableView_vtable_callback_viewportSizeHint(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QTableViewVTable](fcQTableView_vdata(self))
   let self = QTableView(h: self)
   var virtualReturn = vtbl[].viewportSizeHint(self)
@@ -988,78 +1206,54 @@ proc cQTableView_vtable_callback_viewportSizeHint(self: pointer): pointer {.cdec
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QTableViewsizeHintForRow*(self: gen_qtableview_types.QTableView, row: cint): cint =
-  fcQTableView_virtualbase_sizeHintForRow(self.h, row)
-
-proc cQTableView_vtable_callback_sizeHintForRow(self: pointer, row: cint): cint {.cdecl.} =
+proc fcQTableView_vtable_callback_sizeHintForRow(self: pointer, row: cint): cint {.cdecl.} =
   let vtbl = cast[ptr QTableViewVTable](fcQTableView_vdata(self))
   let self = QTableView(h: self)
   let slotval1 = row
   var virtualReturn = vtbl[].sizeHintForRow(self, slotval1)
   virtualReturn
 
-proc QTableViewsizeHintForColumn*(self: gen_qtableview_types.QTableView, column: cint): cint =
-  fcQTableView_virtualbase_sizeHintForColumn(self.h, column)
-
-proc cQTableView_vtable_callback_sizeHintForColumn(self: pointer, column: cint): cint {.cdecl.} =
+proc fcQTableView_vtable_callback_sizeHintForColumn(self: pointer, column: cint): cint {.cdecl.} =
   let vtbl = cast[ptr QTableViewVTable](fcQTableView_vdata(self))
   let self = QTableView(h: self)
   let slotval1 = column
   var virtualReturn = vtbl[].sizeHintForColumn(self, slotval1)
   virtualReturn
 
-proc QTableViewverticalScrollbarAction*(self: gen_qtableview_types.QTableView, action: cint): void =
-  fcQTableView_virtualbase_verticalScrollbarAction(self.h, action)
-
-proc cQTableView_vtable_callback_verticalScrollbarAction(self: pointer, action: cint): void {.cdecl.} =
+proc fcQTableView_vtable_callback_verticalScrollbarAction(self: pointer, action: cint): void {.cdecl.} =
   let vtbl = cast[ptr QTableViewVTable](fcQTableView_vdata(self))
   let self = QTableView(h: self)
   let slotval1 = action
   vtbl[].verticalScrollbarAction(self, slotval1)
 
-proc QTableViewhorizontalScrollbarAction*(self: gen_qtableview_types.QTableView, action: cint): void =
-  fcQTableView_virtualbase_horizontalScrollbarAction(self.h, action)
-
-proc cQTableView_vtable_callback_horizontalScrollbarAction(self: pointer, action: cint): void {.cdecl.} =
+proc fcQTableView_vtable_callback_horizontalScrollbarAction(self: pointer, action: cint): void {.cdecl.} =
   let vtbl = cast[ptr QTableViewVTable](fcQTableView_vdata(self))
   let self = QTableView(h: self)
   let slotval1 = action
   vtbl[].horizontalScrollbarAction(self, slotval1)
 
-proc QTableViewisIndexHidden*(self: gen_qtableview_types.QTableView, index: gen_qabstractitemmodel_types.QModelIndex): bool =
-  fcQTableView_virtualbase_isIndexHidden(self.h, index.h)
-
-proc cQTableView_vtable_callback_isIndexHidden(self: pointer, index: pointer): bool {.cdecl.} =
+proc fcQTableView_vtable_callback_isIndexHidden(self: pointer, index: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QTableViewVTable](fcQTableView_vdata(self))
   let self = QTableView(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var virtualReturn = vtbl[].isIndexHidden(self, slotval1)
   virtualReturn
 
-proc QTableViewselectionChanged*(self: gen_qtableview_types.QTableView, selected: gen_qitemselectionmodel_types.QItemSelection, deselected: gen_qitemselectionmodel_types.QItemSelection): void =
-  fcQTableView_virtualbase_selectionChanged(self.h, selected.h, deselected.h)
-
-proc cQTableView_vtable_callback_selectionChanged(self: pointer, selected: pointer, deselected: pointer): void {.cdecl.} =
+proc fcQTableView_vtable_callback_selectionChanged(self: pointer, selected: pointer, deselected: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTableViewVTable](fcQTableView_vdata(self))
   let self = QTableView(h: self)
   let slotval1 = gen_qitemselectionmodel_types.QItemSelection(h: selected, owned: false)
   let slotval2 = gen_qitemselectionmodel_types.QItemSelection(h: deselected, owned: false)
   vtbl[].selectionChanged(self, slotval1, slotval2)
 
-proc QTableViewcurrentChanged*(self: gen_qtableview_types.QTableView, current: gen_qabstractitemmodel_types.QModelIndex, previous: gen_qabstractitemmodel_types.QModelIndex): void =
-  fcQTableView_virtualbase_currentChanged(self.h, current.h, previous.h)
-
-proc cQTableView_vtable_callback_currentChanged(self: pointer, current: pointer, previous: pointer): void {.cdecl.} =
+proc fcQTableView_vtable_callback_currentChanged(self: pointer, current: pointer, previous: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTableViewVTable](fcQTableView_vdata(self))
   let self = QTableView(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: current, owned: false)
   let slotval2 = gen_qabstractitemmodel_types.QModelIndex(h: previous, owned: false)
   vtbl[].currentChanged(self, slotval1, slotval2)
 
-proc QTableViewkeyboardSearch*(self: gen_qtableview_types.QTableView, search: openArray[char]): void =
-  fcQTableView_virtualbase_keyboardSearch(self.h, struct_miqt_string(data: if len(search) > 0: addr search[0] else: nil, len: csize_t(len(search))))
-
-proc cQTableView_vtable_callback_keyboardSearch(self: pointer, search: struct_miqt_string): void {.cdecl.} =
+proc fcQTableView_vtable_callback_keyboardSearch(self: pointer, search: struct_miqt_string): void {.cdecl.} =
   let vtbl = cast[ptr QTableViewVTable](fcQTableView_vdata(self))
   let self = QTableView(h: self)
   let vsearch_ms = search
@@ -1068,10 +1262,7 @@ proc cQTableView_vtable_callback_keyboardSearch(self: pointer, search: struct_mi
   let slotval1 = vsearchx_ret
   vtbl[].keyboardSearch(self, slotval1)
 
-proc QTableViewinputMethodQuery*(self: gen_qtableview_types.QTableView, query: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQTableView_virtualbase_inputMethodQuery(self.h, cint(query)), owned: true)
-
-proc cQTableView_vtable_callback_inputMethodQuery(self: pointer, query: cint): pointer {.cdecl.} =
+proc fcQTableView_vtable_callback_inputMethodQuery(self: pointer, query: cint): pointer {.cdecl.} =
   let vtbl = cast[ptr QTableViewVTable](fcQTableView_vdata(self))
   let self = QTableView(h: self)
   let slotval1 = cint(query)
@@ -1081,30 +1272,17 @@ proc cQTableView_vtable_callback_inputMethodQuery(self: pointer, query: cint): p
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QTableViewreset*(self: gen_qtableview_types.QTableView): void =
-  fcQTableView_virtualbase_reset(self.h)
-
-proc cQTableView_vtable_callback_reset(self: pointer): void {.cdecl.} =
+proc fcQTableView_vtable_callback_reset(self: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTableViewVTable](fcQTableView_vdata(self))
   let self = QTableView(h: self)
   vtbl[].reset(self)
 
-proc QTableViewselectAll*(self: gen_qtableview_types.QTableView): void =
-  fcQTableView_virtualbase_selectAll(self.h)
-
-proc cQTableView_vtable_callback_selectAll(self: pointer): void {.cdecl.} =
+proc fcQTableView_vtable_callback_selectAll(self: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTableViewVTable](fcQTableView_vdata(self))
   let self = QTableView(h: self)
   vtbl[].selectAll(self)
 
-proc QTableViewdataChanged*(self: gen_qtableview_types.QTableView, topLeft: gen_qabstractitemmodel_types.QModelIndex, bottomRight: gen_qabstractitemmodel_types.QModelIndex, roles: openArray[cint]): void =
-  var roles_CArray = newSeq[cint](len(roles))
-  for i in 0..<len(roles):
-    roles_CArray[i] = roles[i]
-
-  fcQTableView_virtualbase_dataChanged(self.h, topLeft.h, bottomRight.h, struct_miqt_array(len: csize_t(len(roles)), data: if len(roles) == 0: nil else: addr(roles_CArray[0])))
-
-proc cQTableView_vtable_callback_dataChanged(self: pointer, topLeft: pointer, bottomRight: pointer, roles: struct_miqt_array): void {.cdecl.} =
+proc fcQTableView_vtable_callback_dataChanged(self: pointer, topLeft: pointer, bottomRight: pointer, roles: struct_miqt_array): void {.cdecl.} =
   let vtbl = cast[ptr QTableViewVTable](fcQTableView_vdata(self))
   let self = QTableView(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: topLeft, owned: false)
@@ -1118,10 +1296,7 @@ proc cQTableView_vtable_callback_dataChanged(self: pointer, topLeft: pointer, bo
   let slotval3 = vrolesx_ret
   vtbl[].dataChanged(self, slotval1, slotval2, slotval3)
 
-proc QTableViewrowsInserted*(self: gen_qtableview_types.QTableView, parent: gen_qabstractitemmodel_types.QModelIndex, start: cint, endVal: cint): void =
-  fcQTableView_virtualbase_rowsInserted(self.h, parent.h, start, endVal)
-
-proc cQTableView_vtable_callback_rowsInserted(self: pointer, parent: pointer, start: cint, endVal: cint): void {.cdecl.} =
+proc fcQTableView_vtable_callback_rowsInserted(self: pointer, parent: pointer, start: cint, endVal: cint): void {.cdecl.} =
   let vtbl = cast[ptr QTableViewVTable](fcQTableView_vdata(self))
   let self = QTableView(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
@@ -1129,10 +1304,7 @@ proc cQTableView_vtable_callback_rowsInserted(self: pointer, parent: pointer, st
   let slotval3 = endVal
   vtbl[].rowsInserted(self, slotval1, slotval2, slotval3)
 
-proc QTableViewrowsAboutToBeRemoved*(self: gen_qtableview_types.QTableView, parent: gen_qabstractitemmodel_types.QModelIndex, start: cint, endVal: cint): void =
-  fcQTableView_virtualbase_rowsAboutToBeRemoved(self.h, parent.h, start, endVal)
-
-proc cQTableView_vtable_callback_rowsAboutToBeRemoved(self: pointer, parent: pointer, start: cint, endVal: cint): void {.cdecl.} =
+proc fcQTableView_vtable_callback_rowsAboutToBeRemoved(self: pointer, parent: pointer, start: cint, endVal: cint): void {.cdecl.} =
   let vtbl = cast[ptr QTableViewVTable](fcQTableView_vdata(self))
   let self = QTableView(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
@@ -1140,72 +1312,48 @@ proc cQTableView_vtable_callback_rowsAboutToBeRemoved(self: pointer, parent: poi
   let slotval3 = endVal
   vtbl[].rowsAboutToBeRemoved(self, slotval1, slotval2, slotval3)
 
-proc QTableViewupdateEditorData*(self: gen_qtableview_types.QTableView): void =
-  fcQTableView_virtualbase_updateEditorData(self.h)
-
-proc cQTableView_vtable_callback_updateEditorData(self: pointer): void {.cdecl.} =
+proc fcQTableView_vtable_callback_updateEditorData(self: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTableViewVTable](fcQTableView_vdata(self))
   let self = QTableView(h: self)
   vtbl[].updateEditorData(self)
 
-proc QTableViewupdateEditorGeometries*(self: gen_qtableview_types.QTableView): void =
-  fcQTableView_virtualbase_updateEditorGeometries(self.h)
-
-proc cQTableView_vtable_callback_updateEditorGeometries(self: pointer): void {.cdecl.} =
+proc fcQTableView_vtable_callback_updateEditorGeometries(self: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTableViewVTable](fcQTableView_vdata(self))
   let self = QTableView(h: self)
   vtbl[].updateEditorGeometries(self)
 
-proc QTableViewverticalScrollbarValueChanged*(self: gen_qtableview_types.QTableView, value: cint): void =
-  fcQTableView_virtualbase_verticalScrollbarValueChanged(self.h, value)
-
-proc cQTableView_vtable_callback_verticalScrollbarValueChanged(self: pointer, value: cint): void {.cdecl.} =
+proc fcQTableView_vtable_callback_verticalScrollbarValueChanged(self: pointer, value: cint): void {.cdecl.} =
   let vtbl = cast[ptr QTableViewVTable](fcQTableView_vdata(self))
   let self = QTableView(h: self)
   let slotval1 = value
   vtbl[].verticalScrollbarValueChanged(self, slotval1)
 
-proc QTableViewhorizontalScrollbarValueChanged*(self: gen_qtableview_types.QTableView, value: cint): void =
-  fcQTableView_virtualbase_horizontalScrollbarValueChanged(self.h, value)
-
-proc cQTableView_vtable_callback_horizontalScrollbarValueChanged(self: pointer, value: cint): void {.cdecl.} =
+proc fcQTableView_vtable_callback_horizontalScrollbarValueChanged(self: pointer, value: cint): void {.cdecl.} =
   let vtbl = cast[ptr QTableViewVTable](fcQTableView_vdata(self))
   let self = QTableView(h: self)
   let slotval1 = value
   vtbl[].horizontalScrollbarValueChanged(self, slotval1)
 
-proc QTableViewcloseEditor*(self: gen_qtableview_types.QTableView, editor: gen_qwidget_types.QWidget, hint: cint): void =
-  fcQTableView_virtualbase_closeEditor(self.h, editor.h, cint(hint))
-
-proc cQTableView_vtable_callback_closeEditor(self: pointer, editor: pointer, hint: cint): void {.cdecl.} =
+proc fcQTableView_vtable_callback_closeEditor(self: pointer, editor: pointer, hint: cint): void {.cdecl.} =
   let vtbl = cast[ptr QTableViewVTable](fcQTableView_vdata(self))
   let self = QTableView(h: self)
   let slotval1 = gen_qwidget_types.QWidget(h: editor, owned: false)
   let slotval2 = cint(hint)
   vtbl[].closeEditor(self, slotval1, slotval2)
 
-proc QTableViewcommitData*(self: gen_qtableview_types.QTableView, editor: gen_qwidget_types.QWidget): void =
-  fcQTableView_virtualbase_commitData(self.h, editor.h)
-
-proc cQTableView_vtable_callback_commitData(self: pointer, editor: pointer): void {.cdecl.} =
+proc fcQTableView_vtable_callback_commitData(self: pointer, editor: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTableViewVTable](fcQTableView_vdata(self))
   let self = QTableView(h: self)
   let slotval1 = gen_qwidget_types.QWidget(h: editor, owned: false)
   vtbl[].commitData(self, slotval1)
 
-proc QTableVieweditorDestroyed*(self: gen_qtableview_types.QTableView, editor: gen_qobject_types.QObject): void =
-  fcQTableView_virtualbase_editorDestroyed(self.h, editor.h)
-
-proc cQTableView_vtable_callback_editorDestroyed(self: pointer, editor: pointer): void {.cdecl.} =
+proc fcQTableView_vtable_callback_editorDestroyed(self: pointer, editor: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTableViewVTable](fcQTableView_vdata(self))
   let self = QTableView(h: self)
   let slotval1 = gen_qobject_types.QObject(h: editor, owned: false)
   vtbl[].editorDestroyed(self, slotval1)
 
-proc QTableViewedit*(self: gen_qtableview_types.QTableView, index: gen_qabstractitemmodel_types.QModelIndex, trigger: cint, event: gen_qcoreevent_types.QEvent): bool =
-  fcQTableView_virtualbase_edit2(self.h, index.h, cint(trigger), event.h)
-
-proc cQTableView_vtable_callback_edit2(self: pointer, index: pointer, trigger: cint, event: pointer): bool {.cdecl.} =
+proc fcQTableView_vtable_callback_edit2(self: pointer, index: pointer, trigger: cint, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QTableViewVTable](fcQTableView_vdata(self))
   let self = QTableView(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
@@ -1214,10 +1362,7 @@ proc cQTableView_vtable_callback_edit2(self: pointer, index: pointer, trigger: c
   var virtualReturn = vtbl[].edit2(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QTableViewselectionCommand*(self: gen_qtableview_types.QTableView, index: gen_qabstractitemmodel_types.QModelIndex, event: gen_qcoreevent_types.QEvent): cint =
-  cint(fcQTableView_virtualbase_selectionCommand(self.h, index.h, event.h))
-
-proc cQTableView_vtable_callback_selectionCommand(self: pointer, index: pointer, event: pointer): cint {.cdecl.} =
+proc fcQTableView_vtable_callback_selectionCommand(self: pointer, index: pointer, event: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QTableViewVTable](fcQTableView_vdata(self))
   let self = QTableView(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
@@ -1225,166 +1370,112 @@ proc cQTableView_vtable_callback_selectionCommand(self: pointer, index: pointer,
   var virtualReturn = vtbl[].selectionCommand(self, slotval1, slotval2)
   cint(virtualReturn)
 
-proc QTableViewstartDrag*(self: gen_qtableview_types.QTableView, supportedActions: cint): void =
-  fcQTableView_virtualbase_startDrag(self.h, cint(supportedActions))
-
-proc cQTableView_vtable_callback_startDrag(self: pointer, supportedActions: cint): void {.cdecl.} =
+proc fcQTableView_vtable_callback_startDrag(self: pointer, supportedActions: cint): void {.cdecl.} =
   let vtbl = cast[ptr QTableViewVTable](fcQTableView_vdata(self))
   let self = QTableView(h: self)
   let slotval1 = cint(supportedActions)
   vtbl[].startDrag(self, slotval1)
 
-proc QTableViewfocusNextPrevChild*(self: gen_qtableview_types.QTableView, next: bool): bool =
-  fcQTableView_virtualbase_focusNextPrevChild(self.h, next)
-
-proc cQTableView_vtable_callback_focusNextPrevChild(self: pointer, next: bool): bool {.cdecl.} =
+proc fcQTableView_vtable_callback_focusNextPrevChild(self: pointer, next: bool): bool {.cdecl.} =
   let vtbl = cast[ptr QTableViewVTable](fcQTableView_vdata(self))
   let self = QTableView(h: self)
   let slotval1 = next
   var virtualReturn = vtbl[].focusNextPrevChild(self, slotval1)
   virtualReturn
 
-proc QTableViewevent*(self: gen_qtableview_types.QTableView, event: gen_qcoreevent_types.QEvent): bool =
-  fcQTableView_virtualbase_event(self.h, event.h)
-
-proc cQTableView_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
+proc fcQTableView_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QTableViewVTable](fcQTableView_vdata(self))
   let self = QTableView(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
-proc QTableViewviewportEvent*(self: gen_qtableview_types.QTableView, event: gen_qcoreevent_types.QEvent): bool =
-  fcQTableView_virtualbase_viewportEvent(self.h, event.h)
-
-proc cQTableView_vtable_callback_viewportEvent(self: pointer, event: pointer): bool {.cdecl.} =
+proc fcQTableView_vtable_callback_viewportEvent(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QTableViewVTable](fcQTableView_vdata(self))
   let self = QTableView(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].viewportEvent(self, slotval1)
   virtualReturn
 
-proc QTableViewmousePressEvent*(self: gen_qtableview_types.QTableView, event: gen_qevent_types.QMouseEvent): void =
-  fcQTableView_virtualbase_mousePressEvent(self.h, event.h)
-
-proc cQTableView_vtable_callback_mousePressEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQTableView_vtable_callback_mousePressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTableViewVTable](fcQTableView_vdata(self))
   let self = QTableView(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mousePressEvent(self, slotval1)
 
-proc QTableViewmouseMoveEvent*(self: gen_qtableview_types.QTableView, event: gen_qevent_types.QMouseEvent): void =
-  fcQTableView_virtualbase_mouseMoveEvent(self.h, event.h)
-
-proc cQTableView_vtable_callback_mouseMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQTableView_vtable_callback_mouseMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTableViewVTable](fcQTableView_vdata(self))
   let self = QTableView(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseMoveEvent(self, slotval1)
 
-proc QTableViewmouseReleaseEvent*(self: gen_qtableview_types.QTableView, event: gen_qevent_types.QMouseEvent): void =
-  fcQTableView_virtualbase_mouseReleaseEvent(self.h, event.h)
-
-proc cQTableView_vtable_callback_mouseReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQTableView_vtable_callback_mouseReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTableViewVTable](fcQTableView_vdata(self))
   let self = QTableView(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseReleaseEvent(self, slotval1)
 
-proc QTableViewmouseDoubleClickEvent*(self: gen_qtableview_types.QTableView, event: gen_qevent_types.QMouseEvent): void =
-  fcQTableView_virtualbase_mouseDoubleClickEvent(self.h, event.h)
-
-proc cQTableView_vtable_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQTableView_vtable_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTableViewVTable](fcQTableView_vdata(self))
   let self = QTableView(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseDoubleClickEvent(self, slotval1)
 
-proc QTableViewdragEnterEvent*(self: gen_qtableview_types.QTableView, event: gen_qevent_types.QDragEnterEvent): void =
-  fcQTableView_virtualbase_dragEnterEvent(self.h, event.h)
-
-proc cQTableView_vtable_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQTableView_vtable_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTableViewVTable](fcQTableView_vdata(self))
   let self = QTableView(h: self)
   let slotval1 = gen_qevent_types.QDragEnterEvent(h: event, owned: false)
   vtbl[].dragEnterEvent(self, slotval1)
 
-proc QTableViewdragMoveEvent*(self: gen_qtableview_types.QTableView, event: gen_qevent_types.QDragMoveEvent): void =
-  fcQTableView_virtualbase_dragMoveEvent(self.h, event.h)
-
-proc cQTableView_vtable_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQTableView_vtable_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTableViewVTable](fcQTableView_vdata(self))
   let self = QTableView(h: self)
   let slotval1 = gen_qevent_types.QDragMoveEvent(h: event, owned: false)
   vtbl[].dragMoveEvent(self, slotval1)
 
-proc QTableViewdragLeaveEvent*(self: gen_qtableview_types.QTableView, event: gen_qevent_types.QDragLeaveEvent): void =
-  fcQTableView_virtualbase_dragLeaveEvent(self.h, event.h)
-
-proc cQTableView_vtable_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQTableView_vtable_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTableViewVTable](fcQTableView_vdata(self))
   let self = QTableView(h: self)
   let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event, owned: false)
   vtbl[].dragLeaveEvent(self, slotval1)
 
-proc QTableViewdropEvent*(self: gen_qtableview_types.QTableView, event: gen_qevent_types.QDropEvent): void =
-  fcQTableView_virtualbase_dropEvent(self.h, event.h)
-
-proc cQTableView_vtable_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQTableView_vtable_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTableViewVTable](fcQTableView_vdata(self))
   let self = QTableView(h: self)
   let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
   vtbl[].dropEvent(self, slotval1)
 
-proc QTableViewfocusInEvent*(self: gen_qtableview_types.QTableView, event: gen_qevent_types.QFocusEvent): void =
-  fcQTableView_virtualbase_focusInEvent(self.h, event.h)
-
-proc cQTableView_vtable_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQTableView_vtable_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTableViewVTable](fcQTableView_vdata(self))
   let self = QTableView(h: self)
   let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusInEvent(self, slotval1)
 
-proc QTableViewfocusOutEvent*(self: gen_qtableview_types.QTableView, event: gen_qevent_types.QFocusEvent): void =
-  fcQTableView_virtualbase_focusOutEvent(self.h, event.h)
-
-proc cQTableView_vtable_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQTableView_vtable_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTableViewVTable](fcQTableView_vdata(self))
   let self = QTableView(h: self)
   let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusOutEvent(self, slotval1)
 
-proc QTableViewkeyPressEvent*(self: gen_qtableview_types.QTableView, event: gen_qevent_types.QKeyEvent): void =
-  fcQTableView_virtualbase_keyPressEvent(self.h, event.h)
-
-proc cQTableView_vtable_callback_keyPressEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQTableView_vtable_callback_keyPressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTableViewVTable](fcQTableView_vdata(self))
   let self = QTableView(h: self)
   let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   vtbl[].keyPressEvent(self, slotval1)
 
-proc QTableViewresizeEvent*(self: gen_qtableview_types.QTableView, event: gen_qevent_types.QResizeEvent): void =
-  fcQTableView_virtualbase_resizeEvent(self.h, event.h)
-
-proc cQTableView_vtable_callback_resizeEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQTableView_vtable_callback_resizeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTableViewVTable](fcQTableView_vdata(self))
   let self = QTableView(h: self)
   let slotval1 = gen_qevent_types.QResizeEvent(h: event, owned: false)
   vtbl[].resizeEvent(self, slotval1)
 
-proc QTableViewinputMethodEvent*(self: gen_qtableview_types.QTableView, event: gen_qevent_types.QInputMethodEvent): void =
-  fcQTableView_virtualbase_inputMethodEvent(self.h, event.h)
-
-proc cQTableView_vtable_callback_inputMethodEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQTableView_vtable_callback_inputMethodEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTableViewVTable](fcQTableView_vdata(self))
   let self = QTableView(h: self)
   let slotval1 = gen_qevent_types.QInputMethodEvent(h: event, owned: false)
   vtbl[].inputMethodEvent(self, slotval1)
 
-proc QTableVieweventFilter*(self: gen_qtableview_types.QTableView, objectVal: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
-  fcQTableView_virtualbase_eventFilter(self.h, objectVal.h, event.h)
-
-proc cQTableView_vtable_callback_eventFilter(self: pointer, objectVal: pointer, event: pointer): bool {.cdecl.} =
+proc fcQTableView_vtable_callback_eventFilter(self: pointer, objectVal: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QTableViewVTable](fcQTableView_vdata(self))
   let self = QTableView(h: self)
   let slotval1 = gen_qobject_types.QObject(h: objectVal, owned: false)
@@ -1392,10 +1483,7 @@ proc cQTableView_vtable_callback_eventFilter(self: pointer, objectVal: pointer, 
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
-proc QTableViewminimumSizeHint*(self: gen_qtableview_types.QTableView): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQTableView_virtualbase_minimumSizeHint(self.h), owned: true)
-
-proc cQTableView_vtable_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
+proc fcQTableView_vtable_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QTableViewVTable](fcQTableView_vdata(self))
   let self = QTableView(h: self)
   var virtualReturn = vtbl[].minimumSizeHint(self)
@@ -1404,10 +1492,7 @@ proc cQTableView_vtable_callback_minimumSizeHint(self: pointer): pointer {.cdecl
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QTableViewsizeHint*(self: gen_qtableview_types.QTableView): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQTableView_virtualbase_sizeHint(self.h), owned: true)
-
-proc cQTableView_vtable_callback_sizeHint(self: pointer): pointer {.cdecl.} =
+proc fcQTableView_vtable_callback_sizeHint(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QTableViewVTable](fcQTableView_vdata(self))
   let self = QTableView(h: self)
   var virtualReturn = vtbl[].sizeHint(self)
@@ -1416,83 +1501,56 @@ proc cQTableView_vtable_callback_sizeHint(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QTableViewsetupViewport*(self: gen_qtableview_types.QTableView, viewport: gen_qwidget_types.QWidget): void =
-  fcQTableView_virtualbase_setupViewport(self.h, viewport.h)
-
-proc cQTableView_vtable_callback_setupViewport(self: pointer, viewport: pointer): void {.cdecl.} =
+proc fcQTableView_vtable_callback_setupViewport(self: pointer, viewport: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTableViewVTable](fcQTableView_vdata(self))
   let self = QTableView(h: self)
   let slotval1 = gen_qwidget_types.QWidget(h: viewport, owned: false)
   vtbl[].setupViewport(self, slotval1)
 
-proc QTableViewwheelEvent*(self: gen_qtableview_types.QTableView, param1: gen_qevent_types.QWheelEvent): void =
-  fcQTableView_virtualbase_wheelEvent(self.h, param1.h)
-
-proc cQTableView_vtable_callback_wheelEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQTableView_vtable_callback_wheelEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTableViewVTable](fcQTableView_vdata(self))
   let self = QTableView(h: self)
   let slotval1 = gen_qevent_types.QWheelEvent(h: param1, owned: false)
   vtbl[].wheelEvent(self, slotval1)
 
-proc QTableViewcontextMenuEvent*(self: gen_qtableview_types.QTableView, param1: gen_qevent_types.QContextMenuEvent): void =
-  fcQTableView_virtualbase_contextMenuEvent(self.h, param1.h)
-
-proc cQTableView_vtable_callback_contextMenuEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQTableView_vtable_callback_contextMenuEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTableViewVTable](fcQTableView_vdata(self))
   let self = QTableView(h: self)
   let slotval1 = gen_qevent_types.QContextMenuEvent(h: param1, owned: false)
   vtbl[].contextMenuEvent(self, slotval1)
 
-proc QTableViewchangeEvent*(self: gen_qtableview_types.QTableView, param1: gen_qcoreevent_types.QEvent): void =
-  fcQTableView_virtualbase_changeEvent(self.h, param1.h)
-
-proc cQTableView_vtable_callback_changeEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQTableView_vtable_callback_changeEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTableViewVTable](fcQTableView_vdata(self))
   let self = QTableView(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
   vtbl[].changeEvent(self, slotval1)
 
-proc QTableViewdevType*(self: gen_qtableview_types.QTableView): cint =
-  fcQTableView_virtualbase_devType(self.h)
-
-proc cQTableView_vtable_callback_devType(self: pointer): cint {.cdecl.} =
+proc fcQTableView_vtable_callback_devType(self: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QTableViewVTable](fcQTableView_vdata(self))
   let self = QTableView(h: self)
   var virtualReturn = vtbl[].devType(self)
   virtualReturn
 
-proc QTableViewsetVisible*(self: gen_qtableview_types.QTableView, visible: bool): void =
-  fcQTableView_virtualbase_setVisible(self.h, visible)
-
-proc cQTableView_vtable_callback_setVisible(self: pointer, visible: bool): void {.cdecl.} =
+proc fcQTableView_vtable_callback_setVisible(self: pointer, visible: bool): void {.cdecl.} =
   let vtbl = cast[ptr QTableViewVTable](fcQTableView_vdata(self))
   let self = QTableView(h: self)
   let slotval1 = visible
   vtbl[].setVisible(self, slotval1)
 
-proc QTableViewheightForWidth*(self: gen_qtableview_types.QTableView, param1: cint): cint =
-  fcQTableView_virtualbase_heightForWidth(self.h, param1)
-
-proc cQTableView_vtable_callback_heightForWidth(self: pointer, param1: cint): cint {.cdecl.} =
+proc fcQTableView_vtable_callback_heightForWidth(self: pointer, param1: cint): cint {.cdecl.} =
   let vtbl = cast[ptr QTableViewVTable](fcQTableView_vdata(self))
   let self = QTableView(h: self)
   let slotval1 = param1
   var virtualReturn = vtbl[].heightForWidth(self, slotval1)
   virtualReturn
 
-proc QTableViewhasHeightForWidth*(self: gen_qtableview_types.QTableView): bool =
-  fcQTableView_virtualbase_hasHeightForWidth(self.h)
-
-proc cQTableView_vtable_callback_hasHeightForWidth(self: pointer): bool {.cdecl.} =
+proc fcQTableView_vtable_callback_hasHeightForWidth(self: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QTableViewVTable](fcQTableView_vdata(self))
   let self = QTableView(h: self)
   var virtualReturn = vtbl[].hasHeightForWidth(self)
   virtualReturn
 
-proc QTableViewpaintEngine*(self: gen_qtableview_types.QTableView): gen_qpaintengine_types.QPaintEngine =
-  gen_qpaintengine_types.QPaintEngine(h: fcQTableView_virtualbase_paintEngine(self.h), owned: false)
-
-proc cQTableView_vtable_callback_paintEngine(self: pointer): pointer {.cdecl.} =
+proc fcQTableView_vtable_callback_paintEngine(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QTableViewVTable](fcQTableView_vdata(self))
   let self = QTableView(h: self)
   var virtualReturn = vtbl[].paintEngine(self)
@@ -1501,91 +1559,61 @@ proc cQTableView_vtable_callback_paintEngine(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QTableViewkeyReleaseEvent*(self: gen_qtableview_types.QTableView, event: gen_qevent_types.QKeyEvent): void =
-  fcQTableView_virtualbase_keyReleaseEvent(self.h, event.h)
-
-proc cQTableView_vtable_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQTableView_vtable_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTableViewVTable](fcQTableView_vdata(self))
   let self = QTableView(h: self)
   let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   vtbl[].keyReleaseEvent(self, slotval1)
 
-proc QTableViewenterEvent*(self: gen_qtableview_types.QTableView, event: gen_qcoreevent_types.QEvent): void =
-  fcQTableView_virtualbase_enterEvent(self.h, event.h)
-
-proc cQTableView_vtable_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQTableView_vtable_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTableViewVTable](fcQTableView_vdata(self))
   let self = QTableView(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].enterEvent(self, slotval1)
 
-proc QTableViewleaveEvent*(self: gen_qtableview_types.QTableView, event: gen_qcoreevent_types.QEvent): void =
-  fcQTableView_virtualbase_leaveEvent(self.h, event.h)
-
-proc cQTableView_vtable_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQTableView_vtable_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTableViewVTable](fcQTableView_vdata(self))
   let self = QTableView(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].leaveEvent(self, slotval1)
 
-proc QTableViewmoveEvent*(self: gen_qtableview_types.QTableView, event: gen_qevent_types.QMoveEvent): void =
-  fcQTableView_virtualbase_moveEvent(self.h, event.h)
-
-proc cQTableView_vtable_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQTableView_vtable_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTableViewVTable](fcQTableView_vdata(self))
   let self = QTableView(h: self)
   let slotval1 = gen_qevent_types.QMoveEvent(h: event, owned: false)
   vtbl[].moveEvent(self, slotval1)
 
-proc QTableViewcloseEvent*(self: gen_qtableview_types.QTableView, event: gen_qevent_types.QCloseEvent): void =
-  fcQTableView_virtualbase_closeEvent(self.h, event.h)
-
-proc cQTableView_vtable_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQTableView_vtable_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTableViewVTable](fcQTableView_vdata(self))
   let self = QTableView(h: self)
   let slotval1 = gen_qevent_types.QCloseEvent(h: event, owned: false)
   vtbl[].closeEvent(self, slotval1)
 
-proc QTableViewtabletEvent*(self: gen_qtableview_types.QTableView, event: gen_qevent_types.QTabletEvent): void =
-  fcQTableView_virtualbase_tabletEvent(self.h, event.h)
-
-proc cQTableView_vtable_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQTableView_vtable_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTableViewVTable](fcQTableView_vdata(self))
   let self = QTableView(h: self)
   let slotval1 = gen_qevent_types.QTabletEvent(h: event, owned: false)
   vtbl[].tabletEvent(self, slotval1)
 
-proc QTableViewactionEvent*(self: gen_qtableview_types.QTableView, event: gen_qevent_types.QActionEvent): void =
-  fcQTableView_virtualbase_actionEvent(self.h, event.h)
-
-proc cQTableView_vtable_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQTableView_vtable_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTableViewVTable](fcQTableView_vdata(self))
   let self = QTableView(h: self)
   let slotval1 = gen_qevent_types.QActionEvent(h: event, owned: false)
   vtbl[].actionEvent(self, slotval1)
 
-proc QTableViewshowEvent*(self: gen_qtableview_types.QTableView, event: gen_qevent_types.QShowEvent): void =
-  fcQTableView_virtualbase_showEvent(self.h, event.h)
-
-proc cQTableView_vtable_callback_showEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQTableView_vtable_callback_showEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTableViewVTable](fcQTableView_vdata(self))
   let self = QTableView(h: self)
   let slotval1 = gen_qevent_types.QShowEvent(h: event, owned: false)
   vtbl[].showEvent(self, slotval1)
 
-proc QTableViewhideEvent*(self: gen_qtableview_types.QTableView, event: gen_qevent_types.QHideEvent): void =
-  fcQTableView_virtualbase_hideEvent(self.h, event.h)
-
-proc cQTableView_vtable_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQTableView_vtable_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTableViewVTable](fcQTableView_vdata(self))
   let self = QTableView(h: self)
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   vtbl[].hideEvent(self, slotval1)
 
-proc QTableViewnativeEvent*(self: gen_qtableview_types.QTableView, eventType: openArray[byte], message: pointer, resultVal: ptr clong): bool =
-  fcQTableView_virtualbase_nativeEvent(self.h, struct_miqt_string(data: cast[cstring](if len(eventType) == 0: nil else: unsafeAddr eventType[0]), len: csize_t(len(eventType))), message, resultVal)
-
-proc cQTableView_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr clong): bool {.cdecl.} =
+proc fcQTableView_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr clong): bool {.cdecl.} =
   let vtbl = cast[ptr QTableViewVTable](fcQTableView_vdata(self))
   let self = QTableView(h: self)
   var veventType_bytearray = eventType
@@ -1597,29 +1625,20 @@ proc cQTableView_vtable_callback_nativeEvent(self: pointer, eventType: struct_mi
   var virtualReturn = vtbl[].nativeEvent(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QTableViewmetric*(self: gen_qtableview_types.QTableView, param1: cint): cint =
-  fcQTableView_virtualbase_metric(self.h, cint(param1))
-
-proc cQTableView_vtable_callback_metric(self: pointer, param1: cint): cint {.cdecl.} =
+proc fcQTableView_vtable_callback_metric(self: pointer, param1: cint): cint {.cdecl.} =
   let vtbl = cast[ptr QTableViewVTable](fcQTableView_vdata(self))
   let self = QTableView(h: self)
   let slotval1 = cint(param1)
   var virtualReturn = vtbl[].metric(self, slotval1)
   virtualReturn
 
-proc QTableViewinitPainter*(self: gen_qtableview_types.QTableView, painter: gen_qpainter_types.QPainter): void =
-  fcQTableView_virtualbase_initPainter(self.h, painter.h)
-
-proc cQTableView_vtable_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
+proc fcQTableView_vtable_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTableViewVTable](fcQTableView_vdata(self))
   let self = QTableView(h: self)
   let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
   vtbl[].initPainter(self, slotval1)
 
-proc QTableViewredirected*(self: gen_qtableview_types.QTableView, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice =
-  gen_qpaintdevice_types.QPaintDevice(h: fcQTableView_virtualbase_redirected(self.h, offset.h), owned: false)
-
-proc cQTableView_vtable_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
+proc fcQTableView_vtable_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QTableViewVTable](fcQTableView_vdata(self))
   let self = QTableView(h: self)
   let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
@@ -1629,10 +1648,7 @@ proc cQTableView_vtable_callback_redirected(self: pointer, offset: pointer): poi
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QTableViewsharedPainter*(self: gen_qtableview_types.QTableView): gen_qpainter_types.QPainter =
-  gen_qpainter_types.QPainter(h: fcQTableView_virtualbase_sharedPainter(self.h), owned: false)
-
-proc cQTableView_vtable_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
+proc fcQTableView_vtable_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QTableViewVTable](fcQTableView_vdata(self))
   let self = QTableView(h: self)
   var virtualReturn = vtbl[].sharedPainter(self)
@@ -1641,37 +1657,25 @@ proc cQTableView_vtable_callback_sharedPainter(self: pointer): pointer {.cdecl.}
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QTableViewchildEvent*(self: gen_qtableview_types.QTableView, event: gen_qcoreevent_types.QChildEvent): void =
-  fcQTableView_virtualbase_childEvent(self.h, event.h)
-
-proc cQTableView_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQTableView_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTableViewVTable](fcQTableView_vdata(self))
   let self = QTableView(h: self)
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
-proc QTableViewcustomEvent*(self: gen_qtableview_types.QTableView, event: gen_qcoreevent_types.QEvent): void =
-  fcQTableView_virtualbase_customEvent(self.h, event.h)
-
-proc cQTableView_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQTableView_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTableViewVTable](fcQTableView_vdata(self))
   let self = QTableView(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
-proc QTableViewconnectNotify*(self: gen_qtableview_types.QTableView, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQTableView_virtualbase_connectNotify(self.h, signal.h)
-
-proc cQTableView_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQTableView_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTableViewVTable](fcQTableView_vdata(self))
   let self = QTableView(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
-proc QTableViewdisconnectNotify*(self: gen_qtableview_types.QTableView, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQTableView_virtualbase_disconnectNotify(self.h, signal.h)
-
-proc cQTableView_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQTableView_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTableViewVTable](fcQTableView_vdata(self))
   let self = QTableView(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
@@ -1679,9 +1683,193 @@ proc cQTableView_vtable_callback_disconnectNotify(self: pointer, signal: pointer
 
 type VirtualQTableView* {.inheritable.} = ref object of QTableView
   vtbl*: cQTableViewVTable
+
 method metaObject*(self: VirtualQTableView): gen_qobjectdefs_types.QMetaObject {.base.} =
   QTableViewmetaObject(self[])
-proc cQTableView_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
+method metacast*(self: VirtualQTableView, param1: cstring): pointer {.base.} =
+  QTableViewmetacast(self[], param1)
+method metacall*(self: VirtualQTableView, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QTableViewmetacall(self[], param1, param2, param3)
+method setModel*(self: VirtualQTableView, model: gen_qabstractitemmodel_types.QAbstractItemModel): void {.base.} =
+  QTableViewsetModel(self[], model)
+method setRootIndex*(self: VirtualQTableView, index: gen_qabstractitemmodel_types.QModelIndex): void {.base.} =
+  QTableViewsetRootIndex(self[], index)
+method setSelectionModel*(self: VirtualQTableView, selectionModel: gen_qitemselectionmodel_types.QItemSelectionModel): void {.base.} =
+  QTableViewsetSelectionModel(self[], selectionModel)
+method doItemsLayout*(self: VirtualQTableView): void {.base.} =
+  QTableViewdoItemsLayout(self[])
+method visualRect*(self: VirtualQTableView, index: gen_qabstractitemmodel_types.QModelIndex): gen_qrect_types.QRect {.base.} =
+  QTableViewvisualRect(self[], index)
+method scrollTo*(self: VirtualQTableView, index: gen_qabstractitemmodel_types.QModelIndex, hint: cint): void {.base.} =
+  QTableViewscrollTo(self[], index, hint)
+method indexAt*(self: VirtualQTableView, p: gen_qpoint_types.QPoint): gen_qabstractitemmodel_types.QModelIndex {.base.} =
+  QTableViewindexAt(self[], p)
+method scrollContentsBy*(self: VirtualQTableView, dx: cint, dy: cint): void {.base.} =
+  QTableViewscrollContentsBy(self[], dx, dy)
+method viewOptions*(self: VirtualQTableView): gen_qstyleoption_types.QStyleOptionViewItem {.base.} =
+  QTableViewviewOptions(self[])
+method paintEvent*(self: VirtualQTableView, e: gen_qevent_types.QPaintEvent): void {.base.} =
+  QTableViewpaintEvent(self[], e)
+method timerEvent*(self: VirtualQTableView, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QTableViewtimerEvent(self[], event)
+method horizontalOffset*(self: VirtualQTableView): cint {.base.} =
+  QTableViewhorizontalOffset(self[])
+method verticalOffset*(self: VirtualQTableView): cint {.base.} =
+  QTableViewverticalOffset(self[])
+method moveCursor*(self: VirtualQTableView, cursorAction: cint, modifiers: cint): gen_qabstractitemmodel_types.QModelIndex {.base.} =
+  QTableViewmoveCursor(self[], cursorAction, modifiers)
+method setSelection*(self: VirtualQTableView, rect: gen_qrect_types.QRect, command: cint): void {.base.} =
+  QTableViewsetSelection(self[], rect, command)
+method visualRegionForSelection*(self: VirtualQTableView, selection: gen_qitemselectionmodel_types.QItemSelection): gen_qregion_types.QRegion {.base.} =
+  QTableViewvisualRegionForSelection(self[], selection)
+method selectedIndexes*(self: VirtualQTableView): seq[gen_qabstractitemmodel_types.QModelIndex] {.base.} =
+  QTableViewselectedIndexes(self[])
+method updateGeometries*(self: VirtualQTableView): void {.base.} =
+  QTableViewupdateGeometries(self[])
+method viewportSizeHint*(self: VirtualQTableView): gen_qsize_types.QSize {.base.} =
+  QTableViewviewportSizeHint(self[])
+method sizeHintForRow*(self: VirtualQTableView, row: cint): cint {.base.} =
+  QTableViewsizeHintForRow(self[], row)
+method sizeHintForColumn*(self: VirtualQTableView, column: cint): cint {.base.} =
+  QTableViewsizeHintForColumn(self[], column)
+method verticalScrollbarAction*(self: VirtualQTableView, action: cint): void {.base.} =
+  QTableViewverticalScrollbarAction(self[], action)
+method horizontalScrollbarAction*(self: VirtualQTableView, action: cint): void {.base.} =
+  QTableViewhorizontalScrollbarAction(self[], action)
+method isIndexHidden*(self: VirtualQTableView, index: gen_qabstractitemmodel_types.QModelIndex): bool {.base.} =
+  QTableViewisIndexHidden(self[], index)
+method selectionChanged*(self: VirtualQTableView, selected: gen_qitemselectionmodel_types.QItemSelection, deselected: gen_qitemselectionmodel_types.QItemSelection): void {.base.} =
+  QTableViewselectionChanged(self[], selected, deselected)
+method currentChanged*(self: VirtualQTableView, current: gen_qabstractitemmodel_types.QModelIndex, previous: gen_qabstractitemmodel_types.QModelIndex): void {.base.} =
+  QTableViewcurrentChanged(self[], current, previous)
+method keyboardSearch*(self: VirtualQTableView, search: openArray[char]): void {.base.} =
+  QTableViewkeyboardSearch(self[], search)
+method inputMethodQuery*(self: VirtualQTableView, query: cint): gen_qvariant_types.QVariant {.base.} =
+  QTableViewinputMethodQuery(self[], query)
+method reset*(self: VirtualQTableView): void {.base.} =
+  QTableViewreset(self[])
+method selectAll*(self: VirtualQTableView): void {.base.} =
+  QTableViewselectAll(self[])
+method dataChanged*(self: VirtualQTableView, topLeft: gen_qabstractitemmodel_types.QModelIndex, bottomRight: gen_qabstractitemmodel_types.QModelIndex, roles: openArray[cint]): void {.base.} =
+  QTableViewdataChanged(self[], topLeft, bottomRight, roles)
+method rowsInserted*(self: VirtualQTableView, parent: gen_qabstractitemmodel_types.QModelIndex, start: cint, endVal: cint): void {.base.} =
+  QTableViewrowsInserted(self[], parent, start, endVal)
+method rowsAboutToBeRemoved*(self: VirtualQTableView, parent: gen_qabstractitemmodel_types.QModelIndex, start: cint, endVal: cint): void {.base.} =
+  QTableViewrowsAboutToBeRemoved(self[], parent, start, endVal)
+method updateEditorData*(self: VirtualQTableView): void {.base.} =
+  QTableViewupdateEditorData(self[])
+method updateEditorGeometries*(self: VirtualQTableView): void {.base.} =
+  QTableViewupdateEditorGeometries(self[])
+method verticalScrollbarValueChanged*(self: VirtualQTableView, value: cint): void {.base.} =
+  QTableViewverticalScrollbarValueChanged(self[], value)
+method horizontalScrollbarValueChanged*(self: VirtualQTableView, value: cint): void {.base.} =
+  QTableViewhorizontalScrollbarValueChanged(self[], value)
+method closeEditor*(self: VirtualQTableView, editor: gen_qwidget_types.QWidget, hint: cint): void {.base.} =
+  QTableViewcloseEditor(self[], editor, hint)
+method commitData*(self: VirtualQTableView, editor: gen_qwidget_types.QWidget): void {.base.} =
+  QTableViewcommitData(self[], editor)
+method editorDestroyed*(self: VirtualQTableView, editor: gen_qobject_types.QObject): void {.base.} =
+  QTableVieweditorDestroyed(self[], editor)
+method edit*(self: VirtualQTableView, index: gen_qabstractitemmodel_types.QModelIndex, trigger: cint, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QTableViewedit(self[], index, trigger, event)
+method selectionCommand*(self: VirtualQTableView, index: gen_qabstractitemmodel_types.QModelIndex, event: gen_qcoreevent_types.QEvent): cint {.base.} =
+  QTableViewselectionCommand(self[], index, event)
+method startDrag*(self: VirtualQTableView, supportedActions: cint): void {.base.} =
+  QTableViewstartDrag(self[], supportedActions)
+method focusNextPrevChild*(self: VirtualQTableView, next: bool): bool {.base.} =
+  QTableViewfocusNextPrevChild(self[], next)
+method event*(self: VirtualQTableView, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QTableViewevent(self[], event)
+method viewportEvent*(self: VirtualQTableView, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QTableViewviewportEvent(self[], event)
+method mousePressEvent*(self: VirtualQTableView, event: gen_qevent_types.QMouseEvent): void {.base.} =
+  QTableViewmousePressEvent(self[], event)
+method mouseMoveEvent*(self: VirtualQTableView, event: gen_qevent_types.QMouseEvent): void {.base.} =
+  QTableViewmouseMoveEvent(self[], event)
+method mouseReleaseEvent*(self: VirtualQTableView, event: gen_qevent_types.QMouseEvent): void {.base.} =
+  QTableViewmouseReleaseEvent(self[], event)
+method mouseDoubleClickEvent*(self: VirtualQTableView, event: gen_qevent_types.QMouseEvent): void {.base.} =
+  QTableViewmouseDoubleClickEvent(self[], event)
+method dragEnterEvent*(self: VirtualQTableView, event: gen_qevent_types.QDragEnterEvent): void {.base.} =
+  QTableViewdragEnterEvent(self[], event)
+method dragMoveEvent*(self: VirtualQTableView, event: gen_qevent_types.QDragMoveEvent): void {.base.} =
+  QTableViewdragMoveEvent(self[], event)
+method dragLeaveEvent*(self: VirtualQTableView, event: gen_qevent_types.QDragLeaveEvent): void {.base.} =
+  QTableViewdragLeaveEvent(self[], event)
+method dropEvent*(self: VirtualQTableView, event: gen_qevent_types.QDropEvent): void {.base.} =
+  QTableViewdropEvent(self[], event)
+method focusInEvent*(self: VirtualQTableView, event: gen_qevent_types.QFocusEvent): void {.base.} =
+  QTableViewfocusInEvent(self[], event)
+method focusOutEvent*(self: VirtualQTableView, event: gen_qevent_types.QFocusEvent): void {.base.} =
+  QTableViewfocusOutEvent(self[], event)
+method keyPressEvent*(self: VirtualQTableView, event: gen_qevent_types.QKeyEvent): void {.base.} =
+  QTableViewkeyPressEvent(self[], event)
+method resizeEvent*(self: VirtualQTableView, event: gen_qevent_types.QResizeEvent): void {.base.} =
+  QTableViewresizeEvent(self[], event)
+method inputMethodEvent*(self: VirtualQTableView, event: gen_qevent_types.QInputMethodEvent): void {.base.} =
+  QTableViewinputMethodEvent(self[], event)
+method eventFilter*(self: VirtualQTableView, objectVal: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QTableVieweventFilter(self[], objectVal, event)
+method minimumSizeHint*(self: VirtualQTableView): gen_qsize_types.QSize {.base.} =
+  QTableViewminimumSizeHint(self[])
+method sizeHint*(self: VirtualQTableView): gen_qsize_types.QSize {.base.} =
+  QTableViewsizeHint(self[])
+method setupViewport*(self: VirtualQTableView, viewport: gen_qwidget_types.QWidget): void {.base.} =
+  QTableViewsetupViewport(self[], viewport)
+method wheelEvent*(self: VirtualQTableView, param1: gen_qevent_types.QWheelEvent): void {.base.} =
+  QTableViewwheelEvent(self[], param1)
+method contextMenuEvent*(self: VirtualQTableView, param1: gen_qevent_types.QContextMenuEvent): void {.base.} =
+  QTableViewcontextMenuEvent(self[], param1)
+method changeEvent*(self: VirtualQTableView, param1: gen_qcoreevent_types.QEvent): void {.base.} =
+  QTableViewchangeEvent(self[], param1)
+method devType*(self: VirtualQTableView): cint {.base.} =
+  QTableViewdevType(self[])
+method setVisible*(self: VirtualQTableView, visible: bool): void {.base.} =
+  QTableViewsetVisible(self[], visible)
+method heightForWidth*(self: VirtualQTableView, param1: cint): cint {.base.} =
+  QTableViewheightForWidth(self[], param1)
+method hasHeightForWidth*(self: VirtualQTableView): bool {.base.} =
+  QTableViewhasHeightForWidth(self[])
+method paintEngine*(self: VirtualQTableView): gen_qpaintengine_types.QPaintEngine {.base.} =
+  QTableViewpaintEngine(self[])
+method keyReleaseEvent*(self: VirtualQTableView, event: gen_qevent_types.QKeyEvent): void {.base.} =
+  QTableViewkeyReleaseEvent(self[], event)
+method enterEvent*(self: VirtualQTableView, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QTableViewenterEvent(self[], event)
+method leaveEvent*(self: VirtualQTableView, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QTableViewleaveEvent(self[], event)
+method moveEvent*(self: VirtualQTableView, event: gen_qevent_types.QMoveEvent): void {.base.} =
+  QTableViewmoveEvent(self[], event)
+method closeEvent*(self: VirtualQTableView, event: gen_qevent_types.QCloseEvent): void {.base.} =
+  QTableViewcloseEvent(self[], event)
+method tabletEvent*(self: VirtualQTableView, event: gen_qevent_types.QTabletEvent): void {.base.} =
+  QTableViewtabletEvent(self[], event)
+method actionEvent*(self: VirtualQTableView, event: gen_qevent_types.QActionEvent): void {.base.} =
+  QTableViewactionEvent(self[], event)
+method showEvent*(self: VirtualQTableView, event: gen_qevent_types.QShowEvent): void {.base.} =
+  QTableViewshowEvent(self[], event)
+method hideEvent*(self: VirtualQTableView, event: gen_qevent_types.QHideEvent): void {.base.} =
+  QTableViewhideEvent(self[], event)
+method nativeEvent*(self: VirtualQTableView, eventType: openArray[byte], message: pointer, resultVal: ptr clong): bool {.base.} =
+  QTableViewnativeEvent(self[], eventType, message, resultVal)
+method metric*(self: VirtualQTableView, param1: cint): cint {.base.} =
+  QTableViewmetric(self[], param1)
+method initPainter*(self: VirtualQTableView, painter: gen_qpainter_types.QPainter): void {.base.} =
+  QTableViewinitPainter(self[], painter)
+method redirected*(self: VirtualQTableView, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.base.} =
+  QTableViewredirected(self[], offset)
+method sharedPainter*(self: VirtualQTableView): gen_qpainter_types.QPainter {.base.} =
+  QTableViewsharedPainter(self[])
+method childEvent*(self: VirtualQTableView, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QTableViewchildEvent(self[], event)
+method customEvent*(self: VirtualQTableView, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QTableViewcustomEvent(self[], event)
+method connectNotify*(self: VirtualQTableView, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QTableViewconnectNotify(self[], signal)
+method disconnectNotify*(self: VirtualQTableView, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QTableViewdisconnectNotify(self[], signal)
+
+proc fcQTableView_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQTableView](fcQTableView_vdata(self))
   var virtualReturn = inst.metaObject()
   virtualReturn.owned = false # TODO move?
@@ -1689,17 +1877,13 @@ proc cQTableView_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-method metacast*(self: VirtualQTableView, param1: cstring): pointer {.base.} =
-  QTableViewmetacast(self[], param1)
-proc cQTableView_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+proc fcQTableView_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQTableView](fcQTableView_vdata(self))
   let slotval1 = (param1)
   var virtualReturn = inst.metacast(slotval1)
   virtualReturn
 
-method metacall*(self: VirtualQTableView, param1: cint, param2: cint, param3: pointer): cint {.base.} =
-  QTableViewmetacall(self[], param1, param2, param3)
-proc cQTableView_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+proc fcQTableView_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQTableView](fcQTableView_vdata(self))
   let slotval1 = cint(param1)
   let slotval2 = param2
@@ -1707,36 +1891,26 @@ proc cQTableView_method_callback_metacall(self: pointer, param1: cint, param2: c
   var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
-method setModel*(self: VirtualQTableView, model: gen_qabstractitemmodel_types.QAbstractItemModel): void {.base.} =
-  QTableViewsetModel(self[], model)
-proc cQTableView_method_callback_setModel(self: pointer, model: pointer): void {.cdecl.} =
+proc fcQTableView_method_callback_setModel(self: pointer, model: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTableView](fcQTableView_vdata(self))
   let slotval1 = gen_qabstractitemmodel_types.QAbstractItemModel(h: model, owned: false)
   inst.setModel(slotval1)
 
-method setRootIndex*(self: VirtualQTableView, index: gen_qabstractitemmodel_types.QModelIndex): void {.base.} =
-  QTableViewsetRootIndex(self[], index)
-proc cQTableView_method_callback_setRootIndex(self: pointer, index: pointer): void {.cdecl.} =
+proc fcQTableView_method_callback_setRootIndex(self: pointer, index: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTableView](fcQTableView_vdata(self))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   inst.setRootIndex(slotval1)
 
-method setSelectionModel*(self: VirtualQTableView, selectionModel: gen_qitemselectionmodel_types.QItemSelectionModel): void {.base.} =
-  QTableViewsetSelectionModel(self[], selectionModel)
-proc cQTableView_method_callback_setSelectionModel(self: pointer, selectionModel: pointer): void {.cdecl.} =
+proc fcQTableView_method_callback_setSelectionModel(self: pointer, selectionModel: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTableView](fcQTableView_vdata(self))
   let slotval1 = gen_qitemselectionmodel_types.QItemSelectionModel(h: selectionModel, owned: false)
   inst.setSelectionModel(slotval1)
 
-method doItemsLayout*(self: VirtualQTableView): void {.base.} =
-  QTableViewdoItemsLayout(self[])
-proc cQTableView_method_callback_doItemsLayout(self: pointer): void {.cdecl.} =
+proc fcQTableView_method_callback_doItemsLayout(self: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTableView](fcQTableView_vdata(self))
   inst.doItemsLayout()
 
-method visualRect*(self: VirtualQTableView, index: gen_qabstractitemmodel_types.QModelIndex): gen_qrect_types.QRect {.base.} =
-  QTableViewvisualRect(self[], index)
-proc cQTableView_method_callback_visualRect(self: pointer, index: pointer): pointer {.cdecl.} =
+proc fcQTableView_method_callback_visualRect(self: pointer, index: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQTableView](fcQTableView_vdata(self))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var virtualReturn = inst.visualRect(slotval1)
@@ -1745,17 +1919,13 @@ proc cQTableView_method_callback_visualRect(self: pointer, index: pointer): poin
   virtualReturn.h = nil
   virtualReturn_h
 
-method scrollTo*(self: VirtualQTableView, index: gen_qabstractitemmodel_types.QModelIndex, hint: cint): void {.base.} =
-  QTableViewscrollTo(self[], index, hint)
-proc cQTableView_method_callback_scrollTo(self: pointer, index: pointer, hint: cint): void {.cdecl.} =
+proc fcQTableView_method_callback_scrollTo(self: pointer, index: pointer, hint: cint): void {.cdecl.} =
   let inst = cast[VirtualQTableView](fcQTableView_vdata(self))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   let slotval2 = cint(hint)
   inst.scrollTo(slotval1, slotval2)
 
-method indexAt*(self: VirtualQTableView, p: gen_qpoint_types.QPoint): gen_qabstractitemmodel_types.QModelIndex {.base.} =
-  QTableViewindexAt(self[], p)
-proc cQTableView_method_callback_indexAt(self: pointer, p: pointer): pointer {.cdecl.} =
+proc fcQTableView_method_callback_indexAt(self: pointer, p: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQTableView](fcQTableView_vdata(self))
   let slotval1 = gen_qpoint_types.QPoint(h: p, owned: false)
   var virtualReturn = inst.indexAt(slotval1)
@@ -1764,17 +1934,13 @@ proc cQTableView_method_callback_indexAt(self: pointer, p: pointer): pointer {.c
   virtualReturn.h = nil
   virtualReturn_h
 
-method scrollContentsBy*(self: VirtualQTableView, dx: cint, dy: cint): void {.base.} =
-  QTableViewscrollContentsBy(self[], dx, dy)
-proc cQTableView_method_callback_scrollContentsBy(self: pointer, dx: cint, dy: cint): void {.cdecl.} =
+proc fcQTableView_method_callback_scrollContentsBy(self: pointer, dx: cint, dy: cint): void {.cdecl.} =
   let inst = cast[VirtualQTableView](fcQTableView_vdata(self))
   let slotval1 = dx
   let slotval2 = dy
   inst.scrollContentsBy(slotval1, slotval2)
 
-method viewOptions*(self: VirtualQTableView): gen_qstyleoption_types.QStyleOptionViewItem {.base.} =
-  QTableViewviewOptions(self[])
-proc cQTableView_method_callback_viewOptions(self: pointer): pointer {.cdecl.} =
+proc fcQTableView_method_callback_viewOptions(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQTableView](fcQTableView_vdata(self))
   var virtualReturn = inst.viewOptions()
   virtualReturn.owned = false # TODO move?
@@ -1782,37 +1948,27 @@ proc cQTableView_method_callback_viewOptions(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-method paintEvent*(self: VirtualQTableView, e: gen_qevent_types.QPaintEvent): void {.base.} =
-  QTableViewpaintEvent(self[], e)
-proc cQTableView_method_callback_paintEvent(self: pointer, e: pointer): void {.cdecl.} =
+proc fcQTableView_method_callback_paintEvent(self: pointer, e: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTableView](fcQTableView_vdata(self))
   let slotval1 = gen_qevent_types.QPaintEvent(h: e, owned: false)
   inst.paintEvent(slotval1)
 
-method timerEvent*(self: VirtualQTableView, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
-  QTableViewtimerEvent(self[], event)
-proc cQTableView_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQTableView_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTableView](fcQTableView_vdata(self))
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
-method horizontalOffset*(self: VirtualQTableView): cint {.base.} =
-  QTableViewhorizontalOffset(self[])
-proc cQTableView_method_callback_horizontalOffset(self: pointer): cint {.cdecl.} =
+proc fcQTableView_method_callback_horizontalOffset(self: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQTableView](fcQTableView_vdata(self))
   var virtualReturn = inst.horizontalOffset()
   virtualReturn
 
-method verticalOffset*(self: VirtualQTableView): cint {.base.} =
-  QTableViewverticalOffset(self[])
-proc cQTableView_method_callback_verticalOffset(self: pointer): cint {.cdecl.} =
+proc fcQTableView_method_callback_verticalOffset(self: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQTableView](fcQTableView_vdata(self))
   var virtualReturn = inst.verticalOffset()
   virtualReturn
 
-method moveCursor*(self: VirtualQTableView, cursorAction: cint, modifiers: cint): gen_qabstractitemmodel_types.QModelIndex {.base.} =
-  QTableViewmoveCursor(self[], cursorAction, modifiers)
-proc cQTableView_method_callback_moveCursor(self: pointer, cursorAction: cint, modifiers: cint): pointer {.cdecl.} =
+proc fcQTableView_method_callback_moveCursor(self: pointer, cursorAction: cint, modifiers: cint): pointer {.cdecl.} =
   let inst = cast[VirtualQTableView](fcQTableView_vdata(self))
   let slotval1 = cint(cursorAction)
   let slotval2 = cint(modifiers)
@@ -1822,17 +1978,13 @@ proc cQTableView_method_callback_moveCursor(self: pointer, cursorAction: cint, m
   virtualReturn.h = nil
   virtualReturn_h
 
-method setSelection*(self: VirtualQTableView, rect: gen_qrect_types.QRect, command: cint): void {.base.} =
-  QTableViewsetSelection(self[], rect, command)
-proc cQTableView_method_callback_setSelection(self: pointer, rect: pointer, command: cint): void {.cdecl.} =
+proc fcQTableView_method_callback_setSelection(self: pointer, rect: pointer, command: cint): void {.cdecl.} =
   let inst = cast[VirtualQTableView](fcQTableView_vdata(self))
   let slotval1 = gen_qrect_types.QRect(h: rect, owned: false)
   let slotval2 = cint(command)
   inst.setSelection(slotval1, slotval2)
 
-method visualRegionForSelection*(self: VirtualQTableView, selection: gen_qitemselectionmodel_types.QItemSelection): gen_qregion_types.QRegion {.base.} =
-  QTableViewvisualRegionForSelection(self[], selection)
-proc cQTableView_method_callback_visualRegionForSelection(self: pointer, selection: pointer): pointer {.cdecl.} =
+proc fcQTableView_method_callback_visualRegionForSelection(self: pointer, selection: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQTableView](fcQTableView_vdata(self))
   let slotval1 = gen_qitemselectionmodel_types.QItemSelection(h: selection, owned: false)
   var virtualReturn = inst.visualRegionForSelection(slotval1)
@@ -1841,9 +1993,7 @@ proc cQTableView_method_callback_visualRegionForSelection(self: pointer, selecti
   virtualReturn.h = nil
   virtualReturn_h
 
-method selectedIndexes*(self: VirtualQTableView): seq[gen_qabstractitemmodel_types.QModelIndex] {.base.} =
-  QTableViewselectedIndexes(self[])
-proc cQTableView_method_callback_selectedIndexes(self: pointer): struct_miqt_array {.cdecl.} =
+proc fcQTableView_method_callback_selectedIndexes(self: pointer): struct_miqt_array {.cdecl.} =
   let inst = cast[VirtualQTableView](fcQTableView_vdata(self))
   var virtualReturn = inst.selectedIndexes()
   var virtualReturn_CArray = cast[ptr UncheckedArray[pointer]](if len(virtualReturn) > 0: c_malloc(c_sizet(sizeof(pointer) * len(virtualReturn))) else: nil)
@@ -1855,15 +2005,11 @@ proc cQTableView_method_callback_selectedIndexes(self: pointer): struct_miqt_arr
 
   struct_miqt_array(len: csize_t(len(virtualReturn)), data: if len(virtualReturn) == 0: nil else: addr(virtualReturn_CArray[0]))
 
-method updateGeometries*(self: VirtualQTableView): void {.base.} =
-  QTableViewupdateGeometries(self[])
-proc cQTableView_method_callback_updateGeometries(self: pointer): void {.cdecl.} =
+proc fcQTableView_method_callback_updateGeometries(self: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTableView](fcQTableView_vdata(self))
   inst.updateGeometries()
 
-method viewportSizeHint*(self: VirtualQTableView): gen_qsize_types.QSize {.base.} =
-  QTableViewviewportSizeHint(self[])
-proc cQTableView_method_callback_viewportSizeHint(self: pointer): pointer {.cdecl.} =
+proc fcQTableView_method_callback_viewportSizeHint(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQTableView](fcQTableView_vdata(self))
   var virtualReturn = inst.viewportSizeHint()
   virtualReturn.owned = false # TODO move?
@@ -1871,63 +2017,47 @@ proc cQTableView_method_callback_viewportSizeHint(self: pointer): pointer {.cdec
   virtualReturn.h = nil
   virtualReturn_h
 
-method sizeHintForRow*(self: VirtualQTableView, row: cint): cint {.base.} =
-  QTableViewsizeHintForRow(self[], row)
-proc cQTableView_method_callback_sizeHintForRow(self: pointer, row: cint): cint {.cdecl.} =
+proc fcQTableView_method_callback_sizeHintForRow(self: pointer, row: cint): cint {.cdecl.} =
   let inst = cast[VirtualQTableView](fcQTableView_vdata(self))
   let slotval1 = row
   var virtualReturn = inst.sizeHintForRow(slotval1)
   virtualReturn
 
-method sizeHintForColumn*(self: VirtualQTableView, column: cint): cint {.base.} =
-  QTableViewsizeHintForColumn(self[], column)
-proc cQTableView_method_callback_sizeHintForColumn(self: pointer, column: cint): cint {.cdecl.} =
+proc fcQTableView_method_callback_sizeHintForColumn(self: pointer, column: cint): cint {.cdecl.} =
   let inst = cast[VirtualQTableView](fcQTableView_vdata(self))
   let slotval1 = column
   var virtualReturn = inst.sizeHintForColumn(slotval1)
   virtualReturn
 
-method verticalScrollbarAction*(self: VirtualQTableView, action: cint): void {.base.} =
-  QTableViewverticalScrollbarAction(self[], action)
-proc cQTableView_method_callback_verticalScrollbarAction(self: pointer, action: cint): void {.cdecl.} =
+proc fcQTableView_method_callback_verticalScrollbarAction(self: pointer, action: cint): void {.cdecl.} =
   let inst = cast[VirtualQTableView](fcQTableView_vdata(self))
   let slotval1 = action
   inst.verticalScrollbarAction(slotval1)
 
-method horizontalScrollbarAction*(self: VirtualQTableView, action: cint): void {.base.} =
-  QTableViewhorizontalScrollbarAction(self[], action)
-proc cQTableView_method_callback_horizontalScrollbarAction(self: pointer, action: cint): void {.cdecl.} =
+proc fcQTableView_method_callback_horizontalScrollbarAction(self: pointer, action: cint): void {.cdecl.} =
   let inst = cast[VirtualQTableView](fcQTableView_vdata(self))
   let slotval1 = action
   inst.horizontalScrollbarAction(slotval1)
 
-method isIndexHidden*(self: VirtualQTableView, index: gen_qabstractitemmodel_types.QModelIndex): bool {.base.} =
-  QTableViewisIndexHidden(self[], index)
-proc cQTableView_method_callback_isIndexHidden(self: pointer, index: pointer): bool {.cdecl.} =
+proc fcQTableView_method_callback_isIndexHidden(self: pointer, index: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQTableView](fcQTableView_vdata(self))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var virtualReturn = inst.isIndexHidden(slotval1)
   virtualReturn
 
-method selectionChanged*(self: VirtualQTableView, selected: gen_qitemselectionmodel_types.QItemSelection, deselected: gen_qitemselectionmodel_types.QItemSelection): void {.base.} =
-  QTableViewselectionChanged(self[], selected, deselected)
-proc cQTableView_method_callback_selectionChanged(self: pointer, selected: pointer, deselected: pointer): void {.cdecl.} =
+proc fcQTableView_method_callback_selectionChanged(self: pointer, selected: pointer, deselected: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTableView](fcQTableView_vdata(self))
   let slotval1 = gen_qitemselectionmodel_types.QItemSelection(h: selected, owned: false)
   let slotval2 = gen_qitemselectionmodel_types.QItemSelection(h: deselected, owned: false)
   inst.selectionChanged(slotval1, slotval2)
 
-method currentChanged*(self: VirtualQTableView, current: gen_qabstractitemmodel_types.QModelIndex, previous: gen_qabstractitemmodel_types.QModelIndex): void {.base.} =
-  QTableViewcurrentChanged(self[], current, previous)
-proc cQTableView_method_callback_currentChanged(self: pointer, current: pointer, previous: pointer): void {.cdecl.} =
+proc fcQTableView_method_callback_currentChanged(self: pointer, current: pointer, previous: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTableView](fcQTableView_vdata(self))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: current, owned: false)
   let slotval2 = gen_qabstractitemmodel_types.QModelIndex(h: previous, owned: false)
   inst.currentChanged(slotval1, slotval2)
 
-method keyboardSearch*(self: VirtualQTableView, search: openArray[char]): void {.base.} =
-  QTableViewkeyboardSearch(self[], search)
-proc cQTableView_method_callback_keyboardSearch(self: pointer, search: struct_miqt_string): void {.cdecl.} =
+proc fcQTableView_method_callback_keyboardSearch(self: pointer, search: struct_miqt_string): void {.cdecl.} =
   let inst = cast[VirtualQTableView](fcQTableView_vdata(self))
   let vsearch_ms = search
   let vsearchx_ret = string.fromBytes(vsearch_ms)
@@ -1935,9 +2065,7 @@ proc cQTableView_method_callback_keyboardSearch(self: pointer, search: struct_mi
   let slotval1 = vsearchx_ret
   inst.keyboardSearch(slotval1)
 
-method inputMethodQuery*(self: VirtualQTableView, query: cint): gen_qvariant_types.QVariant {.base.} =
-  QTableViewinputMethodQuery(self[], query)
-proc cQTableView_method_callback_inputMethodQuery(self: pointer, query: cint): pointer {.cdecl.} =
+proc fcQTableView_method_callback_inputMethodQuery(self: pointer, query: cint): pointer {.cdecl.} =
   let inst = cast[VirtualQTableView](fcQTableView_vdata(self))
   let slotval1 = cint(query)
   var virtualReturn = inst.inputMethodQuery(slotval1)
@@ -1946,21 +2074,15 @@ proc cQTableView_method_callback_inputMethodQuery(self: pointer, query: cint): p
   virtualReturn.h = nil
   virtualReturn_h
 
-method reset*(self: VirtualQTableView): void {.base.} =
-  QTableViewreset(self[])
-proc cQTableView_method_callback_reset(self: pointer): void {.cdecl.} =
+proc fcQTableView_method_callback_reset(self: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTableView](fcQTableView_vdata(self))
   inst.reset()
 
-method selectAll*(self: VirtualQTableView): void {.base.} =
-  QTableViewselectAll(self[])
-proc cQTableView_method_callback_selectAll(self: pointer): void {.cdecl.} =
+proc fcQTableView_method_callback_selectAll(self: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTableView](fcQTableView_vdata(self))
   inst.selectAll()
 
-method dataChanged*(self: VirtualQTableView, topLeft: gen_qabstractitemmodel_types.QModelIndex, bottomRight: gen_qabstractitemmodel_types.QModelIndex, roles: openArray[cint]): void {.base.} =
-  QTableViewdataChanged(self[], topLeft, bottomRight, roles)
-proc cQTableView_method_callback_dataChanged(self: pointer, topLeft: pointer, bottomRight: pointer, roles: struct_miqt_array): void {.cdecl.} =
+proc fcQTableView_method_callback_dataChanged(self: pointer, topLeft: pointer, bottomRight: pointer, roles: struct_miqt_array): void {.cdecl.} =
   let inst = cast[VirtualQTableView](fcQTableView_vdata(self))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: topLeft, owned: false)
   let slotval2 = gen_qabstractitemmodel_types.QModelIndex(h: bottomRight, owned: false)
@@ -1973,75 +2095,55 @@ proc cQTableView_method_callback_dataChanged(self: pointer, topLeft: pointer, bo
   let slotval3 = vrolesx_ret
   inst.dataChanged(slotval1, slotval2, slotval3)
 
-method rowsInserted*(self: VirtualQTableView, parent: gen_qabstractitemmodel_types.QModelIndex, start: cint, endVal: cint): void {.base.} =
-  QTableViewrowsInserted(self[], parent, start, endVal)
-proc cQTableView_method_callback_rowsInserted(self: pointer, parent: pointer, start: cint, endVal: cint): void {.cdecl.} =
+proc fcQTableView_method_callback_rowsInserted(self: pointer, parent: pointer, start: cint, endVal: cint): void {.cdecl.} =
   let inst = cast[VirtualQTableView](fcQTableView_vdata(self))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   let slotval2 = start
   let slotval3 = endVal
   inst.rowsInserted(slotval1, slotval2, slotval3)
 
-method rowsAboutToBeRemoved*(self: VirtualQTableView, parent: gen_qabstractitemmodel_types.QModelIndex, start: cint, endVal: cint): void {.base.} =
-  QTableViewrowsAboutToBeRemoved(self[], parent, start, endVal)
-proc cQTableView_method_callback_rowsAboutToBeRemoved(self: pointer, parent: pointer, start: cint, endVal: cint): void {.cdecl.} =
+proc fcQTableView_method_callback_rowsAboutToBeRemoved(self: pointer, parent: pointer, start: cint, endVal: cint): void {.cdecl.} =
   let inst = cast[VirtualQTableView](fcQTableView_vdata(self))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   let slotval2 = start
   let slotval3 = endVal
   inst.rowsAboutToBeRemoved(slotval1, slotval2, slotval3)
 
-method updateEditorData*(self: VirtualQTableView): void {.base.} =
-  QTableViewupdateEditorData(self[])
-proc cQTableView_method_callback_updateEditorData(self: pointer): void {.cdecl.} =
+proc fcQTableView_method_callback_updateEditorData(self: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTableView](fcQTableView_vdata(self))
   inst.updateEditorData()
 
-method updateEditorGeometries*(self: VirtualQTableView): void {.base.} =
-  QTableViewupdateEditorGeometries(self[])
-proc cQTableView_method_callback_updateEditorGeometries(self: pointer): void {.cdecl.} =
+proc fcQTableView_method_callback_updateEditorGeometries(self: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTableView](fcQTableView_vdata(self))
   inst.updateEditorGeometries()
 
-method verticalScrollbarValueChanged*(self: VirtualQTableView, value: cint): void {.base.} =
-  QTableViewverticalScrollbarValueChanged(self[], value)
-proc cQTableView_method_callback_verticalScrollbarValueChanged(self: pointer, value: cint): void {.cdecl.} =
+proc fcQTableView_method_callback_verticalScrollbarValueChanged(self: pointer, value: cint): void {.cdecl.} =
   let inst = cast[VirtualQTableView](fcQTableView_vdata(self))
   let slotval1 = value
   inst.verticalScrollbarValueChanged(slotval1)
 
-method horizontalScrollbarValueChanged*(self: VirtualQTableView, value: cint): void {.base.} =
-  QTableViewhorizontalScrollbarValueChanged(self[], value)
-proc cQTableView_method_callback_horizontalScrollbarValueChanged(self: pointer, value: cint): void {.cdecl.} =
+proc fcQTableView_method_callback_horizontalScrollbarValueChanged(self: pointer, value: cint): void {.cdecl.} =
   let inst = cast[VirtualQTableView](fcQTableView_vdata(self))
   let slotval1 = value
   inst.horizontalScrollbarValueChanged(slotval1)
 
-method closeEditor*(self: VirtualQTableView, editor: gen_qwidget_types.QWidget, hint: cint): void {.base.} =
-  QTableViewcloseEditor(self[], editor, hint)
-proc cQTableView_method_callback_closeEditor(self: pointer, editor: pointer, hint: cint): void {.cdecl.} =
+proc fcQTableView_method_callback_closeEditor(self: pointer, editor: pointer, hint: cint): void {.cdecl.} =
   let inst = cast[VirtualQTableView](fcQTableView_vdata(self))
   let slotval1 = gen_qwidget_types.QWidget(h: editor, owned: false)
   let slotval2 = cint(hint)
   inst.closeEditor(slotval1, slotval2)
 
-method commitData*(self: VirtualQTableView, editor: gen_qwidget_types.QWidget): void {.base.} =
-  QTableViewcommitData(self[], editor)
-proc cQTableView_method_callback_commitData(self: pointer, editor: pointer): void {.cdecl.} =
+proc fcQTableView_method_callback_commitData(self: pointer, editor: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTableView](fcQTableView_vdata(self))
   let slotval1 = gen_qwidget_types.QWidget(h: editor, owned: false)
   inst.commitData(slotval1)
 
-method editorDestroyed*(self: VirtualQTableView, editor: gen_qobject_types.QObject): void {.base.} =
-  QTableVieweditorDestroyed(self[], editor)
-proc cQTableView_method_callback_editorDestroyed(self: pointer, editor: pointer): void {.cdecl.} =
+proc fcQTableView_method_callback_editorDestroyed(self: pointer, editor: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTableView](fcQTableView_vdata(self))
   let slotval1 = gen_qobject_types.QObject(h: editor, owned: false)
   inst.editorDestroyed(slotval1)
 
-method edit*(self: VirtualQTableView, index: gen_qabstractitemmodel_types.QModelIndex, trigger: cint, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QTableViewedit(self[], index, trigger, event)
-proc cQTableView_method_callback_edit2(self: pointer, index: pointer, trigger: cint, event: pointer): bool {.cdecl.} =
+proc fcQTableView_method_callback_edit2(self: pointer, index: pointer, trigger: cint, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQTableView](fcQTableView_vdata(self))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   let slotval2 = cint(trigger)
@@ -2049,149 +2151,109 @@ proc cQTableView_method_callback_edit2(self: pointer, index: pointer, trigger: c
   var virtualReturn = inst.edit(slotval1, slotval2, slotval3)
   virtualReturn
 
-method selectionCommand*(self: VirtualQTableView, index: gen_qabstractitemmodel_types.QModelIndex, event: gen_qcoreevent_types.QEvent): cint {.base.} =
-  QTableViewselectionCommand(self[], index, event)
-proc cQTableView_method_callback_selectionCommand(self: pointer, index: pointer, event: pointer): cint {.cdecl.} =
+proc fcQTableView_method_callback_selectionCommand(self: pointer, index: pointer, event: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQTableView](fcQTableView_vdata(self))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.selectionCommand(slotval1, slotval2)
   cint(virtualReturn)
 
-method startDrag*(self: VirtualQTableView, supportedActions: cint): void {.base.} =
-  QTableViewstartDrag(self[], supportedActions)
-proc cQTableView_method_callback_startDrag(self: pointer, supportedActions: cint): void {.cdecl.} =
+proc fcQTableView_method_callback_startDrag(self: pointer, supportedActions: cint): void {.cdecl.} =
   let inst = cast[VirtualQTableView](fcQTableView_vdata(self))
   let slotval1 = cint(supportedActions)
   inst.startDrag(slotval1)
 
-method focusNextPrevChild*(self: VirtualQTableView, next: bool): bool {.base.} =
-  QTableViewfocusNextPrevChild(self[], next)
-proc cQTableView_method_callback_focusNextPrevChild(self: pointer, next: bool): bool {.cdecl.} =
+proc fcQTableView_method_callback_focusNextPrevChild(self: pointer, next: bool): bool {.cdecl.} =
   let inst = cast[VirtualQTableView](fcQTableView_vdata(self))
   let slotval1 = next
   var virtualReturn = inst.focusNextPrevChild(slotval1)
   virtualReturn
 
-method event*(self: VirtualQTableView, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QTableViewevent(self[], event)
-proc cQTableView_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
+proc fcQTableView_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQTableView](fcQTableView_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
-method viewportEvent*(self: VirtualQTableView, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QTableViewviewportEvent(self[], event)
-proc cQTableView_method_callback_viewportEvent(self: pointer, event: pointer): bool {.cdecl.} =
+proc fcQTableView_method_callback_viewportEvent(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQTableView](fcQTableView_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.viewportEvent(slotval1)
   virtualReturn
 
-method mousePressEvent*(self: VirtualQTableView, event: gen_qevent_types.QMouseEvent): void {.base.} =
-  QTableViewmousePressEvent(self[], event)
-proc cQTableView_method_callback_mousePressEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQTableView_method_callback_mousePressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTableView](fcQTableView_vdata(self))
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mousePressEvent(slotval1)
 
-method mouseMoveEvent*(self: VirtualQTableView, event: gen_qevent_types.QMouseEvent): void {.base.} =
-  QTableViewmouseMoveEvent(self[], event)
-proc cQTableView_method_callback_mouseMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQTableView_method_callback_mouseMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTableView](fcQTableView_vdata(self))
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mouseMoveEvent(slotval1)
 
-method mouseReleaseEvent*(self: VirtualQTableView, event: gen_qevent_types.QMouseEvent): void {.base.} =
-  QTableViewmouseReleaseEvent(self[], event)
-proc cQTableView_method_callback_mouseReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQTableView_method_callback_mouseReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTableView](fcQTableView_vdata(self))
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mouseReleaseEvent(slotval1)
 
-method mouseDoubleClickEvent*(self: VirtualQTableView, event: gen_qevent_types.QMouseEvent): void {.base.} =
-  QTableViewmouseDoubleClickEvent(self[], event)
-proc cQTableView_method_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQTableView_method_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTableView](fcQTableView_vdata(self))
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mouseDoubleClickEvent(slotval1)
 
-method dragEnterEvent*(self: VirtualQTableView, event: gen_qevent_types.QDragEnterEvent): void {.base.} =
-  QTableViewdragEnterEvent(self[], event)
-proc cQTableView_method_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQTableView_method_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTableView](fcQTableView_vdata(self))
   let slotval1 = gen_qevent_types.QDragEnterEvent(h: event, owned: false)
   inst.dragEnterEvent(slotval1)
 
-method dragMoveEvent*(self: VirtualQTableView, event: gen_qevent_types.QDragMoveEvent): void {.base.} =
-  QTableViewdragMoveEvent(self[], event)
-proc cQTableView_method_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQTableView_method_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTableView](fcQTableView_vdata(self))
   let slotval1 = gen_qevent_types.QDragMoveEvent(h: event, owned: false)
   inst.dragMoveEvent(slotval1)
 
-method dragLeaveEvent*(self: VirtualQTableView, event: gen_qevent_types.QDragLeaveEvent): void {.base.} =
-  QTableViewdragLeaveEvent(self[], event)
-proc cQTableView_method_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQTableView_method_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTableView](fcQTableView_vdata(self))
   let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event, owned: false)
   inst.dragLeaveEvent(slotval1)
 
-method dropEvent*(self: VirtualQTableView, event: gen_qevent_types.QDropEvent): void {.base.} =
-  QTableViewdropEvent(self[], event)
-proc cQTableView_method_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQTableView_method_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTableView](fcQTableView_vdata(self))
   let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
   inst.dropEvent(slotval1)
 
-method focusInEvent*(self: VirtualQTableView, event: gen_qevent_types.QFocusEvent): void {.base.} =
-  QTableViewfocusInEvent(self[], event)
-proc cQTableView_method_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQTableView_method_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTableView](fcQTableView_vdata(self))
   let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   inst.focusInEvent(slotval1)
 
-method focusOutEvent*(self: VirtualQTableView, event: gen_qevent_types.QFocusEvent): void {.base.} =
-  QTableViewfocusOutEvent(self[], event)
-proc cQTableView_method_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQTableView_method_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTableView](fcQTableView_vdata(self))
   let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   inst.focusOutEvent(slotval1)
 
-method keyPressEvent*(self: VirtualQTableView, event: gen_qevent_types.QKeyEvent): void {.base.} =
-  QTableViewkeyPressEvent(self[], event)
-proc cQTableView_method_callback_keyPressEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQTableView_method_callback_keyPressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTableView](fcQTableView_vdata(self))
   let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   inst.keyPressEvent(slotval1)
 
-method resizeEvent*(self: VirtualQTableView, event: gen_qevent_types.QResizeEvent): void {.base.} =
-  QTableViewresizeEvent(self[], event)
-proc cQTableView_method_callback_resizeEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQTableView_method_callback_resizeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTableView](fcQTableView_vdata(self))
   let slotval1 = gen_qevent_types.QResizeEvent(h: event, owned: false)
   inst.resizeEvent(slotval1)
 
-method inputMethodEvent*(self: VirtualQTableView, event: gen_qevent_types.QInputMethodEvent): void {.base.} =
-  QTableViewinputMethodEvent(self[], event)
-proc cQTableView_method_callback_inputMethodEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQTableView_method_callback_inputMethodEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTableView](fcQTableView_vdata(self))
   let slotval1 = gen_qevent_types.QInputMethodEvent(h: event, owned: false)
   inst.inputMethodEvent(slotval1)
 
-method eventFilter*(self: VirtualQTableView, objectVal: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QTableVieweventFilter(self[], objectVal, event)
-proc cQTableView_method_callback_eventFilter(self: pointer, objectVal: pointer, event: pointer): bool {.cdecl.} =
+proc fcQTableView_method_callback_eventFilter(self: pointer, objectVal: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQTableView](fcQTableView_vdata(self))
   let slotval1 = gen_qobject_types.QObject(h: objectVal, owned: false)
   let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
-method minimumSizeHint*(self: VirtualQTableView): gen_qsize_types.QSize {.base.} =
-  QTableViewminimumSizeHint(self[])
-proc cQTableView_method_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
+proc fcQTableView_method_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQTableView](fcQTableView_vdata(self))
   var virtualReturn = inst.minimumSizeHint()
   virtualReturn.owned = false # TODO move?
@@ -2199,9 +2261,7 @@ proc cQTableView_method_callback_minimumSizeHint(self: pointer): pointer {.cdecl
   virtualReturn.h = nil
   virtualReturn_h
 
-method sizeHint*(self: VirtualQTableView): gen_qsize_types.QSize {.base.} =
-  QTableViewsizeHint(self[])
-proc cQTableView_method_callback_sizeHint(self: pointer): pointer {.cdecl.} =
+proc fcQTableView_method_callback_sizeHint(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQTableView](fcQTableView_vdata(self))
   var virtualReturn = inst.sizeHint()
   virtualReturn.owned = false # TODO move?
@@ -2209,66 +2269,48 @@ proc cQTableView_method_callback_sizeHint(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-method setupViewport*(self: VirtualQTableView, viewport: gen_qwidget_types.QWidget): void {.base.} =
-  QTableViewsetupViewport(self[], viewport)
-proc cQTableView_method_callback_setupViewport(self: pointer, viewport: pointer): void {.cdecl.} =
+proc fcQTableView_method_callback_setupViewport(self: pointer, viewport: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTableView](fcQTableView_vdata(self))
   let slotval1 = gen_qwidget_types.QWidget(h: viewport, owned: false)
   inst.setupViewport(slotval1)
 
-method wheelEvent*(self: VirtualQTableView, param1: gen_qevent_types.QWheelEvent): void {.base.} =
-  QTableViewwheelEvent(self[], param1)
-proc cQTableView_method_callback_wheelEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQTableView_method_callback_wheelEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTableView](fcQTableView_vdata(self))
   let slotval1 = gen_qevent_types.QWheelEvent(h: param1, owned: false)
   inst.wheelEvent(slotval1)
 
-method contextMenuEvent*(self: VirtualQTableView, param1: gen_qevent_types.QContextMenuEvent): void {.base.} =
-  QTableViewcontextMenuEvent(self[], param1)
-proc cQTableView_method_callback_contextMenuEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQTableView_method_callback_contextMenuEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTableView](fcQTableView_vdata(self))
   let slotval1 = gen_qevent_types.QContextMenuEvent(h: param1, owned: false)
   inst.contextMenuEvent(slotval1)
 
-method changeEvent*(self: VirtualQTableView, param1: gen_qcoreevent_types.QEvent): void {.base.} =
-  QTableViewchangeEvent(self[], param1)
-proc cQTableView_method_callback_changeEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQTableView_method_callback_changeEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTableView](fcQTableView_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
   inst.changeEvent(slotval1)
 
-method devType*(self: VirtualQTableView): cint {.base.} =
-  QTableViewdevType(self[])
-proc cQTableView_method_callback_devType(self: pointer): cint {.cdecl.} =
+proc fcQTableView_method_callback_devType(self: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQTableView](fcQTableView_vdata(self))
   var virtualReturn = inst.devType()
   virtualReturn
 
-method setVisible*(self: VirtualQTableView, visible: bool): void {.base.} =
-  QTableViewsetVisible(self[], visible)
-proc cQTableView_method_callback_setVisible(self: pointer, visible: bool): void {.cdecl.} =
+proc fcQTableView_method_callback_setVisible(self: pointer, visible: bool): void {.cdecl.} =
   let inst = cast[VirtualQTableView](fcQTableView_vdata(self))
   let slotval1 = visible
   inst.setVisible(slotval1)
 
-method heightForWidth*(self: VirtualQTableView, param1: cint): cint {.base.} =
-  QTableViewheightForWidth(self[], param1)
-proc cQTableView_method_callback_heightForWidth(self: pointer, param1: cint): cint {.cdecl.} =
+proc fcQTableView_method_callback_heightForWidth(self: pointer, param1: cint): cint {.cdecl.} =
   let inst = cast[VirtualQTableView](fcQTableView_vdata(self))
   let slotval1 = param1
   var virtualReturn = inst.heightForWidth(slotval1)
   virtualReturn
 
-method hasHeightForWidth*(self: VirtualQTableView): bool {.base.} =
-  QTableViewhasHeightForWidth(self[])
-proc cQTableView_method_callback_hasHeightForWidth(self: pointer): bool {.cdecl.} =
+proc fcQTableView_method_callback_hasHeightForWidth(self: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQTableView](fcQTableView_vdata(self))
   var virtualReturn = inst.hasHeightForWidth()
   virtualReturn
 
-method paintEngine*(self: VirtualQTableView): gen_qpaintengine_types.QPaintEngine {.base.} =
-  QTableViewpaintEngine(self[])
-proc cQTableView_method_callback_paintEngine(self: pointer): pointer {.cdecl.} =
+proc fcQTableView_method_callback_paintEngine(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQTableView](fcQTableView_vdata(self))
   var virtualReturn = inst.paintEngine()
   virtualReturn.owned = false # TODO move?
@@ -2276,72 +2318,52 @@ proc cQTableView_method_callback_paintEngine(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-method keyReleaseEvent*(self: VirtualQTableView, event: gen_qevent_types.QKeyEvent): void {.base.} =
-  QTableViewkeyReleaseEvent(self[], event)
-proc cQTableView_method_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQTableView_method_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTableView](fcQTableView_vdata(self))
   let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   inst.keyReleaseEvent(slotval1)
 
-method enterEvent*(self: VirtualQTableView, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QTableViewenterEvent(self[], event)
-proc cQTableView_method_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQTableView_method_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTableView](fcQTableView_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.enterEvent(slotval1)
 
-method leaveEvent*(self: VirtualQTableView, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QTableViewleaveEvent(self[], event)
-proc cQTableView_method_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQTableView_method_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTableView](fcQTableView_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.leaveEvent(slotval1)
 
-method moveEvent*(self: VirtualQTableView, event: gen_qevent_types.QMoveEvent): void {.base.} =
-  QTableViewmoveEvent(self[], event)
-proc cQTableView_method_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQTableView_method_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTableView](fcQTableView_vdata(self))
   let slotval1 = gen_qevent_types.QMoveEvent(h: event, owned: false)
   inst.moveEvent(slotval1)
 
-method closeEvent*(self: VirtualQTableView, event: gen_qevent_types.QCloseEvent): void {.base.} =
-  QTableViewcloseEvent(self[], event)
-proc cQTableView_method_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQTableView_method_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTableView](fcQTableView_vdata(self))
   let slotval1 = gen_qevent_types.QCloseEvent(h: event, owned: false)
   inst.closeEvent(slotval1)
 
-method tabletEvent*(self: VirtualQTableView, event: gen_qevent_types.QTabletEvent): void {.base.} =
-  QTableViewtabletEvent(self[], event)
-proc cQTableView_method_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQTableView_method_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTableView](fcQTableView_vdata(self))
   let slotval1 = gen_qevent_types.QTabletEvent(h: event, owned: false)
   inst.tabletEvent(slotval1)
 
-method actionEvent*(self: VirtualQTableView, event: gen_qevent_types.QActionEvent): void {.base.} =
-  QTableViewactionEvent(self[], event)
-proc cQTableView_method_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQTableView_method_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTableView](fcQTableView_vdata(self))
   let slotval1 = gen_qevent_types.QActionEvent(h: event, owned: false)
   inst.actionEvent(slotval1)
 
-method showEvent*(self: VirtualQTableView, event: gen_qevent_types.QShowEvent): void {.base.} =
-  QTableViewshowEvent(self[], event)
-proc cQTableView_method_callback_showEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQTableView_method_callback_showEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTableView](fcQTableView_vdata(self))
   let slotval1 = gen_qevent_types.QShowEvent(h: event, owned: false)
   inst.showEvent(slotval1)
 
-method hideEvent*(self: VirtualQTableView, event: gen_qevent_types.QHideEvent): void {.base.} =
-  QTableViewhideEvent(self[], event)
-proc cQTableView_method_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQTableView_method_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTableView](fcQTableView_vdata(self))
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   inst.hideEvent(slotval1)
 
-method nativeEvent*(self: VirtualQTableView, eventType: openArray[byte], message: pointer, resultVal: ptr clong): bool {.base.} =
-  QTableViewnativeEvent(self[], eventType, message, resultVal)
-proc cQTableView_method_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr clong): bool {.cdecl.} =
+proc fcQTableView_method_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr clong): bool {.cdecl.} =
   let inst = cast[VirtualQTableView](fcQTableView_vdata(self))
   var veventType_bytearray = eventType
   var veventTypex_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](veventType_bytearray.data), 0, int(veventType_bytearray.len)-1))
@@ -2352,24 +2374,18 @@ proc cQTableView_method_callback_nativeEvent(self: pointer, eventType: struct_mi
   var virtualReturn = inst.nativeEvent(slotval1, slotval2, slotval3)
   virtualReturn
 
-method metric*(self: VirtualQTableView, param1: cint): cint {.base.} =
-  QTableViewmetric(self[], param1)
-proc cQTableView_method_callback_metric(self: pointer, param1: cint): cint {.cdecl.} =
+proc fcQTableView_method_callback_metric(self: pointer, param1: cint): cint {.cdecl.} =
   let inst = cast[VirtualQTableView](fcQTableView_vdata(self))
   let slotval1 = cint(param1)
   var virtualReturn = inst.metric(slotval1)
   virtualReturn
 
-method initPainter*(self: VirtualQTableView, painter: gen_qpainter_types.QPainter): void {.base.} =
-  QTableViewinitPainter(self[], painter)
-proc cQTableView_method_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
+proc fcQTableView_method_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTableView](fcQTableView_vdata(self))
   let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
   inst.initPainter(slotval1)
 
-method redirected*(self: VirtualQTableView, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.base.} =
-  QTableViewredirected(self[], offset)
-proc cQTableView_method_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
+proc fcQTableView_method_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQTableView](fcQTableView_vdata(self))
   let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
   var virtualReturn = inst.redirected(slotval1)
@@ -2378,9 +2394,7 @@ proc cQTableView_method_callback_redirected(self: pointer, offset: pointer): poi
   virtualReturn.h = nil
   virtualReturn_h
 
-method sharedPainter*(self: VirtualQTableView): gen_qpainter_types.QPainter {.base.} =
-  QTableViewsharedPainter(self[])
-proc cQTableView_method_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
+proc fcQTableView_method_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQTableView](fcQTableView_vdata(self))
   var virtualReturn = inst.sharedPainter()
   virtualReturn.owned = false # TODO move?
@@ -2388,33 +2402,26 @@ proc cQTableView_method_callback_sharedPainter(self: pointer): pointer {.cdecl.}
   virtualReturn.h = nil
   virtualReturn_h
 
-method childEvent*(self: VirtualQTableView, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
-  QTableViewchildEvent(self[], event)
-proc cQTableView_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQTableView_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTableView](fcQTableView_vdata(self))
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
-method customEvent*(self: VirtualQTableView, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QTableViewcustomEvent(self[], event)
-proc cQTableView_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQTableView_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTableView](fcQTableView_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
-method connectNotify*(self: VirtualQTableView, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QTableViewconnectNotify(self[], signal)
-proc cQTableView_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQTableView_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTableView](fcQTableView_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
-method disconnectNotify*(self: VirtualQTableView, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QTableViewdisconnectNotify(self[], signal)
-proc cQTableView_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQTableView_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTableView](fcQTableView_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
+
 
 proc rowMoved*(self: gen_qtableview_types.QTableView, row: cint, oldIndex: cint, newIndex: cint): void =
   fcQTableView_protectedbase_rowMoved(self.h, row, oldIndex, newIndex)
@@ -2527,189 +2534,189 @@ proc create*(T: type gen_qtableview_types.QTableView,
     let vtbl = cast[ref QTableViewVTable](fcQTableView_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQTableView_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQTableView_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQTableView_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQTableView_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQTableView_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQTableView_vtable_callback_metacall
   if not isNil(vtbl[].setModel):
-    vtbl[].vtbl.setModel = cQTableView_vtable_callback_setModel
+    vtbl[].vtbl.setModel = fcQTableView_vtable_callback_setModel
   if not isNil(vtbl[].setRootIndex):
-    vtbl[].vtbl.setRootIndex = cQTableView_vtable_callback_setRootIndex
+    vtbl[].vtbl.setRootIndex = fcQTableView_vtable_callback_setRootIndex
   if not isNil(vtbl[].setSelectionModel):
-    vtbl[].vtbl.setSelectionModel = cQTableView_vtable_callback_setSelectionModel
+    vtbl[].vtbl.setSelectionModel = fcQTableView_vtable_callback_setSelectionModel
   if not isNil(vtbl[].doItemsLayout):
-    vtbl[].vtbl.doItemsLayout = cQTableView_vtable_callback_doItemsLayout
+    vtbl[].vtbl.doItemsLayout = fcQTableView_vtable_callback_doItemsLayout
   if not isNil(vtbl[].visualRect):
-    vtbl[].vtbl.visualRect = cQTableView_vtable_callback_visualRect
+    vtbl[].vtbl.visualRect = fcQTableView_vtable_callback_visualRect
   if not isNil(vtbl[].scrollTo):
-    vtbl[].vtbl.scrollTo = cQTableView_vtable_callback_scrollTo
+    vtbl[].vtbl.scrollTo = fcQTableView_vtable_callback_scrollTo
   if not isNil(vtbl[].indexAt):
-    vtbl[].vtbl.indexAt = cQTableView_vtable_callback_indexAt
+    vtbl[].vtbl.indexAt = fcQTableView_vtable_callback_indexAt
   if not isNil(vtbl[].scrollContentsBy):
-    vtbl[].vtbl.scrollContentsBy = cQTableView_vtable_callback_scrollContentsBy
+    vtbl[].vtbl.scrollContentsBy = fcQTableView_vtable_callback_scrollContentsBy
   if not isNil(vtbl[].viewOptions):
-    vtbl[].vtbl.viewOptions = cQTableView_vtable_callback_viewOptions
+    vtbl[].vtbl.viewOptions = fcQTableView_vtable_callback_viewOptions
   if not isNil(vtbl[].paintEvent):
-    vtbl[].vtbl.paintEvent = cQTableView_vtable_callback_paintEvent
+    vtbl[].vtbl.paintEvent = fcQTableView_vtable_callback_paintEvent
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQTableView_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQTableView_vtable_callback_timerEvent
   if not isNil(vtbl[].horizontalOffset):
-    vtbl[].vtbl.horizontalOffset = cQTableView_vtable_callback_horizontalOffset
+    vtbl[].vtbl.horizontalOffset = fcQTableView_vtable_callback_horizontalOffset
   if not isNil(vtbl[].verticalOffset):
-    vtbl[].vtbl.verticalOffset = cQTableView_vtable_callback_verticalOffset
+    vtbl[].vtbl.verticalOffset = fcQTableView_vtable_callback_verticalOffset
   if not isNil(vtbl[].moveCursor):
-    vtbl[].vtbl.moveCursor = cQTableView_vtable_callback_moveCursor
+    vtbl[].vtbl.moveCursor = fcQTableView_vtable_callback_moveCursor
   if not isNil(vtbl[].setSelection):
-    vtbl[].vtbl.setSelection = cQTableView_vtable_callback_setSelection
+    vtbl[].vtbl.setSelection = fcQTableView_vtable_callback_setSelection
   if not isNil(vtbl[].visualRegionForSelection):
-    vtbl[].vtbl.visualRegionForSelection = cQTableView_vtable_callback_visualRegionForSelection
+    vtbl[].vtbl.visualRegionForSelection = fcQTableView_vtable_callback_visualRegionForSelection
   if not isNil(vtbl[].selectedIndexes):
-    vtbl[].vtbl.selectedIndexes = cQTableView_vtable_callback_selectedIndexes
+    vtbl[].vtbl.selectedIndexes = fcQTableView_vtable_callback_selectedIndexes
   if not isNil(vtbl[].updateGeometries):
-    vtbl[].vtbl.updateGeometries = cQTableView_vtable_callback_updateGeometries
+    vtbl[].vtbl.updateGeometries = fcQTableView_vtable_callback_updateGeometries
   if not isNil(vtbl[].viewportSizeHint):
-    vtbl[].vtbl.viewportSizeHint = cQTableView_vtable_callback_viewportSizeHint
+    vtbl[].vtbl.viewportSizeHint = fcQTableView_vtable_callback_viewportSizeHint
   if not isNil(vtbl[].sizeHintForRow):
-    vtbl[].vtbl.sizeHintForRow = cQTableView_vtable_callback_sizeHintForRow
+    vtbl[].vtbl.sizeHintForRow = fcQTableView_vtable_callback_sizeHintForRow
   if not isNil(vtbl[].sizeHintForColumn):
-    vtbl[].vtbl.sizeHintForColumn = cQTableView_vtable_callback_sizeHintForColumn
+    vtbl[].vtbl.sizeHintForColumn = fcQTableView_vtable_callback_sizeHintForColumn
   if not isNil(vtbl[].verticalScrollbarAction):
-    vtbl[].vtbl.verticalScrollbarAction = cQTableView_vtable_callback_verticalScrollbarAction
+    vtbl[].vtbl.verticalScrollbarAction = fcQTableView_vtable_callback_verticalScrollbarAction
   if not isNil(vtbl[].horizontalScrollbarAction):
-    vtbl[].vtbl.horizontalScrollbarAction = cQTableView_vtable_callback_horizontalScrollbarAction
+    vtbl[].vtbl.horizontalScrollbarAction = fcQTableView_vtable_callback_horizontalScrollbarAction
   if not isNil(vtbl[].isIndexHidden):
-    vtbl[].vtbl.isIndexHidden = cQTableView_vtable_callback_isIndexHidden
+    vtbl[].vtbl.isIndexHidden = fcQTableView_vtable_callback_isIndexHidden
   if not isNil(vtbl[].selectionChanged):
-    vtbl[].vtbl.selectionChanged = cQTableView_vtable_callback_selectionChanged
+    vtbl[].vtbl.selectionChanged = fcQTableView_vtable_callback_selectionChanged
   if not isNil(vtbl[].currentChanged):
-    vtbl[].vtbl.currentChanged = cQTableView_vtable_callback_currentChanged
+    vtbl[].vtbl.currentChanged = fcQTableView_vtable_callback_currentChanged
   if not isNil(vtbl[].keyboardSearch):
-    vtbl[].vtbl.keyboardSearch = cQTableView_vtable_callback_keyboardSearch
+    vtbl[].vtbl.keyboardSearch = fcQTableView_vtable_callback_keyboardSearch
   if not isNil(vtbl[].inputMethodQuery):
-    vtbl[].vtbl.inputMethodQuery = cQTableView_vtable_callback_inputMethodQuery
+    vtbl[].vtbl.inputMethodQuery = fcQTableView_vtable_callback_inputMethodQuery
   if not isNil(vtbl[].reset):
-    vtbl[].vtbl.reset = cQTableView_vtable_callback_reset
+    vtbl[].vtbl.reset = fcQTableView_vtable_callback_reset
   if not isNil(vtbl[].selectAll):
-    vtbl[].vtbl.selectAll = cQTableView_vtable_callback_selectAll
+    vtbl[].vtbl.selectAll = fcQTableView_vtable_callback_selectAll
   if not isNil(vtbl[].dataChanged):
-    vtbl[].vtbl.dataChanged = cQTableView_vtable_callback_dataChanged
+    vtbl[].vtbl.dataChanged = fcQTableView_vtable_callback_dataChanged
   if not isNil(vtbl[].rowsInserted):
-    vtbl[].vtbl.rowsInserted = cQTableView_vtable_callback_rowsInserted
+    vtbl[].vtbl.rowsInserted = fcQTableView_vtable_callback_rowsInserted
   if not isNil(vtbl[].rowsAboutToBeRemoved):
-    vtbl[].vtbl.rowsAboutToBeRemoved = cQTableView_vtable_callback_rowsAboutToBeRemoved
+    vtbl[].vtbl.rowsAboutToBeRemoved = fcQTableView_vtable_callback_rowsAboutToBeRemoved
   if not isNil(vtbl[].updateEditorData):
-    vtbl[].vtbl.updateEditorData = cQTableView_vtable_callback_updateEditorData
+    vtbl[].vtbl.updateEditorData = fcQTableView_vtable_callback_updateEditorData
   if not isNil(vtbl[].updateEditorGeometries):
-    vtbl[].vtbl.updateEditorGeometries = cQTableView_vtable_callback_updateEditorGeometries
+    vtbl[].vtbl.updateEditorGeometries = fcQTableView_vtable_callback_updateEditorGeometries
   if not isNil(vtbl[].verticalScrollbarValueChanged):
-    vtbl[].vtbl.verticalScrollbarValueChanged = cQTableView_vtable_callback_verticalScrollbarValueChanged
+    vtbl[].vtbl.verticalScrollbarValueChanged = fcQTableView_vtable_callback_verticalScrollbarValueChanged
   if not isNil(vtbl[].horizontalScrollbarValueChanged):
-    vtbl[].vtbl.horizontalScrollbarValueChanged = cQTableView_vtable_callback_horizontalScrollbarValueChanged
+    vtbl[].vtbl.horizontalScrollbarValueChanged = fcQTableView_vtable_callback_horizontalScrollbarValueChanged
   if not isNil(vtbl[].closeEditor):
-    vtbl[].vtbl.closeEditor = cQTableView_vtable_callback_closeEditor
+    vtbl[].vtbl.closeEditor = fcQTableView_vtable_callback_closeEditor
   if not isNil(vtbl[].commitData):
-    vtbl[].vtbl.commitData = cQTableView_vtable_callback_commitData
+    vtbl[].vtbl.commitData = fcQTableView_vtable_callback_commitData
   if not isNil(vtbl[].editorDestroyed):
-    vtbl[].vtbl.editorDestroyed = cQTableView_vtable_callback_editorDestroyed
+    vtbl[].vtbl.editorDestroyed = fcQTableView_vtable_callback_editorDestroyed
   if not isNil(vtbl[].edit2):
-    vtbl[].vtbl.edit2 = cQTableView_vtable_callback_edit2
+    vtbl[].vtbl.edit2 = fcQTableView_vtable_callback_edit2
   if not isNil(vtbl[].selectionCommand):
-    vtbl[].vtbl.selectionCommand = cQTableView_vtable_callback_selectionCommand
+    vtbl[].vtbl.selectionCommand = fcQTableView_vtable_callback_selectionCommand
   if not isNil(vtbl[].startDrag):
-    vtbl[].vtbl.startDrag = cQTableView_vtable_callback_startDrag
+    vtbl[].vtbl.startDrag = fcQTableView_vtable_callback_startDrag
   if not isNil(vtbl[].focusNextPrevChild):
-    vtbl[].vtbl.focusNextPrevChild = cQTableView_vtable_callback_focusNextPrevChild
+    vtbl[].vtbl.focusNextPrevChild = fcQTableView_vtable_callback_focusNextPrevChild
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQTableView_vtable_callback_event
+    vtbl[].vtbl.event = fcQTableView_vtable_callback_event
   if not isNil(vtbl[].viewportEvent):
-    vtbl[].vtbl.viewportEvent = cQTableView_vtable_callback_viewportEvent
+    vtbl[].vtbl.viewportEvent = fcQTableView_vtable_callback_viewportEvent
   if not isNil(vtbl[].mousePressEvent):
-    vtbl[].vtbl.mousePressEvent = cQTableView_vtable_callback_mousePressEvent
+    vtbl[].vtbl.mousePressEvent = fcQTableView_vtable_callback_mousePressEvent
   if not isNil(vtbl[].mouseMoveEvent):
-    vtbl[].vtbl.mouseMoveEvent = cQTableView_vtable_callback_mouseMoveEvent
+    vtbl[].vtbl.mouseMoveEvent = fcQTableView_vtable_callback_mouseMoveEvent
   if not isNil(vtbl[].mouseReleaseEvent):
-    vtbl[].vtbl.mouseReleaseEvent = cQTableView_vtable_callback_mouseReleaseEvent
+    vtbl[].vtbl.mouseReleaseEvent = fcQTableView_vtable_callback_mouseReleaseEvent
   if not isNil(vtbl[].mouseDoubleClickEvent):
-    vtbl[].vtbl.mouseDoubleClickEvent = cQTableView_vtable_callback_mouseDoubleClickEvent
+    vtbl[].vtbl.mouseDoubleClickEvent = fcQTableView_vtable_callback_mouseDoubleClickEvent
   if not isNil(vtbl[].dragEnterEvent):
-    vtbl[].vtbl.dragEnterEvent = cQTableView_vtable_callback_dragEnterEvent
+    vtbl[].vtbl.dragEnterEvent = fcQTableView_vtable_callback_dragEnterEvent
   if not isNil(vtbl[].dragMoveEvent):
-    vtbl[].vtbl.dragMoveEvent = cQTableView_vtable_callback_dragMoveEvent
+    vtbl[].vtbl.dragMoveEvent = fcQTableView_vtable_callback_dragMoveEvent
   if not isNil(vtbl[].dragLeaveEvent):
-    vtbl[].vtbl.dragLeaveEvent = cQTableView_vtable_callback_dragLeaveEvent
+    vtbl[].vtbl.dragLeaveEvent = fcQTableView_vtable_callback_dragLeaveEvent
   if not isNil(vtbl[].dropEvent):
-    vtbl[].vtbl.dropEvent = cQTableView_vtable_callback_dropEvent
+    vtbl[].vtbl.dropEvent = fcQTableView_vtable_callback_dropEvent
   if not isNil(vtbl[].focusInEvent):
-    vtbl[].vtbl.focusInEvent = cQTableView_vtable_callback_focusInEvent
+    vtbl[].vtbl.focusInEvent = fcQTableView_vtable_callback_focusInEvent
   if not isNil(vtbl[].focusOutEvent):
-    vtbl[].vtbl.focusOutEvent = cQTableView_vtable_callback_focusOutEvent
+    vtbl[].vtbl.focusOutEvent = fcQTableView_vtable_callback_focusOutEvent
   if not isNil(vtbl[].keyPressEvent):
-    vtbl[].vtbl.keyPressEvent = cQTableView_vtable_callback_keyPressEvent
+    vtbl[].vtbl.keyPressEvent = fcQTableView_vtable_callback_keyPressEvent
   if not isNil(vtbl[].resizeEvent):
-    vtbl[].vtbl.resizeEvent = cQTableView_vtable_callback_resizeEvent
+    vtbl[].vtbl.resizeEvent = fcQTableView_vtable_callback_resizeEvent
   if not isNil(vtbl[].inputMethodEvent):
-    vtbl[].vtbl.inputMethodEvent = cQTableView_vtable_callback_inputMethodEvent
+    vtbl[].vtbl.inputMethodEvent = fcQTableView_vtable_callback_inputMethodEvent
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQTableView_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQTableView_vtable_callback_eventFilter
   if not isNil(vtbl[].minimumSizeHint):
-    vtbl[].vtbl.minimumSizeHint = cQTableView_vtable_callback_minimumSizeHint
+    vtbl[].vtbl.minimumSizeHint = fcQTableView_vtable_callback_minimumSizeHint
   if not isNil(vtbl[].sizeHint):
-    vtbl[].vtbl.sizeHint = cQTableView_vtable_callback_sizeHint
+    vtbl[].vtbl.sizeHint = fcQTableView_vtable_callback_sizeHint
   if not isNil(vtbl[].setupViewport):
-    vtbl[].vtbl.setupViewport = cQTableView_vtable_callback_setupViewport
+    vtbl[].vtbl.setupViewport = fcQTableView_vtable_callback_setupViewport
   if not isNil(vtbl[].wheelEvent):
-    vtbl[].vtbl.wheelEvent = cQTableView_vtable_callback_wheelEvent
+    vtbl[].vtbl.wheelEvent = fcQTableView_vtable_callback_wheelEvent
   if not isNil(vtbl[].contextMenuEvent):
-    vtbl[].vtbl.contextMenuEvent = cQTableView_vtable_callback_contextMenuEvent
+    vtbl[].vtbl.contextMenuEvent = fcQTableView_vtable_callback_contextMenuEvent
   if not isNil(vtbl[].changeEvent):
-    vtbl[].vtbl.changeEvent = cQTableView_vtable_callback_changeEvent
+    vtbl[].vtbl.changeEvent = fcQTableView_vtable_callback_changeEvent
   if not isNil(vtbl[].devType):
-    vtbl[].vtbl.devType = cQTableView_vtable_callback_devType
+    vtbl[].vtbl.devType = fcQTableView_vtable_callback_devType
   if not isNil(vtbl[].setVisible):
-    vtbl[].vtbl.setVisible = cQTableView_vtable_callback_setVisible
+    vtbl[].vtbl.setVisible = fcQTableView_vtable_callback_setVisible
   if not isNil(vtbl[].heightForWidth):
-    vtbl[].vtbl.heightForWidth = cQTableView_vtable_callback_heightForWidth
+    vtbl[].vtbl.heightForWidth = fcQTableView_vtable_callback_heightForWidth
   if not isNil(vtbl[].hasHeightForWidth):
-    vtbl[].vtbl.hasHeightForWidth = cQTableView_vtable_callback_hasHeightForWidth
+    vtbl[].vtbl.hasHeightForWidth = fcQTableView_vtable_callback_hasHeightForWidth
   if not isNil(vtbl[].paintEngine):
-    vtbl[].vtbl.paintEngine = cQTableView_vtable_callback_paintEngine
+    vtbl[].vtbl.paintEngine = fcQTableView_vtable_callback_paintEngine
   if not isNil(vtbl[].keyReleaseEvent):
-    vtbl[].vtbl.keyReleaseEvent = cQTableView_vtable_callback_keyReleaseEvent
+    vtbl[].vtbl.keyReleaseEvent = fcQTableView_vtable_callback_keyReleaseEvent
   if not isNil(vtbl[].enterEvent):
-    vtbl[].vtbl.enterEvent = cQTableView_vtable_callback_enterEvent
+    vtbl[].vtbl.enterEvent = fcQTableView_vtable_callback_enterEvent
   if not isNil(vtbl[].leaveEvent):
-    vtbl[].vtbl.leaveEvent = cQTableView_vtable_callback_leaveEvent
+    vtbl[].vtbl.leaveEvent = fcQTableView_vtable_callback_leaveEvent
   if not isNil(vtbl[].moveEvent):
-    vtbl[].vtbl.moveEvent = cQTableView_vtable_callback_moveEvent
+    vtbl[].vtbl.moveEvent = fcQTableView_vtable_callback_moveEvent
   if not isNil(vtbl[].closeEvent):
-    vtbl[].vtbl.closeEvent = cQTableView_vtable_callback_closeEvent
+    vtbl[].vtbl.closeEvent = fcQTableView_vtable_callback_closeEvent
   if not isNil(vtbl[].tabletEvent):
-    vtbl[].vtbl.tabletEvent = cQTableView_vtable_callback_tabletEvent
+    vtbl[].vtbl.tabletEvent = fcQTableView_vtable_callback_tabletEvent
   if not isNil(vtbl[].actionEvent):
-    vtbl[].vtbl.actionEvent = cQTableView_vtable_callback_actionEvent
+    vtbl[].vtbl.actionEvent = fcQTableView_vtable_callback_actionEvent
   if not isNil(vtbl[].showEvent):
-    vtbl[].vtbl.showEvent = cQTableView_vtable_callback_showEvent
+    vtbl[].vtbl.showEvent = fcQTableView_vtable_callback_showEvent
   if not isNil(vtbl[].hideEvent):
-    vtbl[].vtbl.hideEvent = cQTableView_vtable_callback_hideEvent
+    vtbl[].vtbl.hideEvent = fcQTableView_vtable_callback_hideEvent
   if not isNil(vtbl[].nativeEvent):
-    vtbl[].vtbl.nativeEvent = cQTableView_vtable_callback_nativeEvent
+    vtbl[].vtbl.nativeEvent = fcQTableView_vtable_callback_nativeEvent
   if not isNil(vtbl[].metric):
-    vtbl[].vtbl.metric = cQTableView_vtable_callback_metric
+    vtbl[].vtbl.metric = fcQTableView_vtable_callback_metric
   if not isNil(vtbl[].initPainter):
-    vtbl[].vtbl.initPainter = cQTableView_vtable_callback_initPainter
+    vtbl[].vtbl.initPainter = fcQTableView_vtable_callback_initPainter
   if not isNil(vtbl[].redirected):
-    vtbl[].vtbl.redirected = cQTableView_vtable_callback_redirected
+    vtbl[].vtbl.redirected = fcQTableView_vtable_callback_redirected
   if not isNil(vtbl[].sharedPainter):
-    vtbl[].vtbl.sharedPainter = cQTableView_vtable_callback_sharedPainter
+    vtbl[].vtbl.sharedPainter = fcQTableView_vtable_callback_sharedPainter
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQTableView_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQTableView_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQTableView_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQTableView_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQTableView_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQTableView_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQTableView_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQTableView_vtable_callback_disconnectNotify
   gen_qtableview_types.QTableView(h: fcQTableView_new(addr(vtbl[].vtbl), addr(vtbl[]), parent.h), owned: true)
 
 proc create*(T: type gen_qtableview_types.QTableView,
@@ -2720,189 +2727,189 @@ proc create*(T: type gen_qtableview_types.QTableView,
     let vtbl = cast[ref QTableViewVTable](fcQTableView_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQTableView_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQTableView_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQTableView_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQTableView_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQTableView_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQTableView_vtable_callback_metacall
   if not isNil(vtbl[].setModel):
-    vtbl[].vtbl.setModel = cQTableView_vtable_callback_setModel
+    vtbl[].vtbl.setModel = fcQTableView_vtable_callback_setModel
   if not isNil(vtbl[].setRootIndex):
-    vtbl[].vtbl.setRootIndex = cQTableView_vtable_callback_setRootIndex
+    vtbl[].vtbl.setRootIndex = fcQTableView_vtable_callback_setRootIndex
   if not isNil(vtbl[].setSelectionModel):
-    vtbl[].vtbl.setSelectionModel = cQTableView_vtable_callback_setSelectionModel
+    vtbl[].vtbl.setSelectionModel = fcQTableView_vtable_callback_setSelectionModel
   if not isNil(vtbl[].doItemsLayout):
-    vtbl[].vtbl.doItemsLayout = cQTableView_vtable_callback_doItemsLayout
+    vtbl[].vtbl.doItemsLayout = fcQTableView_vtable_callback_doItemsLayout
   if not isNil(vtbl[].visualRect):
-    vtbl[].vtbl.visualRect = cQTableView_vtable_callback_visualRect
+    vtbl[].vtbl.visualRect = fcQTableView_vtable_callback_visualRect
   if not isNil(vtbl[].scrollTo):
-    vtbl[].vtbl.scrollTo = cQTableView_vtable_callback_scrollTo
+    vtbl[].vtbl.scrollTo = fcQTableView_vtable_callback_scrollTo
   if not isNil(vtbl[].indexAt):
-    vtbl[].vtbl.indexAt = cQTableView_vtable_callback_indexAt
+    vtbl[].vtbl.indexAt = fcQTableView_vtable_callback_indexAt
   if not isNil(vtbl[].scrollContentsBy):
-    vtbl[].vtbl.scrollContentsBy = cQTableView_vtable_callback_scrollContentsBy
+    vtbl[].vtbl.scrollContentsBy = fcQTableView_vtable_callback_scrollContentsBy
   if not isNil(vtbl[].viewOptions):
-    vtbl[].vtbl.viewOptions = cQTableView_vtable_callback_viewOptions
+    vtbl[].vtbl.viewOptions = fcQTableView_vtable_callback_viewOptions
   if not isNil(vtbl[].paintEvent):
-    vtbl[].vtbl.paintEvent = cQTableView_vtable_callback_paintEvent
+    vtbl[].vtbl.paintEvent = fcQTableView_vtable_callback_paintEvent
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQTableView_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQTableView_vtable_callback_timerEvent
   if not isNil(vtbl[].horizontalOffset):
-    vtbl[].vtbl.horizontalOffset = cQTableView_vtable_callback_horizontalOffset
+    vtbl[].vtbl.horizontalOffset = fcQTableView_vtable_callback_horizontalOffset
   if not isNil(vtbl[].verticalOffset):
-    vtbl[].vtbl.verticalOffset = cQTableView_vtable_callback_verticalOffset
+    vtbl[].vtbl.verticalOffset = fcQTableView_vtable_callback_verticalOffset
   if not isNil(vtbl[].moveCursor):
-    vtbl[].vtbl.moveCursor = cQTableView_vtable_callback_moveCursor
+    vtbl[].vtbl.moveCursor = fcQTableView_vtable_callback_moveCursor
   if not isNil(vtbl[].setSelection):
-    vtbl[].vtbl.setSelection = cQTableView_vtable_callback_setSelection
+    vtbl[].vtbl.setSelection = fcQTableView_vtable_callback_setSelection
   if not isNil(vtbl[].visualRegionForSelection):
-    vtbl[].vtbl.visualRegionForSelection = cQTableView_vtable_callback_visualRegionForSelection
+    vtbl[].vtbl.visualRegionForSelection = fcQTableView_vtable_callback_visualRegionForSelection
   if not isNil(vtbl[].selectedIndexes):
-    vtbl[].vtbl.selectedIndexes = cQTableView_vtable_callback_selectedIndexes
+    vtbl[].vtbl.selectedIndexes = fcQTableView_vtable_callback_selectedIndexes
   if not isNil(vtbl[].updateGeometries):
-    vtbl[].vtbl.updateGeometries = cQTableView_vtable_callback_updateGeometries
+    vtbl[].vtbl.updateGeometries = fcQTableView_vtable_callback_updateGeometries
   if not isNil(vtbl[].viewportSizeHint):
-    vtbl[].vtbl.viewportSizeHint = cQTableView_vtable_callback_viewportSizeHint
+    vtbl[].vtbl.viewportSizeHint = fcQTableView_vtable_callback_viewportSizeHint
   if not isNil(vtbl[].sizeHintForRow):
-    vtbl[].vtbl.sizeHintForRow = cQTableView_vtable_callback_sizeHintForRow
+    vtbl[].vtbl.sizeHintForRow = fcQTableView_vtable_callback_sizeHintForRow
   if not isNil(vtbl[].sizeHintForColumn):
-    vtbl[].vtbl.sizeHintForColumn = cQTableView_vtable_callback_sizeHintForColumn
+    vtbl[].vtbl.sizeHintForColumn = fcQTableView_vtable_callback_sizeHintForColumn
   if not isNil(vtbl[].verticalScrollbarAction):
-    vtbl[].vtbl.verticalScrollbarAction = cQTableView_vtable_callback_verticalScrollbarAction
+    vtbl[].vtbl.verticalScrollbarAction = fcQTableView_vtable_callback_verticalScrollbarAction
   if not isNil(vtbl[].horizontalScrollbarAction):
-    vtbl[].vtbl.horizontalScrollbarAction = cQTableView_vtable_callback_horizontalScrollbarAction
+    vtbl[].vtbl.horizontalScrollbarAction = fcQTableView_vtable_callback_horizontalScrollbarAction
   if not isNil(vtbl[].isIndexHidden):
-    vtbl[].vtbl.isIndexHidden = cQTableView_vtable_callback_isIndexHidden
+    vtbl[].vtbl.isIndexHidden = fcQTableView_vtable_callback_isIndexHidden
   if not isNil(vtbl[].selectionChanged):
-    vtbl[].vtbl.selectionChanged = cQTableView_vtable_callback_selectionChanged
+    vtbl[].vtbl.selectionChanged = fcQTableView_vtable_callback_selectionChanged
   if not isNil(vtbl[].currentChanged):
-    vtbl[].vtbl.currentChanged = cQTableView_vtable_callback_currentChanged
+    vtbl[].vtbl.currentChanged = fcQTableView_vtable_callback_currentChanged
   if not isNil(vtbl[].keyboardSearch):
-    vtbl[].vtbl.keyboardSearch = cQTableView_vtable_callback_keyboardSearch
+    vtbl[].vtbl.keyboardSearch = fcQTableView_vtable_callback_keyboardSearch
   if not isNil(vtbl[].inputMethodQuery):
-    vtbl[].vtbl.inputMethodQuery = cQTableView_vtable_callback_inputMethodQuery
+    vtbl[].vtbl.inputMethodQuery = fcQTableView_vtable_callback_inputMethodQuery
   if not isNil(vtbl[].reset):
-    vtbl[].vtbl.reset = cQTableView_vtable_callback_reset
+    vtbl[].vtbl.reset = fcQTableView_vtable_callback_reset
   if not isNil(vtbl[].selectAll):
-    vtbl[].vtbl.selectAll = cQTableView_vtable_callback_selectAll
+    vtbl[].vtbl.selectAll = fcQTableView_vtable_callback_selectAll
   if not isNil(vtbl[].dataChanged):
-    vtbl[].vtbl.dataChanged = cQTableView_vtable_callback_dataChanged
+    vtbl[].vtbl.dataChanged = fcQTableView_vtable_callback_dataChanged
   if not isNil(vtbl[].rowsInserted):
-    vtbl[].vtbl.rowsInserted = cQTableView_vtable_callback_rowsInserted
+    vtbl[].vtbl.rowsInserted = fcQTableView_vtable_callback_rowsInserted
   if not isNil(vtbl[].rowsAboutToBeRemoved):
-    vtbl[].vtbl.rowsAboutToBeRemoved = cQTableView_vtable_callback_rowsAboutToBeRemoved
+    vtbl[].vtbl.rowsAboutToBeRemoved = fcQTableView_vtable_callback_rowsAboutToBeRemoved
   if not isNil(vtbl[].updateEditorData):
-    vtbl[].vtbl.updateEditorData = cQTableView_vtable_callback_updateEditorData
+    vtbl[].vtbl.updateEditorData = fcQTableView_vtable_callback_updateEditorData
   if not isNil(vtbl[].updateEditorGeometries):
-    vtbl[].vtbl.updateEditorGeometries = cQTableView_vtable_callback_updateEditorGeometries
+    vtbl[].vtbl.updateEditorGeometries = fcQTableView_vtable_callback_updateEditorGeometries
   if not isNil(vtbl[].verticalScrollbarValueChanged):
-    vtbl[].vtbl.verticalScrollbarValueChanged = cQTableView_vtable_callback_verticalScrollbarValueChanged
+    vtbl[].vtbl.verticalScrollbarValueChanged = fcQTableView_vtable_callback_verticalScrollbarValueChanged
   if not isNil(vtbl[].horizontalScrollbarValueChanged):
-    vtbl[].vtbl.horizontalScrollbarValueChanged = cQTableView_vtable_callback_horizontalScrollbarValueChanged
+    vtbl[].vtbl.horizontalScrollbarValueChanged = fcQTableView_vtable_callback_horizontalScrollbarValueChanged
   if not isNil(vtbl[].closeEditor):
-    vtbl[].vtbl.closeEditor = cQTableView_vtable_callback_closeEditor
+    vtbl[].vtbl.closeEditor = fcQTableView_vtable_callback_closeEditor
   if not isNil(vtbl[].commitData):
-    vtbl[].vtbl.commitData = cQTableView_vtable_callback_commitData
+    vtbl[].vtbl.commitData = fcQTableView_vtable_callback_commitData
   if not isNil(vtbl[].editorDestroyed):
-    vtbl[].vtbl.editorDestroyed = cQTableView_vtable_callback_editorDestroyed
+    vtbl[].vtbl.editorDestroyed = fcQTableView_vtable_callback_editorDestroyed
   if not isNil(vtbl[].edit2):
-    vtbl[].vtbl.edit2 = cQTableView_vtable_callback_edit2
+    vtbl[].vtbl.edit2 = fcQTableView_vtable_callback_edit2
   if not isNil(vtbl[].selectionCommand):
-    vtbl[].vtbl.selectionCommand = cQTableView_vtable_callback_selectionCommand
+    vtbl[].vtbl.selectionCommand = fcQTableView_vtable_callback_selectionCommand
   if not isNil(vtbl[].startDrag):
-    vtbl[].vtbl.startDrag = cQTableView_vtable_callback_startDrag
+    vtbl[].vtbl.startDrag = fcQTableView_vtable_callback_startDrag
   if not isNil(vtbl[].focusNextPrevChild):
-    vtbl[].vtbl.focusNextPrevChild = cQTableView_vtable_callback_focusNextPrevChild
+    vtbl[].vtbl.focusNextPrevChild = fcQTableView_vtable_callback_focusNextPrevChild
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQTableView_vtable_callback_event
+    vtbl[].vtbl.event = fcQTableView_vtable_callback_event
   if not isNil(vtbl[].viewportEvent):
-    vtbl[].vtbl.viewportEvent = cQTableView_vtable_callback_viewportEvent
+    vtbl[].vtbl.viewportEvent = fcQTableView_vtable_callback_viewportEvent
   if not isNil(vtbl[].mousePressEvent):
-    vtbl[].vtbl.mousePressEvent = cQTableView_vtable_callback_mousePressEvent
+    vtbl[].vtbl.mousePressEvent = fcQTableView_vtable_callback_mousePressEvent
   if not isNil(vtbl[].mouseMoveEvent):
-    vtbl[].vtbl.mouseMoveEvent = cQTableView_vtable_callback_mouseMoveEvent
+    vtbl[].vtbl.mouseMoveEvent = fcQTableView_vtable_callback_mouseMoveEvent
   if not isNil(vtbl[].mouseReleaseEvent):
-    vtbl[].vtbl.mouseReleaseEvent = cQTableView_vtable_callback_mouseReleaseEvent
+    vtbl[].vtbl.mouseReleaseEvent = fcQTableView_vtable_callback_mouseReleaseEvent
   if not isNil(vtbl[].mouseDoubleClickEvent):
-    vtbl[].vtbl.mouseDoubleClickEvent = cQTableView_vtable_callback_mouseDoubleClickEvent
+    vtbl[].vtbl.mouseDoubleClickEvent = fcQTableView_vtable_callback_mouseDoubleClickEvent
   if not isNil(vtbl[].dragEnterEvent):
-    vtbl[].vtbl.dragEnterEvent = cQTableView_vtable_callback_dragEnterEvent
+    vtbl[].vtbl.dragEnterEvent = fcQTableView_vtable_callback_dragEnterEvent
   if not isNil(vtbl[].dragMoveEvent):
-    vtbl[].vtbl.dragMoveEvent = cQTableView_vtable_callback_dragMoveEvent
+    vtbl[].vtbl.dragMoveEvent = fcQTableView_vtable_callback_dragMoveEvent
   if not isNil(vtbl[].dragLeaveEvent):
-    vtbl[].vtbl.dragLeaveEvent = cQTableView_vtable_callback_dragLeaveEvent
+    vtbl[].vtbl.dragLeaveEvent = fcQTableView_vtable_callback_dragLeaveEvent
   if not isNil(vtbl[].dropEvent):
-    vtbl[].vtbl.dropEvent = cQTableView_vtable_callback_dropEvent
+    vtbl[].vtbl.dropEvent = fcQTableView_vtable_callback_dropEvent
   if not isNil(vtbl[].focusInEvent):
-    vtbl[].vtbl.focusInEvent = cQTableView_vtable_callback_focusInEvent
+    vtbl[].vtbl.focusInEvent = fcQTableView_vtable_callback_focusInEvent
   if not isNil(vtbl[].focusOutEvent):
-    vtbl[].vtbl.focusOutEvent = cQTableView_vtable_callback_focusOutEvent
+    vtbl[].vtbl.focusOutEvent = fcQTableView_vtable_callback_focusOutEvent
   if not isNil(vtbl[].keyPressEvent):
-    vtbl[].vtbl.keyPressEvent = cQTableView_vtable_callback_keyPressEvent
+    vtbl[].vtbl.keyPressEvent = fcQTableView_vtable_callback_keyPressEvent
   if not isNil(vtbl[].resizeEvent):
-    vtbl[].vtbl.resizeEvent = cQTableView_vtable_callback_resizeEvent
+    vtbl[].vtbl.resizeEvent = fcQTableView_vtable_callback_resizeEvent
   if not isNil(vtbl[].inputMethodEvent):
-    vtbl[].vtbl.inputMethodEvent = cQTableView_vtable_callback_inputMethodEvent
+    vtbl[].vtbl.inputMethodEvent = fcQTableView_vtable_callback_inputMethodEvent
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQTableView_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQTableView_vtable_callback_eventFilter
   if not isNil(vtbl[].minimumSizeHint):
-    vtbl[].vtbl.minimumSizeHint = cQTableView_vtable_callback_minimumSizeHint
+    vtbl[].vtbl.minimumSizeHint = fcQTableView_vtable_callback_minimumSizeHint
   if not isNil(vtbl[].sizeHint):
-    vtbl[].vtbl.sizeHint = cQTableView_vtable_callback_sizeHint
+    vtbl[].vtbl.sizeHint = fcQTableView_vtable_callback_sizeHint
   if not isNil(vtbl[].setupViewport):
-    vtbl[].vtbl.setupViewport = cQTableView_vtable_callback_setupViewport
+    vtbl[].vtbl.setupViewport = fcQTableView_vtable_callback_setupViewport
   if not isNil(vtbl[].wheelEvent):
-    vtbl[].vtbl.wheelEvent = cQTableView_vtable_callback_wheelEvent
+    vtbl[].vtbl.wheelEvent = fcQTableView_vtable_callback_wheelEvent
   if not isNil(vtbl[].contextMenuEvent):
-    vtbl[].vtbl.contextMenuEvent = cQTableView_vtable_callback_contextMenuEvent
+    vtbl[].vtbl.contextMenuEvent = fcQTableView_vtable_callback_contextMenuEvent
   if not isNil(vtbl[].changeEvent):
-    vtbl[].vtbl.changeEvent = cQTableView_vtable_callback_changeEvent
+    vtbl[].vtbl.changeEvent = fcQTableView_vtable_callback_changeEvent
   if not isNil(vtbl[].devType):
-    vtbl[].vtbl.devType = cQTableView_vtable_callback_devType
+    vtbl[].vtbl.devType = fcQTableView_vtable_callback_devType
   if not isNil(vtbl[].setVisible):
-    vtbl[].vtbl.setVisible = cQTableView_vtable_callback_setVisible
+    vtbl[].vtbl.setVisible = fcQTableView_vtable_callback_setVisible
   if not isNil(vtbl[].heightForWidth):
-    vtbl[].vtbl.heightForWidth = cQTableView_vtable_callback_heightForWidth
+    vtbl[].vtbl.heightForWidth = fcQTableView_vtable_callback_heightForWidth
   if not isNil(vtbl[].hasHeightForWidth):
-    vtbl[].vtbl.hasHeightForWidth = cQTableView_vtable_callback_hasHeightForWidth
+    vtbl[].vtbl.hasHeightForWidth = fcQTableView_vtable_callback_hasHeightForWidth
   if not isNil(vtbl[].paintEngine):
-    vtbl[].vtbl.paintEngine = cQTableView_vtable_callback_paintEngine
+    vtbl[].vtbl.paintEngine = fcQTableView_vtable_callback_paintEngine
   if not isNil(vtbl[].keyReleaseEvent):
-    vtbl[].vtbl.keyReleaseEvent = cQTableView_vtable_callback_keyReleaseEvent
+    vtbl[].vtbl.keyReleaseEvent = fcQTableView_vtable_callback_keyReleaseEvent
   if not isNil(vtbl[].enterEvent):
-    vtbl[].vtbl.enterEvent = cQTableView_vtable_callback_enterEvent
+    vtbl[].vtbl.enterEvent = fcQTableView_vtable_callback_enterEvent
   if not isNil(vtbl[].leaveEvent):
-    vtbl[].vtbl.leaveEvent = cQTableView_vtable_callback_leaveEvent
+    vtbl[].vtbl.leaveEvent = fcQTableView_vtable_callback_leaveEvent
   if not isNil(vtbl[].moveEvent):
-    vtbl[].vtbl.moveEvent = cQTableView_vtable_callback_moveEvent
+    vtbl[].vtbl.moveEvent = fcQTableView_vtable_callback_moveEvent
   if not isNil(vtbl[].closeEvent):
-    vtbl[].vtbl.closeEvent = cQTableView_vtable_callback_closeEvent
+    vtbl[].vtbl.closeEvent = fcQTableView_vtable_callback_closeEvent
   if not isNil(vtbl[].tabletEvent):
-    vtbl[].vtbl.tabletEvent = cQTableView_vtable_callback_tabletEvent
+    vtbl[].vtbl.tabletEvent = fcQTableView_vtable_callback_tabletEvent
   if not isNil(vtbl[].actionEvent):
-    vtbl[].vtbl.actionEvent = cQTableView_vtable_callback_actionEvent
+    vtbl[].vtbl.actionEvent = fcQTableView_vtable_callback_actionEvent
   if not isNil(vtbl[].showEvent):
-    vtbl[].vtbl.showEvent = cQTableView_vtable_callback_showEvent
+    vtbl[].vtbl.showEvent = fcQTableView_vtable_callback_showEvent
   if not isNil(vtbl[].hideEvent):
-    vtbl[].vtbl.hideEvent = cQTableView_vtable_callback_hideEvent
+    vtbl[].vtbl.hideEvent = fcQTableView_vtable_callback_hideEvent
   if not isNil(vtbl[].nativeEvent):
-    vtbl[].vtbl.nativeEvent = cQTableView_vtable_callback_nativeEvent
+    vtbl[].vtbl.nativeEvent = fcQTableView_vtable_callback_nativeEvent
   if not isNil(vtbl[].metric):
-    vtbl[].vtbl.metric = cQTableView_vtable_callback_metric
+    vtbl[].vtbl.metric = fcQTableView_vtable_callback_metric
   if not isNil(vtbl[].initPainter):
-    vtbl[].vtbl.initPainter = cQTableView_vtable_callback_initPainter
+    vtbl[].vtbl.initPainter = fcQTableView_vtable_callback_initPainter
   if not isNil(vtbl[].redirected):
-    vtbl[].vtbl.redirected = cQTableView_vtable_callback_redirected
+    vtbl[].vtbl.redirected = fcQTableView_vtable_callback_redirected
   if not isNil(vtbl[].sharedPainter):
-    vtbl[].vtbl.sharedPainter = cQTableView_vtable_callback_sharedPainter
+    vtbl[].vtbl.sharedPainter = fcQTableView_vtable_callback_sharedPainter
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQTableView_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQTableView_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQTableView_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQTableView_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQTableView_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQTableView_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQTableView_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQTableView_vtable_callback_disconnectNotify
   gen_qtableview_types.QTableView(h: fcQTableView_new2(addr(vtbl[].vtbl), addr(vtbl[])), owned: true)
 
 const cQTableView_mvtbl = cQTableViewVTable(
@@ -2910,98 +2917,99 @@ const cQTableView_mvtbl = cQTableViewVTable(
     let inst = cast[ptr typeof(VirtualQTableView()[])](self.fcQTableView_vtbl())
     inst[].h = nil
     inst[].owned = false,
-  metaObject: cQTableView_method_callback_metaObject,
-  metacast: cQTableView_method_callback_metacast,
-  metacall: cQTableView_method_callback_metacall,
-  setModel: cQTableView_method_callback_setModel,
-  setRootIndex: cQTableView_method_callback_setRootIndex,
-  setSelectionModel: cQTableView_method_callback_setSelectionModel,
-  doItemsLayout: cQTableView_method_callback_doItemsLayout,
-  visualRect: cQTableView_method_callback_visualRect,
-  scrollTo: cQTableView_method_callback_scrollTo,
-  indexAt: cQTableView_method_callback_indexAt,
-  scrollContentsBy: cQTableView_method_callback_scrollContentsBy,
-  viewOptions: cQTableView_method_callback_viewOptions,
-  paintEvent: cQTableView_method_callback_paintEvent,
-  timerEvent: cQTableView_method_callback_timerEvent,
-  horizontalOffset: cQTableView_method_callback_horizontalOffset,
-  verticalOffset: cQTableView_method_callback_verticalOffset,
-  moveCursor: cQTableView_method_callback_moveCursor,
-  setSelection: cQTableView_method_callback_setSelection,
-  visualRegionForSelection: cQTableView_method_callback_visualRegionForSelection,
-  selectedIndexes: cQTableView_method_callback_selectedIndexes,
-  updateGeometries: cQTableView_method_callback_updateGeometries,
-  viewportSizeHint: cQTableView_method_callback_viewportSizeHint,
-  sizeHintForRow: cQTableView_method_callback_sizeHintForRow,
-  sizeHintForColumn: cQTableView_method_callback_sizeHintForColumn,
-  verticalScrollbarAction: cQTableView_method_callback_verticalScrollbarAction,
-  horizontalScrollbarAction: cQTableView_method_callback_horizontalScrollbarAction,
-  isIndexHidden: cQTableView_method_callback_isIndexHidden,
-  selectionChanged: cQTableView_method_callback_selectionChanged,
-  currentChanged: cQTableView_method_callback_currentChanged,
-  keyboardSearch: cQTableView_method_callback_keyboardSearch,
-  inputMethodQuery: cQTableView_method_callback_inputMethodQuery,
-  reset: cQTableView_method_callback_reset,
-  selectAll: cQTableView_method_callback_selectAll,
-  dataChanged: cQTableView_method_callback_dataChanged,
-  rowsInserted: cQTableView_method_callback_rowsInserted,
-  rowsAboutToBeRemoved: cQTableView_method_callback_rowsAboutToBeRemoved,
-  updateEditorData: cQTableView_method_callback_updateEditorData,
-  updateEditorGeometries: cQTableView_method_callback_updateEditorGeometries,
-  verticalScrollbarValueChanged: cQTableView_method_callback_verticalScrollbarValueChanged,
-  horizontalScrollbarValueChanged: cQTableView_method_callback_horizontalScrollbarValueChanged,
-  closeEditor: cQTableView_method_callback_closeEditor,
-  commitData: cQTableView_method_callback_commitData,
-  editorDestroyed: cQTableView_method_callback_editorDestroyed,
-  edit2: cQTableView_method_callback_edit2,
-  selectionCommand: cQTableView_method_callback_selectionCommand,
-  startDrag: cQTableView_method_callback_startDrag,
-  focusNextPrevChild: cQTableView_method_callback_focusNextPrevChild,
-  event: cQTableView_method_callback_event,
-  viewportEvent: cQTableView_method_callback_viewportEvent,
-  mousePressEvent: cQTableView_method_callback_mousePressEvent,
-  mouseMoveEvent: cQTableView_method_callback_mouseMoveEvent,
-  mouseReleaseEvent: cQTableView_method_callback_mouseReleaseEvent,
-  mouseDoubleClickEvent: cQTableView_method_callback_mouseDoubleClickEvent,
-  dragEnterEvent: cQTableView_method_callback_dragEnterEvent,
-  dragMoveEvent: cQTableView_method_callback_dragMoveEvent,
-  dragLeaveEvent: cQTableView_method_callback_dragLeaveEvent,
-  dropEvent: cQTableView_method_callback_dropEvent,
-  focusInEvent: cQTableView_method_callback_focusInEvent,
-  focusOutEvent: cQTableView_method_callback_focusOutEvent,
-  keyPressEvent: cQTableView_method_callback_keyPressEvent,
-  resizeEvent: cQTableView_method_callback_resizeEvent,
-  inputMethodEvent: cQTableView_method_callback_inputMethodEvent,
-  eventFilter: cQTableView_method_callback_eventFilter,
-  minimumSizeHint: cQTableView_method_callback_minimumSizeHint,
-  sizeHint: cQTableView_method_callback_sizeHint,
-  setupViewport: cQTableView_method_callback_setupViewport,
-  wheelEvent: cQTableView_method_callback_wheelEvent,
-  contextMenuEvent: cQTableView_method_callback_contextMenuEvent,
-  changeEvent: cQTableView_method_callback_changeEvent,
-  devType: cQTableView_method_callback_devType,
-  setVisible: cQTableView_method_callback_setVisible,
-  heightForWidth: cQTableView_method_callback_heightForWidth,
-  hasHeightForWidth: cQTableView_method_callback_hasHeightForWidth,
-  paintEngine: cQTableView_method_callback_paintEngine,
-  keyReleaseEvent: cQTableView_method_callback_keyReleaseEvent,
-  enterEvent: cQTableView_method_callback_enterEvent,
-  leaveEvent: cQTableView_method_callback_leaveEvent,
-  moveEvent: cQTableView_method_callback_moveEvent,
-  closeEvent: cQTableView_method_callback_closeEvent,
-  tabletEvent: cQTableView_method_callback_tabletEvent,
-  actionEvent: cQTableView_method_callback_actionEvent,
-  showEvent: cQTableView_method_callback_showEvent,
-  hideEvent: cQTableView_method_callback_hideEvent,
-  nativeEvent: cQTableView_method_callback_nativeEvent,
-  metric: cQTableView_method_callback_metric,
-  initPainter: cQTableView_method_callback_initPainter,
-  redirected: cQTableView_method_callback_redirected,
-  sharedPainter: cQTableView_method_callback_sharedPainter,
-  childEvent: cQTableView_method_callback_childEvent,
-  customEvent: cQTableView_method_callback_customEvent,
-  connectNotify: cQTableView_method_callback_connectNotify,
-  disconnectNotify: cQTableView_method_callback_disconnectNotify,
+
+  metaObject: fcQTableView_method_callback_metaObject,
+  metacast: fcQTableView_method_callback_metacast,
+  metacall: fcQTableView_method_callback_metacall,
+  setModel: fcQTableView_method_callback_setModel,
+  setRootIndex: fcQTableView_method_callback_setRootIndex,
+  setSelectionModel: fcQTableView_method_callback_setSelectionModel,
+  doItemsLayout: fcQTableView_method_callback_doItemsLayout,
+  visualRect: fcQTableView_method_callback_visualRect,
+  scrollTo: fcQTableView_method_callback_scrollTo,
+  indexAt: fcQTableView_method_callback_indexAt,
+  scrollContentsBy: fcQTableView_method_callback_scrollContentsBy,
+  viewOptions: fcQTableView_method_callback_viewOptions,
+  paintEvent: fcQTableView_method_callback_paintEvent,
+  timerEvent: fcQTableView_method_callback_timerEvent,
+  horizontalOffset: fcQTableView_method_callback_horizontalOffset,
+  verticalOffset: fcQTableView_method_callback_verticalOffset,
+  moveCursor: fcQTableView_method_callback_moveCursor,
+  setSelection: fcQTableView_method_callback_setSelection,
+  visualRegionForSelection: fcQTableView_method_callback_visualRegionForSelection,
+  selectedIndexes: fcQTableView_method_callback_selectedIndexes,
+  updateGeometries: fcQTableView_method_callback_updateGeometries,
+  viewportSizeHint: fcQTableView_method_callback_viewportSizeHint,
+  sizeHintForRow: fcQTableView_method_callback_sizeHintForRow,
+  sizeHintForColumn: fcQTableView_method_callback_sizeHintForColumn,
+  verticalScrollbarAction: fcQTableView_method_callback_verticalScrollbarAction,
+  horizontalScrollbarAction: fcQTableView_method_callback_horizontalScrollbarAction,
+  isIndexHidden: fcQTableView_method_callback_isIndexHidden,
+  selectionChanged: fcQTableView_method_callback_selectionChanged,
+  currentChanged: fcQTableView_method_callback_currentChanged,
+  keyboardSearch: fcQTableView_method_callback_keyboardSearch,
+  inputMethodQuery: fcQTableView_method_callback_inputMethodQuery,
+  reset: fcQTableView_method_callback_reset,
+  selectAll: fcQTableView_method_callback_selectAll,
+  dataChanged: fcQTableView_method_callback_dataChanged,
+  rowsInserted: fcQTableView_method_callback_rowsInserted,
+  rowsAboutToBeRemoved: fcQTableView_method_callback_rowsAboutToBeRemoved,
+  updateEditorData: fcQTableView_method_callback_updateEditorData,
+  updateEditorGeometries: fcQTableView_method_callback_updateEditorGeometries,
+  verticalScrollbarValueChanged: fcQTableView_method_callback_verticalScrollbarValueChanged,
+  horizontalScrollbarValueChanged: fcQTableView_method_callback_horizontalScrollbarValueChanged,
+  closeEditor: fcQTableView_method_callback_closeEditor,
+  commitData: fcQTableView_method_callback_commitData,
+  editorDestroyed: fcQTableView_method_callback_editorDestroyed,
+  edit2: fcQTableView_method_callback_edit2,
+  selectionCommand: fcQTableView_method_callback_selectionCommand,
+  startDrag: fcQTableView_method_callback_startDrag,
+  focusNextPrevChild: fcQTableView_method_callback_focusNextPrevChild,
+  event: fcQTableView_method_callback_event,
+  viewportEvent: fcQTableView_method_callback_viewportEvent,
+  mousePressEvent: fcQTableView_method_callback_mousePressEvent,
+  mouseMoveEvent: fcQTableView_method_callback_mouseMoveEvent,
+  mouseReleaseEvent: fcQTableView_method_callback_mouseReleaseEvent,
+  mouseDoubleClickEvent: fcQTableView_method_callback_mouseDoubleClickEvent,
+  dragEnterEvent: fcQTableView_method_callback_dragEnterEvent,
+  dragMoveEvent: fcQTableView_method_callback_dragMoveEvent,
+  dragLeaveEvent: fcQTableView_method_callback_dragLeaveEvent,
+  dropEvent: fcQTableView_method_callback_dropEvent,
+  focusInEvent: fcQTableView_method_callback_focusInEvent,
+  focusOutEvent: fcQTableView_method_callback_focusOutEvent,
+  keyPressEvent: fcQTableView_method_callback_keyPressEvent,
+  resizeEvent: fcQTableView_method_callback_resizeEvent,
+  inputMethodEvent: fcQTableView_method_callback_inputMethodEvent,
+  eventFilter: fcQTableView_method_callback_eventFilter,
+  minimumSizeHint: fcQTableView_method_callback_minimumSizeHint,
+  sizeHint: fcQTableView_method_callback_sizeHint,
+  setupViewport: fcQTableView_method_callback_setupViewport,
+  wheelEvent: fcQTableView_method_callback_wheelEvent,
+  contextMenuEvent: fcQTableView_method_callback_contextMenuEvent,
+  changeEvent: fcQTableView_method_callback_changeEvent,
+  devType: fcQTableView_method_callback_devType,
+  setVisible: fcQTableView_method_callback_setVisible,
+  heightForWidth: fcQTableView_method_callback_heightForWidth,
+  hasHeightForWidth: fcQTableView_method_callback_hasHeightForWidth,
+  paintEngine: fcQTableView_method_callback_paintEngine,
+  keyReleaseEvent: fcQTableView_method_callback_keyReleaseEvent,
+  enterEvent: fcQTableView_method_callback_enterEvent,
+  leaveEvent: fcQTableView_method_callback_leaveEvent,
+  moveEvent: fcQTableView_method_callback_moveEvent,
+  closeEvent: fcQTableView_method_callback_closeEvent,
+  tabletEvent: fcQTableView_method_callback_tabletEvent,
+  actionEvent: fcQTableView_method_callback_actionEvent,
+  showEvent: fcQTableView_method_callback_showEvent,
+  hideEvent: fcQTableView_method_callback_hideEvent,
+  nativeEvent: fcQTableView_method_callback_nativeEvent,
+  metric: fcQTableView_method_callback_metric,
+  initPainter: fcQTableView_method_callback_initPainter,
+  redirected: fcQTableView_method_callback_redirected,
+  sharedPainter: fcQTableView_method_callback_sharedPainter,
+  childEvent: fcQTableView_method_callback_childEvent,
+  customEvent: fcQTableView_method_callback_customEvent,
+  connectNotify: fcQTableView_method_callback_connectNotify,
+  disconnectNotify: fcQTableView_method_callback_disconnectNotify,
 )
 proc create*(T: type gen_qtableview_types.QTableView,
     parent: gen_qwidget_types.QWidget,

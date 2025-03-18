@@ -152,19 +152,19 @@ proc closed*(self: gen_qwebenginenotification_types.QWebEngineNotification): voi
   fcQWebEngineNotification_closed(self.h)
 
 type QWebEngineNotificationclosedSlot* = proc()
-proc cQWebEngineNotification_slot_callback_closed(slot: int) {.cdecl.} =
+proc fcQWebEngineNotification_slot_callback_closed(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QWebEngineNotificationclosedSlot](cast[pointer](slot))
   nimfunc[]()
 
-proc cQWebEngineNotification_slot_callback_closed_release(slot: int) {.cdecl.} =
+proc fcQWebEngineNotification_slot_callback_closed_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QWebEngineNotificationclosedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onclosed*(self: gen_qwebenginenotification_types.QWebEngineNotification, slot: QWebEngineNotificationclosedSlot) =
+proc onClosed*(self: gen_qwebenginenotification_types.QWebEngineNotification, slot: QWebEngineNotificationclosedSlot) =
   var tmp = new QWebEngineNotificationclosedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQWebEngineNotification_connect_closed(self.h, cast[int](addr tmp[]), cQWebEngineNotification_slot_callback_closed, cQWebEngineNotification_slot_callback_closed_release)
+  fcQWebEngineNotification_connect_closed(self.h, cast[int](addr tmp[]), fcQWebEngineNotification_slot_callback_closed, fcQWebEngineNotification_slot_callback_closed_release)
 
 proc tr*(_: type gen_qwebenginenotification_types.QWebEngineNotification, s: cstring, c: cstring): string =
   let v_ms = fcQWebEngineNotification_tr2(s, c)

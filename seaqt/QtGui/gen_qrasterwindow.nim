@@ -81,6 +81,7 @@ proc fcQRasterWindow_trUtf82(s: cstring, c: cstring): struct_miqt_string {.impor
 proc fcQRasterWindow_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QRasterWindow_trUtf83".}
 proc fcQRasterWindow_vtbl(self: pointer): pointer {.importc: "QRasterWindow_vtbl".}
 proc fcQRasterWindow_vdata(self: pointer): pointer {.importc: "QRasterWindow_vdata".}
+
 type cQRasterWindowVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -250,6 +251,7 @@ type QRasterWindowdisconnectNotifyProc* = proc(self: QRasterWindow, signal: gen_
 type QRasterWindowdevTypeProc* = proc(self: QRasterWindow): cint {.raises: [], gcsafe.}
 type QRasterWindowinitPainterProc* = proc(self: QRasterWindow, painter: gen_qpainter_types.QPainter): void {.raises: [], gcsafe.}
 type QRasterWindowsharedPainterProc* = proc(self: QRasterWindow): gen_qpainter_types.QPainter {.raises: [], gcsafe.}
+
 type QRasterWindowVTable* {.inheritable, pure.} = object
   vtbl: cQRasterWindowVTable
   metaObject*: QRasterWindowmetaObjectProc
@@ -290,10 +292,123 @@ type QRasterWindowVTable* {.inheritable, pure.} = object
   devType*: QRasterWindowdevTypeProc
   initPainter*: QRasterWindowinitPainterProc
   sharedPainter*: QRasterWindowsharedPainterProc
+
 proc QRasterWindowmetaObject*(self: gen_qrasterwindow_types.QRasterWindow): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQRasterWindow_virtualbase_metaObject(self.h), owned: false)
 
-proc cQRasterWindow_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
+proc QRasterWindowmetacast*(self: gen_qrasterwindow_types.QRasterWindow, param1: cstring): pointer =
+  fcQRasterWindow_virtualbase_metacast(self.h, param1)
+
+proc QRasterWindowmetacall*(self: gen_qrasterwindow_types.QRasterWindow, param1: cint, param2: cint, param3: pointer): cint =
+  fcQRasterWindow_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+proc QRasterWindowmetric*(self: gen_qrasterwindow_types.QRasterWindow, metric: cint): cint =
+  fcQRasterWindow_virtualbase_metric(self.h, cint(metric))
+
+proc QRasterWindowredirected*(self: gen_qrasterwindow_types.QRasterWindow, param1: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice =
+  gen_qpaintdevice_types.QPaintDevice(h: fcQRasterWindow_virtualbase_redirected(self.h, param1.h), owned: false)
+
+proc QRasterWindowpaintEvent*(self: gen_qrasterwindow_types.QRasterWindow, event: gen_qevent_types.QPaintEvent): void =
+  fcQRasterWindow_virtualbase_paintEvent(self.h, event.h)
+
+proc QRasterWindowexposeEvent*(self: gen_qrasterwindow_types.QRasterWindow, param1: gen_qevent_types.QExposeEvent): void =
+  fcQRasterWindow_virtualbase_exposeEvent(self.h, param1.h)
+
+proc QRasterWindowevent*(self: gen_qrasterwindow_types.QRasterWindow, event: gen_qcoreevent_types.QEvent): bool =
+  fcQRasterWindow_virtualbase_event(self.h, event.h)
+
+proc QRasterWindowsurfaceType*(self: gen_qrasterwindow_types.QRasterWindow): cint =
+  cint(fcQRasterWindow_virtualbase_surfaceType(self.h))
+
+proc QRasterWindowformat*(self: gen_qrasterwindow_types.QRasterWindow): gen_qsurfaceformat_types.QSurfaceFormat =
+  gen_qsurfaceformat_types.QSurfaceFormat(h: fcQRasterWindow_virtualbase_format(self.h), owned: true)
+
+proc QRasterWindowsize*(self: gen_qrasterwindow_types.QRasterWindow): gen_qsize_types.QSize =
+  gen_qsize_types.QSize(h: fcQRasterWindow_virtualbase_size(self.h), owned: true)
+
+proc QRasterWindowaccessibleRoot*(self: gen_qrasterwindow_types.QRasterWindow): gen_qaccessible_types.QAccessibleInterface =
+  gen_qaccessible_types.QAccessibleInterface(h: fcQRasterWindow_virtualbase_accessibleRoot(self.h), owned: false)
+
+proc QRasterWindowfocusObject*(self: gen_qrasterwindow_types.QRasterWindow): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQRasterWindow_virtualbase_focusObject(self.h), owned: false)
+
+proc QRasterWindowresizeEvent*(self: gen_qrasterwindow_types.QRasterWindow, param1: gen_qevent_types.QResizeEvent): void =
+  fcQRasterWindow_virtualbase_resizeEvent(self.h, param1.h)
+
+proc QRasterWindowmoveEvent*(self: gen_qrasterwindow_types.QRasterWindow, param1: gen_qevent_types.QMoveEvent): void =
+  fcQRasterWindow_virtualbase_moveEvent(self.h, param1.h)
+
+proc QRasterWindowfocusInEvent*(self: gen_qrasterwindow_types.QRasterWindow, param1: gen_qevent_types.QFocusEvent): void =
+  fcQRasterWindow_virtualbase_focusInEvent(self.h, param1.h)
+
+proc QRasterWindowfocusOutEvent*(self: gen_qrasterwindow_types.QRasterWindow, param1: gen_qevent_types.QFocusEvent): void =
+  fcQRasterWindow_virtualbase_focusOutEvent(self.h, param1.h)
+
+proc QRasterWindowshowEvent*(self: gen_qrasterwindow_types.QRasterWindow, param1: gen_qevent_types.QShowEvent): void =
+  fcQRasterWindow_virtualbase_showEvent(self.h, param1.h)
+
+proc QRasterWindowhideEvent*(self: gen_qrasterwindow_types.QRasterWindow, param1: gen_qevent_types.QHideEvent): void =
+  fcQRasterWindow_virtualbase_hideEvent(self.h, param1.h)
+
+proc QRasterWindowkeyPressEvent*(self: gen_qrasterwindow_types.QRasterWindow, param1: gen_qevent_types.QKeyEvent): void =
+  fcQRasterWindow_virtualbase_keyPressEvent(self.h, param1.h)
+
+proc QRasterWindowkeyReleaseEvent*(self: gen_qrasterwindow_types.QRasterWindow, param1: gen_qevent_types.QKeyEvent): void =
+  fcQRasterWindow_virtualbase_keyReleaseEvent(self.h, param1.h)
+
+proc QRasterWindowmousePressEvent*(self: gen_qrasterwindow_types.QRasterWindow, param1: gen_qevent_types.QMouseEvent): void =
+  fcQRasterWindow_virtualbase_mousePressEvent(self.h, param1.h)
+
+proc QRasterWindowmouseReleaseEvent*(self: gen_qrasterwindow_types.QRasterWindow, param1: gen_qevent_types.QMouseEvent): void =
+  fcQRasterWindow_virtualbase_mouseReleaseEvent(self.h, param1.h)
+
+proc QRasterWindowmouseDoubleClickEvent*(self: gen_qrasterwindow_types.QRasterWindow, param1: gen_qevent_types.QMouseEvent): void =
+  fcQRasterWindow_virtualbase_mouseDoubleClickEvent(self.h, param1.h)
+
+proc QRasterWindowmouseMoveEvent*(self: gen_qrasterwindow_types.QRasterWindow, param1: gen_qevent_types.QMouseEvent): void =
+  fcQRasterWindow_virtualbase_mouseMoveEvent(self.h, param1.h)
+
+proc QRasterWindowwheelEvent*(self: gen_qrasterwindow_types.QRasterWindow, param1: gen_qevent_types.QWheelEvent): void =
+  fcQRasterWindow_virtualbase_wheelEvent(self.h, param1.h)
+
+proc QRasterWindowtouchEvent*(self: gen_qrasterwindow_types.QRasterWindow, param1: gen_qevent_types.QTouchEvent): void =
+  fcQRasterWindow_virtualbase_touchEvent(self.h, param1.h)
+
+proc QRasterWindowtabletEvent*(self: gen_qrasterwindow_types.QRasterWindow, param1: gen_qevent_types.QTabletEvent): void =
+  fcQRasterWindow_virtualbase_tabletEvent(self.h, param1.h)
+
+proc QRasterWindownativeEvent*(self: gen_qrasterwindow_types.QRasterWindow, eventType: openArray[byte], message: pointer, resultVal: ptr clong): bool =
+  fcQRasterWindow_virtualbase_nativeEvent(self.h, struct_miqt_string(data: cast[cstring](if len(eventType) == 0: nil else: unsafeAddr eventType[0]), len: csize_t(len(eventType))), message, resultVal)
+
+proc QRasterWindoweventFilter*(self: gen_qrasterwindow_types.QRasterWindow, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
+  fcQRasterWindow_virtualbase_eventFilter(self.h, watched.h, event.h)
+
+proc QRasterWindowtimerEvent*(self: gen_qrasterwindow_types.QRasterWindow, event: gen_qcoreevent_types.QTimerEvent): void =
+  fcQRasterWindow_virtualbase_timerEvent(self.h, event.h)
+
+proc QRasterWindowchildEvent*(self: gen_qrasterwindow_types.QRasterWindow, event: gen_qcoreevent_types.QChildEvent): void =
+  fcQRasterWindow_virtualbase_childEvent(self.h, event.h)
+
+proc QRasterWindowcustomEvent*(self: gen_qrasterwindow_types.QRasterWindow, event: gen_qcoreevent_types.QEvent): void =
+  fcQRasterWindow_virtualbase_customEvent(self.h, event.h)
+
+proc QRasterWindowconnectNotify*(self: gen_qrasterwindow_types.QRasterWindow, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQRasterWindow_virtualbase_connectNotify(self.h, signal.h)
+
+proc QRasterWindowdisconnectNotify*(self: gen_qrasterwindow_types.QRasterWindow, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQRasterWindow_virtualbase_disconnectNotify(self.h, signal.h)
+
+proc QRasterWindowdevType*(self: gen_qrasterwindow_types.QRasterWindow): cint =
+  fcQRasterWindow_virtualbase_devType(self.h)
+
+proc QRasterWindowinitPainter*(self: gen_qrasterwindow_types.QRasterWindow, painter: gen_qpainter_types.QPainter): void =
+  fcQRasterWindow_virtualbase_initPainter(self.h, painter.h)
+
+proc QRasterWindowsharedPainter*(self: gen_qrasterwindow_types.QRasterWindow): gen_qpainter_types.QPainter =
+  gen_qpainter_types.QPainter(h: fcQRasterWindow_virtualbase_sharedPainter(self.h), owned: false)
+
+
+proc fcQRasterWindow_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QRasterWindowVTable](fcQRasterWindow_vdata(self))
   let self = QRasterWindow(h: self)
   var virtualReturn = vtbl[].metaObject(self)
@@ -302,20 +417,14 @@ proc cQRasterWindow_vtable_callback_metaObject(self: pointer): pointer {.cdecl.}
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QRasterWindowmetacast*(self: gen_qrasterwindow_types.QRasterWindow, param1: cstring): pointer =
-  fcQRasterWindow_virtualbase_metacast(self.h, param1)
-
-proc cQRasterWindow_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+proc fcQRasterWindow_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QRasterWindowVTable](fcQRasterWindow_vdata(self))
   let self = QRasterWindow(h: self)
   let slotval1 = (param1)
   var virtualReturn = vtbl[].metacast(self, slotval1)
   virtualReturn
 
-proc QRasterWindowmetacall*(self: gen_qrasterwindow_types.QRasterWindow, param1: cint, param2: cint, param3: pointer): cint =
-  fcQRasterWindow_virtualbase_metacall(self.h, cint(param1), param2, param3)
-
-proc cQRasterWindow_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+proc fcQRasterWindow_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QRasterWindowVTable](fcQRasterWindow_vdata(self))
   let self = QRasterWindow(h: self)
   let slotval1 = cint(param1)
@@ -324,20 +433,14 @@ proc cQRasterWindow_vtable_callback_metacall(self: pointer, param1: cint, param2
   var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QRasterWindowmetric*(self: gen_qrasterwindow_types.QRasterWindow, metric: cint): cint =
-  fcQRasterWindow_virtualbase_metric(self.h, cint(metric))
-
-proc cQRasterWindow_vtable_callback_metric(self: pointer, metric: cint): cint {.cdecl.} =
+proc fcQRasterWindow_vtable_callback_metric(self: pointer, metric: cint): cint {.cdecl.} =
   let vtbl = cast[ptr QRasterWindowVTable](fcQRasterWindow_vdata(self))
   let self = QRasterWindow(h: self)
   let slotval1 = cint(metric)
   var virtualReturn = vtbl[].metric(self, slotval1)
   virtualReturn
 
-proc QRasterWindowredirected*(self: gen_qrasterwindow_types.QRasterWindow, param1: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice =
-  gen_qpaintdevice_types.QPaintDevice(h: fcQRasterWindow_virtualbase_redirected(self.h, param1.h), owned: false)
-
-proc cQRasterWindow_vtable_callback_redirected(self: pointer, param1: pointer): pointer {.cdecl.} =
+proc fcQRasterWindow_vtable_callback_redirected(self: pointer, param1: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QRasterWindowVTable](fcQRasterWindow_vdata(self))
   let self = QRasterWindow(h: self)
   let slotval1 = gen_qpoint_types.QPoint(h: param1, owned: false)
@@ -347,47 +450,32 @@ proc cQRasterWindow_vtable_callback_redirected(self: pointer, param1: pointer): 
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QRasterWindowpaintEvent*(self: gen_qrasterwindow_types.QRasterWindow, event: gen_qevent_types.QPaintEvent): void =
-  fcQRasterWindow_virtualbase_paintEvent(self.h, event.h)
-
-proc cQRasterWindow_vtable_callback_paintEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQRasterWindow_vtable_callback_paintEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QRasterWindowVTable](fcQRasterWindow_vdata(self))
   let self = QRasterWindow(h: self)
   let slotval1 = gen_qevent_types.QPaintEvent(h: event, owned: false)
   vtbl[].paintEvent(self, slotval1)
 
-proc QRasterWindowexposeEvent*(self: gen_qrasterwindow_types.QRasterWindow, param1: gen_qevent_types.QExposeEvent): void =
-  fcQRasterWindow_virtualbase_exposeEvent(self.h, param1.h)
-
-proc cQRasterWindow_vtable_callback_exposeEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQRasterWindow_vtable_callback_exposeEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QRasterWindowVTable](fcQRasterWindow_vdata(self))
   let self = QRasterWindow(h: self)
   let slotval1 = gen_qevent_types.QExposeEvent(h: param1, owned: false)
   vtbl[].exposeEvent(self, slotval1)
 
-proc QRasterWindowevent*(self: gen_qrasterwindow_types.QRasterWindow, event: gen_qcoreevent_types.QEvent): bool =
-  fcQRasterWindow_virtualbase_event(self.h, event.h)
-
-proc cQRasterWindow_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
+proc fcQRasterWindow_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QRasterWindowVTable](fcQRasterWindow_vdata(self))
   let self = QRasterWindow(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
-proc QRasterWindowsurfaceType*(self: gen_qrasterwindow_types.QRasterWindow): cint =
-  cint(fcQRasterWindow_virtualbase_surfaceType(self.h))
-
-proc cQRasterWindow_vtable_callback_surfaceType(self: pointer): cint {.cdecl.} =
+proc fcQRasterWindow_vtable_callback_surfaceType(self: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QRasterWindowVTable](fcQRasterWindow_vdata(self))
   let self = QRasterWindow(h: self)
   var virtualReturn = vtbl[].surfaceType(self)
   cint(virtualReturn)
 
-proc QRasterWindowformat*(self: gen_qrasterwindow_types.QRasterWindow): gen_qsurfaceformat_types.QSurfaceFormat =
-  gen_qsurfaceformat_types.QSurfaceFormat(h: fcQRasterWindow_virtualbase_format(self.h), owned: true)
-
-proc cQRasterWindow_vtable_callback_format(self: pointer): pointer {.cdecl.} =
+proc fcQRasterWindow_vtable_callback_format(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QRasterWindowVTable](fcQRasterWindow_vdata(self))
   let self = QRasterWindow(h: self)
   var virtualReturn = vtbl[].format(self)
@@ -396,10 +484,7 @@ proc cQRasterWindow_vtable_callback_format(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QRasterWindowsize*(self: gen_qrasterwindow_types.QRasterWindow): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQRasterWindow_virtualbase_size(self.h), owned: true)
-
-proc cQRasterWindow_vtable_callback_size(self: pointer): pointer {.cdecl.} =
+proc fcQRasterWindow_vtable_callback_size(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QRasterWindowVTable](fcQRasterWindow_vdata(self))
   let self = QRasterWindow(h: self)
   var virtualReturn = vtbl[].size(self)
@@ -408,10 +493,7 @@ proc cQRasterWindow_vtable_callback_size(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QRasterWindowaccessibleRoot*(self: gen_qrasterwindow_types.QRasterWindow): gen_qaccessible_types.QAccessibleInterface =
-  gen_qaccessible_types.QAccessibleInterface(h: fcQRasterWindow_virtualbase_accessibleRoot(self.h), owned: false)
-
-proc cQRasterWindow_vtable_callback_accessibleRoot(self: pointer): pointer {.cdecl.} =
+proc fcQRasterWindow_vtable_callback_accessibleRoot(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QRasterWindowVTable](fcQRasterWindow_vdata(self))
   let self = QRasterWindow(h: self)
   var virtualReturn = vtbl[].accessibleRoot(self)
@@ -420,10 +502,7 @@ proc cQRasterWindow_vtable_callback_accessibleRoot(self: pointer): pointer {.cde
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QRasterWindowfocusObject*(self: gen_qrasterwindow_types.QRasterWindow): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQRasterWindow_virtualbase_focusObject(self.h), owned: false)
-
-proc cQRasterWindow_vtable_callback_focusObject(self: pointer): pointer {.cdecl.} =
+proc fcQRasterWindow_vtable_callback_focusObject(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QRasterWindowVTable](fcQRasterWindow_vdata(self))
   let self = QRasterWindow(h: self)
   var virtualReturn = vtbl[].focusObject(self)
@@ -432,145 +511,97 @@ proc cQRasterWindow_vtable_callback_focusObject(self: pointer): pointer {.cdecl.
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QRasterWindowresizeEvent*(self: gen_qrasterwindow_types.QRasterWindow, param1: gen_qevent_types.QResizeEvent): void =
-  fcQRasterWindow_virtualbase_resizeEvent(self.h, param1.h)
-
-proc cQRasterWindow_vtable_callback_resizeEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQRasterWindow_vtable_callback_resizeEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QRasterWindowVTable](fcQRasterWindow_vdata(self))
   let self = QRasterWindow(h: self)
   let slotval1 = gen_qevent_types.QResizeEvent(h: param1, owned: false)
   vtbl[].resizeEvent(self, slotval1)
 
-proc QRasterWindowmoveEvent*(self: gen_qrasterwindow_types.QRasterWindow, param1: gen_qevent_types.QMoveEvent): void =
-  fcQRasterWindow_virtualbase_moveEvent(self.h, param1.h)
-
-proc cQRasterWindow_vtable_callback_moveEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQRasterWindow_vtable_callback_moveEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QRasterWindowVTable](fcQRasterWindow_vdata(self))
   let self = QRasterWindow(h: self)
   let slotval1 = gen_qevent_types.QMoveEvent(h: param1, owned: false)
   vtbl[].moveEvent(self, slotval1)
 
-proc QRasterWindowfocusInEvent*(self: gen_qrasterwindow_types.QRasterWindow, param1: gen_qevent_types.QFocusEvent): void =
-  fcQRasterWindow_virtualbase_focusInEvent(self.h, param1.h)
-
-proc cQRasterWindow_vtable_callback_focusInEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQRasterWindow_vtable_callback_focusInEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QRasterWindowVTable](fcQRasterWindow_vdata(self))
   let self = QRasterWindow(h: self)
   let slotval1 = gen_qevent_types.QFocusEvent(h: param1, owned: false)
   vtbl[].focusInEvent(self, slotval1)
 
-proc QRasterWindowfocusOutEvent*(self: gen_qrasterwindow_types.QRasterWindow, param1: gen_qevent_types.QFocusEvent): void =
-  fcQRasterWindow_virtualbase_focusOutEvent(self.h, param1.h)
-
-proc cQRasterWindow_vtable_callback_focusOutEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQRasterWindow_vtable_callback_focusOutEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QRasterWindowVTable](fcQRasterWindow_vdata(self))
   let self = QRasterWindow(h: self)
   let slotval1 = gen_qevent_types.QFocusEvent(h: param1, owned: false)
   vtbl[].focusOutEvent(self, slotval1)
 
-proc QRasterWindowshowEvent*(self: gen_qrasterwindow_types.QRasterWindow, param1: gen_qevent_types.QShowEvent): void =
-  fcQRasterWindow_virtualbase_showEvent(self.h, param1.h)
-
-proc cQRasterWindow_vtable_callback_showEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQRasterWindow_vtable_callback_showEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QRasterWindowVTable](fcQRasterWindow_vdata(self))
   let self = QRasterWindow(h: self)
   let slotval1 = gen_qevent_types.QShowEvent(h: param1, owned: false)
   vtbl[].showEvent(self, slotval1)
 
-proc QRasterWindowhideEvent*(self: gen_qrasterwindow_types.QRasterWindow, param1: gen_qevent_types.QHideEvent): void =
-  fcQRasterWindow_virtualbase_hideEvent(self.h, param1.h)
-
-proc cQRasterWindow_vtable_callback_hideEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQRasterWindow_vtable_callback_hideEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QRasterWindowVTable](fcQRasterWindow_vdata(self))
   let self = QRasterWindow(h: self)
   let slotval1 = gen_qevent_types.QHideEvent(h: param1, owned: false)
   vtbl[].hideEvent(self, slotval1)
 
-proc QRasterWindowkeyPressEvent*(self: gen_qrasterwindow_types.QRasterWindow, param1: gen_qevent_types.QKeyEvent): void =
-  fcQRasterWindow_virtualbase_keyPressEvent(self.h, param1.h)
-
-proc cQRasterWindow_vtable_callback_keyPressEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQRasterWindow_vtable_callback_keyPressEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QRasterWindowVTable](fcQRasterWindow_vdata(self))
   let self = QRasterWindow(h: self)
   let slotval1 = gen_qevent_types.QKeyEvent(h: param1, owned: false)
   vtbl[].keyPressEvent(self, slotval1)
 
-proc QRasterWindowkeyReleaseEvent*(self: gen_qrasterwindow_types.QRasterWindow, param1: gen_qevent_types.QKeyEvent): void =
-  fcQRasterWindow_virtualbase_keyReleaseEvent(self.h, param1.h)
-
-proc cQRasterWindow_vtable_callback_keyReleaseEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQRasterWindow_vtable_callback_keyReleaseEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QRasterWindowVTable](fcQRasterWindow_vdata(self))
   let self = QRasterWindow(h: self)
   let slotval1 = gen_qevent_types.QKeyEvent(h: param1, owned: false)
   vtbl[].keyReleaseEvent(self, slotval1)
 
-proc QRasterWindowmousePressEvent*(self: gen_qrasterwindow_types.QRasterWindow, param1: gen_qevent_types.QMouseEvent): void =
-  fcQRasterWindow_virtualbase_mousePressEvent(self.h, param1.h)
-
-proc cQRasterWindow_vtable_callback_mousePressEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQRasterWindow_vtable_callback_mousePressEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QRasterWindowVTable](fcQRasterWindow_vdata(self))
   let self = QRasterWindow(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: param1, owned: false)
   vtbl[].mousePressEvent(self, slotval1)
 
-proc QRasterWindowmouseReleaseEvent*(self: gen_qrasterwindow_types.QRasterWindow, param1: gen_qevent_types.QMouseEvent): void =
-  fcQRasterWindow_virtualbase_mouseReleaseEvent(self.h, param1.h)
-
-proc cQRasterWindow_vtable_callback_mouseReleaseEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQRasterWindow_vtable_callback_mouseReleaseEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QRasterWindowVTable](fcQRasterWindow_vdata(self))
   let self = QRasterWindow(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: param1, owned: false)
   vtbl[].mouseReleaseEvent(self, slotval1)
 
-proc QRasterWindowmouseDoubleClickEvent*(self: gen_qrasterwindow_types.QRasterWindow, param1: gen_qevent_types.QMouseEvent): void =
-  fcQRasterWindow_virtualbase_mouseDoubleClickEvent(self.h, param1.h)
-
-proc cQRasterWindow_vtable_callback_mouseDoubleClickEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQRasterWindow_vtable_callback_mouseDoubleClickEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QRasterWindowVTable](fcQRasterWindow_vdata(self))
   let self = QRasterWindow(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: param1, owned: false)
   vtbl[].mouseDoubleClickEvent(self, slotval1)
 
-proc QRasterWindowmouseMoveEvent*(self: gen_qrasterwindow_types.QRasterWindow, param1: gen_qevent_types.QMouseEvent): void =
-  fcQRasterWindow_virtualbase_mouseMoveEvent(self.h, param1.h)
-
-proc cQRasterWindow_vtable_callback_mouseMoveEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQRasterWindow_vtable_callback_mouseMoveEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QRasterWindowVTable](fcQRasterWindow_vdata(self))
   let self = QRasterWindow(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: param1, owned: false)
   vtbl[].mouseMoveEvent(self, slotval1)
 
-proc QRasterWindowwheelEvent*(self: gen_qrasterwindow_types.QRasterWindow, param1: gen_qevent_types.QWheelEvent): void =
-  fcQRasterWindow_virtualbase_wheelEvent(self.h, param1.h)
-
-proc cQRasterWindow_vtable_callback_wheelEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQRasterWindow_vtable_callback_wheelEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QRasterWindowVTable](fcQRasterWindow_vdata(self))
   let self = QRasterWindow(h: self)
   let slotval1 = gen_qevent_types.QWheelEvent(h: param1, owned: false)
   vtbl[].wheelEvent(self, slotval1)
 
-proc QRasterWindowtouchEvent*(self: gen_qrasterwindow_types.QRasterWindow, param1: gen_qevent_types.QTouchEvent): void =
-  fcQRasterWindow_virtualbase_touchEvent(self.h, param1.h)
-
-proc cQRasterWindow_vtable_callback_touchEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQRasterWindow_vtable_callback_touchEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QRasterWindowVTable](fcQRasterWindow_vdata(self))
   let self = QRasterWindow(h: self)
   let slotval1 = gen_qevent_types.QTouchEvent(h: param1, owned: false)
   vtbl[].touchEvent(self, slotval1)
 
-proc QRasterWindowtabletEvent*(self: gen_qrasterwindow_types.QRasterWindow, param1: gen_qevent_types.QTabletEvent): void =
-  fcQRasterWindow_virtualbase_tabletEvent(self.h, param1.h)
-
-proc cQRasterWindow_vtable_callback_tabletEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQRasterWindow_vtable_callback_tabletEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QRasterWindowVTable](fcQRasterWindow_vdata(self))
   let self = QRasterWindow(h: self)
   let slotval1 = gen_qevent_types.QTabletEvent(h: param1, owned: false)
   vtbl[].tabletEvent(self, slotval1)
 
-proc QRasterWindownativeEvent*(self: gen_qrasterwindow_types.QRasterWindow, eventType: openArray[byte], message: pointer, resultVal: ptr clong): bool =
-  fcQRasterWindow_virtualbase_nativeEvent(self.h, struct_miqt_string(data: cast[cstring](if len(eventType) == 0: nil else: unsafeAddr eventType[0]), len: csize_t(len(eventType))), message, resultVal)
-
-proc cQRasterWindow_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr clong): bool {.cdecl.} =
+proc fcQRasterWindow_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr clong): bool {.cdecl.} =
   let vtbl = cast[ptr QRasterWindowVTable](fcQRasterWindow_vdata(self))
   let self = QRasterWindow(h: self)
   var veventType_bytearray = eventType
@@ -582,10 +613,7 @@ proc cQRasterWindow_vtable_callback_nativeEvent(self: pointer, eventType: struct
   var virtualReturn = vtbl[].nativeEvent(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QRasterWindoweventFilter*(self: gen_qrasterwindow_types.QRasterWindow, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
-  fcQRasterWindow_virtualbase_eventFilter(self.h, watched.h, event.h)
-
-proc cQRasterWindow_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+proc fcQRasterWindow_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QRasterWindowVTable](fcQRasterWindow_vdata(self))
   let self = QRasterWindow(h: self)
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
@@ -593,73 +621,49 @@ proc cQRasterWindow_vtable_callback_eventFilter(self: pointer, watched: pointer,
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
-proc QRasterWindowtimerEvent*(self: gen_qrasterwindow_types.QRasterWindow, event: gen_qcoreevent_types.QTimerEvent): void =
-  fcQRasterWindow_virtualbase_timerEvent(self.h, event.h)
-
-proc cQRasterWindow_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQRasterWindow_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QRasterWindowVTable](fcQRasterWindow_vdata(self))
   let self = QRasterWindow(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
-proc QRasterWindowchildEvent*(self: gen_qrasterwindow_types.QRasterWindow, event: gen_qcoreevent_types.QChildEvent): void =
-  fcQRasterWindow_virtualbase_childEvent(self.h, event.h)
-
-proc cQRasterWindow_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQRasterWindow_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QRasterWindowVTable](fcQRasterWindow_vdata(self))
   let self = QRasterWindow(h: self)
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
-proc QRasterWindowcustomEvent*(self: gen_qrasterwindow_types.QRasterWindow, event: gen_qcoreevent_types.QEvent): void =
-  fcQRasterWindow_virtualbase_customEvent(self.h, event.h)
-
-proc cQRasterWindow_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQRasterWindow_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QRasterWindowVTable](fcQRasterWindow_vdata(self))
   let self = QRasterWindow(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
-proc QRasterWindowconnectNotify*(self: gen_qrasterwindow_types.QRasterWindow, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQRasterWindow_virtualbase_connectNotify(self.h, signal.h)
-
-proc cQRasterWindow_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQRasterWindow_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QRasterWindowVTable](fcQRasterWindow_vdata(self))
   let self = QRasterWindow(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
-proc QRasterWindowdisconnectNotify*(self: gen_qrasterwindow_types.QRasterWindow, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQRasterWindow_virtualbase_disconnectNotify(self.h, signal.h)
-
-proc cQRasterWindow_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQRasterWindow_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QRasterWindowVTable](fcQRasterWindow_vdata(self))
   let self = QRasterWindow(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
-proc QRasterWindowdevType*(self: gen_qrasterwindow_types.QRasterWindow): cint =
-  fcQRasterWindow_virtualbase_devType(self.h)
-
-proc cQRasterWindow_vtable_callback_devType(self: pointer): cint {.cdecl.} =
+proc fcQRasterWindow_vtable_callback_devType(self: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QRasterWindowVTable](fcQRasterWindow_vdata(self))
   let self = QRasterWindow(h: self)
   var virtualReturn = vtbl[].devType(self)
   virtualReturn
 
-proc QRasterWindowinitPainter*(self: gen_qrasterwindow_types.QRasterWindow, painter: gen_qpainter_types.QPainter): void =
-  fcQRasterWindow_virtualbase_initPainter(self.h, painter.h)
-
-proc cQRasterWindow_vtable_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
+proc fcQRasterWindow_vtable_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QRasterWindowVTable](fcQRasterWindow_vdata(self))
   let self = QRasterWindow(h: self)
   let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
   vtbl[].initPainter(self, slotval1)
 
-proc QRasterWindowsharedPainter*(self: gen_qrasterwindow_types.QRasterWindow): gen_qpainter_types.QPainter =
-  gen_qpainter_types.QPainter(h: fcQRasterWindow_virtualbase_sharedPainter(self.h), owned: false)
-
-proc cQRasterWindow_vtable_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
+proc fcQRasterWindow_vtable_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QRasterWindowVTable](fcQRasterWindow_vdata(self))
   let self = QRasterWindow(h: self)
   var virtualReturn = vtbl[].sharedPainter(self)
@@ -670,9 +674,85 @@ proc cQRasterWindow_vtable_callback_sharedPainter(self: pointer): pointer {.cdec
 
 type VirtualQRasterWindow* {.inheritable.} = ref object of QRasterWindow
   vtbl*: cQRasterWindowVTable
+
 method metaObject*(self: VirtualQRasterWindow): gen_qobjectdefs_types.QMetaObject {.base.} =
   QRasterWindowmetaObject(self[])
-proc cQRasterWindow_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
+method metacast*(self: VirtualQRasterWindow, param1: cstring): pointer {.base.} =
+  QRasterWindowmetacast(self[], param1)
+method metacall*(self: VirtualQRasterWindow, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QRasterWindowmetacall(self[], param1, param2, param3)
+method metric*(self: VirtualQRasterWindow, metric: cint): cint {.base.} =
+  QRasterWindowmetric(self[], metric)
+method redirected*(self: VirtualQRasterWindow, param1: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.base.} =
+  QRasterWindowredirected(self[], param1)
+method paintEvent*(self: VirtualQRasterWindow, event: gen_qevent_types.QPaintEvent): void {.base.} =
+  QRasterWindowpaintEvent(self[], event)
+method exposeEvent*(self: VirtualQRasterWindow, param1: gen_qevent_types.QExposeEvent): void {.base.} =
+  QRasterWindowexposeEvent(self[], param1)
+method event*(self: VirtualQRasterWindow, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QRasterWindowevent(self[], event)
+method surfaceType*(self: VirtualQRasterWindow): cint {.base.} =
+  QRasterWindowsurfaceType(self[])
+method format*(self: VirtualQRasterWindow): gen_qsurfaceformat_types.QSurfaceFormat {.base.} =
+  QRasterWindowformat(self[])
+method size*(self: VirtualQRasterWindow): gen_qsize_types.QSize {.base.} =
+  QRasterWindowsize(self[])
+method accessibleRoot*(self: VirtualQRasterWindow): gen_qaccessible_types.QAccessibleInterface {.base.} =
+  QRasterWindowaccessibleRoot(self[])
+method focusObject*(self: VirtualQRasterWindow): gen_qobject_types.QObject {.base.} =
+  QRasterWindowfocusObject(self[])
+method resizeEvent*(self: VirtualQRasterWindow, param1: gen_qevent_types.QResizeEvent): void {.base.} =
+  QRasterWindowresizeEvent(self[], param1)
+method moveEvent*(self: VirtualQRasterWindow, param1: gen_qevent_types.QMoveEvent): void {.base.} =
+  QRasterWindowmoveEvent(self[], param1)
+method focusInEvent*(self: VirtualQRasterWindow, param1: gen_qevent_types.QFocusEvent): void {.base.} =
+  QRasterWindowfocusInEvent(self[], param1)
+method focusOutEvent*(self: VirtualQRasterWindow, param1: gen_qevent_types.QFocusEvent): void {.base.} =
+  QRasterWindowfocusOutEvent(self[], param1)
+method showEvent*(self: VirtualQRasterWindow, param1: gen_qevent_types.QShowEvent): void {.base.} =
+  QRasterWindowshowEvent(self[], param1)
+method hideEvent*(self: VirtualQRasterWindow, param1: gen_qevent_types.QHideEvent): void {.base.} =
+  QRasterWindowhideEvent(self[], param1)
+method keyPressEvent*(self: VirtualQRasterWindow, param1: gen_qevent_types.QKeyEvent): void {.base.} =
+  QRasterWindowkeyPressEvent(self[], param1)
+method keyReleaseEvent*(self: VirtualQRasterWindow, param1: gen_qevent_types.QKeyEvent): void {.base.} =
+  QRasterWindowkeyReleaseEvent(self[], param1)
+method mousePressEvent*(self: VirtualQRasterWindow, param1: gen_qevent_types.QMouseEvent): void {.base.} =
+  QRasterWindowmousePressEvent(self[], param1)
+method mouseReleaseEvent*(self: VirtualQRasterWindow, param1: gen_qevent_types.QMouseEvent): void {.base.} =
+  QRasterWindowmouseReleaseEvent(self[], param1)
+method mouseDoubleClickEvent*(self: VirtualQRasterWindow, param1: gen_qevent_types.QMouseEvent): void {.base.} =
+  QRasterWindowmouseDoubleClickEvent(self[], param1)
+method mouseMoveEvent*(self: VirtualQRasterWindow, param1: gen_qevent_types.QMouseEvent): void {.base.} =
+  QRasterWindowmouseMoveEvent(self[], param1)
+method wheelEvent*(self: VirtualQRasterWindow, param1: gen_qevent_types.QWheelEvent): void {.base.} =
+  QRasterWindowwheelEvent(self[], param1)
+method touchEvent*(self: VirtualQRasterWindow, param1: gen_qevent_types.QTouchEvent): void {.base.} =
+  QRasterWindowtouchEvent(self[], param1)
+method tabletEvent*(self: VirtualQRasterWindow, param1: gen_qevent_types.QTabletEvent): void {.base.} =
+  QRasterWindowtabletEvent(self[], param1)
+method nativeEvent*(self: VirtualQRasterWindow, eventType: openArray[byte], message: pointer, resultVal: ptr clong): bool {.base.} =
+  QRasterWindownativeEvent(self[], eventType, message, resultVal)
+method eventFilter*(self: VirtualQRasterWindow, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QRasterWindoweventFilter(self[], watched, event)
+method timerEvent*(self: VirtualQRasterWindow, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QRasterWindowtimerEvent(self[], event)
+method childEvent*(self: VirtualQRasterWindow, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QRasterWindowchildEvent(self[], event)
+method customEvent*(self: VirtualQRasterWindow, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QRasterWindowcustomEvent(self[], event)
+method connectNotify*(self: VirtualQRasterWindow, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QRasterWindowconnectNotify(self[], signal)
+method disconnectNotify*(self: VirtualQRasterWindow, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QRasterWindowdisconnectNotify(self[], signal)
+method devType*(self: VirtualQRasterWindow): cint {.base.} =
+  QRasterWindowdevType(self[])
+method initPainter*(self: VirtualQRasterWindow, painter: gen_qpainter_types.QPainter): void {.base.} =
+  QRasterWindowinitPainter(self[], painter)
+method sharedPainter*(self: VirtualQRasterWindow): gen_qpainter_types.QPainter {.base.} =
+  QRasterWindowsharedPainter(self[])
+
+proc fcQRasterWindow_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQRasterWindow](fcQRasterWindow_vdata(self))
   var virtualReturn = inst.metaObject()
   virtualReturn.owned = false # TODO move?
@@ -680,17 +760,13 @@ proc cQRasterWindow_method_callback_metaObject(self: pointer): pointer {.cdecl.}
   virtualReturn.h = nil
   virtualReturn_h
 
-method metacast*(self: VirtualQRasterWindow, param1: cstring): pointer {.base.} =
-  QRasterWindowmetacast(self[], param1)
-proc cQRasterWindow_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+proc fcQRasterWindow_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQRasterWindow](fcQRasterWindow_vdata(self))
   let slotval1 = (param1)
   var virtualReturn = inst.metacast(slotval1)
   virtualReturn
 
-method metacall*(self: VirtualQRasterWindow, param1: cint, param2: cint, param3: pointer): cint {.base.} =
-  QRasterWindowmetacall(self[], param1, param2, param3)
-proc cQRasterWindow_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+proc fcQRasterWindow_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQRasterWindow](fcQRasterWindow_vdata(self))
   let slotval1 = cint(param1)
   let slotval2 = param2
@@ -698,17 +774,13 @@ proc cQRasterWindow_method_callback_metacall(self: pointer, param1: cint, param2
   var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
-method metric*(self: VirtualQRasterWindow, metric: cint): cint {.base.} =
-  QRasterWindowmetric(self[], metric)
-proc cQRasterWindow_method_callback_metric(self: pointer, metric: cint): cint {.cdecl.} =
+proc fcQRasterWindow_method_callback_metric(self: pointer, metric: cint): cint {.cdecl.} =
   let inst = cast[VirtualQRasterWindow](fcQRasterWindow_vdata(self))
   let slotval1 = cint(metric)
   var virtualReturn = inst.metric(slotval1)
   virtualReturn
 
-method redirected*(self: VirtualQRasterWindow, param1: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.base.} =
-  QRasterWindowredirected(self[], param1)
-proc cQRasterWindow_method_callback_redirected(self: pointer, param1: pointer): pointer {.cdecl.} =
+proc fcQRasterWindow_method_callback_redirected(self: pointer, param1: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQRasterWindow](fcQRasterWindow_vdata(self))
   let slotval1 = gen_qpoint_types.QPoint(h: param1, owned: false)
   var virtualReturn = inst.redirected(slotval1)
@@ -717,38 +789,28 @@ proc cQRasterWindow_method_callback_redirected(self: pointer, param1: pointer): 
   virtualReturn.h = nil
   virtualReturn_h
 
-method paintEvent*(self: VirtualQRasterWindow, event: gen_qevent_types.QPaintEvent): void {.base.} =
-  QRasterWindowpaintEvent(self[], event)
-proc cQRasterWindow_method_callback_paintEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQRasterWindow_method_callback_paintEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQRasterWindow](fcQRasterWindow_vdata(self))
   let slotval1 = gen_qevent_types.QPaintEvent(h: event, owned: false)
   inst.paintEvent(slotval1)
 
-method exposeEvent*(self: VirtualQRasterWindow, param1: gen_qevent_types.QExposeEvent): void {.base.} =
-  QRasterWindowexposeEvent(self[], param1)
-proc cQRasterWindow_method_callback_exposeEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQRasterWindow_method_callback_exposeEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQRasterWindow](fcQRasterWindow_vdata(self))
   let slotval1 = gen_qevent_types.QExposeEvent(h: param1, owned: false)
   inst.exposeEvent(slotval1)
 
-method event*(self: VirtualQRasterWindow, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QRasterWindowevent(self[], event)
-proc cQRasterWindow_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
+proc fcQRasterWindow_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQRasterWindow](fcQRasterWindow_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
-method surfaceType*(self: VirtualQRasterWindow): cint {.base.} =
-  QRasterWindowsurfaceType(self[])
-proc cQRasterWindow_method_callback_surfaceType(self: pointer): cint {.cdecl.} =
+proc fcQRasterWindow_method_callback_surfaceType(self: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQRasterWindow](fcQRasterWindow_vdata(self))
   var virtualReturn = inst.surfaceType()
   cint(virtualReturn)
 
-method format*(self: VirtualQRasterWindow): gen_qsurfaceformat_types.QSurfaceFormat {.base.} =
-  QRasterWindowformat(self[])
-proc cQRasterWindow_method_callback_format(self: pointer): pointer {.cdecl.} =
+proc fcQRasterWindow_method_callback_format(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQRasterWindow](fcQRasterWindow_vdata(self))
   var virtualReturn = inst.format()
   virtualReturn.owned = false # TODO move?
@@ -756,9 +818,7 @@ proc cQRasterWindow_method_callback_format(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-method size*(self: VirtualQRasterWindow): gen_qsize_types.QSize {.base.} =
-  QRasterWindowsize(self[])
-proc cQRasterWindow_method_callback_size(self: pointer): pointer {.cdecl.} =
+proc fcQRasterWindow_method_callback_size(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQRasterWindow](fcQRasterWindow_vdata(self))
   var virtualReturn = inst.size()
   virtualReturn.owned = false # TODO move?
@@ -766,9 +826,7 @@ proc cQRasterWindow_method_callback_size(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-method accessibleRoot*(self: VirtualQRasterWindow): gen_qaccessible_types.QAccessibleInterface {.base.} =
-  QRasterWindowaccessibleRoot(self[])
-proc cQRasterWindow_method_callback_accessibleRoot(self: pointer): pointer {.cdecl.} =
+proc fcQRasterWindow_method_callback_accessibleRoot(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQRasterWindow](fcQRasterWindow_vdata(self))
   var virtualReturn = inst.accessibleRoot()
   virtualReturn.owned = false # TODO move?
@@ -776,9 +834,7 @@ proc cQRasterWindow_method_callback_accessibleRoot(self: pointer): pointer {.cde
   virtualReturn.h = nil
   virtualReturn_h
 
-method focusObject*(self: VirtualQRasterWindow): gen_qobject_types.QObject {.base.} =
-  QRasterWindowfocusObject(self[])
-proc cQRasterWindow_method_callback_focusObject(self: pointer): pointer {.cdecl.} =
+proc fcQRasterWindow_method_callback_focusObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQRasterWindow](fcQRasterWindow_vdata(self))
   var virtualReturn = inst.focusObject()
   virtualReturn.owned = false # TODO move?
@@ -786,114 +842,82 @@ proc cQRasterWindow_method_callback_focusObject(self: pointer): pointer {.cdecl.
   virtualReturn.h = nil
   virtualReturn_h
 
-method resizeEvent*(self: VirtualQRasterWindow, param1: gen_qevent_types.QResizeEvent): void {.base.} =
-  QRasterWindowresizeEvent(self[], param1)
-proc cQRasterWindow_method_callback_resizeEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQRasterWindow_method_callback_resizeEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQRasterWindow](fcQRasterWindow_vdata(self))
   let slotval1 = gen_qevent_types.QResizeEvent(h: param1, owned: false)
   inst.resizeEvent(slotval1)
 
-method moveEvent*(self: VirtualQRasterWindow, param1: gen_qevent_types.QMoveEvent): void {.base.} =
-  QRasterWindowmoveEvent(self[], param1)
-proc cQRasterWindow_method_callback_moveEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQRasterWindow_method_callback_moveEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQRasterWindow](fcQRasterWindow_vdata(self))
   let slotval1 = gen_qevent_types.QMoveEvent(h: param1, owned: false)
   inst.moveEvent(slotval1)
 
-method focusInEvent*(self: VirtualQRasterWindow, param1: gen_qevent_types.QFocusEvent): void {.base.} =
-  QRasterWindowfocusInEvent(self[], param1)
-proc cQRasterWindow_method_callback_focusInEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQRasterWindow_method_callback_focusInEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQRasterWindow](fcQRasterWindow_vdata(self))
   let slotval1 = gen_qevent_types.QFocusEvent(h: param1, owned: false)
   inst.focusInEvent(slotval1)
 
-method focusOutEvent*(self: VirtualQRasterWindow, param1: gen_qevent_types.QFocusEvent): void {.base.} =
-  QRasterWindowfocusOutEvent(self[], param1)
-proc cQRasterWindow_method_callback_focusOutEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQRasterWindow_method_callback_focusOutEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQRasterWindow](fcQRasterWindow_vdata(self))
   let slotval1 = gen_qevent_types.QFocusEvent(h: param1, owned: false)
   inst.focusOutEvent(slotval1)
 
-method showEvent*(self: VirtualQRasterWindow, param1: gen_qevent_types.QShowEvent): void {.base.} =
-  QRasterWindowshowEvent(self[], param1)
-proc cQRasterWindow_method_callback_showEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQRasterWindow_method_callback_showEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQRasterWindow](fcQRasterWindow_vdata(self))
   let slotval1 = gen_qevent_types.QShowEvent(h: param1, owned: false)
   inst.showEvent(slotval1)
 
-method hideEvent*(self: VirtualQRasterWindow, param1: gen_qevent_types.QHideEvent): void {.base.} =
-  QRasterWindowhideEvent(self[], param1)
-proc cQRasterWindow_method_callback_hideEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQRasterWindow_method_callback_hideEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQRasterWindow](fcQRasterWindow_vdata(self))
   let slotval1 = gen_qevent_types.QHideEvent(h: param1, owned: false)
   inst.hideEvent(slotval1)
 
-method keyPressEvent*(self: VirtualQRasterWindow, param1: gen_qevent_types.QKeyEvent): void {.base.} =
-  QRasterWindowkeyPressEvent(self[], param1)
-proc cQRasterWindow_method_callback_keyPressEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQRasterWindow_method_callback_keyPressEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQRasterWindow](fcQRasterWindow_vdata(self))
   let slotval1 = gen_qevent_types.QKeyEvent(h: param1, owned: false)
   inst.keyPressEvent(slotval1)
 
-method keyReleaseEvent*(self: VirtualQRasterWindow, param1: gen_qevent_types.QKeyEvent): void {.base.} =
-  QRasterWindowkeyReleaseEvent(self[], param1)
-proc cQRasterWindow_method_callback_keyReleaseEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQRasterWindow_method_callback_keyReleaseEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQRasterWindow](fcQRasterWindow_vdata(self))
   let slotval1 = gen_qevent_types.QKeyEvent(h: param1, owned: false)
   inst.keyReleaseEvent(slotval1)
 
-method mousePressEvent*(self: VirtualQRasterWindow, param1: gen_qevent_types.QMouseEvent): void {.base.} =
-  QRasterWindowmousePressEvent(self[], param1)
-proc cQRasterWindow_method_callback_mousePressEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQRasterWindow_method_callback_mousePressEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQRasterWindow](fcQRasterWindow_vdata(self))
   let slotval1 = gen_qevent_types.QMouseEvent(h: param1, owned: false)
   inst.mousePressEvent(slotval1)
 
-method mouseReleaseEvent*(self: VirtualQRasterWindow, param1: gen_qevent_types.QMouseEvent): void {.base.} =
-  QRasterWindowmouseReleaseEvent(self[], param1)
-proc cQRasterWindow_method_callback_mouseReleaseEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQRasterWindow_method_callback_mouseReleaseEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQRasterWindow](fcQRasterWindow_vdata(self))
   let slotval1 = gen_qevent_types.QMouseEvent(h: param1, owned: false)
   inst.mouseReleaseEvent(slotval1)
 
-method mouseDoubleClickEvent*(self: VirtualQRasterWindow, param1: gen_qevent_types.QMouseEvent): void {.base.} =
-  QRasterWindowmouseDoubleClickEvent(self[], param1)
-proc cQRasterWindow_method_callback_mouseDoubleClickEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQRasterWindow_method_callback_mouseDoubleClickEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQRasterWindow](fcQRasterWindow_vdata(self))
   let slotval1 = gen_qevent_types.QMouseEvent(h: param1, owned: false)
   inst.mouseDoubleClickEvent(slotval1)
 
-method mouseMoveEvent*(self: VirtualQRasterWindow, param1: gen_qevent_types.QMouseEvent): void {.base.} =
-  QRasterWindowmouseMoveEvent(self[], param1)
-proc cQRasterWindow_method_callback_mouseMoveEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQRasterWindow_method_callback_mouseMoveEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQRasterWindow](fcQRasterWindow_vdata(self))
   let slotval1 = gen_qevent_types.QMouseEvent(h: param1, owned: false)
   inst.mouseMoveEvent(slotval1)
 
-method wheelEvent*(self: VirtualQRasterWindow, param1: gen_qevent_types.QWheelEvent): void {.base.} =
-  QRasterWindowwheelEvent(self[], param1)
-proc cQRasterWindow_method_callback_wheelEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQRasterWindow_method_callback_wheelEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQRasterWindow](fcQRasterWindow_vdata(self))
   let slotval1 = gen_qevent_types.QWheelEvent(h: param1, owned: false)
   inst.wheelEvent(slotval1)
 
-method touchEvent*(self: VirtualQRasterWindow, param1: gen_qevent_types.QTouchEvent): void {.base.} =
-  QRasterWindowtouchEvent(self[], param1)
-proc cQRasterWindow_method_callback_touchEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQRasterWindow_method_callback_touchEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQRasterWindow](fcQRasterWindow_vdata(self))
   let slotval1 = gen_qevent_types.QTouchEvent(h: param1, owned: false)
   inst.touchEvent(slotval1)
 
-method tabletEvent*(self: VirtualQRasterWindow, param1: gen_qevent_types.QTabletEvent): void {.base.} =
-  QRasterWindowtabletEvent(self[], param1)
-proc cQRasterWindow_method_callback_tabletEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQRasterWindow_method_callback_tabletEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQRasterWindow](fcQRasterWindow_vdata(self))
   let slotval1 = gen_qevent_types.QTabletEvent(h: param1, owned: false)
   inst.tabletEvent(slotval1)
 
-method nativeEvent*(self: VirtualQRasterWindow, eventType: openArray[byte], message: pointer, resultVal: ptr clong): bool {.base.} =
-  QRasterWindownativeEvent(self[], eventType, message, resultVal)
-proc cQRasterWindow_method_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr clong): bool {.cdecl.} =
+proc fcQRasterWindow_method_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr clong): bool {.cdecl.} =
   let inst = cast[VirtualQRasterWindow](fcQRasterWindow_vdata(self))
   var veventType_bytearray = eventType
   var veventTypex_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](veventType_bytearray.data), 0, int(veventType_bytearray.len)-1))
@@ -904,73 +928,56 @@ proc cQRasterWindow_method_callback_nativeEvent(self: pointer, eventType: struct
   var virtualReturn = inst.nativeEvent(slotval1, slotval2, slotval3)
   virtualReturn
 
-method eventFilter*(self: VirtualQRasterWindow, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QRasterWindoweventFilter(self[], watched, event)
-proc cQRasterWindow_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+proc fcQRasterWindow_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQRasterWindow](fcQRasterWindow_vdata(self))
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
   let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
-method timerEvent*(self: VirtualQRasterWindow, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
-  QRasterWindowtimerEvent(self[], event)
-proc cQRasterWindow_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQRasterWindow_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQRasterWindow](fcQRasterWindow_vdata(self))
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
-method childEvent*(self: VirtualQRasterWindow, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
-  QRasterWindowchildEvent(self[], event)
-proc cQRasterWindow_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQRasterWindow_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQRasterWindow](fcQRasterWindow_vdata(self))
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
-method customEvent*(self: VirtualQRasterWindow, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QRasterWindowcustomEvent(self[], event)
-proc cQRasterWindow_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQRasterWindow_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQRasterWindow](fcQRasterWindow_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
-method connectNotify*(self: VirtualQRasterWindow, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QRasterWindowconnectNotify(self[], signal)
-proc cQRasterWindow_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQRasterWindow_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQRasterWindow](fcQRasterWindow_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
-method disconnectNotify*(self: VirtualQRasterWindow, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QRasterWindowdisconnectNotify(self[], signal)
-proc cQRasterWindow_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQRasterWindow_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQRasterWindow](fcQRasterWindow_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
 
-method devType*(self: VirtualQRasterWindow): cint {.base.} =
-  QRasterWindowdevType(self[])
-proc cQRasterWindow_method_callback_devType(self: pointer): cint {.cdecl.} =
+proc fcQRasterWindow_method_callback_devType(self: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQRasterWindow](fcQRasterWindow_vdata(self))
   var virtualReturn = inst.devType()
   virtualReturn
 
-method initPainter*(self: VirtualQRasterWindow, painter: gen_qpainter_types.QPainter): void {.base.} =
-  QRasterWindowinitPainter(self[], painter)
-proc cQRasterWindow_method_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
+proc fcQRasterWindow_method_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
   let inst = cast[VirtualQRasterWindow](fcQRasterWindow_vdata(self))
   let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
   inst.initPainter(slotval1)
 
-method sharedPainter*(self: VirtualQRasterWindow): gen_qpainter_types.QPainter {.base.} =
-  QRasterWindowsharedPainter(self[])
-proc cQRasterWindow_method_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
+proc fcQRasterWindow_method_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQRasterWindow](fcQRasterWindow_vdata(self))
   var virtualReturn = inst.sharedPainter()
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
   virtualReturn_h
+
 
 proc sender*(self: gen_qrasterwindow_types.QRasterWindow): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQRasterWindow_protectedbase_sender(self.h), owned: false)
@@ -992,81 +999,81 @@ proc create*(T: type gen_qrasterwindow_types.QRasterWindow,
     let vtbl = cast[ref QRasterWindowVTable](fcQRasterWindow_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQRasterWindow_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQRasterWindow_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQRasterWindow_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQRasterWindow_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQRasterWindow_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQRasterWindow_vtable_callback_metacall
   if not isNil(vtbl[].metric):
-    vtbl[].vtbl.metric = cQRasterWindow_vtable_callback_metric
+    vtbl[].vtbl.metric = fcQRasterWindow_vtable_callback_metric
   if not isNil(vtbl[].redirected):
-    vtbl[].vtbl.redirected = cQRasterWindow_vtable_callback_redirected
+    vtbl[].vtbl.redirected = fcQRasterWindow_vtable_callback_redirected
   if not isNil(vtbl[].paintEvent):
-    vtbl[].vtbl.paintEvent = cQRasterWindow_vtable_callback_paintEvent
+    vtbl[].vtbl.paintEvent = fcQRasterWindow_vtable_callback_paintEvent
   if not isNil(vtbl[].exposeEvent):
-    vtbl[].vtbl.exposeEvent = cQRasterWindow_vtable_callback_exposeEvent
+    vtbl[].vtbl.exposeEvent = fcQRasterWindow_vtable_callback_exposeEvent
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQRasterWindow_vtable_callback_event
+    vtbl[].vtbl.event = fcQRasterWindow_vtable_callback_event
   if not isNil(vtbl[].surfaceType):
-    vtbl[].vtbl.surfaceType = cQRasterWindow_vtable_callback_surfaceType
+    vtbl[].vtbl.surfaceType = fcQRasterWindow_vtable_callback_surfaceType
   if not isNil(vtbl[].format):
-    vtbl[].vtbl.format = cQRasterWindow_vtable_callback_format
+    vtbl[].vtbl.format = fcQRasterWindow_vtable_callback_format
   if not isNil(vtbl[].size):
-    vtbl[].vtbl.size = cQRasterWindow_vtable_callback_size
+    vtbl[].vtbl.size = fcQRasterWindow_vtable_callback_size
   if not isNil(vtbl[].accessibleRoot):
-    vtbl[].vtbl.accessibleRoot = cQRasterWindow_vtable_callback_accessibleRoot
+    vtbl[].vtbl.accessibleRoot = fcQRasterWindow_vtable_callback_accessibleRoot
   if not isNil(vtbl[].focusObject):
-    vtbl[].vtbl.focusObject = cQRasterWindow_vtable_callback_focusObject
+    vtbl[].vtbl.focusObject = fcQRasterWindow_vtable_callback_focusObject
   if not isNil(vtbl[].resizeEvent):
-    vtbl[].vtbl.resizeEvent = cQRasterWindow_vtable_callback_resizeEvent
+    vtbl[].vtbl.resizeEvent = fcQRasterWindow_vtable_callback_resizeEvent
   if not isNil(vtbl[].moveEvent):
-    vtbl[].vtbl.moveEvent = cQRasterWindow_vtable_callback_moveEvent
+    vtbl[].vtbl.moveEvent = fcQRasterWindow_vtable_callback_moveEvent
   if not isNil(vtbl[].focusInEvent):
-    vtbl[].vtbl.focusInEvent = cQRasterWindow_vtable_callback_focusInEvent
+    vtbl[].vtbl.focusInEvent = fcQRasterWindow_vtable_callback_focusInEvent
   if not isNil(vtbl[].focusOutEvent):
-    vtbl[].vtbl.focusOutEvent = cQRasterWindow_vtable_callback_focusOutEvent
+    vtbl[].vtbl.focusOutEvent = fcQRasterWindow_vtable_callback_focusOutEvent
   if not isNil(vtbl[].showEvent):
-    vtbl[].vtbl.showEvent = cQRasterWindow_vtable_callback_showEvent
+    vtbl[].vtbl.showEvent = fcQRasterWindow_vtable_callback_showEvent
   if not isNil(vtbl[].hideEvent):
-    vtbl[].vtbl.hideEvent = cQRasterWindow_vtable_callback_hideEvent
+    vtbl[].vtbl.hideEvent = fcQRasterWindow_vtable_callback_hideEvent
   if not isNil(vtbl[].keyPressEvent):
-    vtbl[].vtbl.keyPressEvent = cQRasterWindow_vtable_callback_keyPressEvent
+    vtbl[].vtbl.keyPressEvent = fcQRasterWindow_vtable_callback_keyPressEvent
   if not isNil(vtbl[].keyReleaseEvent):
-    vtbl[].vtbl.keyReleaseEvent = cQRasterWindow_vtable_callback_keyReleaseEvent
+    vtbl[].vtbl.keyReleaseEvent = fcQRasterWindow_vtable_callback_keyReleaseEvent
   if not isNil(vtbl[].mousePressEvent):
-    vtbl[].vtbl.mousePressEvent = cQRasterWindow_vtable_callback_mousePressEvent
+    vtbl[].vtbl.mousePressEvent = fcQRasterWindow_vtable_callback_mousePressEvent
   if not isNil(vtbl[].mouseReleaseEvent):
-    vtbl[].vtbl.mouseReleaseEvent = cQRasterWindow_vtable_callback_mouseReleaseEvent
+    vtbl[].vtbl.mouseReleaseEvent = fcQRasterWindow_vtable_callback_mouseReleaseEvent
   if not isNil(vtbl[].mouseDoubleClickEvent):
-    vtbl[].vtbl.mouseDoubleClickEvent = cQRasterWindow_vtable_callback_mouseDoubleClickEvent
+    vtbl[].vtbl.mouseDoubleClickEvent = fcQRasterWindow_vtable_callback_mouseDoubleClickEvent
   if not isNil(vtbl[].mouseMoveEvent):
-    vtbl[].vtbl.mouseMoveEvent = cQRasterWindow_vtable_callback_mouseMoveEvent
+    vtbl[].vtbl.mouseMoveEvent = fcQRasterWindow_vtable_callback_mouseMoveEvent
   if not isNil(vtbl[].wheelEvent):
-    vtbl[].vtbl.wheelEvent = cQRasterWindow_vtable_callback_wheelEvent
+    vtbl[].vtbl.wheelEvent = fcQRasterWindow_vtable_callback_wheelEvent
   if not isNil(vtbl[].touchEvent):
-    vtbl[].vtbl.touchEvent = cQRasterWindow_vtable_callback_touchEvent
+    vtbl[].vtbl.touchEvent = fcQRasterWindow_vtable_callback_touchEvent
   if not isNil(vtbl[].tabletEvent):
-    vtbl[].vtbl.tabletEvent = cQRasterWindow_vtable_callback_tabletEvent
+    vtbl[].vtbl.tabletEvent = fcQRasterWindow_vtable_callback_tabletEvent
   if not isNil(vtbl[].nativeEvent):
-    vtbl[].vtbl.nativeEvent = cQRasterWindow_vtable_callback_nativeEvent
+    vtbl[].vtbl.nativeEvent = fcQRasterWindow_vtable_callback_nativeEvent
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQRasterWindow_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQRasterWindow_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQRasterWindow_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQRasterWindow_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQRasterWindow_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQRasterWindow_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQRasterWindow_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQRasterWindow_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQRasterWindow_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQRasterWindow_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQRasterWindow_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQRasterWindow_vtable_callback_disconnectNotify
   if not isNil(vtbl[].devType):
-    vtbl[].vtbl.devType = cQRasterWindow_vtable_callback_devType
+    vtbl[].vtbl.devType = fcQRasterWindow_vtable_callback_devType
   if not isNil(vtbl[].initPainter):
-    vtbl[].vtbl.initPainter = cQRasterWindow_vtable_callback_initPainter
+    vtbl[].vtbl.initPainter = fcQRasterWindow_vtable_callback_initPainter
   if not isNil(vtbl[].sharedPainter):
-    vtbl[].vtbl.sharedPainter = cQRasterWindow_vtable_callback_sharedPainter
+    vtbl[].vtbl.sharedPainter = fcQRasterWindow_vtable_callback_sharedPainter
   gen_qrasterwindow_types.QRasterWindow(h: fcQRasterWindow_new(addr(vtbl[].vtbl), addr(vtbl[])), owned: true)
 
 proc create*(T: type gen_qrasterwindow_types.QRasterWindow,
@@ -1078,81 +1085,81 @@ proc create*(T: type gen_qrasterwindow_types.QRasterWindow,
     let vtbl = cast[ref QRasterWindowVTable](fcQRasterWindow_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQRasterWindow_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQRasterWindow_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQRasterWindow_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQRasterWindow_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQRasterWindow_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQRasterWindow_vtable_callback_metacall
   if not isNil(vtbl[].metric):
-    vtbl[].vtbl.metric = cQRasterWindow_vtable_callback_metric
+    vtbl[].vtbl.metric = fcQRasterWindow_vtable_callback_metric
   if not isNil(vtbl[].redirected):
-    vtbl[].vtbl.redirected = cQRasterWindow_vtable_callback_redirected
+    vtbl[].vtbl.redirected = fcQRasterWindow_vtable_callback_redirected
   if not isNil(vtbl[].paintEvent):
-    vtbl[].vtbl.paintEvent = cQRasterWindow_vtable_callback_paintEvent
+    vtbl[].vtbl.paintEvent = fcQRasterWindow_vtable_callback_paintEvent
   if not isNil(vtbl[].exposeEvent):
-    vtbl[].vtbl.exposeEvent = cQRasterWindow_vtable_callback_exposeEvent
+    vtbl[].vtbl.exposeEvent = fcQRasterWindow_vtable_callback_exposeEvent
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQRasterWindow_vtable_callback_event
+    vtbl[].vtbl.event = fcQRasterWindow_vtable_callback_event
   if not isNil(vtbl[].surfaceType):
-    vtbl[].vtbl.surfaceType = cQRasterWindow_vtable_callback_surfaceType
+    vtbl[].vtbl.surfaceType = fcQRasterWindow_vtable_callback_surfaceType
   if not isNil(vtbl[].format):
-    vtbl[].vtbl.format = cQRasterWindow_vtable_callback_format
+    vtbl[].vtbl.format = fcQRasterWindow_vtable_callback_format
   if not isNil(vtbl[].size):
-    vtbl[].vtbl.size = cQRasterWindow_vtable_callback_size
+    vtbl[].vtbl.size = fcQRasterWindow_vtable_callback_size
   if not isNil(vtbl[].accessibleRoot):
-    vtbl[].vtbl.accessibleRoot = cQRasterWindow_vtable_callback_accessibleRoot
+    vtbl[].vtbl.accessibleRoot = fcQRasterWindow_vtable_callback_accessibleRoot
   if not isNil(vtbl[].focusObject):
-    vtbl[].vtbl.focusObject = cQRasterWindow_vtable_callback_focusObject
+    vtbl[].vtbl.focusObject = fcQRasterWindow_vtable_callback_focusObject
   if not isNil(vtbl[].resizeEvent):
-    vtbl[].vtbl.resizeEvent = cQRasterWindow_vtable_callback_resizeEvent
+    vtbl[].vtbl.resizeEvent = fcQRasterWindow_vtable_callback_resizeEvent
   if not isNil(vtbl[].moveEvent):
-    vtbl[].vtbl.moveEvent = cQRasterWindow_vtable_callback_moveEvent
+    vtbl[].vtbl.moveEvent = fcQRasterWindow_vtable_callback_moveEvent
   if not isNil(vtbl[].focusInEvent):
-    vtbl[].vtbl.focusInEvent = cQRasterWindow_vtable_callback_focusInEvent
+    vtbl[].vtbl.focusInEvent = fcQRasterWindow_vtable_callback_focusInEvent
   if not isNil(vtbl[].focusOutEvent):
-    vtbl[].vtbl.focusOutEvent = cQRasterWindow_vtable_callback_focusOutEvent
+    vtbl[].vtbl.focusOutEvent = fcQRasterWindow_vtable_callback_focusOutEvent
   if not isNil(vtbl[].showEvent):
-    vtbl[].vtbl.showEvent = cQRasterWindow_vtable_callback_showEvent
+    vtbl[].vtbl.showEvent = fcQRasterWindow_vtable_callback_showEvent
   if not isNil(vtbl[].hideEvent):
-    vtbl[].vtbl.hideEvent = cQRasterWindow_vtable_callback_hideEvent
+    vtbl[].vtbl.hideEvent = fcQRasterWindow_vtable_callback_hideEvent
   if not isNil(vtbl[].keyPressEvent):
-    vtbl[].vtbl.keyPressEvent = cQRasterWindow_vtable_callback_keyPressEvent
+    vtbl[].vtbl.keyPressEvent = fcQRasterWindow_vtable_callback_keyPressEvent
   if not isNil(vtbl[].keyReleaseEvent):
-    vtbl[].vtbl.keyReleaseEvent = cQRasterWindow_vtable_callback_keyReleaseEvent
+    vtbl[].vtbl.keyReleaseEvent = fcQRasterWindow_vtable_callback_keyReleaseEvent
   if not isNil(vtbl[].mousePressEvent):
-    vtbl[].vtbl.mousePressEvent = cQRasterWindow_vtable_callback_mousePressEvent
+    vtbl[].vtbl.mousePressEvent = fcQRasterWindow_vtable_callback_mousePressEvent
   if not isNil(vtbl[].mouseReleaseEvent):
-    vtbl[].vtbl.mouseReleaseEvent = cQRasterWindow_vtable_callback_mouseReleaseEvent
+    vtbl[].vtbl.mouseReleaseEvent = fcQRasterWindow_vtable_callback_mouseReleaseEvent
   if not isNil(vtbl[].mouseDoubleClickEvent):
-    vtbl[].vtbl.mouseDoubleClickEvent = cQRasterWindow_vtable_callback_mouseDoubleClickEvent
+    vtbl[].vtbl.mouseDoubleClickEvent = fcQRasterWindow_vtable_callback_mouseDoubleClickEvent
   if not isNil(vtbl[].mouseMoveEvent):
-    vtbl[].vtbl.mouseMoveEvent = cQRasterWindow_vtable_callback_mouseMoveEvent
+    vtbl[].vtbl.mouseMoveEvent = fcQRasterWindow_vtable_callback_mouseMoveEvent
   if not isNil(vtbl[].wheelEvent):
-    vtbl[].vtbl.wheelEvent = cQRasterWindow_vtable_callback_wheelEvent
+    vtbl[].vtbl.wheelEvent = fcQRasterWindow_vtable_callback_wheelEvent
   if not isNil(vtbl[].touchEvent):
-    vtbl[].vtbl.touchEvent = cQRasterWindow_vtable_callback_touchEvent
+    vtbl[].vtbl.touchEvent = fcQRasterWindow_vtable_callback_touchEvent
   if not isNil(vtbl[].tabletEvent):
-    vtbl[].vtbl.tabletEvent = cQRasterWindow_vtable_callback_tabletEvent
+    vtbl[].vtbl.tabletEvent = fcQRasterWindow_vtable_callback_tabletEvent
   if not isNil(vtbl[].nativeEvent):
-    vtbl[].vtbl.nativeEvent = cQRasterWindow_vtable_callback_nativeEvent
+    vtbl[].vtbl.nativeEvent = fcQRasterWindow_vtable_callback_nativeEvent
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQRasterWindow_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQRasterWindow_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQRasterWindow_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQRasterWindow_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQRasterWindow_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQRasterWindow_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQRasterWindow_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQRasterWindow_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQRasterWindow_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQRasterWindow_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQRasterWindow_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQRasterWindow_vtable_callback_disconnectNotify
   if not isNil(vtbl[].devType):
-    vtbl[].vtbl.devType = cQRasterWindow_vtable_callback_devType
+    vtbl[].vtbl.devType = fcQRasterWindow_vtable_callback_devType
   if not isNil(vtbl[].initPainter):
-    vtbl[].vtbl.initPainter = cQRasterWindow_vtable_callback_initPainter
+    vtbl[].vtbl.initPainter = fcQRasterWindow_vtable_callback_initPainter
   if not isNil(vtbl[].sharedPainter):
-    vtbl[].vtbl.sharedPainter = cQRasterWindow_vtable_callback_sharedPainter
+    vtbl[].vtbl.sharedPainter = fcQRasterWindow_vtable_callback_sharedPainter
   gen_qrasterwindow_types.QRasterWindow(h: fcQRasterWindow_new2(addr(vtbl[].vtbl), addr(vtbl[]), parent.h), owned: true)
 
 const cQRasterWindow_mvtbl = cQRasterWindowVTable(
@@ -1160,44 +1167,45 @@ const cQRasterWindow_mvtbl = cQRasterWindowVTable(
     let inst = cast[ptr typeof(VirtualQRasterWindow()[])](self.fcQRasterWindow_vtbl())
     inst[].h = nil
     inst[].owned = false,
-  metaObject: cQRasterWindow_method_callback_metaObject,
-  metacast: cQRasterWindow_method_callback_metacast,
-  metacall: cQRasterWindow_method_callback_metacall,
-  metric: cQRasterWindow_method_callback_metric,
-  redirected: cQRasterWindow_method_callback_redirected,
-  paintEvent: cQRasterWindow_method_callback_paintEvent,
-  exposeEvent: cQRasterWindow_method_callback_exposeEvent,
-  event: cQRasterWindow_method_callback_event,
-  surfaceType: cQRasterWindow_method_callback_surfaceType,
-  format: cQRasterWindow_method_callback_format,
-  size: cQRasterWindow_method_callback_size,
-  accessibleRoot: cQRasterWindow_method_callback_accessibleRoot,
-  focusObject: cQRasterWindow_method_callback_focusObject,
-  resizeEvent: cQRasterWindow_method_callback_resizeEvent,
-  moveEvent: cQRasterWindow_method_callback_moveEvent,
-  focusInEvent: cQRasterWindow_method_callback_focusInEvent,
-  focusOutEvent: cQRasterWindow_method_callback_focusOutEvent,
-  showEvent: cQRasterWindow_method_callback_showEvent,
-  hideEvent: cQRasterWindow_method_callback_hideEvent,
-  keyPressEvent: cQRasterWindow_method_callback_keyPressEvent,
-  keyReleaseEvent: cQRasterWindow_method_callback_keyReleaseEvent,
-  mousePressEvent: cQRasterWindow_method_callback_mousePressEvent,
-  mouseReleaseEvent: cQRasterWindow_method_callback_mouseReleaseEvent,
-  mouseDoubleClickEvent: cQRasterWindow_method_callback_mouseDoubleClickEvent,
-  mouseMoveEvent: cQRasterWindow_method_callback_mouseMoveEvent,
-  wheelEvent: cQRasterWindow_method_callback_wheelEvent,
-  touchEvent: cQRasterWindow_method_callback_touchEvent,
-  tabletEvent: cQRasterWindow_method_callback_tabletEvent,
-  nativeEvent: cQRasterWindow_method_callback_nativeEvent,
-  eventFilter: cQRasterWindow_method_callback_eventFilter,
-  timerEvent: cQRasterWindow_method_callback_timerEvent,
-  childEvent: cQRasterWindow_method_callback_childEvent,
-  customEvent: cQRasterWindow_method_callback_customEvent,
-  connectNotify: cQRasterWindow_method_callback_connectNotify,
-  disconnectNotify: cQRasterWindow_method_callback_disconnectNotify,
-  devType: cQRasterWindow_method_callback_devType,
-  initPainter: cQRasterWindow_method_callback_initPainter,
-  sharedPainter: cQRasterWindow_method_callback_sharedPainter,
+
+  metaObject: fcQRasterWindow_method_callback_metaObject,
+  metacast: fcQRasterWindow_method_callback_metacast,
+  metacall: fcQRasterWindow_method_callback_metacall,
+  metric: fcQRasterWindow_method_callback_metric,
+  redirected: fcQRasterWindow_method_callback_redirected,
+  paintEvent: fcQRasterWindow_method_callback_paintEvent,
+  exposeEvent: fcQRasterWindow_method_callback_exposeEvent,
+  event: fcQRasterWindow_method_callback_event,
+  surfaceType: fcQRasterWindow_method_callback_surfaceType,
+  format: fcQRasterWindow_method_callback_format,
+  size: fcQRasterWindow_method_callback_size,
+  accessibleRoot: fcQRasterWindow_method_callback_accessibleRoot,
+  focusObject: fcQRasterWindow_method_callback_focusObject,
+  resizeEvent: fcQRasterWindow_method_callback_resizeEvent,
+  moveEvent: fcQRasterWindow_method_callback_moveEvent,
+  focusInEvent: fcQRasterWindow_method_callback_focusInEvent,
+  focusOutEvent: fcQRasterWindow_method_callback_focusOutEvent,
+  showEvent: fcQRasterWindow_method_callback_showEvent,
+  hideEvent: fcQRasterWindow_method_callback_hideEvent,
+  keyPressEvent: fcQRasterWindow_method_callback_keyPressEvent,
+  keyReleaseEvent: fcQRasterWindow_method_callback_keyReleaseEvent,
+  mousePressEvent: fcQRasterWindow_method_callback_mousePressEvent,
+  mouseReleaseEvent: fcQRasterWindow_method_callback_mouseReleaseEvent,
+  mouseDoubleClickEvent: fcQRasterWindow_method_callback_mouseDoubleClickEvent,
+  mouseMoveEvent: fcQRasterWindow_method_callback_mouseMoveEvent,
+  wheelEvent: fcQRasterWindow_method_callback_wheelEvent,
+  touchEvent: fcQRasterWindow_method_callback_touchEvent,
+  tabletEvent: fcQRasterWindow_method_callback_tabletEvent,
+  nativeEvent: fcQRasterWindow_method_callback_nativeEvent,
+  eventFilter: fcQRasterWindow_method_callback_eventFilter,
+  timerEvent: fcQRasterWindow_method_callback_timerEvent,
+  childEvent: fcQRasterWindow_method_callback_childEvent,
+  customEvent: fcQRasterWindow_method_callback_customEvent,
+  connectNotify: fcQRasterWindow_method_callback_connectNotify,
+  disconnectNotify: fcQRasterWindow_method_callback_disconnectNotify,
+  devType: fcQRasterWindow_method_callback_devType,
+  initPainter: fcQRasterWindow_method_callback_initPainter,
+  sharedPainter: fcQRasterWindow_method_callback_sharedPainter,
 )
 proc create*(T: type gen_qrasterwindow_types.QRasterWindow,
     inst: VirtualQRasterWindow) =

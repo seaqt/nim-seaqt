@@ -98,39 +98,39 @@ proc videoFrameProbed*(self: gen_qmediavideoprobecontrol_types.QMediaVideoProbeC
   fcQMediaVideoProbeControl_videoFrameProbed(self.h, frame.h)
 
 type QMediaVideoProbeControlvideoFrameProbedSlot* = proc(frame: gen_qvideoframe_types.QVideoFrame)
-proc cQMediaVideoProbeControl_slot_callback_videoFrameProbed(slot: int, frame: pointer) {.cdecl.} =
+proc fcQMediaVideoProbeControl_slot_callback_videoFrameProbed(slot: int, frame: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QMediaVideoProbeControlvideoFrameProbedSlot](cast[pointer](slot))
   let slotval1 = gen_qvideoframe_types.QVideoFrame(h: frame, owned: false)
 
   nimfunc[](slotval1)
 
-proc cQMediaVideoProbeControl_slot_callback_videoFrameProbed_release(slot: int) {.cdecl.} =
+proc fcQMediaVideoProbeControl_slot_callback_videoFrameProbed_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QMediaVideoProbeControlvideoFrameProbedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onvideoFrameProbed*(self: gen_qmediavideoprobecontrol_types.QMediaVideoProbeControl, slot: QMediaVideoProbeControlvideoFrameProbedSlot) =
+proc onVideoFrameProbed*(self: gen_qmediavideoprobecontrol_types.QMediaVideoProbeControl, slot: QMediaVideoProbeControlvideoFrameProbedSlot) =
   var tmp = new QMediaVideoProbeControlvideoFrameProbedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQMediaVideoProbeControl_connect_videoFrameProbed(self.h, cast[int](addr tmp[]), cQMediaVideoProbeControl_slot_callback_videoFrameProbed, cQMediaVideoProbeControl_slot_callback_videoFrameProbed_release)
+  fcQMediaVideoProbeControl_connect_videoFrameProbed(self.h, cast[int](addr tmp[]), fcQMediaVideoProbeControl_slot_callback_videoFrameProbed, fcQMediaVideoProbeControl_slot_callback_videoFrameProbed_release)
 
 proc flush*(self: gen_qmediavideoprobecontrol_types.QMediaVideoProbeControl): void =
   fcQMediaVideoProbeControl_flush(self.h)
 
 type QMediaVideoProbeControlflushSlot* = proc()
-proc cQMediaVideoProbeControl_slot_callback_flush(slot: int) {.cdecl.} =
+proc fcQMediaVideoProbeControl_slot_callback_flush(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QMediaVideoProbeControlflushSlot](cast[pointer](slot))
   nimfunc[]()
 
-proc cQMediaVideoProbeControl_slot_callback_flush_release(slot: int) {.cdecl.} =
+proc fcQMediaVideoProbeControl_slot_callback_flush_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QMediaVideoProbeControlflushSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onflush*(self: gen_qmediavideoprobecontrol_types.QMediaVideoProbeControl, slot: QMediaVideoProbeControlflushSlot) =
+proc onFlush*(self: gen_qmediavideoprobecontrol_types.QMediaVideoProbeControl, slot: QMediaVideoProbeControlflushSlot) =
   var tmp = new QMediaVideoProbeControlflushSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQMediaVideoProbeControl_connect_flush(self.h, cast[int](addr tmp[]), cQMediaVideoProbeControl_slot_callback_flush, cQMediaVideoProbeControl_slot_callback_flush_release)
+  fcQMediaVideoProbeControl_connect_flush(self.h, cast[int](addr tmp[]), fcQMediaVideoProbeControl_slot_callback_flush, fcQMediaVideoProbeControl_slot_callback_flush_release)
 
 proc tr*(_: type gen_qmediavideoprobecontrol_types.QMediaVideoProbeControl, s: cstring, c: cstring): string =
   let v_ms = fcQMediaVideoProbeControl_tr2(s, c)

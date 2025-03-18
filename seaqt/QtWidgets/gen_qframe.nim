@@ -118,6 +118,7 @@ proc fcQFrame_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QF
 proc fcQFrame_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QFrame_trUtf83".}
 proc fcQFrame_vtbl(self: pointer): pointer {.importc: "QFrame_vtbl".}
 proc fcQFrame_vdata(self: pointer): pointer {.importc: "QFrame_vdata".}
+
 type cQFrameVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -373,6 +374,7 @@ type QFramechildEventProc* = proc(self: QFrame, event: gen_qcoreevent_types.QChi
 type QFramecustomEventProc* = proc(self: QFrame, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QFrameconnectNotifyProc* = proc(self: QFrame, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QFramedisconnectNotifyProc* = proc(self: QFrame, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+
 type QFrameVTable* {.inheritable, pure.} = object
   vtbl: cQFrameVTable
   metaObject*: QFramemetaObjectProc
@@ -425,10 +427,159 @@ type QFrameVTable* {.inheritable, pure.} = object
   customEvent*: QFramecustomEventProc
   connectNotify*: QFrameconnectNotifyProc
   disconnectNotify*: QFramedisconnectNotifyProc
+
 proc QFramemetaObject*(self: gen_qframe_types.QFrame): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQFrame_virtualbase_metaObject(self.h), owned: false)
 
-proc cQFrame_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
+proc QFramemetacast*(self: gen_qframe_types.QFrame, param1: cstring): pointer =
+  fcQFrame_virtualbase_metacast(self.h, param1)
+
+proc QFramemetacall*(self: gen_qframe_types.QFrame, param1: cint, param2: cint, param3: pointer): cint =
+  fcQFrame_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+proc QFramesizeHint*(self: gen_qframe_types.QFrame): gen_qsize_types.QSize =
+  gen_qsize_types.QSize(h: fcQFrame_virtualbase_sizeHint(self.h), owned: true)
+
+proc QFrameevent*(self: gen_qframe_types.QFrame, e: gen_qcoreevent_types.QEvent): bool =
+  fcQFrame_virtualbase_event(self.h, e.h)
+
+proc QFramepaintEvent*(self: gen_qframe_types.QFrame, param1: gen_qevent_types.QPaintEvent): void =
+  fcQFrame_virtualbase_paintEvent(self.h, param1.h)
+
+proc QFramechangeEvent*(self: gen_qframe_types.QFrame, param1: gen_qcoreevent_types.QEvent): void =
+  fcQFrame_virtualbase_changeEvent(self.h, param1.h)
+
+proc QFramedevType*(self: gen_qframe_types.QFrame): cint =
+  fcQFrame_virtualbase_devType(self.h)
+
+proc QFramesetVisible*(self: gen_qframe_types.QFrame, visible: bool): void =
+  fcQFrame_virtualbase_setVisible(self.h, visible)
+
+proc QFrameminimumSizeHint*(self: gen_qframe_types.QFrame): gen_qsize_types.QSize =
+  gen_qsize_types.QSize(h: fcQFrame_virtualbase_minimumSizeHint(self.h), owned: true)
+
+proc QFrameheightForWidth*(self: gen_qframe_types.QFrame, param1: cint): cint =
+  fcQFrame_virtualbase_heightForWidth(self.h, param1)
+
+proc QFramehasHeightForWidth*(self: gen_qframe_types.QFrame): bool =
+  fcQFrame_virtualbase_hasHeightForWidth(self.h)
+
+proc QFramepaintEngine*(self: gen_qframe_types.QFrame): gen_qpaintengine_types.QPaintEngine =
+  gen_qpaintengine_types.QPaintEngine(h: fcQFrame_virtualbase_paintEngine(self.h), owned: false)
+
+proc QFramemousePressEvent*(self: gen_qframe_types.QFrame, event: gen_qevent_types.QMouseEvent): void =
+  fcQFrame_virtualbase_mousePressEvent(self.h, event.h)
+
+proc QFramemouseReleaseEvent*(self: gen_qframe_types.QFrame, event: gen_qevent_types.QMouseEvent): void =
+  fcQFrame_virtualbase_mouseReleaseEvent(self.h, event.h)
+
+proc QFramemouseDoubleClickEvent*(self: gen_qframe_types.QFrame, event: gen_qevent_types.QMouseEvent): void =
+  fcQFrame_virtualbase_mouseDoubleClickEvent(self.h, event.h)
+
+proc QFramemouseMoveEvent*(self: gen_qframe_types.QFrame, event: gen_qevent_types.QMouseEvent): void =
+  fcQFrame_virtualbase_mouseMoveEvent(self.h, event.h)
+
+proc QFramewheelEvent*(self: gen_qframe_types.QFrame, event: gen_qevent_types.QWheelEvent): void =
+  fcQFrame_virtualbase_wheelEvent(self.h, event.h)
+
+proc QFramekeyPressEvent*(self: gen_qframe_types.QFrame, event: gen_qevent_types.QKeyEvent): void =
+  fcQFrame_virtualbase_keyPressEvent(self.h, event.h)
+
+proc QFramekeyReleaseEvent*(self: gen_qframe_types.QFrame, event: gen_qevent_types.QKeyEvent): void =
+  fcQFrame_virtualbase_keyReleaseEvent(self.h, event.h)
+
+proc QFramefocusInEvent*(self: gen_qframe_types.QFrame, event: gen_qevent_types.QFocusEvent): void =
+  fcQFrame_virtualbase_focusInEvent(self.h, event.h)
+
+proc QFramefocusOutEvent*(self: gen_qframe_types.QFrame, event: gen_qevent_types.QFocusEvent): void =
+  fcQFrame_virtualbase_focusOutEvent(self.h, event.h)
+
+proc QFrameenterEvent*(self: gen_qframe_types.QFrame, event: gen_qcoreevent_types.QEvent): void =
+  fcQFrame_virtualbase_enterEvent(self.h, event.h)
+
+proc QFrameleaveEvent*(self: gen_qframe_types.QFrame, event: gen_qcoreevent_types.QEvent): void =
+  fcQFrame_virtualbase_leaveEvent(self.h, event.h)
+
+proc QFramemoveEvent*(self: gen_qframe_types.QFrame, event: gen_qevent_types.QMoveEvent): void =
+  fcQFrame_virtualbase_moveEvent(self.h, event.h)
+
+proc QFrameresizeEvent*(self: gen_qframe_types.QFrame, event: gen_qevent_types.QResizeEvent): void =
+  fcQFrame_virtualbase_resizeEvent(self.h, event.h)
+
+proc QFramecloseEvent*(self: gen_qframe_types.QFrame, event: gen_qevent_types.QCloseEvent): void =
+  fcQFrame_virtualbase_closeEvent(self.h, event.h)
+
+proc QFramecontextMenuEvent*(self: gen_qframe_types.QFrame, event: gen_qevent_types.QContextMenuEvent): void =
+  fcQFrame_virtualbase_contextMenuEvent(self.h, event.h)
+
+proc QFrametabletEvent*(self: gen_qframe_types.QFrame, event: gen_qevent_types.QTabletEvent): void =
+  fcQFrame_virtualbase_tabletEvent(self.h, event.h)
+
+proc QFrameactionEvent*(self: gen_qframe_types.QFrame, event: gen_qevent_types.QActionEvent): void =
+  fcQFrame_virtualbase_actionEvent(self.h, event.h)
+
+proc QFramedragEnterEvent*(self: gen_qframe_types.QFrame, event: gen_qevent_types.QDragEnterEvent): void =
+  fcQFrame_virtualbase_dragEnterEvent(self.h, event.h)
+
+proc QFramedragMoveEvent*(self: gen_qframe_types.QFrame, event: gen_qevent_types.QDragMoveEvent): void =
+  fcQFrame_virtualbase_dragMoveEvent(self.h, event.h)
+
+proc QFramedragLeaveEvent*(self: gen_qframe_types.QFrame, event: gen_qevent_types.QDragLeaveEvent): void =
+  fcQFrame_virtualbase_dragLeaveEvent(self.h, event.h)
+
+proc QFramedropEvent*(self: gen_qframe_types.QFrame, event: gen_qevent_types.QDropEvent): void =
+  fcQFrame_virtualbase_dropEvent(self.h, event.h)
+
+proc QFrameshowEvent*(self: gen_qframe_types.QFrame, event: gen_qevent_types.QShowEvent): void =
+  fcQFrame_virtualbase_showEvent(self.h, event.h)
+
+proc QFramehideEvent*(self: gen_qframe_types.QFrame, event: gen_qevent_types.QHideEvent): void =
+  fcQFrame_virtualbase_hideEvent(self.h, event.h)
+
+proc QFramenativeEvent*(self: gen_qframe_types.QFrame, eventType: openArray[byte], message: pointer, resultVal: ptr clong): bool =
+  fcQFrame_virtualbase_nativeEvent(self.h, struct_miqt_string(data: cast[cstring](if len(eventType) == 0: nil else: unsafeAddr eventType[0]), len: csize_t(len(eventType))), message, resultVal)
+
+proc QFramemetric*(self: gen_qframe_types.QFrame, param1: cint): cint =
+  fcQFrame_virtualbase_metric(self.h, cint(param1))
+
+proc QFrameinitPainter*(self: gen_qframe_types.QFrame, painter: gen_qpainter_types.QPainter): void =
+  fcQFrame_virtualbase_initPainter(self.h, painter.h)
+
+proc QFrameredirected*(self: gen_qframe_types.QFrame, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice =
+  gen_qpaintdevice_types.QPaintDevice(h: fcQFrame_virtualbase_redirected(self.h, offset.h), owned: false)
+
+proc QFramesharedPainter*(self: gen_qframe_types.QFrame): gen_qpainter_types.QPainter =
+  gen_qpainter_types.QPainter(h: fcQFrame_virtualbase_sharedPainter(self.h), owned: false)
+
+proc QFrameinputMethodEvent*(self: gen_qframe_types.QFrame, param1: gen_qevent_types.QInputMethodEvent): void =
+  fcQFrame_virtualbase_inputMethodEvent(self.h, param1.h)
+
+proc QFrameinputMethodQuery*(self: gen_qframe_types.QFrame, param1: cint): gen_qvariant_types.QVariant =
+  gen_qvariant_types.QVariant(h: fcQFrame_virtualbase_inputMethodQuery(self.h, cint(param1)), owned: true)
+
+proc QFramefocusNextPrevChild*(self: gen_qframe_types.QFrame, next: bool): bool =
+  fcQFrame_virtualbase_focusNextPrevChild(self.h, next)
+
+proc QFrameeventFilter*(self: gen_qframe_types.QFrame, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
+  fcQFrame_virtualbase_eventFilter(self.h, watched.h, event.h)
+
+proc QFrametimerEvent*(self: gen_qframe_types.QFrame, event: gen_qcoreevent_types.QTimerEvent): void =
+  fcQFrame_virtualbase_timerEvent(self.h, event.h)
+
+proc QFramechildEvent*(self: gen_qframe_types.QFrame, event: gen_qcoreevent_types.QChildEvent): void =
+  fcQFrame_virtualbase_childEvent(self.h, event.h)
+
+proc QFramecustomEvent*(self: gen_qframe_types.QFrame, event: gen_qcoreevent_types.QEvent): void =
+  fcQFrame_virtualbase_customEvent(self.h, event.h)
+
+proc QFrameconnectNotify*(self: gen_qframe_types.QFrame, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQFrame_virtualbase_connectNotify(self.h, signal.h)
+
+proc QFramedisconnectNotify*(self: gen_qframe_types.QFrame, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQFrame_virtualbase_disconnectNotify(self.h, signal.h)
+
+
+proc fcQFrame_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QFrameVTable](fcQFrame_vdata(self))
   let self = QFrame(h: self)
   var virtualReturn = vtbl[].metaObject(self)
@@ -437,20 +588,14 @@ proc cQFrame_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QFramemetacast*(self: gen_qframe_types.QFrame, param1: cstring): pointer =
-  fcQFrame_virtualbase_metacast(self.h, param1)
-
-proc cQFrame_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+proc fcQFrame_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QFrameVTable](fcQFrame_vdata(self))
   let self = QFrame(h: self)
   let slotval1 = (param1)
   var virtualReturn = vtbl[].metacast(self, slotval1)
   virtualReturn
 
-proc QFramemetacall*(self: gen_qframe_types.QFrame, param1: cint, param2: cint, param3: pointer): cint =
-  fcQFrame_virtualbase_metacall(self.h, cint(param1), param2, param3)
-
-proc cQFrame_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+proc fcQFrame_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QFrameVTable](fcQFrame_vdata(self))
   let self = QFrame(h: self)
   let slotval1 = cint(param1)
@@ -459,10 +604,7 @@ proc cQFrame_vtable_callback_metacall(self: pointer, param1: cint, param2: cint,
   var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QFramesizeHint*(self: gen_qframe_types.QFrame): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQFrame_virtualbase_sizeHint(self.h), owned: true)
-
-proc cQFrame_vtable_callback_sizeHint(self: pointer): pointer {.cdecl.} =
+proc fcQFrame_vtable_callback_sizeHint(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QFrameVTable](fcQFrame_vdata(self))
   let self = QFrame(h: self)
   var virtualReturn = vtbl[].sizeHint(self)
@@ -471,56 +613,38 @@ proc cQFrame_vtable_callback_sizeHint(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QFrameevent*(self: gen_qframe_types.QFrame, e: gen_qcoreevent_types.QEvent): bool =
-  fcQFrame_virtualbase_event(self.h, e.h)
-
-proc cQFrame_vtable_callback_event(self: pointer, e: pointer): bool {.cdecl.} =
+proc fcQFrame_vtable_callback_event(self: pointer, e: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QFrameVTable](fcQFrame_vdata(self))
   let self = QFrame(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: e, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
-proc QFramepaintEvent*(self: gen_qframe_types.QFrame, param1: gen_qevent_types.QPaintEvent): void =
-  fcQFrame_virtualbase_paintEvent(self.h, param1.h)
-
-proc cQFrame_vtable_callback_paintEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQFrame_vtable_callback_paintEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFrameVTable](fcQFrame_vdata(self))
   let self = QFrame(h: self)
   let slotval1 = gen_qevent_types.QPaintEvent(h: param1, owned: false)
   vtbl[].paintEvent(self, slotval1)
 
-proc QFramechangeEvent*(self: gen_qframe_types.QFrame, param1: gen_qcoreevent_types.QEvent): void =
-  fcQFrame_virtualbase_changeEvent(self.h, param1.h)
-
-proc cQFrame_vtable_callback_changeEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQFrame_vtable_callback_changeEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFrameVTable](fcQFrame_vdata(self))
   let self = QFrame(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
   vtbl[].changeEvent(self, slotval1)
 
-proc QFramedevType*(self: gen_qframe_types.QFrame): cint =
-  fcQFrame_virtualbase_devType(self.h)
-
-proc cQFrame_vtable_callback_devType(self: pointer): cint {.cdecl.} =
+proc fcQFrame_vtable_callback_devType(self: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QFrameVTable](fcQFrame_vdata(self))
   let self = QFrame(h: self)
   var virtualReturn = vtbl[].devType(self)
   virtualReturn
 
-proc QFramesetVisible*(self: gen_qframe_types.QFrame, visible: bool): void =
-  fcQFrame_virtualbase_setVisible(self.h, visible)
-
-proc cQFrame_vtable_callback_setVisible(self: pointer, visible: bool): void {.cdecl.} =
+proc fcQFrame_vtable_callback_setVisible(self: pointer, visible: bool): void {.cdecl.} =
   let vtbl = cast[ptr QFrameVTable](fcQFrame_vdata(self))
   let self = QFrame(h: self)
   let slotval1 = visible
   vtbl[].setVisible(self, slotval1)
 
-proc QFrameminimumSizeHint*(self: gen_qframe_types.QFrame): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQFrame_virtualbase_minimumSizeHint(self.h), owned: true)
-
-proc cQFrame_vtable_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
+proc fcQFrame_vtable_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QFrameVTable](fcQFrame_vdata(self))
   let self = QFrame(h: self)
   var virtualReturn = vtbl[].minimumSizeHint(self)
@@ -529,29 +653,20 @@ proc cQFrame_vtable_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QFrameheightForWidth*(self: gen_qframe_types.QFrame, param1: cint): cint =
-  fcQFrame_virtualbase_heightForWidth(self.h, param1)
-
-proc cQFrame_vtable_callback_heightForWidth(self: pointer, param1: cint): cint {.cdecl.} =
+proc fcQFrame_vtable_callback_heightForWidth(self: pointer, param1: cint): cint {.cdecl.} =
   let vtbl = cast[ptr QFrameVTable](fcQFrame_vdata(self))
   let self = QFrame(h: self)
   let slotval1 = param1
   var virtualReturn = vtbl[].heightForWidth(self, slotval1)
   virtualReturn
 
-proc QFramehasHeightForWidth*(self: gen_qframe_types.QFrame): bool =
-  fcQFrame_virtualbase_hasHeightForWidth(self.h)
-
-proc cQFrame_vtable_callback_hasHeightForWidth(self: pointer): bool {.cdecl.} =
+proc fcQFrame_vtable_callback_hasHeightForWidth(self: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QFrameVTable](fcQFrame_vdata(self))
   let self = QFrame(h: self)
   var virtualReturn = vtbl[].hasHeightForWidth(self)
   virtualReturn
 
-proc QFramepaintEngine*(self: gen_qframe_types.QFrame): gen_qpaintengine_types.QPaintEngine =
-  gen_qpaintengine_types.QPaintEngine(h: fcQFrame_virtualbase_paintEngine(self.h), owned: false)
-
-proc cQFrame_vtable_callback_paintEngine(self: pointer): pointer {.cdecl.} =
+proc fcQFrame_vtable_callback_paintEngine(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QFrameVTable](fcQFrame_vdata(self))
   let self = QFrame(h: self)
   var virtualReturn = vtbl[].paintEngine(self)
@@ -560,217 +675,145 @@ proc cQFrame_vtable_callback_paintEngine(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QFramemousePressEvent*(self: gen_qframe_types.QFrame, event: gen_qevent_types.QMouseEvent): void =
-  fcQFrame_virtualbase_mousePressEvent(self.h, event.h)
-
-proc cQFrame_vtable_callback_mousePressEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQFrame_vtable_callback_mousePressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFrameVTable](fcQFrame_vdata(self))
   let self = QFrame(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mousePressEvent(self, slotval1)
 
-proc QFramemouseReleaseEvent*(self: gen_qframe_types.QFrame, event: gen_qevent_types.QMouseEvent): void =
-  fcQFrame_virtualbase_mouseReleaseEvent(self.h, event.h)
-
-proc cQFrame_vtable_callback_mouseReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQFrame_vtable_callback_mouseReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFrameVTable](fcQFrame_vdata(self))
   let self = QFrame(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseReleaseEvent(self, slotval1)
 
-proc QFramemouseDoubleClickEvent*(self: gen_qframe_types.QFrame, event: gen_qevent_types.QMouseEvent): void =
-  fcQFrame_virtualbase_mouseDoubleClickEvent(self.h, event.h)
-
-proc cQFrame_vtable_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQFrame_vtable_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFrameVTable](fcQFrame_vdata(self))
   let self = QFrame(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseDoubleClickEvent(self, slotval1)
 
-proc QFramemouseMoveEvent*(self: gen_qframe_types.QFrame, event: gen_qevent_types.QMouseEvent): void =
-  fcQFrame_virtualbase_mouseMoveEvent(self.h, event.h)
-
-proc cQFrame_vtable_callback_mouseMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQFrame_vtable_callback_mouseMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFrameVTable](fcQFrame_vdata(self))
   let self = QFrame(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseMoveEvent(self, slotval1)
 
-proc QFramewheelEvent*(self: gen_qframe_types.QFrame, event: gen_qevent_types.QWheelEvent): void =
-  fcQFrame_virtualbase_wheelEvent(self.h, event.h)
-
-proc cQFrame_vtable_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQFrame_vtable_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFrameVTable](fcQFrame_vdata(self))
   let self = QFrame(h: self)
   let slotval1 = gen_qevent_types.QWheelEvent(h: event, owned: false)
   vtbl[].wheelEvent(self, slotval1)
 
-proc QFramekeyPressEvent*(self: gen_qframe_types.QFrame, event: gen_qevent_types.QKeyEvent): void =
-  fcQFrame_virtualbase_keyPressEvent(self.h, event.h)
-
-proc cQFrame_vtable_callback_keyPressEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQFrame_vtable_callback_keyPressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFrameVTable](fcQFrame_vdata(self))
   let self = QFrame(h: self)
   let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   vtbl[].keyPressEvent(self, slotval1)
 
-proc QFramekeyReleaseEvent*(self: gen_qframe_types.QFrame, event: gen_qevent_types.QKeyEvent): void =
-  fcQFrame_virtualbase_keyReleaseEvent(self.h, event.h)
-
-proc cQFrame_vtable_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQFrame_vtable_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFrameVTable](fcQFrame_vdata(self))
   let self = QFrame(h: self)
   let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   vtbl[].keyReleaseEvent(self, slotval1)
 
-proc QFramefocusInEvent*(self: gen_qframe_types.QFrame, event: gen_qevent_types.QFocusEvent): void =
-  fcQFrame_virtualbase_focusInEvent(self.h, event.h)
-
-proc cQFrame_vtable_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQFrame_vtable_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFrameVTable](fcQFrame_vdata(self))
   let self = QFrame(h: self)
   let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusInEvent(self, slotval1)
 
-proc QFramefocusOutEvent*(self: gen_qframe_types.QFrame, event: gen_qevent_types.QFocusEvent): void =
-  fcQFrame_virtualbase_focusOutEvent(self.h, event.h)
-
-proc cQFrame_vtable_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQFrame_vtable_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFrameVTable](fcQFrame_vdata(self))
   let self = QFrame(h: self)
   let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusOutEvent(self, slotval1)
 
-proc QFrameenterEvent*(self: gen_qframe_types.QFrame, event: gen_qcoreevent_types.QEvent): void =
-  fcQFrame_virtualbase_enterEvent(self.h, event.h)
-
-proc cQFrame_vtable_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQFrame_vtable_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFrameVTable](fcQFrame_vdata(self))
   let self = QFrame(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].enterEvent(self, slotval1)
 
-proc QFrameleaveEvent*(self: gen_qframe_types.QFrame, event: gen_qcoreevent_types.QEvent): void =
-  fcQFrame_virtualbase_leaveEvent(self.h, event.h)
-
-proc cQFrame_vtable_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQFrame_vtable_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFrameVTable](fcQFrame_vdata(self))
   let self = QFrame(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].leaveEvent(self, slotval1)
 
-proc QFramemoveEvent*(self: gen_qframe_types.QFrame, event: gen_qevent_types.QMoveEvent): void =
-  fcQFrame_virtualbase_moveEvent(self.h, event.h)
-
-proc cQFrame_vtable_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQFrame_vtable_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFrameVTable](fcQFrame_vdata(self))
   let self = QFrame(h: self)
   let slotval1 = gen_qevent_types.QMoveEvent(h: event, owned: false)
   vtbl[].moveEvent(self, slotval1)
 
-proc QFrameresizeEvent*(self: gen_qframe_types.QFrame, event: gen_qevent_types.QResizeEvent): void =
-  fcQFrame_virtualbase_resizeEvent(self.h, event.h)
-
-proc cQFrame_vtable_callback_resizeEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQFrame_vtable_callback_resizeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFrameVTable](fcQFrame_vdata(self))
   let self = QFrame(h: self)
   let slotval1 = gen_qevent_types.QResizeEvent(h: event, owned: false)
   vtbl[].resizeEvent(self, slotval1)
 
-proc QFramecloseEvent*(self: gen_qframe_types.QFrame, event: gen_qevent_types.QCloseEvent): void =
-  fcQFrame_virtualbase_closeEvent(self.h, event.h)
-
-proc cQFrame_vtable_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQFrame_vtable_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFrameVTable](fcQFrame_vdata(self))
   let self = QFrame(h: self)
   let slotval1 = gen_qevent_types.QCloseEvent(h: event, owned: false)
   vtbl[].closeEvent(self, slotval1)
 
-proc QFramecontextMenuEvent*(self: gen_qframe_types.QFrame, event: gen_qevent_types.QContextMenuEvent): void =
-  fcQFrame_virtualbase_contextMenuEvent(self.h, event.h)
-
-proc cQFrame_vtable_callback_contextMenuEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQFrame_vtable_callback_contextMenuEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFrameVTable](fcQFrame_vdata(self))
   let self = QFrame(h: self)
   let slotval1 = gen_qevent_types.QContextMenuEvent(h: event, owned: false)
   vtbl[].contextMenuEvent(self, slotval1)
 
-proc QFrametabletEvent*(self: gen_qframe_types.QFrame, event: gen_qevent_types.QTabletEvent): void =
-  fcQFrame_virtualbase_tabletEvent(self.h, event.h)
-
-proc cQFrame_vtable_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQFrame_vtable_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFrameVTable](fcQFrame_vdata(self))
   let self = QFrame(h: self)
   let slotval1 = gen_qevent_types.QTabletEvent(h: event, owned: false)
   vtbl[].tabletEvent(self, slotval1)
 
-proc QFrameactionEvent*(self: gen_qframe_types.QFrame, event: gen_qevent_types.QActionEvent): void =
-  fcQFrame_virtualbase_actionEvent(self.h, event.h)
-
-proc cQFrame_vtable_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQFrame_vtable_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFrameVTable](fcQFrame_vdata(self))
   let self = QFrame(h: self)
   let slotval1 = gen_qevent_types.QActionEvent(h: event, owned: false)
   vtbl[].actionEvent(self, slotval1)
 
-proc QFramedragEnterEvent*(self: gen_qframe_types.QFrame, event: gen_qevent_types.QDragEnterEvent): void =
-  fcQFrame_virtualbase_dragEnterEvent(self.h, event.h)
-
-proc cQFrame_vtable_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQFrame_vtable_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFrameVTable](fcQFrame_vdata(self))
   let self = QFrame(h: self)
   let slotval1 = gen_qevent_types.QDragEnterEvent(h: event, owned: false)
   vtbl[].dragEnterEvent(self, slotval1)
 
-proc QFramedragMoveEvent*(self: gen_qframe_types.QFrame, event: gen_qevent_types.QDragMoveEvent): void =
-  fcQFrame_virtualbase_dragMoveEvent(self.h, event.h)
-
-proc cQFrame_vtable_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQFrame_vtable_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFrameVTable](fcQFrame_vdata(self))
   let self = QFrame(h: self)
   let slotval1 = gen_qevent_types.QDragMoveEvent(h: event, owned: false)
   vtbl[].dragMoveEvent(self, slotval1)
 
-proc QFramedragLeaveEvent*(self: gen_qframe_types.QFrame, event: gen_qevent_types.QDragLeaveEvent): void =
-  fcQFrame_virtualbase_dragLeaveEvent(self.h, event.h)
-
-proc cQFrame_vtable_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQFrame_vtable_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFrameVTable](fcQFrame_vdata(self))
   let self = QFrame(h: self)
   let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event, owned: false)
   vtbl[].dragLeaveEvent(self, slotval1)
 
-proc QFramedropEvent*(self: gen_qframe_types.QFrame, event: gen_qevent_types.QDropEvent): void =
-  fcQFrame_virtualbase_dropEvent(self.h, event.h)
-
-proc cQFrame_vtable_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQFrame_vtable_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFrameVTable](fcQFrame_vdata(self))
   let self = QFrame(h: self)
   let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
   vtbl[].dropEvent(self, slotval1)
 
-proc QFrameshowEvent*(self: gen_qframe_types.QFrame, event: gen_qevent_types.QShowEvent): void =
-  fcQFrame_virtualbase_showEvent(self.h, event.h)
-
-proc cQFrame_vtable_callback_showEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQFrame_vtable_callback_showEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFrameVTable](fcQFrame_vdata(self))
   let self = QFrame(h: self)
   let slotval1 = gen_qevent_types.QShowEvent(h: event, owned: false)
   vtbl[].showEvent(self, slotval1)
 
-proc QFramehideEvent*(self: gen_qframe_types.QFrame, event: gen_qevent_types.QHideEvent): void =
-  fcQFrame_virtualbase_hideEvent(self.h, event.h)
-
-proc cQFrame_vtable_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQFrame_vtable_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFrameVTable](fcQFrame_vdata(self))
   let self = QFrame(h: self)
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   vtbl[].hideEvent(self, slotval1)
 
-proc QFramenativeEvent*(self: gen_qframe_types.QFrame, eventType: openArray[byte], message: pointer, resultVal: ptr clong): bool =
-  fcQFrame_virtualbase_nativeEvent(self.h, struct_miqt_string(data: cast[cstring](if len(eventType) == 0: nil else: unsafeAddr eventType[0]), len: csize_t(len(eventType))), message, resultVal)
-
-proc cQFrame_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr clong): bool {.cdecl.} =
+proc fcQFrame_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr clong): bool {.cdecl.} =
   let vtbl = cast[ptr QFrameVTable](fcQFrame_vdata(self))
   let self = QFrame(h: self)
   var veventType_bytearray = eventType
@@ -782,29 +825,20 @@ proc cQFrame_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt_s
   var virtualReturn = vtbl[].nativeEvent(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QFramemetric*(self: gen_qframe_types.QFrame, param1: cint): cint =
-  fcQFrame_virtualbase_metric(self.h, cint(param1))
-
-proc cQFrame_vtable_callback_metric(self: pointer, param1: cint): cint {.cdecl.} =
+proc fcQFrame_vtable_callback_metric(self: pointer, param1: cint): cint {.cdecl.} =
   let vtbl = cast[ptr QFrameVTable](fcQFrame_vdata(self))
   let self = QFrame(h: self)
   let slotval1 = cint(param1)
   var virtualReturn = vtbl[].metric(self, slotval1)
   virtualReturn
 
-proc QFrameinitPainter*(self: gen_qframe_types.QFrame, painter: gen_qpainter_types.QPainter): void =
-  fcQFrame_virtualbase_initPainter(self.h, painter.h)
-
-proc cQFrame_vtable_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
+proc fcQFrame_vtable_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFrameVTable](fcQFrame_vdata(self))
   let self = QFrame(h: self)
   let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
   vtbl[].initPainter(self, slotval1)
 
-proc QFrameredirected*(self: gen_qframe_types.QFrame, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice =
-  gen_qpaintdevice_types.QPaintDevice(h: fcQFrame_virtualbase_redirected(self.h, offset.h), owned: false)
-
-proc cQFrame_vtable_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
+proc fcQFrame_vtable_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QFrameVTable](fcQFrame_vdata(self))
   let self = QFrame(h: self)
   let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
@@ -814,10 +848,7 @@ proc cQFrame_vtable_callback_redirected(self: pointer, offset: pointer): pointer
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QFramesharedPainter*(self: gen_qframe_types.QFrame): gen_qpainter_types.QPainter =
-  gen_qpainter_types.QPainter(h: fcQFrame_virtualbase_sharedPainter(self.h), owned: false)
-
-proc cQFrame_vtable_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
+proc fcQFrame_vtable_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QFrameVTable](fcQFrame_vdata(self))
   let self = QFrame(h: self)
   var virtualReturn = vtbl[].sharedPainter(self)
@@ -826,19 +857,13 @@ proc cQFrame_vtable_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QFrameinputMethodEvent*(self: gen_qframe_types.QFrame, param1: gen_qevent_types.QInputMethodEvent): void =
-  fcQFrame_virtualbase_inputMethodEvent(self.h, param1.h)
-
-proc cQFrame_vtable_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQFrame_vtable_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFrameVTable](fcQFrame_vdata(self))
   let self = QFrame(h: self)
   let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1, owned: false)
   vtbl[].inputMethodEvent(self, slotval1)
 
-proc QFrameinputMethodQuery*(self: gen_qframe_types.QFrame, param1: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQFrame_virtualbase_inputMethodQuery(self.h, cint(param1)), owned: true)
-
-proc cQFrame_vtable_callback_inputMethodQuery(self: pointer, param1: cint): pointer {.cdecl.} =
+proc fcQFrame_vtable_callback_inputMethodQuery(self: pointer, param1: cint): pointer {.cdecl.} =
   let vtbl = cast[ptr QFrameVTable](fcQFrame_vdata(self))
   let self = QFrame(h: self)
   let slotval1 = cint(param1)
@@ -848,20 +873,14 @@ proc cQFrame_vtable_callback_inputMethodQuery(self: pointer, param1: cint): poin
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QFramefocusNextPrevChild*(self: gen_qframe_types.QFrame, next: bool): bool =
-  fcQFrame_virtualbase_focusNextPrevChild(self.h, next)
-
-proc cQFrame_vtable_callback_focusNextPrevChild(self: pointer, next: bool): bool {.cdecl.} =
+proc fcQFrame_vtable_callback_focusNextPrevChild(self: pointer, next: bool): bool {.cdecl.} =
   let vtbl = cast[ptr QFrameVTable](fcQFrame_vdata(self))
   let self = QFrame(h: self)
   let slotval1 = next
   var virtualReturn = vtbl[].focusNextPrevChild(self, slotval1)
   virtualReturn
 
-proc QFrameeventFilter*(self: gen_qframe_types.QFrame, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
-  fcQFrame_virtualbase_eventFilter(self.h, watched.h, event.h)
-
-proc cQFrame_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+proc fcQFrame_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QFrameVTable](fcQFrame_vdata(self))
   let self = QFrame(h: self)
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
@@ -869,46 +888,31 @@ proc cQFrame_vtable_callback_eventFilter(self: pointer, watched: pointer, event:
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
-proc QFrametimerEvent*(self: gen_qframe_types.QFrame, event: gen_qcoreevent_types.QTimerEvent): void =
-  fcQFrame_virtualbase_timerEvent(self.h, event.h)
-
-proc cQFrame_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQFrame_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFrameVTable](fcQFrame_vdata(self))
   let self = QFrame(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
-proc QFramechildEvent*(self: gen_qframe_types.QFrame, event: gen_qcoreevent_types.QChildEvent): void =
-  fcQFrame_virtualbase_childEvent(self.h, event.h)
-
-proc cQFrame_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQFrame_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFrameVTable](fcQFrame_vdata(self))
   let self = QFrame(h: self)
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
-proc QFramecustomEvent*(self: gen_qframe_types.QFrame, event: gen_qcoreevent_types.QEvent): void =
-  fcQFrame_virtualbase_customEvent(self.h, event.h)
-
-proc cQFrame_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQFrame_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFrameVTable](fcQFrame_vdata(self))
   let self = QFrame(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
-proc QFrameconnectNotify*(self: gen_qframe_types.QFrame, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQFrame_virtualbase_connectNotify(self.h, signal.h)
-
-proc cQFrame_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQFrame_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFrameVTable](fcQFrame_vdata(self))
   let self = QFrame(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
-proc QFramedisconnectNotify*(self: gen_qframe_types.QFrame, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQFrame_virtualbase_disconnectNotify(self.h, signal.h)
-
-proc cQFrame_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQFrame_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFrameVTable](fcQFrame_vdata(self))
   let self = QFrame(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
@@ -916,9 +920,109 @@ proc cQFrame_vtable_callback_disconnectNotify(self: pointer, signal: pointer): v
 
 type VirtualQFrame* {.inheritable.} = ref object of QFrame
   vtbl*: cQFrameVTable
+
 method metaObject*(self: VirtualQFrame): gen_qobjectdefs_types.QMetaObject {.base.} =
   QFramemetaObject(self[])
-proc cQFrame_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
+method metacast*(self: VirtualQFrame, param1: cstring): pointer {.base.} =
+  QFramemetacast(self[], param1)
+method metacall*(self: VirtualQFrame, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QFramemetacall(self[], param1, param2, param3)
+method sizeHint*(self: VirtualQFrame): gen_qsize_types.QSize {.base.} =
+  QFramesizeHint(self[])
+method event*(self: VirtualQFrame, e: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QFrameevent(self[], e)
+method paintEvent*(self: VirtualQFrame, param1: gen_qevent_types.QPaintEvent): void {.base.} =
+  QFramepaintEvent(self[], param1)
+method changeEvent*(self: VirtualQFrame, param1: gen_qcoreevent_types.QEvent): void {.base.} =
+  QFramechangeEvent(self[], param1)
+method devType*(self: VirtualQFrame): cint {.base.} =
+  QFramedevType(self[])
+method setVisible*(self: VirtualQFrame, visible: bool): void {.base.} =
+  QFramesetVisible(self[], visible)
+method minimumSizeHint*(self: VirtualQFrame): gen_qsize_types.QSize {.base.} =
+  QFrameminimumSizeHint(self[])
+method heightForWidth*(self: VirtualQFrame, param1: cint): cint {.base.} =
+  QFrameheightForWidth(self[], param1)
+method hasHeightForWidth*(self: VirtualQFrame): bool {.base.} =
+  QFramehasHeightForWidth(self[])
+method paintEngine*(self: VirtualQFrame): gen_qpaintengine_types.QPaintEngine {.base.} =
+  QFramepaintEngine(self[])
+method mousePressEvent*(self: VirtualQFrame, event: gen_qevent_types.QMouseEvent): void {.base.} =
+  QFramemousePressEvent(self[], event)
+method mouseReleaseEvent*(self: VirtualQFrame, event: gen_qevent_types.QMouseEvent): void {.base.} =
+  QFramemouseReleaseEvent(self[], event)
+method mouseDoubleClickEvent*(self: VirtualQFrame, event: gen_qevent_types.QMouseEvent): void {.base.} =
+  QFramemouseDoubleClickEvent(self[], event)
+method mouseMoveEvent*(self: VirtualQFrame, event: gen_qevent_types.QMouseEvent): void {.base.} =
+  QFramemouseMoveEvent(self[], event)
+method wheelEvent*(self: VirtualQFrame, event: gen_qevent_types.QWheelEvent): void {.base.} =
+  QFramewheelEvent(self[], event)
+method keyPressEvent*(self: VirtualQFrame, event: gen_qevent_types.QKeyEvent): void {.base.} =
+  QFramekeyPressEvent(self[], event)
+method keyReleaseEvent*(self: VirtualQFrame, event: gen_qevent_types.QKeyEvent): void {.base.} =
+  QFramekeyReleaseEvent(self[], event)
+method focusInEvent*(self: VirtualQFrame, event: gen_qevent_types.QFocusEvent): void {.base.} =
+  QFramefocusInEvent(self[], event)
+method focusOutEvent*(self: VirtualQFrame, event: gen_qevent_types.QFocusEvent): void {.base.} =
+  QFramefocusOutEvent(self[], event)
+method enterEvent*(self: VirtualQFrame, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QFrameenterEvent(self[], event)
+method leaveEvent*(self: VirtualQFrame, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QFrameleaveEvent(self[], event)
+method moveEvent*(self: VirtualQFrame, event: gen_qevent_types.QMoveEvent): void {.base.} =
+  QFramemoveEvent(self[], event)
+method resizeEvent*(self: VirtualQFrame, event: gen_qevent_types.QResizeEvent): void {.base.} =
+  QFrameresizeEvent(self[], event)
+method closeEvent*(self: VirtualQFrame, event: gen_qevent_types.QCloseEvent): void {.base.} =
+  QFramecloseEvent(self[], event)
+method contextMenuEvent*(self: VirtualQFrame, event: gen_qevent_types.QContextMenuEvent): void {.base.} =
+  QFramecontextMenuEvent(self[], event)
+method tabletEvent*(self: VirtualQFrame, event: gen_qevent_types.QTabletEvent): void {.base.} =
+  QFrametabletEvent(self[], event)
+method actionEvent*(self: VirtualQFrame, event: gen_qevent_types.QActionEvent): void {.base.} =
+  QFrameactionEvent(self[], event)
+method dragEnterEvent*(self: VirtualQFrame, event: gen_qevent_types.QDragEnterEvent): void {.base.} =
+  QFramedragEnterEvent(self[], event)
+method dragMoveEvent*(self: VirtualQFrame, event: gen_qevent_types.QDragMoveEvent): void {.base.} =
+  QFramedragMoveEvent(self[], event)
+method dragLeaveEvent*(self: VirtualQFrame, event: gen_qevent_types.QDragLeaveEvent): void {.base.} =
+  QFramedragLeaveEvent(self[], event)
+method dropEvent*(self: VirtualQFrame, event: gen_qevent_types.QDropEvent): void {.base.} =
+  QFramedropEvent(self[], event)
+method showEvent*(self: VirtualQFrame, event: gen_qevent_types.QShowEvent): void {.base.} =
+  QFrameshowEvent(self[], event)
+method hideEvent*(self: VirtualQFrame, event: gen_qevent_types.QHideEvent): void {.base.} =
+  QFramehideEvent(self[], event)
+method nativeEvent*(self: VirtualQFrame, eventType: openArray[byte], message: pointer, resultVal: ptr clong): bool {.base.} =
+  QFramenativeEvent(self[], eventType, message, resultVal)
+method metric*(self: VirtualQFrame, param1: cint): cint {.base.} =
+  QFramemetric(self[], param1)
+method initPainter*(self: VirtualQFrame, painter: gen_qpainter_types.QPainter): void {.base.} =
+  QFrameinitPainter(self[], painter)
+method redirected*(self: VirtualQFrame, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.base.} =
+  QFrameredirected(self[], offset)
+method sharedPainter*(self: VirtualQFrame): gen_qpainter_types.QPainter {.base.} =
+  QFramesharedPainter(self[])
+method inputMethodEvent*(self: VirtualQFrame, param1: gen_qevent_types.QInputMethodEvent): void {.base.} =
+  QFrameinputMethodEvent(self[], param1)
+method inputMethodQuery*(self: VirtualQFrame, param1: cint): gen_qvariant_types.QVariant {.base.} =
+  QFrameinputMethodQuery(self[], param1)
+method focusNextPrevChild*(self: VirtualQFrame, next: bool): bool {.base.} =
+  QFramefocusNextPrevChild(self[], next)
+method eventFilter*(self: VirtualQFrame, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QFrameeventFilter(self[], watched, event)
+method timerEvent*(self: VirtualQFrame, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QFrametimerEvent(self[], event)
+method childEvent*(self: VirtualQFrame, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QFramechildEvent(self[], event)
+method customEvent*(self: VirtualQFrame, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QFramecustomEvent(self[], event)
+method connectNotify*(self: VirtualQFrame, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QFrameconnectNotify(self[], signal)
+method disconnectNotify*(self: VirtualQFrame, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QFramedisconnectNotify(self[], signal)
+
+proc fcQFrame_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQFrame](fcQFrame_vdata(self))
   var virtualReturn = inst.metaObject()
   virtualReturn.owned = false # TODO move?
@@ -926,17 +1030,13 @@ proc cQFrame_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-method metacast*(self: VirtualQFrame, param1: cstring): pointer {.base.} =
-  QFramemetacast(self[], param1)
-proc cQFrame_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+proc fcQFrame_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQFrame](fcQFrame_vdata(self))
   let slotval1 = (param1)
   var virtualReturn = inst.metacast(slotval1)
   virtualReturn
 
-method metacall*(self: VirtualQFrame, param1: cint, param2: cint, param3: pointer): cint {.base.} =
-  QFramemetacall(self[], param1, param2, param3)
-proc cQFrame_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+proc fcQFrame_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQFrame](fcQFrame_vdata(self))
   let slotval1 = cint(param1)
   let slotval2 = param2
@@ -944,9 +1044,7 @@ proc cQFrame_method_callback_metacall(self: pointer, param1: cint, param2: cint,
   var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
-method sizeHint*(self: VirtualQFrame): gen_qsize_types.QSize {.base.} =
-  QFramesizeHint(self[])
-proc cQFrame_method_callback_sizeHint(self: pointer): pointer {.cdecl.} =
+proc fcQFrame_method_callback_sizeHint(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQFrame](fcQFrame_vdata(self))
   var virtualReturn = inst.sizeHint()
   virtualReturn.owned = false # TODO move?
@@ -954,45 +1052,33 @@ proc cQFrame_method_callback_sizeHint(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-method event*(self: VirtualQFrame, e: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QFrameevent(self[], e)
-proc cQFrame_method_callback_event(self: pointer, e: pointer): bool {.cdecl.} =
+proc fcQFrame_method_callback_event(self: pointer, e: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQFrame](fcQFrame_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: e, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
-method paintEvent*(self: VirtualQFrame, param1: gen_qevent_types.QPaintEvent): void {.base.} =
-  QFramepaintEvent(self[], param1)
-proc cQFrame_method_callback_paintEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQFrame_method_callback_paintEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFrame](fcQFrame_vdata(self))
   let slotval1 = gen_qevent_types.QPaintEvent(h: param1, owned: false)
   inst.paintEvent(slotval1)
 
-method changeEvent*(self: VirtualQFrame, param1: gen_qcoreevent_types.QEvent): void {.base.} =
-  QFramechangeEvent(self[], param1)
-proc cQFrame_method_callback_changeEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQFrame_method_callback_changeEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFrame](fcQFrame_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
   inst.changeEvent(slotval1)
 
-method devType*(self: VirtualQFrame): cint {.base.} =
-  QFramedevType(self[])
-proc cQFrame_method_callback_devType(self: pointer): cint {.cdecl.} =
+proc fcQFrame_method_callback_devType(self: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQFrame](fcQFrame_vdata(self))
   var virtualReturn = inst.devType()
   virtualReturn
 
-method setVisible*(self: VirtualQFrame, visible: bool): void {.base.} =
-  QFramesetVisible(self[], visible)
-proc cQFrame_method_callback_setVisible(self: pointer, visible: bool): void {.cdecl.} =
+proc fcQFrame_method_callback_setVisible(self: pointer, visible: bool): void {.cdecl.} =
   let inst = cast[VirtualQFrame](fcQFrame_vdata(self))
   let slotval1 = visible
   inst.setVisible(slotval1)
 
-method minimumSizeHint*(self: VirtualQFrame): gen_qsize_types.QSize {.base.} =
-  QFrameminimumSizeHint(self[])
-proc cQFrame_method_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
+proc fcQFrame_method_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQFrame](fcQFrame_vdata(self))
   var virtualReturn = inst.minimumSizeHint()
   virtualReturn.owned = false # TODO move?
@@ -1000,24 +1086,18 @@ proc cQFrame_method_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-method heightForWidth*(self: VirtualQFrame, param1: cint): cint {.base.} =
-  QFrameheightForWidth(self[], param1)
-proc cQFrame_method_callback_heightForWidth(self: pointer, param1: cint): cint {.cdecl.} =
+proc fcQFrame_method_callback_heightForWidth(self: pointer, param1: cint): cint {.cdecl.} =
   let inst = cast[VirtualQFrame](fcQFrame_vdata(self))
   let slotval1 = param1
   var virtualReturn = inst.heightForWidth(slotval1)
   virtualReturn
 
-method hasHeightForWidth*(self: VirtualQFrame): bool {.base.} =
-  QFramehasHeightForWidth(self[])
-proc cQFrame_method_callback_hasHeightForWidth(self: pointer): bool {.cdecl.} =
+proc fcQFrame_method_callback_hasHeightForWidth(self: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQFrame](fcQFrame_vdata(self))
   var virtualReturn = inst.hasHeightForWidth()
   virtualReturn
 
-method paintEngine*(self: VirtualQFrame): gen_qpaintengine_types.QPaintEngine {.base.} =
-  QFramepaintEngine(self[])
-proc cQFrame_method_callback_paintEngine(self: pointer): pointer {.cdecl.} =
+proc fcQFrame_method_callback_paintEngine(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQFrame](fcQFrame_vdata(self))
   var virtualReturn = inst.paintEngine()
   virtualReturn.owned = false # TODO move?
@@ -1025,170 +1105,122 @@ proc cQFrame_method_callback_paintEngine(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-method mousePressEvent*(self: VirtualQFrame, event: gen_qevent_types.QMouseEvent): void {.base.} =
-  QFramemousePressEvent(self[], event)
-proc cQFrame_method_callback_mousePressEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQFrame_method_callback_mousePressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFrame](fcQFrame_vdata(self))
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mousePressEvent(slotval1)
 
-method mouseReleaseEvent*(self: VirtualQFrame, event: gen_qevent_types.QMouseEvent): void {.base.} =
-  QFramemouseReleaseEvent(self[], event)
-proc cQFrame_method_callback_mouseReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQFrame_method_callback_mouseReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFrame](fcQFrame_vdata(self))
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mouseReleaseEvent(slotval1)
 
-method mouseDoubleClickEvent*(self: VirtualQFrame, event: gen_qevent_types.QMouseEvent): void {.base.} =
-  QFramemouseDoubleClickEvent(self[], event)
-proc cQFrame_method_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQFrame_method_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFrame](fcQFrame_vdata(self))
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mouseDoubleClickEvent(slotval1)
 
-method mouseMoveEvent*(self: VirtualQFrame, event: gen_qevent_types.QMouseEvent): void {.base.} =
-  QFramemouseMoveEvent(self[], event)
-proc cQFrame_method_callback_mouseMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQFrame_method_callback_mouseMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFrame](fcQFrame_vdata(self))
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mouseMoveEvent(slotval1)
 
-method wheelEvent*(self: VirtualQFrame, event: gen_qevent_types.QWheelEvent): void {.base.} =
-  QFramewheelEvent(self[], event)
-proc cQFrame_method_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQFrame_method_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFrame](fcQFrame_vdata(self))
   let slotval1 = gen_qevent_types.QWheelEvent(h: event, owned: false)
   inst.wheelEvent(slotval1)
 
-method keyPressEvent*(self: VirtualQFrame, event: gen_qevent_types.QKeyEvent): void {.base.} =
-  QFramekeyPressEvent(self[], event)
-proc cQFrame_method_callback_keyPressEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQFrame_method_callback_keyPressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFrame](fcQFrame_vdata(self))
   let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   inst.keyPressEvent(slotval1)
 
-method keyReleaseEvent*(self: VirtualQFrame, event: gen_qevent_types.QKeyEvent): void {.base.} =
-  QFramekeyReleaseEvent(self[], event)
-proc cQFrame_method_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQFrame_method_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFrame](fcQFrame_vdata(self))
   let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   inst.keyReleaseEvent(slotval1)
 
-method focusInEvent*(self: VirtualQFrame, event: gen_qevent_types.QFocusEvent): void {.base.} =
-  QFramefocusInEvent(self[], event)
-proc cQFrame_method_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQFrame_method_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFrame](fcQFrame_vdata(self))
   let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   inst.focusInEvent(slotval1)
 
-method focusOutEvent*(self: VirtualQFrame, event: gen_qevent_types.QFocusEvent): void {.base.} =
-  QFramefocusOutEvent(self[], event)
-proc cQFrame_method_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQFrame_method_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFrame](fcQFrame_vdata(self))
   let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   inst.focusOutEvent(slotval1)
 
-method enterEvent*(self: VirtualQFrame, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QFrameenterEvent(self[], event)
-proc cQFrame_method_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQFrame_method_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFrame](fcQFrame_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.enterEvent(slotval1)
 
-method leaveEvent*(self: VirtualQFrame, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QFrameleaveEvent(self[], event)
-proc cQFrame_method_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQFrame_method_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFrame](fcQFrame_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.leaveEvent(slotval1)
 
-method moveEvent*(self: VirtualQFrame, event: gen_qevent_types.QMoveEvent): void {.base.} =
-  QFramemoveEvent(self[], event)
-proc cQFrame_method_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQFrame_method_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFrame](fcQFrame_vdata(self))
   let slotval1 = gen_qevent_types.QMoveEvent(h: event, owned: false)
   inst.moveEvent(slotval1)
 
-method resizeEvent*(self: VirtualQFrame, event: gen_qevent_types.QResizeEvent): void {.base.} =
-  QFrameresizeEvent(self[], event)
-proc cQFrame_method_callback_resizeEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQFrame_method_callback_resizeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFrame](fcQFrame_vdata(self))
   let slotval1 = gen_qevent_types.QResizeEvent(h: event, owned: false)
   inst.resizeEvent(slotval1)
 
-method closeEvent*(self: VirtualQFrame, event: gen_qevent_types.QCloseEvent): void {.base.} =
-  QFramecloseEvent(self[], event)
-proc cQFrame_method_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQFrame_method_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFrame](fcQFrame_vdata(self))
   let slotval1 = gen_qevent_types.QCloseEvent(h: event, owned: false)
   inst.closeEvent(slotval1)
 
-method contextMenuEvent*(self: VirtualQFrame, event: gen_qevent_types.QContextMenuEvent): void {.base.} =
-  QFramecontextMenuEvent(self[], event)
-proc cQFrame_method_callback_contextMenuEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQFrame_method_callback_contextMenuEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFrame](fcQFrame_vdata(self))
   let slotval1 = gen_qevent_types.QContextMenuEvent(h: event, owned: false)
   inst.contextMenuEvent(slotval1)
 
-method tabletEvent*(self: VirtualQFrame, event: gen_qevent_types.QTabletEvent): void {.base.} =
-  QFrametabletEvent(self[], event)
-proc cQFrame_method_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQFrame_method_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFrame](fcQFrame_vdata(self))
   let slotval1 = gen_qevent_types.QTabletEvent(h: event, owned: false)
   inst.tabletEvent(slotval1)
 
-method actionEvent*(self: VirtualQFrame, event: gen_qevent_types.QActionEvent): void {.base.} =
-  QFrameactionEvent(self[], event)
-proc cQFrame_method_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQFrame_method_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFrame](fcQFrame_vdata(self))
   let slotval1 = gen_qevent_types.QActionEvent(h: event, owned: false)
   inst.actionEvent(slotval1)
 
-method dragEnterEvent*(self: VirtualQFrame, event: gen_qevent_types.QDragEnterEvent): void {.base.} =
-  QFramedragEnterEvent(self[], event)
-proc cQFrame_method_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQFrame_method_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFrame](fcQFrame_vdata(self))
   let slotval1 = gen_qevent_types.QDragEnterEvent(h: event, owned: false)
   inst.dragEnterEvent(slotval1)
 
-method dragMoveEvent*(self: VirtualQFrame, event: gen_qevent_types.QDragMoveEvent): void {.base.} =
-  QFramedragMoveEvent(self[], event)
-proc cQFrame_method_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQFrame_method_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFrame](fcQFrame_vdata(self))
   let slotval1 = gen_qevent_types.QDragMoveEvent(h: event, owned: false)
   inst.dragMoveEvent(slotval1)
 
-method dragLeaveEvent*(self: VirtualQFrame, event: gen_qevent_types.QDragLeaveEvent): void {.base.} =
-  QFramedragLeaveEvent(self[], event)
-proc cQFrame_method_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQFrame_method_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFrame](fcQFrame_vdata(self))
   let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event, owned: false)
   inst.dragLeaveEvent(slotval1)
 
-method dropEvent*(self: VirtualQFrame, event: gen_qevent_types.QDropEvent): void {.base.} =
-  QFramedropEvent(self[], event)
-proc cQFrame_method_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQFrame_method_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFrame](fcQFrame_vdata(self))
   let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
   inst.dropEvent(slotval1)
 
-method showEvent*(self: VirtualQFrame, event: gen_qevent_types.QShowEvent): void {.base.} =
-  QFrameshowEvent(self[], event)
-proc cQFrame_method_callback_showEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQFrame_method_callback_showEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFrame](fcQFrame_vdata(self))
   let slotval1 = gen_qevent_types.QShowEvent(h: event, owned: false)
   inst.showEvent(slotval1)
 
-method hideEvent*(self: VirtualQFrame, event: gen_qevent_types.QHideEvent): void {.base.} =
-  QFramehideEvent(self[], event)
-proc cQFrame_method_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQFrame_method_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFrame](fcQFrame_vdata(self))
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   inst.hideEvent(slotval1)
 
-method nativeEvent*(self: VirtualQFrame, eventType: openArray[byte], message: pointer, resultVal: ptr clong): bool {.base.} =
-  QFramenativeEvent(self[], eventType, message, resultVal)
-proc cQFrame_method_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr clong): bool {.cdecl.} =
+proc fcQFrame_method_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr clong): bool {.cdecl.} =
   let inst = cast[VirtualQFrame](fcQFrame_vdata(self))
   var veventType_bytearray = eventType
   var veventTypex_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](veventType_bytearray.data), 0, int(veventType_bytearray.len)-1))
@@ -1199,24 +1231,18 @@ proc cQFrame_method_callback_nativeEvent(self: pointer, eventType: struct_miqt_s
   var virtualReturn = inst.nativeEvent(slotval1, slotval2, slotval3)
   virtualReturn
 
-method metric*(self: VirtualQFrame, param1: cint): cint {.base.} =
-  QFramemetric(self[], param1)
-proc cQFrame_method_callback_metric(self: pointer, param1: cint): cint {.cdecl.} =
+proc fcQFrame_method_callback_metric(self: pointer, param1: cint): cint {.cdecl.} =
   let inst = cast[VirtualQFrame](fcQFrame_vdata(self))
   let slotval1 = cint(param1)
   var virtualReturn = inst.metric(slotval1)
   virtualReturn
 
-method initPainter*(self: VirtualQFrame, painter: gen_qpainter_types.QPainter): void {.base.} =
-  QFrameinitPainter(self[], painter)
-proc cQFrame_method_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
+proc fcQFrame_method_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFrame](fcQFrame_vdata(self))
   let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
   inst.initPainter(slotval1)
 
-method redirected*(self: VirtualQFrame, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.base.} =
-  QFrameredirected(self[], offset)
-proc cQFrame_method_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
+proc fcQFrame_method_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQFrame](fcQFrame_vdata(self))
   let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
   var virtualReturn = inst.redirected(slotval1)
@@ -1225,9 +1251,7 @@ proc cQFrame_method_callback_redirected(self: pointer, offset: pointer): pointer
   virtualReturn.h = nil
   virtualReturn_h
 
-method sharedPainter*(self: VirtualQFrame): gen_qpainter_types.QPainter {.base.} =
-  QFramesharedPainter(self[])
-proc cQFrame_method_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
+proc fcQFrame_method_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQFrame](fcQFrame_vdata(self))
   var virtualReturn = inst.sharedPainter()
   virtualReturn.owned = false # TODO move?
@@ -1235,16 +1259,12 @@ proc cQFrame_method_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-method inputMethodEvent*(self: VirtualQFrame, param1: gen_qevent_types.QInputMethodEvent): void {.base.} =
-  QFrameinputMethodEvent(self[], param1)
-proc cQFrame_method_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQFrame_method_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFrame](fcQFrame_vdata(self))
   let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1, owned: false)
   inst.inputMethodEvent(slotval1)
 
-method inputMethodQuery*(self: VirtualQFrame, param1: cint): gen_qvariant_types.QVariant {.base.} =
-  QFrameinputMethodQuery(self[], param1)
-proc cQFrame_method_callback_inputMethodQuery(self: pointer, param1: cint): pointer {.cdecl.} =
+proc fcQFrame_method_callback_inputMethodQuery(self: pointer, param1: cint): pointer {.cdecl.} =
   let inst = cast[VirtualQFrame](fcQFrame_vdata(self))
   let slotval1 = cint(param1)
   var virtualReturn = inst.inputMethodQuery(slotval1)
@@ -1253,57 +1273,44 @@ proc cQFrame_method_callback_inputMethodQuery(self: pointer, param1: cint): poin
   virtualReturn.h = nil
   virtualReturn_h
 
-method focusNextPrevChild*(self: VirtualQFrame, next: bool): bool {.base.} =
-  QFramefocusNextPrevChild(self[], next)
-proc cQFrame_method_callback_focusNextPrevChild(self: pointer, next: bool): bool {.cdecl.} =
+proc fcQFrame_method_callback_focusNextPrevChild(self: pointer, next: bool): bool {.cdecl.} =
   let inst = cast[VirtualQFrame](fcQFrame_vdata(self))
   let slotval1 = next
   var virtualReturn = inst.focusNextPrevChild(slotval1)
   virtualReturn
 
-method eventFilter*(self: VirtualQFrame, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QFrameeventFilter(self[], watched, event)
-proc cQFrame_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+proc fcQFrame_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQFrame](fcQFrame_vdata(self))
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
   let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
-method timerEvent*(self: VirtualQFrame, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
-  QFrametimerEvent(self[], event)
-proc cQFrame_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQFrame_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFrame](fcQFrame_vdata(self))
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
-method childEvent*(self: VirtualQFrame, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
-  QFramechildEvent(self[], event)
-proc cQFrame_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQFrame_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFrame](fcQFrame_vdata(self))
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
-method customEvent*(self: VirtualQFrame, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QFramecustomEvent(self[], event)
-proc cQFrame_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQFrame_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFrame](fcQFrame_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
-method connectNotify*(self: VirtualQFrame, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QFrameconnectNotify(self[], signal)
-proc cQFrame_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQFrame_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFrame](fcQFrame_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
-method disconnectNotify*(self: VirtualQFrame, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QFramedisconnectNotify(self[], signal)
-proc cQFrame_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQFrame_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFrame](fcQFrame_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
+
 
 proc drawFrame*(self: gen_qframe_types.QFrame, param1: gen_qpainter_types.QPainter): void =
   fcQFrame_protectedbase_drawFrame(self.h, param1.h)
@@ -1347,105 +1354,105 @@ proc create*(T: type gen_qframe_types.QFrame,
     let vtbl = cast[ref QFrameVTable](fcQFrame_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQFrame_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQFrame_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQFrame_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQFrame_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQFrame_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQFrame_vtable_callback_metacall
   if not isNil(vtbl[].sizeHint):
-    vtbl[].vtbl.sizeHint = cQFrame_vtable_callback_sizeHint
+    vtbl[].vtbl.sizeHint = fcQFrame_vtable_callback_sizeHint
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQFrame_vtable_callback_event
+    vtbl[].vtbl.event = fcQFrame_vtable_callback_event
   if not isNil(vtbl[].paintEvent):
-    vtbl[].vtbl.paintEvent = cQFrame_vtable_callback_paintEvent
+    vtbl[].vtbl.paintEvent = fcQFrame_vtable_callback_paintEvent
   if not isNil(vtbl[].changeEvent):
-    vtbl[].vtbl.changeEvent = cQFrame_vtable_callback_changeEvent
+    vtbl[].vtbl.changeEvent = fcQFrame_vtable_callback_changeEvent
   if not isNil(vtbl[].devType):
-    vtbl[].vtbl.devType = cQFrame_vtable_callback_devType
+    vtbl[].vtbl.devType = fcQFrame_vtable_callback_devType
   if not isNil(vtbl[].setVisible):
-    vtbl[].vtbl.setVisible = cQFrame_vtable_callback_setVisible
+    vtbl[].vtbl.setVisible = fcQFrame_vtable_callback_setVisible
   if not isNil(vtbl[].minimumSizeHint):
-    vtbl[].vtbl.minimumSizeHint = cQFrame_vtable_callback_minimumSizeHint
+    vtbl[].vtbl.minimumSizeHint = fcQFrame_vtable_callback_minimumSizeHint
   if not isNil(vtbl[].heightForWidth):
-    vtbl[].vtbl.heightForWidth = cQFrame_vtable_callback_heightForWidth
+    vtbl[].vtbl.heightForWidth = fcQFrame_vtable_callback_heightForWidth
   if not isNil(vtbl[].hasHeightForWidth):
-    vtbl[].vtbl.hasHeightForWidth = cQFrame_vtable_callback_hasHeightForWidth
+    vtbl[].vtbl.hasHeightForWidth = fcQFrame_vtable_callback_hasHeightForWidth
   if not isNil(vtbl[].paintEngine):
-    vtbl[].vtbl.paintEngine = cQFrame_vtable_callback_paintEngine
+    vtbl[].vtbl.paintEngine = fcQFrame_vtable_callback_paintEngine
   if not isNil(vtbl[].mousePressEvent):
-    vtbl[].vtbl.mousePressEvent = cQFrame_vtable_callback_mousePressEvent
+    vtbl[].vtbl.mousePressEvent = fcQFrame_vtable_callback_mousePressEvent
   if not isNil(vtbl[].mouseReleaseEvent):
-    vtbl[].vtbl.mouseReleaseEvent = cQFrame_vtable_callback_mouseReleaseEvent
+    vtbl[].vtbl.mouseReleaseEvent = fcQFrame_vtable_callback_mouseReleaseEvent
   if not isNil(vtbl[].mouseDoubleClickEvent):
-    vtbl[].vtbl.mouseDoubleClickEvent = cQFrame_vtable_callback_mouseDoubleClickEvent
+    vtbl[].vtbl.mouseDoubleClickEvent = fcQFrame_vtable_callback_mouseDoubleClickEvent
   if not isNil(vtbl[].mouseMoveEvent):
-    vtbl[].vtbl.mouseMoveEvent = cQFrame_vtable_callback_mouseMoveEvent
+    vtbl[].vtbl.mouseMoveEvent = fcQFrame_vtable_callback_mouseMoveEvent
   if not isNil(vtbl[].wheelEvent):
-    vtbl[].vtbl.wheelEvent = cQFrame_vtable_callback_wheelEvent
+    vtbl[].vtbl.wheelEvent = fcQFrame_vtable_callback_wheelEvent
   if not isNil(vtbl[].keyPressEvent):
-    vtbl[].vtbl.keyPressEvent = cQFrame_vtable_callback_keyPressEvent
+    vtbl[].vtbl.keyPressEvent = fcQFrame_vtable_callback_keyPressEvent
   if not isNil(vtbl[].keyReleaseEvent):
-    vtbl[].vtbl.keyReleaseEvent = cQFrame_vtable_callback_keyReleaseEvent
+    vtbl[].vtbl.keyReleaseEvent = fcQFrame_vtable_callback_keyReleaseEvent
   if not isNil(vtbl[].focusInEvent):
-    vtbl[].vtbl.focusInEvent = cQFrame_vtable_callback_focusInEvent
+    vtbl[].vtbl.focusInEvent = fcQFrame_vtable_callback_focusInEvent
   if not isNil(vtbl[].focusOutEvent):
-    vtbl[].vtbl.focusOutEvent = cQFrame_vtable_callback_focusOutEvent
+    vtbl[].vtbl.focusOutEvent = fcQFrame_vtable_callback_focusOutEvent
   if not isNil(vtbl[].enterEvent):
-    vtbl[].vtbl.enterEvent = cQFrame_vtable_callback_enterEvent
+    vtbl[].vtbl.enterEvent = fcQFrame_vtable_callback_enterEvent
   if not isNil(vtbl[].leaveEvent):
-    vtbl[].vtbl.leaveEvent = cQFrame_vtable_callback_leaveEvent
+    vtbl[].vtbl.leaveEvent = fcQFrame_vtable_callback_leaveEvent
   if not isNil(vtbl[].moveEvent):
-    vtbl[].vtbl.moveEvent = cQFrame_vtable_callback_moveEvent
+    vtbl[].vtbl.moveEvent = fcQFrame_vtable_callback_moveEvent
   if not isNil(vtbl[].resizeEvent):
-    vtbl[].vtbl.resizeEvent = cQFrame_vtable_callback_resizeEvent
+    vtbl[].vtbl.resizeEvent = fcQFrame_vtable_callback_resizeEvent
   if not isNil(vtbl[].closeEvent):
-    vtbl[].vtbl.closeEvent = cQFrame_vtable_callback_closeEvent
+    vtbl[].vtbl.closeEvent = fcQFrame_vtable_callback_closeEvent
   if not isNil(vtbl[].contextMenuEvent):
-    vtbl[].vtbl.contextMenuEvent = cQFrame_vtable_callback_contextMenuEvent
+    vtbl[].vtbl.contextMenuEvent = fcQFrame_vtable_callback_contextMenuEvent
   if not isNil(vtbl[].tabletEvent):
-    vtbl[].vtbl.tabletEvent = cQFrame_vtable_callback_tabletEvent
+    vtbl[].vtbl.tabletEvent = fcQFrame_vtable_callback_tabletEvent
   if not isNil(vtbl[].actionEvent):
-    vtbl[].vtbl.actionEvent = cQFrame_vtable_callback_actionEvent
+    vtbl[].vtbl.actionEvent = fcQFrame_vtable_callback_actionEvent
   if not isNil(vtbl[].dragEnterEvent):
-    vtbl[].vtbl.dragEnterEvent = cQFrame_vtable_callback_dragEnterEvent
+    vtbl[].vtbl.dragEnterEvent = fcQFrame_vtable_callback_dragEnterEvent
   if not isNil(vtbl[].dragMoveEvent):
-    vtbl[].vtbl.dragMoveEvent = cQFrame_vtable_callback_dragMoveEvent
+    vtbl[].vtbl.dragMoveEvent = fcQFrame_vtable_callback_dragMoveEvent
   if not isNil(vtbl[].dragLeaveEvent):
-    vtbl[].vtbl.dragLeaveEvent = cQFrame_vtable_callback_dragLeaveEvent
+    vtbl[].vtbl.dragLeaveEvent = fcQFrame_vtable_callback_dragLeaveEvent
   if not isNil(vtbl[].dropEvent):
-    vtbl[].vtbl.dropEvent = cQFrame_vtable_callback_dropEvent
+    vtbl[].vtbl.dropEvent = fcQFrame_vtable_callback_dropEvent
   if not isNil(vtbl[].showEvent):
-    vtbl[].vtbl.showEvent = cQFrame_vtable_callback_showEvent
+    vtbl[].vtbl.showEvent = fcQFrame_vtable_callback_showEvent
   if not isNil(vtbl[].hideEvent):
-    vtbl[].vtbl.hideEvent = cQFrame_vtable_callback_hideEvent
+    vtbl[].vtbl.hideEvent = fcQFrame_vtable_callback_hideEvent
   if not isNil(vtbl[].nativeEvent):
-    vtbl[].vtbl.nativeEvent = cQFrame_vtable_callback_nativeEvent
+    vtbl[].vtbl.nativeEvent = fcQFrame_vtable_callback_nativeEvent
   if not isNil(vtbl[].metric):
-    vtbl[].vtbl.metric = cQFrame_vtable_callback_metric
+    vtbl[].vtbl.metric = fcQFrame_vtable_callback_metric
   if not isNil(vtbl[].initPainter):
-    vtbl[].vtbl.initPainter = cQFrame_vtable_callback_initPainter
+    vtbl[].vtbl.initPainter = fcQFrame_vtable_callback_initPainter
   if not isNil(vtbl[].redirected):
-    vtbl[].vtbl.redirected = cQFrame_vtable_callback_redirected
+    vtbl[].vtbl.redirected = fcQFrame_vtable_callback_redirected
   if not isNil(vtbl[].sharedPainter):
-    vtbl[].vtbl.sharedPainter = cQFrame_vtable_callback_sharedPainter
+    vtbl[].vtbl.sharedPainter = fcQFrame_vtable_callback_sharedPainter
   if not isNil(vtbl[].inputMethodEvent):
-    vtbl[].vtbl.inputMethodEvent = cQFrame_vtable_callback_inputMethodEvent
+    vtbl[].vtbl.inputMethodEvent = fcQFrame_vtable_callback_inputMethodEvent
   if not isNil(vtbl[].inputMethodQuery):
-    vtbl[].vtbl.inputMethodQuery = cQFrame_vtable_callback_inputMethodQuery
+    vtbl[].vtbl.inputMethodQuery = fcQFrame_vtable_callback_inputMethodQuery
   if not isNil(vtbl[].focusNextPrevChild):
-    vtbl[].vtbl.focusNextPrevChild = cQFrame_vtable_callback_focusNextPrevChild
+    vtbl[].vtbl.focusNextPrevChild = fcQFrame_vtable_callback_focusNextPrevChild
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQFrame_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQFrame_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQFrame_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQFrame_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQFrame_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQFrame_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQFrame_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQFrame_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQFrame_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQFrame_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQFrame_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQFrame_vtable_callback_disconnectNotify
   gen_qframe_types.QFrame(h: fcQFrame_new(addr(vtbl[].vtbl), addr(vtbl[]), parent.h), owned: true)
 
 proc create*(T: type gen_qframe_types.QFrame,
@@ -1456,105 +1463,105 @@ proc create*(T: type gen_qframe_types.QFrame,
     let vtbl = cast[ref QFrameVTable](fcQFrame_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQFrame_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQFrame_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQFrame_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQFrame_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQFrame_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQFrame_vtable_callback_metacall
   if not isNil(vtbl[].sizeHint):
-    vtbl[].vtbl.sizeHint = cQFrame_vtable_callback_sizeHint
+    vtbl[].vtbl.sizeHint = fcQFrame_vtable_callback_sizeHint
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQFrame_vtable_callback_event
+    vtbl[].vtbl.event = fcQFrame_vtable_callback_event
   if not isNil(vtbl[].paintEvent):
-    vtbl[].vtbl.paintEvent = cQFrame_vtable_callback_paintEvent
+    vtbl[].vtbl.paintEvent = fcQFrame_vtable_callback_paintEvent
   if not isNil(vtbl[].changeEvent):
-    vtbl[].vtbl.changeEvent = cQFrame_vtable_callback_changeEvent
+    vtbl[].vtbl.changeEvent = fcQFrame_vtable_callback_changeEvent
   if not isNil(vtbl[].devType):
-    vtbl[].vtbl.devType = cQFrame_vtable_callback_devType
+    vtbl[].vtbl.devType = fcQFrame_vtable_callback_devType
   if not isNil(vtbl[].setVisible):
-    vtbl[].vtbl.setVisible = cQFrame_vtable_callback_setVisible
+    vtbl[].vtbl.setVisible = fcQFrame_vtable_callback_setVisible
   if not isNil(vtbl[].minimumSizeHint):
-    vtbl[].vtbl.minimumSizeHint = cQFrame_vtable_callback_minimumSizeHint
+    vtbl[].vtbl.minimumSizeHint = fcQFrame_vtable_callback_minimumSizeHint
   if not isNil(vtbl[].heightForWidth):
-    vtbl[].vtbl.heightForWidth = cQFrame_vtable_callback_heightForWidth
+    vtbl[].vtbl.heightForWidth = fcQFrame_vtable_callback_heightForWidth
   if not isNil(vtbl[].hasHeightForWidth):
-    vtbl[].vtbl.hasHeightForWidth = cQFrame_vtable_callback_hasHeightForWidth
+    vtbl[].vtbl.hasHeightForWidth = fcQFrame_vtable_callback_hasHeightForWidth
   if not isNil(vtbl[].paintEngine):
-    vtbl[].vtbl.paintEngine = cQFrame_vtable_callback_paintEngine
+    vtbl[].vtbl.paintEngine = fcQFrame_vtable_callback_paintEngine
   if not isNil(vtbl[].mousePressEvent):
-    vtbl[].vtbl.mousePressEvent = cQFrame_vtable_callback_mousePressEvent
+    vtbl[].vtbl.mousePressEvent = fcQFrame_vtable_callback_mousePressEvent
   if not isNil(vtbl[].mouseReleaseEvent):
-    vtbl[].vtbl.mouseReleaseEvent = cQFrame_vtable_callback_mouseReleaseEvent
+    vtbl[].vtbl.mouseReleaseEvent = fcQFrame_vtable_callback_mouseReleaseEvent
   if not isNil(vtbl[].mouseDoubleClickEvent):
-    vtbl[].vtbl.mouseDoubleClickEvent = cQFrame_vtable_callback_mouseDoubleClickEvent
+    vtbl[].vtbl.mouseDoubleClickEvent = fcQFrame_vtable_callback_mouseDoubleClickEvent
   if not isNil(vtbl[].mouseMoveEvent):
-    vtbl[].vtbl.mouseMoveEvent = cQFrame_vtable_callback_mouseMoveEvent
+    vtbl[].vtbl.mouseMoveEvent = fcQFrame_vtable_callback_mouseMoveEvent
   if not isNil(vtbl[].wheelEvent):
-    vtbl[].vtbl.wheelEvent = cQFrame_vtable_callback_wheelEvent
+    vtbl[].vtbl.wheelEvent = fcQFrame_vtable_callback_wheelEvent
   if not isNil(vtbl[].keyPressEvent):
-    vtbl[].vtbl.keyPressEvent = cQFrame_vtable_callback_keyPressEvent
+    vtbl[].vtbl.keyPressEvent = fcQFrame_vtable_callback_keyPressEvent
   if not isNil(vtbl[].keyReleaseEvent):
-    vtbl[].vtbl.keyReleaseEvent = cQFrame_vtable_callback_keyReleaseEvent
+    vtbl[].vtbl.keyReleaseEvent = fcQFrame_vtable_callback_keyReleaseEvent
   if not isNil(vtbl[].focusInEvent):
-    vtbl[].vtbl.focusInEvent = cQFrame_vtable_callback_focusInEvent
+    vtbl[].vtbl.focusInEvent = fcQFrame_vtable_callback_focusInEvent
   if not isNil(vtbl[].focusOutEvent):
-    vtbl[].vtbl.focusOutEvent = cQFrame_vtable_callback_focusOutEvent
+    vtbl[].vtbl.focusOutEvent = fcQFrame_vtable_callback_focusOutEvent
   if not isNil(vtbl[].enterEvent):
-    vtbl[].vtbl.enterEvent = cQFrame_vtable_callback_enterEvent
+    vtbl[].vtbl.enterEvent = fcQFrame_vtable_callback_enterEvent
   if not isNil(vtbl[].leaveEvent):
-    vtbl[].vtbl.leaveEvent = cQFrame_vtable_callback_leaveEvent
+    vtbl[].vtbl.leaveEvent = fcQFrame_vtable_callback_leaveEvent
   if not isNil(vtbl[].moveEvent):
-    vtbl[].vtbl.moveEvent = cQFrame_vtable_callback_moveEvent
+    vtbl[].vtbl.moveEvent = fcQFrame_vtable_callback_moveEvent
   if not isNil(vtbl[].resizeEvent):
-    vtbl[].vtbl.resizeEvent = cQFrame_vtable_callback_resizeEvent
+    vtbl[].vtbl.resizeEvent = fcQFrame_vtable_callback_resizeEvent
   if not isNil(vtbl[].closeEvent):
-    vtbl[].vtbl.closeEvent = cQFrame_vtable_callback_closeEvent
+    vtbl[].vtbl.closeEvent = fcQFrame_vtable_callback_closeEvent
   if not isNil(vtbl[].contextMenuEvent):
-    vtbl[].vtbl.contextMenuEvent = cQFrame_vtable_callback_contextMenuEvent
+    vtbl[].vtbl.contextMenuEvent = fcQFrame_vtable_callback_contextMenuEvent
   if not isNil(vtbl[].tabletEvent):
-    vtbl[].vtbl.tabletEvent = cQFrame_vtable_callback_tabletEvent
+    vtbl[].vtbl.tabletEvent = fcQFrame_vtable_callback_tabletEvent
   if not isNil(vtbl[].actionEvent):
-    vtbl[].vtbl.actionEvent = cQFrame_vtable_callback_actionEvent
+    vtbl[].vtbl.actionEvent = fcQFrame_vtable_callback_actionEvent
   if not isNil(vtbl[].dragEnterEvent):
-    vtbl[].vtbl.dragEnterEvent = cQFrame_vtable_callback_dragEnterEvent
+    vtbl[].vtbl.dragEnterEvent = fcQFrame_vtable_callback_dragEnterEvent
   if not isNil(vtbl[].dragMoveEvent):
-    vtbl[].vtbl.dragMoveEvent = cQFrame_vtable_callback_dragMoveEvent
+    vtbl[].vtbl.dragMoveEvent = fcQFrame_vtable_callback_dragMoveEvent
   if not isNil(vtbl[].dragLeaveEvent):
-    vtbl[].vtbl.dragLeaveEvent = cQFrame_vtable_callback_dragLeaveEvent
+    vtbl[].vtbl.dragLeaveEvent = fcQFrame_vtable_callback_dragLeaveEvent
   if not isNil(vtbl[].dropEvent):
-    vtbl[].vtbl.dropEvent = cQFrame_vtable_callback_dropEvent
+    vtbl[].vtbl.dropEvent = fcQFrame_vtable_callback_dropEvent
   if not isNil(vtbl[].showEvent):
-    vtbl[].vtbl.showEvent = cQFrame_vtable_callback_showEvent
+    vtbl[].vtbl.showEvent = fcQFrame_vtable_callback_showEvent
   if not isNil(vtbl[].hideEvent):
-    vtbl[].vtbl.hideEvent = cQFrame_vtable_callback_hideEvent
+    vtbl[].vtbl.hideEvent = fcQFrame_vtable_callback_hideEvent
   if not isNil(vtbl[].nativeEvent):
-    vtbl[].vtbl.nativeEvent = cQFrame_vtable_callback_nativeEvent
+    vtbl[].vtbl.nativeEvent = fcQFrame_vtable_callback_nativeEvent
   if not isNil(vtbl[].metric):
-    vtbl[].vtbl.metric = cQFrame_vtable_callback_metric
+    vtbl[].vtbl.metric = fcQFrame_vtable_callback_metric
   if not isNil(vtbl[].initPainter):
-    vtbl[].vtbl.initPainter = cQFrame_vtable_callback_initPainter
+    vtbl[].vtbl.initPainter = fcQFrame_vtable_callback_initPainter
   if not isNil(vtbl[].redirected):
-    vtbl[].vtbl.redirected = cQFrame_vtable_callback_redirected
+    vtbl[].vtbl.redirected = fcQFrame_vtable_callback_redirected
   if not isNil(vtbl[].sharedPainter):
-    vtbl[].vtbl.sharedPainter = cQFrame_vtable_callback_sharedPainter
+    vtbl[].vtbl.sharedPainter = fcQFrame_vtable_callback_sharedPainter
   if not isNil(vtbl[].inputMethodEvent):
-    vtbl[].vtbl.inputMethodEvent = cQFrame_vtable_callback_inputMethodEvent
+    vtbl[].vtbl.inputMethodEvent = fcQFrame_vtable_callback_inputMethodEvent
   if not isNil(vtbl[].inputMethodQuery):
-    vtbl[].vtbl.inputMethodQuery = cQFrame_vtable_callback_inputMethodQuery
+    vtbl[].vtbl.inputMethodQuery = fcQFrame_vtable_callback_inputMethodQuery
   if not isNil(vtbl[].focusNextPrevChild):
-    vtbl[].vtbl.focusNextPrevChild = cQFrame_vtable_callback_focusNextPrevChild
+    vtbl[].vtbl.focusNextPrevChild = fcQFrame_vtable_callback_focusNextPrevChild
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQFrame_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQFrame_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQFrame_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQFrame_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQFrame_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQFrame_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQFrame_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQFrame_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQFrame_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQFrame_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQFrame_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQFrame_vtable_callback_disconnectNotify
   gen_qframe_types.QFrame(h: fcQFrame_new2(addr(vtbl[].vtbl), addr(vtbl[])), owned: true)
 
 proc create*(T: type gen_qframe_types.QFrame,
@@ -1566,105 +1573,105 @@ proc create*(T: type gen_qframe_types.QFrame,
     let vtbl = cast[ref QFrameVTable](fcQFrame_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQFrame_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQFrame_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQFrame_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQFrame_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQFrame_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQFrame_vtable_callback_metacall
   if not isNil(vtbl[].sizeHint):
-    vtbl[].vtbl.sizeHint = cQFrame_vtable_callback_sizeHint
+    vtbl[].vtbl.sizeHint = fcQFrame_vtable_callback_sizeHint
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQFrame_vtable_callback_event
+    vtbl[].vtbl.event = fcQFrame_vtable_callback_event
   if not isNil(vtbl[].paintEvent):
-    vtbl[].vtbl.paintEvent = cQFrame_vtable_callback_paintEvent
+    vtbl[].vtbl.paintEvent = fcQFrame_vtable_callback_paintEvent
   if not isNil(vtbl[].changeEvent):
-    vtbl[].vtbl.changeEvent = cQFrame_vtable_callback_changeEvent
+    vtbl[].vtbl.changeEvent = fcQFrame_vtable_callback_changeEvent
   if not isNil(vtbl[].devType):
-    vtbl[].vtbl.devType = cQFrame_vtable_callback_devType
+    vtbl[].vtbl.devType = fcQFrame_vtable_callback_devType
   if not isNil(vtbl[].setVisible):
-    vtbl[].vtbl.setVisible = cQFrame_vtable_callback_setVisible
+    vtbl[].vtbl.setVisible = fcQFrame_vtable_callback_setVisible
   if not isNil(vtbl[].minimumSizeHint):
-    vtbl[].vtbl.minimumSizeHint = cQFrame_vtable_callback_minimumSizeHint
+    vtbl[].vtbl.minimumSizeHint = fcQFrame_vtable_callback_minimumSizeHint
   if not isNil(vtbl[].heightForWidth):
-    vtbl[].vtbl.heightForWidth = cQFrame_vtable_callback_heightForWidth
+    vtbl[].vtbl.heightForWidth = fcQFrame_vtable_callback_heightForWidth
   if not isNil(vtbl[].hasHeightForWidth):
-    vtbl[].vtbl.hasHeightForWidth = cQFrame_vtable_callback_hasHeightForWidth
+    vtbl[].vtbl.hasHeightForWidth = fcQFrame_vtable_callback_hasHeightForWidth
   if not isNil(vtbl[].paintEngine):
-    vtbl[].vtbl.paintEngine = cQFrame_vtable_callback_paintEngine
+    vtbl[].vtbl.paintEngine = fcQFrame_vtable_callback_paintEngine
   if not isNil(vtbl[].mousePressEvent):
-    vtbl[].vtbl.mousePressEvent = cQFrame_vtable_callback_mousePressEvent
+    vtbl[].vtbl.mousePressEvent = fcQFrame_vtable_callback_mousePressEvent
   if not isNil(vtbl[].mouseReleaseEvent):
-    vtbl[].vtbl.mouseReleaseEvent = cQFrame_vtable_callback_mouseReleaseEvent
+    vtbl[].vtbl.mouseReleaseEvent = fcQFrame_vtable_callback_mouseReleaseEvent
   if not isNil(vtbl[].mouseDoubleClickEvent):
-    vtbl[].vtbl.mouseDoubleClickEvent = cQFrame_vtable_callback_mouseDoubleClickEvent
+    vtbl[].vtbl.mouseDoubleClickEvent = fcQFrame_vtable_callback_mouseDoubleClickEvent
   if not isNil(vtbl[].mouseMoveEvent):
-    vtbl[].vtbl.mouseMoveEvent = cQFrame_vtable_callback_mouseMoveEvent
+    vtbl[].vtbl.mouseMoveEvent = fcQFrame_vtable_callback_mouseMoveEvent
   if not isNil(vtbl[].wheelEvent):
-    vtbl[].vtbl.wheelEvent = cQFrame_vtable_callback_wheelEvent
+    vtbl[].vtbl.wheelEvent = fcQFrame_vtable_callback_wheelEvent
   if not isNil(vtbl[].keyPressEvent):
-    vtbl[].vtbl.keyPressEvent = cQFrame_vtable_callback_keyPressEvent
+    vtbl[].vtbl.keyPressEvent = fcQFrame_vtable_callback_keyPressEvent
   if not isNil(vtbl[].keyReleaseEvent):
-    vtbl[].vtbl.keyReleaseEvent = cQFrame_vtable_callback_keyReleaseEvent
+    vtbl[].vtbl.keyReleaseEvent = fcQFrame_vtable_callback_keyReleaseEvent
   if not isNil(vtbl[].focusInEvent):
-    vtbl[].vtbl.focusInEvent = cQFrame_vtable_callback_focusInEvent
+    vtbl[].vtbl.focusInEvent = fcQFrame_vtable_callback_focusInEvent
   if not isNil(vtbl[].focusOutEvent):
-    vtbl[].vtbl.focusOutEvent = cQFrame_vtable_callback_focusOutEvent
+    vtbl[].vtbl.focusOutEvent = fcQFrame_vtable_callback_focusOutEvent
   if not isNil(vtbl[].enterEvent):
-    vtbl[].vtbl.enterEvent = cQFrame_vtable_callback_enterEvent
+    vtbl[].vtbl.enterEvent = fcQFrame_vtable_callback_enterEvent
   if not isNil(vtbl[].leaveEvent):
-    vtbl[].vtbl.leaveEvent = cQFrame_vtable_callback_leaveEvent
+    vtbl[].vtbl.leaveEvent = fcQFrame_vtable_callback_leaveEvent
   if not isNil(vtbl[].moveEvent):
-    vtbl[].vtbl.moveEvent = cQFrame_vtable_callback_moveEvent
+    vtbl[].vtbl.moveEvent = fcQFrame_vtable_callback_moveEvent
   if not isNil(vtbl[].resizeEvent):
-    vtbl[].vtbl.resizeEvent = cQFrame_vtable_callback_resizeEvent
+    vtbl[].vtbl.resizeEvent = fcQFrame_vtable_callback_resizeEvent
   if not isNil(vtbl[].closeEvent):
-    vtbl[].vtbl.closeEvent = cQFrame_vtable_callback_closeEvent
+    vtbl[].vtbl.closeEvent = fcQFrame_vtable_callback_closeEvent
   if not isNil(vtbl[].contextMenuEvent):
-    vtbl[].vtbl.contextMenuEvent = cQFrame_vtable_callback_contextMenuEvent
+    vtbl[].vtbl.contextMenuEvent = fcQFrame_vtable_callback_contextMenuEvent
   if not isNil(vtbl[].tabletEvent):
-    vtbl[].vtbl.tabletEvent = cQFrame_vtable_callback_tabletEvent
+    vtbl[].vtbl.tabletEvent = fcQFrame_vtable_callback_tabletEvent
   if not isNil(vtbl[].actionEvent):
-    vtbl[].vtbl.actionEvent = cQFrame_vtable_callback_actionEvent
+    vtbl[].vtbl.actionEvent = fcQFrame_vtable_callback_actionEvent
   if not isNil(vtbl[].dragEnterEvent):
-    vtbl[].vtbl.dragEnterEvent = cQFrame_vtable_callback_dragEnterEvent
+    vtbl[].vtbl.dragEnterEvent = fcQFrame_vtable_callback_dragEnterEvent
   if not isNil(vtbl[].dragMoveEvent):
-    vtbl[].vtbl.dragMoveEvent = cQFrame_vtable_callback_dragMoveEvent
+    vtbl[].vtbl.dragMoveEvent = fcQFrame_vtable_callback_dragMoveEvent
   if not isNil(vtbl[].dragLeaveEvent):
-    vtbl[].vtbl.dragLeaveEvent = cQFrame_vtable_callback_dragLeaveEvent
+    vtbl[].vtbl.dragLeaveEvent = fcQFrame_vtable_callback_dragLeaveEvent
   if not isNil(vtbl[].dropEvent):
-    vtbl[].vtbl.dropEvent = cQFrame_vtable_callback_dropEvent
+    vtbl[].vtbl.dropEvent = fcQFrame_vtable_callback_dropEvent
   if not isNil(vtbl[].showEvent):
-    vtbl[].vtbl.showEvent = cQFrame_vtable_callback_showEvent
+    vtbl[].vtbl.showEvent = fcQFrame_vtable_callback_showEvent
   if not isNil(vtbl[].hideEvent):
-    vtbl[].vtbl.hideEvent = cQFrame_vtable_callback_hideEvent
+    vtbl[].vtbl.hideEvent = fcQFrame_vtable_callback_hideEvent
   if not isNil(vtbl[].nativeEvent):
-    vtbl[].vtbl.nativeEvent = cQFrame_vtable_callback_nativeEvent
+    vtbl[].vtbl.nativeEvent = fcQFrame_vtable_callback_nativeEvent
   if not isNil(vtbl[].metric):
-    vtbl[].vtbl.metric = cQFrame_vtable_callback_metric
+    vtbl[].vtbl.metric = fcQFrame_vtable_callback_metric
   if not isNil(vtbl[].initPainter):
-    vtbl[].vtbl.initPainter = cQFrame_vtable_callback_initPainter
+    vtbl[].vtbl.initPainter = fcQFrame_vtable_callback_initPainter
   if not isNil(vtbl[].redirected):
-    vtbl[].vtbl.redirected = cQFrame_vtable_callback_redirected
+    vtbl[].vtbl.redirected = fcQFrame_vtable_callback_redirected
   if not isNil(vtbl[].sharedPainter):
-    vtbl[].vtbl.sharedPainter = cQFrame_vtable_callback_sharedPainter
+    vtbl[].vtbl.sharedPainter = fcQFrame_vtable_callback_sharedPainter
   if not isNil(vtbl[].inputMethodEvent):
-    vtbl[].vtbl.inputMethodEvent = cQFrame_vtable_callback_inputMethodEvent
+    vtbl[].vtbl.inputMethodEvent = fcQFrame_vtable_callback_inputMethodEvent
   if not isNil(vtbl[].inputMethodQuery):
-    vtbl[].vtbl.inputMethodQuery = cQFrame_vtable_callback_inputMethodQuery
+    vtbl[].vtbl.inputMethodQuery = fcQFrame_vtable_callback_inputMethodQuery
   if not isNil(vtbl[].focusNextPrevChild):
-    vtbl[].vtbl.focusNextPrevChild = cQFrame_vtable_callback_focusNextPrevChild
+    vtbl[].vtbl.focusNextPrevChild = fcQFrame_vtable_callback_focusNextPrevChild
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQFrame_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQFrame_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQFrame_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQFrame_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQFrame_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQFrame_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQFrame_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQFrame_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQFrame_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQFrame_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQFrame_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQFrame_vtable_callback_disconnectNotify
   gen_qframe_types.QFrame(h: fcQFrame_new3(addr(vtbl[].vtbl), addr(vtbl[]), parent.h, cint(f)), owned: true)
 
 const cQFrame_mvtbl = cQFrameVTable(
@@ -1672,56 +1679,57 @@ const cQFrame_mvtbl = cQFrameVTable(
     let inst = cast[ptr typeof(VirtualQFrame()[])](self.fcQFrame_vtbl())
     inst[].h = nil
     inst[].owned = false,
-  metaObject: cQFrame_method_callback_metaObject,
-  metacast: cQFrame_method_callback_metacast,
-  metacall: cQFrame_method_callback_metacall,
-  sizeHint: cQFrame_method_callback_sizeHint,
-  event: cQFrame_method_callback_event,
-  paintEvent: cQFrame_method_callback_paintEvent,
-  changeEvent: cQFrame_method_callback_changeEvent,
-  devType: cQFrame_method_callback_devType,
-  setVisible: cQFrame_method_callback_setVisible,
-  minimumSizeHint: cQFrame_method_callback_minimumSizeHint,
-  heightForWidth: cQFrame_method_callback_heightForWidth,
-  hasHeightForWidth: cQFrame_method_callback_hasHeightForWidth,
-  paintEngine: cQFrame_method_callback_paintEngine,
-  mousePressEvent: cQFrame_method_callback_mousePressEvent,
-  mouseReleaseEvent: cQFrame_method_callback_mouseReleaseEvent,
-  mouseDoubleClickEvent: cQFrame_method_callback_mouseDoubleClickEvent,
-  mouseMoveEvent: cQFrame_method_callback_mouseMoveEvent,
-  wheelEvent: cQFrame_method_callback_wheelEvent,
-  keyPressEvent: cQFrame_method_callback_keyPressEvent,
-  keyReleaseEvent: cQFrame_method_callback_keyReleaseEvent,
-  focusInEvent: cQFrame_method_callback_focusInEvent,
-  focusOutEvent: cQFrame_method_callback_focusOutEvent,
-  enterEvent: cQFrame_method_callback_enterEvent,
-  leaveEvent: cQFrame_method_callback_leaveEvent,
-  moveEvent: cQFrame_method_callback_moveEvent,
-  resizeEvent: cQFrame_method_callback_resizeEvent,
-  closeEvent: cQFrame_method_callback_closeEvent,
-  contextMenuEvent: cQFrame_method_callback_contextMenuEvent,
-  tabletEvent: cQFrame_method_callback_tabletEvent,
-  actionEvent: cQFrame_method_callback_actionEvent,
-  dragEnterEvent: cQFrame_method_callback_dragEnterEvent,
-  dragMoveEvent: cQFrame_method_callback_dragMoveEvent,
-  dragLeaveEvent: cQFrame_method_callback_dragLeaveEvent,
-  dropEvent: cQFrame_method_callback_dropEvent,
-  showEvent: cQFrame_method_callback_showEvent,
-  hideEvent: cQFrame_method_callback_hideEvent,
-  nativeEvent: cQFrame_method_callback_nativeEvent,
-  metric: cQFrame_method_callback_metric,
-  initPainter: cQFrame_method_callback_initPainter,
-  redirected: cQFrame_method_callback_redirected,
-  sharedPainter: cQFrame_method_callback_sharedPainter,
-  inputMethodEvent: cQFrame_method_callback_inputMethodEvent,
-  inputMethodQuery: cQFrame_method_callback_inputMethodQuery,
-  focusNextPrevChild: cQFrame_method_callback_focusNextPrevChild,
-  eventFilter: cQFrame_method_callback_eventFilter,
-  timerEvent: cQFrame_method_callback_timerEvent,
-  childEvent: cQFrame_method_callback_childEvent,
-  customEvent: cQFrame_method_callback_customEvent,
-  connectNotify: cQFrame_method_callback_connectNotify,
-  disconnectNotify: cQFrame_method_callback_disconnectNotify,
+
+  metaObject: fcQFrame_method_callback_metaObject,
+  metacast: fcQFrame_method_callback_metacast,
+  metacall: fcQFrame_method_callback_metacall,
+  sizeHint: fcQFrame_method_callback_sizeHint,
+  event: fcQFrame_method_callback_event,
+  paintEvent: fcQFrame_method_callback_paintEvent,
+  changeEvent: fcQFrame_method_callback_changeEvent,
+  devType: fcQFrame_method_callback_devType,
+  setVisible: fcQFrame_method_callback_setVisible,
+  minimumSizeHint: fcQFrame_method_callback_minimumSizeHint,
+  heightForWidth: fcQFrame_method_callback_heightForWidth,
+  hasHeightForWidth: fcQFrame_method_callback_hasHeightForWidth,
+  paintEngine: fcQFrame_method_callback_paintEngine,
+  mousePressEvent: fcQFrame_method_callback_mousePressEvent,
+  mouseReleaseEvent: fcQFrame_method_callback_mouseReleaseEvent,
+  mouseDoubleClickEvent: fcQFrame_method_callback_mouseDoubleClickEvent,
+  mouseMoveEvent: fcQFrame_method_callback_mouseMoveEvent,
+  wheelEvent: fcQFrame_method_callback_wheelEvent,
+  keyPressEvent: fcQFrame_method_callback_keyPressEvent,
+  keyReleaseEvent: fcQFrame_method_callback_keyReleaseEvent,
+  focusInEvent: fcQFrame_method_callback_focusInEvent,
+  focusOutEvent: fcQFrame_method_callback_focusOutEvent,
+  enterEvent: fcQFrame_method_callback_enterEvent,
+  leaveEvent: fcQFrame_method_callback_leaveEvent,
+  moveEvent: fcQFrame_method_callback_moveEvent,
+  resizeEvent: fcQFrame_method_callback_resizeEvent,
+  closeEvent: fcQFrame_method_callback_closeEvent,
+  contextMenuEvent: fcQFrame_method_callback_contextMenuEvent,
+  tabletEvent: fcQFrame_method_callback_tabletEvent,
+  actionEvent: fcQFrame_method_callback_actionEvent,
+  dragEnterEvent: fcQFrame_method_callback_dragEnterEvent,
+  dragMoveEvent: fcQFrame_method_callback_dragMoveEvent,
+  dragLeaveEvent: fcQFrame_method_callback_dragLeaveEvent,
+  dropEvent: fcQFrame_method_callback_dropEvent,
+  showEvent: fcQFrame_method_callback_showEvent,
+  hideEvent: fcQFrame_method_callback_hideEvent,
+  nativeEvent: fcQFrame_method_callback_nativeEvent,
+  metric: fcQFrame_method_callback_metric,
+  initPainter: fcQFrame_method_callback_initPainter,
+  redirected: fcQFrame_method_callback_redirected,
+  sharedPainter: fcQFrame_method_callback_sharedPainter,
+  inputMethodEvent: fcQFrame_method_callback_inputMethodEvent,
+  inputMethodQuery: fcQFrame_method_callback_inputMethodQuery,
+  focusNextPrevChild: fcQFrame_method_callback_focusNextPrevChild,
+  eventFilter: fcQFrame_method_callback_eventFilter,
+  timerEvent: fcQFrame_method_callback_timerEvent,
+  childEvent: fcQFrame_method_callback_childEvent,
+  customEvent: fcQFrame_method_callback_customEvent,
+  connectNotify: fcQFrame_method_callback_connectNotify,
+  disconnectNotify: fcQFrame_method_callback_disconnectNotify,
 )
 proc create*(T: type gen_qframe_types.QFrame,
     parent: gen_qwidget_types.QWidget,

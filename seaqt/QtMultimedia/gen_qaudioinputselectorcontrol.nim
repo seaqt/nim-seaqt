@@ -134,7 +134,7 @@ proc activeInputChanged*(self: gen_qaudioinputselectorcontrol_types.QAudioInputS
   fcQAudioInputSelectorControl_activeInputChanged(self.h, struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))))
 
 type QAudioInputSelectorControlactiveInputChangedSlot* = proc(name: openArray[char])
-proc cQAudioInputSelectorControl_slot_callback_activeInputChanged(slot: int, name: struct_miqt_string) {.cdecl.} =
+proc fcQAudioInputSelectorControl_slot_callback_activeInputChanged(slot: int, name: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QAudioInputSelectorControlactiveInputChangedSlot](cast[pointer](slot))
   let vname_ms = name
   let vnamex_ret = string.fromBytes(vname_ms)
@@ -143,33 +143,33 @@ proc cQAudioInputSelectorControl_slot_callback_activeInputChanged(slot: int, nam
 
   nimfunc[](slotval1)
 
-proc cQAudioInputSelectorControl_slot_callback_activeInputChanged_release(slot: int) {.cdecl.} =
+proc fcQAudioInputSelectorControl_slot_callback_activeInputChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QAudioInputSelectorControlactiveInputChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onactiveInputChanged*(self: gen_qaudioinputselectorcontrol_types.QAudioInputSelectorControl, slot: QAudioInputSelectorControlactiveInputChangedSlot) =
+proc onActiveInputChanged*(self: gen_qaudioinputselectorcontrol_types.QAudioInputSelectorControl, slot: QAudioInputSelectorControlactiveInputChangedSlot) =
   var tmp = new QAudioInputSelectorControlactiveInputChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAudioInputSelectorControl_connect_activeInputChanged(self.h, cast[int](addr tmp[]), cQAudioInputSelectorControl_slot_callback_activeInputChanged, cQAudioInputSelectorControl_slot_callback_activeInputChanged_release)
+  fcQAudioInputSelectorControl_connect_activeInputChanged(self.h, cast[int](addr tmp[]), fcQAudioInputSelectorControl_slot_callback_activeInputChanged, fcQAudioInputSelectorControl_slot_callback_activeInputChanged_release)
 
 proc availableInputsChanged*(self: gen_qaudioinputselectorcontrol_types.QAudioInputSelectorControl): void =
   fcQAudioInputSelectorControl_availableInputsChanged(self.h)
 
 type QAudioInputSelectorControlavailableInputsChangedSlot* = proc()
-proc cQAudioInputSelectorControl_slot_callback_availableInputsChanged(slot: int) {.cdecl.} =
+proc fcQAudioInputSelectorControl_slot_callback_availableInputsChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QAudioInputSelectorControlavailableInputsChangedSlot](cast[pointer](slot))
   nimfunc[]()
 
-proc cQAudioInputSelectorControl_slot_callback_availableInputsChanged_release(slot: int) {.cdecl.} =
+proc fcQAudioInputSelectorControl_slot_callback_availableInputsChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QAudioInputSelectorControlavailableInputsChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onavailableInputsChanged*(self: gen_qaudioinputselectorcontrol_types.QAudioInputSelectorControl, slot: QAudioInputSelectorControlavailableInputsChangedSlot) =
+proc onAvailableInputsChanged*(self: gen_qaudioinputselectorcontrol_types.QAudioInputSelectorControl, slot: QAudioInputSelectorControlavailableInputsChangedSlot) =
   var tmp = new QAudioInputSelectorControlavailableInputsChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAudioInputSelectorControl_connect_availableInputsChanged(self.h, cast[int](addr tmp[]), cQAudioInputSelectorControl_slot_callback_availableInputsChanged, cQAudioInputSelectorControl_slot_callback_availableInputsChanged_release)
+  fcQAudioInputSelectorControl_connect_availableInputsChanged(self.h, cast[int](addr tmp[]), fcQAudioInputSelectorControl_slot_callback_availableInputsChanged, fcQAudioInputSelectorControl_slot_callback_availableInputsChanged_release)
 
 proc tr*(_: type gen_qaudioinputselectorcontrol_types.QAudioInputSelectorControl, s: cstring, c: cstring): string =
   let v_ms = fcQAudioInputSelectorControl_tr2(s, c)

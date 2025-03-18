@@ -110,21 +110,21 @@ proc flashReady*(self: gen_qcameraflashcontrol_types.QCameraFlashControl, param1
   fcQCameraFlashControl_flashReady(self.h, param1)
 
 type QCameraFlashControlflashReadySlot* = proc(param1: bool)
-proc cQCameraFlashControl_slot_callback_flashReady(slot: int, param1: bool) {.cdecl.} =
+proc fcQCameraFlashControl_slot_callback_flashReady(slot: int, param1: bool) {.cdecl.} =
   let nimfunc = cast[ptr QCameraFlashControlflashReadySlot](cast[pointer](slot))
   let slotval1 = param1
 
   nimfunc[](slotval1)
 
-proc cQCameraFlashControl_slot_callback_flashReady_release(slot: int) {.cdecl.} =
+proc fcQCameraFlashControl_slot_callback_flashReady_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QCameraFlashControlflashReadySlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onflashReady*(self: gen_qcameraflashcontrol_types.QCameraFlashControl, slot: QCameraFlashControlflashReadySlot) =
+proc onFlashReady*(self: gen_qcameraflashcontrol_types.QCameraFlashControl, slot: QCameraFlashControlflashReadySlot) =
   var tmp = new QCameraFlashControlflashReadySlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQCameraFlashControl_connect_flashReady(self.h, cast[int](addr tmp[]), cQCameraFlashControl_slot_callback_flashReady, cQCameraFlashControl_slot_callback_flashReady_release)
+  fcQCameraFlashControl_connect_flashReady(self.h, cast[int](addr tmp[]), fcQCameraFlashControl_slot_callback_flashReady, fcQCameraFlashControl_slot_callback_flashReady_release)
 
 proc tr*(_: type gen_qcameraflashcontrol_types.QCameraFlashControl, s: cstring, c: cstring): string =
   let v_ms = fcQCameraFlashControl_tr2(s, c)

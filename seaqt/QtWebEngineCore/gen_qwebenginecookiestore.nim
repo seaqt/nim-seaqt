@@ -120,41 +120,41 @@ proc cookieAdded*(self: gen_qwebenginecookiestore_types.QWebEngineCookieStore, c
   fcQWebEngineCookieStore_cookieAdded(self.h, cookie.h)
 
 type QWebEngineCookieStorecookieAddedSlot* = proc(cookie: gen_qnetworkcookie_types.QNetworkCookie)
-proc cQWebEngineCookieStore_slot_callback_cookieAdded(slot: int, cookie: pointer) {.cdecl.} =
+proc fcQWebEngineCookieStore_slot_callback_cookieAdded(slot: int, cookie: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QWebEngineCookieStorecookieAddedSlot](cast[pointer](slot))
   let slotval1 = gen_qnetworkcookie_types.QNetworkCookie(h: cookie, owned: false)
 
   nimfunc[](slotval1)
 
-proc cQWebEngineCookieStore_slot_callback_cookieAdded_release(slot: int) {.cdecl.} =
+proc fcQWebEngineCookieStore_slot_callback_cookieAdded_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QWebEngineCookieStorecookieAddedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc oncookieAdded*(self: gen_qwebenginecookiestore_types.QWebEngineCookieStore, slot: QWebEngineCookieStorecookieAddedSlot) =
+proc onCookieAdded*(self: gen_qwebenginecookiestore_types.QWebEngineCookieStore, slot: QWebEngineCookieStorecookieAddedSlot) =
   var tmp = new QWebEngineCookieStorecookieAddedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQWebEngineCookieStore_connect_cookieAdded(self.h, cast[int](addr tmp[]), cQWebEngineCookieStore_slot_callback_cookieAdded, cQWebEngineCookieStore_slot_callback_cookieAdded_release)
+  fcQWebEngineCookieStore_connect_cookieAdded(self.h, cast[int](addr tmp[]), fcQWebEngineCookieStore_slot_callback_cookieAdded, fcQWebEngineCookieStore_slot_callback_cookieAdded_release)
 
 proc cookieRemoved*(self: gen_qwebenginecookiestore_types.QWebEngineCookieStore, cookie: gen_qnetworkcookie_types.QNetworkCookie): void =
   fcQWebEngineCookieStore_cookieRemoved(self.h, cookie.h)
 
 type QWebEngineCookieStorecookieRemovedSlot* = proc(cookie: gen_qnetworkcookie_types.QNetworkCookie)
-proc cQWebEngineCookieStore_slot_callback_cookieRemoved(slot: int, cookie: pointer) {.cdecl.} =
+proc fcQWebEngineCookieStore_slot_callback_cookieRemoved(slot: int, cookie: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QWebEngineCookieStorecookieRemovedSlot](cast[pointer](slot))
   let slotval1 = gen_qnetworkcookie_types.QNetworkCookie(h: cookie, owned: false)
 
   nimfunc[](slotval1)
 
-proc cQWebEngineCookieStore_slot_callback_cookieRemoved_release(slot: int) {.cdecl.} =
+proc fcQWebEngineCookieStore_slot_callback_cookieRemoved_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QWebEngineCookieStorecookieRemovedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc oncookieRemoved*(self: gen_qwebenginecookiestore_types.QWebEngineCookieStore, slot: QWebEngineCookieStorecookieRemovedSlot) =
+proc onCookieRemoved*(self: gen_qwebenginecookiestore_types.QWebEngineCookieStore, slot: QWebEngineCookieStorecookieRemovedSlot) =
   var tmp = new QWebEngineCookieStorecookieRemovedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQWebEngineCookieStore_connect_cookieRemoved(self.h, cast[int](addr tmp[]), cQWebEngineCookieStore_slot_callback_cookieRemoved, cQWebEngineCookieStore_slot_callback_cookieRemoved_release)
+  fcQWebEngineCookieStore_connect_cookieRemoved(self.h, cast[int](addr tmp[]), fcQWebEngineCookieStore_slot_callback_cookieRemoved, fcQWebEngineCookieStore_slot_callback_cookieRemoved_release)
 
 proc tr*(_: type gen_qwebenginecookiestore_types.QWebEngineCookieStore, s: cstring, c: cstring): string =
   let v_ms = fcQWebEngineCookieStore_tr2(s, c)

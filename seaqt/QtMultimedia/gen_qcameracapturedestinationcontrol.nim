@@ -106,21 +106,21 @@ proc captureDestinationChanged*(self: gen_qcameracapturedestinationcontrol_types
   fcQCameraCaptureDestinationControl_captureDestinationChanged(self.h, cint(destination))
 
 type QCameraCaptureDestinationControlcaptureDestinationChangedSlot* = proc(destination: cint)
-proc cQCameraCaptureDestinationControl_slot_callback_captureDestinationChanged(slot: int, destination: cint) {.cdecl.} =
+proc fcQCameraCaptureDestinationControl_slot_callback_captureDestinationChanged(slot: int, destination: cint) {.cdecl.} =
   let nimfunc = cast[ptr QCameraCaptureDestinationControlcaptureDestinationChangedSlot](cast[pointer](slot))
   let slotval1 = cint(destination)
 
   nimfunc[](slotval1)
 
-proc cQCameraCaptureDestinationControl_slot_callback_captureDestinationChanged_release(slot: int) {.cdecl.} =
+proc fcQCameraCaptureDestinationControl_slot_callback_captureDestinationChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QCameraCaptureDestinationControlcaptureDestinationChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc oncaptureDestinationChanged*(self: gen_qcameracapturedestinationcontrol_types.QCameraCaptureDestinationControl, slot: QCameraCaptureDestinationControlcaptureDestinationChangedSlot) =
+proc onCaptureDestinationChanged*(self: gen_qcameracapturedestinationcontrol_types.QCameraCaptureDestinationControl, slot: QCameraCaptureDestinationControlcaptureDestinationChangedSlot) =
   var tmp = new QCameraCaptureDestinationControlcaptureDestinationChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQCameraCaptureDestinationControl_connect_captureDestinationChanged(self.h, cast[int](addr tmp[]), cQCameraCaptureDestinationControl_slot_callback_captureDestinationChanged, cQCameraCaptureDestinationControl_slot_callback_captureDestinationChanged_release)
+  fcQCameraCaptureDestinationControl_connect_captureDestinationChanged(self.h, cast[int](addr tmp[]), fcQCameraCaptureDestinationControl_slot_callback_captureDestinationChanged, fcQCameraCaptureDestinationControl_slot_callback_captureDestinationChanged_release)
 
 proc tr*(_: type gen_qcameracapturedestinationcontrol_types.QCameraCaptureDestinationControl, s: cstring, c: cstring): string =
   let v_ms = fcQCameraCaptureDestinationControl_tr2(s, c)

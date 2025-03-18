@@ -98,21 +98,21 @@ proc availabilityChanged*(self: gen_qmediaavailabilitycontrol_types.QMediaAvaila
   fcQMediaAvailabilityControl_availabilityChanged(self.h, cint(availability))
 
 type QMediaAvailabilityControlavailabilityChangedSlot* = proc(availability: cint)
-proc cQMediaAvailabilityControl_slot_callback_availabilityChanged(slot: int, availability: cint) {.cdecl.} =
+proc fcQMediaAvailabilityControl_slot_callback_availabilityChanged(slot: int, availability: cint) {.cdecl.} =
   let nimfunc = cast[ptr QMediaAvailabilityControlavailabilityChangedSlot](cast[pointer](slot))
   let slotval1 = cint(availability)
 
   nimfunc[](slotval1)
 
-proc cQMediaAvailabilityControl_slot_callback_availabilityChanged_release(slot: int) {.cdecl.} =
+proc fcQMediaAvailabilityControl_slot_callback_availabilityChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QMediaAvailabilityControlavailabilityChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onavailabilityChanged*(self: gen_qmediaavailabilitycontrol_types.QMediaAvailabilityControl, slot: QMediaAvailabilityControlavailabilityChangedSlot) =
+proc onAvailabilityChanged*(self: gen_qmediaavailabilitycontrol_types.QMediaAvailabilityControl, slot: QMediaAvailabilityControlavailabilityChangedSlot) =
   var tmp = new QMediaAvailabilityControlavailabilityChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQMediaAvailabilityControl_connect_availabilityChanged(self.h, cast[int](addr tmp[]), cQMediaAvailabilityControl_slot_callback_availabilityChanged, cQMediaAvailabilityControl_slot_callback_availabilityChanged_release)
+  fcQMediaAvailabilityControl_connect_availabilityChanged(self.h, cast[int](addr tmp[]), fcQMediaAvailabilityControl_slot_callback_availabilityChanged, fcQMediaAvailabilityControl_slot_callback_availabilityChanged_release)
 
 proc tr*(_: type gen_qmediaavailabilitycontrol_types.QMediaAvailabilityControl, s: cstring, c: cstring): string =
   let v_ms = fcQMediaAvailabilityControl_tr2(s, c)

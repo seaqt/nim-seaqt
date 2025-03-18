@@ -108,21 +108,21 @@ proc configurationChanged*(self: gen_qmedianetworkaccesscontrol_types.QMediaNetw
   fcQMediaNetworkAccessControl_configurationChanged(self.h, configuration.h)
 
 type QMediaNetworkAccessControlconfigurationChangedSlot* = proc(configuration: gen_qnetworkconfiguration_types.QNetworkConfiguration)
-proc cQMediaNetworkAccessControl_slot_callback_configurationChanged(slot: int, configuration: pointer) {.cdecl.} =
+proc fcQMediaNetworkAccessControl_slot_callback_configurationChanged(slot: int, configuration: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QMediaNetworkAccessControlconfigurationChangedSlot](cast[pointer](slot))
   let slotval1 = gen_qnetworkconfiguration_types.QNetworkConfiguration(h: configuration, owned: false)
 
   nimfunc[](slotval1)
 
-proc cQMediaNetworkAccessControl_slot_callback_configurationChanged_release(slot: int) {.cdecl.} =
+proc fcQMediaNetworkAccessControl_slot_callback_configurationChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QMediaNetworkAccessControlconfigurationChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onconfigurationChanged*(self: gen_qmedianetworkaccesscontrol_types.QMediaNetworkAccessControl, slot: QMediaNetworkAccessControlconfigurationChangedSlot) =
+proc onConfigurationChanged*(self: gen_qmedianetworkaccesscontrol_types.QMediaNetworkAccessControl, slot: QMediaNetworkAccessControlconfigurationChangedSlot) =
   var tmp = new QMediaNetworkAccessControlconfigurationChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQMediaNetworkAccessControl_connect_configurationChanged(self.h, cast[int](addr tmp[]), cQMediaNetworkAccessControl_slot_callback_configurationChanged, cQMediaNetworkAccessControl_slot_callback_configurationChanged_release)
+  fcQMediaNetworkAccessControl_connect_configurationChanged(self.h, cast[int](addr tmp[]), fcQMediaNetworkAccessControl_slot_callback_configurationChanged, fcQMediaNetworkAccessControl_slot_callback_configurationChanged_release)
 
 proc tr*(_: type gen_qmedianetworkaccesscontrol_types.QMediaNetworkAccessControl, s: cstring, c: cstring): string =
   let v_ms = fcQMediaNetworkAccessControl_tr2(s, c)

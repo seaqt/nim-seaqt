@@ -81,6 +81,7 @@ proc fcQSizeGrip_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: 
 proc fcQSizeGrip_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QSizeGrip_trUtf83".}
 proc fcQSizeGrip_vtbl(self: pointer): pointer {.importc: "QSizeGrip_vtbl".}
 proc fcQSizeGrip_vdata(self: pointer): pointer {.importc: "QSizeGrip_vdata".}
+
 type cQSizeGripVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -296,6 +297,7 @@ type QSizeGripchildEventProc* = proc(self: QSizeGrip, event: gen_qcoreevent_type
 type QSizeGripcustomEventProc* = proc(self: QSizeGrip, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QSizeGripconnectNotifyProc* = proc(self: QSizeGrip, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QSizeGripdisconnectNotifyProc* = proc(self: QSizeGrip, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+
 type QSizeGripVTable* {.inheritable, pure.} = object
   vtbl: cQSizeGripVTable
   metaObject*: QSizeGripmetaObjectProc
@@ -348,10 +350,159 @@ type QSizeGripVTable* {.inheritable, pure.} = object
   customEvent*: QSizeGripcustomEventProc
   connectNotify*: QSizeGripconnectNotifyProc
   disconnectNotify*: QSizeGripdisconnectNotifyProc
+
 proc QSizeGripmetaObject*(self: gen_qsizegrip_types.QSizeGrip): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQSizeGrip_virtualbase_metaObject(self.h), owned: false)
 
-proc cQSizeGrip_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
+proc QSizeGripmetacast*(self: gen_qsizegrip_types.QSizeGrip, param1: cstring): pointer =
+  fcQSizeGrip_virtualbase_metacast(self.h, param1)
+
+proc QSizeGripmetacall*(self: gen_qsizegrip_types.QSizeGrip, param1: cint, param2: cint, param3: pointer): cint =
+  fcQSizeGrip_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+proc QSizeGripsizeHint*(self: gen_qsizegrip_types.QSizeGrip): gen_qsize_types.QSize =
+  gen_qsize_types.QSize(h: fcQSizeGrip_virtualbase_sizeHint(self.h), owned: true)
+
+proc QSizeGripsetVisible*(self: gen_qsizegrip_types.QSizeGrip, visible: bool): void =
+  fcQSizeGrip_virtualbase_setVisible(self.h, visible)
+
+proc QSizeGrippaintEvent*(self: gen_qsizegrip_types.QSizeGrip, param1: gen_qevent_types.QPaintEvent): void =
+  fcQSizeGrip_virtualbase_paintEvent(self.h, param1.h)
+
+proc QSizeGripmousePressEvent*(self: gen_qsizegrip_types.QSizeGrip, param1: gen_qevent_types.QMouseEvent): void =
+  fcQSizeGrip_virtualbase_mousePressEvent(self.h, param1.h)
+
+proc QSizeGripmouseMoveEvent*(self: gen_qsizegrip_types.QSizeGrip, param1: gen_qevent_types.QMouseEvent): void =
+  fcQSizeGrip_virtualbase_mouseMoveEvent(self.h, param1.h)
+
+proc QSizeGripmouseReleaseEvent*(self: gen_qsizegrip_types.QSizeGrip, mouseEvent: gen_qevent_types.QMouseEvent): void =
+  fcQSizeGrip_virtualbase_mouseReleaseEvent(self.h, mouseEvent.h)
+
+proc QSizeGripmoveEvent*(self: gen_qsizegrip_types.QSizeGrip, moveEvent: gen_qevent_types.QMoveEvent): void =
+  fcQSizeGrip_virtualbase_moveEvent(self.h, moveEvent.h)
+
+proc QSizeGripshowEvent*(self: gen_qsizegrip_types.QSizeGrip, showEvent: gen_qevent_types.QShowEvent): void =
+  fcQSizeGrip_virtualbase_showEvent(self.h, showEvent.h)
+
+proc QSizeGriphideEvent*(self: gen_qsizegrip_types.QSizeGrip, hideEvent: gen_qevent_types.QHideEvent): void =
+  fcQSizeGrip_virtualbase_hideEvent(self.h, hideEvent.h)
+
+proc QSizeGripeventFilter*(self: gen_qsizegrip_types.QSizeGrip, param1: gen_qobject_types.QObject, param2: gen_qcoreevent_types.QEvent): bool =
+  fcQSizeGrip_virtualbase_eventFilter(self.h, param1.h, param2.h)
+
+proc QSizeGripevent*(self: gen_qsizegrip_types.QSizeGrip, param1: gen_qcoreevent_types.QEvent): bool =
+  fcQSizeGrip_virtualbase_event(self.h, param1.h)
+
+proc QSizeGripdevType*(self: gen_qsizegrip_types.QSizeGrip): cint =
+  fcQSizeGrip_virtualbase_devType(self.h)
+
+proc QSizeGripminimumSizeHint*(self: gen_qsizegrip_types.QSizeGrip): gen_qsize_types.QSize =
+  gen_qsize_types.QSize(h: fcQSizeGrip_virtualbase_minimumSizeHint(self.h), owned: true)
+
+proc QSizeGripheightForWidth*(self: gen_qsizegrip_types.QSizeGrip, param1: cint): cint =
+  fcQSizeGrip_virtualbase_heightForWidth(self.h, param1)
+
+proc QSizeGriphasHeightForWidth*(self: gen_qsizegrip_types.QSizeGrip): bool =
+  fcQSizeGrip_virtualbase_hasHeightForWidth(self.h)
+
+proc QSizeGrippaintEngine*(self: gen_qsizegrip_types.QSizeGrip): gen_qpaintengine_types.QPaintEngine =
+  gen_qpaintengine_types.QPaintEngine(h: fcQSizeGrip_virtualbase_paintEngine(self.h), owned: false)
+
+proc QSizeGripmouseDoubleClickEvent*(self: gen_qsizegrip_types.QSizeGrip, event: gen_qevent_types.QMouseEvent): void =
+  fcQSizeGrip_virtualbase_mouseDoubleClickEvent(self.h, event.h)
+
+proc QSizeGripwheelEvent*(self: gen_qsizegrip_types.QSizeGrip, event: gen_qevent_types.QWheelEvent): void =
+  fcQSizeGrip_virtualbase_wheelEvent(self.h, event.h)
+
+proc QSizeGripkeyPressEvent*(self: gen_qsizegrip_types.QSizeGrip, event: gen_qevent_types.QKeyEvent): void =
+  fcQSizeGrip_virtualbase_keyPressEvent(self.h, event.h)
+
+proc QSizeGripkeyReleaseEvent*(self: gen_qsizegrip_types.QSizeGrip, event: gen_qevent_types.QKeyEvent): void =
+  fcQSizeGrip_virtualbase_keyReleaseEvent(self.h, event.h)
+
+proc QSizeGripfocusInEvent*(self: gen_qsizegrip_types.QSizeGrip, event: gen_qevent_types.QFocusEvent): void =
+  fcQSizeGrip_virtualbase_focusInEvent(self.h, event.h)
+
+proc QSizeGripfocusOutEvent*(self: gen_qsizegrip_types.QSizeGrip, event: gen_qevent_types.QFocusEvent): void =
+  fcQSizeGrip_virtualbase_focusOutEvent(self.h, event.h)
+
+proc QSizeGripenterEvent*(self: gen_qsizegrip_types.QSizeGrip, event: gen_qcoreevent_types.QEvent): void =
+  fcQSizeGrip_virtualbase_enterEvent(self.h, event.h)
+
+proc QSizeGripleaveEvent*(self: gen_qsizegrip_types.QSizeGrip, event: gen_qcoreevent_types.QEvent): void =
+  fcQSizeGrip_virtualbase_leaveEvent(self.h, event.h)
+
+proc QSizeGripresizeEvent*(self: gen_qsizegrip_types.QSizeGrip, event: gen_qevent_types.QResizeEvent): void =
+  fcQSizeGrip_virtualbase_resizeEvent(self.h, event.h)
+
+proc QSizeGripcloseEvent*(self: gen_qsizegrip_types.QSizeGrip, event: gen_qevent_types.QCloseEvent): void =
+  fcQSizeGrip_virtualbase_closeEvent(self.h, event.h)
+
+proc QSizeGripcontextMenuEvent*(self: gen_qsizegrip_types.QSizeGrip, event: gen_qevent_types.QContextMenuEvent): void =
+  fcQSizeGrip_virtualbase_contextMenuEvent(self.h, event.h)
+
+proc QSizeGriptabletEvent*(self: gen_qsizegrip_types.QSizeGrip, event: gen_qevent_types.QTabletEvent): void =
+  fcQSizeGrip_virtualbase_tabletEvent(self.h, event.h)
+
+proc QSizeGripactionEvent*(self: gen_qsizegrip_types.QSizeGrip, event: gen_qevent_types.QActionEvent): void =
+  fcQSizeGrip_virtualbase_actionEvent(self.h, event.h)
+
+proc QSizeGripdragEnterEvent*(self: gen_qsizegrip_types.QSizeGrip, event: gen_qevent_types.QDragEnterEvent): void =
+  fcQSizeGrip_virtualbase_dragEnterEvent(self.h, event.h)
+
+proc QSizeGripdragMoveEvent*(self: gen_qsizegrip_types.QSizeGrip, event: gen_qevent_types.QDragMoveEvent): void =
+  fcQSizeGrip_virtualbase_dragMoveEvent(self.h, event.h)
+
+proc QSizeGripdragLeaveEvent*(self: gen_qsizegrip_types.QSizeGrip, event: gen_qevent_types.QDragLeaveEvent): void =
+  fcQSizeGrip_virtualbase_dragLeaveEvent(self.h, event.h)
+
+proc QSizeGripdropEvent*(self: gen_qsizegrip_types.QSizeGrip, event: gen_qevent_types.QDropEvent): void =
+  fcQSizeGrip_virtualbase_dropEvent(self.h, event.h)
+
+proc QSizeGripnativeEvent*(self: gen_qsizegrip_types.QSizeGrip, eventType: openArray[byte], message: pointer, resultVal: ptr clong): bool =
+  fcQSizeGrip_virtualbase_nativeEvent(self.h, struct_miqt_string(data: cast[cstring](if len(eventType) == 0: nil else: unsafeAddr eventType[0]), len: csize_t(len(eventType))), message, resultVal)
+
+proc QSizeGripchangeEvent*(self: gen_qsizegrip_types.QSizeGrip, param1: gen_qcoreevent_types.QEvent): void =
+  fcQSizeGrip_virtualbase_changeEvent(self.h, param1.h)
+
+proc QSizeGripmetric*(self: gen_qsizegrip_types.QSizeGrip, param1: cint): cint =
+  fcQSizeGrip_virtualbase_metric(self.h, cint(param1))
+
+proc QSizeGripinitPainter*(self: gen_qsizegrip_types.QSizeGrip, painter: gen_qpainter_types.QPainter): void =
+  fcQSizeGrip_virtualbase_initPainter(self.h, painter.h)
+
+proc QSizeGripredirected*(self: gen_qsizegrip_types.QSizeGrip, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice =
+  gen_qpaintdevice_types.QPaintDevice(h: fcQSizeGrip_virtualbase_redirected(self.h, offset.h), owned: false)
+
+proc QSizeGripsharedPainter*(self: gen_qsizegrip_types.QSizeGrip): gen_qpainter_types.QPainter =
+  gen_qpainter_types.QPainter(h: fcQSizeGrip_virtualbase_sharedPainter(self.h), owned: false)
+
+proc QSizeGripinputMethodEvent*(self: gen_qsizegrip_types.QSizeGrip, param1: gen_qevent_types.QInputMethodEvent): void =
+  fcQSizeGrip_virtualbase_inputMethodEvent(self.h, param1.h)
+
+proc QSizeGripinputMethodQuery*(self: gen_qsizegrip_types.QSizeGrip, param1: cint): gen_qvariant_types.QVariant =
+  gen_qvariant_types.QVariant(h: fcQSizeGrip_virtualbase_inputMethodQuery(self.h, cint(param1)), owned: true)
+
+proc QSizeGripfocusNextPrevChild*(self: gen_qsizegrip_types.QSizeGrip, next: bool): bool =
+  fcQSizeGrip_virtualbase_focusNextPrevChild(self.h, next)
+
+proc QSizeGriptimerEvent*(self: gen_qsizegrip_types.QSizeGrip, event: gen_qcoreevent_types.QTimerEvent): void =
+  fcQSizeGrip_virtualbase_timerEvent(self.h, event.h)
+
+proc QSizeGripchildEvent*(self: gen_qsizegrip_types.QSizeGrip, event: gen_qcoreevent_types.QChildEvent): void =
+  fcQSizeGrip_virtualbase_childEvent(self.h, event.h)
+
+proc QSizeGripcustomEvent*(self: gen_qsizegrip_types.QSizeGrip, event: gen_qcoreevent_types.QEvent): void =
+  fcQSizeGrip_virtualbase_customEvent(self.h, event.h)
+
+proc QSizeGripconnectNotify*(self: gen_qsizegrip_types.QSizeGrip, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQSizeGrip_virtualbase_connectNotify(self.h, signal.h)
+
+proc QSizeGripdisconnectNotify*(self: gen_qsizegrip_types.QSizeGrip, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQSizeGrip_virtualbase_disconnectNotify(self.h, signal.h)
+
+
+proc fcQSizeGrip_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QSizeGripVTable](fcQSizeGrip_vdata(self))
   let self = QSizeGrip(h: self)
   var virtualReturn = vtbl[].metaObject(self)
@@ -360,20 +511,14 @@ proc cQSizeGrip_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QSizeGripmetacast*(self: gen_qsizegrip_types.QSizeGrip, param1: cstring): pointer =
-  fcQSizeGrip_virtualbase_metacast(self.h, param1)
-
-proc cQSizeGrip_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+proc fcQSizeGrip_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QSizeGripVTable](fcQSizeGrip_vdata(self))
   let self = QSizeGrip(h: self)
   let slotval1 = (param1)
   var virtualReturn = vtbl[].metacast(self, slotval1)
   virtualReturn
 
-proc QSizeGripmetacall*(self: gen_qsizegrip_types.QSizeGrip, param1: cint, param2: cint, param3: pointer): cint =
-  fcQSizeGrip_virtualbase_metacall(self.h, cint(param1), param2, param3)
-
-proc cQSizeGrip_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+proc fcQSizeGrip_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QSizeGripVTable](fcQSizeGrip_vdata(self))
   let self = QSizeGrip(h: self)
   let slotval1 = cint(param1)
@@ -382,10 +527,7 @@ proc cQSizeGrip_vtable_callback_metacall(self: pointer, param1: cint, param2: ci
   var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QSizeGripsizeHint*(self: gen_qsizegrip_types.QSizeGrip): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQSizeGrip_virtualbase_sizeHint(self.h), owned: true)
-
-proc cQSizeGrip_vtable_callback_sizeHint(self: pointer): pointer {.cdecl.} =
+proc fcQSizeGrip_vtable_callback_sizeHint(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QSizeGripVTable](fcQSizeGrip_vdata(self))
   let self = QSizeGrip(h: self)
   var virtualReturn = vtbl[].sizeHint(self)
@@ -394,82 +536,55 @@ proc cQSizeGrip_vtable_callback_sizeHint(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QSizeGripsetVisible*(self: gen_qsizegrip_types.QSizeGrip, visible: bool): void =
-  fcQSizeGrip_virtualbase_setVisible(self.h, visible)
-
-proc cQSizeGrip_vtable_callback_setVisible(self: pointer, visible: bool): void {.cdecl.} =
+proc fcQSizeGrip_vtable_callback_setVisible(self: pointer, visible: bool): void {.cdecl.} =
   let vtbl = cast[ptr QSizeGripVTable](fcQSizeGrip_vdata(self))
   let self = QSizeGrip(h: self)
   let slotval1 = visible
   vtbl[].setVisible(self, slotval1)
 
-proc QSizeGrippaintEvent*(self: gen_qsizegrip_types.QSizeGrip, param1: gen_qevent_types.QPaintEvent): void =
-  fcQSizeGrip_virtualbase_paintEvent(self.h, param1.h)
-
-proc cQSizeGrip_vtable_callback_paintEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQSizeGrip_vtable_callback_paintEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSizeGripVTable](fcQSizeGrip_vdata(self))
   let self = QSizeGrip(h: self)
   let slotval1 = gen_qevent_types.QPaintEvent(h: param1, owned: false)
   vtbl[].paintEvent(self, slotval1)
 
-proc QSizeGripmousePressEvent*(self: gen_qsizegrip_types.QSizeGrip, param1: gen_qevent_types.QMouseEvent): void =
-  fcQSizeGrip_virtualbase_mousePressEvent(self.h, param1.h)
-
-proc cQSizeGrip_vtable_callback_mousePressEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQSizeGrip_vtable_callback_mousePressEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSizeGripVTable](fcQSizeGrip_vdata(self))
   let self = QSizeGrip(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: param1, owned: false)
   vtbl[].mousePressEvent(self, slotval1)
 
-proc QSizeGripmouseMoveEvent*(self: gen_qsizegrip_types.QSizeGrip, param1: gen_qevent_types.QMouseEvent): void =
-  fcQSizeGrip_virtualbase_mouseMoveEvent(self.h, param1.h)
-
-proc cQSizeGrip_vtable_callback_mouseMoveEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQSizeGrip_vtable_callback_mouseMoveEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSizeGripVTable](fcQSizeGrip_vdata(self))
   let self = QSizeGrip(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: param1, owned: false)
   vtbl[].mouseMoveEvent(self, slotval1)
 
-proc QSizeGripmouseReleaseEvent*(self: gen_qsizegrip_types.QSizeGrip, mouseEvent: gen_qevent_types.QMouseEvent): void =
-  fcQSizeGrip_virtualbase_mouseReleaseEvent(self.h, mouseEvent.h)
-
-proc cQSizeGrip_vtable_callback_mouseReleaseEvent(self: pointer, mouseEvent: pointer): void {.cdecl.} =
+proc fcQSizeGrip_vtable_callback_mouseReleaseEvent(self: pointer, mouseEvent: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSizeGripVTable](fcQSizeGrip_vdata(self))
   let self = QSizeGrip(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: mouseEvent, owned: false)
   vtbl[].mouseReleaseEvent(self, slotval1)
 
-proc QSizeGripmoveEvent*(self: gen_qsizegrip_types.QSizeGrip, moveEvent: gen_qevent_types.QMoveEvent): void =
-  fcQSizeGrip_virtualbase_moveEvent(self.h, moveEvent.h)
-
-proc cQSizeGrip_vtable_callback_moveEvent(self: pointer, moveEvent: pointer): void {.cdecl.} =
+proc fcQSizeGrip_vtable_callback_moveEvent(self: pointer, moveEvent: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSizeGripVTable](fcQSizeGrip_vdata(self))
   let self = QSizeGrip(h: self)
   let slotval1 = gen_qevent_types.QMoveEvent(h: moveEvent, owned: false)
   vtbl[].moveEvent(self, slotval1)
 
-proc QSizeGripshowEvent*(self: gen_qsizegrip_types.QSizeGrip, showEvent: gen_qevent_types.QShowEvent): void =
-  fcQSizeGrip_virtualbase_showEvent(self.h, showEvent.h)
-
-proc cQSizeGrip_vtable_callback_showEvent(self: pointer, showEvent: pointer): void {.cdecl.} =
+proc fcQSizeGrip_vtable_callback_showEvent(self: pointer, showEvent: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSizeGripVTable](fcQSizeGrip_vdata(self))
   let self = QSizeGrip(h: self)
   let slotval1 = gen_qevent_types.QShowEvent(h: showEvent, owned: false)
   vtbl[].showEvent(self, slotval1)
 
-proc QSizeGriphideEvent*(self: gen_qsizegrip_types.QSizeGrip, hideEvent: gen_qevent_types.QHideEvent): void =
-  fcQSizeGrip_virtualbase_hideEvent(self.h, hideEvent.h)
-
-proc cQSizeGrip_vtable_callback_hideEvent(self: pointer, hideEvent: pointer): void {.cdecl.} =
+proc fcQSizeGrip_vtable_callback_hideEvent(self: pointer, hideEvent: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSizeGripVTable](fcQSizeGrip_vdata(self))
   let self = QSizeGrip(h: self)
   let slotval1 = gen_qevent_types.QHideEvent(h: hideEvent, owned: false)
   vtbl[].hideEvent(self, slotval1)
 
-proc QSizeGripeventFilter*(self: gen_qsizegrip_types.QSizeGrip, param1: gen_qobject_types.QObject, param2: gen_qcoreevent_types.QEvent): bool =
-  fcQSizeGrip_virtualbase_eventFilter(self.h, param1.h, param2.h)
-
-proc cQSizeGrip_vtable_callback_eventFilter(self: pointer, param1: pointer, param2: pointer): bool {.cdecl.} =
+proc fcQSizeGrip_vtable_callback_eventFilter(self: pointer, param1: pointer, param2: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QSizeGripVTable](fcQSizeGrip_vdata(self))
   let self = QSizeGrip(h: self)
   let slotval1 = gen_qobject_types.QObject(h: param1, owned: false)
@@ -477,29 +592,20 @@ proc cQSizeGrip_vtable_callback_eventFilter(self: pointer, param1: pointer, para
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
-proc QSizeGripevent*(self: gen_qsizegrip_types.QSizeGrip, param1: gen_qcoreevent_types.QEvent): bool =
-  fcQSizeGrip_virtualbase_event(self.h, param1.h)
-
-proc cQSizeGrip_vtable_callback_event(self: pointer, param1: pointer): bool {.cdecl.} =
+proc fcQSizeGrip_vtable_callback_event(self: pointer, param1: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QSizeGripVTable](fcQSizeGrip_vdata(self))
   let self = QSizeGrip(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
-proc QSizeGripdevType*(self: gen_qsizegrip_types.QSizeGrip): cint =
-  fcQSizeGrip_virtualbase_devType(self.h)
-
-proc cQSizeGrip_vtable_callback_devType(self: pointer): cint {.cdecl.} =
+proc fcQSizeGrip_vtable_callback_devType(self: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QSizeGripVTable](fcQSizeGrip_vdata(self))
   let self = QSizeGrip(h: self)
   var virtualReturn = vtbl[].devType(self)
   virtualReturn
 
-proc QSizeGripminimumSizeHint*(self: gen_qsizegrip_types.QSizeGrip): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQSizeGrip_virtualbase_minimumSizeHint(self.h), owned: true)
-
-proc cQSizeGrip_vtable_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
+proc fcQSizeGrip_vtable_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QSizeGripVTable](fcQSizeGrip_vdata(self))
   let self = QSizeGrip(h: self)
   var virtualReturn = vtbl[].minimumSizeHint(self)
@@ -508,29 +614,20 @@ proc cQSizeGrip_vtable_callback_minimumSizeHint(self: pointer): pointer {.cdecl.
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QSizeGripheightForWidth*(self: gen_qsizegrip_types.QSizeGrip, param1: cint): cint =
-  fcQSizeGrip_virtualbase_heightForWidth(self.h, param1)
-
-proc cQSizeGrip_vtable_callback_heightForWidth(self: pointer, param1: cint): cint {.cdecl.} =
+proc fcQSizeGrip_vtable_callback_heightForWidth(self: pointer, param1: cint): cint {.cdecl.} =
   let vtbl = cast[ptr QSizeGripVTable](fcQSizeGrip_vdata(self))
   let self = QSizeGrip(h: self)
   let slotval1 = param1
   var virtualReturn = vtbl[].heightForWidth(self, slotval1)
   virtualReturn
 
-proc QSizeGriphasHeightForWidth*(self: gen_qsizegrip_types.QSizeGrip): bool =
-  fcQSizeGrip_virtualbase_hasHeightForWidth(self.h)
-
-proc cQSizeGrip_vtable_callback_hasHeightForWidth(self: pointer): bool {.cdecl.} =
+proc fcQSizeGrip_vtable_callback_hasHeightForWidth(self: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QSizeGripVTable](fcQSizeGrip_vdata(self))
   let self = QSizeGrip(h: self)
   var virtualReturn = vtbl[].hasHeightForWidth(self)
   virtualReturn
 
-proc QSizeGrippaintEngine*(self: gen_qsizegrip_types.QSizeGrip): gen_qpaintengine_types.QPaintEngine =
-  gen_qpaintengine_types.QPaintEngine(h: fcQSizeGrip_virtualbase_paintEngine(self.h), owned: false)
-
-proc cQSizeGrip_vtable_callback_paintEngine(self: pointer): pointer {.cdecl.} =
+proc fcQSizeGrip_vtable_callback_paintEngine(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QSizeGripVTable](fcQSizeGrip_vdata(self))
   let self = QSizeGrip(h: self)
   var virtualReturn = vtbl[].paintEngine(self)
@@ -539,163 +636,109 @@ proc cQSizeGrip_vtable_callback_paintEngine(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QSizeGripmouseDoubleClickEvent*(self: gen_qsizegrip_types.QSizeGrip, event: gen_qevent_types.QMouseEvent): void =
-  fcQSizeGrip_virtualbase_mouseDoubleClickEvent(self.h, event.h)
-
-proc cQSizeGrip_vtable_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQSizeGrip_vtable_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSizeGripVTable](fcQSizeGrip_vdata(self))
   let self = QSizeGrip(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseDoubleClickEvent(self, slotval1)
 
-proc QSizeGripwheelEvent*(self: gen_qsizegrip_types.QSizeGrip, event: gen_qevent_types.QWheelEvent): void =
-  fcQSizeGrip_virtualbase_wheelEvent(self.h, event.h)
-
-proc cQSizeGrip_vtable_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQSizeGrip_vtable_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSizeGripVTable](fcQSizeGrip_vdata(self))
   let self = QSizeGrip(h: self)
   let slotval1 = gen_qevent_types.QWheelEvent(h: event, owned: false)
   vtbl[].wheelEvent(self, slotval1)
 
-proc QSizeGripkeyPressEvent*(self: gen_qsizegrip_types.QSizeGrip, event: gen_qevent_types.QKeyEvent): void =
-  fcQSizeGrip_virtualbase_keyPressEvent(self.h, event.h)
-
-proc cQSizeGrip_vtable_callback_keyPressEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQSizeGrip_vtable_callback_keyPressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSizeGripVTable](fcQSizeGrip_vdata(self))
   let self = QSizeGrip(h: self)
   let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   vtbl[].keyPressEvent(self, slotval1)
 
-proc QSizeGripkeyReleaseEvent*(self: gen_qsizegrip_types.QSizeGrip, event: gen_qevent_types.QKeyEvent): void =
-  fcQSizeGrip_virtualbase_keyReleaseEvent(self.h, event.h)
-
-proc cQSizeGrip_vtable_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQSizeGrip_vtable_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSizeGripVTable](fcQSizeGrip_vdata(self))
   let self = QSizeGrip(h: self)
   let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   vtbl[].keyReleaseEvent(self, slotval1)
 
-proc QSizeGripfocusInEvent*(self: gen_qsizegrip_types.QSizeGrip, event: gen_qevent_types.QFocusEvent): void =
-  fcQSizeGrip_virtualbase_focusInEvent(self.h, event.h)
-
-proc cQSizeGrip_vtable_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQSizeGrip_vtable_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSizeGripVTable](fcQSizeGrip_vdata(self))
   let self = QSizeGrip(h: self)
   let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusInEvent(self, slotval1)
 
-proc QSizeGripfocusOutEvent*(self: gen_qsizegrip_types.QSizeGrip, event: gen_qevent_types.QFocusEvent): void =
-  fcQSizeGrip_virtualbase_focusOutEvent(self.h, event.h)
-
-proc cQSizeGrip_vtable_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQSizeGrip_vtable_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSizeGripVTable](fcQSizeGrip_vdata(self))
   let self = QSizeGrip(h: self)
   let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusOutEvent(self, slotval1)
 
-proc QSizeGripenterEvent*(self: gen_qsizegrip_types.QSizeGrip, event: gen_qcoreevent_types.QEvent): void =
-  fcQSizeGrip_virtualbase_enterEvent(self.h, event.h)
-
-proc cQSizeGrip_vtable_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQSizeGrip_vtable_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSizeGripVTable](fcQSizeGrip_vdata(self))
   let self = QSizeGrip(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].enterEvent(self, slotval1)
 
-proc QSizeGripleaveEvent*(self: gen_qsizegrip_types.QSizeGrip, event: gen_qcoreevent_types.QEvent): void =
-  fcQSizeGrip_virtualbase_leaveEvent(self.h, event.h)
-
-proc cQSizeGrip_vtable_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQSizeGrip_vtable_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSizeGripVTable](fcQSizeGrip_vdata(self))
   let self = QSizeGrip(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].leaveEvent(self, slotval1)
 
-proc QSizeGripresizeEvent*(self: gen_qsizegrip_types.QSizeGrip, event: gen_qevent_types.QResizeEvent): void =
-  fcQSizeGrip_virtualbase_resizeEvent(self.h, event.h)
-
-proc cQSizeGrip_vtable_callback_resizeEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQSizeGrip_vtable_callback_resizeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSizeGripVTable](fcQSizeGrip_vdata(self))
   let self = QSizeGrip(h: self)
   let slotval1 = gen_qevent_types.QResizeEvent(h: event, owned: false)
   vtbl[].resizeEvent(self, slotval1)
 
-proc QSizeGripcloseEvent*(self: gen_qsizegrip_types.QSizeGrip, event: gen_qevent_types.QCloseEvent): void =
-  fcQSizeGrip_virtualbase_closeEvent(self.h, event.h)
-
-proc cQSizeGrip_vtable_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQSizeGrip_vtable_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSizeGripVTable](fcQSizeGrip_vdata(self))
   let self = QSizeGrip(h: self)
   let slotval1 = gen_qevent_types.QCloseEvent(h: event, owned: false)
   vtbl[].closeEvent(self, slotval1)
 
-proc QSizeGripcontextMenuEvent*(self: gen_qsizegrip_types.QSizeGrip, event: gen_qevent_types.QContextMenuEvent): void =
-  fcQSizeGrip_virtualbase_contextMenuEvent(self.h, event.h)
-
-proc cQSizeGrip_vtable_callback_contextMenuEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQSizeGrip_vtable_callback_contextMenuEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSizeGripVTable](fcQSizeGrip_vdata(self))
   let self = QSizeGrip(h: self)
   let slotval1 = gen_qevent_types.QContextMenuEvent(h: event, owned: false)
   vtbl[].contextMenuEvent(self, slotval1)
 
-proc QSizeGriptabletEvent*(self: gen_qsizegrip_types.QSizeGrip, event: gen_qevent_types.QTabletEvent): void =
-  fcQSizeGrip_virtualbase_tabletEvent(self.h, event.h)
-
-proc cQSizeGrip_vtable_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQSizeGrip_vtable_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSizeGripVTable](fcQSizeGrip_vdata(self))
   let self = QSizeGrip(h: self)
   let slotval1 = gen_qevent_types.QTabletEvent(h: event, owned: false)
   vtbl[].tabletEvent(self, slotval1)
 
-proc QSizeGripactionEvent*(self: gen_qsizegrip_types.QSizeGrip, event: gen_qevent_types.QActionEvent): void =
-  fcQSizeGrip_virtualbase_actionEvent(self.h, event.h)
-
-proc cQSizeGrip_vtable_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQSizeGrip_vtable_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSizeGripVTable](fcQSizeGrip_vdata(self))
   let self = QSizeGrip(h: self)
   let slotval1 = gen_qevent_types.QActionEvent(h: event, owned: false)
   vtbl[].actionEvent(self, slotval1)
 
-proc QSizeGripdragEnterEvent*(self: gen_qsizegrip_types.QSizeGrip, event: gen_qevent_types.QDragEnterEvent): void =
-  fcQSizeGrip_virtualbase_dragEnterEvent(self.h, event.h)
-
-proc cQSizeGrip_vtable_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQSizeGrip_vtable_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSizeGripVTable](fcQSizeGrip_vdata(self))
   let self = QSizeGrip(h: self)
   let slotval1 = gen_qevent_types.QDragEnterEvent(h: event, owned: false)
   vtbl[].dragEnterEvent(self, slotval1)
 
-proc QSizeGripdragMoveEvent*(self: gen_qsizegrip_types.QSizeGrip, event: gen_qevent_types.QDragMoveEvent): void =
-  fcQSizeGrip_virtualbase_dragMoveEvent(self.h, event.h)
-
-proc cQSizeGrip_vtable_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQSizeGrip_vtable_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSizeGripVTable](fcQSizeGrip_vdata(self))
   let self = QSizeGrip(h: self)
   let slotval1 = gen_qevent_types.QDragMoveEvent(h: event, owned: false)
   vtbl[].dragMoveEvent(self, slotval1)
 
-proc QSizeGripdragLeaveEvent*(self: gen_qsizegrip_types.QSizeGrip, event: gen_qevent_types.QDragLeaveEvent): void =
-  fcQSizeGrip_virtualbase_dragLeaveEvent(self.h, event.h)
-
-proc cQSizeGrip_vtable_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQSizeGrip_vtable_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSizeGripVTable](fcQSizeGrip_vdata(self))
   let self = QSizeGrip(h: self)
   let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event, owned: false)
   vtbl[].dragLeaveEvent(self, slotval1)
 
-proc QSizeGripdropEvent*(self: gen_qsizegrip_types.QSizeGrip, event: gen_qevent_types.QDropEvent): void =
-  fcQSizeGrip_virtualbase_dropEvent(self.h, event.h)
-
-proc cQSizeGrip_vtable_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQSizeGrip_vtable_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSizeGripVTable](fcQSizeGrip_vdata(self))
   let self = QSizeGrip(h: self)
   let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
   vtbl[].dropEvent(self, slotval1)
 
-proc QSizeGripnativeEvent*(self: gen_qsizegrip_types.QSizeGrip, eventType: openArray[byte], message: pointer, resultVal: ptr clong): bool =
-  fcQSizeGrip_virtualbase_nativeEvent(self.h, struct_miqt_string(data: cast[cstring](if len(eventType) == 0: nil else: unsafeAddr eventType[0]), len: csize_t(len(eventType))), message, resultVal)
-
-proc cQSizeGrip_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr clong): bool {.cdecl.} =
+proc fcQSizeGrip_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr clong): bool {.cdecl.} =
   let vtbl = cast[ptr QSizeGripVTable](fcQSizeGrip_vdata(self))
   let self = QSizeGrip(h: self)
   var veventType_bytearray = eventType
@@ -707,38 +750,26 @@ proc cQSizeGrip_vtable_callback_nativeEvent(self: pointer, eventType: struct_miq
   var virtualReturn = vtbl[].nativeEvent(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QSizeGripchangeEvent*(self: gen_qsizegrip_types.QSizeGrip, param1: gen_qcoreevent_types.QEvent): void =
-  fcQSizeGrip_virtualbase_changeEvent(self.h, param1.h)
-
-proc cQSizeGrip_vtable_callback_changeEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQSizeGrip_vtable_callback_changeEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSizeGripVTable](fcQSizeGrip_vdata(self))
   let self = QSizeGrip(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
   vtbl[].changeEvent(self, slotval1)
 
-proc QSizeGripmetric*(self: gen_qsizegrip_types.QSizeGrip, param1: cint): cint =
-  fcQSizeGrip_virtualbase_metric(self.h, cint(param1))
-
-proc cQSizeGrip_vtable_callback_metric(self: pointer, param1: cint): cint {.cdecl.} =
+proc fcQSizeGrip_vtable_callback_metric(self: pointer, param1: cint): cint {.cdecl.} =
   let vtbl = cast[ptr QSizeGripVTable](fcQSizeGrip_vdata(self))
   let self = QSizeGrip(h: self)
   let slotval1 = cint(param1)
   var virtualReturn = vtbl[].metric(self, slotval1)
   virtualReturn
 
-proc QSizeGripinitPainter*(self: gen_qsizegrip_types.QSizeGrip, painter: gen_qpainter_types.QPainter): void =
-  fcQSizeGrip_virtualbase_initPainter(self.h, painter.h)
-
-proc cQSizeGrip_vtable_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
+proc fcQSizeGrip_vtable_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSizeGripVTable](fcQSizeGrip_vdata(self))
   let self = QSizeGrip(h: self)
   let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
   vtbl[].initPainter(self, slotval1)
 
-proc QSizeGripredirected*(self: gen_qsizegrip_types.QSizeGrip, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice =
-  gen_qpaintdevice_types.QPaintDevice(h: fcQSizeGrip_virtualbase_redirected(self.h, offset.h), owned: false)
-
-proc cQSizeGrip_vtable_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
+proc fcQSizeGrip_vtable_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QSizeGripVTable](fcQSizeGrip_vdata(self))
   let self = QSizeGrip(h: self)
   let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
@@ -748,10 +779,7 @@ proc cQSizeGrip_vtable_callback_redirected(self: pointer, offset: pointer): poin
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QSizeGripsharedPainter*(self: gen_qsizegrip_types.QSizeGrip): gen_qpainter_types.QPainter =
-  gen_qpainter_types.QPainter(h: fcQSizeGrip_virtualbase_sharedPainter(self.h), owned: false)
-
-proc cQSizeGrip_vtable_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
+proc fcQSizeGrip_vtable_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QSizeGripVTable](fcQSizeGrip_vdata(self))
   let self = QSizeGrip(h: self)
   var virtualReturn = vtbl[].sharedPainter(self)
@@ -760,19 +788,13 @@ proc cQSizeGrip_vtable_callback_sharedPainter(self: pointer): pointer {.cdecl.} 
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QSizeGripinputMethodEvent*(self: gen_qsizegrip_types.QSizeGrip, param1: gen_qevent_types.QInputMethodEvent): void =
-  fcQSizeGrip_virtualbase_inputMethodEvent(self.h, param1.h)
-
-proc cQSizeGrip_vtable_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQSizeGrip_vtable_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSizeGripVTable](fcQSizeGrip_vdata(self))
   let self = QSizeGrip(h: self)
   let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1, owned: false)
   vtbl[].inputMethodEvent(self, slotval1)
 
-proc QSizeGripinputMethodQuery*(self: gen_qsizegrip_types.QSizeGrip, param1: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQSizeGrip_virtualbase_inputMethodQuery(self.h, cint(param1)), owned: true)
-
-proc cQSizeGrip_vtable_callback_inputMethodQuery(self: pointer, param1: cint): pointer {.cdecl.} =
+proc fcQSizeGrip_vtable_callback_inputMethodQuery(self: pointer, param1: cint): pointer {.cdecl.} =
   let vtbl = cast[ptr QSizeGripVTable](fcQSizeGrip_vdata(self))
   let self = QSizeGrip(h: self)
   let slotval1 = cint(param1)
@@ -782,56 +804,38 @@ proc cQSizeGrip_vtable_callback_inputMethodQuery(self: pointer, param1: cint): p
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QSizeGripfocusNextPrevChild*(self: gen_qsizegrip_types.QSizeGrip, next: bool): bool =
-  fcQSizeGrip_virtualbase_focusNextPrevChild(self.h, next)
-
-proc cQSizeGrip_vtable_callback_focusNextPrevChild(self: pointer, next: bool): bool {.cdecl.} =
+proc fcQSizeGrip_vtable_callback_focusNextPrevChild(self: pointer, next: bool): bool {.cdecl.} =
   let vtbl = cast[ptr QSizeGripVTable](fcQSizeGrip_vdata(self))
   let self = QSizeGrip(h: self)
   let slotval1 = next
   var virtualReturn = vtbl[].focusNextPrevChild(self, slotval1)
   virtualReturn
 
-proc QSizeGriptimerEvent*(self: gen_qsizegrip_types.QSizeGrip, event: gen_qcoreevent_types.QTimerEvent): void =
-  fcQSizeGrip_virtualbase_timerEvent(self.h, event.h)
-
-proc cQSizeGrip_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQSizeGrip_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSizeGripVTable](fcQSizeGrip_vdata(self))
   let self = QSizeGrip(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
-proc QSizeGripchildEvent*(self: gen_qsizegrip_types.QSizeGrip, event: gen_qcoreevent_types.QChildEvent): void =
-  fcQSizeGrip_virtualbase_childEvent(self.h, event.h)
-
-proc cQSizeGrip_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQSizeGrip_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSizeGripVTable](fcQSizeGrip_vdata(self))
   let self = QSizeGrip(h: self)
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
-proc QSizeGripcustomEvent*(self: gen_qsizegrip_types.QSizeGrip, event: gen_qcoreevent_types.QEvent): void =
-  fcQSizeGrip_virtualbase_customEvent(self.h, event.h)
-
-proc cQSizeGrip_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQSizeGrip_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSizeGripVTable](fcQSizeGrip_vdata(self))
   let self = QSizeGrip(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
-proc QSizeGripconnectNotify*(self: gen_qsizegrip_types.QSizeGrip, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQSizeGrip_virtualbase_connectNotify(self.h, signal.h)
-
-proc cQSizeGrip_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQSizeGrip_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSizeGripVTable](fcQSizeGrip_vdata(self))
   let self = QSizeGrip(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
-proc QSizeGripdisconnectNotify*(self: gen_qsizegrip_types.QSizeGrip, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQSizeGrip_virtualbase_disconnectNotify(self.h, signal.h)
-
-proc cQSizeGrip_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQSizeGrip_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSizeGripVTable](fcQSizeGrip_vdata(self))
   let self = QSizeGrip(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
@@ -839,9 +843,109 @@ proc cQSizeGrip_vtable_callback_disconnectNotify(self: pointer, signal: pointer)
 
 type VirtualQSizeGrip* {.inheritable.} = ref object of QSizeGrip
   vtbl*: cQSizeGripVTable
+
 method metaObject*(self: VirtualQSizeGrip): gen_qobjectdefs_types.QMetaObject {.base.} =
   QSizeGripmetaObject(self[])
-proc cQSizeGrip_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
+method metacast*(self: VirtualQSizeGrip, param1: cstring): pointer {.base.} =
+  QSizeGripmetacast(self[], param1)
+method metacall*(self: VirtualQSizeGrip, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QSizeGripmetacall(self[], param1, param2, param3)
+method sizeHint*(self: VirtualQSizeGrip): gen_qsize_types.QSize {.base.} =
+  QSizeGripsizeHint(self[])
+method setVisible*(self: VirtualQSizeGrip, visible: bool): void {.base.} =
+  QSizeGripsetVisible(self[], visible)
+method paintEvent*(self: VirtualQSizeGrip, param1: gen_qevent_types.QPaintEvent): void {.base.} =
+  QSizeGrippaintEvent(self[], param1)
+method mousePressEvent*(self: VirtualQSizeGrip, param1: gen_qevent_types.QMouseEvent): void {.base.} =
+  QSizeGripmousePressEvent(self[], param1)
+method mouseMoveEvent*(self: VirtualQSizeGrip, param1: gen_qevent_types.QMouseEvent): void {.base.} =
+  QSizeGripmouseMoveEvent(self[], param1)
+method mouseReleaseEvent*(self: VirtualQSizeGrip, mouseEvent: gen_qevent_types.QMouseEvent): void {.base.} =
+  QSizeGripmouseReleaseEvent(self[], mouseEvent)
+method moveEvent*(self: VirtualQSizeGrip, moveEvent: gen_qevent_types.QMoveEvent): void {.base.} =
+  QSizeGripmoveEvent(self[], moveEvent)
+method showEvent*(self: VirtualQSizeGrip, showEvent: gen_qevent_types.QShowEvent): void {.base.} =
+  QSizeGripshowEvent(self[], showEvent)
+method hideEvent*(self: VirtualQSizeGrip, hideEvent: gen_qevent_types.QHideEvent): void {.base.} =
+  QSizeGriphideEvent(self[], hideEvent)
+method eventFilter*(self: VirtualQSizeGrip, param1: gen_qobject_types.QObject, param2: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QSizeGripeventFilter(self[], param1, param2)
+method event*(self: VirtualQSizeGrip, param1: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QSizeGripevent(self[], param1)
+method devType*(self: VirtualQSizeGrip): cint {.base.} =
+  QSizeGripdevType(self[])
+method minimumSizeHint*(self: VirtualQSizeGrip): gen_qsize_types.QSize {.base.} =
+  QSizeGripminimumSizeHint(self[])
+method heightForWidth*(self: VirtualQSizeGrip, param1: cint): cint {.base.} =
+  QSizeGripheightForWidth(self[], param1)
+method hasHeightForWidth*(self: VirtualQSizeGrip): bool {.base.} =
+  QSizeGriphasHeightForWidth(self[])
+method paintEngine*(self: VirtualQSizeGrip): gen_qpaintengine_types.QPaintEngine {.base.} =
+  QSizeGrippaintEngine(self[])
+method mouseDoubleClickEvent*(self: VirtualQSizeGrip, event: gen_qevent_types.QMouseEvent): void {.base.} =
+  QSizeGripmouseDoubleClickEvent(self[], event)
+method wheelEvent*(self: VirtualQSizeGrip, event: gen_qevent_types.QWheelEvent): void {.base.} =
+  QSizeGripwheelEvent(self[], event)
+method keyPressEvent*(self: VirtualQSizeGrip, event: gen_qevent_types.QKeyEvent): void {.base.} =
+  QSizeGripkeyPressEvent(self[], event)
+method keyReleaseEvent*(self: VirtualQSizeGrip, event: gen_qevent_types.QKeyEvent): void {.base.} =
+  QSizeGripkeyReleaseEvent(self[], event)
+method focusInEvent*(self: VirtualQSizeGrip, event: gen_qevent_types.QFocusEvent): void {.base.} =
+  QSizeGripfocusInEvent(self[], event)
+method focusOutEvent*(self: VirtualQSizeGrip, event: gen_qevent_types.QFocusEvent): void {.base.} =
+  QSizeGripfocusOutEvent(self[], event)
+method enterEvent*(self: VirtualQSizeGrip, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QSizeGripenterEvent(self[], event)
+method leaveEvent*(self: VirtualQSizeGrip, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QSizeGripleaveEvent(self[], event)
+method resizeEvent*(self: VirtualQSizeGrip, event: gen_qevent_types.QResizeEvent): void {.base.} =
+  QSizeGripresizeEvent(self[], event)
+method closeEvent*(self: VirtualQSizeGrip, event: gen_qevent_types.QCloseEvent): void {.base.} =
+  QSizeGripcloseEvent(self[], event)
+method contextMenuEvent*(self: VirtualQSizeGrip, event: gen_qevent_types.QContextMenuEvent): void {.base.} =
+  QSizeGripcontextMenuEvent(self[], event)
+method tabletEvent*(self: VirtualQSizeGrip, event: gen_qevent_types.QTabletEvent): void {.base.} =
+  QSizeGriptabletEvent(self[], event)
+method actionEvent*(self: VirtualQSizeGrip, event: gen_qevent_types.QActionEvent): void {.base.} =
+  QSizeGripactionEvent(self[], event)
+method dragEnterEvent*(self: VirtualQSizeGrip, event: gen_qevent_types.QDragEnterEvent): void {.base.} =
+  QSizeGripdragEnterEvent(self[], event)
+method dragMoveEvent*(self: VirtualQSizeGrip, event: gen_qevent_types.QDragMoveEvent): void {.base.} =
+  QSizeGripdragMoveEvent(self[], event)
+method dragLeaveEvent*(self: VirtualQSizeGrip, event: gen_qevent_types.QDragLeaveEvent): void {.base.} =
+  QSizeGripdragLeaveEvent(self[], event)
+method dropEvent*(self: VirtualQSizeGrip, event: gen_qevent_types.QDropEvent): void {.base.} =
+  QSizeGripdropEvent(self[], event)
+method nativeEvent*(self: VirtualQSizeGrip, eventType: openArray[byte], message: pointer, resultVal: ptr clong): bool {.base.} =
+  QSizeGripnativeEvent(self[], eventType, message, resultVal)
+method changeEvent*(self: VirtualQSizeGrip, param1: gen_qcoreevent_types.QEvent): void {.base.} =
+  QSizeGripchangeEvent(self[], param1)
+method metric*(self: VirtualQSizeGrip, param1: cint): cint {.base.} =
+  QSizeGripmetric(self[], param1)
+method initPainter*(self: VirtualQSizeGrip, painter: gen_qpainter_types.QPainter): void {.base.} =
+  QSizeGripinitPainter(self[], painter)
+method redirected*(self: VirtualQSizeGrip, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.base.} =
+  QSizeGripredirected(self[], offset)
+method sharedPainter*(self: VirtualQSizeGrip): gen_qpainter_types.QPainter {.base.} =
+  QSizeGripsharedPainter(self[])
+method inputMethodEvent*(self: VirtualQSizeGrip, param1: gen_qevent_types.QInputMethodEvent): void {.base.} =
+  QSizeGripinputMethodEvent(self[], param1)
+method inputMethodQuery*(self: VirtualQSizeGrip, param1: cint): gen_qvariant_types.QVariant {.base.} =
+  QSizeGripinputMethodQuery(self[], param1)
+method focusNextPrevChild*(self: VirtualQSizeGrip, next: bool): bool {.base.} =
+  QSizeGripfocusNextPrevChild(self[], next)
+method timerEvent*(self: VirtualQSizeGrip, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QSizeGriptimerEvent(self[], event)
+method childEvent*(self: VirtualQSizeGrip, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QSizeGripchildEvent(self[], event)
+method customEvent*(self: VirtualQSizeGrip, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QSizeGripcustomEvent(self[], event)
+method connectNotify*(self: VirtualQSizeGrip, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QSizeGripconnectNotify(self[], signal)
+method disconnectNotify*(self: VirtualQSizeGrip, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QSizeGripdisconnectNotify(self[], signal)
+
+proc fcQSizeGrip_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQSizeGrip](fcQSizeGrip_vdata(self))
   var virtualReturn = inst.metaObject()
   virtualReturn.owned = false # TODO move?
@@ -849,17 +953,13 @@ proc cQSizeGrip_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-method metacast*(self: VirtualQSizeGrip, param1: cstring): pointer {.base.} =
-  QSizeGripmetacast(self[], param1)
-proc cQSizeGrip_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+proc fcQSizeGrip_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQSizeGrip](fcQSizeGrip_vdata(self))
   let slotval1 = (param1)
   var virtualReturn = inst.metacast(slotval1)
   virtualReturn
 
-method metacall*(self: VirtualQSizeGrip, param1: cint, param2: cint, param3: pointer): cint {.base.} =
-  QSizeGripmetacall(self[], param1, param2, param3)
-proc cQSizeGrip_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+proc fcQSizeGrip_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQSizeGrip](fcQSizeGrip_vdata(self))
   let slotval1 = cint(param1)
   let slotval2 = param2
@@ -867,9 +967,7 @@ proc cQSizeGrip_method_callback_metacall(self: pointer, param1: cint, param2: ci
   var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
-method sizeHint*(self: VirtualQSizeGrip): gen_qsize_types.QSize {.base.} =
-  QSizeGripsizeHint(self[])
-proc cQSizeGrip_method_callback_sizeHint(self: pointer): pointer {.cdecl.} =
+proc fcQSizeGrip_method_callback_sizeHint(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQSizeGrip](fcQSizeGrip_vdata(self))
   var virtualReturn = inst.sizeHint()
   virtualReturn.owned = false # TODO move?
@@ -877,89 +975,65 @@ proc cQSizeGrip_method_callback_sizeHint(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-method setVisible*(self: VirtualQSizeGrip, visible: bool): void {.base.} =
-  QSizeGripsetVisible(self[], visible)
-proc cQSizeGrip_method_callback_setVisible(self: pointer, visible: bool): void {.cdecl.} =
+proc fcQSizeGrip_method_callback_setVisible(self: pointer, visible: bool): void {.cdecl.} =
   let inst = cast[VirtualQSizeGrip](fcQSizeGrip_vdata(self))
   let slotval1 = visible
   inst.setVisible(slotval1)
 
-method paintEvent*(self: VirtualQSizeGrip, param1: gen_qevent_types.QPaintEvent): void {.base.} =
-  QSizeGrippaintEvent(self[], param1)
-proc cQSizeGrip_method_callback_paintEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQSizeGrip_method_callback_paintEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSizeGrip](fcQSizeGrip_vdata(self))
   let slotval1 = gen_qevent_types.QPaintEvent(h: param1, owned: false)
   inst.paintEvent(slotval1)
 
-method mousePressEvent*(self: VirtualQSizeGrip, param1: gen_qevent_types.QMouseEvent): void {.base.} =
-  QSizeGripmousePressEvent(self[], param1)
-proc cQSizeGrip_method_callback_mousePressEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQSizeGrip_method_callback_mousePressEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSizeGrip](fcQSizeGrip_vdata(self))
   let slotval1 = gen_qevent_types.QMouseEvent(h: param1, owned: false)
   inst.mousePressEvent(slotval1)
 
-method mouseMoveEvent*(self: VirtualQSizeGrip, param1: gen_qevent_types.QMouseEvent): void {.base.} =
-  QSizeGripmouseMoveEvent(self[], param1)
-proc cQSizeGrip_method_callback_mouseMoveEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQSizeGrip_method_callback_mouseMoveEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSizeGrip](fcQSizeGrip_vdata(self))
   let slotval1 = gen_qevent_types.QMouseEvent(h: param1, owned: false)
   inst.mouseMoveEvent(slotval1)
 
-method mouseReleaseEvent*(self: VirtualQSizeGrip, mouseEvent: gen_qevent_types.QMouseEvent): void {.base.} =
-  QSizeGripmouseReleaseEvent(self[], mouseEvent)
-proc cQSizeGrip_method_callback_mouseReleaseEvent(self: pointer, mouseEvent: pointer): void {.cdecl.} =
+proc fcQSizeGrip_method_callback_mouseReleaseEvent(self: pointer, mouseEvent: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSizeGrip](fcQSizeGrip_vdata(self))
   let slotval1 = gen_qevent_types.QMouseEvent(h: mouseEvent, owned: false)
   inst.mouseReleaseEvent(slotval1)
 
-method moveEvent*(self: VirtualQSizeGrip, moveEvent: gen_qevent_types.QMoveEvent): void {.base.} =
-  QSizeGripmoveEvent(self[], moveEvent)
-proc cQSizeGrip_method_callback_moveEvent(self: pointer, moveEvent: pointer): void {.cdecl.} =
+proc fcQSizeGrip_method_callback_moveEvent(self: pointer, moveEvent: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSizeGrip](fcQSizeGrip_vdata(self))
   let slotval1 = gen_qevent_types.QMoveEvent(h: moveEvent, owned: false)
   inst.moveEvent(slotval1)
 
-method showEvent*(self: VirtualQSizeGrip, showEvent: gen_qevent_types.QShowEvent): void {.base.} =
-  QSizeGripshowEvent(self[], showEvent)
-proc cQSizeGrip_method_callback_showEvent(self: pointer, showEvent: pointer): void {.cdecl.} =
+proc fcQSizeGrip_method_callback_showEvent(self: pointer, showEvent: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSizeGrip](fcQSizeGrip_vdata(self))
   let slotval1 = gen_qevent_types.QShowEvent(h: showEvent, owned: false)
   inst.showEvent(slotval1)
 
-method hideEvent*(self: VirtualQSizeGrip, hideEvent: gen_qevent_types.QHideEvent): void {.base.} =
-  QSizeGriphideEvent(self[], hideEvent)
-proc cQSizeGrip_method_callback_hideEvent(self: pointer, hideEvent: pointer): void {.cdecl.} =
+proc fcQSizeGrip_method_callback_hideEvent(self: pointer, hideEvent: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSizeGrip](fcQSizeGrip_vdata(self))
   let slotval1 = gen_qevent_types.QHideEvent(h: hideEvent, owned: false)
   inst.hideEvent(slotval1)
 
-method eventFilter*(self: VirtualQSizeGrip, param1: gen_qobject_types.QObject, param2: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QSizeGripeventFilter(self[], param1, param2)
-proc cQSizeGrip_method_callback_eventFilter(self: pointer, param1: pointer, param2: pointer): bool {.cdecl.} =
+proc fcQSizeGrip_method_callback_eventFilter(self: pointer, param1: pointer, param2: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQSizeGrip](fcQSizeGrip_vdata(self))
   let slotval1 = gen_qobject_types.QObject(h: param1, owned: false)
   let slotval2 = gen_qcoreevent_types.QEvent(h: param2, owned: false)
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
-method event*(self: VirtualQSizeGrip, param1: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QSizeGripevent(self[], param1)
-proc cQSizeGrip_method_callback_event(self: pointer, param1: pointer): bool {.cdecl.} =
+proc fcQSizeGrip_method_callback_event(self: pointer, param1: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQSizeGrip](fcQSizeGrip_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
-method devType*(self: VirtualQSizeGrip): cint {.base.} =
-  QSizeGripdevType(self[])
-proc cQSizeGrip_method_callback_devType(self: pointer): cint {.cdecl.} =
+proc fcQSizeGrip_method_callback_devType(self: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQSizeGrip](fcQSizeGrip_vdata(self))
   var virtualReturn = inst.devType()
   virtualReturn
 
-method minimumSizeHint*(self: VirtualQSizeGrip): gen_qsize_types.QSize {.base.} =
-  QSizeGripminimumSizeHint(self[])
-proc cQSizeGrip_method_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
+proc fcQSizeGrip_method_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQSizeGrip](fcQSizeGrip_vdata(self))
   var virtualReturn = inst.minimumSizeHint()
   virtualReturn.owned = false # TODO move?
@@ -967,24 +1041,18 @@ proc cQSizeGrip_method_callback_minimumSizeHint(self: pointer): pointer {.cdecl.
   virtualReturn.h = nil
   virtualReturn_h
 
-method heightForWidth*(self: VirtualQSizeGrip, param1: cint): cint {.base.} =
-  QSizeGripheightForWidth(self[], param1)
-proc cQSizeGrip_method_callback_heightForWidth(self: pointer, param1: cint): cint {.cdecl.} =
+proc fcQSizeGrip_method_callback_heightForWidth(self: pointer, param1: cint): cint {.cdecl.} =
   let inst = cast[VirtualQSizeGrip](fcQSizeGrip_vdata(self))
   let slotval1 = param1
   var virtualReturn = inst.heightForWidth(slotval1)
   virtualReturn
 
-method hasHeightForWidth*(self: VirtualQSizeGrip): bool {.base.} =
-  QSizeGriphasHeightForWidth(self[])
-proc cQSizeGrip_method_callback_hasHeightForWidth(self: pointer): bool {.cdecl.} =
+proc fcQSizeGrip_method_callback_hasHeightForWidth(self: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQSizeGrip](fcQSizeGrip_vdata(self))
   var virtualReturn = inst.hasHeightForWidth()
   virtualReturn
 
-method paintEngine*(self: VirtualQSizeGrip): gen_qpaintengine_types.QPaintEngine {.base.} =
-  QSizeGrippaintEngine(self[])
-proc cQSizeGrip_method_callback_paintEngine(self: pointer): pointer {.cdecl.} =
+proc fcQSizeGrip_method_callback_paintEngine(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQSizeGrip](fcQSizeGrip_vdata(self))
   var virtualReturn = inst.paintEngine()
   virtualReturn.owned = false # TODO move?
@@ -992,128 +1060,92 @@ proc cQSizeGrip_method_callback_paintEngine(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-method mouseDoubleClickEvent*(self: VirtualQSizeGrip, event: gen_qevent_types.QMouseEvent): void {.base.} =
-  QSizeGripmouseDoubleClickEvent(self[], event)
-proc cQSizeGrip_method_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQSizeGrip_method_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSizeGrip](fcQSizeGrip_vdata(self))
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mouseDoubleClickEvent(slotval1)
 
-method wheelEvent*(self: VirtualQSizeGrip, event: gen_qevent_types.QWheelEvent): void {.base.} =
-  QSizeGripwheelEvent(self[], event)
-proc cQSizeGrip_method_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQSizeGrip_method_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSizeGrip](fcQSizeGrip_vdata(self))
   let slotval1 = gen_qevent_types.QWheelEvent(h: event, owned: false)
   inst.wheelEvent(slotval1)
 
-method keyPressEvent*(self: VirtualQSizeGrip, event: gen_qevent_types.QKeyEvent): void {.base.} =
-  QSizeGripkeyPressEvent(self[], event)
-proc cQSizeGrip_method_callback_keyPressEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQSizeGrip_method_callback_keyPressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSizeGrip](fcQSizeGrip_vdata(self))
   let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   inst.keyPressEvent(slotval1)
 
-method keyReleaseEvent*(self: VirtualQSizeGrip, event: gen_qevent_types.QKeyEvent): void {.base.} =
-  QSizeGripkeyReleaseEvent(self[], event)
-proc cQSizeGrip_method_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQSizeGrip_method_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSizeGrip](fcQSizeGrip_vdata(self))
   let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   inst.keyReleaseEvent(slotval1)
 
-method focusInEvent*(self: VirtualQSizeGrip, event: gen_qevent_types.QFocusEvent): void {.base.} =
-  QSizeGripfocusInEvent(self[], event)
-proc cQSizeGrip_method_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQSizeGrip_method_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSizeGrip](fcQSizeGrip_vdata(self))
   let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   inst.focusInEvent(slotval1)
 
-method focusOutEvent*(self: VirtualQSizeGrip, event: gen_qevent_types.QFocusEvent): void {.base.} =
-  QSizeGripfocusOutEvent(self[], event)
-proc cQSizeGrip_method_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQSizeGrip_method_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSizeGrip](fcQSizeGrip_vdata(self))
   let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   inst.focusOutEvent(slotval1)
 
-method enterEvent*(self: VirtualQSizeGrip, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QSizeGripenterEvent(self[], event)
-proc cQSizeGrip_method_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQSizeGrip_method_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSizeGrip](fcQSizeGrip_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.enterEvent(slotval1)
 
-method leaveEvent*(self: VirtualQSizeGrip, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QSizeGripleaveEvent(self[], event)
-proc cQSizeGrip_method_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQSizeGrip_method_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSizeGrip](fcQSizeGrip_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.leaveEvent(slotval1)
 
-method resizeEvent*(self: VirtualQSizeGrip, event: gen_qevent_types.QResizeEvent): void {.base.} =
-  QSizeGripresizeEvent(self[], event)
-proc cQSizeGrip_method_callback_resizeEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQSizeGrip_method_callback_resizeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSizeGrip](fcQSizeGrip_vdata(self))
   let slotval1 = gen_qevent_types.QResizeEvent(h: event, owned: false)
   inst.resizeEvent(slotval1)
 
-method closeEvent*(self: VirtualQSizeGrip, event: gen_qevent_types.QCloseEvent): void {.base.} =
-  QSizeGripcloseEvent(self[], event)
-proc cQSizeGrip_method_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQSizeGrip_method_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSizeGrip](fcQSizeGrip_vdata(self))
   let slotval1 = gen_qevent_types.QCloseEvent(h: event, owned: false)
   inst.closeEvent(slotval1)
 
-method contextMenuEvent*(self: VirtualQSizeGrip, event: gen_qevent_types.QContextMenuEvent): void {.base.} =
-  QSizeGripcontextMenuEvent(self[], event)
-proc cQSizeGrip_method_callback_contextMenuEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQSizeGrip_method_callback_contextMenuEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSizeGrip](fcQSizeGrip_vdata(self))
   let slotval1 = gen_qevent_types.QContextMenuEvent(h: event, owned: false)
   inst.contextMenuEvent(slotval1)
 
-method tabletEvent*(self: VirtualQSizeGrip, event: gen_qevent_types.QTabletEvent): void {.base.} =
-  QSizeGriptabletEvent(self[], event)
-proc cQSizeGrip_method_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQSizeGrip_method_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSizeGrip](fcQSizeGrip_vdata(self))
   let slotval1 = gen_qevent_types.QTabletEvent(h: event, owned: false)
   inst.tabletEvent(slotval1)
 
-method actionEvent*(self: VirtualQSizeGrip, event: gen_qevent_types.QActionEvent): void {.base.} =
-  QSizeGripactionEvent(self[], event)
-proc cQSizeGrip_method_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQSizeGrip_method_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSizeGrip](fcQSizeGrip_vdata(self))
   let slotval1 = gen_qevent_types.QActionEvent(h: event, owned: false)
   inst.actionEvent(slotval1)
 
-method dragEnterEvent*(self: VirtualQSizeGrip, event: gen_qevent_types.QDragEnterEvent): void {.base.} =
-  QSizeGripdragEnterEvent(self[], event)
-proc cQSizeGrip_method_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQSizeGrip_method_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSizeGrip](fcQSizeGrip_vdata(self))
   let slotval1 = gen_qevent_types.QDragEnterEvent(h: event, owned: false)
   inst.dragEnterEvent(slotval1)
 
-method dragMoveEvent*(self: VirtualQSizeGrip, event: gen_qevent_types.QDragMoveEvent): void {.base.} =
-  QSizeGripdragMoveEvent(self[], event)
-proc cQSizeGrip_method_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQSizeGrip_method_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSizeGrip](fcQSizeGrip_vdata(self))
   let slotval1 = gen_qevent_types.QDragMoveEvent(h: event, owned: false)
   inst.dragMoveEvent(slotval1)
 
-method dragLeaveEvent*(self: VirtualQSizeGrip, event: gen_qevent_types.QDragLeaveEvent): void {.base.} =
-  QSizeGripdragLeaveEvent(self[], event)
-proc cQSizeGrip_method_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQSizeGrip_method_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSizeGrip](fcQSizeGrip_vdata(self))
   let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event, owned: false)
   inst.dragLeaveEvent(slotval1)
 
-method dropEvent*(self: VirtualQSizeGrip, event: gen_qevent_types.QDropEvent): void {.base.} =
-  QSizeGripdropEvent(self[], event)
-proc cQSizeGrip_method_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQSizeGrip_method_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSizeGrip](fcQSizeGrip_vdata(self))
   let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
   inst.dropEvent(slotval1)
 
-method nativeEvent*(self: VirtualQSizeGrip, eventType: openArray[byte], message: pointer, resultVal: ptr clong): bool {.base.} =
-  QSizeGripnativeEvent(self[], eventType, message, resultVal)
-proc cQSizeGrip_method_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr clong): bool {.cdecl.} =
+proc fcQSizeGrip_method_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr clong): bool {.cdecl.} =
   let inst = cast[VirtualQSizeGrip](fcQSizeGrip_vdata(self))
   var veventType_bytearray = eventType
   var veventTypex_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](veventType_bytearray.data), 0, int(veventType_bytearray.len)-1))
@@ -1124,31 +1156,23 @@ proc cQSizeGrip_method_callback_nativeEvent(self: pointer, eventType: struct_miq
   var virtualReturn = inst.nativeEvent(slotval1, slotval2, slotval3)
   virtualReturn
 
-method changeEvent*(self: VirtualQSizeGrip, param1: gen_qcoreevent_types.QEvent): void {.base.} =
-  QSizeGripchangeEvent(self[], param1)
-proc cQSizeGrip_method_callback_changeEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQSizeGrip_method_callback_changeEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSizeGrip](fcQSizeGrip_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
   inst.changeEvent(slotval1)
 
-method metric*(self: VirtualQSizeGrip, param1: cint): cint {.base.} =
-  QSizeGripmetric(self[], param1)
-proc cQSizeGrip_method_callback_metric(self: pointer, param1: cint): cint {.cdecl.} =
+proc fcQSizeGrip_method_callback_metric(self: pointer, param1: cint): cint {.cdecl.} =
   let inst = cast[VirtualQSizeGrip](fcQSizeGrip_vdata(self))
   let slotval1 = cint(param1)
   var virtualReturn = inst.metric(slotval1)
   virtualReturn
 
-method initPainter*(self: VirtualQSizeGrip, painter: gen_qpainter_types.QPainter): void {.base.} =
-  QSizeGripinitPainter(self[], painter)
-proc cQSizeGrip_method_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
+proc fcQSizeGrip_method_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSizeGrip](fcQSizeGrip_vdata(self))
   let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
   inst.initPainter(slotval1)
 
-method redirected*(self: VirtualQSizeGrip, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.base.} =
-  QSizeGripredirected(self[], offset)
-proc cQSizeGrip_method_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
+proc fcQSizeGrip_method_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQSizeGrip](fcQSizeGrip_vdata(self))
   let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
   var virtualReturn = inst.redirected(slotval1)
@@ -1157,9 +1181,7 @@ proc cQSizeGrip_method_callback_redirected(self: pointer, offset: pointer): poin
   virtualReturn.h = nil
   virtualReturn_h
 
-method sharedPainter*(self: VirtualQSizeGrip): gen_qpainter_types.QPainter {.base.} =
-  QSizeGripsharedPainter(self[])
-proc cQSizeGrip_method_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
+proc fcQSizeGrip_method_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQSizeGrip](fcQSizeGrip_vdata(self))
   var virtualReturn = inst.sharedPainter()
   virtualReturn.owned = false # TODO move?
@@ -1167,16 +1189,12 @@ proc cQSizeGrip_method_callback_sharedPainter(self: pointer): pointer {.cdecl.} 
   virtualReturn.h = nil
   virtualReturn_h
 
-method inputMethodEvent*(self: VirtualQSizeGrip, param1: gen_qevent_types.QInputMethodEvent): void {.base.} =
-  QSizeGripinputMethodEvent(self[], param1)
-proc cQSizeGrip_method_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQSizeGrip_method_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSizeGrip](fcQSizeGrip_vdata(self))
   let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1, owned: false)
   inst.inputMethodEvent(slotval1)
 
-method inputMethodQuery*(self: VirtualQSizeGrip, param1: cint): gen_qvariant_types.QVariant {.base.} =
-  QSizeGripinputMethodQuery(self[], param1)
-proc cQSizeGrip_method_callback_inputMethodQuery(self: pointer, param1: cint): pointer {.cdecl.} =
+proc fcQSizeGrip_method_callback_inputMethodQuery(self: pointer, param1: cint): pointer {.cdecl.} =
   let inst = cast[VirtualQSizeGrip](fcQSizeGrip_vdata(self))
   let slotval1 = cint(param1)
   var virtualReturn = inst.inputMethodQuery(slotval1)
@@ -1185,48 +1203,37 @@ proc cQSizeGrip_method_callback_inputMethodQuery(self: pointer, param1: cint): p
   virtualReturn.h = nil
   virtualReturn_h
 
-method focusNextPrevChild*(self: VirtualQSizeGrip, next: bool): bool {.base.} =
-  QSizeGripfocusNextPrevChild(self[], next)
-proc cQSizeGrip_method_callback_focusNextPrevChild(self: pointer, next: bool): bool {.cdecl.} =
+proc fcQSizeGrip_method_callback_focusNextPrevChild(self: pointer, next: bool): bool {.cdecl.} =
   let inst = cast[VirtualQSizeGrip](fcQSizeGrip_vdata(self))
   let slotval1 = next
   var virtualReturn = inst.focusNextPrevChild(slotval1)
   virtualReturn
 
-method timerEvent*(self: VirtualQSizeGrip, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
-  QSizeGriptimerEvent(self[], event)
-proc cQSizeGrip_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQSizeGrip_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSizeGrip](fcQSizeGrip_vdata(self))
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
-method childEvent*(self: VirtualQSizeGrip, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
-  QSizeGripchildEvent(self[], event)
-proc cQSizeGrip_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQSizeGrip_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSizeGrip](fcQSizeGrip_vdata(self))
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
-method customEvent*(self: VirtualQSizeGrip, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QSizeGripcustomEvent(self[], event)
-proc cQSizeGrip_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQSizeGrip_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSizeGrip](fcQSizeGrip_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
-method connectNotify*(self: VirtualQSizeGrip, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QSizeGripconnectNotify(self[], signal)
-proc cQSizeGrip_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQSizeGrip_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSizeGrip](fcQSizeGrip_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
-method disconnectNotify*(self: VirtualQSizeGrip, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QSizeGripdisconnectNotify(self[], signal)
-proc cQSizeGrip_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQSizeGrip_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSizeGrip](fcQSizeGrip_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
+
 
 proc updateMicroFocus*(self: gen_qsizegrip_types.QSizeGrip): void =
   fcQSizeGrip_protectedbase_updateMicroFocus(self.h)
@@ -1264,105 +1271,105 @@ proc create*(T: type gen_qsizegrip_types.QSizeGrip,
     let vtbl = cast[ref QSizeGripVTable](fcQSizeGrip_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQSizeGrip_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQSizeGrip_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQSizeGrip_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQSizeGrip_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQSizeGrip_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQSizeGrip_vtable_callback_metacall
   if not isNil(vtbl[].sizeHint):
-    vtbl[].vtbl.sizeHint = cQSizeGrip_vtable_callback_sizeHint
+    vtbl[].vtbl.sizeHint = fcQSizeGrip_vtable_callback_sizeHint
   if not isNil(vtbl[].setVisible):
-    vtbl[].vtbl.setVisible = cQSizeGrip_vtable_callback_setVisible
+    vtbl[].vtbl.setVisible = fcQSizeGrip_vtable_callback_setVisible
   if not isNil(vtbl[].paintEvent):
-    vtbl[].vtbl.paintEvent = cQSizeGrip_vtable_callback_paintEvent
+    vtbl[].vtbl.paintEvent = fcQSizeGrip_vtable_callback_paintEvent
   if not isNil(vtbl[].mousePressEvent):
-    vtbl[].vtbl.mousePressEvent = cQSizeGrip_vtable_callback_mousePressEvent
+    vtbl[].vtbl.mousePressEvent = fcQSizeGrip_vtable_callback_mousePressEvent
   if not isNil(vtbl[].mouseMoveEvent):
-    vtbl[].vtbl.mouseMoveEvent = cQSizeGrip_vtable_callback_mouseMoveEvent
+    vtbl[].vtbl.mouseMoveEvent = fcQSizeGrip_vtable_callback_mouseMoveEvent
   if not isNil(vtbl[].mouseReleaseEvent):
-    vtbl[].vtbl.mouseReleaseEvent = cQSizeGrip_vtable_callback_mouseReleaseEvent
+    vtbl[].vtbl.mouseReleaseEvent = fcQSizeGrip_vtable_callback_mouseReleaseEvent
   if not isNil(vtbl[].moveEvent):
-    vtbl[].vtbl.moveEvent = cQSizeGrip_vtable_callback_moveEvent
+    vtbl[].vtbl.moveEvent = fcQSizeGrip_vtable_callback_moveEvent
   if not isNil(vtbl[].showEvent):
-    vtbl[].vtbl.showEvent = cQSizeGrip_vtable_callback_showEvent
+    vtbl[].vtbl.showEvent = fcQSizeGrip_vtable_callback_showEvent
   if not isNil(vtbl[].hideEvent):
-    vtbl[].vtbl.hideEvent = cQSizeGrip_vtable_callback_hideEvent
+    vtbl[].vtbl.hideEvent = fcQSizeGrip_vtable_callback_hideEvent
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQSizeGrip_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQSizeGrip_vtable_callback_eventFilter
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQSizeGrip_vtable_callback_event
+    vtbl[].vtbl.event = fcQSizeGrip_vtable_callback_event
   if not isNil(vtbl[].devType):
-    vtbl[].vtbl.devType = cQSizeGrip_vtable_callback_devType
+    vtbl[].vtbl.devType = fcQSizeGrip_vtable_callback_devType
   if not isNil(vtbl[].minimumSizeHint):
-    vtbl[].vtbl.minimumSizeHint = cQSizeGrip_vtable_callback_minimumSizeHint
+    vtbl[].vtbl.minimumSizeHint = fcQSizeGrip_vtable_callback_minimumSizeHint
   if not isNil(vtbl[].heightForWidth):
-    vtbl[].vtbl.heightForWidth = cQSizeGrip_vtable_callback_heightForWidth
+    vtbl[].vtbl.heightForWidth = fcQSizeGrip_vtable_callback_heightForWidth
   if not isNil(vtbl[].hasHeightForWidth):
-    vtbl[].vtbl.hasHeightForWidth = cQSizeGrip_vtable_callback_hasHeightForWidth
+    vtbl[].vtbl.hasHeightForWidth = fcQSizeGrip_vtable_callback_hasHeightForWidth
   if not isNil(vtbl[].paintEngine):
-    vtbl[].vtbl.paintEngine = cQSizeGrip_vtable_callback_paintEngine
+    vtbl[].vtbl.paintEngine = fcQSizeGrip_vtable_callback_paintEngine
   if not isNil(vtbl[].mouseDoubleClickEvent):
-    vtbl[].vtbl.mouseDoubleClickEvent = cQSizeGrip_vtable_callback_mouseDoubleClickEvent
+    vtbl[].vtbl.mouseDoubleClickEvent = fcQSizeGrip_vtable_callback_mouseDoubleClickEvent
   if not isNil(vtbl[].wheelEvent):
-    vtbl[].vtbl.wheelEvent = cQSizeGrip_vtable_callback_wheelEvent
+    vtbl[].vtbl.wheelEvent = fcQSizeGrip_vtable_callback_wheelEvent
   if not isNil(vtbl[].keyPressEvent):
-    vtbl[].vtbl.keyPressEvent = cQSizeGrip_vtable_callback_keyPressEvent
+    vtbl[].vtbl.keyPressEvent = fcQSizeGrip_vtable_callback_keyPressEvent
   if not isNil(vtbl[].keyReleaseEvent):
-    vtbl[].vtbl.keyReleaseEvent = cQSizeGrip_vtable_callback_keyReleaseEvent
+    vtbl[].vtbl.keyReleaseEvent = fcQSizeGrip_vtable_callback_keyReleaseEvent
   if not isNil(vtbl[].focusInEvent):
-    vtbl[].vtbl.focusInEvent = cQSizeGrip_vtable_callback_focusInEvent
+    vtbl[].vtbl.focusInEvent = fcQSizeGrip_vtable_callback_focusInEvent
   if not isNil(vtbl[].focusOutEvent):
-    vtbl[].vtbl.focusOutEvent = cQSizeGrip_vtable_callback_focusOutEvent
+    vtbl[].vtbl.focusOutEvent = fcQSizeGrip_vtable_callback_focusOutEvent
   if not isNil(vtbl[].enterEvent):
-    vtbl[].vtbl.enterEvent = cQSizeGrip_vtable_callback_enterEvent
+    vtbl[].vtbl.enterEvent = fcQSizeGrip_vtable_callback_enterEvent
   if not isNil(vtbl[].leaveEvent):
-    vtbl[].vtbl.leaveEvent = cQSizeGrip_vtable_callback_leaveEvent
+    vtbl[].vtbl.leaveEvent = fcQSizeGrip_vtable_callback_leaveEvent
   if not isNil(vtbl[].resizeEvent):
-    vtbl[].vtbl.resizeEvent = cQSizeGrip_vtable_callback_resizeEvent
+    vtbl[].vtbl.resizeEvent = fcQSizeGrip_vtable_callback_resizeEvent
   if not isNil(vtbl[].closeEvent):
-    vtbl[].vtbl.closeEvent = cQSizeGrip_vtable_callback_closeEvent
+    vtbl[].vtbl.closeEvent = fcQSizeGrip_vtable_callback_closeEvent
   if not isNil(vtbl[].contextMenuEvent):
-    vtbl[].vtbl.contextMenuEvent = cQSizeGrip_vtable_callback_contextMenuEvent
+    vtbl[].vtbl.contextMenuEvent = fcQSizeGrip_vtable_callback_contextMenuEvent
   if not isNil(vtbl[].tabletEvent):
-    vtbl[].vtbl.tabletEvent = cQSizeGrip_vtable_callback_tabletEvent
+    vtbl[].vtbl.tabletEvent = fcQSizeGrip_vtable_callback_tabletEvent
   if not isNil(vtbl[].actionEvent):
-    vtbl[].vtbl.actionEvent = cQSizeGrip_vtable_callback_actionEvent
+    vtbl[].vtbl.actionEvent = fcQSizeGrip_vtable_callback_actionEvent
   if not isNil(vtbl[].dragEnterEvent):
-    vtbl[].vtbl.dragEnterEvent = cQSizeGrip_vtable_callback_dragEnterEvent
+    vtbl[].vtbl.dragEnterEvent = fcQSizeGrip_vtable_callback_dragEnterEvent
   if not isNil(vtbl[].dragMoveEvent):
-    vtbl[].vtbl.dragMoveEvent = cQSizeGrip_vtable_callback_dragMoveEvent
+    vtbl[].vtbl.dragMoveEvent = fcQSizeGrip_vtable_callback_dragMoveEvent
   if not isNil(vtbl[].dragLeaveEvent):
-    vtbl[].vtbl.dragLeaveEvent = cQSizeGrip_vtable_callback_dragLeaveEvent
+    vtbl[].vtbl.dragLeaveEvent = fcQSizeGrip_vtable_callback_dragLeaveEvent
   if not isNil(vtbl[].dropEvent):
-    vtbl[].vtbl.dropEvent = cQSizeGrip_vtable_callback_dropEvent
+    vtbl[].vtbl.dropEvent = fcQSizeGrip_vtable_callback_dropEvent
   if not isNil(vtbl[].nativeEvent):
-    vtbl[].vtbl.nativeEvent = cQSizeGrip_vtable_callback_nativeEvent
+    vtbl[].vtbl.nativeEvent = fcQSizeGrip_vtable_callback_nativeEvent
   if not isNil(vtbl[].changeEvent):
-    vtbl[].vtbl.changeEvent = cQSizeGrip_vtable_callback_changeEvent
+    vtbl[].vtbl.changeEvent = fcQSizeGrip_vtable_callback_changeEvent
   if not isNil(vtbl[].metric):
-    vtbl[].vtbl.metric = cQSizeGrip_vtable_callback_metric
+    vtbl[].vtbl.metric = fcQSizeGrip_vtable_callback_metric
   if not isNil(vtbl[].initPainter):
-    vtbl[].vtbl.initPainter = cQSizeGrip_vtable_callback_initPainter
+    vtbl[].vtbl.initPainter = fcQSizeGrip_vtable_callback_initPainter
   if not isNil(vtbl[].redirected):
-    vtbl[].vtbl.redirected = cQSizeGrip_vtable_callback_redirected
+    vtbl[].vtbl.redirected = fcQSizeGrip_vtable_callback_redirected
   if not isNil(vtbl[].sharedPainter):
-    vtbl[].vtbl.sharedPainter = cQSizeGrip_vtable_callback_sharedPainter
+    vtbl[].vtbl.sharedPainter = fcQSizeGrip_vtable_callback_sharedPainter
   if not isNil(vtbl[].inputMethodEvent):
-    vtbl[].vtbl.inputMethodEvent = cQSizeGrip_vtable_callback_inputMethodEvent
+    vtbl[].vtbl.inputMethodEvent = fcQSizeGrip_vtable_callback_inputMethodEvent
   if not isNil(vtbl[].inputMethodQuery):
-    vtbl[].vtbl.inputMethodQuery = cQSizeGrip_vtable_callback_inputMethodQuery
+    vtbl[].vtbl.inputMethodQuery = fcQSizeGrip_vtable_callback_inputMethodQuery
   if not isNil(vtbl[].focusNextPrevChild):
-    vtbl[].vtbl.focusNextPrevChild = cQSizeGrip_vtable_callback_focusNextPrevChild
+    vtbl[].vtbl.focusNextPrevChild = fcQSizeGrip_vtable_callback_focusNextPrevChild
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQSizeGrip_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQSizeGrip_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQSizeGrip_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQSizeGrip_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQSizeGrip_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQSizeGrip_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQSizeGrip_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQSizeGrip_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQSizeGrip_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQSizeGrip_vtable_callback_disconnectNotify
   gen_qsizegrip_types.QSizeGrip(h: fcQSizeGrip_new(addr(vtbl[].vtbl), addr(vtbl[]), parent.h), owned: true)
 
 const cQSizeGrip_mvtbl = cQSizeGripVTable(
@@ -1370,56 +1377,57 @@ const cQSizeGrip_mvtbl = cQSizeGripVTable(
     let inst = cast[ptr typeof(VirtualQSizeGrip()[])](self.fcQSizeGrip_vtbl())
     inst[].h = nil
     inst[].owned = false,
-  metaObject: cQSizeGrip_method_callback_metaObject,
-  metacast: cQSizeGrip_method_callback_metacast,
-  metacall: cQSizeGrip_method_callback_metacall,
-  sizeHint: cQSizeGrip_method_callback_sizeHint,
-  setVisible: cQSizeGrip_method_callback_setVisible,
-  paintEvent: cQSizeGrip_method_callback_paintEvent,
-  mousePressEvent: cQSizeGrip_method_callback_mousePressEvent,
-  mouseMoveEvent: cQSizeGrip_method_callback_mouseMoveEvent,
-  mouseReleaseEvent: cQSizeGrip_method_callback_mouseReleaseEvent,
-  moveEvent: cQSizeGrip_method_callback_moveEvent,
-  showEvent: cQSizeGrip_method_callback_showEvent,
-  hideEvent: cQSizeGrip_method_callback_hideEvent,
-  eventFilter: cQSizeGrip_method_callback_eventFilter,
-  event: cQSizeGrip_method_callback_event,
-  devType: cQSizeGrip_method_callback_devType,
-  minimumSizeHint: cQSizeGrip_method_callback_minimumSizeHint,
-  heightForWidth: cQSizeGrip_method_callback_heightForWidth,
-  hasHeightForWidth: cQSizeGrip_method_callback_hasHeightForWidth,
-  paintEngine: cQSizeGrip_method_callback_paintEngine,
-  mouseDoubleClickEvent: cQSizeGrip_method_callback_mouseDoubleClickEvent,
-  wheelEvent: cQSizeGrip_method_callback_wheelEvent,
-  keyPressEvent: cQSizeGrip_method_callback_keyPressEvent,
-  keyReleaseEvent: cQSizeGrip_method_callback_keyReleaseEvent,
-  focusInEvent: cQSizeGrip_method_callback_focusInEvent,
-  focusOutEvent: cQSizeGrip_method_callback_focusOutEvent,
-  enterEvent: cQSizeGrip_method_callback_enterEvent,
-  leaveEvent: cQSizeGrip_method_callback_leaveEvent,
-  resizeEvent: cQSizeGrip_method_callback_resizeEvent,
-  closeEvent: cQSizeGrip_method_callback_closeEvent,
-  contextMenuEvent: cQSizeGrip_method_callback_contextMenuEvent,
-  tabletEvent: cQSizeGrip_method_callback_tabletEvent,
-  actionEvent: cQSizeGrip_method_callback_actionEvent,
-  dragEnterEvent: cQSizeGrip_method_callback_dragEnterEvent,
-  dragMoveEvent: cQSizeGrip_method_callback_dragMoveEvent,
-  dragLeaveEvent: cQSizeGrip_method_callback_dragLeaveEvent,
-  dropEvent: cQSizeGrip_method_callback_dropEvent,
-  nativeEvent: cQSizeGrip_method_callback_nativeEvent,
-  changeEvent: cQSizeGrip_method_callback_changeEvent,
-  metric: cQSizeGrip_method_callback_metric,
-  initPainter: cQSizeGrip_method_callback_initPainter,
-  redirected: cQSizeGrip_method_callback_redirected,
-  sharedPainter: cQSizeGrip_method_callback_sharedPainter,
-  inputMethodEvent: cQSizeGrip_method_callback_inputMethodEvent,
-  inputMethodQuery: cQSizeGrip_method_callback_inputMethodQuery,
-  focusNextPrevChild: cQSizeGrip_method_callback_focusNextPrevChild,
-  timerEvent: cQSizeGrip_method_callback_timerEvent,
-  childEvent: cQSizeGrip_method_callback_childEvent,
-  customEvent: cQSizeGrip_method_callback_customEvent,
-  connectNotify: cQSizeGrip_method_callback_connectNotify,
-  disconnectNotify: cQSizeGrip_method_callback_disconnectNotify,
+
+  metaObject: fcQSizeGrip_method_callback_metaObject,
+  metacast: fcQSizeGrip_method_callback_metacast,
+  metacall: fcQSizeGrip_method_callback_metacall,
+  sizeHint: fcQSizeGrip_method_callback_sizeHint,
+  setVisible: fcQSizeGrip_method_callback_setVisible,
+  paintEvent: fcQSizeGrip_method_callback_paintEvent,
+  mousePressEvent: fcQSizeGrip_method_callback_mousePressEvent,
+  mouseMoveEvent: fcQSizeGrip_method_callback_mouseMoveEvent,
+  mouseReleaseEvent: fcQSizeGrip_method_callback_mouseReleaseEvent,
+  moveEvent: fcQSizeGrip_method_callback_moveEvent,
+  showEvent: fcQSizeGrip_method_callback_showEvent,
+  hideEvent: fcQSizeGrip_method_callback_hideEvent,
+  eventFilter: fcQSizeGrip_method_callback_eventFilter,
+  event: fcQSizeGrip_method_callback_event,
+  devType: fcQSizeGrip_method_callback_devType,
+  minimumSizeHint: fcQSizeGrip_method_callback_minimumSizeHint,
+  heightForWidth: fcQSizeGrip_method_callback_heightForWidth,
+  hasHeightForWidth: fcQSizeGrip_method_callback_hasHeightForWidth,
+  paintEngine: fcQSizeGrip_method_callback_paintEngine,
+  mouseDoubleClickEvent: fcQSizeGrip_method_callback_mouseDoubleClickEvent,
+  wheelEvent: fcQSizeGrip_method_callback_wheelEvent,
+  keyPressEvent: fcQSizeGrip_method_callback_keyPressEvent,
+  keyReleaseEvent: fcQSizeGrip_method_callback_keyReleaseEvent,
+  focusInEvent: fcQSizeGrip_method_callback_focusInEvent,
+  focusOutEvent: fcQSizeGrip_method_callback_focusOutEvent,
+  enterEvent: fcQSizeGrip_method_callback_enterEvent,
+  leaveEvent: fcQSizeGrip_method_callback_leaveEvent,
+  resizeEvent: fcQSizeGrip_method_callback_resizeEvent,
+  closeEvent: fcQSizeGrip_method_callback_closeEvent,
+  contextMenuEvent: fcQSizeGrip_method_callback_contextMenuEvent,
+  tabletEvent: fcQSizeGrip_method_callback_tabletEvent,
+  actionEvent: fcQSizeGrip_method_callback_actionEvent,
+  dragEnterEvent: fcQSizeGrip_method_callback_dragEnterEvent,
+  dragMoveEvent: fcQSizeGrip_method_callback_dragMoveEvent,
+  dragLeaveEvent: fcQSizeGrip_method_callback_dragLeaveEvent,
+  dropEvent: fcQSizeGrip_method_callback_dropEvent,
+  nativeEvent: fcQSizeGrip_method_callback_nativeEvent,
+  changeEvent: fcQSizeGrip_method_callback_changeEvent,
+  metric: fcQSizeGrip_method_callback_metric,
+  initPainter: fcQSizeGrip_method_callback_initPainter,
+  redirected: fcQSizeGrip_method_callback_redirected,
+  sharedPainter: fcQSizeGrip_method_callback_sharedPainter,
+  inputMethodEvent: fcQSizeGrip_method_callback_inputMethodEvent,
+  inputMethodQuery: fcQSizeGrip_method_callback_inputMethodQuery,
+  focusNextPrevChild: fcQSizeGrip_method_callback_focusNextPrevChild,
+  timerEvent: fcQSizeGrip_method_callback_timerEvent,
+  childEvent: fcQSizeGrip_method_callback_childEvent,
+  customEvent: fcQSizeGrip_method_callback_customEvent,
+  connectNotify: fcQSizeGrip_method_callback_connectNotify,
+  disconnectNotify: fcQSizeGrip_method_callback_disconnectNotify,
 )
 proc create*(T: type gen_qsizegrip_types.QSizeGrip,
     parent: gen_qwidget_types.QWidget,

@@ -110,6 +110,7 @@ proc fcQToolButton_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc
 proc fcQToolButton_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QToolButton_trUtf83".}
 proc fcQToolButton_vtbl(self: pointer): pointer {.importc: "QToolButton_vtbl".}
 proc fcQToolButton_vdata(self: pointer): pointer {.importc: "QToolButton_vdata".}
+
 type cQToolButtonVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -302,21 +303,21 @@ proc triggered*(self: gen_qtoolbutton_types.QToolButton, param1: gen_qaction_typ
   fcQToolButton_triggered(self.h, param1.h)
 
 type QToolButtontriggeredSlot* = proc(param1: gen_qaction_types.QAction)
-proc cQToolButton_slot_callback_triggered(slot: int, param1: pointer) {.cdecl.} =
+proc fcQToolButton_slot_callback_triggered(slot: int, param1: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QToolButtontriggeredSlot](cast[pointer](slot))
   let slotval1 = gen_qaction_types.QAction(h: param1, owned: false)
 
   nimfunc[](slotval1)
 
-proc cQToolButton_slot_callback_triggered_release(slot: int) {.cdecl.} =
+proc fcQToolButton_slot_callback_triggered_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QToolButtontriggeredSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc ontriggered*(self: gen_qtoolbutton_types.QToolButton, slot: QToolButtontriggeredSlot) =
+proc onTriggered*(self: gen_qtoolbutton_types.QToolButton, slot: QToolButtontriggeredSlot) =
   var tmp = new QToolButtontriggeredSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQToolButton_connect_triggered(self.h, cast[int](addr tmp[]), cQToolButton_slot_callback_triggered, cQToolButton_slot_callback_triggered_release)
+  fcQToolButton_connect_triggered(self.h, cast[int](addr tmp[]), fcQToolButton_slot_callback_triggered, fcQToolButton_slot_callback_triggered_release)
 
 proc tr*(_: type gen_qtoolbutton_types.QToolButton, s: cstring, c: cstring): string =
   let v_ms = fcQToolButton_tr2(s, c)
@@ -395,6 +396,7 @@ type QToolButtonchildEventProc* = proc(self: QToolButton, event: gen_qcoreevent_
 type QToolButtoncustomEventProc* = proc(self: QToolButton, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QToolButtonconnectNotifyProc* = proc(self: QToolButton, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QToolButtondisconnectNotifyProc* = proc(self: QToolButton, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+
 type QToolButtonVTable* {.inheritable, pure.} = object
   vtbl: cQToolButtonVTable
   metaObject*: QToolButtonmetaObjectProc
@@ -450,10 +452,168 @@ type QToolButtonVTable* {.inheritable, pure.} = object
   customEvent*: QToolButtoncustomEventProc
   connectNotify*: QToolButtonconnectNotifyProc
   disconnectNotify*: QToolButtondisconnectNotifyProc
+
 proc QToolButtonmetaObject*(self: gen_qtoolbutton_types.QToolButton): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQToolButton_virtualbase_metaObject(self.h), owned: false)
 
-proc cQToolButton_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
+proc QToolButtonmetacast*(self: gen_qtoolbutton_types.QToolButton, param1: cstring): pointer =
+  fcQToolButton_virtualbase_metacast(self.h, param1)
+
+proc QToolButtonmetacall*(self: gen_qtoolbutton_types.QToolButton, param1: cint, param2: cint, param3: pointer): cint =
+  fcQToolButton_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+proc QToolButtonsizeHint*(self: gen_qtoolbutton_types.QToolButton): gen_qsize_types.QSize =
+  gen_qsize_types.QSize(h: fcQToolButton_virtualbase_sizeHint(self.h), owned: true)
+
+proc QToolButtonminimumSizeHint*(self: gen_qtoolbutton_types.QToolButton): gen_qsize_types.QSize =
+  gen_qsize_types.QSize(h: fcQToolButton_virtualbase_minimumSizeHint(self.h), owned: true)
+
+proc QToolButtonevent*(self: gen_qtoolbutton_types.QToolButton, e: gen_qcoreevent_types.QEvent): bool =
+  fcQToolButton_virtualbase_event(self.h, e.h)
+
+proc QToolButtonmousePressEvent*(self: gen_qtoolbutton_types.QToolButton, param1: gen_qevent_types.QMouseEvent): void =
+  fcQToolButton_virtualbase_mousePressEvent(self.h, param1.h)
+
+proc QToolButtonmouseReleaseEvent*(self: gen_qtoolbutton_types.QToolButton, param1: gen_qevent_types.QMouseEvent): void =
+  fcQToolButton_virtualbase_mouseReleaseEvent(self.h, param1.h)
+
+proc QToolButtonpaintEvent*(self: gen_qtoolbutton_types.QToolButton, param1: gen_qevent_types.QPaintEvent): void =
+  fcQToolButton_virtualbase_paintEvent(self.h, param1.h)
+
+proc QToolButtonactionEvent*(self: gen_qtoolbutton_types.QToolButton, param1: gen_qevent_types.QActionEvent): void =
+  fcQToolButton_virtualbase_actionEvent(self.h, param1.h)
+
+proc QToolButtonenterEvent*(self: gen_qtoolbutton_types.QToolButton, param1: gen_qcoreevent_types.QEvent): void =
+  fcQToolButton_virtualbase_enterEvent(self.h, param1.h)
+
+proc QToolButtonleaveEvent*(self: gen_qtoolbutton_types.QToolButton, param1: gen_qcoreevent_types.QEvent): void =
+  fcQToolButton_virtualbase_leaveEvent(self.h, param1.h)
+
+proc QToolButtontimerEvent*(self: gen_qtoolbutton_types.QToolButton, param1: gen_qcoreevent_types.QTimerEvent): void =
+  fcQToolButton_virtualbase_timerEvent(self.h, param1.h)
+
+proc QToolButtonchangeEvent*(self: gen_qtoolbutton_types.QToolButton, param1: gen_qcoreevent_types.QEvent): void =
+  fcQToolButton_virtualbase_changeEvent(self.h, param1.h)
+
+proc QToolButtonhitButton*(self: gen_qtoolbutton_types.QToolButton, pos: gen_qpoint_types.QPoint): bool =
+  fcQToolButton_virtualbase_hitButton(self.h, pos.h)
+
+proc QToolButtonnextCheckState*(self: gen_qtoolbutton_types.QToolButton): void =
+  fcQToolButton_virtualbase_nextCheckState(self.h)
+
+proc QToolButtoncheckStateSet*(self: gen_qtoolbutton_types.QToolButton): void =
+  fcQToolButton_virtualbase_checkStateSet(self.h)
+
+proc QToolButtonkeyPressEvent*(self: gen_qtoolbutton_types.QToolButton, e: gen_qevent_types.QKeyEvent): void =
+  fcQToolButton_virtualbase_keyPressEvent(self.h, e.h)
+
+proc QToolButtonkeyReleaseEvent*(self: gen_qtoolbutton_types.QToolButton, e: gen_qevent_types.QKeyEvent): void =
+  fcQToolButton_virtualbase_keyReleaseEvent(self.h, e.h)
+
+proc QToolButtonmouseMoveEvent*(self: gen_qtoolbutton_types.QToolButton, e: gen_qevent_types.QMouseEvent): void =
+  fcQToolButton_virtualbase_mouseMoveEvent(self.h, e.h)
+
+proc QToolButtonfocusInEvent*(self: gen_qtoolbutton_types.QToolButton, e: gen_qevent_types.QFocusEvent): void =
+  fcQToolButton_virtualbase_focusInEvent(self.h, e.h)
+
+proc QToolButtonfocusOutEvent*(self: gen_qtoolbutton_types.QToolButton, e: gen_qevent_types.QFocusEvent): void =
+  fcQToolButton_virtualbase_focusOutEvent(self.h, e.h)
+
+proc QToolButtondevType*(self: gen_qtoolbutton_types.QToolButton): cint =
+  fcQToolButton_virtualbase_devType(self.h)
+
+proc QToolButtonsetVisible*(self: gen_qtoolbutton_types.QToolButton, visible: bool): void =
+  fcQToolButton_virtualbase_setVisible(self.h, visible)
+
+proc QToolButtonheightForWidth*(self: gen_qtoolbutton_types.QToolButton, param1: cint): cint =
+  fcQToolButton_virtualbase_heightForWidth(self.h, param1)
+
+proc QToolButtonhasHeightForWidth*(self: gen_qtoolbutton_types.QToolButton): bool =
+  fcQToolButton_virtualbase_hasHeightForWidth(self.h)
+
+proc QToolButtonpaintEngine*(self: gen_qtoolbutton_types.QToolButton): gen_qpaintengine_types.QPaintEngine =
+  gen_qpaintengine_types.QPaintEngine(h: fcQToolButton_virtualbase_paintEngine(self.h), owned: false)
+
+proc QToolButtonmouseDoubleClickEvent*(self: gen_qtoolbutton_types.QToolButton, event: gen_qevent_types.QMouseEvent): void =
+  fcQToolButton_virtualbase_mouseDoubleClickEvent(self.h, event.h)
+
+proc QToolButtonwheelEvent*(self: gen_qtoolbutton_types.QToolButton, event: gen_qevent_types.QWheelEvent): void =
+  fcQToolButton_virtualbase_wheelEvent(self.h, event.h)
+
+proc QToolButtonmoveEvent*(self: gen_qtoolbutton_types.QToolButton, event: gen_qevent_types.QMoveEvent): void =
+  fcQToolButton_virtualbase_moveEvent(self.h, event.h)
+
+proc QToolButtonresizeEvent*(self: gen_qtoolbutton_types.QToolButton, event: gen_qevent_types.QResizeEvent): void =
+  fcQToolButton_virtualbase_resizeEvent(self.h, event.h)
+
+proc QToolButtoncloseEvent*(self: gen_qtoolbutton_types.QToolButton, event: gen_qevent_types.QCloseEvent): void =
+  fcQToolButton_virtualbase_closeEvent(self.h, event.h)
+
+proc QToolButtoncontextMenuEvent*(self: gen_qtoolbutton_types.QToolButton, event: gen_qevent_types.QContextMenuEvent): void =
+  fcQToolButton_virtualbase_contextMenuEvent(self.h, event.h)
+
+proc QToolButtontabletEvent*(self: gen_qtoolbutton_types.QToolButton, event: gen_qevent_types.QTabletEvent): void =
+  fcQToolButton_virtualbase_tabletEvent(self.h, event.h)
+
+proc QToolButtondragEnterEvent*(self: gen_qtoolbutton_types.QToolButton, event: gen_qevent_types.QDragEnterEvent): void =
+  fcQToolButton_virtualbase_dragEnterEvent(self.h, event.h)
+
+proc QToolButtondragMoveEvent*(self: gen_qtoolbutton_types.QToolButton, event: gen_qevent_types.QDragMoveEvent): void =
+  fcQToolButton_virtualbase_dragMoveEvent(self.h, event.h)
+
+proc QToolButtondragLeaveEvent*(self: gen_qtoolbutton_types.QToolButton, event: gen_qevent_types.QDragLeaveEvent): void =
+  fcQToolButton_virtualbase_dragLeaveEvent(self.h, event.h)
+
+proc QToolButtondropEvent*(self: gen_qtoolbutton_types.QToolButton, event: gen_qevent_types.QDropEvent): void =
+  fcQToolButton_virtualbase_dropEvent(self.h, event.h)
+
+proc QToolButtonshowEvent*(self: gen_qtoolbutton_types.QToolButton, event: gen_qevent_types.QShowEvent): void =
+  fcQToolButton_virtualbase_showEvent(self.h, event.h)
+
+proc QToolButtonhideEvent*(self: gen_qtoolbutton_types.QToolButton, event: gen_qevent_types.QHideEvent): void =
+  fcQToolButton_virtualbase_hideEvent(self.h, event.h)
+
+proc QToolButtonnativeEvent*(self: gen_qtoolbutton_types.QToolButton, eventType: openArray[byte], message: pointer, resultVal: ptr clong): bool =
+  fcQToolButton_virtualbase_nativeEvent(self.h, struct_miqt_string(data: cast[cstring](if len(eventType) == 0: nil else: unsafeAddr eventType[0]), len: csize_t(len(eventType))), message, resultVal)
+
+proc QToolButtonmetric*(self: gen_qtoolbutton_types.QToolButton, param1: cint): cint =
+  fcQToolButton_virtualbase_metric(self.h, cint(param1))
+
+proc QToolButtoninitPainter*(self: gen_qtoolbutton_types.QToolButton, painter: gen_qpainter_types.QPainter): void =
+  fcQToolButton_virtualbase_initPainter(self.h, painter.h)
+
+proc QToolButtonredirected*(self: gen_qtoolbutton_types.QToolButton, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice =
+  gen_qpaintdevice_types.QPaintDevice(h: fcQToolButton_virtualbase_redirected(self.h, offset.h), owned: false)
+
+proc QToolButtonsharedPainter*(self: gen_qtoolbutton_types.QToolButton): gen_qpainter_types.QPainter =
+  gen_qpainter_types.QPainter(h: fcQToolButton_virtualbase_sharedPainter(self.h), owned: false)
+
+proc QToolButtoninputMethodEvent*(self: gen_qtoolbutton_types.QToolButton, param1: gen_qevent_types.QInputMethodEvent): void =
+  fcQToolButton_virtualbase_inputMethodEvent(self.h, param1.h)
+
+proc QToolButtoninputMethodQuery*(self: gen_qtoolbutton_types.QToolButton, param1: cint): gen_qvariant_types.QVariant =
+  gen_qvariant_types.QVariant(h: fcQToolButton_virtualbase_inputMethodQuery(self.h, cint(param1)), owned: true)
+
+proc QToolButtonfocusNextPrevChild*(self: gen_qtoolbutton_types.QToolButton, next: bool): bool =
+  fcQToolButton_virtualbase_focusNextPrevChild(self.h, next)
+
+proc QToolButtoneventFilter*(self: gen_qtoolbutton_types.QToolButton, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
+  fcQToolButton_virtualbase_eventFilter(self.h, watched.h, event.h)
+
+proc QToolButtonchildEvent*(self: gen_qtoolbutton_types.QToolButton, event: gen_qcoreevent_types.QChildEvent): void =
+  fcQToolButton_virtualbase_childEvent(self.h, event.h)
+
+proc QToolButtoncustomEvent*(self: gen_qtoolbutton_types.QToolButton, event: gen_qcoreevent_types.QEvent): void =
+  fcQToolButton_virtualbase_customEvent(self.h, event.h)
+
+proc QToolButtonconnectNotify*(self: gen_qtoolbutton_types.QToolButton, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQToolButton_virtualbase_connectNotify(self.h, signal.h)
+
+proc QToolButtondisconnectNotify*(self: gen_qtoolbutton_types.QToolButton, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQToolButton_virtualbase_disconnectNotify(self.h, signal.h)
+
+
+proc fcQToolButton_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QToolButtonVTable](fcQToolButton_vdata(self))
   let self = QToolButton(h: self)
   var virtualReturn = vtbl[].metaObject(self)
@@ -462,20 +622,14 @@ proc cQToolButton_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QToolButtonmetacast*(self: gen_qtoolbutton_types.QToolButton, param1: cstring): pointer =
-  fcQToolButton_virtualbase_metacast(self.h, param1)
-
-proc cQToolButton_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+proc fcQToolButton_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QToolButtonVTable](fcQToolButton_vdata(self))
   let self = QToolButton(h: self)
   let slotval1 = (param1)
   var virtualReturn = vtbl[].metacast(self, slotval1)
   virtualReturn
 
-proc QToolButtonmetacall*(self: gen_qtoolbutton_types.QToolButton, param1: cint, param2: cint, param3: pointer): cint =
-  fcQToolButton_virtualbase_metacall(self.h, cint(param1), param2, param3)
-
-proc cQToolButton_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+proc fcQToolButton_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QToolButtonVTable](fcQToolButton_vdata(self))
   let self = QToolButton(h: self)
   let slotval1 = cint(param1)
@@ -484,10 +638,7 @@ proc cQToolButton_vtable_callback_metacall(self: pointer, param1: cint, param2: 
   var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QToolButtonsizeHint*(self: gen_qtoolbutton_types.QToolButton): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQToolButton_virtualbase_sizeHint(self.h), owned: true)
-
-proc cQToolButton_vtable_callback_sizeHint(self: pointer): pointer {.cdecl.} =
+proc fcQToolButton_vtable_callback_sizeHint(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QToolButtonVTable](fcQToolButton_vdata(self))
   let self = QToolButton(h: self)
   var virtualReturn = vtbl[].sizeHint(self)
@@ -496,10 +647,7 @@ proc cQToolButton_vtable_callback_sizeHint(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QToolButtonminimumSizeHint*(self: gen_qtoolbutton_types.QToolButton): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQToolButton_virtualbase_minimumSizeHint(self.h), owned: true)
-
-proc cQToolButton_vtable_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
+proc fcQToolButton_vtable_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QToolButtonVTable](fcQToolButton_vdata(self))
   let self = QToolButton(h: self)
   var virtualReturn = vtbl[].minimumSizeHint(self)
@@ -508,200 +656,134 @@ proc cQToolButton_vtable_callback_minimumSizeHint(self: pointer): pointer {.cdec
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QToolButtonevent*(self: gen_qtoolbutton_types.QToolButton, e: gen_qcoreevent_types.QEvent): bool =
-  fcQToolButton_virtualbase_event(self.h, e.h)
-
-proc cQToolButton_vtable_callback_event(self: pointer, e: pointer): bool {.cdecl.} =
+proc fcQToolButton_vtable_callback_event(self: pointer, e: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QToolButtonVTable](fcQToolButton_vdata(self))
   let self = QToolButton(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: e, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
-proc QToolButtonmousePressEvent*(self: gen_qtoolbutton_types.QToolButton, param1: gen_qevent_types.QMouseEvent): void =
-  fcQToolButton_virtualbase_mousePressEvent(self.h, param1.h)
-
-proc cQToolButton_vtable_callback_mousePressEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQToolButton_vtable_callback_mousePressEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QToolButtonVTable](fcQToolButton_vdata(self))
   let self = QToolButton(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: param1, owned: false)
   vtbl[].mousePressEvent(self, slotval1)
 
-proc QToolButtonmouseReleaseEvent*(self: gen_qtoolbutton_types.QToolButton, param1: gen_qevent_types.QMouseEvent): void =
-  fcQToolButton_virtualbase_mouseReleaseEvent(self.h, param1.h)
-
-proc cQToolButton_vtable_callback_mouseReleaseEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQToolButton_vtable_callback_mouseReleaseEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QToolButtonVTable](fcQToolButton_vdata(self))
   let self = QToolButton(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: param1, owned: false)
   vtbl[].mouseReleaseEvent(self, slotval1)
 
-proc QToolButtonpaintEvent*(self: gen_qtoolbutton_types.QToolButton, param1: gen_qevent_types.QPaintEvent): void =
-  fcQToolButton_virtualbase_paintEvent(self.h, param1.h)
-
-proc cQToolButton_vtable_callback_paintEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQToolButton_vtable_callback_paintEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QToolButtonVTable](fcQToolButton_vdata(self))
   let self = QToolButton(h: self)
   let slotval1 = gen_qevent_types.QPaintEvent(h: param1, owned: false)
   vtbl[].paintEvent(self, slotval1)
 
-proc QToolButtonactionEvent*(self: gen_qtoolbutton_types.QToolButton, param1: gen_qevent_types.QActionEvent): void =
-  fcQToolButton_virtualbase_actionEvent(self.h, param1.h)
-
-proc cQToolButton_vtable_callback_actionEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQToolButton_vtable_callback_actionEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QToolButtonVTable](fcQToolButton_vdata(self))
   let self = QToolButton(h: self)
   let slotval1 = gen_qevent_types.QActionEvent(h: param1, owned: false)
   vtbl[].actionEvent(self, slotval1)
 
-proc QToolButtonenterEvent*(self: gen_qtoolbutton_types.QToolButton, param1: gen_qcoreevent_types.QEvent): void =
-  fcQToolButton_virtualbase_enterEvent(self.h, param1.h)
-
-proc cQToolButton_vtable_callback_enterEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQToolButton_vtable_callback_enterEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QToolButtonVTable](fcQToolButton_vdata(self))
   let self = QToolButton(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
   vtbl[].enterEvent(self, slotval1)
 
-proc QToolButtonleaveEvent*(self: gen_qtoolbutton_types.QToolButton, param1: gen_qcoreevent_types.QEvent): void =
-  fcQToolButton_virtualbase_leaveEvent(self.h, param1.h)
-
-proc cQToolButton_vtable_callback_leaveEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQToolButton_vtable_callback_leaveEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QToolButtonVTable](fcQToolButton_vdata(self))
   let self = QToolButton(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
   vtbl[].leaveEvent(self, slotval1)
 
-proc QToolButtontimerEvent*(self: gen_qtoolbutton_types.QToolButton, param1: gen_qcoreevent_types.QTimerEvent): void =
-  fcQToolButton_virtualbase_timerEvent(self.h, param1.h)
-
-proc cQToolButton_vtable_callback_timerEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQToolButton_vtable_callback_timerEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QToolButtonVTable](fcQToolButton_vdata(self))
   let self = QToolButton(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: param1, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
-proc QToolButtonchangeEvent*(self: gen_qtoolbutton_types.QToolButton, param1: gen_qcoreevent_types.QEvent): void =
-  fcQToolButton_virtualbase_changeEvent(self.h, param1.h)
-
-proc cQToolButton_vtable_callback_changeEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQToolButton_vtable_callback_changeEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QToolButtonVTable](fcQToolButton_vdata(self))
   let self = QToolButton(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
   vtbl[].changeEvent(self, slotval1)
 
-proc QToolButtonhitButton*(self: gen_qtoolbutton_types.QToolButton, pos: gen_qpoint_types.QPoint): bool =
-  fcQToolButton_virtualbase_hitButton(self.h, pos.h)
-
-proc cQToolButton_vtable_callback_hitButton(self: pointer, pos: pointer): bool {.cdecl.} =
+proc fcQToolButton_vtable_callback_hitButton(self: pointer, pos: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QToolButtonVTable](fcQToolButton_vdata(self))
   let self = QToolButton(h: self)
   let slotval1 = gen_qpoint_types.QPoint(h: pos, owned: false)
   var virtualReturn = vtbl[].hitButton(self, slotval1)
   virtualReturn
 
-proc QToolButtonnextCheckState*(self: gen_qtoolbutton_types.QToolButton): void =
-  fcQToolButton_virtualbase_nextCheckState(self.h)
-
-proc cQToolButton_vtable_callback_nextCheckState(self: pointer): void {.cdecl.} =
+proc fcQToolButton_vtable_callback_nextCheckState(self: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QToolButtonVTable](fcQToolButton_vdata(self))
   let self = QToolButton(h: self)
   vtbl[].nextCheckState(self)
 
-proc QToolButtoncheckStateSet*(self: gen_qtoolbutton_types.QToolButton): void =
-  fcQToolButton_virtualbase_checkStateSet(self.h)
-
-proc cQToolButton_vtable_callback_checkStateSet(self: pointer): void {.cdecl.} =
+proc fcQToolButton_vtable_callback_checkStateSet(self: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QToolButtonVTable](fcQToolButton_vdata(self))
   let self = QToolButton(h: self)
   vtbl[].checkStateSet(self)
 
-proc QToolButtonkeyPressEvent*(self: gen_qtoolbutton_types.QToolButton, e: gen_qevent_types.QKeyEvent): void =
-  fcQToolButton_virtualbase_keyPressEvent(self.h, e.h)
-
-proc cQToolButton_vtable_callback_keyPressEvent(self: pointer, e: pointer): void {.cdecl.} =
+proc fcQToolButton_vtable_callback_keyPressEvent(self: pointer, e: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QToolButtonVTable](fcQToolButton_vdata(self))
   let self = QToolButton(h: self)
   let slotval1 = gen_qevent_types.QKeyEvent(h: e, owned: false)
   vtbl[].keyPressEvent(self, slotval1)
 
-proc QToolButtonkeyReleaseEvent*(self: gen_qtoolbutton_types.QToolButton, e: gen_qevent_types.QKeyEvent): void =
-  fcQToolButton_virtualbase_keyReleaseEvent(self.h, e.h)
-
-proc cQToolButton_vtable_callback_keyReleaseEvent(self: pointer, e: pointer): void {.cdecl.} =
+proc fcQToolButton_vtable_callback_keyReleaseEvent(self: pointer, e: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QToolButtonVTable](fcQToolButton_vdata(self))
   let self = QToolButton(h: self)
   let slotval1 = gen_qevent_types.QKeyEvent(h: e, owned: false)
   vtbl[].keyReleaseEvent(self, slotval1)
 
-proc QToolButtonmouseMoveEvent*(self: gen_qtoolbutton_types.QToolButton, e: gen_qevent_types.QMouseEvent): void =
-  fcQToolButton_virtualbase_mouseMoveEvent(self.h, e.h)
-
-proc cQToolButton_vtable_callback_mouseMoveEvent(self: pointer, e: pointer): void {.cdecl.} =
+proc fcQToolButton_vtable_callback_mouseMoveEvent(self: pointer, e: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QToolButtonVTable](fcQToolButton_vdata(self))
   let self = QToolButton(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: e, owned: false)
   vtbl[].mouseMoveEvent(self, slotval1)
 
-proc QToolButtonfocusInEvent*(self: gen_qtoolbutton_types.QToolButton, e: gen_qevent_types.QFocusEvent): void =
-  fcQToolButton_virtualbase_focusInEvent(self.h, e.h)
-
-proc cQToolButton_vtable_callback_focusInEvent(self: pointer, e: pointer): void {.cdecl.} =
+proc fcQToolButton_vtable_callback_focusInEvent(self: pointer, e: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QToolButtonVTable](fcQToolButton_vdata(self))
   let self = QToolButton(h: self)
   let slotval1 = gen_qevent_types.QFocusEvent(h: e, owned: false)
   vtbl[].focusInEvent(self, slotval1)
 
-proc QToolButtonfocusOutEvent*(self: gen_qtoolbutton_types.QToolButton, e: gen_qevent_types.QFocusEvent): void =
-  fcQToolButton_virtualbase_focusOutEvent(self.h, e.h)
-
-proc cQToolButton_vtable_callback_focusOutEvent(self: pointer, e: pointer): void {.cdecl.} =
+proc fcQToolButton_vtable_callback_focusOutEvent(self: pointer, e: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QToolButtonVTable](fcQToolButton_vdata(self))
   let self = QToolButton(h: self)
   let slotval1 = gen_qevent_types.QFocusEvent(h: e, owned: false)
   vtbl[].focusOutEvent(self, slotval1)
 
-proc QToolButtondevType*(self: gen_qtoolbutton_types.QToolButton): cint =
-  fcQToolButton_virtualbase_devType(self.h)
-
-proc cQToolButton_vtable_callback_devType(self: pointer): cint {.cdecl.} =
+proc fcQToolButton_vtable_callback_devType(self: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QToolButtonVTable](fcQToolButton_vdata(self))
   let self = QToolButton(h: self)
   var virtualReturn = vtbl[].devType(self)
   virtualReturn
 
-proc QToolButtonsetVisible*(self: gen_qtoolbutton_types.QToolButton, visible: bool): void =
-  fcQToolButton_virtualbase_setVisible(self.h, visible)
-
-proc cQToolButton_vtable_callback_setVisible(self: pointer, visible: bool): void {.cdecl.} =
+proc fcQToolButton_vtable_callback_setVisible(self: pointer, visible: bool): void {.cdecl.} =
   let vtbl = cast[ptr QToolButtonVTable](fcQToolButton_vdata(self))
   let self = QToolButton(h: self)
   let slotval1 = visible
   vtbl[].setVisible(self, slotval1)
 
-proc QToolButtonheightForWidth*(self: gen_qtoolbutton_types.QToolButton, param1: cint): cint =
-  fcQToolButton_virtualbase_heightForWidth(self.h, param1)
-
-proc cQToolButton_vtable_callback_heightForWidth(self: pointer, param1: cint): cint {.cdecl.} =
+proc fcQToolButton_vtable_callback_heightForWidth(self: pointer, param1: cint): cint {.cdecl.} =
   let vtbl = cast[ptr QToolButtonVTable](fcQToolButton_vdata(self))
   let self = QToolButton(h: self)
   let slotval1 = param1
   var virtualReturn = vtbl[].heightForWidth(self, slotval1)
   virtualReturn
 
-proc QToolButtonhasHeightForWidth*(self: gen_qtoolbutton_types.QToolButton): bool =
-  fcQToolButton_virtualbase_hasHeightForWidth(self.h)
-
-proc cQToolButton_vtable_callback_hasHeightForWidth(self: pointer): bool {.cdecl.} =
+proc fcQToolButton_vtable_callback_hasHeightForWidth(self: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QToolButtonVTable](fcQToolButton_vdata(self))
   let self = QToolButton(h: self)
   var virtualReturn = vtbl[].hasHeightForWidth(self)
   virtualReturn
 
-proc QToolButtonpaintEngine*(self: gen_qtoolbutton_types.QToolButton): gen_qpaintengine_types.QPaintEngine =
-  gen_qpaintengine_types.QPaintEngine(h: fcQToolButton_virtualbase_paintEngine(self.h), owned: false)
-
-proc cQToolButton_vtable_callback_paintEngine(self: pointer): pointer {.cdecl.} =
+proc fcQToolButton_vtable_callback_paintEngine(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QToolButtonVTable](fcQToolButton_vdata(self))
   let self = QToolButton(h: self)
   var virtualReturn = vtbl[].paintEngine(self)
@@ -710,127 +792,85 @@ proc cQToolButton_vtable_callback_paintEngine(self: pointer): pointer {.cdecl.} 
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QToolButtonmouseDoubleClickEvent*(self: gen_qtoolbutton_types.QToolButton, event: gen_qevent_types.QMouseEvent): void =
-  fcQToolButton_virtualbase_mouseDoubleClickEvent(self.h, event.h)
-
-proc cQToolButton_vtable_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQToolButton_vtable_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QToolButtonVTable](fcQToolButton_vdata(self))
   let self = QToolButton(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseDoubleClickEvent(self, slotval1)
 
-proc QToolButtonwheelEvent*(self: gen_qtoolbutton_types.QToolButton, event: gen_qevent_types.QWheelEvent): void =
-  fcQToolButton_virtualbase_wheelEvent(self.h, event.h)
-
-proc cQToolButton_vtable_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQToolButton_vtable_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QToolButtonVTable](fcQToolButton_vdata(self))
   let self = QToolButton(h: self)
   let slotval1 = gen_qevent_types.QWheelEvent(h: event, owned: false)
   vtbl[].wheelEvent(self, slotval1)
 
-proc QToolButtonmoveEvent*(self: gen_qtoolbutton_types.QToolButton, event: gen_qevent_types.QMoveEvent): void =
-  fcQToolButton_virtualbase_moveEvent(self.h, event.h)
-
-proc cQToolButton_vtable_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQToolButton_vtable_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QToolButtonVTable](fcQToolButton_vdata(self))
   let self = QToolButton(h: self)
   let slotval1 = gen_qevent_types.QMoveEvent(h: event, owned: false)
   vtbl[].moveEvent(self, slotval1)
 
-proc QToolButtonresizeEvent*(self: gen_qtoolbutton_types.QToolButton, event: gen_qevent_types.QResizeEvent): void =
-  fcQToolButton_virtualbase_resizeEvent(self.h, event.h)
-
-proc cQToolButton_vtable_callback_resizeEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQToolButton_vtable_callback_resizeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QToolButtonVTable](fcQToolButton_vdata(self))
   let self = QToolButton(h: self)
   let slotval1 = gen_qevent_types.QResizeEvent(h: event, owned: false)
   vtbl[].resizeEvent(self, slotval1)
 
-proc QToolButtoncloseEvent*(self: gen_qtoolbutton_types.QToolButton, event: gen_qevent_types.QCloseEvent): void =
-  fcQToolButton_virtualbase_closeEvent(self.h, event.h)
-
-proc cQToolButton_vtable_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQToolButton_vtable_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QToolButtonVTable](fcQToolButton_vdata(self))
   let self = QToolButton(h: self)
   let slotval1 = gen_qevent_types.QCloseEvent(h: event, owned: false)
   vtbl[].closeEvent(self, slotval1)
 
-proc QToolButtoncontextMenuEvent*(self: gen_qtoolbutton_types.QToolButton, event: gen_qevent_types.QContextMenuEvent): void =
-  fcQToolButton_virtualbase_contextMenuEvent(self.h, event.h)
-
-proc cQToolButton_vtable_callback_contextMenuEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQToolButton_vtable_callback_contextMenuEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QToolButtonVTable](fcQToolButton_vdata(self))
   let self = QToolButton(h: self)
   let slotval1 = gen_qevent_types.QContextMenuEvent(h: event, owned: false)
   vtbl[].contextMenuEvent(self, slotval1)
 
-proc QToolButtontabletEvent*(self: gen_qtoolbutton_types.QToolButton, event: gen_qevent_types.QTabletEvent): void =
-  fcQToolButton_virtualbase_tabletEvent(self.h, event.h)
-
-proc cQToolButton_vtable_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQToolButton_vtable_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QToolButtonVTable](fcQToolButton_vdata(self))
   let self = QToolButton(h: self)
   let slotval1 = gen_qevent_types.QTabletEvent(h: event, owned: false)
   vtbl[].tabletEvent(self, slotval1)
 
-proc QToolButtondragEnterEvent*(self: gen_qtoolbutton_types.QToolButton, event: gen_qevent_types.QDragEnterEvent): void =
-  fcQToolButton_virtualbase_dragEnterEvent(self.h, event.h)
-
-proc cQToolButton_vtable_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQToolButton_vtable_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QToolButtonVTable](fcQToolButton_vdata(self))
   let self = QToolButton(h: self)
   let slotval1 = gen_qevent_types.QDragEnterEvent(h: event, owned: false)
   vtbl[].dragEnterEvent(self, slotval1)
 
-proc QToolButtondragMoveEvent*(self: gen_qtoolbutton_types.QToolButton, event: gen_qevent_types.QDragMoveEvent): void =
-  fcQToolButton_virtualbase_dragMoveEvent(self.h, event.h)
-
-proc cQToolButton_vtable_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQToolButton_vtable_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QToolButtonVTable](fcQToolButton_vdata(self))
   let self = QToolButton(h: self)
   let slotval1 = gen_qevent_types.QDragMoveEvent(h: event, owned: false)
   vtbl[].dragMoveEvent(self, slotval1)
 
-proc QToolButtondragLeaveEvent*(self: gen_qtoolbutton_types.QToolButton, event: gen_qevent_types.QDragLeaveEvent): void =
-  fcQToolButton_virtualbase_dragLeaveEvent(self.h, event.h)
-
-proc cQToolButton_vtable_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQToolButton_vtable_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QToolButtonVTable](fcQToolButton_vdata(self))
   let self = QToolButton(h: self)
   let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event, owned: false)
   vtbl[].dragLeaveEvent(self, slotval1)
 
-proc QToolButtondropEvent*(self: gen_qtoolbutton_types.QToolButton, event: gen_qevent_types.QDropEvent): void =
-  fcQToolButton_virtualbase_dropEvent(self.h, event.h)
-
-proc cQToolButton_vtable_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQToolButton_vtable_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QToolButtonVTable](fcQToolButton_vdata(self))
   let self = QToolButton(h: self)
   let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
   vtbl[].dropEvent(self, slotval1)
 
-proc QToolButtonshowEvent*(self: gen_qtoolbutton_types.QToolButton, event: gen_qevent_types.QShowEvent): void =
-  fcQToolButton_virtualbase_showEvent(self.h, event.h)
-
-proc cQToolButton_vtable_callback_showEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQToolButton_vtable_callback_showEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QToolButtonVTable](fcQToolButton_vdata(self))
   let self = QToolButton(h: self)
   let slotval1 = gen_qevent_types.QShowEvent(h: event, owned: false)
   vtbl[].showEvent(self, slotval1)
 
-proc QToolButtonhideEvent*(self: gen_qtoolbutton_types.QToolButton, event: gen_qevent_types.QHideEvent): void =
-  fcQToolButton_virtualbase_hideEvent(self.h, event.h)
-
-proc cQToolButton_vtable_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQToolButton_vtable_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QToolButtonVTable](fcQToolButton_vdata(self))
   let self = QToolButton(h: self)
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   vtbl[].hideEvent(self, slotval1)
 
-proc QToolButtonnativeEvent*(self: gen_qtoolbutton_types.QToolButton, eventType: openArray[byte], message: pointer, resultVal: ptr clong): bool =
-  fcQToolButton_virtualbase_nativeEvent(self.h, struct_miqt_string(data: cast[cstring](if len(eventType) == 0: nil else: unsafeAddr eventType[0]), len: csize_t(len(eventType))), message, resultVal)
-
-proc cQToolButton_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr clong): bool {.cdecl.} =
+proc fcQToolButton_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr clong): bool {.cdecl.} =
   let vtbl = cast[ptr QToolButtonVTable](fcQToolButton_vdata(self))
   let self = QToolButton(h: self)
   var veventType_bytearray = eventType
@@ -842,29 +882,20 @@ proc cQToolButton_vtable_callback_nativeEvent(self: pointer, eventType: struct_m
   var virtualReturn = vtbl[].nativeEvent(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QToolButtonmetric*(self: gen_qtoolbutton_types.QToolButton, param1: cint): cint =
-  fcQToolButton_virtualbase_metric(self.h, cint(param1))
-
-proc cQToolButton_vtable_callback_metric(self: pointer, param1: cint): cint {.cdecl.} =
+proc fcQToolButton_vtable_callback_metric(self: pointer, param1: cint): cint {.cdecl.} =
   let vtbl = cast[ptr QToolButtonVTable](fcQToolButton_vdata(self))
   let self = QToolButton(h: self)
   let slotval1 = cint(param1)
   var virtualReturn = vtbl[].metric(self, slotval1)
   virtualReturn
 
-proc QToolButtoninitPainter*(self: gen_qtoolbutton_types.QToolButton, painter: gen_qpainter_types.QPainter): void =
-  fcQToolButton_virtualbase_initPainter(self.h, painter.h)
-
-proc cQToolButton_vtable_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
+proc fcQToolButton_vtable_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QToolButtonVTable](fcQToolButton_vdata(self))
   let self = QToolButton(h: self)
   let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
   vtbl[].initPainter(self, slotval1)
 
-proc QToolButtonredirected*(self: gen_qtoolbutton_types.QToolButton, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice =
-  gen_qpaintdevice_types.QPaintDevice(h: fcQToolButton_virtualbase_redirected(self.h, offset.h), owned: false)
-
-proc cQToolButton_vtable_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
+proc fcQToolButton_vtable_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QToolButtonVTable](fcQToolButton_vdata(self))
   let self = QToolButton(h: self)
   let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
@@ -874,10 +905,7 @@ proc cQToolButton_vtable_callback_redirected(self: pointer, offset: pointer): po
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QToolButtonsharedPainter*(self: gen_qtoolbutton_types.QToolButton): gen_qpainter_types.QPainter =
-  gen_qpainter_types.QPainter(h: fcQToolButton_virtualbase_sharedPainter(self.h), owned: false)
-
-proc cQToolButton_vtable_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
+proc fcQToolButton_vtable_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QToolButtonVTable](fcQToolButton_vdata(self))
   let self = QToolButton(h: self)
   var virtualReturn = vtbl[].sharedPainter(self)
@@ -886,19 +914,13 @@ proc cQToolButton_vtable_callback_sharedPainter(self: pointer): pointer {.cdecl.
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QToolButtoninputMethodEvent*(self: gen_qtoolbutton_types.QToolButton, param1: gen_qevent_types.QInputMethodEvent): void =
-  fcQToolButton_virtualbase_inputMethodEvent(self.h, param1.h)
-
-proc cQToolButton_vtable_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQToolButton_vtable_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QToolButtonVTable](fcQToolButton_vdata(self))
   let self = QToolButton(h: self)
   let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1, owned: false)
   vtbl[].inputMethodEvent(self, slotval1)
 
-proc QToolButtoninputMethodQuery*(self: gen_qtoolbutton_types.QToolButton, param1: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQToolButton_virtualbase_inputMethodQuery(self.h, cint(param1)), owned: true)
-
-proc cQToolButton_vtable_callback_inputMethodQuery(self: pointer, param1: cint): pointer {.cdecl.} =
+proc fcQToolButton_vtable_callback_inputMethodQuery(self: pointer, param1: cint): pointer {.cdecl.} =
   let vtbl = cast[ptr QToolButtonVTable](fcQToolButton_vdata(self))
   let self = QToolButton(h: self)
   let slotval1 = cint(param1)
@@ -908,20 +930,14 @@ proc cQToolButton_vtable_callback_inputMethodQuery(self: pointer, param1: cint):
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QToolButtonfocusNextPrevChild*(self: gen_qtoolbutton_types.QToolButton, next: bool): bool =
-  fcQToolButton_virtualbase_focusNextPrevChild(self.h, next)
-
-proc cQToolButton_vtable_callback_focusNextPrevChild(self: pointer, next: bool): bool {.cdecl.} =
+proc fcQToolButton_vtable_callback_focusNextPrevChild(self: pointer, next: bool): bool {.cdecl.} =
   let vtbl = cast[ptr QToolButtonVTable](fcQToolButton_vdata(self))
   let self = QToolButton(h: self)
   let slotval1 = next
   var virtualReturn = vtbl[].focusNextPrevChild(self, slotval1)
   virtualReturn
 
-proc QToolButtoneventFilter*(self: gen_qtoolbutton_types.QToolButton, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
-  fcQToolButton_virtualbase_eventFilter(self.h, watched.h, event.h)
-
-proc cQToolButton_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+proc fcQToolButton_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QToolButtonVTable](fcQToolButton_vdata(self))
   let self = QToolButton(h: self)
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
@@ -929,37 +945,25 @@ proc cQToolButton_vtable_callback_eventFilter(self: pointer, watched: pointer, e
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
-proc QToolButtonchildEvent*(self: gen_qtoolbutton_types.QToolButton, event: gen_qcoreevent_types.QChildEvent): void =
-  fcQToolButton_virtualbase_childEvent(self.h, event.h)
-
-proc cQToolButton_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQToolButton_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QToolButtonVTable](fcQToolButton_vdata(self))
   let self = QToolButton(h: self)
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
-proc QToolButtoncustomEvent*(self: gen_qtoolbutton_types.QToolButton, event: gen_qcoreevent_types.QEvent): void =
-  fcQToolButton_virtualbase_customEvent(self.h, event.h)
-
-proc cQToolButton_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQToolButton_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QToolButtonVTable](fcQToolButton_vdata(self))
   let self = QToolButton(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
-proc QToolButtonconnectNotify*(self: gen_qtoolbutton_types.QToolButton, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQToolButton_virtualbase_connectNotify(self.h, signal.h)
-
-proc cQToolButton_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQToolButton_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QToolButtonVTable](fcQToolButton_vdata(self))
   let self = QToolButton(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
-proc QToolButtondisconnectNotify*(self: gen_qtoolbutton_types.QToolButton, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQToolButton_virtualbase_disconnectNotify(self.h, signal.h)
-
-proc cQToolButton_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQToolButton_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QToolButtonVTable](fcQToolButton_vdata(self))
   let self = QToolButton(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
@@ -967,9 +971,115 @@ proc cQToolButton_vtable_callback_disconnectNotify(self: pointer, signal: pointe
 
 type VirtualQToolButton* {.inheritable.} = ref object of QToolButton
   vtbl*: cQToolButtonVTable
+
 method metaObject*(self: VirtualQToolButton): gen_qobjectdefs_types.QMetaObject {.base.} =
   QToolButtonmetaObject(self[])
-proc cQToolButton_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
+method metacast*(self: VirtualQToolButton, param1: cstring): pointer {.base.} =
+  QToolButtonmetacast(self[], param1)
+method metacall*(self: VirtualQToolButton, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QToolButtonmetacall(self[], param1, param2, param3)
+method sizeHint*(self: VirtualQToolButton): gen_qsize_types.QSize {.base.} =
+  QToolButtonsizeHint(self[])
+method minimumSizeHint*(self: VirtualQToolButton): gen_qsize_types.QSize {.base.} =
+  QToolButtonminimumSizeHint(self[])
+method event*(self: VirtualQToolButton, e: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QToolButtonevent(self[], e)
+method mousePressEvent*(self: VirtualQToolButton, param1: gen_qevent_types.QMouseEvent): void {.base.} =
+  QToolButtonmousePressEvent(self[], param1)
+method mouseReleaseEvent*(self: VirtualQToolButton, param1: gen_qevent_types.QMouseEvent): void {.base.} =
+  QToolButtonmouseReleaseEvent(self[], param1)
+method paintEvent*(self: VirtualQToolButton, param1: gen_qevent_types.QPaintEvent): void {.base.} =
+  QToolButtonpaintEvent(self[], param1)
+method actionEvent*(self: VirtualQToolButton, param1: gen_qevent_types.QActionEvent): void {.base.} =
+  QToolButtonactionEvent(self[], param1)
+method enterEvent*(self: VirtualQToolButton, param1: gen_qcoreevent_types.QEvent): void {.base.} =
+  QToolButtonenterEvent(self[], param1)
+method leaveEvent*(self: VirtualQToolButton, param1: gen_qcoreevent_types.QEvent): void {.base.} =
+  QToolButtonleaveEvent(self[], param1)
+method timerEvent*(self: VirtualQToolButton, param1: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QToolButtontimerEvent(self[], param1)
+method changeEvent*(self: VirtualQToolButton, param1: gen_qcoreevent_types.QEvent): void {.base.} =
+  QToolButtonchangeEvent(self[], param1)
+method hitButton*(self: VirtualQToolButton, pos: gen_qpoint_types.QPoint): bool {.base.} =
+  QToolButtonhitButton(self[], pos)
+method nextCheckState*(self: VirtualQToolButton): void {.base.} =
+  QToolButtonnextCheckState(self[])
+method checkStateSet*(self: VirtualQToolButton): void {.base.} =
+  QToolButtoncheckStateSet(self[])
+method keyPressEvent*(self: VirtualQToolButton, e: gen_qevent_types.QKeyEvent): void {.base.} =
+  QToolButtonkeyPressEvent(self[], e)
+method keyReleaseEvent*(self: VirtualQToolButton, e: gen_qevent_types.QKeyEvent): void {.base.} =
+  QToolButtonkeyReleaseEvent(self[], e)
+method mouseMoveEvent*(self: VirtualQToolButton, e: gen_qevent_types.QMouseEvent): void {.base.} =
+  QToolButtonmouseMoveEvent(self[], e)
+method focusInEvent*(self: VirtualQToolButton, e: gen_qevent_types.QFocusEvent): void {.base.} =
+  QToolButtonfocusInEvent(self[], e)
+method focusOutEvent*(self: VirtualQToolButton, e: gen_qevent_types.QFocusEvent): void {.base.} =
+  QToolButtonfocusOutEvent(self[], e)
+method devType*(self: VirtualQToolButton): cint {.base.} =
+  QToolButtondevType(self[])
+method setVisible*(self: VirtualQToolButton, visible: bool): void {.base.} =
+  QToolButtonsetVisible(self[], visible)
+method heightForWidth*(self: VirtualQToolButton, param1: cint): cint {.base.} =
+  QToolButtonheightForWidth(self[], param1)
+method hasHeightForWidth*(self: VirtualQToolButton): bool {.base.} =
+  QToolButtonhasHeightForWidth(self[])
+method paintEngine*(self: VirtualQToolButton): gen_qpaintengine_types.QPaintEngine {.base.} =
+  QToolButtonpaintEngine(self[])
+method mouseDoubleClickEvent*(self: VirtualQToolButton, event: gen_qevent_types.QMouseEvent): void {.base.} =
+  QToolButtonmouseDoubleClickEvent(self[], event)
+method wheelEvent*(self: VirtualQToolButton, event: gen_qevent_types.QWheelEvent): void {.base.} =
+  QToolButtonwheelEvent(self[], event)
+method moveEvent*(self: VirtualQToolButton, event: gen_qevent_types.QMoveEvent): void {.base.} =
+  QToolButtonmoveEvent(self[], event)
+method resizeEvent*(self: VirtualQToolButton, event: gen_qevent_types.QResizeEvent): void {.base.} =
+  QToolButtonresizeEvent(self[], event)
+method closeEvent*(self: VirtualQToolButton, event: gen_qevent_types.QCloseEvent): void {.base.} =
+  QToolButtoncloseEvent(self[], event)
+method contextMenuEvent*(self: VirtualQToolButton, event: gen_qevent_types.QContextMenuEvent): void {.base.} =
+  QToolButtoncontextMenuEvent(self[], event)
+method tabletEvent*(self: VirtualQToolButton, event: gen_qevent_types.QTabletEvent): void {.base.} =
+  QToolButtontabletEvent(self[], event)
+method dragEnterEvent*(self: VirtualQToolButton, event: gen_qevent_types.QDragEnterEvent): void {.base.} =
+  QToolButtondragEnterEvent(self[], event)
+method dragMoveEvent*(self: VirtualQToolButton, event: gen_qevent_types.QDragMoveEvent): void {.base.} =
+  QToolButtondragMoveEvent(self[], event)
+method dragLeaveEvent*(self: VirtualQToolButton, event: gen_qevent_types.QDragLeaveEvent): void {.base.} =
+  QToolButtondragLeaveEvent(self[], event)
+method dropEvent*(self: VirtualQToolButton, event: gen_qevent_types.QDropEvent): void {.base.} =
+  QToolButtondropEvent(self[], event)
+method showEvent*(self: VirtualQToolButton, event: gen_qevent_types.QShowEvent): void {.base.} =
+  QToolButtonshowEvent(self[], event)
+method hideEvent*(self: VirtualQToolButton, event: gen_qevent_types.QHideEvent): void {.base.} =
+  QToolButtonhideEvent(self[], event)
+method nativeEvent*(self: VirtualQToolButton, eventType: openArray[byte], message: pointer, resultVal: ptr clong): bool {.base.} =
+  QToolButtonnativeEvent(self[], eventType, message, resultVal)
+method metric*(self: VirtualQToolButton, param1: cint): cint {.base.} =
+  QToolButtonmetric(self[], param1)
+method initPainter*(self: VirtualQToolButton, painter: gen_qpainter_types.QPainter): void {.base.} =
+  QToolButtoninitPainter(self[], painter)
+method redirected*(self: VirtualQToolButton, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.base.} =
+  QToolButtonredirected(self[], offset)
+method sharedPainter*(self: VirtualQToolButton): gen_qpainter_types.QPainter {.base.} =
+  QToolButtonsharedPainter(self[])
+method inputMethodEvent*(self: VirtualQToolButton, param1: gen_qevent_types.QInputMethodEvent): void {.base.} =
+  QToolButtoninputMethodEvent(self[], param1)
+method inputMethodQuery*(self: VirtualQToolButton, param1: cint): gen_qvariant_types.QVariant {.base.} =
+  QToolButtoninputMethodQuery(self[], param1)
+method focusNextPrevChild*(self: VirtualQToolButton, next: bool): bool {.base.} =
+  QToolButtonfocusNextPrevChild(self[], next)
+method eventFilter*(self: VirtualQToolButton, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QToolButtoneventFilter(self[], watched, event)
+method childEvent*(self: VirtualQToolButton, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QToolButtonchildEvent(self[], event)
+method customEvent*(self: VirtualQToolButton, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QToolButtoncustomEvent(self[], event)
+method connectNotify*(self: VirtualQToolButton, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QToolButtonconnectNotify(self[], signal)
+method disconnectNotify*(self: VirtualQToolButton, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QToolButtondisconnectNotify(self[], signal)
+
+proc fcQToolButton_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQToolButton](fcQToolButton_vdata(self))
   var virtualReturn = inst.metaObject()
   virtualReturn.owned = false # TODO move?
@@ -977,17 +1087,13 @@ proc cQToolButton_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-method metacast*(self: VirtualQToolButton, param1: cstring): pointer {.base.} =
-  QToolButtonmetacast(self[], param1)
-proc cQToolButton_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+proc fcQToolButton_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQToolButton](fcQToolButton_vdata(self))
   let slotval1 = (param1)
   var virtualReturn = inst.metacast(slotval1)
   virtualReturn
 
-method metacall*(self: VirtualQToolButton, param1: cint, param2: cint, param3: pointer): cint {.base.} =
-  QToolButtonmetacall(self[], param1, param2, param3)
-proc cQToolButton_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+proc fcQToolButton_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQToolButton](fcQToolButton_vdata(self))
   let slotval1 = cint(param1)
   let slotval2 = param2
@@ -995,9 +1101,7 @@ proc cQToolButton_method_callback_metacall(self: pointer, param1: cint, param2: 
   var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
-method sizeHint*(self: VirtualQToolButton): gen_qsize_types.QSize {.base.} =
-  QToolButtonsizeHint(self[])
-proc cQToolButton_method_callback_sizeHint(self: pointer): pointer {.cdecl.} =
+proc fcQToolButton_method_callback_sizeHint(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQToolButton](fcQToolButton_vdata(self))
   var virtualReturn = inst.sizeHint()
   virtualReturn.owned = false # TODO move?
@@ -1005,9 +1109,7 @@ proc cQToolButton_method_callback_sizeHint(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-method minimumSizeHint*(self: VirtualQToolButton): gen_qsize_types.QSize {.base.} =
-  QToolButtonminimumSizeHint(self[])
-proc cQToolButton_method_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
+proc fcQToolButton_method_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQToolButton](fcQToolButton_vdata(self))
   var virtualReturn = inst.minimumSizeHint()
   virtualReturn.owned = false # TODO move?
@@ -1015,157 +1117,113 @@ proc cQToolButton_method_callback_minimumSizeHint(self: pointer): pointer {.cdec
   virtualReturn.h = nil
   virtualReturn_h
 
-method event*(self: VirtualQToolButton, e: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QToolButtonevent(self[], e)
-proc cQToolButton_method_callback_event(self: pointer, e: pointer): bool {.cdecl.} =
+proc fcQToolButton_method_callback_event(self: pointer, e: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQToolButton](fcQToolButton_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: e, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
-method mousePressEvent*(self: VirtualQToolButton, param1: gen_qevent_types.QMouseEvent): void {.base.} =
-  QToolButtonmousePressEvent(self[], param1)
-proc cQToolButton_method_callback_mousePressEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQToolButton_method_callback_mousePressEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQToolButton](fcQToolButton_vdata(self))
   let slotval1 = gen_qevent_types.QMouseEvent(h: param1, owned: false)
   inst.mousePressEvent(slotval1)
 
-method mouseReleaseEvent*(self: VirtualQToolButton, param1: gen_qevent_types.QMouseEvent): void {.base.} =
-  QToolButtonmouseReleaseEvent(self[], param1)
-proc cQToolButton_method_callback_mouseReleaseEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQToolButton_method_callback_mouseReleaseEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQToolButton](fcQToolButton_vdata(self))
   let slotval1 = gen_qevent_types.QMouseEvent(h: param1, owned: false)
   inst.mouseReleaseEvent(slotval1)
 
-method paintEvent*(self: VirtualQToolButton, param1: gen_qevent_types.QPaintEvent): void {.base.} =
-  QToolButtonpaintEvent(self[], param1)
-proc cQToolButton_method_callback_paintEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQToolButton_method_callback_paintEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQToolButton](fcQToolButton_vdata(self))
   let slotval1 = gen_qevent_types.QPaintEvent(h: param1, owned: false)
   inst.paintEvent(slotval1)
 
-method actionEvent*(self: VirtualQToolButton, param1: gen_qevent_types.QActionEvent): void {.base.} =
-  QToolButtonactionEvent(self[], param1)
-proc cQToolButton_method_callback_actionEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQToolButton_method_callback_actionEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQToolButton](fcQToolButton_vdata(self))
   let slotval1 = gen_qevent_types.QActionEvent(h: param1, owned: false)
   inst.actionEvent(slotval1)
 
-method enterEvent*(self: VirtualQToolButton, param1: gen_qcoreevent_types.QEvent): void {.base.} =
-  QToolButtonenterEvent(self[], param1)
-proc cQToolButton_method_callback_enterEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQToolButton_method_callback_enterEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQToolButton](fcQToolButton_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
   inst.enterEvent(slotval1)
 
-method leaveEvent*(self: VirtualQToolButton, param1: gen_qcoreevent_types.QEvent): void {.base.} =
-  QToolButtonleaveEvent(self[], param1)
-proc cQToolButton_method_callback_leaveEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQToolButton_method_callback_leaveEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQToolButton](fcQToolButton_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
   inst.leaveEvent(slotval1)
 
-method timerEvent*(self: VirtualQToolButton, param1: gen_qcoreevent_types.QTimerEvent): void {.base.} =
-  QToolButtontimerEvent(self[], param1)
-proc cQToolButton_method_callback_timerEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQToolButton_method_callback_timerEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQToolButton](fcQToolButton_vdata(self))
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: param1, owned: false)
   inst.timerEvent(slotval1)
 
-method changeEvent*(self: VirtualQToolButton, param1: gen_qcoreevent_types.QEvent): void {.base.} =
-  QToolButtonchangeEvent(self[], param1)
-proc cQToolButton_method_callback_changeEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQToolButton_method_callback_changeEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQToolButton](fcQToolButton_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
   inst.changeEvent(slotval1)
 
-method hitButton*(self: VirtualQToolButton, pos: gen_qpoint_types.QPoint): bool {.base.} =
-  QToolButtonhitButton(self[], pos)
-proc cQToolButton_method_callback_hitButton(self: pointer, pos: pointer): bool {.cdecl.} =
+proc fcQToolButton_method_callback_hitButton(self: pointer, pos: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQToolButton](fcQToolButton_vdata(self))
   let slotval1 = gen_qpoint_types.QPoint(h: pos, owned: false)
   var virtualReturn = inst.hitButton(slotval1)
   virtualReturn
 
-method nextCheckState*(self: VirtualQToolButton): void {.base.} =
-  QToolButtonnextCheckState(self[])
-proc cQToolButton_method_callback_nextCheckState(self: pointer): void {.cdecl.} =
+proc fcQToolButton_method_callback_nextCheckState(self: pointer): void {.cdecl.} =
   let inst = cast[VirtualQToolButton](fcQToolButton_vdata(self))
   inst.nextCheckState()
 
-method checkStateSet*(self: VirtualQToolButton): void {.base.} =
-  QToolButtoncheckStateSet(self[])
-proc cQToolButton_method_callback_checkStateSet(self: pointer): void {.cdecl.} =
+proc fcQToolButton_method_callback_checkStateSet(self: pointer): void {.cdecl.} =
   let inst = cast[VirtualQToolButton](fcQToolButton_vdata(self))
   inst.checkStateSet()
 
-method keyPressEvent*(self: VirtualQToolButton, e: gen_qevent_types.QKeyEvent): void {.base.} =
-  QToolButtonkeyPressEvent(self[], e)
-proc cQToolButton_method_callback_keyPressEvent(self: pointer, e: pointer): void {.cdecl.} =
+proc fcQToolButton_method_callback_keyPressEvent(self: pointer, e: pointer): void {.cdecl.} =
   let inst = cast[VirtualQToolButton](fcQToolButton_vdata(self))
   let slotval1 = gen_qevent_types.QKeyEvent(h: e, owned: false)
   inst.keyPressEvent(slotval1)
 
-method keyReleaseEvent*(self: VirtualQToolButton, e: gen_qevent_types.QKeyEvent): void {.base.} =
-  QToolButtonkeyReleaseEvent(self[], e)
-proc cQToolButton_method_callback_keyReleaseEvent(self: pointer, e: pointer): void {.cdecl.} =
+proc fcQToolButton_method_callback_keyReleaseEvent(self: pointer, e: pointer): void {.cdecl.} =
   let inst = cast[VirtualQToolButton](fcQToolButton_vdata(self))
   let slotval1 = gen_qevent_types.QKeyEvent(h: e, owned: false)
   inst.keyReleaseEvent(slotval1)
 
-method mouseMoveEvent*(self: VirtualQToolButton, e: gen_qevent_types.QMouseEvent): void {.base.} =
-  QToolButtonmouseMoveEvent(self[], e)
-proc cQToolButton_method_callback_mouseMoveEvent(self: pointer, e: pointer): void {.cdecl.} =
+proc fcQToolButton_method_callback_mouseMoveEvent(self: pointer, e: pointer): void {.cdecl.} =
   let inst = cast[VirtualQToolButton](fcQToolButton_vdata(self))
   let slotval1 = gen_qevent_types.QMouseEvent(h: e, owned: false)
   inst.mouseMoveEvent(slotval1)
 
-method focusInEvent*(self: VirtualQToolButton, e: gen_qevent_types.QFocusEvent): void {.base.} =
-  QToolButtonfocusInEvent(self[], e)
-proc cQToolButton_method_callback_focusInEvent(self: pointer, e: pointer): void {.cdecl.} =
+proc fcQToolButton_method_callback_focusInEvent(self: pointer, e: pointer): void {.cdecl.} =
   let inst = cast[VirtualQToolButton](fcQToolButton_vdata(self))
   let slotval1 = gen_qevent_types.QFocusEvent(h: e, owned: false)
   inst.focusInEvent(slotval1)
 
-method focusOutEvent*(self: VirtualQToolButton, e: gen_qevent_types.QFocusEvent): void {.base.} =
-  QToolButtonfocusOutEvent(self[], e)
-proc cQToolButton_method_callback_focusOutEvent(self: pointer, e: pointer): void {.cdecl.} =
+proc fcQToolButton_method_callback_focusOutEvent(self: pointer, e: pointer): void {.cdecl.} =
   let inst = cast[VirtualQToolButton](fcQToolButton_vdata(self))
   let slotval1 = gen_qevent_types.QFocusEvent(h: e, owned: false)
   inst.focusOutEvent(slotval1)
 
-method devType*(self: VirtualQToolButton): cint {.base.} =
-  QToolButtondevType(self[])
-proc cQToolButton_method_callback_devType(self: pointer): cint {.cdecl.} =
+proc fcQToolButton_method_callback_devType(self: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQToolButton](fcQToolButton_vdata(self))
   var virtualReturn = inst.devType()
   virtualReturn
 
-method setVisible*(self: VirtualQToolButton, visible: bool): void {.base.} =
-  QToolButtonsetVisible(self[], visible)
-proc cQToolButton_method_callback_setVisible(self: pointer, visible: bool): void {.cdecl.} =
+proc fcQToolButton_method_callback_setVisible(self: pointer, visible: bool): void {.cdecl.} =
   let inst = cast[VirtualQToolButton](fcQToolButton_vdata(self))
   let slotval1 = visible
   inst.setVisible(slotval1)
 
-method heightForWidth*(self: VirtualQToolButton, param1: cint): cint {.base.} =
-  QToolButtonheightForWidth(self[], param1)
-proc cQToolButton_method_callback_heightForWidth(self: pointer, param1: cint): cint {.cdecl.} =
+proc fcQToolButton_method_callback_heightForWidth(self: pointer, param1: cint): cint {.cdecl.} =
   let inst = cast[VirtualQToolButton](fcQToolButton_vdata(self))
   let slotval1 = param1
   var virtualReturn = inst.heightForWidth(slotval1)
   virtualReturn
 
-method hasHeightForWidth*(self: VirtualQToolButton): bool {.base.} =
-  QToolButtonhasHeightForWidth(self[])
-proc cQToolButton_method_callback_hasHeightForWidth(self: pointer): bool {.cdecl.} =
+proc fcQToolButton_method_callback_hasHeightForWidth(self: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQToolButton](fcQToolButton_vdata(self))
   var virtualReturn = inst.hasHeightForWidth()
   virtualReturn
 
-method paintEngine*(self: VirtualQToolButton): gen_qpaintengine_types.QPaintEngine {.base.} =
-  QToolButtonpaintEngine(self[])
-proc cQToolButton_method_callback_paintEngine(self: pointer): pointer {.cdecl.} =
+proc fcQToolButton_method_callback_paintEngine(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQToolButton](fcQToolButton_vdata(self))
   var virtualReturn = inst.paintEngine()
   virtualReturn.owned = false # TODO move?
@@ -1173,100 +1231,72 @@ proc cQToolButton_method_callback_paintEngine(self: pointer): pointer {.cdecl.} 
   virtualReturn.h = nil
   virtualReturn_h
 
-method mouseDoubleClickEvent*(self: VirtualQToolButton, event: gen_qevent_types.QMouseEvent): void {.base.} =
-  QToolButtonmouseDoubleClickEvent(self[], event)
-proc cQToolButton_method_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQToolButton_method_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQToolButton](fcQToolButton_vdata(self))
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mouseDoubleClickEvent(slotval1)
 
-method wheelEvent*(self: VirtualQToolButton, event: gen_qevent_types.QWheelEvent): void {.base.} =
-  QToolButtonwheelEvent(self[], event)
-proc cQToolButton_method_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQToolButton_method_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQToolButton](fcQToolButton_vdata(self))
   let slotval1 = gen_qevent_types.QWheelEvent(h: event, owned: false)
   inst.wheelEvent(slotval1)
 
-method moveEvent*(self: VirtualQToolButton, event: gen_qevent_types.QMoveEvent): void {.base.} =
-  QToolButtonmoveEvent(self[], event)
-proc cQToolButton_method_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQToolButton_method_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQToolButton](fcQToolButton_vdata(self))
   let slotval1 = gen_qevent_types.QMoveEvent(h: event, owned: false)
   inst.moveEvent(slotval1)
 
-method resizeEvent*(self: VirtualQToolButton, event: gen_qevent_types.QResizeEvent): void {.base.} =
-  QToolButtonresizeEvent(self[], event)
-proc cQToolButton_method_callback_resizeEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQToolButton_method_callback_resizeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQToolButton](fcQToolButton_vdata(self))
   let slotval1 = gen_qevent_types.QResizeEvent(h: event, owned: false)
   inst.resizeEvent(slotval1)
 
-method closeEvent*(self: VirtualQToolButton, event: gen_qevent_types.QCloseEvent): void {.base.} =
-  QToolButtoncloseEvent(self[], event)
-proc cQToolButton_method_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQToolButton_method_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQToolButton](fcQToolButton_vdata(self))
   let slotval1 = gen_qevent_types.QCloseEvent(h: event, owned: false)
   inst.closeEvent(slotval1)
 
-method contextMenuEvent*(self: VirtualQToolButton, event: gen_qevent_types.QContextMenuEvent): void {.base.} =
-  QToolButtoncontextMenuEvent(self[], event)
-proc cQToolButton_method_callback_contextMenuEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQToolButton_method_callback_contextMenuEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQToolButton](fcQToolButton_vdata(self))
   let slotval1 = gen_qevent_types.QContextMenuEvent(h: event, owned: false)
   inst.contextMenuEvent(slotval1)
 
-method tabletEvent*(self: VirtualQToolButton, event: gen_qevent_types.QTabletEvent): void {.base.} =
-  QToolButtontabletEvent(self[], event)
-proc cQToolButton_method_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQToolButton_method_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQToolButton](fcQToolButton_vdata(self))
   let slotval1 = gen_qevent_types.QTabletEvent(h: event, owned: false)
   inst.tabletEvent(slotval1)
 
-method dragEnterEvent*(self: VirtualQToolButton, event: gen_qevent_types.QDragEnterEvent): void {.base.} =
-  QToolButtondragEnterEvent(self[], event)
-proc cQToolButton_method_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQToolButton_method_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQToolButton](fcQToolButton_vdata(self))
   let slotval1 = gen_qevent_types.QDragEnterEvent(h: event, owned: false)
   inst.dragEnterEvent(slotval1)
 
-method dragMoveEvent*(self: VirtualQToolButton, event: gen_qevent_types.QDragMoveEvent): void {.base.} =
-  QToolButtondragMoveEvent(self[], event)
-proc cQToolButton_method_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQToolButton_method_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQToolButton](fcQToolButton_vdata(self))
   let slotval1 = gen_qevent_types.QDragMoveEvent(h: event, owned: false)
   inst.dragMoveEvent(slotval1)
 
-method dragLeaveEvent*(self: VirtualQToolButton, event: gen_qevent_types.QDragLeaveEvent): void {.base.} =
-  QToolButtondragLeaveEvent(self[], event)
-proc cQToolButton_method_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQToolButton_method_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQToolButton](fcQToolButton_vdata(self))
   let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event, owned: false)
   inst.dragLeaveEvent(slotval1)
 
-method dropEvent*(self: VirtualQToolButton, event: gen_qevent_types.QDropEvent): void {.base.} =
-  QToolButtondropEvent(self[], event)
-proc cQToolButton_method_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQToolButton_method_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQToolButton](fcQToolButton_vdata(self))
   let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
   inst.dropEvent(slotval1)
 
-method showEvent*(self: VirtualQToolButton, event: gen_qevent_types.QShowEvent): void {.base.} =
-  QToolButtonshowEvent(self[], event)
-proc cQToolButton_method_callback_showEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQToolButton_method_callback_showEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQToolButton](fcQToolButton_vdata(self))
   let slotval1 = gen_qevent_types.QShowEvent(h: event, owned: false)
   inst.showEvent(slotval1)
 
-method hideEvent*(self: VirtualQToolButton, event: gen_qevent_types.QHideEvent): void {.base.} =
-  QToolButtonhideEvent(self[], event)
-proc cQToolButton_method_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQToolButton_method_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQToolButton](fcQToolButton_vdata(self))
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   inst.hideEvent(slotval1)
 
-method nativeEvent*(self: VirtualQToolButton, eventType: openArray[byte], message: pointer, resultVal: ptr clong): bool {.base.} =
-  QToolButtonnativeEvent(self[], eventType, message, resultVal)
-proc cQToolButton_method_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr clong): bool {.cdecl.} =
+proc fcQToolButton_method_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr clong): bool {.cdecl.} =
   let inst = cast[VirtualQToolButton](fcQToolButton_vdata(self))
   var veventType_bytearray = eventType
   var veventTypex_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](veventType_bytearray.data), 0, int(veventType_bytearray.len)-1))
@@ -1277,24 +1307,18 @@ proc cQToolButton_method_callback_nativeEvent(self: pointer, eventType: struct_m
   var virtualReturn = inst.nativeEvent(slotval1, slotval2, slotval3)
   virtualReturn
 
-method metric*(self: VirtualQToolButton, param1: cint): cint {.base.} =
-  QToolButtonmetric(self[], param1)
-proc cQToolButton_method_callback_metric(self: pointer, param1: cint): cint {.cdecl.} =
+proc fcQToolButton_method_callback_metric(self: pointer, param1: cint): cint {.cdecl.} =
   let inst = cast[VirtualQToolButton](fcQToolButton_vdata(self))
   let slotval1 = cint(param1)
   var virtualReturn = inst.metric(slotval1)
   virtualReturn
 
-method initPainter*(self: VirtualQToolButton, painter: gen_qpainter_types.QPainter): void {.base.} =
-  QToolButtoninitPainter(self[], painter)
-proc cQToolButton_method_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
+proc fcQToolButton_method_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
   let inst = cast[VirtualQToolButton](fcQToolButton_vdata(self))
   let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
   inst.initPainter(slotval1)
 
-method redirected*(self: VirtualQToolButton, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.base.} =
-  QToolButtonredirected(self[], offset)
-proc cQToolButton_method_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
+proc fcQToolButton_method_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQToolButton](fcQToolButton_vdata(self))
   let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
   var virtualReturn = inst.redirected(slotval1)
@@ -1303,9 +1327,7 @@ proc cQToolButton_method_callback_redirected(self: pointer, offset: pointer): po
   virtualReturn.h = nil
   virtualReturn_h
 
-method sharedPainter*(self: VirtualQToolButton): gen_qpainter_types.QPainter {.base.} =
-  QToolButtonsharedPainter(self[])
-proc cQToolButton_method_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
+proc fcQToolButton_method_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQToolButton](fcQToolButton_vdata(self))
   var virtualReturn = inst.sharedPainter()
   virtualReturn.owned = false # TODO move?
@@ -1313,16 +1335,12 @@ proc cQToolButton_method_callback_sharedPainter(self: pointer): pointer {.cdecl.
   virtualReturn.h = nil
   virtualReturn_h
 
-method inputMethodEvent*(self: VirtualQToolButton, param1: gen_qevent_types.QInputMethodEvent): void {.base.} =
-  QToolButtoninputMethodEvent(self[], param1)
-proc cQToolButton_method_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQToolButton_method_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQToolButton](fcQToolButton_vdata(self))
   let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1, owned: false)
   inst.inputMethodEvent(slotval1)
 
-method inputMethodQuery*(self: VirtualQToolButton, param1: cint): gen_qvariant_types.QVariant {.base.} =
-  QToolButtoninputMethodQuery(self[], param1)
-proc cQToolButton_method_callback_inputMethodQuery(self: pointer, param1: cint): pointer {.cdecl.} =
+proc fcQToolButton_method_callback_inputMethodQuery(self: pointer, param1: cint): pointer {.cdecl.} =
   let inst = cast[VirtualQToolButton](fcQToolButton_vdata(self))
   let slotval1 = cint(param1)
   var virtualReturn = inst.inputMethodQuery(slotval1)
@@ -1331,50 +1349,39 @@ proc cQToolButton_method_callback_inputMethodQuery(self: pointer, param1: cint):
   virtualReturn.h = nil
   virtualReturn_h
 
-method focusNextPrevChild*(self: VirtualQToolButton, next: bool): bool {.base.} =
-  QToolButtonfocusNextPrevChild(self[], next)
-proc cQToolButton_method_callback_focusNextPrevChild(self: pointer, next: bool): bool {.cdecl.} =
+proc fcQToolButton_method_callback_focusNextPrevChild(self: pointer, next: bool): bool {.cdecl.} =
   let inst = cast[VirtualQToolButton](fcQToolButton_vdata(self))
   let slotval1 = next
   var virtualReturn = inst.focusNextPrevChild(slotval1)
   virtualReturn
 
-method eventFilter*(self: VirtualQToolButton, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QToolButtoneventFilter(self[], watched, event)
-proc cQToolButton_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+proc fcQToolButton_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQToolButton](fcQToolButton_vdata(self))
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
   let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
-method childEvent*(self: VirtualQToolButton, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
-  QToolButtonchildEvent(self[], event)
-proc cQToolButton_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQToolButton_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQToolButton](fcQToolButton_vdata(self))
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
-method customEvent*(self: VirtualQToolButton, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QToolButtoncustomEvent(self[], event)
-proc cQToolButton_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQToolButton_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQToolButton](fcQToolButton_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
-method connectNotify*(self: VirtualQToolButton, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QToolButtonconnectNotify(self[], signal)
-proc cQToolButton_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQToolButton_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQToolButton](fcQToolButton_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
-method disconnectNotify*(self: VirtualQToolButton, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QToolButtondisconnectNotify(self[], signal)
-proc cQToolButton_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQToolButton_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQToolButton](fcQToolButton_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
+
 
 proc initStyleOption*(self: gen_qtoolbutton_types.QToolButton, option: gen_qstyleoption_types.QStyleOptionToolButton): void =
   fcQToolButton_protectedbase_initStyleOption(self.h, option.h)
@@ -1415,111 +1422,111 @@ proc create*(T: type gen_qtoolbutton_types.QToolButton,
     let vtbl = cast[ref QToolButtonVTable](fcQToolButton_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQToolButton_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQToolButton_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQToolButton_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQToolButton_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQToolButton_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQToolButton_vtable_callback_metacall
   if not isNil(vtbl[].sizeHint):
-    vtbl[].vtbl.sizeHint = cQToolButton_vtable_callback_sizeHint
+    vtbl[].vtbl.sizeHint = fcQToolButton_vtable_callback_sizeHint
   if not isNil(vtbl[].minimumSizeHint):
-    vtbl[].vtbl.minimumSizeHint = cQToolButton_vtable_callback_minimumSizeHint
+    vtbl[].vtbl.minimumSizeHint = fcQToolButton_vtable_callback_minimumSizeHint
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQToolButton_vtable_callback_event
+    vtbl[].vtbl.event = fcQToolButton_vtable_callback_event
   if not isNil(vtbl[].mousePressEvent):
-    vtbl[].vtbl.mousePressEvent = cQToolButton_vtable_callback_mousePressEvent
+    vtbl[].vtbl.mousePressEvent = fcQToolButton_vtable_callback_mousePressEvent
   if not isNil(vtbl[].mouseReleaseEvent):
-    vtbl[].vtbl.mouseReleaseEvent = cQToolButton_vtable_callback_mouseReleaseEvent
+    vtbl[].vtbl.mouseReleaseEvent = fcQToolButton_vtable_callback_mouseReleaseEvent
   if not isNil(vtbl[].paintEvent):
-    vtbl[].vtbl.paintEvent = cQToolButton_vtable_callback_paintEvent
+    vtbl[].vtbl.paintEvent = fcQToolButton_vtable_callback_paintEvent
   if not isNil(vtbl[].actionEvent):
-    vtbl[].vtbl.actionEvent = cQToolButton_vtable_callback_actionEvent
+    vtbl[].vtbl.actionEvent = fcQToolButton_vtable_callback_actionEvent
   if not isNil(vtbl[].enterEvent):
-    vtbl[].vtbl.enterEvent = cQToolButton_vtable_callback_enterEvent
+    vtbl[].vtbl.enterEvent = fcQToolButton_vtable_callback_enterEvent
   if not isNil(vtbl[].leaveEvent):
-    vtbl[].vtbl.leaveEvent = cQToolButton_vtable_callback_leaveEvent
+    vtbl[].vtbl.leaveEvent = fcQToolButton_vtable_callback_leaveEvent
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQToolButton_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQToolButton_vtable_callback_timerEvent
   if not isNil(vtbl[].changeEvent):
-    vtbl[].vtbl.changeEvent = cQToolButton_vtable_callback_changeEvent
+    vtbl[].vtbl.changeEvent = fcQToolButton_vtable_callback_changeEvent
   if not isNil(vtbl[].hitButton):
-    vtbl[].vtbl.hitButton = cQToolButton_vtable_callback_hitButton
+    vtbl[].vtbl.hitButton = fcQToolButton_vtable_callback_hitButton
   if not isNil(vtbl[].nextCheckState):
-    vtbl[].vtbl.nextCheckState = cQToolButton_vtable_callback_nextCheckState
+    vtbl[].vtbl.nextCheckState = fcQToolButton_vtable_callback_nextCheckState
   if not isNil(vtbl[].checkStateSet):
-    vtbl[].vtbl.checkStateSet = cQToolButton_vtable_callback_checkStateSet
+    vtbl[].vtbl.checkStateSet = fcQToolButton_vtable_callback_checkStateSet
   if not isNil(vtbl[].keyPressEvent):
-    vtbl[].vtbl.keyPressEvent = cQToolButton_vtable_callback_keyPressEvent
+    vtbl[].vtbl.keyPressEvent = fcQToolButton_vtable_callback_keyPressEvent
   if not isNil(vtbl[].keyReleaseEvent):
-    vtbl[].vtbl.keyReleaseEvent = cQToolButton_vtable_callback_keyReleaseEvent
+    vtbl[].vtbl.keyReleaseEvent = fcQToolButton_vtable_callback_keyReleaseEvent
   if not isNil(vtbl[].mouseMoveEvent):
-    vtbl[].vtbl.mouseMoveEvent = cQToolButton_vtable_callback_mouseMoveEvent
+    vtbl[].vtbl.mouseMoveEvent = fcQToolButton_vtable_callback_mouseMoveEvent
   if not isNil(vtbl[].focusInEvent):
-    vtbl[].vtbl.focusInEvent = cQToolButton_vtable_callback_focusInEvent
+    vtbl[].vtbl.focusInEvent = fcQToolButton_vtable_callback_focusInEvent
   if not isNil(vtbl[].focusOutEvent):
-    vtbl[].vtbl.focusOutEvent = cQToolButton_vtable_callback_focusOutEvent
+    vtbl[].vtbl.focusOutEvent = fcQToolButton_vtable_callback_focusOutEvent
   if not isNil(vtbl[].devType):
-    vtbl[].vtbl.devType = cQToolButton_vtable_callback_devType
+    vtbl[].vtbl.devType = fcQToolButton_vtable_callback_devType
   if not isNil(vtbl[].setVisible):
-    vtbl[].vtbl.setVisible = cQToolButton_vtable_callback_setVisible
+    vtbl[].vtbl.setVisible = fcQToolButton_vtable_callback_setVisible
   if not isNil(vtbl[].heightForWidth):
-    vtbl[].vtbl.heightForWidth = cQToolButton_vtable_callback_heightForWidth
+    vtbl[].vtbl.heightForWidth = fcQToolButton_vtable_callback_heightForWidth
   if not isNil(vtbl[].hasHeightForWidth):
-    vtbl[].vtbl.hasHeightForWidth = cQToolButton_vtable_callback_hasHeightForWidth
+    vtbl[].vtbl.hasHeightForWidth = fcQToolButton_vtable_callback_hasHeightForWidth
   if not isNil(vtbl[].paintEngine):
-    vtbl[].vtbl.paintEngine = cQToolButton_vtable_callback_paintEngine
+    vtbl[].vtbl.paintEngine = fcQToolButton_vtable_callback_paintEngine
   if not isNil(vtbl[].mouseDoubleClickEvent):
-    vtbl[].vtbl.mouseDoubleClickEvent = cQToolButton_vtable_callback_mouseDoubleClickEvent
+    vtbl[].vtbl.mouseDoubleClickEvent = fcQToolButton_vtable_callback_mouseDoubleClickEvent
   if not isNil(vtbl[].wheelEvent):
-    vtbl[].vtbl.wheelEvent = cQToolButton_vtable_callback_wheelEvent
+    vtbl[].vtbl.wheelEvent = fcQToolButton_vtable_callback_wheelEvent
   if not isNil(vtbl[].moveEvent):
-    vtbl[].vtbl.moveEvent = cQToolButton_vtable_callback_moveEvent
+    vtbl[].vtbl.moveEvent = fcQToolButton_vtable_callback_moveEvent
   if not isNil(vtbl[].resizeEvent):
-    vtbl[].vtbl.resizeEvent = cQToolButton_vtable_callback_resizeEvent
+    vtbl[].vtbl.resizeEvent = fcQToolButton_vtable_callback_resizeEvent
   if not isNil(vtbl[].closeEvent):
-    vtbl[].vtbl.closeEvent = cQToolButton_vtable_callback_closeEvent
+    vtbl[].vtbl.closeEvent = fcQToolButton_vtable_callback_closeEvent
   if not isNil(vtbl[].contextMenuEvent):
-    vtbl[].vtbl.contextMenuEvent = cQToolButton_vtable_callback_contextMenuEvent
+    vtbl[].vtbl.contextMenuEvent = fcQToolButton_vtable_callback_contextMenuEvent
   if not isNil(vtbl[].tabletEvent):
-    vtbl[].vtbl.tabletEvent = cQToolButton_vtable_callback_tabletEvent
+    vtbl[].vtbl.tabletEvent = fcQToolButton_vtable_callback_tabletEvent
   if not isNil(vtbl[].dragEnterEvent):
-    vtbl[].vtbl.dragEnterEvent = cQToolButton_vtable_callback_dragEnterEvent
+    vtbl[].vtbl.dragEnterEvent = fcQToolButton_vtable_callback_dragEnterEvent
   if not isNil(vtbl[].dragMoveEvent):
-    vtbl[].vtbl.dragMoveEvent = cQToolButton_vtable_callback_dragMoveEvent
+    vtbl[].vtbl.dragMoveEvent = fcQToolButton_vtable_callback_dragMoveEvent
   if not isNil(vtbl[].dragLeaveEvent):
-    vtbl[].vtbl.dragLeaveEvent = cQToolButton_vtable_callback_dragLeaveEvent
+    vtbl[].vtbl.dragLeaveEvent = fcQToolButton_vtable_callback_dragLeaveEvent
   if not isNil(vtbl[].dropEvent):
-    vtbl[].vtbl.dropEvent = cQToolButton_vtable_callback_dropEvent
+    vtbl[].vtbl.dropEvent = fcQToolButton_vtable_callback_dropEvent
   if not isNil(vtbl[].showEvent):
-    vtbl[].vtbl.showEvent = cQToolButton_vtable_callback_showEvent
+    vtbl[].vtbl.showEvent = fcQToolButton_vtable_callback_showEvent
   if not isNil(vtbl[].hideEvent):
-    vtbl[].vtbl.hideEvent = cQToolButton_vtable_callback_hideEvent
+    vtbl[].vtbl.hideEvent = fcQToolButton_vtable_callback_hideEvent
   if not isNil(vtbl[].nativeEvent):
-    vtbl[].vtbl.nativeEvent = cQToolButton_vtable_callback_nativeEvent
+    vtbl[].vtbl.nativeEvent = fcQToolButton_vtable_callback_nativeEvent
   if not isNil(vtbl[].metric):
-    vtbl[].vtbl.metric = cQToolButton_vtable_callback_metric
+    vtbl[].vtbl.metric = fcQToolButton_vtable_callback_metric
   if not isNil(vtbl[].initPainter):
-    vtbl[].vtbl.initPainter = cQToolButton_vtable_callback_initPainter
+    vtbl[].vtbl.initPainter = fcQToolButton_vtable_callback_initPainter
   if not isNil(vtbl[].redirected):
-    vtbl[].vtbl.redirected = cQToolButton_vtable_callback_redirected
+    vtbl[].vtbl.redirected = fcQToolButton_vtable_callback_redirected
   if not isNil(vtbl[].sharedPainter):
-    vtbl[].vtbl.sharedPainter = cQToolButton_vtable_callback_sharedPainter
+    vtbl[].vtbl.sharedPainter = fcQToolButton_vtable_callback_sharedPainter
   if not isNil(vtbl[].inputMethodEvent):
-    vtbl[].vtbl.inputMethodEvent = cQToolButton_vtable_callback_inputMethodEvent
+    vtbl[].vtbl.inputMethodEvent = fcQToolButton_vtable_callback_inputMethodEvent
   if not isNil(vtbl[].inputMethodQuery):
-    vtbl[].vtbl.inputMethodQuery = cQToolButton_vtable_callback_inputMethodQuery
+    vtbl[].vtbl.inputMethodQuery = fcQToolButton_vtable_callback_inputMethodQuery
   if not isNil(vtbl[].focusNextPrevChild):
-    vtbl[].vtbl.focusNextPrevChild = cQToolButton_vtable_callback_focusNextPrevChild
+    vtbl[].vtbl.focusNextPrevChild = fcQToolButton_vtable_callback_focusNextPrevChild
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQToolButton_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQToolButton_vtable_callback_eventFilter
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQToolButton_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQToolButton_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQToolButton_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQToolButton_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQToolButton_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQToolButton_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQToolButton_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQToolButton_vtable_callback_disconnectNotify
   gen_qtoolbutton_types.QToolButton(h: fcQToolButton_new(addr(vtbl[].vtbl), addr(vtbl[]), parent.h), owned: true)
 
 proc create*(T: type gen_qtoolbutton_types.QToolButton,
@@ -1530,111 +1537,111 @@ proc create*(T: type gen_qtoolbutton_types.QToolButton,
     let vtbl = cast[ref QToolButtonVTable](fcQToolButton_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQToolButton_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQToolButton_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQToolButton_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQToolButton_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQToolButton_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQToolButton_vtable_callback_metacall
   if not isNil(vtbl[].sizeHint):
-    vtbl[].vtbl.sizeHint = cQToolButton_vtable_callback_sizeHint
+    vtbl[].vtbl.sizeHint = fcQToolButton_vtable_callback_sizeHint
   if not isNil(vtbl[].minimumSizeHint):
-    vtbl[].vtbl.minimumSizeHint = cQToolButton_vtable_callback_minimumSizeHint
+    vtbl[].vtbl.minimumSizeHint = fcQToolButton_vtable_callback_minimumSizeHint
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQToolButton_vtable_callback_event
+    vtbl[].vtbl.event = fcQToolButton_vtable_callback_event
   if not isNil(vtbl[].mousePressEvent):
-    vtbl[].vtbl.mousePressEvent = cQToolButton_vtable_callback_mousePressEvent
+    vtbl[].vtbl.mousePressEvent = fcQToolButton_vtable_callback_mousePressEvent
   if not isNil(vtbl[].mouseReleaseEvent):
-    vtbl[].vtbl.mouseReleaseEvent = cQToolButton_vtable_callback_mouseReleaseEvent
+    vtbl[].vtbl.mouseReleaseEvent = fcQToolButton_vtable_callback_mouseReleaseEvent
   if not isNil(vtbl[].paintEvent):
-    vtbl[].vtbl.paintEvent = cQToolButton_vtable_callback_paintEvent
+    vtbl[].vtbl.paintEvent = fcQToolButton_vtable_callback_paintEvent
   if not isNil(vtbl[].actionEvent):
-    vtbl[].vtbl.actionEvent = cQToolButton_vtable_callback_actionEvent
+    vtbl[].vtbl.actionEvent = fcQToolButton_vtable_callback_actionEvent
   if not isNil(vtbl[].enterEvent):
-    vtbl[].vtbl.enterEvent = cQToolButton_vtable_callback_enterEvent
+    vtbl[].vtbl.enterEvent = fcQToolButton_vtable_callback_enterEvent
   if not isNil(vtbl[].leaveEvent):
-    vtbl[].vtbl.leaveEvent = cQToolButton_vtable_callback_leaveEvent
+    vtbl[].vtbl.leaveEvent = fcQToolButton_vtable_callback_leaveEvent
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQToolButton_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQToolButton_vtable_callback_timerEvent
   if not isNil(vtbl[].changeEvent):
-    vtbl[].vtbl.changeEvent = cQToolButton_vtable_callback_changeEvent
+    vtbl[].vtbl.changeEvent = fcQToolButton_vtable_callback_changeEvent
   if not isNil(vtbl[].hitButton):
-    vtbl[].vtbl.hitButton = cQToolButton_vtable_callback_hitButton
+    vtbl[].vtbl.hitButton = fcQToolButton_vtable_callback_hitButton
   if not isNil(vtbl[].nextCheckState):
-    vtbl[].vtbl.nextCheckState = cQToolButton_vtable_callback_nextCheckState
+    vtbl[].vtbl.nextCheckState = fcQToolButton_vtable_callback_nextCheckState
   if not isNil(vtbl[].checkStateSet):
-    vtbl[].vtbl.checkStateSet = cQToolButton_vtable_callback_checkStateSet
+    vtbl[].vtbl.checkStateSet = fcQToolButton_vtable_callback_checkStateSet
   if not isNil(vtbl[].keyPressEvent):
-    vtbl[].vtbl.keyPressEvent = cQToolButton_vtable_callback_keyPressEvent
+    vtbl[].vtbl.keyPressEvent = fcQToolButton_vtable_callback_keyPressEvent
   if not isNil(vtbl[].keyReleaseEvent):
-    vtbl[].vtbl.keyReleaseEvent = cQToolButton_vtable_callback_keyReleaseEvent
+    vtbl[].vtbl.keyReleaseEvent = fcQToolButton_vtable_callback_keyReleaseEvent
   if not isNil(vtbl[].mouseMoveEvent):
-    vtbl[].vtbl.mouseMoveEvent = cQToolButton_vtable_callback_mouseMoveEvent
+    vtbl[].vtbl.mouseMoveEvent = fcQToolButton_vtable_callback_mouseMoveEvent
   if not isNil(vtbl[].focusInEvent):
-    vtbl[].vtbl.focusInEvent = cQToolButton_vtable_callback_focusInEvent
+    vtbl[].vtbl.focusInEvent = fcQToolButton_vtable_callback_focusInEvent
   if not isNil(vtbl[].focusOutEvent):
-    vtbl[].vtbl.focusOutEvent = cQToolButton_vtable_callback_focusOutEvent
+    vtbl[].vtbl.focusOutEvent = fcQToolButton_vtable_callback_focusOutEvent
   if not isNil(vtbl[].devType):
-    vtbl[].vtbl.devType = cQToolButton_vtable_callback_devType
+    vtbl[].vtbl.devType = fcQToolButton_vtable_callback_devType
   if not isNil(vtbl[].setVisible):
-    vtbl[].vtbl.setVisible = cQToolButton_vtable_callback_setVisible
+    vtbl[].vtbl.setVisible = fcQToolButton_vtable_callback_setVisible
   if not isNil(vtbl[].heightForWidth):
-    vtbl[].vtbl.heightForWidth = cQToolButton_vtable_callback_heightForWidth
+    vtbl[].vtbl.heightForWidth = fcQToolButton_vtable_callback_heightForWidth
   if not isNil(vtbl[].hasHeightForWidth):
-    vtbl[].vtbl.hasHeightForWidth = cQToolButton_vtable_callback_hasHeightForWidth
+    vtbl[].vtbl.hasHeightForWidth = fcQToolButton_vtable_callback_hasHeightForWidth
   if not isNil(vtbl[].paintEngine):
-    vtbl[].vtbl.paintEngine = cQToolButton_vtable_callback_paintEngine
+    vtbl[].vtbl.paintEngine = fcQToolButton_vtable_callback_paintEngine
   if not isNil(vtbl[].mouseDoubleClickEvent):
-    vtbl[].vtbl.mouseDoubleClickEvent = cQToolButton_vtable_callback_mouseDoubleClickEvent
+    vtbl[].vtbl.mouseDoubleClickEvent = fcQToolButton_vtable_callback_mouseDoubleClickEvent
   if not isNil(vtbl[].wheelEvent):
-    vtbl[].vtbl.wheelEvent = cQToolButton_vtable_callback_wheelEvent
+    vtbl[].vtbl.wheelEvent = fcQToolButton_vtable_callback_wheelEvent
   if not isNil(vtbl[].moveEvent):
-    vtbl[].vtbl.moveEvent = cQToolButton_vtable_callback_moveEvent
+    vtbl[].vtbl.moveEvent = fcQToolButton_vtable_callback_moveEvent
   if not isNil(vtbl[].resizeEvent):
-    vtbl[].vtbl.resizeEvent = cQToolButton_vtable_callback_resizeEvent
+    vtbl[].vtbl.resizeEvent = fcQToolButton_vtable_callback_resizeEvent
   if not isNil(vtbl[].closeEvent):
-    vtbl[].vtbl.closeEvent = cQToolButton_vtable_callback_closeEvent
+    vtbl[].vtbl.closeEvent = fcQToolButton_vtable_callback_closeEvent
   if not isNil(vtbl[].contextMenuEvent):
-    vtbl[].vtbl.contextMenuEvent = cQToolButton_vtable_callback_contextMenuEvent
+    vtbl[].vtbl.contextMenuEvent = fcQToolButton_vtable_callback_contextMenuEvent
   if not isNil(vtbl[].tabletEvent):
-    vtbl[].vtbl.tabletEvent = cQToolButton_vtable_callback_tabletEvent
+    vtbl[].vtbl.tabletEvent = fcQToolButton_vtable_callback_tabletEvent
   if not isNil(vtbl[].dragEnterEvent):
-    vtbl[].vtbl.dragEnterEvent = cQToolButton_vtable_callback_dragEnterEvent
+    vtbl[].vtbl.dragEnterEvent = fcQToolButton_vtable_callback_dragEnterEvent
   if not isNil(vtbl[].dragMoveEvent):
-    vtbl[].vtbl.dragMoveEvent = cQToolButton_vtable_callback_dragMoveEvent
+    vtbl[].vtbl.dragMoveEvent = fcQToolButton_vtable_callback_dragMoveEvent
   if not isNil(vtbl[].dragLeaveEvent):
-    vtbl[].vtbl.dragLeaveEvent = cQToolButton_vtable_callback_dragLeaveEvent
+    vtbl[].vtbl.dragLeaveEvent = fcQToolButton_vtable_callback_dragLeaveEvent
   if not isNil(vtbl[].dropEvent):
-    vtbl[].vtbl.dropEvent = cQToolButton_vtable_callback_dropEvent
+    vtbl[].vtbl.dropEvent = fcQToolButton_vtable_callback_dropEvent
   if not isNil(vtbl[].showEvent):
-    vtbl[].vtbl.showEvent = cQToolButton_vtable_callback_showEvent
+    vtbl[].vtbl.showEvent = fcQToolButton_vtable_callback_showEvent
   if not isNil(vtbl[].hideEvent):
-    vtbl[].vtbl.hideEvent = cQToolButton_vtable_callback_hideEvent
+    vtbl[].vtbl.hideEvent = fcQToolButton_vtable_callback_hideEvent
   if not isNil(vtbl[].nativeEvent):
-    vtbl[].vtbl.nativeEvent = cQToolButton_vtable_callback_nativeEvent
+    vtbl[].vtbl.nativeEvent = fcQToolButton_vtable_callback_nativeEvent
   if not isNil(vtbl[].metric):
-    vtbl[].vtbl.metric = cQToolButton_vtable_callback_metric
+    vtbl[].vtbl.metric = fcQToolButton_vtable_callback_metric
   if not isNil(vtbl[].initPainter):
-    vtbl[].vtbl.initPainter = cQToolButton_vtable_callback_initPainter
+    vtbl[].vtbl.initPainter = fcQToolButton_vtable_callback_initPainter
   if not isNil(vtbl[].redirected):
-    vtbl[].vtbl.redirected = cQToolButton_vtable_callback_redirected
+    vtbl[].vtbl.redirected = fcQToolButton_vtable_callback_redirected
   if not isNil(vtbl[].sharedPainter):
-    vtbl[].vtbl.sharedPainter = cQToolButton_vtable_callback_sharedPainter
+    vtbl[].vtbl.sharedPainter = fcQToolButton_vtable_callback_sharedPainter
   if not isNil(vtbl[].inputMethodEvent):
-    vtbl[].vtbl.inputMethodEvent = cQToolButton_vtable_callback_inputMethodEvent
+    vtbl[].vtbl.inputMethodEvent = fcQToolButton_vtable_callback_inputMethodEvent
   if not isNil(vtbl[].inputMethodQuery):
-    vtbl[].vtbl.inputMethodQuery = cQToolButton_vtable_callback_inputMethodQuery
+    vtbl[].vtbl.inputMethodQuery = fcQToolButton_vtable_callback_inputMethodQuery
   if not isNil(vtbl[].focusNextPrevChild):
-    vtbl[].vtbl.focusNextPrevChild = cQToolButton_vtable_callback_focusNextPrevChild
+    vtbl[].vtbl.focusNextPrevChild = fcQToolButton_vtable_callback_focusNextPrevChild
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQToolButton_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQToolButton_vtable_callback_eventFilter
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQToolButton_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQToolButton_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQToolButton_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQToolButton_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQToolButton_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQToolButton_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQToolButton_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQToolButton_vtable_callback_disconnectNotify
   gen_qtoolbutton_types.QToolButton(h: fcQToolButton_new2(addr(vtbl[].vtbl), addr(vtbl[])), owned: true)
 
 const cQToolButton_mvtbl = cQToolButtonVTable(
@@ -1642,59 +1649,60 @@ const cQToolButton_mvtbl = cQToolButtonVTable(
     let inst = cast[ptr typeof(VirtualQToolButton()[])](self.fcQToolButton_vtbl())
     inst[].h = nil
     inst[].owned = false,
-  metaObject: cQToolButton_method_callback_metaObject,
-  metacast: cQToolButton_method_callback_metacast,
-  metacall: cQToolButton_method_callback_metacall,
-  sizeHint: cQToolButton_method_callback_sizeHint,
-  minimumSizeHint: cQToolButton_method_callback_minimumSizeHint,
-  event: cQToolButton_method_callback_event,
-  mousePressEvent: cQToolButton_method_callback_mousePressEvent,
-  mouseReleaseEvent: cQToolButton_method_callback_mouseReleaseEvent,
-  paintEvent: cQToolButton_method_callback_paintEvent,
-  actionEvent: cQToolButton_method_callback_actionEvent,
-  enterEvent: cQToolButton_method_callback_enterEvent,
-  leaveEvent: cQToolButton_method_callback_leaveEvent,
-  timerEvent: cQToolButton_method_callback_timerEvent,
-  changeEvent: cQToolButton_method_callback_changeEvent,
-  hitButton: cQToolButton_method_callback_hitButton,
-  nextCheckState: cQToolButton_method_callback_nextCheckState,
-  checkStateSet: cQToolButton_method_callback_checkStateSet,
-  keyPressEvent: cQToolButton_method_callback_keyPressEvent,
-  keyReleaseEvent: cQToolButton_method_callback_keyReleaseEvent,
-  mouseMoveEvent: cQToolButton_method_callback_mouseMoveEvent,
-  focusInEvent: cQToolButton_method_callback_focusInEvent,
-  focusOutEvent: cQToolButton_method_callback_focusOutEvent,
-  devType: cQToolButton_method_callback_devType,
-  setVisible: cQToolButton_method_callback_setVisible,
-  heightForWidth: cQToolButton_method_callback_heightForWidth,
-  hasHeightForWidth: cQToolButton_method_callback_hasHeightForWidth,
-  paintEngine: cQToolButton_method_callback_paintEngine,
-  mouseDoubleClickEvent: cQToolButton_method_callback_mouseDoubleClickEvent,
-  wheelEvent: cQToolButton_method_callback_wheelEvent,
-  moveEvent: cQToolButton_method_callback_moveEvent,
-  resizeEvent: cQToolButton_method_callback_resizeEvent,
-  closeEvent: cQToolButton_method_callback_closeEvent,
-  contextMenuEvent: cQToolButton_method_callback_contextMenuEvent,
-  tabletEvent: cQToolButton_method_callback_tabletEvent,
-  dragEnterEvent: cQToolButton_method_callback_dragEnterEvent,
-  dragMoveEvent: cQToolButton_method_callback_dragMoveEvent,
-  dragLeaveEvent: cQToolButton_method_callback_dragLeaveEvent,
-  dropEvent: cQToolButton_method_callback_dropEvent,
-  showEvent: cQToolButton_method_callback_showEvent,
-  hideEvent: cQToolButton_method_callback_hideEvent,
-  nativeEvent: cQToolButton_method_callback_nativeEvent,
-  metric: cQToolButton_method_callback_metric,
-  initPainter: cQToolButton_method_callback_initPainter,
-  redirected: cQToolButton_method_callback_redirected,
-  sharedPainter: cQToolButton_method_callback_sharedPainter,
-  inputMethodEvent: cQToolButton_method_callback_inputMethodEvent,
-  inputMethodQuery: cQToolButton_method_callback_inputMethodQuery,
-  focusNextPrevChild: cQToolButton_method_callback_focusNextPrevChild,
-  eventFilter: cQToolButton_method_callback_eventFilter,
-  childEvent: cQToolButton_method_callback_childEvent,
-  customEvent: cQToolButton_method_callback_customEvent,
-  connectNotify: cQToolButton_method_callback_connectNotify,
-  disconnectNotify: cQToolButton_method_callback_disconnectNotify,
+
+  metaObject: fcQToolButton_method_callback_metaObject,
+  metacast: fcQToolButton_method_callback_metacast,
+  metacall: fcQToolButton_method_callback_metacall,
+  sizeHint: fcQToolButton_method_callback_sizeHint,
+  minimumSizeHint: fcQToolButton_method_callback_minimumSizeHint,
+  event: fcQToolButton_method_callback_event,
+  mousePressEvent: fcQToolButton_method_callback_mousePressEvent,
+  mouseReleaseEvent: fcQToolButton_method_callback_mouseReleaseEvent,
+  paintEvent: fcQToolButton_method_callback_paintEvent,
+  actionEvent: fcQToolButton_method_callback_actionEvent,
+  enterEvent: fcQToolButton_method_callback_enterEvent,
+  leaveEvent: fcQToolButton_method_callback_leaveEvent,
+  timerEvent: fcQToolButton_method_callback_timerEvent,
+  changeEvent: fcQToolButton_method_callback_changeEvent,
+  hitButton: fcQToolButton_method_callback_hitButton,
+  nextCheckState: fcQToolButton_method_callback_nextCheckState,
+  checkStateSet: fcQToolButton_method_callback_checkStateSet,
+  keyPressEvent: fcQToolButton_method_callback_keyPressEvent,
+  keyReleaseEvent: fcQToolButton_method_callback_keyReleaseEvent,
+  mouseMoveEvent: fcQToolButton_method_callback_mouseMoveEvent,
+  focusInEvent: fcQToolButton_method_callback_focusInEvent,
+  focusOutEvent: fcQToolButton_method_callback_focusOutEvent,
+  devType: fcQToolButton_method_callback_devType,
+  setVisible: fcQToolButton_method_callback_setVisible,
+  heightForWidth: fcQToolButton_method_callback_heightForWidth,
+  hasHeightForWidth: fcQToolButton_method_callback_hasHeightForWidth,
+  paintEngine: fcQToolButton_method_callback_paintEngine,
+  mouseDoubleClickEvent: fcQToolButton_method_callback_mouseDoubleClickEvent,
+  wheelEvent: fcQToolButton_method_callback_wheelEvent,
+  moveEvent: fcQToolButton_method_callback_moveEvent,
+  resizeEvent: fcQToolButton_method_callback_resizeEvent,
+  closeEvent: fcQToolButton_method_callback_closeEvent,
+  contextMenuEvent: fcQToolButton_method_callback_contextMenuEvent,
+  tabletEvent: fcQToolButton_method_callback_tabletEvent,
+  dragEnterEvent: fcQToolButton_method_callback_dragEnterEvent,
+  dragMoveEvent: fcQToolButton_method_callback_dragMoveEvent,
+  dragLeaveEvent: fcQToolButton_method_callback_dragLeaveEvent,
+  dropEvent: fcQToolButton_method_callback_dropEvent,
+  showEvent: fcQToolButton_method_callback_showEvent,
+  hideEvent: fcQToolButton_method_callback_hideEvent,
+  nativeEvent: fcQToolButton_method_callback_nativeEvent,
+  metric: fcQToolButton_method_callback_metric,
+  initPainter: fcQToolButton_method_callback_initPainter,
+  redirected: fcQToolButton_method_callback_redirected,
+  sharedPainter: fcQToolButton_method_callback_sharedPainter,
+  inputMethodEvent: fcQToolButton_method_callback_inputMethodEvent,
+  inputMethodQuery: fcQToolButton_method_callback_inputMethodQuery,
+  focusNextPrevChild: fcQToolButton_method_callback_focusNextPrevChild,
+  eventFilter: fcQToolButton_method_callback_eventFilter,
+  childEvent: fcQToolButton_method_callback_childEvent,
+  customEvent: fcQToolButton_method_callback_customEvent,
+  connectNotify: fcQToolButton_method_callback_connectNotify,
+  disconnectNotify: fcQToolButton_method_callback_disconnectNotify,
 )
 proc create*(T: type gen_qtoolbutton_types.QToolButton,
     parent: gen_qwidget_types.QWidget,

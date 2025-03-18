@@ -68,6 +68,7 @@ proc fcQPictureFormatPlugin_trUtf82(s: cstring, c: cstring): struct_miqt_string 
 proc fcQPictureFormatPlugin_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QPictureFormatPlugin_trUtf83".}
 proc fcQPictureFormatPlugin_vtbl(self: pointer): pointer {.importc: "QPictureFormatPlugin_vtbl".}
 proc fcQPictureFormatPlugin_vdata(self: pointer): pointer {.importc: "QPictureFormatPlugin_vdata".}
+
 type cQPictureFormatPluginVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -170,6 +171,7 @@ type QPictureFormatPluginchildEventProc* = proc(self: QPictureFormatPlugin, even
 type QPictureFormatPlugincustomEventProc* = proc(self: QPictureFormatPlugin, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QPictureFormatPluginconnectNotifyProc* = proc(self: QPictureFormatPlugin, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QPictureFormatPlugindisconnectNotifyProc* = proc(self: QPictureFormatPlugin, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+
 type QPictureFormatPluginVTable* {.inheritable, pure.} = object
   vtbl: cQPictureFormatPluginVTable
   metaObject*: QPictureFormatPluginmetaObjectProc
@@ -185,10 +187,45 @@ type QPictureFormatPluginVTable* {.inheritable, pure.} = object
   customEvent*: QPictureFormatPlugincustomEventProc
   connectNotify*: QPictureFormatPluginconnectNotifyProc
   disconnectNotify*: QPictureFormatPlugindisconnectNotifyProc
+
 proc QPictureFormatPluginmetaObject*(self: gen_qpictureformatplugin_types.QPictureFormatPlugin): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQPictureFormatPlugin_virtualbase_metaObject(self.h), owned: false)
 
-proc cQPictureFormatPlugin_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
+proc QPictureFormatPluginmetacast*(self: gen_qpictureformatplugin_types.QPictureFormatPlugin, param1: cstring): pointer =
+  fcQPictureFormatPlugin_virtualbase_metacast(self.h, param1)
+
+proc QPictureFormatPluginmetacall*(self: gen_qpictureformatplugin_types.QPictureFormatPlugin, param1: cint, param2: cint, param3: pointer): cint =
+  fcQPictureFormatPlugin_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+proc QPictureFormatPluginloadPicture*(self: gen_qpictureformatplugin_types.QPictureFormatPlugin, format: openArray[char], filename: openArray[char], pic: gen_qpicture_types.QPicture): bool =
+  fcQPictureFormatPlugin_virtualbase_loadPicture(self.h, struct_miqt_string(data: if len(format) > 0: addr format[0] else: nil, len: csize_t(len(format))), struct_miqt_string(data: if len(filename) > 0: addr filename[0] else: nil, len: csize_t(len(filename))), pic.h)
+
+proc QPictureFormatPluginsavePicture*(self: gen_qpictureformatplugin_types.QPictureFormatPlugin, format: openArray[char], filename: openArray[char], pic: gen_qpicture_types.QPicture): bool =
+  fcQPictureFormatPlugin_virtualbase_savePicture(self.h, struct_miqt_string(data: if len(format) > 0: addr format[0] else: nil, len: csize_t(len(format))), struct_miqt_string(data: if len(filename) > 0: addr filename[0] else: nil, len: csize_t(len(filename))), pic.h)
+
+proc QPictureFormatPluginevent*(self: gen_qpictureformatplugin_types.QPictureFormatPlugin, event: gen_qcoreevent_types.QEvent): bool =
+  fcQPictureFormatPlugin_virtualbase_event(self.h, event.h)
+
+proc QPictureFormatPlugineventFilter*(self: gen_qpictureformatplugin_types.QPictureFormatPlugin, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
+  fcQPictureFormatPlugin_virtualbase_eventFilter(self.h, watched.h, event.h)
+
+proc QPictureFormatPlugintimerEvent*(self: gen_qpictureformatplugin_types.QPictureFormatPlugin, event: gen_qcoreevent_types.QTimerEvent): void =
+  fcQPictureFormatPlugin_virtualbase_timerEvent(self.h, event.h)
+
+proc QPictureFormatPluginchildEvent*(self: gen_qpictureformatplugin_types.QPictureFormatPlugin, event: gen_qcoreevent_types.QChildEvent): void =
+  fcQPictureFormatPlugin_virtualbase_childEvent(self.h, event.h)
+
+proc QPictureFormatPlugincustomEvent*(self: gen_qpictureformatplugin_types.QPictureFormatPlugin, event: gen_qcoreevent_types.QEvent): void =
+  fcQPictureFormatPlugin_virtualbase_customEvent(self.h, event.h)
+
+proc QPictureFormatPluginconnectNotify*(self: gen_qpictureformatplugin_types.QPictureFormatPlugin, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQPictureFormatPlugin_virtualbase_connectNotify(self.h, signal.h)
+
+proc QPictureFormatPlugindisconnectNotify*(self: gen_qpictureformatplugin_types.QPictureFormatPlugin, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQPictureFormatPlugin_virtualbase_disconnectNotify(self.h, signal.h)
+
+
+proc fcQPictureFormatPlugin_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QPictureFormatPluginVTable](fcQPictureFormatPlugin_vdata(self))
   let self = QPictureFormatPlugin(h: self)
   var virtualReturn = vtbl[].metaObject(self)
@@ -197,20 +234,14 @@ proc cQPictureFormatPlugin_vtable_callback_metaObject(self: pointer): pointer {.
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QPictureFormatPluginmetacast*(self: gen_qpictureformatplugin_types.QPictureFormatPlugin, param1: cstring): pointer =
-  fcQPictureFormatPlugin_virtualbase_metacast(self.h, param1)
-
-proc cQPictureFormatPlugin_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+proc fcQPictureFormatPlugin_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QPictureFormatPluginVTable](fcQPictureFormatPlugin_vdata(self))
   let self = QPictureFormatPlugin(h: self)
   let slotval1 = (param1)
   var virtualReturn = vtbl[].metacast(self, slotval1)
   virtualReturn
 
-proc QPictureFormatPluginmetacall*(self: gen_qpictureformatplugin_types.QPictureFormatPlugin, param1: cint, param2: cint, param3: pointer): cint =
-  fcQPictureFormatPlugin_virtualbase_metacall(self.h, cint(param1), param2, param3)
-
-proc cQPictureFormatPlugin_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+proc fcQPictureFormatPlugin_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QPictureFormatPluginVTable](fcQPictureFormatPlugin_vdata(self))
   let self = QPictureFormatPlugin(h: self)
   let slotval1 = cint(param1)
@@ -219,10 +250,7 @@ proc cQPictureFormatPlugin_vtable_callback_metacall(self: pointer, param1: cint,
   var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QPictureFormatPluginloadPicture*(self: gen_qpictureformatplugin_types.QPictureFormatPlugin, format: openArray[char], filename: openArray[char], pic: gen_qpicture_types.QPicture): bool =
-  fcQPictureFormatPlugin_virtualbase_loadPicture(self.h, struct_miqt_string(data: if len(format) > 0: addr format[0] else: nil, len: csize_t(len(format))), struct_miqt_string(data: if len(filename) > 0: addr filename[0] else: nil, len: csize_t(len(filename))), pic.h)
-
-proc cQPictureFormatPlugin_vtable_callback_loadPicture(self: pointer, format: struct_miqt_string, filename: struct_miqt_string, pic: pointer): bool {.cdecl.} =
+proc fcQPictureFormatPlugin_vtable_callback_loadPicture(self: pointer, format: struct_miqt_string, filename: struct_miqt_string, pic: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QPictureFormatPluginVTable](fcQPictureFormatPlugin_vdata(self))
   let self = QPictureFormatPlugin(h: self)
   let vformat_ms = format
@@ -237,10 +265,7 @@ proc cQPictureFormatPlugin_vtable_callback_loadPicture(self: pointer, format: st
   var virtualReturn = vtbl[].loadPicture(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QPictureFormatPluginsavePicture*(self: gen_qpictureformatplugin_types.QPictureFormatPlugin, format: openArray[char], filename: openArray[char], pic: gen_qpicture_types.QPicture): bool =
-  fcQPictureFormatPlugin_virtualbase_savePicture(self.h, struct_miqt_string(data: if len(format) > 0: addr format[0] else: nil, len: csize_t(len(format))), struct_miqt_string(data: if len(filename) > 0: addr filename[0] else: nil, len: csize_t(len(filename))), pic.h)
-
-proc cQPictureFormatPlugin_vtable_callback_savePicture(self: pointer, format: struct_miqt_string, filename: struct_miqt_string, pic: pointer): bool {.cdecl.} =
+proc fcQPictureFormatPlugin_vtable_callback_savePicture(self: pointer, format: struct_miqt_string, filename: struct_miqt_string, pic: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QPictureFormatPluginVTable](fcQPictureFormatPlugin_vdata(self))
   let self = QPictureFormatPlugin(h: self)
   let vformat_ms = format
@@ -255,7 +280,7 @@ proc cQPictureFormatPlugin_vtable_callback_savePicture(self: pointer, format: st
   var virtualReturn = vtbl[].savePicture(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc cQPictureFormatPlugin_vtable_callback_installIOHandler(self: pointer, format: struct_miqt_string): bool {.cdecl.} =
+proc fcQPictureFormatPlugin_vtable_callback_installIOHandler(self: pointer, format: struct_miqt_string): bool {.cdecl.} =
   let vtbl = cast[ptr QPictureFormatPluginVTable](fcQPictureFormatPlugin_vdata(self))
   let self = QPictureFormatPlugin(h: self)
   let vformat_ms = format
@@ -265,20 +290,14 @@ proc cQPictureFormatPlugin_vtable_callback_installIOHandler(self: pointer, forma
   var virtualReturn = vtbl[].installIOHandler(self, slotval1)
   virtualReturn
 
-proc QPictureFormatPluginevent*(self: gen_qpictureformatplugin_types.QPictureFormatPlugin, event: gen_qcoreevent_types.QEvent): bool =
-  fcQPictureFormatPlugin_virtualbase_event(self.h, event.h)
-
-proc cQPictureFormatPlugin_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
+proc fcQPictureFormatPlugin_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QPictureFormatPluginVTable](fcQPictureFormatPlugin_vdata(self))
   let self = QPictureFormatPlugin(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
-proc QPictureFormatPlugineventFilter*(self: gen_qpictureformatplugin_types.QPictureFormatPlugin, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
-  fcQPictureFormatPlugin_virtualbase_eventFilter(self.h, watched.h, event.h)
-
-proc cQPictureFormatPlugin_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+proc fcQPictureFormatPlugin_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QPictureFormatPluginVTable](fcQPictureFormatPlugin_vdata(self))
   let self = QPictureFormatPlugin(h: self)
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
@@ -286,46 +305,31 @@ proc cQPictureFormatPlugin_vtable_callback_eventFilter(self: pointer, watched: p
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
-proc QPictureFormatPlugintimerEvent*(self: gen_qpictureformatplugin_types.QPictureFormatPlugin, event: gen_qcoreevent_types.QTimerEvent): void =
-  fcQPictureFormatPlugin_virtualbase_timerEvent(self.h, event.h)
-
-proc cQPictureFormatPlugin_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQPictureFormatPlugin_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPictureFormatPluginVTable](fcQPictureFormatPlugin_vdata(self))
   let self = QPictureFormatPlugin(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
-proc QPictureFormatPluginchildEvent*(self: gen_qpictureformatplugin_types.QPictureFormatPlugin, event: gen_qcoreevent_types.QChildEvent): void =
-  fcQPictureFormatPlugin_virtualbase_childEvent(self.h, event.h)
-
-proc cQPictureFormatPlugin_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQPictureFormatPlugin_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPictureFormatPluginVTable](fcQPictureFormatPlugin_vdata(self))
   let self = QPictureFormatPlugin(h: self)
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
-proc QPictureFormatPlugincustomEvent*(self: gen_qpictureformatplugin_types.QPictureFormatPlugin, event: gen_qcoreevent_types.QEvent): void =
-  fcQPictureFormatPlugin_virtualbase_customEvent(self.h, event.h)
-
-proc cQPictureFormatPlugin_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQPictureFormatPlugin_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPictureFormatPluginVTable](fcQPictureFormatPlugin_vdata(self))
   let self = QPictureFormatPlugin(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
-proc QPictureFormatPluginconnectNotify*(self: gen_qpictureformatplugin_types.QPictureFormatPlugin, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQPictureFormatPlugin_virtualbase_connectNotify(self.h, signal.h)
-
-proc cQPictureFormatPlugin_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQPictureFormatPlugin_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPictureFormatPluginVTable](fcQPictureFormatPlugin_vdata(self))
   let self = QPictureFormatPlugin(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
-proc QPictureFormatPlugindisconnectNotify*(self: gen_qpictureformatplugin_types.QPictureFormatPlugin, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQPictureFormatPlugin_virtualbase_disconnectNotify(self.h, signal.h)
-
-proc cQPictureFormatPlugin_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQPictureFormatPlugin_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPictureFormatPluginVTable](fcQPictureFormatPlugin_vdata(self))
   let self = QPictureFormatPlugin(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
@@ -333,9 +337,35 @@ proc cQPictureFormatPlugin_vtable_callback_disconnectNotify(self: pointer, signa
 
 type VirtualQPictureFormatPlugin* {.inheritable.} = ref object of QPictureFormatPlugin
   vtbl*: cQPictureFormatPluginVTable
+
 method metaObject*(self: VirtualQPictureFormatPlugin): gen_qobjectdefs_types.QMetaObject {.base.} =
   QPictureFormatPluginmetaObject(self[])
-proc cQPictureFormatPlugin_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
+method metacast*(self: VirtualQPictureFormatPlugin, param1: cstring): pointer {.base.} =
+  QPictureFormatPluginmetacast(self[], param1)
+method metacall*(self: VirtualQPictureFormatPlugin, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QPictureFormatPluginmetacall(self[], param1, param2, param3)
+method loadPicture*(self: VirtualQPictureFormatPlugin, format: openArray[char], filename: openArray[char], pic: gen_qpicture_types.QPicture): bool {.base.} =
+  QPictureFormatPluginloadPicture(self[], format, filename, pic)
+method savePicture*(self: VirtualQPictureFormatPlugin, format: openArray[char], filename: openArray[char], pic: gen_qpicture_types.QPicture): bool {.base.} =
+  QPictureFormatPluginsavePicture(self[], format, filename, pic)
+method installIOHandler*(self: VirtualQPictureFormatPlugin, format: openArray[char]): bool {.base.} =
+  raiseAssert("missing implementation of QPictureFormatPlugin.installIOHandler")
+method event*(self: VirtualQPictureFormatPlugin, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QPictureFormatPluginevent(self[], event)
+method eventFilter*(self: VirtualQPictureFormatPlugin, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QPictureFormatPlugineventFilter(self[], watched, event)
+method timerEvent*(self: VirtualQPictureFormatPlugin, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QPictureFormatPlugintimerEvent(self[], event)
+method childEvent*(self: VirtualQPictureFormatPlugin, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QPictureFormatPluginchildEvent(self[], event)
+method customEvent*(self: VirtualQPictureFormatPlugin, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QPictureFormatPlugincustomEvent(self[], event)
+method connectNotify*(self: VirtualQPictureFormatPlugin, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QPictureFormatPluginconnectNotify(self[], signal)
+method disconnectNotify*(self: VirtualQPictureFormatPlugin, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QPictureFormatPlugindisconnectNotify(self[], signal)
+
+proc fcQPictureFormatPlugin_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQPictureFormatPlugin](fcQPictureFormatPlugin_vdata(self))
   var virtualReturn = inst.metaObject()
   virtualReturn.owned = false # TODO move?
@@ -343,17 +373,13 @@ proc cQPictureFormatPlugin_method_callback_metaObject(self: pointer): pointer {.
   virtualReturn.h = nil
   virtualReturn_h
 
-method metacast*(self: VirtualQPictureFormatPlugin, param1: cstring): pointer {.base.} =
-  QPictureFormatPluginmetacast(self[], param1)
-proc cQPictureFormatPlugin_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+proc fcQPictureFormatPlugin_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQPictureFormatPlugin](fcQPictureFormatPlugin_vdata(self))
   let slotval1 = (param1)
   var virtualReturn = inst.metacast(slotval1)
   virtualReturn
 
-method metacall*(self: VirtualQPictureFormatPlugin, param1: cint, param2: cint, param3: pointer): cint {.base.} =
-  QPictureFormatPluginmetacall(self[], param1, param2, param3)
-proc cQPictureFormatPlugin_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+proc fcQPictureFormatPlugin_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQPictureFormatPlugin](fcQPictureFormatPlugin_vdata(self))
   let slotval1 = cint(param1)
   let slotval2 = param2
@@ -361,9 +387,7 @@ proc cQPictureFormatPlugin_method_callback_metacall(self: pointer, param1: cint,
   var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
-method loadPicture*(self: VirtualQPictureFormatPlugin, format: openArray[char], filename: openArray[char], pic: gen_qpicture_types.QPicture): bool {.base.} =
-  QPictureFormatPluginloadPicture(self[], format, filename, pic)
-proc cQPictureFormatPlugin_method_callback_loadPicture(self: pointer, format: struct_miqt_string, filename: struct_miqt_string, pic: pointer): bool {.cdecl.} =
+proc fcQPictureFormatPlugin_method_callback_loadPicture(self: pointer, format: struct_miqt_string, filename: struct_miqt_string, pic: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQPictureFormatPlugin](fcQPictureFormatPlugin_vdata(self))
   let vformat_ms = format
   let vformatx_ret = string.fromBytes(vformat_ms)
@@ -377,9 +401,7 @@ proc cQPictureFormatPlugin_method_callback_loadPicture(self: pointer, format: st
   var virtualReturn = inst.loadPicture(slotval1, slotval2, slotval3)
   virtualReturn
 
-method savePicture*(self: VirtualQPictureFormatPlugin, format: openArray[char], filename: openArray[char], pic: gen_qpicture_types.QPicture): bool {.base.} =
-  QPictureFormatPluginsavePicture(self[], format, filename, pic)
-proc cQPictureFormatPlugin_method_callback_savePicture(self: pointer, format: struct_miqt_string, filename: struct_miqt_string, pic: pointer): bool {.cdecl.} =
+proc fcQPictureFormatPlugin_method_callback_savePicture(self: pointer, format: struct_miqt_string, filename: struct_miqt_string, pic: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQPictureFormatPlugin](fcQPictureFormatPlugin_vdata(self))
   let vformat_ms = format
   let vformatx_ret = string.fromBytes(vformat_ms)
@@ -393,9 +415,7 @@ proc cQPictureFormatPlugin_method_callback_savePicture(self: pointer, format: st
   var virtualReturn = inst.savePicture(slotval1, slotval2, slotval3)
   virtualReturn
 
-method installIOHandler*(self: VirtualQPictureFormatPlugin, format: openArray[char]): bool {.base.} =
-  raiseAssert("missing implementation of QPictureFormatPlugin_virtualbase_installIOHandler")
-proc cQPictureFormatPlugin_method_callback_installIOHandler(self: pointer, format: struct_miqt_string): bool {.cdecl.} =
+proc fcQPictureFormatPlugin_method_callback_installIOHandler(self: pointer, format: struct_miqt_string): bool {.cdecl.} =
   let inst = cast[VirtualQPictureFormatPlugin](fcQPictureFormatPlugin_vdata(self))
   let vformat_ms = format
   let vformatx_ret = string.fromBytes(vformat_ms)
@@ -404,57 +424,44 @@ proc cQPictureFormatPlugin_method_callback_installIOHandler(self: pointer, forma
   var virtualReturn = inst.installIOHandler(slotval1)
   virtualReturn
 
-method event*(self: VirtualQPictureFormatPlugin, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QPictureFormatPluginevent(self[], event)
-proc cQPictureFormatPlugin_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
+proc fcQPictureFormatPlugin_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQPictureFormatPlugin](fcQPictureFormatPlugin_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
-method eventFilter*(self: VirtualQPictureFormatPlugin, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QPictureFormatPlugineventFilter(self[], watched, event)
-proc cQPictureFormatPlugin_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+proc fcQPictureFormatPlugin_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQPictureFormatPlugin](fcQPictureFormatPlugin_vdata(self))
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
   let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
-method timerEvent*(self: VirtualQPictureFormatPlugin, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
-  QPictureFormatPlugintimerEvent(self[], event)
-proc cQPictureFormatPlugin_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQPictureFormatPlugin_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPictureFormatPlugin](fcQPictureFormatPlugin_vdata(self))
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
-method childEvent*(self: VirtualQPictureFormatPlugin, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
-  QPictureFormatPluginchildEvent(self[], event)
-proc cQPictureFormatPlugin_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQPictureFormatPlugin_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPictureFormatPlugin](fcQPictureFormatPlugin_vdata(self))
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
-method customEvent*(self: VirtualQPictureFormatPlugin, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QPictureFormatPlugincustomEvent(self[], event)
-proc cQPictureFormatPlugin_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQPictureFormatPlugin_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPictureFormatPlugin](fcQPictureFormatPlugin_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
-method connectNotify*(self: VirtualQPictureFormatPlugin, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QPictureFormatPluginconnectNotify(self[], signal)
-proc cQPictureFormatPlugin_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQPictureFormatPlugin_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPictureFormatPlugin](fcQPictureFormatPlugin_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
-method disconnectNotify*(self: VirtualQPictureFormatPlugin, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QPictureFormatPlugindisconnectNotify(self[], signal)
-proc cQPictureFormatPlugin_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQPictureFormatPlugin_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPictureFormatPlugin](fcQPictureFormatPlugin_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
+
 
 proc sender*(self: gen_qpictureformatplugin_types.QPictureFormatPlugin): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQPictureFormatPlugin_protectedbase_sender(self.h), owned: false)
@@ -476,31 +483,31 @@ proc create*(T: type gen_qpictureformatplugin_types.QPictureFormatPlugin,
     let vtbl = cast[ref QPictureFormatPluginVTable](fcQPictureFormatPlugin_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQPictureFormatPlugin_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQPictureFormatPlugin_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQPictureFormatPlugin_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQPictureFormatPlugin_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQPictureFormatPlugin_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQPictureFormatPlugin_vtable_callback_metacall
   if not isNil(vtbl[].loadPicture):
-    vtbl[].vtbl.loadPicture = cQPictureFormatPlugin_vtable_callback_loadPicture
+    vtbl[].vtbl.loadPicture = fcQPictureFormatPlugin_vtable_callback_loadPicture
   if not isNil(vtbl[].savePicture):
-    vtbl[].vtbl.savePicture = cQPictureFormatPlugin_vtable_callback_savePicture
+    vtbl[].vtbl.savePicture = fcQPictureFormatPlugin_vtable_callback_savePicture
   if not isNil(vtbl[].installIOHandler):
-    vtbl[].vtbl.installIOHandler = cQPictureFormatPlugin_vtable_callback_installIOHandler
+    vtbl[].vtbl.installIOHandler = fcQPictureFormatPlugin_vtable_callback_installIOHandler
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQPictureFormatPlugin_vtable_callback_event
+    vtbl[].vtbl.event = fcQPictureFormatPlugin_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQPictureFormatPlugin_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQPictureFormatPlugin_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQPictureFormatPlugin_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQPictureFormatPlugin_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQPictureFormatPlugin_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQPictureFormatPlugin_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQPictureFormatPlugin_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQPictureFormatPlugin_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQPictureFormatPlugin_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQPictureFormatPlugin_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQPictureFormatPlugin_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQPictureFormatPlugin_vtable_callback_disconnectNotify
   gen_qpictureformatplugin_types.QPictureFormatPlugin(h: fcQPictureFormatPlugin_new(addr(vtbl[].vtbl), addr(vtbl[])), owned: true)
 
 proc create*(T: type gen_qpictureformatplugin_types.QPictureFormatPlugin,
@@ -512,31 +519,31 @@ proc create*(T: type gen_qpictureformatplugin_types.QPictureFormatPlugin,
     let vtbl = cast[ref QPictureFormatPluginVTable](fcQPictureFormatPlugin_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQPictureFormatPlugin_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQPictureFormatPlugin_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQPictureFormatPlugin_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQPictureFormatPlugin_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQPictureFormatPlugin_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQPictureFormatPlugin_vtable_callback_metacall
   if not isNil(vtbl[].loadPicture):
-    vtbl[].vtbl.loadPicture = cQPictureFormatPlugin_vtable_callback_loadPicture
+    vtbl[].vtbl.loadPicture = fcQPictureFormatPlugin_vtable_callback_loadPicture
   if not isNil(vtbl[].savePicture):
-    vtbl[].vtbl.savePicture = cQPictureFormatPlugin_vtable_callback_savePicture
+    vtbl[].vtbl.savePicture = fcQPictureFormatPlugin_vtable_callback_savePicture
   if not isNil(vtbl[].installIOHandler):
-    vtbl[].vtbl.installIOHandler = cQPictureFormatPlugin_vtable_callback_installIOHandler
+    vtbl[].vtbl.installIOHandler = fcQPictureFormatPlugin_vtable_callback_installIOHandler
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQPictureFormatPlugin_vtable_callback_event
+    vtbl[].vtbl.event = fcQPictureFormatPlugin_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQPictureFormatPlugin_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQPictureFormatPlugin_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQPictureFormatPlugin_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQPictureFormatPlugin_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQPictureFormatPlugin_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQPictureFormatPlugin_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQPictureFormatPlugin_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQPictureFormatPlugin_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQPictureFormatPlugin_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQPictureFormatPlugin_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQPictureFormatPlugin_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQPictureFormatPlugin_vtable_callback_disconnectNotify
   gen_qpictureformatplugin_types.QPictureFormatPlugin(h: fcQPictureFormatPlugin_new2(addr(vtbl[].vtbl), addr(vtbl[]), parent.h), owned: true)
 
 const cQPictureFormatPlugin_mvtbl = cQPictureFormatPluginVTable(
@@ -544,19 +551,20 @@ const cQPictureFormatPlugin_mvtbl = cQPictureFormatPluginVTable(
     let inst = cast[ptr typeof(VirtualQPictureFormatPlugin()[])](self.fcQPictureFormatPlugin_vtbl())
     inst[].h = nil
     inst[].owned = false,
-  metaObject: cQPictureFormatPlugin_method_callback_metaObject,
-  metacast: cQPictureFormatPlugin_method_callback_metacast,
-  metacall: cQPictureFormatPlugin_method_callback_metacall,
-  loadPicture: cQPictureFormatPlugin_method_callback_loadPicture,
-  savePicture: cQPictureFormatPlugin_method_callback_savePicture,
-  installIOHandler: cQPictureFormatPlugin_method_callback_installIOHandler,
-  event: cQPictureFormatPlugin_method_callback_event,
-  eventFilter: cQPictureFormatPlugin_method_callback_eventFilter,
-  timerEvent: cQPictureFormatPlugin_method_callback_timerEvent,
-  childEvent: cQPictureFormatPlugin_method_callback_childEvent,
-  customEvent: cQPictureFormatPlugin_method_callback_customEvent,
-  connectNotify: cQPictureFormatPlugin_method_callback_connectNotify,
-  disconnectNotify: cQPictureFormatPlugin_method_callback_disconnectNotify,
+
+  metaObject: fcQPictureFormatPlugin_method_callback_metaObject,
+  metacast: fcQPictureFormatPlugin_method_callback_metacast,
+  metacall: fcQPictureFormatPlugin_method_callback_metacall,
+  loadPicture: fcQPictureFormatPlugin_method_callback_loadPicture,
+  savePicture: fcQPictureFormatPlugin_method_callback_savePicture,
+  installIOHandler: fcQPictureFormatPlugin_method_callback_installIOHandler,
+  event: fcQPictureFormatPlugin_method_callback_event,
+  eventFilter: fcQPictureFormatPlugin_method_callback_eventFilter,
+  timerEvent: fcQPictureFormatPlugin_method_callback_timerEvent,
+  childEvent: fcQPictureFormatPlugin_method_callback_childEvent,
+  customEvent: fcQPictureFormatPlugin_method_callback_customEvent,
+  connectNotify: fcQPictureFormatPlugin_method_callback_connectNotify,
+  disconnectNotify: fcQPictureFormatPlugin_method_callback_disconnectNotify,
 )
 proc create*(T: type gen_qpictureformatplugin_types.QPictureFormatPlugin,
     inst: VirtualQPictureFormatPlugin) =

@@ -100,6 +100,7 @@ proc fcQButtonGroup_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string
 proc fcQButtonGroup_addButton2(self: pointer, param1: pointer, id: cint): void {.importc: "QButtonGroup_addButton2".}
 proc fcQButtonGroup_vtbl(self: pointer): pointer {.importc: "QButtonGroup_vtbl".}
 proc fcQButtonGroup_vdata(self: pointer): pointer {.importc: "QButtonGroup_vdata".}
+
 type cQButtonGroupVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -191,67 +192,67 @@ proc buttonClicked*(self: gen_qbuttongroup_types.QButtonGroup, param1: gen_qabst
   fcQButtonGroup_buttonClicked(self.h, param1.h)
 
 type QButtonGroupbuttonClickedSlot* = proc(param1: gen_qabstractbutton_types.QAbstractButton)
-proc cQButtonGroup_slot_callback_buttonClicked(slot: int, param1: pointer) {.cdecl.} =
+proc fcQButtonGroup_slot_callback_buttonClicked(slot: int, param1: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QButtonGroupbuttonClickedSlot](cast[pointer](slot))
   let slotval1 = gen_qabstractbutton_types.QAbstractButton(h: param1, owned: false)
 
   nimfunc[](slotval1)
 
-proc cQButtonGroup_slot_callback_buttonClicked_release(slot: int) {.cdecl.} =
+proc fcQButtonGroup_slot_callback_buttonClicked_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QButtonGroupbuttonClickedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onbuttonClicked*(self: gen_qbuttongroup_types.QButtonGroup, slot: QButtonGroupbuttonClickedSlot) =
+proc onButtonClicked*(self: gen_qbuttongroup_types.QButtonGroup, slot: QButtonGroupbuttonClickedSlot) =
   var tmp = new QButtonGroupbuttonClickedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQButtonGroup_connect_buttonClicked(self.h, cast[int](addr tmp[]), cQButtonGroup_slot_callback_buttonClicked, cQButtonGroup_slot_callback_buttonClicked_release)
+  fcQButtonGroup_connect_buttonClicked(self.h, cast[int](addr tmp[]), fcQButtonGroup_slot_callback_buttonClicked, fcQButtonGroup_slot_callback_buttonClicked_release)
 
 proc buttonPressed*(self: gen_qbuttongroup_types.QButtonGroup, param1: gen_qabstractbutton_types.QAbstractButton): void =
   fcQButtonGroup_buttonPressed(self.h, param1.h)
 
 type QButtonGroupbuttonPressedSlot* = proc(param1: gen_qabstractbutton_types.QAbstractButton)
-proc cQButtonGroup_slot_callback_buttonPressed(slot: int, param1: pointer) {.cdecl.} =
+proc fcQButtonGroup_slot_callback_buttonPressed(slot: int, param1: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QButtonGroupbuttonPressedSlot](cast[pointer](slot))
   let slotval1 = gen_qabstractbutton_types.QAbstractButton(h: param1, owned: false)
 
   nimfunc[](slotval1)
 
-proc cQButtonGroup_slot_callback_buttonPressed_release(slot: int) {.cdecl.} =
+proc fcQButtonGroup_slot_callback_buttonPressed_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QButtonGroupbuttonPressedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onbuttonPressed*(self: gen_qbuttongroup_types.QButtonGroup, slot: QButtonGroupbuttonPressedSlot) =
+proc onButtonPressed*(self: gen_qbuttongroup_types.QButtonGroup, slot: QButtonGroupbuttonPressedSlot) =
   var tmp = new QButtonGroupbuttonPressedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQButtonGroup_connect_buttonPressed(self.h, cast[int](addr tmp[]), cQButtonGroup_slot_callback_buttonPressed, cQButtonGroup_slot_callback_buttonPressed_release)
+  fcQButtonGroup_connect_buttonPressed(self.h, cast[int](addr tmp[]), fcQButtonGroup_slot_callback_buttonPressed, fcQButtonGroup_slot_callback_buttonPressed_release)
 
 proc buttonReleased*(self: gen_qbuttongroup_types.QButtonGroup, param1: gen_qabstractbutton_types.QAbstractButton): void =
   fcQButtonGroup_buttonReleased(self.h, param1.h)
 
 type QButtonGroupbuttonReleasedSlot* = proc(param1: gen_qabstractbutton_types.QAbstractButton)
-proc cQButtonGroup_slot_callback_buttonReleased(slot: int, param1: pointer) {.cdecl.} =
+proc fcQButtonGroup_slot_callback_buttonReleased(slot: int, param1: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QButtonGroupbuttonReleasedSlot](cast[pointer](slot))
   let slotval1 = gen_qabstractbutton_types.QAbstractButton(h: param1, owned: false)
 
   nimfunc[](slotval1)
 
-proc cQButtonGroup_slot_callback_buttonReleased_release(slot: int) {.cdecl.} =
+proc fcQButtonGroup_slot_callback_buttonReleased_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QButtonGroupbuttonReleasedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onbuttonReleased*(self: gen_qbuttongroup_types.QButtonGroup, slot: QButtonGroupbuttonReleasedSlot) =
+proc onButtonReleased*(self: gen_qbuttongroup_types.QButtonGroup, slot: QButtonGroupbuttonReleasedSlot) =
   var tmp = new QButtonGroupbuttonReleasedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQButtonGroup_connect_buttonReleased(self.h, cast[int](addr tmp[]), cQButtonGroup_slot_callback_buttonReleased, cQButtonGroup_slot_callback_buttonReleased_release)
+  fcQButtonGroup_connect_buttonReleased(self.h, cast[int](addr tmp[]), fcQButtonGroup_slot_callback_buttonReleased, fcQButtonGroup_slot_callback_buttonReleased_release)
 
 proc buttonToggled*(self: gen_qbuttongroup_types.QButtonGroup, param1: gen_qabstractbutton_types.QAbstractButton, param2: bool): void =
   fcQButtonGroup_buttonToggled(self.h, param1.h, param2)
 
 type QButtonGroupbuttonToggledSlot* = proc(param1: gen_qabstractbutton_types.QAbstractButton, param2: bool)
-proc cQButtonGroup_slot_callback_buttonToggled(slot: int, param1: pointer, param2: bool) {.cdecl.} =
+proc fcQButtonGroup_slot_callback_buttonToggled(slot: int, param1: pointer, param2: bool) {.cdecl.} =
   let nimfunc = cast[ptr QButtonGroupbuttonToggledSlot](cast[pointer](slot))
   let slotval1 = gen_qabstractbutton_types.QAbstractButton(h: param1, owned: false)
 
@@ -259,81 +260,81 @@ proc cQButtonGroup_slot_callback_buttonToggled(slot: int, param1: pointer, param
 
   nimfunc[](slotval1, slotval2)
 
-proc cQButtonGroup_slot_callback_buttonToggled_release(slot: int) {.cdecl.} =
+proc fcQButtonGroup_slot_callback_buttonToggled_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QButtonGroupbuttonToggledSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onbuttonToggled*(self: gen_qbuttongroup_types.QButtonGroup, slot: QButtonGroupbuttonToggledSlot) =
+proc onButtonToggled*(self: gen_qbuttongroup_types.QButtonGroup, slot: QButtonGroupbuttonToggledSlot) =
   var tmp = new QButtonGroupbuttonToggledSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQButtonGroup_connect_buttonToggled(self.h, cast[int](addr tmp[]), cQButtonGroup_slot_callback_buttonToggled, cQButtonGroup_slot_callback_buttonToggled_release)
+  fcQButtonGroup_connect_buttonToggled(self.h, cast[int](addr tmp[]), fcQButtonGroup_slot_callback_buttonToggled, fcQButtonGroup_slot_callback_buttonToggled_release)
 
 proc idClicked*(self: gen_qbuttongroup_types.QButtonGroup, param1: cint): void =
   fcQButtonGroup_idClicked(self.h, param1)
 
 type QButtonGroupidClickedSlot* = proc(param1: cint)
-proc cQButtonGroup_slot_callback_idClicked(slot: int, param1: cint) {.cdecl.} =
+proc fcQButtonGroup_slot_callback_idClicked(slot: int, param1: cint) {.cdecl.} =
   let nimfunc = cast[ptr QButtonGroupidClickedSlot](cast[pointer](slot))
   let slotval1 = param1
 
   nimfunc[](slotval1)
 
-proc cQButtonGroup_slot_callback_idClicked_release(slot: int) {.cdecl.} =
+proc fcQButtonGroup_slot_callback_idClicked_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QButtonGroupidClickedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onidClicked*(self: gen_qbuttongroup_types.QButtonGroup, slot: QButtonGroupidClickedSlot) =
+proc onIdClicked*(self: gen_qbuttongroup_types.QButtonGroup, slot: QButtonGroupidClickedSlot) =
   var tmp = new QButtonGroupidClickedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQButtonGroup_connect_idClicked(self.h, cast[int](addr tmp[]), cQButtonGroup_slot_callback_idClicked, cQButtonGroup_slot_callback_idClicked_release)
+  fcQButtonGroup_connect_idClicked(self.h, cast[int](addr tmp[]), fcQButtonGroup_slot_callback_idClicked, fcQButtonGroup_slot_callback_idClicked_release)
 
 proc idPressed*(self: gen_qbuttongroup_types.QButtonGroup, param1: cint): void =
   fcQButtonGroup_idPressed(self.h, param1)
 
 type QButtonGroupidPressedSlot* = proc(param1: cint)
-proc cQButtonGroup_slot_callback_idPressed(slot: int, param1: cint) {.cdecl.} =
+proc fcQButtonGroup_slot_callback_idPressed(slot: int, param1: cint) {.cdecl.} =
   let nimfunc = cast[ptr QButtonGroupidPressedSlot](cast[pointer](slot))
   let slotval1 = param1
 
   nimfunc[](slotval1)
 
-proc cQButtonGroup_slot_callback_idPressed_release(slot: int) {.cdecl.} =
+proc fcQButtonGroup_slot_callback_idPressed_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QButtonGroupidPressedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onidPressed*(self: gen_qbuttongroup_types.QButtonGroup, slot: QButtonGroupidPressedSlot) =
+proc onIdPressed*(self: gen_qbuttongroup_types.QButtonGroup, slot: QButtonGroupidPressedSlot) =
   var tmp = new QButtonGroupidPressedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQButtonGroup_connect_idPressed(self.h, cast[int](addr tmp[]), cQButtonGroup_slot_callback_idPressed, cQButtonGroup_slot_callback_idPressed_release)
+  fcQButtonGroup_connect_idPressed(self.h, cast[int](addr tmp[]), fcQButtonGroup_slot_callback_idPressed, fcQButtonGroup_slot_callback_idPressed_release)
 
 proc idReleased*(self: gen_qbuttongroup_types.QButtonGroup, param1: cint): void =
   fcQButtonGroup_idReleased(self.h, param1)
 
 type QButtonGroupidReleasedSlot* = proc(param1: cint)
-proc cQButtonGroup_slot_callback_idReleased(slot: int, param1: cint) {.cdecl.} =
+proc fcQButtonGroup_slot_callback_idReleased(slot: int, param1: cint) {.cdecl.} =
   let nimfunc = cast[ptr QButtonGroupidReleasedSlot](cast[pointer](slot))
   let slotval1 = param1
 
   nimfunc[](slotval1)
 
-proc cQButtonGroup_slot_callback_idReleased_release(slot: int) {.cdecl.} =
+proc fcQButtonGroup_slot_callback_idReleased_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QButtonGroupidReleasedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onidReleased*(self: gen_qbuttongroup_types.QButtonGroup, slot: QButtonGroupidReleasedSlot) =
+proc onIdReleased*(self: gen_qbuttongroup_types.QButtonGroup, slot: QButtonGroupidReleasedSlot) =
   var tmp = new QButtonGroupidReleasedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQButtonGroup_connect_idReleased(self.h, cast[int](addr tmp[]), cQButtonGroup_slot_callback_idReleased, cQButtonGroup_slot_callback_idReleased_release)
+  fcQButtonGroup_connect_idReleased(self.h, cast[int](addr tmp[]), fcQButtonGroup_slot_callback_idReleased, fcQButtonGroup_slot_callback_idReleased_release)
 
 proc idToggled*(self: gen_qbuttongroup_types.QButtonGroup, param1: cint, param2: bool): void =
   fcQButtonGroup_idToggled(self.h, param1, param2)
 
 type QButtonGroupidToggledSlot* = proc(param1: cint, param2: bool)
-proc cQButtonGroup_slot_callback_idToggled(slot: int, param1: cint, param2: bool) {.cdecl.} =
+proc fcQButtonGroup_slot_callback_idToggled(slot: int, param1: cint, param2: bool) {.cdecl.} =
   let nimfunc = cast[ptr QButtonGroupidToggledSlot](cast[pointer](slot))
   let slotval1 = param1
 
@@ -341,81 +342,81 @@ proc cQButtonGroup_slot_callback_idToggled(slot: int, param1: cint, param2: bool
 
   nimfunc[](slotval1, slotval2)
 
-proc cQButtonGroup_slot_callback_idToggled_release(slot: int) {.cdecl.} =
+proc fcQButtonGroup_slot_callback_idToggled_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QButtonGroupidToggledSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onidToggled*(self: gen_qbuttongroup_types.QButtonGroup, slot: QButtonGroupidToggledSlot) =
+proc onIdToggled*(self: gen_qbuttongroup_types.QButtonGroup, slot: QButtonGroupidToggledSlot) =
   var tmp = new QButtonGroupidToggledSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQButtonGroup_connect_idToggled(self.h, cast[int](addr tmp[]), cQButtonGroup_slot_callback_idToggled, cQButtonGroup_slot_callback_idToggled_release)
+  fcQButtonGroup_connect_idToggled(self.h, cast[int](addr tmp[]), fcQButtonGroup_slot_callback_idToggled, fcQButtonGroup_slot_callback_idToggled_release)
 
 proc buttonClicked*(self: gen_qbuttongroup_types.QButtonGroup, param1: cint): void =
   fcQButtonGroup_buttonClickedWithInt(self.h, param1)
 
 type QButtonGroupbuttonClickedWithIntSlot* = proc(param1: cint)
-proc cQButtonGroup_slot_callback_buttonClickedWithInt(slot: int, param1: cint) {.cdecl.} =
+proc fcQButtonGroup_slot_callback_buttonClickedWithInt(slot: int, param1: cint) {.cdecl.} =
   let nimfunc = cast[ptr QButtonGroupbuttonClickedWithIntSlot](cast[pointer](slot))
   let slotval1 = param1
 
   nimfunc[](slotval1)
 
-proc cQButtonGroup_slot_callback_buttonClickedWithInt_release(slot: int) {.cdecl.} =
+proc fcQButtonGroup_slot_callback_buttonClickedWithInt_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QButtonGroupbuttonClickedWithIntSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onbuttonClicked*(self: gen_qbuttongroup_types.QButtonGroup, slot: QButtonGroupbuttonClickedWithIntSlot) =
+proc onButtonClicked*(self: gen_qbuttongroup_types.QButtonGroup, slot: QButtonGroupbuttonClickedWithIntSlot) =
   var tmp = new QButtonGroupbuttonClickedWithIntSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQButtonGroup_connect_buttonClickedWithInt(self.h, cast[int](addr tmp[]), cQButtonGroup_slot_callback_buttonClickedWithInt, cQButtonGroup_slot_callback_buttonClickedWithInt_release)
+  fcQButtonGroup_connect_buttonClickedWithInt(self.h, cast[int](addr tmp[]), fcQButtonGroup_slot_callback_buttonClickedWithInt, fcQButtonGroup_slot_callback_buttonClickedWithInt_release)
 
 proc buttonPressed*(self: gen_qbuttongroup_types.QButtonGroup, param1: cint): void =
   fcQButtonGroup_buttonPressedWithInt(self.h, param1)
 
 type QButtonGroupbuttonPressedWithIntSlot* = proc(param1: cint)
-proc cQButtonGroup_slot_callback_buttonPressedWithInt(slot: int, param1: cint) {.cdecl.} =
+proc fcQButtonGroup_slot_callback_buttonPressedWithInt(slot: int, param1: cint) {.cdecl.} =
   let nimfunc = cast[ptr QButtonGroupbuttonPressedWithIntSlot](cast[pointer](slot))
   let slotval1 = param1
 
   nimfunc[](slotval1)
 
-proc cQButtonGroup_slot_callback_buttonPressedWithInt_release(slot: int) {.cdecl.} =
+proc fcQButtonGroup_slot_callback_buttonPressedWithInt_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QButtonGroupbuttonPressedWithIntSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onbuttonPressed*(self: gen_qbuttongroup_types.QButtonGroup, slot: QButtonGroupbuttonPressedWithIntSlot) =
+proc onButtonPressed*(self: gen_qbuttongroup_types.QButtonGroup, slot: QButtonGroupbuttonPressedWithIntSlot) =
   var tmp = new QButtonGroupbuttonPressedWithIntSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQButtonGroup_connect_buttonPressedWithInt(self.h, cast[int](addr tmp[]), cQButtonGroup_slot_callback_buttonPressedWithInt, cQButtonGroup_slot_callback_buttonPressedWithInt_release)
+  fcQButtonGroup_connect_buttonPressedWithInt(self.h, cast[int](addr tmp[]), fcQButtonGroup_slot_callback_buttonPressedWithInt, fcQButtonGroup_slot_callback_buttonPressedWithInt_release)
 
 proc buttonReleased*(self: gen_qbuttongroup_types.QButtonGroup, param1: cint): void =
   fcQButtonGroup_buttonReleasedWithInt(self.h, param1)
 
 type QButtonGroupbuttonReleasedWithIntSlot* = proc(param1: cint)
-proc cQButtonGroup_slot_callback_buttonReleasedWithInt(slot: int, param1: cint) {.cdecl.} =
+proc fcQButtonGroup_slot_callback_buttonReleasedWithInt(slot: int, param1: cint) {.cdecl.} =
   let nimfunc = cast[ptr QButtonGroupbuttonReleasedWithIntSlot](cast[pointer](slot))
   let slotval1 = param1
 
   nimfunc[](slotval1)
 
-proc cQButtonGroup_slot_callback_buttonReleasedWithInt_release(slot: int) {.cdecl.} =
+proc fcQButtonGroup_slot_callback_buttonReleasedWithInt_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QButtonGroupbuttonReleasedWithIntSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onbuttonReleased*(self: gen_qbuttongroup_types.QButtonGroup, slot: QButtonGroupbuttonReleasedWithIntSlot) =
+proc onButtonReleased*(self: gen_qbuttongroup_types.QButtonGroup, slot: QButtonGroupbuttonReleasedWithIntSlot) =
   var tmp = new QButtonGroupbuttonReleasedWithIntSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQButtonGroup_connect_buttonReleasedWithInt(self.h, cast[int](addr tmp[]), cQButtonGroup_slot_callback_buttonReleasedWithInt, cQButtonGroup_slot_callback_buttonReleasedWithInt_release)
+  fcQButtonGroup_connect_buttonReleasedWithInt(self.h, cast[int](addr tmp[]), fcQButtonGroup_slot_callback_buttonReleasedWithInt, fcQButtonGroup_slot_callback_buttonReleasedWithInt_release)
 
 proc buttonToggled*(self: gen_qbuttongroup_types.QButtonGroup, param1: cint, param2: bool): void =
   fcQButtonGroup_buttonToggled2(self.h, param1, param2)
 
 type QButtonGroupbuttonToggled2Slot* = proc(param1: cint, param2: bool)
-proc cQButtonGroup_slot_callback_buttonToggled2(slot: int, param1: cint, param2: bool) {.cdecl.} =
+proc fcQButtonGroup_slot_callback_buttonToggled2(slot: int, param1: cint, param2: bool) {.cdecl.} =
   let nimfunc = cast[ptr QButtonGroupbuttonToggled2Slot](cast[pointer](slot))
   let slotval1 = param1
 
@@ -423,15 +424,15 @@ proc cQButtonGroup_slot_callback_buttonToggled2(slot: int, param1: cint, param2:
 
   nimfunc[](slotval1, slotval2)
 
-proc cQButtonGroup_slot_callback_buttonToggled2_release(slot: int) {.cdecl.} =
+proc fcQButtonGroup_slot_callback_buttonToggled2_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QButtonGroupbuttonToggled2Slot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onbuttonToggled*(self: gen_qbuttongroup_types.QButtonGroup, slot: QButtonGroupbuttonToggled2Slot) =
+proc onButtonToggled*(self: gen_qbuttongroup_types.QButtonGroup, slot: QButtonGroupbuttonToggled2Slot) =
   var tmp = new QButtonGroupbuttonToggled2Slot
   tmp[] = slot
   GC_ref(tmp)
-  fcQButtonGroup_connect_buttonToggled2(self.h, cast[int](addr tmp[]), cQButtonGroup_slot_callback_buttonToggled2, cQButtonGroup_slot_callback_buttonToggled2_release)
+  fcQButtonGroup_connect_buttonToggled2(self.h, cast[int](addr tmp[]), fcQButtonGroup_slot_callback_buttonToggled2, fcQButtonGroup_slot_callback_buttonToggled2_release)
 
 proc tr*(_: type gen_qbuttongroup_types.QButtonGroup, s: cstring, c: cstring): string =
   let v_ms = fcQButtonGroup_tr2(s, c)
@@ -470,6 +471,7 @@ type QButtonGroupchildEventProc* = proc(self: QButtonGroup, event: gen_qcoreeven
 type QButtonGroupcustomEventProc* = proc(self: QButtonGroup, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QButtonGroupconnectNotifyProc* = proc(self: QButtonGroup, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QButtonGroupdisconnectNotifyProc* = proc(self: QButtonGroup, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+
 type QButtonGroupVTable* {.inheritable, pure.} = object
   vtbl: cQButtonGroupVTable
   metaObject*: QButtonGroupmetaObjectProc
@@ -482,10 +484,39 @@ type QButtonGroupVTable* {.inheritable, pure.} = object
   customEvent*: QButtonGroupcustomEventProc
   connectNotify*: QButtonGroupconnectNotifyProc
   disconnectNotify*: QButtonGroupdisconnectNotifyProc
+
 proc QButtonGroupmetaObject*(self: gen_qbuttongroup_types.QButtonGroup): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQButtonGroup_virtualbase_metaObject(self.h), owned: false)
 
-proc cQButtonGroup_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
+proc QButtonGroupmetacast*(self: gen_qbuttongroup_types.QButtonGroup, param1: cstring): pointer =
+  fcQButtonGroup_virtualbase_metacast(self.h, param1)
+
+proc QButtonGroupmetacall*(self: gen_qbuttongroup_types.QButtonGroup, param1: cint, param2: cint, param3: pointer): cint =
+  fcQButtonGroup_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+proc QButtonGroupevent*(self: gen_qbuttongroup_types.QButtonGroup, event: gen_qcoreevent_types.QEvent): bool =
+  fcQButtonGroup_virtualbase_event(self.h, event.h)
+
+proc QButtonGroupeventFilter*(self: gen_qbuttongroup_types.QButtonGroup, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
+  fcQButtonGroup_virtualbase_eventFilter(self.h, watched.h, event.h)
+
+proc QButtonGrouptimerEvent*(self: gen_qbuttongroup_types.QButtonGroup, event: gen_qcoreevent_types.QTimerEvent): void =
+  fcQButtonGroup_virtualbase_timerEvent(self.h, event.h)
+
+proc QButtonGroupchildEvent*(self: gen_qbuttongroup_types.QButtonGroup, event: gen_qcoreevent_types.QChildEvent): void =
+  fcQButtonGroup_virtualbase_childEvent(self.h, event.h)
+
+proc QButtonGroupcustomEvent*(self: gen_qbuttongroup_types.QButtonGroup, event: gen_qcoreevent_types.QEvent): void =
+  fcQButtonGroup_virtualbase_customEvent(self.h, event.h)
+
+proc QButtonGroupconnectNotify*(self: gen_qbuttongroup_types.QButtonGroup, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQButtonGroup_virtualbase_connectNotify(self.h, signal.h)
+
+proc QButtonGroupdisconnectNotify*(self: gen_qbuttongroup_types.QButtonGroup, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQButtonGroup_virtualbase_disconnectNotify(self.h, signal.h)
+
+
+proc fcQButtonGroup_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QButtonGroupVTable](fcQButtonGroup_vdata(self))
   let self = QButtonGroup(h: self)
   var virtualReturn = vtbl[].metaObject(self)
@@ -494,20 +525,14 @@ proc cQButtonGroup_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} 
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QButtonGroupmetacast*(self: gen_qbuttongroup_types.QButtonGroup, param1: cstring): pointer =
-  fcQButtonGroup_virtualbase_metacast(self.h, param1)
-
-proc cQButtonGroup_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+proc fcQButtonGroup_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QButtonGroupVTable](fcQButtonGroup_vdata(self))
   let self = QButtonGroup(h: self)
   let slotval1 = (param1)
   var virtualReturn = vtbl[].metacast(self, slotval1)
   virtualReturn
 
-proc QButtonGroupmetacall*(self: gen_qbuttongroup_types.QButtonGroup, param1: cint, param2: cint, param3: pointer): cint =
-  fcQButtonGroup_virtualbase_metacall(self.h, cint(param1), param2, param3)
-
-proc cQButtonGroup_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+proc fcQButtonGroup_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QButtonGroupVTable](fcQButtonGroup_vdata(self))
   let self = QButtonGroup(h: self)
   let slotval1 = cint(param1)
@@ -516,20 +541,14 @@ proc cQButtonGroup_vtable_callback_metacall(self: pointer, param1: cint, param2:
   var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QButtonGroupevent*(self: gen_qbuttongroup_types.QButtonGroup, event: gen_qcoreevent_types.QEvent): bool =
-  fcQButtonGroup_virtualbase_event(self.h, event.h)
-
-proc cQButtonGroup_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
+proc fcQButtonGroup_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QButtonGroupVTable](fcQButtonGroup_vdata(self))
   let self = QButtonGroup(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
-proc QButtonGroupeventFilter*(self: gen_qbuttongroup_types.QButtonGroup, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
-  fcQButtonGroup_virtualbase_eventFilter(self.h, watched.h, event.h)
-
-proc cQButtonGroup_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+proc fcQButtonGroup_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QButtonGroupVTable](fcQButtonGroup_vdata(self))
   let self = QButtonGroup(h: self)
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
@@ -537,46 +556,31 @@ proc cQButtonGroup_vtable_callback_eventFilter(self: pointer, watched: pointer, 
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
-proc QButtonGrouptimerEvent*(self: gen_qbuttongroup_types.QButtonGroup, event: gen_qcoreevent_types.QTimerEvent): void =
-  fcQButtonGroup_virtualbase_timerEvent(self.h, event.h)
-
-proc cQButtonGroup_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQButtonGroup_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QButtonGroupVTable](fcQButtonGroup_vdata(self))
   let self = QButtonGroup(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
-proc QButtonGroupchildEvent*(self: gen_qbuttongroup_types.QButtonGroup, event: gen_qcoreevent_types.QChildEvent): void =
-  fcQButtonGroup_virtualbase_childEvent(self.h, event.h)
-
-proc cQButtonGroup_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQButtonGroup_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QButtonGroupVTable](fcQButtonGroup_vdata(self))
   let self = QButtonGroup(h: self)
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
-proc QButtonGroupcustomEvent*(self: gen_qbuttongroup_types.QButtonGroup, event: gen_qcoreevent_types.QEvent): void =
-  fcQButtonGroup_virtualbase_customEvent(self.h, event.h)
-
-proc cQButtonGroup_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQButtonGroup_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QButtonGroupVTable](fcQButtonGroup_vdata(self))
   let self = QButtonGroup(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
-proc QButtonGroupconnectNotify*(self: gen_qbuttongroup_types.QButtonGroup, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQButtonGroup_virtualbase_connectNotify(self.h, signal.h)
-
-proc cQButtonGroup_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQButtonGroup_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QButtonGroupVTable](fcQButtonGroup_vdata(self))
   let self = QButtonGroup(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
-proc QButtonGroupdisconnectNotify*(self: gen_qbuttongroup_types.QButtonGroup, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQButtonGroup_virtualbase_disconnectNotify(self.h, signal.h)
-
-proc cQButtonGroup_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQButtonGroup_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QButtonGroupVTable](fcQButtonGroup_vdata(self))
   let self = QButtonGroup(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
@@ -584,9 +588,29 @@ proc cQButtonGroup_vtable_callback_disconnectNotify(self: pointer, signal: point
 
 type VirtualQButtonGroup* {.inheritable.} = ref object of QButtonGroup
   vtbl*: cQButtonGroupVTable
+
 method metaObject*(self: VirtualQButtonGroup): gen_qobjectdefs_types.QMetaObject {.base.} =
   QButtonGroupmetaObject(self[])
-proc cQButtonGroup_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
+method metacast*(self: VirtualQButtonGroup, param1: cstring): pointer {.base.} =
+  QButtonGroupmetacast(self[], param1)
+method metacall*(self: VirtualQButtonGroup, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QButtonGroupmetacall(self[], param1, param2, param3)
+method event*(self: VirtualQButtonGroup, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QButtonGroupevent(self[], event)
+method eventFilter*(self: VirtualQButtonGroup, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QButtonGroupeventFilter(self[], watched, event)
+method timerEvent*(self: VirtualQButtonGroup, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QButtonGrouptimerEvent(self[], event)
+method childEvent*(self: VirtualQButtonGroup, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QButtonGroupchildEvent(self[], event)
+method customEvent*(self: VirtualQButtonGroup, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QButtonGroupcustomEvent(self[], event)
+method connectNotify*(self: VirtualQButtonGroup, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QButtonGroupconnectNotify(self[], signal)
+method disconnectNotify*(self: VirtualQButtonGroup, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QButtonGroupdisconnectNotify(self[], signal)
+
+proc fcQButtonGroup_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQButtonGroup](fcQButtonGroup_vdata(self))
   var virtualReturn = inst.metaObject()
   virtualReturn.owned = false # TODO move?
@@ -594,17 +618,13 @@ proc cQButtonGroup_method_callback_metaObject(self: pointer): pointer {.cdecl.} 
   virtualReturn.h = nil
   virtualReturn_h
 
-method metacast*(self: VirtualQButtonGroup, param1: cstring): pointer {.base.} =
-  QButtonGroupmetacast(self[], param1)
-proc cQButtonGroup_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+proc fcQButtonGroup_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQButtonGroup](fcQButtonGroup_vdata(self))
   let slotval1 = (param1)
   var virtualReturn = inst.metacast(slotval1)
   virtualReturn
 
-method metacall*(self: VirtualQButtonGroup, param1: cint, param2: cint, param3: pointer): cint {.base.} =
-  QButtonGroupmetacall(self[], param1, param2, param3)
-proc cQButtonGroup_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+proc fcQButtonGroup_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQButtonGroup](fcQButtonGroup_vdata(self))
   let slotval1 = cint(param1)
   let slotval2 = param2
@@ -612,57 +632,44 @@ proc cQButtonGroup_method_callback_metacall(self: pointer, param1: cint, param2:
   var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
-method event*(self: VirtualQButtonGroup, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QButtonGroupevent(self[], event)
-proc cQButtonGroup_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
+proc fcQButtonGroup_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQButtonGroup](fcQButtonGroup_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
-method eventFilter*(self: VirtualQButtonGroup, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QButtonGroupeventFilter(self[], watched, event)
-proc cQButtonGroup_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+proc fcQButtonGroup_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQButtonGroup](fcQButtonGroup_vdata(self))
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
   let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
-method timerEvent*(self: VirtualQButtonGroup, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
-  QButtonGrouptimerEvent(self[], event)
-proc cQButtonGroup_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQButtonGroup_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQButtonGroup](fcQButtonGroup_vdata(self))
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
-method childEvent*(self: VirtualQButtonGroup, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
-  QButtonGroupchildEvent(self[], event)
-proc cQButtonGroup_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQButtonGroup_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQButtonGroup](fcQButtonGroup_vdata(self))
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
-method customEvent*(self: VirtualQButtonGroup, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QButtonGroupcustomEvent(self[], event)
-proc cQButtonGroup_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQButtonGroup_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQButtonGroup](fcQButtonGroup_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
-method connectNotify*(self: VirtualQButtonGroup, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QButtonGroupconnectNotify(self[], signal)
-proc cQButtonGroup_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQButtonGroup_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQButtonGroup](fcQButtonGroup_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
-method disconnectNotify*(self: VirtualQButtonGroup, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QButtonGroupdisconnectNotify(self[], signal)
-proc cQButtonGroup_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQButtonGroup_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQButtonGroup](fcQButtonGroup_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
+
 
 proc sender*(self: gen_qbuttongroup_types.QButtonGroup): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQButtonGroup_protectedbase_sender(self.h), owned: false)
@@ -684,25 +691,25 @@ proc create*(T: type gen_qbuttongroup_types.QButtonGroup,
     let vtbl = cast[ref QButtonGroupVTable](fcQButtonGroup_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQButtonGroup_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQButtonGroup_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQButtonGroup_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQButtonGroup_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQButtonGroup_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQButtonGroup_vtable_callback_metacall
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQButtonGroup_vtable_callback_event
+    vtbl[].vtbl.event = fcQButtonGroup_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQButtonGroup_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQButtonGroup_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQButtonGroup_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQButtonGroup_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQButtonGroup_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQButtonGroup_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQButtonGroup_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQButtonGroup_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQButtonGroup_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQButtonGroup_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQButtonGroup_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQButtonGroup_vtable_callback_disconnectNotify
   gen_qbuttongroup_types.QButtonGroup(h: fcQButtonGroup_new(addr(vtbl[].vtbl), addr(vtbl[])), owned: true)
 
 proc create*(T: type gen_qbuttongroup_types.QButtonGroup,
@@ -714,25 +721,25 @@ proc create*(T: type gen_qbuttongroup_types.QButtonGroup,
     let vtbl = cast[ref QButtonGroupVTable](fcQButtonGroup_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQButtonGroup_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQButtonGroup_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQButtonGroup_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQButtonGroup_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQButtonGroup_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQButtonGroup_vtable_callback_metacall
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQButtonGroup_vtable_callback_event
+    vtbl[].vtbl.event = fcQButtonGroup_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQButtonGroup_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQButtonGroup_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQButtonGroup_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQButtonGroup_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQButtonGroup_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQButtonGroup_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQButtonGroup_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQButtonGroup_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQButtonGroup_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQButtonGroup_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQButtonGroup_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQButtonGroup_vtable_callback_disconnectNotify
   gen_qbuttongroup_types.QButtonGroup(h: fcQButtonGroup_new2(addr(vtbl[].vtbl), addr(vtbl[]), parent.h), owned: true)
 
 const cQButtonGroup_mvtbl = cQButtonGroupVTable(
@@ -740,16 +747,17 @@ const cQButtonGroup_mvtbl = cQButtonGroupVTable(
     let inst = cast[ptr typeof(VirtualQButtonGroup()[])](self.fcQButtonGroup_vtbl())
     inst[].h = nil
     inst[].owned = false,
-  metaObject: cQButtonGroup_method_callback_metaObject,
-  metacast: cQButtonGroup_method_callback_metacast,
-  metacall: cQButtonGroup_method_callback_metacall,
-  event: cQButtonGroup_method_callback_event,
-  eventFilter: cQButtonGroup_method_callback_eventFilter,
-  timerEvent: cQButtonGroup_method_callback_timerEvent,
-  childEvent: cQButtonGroup_method_callback_childEvent,
-  customEvent: cQButtonGroup_method_callback_customEvent,
-  connectNotify: cQButtonGroup_method_callback_connectNotify,
-  disconnectNotify: cQButtonGroup_method_callback_disconnectNotify,
+
+  metaObject: fcQButtonGroup_method_callback_metaObject,
+  metacast: fcQButtonGroup_method_callback_metacast,
+  metacall: fcQButtonGroup_method_callback_metacall,
+  event: fcQButtonGroup_method_callback_event,
+  eventFilter: fcQButtonGroup_method_callback_eventFilter,
+  timerEvent: fcQButtonGroup_method_callback_timerEvent,
+  childEvent: fcQButtonGroup_method_callback_childEvent,
+  customEvent: fcQButtonGroup_method_callback_customEvent,
+  connectNotify: fcQButtonGroup_method_callback_connectNotify,
+  disconnectNotify: fcQButtonGroup_method_callback_disconnectNotify,
 )
 proc create*(T: type gen_qbuttongroup_types.QButtonGroup,
     inst: VirtualQButtonGroup) =

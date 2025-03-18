@@ -112,21 +112,21 @@ proc bufferFormatChanged*(self: gen_qcameracapturebufferformatcontrol_types.QCam
   fcQCameraCaptureBufferFormatControl_bufferFormatChanged(self.h, cint(format))
 
 type QCameraCaptureBufferFormatControlbufferFormatChangedSlot* = proc(format: cint)
-proc cQCameraCaptureBufferFormatControl_slot_callback_bufferFormatChanged(slot: int, format: cint) {.cdecl.} =
+proc fcQCameraCaptureBufferFormatControl_slot_callback_bufferFormatChanged(slot: int, format: cint) {.cdecl.} =
   let nimfunc = cast[ptr QCameraCaptureBufferFormatControlbufferFormatChangedSlot](cast[pointer](slot))
   let slotval1 = cint(format)
 
   nimfunc[](slotval1)
 
-proc cQCameraCaptureBufferFormatControl_slot_callback_bufferFormatChanged_release(slot: int) {.cdecl.} =
+proc fcQCameraCaptureBufferFormatControl_slot_callback_bufferFormatChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QCameraCaptureBufferFormatControlbufferFormatChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onbufferFormatChanged*(self: gen_qcameracapturebufferformatcontrol_types.QCameraCaptureBufferFormatControl, slot: QCameraCaptureBufferFormatControlbufferFormatChangedSlot) =
+proc onBufferFormatChanged*(self: gen_qcameracapturebufferformatcontrol_types.QCameraCaptureBufferFormatControl, slot: QCameraCaptureBufferFormatControlbufferFormatChangedSlot) =
   var tmp = new QCameraCaptureBufferFormatControlbufferFormatChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQCameraCaptureBufferFormatControl_connect_bufferFormatChanged(self.h, cast[int](addr tmp[]), cQCameraCaptureBufferFormatControl_slot_callback_bufferFormatChanged, cQCameraCaptureBufferFormatControl_slot_callback_bufferFormatChanged_release)
+  fcQCameraCaptureBufferFormatControl_connect_bufferFormatChanged(self.h, cast[int](addr tmp[]), fcQCameraCaptureBufferFormatControl_slot_callback_bufferFormatChanged, fcQCameraCaptureBufferFormatControl_slot_callback_bufferFormatChanged_release)
 
 proc tr*(_: type gen_qcameracapturebufferformatcontrol_types.QCameraCaptureBufferFormatControl, s: cstring, c: cstring): string =
   let v_ms = fcQCameraCaptureBufferFormatControl_tr2(s, c)

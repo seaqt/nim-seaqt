@@ -170,6 +170,7 @@ proc fcQMediaRecorder_setEncodingSettings2(self: pointer, audioSettings: pointer
 proc fcQMediaRecorder_setEncodingSettings3(self: pointer, audioSettings: pointer, videoSettings: pointer, containerMimeType: struct_miqt_string): void {.importc: "QMediaRecorder_setEncodingSettings3".}
 proc fcQMediaRecorder_vtbl(self: pointer): pointer {.importc: "QMediaRecorder_vtbl".}
 proc fcQMediaRecorder_vdata(self: pointer): pointer {.importc: "QMediaRecorder_vdata".}
+
 type cQMediaRecorderVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -415,205 +416,205 @@ proc stateChanged*(self: gen_qmediarecorder_types.QMediaRecorder, state: cint): 
   fcQMediaRecorder_stateChanged(self.h, cint(state))
 
 type QMediaRecorderstateChangedSlot* = proc(state: cint)
-proc cQMediaRecorder_slot_callback_stateChanged(slot: int, state: cint) {.cdecl.} =
+proc fcQMediaRecorder_slot_callback_stateChanged(slot: int, state: cint) {.cdecl.} =
   let nimfunc = cast[ptr QMediaRecorderstateChangedSlot](cast[pointer](slot))
   let slotval1 = cint(state)
 
   nimfunc[](slotval1)
 
-proc cQMediaRecorder_slot_callback_stateChanged_release(slot: int) {.cdecl.} =
+proc fcQMediaRecorder_slot_callback_stateChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QMediaRecorderstateChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onstateChanged*(self: gen_qmediarecorder_types.QMediaRecorder, slot: QMediaRecorderstateChangedSlot) =
+proc onStateChanged*(self: gen_qmediarecorder_types.QMediaRecorder, slot: QMediaRecorderstateChangedSlot) =
   var tmp = new QMediaRecorderstateChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQMediaRecorder_connect_stateChanged(self.h, cast[int](addr tmp[]), cQMediaRecorder_slot_callback_stateChanged, cQMediaRecorder_slot_callback_stateChanged_release)
+  fcQMediaRecorder_connect_stateChanged(self.h, cast[int](addr tmp[]), fcQMediaRecorder_slot_callback_stateChanged, fcQMediaRecorder_slot_callback_stateChanged_release)
 
 proc statusChanged*(self: gen_qmediarecorder_types.QMediaRecorder, status: cint): void =
   fcQMediaRecorder_statusChanged(self.h, cint(status))
 
 type QMediaRecorderstatusChangedSlot* = proc(status: cint)
-proc cQMediaRecorder_slot_callback_statusChanged(slot: int, status: cint) {.cdecl.} =
+proc fcQMediaRecorder_slot_callback_statusChanged(slot: int, status: cint) {.cdecl.} =
   let nimfunc = cast[ptr QMediaRecorderstatusChangedSlot](cast[pointer](slot))
   let slotval1 = cint(status)
 
   nimfunc[](slotval1)
 
-proc cQMediaRecorder_slot_callback_statusChanged_release(slot: int) {.cdecl.} =
+proc fcQMediaRecorder_slot_callback_statusChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QMediaRecorderstatusChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onstatusChanged*(self: gen_qmediarecorder_types.QMediaRecorder, slot: QMediaRecorderstatusChangedSlot) =
+proc onStatusChanged*(self: gen_qmediarecorder_types.QMediaRecorder, slot: QMediaRecorderstatusChangedSlot) =
   var tmp = new QMediaRecorderstatusChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQMediaRecorder_connect_statusChanged(self.h, cast[int](addr tmp[]), cQMediaRecorder_slot_callback_statusChanged, cQMediaRecorder_slot_callback_statusChanged_release)
+  fcQMediaRecorder_connect_statusChanged(self.h, cast[int](addr tmp[]), fcQMediaRecorder_slot_callback_statusChanged, fcQMediaRecorder_slot_callback_statusChanged_release)
 
 proc durationChanged*(self: gen_qmediarecorder_types.QMediaRecorder, duration: clonglong): void =
   fcQMediaRecorder_durationChanged(self.h, duration)
 
 type QMediaRecorderdurationChangedSlot* = proc(duration: clonglong)
-proc cQMediaRecorder_slot_callback_durationChanged(slot: int, duration: clonglong) {.cdecl.} =
+proc fcQMediaRecorder_slot_callback_durationChanged(slot: int, duration: clonglong) {.cdecl.} =
   let nimfunc = cast[ptr QMediaRecorderdurationChangedSlot](cast[pointer](slot))
   let slotval1 = duration
 
   nimfunc[](slotval1)
 
-proc cQMediaRecorder_slot_callback_durationChanged_release(slot: int) {.cdecl.} =
+proc fcQMediaRecorder_slot_callback_durationChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QMediaRecorderdurationChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc ondurationChanged*(self: gen_qmediarecorder_types.QMediaRecorder, slot: QMediaRecorderdurationChangedSlot) =
+proc onDurationChanged*(self: gen_qmediarecorder_types.QMediaRecorder, slot: QMediaRecorderdurationChangedSlot) =
   var tmp = new QMediaRecorderdurationChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQMediaRecorder_connect_durationChanged(self.h, cast[int](addr tmp[]), cQMediaRecorder_slot_callback_durationChanged, cQMediaRecorder_slot_callback_durationChanged_release)
+  fcQMediaRecorder_connect_durationChanged(self.h, cast[int](addr tmp[]), fcQMediaRecorder_slot_callback_durationChanged, fcQMediaRecorder_slot_callback_durationChanged_release)
 
 proc mutedChanged*(self: gen_qmediarecorder_types.QMediaRecorder, muted: bool): void =
   fcQMediaRecorder_mutedChanged(self.h, muted)
 
 type QMediaRecordermutedChangedSlot* = proc(muted: bool)
-proc cQMediaRecorder_slot_callback_mutedChanged(slot: int, muted: bool) {.cdecl.} =
+proc fcQMediaRecorder_slot_callback_mutedChanged(slot: int, muted: bool) {.cdecl.} =
   let nimfunc = cast[ptr QMediaRecordermutedChangedSlot](cast[pointer](slot))
   let slotval1 = muted
 
   nimfunc[](slotval1)
 
-proc cQMediaRecorder_slot_callback_mutedChanged_release(slot: int) {.cdecl.} =
+proc fcQMediaRecorder_slot_callback_mutedChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QMediaRecordermutedChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onmutedChanged*(self: gen_qmediarecorder_types.QMediaRecorder, slot: QMediaRecordermutedChangedSlot) =
+proc onMutedChanged*(self: gen_qmediarecorder_types.QMediaRecorder, slot: QMediaRecordermutedChangedSlot) =
   var tmp = new QMediaRecordermutedChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQMediaRecorder_connect_mutedChanged(self.h, cast[int](addr tmp[]), cQMediaRecorder_slot_callback_mutedChanged, cQMediaRecorder_slot_callback_mutedChanged_release)
+  fcQMediaRecorder_connect_mutedChanged(self.h, cast[int](addr tmp[]), fcQMediaRecorder_slot_callback_mutedChanged, fcQMediaRecorder_slot_callback_mutedChanged_release)
 
 proc volumeChanged*(self: gen_qmediarecorder_types.QMediaRecorder, volume: float64): void =
   fcQMediaRecorder_volumeChanged(self.h, volume)
 
 type QMediaRecordervolumeChangedSlot* = proc(volume: float64)
-proc cQMediaRecorder_slot_callback_volumeChanged(slot: int, volume: float64) {.cdecl.} =
+proc fcQMediaRecorder_slot_callback_volumeChanged(slot: int, volume: float64) {.cdecl.} =
   let nimfunc = cast[ptr QMediaRecordervolumeChangedSlot](cast[pointer](slot))
   let slotval1 = volume
 
   nimfunc[](slotval1)
 
-proc cQMediaRecorder_slot_callback_volumeChanged_release(slot: int) {.cdecl.} =
+proc fcQMediaRecorder_slot_callback_volumeChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QMediaRecordervolumeChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onvolumeChanged*(self: gen_qmediarecorder_types.QMediaRecorder, slot: QMediaRecordervolumeChangedSlot) =
+proc onVolumeChanged*(self: gen_qmediarecorder_types.QMediaRecorder, slot: QMediaRecordervolumeChangedSlot) =
   var tmp = new QMediaRecordervolumeChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQMediaRecorder_connect_volumeChanged(self.h, cast[int](addr tmp[]), cQMediaRecorder_slot_callback_volumeChanged, cQMediaRecorder_slot_callback_volumeChanged_release)
+  fcQMediaRecorder_connect_volumeChanged(self.h, cast[int](addr tmp[]), fcQMediaRecorder_slot_callback_volumeChanged, fcQMediaRecorder_slot_callback_volumeChanged_release)
 
 proc actualLocationChanged*(self: gen_qmediarecorder_types.QMediaRecorder, location: gen_qurl_types.QUrl): void =
   fcQMediaRecorder_actualLocationChanged(self.h, location.h)
 
 type QMediaRecorderactualLocationChangedSlot* = proc(location: gen_qurl_types.QUrl)
-proc cQMediaRecorder_slot_callback_actualLocationChanged(slot: int, location: pointer) {.cdecl.} =
+proc fcQMediaRecorder_slot_callback_actualLocationChanged(slot: int, location: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QMediaRecorderactualLocationChangedSlot](cast[pointer](slot))
   let slotval1 = gen_qurl_types.QUrl(h: location, owned: false)
 
   nimfunc[](slotval1)
 
-proc cQMediaRecorder_slot_callback_actualLocationChanged_release(slot: int) {.cdecl.} =
+proc fcQMediaRecorder_slot_callback_actualLocationChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QMediaRecorderactualLocationChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onactualLocationChanged*(self: gen_qmediarecorder_types.QMediaRecorder, slot: QMediaRecorderactualLocationChangedSlot) =
+proc onActualLocationChanged*(self: gen_qmediarecorder_types.QMediaRecorder, slot: QMediaRecorderactualLocationChangedSlot) =
   var tmp = new QMediaRecorderactualLocationChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQMediaRecorder_connect_actualLocationChanged(self.h, cast[int](addr tmp[]), cQMediaRecorder_slot_callback_actualLocationChanged, cQMediaRecorder_slot_callback_actualLocationChanged_release)
+  fcQMediaRecorder_connect_actualLocationChanged(self.h, cast[int](addr tmp[]), fcQMediaRecorder_slot_callback_actualLocationChanged, fcQMediaRecorder_slot_callback_actualLocationChanged_release)
 
 proc error*(self: gen_qmediarecorder_types.QMediaRecorder, error: cint): void =
   fcQMediaRecorder_errorWithError(self.h, cint(error))
 
 type QMediaRecordererrorWithErrorSlot* = proc(error: cint)
-proc cQMediaRecorder_slot_callback_errorWithError(slot: int, error: cint) {.cdecl.} =
+proc fcQMediaRecorder_slot_callback_errorWithError(slot: int, error: cint) {.cdecl.} =
   let nimfunc = cast[ptr QMediaRecordererrorWithErrorSlot](cast[pointer](slot))
   let slotval1 = cint(error)
 
   nimfunc[](slotval1)
 
-proc cQMediaRecorder_slot_callback_errorWithError_release(slot: int) {.cdecl.} =
+proc fcQMediaRecorder_slot_callback_errorWithError_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QMediaRecordererrorWithErrorSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onerror*(self: gen_qmediarecorder_types.QMediaRecorder, slot: QMediaRecordererrorWithErrorSlot) =
+proc onError*(self: gen_qmediarecorder_types.QMediaRecorder, slot: QMediaRecordererrorWithErrorSlot) =
   var tmp = new QMediaRecordererrorWithErrorSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQMediaRecorder_connect_errorWithError(self.h, cast[int](addr tmp[]), cQMediaRecorder_slot_callback_errorWithError, cQMediaRecorder_slot_callback_errorWithError_release)
+  fcQMediaRecorder_connect_errorWithError(self.h, cast[int](addr tmp[]), fcQMediaRecorder_slot_callback_errorWithError, fcQMediaRecorder_slot_callback_errorWithError_release)
 
 proc metaDataAvailableChanged*(self: gen_qmediarecorder_types.QMediaRecorder, available: bool): void =
   fcQMediaRecorder_metaDataAvailableChanged(self.h, available)
 
 type QMediaRecordermetaDataAvailableChangedSlot* = proc(available: bool)
-proc cQMediaRecorder_slot_callback_metaDataAvailableChanged(slot: int, available: bool) {.cdecl.} =
+proc fcQMediaRecorder_slot_callback_metaDataAvailableChanged(slot: int, available: bool) {.cdecl.} =
   let nimfunc = cast[ptr QMediaRecordermetaDataAvailableChangedSlot](cast[pointer](slot))
   let slotval1 = available
 
   nimfunc[](slotval1)
 
-proc cQMediaRecorder_slot_callback_metaDataAvailableChanged_release(slot: int) {.cdecl.} =
+proc fcQMediaRecorder_slot_callback_metaDataAvailableChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QMediaRecordermetaDataAvailableChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onmetaDataAvailableChanged*(self: gen_qmediarecorder_types.QMediaRecorder, slot: QMediaRecordermetaDataAvailableChangedSlot) =
+proc onMetaDataAvailableChanged*(self: gen_qmediarecorder_types.QMediaRecorder, slot: QMediaRecordermetaDataAvailableChangedSlot) =
   var tmp = new QMediaRecordermetaDataAvailableChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQMediaRecorder_connect_metaDataAvailableChanged(self.h, cast[int](addr tmp[]), cQMediaRecorder_slot_callback_metaDataAvailableChanged, cQMediaRecorder_slot_callback_metaDataAvailableChanged_release)
+  fcQMediaRecorder_connect_metaDataAvailableChanged(self.h, cast[int](addr tmp[]), fcQMediaRecorder_slot_callback_metaDataAvailableChanged, fcQMediaRecorder_slot_callback_metaDataAvailableChanged_release)
 
 proc metaDataWritableChanged*(self: gen_qmediarecorder_types.QMediaRecorder, writable: bool): void =
   fcQMediaRecorder_metaDataWritableChanged(self.h, writable)
 
 type QMediaRecordermetaDataWritableChangedSlot* = proc(writable: bool)
-proc cQMediaRecorder_slot_callback_metaDataWritableChanged(slot: int, writable: bool) {.cdecl.} =
+proc fcQMediaRecorder_slot_callback_metaDataWritableChanged(slot: int, writable: bool) {.cdecl.} =
   let nimfunc = cast[ptr QMediaRecordermetaDataWritableChangedSlot](cast[pointer](slot))
   let slotval1 = writable
 
   nimfunc[](slotval1)
 
-proc cQMediaRecorder_slot_callback_metaDataWritableChanged_release(slot: int) {.cdecl.} =
+proc fcQMediaRecorder_slot_callback_metaDataWritableChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QMediaRecordermetaDataWritableChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onmetaDataWritableChanged*(self: gen_qmediarecorder_types.QMediaRecorder, slot: QMediaRecordermetaDataWritableChangedSlot) =
+proc onMetaDataWritableChanged*(self: gen_qmediarecorder_types.QMediaRecorder, slot: QMediaRecordermetaDataWritableChangedSlot) =
   var tmp = new QMediaRecordermetaDataWritableChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQMediaRecorder_connect_metaDataWritableChanged(self.h, cast[int](addr tmp[]), cQMediaRecorder_slot_callback_metaDataWritableChanged, cQMediaRecorder_slot_callback_metaDataWritableChanged_release)
+  fcQMediaRecorder_connect_metaDataWritableChanged(self.h, cast[int](addr tmp[]), fcQMediaRecorder_slot_callback_metaDataWritableChanged, fcQMediaRecorder_slot_callback_metaDataWritableChanged_release)
 
 proc metaDataChanged*(self: gen_qmediarecorder_types.QMediaRecorder): void =
   fcQMediaRecorder_metaDataChanged(self.h)
 
 type QMediaRecordermetaDataChangedSlot* = proc()
-proc cQMediaRecorder_slot_callback_metaDataChanged(slot: int) {.cdecl.} =
+proc fcQMediaRecorder_slot_callback_metaDataChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QMediaRecordermetaDataChangedSlot](cast[pointer](slot))
   nimfunc[]()
 
-proc cQMediaRecorder_slot_callback_metaDataChanged_release(slot: int) {.cdecl.} =
+proc fcQMediaRecorder_slot_callback_metaDataChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QMediaRecordermetaDataChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onmetaDataChanged*(self: gen_qmediarecorder_types.QMediaRecorder, slot: QMediaRecordermetaDataChangedSlot) =
+proc onMetaDataChanged*(self: gen_qmediarecorder_types.QMediaRecorder, slot: QMediaRecordermetaDataChangedSlot) =
   var tmp = new QMediaRecordermetaDataChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQMediaRecorder_connect_metaDataChanged(self.h, cast[int](addr tmp[]), cQMediaRecorder_slot_callback_metaDataChanged, cQMediaRecorder_slot_callback_metaDataChanged_release)
+  fcQMediaRecorder_connect_metaDataChanged(self.h, cast[int](addr tmp[]), fcQMediaRecorder_slot_callback_metaDataChanged, fcQMediaRecorder_slot_callback_metaDataChanged_release)
 
 proc metaDataChanged*(self: gen_qmediarecorder_types.QMediaRecorder, key: openArray[char], value: gen_qvariant_types.QVariant): void =
   fcQMediaRecorder_metaDataChanged2(self.h, struct_miqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key))), value.h)
 
 type QMediaRecordermetaDataChanged2Slot* = proc(key: openArray[char], value: gen_qvariant_types.QVariant)
-proc cQMediaRecorder_slot_callback_metaDataChanged2(slot: int, key: struct_miqt_string, value: pointer) {.cdecl.} =
+proc fcQMediaRecorder_slot_callback_metaDataChanged2(slot: int, key: struct_miqt_string, value: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QMediaRecordermetaDataChanged2Slot](cast[pointer](slot))
   let vkey_ms = key
   let vkeyx_ret = string.fromBytes(vkey_ms)
@@ -624,55 +625,55 @@ proc cQMediaRecorder_slot_callback_metaDataChanged2(slot: int, key: struct_miqt_
 
   nimfunc[](slotval1, slotval2)
 
-proc cQMediaRecorder_slot_callback_metaDataChanged2_release(slot: int) {.cdecl.} =
+proc fcQMediaRecorder_slot_callback_metaDataChanged2_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QMediaRecordermetaDataChanged2Slot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onmetaDataChanged*(self: gen_qmediarecorder_types.QMediaRecorder, slot: QMediaRecordermetaDataChanged2Slot) =
+proc onMetaDataChanged*(self: gen_qmediarecorder_types.QMediaRecorder, slot: QMediaRecordermetaDataChanged2Slot) =
   var tmp = new QMediaRecordermetaDataChanged2Slot
   tmp[] = slot
   GC_ref(tmp)
-  fcQMediaRecorder_connect_metaDataChanged2(self.h, cast[int](addr tmp[]), cQMediaRecorder_slot_callback_metaDataChanged2, cQMediaRecorder_slot_callback_metaDataChanged2_release)
+  fcQMediaRecorder_connect_metaDataChanged2(self.h, cast[int](addr tmp[]), fcQMediaRecorder_slot_callback_metaDataChanged2, fcQMediaRecorder_slot_callback_metaDataChanged2_release)
 
 proc availabilityChanged*(self: gen_qmediarecorder_types.QMediaRecorder, available: bool): void =
   fcQMediaRecorder_availabilityChanged(self.h, available)
 
 type QMediaRecorderavailabilityChangedSlot* = proc(available: bool)
-proc cQMediaRecorder_slot_callback_availabilityChanged(slot: int, available: bool) {.cdecl.} =
+proc fcQMediaRecorder_slot_callback_availabilityChanged(slot: int, available: bool) {.cdecl.} =
   let nimfunc = cast[ptr QMediaRecorderavailabilityChangedSlot](cast[pointer](slot))
   let slotval1 = available
 
   nimfunc[](slotval1)
 
-proc cQMediaRecorder_slot_callback_availabilityChanged_release(slot: int) {.cdecl.} =
+proc fcQMediaRecorder_slot_callback_availabilityChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QMediaRecorderavailabilityChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onavailabilityChanged*(self: gen_qmediarecorder_types.QMediaRecorder, slot: QMediaRecorderavailabilityChangedSlot) =
+proc onAvailabilityChanged*(self: gen_qmediarecorder_types.QMediaRecorder, slot: QMediaRecorderavailabilityChangedSlot) =
   var tmp = new QMediaRecorderavailabilityChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQMediaRecorder_connect_availabilityChanged(self.h, cast[int](addr tmp[]), cQMediaRecorder_slot_callback_availabilityChanged, cQMediaRecorder_slot_callback_availabilityChanged_release)
+  fcQMediaRecorder_connect_availabilityChanged(self.h, cast[int](addr tmp[]), fcQMediaRecorder_slot_callback_availabilityChanged, fcQMediaRecorder_slot_callback_availabilityChanged_release)
 
 proc availabilityChanged*(self: gen_qmediarecorder_types.QMediaRecorder, availability: cint): void =
   fcQMediaRecorder_availabilityChangedWithAvailability(self.h, cint(availability))
 
 type QMediaRecorderavailabilityChangedWithAvailabilitySlot* = proc(availability: cint)
-proc cQMediaRecorder_slot_callback_availabilityChangedWithAvailability(slot: int, availability: cint) {.cdecl.} =
+proc fcQMediaRecorder_slot_callback_availabilityChangedWithAvailability(slot: int, availability: cint) {.cdecl.} =
   let nimfunc = cast[ptr QMediaRecorderavailabilityChangedWithAvailabilitySlot](cast[pointer](slot))
   let slotval1 = cint(availability)
 
   nimfunc[](slotval1)
 
-proc cQMediaRecorder_slot_callback_availabilityChangedWithAvailability_release(slot: int) {.cdecl.} =
+proc fcQMediaRecorder_slot_callback_availabilityChangedWithAvailability_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QMediaRecorderavailabilityChangedWithAvailabilitySlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onavailabilityChanged*(self: gen_qmediarecorder_types.QMediaRecorder, slot: QMediaRecorderavailabilityChangedWithAvailabilitySlot) =
+proc onAvailabilityChanged*(self: gen_qmediarecorder_types.QMediaRecorder, slot: QMediaRecorderavailabilityChangedWithAvailabilitySlot) =
   var tmp = new QMediaRecorderavailabilityChangedWithAvailabilitySlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQMediaRecorder_connect_availabilityChangedWithAvailability(self.h, cast[int](addr tmp[]), cQMediaRecorder_slot_callback_availabilityChangedWithAvailability, cQMediaRecorder_slot_callback_availabilityChangedWithAvailability_release)
+  fcQMediaRecorder_connect_availabilityChangedWithAvailability(self.h, cast[int](addr tmp[]), fcQMediaRecorder_slot_callback_availabilityChangedWithAvailability, fcQMediaRecorder_slot_callback_availabilityChangedWithAvailability_release)
 
 proc tr*(_: type gen_qmediarecorder_types.QMediaRecorder, s: cstring, c: cstring): string =
   let v_ms = fcQMediaRecorder_tr2(s, c)
@@ -770,6 +771,7 @@ type QMediaRecorderchildEventProc* = proc(self: QMediaRecorder, event: gen_qcore
 type QMediaRecordercustomEventProc* = proc(self: QMediaRecorder, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QMediaRecorderconnectNotifyProc* = proc(self: QMediaRecorder, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QMediaRecorderdisconnectNotifyProc* = proc(self: QMediaRecorder, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+
 type QMediaRecorderVTable* {.inheritable, pure.} = object
   vtbl: cQMediaRecorderVTable
   metaObject*: QMediaRecordermetaObjectProc
@@ -784,10 +786,45 @@ type QMediaRecorderVTable* {.inheritable, pure.} = object
   customEvent*: QMediaRecordercustomEventProc
   connectNotify*: QMediaRecorderconnectNotifyProc
   disconnectNotify*: QMediaRecorderdisconnectNotifyProc
+
 proc QMediaRecordermetaObject*(self: gen_qmediarecorder_types.QMediaRecorder): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQMediaRecorder_virtualbase_metaObject(self.h), owned: false)
 
-proc cQMediaRecorder_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
+proc QMediaRecordermetacast*(self: gen_qmediarecorder_types.QMediaRecorder, param1: cstring): pointer =
+  fcQMediaRecorder_virtualbase_metacast(self.h, param1)
+
+proc QMediaRecordermetacall*(self: gen_qmediarecorder_types.QMediaRecorder, param1: cint, param2: cint, param3: pointer): cint =
+  fcQMediaRecorder_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+proc QMediaRecordermediaObject*(self: gen_qmediarecorder_types.QMediaRecorder): gen_qmediaobject_types.QMediaObject =
+  gen_qmediaobject_types.QMediaObject(h: fcQMediaRecorder_virtualbase_mediaObject(self.h), owned: false)
+
+proc QMediaRecordersetMediaObject*(self: gen_qmediarecorder_types.QMediaRecorder, objectVal: gen_qmediaobject_types.QMediaObject): bool =
+  fcQMediaRecorder_virtualbase_setMediaObject(self.h, objectVal.h)
+
+proc QMediaRecorderevent*(self: gen_qmediarecorder_types.QMediaRecorder, event: gen_qcoreevent_types.QEvent): bool =
+  fcQMediaRecorder_virtualbase_event(self.h, event.h)
+
+proc QMediaRecordereventFilter*(self: gen_qmediarecorder_types.QMediaRecorder, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
+  fcQMediaRecorder_virtualbase_eventFilter(self.h, watched.h, event.h)
+
+proc QMediaRecordertimerEvent*(self: gen_qmediarecorder_types.QMediaRecorder, event: gen_qcoreevent_types.QTimerEvent): void =
+  fcQMediaRecorder_virtualbase_timerEvent(self.h, event.h)
+
+proc QMediaRecorderchildEvent*(self: gen_qmediarecorder_types.QMediaRecorder, event: gen_qcoreevent_types.QChildEvent): void =
+  fcQMediaRecorder_virtualbase_childEvent(self.h, event.h)
+
+proc QMediaRecordercustomEvent*(self: gen_qmediarecorder_types.QMediaRecorder, event: gen_qcoreevent_types.QEvent): void =
+  fcQMediaRecorder_virtualbase_customEvent(self.h, event.h)
+
+proc QMediaRecorderconnectNotify*(self: gen_qmediarecorder_types.QMediaRecorder, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQMediaRecorder_virtualbase_connectNotify(self.h, signal.h)
+
+proc QMediaRecorderdisconnectNotify*(self: gen_qmediarecorder_types.QMediaRecorder, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQMediaRecorder_virtualbase_disconnectNotify(self.h, signal.h)
+
+
+proc fcQMediaRecorder_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QMediaRecorderVTable](fcQMediaRecorder_vdata(self))
   let self = QMediaRecorder(h: self)
   var virtualReturn = vtbl[].metaObject(self)
@@ -796,20 +833,14 @@ proc cQMediaRecorder_vtable_callback_metaObject(self: pointer): pointer {.cdecl.
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QMediaRecordermetacast*(self: gen_qmediarecorder_types.QMediaRecorder, param1: cstring): pointer =
-  fcQMediaRecorder_virtualbase_metacast(self.h, param1)
-
-proc cQMediaRecorder_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+proc fcQMediaRecorder_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QMediaRecorderVTable](fcQMediaRecorder_vdata(self))
   let self = QMediaRecorder(h: self)
   let slotval1 = (param1)
   var virtualReturn = vtbl[].metacast(self, slotval1)
   virtualReturn
 
-proc QMediaRecordermetacall*(self: gen_qmediarecorder_types.QMediaRecorder, param1: cint, param2: cint, param3: pointer): cint =
-  fcQMediaRecorder_virtualbase_metacall(self.h, cint(param1), param2, param3)
-
-proc cQMediaRecorder_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+proc fcQMediaRecorder_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QMediaRecorderVTable](fcQMediaRecorder_vdata(self))
   let self = QMediaRecorder(h: self)
   let slotval1 = cint(param1)
@@ -818,10 +849,7 @@ proc cQMediaRecorder_vtable_callback_metacall(self: pointer, param1: cint, param
   var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QMediaRecordermediaObject*(self: gen_qmediarecorder_types.QMediaRecorder): gen_qmediaobject_types.QMediaObject =
-  gen_qmediaobject_types.QMediaObject(h: fcQMediaRecorder_virtualbase_mediaObject(self.h), owned: false)
-
-proc cQMediaRecorder_vtable_callback_mediaObject(self: pointer): pointer {.cdecl.} =
+proc fcQMediaRecorder_vtable_callback_mediaObject(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QMediaRecorderVTable](fcQMediaRecorder_vdata(self))
   let self = QMediaRecorder(h: self)
   var virtualReturn = vtbl[].mediaObject(self)
@@ -830,30 +858,21 @@ proc cQMediaRecorder_vtable_callback_mediaObject(self: pointer): pointer {.cdecl
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QMediaRecordersetMediaObject*(self: gen_qmediarecorder_types.QMediaRecorder, objectVal: gen_qmediaobject_types.QMediaObject): bool =
-  fcQMediaRecorder_virtualbase_setMediaObject(self.h, objectVal.h)
-
-proc cQMediaRecorder_vtable_callback_setMediaObject(self: pointer, objectVal: pointer): bool {.cdecl.} =
+proc fcQMediaRecorder_vtable_callback_setMediaObject(self: pointer, objectVal: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QMediaRecorderVTable](fcQMediaRecorder_vdata(self))
   let self = QMediaRecorder(h: self)
   let slotval1 = gen_qmediaobject_types.QMediaObject(h: objectVal, owned: false)
   var virtualReturn = vtbl[].setMediaObject(self, slotval1)
   virtualReturn
 
-proc QMediaRecorderevent*(self: gen_qmediarecorder_types.QMediaRecorder, event: gen_qcoreevent_types.QEvent): bool =
-  fcQMediaRecorder_virtualbase_event(self.h, event.h)
-
-proc cQMediaRecorder_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
+proc fcQMediaRecorder_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QMediaRecorderVTable](fcQMediaRecorder_vdata(self))
   let self = QMediaRecorder(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
-proc QMediaRecordereventFilter*(self: gen_qmediarecorder_types.QMediaRecorder, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
-  fcQMediaRecorder_virtualbase_eventFilter(self.h, watched.h, event.h)
-
-proc cQMediaRecorder_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+proc fcQMediaRecorder_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QMediaRecorderVTable](fcQMediaRecorder_vdata(self))
   let self = QMediaRecorder(h: self)
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
@@ -861,46 +880,31 @@ proc cQMediaRecorder_vtable_callback_eventFilter(self: pointer, watched: pointer
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
-proc QMediaRecordertimerEvent*(self: gen_qmediarecorder_types.QMediaRecorder, event: gen_qcoreevent_types.QTimerEvent): void =
-  fcQMediaRecorder_virtualbase_timerEvent(self.h, event.h)
-
-proc cQMediaRecorder_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQMediaRecorder_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMediaRecorderVTable](fcQMediaRecorder_vdata(self))
   let self = QMediaRecorder(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
-proc QMediaRecorderchildEvent*(self: gen_qmediarecorder_types.QMediaRecorder, event: gen_qcoreevent_types.QChildEvent): void =
-  fcQMediaRecorder_virtualbase_childEvent(self.h, event.h)
-
-proc cQMediaRecorder_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQMediaRecorder_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMediaRecorderVTable](fcQMediaRecorder_vdata(self))
   let self = QMediaRecorder(h: self)
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
-proc QMediaRecordercustomEvent*(self: gen_qmediarecorder_types.QMediaRecorder, event: gen_qcoreevent_types.QEvent): void =
-  fcQMediaRecorder_virtualbase_customEvent(self.h, event.h)
-
-proc cQMediaRecorder_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQMediaRecorder_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMediaRecorderVTable](fcQMediaRecorder_vdata(self))
   let self = QMediaRecorder(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
-proc QMediaRecorderconnectNotify*(self: gen_qmediarecorder_types.QMediaRecorder, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQMediaRecorder_virtualbase_connectNotify(self.h, signal.h)
-
-proc cQMediaRecorder_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQMediaRecorder_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMediaRecorderVTable](fcQMediaRecorder_vdata(self))
   let self = QMediaRecorder(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
-proc QMediaRecorderdisconnectNotify*(self: gen_qmediarecorder_types.QMediaRecorder, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQMediaRecorder_virtualbase_disconnectNotify(self.h, signal.h)
-
-proc cQMediaRecorder_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQMediaRecorder_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMediaRecorderVTable](fcQMediaRecorder_vdata(self))
   let self = QMediaRecorder(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
@@ -908,9 +912,33 @@ proc cQMediaRecorder_vtable_callback_disconnectNotify(self: pointer, signal: poi
 
 type VirtualQMediaRecorder* {.inheritable.} = ref object of QMediaRecorder
   vtbl*: cQMediaRecorderVTable
+
 method metaObject*(self: VirtualQMediaRecorder): gen_qobjectdefs_types.QMetaObject {.base.} =
   QMediaRecordermetaObject(self[])
-proc cQMediaRecorder_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
+method metacast*(self: VirtualQMediaRecorder, param1: cstring): pointer {.base.} =
+  QMediaRecordermetacast(self[], param1)
+method metacall*(self: VirtualQMediaRecorder, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QMediaRecordermetacall(self[], param1, param2, param3)
+method mediaObject*(self: VirtualQMediaRecorder): gen_qmediaobject_types.QMediaObject {.base.} =
+  QMediaRecordermediaObject(self[])
+method setMediaObject*(self: VirtualQMediaRecorder, objectVal: gen_qmediaobject_types.QMediaObject): bool {.base.} =
+  QMediaRecordersetMediaObject(self[], objectVal)
+method event*(self: VirtualQMediaRecorder, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QMediaRecorderevent(self[], event)
+method eventFilter*(self: VirtualQMediaRecorder, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QMediaRecordereventFilter(self[], watched, event)
+method timerEvent*(self: VirtualQMediaRecorder, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QMediaRecordertimerEvent(self[], event)
+method childEvent*(self: VirtualQMediaRecorder, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QMediaRecorderchildEvent(self[], event)
+method customEvent*(self: VirtualQMediaRecorder, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QMediaRecordercustomEvent(self[], event)
+method connectNotify*(self: VirtualQMediaRecorder, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QMediaRecorderconnectNotify(self[], signal)
+method disconnectNotify*(self: VirtualQMediaRecorder, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QMediaRecorderdisconnectNotify(self[], signal)
+
+proc fcQMediaRecorder_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQMediaRecorder](fcQMediaRecorder_vdata(self))
   var virtualReturn = inst.metaObject()
   virtualReturn.owned = false # TODO move?
@@ -918,17 +946,13 @@ proc cQMediaRecorder_method_callback_metaObject(self: pointer): pointer {.cdecl.
   virtualReturn.h = nil
   virtualReturn_h
 
-method metacast*(self: VirtualQMediaRecorder, param1: cstring): pointer {.base.} =
-  QMediaRecordermetacast(self[], param1)
-proc cQMediaRecorder_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+proc fcQMediaRecorder_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQMediaRecorder](fcQMediaRecorder_vdata(self))
   let slotval1 = (param1)
   var virtualReturn = inst.metacast(slotval1)
   virtualReturn
 
-method metacall*(self: VirtualQMediaRecorder, param1: cint, param2: cint, param3: pointer): cint {.base.} =
-  QMediaRecordermetacall(self[], param1, param2, param3)
-proc cQMediaRecorder_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+proc fcQMediaRecorder_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQMediaRecorder](fcQMediaRecorder_vdata(self))
   let slotval1 = cint(param1)
   let slotval2 = param2
@@ -936,9 +960,7 @@ proc cQMediaRecorder_method_callback_metacall(self: pointer, param1: cint, param
   var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
-method mediaObject*(self: VirtualQMediaRecorder): gen_qmediaobject_types.QMediaObject {.base.} =
-  QMediaRecordermediaObject(self[])
-proc cQMediaRecorder_method_callback_mediaObject(self: pointer): pointer {.cdecl.} =
+proc fcQMediaRecorder_method_callback_mediaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQMediaRecorder](fcQMediaRecorder_vdata(self))
   var virtualReturn = inst.mediaObject()
   virtualReturn.owned = false # TODO move?
@@ -946,65 +968,50 @@ proc cQMediaRecorder_method_callback_mediaObject(self: pointer): pointer {.cdecl
   virtualReturn.h = nil
   virtualReturn_h
 
-method setMediaObject*(self: VirtualQMediaRecorder, objectVal: gen_qmediaobject_types.QMediaObject): bool {.base.} =
-  QMediaRecordersetMediaObject(self[], objectVal)
-proc cQMediaRecorder_method_callback_setMediaObject(self: pointer, objectVal: pointer): bool {.cdecl.} =
+proc fcQMediaRecorder_method_callback_setMediaObject(self: pointer, objectVal: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQMediaRecorder](fcQMediaRecorder_vdata(self))
   let slotval1 = gen_qmediaobject_types.QMediaObject(h: objectVal, owned: false)
   var virtualReturn = inst.setMediaObject(slotval1)
   virtualReturn
 
-method event*(self: VirtualQMediaRecorder, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QMediaRecorderevent(self[], event)
-proc cQMediaRecorder_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
+proc fcQMediaRecorder_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQMediaRecorder](fcQMediaRecorder_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
-method eventFilter*(self: VirtualQMediaRecorder, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QMediaRecordereventFilter(self[], watched, event)
-proc cQMediaRecorder_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+proc fcQMediaRecorder_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQMediaRecorder](fcQMediaRecorder_vdata(self))
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
   let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
-method timerEvent*(self: VirtualQMediaRecorder, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
-  QMediaRecordertimerEvent(self[], event)
-proc cQMediaRecorder_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQMediaRecorder_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMediaRecorder](fcQMediaRecorder_vdata(self))
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
-method childEvent*(self: VirtualQMediaRecorder, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
-  QMediaRecorderchildEvent(self[], event)
-proc cQMediaRecorder_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQMediaRecorder_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMediaRecorder](fcQMediaRecorder_vdata(self))
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
-method customEvent*(self: VirtualQMediaRecorder, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QMediaRecordercustomEvent(self[], event)
-proc cQMediaRecorder_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQMediaRecorder_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMediaRecorder](fcQMediaRecorder_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
-method connectNotify*(self: VirtualQMediaRecorder, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QMediaRecorderconnectNotify(self[], signal)
-proc cQMediaRecorder_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQMediaRecorder_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMediaRecorder](fcQMediaRecorder_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
-method disconnectNotify*(self: VirtualQMediaRecorder, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QMediaRecorderdisconnectNotify(self[], signal)
-proc cQMediaRecorder_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQMediaRecorder_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMediaRecorder](fcQMediaRecorder_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
+
 
 proc sender*(self: gen_qmediarecorder_types.QMediaRecorder): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQMediaRecorder_protectedbase_sender(self.h), owned: false)
@@ -1027,29 +1034,29 @@ proc create*(T: type gen_qmediarecorder_types.QMediaRecorder,
     let vtbl = cast[ref QMediaRecorderVTable](fcQMediaRecorder_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQMediaRecorder_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQMediaRecorder_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQMediaRecorder_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQMediaRecorder_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQMediaRecorder_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQMediaRecorder_vtable_callback_metacall
   if not isNil(vtbl[].mediaObject):
-    vtbl[].vtbl.mediaObject = cQMediaRecorder_vtable_callback_mediaObject
+    vtbl[].vtbl.mediaObject = fcQMediaRecorder_vtable_callback_mediaObject
   if not isNil(vtbl[].setMediaObject):
-    vtbl[].vtbl.setMediaObject = cQMediaRecorder_vtable_callback_setMediaObject
+    vtbl[].vtbl.setMediaObject = fcQMediaRecorder_vtable_callback_setMediaObject
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQMediaRecorder_vtable_callback_event
+    vtbl[].vtbl.event = fcQMediaRecorder_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQMediaRecorder_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQMediaRecorder_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQMediaRecorder_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQMediaRecorder_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQMediaRecorder_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQMediaRecorder_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQMediaRecorder_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQMediaRecorder_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQMediaRecorder_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQMediaRecorder_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQMediaRecorder_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQMediaRecorder_vtable_callback_disconnectNotify
   gen_qmediarecorder_types.QMediaRecorder(h: fcQMediaRecorder_new(addr(vtbl[].vtbl), addr(vtbl[]), mediaObject.h), owned: true)
 
 proc create*(T: type gen_qmediarecorder_types.QMediaRecorder,
@@ -1061,29 +1068,29 @@ proc create*(T: type gen_qmediarecorder_types.QMediaRecorder,
     let vtbl = cast[ref QMediaRecorderVTable](fcQMediaRecorder_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQMediaRecorder_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQMediaRecorder_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQMediaRecorder_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQMediaRecorder_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQMediaRecorder_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQMediaRecorder_vtable_callback_metacall
   if not isNil(vtbl[].mediaObject):
-    vtbl[].vtbl.mediaObject = cQMediaRecorder_vtable_callback_mediaObject
+    vtbl[].vtbl.mediaObject = fcQMediaRecorder_vtable_callback_mediaObject
   if not isNil(vtbl[].setMediaObject):
-    vtbl[].vtbl.setMediaObject = cQMediaRecorder_vtable_callback_setMediaObject
+    vtbl[].vtbl.setMediaObject = fcQMediaRecorder_vtable_callback_setMediaObject
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQMediaRecorder_vtable_callback_event
+    vtbl[].vtbl.event = fcQMediaRecorder_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQMediaRecorder_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQMediaRecorder_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQMediaRecorder_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQMediaRecorder_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQMediaRecorder_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQMediaRecorder_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQMediaRecorder_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQMediaRecorder_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQMediaRecorder_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQMediaRecorder_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQMediaRecorder_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQMediaRecorder_vtable_callback_disconnectNotify
   gen_qmediarecorder_types.QMediaRecorder(h: fcQMediaRecorder_new2(addr(vtbl[].vtbl), addr(vtbl[]), mediaObject.h, parent.h), owned: true)
 
 const cQMediaRecorder_mvtbl = cQMediaRecorderVTable(
@@ -1091,18 +1098,19 @@ const cQMediaRecorder_mvtbl = cQMediaRecorderVTable(
     let inst = cast[ptr typeof(VirtualQMediaRecorder()[])](self.fcQMediaRecorder_vtbl())
     inst[].h = nil
     inst[].owned = false,
-  metaObject: cQMediaRecorder_method_callback_metaObject,
-  metacast: cQMediaRecorder_method_callback_metacast,
-  metacall: cQMediaRecorder_method_callback_metacall,
-  mediaObject: cQMediaRecorder_method_callback_mediaObject,
-  setMediaObject: cQMediaRecorder_method_callback_setMediaObject,
-  event: cQMediaRecorder_method_callback_event,
-  eventFilter: cQMediaRecorder_method_callback_eventFilter,
-  timerEvent: cQMediaRecorder_method_callback_timerEvent,
-  childEvent: cQMediaRecorder_method_callback_childEvent,
-  customEvent: cQMediaRecorder_method_callback_customEvent,
-  connectNotify: cQMediaRecorder_method_callback_connectNotify,
-  disconnectNotify: cQMediaRecorder_method_callback_disconnectNotify,
+
+  metaObject: fcQMediaRecorder_method_callback_metaObject,
+  metacast: fcQMediaRecorder_method_callback_metacast,
+  metacall: fcQMediaRecorder_method_callback_metacall,
+  mediaObject: fcQMediaRecorder_method_callback_mediaObject,
+  setMediaObject: fcQMediaRecorder_method_callback_setMediaObject,
+  event: fcQMediaRecorder_method_callback_event,
+  eventFilter: fcQMediaRecorder_method_callback_eventFilter,
+  timerEvent: fcQMediaRecorder_method_callback_timerEvent,
+  childEvent: fcQMediaRecorder_method_callback_childEvent,
+  customEvent: fcQMediaRecorder_method_callback_customEvent,
+  connectNotify: fcQMediaRecorder_method_callback_connectNotify,
+  disconnectNotify: fcQMediaRecorder_method_callback_disconnectNotify,
 )
 proc create*(T: type gen_qmediarecorder_types.QMediaRecorder,
     mediaObject: gen_qmediaobject_types.QMediaObject,

@@ -126,6 +126,7 @@ proc fcQDirModel_index2(self: pointer, path: struct_miqt_string, column: cint): 
 proc fcQDirModel_refresh1(self: pointer, parent: pointer): void {.importc: "QDirModel_refresh1".}
 proc fcQDirModel_vtbl(self: pointer): pointer {.importc: "QDirModel_vtbl".}
 proc fcQDirModel_vdata(self: pointer): pointer {.importc: "QDirModel_vdata".}
+
 type cQDirModelVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -488,6 +489,7 @@ type QDirModelchildEventProc* = proc(self: QDirModel, event: gen_qcoreevent_type
 type QDirModelcustomEventProc* = proc(self: QDirModel, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QDirModelconnectNotifyProc* = proc(self: QDirModel, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QDirModeldisconnectNotifyProc* = proc(self: QDirModel, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+
 type QDirModelVTable* {.inheritable, pure.} = object
   vtbl: cQDirModelVTable
   metaObject*: QDirModelmetaObjectProc
@@ -534,158 +536,45 @@ type QDirModelVTable* {.inheritable, pure.} = object
   customEvent*: QDirModelcustomEventProc
   connectNotify*: QDirModelconnectNotifyProc
   disconnectNotify*: QDirModeldisconnectNotifyProc
+
 proc QDirModelmetaObject*(self: gen_qdirmodel_types.QDirModel): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQDirModel_virtualbase_metaObject(self.h), owned: false)
-
-proc cQDirModel_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
-  let vtbl = cast[ptr QDirModelVTable](fcQDirModel_vdata(self))
-  let self = QDirModel(h: self)
-  var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.owned = false # TODO move?
-  let virtualReturn_h = virtualReturn.h
-  virtualReturn.h = nil
-  virtualReturn_h
 
 proc QDirModelmetacast*(self: gen_qdirmodel_types.QDirModel, param1: cstring): pointer =
   fcQDirModel_virtualbase_metacast(self.h, param1)
 
-proc cQDirModel_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
-  let vtbl = cast[ptr QDirModelVTable](fcQDirModel_vdata(self))
-  let self = QDirModel(h: self)
-  let slotval1 = (param1)
-  var virtualReturn = vtbl[].metacast(self, slotval1)
-  virtualReturn
-
 proc QDirModelmetacall*(self: gen_qdirmodel_types.QDirModel, param1: cint, param2: cint, param3: pointer): cint =
   fcQDirModel_virtualbase_metacall(self.h, cint(param1), param2, param3)
-
-proc cQDirModel_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
-  let vtbl = cast[ptr QDirModelVTable](fcQDirModel_vdata(self))
-  let self = QDirModel(h: self)
-  let slotval1 = cint(param1)
-  let slotval2 = param2
-  let slotval3 = param3
-  var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
-  virtualReturn
 
 proc QDirModelindex*(self: gen_qdirmodel_types.QDirModel, row: cint, column: cint, parent: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex =
   gen_qabstractitemmodel_types.QModelIndex(h: fcQDirModel_virtualbase_index(self.h, row, column, parent.h), owned: true)
 
-proc cQDirModel_vtable_callback_index(self: pointer, row: cint, column: cint, parent: pointer): pointer {.cdecl.} =
-  let vtbl = cast[ptr QDirModelVTable](fcQDirModel_vdata(self))
-  let self = QDirModel(h: self)
-  let slotval1 = row
-  let slotval2 = column
-  let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
-  var virtualReturn = vtbl[].index(self, slotval1, slotval2, slotval3)
-  virtualReturn.owned = false # TODO move?
-  let virtualReturn_h = virtualReturn.h
-  virtualReturn.h = nil
-  virtualReturn_h
-
 proc QDirModelparent*(self: gen_qdirmodel_types.QDirModel, child: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex =
   gen_qabstractitemmodel_types.QModelIndex(h: fcQDirModel_virtualbase_parent(self.h, child.h), owned: true)
-
-proc cQDirModel_vtable_callback_parent(self: pointer, child: pointer): pointer {.cdecl.} =
-  let vtbl = cast[ptr QDirModelVTable](fcQDirModel_vdata(self))
-  let self = QDirModel(h: self)
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: child, owned: false)
-  var virtualReturn = vtbl[].parent(self, slotval1)
-  virtualReturn.owned = false # TODO move?
-  let virtualReturn_h = virtualReturn.h
-  virtualReturn.h = nil
-  virtualReturn_h
 
 proc QDirModelrowCount*(self: gen_qdirmodel_types.QDirModel, parent: gen_qabstractitemmodel_types.QModelIndex): cint =
   fcQDirModel_virtualbase_rowCount(self.h, parent.h)
 
-proc cQDirModel_vtable_callback_rowCount(self: pointer, parent: pointer): cint {.cdecl.} =
-  let vtbl = cast[ptr QDirModelVTable](fcQDirModel_vdata(self))
-  let self = QDirModel(h: self)
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
-  var virtualReturn = vtbl[].rowCount(self, slotval1)
-  virtualReturn
-
 proc QDirModelcolumnCount*(self: gen_qdirmodel_types.QDirModel, parent: gen_qabstractitemmodel_types.QModelIndex): cint =
   fcQDirModel_virtualbase_columnCount(self.h, parent.h)
-
-proc cQDirModel_vtable_callback_columnCount(self: pointer, parent: pointer): cint {.cdecl.} =
-  let vtbl = cast[ptr QDirModelVTable](fcQDirModel_vdata(self))
-  let self = QDirModel(h: self)
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
-  var virtualReturn = vtbl[].columnCount(self, slotval1)
-  virtualReturn
 
 proc QDirModeldata*(self: gen_qdirmodel_types.QDirModel, index: gen_qabstractitemmodel_types.QModelIndex, role: cint): gen_qvariant_types.QVariant =
   gen_qvariant_types.QVariant(h: fcQDirModel_virtualbase_data(self.h, index.h, role), owned: true)
 
-proc cQDirModel_vtable_callback_data(self: pointer, index: pointer, role: cint): pointer {.cdecl.} =
-  let vtbl = cast[ptr QDirModelVTable](fcQDirModel_vdata(self))
-  let self = QDirModel(h: self)
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
-  let slotval2 = role
-  var virtualReturn = vtbl[].data(self, slotval1, slotval2)
-  virtualReturn.owned = false # TODO move?
-  let virtualReturn_h = virtualReturn.h
-  virtualReturn.h = nil
-  virtualReturn_h
-
 proc QDirModelsetData*(self: gen_qdirmodel_types.QDirModel, index: gen_qabstractitemmodel_types.QModelIndex, value: gen_qvariant_types.QVariant, role: cint): bool =
   fcQDirModel_virtualbase_setData(self.h, index.h, value.h, role)
-
-proc cQDirModel_vtable_callback_setData(self: pointer, index: pointer, value: pointer, role: cint): bool {.cdecl.} =
-  let vtbl = cast[ptr QDirModelVTable](fcQDirModel_vdata(self))
-  let self = QDirModel(h: self)
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
-  let slotval2 = gen_qvariant_types.QVariant(h: value, owned: false)
-  let slotval3 = role
-  var virtualReturn = vtbl[].setData(self, slotval1, slotval2, slotval3)
-  virtualReturn
 
 proc QDirModelheaderData*(self: gen_qdirmodel_types.QDirModel, section: cint, orientation: cint, role: cint): gen_qvariant_types.QVariant =
   gen_qvariant_types.QVariant(h: fcQDirModel_virtualbase_headerData(self.h, section, cint(orientation), role), owned: true)
 
-proc cQDirModel_vtable_callback_headerData(self: pointer, section: cint, orientation: cint, role: cint): pointer {.cdecl.} =
-  let vtbl = cast[ptr QDirModelVTable](fcQDirModel_vdata(self))
-  let self = QDirModel(h: self)
-  let slotval1 = section
-  let slotval2 = cint(orientation)
-  let slotval3 = role
-  var virtualReturn = vtbl[].headerData(self, slotval1, slotval2, slotval3)
-  virtualReturn.owned = false # TODO move?
-  let virtualReturn_h = virtualReturn.h
-  virtualReturn.h = nil
-  virtualReturn_h
-
 proc QDirModelhasChildren*(self: gen_qdirmodel_types.QDirModel, index: gen_qabstractitemmodel_types.QModelIndex): bool =
   fcQDirModel_virtualbase_hasChildren(self.h, index.h)
-
-proc cQDirModel_vtable_callback_hasChildren(self: pointer, index: pointer): bool {.cdecl.} =
-  let vtbl = cast[ptr QDirModelVTable](fcQDirModel_vdata(self))
-  let self = QDirModel(h: self)
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
-  var virtualReturn = vtbl[].hasChildren(self, slotval1)
-  virtualReturn
 
 proc QDirModelflags*(self: gen_qdirmodel_types.QDirModel, index: gen_qabstractitemmodel_types.QModelIndex): cint =
   cint(fcQDirModel_virtualbase_flags(self.h, index.h))
 
-proc cQDirModel_vtable_callback_flags(self: pointer, index: pointer): cint {.cdecl.} =
-  let vtbl = cast[ptr QDirModelVTable](fcQDirModel_vdata(self))
-  let self = QDirModel(h: self)
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
-  var virtualReturn = vtbl[].flags(self, slotval1)
-  cint(virtualReturn)
-
 proc QDirModelsort*(self: gen_qdirmodel_types.QDirModel, column: cint, order: cint): void =
   fcQDirModel_virtualbase_sort(self.h, column, cint(order))
-
-proc cQDirModel_vtable_callback_sort(self: pointer, column: cint, order: cint): void {.cdecl.} =
-  let vtbl = cast[ptr QDirModelVTable](fcQDirModel_vdata(self))
-  let self = QDirModel(h: self)
-  let slotval1 = column
-  let slotval2 = cint(order)
-  vtbl[].sort(self, slotval1, slotval2)
 
 proc QDirModelmimeTypes*(self: gen_qdirmodel_types.QDirModel): seq[string] =
   var v_ma = fcQDirModel_virtualbase_mimeTypes(self.h)
@@ -699,18 +588,6 @@ proc QDirModelmimeTypes*(self: gen_qdirmodel_types.QDirModel): seq[string] =
   c_free(v_ma.data)
   vx_ret
 
-proc cQDirModel_vtable_callback_mimeTypes(self: pointer): struct_miqt_array {.cdecl.} =
-  let vtbl = cast[ptr QDirModelVTable](fcQDirModel_vdata(self))
-  let self = QDirModel(h: self)
-  var virtualReturn = vtbl[].mimeTypes(self)
-  var virtualReturn_CArray = cast[ptr UncheckedArray[struct_miqt_string]](if len(virtualReturn) > 0: c_malloc(c_sizet(sizeof(struct_miqt_string) * len(virtualReturn))) else: nil)
-  for i in 0..<len(virtualReturn):
-    var virtualReturn_i_copy = cast[cstring](if len(virtualReturn[i]) > 0: c_malloc(csize_t(len(virtualReturn[i]))) else: nil)
-    if len(virtualReturn[i]) > 0: copyMem(cast[pointer](virtualReturn_i_copy), addr virtualReturn[i][0], csize_t(len(virtualReturn[i])))
-    virtualReturn_CArray[i] = struct_miqt_string(data: virtualReturn_i_copy, len: csize_t(len(virtualReturn[i])))
-
-  struct_miqt_array(len: csize_t(len(virtualReturn)), data: if len(virtualReturn) == 0: nil else: addr(virtualReturn_CArray[0]))
-
 proc QDirModelmimeData*(self: gen_qdirmodel_types.QDirModel, indexes: openArray[gen_qabstractitemmodel_types.QModelIndex]): gen_qmimedata_types.QMimeData =
   var indexes_CArray = newSeq[pointer](len(indexes))
   for i in 0..<len(indexes):
@@ -718,72 +595,17 @@ proc QDirModelmimeData*(self: gen_qdirmodel_types.QDirModel, indexes: openArray[
 
   gen_qmimedata_types.QMimeData(h: fcQDirModel_virtualbase_mimeData(self.h, struct_miqt_array(len: csize_t(len(indexes)), data: if len(indexes) == 0: nil else: addr(indexes_CArray[0]))), owned: false)
 
-proc cQDirModel_vtable_callback_mimeData(self: pointer, indexes: struct_miqt_array): pointer {.cdecl.} =
-  let vtbl = cast[ptr QDirModelVTable](fcQDirModel_vdata(self))
-  let self = QDirModel(h: self)
-  var vindexes_ma = indexes
-  var vindexesx_ret = newSeq[gen_qabstractitemmodel_types.QModelIndex](int(vindexes_ma.len))
-  let vindexes_outCast = cast[ptr UncheckedArray[pointer]](vindexes_ma.data)
-  for i in 0 ..< vindexes_ma.len:
-    vindexesx_ret[i] = gen_qabstractitemmodel_types.QModelIndex(h: vindexes_outCast[i], owned: true)
-  c_free(vindexes_ma.data)
-  let slotval1 = vindexesx_ret
-  var virtualReturn = vtbl[].mimeData(self, slotval1)
-  virtualReturn.owned = false # TODO move?
-  let virtualReturn_h = virtualReturn.h
-  virtualReturn.h = nil
-  virtualReturn_h
-
 proc QDirModeldropMimeData*(self: gen_qdirmodel_types.QDirModel, data: gen_qmimedata_types.QMimeData, action: cint, row: cint, column: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool =
   fcQDirModel_virtualbase_dropMimeData(self.h, data.h, cint(action), row, column, parent.h)
-
-proc cQDirModel_vtable_callback_dropMimeData(self: pointer, data: pointer, action: cint, row: cint, column: cint, parent: pointer): bool {.cdecl.} =
-  let vtbl = cast[ptr QDirModelVTable](fcQDirModel_vdata(self))
-  let self = QDirModel(h: self)
-  let slotval1 = gen_qmimedata_types.QMimeData(h: data, owned: false)
-  let slotval2 = cint(action)
-  let slotval3 = row
-  let slotval4 = column
-  let slotval5 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
-  var virtualReturn = vtbl[].dropMimeData(self, slotval1, slotval2, slotval3, slotval4, slotval5)
-  virtualReturn
 
 proc QDirModelsupportedDropActions*(self: gen_qdirmodel_types.QDirModel): cint =
   cint(fcQDirModel_virtualbase_supportedDropActions(self.h))
 
-proc cQDirModel_vtable_callback_supportedDropActions(self: pointer): cint {.cdecl.} =
-  let vtbl = cast[ptr QDirModelVTable](fcQDirModel_vdata(self))
-  let self = QDirModel(h: self)
-  var virtualReturn = vtbl[].supportedDropActions(self)
-  cint(virtualReturn)
-
 proc QDirModelsibling*(self: gen_qdirmodel_types.QDirModel, row: cint, column: cint, idx: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex =
   gen_qabstractitemmodel_types.QModelIndex(h: fcQDirModel_virtualbase_sibling(self.h, row, column, idx.h), owned: true)
 
-proc cQDirModel_vtable_callback_sibling(self: pointer, row: cint, column: cint, idx: pointer): pointer {.cdecl.} =
-  let vtbl = cast[ptr QDirModelVTable](fcQDirModel_vdata(self))
-  let self = QDirModel(h: self)
-  let slotval1 = row
-  let slotval2 = column
-  let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: idx, owned: false)
-  var virtualReturn = vtbl[].sibling(self, slotval1, slotval2, slotval3)
-  virtualReturn.owned = false # TODO move?
-  let virtualReturn_h = virtualReturn.h
-  virtualReturn.h = nil
-  virtualReturn_h
-
 proc QDirModelsetHeaderData*(self: gen_qdirmodel_types.QDirModel, section: cint, orientation: cint, value: gen_qvariant_types.QVariant, role: cint): bool =
   fcQDirModel_virtualbase_setHeaderData(self.h, section, cint(orientation), value.h, role)
-
-proc cQDirModel_vtable_callback_setHeaderData(self: pointer, section: cint, orientation: cint, value: pointer, role: cint): bool {.cdecl.} =
-  let vtbl = cast[ptr QDirModelVTable](fcQDirModel_vdata(self))
-  let self = QDirModel(h: self)
-  let slotval1 = section
-  let slotval2 = cint(orientation)
-  let slotval3 = gen_qvariant_types.QVariant(h: value, owned: false)
-  let slotval4 = role
-  var virtualReturn = vtbl[].setHeaderData(self, slotval1, slotval2, slotval3, slotval4)
-  virtualReturn
 
 proc QDirModelitemData*(self: gen_qdirmodel_types.QDirModel, index: gen_qabstractitemmodel_types.QModelIndex): Table[cint,gen_qvariant_types.QVariant] =
   var v_mm = fcQDirModel_virtualbase_itemData(self.h, index.h)
@@ -800,7 +622,293 @@ proc QDirModelitemData*(self: gen_qdirmodel_types.QDirModel, index: gen_qabstrac
   c_free(v_mm.values)
   vx_ret
 
-proc cQDirModel_vtable_callback_itemData(self: pointer, index: pointer): struct_miqt_map {.cdecl.} =
+proc QDirModelsetItemData*(self: gen_qdirmodel_types.QDirModel, index: gen_qabstractitemmodel_types.QModelIndex, roles: Table[cint,gen_qvariant_types.QVariant]): bool =
+  var roles_Keys_CArray = newSeq[cint](len(roles))
+  var roles_Values_CArray = newSeq[pointer](len(roles))
+  var roles_ctr = 0
+  for roles_k in roles.keys():
+    roles_Keys_CArray[roles_ctr] = roles_k
+    roles_ctr += 1
+  roles_ctr = 0
+  for roles_v in roles.values():
+    roles_Values_CArray[roles_ctr] = roles_v.h
+    roles_ctr += 1
+
+  fcQDirModel_virtualbase_setItemData(self.h, index.h, struct_miqt_map(len: csize_t(len(roles)),keys: if len(roles) == 0: nil else: addr(roles_Keys_CArray[0]), values: if len(roles) == 0: nil else: addr(roles_Values_CArray[0]),))
+
+proc QDirModelcanDropMimeData*(self: gen_qdirmodel_types.QDirModel, data: gen_qmimedata_types.QMimeData, action: cint, row: cint, column: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool =
+  fcQDirModel_virtualbase_canDropMimeData(self.h, data.h, cint(action), row, column, parent.h)
+
+proc QDirModelsupportedDragActions*(self: gen_qdirmodel_types.QDirModel): cint =
+  cint(fcQDirModel_virtualbase_supportedDragActions(self.h))
+
+proc QDirModelinsertRows*(self: gen_qdirmodel_types.QDirModel, row: cint, count: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool =
+  fcQDirModel_virtualbase_insertRows(self.h, row, count, parent.h)
+
+proc QDirModelinsertColumns*(self: gen_qdirmodel_types.QDirModel, column: cint, count: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool =
+  fcQDirModel_virtualbase_insertColumns(self.h, column, count, parent.h)
+
+proc QDirModelremoveRows*(self: gen_qdirmodel_types.QDirModel, row: cint, count: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool =
+  fcQDirModel_virtualbase_removeRows(self.h, row, count, parent.h)
+
+proc QDirModelremoveColumns*(self: gen_qdirmodel_types.QDirModel, column: cint, count: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool =
+  fcQDirModel_virtualbase_removeColumns(self.h, column, count, parent.h)
+
+proc QDirModelmoveRows*(self: gen_qdirmodel_types.QDirModel, sourceParent: gen_qabstractitemmodel_types.QModelIndex, sourceRow: cint, count: cint, destinationParent: gen_qabstractitemmodel_types.QModelIndex, destinationChild: cint): bool =
+  fcQDirModel_virtualbase_moveRows(self.h, sourceParent.h, sourceRow, count, destinationParent.h, destinationChild)
+
+proc QDirModelmoveColumns*(self: gen_qdirmodel_types.QDirModel, sourceParent: gen_qabstractitemmodel_types.QModelIndex, sourceColumn: cint, count: cint, destinationParent: gen_qabstractitemmodel_types.QModelIndex, destinationChild: cint): bool =
+  fcQDirModel_virtualbase_moveColumns(self.h, sourceParent.h, sourceColumn, count, destinationParent.h, destinationChild)
+
+proc QDirModelfetchMore*(self: gen_qdirmodel_types.QDirModel, parent: gen_qabstractitemmodel_types.QModelIndex): void =
+  fcQDirModel_virtualbase_fetchMore(self.h, parent.h)
+
+proc QDirModelcanFetchMore*(self: gen_qdirmodel_types.QDirModel, parent: gen_qabstractitemmodel_types.QModelIndex): bool =
+  fcQDirModel_virtualbase_canFetchMore(self.h, parent.h)
+
+proc QDirModelbuddy*(self: gen_qdirmodel_types.QDirModel, index: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex =
+  gen_qabstractitemmodel_types.QModelIndex(h: fcQDirModel_virtualbase_buddy(self.h, index.h), owned: true)
+
+proc QDirModelmatch*(self: gen_qdirmodel_types.QDirModel, start: gen_qabstractitemmodel_types.QModelIndex, role: cint, value: gen_qvariant_types.QVariant, hits: cint, flags: cint): seq[gen_qabstractitemmodel_types.QModelIndex] =
+  var v_ma = fcQDirModel_virtualbase_match(self.h, start.h, role, value.h, hits, cint(flags))
+  var vx_ret = newSeq[gen_qabstractitemmodel_types.QModelIndex](int(v_ma.len))
+  let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
+  for i in 0 ..< v_ma.len:
+    vx_ret[i] = gen_qabstractitemmodel_types.QModelIndex(h: v_outCast[i], owned: true)
+  c_free(v_ma.data)
+  vx_ret
+
+proc QDirModelspan*(self: gen_qdirmodel_types.QDirModel, index: gen_qabstractitemmodel_types.QModelIndex): gen_qsize_types.QSize =
+  gen_qsize_types.QSize(h: fcQDirModel_virtualbase_span(self.h, index.h), owned: true)
+
+proc QDirModelroleNames*(self: gen_qdirmodel_types.QDirModel): Table[cint,seq[byte]] =
+  var v_mm = fcQDirModel_virtualbase_roleNames(self.h)
+  var vx_ret: Table[cint, seq[byte]]
+  var v_Keys = cast[ptr UncheckedArray[cint]](v_mm.keys)
+  var v_Values = cast[ptr UncheckedArray[struct_miqt_string]](v_mm.values)
+  for i in 0..<v_mm.len:
+    var v_entry_Key = v_Keys[i]
+
+    var vx_hashval_bytearray = v_Values[i]
+    var vx_hashvalx_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](vx_hashval_bytearray.data), 0, int(vx_hashval_bytearray.len)-1))
+    c_free(vx_hashval_bytearray.data)
+    var v_entry_Value = vx_hashvalx_ret
+
+    vx_ret[v_entry_Key] = v_entry_Value
+  c_free(v_mm.keys)
+  c_free(v_mm.values)
+  vx_ret
+
+proc QDirModelsubmit*(self: gen_qdirmodel_types.QDirModel): bool =
+  fcQDirModel_virtualbase_submit(self.h)
+
+proc QDirModelrevert*(self: gen_qdirmodel_types.QDirModel): void =
+  fcQDirModel_virtualbase_revert(self.h)
+
+proc QDirModelevent*(self: gen_qdirmodel_types.QDirModel, event: gen_qcoreevent_types.QEvent): bool =
+  fcQDirModel_virtualbase_event(self.h, event.h)
+
+proc QDirModeleventFilter*(self: gen_qdirmodel_types.QDirModel, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
+  fcQDirModel_virtualbase_eventFilter(self.h, watched.h, event.h)
+
+proc QDirModeltimerEvent*(self: gen_qdirmodel_types.QDirModel, event: gen_qcoreevent_types.QTimerEvent): void =
+  fcQDirModel_virtualbase_timerEvent(self.h, event.h)
+
+proc QDirModelchildEvent*(self: gen_qdirmodel_types.QDirModel, event: gen_qcoreevent_types.QChildEvent): void =
+  fcQDirModel_virtualbase_childEvent(self.h, event.h)
+
+proc QDirModelcustomEvent*(self: gen_qdirmodel_types.QDirModel, event: gen_qcoreevent_types.QEvent): void =
+  fcQDirModel_virtualbase_customEvent(self.h, event.h)
+
+proc QDirModelconnectNotify*(self: gen_qdirmodel_types.QDirModel, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQDirModel_virtualbase_connectNotify(self.h, signal.h)
+
+proc QDirModeldisconnectNotify*(self: gen_qdirmodel_types.QDirModel, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQDirModel_virtualbase_disconnectNotify(self.h, signal.h)
+
+
+proc fcQDirModel_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QDirModelVTable](fcQDirModel_vdata(self))
+  let self = QDirModel(h: self)
+  var virtualReturn = vtbl[].metaObject(self)
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+proc fcQDirModel_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+  let vtbl = cast[ptr QDirModelVTable](fcQDirModel_vdata(self))
+  let self = QDirModel(h: self)
+  let slotval1 = (param1)
+  var virtualReturn = vtbl[].metacast(self, slotval1)
+  virtualReturn
+
+proc fcQDirModel_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QDirModelVTable](fcQDirModel_vdata(self))
+  let self = QDirModel(h: self)
+  let slotval1 = cint(param1)
+  let slotval2 = param2
+  let slotval3 = param3
+  var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
+  virtualReturn
+
+proc fcQDirModel_vtable_callback_index(self: pointer, row: cint, column: cint, parent: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QDirModelVTable](fcQDirModel_vdata(self))
+  let self = QDirModel(h: self)
+  let slotval1 = row
+  let slotval2 = column
+  let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
+  var virtualReturn = vtbl[].index(self, slotval1, slotval2, slotval3)
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+proc fcQDirModel_vtable_callback_parent(self: pointer, child: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QDirModelVTable](fcQDirModel_vdata(self))
+  let self = QDirModel(h: self)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: child, owned: false)
+  var virtualReturn = vtbl[].parent(self, slotval1)
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+proc fcQDirModel_vtable_callback_rowCount(self: pointer, parent: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QDirModelVTable](fcQDirModel_vdata(self))
+  let self = QDirModel(h: self)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
+  var virtualReturn = vtbl[].rowCount(self, slotval1)
+  virtualReturn
+
+proc fcQDirModel_vtable_callback_columnCount(self: pointer, parent: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QDirModelVTable](fcQDirModel_vdata(self))
+  let self = QDirModel(h: self)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
+  var virtualReturn = vtbl[].columnCount(self, slotval1)
+  virtualReturn
+
+proc fcQDirModel_vtable_callback_data(self: pointer, index: pointer, role: cint): pointer {.cdecl.} =
+  let vtbl = cast[ptr QDirModelVTable](fcQDirModel_vdata(self))
+  let self = QDirModel(h: self)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
+  let slotval2 = role
+  var virtualReturn = vtbl[].data(self, slotval1, slotval2)
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+proc fcQDirModel_vtable_callback_setData(self: pointer, index: pointer, value: pointer, role: cint): bool {.cdecl.} =
+  let vtbl = cast[ptr QDirModelVTable](fcQDirModel_vdata(self))
+  let self = QDirModel(h: self)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
+  let slotval2 = gen_qvariant_types.QVariant(h: value, owned: false)
+  let slotval3 = role
+  var virtualReturn = vtbl[].setData(self, slotval1, slotval2, slotval3)
+  virtualReturn
+
+proc fcQDirModel_vtable_callback_headerData(self: pointer, section: cint, orientation: cint, role: cint): pointer {.cdecl.} =
+  let vtbl = cast[ptr QDirModelVTable](fcQDirModel_vdata(self))
+  let self = QDirModel(h: self)
+  let slotval1 = section
+  let slotval2 = cint(orientation)
+  let slotval3 = role
+  var virtualReturn = vtbl[].headerData(self, slotval1, slotval2, slotval3)
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+proc fcQDirModel_vtable_callback_hasChildren(self: pointer, index: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QDirModelVTable](fcQDirModel_vdata(self))
+  let self = QDirModel(h: self)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
+  var virtualReturn = vtbl[].hasChildren(self, slotval1)
+  virtualReturn
+
+proc fcQDirModel_vtable_callback_flags(self: pointer, index: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QDirModelVTable](fcQDirModel_vdata(self))
+  let self = QDirModel(h: self)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
+  var virtualReturn = vtbl[].flags(self, slotval1)
+  cint(virtualReturn)
+
+proc fcQDirModel_vtable_callback_sort(self: pointer, column: cint, order: cint): void {.cdecl.} =
+  let vtbl = cast[ptr QDirModelVTable](fcQDirModel_vdata(self))
+  let self = QDirModel(h: self)
+  let slotval1 = column
+  let slotval2 = cint(order)
+  vtbl[].sort(self, slotval1, slotval2)
+
+proc fcQDirModel_vtable_callback_mimeTypes(self: pointer): struct_miqt_array {.cdecl.} =
+  let vtbl = cast[ptr QDirModelVTable](fcQDirModel_vdata(self))
+  let self = QDirModel(h: self)
+  var virtualReturn = vtbl[].mimeTypes(self)
+  var virtualReturn_CArray = cast[ptr UncheckedArray[struct_miqt_string]](if len(virtualReturn) > 0: c_malloc(c_sizet(sizeof(struct_miqt_string) * len(virtualReturn))) else: nil)
+  for i in 0..<len(virtualReturn):
+    var virtualReturn_i_copy = cast[cstring](if len(virtualReturn[i]) > 0: c_malloc(csize_t(len(virtualReturn[i]))) else: nil)
+    if len(virtualReturn[i]) > 0: copyMem(cast[pointer](virtualReturn_i_copy), addr virtualReturn[i][0], csize_t(len(virtualReturn[i])))
+    virtualReturn_CArray[i] = struct_miqt_string(data: virtualReturn_i_copy, len: csize_t(len(virtualReturn[i])))
+
+  struct_miqt_array(len: csize_t(len(virtualReturn)), data: if len(virtualReturn) == 0: nil else: addr(virtualReturn_CArray[0]))
+
+proc fcQDirModel_vtable_callback_mimeData(self: pointer, indexes: struct_miqt_array): pointer {.cdecl.} =
+  let vtbl = cast[ptr QDirModelVTable](fcQDirModel_vdata(self))
+  let self = QDirModel(h: self)
+  var vindexes_ma = indexes
+  var vindexesx_ret = newSeq[gen_qabstractitemmodel_types.QModelIndex](int(vindexes_ma.len))
+  let vindexes_outCast = cast[ptr UncheckedArray[pointer]](vindexes_ma.data)
+  for i in 0 ..< vindexes_ma.len:
+    vindexesx_ret[i] = gen_qabstractitemmodel_types.QModelIndex(h: vindexes_outCast[i], owned: true)
+  c_free(vindexes_ma.data)
+  let slotval1 = vindexesx_ret
+  var virtualReturn = vtbl[].mimeData(self, slotval1)
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+proc fcQDirModel_vtable_callback_dropMimeData(self: pointer, data: pointer, action: cint, row: cint, column: cint, parent: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QDirModelVTable](fcQDirModel_vdata(self))
+  let self = QDirModel(h: self)
+  let slotval1 = gen_qmimedata_types.QMimeData(h: data, owned: false)
+  let slotval2 = cint(action)
+  let slotval3 = row
+  let slotval4 = column
+  let slotval5 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
+  var virtualReturn = vtbl[].dropMimeData(self, slotval1, slotval2, slotval3, slotval4, slotval5)
+  virtualReturn
+
+proc fcQDirModel_vtable_callback_supportedDropActions(self: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QDirModelVTable](fcQDirModel_vdata(self))
+  let self = QDirModel(h: self)
+  var virtualReturn = vtbl[].supportedDropActions(self)
+  cint(virtualReturn)
+
+proc fcQDirModel_vtable_callback_sibling(self: pointer, row: cint, column: cint, idx: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QDirModelVTable](fcQDirModel_vdata(self))
+  let self = QDirModel(h: self)
+  let slotval1 = row
+  let slotval2 = column
+  let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: idx, owned: false)
+  var virtualReturn = vtbl[].sibling(self, slotval1, slotval2, slotval3)
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+proc fcQDirModel_vtable_callback_setHeaderData(self: pointer, section: cint, orientation: cint, value: pointer, role: cint): bool {.cdecl.} =
+  let vtbl = cast[ptr QDirModelVTable](fcQDirModel_vdata(self))
+  let self = QDirModel(h: self)
+  let slotval1 = section
+  let slotval2 = cint(orientation)
+  let slotval3 = gen_qvariant_types.QVariant(h: value, owned: false)
+  let slotval4 = role
+  var virtualReturn = vtbl[].setHeaderData(self, slotval1, slotval2, slotval3, slotval4)
+  virtualReturn
+
+proc fcQDirModel_vtable_callback_itemData(self: pointer, index: pointer): struct_miqt_map {.cdecl.} =
   let vtbl = cast[ptr QDirModelVTable](fcQDirModel_vdata(self))
   let self = QDirModel(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
@@ -821,21 +929,7 @@ proc cQDirModel_vtable_callback_itemData(self: pointer, index: pointer): struct_
 
   struct_miqt_map(len: csize_t(len(virtualReturn)),keys: if len(virtualReturn) == 0: nil else: addr(virtualReturn_Keys_CArray[0]), values: if len(virtualReturn) == 0: nil else: addr(virtualReturn_Values_CArray[0]),)
 
-proc QDirModelsetItemData*(self: gen_qdirmodel_types.QDirModel, index: gen_qabstractitemmodel_types.QModelIndex, roles: Table[cint,gen_qvariant_types.QVariant]): bool =
-  var roles_Keys_CArray = newSeq[cint](len(roles))
-  var roles_Values_CArray = newSeq[pointer](len(roles))
-  var roles_ctr = 0
-  for roles_k in roles.keys():
-    roles_Keys_CArray[roles_ctr] = roles_k
-    roles_ctr += 1
-  roles_ctr = 0
-  for roles_v in roles.values():
-    roles_Values_CArray[roles_ctr] = roles_v.h
-    roles_ctr += 1
-
-  fcQDirModel_virtualbase_setItemData(self.h, index.h, struct_miqt_map(len: csize_t(len(roles)),keys: if len(roles) == 0: nil else: addr(roles_Keys_CArray[0]), values: if len(roles) == 0: nil else: addr(roles_Values_CArray[0]),))
-
-proc cQDirModel_vtable_callback_setItemData(self: pointer, index: pointer, roles: struct_miqt_map): bool {.cdecl.} =
+proc fcQDirModel_vtable_callback_setItemData(self: pointer, index: pointer, roles: struct_miqt_map): bool {.cdecl.} =
   let vtbl = cast[ptr QDirModelVTable](fcQDirModel_vdata(self))
   let self = QDirModel(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
@@ -855,10 +949,7 @@ proc cQDirModel_vtable_callback_setItemData(self: pointer, index: pointer, roles
   var virtualReturn = vtbl[].setItemData(self, slotval1, slotval2)
   virtualReturn
 
-proc QDirModelcanDropMimeData*(self: gen_qdirmodel_types.QDirModel, data: gen_qmimedata_types.QMimeData, action: cint, row: cint, column: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool =
-  fcQDirModel_virtualbase_canDropMimeData(self.h, data.h, cint(action), row, column, parent.h)
-
-proc cQDirModel_vtable_callback_canDropMimeData(self: pointer, data: pointer, action: cint, row: cint, column: cint, parent: pointer): bool {.cdecl.} =
+proc fcQDirModel_vtable_callback_canDropMimeData(self: pointer, data: pointer, action: cint, row: cint, column: cint, parent: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QDirModelVTable](fcQDirModel_vdata(self))
   let self = QDirModel(h: self)
   let slotval1 = gen_qmimedata_types.QMimeData(h: data, owned: false)
@@ -869,19 +960,13 @@ proc cQDirModel_vtable_callback_canDropMimeData(self: pointer, data: pointer, ac
   var virtualReturn = vtbl[].canDropMimeData(self, slotval1, slotval2, slotval3, slotval4, slotval5)
   virtualReturn
 
-proc QDirModelsupportedDragActions*(self: gen_qdirmodel_types.QDirModel): cint =
-  cint(fcQDirModel_virtualbase_supportedDragActions(self.h))
-
-proc cQDirModel_vtable_callback_supportedDragActions(self: pointer): cint {.cdecl.} =
+proc fcQDirModel_vtable_callback_supportedDragActions(self: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QDirModelVTable](fcQDirModel_vdata(self))
   let self = QDirModel(h: self)
   var virtualReturn = vtbl[].supportedDragActions(self)
   cint(virtualReturn)
 
-proc QDirModelinsertRows*(self: gen_qdirmodel_types.QDirModel, row: cint, count: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool =
-  fcQDirModel_virtualbase_insertRows(self.h, row, count, parent.h)
-
-proc cQDirModel_vtable_callback_insertRows(self: pointer, row: cint, count: cint, parent: pointer): bool {.cdecl.} =
+proc fcQDirModel_vtable_callback_insertRows(self: pointer, row: cint, count: cint, parent: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QDirModelVTable](fcQDirModel_vdata(self))
   let self = QDirModel(h: self)
   let slotval1 = row
@@ -890,10 +975,7 @@ proc cQDirModel_vtable_callback_insertRows(self: pointer, row: cint, count: cint
   var virtualReturn = vtbl[].insertRows(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QDirModelinsertColumns*(self: gen_qdirmodel_types.QDirModel, column: cint, count: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool =
-  fcQDirModel_virtualbase_insertColumns(self.h, column, count, parent.h)
-
-proc cQDirModel_vtable_callback_insertColumns(self: pointer, column: cint, count: cint, parent: pointer): bool {.cdecl.} =
+proc fcQDirModel_vtable_callback_insertColumns(self: pointer, column: cint, count: cint, parent: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QDirModelVTable](fcQDirModel_vdata(self))
   let self = QDirModel(h: self)
   let slotval1 = column
@@ -902,10 +984,7 @@ proc cQDirModel_vtable_callback_insertColumns(self: pointer, column: cint, count
   var virtualReturn = vtbl[].insertColumns(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QDirModelremoveRows*(self: gen_qdirmodel_types.QDirModel, row: cint, count: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool =
-  fcQDirModel_virtualbase_removeRows(self.h, row, count, parent.h)
-
-proc cQDirModel_vtable_callback_removeRows(self: pointer, row: cint, count: cint, parent: pointer): bool {.cdecl.} =
+proc fcQDirModel_vtable_callback_removeRows(self: pointer, row: cint, count: cint, parent: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QDirModelVTable](fcQDirModel_vdata(self))
   let self = QDirModel(h: self)
   let slotval1 = row
@@ -914,10 +993,7 @@ proc cQDirModel_vtable_callback_removeRows(self: pointer, row: cint, count: cint
   var virtualReturn = vtbl[].removeRows(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QDirModelremoveColumns*(self: gen_qdirmodel_types.QDirModel, column: cint, count: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool =
-  fcQDirModel_virtualbase_removeColumns(self.h, column, count, parent.h)
-
-proc cQDirModel_vtable_callback_removeColumns(self: pointer, column: cint, count: cint, parent: pointer): bool {.cdecl.} =
+proc fcQDirModel_vtable_callback_removeColumns(self: pointer, column: cint, count: cint, parent: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QDirModelVTable](fcQDirModel_vdata(self))
   let self = QDirModel(h: self)
   let slotval1 = column
@@ -926,10 +1002,7 @@ proc cQDirModel_vtable_callback_removeColumns(self: pointer, column: cint, count
   var virtualReturn = vtbl[].removeColumns(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QDirModelmoveRows*(self: gen_qdirmodel_types.QDirModel, sourceParent: gen_qabstractitemmodel_types.QModelIndex, sourceRow: cint, count: cint, destinationParent: gen_qabstractitemmodel_types.QModelIndex, destinationChild: cint): bool =
-  fcQDirModel_virtualbase_moveRows(self.h, sourceParent.h, sourceRow, count, destinationParent.h, destinationChild)
-
-proc cQDirModel_vtable_callback_moveRows(self: pointer, sourceParent: pointer, sourceRow: cint, count: cint, destinationParent: pointer, destinationChild: cint): bool {.cdecl.} =
+proc fcQDirModel_vtable_callback_moveRows(self: pointer, sourceParent: pointer, sourceRow: cint, count: cint, destinationParent: pointer, destinationChild: cint): bool {.cdecl.} =
   let vtbl = cast[ptr QDirModelVTable](fcQDirModel_vdata(self))
   let self = QDirModel(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: sourceParent, owned: false)
@@ -940,10 +1013,7 @@ proc cQDirModel_vtable_callback_moveRows(self: pointer, sourceParent: pointer, s
   var virtualReturn = vtbl[].moveRows(self, slotval1, slotval2, slotval3, slotval4, slotval5)
   virtualReturn
 
-proc QDirModelmoveColumns*(self: gen_qdirmodel_types.QDirModel, sourceParent: gen_qabstractitemmodel_types.QModelIndex, sourceColumn: cint, count: cint, destinationParent: gen_qabstractitemmodel_types.QModelIndex, destinationChild: cint): bool =
-  fcQDirModel_virtualbase_moveColumns(self.h, sourceParent.h, sourceColumn, count, destinationParent.h, destinationChild)
-
-proc cQDirModel_vtable_callback_moveColumns(self: pointer, sourceParent: pointer, sourceColumn: cint, count: cint, destinationParent: pointer, destinationChild: cint): bool {.cdecl.} =
+proc fcQDirModel_vtable_callback_moveColumns(self: pointer, sourceParent: pointer, sourceColumn: cint, count: cint, destinationParent: pointer, destinationChild: cint): bool {.cdecl.} =
   let vtbl = cast[ptr QDirModelVTable](fcQDirModel_vdata(self))
   let self = QDirModel(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: sourceParent, owned: false)
@@ -954,29 +1024,20 @@ proc cQDirModel_vtable_callback_moveColumns(self: pointer, sourceParent: pointer
   var virtualReturn = vtbl[].moveColumns(self, slotval1, slotval2, slotval3, slotval4, slotval5)
   virtualReturn
 
-proc QDirModelfetchMore*(self: gen_qdirmodel_types.QDirModel, parent: gen_qabstractitemmodel_types.QModelIndex): void =
-  fcQDirModel_virtualbase_fetchMore(self.h, parent.h)
-
-proc cQDirModel_vtable_callback_fetchMore(self: pointer, parent: pointer): void {.cdecl.} =
+proc fcQDirModel_vtable_callback_fetchMore(self: pointer, parent: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDirModelVTable](fcQDirModel_vdata(self))
   let self = QDirModel(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   vtbl[].fetchMore(self, slotval1)
 
-proc QDirModelcanFetchMore*(self: gen_qdirmodel_types.QDirModel, parent: gen_qabstractitemmodel_types.QModelIndex): bool =
-  fcQDirModel_virtualbase_canFetchMore(self.h, parent.h)
-
-proc cQDirModel_vtable_callback_canFetchMore(self: pointer, parent: pointer): bool {.cdecl.} =
+proc fcQDirModel_vtable_callback_canFetchMore(self: pointer, parent: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QDirModelVTable](fcQDirModel_vdata(self))
   let self = QDirModel(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   var virtualReturn = vtbl[].canFetchMore(self, slotval1)
   virtualReturn
 
-proc QDirModelbuddy*(self: gen_qdirmodel_types.QDirModel, index: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex =
-  gen_qabstractitemmodel_types.QModelIndex(h: fcQDirModel_virtualbase_buddy(self.h, index.h), owned: true)
-
-proc cQDirModel_vtable_callback_buddy(self: pointer, index: pointer): pointer {.cdecl.} =
+proc fcQDirModel_vtable_callback_buddy(self: pointer, index: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QDirModelVTable](fcQDirModel_vdata(self))
   let self = QDirModel(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
@@ -986,16 +1047,7 @@ proc cQDirModel_vtable_callback_buddy(self: pointer, index: pointer): pointer {.
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QDirModelmatch*(self: gen_qdirmodel_types.QDirModel, start: gen_qabstractitemmodel_types.QModelIndex, role: cint, value: gen_qvariant_types.QVariant, hits: cint, flags: cint): seq[gen_qabstractitemmodel_types.QModelIndex] =
-  var v_ma = fcQDirModel_virtualbase_match(self.h, start.h, role, value.h, hits, cint(flags))
-  var vx_ret = newSeq[gen_qabstractitemmodel_types.QModelIndex](int(v_ma.len))
-  let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
-  for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qabstractitemmodel_types.QModelIndex(h: v_outCast[i], owned: true)
-  c_free(v_ma.data)
-  vx_ret
-
-proc cQDirModel_vtable_callback_match(self: pointer, start: pointer, role: cint, value: pointer, hits: cint, flags: cint): struct_miqt_array {.cdecl.} =
+proc fcQDirModel_vtable_callback_match(self: pointer, start: pointer, role: cint, value: pointer, hits: cint, flags: cint): struct_miqt_array {.cdecl.} =
   let vtbl = cast[ptr QDirModelVTable](fcQDirModel_vdata(self))
   let self = QDirModel(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: start, owned: false)
@@ -1013,10 +1065,7 @@ proc cQDirModel_vtable_callback_match(self: pointer, start: pointer, role: cint,
 
   struct_miqt_array(len: csize_t(len(virtualReturn)), data: if len(virtualReturn) == 0: nil else: addr(virtualReturn_CArray[0]))
 
-proc QDirModelspan*(self: gen_qdirmodel_types.QDirModel, index: gen_qabstractitemmodel_types.QModelIndex): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQDirModel_virtualbase_span(self.h, index.h), owned: true)
-
-proc cQDirModel_vtable_callback_span(self: pointer, index: pointer): pointer {.cdecl.} =
+proc fcQDirModel_vtable_callback_span(self: pointer, index: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QDirModelVTable](fcQDirModel_vdata(self))
   let self = QDirModel(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
@@ -1026,25 +1075,7 @@ proc cQDirModel_vtable_callback_span(self: pointer, index: pointer): pointer {.c
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QDirModelroleNames*(self: gen_qdirmodel_types.QDirModel): Table[cint,seq[byte]] =
-  var v_mm = fcQDirModel_virtualbase_roleNames(self.h)
-  var vx_ret: Table[cint, seq[byte]]
-  var v_Keys = cast[ptr UncheckedArray[cint]](v_mm.keys)
-  var v_Values = cast[ptr UncheckedArray[struct_miqt_string]](v_mm.values)
-  for i in 0..<v_mm.len:
-    var v_entry_Key = v_Keys[i]
-
-    var vx_hashval_bytearray = v_Values[i]
-    var vx_hashvalx_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](vx_hashval_bytearray.data), 0, int(vx_hashval_bytearray.len)-1))
-    c_free(vx_hashval_bytearray.data)
-    var v_entry_Value = vx_hashvalx_ret
-
-    vx_ret[v_entry_Key] = v_entry_Value
-  c_free(v_mm.keys)
-  c_free(v_mm.values)
-  vx_ret
-
-proc cQDirModel_vtable_callback_roleNames(self: pointer): struct_miqt_map {.cdecl.} =
+proc fcQDirModel_vtable_callback_roleNames(self: pointer): struct_miqt_map {.cdecl.} =
   let vtbl = cast[ptr QDirModelVTable](fcQDirModel_vdata(self))
   let self = QDirModel(h: self)
   var virtualReturn = vtbl[].roleNames(self)
@@ -1063,37 +1094,25 @@ proc cQDirModel_vtable_callback_roleNames(self: pointer): struct_miqt_map {.cdec
 
   struct_miqt_map(len: csize_t(len(virtualReturn)),keys: if len(virtualReturn) == 0: nil else: addr(virtualReturn_Keys_CArray[0]), values: if len(virtualReturn) == 0: nil else: addr(virtualReturn_Values_CArray[0]),)
 
-proc QDirModelsubmit*(self: gen_qdirmodel_types.QDirModel): bool =
-  fcQDirModel_virtualbase_submit(self.h)
-
-proc cQDirModel_vtable_callback_submit(self: pointer): bool {.cdecl.} =
+proc fcQDirModel_vtable_callback_submit(self: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QDirModelVTable](fcQDirModel_vdata(self))
   let self = QDirModel(h: self)
   var virtualReturn = vtbl[].submit(self)
   virtualReturn
 
-proc QDirModelrevert*(self: gen_qdirmodel_types.QDirModel): void =
-  fcQDirModel_virtualbase_revert(self.h)
-
-proc cQDirModel_vtable_callback_revert(self: pointer): void {.cdecl.} =
+proc fcQDirModel_vtable_callback_revert(self: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDirModelVTable](fcQDirModel_vdata(self))
   let self = QDirModel(h: self)
   vtbl[].revert(self)
 
-proc QDirModelevent*(self: gen_qdirmodel_types.QDirModel, event: gen_qcoreevent_types.QEvent): bool =
-  fcQDirModel_virtualbase_event(self.h, event.h)
-
-proc cQDirModel_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
+proc fcQDirModel_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QDirModelVTable](fcQDirModel_vdata(self))
   let self = QDirModel(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
-proc QDirModeleventFilter*(self: gen_qdirmodel_types.QDirModel, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
-  fcQDirModel_virtualbase_eventFilter(self.h, watched.h, event.h)
-
-proc cQDirModel_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+proc fcQDirModel_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QDirModelVTable](fcQDirModel_vdata(self))
   let self = QDirModel(h: self)
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
@@ -1101,46 +1120,31 @@ proc cQDirModel_vtable_callback_eventFilter(self: pointer, watched: pointer, eve
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
-proc QDirModeltimerEvent*(self: gen_qdirmodel_types.QDirModel, event: gen_qcoreevent_types.QTimerEvent): void =
-  fcQDirModel_virtualbase_timerEvent(self.h, event.h)
-
-proc cQDirModel_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQDirModel_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDirModelVTable](fcQDirModel_vdata(self))
   let self = QDirModel(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
-proc QDirModelchildEvent*(self: gen_qdirmodel_types.QDirModel, event: gen_qcoreevent_types.QChildEvent): void =
-  fcQDirModel_virtualbase_childEvent(self.h, event.h)
-
-proc cQDirModel_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQDirModel_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDirModelVTable](fcQDirModel_vdata(self))
   let self = QDirModel(h: self)
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
-proc QDirModelcustomEvent*(self: gen_qdirmodel_types.QDirModel, event: gen_qcoreevent_types.QEvent): void =
-  fcQDirModel_virtualbase_customEvent(self.h, event.h)
-
-proc cQDirModel_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQDirModel_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDirModelVTable](fcQDirModel_vdata(self))
   let self = QDirModel(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
-proc QDirModelconnectNotify*(self: gen_qdirmodel_types.QDirModel, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQDirModel_virtualbase_connectNotify(self.h, signal.h)
-
-proc cQDirModel_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQDirModel_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDirModelVTable](fcQDirModel_vdata(self))
   let self = QDirModel(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
-proc QDirModeldisconnectNotify*(self: gen_qdirmodel_types.QDirModel, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQDirModel_virtualbase_disconnectNotify(self.h, signal.h)
-
-proc cQDirModel_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQDirModel_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDirModelVTable](fcQDirModel_vdata(self))
   let self = QDirModel(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
@@ -1148,9 +1152,97 @@ proc cQDirModel_vtable_callback_disconnectNotify(self: pointer, signal: pointer)
 
 type VirtualQDirModel* {.inheritable.} = ref object of QDirModel
   vtbl*: cQDirModelVTable
+
 method metaObject*(self: VirtualQDirModel): gen_qobjectdefs_types.QMetaObject {.base.} =
   QDirModelmetaObject(self[])
-proc cQDirModel_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
+method metacast*(self: VirtualQDirModel, param1: cstring): pointer {.base.} =
+  QDirModelmetacast(self[], param1)
+method metacall*(self: VirtualQDirModel, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QDirModelmetacall(self[], param1, param2, param3)
+method index*(self: VirtualQDirModel, row: cint, column: cint, parent: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex {.base.} =
+  QDirModelindex(self[], row, column, parent)
+method parent*(self: VirtualQDirModel, child: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex {.base.} =
+  QDirModelparent(self[], child)
+method rowCount*(self: VirtualQDirModel, parent: gen_qabstractitemmodel_types.QModelIndex): cint {.base.} =
+  QDirModelrowCount(self[], parent)
+method columnCount*(self: VirtualQDirModel, parent: gen_qabstractitemmodel_types.QModelIndex): cint {.base.} =
+  QDirModelcolumnCount(self[], parent)
+method data*(self: VirtualQDirModel, index: gen_qabstractitemmodel_types.QModelIndex, role: cint): gen_qvariant_types.QVariant {.base.} =
+  QDirModeldata(self[], index, role)
+method setData*(self: VirtualQDirModel, index: gen_qabstractitemmodel_types.QModelIndex, value: gen_qvariant_types.QVariant, role: cint): bool {.base.} =
+  QDirModelsetData(self[], index, value, role)
+method headerData*(self: VirtualQDirModel, section: cint, orientation: cint, role: cint): gen_qvariant_types.QVariant {.base.} =
+  QDirModelheaderData(self[], section, orientation, role)
+method hasChildren*(self: VirtualQDirModel, index: gen_qabstractitemmodel_types.QModelIndex): bool {.base.} =
+  QDirModelhasChildren(self[], index)
+method flags*(self: VirtualQDirModel, index: gen_qabstractitemmodel_types.QModelIndex): cint {.base.} =
+  QDirModelflags(self[], index)
+method sort*(self: VirtualQDirModel, column: cint, order: cint): void {.base.} =
+  QDirModelsort(self[], column, order)
+method mimeTypes*(self: VirtualQDirModel): seq[string] {.base.} =
+  QDirModelmimeTypes(self[])
+method mimeData*(self: VirtualQDirModel, indexes: openArray[gen_qabstractitemmodel_types.QModelIndex]): gen_qmimedata_types.QMimeData {.base.} =
+  QDirModelmimeData(self[], indexes)
+method dropMimeData*(self: VirtualQDirModel, data: gen_qmimedata_types.QMimeData, action: cint, row: cint, column: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool {.base.} =
+  QDirModeldropMimeData(self[], data, action, row, column, parent)
+method supportedDropActions*(self: VirtualQDirModel): cint {.base.} =
+  QDirModelsupportedDropActions(self[])
+method sibling*(self: VirtualQDirModel, row: cint, column: cint, idx: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex {.base.} =
+  QDirModelsibling(self[], row, column, idx)
+method setHeaderData*(self: VirtualQDirModel, section: cint, orientation: cint, value: gen_qvariant_types.QVariant, role: cint): bool {.base.} =
+  QDirModelsetHeaderData(self[], section, orientation, value, role)
+method itemData*(self: VirtualQDirModel, index: gen_qabstractitemmodel_types.QModelIndex): Table[cint,gen_qvariant_types.QVariant] {.base.} =
+  QDirModelitemData(self[], index)
+method setItemData*(self: VirtualQDirModel, index: gen_qabstractitemmodel_types.QModelIndex, roles: Table[cint,gen_qvariant_types.QVariant]): bool {.base.} =
+  QDirModelsetItemData(self[], index, roles)
+method canDropMimeData*(self: VirtualQDirModel, data: gen_qmimedata_types.QMimeData, action: cint, row: cint, column: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool {.base.} =
+  QDirModelcanDropMimeData(self[], data, action, row, column, parent)
+method supportedDragActions*(self: VirtualQDirModel): cint {.base.} =
+  QDirModelsupportedDragActions(self[])
+method insertRows*(self: VirtualQDirModel, row: cint, count: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool {.base.} =
+  QDirModelinsertRows(self[], row, count, parent)
+method insertColumns*(self: VirtualQDirModel, column: cint, count: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool {.base.} =
+  QDirModelinsertColumns(self[], column, count, parent)
+method removeRows*(self: VirtualQDirModel, row: cint, count: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool {.base.} =
+  QDirModelremoveRows(self[], row, count, parent)
+method removeColumns*(self: VirtualQDirModel, column: cint, count: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool {.base.} =
+  QDirModelremoveColumns(self[], column, count, parent)
+method moveRows*(self: VirtualQDirModel, sourceParent: gen_qabstractitemmodel_types.QModelIndex, sourceRow: cint, count: cint, destinationParent: gen_qabstractitemmodel_types.QModelIndex, destinationChild: cint): bool {.base.} =
+  QDirModelmoveRows(self[], sourceParent, sourceRow, count, destinationParent, destinationChild)
+method moveColumns*(self: VirtualQDirModel, sourceParent: gen_qabstractitemmodel_types.QModelIndex, sourceColumn: cint, count: cint, destinationParent: gen_qabstractitemmodel_types.QModelIndex, destinationChild: cint): bool {.base.} =
+  QDirModelmoveColumns(self[], sourceParent, sourceColumn, count, destinationParent, destinationChild)
+method fetchMore*(self: VirtualQDirModel, parent: gen_qabstractitemmodel_types.QModelIndex): void {.base.} =
+  QDirModelfetchMore(self[], parent)
+method canFetchMore*(self: VirtualQDirModel, parent: gen_qabstractitemmodel_types.QModelIndex): bool {.base.} =
+  QDirModelcanFetchMore(self[], parent)
+method buddy*(self: VirtualQDirModel, index: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex {.base.} =
+  QDirModelbuddy(self[], index)
+method match*(self: VirtualQDirModel, start: gen_qabstractitemmodel_types.QModelIndex, role: cint, value: gen_qvariant_types.QVariant, hits: cint, flags: cint): seq[gen_qabstractitemmodel_types.QModelIndex] {.base.} =
+  QDirModelmatch(self[], start, role, value, hits, flags)
+method span*(self: VirtualQDirModel, index: gen_qabstractitemmodel_types.QModelIndex): gen_qsize_types.QSize {.base.} =
+  QDirModelspan(self[], index)
+method roleNames*(self: VirtualQDirModel): Table[cint,seq[byte]] {.base.} =
+  QDirModelroleNames(self[])
+method submit*(self: VirtualQDirModel): bool {.base.} =
+  QDirModelsubmit(self[])
+method revert*(self: VirtualQDirModel): void {.base.} =
+  QDirModelrevert(self[])
+method event*(self: VirtualQDirModel, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QDirModelevent(self[], event)
+method eventFilter*(self: VirtualQDirModel, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QDirModeleventFilter(self[], watched, event)
+method timerEvent*(self: VirtualQDirModel, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QDirModeltimerEvent(self[], event)
+method childEvent*(self: VirtualQDirModel, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QDirModelchildEvent(self[], event)
+method customEvent*(self: VirtualQDirModel, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QDirModelcustomEvent(self[], event)
+method connectNotify*(self: VirtualQDirModel, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QDirModelconnectNotify(self[], signal)
+method disconnectNotify*(self: VirtualQDirModel, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QDirModeldisconnectNotify(self[], signal)
+
+proc fcQDirModel_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQDirModel](fcQDirModel_vdata(self))
   var virtualReturn = inst.metaObject()
   virtualReturn.owned = false # TODO move?
@@ -1158,17 +1250,13 @@ proc cQDirModel_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-method metacast*(self: VirtualQDirModel, param1: cstring): pointer {.base.} =
-  QDirModelmetacast(self[], param1)
-proc cQDirModel_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+proc fcQDirModel_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQDirModel](fcQDirModel_vdata(self))
   let slotval1 = (param1)
   var virtualReturn = inst.metacast(slotval1)
   virtualReturn
 
-method metacall*(self: VirtualQDirModel, param1: cint, param2: cint, param3: pointer): cint {.base.} =
-  QDirModelmetacall(self[], param1, param2, param3)
-proc cQDirModel_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+proc fcQDirModel_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQDirModel](fcQDirModel_vdata(self))
   let slotval1 = cint(param1)
   let slotval2 = param2
@@ -1176,9 +1264,7 @@ proc cQDirModel_method_callback_metacall(self: pointer, param1: cint, param2: ci
   var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
-method index*(self: VirtualQDirModel, row: cint, column: cint, parent: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex {.base.} =
-  QDirModelindex(self[], row, column, parent)
-proc cQDirModel_method_callback_index(self: pointer, row: cint, column: cint, parent: pointer): pointer {.cdecl.} =
+proc fcQDirModel_method_callback_index(self: pointer, row: cint, column: cint, parent: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQDirModel](fcQDirModel_vdata(self))
   let slotval1 = row
   let slotval2 = column
@@ -1189,9 +1275,7 @@ proc cQDirModel_method_callback_index(self: pointer, row: cint, column: cint, pa
   virtualReturn.h = nil
   virtualReturn_h
 
-method parent*(self: VirtualQDirModel, child: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex {.base.} =
-  QDirModelparent(self[], child)
-proc cQDirModel_method_callback_parent(self: pointer, child: pointer): pointer {.cdecl.} =
+proc fcQDirModel_method_callback_parent(self: pointer, child: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQDirModel](fcQDirModel_vdata(self))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: child, owned: false)
   var virtualReturn = inst.parent(slotval1)
@@ -1200,25 +1284,19 @@ proc cQDirModel_method_callback_parent(self: pointer, child: pointer): pointer {
   virtualReturn.h = nil
   virtualReturn_h
 
-method rowCount*(self: VirtualQDirModel, parent: gen_qabstractitemmodel_types.QModelIndex): cint {.base.} =
-  QDirModelrowCount(self[], parent)
-proc cQDirModel_method_callback_rowCount(self: pointer, parent: pointer): cint {.cdecl.} =
+proc fcQDirModel_method_callback_rowCount(self: pointer, parent: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQDirModel](fcQDirModel_vdata(self))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   var virtualReturn = inst.rowCount(slotval1)
   virtualReturn
 
-method columnCount*(self: VirtualQDirModel, parent: gen_qabstractitemmodel_types.QModelIndex): cint {.base.} =
-  QDirModelcolumnCount(self[], parent)
-proc cQDirModel_method_callback_columnCount(self: pointer, parent: pointer): cint {.cdecl.} =
+proc fcQDirModel_method_callback_columnCount(self: pointer, parent: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQDirModel](fcQDirModel_vdata(self))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   var virtualReturn = inst.columnCount(slotval1)
   virtualReturn
 
-method data*(self: VirtualQDirModel, index: gen_qabstractitemmodel_types.QModelIndex, role: cint): gen_qvariant_types.QVariant {.base.} =
-  QDirModeldata(self[], index, role)
-proc cQDirModel_method_callback_data(self: pointer, index: pointer, role: cint): pointer {.cdecl.} =
+proc fcQDirModel_method_callback_data(self: pointer, index: pointer, role: cint): pointer {.cdecl.} =
   let inst = cast[VirtualQDirModel](fcQDirModel_vdata(self))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   let slotval2 = role
@@ -1228,9 +1306,7 @@ proc cQDirModel_method_callback_data(self: pointer, index: pointer, role: cint):
   virtualReturn.h = nil
   virtualReturn_h
 
-method setData*(self: VirtualQDirModel, index: gen_qabstractitemmodel_types.QModelIndex, value: gen_qvariant_types.QVariant, role: cint): bool {.base.} =
-  QDirModelsetData(self[], index, value, role)
-proc cQDirModel_method_callback_setData(self: pointer, index: pointer, value: pointer, role: cint): bool {.cdecl.} =
+proc fcQDirModel_method_callback_setData(self: pointer, index: pointer, value: pointer, role: cint): bool {.cdecl.} =
   let inst = cast[VirtualQDirModel](fcQDirModel_vdata(self))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   let slotval2 = gen_qvariant_types.QVariant(h: value, owned: false)
@@ -1238,9 +1314,7 @@ proc cQDirModel_method_callback_setData(self: pointer, index: pointer, value: po
   var virtualReturn = inst.setData(slotval1, slotval2, slotval3)
   virtualReturn
 
-method headerData*(self: VirtualQDirModel, section: cint, orientation: cint, role: cint): gen_qvariant_types.QVariant {.base.} =
-  QDirModelheaderData(self[], section, orientation, role)
-proc cQDirModel_method_callback_headerData(self: pointer, section: cint, orientation: cint, role: cint): pointer {.cdecl.} =
+proc fcQDirModel_method_callback_headerData(self: pointer, section: cint, orientation: cint, role: cint): pointer {.cdecl.} =
   let inst = cast[VirtualQDirModel](fcQDirModel_vdata(self))
   let slotval1 = section
   let slotval2 = cint(orientation)
@@ -1251,33 +1325,25 @@ proc cQDirModel_method_callback_headerData(self: pointer, section: cint, orienta
   virtualReturn.h = nil
   virtualReturn_h
 
-method hasChildren*(self: VirtualQDirModel, index: gen_qabstractitemmodel_types.QModelIndex): bool {.base.} =
-  QDirModelhasChildren(self[], index)
-proc cQDirModel_method_callback_hasChildren(self: pointer, index: pointer): bool {.cdecl.} =
+proc fcQDirModel_method_callback_hasChildren(self: pointer, index: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQDirModel](fcQDirModel_vdata(self))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var virtualReturn = inst.hasChildren(slotval1)
   virtualReturn
 
-method flags*(self: VirtualQDirModel, index: gen_qabstractitemmodel_types.QModelIndex): cint {.base.} =
-  QDirModelflags(self[], index)
-proc cQDirModel_method_callback_flags(self: pointer, index: pointer): cint {.cdecl.} =
+proc fcQDirModel_method_callback_flags(self: pointer, index: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQDirModel](fcQDirModel_vdata(self))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var virtualReturn = inst.flags(slotval1)
   cint(virtualReturn)
 
-method sort*(self: VirtualQDirModel, column: cint, order: cint): void {.base.} =
-  QDirModelsort(self[], column, order)
-proc cQDirModel_method_callback_sort(self: pointer, column: cint, order: cint): void {.cdecl.} =
+proc fcQDirModel_method_callback_sort(self: pointer, column: cint, order: cint): void {.cdecl.} =
   let inst = cast[VirtualQDirModel](fcQDirModel_vdata(self))
   let slotval1 = column
   let slotval2 = cint(order)
   inst.sort(slotval1, slotval2)
 
-method mimeTypes*(self: VirtualQDirModel): seq[string] {.base.} =
-  QDirModelmimeTypes(self[])
-proc cQDirModel_method_callback_mimeTypes(self: pointer): struct_miqt_array {.cdecl.} =
+proc fcQDirModel_method_callback_mimeTypes(self: pointer): struct_miqt_array {.cdecl.} =
   let inst = cast[VirtualQDirModel](fcQDirModel_vdata(self))
   var virtualReturn = inst.mimeTypes()
   var virtualReturn_CArray = cast[ptr UncheckedArray[struct_miqt_string]](if len(virtualReturn) > 0: c_malloc(c_sizet(sizeof(struct_miqt_string) * len(virtualReturn))) else: nil)
@@ -1288,9 +1354,7 @@ proc cQDirModel_method_callback_mimeTypes(self: pointer): struct_miqt_array {.cd
 
   struct_miqt_array(len: csize_t(len(virtualReturn)), data: if len(virtualReturn) == 0: nil else: addr(virtualReturn_CArray[0]))
 
-method mimeData*(self: VirtualQDirModel, indexes: openArray[gen_qabstractitemmodel_types.QModelIndex]): gen_qmimedata_types.QMimeData {.base.} =
-  QDirModelmimeData(self[], indexes)
-proc cQDirModel_method_callback_mimeData(self: pointer, indexes: struct_miqt_array): pointer {.cdecl.} =
+proc fcQDirModel_method_callback_mimeData(self: pointer, indexes: struct_miqt_array): pointer {.cdecl.} =
   let inst = cast[VirtualQDirModel](fcQDirModel_vdata(self))
   var vindexes_ma = indexes
   var vindexesx_ret = newSeq[gen_qabstractitemmodel_types.QModelIndex](int(vindexes_ma.len))
@@ -1305,9 +1369,7 @@ proc cQDirModel_method_callback_mimeData(self: pointer, indexes: struct_miqt_arr
   virtualReturn.h = nil
   virtualReturn_h
 
-method dropMimeData*(self: VirtualQDirModel, data: gen_qmimedata_types.QMimeData, action: cint, row: cint, column: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool {.base.} =
-  QDirModeldropMimeData(self[], data, action, row, column, parent)
-proc cQDirModel_method_callback_dropMimeData(self: pointer, data: pointer, action: cint, row: cint, column: cint, parent: pointer): bool {.cdecl.} =
+proc fcQDirModel_method_callback_dropMimeData(self: pointer, data: pointer, action: cint, row: cint, column: cint, parent: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQDirModel](fcQDirModel_vdata(self))
   let slotval1 = gen_qmimedata_types.QMimeData(h: data, owned: false)
   let slotval2 = cint(action)
@@ -1317,16 +1379,12 @@ proc cQDirModel_method_callback_dropMimeData(self: pointer, data: pointer, actio
   var virtualReturn = inst.dropMimeData(slotval1, slotval2, slotval3, slotval4, slotval5)
   virtualReturn
 
-method supportedDropActions*(self: VirtualQDirModel): cint {.base.} =
-  QDirModelsupportedDropActions(self[])
-proc cQDirModel_method_callback_supportedDropActions(self: pointer): cint {.cdecl.} =
+proc fcQDirModel_method_callback_supportedDropActions(self: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQDirModel](fcQDirModel_vdata(self))
   var virtualReturn = inst.supportedDropActions()
   cint(virtualReturn)
 
-method sibling*(self: VirtualQDirModel, row: cint, column: cint, idx: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex {.base.} =
-  QDirModelsibling(self[], row, column, idx)
-proc cQDirModel_method_callback_sibling(self: pointer, row: cint, column: cint, idx: pointer): pointer {.cdecl.} =
+proc fcQDirModel_method_callback_sibling(self: pointer, row: cint, column: cint, idx: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQDirModel](fcQDirModel_vdata(self))
   let slotval1 = row
   let slotval2 = column
@@ -1337,9 +1395,7 @@ proc cQDirModel_method_callback_sibling(self: pointer, row: cint, column: cint, 
   virtualReturn.h = nil
   virtualReturn_h
 
-method setHeaderData*(self: VirtualQDirModel, section: cint, orientation: cint, value: gen_qvariant_types.QVariant, role: cint): bool {.base.} =
-  QDirModelsetHeaderData(self[], section, orientation, value, role)
-proc cQDirModel_method_callback_setHeaderData(self: pointer, section: cint, orientation: cint, value: pointer, role: cint): bool {.cdecl.} =
+proc fcQDirModel_method_callback_setHeaderData(self: pointer, section: cint, orientation: cint, value: pointer, role: cint): bool {.cdecl.} =
   let inst = cast[VirtualQDirModel](fcQDirModel_vdata(self))
   let slotval1 = section
   let slotval2 = cint(orientation)
@@ -1348,9 +1404,7 @@ proc cQDirModel_method_callback_setHeaderData(self: pointer, section: cint, orie
   var virtualReturn = inst.setHeaderData(slotval1, slotval2, slotval3, slotval4)
   virtualReturn
 
-method itemData*(self: VirtualQDirModel, index: gen_qabstractitemmodel_types.QModelIndex): Table[cint,gen_qvariant_types.QVariant] {.base.} =
-  QDirModelitemData(self[], index)
-proc cQDirModel_method_callback_itemData(self: pointer, index: pointer): struct_miqt_map {.cdecl.} =
+proc fcQDirModel_method_callback_itemData(self: pointer, index: pointer): struct_miqt_map {.cdecl.} =
   let inst = cast[VirtualQDirModel](fcQDirModel_vdata(self))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var virtualReturn = inst.itemData(slotval1)
@@ -1370,9 +1424,7 @@ proc cQDirModel_method_callback_itemData(self: pointer, index: pointer): struct_
 
   struct_miqt_map(len: csize_t(len(virtualReturn)),keys: if len(virtualReturn) == 0: nil else: addr(virtualReturn_Keys_CArray[0]), values: if len(virtualReturn) == 0: nil else: addr(virtualReturn_Values_CArray[0]),)
 
-method setItemData*(self: VirtualQDirModel, index: gen_qabstractitemmodel_types.QModelIndex, roles: Table[cint,gen_qvariant_types.QVariant]): bool {.base.} =
-  QDirModelsetItemData(self[], index, roles)
-proc cQDirModel_method_callback_setItemData(self: pointer, index: pointer, roles: struct_miqt_map): bool {.cdecl.} =
+proc fcQDirModel_method_callback_setItemData(self: pointer, index: pointer, roles: struct_miqt_map): bool {.cdecl.} =
   let inst = cast[VirtualQDirModel](fcQDirModel_vdata(self))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var vroles_mm = roles
@@ -1391,9 +1443,7 @@ proc cQDirModel_method_callback_setItemData(self: pointer, index: pointer, roles
   var virtualReturn = inst.setItemData(slotval1, slotval2)
   virtualReturn
 
-method canDropMimeData*(self: VirtualQDirModel, data: gen_qmimedata_types.QMimeData, action: cint, row: cint, column: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool {.base.} =
-  QDirModelcanDropMimeData(self[], data, action, row, column, parent)
-proc cQDirModel_method_callback_canDropMimeData(self: pointer, data: pointer, action: cint, row: cint, column: cint, parent: pointer): bool {.cdecl.} =
+proc fcQDirModel_method_callback_canDropMimeData(self: pointer, data: pointer, action: cint, row: cint, column: cint, parent: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQDirModel](fcQDirModel_vdata(self))
   let slotval1 = gen_qmimedata_types.QMimeData(h: data, owned: false)
   let slotval2 = cint(action)
@@ -1403,16 +1453,12 @@ proc cQDirModel_method_callback_canDropMimeData(self: pointer, data: pointer, ac
   var virtualReturn = inst.canDropMimeData(slotval1, slotval2, slotval3, slotval4, slotval5)
   virtualReturn
 
-method supportedDragActions*(self: VirtualQDirModel): cint {.base.} =
-  QDirModelsupportedDragActions(self[])
-proc cQDirModel_method_callback_supportedDragActions(self: pointer): cint {.cdecl.} =
+proc fcQDirModel_method_callback_supportedDragActions(self: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQDirModel](fcQDirModel_vdata(self))
   var virtualReturn = inst.supportedDragActions()
   cint(virtualReturn)
 
-method insertRows*(self: VirtualQDirModel, row: cint, count: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool {.base.} =
-  QDirModelinsertRows(self[], row, count, parent)
-proc cQDirModel_method_callback_insertRows(self: pointer, row: cint, count: cint, parent: pointer): bool {.cdecl.} =
+proc fcQDirModel_method_callback_insertRows(self: pointer, row: cint, count: cint, parent: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQDirModel](fcQDirModel_vdata(self))
   let slotval1 = row
   let slotval2 = count
@@ -1420,9 +1466,7 @@ proc cQDirModel_method_callback_insertRows(self: pointer, row: cint, count: cint
   var virtualReturn = inst.insertRows(slotval1, slotval2, slotval3)
   virtualReturn
 
-method insertColumns*(self: VirtualQDirModel, column: cint, count: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool {.base.} =
-  QDirModelinsertColumns(self[], column, count, parent)
-proc cQDirModel_method_callback_insertColumns(self: pointer, column: cint, count: cint, parent: pointer): bool {.cdecl.} =
+proc fcQDirModel_method_callback_insertColumns(self: pointer, column: cint, count: cint, parent: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQDirModel](fcQDirModel_vdata(self))
   let slotval1 = column
   let slotval2 = count
@@ -1430,9 +1474,7 @@ proc cQDirModel_method_callback_insertColumns(self: pointer, column: cint, count
   var virtualReturn = inst.insertColumns(slotval1, slotval2, slotval3)
   virtualReturn
 
-method removeRows*(self: VirtualQDirModel, row: cint, count: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool {.base.} =
-  QDirModelremoveRows(self[], row, count, parent)
-proc cQDirModel_method_callback_removeRows(self: pointer, row: cint, count: cint, parent: pointer): bool {.cdecl.} =
+proc fcQDirModel_method_callback_removeRows(self: pointer, row: cint, count: cint, parent: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQDirModel](fcQDirModel_vdata(self))
   let slotval1 = row
   let slotval2 = count
@@ -1440,9 +1482,7 @@ proc cQDirModel_method_callback_removeRows(self: pointer, row: cint, count: cint
   var virtualReturn = inst.removeRows(slotval1, slotval2, slotval3)
   virtualReturn
 
-method removeColumns*(self: VirtualQDirModel, column: cint, count: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool {.base.} =
-  QDirModelremoveColumns(self[], column, count, parent)
-proc cQDirModel_method_callback_removeColumns(self: pointer, column: cint, count: cint, parent: pointer): bool {.cdecl.} =
+proc fcQDirModel_method_callback_removeColumns(self: pointer, column: cint, count: cint, parent: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQDirModel](fcQDirModel_vdata(self))
   let slotval1 = column
   let slotval2 = count
@@ -1450,9 +1490,7 @@ proc cQDirModel_method_callback_removeColumns(self: pointer, column: cint, count
   var virtualReturn = inst.removeColumns(slotval1, slotval2, slotval3)
   virtualReturn
 
-method moveRows*(self: VirtualQDirModel, sourceParent: gen_qabstractitemmodel_types.QModelIndex, sourceRow: cint, count: cint, destinationParent: gen_qabstractitemmodel_types.QModelIndex, destinationChild: cint): bool {.base.} =
-  QDirModelmoveRows(self[], sourceParent, sourceRow, count, destinationParent, destinationChild)
-proc cQDirModel_method_callback_moveRows(self: pointer, sourceParent: pointer, sourceRow: cint, count: cint, destinationParent: pointer, destinationChild: cint): bool {.cdecl.} =
+proc fcQDirModel_method_callback_moveRows(self: pointer, sourceParent: pointer, sourceRow: cint, count: cint, destinationParent: pointer, destinationChild: cint): bool {.cdecl.} =
   let inst = cast[VirtualQDirModel](fcQDirModel_vdata(self))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: sourceParent, owned: false)
   let slotval2 = sourceRow
@@ -1462,9 +1500,7 @@ proc cQDirModel_method_callback_moveRows(self: pointer, sourceParent: pointer, s
   var virtualReturn = inst.moveRows(slotval1, slotval2, slotval3, slotval4, slotval5)
   virtualReturn
 
-method moveColumns*(self: VirtualQDirModel, sourceParent: gen_qabstractitemmodel_types.QModelIndex, sourceColumn: cint, count: cint, destinationParent: gen_qabstractitemmodel_types.QModelIndex, destinationChild: cint): bool {.base.} =
-  QDirModelmoveColumns(self[], sourceParent, sourceColumn, count, destinationParent, destinationChild)
-proc cQDirModel_method_callback_moveColumns(self: pointer, sourceParent: pointer, sourceColumn: cint, count: cint, destinationParent: pointer, destinationChild: cint): bool {.cdecl.} =
+proc fcQDirModel_method_callback_moveColumns(self: pointer, sourceParent: pointer, sourceColumn: cint, count: cint, destinationParent: pointer, destinationChild: cint): bool {.cdecl.} =
   let inst = cast[VirtualQDirModel](fcQDirModel_vdata(self))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: sourceParent, owned: false)
   let slotval2 = sourceColumn
@@ -1474,24 +1510,18 @@ proc cQDirModel_method_callback_moveColumns(self: pointer, sourceParent: pointer
   var virtualReturn = inst.moveColumns(slotval1, slotval2, slotval3, slotval4, slotval5)
   virtualReturn
 
-method fetchMore*(self: VirtualQDirModel, parent: gen_qabstractitemmodel_types.QModelIndex): void {.base.} =
-  QDirModelfetchMore(self[], parent)
-proc cQDirModel_method_callback_fetchMore(self: pointer, parent: pointer): void {.cdecl.} =
+proc fcQDirModel_method_callback_fetchMore(self: pointer, parent: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDirModel](fcQDirModel_vdata(self))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   inst.fetchMore(slotval1)
 
-method canFetchMore*(self: VirtualQDirModel, parent: gen_qabstractitemmodel_types.QModelIndex): bool {.base.} =
-  QDirModelcanFetchMore(self[], parent)
-proc cQDirModel_method_callback_canFetchMore(self: pointer, parent: pointer): bool {.cdecl.} =
+proc fcQDirModel_method_callback_canFetchMore(self: pointer, parent: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQDirModel](fcQDirModel_vdata(self))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   var virtualReturn = inst.canFetchMore(slotval1)
   virtualReturn
 
-method buddy*(self: VirtualQDirModel, index: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex {.base.} =
-  QDirModelbuddy(self[], index)
-proc cQDirModel_method_callback_buddy(self: pointer, index: pointer): pointer {.cdecl.} =
+proc fcQDirModel_method_callback_buddy(self: pointer, index: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQDirModel](fcQDirModel_vdata(self))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var virtualReturn = inst.buddy(slotval1)
@@ -1500,9 +1530,7 @@ proc cQDirModel_method_callback_buddy(self: pointer, index: pointer): pointer {.
   virtualReturn.h = nil
   virtualReturn_h
 
-method match*(self: VirtualQDirModel, start: gen_qabstractitemmodel_types.QModelIndex, role: cint, value: gen_qvariant_types.QVariant, hits: cint, flags: cint): seq[gen_qabstractitemmodel_types.QModelIndex] {.base.} =
-  QDirModelmatch(self[], start, role, value, hits, flags)
-proc cQDirModel_method_callback_match(self: pointer, start: pointer, role: cint, value: pointer, hits: cint, flags: cint): struct_miqt_array {.cdecl.} =
+proc fcQDirModel_method_callback_match(self: pointer, start: pointer, role: cint, value: pointer, hits: cint, flags: cint): struct_miqt_array {.cdecl.} =
   let inst = cast[VirtualQDirModel](fcQDirModel_vdata(self))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: start, owned: false)
   let slotval2 = role
@@ -1519,9 +1547,7 @@ proc cQDirModel_method_callback_match(self: pointer, start: pointer, role: cint,
 
   struct_miqt_array(len: csize_t(len(virtualReturn)), data: if len(virtualReturn) == 0: nil else: addr(virtualReturn_CArray[0]))
 
-method span*(self: VirtualQDirModel, index: gen_qabstractitemmodel_types.QModelIndex): gen_qsize_types.QSize {.base.} =
-  QDirModelspan(self[], index)
-proc cQDirModel_method_callback_span(self: pointer, index: pointer): pointer {.cdecl.} =
+proc fcQDirModel_method_callback_span(self: pointer, index: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQDirModel](fcQDirModel_vdata(self))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var virtualReturn = inst.span(slotval1)
@@ -1530,9 +1556,7 @@ proc cQDirModel_method_callback_span(self: pointer, index: pointer): pointer {.c
   virtualReturn.h = nil
   virtualReturn_h
 
-method roleNames*(self: VirtualQDirModel): Table[cint,seq[byte]] {.base.} =
-  QDirModelroleNames(self[])
-proc cQDirModel_method_callback_roleNames(self: pointer): struct_miqt_map {.cdecl.} =
+proc fcQDirModel_method_callback_roleNames(self: pointer): struct_miqt_map {.cdecl.} =
   let inst = cast[VirtualQDirModel](fcQDirModel_vdata(self))
   var virtualReturn = inst.roleNames()
   var virtualReturn_Keys_CArray = cast[ptr UncheckedArray[cint]](if len(virtualReturn) > 0: c_malloc(csize_t(sizeof(cint) * len(virtualReturn))) else: nil)
@@ -1550,70 +1574,53 @@ proc cQDirModel_method_callback_roleNames(self: pointer): struct_miqt_map {.cdec
 
   struct_miqt_map(len: csize_t(len(virtualReturn)),keys: if len(virtualReturn) == 0: nil else: addr(virtualReturn_Keys_CArray[0]), values: if len(virtualReturn) == 0: nil else: addr(virtualReturn_Values_CArray[0]),)
 
-method submit*(self: VirtualQDirModel): bool {.base.} =
-  QDirModelsubmit(self[])
-proc cQDirModel_method_callback_submit(self: pointer): bool {.cdecl.} =
+proc fcQDirModel_method_callback_submit(self: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQDirModel](fcQDirModel_vdata(self))
   var virtualReturn = inst.submit()
   virtualReturn
 
-method revert*(self: VirtualQDirModel): void {.base.} =
-  QDirModelrevert(self[])
-proc cQDirModel_method_callback_revert(self: pointer): void {.cdecl.} =
+proc fcQDirModel_method_callback_revert(self: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDirModel](fcQDirModel_vdata(self))
   inst.revert()
 
-method event*(self: VirtualQDirModel, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QDirModelevent(self[], event)
-proc cQDirModel_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
+proc fcQDirModel_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQDirModel](fcQDirModel_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
-method eventFilter*(self: VirtualQDirModel, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QDirModeleventFilter(self[], watched, event)
-proc cQDirModel_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+proc fcQDirModel_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQDirModel](fcQDirModel_vdata(self))
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
   let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
-method timerEvent*(self: VirtualQDirModel, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
-  QDirModeltimerEvent(self[], event)
-proc cQDirModel_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQDirModel_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDirModel](fcQDirModel_vdata(self))
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
-method childEvent*(self: VirtualQDirModel, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
-  QDirModelchildEvent(self[], event)
-proc cQDirModel_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQDirModel_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDirModel](fcQDirModel_vdata(self))
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
-method customEvent*(self: VirtualQDirModel, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QDirModelcustomEvent(self[], event)
-proc cQDirModel_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQDirModel_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDirModel](fcQDirModel_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
-method connectNotify*(self: VirtualQDirModel, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QDirModelconnectNotify(self[], signal)
-proc cQDirModel_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQDirModel_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDirModel](fcQDirModel_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
-method disconnectNotify*(self: VirtualQDirModel, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QDirModeldisconnectNotify(self[], signal)
-proc cQDirModel_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQDirModel_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDirModel](fcQDirModel_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
+
 
 proc resetInternalData*(self: gen_qdirmodel_types.QDirModel): void =
   fcQDirModel_protectedbase_resetInternalData(self.h)
@@ -1721,93 +1728,93 @@ proc create*(T: type gen_qdirmodel_types.QDirModel,
     let vtbl = cast[ref QDirModelVTable](fcQDirModel_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQDirModel_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQDirModel_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQDirModel_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQDirModel_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQDirModel_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQDirModel_vtable_callback_metacall
   if not isNil(vtbl[].index):
-    vtbl[].vtbl.index = cQDirModel_vtable_callback_index
+    vtbl[].vtbl.index = fcQDirModel_vtable_callback_index
   if not isNil(vtbl[].parent):
-    vtbl[].vtbl.parent = cQDirModel_vtable_callback_parent
+    vtbl[].vtbl.parent = fcQDirModel_vtable_callback_parent
   if not isNil(vtbl[].rowCount):
-    vtbl[].vtbl.rowCount = cQDirModel_vtable_callback_rowCount
+    vtbl[].vtbl.rowCount = fcQDirModel_vtable_callback_rowCount
   if not isNil(vtbl[].columnCount):
-    vtbl[].vtbl.columnCount = cQDirModel_vtable_callback_columnCount
+    vtbl[].vtbl.columnCount = fcQDirModel_vtable_callback_columnCount
   if not isNil(vtbl[].data):
-    vtbl[].vtbl.data = cQDirModel_vtable_callback_data
+    vtbl[].vtbl.data = fcQDirModel_vtable_callback_data
   if not isNil(vtbl[].setData):
-    vtbl[].vtbl.setData = cQDirModel_vtable_callback_setData
+    vtbl[].vtbl.setData = fcQDirModel_vtable_callback_setData
   if not isNil(vtbl[].headerData):
-    vtbl[].vtbl.headerData = cQDirModel_vtable_callback_headerData
+    vtbl[].vtbl.headerData = fcQDirModel_vtable_callback_headerData
   if not isNil(vtbl[].hasChildren):
-    vtbl[].vtbl.hasChildren = cQDirModel_vtable_callback_hasChildren
+    vtbl[].vtbl.hasChildren = fcQDirModel_vtable_callback_hasChildren
   if not isNil(vtbl[].flags):
-    vtbl[].vtbl.flags = cQDirModel_vtable_callback_flags
+    vtbl[].vtbl.flags = fcQDirModel_vtable_callback_flags
   if not isNil(vtbl[].sort):
-    vtbl[].vtbl.sort = cQDirModel_vtable_callback_sort
+    vtbl[].vtbl.sort = fcQDirModel_vtable_callback_sort
   if not isNil(vtbl[].mimeTypes):
-    vtbl[].vtbl.mimeTypes = cQDirModel_vtable_callback_mimeTypes
+    vtbl[].vtbl.mimeTypes = fcQDirModel_vtable_callback_mimeTypes
   if not isNil(vtbl[].mimeData):
-    vtbl[].vtbl.mimeData = cQDirModel_vtable_callback_mimeData
+    vtbl[].vtbl.mimeData = fcQDirModel_vtable_callback_mimeData
   if not isNil(vtbl[].dropMimeData):
-    vtbl[].vtbl.dropMimeData = cQDirModel_vtable_callback_dropMimeData
+    vtbl[].vtbl.dropMimeData = fcQDirModel_vtable_callback_dropMimeData
   if not isNil(vtbl[].supportedDropActions):
-    vtbl[].vtbl.supportedDropActions = cQDirModel_vtable_callback_supportedDropActions
+    vtbl[].vtbl.supportedDropActions = fcQDirModel_vtable_callback_supportedDropActions
   if not isNil(vtbl[].sibling):
-    vtbl[].vtbl.sibling = cQDirModel_vtable_callback_sibling
+    vtbl[].vtbl.sibling = fcQDirModel_vtable_callback_sibling
   if not isNil(vtbl[].setHeaderData):
-    vtbl[].vtbl.setHeaderData = cQDirModel_vtable_callback_setHeaderData
+    vtbl[].vtbl.setHeaderData = fcQDirModel_vtable_callback_setHeaderData
   if not isNil(vtbl[].itemData):
-    vtbl[].vtbl.itemData = cQDirModel_vtable_callback_itemData
+    vtbl[].vtbl.itemData = fcQDirModel_vtable_callback_itemData
   if not isNil(vtbl[].setItemData):
-    vtbl[].vtbl.setItemData = cQDirModel_vtable_callback_setItemData
+    vtbl[].vtbl.setItemData = fcQDirModel_vtable_callback_setItemData
   if not isNil(vtbl[].canDropMimeData):
-    vtbl[].vtbl.canDropMimeData = cQDirModel_vtable_callback_canDropMimeData
+    vtbl[].vtbl.canDropMimeData = fcQDirModel_vtable_callback_canDropMimeData
   if not isNil(vtbl[].supportedDragActions):
-    vtbl[].vtbl.supportedDragActions = cQDirModel_vtable_callback_supportedDragActions
+    vtbl[].vtbl.supportedDragActions = fcQDirModel_vtable_callback_supportedDragActions
   if not isNil(vtbl[].insertRows):
-    vtbl[].vtbl.insertRows = cQDirModel_vtable_callback_insertRows
+    vtbl[].vtbl.insertRows = fcQDirModel_vtable_callback_insertRows
   if not isNil(vtbl[].insertColumns):
-    vtbl[].vtbl.insertColumns = cQDirModel_vtable_callback_insertColumns
+    vtbl[].vtbl.insertColumns = fcQDirModel_vtable_callback_insertColumns
   if not isNil(vtbl[].removeRows):
-    vtbl[].vtbl.removeRows = cQDirModel_vtable_callback_removeRows
+    vtbl[].vtbl.removeRows = fcQDirModel_vtable_callback_removeRows
   if not isNil(vtbl[].removeColumns):
-    vtbl[].vtbl.removeColumns = cQDirModel_vtable_callback_removeColumns
+    vtbl[].vtbl.removeColumns = fcQDirModel_vtable_callback_removeColumns
   if not isNil(vtbl[].moveRows):
-    vtbl[].vtbl.moveRows = cQDirModel_vtable_callback_moveRows
+    vtbl[].vtbl.moveRows = fcQDirModel_vtable_callback_moveRows
   if not isNil(vtbl[].moveColumns):
-    vtbl[].vtbl.moveColumns = cQDirModel_vtable_callback_moveColumns
+    vtbl[].vtbl.moveColumns = fcQDirModel_vtable_callback_moveColumns
   if not isNil(vtbl[].fetchMore):
-    vtbl[].vtbl.fetchMore = cQDirModel_vtable_callback_fetchMore
+    vtbl[].vtbl.fetchMore = fcQDirModel_vtable_callback_fetchMore
   if not isNil(vtbl[].canFetchMore):
-    vtbl[].vtbl.canFetchMore = cQDirModel_vtable_callback_canFetchMore
+    vtbl[].vtbl.canFetchMore = fcQDirModel_vtable_callback_canFetchMore
   if not isNil(vtbl[].buddy):
-    vtbl[].vtbl.buddy = cQDirModel_vtable_callback_buddy
+    vtbl[].vtbl.buddy = fcQDirModel_vtable_callback_buddy
   if not isNil(vtbl[].match):
-    vtbl[].vtbl.match = cQDirModel_vtable_callback_match
+    vtbl[].vtbl.match = fcQDirModel_vtable_callback_match
   if not isNil(vtbl[].span):
-    vtbl[].vtbl.span = cQDirModel_vtable_callback_span
+    vtbl[].vtbl.span = fcQDirModel_vtable_callback_span
   if not isNil(vtbl[].roleNames):
-    vtbl[].vtbl.roleNames = cQDirModel_vtable_callback_roleNames
+    vtbl[].vtbl.roleNames = fcQDirModel_vtable_callback_roleNames
   if not isNil(vtbl[].submit):
-    vtbl[].vtbl.submit = cQDirModel_vtable_callback_submit
+    vtbl[].vtbl.submit = fcQDirModel_vtable_callback_submit
   if not isNil(vtbl[].revert):
-    vtbl[].vtbl.revert = cQDirModel_vtable_callback_revert
+    vtbl[].vtbl.revert = fcQDirModel_vtable_callback_revert
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQDirModel_vtable_callback_event
+    vtbl[].vtbl.event = fcQDirModel_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQDirModel_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQDirModel_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQDirModel_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQDirModel_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQDirModel_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQDirModel_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQDirModel_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQDirModel_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQDirModel_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQDirModel_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQDirModel_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQDirModel_vtable_callback_disconnectNotify
   gen_qdirmodel_types.QDirModel(h: fcQDirModel_new(addr(vtbl[].vtbl), addr(vtbl[]), struct_miqt_array(len: csize_t(len(nameFilters)), data: if len(nameFilters) == 0: nil else: addr(nameFilters_CArray[0])), cint(filters), cint(sort)), owned: true)
 
 proc create*(T: type gen_qdirmodel_types.QDirModel,
@@ -1818,93 +1825,93 @@ proc create*(T: type gen_qdirmodel_types.QDirModel,
     let vtbl = cast[ref QDirModelVTable](fcQDirModel_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQDirModel_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQDirModel_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQDirModel_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQDirModel_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQDirModel_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQDirModel_vtable_callback_metacall
   if not isNil(vtbl[].index):
-    vtbl[].vtbl.index = cQDirModel_vtable_callback_index
+    vtbl[].vtbl.index = fcQDirModel_vtable_callback_index
   if not isNil(vtbl[].parent):
-    vtbl[].vtbl.parent = cQDirModel_vtable_callback_parent
+    vtbl[].vtbl.parent = fcQDirModel_vtable_callback_parent
   if not isNil(vtbl[].rowCount):
-    vtbl[].vtbl.rowCount = cQDirModel_vtable_callback_rowCount
+    vtbl[].vtbl.rowCount = fcQDirModel_vtable_callback_rowCount
   if not isNil(vtbl[].columnCount):
-    vtbl[].vtbl.columnCount = cQDirModel_vtable_callback_columnCount
+    vtbl[].vtbl.columnCount = fcQDirModel_vtable_callback_columnCount
   if not isNil(vtbl[].data):
-    vtbl[].vtbl.data = cQDirModel_vtable_callback_data
+    vtbl[].vtbl.data = fcQDirModel_vtable_callback_data
   if not isNil(vtbl[].setData):
-    vtbl[].vtbl.setData = cQDirModel_vtable_callback_setData
+    vtbl[].vtbl.setData = fcQDirModel_vtable_callback_setData
   if not isNil(vtbl[].headerData):
-    vtbl[].vtbl.headerData = cQDirModel_vtable_callback_headerData
+    vtbl[].vtbl.headerData = fcQDirModel_vtable_callback_headerData
   if not isNil(vtbl[].hasChildren):
-    vtbl[].vtbl.hasChildren = cQDirModel_vtable_callback_hasChildren
+    vtbl[].vtbl.hasChildren = fcQDirModel_vtable_callback_hasChildren
   if not isNil(vtbl[].flags):
-    vtbl[].vtbl.flags = cQDirModel_vtable_callback_flags
+    vtbl[].vtbl.flags = fcQDirModel_vtable_callback_flags
   if not isNil(vtbl[].sort):
-    vtbl[].vtbl.sort = cQDirModel_vtable_callback_sort
+    vtbl[].vtbl.sort = fcQDirModel_vtable_callback_sort
   if not isNil(vtbl[].mimeTypes):
-    vtbl[].vtbl.mimeTypes = cQDirModel_vtable_callback_mimeTypes
+    vtbl[].vtbl.mimeTypes = fcQDirModel_vtable_callback_mimeTypes
   if not isNil(vtbl[].mimeData):
-    vtbl[].vtbl.mimeData = cQDirModel_vtable_callback_mimeData
+    vtbl[].vtbl.mimeData = fcQDirModel_vtable_callback_mimeData
   if not isNil(vtbl[].dropMimeData):
-    vtbl[].vtbl.dropMimeData = cQDirModel_vtable_callback_dropMimeData
+    vtbl[].vtbl.dropMimeData = fcQDirModel_vtable_callback_dropMimeData
   if not isNil(vtbl[].supportedDropActions):
-    vtbl[].vtbl.supportedDropActions = cQDirModel_vtable_callback_supportedDropActions
+    vtbl[].vtbl.supportedDropActions = fcQDirModel_vtable_callback_supportedDropActions
   if not isNil(vtbl[].sibling):
-    vtbl[].vtbl.sibling = cQDirModel_vtable_callback_sibling
+    vtbl[].vtbl.sibling = fcQDirModel_vtable_callback_sibling
   if not isNil(vtbl[].setHeaderData):
-    vtbl[].vtbl.setHeaderData = cQDirModel_vtable_callback_setHeaderData
+    vtbl[].vtbl.setHeaderData = fcQDirModel_vtable_callback_setHeaderData
   if not isNil(vtbl[].itemData):
-    vtbl[].vtbl.itemData = cQDirModel_vtable_callback_itemData
+    vtbl[].vtbl.itemData = fcQDirModel_vtable_callback_itemData
   if not isNil(vtbl[].setItemData):
-    vtbl[].vtbl.setItemData = cQDirModel_vtable_callback_setItemData
+    vtbl[].vtbl.setItemData = fcQDirModel_vtable_callback_setItemData
   if not isNil(vtbl[].canDropMimeData):
-    vtbl[].vtbl.canDropMimeData = cQDirModel_vtable_callback_canDropMimeData
+    vtbl[].vtbl.canDropMimeData = fcQDirModel_vtable_callback_canDropMimeData
   if not isNil(vtbl[].supportedDragActions):
-    vtbl[].vtbl.supportedDragActions = cQDirModel_vtable_callback_supportedDragActions
+    vtbl[].vtbl.supportedDragActions = fcQDirModel_vtable_callback_supportedDragActions
   if not isNil(vtbl[].insertRows):
-    vtbl[].vtbl.insertRows = cQDirModel_vtable_callback_insertRows
+    vtbl[].vtbl.insertRows = fcQDirModel_vtable_callback_insertRows
   if not isNil(vtbl[].insertColumns):
-    vtbl[].vtbl.insertColumns = cQDirModel_vtable_callback_insertColumns
+    vtbl[].vtbl.insertColumns = fcQDirModel_vtable_callback_insertColumns
   if not isNil(vtbl[].removeRows):
-    vtbl[].vtbl.removeRows = cQDirModel_vtable_callback_removeRows
+    vtbl[].vtbl.removeRows = fcQDirModel_vtable_callback_removeRows
   if not isNil(vtbl[].removeColumns):
-    vtbl[].vtbl.removeColumns = cQDirModel_vtable_callback_removeColumns
+    vtbl[].vtbl.removeColumns = fcQDirModel_vtable_callback_removeColumns
   if not isNil(vtbl[].moveRows):
-    vtbl[].vtbl.moveRows = cQDirModel_vtable_callback_moveRows
+    vtbl[].vtbl.moveRows = fcQDirModel_vtable_callback_moveRows
   if not isNil(vtbl[].moveColumns):
-    vtbl[].vtbl.moveColumns = cQDirModel_vtable_callback_moveColumns
+    vtbl[].vtbl.moveColumns = fcQDirModel_vtable_callback_moveColumns
   if not isNil(vtbl[].fetchMore):
-    vtbl[].vtbl.fetchMore = cQDirModel_vtable_callback_fetchMore
+    vtbl[].vtbl.fetchMore = fcQDirModel_vtable_callback_fetchMore
   if not isNil(vtbl[].canFetchMore):
-    vtbl[].vtbl.canFetchMore = cQDirModel_vtable_callback_canFetchMore
+    vtbl[].vtbl.canFetchMore = fcQDirModel_vtable_callback_canFetchMore
   if not isNil(vtbl[].buddy):
-    vtbl[].vtbl.buddy = cQDirModel_vtable_callback_buddy
+    vtbl[].vtbl.buddy = fcQDirModel_vtable_callback_buddy
   if not isNil(vtbl[].match):
-    vtbl[].vtbl.match = cQDirModel_vtable_callback_match
+    vtbl[].vtbl.match = fcQDirModel_vtable_callback_match
   if not isNil(vtbl[].span):
-    vtbl[].vtbl.span = cQDirModel_vtable_callback_span
+    vtbl[].vtbl.span = fcQDirModel_vtable_callback_span
   if not isNil(vtbl[].roleNames):
-    vtbl[].vtbl.roleNames = cQDirModel_vtable_callback_roleNames
+    vtbl[].vtbl.roleNames = fcQDirModel_vtable_callback_roleNames
   if not isNil(vtbl[].submit):
-    vtbl[].vtbl.submit = cQDirModel_vtable_callback_submit
+    vtbl[].vtbl.submit = fcQDirModel_vtable_callback_submit
   if not isNil(vtbl[].revert):
-    vtbl[].vtbl.revert = cQDirModel_vtable_callback_revert
+    vtbl[].vtbl.revert = fcQDirModel_vtable_callback_revert
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQDirModel_vtable_callback_event
+    vtbl[].vtbl.event = fcQDirModel_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQDirModel_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQDirModel_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQDirModel_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQDirModel_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQDirModel_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQDirModel_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQDirModel_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQDirModel_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQDirModel_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQDirModel_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQDirModel_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQDirModel_vtable_callback_disconnectNotify
   gen_qdirmodel_types.QDirModel(h: fcQDirModel_new2(addr(vtbl[].vtbl), addr(vtbl[])), owned: true)
 
 proc create*(T: type gen_qdirmodel_types.QDirModel,
@@ -1920,93 +1927,93 @@ proc create*(T: type gen_qdirmodel_types.QDirModel,
     let vtbl = cast[ref QDirModelVTable](fcQDirModel_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQDirModel_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQDirModel_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQDirModel_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQDirModel_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQDirModel_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQDirModel_vtable_callback_metacall
   if not isNil(vtbl[].index):
-    vtbl[].vtbl.index = cQDirModel_vtable_callback_index
+    vtbl[].vtbl.index = fcQDirModel_vtable_callback_index
   if not isNil(vtbl[].parent):
-    vtbl[].vtbl.parent = cQDirModel_vtable_callback_parent
+    vtbl[].vtbl.parent = fcQDirModel_vtable_callback_parent
   if not isNil(vtbl[].rowCount):
-    vtbl[].vtbl.rowCount = cQDirModel_vtable_callback_rowCount
+    vtbl[].vtbl.rowCount = fcQDirModel_vtable_callback_rowCount
   if not isNil(vtbl[].columnCount):
-    vtbl[].vtbl.columnCount = cQDirModel_vtable_callback_columnCount
+    vtbl[].vtbl.columnCount = fcQDirModel_vtable_callback_columnCount
   if not isNil(vtbl[].data):
-    vtbl[].vtbl.data = cQDirModel_vtable_callback_data
+    vtbl[].vtbl.data = fcQDirModel_vtable_callback_data
   if not isNil(vtbl[].setData):
-    vtbl[].vtbl.setData = cQDirModel_vtable_callback_setData
+    vtbl[].vtbl.setData = fcQDirModel_vtable_callback_setData
   if not isNil(vtbl[].headerData):
-    vtbl[].vtbl.headerData = cQDirModel_vtable_callback_headerData
+    vtbl[].vtbl.headerData = fcQDirModel_vtable_callback_headerData
   if not isNil(vtbl[].hasChildren):
-    vtbl[].vtbl.hasChildren = cQDirModel_vtable_callback_hasChildren
+    vtbl[].vtbl.hasChildren = fcQDirModel_vtable_callback_hasChildren
   if not isNil(vtbl[].flags):
-    vtbl[].vtbl.flags = cQDirModel_vtable_callback_flags
+    vtbl[].vtbl.flags = fcQDirModel_vtable_callback_flags
   if not isNil(vtbl[].sort):
-    vtbl[].vtbl.sort = cQDirModel_vtable_callback_sort
+    vtbl[].vtbl.sort = fcQDirModel_vtable_callback_sort
   if not isNil(vtbl[].mimeTypes):
-    vtbl[].vtbl.mimeTypes = cQDirModel_vtable_callback_mimeTypes
+    vtbl[].vtbl.mimeTypes = fcQDirModel_vtable_callback_mimeTypes
   if not isNil(vtbl[].mimeData):
-    vtbl[].vtbl.mimeData = cQDirModel_vtable_callback_mimeData
+    vtbl[].vtbl.mimeData = fcQDirModel_vtable_callback_mimeData
   if not isNil(vtbl[].dropMimeData):
-    vtbl[].vtbl.dropMimeData = cQDirModel_vtable_callback_dropMimeData
+    vtbl[].vtbl.dropMimeData = fcQDirModel_vtable_callback_dropMimeData
   if not isNil(vtbl[].supportedDropActions):
-    vtbl[].vtbl.supportedDropActions = cQDirModel_vtable_callback_supportedDropActions
+    vtbl[].vtbl.supportedDropActions = fcQDirModel_vtable_callback_supportedDropActions
   if not isNil(vtbl[].sibling):
-    vtbl[].vtbl.sibling = cQDirModel_vtable_callback_sibling
+    vtbl[].vtbl.sibling = fcQDirModel_vtable_callback_sibling
   if not isNil(vtbl[].setHeaderData):
-    vtbl[].vtbl.setHeaderData = cQDirModel_vtable_callback_setHeaderData
+    vtbl[].vtbl.setHeaderData = fcQDirModel_vtable_callback_setHeaderData
   if not isNil(vtbl[].itemData):
-    vtbl[].vtbl.itemData = cQDirModel_vtable_callback_itemData
+    vtbl[].vtbl.itemData = fcQDirModel_vtable_callback_itemData
   if not isNil(vtbl[].setItemData):
-    vtbl[].vtbl.setItemData = cQDirModel_vtable_callback_setItemData
+    vtbl[].vtbl.setItemData = fcQDirModel_vtable_callback_setItemData
   if not isNil(vtbl[].canDropMimeData):
-    vtbl[].vtbl.canDropMimeData = cQDirModel_vtable_callback_canDropMimeData
+    vtbl[].vtbl.canDropMimeData = fcQDirModel_vtable_callback_canDropMimeData
   if not isNil(vtbl[].supportedDragActions):
-    vtbl[].vtbl.supportedDragActions = cQDirModel_vtable_callback_supportedDragActions
+    vtbl[].vtbl.supportedDragActions = fcQDirModel_vtable_callback_supportedDragActions
   if not isNil(vtbl[].insertRows):
-    vtbl[].vtbl.insertRows = cQDirModel_vtable_callback_insertRows
+    vtbl[].vtbl.insertRows = fcQDirModel_vtable_callback_insertRows
   if not isNil(vtbl[].insertColumns):
-    vtbl[].vtbl.insertColumns = cQDirModel_vtable_callback_insertColumns
+    vtbl[].vtbl.insertColumns = fcQDirModel_vtable_callback_insertColumns
   if not isNil(vtbl[].removeRows):
-    vtbl[].vtbl.removeRows = cQDirModel_vtable_callback_removeRows
+    vtbl[].vtbl.removeRows = fcQDirModel_vtable_callback_removeRows
   if not isNil(vtbl[].removeColumns):
-    vtbl[].vtbl.removeColumns = cQDirModel_vtable_callback_removeColumns
+    vtbl[].vtbl.removeColumns = fcQDirModel_vtable_callback_removeColumns
   if not isNil(vtbl[].moveRows):
-    vtbl[].vtbl.moveRows = cQDirModel_vtable_callback_moveRows
+    vtbl[].vtbl.moveRows = fcQDirModel_vtable_callback_moveRows
   if not isNil(vtbl[].moveColumns):
-    vtbl[].vtbl.moveColumns = cQDirModel_vtable_callback_moveColumns
+    vtbl[].vtbl.moveColumns = fcQDirModel_vtable_callback_moveColumns
   if not isNil(vtbl[].fetchMore):
-    vtbl[].vtbl.fetchMore = cQDirModel_vtable_callback_fetchMore
+    vtbl[].vtbl.fetchMore = fcQDirModel_vtable_callback_fetchMore
   if not isNil(vtbl[].canFetchMore):
-    vtbl[].vtbl.canFetchMore = cQDirModel_vtable_callback_canFetchMore
+    vtbl[].vtbl.canFetchMore = fcQDirModel_vtable_callback_canFetchMore
   if not isNil(vtbl[].buddy):
-    vtbl[].vtbl.buddy = cQDirModel_vtable_callback_buddy
+    vtbl[].vtbl.buddy = fcQDirModel_vtable_callback_buddy
   if not isNil(vtbl[].match):
-    vtbl[].vtbl.match = cQDirModel_vtable_callback_match
+    vtbl[].vtbl.match = fcQDirModel_vtable_callback_match
   if not isNil(vtbl[].span):
-    vtbl[].vtbl.span = cQDirModel_vtable_callback_span
+    vtbl[].vtbl.span = fcQDirModel_vtable_callback_span
   if not isNil(vtbl[].roleNames):
-    vtbl[].vtbl.roleNames = cQDirModel_vtable_callback_roleNames
+    vtbl[].vtbl.roleNames = fcQDirModel_vtable_callback_roleNames
   if not isNil(vtbl[].submit):
-    vtbl[].vtbl.submit = cQDirModel_vtable_callback_submit
+    vtbl[].vtbl.submit = fcQDirModel_vtable_callback_submit
   if not isNil(vtbl[].revert):
-    vtbl[].vtbl.revert = cQDirModel_vtable_callback_revert
+    vtbl[].vtbl.revert = fcQDirModel_vtable_callback_revert
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQDirModel_vtable_callback_event
+    vtbl[].vtbl.event = fcQDirModel_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQDirModel_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQDirModel_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQDirModel_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQDirModel_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQDirModel_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQDirModel_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQDirModel_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQDirModel_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQDirModel_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQDirModel_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQDirModel_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQDirModel_vtable_callback_disconnectNotify
   gen_qdirmodel_types.QDirModel(h: fcQDirModel_new3(addr(vtbl[].vtbl), addr(vtbl[]), struct_miqt_array(len: csize_t(len(nameFilters)), data: if len(nameFilters) == 0: nil else: addr(nameFilters_CArray[0])), cint(filters), cint(sort), parent.h), owned: true)
 
 proc create*(T: type gen_qdirmodel_types.QDirModel,
@@ -2018,93 +2025,93 @@ proc create*(T: type gen_qdirmodel_types.QDirModel,
     let vtbl = cast[ref QDirModelVTable](fcQDirModel_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQDirModel_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQDirModel_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQDirModel_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQDirModel_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQDirModel_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQDirModel_vtable_callback_metacall
   if not isNil(vtbl[].index):
-    vtbl[].vtbl.index = cQDirModel_vtable_callback_index
+    vtbl[].vtbl.index = fcQDirModel_vtable_callback_index
   if not isNil(vtbl[].parent):
-    vtbl[].vtbl.parent = cQDirModel_vtable_callback_parent
+    vtbl[].vtbl.parent = fcQDirModel_vtable_callback_parent
   if not isNil(vtbl[].rowCount):
-    vtbl[].vtbl.rowCount = cQDirModel_vtable_callback_rowCount
+    vtbl[].vtbl.rowCount = fcQDirModel_vtable_callback_rowCount
   if not isNil(vtbl[].columnCount):
-    vtbl[].vtbl.columnCount = cQDirModel_vtable_callback_columnCount
+    vtbl[].vtbl.columnCount = fcQDirModel_vtable_callback_columnCount
   if not isNil(vtbl[].data):
-    vtbl[].vtbl.data = cQDirModel_vtable_callback_data
+    vtbl[].vtbl.data = fcQDirModel_vtable_callback_data
   if not isNil(vtbl[].setData):
-    vtbl[].vtbl.setData = cQDirModel_vtable_callback_setData
+    vtbl[].vtbl.setData = fcQDirModel_vtable_callback_setData
   if not isNil(vtbl[].headerData):
-    vtbl[].vtbl.headerData = cQDirModel_vtable_callback_headerData
+    vtbl[].vtbl.headerData = fcQDirModel_vtable_callback_headerData
   if not isNil(vtbl[].hasChildren):
-    vtbl[].vtbl.hasChildren = cQDirModel_vtable_callback_hasChildren
+    vtbl[].vtbl.hasChildren = fcQDirModel_vtable_callback_hasChildren
   if not isNil(vtbl[].flags):
-    vtbl[].vtbl.flags = cQDirModel_vtable_callback_flags
+    vtbl[].vtbl.flags = fcQDirModel_vtable_callback_flags
   if not isNil(vtbl[].sort):
-    vtbl[].vtbl.sort = cQDirModel_vtable_callback_sort
+    vtbl[].vtbl.sort = fcQDirModel_vtable_callback_sort
   if not isNil(vtbl[].mimeTypes):
-    vtbl[].vtbl.mimeTypes = cQDirModel_vtable_callback_mimeTypes
+    vtbl[].vtbl.mimeTypes = fcQDirModel_vtable_callback_mimeTypes
   if not isNil(vtbl[].mimeData):
-    vtbl[].vtbl.mimeData = cQDirModel_vtable_callback_mimeData
+    vtbl[].vtbl.mimeData = fcQDirModel_vtable_callback_mimeData
   if not isNil(vtbl[].dropMimeData):
-    vtbl[].vtbl.dropMimeData = cQDirModel_vtable_callback_dropMimeData
+    vtbl[].vtbl.dropMimeData = fcQDirModel_vtable_callback_dropMimeData
   if not isNil(vtbl[].supportedDropActions):
-    vtbl[].vtbl.supportedDropActions = cQDirModel_vtable_callback_supportedDropActions
+    vtbl[].vtbl.supportedDropActions = fcQDirModel_vtable_callback_supportedDropActions
   if not isNil(vtbl[].sibling):
-    vtbl[].vtbl.sibling = cQDirModel_vtable_callback_sibling
+    vtbl[].vtbl.sibling = fcQDirModel_vtable_callback_sibling
   if not isNil(vtbl[].setHeaderData):
-    vtbl[].vtbl.setHeaderData = cQDirModel_vtable_callback_setHeaderData
+    vtbl[].vtbl.setHeaderData = fcQDirModel_vtable_callback_setHeaderData
   if not isNil(vtbl[].itemData):
-    vtbl[].vtbl.itemData = cQDirModel_vtable_callback_itemData
+    vtbl[].vtbl.itemData = fcQDirModel_vtable_callback_itemData
   if not isNil(vtbl[].setItemData):
-    vtbl[].vtbl.setItemData = cQDirModel_vtable_callback_setItemData
+    vtbl[].vtbl.setItemData = fcQDirModel_vtable_callback_setItemData
   if not isNil(vtbl[].canDropMimeData):
-    vtbl[].vtbl.canDropMimeData = cQDirModel_vtable_callback_canDropMimeData
+    vtbl[].vtbl.canDropMimeData = fcQDirModel_vtable_callback_canDropMimeData
   if not isNil(vtbl[].supportedDragActions):
-    vtbl[].vtbl.supportedDragActions = cQDirModel_vtable_callback_supportedDragActions
+    vtbl[].vtbl.supportedDragActions = fcQDirModel_vtable_callback_supportedDragActions
   if not isNil(vtbl[].insertRows):
-    vtbl[].vtbl.insertRows = cQDirModel_vtable_callback_insertRows
+    vtbl[].vtbl.insertRows = fcQDirModel_vtable_callback_insertRows
   if not isNil(vtbl[].insertColumns):
-    vtbl[].vtbl.insertColumns = cQDirModel_vtable_callback_insertColumns
+    vtbl[].vtbl.insertColumns = fcQDirModel_vtable_callback_insertColumns
   if not isNil(vtbl[].removeRows):
-    vtbl[].vtbl.removeRows = cQDirModel_vtable_callback_removeRows
+    vtbl[].vtbl.removeRows = fcQDirModel_vtable_callback_removeRows
   if not isNil(vtbl[].removeColumns):
-    vtbl[].vtbl.removeColumns = cQDirModel_vtable_callback_removeColumns
+    vtbl[].vtbl.removeColumns = fcQDirModel_vtable_callback_removeColumns
   if not isNil(vtbl[].moveRows):
-    vtbl[].vtbl.moveRows = cQDirModel_vtable_callback_moveRows
+    vtbl[].vtbl.moveRows = fcQDirModel_vtable_callback_moveRows
   if not isNil(vtbl[].moveColumns):
-    vtbl[].vtbl.moveColumns = cQDirModel_vtable_callback_moveColumns
+    vtbl[].vtbl.moveColumns = fcQDirModel_vtable_callback_moveColumns
   if not isNil(vtbl[].fetchMore):
-    vtbl[].vtbl.fetchMore = cQDirModel_vtable_callback_fetchMore
+    vtbl[].vtbl.fetchMore = fcQDirModel_vtable_callback_fetchMore
   if not isNil(vtbl[].canFetchMore):
-    vtbl[].vtbl.canFetchMore = cQDirModel_vtable_callback_canFetchMore
+    vtbl[].vtbl.canFetchMore = fcQDirModel_vtable_callback_canFetchMore
   if not isNil(vtbl[].buddy):
-    vtbl[].vtbl.buddy = cQDirModel_vtable_callback_buddy
+    vtbl[].vtbl.buddy = fcQDirModel_vtable_callback_buddy
   if not isNil(vtbl[].match):
-    vtbl[].vtbl.match = cQDirModel_vtable_callback_match
+    vtbl[].vtbl.match = fcQDirModel_vtable_callback_match
   if not isNil(vtbl[].span):
-    vtbl[].vtbl.span = cQDirModel_vtable_callback_span
+    vtbl[].vtbl.span = fcQDirModel_vtable_callback_span
   if not isNil(vtbl[].roleNames):
-    vtbl[].vtbl.roleNames = cQDirModel_vtable_callback_roleNames
+    vtbl[].vtbl.roleNames = fcQDirModel_vtable_callback_roleNames
   if not isNil(vtbl[].submit):
-    vtbl[].vtbl.submit = cQDirModel_vtable_callback_submit
+    vtbl[].vtbl.submit = fcQDirModel_vtable_callback_submit
   if not isNil(vtbl[].revert):
-    vtbl[].vtbl.revert = cQDirModel_vtable_callback_revert
+    vtbl[].vtbl.revert = fcQDirModel_vtable_callback_revert
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQDirModel_vtable_callback_event
+    vtbl[].vtbl.event = fcQDirModel_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQDirModel_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQDirModel_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQDirModel_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQDirModel_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQDirModel_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQDirModel_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQDirModel_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQDirModel_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQDirModel_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQDirModel_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQDirModel_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQDirModel_vtable_callback_disconnectNotify
   gen_qdirmodel_types.QDirModel(h: fcQDirModel_new4(addr(vtbl[].vtbl), addr(vtbl[]), parent.h), owned: true)
 
 const cQDirModel_mvtbl = cQDirModelVTable(
@@ -2112,50 +2119,51 @@ const cQDirModel_mvtbl = cQDirModelVTable(
     let inst = cast[ptr typeof(VirtualQDirModel()[])](self.fcQDirModel_vtbl())
     inst[].h = nil
     inst[].owned = false,
-  metaObject: cQDirModel_method_callback_metaObject,
-  metacast: cQDirModel_method_callback_metacast,
-  metacall: cQDirModel_method_callback_metacall,
-  index: cQDirModel_method_callback_index,
-  parent: cQDirModel_method_callback_parent,
-  rowCount: cQDirModel_method_callback_rowCount,
-  columnCount: cQDirModel_method_callback_columnCount,
-  data: cQDirModel_method_callback_data,
-  setData: cQDirModel_method_callback_setData,
-  headerData: cQDirModel_method_callback_headerData,
-  hasChildren: cQDirModel_method_callback_hasChildren,
-  flags: cQDirModel_method_callback_flags,
-  sort: cQDirModel_method_callback_sort,
-  mimeTypes: cQDirModel_method_callback_mimeTypes,
-  mimeData: cQDirModel_method_callback_mimeData,
-  dropMimeData: cQDirModel_method_callback_dropMimeData,
-  supportedDropActions: cQDirModel_method_callback_supportedDropActions,
-  sibling: cQDirModel_method_callback_sibling,
-  setHeaderData: cQDirModel_method_callback_setHeaderData,
-  itemData: cQDirModel_method_callback_itemData,
-  setItemData: cQDirModel_method_callback_setItemData,
-  canDropMimeData: cQDirModel_method_callback_canDropMimeData,
-  supportedDragActions: cQDirModel_method_callback_supportedDragActions,
-  insertRows: cQDirModel_method_callback_insertRows,
-  insertColumns: cQDirModel_method_callback_insertColumns,
-  removeRows: cQDirModel_method_callback_removeRows,
-  removeColumns: cQDirModel_method_callback_removeColumns,
-  moveRows: cQDirModel_method_callback_moveRows,
-  moveColumns: cQDirModel_method_callback_moveColumns,
-  fetchMore: cQDirModel_method_callback_fetchMore,
-  canFetchMore: cQDirModel_method_callback_canFetchMore,
-  buddy: cQDirModel_method_callback_buddy,
-  match: cQDirModel_method_callback_match,
-  span: cQDirModel_method_callback_span,
-  roleNames: cQDirModel_method_callback_roleNames,
-  submit: cQDirModel_method_callback_submit,
-  revert: cQDirModel_method_callback_revert,
-  event: cQDirModel_method_callback_event,
-  eventFilter: cQDirModel_method_callback_eventFilter,
-  timerEvent: cQDirModel_method_callback_timerEvent,
-  childEvent: cQDirModel_method_callback_childEvent,
-  customEvent: cQDirModel_method_callback_customEvent,
-  connectNotify: cQDirModel_method_callback_connectNotify,
-  disconnectNotify: cQDirModel_method_callback_disconnectNotify,
+
+  metaObject: fcQDirModel_method_callback_metaObject,
+  metacast: fcQDirModel_method_callback_metacast,
+  metacall: fcQDirModel_method_callback_metacall,
+  index: fcQDirModel_method_callback_index,
+  parent: fcQDirModel_method_callback_parent,
+  rowCount: fcQDirModel_method_callback_rowCount,
+  columnCount: fcQDirModel_method_callback_columnCount,
+  data: fcQDirModel_method_callback_data,
+  setData: fcQDirModel_method_callback_setData,
+  headerData: fcQDirModel_method_callback_headerData,
+  hasChildren: fcQDirModel_method_callback_hasChildren,
+  flags: fcQDirModel_method_callback_flags,
+  sort: fcQDirModel_method_callback_sort,
+  mimeTypes: fcQDirModel_method_callback_mimeTypes,
+  mimeData: fcQDirModel_method_callback_mimeData,
+  dropMimeData: fcQDirModel_method_callback_dropMimeData,
+  supportedDropActions: fcQDirModel_method_callback_supportedDropActions,
+  sibling: fcQDirModel_method_callback_sibling,
+  setHeaderData: fcQDirModel_method_callback_setHeaderData,
+  itemData: fcQDirModel_method_callback_itemData,
+  setItemData: fcQDirModel_method_callback_setItemData,
+  canDropMimeData: fcQDirModel_method_callback_canDropMimeData,
+  supportedDragActions: fcQDirModel_method_callback_supportedDragActions,
+  insertRows: fcQDirModel_method_callback_insertRows,
+  insertColumns: fcQDirModel_method_callback_insertColumns,
+  removeRows: fcQDirModel_method_callback_removeRows,
+  removeColumns: fcQDirModel_method_callback_removeColumns,
+  moveRows: fcQDirModel_method_callback_moveRows,
+  moveColumns: fcQDirModel_method_callback_moveColumns,
+  fetchMore: fcQDirModel_method_callback_fetchMore,
+  canFetchMore: fcQDirModel_method_callback_canFetchMore,
+  buddy: fcQDirModel_method_callback_buddy,
+  match: fcQDirModel_method_callback_match,
+  span: fcQDirModel_method_callback_span,
+  roleNames: fcQDirModel_method_callback_roleNames,
+  submit: fcQDirModel_method_callback_submit,
+  revert: fcQDirModel_method_callback_revert,
+  event: fcQDirModel_method_callback_event,
+  eventFilter: fcQDirModel_method_callback_eventFilter,
+  timerEvent: fcQDirModel_method_callback_timerEvent,
+  childEvent: fcQDirModel_method_callback_childEvent,
+  customEvent: fcQDirModel_method_callback_customEvent,
+  connectNotify: fcQDirModel_method_callback_connectNotify,
+  disconnectNotify: fcQDirModel_method_callback_disconnectNotify,
 )
 proc create*(T: type gen_qdirmodel_types.QDirModel,
     nameFilters: openArray[string], filters: cint, sort: cint,

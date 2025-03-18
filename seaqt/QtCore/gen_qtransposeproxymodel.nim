@@ -97,6 +97,7 @@ proc fcQTransposeProxyModel_trUtf82(s: cstring, c: cstring): struct_miqt_string 
 proc fcQTransposeProxyModel_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QTransposeProxyModel_trUtf83".}
 proc fcQTransposeProxyModel_vtbl(self: pointer): pointer {.importc: "QTransposeProxyModel_vtbl".}
 proc fcQTransposeProxyModel_vdata(self: pointer): pointer {.importc: "QTransposeProxyModel_vdata".}
+
 type cQTransposeProxyModelVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -400,6 +401,7 @@ type QTransposeProxyModelchildEventProc* = proc(self: QTransposeProxyModel, even
 type QTransposeProxyModelcustomEventProc* = proc(self: QTransposeProxyModel, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QTransposeProxyModelconnectNotifyProc* = proc(self: QTransposeProxyModel, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QTransposeProxyModeldisconnectNotifyProc* = proc(self: QTransposeProxyModel, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+
 type QTransposeProxyModelVTable* {.inheritable, pure.} = object
   vtbl: cQTransposeProxyModelVTable
   metaObject*: QTransposeProxyModelmetaObjectProc
@@ -451,96 +453,30 @@ type QTransposeProxyModelVTable* {.inheritable, pure.} = object
   customEvent*: QTransposeProxyModelcustomEventProc
   connectNotify*: QTransposeProxyModelconnectNotifyProc
   disconnectNotify*: QTransposeProxyModeldisconnectNotifyProc
+
 proc QTransposeProxyModelmetaObject*(self: gen_qtransposeproxymodel_types.QTransposeProxyModel): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQTransposeProxyModel_virtualbase_metaObject(self.h), owned: false)
-
-proc cQTransposeProxyModel_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
-  let vtbl = cast[ptr QTransposeProxyModelVTable](fcQTransposeProxyModel_vdata(self))
-  let self = QTransposeProxyModel(h: self)
-  var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.owned = false # TODO move?
-  let virtualReturn_h = virtualReturn.h
-  virtualReturn.h = nil
-  virtualReturn_h
 
 proc QTransposeProxyModelmetacast*(self: gen_qtransposeproxymodel_types.QTransposeProxyModel, param1: cstring): pointer =
   fcQTransposeProxyModel_virtualbase_metacast(self.h, param1)
 
-proc cQTransposeProxyModel_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
-  let vtbl = cast[ptr QTransposeProxyModelVTable](fcQTransposeProxyModel_vdata(self))
-  let self = QTransposeProxyModel(h: self)
-  let slotval1 = (param1)
-  var virtualReturn = vtbl[].metacast(self, slotval1)
-  virtualReturn
-
 proc QTransposeProxyModelmetacall*(self: gen_qtransposeproxymodel_types.QTransposeProxyModel, param1: cint, param2: cint, param3: pointer): cint =
   fcQTransposeProxyModel_virtualbase_metacall(self.h, cint(param1), param2, param3)
-
-proc cQTransposeProxyModel_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
-  let vtbl = cast[ptr QTransposeProxyModelVTable](fcQTransposeProxyModel_vdata(self))
-  let self = QTransposeProxyModel(h: self)
-  let slotval1 = cint(param1)
-  let slotval2 = param2
-  let slotval3 = param3
-  var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
-  virtualReturn
 
 proc QTransposeProxyModelsetSourceModel*(self: gen_qtransposeproxymodel_types.QTransposeProxyModel, newSourceModel: gen_qabstractitemmodel_types.QAbstractItemModel): void =
   fcQTransposeProxyModel_virtualbase_setSourceModel(self.h, newSourceModel.h)
 
-proc cQTransposeProxyModel_vtable_callback_setSourceModel(self: pointer, newSourceModel: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QTransposeProxyModelVTable](fcQTransposeProxyModel_vdata(self))
-  let self = QTransposeProxyModel(h: self)
-  let slotval1 = gen_qabstractitemmodel_types.QAbstractItemModel(h: newSourceModel, owned: false)
-  vtbl[].setSourceModel(self, slotval1)
-
 proc QTransposeProxyModelrowCount*(self: gen_qtransposeproxymodel_types.QTransposeProxyModel, parent: gen_qabstractitemmodel_types.QModelIndex): cint =
   fcQTransposeProxyModel_virtualbase_rowCount(self.h, parent.h)
-
-proc cQTransposeProxyModel_vtable_callback_rowCount(self: pointer, parent: pointer): cint {.cdecl.} =
-  let vtbl = cast[ptr QTransposeProxyModelVTable](fcQTransposeProxyModel_vdata(self))
-  let self = QTransposeProxyModel(h: self)
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
-  var virtualReturn = vtbl[].rowCount(self, slotval1)
-  virtualReturn
 
 proc QTransposeProxyModelcolumnCount*(self: gen_qtransposeproxymodel_types.QTransposeProxyModel, parent: gen_qabstractitemmodel_types.QModelIndex): cint =
   fcQTransposeProxyModel_virtualbase_columnCount(self.h, parent.h)
 
-proc cQTransposeProxyModel_vtable_callback_columnCount(self: pointer, parent: pointer): cint {.cdecl.} =
-  let vtbl = cast[ptr QTransposeProxyModelVTable](fcQTransposeProxyModel_vdata(self))
-  let self = QTransposeProxyModel(h: self)
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
-  var virtualReturn = vtbl[].columnCount(self, slotval1)
-  virtualReturn
-
 proc QTransposeProxyModelheaderData*(self: gen_qtransposeproxymodel_types.QTransposeProxyModel, section: cint, orientation: cint, role: cint): gen_qvariant_types.QVariant =
   gen_qvariant_types.QVariant(h: fcQTransposeProxyModel_virtualbase_headerData(self.h, section, cint(orientation), role), owned: true)
 
-proc cQTransposeProxyModel_vtable_callback_headerData(self: pointer, section: cint, orientation: cint, role: cint): pointer {.cdecl.} =
-  let vtbl = cast[ptr QTransposeProxyModelVTable](fcQTransposeProxyModel_vdata(self))
-  let self = QTransposeProxyModel(h: self)
-  let slotval1 = section
-  let slotval2 = cint(orientation)
-  let slotval3 = role
-  var virtualReturn = vtbl[].headerData(self, slotval1, slotval2, slotval3)
-  virtualReturn.owned = false # TODO move?
-  let virtualReturn_h = virtualReturn.h
-  virtualReturn.h = nil
-  virtualReturn_h
-
 proc QTransposeProxyModelsetHeaderData*(self: gen_qtransposeproxymodel_types.QTransposeProxyModel, section: cint, orientation: cint, value: gen_qvariant_types.QVariant, role: cint): bool =
   fcQTransposeProxyModel_virtualbase_setHeaderData(self.h, section, cint(orientation), value.h, role)
-
-proc cQTransposeProxyModel_vtable_callback_setHeaderData(self: pointer, section: cint, orientation: cint, value: pointer, role: cint): bool {.cdecl.} =
-  let vtbl = cast[ptr QTransposeProxyModelVTable](fcQTransposeProxyModel_vdata(self))
-  let self = QTransposeProxyModel(h: self)
-  let slotval1 = section
-  let slotval2 = cint(orientation)
-  let slotval3 = gen_qvariant_types.QVariant(h: value, owned: false)
-  let slotval4 = role
-  var virtualReturn = vtbl[].setHeaderData(self, slotval1, slotval2, slotval3, slotval4)
-  virtualReturn
 
 proc QTransposeProxyModelsetItemData*(self: gen_qtransposeproxymodel_types.QTransposeProxyModel, index: gen_qabstractitemmodel_types.QModelIndex, roles: Table[cint,gen_qvariant_types.QVariant]): bool =
   var roles_Keys_CArray = newSeq[cint](len(roles))
@@ -556,7 +492,241 @@ proc QTransposeProxyModelsetItemData*(self: gen_qtransposeproxymodel_types.QTran
 
   fcQTransposeProxyModel_virtualbase_setItemData(self.h, index.h, struct_miqt_map(len: csize_t(len(roles)),keys: if len(roles) == 0: nil else: addr(roles_Keys_CArray[0]), values: if len(roles) == 0: nil else: addr(roles_Values_CArray[0]),))
 
-proc cQTransposeProxyModel_vtable_callback_setItemData(self: pointer, index: pointer, roles: struct_miqt_map): bool {.cdecl.} =
+proc QTransposeProxyModelspan*(self: gen_qtransposeproxymodel_types.QTransposeProxyModel, index: gen_qabstractitemmodel_types.QModelIndex): gen_qsize_types.QSize =
+  gen_qsize_types.QSize(h: fcQTransposeProxyModel_virtualbase_span(self.h, index.h), owned: true)
+
+proc QTransposeProxyModelitemData*(self: gen_qtransposeproxymodel_types.QTransposeProxyModel, index: gen_qabstractitemmodel_types.QModelIndex): Table[cint,gen_qvariant_types.QVariant] =
+  var v_mm = fcQTransposeProxyModel_virtualbase_itemData(self.h, index.h)
+  var vx_ret: Table[cint, gen_qvariant_types.QVariant]
+  var v_Keys = cast[ptr UncheckedArray[cint]](v_mm.keys)
+  var v_Values = cast[ptr UncheckedArray[pointer]](v_mm.values)
+  for i in 0..<v_mm.len:
+    var v_entry_Key = v_Keys[i]
+
+    var v_entry_Value = gen_qvariant_types.QVariant(h: v_Values[i], owned: true)
+
+    vx_ret[v_entry_Key] = v_entry_Value
+  c_free(v_mm.keys)
+  c_free(v_mm.values)
+  vx_ret
+
+proc QTransposeProxyModelmapFromSource*(self: gen_qtransposeproxymodel_types.QTransposeProxyModel, sourceIndex: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex =
+  gen_qabstractitemmodel_types.QModelIndex(h: fcQTransposeProxyModel_virtualbase_mapFromSource(self.h, sourceIndex.h), owned: true)
+
+proc QTransposeProxyModelmapToSource*(self: gen_qtransposeproxymodel_types.QTransposeProxyModel, proxyIndex: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex =
+  gen_qabstractitemmodel_types.QModelIndex(h: fcQTransposeProxyModel_virtualbase_mapToSource(self.h, proxyIndex.h), owned: true)
+
+proc QTransposeProxyModelparent*(self: gen_qtransposeproxymodel_types.QTransposeProxyModel, index: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex =
+  gen_qabstractitemmodel_types.QModelIndex(h: fcQTransposeProxyModel_virtualbase_parent(self.h, index.h), owned: true)
+
+proc QTransposeProxyModelindex*(self: gen_qtransposeproxymodel_types.QTransposeProxyModel, row: cint, column: cint, parent: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex =
+  gen_qabstractitemmodel_types.QModelIndex(h: fcQTransposeProxyModel_virtualbase_index(self.h, row, column, parent.h), owned: true)
+
+proc QTransposeProxyModelinsertRows*(self: gen_qtransposeproxymodel_types.QTransposeProxyModel, row: cint, count: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool =
+  fcQTransposeProxyModel_virtualbase_insertRows(self.h, row, count, parent.h)
+
+proc QTransposeProxyModelremoveRows*(self: gen_qtransposeproxymodel_types.QTransposeProxyModel, row: cint, count: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool =
+  fcQTransposeProxyModel_virtualbase_removeRows(self.h, row, count, parent.h)
+
+proc QTransposeProxyModelmoveRows*(self: gen_qtransposeproxymodel_types.QTransposeProxyModel, sourceParent: gen_qabstractitemmodel_types.QModelIndex, sourceRow: cint, count: cint, destinationParent: gen_qabstractitemmodel_types.QModelIndex, destinationChild: cint): bool =
+  fcQTransposeProxyModel_virtualbase_moveRows(self.h, sourceParent.h, sourceRow, count, destinationParent.h, destinationChild)
+
+proc QTransposeProxyModelinsertColumns*(self: gen_qtransposeproxymodel_types.QTransposeProxyModel, column: cint, count: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool =
+  fcQTransposeProxyModel_virtualbase_insertColumns(self.h, column, count, parent.h)
+
+proc QTransposeProxyModelremoveColumns*(self: gen_qtransposeproxymodel_types.QTransposeProxyModel, column: cint, count: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool =
+  fcQTransposeProxyModel_virtualbase_removeColumns(self.h, column, count, parent.h)
+
+proc QTransposeProxyModelmoveColumns*(self: gen_qtransposeproxymodel_types.QTransposeProxyModel, sourceParent: gen_qabstractitemmodel_types.QModelIndex, sourceColumn: cint, count: cint, destinationParent: gen_qabstractitemmodel_types.QModelIndex, destinationChild: cint): bool =
+  fcQTransposeProxyModel_virtualbase_moveColumns(self.h, sourceParent.h, sourceColumn, count, destinationParent.h, destinationChild)
+
+proc QTransposeProxyModelsort*(self: gen_qtransposeproxymodel_types.QTransposeProxyModel, column: cint, order: cint): void =
+  fcQTransposeProxyModel_virtualbase_sort(self.h, column, cint(order))
+
+proc QTransposeProxyModelmapSelectionToSource*(self: gen_qtransposeproxymodel_types.QTransposeProxyModel, selection: gen_qitemselectionmodel_types.QItemSelection): gen_qitemselectionmodel_types.QItemSelection =
+  gen_qitemselectionmodel_types.QItemSelection(h: fcQTransposeProxyModel_virtualbase_mapSelectionToSource(self.h, selection.h), owned: true)
+
+proc QTransposeProxyModelmapSelectionFromSource*(self: gen_qtransposeproxymodel_types.QTransposeProxyModel, selection: gen_qitemselectionmodel_types.QItemSelection): gen_qitemselectionmodel_types.QItemSelection =
+  gen_qitemselectionmodel_types.QItemSelection(h: fcQTransposeProxyModel_virtualbase_mapSelectionFromSource(self.h, selection.h), owned: true)
+
+proc QTransposeProxyModelsubmit*(self: gen_qtransposeproxymodel_types.QTransposeProxyModel): bool =
+  fcQTransposeProxyModel_virtualbase_submit(self.h)
+
+proc QTransposeProxyModelrevert*(self: gen_qtransposeproxymodel_types.QTransposeProxyModel): void =
+  fcQTransposeProxyModel_virtualbase_revert(self.h)
+
+proc QTransposeProxyModeldata*(self: gen_qtransposeproxymodel_types.QTransposeProxyModel, proxyIndex: gen_qabstractitemmodel_types.QModelIndex, role: cint): gen_qvariant_types.QVariant =
+  gen_qvariant_types.QVariant(h: fcQTransposeProxyModel_virtualbase_data(self.h, proxyIndex.h, role), owned: true)
+
+proc QTransposeProxyModelflags*(self: gen_qtransposeproxymodel_types.QTransposeProxyModel, index: gen_qabstractitemmodel_types.QModelIndex): cint =
+  cint(fcQTransposeProxyModel_virtualbase_flags(self.h, index.h))
+
+proc QTransposeProxyModelsetData*(self: gen_qtransposeproxymodel_types.QTransposeProxyModel, index: gen_qabstractitemmodel_types.QModelIndex, value: gen_qvariant_types.QVariant, role: cint): bool =
+  fcQTransposeProxyModel_virtualbase_setData(self.h, index.h, value.h, role)
+
+proc QTransposeProxyModelbuddy*(self: gen_qtransposeproxymodel_types.QTransposeProxyModel, index: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex =
+  gen_qabstractitemmodel_types.QModelIndex(h: fcQTransposeProxyModel_virtualbase_buddy(self.h, index.h), owned: true)
+
+proc QTransposeProxyModelcanFetchMore*(self: gen_qtransposeproxymodel_types.QTransposeProxyModel, parent: gen_qabstractitemmodel_types.QModelIndex): bool =
+  fcQTransposeProxyModel_virtualbase_canFetchMore(self.h, parent.h)
+
+proc QTransposeProxyModelfetchMore*(self: gen_qtransposeproxymodel_types.QTransposeProxyModel, parent: gen_qabstractitemmodel_types.QModelIndex): void =
+  fcQTransposeProxyModel_virtualbase_fetchMore(self.h, parent.h)
+
+proc QTransposeProxyModelhasChildren*(self: gen_qtransposeproxymodel_types.QTransposeProxyModel, parent: gen_qabstractitemmodel_types.QModelIndex): bool =
+  fcQTransposeProxyModel_virtualbase_hasChildren(self.h, parent.h)
+
+proc QTransposeProxyModelsibling*(self: gen_qtransposeproxymodel_types.QTransposeProxyModel, row: cint, column: cint, idx: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex =
+  gen_qabstractitemmodel_types.QModelIndex(h: fcQTransposeProxyModel_virtualbase_sibling(self.h, row, column, idx.h), owned: true)
+
+proc QTransposeProxyModelmimeData*(self: gen_qtransposeproxymodel_types.QTransposeProxyModel, indexes: openArray[gen_qabstractitemmodel_types.QModelIndex]): gen_qmimedata_types.QMimeData =
+  var indexes_CArray = newSeq[pointer](len(indexes))
+  for i in 0..<len(indexes):
+    indexes_CArray[i] = indexes[i].h
+
+  gen_qmimedata_types.QMimeData(h: fcQTransposeProxyModel_virtualbase_mimeData(self.h, struct_miqt_array(len: csize_t(len(indexes)), data: if len(indexes) == 0: nil else: addr(indexes_CArray[0]))), owned: false)
+
+proc QTransposeProxyModelcanDropMimeData*(self: gen_qtransposeproxymodel_types.QTransposeProxyModel, data: gen_qmimedata_types.QMimeData, action: cint, row: cint, column: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool =
+  fcQTransposeProxyModel_virtualbase_canDropMimeData(self.h, data.h, cint(action), row, column, parent.h)
+
+proc QTransposeProxyModeldropMimeData*(self: gen_qtransposeproxymodel_types.QTransposeProxyModel, data: gen_qmimedata_types.QMimeData, action: cint, row: cint, column: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool =
+  fcQTransposeProxyModel_virtualbase_dropMimeData(self.h, data.h, cint(action), row, column, parent.h)
+
+proc QTransposeProxyModelmimeTypes*(self: gen_qtransposeproxymodel_types.QTransposeProxyModel): seq[string] =
+  var v_ma = fcQTransposeProxyModel_virtualbase_mimeTypes(self.h)
+  var vx_ret = newSeq[string](int(v_ma.len))
+  let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
+  for i in 0 ..< v_ma.len:
+    let vx_lv_ms = v_outCast[i]
+    let vx_lvx_ret = string.fromBytes(vx_lv_ms)
+    c_free(vx_lv_ms.data)
+    vx_ret[i] = vx_lvx_ret
+  c_free(v_ma.data)
+  vx_ret
+
+proc QTransposeProxyModelsupportedDragActions*(self: gen_qtransposeproxymodel_types.QTransposeProxyModel): cint =
+  cint(fcQTransposeProxyModel_virtualbase_supportedDragActions(self.h))
+
+proc QTransposeProxyModelsupportedDropActions*(self: gen_qtransposeproxymodel_types.QTransposeProxyModel): cint =
+  cint(fcQTransposeProxyModel_virtualbase_supportedDropActions(self.h))
+
+proc QTransposeProxyModelmatch*(self: gen_qtransposeproxymodel_types.QTransposeProxyModel, start: gen_qabstractitemmodel_types.QModelIndex, role: cint, value: gen_qvariant_types.QVariant, hits: cint, flags: cint): seq[gen_qabstractitemmodel_types.QModelIndex] =
+  var v_ma = fcQTransposeProxyModel_virtualbase_match(self.h, start.h, role, value.h, hits, cint(flags))
+  var vx_ret = newSeq[gen_qabstractitemmodel_types.QModelIndex](int(v_ma.len))
+  let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
+  for i in 0 ..< v_ma.len:
+    vx_ret[i] = gen_qabstractitemmodel_types.QModelIndex(h: v_outCast[i], owned: true)
+  c_free(v_ma.data)
+  vx_ret
+
+proc QTransposeProxyModelroleNames*(self: gen_qtransposeproxymodel_types.QTransposeProxyModel): Table[cint,seq[byte]] =
+  var v_mm = fcQTransposeProxyModel_virtualbase_roleNames(self.h)
+  var vx_ret: Table[cint, seq[byte]]
+  var v_Keys = cast[ptr UncheckedArray[cint]](v_mm.keys)
+  var v_Values = cast[ptr UncheckedArray[struct_miqt_string]](v_mm.values)
+  for i in 0..<v_mm.len:
+    var v_entry_Key = v_Keys[i]
+
+    var vx_hashval_bytearray = v_Values[i]
+    var vx_hashvalx_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](vx_hashval_bytearray.data), 0, int(vx_hashval_bytearray.len)-1))
+    c_free(vx_hashval_bytearray.data)
+    var v_entry_Value = vx_hashvalx_ret
+
+    vx_ret[v_entry_Key] = v_entry_Value
+  c_free(v_mm.keys)
+  c_free(v_mm.values)
+  vx_ret
+
+proc QTransposeProxyModelevent*(self: gen_qtransposeproxymodel_types.QTransposeProxyModel, event: gen_qcoreevent_types.QEvent): bool =
+  fcQTransposeProxyModel_virtualbase_event(self.h, event.h)
+
+proc QTransposeProxyModeleventFilter*(self: gen_qtransposeproxymodel_types.QTransposeProxyModel, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
+  fcQTransposeProxyModel_virtualbase_eventFilter(self.h, watched.h, event.h)
+
+proc QTransposeProxyModeltimerEvent*(self: gen_qtransposeproxymodel_types.QTransposeProxyModel, event: gen_qcoreevent_types.QTimerEvent): void =
+  fcQTransposeProxyModel_virtualbase_timerEvent(self.h, event.h)
+
+proc QTransposeProxyModelchildEvent*(self: gen_qtransposeproxymodel_types.QTransposeProxyModel, event: gen_qcoreevent_types.QChildEvent): void =
+  fcQTransposeProxyModel_virtualbase_childEvent(self.h, event.h)
+
+proc QTransposeProxyModelcustomEvent*(self: gen_qtransposeproxymodel_types.QTransposeProxyModel, event: gen_qcoreevent_types.QEvent): void =
+  fcQTransposeProxyModel_virtualbase_customEvent(self.h, event.h)
+
+proc QTransposeProxyModelconnectNotify*(self: gen_qtransposeproxymodel_types.QTransposeProxyModel, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQTransposeProxyModel_virtualbase_connectNotify(self.h, signal.h)
+
+proc QTransposeProxyModeldisconnectNotify*(self: gen_qtransposeproxymodel_types.QTransposeProxyModel, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQTransposeProxyModel_virtualbase_disconnectNotify(self.h, signal.h)
+
+
+proc fcQTransposeProxyModel_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QTransposeProxyModelVTable](fcQTransposeProxyModel_vdata(self))
+  let self = QTransposeProxyModel(h: self)
+  var virtualReturn = vtbl[].metaObject(self)
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+proc fcQTransposeProxyModel_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+  let vtbl = cast[ptr QTransposeProxyModelVTable](fcQTransposeProxyModel_vdata(self))
+  let self = QTransposeProxyModel(h: self)
+  let slotval1 = (param1)
+  var virtualReturn = vtbl[].metacast(self, slotval1)
+  virtualReturn
+
+proc fcQTransposeProxyModel_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QTransposeProxyModelVTable](fcQTransposeProxyModel_vdata(self))
+  let self = QTransposeProxyModel(h: self)
+  let slotval1 = cint(param1)
+  let slotval2 = param2
+  let slotval3 = param3
+  var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
+  virtualReturn
+
+proc fcQTransposeProxyModel_vtable_callback_setSourceModel(self: pointer, newSourceModel: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QTransposeProxyModelVTable](fcQTransposeProxyModel_vdata(self))
+  let self = QTransposeProxyModel(h: self)
+  let slotval1 = gen_qabstractitemmodel_types.QAbstractItemModel(h: newSourceModel, owned: false)
+  vtbl[].setSourceModel(self, slotval1)
+
+proc fcQTransposeProxyModel_vtable_callback_rowCount(self: pointer, parent: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QTransposeProxyModelVTable](fcQTransposeProxyModel_vdata(self))
+  let self = QTransposeProxyModel(h: self)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
+  var virtualReturn = vtbl[].rowCount(self, slotval1)
+  virtualReturn
+
+proc fcQTransposeProxyModel_vtable_callback_columnCount(self: pointer, parent: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QTransposeProxyModelVTable](fcQTransposeProxyModel_vdata(self))
+  let self = QTransposeProxyModel(h: self)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
+  var virtualReturn = vtbl[].columnCount(self, slotval1)
+  virtualReturn
+
+proc fcQTransposeProxyModel_vtable_callback_headerData(self: pointer, section: cint, orientation: cint, role: cint): pointer {.cdecl.} =
+  let vtbl = cast[ptr QTransposeProxyModelVTable](fcQTransposeProxyModel_vdata(self))
+  let self = QTransposeProxyModel(h: self)
+  let slotval1 = section
+  let slotval2 = cint(orientation)
+  let slotval3 = role
+  var virtualReturn = vtbl[].headerData(self, slotval1, slotval2, slotval3)
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+proc fcQTransposeProxyModel_vtable_callback_setHeaderData(self: pointer, section: cint, orientation: cint, value: pointer, role: cint): bool {.cdecl.} =
+  let vtbl = cast[ptr QTransposeProxyModelVTable](fcQTransposeProxyModel_vdata(self))
+  let self = QTransposeProxyModel(h: self)
+  let slotval1 = section
+  let slotval2 = cint(orientation)
+  let slotval3 = gen_qvariant_types.QVariant(h: value, owned: false)
+  let slotval4 = role
+  var virtualReturn = vtbl[].setHeaderData(self, slotval1, slotval2, slotval3, slotval4)
+  virtualReturn
+
+proc fcQTransposeProxyModel_vtable_callback_setItemData(self: pointer, index: pointer, roles: struct_miqt_map): bool {.cdecl.} =
   let vtbl = cast[ptr QTransposeProxyModelVTable](fcQTransposeProxyModel_vdata(self))
   let self = QTransposeProxyModel(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
@@ -576,10 +746,7 @@ proc cQTransposeProxyModel_vtable_callback_setItemData(self: pointer, index: poi
   var virtualReturn = vtbl[].setItemData(self, slotval1, slotval2)
   virtualReturn
 
-proc QTransposeProxyModelspan*(self: gen_qtransposeproxymodel_types.QTransposeProxyModel, index: gen_qabstractitemmodel_types.QModelIndex): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQTransposeProxyModel_virtualbase_span(self.h, index.h), owned: true)
-
-proc cQTransposeProxyModel_vtable_callback_span(self: pointer, index: pointer): pointer {.cdecl.} =
+proc fcQTransposeProxyModel_vtable_callback_span(self: pointer, index: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QTransposeProxyModelVTable](fcQTransposeProxyModel_vdata(self))
   let self = QTransposeProxyModel(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
@@ -589,22 +756,7 @@ proc cQTransposeProxyModel_vtable_callback_span(self: pointer, index: pointer): 
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QTransposeProxyModelitemData*(self: gen_qtransposeproxymodel_types.QTransposeProxyModel, index: gen_qabstractitemmodel_types.QModelIndex): Table[cint,gen_qvariant_types.QVariant] =
-  var v_mm = fcQTransposeProxyModel_virtualbase_itemData(self.h, index.h)
-  var vx_ret: Table[cint, gen_qvariant_types.QVariant]
-  var v_Keys = cast[ptr UncheckedArray[cint]](v_mm.keys)
-  var v_Values = cast[ptr UncheckedArray[pointer]](v_mm.values)
-  for i in 0..<v_mm.len:
-    var v_entry_Key = v_Keys[i]
-
-    var v_entry_Value = gen_qvariant_types.QVariant(h: v_Values[i], owned: true)
-
-    vx_ret[v_entry_Key] = v_entry_Value
-  c_free(v_mm.keys)
-  c_free(v_mm.values)
-  vx_ret
-
-proc cQTransposeProxyModel_vtable_callback_itemData(self: pointer, index: pointer): struct_miqt_map {.cdecl.} =
+proc fcQTransposeProxyModel_vtable_callback_itemData(self: pointer, index: pointer): struct_miqt_map {.cdecl.} =
   let vtbl = cast[ptr QTransposeProxyModelVTable](fcQTransposeProxyModel_vdata(self))
   let self = QTransposeProxyModel(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
@@ -625,10 +777,7 @@ proc cQTransposeProxyModel_vtable_callback_itemData(self: pointer, index: pointe
 
   struct_miqt_map(len: csize_t(len(virtualReturn)),keys: if len(virtualReturn) == 0: nil else: addr(virtualReturn_Keys_CArray[0]), values: if len(virtualReturn) == 0: nil else: addr(virtualReturn_Values_CArray[0]),)
 
-proc QTransposeProxyModelmapFromSource*(self: gen_qtransposeproxymodel_types.QTransposeProxyModel, sourceIndex: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex =
-  gen_qabstractitemmodel_types.QModelIndex(h: fcQTransposeProxyModel_virtualbase_mapFromSource(self.h, sourceIndex.h), owned: true)
-
-proc cQTransposeProxyModel_vtable_callback_mapFromSource(self: pointer, sourceIndex: pointer): pointer {.cdecl.} =
+proc fcQTransposeProxyModel_vtable_callback_mapFromSource(self: pointer, sourceIndex: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QTransposeProxyModelVTable](fcQTransposeProxyModel_vdata(self))
   let self = QTransposeProxyModel(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: sourceIndex, owned: false)
@@ -638,10 +787,7 @@ proc cQTransposeProxyModel_vtable_callback_mapFromSource(self: pointer, sourceIn
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QTransposeProxyModelmapToSource*(self: gen_qtransposeproxymodel_types.QTransposeProxyModel, proxyIndex: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex =
-  gen_qabstractitemmodel_types.QModelIndex(h: fcQTransposeProxyModel_virtualbase_mapToSource(self.h, proxyIndex.h), owned: true)
-
-proc cQTransposeProxyModel_vtable_callback_mapToSource(self: pointer, proxyIndex: pointer): pointer {.cdecl.} =
+proc fcQTransposeProxyModel_vtable_callback_mapToSource(self: pointer, proxyIndex: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QTransposeProxyModelVTable](fcQTransposeProxyModel_vdata(self))
   let self = QTransposeProxyModel(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: proxyIndex, owned: false)
@@ -651,10 +797,7 @@ proc cQTransposeProxyModel_vtable_callback_mapToSource(self: pointer, proxyIndex
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QTransposeProxyModelparent*(self: gen_qtransposeproxymodel_types.QTransposeProxyModel, index: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex =
-  gen_qabstractitemmodel_types.QModelIndex(h: fcQTransposeProxyModel_virtualbase_parent(self.h, index.h), owned: true)
-
-proc cQTransposeProxyModel_vtable_callback_parent(self: pointer, index: pointer): pointer {.cdecl.} =
+proc fcQTransposeProxyModel_vtable_callback_parent(self: pointer, index: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QTransposeProxyModelVTable](fcQTransposeProxyModel_vdata(self))
   let self = QTransposeProxyModel(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
@@ -664,10 +807,7 @@ proc cQTransposeProxyModel_vtable_callback_parent(self: pointer, index: pointer)
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QTransposeProxyModelindex*(self: gen_qtransposeproxymodel_types.QTransposeProxyModel, row: cint, column: cint, parent: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex =
-  gen_qabstractitemmodel_types.QModelIndex(h: fcQTransposeProxyModel_virtualbase_index(self.h, row, column, parent.h), owned: true)
-
-proc cQTransposeProxyModel_vtable_callback_index(self: pointer, row: cint, column: cint, parent: pointer): pointer {.cdecl.} =
+proc fcQTransposeProxyModel_vtable_callback_index(self: pointer, row: cint, column: cint, parent: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QTransposeProxyModelVTable](fcQTransposeProxyModel_vdata(self))
   let self = QTransposeProxyModel(h: self)
   let slotval1 = row
@@ -679,10 +819,7 @@ proc cQTransposeProxyModel_vtable_callback_index(self: pointer, row: cint, colum
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QTransposeProxyModelinsertRows*(self: gen_qtransposeproxymodel_types.QTransposeProxyModel, row: cint, count: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool =
-  fcQTransposeProxyModel_virtualbase_insertRows(self.h, row, count, parent.h)
-
-proc cQTransposeProxyModel_vtable_callback_insertRows(self: pointer, row: cint, count: cint, parent: pointer): bool {.cdecl.} =
+proc fcQTransposeProxyModel_vtable_callback_insertRows(self: pointer, row: cint, count: cint, parent: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QTransposeProxyModelVTable](fcQTransposeProxyModel_vdata(self))
   let self = QTransposeProxyModel(h: self)
   let slotval1 = row
@@ -691,10 +828,7 @@ proc cQTransposeProxyModel_vtable_callback_insertRows(self: pointer, row: cint, 
   var virtualReturn = vtbl[].insertRows(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QTransposeProxyModelremoveRows*(self: gen_qtransposeproxymodel_types.QTransposeProxyModel, row: cint, count: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool =
-  fcQTransposeProxyModel_virtualbase_removeRows(self.h, row, count, parent.h)
-
-proc cQTransposeProxyModel_vtable_callback_removeRows(self: pointer, row: cint, count: cint, parent: pointer): bool {.cdecl.} =
+proc fcQTransposeProxyModel_vtable_callback_removeRows(self: pointer, row: cint, count: cint, parent: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QTransposeProxyModelVTable](fcQTransposeProxyModel_vdata(self))
   let self = QTransposeProxyModel(h: self)
   let slotval1 = row
@@ -703,10 +837,7 @@ proc cQTransposeProxyModel_vtable_callback_removeRows(self: pointer, row: cint, 
   var virtualReturn = vtbl[].removeRows(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QTransposeProxyModelmoveRows*(self: gen_qtransposeproxymodel_types.QTransposeProxyModel, sourceParent: gen_qabstractitemmodel_types.QModelIndex, sourceRow: cint, count: cint, destinationParent: gen_qabstractitemmodel_types.QModelIndex, destinationChild: cint): bool =
-  fcQTransposeProxyModel_virtualbase_moveRows(self.h, sourceParent.h, sourceRow, count, destinationParent.h, destinationChild)
-
-proc cQTransposeProxyModel_vtable_callback_moveRows(self: pointer, sourceParent: pointer, sourceRow: cint, count: cint, destinationParent: pointer, destinationChild: cint): bool {.cdecl.} =
+proc fcQTransposeProxyModel_vtable_callback_moveRows(self: pointer, sourceParent: pointer, sourceRow: cint, count: cint, destinationParent: pointer, destinationChild: cint): bool {.cdecl.} =
   let vtbl = cast[ptr QTransposeProxyModelVTable](fcQTransposeProxyModel_vdata(self))
   let self = QTransposeProxyModel(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: sourceParent, owned: false)
@@ -717,10 +848,7 @@ proc cQTransposeProxyModel_vtable_callback_moveRows(self: pointer, sourceParent:
   var virtualReturn = vtbl[].moveRows(self, slotval1, slotval2, slotval3, slotval4, slotval5)
   virtualReturn
 
-proc QTransposeProxyModelinsertColumns*(self: gen_qtransposeproxymodel_types.QTransposeProxyModel, column: cint, count: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool =
-  fcQTransposeProxyModel_virtualbase_insertColumns(self.h, column, count, parent.h)
-
-proc cQTransposeProxyModel_vtable_callback_insertColumns(self: pointer, column: cint, count: cint, parent: pointer): bool {.cdecl.} =
+proc fcQTransposeProxyModel_vtable_callback_insertColumns(self: pointer, column: cint, count: cint, parent: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QTransposeProxyModelVTable](fcQTransposeProxyModel_vdata(self))
   let self = QTransposeProxyModel(h: self)
   let slotval1 = column
@@ -729,10 +857,7 @@ proc cQTransposeProxyModel_vtable_callback_insertColumns(self: pointer, column: 
   var virtualReturn = vtbl[].insertColumns(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QTransposeProxyModelremoveColumns*(self: gen_qtransposeproxymodel_types.QTransposeProxyModel, column: cint, count: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool =
-  fcQTransposeProxyModel_virtualbase_removeColumns(self.h, column, count, parent.h)
-
-proc cQTransposeProxyModel_vtable_callback_removeColumns(self: pointer, column: cint, count: cint, parent: pointer): bool {.cdecl.} =
+proc fcQTransposeProxyModel_vtable_callback_removeColumns(self: pointer, column: cint, count: cint, parent: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QTransposeProxyModelVTable](fcQTransposeProxyModel_vdata(self))
   let self = QTransposeProxyModel(h: self)
   let slotval1 = column
@@ -741,10 +866,7 @@ proc cQTransposeProxyModel_vtable_callback_removeColumns(self: pointer, column: 
   var virtualReturn = vtbl[].removeColumns(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QTransposeProxyModelmoveColumns*(self: gen_qtransposeproxymodel_types.QTransposeProxyModel, sourceParent: gen_qabstractitemmodel_types.QModelIndex, sourceColumn: cint, count: cint, destinationParent: gen_qabstractitemmodel_types.QModelIndex, destinationChild: cint): bool =
-  fcQTransposeProxyModel_virtualbase_moveColumns(self.h, sourceParent.h, sourceColumn, count, destinationParent.h, destinationChild)
-
-proc cQTransposeProxyModel_vtable_callback_moveColumns(self: pointer, sourceParent: pointer, sourceColumn: cint, count: cint, destinationParent: pointer, destinationChild: cint): bool {.cdecl.} =
+proc fcQTransposeProxyModel_vtable_callback_moveColumns(self: pointer, sourceParent: pointer, sourceColumn: cint, count: cint, destinationParent: pointer, destinationChild: cint): bool {.cdecl.} =
   let vtbl = cast[ptr QTransposeProxyModelVTable](fcQTransposeProxyModel_vdata(self))
   let self = QTransposeProxyModel(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: sourceParent, owned: false)
@@ -755,20 +877,14 @@ proc cQTransposeProxyModel_vtable_callback_moveColumns(self: pointer, sourcePare
   var virtualReturn = vtbl[].moveColumns(self, slotval1, slotval2, slotval3, slotval4, slotval5)
   virtualReturn
 
-proc QTransposeProxyModelsort*(self: gen_qtransposeproxymodel_types.QTransposeProxyModel, column: cint, order: cint): void =
-  fcQTransposeProxyModel_virtualbase_sort(self.h, column, cint(order))
-
-proc cQTransposeProxyModel_vtable_callback_sort(self: pointer, column: cint, order: cint): void {.cdecl.} =
+proc fcQTransposeProxyModel_vtable_callback_sort(self: pointer, column: cint, order: cint): void {.cdecl.} =
   let vtbl = cast[ptr QTransposeProxyModelVTable](fcQTransposeProxyModel_vdata(self))
   let self = QTransposeProxyModel(h: self)
   let slotval1 = column
   let slotval2 = cint(order)
   vtbl[].sort(self, slotval1, slotval2)
 
-proc QTransposeProxyModelmapSelectionToSource*(self: gen_qtransposeproxymodel_types.QTransposeProxyModel, selection: gen_qitemselectionmodel_types.QItemSelection): gen_qitemselectionmodel_types.QItemSelection =
-  gen_qitemselectionmodel_types.QItemSelection(h: fcQTransposeProxyModel_virtualbase_mapSelectionToSource(self.h, selection.h), owned: true)
-
-proc cQTransposeProxyModel_vtable_callback_mapSelectionToSource(self: pointer, selection: pointer): pointer {.cdecl.} =
+proc fcQTransposeProxyModel_vtable_callback_mapSelectionToSource(self: pointer, selection: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QTransposeProxyModelVTable](fcQTransposeProxyModel_vdata(self))
   let self = QTransposeProxyModel(h: self)
   let slotval1 = gen_qitemselectionmodel_types.QItemSelection(h: selection, owned: false)
@@ -778,10 +894,7 @@ proc cQTransposeProxyModel_vtable_callback_mapSelectionToSource(self: pointer, s
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QTransposeProxyModelmapSelectionFromSource*(self: gen_qtransposeproxymodel_types.QTransposeProxyModel, selection: gen_qitemselectionmodel_types.QItemSelection): gen_qitemselectionmodel_types.QItemSelection =
-  gen_qitemselectionmodel_types.QItemSelection(h: fcQTransposeProxyModel_virtualbase_mapSelectionFromSource(self.h, selection.h), owned: true)
-
-proc cQTransposeProxyModel_vtable_callback_mapSelectionFromSource(self: pointer, selection: pointer): pointer {.cdecl.} =
+proc fcQTransposeProxyModel_vtable_callback_mapSelectionFromSource(self: pointer, selection: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QTransposeProxyModelVTable](fcQTransposeProxyModel_vdata(self))
   let self = QTransposeProxyModel(h: self)
   let slotval1 = gen_qitemselectionmodel_types.QItemSelection(h: selection, owned: false)
@@ -791,27 +904,18 @@ proc cQTransposeProxyModel_vtable_callback_mapSelectionFromSource(self: pointer,
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QTransposeProxyModelsubmit*(self: gen_qtransposeproxymodel_types.QTransposeProxyModel): bool =
-  fcQTransposeProxyModel_virtualbase_submit(self.h)
-
-proc cQTransposeProxyModel_vtable_callback_submit(self: pointer): bool {.cdecl.} =
+proc fcQTransposeProxyModel_vtable_callback_submit(self: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QTransposeProxyModelVTable](fcQTransposeProxyModel_vdata(self))
   let self = QTransposeProxyModel(h: self)
   var virtualReturn = vtbl[].submit(self)
   virtualReturn
 
-proc QTransposeProxyModelrevert*(self: gen_qtransposeproxymodel_types.QTransposeProxyModel): void =
-  fcQTransposeProxyModel_virtualbase_revert(self.h)
-
-proc cQTransposeProxyModel_vtable_callback_revert(self: pointer): void {.cdecl.} =
+proc fcQTransposeProxyModel_vtable_callback_revert(self: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTransposeProxyModelVTable](fcQTransposeProxyModel_vdata(self))
   let self = QTransposeProxyModel(h: self)
   vtbl[].revert(self)
 
-proc QTransposeProxyModeldata*(self: gen_qtransposeproxymodel_types.QTransposeProxyModel, proxyIndex: gen_qabstractitemmodel_types.QModelIndex, role: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQTransposeProxyModel_virtualbase_data(self.h, proxyIndex.h, role), owned: true)
-
-proc cQTransposeProxyModel_vtable_callback_data(self: pointer, proxyIndex: pointer, role: cint): pointer {.cdecl.} =
+proc fcQTransposeProxyModel_vtable_callback_data(self: pointer, proxyIndex: pointer, role: cint): pointer {.cdecl.} =
   let vtbl = cast[ptr QTransposeProxyModelVTable](fcQTransposeProxyModel_vdata(self))
   let self = QTransposeProxyModel(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: proxyIndex, owned: false)
@@ -822,20 +926,14 @@ proc cQTransposeProxyModel_vtable_callback_data(self: pointer, proxyIndex: point
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QTransposeProxyModelflags*(self: gen_qtransposeproxymodel_types.QTransposeProxyModel, index: gen_qabstractitemmodel_types.QModelIndex): cint =
-  cint(fcQTransposeProxyModel_virtualbase_flags(self.h, index.h))
-
-proc cQTransposeProxyModel_vtable_callback_flags(self: pointer, index: pointer): cint {.cdecl.} =
+proc fcQTransposeProxyModel_vtable_callback_flags(self: pointer, index: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QTransposeProxyModelVTable](fcQTransposeProxyModel_vdata(self))
   let self = QTransposeProxyModel(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var virtualReturn = vtbl[].flags(self, slotval1)
   cint(virtualReturn)
 
-proc QTransposeProxyModelsetData*(self: gen_qtransposeproxymodel_types.QTransposeProxyModel, index: gen_qabstractitemmodel_types.QModelIndex, value: gen_qvariant_types.QVariant, role: cint): bool =
-  fcQTransposeProxyModel_virtualbase_setData(self.h, index.h, value.h, role)
-
-proc cQTransposeProxyModel_vtable_callback_setData(self: pointer, index: pointer, value: pointer, role: cint): bool {.cdecl.} =
+proc fcQTransposeProxyModel_vtable_callback_setData(self: pointer, index: pointer, value: pointer, role: cint): bool {.cdecl.} =
   let vtbl = cast[ptr QTransposeProxyModelVTable](fcQTransposeProxyModel_vdata(self))
   let self = QTransposeProxyModel(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
@@ -844,10 +942,7 @@ proc cQTransposeProxyModel_vtable_callback_setData(self: pointer, index: pointer
   var virtualReturn = vtbl[].setData(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QTransposeProxyModelbuddy*(self: gen_qtransposeproxymodel_types.QTransposeProxyModel, index: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex =
-  gen_qabstractitemmodel_types.QModelIndex(h: fcQTransposeProxyModel_virtualbase_buddy(self.h, index.h), owned: true)
-
-proc cQTransposeProxyModel_vtable_callback_buddy(self: pointer, index: pointer): pointer {.cdecl.} =
+proc fcQTransposeProxyModel_vtable_callback_buddy(self: pointer, index: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QTransposeProxyModelVTable](fcQTransposeProxyModel_vdata(self))
   let self = QTransposeProxyModel(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
@@ -857,39 +952,27 @@ proc cQTransposeProxyModel_vtable_callback_buddy(self: pointer, index: pointer):
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QTransposeProxyModelcanFetchMore*(self: gen_qtransposeproxymodel_types.QTransposeProxyModel, parent: gen_qabstractitemmodel_types.QModelIndex): bool =
-  fcQTransposeProxyModel_virtualbase_canFetchMore(self.h, parent.h)
-
-proc cQTransposeProxyModel_vtable_callback_canFetchMore(self: pointer, parent: pointer): bool {.cdecl.} =
+proc fcQTransposeProxyModel_vtable_callback_canFetchMore(self: pointer, parent: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QTransposeProxyModelVTable](fcQTransposeProxyModel_vdata(self))
   let self = QTransposeProxyModel(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   var virtualReturn = vtbl[].canFetchMore(self, slotval1)
   virtualReturn
 
-proc QTransposeProxyModelfetchMore*(self: gen_qtransposeproxymodel_types.QTransposeProxyModel, parent: gen_qabstractitemmodel_types.QModelIndex): void =
-  fcQTransposeProxyModel_virtualbase_fetchMore(self.h, parent.h)
-
-proc cQTransposeProxyModel_vtable_callback_fetchMore(self: pointer, parent: pointer): void {.cdecl.} =
+proc fcQTransposeProxyModel_vtable_callback_fetchMore(self: pointer, parent: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTransposeProxyModelVTable](fcQTransposeProxyModel_vdata(self))
   let self = QTransposeProxyModel(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   vtbl[].fetchMore(self, slotval1)
 
-proc QTransposeProxyModelhasChildren*(self: gen_qtransposeproxymodel_types.QTransposeProxyModel, parent: gen_qabstractitemmodel_types.QModelIndex): bool =
-  fcQTransposeProxyModel_virtualbase_hasChildren(self.h, parent.h)
-
-proc cQTransposeProxyModel_vtable_callback_hasChildren(self: pointer, parent: pointer): bool {.cdecl.} =
+proc fcQTransposeProxyModel_vtable_callback_hasChildren(self: pointer, parent: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QTransposeProxyModelVTable](fcQTransposeProxyModel_vdata(self))
   let self = QTransposeProxyModel(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   var virtualReturn = vtbl[].hasChildren(self, slotval1)
   virtualReturn
 
-proc QTransposeProxyModelsibling*(self: gen_qtransposeproxymodel_types.QTransposeProxyModel, row: cint, column: cint, idx: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex =
-  gen_qabstractitemmodel_types.QModelIndex(h: fcQTransposeProxyModel_virtualbase_sibling(self.h, row, column, idx.h), owned: true)
-
-proc cQTransposeProxyModel_vtable_callback_sibling(self: pointer, row: cint, column: cint, idx: pointer): pointer {.cdecl.} =
+proc fcQTransposeProxyModel_vtable_callback_sibling(self: pointer, row: cint, column: cint, idx: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QTransposeProxyModelVTable](fcQTransposeProxyModel_vdata(self))
   let self = QTransposeProxyModel(h: self)
   let slotval1 = row
@@ -901,14 +984,7 @@ proc cQTransposeProxyModel_vtable_callback_sibling(self: pointer, row: cint, col
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QTransposeProxyModelmimeData*(self: gen_qtransposeproxymodel_types.QTransposeProxyModel, indexes: openArray[gen_qabstractitemmodel_types.QModelIndex]): gen_qmimedata_types.QMimeData =
-  var indexes_CArray = newSeq[pointer](len(indexes))
-  for i in 0..<len(indexes):
-    indexes_CArray[i] = indexes[i].h
-
-  gen_qmimedata_types.QMimeData(h: fcQTransposeProxyModel_virtualbase_mimeData(self.h, struct_miqt_array(len: csize_t(len(indexes)), data: if len(indexes) == 0: nil else: addr(indexes_CArray[0]))), owned: false)
-
-proc cQTransposeProxyModel_vtable_callback_mimeData(self: pointer, indexes: struct_miqt_array): pointer {.cdecl.} =
+proc fcQTransposeProxyModel_vtable_callback_mimeData(self: pointer, indexes: struct_miqt_array): pointer {.cdecl.} =
   let vtbl = cast[ptr QTransposeProxyModelVTable](fcQTransposeProxyModel_vdata(self))
   let self = QTransposeProxyModel(h: self)
   var vindexes_ma = indexes
@@ -924,10 +1000,7 @@ proc cQTransposeProxyModel_vtable_callback_mimeData(self: pointer, indexes: stru
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QTransposeProxyModelcanDropMimeData*(self: gen_qtransposeproxymodel_types.QTransposeProxyModel, data: gen_qmimedata_types.QMimeData, action: cint, row: cint, column: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool =
-  fcQTransposeProxyModel_virtualbase_canDropMimeData(self.h, data.h, cint(action), row, column, parent.h)
-
-proc cQTransposeProxyModel_vtable_callback_canDropMimeData(self: pointer, data: pointer, action: cint, row: cint, column: cint, parent: pointer): bool {.cdecl.} =
+proc fcQTransposeProxyModel_vtable_callback_canDropMimeData(self: pointer, data: pointer, action: cint, row: cint, column: cint, parent: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QTransposeProxyModelVTable](fcQTransposeProxyModel_vdata(self))
   let self = QTransposeProxyModel(h: self)
   let slotval1 = gen_qmimedata_types.QMimeData(h: data, owned: false)
@@ -938,10 +1011,7 @@ proc cQTransposeProxyModel_vtable_callback_canDropMimeData(self: pointer, data: 
   var virtualReturn = vtbl[].canDropMimeData(self, slotval1, slotval2, slotval3, slotval4, slotval5)
   virtualReturn
 
-proc QTransposeProxyModeldropMimeData*(self: gen_qtransposeproxymodel_types.QTransposeProxyModel, data: gen_qmimedata_types.QMimeData, action: cint, row: cint, column: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool =
-  fcQTransposeProxyModel_virtualbase_dropMimeData(self.h, data.h, cint(action), row, column, parent.h)
-
-proc cQTransposeProxyModel_vtable_callback_dropMimeData(self: pointer, data: pointer, action: cint, row: cint, column: cint, parent: pointer): bool {.cdecl.} =
+proc fcQTransposeProxyModel_vtable_callback_dropMimeData(self: pointer, data: pointer, action: cint, row: cint, column: cint, parent: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QTransposeProxyModelVTable](fcQTransposeProxyModel_vdata(self))
   let self = QTransposeProxyModel(h: self)
   let slotval1 = gen_qmimedata_types.QMimeData(h: data, owned: false)
@@ -952,19 +1022,7 @@ proc cQTransposeProxyModel_vtable_callback_dropMimeData(self: pointer, data: poi
   var virtualReturn = vtbl[].dropMimeData(self, slotval1, slotval2, slotval3, slotval4, slotval5)
   virtualReturn
 
-proc QTransposeProxyModelmimeTypes*(self: gen_qtransposeproxymodel_types.QTransposeProxyModel): seq[string] =
-  var v_ma = fcQTransposeProxyModel_virtualbase_mimeTypes(self.h)
-  var vx_ret = newSeq[string](int(v_ma.len))
-  let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
-  for i in 0 ..< v_ma.len:
-    let vx_lv_ms = v_outCast[i]
-    let vx_lvx_ret = string.fromBytes(vx_lv_ms)
-    c_free(vx_lv_ms.data)
-    vx_ret[i] = vx_lvx_ret
-  c_free(v_ma.data)
-  vx_ret
-
-proc cQTransposeProxyModel_vtable_callback_mimeTypes(self: pointer): struct_miqt_array {.cdecl.} =
+proc fcQTransposeProxyModel_vtable_callback_mimeTypes(self: pointer): struct_miqt_array {.cdecl.} =
   let vtbl = cast[ptr QTransposeProxyModelVTable](fcQTransposeProxyModel_vdata(self))
   let self = QTransposeProxyModel(h: self)
   var virtualReturn = vtbl[].mimeTypes(self)
@@ -976,34 +1034,19 @@ proc cQTransposeProxyModel_vtable_callback_mimeTypes(self: pointer): struct_miqt
 
   struct_miqt_array(len: csize_t(len(virtualReturn)), data: if len(virtualReturn) == 0: nil else: addr(virtualReturn_CArray[0]))
 
-proc QTransposeProxyModelsupportedDragActions*(self: gen_qtransposeproxymodel_types.QTransposeProxyModel): cint =
-  cint(fcQTransposeProxyModel_virtualbase_supportedDragActions(self.h))
-
-proc cQTransposeProxyModel_vtable_callback_supportedDragActions(self: pointer): cint {.cdecl.} =
+proc fcQTransposeProxyModel_vtable_callback_supportedDragActions(self: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QTransposeProxyModelVTable](fcQTransposeProxyModel_vdata(self))
   let self = QTransposeProxyModel(h: self)
   var virtualReturn = vtbl[].supportedDragActions(self)
   cint(virtualReturn)
 
-proc QTransposeProxyModelsupportedDropActions*(self: gen_qtransposeproxymodel_types.QTransposeProxyModel): cint =
-  cint(fcQTransposeProxyModel_virtualbase_supportedDropActions(self.h))
-
-proc cQTransposeProxyModel_vtable_callback_supportedDropActions(self: pointer): cint {.cdecl.} =
+proc fcQTransposeProxyModel_vtable_callback_supportedDropActions(self: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QTransposeProxyModelVTable](fcQTransposeProxyModel_vdata(self))
   let self = QTransposeProxyModel(h: self)
   var virtualReturn = vtbl[].supportedDropActions(self)
   cint(virtualReturn)
 
-proc QTransposeProxyModelmatch*(self: gen_qtransposeproxymodel_types.QTransposeProxyModel, start: gen_qabstractitemmodel_types.QModelIndex, role: cint, value: gen_qvariant_types.QVariant, hits: cint, flags: cint): seq[gen_qabstractitemmodel_types.QModelIndex] =
-  var v_ma = fcQTransposeProxyModel_virtualbase_match(self.h, start.h, role, value.h, hits, cint(flags))
-  var vx_ret = newSeq[gen_qabstractitemmodel_types.QModelIndex](int(v_ma.len))
-  let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
-  for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qabstractitemmodel_types.QModelIndex(h: v_outCast[i], owned: true)
-  c_free(v_ma.data)
-  vx_ret
-
-proc cQTransposeProxyModel_vtable_callback_match(self: pointer, start: pointer, role: cint, value: pointer, hits: cint, flags: cint): struct_miqt_array {.cdecl.} =
+proc fcQTransposeProxyModel_vtable_callback_match(self: pointer, start: pointer, role: cint, value: pointer, hits: cint, flags: cint): struct_miqt_array {.cdecl.} =
   let vtbl = cast[ptr QTransposeProxyModelVTable](fcQTransposeProxyModel_vdata(self))
   let self = QTransposeProxyModel(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: start, owned: false)
@@ -1021,25 +1064,7 @@ proc cQTransposeProxyModel_vtable_callback_match(self: pointer, start: pointer, 
 
   struct_miqt_array(len: csize_t(len(virtualReturn)), data: if len(virtualReturn) == 0: nil else: addr(virtualReturn_CArray[0]))
 
-proc QTransposeProxyModelroleNames*(self: gen_qtransposeproxymodel_types.QTransposeProxyModel): Table[cint,seq[byte]] =
-  var v_mm = fcQTransposeProxyModel_virtualbase_roleNames(self.h)
-  var vx_ret: Table[cint, seq[byte]]
-  var v_Keys = cast[ptr UncheckedArray[cint]](v_mm.keys)
-  var v_Values = cast[ptr UncheckedArray[struct_miqt_string]](v_mm.values)
-  for i in 0..<v_mm.len:
-    var v_entry_Key = v_Keys[i]
-
-    var vx_hashval_bytearray = v_Values[i]
-    var vx_hashvalx_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](vx_hashval_bytearray.data), 0, int(vx_hashval_bytearray.len)-1))
-    c_free(vx_hashval_bytearray.data)
-    var v_entry_Value = vx_hashvalx_ret
-
-    vx_ret[v_entry_Key] = v_entry_Value
-  c_free(v_mm.keys)
-  c_free(v_mm.values)
-  vx_ret
-
-proc cQTransposeProxyModel_vtable_callback_roleNames(self: pointer): struct_miqt_map {.cdecl.} =
+proc fcQTransposeProxyModel_vtable_callback_roleNames(self: pointer): struct_miqt_map {.cdecl.} =
   let vtbl = cast[ptr QTransposeProxyModelVTable](fcQTransposeProxyModel_vdata(self))
   let self = QTransposeProxyModel(h: self)
   var virtualReturn = vtbl[].roleNames(self)
@@ -1058,20 +1083,14 @@ proc cQTransposeProxyModel_vtable_callback_roleNames(self: pointer): struct_miqt
 
   struct_miqt_map(len: csize_t(len(virtualReturn)),keys: if len(virtualReturn) == 0: nil else: addr(virtualReturn_Keys_CArray[0]), values: if len(virtualReturn) == 0: nil else: addr(virtualReturn_Values_CArray[0]),)
 
-proc QTransposeProxyModelevent*(self: gen_qtransposeproxymodel_types.QTransposeProxyModel, event: gen_qcoreevent_types.QEvent): bool =
-  fcQTransposeProxyModel_virtualbase_event(self.h, event.h)
-
-proc cQTransposeProxyModel_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
+proc fcQTransposeProxyModel_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QTransposeProxyModelVTable](fcQTransposeProxyModel_vdata(self))
   let self = QTransposeProxyModel(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
-proc QTransposeProxyModeleventFilter*(self: gen_qtransposeproxymodel_types.QTransposeProxyModel, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
-  fcQTransposeProxyModel_virtualbase_eventFilter(self.h, watched.h, event.h)
-
-proc cQTransposeProxyModel_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+proc fcQTransposeProxyModel_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QTransposeProxyModelVTable](fcQTransposeProxyModel_vdata(self))
   let self = QTransposeProxyModel(h: self)
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
@@ -1079,46 +1098,31 @@ proc cQTransposeProxyModel_vtable_callback_eventFilter(self: pointer, watched: p
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
-proc QTransposeProxyModeltimerEvent*(self: gen_qtransposeproxymodel_types.QTransposeProxyModel, event: gen_qcoreevent_types.QTimerEvent): void =
-  fcQTransposeProxyModel_virtualbase_timerEvent(self.h, event.h)
-
-proc cQTransposeProxyModel_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQTransposeProxyModel_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTransposeProxyModelVTable](fcQTransposeProxyModel_vdata(self))
   let self = QTransposeProxyModel(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
-proc QTransposeProxyModelchildEvent*(self: gen_qtransposeproxymodel_types.QTransposeProxyModel, event: gen_qcoreevent_types.QChildEvent): void =
-  fcQTransposeProxyModel_virtualbase_childEvent(self.h, event.h)
-
-proc cQTransposeProxyModel_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQTransposeProxyModel_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTransposeProxyModelVTable](fcQTransposeProxyModel_vdata(self))
   let self = QTransposeProxyModel(h: self)
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
-proc QTransposeProxyModelcustomEvent*(self: gen_qtransposeproxymodel_types.QTransposeProxyModel, event: gen_qcoreevent_types.QEvent): void =
-  fcQTransposeProxyModel_virtualbase_customEvent(self.h, event.h)
-
-proc cQTransposeProxyModel_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQTransposeProxyModel_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTransposeProxyModelVTable](fcQTransposeProxyModel_vdata(self))
   let self = QTransposeProxyModel(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
-proc QTransposeProxyModelconnectNotify*(self: gen_qtransposeproxymodel_types.QTransposeProxyModel, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQTransposeProxyModel_virtualbase_connectNotify(self.h, signal.h)
-
-proc cQTransposeProxyModel_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQTransposeProxyModel_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTransposeProxyModelVTable](fcQTransposeProxyModel_vdata(self))
   let self = QTransposeProxyModel(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
-proc QTransposeProxyModeldisconnectNotify*(self: gen_qtransposeproxymodel_types.QTransposeProxyModel, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQTransposeProxyModel_virtualbase_disconnectNotify(self.h, signal.h)
-
-proc cQTransposeProxyModel_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQTransposeProxyModel_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTransposeProxyModelVTable](fcQTransposeProxyModel_vdata(self))
   let self = QTransposeProxyModel(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
@@ -1126,9 +1130,107 @@ proc cQTransposeProxyModel_vtable_callback_disconnectNotify(self: pointer, signa
 
 type VirtualQTransposeProxyModel* {.inheritable.} = ref object of QTransposeProxyModel
   vtbl*: cQTransposeProxyModelVTable
+
 method metaObject*(self: VirtualQTransposeProxyModel): gen_qobjectdefs_types.QMetaObject {.base.} =
   QTransposeProxyModelmetaObject(self[])
-proc cQTransposeProxyModel_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
+method metacast*(self: VirtualQTransposeProxyModel, param1: cstring): pointer {.base.} =
+  QTransposeProxyModelmetacast(self[], param1)
+method metacall*(self: VirtualQTransposeProxyModel, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QTransposeProxyModelmetacall(self[], param1, param2, param3)
+method setSourceModel*(self: VirtualQTransposeProxyModel, newSourceModel: gen_qabstractitemmodel_types.QAbstractItemModel): void {.base.} =
+  QTransposeProxyModelsetSourceModel(self[], newSourceModel)
+method rowCount*(self: VirtualQTransposeProxyModel, parent: gen_qabstractitemmodel_types.QModelIndex): cint {.base.} =
+  QTransposeProxyModelrowCount(self[], parent)
+method columnCount*(self: VirtualQTransposeProxyModel, parent: gen_qabstractitemmodel_types.QModelIndex): cint {.base.} =
+  QTransposeProxyModelcolumnCount(self[], parent)
+method headerData*(self: VirtualQTransposeProxyModel, section: cint, orientation: cint, role: cint): gen_qvariant_types.QVariant {.base.} =
+  QTransposeProxyModelheaderData(self[], section, orientation, role)
+method setHeaderData*(self: VirtualQTransposeProxyModel, section: cint, orientation: cint, value: gen_qvariant_types.QVariant, role: cint): bool {.base.} =
+  QTransposeProxyModelsetHeaderData(self[], section, orientation, value, role)
+method setItemData*(self: VirtualQTransposeProxyModel, index: gen_qabstractitemmodel_types.QModelIndex, roles: Table[cint,gen_qvariant_types.QVariant]): bool {.base.} =
+  QTransposeProxyModelsetItemData(self[], index, roles)
+method span*(self: VirtualQTransposeProxyModel, index: gen_qabstractitemmodel_types.QModelIndex): gen_qsize_types.QSize {.base.} =
+  QTransposeProxyModelspan(self[], index)
+method itemData*(self: VirtualQTransposeProxyModel, index: gen_qabstractitemmodel_types.QModelIndex): Table[cint,gen_qvariant_types.QVariant] {.base.} =
+  QTransposeProxyModelitemData(self[], index)
+method mapFromSource*(self: VirtualQTransposeProxyModel, sourceIndex: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex {.base.} =
+  QTransposeProxyModelmapFromSource(self[], sourceIndex)
+method mapToSource*(self: VirtualQTransposeProxyModel, proxyIndex: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex {.base.} =
+  QTransposeProxyModelmapToSource(self[], proxyIndex)
+method parent*(self: VirtualQTransposeProxyModel, index: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex {.base.} =
+  QTransposeProxyModelparent(self[], index)
+method index*(self: VirtualQTransposeProxyModel, row: cint, column: cint, parent: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex {.base.} =
+  QTransposeProxyModelindex(self[], row, column, parent)
+method insertRows*(self: VirtualQTransposeProxyModel, row: cint, count: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool {.base.} =
+  QTransposeProxyModelinsertRows(self[], row, count, parent)
+method removeRows*(self: VirtualQTransposeProxyModel, row: cint, count: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool {.base.} =
+  QTransposeProxyModelremoveRows(self[], row, count, parent)
+method moveRows*(self: VirtualQTransposeProxyModel, sourceParent: gen_qabstractitemmodel_types.QModelIndex, sourceRow: cint, count: cint, destinationParent: gen_qabstractitemmodel_types.QModelIndex, destinationChild: cint): bool {.base.} =
+  QTransposeProxyModelmoveRows(self[], sourceParent, sourceRow, count, destinationParent, destinationChild)
+method insertColumns*(self: VirtualQTransposeProxyModel, column: cint, count: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool {.base.} =
+  QTransposeProxyModelinsertColumns(self[], column, count, parent)
+method removeColumns*(self: VirtualQTransposeProxyModel, column: cint, count: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool {.base.} =
+  QTransposeProxyModelremoveColumns(self[], column, count, parent)
+method moveColumns*(self: VirtualQTransposeProxyModel, sourceParent: gen_qabstractitemmodel_types.QModelIndex, sourceColumn: cint, count: cint, destinationParent: gen_qabstractitemmodel_types.QModelIndex, destinationChild: cint): bool {.base.} =
+  QTransposeProxyModelmoveColumns(self[], sourceParent, sourceColumn, count, destinationParent, destinationChild)
+method sort*(self: VirtualQTransposeProxyModel, column: cint, order: cint): void {.base.} =
+  QTransposeProxyModelsort(self[], column, order)
+method mapSelectionToSource*(self: VirtualQTransposeProxyModel, selection: gen_qitemselectionmodel_types.QItemSelection): gen_qitemselectionmodel_types.QItemSelection {.base.} =
+  QTransposeProxyModelmapSelectionToSource(self[], selection)
+method mapSelectionFromSource*(self: VirtualQTransposeProxyModel, selection: gen_qitemselectionmodel_types.QItemSelection): gen_qitemselectionmodel_types.QItemSelection {.base.} =
+  QTransposeProxyModelmapSelectionFromSource(self[], selection)
+method submit*(self: VirtualQTransposeProxyModel): bool {.base.} =
+  QTransposeProxyModelsubmit(self[])
+method revert*(self: VirtualQTransposeProxyModel): void {.base.} =
+  QTransposeProxyModelrevert(self[])
+method data*(self: VirtualQTransposeProxyModel, proxyIndex: gen_qabstractitemmodel_types.QModelIndex, role: cint): gen_qvariant_types.QVariant {.base.} =
+  QTransposeProxyModeldata(self[], proxyIndex, role)
+method flags*(self: VirtualQTransposeProxyModel, index: gen_qabstractitemmodel_types.QModelIndex): cint {.base.} =
+  QTransposeProxyModelflags(self[], index)
+method setData*(self: VirtualQTransposeProxyModel, index: gen_qabstractitemmodel_types.QModelIndex, value: gen_qvariant_types.QVariant, role: cint): bool {.base.} =
+  QTransposeProxyModelsetData(self[], index, value, role)
+method buddy*(self: VirtualQTransposeProxyModel, index: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex {.base.} =
+  QTransposeProxyModelbuddy(self[], index)
+method canFetchMore*(self: VirtualQTransposeProxyModel, parent: gen_qabstractitemmodel_types.QModelIndex): bool {.base.} =
+  QTransposeProxyModelcanFetchMore(self[], parent)
+method fetchMore*(self: VirtualQTransposeProxyModel, parent: gen_qabstractitemmodel_types.QModelIndex): void {.base.} =
+  QTransposeProxyModelfetchMore(self[], parent)
+method hasChildren*(self: VirtualQTransposeProxyModel, parent: gen_qabstractitemmodel_types.QModelIndex): bool {.base.} =
+  QTransposeProxyModelhasChildren(self[], parent)
+method sibling*(self: VirtualQTransposeProxyModel, row: cint, column: cint, idx: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex {.base.} =
+  QTransposeProxyModelsibling(self[], row, column, idx)
+method mimeData*(self: VirtualQTransposeProxyModel, indexes: openArray[gen_qabstractitemmodel_types.QModelIndex]): gen_qmimedata_types.QMimeData {.base.} =
+  QTransposeProxyModelmimeData(self[], indexes)
+method canDropMimeData*(self: VirtualQTransposeProxyModel, data: gen_qmimedata_types.QMimeData, action: cint, row: cint, column: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool {.base.} =
+  QTransposeProxyModelcanDropMimeData(self[], data, action, row, column, parent)
+method dropMimeData*(self: VirtualQTransposeProxyModel, data: gen_qmimedata_types.QMimeData, action: cint, row: cint, column: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool {.base.} =
+  QTransposeProxyModeldropMimeData(self[], data, action, row, column, parent)
+method mimeTypes*(self: VirtualQTransposeProxyModel): seq[string] {.base.} =
+  QTransposeProxyModelmimeTypes(self[])
+method supportedDragActions*(self: VirtualQTransposeProxyModel): cint {.base.} =
+  QTransposeProxyModelsupportedDragActions(self[])
+method supportedDropActions*(self: VirtualQTransposeProxyModel): cint {.base.} =
+  QTransposeProxyModelsupportedDropActions(self[])
+method match*(self: VirtualQTransposeProxyModel, start: gen_qabstractitemmodel_types.QModelIndex, role: cint, value: gen_qvariant_types.QVariant, hits: cint, flags: cint): seq[gen_qabstractitemmodel_types.QModelIndex] {.base.} =
+  QTransposeProxyModelmatch(self[], start, role, value, hits, flags)
+method roleNames*(self: VirtualQTransposeProxyModel): Table[cint,seq[byte]] {.base.} =
+  QTransposeProxyModelroleNames(self[])
+method event*(self: VirtualQTransposeProxyModel, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QTransposeProxyModelevent(self[], event)
+method eventFilter*(self: VirtualQTransposeProxyModel, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QTransposeProxyModeleventFilter(self[], watched, event)
+method timerEvent*(self: VirtualQTransposeProxyModel, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QTransposeProxyModeltimerEvent(self[], event)
+method childEvent*(self: VirtualQTransposeProxyModel, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QTransposeProxyModelchildEvent(self[], event)
+method customEvent*(self: VirtualQTransposeProxyModel, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QTransposeProxyModelcustomEvent(self[], event)
+method connectNotify*(self: VirtualQTransposeProxyModel, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QTransposeProxyModelconnectNotify(self[], signal)
+method disconnectNotify*(self: VirtualQTransposeProxyModel, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QTransposeProxyModeldisconnectNotify(self[], signal)
+
+proc fcQTransposeProxyModel_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQTransposeProxyModel](fcQTransposeProxyModel_vdata(self))
   var virtualReturn = inst.metaObject()
   virtualReturn.owned = false # TODO move?
@@ -1136,17 +1238,13 @@ proc cQTransposeProxyModel_method_callback_metaObject(self: pointer): pointer {.
   virtualReturn.h = nil
   virtualReturn_h
 
-method metacast*(self: VirtualQTransposeProxyModel, param1: cstring): pointer {.base.} =
-  QTransposeProxyModelmetacast(self[], param1)
-proc cQTransposeProxyModel_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+proc fcQTransposeProxyModel_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQTransposeProxyModel](fcQTransposeProxyModel_vdata(self))
   let slotval1 = (param1)
   var virtualReturn = inst.metacast(slotval1)
   virtualReturn
 
-method metacall*(self: VirtualQTransposeProxyModel, param1: cint, param2: cint, param3: pointer): cint {.base.} =
-  QTransposeProxyModelmetacall(self[], param1, param2, param3)
-proc cQTransposeProxyModel_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+proc fcQTransposeProxyModel_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQTransposeProxyModel](fcQTransposeProxyModel_vdata(self))
   let slotval1 = cint(param1)
   let slotval2 = param2
@@ -1154,32 +1252,24 @@ proc cQTransposeProxyModel_method_callback_metacall(self: pointer, param1: cint,
   var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
-method setSourceModel*(self: VirtualQTransposeProxyModel, newSourceModel: gen_qabstractitemmodel_types.QAbstractItemModel): void {.base.} =
-  QTransposeProxyModelsetSourceModel(self[], newSourceModel)
-proc cQTransposeProxyModel_method_callback_setSourceModel(self: pointer, newSourceModel: pointer): void {.cdecl.} =
+proc fcQTransposeProxyModel_method_callback_setSourceModel(self: pointer, newSourceModel: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTransposeProxyModel](fcQTransposeProxyModel_vdata(self))
   let slotval1 = gen_qabstractitemmodel_types.QAbstractItemModel(h: newSourceModel, owned: false)
   inst.setSourceModel(slotval1)
 
-method rowCount*(self: VirtualQTransposeProxyModel, parent: gen_qabstractitemmodel_types.QModelIndex): cint {.base.} =
-  QTransposeProxyModelrowCount(self[], parent)
-proc cQTransposeProxyModel_method_callback_rowCount(self: pointer, parent: pointer): cint {.cdecl.} =
+proc fcQTransposeProxyModel_method_callback_rowCount(self: pointer, parent: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQTransposeProxyModel](fcQTransposeProxyModel_vdata(self))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   var virtualReturn = inst.rowCount(slotval1)
   virtualReturn
 
-method columnCount*(self: VirtualQTransposeProxyModel, parent: gen_qabstractitemmodel_types.QModelIndex): cint {.base.} =
-  QTransposeProxyModelcolumnCount(self[], parent)
-proc cQTransposeProxyModel_method_callback_columnCount(self: pointer, parent: pointer): cint {.cdecl.} =
+proc fcQTransposeProxyModel_method_callback_columnCount(self: pointer, parent: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQTransposeProxyModel](fcQTransposeProxyModel_vdata(self))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   var virtualReturn = inst.columnCount(slotval1)
   virtualReturn
 
-method headerData*(self: VirtualQTransposeProxyModel, section: cint, orientation: cint, role: cint): gen_qvariant_types.QVariant {.base.} =
-  QTransposeProxyModelheaderData(self[], section, orientation, role)
-proc cQTransposeProxyModel_method_callback_headerData(self: pointer, section: cint, orientation: cint, role: cint): pointer {.cdecl.} =
+proc fcQTransposeProxyModel_method_callback_headerData(self: pointer, section: cint, orientation: cint, role: cint): pointer {.cdecl.} =
   let inst = cast[VirtualQTransposeProxyModel](fcQTransposeProxyModel_vdata(self))
   let slotval1 = section
   let slotval2 = cint(orientation)
@@ -1190,9 +1280,7 @@ proc cQTransposeProxyModel_method_callback_headerData(self: pointer, section: ci
   virtualReturn.h = nil
   virtualReturn_h
 
-method setHeaderData*(self: VirtualQTransposeProxyModel, section: cint, orientation: cint, value: gen_qvariant_types.QVariant, role: cint): bool {.base.} =
-  QTransposeProxyModelsetHeaderData(self[], section, orientation, value, role)
-proc cQTransposeProxyModel_method_callback_setHeaderData(self: pointer, section: cint, orientation: cint, value: pointer, role: cint): bool {.cdecl.} =
+proc fcQTransposeProxyModel_method_callback_setHeaderData(self: pointer, section: cint, orientation: cint, value: pointer, role: cint): bool {.cdecl.} =
   let inst = cast[VirtualQTransposeProxyModel](fcQTransposeProxyModel_vdata(self))
   let slotval1 = section
   let slotval2 = cint(orientation)
@@ -1201,9 +1289,7 @@ proc cQTransposeProxyModel_method_callback_setHeaderData(self: pointer, section:
   var virtualReturn = inst.setHeaderData(slotval1, slotval2, slotval3, slotval4)
   virtualReturn
 
-method setItemData*(self: VirtualQTransposeProxyModel, index: gen_qabstractitemmodel_types.QModelIndex, roles: Table[cint,gen_qvariant_types.QVariant]): bool {.base.} =
-  QTransposeProxyModelsetItemData(self[], index, roles)
-proc cQTransposeProxyModel_method_callback_setItemData(self: pointer, index: pointer, roles: struct_miqt_map): bool {.cdecl.} =
+proc fcQTransposeProxyModel_method_callback_setItemData(self: pointer, index: pointer, roles: struct_miqt_map): bool {.cdecl.} =
   let inst = cast[VirtualQTransposeProxyModel](fcQTransposeProxyModel_vdata(self))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var vroles_mm = roles
@@ -1222,9 +1308,7 @@ proc cQTransposeProxyModel_method_callback_setItemData(self: pointer, index: poi
   var virtualReturn = inst.setItemData(slotval1, slotval2)
   virtualReturn
 
-method span*(self: VirtualQTransposeProxyModel, index: gen_qabstractitemmodel_types.QModelIndex): gen_qsize_types.QSize {.base.} =
-  QTransposeProxyModelspan(self[], index)
-proc cQTransposeProxyModel_method_callback_span(self: pointer, index: pointer): pointer {.cdecl.} =
+proc fcQTransposeProxyModel_method_callback_span(self: pointer, index: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQTransposeProxyModel](fcQTransposeProxyModel_vdata(self))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var virtualReturn = inst.span(slotval1)
@@ -1233,9 +1317,7 @@ proc cQTransposeProxyModel_method_callback_span(self: pointer, index: pointer): 
   virtualReturn.h = nil
   virtualReturn_h
 
-method itemData*(self: VirtualQTransposeProxyModel, index: gen_qabstractitemmodel_types.QModelIndex): Table[cint,gen_qvariant_types.QVariant] {.base.} =
-  QTransposeProxyModelitemData(self[], index)
-proc cQTransposeProxyModel_method_callback_itemData(self: pointer, index: pointer): struct_miqt_map {.cdecl.} =
+proc fcQTransposeProxyModel_method_callback_itemData(self: pointer, index: pointer): struct_miqt_map {.cdecl.} =
   let inst = cast[VirtualQTransposeProxyModel](fcQTransposeProxyModel_vdata(self))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var virtualReturn = inst.itemData(slotval1)
@@ -1255,9 +1337,7 @@ proc cQTransposeProxyModel_method_callback_itemData(self: pointer, index: pointe
 
   struct_miqt_map(len: csize_t(len(virtualReturn)),keys: if len(virtualReturn) == 0: nil else: addr(virtualReturn_Keys_CArray[0]), values: if len(virtualReturn) == 0: nil else: addr(virtualReturn_Values_CArray[0]),)
 
-method mapFromSource*(self: VirtualQTransposeProxyModel, sourceIndex: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex {.base.} =
-  QTransposeProxyModelmapFromSource(self[], sourceIndex)
-proc cQTransposeProxyModel_method_callback_mapFromSource(self: pointer, sourceIndex: pointer): pointer {.cdecl.} =
+proc fcQTransposeProxyModel_method_callback_mapFromSource(self: pointer, sourceIndex: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQTransposeProxyModel](fcQTransposeProxyModel_vdata(self))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: sourceIndex, owned: false)
   var virtualReturn = inst.mapFromSource(slotval1)
@@ -1266,9 +1346,7 @@ proc cQTransposeProxyModel_method_callback_mapFromSource(self: pointer, sourceIn
   virtualReturn.h = nil
   virtualReturn_h
 
-method mapToSource*(self: VirtualQTransposeProxyModel, proxyIndex: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex {.base.} =
-  QTransposeProxyModelmapToSource(self[], proxyIndex)
-proc cQTransposeProxyModel_method_callback_mapToSource(self: pointer, proxyIndex: pointer): pointer {.cdecl.} =
+proc fcQTransposeProxyModel_method_callback_mapToSource(self: pointer, proxyIndex: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQTransposeProxyModel](fcQTransposeProxyModel_vdata(self))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: proxyIndex, owned: false)
   var virtualReturn = inst.mapToSource(slotval1)
@@ -1277,9 +1355,7 @@ proc cQTransposeProxyModel_method_callback_mapToSource(self: pointer, proxyIndex
   virtualReturn.h = nil
   virtualReturn_h
 
-method parent*(self: VirtualQTransposeProxyModel, index: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex {.base.} =
-  QTransposeProxyModelparent(self[], index)
-proc cQTransposeProxyModel_method_callback_parent(self: pointer, index: pointer): pointer {.cdecl.} =
+proc fcQTransposeProxyModel_method_callback_parent(self: pointer, index: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQTransposeProxyModel](fcQTransposeProxyModel_vdata(self))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var virtualReturn = inst.parent(slotval1)
@@ -1288,9 +1364,7 @@ proc cQTransposeProxyModel_method_callback_parent(self: pointer, index: pointer)
   virtualReturn.h = nil
   virtualReturn_h
 
-method index*(self: VirtualQTransposeProxyModel, row: cint, column: cint, parent: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex {.base.} =
-  QTransposeProxyModelindex(self[], row, column, parent)
-proc cQTransposeProxyModel_method_callback_index(self: pointer, row: cint, column: cint, parent: pointer): pointer {.cdecl.} =
+proc fcQTransposeProxyModel_method_callback_index(self: pointer, row: cint, column: cint, parent: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQTransposeProxyModel](fcQTransposeProxyModel_vdata(self))
   let slotval1 = row
   let slotval2 = column
@@ -1301,9 +1375,7 @@ proc cQTransposeProxyModel_method_callback_index(self: pointer, row: cint, colum
   virtualReturn.h = nil
   virtualReturn_h
 
-method insertRows*(self: VirtualQTransposeProxyModel, row: cint, count: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool {.base.} =
-  QTransposeProxyModelinsertRows(self[], row, count, parent)
-proc cQTransposeProxyModel_method_callback_insertRows(self: pointer, row: cint, count: cint, parent: pointer): bool {.cdecl.} =
+proc fcQTransposeProxyModel_method_callback_insertRows(self: pointer, row: cint, count: cint, parent: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQTransposeProxyModel](fcQTransposeProxyModel_vdata(self))
   let slotval1 = row
   let slotval2 = count
@@ -1311,9 +1383,7 @@ proc cQTransposeProxyModel_method_callback_insertRows(self: pointer, row: cint, 
   var virtualReturn = inst.insertRows(slotval1, slotval2, slotval3)
   virtualReturn
 
-method removeRows*(self: VirtualQTransposeProxyModel, row: cint, count: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool {.base.} =
-  QTransposeProxyModelremoveRows(self[], row, count, parent)
-proc cQTransposeProxyModel_method_callback_removeRows(self: pointer, row: cint, count: cint, parent: pointer): bool {.cdecl.} =
+proc fcQTransposeProxyModel_method_callback_removeRows(self: pointer, row: cint, count: cint, parent: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQTransposeProxyModel](fcQTransposeProxyModel_vdata(self))
   let slotval1 = row
   let slotval2 = count
@@ -1321,9 +1391,7 @@ proc cQTransposeProxyModel_method_callback_removeRows(self: pointer, row: cint, 
   var virtualReturn = inst.removeRows(slotval1, slotval2, slotval3)
   virtualReturn
 
-method moveRows*(self: VirtualQTransposeProxyModel, sourceParent: gen_qabstractitemmodel_types.QModelIndex, sourceRow: cint, count: cint, destinationParent: gen_qabstractitemmodel_types.QModelIndex, destinationChild: cint): bool {.base.} =
-  QTransposeProxyModelmoveRows(self[], sourceParent, sourceRow, count, destinationParent, destinationChild)
-proc cQTransposeProxyModel_method_callback_moveRows(self: pointer, sourceParent: pointer, sourceRow: cint, count: cint, destinationParent: pointer, destinationChild: cint): bool {.cdecl.} =
+proc fcQTransposeProxyModel_method_callback_moveRows(self: pointer, sourceParent: pointer, sourceRow: cint, count: cint, destinationParent: pointer, destinationChild: cint): bool {.cdecl.} =
   let inst = cast[VirtualQTransposeProxyModel](fcQTransposeProxyModel_vdata(self))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: sourceParent, owned: false)
   let slotval2 = sourceRow
@@ -1333,9 +1401,7 @@ proc cQTransposeProxyModel_method_callback_moveRows(self: pointer, sourceParent:
   var virtualReturn = inst.moveRows(slotval1, slotval2, slotval3, slotval4, slotval5)
   virtualReturn
 
-method insertColumns*(self: VirtualQTransposeProxyModel, column: cint, count: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool {.base.} =
-  QTransposeProxyModelinsertColumns(self[], column, count, parent)
-proc cQTransposeProxyModel_method_callback_insertColumns(self: pointer, column: cint, count: cint, parent: pointer): bool {.cdecl.} =
+proc fcQTransposeProxyModel_method_callback_insertColumns(self: pointer, column: cint, count: cint, parent: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQTransposeProxyModel](fcQTransposeProxyModel_vdata(self))
   let slotval1 = column
   let slotval2 = count
@@ -1343,9 +1409,7 @@ proc cQTransposeProxyModel_method_callback_insertColumns(self: pointer, column: 
   var virtualReturn = inst.insertColumns(slotval1, slotval2, slotval3)
   virtualReturn
 
-method removeColumns*(self: VirtualQTransposeProxyModel, column: cint, count: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool {.base.} =
-  QTransposeProxyModelremoveColumns(self[], column, count, parent)
-proc cQTransposeProxyModel_method_callback_removeColumns(self: pointer, column: cint, count: cint, parent: pointer): bool {.cdecl.} =
+proc fcQTransposeProxyModel_method_callback_removeColumns(self: pointer, column: cint, count: cint, parent: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQTransposeProxyModel](fcQTransposeProxyModel_vdata(self))
   let slotval1 = column
   let slotval2 = count
@@ -1353,9 +1417,7 @@ proc cQTransposeProxyModel_method_callback_removeColumns(self: pointer, column: 
   var virtualReturn = inst.removeColumns(slotval1, slotval2, slotval3)
   virtualReturn
 
-method moveColumns*(self: VirtualQTransposeProxyModel, sourceParent: gen_qabstractitemmodel_types.QModelIndex, sourceColumn: cint, count: cint, destinationParent: gen_qabstractitemmodel_types.QModelIndex, destinationChild: cint): bool {.base.} =
-  QTransposeProxyModelmoveColumns(self[], sourceParent, sourceColumn, count, destinationParent, destinationChild)
-proc cQTransposeProxyModel_method_callback_moveColumns(self: pointer, sourceParent: pointer, sourceColumn: cint, count: cint, destinationParent: pointer, destinationChild: cint): bool {.cdecl.} =
+proc fcQTransposeProxyModel_method_callback_moveColumns(self: pointer, sourceParent: pointer, sourceColumn: cint, count: cint, destinationParent: pointer, destinationChild: cint): bool {.cdecl.} =
   let inst = cast[VirtualQTransposeProxyModel](fcQTransposeProxyModel_vdata(self))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: sourceParent, owned: false)
   let slotval2 = sourceColumn
@@ -1365,17 +1427,13 @@ proc cQTransposeProxyModel_method_callback_moveColumns(self: pointer, sourcePare
   var virtualReturn = inst.moveColumns(slotval1, slotval2, slotval3, slotval4, slotval5)
   virtualReturn
 
-method sort*(self: VirtualQTransposeProxyModel, column: cint, order: cint): void {.base.} =
-  QTransposeProxyModelsort(self[], column, order)
-proc cQTransposeProxyModel_method_callback_sort(self: pointer, column: cint, order: cint): void {.cdecl.} =
+proc fcQTransposeProxyModel_method_callback_sort(self: pointer, column: cint, order: cint): void {.cdecl.} =
   let inst = cast[VirtualQTransposeProxyModel](fcQTransposeProxyModel_vdata(self))
   let slotval1 = column
   let slotval2 = cint(order)
   inst.sort(slotval1, slotval2)
 
-method mapSelectionToSource*(self: VirtualQTransposeProxyModel, selection: gen_qitemselectionmodel_types.QItemSelection): gen_qitemselectionmodel_types.QItemSelection {.base.} =
-  QTransposeProxyModelmapSelectionToSource(self[], selection)
-proc cQTransposeProxyModel_method_callback_mapSelectionToSource(self: pointer, selection: pointer): pointer {.cdecl.} =
+proc fcQTransposeProxyModel_method_callback_mapSelectionToSource(self: pointer, selection: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQTransposeProxyModel](fcQTransposeProxyModel_vdata(self))
   let slotval1 = gen_qitemselectionmodel_types.QItemSelection(h: selection, owned: false)
   var virtualReturn = inst.mapSelectionToSource(slotval1)
@@ -1384,9 +1442,7 @@ proc cQTransposeProxyModel_method_callback_mapSelectionToSource(self: pointer, s
   virtualReturn.h = nil
   virtualReturn_h
 
-method mapSelectionFromSource*(self: VirtualQTransposeProxyModel, selection: gen_qitemselectionmodel_types.QItemSelection): gen_qitemselectionmodel_types.QItemSelection {.base.} =
-  QTransposeProxyModelmapSelectionFromSource(self[], selection)
-proc cQTransposeProxyModel_method_callback_mapSelectionFromSource(self: pointer, selection: pointer): pointer {.cdecl.} =
+proc fcQTransposeProxyModel_method_callback_mapSelectionFromSource(self: pointer, selection: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQTransposeProxyModel](fcQTransposeProxyModel_vdata(self))
   let slotval1 = gen_qitemselectionmodel_types.QItemSelection(h: selection, owned: false)
   var virtualReturn = inst.mapSelectionFromSource(slotval1)
@@ -1395,22 +1451,16 @@ proc cQTransposeProxyModel_method_callback_mapSelectionFromSource(self: pointer,
   virtualReturn.h = nil
   virtualReturn_h
 
-method submit*(self: VirtualQTransposeProxyModel): bool {.base.} =
-  QTransposeProxyModelsubmit(self[])
-proc cQTransposeProxyModel_method_callback_submit(self: pointer): bool {.cdecl.} =
+proc fcQTransposeProxyModel_method_callback_submit(self: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQTransposeProxyModel](fcQTransposeProxyModel_vdata(self))
   var virtualReturn = inst.submit()
   virtualReturn
 
-method revert*(self: VirtualQTransposeProxyModel): void {.base.} =
-  QTransposeProxyModelrevert(self[])
-proc cQTransposeProxyModel_method_callback_revert(self: pointer): void {.cdecl.} =
+proc fcQTransposeProxyModel_method_callback_revert(self: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTransposeProxyModel](fcQTransposeProxyModel_vdata(self))
   inst.revert()
 
-method data*(self: VirtualQTransposeProxyModel, proxyIndex: gen_qabstractitemmodel_types.QModelIndex, role: cint): gen_qvariant_types.QVariant {.base.} =
-  QTransposeProxyModeldata(self[], proxyIndex, role)
-proc cQTransposeProxyModel_method_callback_data(self: pointer, proxyIndex: pointer, role: cint): pointer {.cdecl.} =
+proc fcQTransposeProxyModel_method_callback_data(self: pointer, proxyIndex: pointer, role: cint): pointer {.cdecl.} =
   let inst = cast[VirtualQTransposeProxyModel](fcQTransposeProxyModel_vdata(self))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: proxyIndex, owned: false)
   let slotval2 = role
@@ -1420,17 +1470,13 @@ proc cQTransposeProxyModel_method_callback_data(self: pointer, proxyIndex: point
   virtualReturn.h = nil
   virtualReturn_h
 
-method flags*(self: VirtualQTransposeProxyModel, index: gen_qabstractitemmodel_types.QModelIndex): cint {.base.} =
-  QTransposeProxyModelflags(self[], index)
-proc cQTransposeProxyModel_method_callback_flags(self: pointer, index: pointer): cint {.cdecl.} =
+proc fcQTransposeProxyModel_method_callback_flags(self: pointer, index: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQTransposeProxyModel](fcQTransposeProxyModel_vdata(self))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var virtualReturn = inst.flags(slotval1)
   cint(virtualReturn)
 
-method setData*(self: VirtualQTransposeProxyModel, index: gen_qabstractitemmodel_types.QModelIndex, value: gen_qvariant_types.QVariant, role: cint): bool {.base.} =
-  QTransposeProxyModelsetData(self[], index, value, role)
-proc cQTransposeProxyModel_method_callback_setData(self: pointer, index: pointer, value: pointer, role: cint): bool {.cdecl.} =
+proc fcQTransposeProxyModel_method_callback_setData(self: pointer, index: pointer, value: pointer, role: cint): bool {.cdecl.} =
   let inst = cast[VirtualQTransposeProxyModel](fcQTransposeProxyModel_vdata(self))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   let slotval2 = gen_qvariant_types.QVariant(h: value, owned: false)
@@ -1438,9 +1484,7 @@ proc cQTransposeProxyModel_method_callback_setData(self: pointer, index: pointer
   var virtualReturn = inst.setData(slotval1, slotval2, slotval3)
   virtualReturn
 
-method buddy*(self: VirtualQTransposeProxyModel, index: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex {.base.} =
-  QTransposeProxyModelbuddy(self[], index)
-proc cQTransposeProxyModel_method_callback_buddy(self: pointer, index: pointer): pointer {.cdecl.} =
+proc fcQTransposeProxyModel_method_callback_buddy(self: pointer, index: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQTransposeProxyModel](fcQTransposeProxyModel_vdata(self))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var virtualReturn = inst.buddy(slotval1)
@@ -1449,32 +1493,24 @@ proc cQTransposeProxyModel_method_callback_buddy(self: pointer, index: pointer):
   virtualReturn.h = nil
   virtualReturn_h
 
-method canFetchMore*(self: VirtualQTransposeProxyModel, parent: gen_qabstractitemmodel_types.QModelIndex): bool {.base.} =
-  QTransposeProxyModelcanFetchMore(self[], parent)
-proc cQTransposeProxyModel_method_callback_canFetchMore(self: pointer, parent: pointer): bool {.cdecl.} =
+proc fcQTransposeProxyModel_method_callback_canFetchMore(self: pointer, parent: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQTransposeProxyModel](fcQTransposeProxyModel_vdata(self))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   var virtualReturn = inst.canFetchMore(slotval1)
   virtualReturn
 
-method fetchMore*(self: VirtualQTransposeProxyModel, parent: gen_qabstractitemmodel_types.QModelIndex): void {.base.} =
-  QTransposeProxyModelfetchMore(self[], parent)
-proc cQTransposeProxyModel_method_callback_fetchMore(self: pointer, parent: pointer): void {.cdecl.} =
+proc fcQTransposeProxyModel_method_callback_fetchMore(self: pointer, parent: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTransposeProxyModel](fcQTransposeProxyModel_vdata(self))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   inst.fetchMore(slotval1)
 
-method hasChildren*(self: VirtualQTransposeProxyModel, parent: gen_qabstractitemmodel_types.QModelIndex): bool {.base.} =
-  QTransposeProxyModelhasChildren(self[], parent)
-proc cQTransposeProxyModel_method_callback_hasChildren(self: pointer, parent: pointer): bool {.cdecl.} =
+proc fcQTransposeProxyModel_method_callback_hasChildren(self: pointer, parent: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQTransposeProxyModel](fcQTransposeProxyModel_vdata(self))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   var virtualReturn = inst.hasChildren(slotval1)
   virtualReturn
 
-method sibling*(self: VirtualQTransposeProxyModel, row: cint, column: cint, idx: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex {.base.} =
-  QTransposeProxyModelsibling(self[], row, column, idx)
-proc cQTransposeProxyModel_method_callback_sibling(self: pointer, row: cint, column: cint, idx: pointer): pointer {.cdecl.} =
+proc fcQTransposeProxyModel_method_callback_sibling(self: pointer, row: cint, column: cint, idx: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQTransposeProxyModel](fcQTransposeProxyModel_vdata(self))
   let slotval1 = row
   let slotval2 = column
@@ -1485,9 +1521,7 @@ proc cQTransposeProxyModel_method_callback_sibling(self: pointer, row: cint, col
   virtualReturn.h = nil
   virtualReturn_h
 
-method mimeData*(self: VirtualQTransposeProxyModel, indexes: openArray[gen_qabstractitemmodel_types.QModelIndex]): gen_qmimedata_types.QMimeData {.base.} =
-  QTransposeProxyModelmimeData(self[], indexes)
-proc cQTransposeProxyModel_method_callback_mimeData(self: pointer, indexes: struct_miqt_array): pointer {.cdecl.} =
+proc fcQTransposeProxyModel_method_callback_mimeData(self: pointer, indexes: struct_miqt_array): pointer {.cdecl.} =
   let inst = cast[VirtualQTransposeProxyModel](fcQTransposeProxyModel_vdata(self))
   var vindexes_ma = indexes
   var vindexesx_ret = newSeq[gen_qabstractitemmodel_types.QModelIndex](int(vindexes_ma.len))
@@ -1502,9 +1536,7 @@ proc cQTransposeProxyModel_method_callback_mimeData(self: pointer, indexes: stru
   virtualReturn.h = nil
   virtualReturn_h
 
-method canDropMimeData*(self: VirtualQTransposeProxyModel, data: gen_qmimedata_types.QMimeData, action: cint, row: cint, column: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool {.base.} =
-  QTransposeProxyModelcanDropMimeData(self[], data, action, row, column, parent)
-proc cQTransposeProxyModel_method_callback_canDropMimeData(self: pointer, data: pointer, action: cint, row: cint, column: cint, parent: pointer): bool {.cdecl.} =
+proc fcQTransposeProxyModel_method_callback_canDropMimeData(self: pointer, data: pointer, action: cint, row: cint, column: cint, parent: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQTransposeProxyModel](fcQTransposeProxyModel_vdata(self))
   let slotval1 = gen_qmimedata_types.QMimeData(h: data, owned: false)
   let slotval2 = cint(action)
@@ -1514,9 +1546,7 @@ proc cQTransposeProxyModel_method_callback_canDropMimeData(self: pointer, data: 
   var virtualReturn = inst.canDropMimeData(slotval1, slotval2, slotval3, slotval4, slotval5)
   virtualReturn
 
-method dropMimeData*(self: VirtualQTransposeProxyModel, data: gen_qmimedata_types.QMimeData, action: cint, row: cint, column: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool {.base.} =
-  QTransposeProxyModeldropMimeData(self[], data, action, row, column, parent)
-proc cQTransposeProxyModel_method_callback_dropMimeData(self: pointer, data: pointer, action: cint, row: cint, column: cint, parent: pointer): bool {.cdecl.} =
+proc fcQTransposeProxyModel_method_callback_dropMimeData(self: pointer, data: pointer, action: cint, row: cint, column: cint, parent: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQTransposeProxyModel](fcQTransposeProxyModel_vdata(self))
   let slotval1 = gen_qmimedata_types.QMimeData(h: data, owned: false)
   let slotval2 = cint(action)
@@ -1526,9 +1556,7 @@ proc cQTransposeProxyModel_method_callback_dropMimeData(self: pointer, data: poi
   var virtualReturn = inst.dropMimeData(slotval1, slotval2, slotval3, slotval4, slotval5)
   virtualReturn
 
-method mimeTypes*(self: VirtualQTransposeProxyModel): seq[string] {.base.} =
-  QTransposeProxyModelmimeTypes(self[])
-proc cQTransposeProxyModel_method_callback_mimeTypes(self: pointer): struct_miqt_array {.cdecl.} =
+proc fcQTransposeProxyModel_method_callback_mimeTypes(self: pointer): struct_miqt_array {.cdecl.} =
   let inst = cast[VirtualQTransposeProxyModel](fcQTransposeProxyModel_vdata(self))
   var virtualReturn = inst.mimeTypes()
   var virtualReturn_CArray = cast[ptr UncheckedArray[struct_miqt_string]](if len(virtualReturn) > 0: c_malloc(c_sizet(sizeof(struct_miqt_string) * len(virtualReturn))) else: nil)
@@ -1539,23 +1567,17 @@ proc cQTransposeProxyModel_method_callback_mimeTypes(self: pointer): struct_miqt
 
   struct_miqt_array(len: csize_t(len(virtualReturn)), data: if len(virtualReturn) == 0: nil else: addr(virtualReturn_CArray[0]))
 
-method supportedDragActions*(self: VirtualQTransposeProxyModel): cint {.base.} =
-  QTransposeProxyModelsupportedDragActions(self[])
-proc cQTransposeProxyModel_method_callback_supportedDragActions(self: pointer): cint {.cdecl.} =
+proc fcQTransposeProxyModel_method_callback_supportedDragActions(self: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQTransposeProxyModel](fcQTransposeProxyModel_vdata(self))
   var virtualReturn = inst.supportedDragActions()
   cint(virtualReturn)
 
-method supportedDropActions*(self: VirtualQTransposeProxyModel): cint {.base.} =
-  QTransposeProxyModelsupportedDropActions(self[])
-proc cQTransposeProxyModel_method_callback_supportedDropActions(self: pointer): cint {.cdecl.} =
+proc fcQTransposeProxyModel_method_callback_supportedDropActions(self: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQTransposeProxyModel](fcQTransposeProxyModel_vdata(self))
   var virtualReturn = inst.supportedDropActions()
   cint(virtualReturn)
 
-method match*(self: VirtualQTransposeProxyModel, start: gen_qabstractitemmodel_types.QModelIndex, role: cint, value: gen_qvariant_types.QVariant, hits: cint, flags: cint): seq[gen_qabstractitemmodel_types.QModelIndex] {.base.} =
-  QTransposeProxyModelmatch(self[], start, role, value, hits, flags)
-proc cQTransposeProxyModel_method_callback_match(self: pointer, start: pointer, role: cint, value: pointer, hits: cint, flags: cint): struct_miqt_array {.cdecl.} =
+proc fcQTransposeProxyModel_method_callback_match(self: pointer, start: pointer, role: cint, value: pointer, hits: cint, flags: cint): struct_miqt_array {.cdecl.} =
   let inst = cast[VirtualQTransposeProxyModel](fcQTransposeProxyModel_vdata(self))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: start, owned: false)
   let slotval2 = role
@@ -1572,9 +1594,7 @@ proc cQTransposeProxyModel_method_callback_match(self: pointer, start: pointer, 
 
   struct_miqt_array(len: csize_t(len(virtualReturn)), data: if len(virtualReturn) == 0: nil else: addr(virtualReturn_CArray[0]))
 
-method roleNames*(self: VirtualQTransposeProxyModel): Table[cint,seq[byte]] {.base.} =
-  QTransposeProxyModelroleNames(self[])
-proc cQTransposeProxyModel_method_callback_roleNames(self: pointer): struct_miqt_map {.cdecl.} =
+proc fcQTransposeProxyModel_method_callback_roleNames(self: pointer): struct_miqt_map {.cdecl.} =
   let inst = cast[VirtualQTransposeProxyModel](fcQTransposeProxyModel_vdata(self))
   var virtualReturn = inst.roleNames()
   var virtualReturn_Keys_CArray = cast[ptr UncheckedArray[cint]](if len(virtualReturn) > 0: c_malloc(csize_t(sizeof(cint) * len(virtualReturn))) else: nil)
@@ -1592,57 +1612,44 @@ proc cQTransposeProxyModel_method_callback_roleNames(self: pointer): struct_miqt
 
   struct_miqt_map(len: csize_t(len(virtualReturn)),keys: if len(virtualReturn) == 0: nil else: addr(virtualReturn_Keys_CArray[0]), values: if len(virtualReturn) == 0: nil else: addr(virtualReturn_Values_CArray[0]),)
 
-method event*(self: VirtualQTransposeProxyModel, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QTransposeProxyModelevent(self[], event)
-proc cQTransposeProxyModel_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
+proc fcQTransposeProxyModel_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQTransposeProxyModel](fcQTransposeProxyModel_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
-method eventFilter*(self: VirtualQTransposeProxyModel, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QTransposeProxyModeleventFilter(self[], watched, event)
-proc cQTransposeProxyModel_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+proc fcQTransposeProxyModel_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQTransposeProxyModel](fcQTransposeProxyModel_vdata(self))
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
   let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
-method timerEvent*(self: VirtualQTransposeProxyModel, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
-  QTransposeProxyModeltimerEvent(self[], event)
-proc cQTransposeProxyModel_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQTransposeProxyModel_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTransposeProxyModel](fcQTransposeProxyModel_vdata(self))
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
-method childEvent*(self: VirtualQTransposeProxyModel, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
-  QTransposeProxyModelchildEvent(self[], event)
-proc cQTransposeProxyModel_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQTransposeProxyModel_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTransposeProxyModel](fcQTransposeProxyModel_vdata(self))
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
-method customEvent*(self: VirtualQTransposeProxyModel, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QTransposeProxyModelcustomEvent(self[], event)
-proc cQTransposeProxyModel_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQTransposeProxyModel_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTransposeProxyModel](fcQTransposeProxyModel_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
-method connectNotify*(self: VirtualQTransposeProxyModel, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QTransposeProxyModelconnectNotify(self[], signal)
-proc cQTransposeProxyModel_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQTransposeProxyModel_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTransposeProxyModel](fcQTransposeProxyModel_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
-method disconnectNotify*(self: VirtualQTransposeProxyModel, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QTransposeProxyModeldisconnectNotify(self[], signal)
-proc cQTransposeProxyModel_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQTransposeProxyModel_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTransposeProxyModel](fcQTransposeProxyModel_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
+
 
 proc resetInternalData*(self: gen_qtransposeproxymodel_types.QTransposeProxyModel): void =
   fcQTransposeProxyModel_protectedbase_resetInternalData(self.h)
@@ -1745,103 +1752,103 @@ proc create*(T: type gen_qtransposeproxymodel_types.QTransposeProxyModel,
     let vtbl = cast[ref QTransposeProxyModelVTable](fcQTransposeProxyModel_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQTransposeProxyModel_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQTransposeProxyModel_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQTransposeProxyModel_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQTransposeProxyModel_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQTransposeProxyModel_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQTransposeProxyModel_vtable_callback_metacall
   if not isNil(vtbl[].setSourceModel):
-    vtbl[].vtbl.setSourceModel = cQTransposeProxyModel_vtable_callback_setSourceModel
+    vtbl[].vtbl.setSourceModel = fcQTransposeProxyModel_vtable_callback_setSourceModel
   if not isNil(vtbl[].rowCount):
-    vtbl[].vtbl.rowCount = cQTransposeProxyModel_vtable_callback_rowCount
+    vtbl[].vtbl.rowCount = fcQTransposeProxyModel_vtable_callback_rowCount
   if not isNil(vtbl[].columnCount):
-    vtbl[].vtbl.columnCount = cQTransposeProxyModel_vtable_callback_columnCount
+    vtbl[].vtbl.columnCount = fcQTransposeProxyModel_vtable_callback_columnCount
   if not isNil(vtbl[].headerData):
-    vtbl[].vtbl.headerData = cQTransposeProxyModel_vtable_callback_headerData
+    vtbl[].vtbl.headerData = fcQTransposeProxyModel_vtable_callback_headerData
   if not isNil(vtbl[].setHeaderData):
-    vtbl[].vtbl.setHeaderData = cQTransposeProxyModel_vtable_callback_setHeaderData
+    vtbl[].vtbl.setHeaderData = fcQTransposeProxyModel_vtable_callback_setHeaderData
   if not isNil(vtbl[].setItemData):
-    vtbl[].vtbl.setItemData = cQTransposeProxyModel_vtable_callback_setItemData
+    vtbl[].vtbl.setItemData = fcQTransposeProxyModel_vtable_callback_setItemData
   if not isNil(vtbl[].span):
-    vtbl[].vtbl.span = cQTransposeProxyModel_vtable_callback_span
+    vtbl[].vtbl.span = fcQTransposeProxyModel_vtable_callback_span
   if not isNil(vtbl[].itemData):
-    vtbl[].vtbl.itemData = cQTransposeProxyModel_vtable_callback_itemData
+    vtbl[].vtbl.itemData = fcQTransposeProxyModel_vtable_callback_itemData
   if not isNil(vtbl[].mapFromSource):
-    vtbl[].vtbl.mapFromSource = cQTransposeProxyModel_vtable_callback_mapFromSource
+    vtbl[].vtbl.mapFromSource = fcQTransposeProxyModel_vtable_callback_mapFromSource
   if not isNil(vtbl[].mapToSource):
-    vtbl[].vtbl.mapToSource = cQTransposeProxyModel_vtable_callback_mapToSource
+    vtbl[].vtbl.mapToSource = fcQTransposeProxyModel_vtable_callback_mapToSource
   if not isNil(vtbl[].parent):
-    vtbl[].vtbl.parent = cQTransposeProxyModel_vtable_callback_parent
+    vtbl[].vtbl.parent = fcQTransposeProxyModel_vtable_callback_parent
   if not isNil(vtbl[].index):
-    vtbl[].vtbl.index = cQTransposeProxyModel_vtable_callback_index
+    vtbl[].vtbl.index = fcQTransposeProxyModel_vtable_callback_index
   if not isNil(vtbl[].insertRows):
-    vtbl[].vtbl.insertRows = cQTransposeProxyModel_vtable_callback_insertRows
+    vtbl[].vtbl.insertRows = fcQTransposeProxyModel_vtable_callback_insertRows
   if not isNil(vtbl[].removeRows):
-    vtbl[].vtbl.removeRows = cQTransposeProxyModel_vtable_callback_removeRows
+    vtbl[].vtbl.removeRows = fcQTransposeProxyModel_vtable_callback_removeRows
   if not isNil(vtbl[].moveRows):
-    vtbl[].vtbl.moveRows = cQTransposeProxyModel_vtable_callback_moveRows
+    vtbl[].vtbl.moveRows = fcQTransposeProxyModel_vtable_callback_moveRows
   if not isNil(vtbl[].insertColumns):
-    vtbl[].vtbl.insertColumns = cQTransposeProxyModel_vtable_callback_insertColumns
+    vtbl[].vtbl.insertColumns = fcQTransposeProxyModel_vtable_callback_insertColumns
   if not isNil(vtbl[].removeColumns):
-    vtbl[].vtbl.removeColumns = cQTransposeProxyModel_vtable_callback_removeColumns
+    vtbl[].vtbl.removeColumns = fcQTransposeProxyModel_vtable_callback_removeColumns
   if not isNil(vtbl[].moveColumns):
-    vtbl[].vtbl.moveColumns = cQTransposeProxyModel_vtable_callback_moveColumns
+    vtbl[].vtbl.moveColumns = fcQTransposeProxyModel_vtable_callback_moveColumns
   if not isNil(vtbl[].sort):
-    vtbl[].vtbl.sort = cQTransposeProxyModel_vtable_callback_sort
+    vtbl[].vtbl.sort = fcQTransposeProxyModel_vtable_callback_sort
   if not isNil(vtbl[].mapSelectionToSource):
-    vtbl[].vtbl.mapSelectionToSource = cQTransposeProxyModel_vtable_callback_mapSelectionToSource
+    vtbl[].vtbl.mapSelectionToSource = fcQTransposeProxyModel_vtable_callback_mapSelectionToSource
   if not isNil(vtbl[].mapSelectionFromSource):
-    vtbl[].vtbl.mapSelectionFromSource = cQTransposeProxyModel_vtable_callback_mapSelectionFromSource
+    vtbl[].vtbl.mapSelectionFromSource = fcQTransposeProxyModel_vtable_callback_mapSelectionFromSource
   if not isNil(vtbl[].submit):
-    vtbl[].vtbl.submit = cQTransposeProxyModel_vtable_callback_submit
+    vtbl[].vtbl.submit = fcQTransposeProxyModel_vtable_callback_submit
   if not isNil(vtbl[].revert):
-    vtbl[].vtbl.revert = cQTransposeProxyModel_vtable_callback_revert
+    vtbl[].vtbl.revert = fcQTransposeProxyModel_vtable_callback_revert
   if not isNil(vtbl[].data):
-    vtbl[].vtbl.data = cQTransposeProxyModel_vtable_callback_data
+    vtbl[].vtbl.data = fcQTransposeProxyModel_vtable_callback_data
   if not isNil(vtbl[].flags):
-    vtbl[].vtbl.flags = cQTransposeProxyModel_vtable_callback_flags
+    vtbl[].vtbl.flags = fcQTransposeProxyModel_vtable_callback_flags
   if not isNil(vtbl[].setData):
-    vtbl[].vtbl.setData = cQTransposeProxyModel_vtable_callback_setData
+    vtbl[].vtbl.setData = fcQTransposeProxyModel_vtable_callback_setData
   if not isNil(vtbl[].buddy):
-    vtbl[].vtbl.buddy = cQTransposeProxyModel_vtable_callback_buddy
+    vtbl[].vtbl.buddy = fcQTransposeProxyModel_vtable_callback_buddy
   if not isNil(vtbl[].canFetchMore):
-    vtbl[].vtbl.canFetchMore = cQTransposeProxyModel_vtable_callback_canFetchMore
+    vtbl[].vtbl.canFetchMore = fcQTransposeProxyModel_vtable_callback_canFetchMore
   if not isNil(vtbl[].fetchMore):
-    vtbl[].vtbl.fetchMore = cQTransposeProxyModel_vtable_callback_fetchMore
+    vtbl[].vtbl.fetchMore = fcQTransposeProxyModel_vtable_callback_fetchMore
   if not isNil(vtbl[].hasChildren):
-    vtbl[].vtbl.hasChildren = cQTransposeProxyModel_vtable_callback_hasChildren
+    vtbl[].vtbl.hasChildren = fcQTransposeProxyModel_vtable_callback_hasChildren
   if not isNil(vtbl[].sibling):
-    vtbl[].vtbl.sibling = cQTransposeProxyModel_vtable_callback_sibling
+    vtbl[].vtbl.sibling = fcQTransposeProxyModel_vtable_callback_sibling
   if not isNil(vtbl[].mimeData):
-    vtbl[].vtbl.mimeData = cQTransposeProxyModel_vtable_callback_mimeData
+    vtbl[].vtbl.mimeData = fcQTransposeProxyModel_vtable_callback_mimeData
   if not isNil(vtbl[].canDropMimeData):
-    vtbl[].vtbl.canDropMimeData = cQTransposeProxyModel_vtable_callback_canDropMimeData
+    vtbl[].vtbl.canDropMimeData = fcQTransposeProxyModel_vtable_callback_canDropMimeData
   if not isNil(vtbl[].dropMimeData):
-    vtbl[].vtbl.dropMimeData = cQTransposeProxyModel_vtable_callback_dropMimeData
+    vtbl[].vtbl.dropMimeData = fcQTransposeProxyModel_vtable_callback_dropMimeData
   if not isNil(vtbl[].mimeTypes):
-    vtbl[].vtbl.mimeTypes = cQTransposeProxyModel_vtable_callback_mimeTypes
+    vtbl[].vtbl.mimeTypes = fcQTransposeProxyModel_vtable_callback_mimeTypes
   if not isNil(vtbl[].supportedDragActions):
-    vtbl[].vtbl.supportedDragActions = cQTransposeProxyModel_vtable_callback_supportedDragActions
+    vtbl[].vtbl.supportedDragActions = fcQTransposeProxyModel_vtable_callback_supportedDragActions
   if not isNil(vtbl[].supportedDropActions):
-    vtbl[].vtbl.supportedDropActions = cQTransposeProxyModel_vtable_callback_supportedDropActions
+    vtbl[].vtbl.supportedDropActions = fcQTransposeProxyModel_vtable_callback_supportedDropActions
   if not isNil(vtbl[].match):
-    vtbl[].vtbl.match = cQTransposeProxyModel_vtable_callback_match
+    vtbl[].vtbl.match = fcQTransposeProxyModel_vtable_callback_match
   if not isNil(vtbl[].roleNames):
-    vtbl[].vtbl.roleNames = cQTransposeProxyModel_vtable_callback_roleNames
+    vtbl[].vtbl.roleNames = fcQTransposeProxyModel_vtable_callback_roleNames
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQTransposeProxyModel_vtable_callback_event
+    vtbl[].vtbl.event = fcQTransposeProxyModel_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQTransposeProxyModel_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQTransposeProxyModel_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQTransposeProxyModel_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQTransposeProxyModel_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQTransposeProxyModel_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQTransposeProxyModel_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQTransposeProxyModel_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQTransposeProxyModel_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQTransposeProxyModel_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQTransposeProxyModel_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQTransposeProxyModel_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQTransposeProxyModel_vtable_callback_disconnectNotify
   gen_qtransposeproxymodel_types.QTransposeProxyModel(h: fcQTransposeProxyModel_new(addr(vtbl[].vtbl), addr(vtbl[])), owned: true)
 
 proc create*(T: type gen_qtransposeproxymodel_types.QTransposeProxyModel,
@@ -1853,103 +1860,103 @@ proc create*(T: type gen_qtransposeproxymodel_types.QTransposeProxyModel,
     let vtbl = cast[ref QTransposeProxyModelVTable](fcQTransposeProxyModel_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQTransposeProxyModel_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQTransposeProxyModel_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQTransposeProxyModel_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQTransposeProxyModel_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQTransposeProxyModel_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQTransposeProxyModel_vtable_callback_metacall
   if not isNil(vtbl[].setSourceModel):
-    vtbl[].vtbl.setSourceModel = cQTransposeProxyModel_vtable_callback_setSourceModel
+    vtbl[].vtbl.setSourceModel = fcQTransposeProxyModel_vtable_callback_setSourceModel
   if not isNil(vtbl[].rowCount):
-    vtbl[].vtbl.rowCount = cQTransposeProxyModel_vtable_callback_rowCount
+    vtbl[].vtbl.rowCount = fcQTransposeProxyModel_vtable_callback_rowCount
   if not isNil(vtbl[].columnCount):
-    vtbl[].vtbl.columnCount = cQTransposeProxyModel_vtable_callback_columnCount
+    vtbl[].vtbl.columnCount = fcQTransposeProxyModel_vtable_callback_columnCount
   if not isNil(vtbl[].headerData):
-    vtbl[].vtbl.headerData = cQTransposeProxyModel_vtable_callback_headerData
+    vtbl[].vtbl.headerData = fcQTransposeProxyModel_vtable_callback_headerData
   if not isNil(vtbl[].setHeaderData):
-    vtbl[].vtbl.setHeaderData = cQTransposeProxyModel_vtable_callback_setHeaderData
+    vtbl[].vtbl.setHeaderData = fcQTransposeProxyModel_vtable_callback_setHeaderData
   if not isNil(vtbl[].setItemData):
-    vtbl[].vtbl.setItemData = cQTransposeProxyModel_vtable_callback_setItemData
+    vtbl[].vtbl.setItemData = fcQTransposeProxyModel_vtable_callback_setItemData
   if not isNil(vtbl[].span):
-    vtbl[].vtbl.span = cQTransposeProxyModel_vtable_callback_span
+    vtbl[].vtbl.span = fcQTransposeProxyModel_vtable_callback_span
   if not isNil(vtbl[].itemData):
-    vtbl[].vtbl.itemData = cQTransposeProxyModel_vtable_callback_itemData
+    vtbl[].vtbl.itemData = fcQTransposeProxyModel_vtable_callback_itemData
   if not isNil(vtbl[].mapFromSource):
-    vtbl[].vtbl.mapFromSource = cQTransposeProxyModel_vtable_callback_mapFromSource
+    vtbl[].vtbl.mapFromSource = fcQTransposeProxyModel_vtable_callback_mapFromSource
   if not isNil(vtbl[].mapToSource):
-    vtbl[].vtbl.mapToSource = cQTransposeProxyModel_vtable_callback_mapToSource
+    vtbl[].vtbl.mapToSource = fcQTransposeProxyModel_vtable_callback_mapToSource
   if not isNil(vtbl[].parent):
-    vtbl[].vtbl.parent = cQTransposeProxyModel_vtable_callback_parent
+    vtbl[].vtbl.parent = fcQTransposeProxyModel_vtable_callback_parent
   if not isNil(vtbl[].index):
-    vtbl[].vtbl.index = cQTransposeProxyModel_vtable_callback_index
+    vtbl[].vtbl.index = fcQTransposeProxyModel_vtable_callback_index
   if not isNil(vtbl[].insertRows):
-    vtbl[].vtbl.insertRows = cQTransposeProxyModel_vtable_callback_insertRows
+    vtbl[].vtbl.insertRows = fcQTransposeProxyModel_vtable_callback_insertRows
   if not isNil(vtbl[].removeRows):
-    vtbl[].vtbl.removeRows = cQTransposeProxyModel_vtable_callback_removeRows
+    vtbl[].vtbl.removeRows = fcQTransposeProxyModel_vtable_callback_removeRows
   if not isNil(vtbl[].moveRows):
-    vtbl[].vtbl.moveRows = cQTransposeProxyModel_vtable_callback_moveRows
+    vtbl[].vtbl.moveRows = fcQTransposeProxyModel_vtable_callback_moveRows
   if not isNil(vtbl[].insertColumns):
-    vtbl[].vtbl.insertColumns = cQTransposeProxyModel_vtable_callback_insertColumns
+    vtbl[].vtbl.insertColumns = fcQTransposeProxyModel_vtable_callback_insertColumns
   if not isNil(vtbl[].removeColumns):
-    vtbl[].vtbl.removeColumns = cQTransposeProxyModel_vtable_callback_removeColumns
+    vtbl[].vtbl.removeColumns = fcQTransposeProxyModel_vtable_callback_removeColumns
   if not isNil(vtbl[].moveColumns):
-    vtbl[].vtbl.moveColumns = cQTransposeProxyModel_vtable_callback_moveColumns
+    vtbl[].vtbl.moveColumns = fcQTransposeProxyModel_vtable_callback_moveColumns
   if not isNil(vtbl[].sort):
-    vtbl[].vtbl.sort = cQTransposeProxyModel_vtable_callback_sort
+    vtbl[].vtbl.sort = fcQTransposeProxyModel_vtable_callback_sort
   if not isNil(vtbl[].mapSelectionToSource):
-    vtbl[].vtbl.mapSelectionToSource = cQTransposeProxyModel_vtable_callback_mapSelectionToSource
+    vtbl[].vtbl.mapSelectionToSource = fcQTransposeProxyModel_vtable_callback_mapSelectionToSource
   if not isNil(vtbl[].mapSelectionFromSource):
-    vtbl[].vtbl.mapSelectionFromSource = cQTransposeProxyModel_vtable_callback_mapSelectionFromSource
+    vtbl[].vtbl.mapSelectionFromSource = fcQTransposeProxyModel_vtable_callback_mapSelectionFromSource
   if not isNil(vtbl[].submit):
-    vtbl[].vtbl.submit = cQTransposeProxyModel_vtable_callback_submit
+    vtbl[].vtbl.submit = fcQTransposeProxyModel_vtable_callback_submit
   if not isNil(vtbl[].revert):
-    vtbl[].vtbl.revert = cQTransposeProxyModel_vtable_callback_revert
+    vtbl[].vtbl.revert = fcQTransposeProxyModel_vtable_callback_revert
   if not isNil(vtbl[].data):
-    vtbl[].vtbl.data = cQTransposeProxyModel_vtable_callback_data
+    vtbl[].vtbl.data = fcQTransposeProxyModel_vtable_callback_data
   if not isNil(vtbl[].flags):
-    vtbl[].vtbl.flags = cQTransposeProxyModel_vtable_callback_flags
+    vtbl[].vtbl.flags = fcQTransposeProxyModel_vtable_callback_flags
   if not isNil(vtbl[].setData):
-    vtbl[].vtbl.setData = cQTransposeProxyModel_vtable_callback_setData
+    vtbl[].vtbl.setData = fcQTransposeProxyModel_vtable_callback_setData
   if not isNil(vtbl[].buddy):
-    vtbl[].vtbl.buddy = cQTransposeProxyModel_vtable_callback_buddy
+    vtbl[].vtbl.buddy = fcQTransposeProxyModel_vtable_callback_buddy
   if not isNil(vtbl[].canFetchMore):
-    vtbl[].vtbl.canFetchMore = cQTransposeProxyModel_vtable_callback_canFetchMore
+    vtbl[].vtbl.canFetchMore = fcQTransposeProxyModel_vtable_callback_canFetchMore
   if not isNil(vtbl[].fetchMore):
-    vtbl[].vtbl.fetchMore = cQTransposeProxyModel_vtable_callback_fetchMore
+    vtbl[].vtbl.fetchMore = fcQTransposeProxyModel_vtable_callback_fetchMore
   if not isNil(vtbl[].hasChildren):
-    vtbl[].vtbl.hasChildren = cQTransposeProxyModel_vtable_callback_hasChildren
+    vtbl[].vtbl.hasChildren = fcQTransposeProxyModel_vtable_callback_hasChildren
   if not isNil(vtbl[].sibling):
-    vtbl[].vtbl.sibling = cQTransposeProxyModel_vtable_callback_sibling
+    vtbl[].vtbl.sibling = fcQTransposeProxyModel_vtable_callback_sibling
   if not isNil(vtbl[].mimeData):
-    vtbl[].vtbl.mimeData = cQTransposeProxyModel_vtable_callback_mimeData
+    vtbl[].vtbl.mimeData = fcQTransposeProxyModel_vtable_callback_mimeData
   if not isNil(vtbl[].canDropMimeData):
-    vtbl[].vtbl.canDropMimeData = cQTransposeProxyModel_vtable_callback_canDropMimeData
+    vtbl[].vtbl.canDropMimeData = fcQTransposeProxyModel_vtable_callback_canDropMimeData
   if not isNil(vtbl[].dropMimeData):
-    vtbl[].vtbl.dropMimeData = cQTransposeProxyModel_vtable_callback_dropMimeData
+    vtbl[].vtbl.dropMimeData = fcQTransposeProxyModel_vtable_callback_dropMimeData
   if not isNil(vtbl[].mimeTypes):
-    vtbl[].vtbl.mimeTypes = cQTransposeProxyModel_vtable_callback_mimeTypes
+    vtbl[].vtbl.mimeTypes = fcQTransposeProxyModel_vtable_callback_mimeTypes
   if not isNil(vtbl[].supportedDragActions):
-    vtbl[].vtbl.supportedDragActions = cQTransposeProxyModel_vtable_callback_supportedDragActions
+    vtbl[].vtbl.supportedDragActions = fcQTransposeProxyModel_vtable_callback_supportedDragActions
   if not isNil(vtbl[].supportedDropActions):
-    vtbl[].vtbl.supportedDropActions = cQTransposeProxyModel_vtable_callback_supportedDropActions
+    vtbl[].vtbl.supportedDropActions = fcQTransposeProxyModel_vtable_callback_supportedDropActions
   if not isNil(vtbl[].match):
-    vtbl[].vtbl.match = cQTransposeProxyModel_vtable_callback_match
+    vtbl[].vtbl.match = fcQTransposeProxyModel_vtable_callback_match
   if not isNil(vtbl[].roleNames):
-    vtbl[].vtbl.roleNames = cQTransposeProxyModel_vtable_callback_roleNames
+    vtbl[].vtbl.roleNames = fcQTransposeProxyModel_vtable_callback_roleNames
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQTransposeProxyModel_vtable_callback_event
+    vtbl[].vtbl.event = fcQTransposeProxyModel_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQTransposeProxyModel_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQTransposeProxyModel_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQTransposeProxyModel_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQTransposeProxyModel_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQTransposeProxyModel_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQTransposeProxyModel_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQTransposeProxyModel_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQTransposeProxyModel_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQTransposeProxyModel_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQTransposeProxyModel_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQTransposeProxyModel_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQTransposeProxyModel_vtable_callback_disconnectNotify
   gen_qtransposeproxymodel_types.QTransposeProxyModel(h: fcQTransposeProxyModel_new2(addr(vtbl[].vtbl), addr(vtbl[]), parent.h), owned: true)
 
 const cQTransposeProxyModel_mvtbl = cQTransposeProxyModelVTable(
@@ -1957,55 +1964,56 @@ const cQTransposeProxyModel_mvtbl = cQTransposeProxyModelVTable(
     let inst = cast[ptr typeof(VirtualQTransposeProxyModel()[])](self.fcQTransposeProxyModel_vtbl())
     inst[].h = nil
     inst[].owned = false,
-  metaObject: cQTransposeProxyModel_method_callback_metaObject,
-  metacast: cQTransposeProxyModel_method_callback_metacast,
-  metacall: cQTransposeProxyModel_method_callback_metacall,
-  setSourceModel: cQTransposeProxyModel_method_callback_setSourceModel,
-  rowCount: cQTransposeProxyModel_method_callback_rowCount,
-  columnCount: cQTransposeProxyModel_method_callback_columnCount,
-  headerData: cQTransposeProxyModel_method_callback_headerData,
-  setHeaderData: cQTransposeProxyModel_method_callback_setHeaderData,
-  setItemData: cQTransposeProxyModel_method_callback_setItemData,
-  span: cQTransposeProxyModel_method_callback_span,
-  itemData: cQTransposeProxyModel_method_callback_itemData,
-  mapFromSource: cQTransposeProxyModel_method_callback_mapFromSource,
-  mapToSource: cQTransposeProxyModel_method_callback_mapToSource,
-  parent: cQTransposeProxyModel_method_callback_parent,
-  index: cQTransposeProxyModel_method_callback_index,
-  insertRows: cQTransposeProxyModel_method_callback_insertRows,
-  removeRows: cQTransposeProxyModel_method_callback_removeRows,
-  moveRows: cQTransposeProxyModel_method_callback_moveRows,
-  insertColumns: cQTransposeProxyModel_method_callback_insertColumns,
-  removeColumns: cQTransposeProxyModel_method_callback_removeColumns,
-  moveColumns: cQTransposeProxyModel_method_callback_moveColumns,
-  sort: cQTransposeProxyModel_method_callback_sort,
-  mapSelectionToSource: cQTransposeProxyModel_method_callback_mapSelectionToSource,
-  mapSelectionFromSource: cQTransposeProxyModel_method_callback_mapSelectionFromSource,
-  submit: cQTransposeProxyModel_method_callback_submit,
-  revert: cQTransposeProxyModel_method_callback_revert,
-  data: cQTransposeProxyModel_method_callback_data,
-  flags: cQTransposeProxyModel_method_callback_flags,
-  setData: cQTransposeProxyModel_method_callback_setData,
-  buddy: cQTransposeProxyModel_method_callback_buddy,
-  canFetchMore: cQTransposeProxyModel_method_callback_canFetchMore,
-  fetchMore: cQTransposeProxyModel_method_callback_fetchMore,
-  hasChildren: cQTransposeProxyModel_method_callback_hasChildren,
-  sibling: cQTransposeProxyModel_method_callback_sibling,
-  mimeData: cQTransposeProxyModel_method_callback_mimeData,
-  canDropMimeData: cQTransposeProxyModel_method_callback_canDropMimeData,
-  dropMimeData: cQTransposeProxyModel_method_callback_dropMimeData,
-  mimeTypes: cQTransposeProxyModel_method_callback_mimeTypes,
-  supportedDragActions: cQTransposeProxyModel_method_callback_supportedDragActions,
-  supportedDropActions: cQTransposeProxyModel_method_callback_supportedDropActions,
-  match: cQTransposeProxyModel_method_callback_match,
-  roleNames: cQTransposeProxyModel_method_callback_roleNames,
-  event: cQTransposeProxyModel_method_callback_event,
-  eventFilter: cQTransposeProxyModel_method_callback_eventFilter,
-  timerEvent: cQTransposeProxyModel_method_callback_timerEvent,
-  childEvent: cQTransposeProxyModel_method_callback_childEvent,
-  customEvent: cQTransposeProxyModel_method_callback_customEvent,
-  connectNotify: cQTransposeProxyModel_method_callback_connectNotify,
-  disconnectNotify: cQTransposeProxyModel_method_callback_disconnectNotify,
+
+  metaObject: fcQTransposeProxyModel_method_callback_metaObject,
+  metacast: fcQTransposeProxyModel_method_callback_metacast,
+  metacall: fcQTransposeProxyModel_method_callback_metacall,
+  setSourceModel: fcQTransposeProxyModel_method_callback_setSourceModel,
+  rowCount: fcQTransposeProxyModel_method_callback_rowCount,
+  columnCount: fcQTransposeProxyModel_method_callback_columnCount,
+  headerData: fcQTransposeProxyModel_method_callback_headerData,
+  setHeaderData: fcQTransposeProxyModel_method_callback_setHeaderData,
+  setItemData: fcQTransposeProxyModel_method_callback_setItemData,
+  span: fcQTransposeProxyModel_method_callback_span,
+  itemData: fcQTransposeProxyModel_method_callback_itemData,
+  mapFromSource: fcQTransposeProxyModel_method_callback_mapFromSource,
+  mapToSource: fcQTransposeProxyModel_method_callback_mapToSource,
+  parent: fcQTransposeProxyModel_method_callback_parent,
+  index: fcQTransposeProxyModel_method_callback_index,
+  insertRows: fcQTransposeProxyModel_method_callback_insertRows,
+  removeRows: fcQTransposeProxyModel_method_callback_removeRows,
+  moveRows: fcQTransposeProxyModel_method_callback_moveRows,
+  insertColumns: fcQTransposeProxyModel_method_callback_insertColumns,
+  removeColumns: fcQTransposeProxyModel_method_callback_removeColumns,
+  moveColumns: fcQTransposeProxyModel_method_callback_moveColumns,
+  sort: fcQTransposeProxyModel_method_callback_sort,
+  mapSelectionToSource: fcQTransposeProxyModel_method_callback_mapSelectionToSource,
+  mapSelectionFromSource: fcQTransposeProxyModel_method_callback_mapSelectionFromSource,
+  submit: fcQTransposeProxyModel_method_callback_submit,
+  revert: fcQTransposeProxyModel_method_callback_revert,
+  data: fcQTransposeProxyModel_method_callback_data,
+  flags: fcQTransposeProxyModel_method_callback_flags,
+  setData: fcQTransposeProxyModel_method_callback_setData,
+  buddy: fcQTransposeProxyModel_method_callback_buddy,
+  canFetchMore: fcQTransposeProxyModel_method_callback_canFetchMore,
+  fetchMore: fcQTransposeProxyModel_method_callback_fetchMore,
+  hasChildren: fcQTransposeProxyModel_method_callback_hasChildren,
+  sibling: fcQTransposeProxyModel_method_callback_sibling,
+  mimeData: fcQTransposeProxyModel_method_callback_mimeData,
+  canDropMimeData: fcQTransposeProxyModel_method_callback_canDropMimeData,
+  dropMimeData: fcQTransposeProxyModel_method_callback_dropMimeData,
+  mimeTypes: fcQTransposeProxyModel_method_callback_mimeTypes,
+  supportedDragActions: fcQTransposeProxyModel_method_callback_supportedDragActions,
+  supportedDropActions: fcQTransposeProxyModel_method_callback_supportedDropActions,
+  match: fcQTransposeProxyModel_method_callback_match,
+  roleNames: fcQTransposeProxyModel_method_callback_roleNames,
+  event: fcQTransposeProxyModel_method_callback_event,
+  eventFilter: fcQTransposeProxyModel_method_callback_eventFilter,
+  timerEvent: fcQTransposeProxyModel_method_callback_timerEvent,
+  childEvent: fcQTransposeProxyModel_method_callback_childEvent,
+  customEvent: fcQTransposeProxyModel_method_callback_customEvent,
+  connectNotify: fcQTransposeProxyModel_method_callback_connectNotify,
+  disconnectNotify: fcQTransposeProxyModel_method_callback_disconnectNotify,
 )
 proc create*(T: type gen_qtransposeproxymodel_types.QTransposeProxyModel,
     inst: VirtualQTransposeProxyModel) =

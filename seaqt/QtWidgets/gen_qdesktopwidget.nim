@@ -106,6 +106,7 @@ proc fcQDesktopWidget_screenGeometry1(self: pointer, screen: cint): pointer {.im
 proc fcQDesktopWidget_availableGeometry1(self: pointer, screen: cint): pointer {.importc: "QDesktopWidget_availableGeometry1".}
 proc fcQDesktopWidget_vtbl(self: pointer): pointer {.importc: "QDesktopWidget_vtbl".}
 proc fcQDesktopWidget_vdata(self: pointer): pointer {.importc: "QDesktopWidget_vdata".}
+
 type cQDesktopWidgetVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -284,79 +285,79 @@ proc resized*(self: gen_qdesktopwidget_types.QDesktopWidget, param1: cint): void
   fcQDesktopWidget_resized(self.h, param1)
 
 type QDesktopWidgetresizedSlot* = proc(param1: cint)
-proc cQDesktopWidget_slot_callback_resized(slot: int, param1: cint) {.cdecl.} =
+proc fcQDesktopWidget_slot_callback_resized(slot: int, param1: cint) {.cdecl.} =
   let nimfunc = cast[ptr QDesktopWidgetresizedSlot](cast[pointer](slot))
   let slotval1 = param1
 
   nimfunc[](slotval1)
 
-proc cQDesktopWidget_slot_callback_resized_release(slot: int) {.cdecl.} =
+proc fcQDesktopWidget_slot_callback_resized_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QDesktopWidgetresizedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onresized*(self: gen_qdesktopwidget_types.QDesktopWidget, slot: QDesktopWidgetresizedSlot) =
+proc onResized*(self: gen_qdesktopwidget_types.QDesktopWidget, slot: QDesktopWidgetresizedSlot) =
   var tmp = new QDesktopWidgetresizedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQDesktopWidget_connect_resized(self.h, cast[int](addr tmp[]), cQDesktopWidget_slot_callback_resized, cQDesktopWidget_slot_callback_resized_release)
+  fcQDesktopWidget_connect_resized(self.h, cast[int](addr tmp[]), fcQDesktopWidget_slot_callback_resized, fcQDesktopWidget_slot_callback_resized_release)
 
 proc workAreaResized*(self: gen_qdesktopwidget_types.QDesktopWidget, param1: cint): void =
   fcQDesktopWidget_workAreaResized(self.h, param1)
 
 type QDesktopWidgetworkAreaResizedSlot* = proc(param1: cint)
-proc cQDesktopWidget_slot_callback_workAreaResized(slot: int, param1: cint) {.cdecl.} =
+proc fcQDesktopWidget_slot_callback_workAreaResized(slot: int, param1: cint) {.cdecl.} =
   let nimfunc = cast[ptr QDesktopWidgetworkAreaResizedSlot](cast[pointer](slot))
   let slotval1 = param1
 
   nimfunc[](slotval1)
 
-proc cQDesktopWidget_slot_callback_workAreaResized_release(slot: int) {.cdecl.} =
+proc fcQDesktopWidget_slot_callback_workAreaResized_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QDesktopWidgetworkAreaResizedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onworkAreaResized*(self: gen_qdesktopwidget_types.QDesktopWidget, slot: QDesktopWidgetworkAreaResizedSlot) =
+proc onWorkAreaResized*(self: gen_qdesktopwidget_types.QDesktopWidget, slot: QDesktopWidgetworkAreaResizedSlot) =
   var tmp = new QDesktopWidgetworkAreaResizedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQDesktopWidget_connect_workAreaResized(self.h, cast[int](addr tmp[]), cQDesktopWidget_slot_callback_workAreaResized, cQDesktopWidget_slot_callback_workAreaResized_release)
+  fcQDesktopWidget_connect_workAreaResized(self.h, cast[int](addr tmp[]), fcQDesktopWidget_slot_callback_workAreaResized, fcQDesktopWidget_slot_callback_workAreaResized_release)
 
 proc screenCountChanged*(self: gen_qdesktopwidget_types.QDesktopWidget, param1: cint): void =
   fcQDesktopWidget_screenCountChanged(self.h, param1)
 
 type QDesktopWidgetscreenCountChangedSlot* = proc(param1: cint)
-proc cQDesktopWidget_slot_callback_screenCountChanged(slot: int, param1: cint) {.cdecl.} =
+proc fcQDesktopWidget_slot_callback_screenCountChanged(slot: int, param1: cint) {.cdecl.} =
   let nimfunc = cast[ptr QDesktopWidgetscreenCountChangedSlot](cast[pointer](slot))
   let slotval1 = param1
 
   nimfunc[](slotval1)
 
-proc cQDesktopWidget_slot_callback_screenCountChanged_release(slot: int) {.cdecl.} =
+proc fcQDesktopWidget_slot_callback_screenCountChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QDesktopWidgetscreenCountChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onscreenCountChanged*(self: gen_qdesktopwidget_types.QDesktopWidget, slot: QDesktopWidgetscreenCountChangedSlot) =
+proc onScreenCountChanged*(self: gen_qdesktopwidget_types.QDesktopWidget, slot: QDesktopWidgetscreenCountChangedSlot) =
   var tmp = new QDesktopWidgetscreenCountChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQDesktopWidget_connect_screenCountChanged(self.h, cast[int](addr tmp[]), cQDesktopWidget_slot_callback_screenCountChanged, cQDesktopWidget_slot_callback_screenCountChanged_release)
+  fcQDesktopWidget_connect_screenCountChanged(self.h, cast[int](addr tmp[]), fcQDesktopWidget_slot_callback_screenCountChanged, fcQDesktopWidget_slot_callback_screenCountChanged_release)
 
 proc primaryScreenChanged*(self: gen_qdesktopwidget_types.QDesktopWidget): void =
   fcQDesktopWidget_primaryScreenChanged(self.h)
 
 type QDesktopWidgetprimaryScreenChangedSlot* = proc()
-proc cQDesktopWidget_slot_callback_primaryScreenChanged(slot: int) {.cdecl.} =
+proc fcQDesktopWidget_slot_callback_primaryScreenChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QDesktopWidgetprimaryScreenChangedSlot](cast[pointer](slot))
   nimfunc[]()
 
-proc cQDesktopWidget_slot_callback_primaryScreenChanged_release(slot: int) {.cdecl.} =
+proc fcQDesktopWidget_slot_callback_primaryScreenChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QDesktopWidgetprimaryScreenChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onprimaryScreenChanged*(self: gen_qdesktopwidget_types.QDesktopWidget, slot: QDesktopWidgetprimaryScreenChangedSlot) =
+proc onPrimaryScreenChanged*(self: gen_qdesktopwidget_types.QDesktopWidget, slot: QDesktopWidgetprimaryScreenChangedSlot) =
   var tmp = new QDesktopWidgetprimaryScreenChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQDesktopWidget_connect_primaryScreenChanged(self.h, cast[int](addr tmp[]), cQDesktopWidget_slot_callback_primaryScreenChanged, cQDesktopWidget_slot_callback_primaryScreenChanged_release)
+  fcQDesktopWidget_connect_primaryScreenChanged(self.h, cast[int](addr tmp[]), fcQDesktopWidget_slot_callback_primaryScreenChanged, fcQDesktopWidget_slot_callback_primaryScreenChanged_release)
 
 proc tr*(_: type gen_qdesktopwidget_types.QDesktopWidget, s: cstring, c: cstring): string =
   let v_ms = fcQDesktopWidget_tr2(s, c)
@@ -444,6 +445,7 @@ type QDesktopWidgetchildEventProc* = proc(self: QDesktopWidget, event: gen_qcore
 type QDesktopWidgetcustomEventProc* = proc(self: QDesktopWidget, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QDesktopWidgetconnectNotifyProc* = proc(self: QDesktopWidget, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QDesktopWidgetdisconnectNotifyProc* = proc(self: QDesktopWidget, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+
 type QDesktopWidgetVTable* {.inheritable, pure.} = object
   vtbl: cQDesktopWidgetVTable
   metaObject*: QDesktopWidgetmetaObjectProc
@@ -496,10 +498,159 @@ type QDesktopWidgetVTable* {.inheritable, pure.} = object
   customEvent*: QDesktopWidgetcustomEventProc
   connectNotify*: QDesktopWidgetconnectNotifyProc
   disconnectNotify*: QDesktopWidgetdisconnectNotifyProc
+
 proc QDesktopWidgetmetaObject*(self: gen_qdesktopwidget_types.QDesktopWidget): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQDesktopWidget_virtualbase_metaObject(self.h), owned: false)
 
-proc cQDesktopWidget_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
+proc QDesktopWidgetmetacast*(self: gen_qdesktopwidget_types.QDesktopWidget, param1: cstring): pointer =
+  fcQDesktopWidget_virtualbase_metacast(self.h, param1)
+
+proc QDesktopWidgetmetacall*(self: gen_qdesktopwidget_types.QDesktopWidget, param1: cint, param2: cint, param3: pointer): cint =
+  fcQDesktopWidget_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+proc QDesktopWidgetresizeEvent*(self: gen_qdesktopwidget_types.QDesktopWidget, e: gen_qevent_types.QResizeEvent): void =
+  fcQDesktopWidget_virtualbase_resizeEvent(self.h, e.h)
+
+proc QDesktopWidgetdevType*(self: gen_qdesktopwidget_types.QDesktopWidget): cint =
+  fcQDesktopWidget_virtualbase_devType(self.h)
+
+proc QDesktopWidgetsetVisible*(self: gen_qdesktopwidget_types.QDesktopWidget, visible: bool): void =
+  fcQDesktopWidget_virtualbase_setVisible(self.h, visible)
+
+proc QDesktopWidgetsizeHint*(self: gen_qdesktopwidget_types.QDesktopWidget): gen_qsize_types.QSize =
+  gen_qsize_types.QSize(h: fcQDesktopWidget_virtualbase_sizeHint(self.h), owned: true)
+
+proc QDesktopWidgetminimumSizeHint*(self: gen_qdesktopwidget_types.QDesktopWidget): gen_qsize_types.QSize =
+  gen_qsize_types.QSize(h: fcQDesktopWidget_virtualbase_minimumSizeHint(self.h), owned: true)
+
+proc QDesktopWidgetheightForWidth*(self: gen_qdesktopwidget_types.QDesktopWidget, param1: cint): cint =
+  fcQDesktopWidget_virtualbase_heightForWidth(self.h, param1)
+
+proc QDesktopWidgethasHeightForWidth*(self: gen_qdesktopwidget_types.QDesktopWidget): bool =
+  fcQDesktopWidget_virtualbase_hasHeightForWidth(self.h)
+
+proc QDesktopWidgetpaintEngine*(self: gen_qdesktopwidget_types.QDesktopWidget): gen_qpaintengine_types.QPaintEngine =
+  gen_qpaintengine_types.QPaintEngine(h: fcQDesktopWidget_virtualbase_paintEngine(self.h), owned: false)
+
+proc QDesktopWidgetevent*(self: gen_qdesktopwidget_types.QDesktopWidget, event: gen_qcoreevent_types.QEvent): bool =
+  fcQDesktopWidget_virtualbase_event(self.h, event.h)
+
+proc QDesktopWidgetmousePressEvent*(self: gen_qdesktopwidget_types.QDesktopWidget, event: gen_qevent_types.QMouseEvent): void =
+  fcQDesktopWidget_virtualbase_mousePressEvent(self.h, event.h)
+
+proc QDesktopWidgetmouseReleaseEvent*(self: gen_qdesktopwidget_types.QDesktopWidget, event: gen_qevent_types.QMouseEvent): void =
+  fcQDesktopWidget_virtualbase_mouseReleaseEvent(self.h, event.h)
+
+proc QDesktopWidgetmouseDoubleClickEvent*(self: gen_qdesktopwidget_types.QDesktopWidget, event: gen_qevent_types.QMouseEvent): void =
+  fcQDesktopWidget_virtualbase_mouseDoubleClickEvent(self.h, event.h)
+
+proc QDesktopWidgetmouseMoveEvent*(self: gen_qdesktopwidget_types.QDesktopWidget, event: gen_qevent_types.QMouseEvent): void =
+  fcQDesktopWidget_virtualbase_mouseMoveEvent(self.h, event.h)
+
+proc QDesktopWidgetwheelEvent*(self: gen_qdesktopwidget_types.QDesktopWidget, event: gen_qevent_types.QWheelEvent): void =
+  fcQDesktopWidget_virtualbase_wheelEvent(self.h, event.h)
+
+proc QDesktopWidgetkeyPressEvent*(self: gen_qdesktopwidget_types.QDesktopWidget, event: gen_qevent_types.QKeyEvent): void =
+  fcQDesktopWidget_virtualbase_keyPressEvent(self.h, event.h)
+
+proc QDesktopWidgetkeyReleaseEvent*(self: gen_qdesktopwidget_types.QDesktopWidget, event: gen_qevent_types.QKeyEvent): void =
+  fcQDesktopWidget_virtualbase_keyReleaseEvent(self.h, event.h)
+
+proc QDesktopWidgetfocusInEvent*(self: gen_qdesktopwidget_types.QDesktopWidget, event: gen_qevent_types.QFocusEvent): void =
+  fcQDesktopWidget_virtualbase_focusInEvent(self.h, event.h)
+
+proc QDesktopWidgetfocusOutEvent*(self: gen_qdesktopwidget_types.QDesktopWidget, event: gen_qevent_types.QFocusEvent): void =
+  fcQDesktopWidget_virtualbase_focusOutEvent(self.h, event.h)
+
+proc QDesktopWidgetenterEvent*(self: gen_qdesktopwidget_types.QDesktopWidget, event: gen_qcoreevent_types.QEvent): void =
+  fcQDesktopWidget_virtualbase_enterEvent(self.h, event.h)
+
+proc QDesktopWidgetleaveEvent*(self: gen_qdesktopwidget_types.QDesktopWidget, event: gen_qcoreevent_types.QEvent): void =
+  fcQDesktopWidget_virtualbase_leaveEvent(self.h, event.h)
+
+proc QDesktopWidgetpaintEvent*(self: gen_qdesktopwidget_types.QDesktopWidget, event: gen_qevent_types.QPaintEvent): void =
+  fcQDesktopWidget_virtualbase_paintEvent(self.h, event.h)
+
+proc QDesktopWidgetmoveEvent*(self: gen_qdesktopwidget_types.QDesktopWidget, event: gen_qevent_types.QMoveEvent): void =
+  fcQDesktopWidget_virtualbase_moveEvent(self.h, event.h)
+
+proc QDesktopWidgetcloseEvent*(self: gen_qdesktopwidget_types.QDesktopWidget, event: gen_qevent_types.QCloseEvent): void =
+  fcQDesktopWidget_virtualbase_closeEvent(self.h, event.h)
+
+proc QDesktopWidgetcontextMenuEvent*(self: gen_qdesktopwidget_types.QDesktopWidget, event: gen_qevent_types.QContextMenuEvent): void =
+  fcQDesktopWidget_virtualbase_contextMenuEvent(self.h, event.h)
+
+proc QDesktopWidgettabletEvent*(self: gen_qdesktopwidget_types.QDesktopWidget, event: gen_qevent_types.QTabletEvent): void =
+  fcQDesktopWidget_virtualbase_tabletEvent(self.h, event.h)
+
+proc QDesktopWidgetactionEvent*(self: gen_qdesktopwidget_types.QDesktopWidget, event: gen_qevent_types.QActionEvent): void =
+  fcQDesktopWidget_virtualbase_actionEvent(self.h, event.h)
+
+proc QDesktopWidgetdragEnterEvent*(self: gen_qdesktopwidget_types.QDesktopWidget, event: gen_qevent_types.QDragEnterEvent): void =
+  fcQDesktopWidget_virtualbase_dragEnterEvent(self.h, event.h)
+
+proc QDesktopWidgetdragMoveEvent*(self: gen_qdesktopwidget_types.QDesktopWidget, event: gen_qevent_types.QDragMoveEvent): void =
+  fcQDesktopWidget_virtualbase_dragMoveEvent(self.h, event.h)
+
+proc QDesktopWidgetdragLeaveEvent*(self: gen_qdesktopwidget_types.QDesktopWidget, event: gen_qevent_types.QDragLeaveEvent): void =
+  fcQDesktopWidget_virtualbase_dragLeaveEvent(self.h, event.h)
+
+proc QDesktopWidgetdropEvent*(self: gen_qdesktopwidget_types.QDesktopWidget, event: gen_qevent_types.QDropEvent): void =
+  fcQDesktopWidget_virtualbase_dropEvent(self.h, event.h)
+
+proc QDesktopWidgetshowEvent*(self: gen_qdesktopwidget_types.QDesktopWidget, event: gen_qevent_types.QShowEvent): void =
+  fcQDesktopWidget_virtualbase_showEvent(self.h, event.h)
+
+proc QDesktopWidgethideEvent*(self: gen_qdesktopwidget_types.QDesktopWidget, event: gen_qevent_types.QHideEvent): void =
+  fcQDesktopWidget_virtualbase_hideEvent(self.h, event.h)
+
+proc QDesktopWidgetnativeEvent*(self: gen_qdesktopwidget_types.QDesktopWidget, eventType: openArray[byte], message: pointer, resultVal: ptr clong): bool =
+  fcQDesktopWidget_virtualbase_nativeEvent(self.h, struct_miqt_string(data: cast[cstring](if len(eventType) == 0: nil else: unsafeAddr eventType[0]), len: csize_t(len(eventType))), message, resultVal)
+
+proc QDesktopWidgetchangeEvent*(self: gen_qdesktopwidget_types.QDesktopWidget, param1: gen_qcoreevent_types.QEvent): void =
+  fcQDesktopWidget_virtualbase_changeEvent(self.h, param1.h)
+
+proc QDesktopWidgetmetric*(self: gen_qdesktopwidget_types.QDesktopWidget, param1: cint): cint =
+  fcQDesktopWidget_virtualbase_metric(self.h, cint(param1))
+
+proc QDesktopWidgetinitPainter*(self: gen_qdesktopwidget_types.QDesktopWidget, painter: gen_qpainter_types.QPainter): void =
+  fcQDesktopWidget_virtualbase_initPainter(self.h, painter.h)
+
+proc QDesktopWidgetredirected*(self: gen_qdesktopwidget_types.QDesktopWidget, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice =
+  gen_qpaintdevice_types.QPaintDevice(h: fcQDesktopWidget_virtualbase_redirected(self.h, offset.h), owned: false)
+
+proc QDesktopWidgetsharedPainter*(self: gen_qdesktopwidget_types.QDesktopWidget): gen_qpainter_types.QPainter =
+  gen_qpainter_types.QPainter(h: fcQDesktopWidget_virtualbase_sharedPainter(self.h), owned: false)
+
+proc QDesktopWidgetinputMethodEvent*(self: gen_qdesktopwidget_types.QDesktopWidget, param1: gen_qevent_types.QInputMethodEvent): void =
+  fcQDesktopWidget_virtualbase_inputMethodEvent(self.h, param1.h)
+
+proc QDesktopWidgetinputMethodQuery*(self: gen_qdesktopwidget_types.QDesktopWidget, param1: cint): gen_qvariant_types.QVariant =
+  gen_qvariant_types.QVariant(h: fcQDesktopWidget_virtualbase_inputMethodQuery(self.h, cint(param1)), owned: true)
+
+proc QDesktopWidgetfocusNextPrevChild*(self: gen_qdesktopwidget_types.QDesktopWidget, next: bool): bool =
+  fcQDesktopWidget_virtualbase_focusNextPrevChild(self.h, next)
+
+proc QDesktopWidgeteventFilter*(self: gen_qdesktopwidget_types.QDesktopWidget, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
+  fcQDesktopWidget_virtualbase_eventFilter(self.h, watched.h, event.h)
+
+proc QDesktopWidgettimerEvent*(self: gen_qdesktopwidget_types.QDesktopWidget, event: gen_qcoreevent_types.QTimerEvent): void =
+  fcQDesktopWidget_virtualbase_timerEvent(self.h, event.h)
+
+proc QDesktopWidgetchildEvent*(self: gen_qdesktopwidget_types.QDesktopWidget, event: gen_qcoreevent_types.QChildEvent): void =
+  fcQDesktopWidget_virtualbase_childEvent(self.h, event.h)
+
+proc QDesktopWidgetcustomEvent*(self: gen_qdesktopwidget_types.QDesktopWidget, event: gen_qcoreevent_types.QEvent): void =
+  fcQDesktopWidget_virtualbase_customEvent(self.h, event.h)
+
+proc QDesktopWidgetconnectNotify*(self: gen_qdesktopwidget_types.QDesktopWidget, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQDesktopWidget_virtualbase_connectNotify(self.h, signal.h)
+
+proc QDesktopWidgetdisconnectNotify*(self: gen_qdesktopwidget_types.QDesktopWidget, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQDesktopWidget_virtualbase_disconnectNotify(self.h, signal.h)
+
+
+proc fcQDesktopWidget_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QDesktopWidgetVTable](fcQDesktopWidget_vdata(self))
   let self = QDesktopWidget(h: self)
   var virtualReturn = vtbl[].metaObject(self)
@@ -508,20 +659,14 @@ proc cQDesktopWidget_vtable_callback_metaObject(self: pointer): pointer {.cdecl.
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QDesktopWidgetmetacast*(self: gen_qdesktopwidget_types.QDesktopWidget, param1: cstring): pointer =
-  fcQDesktopWidget_virtualbase_metacast(self.h, param1)
-
-proc cQDesktopWidget_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+proc fcQDesktopWidget_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QDesktopWidgetVTable](fcQDesktopWidget_vdata(self))
   let self = QDesktopWidget(h: self)
   let slotval1 = (param1)
   var virtualReturn = vtbl[].metacast(self, slotval1)
   virtualReturn
 
-proc QDesktopWidgetmetacall*(self: gen_qdesktopwidget_types.QDesktopWidget, param1: cint, param2: cint, param3: pointer): cint =
-  fcQDesktopWidget_virtualbase_metacall(self.h, cint(param1), param2, param3)
-
-proc cQDesktopWidget_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+proc fcQDesktopWidget_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QDesktopWidgetVTable](fcQDesktopWidget_vdata(self))
   let self = QDesktopWidget(h: self)
   let slotval1 = cint(param1)
@@ -530,37 +675,25 @@ proc cQDesktopWidget_vtable_callback_metacall(self: pointer, param1: cint, param
   var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QDesktopWidgetresizeEvent*(self: gen_qdesktopwidget_types.QDesktopWidget, e: gen_qevent_types.QResizeEvent): void =
-  fcQDesktopWidget_virtualbase_resizeEvent(self.h, e.h)
-
-proc cQDesktopWidget_vtable_callback_resizeEvent(self: pointer, e: pointer): void {.cdecl.} =
+proc fcQDesktopWidget_vtable_callback_resizeEvent(self: pointer, e: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDesktopWidgetVTable](fcQDesktopWidget_vdata(self))
   let self = QDesktopWidget(h: self)
   let slotval1 = gen_qevent_types.QResizeEvent(h: e, owned: false)
   vtbl[].resizeEvent(self, slotval1)
 
-proc QDesktopWidgetdevType*(self: gen_qdesktopwidget_types.QDesktopWidget): cint =
-  fcQDesktopWidget_virtualbase_devType(self.h)
-
-proc cQDesktopWidget_vtable_callback_devType(self: pointer): cint {.cdecl.} =
+proc fcQDesktopWidget_vtable_callback_devType(self: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QDesktopWidgetVTable](fcQDesktopWidget_vdata(self))
   let self = QDesktopWidget(h: self)
   var virtualReturn = vtbl[].devType(self)
   virtualReturn
 
-proc QDesktopWidgetsetVisible*(self: gen_qdesktopwidget_types.QDesktopWidget, visible: bool): void =
-  fcQDesktopWidget_virtualbase_setVisible(self.h, visible)
-
-proc cQDesktopWidget_vtable_callback_setVisible(self: pointer, visible: bool): void {.cdecl.} =
+proc fcQDesktopWidget_vtable_callback_setVisible(self: pointer, visible: bool): void {.cdecl.} =
   let vtbl = cast[ptr QDesktopWidgetVTable](fcQDesktopWidget_vdata(self))
   let self = QDesktopWidget(h: self)
   let slotval1 = visible
   vtbl[].setVisible(self, slotval1)
 
-proc QDesktopWidgetsizeHint*(self: gen_qdesktopwidget_types.QDesktopWidget): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQDesktopWidget_virtualbase_sizeHint(self.h), owned: true)
-
-proc cQDesktopWidget_vtable_callback_sizeHint(self: pointer): pointer {.cdecl.} =
+proc fcQDesktopWidget_vtable_callback_sizeHint(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QDesktopWidgetVTable](fcQDesktopWidget_vdata(self))
   let self = QDesktopWidget(h: self)
   var virtualReturn = vtbl[].sizeHint(self)
@@ -569,10 +702,7 @@ proc cQDesktopWidget_vtable_callback_sizeHint(self: pointer): pointer {.cdecl.} 
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QDesktopWidgetminimumSizeHint*(self: gen_qdesktopwidget_types.QDesktopWidget): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQDesktopWidget_virtualbase_minimumSizeHint(self.h), owned: true)
-
-proc cQDesktopWidget_vtable_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
+proc fcQDesktopWidget_vtable_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QDesktopWidgetVTable](fcQDesktopWidget_vdata(self))
   let self = QDesktopWidget(h: self)
   var virtualReturn = vtbl[].minimumSizeHint(self)
@@ -581,29 +711,20 @@ proc cQDesktopWidget_vtable_callback_minimumSizeHint(self: pointer): pointer {.c
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QDesktopWidgetheightForWidth*(self: gen_qdesktopwidget_types.QDesktopWidget, param1: cint): cint =
-  fcQDesktopWidget_virtualbase_heightForWidth(self.h, param1)
-
-proc cQDesktopWidget_vtable_callback_heightForWidth(self: pointer, param1: cint): cint {.cdecl.} =
+proc fcQDesktopWidget_vtable_callback_heightForWidth(self: pointer, param1: cint): cint {.cdecl.} =
   let vtbl = cast[ptr QDesktopWidgetVTable](fcQDesktopWidget_vdata(self))
   let self = QDesktopWidget(h: self)
   let slotval1 = param1
   var virtualReturn = vtbl[].heightForWidth(self, slotval1)
   virtualReturn
 
-proc QDesktopWidgethasHeightForWidth*(self: gen_qdesktopwidget_types.QDesktopWidget): bool =
-  fcQDesktopWidget_virtualbase_hasHeightForWidth(self.h)
-
-proc cQDesktopWidget_vtable_callback_hasHeightForWidth(self: pointer): bool {.cdecl.} =
+proc fcQDesktopWidget_vtable_callback_hasHeightForWidth(self: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QDesktopWidgetVTable](fcQDesktopWidget_vdata(self))
   let self = QDesktopWidget(h: self)
   var virtualReturn = vtbl[].hasHeightForWidth(self)
   virtualReturn
 
-proc QDesktopWidgetpaintEngine*(self: gen_qdesktopwidget_types.QDesktopWidget): gen_qpaintengine_types.QPaintEngine =
-  gen_qpaintengine_types.QPaintEngine(h: fcQDesktopWidget_virtualbase_paintEngine(self.h), owned: false)
-
-proc cQDesktopWidget_vtable_callback_paintEngine(self: pointer): pointer {.cdecl.} =
+proc fcQDesktopWidget_vtable_callback_paintEngine(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QDesktopWidgetVTable](fcQDesktopWidget_vdata(self))
   let self = QDesktopWidget(h: self)
   var virtualReturn = vtbl[].paintEngine(self)
@@ -612,227 +733,152 @@ proc cQDesktopWidget_vtable_callback_paintEngine(self: pointer): pointer {.cdecl
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QDesktopWidgetevent*(self: gen_qdesktopwidget_types.QDesktopWidget, event: gen_qcoreevent_types.QEvent): bool =
-  fcQDesktopWidget_virtualbase_event(self.h, event.h)
-
-proc cQDesktopWidget_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
+proc fcQDesktopWidget_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QDesktopWidgetVTable](fcQDesktopWidget_vdata(self))
   let self = QDesktopWidget(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
-proc QDesktopWidgetmousePressEvent*(self: gen_qdesktopwidget_types.QDesktopWidget, event: gen_qevent_types.QMouseEvent): void =
-  fcQDesktopWidget_virtualbase_mousePressEvent(self.h, event.h)
-
-proc cQDesktopWidget_vtable_callback_mousePressEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQDesktopWidget_vtable_callback_mousePressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDesktopWidgetVTable](fcQDesktopWidget_vdata(self))
   let self = QDesktopWidget(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mousePressEvent(self, slotval1)
 
-proc QDesktopWidgetmouseReleaseEvent*(self: gen_qdesktopwidget_types.QDesktopWidget, event: gen_qevent_types.QMouseEvent): void =
-  fcQDesktopWidget_virtualbase_mouseReleaseEvent(self.h, event.h)
-
-proc cQDesktopWidget_vtable_callback_mouseReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQDesktopWidget_vtable_callback_mouseReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDesktopWidgetVTable](fcQDesktopWidget_vdata(self))
   let self = QDesktopWidget(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseReleaseEvent(self, slotval1)
 
-proc QDesktopWidgetmouseDoubleClickEvent*(self: gen_qdesktopwidget_types.QDesktopWidget, event: gen_qevent_types.QMouseEvent): void =
-  fcQDesktopWidget_virtualbase_mouseDoubleClickEvent(self.h, event.h)
-
-proc cQDesktopWidget_vtable_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQDesktopWidget_vtable_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDesktopWidgetVTable](fcQDesktopWidget_vdata(self))
   let self = QDesktopWidget(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseDoubleClickEvent(self, slotval1)
 
-proc QDesktopWidgetmouseMoveEvent*(self: gen_qdesktopwidget_types.QDesktopWidget, event: gen_qevent_types.QMouseEvent): void =
-  fcQDesktopWidget_virtualbase_mouseMoveEvent(self.h, event.h)
-
-proc cQDesktopWidget_vtable_callback_mouseMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQDesktopWidget_vtable_callback_mouseMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDesktopWidgetVTable](fcQDesktopWidget_vdata(self))
   let self = QDesktopWidget(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseMoveEvent(self, slotval1)
 
-proc QDesktopWidgetwheelEvent*(self: gen_qdesktopwidget_types.QDesktopWidget, event: gen_qevent_types.QWheelEvent): void =
-  fcQDesktopWidget_virtualbase_wheelEvent(self.h, event.h)
-
-proc cQDesktopWidget_vtable_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQDesktopWidget_vtable_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDesktopWidgetVTable](fcQDesktopWidget_vdata(self))
   let self = QDesktopWidget(h: self)
   let slotval1 = gen_qevent_types.QWheelEvent(h: event, owned: false)
   vtbl[].wheelEvent(self, slotval1)
 
-proc QDesktopWidgetkeyPressEvent*(self: gen_qdesktopwidget_types.QDesktopWidget, event: gen_qevent_types.QKeyEvent): void =
-  fcQDesktopWidget_virtualbase_keyPressEvent(self.h, event.h)
-
-proc cQDesktopWidget_vtable_callback_keyPressEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQDesktopWidget_vtable_callback_keyPressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDesktopWidgetVTable](fcQDesktopWidget_vdata(self))
   let self = QDesktopWidget(h: self)
   let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   vtbl[].keyPressEvent(self, slotval1)
 
-proc QDesktopWidgetkeyReleaseEvent*(self: gen_qdesktopwidget_types.QDesktopWidget, event: gen_qevent_types.QKeyEvent): void =
-  fcQDesktopWidget_virtualbase_keyReleaseEvent(self.h, event.h)
-
-proc cQDesktopWidget_vtable_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQDesktopWidget_vtable_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDesktopWidgetVTable](fcQDesktopWidget_vdata(self))
   let self = QDesktopWidget(h: self)
   let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   vtbl[].keyReleaseEvent(self, slotval1)
 
-proc QDesktopWidgetfocusInEvent*(self: gen_qdesktopwidget_types.QDesktopWidget, event: gen_qevent_types.QFocusEvent): void =
-  fcQDesktopWidget_virtualbase_focusInEvent(self.h, event.h)
-
-proc cQDesktopWidget_vtable_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQDesktopWidget_vtable_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDesktopWidgetVTable](fcQDesktopWidget_vdata(self))
   let self = QDesktopWidget(h: self)
   let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusInEvent(self, slotval1)
 
-proc QDesktopWidgetfocusOutEvent*(self: gen_qdesktopwidget_types.QDesktopWidget, event: gen_qevent_types.QFocusEvent): void =
-  fcQDesktopWidget_virtualbase_focusOutEvent(self.h, event.h)
-
-proc cQDesktopWidget_vtable_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQDesktopWidget_vtable_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDesktopWidgetVTable](fcQDesktopWidget_vdata(self))
   let self = QDesktopWidget(h: self)
   let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusOutEvent(self, slotval1)
 
-proc QDesktopWidgetenterEvent*(self: gen_qdesktopwidget_types.QDesktopWidget, event: gen_qcoreevent_types.QEvent): void =
-  fcQDesktopWidget_virtualbase_enterEvent(self.h, event.h)
-
-proc cQDesktopWidget_vtable_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQDesktopWidget_vtable_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDesktopWidgetVTable](fcQDesktopWidget_vdata(self))
   let self = QDesktopWidget(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].enterEvent(self, slotval1)
 
-proc QDesktopWidgetleaveEvent*(self: gen_qdesktopwidget_types.QDesktopWidget, event: gen_qcoreevent_types.QEvent): void =
-  fcQDesktopWidget_virtualbase_leaveEvent(self.h, event.h)
-
-proc cQDesktopWidget_vtable_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQDesktopWidget_vtable_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDesktopWidgetVTable](fcQDesktopWidget_vdata(self))
   let self = QDesktopWidget(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].leaveEvent(self, slotval1)
 
-proc QDesktopWidgetpaintEvent*(self: gen_qdesktopwidget_types.QDesktopWidget, event: gen_qevent_types.QPaintEvent): void =
-  fcQDesktopWidget_virtualbase_paintEvent(self.h, event.h)
-
-proc cQDesktopWidget_vtable_callback_paintEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQDesktopWidget_vtable_callback_paintEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDesktopWidgetVTable](fcQDesktopWidget_vdata(self))
   let self = QDesktopWidget(h: self)
   let slotval1 = gen_qevent_types.QPaintEvent(h: event, owned: false)
   vtbl[].paintEvent(self, slotval1)
 
-proc QDesktopWidgetmoveEvent*(self: gen_qdesktopwidget_types.QDesktopWidget, event: gen_qevent_types.QMoveEvent): void =
-  fcQDesktopWidget_virtualbase_moveEvent(self.h, event.h)
-
-proc cQDesktopWidget_vtable_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQDesktopWidget_vtable_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDesktopWidgetVTable](fcQDesktopWidget_vdata(self))
   let self = QDesktopWidget(h: self)
   let slotval1 = gen_qevent_types.QMoveEvent(h: event, owned: false)
   vtbl[].moveEvent(self, slotval1)
 
-proc QDesktopWidgetcloseEvent*(self: gen_qdesktopwidget_types.QDesktopWidget, event: gen_qevent_types.QCloseEvent): void =
-  fcQDesktopWidget_virtualbase_closeEvent(self.h, event.h)
-
-proc cQDesktopWidget_vtable_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQDesktopWidget_vtable_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDesktopWidgetVTable](fcQDesktopWidget_vdata(self))
   let self = QDesktopWidget(h: self)
   let slotval1 = gen_qevent_types.QCloseEvent(h: event, owned: false)
   vtbl[].closeEvent(self, slotval1)
 
-proc QDesktopWidgetcontextMenuEvent*(self: gen_qdesktopwidget_types.QDesktopWidget, event: gen_qevent_types.QContextMenuEvent): void =
-  fcQDesktopWidget_virtualbase_contextMenuEvent(self.h, event.h)
-
-proc cQDesktopWidget_vtable_callback_contextMenuEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQDesktopWidget_vtable_callback_contextMenuEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDesktopWidgetVTable](fcQDesktopWidget_vdata(self))
   let self = QDesktopWidget(h: self)
   let slotval1 = gen_qevent_types.QContextMenuEvent(h: event, owned: false)
   vtbl[].contextMenuEvent(self, slotval1)
 
-proc QDesktopWidgettabletEvent*(self: gen_qdesktopwidget_types.QDesktopWidget, event: gen_qevent_types.QTabletEvent): void =
-  fcQDesktopWidget_virtualbase_tabletEvent(self.h, event.h)
-
-proc cQDesktopWidget_vtable_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQDesktopWidget_vtable_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDesktopWidgetVTable](fcQDesktopWidget_vdata(self))
   let self = QDesktopWidget(h: self)
   let slotval1 = gen_qevent_types.QTabletEvent(h: event, owned: false)
   vtbl[].tabletEvent(self, slotval1)
 
-proc QDesktopWidgetactionEvent*(self: gen_qdesktopwidget_types.QDesktopWidget, event: gen_qevent_types.QActionEvent): void =
-  fcQDesktopWidget_virtualbase_actionEvent(self.h, event.h)
-
-proc cQDesktopWidget_vtable_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQDesktopWidget_vtable_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDesktopWidgetVTable](fcQDesktopWidget_vdata(self))
   let self = QDesktopWidget(h: self)
   let slotval1 = gen_qevent_types.QActionEvent(h: event, owned: false)
   vtbl[].actionEvent(self, slotval1)
 
-proc QDesktopWidgetdragEnterEvent*(self: gen_qdesktopwidget_types.QDesktopWidget, event: gen_qevent_types.QDragEnterEvent): void =
-  fcQDesktopWidget_virtualbase_dragEnterEvent(self.h, event.h)
-
-proc cQDesktopWidget_vtable_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQDesktopWidget_vtable_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDesktopWidgetVTable](fcQDesktopWidget_vdata(self))
   let self = QDesktopWidget(h: self)
   let slotval1 = gen_qevent_types.QDragEnterEvent(h: event, owned: false)
   vtbl[].dragEnterEvent(self, slotval1)
 
-proc QDesktopWidgetdragMoveEvent*(self: gen_qdesktopwidget_types.QDesktopWidget, event: gen_qevent_types.QDragMoveEvent): void =
-  fcQDesktopWidget_virtualbase_dragMoveEvent(self.h, event.h)
-
-proc cQDesktopWidget_vtable_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQDesktopWidget_vtable_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDesktopWidgetVTable](fcQDesktopWidget_vdata(self))
   let self = QDesktopWidget(h: self)
   let slotval1 = gen_qevent_types.QDragMoveEvent(h: event, owned: false)
   vtbl[].dragMoveEvent(self, slotval1)
 
-proc QDesktopWidgetdragLeaveEvent*(self: gen_qdesktopwidget_types.QDesktopWidget, event: gen_qevent_types.QDragLeaveEvent): void =
-  fcQDesktopWidget_virtualbase_dragLeaveEvent(self.h, event.h)
-
-proc cQDesktopWidget_vtable_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQDesktopWidget_vtable_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDesktopWidgetVTable](fcQDesktopWidget_vdata(self))
   let self = QDesktopWidget(h: self)
   let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event, owned: false)
   vtbl[].dragLeaveEvent(self, slotval1)
 
-proc QDesktopWidgetdropEvent*(self: gen_qdesktopwidget_types.QDesktopWidget, event: gen_qevent_types.QDropEvent): void =
-  fcQDesktopWidget_virtualbase_dropEvent(self.h, event.h)
-
-proc cQDesktopWidget_vtable_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQDesktopWidget_vtable_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDesktopWidgetVTable](fcQDesktopWidget_vdata(self))
   let self = QDesktopWidget(h: self)
   let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
   vtbl[].dropEvent(self, slotval1)
 
-proc QDesktopWidgetshowEvent*(self: gen_qdesktopwidget_types.QDesktopWidget, event: gen_qevent_types.QShowEvent): void =
-  fcQDesktopWidget_virtualbase_showEvent(self.h, event.h)
-
-proc cQDesktopWidget_vtable_callback_showEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQDesktopWidget_vtable_callback_showEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDesktopWidgetVTable](fcQDesktopWidget_vdata(self))
   let self = QDesktopWidget(h: self)
   let slotval1 = gen_qevent_types.QShowEvent(h: event, owned: false)
   vtbl[].showEvent(self, slotval1)
 
-proc QDesktopWidgethideEvent*(self: gen_qdesktopwidget_types.QDesktopWidget, event: gen_qevent_types.QHideEvent): void =
-  fcQDesktopWidget_virtualbase_hideEvent(self.h, event.h)
-
-proc cQDesktopWidget_vtable_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQDesktopWidget_vtable_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDesktopWidgetVTable](fcQDesktopWidget_vdata(self))
   let self = QDesktopWidget(h: self)
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   vtbl[].hideEvent(self, slotval1)
 
-proc QDesktopWidgetnativeEvent*(self: gen_qdesktopwidget_types.QDesktopWidget, eventType: openArray[byte], message: pointer, resultVal: ptr clong): bool =
-  fcQDesktopWidget_virtualbase_nativeEvent(self.h, struct_miqt_string(data: cast[cstring](if len(eventType) == 0: nil else: unsafeAddr eventType[0]), len: csize_t(len(eventType))), message, resultVal)
-
-proc cQDesktopWidget_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr clong): bool {.cdecl.} =
+proc fcQDesktopWidget_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr clong): bool {.cdecl.} =
   let vtbl = cast[ptr QDesktopWidgetVTable](fcQDesktopWidget_vdata(self))
   let self = QDesktopWidget(h: self)
   var veventType_bytearray = eventType
@@ -844,38 +890,26 @@ proc cQDesktopWidget_vtable_callback_nativeEvent(self: pointer, eventType: struc
   var virtualReturn = vtbl[].nativeEvent(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QDesktopWidgetchangeEvent*(self: gen_qdesktopwidget_types.QDesktopWidget, param1: gen_qcoreevent_types.QEvent): void =
-  fcQDesktopWidget_virtualbase_changeEvent(self.h, param1.h)
-
-proc cQDesktopWidget_vtable_callback_changeEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQDesktopWidget_vtable_callback_changeEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDesktopWidgetVTable](fcQDesktopWidget_vdata(self))
   let self = QDesktopWidget(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
   vtbl[].changeEvent(self, slotval1)
 
-proc QDesktopWidgetmetric*(self: gen_qdesktopwidget_types.QDesktopWidget, param1: cint): cint =
-  fcQDesktopWidget_virtualbase_metric(self.h, cint(param1))
-
-proc cQDesktopWidget_vtable_callback_metric(self: pointer, param1: cint): cint {.cdecl.} =
+proc fcQDesktopWidget_vtable_callback_metric(self: pointer, param1: cint): cint {.cdecl.} =
   let vtbl = cast[ptr QDesktopWidgetVTable](fcQDesktopWidget_vdata(self))
   let self = QDesktopWidget(h: self)
   let slotval1 = cint(param1)
   var virtualReturn = vtbl[].metric(self, slotval1)
   virtualReturn
 
-proc QDesktopWidgetinitPainter*(self: gen_qdesktopwidget_types.QDesktopWidget, painter: gen_qpainter_types.QPainter): void =
-  fcQDesktopWidget_virtualbase_initPainter(self.h, painter.h)
-
-proc cQDesktopWidget_vtable_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
+proc fcQDesktopWidget_vtable_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDesktopWidgetVTable](fcQDesktopWidget_vdata(self))
   let self = QDesktopWidget(h: self)
   let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
   vtbl[].initPainter(self, slotval1)
 
-proc QDesktopWidgetredirected*(self: gen_qdesktopwidget_types.QDesktopWidget, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice =
-  gen_qpaintdevice_types.QPaintDevice(h: fcQDesktopWidget_virtualbase_redirected(self.h, offset.h), owned: false)
-
-proc cQDesktopWidget_vtable_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
+proc fcQDesktopWidget_vtable_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QDesktopWidgetVTable](fcQDesktopWidget_vdata(self))
   let self = QDesktopWidget(h: self)
   let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
@@ -885,10 +919,7 @@ proc cQDesktopWidget_vtable_callback_redirected(self: pointer, offset: pointer):
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QDesktopWidgetsharedPainter*(self: gen_qdesktopwidget_types.QDesktopWidget): gen_qpainter_types.QPainter =
-  gen_qpainter_types.QPainter(h: fcQDesktopWidget_virtualbase_sharedPainter(self.h), owned: false)
-
-proc cQDesktopWidget_vtable_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
+proc fcQDesktopWidget_vtable_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QDesktopWidgetVTable](fcQDesktopWidget_vdata(self))
   let self = QDesktopWidget(h: self)
   var virtualReturn = vtbl[].sharedPainter(self)
@@ -897,19 +928,13 @@ proc cQDesktopWidget_vtable_callback_sharedPainter(self: pointer): pointer {.cde
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QDesktopWidgetinputMethodEvent*(self: gen_qdesktopwidget_types.QDesktopWidget, param1: gen_qevent_types.QInputMethodEvent): void =
-  fcQDesktopWidget_virtualbase_inputMethodEvent(self.h, param1.h)
-
-proc cQDesktopWidget_vtable_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQDesktopWidget_vtable_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDesktopWidgetVTable](fcQDesktopWidget_vdata(self))
   let self = QDesktopWidget(h: self)
   let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1, owned: false)
   vtbl[].inputMethodEvent(self, slotval1)
 
-proc QDesktopWidgetinputMethodQuery*(self: gen_qdesktopwidget_types.QDesktopWidget, param1: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQDesktopWidget_virtualbase_inputMethodQuery(self.h, cint(param1)), owned: true)
-
-proc cQDesktopWidget_vtable_callback_inputMethodQuery(self: pointer, param1: cint): pointer {.cdecl.} =
+proc fcQDesktopWidget_vtable_callback_inputMethodQuery(self: pointer, param1: cint): pointer {.cdecl.} =
   let vtbl = cast[ptr QDesktopWidgetVTable](fcQDesktopWidget_vdata(self))
   let self = QDesktopWidget(h: self)
   let slotval1 = cint(param1)
@@ -919,20 +944,14 @@ proc cQDesktopWidget_vtable_callback_inputMethodQuery(self: pointer, param1: cin
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QDesktopWidgetfocusNextPrevChild*(self: gen_qdesktopwidget_types.QDesktopWidget, next: bool): bool =
-  fcQDesktopWidget_virtualbase_focusNextPrevChild(self.h, next)
-
-proc cQDesktopWidget_vtable_callback_focusNextPrevChild(self: pointer, next: bool): bool {.cdecl.} =
+proc fcQDesktopWidget_vtable_callback_focusNextPrevChild(self: pointer, next: bool): bool {.cdecl.} =
   let vtbl = cast[ptr QDesktopWidgetVTable](fcQDesktopWidget_vdata(self))
   let self = QDesktopWidget(h: self)
   let slotval1 = next
   var virtualReturn = vtbl[].focusNextPrevChild(self, slotval1)
   virtualReturn
 
-proc QDesktopWidgeteventFilter*(self: gen_qdesktopwidget_types.QDesktopWidget, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
-  fcQDesktopWidget_virtualbase_eventFilter(self.h, watched.h, event.h)
-
-proc cQDesktopWidget_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+proc fcQDesktopWidget_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QDesktopWidgetVTable](fcQDesktopWidget_vdata(self))
   let self = QDesktopWidget(h: self)
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
@@ -940,46 +959,31 @@ proc cQDesktopWidget_vtable_callback_eventFilter(self: pointer, watched: pointer
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
-proc QDesktopWidgettimerEvent*(self: gen_qdesktopwidget_types.QDesktopWidget, event: gen_qcoreevent_types.QTimerEvent): void =
-  fcQDesktopWidget_virtualbase_timerEvent(self.h, event.h)
-
-proc cQDesktopWidget_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQDesktopWidget_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDesktopWidgetVTable](fcQDesktopWidget_vdata(self))
   let self = QDesktopWidget(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
-proc QDesktopWidgetchildEvent*(self: gen_qdesktopwidget_types.QDesktopWidget, event: gen_qcoreevent_types.QChildEvent): void =
-  fcQDesktopWidget_virtualbase_childEvent(self.h, event.h)
-
-proc cQDesktopWidget_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQDesktopWidget_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDesktopWidgetVTable](fcQDesktopWidget_vdata(self))
   let self = QDesktopWidget(h: self)
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
-proc QDesktopWidgetcustomEvent*(self: gen_qdesktopwidget_types.QDesktopWidget, event: gen_qcoreevent_types.QEvent): void =
-  fcQDesktopWidget_virtualbase_customEvent(self.h, event.h)
-
-proc cQDesktopWidget_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQDesktopWidget_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDesktopWidgetVTable](fcQDesktopWidget_vdata(self))
   let self = QDesktopWidget(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
-proc QDesktopWidgetconnectNotify*(self: gen_qdesktopwidget_types.QDesktopWidget, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQDesktopWidget_virtualbase_connectNotify(self.h, signal.h)
-
-proc cQDesktopWidget_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQDesktopWidget_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDesktopWidgetVTable](fcQDesktopWidget_vdata(self))
   let self = QDesktopWidget(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
-proc QDesktopWidgetdisconnectNotify*(self: gen_qdesktopwidget_types.QDesktopWidget, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQDesktopWidget_virtualbase_disconnectNotify(self.h, signal.h)
-
-proc cQDesktopWidget_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQDesktopWidget_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDesktopWidgetVTable](fcQDesktopWidget_vdata(self))
   let self = QDesktopWidget(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
@@ -987,9 +991,109 @@ proc cQDesktopWidget_vtable_callback_disconnectNotify(self: pointer, signal: poi
 
 type VirtualQDesktopWidget* {.inheritable.} = ref object of QDesktopWidget
   vtbl*: cQDesktopWidgetVTable
+
 method metaObject*(self: VirtualQDesktopWidget): gen_qobjectdefs_types.QMetaObject {.base.} =
   QDesktopWidgetmetaObject(self[])
-proc cQDesktopWidget_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
+method metacast*(self: VirtualQDesktopWidget, param1: cstring): pointer {.base.} =
+  QDesktopWidgetmetacast(self[], param1)
+method metacall*(self: VirtualQDesktopWidget, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QDesktopWidgetmetacall(self[], param1, param2, param3)
+method resizeEvent*(self: VirtualQDesktopWidget, e: gen_qevent_types.QResizeEvent): void {.base.} =
+  QDesktopWidgetresizeEvent(self[], e)
+method devType*(self: VirtualQDesktopWidget): cint {.base.} =
+  QDesktopWidgetdevType(self[])
+method setVisible*(self: VirtualQDesktopWidget, visible: bool): void {.base.} =
+  QDesktopWidgetsetVisible(self[], visible)
+method sizeHint*(self: VirtualQDesktopWidget): gen_qsize_types.QSize {.base.} =
+  QDesktopWidgetsizeHint(self[])
+method minimumSizeHint*(self: VirtualQDesktopWidget): gen_qsize_types.QSize {.base.} =
+  QDesktopWidgetminimumSizeHint(self[])
+method heightForWidth*(self: VirtualQDesktopWidget, param1: cint): cint {.base.} =
+  QDesktopWidgetheightForWidth(self[], param1)
+method hasHeightForWidth*(self: VirtualQDesktopWidget): bool {.base.} =
+  QDesktopWidgethasHeightForWidth(self[])
+method paintEngine*(self: VirtualQDesktopWidget): gen_qpaintengine_types.QPaintEngine {.base.} =
+  QDesktopWidgetpaintEngine(self[])
+method event*(self: VirtualQDesktopWidget, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QDesktopWidgetevent(self[], event)
+method mousePressEvent*(self: VirtualQDesktopWidget, event: gen_qevent_types.QMouseEvent): void {.base.} =
+  QDesktopWidgetmousePressEvent(self[], event)
+method mouseReleaseEvent*(self: VirtualQDesktopWidget, event: gen_qevent_types.QMouseEvent): void {.base.} =
+  QDesktopWidgetmouseReleaseEvent(self[], event)
+method mouseDoubleClickEvent*(self: VirtualQDesktopWidget, event: gen_qevent_types.QMouseEvent): void {.base.} =
+  QDesktopWidgetmouseDoubleClickEvent(self[], event)
+method mouseMoveEvent*(self: VirtualQDesktopWidget, event: gen_qevent_types.QMouseEvent): void {.base.} =
+  QDesktopWidgetmouseMoveEvent(self[], event)
+method wheelEvent*(self: VirtualQDesktopWidget, event: gen_qevent_types.QWheelEvent): void {.base.} =
+  QDesktopWidgetwheelEvent(self[], event)
+method keyPressEvent*(self: VirtualQDesktopWidget, event: gen_qevent_types.QKeyEvent): void {.base.} =
+  QDesktopWidgetkeyPressEvent(self[], event)
+method keyReleaseEvent*(self: VirtualQDesktopWidget, event: gen_qevent_types.QKeyEvent): void {.base.} =
+  QDesktopWidgetkeyReleaseEvent(self[], event)
+method focusInEvent*(self: VirtualQDesktopWidget, event: gen_qevent_types.QFocusEvent): void {.base.} =
+  QDesktopWidgetfocusInEvent(self[], event)
+method focusOutEvent*(self: VirtualQDesktopWidget, event: gen_qevent_types.QFocusEvent): void {.base.} =
+  QDesktopWidgetfocusOutEvent(self[], event)
+method enterEvent*(self: VirtualQDesktopWidget, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QDesktopWidgetenterEvent(self[], event)
+method leaveEvent*(self: VirtualQDesktopWidget, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QDesktopWidgetleaveEvent(self[], event)
+method paintEvent*(self: VirtualQDesktopWidget, event: gen_qevent_types.QPaintEvent): void {.base.} =
+  QDesktopWidgetpaintEvent(self[], event)
+method moveEvent*(self: VirtualQDesktopWidget, event: gen_qevent_types.QMoveEvent): void {.base.} =
+  QDesktopWidgetmoveEvent(self[], event)
+method closeEvent*(self: VirtualQDesktopWidget, event: gen_qevent_types.QCloseEvent): void {.base.} =
+  QDesktopWidgetcloseEvent(self[], event)
+method contextMenuEvent*(self: VirtualQDesktopWidget, event: gen_qevent_types.QContextMenuEvent): void {.base.} =
+  QDesktopWidgetcontextMenuEvent(self[], event)
+method tabletEvent*(self: VirtualQDesktopWidget, event: gen_qevent_types.QTabletEvent): void {.base.} =
+  QDesktopWidgettabletEvent(self[], event)
+method actionEvent*(self: VirtualQDesktopWidget, event: gen_qevent_types.QActionEvent): void {.base.} =
+  QDesktopWidgetactionEvent(self[], event)
+method dragEnterEvent*(self: VirtualQDesktopWidget, event: gen_qevent_types.QDragEnterEvent): void {.base.} =
+  QDesktopWidgetdragEnterEvent(self[], event)
+method dragMoveEvent*(self: VirtualQDesktopWidget, event: gen_qevent_types.QDragMoveEvent): void {.base.} =
+  QDesktopWidgetdragMoveEvent(self[], event)
+method dragLeaveEvent*(self: VirtualQDesktopWidget, event: gen_qevent_types.QDragLeaveEvent): void {.base.} =
+  QDesktopWidgetdragLeaveEvent(self[], event)
+method dropEvent*(self: VirtualQDesktopWidget, event: gen_qevent_types.QDropEvent): void {.base.} =
+  QDesktopWidgetdropEvent(self[], event)
+method showEvent*(self: VirtualQDesktopWidget, event: gen_qevent_types.QShowEvent): void {.base.} =
+  QDesktopWidgetshowEvent(self[], event)
+method hideEvent*(self: VirtualQDesktopWidget, event: gen_qevent_types.QHideEvent): void {.base.} =
+  QDesktopWidgethideEvent(self[], event)
+method nativeEvent*(self: VirtualQDesktopWidget, eventType: openArray[byte], message: pointer, resultVal: ptr clong): bool {.base.} =
+  QDesktopWidgetnativeEvent(self[], eventType, message, resultVal)
+method changeEvent*(self: VirtualQDesktopWidget, param1: gen_qcoreevent_types.QEvent): void {.base.} =
+  QDesktopWidgetchangeEvent(self[], param1)
+method metric*(self: VirtualQDesktopWidget, param1: cint): cint {.base.} =
+  QDesktopWidgetmetric(self[], param1)
+method initPainter*(self: VirtualQDesktopWidget, painter: gen_qpainter_types.QPainter): void {.base.} =
+  QDesktopWidgetinitPainter(self[], painter)
+method redirected*(self: VirtualQDesktopWidget, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.base.} =
+  QDesktopWidgetredirected(self[], offset)
+method sharedPainter*(self: VirtualQDesktopWidget): gen_qpainter_types.QPainter {.base.} =
+  QDesktopWidgetsharedPainter(self[])
+method inputMethodEvent*(self: VirtualQDesktopWidget, param1: gen_qevent_types.QInputMethodEvent): void {.base.} =
+  QDesktopWidgetinputMethodEvent(self[], param1)
+method inputMethodQuery*(self: VirtualQDesktopWidget, param1: cint): gen_qvariant_types.QVariant {.base.} =
+  QDesktopWidgetinputMethodQuery(self[], param1)
+method focusNextPrevChild*(self: VirtualQDesktopWidget, next: bool): bool {.base.} =
+  QDesktopWidgetfocusNextPrevChild(self[], next)
+method eventFilter*(self: VirtualQDesktopWidget, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QDesktopWidgeteventFilter(self[], watched, event)
+method timerEvent*(self: VirtualQDesktopWidget, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QDesktopWidgettimerEvent(self[], event)
+method childEvent*(self: VirtualQDesktopWidget, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QDesktopWidgetchildEvent(self[], event)
+method customEvent*(self: VirtualQDesktopWidget, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QDesktopWidgetcustomEvent(self[], event)
+method connectNotify*(self: VirtualQDesktopWidget, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QDesktopWidgetconnectNotify(self[], signal)
+method disconnectNotify*(self: VirtualQDesktopWidget, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QDesktopWidgetdisconnectNotify(self[], signal)
+
+proc fcQDesktopWidget_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQDesktopWidget](fcQDesktopWidget_vdata(self))
   var virtualReturn = inst.metaObject()
   virtualReturn.owned = false # TODO move?
@@ -997,17 +1101,13 @@ proc cQDesktopWidget_method_callback_metaObject(self: pointer): pointer {.cdecl.
   virtualReturn.h = nil
   virtualReturn_h
 
-method metacast*(self: VirtualQDesktopWidget, param1: cstring): pointer {.base.} =
-  QDesktopWidgetmetacast(self[], param1)
-proc cQDesktopWidget_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+proc fcQDesktopWidget_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQDesktopWidget](fcQDesktopWidget_vdata(self))
   let slotval1 = (param1)
   var virtualReturn = inst.metacast(slotval1)
   virtualReturn
 
-method metacall*(self: VirtualQDesktopWidget, param1: cint, param2: cint, param3: pointer): cint {.base.} =
-  QDesktopWidgetmetacall(self[], param1, param2, param3)
-proc cQDesktopWidget_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+proc fcQDesktopWidget_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQDesktopWidget](fcQDesktopWidget_vdata(self))
   let slotval1 = cint(param1)
   let slotval2 = param2
@@ -1015,30 +1115,22 @@ proc cQDesktopWidget_method_callback_metacall(self: pointer, param1: cint, param
   var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
-method resizeEvent*(self: VirtualQDesktopWidget, e: gen_qevent_types.QResizeEvent): void {.base.} =
-  QDesktopWidgetresizeEvent(self[], e)
-proc cQDesktopWidget_method_callback_resizeEvent(self: pointer, e: pointer): void {.cdecl.} =
+proc fcQDesktopWidget_method_callback_resizeEvent(self: pointer, e: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDesktopWidget](fcQDesktopWidget_vdata(self))
   let slotval1 = gen_qevent_types.QResizeEvent(h: e, owned: false)
   inst.resizeEvent(slotval1)
 
-method devType*(self: VirtualQDesktopWidget): cint {.base.} =
-  QDesktopWidgetdevType(self[])
-proc cQDesktopWidget_method_callback_devType(self: pointer): cint {.cdecl.} =
+proc fcQDesktopWidget_method_callback_devType(self: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQDesktopWidget](fcQDesktopWidget_vdata(self))
   var virtualReturn = inst.devType()
   virtualReturn
 
-method setVisible*(self: VirtualQDesktopWidget, visible: bool): void {.base.} =
-  QDesktopWidgetsetVisible(self[], visible)
-proc cQDesktopWidget_method_callback_setVisible(self: pointer, visible: bool): void {.cdecl.} =
+proc fcQDesktopWidget_method_callback_setVisible(self: pointer, visible: bool): void {.cdecl.} =
   let inst = cast[VirtualQDesktopWidget](fcQDesktopWidget_vdata(self))
   let slotval1 = visible
   inst.setVisible(slotval1)
 
-method sizeHint*(self: VirtualQDesktopWidget): gen_qsize_types.QSize {.base.} =
-  QDesktopWidgetsizeHint(self[])
-proc cQDesktopWidget_method_callback_sizeHint(self: pointer): pointer {.cdecl.} =
+proc fcQDesktopWidget_method_callback_sizeHint(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQDesktopWidget](fcQDesktopWidget_vdata(self))
   var virtualReturn = inst.sizeHint()
   virtualReturn.owned = false # TODO move?
@@ -1046,9 +1138,7 @@ proc cQDesktopWidget_method_callback_sizeHint(self: pointer): pointer {.cdecl.} 
   virtualReturn.h = nil
   virtualReturn_h
 
-method minimumSizeHint*(self: VirtualQDesktopWidget): gen_qsize_types.QSize {.base.} =
-  QDesktopWidgetminimumSizeHint(self[])
-proc cQDesktopWidget_method_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
+proc fcQDesktopWidget_method_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQDesktopWidget](fcQDesktopWidget_vdata(self))
   var virtualReturn = inst.minimumSizeHint()
   virtualReturn.owned = false # TODO move?
@@ -1056,24 +1146,18 @@ proc cQDesktopWidget_method_callback_minimumSizeHint(self: pointer): pointer {.c
   virtualReturn.h = nil
   virtualReturn_h
 
-method heightForWidth*(self: VirtualQDesktopWidget, param1: cint): cint {.base.} =
-  QDesktopWidgetheightForWidth(self[], param1)
-proc cQDesktopWidget_method_callback_heightForWidth(self: pointer, param1: cint): cint {.cdecl.} =
+proc fcQDesktopWidget_method_callback_heightForWidth(self: pointer, param1: cint): cint {.cdecl.} =
   let inst = cast[VirtualQDesktopWidget](fcQDesktopWidget_vdata(self))
   let slotval1 = param1
   var virtualReturn = inst.heightForWidth(slotval1)
   virtualReturn
 
-method hasHeightForWidth*(self: VirtualQDesktopWidget): bool {.base.} =
-  QDesktopWidgethasHeightForWidth(self[])
-proc cQDesktopWidget_method_callback_hasHeightForWidth(self: pointer): bool {.cdecl.} =
+proc fcQDesktopWidget_method_callback_hasHeightForWidth(self: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQDesktopWidget](fcQDesktopWidget_vdata(self))
   var virtualReturn = inst.hasHeightForWidth()
   virtualReturn
 
-method paintEngine*(self: VirtualQDesktopWidget): gen_qpaintengine_types.QPaintEngine {.base.} =
-  QDesktopWidgetpaintEngine(self[])
-proc cQDesktopWidget_method_callback_paintEngine(self: pointer): pointer {.cdecl.} =
+proc fcQDesktopWidget_method_callback_paintEngine(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQDesktopWidget](fcQDesktopWidget_vdata(self))
   var virtualReturn = inst.paintEngine()
   virtualReturn.owned = false # TODO move?
@@ -1081,178 +1165,128 @@ proc cQDesktopWidget_method_callback_paintEngine(self: pointer): pointer {.cdecl
   virtualReturn.h = nil
   virtualReturn_h
 
-method event*(self: VirtualQDesktopWidget, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QDesktopWidgetevent(self[], event)
-proc cQDesktopWidget_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
+proc fcQDesktopWidget_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQDesktopWidget](fcQDesktopWidget_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
-method mousePressEvent*(self: VirtualQDesktopWidget, event: gen_qevent_types.QMouseEvent): void {.base.} =
-  QDesktopWidgetmousePressEvent(self[], event)
-proc cQDesktopWidget_method_callback_mousePressEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQDesktopWidget_method_callback_mousePressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDesktopWidget](fcQDesktopWidget_vdata(self))
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mousePressEvent(slotval1)
 
-method mouseReleaseEvent*(self: VirtualQDesktopWidget, event: gen_qevent_types.QMouseEvent): void {.base.} =
-  QDesktopWidgetmouseReleaseEvent(self[], event)
-proc cQDesktopWidget_method_callback_mouseReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQDesktopWidget_method_callback_mouseReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDesktopWidget](fcQDesktopWidget_vdata(self))
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mouseReleaseEvent(slotval1)
 
-method mouseDoubleClickEvent*(self: VirtualQDesktopWidget, event: gen_qevent_types.QMouseEvent): void {.base.} =
-  QDesktopWidgetmouseDoubleClickEvent(self[], event)
-proc cQDesktopWidget_method_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQDesktopWidget_method_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDesktopWidget](fcQDesktopWidget_vdata(self))
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mouseDoubleClickEvent(slotval1)
 
-method mouseMoveEvent*(self: VirtualQDesktopWidget, event: gen_qevent_types.QMouseEvent): void {.base.} =
-  QDesktopWidgetmouseMoveEvent(self[], event)
-proc cQDesktopWidget_method_callback_mouseMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQDesktopWidget_method_callback_mouseMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDesktopWidget](fcQDesktopWidget_vdata(self))
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mouseMoveEvent(slotval1)
 
-method wheelEvent*(self: VirtualQDesktopWidget, event: gen_qevent_types.QWheelEvent): void {.base.} =
-  QDesktopWidgetwheelEvent(self[], event)
-proc cQDesktopWidget_method_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQDesktopWidget_method_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDesktopWidget](fcQDesktopWidget_vdata(self))
   let slotval1 = gen_qevent_types.QWheelEvent(h: event, owned: false)
   inst.wheelEvent(slotval1)
 
-method keyPressEvent*(self: VirtualQDesktopWidget, event: gen_qevent_types.QKeyEvent): void {.base.} =
-  QDesktopWidgetkeyPressEvent(self[], event)
-proc cQDesktopWidget_method_callback_keyPressEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQDesktopWidget_method_callback_keyPressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDesktopWidget](fcQDesktopWidget_vdata(self))
   let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   inst.keyPressEvent(slotval1)
 
-method keyReleaseEvent*(self: VirtualQDesktopWidget, event: gen_qevent_types.QKeyEvent): void {.base.} =
-  QDesktopWidgetkeyReleaseEvent(self[], event)
-proc cQDesktopWidget_method_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQDesktopWidget_method_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDesktopWidget](fcQDesktopWidget_vdata(self))
   let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   inst.keyReleaseEvent(slotval1)
 
-method focusInEvent*(self: VirtualQDesktopWidget, event: gen_qevent_types.QFocusEvent): void {.base.} =
-  QDesktopWidgetfocusInEvent(self[], event)
-proc cQDesktopWidget_method_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQDesktopWidget_method_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDesktopWidget](fcQDesktopWidget_vdata(self))
   let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   inst.focusInEvent(slotval1)
 
-method focusOutEvent*(self: VirtualQDesktopWidget, event: gen_qevent_types.QFocusEvent): void {.base.} =
-  QDesktopWidgetfocusOutEvent(self[], event)
-proc cQDesktopWidget_method_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQDesktopWidget_method_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDesktopWidget](fcQDesktopWidget_vdata(self))
   let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   inst.focusOutEvent(slotval1)
 
-method enterEvent*(self: VirtualQDesktopWidget, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QDesktopWidgetenterEvent(self[], event)
-proc cQDesktopWidget_method_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQDesktopWidget_method_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDesktopWidget](fcQDesktopWidget_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.enterEvent(slotval1)
 
-method leaveEvent*(self: VirtualQDesktopWidget, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QDesktopWidgetleaveEvent(self[], event)
-proc cQDesktopWidget_method_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQDesktopWidget_method_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDesktopWidget](fcQDesktopWidget_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.leaveEvent(slotval1)
 
-method paintEvent*(self: VirtualQDesktopWidget, event: gen_qevent_types.QPaintEvent): void {.base.} =
-  QDesktopWidgetpaintEvent(self[], event)
-proc cQDesktopWidget_method_callback_paintEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQDesktopWidget_method_callback_paintEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDesktopWidget](fcQDesktopWidget_vdata(self))
   let slotval1 = gen_qevent_types.QPaintEvent(h: event, owned: false)
   inst.paintEvent(slotval1)
 
-method moveEvent*(self: VirtualQDesktopWidget, event: gen_qevent_types.QMoveEvent): void {.base.} =
-  QDesktopWidgetmoveEvent(self[], event)
-proc cQDesktopWidget_method_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQDesktopWidget_method_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDesktopWidget](fcQDesktopWidget_vdata(self))
   let slotval1 = gen_qevent_types.QMoveEvent(h: event, owned: false)
   inst.moveEvent(slotval1)
 
-method closeEvent*(self: VirtualQDesktopWidget, event: gen_qevent_types.QCloseEvent): void {.base.} =
-  QDesktopWidgetcloseEvent(self[], event)
-proc cQDesktopWidget_method_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQDesktopWidget_method_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDesktopWidget](fcQDesktopWidget_vdata(self))
   let slotval1 = gen_qevent_types.QCloseEvent(h: event, owned: false)
   inst.closeEvent(slotval1)
 
-method contextMenuEvent*(self: VirtualQDesktopWidget, event: gen_qevent_types.QContextMenuEvent): void {.base.} =
-  QDesktopWidgetcontextMenuEvent(self[], event)
-proc cQDesktopWidget_method_callback_contextMenuEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQDesktopWidget_method_callback_contextMenuEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDesktopWidget](fcQDesktopWidget_vdata(self))
   let slotval1 = gen_qevent_types.QContextMenuEvent(h: event, owned: false)
   inst.contextMenuEvent(slotval1)
 
-method tabletEvent*(self: VirtualQDesktopWidget, event: gen_qevent_types.QTabletEvent): void {.base.} =
-  QDesktopWidgettabletEvent(self[], event)
-proc cQDesktopWidget_method_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQDesktopWidget_method_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDesktopWidget](fcQDesktopWidget_vdata(self))
   let slotval1 = gen_qevent_types.QTabletEvent(h: event, owned: false)
   inst.tabletEvent(slotval1)
 
-method actionEvent*(self: VirtualQDesktopWidget, event: gen_qevent_types.QActionEvent): void {.base.} =
-  QDesktopWidgetactionEvent(self[], event)
-proc cQDesktopWidget_method_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQDesktopWidget_method_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDesktopWidget](fcQDesktopWidget_vdata(self))
   let slotval1 = gen_qevent_types.QActionEvent(h: event, owned: false)
   inst.actionEvent(slotval1)
 
-method dragEnterEvent*(self: VirtualQDesktopWidget, event: gen_qevent_types.QDragEnterEvent): void {.base.} =
-  QDesktopWidgetdragEnterEvent(self[], event)
-proc cQDesktopWidget_method_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQDesktopWidget_method_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDesktopWidget](fcQDesktopWidget_vdata(self))
   let slotval1 = gen_qevent_types.QDragEnterEvent(h: event, owned: false)
   inst.dragEnterEvent(slotval1)
 
-method dragMoveEvent*(self: VirtualQDesktopWidget, event: gen_qevent_types.QDragMoveEvent): void {.base.} =
-  QDesktopWidgetdragMoveEvent(self[], event)
-proc cQDesktopWidget_method_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQDesktopWidget_method_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDesktopWidget](fcQDesktopWidget_vdata(self))
   let slotval1 = gen_qevent_types.QDragMoveEvent(h: event, owned: false)
   inst.dragMoveEvent(slotval1)
 
-method dragLeaveEvent*(self: VirtualQDesktopWidget, event: gen_qevent_types.QDragLeaveEvent): void {.base.} =
-  QDesktopWidgetdragLeaveEvent(self[], event)
-proc cQDesktopWidget_method_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQDesktopWidget_method_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDesktopWidget](fcQDesktopWidget_vdata(self))
   let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event, owned: false)
   inst.dragLeaveEvent(slotval1)
 
-method dropEvent*(self: VirtualQDesktopWidget, event: gen_qevent_types.QDropEvent): void {.base.} =
-  QDesktopWidgetdropEvent(self[], event)
-proc cQDesktopWidget_method_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQDesktopWidget_method_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDesktopWidget](fcQDesktopWidget_vdata(self))
   let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
   inst.dropEvent(slotval1)
 
-method showEvent*(self: VirtualQDesktopWidget, event: gen_qevent_types.QShowEvent): void {.base.} =
-  QDesktopWidgetshowEvent(self[], event)
-proc cQDesktopWidget_method_callback_showEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQDesktopWidget_method_callback_showEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDesktopWidget](fcQDesktopWidget_vdata(self))
   let slotval1 = gen_qevent_types.QShowEvent(h: event, owned: false)
   inst.showEvent(slotval1)
 
-method hideEvent*(self: VirtualQDesktopWidget, event: gen_qevent_types.QHideEvent): void {.base.} =
-  QDesktopWidgethideEvent(self[], event)
-proc cQDesktopWidget_method_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQDesktopWidget_method_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDesktopWidget](fcQDesktopWidget_vdata(self))
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   inst.hideEvent(slotval1)
 
-method nativeEvent*(self: VirtualQDesktopWidget, eventType: openArray[byte], message: pointer, resultVal: ptr clong): bool {.base.} =
-  QDesktopWidgetnativeEvent(self[], eventType, message, resultVal)
-proc cQDesktopWidget_method_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr clong): bool {.cdecl.} =
+proc fcQDesktopWidget_method_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr clong): bool {.cdecl.} =
   let inst = cast[VirtualQDesktopWidget](fcQDesktopWidget_vdata(self))
   var veventType_bytearray = eventType
   var veventTypex_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](veventType_bytearray.data), 0, int(veventType_bytearray.len)-1))
@@ -1263,31 +1297,23 @@ proc cQDesktopWidget_method_callback_nativeEvent(self: pointer, eventType: struc
   var virtualReturn = inst.nativeEvent(slotval1, slotval2, slotval3)
   virtualReturn
 
-method changeEvent*(self: VirtualQDesktopWidget, param1: gen_qcoreevent_types.QEvent): void {.base.} =
-  QDesktopWidgetchangeEvent(self[], param1)
-proc cQDesktopWidget_method_callback_changeEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQDesktopWidget_method_callback_changeEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDesktopWidget](fcQDesktopWidget_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
   inst.changeEvent(slotval1)
 
-method metric*(self: VirtualQDesktopWidget, param1: cint): cint {.base.} =
-  QDesktopWidgetmetric(self[], param1)
-proc cQDesktopWidget_method_callback_metric(self: pointer, param1: cint): cint {.cdecl.} =
+proc fcQDesktopWidget_method_callback_metric(self: pointer, param1: cint): cint {.cdecl.} =
   let inst = cast[VirtualQDesktopWidget](fcQDesktopWidget_vdata(self))
   let slotval1 = cint(param1)
   var virtualReturn = inst.metric(slotval1)
   virtualReturn
 
-method initPainter*(self: VirtualQDesktopWidget, painter: gen_qpainter_types.QPainter): void {.base.} =
-  QDesktopWidgetinitPainter(self[], painter)
-proc cQDesktopWidget_method_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
+proc fcQDesktopWidget_method_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDesktopWidget](fcQDesktopWidget_vdata(self))
   let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
   inst.initPainter(slotval1)
 
-method redirected*(self: VirtualQDesktopWidget, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.base.} =
-  QDesktopWidgetredirected(self[], offset)
-proc cQDesktopWidget_method_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
+proc fcQDesktopWidget_method_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQDesktopWidget](fcQDesktopWidget_vdata(self))
   let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
   var virtualReturn = inst.redirected(slotval1)
@@ -1296,9 +1322,7 @@ proc cQDesktopWidget_method_callback_redirected(self: pointer, offset: pointer):
   virtualReturn.h = nil
   virtualReturn_h
 
-method sharedPainter*(self: VirtualQDesktopWidget): gen_qpainter_types.QPainter {.base.} =
-  QDesktopWidgetsharedPainter(self[])
-proc cQDesktopWidget_method_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
+proc fcQDesktopWidget_method_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQDesktopWidget](fcQDesktopWidget_vdata(self))
   var virtualReturn = inst.sharedPainter()
   virtualReturn.owned = false # TODO move?
@@ -1306,16 +1330,12 @@ proc cQDesktopWidget_method_callback_sharedPainter(self: pointer): pointer {.cde
   virtualReturn.h = nil
   virtualReturn_h
 
-method inputMethodEvent*(self: VirtualQDesktopWidget, param1: gen_qevent_types.QInputMethodEvent): void {.base.} =
-  QDesktopWidgetinputMethodEvent(self[], param1)
-proc cQDesktopWidget_method_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQDesktopWidget_method_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDesktopWidget](fcQDesktopWidget_vdata(self))
   let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1, owned: false)
   inst.inputMethodEvent(slotval1)
 
-method inputMethodQuery*(self: VirtualQDesktopWidget, param1: cint): gen_qvariant_types.QVariant {.base.} =
-  QDesktopWidgetinputMethodQuery(self[], param1)
-proc cQDesktopWidget_method_callback_inputMethodQuery(self: pointer, param1: cint): pointer {.cdecl.} =
+proc fcQDesktopWidget_method_callback_inputMethodQuery(self: pointer, param1: cint): pointer {.cdecl.} =
   let inst = cast[VirtualQDesktopWidget](fcQDesktopWidget_vdata(self))
   let slotval1 = cint(param1)
   var virtualReturn = inst.inputMethodQuery(slotval1)
@@ -1324,57 +1344,44 @@ proc cQDesktopWidget_method_callback_inputMethodQuery(self: pointer, param1: cin
   virtualReturn.h = nil
   virtualReturn_h
 
-method focusNextPrevChild*(self: VirtualQDesktopWidget, next: bool): bool {.base.} =
-  QDesktopWidgetfocusNextPrevChild(self[], next)
-proc cQDesktopWidget_method_callback_focusNextPrevChild(self: pointer, next: bool): bool {.cdecl.} =
+proc fcQDesktopWidget_method_callback_focusNextPrevChild(self: pointer, next: bool): bool {.cdecl.} =
   let inst = cast[VirtualQDesktopWidget](fcQDesktopWidget_vdata(self))
   let slotval1 = next
   var virtualReturn = inst.focusNextPrevChild(slotval1)
   virtualReturn
 
-method eventFilter*(self: VirtualQDesktopWidget, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QDesktopWidgeteventFilter(self[], watched, event)
-proc cQDesktopWidget_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+proc fcQDesktopWidget_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQDesktopWidget](fcQDesktopWidget_vdata(self))
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
   let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
-method timerEvent*(self: VirtualQDesktopWidget, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
-  QDesktopWidgettimerEvent(self[], event)
-proc cQDesktopWidget_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQDesktopWidget_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDesktopWidget](fcQDesktopWidget_vdata(self))
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
-method childEvent*(self: VirtualQDesktopWidget, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
-  QDesktopWidgetchildEvent(self[], event)
-proc cQDesktopWidget_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQDesktopWidget_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDesktopWidget](fcQDesktopWidget_vdata(self))
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
-method customEvent*(self: VirtualQDesktopWidget, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QDesktopWidgetcustomEvent(self[], event)
-proc cQDesktopWidget_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQDesktopWidget_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDesktopWidget](fcQDesktopWidget_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
-method connectNotify*(self: VirtualQDesktopWidget, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QDesktopWidgetconnectNotify(self[], signal)
-proc cQDesktopWidget_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQDesktopWidget_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDesktopWidget](fcQDesktopWidget_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
-method disconnectNotify*(self: VirtualQDesktopWidget, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QDesktopWidgetdisconnectNotify(self[], signal)
-proc cQDesktopWidget_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQDesktopWidget_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDesktopWidget](fcQDesktopWidget_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
+
 
 proc updateMicroFocus*(self: gen_qdesktopwidget_types.QDesktopWidget): void =
   fcQDesktopWidget_protectedbase_updateMicroFocus(self.h)
@@ -1411,105 +1418,105 @@ proc create*(T: type gen_qdesktopwidget_types.QDesktopWidget,
     let vtbl = cast[ref QDesktopWidgetVTable](fcQDesktopWidget_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQDesktopWidget_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQDesktopWidget_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQDesktopWidget_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQDesktopWidget_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQDesktopWidget_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQDesktopWidget_vtable_callback_metacall
   if not isNil(vtbl[].resizeEvent):
-    vtbl[].vtbl.resizeEvent = cQDesktopWidget_vtable_callback_resizeEvent
+    vtbl[].vtbl.resizeEvent = fcQDesktopWidget_vtable_callback_resizeEvent
   if not isNil(vtbl[].devType):
-    vtbl[].vtbl.devType = cQDesktopWidget_vtable_callback_devType
+    vtbl[].vtbl.devType = fcQDesktopWidget_vtable_callback_devType
   if not isNil(vtbl[].setVisible):
-    vtbl[].vtbl.setVisible = cQDesktopWidget_vtable_callback_setVisible
+    vtbl[].vtbl.setVisible = fcQDesktopWidget_vtable_callback_setVisible
   if not isNil(vtbl[].sizeHint):
-    vtbl[].vtbl.sizeHint = cQDesktopWidget_vtable_callback_sizeHint
+    vtbl[].vtbl.sizeHint = fcQDesktopWidget_vtable_callback_sizeHint
   if not isNil(vtbl[].minimumSizeHint):
-    vtbl[].vtbl.minimumSizeHint = cQDesktopWidget_vtable_callback_minimumSizeHint
+    vtbl[].vtbl.minimumSizeHint = fcQDesktopWidget_vtable_callback_minimumSizeHint
   if not isNil(vtbl[].heightForWidth):
-    vtbl[].vtbl.heightForWidth = cQDesktopWidget_vtable_callback_heightForWidth
+    vtbl[].vtbl.heightForWidth = fcQDesktopWidget_vtable_callback_heightForWidth
   if not isNil(vtbl[].hasHeightForWidth):
-    vtbl[].vtbl.hasHeightForWidth = cQDesktopWidget_vtable_callback_hasHeightForWidth
+    vtbl[].vtbl.hasHeightForWidth = fcQDesktopWidget_vtable_callback_hasHeightForWidth
   if not isNil(vtbl[].paintEngine):
-    vtbl[].vtbl.paintEngine = cQDesktopWidget_vtable_callback_paintEngine
+    vtbl[].vtbl.paintEngine = fcQDesktopWidget_vtable_callback_paintEngine
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQDesktopWidget_vtable_callback_event
+    vtbl[].vtbl.event = fcQDesktopWidget_vtable_callback_event
   if not isNil(vtbl[].mousePressEvent):
-    vtbl[].vtbl.mousePressEvent = cQDesktopWidget_vtable_callback_mousePressEvent
+    vtbl[].vtbl.mousePressEvent = fcQDesktopWidget_vtable_callback_mousePressEvent
   if not isNil(vtbl[].mouseReleaseEvent):
-    vtbl[].vtbl.mouseReleaseEvent = cQDesktopWidget_vtable_callback_mouseReleaseEvent
+    vtbl[].vtbl.mouseReleaseEvent = fcQDesktopWidget_vtable_callback_mouseReleaseEvent
   if not isNil(vtbl[].mouseDoubleClickEvent):
-    vtbl[].vtbl.mouseDoubleClickEvent = cQDesktopWidget_vtable_callback_mouseDoubleClickEvent
+    vtbl[].vtbl.mouseDoubleClickEvent = fcQDesktopWidget_vtable_callback_mouseDoubleClickEvent
   if not isNil(vtbl[].mouseMoveEvent):
-    vtbl[].vtbl.mouseMoveEvent = cQDesktopWidget_vtable_callback_mouseMoveEvent
+    vtbl[].vtbl.mouseMoveEvent = fcQDesktopWidget_vtable_callback_mouseMoveEvent
   if not isNil(vtbl[].wheelEvent):
-    vtbl[].vtbl.wheelEvent = cQDesktopWidget_vtable_callback_wheelEvent
+    vtbl[].vtbl.wheelEvent = fcQDesktopWidget_vtable_callback_wheelEvent
   if not isNil(vtbl[].keyPressEvent):
-    vtbl[].vtbl.keyPressEvent = cQDesktopWidget_vtable_callback_keyPressEvent
+    vtbl[].vtbl.keyPressEvent = fcQDesktopWidget_vtable_callback_keyPressEvent
   if not isNil(vtbl[].keyReleaseEvent):
-    vtbl[].vtbl.keyReleaseEvent = cQDesktopWidget_vtable_callback_keyReleaseEvent
+    vtbl[].vtbl.keyReleaseEvent = fcQDesktopWidget_vtable_callback_keyReleaseEvent
   if not isNil(vtbl[].focusInEvent):
-    vtbl[].vtbl.focusInEvent = cQDesktopWidget_vtable_callback_focusInEvent
+    vtbl[].vtbl.focusInEvent = fcQDesktopWidget_vtable_callback_focusInEvent
   if not isNil(vtbl[].focusOutEvent):
-    vtbl[].vtbl.focusOutEvent = cQDesktopWidget_vtable_callback_focusOutEvent
+    vtbl[].vtbl.focusOutEvent = fcQDesktopWidget_vtable_callback_focusOutEvent
   if not isNil(vtbl[].enterEvent):
-    vtbl[].vtbl.enterEvent = cQDesktopWidget_vtable_callback_enterEvent
+    vtbl[].vtbl.enterEvent = fcQDesktopWidget_vtable_callback_enterEvent
   if not isNil(vtbl[].leaveEvent):
-    vtbl[].vtbl.leaveEvent = cQDesktopWidget_vtable_callback_leaveEvent
+    vtbl[].vtbl.leaveEvent = fcQDesktopWidget_vtable_callback_leaveEvent
   if not isNil(vtbl[].paintEvent):
-    vtbl[].vtbl.paintEvent = cQDesktopWidget_vtable_callback_paintEvent
+    vtbl[].vtbl.paintEvent = fcQDesktopWidget_vtable_callback_paintEvent
   if not isNil(vtbl[].moveEvent):
-    vtbl[].vtbl.moveEvent = cQDesktopWidget_vtable_callback_moveEvent
+    vtbl[].vtbl.moveEvent = fcQDesktopWidget_vtable_callback_moveEvent
   if not isNil(vtbl[].closeEvent):
-    vtbl[].vtbl.closeEvent = cQDesktopWidget_vtable_callback_closeEvent
+    vtbl[].vtbl.closeEvent = fcQDesktopWidget_vtable_callback_closeEvent
   if not isNil(vtbl[].contextMenuEvent):
-    vtbl[].vtbl.contextMenuEvent = cQDesktopWidget_vtable_callback_contextMenuEvent
+    vtbl[].vtbl.contextMenuEvent = fcQDesktopWidget_vtable_callback_contextMenuEvent
   if not isNil(vtbl[].tabletEvent):
-    vtbl[].vtbl.tabletEvent = cQDesktopWidget_vtable_callback_tabletEvent
+    vtbl[].vtbl.tabletEvent = fcQDesktopWidget_vtable_callback_tabletEvent
   if not isNil(vtbl[].actionEvent):
-    vtbl[].vtbl.actionEvent = cQDesktopWidget_vtable_callback_actionEvent
+    vtbl[].vtbl.actionEvent = fcQDesktopWidget_vtable_callback_actionEvent
   if not isNil(vtbl[].dragEnterEvent):
-    vtbl[].vtbl.dragEnterEvent = cQDesktopWidget_vtable_callback_dragEnterEvent
+    vtbl[].vtbl.dragEnterEvent = fcQDesktopWidget_vtable_callback_dragEnterEvent
   if not isNil(vtbl[].dragMoveEvent):
-    vtbl[].vtbl.dragMoveEvent = cQDesktopWidget_vtable_callback_dragMoveEvent
+    vtbl[].vtbl.dragMoveEvent = fcQDesktopWidget_vtable_callback_dragMoveEvent
   if not isNil(vtbl[].dragLeaveEvent):
-    vtbl[].vtbl.dragLeaveEvent = cQDesktopWidget_vtable_callback_dragLeaveEvent
+    vtbl[].vtbl.dragLeaveEvent = fcQDesktopWidget_vtable_callback_dragLeaveEvent
   if not isNil(vtbl[].dropEvent):
-    vtbl[].vtbl.dropEvent = cQDesktopWidget_vtable_callback_dropEvent
+    vtbl[].vtbl.dropEvent = fcQDesktopWidget_vtable_callback_dropEvent
   if not isNil(vtbl[].showEvent):
-    vtbl[].vtbl.showEvent = cQDesktopWidget_vtable_callback_showEvent
+    vtbl[].vtbl.showEvent = fcQDesktopWidget_vtable_callback_showEvent
   if not isNil(vtbl[].hideEvent):
-    vtbl[].vtbl.hideEvent = cQDesktopWidget_vtable_callback_hideEvent
+    vtbl[].vtbl.hideEvent = fcQDesktopWidget_vtable_callback_hideEvent
   if not isNil(vtbl[].nativeEvent):
-    vtbl[].vtbl.nativeEvent = cQDesktopWidget_vtable_callback_nativeEvent
+    vtbl[].vtbl.nativeEvent = fcQDesktopWidget_vtable_callback_nativeEvent
   if not isNil(vtbl[].changeEvent):
-    vtbl[].vtbl.changeEvent = cQDesktopWidget_vtable_callback_changeEvent
+    vtbl[].vtbl.changeEvent = fcQDesktopWidget_vtable_callback_changeEvent
   if not isNil(vtbl[].metric):
-    vtbl[].vtbl.metric = cQDesktopWidget_vtable_callback_metric
+    vtbl[].vtbl.metric = fcQDesktopWidget_vtable_callback_metric
   if not isNil(vtbl[].initPainter):
-    vtbl[].vtbl.initPainter = cQDesktopWidget_vtable_callback_initPainter
+    vtbl[].vtbl.initPainter = fcQDesktopWidget_vtable_callback_initPainter
   if not isNil(vtbl[].redirected):
-    vtbl[].vtbl.redirected = cQDesktopWidget_vtable_callback_redirected
+    vtbl[].vtbl.redirected = fcQDesktopWidget_vtable_callback_redirected
   if not isNil(vtbl[].sharedPainter):
-    vtbl[].vtbl.sharedPainter = cQDesktopWidget_vtable_callback_sharedPainter
+    vtbl[].vtbl.sharedPainter = fcQDesktopWidget_vtable_callback_sharedPainter
   if not isNil(vtbl[].inputMethodEvent):
-    vtbl[].vtbl.inputMethodEvent = cQDesktopWidget_vtable_callback_inputMethodEvent
+    vtbl[].vtbl.inputMethodEvent = fcQDesktopWidget_vtable_callback_inputMethodEvent
   if not isNil(vtbl[].inputMethodQuery):
-    vtbl[].vtbl.inputMethodQuery = cQDesktopWidget_vtable_callback_inputMethodQuery
+    vtbl[].vtbl.inputMethodQuery = fcQDesktopWidget_vtable_callback_inputMethodQuery
   if not isNil(vtbl[].focusNextPrevChild):
-    vtbl[].vtbl.focusNextPrevChild = cQDesktopWidget_vtable_callback_focusNextPrevChild
+    vtbl[].vtbl.focusNextPrevChild = fcQDesktopWidget_vtable_callback_focusNextPrevChild
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQDesktopWidget_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQDesktopWidget_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQDesktopWidget_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQDesktopWidget_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQDesktopWidget_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQDesktopWidget_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQDesktopWidget_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQDesktopWidget_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQDesktopWidget_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQDesktopWidget_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQDesktopWidget_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQDesktopWidget_vtable_callback_disconnectNotify
   gen_qdesktopwidget_types.QDesktopWidget(h: fcQDesktopWidget_new(addr(vtbl[].vtbl), addr(vtbl[])), owned: true)
 
 const cQDesktopWidget_mvtbl = cQDesktopWidgetVTable(
@@ -1517,56 +1524,57 @@ const cQDesktopWidget_mvtbl = cQDesktopWidgetVTable(
     let inst = cast[ptr typeof(VirtualQDesktopWidget()[])](self.fcQDesktopWidget_vtbl())
     inst[].h = nil
     inst[].owned = false,
-  metaObject: cQDesktopWidget_method_callback_metaObject,
-  metacast: cQDesktopWidget_method_callback_metacast,
-  metacall: cQDesktopWidget_method_callback_metacall,
-  resizeEvent: cQDesktopWidget_method_callback_resizeEvent,
-  devType: cQDesktopWidget_method_callback_devType,
-  setVisible: cQDesktopWidget_method_callback_setVisible,
-  sizeHint: cQDesktopWidget_method_callback_sizeHint,
-  minimumSizeHint: cQDesktopWidget_method_callback_minimumSizeHint,
-  heightForWidth: cQDesktopWidget_method_callback_heightForWidth,
-  hasHeightForWidth: cQDesktopWidget_method_callback_hasHeightForWidth,
-  paintEngine: cQDesktopWidget_method_callback_paintEngine,
-  event: cQDesktopWidget_method_callback_event,
-  mousePressEvent: cQDesktopWidget_method_callback_mousePressEvent,
-  mouseReleaseEvent: cQDesktopWidget_method_callback_mouseReleaseEvent,
-  mouseDoubleClickEvent: cQDesktopWidget_method_callback_mouseDoubleClickEvent,
-  mouseMoveEvent: cQDesktopWidget_method_callback_mouseMoveEvent,
-  wheelEvent: cQDesktopWidget_method_callback_wheelEvent,
-  keyPressEvent: cQDesktopWidget_method_callback_keyPressEvent,
-  keyReleaseEvent: cQDesktopWidget_method_callback_keyReleaseEvent,
-  focusInEvent: cQDesktopWidget_method_callback_focusInEvent,
-  focusOutEvent: cQDesktopWidget_method_callback_focusOutEvent,
-  enterEvent: cQDesktopWidget_method_callback_enterEvent,
-  leaveEvent: cQDesktopWidget_method_callback_leaveEvent,
-  paintEvent: cQDesktopWidget_method_callback_paintEvent,
-  moveEvent: cQDesktopWidget_method_callback_moveEvent,
-  closeEvent: cQDesktopWidget_method_callback_closeEvent,
-  contextMenuEvent: cQDesktopWidget_method_callback_contextMenuEvent,
-  tabletEvent: cQDesktopWidget_method_callback_tabletEvent,
-  actionEvent: cQDesktopWidget_method_callback_actionEvent,
-  dragEnterEvent: cQDesktopWidget_method_callback_dragEnterEvent,
-  dragMoveEvent: cQDesktopWidget_method_callback_dragMoveEvent,
-  dragLeaveEvent: cQDesktopWidget_method_callback_dragLeaveEvent,
-  dropEvent: cQDesktopWidget_method_callback_dropEvent,
-  showEvent: cQDesktopWidget_method_callback_showEvent,
-  hideEvent: cQDesktopWidget_method_callback_hideEvent,
-  nativeEvent: cQDesktopWidget_method_callback_nativeEvent,
-  changeEvent: cQDesktopWidget_method_callback_changeEvent,
-  metric: cQDesktopWidget_method_callback_metric,
-  initPainter: cQDesktopWidget_method_callback_initPainter,
-  redirected: cQDesktopWidget_method_callback_redirected,
-  sharedPainter: cQDesktopWidget_method_callback_sharedPainter,
-  inputMethodEvent: cQDesktopWidget_method_callback_inputMethodEvent,
-  inputMethodQuery: cQDesktopWidget_method_callback_inputMethodQuery,
-  focusNextPrevChild: cQDesktopWidget_method_callback_focusNextPrevChild,
-  eventFilter: cQDesktopWidget_method_callback_eventFilter,
-  timerEvent: cQDesktopWidget_method_callback_timerEvent,
-  childEvent: cQDesktopWidget_method_callback_childEvent,
-  customEvent: cQDesktopWidget_method_callback_customEvent,
-  connectNotify: cQDesktopWidget_method_callback_connectNotify,
-  disconnectNotify: cQDesktopWidget_method_callback_disconnectNotify,
+
+  metaObject: fcQDesktopWidget_method_callback_metaObject,
+  metacast: fcQDesktopWidget_method_callback_metacast,
+  metacall: fcQDesktopWidget_method_callback_metacall,
+  resizeEvent: fcQDesktopWidget_method_callback_resizeEvent,
+  devType: fcQDesktopWidget_method_callback_devType,
+  setVisible: fcQDesktopWidget_method_callback_setVisible,
+  sizeHint: fcQDesktopWidget_method_callback_sizeHint,
+  minimumSizeHint: fcQDesktopWidget_method_callback_minimumSizeHint,
+  heightForWidth: fcQDesktopWidget_method_callback_heightForWidth,
+  hasHeightForWidth: fcQDesktopWidget_method_callback_hasHeightForWidth,
+  paintEngine: fcQDesktopWidget_method_callback_paintEngine,
+  event: fcQDesktopWidget_method_callback_event,
+  mousePressEvent: fcQDesktopWidget_method_callback_mousePressEvent,
+  mouseReleaseEvent: fcQDesktopWidget_method_callback_mouseReleaseEvent,
+  mouseDoubleClickEvent: fcQDesktopWidget_method_callback_mouseDoubleClickEvent,
+  mouseMoveEvent: fcQDesktopWidget_method_callback_mouseMoveEvent,
+  wheelEvent: fcQDesktopWidget_method_callback_wheelEvent,
+  keyPressEvent: fcQDesktopWidget_method_callback_keyPressEvent,
+  keyReleaseEvent: fcQDesktopWidget_method_callback_keyReleaseEvent,
+  focusInEvent: fcQDesktopWidget_method_callback_focusInEvent,
+  focusOutEvent: fcQDesktopWidget_method_callback_focusOutEvent,
+  enterEvent: fcQDesktopWidget_method_callback_enterEvent,
+  leaveEvent: fcQDesktopWidget_method_callback_leaveEvent,
+  paintEvent: fcQDesktopWidget_method_callback_paintEvent,
+  moveEvent: fcQDesktopWidget_method_callback_moveEvent,
+  closeEvent: fcQDesktopWidget_method_callback_closeEvent,
+  contextMenuEvent: fcQDesktopWidget_method_callback_contextMenuEvent,
+  tabletEvent: fcQDesktopWidget_method_callback_tabletEvent,
+  actionEvent: fcQDesktopWidget_method_callback_actionEvent,
+  dragEnterEvent: fcQDesktopWidget_method_callback_dragEnterEvent,
+  dragMoveEvent: fcQDesktopWidget_method_callback_dragMoveEvent,
+  dragLeaveEvent: fcQDesktopWidget_method_callback_dragLeaveEvent,
+  dropEvent: fcQDesktopWidget_method_callback_dropEvent,
+  showEvent: fcQDesktopWidget_method_callback_showEvent,
+  hideEvent: fcQDesktopWidget_method_callback_hideEvent,
+  nativeEvent: fcQDesktopWidget_method_callback_nativeEvent,
+  changeEvent: fcQDesktopWidget_method_callback_changeEvent,
+  metric: fcQDesktopWidget_method_callback_metric,
+  initPainter: fcQDesktopWidget_method_callback_initPainter,
+  redirected: fcQDesktopWidget_method_callback_redirected,
+  sharedPainter: fcQDesktopWidget_method_callback_sharedPainter,
+  inputMethodEvent: fcQDesktopWidget_method_callback_inputMethodEvent,
+  inputMethodQuery: fcQDesktopWidget_method_callback_inputMethodQuery,
+  focusNextPrevChild: fcQDesktopWidget_method_callback_focusNextPrevChild,
+  eventFilter: fcQDesktopWidget_method_callback_eventFilter,
+  timerEvent: fcQDesktopWidget_method_callback_timerEvent,
+  childEvent: fcQDesktopWidget_method_callback_childEvent,
+  customEvent: fcQDesktopWidget_method_callback_customEvent,
+  connectNotify: fcQDesktopWidget_method_callback_connectNotify,
+  disconnectNotify: fcQDesktopWidget_method_callback_disconnectNotify,
 )
 proc create*(T: type gen_qdesktopwidget_types.QDesktopWidget,
     inst: VirtualQDesktopWidget) =

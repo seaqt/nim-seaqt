@@ -71,6 +71,7 @@ proc fcQWebPluginFactory_trUtf82(s: cstring, c: cstring): struct_miqt_string {.i
 proc fcQWebPluginFactory_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QWebPluginFactory_trUtf83".}
 proc fcQWebPluginFactory_vtbl(self: pointer): pointer {.importc: "QWebPluginFactory_vtbl".}
 proc fcQWebPluginFactory_vdata(self: pointer): pointer {.importc: "QWebPluginFactory_vdata".}
+
 type cQWebPluginFactoryVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -204,6 +205,7 @@ type QWebPluginFactorychildEventProc* = proc(self: QWebPluginFactory, event: gen
 type QWebPluginFactorycustomEventProc* = proc(self: QWebPluginFactory, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QWebPluginFactoryconnectNotifyProc* = proc(self: QWebPluginFactory, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QWebPluginFactorydisconnectNotifyProc* = proc(self: QWebPluginFactory, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+
 type QWebPluginFactoryVTable* {.inheritable, pure.} = object
   vtbl: cQWebPluginFactoryVTable
   metaObject*: QWebPluginFactorymetaObjectProc
@@ -221,10 +223,48 @@ type QWebPluginFactoryVTable* {.inheritable, pure.} = object
   customEvent*: QWebPluginFactorycustomEventProc
   connectNotify*: QWebPluginFactoryconnectNotifyProc
   disconnectNotify*: QWebPluginFactorydisconnectNotifyProc
+
 proc QWebPluginFactorymetaObject*(self: gen_qwebpluginfactory_types.QWebPluginFactory): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQWebPluginFactory_virtualbase_metaObject(self.h), owned: false)
 
-proc cQWebPluginFactory_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
+proc QWebPluginFactorymetacast*(self: gen_qwebpluginfactory_types.QWebPluginFactory, param1: cstring): pointer =
+  fcQWebPluginFactory_virtualbase_metacast(self.h, param1)
+
+proc QWebPluginFactorymetacall*(self: gen_qwebpluginfactory_types.QWebPluginFactory, param1: cint, param2: cint, param3: pointer): cint =
+  fcQWebPluginFactory_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+proc QWebPluginFactoryrefreshPlugins*(self: gen_qwebpluginfactory_types.QWebPluginFactory): void =
+  fcQWebPluginFactory_virtualbase_refreshPlugins(self.h)
+
+proc QWebPluginFactoryextension*(self: gen_qwebpluginfactory_types.QWebPluginFactory, extension: cint, option: gen_qwebpluginfactory_types.QWebPluginFactoryExtensionOption, output: gen_qwebpluginfactory_types.QWebPluginFactoryExtensionReturn): bool =
+  fcQWebPluginFactory_virtualbase_extension(self.h, cint(extension), option.h, output.h)
+
+proc QWebPluginFactorysupportsExtension*(self: gen_qwebpluginfactory_types.QWebPluginFactory, extension: cint): bool =
+  fcQWebPluginFactory_virtualbase_supportsExtension(self.h, cint(extension))
+
+proc QWebPluginFactoryevent*(self: gen_qwebpluginfactory_types.QWebPluginFactory, event: gen_qcoreevent_types.QEvent): bool =
+  fcQWebPluginFactory_virtualbase_event(self.h, event.h)
+
+proc QWebPluginFactoryeventFilter*(self: gen_qwebpluginfactory_types.QWebPluginFactory, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
+  fcQWebPluginFactory_virtualbase_eventFilter(self.h, watched.h, event.h)
+
+proc QWebPluginFactorytimerEvent*(self: gen_qwebpluginfactory_types.QWebPluginFactory, event: gen_qcoreevent_types.QTimerEvent): void =
+  fcQWebPluginFactory_virtualbase_timerEvent(self.h, event.h)
+
+proc QWebPluginFactorychildEvent*(self: gen_qwebpluginfactory_types.QWebPluginFactory, event: gen_qcoreevent_types.QChildEvent): void =
+  fcQWebPluginFactory_virtualbase_childEvent(self.h, event.h)
+
+proc QWebPluginFactorycustomEvent*(self: gen_qwebpluginfactory_types.QWebPluginFactory, event: gen_qcoreevent_types.QEvent): void =
+  fcQWebPluginFactory_virtualbase_customEvent(self.h, event.h)
+
+proc QWebPluginFactoryconnectNotify*(self: gen_qwebpluginfactory_types.QWebPluginFactory, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQWebPluginFactory_virtualbase_connectNotify(self.h, signal.h)
+
+proc QWebPluginFactorydisconnectNotify*(self: gen_qwebpluginfactory_types.QWebPluginFactory, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQWebPluginFactory_virtualbase_disconnectNotify(self.h, signal.h)
+
+
+proc fcQWebPluginFactory_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QWebPluginFactoryVTable](fcQWebPluginFactory_vdata(self))
   let self = QWebPluginFactory(h: self)
   var virtualReturn = vtbl[].metaObject(self)
@@ -233,20 +273,14 @@ proc cQWebPluginFactory_vtable_callback_metaObject(self: pointer): pointer {.cde
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QWebPluginFactorymetacast*(self: gen_qwebpluginfactory_types.QWebPluginFactory, param1: cstring): pointer =
-  fcQWebPluginFactory_virtualbase_metacast(self.h, param1)
-
-proc cQWebPluginFactory_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+proc fcQWebPluginFactory_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QWebPluginFactoryVTable](fcQWebPluginFactory_vdata(self))
   let self = QWebPluginFactory(h: self)
   let slotval1 = (param1)
   var virtualReturn = vtbl[].metacast(self, slotval1)
   virtualReturn
 
-proc QWebPluginFactorymetacall*(self: gen_qwebpluginfactory_types.QWebPluginFactory, param1: cint, param2: cint, param3: pointer): cint =
-  fcQWebPluginFactory_virtualbase_metacall(self.h, cint(param1), param2, param3)
-
-proc cQWebPluginFactory_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+proc fcQWebPluginFactory_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QWebPluginFactoryVTable](fcQWebPluginFactory_vdata(self))
   let self = QWebPluginFactory(h: self)
   let slotval1 = cint(param1)
@@ -255,7 +289,7 @@ proc cQWebPluginFactory_vtable_callback_metacall(self: pointer, param1: cint, pa
   var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc cQWebPluginFactory_vtable_callback_plugins(self: pointer): struct_miqt_array {.cdecl.} =
+proc fcQWebPluginFactory_vtable_callback_plugins(self: pointer): struct_miqt_array {.cdecl.} =
   let vtbl = cast[ptr QWebPluginFactoryVTable](fcQWebPluginFactory_vdata(self))
   let self = QWebPluginFactory(h: self)
   var virtualReturn = vtbl[].plugins(self)
@@ -268,15 +302,12 @@ proc cQWebPluginFactory_vtable_callback_plugins(self: pointer): struct_miqt_arra
 
   struct_miqt_array(len: csize_t(len(virtualReturn)), data: if len(virtualReturn) == 0: nil else: addr(virtualReturn_CArray[0]))
 
-proc QWebPluginFactoryrefreshPlugins*(self: gen_qwebpluginfactory_types.QWebPluginFactory): void =
-  fcQWebPluginFactory_virtualbase_refreshPlugins(self.h)
-
-proc cQWebPluginFactory_vtable_callback_refreshPlugins(self: pointer): void {.cdecl.} =
+proc fcQWebPluginFactory_vtable_callback_refreshPlugins(self: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWebPluginFactoryVTable](fcQWebPluginFactory_vdata(self))
   let self = QWebPluginFactory(h: self)
   vtbl[].refreshPlugins(self)
 
-proc cQWebPluginFactory_vtable_callback_createX(self: pointer, mimeType: struct_miqt_string, param2: pointer, argumentNames: struct_miqt_array, argumentValues: struct_miqt_array): pointer {.cdecl.} =
+proc fcQWebPluginFactory_vtable_callback_createX(self: pointer, mimeType: struct_miqt_string, param2: pointer, argumentNames: struct_miqt_array, argumentValues: struct_miqt_array): pointer {.cdecl.} =
   let vtbl = cast[ptr QWebPluginFactoryVTable](fcQWebPluginFactory_vdata(self))
   let self = QWebPluginFactory(h: self)
   let vmimeType_ms = mimeType
@@ -310,10 +341,7 @@ proc cQWebPluginFactory_vtable_callback_createX(self: pointer, mimeType: struct_
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QWebPluginFactoryextension*(self: gen_qwebpluginfactory_types.QWebPluginFactory, extension: cint, option: gen_qwebpluginfactory_types.QWebPluginFactoryExtensionOption, output: gen_qwebpluginfactory_types.QWebPluginFactoryExtensionReturn): bool =
-  fcQWebPluginFactory_virtualbase_extension(self.h, cint(extension), option.h, output.h)
-
-proc cQWebPluginFactory_vtable_callback_extension(self: pointer, extension: cint, option: pointer, output: pointer): bool {.cdecl.} =
+proc fcQWebPluginFactory_vtable_callback_extension(self: pointer, extension: cint, option: pointer, output: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QWebPluginFactoryVTable](fcQWebPluginFactory_vdata(self))
   let self = QWebPluginFactory(h: self)
   let slotval1 = cint(extension)
@@ -322,30 +350,21 @@ proc cQWebPluginFactory_vtable_callback_extension(self: pointer, extension: cint
   var virtualReturn = vtbl[].extension(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QWebPluginFactorysupportsExtension*(self: gen_qwebpluginfactory_types.QWebPluginFactory, extension: cint): bool =
-  fcQWebPluginFactory_virtualbase_supportsExtension(self.h, cint(extension))
-
-proc cQWebPluginFactory_vtable_callback_supportsExtension(self: pointer, extension: cint): bool {.cdecl.} =
+proc fcQWebPluginFactory_vtable_callback_supportsExtension(self: pointer, extension: cint): bool {.cdecl.} =
   let vtbl = cast[ptr QWebPluginFactoryVTable](fcQWebPluginFactory_vdata(self))
   let self = QWebPluginFactory(h: self)
   let slotval1 = cint(extension)
   var virtualReturn = vtbl[].supportsExtension(self, slotval1)
   virtualReturn
 
-proc QWebPluginFactoryevent*(self: gen_qwebpluginfactory_types.QWebPluginFactory, event: gen_qcoreevent_types.QEvent): bool =
-  fcQWebPluginFactory_virtualbase_event(self.h, event.h)
-
-proc cQWebPluginFactory_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
+proc fcQWebPluginFactory_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QWebPluginFactoryVTable](fcQWebPluginFactory_vdata(self))
   let self = QWebPluginFactory(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
-proc QWebPluginFactoryeventFilter*(self: gen_qwebpluginfactory_types.QWebPluginFactory, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
-  fcQWebPluginFactory_virtualbase_eventFilter(self.h, watched.h, event.h)
-
-proc cQWebPluginFactory_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+proc fcQWebPluginFactory_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QWebPluginFactoryVTable](fcQWebPluginFactory_vdata(self))
   let self = QWebPluginFactory(h: self)
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
@@ -353,46 +372,31 @@ proc cQWebPluginFactory_vtable_callback_eventFilter(self: pointer, watched: poin
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
-proc QWebPluginFactorytimerEvent*(self: gen_qwebpluginfactory_types.QWebPluginFactory, event: gen_qcoreevent_types.QTimerEvent): void =
-  fcQWebPluginFactory_virtualbase_timerEvent(self.h, event.h)
-
-proc cQWebPluginFactory_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQWebPluginFactory_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWebPluginFactoryVTable](fcQWebPluginFactory_vdata(self))
   let self = QWebPluginFactory(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
-proc QWebPluginFactorychildEvent*(self: gen_qwebpluginfactory_types.QWebPluginFactory, event: gen_qcoreevent_types.QChildEvent): void =
-  fcQWebPluginFactory_virtualbase_childEvent(self.h, event.h)
-
-proc cQWebPluginFactory_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQWebPluginFactory_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWebPluginFactoryVTable](fcQWebPluginFactory_vdata(self))
   let self = QWebPluginFactory(h: self)
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
-proc QWebPluginFactorycustomEvent*(self: gen_qwebpluginfactory_types.QWebPluginFactory, event: gen_qcoreevent_types.QEvent): void =
-  fcQWebPluginFactory_virtualbase_customEvent(self.h, event.h)
-
-proc cQWebPluginFactory_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQWebPluginFactory_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWebPluginFactoryVTable](fcQWebPluginFactory_vdata(self))
   let self = QWebPluginFactory(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
-proc QWebPluginFactoryconnectNotify*(self: gen_qwebpluginfactory_types.QWebPluginFactory, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQWebPluginFactory_virtualbase_connectNotify(self.h, signal.h)
-
-proc cQWebPluginFactory_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQWebPluginFactory_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWebPluginFactoryVTable](fcQWebPluginFactory_vdata(self))
   let self = QWebPluginFactory(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
-proc QWebPluginFactorydisconnectNotify*(self: gen_qwebpluginfactory_types.QWebPluginFactory, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQWebPluginFactory_virtualbase_disconnectNotify(self.h, signal.h)
-
-proc cQWebPluginFactory_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQWebPluginFactory_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWebPluginFactoryVTable](fcQWebPluginFactory_vdata(self))
   let self = QWebPluginFactory(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
@@ -400,9 +404,39 @@ proc cQWebPluginFactory_vtable_callback_disconnectNotify(self: pointer, signal: 
 
 type VirtualQWebPluginFactory* {.inheritable.} = ref object of QWebPluginFactory
   vtbl*: cQWebPluginFactoryVTable
+
 method metaObject*(self: VirtualQWebPluginFactory): gen_qobjectdefs_types.QMetaObject {.base.} =
   QWebPluginFactorymetaObject(self[])
-proc cQWebPluginFactory_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
+method metacast*(self: VirtualQWebPluginFactory, param1: cstring): pointer {.base.} =
+  QWebPluginFactorymetacast(self[], param1)
+method metacall*(self: VirtualQWebPluginFactory, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QWebPluginFactorymetacall(self[], param1, param2, param3)
+method plugins*(self: VirtualQWebPluginFactory): seq[gen_qwebpluginfactory_types.QWebPluginFactoryPlugin] {.base.} =
+  raiseAssert("missing implementation of QWebPluginFactory.plugins")
+method refreshPlugins*(self: VirtualQWebPluginFactory): void {.base.} =
+  QWebPluginFactoryrefreshPlugins(self[])
+method createX*(self: VirtualQWebPluginFactory, mimeType: openArray[char], param2: gen_qurl_types.QUrl, argumentNames: openArray[string], argumentValues: openArray[string]): gen_qobject_types.QObject {.base.} =
+  raiseAssert("missing implementation of QWebPluginFactory.createX")
+method extension*(self: VirtualQWebPluginFactory, extension: cint, option: gen_qwebpluginfactory_types.QWebPluginFactoryExtensionOption, output: gen_qwebpluginfactory_types.QWebPluginFactoryExtensionReturn): bool {.base.} =
+  QWebPluginFactoryextension(self[], extension, option, output)
+method supportsExtension*(self: VirtualQWebPluginFactory, extension: cint): bool {.base.} =
+  QWebPluginFactorysupportsExtension(self[], extension)
+method event*(self: VirtualQWebPluginFactory, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QWebPluginFactoryevent(self[], event)
+method eventFilter*(self: VirtualQWebPluginFactory, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QWebPluginFactoryeventFilter(self[], watched, event)
+method timerEvent*(self: VirtualQWebPluginFactory, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QWebPluginFactorytimerEvent(self[], event)
+method childEvent*(self: VirtualQWebPluginFactory, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QWebPluginFactorychildEvent(self[], event)
+method customEvent*(self: VirtualQWebPluginFactory, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QWebPluginFactorycustomEvent(self[], event)
+method connectNotify*(self: VirtualQWebPluginFactory, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QWebPluginFactoryconnectNotify(self[], signal)
+method disconnectNotify*(self: VirtualQWebPluginFactory, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QWebPluginFactorydisconnectNotify(self[], signal)
+
+proc fcQWebPluginFactory_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQWebPluginFactory](fcQWebPluginFactory_vdata(self))
   var virtualReturn = inst.metaObject()
   virtualReturn.owned = false # TODO move?
@@ -410,17 +444,13 @@ proc cQWebPluginFactory_method_callback_metaObject(self: pointer): pointer {.cde
   virtualReturn.h = nil
   virtualReturn_h
 
-method metacast*(self: VirtualQWebPluginFactory, param1: cstring): pointer {.base.} =
-  QWebPluginFactorymetacast(self[], param1)
-proc cQWebPluginFactory_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+proc fcQWebPluginFactory_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQWebPluginFactory](fcQWebPluginFactory_vdata(self))
   let slotval1 = (param1)
   var virtualReturn = inst.metacast(slotval1)
   virtualReturn
 
-method metacall*(self: VirtualQWebPluginFactory, param1: cint, param2: cint, param3: pointer): cint {.base.} =
-  QWebPluginFactorymetacall(self[], param1, param2, param3)
-proc cQWebPluginFactory_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+proc fcQWebPluginFactory_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQWebPluginFactory](fcQWebPluginFactory_vdata(self))
   let slotval1 = cint(param1)
   let slotval2 = param2
@@ -428,9 +458,7 @@ proc cQWebPluginFactory_method_callback_metacall(self: pointer, param1: cint, pa
   var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
-method plugins*(self: VirtualQWebPluginFactory): seq[gen_qwebpluginfactory_types.QWebPluginFactoryPlugin] {.base.} =
-  raiseAssert("missing implementation of QWebPluginFactory_virtualbase_plugins")
-proc cQWebPluginFactory_method_callback_plugins(self: pointer): struct_miqt_array {.cdecl.} =
+proc fcQWebPluginFactory_method_callback_plugins(self: pointer): struct_miqt_array {.cdecl.} =
   let inst = cast[VirtualQWebPluginFactory](fcQWebPluginFactory_vdata(self))
   var virtualReturn = inst.plugins()
   var virtualReturn_CArray = cast[ptr UncheckedArray[pointer]](if len(virtualReturn) > 0: c_malloc(c_sizet(sizeof(pointer) * len(virtualReturn))) else: nil)
@@ -442,15 +470,11 @@ proc cQWebPluginFactory_method_callback_plugins(self: pointer): struct_miqt_arra
 
   struct_miqt_array(len: csize_t(len(virtualReturn)), data: if len(virtualReturn) == 0: nil else: addr(virtualReturn_CArray[0]))
 
-method refreshPlugins*(self: VirtualQWebPluginFactory): void {.base.} =
-  QWebPluginFactoryrefreshPlugins(self[])
-proc cQWebPluginFactory_method_callback_refreshPlugins(self: pointer): void {.cdecl.} =
+proc fcQWebPluginFactory_method_callback_refreshPlugins(self: pointer): void {.cdecl.} =
   let inst = cast[VirtualQWebPluginFactory](fcQWebPluginFactory_vdata(self))
   inst.refreshPlugins()
 
-method createX*(self: VirtualQWebPluginFactory, mimeType: openArray[char], param2: gen_qurl_types.QUrl, argumentNames: openArray[string], argumentValues: openArray[string]): gen_qobject_types.QObject {.base.} =
-  raiseAssert("missing implementation of QWebPluginFactory_virtualbase_create")
-proc cQWebPluginFactory_method_callback_createX(self: pointer, mimeType: struct_miqt_string, param2: pointer, argumentNames: struct_miqt_array, argumentValues: struct_miqt_array): pointer {.cdecl.} =
+proc fcQWebPluginFactory_method_callback_createX(self: pointer, mimeType: struct_miqt_string, param2: pointer, argumentNames: struct_miqt_array, argumentValues: struct_miqt_array): pointer {.cdecl.} =
   let inst = cast[VirtualQWebPluginFactory](fcQWebPluginFactory_vdata(self))
   let vmimeType_ms = mimeType
   let vmimeTypex_ret = string.fromBytes(vmimeType_ms)
@@ -483,9 +507,7 @@ proc cQWebPluginFactory_method_callback_createX(self: pointer, mimeType: struct_
   virtualReturn.h = nil
   virtualReturn_h
 
-method extension*(self: VirtualQWebPluginFactory, extension: cint, option: gen_qwebpluginfactory_types.QWebPluginFactoryExtensionOption, output: gen_qwebpluginfactory_types.QWebPluginFactoryExtensionReturn): bool {.base.} =
-  QWebPluginFactoryextension(self[], extension, option, output)
-proc cQWebPluginFactory_method_callback_extension(self: pointer, extension: cint, option: pointer, output: pointer): bool {.cdecl.} =
+proc fcQWebPluginFactory_method_callback_extension(self: pointer, extension: cint, option: pointer, output: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQWebPluginFactory](fcQWebPluginFactory_vdata(self))
   let slotval1 = cint(extension)
   let slotval2 = gen_qwebpluginfactory_types.QWebPluginFactoryExtensionOption(h: option, owned: false)
@@ -493,65 +515,50 @@ proc cQWebPluginFactory_method_callback_extension(self: pointer, extension: cint
   var virtualReturn = inst.extension(slotval1, slotval2, slotval3)
   virtualReturn
 
-method supportsExtension*(self: VirtualQWebPluginFactory, extension: cint): bool {.base.} =
-  QWebPluginFactorysupportsExtension(self[], extension)
-proc cQWebPluginFactory_method_callback_supportsExtension(self: pointer, extension: cint): bool {.cdecl.} =
+proc fcQWebPluginFactory_method_callback_supportsExtension(self: pointer, extension: cint): bool {.cdecl.} =
   let inst = cast[VirtualQWebPluginFactory](fcQWebPluginFactory_vdata(self))
   let slotval1 = cint(extension)
   var virtualReturn = inst.supportsExtension(slotval1)
   virtualReturn
 
-method event*(self: VirtualQWebPluginFactory, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QWebPluginFactoryevent(self[], event)
-proc cQWebPluginFactory_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
+proc fcQWebPluginFactory_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQWebPluginFactory](fcQWebPluginFactory_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
-method eventFilter*(self: VirtualQWebPluginFactory, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QWebPluginFactoryeventFilter(self[], watched, event)
-proc cQWebPluginFactory_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+proc fcQWebPluginFactory_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQWebPluginFactory](fcQWebPluginFactory_vdata(self))
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
   let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
-method timerEvent*(self: VirtualQWebPluginFactory, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
-  QWebPluginFactorytimerEvent(self[], event)
-proc cQWebPluginFactory_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQWebPluginFactory_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQWebPluginFactory](fcQWebPluginFactory_vdata(self))
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
-method childEvent*(self: VirtualQWebPluginFactory, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
-  QWebPluginFactorychildEvent(self[], event)
-proc cQWebPluginFactory_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQWebPluginFactory_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQWebPluginFactory](fcQWebPluginFactory_vdata(self))
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
-method customEvent*(self: VirtualQWebPluginFactory, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QWebPluginFactorycustomEvent(self[], event)
-proc cQWebPluginFactory_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQWebPluginFactory_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQWebPluginFactory](fcQWebPluginFactory_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
-method connectNotify*(self: VirtualQWebPluginFactory, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QWebPluginFactoryconnectNotify(self[], signal)
-proc cQWebPluginFactory_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQWebPluginFactory_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQWebPluginFactory](fcQWebPluginFactory_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
-method disconnectNotify*(self: VirtualQWebPluginFactory, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QWebPluginFactorydisconnectNotify(self[], signal)
-proc cQWebPluginFactory_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQWebPluginFactory_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQWebPluginFactory](fcQWebPluginFactory_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
+
 
 proc sender*(self: gen_qwebpluginfactory_types.QWebPluginFactory): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQWebPluginFactory_protectedbase_sender(self.h), owned: false)
@@ -573,35 +580,35 @@ proc create*(T: type gen_qwebpluginfactory_types.QWebPluginFactory,
     let vtbl = cast[ref QWebPluginFactoryVTable](fcQWebPluginFactory_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQWebPluginFactory_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQWebPluginFactory_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQWebPluginFactory_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQWebPluginFactory_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQWebPluginFactory_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQWebPluginFactory_vtable_callback_metacall
   if not isNil(vtbl[].plugins):
-    vtbl[].vtbl.plugins = cQWebPluginFactory_vtable_callback_plugins
+    vtbl[].vtbl.plugins = fcQWebPluginFactory_vtable_callback_plugins
   if not isNil(vtbl[].refreshPlugins):
-    vtbl[].vtbl.refreshPlugins = cQWebPluginFactory_vtable_callback_refreshPlugins
+    vtbl[].vtbl.refreshPlugins = fcQWebPluginFactory_vtable_callback_refreshPlugins
   if not isNil(vtbl[].createX):
-    vtbl[].vtbl.createX = cQWebPluginFactory_vtable_callback_createX
+    vtbl[].vtbl.createX = fcQWebPluginFactory_vtable_callback_createX
   if not isNil(vtbl[].extension):
-    vtbl[].vtbl.extension = cQWebPluginFactory_vtable_callback_extension
+    vtbl[].vtbl.extension = fcQWebPluginFactory_vtable_callback_extension
   if not isNil(vtbl[].supportsExtension):
-    vtbl[].vtbl.supportsExtension = cQWebPluginFactory_vtable_callback_supportsExtension
+    vtbl[].vtbl.supportsExtension = fcQWebPluginFactory_vtable_callback_supportsExtension
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQWebPluginFactory_vtable_callback_event
+    vtbl[].vtbl.event = fcQWebPluginFactory_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQWebPluginFactory_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQWebPluginFactory_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQWebPluginFactory_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQWebPluginFactory_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQWebPluginFactory_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQWebPluginFactory_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQWebPluginFactory_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQWebPluginFactory_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQWebPluginFactory_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQWebPluginFactory_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQWebPluginFactory_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQWebPluginFactory_vtable_callback_disconnectNotify
   gen_qwebpluginfactory_types.QWebPluginFactory(h: fcQWebPluginFactory_new(addr(vtbl[].vtbl), addr(vtbl[])), owned: true)
 
 proc create*(T: type gen_qwebpluginfactory_types.QWebPluginFactory,
@@ -613,35 +620,35 @@ proc create*(T: type gen_qwebpluginfactory_types.QWebPluginFactory,
     let vtbl = cast[ref QWebPluginFactoryVTable](fcQWebPluginFactory_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQWebPluginFactory_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQWebPluginFactory_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQWebPluginFactory_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQWebPluginFactory_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQWebPluginFactory_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQWebPluginFactory_vtable_callback_metacall
   if not isNil(vtbl[].plugins):
-    vtbl[].vtbl.plugins = cQWebPluginFactory_vtable_callback_plugins
+    vtbl[].vtbl.plugins = fcQWebPluginFactory_vtable_callback_plugins
   if not isNil(vtbl[].refreshPlugins):
-    vtbl[].vtbl.refreshPlugins = cQWebPluginFactory_vtable_callback_refreshPlugins
+    vtbl[].vtbl.refreshPlugins = fcQWebPluginFactory_vtable_callback_refreshPlugins
   if not isNil(vtbl[].createX):
-    vtbl[].vtbl.createX = cQWebPluginFactory_vtable_callback_createX
+    vtbl[].vtbl.createX = fcQWebPluginFactory_vtable_callback_createX
   if not isNil(vtbl[].extension):
-    vtbl[].vtbl.extension = cQWebPluginFactory_vtable_callback_extension
+    vtbl[].vtbl.extension = fcQWebPluginFactory_vtable_callback_extension
   if not isNil(vtbl[].supportsExtension):
-    vtbl[].vtbl.supportsExtension = cQWebPluginFactory_vtable_callback_supportsExtension
+    vtbl[].vtbl.supportsExtension = fcQWebPluginFactory_vtable_callback_supportsExtension
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQWebPluginFactory_vtable_callback_event
+    vtbl[].vtbl.event = fcQWebPluginFactory_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQWebPluginFactory_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQWebPluginFactory_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQWebPluginFactory_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQWebPluginFactory_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQWebPluginFactory_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQWebPluginFactory_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQWebPluginFactory_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQWebPluginFactory_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQWebPluginFactory_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQWebPluginFactory_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQWebPluginFactory_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQWebPluginFactory_vtable_callback_disconnectNotify
   gen_qwebpluginfactory_types.QWebPluginFactory(h: fcQWebPluginFactory_new2(addr(vtbl[].vtbl), addr(vtbl[]), parent.h), owned: true)
 
 const cQWebPluginFactory_mvtbl = cQWebPluginFactoryVTable(
@@ -649,21 +656,22 @@ const cQWebPluginFactory_mvtbl = cQWebPluginFactoryVTable(
     let inst = cast[ptr typeof(VirtualQWebPluginFactory()[])](self.fcQWebPluginFactory_vtbl())
     inst[].h = nil
     inst[].owned = false,
-  metaObject: cQWebPluginFactory_method_callback_metaObject,
-  metacast: cQWebPluginFactory_method_callback_metacast,
-  metacall: cQWebPluginFactory_method_callback_metacall,
-  plugins: cQWebPluginFactory_method_callback_plugins,
-  refreshPlugins: cQWebPluginFactory_method_callback_refreshPlugins,
-  createX: cQWebPluginFactory_method_callback_createX,
-  extension: cQWebPluginFactory_method_callback_extension,
-  supportsExtension: cQWebPluginFactory_method_callback_supportsExtension,
-  event: cQWebPluginFactory_method_callback_event,
-  eventFilter: cQWebPluginFactory_method_callback_eventFilter,
-  timerEvent: cQWebPluginFactory_method_callback_timerEvent,
-  childEvent: cQWebPluginFactory_method_callback_childEvent,
-  customEvent: cQWebPluginFactory_method_callback_customEvent,
-  connectNotify: cQWebPluginFactory_method_callback_connectNotify,
-  disconnectNotify: cQWebPluginFactory_method_callback_disconnectNotify,
+
+  metaObject: fcQWebPluginFactory_method_callback_metaObject,
+  metacast: fcQWebPluginFactory_method_callback_metacast,
+  metacall: fcQWebPluginFactory_method_callback_metacall,
+  plugins: fcQWebPluginFactory_method_callback_plugins,
+  refreshPlugins: fcQWebPluginFactory_method_callback_refreshPlugins,
+  createX: fcQWebPluginFactory_method_callback_createX,
+  extension: fcQWebPluginFactory_method_callback_extension,
+  supportsExtension: fcQWebPluginFactory_method_callback_supportsExtension,
+  event: fcQWebPluginFactory_method_callback_event,
+  eventFilter: fcQWebPluginFactory_method_callback_eventFilter,
+  timerEvent: fcQWebPluginFactory_method_callback_timerEvent,
+  childEvent: fcQWebPluginFactory_method_callback_childEvent,
+  customEvent: fcQWebPluginFactory_method_callback_customEvent,
+  connectNotify: fcQWebPluginFactory_method_callback_connectNotify,
+  disconnectNotify: fcQWebPluginFactory_method_callback_disconnectNotify,
 )
 proc create*(T: type gen_qwebpluginfactory_types.QWebPluginFactory,
     inst: VirtualQWebPluginFactory) =
