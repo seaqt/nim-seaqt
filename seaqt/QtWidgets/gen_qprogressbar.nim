@@ -2,7 +2,7 @@ import ./Qt6Widgets_libs
 
 {.push raises: [].}
 
-from system/ansi_c import c_free
+from system/ansi_c import c_free, c_malloc
 
 type
   struct_miqt_string {.used.} = object
@@ -501,7 +501,9 @@ proc fcQProgressBar_vtable_callback_text(self: pointer): struct_miqt_string {.cd
   let vtbl = cast[ptr QProgressBarVTable](fcQProgressBar_vdata(self)[])
   let self = QProgressBar(h: self)
   var virtualReturn = vtbl[].text(self)
-  struct_miqt_string(data: if len(virtualReturn) > 0: addr virtualReturn[0] else: nil, len: csize_t(len(virtualReturn)))
+  var virtualReturn_copy = if len(virtualReturn) > 0: c_malloc(csize_t(len(virtualReturn))) else: nil
+  if len(virtualReturn) > 0: copyMem(virtualReturn_copy, addr virtualReturn[0], csize_t(len(virtualReturn)))
+  struct_miqt_string(data: virtualReturn_copy, len: csize_t(len(virtualReturn)))
 
 proc QProgressBarsizeHint*(self: gen_qprogressbar_types.QProgressBar): gen_qsize_types.QSize =
   gen_qsize_types.QSize(h: fcQProgressBar_virtualbase_sizeHint(self.h))

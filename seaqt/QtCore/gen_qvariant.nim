@@ -2,7 +2,7 @@ import ./Qt6Core_libs
 
 {.push raises: [].}
 
-from system/ansi_c import c_free
+from system/ansi_c import c_free, c_malloc
 
 type
   struct_miqt_string {.used.} = object
@@ -653,7 +653,7 @@ proc create*(T: type gen_qvariant_types.QVariant,
   var map_Keys_CArray = newSeq[struct_miqt_string](len(map))
   var map_Values_CArray = newSeq[pointer](len(map))
   var map_ctr = 0
-  for mapk, mapv in map:
+  for map_k, map_v in map:
     map_Keys_CArray[map_ctr] = struct_miqt_string(data: if len(map_k) > 0: addr map_k[0] else: nil, len: csize_t(len(map_k)))
     map_Values_CArray[map_ctr] = map_v.h
     map_ctr += 1
@@ -665,7 +665,7 @@ proc create2*(T: type gen_qvariant_types.QVariant,
   var hash_Keys_CArray = newSeq[struct_miqt_string](len(hash))
   var hash_Values_CArray = newSeq[pointer](len(hash))
   var hash_ctr = 0
-  for hashk, hashv in hash:
+  for hash_k, hash_v in hash:
     hash_Keys_CArray[hash_ctr] = struct_miqt_string(data: if len(hash_k) > 0: addr hash_k[0] else: nil, len: csize_t(len(hash_k)))
     hash_Values_CArray[hash_ctr] = hash_v.h
     hash_ctr += 1

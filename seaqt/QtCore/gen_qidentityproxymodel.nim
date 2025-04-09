@@ -2,7 +2,7 @@ import ./Qt6Core_libs
 
 {.push raises: [].}
 
-from system/ansi_c import c_free
+from system/ansi_c import c_free, c_malloc
 
 type
   struct_miqt_string {.used.} = object
@@ -595,7 +595,7 @@ proc fcQIdentityProxyModel_vtable_callback_match(self: pointer, start: pointer, 
   let slotval4 = hits
   let slotval5 = cint(flags)
   var virtualReturn = vtbl[].match(self, slotval1, slotval2, slotval3, slotval4, slotval5)
-  var virtualReturn_CArray = newSeq[pointer](len(virtualReturn))
+  var virtualReturn_CArray = cast[ptr UncheckedArray[pointer]](if len(virtualReturn) > 0: c_malloc(c_sizet(sizeof(pointer) * len(virtualReturn))) else: nil)
   for i in 0..<len(virtualReturn):
     virtualReturn_CArray[i] = virtualReturn[i].h
 
@@ -734,10 +734,10 @@ proc fcQIdentityProxyModel_vtable_callback_itemData(self: pointer, index: pointe
   let self = QIdentityProxyModel(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index)
   var virtualReturn = vtbl[].itemData(self, slotval1)
-  var virtualReturn_Keys_CArray = newSeq[cint](len(virtualReturn))
-  var virtualReturn_Values_CArray = newSeq[pointer](len(virtualReturn))
+  var virtualReturn_Keys_CArray = cast[ptr UncheckedArray[cint]](if len(virtualReturn) > 0: c_malloc(csize_t(sizeof(cint) * len(virtualReturn))) else: nil)
+  var virtualReturn_Values_CArray = cast[ptr UncheckedArray[pointer]](if len(virtualReturn) > 0: c_malloc(csize_t(sizeof(pointer) * len(virtualReturn))) else: nil)
   var virtualReturn_ctr = 0
-  for virtualReturnk, virtualReturnv in virtualReturn:
+  for virtualReturn_k, virtualReturn_v in virtualReturn:
     virtualReturn_Keys_CArray[virtualReturn_ctr] = virtualReturn_k
     virtualReturn_Values_CArray[virtualReturn_ctr] = virtualReturn_v.h
     virtualReturn_ctr += 1
@@ -770,7 +770,7 @@ proc QIdentityProxyModelsetItemData*(self: gen_qidentityproxymodel_types.QIdenti
   var roles_Keys_CArray = newSeq[cint](len(roles))
   var roles_Values_CArray = newSeq[pointer](len(roles))
   var roles_ctr = 0
-  for rolesk, rolesv in roles:
+  for roles_k, roles_v in roles:
     roles_Keys_CArray[roles_ctr] = roles_k
     roles_Values_CArray[roles_ctr] = roles_v.h
     roles_ctr += 1
@@ -929,9 +929,11 @@ proc fcQIdentityProxyModel_vtable_callback_mimeTypes(self: pointer): struct_miqt
   let vtbl = cast[ptr QIdentityProxyModelVTable](fcQIdentityProxyModel_vdata(self)[])
   let self = QIdentityProxyModel(h: self)
   var virtualReturn = vtbl[].mimeTypes(self)
-  var virtualReturn_CArray = newSeq[struct_miqt_string](len(virtualReturn))
+  var virtualReturn_CArray = cast[ptr UncheckedArray[struct_miqt_string]](if len(virtualReturn) > 0: c_malloc(c_sizet(sizeof(struct_miqt_string) * len(virtualReturn))) else: nil)
   for i in 0..<len(virtualReturn):
-    virtualReturn_CArray[i] = struct_miqt_string(data: if len(virtualReturn[i]) > 0: addr virtualReturn[i][0] else: nil, len: csize_t(len(virtualReturn[i])))
+    var virtualReturn_i_copy = if len(virtualReturn[i]) > 0: c_malloc(csize_t(len(virtualReturn[i]))) else: nil
+    if len(virtualReturn[i]) > 0: copyMem(virtualReturn_i_copy, addr virtualReturn[i][0], csize_t(len(virtualReturn[i])))
+    virtualReturn_CArray[i] = struct_miqt_string(data: virtualReturn_i_copy, len: csize_t(len(virtualReturn[i])))
 
   struct_miqt_array(len: csize_t(len(virtualReturn)), data: if len(virtualReturn) == 0: nil else: addr(virtualReturn_CArray[0]))
 
@@ -975,12 +977,14 @@ proc fcQIdentityProxyModel_vtable_callback_roleNames(self: pointer): struct_miqt
   let vtbl = cast[ptr QIdentityProxyModelVTable](fcQIdentityProxyModel_vdata(self)[])
   let self = QIdentityProxyModel(h: self)
   var virtualReturn = vtbl[].roleNames(self)
-  var virtualReturn_Keys_CArray = newSeq[cint](len(virtualReturn))
-  var virtualReturn_Values_CArray = newSeq[struct_miqt_string](len(virtualReturn))
+  var virtualReturn_Keys_CArray = cast[ptr UncheckedArray[cint]](if len(virtualReturn) > 0: c_malloc(csize_t(sizeof(cint) * len(virtualReturn))) else: nil)
+  var virtualReturn_Values_CArray = cast[ptr UncheckedArray[struct_miqt_string]](if len(virtualReturn) > 0: c_malloc(csize_t(sizeof(struct_miqt_string) * len(virtualReturn))) else: nil)
   var virtualReturn_ctr = 0
-  for virtualReturnk, virtualReturnv in virtualReturn:
+  for virtualReturn_k, virtualReturn_v in virtualReturn:
     virtualReturn_Keys_CArray[virtualReturn_ctr] = virtualReturn_k
-    virtualReturn_Values_CArray[virtualReturn_ctr] = struct_miqt_string(data: if len(virtualReturn_v) > 0: addr virtualReturn_v[0] else: nil, len: csize_t(len(virtualReturn_v)))
+    var virtualReturn_v_copy = if len(virtualReturn_v) > 0: c_malloc(csize_t(len(virtualReturn_v))) else: nil
+    if len(virtualReturn_v) > 0: copyMem(virtualReturn_v_copy, addr virtualReturn_v[0], csize_t(len(virtualReturn_v)))
+    virtualReturn_Values_CArray[virtualReturn_ctr] = struct_miqt_string(data: virtualReturn_v_copy, len: csize_t(len(virtualReturn_v)))
     virtualReturn_ctr += 1
 
   struct_miqt_map(len: csize_t(len(virtualReturn)),keys: if len(virtualReturn) == 0: nil else: addr(virtualReturn_Keys_CArray[0]), values: if len(virtualReturn) == 0: nil else: addr(virtualReturn_Values_CArray[0]),)
@@ -1312,7 +1316,7 @@ proc fcQIdentityProxyModel_method_callback_itemData(self: pointer, index: pointe
   var virtualReturn_Keys_CArray = newSeq[cint](len(virtualReturn))
   var virtualReturn_Values_CArray = newSeq[pointer](len(virtualReturn))
   var virtualReturn_ctr = 0
-  for virtualReturnk, virtualReturnv in virtualReturn:
+  for virtualReturn_k, virtualReturn_v in virtualReturn:
     virtualReturn_Keys_CArray[virtualReturn_ctr] = virtualReturn_k
     virtualReturn_Values_CArray[virtualReturn_ctr] = virtualReturn_v.h
     virtualReturn_ctr += 1
@@ -1483,7 +1487,7 @@ proc fcQIdentityProxyModel_method_callback_roleNames(self: pointer): struct_miqt
   var virtualReturn_Keys_CArray = newSeq[cint](len(virtualReturn))
   var virtualReturn_Values_CArray = newSeq[struct_miqt_string](len(virtualReturn))
   var virtualReturn_ctr = 0
-  for virtualReturnk, virtualReturnv in virtualReturn:
+  for virtualReturn_k, virtualReturn_v in virtualReturn:
     virtualReturn_Keys_CArray[virtualReturn_ctr] = virtualReturn_k
     virtualReturn_Values_CArray[virtualReturn_ctr] = struct_miqt_string(data: if len(virtualReturn_v) > 0: addr virtualReturn_v[0] else: nil, len: csize_t(len(virtualReturn_v)))
     virtualReturn_ctr += 1

@@ -2,7 +2,7 @@ import ./Qt6Network_libs
 
 {.push raises: [].}
 
-from system/ansi_c import c_free
+from system/ansi_c import c_free, c_malloc
 
 type
   struct_miqt_string {.used.} = object
@@ -194,7 +194,7 @@ proc setAttributes*(self: gen_qabstractnetworkcache_types.QNetworkCacheMetaData,
   var attributes_Keys_CArray = newSeq[cint](len(attributes))
   var attributes_Values_CArray = newSeq[pointer](len(attributes))
   var attributes_ctr = 0
-  for attributesk, attributesv in attributes:
+  for attributes_k, attributes_v in attributes:
     attributes_Keys_CArray[attributes_ctr] = cint(attributes_k)
     attributes_Values_CArray[attributes_ctr] = attributes_v.h
     attributes_ctr += 1

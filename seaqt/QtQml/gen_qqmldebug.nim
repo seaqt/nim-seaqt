@@ -2,7 +2,7 @@ import ./Qt6Qml_libs
 
 {.push raises: [].}
 
-from system/ansi_c import c_free
+from system/ansi_c import c_free, c_malloc
 
 type
   struct_miqt_string {.used.} = object
@@ -149,7 +149,7 @@ proc startDebugConnector*(_: type gen_qqmldebug_types.QQmlDebuggingEnabler, plug
   var configuration_Keys_CArray = newSeq[struct_miqt_string](len(configuration))
   var configuration_Values_CArray = newSeq[pointer](len(configuration))
   var configuration_ctr = 0
-  for configurationk, configurationv in configuration:
+  for configuration_k, configuration_v in configuration:
     configuration_Keys_CArray[configuration_ctr] = struct_miqt_string(data: if len(configuration_k) > 0: addr configuration_k[0] else: nil, len: csize_t(len(configuration_k)))
     configuration_Values_CArray[configuration_ctr] = configuration_v.h
     configuration_ctr += 1

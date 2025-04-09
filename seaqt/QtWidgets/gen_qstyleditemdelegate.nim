@@ -2,7 +2,7 @@ import ./Qt6Widgets_libs
 
 {.push raises: [].}
 
-from system/ansi_c import c_free
+from system/ansi_c import c_free, c_malloc
 
 type
   struct_miqt_string {.used.} = object
@@ -358,7 +358,9 @@ proc fcQStyledItemDelegate_vtable_callback_displayText(self: pointer, value: poi
   let slotval1 = gen_qvariant_types.QVariant(h: value)
   let slotval2 = gen_qlocale_types.QLocale(h: locale)
   var virtualReturn = vtbl[].displayText(self, slotval1, slotval2)
-  struct_miqt_string(data: if len(virtualReturn) > 0: addr virtualReturn[0] else: nil, len: csize_t(len(virtualReturn)))
+  var virtualReturn_copy = if len(virtualReturn) > 0: c_malloc(csize_t(len(virtualReturn))) else: nil
+  if len(virtualReturn) > 0: copyMem(virtualReturn_copy, addr virtualReturn[0], csize_t(len(virtualReturn)))
+  struct_miqt_string(data: virtualReturn_copy, len: csize_t(len(virtualReturn)))
 
 proc QStyledItemDelegateinitStyleOption*(self: gen_qstyleditemdelegate_types.QStyledItemDelegate, option: gen_qstyleoption_types.QStyleOptionViewItem, index: gen_qabstractitemmodel_types.QModelIndex): void =
   fcQStyledItemDelegate_virtualbase_initStyleOption(self.h, option.h, index.h)
@@ -430,7 +432,7 @@ proc fcQStyledItemDelegate_vtable_callback_paintingRoles(self: pointer): struct_
   let vtbl = cast[ptr QStyledItemDelegateVTable](fcQStyledItemDelegate_vdata(self)[])
   let self = QStyledItemDelegate(h: self)
   var virtualReturn = vtbl[].paintingRoles(self)
-  var virtualReturn_CArray = newSeq[cint](len(virtualReturn))
+  var virtualReturn_CArray = cast[ptr UncheckedArray[cint]](if len(virtualReturn) > 0: c_malloc(c_sizet(sizeof(cint) * len(virtualReturn))) else: nil)
   for i in 0..<len(virtualReturn):
     virtualReturn_CArray[i] = virtualReturn[i]
 

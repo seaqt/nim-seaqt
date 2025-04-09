@@ -2,7 +2,7 @@ import ./Qt6WebEngineCore_libs
 
 {.push raises: [].}
 
-from system/ansi_c import c_free
+from system/ansi_c import c_free, c_malloc
 
 type
   struct_miqt_string {.used.} = object
@@ -81,7 +81,7 @@ proc postRequest*(_: type gen_qwebenginehttprequest_types.QWebEngineHttpRequest,
   var postData_Keys_CArray = newSeq[struct_miqt_string](len(postData))
   var postData_Values_CArray = newSeq[struct_miqt_string](len(postData))
   var postData_ctr = 0
-  for postDatak, postDatav in postData:
+  for postData_k, postData_v in postData:
     postData_Keys_CArray[postData_ctr] = struct_miqt_string(data: if len(postData_k) > 0: addr postData_k[0] else: nil, len: csize_t(len(postData_k)))
     postData_Values_CArray[postData_ctr] = struct_miqt_string(data: if len(postData_v) > 0: addr postData_v[0] else: nil, len: csize_t(len(postData_v)))
     postData_ctr += 1

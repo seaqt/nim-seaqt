@@ -2,7 +2,7 @@ import ./Qt6Core_libs
 
 {.push raises: [].}
 
-from system/ansi_c import c_free
+from system/ansi_c import c_free, c_malloc
 
 type
   struct_miqt_string {.used.} = object
@@ -160,7 +160,7 @@ proc fromVariantMap*(_: type gen_qjsonobject_types.QJsonObject, map: Table[strin
   var map_Keys_CArray = newSeq[struct_miqt_string](len(map))
   var map_Values_CArray = newSeq[pointer](len(map))
   var map_ctr = 0
-  for mapk, mapv in map:
+  for map_k, map_v in map:
     map_Keys_CArray[map_ctr] = struct_miqt_string(data: if len(map_k) > 0: addr map_k[0] else: nil, len: csize_t(len(map_k)))
     map_Values_CArray[map_ctr] = map_v.h
     map_ctr += 1
@@ -189,7 +189,7 @@ proc fromVariantHash*(_: type gen_qjsonobject_types.QJsonObject, map: Table[stri
   var map_Keys_CArray = newSeq[struct_miqt_string](len(map))
   var map_Values_CArray = newSeq[pointer](len(map))
   var map_ctr = 0
-  for mapk, mapv in map:
+  for map_k, map_v in map:
     map_Keys_CArray[map_ctr] = struct_miqt_string(data: if len(map_k) > 0: addr map_k[0] else: nil, len: csize_t(len(map_k)))
     map_Values_CArray[map_ctr] = map_v.h
     map_ctr += 1

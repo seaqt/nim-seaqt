@@ -2,7 +2,7 @@ import ./Qt6Widgets_libs
 
 {.push raises: [].}
 
-from system/ansi_c import c_free
+from system/ansi_c import c_free, c_malloc
 
 type
   struct_miqt_string {.used.} = object
@@ -736,7 +736,9 @@ proc fcQSpinBox_vtable_callback_textFromValue(self: pointer, val: cint): struct_
   let self = QSpinBox(h: self)
   let slotval1 = val
   var virtualReturn = vtbl[].textFromValue(self, slotval1)
-  struct_miqt_string(data: if len(virtualReturn) > 0: addr virtualReturn[0] else: nil, len: csize_t(len(virtualReturn)))
+  var virtualReturn_copy = if len(virtualReturn) > 0: c_malloc(csize_t(len(virtualReturn))) else: nil
+  if len(virtualReturn) > 0: copyMem(virtualReturn_copy, addr virtualReturn[0], csize_t(len(virtualReturn)))
+  struct_miqt_string(data: virtualReturn_copy, len: csize_t(len(virtualReturn)))
 
 proc QSpinBoxfixup*(self: gen_qspinbox_types.QSpinBox, str: string): void =
   fcQSpinBox_virtualbase_fixup(self.h, struct_miqt_string(data: if len(str) > 0: addr str[0] else: nil, len: csize_t(len(str))))
@@ -2352,7 +2354,9 @@ proc fcQDoubleSpinBox_vtable_callback_textFromValue(self: pointer, val: float64)
   let self = QDoubleSpinBox(h: self)
   let slotval1 = val
   var virtualReturn = vtbl[].textFromValue(self, slotval1)
-  struct_miqt_string(data: if len(virtualReturn) > 0: addr virtualReturn[0] else: nil, len: csize_t(len(virtualReturn)))
+  var virtualReturn_copy = if len(virtualReturn) > 0: c_malloc(csize_t(len(virtualReturn))) else: nil
+  if len(virtualReturn) > 0: copyMem(virtualReturn_copy, addr virtualReturn[0], csize_t(len(virtualReturn)))
+  struct_miqt_string(data: virtualReturn_copy, len: csize_t(len(virtualReturn)))
 
 proc QDoubleSpinBoxfixup*(self: gen_qspinbox_types.QDoubleSpinBox, str: string): void =
   fcQDoubleSpinBox_virtualbase_fixup(self.h, struct_miqt_string(data: if len(str) > 0: addr str[0] else: nil, len: csize_t(len(str))))

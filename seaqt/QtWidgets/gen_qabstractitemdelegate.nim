@@ -2,7 +2,7 @@ import ./Qt6Widgets_libs
 
 {.push raises: [].}
 
-from system/ansi_c import c_free
+from system/ansi_c import c_free, c_malloc
 
 type
   struct_miqt_string {.used.} = object
@@ -476,7 +476,7 @@ proc fcQAbstractItemDelegate_vtable_callback_paintingRoles(self: pointer): struc
   let vtbl = cast[ptr QAbstractItemDelegateVTable](fcQAbstractItemDelegate_vdata(self)[])
   let self = QAbstractItemDelegate(h: self)
   var virtualReturn = vtbl[].paintingRoles(self)
-  var virtualReturn_CArray = newSeq[cint](len(virtualReturn))
+  var virtualReturn_CArray = cast[ptr UncheckedArray[cint]](if len(virtualReturn) > 0: c_malloc(c_sizet(sizeof(cint) * len(virtualReturn))) else: nil)
   for i in 0..<len(virtualReturn):
     virtualReturn_CArray[i] = virtualReturn[i]
 

@@ -2,7 +2,7 @@ import ./Qt6Widgets_libs
 
 {.push raises: [].}
 
-from system/ansi_c import c_free
+from system/ansi_c import c_free, c_malloc
 
 type
   struct_miqt_string {.used.} = object
@@ -118,7 +118,9 @@ proc fcQFileIconProvider_vtable_callback_typeX(self: pointer, param1: pointer): 
   let self = QFileIconProvider(h: self)
   let slotval1 = gen_qfileinfo_types.QFileInfo(h: param1)
   var virtualReturn = vtbl[].typeX(self, slotval1)
-  struct_miqt_string(data: if len(virtualReturn) > 0: addr virtualReturn[0] else: nil, len: csize_t(len(virtualReturn)))
+  var virtualReturn_copy = if len(virtualReturn) > 0: c_malloc(csize_t(len(virtualReturn))) else: nil
+  if len(virtualReturn) > 0: copyMem(virtualReturn_copy, addr virtualReturn[0], csize_t(len(virtualReturn)))
+  struct_miqt_string(data: virtualReturn_copy, len: csize_t(len(virtualReturn)))
 
 proc QFileIconProvidersetOptions*(self: gen_qfileiconprovider_types.QFileIconProvider, options: cint): void =
   fcQFileIconProvider_virtualbase_setOptions(self.h, cint(options))
