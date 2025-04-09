@@ -32,9 +32,6 @@ func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
     else:
       copyMem(addr result[0], v.data, len)
 
-const cflags = gorge("pkg-config --cflags Qt6Gui")  & " -fPIC"
-{.compile("gen_qevent.cpp", cflags).}
-
 
 type QWheelEventEnumEnum* = distinct cint
 template DefaultDeltasPerStep*(_: type QWheelEventEnumEnum): untyped = 120
@@ -166,7 +163,6 @@ proc fcQInputEvent_virtualbase_setTimestamp(self: pointer, timestamp: culonglong
 proc fcQInputEvent_virtualbase_setAccepted(self: pointer, accepted: bool): void {.importc: "QInputEvent_virtualbase_setAccepted".}
 proc fcQInputEvent_new(vtbl: pointer, vdata: csize_t, typeVal: cint, m_dev: pointer): ptr cQInputEvent {.importc: "QInputEvent_new".}
 proc fcQInputEvent_new2(vtbl: pointer, vdata: csize_t, typeVal: cint, m_dev: pointer, modifiers: cint): ptr cQInputEvent {.importc: "QInputEvent_new2".}
-proc fcQInputEvent_delete(self: pointer) {.importc: "QInputEvent_delete".}
 proc fcQPointerEvent_clone(self: pointer): pointer {.importc: "QPointerEvent_clone".}
 proc fcQPointerEvent_pointingDevice(self: pointer): pointer {.importc: "QPointerEvent_pointingDevice".}
 proc fcQPointerEvent_pointerType(self: pointer): cint {.importc: "QPointerEvent_pointerType".}
@@ -205,7 +201,6 @@ proc fcQPointerEvent_virtualbase_setAccepted(self: pointer, accepted: bool): voi
 proc fcQPointerEvent_new(vtbl: pointer, vdata: csize_t, typeVal: cint, dev: pointer): ptr cQPointerEvent {.importc: "QPointerEvent_new".}
 proc fcQPointerEvent_new2(vtbl: pointer, vdata: csize_t, typeVal: cint, dev: pointer, modifiers: cint): ptr cQPointerEvent {.importc: "QPointerEvent_new2".}
 proc fcQPointerEvent_new3(vtbl: pointer, vdata: csize_t, typeVal: cint, dev: pointer, modifiers: cint, points: struct_miqt_array): ptr cQPointerEvent {.importc: "QPointerEvent_new3".}
-proc fcQPointerEvent_delete(self: pointer) {.importc: "QPointerEvent_delete".}
 proc fcQSinglePointEvent_clone(self: pointer): pointer {.importc: "QSinglePointEvent_clone".}
 proc fcQSinglePointEvent_button(self: pointer): cint {.importc: "QSinglePointEvent_button".}
 proc fcQSinglePointEvent_buttons(self: pointer): cint {.importc: "QSinglePointEvent_buttons".}
@@ -218,7 +213,6 @@ proc fcQSinglePointEvent_isEndEvent(self: pointer): bool {.importc: "QSinglePoin
 proc fcQSinglePointEvent_exclusivePointGrabber(self: pointer): pointer {.importc: "QSinglePointEvent_exclusivePointGrabber".}
 proc fcQSinglePointEvent_setExclusivePointGrabber(self: pointer, exclusiveGrabber: pointer): void {.importc: "QSinglePointEvent_setExclusivePointGrabber".}
 proc fcQSinglePointEvent_staticMetaObject(): pointer {.importc: "QSinglePointEvent_staticMetaObject".}
-proc fcQSinglePointEvent_delete(self: pointer) {.importc: "QSinglePointEvent_delete".}
 proc fcQEnterEvent_clone(self: pointer): pointer {.importc: "QEnterEvent_clone".}
 proc fcQEnterEvent_pos(self: pointer): pointer {.importc: "QEnterEvent_pos".}
 proc fcQEnterEvent_globalPos(self: pointer): pointer {.importc: "QEnterEvent_globalPos".}
@@ -247,7 +241,6 @@ proc fcQEnterEvent_virtualbase_setTimestamp(self: pointer, timestamp: culonglong
 proc fcQEnterEvent_virtualbase_setAccepted(self: pointer, accepted: bool): void {.importc: "QEnterEvent_virtualbase_setAccepted".}
 proc fcQEnterEvent_new(vtbl: pointer, vdata: csize_t, localPos: pointer, scenePos: pointer, globalPos: pointer): ptr cQEnterEvent {.importc: "QEnterEvent_new".}
 proc fcQEnterEvent_new2(vtbl: pointer, vdata: csize_t, localPos: pointer, scenePos: pointer, globalPos: pointer, device: pointer): ptr cQEnterEvent {.importc: "QEnterEvent_new2".}
-proc fcQEnterEvent_delete(self: pointer) {.importc: "QEnterEvent_delete".}
 proc fcQMouseEvent_clone(self: pointer): pointer {.importc: "QMouseEvent_clone".}
 proc fcQMouseEvent_pos(self: pointer): pointer {.importc: "QMouseEvent_pos".}
 proc fcQMouseEvent_globalPos(self: pointer): pointer {.importc: "QMouseEvent_globalPos".}
@@ -284,7 +277,6 @@ proc fcQMouseEvent_new5(vtbl: pointer, vdata: csize_t, typeVal: cint, localPos: 
 proc fcQMouseEvent_new6(vtbl: pointer, vdata: csize_t, typeVal: cint, localPos: pointer, globalPos: pointer, button: cint, buttons: cint, modifiers: cint, device: pointer): ptr cQMouseEvent {.importc: "QMouseEvent_new6".}
 proc fcQMouseEvent_new7(vtbl: pointer, vdata: csize_t, typeVal: cint, localPos: pointer, scenePos: pointer, globalPos: pointer, button: cint, buttons: cint, modifiers: cint, device: pointer): ptr cQMouseEvent {.importc: "QMouseEvent_new7".}
 proc fcQMouseEvent_new8(vtbl: pointer, vdata: csize_t, typeVal: cint, localPos: pointer, scenePos: pointer, globalPos: pointer, button: cint, buttons: cint, modifiers: cint, source: cint, device: pointer): ptr cQMouseEvent {.importc: "QMouseEvent_new8".}
-proc fcQMouseEvent_delete(self: pointer) {.importc: "QMouseEvent_delete".}
 proc fcQHoverEvent_clone(self: pointer): pointer {.importc: "QHoverEvent_clone".}
 proc fcQHoverEvent_pos(self: pointer): pointer {.importc: "QHoverEvent_pos".}
 proc fcQHoverEvent_posF(self: pointer): pointer {.importc: "QHoverEvent_posF".}
@@ -313,7 +305,6 @@ proc fcQHoverEvent_new3(vtbl: pointer, vdata: csize_t, typeVal: cint, scenePos: 
 proc fcQHoverEvent_new4(vtbl: pointer, vdata: csize_t, typeVal: cint, scenePos: pointer, globalPos: pointer, oldPos: pointer, modifiers: cint, device: pointer): ptr cQHoverEvent {.importc: "QHoverEvent_new4".}
 proc fcQHoverEvent_new5(vtbl: pointer, vdata: csize_t, typeVal: cint, pos: pointer, oldPos: pointer, modifiers: cint): ptr cQHoverEvent {.importc: "QHoverEvent_new5".}
 proc fcQHoverEvent_new6(vtbl: pointer, vdata: csize_t, typeVal: cint, pos: pointer, oldPos: pointer, modifiers: cint, device: pointer): ptr cQHoverEvent {.importc: "QHoverEvent_new6".}
-proc fcQHoverEvent_delete(self: pointer) {.importc: "QHoverEvent_delete".}
 proc fcQWheelEvent_clone(self: pointer): pointer {.importc: "QWheelEvent_clone".}
 proc fcQWheelEvent_pixelDelta(self: pointer): pointer {.importc: "QWheelEvent_pixelDelta".}
 proc fcQWheelEvent_angleDelta(self: pointer): pointer {.importc: "QWheelEvent_angleDelta".}
@@ -345,7 +336,6 @@ proc fcQWheelEvent_new(vtbl: pointer, vdata: csize_t, pos: pointer, globalPos: p
 proc fcQWheelEvent_new2(vtbl: pointer, vdata: csize_t, pos: pointer, globalPos: pointer, pixelDelta: pointer, angleDelta: pointer, buttons: cint, modifiers: cint, phase: cint, inverted: bool, source: cint): ptr cQWheelEvent {.importc: "QWheelEvent_new2".}
 proc fcQWheelEvent_new3(vtbl: pointer, vdata: csize_t, pos: pointer, globalPos: pointer, pixelDelta: pointer, angleDelta: pointer, buttons: cint, modifiers: cint, phase: cint, inverted: bool, source: cint, device: pointer): ptr cQWheelEvent {.importc: "QWheelEvent_new3".}
 proc fcQWheelEvent_staticMetaObject(): pointer {.importc: "QWheelEvent_staticMetaObject".}
-proc fcQWheelEvent_delete(self: pointer) {.importc: "QWheelEvent_delete".}
 proc fcQTabletEvent_clone(self: pointer): pointer {.importc: "QTabletEvent_clone".}
 proc fcQTabletEvent_pos(self: pointer): pointer {.importc: "QTabletEvent_pos".}
 proc fcQTabletEvent_globalPos(self: pointer): pointer {.importc: "QTabletEvent_globalPos".}
@@ -381,7 +371,6 @@ proc fcQTabletEvent_virtualbase_isEndEvent(self: pointer): bool {.importc: "QTab
 proc fcQTabletEvent_virtualbase_setTimestamp(self: pointer, timestamp: culonglong): void {.importc: "QTabletEvent_virtualbase_setTimestamp".}
 proc fcQTabletEvent_virtualbase_setAccepted(self: pointer, accepted: bool): void {.importc: "QTabletEvent_virtualbase_setAccepted".}
 proc fcQTabletEvent_new(vtbl: pointer, vdata: csize_t, t: cint, device: pointer, pos: pointer, globalPos: pointer, pressure: float64, xTilt: float32, yTilt: float32, tangentialPressure: float32, rotation: float64, z: float32, keyState: cint, button: cint, buttons: cint): ptr cQTabletEvent {.importc: "QTabletEvent_new".}
-proc fcQTabletEvent_delete(self: pointer) {.importc: "QTabletEvent_delete".}
 proc fcQNativeGestureEvent_clone(self: pointer): pointer {.importc: "QNativeGestureEvent_clone".}
 proc fcQNativeGestureEvent_gestureType(self: pointer): cint {.importc: "QNativeGestureEvent_gestureType".}
 proc fcQNativeGestureEvent_fingerCount(self: pointer): cint {.importc: "QNativeGestureEvent_fingerCount".}
@@ -411,7 +400,6 @@ proc fcQNativeGestureEvent_virtualbase_setAccepted(self: pointer, accepted: bool
 proc fcQNativeGestureEvent_new(vtbl: pointer, vdata: csize_t, typeVal: cint, dev: pointer, localPos: pointer, scenePos: pointer, globalPos: pointer, value: float64, sequenceId: culonglong, intArgument: culonglong): ptr cQNativeGestureEvent {.importc: "QNativeGestureEvent_new".}
 proc fcQNativeGestureEvent_new2(vtbl: pointer, vdata: csize_t, typeVal: cint, dev: pointer, fingerCount: cint, localPos: pointer, scenePos: pointer, globalPos: pointer, value: float64, delta: pointer): ptr cQNativeGestureEvent {.importc: "QNativeGestureEvent_new2".}
 proc fcQNativeGestureEvent_new3(vtbl: pointer, vdata: csize_t, typeVal: cint, dev: pointer, fingerCount: cint, localPos: pointer, scenePos: pointer, globalPos: pointer, value: float64, delta: pointer, sequenceId: culonglong): ptr cQNativeGestureEvent {.importc: "QNativeGestureEvent_new3".}
-proc fcQNativeGestureEvent_delete(self: pointer) {.importc: "QNativeGestureEvent_delete".}
 proc fcQKeyEvent_clone(self: pointer): pointer {.importc: "QKeyEvent_clone".}
 proc fcQKeyEvent_key(self: pointer): cint {.importc: "QKeyEvent_key".}
 proc fcQKeyEvent_matches(self: pointer, key: cint): bool {.importc: "QKeyEvent_matches".}
@@ -442,7 +430,6 @@ proc fcQKeyEvent_new6(vtbl: pointer, vdata: csize_t, typeVal: cint, key: cint, m
 proc fcQKeyEvent_new7(vtbl: pointer, vdata: csize_t, typeVal: cint, key: cint, modifiers: cint, nativeScanCode: cuint, nativeVirtualKey: cuint, nativeModifiers: cuint, text: struct_miqt_string, autorep: bool): ptr cQKeyEvent {.importc: "QKeyEvent_new7".}
 proc fcQKeyEvent_new8(vtbl: pointer, vdata: csize_t, typeVal: cint, key: cint, modifiers: cint, nativeScanCode: cuint, nativeVirtualKey: cuint, nativeModifiers: cuint, text: struct_miqt_string, autorep: bool, count: cushort): ptr cQKeyEvent {.importc: "QKeyEvent_new8".}
 proc fcQKeyEvent_new9(vtbl: pointer, vdata: csize_t, typeVal: cint, key: cint, modifiers: cint, nativeScanCode: cuint, nativeVirtualKey: cuint, nativeModifiers: cuint, text: struct_miqt_string, autorep: bool, count: cushort, device: pointer): ptr cQKeyEvent {.importc: "QKeyEvent_new9".}
-proc fcQKeyEvent_delete(self: pointer) {.importc: "QKeyEvent_delete".}
 proc fcQFocusEvent_clone(self: pointer): pointer {.importc: "QFocusEvent_clone".}
 proc fcQFocusEvent_gotFocus(self: pointer): bool {.importc: "QFocusEvent_gotFocus".}
 proc fcQFocusEvent_lostFocus(self: pointer): bool {.importc: "QFocusEvent_lostFocus".}
@@ -457,7 +444,6 @@ proc fcQFocusEvent_virtualbase_clone(self: pointer): pointer {.importc: "QFocusE
 proc fcQFocusEvent_virtualbase_setAccepted(self: pointer, accepted: bool): void {.importc: "QFocusEvent_virtualbase_setAccepted".}
 proc fcQFocusEvent_new(vtbl: pointer, vdata: csize_t, typeVal: cint): ptr cQFocusEvent {.importc: "QFocusEvent_new".}
 proc fcQFocusEvent_new2(vtbl: pointer, vdata: csize_t, typeVal: cint, reason: cint): ptr cQFocusEvent {.importc: "QFocusEvent_new2".}
-proc fcQFocusEvent_delete(self: pointer) {.importc: "QFocusEvent_delete".}
 proc fcQPaintEvent_clone(self: pointer): pointer {.importc: "QPaintEvent_clone".}
 proc fcQPaintEvent_rect(self: pointer): pointer {.importc: "QPaintEvent_rect".}
 proc fcQPaintEvent_region(self: pointer): pointer {.importc: "QPaintEvent_region".}
@@ -471,7 +457,6 @@ proc fcQPaintEvent_virtualbase_clone(self: pointer): pointer {.importc: "QPaintE
 proc fcQPaintEvent_virtualbase_setAccepted(self: pointer, accepted: bool): void {.importc: "QPaintEvent_virtualbase_setAccepted".}
 proc fcQPaintEvent_new(vtbl: pointer, vdata: csize_t, paintRegion: pointer): ptr cQPaintEvent {.importc: "QPaintEvent_new".}
 proc fcQPaintEvent_new2(vtbl: pointer, vdata: csize_t, paintRect: pointer): ptr cQPaintEvent {.importc: "QPaintEvent_new2".}
-proc fcQPaintEvent_delete(self: pointer) {.importc: "QPaintEvent_delete".}
 proc fcQMoveEvent_clone(self: pointer): pointer {.importc: "QMoveEvent_clone".}
 proc fcQMoveEvent_pos(self: pointer): pointer {.importc: "QMoveEvent_pos".}
 proc fcQMoveEvent_oldPos(self: pointer): pointer {.importc: "QMoveEvent_oldPos".}
@@ -484,7 +469,6 @@ type cQMoveEventVTable {.pure.} = object
 proc fcQMoveEvent_virtualbase_clone(self: pointer): pointer {.importc: "QMoveEvent_virtualbase_clone".}
 proc fcQMoveEvent_virtualbase_setAccepted(self: pointer, accepted: bool): void {.importc: "QMoveEvent_virtualbase_setAccepted".}
 proc fcQMoveEvent_new(vtbl: pointer, vdata: csize_t, pos: pointer, oldPos: pointer): ptr cQMoveEvent {.importc: "QMoveEvent_new".}
-proc fcQMoveEvent_delete(self: pointer) {.importc: "QMoveEvent_delete".}
 proc fcQExposeEvent_clone(self: pointer): pointer {.importc: "QExposeEvent_clone".}
 proc fcQExposeEvent_region(self: pointer): pointer {.importc: "QExposeEvent_region".}
 proc fcQExposeEvent_vdata(self: pointer): ptr pointer {.importc: "QExposeEvent_vdata".}
@@ -496,7 +480,6 @@ type cQExposeEventVTable {.pure.} = object
 proc fcQExposeEvent_virtualbase_clone(self: pointer): pointer {.importc: "QExposeEvent_virtualbase_clone".}
 proc fcQExposeEvent_virtualbase_setAccepted(self: pointer, accepted: bool): void {.importc: "QExposeEvent_virtualbase_setAccepted".}
 proc fcQExposeEvent_new(vtbl: pointer, vdata: csize_t, m_region: pointer): ptr cQExposeEvent {.importc: "QExposeEvent_new".}
-proc fcQExposeEvent_delete(self: pointer) {.importc: "QExposeEvent_delete".}
 proc fcQPlatformSurfaceEvent_clone(self: pointer): pointer {.importc: "QPlatformSurfaceEvent_clone".}
 proc fcQPlatformSurfaceEvent_surfaceEventType(self: pointer): cint {.importc: "QPlatformSurfaceEvent_surfaceEventType".}
 proc fcQPlatformSurfaceEvent_vdata(self: pointer): ptr pointer {.importc: "QPlatformSurfaceEvent_vdata".}
@@ -508,7 +491,6 @@ type cQPlatformSurfaceEventVTable {.pure.} = object
 proc fcQPlatformSurfaceEvent_virtualbase_clone(self: pointer): pointer {.importc: "QPlatformSurfaceEvent_virtualbase_clone".}
 proc fcQPlatformSurfaceEvent_virtualbase_setAccepted(self: pointer, accepted: bool): void {.importc: "QPlatformSurfaceEvent_virtualbase_setAccepted".}
 proc fcQPlatformSurfaceEvent_new(vtbl: pointer, vdata: csize_t, surfaceEventType: cint): ptr cQPlatformSurfaceEvent {.importc: "QPlatformSurfaceEvent_new".}
-proc fcQPlatformSurfaceEvent_delete(self: pointer) {.importc: "QPlatformSurfaceEvent_delete".}
 proc fcQResizeEvent_clone(self: pointer): pointer {.importc: "QResizeEvent_clone".}
 proc fcQResizeEvent_size(self: pointer): pointer {.importc: "QResizeEvent_size".}
 proc fcQResizeEvent_oldSize(self: pointer): pointer {.importc: "QResizeEvent_oldSize".}
@@ -521,7 +503,6 @@ type cQResizeEventVTable {.pure.} = object
 proc fcQResizeEvent_virtualbase_clone(self: pointer): pointer {.importc: "QResizeEvent_virtualbase_clone".}
 proc fcQResizeEvent_virtualbase_setAccepted(self: pointer, accepted: bool): void {.importc: "QResizeEvent_virtualbase_setAccepted".}
 proc fcQResizeEvent_new(vtbl: pointer, vdata: csize_t, size: pointer, oldSize: pointer): ptr cQResizeEvent {.importc: "QResizeEvent_new".}
-proc fcQResizeEvent_delete(self: pointer) {.importc: "QResizeEvent_delete".}
 proc fcQCloseEvent_clone(self: pointer): pointer {.importc: "QCloseEvent_clone".}
 proc fcQCloseEvent_vdata(self: pointer): ptr pointer {.importc: "QCloseEvent_vdata".}
 proc fvdata_cQCloseEvent(self: pointer): pointer {.importc: "vdata_QCloseEvent".}
@@ -532,7 +513,6 @@ type cQCloseEventVTable {.pure.} = object
 proc fcQCloseEvent_virtualbase_clone(self: pointer): pointer {.importc: "QCloseEvent_virtualbase_clone".}
 proc fcQCloseEvent_virtualbase_setAccepted(self: pointer, accepted: bool): void {.importc: "QCloseEvent_virtualbase_setAccepted".}
 proc fcQCloseEvent_new(vtbl: pointer, vdata: csize_t): ptr cQCloseEvent {.importc: "QCloseEvent_new".}
-proc fcQCloseEvent_delete(self: pointer) {.importc: "QCloseEvent_delete".}
 proc fcQIconDragEvent_clone(self: pointer): pointer {.importc: "QIconDragEvent_clone".}
 proc fcQIconDragEvent_vdata(self: pointer): ptr pointer {.importc: "QIconDragEvent_vdata".}
 proc fvdata_cQIconDragEvent(self: pointer): pointer {.importc: "vdata_QIconDragEvent".}
@@ -543,7 +523,6 @@ type cQIconDragEventVTable {.pure.} = object
 proc fcQIconDragEvent_virtualbase_clone(self: pointer): pointer {.importc: "QIconDragEvent_virtualbase_clone".}
 proc fcQIconDragEvent_virtualbase_setAccepted(self: pointer, accepted: bool): void {.importc: "QIconDragEvent_virtualbase_setAccepted".}
 proc fcQIconDragEvent_new(vtbl: pointer, vdata: csize_t): ptr cQIconDragEvent {.importc: "QIconDragEvent_new".}
-proc fcQIconDragEvent_delete(self: pointer) {.importc: "QIconDragEvent_delete".}
 proc fcQShowEvent_clone(self: pointer): pointer {.importc: "QShowEvent_clone".}
 proc fcQShowEvent_vdata(self: pointer): ptr pointer {.importc: "QShowEvent_vdata".}
 proc fvdata_cQShowEvent(self: pointer): pointer {.importc: "vdata_QShowEvent".}
@@ -554,7 +533,6 @@ type cQShowEventVTable {.pure.} = object
 proc fcQShowEvent_virtualbase_clone(self: pointer): pointer {.importc: "QShowEvent_virtualbase_clone".}
 proc fcQShowEvent_virtualbase_setAccepted(self: pointer, accepted: bool): void {.importc: "QShowEvent_virtualbase_setAccepted".}
 proc fcQShowEvent_new(vtbl: pointer, vdata: csize_t): ptr cQShowEvent {.importc: "QShowEvent_new".}
-proc fcQShowEvent_delete(self: pointer) {.importc: "QShowEvent_delete".}
 proc fcQHideEvent_clone(self: pointer): pointer {.importc: "QHideEvent_clone".}
 proc fcQHideEvent_vdata(self: pointer): ptr pointer {.importc: "QHideEvent_vdata".}
 proc fvdata_cQHideEvent(self: pointer): pointer {.importc: "vdata_QHideEvent".}
@@ -565,7 +543,6 @@ type cQHideEventVTable {.pure.} = object
 proc fcQHideEvent_virtualbase_clone(self: pointer): pointer {.importc: "QHideEvent_virtualbase_clone".}
 proc fcQHideEvent_virtualbase_setAccepted(self: pointer, accepted: bool): void {.importc: "QHideEvent_virtualbase_setAccepted".}
 proc fcQHideEvent_new(vtbl: pointer, vdata: csize_t): ptr cQHideEvent {.importc: "QHideEvent_new".}
-proc fcQHideEvent_delete(self: pointer) {.importc: "QHideEvent_delete".}
 proc fcQContextMenuEvent_clone(self: pointer): pointer {.importc: "QContextMenuEvent_clone".}
 proc fcQContextMenuEvent_x(self: pointer): cint {.importc: "QContextMenuEvent_x".}
 proc fcQContextMenuEvent_y(self: pointer): cint {.importc: "QContextMenuEvent_y".}
@@ -587,7 +564,6 @@ proc fcQContextMenuEvent_virtualbase_setAccepted(self: pointer, accepted: bool):
 proc fcQContextMenuEvent_new(vtbl: pointer, vdata: csize_t, reason: cint, pos: pointer, globalPos: pointer): ptr cQContextMenuEvent {.importc: "QContextMenuEvent_new".}
 proc fcQContextMenuEvent_new2(vtbl: pointer, vdata: csize_t, reason: cint, pos: pointer): ptr cQContextMenuEvent {.importc: "QContextMenuEvent_new2".}
 proc fcQContextMenuEvent_new3(vtbl: pointer, vdata: csize_t, reason: cint, pos: pointer, globalPos: pointer, modifiers: cint): ptr cQContextMenuEvent {.importc: "QContextMenuEvent_new3".}
-proc fcQContextMenuEvent_delete(self: pointer) {.importc: "QContextMenuEvent_delete".}
 proc fcQInputMethodEvent_clone(self: pointer): pointer {.importc: "QInputMethodEvent_clone".}
 proc fcQInputMethodEvent_setCommitString(self: pointer, commitString: struct_miqt_string): void {.importc: "QInputMethodEvent_setCommitString".}
 proc fcQInputMethodEvent_attributes(self: pointer): struct_miqt_array {.importc: "QInputMethodEvent_attributes".}
@@ -607,7 +583,6 @@ proc fcQInputMethodEvent_virtualbase_clone(self: pointer): pointer {.importc: "Q
 proc fcQInputMethodEvent_virtualbase_setAccepted(self: pointer, accepted: bool): void {.importc: "QInputMethodEvent_virtualbase_setAccepted".}
 proc fcQInputMethodEvent_new(vtbl: pointer, vdata: csize_t): ptr cQInputMethodEvent {.importc: "QInputMethodEvent_new".}
 proc fcQInputMethodEvent_new2(vtbl: pointer, vdata: csize_t, preeditText: struct_miqt_string, attributes: struct_miqt_array): ptr cQInputMethodEvent {.importc: "QInputMethodEvent_new2".}
-proc fcQInputMethodEvent_delete(self: pointer) {.importc: "QInputMethodEvent_delete".}
 proc fcQInputMethodQueryEvent_clone(self: pointer): pointer {.importc: "QInputMethodQueryEvent_clone".}
 proc fcQInputMethodQueryEvent_queries(self: pointer): cint {.importc: "QInputMethodQueryEvent_queries".}
 proc fcQInputMethodQueryEvent_setValue(self: pointer, query: cint, value: pointer): void {.importc: "QInputMethodQueryEvent_setValue".}
@@ -621,7 +596,6 @@ type cQInputMethodQueryEventVTable {.pure.} = object
 proc fcQInputMethodQueryEvent_virtualbase_clone(self: pointer): pointer {.importc: "QInputMethodQueryEvent_virtualbase_clone".}
 proc fcQInputMethodQueryEvent_virtualbase_setAccepted(self: pointer, accepted: bool): void {.importc: "QInputMethodQueryEvent_virtualbase_setAccepted".}
 proc fcQInputMethodQueryEvent_new(vtbl: pointer, vdata: csize_t, queries: cint): ptr cQInputMethodQueryEvent {.importc: "QInputMethodQueryEvent_new".}
-proc fcQInputMethodQueryEvent_delete(self: pointer) {.importc: "QInputMethodQueryEvent_delete".}
 proc fcQDropEvent_clone(self: pointer): pointer {.importc: "QDropEvent_clone".}
 proc fcQDropEvent_pos(self: pointer): pointer {.importc: "QDropEvent_pos".}
 proc fcQDropEvent_posF(self: pointer): pointer {.importc: "QDropEvent_posF".}
@@ -647,7 +621,6 @@ proc fcQDropEvent_virtualbase_clone(self: pointer): pointer {.importc: "QDropEve
 proc fcQDropEvent_virtualbase_setAccepted(self: pointer, accepted: bool): void {.importc: "QDropEvent_virtualbase_setAccepted".}
 proc fcQDropEvent_new(vtbl: pointer, vdata: csize_t, pos: pointer, actions: cint, data: pointer, buttons: cint, modifiers: cint): ptr cQDropEvent {.importc: "QDropEvent_new".}
 proc fcQDropEvent_new2(vtbl: pointer, vdata: csize_t, pos: pointer, actions: cint, data: pointer, buttons: cint, modifiers: cint, typeVal: cint): ptr cQDropEvent {.importc: "QDropEvent_new2".}
-proc fcQDropEvent_delete(self: pointer) {.importc: "QDropEvent_delete".}
 proc fcQDragMoveEvent_clone(self: pointer): pointer {.importc: "QDragMoveEvent_clone".}
 proc fcQDragMoveEvent_answerRect(self: pointer): pointer {.importc: "QDragMoveEvent_answerRect".}
 proc fcQDragMoveEvent_accept(self: pointer): void {.importc: "QDragMoveEvent_accept".}
@@ -664,7 +637,6 @@ proc fcQDragMoveEvent_virtualbase_clone(self: pointer): pointer {.importc: "QDra
 proc fcQDragMoveEvent_virtualbase_setAccepted(self: pointer, accepted: bool): void {.importc: "QDragMoveEvent_virtualbase_setAccepted".}
 proc fcQDragMoveEvent_new(vtbl: pointer, vdata: csize_t, pos: pointer, actions: cint, data: pointer, buttons: cint, modifiers: cint): ptr cQDragMoveEvent {.importc: "QDragMoveEvent_new".}
 proc fcQDragMoveEvent_new2(vtbl: pointer, vdata: csize_t, pos: pointer, actions: cint, data: pointer, buttons: cint, modifiers: cint, typeVal: cint): ptr cQDragMoveEvent {.importc: "QDragMoveEvent_new2".}
-proc fcQDragMoveEvent_delete(self: pointer) {.importc: "QDragMoveEvent_delete".}
 proc fcQDragEnterEvent_clone(self: pointer): pointer {.importc: "QDragEnterEvent_clone".}
 proc fcQDragEnterEvent_vdata(self: pointer): ptr pointer {.importc: "QDragEnterEvent_vdata".}
 proc fvdata_cQDragEnterEvent(self: pointer): pointer {.importc: "vdata_QDragEnterEvent".}
@@ -675,7 +647,6 @@ type cQDragEnterEventVTable {.pure.} = object
 proc fcQDragEnterEvent_virtualbase_clone(self: pointer): pointer {.importc: "QDragEnterEvent_virtualbase_clone".}
 proc fcQDragEnterEvent_virtualbase_setAccepted(self: pointer, accepted: bool): void {.importc: "QDragEnterEvent_virtualbase_setAccepted".}
 proc fcQDragEnterEvent_new(vtbl: pointer, vdata: csize_t, pos: pointer, actions: cint, data: pointer, buttons: cint, modifiers: cint): ptr cQDragEnterEvent {.importc: "QDragEnterEvent_new".}
-proc fcQDragEnterEvent_delete(self: pointer) {.importc: "QDragEnterEvent_delete".}
 proc fcQDragLeaveEvent_clone(self: pointer): pointer {.importc: "QDragLeaveEvent_clone".}
 proc fcQDragLeaveEvent_vdata(self: pointer): ptr pointer {.importc: "QDragLeaveEvent_vdata".}
 proc fvdata_cQDragLeaveEvent(self: pointer): pointer {.importc: "vdata_QDragLeaveEvent".}
@@ -686,7 +657,6 @@ type cQDragLeaveEventVTable {.pure.} = object
 proc fcQDragLeaveEvent_virtualbase_clone(self: pointer): pointer {.importc: "QDragLeaveEvent_virtualbase_clone".}
 proc fcQDragLeaveEvent_virtualbase_setAccepted(self: pointer, accepted: bool): void {.importc: "QDragLeaveEvent_virtualbase_setAccepted".}
 proc fcQDragLeaveEvent_new(vtbl: pointer, vdata: csize_t): ptr cQDragLeaveEvent {.importc: "QDragLeaveEvent_new".}
-proc fcQDragLeaveEvent_delete(self: pointer) {.importc: "QDragLeaveEvent_delete".}
 proc fcQHelpEvent_clone(self: pointer): pointer {.importc: "QHelpEvent_clone".}
 proc fcQHelpEvent_x(self: pointer): cint {.importc: "QHelpEvent_x".}
 proc fcQHelpEvent_y(self: pointer): cint {.importc: "QHelpEvent_y".}
@@ -703,7 +673,6 @@ type cQHelpEventVTable {.pure.} = object
 proc fcQHelpEvent_virtualbase_clone(self: pointer): pointer {.importc: "QHelpEvent_virtualbase_clone".}
 proc fcQHelpEvent_virtualbase_setAccepted(self: pointer, accepted: bool): void {.importc: "QHelpEvent_virtualbase_setAccepted".}
 proc fcQHelpEvent_new(vtbl: pointer, vdata: csize_t, typeVal: cint, pos: pointer, globalPos: pointer): ptr cQHelpEvent {.importc: "QHelpEvent_new".}
-proc fcQHelpEvent_delete(self: pointer) {.importc: "QHelpEvent_delete".}
 proc fcQStatusTipEvent_clone(self: pointer): pointer {.importc: "QStatusTipEvent_clone".}
 proc fcQStatusTipEvent_tip(self: pointer): struct_miqt_string {.importc: "QStatusTipEvent_tip".}
 proc fcQStatusTipEvent_vdata(self: pointer): ptr pointer {.importc: "QStatusTipEvent_vdata".}
@@ -715,7 +684,6 @@ type cQStatusTipEventVTable {.pure.} = object
 proc fcQStatusTipEvent_virtualbase_clone(self: pointer): pointer {.importc: "QStatusTipEvent_virtualbase_clone".}
 proc fcQStatusTipEvent_virtualbase_setAccepted(self: pointer, accepted: bool): void {.importc: "QStatusTipEvent_virtualbase_setAccepted".}
 proc fcQStatusTipEvent_new(vtbl: pointer, vdata: csize_t, tip: struct_miqt_string): ptr cQStatusTipEvent {.importc: "QStatusTipEvent_new".}
-proc fcQStatusTipEvent_delete(self: pointer) {.importc: "QStatusTipEvent_delete".}
 proc fcQWhatsThisClickedEvent_clone(self: pointer): pointer {.importc: "QWhatsThisClickedEvent_clone".}
 proc fcQWhatsThisClickedEvent_href(self: pointer): struct_miqt_string {.importc: "QWhatsThisClickedEvent_href".}
 proc fcQWhatsThisClickedEvent_vdata(self: pointer): ptr pointer {.importc: "QWhatsThisClickedEvent_vdata".}
@@ -727,9 +695,7 @@ type cQWhatsThisClickedEventVTable {.pure.} = object
 proc fcQWhatsThisClickedEvent_virtualbase_clone(self: pointer): pointer {.importc: "QWhatsThisClickedEvent_virtualbase_clone".}
 proc fcQWhatsThisClickedEvent_virtualbase_setAccepted(self: pointer, accepted: bool): void {.importc: "QWhatsThisClickedEvent_virtualbase_setAccepted".}
 proc fcQWhatsThisClickedEvent_new(vtbl: pointer, vdata: csize_t, href: struct_miqt_string): ptr cQWhatsThisClickedEvent {.importc: "QWhatsThisClickedEvent_new".}
-proc fcQWhatsThisClickedEvent_delete(self: pointer) {.importc: "QWhatsThisClickedEvent_delete".}
 proc fcQActionEvent_clone(self: pointer): pointer {.importc: "QActionEvent_clone".}
-proc fcQActionEvent_delete(self: pointer) {.importc: "QActionEvent_delete".}
 proc fcQFileOpenEvent_clone(self: pointer): pointer {.importc: "QFileOpenEvent_clone".}
 proc fcQFileOpenEvent_file(self: pointer): struct_miqt_string {.importc: "QFileOpenEvent_file".}
 proc fcQFileOpenEvent_url(self: pointer): pointer {.importc: "QFileOpenEvent_url".}
@@ -744,7 +710,6 @@ proc fcQFileOpenEvent_virtualbase_clone(self: pointer): pointer {.importc: "QFil
 proc fcQFileOpenEvent_virtualbase_setAccepted(self: pointer, accepted: bool): void {.importc: "QFileOpenEvent_virtualbase_setAccepted".}
 proc fcQFileOpenEvent_new(vtbl: pointer, vdata: csize_t, file: struct_miqt_string): ptr cQFileOpenEvent {.importc: "QFileOpenEvent_new".}
 proc fcQFileOpenEvent_new2(vtbl: pointer, vdata: csize_t, url: pointer): ptr cQFileOpenEvent {.importc: "QFileOpenEvent_new2".}
-proc fcQFileOpenEvent_delete(self: pointer) {.importc: "QFileOpenEvent_delete".}
 proc fcQToolBarChangeEvent_clone(self: pointer): pointer {.importc: "QToolBarChangeEvent_clone".}
 proc fcQToolBarChangeEvent_toggle(self: pointer): bool {.importc: "QToolBarChangeEvent_toggle".}
 proc fcQToolBarChangeEvent_vdata(self: pointer): ptr pointer {.importc: "QToolBarChangeEvent_vdata".}
@@ -756,7 +721,6 @@ type cQToolBarChangeEventVTable {.pure.} = object
 proc fcQToolBarChangeEvent_virtualbase_clone(self: pointer): pointer {.importc: "QToolBarChangeEvent_virtualbase_clone".}
 proc fcQToolBarChangeEvent_virtualbase_setAccepted(self: pointer, accepted: bool): void {.importc: "QToolBarChangeEvent_virtualbase_setAccepted".}
 proc fcQToolBarChangeEvent_new(vtbl: pointer, vdata: csize_t, t: bool): ptr cQToolBarChangeEvent {.importc: "QToolBarChangeEvent_new".}
-proc fcQToolBarChangeEvent_delete(self: pointer) {.importc: "QToolBarChangeEvent_delete".}
 proc fcQShortcutEvent_clone(self: pointer): pointer {.importc: "QShortcutEvent_clone".}
 proc fcQShortcutEvent_key(self: pointer): pointer {.importc: "QShortcutEvent_key".}
 proc fcQShortcutEvent_shortcutId(self: pointer): cint {.importc: "QShortcutEvent_shortcutId".}
@@ -771,7 +735,6 @@ proc fcQShortcutEvent_virtualbase_clone(self: pointer): pointer {.importc: "QSho
 proc fcQShortcutEvent_virtualbase_setAccepted(self: pointer, accepted: bool): void {.importc: "QShortcutEvent_virtualbase_setAccepted".}
 proc fcQShortcutEvent_new(vtbl: pointer, vdata: csize_t, key: pointer, id: cint): ptr cQShortcutEvent {.importc: "QShortcutEvent_new".}
 proc fcQShortcutEvent_new2(vtbl: pointer, vdata: csize_t, key: pointer, id: cint, ambiguous: bool): ptr cQShortcutEvent {.importc: "QShortcutEvent_new2".}
-proc fcQShortcutEvent_delete(self: pointer) {.importc: "QShortcutEvent_delete".}
 proc fcQWindowStateChangeEvent_clone(self: pointer): pointer {.importc: "QWindowStateChangeEvent_clone".}
 proc fcQWindowStateChangeEvent_oldState(self: pointer): cint {.importc: "QWindowStateChangeEvent_oldState".}
 proc fcQWindowStateChangeEvent_isOverride(self: pointer): bool {.importc: "QWindowStateChangeEvent_isOverride".}
@@ -785,7 +748,6 @@ proc fcQWindowStateChangeEvent_virtualbase_clone(self: pointer): pointer {.impor
 proc fcQWindowStateChangeEvent_virtualbase_setAccepted(self: pointer, accepted: bool): void {.importc: "QWindowStateChangeEvent_virtualbase_setAccepted".}
 proc fcQWindowStateChangeEvent_new(vtbl: pointer, vdata: csize_t, oldState: cint): ptr cQWindowStateChangeEvent {.importc: "QWindowStateChangeEvent_new".}
 proc fcQWindowStateChangeEvent_new2(vtbl: pointer, vdata: csize_t, oldState: cint, isOverride: bool): ptr cQWindowStateChangeEvent {.importc: "QWindowStateChangeEvent_new2".}
-proc fcQWindowStateChangeEvent_delete(self: pointer) {.importc: "QWindowStateChangeEvent_delete".}
 proc fcQTouchEvent_clone(self: pointer): pointer {.importc: "QTouchEvent_clone".}
 proc fcQTouchEvent_target(self: pointer): pointer {.importc: "QTouchEvent_target".}
 proc fcQTouchEvent_touchPointStates(self: pointer): cint {.importc: "QTouchEvent_touchPointStates".}
@@ -815,7 +777,6 @@ proc fcQTouchEvent_new3(vtbl: pointer, vdata: csize_t, eventType: cint, device: 
 proc fcQTouchEvent_new4(vtbl: pointer, vdata: csize_t, eventType: cint, device: pointer, modifiers: cint): ptr cQTouchEvent {.importc: "QTouchEvent_new4".}
 proc fcQTouchEvent_new5(vtbl: pointer, vdata: csize_t, eventType: cint, device: pointer, modifiers: cint, touchPoints: struct_miqt_array): ptr cQTouchEvent {.importc: "QTouchEvent_new5".}
 proc fcQTouchEvent_new6(vtbl: pointer, vdata: csize_t, eventType: cint, device: pointer, modifiers: cint, touchPointStates: cint, touchPoints: struct_miqt_array): ptr cQTouchEvent {.importc: "QTouchEvent_new6".}
-proc fcQTouchEvent_delete(self: pointer) {.importc: "QTouchEvent_delete".}
 proc fcQScrollPrepareEvent_clone(self: pointer): pointer {.importc: "QScrollPrepareEvent_clone".}
 proc fcQScrollPrepareEvent_startPos(self: pointer): pointer {.importc: "QScrollPrepareEvent_startPos".}
 proc fcQScrollPrepareEvent_viewportSize(self: pointer): pointer {.importc: "QScrollPrepareEvent_viewportSize".}
@@ -833,7 +794,6 @@ type cQScrollPrepareEventVTable {.pure.} = object
 proc fcQScrollPrepareEvent_virtualbase_clone(self: pointer): pointer {.importc: "QScrollPrepareEvent_virtualbase_clone".}
 proc fcQScrollPrepareEvent_virtualbase_setAccepted(self: pointer, accepted: bool): void {.importc: "QScrollPrepareEvent_virtualbase_setAccepted".}
 proc fcQScrollPrepareEvent_new(vtbl: pointer, vdata: csize_t, startPos: pointer): ptr cQScrollPrepareEvent {.importc: "QScrollPrepareEvent_new".}
-proc fcQScrollPrepareEvent_delete(self: pointer) {.importc: "QScrollPrepareEvent_delete".}
 proc fcQScrollEvent_clone(self: pointer): pointer {.importc: "QScrollEvent_clone".}
 proc fcQScrollEvent_contentPos(self: pointer): pointer {.importc: "QScrollEvent_contentPos".}
 proc fcQScrollEvent_overshootDistance(self: pointer): pointer {.importc: "QScrollEvent_overshootDistance".}
@@ -847,7 +807,6 @@ type cQScrollEventVTable {.pure.} = object
 proc fcQScrollEvent_virtualbase_clone(self: pointer): pointer {.importc: "QScrollEvent_virtualbase_clone".}
 proc fcQScrollEvent_virtualbase_setAccepted(self: pointer, accepted: bool): void {.importc: "QScrollEvent_virtualbase_setAccepted".}
 proc fcQScrollEvent_new(vtbl: pointer, vdata: csize_t, contentPos: pointer, overshoot: pointer, scrollState: cint): ptr cQScrollEvent {.importc: "QScrollEvent_new".}
-proc fcQScrollEvent_delete(self: pointer) {.importc: "QScrollEvent_delete".}
 proc fcQScreenOrientationChangeEvent_clone(self: pointer): pointer {.importc: "QScreenOrientationChangeEvent_clone".}
 proc fcQScreenOrientationChangeEvent_screen(self: pointer): pointer {.importc: "QScreenOrientationChangeEvent_screen".}
 proc fcQScreenOrientationChangeEvent_orientation(self: pointer): cint {.importc: "QScreenOrientationChangeEvent_orientation".}
@@ -860,7 +819,6 @@ type cQScreenOrientationChangeEventVTable {.pure.} = object
 proc fcQScreenOrientationChangeEvent_virtualbase_clone(self: pointer): pointer {.importc: "QScreenOrientationChangeEvent_virtualbase_clone".}
 proc fcQScreenOrientationChangeEvent_virtualbase_setAccepted(self: pointer, accepted: bool): void {.importc: "QScreenOrientationChangeEvent_virtualbase_setAccepted".}
 proc fcQScreenOrientationChangeEvent_new(vtbl: pointer, vdata: csize_t, screen: pointer, orientation: cint): ptr cQScreenOrientationChangeEvent {.importc: "QScreenOrientationChangeEvent_new".}
-proc fcQScreenOrientationChangeEvent_delete(self: pointer) {.importc: "QScreenOrientationChangeEvent_delete".}
 proc fcQApplicationStateChangeEvent_clone(self: pointer): pointer {.importc: "QApplicationStateChangeEvent_clone".}
 proc fcQApplicationStateChangeEvent_applicationState(self: pointer): cint {.importc: "QApplicationStateChangeEvent_applicationState".}
 proc fcQApplicationStateChangeEvent_vdata(self: pointer): ptr pointer {.importc: "QApplicationStateChangeEvent_vdata".}
@@ -872,18 +830,16 @@ type cQApplicationStateChangeEventVTable {.pure.} = object
 proc fcQApplicationStateChangeEvent_virtualbase_clone(self: pointer): pointer {.importc: "QApplicationStateChangeEvent_virtualbase_clone".}
 proc fcQApplicationStateChangeEvent_virtualbase_setAccepted(self: pointer, accepted: bool): void {.importc: "QApplicationStateChangeEvent_virtualbase_setAccepted".}
 proc fcQApplicationStateChangeEvent_new(vtbl: pointer, vdata: csize_t, state: cint): ptr cQApplicationStateChangeEvent {.importc: "QApplicationStateChangeEvent_new".}
-proc fcQApplicationStateChangeEvent_delete(self: pointer) {.importc: "QApplicationStateChangeEvent_delete".}
 proc fcQInputMethodEventAttribute_operatorAssign(self: pointer, param1: pointer): void {.importc: "QInputMethodEvent__Attribute_operatorAssign".}
 proc fcQInputMethodEventAttribute_new(typ: cint, s: cint, l: cint, val: pointer): ptr cQInputMethodEventAttribute {.importc: "QInputMethodEvent__Attribute_new".}
 proc fcQInputMethodEventAttribute_new2(typ: cint, s: cint, l: cint): ptr cQInputMethodEventAttribute {.importc: "QInputMethodEvent__Attribute_new2".}
 proc fcQInputMethodEventAttribute_new3(param1: pointer): ptr cQInputMethodEventAttribute {.importc: "QInputMethodEvent__Attribute_new3".}
-proc fcQInputMethodEventAttribute_delete(self: pointer) {.importc: "QInputMethodEvent__Attribute_delete".}
 
 proc clone*(self: gen_qevent_types.QInputEvent): gen_qevent_types.QInputEvent =
-  gen_qevent_types.QInputEvent(h: fcQInputEvent_clone(self.h))
+  gen_qevent_types.QInputEvent(h: fcQInputEvent_clone(self.h), owned: false)
 
 proc device*(self: gen_qevent_types.QInputEvent): gen_qinputdevice_types.QInputDevice =
-  gen_qinputdevice_types.QInputDevice(h: fcQInputEvent_device(self.h))
+  gen_qinputdevice_types.QInputDevice(h: fcQInputEvent_device(self.h), owned: false)
 
 proc deviceType*(self: gen_qevent_types.QInputEvent): cint =
   cint(fcQInputEvent_deviceType(self.h))
@@ -903,19 +859,22 @@ proc setTimestamp*(self: gen_qevent_types.QInputEvent, timestamp: culonglong): v
 type QInputEventcloneProc* = proc(self: QInputEvent): gen_qevent_types.QInputEvent {.raises: [], gcsafe.}
 type QInputEventsetTimestampProc* = proc(self: QInputEvent, timestamp: culonglong): void {.raises: [], gcsafe.}
 type QInputEventsetAcceptedProc* = proc(self: QInputEvent, accepted: bool): void {.raises: [], gcsafe.}
-type QInputEventVTable* = object
+type QInputEventVTable* {.inheritable, pure.} = object
   vtbl: cQInputEventVTable
   clone*: QInputEventcloneProc
   setTimestamp*: QInputEventsetTimestampProc
   setAccepted*: QInputEventsetAcceptedProc
 proc QInputEventclone*(self: gen_qevent_types.QInputEvent): gen_qevent_types.QInputEvent =
-  gen_qevent_types.QInputEvent(h: fcQInputEvent_virtualbase_clone(self.h))
+  gen_qevent_types.QInputEvent(h: fcQInputEvent_virtualbase_clone(self.h), owned: false)
 
 proc fcQInputEvent_vtable_callback_clone(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QInputEventVTable](fcQInputEvent_vdata(self)[])
   let self = QInputEvent(h: self)
   var virtualReturn = vtbl[].clone(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QInputEventsetTimestamp*(self: gen_qevent_types.QInputEvent, timestamp: culonglong): void =
   fcQInputEvent_virtualbase_setTimestamp(self.h, timestamp)
@@ -972,7 +931,7 @@ proc create*(T: type gen_qevent_types.QInputEvent,
     vtbl[].vtbl.setTimestamp = fcQInputEvent_vtable_callback_setTimestamp
   if not isNil(vtbl[].setAccepted):
     vtbl[].vtbl.setAccepted = fcQInputEvent_vtable_callback_setAccepted
-  let tmp = gen_qevent_types.QInputEvent(h: fcQInputEvent_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(typeVal), m_dev.h))
+  let tmp = gen_qevent_types.QInputEvent(h: fcQInputEvent_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(typeVal), m_dev.h), owned: true)
   fcQInputEvent_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qevent_types.QInputEvent,
@@ -989,13 +948,14 @@ proc create*(T: type gen_qevent_types.QInputEvent,
     vtbl[].vtbl.setTimestamp = fcQInputEvent_vtable_callback_setTimestamp
   if not isNil(vtbl[].setAccepted):
     vtbl[].vtbl.setAccepted = fcQInputEvent_vtable_callback_setAccepted
-  let tmp = gen_qevent_types.QInputEvent(h: fcQInputEvent_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(typeVal), m_dev.h, cint(modifiers)))
+  let tmp = gen_qevent_types.QInputEvent(h: fcQInputEvent_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(typeVal), m_dev.h, cint(modifiers)), owned: true)
   fcQInputEvent_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQInputEvent_mvtbl = cQInputEventVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQInputEvent()[])](self.fcQInputEvent_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   clone: fcQInputEvent_method_callback_clone,
   setTimestamp: fcQInputEvent_method_callback_setTimestamp,
@@ -1015,13 +975,11 @@ proc create*(T: type gen_qevent_types.QInputEvent,
   inst[].h = fcQInputEvent_new2(addr(cQInputEvent_mvtbl), csize_t(sizeof(pointer)), cint(typeVal), m_dev.h, cint(modifiers))
   fcQInputEvent_vdata(inst[].h)[] = addr inst[]
 
-proc delete*(self: gen_qevent_types.QInputEvent) =
-  fcQInputEvent_delete(self.h)
 proc clone*(self: gen_qevent_types.QPointerEvent): gen_qevent_types.QPointerEvent =
-  gen_qevent_types.QPointerEvent(h: fcQPointerEvent_clone(self.h))
+  gen_qevent_types.QPointerEvent(h: fcQPointerEvent_clone(self.h), owned: false)
 
 proc pointingDevice*(self: gen_qevent_types.QPointerEvent): gen_qpointingdevice_types.QPointingDevice =
-  gen_qpointingdevice_types.QPointingDevice(h: fcQPointerEvent_pointingDevice(self.h))
+  gen_qpointingdevice_types.QPointingDevice(h: fcQPointerEvent_pointingDevice(self.h), owned: false)
 
 proc pointerType*(self: gen_qevent_types.QPointerEvent): cint =
   cint(fcQPointerEvent_pointerType(self.h))
@@ -1033,19 +991,19 @@ proc pointCount*(self: gen_qevent_types.QPointerEvent): int64 =
   fcQPointerEvent_pointCount(self.h)
 
 proc point*(self: gen_qevent_types.QPointerEvent, i: int64): gen_qeventpoint_types.QEventPoint =
-  gen_qeventpoint_types.QEventPoint(h: fcQPointerEvent_point(self.h, i))
+  gen_qeventpoint_types.QEventPoint(h: fcQPointerEvent_point(self.h, i), owned: false)
 
 proc points*(self: gen_qevent_types.QPointerEvent): seq[gen_qeventpoint_types.QEventPoint] =
   var v_ma = fcQPointerEvent_points(self.h)
   var vx_ret = newSeq[gen_qeventpoint_types.QEventPoint](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qeventpoint_types.QEventPoint(h: v_outCast[i])
+    vx_ret[i] = gen_qeventpoint_types.QEventPoint(h: v_outCast[i], owned: true)
   c_free(v_ma.data)
   vx_ret
 
 proc pointById*(self: gen_qevent_types.QPointerEvent, id: cint): gen_qeventpoint_types.QEventPoint =
-  gen_qeventpoint_types.QEventPoint(h: fcQPointerEvent_pointById(self.h, id))
+  gen_qeventpoint_types.QEventPoint(h: fcQPointerEvent_pointById(self.h, id), owned: false)
 
 proc allPointsGrabbed*(self: gen_qevent_types.QPointerEvent): bool =
   fcQPointerEvent_allPointsGrabbed(self.h)
@@ -1066,7 +1024,7 @@ proc setAccepted*(self: gen_qevent_types.QPointerEvent, accepted: bool): void =
   fcQPointerEvent_setAccepted(self.h, accepted)
 
 proc exclusiveGrabber*(self: gen_qevent_types.QPointerEvent, point: gen_qeventpoint_types.QEventPoint): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQPointerEvent_exclusiveGrabber(self.h, point.h))
+  gen_qobject_types.QObject(h: fcQPointerEvent_exclusiveGrabber(self.h, point.h), owned: false)
 
 proc setExclusiveGrabber*(self: gen_qevent_types.QPointerEvent, point: gen_qeventpoint_types.QEventPoint, exclusiveGrabber: gen_qobject_types.QObject): void =
   fcQPointerEvent_setExclusiveGrabber(self.h, point.h, exclusiveGrabber.h)
@@ -1086,7 +1044,7 @@ type QPointerEventisBeginEventProc* = proc(self: QPointerEvent): bool {.raises: 
 type QPointerEventisUpdateEventProc* = proc(self: QPointerEvent): bool {.raises: [], gcsafe.}
 type QPointerEventisEndEventProc* = proc(self: QPointerEvent): bool {.raises: [], gcsafe.}
 type QPointerEventsetAcceptedProc* = proc(self: QPointerEvent, accepted: bool): void {.raises: [], gcsafe.}
-type QPointerEventVTable* = object
+type QPointerEventVTable* {.inheritable, pure.} = object
   vtbl: cQPointerEventVTable
   clone*: QPointerEventcloneProc
   setTimestamp*: QPointerEventsetTimestampProc
@@ -1095,13 +1053,16 @@ type QPointerEventVTable* = object
   isEndEvent*: QPointerEventisEndEventProc
   setAccepted*: QPointerEventsetAcceptedProc
 proc QPointerEventclone*(self: gen_qevent_types.QPointerEvent): gen_qevent_types.QPointerEvent =
-  gen_qevent_types.QPointerEvent(h: fcQPointerEvent_virtualbase_clone(self.h))
+  gen_qevent_types.QPointerEvent(h: fcQPointerEvent_virtualbase_clone(self.h), owned: false)
 
 proc fcQPointerEvent_vtable_callback_clone(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QPointerEventVTable](fcQPointerEvent_vdata(self)[])
   let self = QPointerEvent(h: self)
   var virtualReturn = vtbl[].clone(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QPointerEventsetTimestamp*(self: gen_qevent_types.QPointerEvent, timestamp: culonglong): void =
   fcQPointerEvent_virtualbase_setTimestamp(self.h, timestamp)
@@ -1212,7 +1173,7 @@ proc create*(T: type gen_qevent_types.QPointerEvent,
     vtbl[].vtbl.isEndEvent = fcQPointerEvent_vtable_callback_isEndEvent
   if not isNil(vtbl[].setAccepted):
     vtbl[].vtbl.setAccepted = fcQPointerEvent_vtable_callback_setAccepted
-  let tmp = gen_qevent_types.QPointerEvent(h: fcQPointerEvent_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(typeVal), dev.h))
+  let tmp = gen_qevent_types.QPointerEvent(h: fcQPointerEvent_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(typeVal), dev.h), owned: true)
   fcQPointerEvent_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qevent_types.QPointerEvent,
@@ -1235,7 +1196,7 @@ proc create*(T: type gen_qevent_types.QPointerEvent,
     vtbl[].vtbl.isEndEvent = fcQPointerEvent_vtable_callback_isEndEvent
   if not isNil(vtbl[].setAccepted):
     vtbl[].vtbl.setAccepted = fcQPointerEvent_vtable_callback_setAccepted
-  let tmp = gen_qevent_types.QPointerEvent(h: fcQPointerEvent_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(typeVal), dev.h, cint(modifiers)))
+  let tmp = gen_qevent_types.QPointerEvent(h: fcQPointerEvent_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(typeVal), dev.h, cint(modifiers)), owned: true)
   fcQPointerEvent_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qevent_types.QPointerEvent,
@@ -1262,13 +1223,14 @@ proc create*(T: type gen_qevent_types.QPointerEvent,
     vtbl[].vtbl.isEndEvent = fcQPointerEvent_vtable_callback_isEndEvent
   if not isNil(vtbl[].setAccepted):
     vtbl[].vtbl.setAccepted = fcQPointerEvent_vtable_callback_setAccepted
-  let tmp = gen_qevent_types.QPointerEvent(h: fcQPointerEvent_new3(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(typeVal), dev.h, cint(modifiers), struct_miqt_array(len: csize_t(len(points)), data: if len(points) == 0: nil else: addr(points_CArray[0]))))
+  let tmp = gen_qevent_types.QPointerEvent(h: fcQPointerEvent_new3(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(typeVal), dev.h, cint(modifiers), struct_miqt_array(len: csize_t(len(points)), data: if len(points) == 0: nil else: addr(points_CArray[0]))), owned: true)
   fcQPointerEvent_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQPointerEvent_mvtbl = cQPointerEventVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQPointerEvent()[])](self.fcQPointerEvent_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   clone: fcQPointerEvent_method_callback_clone,
   setTimestamp: fcQPointerEvent_method_callback_setTimestamp,
@@ -1302,10 +1264,8 @@ proc create*(T: type gen_qevent_types.QPointerEvent,
   inst[].h = fcQPointerEvent_new3(addr(cQPointerEvent_mvtbl), csize_t(sizeof(pointer)), cint(typeVal), dev.h, cint(modifiers), struct_miqt_array(len: csize_t(len(points)), data: if len(points) == 0: nil else: addr(points_CArray[0])))
   fcQPointerEvent_vdata(inst[].h)[] = addr inst[]
 
-proc delete*(self: gen_qevent_types.QPointerEvent) =
-  fcQPointerEvent_delete(self.h)
 proc clone*(self: gen_qevent_types.QSinglePointEvent): gen_qevent_types.QSinglePointEvent =
-  gen_qevent_types.QSinglePointEvent(h: fcQSinglePointEvent_clone(self.h))
+  gen_qevent_types.QSinglePointEvent(h: fcQSinglePointEvent_clone(self.h), owned: false)
 
 proc button*(self: gen_qevent_types.QSinglePointEvent): cint =
   cint(fcQSinglePointEvent_button(self.h))
@@ -1314,13 +1274,13 @@ proc buttons*(self: gen_qevent_types.QSinglePointEvent): cint =
   cint(fcQSinglePointEvent_buttons(self.h))
 
 proc position*(self: gen_qevent_types.QSinglePointEvent): gen_qpoint_types.QPointF =
-  gen_qpoint_types.QPointF(h: fcQSinglePointEvent_position(self.h))
+  gen_qpoint_types.QPointF(h: fcQSinglePointEvent_position(self.h), owned: true)
 
 proc scenePosition*(self: gen_qevent_types.QSinglePointEvent): gen_qpoint_types.QPointF =
-  gen_qpoint_types.QPointF(h: fcQSinglePointEvent_scenePosition(self.h))
+  gen_qpoint_types.QPointF(h: fcQSinglePointEvent_scenePosition(self.h), owned: true)
 
 proc globalPosition*(self: gen_qevent_types.QSinglePointEvent): gen_qpoint_types.QPointF =
-  gen_qpoint_types.QPointF(h: fcQSinglePointEvent_globalPosition(self.h))
+  gen_qpoint_types.QPointF(h: fcQSinglePointEvent_globalPosition(self.h), owned: true)
 
 proc isBeginEvent*(self: gen_qevent_types.QSinglePointEvent): bool =
   fcQSinglePointEvent_isBeginEvent(self.h)
@@ -1332,23 +1292,21 @@ proc isEndEvent*(self: gen_qevent_types.QSinglePointEvent): bool =
   fcQSinglePointEvent_isEndEvent(self.h)
 
 proc exclusivePointGrabber*(self: gen_qevent_types.QSinglePointEvent): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQSinglePointEvent_exclusivePointGrabber(self.h))
+  gen_qobject_types.QObject(h: fcQSinglePointEvent_exclusivePointGrabber(self.h), owned: false)
 
 proc setExclusivePointGrabber*(self: gen_qevent_types.QSinglePointEvent, exclusiveGrabber: gen_qobject_types.QObject): void =
   fcQSinglePointEvent_setExclusivePointGrabber(self.h, exclusiveGrabber.h)
 
 proc staticMetaObject*(_: type gen_qevent_types.QSinglePointEvent): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQSinglePointEvent_staticMetaObject())
-proc delete*(self: gen_qevent_types.QSinglePointEvent) =
-  fcQSinglePointEvent_delete(self.h)
 proc clone*(self: gen_qevent_types.QEnterEvent): gen_qevent_types.QEnterEvent =
-  gen_qevent_types.QEnterEvent(h: fcQEnterEvent_clone(self.h))
+  gen_qevent_types.QEnterEvent(h: fcQEnterEvent_clone(self.h), owned: false)
 
 proc pos*(self: gen_qevent_types.QEnterEvent): gen_qpoint_types.QPoint =
-  gen_qpoint_types.QPoint(h: fcQEnterEvent_pos(self.h))
+  gen_qpoint_types.QPoint(h: fcQEnterEvent_pos(self.h), owned: true)
 
 proc globalPos*(self: gen_qevent_types.QEnterEvent): gen_qpoint_types.QPoint =
-  gen_qpoint_types.QPoint(h: fcQEnterEvent_globalPos(self.h))
+  gen_qpoint_types.QPoint(h: fcQEnterEvent_globalPos(self.h), owned: true)
 
 proc x*(self: gen_qevent_types.QEnterEvent): cint =
   fcQEnterEvent_x(self.h)
@@ -1363,13 +1321,13 @@ proc globalY*(self: gen_qevent_types.QEnterEvent): cint =
   fcQEnterEvent_globalY(self.h)
 
 proc localPos*(self: gen_qevent_types.QEnterEvent): gen_qpoint_types.QPointF =
-  gen_qpoint_types.QPointF(h: fcQEnterEvent_localPos(self.h))
+  gen_qpoint_types.QPointF(h: fcQEnterEvent_localPos(self.h), owned: true)
 
 proc windowPos*(self: gen_qevent_types.QEnterEvent): gen_qpoint_types.QPointF =
-  gen_qpoint_types.QPointF(h: fcQEnterEvent_windowPos(self.h))
+  gen_qpoint_types.QPointF(h: fcQEnterEvent_windowPos(self.h), owned: true)
 
 proc screenPos*(self: gen_qevent_types.QEnterEvent): gen_qpoint_types.QPointF =
-  gen_qpoint_types.QPointF(h: fcQEnterEvent_screenPos(self.h))
+  gen_qpoint_types.QPointF(h: fcQEnterEvent_screenPos(self.h), owned: true)
 
 type QEnterEventcloneProc* = proc(self: QEnterEvent): gen_qevent_types.QEnterEvent {.raises: [], gcsafe.}
 type QEnterEventisBeginEventProc* = proc(self: QEnterEvent): bool {.raises: [], gcsafe.}
@@ -1377,7 +1335,7 @@ type QEnterEventisUpdateEventProc* = proc(self: QEnterEvent): bool {.raises: [],
 type QEnterEventisEndEventProc* = proc(self: QEnterEvent): bool {.raises: [], gcsafe.}
 type QEnterEventsetTimestampProc* = proc(self: QEnterEvent, timestamp: culonglong): void {.raises: [], gcsafe.}
 type QEnterEventsetAcceptedProc* = proc(self: QEnterEvent, accepted: bool): void {.raises: [], gcsafe.}
-type QEnterEventVTable* = object
+type QEnterEventVTable* {.inheritable, pure.} = object
   vtbl: cQEnterEventVTable
   clone*: QEnterEventcloneProc
   isBeginEvent*: QEnterEventisBeginEventProc
@@ -1386,13 +1344,16 @@ type QEnterEventVTable* = object
   setTimestamp*: QEnterEventsetTimestampProc
   setAccepted*: QEnterEventsetAcceptedProc
 proc QEnterEventclone*(self: gen_qevent_types.QEnterEvent): gen_qevent_types.QEnterEvent =
-  gen_qevent_types.QEnterEvent(h: fcQEnterEvent_virtualbase_clone(self.h))
+  gen_qevent_types.QEnterEvent(h: fcQEnterEvent_virtualbase_clone(self.h), owned: false)
 
 proc fcQEnterEvent_vtable_callback_clone(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QEnterEventVTable](fcQEnterEvent_vdata(self)[])
   let self = QEnterEvent(h: self)
   var virtualReturn = vtbl[].clone(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QEnterEventisBeginEvent*(self: gen_qevent_types.QEnterEvent): bool =
   fcQEnterEvent_virtualbase_isBeginEvent(self.h)
@@ -1503,7 +1464,7 @@ proc create*(T: type gen_qevent_types.QEnterEvent,
     vtbl[].vtbl.setTimestamp = fcQEnterEvent_vtable_callback_setTimestamp
   if not isNil(vtbl[].setAccepted):
     vtbl[].vtbl.setAccepted = fcQEnterEvent_vtable_callback_setAccepted
-  let tmp = gen_qevent_types.QEnterEvent(h: fcQEnterEvent_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), localPos.h, scenePos.h, globalPos.h))
+  let tmp = gen_qevent_types.QEnterEvent(h: fcQEnterEvent_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), localPos.h, scenePos.h, globalPos.h), owned: true)
   fcQEnterEvent_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qevent_types.QEnterEvent,
@@ -1526,13 +1487,14 @@ proc create*(T: type gen_qevent_types.QEnterEvent,
     vtbl[].vtbl.setTimestamp = fcQEnterEvent_vtable_callback_setTimestamp
   if not isNil(vtbl[].setAccepted):
     vtbl[].vtbl.setAccepted = fcQEnterEvent_vtable_callback_setAccepted
-  let tmp = gen_qevent_types.QEnterEvent(h: fcQEnterEvent_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), localPos.h, scenePos.h, globalPos.h, device.h))
+  let tmp = gen_qevent_types.QEnterEvent(h: fcQEnterEvent_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), localPos.h, scenePos.h, globalPos.h, device.h), owned: true)
   fcQEnterEvent_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQEnterEvent_mvtbl = cQEnterEventVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQEnterEvent()[])](self.fcQEnterEvent_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   clone: fcQEnterEvent_method_callback_clone,
   isBeginEvent: fcQEnterEvent_method_callback_isBeginEvent,
@@ -1555,16 +1517,14 @@ proc create*(T: type gen_qevent_types.QEnterEvent,
   inst[].h = fcQEnterEvent_new2(addr(cQEnterEvent_mvtbl), csize_t(sizeof(pointer)), localPos.h, scenePos.h, globalPos.h, device.h)
   fcQEnterEvent_vdata(inst[].h)[] = addr inst[]
 
-proc delete*(self: gen_qevent_types.QEnterEvent) =
-  fcQEnterEvent_delete(self.h)
 proc clone*(self: gen_qevent_types.QMouseEvent): gen_qevent_types.QMouseEvent =
-  gen_qevent_types.QMouseEvent(h: fcQMouseEvent_clone(self.h))
+  gen_qevent_types.QMouseEvent(h: fcQMouseEvent_clone(self.h), owned: false)
 
 proc pos*(self: gen_qevent_types.QMouseEvent): gen_qpoint_types.QPoint =
-  gen_qpoint_types.QPoint(h: fcQMouseEvent_pos(self.h))
+  gen_qpoint_types.QPoint(h: fcQMouseEvent_pos(self.h), owned: true)
 
 proc globalPos*(self: gen_qevent_types.QMouseEvent): gen_qpoint_types.QPoint =
-  gen_qpoint_types.QPoint(h: fcQMouseEvent_globalPos(self.h))
+  gen_qpoint_types.QPoint(h: fcQMouseEvent_globalPos(self.h), owned: true)
 
 proc x*(self: gen_qevent_types.QMouseEvent): cint =
   fcQMouseEvent_x(self.h)
@@ -1579,13 +1539,13 @@ proc globalY*(self: gen_qevent_types.QMouseEvent): cint =
   fcQMouseEvent_globalY(self.h)
 
 proc localPos*(self: gen_qevent_types.QMouseEvent): gen_qpoint_types.QPointF =
-  gen_qpoint_types.QPointF(h: fcQMouseEvent_localPos(self.h))
+  gen_qpoint_types.QPointF(h: fcQMouseEvent_localPos(self.h), owned: true)
 
 proc windowPos*(self: gen_qevent_types.QMouseEvent): gen_qpoint_types.QPointF =
-  gen_qpoint_types.QPointF(h: fcQMouseEvent_windowPos(self.h))
+  gen_qpoint_types.QPointF(h: fcQMouseEvent_windowPos(self.h), owned: true)
 
 proc screenPos*(self: gen_qevent_types.QMouseEvent): gen_qpoint_types.QPointF =
-  gen_qpoint_types.QPointF(h: fcQMouseEvent_screenPos(self.h))
+  gen_qpoint_types.QPointF(h: fcQMouseEvent_screenPos(self.h), owned: true)
 
 proc source*(self: gen_qevent_types.QMouseEvent): cint =
   cint(fcQMouseEvent_source(self.h))
@@ -1599,7 +1559,7 @@ type QMouseEventisUpdateEventProc* = proc(self: QMouseEvent): bool {.raises: [],
 type QMouseEventisEndEventProc* = proc(self: QMouseEvent): bool {.raises: [], gcsafe.}
 type QMouseEventsetTimestampProc* = proc(self: QMouseEvent, timestamp: culonglong): void {.raises: [], gcsafe.}
 type QMouseEventsetAcceptedProc* = proc(self: QMouseEvent, accepted: bool): void {.raises: [], gcsafe.}
-type QMouseEventVTable* = object
+type QMouseEventVTable* {.inheritable, pure.} = object
   vtbl: cQMouseEventVTable
   clone*: QMouseEventcloneProc
   isBeginEvent*: QMouseEventisBeginEventProc
@@ -1608,13 +1568,16 @@ type QMouseEventVTable* = object
   setTimestamp*: QMouseEventsetTimestampProc
   setAccepted*: QMouseEventsetAcceptedProc
 proc QMouseEventclone*(self: gen_qevent_types.QMouseEvent): gen_qevent_types.QMouseEvent =
-  gen_qevent_types.QMouseEvent(h: fcQMouseEvent_virtualbase_clone(self.h))
+  gen_qevent_types.QMouseEvent(h: fcQMouseEvent_virtualbase_clone(self.h), owned: false)
 
 proc fcQMouseEvent_vtable_callback_clone(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QMouseEventVTable](fcQMouseEvent_vdata(self)[])
   let self = QMouseEvent(h: self)
   var virtualReturn = vtbl[].clone(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QMouseEventisBeginEvent*(self: gen_qevent_types.QMouseEvent): bool =
   fcQMouseEvent_virtualbase_isBeginEvent(self.h)
@@ -1725,7 +1688,7 @@ proc create*(T: type gen_qevent_types.QMouseEvent,
     vtbl[].vtbl.setTimestamp = fcQMouseEvent_vtable_callback_setTimestamp
   if not isNil(vtbl[].setAccepted):
     vtbl[].vtbl.setAccepted = fcQMouseEvent_vtable_callback_setAccepted
-  let tmp = gen_qevent_types.QMouseEvent(h: fcQMouseEvent_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(typeVal), localPos.h, cint(button), cint(buttons), cint(modifiers)))
+  let tmp = gen_qevent_types.QMouseEvent(h: fcQMouseEvent_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(typeVal), localPos.h, cint(button), cint(buttons), cint(modifiers)), owned: true)
   fcQMouseEvent_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qevent_types.QMouseEvent,
@@ -1748,7 +1711,7 @@ proc create*(T: type gen_qevent_types.QMouseEvent,
     vtbl[].vtbl.setTimestamp = fcQMouseEvent_vtable_callback_setTimestamp
   if not isNil(vtbl[].setAccepted):
     vtbl[].vtbl.setAccepted = fcQMouseEvent_vtable_callback_setAccepted
-  let tmp = gen_qevent_types.QMouseEvent(h: fcQMouseEvent_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(typeVal), localPos.h, globalPos.h, cint(button), cint(buttons), cint(modifiers)))
+  let tmp = gen_qevent_types.QMouseEvent(h: fcQMouseEvent_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(typeVal), localPos.h, globalPos.h, cint(button), cint(buttons), cint(modifiers)), owned: true)
   fcQMouseEvent_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qevent_types.QMouseEvent,
@@ -1771,7 +1734,7 @@ proc create*(T: type gen_qevent_types.QMouseEvent,
     vtbl[].vtbl.setTimestamp = fcQMouseEvent_vtable_callback_setTimestamp
   if not isNil(vtbl[].setAccepted):
     vtbl[].vtbl.setAccepted = fcQMouseEvent_vtable_callback_setAccepted
-  let tmp = gen_qevent_types.QMouseEvent(h: fcQMouseEvent_new3(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(typeVal), localPos.h, scenePos.h, globalPos.h, cint(button), cint(buttons), cint(modifiers)))
+  let tmp = gen_qevent_types.QMouseEvent(h: fcQMouseEvent_new3(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(typeVal), localPos.h, scenePos.h, globalPos.h, cint(button), cint(buttons), cint(modifiers)), owned: true)
   fcQMouseEvent_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qevent_types.QMouseEvent,
@@ -1794,7 +1757,7 @@ proc create*(T: type gen_qevent_types.QMouseEvent,
     vtbl[].vtbl.setTimestamp = fcQMouseEvent_vtable_callback_setTimestamp
   if not isNil(vtbl[].setAccepted):
     vtbl[].vtbl.setAccepted = fcQMouseEvent_vtable_callback_setAccepted
-  let tmp = gen_qevent_types.QMouseEvent(h: fcQMouseEvent_new4(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(typeVal), localPos.h, scenePos.h, globalPos.h, cint(button), cint(buttons), cint(modifiers), cint(source)))
+  let tmp = gen_qevent_types.QMouseEvent(h: fcQMouseEvent_new4(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(typeVal), localPos.h, scenePos.h, globalPos.h, cint(button), cint(buttons), cint(modifiers), cint(source)), owned: true)
   fcQMouseEvent_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qevent_types.QMouseEvent,
@@ -1817,7 +1780,7 @@ proc create*(T: type gen_qevent_types.QMouseEvent,
     vtbl[].vtbl.setTimestamp = fcQMouseEvent_vtable_callback_setTimestamp
   if not isNil(vtbl[].setAccepted):
     vtbl[].vtbl.setAccepted = fcQMouseEvent_vtable_callback_setAccepted
-  let tmp = gen_qevent_types.QMouseEvent(h: fcQMouseEvent_new5(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(typeVal), localPos.h, cint(button), cint(buttons), cint(modifiers), device.h))
+  let tmp = gen_qevent_types.QMouseEvent(h: fcQMouseEvent_new5(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(typeVal), localPos.h, cint(button), cint(buttons), cint(modifiers), device.h), owned: true)
   fcQMouseEvent_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qevent_types.QMouseEvent,
@@ -1840,7 +1803,7 @@ proc create*(T: type gen_qevent_types.QMouseEvent,
     vtbl[].vtbl.setTimestamp = fcQMouseEvent_vtable_callback_setTimestamp
   if not isNil(vtbl[].setAccepted):
     vtbl[].vtbl.setAccepted = fcQMouseEvent_vtable_callback_setAccepted
-  let tmp = gen_qevent_types.QMouseEvent(h: fcQMouseEvent_new6(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(typeVal), localPos.h, globalPos.h, cint(button), cint(buttons), cint(modifiers), device.h))
+  let tmp = gen_qevent_types.QMouseEvent(h: fcQMouseEvent_new6(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(typeVal), localPos.h, globalPos.h, cint(button), cint(buttons), cint(modifiers), device.h), owned: true)
   fcQMouseEvent_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qevent_types.QMouseEvent,
@@ -1863,7 +1826,7 @@ proc create*(T: type gen_qevent_types.QMouseEvent,
     vtbl[].vtbl.setTimestamp = fcQMouseEvent_vtable_callback_setTimestamp
   if not isNil(vtbl[].setAccepted):
     vtbl[].vtbl.setAccepted = fcQMouseEvent_vtable_callback_setAccepted
-  let tmp = gen_qevent_types.QMouseEvent(h: fcQMouseEvent_new7(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(typeVal), localPos.h, scenePos.h, globalPos.h, cint(button), cint(buttons), cint(modifiers), device.h))
+  let tmp = gen_qevent_types.QMouseEvent(h: fcQMouseEvent_new7(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(typeVal), localPos.h, scenePos.h, globalPos.h, cint(button), cint(buttons), cint(modifiers), device.h), owned: true)
   fcQMouseEvent_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qevent_types.QMouseEvent,
@@ -1886,13 +1849,14 @@ proc create*(T: type gen_qevent_types.QMouseEvent,
     vtbl[].vtbl.setTimestamp = fcQMouseEvent_vtable_callback_setTimestamp
   if not isNil(vtbl[].setAccepted):
     vtbl[].vtbl.setAccepted = fcQMouseEvent_vtable_callback_setAccepted
-  let tmp = gen_qevent_types.QMouseEvent(h: fcQMouseEvent_new8(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(typeVal), localPos.h, scenePos.h, globalPos.h, cint(button), cint(buttons), cint(modifiers), cint(source), device.h))
+  let tmp = gen_qevent_types.QMouseEvent(h: fcQMouseEvent_new8(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(typeVal), localPos.h, scenePos.h, globalPos.h, cint(button), cint(buttons), cint(modifiers), cint(source), device.h), owned: true)
   fcQMouseEvent_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQMouseEvent_mvtbl = cQMouseEventVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQMouseEvent()[])](self.fcQMouseEvent_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   clone: fcQMouseEvent_method_callback_clone,
   isBeginEvent: fcQMouseEvent_method_callback_isBeginEvent,
@@ -1957,25 +1921,23 @@ proc create*(T: type gen_qevent_types.QMouseEvent,
   inst[].h = fcQMouseEvent_new8(addr(cQMouseEvent_mvtbl), csize_t(sizeof(pointer)), cint(typeVal), localPos.h, scenePos.h, globalPos.h, cint(button), cint(buttons), cint(modifiers), cint(source), device.h)
   fcQMouseEvent_vdata(inst[].h)[] = addr inst[]
 
-proc delete*(self: gen_qevent_types.QMouseEvent) =
-  fcQMouseEvent_delete(self.h)
 proc clone*(self: gen_qevent_types.QHoverEvent): gen_qevent_types.QHoverEvent =
-  gen_qevent_types.QHoverEvent(h: fcQHoverEvent_clone(self.h))
+  gen_qevent_types.QHoverEvent(h: fcQHoverEvent_clone(self.h), owned: false)
 
 proc pos*(self: gen_qevent_types.QHoverEvent): gen_qpoint_types.QPoint =
-  gen_qpoint_types.QPoint(h: fcQHoverEvent_pos(self.h))
+  gen_qpoint_types.QPoint(h: fcQHoverEvent_pos(self.h), owned: true)
 
 proc posF*(self: gen_qevent_types.QHoverEvent): gen_qpoint_types.QPointF =
-  gen_qpoint_types.QPointF(h: fcQHoverEvent_posF(self.h))
+  gen_qpoint_types.QPointF(h: fcQHoverEvent_posF(self.h), owned: true)
 
 proc isUpdateEvent*(self: gen_qevent_types.QHoverEvent): bool =
   fcQHoverEvent_isUpdateEvent(self.h)
 
 proc oldPos*(self: gen_qevent_types.QHoverEvent): gen_qpoint_types.QPoint =
-  gen_qpoint_types.QPoint(h: fcQHoverEvent_oldPos(self.h))
+  gen_qpoint_types.QPoint(h: fcQHoverEvent_oldPos(self.h), owned: true)
 
 proc oldPosF*(self: gen_qevent_types.QHoverEvent): gen_qpoint_types.QPointF =
-  gen_qpoint_types.QPointF(h: fcQHoverEvent_oldPosF(self.h))
+  gen_qpoint_types.QPointF(h: fcQHoverEvent_oldPosF(self.h), owned: true)
 
 type QHoverEventcloneProc* = proc(self: QHoverEvent): gen_qevent_types.QHoverEvent {.raises: [], gcsafe.}
 type QHoverEventisUpdateEventProc* = proc(self: QHoverEvent): bool {.raises: [], gcsafe.}
@@ -1983,7 +1945,7 @@ type QHoverEventisBeginEventProc* = proc(self: QHoverEvent): bool {.raises: [], 
 type QHoverEventisEndEventProc* = proc(self: QHoverEvent): bool {.raises: [], gcsafe.}
 type QHoverEventsetTimestampProc* = proc(self: QHoverEvent, timestamp: culonglong): void {.raises: [], gcsafe.}
 type QHoverEventsetAcceptedProc* = proc(self: QHoverEvent, accepted: bool): void {.raises: [], gcsafe.}
-type QHoverEventVTable* = object
+type QHoverEventVTable* {.inheritable, pure.} = object
   vtbl: cQHoverEventVTable
   clone*: QHoverEventcloneProc
   isUpdateEvent*: QHoverEventisUpdateEventProc
@@ -1992,13 +1954,16 @@ type QHoverEventVTable* = object
   setTimestamp*: QHoverEventsetTimestampProc
   setAccepted*: QHoverEventsetAcceptedProc
 proc QHoverEventclone*(self: gen_qevent_types.QHoverEvent): gen_qevent_types.QHoverEvent =
-  gen_qevent_types.QHoverEvent(h: fcQHoverEvent_virtualbase_clone(self.h))
+  gen_qevent_types.QHoverEvent(h: fcQHoverEvent_virtualbase_clone(self.h), owned: false)
 
 proc fcQHoverEvent_vtable_callback_clone(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QHoverEventVTable](fcQHoverEvent_vdata(self)[])
   let self = QHoverEvent(h: self)
   var virtualReturn = vtbl[].clone(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QHoverEventisUpdateEvent*(self: gen_qevent_types.QHoverEvent): bool =
   fcQHoverEvent_virtualbase_isUpdateEvent(self.h)
@@ -2109,7 +2074,7 @@ proc create*(T: type gen_qevent_types.QHoverEvent,
     vtbl[].vtbl.setTimestamp = fcQHoverEvent_vtable_callback_setTimestamp
   if not isNil(vtbl[].setAccepted):
     vtbl[].vtbl.setAccepted = fcQHoverEvent_vtable_callback_setAccepted
-  let tmp = gen_qevent_types.QHoverEvent(h: fcQHoverEvent_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(typeVal), scenePos.h, globalPos.h, oldPos.h))
+  let tmp = gen_qevent_types.QHoverEvent(h: fcQHoverEvent_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(typeVal), scenePos.h, globalPos.h, oldPos.h), owned: true)
   fcQHoverEvent_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qevent_types.QHoverEvent,
@@ -2132,7 +2097,7 @@ proc create*(T: type gen_qevent_types.QHoverEvent,
     vtbl[].vtbl.setTimestamp = fcQHoverEvent_vtable_callback_setTimestamp
   if not isNil(vtbl[].setAccepted):
     vtbl[].vtbl.setAccepted = fcQHoverEvent_vtable_callback_setAccepted
-  let tmp = gen_qevent_types.QHoverEvent(h: fcQHoverEvent_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(typeVal), pos.h, oldPos.h))
+  let tmp = gen_qevent_types.QHoverEvent(h: fcQHoverEvent_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(typeVal), pos.h, oldPos.h), owned: true)
   fcQHoverEvent_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qevent_types.QHoverEvent,
@@ -2155,7 +2120,7 @@ proc create*(T: type gen_qevent_types.QHoverEvent,
     vtbl[].vtbl.setTimestamp = fcQHoverEvent_vtable_callback_setTimestamp
   if not isNil(vtbl[].setAccepted):
     vtbl[].vtbl.setAccepted = fcQHoverEvent_vtable_callback_setAccepted
-  let tmp = gen_qevent_types.QHoverEvent(h: fcQHoverEvent_new3(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(typeVal), scenePos.h, globalPos.h, oldPos.h, cint(modifiers)))
+  let tmp = gen_qevent_types.QHoverEvent(h: fcQHoverEvent_new3(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(typeVal), scenePos.h, globalPos.h, oldPos.h, cint(modifiers)), owned: true)
   fcQHoverEvent_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qevent_types.QHoverEvent,
@@ -2178,7 +2143,7 @@ proc create*(T: type gen_qevent_types.QHoverEvent,
     vtbl[].vtbl.setTimestamp = fcQHoverEvent_vtable_callback_setTimestamp
   if not isNil(vtbl[].setAccepted):
     vtbl[].vtbl.setAccepted = fcQHoverEvent_vtable_callback_setAccepted
-  let tmp = gen_qevent_types.QHoverEvent(h: fcQHoverEvent_new4(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(typeVal), scenePos.h, globalPos.h, oldPos.h, cint(modifiers), device.h))
+  let tmp = gen_qevent_types.QHoverEvent(h: fcQHoverEvent_new4(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(typeVal), scenePos.h, globalPos.h, oldPos.h, cint(modifiers), device.h), owned: true)
   fcQHoverEvent_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qevent_types.QHoverEvent,
@@ -2201,7 +2166,7 @@ proc create*(T: type gen_qevent_types.QHoverEvent,
     vtbl[].vtbl.setTimestamp = fcQHoverEvent_vtable_callback_setTimestamp
   if not isNil(vtbl[].setAccepted):
     vtbl[].vtbl.setAccepted = fcQHoverEvent_vtable_callback_setAccepted
-  let tmp = gen_qevent_types.QHoverEvent(h: fcQHoverEvent_new5(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(typeVal), pos.h, oldPos.h, cint(modifiers)))
+  let tmp = gen_qevent_types.QHoverEvent(h: fcQHoverEvent_new5(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(typeVal), pos.h, oldPos.h, cint(modifiers)), owned: true)
   fcQHoverEvent_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qevent_types.QHoverEvent,
@@ -2224,13 +2189,14 @@ proc create*(T: type gen_qevent_types.QHoverEvent,
     vtbl[].vtbl.setTimestamp = fcQHoverEvent_vtable_callback_setTimestamp
   if not isNil(vtbl[].setAccepted):
     vtbl[].vtbl.setAccepted = fcQHoverEvent_vtable_callback_setAccepted
-  let tmp = gen_qevent_types.QHoverEvent(h: fcQHoverEvent_new6(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(typeVal), pos.h, oldPos.h, cint(modifiers), device.h))
+  let tmp = gen_qevent_types.QHoverEvent(h: fcQHoverEvent_new6(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(typeVal), pos.h, oldPos.h, cint(modifiers), device.h), owned: true)
   fcQHoverEvent_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQHoverEvent_mvtbl = cQHoverEventVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQHoverEvent()[])](self.fcQHoverEvent_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   clone: fcQHoverEvent_method_callback_clone,
   isUpdateEvent: fcQHoverEvent_method_callback_isUpdateEvent,
@@ -2281,16 +2247,14 @@ proc create*(T: type gen_qevent_types.QHoverEvent,
   inst[].h = fcQHoverEvent_new6(addr(cQHoverEvent_mvtbl), csize_t(sizeof(pointer)), cint(typeVal), pos.h, oldPos.h, cint(modifiers), device.h)
   fcQHoverEvent_vdata(inst[].h)[] = addr inst[]
 
-proc delete*(self: gen_qevent_types.QHoverEvent) =
-  fcQHoverEvent_delete(self.h)
 proc clone*(self: gen_qevent_types.QWheelEvent): gen_qevent_types.QWheelEvent =
-  gen_qevent_types.QWheelEvent(h: fcQWheelEvent_clone(self.h))
+  gen_qevent_types.QWheelEvent(h: fcQWheelEvent_clone(self.h), owned: false)
 
 proc pixelDelta*(self: gen_qevent_types.QWheelEvent): gen_qpoint_types.QPoint =
-  gen_qpoint_types.QPoint(h: fcQWheelEvent_pixelDelta(self.h))
+  gen_qpoint_types.QPoint(h: fcQWheelEvent_pixelDelta(self.h), owned: true)
 
 proc angleDelta*(self: gen_qevent_types.QWheelEvent): gen_qpoint_types.QPoint =
-  gen_qpoint_types.QPoint(h: fcQWheelEvent_angleDelta(self.h))
+  gen_qpoint_types.QPoint(h: fcQWheelEvent_angleDelta(self.h), owned: true)
 
 proc phase*(self: gen_qevent_types.QWheelEvent): cint =
   cint(fcQWheelEvent_phase(self.h))
@@ -2322,7 +2286,7 @@ type QWheelEventisUpdateEventProc* = proc(self: QWheelEvent): bool {.raises: [],
 type QWheelEventisEndEventProc* = proc(self: QWheelEvent): bool {.raises: [], gcsafe.}
 type QWheelEventsetTimestampProc* = proc(self: QWheelEvent, timestamp: culonglong): void {.raises: [], gcsafe.}
 type QWheelEventsetAcceptedProc* = proc(self: QWheelEvent, accepted: bool): void {.raises: [], gcsafe.}
-type QWheelEventVTable* = object
+type QWheelEventVTable* {.inheritable, pure.} = object
   vtbl: cQWheelEventVTable
   clone*: QWheelEventcloneProc
   isBeginEvent*: QWheelEventisBeginEventProc
@@ -2331,13 +2295,16 @@ type QWheelEventVTable* = object
   setTimestamp*: QWheelEventsetTimestampProc
   setAccepted*: QWheelEventsetAcceptedProc
 proc QWheelEventclone*(self: gen_qevent_types.QWheelEvent): gen_qevent_types.QWheelEvent =
-  gen_qevent_types.QWheelEvent(h: fcQWheelEvent_virtualbase_clone(self.h))
+  gen_qevent_types.QWheelEvent(h: fcQWheelEvent_virtualbase_clone(self.h), owned: false)
 
 proc fcQWheelEvent_vtable_callback_clone(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QWheelEventVTable](fcQWheelEvent_vdata(self)[])
   let self = QWheelEvent(h: self)
   var virtualReturn = vtbl[].clone(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QWheelEventisBeginEvent*(self: gen_qevent_types.QWheelEvent): bool =
   fcQWheelEvent_virtualbase_isBeginEvent(self.h)
@@ -2448,7 +2415,7 @@ proc create*(T: type gen_qevent_types.QWheelEvent,
     vtbl[].vtbl.setTimestamp = fcQWheelEvent_vtable_callback_setTimestamp
   if not isNil(vtbl[].setAccepted):
     vtbl[].vtbl.setAccepted = fcQWheelEvent_vtable_callback_setAccepted
-  let tmp = gen_qevent_types.QWheelEvent(h: fcQWheelEvent_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), pos.h, globalPos.h, pixelDelta.h, angleDelta.h, cint(buttons), cint(modifiers), cint(phase), inverted))
+  let tmp = gen_qevent_types.QWheelEvent(h: fcQWheelEvent_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), pos.h, globalPos.h, pixelDelta.h, angleDelta.h, cint(buttons), cint(modifiers), cint(phase), inverted), owned: true)
   fcQWheelEvent_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qevent_types.QWheelEvent,
@@ -2471,7 +2438,7 @@ proc create*(T: type gen_qevent_types.QWheelEvent,
     vtbl[].vtbl.setTimestamp = fcQWheelEvent_vtable_callback_setTimestamp
   if not isNil(vtbl[].setAccepted):
     vtbl[].vtbl.setAccepted = fcQWheelEvent_vtable_callback_setAccepted
-  let tmp = gen_qevent_types.QWheelEvent(h: fcQWheelEvent_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), pos.h, globalPos.h, pixelDelta.h, angleDelta.h, cint(buttons), cint(modifiers), cint(phase), inverted, cint(source)))
+  let tmp = gen_qevent_types.QWheelEvent(h: fcQWheelEvent_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), pos.h, globalPos.h, pixelDelta.h, angleDelta.h, cint(buttons), cint(modifiers), cint(phase), inverted, cint(source)), owned: true)
   fcQWheelEvent_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qevent_types.QWheelEvent,
@@ -2494,13 +2461,14 @@ proc create*(T: type gen_qevent_types.QWheelEvent,
     vtbl[].vtbl.setTimestamp = fcQWheelEvent_vtable_callback_setTimestamp
   if not isNil(vtbl[].setAccepted):
     vtbl[].vtbl.setAccepted = fcQWheelEvent_vtable_callback_setAccepted
-  let tmp = gen_qevent_types.QWheelEvent(h: fcQWheelEvent_new3(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), pos.h, globalPos.h, pixelDelta.h, angleDelta.h, cint(buttons), cint(modifiers), cint(phase), inverted, cint(source), device.h))
+  let tmp = gen_qevent_types.QWheelEvent(h: fcQWheelEvent_new3(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), pos.h, globalPos.h, pixelDelta.h, angleDelta.h, cint(buttons), cint(modifiers), cint(phase), inverted, cint(source), device.h), owned: true)
   fcQWheelEvent_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQWheelEvent_mvtbl = cQWheelEventVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQWheelEvent()[])](self.fcQWheelEvent_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   clone: fcQWheelEvent_method_callback_clone,
   isBeginEvent: fcQWheelEvent_method_callback_isBeginEvent,
@@ -2532,22 +2500,20 @@ proc create*(T: type gen_qevent_types.QWheelEvent,
 
 proc staticMetaObject*(_: type gen_qevent_types.QWheelEvent): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQWheelEvent_staticMetaObject())
-proc delete*(self: gen_qevent_types.QWheelEvent) =
-  fcQWheelEvent_delete(self.h)
 proc clone*(self: gen_qevent_types.QTabletEvent): gen_qevent_types.QTabletEvent =
-  gen_qevent_types.QTabletEvent(h: fcQTabletEvent_clone(self.h))
+  gen_qevent_types.QTabletEvent(h: fcQTabletEvent_clone(self.h), owned: false)
 
 proc pos*(self: gen_qevent_types.QTabletEvent): gen_qpoint_types.QPoint =
-  gen_qpoint_types.QPoint(h: fcQTabletEvent_pos(self.h))
+  gen_qpoint_types.QPoint(h: fcQTabletEvent_pos(self.h), owned: true)
 
 proc globalPos*(self: gen_qevent_types.QTabletEvent): gen_qpoint_types.QPoint =
-  gen_qpoint_types.QPoint(h: fcQTabletEvent_globalPos(self.h))
+  gen_qpoint_types.QPoint(h: fcQTabletEvent_globalPos(self.h), owned: true)
 
 proc posF*(self: gen_qevent_types.QTabletEvent): gen_qpoint_types.QPointF =
-  gen_qpoint_types.QPointF(h: fcQTabletEvent_posF(self.h))
+  gen_qpoint_types.QPointF(h: fcQTabletEvent_posF(self.h), owned: true)
 
 proc globalPosF*(self: gen_qevent_types.QTabletEvent): gen_qpoint_types.QPointF =
-  gen_qpoint_types.QPointF(h: fcQTabletEvent_globalPosF(self.h))
+  gen_qpoint_types.QPointF(h: fcQTabletEvent_globalPosF(self.h), owned: true)
 
 proc x*(self: gen_qevent_types.QTabletEvent): cint =
   fcQTabletEvent_x(self.h)
@@ -2594,7 +2560,7 @@ type QTabletEventisUpdateEventProc* = proc(self: QTabletEvent): bool {.raises: [
 type QTabletEventisEndEventProc* = proc(self: QTabletEvent): bool {.raises: [], gcsafe.}
 type QTabletEventsetTimestampProc* = proc(self: QTabletEvent, timestamp: culonglong): void {.raises: [], gcsafe.}
 type QTabletEventsetAcceptedProc* = proc(self: QTabletEvent, accepted: bool): void {.raises: [], gcsafe.}
-type QTabletEventVTable* = object
+type QTabletEventVTable* {.inheritable, pure.} = object
   vtbl: cQTabletEventVTable
   clone*: QTabletEventcloneProc
   isBeginEvent*: QTabletEventisBeginEventProc
@@ -2603,13 +2569,16 @@ type QTabletEventVTable* = object
   setTimestamp*: QTabletEventsetTimestampProc
   setAccepted*: QTabletEventsetAcceptedProc
 proc QTabletEventclone*(self: gen_qevent_types.QTabletEvent): gen_qevent_types.QTabletEvent =
-  gen_qevent_types.QTabletEvent(h: fcQTabletEvent_virtualbase_clone(self.h))
+  gen_qevent_types.QTabletEvent(h: fcQTabletEvent_virtualbase_clone(self.h), owned: false)
 
 proc fcQTabletEvent_vtable_callback_clone(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QTabletEventVTable](fcQTabletEvent_vdata(self)[])
   let self = QTabletEvent(h: self)
   var virtualReturn = vtbl[].clone(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QTabletEventisBeginEvent*(self: gen_qevent_types.QTabletEvent): bool =
   fcQTabletEvent_virtualbase_isBeginEvent(self.h)
@@ -2720,13 +2689,14 @@ proc create*(T: type gen_qevent_types.QTabletEvent,
     vtbl[].vtbl.setTimestamp = fcQTabletEvent_vtable_callback_setTimestamp
   if not isNil(vtbl[].setAccepted):
     vtbl[].vtbl.setAccepted = fcQTabletEvent_vtable_callback_setAccepted
-  let tmp = gen_qevent_types.QTabletEvent(h: fcQTabletEvent_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(t), device.h, pos.h, globalPos.h, pressure, xTilt, yTilt, tangentialPressure, rotation, z, cint(keyState), cint(button), cint(buttons)))
+  let tmp = gen_qevent_types.QTabletEvent(h: fcQTabletEvent_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(t), device.h, pos.h, globalPos.h, pressure, xTilt, yTilt, tangentialPressure, rotation, z, cint(keyState), cint(button), cint(buttons)), owned: true)
   fcQTabletEvent_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQTabletEvent_mvtbl = cQTabletEventVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQTabletEvent()[])](self.fcQTabletEvent_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   clone: fcQTabletEvent_method_callback_clone,
   isBeginEvent: fcQTabletEvent_method_callback_isBeginEvent,
@@ -2742,10 +2712,8 @@ proc create*(T: type gen_qevent_types.QTabletEvent,
   inst[].h = fcQTabletEvent_new(addr(cQTabletEvent_mvtbl), csize_t(sizeof(pointer)), cint(t), device.h, pos.h, globalPos.h, pressure, xTilt, yTilt, tangentialPressure, rotation, z, cint(keyState), cint(button), cint(buttons))
   fcQTabletEvent_vdata(inst[].h)[] = addr inst[]
 
-proc delete*(self: gen_qevent_types.QTabletEvent) =
-  fcQTabletEvent_delete(self.h)
 proc clone*(self: gen_qevent_types.QNativeGestureEvent): gen_qevent_types.QNativeGestureEvent =
-  gen_qevent_types.QNativeGestureEvent(h: fcQNativeGestureEvent_clone(self.h))
+  gen_qevent_types.QNativeGestureEvent(h: fcQNativeGestureEvent_clone(self.h), owned: false)
 
 proc gestureType*(self: gen_qevent_types.QNativeGestureEvent): cint =
   cint(fcQNativeGestureEvent_gestureType(self.h))
@@ -2757,22 +2725,22 @@ proc value*(self: gen_qevent_types.QNativeGestureEvent): float64 =
   fcQNativeGestureEvent_value(self.h)
 
 proc delta*(self: gen_qevent_types.QNativeGestureEvent): gen_qpoint_types.QPointF =
-  gen_qpoint_types.QPointF(h: fcQNativeGestureEvent_delta(self.h))
+  gen_qpoint_types.QPointF(h: fcQNativeGestureEvent_delta(self.h), owned: true)
 
 proc pos*(self: gen_qevent_types.QNativeGestureEvent): gen_qpoint_types.QPoint =
-  gen_qpoint_types.QPoint(h: fcQNativeGestureEvent_pos(self.h))
+  gen_qpoint_types.QPoint(h: fcQNativeGestureEvent_pos(self.h), owned: true)
 
 proc globalPos*(self: gen_qevent_types.QNativeGestureEvent): gen_qpoint_types.QPoint =
-  gen_qpoint_types.QPoint(h: fcQNativeGestureEvent_globalPos(self.h))
+  gen_qpoint_types.QPoint(h: fcQNativeGestureEvent_globalPos(self.h), owned: true)
 
 proc localPos*(self: gen_qevent_types.QNativeGestureEvent): gen_qpoint_types.QPointF =
-  gen_qpoint_types.QPointF(h: fcQNativeGestureEvent_localPos(self.h))
+  gen_qpoint_types.QPointF(h: fcQNativeGestureEvent_localPos(self.h), owned: true)
 
 proc windowPos*(self: gen_qevent_types.QNativeGestureEvent): gen_qpoint_types.QPointF =
-  gen_qpoint_types.QPointF(h: fcQNativeGestureEvent_windowPos(self.h))
+  gen_qpoint_types.QPointF(h: fcQNativeGestureEvent_windowPos(self.h), owned: true)
 
 proc screenPos*(self: gen_qevent_types.QNativeGestureEvent): gen_qpoint_types.QPointF =
-  gen_qpoint_types.QPointF(h: fcQNativeGestureEvent_screenPos(self.h))
+  gen_qpoint_types.QPointF(h: fcQNativeGestureEvent_screenPos(self.h), owned: true)
 
 type QNativeGestureEventcloneProc* = proc(self: QNativeGestureEvent): gen_qevent_types.QNativeGestureEvent {.raises: [], gcsafe.}
 type QNativeGestureEventisBeginEventProc* = proc(self: QNativeGestureEvent): bool {.raises: [], gcsafe.}
@@ -2780,7 +2748,7 @@ type QNativeGestureEventisUpdateEventProc* = proc(self: QNativeGestureEvent): bo
 type QNativeGestureEventisEndEventProc* = proc(self: QNativeGestureEvent): bool {.raises: [], gcsafe.}
 type QNativeGestureEventsetTimestampProc* = proc(self: QNativeGestureEvent, timestamp: culonglong): void {.raises: [], gcsafe.}
 type QNativeGestureEventsetAcceptedProc* = proc(self: QNativeGestureEvent, accepted: bool): void {.raises: [], gcsafe.}
-type QNativeGestureEventVTable* = object
+type QNativeGestureEventVTable* {.inheritable, pure.} = object
   vtbl: cQNativeGestureEventVTable
   clone*: QNativeGestureEventcloneProc
   isBeginEvent*: QNativeGestureEventisBeginEventProc
@@ -2789,13 +2757,16 @@ type QNativeGestureEventVTable* = object
   setTimestamp*: QNativeGestureEventsetTimestampProc
   setAccepted*: QNativeGestureEventsetAcceptedProc
 proc QNativeGestureEventclone*(self: gen_qevent_types.QNativeGestureEvent): gen_qevent_types.QNativeGestureEvent =
-  gen_qevent_types.QNativeGestureEvent(h: fcQNativeGestureEvent_virtualbase_clone(self.h))
+  gen_qevent_types.QNativeGestureEvent(h: fcQNativeGestureEvent_virtualbase_clone(self.h), owned: false)
 
 proc fcQNativeGestureEvent_vtable_callback_clone(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QNativeGestureEventVTable](fcQNativeGestureEvent_vdata(self)[])
   let self = QNativeGestureEvent(h: self)
   var virtualReturn = vtbl[].clone(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QNativeGestureEventisBeginEvent*(self: gen_qevent_types.QNativeGestureEvent): bool =
   fcQNativeGestureEvent_virtualbase_isBeginEvent(self.h)
@@ -2906,7 +2877,7 @@ proc create*(T: type gen_qevent_types.QNativeGestureEvent,
     vtbl[].vtbl.setTimestamp = fcQNativeGestureEvent_vtable_callback_setTimestamp
   if not isNil(vtbl[].setAccepted):
     vtbl[].vtbl.setAccepted = fcQNativeGestureEvent_vtable_callback_setAccepted
-  let tmp = gen_qevent_types.QNativeGestureEvent(h: fcQNativeGestureEvent_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(typeVal), dev.h, localPos.h, scenePos.h, globalPos.h, value, sequenceId, intArgument))
+  let tmp = gen_qevent_types.QNativeGestureEvent(h: fcQNativeGestureEvent_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(typeVal), dev.h, localPos.h, scenePos.h, globalPos.h, value, sequenceId, intArgument), owned: true)
   fcQNativeGestureEvent_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qevent_types.QNativeGestureEvent,
@@ -2929,7 +2900,7 @@ proc create*(T: type gen_qevent_types.QNativeGestureEvent,
     vtbl[].vtbl.setTimestamp = fcQNativeGestureEvent_vtable_callback_setTimestamp
   if not isNil(vtbl[].setAccepted):
     vtbl[].vtbl.setAccepted = fcQNativeGestureEvent_vtable_callback_setAccepted
-  let tmp = gen_qevent_types.QNativeGestureEvent(h: fcQNativeGestureEvent_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(typeVal), dev.h, fingerCount, localPos.h, scenePos.h, globalPos.h, value, delta.h))
+  let tmp = gen_qevent_types.QNativeGestureEvent(h: fcQNativeGestureEvent_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(typeVal), dev.h, fingerCount, localPos.h, scenePos.h, globalPos.h, value, delta.h), owned: true)
   fcQNativeGestureEvent_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qevent_types.QNativeGestureEvent,
@@ -2952,13 +2923,14 @@ proc create*(T: type gen_qevent_types.QNativeGestureEvent,
     vtbl[].vtbl.setTimestamp = fcQNativeGestureEvent_vtable_callback_setTimestamp
   if not isNil(vtbl[].setAccepted):
     vtbl[].vtbl.setAccepted = fcQNativeGestureEvent_vtable_callback_setAccepted
-  let tmp = gen_qevent_types.QNativeGestureEvent(h: fcQNativeGestureEvent_new3(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(typeVal), dev.h, fingerCount, localPos.h, scenePos.h, globalPos.h, value, delta.h, sequenceId))
+  let tmp = gen_qevent_types.QNativeGestureEvent(h: fcQNativeGestureEvent_new3(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(typeVal), dev.h, fingerCount, localPos.h, scenePos.h, globalPos.h, value, delta.h, sequenceId), owned: true)
   fcQNativeGestureEvent_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQNativeGestureEvent_mvtbl = cQNativeGestureEventVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQNativeGestureEvent()[])](self.fcQNativeGestureEvent_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   clone: fcQNativeGestureEvent_method_callback_clone,
   isBeginEvent: fcQNativeGestureEvent_method_callback_isBeginEvent,
@@ -2988,10 +2960,8 @@ proc create*(T: type gen_qevent_types.QNativeGestureEvent,
   inst[].h = fcQNativeGestureEvent_new3(addr(cQNativeGestureEvent_mvtbl), csize_t(sizeof(pointer)), cint(typeVal), dev.h, fingerCount, localPos.h, scenePos.h, globalPos.h, value, delta.h, sequenceId)
   fcQNativeGestureEvent_vdata(inst[].h)[] = addr inst[]
 
-proc delete*(self: gen_qevent_types.QNativeGestureEvent) =
-  fcQNativeGestureEvent_delete(self.h)
 proc clone*(self: gen_qevent_types.QKeyEvent): gen_qevent_types.QKeyEvent =
-  gen_qevent_types.QKeyEvent(h: fcQKeyEvent_clone(self.h))
+  gen_qevent_types.QKeyEvent(h: fcQKeyEvent_clone(self.h), owned: false)
 
 proc key*(self: gen_qevent_types.QKeyEvent): cint =
   fcQKeyEvent_key(self.h)
@@ -3003,7 +2973,7 @@ proc modifiers*(self: gen_qevent_types.QKeyEvent): cint =
   cint(fcQKeyEvent_modifiers(self.h))
 
 proc keyCombination*(self: gen_qevent_types.QKeyEvent): gen_qnamespace_types.QKeyCombination =
-  gen_qnamespace_types.QKeyCombination(h: fcQKeyEvent_keyCombination(self.h))
+  gen_qnamespace_types.QKeyCombination(h: fcQKeyEvent_keyCombination(self.h), owned: true)
 
 proc text*(self: gen_qevent_types.QKeyEvent): string =
   let v_ms = fcQKeyEvent_text(self.h)
@@ -3029,19 +2999,22 @@ proc nativeModifiers*(self: gen_qevent_types.QKeyEvent): cuint =
 type QKeyEventcloneProc* = proc(self: QKeyEvent): gen_qevent_types.QKeyEvent {.raises: [], gcsafe.}
 type QKeyEventsetTimestampProc* = proc(self: QKeyEvent, timestamp: culonglong): void {.raises: [], gcsafe.}
 type QKeyEventsetAcceptedProc* = proc(self: QKeyEvent, accepted: bool): void {.raises: [], gcsafe.}
-type QKeyEventVTable* = object
+type QKeyEventVTable* {.inheritable, pure.} = object
   vtbl: cQKeyEventVTable
   clone*: QKeyEventcloneProc
   setTimestamp*: QKeyEventsetTimestampProc
   setAccepted*: QKeyEventsetAcceptedProc
 proc QKeyEventclone*(self: gen_qevent_types.QKeyEvent): gen_qevent_types.QKeyEvent =
-  gen_qevent_types.QKeyEvent(h: fcQKeyEvent_virtualbase_clone(self.h))
+  gen_qevent_types.QKeyEvent(h: fcQKeyEvent_virtualbase_clone(self.h), owned: false)
 
 proc fcQKeyEvent_vtable_callback_clone(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QKeyEventVTable](fcQKeyEvent_vdata(self)[])
   let self = QKeyEvent(h: self)
   var virtualReturn = vtbl[].clone(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QKeyEventsetTimestamp*(self: gen_qevent_types.QKeyEvent, timestamp: culonglong): void =
   fcQKeyEvent_virtualbase_setTimestamp(self.h, timestamp)
@@ -3098,7 +3071,7 @@ proc create*(T: type gen_qevent_types.QKeyEvent,
     vtbl[].vtbl.setTimestamp = fcQKeyEvent_vtable_callback_setTimestamp
   if not isNil(vtbl[].setAccepted):
     vtbl[].vtbl.setAccepted = fcQKeyEvent_vtable_callback_setAccepted
-  let tmp = gen_qevent_types.QKeyEvent(h: fcQKeyEvent_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(typeVal), key, cint(modifiers)))
+  let tmp = gen_qevent_types.QKeyEvent(h: fcQKeyEvent_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(typeVal), key, cint(modifiers)), owned: true)
   fcQKeyEvent_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qevent_types.QKeyEvent,
@@ -3115,7 +3088,7 @@ proc create*(T: type gen_qevent_types.QKeyEvent,
     vtbl[].vtbl.setTimestamp = fcQKeyEvent_vtable_callback_setTimestamp
   if not isNil(vtbl[].setAccepted):
     vtbl[].vtbl.setAccepted = fcQKeyEvent_vtable_callback_setAccepted
-  let tmp = gen_qevent_types.QKeyEvent(h: fcQKeyEvent_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(typeVal), key, cint(modifiers), nativeScanCode, nativeVirtualKey, nativeModifiers))
+  let tmp = gen_qevent_types.QKeyEvent(h: fcQKeyEvent_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(typeVal), key, cint(modifiers), nativeScanCode, nativeVirtualKey, nativeModifiers), owned: true)
   fcQKeyEvent_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qevent_types.QKeyEvent,
@@ -3132,7 +3105,7 @@ proc create*(T: type gen_qevent_types.QKeyEvent,
     vtbl[].vtbl.setTimestamp = fcQKeyEvent_vtable_callback_setTimestamp
   if not isNil(vtbl[].setAccepted):
     vtbl[].vtbl.setAccepted = fcQKeyEvent_vtable_callback_setAccepted
-  let tmp = gen_qevent_types.QKeyEvent(h: fcQKeyEvent_new3(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(typeVal), key, cint(modifiers), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))))
+  let tmp = gen_qevent_types.QKeyEvent(h: fcQKeyEvent_new3(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(typeVal), key, cint(modifiers), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))), owned: true)
   fcQKeyEvent_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qevent_types.QKeyEvent,
@@ -3149,7 +3122,7 @@ proc create*(T: type gen_qevent_types.QKeyEvent,
     vtbl[].vtbl.setTimestamp = fcQKeyEvent_vtable_callback_setTimestamp
   if not isNil(vtbl[].setAccepted):
     vtbl[].vtbl.setAccepted = fcQKeyEvent_vtable_callback_setAccepted
-  let tmp = gen_qevent_types.QKeyEvent(h: fcQKeyEvent_new4(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(typeVal), key, cint(modifiers), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), autorep))
+  let tmp = gen_qevent_types.QKeyEvent(h: fcQKeyEvent_new4(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(typeVal), key, cint(modifiers), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), autorep), owned: true)
   fcQKeyEvent_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qevent_types.QKeyEvent,
@@ -3166,7 +3139,7 @@ proc create*(T: type gen_qevent_types.QKeyEvent,
     vtbl[].vtbl.setTimestamp = fcQKeyEvent_vtable_callback_setTimestamp
   if not isNil(vtbl[].setAccepted):
     vtbl[].vtbl.setAccepted = fcQKeyEvent_vtable_callback_setAccepted
-  let tmp = gen_qevent_types.QKeyEvent(h: fcQKeyEvent_new5(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(typeVal), key, cint(modifiers), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), autorep, count))
+  let tmp = gen_qevent_types.QKeyEvent(h: fcQKeyEvent_new5(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(typeVal), key, cint(modifiers), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), autorep, count), owned: true)
   fcQKeyEvent_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qevent_types.QKeyEvent,
@@ -3183,7 +3156,7 @@ proc create*(T: type gen_qevent_types.QKeyEvent,
     vtbl[].vtbl.setTimestamp = fcQKeyEvent_vtable_callback_setTimestamp
   if not isNil(vtbl[].setAccepted):
     vtbl[].vtbl.setAccepted = fcQKeyEvent_vtable_callback_setAccepted
-  let tmp = gen_qevent_types.QKeyEvent(h: fcQKeyEvent_new6(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(typeVal), key, cint(modifiers), nativeScanCode, nativeVirtualKey, nativeModifiers, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))))
+  let tmp = gen_qevent_types.QKeyEvent(h: fcQKeyEvent_new6(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(typeVal), key, cint(modifiers), nativeScanCode, nativeVirtualKey, nativeModifiers, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))), owned: true)
   fcQKeyEvent_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qevent_types.QKeyEvent,
@@ -3200,7 +3173,7 @@ proc create*(T: type gen_qevent_types.QKeyEvent,
     vtbl[].vtbl.setTimestamp = fcQKeyEvent_vtable_callback_setTimestamp
   if not isNil(vtbl[].setAccepted):
     vtbl[].vtbl.setAccepted = fcQKeyEvent_vtable_callback_setAccepted
-  let tmp = gen_qevent_types.QKeyEvent(h: fcQKeyEvent_new7(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(typeVal), key, cint(modifiers), nativeScanCode, nativeVirtualKey, nativeModifiers, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), autorep))
+  let tmp = gen_qevent_types.QKeyEvent(h: fcQKeyEvent_new7(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(typeVal), key, cint(modifiers), nativeScanCode, nativeVirtualKey, nativeModifiers, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), autorep), owned: true)
   fcQKeyEvent_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qevent_types.QKeyEvent,
@@ -3217,7 +3190,7 @@ proc create*(T: type gen_qevent_types.QKeyEvent,
     vtbl[].vtbl.setTimestamp = fcQKeyEvent_vtable_callback_setTimestamp
   if not isNil(vtbl[].setAccepted):
     vtbl[].vtbl.setAccepted = fcQKeyEvent_vtable_callback_setAccepted
-  let tmp = gen_qevent_types.QKeyEvent(h: fcQKeyEvent_new8(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(typeVal), key, cint(modifiers), nativeScanCode, nativeVirtualKey, nativeModifiers, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), autorep, count))
+  let tmp = gen_qevent_types.QKeyEvent(h: fcQKeyEvent_new8(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(typeVal), key, cint(modifiers), nativeScanCode, nativeVirtualKey, nativeModifiers, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), autorep, count), owned: true)
   fcQKeyEvent_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qevent_types.QKeyEvent,
@@ -3234,13 +3207,14 @@ proc create*(T: type gen_qevent_types.QKeyEvent,
     vtbl[].vtbl.setTimestamp = fcQKeyEvent_vtable_callback_setTimestamp
   if not isNil(vtbl[].setAccepted):
     vtbl[].vtbl.setAccepted = fcQKeyEvent_vtable_callback_setAccepted
-  let tmp = gen_qevent_types.QKeyEvent(h: fcQKeyEvent_new9(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(typeVal), key, cint(modifiers), nativeScanCode, nativeVirtualKey, nativeModifiers, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), autorep, count, device.h))
+  let tmp = gen_qevent_types.QKeyEvent(h: fcQKeyEvent_new9(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(typeVal), key, cint(modifiers), nativeScanCode, nativeVirtualKey, nativeModifiers, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), autorep, count, device.h), owned: true)
   fcQKeyEvent_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQKeyEvent_mvtbl = cQKeyEventVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQKeyEvent()[])](self.fcQKeyEvent_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   clone: fcQKeyEvent_method_callback_clone,
   setTimestamp: fcQKeyEvent_method_callback_setTimestamp,
@@ -3309,10 +3283,8 @@ proc create*(T: type gen_qevent_types.QKeyEvent,
   inst[].h = fcQKeyEvent_new9(addr(cQKeyEvent_mvtbl), csize_t(sizeof(pointer)), cint(typeVal), key, cint(modifiers), nativeScanCode, nativeVirtualKey, nativeModifiers, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), autorep, count, device.h)
   fcQKeyEvent_vdata(inst[].h)[] = addr inst[]
 
-proc delete*(self: gen_qevent_types.QKeyEvent) =
-  fcQKeyEvent_delete(self.h)
 proc clone*(self: gen_qevent_types.QFocusEvent): gen_qevent_types.QFocusEvent =
-  gen_qevent_types.QFocusEvent(h: fcQFocusEvent_clone(self.h))
+  gen_qevent_types.QFocusEvent(h: fcQFocusEvent_clone(self.h), owned: false)
 
 proc gotFocus*(self: gen_qevent_types.QFocusEvent): bool =
   fcQFocusEvent_gotFocus(self.h)
@@ -3325,18 +3297,21 @@ proc reason*(self: gen_qevent_types.QFocusEvent): cint =
 
 type QFocusEventcloneProc* = proc(self: QFocusEvent): gen_qevent_types.QFocusEvent {.raises: [], gcsafe.}
 type QFocusEventsetAcceptedProc* = proc(self: QFocusEvent, accepted: bool): void {.raises: [], gcsafe.}
-type QFocusEventVTable* = object
+type QFocusEventVTable* {.inheritable, pure.} = object
   vtbl: cQFocusEventVTable
   clone*: QFocusEventcloneProc
   setAccepted*: QFocusEventsetAcceptedProc
 proc QFocusEventclone*(self: gen_qevent_types.QFocusEvent): gen_qevent_types.QFocusEvent =
-  gen_qevent_types.QFocusEvent(h: fcQFocusEvent_virtualbase_clone(self.h))
+  gen_qevent_types.QFocusEvent(h: fcQFocusEvent_virtualbase_clone(self.h), owned: false)
 
 proc fcQFocusEvent_vtable_callback_clone(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QFocusEventVTable](fcQFocusEvent_vdata(self)[])
   let self = QFocusEvent(h: self)
   var virtualReturn = vtbl[].clone(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QFocusEventsetAccepted*(self: gen_qevent_types.QFocusEvent, accepted: bool): void =
   fcQFocusEvent_virtualbase_setAccepted(self.h, accepted)
@@ -3375,7 +3350,7 @@ proc create*(T: type gen_qevent_types.QFocusEvent,
     vtbl[].vtbl.clone = fcQFocusEvent_vtable_callback_clone
   if not isNil(vtbl[].setAccepted):
     vtbl[].vtbl.setAccepted = fcQFocusEvent_vtable_callback_setAccepted
-  let tmp = gen_qevent_types.QFocusEvent(h: fcQFocusEvent_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(typeVal)))
+  let tmp = gen_qevent_types.QFocusEvent(h: fcQFocusEvent_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(typeVal)), owned: true)
   fcQFocusEvent_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qevent_types.QFocusEvent,
@@ -3390,13 +3365,14 @@ proc create*(T: type gen_qevent_types.QFocusEvent,
     vtbl[].vtbl.clone = fcQFocusEvent_vtable_callback_clone
   if not isNil(vtbl[].setAccepted):
     vtbl[].vtbl.setAccepted = fcQFocusEvent_vtable_callback_setAccepted
-  let tmp = gen_qevent_types.QFocusEvent(h: fcQFocusEvent_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(typeVal), cint(reason)))
+  let tmp = gen_qevent_types.QFocusEvent(h: fcQFocusEvent_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(typeVal), cint(reason)), owned: true)
   fcQFocusEvent_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQFocusEvent_mvtbl = cQFocusEventVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQFocusEvent()[])](self.fcQFocusEvent_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   clone: fcQFocusEvent_method_callback_clone,
   setAccepted: fcQFocusEvent_method_callback_setAccepted,
@@ -3415,31 +3391,32 @@ proc create*(T: type gen_qevent_types.QFocusEvent,
   inst[].h = fcQFocusEvent_new2(addr(cQFocusEvent_mvtbl), csize_t(sizeof(pointer)), cint(typeVal), cint(reason))
   fcQFocusEvent_vdata(inst[].h)[] = addr inst[]
 
-proc delete*(self: gen_qevent_types.QFocusEvent) =
-  fcQFocusEvent_delete(self.h)
 proc clone*(self: gen_qevent_types.QPaintEvent): gen_qevent_types.QPaintEvent =
-  gen_qevent_types.QPaintEvent(h: fcQPaintEvent_clone(self.h))
+  gen_qevent_types.QPaintEvent(h: fcQPaintEvent_clone(self.h), owned: false)
 
 proc rect*(self: gen_qevent_types.QPaintEvent): gen_qrect_types.QRect =
-  gen_qrect_types.QRect(h: fcQPaintEvent_rect(self.h))
+  gen_qrect_types.QRect(h: fcQPaintEvent_rect(self.h), owned: false)
 
 proc region*(self: gen_qevent_types.QPaintEvent): gen_qregion_types.QRegion =
-  gen_qregion_types.QRegion(h: fcQPaintEvent_region(self.h))
+  gen_qregion_types.QRegion(h: fcQPaintEvent_region(self.h), owned: false)
 
 type QPaintEventcloneProc* = proc(self: QPaintEvent): gen_qevent_types.QPaintEvent {.raises: [], gcsafe.}
 type QPaintEventsetAcceptedProc* = proc(self: QPaintEvent, accepted: bool): void {.raises: [], gcsafe.}
-type QPaintEventVTable* = object
+type QPaintEventVTable* {.inheritable, pure.} = object
   vtbl: cQPaintEventVTable
   clone*: QPaintEventcloneProc
   setAccepted*: QPaintEventsetAcceptedProc
 proc QPaintEventclone*(self: gen_qevent_types.QPaintEvent): gen_qevent_types.QPaintEvent =
-  gen_qevent_types.QPaintEvent(h: fcQPaintEvent_virtualbase_clone(self.h))
+  gen_qevent_types.QPaintEvent(h: fcQPaintEvent_virtualbase_clone(self.h), owned: false)
 
 proc fcQPaintEvent_vtable_callback_clone(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QPaintEventVTable](fcQPaintEvent_vdata(self)[])
   let self = QPaintEvent(h: self)
   var virtualReturn = vtbl[].clone(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QPaintEventsetAccepted*(self: gen_qevent_types.QPaintEvent, accepted: bool): void =
   fcQPaintEvent_virtualbase_setAccepted(self.h, accepted)
@@ -3478,7 +3455,7 @@ proc create*(T: type gen_qevent_types.QPaintEvent,
     vtbl[].vtbl.clone = fcQPaintEvent_vtable_callback_clone
   if not isNil(vtbl[].setAccepted):
     vtbl[].vtbl.setAccepted = fcQPaintEvent_vtable_callback_setAccepted
-  let tmp = gen_qevent_types.QPaintEvent(h: fcQPaintEvent_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), paintRegion.h))
+  let tmp = gen_qevent_types.QPaintEvent(h: fcQPaintEvent_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), paintRegion.h), owned: true)
   fcQPaintEvent_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qevent_types.QPaintEvent,
@@ -3493,13 +3470,14 @@ proc create*(T: type gen_qevent_types.QPaintEvent,
     vtbl[].vtbl.clone = fcQPaintEvent_vtable_callback_clone
   if not isNil(vtbl[].setAccepted):
     vtbl[].vtbl.setAccepted = fcQPaintEvent_vtable_callback_setAccepted
-  let tmp = gen_qevent_types.QPaintEvent(h: fcQPaintEvent_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), paintRect.h))
+  let tmp = gen_qevent_types.QPaintEvent(h: fcQPaintEvent_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), paintRect.h), owned: true)
   fcQPaintEvent_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQPaintEvent_mvtbl = cQPaintEventVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQPaintEvent()[])](self.fcQPaintEvent_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   clone: fcQPaintEvent_method_callback_clone,
   setAccepted: fcQPaintEvent_method_callback_setAccepted,
@@ -3518,31 +3496,32 @@ proc create*(T: type gen_qevent_types.QPaintEvent,
   inst[].h = fcQPaintEvent_new2(addr(cQPaintEvent_mvtbl), csize_t(sizeof(pointer)), paintRect.h)
   fcQPaintEvent_vdata(inst[].h)[] = addr inst[]
 
-proc delete*(self: gen_qevent_types.QPaintEvent) =
-  fcQPaintEvent_delete(self.h)
 proc clone*(self: gen_qevent_types.QMoveEvent): gen_qevent_types.QMoveEvent =
-  gen_qevent_types.QMoveEvent(h: fcQMoveEvent_clone(self.h))
+  gen_qevent_types.QMoveEvent(h: fcQMoveEvent_clone(self.h), owned: false)
 
 proc pos*(self: gen_qevent_types.QMoveEvent): gen_qpoint_types.QPoint =
-  gen_qpoint_types.QPoint(h: fcQMoveEvent_pos(self.h))
+  gen_qpoint_types.QPoint(h: fcQMoveEvent_pos(self.h), owned: false)
 
 proc oldPos*(self: gen_qevent_types.QMoveEvent): gen_qpoint_types.QPoint =
-  gen_qpoint_types.QPoint(h: fcQMoveEvent_oldPos(self.h))
+  gen_qpoint_types.QPoint(h: fcQMoveEvent_oldPos(self.h), owned: false)
 
 type QMoveEventcloneProc* = proc(self: QMoveEvent): gen_qevent_types.QMoveEvent {.raises: [], gcsafe.}
 type QMoveEventsetAcceptedProc* = proc(self: QMoveEvent, accepted: bool): void {.raises: [], gcsafe.}
-type QMoveEventVTable* = object
+type QMoveEventVTable* {.inheritable, pure.} = object
   vtbl: cQMoveEventVTable
   clone*: QMoveEventcloneProc
   setAccepted*: QMoveEventsetAcceptedProc
 proc QMoveEventclone*(self: gen_qevent_types.QMoveEvent): gen_qevent_types.QMoveEvent =
-  gen_qevent_types.QMoveEvent(h: fcQMoveEvent_virtualbase_clone(self.h))
+  gen_qevent_types.QMoveEvent(h: fcQMoveEvent_virtualbase_clone(self.h), owned: false)
 
 proc fcQMoveEvent_vtable_callback_clone(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QMoveEventVTable](fcQMoveEvent_vdata(self)[])
   let self = QMoveEvent(h: self)
   var virtualReturn = vtbl[].clone(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QMoveEventsetAccepted*(self: gen_qevent_types.QMoveEvent, accepted: bool): void =
   fcQMoveEvent_virtualbase_setAccepted(self.h, accepted)
@@ -3581,13 +3560,14 @@ proc create*(T: type gen_qevent_types.QMoveEvent,
     vtbl[].vtbl.clone = fcQMoveEvent_vtable_callback_clone
   if not isNil(vtbl[].setAccepted):
     vtbl[].vtbl.setAccepted = fcQMoveEvent_vtable_callback_setAccepted
-  let tmp = gen_qevent_types.QMoveEvent(h: fcQMoveEvent_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), pos.h, oldPos.h))
+  let tmp = gen_qevent_types.QMoveEvent(h: fcQMoveEvent_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), pos.h, oldPos.h), owned: true)
   fcQMoveEvent_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQMoveEvent_mvtbl = cQMoveEventVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQMoveEvent()[])](self.fcQMoveEvent_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   clone: fcQMoveEvent_method_callback_clone,
   setAccepted: fcQMoveEvent_method_callback_setAccepted,
@@ -3599,28 +3579,29 @@ proc create*(T: type gen_qevent_types.QMoveEvent,
   inst[].h = fcQMoveEvent_new(addr(cQMoveEvent_mvtbl), csize_t(sizeof(pointer)), pos.h, oldPos.h)
   fcQMoveEvent_vdata(inst[].h)[] = addr inst[]
 
-proc delete*(self: gen_qevent_types.QMoveEvent) =
-  fcQMoveEvent_delete(self.h)
 proc clone*(self: gen_qevent_types.QExposeEvent): gen_qevent_types.QExposeEvent =
-  gen_qevent_types.QExposeEvent(h: fcQExposeEvent_clone(self.h))
+  gen_qevent_types.QExposeEvent(h: fcQExposeEvent_clone(self.h), owned: false)
 
 proc region*(self: gen_qevent_types.QExposeEvent): gen_qregion_types.QRegion =
-  gen_qregion_types.QRegion(h: fcQExposeEvent_region(self.h))
+  gen_qregion_types.QRegion(h: fcQExposeEvent_region(self.h), owned: false)
 
 type QExposeEventcloneProc* = proc(self: QExposeEvent): gen_qevent_types.QExposeEvent {.raises: [], gcsafe.}
 type QExposeEventsetAcceptedProc* = proc(self: QExposeEvent, accepted: bool): void {.raises: [], gcsafe.}
-type QExposeEventVTable* = object
+type QExposeEventVTable* {.inheritable, pure.} = object
   vtbl: cQExposeEventVTable
   clone*: QExposeEventcloneProc
   setAccepted*: QExposeEventsetAcceptedProc
 proc QExposeEventclone*(self: gen_qevent_types.QExposeEvent): gen_qevent_types.QExposeEvent =
-  gen_qevent_types.QExposeEvent(h: fcQExposeEvent_virtualbase_clone(self.h))
+  gen_qevent_types.QExposeEvent(h: fcQExposeEvent_virtualbase_clone(self.h), owned: false)
 
 proc fcQExposeEvent_vtable_callback_clone(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QExposeEventVTable](fcQExposeEvent_vdata(self)[])
   let self = QExposeEvent(h: self)
   var virtualReturn = vtbl[].clone(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QExposeEventsetAccepted*(self: gen_qevent_types.QExposeEvent, accepted: bool): void =
   fcQExposeEvent_virtualbase_setAccepted(self.h, accepted)
@@ -3659,13 +3640,14 @@ proc create*(T: type gen_qevent_types.QExposeEvent,
     vtbl[].vtbl.clone = fcQExposeEvent_vtable_callback_clone
   if not isNil(vtbl[].setAccepted):
     vtbl[].vtbl.setAccepted = fcQExposeEvent_vtable_callback_setAccepted
-  let tmp = gen_qevent_types.QExposeEvent(h: fcQExposeEvent_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), m_region.h))
+  let tmp = gen_qevent_types.QExposeEvent(h: fcQExposeEvent_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), m_region.h), owned: true)
   fcQExposeEvent_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQExposeEvent_mvtbl = cQExposeEventVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQExposeEvent()[])](self.fcQExposeEvent_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   clone: fcQExposeEvent_method_callback_clone,
   setAccepted: fcQExposeEvent_method_callback_setAccepted,
@@ -3677,28 +3659,29 @@ proc create*(T: type gen_qevent_types.QExposeEvent,
   inst[].h = fcQExposeEvent_new(addr(cQExposeEvent_mvtbl), csize_t(sizeof(pointer)), m_region.h)
   fcQExposeEvent_vdata(inst[].h)[] = addr inst[]
 
-proc delete*(self: gen_qevent_types.QExposeEvent) =
-  fcQExposeEvent_delete(self.h)
 proc clone*(self: gen_qevent_types.QPlatformSurfaceEvent): gen_qevent_types.QPlatformSurfaceEvent =
-  gen_qevent_types.QPlatformSurfaceEvent(h: fcQPlatformSurfaceEvent_clone(self.h))
+  gen_qevent_types.QPlatformSurfaceEvent(h: fcQPlatformSurfaceEvent_clone(self.h), owned: false)
 
 proc surfaceEventType*(self: gen_qevent_types.QPlatformSurfaceEvent): cint =
   cint(fcQPlatformSurfaceEvent_surfaceEventType(self.h))
 
 type QPlatformSurfaceEventcloneProc* = proc(self: QPlatformSurfaceEvent): gen_qevent_types.QPlatformSurfaceEvent {.raises: [], gcsafe.}
 type QPlatformSurfaceEventsetAcceptedProc* = proc(self: QPlatformSurfaceEvent, accepted: bool): void {.raises: [], gcsafe.}
-type QPlatformSurfaceEventVTable* = object
+type QPlatformSurfaceEventVTable* {.inheritable, pure.} = object
   vtbl: cQPlatformSurfaceEventVTable
   clone*: QPlatformSurfaceEventcloneProc
   setAccepted*: QPlatformSurfaceEventsetAcceptedProc
 proc QPlatformSurfaceEventclone*(self: gen_qevent_types.QPlatformSurfaceEvent): gen_qevent_types.QPlatformSurfaceEvent =
-  gen_qevent_types.QPlatformSurfaceEvent(h: fcQPlatformSurfaceEvent_virtualbase_clone(self.h))
+  gen_qevent_types.QPlatformSurfaceEvent(h: fcQPlatformSurfaceEvent_virtualbase_clone(self.h), owned: false)
 
 proc fcQPlatformSurfaceEvent_vtable_callback_clone(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QPlatformSurfaceEventVTable](fcQPlatformSurfaceEvent_vdata(self)[])
   let self = QPlatformSurfaceEvent(h: self)
   var virtualReturn = vtbl[].clone(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QPlatformSurfaceEventsetAccepted*(self: gen_qevent_types.QPlatformSurfaceEvent, accepted: bool): void =
   fcQPlatformSurfaceEvent_virtualbase_setAccepted(self.h, accepted)
@@ -3737,13 +3720,14 @@ proc create*(T: type gen_qevent_types.QPlatformSurfaceEvent,
     vtbl[].vtbl.clone = fcQPlatformSurfaceEvent_vtable_callback_clone
   if not isNil(vtbl[].setAccepted):
     vtbl[].vtbl.setAccepted = fcQPlatformSurfaceEvent_vtable_callback_setAccepted
-  let tmp = gen_qevent_types.QPlatformSurfaceEvent(h: fcQPlatformSurfaceEvent_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(surfaceEventType)))
+  let tmp = gen_qevent_types.QPlatformSurfaceEvent(h: fcQPlatformSurfaceEvent_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(surfaceEventType)), owned: true)
   fcQPlatformSurfaceEvent_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQPlatformSurfaceEvent_mvtbl = cQPlatformSurfaceEventVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQPlatformSurfaceEvent()[])](self.fcQPlatformSurfaceEvent_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   clone: fcQPlatformSurfaceEvent_method_callback_clone,
   setAccepted: fcQPlatformSurfaceEvent_method_callback_setAccepted,
@@ -3755,31 +3739,32 @@ proc create*(T: type gen_qevent_types.QPlatformSurfaceEvent,
   inst[].h = fcQPlatformSurfaceEvent_new(addr(cQPlatformSurfaceEvent_mvtbl), csize_t(sizeof(pointer)), cint(surfaceEventType))
   fcQPlatformSurfaceEvent_vdata(inst[].h)[] = addr inst[]
 
-proc delete*(self: gen_qevent_types.QPlatformSurfaceEvent) =
-  fcQPlatformSurfaceEvent_delete(self.h)
 proc clone*(self: gen_qevent_types.QResizeEvent): gen_qevent_types.QResizeEvent =
-  gen_qevent_types.QResizeEvent(h: fcQResizeEvent_clone(self.h))
+  gen_qevent_types.QResizeEvent(h: fcQResizeEvent_clone(self.h), owned: false)
 
 proc size*(self: gen_qevent_types.QResizeEvent): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQResizeEvent_size(self.h))
+  gen_qsize_types.QSize(h: fcQResizeEvent_size(self.h), owned: false)
 
 proc oldSize*(self: gen_qevent_types.QResizeEvent): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQResizeEvent_oldSize(self.h))
+  gen_qsize_types.QSize(h: fcQResizeEvent_oldSize(self.h), owned: false)
 
 type QResizeEventcloneProc* = proc(self: QResizeEvent): gen_qevent_types.QResizeEvent {.raises: [], gcsafe.}
 type QResizeEventsetAcceptedProc* = proc(self: QResizeEvent, accepted: bool): void {.raises: [], gcsafe.}
-type QResizeEventVTable* = object
+type QResizeEventVTable* {.inheritable, pure.} = object
   vtbl: cQResizeEventVTable
   clone*: QResizeEventcloneProc
   setAccepted*: QResizeEventsetAcceptedProc
 proc QResizeEventclone*(self: gen_qevent_types.QResizeEvent): gen_qevent_types.QResizeEvent =
-  gen_qevent_types.QResizeEvent(h: fcQResizeEvent_virtualbase_clone(self.h))
+  gen_qevent_types.QResizeEvent(h: fcQResizeEvent_virtualbase_clone(self.h), owned: false)
 
 proc fcQResizeEvent_vtable_callback_clone(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QResizeEventVTable](fcQResizeEvent_vdata(self)[])
   let self = QResizeEvent(h: self)
   var virtualReturn = vtbl[].clone(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QResizeEventsetAccepted*(self: gen_qevent_types.QResizeEvent, accepted: bool): void =
   fcQResizeEvent_virtualbase_setAccepted(self.h, accepted)
@@ -3818,13 +3803,14 @@ proc create*(T: type gen_qevent_types.QResizeEvent,
     vtbl[].vtbl.clone = fcQResizeEvent_vtable_callback_clone
   if not isNil(vtbl[].setAccepted):
     vtbl[].vtbl.setAccepted = fcQResizeEvent_vtable_callback_setAccepted
-  let tmp = gen_qevent_types.QResizeEvent(h: fcQResizeEvent_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), size.h, oldSize.h))
+  let tmp = gen_qevent_types.QResizeEvent(h: fcQResizeEvent_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), size.h, oldSize.h), owned: true)
   fcQResizeEvent_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQResizeEvent_mvtbl = cQResizeEventVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQResizeEvent()[])](self.fcQResizeEvent_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   clone: fcQResizeEvent_method_callback_clone,
   setAccepted: fcQResizeEvent_method_callback_setAccepted,
@@ -3836,25 +3822,26 @@ proc create*(T: type gen_qevent_types.QResizeEvent,
   inst[].h = fcQResizeEvent_new(addr(cQResizeEvent_mvtbl), csize_t(sizeof(pointer)), size.h, oldSize.h)
   fcQResizeEvent_vdata(inst[].h)[] = addr inst[]
 
-proc delete*(self: gen_qevent_types.QResizeEvent) =
-  fcQResizeEvent_delete(self.h)
 proc clone*(self: gen_qevent_types.QCloseEvent): gen_qevent_types.QCloseEvent =
-  gen_qevent_types.QCloseEvent(h: fcQCloseEvent_clone(self.h))
+  gen_qevent_types.QCloseEvent(h: fcQCloseEvent_clone(self.h), owned: false)
 
 type QCloseEventcloneProc* = proc(self: QCloseEvent): gen_qevent_types.QCloseEvent {.raises: [], gcsafe.}
 type QCloseEventsetAcceptedProc* = proc(self: QCloseEvent, accepted: bool): void {.raises: [], gcsafe.}
-type QCloseEventVTable* = object
+type QCloseEventVTable* {.inheritable, pure.} = object
   vtbl: cQCloseEventVTable
   clone*: QCloseEventcloneProc
   setAccepted*: QCloseEventsetAcceptedProc
 proc QCloseEventclone*(self: gen_qevent_types.QCloseEvent): gen_qevent_types.QCloseEvent =
-  gen_qevent_types.QCloseEvent(h: fcQCloseEvent_virtualbase_clone(self.h))
+  gen_qevent_types.QCloseEvent(h: fcQCloseEvent_virtualbase_clone(self.h), owned: false)
 
 proc fcQCloseEvent_vtable_callback_clone(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QCloseEventVTable](fcQCloseEvent_vdata(self)[])
   let self = QCloseEvent(h: self)
   var virtualReturn = vtbl[].clone(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QCloseEventsetAccepted*(self: gen_qevent_types.QCloseEvent, accepted: bool): void =
   fcQCloseEvent_virtualbase_setAccepted(self.h, accepted)
@@ -3892,13 +3879,14 @@ proc create*(T: type gen_qevent_types.QCloseEvent,
     vtbl[].vtbl.clone = fcQCloseEvent_vtable_callback_clone
   if not isNil(vtbl[].setAccepted):
     vtbl[].vtbl.setAccepted = fcQCloseEvent_vtable_callback_setAccepted
-  let tmp = gen_qevent_types.QCloseEvent(h: fcQCloseEvent_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))))
+  let tmp = gen_qevent_types.QCloseEvent(h: fcQCloseEvent_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))), owned: true)
   fcQCloseEvent_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQCloseEvent_mvtbl = cQCloseEventVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQCloseEvent()[])](self.fcQCloseEvent_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   clone: fcQCloseEvent_method_callback_clone,
   setAccepted: fcQCloseEvent_method_callback_setAccepted,
@@ -3909,25 +3897,26 @@ proc create*(T: type gen_qevent_types.QCloseEvent,
   inst[].h = fcQCloseEvent_new(addr(cQCloseEvent_mvtbl), csize_t(sizeof(pointer)))
   fcQCloseEvent_vdata(inst[].h)[] = addr inst[]
 
-proc delete*(self: gen_qevent_types.QCloseEvent) =
-  fcQCloseEvent_delete(self.h)
 proc clone*(self: gen_qevent_types.QIconDragEvent): gen_qevent_types.QIconDragEvent =
-  gen_qevent_types.QIconDragEvent(h: fcQIconDragEvent_clone(self.h))
+  gen_qevent_types.QIconDragEvent(h: fcQIconDragEvent_clone(self.h), owned: false)
 
 type QIconDragEventcloneProc* = proc(self: QIconDragEvent): gen_qevent_types.QIconDragEvent {.raises: [], gcsafe.}
 type QIconDragEventsetAcceptedProc* = proc(self: QIconDragEvent, accepted: bool): void {.raises: [], gcsafe.}
-type QIconDragEventVTable* = object
+type QIconDragEventVTable* {.inheritable, pure.} = object
   vtbl: cQIconDragEventVTable
   clone*: QIconDragEventcloneProc
   setAccepted*: QIconDragEventsetAcceptedProc
 proc QIconDragEventclone*(self: gen_qevent_types.QIconDragEvent): gen_qevent_types.QIconDragEvent =
-  gen_qevent_types.QIconDragEvent(h: fcQIconDragEvent_virtualbase_clone(self.h))
+  gen_qevent_types.QIconDragEvent(h: fcQIconDragEvent_virtualbase_clone(self.h), owned: false)
 
 proc fcQIconDragEvent_vtable_callback_clone(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QIconDragEventVTable](fcQIconDragEvent_vdata(self)[])
   let self = QIconDragEvent(h: self)
   var virtualReturn = vtbl[].clone(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QIconDragEventsetAccepted*(self: gen_qevent_types.QIconDragEvent, accepted: bool): void =
   fcQIconDragEvent_virtualbase_setAccepted(self.h, accepted)
@@ -3965,13 +3954,14 @@ proc create*(T: type gen_qevent_types.QIconDragEvent,
     vtbl[].vtbl.clone = fcQIconDragEvent_vtable_callback_clone
   if not isNil(vtbl[].setAccepted):
     vtbl[].vtbl.setAccepted = fcQIconDragEvent_vtable_callback_setAccepted
-  let tmp = gen_qevent_types.QIconDragEvent(h: fcQIconDragEvent_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))))
+  let tmp = gen_qevent_types.QIconDragEvent(h: fcQIconDragEvent_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))), owned: true)
   fcQIconDragEvent_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQIconDragEvent_mvtbl = cQIconDragEventVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQIconDragEvent()[])](self.fcQIconDragEvent_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   clone: fcQIconDragEvent_method_callback_clone,
   setAccepted: fcQIconDragEvent_method_callback_setAccepted,
@@ -3982,25 +3972,26 @@ proc create*(T: type gen_qevent_types.QIconDragEvent,
   inst[].h = fcQIconDragEvent_new(addr(cQIconDragEvent_mvtbl), csize_t(sizeof(pointer)))
   fcQIconDragEvent_vdata(inst[].h)[] = addr inst[]
 
-proc delete*(self: gen_qevent_types.QIconDragEvent) =
-  fcQIconDragEvent_delete(self.h)
 proc clone*(self: gen_qevent_types.QShowEvent): gen_qevent_types.QShowEvent =
-  gen_qevent_types.QShowEvent(h: fcQShowEvent_clone(self.h))
+  gen_qevent_types.QShowEvent(h: fcQShowEvent_clone(self.h), owned: false)
 
 type QShowEventcloneProc* = proc(self: QShowEvent): gen_qevent_types.QShowEvent {.raises: [], gcsafe.}
 type QShowEventsetAcceptedProc* = proc(self: QShowEvent, accepted: bool): void {.raises: [], gcsafe.}
-type QShowEventVTable* = object
+type QShowEventVTable* {.inheritable, pure.} = object
   vtbl: cQShowEventVTable
   clone*: QShowEventcloneProc
   setAccepted*: QShowEventsetAcceptedProc
 proc QShowEventclone*(self: gen_qevent_types.QShowEvent): gen_qevent_types.QShowEvent =
-  gen_qevent_types.QShowEvent(h: fcQShowEvent_virtualbase_clone(self.h))
+  gen_qevent_types.QShowEvent(h: fcQShowEvent_virtualbase_clone(self.h), owned: false)
 
 proc fcQShowEvent_vtable_callback_clone(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QShowEventVTable](fcQShowEvent_vdata(self)[])
   let self = QShowEvent(h: self)
   var virtualReturn = vtbl[].clone(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QShowEventsetAccepted*(self: gen_qevent_types.QShowEvent, accepted: bool): void =
   fcQShowEvent_virtualbase_setAccepted(self.h, accepted)
@@ -4038,13 +4029,14 @@ proc create*(T: type gen_qevent_types.QShowEvent,
     vtbl[].vtbl.clone = fcQShowEvent_vtable_callback_clone
   if not isNil(vtbl[].setAccepted):
     vtbl[].vtbl.setAccepted = fcQShowEvent_vtable_callback_setAccepted
-  let tmp = gen_qevent_types.QShowEvent(h: fcQShowEvent_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))))
+  let tmp = gen_qevent_types.QShowEvent(h: fcQShowEvent_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))), owned: true)
   fcQShowEvent_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQShowEvent_mvtbl = cQShowEventVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQShowEvent()[])](self.fcQShowEvent_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   clone: fcQShowEvent_method_callback_clone,
   setAccepted: fcQShowEvent_method_callback_setAccepted,
@@ -4055,25 +4047,26 @@ proc create*(T: type gen_qevent_types.QShowEvent,
   inst[].h = fcQShowEvent_new(addr(cQShowEvent_mvtbl), csize_t(sizeof(pointer)))
   fcQShowEvent_vdata(inst[].h)[] = addr inst[]
 
-proc delete*(self: gen_qevent_types.QShowEvent) =
-  fcQShowEvent_delete(self.h)
 proc clone*(self: gen_qevent_types.QHideEvent): gen_qevent_types.QHideEvent =
-  gen_qevent_types.QHideEvent(h: fcQHideEvent_clone(self.h))
+  gen_qevent_types.QHideEvent(h: fcQHideEvent_clone(self.h), owned: false)
 
 type QHideEventcloneProc* = proc(self: QHideEvent): gen_qevent_types.QHideEvent {.raises: [], gcsafe.}
 type QHideEventsetAcceptedProc* = proc(self: QHideEvent, accepted: bool): void {.raises: [], gcsafe.}
-type QHideEventVTable* = object
+type QHideEventVTable* {.inheritable, pure.} = object
   vtbl: cQHideEventVTable
   clone*: QHideEventcloneProc
   setAccepted*: QHideEventsetAcceptedProc
 proc QHideEventclone*(self: gen_qevent_types.QHideEvent): gen_qevent_types.QHideEvent =
-  gen_qevent_types.QHideEvent(h: fcQHideEvent_virtualbase_clone(self.h))
+  gen_qevent_types.QHideEvent(h: fcQHideEvent_virtualbase_clone(self.h), owned: false)
 
 proc fcQHideEvent_vtable_callback_clone(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QHideEventVTable](fcQHideEvent_vdata(self)[])
   let self = QHideEvent(h: self)
   var virtualReturn = vtbl[].clone(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QHideEventsetAccepted*(self: gen_qevent_types.QHideEvent, accepted: bool): void =
   fcQHideEvent_virtualbase_setAccepted(self.h, accepted)
@@ -4111,13 +4104,14 @@ proc create*(T: type gen_qevent_types.QHideEvent,
     vtbl[].vtbl.clone = fcQHideEvent_vtable_callback_clone
   if not isNil(vtbl[].setAccepted):
     vtbl[].vtbl.setAccepted = fcQHideEvent_vtable_callback_setAccepted
-  let tmp = gen_qevent_types.QHideEvent(h: fcQHideEvent_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))))
+  let tmp = gen_qevent_types.QHideEvent(h: fcQHideEvent_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))), owned: true)
   fcQHideEvent_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQHideEvent_mvtbl = cQHideEventVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQHideEvent()[])](self.fcQHideEvent_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   clone: fcQHideEvent_method_callback_clone,
   setAccepted: fcQHideEvent_method_callback_setAccepted,
@@ -4128,10 +4122,8 @@ proc create*(T: type gen_qevent_types.QHideEvent,
   inst[].h = fcQHideEvent_new(addr(cQHideEvent_mvtbl), csize_t(sizeof(pointer)))
   fcQHideEvent_vdata(inst[].h)[] = addr inst[]
 
-proc delete*(self: gen_qevent_types.QHideEvent) =
-  fcQHideEvent_delete(self.h)
 proc clone*(self: gen_qevent_types.QContextMenuEvent): gen_qevent_types.QContextMenuEvent =
-  gen_qevent_types.QContextMenuEvent(h: fcQContextMenuEvent_clone(self.h))
+  gen_qevent_types.QContextMenuEvent(h: fcQContextMenuEvent_clone(self.h), owned: false)
 
 proc x*(self: gen_qevent_types.QContextMenuEvent): cint =
   fcQContextMenuEvent_x(self.h)
@@ -4146,10 +4138,10 @@ proc globalY*(self: gen_qevent_types.QContextMenuEvent): cint =
   fcQContextMenuEvent_globalY(self.h)
 
 proc pos*(self: gen_qevent_types.QContextMenuEvent): gen_qpoint_types.QPoint =
-  gen_qpoint_types.QPoint(h: fcQContextMenuEvent_pos(self.h))
+  gen_qpoint_types.QPoint(h: fcQContextMenuEvent_pos(self.h), owned: false)
 
 proc globalPos*(self: gen_qevent_types.QContextMenuEvent): gen_qpoint_types.QPoint =
-  gen_qpoint_types.QPoint(h: fcQContextMenuEvent_globalPos(self.h))
+  gen_qpoint_types.QPoint(h: fcQContextMenuEvent_globalPos(self.h), owned: false)
 
 proc reason*(self: gen_qevent_types.QContextMenuEvent): cint =
   cint(fcQContextMenuEvent_reason(self.h))
@@ -4157,19 +4149,22 @@ proc reason*(self: gen_qevent_types.QContextMenuEvent): cint =
 type QContextMenuEventcloneProc* = proc(self: QContextMenuEvent): gen_qevent_types.QContextMenuEvent {.raises: [], gcsafe.}
 type QContextMenuEventsetTimestampProc* = proc(self: QContextMenuEvent, timestamp: culonglong): void {.raises: [], gcsafe.}
 type QContextMenuEventsetAcceptedProc* = proc(self: QContextMenuEvent, accepted: bool): void {.raises: [], gcsafe.}
-type QContextMenuEventVTable* = object
+type QContextMenuEventVTable* {.inheritable, pure.} = object
   vtbl: cQContextMenuEventVTable
   clone*: QContextMenuEventcloneProc
   setTimestamp*: QContextMenuEventsetTimestampProc
   setAccepted*: QContextMenuEventsetAcceptedProc
 proc QContextMenuEventclone*(self: gen_qevent_types.QContextMenuEvent): gen_qevent_types.QContextMenuEvent =
-  gen_qevent_types.QContextMenuEvent(h: fcQContextMenuEvent_virtualbase_clone(self.h))
+  gen_qevent_types.QContextMenuEvent(h: fcQContextMenuEvent_virtualbase_clone(self.h), owned: false)
 
 proc fcQContextMenuEvent_vtable_callback_clone(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QContextMenuEventVTable](fcQContextMenuEvent_vdata(self)[])
   let self = QContextMenuEvent(h: self)
   var virtualReturn = vtbl[].clone(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QContextMenuEventsetTimestamp*(self: gen_qevent_types.QContextMenuEvent, timestamp: culonglong): void =
   fcQContextMenuEvent_virtualbase_setTimestamp(self.h, timestamp)
@@ -4226,7 +4221,7 @@ proc create*(T: type gen_qevent_types.QContextMenuEvent,
     vtbl[].vtbl.setTimestamp = fcQContextMenuEvent_vtable_callback_setTimestamp
   if not isNil(vtbl[].setAccepted):
     vtbl[].vtbl.setAccepted = fcQContextMenuEvent_vtable_callback_setAccepted
-  let tmp = gen_qevent_types.QContextMenuEvent(h: fcQContextMenuEvent_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(reason), pos.h, globalPos.h))
+  let tmp = gen_qevent_types.QContextMenuEvent(h: fcQContextMenuEvent_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(reason), pos.h, globalPos.h), owned: true)
   fcQContextMenuEvent_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qevent_types.QContextMenuEvent,
@@ -4243,7 +4238,7 @@ proc create*(T: type gen_qevent_types.QContextMenuEvent,
     vtbl[].vtbl.setTimestamp = fcQContextMenuEvent_vtable_callback_setTimestamp
   if not isNil(vtbl[].setAccepted):
     vtbl[].vtbl.setAccepted = fcQContextMenuEvent_vtable_callback_setAccepted
-  let tmp = gen_qevent_types.QContextMenuEvent(h: fcQContextMenuEvent_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(reason), pos.h))
+  let tmp = gen_qevent_types.QContextMenuEvent(h: fcQContextMenuEvent_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(reason), pos.h), owned: true)
   fcQContextMenuEvent_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qevent_types.QContextMenuEvent,
@@ -4260,13 +4255,14 @@ proc create*(T: type gen_qevent_types.QContextMenuEvent,
     vtbl[].vtbl.setTimestamp = fcQContextMenuEvent_vtable_callback_setTimestamp
   if not isNil(vtbl[].setAccepted):
     vtbl[].vtbl.setAccepted = fcQContextMenuEvent_vtable_callback_setAccepted
-  let tmp = gen_qevent_types.QContextMenuEvent(h: fcQContextMenuEvent_new3(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(reason), pos.h, globalPos.h, cint(modifiers)))
+  let tmp = gen_qevent_types.QContextMenuEvent(h: fcQContextMenuEvent_new3(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(reason), pos.h, globalPos.h, cint(modifiers)), owned: true)
   fcQContextMenuEvent_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQContextMenuEvent_mvtbl = cQContextMenuEventVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQContextMenuEvent()[])](self.fcQContextMenuEvent_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   clone: fcQContextMenuEvent_method_callback_clone,
   setTimestamp: fcQContextMenuEvent_method_callback_setTimestamp,
@@ -4293,10 +4289,8 @@ proc create*(T: type gen_qevent_types.QContextMenuEvent,
   inst[].h = fcQContextMenuEvent_new3(addr(cQContextMenuEvent_mvtbl), csize_t(sizeof(pointer)), cint(reason), pos.h, globalPos.h, cint(modifiers))
   fcQContextMenuEvent_vdata(inst[].h)[] = addr inst[]
 
-proc delete*(self: gen_qevent_types.QContextMenuEvent) =
-  fcQContextMenuEvent_delete(self.h)
 proc clone*(self: gen_qevent_types.QInputMethodEvent): gen_qevent_types.QInputMethodEvent =
-  gen_qevent_types.QInputMethodEvent(h: fcQInputMethodEvent_clone(self.h))
+  gen_qevent_types.QInputMethodEvent(h: fcQInputMethodEvent_clone(self.h), owned: false)
 
 proc setCommitString*(self: gen_qevent_types.QInputMethodEvent, commitString: string): void =
   fcQInputMethodEvent_setCommitString(self.h, struct_miqt_string(data: if len(commitString) > 0: addr commitString[0] else: nil, len: csize_t(len(commitString))))
@@ -4306,7 +4300,7 @@ proc attributes*(self: gen_qevent_types.QInputMethodEvent): seq[gen_qevent_types
   var vx_ret = newSeq[gen_qevent_types.QInputMethodEventAttribute](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qevent_types.QInputMethodEventAttribute(h: v_outCast[i])
+    vx_ret[i] = gen_qevent_types.QInputMethodEventAttribute(h: v_outCast[i], owned: true)
   c_free(v_ma.data)
   vx_ret
 
@@ -4336,18 +4330,21 @@ proc setCommitString*(self: gen_qevent_types.QInputMethodEvent, commitString: st
 
 type QInputMethodEventcloneProc* = proc(self: QInputMethodEvent): gen_qevent_types.QInputMethodEvent {.raises: [], gcsafe.}
 type QInputMethodEventsetAcceptedProc* = proc(self: QInputMethodEvent, accepted: bool): void {.raises: [], gcsafe.}
-type QInputMethodEventVTable* = object
+type QInputMethodEventVTable* {.inheritable, pure.} = object
   vtbl: cQInputMethodEventVTable
   clone*: QInputMethodEventcloneProc
   setAccepted*: QInputMethodEventsetAcceptedProc
 proc QInputMethodEventclone*(self: gen_qevent_types.QInputMethodEvent): gen_qevent_types.QInputMethodEvent =
-  gen_qevent_types.QInputMethodEvent(h: fcQInputMethodEvent_virtualbase_clone(self.h))
+  gen_qevent_types.QInputMethodEvent(h: fcQInputMethodEvent_virtualbase_clone(self.h), owned: false)
 
 proc fcQInputMethodEvent_vtable_callback_clone(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QInputMethodEventVTable](fcQInputMethodEvent_vdata(self)[])
   let self = QInputMethodEvent(h: self)
   var virtualReturn = vtbl[].clone(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QInputMethodEventsetAccepted*(self: gen_qevent_types.QInputMethodEvent, accepted: bool): void =
   fcQInputMethodEvent_virtualbase_setAccepted(self.h, accepted)
@@ -4385,7 +4382,7 @@ proc create*(T: type gen_qevent_types.QInputMethodEvent,
     vtbl[].vtbl.clone = fcQInputMethodEvent_vtable_callback_clone
   if not isNil(vtbl[].setAccepted):
     vtbl[].vtbl.setAccepted = fcQInputMethodEvent_vtable_callback_setAccepted
-  let tmp = gen_qevent_types.QInputMethodEvent(h: fcQInputMethodEvent_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))))
+  let tmp = gen_qevent_types.QInputMethodEvent(h: fcQInputMethodEvent_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))), owned: true)
   fcQInputMethodEvent_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qevent_types.QInputMethodEvent,
@@ -4404,13 +4401,14 @@ proc create*(T: type gen_qevent_types.QInputMethodEvent,
     vtbl[].vtbl.clone = fcQInputMethodEvent_vtable_callback_clone
   if not isNil(vtbl[].setAccepted):
     vtbl[].vtbl.setAccepted = fcQInputMethodEvent_vtable_callback_setAccepted
-  let tmp = gen_qevent_types.QInputMethodEvent(h: fcQInputMethodEvent_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(preeditText) > 0: addr preeditText[0] else: nil, len: csize_t(len(preeditText))), struct_miqt_array(len: csize_t(len(attributes)), data: if len(attributes) == 0: nil else: addr(attributes_CArray[0]))))
+  let tmp = gen_qevent_types.QInputMethodEvent(h: fcQInputMethodEvent_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(preeditText) > 0: addr preeditText[0] else: nil, len: csize_t(len(preeditText))), struct_miqt_array(len: csize_t(len(attributes)), data: if len(attributes) == 0: nil else: addr(attributes_CArray[0]))), owned: true)
   fcQInputMethodEvent_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQInputMethodEvent_mvtbl = cQInputMethodEventVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQInputMethodEvent()[])](self.fcQInputMethodEvent_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   clone: fcQInputMethodEvent_method_callback_clone,
   setAccepted: fcQInputMethodEvent_method_callback_setAccepted,
@@ -4432,10 +4430,8 @@ proc create*(T: type gen_qevent_types.QInputMethodEvent,
   inst[].h = fcQInputMethodEvent_new2(addr(cQInputMethodEvent_mvtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(preeditText) > 0: addr preeditText[0] else: nil, len: csize_t(len(preeditText))), struct_miqt_array(len: csize_t(len(attributes)), data: if len(attributes) == 0: nil else: addr(attributes_CArray[0])))
   fcQInputMethodEvent_vdata(inst[].h)[] = addr inst[]
 
-proc delete*(self: gen_qevent_types.QInputMethodEvent) =
-  fcQInputMethodEvent_delete(self.h)
 proc clone*(self: gen_qevent_types.QInputMethodQueryEvent): gen_qevent_types.QInputMethodQueryEvent =
-  gen_qevent_types.QInputMethodQueryEvent(h: fcQInputMethodQueryEvent_clone(self.h))
+  gen_qevent_types.QInputMethodQueryEvent(h: fcQInputMethodQueryEvent_clone(self.h), owned: false)
 
 proc queries*(self: gen_qevent_types.QInputMethodQueryEvent): cint =
   cint(fcQInputMethodQueryEvent_queries(self.h))
@@ -4444,22 +4440,25 @@ proc setValue*(self: gen_qevent_types.QInputMethodQueryEvent, query: cint, value
   fcQInputMethodQueryEvent_setValue(self.h, cint(query), value.h)
 
 proc value*(self: gen_qevent_types.QInputMethodQueryEvent, query: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQInputMethodQueryEvent_value(self.h, cint(query)))
+  gen_qvariant_types.QVariant(h: fcQInputMethodQueryEvent_value(self.h, cint(query)), owned: true)
 
 type QInputMethodQueryEventcloneProc* = proc(self: QInputMethodQueryEvent): gen_qevent_types.QInputMethodQueryEvent {.raises: [], gcsafe.}
 type QInputMethodQueryEventsetAcceptedProc* = proc(self: QInputMethodQueryEvent, accepted: bool): void {.raises: [], gcsafe.}
-type QInputMethodQueryEventVTable* = object
+type QInputMethodQueryEventVTable* {.inheritable, pure.} = object
   vtbl: cQInputMethodQueryEventVTable
   clone*: QInputMethodQueryEventcloneProc
   setAccepted*: QInputMethodQueryEventsetAcceptedProc
 proc QInputMethodQueryEventclone*(self: gen_qevent_types.QInputMethodQueryEvent): gen_qevent_types.QInputMethodQueryEvent =
-  gen_qevent_types.QInputMethodQueryEvent(h: fcQInputMethodQueryEvent_virtualbase_clone(self.h))
+  gen_qevent_types.QInputMethodQueryEvent(h: fcQInputMethodQueryEvent_virtualbase_clone(self.h), owned: false)
 
 proc fcQInputMethodQueryEvent_vtable_callback_clone(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QInputMethodQueryEventVTable](fcQInputMethodQueryEvent_vdata(self)[])
   let self = QInputMethodQueryEvent(h: self)
   var virtualReturn = vtbl[].clone(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QInputMethodQueryEventsetAccepted*(self: gen_qevent_types.QInputMethodQueryEvent, accepted: bool): void =
   fcQInputMethodQueryEvent_virtualbase_setAccepted(self.h, accepted)
@@ -4498,13 +4497,14 @@ proc create*(T: type gen_qevent_types.QInputMethodQueryEvent,
     vtbl[].vtbl.clone = fcQInputMethodQueryEvent_vtable_callback_clone
   if not isNil(vtbl[].setAccepted):
     vtbl[].vtbl.setAccepted = fcQInputMethodQueryEvent_vtable_callback_setAccepted
-  let tmp = gen_qevent_types.QInputMethodQueryEvent(h: fcQInputMethodQueryEvent_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(queries)))
+  let tmp = gen_qevent_types.QInputMethodQueryEvent(h: fcQInputMethodQueryEvent_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(queries)), owned: true)
   fcQInputMethodQueryEvent_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQInputMethodQueryEvent_mvtbl = cQInputMethodQueryEventVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQInputMethodQueryEvent()[])](self.fcQInputMethodQueryEvent_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   clone: fcQInputMethodQueryEvent_method_callback_clone,
   setAccepted: fcQInputMethodQueryEvent_method_callback_setAccepted,
@@ -4516,16 +4516,14 @@ proc create*(T: type gen_qevent_types.QInputMethodQueryEvent,
   inst[].h = fcQInputMethodQueryEvent_new(addr(cQInputMethodQueryEvent_mvtbl), csize_t(sizeof(pointer)), cint(queries))
   fcQInputMethodQueryEvent_vdata(inst[].h)[] = addr inst[]
 
-proc delete*(self: gen_qevent_types.QInputMethodQueryEvent) =
-  fcQInputMethodQueryEvent_delete(self.h)
 proc clone*(self: gen_qevent_types.QDropEvent): gen_qevent_types.QDropEvent =
-  gen_qevent_types.QDropEvent(h: fcQDropEvent_clone(self.h))
+  gen_qevent_types.QDropEvent(h: fcQDropEvent_clone(self.h), owned: false)
 
 proc pos*(self: gen_qevent_types.QDropEvent): gen_qpoint_types.QPoint =
-  gen_qpoint_types.QPoint(h: fcQDropEvent_pos(self.h))
+  gen_qpoint_types.QPoint(h: fcQDropEvent_pos(self.h), owned: true)
 
 proc posF*(self: gen_qevent_types.QDropEvent): gen_qpoint_types.QPointF =
-  gen_qpoint_types.QPointF(h: fcQDropEvent_posF(self.h))
+  gen_qpoint_types.QPointF(h: fcQDropEvent_posF(self.h), owned: true)
 
 proc mouseButtons*(self: gen_qevent_types.QDropEvent): cint =
   cint(fcQDropEvent_mouseButtons(self.h))
@@ -4534,7 +4532,7 @@ proc keyboardModifiers*(self: gen_qevent_types.QDropEvent): cint =
   cint(fcQDropEvent_keyboardModifiers(self.h))
 
 proc position*(self: gen_qevent_types.QDropEvent): gen_qpoint_types.QPointF =
-  gen_qpoint_types.QPointF(h: fcQDropEvent_position(self.h))
+  gen_qpoint_types.QPointF(h: fcQDropEvent_position(self.h), owned: true)
 
 proc buttons*(self: gen_qevent_types.QDropEvent): cint =
   cint(fcQDropEvent_buttons(self.h))
@@ -4558,25 +4556,28 @@ proc setDropAction*(self: gen_qevent_types.QDropEvent, action: cint): void =
   fcQDropEvent_setDropAction(self.h, cint(action))
 
 proc source*(self: gen_qevent_types.QDropEvent): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQDropEvent_source(self.h))
+  gen_qobject_types.QObject(h: fcQDropEvent_source(self.h), owned: false)
 
 proc mimeData*(self: gen_qevent_types.QDropEvent): gen_qmimedata_types.QMimeData =
-  gen_qmimedata_types.QMimeData(h: fcQDropEvent_mimeData(self.h))
+  gen_qmimedata_types.QMimeData(h: fcQDropEvent_mimeData(self.h), owned: false)
 
 type QDropEventcloneProc* = proc(self: QDropEvent): gen_qevent_types.QDropEvent {.raises: [], gcsafe.}
 type QDropEventsetAcceptedProc* = proc(self: QDropEvent, accepted: bool): void {.raises: [], gcsafe.}
-type QDropEventVTable* = object
+type QDropEventVTable* {.inheritable, pure.} = object
   vtbl: cQDropEventVTable
   clone*: QDropEventcloneProc
   setAccepted*: QDropEventsetAcceptedProc
 proc QDropEventclone*(self: gen_qevent_types.QDropEvent): gen_qevent_types.QDropEvent =
-  gen_qevent_types.QDropEvent(h: fcQDropEvent_virtualbase_clone(self.h))
+  gen_qevent_types.QDropEvent(h: fcQDropEvent_virtualbase_clone(self.h), owned: false)
 
 proc fcQDropEvent_vtable_callback_clone(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QDropEventVTable](fcQDropEvent_vdata(self)[])
   let self = QDropEvent(h: self)
   var virtualReturn = vtbl[].clone(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QDropEventsetAccepted*(self: gen_qevent_types.QDropEvent, accepted: bool): void =
   fcQDropEvent_virtualbase_setAccepted(self.h, accepted)
@@ -4615,7 +4616,7 @@ proc create*(T: type gen_qevent_types.QDropEvent,
     vtbl[].vtbl.clone = fcQDropEvent_vtable_callback_clone
   if not isNil(vtbl[].setAccepted):
     vtbl[].vtbl.setAccepted = fcQDropEvent_vtable_callback_setAccepted
-  let tmp = gen_qevent_types.QDropEvent(h: fcQDropEvent_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), pos.h, cint(actions), data.h, cint(buttons), cint(modifiers)))
+  let tmp = gen_qevent_types.QDropEvent(h: fcQDropEvent_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), pos.h, cint(actions), data.h, cint(buttons), cint(modifiers)), owned: true)
   fcQDropEvent_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qevent_types.QDropEvent,
@@ -4630,13 +4631,14 @@ proc create*(T: type gen_qevent_types.QDropEvent,
     vtbl[].vtbl.clone = fcQDropEvent_vtable_callback_clone
   if not isNil(vtbl[].setAccepted):
     vtbl[].vtbl.setAccepted = fcQDropEvent_vtable_callback_setAccepted
-  let tmp = gen_qevent_types.QDropEvent(h: fcQDropEvent_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), pos.h, cint(actions), data.h, cint(buttons), cint(modifiers), cint(typeVal)))
+  let tmp = gen_qevent_types.QDropEvent(h: fcQDropEvent_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), pos.h, cint(actions), data.h, cint(buttons), cint(modifiers), cint(typeVal)), owned: true)
   fcQDropEvent_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQDropEvent_mvtbl = cQDropEventVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQDropEvent()[])](self.fcQDropEvent_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   clone: fcQDropEvent_method_callback_clone,
   setAccepted: fcQDropEvent_method_callback_setAccepted,
@@ -4655,13 +4657,11 @@ proc create*(T: type gen_qevent_types.QDropEvent,
   inst[].h = fcQDropEvent_new2(addr(cQDropEvent_mvtbl), csize_t(sizeof(pointer)), pos.h, cint(actions), data.h, cint(buttons), cint(modifiers), cint(typeVal))
   fcQDropEvent_vdata(inst[].h)[] = addr inst[]
 
-proc delete*(self: gen_qevent_types.QDropEvent) =
-  fcQDropEvent_delete(self.h)
 proc clone*(self: gen_qevent_types.QDragMoveEvent): gen_qevent_types.QDragMoveEvent =
-  gen_qevent_types.QDragMoveEvent(h: fcQDragMoveEvent_clone(self.h))
+  gen_qevent_types.QDragMoveEvent(h: fcQDragMoveEvent_clone(self.h), owned: false)
 
 proc answerRect*(self: gen_qevent_types.QDragMoveEvent): gen_qrect_types.QRect =
-  gen_qrect_types.QRect(h: fcQDragMoveEvent_answerRect(self.h))
+  gen_qrect_types.QRect(h: fcQDragMoveEvent_answerRect(self.h), owned: true)
 
 proc accept*(self: gen_qevent_types.QDragMoveEvent): void =
   fcQDragMoveEvent_accept(self.h)
@@ -4677,18 +4677,21 @@ proc ignore*(self: gen_qevent_types.QDragMoveEvent, r: gen_qrect_types.QRect): v
 
 type QDragMoveEventcloneProc* = proc(self: QDragMoveEvent): gen_qevent_types.QDragMoveEvent {.raises: [], gcsafe.}
 type QDragMoveEventsetAcceptedProc* = proc(self: QDragMoveEvent, accepted: bool): void {.raises: [], gcsafe.}
-type QDragMoveEventVTable* = object
+type QDragMoveEventVTable* {.inheritable, pure.} = object
   vtbl: cQDragMoveEventVTable
   clone*: QDragMoveEventcloneProc
   setAccepted*: QDragMoveEventsetAcceptedProc
 proc QDragMoveEventclone*(self: gen_qevent_types.QDragMoveEvent): gen_qevent_types.QDragMoveEvent =
-  gen_qevent_types.QDragMoveEvent(h: fcQDragMoveEvent_virtualbase_clone(self.h))
+  gen_qevent_types.QDragMoveEvent(h: fcQDragMoveEvent_virtualbase_clone(self.h), owned: false)
 
 proc fcQDragMoveEvent_vtable_callback_clone(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QDragMoveEventVTable](fcQDragMoveEvent_vdata(self)[])
   let self = QDragMoveEvent(h: self)
   var virtualReturn = vtbl[].clone(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QDragMoveEventsetAccepted*(self: gen_qevent_types.QDragMoveEvent, accepted: bool): void =
   fcQDragMoveEvent_virtualbase_setAccepted(self.h, accepted)
@@ -4727,7 +4730,7 @@ proc create*(T: type gen_qevent_types.QDragMoveEvent,
     vtbl[].vtbl.clone = fcQDragMoveEvent_vtable_callback_clone
   if not isNil(vtbl[].setAccepted):
     vtbl[].vtbl.setAccepted = fcQDragMoveEvent_vtable_callback_setAccepted
-  let tmp = gen_qevent_types.QDragMoveEvent(h: fcQDragMoveEvent_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), pos.h, cint(actions), data.h, cint(buttons), cint(modifiers)))
+  let tmp = gen_qevent_types.QDragMoveEvent(h: fcQDragMoveEvent_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), pos.h, cint(actions), data.h, cint(buttons), cint(modifiers)), owned: true)
   fcQDragMoveEvent_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qevent_types.QDragMoveEvent,
@@ -4742,13 +4745,14 @@ proc create*(T: type gen_qevent_types.QDragMoveEvent,
     vtbl[].vtbl.clone = fcQDragMoveEvent_vtable_callback_clone
   if not isNil(vtbl[].setAccepted):
     vtbl[].vtbl.setAccepted = fcQDragMoveEvent_vtable_callback_setAccepted
-  let tmp = gen_qevent_types.QDragMoveEvent(h: fcQDragMoveEvent_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), pos.h, cint(actions), data.h, cint(buttons), cint(modifiers), cint(typeVal)))
+  let tmp = gen_qevent_types.QDragMoveEvent(h: fcQDragMoveEvent_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), pos.h, cint(actions), data.h, cint(buttons), cint(modifiers), cint(typeVal)), owned: true)
   fcQDragMoveEvent_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQDragMoveEvent_mvtbl = cQDragMoveEventVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQDragMoveEvent()[])](self.fcQDragMoveEvent_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   clone: fcQDragMoveEvent_method_callback_clone,
   setAccepted: fcQDragMoveEvent_method_callback_setAccepted,
@@ -4767,25 +4771,26 @@ proc create*(T: type gen_qevent_types.QDragMoveEvent,
   inst[].h = fcQDragMoveEvent_new2(addr(cQDragMoveEvent_mvtbl), csize_t(sizeof(pointer)), pos.h, cint(actions), data.h, cint(buttons), cint(modifiers), cint(typeVal))
   fcQDragMoveEvent_vdata(inst[].h)[] = addr inst[]
 
-proc delete*(self: gen_qevent_types.QDragMoveEvent) =
-  fcQDragMoveEvent_delete(self.h)
 proc clone*(self: gen_qevent_types.QDragEnterEvent): gen_qevent_types.QDragEnterEvent =
-  gen_qevent_types.QDragEnterEvent(h: fcQDragEnterEvent_clone(self.h))
+  gen_qevent_types.QDragEnterEvent(h: fcQDragEnterEvent_clone(self.h), owned: false)
 
 type QDragEnterEventcloneProc* = proc(self: QDragEnterEvent): gen_qevent_types.QDragEnterEvent {.raises: [], gcsafe.}
 type QDragEnterEventsetAcceptedProc* = proc(self: QDragEnterEvent, accepted: bool): void {.raises: [], gcsafe.}
-type QDragEnterEventVTable* = object
+type QDragEnterEventVTable* {.inheritable, pure.} = object
   vtbl: cQDragEnterEventVTable
   clone*: QDragEnterEventcloneProc
   setAccepted*: QDragEnterEventsetAcceptedProc
 proc QDragEnterEventclone*(self: gen_qevent_types.QDragEnterEvent): gen_qevent_types.QDragEnterEvent =
-  gen_qevent_types.QDragEnterEvent(h: fcQDragEnterEvent_virtualbase_clone(self.h))
+  gen_qevent_types.QDragEnterEvent(h: fcQDragEnterEvent_virtualbase_clone(self.h), owned: false)
 
 proc fcQDragEnterEvent_vtable_callback_clone(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QDragEnterEventVTable](fcQDragEnterEvent_vdata(self)[])
   let self = QDragEnterEvent(h: self)
   var virtualReturn = vtbl[].clone(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QDragEnterEventsetAccepted*(self: gen_qevent_types.QDragEnterEvent, accepted: bool): void =
   fcQDragEnterEvent_virtualbase_setAccepted(self.h, accepted)
@@ -4824,13 +4829,14 @@ proc create*(T: type gen_qevent_types.QDragEnterEvent,
     vtbl[].vtbl.clone = fcQDragEnterEvent_vtable_callback_clone
   if not isNil(vtbl[].setAccepted):
     vtbl[].vtbl.setAccepted = fcQDragEnterEvent_vtable_callback_setAccepted
-  let tmp = gen_qevent_types.QDragEnterEvent(h: fcQDragEnterEvent_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), pos.h, cint(actions), data.h, cint(buttons), cint(modifiers)))
+  let tmp = gen_qevent_types.QDragEnterEvent(h: fcQDragEnterEvent_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), pos.h, cint(actions), data.h, cint(buttons), cint(modifiers)), owned: true)
   fcQDragEnterEvent_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQDragEnterEvent_mvtbl = cQDragEnterEventVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQDragEnterEvent()[])](self.fcQDragEnterEvent_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   clone: fcQDragEnterEvent_method_callback_clone,
   setAccepted: fcQDragEnterEvent_method_callback_setAccepted,
@@ -4842,25 +4848,26 @@ proc create*(T: type gen_qevent_types.QDragEnterEvent,
   inst[].h = fcQDragEnterEvent_new(addr(cQDragEnterEvent_mvtbl), csize_t(sizeof(pointer)), pos.h, cint(actions), data.h, cint(buttons), cint(modifiers))
   fcQDragEnterEvent_vdata(inst[].h)[] = addr inst[]
 
-proc delete*(self: gen_qevent_types.QDragEnterEvent) =
-  fcQDragEnterEvent_delete(self.h)
 proc clone*(self: gen_qevent_types.QDragLeaveEvent): gen_qevent_types.QDragLeaveEvent =
-  gen_qevent_types.QDragLeaveEvent(h: fcQDragLeaveEvent_clone(self.h))
+  gen_qevent_types.QDragLeaveEvent(h: fcQDragLeaveEvent_clone(self.h), owned: false)
 
 type QDragLeaveEventcloneProc* = proc(self: QDragLeaveEvent): gen_qevent_types.QDragLeaveEvent {.raises: [], gcsafe.}
 type QDragLeaveEventsetAcceptedProc* = proc(self: QDragLeaveEvent, accepted: bool): void {.raises: [], gcsafe.}
-type QDragLeaveEventVTable* = object
+type QDragLeaveEventVTable* {.inheritable, pure.} = object
   vtbl: cQDragLeaveEventVTable
   clone*: QDragLeaveEventcloneProc
   setAccepted*: QDragLeaveEventsetAcceptedProc
 proc QDragLeaveEventclone*(self: gen_qevent_types.QDragLeaveEvent): gen_qevent_types.QDragLeaveEvent =
-  gen_qevent_types.QDragLeaveEvent(h: fcQDragLeaveEvent_virtualbase_clone(self.h))
+  gen_qevent_types.QDragLeaveEvent(h: fcQDragLeaveEvent_virtualbase_clone(self.h), owned: false)
 
 proc fcQDragLeaveEvent_vtable_callback_clone(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QDragLeaveEventVTable](fcQDragLeaveEvent_vdata(self)[])
   let self = QDragLeaveEvent(h: self)
   var virtualReturn = vtbl[].clone(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QDragLeaveEventsetAccepted*(self: gen_qevent_types.QDragLeaveEvent, accepted: bool): void =
   fcQDragLeaveEvent_virtualbase_setAccepted(self.h, accepted)
@@ -4898,13 +4905,14 @@ proc create*(T: type gen_qevent_types.QDragLeaveEvent,
     vtbl[].vtbl.clone = fcQDragLeaveEvent_vtable_callback_clone
   if not isNil(vtbl[].setAccepted):
     vtbl[].vtbl.setAccepted = fcQDragLeaveEvent_vtable_callback_setAccepted
-  let tmp = gen_qevent_types.QDragLeaveEvent(h: fcQDragLeaveEvent_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))))
+  let tmp = gen_qevent_types.QDragLeaveEvent(h: fcQDragLeaveEvent_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))), owned: true)
   fcQDragLeaveEvent_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQDragLeaveEvent_mvtbl = cQDragLeaveEventVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQDragLeaveEvent()[])](self.fcQDragLeaveEvent_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   clone: fcQDragLeaveEvent_method_callback_clone,
   setAccepted: fcQDragLeaveEvent_method_callback_setAccepted,
@@ -4915,10 +4923,8 @@ proc create*(T: type gen_qevent_types.QDragLeaveEvent,
   inst[].h = fcQDragLeaveEvent_new(addr(cQDragLeaveEvent_mvtbl), csize_t(sizeof(pointer)))
   fcQDragLeaveEvent_vdata(inst[].h)[] = addr inst[]
 
-proc delete*(self: gen_qevent_types.QDragLeaveEvent) =
-  fcQDragLeaveEvent_delete(self.h)
 proc clone*(self: gen_qevent_types.QHelpEvent): gen_qevent_types.QHelpEvent =
-  gen_qevent_types.QHelpEvent(h: fcQHelpEvent_clone(self.h))
+  gen_qevent_types.QHelpEvent(h: fcQHelpEvent_clone(self.h), owned: false)
 
 proc x*(self: gen_qevent_types.QHelpEvent): cint =
   fcQHelpEvent_x(self.h)
@@ -4933,25 +4939,28 @@ proc globalY*(self: gen_qevent_types.QHelpEvent): cint =
   fcQHelpEvent_globalY(self.h)
 
 proc pos*(self: gen_qevent_types.QHelpEvent): gen_qpoint_types.QPoint =
-  gen_qpoint_types.QPoint(h: fcQHelpEvent_pos(self.h))
+  gen_qpoint_types.QPoint(h: fcQHelpEvent_pos(self.h), owned: false)
 
 proc globalPos*(self: gen_qevent_types.QHelpEvent): gen_qpoint_types.QPoint =
-  gen_qpoint_types.QPoint(h: fcQHelpEvent_globalPos(self.h))
+  gen_qpoint_types.QPoint(h: fcQHelpEvent_globalPos(self.h), owned: false)
 
 type QHelpEventcloneProc* = proc(self: QHelpEvent): gen_qevent_types.QHelpEvent {.raises: [], gcsafe.}
 type QHelpEventsetAcceptedProc* = proc(self: QHelpEvent, accepted: bool): void {.raises: [], gcsafe.}
-type QHelpEventVTable* = object
+type QHelpEventVTable* {.inheritable, pure.} = object
   vtbl: cQHelpEventVTable
   clone*: QHelpEventcloneProc
   setAccepted*: QHelpEventsetAcceptedProc
 proc QHelpEventclone*(self: gen_qevent_types.QHelpEvent): gen_qevent_types.QHelpEvent =
-  gen_qevent_types.QHelpEvent(h: fcQHelpEvent_virtualbase_clone(self.h))
+  gen_qevent_types.QHelpEvent(h: fcQHelpEvent_virtualbase_clone(self.h), owned: false)
 
 proc fcQHelpEvent_vtable_callback_clone(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QHelpEventVTable](fcQHelpEvent_vdata(self)[])
   let self = QHelpEvent(h: self)
   var virtualReturn = vtbl[].clone(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QHelpEventsetAccepted*(self: gen_qevent_types.QHelpEvent, accepted: bool): void =
   fcQHelpEvent_virtualbase_setAccepted(self.h, accepted)
@@ -4990,13 +4999,14 @@ proc create*(T: type gen_qevent_types.QHelpEvent,
     vtbl[].vtbl.clone = fcQHelpEvent_vtable_callback_clone
   if not isNil(vtbl[].setAccepted):
     vtbl[].vtbl.setAccepted = fcQHelpEvent_vtable_callback_setAccepted
-  let tmp = gen_qevent_types.QHelpEvent(h: fcQHelpEvent_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(typeVal), pos.h, globalPos.h))
+  let tmp = gen_qevent_types.QHelpEvent(h: fcQHelpEvent_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(typeVal), pos.h, globalPos.h), owned: true)
   fcQHelpEvent_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQHelpEvent_mvtbl = cQHelpEventVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQHelpEvent()[])](self.fcQHelpEvent_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   clone: fcQHelpEvent_method_callback_clone,
   setAccepted: fcQHelpEvent_method_callback_setAccepted,
@@ -5008,10 +5018,8 @@ proc create*(T: type gen_qevent_types.QHelpEvent,
   inst[].h = fcQHelpEvent_new(addr(cQHelpEvent_mvtbl), csize_t(sizeof(pointer)), cint(typeVal), pos.h, globalPos.h)
   fcQHelpEvent_vdata(inst[].h)[] = addr inst[]
 
-proc delete*(self: gen_qevent_types.QHelpEvent) =
-  fcQHelpEvent_delete(self.h)
 proc clone*(self: gen_qevent_types.QStatusTipEvent): gen_qevent_types.QStatusTipEvent =
-  gen_qevent_types.QStatusTipEvent(h: fcQStatusTipEvent_clone(self.h))
+  gen_qevent_types.QStatusTipEvent(h: fcQStatusTipEvent_clone(self.h), owned: false)
 
 proc tip*(self: gen_qevent_types.QStatusTipEvent): string =
   let v_ms = fcQStatusTipEvent_tip(self.h)
@@ -5021,18 +5029,21 @@ proc tip*(self: gen_qevent_types.QStatusTipEvent): string =
 
 type QStatusTipEventcloneProc* = proc(self: QStatusTipEvent): gen_qevent_types.QStatusTipEvent {.raises: [], gcsafe.}
 type QStatusTipEventsetAcceptedProc* = proc(self: QStatusTipEvent, accepted: bool): void {.raises: [], gcsafe.}
-type QStatusTipEventVTable* = object
+type QStatusTipEventVTable* {.inheritable, pure.} = object
   vtbl: cQStatusTipEventVTable
   clone*: QStatusTipEventcloneProc
   setAccepted*: QStatusTipEventsetAcceptedProc
 proc QStatusTipEventclone*(self: gen_qevent_types.QStatusTipEvent): gen_qevent_types.QStatusTipEvent =
-  gen_qevent_types.QStatusTipEvent(h: fcQStatusTipEvent_virtualbase_clone(self.h))
+  gen_qevent_types.QStatusTipEvent(h: fcQStatusTipEvent_virtualbase_clone(self.h), owned: false)
 
 proc fcQStatusTipEvent_vtable_callback_clone(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QStatusTipEventVTable](fcQStatusTipEvent_vdata(self)[])
   let self = QStatusTipEvent(h: self)
   var virtualReturn = vtbl[].clone(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QStatusTipEventsetAccepted*(self: gen_qevent_types.QStatusTipEvent, accepted: bool): void =
   fcQStatusTipEvent_virtualbase_setAccepted(self.h, accepted)
@@ -5071,13 +5082,14 @@ proc create*(T: type gen_qevent_types.QStatusTipEvent,
     vtbl[].vtbl.clone = fcQStatusTipEvent_vtable_callback_clone
   if not isNil(vtbl[].setAccepted):
     vtbl[].vtbl.setAccepted = fcQStatusTipEvent_vtable_callback_setAccepted
-  let tmp = gen_qevent_types.QStatusTipEvent(h: fcQStatusTipEvent_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(tip) > 0: addr tip[0] else: nil, len: csize_t(len(tip)))))
+  let tmp = gen_qevent_types.QStatusTipEvent(h: fcQStatusTipEvent_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(tip) > 0: addr tip[0] else: nil, len: csize_t(len(tip)))), owned: true)
   fcQStatusTipEvent_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQStatusTipEvent_mvtbl = cQStatusTipEventVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQStatusTipEvent()[])](self.fcQStatusTipEvent_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   clone: fcQStatusTipEvent_method_callback_clone,
   setAccepted: fcQStatusTipEvent_method_callback_setAccepted,
@@ -5089,10 +5101,8 @@ proc create*(T: type gen_qevent_types.QStatusTipEvent,
   inst[].h = fcQStatusTipEvent_new(addr(cQStatusTipEvent_mvtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(tip) > 0: addr tip[0] else: nil, len: csize_t(len(tip))))
   fcQStatusTipEvent_vdata(inst[].h)[] = addr inst[]
 
-proc delete*(self: gen_qevent_types.QStatusTipEvent) =
-  fcQStatusTipEvent_delete(self.h)
 proc clone*(self: gen_qevent_types.QWhatsThisClickedEvent): gen_qevent_types.QWhatsThisClickedEvent =
-  gen_qevent_types.QWhatsThisClickedEvent(h: fcQWhatsThisClickedEvent_clone(self.h))
+  gen_qevent_types.QWhatsThisClickedEvent(h: fcQWhatsThisClickedEvent_clone(self.h), owned: false)
 
 proc href*(self: gen_qevent_types.QWhatsThisClickedEvent): string =
   let v_ms = fcQWhatsThisClickedEvent_href(self.h)
@@ -5102,18 +5112,21 @@ proc href*(self: gen_qevent_types.QWhatsThisClickedEvent): string =
 
 type QWhatsThisClickedEventcloneProc* = proc(self: QWhatsThisClickedEvent): gen_qevent_types.QWhatsThisClickedEvent {.raises: [], gcsafe.}
 type QWhatsThisClickedEventsetAcceptedProc* = proc(self: QWhatsThisClickedEvent, accepted: bool): void {.raises: [], gcsafe.}
-type QWhatsThisClickedEventVTable* = object
+type QWhatsThisClickedEventVTable* {.inheritable, pure.} = object
   vtbl: cQWhatsThisClickedEventVTable
   clone*: QWhatsThisClickedEventcloneProc
   setAccepted*: QWhatsThisClickedEventsetAcceptedProc
 proc QWhatsThisClickedEventclone*(self: gen_qevent_types.QWhatsThisClickedEvent): gen_qevent_types.QWhatsThisClickedEvent =
-  gen_qevent_types.QWhatsThisClickedEvent(h: fcQWhatsThisClickedEvent_virtualbase_clone(self.h))
+  gen_qevent_types.QWhatsThisClickedEvent(h: fcQWhatsThisClickedEvent_virtualbase_clone(self.h), owned: false)
 
 proc fcQWhatsThisClickedEvent_vtable_callback_clone(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QWhatsThisClickedEventVTable](fcQWhatsThisClickedEvent_vdata(self)[])
   let self = QWhatsThisClickedEvent(h: self)
   var virtualReturn = vtbl[].clone(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QWhatsThisClickedEventsetAccepted*(self: gen_qevent_types.QWhatsThisClickedEvent, accepted: bool): void =
   fcQWhatsThisClickedEvent_virtualbase_setAccepted(self.h, accepted)
@@ -5152,13 +5165,14 @@ proc create*(T: type gen_qevent_types.QWhatsThisClickedEvent,
     vtbl[].vtbl.clone = fcQWhatsThisClickedEvent_vtable_callback_clone
   if not isNil(vtbl[].setAccepted):
     vtbl[].vtbl.setAccepted = fcQWhatsThisClickedEvent_vtable_callback_setAccepted
-  let tmp = gen_qevent_types.QWhatsThisClickedEvent(h: fcQWhatsThisClickedEvent_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(href) > 0: addr href[0] else: nil, len: csize_t(len(href)))))
+  let tmp = gen_qevent_types.QWhatsThisClickedEvent(h: fcQWhatsThisClickedEvent_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(href) > 0: addr href[0] else: nil, len: csize_t(len(href)))), owned: true)
   fcQWhatsThisClickedEvent_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQWhatsThisClickedEvent_mvtbl = cQWhatsThisClickedEventVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQWhatsThisClickedEvent()[])](self.fcQWhatsThisClickedEvent_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   clone: fcQWhatsThisClickedEvent_method_callback_clone,
   setAccepted: fcQWhatsThisClickedEvent_method_callback_setAccepted,
@@ -5170,15 +5184,11 @@ proc create*(T: type gen_qevent_types.QWhatsThisClickedEvent,
   inst[].h = fcQWhatsThisClickedEvent_new(addr(cQWhatsThisClickedEvent_mvtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(href) > 0: addr href[0] else: nil, len: csize_t(len(href))))
   fcQWhatsThisClickedEvent_vdata(inst[].h)[] = addr inst[]
 
-proc delete*(self: gen_qevent_types.QWhatsThisClickedEvent) =
-  fcQWhatsThisClickedEvent_delete(self.h)
 proc clone*(self: gen_qevent_types.QActionEvent): gen_qevent_types.QActionEvent =
-  gen_qevent_types.QActionEvent(h: fcQActionEvent_clone(self.h))
+  gen_qevent_types.QActionEvent(h: fcQActionEvent_clone(self.h), owned: false)
 
-proc delete*(self: gen_qevent_types.QActionEvent) =
-  fcQActionEvent_delete(self.h)
 proc clone*(self: gen_qevent_types.QFileOpenEvent): gen_qevent_types.QFileOpenEvent =
-  gen_qevent_types.QFileOpenEvent(h: fcQFileOpenEvent_clone(self.h))
+  gen_qevent_types.QFileOpenEvent(h: fcQFileOpenEvent_clone(self.h), owned: false)
 
 proc file*(self: gen_qevent_types.QFileOpenEvent): string =
   let v_ms = fcQFileOpenEvent_file(self.h)
@@ -5187,25 +5197,28 @@ proc file*(self: gen_qevent_types.QFileOpenEvent): string =
   vx_ret
 
 proc url*(self: gen_qevent_types.QFileOpenEvent): gen_qurl_types.QUrl =
-  gen_qurl_types.QUrl(h: fcQFileOpenEvent_url(self.h))
+  gen_qurl_types.QUrl(h: fcQFileOpenEvent_url(self.h), owned: true)
 
 proc openFile*(self: gen_qevent_types.QFileOpenEvent, file: gen_qfile_types.QFile, flags: cint): bool =
   fcQFileOpenEvent_openFile(self.h, file.h, cint(flags))
 
 type QFileOpenEventcloneProc* = proc(self: QFileOpenEvent): gen_qevent_types.QFileOpenEvent {.raises: [], gcsafe.}
 type QFileOpenEventsetAcceptedProc* = proc(self: QFileOpenEvent, accepted: bool): void {.raises: [], gcsafe.}
-type QFileOpenEventVTable* = object
+type QFileOpenEventVTable* {.inheritable, pure.} = object
   vtbl: cQFileOpenEventVTable
   clone*: QFileOpenEventcloneProc
   setAccepted*: QFileOpenEventsetAcceptedProc
 proc QFileOpenEventclone*(self: gen_qevent_types.QFileOpenEvent): gen_qevent_types.QFileOpenEvent =
-  gen_qevent_types.QFileOpenEvent(h: fcQFileOpenEvent_virtualbase_clone(self.h))
+  gen_qevent_types.QFileOpenEvent(h: fcQFileOpenEvent_virtualbase_clone(self.h), owned: false)
 
 proc fcQFileOpenEvent_vtable_callback_clone(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QFileOpenEventVTable](fcQFileOpenEvent_vdata(self)[])
   let self = QFileOpenEvent(h: self)
   var virtualReturn = vtbl[].clone(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QFileOpenEventsetAccepted*(self: gen_qevent_types.QFileOpenEvent, accepted: bool): void =
   fcQFileOpenEvent_virtualbase_setAccepted(self.h, accepted)
@@ -5244,7 +5257,7 @@ proc create*(T: type gen_qevent_types.QFileOpenEvent,
     vtbl[].vtbl.clone = fcQFileOpenEvent_vtable_callback_clone
   if not isNil(vtbl[].setAccepted):
     vtbl[].vtbl.setAccepted = fcQFileOpenEvent_vtable_callback_setAccepted
-  let tmp = gen_qevent_types.QFileOpenEvent(h: fcQFileOpenEvent_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(file) > 0: addr file[0] else: nil, len: csize_t(len(file)))))
+  let tmp = gen_qevent_types.QFileOpenEvent(h: fcQFileOpenEvent_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(file) > 0: addr file[0] else: nil, len: csize_t(len(file)))), owned: true)
   fcQFileOpenEvent_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qevent_types.QFileOpenEvent,
@@ -5259,13 +5272,14 @@ proc create*(T: type gen_qevent_types.QFileOpenEvent,
     vtbl[].vtbl.clone = fcQFileOpenEvent_vtable_callback_clone
   if not isNil(vtbl[].setAccepted):
     vtbl[].vtbl.setAccepted = fcQFileOpenEvent_vtable_callback_setAccepted
-  let tmp = gen_qevent_types.QFileOpenEvent(h: fcQFileOpenEvent_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), url.h))
+  let tmp = gen_qevent_types.QFileOpenEvent(h: fcQFileOpenEvent_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), url.h), owned: true)
   fcQFileOpenEvent_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQFileOpenEvent_mvtbl = cQFileOpenEventVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQFileOpenEvent()[])](self.fcQFileOpenEvent_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   clone: fcQFileOpenEvent_method_callback_clone,
   setAccepted: fcQFileOpenEvent_method_callback_setAccepted,
@@ -5284,28 +5298,29 @@ proc create*(T: type gen_qevent_types.QFileOpenEvent,
   inst[].h = fcQFileOpenEvent_new2(addr(cQFileOpenEvent_mvtbl), csize_t(sizeof(pointer)), url.h)
   fcQFileOpenEvent_vdata(inst[].h)[] = addr inst[]
 
-proc delete*(self: gen_qevent_types.QFileOpenEvent) =
-  fcQFileOpenEvent_delete(self.h)
 proc clone*(self: gen_qevent_types.QToolBarChangeEvent): gen_qevent_types.QToolBarChangeEvent =
-  gen_qevent_types.QToolBarChangeEvent(h: fcQToolBarChangeEvent_clone(self.h))
+  gen_qevent_types.QToolBarChangeEvent(h: fcQToolBarChangeEvent_clone(self.h), owned: false)
 
 proc toggle*(self: gen_qevent_types.QToolBarChangeEvent): bool =
   fcQToolBarChangeEvent_toggle(self.h)
 
 type QToolBarChangeEventcloneProc* = proc(self: QToolBarChangeEvent): gen_qevent_types.QToolBarChangeEvent {.raises: [], gcsafe.}
 type QToolBarChangeEventsetAcceptedProc* = proc(self: QToolBarChangeEvent, accepted: bool): void {.raises: [], gcsafe.}
-type QToolBarChangeEventVTable* = object
+type QToolBarChangeEventVTable* {.inheritable, pure.} = object
   vtbl: cQToolBarChangeEventVTable
   clone*: QToolBarChangeEventcloneProc
   setAccepted*: QToolBarChangeEventsetAcceptedProc
 proc QToolBarChangeEventclone*(self: gen_qevent_types.QToolBarChangeEvent): gen_qevent_types.QToolBarChangeEvent =
-  gen_qevent_types.QToolBarChangeEvent(h: fcQToolBarChangeEvent_virtualbase_clone(self.h))
+  gen_qevent_types.QToolBarChangeEvent(h: fcQToolBarChangeEvent_virtualbase_clone(self.h), owned: false)
 
 proc fcQToolBarChangeEvent_vtable_callback_clone(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QToolBarChangeEventVTable](fcQToolBarChangeEvent_vdata(self)[])
   let self = QToolBarChangeEvent(h: self)
   var virtualReturn = vtbl[].clone(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QToolBarChangeEventsetAccepted*(self: gen_qevent_types.QToolBarChangeEvent, accepted: bool): void =
   fcQToolBarChangeEvent_virtualbase_setAccepted(self.h, accepted)
@@ -5344,13 +5359,14 @@ proc create*(T: type gen_qevent_types.QToolBarChangeEvent,
     vtbl[].vtbl.clone = fcQToolBarChangeEvent_vtable_callback_clone
   if not isNil(vtbl[].setAccepted):
     vtbl[].vtbl.setAccepted = fcQToolBarChangeEvent_vtable_callback_setAccepted
-  let tmp = gen_qevent_types.QToolBarChangeEvent(h: fcQToolBarChangeEvent_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), t))
+  let tmp = gen_qevent_types.QToolBarChangeEvent(h: fcQToolBarChangeEvent_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), t), owned: true)
   fcQToolBarChangeEvent_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQToolBarChangeEvent_mvtbl = cQToolBarChangeEventVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQToolBarChangeEvent()[])](self.fcQToolBarChangeEvent_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   clone: fcQToolBarChangeEvent_method_callback_clone,
   setAccepted: fcQToolBarChangeEvent_method_callback_setAccepted,
@@ -5362,13 +5378,11 @@ proc create*(T: type gen_qevent_types.QToolBarChangeEvent,
   inst[].h = fcQToolBarChangeEvent_new(addr(cQToolBarChangeEvent_mvtbl), csize_t(sizeof(pointer)), t)
   fcQToolBarChangeEvent_vdata(inst[].h)[] = addr inst[]
 
-proc delete*(self: gen_qevent_types.QToolBarChangeEvent) =
-  fcQToolBarChangeEvent_delete(self.h)
 proc clone*(self: gen_qevent_types.QShortcutEvent): gen_qevent_types.QShortcutEvent =
-  gen_qevent_types.QShortcutEvent(h: fcQShortcutEvent_clone(self.h))
+  gen_qevent_types.QShortcutEvent(h: fcQShortcutEvent_clone(self.h), owned: false)
 
 proc key*(self: gen_qevent_types.QShortcutEvent): gen_qkeysequence_types.QKeySequence =
-  gen_qkeysequence_types.QKeySequence(h: fcQShortcutEvent_key(self.h))
+  gen_qkeysequence_types.QKeySequence(h: fcQShortcutEvent_key(self.h), owned: false)
 
 proc shortcutId*(self: gen_qevent_types.QShortcutEvent): cint =
   fcQShortcutEvent_shortcutId(self.h)
@@ -5378,18 +5392,21 @@ proc isAmbiguous*(self: gen_qevent_types.QShortcutEvent): bool =
 
 type QShortcutEventcloneProc* = proc(self: QShortcutEvent): gen_qevent_types.QShortcutEvent {.raises: [], gcsafe.}
 type QShortcutEventsetAcceptedProc* = proc(self: QShortcutEvent, accepted: bool): void {.raises: [], gcsafe.}
-type QShortcutEventVTable* = object
+type QShortcutEventVTable* {.inheritable, pure.} = object
   vtbl: cQShortcutEventVTable
   clone*: QShortcutEventcloneProc
   setAccepted*: QShortcutEventsetAcceptedProc
 proc QShortcutEventclone*(self: gen_qevent_types.QShortcutEvent): gen_qevent_types.QShortcutEvent =
-  gen_qevent_types.QShortcutEvent(h: fcQShortcutEvent_virtualbase_clone(self.h))
+  gen_qevent_types.QShortcutEvent(h: fcQShortcutEvent_virtualbase_clone(self.h), owned: false)
 
 proc fcQShortcutEvent_vtable_callback_clone(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QShortcutEventVTable](fcQShortcutEvent_vdata(self)[])
   let self = QShortcutEvent(h: self)
   var virtualReturn = vtbl[].clone(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QShortcutEventsetAccepted*(self: gen_qevent_types.QShortcutEvent, accepted: bool): void =
   fcQShortcutEvent_virtualbase_setAccepted(self.h, accepted)
@@ -5428,7 +5445,7 @@ proc create*(T: type gen_qevent_types.QShortcutEvent,
     vtbl[].vtbl.clone = fcQShortcutEvent_vtable_callback_clone
   if not isNil(vtbl[].setAccepted):
     vtbl[].vtbl.setAccepted = fcQShortcutEvent_vtable_callback_setAccepted
-  let tmp = gen_qevent_types.QShortcutEvent(h: fcQShortcutEvent_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), key.h, id))
+  let tmp = gen_qevent_types.QShortcutEvent(h: fcQShortcutEvent_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), key.h, id), owned: true)
   fcQShortcutEvent_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qevent_types.QShortcutEvent,
@@ -5443,13 +5460,14 @@ proc create*(T: type gen_qevent_types.QShortcutEvent,
     vtbl[].vtbl.clone = fcQShortcutEvent_vtable_callback_clone
   if not isNil(vtbl[].setAccepted):
     vtbl[].vtbl.setAccepted = fcQShortcutEvent_vtable_callback_setAccepted
-  let tmp = gen_qevent_types.QShortcutEvent(h: fcQShortcutEvent_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), key.h, id, ambiguous))
+  let tmp = gen_qevent_types.QShortcutEvent(h: fcQShortcutEvent_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), key.h, id, ambiguous), owned: true)
   fcQShortcutEvent_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQShortcutEvent_mvtbl = cQShortcutEventVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQShortcutEvent()[])](self.fcQShortcutEvent_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   clone: fcQShortcutEvent_method_callback_clone,
   setAccepted: fcQShortcutEvent_method_callback_setAccepted,
@@ -5468,10 +5486,8 @@ proc create*(T: type gen_qevent_types.QShortcutEvent,
   inst[].h = fcQShortcutEvent_new2(addr(cQShortcutEvent_mvtbl), csize_t(sizeof(pointer)), key.h, id, ambiguous)
   fcQShortcutEvent_vdata(inst[].h)[] = addr inst[]
 
-proc delete*(self: gen_qevent_types.QShortcutEvent) =
-  fcQShortcutEvent_delete(self.h)
 proc clone*(self: gen_qevent_types.QWindowStateChangeEvent): gen_qevent_types.QWindowStateChangeEvent =
-  gen_qevent_types.QWindowStateChangeEvent(h: fcQWindowStateChangeEvent_clone(self.h))
+  gen_qevent_types.QWindowStateChangeEvent(h: fcQWindowStateChangeEvent_clone(self.h), owned: false)
 
 proc oldState*(self: gen_qevent_types.QWindowStateChangeEvent): cint =
   cint(fcQWindowStateChangeEvent_oldState(self.h))
@@ -5481,18 +5497,21 @@ proc isOverride*(self: gen_qevent_types.QWindowStateChangeEvent): bool =
 
 type QWindowStateChangeEventcloneProc* = proc(self: QWindowStateChangeEvent): gen_qevent_types.QWindowStateChangeEvent {.raises: [], gcsafe.}
 type QWindowStateChangeEventsetAcceptedProc* = proc(self: QWindowStateChangeEvent, accepted: bool): void {.raises: [], gcsafe.}
-type QWindowStateChangeEventVTable* = object
+type QWindowStateChangeEventVTable* {.inheritable, pure.} = object
   vtbl: cQWindowStateChangeEventVTable
   clone*: QWindowStateChangeEventcloneProc
   setAccepted*: QWindowStateChangeEventsetAcceptedProc
 proc QWindowStateChangeEventclone*(self: gen_qevent_types.QWindowStateChangeEvent): gen_qevent_types.QWindowStateChangeEvent =
-  gen_qevent_types.QWindowStateChangeEvent(h: fcQWindowStateChangeEvent_virtualbase_clone(self.h))
+  gen_qevent_types.QWindowStateChangeEvent(h: fcQWindowStateChangeEvent_virtualbase_clone(self.h), owned: false)
 
 proc fcQWindowStateChangeEvent_vtable_callback_clone(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QWindowStateChangeEventVTable](fcQWindowStateChangeEvent_vdata(self)[])
   let self = QWindowStateChangeEvent(h: self)
   var virtualReturn = vtbl[].clone(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QWindowStateChangeEventsetAccepted*(self: gen_qevent_types.QWindowStateChangeEvent, accepted: bool): void =
   fcQWindowStateChangeEvent_virtualbase_setAccepted(self.h, accepted)
@@ -5531,7 +5550,7 @@ proc create*(T: type gen_qevent_types.QWindowStateChangeEvent,
     vtbl[].vtbl.clone = fcQWindowStateChangeEvent_vtable_callback_clone
   if not isNil(vtbl[].setAccepted):
     vtbl[].vtbl.setAccepted = fcQWindowStateChangeEvent_vtable_callback_setAccepted
-  let tmp = gen_qevent_types.QWindowStateChangeEvent(h: fcQWindowStateChangeEvent_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(oldState)))
+  let tmp = gen_qevent_types.QWindowStateChangeEvent(h: fcQWindowStateChangeEvent_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(oldState)), owned: true)
   fcQWindowStateChangeEvent_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qevent_types.QWindowStateChangeEvent,
@@ -5546,13 +5565,14 @@ proc create*(T: type gen_qevent_types.QWindowStateChangeEvent,
     vtbl[].vtbl.clone = fcQWindowStateChangeEvent_vtable_callback_clone
   if not isNil(vtbl[].setAccepted):
     vtbl[].vtbl.setAccepted = fcQWindowStateChangeEvent_vtable_callback_setAccepted
-  let tmp = gen_qevent_types.QWindowStateChangeEvent(h: fcQWindowStateChangeEvent_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(oldState), isOverride))
+  let tmp = gen_qevent_types.QWindowStateChangeEvent(h: fcQWindowStateChangeEvent_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(oldState), isOverride), owned: true)
   fcQWindowStateChangeEvent_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQWindowStateChangeEvent_mvtbl = cQWindowStateChangeEventVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQWindowStateChangeEvent()[])](self.fcQWindowStateChangeEvent_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   clone: fcQWindowStateChangeEvent_method_callback_clone,
   setAccepted: fcQWindowStateChangeEvent_method_callback_setAccepted,
@@ -5571,13 +5591,11 @@ proc create*(T: type gen_qevent_types.QWindowStateChangeEvent,
   inst[].h = fcQWindowStateChangeEvent_new2(addr(cQWindowStateChangeEvent_mvtbl), csize_t(sizeof(pointer)), cint(oldState), isOverride)
   fcQWindowStateChangeEvent_vdata(inst[].h)[] = addr inst[]
 
-proc delete*(self: gen_qevent_types.QWindowStateChangeEvent) =
-  fcQWindowStateChangeEvent_delete(self.h)
 proc clone*(self: gen_qevent_types.QTouchEvent): gen_qevent_types.QTouchEvent =
-  gen_qevent_types.QTouchEvent(h: fcQTouchEvent_clone(self.h))
+  gen_qevent_types.QTouchEvent(h: fcQTouchEvent_clone(self.h), owned: false)
 
 proc target*(self: gen_qevent_types.QTouchEvent): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQTouchEvent_target(self.h))
+  gen_qobject_types.QObject(h: fcQTouchEvent_target(self.h), owned: false)
 
 proc touchPointStates*(self: gen_qevent_types.QTouchEvent): cint =
   cint(fcQTouchEvent_touchPointStates(self.h))
@@ -5587,7 +5605,7 @@ proc touchPoints*(self: gen_qevent_types.QTouchEvent): seq[gen_qeventpoint_types
   var vx_ret = newSeq[gen_qeventpoint_types.QEventPoint](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qeventpoint_types.QEventPoint(h: v_outCast[i])
+    vx_ret[i] = gen_qeventpoint_types.QEventPoint(h: v_outCast[i], owned: true)
   c_free(v_ma.data)
   vx_ret
 
@@ -5606,7 +5624,7 @@ type QTouchEventisUpdateEventProc* = proc(self: QTouchEvent): bool {.raises: [],
 type QTouchEventisEndEventProc* = proc(self: QTouchEvent): bool {.raises: [], gcsafe.}
 type QTouchEventsetTimestampProc* = proc(self: QTouchEvent, timestamp: culonglong): void {.raises: [], gcsafe.}
 type QTouchEventsetAcceptedProc* = proc(self: QTouchEvent, accepted: bool): void {.raises: [], gcsafe.}
-type QTouchEventVTable* = object
+type QTouchEventVTable* {.inheritable, pure.} = object
   vtbl: cQTouchEventVTable
   clone*: QTouchEventcloneProc
   isBeginEvent*: QTouchEventisBeginEventProc
@@ -5615,13 +5633,16 @@ type QTouchEventVTable* = object
   setTimestamp*: QTouchEventsetTimestampProc
   setAccepted*: QTouchEventsetAcceptedProc
 proc QTouchEventclone*(self: gen_qevent_types.QTouchEvent): gen_qevent_types.QTouchEvent =
-  gen_qevent_types.QTouchEvent(h: fcQTouchEvent_virtualbase_clone(self.h))
+  gen_qevent_types.QTouchEvent(h: fcQTouchEvent_virtualbase_clone(self.h), owned: false)
 
 proc fcQTouchEvent_vtable_callback_clone(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QTouchEventVTable](fcQTouchEvent_vdata(self)[])
   let self = QTouchEvent(h: self)
   var virtualReturn = vtbl[].clone(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QTouchEventisBeginEvent*(self: gen_qevent_types.QTouchEvent): bool =
   fcQTouchEvent_virtualbase_isBeginEvent(self.h)
@@ -5732,7 +5753,7 @@ proc create*(T: type gen_qevent_types.QTouchEvent,
     vtbl[].vtbl.setTimestamp = fcQTouchEvent_vtable_callback_setTimestamp
   if not isNil(vtbl[].setAccepted):
     vtbl[].vtbl.setAccepted = fcQTouchEvent_vtable_callback_setAccepted
-  let tmp = gen_qevent_types.QTouchEvent(h: fcQTouchEvent_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(eventType)))
+  let tmp = gen_qevent_types.QTouchEvent(h: fcQTouchEvent_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(eventType)), owned: true)
   fcQTouchEvent_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qevent_types.QTouchEvent,
@@ -5755,7 +5776,7 @@ proc create*(T: type gen_qevent_types.QTouchEvent,
     vtbl[].vtbl.setTimestamp = fcQTouchEvent_vtable_callback_setTimestamp
   if not isNil(vtbl[].setAccepted):
     vtbl[].vtbl.setAccepted = fcQTouchEvent_vtable_callback_setAccepted
-  let tmp = gen_qevent_types.QTouchEvent(h: fcQTouchEvent_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(eventType), device.h, cint(modifiers), cint(touchPointStates)))
+  let tmp = gen_qevent_types.QTouchEvent(h: fcQTouchEvent_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(eventType), device.h, cint(modifiers), cint(touchPointStates)), owned: true)
   fcQTouchEvent_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qevent_types.QTouchEvent,
@@ -5778,7 +5799,7 @@ proc create*(T: type gen_qevent_types.QTouchEvent,
     vtbl[].vtbl.setTimestamp = fcQTouchEvent_vtable_callback_setTimestamp
   if not isNil(vtbl[].setAccepted):
     vtbl[].vtbl.setAccepted = fcQTouchEvent_vtable_callback_setAccepted
-  let tmp = gen_qevent_types.QTouchEvent(h: fcQTouchEvent_new3(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(eventType), device.h))
+  let tmp = gen_qevent_types.QTouchEvent(h: fcQTouchEvent_new3(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(eventType), device.h), owned: true)
   fcQTouchEvent_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qevent_types.QTouchEvent,
@@ -5801,7 +5822,7 @@ proc create*(T: type gen_qevent_types.QTouchEvent,
     vtbl[].vtbl.setTimestamp = fcQTouchEvent_vtable_callback_setTimestamp
   if not isNil(vtbl[].setAccepted):
     vtbl[].vtbl.setAccepted = fcQTouchEvent_vtable_callback_setAccepted
-  let tmp = gen_qevent_types.QTouchEvent(h: fcQTouchEvent_new4(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(eventType), device.h, cint(modifiers)))
+  let tmp = gen_qevent_types.QTouchEvent(h: fcQTouchEvent_new4(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(eventType), device.h, cint(modifiers)), owned: true)
   fcQTouchEvent_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qevent_types.QTouchEvent,
@@ -5828,7 +5849,7 @@ proc create*(T: type gen_qevent_types.QTouchEvent,
     vtbl[].vtbl.setTimestamp = fcQTouchEvent_vtable_callback_setTimestamp
   if not isNil(vtbl[].setAccepted):
     vtbl[].vtbl.setAccepted = fcQTouchEvent_vtable_callback_setAccepted
-  let tmp = gen_qevent_types.QTouchEvent(h: fcQTouchEvent_new5(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(eventType), device.h, cint(modifiers), struct_miqt_array(len: csize_t(len(touchPoints)), data: if len(touchPoints) == 0: nil else: addr(touchPoints_CArray[0]))))
+  let tmp = gen_qevent_types.QTouchEvent(h: fcQTouchEvent_new5(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(eventType), device.h, cint(modifiers), struct_miqt_array(len: csize_t(len(touchPoints)), data: if len(touchPoints) == 0: nil else: addr(touchPoints_CArray[0]))), owned: true)
   fcQTouchEvent_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qevent_types.QTouchEvent,
@@ -5855,13 +5876,14 @@ proc create*(T: type gen_qevent_types.QTouchEvent,
     vtbl[].vtbl.setTimestamp = fcQTouchEvent_vtable_callback_setTimestamp
   if not isNil(vtbl[].setAccepted):
     vtbl[].vtbl.setAccepted = fcQTouchEvent_vtable_callback_setAccepted
-  let tmp = gen_qevent_types.QTouchEvent(h: fcQTouchEvent_new6(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(eventType), device.h, cint(modifiers), cint(touchPointStates), struct_miqt_array(len: csize_t(len(touchPoints)), data: if len(touchPoints) == 0: nil else: addr(touchPoints_CArray[0]))))
+  let tmp = gen_qevent_types.QTouchEvent(h: fcQTouchEvent_new6(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(eventType), device.h, cint(modifiers), cint(touchPointStates), struct_miqt_array(len: csize_t(len(touchPoints)), data: if len(touchPoints) == 0: nil else: addr(touchPoints_CArray[0]))), owned: true)
   fcQTouchEvent_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQTouchEvent_mvtbl = cQTouchEventVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQTouchEvent()[])](self.fcQTouchEvent_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   clone: fcQTouchEvent_method_callback_clone,
   isBeginEvent: fcQTouchEvent_method_callback_isBeginEvent,
@@ -5920,22 +5942,20 @@ proc create*(T: type gen_qevent_types.QTouchEvent,
   inst[].h = fcQTouchEvent_new6(addr(cQTouchEvent_mvtbl), csize_t(sizeof(pointer)), cint(eventType), device.h, cint(modifiers), cint(touchPointStates), struct_miqt_array(len: csize_t(len(touchPoints)), data: if len(touchPoints) == 0: nil else: addr(touchPoints_CArray[0])))
   fcQTouchEvent_vdata(inst[].h)[] = addr inst[]
 
-proc delete*(self: gen_qevent_types.QTouchEvent) =
-  fcQTouchEvent_delete(self.h)
 proc clone*(self: gen_qevent_types.QScrollPrepareEvent): gen_qevent_types.QScrollPrepareEvent =
-  gen_qevent_types.QScrollPrepareEvent(h: fcQScrollPrepareEvent_clone(self.h))
+  gen_qevent_types.QScrollPrepareEvent(h: fcQScrollPrepareEvent_clone(self.h), owned: false)
 
 proc startPos*(self: gen_qevent_types.QScrollPrepareEvent): gen_qpoint_types.QPointF =
-  gen_qpoint_types.QPointF(h: fcQScrollPrepareEvent_startPos(self.h))
+  gen_qpoint_types.QPointF(h: fcQScrollPrepareEvent_startPos(self.h), owned: true)
 
 proc viewportSize*(self: gen_qevent_types.QScrollPrepareEvent): gen_qsize_types.QSizeF =
-  gen_qsize_types.QSizeF(h: fcQScrollPrepareEvent_viewportSize(self.h))
+  gen_qsize_types.QSizeF(h: fcQScrollPrepareEvent_viewportSize(self.h), owned: true)
 
 proc contentPosRange*(self: gen_qevent_types.QScrollPrepareEvent): gen_qrect_types.QRectF =
-  gen_qrect_types.QRectF(h: fcQScrollPrepareEvent_contentPosRange(self.h))
+  gen_qrect_types.QRectF(h: fcQScrollPrepareEvent_contentPosRange(self.h), owned: true)
 
 proc contentPos*(self: gen_qevent_types.QScrollPrepareEvent): gen_qpoint_types.QPointF =
-  gen_qpoint_types.QPointF(h: fcQScrollPrepareEvent_contentPos(self.h))
+  gen_qpoint_types.QPointF(h: fcQScrollPrepareEvent_contentPos(self.h), owned: true)
 
 proc setViewportSize*(self: gen_qevent_types.QScrollPrepareEvent, size: gen_qsize_types.QSizeF): void =
   fcQScrollPrepareEvent_setViewportSize(self.h, size.h)
@@ -5948,18 +5968,21 @@ proc setContentPos*(self: gen_qevent_types.QScrollPrepareEvent, pos: gen_qpoint_
 
 type QScrollPrepareEventcloneProc* = proc(self: QScrollPrepareEvent): gen_qevent_types.QScrollPrepareEvent {.raises: [], gcsafe.}
 type QScrollPrepareEventsetAcceptedProc* = proc(self: QScrollPrepareEvent, accepted: bool): void {.raises: [], gcsafe.}
-type QScrollPrepareEventVTable* = object
+type QScrollPrepareEventVTable* {.inheritable, pure.} = object
   vtbl: cQScrollPrepareEventVTable
   clone*: QScrollPrepareEventcloneProc
   setAccepted*: QScrollPrepareEventsetAcceptedProc
 proc QScrollPrepareEventclone*(self: gen_qevent_types.QScrollPrepareEvent): gen_qevent_types.QScrollPrepareEvent =
-  gen_qevent_types.QScrollPrepareEvent(h: fcQScrollPrepareEvent_virtualbase_clone(self.h))
+  gen_qevent_types.QScrollPrepareEvent(h: fcQScrollPrepareEvent_virtualbase_clone(self.h), owned: false)
 
 proc fcQScrollPrepareEvent_vtable_callback_clone(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QScrollPrepareEventVTable](fcQScrollPrepareEvent_vdata(self)[])
   let self = QScrollPrepareEvent(h: self)
   var virtualReturn = vtbl[].clone(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QScrollPrepareEventsetAccepted*(self: gen_qevent_types.QScrollPrepareEvent, accepted: bool): void =
   fcQScrollPrepareEvent_virtualbase_setAccepted(self.h, accepted)
@@ -5998,13 +6021,14 @@ proc create*(T: type gen_qevent_types.QScrollPrepareEvent,
     vtbl[].vtbl.clone = fcQScrollPrepareEvent_vtable_callback_clone
   if not isNil(vtbl[].setAccepted):
     vtbl[].vtbl.setAccepted = fcQScrollPrepareEvent_vtable_callback_setAccepted
-  let tmp = gen_qevent_types.QScrollPrepareEvent(h: fcQScrollPrepareEvent_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), startPos.h))
+  let tmp = gen_qevent_types.QScrollPrepareEvent(h: fcQScrollPrepareEvent_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), startPos.h), owned: true)
   fcQScrollPrepareEvent_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQScrollPrepareEvent_mvtbl = cQScrollPrepareEventVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQScrollPrepareEvent()[])](self.fcQScrollPrepareEvent_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   clone: fcQScrollPrepareEvent_method_callback_clone,
   setAccepted: fcQScrollPrepareEvent_method_callback_setAccepted,
@@ -6016,34 +6040,35 @@ proc create*(T: type gen_qevent_types.QScrollPrepareEvent,
   inst[].h = fcQScrollPrepareEvent_new(addr(cQScrollPrepareEvent_mvtbl), csize_t(sizeof(pointer)), startPos.h)
   fcQScrollPrepareEvent_vdata(inst[].h)[] = addr inst[]
 
-proc delete*(self: gen_qevent_types.QScrollPrepareEvent) =
-  fcQScrollPrepareEvent_delete(self.h)
 proc clone*(self: gen_qevent_types.QScrollEvent): gen_qevent_types.QScrollEvent =
-  gen_qevent_types.QScrollEvent(h: fcQScrollEvent_clone(self.h))
+  gen_qevent_types.QScrollEvent(h: fcQScrollEvent_clone(self.h), owned: false)
 
 proc contentPos*(self: gen_qevent_types.QScrollEvent): gen_qpoint_types.QPointF =
-  gen_qpoint_types.QPointF(h: fcQScrollEvent_contentPos(self.h))
+  gen_qpoint_types.QPointF(h: fcQScrollEvent_contentPos(self.h), owned: true)
 
 proc overshootDistance*(self: gen_qevent_types.QScrollEvent): gen_qpoint_types.QPointF =
-  gen_qpoint_types.QPointF(h: fcQScrollEvent_overshootDistance(self.h))
+  gen_qpoint_types.QPointF(h: fcQScrollEvent_overshootDistance(self.h), owned: true)
 
 proc scrollState*(self: gen_qevent_types.QScrollEvent): cint =
   cint(fcQScrollEvent_scrollState(self.h))
 
 type QScrollEventcloneProc* = proc(self: QScrollEvent): gen_qevent_types.QScrollEvent {.raises: [], gcsafe.}
 type QScrollEventsetAcceptedProc* = proc(self: QScrollEvent, accepted: bool): void {.raises: [], gcsafe.}
-type QScrollEventVTable* = object
+type QScrollEventVTable* {.inheritable, pure.} = object
   vtbl: cQScrollEventVTable
   clone*: QScrollEventcloneProc
   setAccepted*: QScrollEventsetAcceptedProc
 proc QScrollEventclone*(self: gen_qevent_types.QScrollEvent): gen_qevent_types.QScrollEvent =
-  gen_qevent_types.QScrollEvent(h: fcQScrollEvent_virtualbase_clone(self.h))
+  gen_qevent_types.QScrollEvent(h: fcQScrollEvent_virtualbase_clone(self.h), owned: false)
 
 proc fcQScrollEvent_vtable_callback_clone(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QScrollEventVTable](fcQScrollEvent_vdata(self)[])
   let self = QScrollEvent(h: self)
   var virtualReturn = vtbl[].clone(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QScrollEventsetAccepted*(self: gen_qevent_types.QScrollEvent, accepted: bool): void =
   fcQScrollEvent_virtualbase_setAccepted(self.h, accepted)
@@ -6082,13 +6107,14 @@ proc create*(T: type gen_qevent_types.QScrollEvent,
     vtbl[].vtbl.clone = fcQScrollEvent_vtable_callback_clone
   if not isNil(vtbl[].setAccepted):
     vtbl[].vtbl.setAccepted = fcQScrollEvent_vtable_callback_setAccepted
-  let tmp = gen_qevent_types.QScrollEvent(h: fcQScrollEvent_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), contentPos.h, overshoot.h, cint(scrollState)))
+  let tmp = gen_qevent_types.QScrollEvent(h: fcQScrollEvent_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), contentPos.h, overshoot.h, cint(scrollState)), owned: true)
   fcQScrollEvent_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQScrollEvent_mvtbl = cQScrollEventVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQScrollEvent()[])](self.fcQScrollEvent_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   clone: fcQScrollEvent_method_callback_clone,
   setAccepted: fcQScrollEvent_method_callback_setAccepted,
@@ -6100,31 +6126,32 @@ proc create*(T: type gen_qevent_types.QScrollEvent,
   inst[].h = fcQScrollEvent_new(addr(cQScrollEvent_mvtbl), csize_t(sizeof(pointer)), contentPos.h, overshoot.h, cint(scrollState))
   fcQScrollEvent_vdata(inst[].h)[] = addr inst[]
 
-proc delete*(self: gen_qevent_types.QScrollEvent) =
-  fcQScrollEvent_delete(self.h)
 proc clone*(self: gen_qevent_types.QScreenOrientationChangeEvent): gen_qevent_types.QScreenOrientationChangeEvent =
-  gen_qevent_types.QScreenOrientationChangeEvent(h: fcQScreenOrientationChangeEvent_clone(self.h))
+  gen_qevent_types.QScreenOrientationChangeEvent(h: fcQScreenOrientationChangeEvent_clone(self.h), owned: false)
 
 proc screen*(self: gen_qevent_types.QScreenOrientationChangeEvent): gen_qscreen_types.QScreen =
-  gen_qscreen_types.QScreen(h: fcQScreenOrientationChangeEvent_screen(self.h))
+  gen_qscreen_types.QScreen(h: fcQScreenOrientationChangeEvent_screen(self.h), owned: false)
 
 proc orientation*(self: gen_qevent_types.QScreenOrientationChangeEvent): cint =
   cint(fcQScreenOrientationChangeEvent_orientation(self.h))
 
 type QScreenOrientationChangeEventcloneProc* = proc(self: QScreenOrientationChangeEvent): gen_qevent_types.QScreenOrientationChangeEvent {.raises: [], gcsafe.}
 type QScreenOrientationChangeEventsetAcceptedProc* = proc(self: QScreenOrientationChangeEvent, accepted: bool): void {.raises: [], gcsafe.}
-type QScreenOrientationChangeEventVTable* = object
+type QScreenOrientationChangeEventVTable* {.inheritable, pure.} = object
   vtbl: cQScreenOrientationChangeEventVTable
   clone*: QScreenOrientationChangeEventcloneProc
   setAccepted*: QScreenOrientationChangeEventsetAcceptedProc
 proc QScreenOrientationChangeEventclone*(self: gen_qevent_types.QScreenOrientationChangeEvent): gen_qevent_types.QScreenOrientationChangeEvent =
-  gen_qevent_types.QScreenOrientationChangeEvent(h: fcQScreenOrientationChangeEvent_virtualbase_clone(self.h))
+  gen_qevent_types.QScreenOrientationChangeEvent(h: fcQScreenOrientationChangeEvent_virtualbase_clone(self.h), owned: false)
 
 proc fcQScreenOrientationChangeEvent_vtable_callback_clone(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QScreenOrientationChangeEventVTable](fcQScreenOrientationChangeEvent_vdata(self)[])
   let self = QScreenOrientationChangeEvent(h: self)
   var virtualReturn = vtbl[].clone(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QScreenOrientationChangeEventsetAccepted*(self: gen_qevent_types.QScreenOrientationChangeEvent, accepted: bool): void =
   fcQScreenOrientationChangeEvent_virtualbase_setAccepted(self.h, accepted)
@@ -6163,13 +6190,14 @@ proc create*(T: type gen_qevent_types.QScreenOrientationChangeEvent,
     vtbl[].vtbl.clone = fcQScreenOrientationChangeEvent_vtable_callback_clone
   if not isNil(vtbl[].setAccepted):
     vtbl[].vtbl.setAccepted = fcQScreenOrientationChangeEvent_vtable_callback_setAccepted
-  let tmp = gen_qevent_types.QScreenOrientationChangeEvent(h: fcQScreenOrientationChangeEvent_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), screen.h, cint(orientation)))
+  let tmp = gen_qevent_types.QScreenOrientationChangeEvent(h: fcQScreenOrientationChangeEvent_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), screen.h, cint(orientation)), owned: true)
   fcQScreenOrientationChangeEvent_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQScreenOrientationChangeEvent_mvtbl = cQScreenOrientationChangeEventVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQScreenOrientationChangeEvent()[])](self.fcQScreenOrientationChangeEvent_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   clone: fcQScreenOrientationChangeEvent_method_callback_clone,
   setAccepted: fcQScreenOrientationChangeEvent_method_callback_setAccepted,
@@ -6181,28 +6209,29 @@ proc create*(T: type gen_qevent_types.QScreenOrientationChangeEvent,
   inst[].h = fcQScreenOrientationChangeEvent_new(addr(cQScreenOrientationChangeEvent_mvtbl), csize_t(sizeof(pointer)), screen.h, cint(orientation))
   fcQScreenOrientationChangeEvent_vdata(inst[].h)[] = addr inst[]
 
-proc delete*(self: gen_qevent_types.QScreenOrientationChangeEvent) =
-  fcQScreenOrientationChangeEvent_delete(self.h)
 proc clone*(self: gen_qevent_types.QApplicationStateChangeEvent): gen_qevent_types.QApplicationStateChangeEvent =
-  gen_qevent_types.QApplicationStateChangeEvent(h: fcQApplicationStateChangeEvent_clone(self.h))
+  gen_qevent_types.QApplicationStateChangeEvent(h: fcQApplicationStateChangeEvent_clone(self.h), owned: false)
 
 proc applicationState*(self: gen_qevent_types.QApplicationStateChangeEvent): cint =
   cint(fcQApplicationStateChangeEvent_applicationState(self.h))
 
 type QApplicationStateChangeEventcloneProc* = proc(self: QApplicationStateChangeEvent): gen_qevent_types.QApplicationStateChangeEvent {.raises: [], gcsafe.}
 type QApplicationStateChangeEventsetAcceptedProc* = proc(self: QApplicationStateChangeEvent, accepted: bool): void {.raises: [], gcsafe.}
-type QApplicationStateChangeEventVTable* = object
+type QApplicationStateChangeEventVTable* {.inheritable, pure.} = object
   vtbl: cQApplicationStateChangeEventVTable
   clone*: QApplicationStateChangeEventcloneProc
   setAccepted*: QApplicationStateChangeEventsetAcceptedProc
 proc QApplicationStateChangeEventclone*(self: gen_qevent_types.QApplicationStateChangeEvent): gen_qevent_types.QApplicationStateChangeEvent =
-  gen_qevent_types.QApplicationStateChangeEvent(h: fcQApplicationStateChangeEvent_virtualbase_clone(self.h))
+  gen_qevent_types.QApplicationStateChangeEvent(h: fcQApplicationStateChangeEvent_virtualbase_clone(self.h), owned: false)
 
 proc fcQApplicationStateChangeEvent_vtable_callback_clone(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QApplicationStateChangeEventVTable](fcQApplicationStateChangeEvent_vdata(self)[])
   let self = QApplicationStateChangeEvent(h: self)
   var virtualReturn = vtbl[].clone(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QApplicationStateChangeEventsetAccepted*(self: gen_qevent_types.QApplicationStateChangeEvent, accepted: bool): void =
   fcQApplicationStateChangeEvent_virtualbase_setAccepted(self.h, accepted)
@@ -6241,13 +6270,14 @@ proc create*(T: type gen_qevent_types.QApplicationStateChangeEvent,
     vtbl[].vtbl.clone = fcQApplicationStateChangeEvent_vtable_callback_clone
   if not isNil(vtbl[].setAccepted):
     vtbl[].vtbl.setAccepted = fcQApplicationStateChangeEvent_vtable_callback_setAccepted
-  let tmp = gen_qevent_types.QApplicationStateChangeEvent(h: fcQApplicationStateChangeEvent_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(state)))
+  let tmp = gen_qevent_types.QApplicationStateChangeEvent(h: fcQApplicationStateChangeEvent_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(state)), owned: true)
   fcQApplicationStateChangeEvent_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQApplicationStateChangeEvent_mvtbl = cQApplicationStateChangeEventVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQApplicationStateChangeEvent()[])](self.fcQApplicationStateChangeEvent_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   clone: fcQApplicationStateChangeEvent_method_callback_clone,
   setAccepted: fcQApplicationStateChangeEvent_method_callback_setAccepted,
@@ -6259,22 +6289,18 @@ proc create*(T: type gen_qevent_types.QApplicationStateChangeEvent,
   inst[].h = fcQApplicationStateChangeEvent_new(addr(cQApplicationStateChangeEvent_mvtbl), csize_t(sizeof(pointer)), cint(state))
   fcQApplicationStateChangeEvent_vdata(inst[].h)[] = addr inst[]
 
-proc delete*(self: gen_qevent_types.QApplicationStateChangeEvent) =
-  fcQApplicationStateChangeEvent_delete(self.h)
 proc operatorAssign*(self: gen_qevent_types.QInputMethodEventAttribute, param1: gen_qevent_types.QInputMethodEventAttribute): void =
   fcQInputMethodEventAttribute_operatorAssign(self.h, param1.h)
 
 proc create*(T: type gen_qevent_types.QInputMethodEventAttribute,
     typ: cint, s: cint, l: cint, val: gen_qvariant_types.QVariant): gen_qevent_types.QInputMethodEventAttribute =
-  let tmp = gen_qevent_types.QInputMethodEventAttribute(h: fcQInputMethodEventAttribute_new(cint(typ), s, l, val.h))
+  let tmp = gen_qevent_types.QInputMethodEventAttribute(h: fcQInputMethodEventAttribute_new(cint(typ), s, l, val.h), owned: true)
   tmp
 proc create*(T: type gen_qevent_types.QInputMethodEventAttribute,
     typ: cint, s: cint, l: cint): gen_qevent_types.QInputMethodEventAttribute =
-  let tmp = gen_qevent_types.QInputMethodEventAttribute(h: fcQInputMethodEventAttribute_new2(cint(typ), s, l))
+  let tmp = gen_qevent_types.QInputMethodEventAttribute(h: fcQInputMethodEventAttribute_new2(cint(typ), s, l), owned: true)
   tmp
 proc create*(T: type gen_qevent_types.QInputMethodEventAttribute,
     param1: gen_qevent_types.QInputMethodEventAttribute): gen_qevent_types.QInputMethodEventAttribute =
-  let tmp = gen_qevent_types.QInputMethodEventAttribute(h: fcQInputMethodEventAttribute_new3(param1.h))
+  let tmp = gen_qevent_types.QInputMethodEventAttribute(h: fcQInputMethodEventAttribute_new3(param1.h), owned: true)
   tmp
-proc delete*(self: gen_qevent_types.QInputMethodEventAttribute) =
-  fcQInputMethodEventAttribute_delete(self.h)

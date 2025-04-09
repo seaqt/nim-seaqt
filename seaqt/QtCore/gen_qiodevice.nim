@@ -32,7 +32,7 @@ func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
     else:
       copyMem(addr result[0], v.data, len)
 
-const cflags = gorge("pkg-config --cflags Qt6Core")  & " -fPIC"
+const cflags = gorge("pkg-config --cflags Qt6Core") & " -fPIC"
 {.compile("gen_qiodevice.cpp", cflags).}
 
 
@@ -180,10 +180,9 @@ proc fcQIODevice_protectedbase_isSignalConnected(self: pointer, signal: pointer)
 proc fcQIODevice_new(vtbl: pointer, vdata: csize_t): ptr cQIODevice {.importc: "QIODevice_new".}
 proc fcQIODevice_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQIODevice {.importc: "QIODevice_new2".}
 proc fcQIODevice_staticMetaObject(): pointer {.importc: "QIODevice_staticMetaObject".}
-proc fcQIODevice_delete(self: pointer) {.importc: "QIODevice_delete".}
 
 proc metaObject*(self: gen_qiodevice_types.QIODevice): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQIODevice_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQIODevice_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qiodevice_types.QIODevice, param1: cstring): pointer =
   fcQIODevice_metacast(self.h, param1)
@@ -505,7 +504,7 @@ type QIODevicechildEventProc* = proc(self: QIODevice, event: gen_qcoreevent_type
 type QIODevicecustomEventProc* = proc(self: QIODevice, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QIODeviceconnectNotifyProc* = proc(self: QIODevice, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QIODevicedisconnectNotifyProc* = proc(self: QIODevice, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
-type QIODeviceVTable* = object
+type QIODeviceVTable* {.inheritable, pure.} = object
   vtbl: cQIODeviceVTable
   metaObject*: QIODevicemetaObjectProc
   metacast*: QIODevicemetacastProc
@@ -535,13 +534,16 @@ type QIODeviceVTable* = object
   connectNotify*: QIODeviceconnectNotifyProc
   disconnectNotify*: QIODevicedisconnectNotifyProc
 proc QIODevicemetaObject*(self: gen_qiodevice_types.QIODevice): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQIODevice_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQIODevice_virtualbase_metaObject(self.h), owned: false)
 
 proc fcQIODevice_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QIODeviceVTable](fcQIODevice_vdata(self)[])
   let self = QIODevice(h: self)
   var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QIODevicemetacast*(self: gen_qiodevice_types.QIODevice, param1: cstring): pointer =
   fcQIODevice_virtualbase_metacast(self.h, param1)
@@ -728,7 +730,7 @@ proc QIODeviceevent*(self: gen_qiodevice_types.QIODevice, event: gen_qcoreevent_
 proc fcQIODevice_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QIODeviceVTable](fcQIODevice_vdata(self)[])
   let self = QIODevice(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
@@ -738,8 +740,8 @@ proc QIODeviceeventFilter*(self: gen_qiodevice_types.QIODevice, watched: gen_qob
 proc fcQIODevice_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QIODeviceVTable](fcQIODevice_vdata(self)[])
   let self = QIODevice(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
@@ -749,7 +751,7 @@ proc QIODevicetimerEvent*(self: gen_qiodevice_types.QIODevice, event: gen_qcoree
 proc fcQIODevice_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QIODeviceVTable](fcQIODevice_vdata(self)[])
   let self = QIODevice(h: self)
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
 proc QIODevicechildEvent*(self: gen_qiodevice_types.QIODevice, event: gen_qcoreevent_types.QChildEvent): void =
@@ -758,7 +760,7 @@ proc QIODevicechildEvent*(self: gen_qiodevice_types.QIODevice, event: gen_qcoree
 proc fcQIODevice_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QIODeviceVTable](fcQIODevice_vdata(self)[])
   let self = QIODevice(h: self)
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
 proc QIODevicecustomEvent*(self: gen_qiodevice_types.QIODevice, event: gen_qcoreevent_types.QEvent): void =
@@ -767,7 +769,7 @@ proc QIODevicecustomEvent*(self: gen_qiodevice_types.QIODevice, event: gen_qcore
 proc fcQIODevice_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QIODeviceVTable](fcQIODevice_vdata(self)[])
   let self = QIODevice(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
 proc QIODeviceconnectNotify*(self: gen_qiodevice_types.QIODevice, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -776,7 +778,7 @@ proc QIODeviceconnectNotify*(self: gen_qiodevice_types.QIODevice, signal: gen_qm
 proc fcQIODevice_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QIODeviceVTable](fcQIODevice_vdata(self)[])
   let self = QIODevice(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
 proc QIODevicedisconnectNotify*(self: gen_qiodevice_types.QIODevice, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -785,7 +787,7 @@ proc QIODevicedisconnectNotify*(self: gen_qiodevice_types.QIODevice, signal: gen
 proc fcQIODevice_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QIODeviceVTable](fcQIODevice_vdata(self)[])
   let self = QIODevice(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
 type VirtualQIODevice* {.inheritable.} = ref object of QIODevice
@@ -948,7 +950,7 @@ method event*(self: VirtualQIODevice, event: gen_qcoreevent_types.QEvent): bool 
   QIODeviceevent(self[], event)
 proc fcQIODevice_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQIODevice](fcQIODevice_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
@@ -956,8 +958,8 @@ method eventFilter*(self: VirtualQIODevice, watched: gen_qobject_types.QObject, 
   QIODeviceeventFilter(self[], watched, event)
 proc fcQIODevice_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQIODevice](fcQIODevice_vdata(self)[])
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
@@ -965,35 +967,35 @@ method timerEvent*(self: VirtualQIODevice, event: gen_qcoreevent_types.QTimerEve
   QIODevicetimerEvent(self[], event)
 proc fcQIODevice_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQIODevice](fcQIODevice_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
 method childEvent*(self: VirtualQIODevice, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
   QIODevicechildEvent(self[], event)
 proc fcQIODevice_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQIODevice](fcQIODevice_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
 method customEvent*(self: VirtualQIODevice, event: gen_qcoreevent_types.QEvent): void {.base.} =
   QIODevicecustomEvent(self[], event)
 proc fcQIODevice_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQIODevice](fcQIODevice_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
 method connectNotify*(self: VirtualQIODevice, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
   QIODeviceconnectNotify(self[], signal)
 proc fcQIODevice_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQIODevice](fcQIODevice_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
 method disconnectNotify*(self: VirtualQIODevice, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
   QIODevicedisconnectNotify(self[], signal)
 proc fcQIODevice_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQIODevice](fcQIODevice_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
 
 proc setOpenMode*(self: gen_qiodevice_types.QIODevice, openMode: cint): void =
@@ -1003,7 +1005,7 @@ proc setErrorString*(self: gen_qiodevice_types.QIODevice, errorString: string): 
   fcQIODevice_protectedbase_setErrorString(self.h, struct_miqt_string(data: if len(errorString) > 0: addr errorString[0] else: nil, len: csize_t(len(errorString))))
 
 proc sender*(self: gen_qiodevice_types.QIODevice): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQIODevice_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQIODevice_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qiodevice_types.QIODevice): cint =
   fcQIODevice_protectedbase_senderSignalIndex(self.h)
@@ -1075,7 +1077,7 @@ proc create*(T: type gen_qiodevice_types.QIODevice,
     vtbl[].vtbl.connectNotify = fcQIODevice_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQIODevice_vtable_callback_disconnectNotify
-  let tmp = gen_qiodevice_types.QIODevice(h: fcQIODevice_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))))
+  let tmp = gen_qiodevice_types.QIODevice(h: fcQIODevice_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))), owned: true)
   fcQIODevice_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qiodevice_types.QIODevice,
@@ -1140,13 +1142,14 @@ proc create*(T: type gen_qiodevice_types.QIODevice,
     vtbl[].vtbl.connectNotify = fcQIODevice_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQIODevice_vtable_callback_disconnectNotify
-  let tmp = gen_qiodevice_types.QIODevice(h: fcQIODevice_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h))
+  let tmp = gen_qiodevice_types.QIODevice(h: fcQIODevice_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h), owned: true)
   fcQIODevice_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQIODevice_mvtbl = cQIODeviceVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQIODevice()[])](self.fcQIODevice_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   metaObject: fcQIODevice_method_callback_metaObject,
   metacast: fcQIODevice_method_callback_metacast,
@@ -1191,5 +1194,3 @@ proc create*(T: type gen_qiodevice_types.QIODevice,
 
 proc staticMetaObject*(_: type gen_qiodevice_types.QIODevice): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQIODevice_staticMetaObject())
-proc delete*(self: gen_qiodevice_types.QIODevice) =
-  fcQIODevice_delete(self.h)

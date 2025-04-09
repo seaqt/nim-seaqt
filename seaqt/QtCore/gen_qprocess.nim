@@ -32,9 +32,6 @@ func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
     else:
       copyMem(addr result[0], v.data, len)
 
-const cflags = gorge("pkg-config --cflags Qt6Core")  & " -fPIC"
-{.compile("gen_qprocess.cpp", cflags).}
-
 
 type QProcessEnvironmentInitializationEnum* = distinct cint
 template InheritFromParent*(_: type QProcessEnvironmentInitializationEnum): untyped = 0
@@ -116,7 +113,6 @@ proc fcQProcessEnvironment_value2(self: pointer, name: struct_miqt_string, defau
 proc fcQProcessEnvironment_new(): ptr cQProcessEnvironment {.importc: "QProcessEnvironment_new".}
 proc fcQProcessEnvironment_new2(param1: cint): ptr cQProcessEnvironment {.importc: "QProcessEnvironment_new2".}
 proc fcQProcessEnvironment_new3(other: pointer): ptr cQProcessEnvironment {.importc: "QProcessEnvironment_new3".}
-proc fcQProcessEnvironment_delete(self: pointer) {.importc: "QProcessEnvironment_delete".}
 proc fcQProcess_metaObject(self: pointer): pointer {.importc: "QProcess_metaObject".}
 proc fcQProcess_metacast(self: pointer, param1: cstring): pointer {.importc: "QProcess_metacast".}
 proc fcQProcess_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QProcess_metacall".}
@@ -257,7 +253,6 @@ proc fcQProcess_protectedbase_isSignalConnected(self: pointer, signal: pointer):
 proc fcQProcess_new(vtbl: pointer, vdata: csize_t): ptr cQProcess {.importc: "QProcess_new".}
 proc fcQProcess_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQProcess {.importc: "QProcess_new2".}
 proc fcQProcess_staticMetaObject(): pointer {.importc: "QProcess_staticMetaObject".}
-proc fcQProcess_delete(self: pointer) {.importc: "QProcess_delete".}
 
 proc operatorAssign*(self: gen_qprocess_types.QProcessEnvironment, other: gen_qprocess_types.QProcessEnvironment): void =
   fcQProcessEnvironment_operatorAssign(self.h, other.h)
@@ -323,7 +318,7 @@ proc insert*(self: gen_qprocess_types.QProcessEnvironment, e: gen_qprocess_types
   fcQProcessEnvironment_insertWithQProcessEnvironment(self.h, e.h)
 
 proc systemEnvironment*(_: type gen_qprocess_types.QProcessEnvironment): gen_qprocess_types.QProcessEnvironment =
-  gen_qprocess_types.QProcessEnvironment(h: fcQProcessEnvironment_systemEnvironment())
+  gen_qprocess_types.QProcessEnvironment(h: fcQProcessEnvironment_systemEnvironment(), owned: true)
 
 proc value*(self: gen_qprocess_types.QProcessEnvironment, name: string, defaultValue: string): string =
   let v_ms = fcQProcessEnvironment_value2(self.h, struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), struct_miqt_string(data: if len(defaultValue) > 0: addr defaultValue[0] else: nil, len: csize_t(len(defaultValue))))
@@ -332,20 +327,18 @@ proc value*(self: gen_qprocess_types.QProcessEnvironment, name: string, defaultV
   vx_ret
 
 proc create*(T: type gen_qprocess_types.QProcessEnvironment): gen_qprocess_types.QProcessEnvironment =
-  let tmp = gen_qprocess_types.QProcessEnvironment(h: fcQProcessEnvironment_new())
+  let tmp = gen_qprocess_types.QProcessEnvironment(h: fcQProcessEnvironment_new(), owned: true)
   tmp
 proc create*(T: type gen_qprocess_types.QProcessEnvironment,
     param1: cint): gen_qprocess_types.QProcessEnvironment =
-  let tmp = gen_qprocess_types.QProcessEnvironment(h: fcQProcessEnvironment_new2(cint(param1)))
+  let tmp = gen_qprocess_types.QProcessEnvironment(h: fcQProcessEnvironment_new2(cint(param1)), owned: true)
   tmp
 proc create*(T: type gen_qprocess_types.QProcessEnvironment,
     other: gen_qprocess_types.QProcessEnvironment): gen_qprocess_types.QProcessEnvironment =
-  let tmp = gen_qprocess_types.QProcessEnvironment(h: fcQProcessEnvironment_new3(other.h))
+  let tmp = gen_qprocess_types.QProcessEnvironment(h: fcQProcessEnvironment_new3(other.h), owned: true)
   tmp
-proc delete*(self: gen_qprocess_types.QProcessEnvironment) =
-  fcQProcessEnvironment_delete(self.h)
 proc metaObject*(self: gen_qprocess_types.QProcess): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQProcess_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQProcess_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qprocess_types.QProcess, param1: cstring): pointer =
   fcQProcess_metacast(self.h, param1)
@@ -470,7 +463,7 @@ proc setProcessEnvironment*(self: gen_qprocess_types.QProcess, environment: gen_
   fcQProcess_setProcessEnvironment(self.h, environment.h)
 
 proc processEnvironment*(self: gen_qprocess_types.QProcess): gen_qprocess_types.QProcessEnvironment =
-  gen_qprocess_types.QProcessEnvironment(h: fcQProcess_processEnvironment(self.h))
+  gen_qprocess_types.QProcessEnvironment(h: fcQProcess_processEnvironment(self.h), owned: true)
 
 proc error*(self: gen_qprocess_types.QProcess): cint =
   cint(fcQProcess_error(self.h))
@@ -714,7 +707,7 @@ type QProcesschildEventProc* = proc(self: QProcess, event: gen_qcoreevent_types.
 type QProcesscustomEventProc* = proc(self: QProcess, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QProcessconnectNotifyProc* = proc(self: QProcess, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QProcessdisconnectNotifyProc* = proc(self: QProcess, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
-type QProcessVTable* = object
+type QProcessVTable* {.inheritable, pure.} = object
   vtbl: cQProcessVTable
   metaObject*: QProcessmetaObjectProc
   metacast*: QProcessmetacastProc
@@ -744,13 +737,16 @@ type QProcessVTable* = object
   connectNotify*: QProcessconnectNotifyProc
   disconnectNotify*: QProcessdisconnectNotifyProc
 proc QProcessmetaObject*(self: gen_qprocess_types.QProcess): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQProcess_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQProcess_virtualbase_metaObject(self.h), owned: false)
 
 proc fcQProcess_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QProcessVTable](fcQProcess_vdata(self)[])
   let self = QProcess(h: self)
   var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QProcessmetacast*(self: gen_qprocess_types.QProcess, param1: cstring): pointer =
   fcQProcess_virtualbase_metacast(self.h, param1)
@@ -943,7 +939,7 @@ proc QProcessevent*(self: gen_qprocess_types.QProcess, event: gen_qcoreevent_typ
 proc fcQProcess_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QProcessVTable](fcQProcess_vdata(self)[])
   let self = QProcess(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
@@ -953,8 +949,8 @@ proc QProcesseventFilter*(self: gen_qprocess_types.QProcess, watched: gen_qobjec
 proc fcQProcess_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QProcessVTable](fcQProcess_vdata(self)[])
   let self = QProcess(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
@@ -964,7 +960,7 @@ proc QProcesstimerEvent*(self: gen_qprocess_types.QProcess, event: gen_qcoreeven
 proc fcQProcess_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QProcessVTable](fcQProcess_vdata(self)[])
   let self = QProcess(h: self)
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
 proc QProcesschildEvent*(self: gen_qprocess_types.QProcess, event: gen_qcoreevent_types.QChildEvent): void =
@@ -973,7 +969,7 @@ proc QProcesschildEvent*(self: gen_qprocess_types.QProcess, event: gen_qcoreeven
 proc fcQProcess_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QProcessVTable](fcQProcess_vdata(self)[])
   let self = QProcess(h: self)
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
 proc QProcesscustomEvent*(self: gen_qprocess_types.QProcess, event: gen_qcoreevent_types.QEvent): void =
@@ -982,7 +978,7 @@ proc QProcesscustomEvent*(self: gen_qprocess_types.QProcess, event: gen_qcoreeve
 proc fcQProcess_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QProcessVTable](fcQProcess_vdata(self)[])
   let self = QProcess(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
 proc QProcessconnectNotify*(self: gen_qprocess_types.QProcess, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -991,7 +987,7 @@ proc QProcessconnectNotify*(self: gen_qprocess_types.QProcess, signal: gen_qmeta
 proc fcQProcess_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QProcessVTable](fcQProcess_vdata(self)[])
   let self = QProcess(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
 proc QProcessdisconnectNotify*(self: gen_qprocess_types.QProcess, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -1000,7 +996,7 @@ proc QProcessdisconnectNotify*(self: gen_qprocess_types.QProcess, signal: gen_qm
 proc fcQProcess_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QProcessVTable](fcQProcess_vdata(self)[])
   let self = QProcess(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
 type VirtualQProcess* {.inheritable.} = ref object of QProcess
@@ -1163,7 +1159,7 @@ method event*(self: VirtualQProcess, event: gen_qcoreevent_types.QEvent): bool {
   QProcessevent(self[], event)
 proc fcQProcess_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQProcess](fcQProcess_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
@@ -1171,8 +1167,8 @@ method eventFilter*(self: VirtualQProcess, watched: gen_qobject_types.QObject, e
   QProcesseventFilter(self[], watched, event)
 proc fcQProcess_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQProcess](fcQProcess_vdata(self)[])
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
@@ -1180,35 +1176,35 @@ method timerEvent*(self: VirtualQProcess, event: gen_qcoreevent_types.QTimerEven
   QProcesstimerEvent(self[], event)
 proc fcQProcess_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQProcess](fcQProcess_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
 method childEvent*(self: VirtualQProcess, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
   QProcesschildEvent(self[], event)
 proc fcQProcess_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQProcess](fcQProcess_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
 method customEvent*(self: VirtualQProcess, event: gen_qcoreevent_types.QEvent): void {.base.} =
   QProcesscustomEvent(self[], event)
 proc fcQProcess_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQProcess](fcQProcess_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
 method connectNotify*(self: VirtualQProcess, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
   QProcessconnectNotify(self[], signal)
 proc fcQProcess_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQProcess](fcQProcess_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
 method disconnectNotify*(self: VirtualQProcess, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
   QProcessdisconnectNotify(self[], signal)
 proc fcQProcess_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQProcess](fcQProcess_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
 
 proc setProcessState*(self: gen_qprocess_types.QProcess, state: cint): void =
@@ -1221,7 +1217,7 @@ proc setErrorString*(self: gen_qprocess_types.QProcess, errorString: string): vo
   fcQProcess_protectedbase_setErrorString(self.h, struct_miqt_string(data: if len(errorString) > 0: addr errorString[0] else: nil, len: csize_t(len(errorString))))
 
 proc sender*(self: gen_qprocess_types.QProcess): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQProcess_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQProcess_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qprocess_types.QProcess): cint =
   fcQProcess_protectedbase_senderSignalIndex(self.h)
@@ -1293,7 +1289,7 @@ proc create*(T: type gen_qprocess_types.QProcess,
     vtbl[].vtbl.connectNotify = fcQProcess_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQProcess_vtable_callback_disconnectNotify
-  let tmp = gen_qprocess_types.QProcess(h: fcQProcess_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))))
+  let tmp = gen_qprocess_types.QProcess(h: fcQProcess_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))), owned: true)
   fcQProcess_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qprocess_types.QProcess,
@@ -1358,13 +1354,14 @@ proc create*(T: type gen_qprocess_types.QProcess,
     vtbl[].vtbl.connectNotify = fcQProcess_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQProcess_vtable_callback_disconnectNotify
-  let tmp = gen_qprocess_types.QProcess(h: fcQProcess_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h))
+  let tmp = gen_qprocess_types.QProcess(h: fcQProcess_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h), owned: true)
   fcQProcess_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQProcess_mvtbl = cQProcessVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQProcess()[])](self.fcQProcess_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   metaObject: fcQProcess_method_callback_metaObject,
   metacast: fcQProcess_method_callback_metacast,
@@ -1409,5 +1406,3 @@ proc create*(T: type gen_qprocess_types.QProcess,
 
 proc staticMetaObject*(_: type gen_qprocess_types.QProcess): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQProcess_staticMetaObject())
-proc delete*(self: gen_qprocess_types.QProcess) =
-  fcQProcess_delete(self.h)

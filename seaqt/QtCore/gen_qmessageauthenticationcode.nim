@@ -32,9 +32,6 @@ func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
     else:
       copyMem(addr result[0], v.data, len)
 
-const cflags = gorge("pkg-config --cflags Qt6Core")  & " -fPIC"
-{.compile("gen_qmessageauthenticationcode.cpp", cflags).}
-
 
 import ./gen_qmessageauthenticationcode_types
 export gen_qmessageauthenticationcode_types
@@ -55,7 +52,6 @@ proc fcQMessageAuthenticationCode_resultX(self: pointer): struct_miqt_string {.i
 proc fcQMessageAuthenticationCode_hash(message: struct_miqt_string, key: struct_miqt_string, methodVal: cint): struct_miqt_string {.importc: "QMessageAuthenticationCode_hash".}
 proc fcQMessageAuthenticationCode_new(methodVal: cint): ptr cQMessageAuthenticationCode {.importc: "QMessageAuthenticationCode_new".}
 proc fcQMessageAuthenticationCode_new2(methodVal: cint, key: struct_miqt_string): ptr cQMessageAuthenticationCode {.importc: "QMessageAuthenticationCode_new2".}
-proc fcQMessageAuthenticationCode_delete(self: pointer) {.importc: "QMessageAuthenticationCode_delete".}
 
 proc reset*(self: gen_qmessageauthenticationcode_types.QMessageAuthenticationCode): void =
   fcQMessageAuthenticationCode_reset(self.h)
@@ -86,11 +82,9 @@ proc hash*(_: type gen_qmessageauthenticationcode_types.QMessageAuthenticationCo
 
 proc create*(T: type gen_qmessageauthenticationcode_types.QMessageAuthenticationCode,
     methodVal: cint): gen_qmessageauthenticationcode_types.QMessageAuthenticationCode =
-  let tmp = gen_qmessageauthenticationcode_types.QMessageAuthenticationCode(h: fcQMessageAuthenticationCode_new(cint(methodVal)))
+  let tmp = gen_qmessageauthenticationcode_types.QMessageAuthenticationCode(h: fcQMessageAuthenticationCode_new(cint(methodVal)), owned: true)
   tmp
 proc create*(T: type gen_qmessageauthenticationcode_types.QMessageAuthenticationCode,
     methodVal: cint, key: seq[byte]): gen_qmessageauthenticationcode_types.QMessageAuthenticationCode =
-  let tmp = gen_qmessageauthenticationcode_types.QMessageAuthenticationCode(h: fcQMessageAuthenticationCode_new2(cint(methodVal), struct_miqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key)))))
+  let tmp = gen_qmessageauthenticationcode_types.QMessageAuthenticationCode(h: fcQMessageAuthenticationCode_new2(cint(methodVal), struct_miqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key)))), owned: true)
   tmp
-proc delete*(self: gen_qmessageauthenticationcode_types.QMessageAuthenticationCode) =
-  fcQMessageAuthenticationCode_delete(self.h)

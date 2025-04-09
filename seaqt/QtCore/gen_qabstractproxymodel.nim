@@ -32,7 +32,7 @@ func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
     else:
       copyMem(addr result[0], v.data, len)
 
-const cflags = gorge("pkg-config --cflags Qt6Core")  & " -fPIC"
+const cflags = gorge("pkg-config --cflags Qt6Core") & " -fPIC"
 {.compile("gen_qabstractproxymodel.cpp", cflags).}
 
 
@@ -231,10 +231,9 @@ proc fcQAbstractProxyModel_protectedbase_isSignalConnected(self: pointer, signal
 proc fcQAbstractProxyModel_new(vtbl: pointer, vdata: csize_t): ptr cQAbstractProxyModel {.importc: "QAbstractProxyModel_new".}
 proc fcQAbstractProxyModel_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQAbstractProxyModel {.importc: "QAbstractProxyModel_new2".}
 proc fcQAbstractProxyModel_staticMetaObject(): pointer {.importc: "QAbstractProxyModel_staticMetaObject".}
-proc fcQAbstractProxyModel_delete(self: pointer) {.importc: "QAbstractProxyModel_delete".}
 
 proc metaObject*(self: gen_qabstractproxymodel_types.QAbstractProxyModel): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQAbstractProxyModel_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQAbstractProxyModel_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qabstractproxymodel_types.QAbstractProxyModel, param1: cstring): pointer =
   fcQAbstractProxyModel_metacast(self.h, param1)
@@ -252,19 +251,19 @@ proc setSourceModel*(self: gen_qabstractproxymodel_types.QAbstractProxyModel, so
   fcQAbstractProxyModel_setSourceModel(self.h, sourceModel.h)
 
 proc sourceModel*(self: gen_qabstractproxymodel_types.QAbstractProxyModel): gen_qabstractitemmodel_types.QAbstractItemModel =
-  gen_qabstractitemmodel_types.QAbstractItemModel(h: fcQAbstractProxyModel_sourceModel(self.h))
+  gen_qabstractitemmodel_types.QAbstractItemModel(h: fcQAbstractProxyModel_sourceModel(self.h), owned: false)
 
 proc mapToSource*(self: gen_qabstractproxymodel_types.QAbstractProxyModel, proxyIndex: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex =
-  gen_qabstractitemmodel_types.QModelIndex(h: fcQAbstractProxyModel_mapToSource(self.h, proxyIndex.h))
+  gen_qabstractitemmodel_types.QModelIndex(h: fcQAbstractProxyModel_mapToSource(self.h, proxyIndex.h), owned: true)
 
 proc mapFromSource*(self: gen_qabstractproxymodel_types.QAbstractProxyModel, sourceIndex: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex =
-  gen_qabstractitemmodel_types.QModelIndex(h: fcQAbstractProxyModel_mapFromSource(self.h, sourceIndex.h))
+  gen_qabstractitemmodel_types.QModelIndex(h: fcQAbstractProxyModel_mapFromSource(self.h, sourceIndex.h), owned: true)
 
 proc mapSelectionToSource*(self: gen_qabstractproxymodel_types.QAbstractProxyModel, selection: gen_qitemselectionmodel_types.QItemSelection): gen_qitemselectionmodel_types.QItemSelection =
-  gen_qitemselectionmodel_types.QItemSelection(h: fcQAbstractProxyModel_mapSelectionToSource(self.h, selection.h))
+  gen_qitemselectionmodel_types.QItemSelection(h: fcQAbstractProxyModel_mapSelectionToSource(self.h, selection.h), owned: true)
 
 proc mapSelectionFromSource*(self: gen_qabstractproxymodel_types.QAbstractProxyModel, selection: gen_qitemselectionmodel_types.QItemSelection): gen_qitemselectionmodel_types.QItemSelection =
-  gen_qitemselectionmodel_types.QItemSelection(h: fcQAbstractProxyModel_mapSelectionFromSource(self.h, selection.h))
+  gen_qitemselectionmodel_types.QItemSelection(h: fcQAbstractProxyModel_mapSelectionFromSource(self.h, selection.h), owned: true)
 
 proc submit*(self: gen_qabstractproxymodel_types.QAbstractProxyModel): bool =
   fcQAbstractProxyModel_submit(self.h)
@@ -273,10 +272,10 @@ proc revert*(self: gen_qabstractproxymodel_types.QAbstractProxyModel): void =
   fcQAbstractProxyModel_revert(self.h)
 
 proc data*(self: gen_qabstractproxymodel_types.QAbstractProxyModel, proxyIndex: gen_qabstractitemmodel_types.QModelIndex, role: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQAbstractProxyModel_data(self.h, proxyIndex.h, role))
+  gen_qvariant_types.QVariant(h: fcQAbstractProxyModel_data(self.h, proxyIndex.h, role), owned: true)
 
 proc headerData*(self: gen_qabstractproxymodel_types.QAbstractProxyModel, section: cint, orientation: cint, role: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQAbstractProxyModel_headerData(self.h, section, cint(orientation), role))
+  gen_qvariant_types.QVariant(h: fcQAbstractProxyModel_headerData(self.h, section, cint(orientation), role), owned: true)
 
 proc itemData*(self: gen_qabstractproxymodel_types.QAbstractProxyModel, index: gen_qabstractitemmodel_types.QModelIndex): Table[cint,gen_qvariant_types.QVariant] =
   var v_mm = fcQAbstractProxyModel_itemData(self.h, index.h)
@@ -286,7 +285,7 @@ proc itemData*(self: gen_qabstractproxymodel_types.QAbstractProxyModel, index: g
   for i in 0..<v_mm.len:
     var v_entry_Key = v_Keys[i]
 
-    var v_entry_Value = gen_qvariant_types.QVariant(h: v_Values[i])
+    var v_entry_Value = gen_qvariant_types.QVariant(h: v_Values[i], owned: true)
 
     vx_ret[v_entry_Key] = v_entry_Value
   c_free(v_mm.keys)
@@ -303,8 +302,11 @@ proc setItemData*(self: gen_qabstractproxymodel_types.QAbstractProxyModel, index
   var roles_Keys_CArray = newSeq[cint](len(roles))
   var roles_Values_CArray = newSeq[pointer](len(roles))
   var roles_ctr = 0
-  for roles_k, roles_v in roles:
+  for roles_k in roles.keys():
     roles_Keys_CArray[roles_ctr] = roles_k
+    roles_ctr += 1
+  roles_ctr = 0
+  for roles_v in roles.values():
     roles_Values_CArray[roles_ctr] = roles_v.h
     roles_ctr += 1
 
@@ -317,7 +319,7 @@ proc clearItemData*(self: gen_qabstractproxymodel_types.QAbstractProxyModel, ind
   fcQAbstractProxyModel_clearItemData(self.h, index.h)
 
 proc buddy*(self: gen_qabstractproxymodel_types.QAbstractProxyModel, index: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex =
-  gen_qabstractitemmodel_types.QModelIndex(h: fcQAbstractProxyModel_buddy(self.h, index.h))
+  gen_qabstractitemmodel_types.QModelIndex(h: fcQAbstractProxyModel_buddy(self.h, index.h), owned: true)
 
 proc canFetchMore*(self: gen_qabstractproxymodel_types.QAbstractProxyModel, parent: gen_qabstractitemmodel_types.QModelIndex): bool =
   fcQAbstractProxyModel_canFetchMore(self.h, parent.h)
@@ -329,20 +331,20 @@ proc sort*(self: gen_qabstractproxymodel_types.QAbstractProxyModel, column: cint
   fcQAbstractProxyModel_sort(self.h, column, cint(order))
 
 proc span*(self: gen_qabstractproxymodel_types.QAbstractProxyModel, index: gen_qabstractitemmodel_types.QModelIndex): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQAbstractProxyModel_span(self.h, index.h))
+  gen_qsize_types.QSize(h: fcQAbstractProxyModel_span(self.h, index.h), owned: true)
 
 proc hasChildren*(self: gen_qabstractproxymodel_types.QAbstractProxyModel, parent: gen_qabstractitemmodel_types.QModelIndex): bool =
   fcQAbstractProxyModel_hasChildren(self.h, parent.h)
 
 proc sibling*(self: gen_qabstractproxymodel_types.QAbstractProxyModel, row: cint, column: cint, idx: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex =
-  gen_qabstractitemmodel_types.QModelIndex(h: fcQAbstractProxyModel_sibling(self.h, row, column, idx.h))
+  gen_qabstractitemmodel_types.QModelIndex(h: fcQAbstractProxyModel_sibling(self.h, row, column, idx.h), owned: true)
 
 proc mimeData*(self: gen_qabstractproxymodel_types.QAbstractProxyModel, indexes: seq[gen_qabstractitemmodel_types.QModelIndex]): gen_qmimedata_types.QMimeData =
   var indexes_CArray = newSeq[pointer](len(indexes))
   for i in 0..<len(indexes):
     indexes_CArray[i] = indexes[i].h
 
-  gen_qmimedata_types.QMimeData(h: fcQAbstractProxyModel_mimeData(self.h, struct_miqt_array(len: csize_t(len(indexes)), data: if len(indexes) == 0: nil else: addr(indexes_CArray[0]))))
+  gen_qmimedata_types.QMimeData(h: fcQAbstractProxyModel_mimeData(self.h, struct_miqt_array(len: csize_t(len(indexes)), data: if len(indexes) == 0: nil else: addr(indexes_CArray[0]))), owned: false)
 
 proc canDropMimeData*(self: gen_qabstractproxymodel_types.QAbstractProxyModel, data: gen_qmimedata_types.QMimeData, action: cint, row: cint, column: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool =
   fcQAbstractProxyModel_canDropMimeData(self.h, data.h, cint(action), row, column, parent.h)
@@ -450,7 +452,7 @@ type QAbstractProxyModelchildEventProc* = proc(self: QAbstractProxyModel, event:
 type QAbstractProxyModelcustomEventProc* = proc(self: QAbstractProxyModel, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QAbstractProxyModelconnectNotifyProc* = proc(self: QAbstractProxyModel, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QAbstractProxyModeldisconnectNotifyProc* = proc(self: QAbstractProxyModel, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
-type QAbstractProxyModelVTable* = object
+type QAbstractProxyModelVTable* {.inheritable, pure.} = object
   vtbl: cQAbstractProxyModelVTable
   metaObject*: QAbstractProxyModelmetaObjectProc
   metacast*: QAbstractProxyModelmetacastProc
@@ -505,13 +507,16 @@ type QAbstractProxyModelVTable* = object
   connectNotify*: QAbstractProxyModelconnectNotifyProc
   disconnectNotify*: QAbstractProxyModeldisconnectNotifyProc
 proc QAbstractProxyModelmetaObject*(self: gen_qabstractproxymodel_types.QAbstractProxyModel): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQAbstractProxyModel_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQAbstractProxyModel_virtualbase_metaObject(self.h), owned: false)
 
 proc fcQAbstractProxyModel_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QAbstractProxyModelVTable](fcQAbstractProxyModel_vdata(self)[])
   let self = QAbstractProxyModel(h: self)
   var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QAbstractProxyModelmetacast*(self: gen_qabstractproxymodel_types.QAbstractProxyModel, param1: cstring): pointer =
   fcQAbstractProxyModel_virtualbase_metacast(self.h, param1)
@@ -541,42 +546,54 @@ proc QAbstractProxyModelsetSourceModel*(self: gen_qabstractproxymodel_types.QAbs
 proc fcQAbstractProxyModel_vtable_callback_setSourceModel(self: pointer, sourceModel: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAbstractProxyModelVTable](fcQAbstractProxyModel_vdata(self)[])
   let self = QAbstractProxyModel(h: self)
-  let slotval1 = gen_qabstractitemmodel_types.QAbstractItemModel(h: sourceModel)
+  let slotval1 = gen_qabstractitemmodel_types.QAbstractItemModel(h: sourceModel, owned: false)
   vtbl[].setSourceModel(self, slotval1)
 
 proc fcQAbstractProxyModel_vtable_callback_mapToSource(self: pointer, proxyIndex: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QAbstractProxyModelVTable](fcQAbstractProxyModel_vdata(self)[])
   let self = QAbstractProxyModel(h: self)
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: proxyIndex)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: proxyIndex, owned: false)
   var virtualReturn = vtbl[].mapToSource(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQAbstractProxyModel_vtable_callback_mapFromSource(self: pointer, sourceIndex: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QAbstractProxyModelVTable](fcQAbstractProxyModel_vdata(self)[])
   let self = QAbstractProxyModel(h: self)
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: sourceIndex)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: sourceIndex, owned: false)
   var virtualReturn = vtbl[].mapFromSource(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QAbstractProxyModelmapSelectionToSource*(self: gen_qabstractproxymodel_types.QAbstractProxyModel, selection: gen_qitemselectionmodel_types.QItemSelection): gen_qitemselectionmodel_types.QItemSelection =
-  gen_qitemselectionmodel_types.QItemSelection(h: fcQAbstractProxyModel_virtualbase_mapSelectionToSource(self.h, selection.h))
+  gen_qitemselectionmodel_types.QItemSelection(h: fcQAbstractProxyModel_virtualbase_mapSelectionToSource(self.h, selection.h), owned: true)
 
 proc fcQAbstractProxyModel_vtable_callback_mapSelectionToSource(self: pointer, selection: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QAbstractProxyModelVTable](fcQAbstractProxyModel_vdata(self)[])
   let self = QAbstractProxyModel(h: self)
-  let slotval1 = gen_qitemselectionmodel_types.QItemSelection(h: selection)
+  let slotval1 = gen_qitemselectionmodel_types.QItemSelection(h: selection, owned: false)
   var virtualReturn = vtbl[].mapSelectionToSource(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QAbstractProxyModelmapSelectionFromSource*(self: gen_qabstractproxymodel_types.QAbstractProxyModel, selection: gen_qitemselectionmodel_types.QItemSelection): gen_qitemselectionmodel_types.QItemSelection =
-  gen_qitemselectionmodel_types.QItemSelection(h: fcQAbstractProxyModel_virtualbase_mapSelectionFromSource(self.h, selection.h))
+  gen_qitemselectionmodel_types.QItemSelection(h: fcQAbstractProxyModel_virtualbase_mapSelectionFromSource(self.h, selection.h), owned: true)
 
 proc fcQAbstractProxyModel_vtable_callback_mapSelectionFromSource(self: pointer, selection: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QAbstractProxyModelVTable](fcQAbstractProxyModel_vdata(self)[])
   let self = QAbstractProxyModel(h: self)
-  let slotval1 = gen_qitemselectionmodel_types.QItemSelection(h: selection)
+  let slotval1 = gen_qitemselectionmodel_types.QItemSelection(h: selection, owned: false)
   var virtualReturn = vtbl[].mapSelectionFromSource(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QAbstractProxyModelsubmit*(self: gen_qabstractproxymodel_types.QAbstractProxyModel): bool =
   fcQAbstractProxyModel_virtualbase_submit(self.h)
@@ -596,18 +613,21 @@ proc fcQAbstractProxyModel_vtable_callback_revert(self: pointer): void {.cdecl.}
   vtbl[].revert(self)
 
 proc QAbstractProxyModeldata*(self: gen_qabstractproxymodel_types.QAbstractProxyModel, proxyIndex: gen_qabstractitemmodel_types.QModelIndex, role: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQAbstractProxyModel_virtualbase_data(self.h, proxyIndex.h, role))
+  gen_qvariant_types.QVariant(h: fcQAbstractProxyModel_virtualbase_data(self.h, proxyIndex.h, role), owned: true)
 
 proc fcQAbstractProxyModel_vtable_callback_data(self: pointer, proxyIndex: pointer, role: cint): pointer {.cdecl.} =
   let vtbl = cast[ptr QAbstractProxyModelVTable](fcQAbstractProxyModel_vdata(self)[])
   let self = QAbstractProxyModel(h: self)
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: proxyIndex)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: proxyIndex, owned: false)
   let slotval2 = role
   var virtualReturn = vtbl[].data(self, slotval1, slotval2)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QAbstractProxyModelheaderData*(self: gen_qabstractproxymodel_types.QAbstractProxyModel, section: cint, orientation: cint, role: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQAbstractProxyModel_virtualbase_headerData(self.h, section, cint(orientation), role))
+  gen_qvariant_types.QVariant(h: fcQAbstractProxyModel_virtualbase_headerData(self.h, section, cint(orientation), role), owned: true)
 
 proc fcQAbstractProxyModel_vtable_callback_headerData(self: pointer, section: cint, orientation: cint, role: cint): pointer {.cdecl.} =
   let vtbl = cast[ptr QAbstractProxyModelVTable](fcQAbstractProxyModel_vdata(self)[])
@@ -616,7 +636,10 @@ proc fcQAbstractProxyModel_vtable_callback_headerData(self: pointer, section: ci
   let slotval2 = cint(orientation)
   let slotval3 = role
   var virtualReturn = vtbl[].headerData(self, slotval1, slotval2, slotval3)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QAbstractProxyModelitemData*(self: gen_qabstractproxymodel_types.QAbstractProxyModel, index: gen_qabstractitemmodel_types.QModelIndex): Table[cint,gen_qvariant_types.QVariant] =
   var v_mm = fcQAbstractProxyModel_virtualbase_itemData(self.h, index.h)
@@ -626,7 +649,7 @@ proc QAbstractProxyModelitemData*(self: gen_qabstractproxymodel_types.QAbstractP
   for i in 0..<v_mm.len:
     var v_entry_Key = v_Keys[i]
 
-    var v_entry_Value = gen_qvariant_types.QVariant(h: v_Values[i])
+    var v_entry_Value = gen_qvariant_types.QVariant(h: v_Values[i], owned: true)
 
     vx_ret[v_entry_Key] = v_entry_Value
   c_free(v_mm.keys)
@@ -636,14 +659,20 @@ proc QAbstractProxyModelitemData*(self: gen_qabstractproxymodel_types.QAbstractP
 proc fcQAbstractProxyModel_vtable_callback_itemData(self: pointer, index: pointer): struct_miqt_map {.cdecl.} =
   let vtbl = cast[ptr QAbstractProxyModelVTable](fcQAbstractProxyModel_vdata(self)[])
   let self = QAbstractProxyModel(h: self)
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var virtualReturn = vtbl[].itemData(self, slotval1)
   var virtualReturn_Keys_CArray = cast[ptr UncheckedArray[cint]](if len(virtualReturn) > 0: c_malloc(csize_t(sizeof(cint) * len(virtualReturn))) else: nil)
   var virtualReturn_Values_CArray = cast[ptr UncheckedArray[pointer]](if len(virtualReturn) > 0: c_malloc(csize_t(sizeof(pointer) * len(virtualReturn))) else: nil)
   var virtualReturn_ctr = 0
-  for virtualReturn_k, virtualReturn_v in virtualReturn:
+  for virtualReturn_k in virtualReturn.keys():
     virtualReturn_Keys_CArray[virtualReturn_ctr] = virtualReturn_k
-    virtualReturn_Values_CArray[virtualReturn_ctr] = virtualReturn_v.h
+    virtualReturn_ctr += 1
+  virtualReturn_ctr = 0
+  for virtualReturn_v in virtualReturn.mvalues():
+    virtualReturn_v.owned = false # TODO move?
+    let virtualReturn_v_h = virtualReturn_v.h
+    virtualReturn_v.h = nil
+    virtualReturn_Values_CArray[virtualReturn_ctr] = virtualReturn_v_h
     virtualReturn_ctr += 1
 
   struct_miqt_map(len: csize_t(len(virtualReturn)),keys: if len(virtualReturn) == 0: nil else: addr(virtualReturn_Keys_CArray[0]), values: if len(virtualReturn) == 0: nil else: addr(virtualReturn_Values_CArray[0]),)
@@ -654,7 +683,7 @@ proc QAbstractProxyModelflags*(self: gen_qabstractproxymodel_types.QAbstractProx
 proc fcQAbstractProxyModel_vtable_callback_flags(self: pointer, index: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QAbstractProxyModelVTable](fcQAbstractProxyModel_vdata(self)[])
   let self = QAbstractProxyModel(h: self)
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var virtualReturn = vtbl[].flags(self, slotval1)
   cint(virtualReturn)
 
@@ -664,8 +693,8 @@ proc QAbstractProxyModelsetData*(self: gen_qabstractproxymodel_types.QAbstractPr
 proc fcQAbstractProxyModel_vtable_callback_setData(self: pointer, index: pointer, value: pointer, role: cint): bool {.cdecl.} =
   let vtbl = cast[ptr QAbstractProxyModelVTable](fcQAbstractProxyModel_vdata(self)[])
   let self = QAbstractProxyModel(h: self)
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index)
-  let slotval2 = gen_qvariant_types.QVariant(h: value)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
+  let slotval2 = gen_qvariant_types.QVariant(h: value, owned: false)
   let slotval3 = role
   var virtualReturn = vtbl[].setData(self, slotval1, slotval2, slotval3)
   virtualReturn
@@ -674,8 +703,11 @@ proc QAbstractProxyModelsetItemData*(self: gen_qabstractproxymodel_types.QAbstra
   var roles_Keys_CArray = newSeq[cint](len(roles))
   var roles_Values_CArray = newSeq[pointer](len(roles))
   var roles_ctr = 0
-  for roles_k, roles_v in roles:
+  for roles_k in roles.keys():
     roles_Keys_CArray[roles_ctr] = roles_k
+    roles_ctr += 1
+  roles_ctr = 0
+  for roles_v in roles.values():
     roles_Values_CArray[roles_ctr] = roles_v.h
     roles_ctr += 1
 
@@ -684,7 +716,7 @@ proc QAbstractProxyModelsetItemData*(self: gen_qabstractproxymodel_types.QAbstra
 proc fcQAbstractProxyModel_vtable_callback_setItemData(self: pointer, index: pointer, roles: struct_miqt_map): bool {.cdecl.} =
   let vtbl = cast[ptr QAbstractProxyModelVTable](fcQAbstractProxyModel_vdata(self)[])
   let self = QAbstractProxyModel(h: self)
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var vroles_mm = roles
   var vrolesx_ret: Table[cint, gen_qvariant_types.QVariant]
   var vroles_Keys = cast[ptr UncheckedArray[cint]](vroles_mm.keys)
@@ -692,7 +724,7 @@ proc fcQAbstractProxyModel_vtable_callback_setItemData(self: pointer, index: poi
   for i in 0..<vroles_mm.len:
     var vroles_entry_Key = vroles_Keys[i]
 
-    var vroles_entry_Value = gen_qvariant_types.QVariant(h: vroles_Values[i])
+    var vroles_entry_Value = gen_qvariant_types.QVariant(h: vroles_Values[i], owned: true)
 
     vrolesx_ret[vroles_entry_Key] = vroles_entry_Value
   c_free(vroles_mm.keys)
@@ -709,7 +741,7 @@ proc fcQAbstractProxyModel_vtable_callback_setHeaderData(self: pointer, section:
   let self = QAbstractProxyModel(h: self)
   let slotval1 = section
   let slotval2 = cint(orientation)
-  let slotval3 = gen_qvariant_types.QVariant(h: value)
+  let slotval3 = gen_qvariant_types.QVariant(h: value, owned: false)
   let slotval4 = role
   var virtualReturn = vtbl[].setHeaderData(self, slotval1, slotval2, slotval3, slotval4)
   virtualReturn
@@ -720,19 +752,22 @@ proc QAbstractProxyModelclearItemData*(self: gen_qabstractproxymodel_types.QAbst
 proc fcQAbstractProxyModel_vtable_callback_clearItemData(self: pointer, index: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QAbstractProxyModelVTable](fcQAbstractProxyModel_vdata(self)[])
   let self = QAbstractProxyModel(h: self)
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var virtualReturn = vtbl[].clearItemData(self, slotval1)
   virtualReturn
 
 proc QAbstractProxyModelbuddy*(self: gen_qabstractproxymodel_types.QAbstractProxyModel, index: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex =
-  gen_qabstractitemmodel_types.QModelIndex(h: fcQAbstractProxyModel_virtualbase_buddy(self.h, index.h))
+  gen_qabstractitemmodel_types.QModelIndex(h: fcQAbstractProxyModel_virtualbase_buddy(self.h, index.h), owned: true)
 
 proc fcQAbstractProxyModel_vtable_callback_buddy(self: pointer, index: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QAbstractProxyModelVTable](fcQAbstractProxyModel_vdata(self)[])
   let self = QAbstractProxyModel(h: self)
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var virtualReturn = vtbl[].buddy(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QAbstractProxyModelcanFetchMore*(self: gen_qabstractproxymodel_types.QAbstractProxyModel, parent: gen_qabstractitemmodel_types.QModelIndex): bool =
   fcQAbstractProxyModel_virtualbase_canFetchMore(self.h, parent.h)
@@ -740,7 +775,7 @@ proc QAbstractProxyModelcanFetchMore*(self: gen_qabstractproxymodel_types.QAbstr
 proc fcQAbstractProxyModel_vtable_callback_canFetchMore(self: pointer, parent: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QAbstractProxyModelVTable](fcQAbstractProxyModel_vdata(self)[])
   let self = QAbstractProxyModel(h: self)
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   var virtualReturn = vtbl[].canFetchMore(self, slotval1)
   virtualReturn
 
@@ -750,7 +785,7 @@ proc QAbstractProxyModelfetchMore*(self: gen_qabstractproxymodel_types.QAbstract
 proc fcQAbstractProxyModel_vtable_callback_fetchMore(self: pointer, parent: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAbstractProxyModelVTable](fcQAbstractProxyModel_vdata(self)[])
   let self = QAbstractProxyModel(h: self)
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   vtbl[].fetchMore(self, slotval1)
 
 proc QAbstractProxyModelsort*(self: gen_qabstractproxymodel_types.QAbstractProxyModel, column: cint, order: cint): void =
@@ -764,14 +799,17 @@ proc fcQAbstractProxyModel_vtable_callback_sort(self: pointer, column: cint, ord
   vtbl[].sort(self, slotval1, slotval2)
 
 proc QAbstractProxyModelspan*(self: gen_qabstractproxymodel_types.QAbstractProxyModel, index: gen_qabstractitemmodel_types.QModelIndex): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQAbstractProxyModel_virtualbase_span(self.h, index.h))
+  gen_qsize_types.QSize(h: fcQAbstractProxyModel_virtualbase_span(self.h, index.h), owned: true)
 
 proc fcQAbstractProxyModel_vtable_callback_span(self: pointer, index: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QAbstractProxyModelVTable](fcQAbstractProxyModel_vdata(self)[])
   let self = QAbstractProxyModel(h: self)
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var virtualReturn = vtbl[].span(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QAbstractProxyModelhasChildren*(self: gen_qabstractproxymodel_types.QAbstractProxyModel, parent: gen_qabstractitemmodel_types.QModelIndex): bool =
   fcQAbstractProxyModel_virtualbase_hasChildren(self.h, parent.h)
@@ -779,28 +817,31 @@ proc QAbstractProxyModelhasChildren*(self: gen_qabstractproxymodel_types.QAbstra
 proc fcQAbstractProxyModel_vtable_callback_hasChildren(self: pointer, parent: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QAbstractProxyModelVTable](fcQAbstractProxyModel_vdata(self)[])
   let self = QAbstractProxyModel(h: self)
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   var virtualReturn = vtbl[].hasChildren(self, slotval1)
   virtualReturn
 
 proc QAbstractProxyModelsibling*(self: gen_qabstractproxymodel_types.QAbstractProxyModel, row: cint, column: cint, idx: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex =
-  gen_qabstractitemmodel_types.QModelIndex(h: fcQAbstractProxyModel_virtualbase_sibling(self.h, row, column, idx.h))
+  gen_qabstractitemmodel_types.QModelIndex(h: fcQAbstractProxyModel_virtualbase_sibling(self.h, row, column, idx.h), owned: true)
 
 proc fcQAbstractProxyModel_vtable_callback_sibling(self: pointer, row: cint, column: cint, idx: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QAbstractProxyModelVTable](fcQAbstractProxyModel_vdata(self)[])
   let self = QAbstractProxyModel(h: self)
   let slotval1 = row
   let slotval2 = column
-  let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: idx)
+  let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: idx, owned: false)
   var virtualReturn = vtbl[].sibling(self, slotval1, slotval2, slotval3)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QAbstractProxyModelmimeData*(self: gen_qabstractproxymodel_types.QAbstractProxyModel, indexes: seq[gen_qabstractitemmodel_types.QModelIndex]): gen_qmimedata_types.QMimeData =
   var indexes_CArray = newSeq[pointer](len(indexes))
   for i in 0..<len(indexes):
     indexes_CArray[i] = indexes[i].h
 
-  gen_qmimedata_types.QMimeData(h: fcQAbstractProxyModel_virtualbase_mimeData(self.h, struct_miqt_array(len: csize_t(len(indexes)), data: if len(indexes) == 0: nil else: addr(indexes_CArray[0]))))
+  gen_qmimedata_types.QMimeData(h: fcQAbstractProxyModel_virtualbase_mimeData(self.h, struct_miqt_array(len: csize_t(len(indexes)), data: if len(indexes) == 0: nil else: addr(indexes_CArray[0]))), owned: false)
 
 proc fcQAbstractProxyModel_vtable_callback_mimeData(self: pointer, indexes: struct_miqt_array): pointer {.cdecl.} =
   let vtbl = cast[ptr QAbstractProxyModelVTable](fcQAbstractProxyModel_vdata(self)[])
@@ -809,11 +850,14 @@ proc fcQAbstractProxyModel_vtable_callback_mimeData(self: pointer, indexes: stru
   var vindexesx_ret = newSeq[gen_qabstractitemmodel_types.QModelIndex](int(vindexes_ma.len))
   let vindexes_outCast = cast[ptr UncheckedArray[pointer]](vindexes_ma.data)
   for i in 0 ..< vindexes_ma.len:
-    vindexesx_ret[i] = gen_qabstractitemmodel_types.QModelIndex(h: vindexes_outCast[i])
+    vindexesx_ret[i] = gen_qabstractitemmodel_types.QModelIndex(h: vindexes_outCast[i], owned: true)
   c_free(vindexes_ma.data)
   let slotval1 = vindexesx_ret
   var virtualReturn = vtbl[].mimeData(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QAbstractProxyModelcanDropMimeData*(self: gen_qabstractproxymodel_types.QAbstractProxyModel, data: gen_qmimedata_types.QMimeData, action: cint, row: cint, column: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool =
   fcQAbstractProxyModel_virtualbase_canDropMimeData(self.h, data.h, cint(action), row, column, parent.h)
@@ -821,11 +865,11 @@ proc QAbstractProxyModelcanDropMimeData*(self: gen_qabstractproxymodel_types.QAb
 proc fcQAbstractProxyModel_vtable_callback_canDropMimeData(self: pointer, data: pointer, action: cint, row: cint, column: cint, parent: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QAbstractProxyModelVTable](fcQAbstractProxyModel_vdata(self)[])
   let self = QAbstractProxyModel(h: self)
-  let slotval1 = gen_qmimedata_types.QMimeData(h: data)
+  let slotval1 = gen_qmimedata_types.QMimeData(h: data, owned: false)
   let slotval2 = cint(action)
   let slotval3 = row
   let slotval4 = column
-  let slotval5 = gen_qabstractitemmodel_types.QModelIndex(h: parent)
+  let slotval5 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   var virtualReturn = vtbl[].canDropMimeData(self, slotval1, slotval2, slotval3, slotval4, slotval5)
   virtualReturn
 
@@ -835,11 +879,11 @@ proc QAbstractProxyModeldropMimeData*(self: gen_qabstractproxymodel_types.QAbstr
 proc fcQAbstractProxyModel_vtable_callback_dropMimeData(self: pointer, data: pointer, action: cint, row: cint, column: cint, parent: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QAbstractProxyModelVTable](fcQAbstractProxyModel_vdata(self)[])
   let self = QAbstractProxyModel(h: self)
-  let slotval1 = gen_qmimedata_types.QMimeData(h: data)
+  let slotval1 = gen_qmimedata_types.QMimeData(h: data, owned: false)
   let slotval2 = cint(action)
   let slotval3 = row
   let slotval4 = column
-  let slotval5 = gen_qabstractitemmodel_types.QModelIndex(h: parent)
+  let slotval5 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   var virtualReturn = vtbl[].dropMimeData(self, slotval1, slotval2, slotval3, slotval4, slotval5)
   virtualReturn
 
@@ -910,8 +954,11 @@ proc fcQAbstractProxyModel_vtable_callback_roleNames(self: pointer): struct_miqt
   var virtualReturn_Keys_CArray = cast[ptr UncheckedArray[cint]](if len(virtualReturn) > 0: c_malloc(csize_t(sizeof(cint) * len(virtualReturn))) else: nil)
   var virtualReturn_Values_CArray = cast[ptr UncheckedArray[struct_miqt_string]](if len(virtualReturn) > 0: c_malloc(csize_t(sizeof(struct_miqt_string) * len(virtualReturn))) else: nil)
   var virtualReturn_ctr = 0
-  for virtualReturn_k, virtualReturn_v in virtualReturn:
+  for virtualReturn_k in virtualReturn.keys():
     virtualReturn_Keys_CArray[virtualReturn_ctr] = virtualReturn_k
+    virtualReturn_ctr += 1
+  virtualReturn_ctr = 0
+  for virtualReturn_v in virtualReturn.mvalues():
     var virtualReturn_v_copy = if len(virtualReturn_v) > 0: c_malloc(csize_t(len(virtualReturn_v))) else: nil
     if len(virtualReturn_v) > 0: copyMem(virtualReturn_v_copy, addr virtualReturn_v[0], csize_t(len(virtualReturn_v)))
     virtualReturn_Values_CArray[virtualReturn_ctr] = struct_miqt_string(data: virtualReturn_v_copy, len: csize_t(len(virtualReturn_v)))
@@ -924,28 +971,34 @@ proc fcQAbstractProxyModel_vtable_callback_index(self: pointer, row: cint, colum
   let self = QAbstractProxyModel(h: self)
   let slotval1 = row
   let slotval2 = column
-  let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: parent)
+  let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   var virtualReturn = vtbl[].index(self, slotval1, slotval2, slotval3)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQAbstractProxyModel_vtable_callback_parent(self: pointer, child: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QAbstractProxyModelVTable](fcQAbstractProxyModel_vdata(self)[])
   let self = QAbstractProxyModel(h: self)
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: child)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: child, owned: false)
   var virtualReturn = vtbl[].parent(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQAbstractProxyModel_vtable_callback_rowCount(self: pointer, parent: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QAbstractProxyModelVTable](fcQAbstractProxyModel_vdata(self)[])
   let self = QAbstractProxyModel(h: self)
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   var virtualReturn = vtbl[].rowCount(self, slotval1)
   virtualReturn
 
 proc fcQAbstractProxyModel_vtable_callback_columnCount(self: pointer, parent: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QAbstractProxyModelVTable](fcQAbstractProxyModel_vdata(self)[])
   let self = QAbstractProxyModel(h: self)
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   var virtualReturn = vtbl[].columnCount(self, slotval1)
   virtualReturn
 
@@ -957,7 +1010,7 @@ proc fcQAbstractProxyModel_vtable_callback_insertRows(self: pointer, row: cint, 
   let self = QAbstractProxyModel(h: self)
   let slotval1 = row
   let slotval2 = count
-  let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: parent)
+  let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   var virtualReturn = vtbl[].insertRows(self, slotval1, slotval2, slotval3)
   virtualReturn
 
@@ -969,7 +1022,7 @@ proc fcQAbstractProxyModel_vtable_callback_insertColumns(self: pointer, column: 
   let self = QAbstractProxyModel(h: self)
   let slotval1 = column
   let slotval2 = count
-  let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: parent)
+  let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   var virtualReturn = vtbl[].insertColumns(self, slotval1, slotval2, slotval3)
   virtualReturn
 
@@ -981,7 +1034,7 @@ proc fcQAbstractProxyModel_vtable_callback_removeRows(self: pointer, row: cint, 
   let self = QAbstractProxyModel(h: self)
   let slotval1 = row
   let slotval2 = count
-  let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: parent)
+  let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   var virtualReturn = vtbl[].removeRows(self, slotval1, slotval2, slotval3)
   virtualReturn
 
@@ -993,7 +1046,7 @@ proc fcQAbstractProxyModel_vtable_callback_removeColumns(self: pointer, column: 
   let self = QAbstractProxyModel(h: self)
   let slotval1 = column
   let slotval2 = count
-  let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: parent)
+  let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   var virtualReturn = vtbl[].removeColumns(self, slotval1, slotval2, slotval3)
   virtualReturn
 
@@ -1003,10 +1056,10 @@ proc QAbstractProxyModelmoveRows*(self: gen_qabstractproxymodel_types.QAbstractP
 proc fcQAbstractProxyModel_vtable_callback_moveRows(self: pointer, sourceParent: pointer, sourceRow: cint, count: cint, destinationParent: pointer, destinationChild: cint): bool {.cdecl.} =
   let vtbl = cast[ptr QAbstractProxyModelVTable](fcQAbstractProxyModel_vdata(self)[])
   let self = QAbstractProxyModel(h: self)
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: sourceParent)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: sourceParent, owned: false)
   let slotval2 = sourceRow
   let slotval3 = count
-  let slotval4 = gen_qabstractitemmodel_types.QModelIndex(h: destinationParent)
+  let slotval4 = gen_qabstractitemmodel_types.QModelIndex(h: destinationParent, owned: false)
   let slotval5 = destinationChild
   var virtualReturn = vtbl[].moveRows(self, slotval1, slotval2, slotval3, slotval4, slotval5)
   virtualReturn
@@ -1017,10 +1070,10 @@ proc QAbstractProxyModelmoveColumns*(self: gen_qabstractproxymodel_types.QAbstra
 proc fcQAbstractProxyModel_vtable_callback_moveColumns(self: pointer, sourceParent: pointer, sourceColumn: cint, count: cint, destinationParent: pointer, destinationChild: cint): bool {.cdecl.} =
   let vtbl = cast[ptr QAbstractProxyModelVTable](fcQAbstractProxyModel_vdata(self)[])
   let self = QAbstractProxyModel(h: self)
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: sourceParent)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: sourceParent, owned: false)
   let slotval2 = sourceColumn
   let slotval3 = count
-  let slotval4 = gen_qabstractitemmodel_types.QModelIndex(h: destinationParent)
+  let slotval4 = gen_qabstractitemmodel_types.QModelIndex(h: destinationParent, owned: false)
   let slotval5 = destinationChild
   var virtualReturn = vtbl[].moveColumns(self, slotval1, slotval2, slotval3, slotval4, slotval5)
   virtualReturn
@@ -1030,22 +1083,25 @@ proc QAbstractProxyModelmatch*(self: gen_qabstractproxymodel_types.QAbstractProx
   var vx_ret = newSeq[gen_qabstractitemmodel_types.QModelIndex](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qabstractitemmodel_types.QModelIndex(h: v_outCast[i])
+    vx_ret[i] = gen_qabstractitemmodel_types.QModelIndex(h: v_outCast[i], owned: true)
   c_free(v_ma.data)
   vx_ret
 
 proc fcQAbstractProxyModel_vtable_callback_match(self: pointer, start: pointer, role: cint, value: pointer, hits: cint, flags: cint): struct_miqt_array {.cdecl.} =
   let vtbl = cast[ptr QAbstractProxyModelVTable](fcQAbstractProxyModel_vdata(self)[])
   let self = QAbstractProxyModel(h: self)
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: start)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: start, owned: false)
   let slotval2 = role
-  let slotval3 = gen_qvariant_types.QVariant(h: value)
+  let slotval3 = gen_qvariant_types.QVariant(h: value, owned: false)
   let slotval4 = hits
   let slotval5 = cint(flags)
   var virtualReturn = vtbl[].match(self, slotval1, slotval2, slotval3, slotval4, slotval5)
   var virtualReturn_CArray = cast[ptr UncheckedArray[pointer]](if len(virtualReturn) > 0: c_malloc(c_sizet(sizeof(pointer) * len(virtualReturn))) else: nil)
   for i in 0..<len(virtualReturn):
-    virtualReturn_CArray[i] = virtualReturn[i].h
+    virtualReturn[i].owned = false # TODO move?
+    let virtualReturn_i_h = virtualReturn[i].h
+    virtualReturn[i].h = nil
+    virtualReturn_CArray[i] = virtualReturn_i_h
 
   struct_miqt_array(len: csize_t(len(virtualReturn)), data: if len(virtualReturn) == 0: nil else: addr(virtualReturn_CArray[0]))
 
@@ -1055,8 +1111,8 @@ proc QAbstractProxyModelmultiData*(self: gen_qabstractproxymodel_types.QAbstract
 proc fcQAbstractProxyModel_vtable_callback_multiData(self: pointer, index: pointer, roleDataSpan: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAbstractProxyModelVTable](fcQAbstractProxyModel_vdata(self)[])
   let self = QAbstractProxyModel(h: self)
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index)
-  let slotval2 = gen_qabstractitemmodel_types.QModelRoleDataSpan(h: roleDataSpan)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
+  let slotval2 = gen_qabstractitemmodel_types.QModelRoleDataSpan(h: roleDataSpan, owned: true)
   vtbl[].multiData(self, slotval1, slotval2)
 
 proc QAbstractProxyModelresetInternalData*(self: gen_qabstractproxymodel_types.QAbstractProxyModel): void =
@@ -1073,7 +1129,7 @@ proc QAbstractProxyModelevent*(self: gen_qabstractproxymodel_types.QAbstractProx
 proc fcQAbstractProxyModel_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QAbstractProxyModelVTable](fcQAbstractProxyModel_vdata(self)[])
   let self = QAbstractProxyModel(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
@@ -1083,8 +1139,8 @@ proc QAbstractProxyModeleventFilter*(self: gen_qabstractproxymodel_types.QAbstra
 proc fcQAbstractProxyModel_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QAbstractProxyModelVTable](fcQAbstractProxyModel_vdata(self)[])
   let self = QAbstractProxyModel(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
@@ -1094,7 +1150,7 @@ proc QAbstractProxyModeltimerEvent*(self: gen_qabstractproxymodel_types.QAbstrac
 proc fcQAbstractProxyModel_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAbstractProxyModelVTable](fcQAbstractProxyModel_vdata(self)[])
   let self = QAbstractProxyModel(h: self)
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
 proc QAbstractProxyModelchildEvent*(self: gen_qabstractproxymodel_types.QAbstractProxyModel, event: gen_qcoreevent_types.QChildEvent): void =
@@ -1103,7 +1159,7 @@ proc QAbstractProxyModelchildEvent*(self: gen_qabstractproxymodel_types.QAbstrac
 proc fcQAbstractProxyModel_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAbstractProxyModelVTable](fcQAbstractProxyModel_vdata(self)[])
   let self = QAbstractProxyModel(h: self)
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
 proc QAbstractProxyModelcustomEvent*(self: gen_qabstractproxymodel_types.QAbstractProxyModel, event: gen_qcoreevent_types.QEvent): void =
@@ -1112,7 +1168,7 @@ proc QAbstractProxyModelcustomEvent*(self: gen_qabstractproxymodel_types.QAbstra
 proc fcQAbstractProxyModel_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAbstractProxyModelVTable](fcQAbstractProxyModel_vdata(self)[])
   let self = QAbstractProxyModel(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
 proc QAbstractProxyModelconnectNotify*(self: gen_qabstractproxymodel_types.QAbstractProxyModel, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -1121,7 +1177,7 @@ proc QAbstractProxyModelconnectNotify*(self: gen_qabstractproxymodel_types.QAbst
 proc fcQAbstractProxyModel_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAbstractProxyModelVTable](fcQAbstractProxyModel_vdata(self)[])
   let self = QAbstractProxyModel(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
 proc QAbstractProxyModeldisconnectNotify*(self: gen_qabstractproxymodel_types.QAbstractProxyModel, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -1130,7 +1186,7 @@ proc QAbstractProxyModeldisconnectNotify*(self: gen_qabstractproxymodel_types.QA
 proc fcQAbstractProxyModel_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAbstractProxyModelVTable](fcQAbstractProxyModel_vdata(self)[])
   let self = QAbstractProxyModel(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
 type VirtualQAbstractProxyModel* {.inheritable.} = ref object of QAbstractProxyModel
@@ -1164,14 +1220,14 @@ method setSourceModel*(self: VirtualQAbstractProxyModel, sourceModel: gen_qabstr
   QAbstractProxyModelsetSourceModel(self[], sourceModel)
 proc fcQAbstractProxyModel_method_callback_setSourceModel(self: pointer, sourceModel: pointer): void {.cdecl.} =
   let inst = cast[VirtualQAbstractProxyModel](fcQAbstractProxyModel_vdata(self)[])
-  let slotval1 = gen_qabstractitemmodel_types.QAbstractItemModel(h: sourceModel)
+  let slotval1 = gen_qabstractitemmodel_types.QAbstractItemModel(h: sourceModel, owned: false)
   inst.setSourceModel(slotval1)
 
 method mapToSource*(self: VirtualQAbstractProxyModel, proxyIndex: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex {.base.} =
   raiseAssert("missing implementation of QAbstractProxyModel_virtualbase_mapToSource")
 proc fcQAbstractProxyModel_method_callback_mapToSource(self: pointer, proxyIndex: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQAbstractProxyModel](fcQAbstractProxyModel_vdata(self)[])
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: proxyIndex)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: proxyIndex, owned: false)
   var virtualReturn = inst.mapToSource(slotval1)
   virtualReturn.h
 
@@ -1179,7 +1235,7 @@ method mapFromSource*(self: VirtualQAbstractProxyModel, sourceIndex: gen_qabstra
   raiseAssert("missing implementation of QAbstractProxyModel_virtualbase_mapFromSource")
 proc fcQAbstractProxyModel_method_callback_mapFromSource(self: pointer, sourceIndex: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQAbstractProxyModel](fcQAbstractProxyModel_vdata(self)[])
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: sourceIndex)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: sourceIndex, owned: false)
   var virtualReturn = inst.mapFromSource(slotval1)
   virtualReturn.h
 
@@ -1187,7 +1243,7 @@ method mapSelectionToSource*(self: VirtualQAbstractProxyModel, selection: gen_qi
   QAbstractProxyModelmapSelectionToSource(self[], selection)
 proc fcQAbstractProxyModel_method_callback_mapSelectionToSource(self: pointer, selection: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQAbstractProxyModel](fcQAbstractProxyModel_vdata(self)[])
-  let slotval1 = gen_qitemselectionmodel_types.QItemSelection(h: selection)
+  let slotval1 = gen_qitemselectionmodel_types.QItemSelection(h: selection, owned: false)
   var virtualReturn = inst.mapSelectionToSource(slotval1)
   virtualReturn.h
 
@@ -1195,7 +1251,7 @@ method mapSelectionFromSource*(self: VirtualQAbstractProxyModel, selection: gen_
   QAbstractProxyModelmapSelectionFromSource(self[], selection)
 proc fcQAbstractProxyModel_method_callback_mapSelectionFromSource(self: pointer, selection: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQAbstractProxyModel](fcQAbstractProxyModel_vdata(self)[])
-  let slotval1 = gen_qitemselectionmodel_types.QItemSelection(h: selection)
+  let slotval1 = gen_qitemselectionmodel_types.QItemSelection(h: selection, owned: false)
   var virtualReturn = inst.mapSelectionFromSource(slotval1)
   virtualReturn.h
 
@@ -1216,7 +1272,7 @@ method data*(self: VirtualQAbstractProxyModel, proxyIndex: gen_qabstractitemmode
   QAbstractProxyModeldata(self[], proxyIndex, role)
 proc fcQAbstractProxyModel_method_callback_data(self: pointer, proxyIndex: pointer, role: cint): pointer {.cdecl.} =
   let inst = cast[VirtualQAbstractProxyModel](fcQAbstractProxyModel_vdata(self)[])
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: proxyIndex)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: proxyIndex, owned: false)
   let slotval2 = role
   var virtualReturn = inst.data(slotval1, slotval2)
   virtualReturn.h
@@ -1235,13 +1291,16 @@ method itemData*(self: VirtualQAbstractProxyModel, index: gen_qabstractitemmodel
   QAbstractProxyModelitemData(self[], index)
 proc fcQAbstractProxyModel_method_callback_itemData(self: pointer, index: pointer): struct_miqt_map {.cdecl.} =
   let inst = cast[VirtualQAbstractProxyModel](fcQAbstractProxyModel_vdata(self)[])
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var virtualReturn = inst.itemData(slotval1)
   var virtualReturn_Keys_CArray = newSeq[cint](len(virtualReturn))
   var virtualReturn_Values_CArray = newSeq[pointer](len(virtualReturn))
   var virtualReturn_ctr = 0
-  for virtualReturn_k, virtualReturn_v in virtualReturn:
+  for virtualReturn_k in virtualReturn.keys():
     virtualReturn_Keys_CArray[virtualReturn_ctr] = virtualReturn_k
+    virtualReturn_ctr += 1
+  virtualReturn_ctr = 0
+  for virtualReturn_v in virtualReturn.values():
     virtualReturn_Values_CArray[virtualReturn_ctr] = virtualReturn_v.h
     virtualReturn_ctr += 1
 
@@ -1251,7 +1310,7 @@ method flags*(self: VirtualQAbstractProxyModel, index: gen_qabstractitemmodel_ty
   QAbstractProxyModelflags(self[], index)
 proc fcQAbstractProxyModel_method_callback_flags(self: pointer, index: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQAbstractProxyModel](fcQAbstractProxyModel_vdata(self)[])
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var virtualReturn = inst.flags(slotval1)
   cint(virtualReturn)
 
@@ -1259,8 +1318,8 @@ method setData*(self: VirtualQAbstractProxyModel, index: gen_qabstractitemmodel_
   QAbstractProxyModelsetData(self[], index, value, role)
 proc fcQAbstractProxyModel_method_callback_setData(self: pointer, index: pointer, value: pointer, role: cint): bool {.cdecl.} =
   let inst = cast[VirtualQAbstractProxyModel](fcQAbstractProxyModel_vdata(self)[])
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index)
-  let slotval2 = gen_qvariant_types.QVariant(h: value)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
+  let slotval2 = gen_qvariant_types.QVariant(h: value, owned: false)
   let slotval3 = role
   var virtualReturn = inst.setData(slotval1, slotval2, slotval3)
   virtualReturn
@@ -1269,7 +1328,7 @@ method setItemData*(self: VirtualQAbstractProxyModel, index: gen_qabstractitemmo
   QAbstractProxyModelsetItemData(self[], index, roles)
 proc fcQAbstractProxyModel_method_callback_setItemData(self: pointer, index: pointer, roles: struct_miqt_map): bool {.cdecl.} =
   let inst = cast[VirtualQAbstractProxyModel](fcQAbstractProxyModel_vdata(self)[])
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var vroles_mm = roles
   var vrolesx_ret: Table[cint, gen_qvariant_types.QVariant]
   var vroles_Keys = cast[ptr UncheckedArray[cint]](vroles_mm.keys)
@@ -1277,7 +1336,7 @@ proc fcQAbstractProxyModel_method_callback_setItemData(self: pointer, index: poi
   for i in 0..<vroles_mm.len:
     var vroles_entry_Key = vroles_Keys[i]
 
-    var vroles_entry_Value = gen_qvariant_types.QVariant(h: vroles_Values[i])
+    var vroles_entry_Value = gen_qvariant_types.QVariant(h: vroles_Values[i], owned: true)
 
     vrolesx_ret[vroles_entry_Key] = vroles_entry_Value
   c_free(vroles_mm.keys)
@@ -1292,7 +1351,7 @@ proc fcQAbstractProxyModel_method_callback_setHeaderData(self: pointer, section:
   let inst = cast[VirtualQAbstractProxyModel](fcQAbstractProxyModel_vdata(self)[])
   let slotval1 = section
   let slotval2 = cint(orientation)
-  let slotval3 = gen_qvariant_types.QVariant(h: value)
+  let slotval3 = gen_qvariant_types.QVariant(h: value, owned: false)
   let slotval4 = role
   var virtualReturn = inst.setHeaderData(slotval1, slotval2, slotval3, slotval4)
   virtualReturn
@@ -1301,7 +1360,7 @@ method clearItemData*(self: VirtualQAbstractProxyModel, index: gen_qabstractitem
   QAbstractProxyModelclearItemData(self[], index)
 proc fcQAbstractProxyModel_method_callback_clearItemData(self: pointer, index: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQAbstractProxyModel](fcQAbstractProxyModel_vdata(self)[])
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var virtualReturn = inst.clearItemData(slotval1)
   virtualReturn
 
@@ -1309,7 +1368,7 @@ method buddy*(self: VirtualQAbstractProxyModel, index: gen_qabstractitemmodel_ty
   QAbstractProxyModelbuddy(self[], index)
 proc fcQAbstractProxyModel_method_callback_buddy(self: pointer, index: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQAbstractProxyModel](fcQAbstractProxyModel_vdata(self)[])
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var virtualReturn = inst.buddy(slotval1)
   virtualReturn.h
 
@@ -1317,7 +1376,7 @@ method canFetchMore*(self: VirtualQAbstractProxyModel, parent: gen_qabstractitem
   QAbstractProxyModelcanFetchMore(self[], parent)
 proc fcQAbstractProxyModel_method_callback_canFetchMore(self: pointer, parent: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQAbstractProxyModel](fcQAbstractProxyModel_vdata(self)[])
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   var virtualReturn = inst.canFetchMore(slotval1)
   virtualReturn
 
@@ -1325,7 +1384,7 @@ method fetchMore*(self: VirtualQAbstractProxyModel, parent: gen_qabstractitemmod
   QAbstractProxyModelfetchMore(self[], parent)
 proc fcQAbstractProxyModel_method_callback_fetchMore(self: pointer, parent: pointer): void {.cdecl.} =
   let inst = cast[VirtualQAbstractProxyModel](fcQAbstractProxyModel_vdata(self)[])
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   inst.fetchMore(slotval1)
 
 method sort*(self: VirtualQAbstractProxyModel, column: cint, order: cint): void {.base.} =
@@ -1340,7 +1399,7 @@ method span*(self: VirtualQAbstractProxyModel, index: gen_qabstractitemmodel_typ
   QAbstractProxyModelspan(self[], index)
 proc fcQAbstractProxyModel_method_callback_span(self: pointer, index: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQAbstractProxyModel](fcQAbstractProxyModel_vdata(self)[])
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var virtualReturn = inst.span(slotval1)
   virtualReturn.h
 
@@ -1348,7 +1407,7 @@ method hasChildren*(self: VirtualQAbstractProxyModel, parent: gen_qabstractitemm
   QAbstractProxyModelhasChildren(self[], parent)
 proc fcQAbstractProxyModel_method_callback_hasChildren(self: pointer, parent: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQAbstractProxyModel](fcQAbstractProxyModel_vdata(self)[])
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   var virtualReturn = inst.hasChildren(slotval1)
   virtualReturn
 
@@ -1358,7 +1417,7 @@ proc fcQAbstractProxyModel_method_callback_sibling(self: pointer, row: cint, col
   let inst = cast[VirtualQAbstractProxyModel](fcQAbstractProxyModel_vdata(self)[])
   let slotval1 = row
   let slotval2 = column
-  let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: idx)
+  let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: idx, owned: false)
   var virtualReturn = inst.sibling(slotval1, slotval2, slotval3)
   virtualReturn.h
 
@@ -1370,7 +1429,7 @@ proc fcQAbstractProxyModel_method_callback_mimeData(self: pointer, indexes: stru
   var vindexesx_ret = newSeq[gen_qabstractitemmodel_types.QModelIndex](int(vindexes_ma.len))
   let vindexes_outCast = cast[ptr UncheckedArray[pointer]](vindexes_ma.data)
   for i in 0 ..< vindexes_ma.len:
-    vindexesx_ret[i] = gen_qabstractitemmodel_types.QModelIndex(h: vindexes_outCast[i])
+    vindexesx_ret[i] = gen_qabstractitemmodel_types.QModelIndex(h: vindexes_outCast[i], owned: true)
   c_free(vindexes_ma.data)
   let slotval1 = vindexesx_ret
   var virtualReturn = inst.mimeData(slotval1)
@@ -1380,11 +1439,11 @@ method canDropMimeData*(self: VirtualQAbstractProxyModel, data: gen_qmimedata_ty
   QAbstractProxyModelcanDropMimeData(self[], data, action, row, column, parent)
 proc fcQAbstractProxyModel_method_callback_canDropMimeData(self: pointer, data: pointer, action: cint, row: cint, column: cint, parent: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQAbstractProxyModel](fcQAbstractProxyModel_vdata(self)[])
-  let slotval1 = gen_qmimedata_types.QMimeData(h: data)
+  let slotval1 = gen_qmimedata_types.QMimeData(h: data, owned: false)
   let slotval2 = cint(action)
   let slotval3 = row
   let slotval4 = column
-  let slotval5 = gen_qabstractitemmodel_types.QModelIndex(h: parent)
+  let slotval5 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   var virtualReturn = inst.canDropMimeData(slotval1, slotval2, slotval3, slotval4, slotval5)
   virtualReturn
 
@@ -1392,11 +1451,11 @@ method dropMimeData*(self: VirtualQAbstractProxyModel, data: gen_qmimedata_types
   QAbstractProxyModeldropMimeData(self[], data, action, row, column, parent)
 proc fcQAbstractProxyModel_method_callback_dropMimeData(self: pointer, data: pointer, action: cint, row: cint, column: cint, parent: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQAbstractProxyModel](fcQAbstractProxyModel_vdata(self)[])
-  let slotval1 = gen_qmimedata_types.QMimeData(h: data)
+  let slotval1 = gen_qmimedata_types.QMimeData(h: data, owned: false)
   let slotval2 = cint(action)
   let slotval3 = row
   let slotval4 = column
-  let slotval5 = gen_qabstractitemmodel_types.QModelIndex(h: parent)
+  let slotval5 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   var virtualReturn = inst.dropMimeData(slotval1, slotval2, slotval3, slotval4, slotval5)
   virtualReturn
 
@@ -1433,8 +1492,11 @@ proc fcQAbstractProxyModel_method_callback_roleNames(self: pointer): struct_miqt
   var virtualReturn_Keys_CArray = newSeq[cint](len(virtualReturn))
   var virtualReturn_Values_CArray = newSeq[struct_miqt_string](len(virtualReturn))
   var virtualReturn_ctr = 0
-  for virtualReturn_k, virtualReturn_v in virtualReturn:
+  for virtualReturn_k in virtualReturn.keys():
     virtualReturn_Keys_CArray[virtualReturn_ctr] = virtualReturn_k
+    virtualReturn_ctr += 1
+  virtualReturn_ctr = 0
+  for virtualReturn_v in virtualReturn.values():
     virtualReturn_Values_CArray[virtualReturn_ctr] = struct_miqt_string(data: if len(virtualReturn_v) > 0: addr virtualReturn_v[0] else: nil, len: csize_t(len(virtualReturn_v)))
     virtualReturn_ctr += 1
 
@@ -1446,7 +1508,7 @@ proc fcQAbstractProxyModel_method_callback_index(self: pointer, row: cint, colum
   let inst = cast[VirtualQAbstractProxyModel](fcQAbstractProxyModel_vdata(self)[])
   let slotval1 = row
   let slotval2 = column
-  let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: parent)
+  let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   var virtualReturn = inst.index(slotval1, slotval2, slotval3)
   virtualReturn.h
 
@@ -1454,7 +1516,7 @@ method parent*(self: VirtualQAbstractProxyModel, child: gen_qabstractitemmodel_t
   raiseAssert("missing implementation of QAbstractProxyModel_virtualbase_parent")
 proc fcQAbstractProxyModel_method_callback_parent(self: pointer, child: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQAbstractProxyModel](fcQAbstractProxyModel_vdata(self)[])
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: child)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: child, owned: false)
   var virtualReturn = inst.parent(slotval1)
   virtualReturn.h
 
@@ -1462,7 +1524,7 @@ method rowCount*(self: VirtualQAbstractProxyModel, parent: gen_qabstractitemmode
   raiseAssert("missing implementation of QAbstractProxyModel_virtualbase_rowCount")
 proc fcQAbstractProxyModel_method_callback_rowCount(self: pointer, parent: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQAbstractProxyModel](fcQAbstractProxyModel_vdata(self)[])
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   var virtualReturn = inst.rowCount(slotval1)
   virtualReturn
 
@@ -1470,7 +1532,7 @@ method columnCount*(self: VirtualQAbstractProxyModel, parent: gen_qabstractitemm
   raiseAssert("missing implementation of QAbstractProxyModel_virtualbase_columnCount")
 proc fcQAbstractProxyModel_method_callback_columnCount(self: pointer, parent: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQAbstractProxyModel](fcQAbstractProxyModel_vdata(self)[])
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   var virtualReturn = inst.columnCount(slotval1)
   virtualReturn
 
@@ -1480,7 +1542,7 @@ proc fcQAbstractProxyModel_method_callback_insertRows(self: pointer, row: cint, 
   let inst = cast[VirtualQAbstractProxyModel](fcQAbstractProxyModel_vdata(self)[])
   let slotval1 = row
   let slotval2 = count
-  let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: parent)
+  let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   var virtualReturn = inst.insertRows(slotval1, slotval2, slotval3)
   virtualReturn
 
@@ -1490,7 +1552,7 @@ proc fcQAbstractProxyModel_method_callback_insertColumns(self: pointer, column: 
   let inst = cast[VirtualQAbstractProxyModel](fcQAbstractProxyModel_vdata(self)[])
   let slotval1 = column
   let slotval2 = count
-  let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: parent)
+  let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   var virtualReturn = inst.insertColumns(slotval1, slotval2, slotval3)
   virtualReturn
 
@@ -1500,7 +1562,7 @@ proc fcQAbstractProxyModel_method_callback_removeRows(self: pointer, row: cint, 
   let inst = cast[VirtualQAbstractProxyModel](fcQAbstractProxyModel_vdata(self)[])
   let slotval1 = row
   let slotval2 = count
-  let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: parent)
+  let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   var virtualReturn = inst.removeRows(slotval1, slotval2, slotval3)
   virtualReturn
 
@@ -1510,7 +1572,7 @@ proc fcQAbstractProxyModel_method_callback_removeColumns(self: pointer, column: 
   let inst = cast[VirtualQAbstractProxyModel](fcQAbstractProxyModel_vdata(self)[])
   let slotval1 = column
   let slotval2 = count
-  let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: parent)
+  let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   var virtualReturn = inst.removeColumns(slotval1, slotval2, slotval3)
   virtualReturn
 
@@ -1518,10 +1580,10 @@ method moveRows*(self: VirtualQAbstractProxyModel, sourceParent: gen_qabstractit
   QAbstractProxyModelmoveRows(self[], sourceParent, sourceRow, count, destinationParent, destinationChild)
 proc fcQAbstractProxyModel_method_callback_moveRows(self: pointer, sourceParent: pointer, sourceRow: cint, count: cint, destinationParent: pointer, destinationChild: cint): bool {.cdecl.} =
   let inst = cast[VirtualQAbstractProxyModel](fcQAbstractProxyModel_vdata(self)[])
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: sourceParent)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: sourceParent, owned: false)
   let slotval2 = sourceRow
   let slotval3 = count
-  let slotval4 = gen_qabstractitemmodel_types.QModelIndex(h: destinationParent)
+  let slotval4 = gen_qabstractitemmodel_types.QModelIndex(h: destinationParent, owned: false)
   let slotval5 = destinationChild
   var virtualReturn = inst.moveRows(slotval1, slotval2, slotval3, slotval4, slotval5)
   virtualReturn
@@ -1530,10 +1592,10 @@ method moveColumns*(self: VirtualQAbstractProxyModel, sourceParent: gen_qabstrac
   QAbstractProxyModelmoveColumns(self[], sourceParent, sourceColumn, count, destinationParent, destinationChild)
 proc fcQAbstractProxyModel_method_callback_moveColumns(self: pointer, sourceParent: pointer, sourceColumn: cint, count: cint, destinationParent: pointer, destinationChild: cint): bool {.cdecl.} =
   let inst = cast[VirtualQAbstractProxyModel](fcQAbstractProxyModel_vdata(self)[])
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: sourceParent)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: sourceParent, owned: false)
   let slotval2 = sourceColumn
   let slotval3 = count
-  let slotval4 = gen_qabstractitemmodel_types.QModelIndex(h: destinationParent)
+  let slotval4 = gen_qabstractitemmodel_types.QModelIndex(h: destinationParent, owned: false)
   let slotval5 = destinationChild
   var virtualReturn = inst.moveColumns(slotval1, slotval2, slotval3, slotval4, slotval5)
   virtualReturn
@@ -1542,9 +1604,9 @@ method match*(self: VirtualQAbstractProxyModel, start: gen_qabstractitemmodel_ty
   QAbstractProxyModelmatch(self[], start, role, value, hits, flags)
 proc fcQAbstractProxyModel_method_callback_match(self: pointer, start: pointer, role: cint, value: pointer, hits: cint, flags: cint): struct_miqt_array {.cdecl.} =
   let inst = cast[VirtualQAbstractProxyModel](fcQAbstractProxyModel_vdata(self)[])
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: start)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: start, owned: false)
   let slotval2 = role
-  let slotval3 = gen_qvariant_types.QVariant(h: value)
+  let slotval3 = gen_qvariant_types.QVariant(h: value, owned: false)
   let slotval4 = hits
   let slotval5 = cint(flags)
   var virtualReturn = inst.match(slotval1, slotval2, slotval3, slotval4, slotval5)
@@ -1558,8 +1620,8 @@ method multiData*(self: VirtualQAbstractProxyModel, index: gen_qabstractitemmode
   QAbstractProxyModelmultiData(self[], index, roleDataSpan)
 proc fcQAbstractProxyModel_method_callback_multiData(self: pointer, index: pointer, roleDataSpan: pointer): void {.cdecl.} =
   let inst = cast[VirtualQAbstractProxyModel](fcQAbstractProxyModel_vdata(self)[])
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index)
-  let slotval2 = gen_qabstractitemmodel_types.QModelRoleDataSpan(h: roleDataSpan)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
+  let slotval2 = gen_qabstractitemmodel_types.QModelRoleDataSpan(h: roleDataSpan, owned: true)
   inst.multiData(slotval1, slotval2)
 
 method resetInternalData*(self: VirtualQAbstractProxyModel): void {.base.} =
@@ -1572,7 +1634,7 @@ method event*(self: VirtualQAbstractProxyModel, event: gen_qcoreevent_types.QEve
   QAbstractProxyModelevent(self[], event)
 proc fcQAbstractProxyModel_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQAbstractProxyModel](fcQAbstractProxyModel_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
@@ -1580,8 +1642,8 @@ method eventFilter*(self: VirtualQAbstractProxyModel, watched: gen_qobject_types
   QAbstractProxyModeleventFilter(self[], watched, event)
 proc fcQAbstractProxyModel_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQAbstractProxyModel](fcQAbstractProxyModel_vdata(self)[])
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
@@ -1589,42 +1651,42 @@ method timerEvent*(self: VirtualQAbstractProxyModel, event: gen_qcoreevent_types
   QAbstractProxyModeltimerEvent(self[], event)
 proc fcQAbstractProxyModel_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQAbstractProxyModel](fcQAbstractProxyModel_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
 method childEvent*(self: VirtualQAbstractProxyModel, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
   QAbstractProxyModelchildEvent(self[], event)
 proc fcQAbstractProxyModel_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQAbstractProxyModel](fcQAbstractProxyModel_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
 method customEvent*(self: VirtualQAbstractProxyModel, event: gen_qcoreevent_types.QEvent): void {.base.} =
   QAbstractProxyModelcustomEvent(self[], event)
 proc fcQAbstractProxyModel_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQAbstractProxyModel](fcQAbstractProxyModel_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
 method connectNotify*(self: VirtualQAbstractProxyModel, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
   QAbstractProxyModelconnectNotify(self[], signal)
 proc fcQAbstractProxyModel_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQAbstractProxyModel](fcQAbstractProxyModel_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
 method disconnectNotify*(self: VirtualQAbstractProxyModel, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
   QAbstractProxyModeldisconnectNotify(self[], signal)
 proc fcQAbstractProxyModel_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQAbstractProxyModel](fcQAbstractProxyModel_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
 
 proc createSourceIndex*(self: gen_qabstractproxymodel_types.QAbstractProxyModel, row: cint, col: cint, internalPtr: pointer): gen_qabstractitemmodel_types.QModelIndex =
-  gen_qabstractitemmodel_types.QModelIndex(h: fcQAbstractProxyModel_protectedbase_createSourceIndex(self.h, row, col, internalPtr))
+  gen_qabstractitemmodel_types.QModelIndex(h: fcQAbstractProxyModel_protectedbase_createSourceIndex(self.h, row, col, internalPtr), owned: true)
 
 proc createIndex*(self: gen_qabstractproxymodel_types.QAbstractProxyModel, row: cint, column: cint): gen_qabstractitemmodel_types.QModelIndex =
-  gen_qabstractitemmodel_types.QModelIndex(h: fcQAbstractProxyModel_protectedbase_createIndex(self.h, row, column))
+  gen_qabstractitemmodel_types.QModelIndex(h: fcQAbstractProxyModel_protectedbase_createIndex(self.h, row, column), owned: true)
 
 proc encodeData*(self: gen_qabstractproxymodel_types.QAbstractProxyModel, indexes: seq[gen_qabstractitemmodel_types.QModelIndex], stream: gen_qdatastream_types.QDataStream): void =
   var indexes_CArray = newSeq[pointer](len(indexes))
@@ -1697,12 +1759,12 @@ proc persistentIndexList*(self: gen_qabstractproxymodel_types.QAbstractProxyMode
   var vx_ret = newSeq[gen_qabstractitemmodel_types.QModelIndex](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qabstractitemmodel_types.QModelIndex(h: v_outCast[i])
+    vx_ret[i] = gen_qabstractitemmodel_types.QModelIndex(h: v_outCast[i], owned: true)
   c_free(v_ma.data)
   vx_ret
 
 proc sender*(self: gen_qabstractproxymodel_types.QAbstractProxyModel): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQAbstractProxyModel_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQAbstractProxyModel_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qabstractproxymodel_types.QAbstractProxyModel): cint =
   fcQAbstractProxyModel_protectedbase_senderSignalIndex(self.h)
@@ -1824,7 +1886,7 @@ proc create*(T: type gen_qabstractproxymodel_types.QAbstractProxyModel,
     vtbl[].vtbl.connectNotify = fcQAbstractProxyModel_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQAbstractProxyModel_vtable_callback_disconnectNotify
-  let tmp = gen_qabstractproxymodel_types.QAbstractProxyModel(h: fcQAbstractProxyModel_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))))
+  let tmp = gen_qabstractproxymodel_types.QAbstractProxyModel(h: fcQAbstractProxyModel_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))), owned: true)
   fcQAbstractProxyModel_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qabstractproxymodel_types.QAbstractProxyModel,
@@ -1939,13 +2001,14 @@ proc create*(T: type gen_qabstractproxymodel_types.QAbstractProxyModel,
     vtbl[].vtbl.connectNotify = fcQAbstractProxyModel_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQAbstractProxyModel_vtable_callback_disconnectNotify
-  let tmp = gen_qabstractproxymodel_types.QAbstractProxyModel(h: fcQAbstractProxyModel_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h))
+  let tmp = gen_qabstractproxymodel_types.QAbstractProxyModel(h: fcQAbstractProxyModel_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h), owned: true)
   fcQAbstractProxyModel_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQAbstractProxyModel_mvtbl = cQAbstractProxyModelVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQAbstractProxyModel()[])](self.fcQAbstractProxyModel_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   metaObject: fcQAbstractProxyModel_method_callback_metaObject,
   metacast: fcQAbstractProxyModel_method_callback_metacast,
@@ -2015,5 +2078,3 @@ proc create*(T: type gen_qabstractproxymodel_types.QAbstractProxyModel,
 
 proc staticMetaObject*(_: type gen_qabstractproxymodel_types.QAbstractProxyModel): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQAbstractProxyModel_staticMetaObject())
-proc delete*(self: gen_qabstractproxymodel_types.QAbstractProxyModel) =
-  fcQAbstractProxyModel_delete(self.h)

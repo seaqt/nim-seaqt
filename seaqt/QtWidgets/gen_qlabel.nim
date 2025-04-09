@@ -32,7 +32,7 @@ func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
     else:
       copyMem(addr result[0], v.data, len)
 
-const cflags = gorge("pkg-config --cflags Qt6Widgets")  & " -fPIC"
+const cflags = gorge("pkg-config --cflags Qt6Widgets") & " -fPIC"
 {.compile("gen_qlabel.cpp", cflags).}
 
 
@@ -249,10 +249,9 @@ proc fcQLabel_new4(vtbl: pointer, vdata: csize_t, parent: pointer, f: cint): ptr
 proc fcQLabel_new5(vtbl: pointer, vdata: csize_t, text: struct_miqt_string, parent: pointer): ptr cQLabel {.importc: "QLabel_new5".}
 proc fcQLabel_new6(vtbl: pointer, vdata: csize_t, text: struct_miqt_string, parent: pointer, f: cint): ptr cQLabel {.importc: "QLabel_new6".}
 proc fcQLabel_staticMetaObject(): pointer {.importc: "QLabel_staticMetaObject".}
-proc fcQLabel_delete(self: pointer) {.importc: "QLabel_delete".}
 
 proc metaObject*(self: gen_qlabel_types.QLabel): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQLabel_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQLabel_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qlabel_types.QLabel, param1: cstring): pointer =
   fcQLabel_metacast(self.h, param1)
@@ -273,19 +272,19 @@ proc text*(self: gen_qlabel_types.QLabel): string =
   vx_ret
 
 proc pixmap*(self: gen_qlabel_types.QLabel, param1: cint): gen_qpixmap_types.QPixmap =
-  gen_qpixmap_types.QPixmap(h: fcQLabel_pixmap(self.h, cint(param1)))
+  gen_qpixmap_types.QPixmap(h: fcQLabel_pixmap(self.h, cint(param1)), owned: true)
 
 proc pixmap*(self: gen_qlabel_types.QLabel): gen_qpixmap_types.QPixmap =
-  gen_qpixmap_types.QPixmap(h: fcQLabel_pixmap2(self.h))
+  gen_qpixmap_types.QPixmap(h: fcQLabel_pixmap2(self.h), owned: true)
 
 proc picture*(self: gen_qlabel_types.QLabel, param1: cint): gen_qpicture_types.QPicture =
-  gen_qpicture_types.QPicture(h: fcQLabel_picture(self.h, cint(param1)))
+  gen_qpicture_types.QPicture(h: fcQLabel_picture(self.h, cint(param1)), owned: true)
 
 proc picture*(self: gen_qlabel_types.QLabel): gen_qpicture_types.QPicture =
-  gen_qpicture_types.QPicture(h: fcQLabel_picture2(self.h))
+  gen_qpicture_types.QPicture(h: fcQLabel_picture2(self.h), owned: true)
 
 proc movie*(self: gen_qlabel_types.QLabel): gen_qmovie_types.QMovie =
-  gen_qmovie_types.QMovie(h: fcQLabel_movie(self.h))
+  gen_qmovie_types.QMovie(h: fcQLabel_movie(self.h), owned: false)
 
 proc textFormat*(self: gen_qlabel_types.QLabel): cint =
   cint(fcQLabel_textFormat(self.h))
@@ -324,16 +323,16 @@ proc setScaledContents*(self: gen_qlabel_types.QLabel, scaledContents: bool): vo
   fcQLabel_setScaledContents(self.h, scaledContents)
 
 proc sizeHint*(self: gen_qlabel_types.QLabel): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQLabel_sizeHint(self.h))
+  gen_qsize_types.QSize(h: fcQLabel_sizeHint(self.h), owned: true)
 
 proc minimumSizeHint*(self: gen_qlabel_types.QLabel): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQLabel_minimumSizeHint(self.h))
+  gen_qsize_types.QSize(h: fcQLabel_minimumSizeHint(self.h), owned: true)
 
 proc setBuddy*(self: gen_qlabel_types.QLabel, buddy: gen_qwidget_types.QWidget): void =
   fcQLabel_setBuddy(self.h, buddy.h)
 
 proc buddy*(self: gen_qlabel_types.QLabel): gen_qwidget_types.QWidget =
-  gen_qwidget_types.QWidget(h: fcQLabel_buddy(self.h))
+  gen_qwidget_types.QWidget(h: fcQLabel_buddy(self.h), owned: false)
 
 proc heightForWidth*(self: gen_qlabel_types.QLabel, param1: cint): cint =
   fcQLabel_heightForWidth(self.h, param1)
@@ -495,7 +494,7 @@ type QLabelchildEventProc* = proc(self: QLabel, event: gen_qcoreevent_types.QChi
 type QLabelcustomEventProc* = proc(self: QLabel, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QLabelconnectNotifyProc* = proc(self: QLabel, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QLabeldisconnectNotifyProc* = proc(self: QLabel, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
-type QLabelVTable* = object
+type QLabelVTable* {.inheritable, pure.} = object
   vtbl: cQLabelVTable
   metaObject*: QLabelmetaObjectProc
   metacast*: QLabelmetacastProc
@@ -549,13 +548,16 @@ type QLabelVTable* = object
   connectNotify*: QLabelconnectNotifyProc
   disconnectNotify*: QLabeldisconnectNotifyProc
 proc QLabelmetaObject*(self: gen_qlabel_types.QLabel): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQLabel_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQLabel_virtualbase_metaObject(self.h), owned: false)
 
 proc fcQLabel_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QLabelVTable](fcQLabel_vdata(self)[])
   let self = QLabel(h: self)
   var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QLabelmetacast*(self: gen_qlabel_types.QLabel, param1: cstring): pointer =
   fcQLabel_virtualbase_metacast(self.h, param1)
@@ -580,22 +582,28 @@ proc fcQLabel_vtable_callback_metacall(self: pointer, param1: cint, param2: cint
   virtualReturn
 
 proc QLabelsizeHint*(self: gen_qlabel_types.QLabel): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQLabel_virtualbase_sizeHint(self.h))
+  gen_qsize_types.QSize(h: fcQLabel_virtualbase_sizeHint(self.h), owned: true)
 
 proc fcQLabel_vtable_callback_sizeHint(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QLabelVTable](fcQLabel_vdata(self)[])
   let self = QLabel(h: self)
   var virtualReturn = vtbl[].sizeHint(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QLabelminimumSizeHint*(self: gen_qlabel_types.QLabel): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQLabel_virtualbase_minimumSizeHint(self.h))
+  gen_qsize_types.QSize(h: fcQLabel_virtualbase_minimumSizeHint(self.h), owned: true)
 
 proc fcQLabel_vtable_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QLabelVTable](fcQLabel_vdata(self)[])
   let self = QLabel(h: self)
   var virtualReturn = vtbl[].minimumSizeHint(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QLabelheightForWidth*(self: gen_qlabel_types.QLabel, param1: cint): cint =
   fcQLabel_virtualbase_heightForWidth(self.h, param1)
@@ -613,7 +621,7 @@ proc QLabelevent*(self: gen_qlabel_types.QLabel, e: gen_qcoreevent_types.QEvent)
 proc fcQLabel_vtable_callback_event(self: pointer, e: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QLabelVTable](fcQLabel_vdata(self)[])
   let self = QLabel(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: e)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: e, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
@@ -623,7 +631,7 @@ proc QLabelkeyPressEvent*(self: gen_qlabel_types.QLabel, ev: gen_qevent_types.QK
 proc fcQLabel_vtable_callback_keyPressEvent(self: pointer, ev: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QLabelVTable](fcQLabel_vdata(self)[])
   let self = QLabel(h: self)
-  let slotval1 = gen_qevent_types.QKeyEvent(h: ev)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: ev, owned: false)
   vtbl[].keyPressEvent(self, slotval1)
 
 proc QLabelpaintEvent*(self: gen_qlabel_types.QLabel, param1: gen_qevent_types.QPaintEvent): void =
@@ -632,7 +640,7 @@ proc QLabelpaintEvent*(self: gen_qlabel_types.QLabel, param1: gen_qevent_types.Q
 proc fcQLabel_vtable_callback_paintEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QLabelVTable](fcQLabel_vdata(self)[])
   let self = QLabel(h: self)
-  let slotval1 = gen_qevent_types.QPaintEvent(h: param1)
+  let slotval1 = gen_qevent_types.QPaintEvent(h: param1, owned: false)
   vtbl[].paintEvent(self, slotval1)
 
 proc QLabelchangeEvent*(self: gen_qlabel_types.QLabel, param1: gen_qcoreevent_types.QEvent): void =
@@ -641,7 +649,7 @@ proc QLabelchangeEvent*(self: gen_qlabel_types.QLabel, param1: gen_qcoreevent_ty
 proc fcQLabel_vtable_callback_changeEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QLabelVTable](fcQLabel_vdata(self)[])
   let self = QLabel(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: param1)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
   vtbl[].changeEvent(self, slotval1)
 
 proc QLabelmousePressEvent*(self: gen_qlabel_types.QLabel, ev: gen_qevent_types.QMouseEvent): void =
@@ -650,7 +658,7 @@ proc QLabelmousePressEvent*(self: gen_qlabel_types.QLabel, ev: gen_qevent_types.
 proc fcQLabel_vtable_callback_mousePressEvent(self: pointer, ev: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QLabelVTable](fcQLabel_vdata(self)[])
   let self = QLabel(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: ev)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: ev, owned: false)
   vtbl[].mousePressEvent(self, slotval1)
 
 proc QLabelmouseMoveEvent*(self: gen_qlabel_types.QLabel, ev: gen_qevent_types.QMouseEvent): void =
@@ -659,7 +667,7 @@ proc QLabelmouseMoveEvent*(self: gen_qlabel_types.QLabel, ev: gen_qevent_types.Q
 proc fcQLabel_vtable_callback_mouseMoveEvent(self: pointer, ev: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QLabelVTable](fcQLabel_vdata(self)[])
   let self = QLabel(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: ev)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: ev, owned: false)
   vtbl[].mouseMoveEvent(self, slotval1)
 
 proc QLabelmouseReleaseEvent*(self: gen_qlabel_types.QLabel, ev: gen_qevent_types.QMouseEvent): void =
@@ -668,7 +676,7 @@ proc QLabelmouseReleaseEvent*(self: gen_qlabel_types.QLabel, ev: gen_qevent_type
 proc fcQLabel_vtable_callback_mouseReleaseEvent(self: pointer, ev: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QLabelVTable](fcQLabel_vdata(self)[])
   let self = QLabel(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: ev)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: ev, owned: false)
   vtbl[].mouseReleaseEvent(self, slotval1)
 
 proc QLabelcontextMenuEvent*(self: gen_qlabel_types.QLabel, ev: gen_qevent_types.QContextMenuEvent): void =
@@ -677,7 +685,7 @@ proc QLabelcontextMenuEvent*(self: gen_qlabel_types.QLabel, ev: gen_qevent_types
 proc fcQLabel_vtable_callback_contextMenuEvent(self: pointer, ev: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QLabelVTable](fcQLabel_vdata(self)[])
   let self = QLabel(h: self)
-  let slotval1 = gen_qevent_types.QContextMenuEvent(h: ev)
+  let slotval1 = gen_qevent_types.QContextMenuEvent(h: ev, owned: false)
   vtbl[].contextMenuEvent(self, slotval1)
 
 proc QLabelfocusInEvent*(self: gen_qlabel_types.QLabel, ev: gen_qevent_types.QFocusEvent): void =
@@ -686,7 +694,7 @@ proc QLabelfocusInEvent*(self: gen_qlabel_types.QLabel, ev: gen_qevent_types.QFo
 proc fcQLabel_vtable_callback_focusInEvent(self: pointer, ev: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QLabelVTable](fcQLabel_vdata(self)[])
   let self = QLabel(h: self)
-  let slotval1 = gen_qevent_types.QFocusEvent(h: ev)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: ev, owned: false)
   vtbl[].focusInEvent(self, slotval1)
 
 proc QLabelfocusOutEvent*(self: gen_qlabel_types.QLabel, ev: gen_qevent_types.QFocusEvent): void =
@@ -695,7 +703,7 @@ proc QLabelfocusOutEvent*(self: gen_qlabel_types.QLabel, ev: gen_qevent_types.QF
 proc fcQLabel_vtable_callback_focusOutEvent(self: pointer, ev: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QLabelVTable](fcQLabel_vdata(self)[])
   let self = QLabel(h: self)
-  let slotval1 = gen_qevent_types.QFocusEvent(h: ev)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: ev, owned: false)
   vtbl[].focusOutEvent(self, slotval1)
 
 proc QLabelfocusNextPrevChild*(self: gen_qlabel_types.QLabel, next: bool): bool =
@@ -714,7 +722,7 @@ proc QLabelinitStyleOption*(self: gen_qlabel_types.QLabel, option: gen_qstyleopt
 proc fcQLabel_vtable_callback_initStyleOption(self: pointer, option: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QLabelVTable](fcQLabel_vdata(self)[])
   let self = QLabel(h: self)
-  let slotval1 = gen_qstyleoption_types.QStyleOptionFrame(h: option)
+  let slotval1 = gen_qstyleoption_types.QStyleOptionFrame(h: option, owned: false)
   vtbl[].initStyleOption(self, slotval1)
 
 proc QLabeldevType*(self: gen_qlabel_types.QLabel): cint =
@@ -745,13 +753,16 @@ proc fcQLabel_vtable_callback_hasHeightForWidth(self: pointer): bool {.cdecl.} =
   virtualReturn
 
 proc QLabelpaintEngine*(self: gen_qlabel_types.QLabel): gen_qpaintengine_types.QPaintEngine =
-  gen_qpaintengine_types.QPaintEngine(h: fcQLabel_virtualbase_paintEngine(self.h))
+  gen_qpaintengine_types.QPaintEngine(h: fcQLabel_virtualbase_paintEngine(self.h), owned: false)
 
 proc fcQLabel_vtable_callback_paintEngine(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QLabelVTable](fcQLabel_vdata(self)[])
   let self = QLabel(h: self)
   var virtualReturn = vtbl[].paintEngine(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QLabelmouseDoubleClickEvent*(self: gen_qlabel_types.QLabel, event: gen_qevent_types.QMouseEvent): void =
   fcQLabel_virtualbase_mouseDoubleClickEvent(self.h, event.h)
@@ -759,7 +770,7 @@ proc QLabelmouseDoubleClickEvent*(self: gen_qlabel_types.QLabel, event: gen_qeve
 proc fcQLabel_vtable_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QLabelVTable](fcQLabel_vdata(self)[])
   let self = QLabel(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseDoubleClickEvent(self, slotval1)
 
 proc QLabelwheelEvent*(self: gen_qlabel_types.QLabel, event: gen_qevent_types.QWheelEvent): void =
@@ -768,7 +779,7 @@ proc QLabelwheelEvent*(self: gen_qlabel_types.QLabel, event: gen_qevent_types.QW
 proc fcQLabel_vtable_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QLabelVTable](fcQLabel_vdata(self)[])
   let self = QLabel(h: self)
-  let slotval1 = gen_qevent_types.QWheelEvent(h: event)
+  let slotval1 = gen_qevent_types.QWheelEvent(h: event, owned: false)
   vtbl[].wheelEvent(self, slotval1)
 
 proc QLabelkeyReleaseEvent*(self: gen_qlabel_types.QLabel, event: gen_qevent_types.QKeyEvent): void =
@@ -777,7 +788,7 @@ proc QLabelkeyReleaseEvent*(self: gen_qlabel_types.QLabel, event: gen_qevent_typ
 proc fcQLabel_vtable_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QLabelVTable](fcQLabel_vdata(self)[])
   let self = QLabel(h: self)
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   vtbl[].keyReleaseEvent(self, slotval1)
 
 proc QLabelenterEvent*(self: gen_qlabel_types.QLabel, event: gen_qevent_types.QEnterEvent): void =
@@ -786,7 +797,7 @@ proc QLabelenterEvent*(self: gen_qlabel_types.QLabel, event: gen_qevent_types.QE
 proc fcQLabel_vtable_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QLabelVTable](fcQLabel_vdata(self)[])
   let self = QLabel(h: self)
-  let slotval1 = gen_qevent_types.QEnterEvent(h: event)
+  let slotval1 = gen_qevent_types.QEnterEvent(h: event, owned: false)
   vtbl[].enterEvent(self, slotval1)
 
 proc QLabelleaveEvent*(self: gen_qlabel_types.QLabel, event: gen_qcoreevent_types.QEvent): void =
@@ -795,7 +806,7 @@ proc QLabelleaveEvent*(self: gen_qlabel_types.QLabel, event: gen_qcoreevent_type
 proc fcQLabel_vtable_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QLabelVTable](fcQLabel_vdata(self)[])
   let self = QLabel(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].leaveEvent(self, slotval1)
 
 proc QLabelmoveEvent*(self: gen_qlabel_types.QLabel, event: gen_qevent_types.QMoveEvent): void =
@@ -804,7 +815,7 @@ proc QLabelmoveEvent*(self: gen_qlabel_types.QLabel, event: gen_qevent_types.QMo
 proc fcQLabel_vtable_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QLabelVTable](fcQLabel_vdata(self)[])
   let self = QLabel(h: self)
-  let slotval1 = gen_qevent_types.QMoveEvent(h: event)
+  let slotval1 = gen_qevent_types.QMoveEvent(h: event, owned: false)
   vtbl[].moveEvent(self, slotval1)
 
 proc QLabelresizeEvent*(self: gen_qlabel_types.QLabel, event: gen_qevent_types.QResizeEvent): void =
@@ -813,7 +824,7 @@ proc QLabelresizeEvent*(self: gen_qlabel_types.QLabel, event: gen_qevent_types.Q
 proc fcQLabel_vtable_callback_resizeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QLabelVTable](fcQLabel_vdata(self)[])
   let self = QLabel(h: self)
-  let slotval1 = gen_qevent_types.QResizeEvent(h: event)
+  let slotval1 = gen_qevent_types.QResizeEvent(h: event, owned: false)
   vtbl[].resizeEvent(self, slotval1)
 
 proc QLabelcloseEvent*(self: gen_qlabel_types.QLabel, event: gen_qevent_types.QCloseEvent): void =
@@ -822,7 +833,7 @@ proc QLabelcloseEvent*(self: gen_qlabel_types.QLabel, event: gen_qevent_types.QC
 proc fcQLabel_vtable_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QLabelVTable](fcQLabel_vdata(self)[])
   let self = QLabel(h: self)
-  let slotval1 = gen_qevent_types.QCloseEvent(h: event)
+  let slotval1 = gen_qevent_types.QCloseEvent(h: event, owned: false)
   vtbl[].closeEvent(self, slotval1)
 
 proc QLabeltabletEvent*(self: gen_qlabel_types.QLabel, event: gen_qevent_types.QTabletEvent): void =
@@ -831,7 +842,7 @@ proc QLabeltabletEvent*(self: gen_qlabel_types.QLabel, event: gen_qevent_types.Q
 proc fcQLabel_vtable_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QLabelVTable](fcQLabel_vdata(self)[])
   let self = QLabel(h: self)
-  let slotval1 = gen_qevent_types.QTabletEvent(h: event)
+  let slotval1 = gen_qevent_types.QTabletEvent(h: event, owned: false)
   vtbl[].tabletEvent(self, slotval1)
 
 proc QLabelactionEvent*(self: gen_qlabel_types.QLabel, event: gen_qevent_types.QActionEvent): void =
@@ -840,7 +851,7 @@ proc QLabelactionEvent*(self: gen_qlabel_types.QLabel, event: gen_qevent_types.Q
 proc fcQLabel_vtable_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QLabelVTable](fcQLabel_vdata(self)[])
   let self = QLabel(h: self)
-  let slotval1 = gen_qevent_types.QActionEvent(h: event)
+  let slotval1 = gen_qevent_types.QActionEvent(h: event, owned: false)
   vtbl[].actionEvent(self, slotval1)
 
 proc QLabeldragEnterEvent*(self: gen_qlabel_types.QLabel, event: gen_qevent_types.QDragEnterEvent): void =
@@ -849,7 +860,7 @@ proc QLabeldragEnterEvent*(self: gen_qlabel_types.QLabel, event: gen_qevent_type
 proc fcQLabel_vtable_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QLabelVTable](fcQLabel_vdata(self)[])
   let self = QLabel(h: self)
-  let slotval1 = gen_qevent_types.QDragEnterEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragEnterEvent(h: event, owned: false)
   vtbl[].dragEnterEvent(self, slotval1)
 
 proc QLabeldragMoveEvent*(self: gen_qlabel_types.QLabel, event: gen_qevent_types.QDragMoveEvent): void =
@@ -858,7 +869,7 @@ proc QLabeldragMoveEvent*(self: gen_qlabel_types.QLabel, event: gen_qevent_types
 proc fcQLabel_vtable_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QLabelVTable](fcQLabel_vdata(self)[])
   let self = QLabel(h: self)
-  let slotval1 = gen_qevent_types.QDragMoveEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragMoveEvent(h: event, owned: false)
   vtbl[].dragMoveEvent(self, slotval1)
 
 proc QLabeldragLeaveEvent*(self: gen_qlabel_types.QLabel, event: gen_qevent_types.QDragLeaveEvent): void =
@@ -867,7 +878,7 @@ proc QLabeldragLeaveEvent*(self: gen_qlabel_types.QLabel, event: gen_qevent_type
 proc fcQLabel_vtable_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QLabelVTable](fcQLabel_vdata(self)[])
   let self = QLabel(h: self)
-  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event, owned: false)
   vtbl[].dragLeaveEvent(self, slotval1)
 
 proc QLabeldropEvent*(self: gen_qlabel_types.QLabel, event: gen_qevent_types.QDropEvent): void =
@@ -876,7 +887,7 @@ proc QLabeldropEvent*(self: gen_qlabel_types.QLabel, event: gen_qevent_types.QDr
 proc fcQLabel_vtable_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QLabelVTable](fcQLabel_vdata(self)[])
   let self = QLabel(h: self)
-  let slotval1 = gen_qevent_types.QDropEvent(h: event)
+  let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
   vtbl[].dropEvent(self, slotval1)
 
 proc QLabelshowEvent*(self: gen_qlabel_types.QLabel, event: gen_qevent_types.QShowEvent): void =
@@ -885,7 +896,7 @@ proc QLabelshowEvent*(self: gen_qlabel_types.QLabel, event: gen_qevent_types.QSh
 proc fcQLabel_vtable_callback_showEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QLabelVTable](fcQLabel_vdata(self)[])
   let self = QLabel(h: self)
-  let slotval1 = gen_qevent_types.QShowEvent(h: event)
+  let slotval1 = gen_qevent_types.QShowEvent(h: event, owned: false)
   vtbl[].showEvent(self, slotval1)
 
 proc QLabelhideEvent*(self: gen_qlabel_types.QLabel, event: gen_qevent_types.QHideEvent): void =
@@ -894,7 +905,7 @@ proc QLabelhideEvent*(self: gen_qlabel_types.QLabel, event: gen_qevent_types.QHi
 proc fcQLabel_vtable_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QLabelVTable](fcQLabel_vdata(self)[])
   let self = QLabel(h: self)
-  let slotval1 = gen_qevent_types.QHideEvent(h: event)
+  let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   vtbl[].hideEvent(self, slotval1)
 
 proc QLabelnativeEvent*(self: gen_qlabel_types.QLabel, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool =
@@ -928,27 +939,33 @@ proc QLabelinitPainter*(self: gen_qlabel_types.QLabel, painter: gen_qpainter_typ
 proc fcQLabel_vtable_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QLabelVTable](fcQLabel_vdata(self)[])
   let self = QLabel(h: self)
-  let slotval1 = gen_qpainter_types.QPainter(h: painter)
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
   vtbl[].initPainter(self, slotval1)
 
 proc QLabelredirected*(self: gen_qlabel_types.QLabel, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice =
-  gen_qpaintdevice_types.QPaintDevice(h: fcQLabel_virtualbase_redirected(self.h, offset.h))
+  gen_qpaintdevice_types.QPaintDevice(h: fcQLabel_virtualbase_redirected(self.h, offset.h), owned: false)
 
 proc fcQLabel_vtable_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QLabelVTable](fcQLabel_vdata(self)[])
   let self = QLabel(h: self)
-  let slotval1 = gen_qpoint_types.QPoint(h: offset)
+  let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
   var virtualReturn = vtbl[].redirected(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QLabelsharedPainter*(self: gen_qlabel_types.QLabel): gen_qpainter_types.QPainter =
-  gen_qpainter_types.QPainter(h: fcQLabel_virtualbase_sharedPainter(self.h))
+  gen_qpainter_types.QPainter(h: fcQLabel_virtualbase_sharedPainter(self.h), owned: false)
 
 proc fcQLabel_vtable_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QLabelVTable](fcQLabel_vdata(self)[])
   let self = QLabel(h: self)
   var virtualReturn = vtbl[].sharedPainter(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QLabelinputMethodEvent*(self: gen_qlabel_types.QLabel, param1: gen_qevent_types.QInputMethodEvent): void =
   fcQLabel_virtualbase_inputMethodEvent(self.h, param1.h)
@@ -956,18 +973,21 @@ proc QLabelinputMethodEvent*(self: gen_qlabel_types.QLabel, param1: gen_qevent_t
 proc fcQLabel_vtable_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QLabelVTable](fcQLabel_vdata(self)[])
   let self = QLabel(h: self)
-  let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1)
+  let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1, owned: false)
   vtbl[].inputMethodEvent(self, slotval1)
 
 proc QLabelinputMethodQuery*(self: gen_qlabel_types.QLabel, param1: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQLabel_virtualbase_inputMethodQuery(self.h, cint(param1)))
+  gen_qvariant_types.QVariant(h: fcQLabel_virtualbase_inputMethodQuery(self.h, cint(param1)), owned: true)
 
 proc fcQLabel_vtable_callback_inputMethodQuery(self: pointer, param1: cint): pointer {.cdecl.} =
   let vtbl = cast[ptr QLabelVTable](fcQLabel_vdata(self)[])
   let self = QLabel(h: self)
   let slotval1 = cint(param1)
   var virtualReturn = vtbl[].inputMethodQuery(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QLabeleventFilter*(self: gen_qlabel_types.QLabel, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
   fcQLabel_virtualbase_eventFilter(self.h, watched.h, event.h)
@@ -975,8 +995,8 @@ proc QLabeleventFilter*(self: gen_qlabel_types.QLabel, watched: gen_qobject_type
 proc fcQLabel_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QLabelVTable](fcQLabel_vdata(self)[])
   let self = QLabel(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
@@ -986,7 +1006,7 @@ proc QLabeltimerEvent*(self: gen_qlabel_types.QLabel, event: gen_qcoreevent_type
 proc fcQLabel_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QLabelVTable](fcQLabel_vdata(self)[])
   let self = QLabel(h: self)
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
 proc QLabelchildEvent*(self: gen_qlabel_types.QLabel, event: gen_qcoreevent_types.QChildEvent): void =
@@ -995,7 +1015,7 @@ proc QLabelchildEvent*(self: gen_qlabel_types.QLabel, event: gen_qcoreevent_type
 proc fcQLabel_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QLabelVTable](fcQLabel_vdata(self)[])
   let self = QLabel(h: self)
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
 proc QLabelcustomEvent*(self: gen_qlabel_types.QLabel, event: gen_qcoreevent_types.QEvent): void =
@@ -1004,7 +1024,7 @@ proc QLabelcustomEvent*(self: gen_qlabel_types.QLabel, event: gen_qcoreevent_typ
 proc fcQLabel_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QLabelVTable](fcQLabel_vdata(self)[])
   let self = QLabel(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
 proc QLabelconnectNotify*(self: gen_qlabel_types.QLabel, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -1013,7 +1033,7 @@ proc QLabelconnectNotify*(self: gen_qlabel_types.QLabel, signal: gen_qmetaobject
 proc fcQLabel_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QLabelVTable](fcQLabel_vdata(self)[])
   let self = QLabel(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
 proc QLabeldisconnectNotify*(self: gen_qlabel_types.QLabel, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -1022,7 +1042,7 @@ proc QLabeldisconnectNotify*(self: gen_qlabel_types.QLabel, signal: gen_qmetaobj
 proc fcQLabel_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QLabelVTable](fcQLabel_vdata(self)[])
   let self = QLabel(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
 type VirtualQLabel* {.inheritable.} = ref object of QLabel
@@ -1078,7 +1098,7 @@ method event*(self: VirtualQLabel, e: gen_qcoreevent_types.QEvent): bool {.base.
   QLabelevent(self[], e)
 proc fcQLabel_method_callback_event(self: pointer, e: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQLabel](fcQLabel_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: e)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: e, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
@@ -1086,63 +1106,63 @@ method keyPressEvent*(self: VirtualQLabel, ev: gen_qevent_types.QKeyEvent): void
   QLabelkeyPressEvent(self[], ev)
 proc fcQLabel_method_callback_keyPressEvent(self: pointer, ev: pointer): void {.cdecl.} =
   let inst = cast[VirtualQLabel](fcQLabel_vdata(self)[])
-  let slotval1 = gen_qevent_types.QKeyEvent(h: ev)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: ev, owned: false)
   inst.keyPressEvent(slotval1)
 
 method paintEvent*(self: VirtualQLabel, param1: gen_qevent_types.QPaintEvent): void {.base.} =
   QLabelpaintEvent(self[], param1)
 proc fcQLabel_method_callback_paintEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQLabel](fcQLabel_vdata(self)[])
-  let slotval1 = gen_qevent_types.QPaintEvent(h: param1)
+  let slotval1 = gen_qevent_types.QPaintEvent(h: param1, owned: false)
   inst.paintEvent(slotval1)
 
 method changeEvent*(self: VirtualQLabel, param1: gen_qcoreevent_types.QEvent): void {.base.} =
   QLabelchangeEvent(self[], param1)
 proc fcQLabel_method_callback_changeEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQLabel](fcQLabel_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: param1)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
   inst.changeEvent(slotval1)
 
 method mousePressEvent*(self: VirtualQLabel, ev: gen_qevent_types.QMouseEvent): void {.base.} =
   QLabelmousePressEvent(self[], ev)
 proc fcQLabel_method_callback_mousePressEvent(self: pointer, ev: pointer): void {.cdecl.} =
   let inst = cast[VirtualQLabel](fcQLabel_vdata(self)[])
-  let slotval1 = gen_qevent_types.QMouseEvent(h: ev)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: ev, owned: false)
   inst.mousePressEvent(slotval1)
 
 method mouseMoveEvent*(self: VirtualQLabel, ev: gen_qevent_types.QMouseEvent): void {.base.} =
   QLabelmouseMoveEvent(self[], ev)
 proc fcQLabel_method_callback_mouseMoveEvent(self: pointer, ev: pointer): void {.cdecl.} =
   let inst = cast[VirtualQLabel](fcQLabel_vdata(self)[])
-  let slotval1 = gen_qevent_types.QMouseEvent(h: ev)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: ev, owned: false)
   inst.mouseMoveEvent(slotval1)
 
 method mouseReleaseEvent*(self: VirtualQLabel, ev: gen_qevent_types.QMouseEvent): void {.base.} =
   QLabelmouseReleaseEvent(self[], ev)
 proc fcQLabel_method_callback_mouseReleaseEvent(self: pointer, ev: pointer): void {.cdecl.} =
   let inst = cast[VirtualQLabel](fcQLabel_vdata(self)[])
-  let slotval1 = gen_qevent_types.QMouseEvent(h: ev)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: ev, owned: false)
   inst.mouseReleaseEvent(slotval1)
 
 method contextMenuEvent*(self: VirtualQLabel, ev: gen_qevent_types.QContextMenuEvent): void {.base.} =
   QLabelcontextMenuEvent(self[], ev)
 proc fcQLabel_method_callback_contextMenuEvent(self: pointer, ev: pointer): void {.cdecl.} =
   let inst = cast[VirtualQLabel](fcQLabel_vdata(self)[])
-  let slotval1 = gen_qevent_types.QContextMenuEvent(h: ev)
+  let slotval1 = gen_qevent_types.QContextMenuEvent(h: ev, owned: false)
   inst.contextMenuEvent(slotval1)
 
 method focusInEvent*(self: VirtualQLabel, ev: gen_qevent_types.QFocusEvent): void {.base.} =
   QLabelfocusInEvent(self[], ev)
 proc fcQLabel_method_callback_focusInEvent(self: pointer, ev: pointer): void {.cdecl.} =
   let inst = cast[VirtualQLabel](fcQLabel_vdata(self)[])
-  let slotval1 = gen_qevent_types.QFocusEvent(h: ev)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: ev, owned: false)
   inst.focusInEvent(slotval1)
 
 method focusOutEvent*(self: VirtualQLabel, ev: gen_qevent_types.QFocusEvent): void {.base.} =
   QLabelfocusOutEvent(self[], ev)
 proc fcQLabel_method_callback_focusOutEvent(self: pointer, ev: pointer): void {.cdecl.} =
   let inst = cast[VirtualQLabel](fcQLabel_vdata(self)[])
-  let slotval1 = gen_qevent_types.QFocusEvent(h: ev)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: ev, owned: false)
   inst.focusOutEvent(slotval1)
 
 method focusNextPrevChild*(self: VirtualQLabel, next: bool): bool {.base.} =
@@ -1157,7 +1177,7 @@ method initStyleOption*(self: VirtualQLabel, option: gen_qstyleoption_types.QSty
   QLabelinitStyleOption(self[], option)
 proc fcQLabel_method_callback_initStyleOption(self: pointer, option: pointer): void {.cdecl.} =
   let inst = cast[VirtualQLabel](fcQLabel_vdata(self)[])
-  let slotval1 = gen_qstyleoption_types.QStyleOptionFrame(h: option)
+  let slotval1 = gen_qstyleoption_types.QStyleOptionFrame(h: option, owned: false)
   inst.initStyleOption(slotval1)
 
 method devType*(self: VirtualQLabel): cint {.base.} =
@@ -1192,112 +1212,112 @@ method mouseDoubleClickEvent*(self: VirtualQLabel, event: gen_qevent_types.QMous
   QLabelmouseDoubleClickEvent(self[], event)
 proc fcQLabel_method_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQLabel](fcQLabel_vdata(self)[])
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mouseDoubleClickEvent(slotval1)
 
 method wheelEvent*(self: VirtualQLabel, event: gen_qevent_types.QWheelEvent): void {.base.} =
   QLabelwheelEvent(self[], event)
 proc fcQLabel_method_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQLabel](fcQLabel_vdata(self)[])
-  let slotval1 = gen_qevent_types.QWheelEvent(h: event)
+  let slotval1 = gen_qevent_types.QWheelEvent(h: event, owned: false)
   inst.wheelEvent(slotval1)
 
 method keyReleaseEvent*(self: VirtualQLabel, event: gen_qevent_types.QKeyEvent): void {.base.} =
   QLabelkeyReleaseEvent(self[], event)
 proc fcQLabel_method_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQLabel](fcQLabel_vdata(self)[])
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   inst.keyReleaseEvent(slotval1)
 
 method enterEvent*(self: VirtualQLabel, event: gen_qevent_types.QEnterEvent): void {.base.} =
   QLabelenterEvent(self[], event)
 proc fcQLabel_method_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQLabel](fcQLabel_vdata(self)[])
-  let slotval1 = gen_qevent_types.QEnterEvent(h: event)
+  let slotval1 = gen_qevent_types.QEnterEvent(h: event, owned: false)
   inst.enterEvent(slotval1)
 
 method leaveEvent*(self: VirtualQLabel, event: gen_qcoreevent_types.QEvent): void {.base.} =
   QLabelleaveEvent(self[], event)
 proc fcQLabel_method_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQLabel](fcQLabel_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.leaveEvent(slotval1)
 
 method moveEvent*(self: VirtualQLabel, event: gen_qevent_types.QMoveEvent): void {.base.} =
   QLabelmoveEvent(self[], event)
 proc fcQLabel_method_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQLabel](fcQLabel_vdata(self)[])
-  let slotval1 = gen_qevent_types.QMoveEvent(h: event)
+  let slotval1 = gen_qevent_types.QMoveEvent(h: event, owned: false)
   inst.moveEvent(slotval1)
 
 method resizeEvent*(self: VirtualQLabel, event: gen_qevent_types.QResizeEvent): void {.base.} =
   QLabelresizeEvent(self[], event)
 proc fcQLabel_method_callback_resizeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQLabel](fcQLabel_vdata(self)[])
-  let slotval1 = gen_qevent_types.QResizeEvent(h: event)
+  let slotval1 = gen_qevent_types.QResizeEvent(h: event, owned: false)
   inst.resizeEvent(slotval1)
 
 method closeEvent*(self: VirtualQLabel, event: gen_qevent_types.QCloseEvent): void {.base.} =
   QLabelcloseEvent(self[], event)
 proc fcQLabel_method_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQLabel](fcQLabel_vdata(self)[])
-  let slotval1 = gen_qevent_types.QCloseEvent(h: event)
+  let slotval1 = gen_qevent_types.QCloseEvent(h: event, owned: false)
   inst.closeEvent(slotval1)
 
 method tabletEvent*(self: VirtualQLabel, event: gen_qevent_types.QTabletEvent): void {.base.} =
   QLabeltabletEvent(self[], event)
 proc fcQLabel_method_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQLabel](fcQLabel_vdata(self)[])
-  let slotval1 = gen_qevent_types.QTabletEvent(h: event)
+  let slotval1 = gen_qevent_types.QTabletEvent(h: event, owned: false)
   inst.tabletEvent(slotval1)
 
 method actionEvent*(self: VirtualQLabel, event: gen_qevent_types.QActionEvent): void {.base.} =
   QLabelactionEvent(self[], event)
 proc fcQLabel_method_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQLabel](fcQLabel_vdata(self)[])
-  let slotval1 = gen_qevent_types.QActionEvent(h: event)
+  let slotval1 = gen_qevent_types.QActionEvent(h: event, owned: false)
   inst.actionEvent(slotval1)
 
 method dragEnterEvent*(self: VirtualQLabel, event: gen_qevent_types.QDragEnterEvent): void {.base.} =
   QLabeldragEnterEvent(self[], event)
 proc fcQLabel_method_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQLabel](fcQLabel_vdata(self)[])
-  let slotval1 = gen_qevent_types.QDragEnterEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragEnterEvent(h: event, owned: false)
   inst.dragEnterEvent(slotval1)
 
 method dragMoveEvent*(self: VirtualQLabel, event: gen_qevent_types.QDragMoveEvent): void {.base.} =
   QLabeldragMoveEvent(self[], event)
 proc fcQLabel_method_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQLabel](fcQLabel_vdata(self)[])
-  let slotval1 = gen_qevent_types.QDragMoveEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragMoveEvent(h: event, owned: false)
   inst.dragMoveEvent(slotval1)
 
 method dragLeaveEvent*(self: VirtualQLabel, event: gen_qevent_types.QDragLeaveEvent): void {.base.} =
   QLabeldragLeaveEvent(self[], event)
 proc fcQLabel_method_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQLabel](fcQLabel_vdata(self)[])
-  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event, owned: false)
   inst.dragLeaveEvent(slotval1)
 
 method dropEvent*(self: VirtualQLabel, event: gen_qevent_types.QDropEvent): void {.base.} =
   QLabeldropEvent(self[], event)
 proc fcQLabel_method_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQLabel](fcQLabel_vdata(self)[])
-  let slotval1 = gen_qevent_types.QDropEvent(h: event)
+  let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
   inst.dropEvent(slotval1)
 
 method showEvent*(self: VirtualQLabel, event: gen_qevent_types.QShowEvent): void {.base.} =
   QLabelshowEvent(self[], event)
 proc fcQLabel_method_callback_showEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQLabel](fcQLabel_vdata(self)[])
-  let slotval1 = gen_qevent_types.QShowEvent(h: event)
+  let slotval1 = gen_qevent_types.QShowEvent(h: event, owned: false)
   inst.showEvent(slotval1)
 
 method hideEvent*(self: VirtualQLabel, event: gen_qevent_types.QHideEvent): void {.base.} =
   QLabelhideEvent(self[], event)
 proc fcQLabel_method_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQLabel](fcQLabel_vdata(self)[])
-  let slotval1 = gen_qevent_types.QHideEvent(h: event)
+  let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   inst.hideEvent(slotval1)
 
 method nativeEvent*(self: VirtualQLabel, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
@@ -1325,14 +1345,14 @@ method initPainter*(self: VirtualQLabel, painter: gen_qpainter_types.QPainter): 
   QLabelinitPainter(self[], painter)
 proc fcQLabel_method_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
   let inst = cast[VirtualQLabel](fcQLabel_vdata(self)[])
-  let slotval1 = gen_qpainter_types.QPainter(h: painter)
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
   inst.initPainter(slotval1)
 
 method redirected*(self: VirtualQLabel, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.base.} =
   QLabelredirected(self[], offset)
 proc fcQLabel_method_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQLabel](fcQLabel_vdata(self)[])
-  let slotval1 = gen_qpoint_types.QPoint(h: offset)
+  let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
   var virtualReturn = inst.redirected(slotval1)
   virtualReturn.h
 
@@ -1347,7 +1367,7 @@ method inputMethodEvent*(self: VirtualQLabel, param1: gen_qevent_types.QInputMet
   QLabelinputMethodEvent(self[], param1)
 proc fcQLabel_method_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQLabel](fcQLabel_vdata(self)[])
-  let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1)
+  let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1, owned: false)
   inst.inputMethodEvent(slotval1)
 
 method inputMethodQuery*(self: VirtualQLabel, param1: cint): gen_qvariant_types.QVariant {.base.} =
@@ -1362,8 +1382,8 @@ method eventFilter*(self: VirtualQLabel, watched: gen_qobject_types.QObject, eve
   QLabeleventFilter(self[], watched, event)
 proc fcQLabel_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQLabel](fcQLabel_vdata(self)[])
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
@@ -1371,35 +1391,35 @@ method timerEvent*(self: VirtualQLabel, event: gen_qcoreevent_types.QTimerEvent)
   QLabeltimerEvent(self[], event)
 proc fcQLabel_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQLabel](fcQLabel_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
 method childEvent*(self: VirtualQLabel, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
   QLabelchildEvent(self[], event)
 proc fcQLabel_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQLabel](fcQLabel_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
 method customEvent*(self: VirtualQLabel, event: gen_qcoreevent_types.QEvent): void {.base.} =
   QLabelcustomEvent(self[], event)
 proc fcQLabel_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQLabel](fcQLabel_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
 method connectNotify*(self: VirtualQLabel, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
   QLabelconnectNotify(self[], signal)
 proc fcQLabel_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQLabel](fcQLabel_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
 method disconnectNotify*(self: VirtualQLabel, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
   QLabeldisconnectNotify(self[], signal)
 proc fcQLabel_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQLabel](fcQLabel_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
 
 proc drawFrame*(self: gen_qlabel_types.QLabel, param1: gen_qpainter_types.QPainter): void =
@@ -1421,7 +1441,7 @@ proc focusPreviousChild*(self: gen_qlabel_types.QLabel): bool =
   fcQLabel_protectedbase_focusPreviousChild(self.h)
 
 proc sender*(self: gen_qlabel_types.QLabel): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQLabel_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQLabel_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qlabel_types.QLabel): cint =
   fcQLabel_protectedbase_senderSignalIndex(self.h)
@@ -1542,7 +1562,7 @@ proc create*(T: type gen_qlabel_types.QLabel,
     vtbl[].vtbl.connectNotify = fcQLabel_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQLabel_vtable_callback_disconnectNotify
-  let tmp = gen_qlabel_types.QLabel(h: fcQLabel_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h))
+  let tmp = gen_qlabel_types.QLabel(h: fcQLabel_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h), owned: true)
   fcQLabel_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qlabel_types.QLabel,
@@ -1654,7 +1674,7 @@ proc create*(T: type gen_qlabel_types.QLabel,
     vtbl[].vtbl.connectNotify = fcQLabel_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQLabel_vtable_callback_disconnectNotify
-  let tmp = gen_qlabel_types.QLabel(h: fcQLabel_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer))))
+  let tmp = gen_qlabel_types.QLabel(h: fcQLabel_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer))), owned: true)
   fcQLabel_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qlabel_types.QLabel,
@@ -1767,7 +1787,7 @@ proc create*(T: type gen_qlabel_types.QLabel,
     vtbl[].vtbl.connectNotify = fcQLabel_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQLabel_vtable_callback_disconnectNotify
-  let tmp = gen_qlabel_types.QLabel(h: fcQLabel_new3(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))))
+  let tmp = gen_qlabel_types.QLabel(h: fcQLabel_new3(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))), owned: true)
   fcQLabel_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qlabel_types.QLabel,
@@ -1880,7 +1900,7 @@ proc create*(T: type gen_qlabel_types.QLabel,
     vtbl[].vtbl.connectNotify = fcQLabel_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQLabel_vtable_callback_disconnectNotify
-  let tmp = gen_qlabel_types.QLabel(h: fcQLabel_new4(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h, cint(f)))
+  let tmp = gen_qlabel_types.QLabel(h: fcQLabel_new4(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h, cint(f)), owned: true)
   fcQLabel_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qlabel_types.QLabel,
@@ -1993,7 +2013,7 @@ proc create*(T: type gen_qlabel_types.QLabel,
     vtbl[].vtbl.connectNotify = fcQLabel_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQLabel_vtable_callback_disconnectNotify
-  let tmp = gen_qlabel_types.QLabel(h: fcQLabel_new5(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), parent.h))
+  let tmp = gen_qlabel_types.QLabel(h: fcQLabel_new5(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), parent.h), owned: true)
   fcQLabel_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qlabel_types.QLabel,
@@ -2106,13 +2126,14 @@ proc create*(T: type gen_qlabel_types.QLabel,
     vtbl[].vtbl.connectNotify = fcQLabel_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQLabel_vtable_callback_disconnectNotify
-  let tmp = gen_qlabel_types.QLabel(h: fcQLabel_new6(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), parent.h, cint(f)))
+  let tmp = gen_qlabel_types.QLabel(h: fcQLabel_new6(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), parent.h, cint(f)), owned: true)
   fcQLabel_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQLabel_mvtbl = cQLabelVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQLabel()[])](self.fcQLabel_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   metaObject: fcQLabel_method_callback_metaObject,
   metacast: fcQLabel_method_callback_metacast,
@@ -2209,5 +2230,3 @@ proc create*(T: type gen_qlabel_types.QLabel,
 
 proc staticMetaObject*(_: type gen_qlabel_types.QLabel): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQLabel_staticMetaObject())
-proc delete*(self: gen_qlabel_types.QLabel) =
-  fcQLabel_delete(self.h)

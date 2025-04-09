@@ -32,9 +32,6 @@ func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
     else:
       copyMem(addr result[0], v.data, len)
 
-const cflags = gorge("pkg-config --cflags Qt6Quick")  & " -fPIC"
-{.compile("gen_qsgmaterialtype.cpp", cflags).}
-
 
 import ./gen_qsgmaterialtype_types
 export gen_qsgmaterialtype_types
@@ -42,7 +39,4 @@ export gen_qsgmaterialtype_types
 
 type cQSGMaterialType*{.exportc: "QSGMaterialType", incompleteStruct.} = object
 
-proc fcQSGMaterialType_delete(self: pointer) {.importc: "QSGMaterialType_delete".}
 
-proc delete*(self: gen_qsgmaterialtype_types.QSGMaterialType) =
-  fcQSGMaterialType_delete(self.h)

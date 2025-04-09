@@ -32,9 +32,6 @@ func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
     else:
       copyMem(addr result[0], v.data, len)
 
-const cflags = gorge("pkg-config --cflags Qt6Core")  & " -fPIC"
-{.compile("gen_qcborstreamreader.cpp", cflags).}
-
 
 type QCborStreamReaderTypeEnum* = distinct uint8
 template UnsignedInteger*(_: type QCborStreamReaderTypeEnum): untyped = 0
@@ -130,13 +127,12 @@ proc fcQCborStreamReader_new3(data: ptr uint8, len: int64): ptr cQCborStreamRead
 proc fcQCborStreamReader_new4(data: struct_miqt_string): ptr cQCborStreamReader {.importc: "QCborStreamReader_new4".}
 proc fcQCborStreamReader_new5(device: pointer): ptr cQCborStreamReader {.importc: "QCborStreamReader_new5".}
 proc fcQCborStreamReader_staticMetaObject(): pointer {.importc: "QCborStreamReader_staticMetaObject".}
-proc fcQCborStreamReader_delete(self: pointer) {.importc: "QCborStreamReader_delete".}
 
 proc setDevice*(self: gen_qcborstreamreader_types.QCborStreamReader, device: gen_qiodevice_types.QIODevice): void =
   fcQCborStreamReader_setDevice(self.h, device.h)
 
 proc device*(self: gen_qcborstreamreader_types.QCborStreamReader): gen_qiodevice_types.QIODevice =
-  gen_qiodevice_types.QIODevice(h: fcQCborStreamReader_device(self.h))
+  gen_qiodevice_types.QIODevice(h: fcQCborStreamReader_device(self.h), owned: false)
 
 proc addData*(self: gen_qcborstreamreader_types.QCborStreamReader, data: seq[byte]): void =
   fcQCborStreamReader_addData(self.h, struct_miqt_string(data: if len(data) > 0: addr data[0] else: nil, len: csize_t(len(data))))
@@ -157,7 +153,7 @@ proc reset*(self: gen_qcborstreamreader_types.QCborStreamReader): void =
   fcQCborStreamReader_reset(self.h)
 
 proc lastError*(self: gen_qcborstreamreader_types.QCborStreamReader): gen_qcborcommon_types.QCborError =
-  gen_qcborcommon_types.QCborError(h: fcQCborStreamReader_lastError(self.h))
+  gen_qcborcommon_types.QCborError(h: fcQCborStreamReader_lastError(self.h), owned: true)
 
 proc currentOffset*(self: gen_qcborstreamreader_types.QCborStreamReader): clonglong =
   fcQCborStreamReader_currentOffset(self.h)
@@ -283,25 +279,23 @@ proc next*(self: gen_qcborstreamreader_types.QCborStreamReader, maxRecursion: ci
   fcQCborStreamReader_next1(self.h, maxRecursion)
 
 proc create*(T: type gen_qcborstreamreader_types.QCborStreamReader): gen_qcborstreamreader_types.QCborStreamReader =
-  let tmp = gen_qcborstreamreader_types.QCborStreamReader(h: fcQCborStreamReader_new())
+  let tmp = gen_qcborstreamreader_types.QCborStreamReader(h: fcQCborStreamReader_new(), owned: true)
   tmp
 proc create*(T: type gen_qcborstreamreader_types.QCborStreamReader,
     data: cstring, len: int64): gen_qcborstreamreader_types.QCborStreamReader =
-  let tmp = gen_qcborstreamreader_types.QCborStreamReader(h: fcQCborStreamReader_new2(data, len))
+  let tmp = gen_qcborstreamreader_types.QCborStreamReader(h: fcQCborStreamReader_new2(data, len), owned: true)
   tmp
 proc create*(T: type gen_qcborstreamreader_types.QCborStreamReader,
     data: ptr uint8, len: int64): gen_qcborstreamreader_types.QCborStreamReader =
-  let tmp = gen_qcborstreamreader_types.QCborStreamReader(h: fcQCborStreamReader_new3(data, len))
+  let tmp = gen_qcborstreamreader_types.QCborStreamReader(h: fcQCborStreamReader_new3(data, len), owned: true)
   tmp
 proc create*(T: type gen_qcborstreamreader_types.QCborStreamReader,
     data: seq[byte]): gen_qcborstreamreader_types.QCborStreamReader =
-  let tmp = gen_qcborstreamreader_types.QCborStreamReader(h: fcQCborStreamReader_new4(struct_miqt_string(data: if len(data) > 0: addr data[0] else: nil, len: csize_t(len(data)))))
+  let tmp = gen_qcborstreamreader_types.QCborStreamReader(h: fcQCborStreamReader_new4(struct_miqt_string(data: if len(data) > 0: addr data[0] else: nil, len: csize_t(len(data)))), owned: true)
   tmp
 proc create*(T: type gen_qcborstreamreader_types.QCborStreamReader,
     device: gen_qiodevice_types.QIODevice): gen_qcborstreamreader_types.QCborStreamReader =
-  let tmp = gen_qcborstreamreader_types.QCborStreamReader(h: fcQCborStreamReader_new5(device.h))
+  let tmp = gen_qcborstreamreader_types.QCborStreamReader(h: fcQCborStreamReader_new5(device.h), owned: true)
   tmp
 proc staticMetaObject*(_: type gen_qcborstreamreader_types.QCborStreamReader): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQCborStreamReader_staticMetaObject())
-proc delete*(self: gen_qcborstreamreader_types.QCborStreamReader) =
-  fcQCborStreamReader_delete(self.h)

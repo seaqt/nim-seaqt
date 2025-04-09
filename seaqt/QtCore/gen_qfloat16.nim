@@ -32,9 +32,6 @@ func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
     else:
       copyMem(addr result[0], v.data, len)
 
-const cflags = gorge("pkg-config --cflags Qt6Core")  & " -fPIC"
-{.compile("gen_qfloat16.cpp", cflags).}
-
 
 import ./gen_qfloat16_types
 export gen_qfloat16_types
@@ -50,7 +47,6 @@ proc fcqfloat16_isNormal(self: pointer): bool {.importc: "qfloat16_isNormal".}
 proc fcqfloat16_new(): ptr cqfloat16 {.importc: "qfloat16_new".}
 proc fcqfloat16_new2(param1: cint): ptr cqfloat16 {.importc: "qfloat16_new2".}
 proc fcqfloat16_new3(f: float32): ptr cqfloat16 {.importc: "qfloat16_new3".}
-proc fcqfloat16_delete(self: pointer) {.importc: "qfloat16_delete".}
 
 proc isInf*(self: gen_qfloat16_types.qfloat16): bool =
   fcqfloat16_isInf(self.h)
@@ -68,15 +64,13 @@ proc isNormal*(self: gen_qfloat16_types.qfloat16): bool =
   fcqfloat16_isNormal(self.h)
 
 proc create*(T: type gen_qfloat16_types.qfloat16): gen_qfloat16_types.qfloat16 =
-  let tmp = gen_qfloat16_types.qfloat16(h: fcqfloat16_new())
+  let tmp = gen_qfloat16_types.qfloat16(h: fcqfloat16_new(), owned: true)
   tmp
 proc create*(T: type gen_qfloat16_types.qfloat16,
     param1: cint): gen_qfloat16_types.qfloat16 =
-  let tmp = gen_qfloat16_types.qfloat16(h: fcqfloat16_new2(cint(param1)))
+  let tmp = gen_qfloat16_types.qfloat16(h: fcqfloat16_new2(cint(param1)), owned: true)
   tmp
 proc create*(T: type gen_qfloat16_types.qfloat16,
     f: float32): gen_qfloat16_types.qfloat16 =
-  let tmp = gen_qfloat16_types.qfloat16(h: fcqfloat16_new3(f))
+  let tmp = gen_qfloat16_types.qfloat16(h: fcqfloat16_new3(f), owned: true)
   tmp
-proc delete*(self: gen_qfloat16_types.qfloat16) =
-  fcqfloat16_delete(self.h)

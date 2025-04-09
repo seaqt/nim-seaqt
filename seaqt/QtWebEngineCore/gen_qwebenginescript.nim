@@ -32,9 +32,6 @@ func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
     else:
       copyMem(addr result[0], v.data, len)
 
-const cflags = gorge("pkg-config --cflags Qt6WebEngineCore")  & " -fPIC"
-{.compile("gen_qwebenginescript.cpp", cflags).}
-
 
 type QWebEngineScriptInjectionPointEnum* = distinct cint
 template Deferred*(_: type QWebEngineScriptInjectionPointEnum): untyped = 0
@@ -79,7 +76,6 @@ proc fcQWebEngineScript_swap(self: pointer, other: pointer): void {.importc: "QW
 proc fcQWebEngineScript_new(): ptr cQWebEngineScript {.importc: "QWebEngineScript_new".}
 proc fcQWebEngineScript_new2(other: pointer): ptr cQWebEngineScript {.importc: "QWebEngineScript_new2".}
 proc fcQWebEngineScript_staticMetaObject(): pointer {.importc: "QWebEngineScript_staticMetaObject".}
-proc fcQWebEngineScript_delete(self: pointer) {.importc: "QWebEngineScript_delete".}
 
 proc operatorAssign*(self: gen_qwebenginescript_types.QWebEngineScript, other: gen_qwebenginescript_types.QWebEngineScript): void =
   fcQWebEngineScript_operatorAssign(self.h, other.h)
@@ -94,7 +90,7 @@ proc setName*(self: gen_qwebenginescript_types.QWebEngineScript, name: string): 
   fcQWebEngineScript_setName(self.h, struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))))
 
 proc sourceUrl*(self: gen_qwebenginescript_types.QWebEngineScript): gen_qurl_types.QUrl =
-  gen_qurl_types.QUrl(h: fcQWebEngineScript_sourceUrl(self.h))
+  gen_qurl_types.QUrl(h: fcQWebEngineScript_sourceUrl(self.h), owned: true)
 
 proc setSourceUrl*(self: gen_qwebenginescript_types.QWebEngineScript, url: gen_qurl_types.QUrl): void =
   fcQWebEngineScript_setSourceUrl(self.h, url.h)
@@ -136,13 +132,11 @@ proc swap*(self: gen_qwebenginescript_types.QWebEngineScript, other: gen_qwebeng
   fcQWebEngineScript_swap(self.h, other.h)
 
 proc create*(T: type gen_qwebenginescript_types.QWebEngineScript): gen_qwebenginescript_types.QWebEngineScript =
-  let tmp = gen_qwebenginescript_types.QWebEngineScript(h: fcQWebEngineScript_new())
+  let tmp = gen_qwebenginescript_types.QWebEngineScript(h: fcQWebEngineScript_new(), owned: true)
   tmp
 proc create*(T: type gen_qwebenginescript_types.QWebEngineScript,
     other: gen_qwebenginescript_types.QWebEngineScript): gen_qwebenginescript_types.QWebEngineScript =
-  let tmp = gen_qwebenginescript_types.QWebEngineScript(h: fcQWebEngineScript_new2(other.h))
+  let tmp = gen_qwebenginescript_types.QWebEngineScript(h: fcQWebEngineScript_new2(other.h), owned: true)
   tmp
 proc staticMetaObject*(_: type gen_qwebenginescript_types.QWebEngineScript): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQWebEngineScript_staticMetaObject())
-proc delete*(self: gen_qwebenginescript_types.QWebEngineScript) =
-  fcQWebEngineScript_delete(self.h)

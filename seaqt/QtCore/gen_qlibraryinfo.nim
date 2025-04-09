@@ -32,9 +32,6 @@ func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
     else:
       copyMem(addr result[0], v.data, len)
 
-const cflags = gorge("pkg-config --cflags Qt6Core")  & " -fPIC"
-{.compile("gen_qlibraryinfo.cpp", cflags).}
-
 
 type QLibraryInfoLibraryPathEnum* = distinct cint
 template PrefixPath*(_: type QLibraryInfoLibraryPathEnum): untyped = 0
@@ -70,7 +67,6 @@ proc fcQLibraryInfo_version(): pointer {.importc: "QLibraryInfo_version".}
 proc fcQLibraryInfo_path(p: cint): struct_miqt_string {.importc: "QLibraryInfo_path".}
 proc fcQLibraryInfo_location(location: cint): struct_miqt_string {.importc: "QLibraryInfo_location".}
 proc fcQLibraryInfo_platformPluginArguments(platformName: struct_miqt_string): struct_miqt_array {.importc: "QLibraryInfo_platformPluginArguments".}
-proc fcQLibraryInfo_delete(self: pointer) {.importc: "QLibraryInfo_delete".}
 
 proc build*(_: type gen_qlibraryinfo_types.QLibraryInfo): cstring =
   (fcQLibraryInfo_build())
@@ -79,7 +75,7 @@ proc isDebugBuild*(_: type gen_qlibraryinfo_types.QLibraryInfo): bool =
   fcQLibraryInfo_isDebugBuild()
 
 proc version*(_: type gen_qlibraryinfo_types.QLibraryInfo): gen_qversionnumber_types.QVersionNumber =
-  gen_qversionnumber_types.QVersionNumber(h: fcQLibraryInfo_version())
+  gen_qversionnumber_types.QVersionNumber(h: fcQLibraryInfo_version(), owned: true)
 
 proc path*(_: type gen_qlibraryinfo_types.QLibraryInfo, p: cint): string =
   let v_ms = fcQLibraryInfo_path(cint(p))
@@ -105,5 +101,3 @@ proc platformPluginArguments*(_: type gen_qlibraryinfo_types.QLibraryInfo, platf
   c_free(v_ma.data)
   vx_ret
 
-proc delete*(self: gen_qlibraryinfo_types.QLibraryInfo) =
-  fcQLibraryInfo_delete(self.h)

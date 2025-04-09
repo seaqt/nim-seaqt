@@ -32,9 +32,6 @@ func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
     else:
       copyMem(addr result[0], v.data, len)
 
-const cflags = gorge("pkg-config --cflags Qt6Widgets")  & " -fPIC"
-{.compile("gen_qitemeditorfactory.cpp", cflags).}
-
 
 import ./gen_qitemeditorfactory_types
 export gen_qitemeditorfactory_types
@@ -50,7 +47,6 @@ type cQItemEditorFactory*{.exportc: "QItemEditorFactory", incompleteStruct.} = o
 proc fcQItemEditorCreatorBase_createWidget(self: pointer, parent: pointer): pointer {.importc: "QItemEditorCreatorBase_createWidget".}
 proc fcQItemEditorCreatorBase_valuePropertyName(self: pointer): struct_miqt_string {.importc: "QItemEditorCreatorBase_valuePropertyName".}
 proc fcQItemEditorCreatorBase_operatorAssign(self: pointer, param1: pointer): void {.importc: "QItemEditorCreatorBase_operatorAssign".}
-proc fcQItemEditorCreatorBase_delete(self: pointer) {.importc: "QItemEditorCreatorBase_delete".}
 proc fcQItemEditorFactory_createEditor(self: pointer, userType: cint, parent: pointer): pointer {.importc: "QItemEditorFactory_createEditor".}
 proc fcQItemEditorFactory_valuePropertyName(self: pointer, userType: cint): struct_miqt_string {.importc: "QItemEditorFactory_valuePropertyName".}
 proc fcQItemEditorFactory_registerEditor(self: pointer, userType: cint, creator: pointer): void {.importc: "QItemEditorFactory_registerEditor".}
@@ -66,10 +62,9 @@ proc fcQItemEditorFactory_virtualbase_createEditor(self: pointer, userType: cint
 proc fcQItemEditorFactory_virtualbase_valuePropertyName(self: pointer, userType: cint): struct_miqt_string {.importc: "QItemEditorFactory_virtualbase_valuePropertyName".}
 proc fcQItemEditorFactory_new(vtbl: pointer, vdata: csize_t): ptr cQItemEditorFactory {.importc: "QItemEditorFactory_new".}
 proc fcQItemEditorFactory_new2(vtbl: pointer, vdata: csize_t, param1: pointer): ptr cQItemEditorFactory {.importc: "QItemEditorFactory_new2".}
-proc fcQItemEditorFactory_delete(self: pointer) {.importc: "QItemEditorFactory_delete".}
 
 proc createWidget*(self: gen_qitemeditorfactory_types.QItemEditorCreatorBase, parent: gen_qwidget_types.QWidget): gen_qwidget_types.QWidget =
-  gen_qwidget_types.QWidget(h: fcQItemEditorCreatorBase_createWidget(self.h, parent.h))
+  gen_qwidget_types.QWidget(h: fcQItemEditorCreatorBase_createWidget(self.h, parent.h), owned: false)
 
 proc valuePropertyName*(self: gen_qitemeditorfactory_types.QItemEditorCreatorBase): seq[byte] =
   var v_bytearray = fcQItemEditorCreatorBase_valuePropertyName(self.h)
@@ -80,10 +75,8 @@ proc valuePropertyName*(self: gen_qitemeditorfactory_types.QItemEditorCreatorBas
 proc operatorAssign*(self: gen_qitemeditorfactory_types.QItemEditorCreatorBase, param1: gen_qitemeditorfactory_types.QItemEditorCreatorBase): void =
   fcQItemEditorCreatorBase_operatorAssign(self.h, param1.h)
 
-proc delete*(self: gen_qitemeditorfactory_types.QItemEditorCreatorBase) =
-  fcQItemEditorCreatorBase_delete(self.h)
 proc createEditor*(self: gen_qitemeditorfactory_types.QItemEditorFactory, userType: cint, parent: gen_qwidget_types.QWidget): gen_qwidget_types.QWidget =
-  gen_qwidget_types.QWidget(h: fcQItemEditorFactory_createEditor(self.h, userType, parent.h))
+  gen_qwidget_types.QWidget(h: fcQItemEditorFactory_createEditor(self.h, userType, parent.h), owned: false)
 
 proc valuePropertyName*(self: gen_qitemeditorfactory_types.QItemEditorFactory, userType: cint): seq[byte] =
   var v_bytearray = fcQItemEditorFactory_valuePropertyName(self.h, userType)
@@ -95,27 +88,30 @@ proc registerEditor*(self: gen_qitemeditorfactory_types.QItemEditorFactory, user
   fcQItemEditorFactory_registerEditor(self.h, userType, creator.h)
 
 proc defaultFactory*(_: type gen_qitemeditorfactory_types.QItemEditorFactory): gen_qitemeditorfactory_types.QItemEditorFactory =
-  gen_qitemeditorfactory_types.QItemEditorFactory(h: fcQItemEditorFactory_defaultFactory())
+  gen_qitemeditorfactory_types.QItemEditorFactory(h: fcQItemEditorFactory_defaultFactory(), owned: false)
 
 proc setDefaultFactory*(_: type gen_qitemeditorfactory_types.QItemEditorFactory, factory: gen_qitemeditorfactory_types.QItemEditorFactory): void =
   fcQItemEditorFactory_setDefaultFactory(factory.h)
 
 type QItemEditorFactorycreateEditorProc* = proc(self: QItemEditorFactory, userType: cint, parent: gen_qwidget_types.QWidget): gen_qwidget_types.QWidget {.raises: [], gcsafe.}
 type QItemEditorFactoryvaluePropertyNameProc* = proc(self: QItemEditorFactory, userType: cint): seq[byte] {.raises: [], gcsafe.}
-type QItemEditorFactoryVTable* = object
+type QItemEditorFactoryVTable* {.inheritable, pure.} = object
   vtbl: cQItemEditorFactoryVTable
   createEditor*: QItemEditorFactorycreateEditorProc
   valuePropertyName*: QItemEditorFactoryvaluePropertyNameProc
 proc QItemEditorFactorycreateEditor*(self: gen_qitemeditorfactory_types.QItemEditorFactory, userType: cint, parent: gen_qwidget_types.QWidget): gen_qwidget_types.QWidget =
-  gen_qwidget_types.QWidget(h: fcQItemEditorFactory_virtualbase_createEditor(self.h, userType, parent.h))
+  gen_qwidget_types.QWidget(h: fcQItemEditorFactory_virtualbase_createEditor(self.h, userType, parent.h), owned: false)
 
 proc fcQItemEditorFactory_vtable_callback_createEditor(self: pointer, userType: cint, parent: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QItemEditorFactoryVTable](fcQItemEditorFactory_vdata(self)[])
   let self = QItemEditorFactory(h: self)
   let slotval1 = userType
-  let slotval2 = gen_qwidget_types.QWidget(h: parent)
+  let slotval2 = gen_qwidget_types.QWidget(h: parent, owned: false)
   var virtualReturn = vtbl[].createEditor(self, slotval1, slotval2)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QItemEditorFactoryvaluePropertyName*(self: gen_qitemeditorfactory_types.QItemEditorFactory, userType: cint): seq[byte] =
   var v_bytearray = fcQItemEditorFactory_virtualbase_valuePropertyName(self.h, userType)
@@ -139,7 +135,7 @@ method createEditor*(self: VirtualQItemEditorFactory, userType: cint, parent: ge
 proc fcQItemEditorFactory_method_callback_createEditor(self: pointer, userType: cint, parent: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQItemEditorFactory](fcQItemEditorFactory_vdata(self)[])
   let slotval1 = userType
-  let slotval2 = gen_qwidget_types.QWidget(h: parent)
+  let slotval2 = gen_qwidget_types.QWidget(h: parent, owned: false)
   var virtualReturn = inst.createEditor(slotval1, slotval2)
   virtualReturn.h
 
@@ -162,7 +158,7 @@ proc create*(T: type gen_qitemeditorfactory_types.QItemEditorFactory,
     vtbl[].vtbl.createEditor = fcQItemEditorFactory_vtable_callback_createEditor
   if not isNil(vtbl[].valuePropertyName):
     vtbl[].vtbl.valuePropertyName = fcQItemEditorFactory_vtable_callback_valuePropertyName
-  let tmp = gen_qitemeditorfactory_types.QItemEditorFactory(h: fcQItemEditorFactory_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))))
+  let tmp = gen_qitemeditorfactory_types.QItemEditorFactory(h: fcQItemEditorFactory_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))), owned: true)
   fcQItemEditorFactory_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qitemeditorfactory_types.QItemEditorFactory,
@@ -177,13 +173,14 @@ proc create*(T: type gen_qitemeditorfactory_types.QItemEditorFactory,
     vtbl[].vtbl.createEditor = fcQItemEditorFactory_vtable_callback_createEditor
   if not isNil(vtbl[].valuePropertyName):
     vtbl[].vtbl.valuePropertyName = fcQItemEditorFactory_vtable_callback_valuePropertyName
-  let tmp = gen_qitemeditorfactory_types.QItemEditorFactory(h: fcQItemEditorFactory_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), param1.h))
+  let tmp = gen_qitemeditorfactory_types.QItemEditorFactory(h: fcQItemEditorFactory_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), param1.h), owned: true)
   fcQItemEditorFactory_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQItemEditorFactory_mvtbl = cQItemEditorFactoryVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQItemEditorFactory()[])](self.fcQItemEditorFactory_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   createEditor: fcQItemEditorFactory_method_callback_createEditor,
   valuePropertyName: fcQItemEditorFactory_method_callback_valuePropertyName,
@@ -201,5 +198,3 @@ proc create*(T: type gen_qitemeditorfactory_types.QItemEditorFactory,
   inst[].h = fcQItemEditorFactory_new2(addr(cQItemEditorFactory_mvtbl), csize_t(sizeof(pointer)), param1.h)
   fcQItemEditorFactory_vdata(inst[].h)[] = addr inst[]
 
-proc delete*(self: gen_qitemeditorfactory_types.QItemEditorFactory) =
-  fcQItemEditorFactory_delete(self.h)

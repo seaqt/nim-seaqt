@@ -32,9 +32,6 @@ func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
     else:
       copyMem(addr result[0], v.data, len)
 
-const cflags = gorge("pkg-config --cflags Qt6Core")  & " -fPIC"
-{.compile("gen_qstringbuilder.cpp", cflags).}
-
 
 import ./gen_qstringbuilder_types
 export gen_qstringbuilder_types
@@ -42,7 +39,4 @@ export gen_qstringbuilder_types
 
 type cQAbstractConcatenable*{.exportc: "QAbstractConcatenable", incompleteStruct.} = object
 
-proc fcQAbstractConcatenable_delete(self: pointer) {.importc: "QAbstractConcatenable_delete".}
 
-proc delete*(self: gen_qstringbuilder_types.QAbstractConcatenable) =
-  fcQAbstractConcatenable_delete(self.h)

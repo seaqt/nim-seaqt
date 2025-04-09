@@ -32,7 +32,7 @@ func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
     else:
       copyMem(addr result[0], v.data, len)
 
-const cflags = gorge("pkg-config --cflags Qt6Widgets")  & " -fPIC"
+const cflags = gorge("pkg-config --cflags Qt6Widgets") & " -fPIC"
 {.compile("gen_qsplashscreen.cpp", cflags).}
 
 
@@ -213,10 +213,9 @@ proc fcQSplashScreen_new4(vtbl: pointer, vdata: csize_t, pixmap: pointer, f: cin
 proc fcQSplashScreen_new5(vtbl: pointer, vdata: csize_t, screen: pointer, pixmap: pointer): ptr cQSplashScreen {.importc: "QSplashScreen_new5".}
 proc fcQSplashScreen_new6(vtbl: pointer, vdata: csize_t, screen: pointer, pixmap: pointer, f: cint): ptr cQSplashScreen {.importc: "QSplashScreen_new6".}
 proc fcQSplashScreen_staticMetaObject(): pointer {.importc: "QSplashScreen_staticMetaObject".}
-proc fcQSplashScreen_delete(self: pointer) {.importc: "QSplashScreen_delete".}
 
 proc metaObject*(self: gen_qsplashscreen_types.QSplashScreen): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQSplashScreen_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQSplashScreen_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qsplashscreen_types.QSplashScreen, param1: cstring): pointer =
   fcQSplashScreen_metacast(self.h, param1)
@@ -234,7 +233,7 @@ proc setPixmap*(self: gen_qsplashscreen_types.QSplashScreen, pixmap: gen_qpixmap
   fcQSplashScreen_setPixmap(self.h, pixmap.h)
 
 proc pixmap*(self: gen_qsplashscreen_types.QSplashScreen): gen_qpixmap_types.QPixmap =
-  gen_qpixmap_types.QPixmap(h: fcQSplashScreen_pixmap(self.h))
+  gen_qpixmap_types.QPixmap(h: fcQSplashScreen_pixmap(self.h), owned: true)
 
 proc finish*(self: gen_qsplashscreen_types.QSplashScreen, w: gen_qwidget_types.QWidget): void =
   fcQSplashScreen_finish(self.h, w.h)
@@ -346,7 +345,7 @@ type QSplashScreenchildEventProc* = proc(self: QSplashScreen, event: gen_qcoreev
 type QSplashScreencustomEventProc* = proc(self: QSplashScreen, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QSplashScreenconnectNotifyProc* = proc(self: QSplashScreen, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QSplashScreendisconnectNotifyProc* = proc(self: QSplashScreen, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
-type QSplashScreenVTable* = object
+type QSplashScreenVTable* {.inheritable, pure.} = object
   vtbl: cQSplashScreenVTable
   metaObject*: QSplashScreenmetaObjectProc
   metacast*: QSplashScreenmetacastProc
@@ -400,13 +399,16 @@ type QSplashScreenVTable* = object
   connectNotify*: QSplashScreenconnectNotifyProc
   disconnectNotify*: QSplashScreendisconnectNotifyProc
 proc QSplashScreenmetaObject*(self: gen_qsplashscreen_types.QSplashScreen): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQSplashScreen_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQSplashScreen_virtualbase_metaObject(self.h), owned: false)
 
 proc fcQSplashScreen_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QSplashScreenVTable](fcQSplashScreen_vdata(self)[])
   let self = QSplashScreen(h: self)
   var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QSplashScreenmetacast*(self: gen_qsplashscreen_types.QSplashScreen, param1: cstring): pointer =
   fcQSplashScreen_virtualbase_metacast(self.h, param1)
@@ -436,7 +438,7 @@ proc QSplashScreenevent*(self: gen_qsplashscreen_types.QSplashScreen, e: gen_qco
 proc fcQSplashScreen_vtable_callback_event(self: pointer, e: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QSplashScreenVTable](fcQSplashScreen_vdata(self)[])
   let self = QSplashScreen(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: e)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: e, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
@@ -446,7 +448,7 @@ proc QSplashScreendrawContents*(self: gen_qsplashscreen_types.QSplashScreen, pai
 proc fcQSplashScreen_vtable_callback_drawContents(self: pointer, painter: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSplashScreenVTable](fcQSplashScreen_vdata(self)[])
   let self = QSplashScreen(h: self)
-  let slotval1 = gen_qpainter_types.QPainter(h: painter)
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
   vtbl[].drawContents(self, slotval1)
 
 proc QSplashScreenmousePressEvent*(self: gen_qsplashscreen_types.QSplashScreen, param1: gen_qevent_types.QMouseEvent): void =
@@ -455,7 +457,7 @@ proc QSplashScreenmousePressEvent*(self: gen_qsplashscreen_types.QSplashScreen, 
 proc fcQSplashScreen_vtable_callback_mousePressEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSplashScreenVTable](fcQSplashScreen_vdata(self)[])
   let self = QSplashScreen(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: param1)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: param1, owned: false)
   vtbl[].mousePressEvent(self, slotval1)
 
 proc QSplashScreendevType*(self: gen_qsplashscreen_types.QSplashScreen): cint =
@@ -477,22 +479,28 @@ proc fcQSplashScreen_vtable_callback_setVisible(self: pointer, visible: bool): v
   vtbl[].setVisible(self, slotval1)
 
 proc QSplashScreensizeHint*(self: gen_qsplashscreen_types.QSplashScreen): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQSplashScreen_virtualbase_sizeHint(self.h))
+  gen_qsize_types.QSize(h: fcQSplashScreen_virtualbase_sizeHint(self.h), owned: true)
 
 proc fcQSplashScreen_vtable_callback_sizeHint(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QSplashScreenVTable](fcQSplashScreen_vdata(self)[])
   let self = QSplashScreen(h: self)
   var virtualReturn = vtbl[].sizeHint(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QSplashScreenminimumSizeHint*(self: gen_qsplashscreen_types.QSplashScreen): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQSplashScreen_virtualbase_minimumSizeHint(self.h))
+  gen_qsize_types.QSize(h: fcQSplashScreen_virtualbase_minimumSizeHint(self.h), owned: true)
 
 proc fcQSplashScreen_vtable_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QSplashScreenVTable](fcQSplashScreen_vdata(self)[])
   let self = QSplashScreen(h: self)
   var virtualReturn = vtbl[].minimumSizeHint(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QSplashScreenheightForWidth*(self: gen_qsplashscreen_types.QSplashScreen, param1: cint): cint =
   fcQSplashScreen_virtualbase_heightForWidth(self.h, param1)
@@ -514,13 +522,16 @@ proc fcQSplashScreen_vtable_callback_hasHeightForWidth(self: pointer): bool {.cd
   virtualReturn
 
 proc QSplashScreenpaintEngine*(self: gen_qsplashscreen_types.QSplashScreen): gen_qpaintengine_types.QPaintEngine =
-  gen_qpaintengine_types.QPaintEngine(h: fcQSplashScreen_virtualbase_paintEngine(self.h))
+  gen_qpaintengine_types.QPaintEngine(h: fcQSplashScreen_virtualbase_paintEngine(self.h), owned: false)
 
 proc fcQSplashScreen_vtable_callback_paintEngine(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QSplashScreenVTable](fcQSplashScreen_vdata(self)[])
   let self = QSplashScreen(h: self)
   var virtualReturn = vtbl[].paintEngine(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QSplashScreenmouseReleaseEvent*(self: gen_qsplashscreen_types.QSplashScreen, event: gen_qevent_types.QMouseEvent): void =
   fcQSplashScreen_virtualbase_mouseReleaseEvent(self.h, event.h)
@@ -528,7 +539,7 @@ proc QSplashScreenmouseReleaseEvent*(self: gen_qsplashscreen_types.QSplashScreen
 proc fcQSplashScreen_vtable_callback_mouseReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSplashScreenVTable](fcQSplashScreen_vdata(self)[])
   let self = QSplashScreen(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseReleaseEvent(self, slotval1)
 
 proc QSplashScreenmouseDoubleClickEvent*(self: gen_qsplashscreen_types.QSplashScreen, event: gen_qevent_types.QMouseEvent): void =
@@ -537,7 +548,7 @@ proc QSplashScreenmouseDoubleClickEvent*(self: gen_qsplashscreen_types.QSplashSc
 proc fcQSplashScreen_vtable_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSplashScreenVTable](fcQSplashScreen_vdata(self)[])
   let self = QSplashScreen(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseDoubleClickEvent(self, slotval1)
 
 proc QSplashScreenmouseMoveEvent*(self: gen_qsplashscreen_types.QSplashScreen, event: gen_qevent_types.QMouseEvent): void =
@@ -546,7 +557,7 @@ proc QSplashScreenmouseMoveEvent*(self: gen_qsplashscreen_types.QSplashScreen, e
 proc fcQSplashScreen_vtable_callback_mouseMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSplashScreenVTable](fcQSplashScreen_vdata(self)[])
   let self = QSplashScreen(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseMoveEvent(self, slotval1)
 
 proc QSplashScreenwheelEvent*(self: gen_qsplashscreen_types.QSplashScreen, event: gen_qevent_types.QWheelEvent): void =
@@ -555,7 +566,7 @@ proc QSplashScreenwheelEvent*(self: gen_qsplashscreen_types.QSplashScreen, event
 proc fcQSplashScreen_vtable_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSplashScreenVTable](fcQSplashScreen_vdata(self)[])
   let self = QSplashScreen(h: self)
-  let slotval1 = gen_qevent_types.QWheelEvent(h: event)
+  let slotval1 = gen_qevent_types.QWheelEvent(h: event, owned: false)
   vtbl[].wheelEvent(self, slotval1)
 
 proc QSplashScreenkeyPressEvent*(self: gen_qsplashscreen_types.QSplashScreen, event: gen_qevent_types.QKeyEvent): void =
@@ -564,7 +575,7 @@ proc QSplashScreenkeyPressEvent*(self: gen_qsplashscreen_types.QSplashScreen, ev
 proc fcQSplashScreen_vtable_callback_keyPressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSplashScreenVTable](fcQSplashScreen_vdata(self)[])
   let self = QSplashScreen(h: self)
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   vtbl[].keyPressEvent(self, slotval1)
 
 proc QSplashScreenkeyReleaseEvent*(self: gen_qsplashscreen_types.QSplashScreen, event: gen_qevent_types.QKeyEvent): void =
@@ -573,7 +584,7 @@ proc QSplashScreenkeyReleaseEvent*(self: gen_qsplashscreen_types.QSplashScreen, 
 proc fcQSplashScreen_vtable_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSplashScreenVTable](fcQSplashScreen_vdata(self)[])
   let self = QSplashScreen(h: self)
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   vtbl[].keyReleaseEvent(self, slotval1)
 
 proc QSplashScreenfocusInEvent*(self: gen_qsplashscreen_types.QSplashScreen, event: gen_qevent_types.QFocusEvent): void =
@@ -582,7 +593,7 @@ proc QSplashScreenfocusInEvent*(self: gen_qsplashscreen_types.QSplashScreen, eve
 proc fcQSplashScreen_vtable_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSplashScreenVTable](fcQSplashScreen_vdata(self)[])
   let self = QSplashScreen(h: self)
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusInEvent(self, slotval1)
 
 proc QSplashScreenfocusOutEvent*(self: gen_qsplashscreen_types.QSplashScreen, event: gen_qevent_types.QFocusEvent): void =
@@ -591,7 +602,7 @@ proc QSplashScreenfocusOutEvent*(self: gen_qsplashscreen_types.QSplashScreen, ev
 proc fcQSplashScreen_vtable_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSplashScreenVTable](fcQSplashScreen_vdata(self)[])
   let self = QSplashScreen(h: self)
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusOutEvent(self, slotval1)
 
 proc QSplashScreenenterEvent*(self: gen_qsplashscreen_types.QSplashScreen, event: gen_qevent_types.QEnterEvent): void =
@@ -600,7 +611,7 @@ proc QSplashScreenenterEvent*(self: gen_qsplashscreen_types.QSplashScreen, event
 proc fcQSplashScreen_vtable_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSplashScreenVTable](fcQSplashScreen_vdata(self)[])
   let self = QSplashScreen(h: self)
-  let slotval1 = gen_qevent_types.QEnterEvent(h: event)
+  let slotval1 = gen_qevent_types.QEnterEvent(h: event, owned: false)
   vtbl[].enterEvent(self, slotval1)
 
 proc QSplashScreenleaveEvent*(self: gen_qsplashscreen_types.QSplashScreen, event: gen_qcoreevent_types.QEvent): void =
@@ -609,7 +620,7 @@ proc QSplashScreenleaveEvent*(self: gen_qsplashscreen_types.QSplashScreen, event
 proc fcQSplashScreen_vtable_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSplashScreenVTable](fcQSplashScreen_vdata(self)[])
   let self = QSplashScreen(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].leaveEvent(self, slotval1)
 
 proc QSplashScreenpaintEvent*(self: gen_qsplashscreen_types.QSplashScreen, event: gen_qevent_types.QPaintEvent): void =
@@ -618,7 +629,7 @@ proc QSplashScreenpaintEvent*(self: gen_qsplashscreen_types.QSplashScreen, event
 proc fcQSplashScreen_vtable_callback_paintEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSplashScreenVTable](fcQSplashScreen_vdata(self)[])
   let self = QSplashScreen(h: self)
-  let slotval1 = gen_qevent_types.QPaintEvent(h: event)
+  let slotval1 = gen_qevent_types.QPaintEvent(h: event, owned: false)
   vtbl[].paintEvent(self, slotval1)
 
 proc QSplashScreenmoveEvent*(self: gen_qsplashscreen_types.QSplashScreen, event: gen_qevent_types.QMoveEvent): void =
@@ -627,7 +638,7 @@ proc QSplashScreenmoveEvent*(self: gen_qsplashscreen_types.QSplashScreen, event:
 proc fcQSplashScreen_vtable_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSplashScreenVTable](fcQSplashScreen_vdata(self)[])
   let self = QSplashScreen(h: self)
-  let slotval1 = gen_qevent_types.QMoveEvent(h: event)
+  let slotval1 = gen_qevent_types.QMoveEvent(h: event, owned: false)
   vtbl[].moveEvent(self, slotval1)
 
 proc QSplashScreenresizeEvent*(self: gen_qsplashscreen_types.QSplashScreen, event: gen_qevent_types.QResizeEvent): void =
@@ -636,7 +647,7 @@ proc QSplashScreenresizeEvent*(self: gen_qsplashscreen_types.QSplashScreen, even
 proc fcQSplashScreen_vtable_callback_resizeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSplashScreenVTable](fcQSplashScreen_vdata(self)[])
   let self = QSplashScreen(h: self)
-  let slotval1 = gen_qevent_types.QResizeEvent(h: event)
+  let slotval1 = gen_qevent_types.QResizeEvent(h: event, owned: false)
   vtbl[].resizeEvent(self, slotval1)
 
 proc QSplashScreencloseEvent*(self: gen_qsplashscreen_types.QSplashScreen, event: gen_qevent_types.QCloseEvent): void =
@@ -645,7 +656,7 @@ proc QSplashScreencloseEvent*(self: gen_qsplashscreen_types.QSplashScreen, event
 proc fcQSplashScreen_vtable_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSplashScreenVTable](fcQSplashScreen_vdata(self)[])
   let self = QSplashScreen(h: self)
-  let slotval1 = gen_qevent_types.QCloseEvent(h: event)
+  let slotval1 = gen_qevent_types.QCloseEvent(h: event, owned: false)
   vtbl[].closeEvent(self, slotval1)
 
 proc QSplashScreencontextMenuEvent*(self: gen_qsplashscreen_types.QSplashScreen, event: gen_qevent_types.QContextMenuEvent): void =
@@ -654,7 +665,7 @@ proc QSplashScreencontextMenuEvent*(self: gen_qsplashscreen_types.QSplashScreen,
 proc fcQSplashScreen_vtable_callback_contextMenuEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSplashScreenVTable](fcQSplashScreen_vdata(self)[])
   let self = QSplashScreen(h: self)
-  let slotval1 = gen_qevent_types.QContextMenuEvent(h: event)
+  let slotval1 = gen_qevent_types.QContextMenuEvent(h: event, owned: false)
   vtbl[].contextMenuEvent(self, slotval1)
 
 proc QSplashScreentabletEvent*(self: gen_qsplashscreen_types.QSplashScreen, event: gen_qevent_types.QTabletEvent): void =
@@ -663,7 +674,7 @@ proc QSplashScreentabletEvent*(self: gen_qsplashscreen_types.QSplashScreen, even
 proc fcQSplashScreen_vtable_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSplashScreenVTable](fcQSplashScreen_vdata(self)[])
   let self = QSplashScreen(h: self)
-  let slotval1 = gen_qevent_types.QTabletEvent(h: event)
+  let slotval1 = gen_qevent_types.QTabletEvent(h: event, owned: false)
   vtbl[].tabletEvent(self, slotval1)
 
 proc QSplashScreenactionEvent*(self: gen_qsplashscreen_types.QSplashScreen, event: gen_qevent_types.QActionEvent): void =
@@ -672,7 +683,7 @@ proc QSplashScreenactionEvent*(self: gen_qsplashscreen_types.QSplashScreen, even
 proc fcQSplashScreen_vtable_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSplashScreenVTable](fcQSplashScreen_vdata(self)[])
   let self = QSplashScreen(h: self)
-  let slotval1 = gen_qevent_types.QActionEvent(h: event)
+  let slotval1 = gen_qevent_types.QActionEvent(h: event, owned: false)
   vtbl[].actionEvent(self, slotval1)
 
 proc QSplashScreendragEnterEvent*(self: gen_qsplashscreen_types.QSplashScreen, event: gen_qevent_types.QDragEnterEvent): void =
@@ -681,7 +692,7 @@ proc QSplashScreendragEnterEvent*(self: gen_qsplashscreen_types.QSplashScreen, e
 proc fcQSplashScreen_vtable_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSplashScreenVTable](fcQSplashScreen_vdata(self)[])
   let self = QSplashScreen(h: self)
-  let slotval1 = gen_qevent_types.QDragEnterEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragEnterEvent(h: event, owned: false)
   vtbl[].dragEnterEvent(self, slotval1)
 
 proc QSplashScreendragMoveEvent*(self: gen_qsplashscreen_types.QSplashScreen, event: gen_qevent_types.QDragMoveEvent): void =
@@ -690,7 +701,7 @@ proc QSplashScreendragMoveEvent*(self: gen_qsplashscreen_types.QSplashScreen, ev
 proc fcQSplashScreen_vtable_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSplashScreenVTable](fcQSplashScreen_vdata(self)[])
   let self = QSplashScreen(h: self)
-  let slotval1 = gen_qevent_types.QDragMoveEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragMoveEvent(h: event, owned: false)
   vtbl[].dragMoveEvent(self, slotval1)
 
 proc QSplashScreendragLeaveEvent*(self: gen_qsplashscreen_types.QSplashScreen, event: gen_qevent_types.QDragLeaveEvent): void =
@@ -699,7 +710,7 @@ proc QSplashScreendragLeaveEvent*(self: gen_qsplashscreen_types.QSplashScreen, e
 proc fcQSplashScreen_vtable_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSplashScreenVTable](fcQSplashScreen_vdata(self)[])
   let self = QSplashScreen(h: self)
-  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event, owned: false)
   vtbl[].dragLeaveEvent(self, slotval1)
 
 proc QSplashScreendropEvent*(self: gen_qsplashscreen_types.QSplashScreen, event: gen_qevent_types.QDropEvent): void =
@@ -708,7 +719,7 @@ proc QSplashScreendropEvent*(self: gen_qsplashscreen_types.QSplashScreen, event:
 proc fcQSplashScreen_vtable_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSplashScreenVTable](fcQSplashScreen_vdata(self)[])
   let self = QSplashScreen(h: self)
-  let slotval1 = gen_qevent_types.QDropEvent(h: event)
+  let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
   vtbl[].dropEvent(self, slotval1)
 
 proc QSplashScreenshowEvent*(self: gen_qsplashscreen_types.QSplashScreen, event: gen_qevent_types.QShowEvent): void =
@@ -717,7 +728,7 @@ proc QSplashScreenshowEvent*(self: gen_qsplashscreen_types.QSplashScreen, event:
 proc fcQSplashScreen_vtable_callback_showEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSplashScreenVTable](fcQSplashScreen_vdata(self)[])
   let self = QSplashScreen(h: self)
-  let slotval1 = gen_qevent_types.QShowEvent(h: event)
+  let slotval1 = gen_qevent_types.QShowEvent(h: event, owned: false)
   vtbl[].showEvent(self, slotval1)
 
 proc QSplashScreenhideEvent*(self: gen_qsplashscreen_types.QSplashScreen, event: gen_qevent_types.QHideEvent): void =
@@ -726,7 +737,7 @@ proc QSplashScreenhideEvent*(self: gen_qsplashscreen_types.QSplashScreen, event:
 proc fcQSplashScreen_vtable_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSplashScreenVTable](fcQSplashScreen_vdata(self)[])
   let self = QSplashScreen(h: self)
-  let slotval1 = gen_qevent_types.QHideEvent(h: event)
+  let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   vtbl[].hideEvent(self, slotval1)
 
 proc QSplashScreennativeEvent*(self: gen_qsplashscreen_types.QSplashScreen, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool =
@@ -750,7 +761,7 @@ proc QSplashScreenchangeEvent*(self: gen_qsplashscreen_types.QSplashScreen, para
 proc fcQSplashScreen_vtable_callback_changeEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSplashScreenVTable](fcQSplashScreen_vdata(self)[])
   let self = QSplashScreen(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: param1)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
   vtbl[].changeEvent(self, slotval1)
 
 proc QSplashScreenmetric*(self: gen_qsplashscreen_types.QSplashScreen, param1: cint): cint =
@@ -769,27 +780,33 @@ proc QSplashScreeninitPainter*(self: gen_qsplashscreen_types.QSplashScreen, pain
 proc fcQSplashScreen_vtable_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSplashScreenVTable](fcQSplashScreen_vdata(self)[])
   let self = QSplashScreen(h: self)
-  let slotval1 = gen_qpainter_types.QPainter(h: painter)
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
   vtbl[].initPainter(self, slotval1)
 
 proc QSplashScreenredirected*(self: gen_qsplashscreen_types.QSplashScreen, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice =
-  gen_qpaintdevice_types.QPaintDevice(h: fcQSplashScreen_virtualbase_redirected(self.h, offset.h))
+  gen_qpaintdevice_types.QPaintDevice(h: fcQSplashScreen_virtualbase_redirected(self.h, offset.h), owned: false)
 
 proc fcQSplashScreen_vtable_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QSplashScreenVTable](fcQSplashScreen_vdata(self)[])
   let self = QSplashScreen(h: self)
-  let slotval1 = gen_qpoint_types.QPoint(h: offset)
+  let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
   var virtualReturn = vtbl[].redirected(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QSplashScreensharedPainter*(self: gen_qsplashscreen_types.QSplashScreen): gen_qpainter_types.QPainter =
-  gen_qpainter_types.QPainter(h: fcQSplashScreen_virtualbase_sharedPainter(self.h))
+  gen_qpainter_types.QPainter(h: fcQSplashScreen_virtualbase_sharedPainter(self.h), owned: false)
 
 proc fcQSplashScreen_vtable_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QSplashScreenVTable](fcQSplashScreen_vdata(self)[])
   let self = QSplashScreen(h: self)
   var virtualReturn = vtbl[].sharedPainter(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QSplashScreeninputMethodEvent*(self: gen_qsplashscreen_types.QSplashScreen, param1: gen_qevent_types.QInputMethodEvent): void =
   fcQSplashScreen_virtualbase_inputMethodEvent(self.h, param1.h)
@@ -797,18 +814,21 @@ proc QSplashScreeninputMethodEvent*(self: gen_qsplashscreen_types.QSplashScreen,
 proc fcQSplashScreen_vtable_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSplashScreenVTable](fcQSplashScreen_vdata(self)[])
   let self = QSplashScreen(h: self)
-  let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1)
+  let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1, owned: false)
   vtbl[].inputMethodEvent(self, slotval1)
 
 proc QSplashScreeninputMethodQuery*(self: gen_qsplashscreen_types.QSplashScreen, param1: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQSplashScreen_virtualbase_inputMethodQuery(self.h, cint(param1)))
+  gen_qvariant_types.QVariant(h: fcQSplashScreen_virtualbase_inputMethodQuery(self.h, cint(param1)), owned: true)
 
 proc fcQSplashScreen_vtable_callback_inputMethodQuery(self: pointer, param1: cint): pointer {.cdecl.} =
   let vtbl = cast[ptr QSplashScreenVTable](fcQSplashScreen_vdata(self)[])
   let self = QSplashScreen(h: self)
   let slotval1 = cint(param1)
   var virtualReturn = vtbl[].inputMethodQuery(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QSplashScreenfocusNextPrevChild*(self: gen_qsplashscreen_types.QSplashScreen, next: bool): bool =
   fcQSplashScreen_virtualbase_focusNextPrevChild(self.h, next)
@@ -826,8 +846,8 @@ proc QSplashScreeneventFilter*(self: gen_qsplashscreen_types.QSplashScreen, watc
 proc fcQSplashScreen_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QSplashScreenVTable](fcQSplashScreen_vdata(self)[])
   let self = QSplashScreen(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
@@ -837,7 +857,7 @@ proc QSplashScreentimerEvent*(self: gen_qsplashscreen_types.QSplashScreen, event
 proc fcQSplashScreen_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSplashScreenVTable](fcQSplashScreen_vdata(self)[])
   let self = QSplashScreen(h: self)
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
 proc QSplashScreenchildEvent*(self: gen_qsplashscreen_types.QSplashScreen, event: gen_qcoreevent_types.QChildEvent): void =
@@ -846,7 +866,7 @@ proc QSplashScreenchildEvent*(self: gen_qsplashscreen_types.QSplashScreen, event
 proc fcQSplashScreen_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSplashScreenVTable](fcQSplashScreen_vdata(self)[])
   let self = QSplashScreen(h: self)
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
 proc QSplashScreencustomEvent*(self: gen_qsplashscreen_types.QSplashScreen, event: gen_qcoreevent_types.QEvent): void =
@@ -855,7 +875,7 @@ proc QSplashScreencustomEvent*(self: gen_qsplashscreen_types.QSplashScreen, even
 proc fcQSplashScreen_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSplashScreenVTable](fcQSplashScreen_vdata(self)[])
   let self = QSplashScreen(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
 proc QSplashScreenconnectNotify*(self: gen_qsplashscreen_types.QSplashScreen, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -864,7 +884,7 @@ proc QSplashScreenconnectNotify*(self: gen_qsplashscreen_types.QSplashScreen, si
 proc fcQSplashScreen_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSplashScreenVTable](fcQSplashScreen_vdata(self)[])
   let self = QSplashScreen(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
 proc QSplashScreendisconnectNotify*(self: gen_qsplashscreen_types.QSplashScreen, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -873,7 +893,7 @@ proc QSplashScreendisconnectNotify*(self: gen_qsplashscreen_types.QSplashScreen,
 proc fcQSplashScreen_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSplashScreenVTable](fcQSplashScreen_vdata(self)[])
   let self = QSplashScreen(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
 type VirtualQSplashScreen* {.inheritable.} = ref object of QSplashScreen
@@ -907,7 +927,7 @@ method event*(self: VirtualQSplashScreen, e: gen_qcoreevent_types.QEvent): bool 
   QSplashScreenevent(self[], e)
 proc fcQSplashScreen_method_callback_event(self: pointer, e: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQSplashScreen](fcQSplashScreen_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: e)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: e, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
@@ -915,14 +935,14 @@ method drawContents*(self: VirtualQSplashScreen, painter: gen_qpainter_types.QPa
   QSplashScreendrawContents(self[], painter)
 proc fcQSplashScreen_method_callback_drawContents(self: pointer, painter: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSplashScreen](fcQSplashScreen_vdata(self)[])
-  let slotval1 = gen_qpainter_types.QPainter(h: painter)
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
   inst.drawContents(slotval1)
 
 method mousePressEvent*(self: VirtualQSplashScreen, param1: gen_qevent_types.QMouseEvent): void {.base.} =
   QSplashScreenmousePressEvent(self[], param1)
 proc fcQSplashScreen_method_callback_mousePressEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSplashScreen](fcQSplashScreen_vdata(self)[])
-  let slotval1 = gen_qevent_types.QMouseEvent(h: param1)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: param1, owned: false)
   inst.mousePressEvent(slotval1)
 
 method devType*(self: VirtualQSplashScreen): cint {.base.} =
@@ -979,161 +999,161 @@ method mouseReleaseEvent*(self: VirtualQSplashScreen, event: gen_qevent_types.QM
   QSplashScreenmouseReleaseEvent(self[], event)
 proc fcQSplashScreen_method_callback_mouseReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSplashScreen](fcQSplashScreen_vdata(self)[])
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mouseReleaseEvent(slotval1)
 
 method mouseDoubleClickEvent*(self: VirtualQSplashScreen, event: gen_qevent_types.QMouseEvent): void {.base.} =
   QSplashScreenmouseDoubleClickEvent(self[], event)
 proc fcQSplashScreen_method_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSplashScreen](fcQSplashScreen_vdata(self)[])
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mouseDoubleClickEvent(slotval1)
 
 method mouseMoveEvent*(self: VirtualQSplashScreen, event: gen_qevent_types.QMouseEvent): void {.base.} =
   QSplashScreenmouseMoveEvent(self[], event)
 proc fcQSplashScreen_method_callback_mouseMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSplashScreen](fcQSplashScreen_vdata(self)[])
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mouseMoveEvent(slotval1)
 
 method wheelEvent*(self: VirtualQSplashScreen, event: gen_qevent_types.QWheelEvent): void {.base.} =
   QSplashScreenwheelEvent(self[], event)
 proc fcQSplashScreen_method_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSplashScreen](fcQSplashScreen_vdata(self)[])
-  let slotval1 = gen_qevent_types.QWheelEvent(h: event)
+  let slotval1 = gen_qevent_types.QWheelEvent(h: event, owned: false)
   inst.wheelEvent(slotval1)
 
 method keyPressEvent*(self: VirtualQSplashScreen, event: gen_qevent_types.QKeyEvent): void {.base.} =
   QSplashScreenkeyPressEvent(self[], event)
 proc fcQSplashScreen_method_callback_keyPressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSplashScreen](fcQSplashScreen_vdata(self)[])
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   inst.keyPressEvent(slotval1)
 
 method keyReleaseEvent*(self: VirtualQSplashScreen, event: gen_qevent_types.QKeyEvent): void {.base.} =
   QSplashScreenkeyReleaseEvent(self[], event)
 proc fcQSplashScreen_method_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSplashScreen](fcQSplashScreen_vdata(self)[])
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   inst.keyReleaseEvent(slotval1)
 
 method focusInEvent*(self: VirtualQSplashScreen, event: gen_qevent_types.QFocusEvent): void {.base.} =
   QSplashScreenfocusInEvent(self[], event)
 proc fcQSplashScreen_method_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSplashScreen](fcQSplashScreen_vdata(self)[])
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   inst.focusInEvent(slotval1)
 
 method focusOutEvent*(self: VirtualQSplashScreen, event: gen_qevent_types.QFocusEvent): void {.base.} =
   QSplashScreenfocusOutEvent(self[], event)
 proc fcQSplashScreen_method_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSplashScreen](fcQSplashScreen_vdata(self)[])
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   inst.focusOutEvent(slotval1)
 
 method enterEvent*(self: VirtualQSplashScreen, event: gen_qevent_types.QEnterEvent): void {.base.} =
   QSplashScreenenterEvent(self[], event)
 proc fcQSplashScreen_method_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSplashScreen](fcQSplashScreen_vdata(self)[])
-  let slotval1 = gen_qevent_types.QEnterEvent(h: event)
+  let slotval1 = gen_qevent_types.QEnterEvent(h: event, owned: false)
   inst.enterEvent(slotval1)
 
 method leaveEvent*(self: VirtualQSplashScreen, event: gen_qcoreevent_types.QEvent): void {.base.} =
   QSplashScreenleaveEvent(self[], event)
 proc fcQSplashScreen_method_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSplashScreen](fcQSplashScreen_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.leaveEvent(slotval1)
 
 method paintEvent*(self: VirtualQSplashScreen, event: gen_qevent_types.QPaintEvent): void {.base.} =
   QSplashScreenpaintEvent(self[], event)
 proc fcQSplashScreen_method_callback_paintEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSplashScreen](fcQSplashScreen_vdata(self)[])
-  let slotval1 = gen_qevent_types.QPaintEvent(h: event)
+  let slotval1 = gen_qevent_types.QPaintEvent(h: event, owned: false)
   inst.paintEvent(slotval1)
 
 method moveEvent*(self: VirtualQSplashScreen, event: gen_qevent_types.QMoveEvent): void {.base.} =
   QSplashScreenmoveEvent(self[], event)
 proc fcQSplashScreen_method_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSplashScreen](fcQSplashScreen_vdata(self)[])
-  let slotval1 = gen_qevent_types.QMoveEvent(h: event)
+  let slotval1 = gen_qevent_types.QMoveEvent(h: event, owned: false)
   inst.moveEvent(slotval1)
 
 method resizeEvent*(self: VirtualQSplashScreen, event: gen_qevent_types.QResizeEvent): void {.base.} =
   QSplashScreenresizeEvent(self[], event)
 proc fcQSplashScreen_method_callback_resizeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSplashScreen](fcQSplashScreen_vdata(self)[])
-  let slotval1 = gen_qevent_types.QResizeEvent(h: event)
+  let slotval1 = gen_qevent_types.QResizeEvent(h: event, owned: false)
   inst.resizeEvent(slotval1)
 
 method closeEvent*(self: VirtualQSplashScreen, event: gen_qevent_types.QCloseEvent): void {.base.} =
   QSplashScreencloseEvent(self[], event)
 proc fcQSplashScreen_method_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSplashScreen](fcQSplashScreen_vdata(self)[])
-  let slotval1 = gen_qevent_types.QCloseEvent(h: event)
+  let slotval1 = gen_qevent_types.QCloseEvent(h: event, owned: false)
   inst.closeEvent(slotval1)
 
 method contextMenuEvent*(self: VirtualQSplashScreen, event: gen_qevent_types.QContextMenuEvent): void {.base.} =
   QSplashScreencontextMenuEvent(self[], event)
 proc fcQSplashScreen_method_callback_contextMenuEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSplashScreen](fcQSplashScreen_vdata(self)[])
-  let slotval1 = gen_qevent_types.QContextMenuEvent(h: event)
+  let slotval1 = gen_qevent_types.QContextMenuEvent(h: event, owned: false)
   inst.contextMenuEvent(slotval1)
 
 method tabletEvent*(self: VirtualQSplashScreen, event: gen_qevent_types.QTabletEvent): void {.base.} =
   QSplashScreentabletEvent(self[], event)
 proc fcQSplashScreen_method_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSplashScreen](fcQSplashScreen_vdata(self)[])
-  let slotval1 = gen_qevent_types.QTabletEvent(h: event)
+  let slotval1 = gen_qevent_types.QTabletEvent(h: event, owned: false)
   inst.tabletEvent(slotval1)
 
 method actionEvent*(self: VirtualQSplashScreen, event: gen_qevent_types.QActionEvent): void {.base.} =
   QSplashScreenactionEvent(self[], event)
 proc fcQSplashScreen_method_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSplashScreen](fcQSplashScreen_vdata(self)[])
-  let slotval1 = gen_qevent_types.QActionEvent(h: event)
+  let slotval1 = gen_qevent_types.QActionEvent(h: event, owned: false)
   inst.actionEvent(slotval1)
 
 method dragEnterEvent*(self: VirtualQSplashScreen, event: gen_qevent_types.QDragEnterEvent): void {.base.} =
   QSplashScreendragEnterEvent(self[], event)
 proc fcQSplashScreen_method_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSplashScreen](fcQSplashScreen_vdata(self)[])
-  let slotval1 = gen_qevent_types.QDragEnterEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragEnterEvent(h: event, owned: false)
   inst.dragEnterEvent(slotval1)
 
 method dragMoveEvent*(self: VirtualQSplashScreen, event: gen_qevent_types.QDragMoveEvent): void {.base.} =
   QSplashScreendragMoveEvent(self[], event)
 proc fcQSplashScreen_method_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSplashScreen](fcQSplashScreen_vdata(self)[])
-  let slotval1 = gen_qevent_types.QDragMoveEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragMoveEvent(h: event, owned: false)
   inst.dragMoveEvent(slotval1)
 
 method dragLeaveEvent*(self: VirtualQSplashScreen, event: gen_qevent_types.QDragLeaveEvent): void {.base.} =
   QSplashScreendragLeaveEvent(self[], event)
 proc fcQSplashScreen_method_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSplashScreen](fcQSplashScreen_vdata(self)[])
-  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event, owned: false)
   inst.dragLeaveEvent(slotval1)
 
 method dropEvent*(self: VirtualQSplashScreen, event: gen_qevent_types.QDropEvent): void {.base.} =
   QSplashScreendropEvent(self[], event)
 proc fcQSplashScreen_method_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSplashScreen](fcQSplashScreen_vdata(self)[])
-  let slotval1 = gen_qevent_types.QDropEvent(h: event)
+  let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
   inst.dropEvent(slotval1)
 
 method showEvent*(self: VirtualQSplashScreen, event: gen_qevent_types.QShowEvent): void {.base.} =
   QSplashScreenshowEvent(self[], event)
 proc fcQSplashScreen_method_callback_showEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSplashScreen](fcQSplashScreen_vdata(self)[])
-  let slotval1 = gen_qevent_types.QShowEvent(h: event)
+  let slotval1 = gen_qevent_types.QShowEvent(h: event, owned: false)
   inst.showEvent(slotval1)
 
 method hideEvent*(self: VirtualQSplashScreen, event: gen_qevent_types.QHideEvent): void {.base.} =
   QSplashScreenhideEvent(self[], event)
 proc fcQSplashScreen_method_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSplashScreen](fcQSplashScreen_vdata(self)[])
-  let slotval1 = gen_qevent_types.QHideEvent(h: event)
+  let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   inst.hideEvent(slotval1)
 
 method nativeEvent*(self: VirtualQSplashScreen, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
@@ -1153,7 +1173,7 @@ method changeEvent*(self: VirtualQSplashScreen, param1: gen_qcoreevent_types.QEv
   QSplashScreenchangeEvent(self[], param1)
 proc fcQSplashScreen_method_callback_changeEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSplashScreen](fcQSplashScreen_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: param1)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
   inst.changeEvent(slotval1)
 
 method metric*(self: VirtualQSplashScreen, param1: cint): cint {.base.} =
@@ -1168,14 +1188,14 @@ method initPainter*(self: VirtualQSplashScreen, painter: gen_qpainter_types.QPai
   QSplashScreeninitPainter(self[], painter)
 proc fcQSplashScreen_method_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSplashScreen](fcQSplashScreen_vdata(self)[])
-  let slotval1 = gen_qpainter_types.QPainter(h: painter)
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
   inst.initPainter(slotval1)
 
 method redirected*(self: VirtualQSplashScreen, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.base.} =
   QSplashScreenredirected(self[], offset)
 proc fcQSplashScreen_method_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQSplashScreen](fcQSplashScreen_vdata(self)[])
-  let slotval1 = gen_qpoint_types.QPoint(h: offset)
+  let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
   var virtualReturn = inst.redirected(slotval1)
   virtualReturn.h
 
@@ -1190,7 +1210,7 @@ method inputMethodEvent*(self: VirtualQSplashScreen, param1: gen_qevent_types.QI
   QSplashScreeninputMethodEvent(self[], param1)
 proc fcQSplashScreen_method_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSplashScreen](fcQSplashScreen_vdata(self)[])
-  let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1)
+  let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1, owned: false)
   inst.inputMethodEvent(slotval1)
 
 method inputMethodQuery*(self: VirtualQSplashScreen, param1: cint): gen_qvariant_types.QVariant {.base.} =
@@ -1213,8 +1233,8 @@ method eventFilter*(self: VirtualQSplashScreen, watched: gen_qobject_types.QObje
   QSplashScreeneventFilter(self[], watched, event)
 proc fcQSplashScreen_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQSplashScreen](fcQSplashScreen_vdata(self)[])
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
@@ -1222,35 +1242,35 @@ method timerEvent*(self: VirtualQSplashScreen, event: gen_qcoreevent_types.QTime
   QSplashScreentimerEvent(self[], event)
 proc fcQSplashScreen_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSplashScreen](fcQSplashScreen_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
 method childEvent*(self: VirtualQSplashScreen, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
   QSplashScreenchildEvent(self[], event)
 proc fcQSplashScreen_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSplashScreen](fcQSplashScreen_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
 method customEvent*(self: VirtualQSplashScreen, event: gen_qcoreevent_types.QEvent): void {.base.} =
   QSplashScreencustomEvent(self[], event)
 proc fcQSplashScreen_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSplashScreen](fcQSplashScreen_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
 method connectNotify*(self: VirtualQSplashScreen, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
   QSplashScreenconnectNotify(self[], signal)
 proc fcQSplashScreen_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSplashScreen](fcQSplashScreen_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
 method disconnectNotify*(self: VirtualQSplashScreen, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
   QSplashScreendisconnectNotify(self[], signal)
 proc fcQSplashScreen_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSplashScreen](fcQSplashScreen_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
 
 proc updateMicroFocus*(self: gen_qsplashscreen_types.QSplashScreen): void =
@@ -1269,7 +1289,7 @@ proc focusPreviousChild*(self: gen_qsplashscreen_types.QSplashScreen): bool =
   fcQSplashScreen_protectedbase_focusPreviousChild(self.h)
 
 proc sender*(self: gen_qsplashscreen_types.QSplashScreen): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQSplashScreen_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQSplashScreen_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qsplashscreen_types.QSplashScreen): cint =
   fcQSplashScreen_protectedbase_senderSignalIndex(self.h)
@@ -1389,7 +1409,7 @@ proc create*(T: type gen_qsplashscreen_types.QSplashScreen,
     vtbl[].vtbl.connectNotify = fcQSplashScreen_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQSplashScreen_vtable_callback_disconnectNotify
-  let tmp = gen_qsplashscreen_types.QSplashScreen(h: fcQSplashScreen_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))))
+  let tmp = gen_qsplashscreen_types.QSplashScreen(h: fcQSplashScreen_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))), owned: true)
   fcQSplashScreen_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qsplashscreen_types.QSplashScreen,
@@ -1502,7 +1522,7 @@ proc create*(T: type gen_qsplashscreen_types.QSplashScreen,
     vtbl[].vtbl.connectNotify = fcQSplashScreen_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQSplashScreen_vtable_callback_disconnectNotify
-  let tmp = gen_qsplashscreen_types.QSplashScreen(h: fcQSplashScreen_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), screen.h))
+  let tmp = gen_qsplashscreen_types.QSplashScreen(h: fcQSplashScreen_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), screen.h), owned: true)
   fcQSplashScreen_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qsplashscreen_types.QSplashScreen,
@@ -1615,7 +1635,7 @@ proc create*(T: type gen_qsplashscreen_types.QSplashScreen,
     vtbl[].vtbl.connectNotify = fcQSplashScreen_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQSplashScreen_vtable_callback_disconnectNotify
-  let tmp = gen_qsplashscreen_types.QSplashScreen(h: fcQSplashScreen_new3(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), pixmap.h))
+  let tmp = gen_qsplashscreen_types.QSplashScreen(h: fcQSplashScreen_new3(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), pixmap.h), owned: true)
   fcQSplashScreen_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qsplashscreen_types.QSplashScreen,
@@ -1728,7 +1748,7 @@ proc create*(T: type gen_qsplashscreen_types.QSplashScreen,
     vtbl[].vtbl.connectNotify = fcQSplashScreen_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQSplashScreen_vtable_callback_disconnectNotify
-  let tmp = gen_qsplashscreen_types.QSplashScreen(h: fcQSplashScreen_new4(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), pixmap.h, cint(f)))
+  let tmp = gen_qsplashscreen_types.QSplashScreen(h: fcQSplashScreen_new4(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), pixmap.h, cint(f)), owned: true)
   fcQSplashScreen_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qsplashscreen_types.QSplashScreen,
@@ -1841,7 +1861,7 @@ proc create*(T: type gen_qsplashscreen_types.QSplashScreen,
     vtbl[].vtbl.connectNotify = fcQSplashScreen_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQSplashScreen_vtable_callback_disconnectNotify
-  let tmp = gen_qsplashscreen_types.QSplashScreen(h: fcQSplashScreen_new5(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), screen.h, pixmap.h))
+  let tmp = gen_qsplashscreen_types.QSplashScreen(h: fcQSplashScreen_new5(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), screen.h, pixmap.h), owned: true)
   fcQSplashScreen_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qsplashscreen_types.QSplashScreen,
@@ -1954,13 +1974,14 @@ proc create*(T: type gen_qsplashscreen_types.QSplashScreen,
     vtbl[].vtbl.connectNotify = fcQSplashScreen_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQSplashScreen_vtable_callback_disconnectNotify
-  let tmp = gen_qsplashscreen_types.QSplashScreen(h: fcQSplashScreen_new6(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), screen.h, pixmap.h, cint(f)))
+  let tmp = gen_qsplashscreen_types.QSplashScreen(h: fcQSplashScreen_new6(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), screen.h, pixmap.h, cint(f)), owned: true)
   fcQSplashScreen_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQSplashScreen_mvtbl = cQSplashScreenVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQSplashScreen()[])](self.fcQSplashScreen_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   metaObject: fcQSplashScreen_method_callback_metaObject,
   metacast: fcQSplashScreen_method_callback_metacast,
@@ -2057,5 +2078,3 @@ proc create*(T: type gen_qsplashscreen_types.QSplashScreen,
 
 proc staticMetaObject*(_: type gen_qsplashscreen_types.QSplashScreen): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQSplashScreen_staticMetaObject())
-proc delete*(self: gen_qsplashscreen_types.QSplashScreen) =
-  fcQSplashScreen_delete(self.h)

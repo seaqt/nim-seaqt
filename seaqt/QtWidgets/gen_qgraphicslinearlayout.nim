@@ -32,7 +32,7 @@ func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
     else:
       copyMem(addr result[0], v.data, len)
 
-const cflags = gorge("pkg-config --cflags Qt6Widgets")  & " -fPIC"
+const cflags = gorge("pkg-config --cflags Qt6Widgets") & " -fPIC"
 {.compile("gen_qgraphicslinearlayout.cpp", cflags).}
 
 
@@ -112,7 +112,6 @@ proc fcQGraphicsLinearLayout_new(vtbl: pointer, vdata: csize_t): ptr cQGraphicsL
 proc fcQGraphicsLinearLayout_new2(vtbl: pointer, vdata: csize_t, orientation: cint): ptr cQGraphicsLinearLayout {.importc: "QGraphicsLinearLayout_new2".}
 proc fcQGraphicsLinearLayout_new3(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQGraphicsLinearLayout {.importc: "QGraphicsLinearLayout_new3".}
 proc fcQGraphicsLinearLayout_new4(vtbl: pointer, vdata: csize_t, orientation: cint, parent: pointer): ptr cQGraphicsLinearLayout {.importc: "QGraphicsLinearLayout_new4".}
-proc fcQGraphicsLinearLayout_delete(self: pointer) {.importc: "QGraphicsLinearLayout_delete".}
 
 proc setOrientation*(self: gen_qgraphicslinearlayout_types.QGraphicsLinearLayout, orientation: cint): void =
   fcQGraphicsLinearLayout_setOrientation(self.h, cint(orientation))
@@ -169,13 +168,13 @@ proc count*(self: gen_qgraphicslinearlayout_types.QGraphicsLinearLayout): cint =
   fcQGraphicsLinearLayout_count(self.h)
 
 proc itemAt*(self: gen_qgraphicslinearlayout_types.QGraphicsLinearLayout, index: cint): gen_qgraphicslayoutitem_types.QGraphicsLayoutItem =
-  gen_qgraphicslayoutitem_types.QGraphicsLayoutItem(h: fcQGraphicsLinearLayout_itemAt(self.h, index))
+  gen_qgraphicslayoutitem_types.QGraphicsLayoutItem(h: fcQGraphicsLinearLayout_itemAt(self.h, index), owned: false)
 
 proc invalidate*(self: gen_qgraphicslinearlayout_types.QGraphicsLinearLayout): void =
   fcQGraphicsLinearLayout_invalidate(self.h)
 
 proc sizeHint*(self: gen_qgraphicslinearlayout_types.QGraphicsLinearLayout, which: cint, constraint: gen_qsize_types.QSizeF): gen_qsize_types.QSizeF =
-  gen_qsize_types.QSizeF(h: fcQGraphicsLinearLayout_sizeHint(self.h, cint(which), constraint.h))
+  gen_qsize_types.QSizeF(h: fcQGraphicsLinearLayout_sizeHint(self.h, cint(which), constraint.h), owned: true)
 
 proc dump*(self: gen_qgraphicslinearlayout_types.QGraphicsLinearLayout): void =
   fcQGraphicsLinearLayout_dump(self.h)
@@ -199,7 +198,7 @@ type QGraphicsLinearLayoutgetContentsMarginsProc* = proc(self: QGraphicsLinearLa
 type QGraphicsLinearLayoutupdateGeometryProc* = proc(self: QGraphicsLinearLayout): void {.raises: [], gcsafe.}
 type QGraphicsLinearLayoutwidgetEventProc* = proc(self: QGraphicsLinearLayout, e: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QGraphicsLinearLayoutisEmptyProc* = proc(self: QGraphicsLinearLayout): bool {.raises: [], gcsafe.}
-type QGraphicsLinearLayoutVTable* = object
+type QGraphicsLinearLayoutVTable* {.inheritable, pure.} = object
   vtbl: cQGraphicsLinearLayoutVTable
   removeAt*: QGraphicsLinearLayoutremoveAtProc
   setGeometry*: QGraphicsLinearLayoutsetGeometryProc
@@ -226,7 +225,7 @@ proc QGraphicsLinearLayoutsetGeometry*(self: gen_qgraphicslinearlayout_types.QGr
 proc fcQGraphicsLinearLayout_vtable_callback_setGeometry(self: pointer, rect: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsLinearLayoutVTable](fcQGraphicsLinearLayout_vdata(self)[])
   let self = QGraphicsLinearLayout(h: self)
-  let slotval1 = gen_qrect_types.QRectF(h: rect)
+  let slotval1 = gen_qrect_types.QRectF(h: rect, owned: false)
   vtbl[].setGeometry(self, slotval1)
 
 proc QGraphicsLinearLayoutcount*(self: gen_qgraphicslinearlayout_types.QGraphicsLinearLayout): cint =
@@ -239,14 +238,17 @@ proc fcQGraphicsLinearLayout_vtable_callback_count(self: pointer): cint {.cdecl.
   virtualReturn
 
 proc QGraphicsLinearLayoutitemAt*(self: gen_qgraphicslinearlayout_types.QGraphicsLinearLayout, index: cint): gen_qgraphicslayoutitem_types.QGraphicsLayoutItem =
-  gen_qgraphicslayoutitem_types.QGraphicsLayoutItem(h: fcQGraphicsLinearLayout_virtualbase_itemAt(self.h, index))
+  gen_qgraphicslayoutitem_types.QGraphicsLayoutItem(h: fcQGraphicsLinearLayout_virtualbase_itemAt(self.h, index), owned: false)
 
 proc fcQGraphicsLinearLayout_vtable_callback_itemAt(self: pointer, index: cint): pointer {.cdecl.} =
   let vtbl = cast[ptr QGraphicsLinearLayoutVTable](fcQGraphicsLinearLayout_vdata(self)[])
   let self = QGraphicsLinearLayout(h: self)
   let slotval1 = index
   var virtualReturn = vtbl[].itemAt(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QGraphicsLinearLayoutinvalidate*(self: gen_qgraphicslinearlayout_types.QGraphicsLinearLayout): void =
   fcQGraphicsLinearLayout_virtualbase_invalidate(self.h)
@@ -257,15 +259,18 @@ proc fcQGraphicsLinearLayout_vtable_callback_invalidate(self: pointer): void {.c
   vtbl[].invalidate(self)
 
 proc QGraphicsLinearLayoutsizeHint*(self: gen_qgraphicslinearlayout_types.QGraphicsLinearLayout, which: cint, constraint: gen_qsize_types.QSizeF): gen_qsize_types.QSizeF =
-  gen_qsize_types.QSizeF(h: fcQGraphicsLinearLayout_virtualbase_sizeHint(self.h, cint(which), constraint.h))
+  gen_qsize_types.QSizeF(h: fcQGraphicsLinearLayout_virtualbase_sizeHint(self.h, cint(which), constraint.h), owned: true)
 
 proc fcQGraphicsLinearLayout_vtable_callback_sizeHint(self: pointer, which: cint, constraint: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QGraphicsLinearLayoutVTable](fcQGraphicsLinearLayout_vdata(self)[])
   let self = QGraphicsLinearLayout(h: self)
   let slotval1 = cint(which)
-  let slotval2 = gen_qsize_types.QSizeF(h: constraint)
+  let slotval2 = gen_qsize_types.QSizeF(h: constraint, owned: false)
   var virtualReturn = vtbl[].sizeHint(self, slotval1, slotval2)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QGraphicsLinearLayoutgetContentsMargins*(self: gen_qgraphicslinearlayout_types.QGraphicsLinearLayout, left: ptr float64, top: ptr float64, right: ptr float64, bottom: ptr float64): void =
   fcQGraphicsLinearLayout_virtualbase_getContentsMargins(self.h, left, top, right, bottom)
@@ -293,7 +298,7 @@ proc QGraphicsLinearLayoutwidgetEvent*(self: gen_qgraphicslinearlayout_types.QGr
 proc fcQGraphicsLinearLayout_vtable_callback_widgetEvent(self: pointer, e: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsLinearLayoutVTable](fcQGraphicsLinearLayout_vdata(self)[])
   let self = QGraphicsLinearLayout(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: e)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: e, owned: false)
   vtbl[].widgetEvent(self, slotval1)
 
 proc QGraphicsLinearLayoutisEmpty*(self: gen_qgraphicslinearlayout_types.QGraphicsLinearLayout): bool =
@@ -318,7 +323,7 @@ method setGeometry*(self: VirtualQGraphicsLinearLayout, rect: gen_qrect_types.QR
   QGraphicsLinearLayoutsetGeometry(self[], rect)
 proc fcQGraphicsLinearLayout_method_callback_setGeometry(self: pointer, rect: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsLinearLayout](fcQGraphicsLinearLayout_vdata(self)[])
-  let slotval1 = gen_qrect_types.QRectF(h: rect)
+  let slotval1 = gen_qrect_types.QRectF(h: rect, owned: false)
   inst.setGeometry(slotval1)
 
 method count*(self: VirtualQGraphicsLinearLayout): cint {.base.} =
@@ -347,7 +352,7 @@ method sizeHint*(self: VirtualQGraphicsLinearLayout, which: cint, constraint: ge
 proc fcQGraphicsLinearLayout_method_callback_sizeHint(self: pointer, which: cint, constraint: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsLinearLayout](fcQGraphicsLinearLayout_vdata(self)[])
   let slotval1 = cint(which)
-  let slotval2 = gen_qsize_types.QSizeF(h: constraint)
+  let slotval2 = gen_qsize_types.QSizeF(h: constraint, owned: false)
   var virtualReturn = inst.sizeHint(slotval1, slotval2)
   virtualReturn.h
 
@@ -371,7 +376,7 @@ method widgetEvent*(self: VirtualQGraphicsLinearLayout, e: gen_qcoreevent_types.
   QGraphicsLinearLayoutwidgetEvent(self[], e)
 proc fcQGraphicsLinearLayout_method_callback_widgetEvent(self: pointer, e: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsLinearLayout](fcQGraphicsLinearLayout_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: e)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: e, owned: false)
   inst.widgetEvent(slotval1)
 
 method isEmpty*(self: VirtualQGraphicsLinearLayout): bool {.base.} =
@@ -417,7 +422,7 @@ proc create*(T: type gen_qgraphicslinearlayout_types.QGraphicsLinearLayout,
     vtbl[].vtbl.widgetEvent = fcQGraphicsLinearLayout_vtable_callback_widgetEvent
   if not isNil(vtbl[].isEmpty):
     vtbl[].vtbl.isEmpty = fcQGraphicsLinearLayout_vtable_callback_isEmpty
-  let tmp = gen_qgraphicslinearlayout_types.QGraphicsLinearLayout(h: fcQGraphicsLinearLayout_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))))
+  let tmp = gen_qgraphicslinearlayout_types.QGraphicsLinearLayout(h: fcQGraphicsLinearLayout_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))), owned: true)
   fcQGraphicsLinearLayout_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qgraphicslinearlayout_types.QGraphicsLinearLayout,
@@ -448,7 +453,7 @@ proc create*(T: type gen_qgraphicslinearlayout_types.QGraphicsLinearLayout,
     vtbl[].vtbl.widgetEvent = fcQGraphicsLinearLayout_vtable_callback_widgetEvent
   if not isNil(vtbl[].isEmpty):
     vtbl[].vtbl.isEmpty = fcQGraphicsLinearLayout_vtable_callback_isEmpty
-  let tmp = gen_qgraphicslinearlayout_types.QGraphicsLinearLayout(h: fcQGraphicsLinearLayout_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(orientation)))
+  let tmp = gen_qgraphicslinearlayout_types.QGraphicsLinearLayout(h: fcQGraphicsLinearLayout_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(orientation)), owned: true)
   fcQGraphicsLinearLayout_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qgraphicslinearlayout_types.QGraphicsLinearLayout,
@@ -479,7 +484,7 @@ proc create*(T: type gen_qgraphicslinearlayout_types.QGraphicsLinearLayout,
     vtbl[].vtbl.widgetEvent = fcQGraphicsLinearLayout_vtable_callback_widgetEvent
   if not isNil(vtbl[].isEmpty):
     vtbl[].vtbl.isEmpty = fcQGraphicsLinearLayout_vtable_callback_isEmpty
-  let tmp = gen_qgraphicslinearlayout_types.QGraphicsLinearLayout(h: fcQGraphicsLinearLayout_new3(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h))
+  let tmp = gen_qgraphicslinearlayout_types.QGraphicsLinearLayout(h: fcQGraphicsLinearLayout_new3(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h), owned: true)
   fcQGraphicsLinearLayout_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qgraphicslinearlayout_types.QGraphicsLinearLayout,
@@ -510,13 +515,14 @@ proc create*(T: type gen_qgraphicslinearlayout_types.QGraphicsLinearLayout,
     vtbl[].vtbl.widgetEvent = fcQGraphicsLinearLayout_vtable_callback_widgetEvent
   if not isNil(vtbl[].isEmpty):
     vtbl[].vtbl.isEmpty = fcQGraphicsLinearLayout_vtable_callback_isEmpty
-  let tmp = gen_qgraphicslinearlayout_types.QGraphicsLinearLayout(h: fcQGraphicsLinearLayout_new4(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(orientation), parent.h))
+  let tmp = gen_qgraphicslinearlayout_types.QGraphicsLinearLayout(h: fcQGraphicsLinearLayout_new4(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(orientation), parent.h), owned: true)
   fcQGraphicsLinearLayout_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQGraphicsLinearLayout_mvtbl = cQGraphicsLinearLayoutVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQGraphicsLinearLayout()[])](self.fcQGraphicsLinearLayout_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   removeAt: fcQGraphicsLinearLayout_method_callback_removeAt,
   setGeometry: fcQGraphicsLinearLayout_method_callback_setGeometry,
@@ -556,5 +562,3 @@ proc create*(T: type gen_qgraphicslinearlayout_types.QGraphicsLinearLayout,
   inst[].h = fcQGraphicsLinearLayout_new4(addr(cQGraphicsLinearLayout_mvtbl), csize_t(sizeof(pointer)), cint(orientation), parent.h)
   fcQGraphicsLinearLayout_vdata(inst[].h)[] = addr inst[]
 
-proc delete*(self: gen_qgraphicslinearlayout_types.QGraphicsLinearLayout) =
-  fcQGraphicsLinearLayout_delete(self.h)

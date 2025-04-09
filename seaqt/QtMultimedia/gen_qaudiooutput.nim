@@ -32,7 +32,7 @@ func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
     else:
       copyMem(addr result[0], v.data, len)
 
-const cflags = gorge("pkg-config --cflags Qt6Multimedia")  & " -fPIC"
+const cflags = gorge("pkg-config --cflags Qt6Multimedia") & " -fPIC"
 {.compile("gen_qaudiooutput.cpp", cflags).}
 
 
@@ -105,10 +105,9 @@ proc fcQAudioOutput_new2(vtbl: pointer, vdata: csize_t, device: pointer): ptr cQ
 proc fcQAudioOutput_new3(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQAudioOutput {.importc: "QAudioOutput_new3".}
 proc fcQAudioOutput_new4(vtbl: pointer, vdata: csize_t, device: pointer, parent: pointer): ptr cQAudioOutput {.importc: "QAudioOutput_new4".}
 proc fcQAudioOutput_staticMetaObject(): pointer {.importc: "QAudioOutput_staticMetaObject".}
-proc fcQAudioOutput_delete(self: pointer) {.importc: "QAudioOutput_delete".}
 
 proc metaObject*(self: gen_qaudiooutput_types.QAudioOutput): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQAudioOutput_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQAudioOutput_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qaudiooutput_types.QAudioOutput, param1: cstring): pointer =
   fcQAudioOutput_metacast(self.h, param1)
@@ -123,7 +122,7 @@ proc tr*(_: type gen_qaudiooutput_types.QAudioOutput, s: cstring): string =
   vx_ret
 
 proc device*(self: gen_qaudiooutput_types.QAudioOutput): gen_qaudiodevice_types.QAudioDevice =
-  gen_qaudiodevice_types.QAudioDevice(h: fcQAudioOutput_device(self.h))
+  gen_qaudiodevice_types.QAudioDevice(h: fcQAudioOutput_device(self.h), owned: true)
 
 proc volume*(self: gen_qaudiooutput_types.QAudioOutput): float32 =
   fcQAudioOutput_volume(self.h)
@@ -220,7 +219,7 @@ type QAudioOutputchildEventProc* = proc(self: QAudioOutput, event: gen_qcoreeven
 type QAudioOutputcustomEventProc* = proc(self: QAudioOutput, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QAudioOutputconnectNotifyProc* = proc(self: QAudioOutput, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QAudioOutputdisconnectNotifyProc* = proc(self: QAudioOutput, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
-type QAudioOutputVTable* = object
+type QAudioOutputVTable* {.inheritable, pure.} = object
   vtbl: cQAudioOutputVTable
   metaObject*: QAudioOutputmetaObjectProc
   metacast*: QAudioOutputmetacastProc
@@ -233,13 +232,16 @@ type QAudioOutputVTable* = object
   connectNotify*: QAudioOutputconnectNotifyProc
   disconnectNotify*: QAudioOutputdisconnectNotifyProc
 proc QAudioOutputmetaObject*(self: gen_qaudiooutput_types.QAudioOutput): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQAudioOutput_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQAudioOutput_virtualbase_metaObject(self.h), owned: false)
 
 proc fcQAudioOutput_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QAudioOutputVTable](fcQAudioOutput_vdata(self)[])
   let self = QAudioOutput(h: self)
   var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QAudioOutputmetacast*(self: gen_qaudiooutput_types.QAudioOutput, param1: cstring): pointer =
   fcQAudioOutput_virtualbase_metacast(self.h, param1)
@@ -269,7 +271,7 @@ proc QAudioOutputevent*(self: gen_qaudiooutput_types.QAudioOutput, event: gen_qc
 proc fcQAudioOutput_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QAudioOutputVTable](fcQAudioOutput_vdata(self)[])
   let self = QAudioOutput(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
@@ -279,8 +281,8 @@ proc QAudioOutputeventFilter*(self: gen_qaudiooutput_types.QAudioOutput, watched
 proc fcQAudioOutput_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QAudioOutputVTable](fcQAudioOutput_vdata(self)[])
   let self = QAudioOutput(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
@@ -290,7 +292,7 @@ proc QAudioOutputtimerEvent*(self: gen_qaudiooutput_types.QAudioOutput, event: g
 proc fcQAudioOutput_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAudioOutputVTable](fcQAudioOutput_vdata(self)[])
   let self = QAudioOutput(h: self)
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
 proc QAudioOutputchildEvent*(self: gen_qaudiooutput_types.QAudioOutput, event: gen_qcoreevent_types.QChildEvent): void =
@@ -299,7 +301,7 @@ proc QAudioOutputchildEvent*(self: gen_qaudiooutput_types.QAudioOutput, event: g
 proc fcQAudioOutput_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAudioOutputVTable](fcQAudioOutput_vdata(self)[])
   let self = QAudioOutput(h: self)
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
 proc QAudioOutputcustomEvent*(self: gen_qaudiooutput_types.QAudioOutput, event: gen_qcoreevent_types.QEvent): void =
@@ -308,7 +310,7 @@ proc QAudioOutputcustomEvent*(self: gen_qaudiooutput_types.QAudioOutput, event: 
 proc fcQAudioOutput_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAudioOutputVTable](fcQAudioOutput_vdata(self)[])
   let self = QAudioOutput(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
 proc QAudioOutputconnectNotify*(self: gen_qaudiooutput_types.QAudioOutput, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -317,7 +319,7 @@ proc QAudioOutputconnectNotify*(self: gen_qaudiooutput_types.QAudioOutput, signa
 proc fcQAudioOutput_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAudioOutputVTable](fcQAudioOutput_vdata(self)[])
   let self = QAudioOutput(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
 proc QAudioOutputdisconnectNotify*(self: gen_qaudiooutput_types.QAudioOutput, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -326,7 +328,7 @@ proc QAudioOutputdisconnectNotify*(self: gen_qaudiooutput_types.QAudioOutput, si
 proc fcQAudioOutput_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAudioOutputVTable](fcQAudioOutput_vdata(self)[])
   let self = QAudioOutput(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
 type VirtualQAudioOutput* {.inheritable.} = ref object of QAudioOutput
@@ -360,7 +362,7 @@ method event*(self: VirtualQAudioOutput, event: gen_qcoreevent_types.QEvent): bo
   QAudioOutputevent(self[], event)
 proc fcQAudioOutput_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQAudioOutput](fcQAudioOutput_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
@@ -368,8 +370,8 @@ method eventFilter*(self: VirtualQAudioOutput, watched: gen_qobject_types.QObjec
   QAudioOutputeventFilter(self[], watched, event)
 proc fcQAudioOutput_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQAudioOutput](fcQAudioOutput_vdata(self)[])
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
@@ -377,39 +379,39 @@ method timerEvent*(self: VirtualQAudioOutput, event: gen_qcoreevent_types.QTimer
   QAudioOutputtimerEvent(self[], event)
 proc fcQAudioOutput_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQAudioOutput](fcQAudioOutput_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
 method childEvent*(self: VirtualQAudioOutput, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
   QAudioOutputchildEvent(self[], event)
 proc fcQAudioOutput_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQAudioOutput](fcQAudioOutput_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
 method customEvent*(self: VirtualQAudioOutput, event: gen_qcoreevent_types.QEvent): void {.base.} =
   QAudioOutputcustomEvent(self[], event)
 proc fcQAudioOutput_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQAudioOutput](fcQAudioOutput_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
 method connectNotify*(self: VirtualQAudioOutput, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
   QAudioOutputconnectNotify(self[], signal)
 proc fcQAudioOutput_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQAudioOutput](fcQAudioOutput_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
 method disconnectNotify*(self: VirtualQAudioOutput, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
   QAudioOutputdisconnectNotify(self[], signal)
 proc fcQAudioOutput_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQAudioOutput](fcQAudioOutput_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
 
 proc sender*(self: gen_qaudiooutput_types.QAudioOutput): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQAudioOutput_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQAudioOutput_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qaudiooutput_types.QAudioOutput): cint =
   fcQAudioOutput_protectedbase_senderSignalIndex(self.h)
@@ -447,7 +449,7 @@ proc create*(T: type gen_qaudiooutput_types.QAudioOutput,
     vtbl[].vtbl.connectNotify = fcQAudioOutput_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQAudioOutput_vtable_callback_disconnectNotify
-  let tmp = gen_qaudiooutput_types.QAudioOutput(h: fcQAudioOutput_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))))
+  let tmp = gen_qaudiooutput_types.QAudioOutput(h: fcQAudioOutput_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))), owned: true)
   fcQAudioOutput_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qaudiooutput_types.QAudioOutput,
@@ -478,7 +480,7 @@ proc create*(T: type gen_qaudiooutput_types.QAudioOutput,
     vtbl[].vtbl.connectNotify = fcQAudioOutput_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQAudioOutput_vtable_callback_disconnectNotify
-  let tmp = gen_qaudiooutput_types.QAudioOutput(h: fcQAudioOutput_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), device.h))
+  let tmp = gen_qaudiooutput_types.QAudioOutput(h: fcQAudioOutput_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), device.h), owned: true)
   fcQAudioOutput_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qaudiooutput_types.QAudioOutput,
@@ -509,7 +511,7 @@ proc create*(T: type gen_qaudiooutput_types.QAudioOutput,
     vtbl[].vtbl.connectNotify = fcQAudioOutput_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQAudioOutput_vtable_callback_disconnectNotify
-  let tmp = gen_qaudiooutput_types.QAudioOutput(h: fcQAudioOutput_new3(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h))
+  let tmp = gen_qaudiooutput_types.QAudioOutput(h: fcQAudioOutput_new3(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h), owned: true)
   fcQAudioOutput_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qaudiooutput_types.QAudioOutput,
@@ -540,13 +542,14 @@ proc create*(T: type gen_qaudiooutput_types.QAudioOutput,
     vtbl[].vtbl.connectNotify = fcQAudioOutput_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQAudioOutput_vtable_callback_disconnectNotify
-  let tmp = gen_qaudiooutput_types.QAudioOutput(h: fcQAudioOutput_new4(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), device.h, parent.h))
+  let tmp = gen_qaudiooutput_types.QAudioOutput(h: fcQAudioOutput_new4(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), device.h, parent.h), owned: true)
   fcQAudioOutput_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQAudioOutput_mvtbl = cQAudioOutputVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQAudioOutput()[])](self.fcQAudioOutput_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   metaObject: fcQAudioOutput_method_callback_metaObject,
   metacast: fcQAudioOutput_method_callback_metacast,
@@ -588,5 +591,3 @@ proc create*(T: type gen_qaudiooutput_types.QAudioOutput,
 
 proc staticMetaObject*(_: type gen_qaudiooutput_types.QAudioOutput): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQAudioOutput_staticMetaObject())
-proc delete*(self: gen_qaudiooutput_types.QAudioOutput) =
-  fcQAudioOutput_delete(self.h)

@@ -32,9 +32,6 @@ func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
     else:
       copyMem(addr result[0], v.data, len)
 
-const cflags = gorge("pkg-config --cflags Qt6Gui")  & " -fPIC"
-{.compile("gen_qpaintengine.cpp", cflags).}
-
 
 type QTextItemRenderFlagEnum* = distinct cint
 template RightToLeft*(_: type QTextItemRenderFlagEnum): untyped = 1
@@ -157,7 +154,6 @@ proc fcQTextItem_width(self: pointer): float64 {.importc: "QTextItem_width".}
 proc fcQTextItem_renderFlags(self: pointer): cint {.importc: "QTextItem_renderFlags".}
 proc fcQTextItem_text(self: pointer): struct_miqt_string {.importc: "QTextItem_text".}
 proc fcQTextItem_font(self: pointer): pointer {.importc: "QTextItem_font".}
-proc fcQTextItem_delete(self: pointer) {.importc: "QTextItem_delete".}
 proc fcQPaintEngine_isActive(self: pointer): bool {.importc: "QPaintEngine_isActive".}
 proc fcQPaintEngine_setActive(self: pointer, newState: bool): void {.importc: "QPaintEngine_setActive".}
 proc fcQPaintEngine_begin(self: pointer, pdev: pointer): bool {.importc: "QPaintEngine_begin".}
@@ -241,7 +237,6 @@ proc fcQPaintEngine_virtualbase_createPixmap(self: pointer, size: pointer): poin
 proc fcQPaintEngine_virtualbase_createPixmapFromImage(self: pointer, image: pointer, flags: cint): pointer {.importc: "QPaintEngine_virtualbase_createPixmapFromImage".}
 proc fcQPaintEngine_new(vtbl: pointer, vdata: csize_t): ptr cQPaintEngine {.importc: "QPaintEngine_new".}
 proc fcQPaintEngine_new2(vtbl: pointer, vdata: csize_t, features: cint): ptr cQPaintEngine {.importc: "QPaintEngine_new2".}
-proc fcQPaintEngine_delete(self: pointer) {.importc: "QPaintEngine_delete".}
 proc fcQPaintEngineState_state(self: pointer): cint {.importc: "QPaintEngineState_state".}
 proc fcQPaintEngineState_pen(self: pointer): pointer {.importc: "QPaintEngineState_pen".}
 proc fcQPaintEngineState_brush(self: pointer): pointer {.importc: "QPaintEngineState_brush".}
@@ -260,7 +255,6 @@ proc fcQPaintEngineState_opacity(self: pointer): float64 {.importc: "QPaintEngin
 proc fcQPaintEngineState_painter(self: pointer): pointer {.importc: "QPaintEngineState_painter".}
 proc fcQPaintEngineState_brushNeedsResolving(self: pointer): bool {.importc: "QPaintEngineState_brushNeedsResolving".}
 proc fcQPaintEngineState_penNeedsResolving(self: pointer): bool {.importc: "QPaintEngineState_penNeedsResolving".}
-proc fcQPaintEngineState_delete(self: pointer) {.importc: "QPaintEngineState_delete".}
 
 proc descent*(self: gen_qpaintengine_types.QTextItem): float64 =
   fcQTextItem_descent(self.h)
@@ -281,10 +275,8 @@ proc text*(self: gen_qpaintengine_types.QTextItem): string =
   vx_ret
 
 proc font*(self: gen_qpaintengine_types.QTextItem): gen_qfont_types.QFont =
-  gen_qfont_types.QFont(h: fcQTextItem_font(self.h))
+  gen_qfont_types.QFont(h: fcQTextItem_font(self.h), owned: true)
 
-proc delete*(self: gen_qpaintengine_types.QTextItem) =
-  fcQTextItem_delete(self.h)
 proc isActive*(self: gen_qpaintengine_types.QPaintEngine): bool =
   fcQPaintEngine_isActive(self.h)
 
@@ -349,22 +341,22 @@ proc setPaintDevice*(self: gen_qpaintengine_types.QPaintEngine, device: gen_qpai
   fcQPaintEngine_setPaintDevice(self.h, device.h)
 
 proc paintDevice*(self: gen_qpaintengine_types.QPaintEngine): gen_qpaintdevice_types.QPaintDevice =
-  gen_qpaintdevice_types.QPaintDevice(h: fcQPaintEngine_paintDevice(self.h))
+  gen_qpaintdevice_types.QPaintDevice(h: fcQPaintEngine_paintDevice(self.h), owned: false)
 
 proc setSystemClip*(self: gen_qpaintengine_types.QPaintEngine, baseClip: gen_qregion_types.QRegion): void =
   fcQPaintEngine_setSystemClip(self.h, baseClip.h)
 
 proc systemClip*(self: gen_qpaintengine_types.QPaintEngine): gen_qregion_types.QRegion =
-  gen_qregion_types.QRegion(h: fcQPaintEngine_systemClip(self.h))
+  gen_qregion_types.QRegion(h: fcQPaintEngine_systemClip(self.h), owned: true)
 
 proc setSystemRect*(self: gen_qpaintengine_types.QPaintEngine, rect: gen_qrect_types.QRect): void =
   fcQPaintEngine_setSystemRect(self.h, rect.h)
 
 proc systemRect*(self: gen_qpaintengine_types.QPaintEngine): gen_qrect_types.QRect =
-  gen_qrect_types.QRect(h: fcQPaintEngine_systemRect(self.h))
+  gen_qrect_types.QRect(h: fcQPaintEngine_systemRect(self.h), owned: true)
 
 proc coordinateOffset*(self: gen_qpaintengine_types.QPaintEngine): gen_qpoint_types.QPoint =
-  gen_qpoint_types.QPoint(h: fcQPaintEngine_coordinateOffset(self.h))
+  gen_qpoint_types.QPoint(h: fcQPaintEngine_coordinateOffset(self.h), owned: true)
 
 proc typeX*(self: gen_qpaintengine_types.QPaintEngine): cint =
   cint(fcQPaintEngine_typeX(self.h))
@@ -385,7 +377,7 @@ proc hasFeature*(self: gen_qpaintengine_types.QPaintEngine, feature: cint): bool
   fcQPaintEngine_hasFeature(self.h, cint(feature))
 
 proc painter*(self: gen_qpaintengine_types.QPaintEngine): gen_qpainter_types.QPainter =
-  gen_qpainter_types.QPainter(h: fcQPaintEngine_painter(self.h))
+  gen_qpainter_types.QPainter(h: fcQPaintEngine_painter(self.h), owned: false)
 
 proc syncState*(self: gen_qpaintengine_types.QPaintEngine): void =
   fcQPaintEngine_syncState(self.h)
@@ -394,10 +386,10 @@ proc isExtended*(self: gen_qpaintengine_types.QPaintEngine): bool =
   fcQPaintEngine_isExtended(self.h)
 
 proc createPixmap*(self: gen_qpaintengine_types.QPaintEngine, size: gen_qsize_types.QSize): gen_qpixmap_types.QPixmap =
-  gen_qpixmap_types.QPixmap(h: fcQPaintEngine_createPixmap(self.h, size.h))
+  gen_qpixmap_types.QPixmap(h: fcQPaintEngine_createPixmap(self.h, size.h), owned: true)
 
 proc createPixmapFromImage*(self: gen_qpaintengine_types.QPaintEngine, image: gen_qimage_types.QImage, flags: cint): gen_qpixmap_types.QPixmap =
-  gen_qpixmap_types.QPixmap(h: fcQPaintEngine_createPixmapFromImage(self.h, image.h, cint(flags)))
+  gen_qpixmap_types.QPixmap(h: fcQPaintEngine_createPixmapFromImage(self.h, image.h, cint(flags)), owned: true)
 
 type QPaintEnginebeginProc* = proc(self: QPaintEngine, pdev: gen_qpaintdevice_types.QPaintDevice): bool {.raises: [], gcsafe.}
 type QPaintEngineendXProc* = proc(self: QPaintEngine): bool {.raises: [], gcsafe.}
@@ -421,7 +413,7 @@ type QPaintEnginecoordinateOffsetProc* = proc(self: QPaintEngine): gen_qpoint_ty
 type QPaintEnginetypeXProc* = proc(self: QPaintEngine): cint {.raises: [], gcsafe.}
 type QPaintEnginecreatePixmapProc* = proc(self: QPaintEngine, size: gen_qsize_types.QSize): gen_qpixmap_types.QPixmap {.raises: [], gcsafe.}
 type QPaintEnginecreatePixmapFromImageProc* = proc(self: QPaintEngine, image: gen_qimage_types.QImage, flags: cint): gen_qpixmap_types.QPixmap {.raises: [], gcsafe.}
-type QPaintEngineVTable* = object
+type QPaintEngineVTable* {.inheritable, pure.} = object
   vtbl: cQPaintEngineVTable
   begin*: QPaintEnginebeginProc
   endX*: QPaintEngineendXProc
@@ -448,7 +440,7 @@ type QPaintEngineVTable* = object
 proc fcQPaintEngine_vtable_callback_begin(self: pointer, pdev: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QPaintEngineVTable](fcQPaintEngine_vdata(self)[])
   let self = QPaintEngine(h: self)
-  let slotval1 = gen_qpaintdevice_types.QPaintDevice(h: pdev)
+  let slotval1 = gen_qpaintdevice_types.QPaintDevice(h: pdev, owned: false)
   var virtualReturn = vtbl[].begin(self, slotval1)
   virtualReturn
 
@@ -461,7 +453,7 @@ proc fcQPaintEngine_vtable_callback_endX(self: pointer): bool {.cdecl.} =
 proc fcQPaintEngine_vtable_callback_updateState(self: pointer, state: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPaintEngineVTable](fcQPaintEngine_vdata(self)[])
   let self = QPaintEngine(h: self)
-  let slotval1 = gen_qpaintengine_types.QPaintEngineState(h: state)
+  let slotval1 = gen_qpaintengine_types.QPaintEngineState(h: state, owned: false)
   vtbl[].updateState(self, slotval1)
 
 proc QPaintEnginedrawRects*(self: gen_qpaintengine_types.QPaintEngine, rects: gen_qrect_types.QRect, rectCount: cint): void =
@@ -470,7 +462,7 @@ proc QPaintEnginedrawRects*(self: gen_qpaintengine_types.QPaintEngine, rects: ge
 proc fcQPaintEngine_vtable_callback_drawRects(self: pointer, rects: pointer, rectCount: cint): void {.cdecl.} =
   let vtbl = cast[ptr QPaintEngineVTable](fcQPaintEngine_vdata(self)[])
   let self = QPaintEngine(h: self)
-  let slotval1 = gen_qrect_types.QRect(h: rects)
+  let slotval1 = gen_qrect_types.QRect(h: rects, owned: false)
   let slotval2 = rectCount
   vtbl[].drawRects(self, slotval1, slotval2)
 
@@ -480,7 +472,7 @@ proc QPaintEnginedrawRects*(self: gen_qpaintengine_types.QPaintEngine, rects: ge
 proc fcQPaintEngine_vtable_callback_drawRects2(self: pointer, rects: pointer, rectCount: cint): void {.cdecl.} =
   let vtbl = cast[ptr QPaintEngineVTable](fcQPaintEngine_vdata(self)[])
   let self = QPaintEngine(h: self)
-  let slotval1 = gen_qrect_types.QRectF(h: rects)
+  let slotval1 = gen_qrect_types.QRectF(h: rects, owned: false)
   let slotval2 = rectCount
   vtbl[].drawRects2(self, slotval1, slotval2)
 
@@ -490,7 +482,7 @@ proc QPaintEnginedrawLines*(self: gen_qpaintengine_types.QPaintEngine, lines: ge
 proc fcQPaintEngine_vtable_callback_drawLines(self: pointer, lines: pointer, lineCount: cint): void {.cdecl.} =
   let vtbl = cast[ptr QPaintEngineVTable](fcQPaintEngine_vdata(self)[])
   let self = QPaintEngine(h: self)
-  let slotval1 = gen_qline_types.QLine(h: lines)
+  let slotval1 = gen_qline_types.QLine(h: lines, owned: false)
   let slotval2 = lineCount
   vtbl[].drawLines(self, slotval1, slotval2)
 
@@ -500,7 +492,7 @@ proc QPaintEnginedrawLines*(self: gen_qpaintengine_types.QPaintEngine, lines: ge
 proc fcQPaintEngine_vtable_callback_drawLines2(self: pointer, lines: pointer, lineCount: cint): void {.cdecl.} =
   let vtbl = cast[ptr QPaintEngineVTable](fcQPaintEngine_vdata(self)[])
   let self = QPaintEngine(h: self)
-  let slotval1 = gen_qline_types.QLineF(h: lines)
+  let slotval1 = gen_qline_types.QLineF(h: lines, owned: false)
   let slotval2 = lineCount
   vtbl[].drawLines2(self, slotval1, slotval2)
 
@@ -510,7 +502,7 @@ proc QPaintEnginedrawEllipse*(self: gen_qpaintengine_types.QPaintEngine, r: gen_
 proc fcQPaintEngine_vtable_callback_drawEllipse(self: pointer, r: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPaintEngineVTable](fcQPaintEngine_vdata(self)[])
   let self = QPaintEngine(h: self)
-  let slotval1 = gen_qrect_types.QRectF(h: r)
+  let slotval1 = gen_qrect_types.QRectF(h: r, owned: false)
   vtbl[].drawEllipse(self, slotval1)
 
 proc QPaintEnginedrawEllipse*(self: gen_qpaintengine_types.QPaintEngine, r: gen_qrect_types.QRect): void =
@@ -519,7 +511,7 @@ proc QPaintEnginedrawEllipse*(self: gen_qpaintengine_types.QPaintEngine, r: gen_
 proc fcQPaintEngine_vtable_callback_drawEllipseWithQRect(self: pointer, r: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPaintEngineVTable](fcQPaintEngine_vdata(self)[])
   let self = QPaintEngine(h: self)
-  let slotval1 = gen_qrect_types.QRect(h: r)
+  let slotval1 = gen_qrect_types.QRect(h: r, owned: false)
   vtbl[].drawEllipseWithQRect(self, slotval1)
 
 proc QPaintEnginedrawPath*(self: gen_qpaintengine_types.QPaintEngine, path: gen_qpainterpath_types.QPainterPath): void =
@@ -528,7 +520,7 @@ proc QPaintEnginedrawPath*(self: gen_qpaintengine_types.QPaintEngine, path: gen_
 proc fcQPaintEngine_vtable_callback_drawPath(self: pointer, path: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPaintEngineVTable](fcQPaintEngine_vdata(self)[])
   let self = QPaintEngine(h: self)
-  let slotval1 = gen_qpainterpath_types.QPainterPath(h: path)
+  let slotval1 = gen_qpainterpath_types.QPainterPath(h: path, owned: false)
   vtbl[].drawPath(self, slotval1)
 
 proc QPaintEnginedrawPoints*(self: gen_qpaintengine_types.QPaintEngine, points: gen_qpoint_types.QPointF, pointCount: cint): void =
@@ -537,7 +529,7 @@ proc QPaintEnginedrawPoints*(self: gen_qpaintengine_types.QPaintEngine, points: 
 proc fcQPaintEngine_vtable_callback_drawPoints(self: pointer, points: pointer, pointCount: cint): void {.cdecl.} =
   let vtbl = cast[ptr QPaintEngineVTable](fcQPaintEngine_vdata(self)[])
   let self = QPaintEngine(h: self)
-  let slotval1 = gen_qpoint_types.QPointF(h: points)
+  let slotval1 = gen_qpoint_types.QPointF(h: points, owned: false)
   let slotval2 = pointCount
   vtbl[].drawPoints(self, slotval1, slotval2)
 
@@ -547,7 +539,7 @@ proc QPaintEnginedrawPoints*(self: gen_qpaintengine_types.QPaintEngine, points: 
 proc fcQPaintEngine_vtable_callback_drawPoints2(self: pointer, points: pointer, pointCount: cint): void {.cdecl.} =
   let vtbl = cast[ptr QPaintEngineVTable](fcQPaintEngine_vdata(self)[])
   let self = QPaintEngine(h: self)
-  let slotval1 = gen_qpoint_types.QPoint(h: points)
+  let slotval1 = gen_qpoint_types.QPoint(h: points, owned: false)
   let slotval2 = pointCount
   vtbl[].drawPoints2(self, slotval1, slotval2)
 
@@ -557,7 +549,7 @@ proc QPaintEnginedrawPolygon*(self: gen_qpaintengine_types.QPaintEngine, points:
 proc fcQPaintEngine_vtable_callback_drawPolygon(self: pointer, points: pointer, pointCount: cint, mode: cint): void {.cdecl.} =
   let vtbl = cast[ptr QPaintEngineVTable](fcQPaintEngine_vdata(self)[])
   let self = QPaintEngine(h: self)
-  let slotval1 = gen_qpoint_types.QPointF(h: points)
+  let slotval1 = gen_qpoint_types.QPointF(h: points, owned: false)
   let slotval2 = pointCount
   let slotval3 = cint(mode)
   vtbl[].drawPolygon(self, slotval1, slotval2, slotval3)
@@ -568,7 +560,7 @@ proc QPaintEnginedrawPolygon*(self: gen_qpaintengine_types.QPaintEngine, points:
 proc fcQPaintEngine_vtable_callback_drawPolygon2(self: pointer, points: pointer, pointCount: cint, mode: cint): void {.cdecl.} =
   let vtbl = cast[ptr QPaintEngineVTable](fcQPaintEngine_vdata(self)[])
   let self = QPaintEngine(h: self)
-  let slotval1 = gen_qpoint_types.QPoint(h: points)
+  let slotval1 = gen_qpoint_types.QPoint(h: points, owned: false)
   let slotval2 = pointCount
   let slotval3 = cint(mode)
   vtbl[].drawPolygon2(self, slotval1, slotval2, slotval3)
@@ -576,9 +568,9 @@ proc fcQPaintEngine_vtable_callback_drawPolygon2(self: pointer, points: pointer,
 proc fcQPaintEngine_vtable_callback_drawPixmap(self: pointer, r: pointer, pm: pointer, sr: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPaintEngineVTable](fcQPaintEngine_vdata(self)[])
   let self = QPaintEngine(h: self)
-  let slotval1 = gen_qrect_types.QRectF(h: r)
-  let slotval2 = gen_qpixmap_types.QPixmap(h: pm)
-  let slotval3 = gen_qrect_types.QRectF(h: sr)
+  let slotval1 = gen_qrect_types.QRectF(h: r, owned: false)
+  let slotval2 = gen_qpixmap_types.QPixmap(h: pm, owned: false)
+  let slotval3 = gen_qrect_types.QRectF(h: sr, owned: false)
   vtbl[].drawPixmap(self, slotval1, slotval2, slotval3)
 
 proc QPaintEnginedrawTextItem*(self: gen_qpaintengine_types.QPaintEngine, p: gen_qpoint_types.QPointF, textItem: gen_qpaintengine_types.QTextItem): void =
@@ -587,8 +579,8 @@ proc QPaintEnginedrawTextItem*(self: gen_qpaintengine_types.QPaintEngine, p: gen
 proc fcQPaintEngine_vtable_callback_drawTextItem(self: pointer, p: pointer, textItem: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPaintEngineVTable](fcQPaintEngine_vdata(self)[])
   let self = QPaintEngine(h: self)
-  let slotval1 = gen_qpoint_types.QPointF(h: p)
-  let slotval2 = gen_qpaintengine_types.QTextItem(h: textItem)
+  let slotval1 = gen_qpoint_types.QPointF(h: p, owned: false)
+  let slotval2 = gen_qpaintengine_types.QTextItem(h: textItem, owned: false)
   vtbl[].drawTextItem(self, slotval1, slotval2)
 
 proc QPaintEnginedrawTiledPixmap*(self: gen_qpaintengine_types.QPaintEngine, r: gen_qrect_types.QRectF, pixmap: gen_qpixmap_types.QPixmap, s: gen_qpoint_types.QPointF): void =
@@ -597,9 +589,9 @@ proc QPaintEnginedrawTiledPixmap*(self: gen_qpaintengine_types.QPaintEngine, r: 
 proc fcQPaintEngine_vtable_callback_drawTiledPixmap(self: pointer, r: pointer, pixmap: pointer, s: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPaintEngineVTable](fcQPaintEngine_vdata(self)[])
   let self = QPaintEngine(h: self)
-  let slotval1 = gen_qrect_types.QRectF(h: r)
-  let slotval2 = gen_qpixmap_types.QPixmap(h: pixmap)
-  let slotval3 = gen_qpoint_types.QPointF(h: s)
+  let slotval1 = gen_qrect_types.QRectF(h: r, owned: false)
+  let slotval2 = gen_qpixmap_types.QPixmap(h: pixmap, owned: false)
+  let slotval3 = gen_qpoint_types.QPointF(h: s, owned: false)
   vtbl[].drawTiledPixmap(self, slotval1, slotval2, slotval3)
 
 proc QPaintEnginedrawImage*(self: gen_qpaintengine_types.QPaintEngine, r: gen_qrect_types.QRectF, pm: gen_qimage_types.QImage, sr: gen_qrect_types.QRectF, flags: cint): void =
@@ -608,20 +600,23 @@ proc QPaintEnginedrawImage*(self: gen_qpaintengine_types.QPaintEngine, r: gen_qr
 proc fcQPaintEngine_vtable_callback_drawImage(self: pointer, r: pointer, pm: pointer, sr: pointer, flags: cint): void {.cdecl.} =
   let vtbl = cast[ptr QPaintEngineVTable](fcQPaintEngine_vdata(self)[])
   let self = QPaintEngine(h: self)
-  let slotval1 = gen_qrect_types.QRectF(h: r)
-  let slotval2 = gen_qimage_types.QImage(h: pm)
-  let slotval3 = gen_qrect_types.QRectF(h: sr)
+  let slotval1 = gen_qrect_types.QRectF(h: r, owned: false)
+  let slotval2 = gen_qimage_types.QImage(h: pm, owned: false)
+  let slotval3 = gen_qrect_types.QRectF(h: sr, owned: false)
   let slotval4 = cint(flags)
   vtbl[].drawImage(self, slotval1, slotval2, slotval3, slotval4)
 
 proc QPaintEnginecoordinateOffset*(self: gen_qpaintengine_types.QPaintEngine): gen_qpoint_types.QPoint =
-  gen_qpoint_types.QPoint(h: fcQPaintEngine_virtualbase_coordinateOffset(self.h))
+  gen_qpoint_types.QPoint(h: fcQPaintEngine_virtualbase_coordinateOffset(self.h), owned: true)
 
 proc fcQPaintEngine_vtable_callback_coordinateOffset(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QPaintEngineVTable](fcQPaintEngine_vdata(self)[])
   let self = QPaintEngine(h: self)
   var virtualReturn = vtbl[].coordinateOffset(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQPaintEngine_vtable_callback_typeX(self: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QPaintEngineVTable](fcQPaintEngine_vdata(self)[])
@@ -630,25 +625,31 @@ proc fcQPaintEngine_vtable_callback_typeX(self: pointer): cint {.cdecl.} =
   cint(virtualReturn)
 
 proc QPaintEnginecreatePixmap*(self: gen_qpaintengine_types.QPaintEngine, size: gen_qsize_types.QSize): gen_qpixmap_types.QPixmap =
-  gen_qpixmap_types.QPixmap(h: fcQPaintEngine_virtualbase_createPixmap(self.h, size.h))
+  gen_qpixmap_types.QPixmap(h: fcQPaintEngine_virtualbase_createPixmap(self.h, size.h), owned: true)
 
 proc fcQPaintEngine_vtable_callback_createPixmap(self: pointer, size: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QPaintEngineVTable](fcQPaintEngine_vdata(self)[])
   let self = QPaintEngine(h: self)
-  let slotval1 = gen_qsize_types.QSize(h: size)
+  let slotval1 = gen_qsize_types.QSize(h: size, owned: true)
   var virtualReturn = vtbl[].createPixmap(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QPaintEnginecreatePixmapFromImage*(self: gen_qpaintengine_types.QPaintEngine, image: gen_qimage_types.QImage, flags: cint): gen_qpixmap_types.QPixmap =
-  gen_qpixmap_types.QPixmap(h: fcQPaintEngine_virtualbase_createPixmapFromImage(self.h, image.h, cint(flags)))
+  gen_qpixmap_types.QPixmap(h: fcQPaintEngine_virtualbase_createPixmapFromImage(self.h, image.h, cint(flags)), owned: true)
 
 proc fcQPaintEngine_vtable_callback_createPixmapFromImage(self: pointer, image: pointer, flags: cint): pointer {.cdecl.} =
   let vtbl = cast[ptr QPaintEngineVTable](fcQPaintEngine_vdata(self)[])
   let self = QPaintEngine(h: self)
-  let slotval1 = gen_qimage_types.QImage(h: image)
+  let slotval1 = gen_qimage_types.QImage(h: image, owned: true)
   let slotval2 = cint(flags)
   var virtualReturn = vtbl[].createPixmapFromImage(self, slotval1, slotval2)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 type VirtualQPaintEngine* {.inheritable.} = ref object of QPaintEngine
   vtbl*: cQPaintEngineVTable
@@ -656,7 +657,7 @@ method begin*(self: VirtualQPaintEngine, pdev: gen_qpaintdevice_types.QPaintDevi
   raiseAssert("missing implementation of QPaintEngine_virtualbase_begin")
 proc fcQPaintEngine_method_callback_begin(self: pointer, pdev: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQPaintEngine](fcQPaintEngine_vdata(self)[])
-  let slotval1 = gen_qpaintdevice_types.QPaintDevice(h: pdev)
+  let slotval1 = gen_qpaintdevice_types.QPaintDevice(h: pdev, owned: false)
   var virtualReturn = inst.begin(slotval1)
   virtualReturn
 
@@ -671,14 +672,14 @@ method updateState*(self: VirtualQPaintEngine, state: gen_qpaintengine_types.QPa
   raiseAssert("missing implementation of QPaintEngine_virtualbase_updateState")
 proc fcQPaintEngine_method_callback_updateState(self: pointer, state: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPaintEngine](fcQPaintEngine_vdata(self)[])
-  let slotval1 = gen_qpaintengine_types.QPaintEngineState(h: state)
+  let slotval1 = gen_qpaintengine_types.QPaintEngineState(h: state, owned: false)
   inst.updateState(slotval1)
 
 method drawRects*(self: VirtualQPaintEngine, rects: gen_qrect_types.QRect, rectCount: cint): void {.base.} =
   QPaintEnginedrawRects(self[], rects, rectCount)
 proc fcQPaintEngine_method_callback_drawRects(self: pointer, rects: pointer, rectCount: cint): void {.cdecl.} =
   let inst = cast[VirtualQPaintEngine](fcQPaintEngine_vdata(self)[])
-  let slotval1 = gen_qrect_types.QRect(h: rects)
+  let slotval1 = gen_qrect_types.QRect(h: rects, owned: false)
   let slotval2 = rectCount
   inst.drawRects(slotval1, slotval2)
 
@@ -686,7 +687,7 @@ method drawRects*(self: VirtualQPaintEngine, rects: gen_qrect_types.QRectF, rect
   QPaintEnginedrawRects(self[], rects, rectCount)
 proc fcQPaintEngine_method_callback_drawRects2(self: pointer, rects: pointer, rectCount: cint): void {.cdecl.} =
   let inst = cast[VirtualQPaintEngine](fcQPaintEngine_vdata(self)[])
-  let slotval1 = gen_qrect_types.QRectF(h: rects)
+  let slotval1 = gen_qrect_types.QRectF(h: rects, owned: false)
   let slotval2 = rectCount
   inst.drawRects(slotval1, slotval2)
 
@@ -694,7 +695,7 @@ method drawLines*(self: VirtualQPaintEngine, lines: gen_qline_types.QLine, lineC
   QPaintEnginedrawLines(self[], lines, lineCount)
 proc fcQPaintEngine_method_callback_drawLines(self: pointer, lines: pointer, lineCount: cint): void {.cdecl.} =
   let inst = cast[VirtualQPaintEngine](fcQPaintEngine_vdata(self)[])
-  let slotval1 = gen_qline_types.QLine(h: lines)
+  let slotval1 = gen_qline_types.QLine(h: lines, owned: false)
   let slotval2 = lineCount
   inst.drawLines(slotval1, slotval2)
 
@@ -702,7 +703,7 @@ method drawLines*(self: VirtualQPaintEngine, lines: gen_qline_types.QLineF, line
   QPaintEnginedrawLines(self[], lines, lineCount)
 proc fcQPaintEngine_method_callback_drawLines2(self: pointer, lines: pointer, lineCount: cint): void {.cdecl.} =
   let inst = cast[VirtualQPaintEngine](fcQPaintEngine_vdata(self)[])
-  let slotval1 = gen_qline_types.QLineF(h: lines)
+  let slotval1 = gen_qline_types.QLineF(h: lines, owned: false)
   let slotval2 = lineCount
   inst.drawLines(slotval1, slotval2)
 
@@ -710,28 +711,28 @@ method drawEllipse*(self: VirtualQPaintEngine, r: gen_qrect_types.QRectF): void 
   QPaintEnginedrawEllipse(self[], r)
 proc fcQPaintEngine_method_callback_drawEllipse(self: pointer, r: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPaintEngine](fcQPaintEngine_vdata(self)[])
-  let slotval1 = gen_qrect_types.QRectF(h: r)
+  let slotval1 = gen_qrect_types.QRectF(h: r, owned: false)
   inst.drawEllipse(slotval1)
 
 method drawEllipse*(self: VirtualQPaintEngine, r: gen_qrect_types.QRect): void {.base.} =
   QPaintEnginedrawEllipse(self[], r)
 proc fcQPaintEngine_method_callback_drawEllipseWithQRect(self: pointer, r: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPaintEngine](fcQPaintEngine_vdata(self)[])
-  let slotval1 = gen_qrect_types.QRect(h: r)
+  let slotval1 = gen_qrect_types.QRect(h: r, owned: false)
   inst.drawEllipse(slotval1)
 
 method drawPath*(self: VirtualQPaintEngine, path: gen_qpainterpath_types.QPainterPath): void {.base.} =
   QPaintEnginedrawPath(self[], path)
 proc fcQPaintEngine_method_callback_drawPath(self: pointer, path: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPaintEngine](fcQPaintEngine_vdata(self)[])
-  let slotval1 = gen_qpainterpath_types.QPainterPath(h: path)
+  let slotval1 = gen_qpainterpath_types.QPainterPath(h: path, owned: false)
   inst.drawPath(slotval1)
 
 method drawPoints*(self: VirtualQPaintEngine, points: gen_qpoint_types.QPointF, pointCount: cint): void {.base.} =
   QPaintEnginedrawPoints(self[], points, pointCount)
 proc fcQPaintEngine_method_callback_drawPoints(self: pointer, points: pointer, pointCount: cint): void {.cdecl.} =
   let inst = cast[VirtualQPaintEngine](fcQPaintEngine_vdata(self)[])
-  let slotval1 = gen_qpoint_types.QPointF(h: points)
+  let slotval1 = gen_qpoint_types.QPointF(h: points, owned: false)
   let slotval2 = pointCount
   inst.drawPoints(slotval1, slotval2)
 
@@ -739,7 +740,7 @@ method drawPoints*(self: VirtualQPaintEngine, points: gen_qpoint_types.QPoint, p
   QPaintEnginedrawPoints(self[], points, pointCount)
 proc fcQPaintEngine_method_callback_drawPoints2(self: pointer, points: pointer, pointCount: cint): void {.cdecl.} =
   let inst = cast[VirtualQPaintEngine](fcQPaintEngine_vdata(self)[])
-  let slotval1 = gen_qpoint_types.QPoint(h: points)
+  let slotval1 = gen_qpoint_types.QPoint(h: points, owned: false)
   let slotval2 = pointCount
   inst.drawPoints(slotval1, slotval2)
 
@@ -747,7 +748,7 @@ method drawPolygon*(self: VirtualQPaintEngine, points: gen_qpoint_types.QPointF,
   QPaintEnginedrawPolygon(self[], points, pointCount, mode)
 proc fcQPaintEngine_method_callback_drawPolygon(self: pointer, points: pointer, pointCount: cint, mode: cint): void {.cdecl.} =
   let inst = cast[VirtualQPaintEngine](fcQPaintEngine_vdata(self)[])
-  let slotval1 = gen_qpoint_types.QPointF(h: points)
+  let slotval1 = gen_qpoint_types.QPointF(h: points, owned: false)
   let slotval2 = pointCount
   let slotval3 = cint(mode)
   inst.drawPolygon(slotval1, slotval2, slotval3)
@@ -756,7 +757,7 @@ method drawPolygon*(self: VirtualQPaintEngine, points: gen_qpoint_types.QPoint, 
   QPaintEnginedrawPolygon(self[], points, pointCount, mode)
 proc fcQPaintEngine_method_callback_drawPolygon2(self: pointer, points: pointer, pointCount: cint, mode: cint): void {.cdecl.} =
   let inst = cast[VirtualQPaintEngine](fcQPaintEngine_vdata(self)[])
-  let slotval1 = gen_qpoint_types.QPoint(h: points)
+  let slotval1 = gen_qpoint_types.QPoint(h: points, owned: false)
   let slotval2 = pointCount
   let slotval3 = cint(mode)
   inst.drawPolygon(slotval1, slotval2, slotval3)
@@ -765,35 +766,35 @@ method drawPixmap*(self: VirtualQPaintEngine, r: gen_qrect_types.QRectF, pm: gen
   raiseAssert("missing implementation of QPaintEngine_virtualbase_drawPixmap")
 proc fcQPaintEngine_method_callback_drawPixmap(self: pointer, r: pointer, pm: pointer, sr: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPaintEngine](fcQPaintEngine_vdata(self)[])
-  let slotval1 = gen_qrect_types.QRectF(h: r)
-  let slotval2 = gen_qpixmap_types.QPixmap(h: pm)
-  let slotval3 = gen_qrect_types.QRectF(h: sr)
+  let slotval1 = gen_qrect_types.QRectF(h: r, owned: false)
+  let slotval2 = gen_qpixmap_types.QPixmap(h: pm, owned: false)
+  let slotval3 = gen_qrect_types.QRectF(h: sr, owned: false)
   inst.drawPixmap(slotval1, slotval2, slotval3)
 
 method drawTextItem*(self: VirtualQPaintEngine, p: gen_qpoint_types.QPointF, textItem: gen_qpaintengine_types.QTextItem): void {.base.} =
   QPaintEnginedrawTextItem(self[], p, textItem)
 proc fcQPaintEngine_method_callback_drawTextItem(self: pointer, p: pointer, textItem: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPaintEngine](fcQPaintEngine_vdata(self)[])
-  let slotval1 = gen_qpoint_types.QPointF(h: p)
-  let slotval2 = gen_qpaintengine_types.QTextItem(h: textItem)
+  let slotval1 = gen_qpoint_types.QPointF(h: p, owned: false)
+  let slotval2 = gen_qpaintengine_types.QTextItem(h: textItem, owned: false)
   inst.drawTextItem(slotval1, slotval2)
 
 method drawTiledPixmap*(self: VirtualQPaintEngine, r: gen_qrect_types.QRectF, pixmap: gen_qpixmap_types.QPixmap, s: gen_qpoint_types.QPointF): void {.base.} =
   QPaintEnginedrawTiledPixmap(self[], r, pixmap, s)
 proc fcQPaintEngine_method_callback_drawTiledPixmap(self: pointer, r: pointer, pixmap: pointer, s: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPaintEngine](fcQPaintEngine_vdata(self)[])
-  let slotval1 = gen_qrect_types.QRectF(h: r)
-  let slotval2 = gen_qpixmap_types.QPixmap(h: pixmap)
-  let slotval3 = gen_qpoint_types.QPointF(h: s)
+  let slotval1 = gen_qrect_types.QRectF(h: r, owned: false)
+  let slotval2 = gen_qpixmap_types.QPixmap(h: pixmap, owned: false)
+  let slotval3 = gen_qpoint_types.QPointF(h: s, owned: false)
   inst.drawTiledPixmap(slotval1, slotval2, slotval3)
 
 method drawImage*(self: VirtualQPaintEngine, r: gen_qrect_types.QRectF, pm: gen_qimage_types.QImage, sr: gen_qrect_types.QRectF, flags: cint): void {.base.} =
   QPaintEnginedrawImage(self[], r, pm, sr, flags)
 proc fcQPaintEngine_method_callback_drawImage(self: pointer, r: pointer, pm: pointer, sr: pointer, flags: cint): void {.cdecl.} =
   let inst = cast[VirtualQPaintEngine](fcQPaintEngine_vdata(self)[])
-  let slotval1 = gen_qrect_types.QRectF(h: r)
-  let slotval2 = gen_qimage_types.QImage(h: pm)
-  let slotval3 = gen_qrect_types.QRectF(h: sr)
+  let slotval1 = gen_qrect_types.QRectF(h: r, owned: false)
+  let slotval2 = gen_qimage_types.QImage(h: pm, owned: false)
+  let slotval3 = gen_qrect_types.QRectF(h: sr, owned: false)
   let slotval4 = cint(flags)
   inst.drawImage(slotval1, slotval2, slotval3, slotval4)
 
@@ -815,7 +816,7 @@ method createPixmap*(self: VirtualQPaintEngine, size: gen_qsize_types.QSize): ge
   QPaintEnginecreatePixmap(self[], size)
 proc fcQPaintEngine_method_callback_createPixmap(self: pointer, size: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQPaintEngine](fcQPaintEngine_vdata(self)[])
-  let slotval1 = gen_qsize_types.QSize(h: size)
+  let slotval1 = gen_qsize_types.QSize(h: size, owned: true)
   var virtualReturn = inst.createPixmap(slotval1)
   virtualReturn.h
 
@@ -823,7 +824,7 @@ method createPixmapFromImage*(self: VirtualQPaintEngine, image: gen_qimage_types
   QPaintEnginecreatePixmapFromImage(self[], image, flags)
 proc fcQPaintEngine_method_callback_createPixmapFromImage(self: pointer, image: pointer, flags: cint): pointer {.cdecl.} =
   let inst = cast[VirtualQPaintEngine](fcQPaintEngine_vdata(self)[])
-  let slotval1 = gen_qimage_types.QImage(h: image)
+  let slotval1 = gen_qimage_types.QImage(h: image, owned: true)
   let slotval2 = cint(flags)
   var virtualReturn = inst.createPixmapFromImage(slotval1, slotval2)
   virtualReturn.h
@@ -879,7 +880,7 @@ proc create*(T: type gen_qpaintengine_types.QPaintEngine,
     vtbl[].vtbl.createPixmap = fcQPaintEngine_vtable_callback_createPixmap
   if not isNil(vtbl[].createPixmapFromImage):
     vtbl[].vtbl.createPixmapFromImage = fcQPaintEngine_vtable_callback_createPixmapFromImage
-  let tmp = gen_qpaintengine_types.QPaintEngine(h: fcQPaintEngine_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))))
+  let tmp = gen_qpaintengine_types.QPaintEngine(h: fcQPaintEngine_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))), owned: true)
   fcQPaintEngine_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qpaintengine_types.QPaintEngine,
@@ -934,13 +935,14 @@ proc create*(T: type gen_qpaintengine_types.QPaintEngine,
     vtbl[].vtbl.createPixmap = fcQPaintEngine_vtable_callback_createPixmap
   if not isNil(vtbl[].createPixmapFromImage):
     vtbl[].vtbl.createPixmapFromImage = fcQPaintEngine_vtable_callback_createPixmapFromImage
-  let tmp = gen_qpaintengine_types.QPaintEngine(h: fcQPaintEngine_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(features)))
+  let tmp = gen_qpaintengine_types.QPaintEngine(h: fcQPaintEngine_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(features)), owned: true)
   fcQPaintEngine_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQPaintEngine_mvtbl = cQPaintEngineVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQPaintEngine()[])](self.fcQPaintEngine_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   begin: fcQPaintEngine_method_callback_begin,
   endX: fcQPaintEngine_method_callback_endX,
@@ -978,40 +980,38 @@ proc create*(T: type gen_qpaintengine_types.QPaintEngine,
   inst[].h = fcQPaintEngine_new2(addr(cQPaintEngine_mvtbl), csize_t(sizeof(pointer)), cint(features))
   fcQPaintEngine_vdata(inst[].h)[] = addr inst[]
 
-proc delete*(self: gen_qpaintengine_types.QPaintEngine) =
-  fcQPaintEngine_delete(self.h)
 proc state*(self: gen_qpaintengine_types.QPaintEngineState): cint =
   cint(fcQPaintEngineState_state(self.h))
 
 proc pen*(self: gen_qpaintengine_types.QPaintEngineState): gen_qpen_types.QPen =
-  gen_qpen_types.QPen(h: fcQPaintEngineState_pen(self.h))
+  gen_qpen_types.QPen(h: fcQPaintEngineState_pen(self.h), owned: true)
 
 proc brush*(self: gen_qpaintengine_types.QPaintEngineState): gen_qbrush_types.QBrush =
-  gen_qbrush_types.QBrush(h: fcQPaintEngineState_brush(self.h))
+  gen_qbrush_types.QBrush(h: fcQPaintEngineState_brush(self.h), owned: true)
 
 proc brushOrigin*(self: gen_qpaintengine_types.QPaintEngineState): gen_qpoint_types.QPointF =
-  gen_qpoint_types.QPointF(h: fcQPaintEngineState_brushOrigin(self.h))
+  gen_qpoint_types.QPointF(h: fcQPaintEngineState_brushOrigin(self.h), owned: true)
 
 proc backgroundBrush*(self: gen_qpaintengine_types.QPaintEngineState): gen_qbrush_types.QBrush =
-  gen_qbrush_types.QBrush(h: fcQPaintEngineState_backgroundBrush(self.h))
+  gen_qbrush_types.QBrush(h: fcQPaintEngineState_backgroundBrush(self.h), owned: true)
 
 proc backgroundMode*(self: gen_qpaintengine_types.QPaintEngineState): cint =
   cint(fcQPaintEngineState_backgroundMode(self.h))
 
 proc font*(self: gen_qpaintengine_types.QPaintEngineState): gen_qfont_types.QFont =
-  gen_qfont_types.QFont(h: fcQPaintEngineState_font(self.h))
+  gen_qfont_types.QFont(h: fcQPaintEngineState_font(self.h), owned: true)
 
 proc transform*(self: gen_qpaintengine_types.QPaintEngineState): gen_qtransform_types.QTransform =
-  gen_qtransform_types.QTransform(h: fcQPaintEngineState_transform(self.h))
+  gen_qtransform_types.QTransform(h: fcQPaintEngineState_transform(self.h), owned: true)
 
 proc clipOperation*(self: gen_qpaintengine_types.QPaintEngineState): cint =
   cint(fcQPaintEngineState_clipOperation(self.h))
 
 proc clipRegion*(self: gen_qpaintengine_types.QPaintEngineState): gen_qregion_types.QRegion =
-  gen_qregion_types.QRegion(h: fcQPaintEngineState_clipRegion(self.h))
+  gen_qregion_types.QRegion(h: fcQPaintEngineState_clipRegion(self.h), owned: true)
 
 proc clipPath*(self: gen_qpaintengine_types.QPaintEngineState): gen_qpainterpath_types.QPainterPath =
-  gen_qpainterpath_types.QPainterPath(h: fcQPaintEngineState_clipPath(self.h))
+  gen_qpainterpath_types.QPainterPath(h: fcQPaintEngineState_clipPath(self.h), owned: true)
 
 proc isClipEnabled*(self: gen_qpaintengine_types.QPaintEngineState): bool =
   fcQPaintEngineState_isClipEnabled(self.h)
@@ -1026,7 +1026,7 @@ proc opacity*(self: gen_qpaintengine_types.QPaintEngineState): float64 =
   fcQPaintEngineState_opacity(self.h)
 
 proc painter*(self: gen_qpaintengine_types.QPaintEngineState): gen_qpainter_types.QPainter =
-  gen_qpainter_types.QPainter(h: fcQPaintEngineState_painter(self.h))
+  gen_qpainter_types.QPainter(h: fcQPaintEngineState_painter(self.h), owned: false)
 
 proc brushNeedsResolving*(self: gen_qpaintengine_types.QPaintEngineState): bool =
   fcQPaintEngineState_brushNeedsResolving(self.h)
@@ -1034,5 +1034,3 @@ proc brushNeedsResolving*(self: gen_qpaintengine_types.QPaintEngineState): bool 
 proc penNeedsResolving*(self: gen_qpaintengine_types.QPaintEngineState): bool =
   fcQPaintEngineState_penNeedsResolving(self.h)
 
-proc delete*(self: gen_qpaintengine_types.QPaintEngineState) =
-  fcQPaintEngineState_delete(self.h)

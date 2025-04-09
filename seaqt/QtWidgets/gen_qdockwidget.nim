@@ -32,7 +32,7 @@ func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
     else:
       copyMem(addr result[0], v.data, len)
 
-const cflags = gorge("pkg-config --cflags Qt6Widgets")  & " -fPIC"
+const cflags = gorge("pkg-config --cflags Qt6Widgets") & " -fPIC"
 {.compile("gen_qdockwidget.cpp", cflags).}
 
 
@@ -232,10 +232,9 @@ proc fcQDockWidget_new4(vtbl: pointer, vdata: csize_t, title: struct_miqt_string
 proc fcQDockWidget_new5(vtbl: pointer, vdata: csize_t, title: struct_miqt_string, parent: pointer, flags: cint): ptr cQDockWidget {.importc: "QDockWidget_new5".}
 proc fcQDockWidget_new6(vtbl: pointer, vdata: csize_t, parent: pointer, flags: cint): ptr cQDockWidget {.importc: "QDockWidget_new6".}
 proc fcQDockWidget_staticMetaObject(): pointer {.importc: "QDockWidget_staticMetaObject".}
-proc fcQDockWidget_delete(self: pointer) {.importc: "QDockWidget_delete".}
 
 proc metaObject*(self: gen_qdockwidget_types.QDockWidget): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQDockWidget_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQDockWidget_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qdockwidget_types.QDockWidget, param1: cstring): pointer =
   fcQDockWidget_metacast(self.h, param1)
@@ -250,7 +249,7 @@ proc tr*(_: type gen_qdockwidget_types.QDockWidget, s: cstring): string =
   vx_ret
 
 proc widget*(self: gen_qdockwidget_types.QDockWidget): gen_qwidget_types.QWidget =
-  gen_qwidget_types.QWidget(h: fcQDockWidget_widget(self.h))
+  gen_qwidget_types.QWidget(h: fcQDockWidget_widget(self.h), owned: false)
 
 proc setWidget*(self: gen_qdockwidget_types.QDockWidget, widget: gen_qwidget_types.QWidget): void =
   fcQDockWidget_setWidget(self.h, widget.h)
@@ -277,13 +276,13 @@ proc setTitleBarWidget*(self: gen_qdockwidget_types.QDockWidget, widget: gen_qwi
   fcQDockWidget_setTitleBarWidget(self.h, widget.h)
 
 proc titleBarWidget*(self: gen_qdockwidget_types.QDockWidget): gen_qwidget_types.QWidget =
-  gen_qwidget_types.QWidget(h: fcQDockWidget_titleBarWidget(self.h))
+  gen_qwidget_types.QWidget(h: fcQDockWidget_titleBarWidget(self.h), owned: false)
 
 proc isAreaAllowed*(self: gen_qdockwidget_types.QDockWidget, area: cint): bool =
   fcQDockWidget_isAreaAllowed(self.h, cint(area))
 
 proc toggleViewAction*(self: gen_qdockwidget_types.QDockWidget): gen_qaction_types.QAction =
-  gen_qaction_types.QAction(h: fcQDockWidget_toggleViewAction(self.h))
+  gen_qaction_types.QAction(h: fcQDockWidget_toggleViewAction(self.h), owned: false)
 
 proc featuresChanged*(self: gen_qdockwidget_types.QDockWidget, features: cint): void =
   fcQDockWidget_featuresChanged(self.h, cint(features))
@@ -448,7 +447,7 @@ type QDockWidgetchildEventProc* = proc(self: QDockWidget, event: gen_qcoreevent_
 type QDockWidgetcustomEventProc* = proc(self: QDockWidget, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QDockWidgetconnectNotifyProc* = proc(self: QDockWidget, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QDockWidgetdisconnectNotifyProc* = proc(self: QDockWidget, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
-type QDockWidgetVTable* = object
+type QDockWidgetVTable* {.inheritable, pure.} = object
   vtbl: cQDockWidgetVTable
   metaObject*: QDockWidgetmetaObjectProc
   metacast*: QDockWidgetmetacastProc
@@ -502,13 +501,16 @@ type QDockWidgetVTable* = object
   connectNotify*: QDockWidgetconnectNotifyProc
   disconnectNotify*: QDockWidgetdisconnectNotifyProc
 proc QDockWidgetmetaObject*(self: gen_qdockwidget_types.QDockWidget): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQDockWidget_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQDockWidget_virtualbase_metaObject(self.h), owned: false)
 
 proc fcQDockWidget_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QDockWidgetVTable](fcQDockWidget_vdata(self)[])
   let self = QDockWidget(h: self)
   var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QDockWidgetmetacast*(self: gen_qdockwidget_types.QDockWidget, param1: cstring): pointer =
   fcQDockWidget_virtualbase_metacast(self.h, param1)
@@ -538,7 +540,7 @@ proc QDockWidgetchangeEvent*(self: gen_qdockwidget_types.QDockWidget, event: gen
 proc fcQDockWidget_vtable_callback_changeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDockWidgetVTable](fcQDockWidget_vdata(self)[])
   let self = QDockWidget(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].changeEvent(self, slotval1)
 
 proc QDockWidgetcloseEvent*(self: gen_qdockwidget_types.QDockWidget, event: gen_qevent_types.QCloseEvent): void =
@@ -547,7 +549,7 @@ proc QDockWidgetcloseEvent*(self: gen_qdockwidget_types.QDockWidget, event: gen_
 proc fcQDockWidget_vtable_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDockWidgetVTable](fcQDockWidget_vdata(self)[])
   let self = QDockWidget(h: self)
-  let slotval1 = gen_qevent_types.QCloseEvent(h: event)
+  let slotval1 = gen_qevent_types.QCloseEvent(h: event, owned: false)
   vtbl[].closeEvent(self, slotval1)
 
 proc QDockWidgetpaintEvent*(self: gen_qdockwidget_types.QDockWidget, event: gen_qevent_types.QPaintEvent): void =
@@ -556,7 +558,7 @@ proc QDockWidgetpaintEvent*(self: gen_qdockwidget_types.QDockWidget, event: gen_
 proc fcQDockWidget_vtable_callback_paintEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDockWidgetVTable](fcQDockWidget_vdata(self)[])
   let self = QDockWidget(h: self)
-  let slotval1 = gen_qevent_types.QPaintEvent(h: event)
+  let slotval1 = gen_qevent_types.QPaintEvent(h: event, owned: false)
   vtbl[].paintEvent(self, slotval1)
 
 proc QDockWidgetevent*(self: gen_qdockwidget_types.QDockWidget, event: gen_qcoreevent_types.QEvent): bool =
@@ -565,7 +567,7 @@ proc QDockWidgetevent*(self: gen_qdockwidget_types.QDockWidget, event: gen_qcore
 proc fcQDockWidget_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QDockWidgetVTable](fcQDockWidget_vdata(self)[])
   let self = QDockWidget(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
@@ -575,7 +577,7 @@ proc QDockWidgetinitStyleOption*(self: gen_qdockwidget_types.QDockWidget, option
 proc fcQDockWidget_vtable_callback_initStyleOption(self: pointer, option: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDockWidgetVTable](fcQDockWidget_vdata(self)[])
   let self = QDockWidget(h: self)
-  let slotval1 = gen_qstyleoption_types.QStyleOptionDockWidget(h: option)
+  let slotval1 = gen_qstyleoption_types.QStyleOptionDockWidget(h: option, owned: false)
   vtbl[].initStyleOption(self, slotval1)
 
 proc QDockWidgetdevType*(self: gen_qdockwidget_types.QDockWidget): cint =
@@ -597,22 +599,28 @@ proc fcQDockWidget_vtable_callback_setVisible(self: pointer, visible: bool): voi
   vtbl[].setVisible(self, slotval1)
 
 proc QDockWidgetsizeHint*(self: gen_qdockwidget_types.QDockWidget): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQDockWidget_virtualbase_sizeHint(self.h))
+  gen_qsize_types.QSize(h: fcQDockWidget_virtualbase_sizeHint(self.h), owned: true)
 
 proc fcQDockWidget_vtable_callback_sizeHint(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QDockWidgetVTable](fcQDockWidget_vdata(self)[])
   let self = QDockWidget(h: self)
   var virtualReturn = vtbl[].sizeHint(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QDockWidgetminimumSizeHint*(self: gen_qdockwidget_types.QDockWidget): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQDockWidget_virtualbase_minimumSizeHint(self.h))
+  gen_qsize_types.QSize(h: fcQDockWidget_virtualbase_minimumSizeHint(self.h), owned: true)
 
 proc fcQDockWidget_vtable_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QDockWidgetVTable](fcQDockWidget_vdata(self)[])
   let self = QDockWidget(h: self)
   var virtualReturn = vtbl[].minimumSizeHint(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QDockWidgetheightForWidth*(self: gen_qdockwidget_types.QDockWidget, param1: cint): cint =
   fcQDockWidget_virtualbase_heightForWidth(self.h, param1)
@@ -634,13 +642,16 @@ proc fcQDockWidget_vtable_callback_hasHeightForWidth(self: pointer): bool {.cdec
   virtualReturn
 
 proc QDockWidgetpaintEngine*(self: gen_qdockwidget_types.QDockWidget): gen_qpaintengine_types.QPaintEngine =
-  gen_qpaintengine_types.QPaintEngine(h: fcQDockWidget_virtualbase_paintEngine(self.h))
+  gen_qpaintengine_types.QPaintEngine(h: fcQDockWidget_virtualbase_paintEngine(self.h), owned: false)
 
 proc fcQDockWidget_vtable_callback_paintEngine(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QDockWidgetVTable](fcQDockWidget_vdata(self)[])
   let self = QDockWidget(h: self)
   var virtualReturn = vtbl[].paintEngine(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QDockWidgetmousePressEvent*(self: gen_qdockwidget_types.QDockWidget, event: gen_qevent_types.QMouseEvent): void =
   fcQDockWidget_virtualbase_mousePressEvent(self.h, event.h)
@@ -648,7 +659,7 @@ proc QDockWidgetmousePressEvent*(self: gen_qdockwidget_types.QDockWidget, event:
 proc fcQDockWidget_vtable_callback_mousePressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDockWidgetVTable](fcQDockWidget_vdata(self)[])
   let self = QDockWidget(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mousePressEvent(self, slotval1)
 
 proc QDockWidgetmouseReleaseEvent*(self: gen_qdockwidget_types.QDockWidget, event: gen_qevent_types.QMouseEvent): void =
@@ -657,7 +668,7 @@ proc QDockWidgetmouseReleaseEvent*(self: gen_qdockwidget_types.QDockWidget, even
 proc fcQDockWidget_vtable_callback_mouseReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDockWidgetVTable](fcQDockWidget_vdata(self)[])
   let self = QDockWidget(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseReleaseEvent(self, slotval1)
 
 proc QDockWidgetmouseDoubleClickEvent*(self: gen_qdockwidget_types.QDockWidget, event: gen_qevent_types.QMouseEvent): void =
@@ -666,7 +677,7 @@ proc QDockWidgetmouseDoubleClickEvent*(self: gen_qdockwidget_types.QDockWidget, 
 proc fcQDockWidget_vtable_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDockWidgetVTable](fcQDockWidget_vdata(self)[])
   let self = QDockWidget(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseDoubleClickEvent(self, slotval1)
 
 proc QDockWidgetmouseMoveEvent*(self: gen_qdockwidget_types.QDockWidget, event: gen_qevent_types.QMouseEvent): void =
@@ -675,7 +686,7 @@ proc QDockWidgetmouseMoveEvent*(self: gen_qdockwidget_types.QDockWidget, event: 
 proc fcQDockWidget_vtable_callback_mouseMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDockWidgetVTable](fcQDockWidget_vdata(self)[])
   let self = QDockWidget(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseMoveEvent(self, slotval1)
 
 proc QDockWidgetwheelEvent*(self: gen_qdockwidget_types.QDockWidget, event: gen_qevent_types.QWheelEvent): void =
@@ -684,7 +695,7 @@ proc QDockWidgetwheelEvent*(self: gen_qdockwidget_types.QDockWidget, event: gen_
 proc fcQDockWidget_vtable_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDockWidgetVTable](fcQDockWidget_vdata(self)[])
   let self = QDockWidget(h: self)
-  let slotval1 = gen_qevent_types.QWheelEvent(h: event)
+  let slotval1 = gen_qevent_types.QWheelEvent(h: event, owned: false)
   vtbl[].wheelEvent(self, slotval1)
 
 proc QDockWidgetkeyPressEvent*(self: gen_qdockwidget_types.QDockWidget, event: gen_qevent_types.QKeyEvent): void =
@@ -693,7 +704,7 @@ proc QDockWidgetkeyPressEvent*(self: gen_qdockwidget_types.QDockWidget, event: g
 proc fcQDockWidget_vtable_callback_keyPressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDockWidgetVTable](fcQDockWidget_vdata(self)[])
   let self = QDockWidget(h: self)
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   vtbl[].keyPressEvent(self, slotval1)
 
 proc QDockWidgetkeyReleaseEvent*(self: gen_qdockwidget_types.QDockWidget, event: gen_qevent_types.QKeyEvent): void =
@@ -702,7 +713,7 @@ proc QDockWidgetkeyReleaseEvent*(self: gen_qdockwidget_types.QDockWidget, event:
 proc fcQDockWidget_vtable_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDockWidgetVTable](fcQDockWidget_vdata(self)[])
   let self = QDockWidget(h: self)
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   vtbl[].keyReleaseEvent(self, slotval1)
 
 proc QDockWidgetfocusInEvent*(self: gen_qdockwidget_types.QDockWidget, event: gen_qevent_types.QFocusEvent): void =
@@ -711,7 +722,7 @@ proc QDockWidgetfocusInEvent*(self: gen_qdockwidget_types.QDockWidget, event: ge
 proc fcQDockWidget_vtable_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDockWidgetVTable](fcQDockWidget_vdata(self)[])
   let self = QDockWidget(h: self)
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusInEvent(self, slotval1)
 
 proc QDockWidgetfocusOutEvent*(self: gen_qdockwidget_types.QDockWidget, event: gen_qevent_types.QFocusEvent): void =
@@ -720,7 +731,7 @@ proc QDockWidgetfocusOutEvent*(self: gen_qdockwidget_types.QDockWidget, event: g
 proc fcQDockWidget_vtable_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDockWidgetVTable](fcQDockWidget_vdata(self)[])
   let self = QDockWidget(h: self)
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusOutEvent(self, slotval1)
 
 proc QDockWidgetenterEvent*(self: gen_qdockwidget_types.QDockWidget, event: gen_qevent_types.QEnterEvent): void =
@@ -729,7 +740,7 @@ proc QDockWidgetenterEvent*(self: gen_qdockwidget_types.QDockWidget, event: gen_
 proc fcQDockWidget_vtable_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDockWidgetVTable](fcQDockWidget_vdata(self)[])
   let self = QDockWidget(h: self)
-  let slotval1 = gen_qevent_types.QEnterEvent(h: event)
+  let slotval1 = gen_qevent_types.QEnterEvent(h: event, owned: false)
   vtbl[].enterEvent(self, slotval1)
 
 proc QDockWidgetleaveEvent*(self: gen_qdockwidget_types.QDockWidget, event: gen_qcoreevent_types.QEvent): void =
@@ -738,7 +749,7 @@ proc QDockWidgetleaveEvent*(self: gen_qdockwidget_types.QDockWidget, event: gen_
 proc fcQDockWidget_vtable_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDockWidgetVTable](fcQDockWidget_vdata(self)[])
   let self = QDockWidget(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].leaveEvent(self, slotval1)
 
 proc QDockWidgetmoveEvent*(self: gen_qdockwidget_types.QDockWidget, event: gen_qevent_types.QMoveEvent): void =
@@ -747,7 +758,7 @@ proc QDockWidgetmoveEvent*(self: gen_qdockwidget_types.QDockWidget, event: gen_q
 proc fcQDockWidget_vtable_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDockWidgetVTable](fcQDockWidget_vdata(self)[])
   let self = QDockWidget(h: self)
-  let slotval1 = gen_qevent_types.QMoveEvent(h: event)
+  let slotval1 = gen_qevent_types.QMoveEvent(h: event, owned: false)
   vtbl[].moveEvent(self, slotval1)
 
 proc QDockWidgetresizeEvent*(self: gen_qdockwidget_types.QDockWidget, event: gen_qevent_types.QResizeEvent): void =
@@ -756,7 +767,7 @@ proc QDockWidgetresizeEvent*(self: gen_qdockwidget_types.QDockWidget, event: gen
 proc fcQDockWidget_vtable_callback_resizeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDockWidgetVTable](fcQDockWidget_vdata(self)[])
   let self = QDockWidget(h: self)
-  let slotval1 = gen_qevent_types.QResizeEvent(h: event)
+  let slotval1 = gen_qevent_types.QResizeEvent(h: event, owned: false)
   vtbl[].resizeEvent(self, slotval1)
 
 proc QDockWidgetcontextMenuEvent*(self: gen_qdockwidget_types.QDockWidget, event: gen_qevent_types.QContextMenuEvent): void =
@@ -765,7 +776,7 @@ proc QDockWidgetcontextMenuEvent*(self: gen_qdockwidget_types.QDockWidget, event
 proc fcQDockWidget_vtable_callback_contextMenuEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDockWidgetVTable](fcQDockWidget_vdata(self)[])
   let self = QDockWidget(h: self)
-  let slotval1 = gen_qevent_types.QContextMenuEvent(h: event)
+  let slotval1 = gen_qevent_types.QContextMenuEvent(h: event, owned: false)
   vtbl[].contextMenuEvent(self, slotval1)
 
 proc QDockWidgettabletEvent*(self: gen_qdockwidget_types.QDockWidget, event: gen_qevent_types.QTabletEvent): void =
@@ -774,7 +785,7 @@ proc QDockWidgettabletEvent*(self: gen_qdockwidget_types.QDockWidget, event: gen
 proc fcQDockWidget_vtable_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDockWidgetVTable](fcQDockWidget_vdata(self)[])
   let self = QDockWidget(h: self)
-  let slotval1 = gen_qevent_types.QTabletEvent(h: event)
+  let slotval1 = gen_qevent_types.QTabletEvent(h: event, owned: false)
   vtbl[].tabletEvent(self, slotval1)
 
 proc QDockWidgetactionEvent*(self: gen_qdockwidget_types.QDockWidget, event: gen_qevent_types.QActionEvent): void =
@@ -783,7 +794,7 @@ proc QDockWidgetactionEvent*(self: gen_qdockwidget_types.QDockWidget, event: gen
 proc fcQDockWidget_vtable_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDockWidgetVTable](fcQDockWidget_vdata(self)[])
   let self = QDockWidget(h: self)
-  let slotval1 = gen_qevent_types.QActionEvent(h: event)
+  let slotval1 = gen_qevent_types.QActionEvent(h: event, owned: false)
   vtbl[].actionEvent(self, slotval1)
 
 proc QDockWidgetdragEnterEvent*(self: gen_qdockwidget_types.QDockWidget, event: gen_qevent_types.QDragEnterEvent): void =
@@ -792,7 +803,7 @@ proc QDockWidgetdragEnterEvent*(self: gen_qdockwidget_types.QDockWidget, event: 
 proc fcQDockWidget_vtable_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDockWidgetVTable](fcQDockWidget_vdata(self)[])
   let self = QDockWidget(h: self)
-  let slotval1 = gen_qevent_types.QDragEnterEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragEnterEvent(h: event, owned: false)
   vtbl[].dragEnterEvent(self, slotval1)
 
 proc QDockWidgetdragMoveEvent*(self: gen_qdockwidget_types.QDockWidget, event: gen_qevent_types.QDragMoveEvent): void =
@@ -801,7 +812,7 @@ proc QDockWidgetdragMoveEvent*(self: gen_qdockwidget_types.QDockWidget, event: g
 proc fcQDockWidget_vtable_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDockWidgetVTable](fcQDockWidget_vdata(self)[])
   let self = QDockWidget(h: self)
-  let slotval1 = gen_qevent_types.QDragMoveEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragMoveEvent(h: event, owned: false)
   vtbl[].dragMoveEvent(self, slotval1)
 
 proc QDockWidgetdragLeaveEvent*(self: gen_qdockwidget_types.QDockWidget, event: gen_qevent_types.QDragLeaveEvent): void =
@@ -810,7 +821,7 @@ proc QDockWidgetdragLeaveEvent*(self: gen_qdockwidget_types.QDockWidget, event: 
 proc fcQDockWidget_vtable_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDockWidgetVTable](fcQDockWidget_vdata(self)[])
   let self = QDockWidget(h: self)
-  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event, owned: false)
   vtbl[].dragLeaveEvent(self, slotval1)
 
 proc QDockWidgetdropEvent*(self: gen_qdockwidget_types.QDockWidget, event: gen_qevent_types.QDropEvent): void =
@@ -819,7 +830,7 @@ proc QDockWidgetdropEvent*(self: gen_qdockwidget_types.QDockWidget, event: gen_q
 proc fcQDockWidget_vtable_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDockWidgetVTable](fcQDockWidget_vdata(self)[])
   let self = QDockWidget(h: self)
-  let slotval1 = gen_qevent_types.QDropEvent(h: event)
+  let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
   vtbl[].dropEvent(self, slotval1)
 
 proc QDockWidgetshowEvent*(self: gen_qdockwidget_types.QDockWidget, event: gen_qevent_types.QShowEvent): void =
@@ -828,7 +839,7 @@ proc QDockWidgetshowEvent*(self: gen_qdockwidget_types.QDockWidget, event: gen_q
 proc fcQDockWidget_vtable_callback_showEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDockWidgetVTable](fcQDockWidget_vdata(self)[])
   let self = QDockWidget(h: self)
-  let slotval1 = gen_qevent_types.QShowEvent(h: event)
+  let slotval1 = gen_qevent_types.QShowEvent(h: event, owned: false)
   vtbl[].showEvent(self, slotval1)
 
 proc QDockWidgethideEvent*(self: gen_qdockwidget_types.QDockWidget, event: gen_qevent_types.QHideEvent): void =
@@ -837,7 +848,7 @@ proc QDockWidgethideEvent*(self: gen_qdockwidget_types.QDockWidget, event: gen_q
 proc fcQDockWidget_vtable_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDockWidgetVTable](fcQDockWidget_vdata(self)[])
   let self = QDockWidget(h: self)
-  let slotval1 = gen_qevent_types.QHideEvent(h: event)
+  let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   vtbl[].hideEvent(self, slotval1)
 
 proc QDockWidgetnativeEvent*(self: gen_qdockwidget_types.QDockWidget, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool =
@@ -871,27 +882,33 @@ proc QDockWidgetinitPainter*(self: gen_qdockwidget_types.QDockWidget, painter: g
 proc fcQDockWidget_vtable_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDockWidgetVTable](fcQDockWidget_vdata(self)[])
   let self = QDockWidget(h: self)
-  let slotval1 = gen_qpainter_types.QPainter(h: painter)
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
   vtbl[].initPainter(self, slotval1)
 
 proc QDockWidgetredirected*(self: gen_qdockwidget_types.QDockWidget, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice =
-  gen_qpaintdevice_types.QPaintDevice(h: fcQDockWidget_virtualbase_redirected(self.h, offset.h))
+  gen_qpaintdevice_types.QPaintDevice(h: fcQDockWidget_virtualbase_redirected(self.h, offset.h), owned: false)
 
 proc fcQDockWidget_vtable_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QDockWidgetVTable](fcQDockWidget_vdata(self)[])
   let self = QDockWidget(h: self)
-  let slotval1 = gen_qpoint_types.QPoint(h: offset)
+  let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
   var virtualReturn = vtbl[].redirected(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QDockWidgetsharedPainter*(self: gen_qdockwidget_types.QDockWidget): gen_qpainter_types.QPainter =
-  gen_qpainter_types.QPainter(h: fcQDockWidget_virtualbase_sharedPainter(self.h))
+  gen_qpainter_types.QPainter(h: fcQDockWidget_virtualbase_sharedPainter(self.h), owned: false)
 
 proc fcQDockWidget_vtable_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QDockWidgetVTable](fcQDockWidget_vdata(self)[])
   let self = QDockWidget(h: self)
   var virtualReturn = vtbl[].sharedPainter(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QDockWidgetinputMethodEvent*(self: gen_qdockwidget_types.QDockWidget, param1: gen_qevent_types.QInputMethodEvent): void =
   fcQDockWidget_virtualbase_inputMethodEvent(self.h, param1.h)
@@ -899,18 +916,21 @@ proc QDockWidgetinputMethodEvent*(self: gen_qdockwidget_types.QDockWidget, param
 proc fcQDockWidget_vtable_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDockWidgetVTable](fcQDockWidget_vdata(self)[])
   let self = QDockWidget(h: self)
-  let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1)
+  let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1, owned: false)
   vtbl[].inputMethodEvent(self, slotval1)
 
 proc QDockWidgetinputMethodQuery*(self: gen_qdockwidget_types.QDockWidget, param1: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQDockWidget_virtualbase_inputMethodQuery(self.h, cint(param1)))
+  gen_qvariant_types.QVariant(h: fcQDockWidget_virtualbase_inputMethodQuery(self.h, cint(param1)), owned: true)
 
 proc fcQDockWidget_vtable_callback_inputMethodQuery(self: pointer, param1: cint): pointer {.cdecl.} =
   let vtbl = cast[ptr QDockWidgetVTable](fcQDockWidget_vdata(self)[])
   let self = QDockWidget(h: self)
   let slotval1 = cint(param1)
   var virtualReturn = vtbl[].inputMethodQuery(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QDockWidgetfocusNextPrevChild*(self: gen_qdockwidget_types.QDockWidget, next: bool): bool =
   fcQDockWidget_virtualbase_focusNextPrevChild(self.h, next)
@@ -928,8 +948,8 @@ proc QDockWidgeteventFilter*(self: gen_qdockwidget_types.QDockWidget, watched: g
 proc fcQDockWidget_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QDockWidgetVTable](fcQDockWidget_vdata(self)[])
   let self = QDockWidget(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
@@ -939,7 +959,7 @@ proc QDockWidgettimerEvent*(self: gen_qdockwidget_types.QDockWidget, event: gen_
 proc fcQDockWidget_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDockWidgetVTable](fcQDockWidget_vdata(self)[])
   let self = QDockWidget(h: self)
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
 proc QDockWidgetchildEvent*(self: gen_qdockwidget_types.QDockWidget, event: gen_qcoreevent_types.QChildEvent): void =
@@ -948,7 +968,7 @@ proc QDockWidgetchildEvent*(self: gen_qdockwidget_types.QDockWidget, event: gen_
 proc fcQDockWidget_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDockWidgetVTable](fcQDockWidget_vdata(self)[])
   let self = QDockWidget(h: self)
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
 proc QDockWidgetcustomEvent*(self: gen_qdockwidget_types.QDockWidget, event: gen_qcoreevent_types.QEvent): void =
@@ -957,7 +977,7 @@ proc QDockWidgetcustomEvent*(self: gen_qdockwidget_types.QDockWidget, event: gen
 proc fcQDockWidget_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDockWidgetVTable](fcQDockWidget_vdata(self)[])
   let self = QDockWidget(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
 proc QDockWidgetconnectNotify*(self: gen_qdockwidget_types.QDockWidget, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -966,7 +986,7 @@ proc QDockWidgetconnectNotify*(self: gen_qdockwidget_types.QDockWidget, signal: 
 proc fcQDockWidget_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDockWidgetVTable](fcQDockWidget_vdata(self)[])
   let self = QDockWidget(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
 proc QDockWidgetdisconnectNotify*(self: gen_qdockwidget_types.QDockWidget, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -975,7 +995,7 @@ proc QDockWidgetdisconnectNotify*(self: gen_qdockwidget_types.QDockWidget, signa
 proc fcQDockWidget_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDockWidgetVTable](fcQDockWidget_vdata(self)[])
   let self = QDockWidget(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
 type VirtualQDockWidget* {.inheritable.} = ref object of QDockWidget
@@ -1009,28 +1029,28 @@ method changeEvent*(self: VirtualQDockWidget, event: gen_qcoreevent_types.QEvent
   QDockWidgetchangeEvent(self[], event)
 proc fcQDockWidget_method_callback_changeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDockWidget](fcQDockWidget_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.changeEvent(slotval1)
 
 method closeEvent*(self: VirtualQDockWidget, event: gen_qevent_types.QCloseEvent): void {.base.} =
   QDockWidgetcloseEvent(self[], event)
 proc fcQDockWidget_method_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDockWidget](fcQDockWidget_vdata(self)[])
-  let slotval1 = gen_qevent_types.QCloseEvent(h: event)
+  let slotval1 = gen_qevent_types.QCloseEvent(h: event, owned: false)
   inst.closeEvent(slotval1)
 
 method paintEvent*(self: VirtualQDockWidget, event: gen_qevent_types.QPaintEvent): void {.base.} =
   QDockWidgetpaintEvent(self[], event)
 proc fcQDockWidget_method_callback_paintEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDockWidget](fcQDockWidget_vdata(self)[])
-  let slotval1 = gen_qevent_types.QPaintEvent(h: event)
+  let slotval1 = gen_qevent_types.QPaintEvent(h: event, owned: false)
   inst.paintEvent(slotval1)
 
 method event*(self: VirtualQDockWidget, event: gen_qcoreevent_types.QEvent): bool {.base.} =
   QDockWidgetevent(self[], event)
 proc fcQDockWidget_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQDockWidget](fcQDockWidget_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
@@ -1038,7 +1058,7 @@ method initStyleOption*(self: VirtualQDockWidget, option: gen_qstyleoption_types
   QDockWidgetinitStyleOption(self[], option)
 proc fcQDockWidget_method_callback_initStyleOption(self: pointer, option: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDockWidget](fcQDockWidget_vdata(self)[])
-  let slotval1 = gen_qstyleoption_types.QStyleOptionDockWidget(h: option)
+  let slotval1 = gen_qstyleoption_types.QStyleOptionDockWidget(h: option, owned: false)
   inst.initStyleOption(slotval1)
 
 method devType*(self: VirtualQDockWidget): cint {.base.} =
@@ -1095,154 +1115,154 @@ method mousePressEvent*(self: VirtualQDockWidget, event: gen_qevent_types.QMouse
   QDockWidgetmousePressEvent(self[], event)
 proc fcQDockWidget_method_callback_mousePressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDockWidget](fcQDockWidget_vdata(self)[])
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mousePressEvent(slotval1)
 
 method mouseReleaseEvent*(self: VirtualQDockWidget, event: gen_qevent_types.QMouseEvent): void {.base.} =
   QDockWidgetmouseReleaseEvent(self[], event)
 proc fcQDockWidget_method_callback_mouseReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDockWidget](fcQDockWidget_vdata(self)[])
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mouseReleaseEvent(slotval1)
 
 method mouseDoubleClickEvent*(self: VirtualQDockWidget, event: gen_qevent_types.QMouseEvent): void {.base.} =
   QDockWidgetmouseDoubleClickEvent(self[], event)
 proc fcQDockWidget_method_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDockWidget](fcQDockWidget_vdata(self)[])
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mouseDoubleClickEvent(slotval1)
 
 method mouseMoveEvent*(self: VirtualQDockWidget, event: gen_qevent_types.QMouseEvent): void {.base.} =
   QDockWidgetmouseMoveEvent(self[], event)
 proc fcQDockWidget_method_callback_mouseMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDockWidget](fcQDockWidget_vdata(self)[])
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mouseMoveEvent(slotval1)
 
 method wheelEvent*(self: VirtualQDockWidget, event: gen_qevent_types.QWheelEvent): void {.base.} =
   QDockWidgetwheelEvent(self[], event)
 proc fcQDockWidget_method_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDockWidget](fcQDockWidget_vdata(self)[])
-  let slotval1 = gen_qevent_types.QWheelEvent(h: event)
+  let slotval1 = gen_qevent_types.QWheelEvent(h: event, owned: false)
   inst.wheelEvent(slotval1)
 
 method keyPressEvent*(self: VirtualQDockWidget, event: gen_qevent_types.QKeyEvent): void {.base.} =
   QDockWidgetkeyPressEvent(self[], event)
 proc fcQDockWidget_method_callback_keyPressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDockWidget](fcQDockWidget_vdata(self)[])
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   inst.keyPressEvent(slotval1)
 
 method keyReleaseEvent*(self: VirtualQDockWidget, event: gen_qevent_types.QKeyEvent): void {.base.} =
   QDockWidgetkeyReleaseEvent(self[], event)
 proc fcQDockWidget_method_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDockWidget](fcQDockWidget_vdata(self)[])
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   inst.keyReleaseEvent(slotval1)
 
 method focusInEvent*(self: VirtualQDockWidget, event: gen_qevent_types.QFocusEvent): void {.base.} =
   QDockWidgetfocusInEvent(self[], event)
 proc fcQDockWidget_method_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDockWidget](fcQDockWidget_vdata(self)[])
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   inst.focusInEvent(slotval1)
 
 method focusOutEvent*(self: VirtualQDockWidget, event: gen_qevent_types.QFocusEvent): void {.base.} =
   QDockWidgetfocusOutEvent(self[], event)
 proc fcQDockWidget_method_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDockWidget](fcQDockWidget_vdata(self)[])
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   inst.focusOutEvent(slotval1)
 
 method enterEvent*(self: VirtualQDockWidget, event: gen_qevent_types.QEnterEvent): void {.base.} =
   QDockWidgetenterEvent(self[], event)
 proc fcQDockWidget_method_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDockWidget](fcQDockWidget_vdata(self)[])
-  let slotval1 = gen_qevent_types.QEnterEvent(h: event)
+  let slotval1 = gen_qevent_types.QEnterEvent(h: event, owned: false)
   inst.enterEvent(slotval1)
 
 method leaveEvent*(self: VirtualQDockWidget, event: gen_qcoreevent_types.QEvent): void {.base.} =
   QDockWidgetleaveEvent(self[], event)
 proc fcQDockWidget_method_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDockWidget](fcQDockWidget_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.leaveEvent(slotval1)
 
 method moveEvent*(self: VirtualQDockWidget, event: gen_qevent_types.QMoveEvent): void {.base.} =
   QDockWidgetmoveEvent(self[], event)
 proc fcQDockWidget_method_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDockWidget](fcQDockWidget_vdata(self)[])
-  let slotval1 = gen_qevent_types.QMoveEvent(h: event)
+  let slotval1 = gen_qevent_types.QMoveEvent(h: event, owned: false)
   inst.moveEvent(slotval1)
 
 method resizeEvent*(self: VirtualQDockWidget, event: gen_qevent_types.QResizeEvent): void {.base.} =
   QDockWidgetresizeEvent(self[], event)
 proc fcQDockWidget_method_callback_resizeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDockWidget](fcQDockWidget_vdata(self)[])
-  let slotval1 = gen_qevent_types.QResizeEvent(h: event)
+  let slotval1 = gen_qevent_types.QResizeEvent(h: event, owned: false)
   inst.resizeEvent(slotval1)
 
 method contextMenuEvent*(self: VirtualQDockWidget, event: gen_qevent_types.QContextMenuEvent): void {.base.} =
   QDockWidgetcontextMenuEvent(self[], event)
 proc fcQDockWidget_method_callback_contextMenuEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDockWidget](fcQDockWidget_vdata(self)[])
-  let slotval1 = gen_qevent_types.QContextMenuEvent(h: event)
+  let slotval1 = gen_qevent_types.QContextMenuEvent(h: event, owned: false)
   inst.contextMenuEvent(slotval1)
 
 method tabletEvent*(self: VirtualQDockWidget, event: gen_qevent_types.QTabletEvent): void {.base.} =
   QDockWidgettabletEvent(self[], event)
 proc fcQDockWidget_method_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDockWidget](fcQDockWidget_vdata(self)[])
-  let slotval1 = gen_qevent_types.QTabletEvent(h: event)
+  let slotval1 = gen_qevent_types.QTabletEvent(h: event, owned: false)
   inst.tabletEvent(slotval1)
 
 method actionEvent*(self: VirtualQDockWidget, event: gen_qevent_types.QActionEvent): void {.base.} =
   QDockWidgetactionEvent(self[], event)
 proc fcQDockWidget_method_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDockWidget](fcQDockWidget_vdata(self)[])
-  let slotval1 = gen_qevent_types.QActionEvent(h: event)
+  let slotval1 = gen_qevent_types.QActionEvent(h: event, owned: false)
   inst.actionEvent(slotval1)
 
 method dragEnterEvent*(self: VirtualQDockWidget, event: gen_qevent_types.QDragEnterEvent): void {.base.} =
   QDockWidgetdragEnterEvent(self[], event)
 proc fcQDockWidget_method_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDockWidget](fcQDockWidget_vdata(self)[])
-  let slotval1 = gen_qevent_types.QDragEnterEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragEnterEvent(h: event, owned: false)
   inst.dragEnterEvent(slotval1)
 
 method dragMoveEvent*(self: VirtualQDockWidget, event: gen_qevent_types.QDragMoveEvent): void {.base.} =
   QDockWidgetdragMoveEvent(self[], event)
 proc fcQDockWidget_method_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDockWidget](fcQDockWidget_vdata(self)[])
-  let slotval1 = gen_qevent_types.QDragMoveEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragMoveEvent(h: event, owned: false)
   inst.dragMoveEvent(slotval1)
 
 method dragLeaveEvent*(self: VirtualQDockWidget, event: gen_qevent_types.QDragLeaveEvent): void {.base.} =
   QDockWidgetdragLeaveEvent(self[], event)
 proc fcQDockWidget_method_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDockWidget](fcQDockWidget_vdata(self)[])
-  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event, owned: false)
   inst.dragLeaveEvent(slotval1)
 
 method dropEvent*(self: VirtualQDockWidget, event: gen_qevent_types.QDropEvent): void {.base.} =
   QDockWidgetdropEvent(self[], event)
 proc fcQDockWidget_method_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDockWidget](fcQDockWidget_vdata(self)[])
-  let slotval1 = gen_qevent_types.QDropEvent(h: event)
+  let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
   inst.dropEvent(slotval1)
 
 method showEvent*(self: VirtualQDockWidget, event: gen_qevent_types.QShowEvent): void {.base.} =
   QDockWidgetshowEvent(self[], event)
 proc fcQDockWidget_method_callback_showEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDockWidget](fcQDockWidget_vdata(self)[])
-  let slotval1 = gen_qevent_types.QShowEvent(h: event)
+  let slotval1 = gen_qevent_types.QShowEvent(h: event, owned: false)
   inst.showEvent(slotval1)
 
 method hideEvent*(self: VirtualQDockWidget, event: gen_qevent_types.QHideEvent): void {.base.} =
   QDockWidgethideEvent(self[], event)
 proc fcQDockWidget_method_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDockWidget](fcQDockWidget_vdata(self)[])
-  let slotval1 = gen_qevent_types.QHideEvent(h: event)
+  let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   inst.hideEvent(slotval1)
 
 method nativeEvent*(self: VirtualQDockWidget, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
@@ -1270,14 +1290,14 @@ method initPainter*(self: VirtualQDockWidget, painter: gen_qpainter_types.QPaint
   QDockWidgetinitPainter(self[], painter)
 proc fcQDockWidget_method_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDockWidget](fcQDockWidget_vdata(self)[])
-  let slotval1 = gen_qpainter_types.QPainter(h: painter)
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
   inst.initPainter(slotval1)
 
 method redirected*(self: VirtualQDockWidget, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.base.} =
   QDockWidgetredirected(self[], offset)
 proc fcQDockWidget_method_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQDockWidget](fcQDockWidget_vdata(self)[])
-  let slotval1 = gen_qpoint_types.QPoint(h: offset)
+  let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
   var virtualReturn = inst.redirected(slotval1)
   virtualReturn.h
 
@@ -1292,7 +1312,7 @@ method inputMethodEvent*(self: VirtualQDockWidget, param1: gen_qevent_types.QInp
   QDockWidgetinputMethodEvent(self[], param1)
 proc fcQDockWidget_method_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDockWidget](fcQDockWidget_vdata(self)[])
-  let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1)
+  let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1, owned: false)
   inst.inputMethodEvent(slotval1)
 
 method inputMethodQuery*(self: VirtualQDockWidget, param1: cint): gen_qvariant_types.QVariant {.base.} =
@@ -1315,8 +1335,8 @@ method eventFilter*(self: VirtualQDockWidget, watched: gen_qobject_types.QObject
   QDockWidgeteventFilter(self[], watched, event)
 proc fcQDockWidget_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQDockWidget](fcQDockWidget_vdata(self)[])
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
@@ -1324,35 +1344,35 @@ method timerEvent*(self: VirtualQDockWidget, event: gen_qcoreevent_types.QTimerE
   QDockWidgettimerEvent(self[], event)
 proc fcQDockWidget_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDockWidget](fcQDockWidget_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
 method childEvent*(self: VirtualQDockWidget, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
   QDockWidgetchildEvent(self[], event)
 proc fcQDockWidget_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDockWidget](fcQDockWidget_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
 method customEvent*(self: VirtualQDockWidget, event: gen_qcoreevent_types.QEvent): void {.base.} =
   QDockWidgetcustomEvent(self[], event)
 proc fcQDockWidget_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDockWidget](fcQDockWidget_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
 method connectNotify*(self: VirtualQDockWidget, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
   QDockWidgetconnectNotify(self[], signal)
 proc fcQDockWidget_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDockWidget](fcQDockWidget_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
 method disconnectNotify*(self: VirtualQDockWidget, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
   QDockWidgetdisconnectNotify(self[], signal)
 proc fcQDockWidget_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDockWidget](fcQDockWidget_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
 
 proc updateMicroFocus*(self: gen_qdockwidget_types.QDockWidget): void =
@@ -1371,7 +1391,7 @@ proc focusPreviousChild*(self: gen_qdockwidget_types.QDockWidget): bool =
   fcQDockWidget_protectedbase_focusPreviousChild(self.h)
 
 proc sender*(self: gen_qdockwidget_types.QDockWidget): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQDockWidget_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQDockWidget_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qdockwidget_types.QDockWidget): cint =
   fcQDockWidget_protectedbase_senderSignalIndex(self.h)
@@ -1492,7 +1512,7 @@ proc create*(T: type gen_qdockwidget_types.QDockWidget,
     vtbl[].vtbl.connectNotify = fcQDockWidget_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQDockWidget_vtable_callback_disconnectNotify
-  let tmp = gen_qdockwidget_types.QDockWidget(h: fcQDockWidget_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h))
+  let tmp = gen_qdockwidget_types.QDockWidget(h: fcQDockWidget_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h), owned: true)
   fcQDockWidget_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qdockwidget_types.QDockWidget,
@@ -1605,7 +1625,7 @@ proc create*(T: type gen_qdockwidget_types.QDockWidget,
     vtbl[].vtbl.connectNotify = fcQDockWidget_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQDockWidget_vtable_callback_disconnectNotify
-  let tmp = gen_qdockwidget_types.QDockWidget(h: fcQDockWidget_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title)))))
+  let tmp = gen_qdockwidget_types.QDockWidget(h: fcQDockWidget_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title)))), owned: true)
   fcQDockWidget_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qdockwidget_types.QDockWidget,
@@ -1717,7 +1737,7 @@ proc create*(T: type gen_qdockwidget_types.QDockWidget,
     vtbl[].vtbl.connectNotify = fcQDockWidget_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQDockWidget_vtable_callback_disconnectNotify
-  let tmp = gen_qdockwidget_types.QDockWidget(h: fcQDockWidget_new3(addr(vtbl[].vtbl), csize_t(sizeof(pointer))))
+  let tmp = gen_qdockwidget_types.QDockWidget(h: fcQDockWidget_new3(addr(vtbl[].vtbl), csize_t(sizeof(pointer))), owned: true)
   fcQDockWidget_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qdockwidget_types.QDockWidget,
@@ -1830,7 +1850,7 @@ proc create*(T: type gen_qdockwidget_types.QDockWidget,
     vtbl[].vtbl.connectNotify = fcQDockWidget_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQDockWidget_vtable_callback_disconnectNotify
-  let tmp = gen_qdockwidget_types.QDockWidget(h: fcQDockWidget_new4(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), parent.h))
+  let tmp = gen_qdockwidget_types.QDockWidget(h: fcQDockWidget_new4(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), parent.h), owned: true)
   fcQDockWidget_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qdockwidget_types.QDockWidget,
@@ -1943,7 +1963,7 @@ proc create*(T: type gen_qdockwidget_types.QDockWidget,
     vtbl[].vtbl.connectNotify = fcQDockWidget_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQDockWidget_vtable_callback_disconnectNotify
-  let tmp = gen_qdockwidget_types.QDockWidget(h: fcQDockWidget_new5(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), parent.h, cint(flags)))
+  let tmp = gen_qdockwidget_types.QDockWidget(h: fcQDockWidget_new5(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), parent.h, cint(flags)), owned: true)
   fcQDockWidget_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qdockwidget_types.QDockWidget,
@@ -2056,13 +2076,14 @@ proc create*(T: type gen_qdockwidget_types.QDockWidget,
     vtbl[].vtbl.connectNotify = fcQDockWidget_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQDockWidget_vtable_callback_disconnectNotify
-  let tmp = gen_qdockwidget_types.QDockWidget(h: fcQDockWidget_new6(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h, cint(flags)))
+  let tmp = gen_qdockwidget_types.QDockWidget(h: fcQDockWidget_new6(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h, cint(flags)), owned: true)
   fcQDockWidget_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQDockWidget_mvtbl = cQDockWidgetVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQDockWidget()[])](self.fcQDockWidget_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   metaObject: fcQDockWidget_method_callback_metaObject,
   metacast: fcQDockWidget_method_callback_metacast,
@@ -2159,5 +2180,3 @@ proc create*(T: type gen_qdockwidget_types.QDockWidget,
 
 proc staticMetaObject*(_: type gen_qdockwidget_types.QDockWidget): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQDockWidget_staticMetaObject())
-proc delete*(self: gen_qdockwidget_types.QDockWidget) =
-  fcQDockWidget_delete(self.h)

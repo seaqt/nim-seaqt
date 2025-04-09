@@ -32,7 +32,7 @@ func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
     else:
       copyMem(addr result[0], v.data, len)
 
-const cflags = gorge("pkg-config --cflags Qt6Network")  & " -fPIC"
+const cflags = gorge("pkg-config --cflags Qt6Network") & " -fPIC"
 {.compile("gen_qnetworkdiskcache.cpp", cflags).}
 
 
@@ -126,10 +126,9 @@ proc fcQNetworkDiskCache_protectedbase_isSignalConnected(self: pointer, signal: 
 proc fcQNetworkDiskCache_new(vtbl: pointer, vdata: csize_t): ptr cQNetworkDiskCache {.importc: "QNetworkDiskCache_new".}
 proc fcQNetworkDiskCache_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQNetworkDiskCache {.importc: "QNetworkDiskCache_new2".}
 proc fcQNetworkDiskCache_staticMetaObject(): pointer {.importc: "QNetworkDiskCache_staticMetaObject".}
-proc fcQNetworkDiskCache_delete(self: pointer) {.importc: "QNetworkDiskCache_delete".}
 
 proc metaObject*(self: gen_qnetworkdiskcache_types.QNetworkDiskCache): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQNetworkDiskCache_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQNetworkDiskCache_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qnetworkdiskcache_types.QNetworkDiskCache, param1: cstring): pointer =
   fcQNetworkDiskCache_metacast(self.h, param1)
@@ -162,25 +161,25 @@ proc cacheSize*(self: gen_qnetworkdiskcache_types.QNetworkDiskCache): clonglong 
   fcQNetworkDiskCache_cacheSize(self.h)
 
 proc metaData*(self: gen_qnetworkdiskcache_types.QNetworkDiskCache, url: gen_qurl_types.QUrl): gen_qabstractnetworkcache_types.QNetworkCacheMetaData =
-  gen_qabstractnetworkcache_types.QNetworkCacheMetaData(h: fcQNetworkDiskCache_metaData(self.h, url.h))
+  gen_qabstractnetworkcache_types.QNetworkCacheMetaData(h: fcQNetworkDiskCache_metaData(self.h, url.h), owned: true)
 
 proc updateMetaData*(self: gen_qnetworkdiskcache_types.QNetworkDiskCache, metaData: gen_qabstractnetworkcache_types.QNetworkCacheMetaData): void =
   fcQNetworkDiskCache_updateMetaData(self.h, metaData.h)
 
 proc data*(self: gen_qnetworkdiskcache_types.QNetworkDiskCache, url: gen_qurl_types.QUrl): gen_qiodevice_types.QIODevice =
-  gen_qiodevice_types.QIODevice(h: fcQNetworkDiskCache_data(self.h, url.h))
+  gen_qiodevice_types.QIODevice(h: fcQNetworkDiskCache_data(self.h, url.h), owned: false)
 
 proc remove*(self: gen_qnetworkdiskcache_types.QNetworkDiskCache, url: gen_qurl_types.QUrl): bool =
   fcQNetworkDiskCache_remove(self.h, url.h)
 
 proc prepare*(self: gen_qnetworkdiskcache_types.QNetworkDiskCache, metaData: gen_qabstractnetworkcache_types.QNetworkCacheMetaData): gen_qiodevice_types.QIODevice =
-  gen_qiodevice_types.QIODevice(h: fcQNetworkDiskCache_prepare(self.h, metaData.h))
+  gen_qiodevice_types.QIODevice(h: fcQNetworkDiskCache_prepare(self.h, metaData.h), owned: false)
 
 proc insert*(self: gen_qnetworkdiskcache_types.QNetworkDiskCache, device: gen_qiodevice_types.QIODevice): void =
   fcQNetworkDiskCache_insert(self.h, device.h)
 
 proc fileMetaData*(self: gen_qnetworkdiskcache_types.QNetworkDiskCache, fileName: string): gen_qabstractnetworkcache_types.QNetworkCacheMetaData =
-  gen_qabstractnetworkcache_types.QNetworkCacheMetaData(h: fcQNetworkDiskCache_fileMetaData(self.h, struct_miqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName)))))
+  gen_qabstractnetworkcache_types.QNetworkCacheMetaData(h: fcQNetworkDiskCache_fileMetaData(self.h, struct_miqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName)))), owned: true)
 
 proc clear*(self: gen_qnetworkdiskcache_types.QNetworkDiskCache): void =
   fcQNetworkDiskCache_clear(self.h)
@@ -216,7 +215,7 @@ type QNetworkDiskCachechildEventProc* = proc(self: QNetworkDiskCache, event: gen
 type QNetworkDiskCachecustomEventProc* = proc(self: QNetworkDiskCache, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QNetworkDiskCacheconnectNotifyProc* = proc(self: QNetworkDiskCache, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QNetworkDiskCachedisconnectNotifyProc* = proc(self: QNetworkDiskCache, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
-type QNetworkDiskCacheVTable* = object
+type QNetworkDiskCacheVTable* {.inheritable, pure.} = object
   vtbl: cQNetworkDiskCacheVTable
   metaObject*: QNetworkDiskCachemetaObjectProc
   metacast*: QNetworkDiskCachemetacastProc
@@ -238,13 +237,16 @@ type QNetworkDiskCacheVTable* = object
   connectNotify*: QNetworkDiskCacheconnectNotifyProc
   disconnectNotify*: QNetworkDiskCachedisconnectNotifyProc
 proc QNetworkDiskCachemetaObject*(self: gen_qnetworkdiskcache_types.QNetworkDiskCache): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQNetworkDiskCache_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQNetworkDiskCache_virtualbase_metaObject(self.h), owned: false)
 
 proc fcQNetworkDiskCache_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QNetworkDiskCacheVTable](fcQNetworkDiskCache_vdata(self)[])
   let self = QNetworkDiskCache(h: self)
   var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QNetworkDiskCachemetacast*(self: gen_qnetworkdiskcache_types.QNetworkDiskCache, param1: cstring): pointer =
   fcQNetworkDiskCache_virtualbase_metacast(self.h, param1)
@@ -278,14 +280,17 @@ proc fcQNetworkDiskCache_vtable_callback_cacheSize(self: pointer): clonglong {.c
   virtualReturn
 
 proc QNetworkDiskCachemetaData*(self: gen_qnetworkdiskcache_types.QNetworkDiskCache, url: gen_qurl_types.QUrl): gen_qabstractnetworkcache_types.QNetworkCacheMetaData =
-  gen_qabstractnetworkcache_types.QNetworkCacheMetaData(h: fcQNetworkDiskCache_virtualbase_metaData(self.h, url.h))
+  gen_qabstractnetworkcache_types.QNetworkCacheMetaData(h: fcQNetworkDiskCache_virtualbase_metaData(self.h, url.h), owned: true)
 
 proc fcQNetworkDiskCache_vtable_callback_metaData(self: pointer, url: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QNetworkDiskCacheVTable](fcQNetworkDiskCache_vdata(self)[])
   let self = QNetworkDiskCache(h: self)
-  let slotval1 = gen_qurl_types.QUrl(h: url)
+  let slotval1 = gen_qurl_types.QUrl(h: url, owned: false)
   var virtualReturn = vtbl[].metaData(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QNetworkDiskCacheupdateMetaData*(self: gen_qnetworkdiskcache_types.QNetworkDiskCache, metaData: gen_qabstractnetworkcache_types.QNetworkCacheMetaData): void =
   fcQNetworkDiskCache_virtualbase_updateMetaData(self.h, metaData.h)
@@ -293,18 +298,21 @@ proc QNetworkDiskCacheupdateMetaData*(self: gen_qnetworkdiskcache_types.QNetwork
 proc fcQNetworkDiskCache_vtable_callback_updateMetaData(self: pointer, metaData: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QNetworkDiskCacheVTable](fcQNetworkDiskCache_vdata(self)[])
   let self = QNetworkDiskCache(h: self)
-  let slotval1 = gen_qabstractnetworkcache_types.QNetworkCacheMetaData(h: metaData)
+  let slotval1 = gen_qabstractnetworkcache_types.QNetworkCacheMetaData(h: metaData, owned: false)
   vtbl[].updateMetaData(self, slotval1)
 
 proc QNetworkDiskCachedata*(self: gen_qnetworkdiskcache_types.QNetworkDiskCache, url: gen_qurl_types.QUrl): gen_qiodevice_types.QIODevice =
-  gen_qiodevice_types.QIODevice(h: fcQNetworkDiskCache_virtualbase_data(self.h, url.h))
+  gen_qiodevice_types.QIODevice(h: fcQNetworkDiskCache_virtualbase_data(self.h, url.h), owned: false)
 
 proc fcQNetworkDiskCache_vtable_callback_data(self: pointer, url: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QNetworkDiskCacheVTable](fcQNetworkDiskCache_vdata(self)[])
   let self = QNetworkDiskCache(h: self)
-  let slotval1 = gen_qurl_types.QUrl(h: url)
+  let slotval1 = gen_qurl_types.QUrl(h: url, owned: false)
   var virtualReturn = vtbl[].data(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QNetworkDiskCacheremove*(self: gen_qnetworkdiskcache_types.QNetworkDiskCache, url: gen_qurl_types.QUrl): bool =
   fcQNetworkDiskCache_virtualbase_remove(self.h, url.h)
@@ -312,19 +320,22 @@ proc QNetworkDiskCacheremove*(self: gen_qnetworkdiskcache_types.QNetworkDiskCach
 proc fcQNetworkDiskCache_vtable_callback_remove(self: pointer, url: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QNetworkDiskCacheVTable](fcQNetworkDiskCache_vdata(self)[])
   let self = QNetworkDiskCache(h: self)
-  let slotval1 = gen_qurl_types.QUrl(h: url)
+  let slotval1 = gen_qurl_types.QUrl(h: url, owned: false)
   var virtualReturn = vtbl[].remove(self, slotval1)
   virtualReturn
 
 proc QNetworkDiskCacheprepare*(self: gen_qnetworkdiskcache_types.QNetworkDiskCache, metaData: gen_qabstractnetworkcache_types.QNetworkCacheMetaData): gen_qiodevice_types.QIODevice =
-  gen_qiodevice_types.QIODevice(h: fcQNetworkDiskCache_virtualbase_prepare(self.h, metaData.h))
+  gen_qiodevice_types.QIODevice(h: fcQNetworkDiskCache_virtualbase_prepare(self.h, metaData.h), owned: false)
 
 proc fcQNetworkDiskCache_vtable_callback_prepare(self: pointer, metaData: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QNetworkDiskCacheVTable](fcQNetworkDiskCache_vdata(self)[])
   let self = QNetworkDiskCache(h: self)
-  let slotval1 = gen_qabstractnetworkcache_types.QNetworkCacheMetaData(h: metaData)
+  let slotval1 = gen_qabstractnetworkcache_types.QNetworkCacheMetaData(h: metaData, owned: false)
   var virtualReturn = vtbl[].prepare(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QNetworkDiskCacheinsert*(self: gen_qnetworkdiskcache_types.QNetworkDiskCache, device: gen_qiodevice_types.QIODevice): void =
   fcQNetworkDiskCache_virtualbase_insert(self.h, device.h)
@@ -332,7 +343,7 @@ proc QNetworkDiskCacheinsert*(self: gen_qnetworkdiskcache_types.QNetworkDiskCach
 proc fcQNetworkDiskCache_vtable_callback_insert(self: pointer, device: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QNetworkDiskCacheVTable](fcQNetworkDiskCache_vdata(self)[])
   let self = QNetworkDiskCache(h: self)
-  let slotval1 = gen_qiodevice_types.QIODevice(h: device)
+  let slotval1 = gen_qiodevice_types.QIODevice(h: device, owned: false)
   vtbl[].insert(self, slotval1)
 
 proc QNetworkDiskCacheclear*(self: gen_qnetworkdiskcache_types.QNetworkDiskCache): void =
@@ -358,7 +369,7 @@ proc QNetworkDiskCacheevent*(self: gen_qnetworkdiskcache_types.QNetworkDiskCache
 proc fcQNetworkDiskCache_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QNetworkDiskCacheVTable](fcQNetworkDiskCache_vdata(self)[])
   let self = QNetworkDiskCache(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
@@ -368,8 +379,8 @@ proc QNetworkDiskCacheeventFilter*(self: gen_qnetworkdiskcache_types.QNetworkDis
 proc fcQNetworkDiskCache_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QNetworkDiskCacheVTable](fcQNetworkDiskCache_vdata(self)[])
   let self = QNetworkDiskCache(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
@@ -379,7 +390,7 @@ proc QNetworkDiskCachetimerEvent*(self: gen_qnetworkdiskcache_types.QNetworkDisk
 proc fcQNetworkDiskCache_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QNetworkDiskCacheVTable](fcQNetworkDiskCache_vdata(self)[])
   let self = QNetworkDiskCache(h: self)
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
 proc QNetworkDiskCachechildEvent*(self: gen_qnetworkdiskcache_types.QNetworkDiskCache, event: gen_qcoreevent_types.QChildEvent): void =
@@ -388,7 +399,7 @@ proc QNetworkDiskCachechildEvent*(self: gen_qnetworkdiskcache_types.QNetworkDisk
 proc fcQNetworkDiskCache_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QNetworkDiskCacheVTable](fcQNetworkDiskCache_vdata(self)[])
   let self = QNetworkDiskCache(h: self)
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
 proc QNetworkDiskCachecustomEvent*(self: gen_qnetworkdiskcache_types.QNetworkDiskCache, event: gen_qcoreevent_types.QEvent): void =
@@ -397,7 +408,7 @@ proc QNetworkDiskCachecustomEvent*(self: gen_qnetworkdiskcache_types.QNetworkDis
 proc fcQNetworkDiskCache_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QNetworkDiskCacheVTable](fcQNetworkDiskCache_vdata(self)[])
   let self = QNetworkDiskCache(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
 proc QNetworkDiskCacheconnectNotify*(self: gen_qnetworkdiskcache_types.QNetworkDiskCache, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -406,7 +417,7 @@ proc QNetworkDiskCacheconnectNotify*(self: gen_qnetworkdiskcache_types.QNetworkD
 proc fcQNetworkDiskCache_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QNetworkDiskCacheVTable](fcQNetworkDiskCache_vdata(self)[])
   let self = QNetworkDiskCache(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
 proc QNetworkDiskCachedisconnectNotify*(self: gen_qnetworkdiskcache_types.QNetworkDiskCache, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -415,7 +426,7 @@ proc QNetworkDiskCachedisconnectNotify*(self: gen_qnetworkdiskcache_types.QNetwo
 proc fcQNetworkDiskCache_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QNetworkDiskCacheVTable](fcQNetworkDiskCache_vdata(self)[])
   let self = QNetworkDiskCache(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
 type VirtualQNetworkDiskCache* {.inheritable.} = ref object of QNetworkDiskCache
@@ -456,7 +467,7 @@ method metaData*(self: VirtualQNetworkDiskCache, url: gen_qurl_types.QUrl): gen_
   QNetworkDiskCachemetaData(self[], url)
 proc fcQNetworkDiskCache_method_callback_metaData(self: pointer, url: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQNetworkDiskCache](fcQNetworkDiskCache_vdata(self)[])
-  let slotval1 = gen_qurl_types.QUrl(h: url)
+  let slotval1 = gen_qurl_types.QUrl(h: url, owned: false)
   var virtualReturn = inst.metaData(slotval1)
   virtualReturn.h
 
@@ -464,14 +475,14 @@ method updateMetaData*(self: VirtualQNetworkDiskCache, metaData: gen_qabstractne
   QNetworkDiskCacheupdateMetaData(self[], metaData)
 proc fcQNetworkDiskCache_method_callback_updateMetaData(self: pointer, metaData: pointer): void {.cdecl.} =
   let inst = cast[VirtualQNetworkDiskCache](fcQNetworkDiskCache_vdata(self)[])
-  let slotval1 = gen_qabstractnetworkcache_types.QNetworkCacheMetaData(h: metaData)
+  let slotval1 = gen_qabstractnetworkcache_types.QNetworkCacheMetaData(h: metaData, owned: false)
   inst.updateMetaData(slotval1)
 
 method data*(self: VirtualQNetworkDiskCache, url: gen_qurl_types.QUrl): gen_qiodevice_types.QIODevice {.base.} =
   QNetworkDiskCachedata(self[], url)
 proc fcQNetworkDiskCache_method_callback_data(self: pointer, url: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQNetworkDiskCache](fcQNetworkDiskCache_vdata(self)[])
-  let slotval1 = gen_qurl_types.QUrl(h: url)
+  let slotval1 = gen_qurl_types.QUrl(h: url, owned: false)
   var virtualReturn = inst.data(slotval1)
   virtualReturn.h
 
@@ -479,7 +490,7 @@ method remove*(self: VirtualQNetworkDiskCache, url: gen_qurl_types.QUrl): bool {
   QNetworkDiskCacheremove(self[], url)
 proc fcQNetworkDiskCache_method_callback_remove(self: pointer, url: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQNetworkDiskCache](fcQNetworkDiskCache_vdata(self)[])
-  let slotval1 = gen_qurl_types.QUrl(h: url)
+  let slotval1 = gen_qurl_types.QUrl(h: url, owned: false)
   var virtualReturn = inst.remove(slotval1)
   virtualReturn
 
@@ -487,7 +498,7 @@ method prepare*(self: VirtualQNetworkDiskCache, metaData: gen_qabstractnetworkca
   QNetworkDiskCacheprepare(self[], metaData)
 proc fcQNetworkDiskCache_method_callback_prepare(self: pointer, metaData: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQNetworkDiskCache](fcQNetworkDiskCache_vdata(self)[])
-  let slotval1 = gen_qabstractnetworkcache_types.QNetworkCacheMetaData(h: metaData)
+  let slotval1 = gen_qabstractnetworkcache_types.QNetworkCacheMetaData(h: metaData, owned: false)
   var virtualReturn = inst.prepare(slotval1)
   virtualReturn.h
 
@@ -495,7 +506,7 @@ method insert*(self: VirtualQNetworkDiskCache, device: gen_qiodevice_types.QIODe
   QNetworkDiskCacheinsert(self[], device)
 proc fcQNetworkDiskCache_method_callback_insert(self: pointer, device: pointer): void {.cdecl.} =
   let inst = cast[VirtualQNetworkDiskCache](fcQNetworkDiskCache_vdata(self)[])
-  let slotval1 = gen_qiodevice_types.QIODevice(h: device)
+  let slotval1 = gen_qiodevice_types.QIODevice(h: device, owned: false)
   inst.insert(slotval1)
 
 method clear*(self: VirtualQNetworkDiskCache): void {.base.} =
@@ -515,7 +526,7 @@ method event*(self: VirtualQNetworkDiskCache, event: gen_qcoreevent_types.QEvent
   QNetworkDiskCacheevent(self[], event)
 proc fcQNetworkDiskCache_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQNetworkDiskCache](fcQNetworkDiskCache_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
@@ -523,8 +534,8 @@ method eventFilter*(self: VirtualQNetworkDiskCache, watched: gen_qobject_types.Q
   QNetworkDiskCacheeventFilter(self[], watched, event)
 proc fcQNetworkDiskCache_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQNetworkDiskCache](fcQNetworkDiskCache_vdata(self)[])
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
@@ -532,39 +543,39 @@ method timerEvent*(self: VirtualQNetworkDiskCache, event: gen_qcoreevent_types.Q
   QNetworkDiskCachetimerEvent(self[], event)
 proc fcQNetworkDiskCache_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQNetworkDiskCache](fcQNetworkDiskCache_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
 method childEvent*(self: VirtualQNetworkDiskCache, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
   QNetworkDiskCachechildEvent(self[], event)
 proc fcQNetworkDiskCache_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQNetworkDiskCache](fcQNetworkDiskCache_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
 method customEvent*(self: VirtualQNetworkDiskCache, event: gen_qcoreevent_types.QEvent): void {.base.} =
   QNetworkDiskCachecustomEvent(self[], event)
 proc fcQNetworkDiskCache_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQNetworkDiskCache](fcQNetworkDiskCache_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
 method connectNotify*(self: VirtualQNetworkDiskCache, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
   QNetworkDiskCacheconnectNotify(self[], signal)
 proc fcQNetworkDiskCache_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQNetworkDiskCache](fcQNetworkDiskCache_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
 method disconnectNotify*(self: VirtualQNetworkDiskCache, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
   QNetworkDiskCachedisconnectNotify(self[], signal)
 proc fcQNetworkDiskCache_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQNetworkDiskCache](fcQNetworkDiskCache_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
 
 proc sender*(self: gen_qnetworkdiskcache_types.QNetworkDiskCache): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQNetworkDiskCache_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQNetworkDiskCache_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qnetworkdiskcache_types.QNetworkDiskCache): cint =
   fcQNetworkDiskCache_protectedbase_senderSignalIndex(self.h)
@@ -620,7 +631,7 @@ proc create*(T: type gen_qnetworkdiskcache_types.QNetworkDiskCache,
     vtbl[].vtbl.connectNotify = fcQNetworkDiskCache_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQNetworkDiskCache_vtable_callback_disconnectNotify
-  let tmp = gen_qnetworkdiskcache_types.QNetworkDiskCache(h: fcQNetworkDiskCache_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))))
+  let tmp = gen_qnetworkdiskcache_types.QNetworkDiskCache(h: fcQNetworkDiskCache_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))), owned: true)
   fcQNetworkDiskCache_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qnetworkdiskcache_types.QNetworkDiskCache,
@@ -669,13 +680,14 @@ proc create*(T: type gen_qnetworkdiskcache_types.QNetworkDiskCache,
     vtbl[].vtbl.connectNotify = fcQNetworkDiskCache_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQNetworkDiskCache_vtable_callback_disconnectNotify
-  let tmp = gen_qnetworkdiskcache_types.QNetworkDiskCache(h: fcQNetworkDiskCache_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h))
+  let tmp = gen_qnetworkdiskcache_types.QNetworkDiskCache(h: fcQNetworkDiskCache_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h), owned: true)
   fcQNetworkDiskCache_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQNetworkDiskCache_mvtbl = cQNetworkDiskCacheVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQNetworkDiskCache()[])](self.fcQNetworkDiskCache_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   metaObject: fcQNetworkDiskCache_method_callback_metaObject,
   metacast: fcQNetworkDiskCache_method_callback_metacast,
@@ -712,5 +724,3 @@ proc create*(T: type gen_qnetworkdiskcache_types.QNetworkDiskCache,
 
 proc staticMetaObject*(_: type gen_qnetworkdiskcache_types.QNetworkDiskCache): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQNetworkDiskCache_staticMetaObject())
-proc delete*(self: gen_qnetworkdiskcache_types.QNetworkDiskCache) =
-  fcQNetworkDiskCache_delete(self.h)

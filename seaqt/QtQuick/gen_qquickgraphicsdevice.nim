@@ -32,9 +32,6 @@ func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
     else:
       copyMem(addr result[0], v.data, len)
 
-const cflags = gorge("pkg-config --cflags Qt6Quick")  & " -fPIC"
-{.compile("gen_qquickgraphicsdevice.cpp", cflags).}
-
 
 import ./gen_qquickgraphicsdevice_types
 export gen_qquickgraphicsdevice_types
@@ -46,7 +43,6 @@ proc fcQQuickGraphicsDevice_operatorAssign(self: pointer, other: pointer): void 
 proc fcQQuickGraphicsDevice_isNull(self: pointer): bool {.importc: "QQuickGraphicsDevice_isNull".}
 proc fcQQuickGraphicsDevice_new(): ptr cQQuickGraphicsDevice {.importc: "QQuickGraphicsDevice_new".}
 proc fcQQuickGraphicsDevice_new2(other: pointer): ptr cQQuickGraphicsDevice {.importc: "QQuickGraphicsDevice_new2".}
-proc fcQQuickGraphicsDevice_delete(self: pointer) {.importc: "QQuickGraphicsDevice_delete".}
 
 proc operatorAssign*(self: gen_qquickgraphicsdevice_types.QQuickGraphicsDevice, other: gen_qquickgraphicsdevice_types.QQuickGraphicsDevice): void =
   fcQQuickGraphicsDevice_operatorAssign(self.h, other.h)
@@ -55,11 +51,9 @@ proc isNull*(self: gen_qquickgraphicsdevice_types.QQuickGraphicsDevice): bool =
   fcQQuickGraphicsDevice_isNull(self.h)
 
 proc create*(T: type gen_qquickgraphicsdevice_types.QQuickGraphicsDevice): gen_qquickgraphicsdevice_types.QQuickGraphicsDevice =
-  let tmp = gen_qquickgraphicsdevice_types.QQuickGraphicsDevice(h: fcQQuickGraphicsDevice_new())
+  let tmp = gen_qquickgraphicsdevice_types.QQuickGraphicsDevice(h: fcQQuickGraphicsDevice_new(), owned: true)
   tmp
 proc create*(T: type gen_qquickgraphicsdevice_types.QQuickGraphicsDevice,
     other: gen_qquickgraphicsdevice_types.QQuickGraphicsDevice): gen_qquickgraphicsdevice_types.QQuickGraphicsDevice =
-  let tmp = gen_qquickgraphicsdevice_types.QQuickGraphicsDevice(h: fcQQuickGraphicsDevice_new2(other.h))
+  let tmp = gen_qquickgraphicsdevice_types.QQuickGraphicsDevice(h: fcQQuickGraphicsDevice_new2(other.h), owned: true)
   tmp
-proc delete*(self: gen_qquickgraphicsdevice_types.QQuickGraphicsDevice) =
-  fcQQuickGraphicsDevice_delete(self.h)

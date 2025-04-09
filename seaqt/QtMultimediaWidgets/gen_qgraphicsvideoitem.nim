@@ -32,7 +32,7 @@ func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
     else:
       copyMem(addr result[0], v.data, len)
 
-const cflags = gorge("pkg-config --cflags Qt6MultimediaWidgets")  & " -fPIC"
+const cflags = gorge("pkg-config --cflags Qt6MultimediaWidgets") & " -fPIC"
 {.compile("gen_qgraphicsvideoitem.cpp", cflags).}
 
 
@@ -204,10 +204,9 @@ proc fcQGraphicsVideoItem_protectedbase_prepareGeometryChange(self: pointer): vo
 proc fcQGraphicsVideoItem_new(vtbl: pointer, vdata: csize_t): ptr cQGraphicsVideoItem {.importc: "QGraphicsVideoItem_new".}
 proc fcQGraphicsVideoItem_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQGraphicsVideoItem {.importc: "QGraphicsVideoItem_new2".}
 proc fcQGraphicsVideoItem_staticMetaObject(): pointer {.importc: "QGraphicsVideoItem_staticMetaObject".}
-proc fcQGraphicsVideoItem_delete(self: pointer) {.importc: "QGraphicsVideoItem_delete".}
 
 proc metaObject*(self: gen_qgraphicsvideoitem_types.QGraphicsVideoItem): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQGraphicsVideoItem_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQGraphicsVideoItem_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qgraphicsvideoitem_types.QGraphicsVideoItem, param1: cstring): pointer =
   fcQGraphicsVideoItem_metacast(self.h, param1)
@@ -222,7 +221,7 @@ proc tr*(_: type gen_qgraphicsvideoitem_types.QGraphicsVideoItem, s: cstring): s
   vx_ret
 
 proc videoSink*(self: gen_qgraphicsvideoitem_types.QGraphicsVideoItem): gen_qvideosink_types.QVideoSink =
-  gen_qvideosink_types.QVideoSink(h: fcQGraphicsVideoItem_videoSink(self.h))
+  gen_qvideosink_types.QVideoSink(h: fcQGraphicsVideoItem_videoSink(self.h), owned: false)
 
 proc aspectRatioMode*(self: gen_qgraphicsvideoitem_types.QGraphicsVideoItem): cint =
   cint(fcQGraphicsVideoItem_aspectRatioMode(self.h))
@@ -231,22 +230,22 @@ proc setAspectRatioMode*(self: gen_qgraphicsvideoitem_types.QGraphicsVideoItem, 
   fcQGraphicsVideoItem_setAspectRatioMode(self.h, cint(mode))
 
 proc offset*(self: gen_qgraphicsvideoitem_types.QGraphicsVideoItem): gen_qpoint_types.QPointF =
-  gen_qpoint_types.QPointF(h: fcQGraphicsVideoItem_offset(self.h))
+  gen_qpoint_types.QPointF(h: fcQGraphicsVideoItem_offset(self.h), owned: true)
 
 proc setOffset*(self: gen_qgraphicsvideoitem_types.QGraphicsVideoItem, offset: gen_qpoint_types.QPointF): void =
   fcQGraphicsVideoItem_setOffset(self.h, offset.h)
 
 proc size*(self: gen_qgraphicsvideoitem_types.QGraphicsVideoItem): gen_qsize_types.QSizeF =
-  gen_qsize_types.QSizeF(h: fcQGraphicsVideoItem_size(self.h))
+  gen_qsize_types.QSizeF(h: fcQGraphicsVideoItem_size(self.h), owned: true)
 
 proc setSize*(self: gen_qgraphicsvideoitem_types.QGraphicsVideoItem, size: gen_qsize_types.QSizeF): void =
   fcQGraphicsVideoItem_setSize(self.h, size.h)
 
 proc nativeSize*(self: gen_qgraphicsvideoitem_types.QGraphicsVideoItem): gen_qsize_types.QSizeF =
-  gen_qsize_types.QSizeF(h: fcQGraphicsVideoItem_nativeSize(self.h))
+  gen_qsize_types.QSizeF(h: fcQGraphicsVideoItem_nativeSize(self.h), owned: true)
 
 proc boundingRect*(self: gen_qgraphicsvideoitem_types.QGraphicsVideoItem): gen_qrect_types.QRectF =
-  gen_qrect_types.QRectF(h: fcQGraphicsVideoItem_boundingRect(self.h))
+  gen_qrect_types.QRectF(h: fcQGraphicsVideoItem_boundingRect(self.h), owned: true)
 
 proc paint*(self: gen_qgraphicsvideoitem_types.QGraphicsVideoItem, painter: gen_qpainter_types.QPainter, option: gen_qstyleoption_types.QStyleOptionGraphicsItem, widget: gen_qwidget_types.QWidget): void =
   fcQGraphicsVideoItem_paint(self.h, painter.h, option.h, widget.h)
@@ -260,7 +259,7 @@ proc nativeSizeChanged*(self: gen_qgraphicsvideoitem_types.QGraphicsVideoItem, s
 type QGraphicsVideoItemnativeSizeChangedSlot* = proc(size: gen_qsize_types.QSizeF)
 proc fcQGraphicsVideoItem_slot_callback_nativeSizeChanged(slot: int, size: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QGraphicsVideoItemnativeSizeChangedSlot](cast[pointer](slot))
-  let slotval1 = gen_qsize_types.QSizeF(h: size)
+  let slotval1 = gen_qsize_types.QSizeF(h: size, owned: false)
 
   nimfunc[](slotval1)
 
@@ -331,7 +330,7 @@ type QGraphicsVideoIteminputMethodQueryProc* = proc(self: QGraphicsVideoItem, qu
 type QGraphicsVideoItemsupportsExtensionProc* = proc(self: QGraphicsVideoItem, extension: cint): bool {.raises: [], gcsafe.}
 type QGraphicsVideoItemsetExtensionProc* = proc(self: QGraphicsVideoItem, extension: cint, variant: gen_qvariant_types.QVariant): void {.raises: [], gcsafe.}
 type QGraphicsVideoItemextensionProc* = proc(self: QGraphicsVideoItem, variant: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant {.raises: [], gcsafe.}
-type QGraphicsVideoItemVTable* = object
+type QGraphicsVideoItemVTable* {.inheritable, pure.} = object
   vtbl: cQGraphicsVideoItemVTable
   metaObject*: QGraphicsVideoItemmetaObjectProc
   metacast*: QGraphicsVideoItemmetacastProc
@@ -379,13 +378,16 @@ type QGraphicsVideoItemVTable* = object
   setExtension*: QGraphicsVideoItemsetExtensionProc
   extension*: QGraphicsVideoItemextensionProc
 proc QGraphicsVideoItemmetaObject*(self: gen_qgraphicsvideoitem_types.QGraphicsVideoItem): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQGraphicsVideoItem_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQGraphicsVideoItem_virtualbase_metaObject(self.h), owned: false)
 
 proc fcQGraphicsVideoItem_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QGraphicsVideoItemVTable](fcQGraphicsVideoItem_vdata(self)[])
   let self = QGraphicsVideoItem(h: self)
   var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QGraphicsVideoItemmetacast*(self: gen_qgraphicsvideoitem_types.QGraphicsVideoItem, param1: cstring): pointer =
   fcQGraphicsVideoItem_virtualbase_metacast(self.h, param1)
@@ -410,13 +412,16 @@ proc fcQGraphicsVideoItem_vtable_callback_metacall(self: pointer, param1: cint, 
   virtualReturn
 
 proc QGraphicsVideoItemboundingRect*(self: gen_qgraphicsvideoitem_types.QGraphicsVideoItem): gen_qrect_types.QRectF =
-  gen_qrect_types.QRectF(h: fcQGraphicsVideoItem_virtualbase_boundingRect(self.h))
+  gen_qrect_types.QRectF(h: fcQGraphicsVideoItem_virtualbase_boundingRect(self.h), owned: true)
 
 proc fcQGraphicsVideoItem_vtable_callback_boundingRect(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QGraphicsVideoItemVTable](fcQGraphicsVideoItem_vdata(self)[])
   let self = QGraphicsVideoItem(h: self)
   var virtualReturn = vtbl[].boundingRect(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QGraphicsVideoItempaint*(self: gen_qgraphicsvideoitem_types.QGraphicsVideoItem, painter: gen_qpainter_types.QPainter, option: gen_qstyleoption_types.QStyleOptionGraphicsItem, widget: gen_qwidget_types.QWidget): void =
   fcQGraphicsVideoItem_virtualbase_paint(self.h, painter.h, option.h, widget.h)
@@ -424,9 +429,9 @@ proc QGraphicsVideoItempaint*(self: gen_qgraphicsvideoitem_types.QGraphicsVideoI
 proc fcQGraphicsVideoItem_vtable_callback_paint(self: pointer, painter: pointer, option: pointer, widget: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsVideoItemVTable](fcQGraphicsVideoItem_vdata(self)[])
   let self = QGraphicsVideoItem(h: self)
-  let slotval1 = gen_qpainter_types.QPainter(h: painter)
-  let slotval2 = gen_qstyleoption_types.QStyleOptionGraphicsItem(h: option)
-  let slotval3 = gen_qwidget_types.QWidget(h: widget)
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
+  let slotval2 = gen_qstyleoption_types.QStyleOptionGraphicsItem(h: option, owned: false)
+  let slotval3 = gen_qwidget_types.QWidget(h: widget, owned: false)
   vtbl[].paint(self, slotval1, slotval2, slotval3)
 
 proc QGraphicsVideoItemtypeX*(self: gen_qgraphicsvideoitem_types.QGraphicsVideoItem): cint =
@@ -444,19 +449,22 @@ proc QGraphicsVideoItemtimerEvent*(self: gen_qgraphicsvideoitem_types.QGraphicsV
 proc fcQGraphicsVideoItem_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsVideoItemVTable](fcQGraphicsVideoItem_vdata(self)[])
   let self = QGraphicsVideoItem(h: self)
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
 proc QGraphicsVideoItemitemChange*(self: gen_qgraphicsvideoitem_types.QGraphicsVideoItem, change: cint, value: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQGraphicsVideoItem_virtualbase_itemChange(self.h, cint(change), value.h))
+  gen_qvariant_types.QVariant(h: fcQGraphicsVideoItem_virtualbase_itemChange(self.h, cint(change), value.h), owned: true)
 
 proc fcQGraphicsVideoItem_vtable_callback_itemChange(self: pointer, change: cint, value: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QGraphicsVideoItemVTable](fcQGraphicsVideoItem_vdata(self)[])
   let self = QGraphicsVideoItem(h: self)
   let slotval1 = cint(change)
-  let slotval2 = gen_qvariant_types.QVariant(h: value)
+  let slotval2 = gen_qvariant_types.QVariant(h: value, owned: false)
   var virtualReturn = vtbl[].itemChange(self, slotval1, slotval2)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QGraphicsVideoItemevent*(self: gen_qgraphicsvideoitem_types.QGraphicsVideoItem, ev: gen_qcoreevent_types.QEvent): bool =
   fcQGraphicsVideoItem_virtualbase_event(self.h, ev.h)
@@ -464,7 +472,7 @@ proc QGraphicsVideoItemevent*(self: gen_qgraphicsvideoitem_types.QGraphicsVideoI
 proc fcQGraphicsVideoItem_vtable_callback_event(self: pointer, ev: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QGraphicsVideoItemVTable](fcQGraphicsVideoItem_vdata(self)[])
   let self = QGraphicsVideoItem(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: ev)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: ev, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
@@ -474,8 +482,8 @@ proc QGraphicsVideoItemeventFilter*(self: gen_qgraphicsvideoitem_types.QGraphics
 proc fcQGraphicsVideoItem_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QGraphicsVideoItemVTable](fcQGraphicsVideoItem_vdata(self)[])
   let self = QGraphicsVideoItem(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
@@ -485,7 +493,7 @@ proc QGraphicsVideoItemchildEvent*(self: gen_qgraphicsvideoitem_types.QGraphicsV
 proc fcQGraphicsVideoItem_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsVideoItemVTable](fcQGraphicsVideoItem_vdata(self)[])
   let self = QGraphicsVideoItem(h: self)
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
 proc QGraphicsVideoItemcustomEvent*(self: gen_qgraphicsvideoitem_types.QGraphicsVideoItem, event: gen_qcoreevent_types.QEvent): void =
@@ -494,7 +502,7 @@ proc QGraphicsVideoItemcustomEvent*(self: gen_qgraphicsvideoitem_types.QGraphics
 proc fcQGraphicsVideoItem_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsVideoItemVTable](fcQGraphicsVideoItem_vdata(self)[])
   let self = QGraphicsVideoItem(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
 proc QGraphicsVideoItemconnectNotify*(self: gen_qgraphicsvideoitem_types.QGraphicsVideoItem, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -503,7 +511,7 @@ proc QGraphicsVideoItemconnectNotify*(self: gen_qgraphicsvideoitem_types.QGraphi
 proc fcQGraphicsVideoItem_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsVideoItemVTable](fcQGraphicsVideoItem_vdata(self)[])
   let self = QGraphicsVideoItem(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
 proc QGraphicsVideoItemdisconnectNotify*(self: gen_qgraphicsvideoitem_types.QGraphicsVideoItem, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -512,7 +520,7 @@ proc QGraphicsVideoItemdisconnectNotify*(self: gen_qgraphicsvideoitem_types.QGra
 proc fcQGraphicsVideoItem_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsVideoItemVTable](fcQGraphicsVideoItem_vdata(self)[])
   let self = QGraphicsVideoItem(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
 proc QGraphicsVideoItemadvance*(self: gen_qgraphicsvideoitem_types.QGraphicsVideoItem, phase: cint): void =
@@ -525,13 +533,16 @@ proc fcQGraphicsVideoItem_vtable_callback_advance(self: pointer, phase: cint): v
   vtbl[].advance(self, slotval1)
 
 proc QGraphicsVideoItemshape*(self: gen_qgraphicsvideoitem_types.QGraphicsVideoItem): gen_qpainterpath_types.QPainterPath =
-  gen_qpainterpath_types.QPainterPath(h: fcQGraphicsVideoItem_virtualbase_shape(self.h))
+  gen_qpainterpath_types.QPainterPath(h: fcQGraphicsVideoItem_virtualbase_shape(self.h), owned: true)
 
 proc fcQGraphicsVideoItem_vtable_callback_shape(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QGraphicsVideoItemVTable](fcQGraphicsVideoItem_vdata(self)[])
   let self = QGraphicsVideoItem(h: self)
   var virtualReturn = vtbl[].shape(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QGraphicsVideoItemcontains*(self: gen_qgraphicsvideoitem_types.QGraphicsVideoItem, point: gen_qpoint_types.QPointF): bool =
   fcQGraphicsVideoItem_virtualbase_contains(self.h, point.h)
@@ -539,7 +550,7 @@ proc QGraphicsVideoItemcontains*(self: gen_qgraphicsvideoitem_types.QGraphicsVid
 proc fcQGraphicsVideoItem_vtable_callback_contains(self: pointer, point: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QGraphicsVideoItemVTable](fcQGraphicsVideoItem_vdata(self)[])
   let self = QGraphicsVideoItem(h: self)
-  let slotval1 = gen_qpoint_types.QPointF(h: point)
+  let slotval1 = gen_qpoint_types.QPointF(h: point, owned: false)
   var virtualReturn = vtbl[].contains(self, slotval1)
   virtualReturn
 
@@ -549,7 +560,7 @@ proc QGraphicsVideoItemcollidesWithItem*(self: gen_qgraphicsvideoitem_types.QGra
 proc fcQGraphicsVideoItem_vtable_callback_collidesWithItem(self: pointer, other: pointer, mode: cint): bool {.cdecl.} =
   let vtbl = cast[ptr QGraphicsVideoItemVTable](fcQGraphicsVideoItem_vdata(self)[])
   let self = QGraphicsVideoItem(h: self)
-  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: other)
+  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: other, owned: false)
   let slotval2 = cint(mode)
   var virtualReturn = vtbl[].collidesWithItem(self, slotval1, slotval2)
   virtualReturn
@@ -560,7 +571,7 @@ proc QGraphicsVideoItemcollidesWithPath*(self: gen_qgraphicsvideoitem_types.QGra
 proc fcQGraphicsVideoItem_vtable_callback_collidesWithPath(self: pointer, path: pointer, mode: cint): bool {.cdecl.} =
   let vtbl = cast[ptr QGraphicsVideoItemVTable](fcQGraphicsVideoItem_vdata(self)[])
   let self = QGraphicsVideoItem(h: self)
-  let slotval1 = gen_qpainterpath_types.QPainterPath(h: path)
+  let slotval1 = gen_qpainterpath_types.QPainterPath(h: path, owned: false)
   let slotval2 = cint(mode)
   var virtualReturn = vtbl[].collidesWithPath(self, slotval1, slotval2)
   virtualReturn
@@ -571,18 +582,21 @@ proc QGraphicsVideoItemisObscuredBy*(self: gen_qgraphicsvideoitem_types.QGraphic
 proc fcQGraphicsVideoItem_vtable_callback_isObscuredBy(self: pointer, item: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QGraphicsVideoItemVTable](fcQGraphicsVideoItem_vdata(self)[])
   let self = QGraphicsVideoItem(h: self)
-  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: item)
+  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: item, owned: false)
   var virtualReturn = vtbl[].isObscuredBy(self, slotval1)
   virtualReturn
 
 proc QGraphicsVideoItemopaqueArea*(self: gen_qgraphicsvideoitem_types.QGraphicsVideoItem): gen_qpainterpath_types.QPainterPath =
-  gen_qpainterpath_types.QPainterPath(h: fcQGraphicsVideoItem_virtualbase_opaqueArea(self.h))
+  gen_qpainterpath_types.QPainterPath(h: fcQGraphicsVideoItem_virtualbase_opaqueArea(self.h), owned: true)
 
 proc fcQGraphicsVideoItem_vtable_callback_opaqueArea(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QGraphicsVideoItemVTable](fcQGraphicsVideoItem_vdata(self)[])
   let self = QGraphicsVideoItem(h: self)
   var virtualReturn = vtbl[].opaqueArea(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QGraphicsVideoItemsceneEventFilter*(self: gen_qgraphicsvideoitem_types.QGraphicsVideoItem, watched: gen_qgraphicsitem_types.QGraphicsItem, event: gen_qcoreevent_types.QEvent): bool =
   fcQGraphicsVideoItem_virtualbase_sceneEventFilter(self.h, watched.h, event.h)
@@ -590,8 +604,8 @@ proc QGraphicsVideoItemsceneEventFilter*(self: gen_qgraphicsvideoitem_types.QGra
 proc fcQGraphicsVideoItem_vtable_callback_sceneEventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QGraphicsVideoItemVTable](fcQGraphicsVideoItem_vdata(self)[])
   let self = QGraphicsVideoItem(h: self)
-  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].sceneEventFilter(self, slotval1, slotval2)
   virtualReturn
 
@@ -601,7 +615,7 @@ proc QGraphicsVideoItemsceneEvent*(self: gen_qgraphicsvideoitem_types.QGraphicsV
 proc fcQGraphicsVideoItem_vtable_callback_sceneEvent(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QGraphicsVideoItemVTable](fcQGraphicsVideoItem_vdata(self)[])
   let self = QGraphicsVideoItem(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].sceneEvent(self, slotval1)
   virtualReturn
 
@@ -611,7 +625,7 @@ proc QGraphicsVideoItemcontextMenuEvent*(self: gen_qgraphicsvideoitem_types.QGra
 proc fcQGraphicsVideoItem_vtable_callback_contextMenuEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsVideoItemVTable](fcQGraphicsVideoItem_vdata(self)[])
   let self = QGraphicsVideoItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneContextMenuEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneContextMenuEvent(h: event, owned: false)
   vtbl[].contextMenuEvent(self, slotval1)
 
 proc QGraphicsVideoItemdragEnterEvent*(self: gen_qgraphicsvideoitem_types.QGraphicsVideoItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void =
@@ -620,7 +634,7 @@ proc QGraphicsVideoItemdragEnterEvent*(self: gen_qgraphicsvideoitem_types.QGraph
 proc fcQGraphicsVideoItem_vtable_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsVideoItemVTable](fcQGraphicsVideoItem_vdata(self)[])
   let self = QGraphicsVideoItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event, owned: false)
   vtbl[].dragEnterEvent(self, slotval1)
 
 proc QGraphicsVideoItemdragLeaveEvent*(self: gen_qgraphicsvideoitem_types.QGraphicsVideoItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void =
@@ -629,7 +643,7 @@ proc QGraphicsVideoItemdragLeaveEvent*(self: gen_qgraphicsvideoitem_types.QGraph
 proc fcQGraphicsVideoItem_vtable_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsVideoItemVTable](fcQGraphicsVideoItem_vdata(self)[])
   let self = QGraphicsVideoItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event, owned: false)
   vtbl[].dragLeaveEvent(self, slotval1)
 
 proc QGraphicsVideoItemdragMoveEvent*(self: gen_qgraphicsvideoitem_types.QGraphicsVideoItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void =
@@ -638,7 +652,7 @@ proc QGraphicsVideoItemdragMoveEvent*(self: gen_qgraphicsvideoitem_types.QGraphi
 proc fcQGraphicsVideoItem_vtable_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsVideoItemVTable](fcQGraphicsVideoItem_vdata(self)[])
   let self = QGraphicsVideoItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event, owned: false)
   vtbl[].dragMoveEvent(self, slotval1)
 
 proc QGraphicsVideoItemdropEvent*(self: gen_qgraphicsvideoitem_types.QGraphicsVideoItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void =
@@ -647,7 +661,7 @@ proc QGraphicsVideoItemdropEvent*(self: gen_qgraphicsvideoitem_types.QGraphicsVi
 proc fcQGraphicsVideoItem_vtable_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsVideoItemVTable](fcQGraphicsVideoItem_vdata(self)[])
   let self = QGraphicsVideoItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event, owned: false)
   vtbl[].dropEvent(self, slotval1)
 
 proc QGraphicsVideoItemfocusInEvent*(self: gen_qgraphicsvideoitem_types.QGraphicsVideoItem, event: gen_qevent_types.QFocusEvent): void =
@@ -656,7 +670,7 @@ proc QGraphicsVideoItemfocusInEvent*(self: gen_qgraphicsvideoitem_types.QGraphic
 proc fcQGraphicsVideoItem_vtable_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsVideoItemVTable](fcQGraphicsVideoItem_vdata(self)[])
   let self = QGraphicsVideoItem(h: self)
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusInEvent(self, slotval1)
 
 proc QGraphicsVideoItemfocusOutEvent*(self: gen_qgraphicsvideoitem_types.QGraphicsVideoItem, event: gen_qevent_types.QFocusEvent): void =
@@ -665,7 +679,7 @@ proc QGraphicsVideoItemfocusOutEvent*(self: gen_qgraphicsvideoitem_types.QGraphi
 proc fcQGraphicsVideoItem_vtable_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsVideoItemVTable](fcQGraphicsVideoItem_vdata(self)[])
   let self = QGraphicsVideoItem(h: self)
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusOutEvent(self, slotval1)
 
 proc QGraphicsVideoItemhoverEnterEvent*(self: gen_qgraphicsvideoitem_types.QGraphicsVideoItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent): void =
@@ -674,7 +688,7 @@ proc QGraphicsVideoItemhoverEnterEvent*(self: gen_qgraphicsvideoitem_types.QGrap
 proc fcQGraphicsVideoItem_vtable_callback_hoverEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsVideoItemVTable](fcQGraphicsVideoItem_vdata(self)[])
   let self = QGraphicsVideoItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event, owned: false)
   vtbl[].hoverEnterEvent(self, slotval1)
 
 proc QGraphicsVideoItemhoverMoveEvent*(self: gen_qgraphicsvideoitem_types.QGraphicsVideoItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent): void =
@@ -683,7 +697,7 @@ proc QGraphicsVideoItemhoverMoveEvent*(self: gen_qgraphicsvideoitem_types.QGraph
 proc fcQGraphicsVideoItem_vtable_callback_hoverMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsVideoItemVTable](fcQGraphicsVideoItem_vdata(self)[])
   let self = QGraphicsVideoItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event, owned: false)
   vtbl[].hoverMoveEvent(self, slotval1)
 
 proc QGraphicsVideoItemhoverLeaveEvent*(self: gen_qgraphicsvideoitem_types.QGraphicsVideoItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent): void =
@@ -692,7 +706,7 @@ proc QGraphicsVideoItemhoverLeaveEvent*(self: gen_qgraphicsvideoitem_types.QGrap
 proc fcQGraphicsVideoItem_vtable_callback_hoverLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsVideoItemVTable](fcQGraphicsVideoItem_vdata(self)[])
   let self = QGraphicsVideoItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event, owned: false)
   vtbl[].hoverLeaveEvent(self, slotval1)
 
 proc QGraphicsVideoItemkeyPressEvent*(self: gen_qgraphicsvideoitem_types.QGraphicsVideoItem, event: gen_qevent_types.QKeyEvent): void =
@@ -701,7 +715,7 @@ proc QGraphicsVideoItemkeyPressEvent*(self: gen_qgraphicsvideoitem_types.QGraphi
 proc fcQGraphicsVideoItem_vtable_callback_keyPressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsVideoItemVTable](fcQGraphicsVideoItem_vdata(self)[])
   let self = QGraphicsVideoItem(h: self)
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   vtbl[].keyPressEvent(self, slotval1)
 
 proc QGraphicsVideoItemkeyReleaseEvent*(self: gen_qgraphicsvideoitem_types.QGraphicsVideoItem, event: gen_qevent_types.QKeyEvent): void =
@@ -710,7 +724,7 @@ proc QGraphicsVideoItemkeyReleaseEvent*(self: gen_qgraphicsvideoitem_types.QGrap
 proc fcQGraphicsVideoItem_vtable_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsVideoItemVTable](fcQGraphicsVideoItem_vdata(self)[])
   let self = QGraphicsVideoItem(h: self)
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   vtbl[].keyReleaseEvent(self, slotval1)
 
 proc QGraphicsVideoItemmousePressEvent*(self: gen_qgraphicsvideoitem_types.QGraphicsVideoItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void =
@@ -719,7 +733,7 @@ proc QGraphicsVideoItemmousePressEvent*(self: gen_qgraphicsvideoitem_types.QGrap
 proc fcQGraphicsVideoItem_vtable_callback_mousePressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsVideoItemVTable](fcQGraphicsVideoItem_vdata(self)[])
   let self = QGraphicsVideoItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event, owned: false)
   vtbl[].mousePressEvent(self, slotval1)
 
 proc QGraphicsVideoItemmouseMoveEvent*(self: gen_qgraphicsvideoitem_types.QGraphicsVideoItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void =
@@ -728,7 +742,7 @@ proc QGraphicsVideoItemmouseMoveEvent*(self: gen_qgraphicsvideoitem_types.QGraph
 proc fcQGraphicsVideoItem_vtable_callback_mouseMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsVideoItemVTable](fcQGraphicsVideoItem_vdata(self)[])
   let self = QGraphicsVideoItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event, owned: false)
   vtbl[].mouseMoveEvent(self, slotval1)
 
 proc QGraphicsVideoItemmouseReleaseEvent*(self: gen_qgraphicsvideoitem_types.QGraphicsVideoItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void =
@@ -737,7 +751,7 @@ proc QGraphicsVideoItemmouseReleaseEvent*(self: gen_qgraphicsvideoitem_types.QGr
 proc fcQGraphicsVideoItem_vtable_callback_mouseReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsVideoItemVTable](fcQGraphicsVideoItem_vdata(self)[])
   let self = QGraphicsVideoItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event, owned: false)
   vtbl[].mouseReleaseEvent(self, slotval1)
 
 proc QGraphicsVideoItemmouseDoubleClickEvent*(self: gen_qgraphicsvideoitem_types.QGraphicsVideoItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void =
@@ -746,7 +760,7 @@ proc QGraphicsVideoItemmouseDoubleClickEvent*(self: gen_qgraphicsvideoitem_types
 proc fcQGraphicsVideoItem_vtable_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsVideoItemVTable](fcQGraphicsVideoItem_vdata(self)[])
   let self = QGraphicsVideoItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event, owned: false)
   vtbl[].mouseDoubleClickEvent(self, slotval1)
 
 proc QGraphicsVideoItemwheelEvent*(self: gen_qgraphicsvideoitem_types.QGraphicsVideoItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent): void =
@@ -755,7 +769,7 @@ proc QGraphicsVideoItemwheelEvent*(self: gen_qgraphicsvideoitem_types.QGraphicsV
 proc fcQGraphicsVideoItem_vtable_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsVideoItemVTable](fcQGraphicsVideoItem_vdata(self)[])
   let self = QGraphicsVideoItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent(h: event, owned: false)
   vtbl[].wheelEvent(self, slotval1)
 
 proc QGraphicsVideoIteminputMethodEvent*(self: gen_qgraphicsvideoitem_types.QGraphicsVideoItem, event: gen_qevent_types.QInputMethodEvent): void =
@@ -764,18 +778,21 @@ proc QGraphicsVideoIteminputMethodEvent*(self: gen_qgraphicsvideoitem_types.QGra
 proc fcQGraphicsVideoItem_vtable_callback_inputMethodEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsVideoItemVTable](fcQGraphicsVideoItem_vdata(self)[])
   let self = QGraphicsVideoItem(h: self)
-  let slotval1 = gen_qevent_types.QInputMethodEvent(h: event)
+  let slotval1 = gen_qevent_types.QInputMethodEvent(h: event, owned: false)
   vtbl[].inputMethodEvent(self, slotval1)
 
 proc QGraphicsVideoIteminputMethodQuery*(self: gen_qgraphicsvideoitem_types.QGraphicsVideoItem, query: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQGraphicsVideoItem_virtualbase_inputMethodQuery(self.h, cint(query)))
+  gen_qvariant_types.QVariant(h: fcQGraphicsVideoItem_virtualbase_inputMethodQuery(self.h, cint(query)), owned: true)
 
 proc fcQGraphicsVideoItem_vtable_callback_inputMethodQuery(self: pointer, query: cint): pointer {.cdecl.} =
   let vtbl = cast[ptr QGraphicsVideoItemVTable](fcQGraphicsVideoItem_vdata(self)[])
   let self = QGraphicsVideoItem(h: self)
   let slotval1 = cint(query)
   var virtualReturn = vtbl[].inputMethodQuery(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QGraphicsVideoItemsupportsExtension*(self: gen_qgraphicsvideoitem_types.QGraphicsVideoItem, extension: cint): bool =
   fcQGraphicsVideoItem_virtualbase_supportsExtension(self.h, cint(extension))
@@ -794,18 +811,21 @@ proc fcQGraphicsVideoItem_vtable_callback_setExtension(self: pointer, extension:
   let vtbl = cast[ptr QGraphicsVideoItemVTable](fcQGraphicsVideoItem_vdata(self)[])
   let self = QGraphicsVideoItem(h: self)
   let slotval1 = cint(extension)
-  let slotval2 = gen_qvariant_types.QVariant(h: variant)
+  let slotval2 = gen_qvariant_types.QVariant(h: variant, owned: false)
   vtbl[].setExtension(self, slotval1, slotval2)
 
 proc QGraphicsVideoItemextension*(self: gen_qgraphicsvideoitem_types.QGraphicsVideoItem, variant: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQGraphicsVideoItem_virtualbase_extension(self.h, variant.h))
+  gen_qvariant_types.QVariant(h: fcQGraphicsVideoItem_virtualbase_extension(self.h, variant.h), owned: true)
 
 proc fcQGraphicsVideoItem_vtable_callback_extension(self: pointer, variant: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QGraphicsVideoItemVTable](fcQGraphicsVideoItem_vdata(self)[])
   let self = QGraphicsVideoItem(h: self)
-  let slotval1 = gen_qvariant_types.QVariant(h: variant)
+  let slotval1 = gen_qvariant_types.QVariant(h: variant, owned: false)
   var virtualReturn = vtbl[].extension(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 type VirtualQGraphicsVideoItem* {.inheritable.} = ref object of QGraphicsVideoItem
   vtbl*: cQGraphicsVideoItemVTable
@@ -845,9 +865,9 @@ method paint*(self: VirtualQGraphicsVideoItem, painter: gen_qpainter_types.QPain
   QGraphicsVideoItempaint(self[], painter, option, widget)
 proc fcQGraphicsVideoItem_method_callback_paint(self: pointer, painter: pointer, option: pointer, widget: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsVideoItem](fcQGraphicsVideoItem_vdata(self)[])
-  let slotval1 = gen_qpainter_types.QPainter(h: painter)
-  let slotval2 = gen_qstyleoption_types.QStyleOptionGraphicsItem(h: option)
-  let slotval3 = gen_qwidget_types.QWidget(h: widget)
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
+  let slotval2 = gen_qstyleoption_types.QStyleOptionGraphicsItem(h: option, owned: false)
+  let slotval3 = gen_qwidget_types.QWidget(h: widget, owned: false)
   inst.paint(slotval1, slotval2, slotval3)
 
 method typeX*(self: VirtualQGraphicsVideoItem): cint {.base.} =
@@ -861,7 +881,7 @@ method timerEvent*(self: VirtualQGraphicsVideoItem, event: gen_qcoreevent_types.
   QGraphicsVideoItemtimerEvent(self[], event)
 proc fcQGraphicsVideoItem_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsVideoItem](fcQGraphicsVideoItem_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
 method itemChange*(self: VirtualQGraphicsVideoItem, change: cint, value: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant {.base.} =
@@ -869,7 +889,7 @@ method itemChange*(self: VirtualQGraphicsVideoItem, change: cint, value: gen_qva
 proc fcQGraphicsVideoItem_method_callback_itemChange(self: pointer, change: cint, value: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsVideoItem](fcQGraphicsVideoItem_vdata(self)[])
   let slotval1 = cint(change)
-  let slotval2 = gen_qvariant_types.QVariant(h: value)
+  let slotval2 = gen_qvariant_types.QVariant(h: value, owned: false)
   var virtualReturn = inst.itemChange(slotval1, slotval2)
   virtualReturn.h
 
@@ -877,7 +897,7 @@ method event*(self: VirtualQGraphicsVideoItem, ev: gen_qcoreevent_types.QEvent):
   QGraphicsVideoItemevent(self[], ev)
 proc fcQGraphicsVideoItem_method_callback_event(self: pointer, ev: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQGraphicsVideoItem](fcQGraphicsVideoItem_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: ev)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: ev, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
@@ -885,8 +905,8 @@ method eventFilter*(self: VirtualQGraphicsVideoItem, watched: gen_qobject_types.
   QGraphicsVideoItemeventFilter(self[], watched, event)
 proc fcQGraphicsVideoItem_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQGraphicsVideoItem](fcQGraphicsVideoItem_vdata(self)[])
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
@@ -894,28 +914,28 @@ method childEvent*(self: VirtualQGraphicsVideoItem, event: gen_qcoreevent_types.
   QGraphicsVideoItemchildEvent(self[], event)
 proc fcQGraphicsVideoItem_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsVideoItem](fcQGraphicsVideoItem_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
 method customEvent*(self: VirtualQGraphicsVideoItem, event: gen_qcoreevent_types.QEvent): void {.base.} =
   QGraphicsVideoItemcustomEvent(self[], event)
 proc fcQGraphicsVideoItem_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsVideoItem](fcQGraphicsVideoItem_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
 method connectNotify*(self: VirtualQGraphicsVideoItem, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
   QGraphicsVideoItemconnectNotify(self[], signal)
 proc fcQGraphicsVideoItem_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsVideoItem](fcQGraphicsVideoItem_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
 method disconnectNotify*(self: VirtualQGraphicsVideoItem, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
   QGraphicsVideoItemdisconnectNotify(self[], signal)
 proc fcQGraphicsVideoItem_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsVideoItem](fcQGraphicsVideoItem_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
 
 method advance*(self: VirtualQGraphicsVideoItem, phase: cint): void {.base.} =
@@ -936,7 +956,7 @@ method contains*(self: VirtualQGraphicsVideoItem, point: gen_qpoint_types.QPoint
   QGraphicsVideoItemcontains(self[], point)
 proc fcQGraphicsVideoItem_method_callback_contains(self: pointer, point: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQGraphicsVideoItem](fcQGraphicsVideoItem_vdata(self)[])
-  let slotval1 = gen_qpoint_types.QPointF(h: point)
+  let slotval1 = gen_qpoint_types.QPointF(h: point, owned: false)
   var virtualReturn = inst.contains(slotval1)
   virtualReturn
 
@@ -944,7 +964,7 @@ method collidesWithItem*(self: VirtualQGraphicsVideoItem, other: gen_qgraphicsit
   QGraphicsVideoItemcollidesWithItem(self[], other, mode)
 proc fcQGraphicsVideoItem_method_callback_collidesWithItem(self: pointer, other: pointer, mode: cint): bool {.cdecl.} =
   let inst = cast[VirtualQGraphicsVideoItem](fcQGraphicsVideoItem_vdata(self)[])
-  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: other)
+  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: other, owned: false)
   let slotval2 = cint(mode)
   var virtualReturn = inst.collidesWithItem(slotval1, slotval2)
   virtualReturn
@@ -953,7 +973,7 @@ method collidesWithPath*(self: VirtualQGraphicsVideoItem, path: gen_qpainterpath
   QGraphicsVideoItemcollidesWithPath(self[], path, mode)
 proc fcQGraphicsVideoItem_method_callback_collidesWithPath(self: pointer, path: pointer, mode: cint): bool {.cdecl.} =
   let inst = cast[VirtualQGraphicsVideoItem](fcQGraphicsVideoItem_vdata(self)[])
-  let slotval1 = gen_qpainterpath_types.QPainterPath(h: path)
+  let slotval1 = gen_qpainterpath_types.QPainterPath(h: path, owned: false)
   let slotval2 = cint(mode)
   var virtualReturn = inst.collidesWithPath(slotval1, slotval2)
   virtualReturn
@@ -962,7 +982,7 @@ method isObscuredBy*(self: VirtualQGraphicsVideoItem, item: gen_qgraphicsitem_ty
   QGraphicsVideoItemisObscuredBy(self[], item)
 proc fcQGraphicsVideoItem_method_callback_isObscuredBy(self: pointer, item: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQGraphicsVideoItem](fcQGraphicsVideoItem_vdata(self)[])
-  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: item)
+  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: item, owned: false)
   var virtualReturn = inst.isObscuredBy(slotval1)
   virtualReturn
 
@@ -977,8 +997,8 @@ method sceneEventFilter*(self: VirtualQGraphicsVideoItem, watched: gen_qgraphics
   QGraphicsVideoItemsceneEventFilter(self[], watched, event)
 proc fcQGraphicsVideoItem_method_callback_sceneEventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQGraphicsVideoItem](fcQGraphicsVideoItem_vdata(self)[])
-  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.sceneEventFilter(slotval1, slotval2)
   virtualReturn
 
@@ -986,7 +1006,7 @@ method sceneEvent*(self: VirtualQGraphicsVideoItem, event: gen_qcoreevent_types.
   QGraphicsVideoItemsceneEvent(self[], event)
 proc fcQGraphicsVideoItem_method_callback_sceneEvent(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQGraphicsVideoItem](fcQGraphicsVideoItem_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.sceneEvent(slotval1)
   virtualReturn
 
@@ -994,126 +1014,126 @@ method contextMenuEvent*(self: VirtualQGraphicsVideoItem, event: gen_qgraphicssc
   QGraphicsVideoItemcontextMenuEvent(self[], event)
 proc fcQGraphicsVideoItem_method_callback_contextMenuEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsVideoItem](fcQGraphicsVideoItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneContextMenuEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneContextMenuEvent(h: event, owned: false)
   inst.contextMenuEvent(slotval1)
 
 method dragEnterEvent*(self: VirtualQGraphicsVideoItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void {.base.} =
   QGraphicsVideoItemdragEnterEvent(self[], event)
 proc fcQGraphicsVideoItem_method_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsVideoItem](fcQGraphicsVideoItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event, owned: false)
   inst.dragEnterEvent(slotval1)
 
 method dragLeaveEvent*(self: VirtualQGraphicsVideoItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void {.base.} =
   QGraphicsVideoItemdragLeaveEvent(self[], event)
 proc fcQGraphicsVideoItem_method_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsVideoItem](fcQGraphicsVideoItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event, owned: false)
   inst.dragLeaveEvent(slotval1)
 
 method dragMoveEvent*(self: VirtualQGraphicsVideoItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void {.base.} =
   QGraphicsVideoItemdragMoveEvent(self[], event)
 proc fcQGraphicsVideoItem_method_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsVideoItem](fcQGraphicsVideoItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event, owned: false)
   inst.dragMoveEvent(slotval1)
 
 method dropEvent*(self: VirtualQGraphicsVideoItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void {.base.} =
   QGraphicsVideoItemdropEvent(self[], event)
 proc fcQGraphicsVideoItem_method_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsVideoItem](fcQGraphicsVideoItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event, owned: false)
   inst.dropEvent(slotval1)
 
 method focusInEvent*(self: VirtualQGraphicsVideoItem, event: gen_qevent_types.QFocusEvent): void {.base.} =
   QGraphicsVideoItemfocusInEvent(self[], event)
 proc fcQGraphicsVideoItem_method_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsVideoItem](fcQGraphicsVideoItem_vdata(self)[])
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   inst.focusInEvent(slotval1)
 
 method focusOutEvent*(self: VirtualQGraphicsVideoItem, event: gen_qevent_types.QFocusEvent): void {.base.} =
   QGraphicsVideoItemfocusOutEvent(self[], event)
 proc fcQGraphicsVideoItem_method_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsVideoItem](fcQGraphicsVideoItem_vdata(self)[])
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   inst.focusOutEvent(slotval1)
 
 method hoverEnterEvent*(self: VirtualQGraphicsVideoItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent): void {.base.} =
   QGraphicsVideoItemhoverEnterEvent(self[], event)
 proc fcQGraphicsVideoItem_method_callback_hoverEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsVideoItem](fcQGraphicsVideoItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event, owned: false)
   inst.hoverEnterEvent(slotval1)
 
 method hoverMoveEvent*(self: VirtualQGraphicsVideoItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent): void {.base.} =
   QGraphicsVideoItemhoverMoveEvent(self[], event)
 proc fcQGraphicsVideoItem_method_callback_hoverMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsVideoItem](fcQGraphicsVideoItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event, owned: false)
   inst.hoverMoveEvent(slotval1)
 
 method hoverLeaveEvent*(self: VirtualQGraphicsVideoItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent): void {.base.} =
   QGraphicsVideoItemhoverLeaveEvent(self[], event)
 proc fcQGraphicsVideoItem_method_callback_hoverLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsVideoItem](fcQGraphicsVideoItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event, owned: false)
   inst.hoverLeaveEvent(slotval1)
 
 method keyPressEvent*(self: VirtualQGraphicsVideoItem, event: gen_qevent_types.QKeyEvent): void {.base.} =
   QGraphicsVideoItemkeyPressEvent(self[], event)
 proc fcQGraphicsVideoItem_method_callback_keyPressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsVideoItem](fcQGraphicsVideoItem_vdata(self)[])
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   inst.keyPressEvent(slotval1)
 
 method keyReleaseEvent*(self: VirtualQGraphicsVideoItem, event: gen_qevent_types.QKeyEvent): void {.base.} =
   QGraphicsVideoItemkeyReleaseEvent(self[], event)
 proc fcQGraphicsVideoItem_method_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsVideoItem](fcQGraphicsVideoItem_vdata(self)[])
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   inst.keyReleaseEvent(slotval1)
 
 method mousePressEvent*(self: VirtualQGraphicsVideoItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void {.base.} =
   QGraphicsVideoItemmousePressEvent(self[], event)
 proc fcQGraphicsVideoItem_method_callback_mousePressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsVideoItem](fcQGraphicsVideoItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event, owned: false)
   inst.mousePressEvent(slotval1)
 
 method mouseMoveEvent*(self: VirtualQGraphicsVideoItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void {.base.} =
   QGraphicsVideoItemmouseMoveEvent(self[], event)
 proc fcQGraphicsVideoItem_method_callback_mouseMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsVideoItem](fcQGraphicsVideoItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event, owned: false)
   inst.mouseMoveEvent(slotval1)
 
 method mouseReleaseEvent*(self: VirtualQGraphicsVideoItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void {.base.} =
   QGraphicsVideoItemmouseReleaseEvent(self[], event)
 proc fcQGraphicsVideoItem_method_callback_mouseReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsVideoItem](fcQGraphicsVideoItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event, owned: false)
   inst.mouseReleaseEvent(slotval1)
 
 method mouseDoubleClickEvent*(self: VirtualQGraphicsVideoItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void {.base.} =
   QGraphicsVideoItemmouseDoubleClickEvent(self[], event)
 proc fcQGraphicsVideoItem_method_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsVideoItem](fcQGraphicsVideoItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event, owned: false)
   inst.mouseDoubleClickEvent(slotval1)
 
 method wheelEvent*(self: VirtualQGraphicsVideoItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent): void {.base.} =
   QGraphicsVideoItemwheelEvent(self[], event)
 proc fcQGraphicsVideoItem_method_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsVideoItem](fcQGraphicsVideoItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent(h: event, owned: false)
   inst.wheelEvent(slotval1)
 
 method inputMethodEvent*(self: VirtualQGraphicsVideoItem, event: gen_qevent_types.QInputMethodEvent): void {.base.} =
   QGraphicsVideoIteminputMethodEvent(self[], event)
 proc fcQGraphicsVideoItem_method_callback_inputMethodEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsVideoItem](fcQGraphicsVideoItem_vdata(self)[])
-  let slotval1 = gen_qevent_types.QInputMethodEvent(h: event)
+  let slotval1 = gen_qevent_types.QInputMethodEvent(h: event, owned: false)
   inst.inputMethodEvent(slotval1)
 
 method inputMethodQuery*(self: VirtualQGraphicsVideoItem, query: cint): gen_qvariant_types.QVariant {.base.} =
@@ -1137,14 +1157,14 @@ method setExtension*(self: VirtualQGraphicsVideoItem, extension: cint, variant: 
 proc fcQGraphicsVideoItem_method_callback_setExtension(self: pointer, extension: cint, variant: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsVideoItem](fcQGraphicsVideoItem_vdata(self)[])
   let slotval1 = cint(extension)
-  let slotval2 = gen_qvariant_types.QVariant(h: variant)
+  let slotval2 = gen_qvariant_types.QVariant(h: variant, owned: false)
   inst.setExtension(slotval1, slotval2)
 
 method extension*(self: VirtualQGraphicsVideoItem, variant: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant {.base.} =
   QGraphicsVideoItemextension(self[], variant)
 proc fcQGraphicsVideoItem_method_callback_extension(self: pointer, variant: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsVideoItem](fcQGraphicsVideoItem_vdata(self)[])
-  let slotval1 = gen_qvariant_types.QVariant(h: variant)
+  let slotval1 = gen_qvariant_types.QVariant(h: variant, owned: false)
   var virtualReturn = inst.extension(slotval1)
   virtualReturn.h
 
@@ -1152,7 +1172,7 @@ proc updateMicroFocus*(self: gen_qgraphicsvideoitem_types.QGraphicsVideoItem): v
   fcQGraphicsVideoItem_protectedbase_updateMicroFocus(self.h)
 
 proc sender*(self: gen_qgraphicsvideoitem_types.QGraphicsVideoItem): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQGraphicsVideoItem_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQGraphicsVideoItem_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qgraphicsvideoitem_types.QGraphicsVideoItem): cint =
   fcQGraphicsVideoItem_protectedbase_senderSignalIndex(self.h)
@@ -1269,7 +1289,7 @@ proc create*(T: type gen_qgraphicsvideoitem_types.QGraphicsVideoItem,
     vtbl[].vtbl.setExtension = fcQGraphicsVideoItem_vtable_callback_setExtension
   if not isNil(vtbl[].extension):
     vtbl[].vtbl.extension = fcQGraphicsVideoItem_vtable_callback_extension
-  let tmp = gen_qgraphicsvideoitem_types.QGraphicsVideoItem(h: fcQGraphicsVideoItem_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))))
+  let tmp = gen_qgraphicsvideoitem_types.QGraphicsVideoItem(h: fcQGraphicsVideoItem_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))), owned: true)
   fcQGraphicsVideoItem_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qgraphicsvideoitem_types.QGraphicsVideoItem,
@@ -1370,13 +1390,14 @@ proc create*(T: type gen_qgraphicsvideoitem_types.QGraphicsVideoItem,
     vtbl[].vtbl.setExtension = fcQGraphicsVideoItem_vtable_callback_setExtension
   if not isNil(vtbl[].extension):
     vtbl[].vtbl.extension = fcQGraphicsVideoItem_vtable_callback_extension
-  let tmp = gen_qgraphicsvideoitem_types.QGraphicsVideoItem(h: fcQGraphicsVideoItem_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h))
+  let tmp = gen_qgraphicsvideoitem_types.QGraphicsVideoItem(h: fcQGraphicsVideoItem_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h), owned: true)
   fcQGraphicsVideoItem_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQGraphicsVideoItem_mvtbl = cQGraphicsVideoItemVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQGraphicsVideoItem()[])](self.fcQGraphicsVideoItem_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   metaObject: fcQGraphicsVideoItem_method_callback_metaObject,
   metacast: fcQGraphicsVideoItem_method_callback_metacast,
@@ -1439,5 +1460,3 @@ proc create*(T: type gen_qgraphicsvideoitem_types.QGraphicsVideoItem,
 
 proc staticMetaObject*(_: type gen_qgraphicsvideoitem_types.QGraphicsVideoItem): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQGraphicsVideoItem_staticMetaObject())
-proc delete*(self: gen_qgraphicsvideoitem_types.QGraphicsVideoItem) =
-  fcQGraphicsVideoItem_delete(self.h)

@@ -32,7 +32,7 @@ func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
     else:
       copyMem(addr result[0], v.data, len)
 
-const cflags = gorge("pkg-config --cflags Qt6Quick")  & " -fPIC"
+const cflags = gorge("pkg-config --cflags Qt6Quick") & " -fPIC"
 {.compile("gen_qquickrendercontrol.cpp", cflags).}
 
 
@@ -117,10 +117,9 @@ proc fcQQuickRenderControl_protectedbase_isSignalConnected(self: pointer, signal
 proc fcQQuickRenderControl_new(vtbl: pointer, vdata: csize_t): ptr cQQuickRenderControl {.importc: "QQuickRenderControl_new".}
 proc fcQQuickRenderControl_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQQuickRenderControl {.importc: "QQuickRenderControl_new2".}
 proc fcQQuickRenderControl_staticMetaObject(): pointer {.importc: "QQuickRenderControl_staticMetaObject".}
-proc fcQQuickRenderControl_delete(self: pointer) {.importc: "QQuickRenderControl_delete".}
 
 proc metaObject*(self: gen_qquickrendercontrol_types.QQuickRenderControl): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQQuickRenderControl_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQQuickRenderControl_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qquickrendercontrol_types.QQuickRenderControl, param1: cstring): pointer =
   fcQQuickRenderControl_metacast(self.h, param1)
@@ -165,13 +164,13 @@ proc render*(self: gen_qquickrendercontrol_types.QQuickRenderControl): void =
   fcQQuickRenderControl_render(self.h)
 
 proc renderWindowFor*(_: type gen_qquickrendercontrol_types.QQuickRenderControl, win: gen_qquickwindow_types.QQuickWindow): gen_qwindow_types.QWindow =
-  gen_qwindow_types.QWindow(h: fcQQuickRenderControl_renderWindowFor(win.h))
+  gen_qwindow_types.QWindow(h: fcQQuickRenderControl_renderWindowFor(win.h), owned: false)
 
 proc renderWindow*(self: gen_qquickrendercontrol_types.QQuickRenderControl, offset: gen_qpoint_types.QPoint): gen_qwindow_types.QWindow =
-  gen_qwindow_types.QWindow(h: fcQQuickRenderControl_renderWindow(self.h, offset.h))
+  gen_qwindow_types.QWindow(h: fcQQuickRenderControl_renderWindow(self.h, offset.h), owned: false)
 
 proc window*(self: gen_qquickrendercontrol_types.QQuickRenderControl): gen_qquickwindow_types.QQuickWindow =
-  gen_qquickwindow_types.QQuickWindow(h: fcQQuickRenderControl_window(self.h))
+  gen_qquickwindow_types.QQuickWindow(h: fcQQuickRenderControl_window(self.h), owned: false)
 
 proc renderRequested*(self: gen_qquickrendercontrol_types.QQuickRenderControl): void =
   fcQQuickRenderControl_renderRequested(self.h)
@@ -222,7 +221,7 @@ proc tr*(_: type gen_qquickrendercontrol_types.QQuickRenderControl, s: cstring, 
   vx_ret
 
 proc renderWindowFor*(_: type gen_qquickrendercontrol_types.QQuickRenderControl, win: gen_qquickwindow_types.QQuickWindow, offset: gen_qpoint_types.QPoint): gen_qwindow_types.QWindow =
-  gen_qwindow_types.QWindow(h: fcQQuickRenderControl_renderWindowFor2(win.h, offset.h))
+  gen_qwindow_types.QWindow(h: fcQQuickRenderControl_renderWindowFor2(win.h, offset.h), owned: false)
 
 type QQuickRenderControlmetaObjectProc* = proc(self: QQuickRenderControl): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QQuickRenderControlmetacastProc* = proc(self: QQuickRenderControl, param1: cstring): pointer {.raises: [], gcsafe.}
@@ -235,7 +234,7 @@ type QQuickRenderControlchildEventProc* = proc(self: QQuickRenderControl, event:
 type QQuickRenderControlcustomEventProc* = proc(self: QQuickRenderControl, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QQuickRenderControlconnectNotifyProc* = proc(self: QQuickRenderControl, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QQuickRenderControldisconnectNotifyProc* = proc(self: QQuickRenderControl, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
-type QQuickRenderControlVTable* = object
+type QQuickRenderControlVTable* {.inheritable, pure.} = object
   vtbl: cQQuickRenderControlVTable
   metaObject*: QQuickRenderControlmetaObjectProc
   metacast*: QQuickRenderControlmetacastProc
@@ -249,13 +248,16 @@ type QQuickRenderControlVTable* = object
   connectNotify*: QQuickRenderControlconnectNotifyProc
   disconnectNotify*: QQuickRenderControldisconnectNotifyProc
 proc QQuickRenderControlmetaObject*(self: gen_qquickrendercontrol_types.QQuickRenderControl): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQQuickRenderControl_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQQuickRenderControl_virtualbase_metaObject(self.h), owned: false)
 
 proc fcQQuickRenderControl_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QQuickRenderControlVTable](fcQQuickRenderControl_vdata(self)[])
   let self = QQuickRenderControl(h: self)
   var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QQuickRenderControlmetacast*(self: gen_qquickrendercontrol_types.QQuickRenderControl, param1: cstring): pointer =
   fcQQuickRenderControl_virtualbase_metacast(self.h, param1)
@@ -280,14 +282,17 @@ proc fcQQuickRenderControl_vtable_callback_metacall(self: pointer, param1: cint,
   virtualReturn
 
 proc QQuickRenderControlrenderWindow*(self: gen_qquickrendercontrol_types.QQuickRenderControl, offset: gen_qpoint_types.QPoint): gen_qwindow_types.QWindow =
-  gen_qwindow_types.QWindow(h: fcQQuickRenderControl_virtualbase_renderWindow(self.h, offset.h))
+  gen_qwindow_types.QWindow(h: fcQQuickRenderControl_virtualbase_renderWindow(self.h, offset.h), owned: false)
 
 proc fcQQuickRenderControl_vtable_callback_renderWindow(self: pointer, offset: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QQuickRenderControlVTable](fcQQuickRenderControl_vdata(self)[])
   let self = QQuickRenderControl(h: self)
-  let slotval1 = gen_qpoint_types.QPoint(h: offset)
+  let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
   var virtualReturn = vtbl[].renderWindow(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QQuickRenderControlevent*(self: gen_qquickrendercontrol_types.QQuickRenderControl, event: gen_qcoreevent_types.QEvent): bool =
   fcQQuickRenderControl_virtualbase_event(self.h, event.h)
@@ -295,7 +300,7 @@ proc QQuickRenderControlevent*(self: gen_qquickrendercontrol_types.QQuickRenderC
 proc fcQQuickRenderControl_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QQuickRenderControlVTable](fcQQuickRenderControl_vdata(self)[])
   let self = QQuickRenderControl(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
@@ -305,8 +310,8 @@ proc QQuickRenderControleventFilter*(self: gen_qquickrendercontrol_types.QQuickR
 proc fcQQuickRenderControl_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QQuickRenderControlVTable](fcQQuickRenderControl_vdata(self)[])
   let self = QQuickRenderControl(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
@@ -316,7 +321,7 @@ proc QQuickRenderControltimerEvent*(self: gen_qquickrendercontrol_types.QQuickRe
 proc fcQQuickRenderControl_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QQuickRenderControlVTable](fcQQuickRenderControl_vdata(self)[])
   let self = QQuickRenderControl(h: self)
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
 proc QQuickRenderControlchildEvent*(self: gen_qquickrendercontrol_types.QQuickRenderControl, event: gen_qcoreevent_types.QChildEvent): void =
@@ -325,7 +330,7 @@ proc QQuickRenderControlchildEvent*(self: gen_qquickrendercontrol_types.QQuickRe
 proc fcQQuickRenderControl_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QQuickRenderControlVTable](fcQQuickRenderControl_vdata(self)[])
   let self = QQuickRenderControl(h: self)
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
 proc QQuickRenderControlcustomEvent*(self: gen_qquickrendercontrol_types.QQuickRenderControl, event: gen_qcoreevent_types.QEvent): void =
@@ -334,7 +339,7 @@ proc QQuickRenderControlcustomEvent*(self: gen_qquickrendercontrol_types.QQuickR
 proc fcQQuickRenderControl_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QQuickRenderControlVTable](fcQQuickRenderControl_vdata(self)[])
   let self = QQuickRenderControl(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
 proc QQuickRenderControlconnectNotify*(self: gen_qquickrendercontrol_types.QQuickRenderControl, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -343,7 +348,7 @@ proc QQuickRenderControlconnectNotify*(self: gen_qquickrendercontrol_types.QQuic
 proc fcQQuickRenderControl_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QQuickRenderControlVTable](fcQQuickRenderControl_vdata(self)[])
   let self = QQuickRenderControl(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
 proc QQuickRenderControldisconnectNotify*(self: gen_qquickrendercontrol_types.QQuickRenderControl, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -352,7 +357,7 @@ proc QQuickRenderControldisconnectNotify*(self: gen_qquickrendercontrol_types.QQ
 proc fcQQuickRenderControl_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QQuickRenderControlVTable](fcQQuickRenderControl_vdata(self)[])
   let self = QQuickRenderControl(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
 type VirtualQQuickRenderControl* {.inheritable.} = ref object of QQuickRenderControl
@@ -386,7 +391,7 @@ method renderWindow*(self: VirtualQQuickRenderControl, offset: gen_qpoint_types.
   QQuickRenderControlrenderWindow(self[], offset)
 proc fcQQuickRenderControl_method_callback_renderWindow(self: pointer, offset: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQQuickRenderControl](fcQQuickRenderControl_vdata(self)[])
-  let slotval1 = gen_qpoint_types.QPoint(h: offset)
+  let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
   var virtualReturn = inst.renderWindow(slotval1)
   virtualReturn.h
 
@@ -394,7 +399,7 @@ method event*(self: VirtualQQuickRenderControl, event: gen_qcoreevent_types.QEve
   QQuickRenderControlevent(self[], event)
 proc fcQQuickRenderControl_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQQuickRenderControl](fcQQuickRenderControl_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
@@ -402,8 +407,8 @@ method eventFilter*(self: VirtualQQuickRenderControl, watched: gen_qobject_types
   QQuickRenderControleventFilter(self[], watched, event)
 proc fcQQuickRenderControl_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQQuickRenderControl](fcQQuickRenderControl_vdata(self)[])
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
@@ -411,39 +416,39 @@ method timerEvent*(self: VirtualQQuickRenderControl, event: gen_qcoreevent_types
   QQuickRenderControltimerEvent(self[], event)
 proc fcQQuickRenderControl_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQQuickRenderControl](fcQQuickRenderControl_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
 method childEvent*(self: VirtualQQuickRenderControl, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
   QQuickRenderControlchildEvent(self[], event)
 proc fcQQuickRenderControl_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQQuickRenderControl](fcQQuickRenderControl_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
 method customEvent*(self: VirtualQQuickRenderControl, event: gen_qcoreevent_types.QEvent): void {.base.} =
   QQuickRenderControlcustomEvent(self[], event)
 proc fcQQuickRenderControl_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQQuickRenderControl](fcQQuickRenderControl_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
 method connectNotify*(self: VirtualQQuickRenderControl, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
   QQuickRenderControlconnectNotify(self[], signal)
 proc fcQQuickRenderControl_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQQuickRenderControl](fcQQuickRenderControl_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
 method disconnectNotify*(self: VirtualQQuickRenderControl, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
   QQuickRenderControldisconnectNotify(self[], signal)
 proc fcQQuickRenderControl_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQQuickRenderControl](fcQQuickRenderControl_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
 
 proc sender*(self: gen_qquickrendercontrol_types.QQuickRenderControl): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQQuickRenderControl_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQQuickRenderControl_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qquickrendercontrol_types.QQuickRenderControl): cint =
   fcQQuickRenderControl_protectedbase_senderSignalIndex(self.h)
@@ -483,7 +488,7 @@ proc create*(T: type gen_qquickrendercontrol_types.QQuickRenderControl,
     vtbl[].vtbl.connectNotify = fcQQuickRenderControl_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQQuickRenderControl_vtable_callback_disconnectNotify
-  let tmp = gen_qquickrendercontrol_types.QQuickRenderControl(h: fcQQuickRenderControl_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))))
+  let tmp = gen_qquickrendercontrol_types.QQuickRenderControl(h: fcQQuickRenderControl_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))), owned: true)
   fcQQuickRenderControl_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qquickrendercontrol_types.QQuickRenderControl,
@@ -516,13 +521,14 @@ proc create*(T: type gen_qquickrendercontrol_types.QQuickRenderControl,
     vtbl[].vtbl.connectNotify = fcQQuickRenderControl_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQQuickRenderControl_vtable_callback_disconnectNotify
-  let tmp = gen_qquickrendercontrol_types.QQuickRenderControl(h: fcQQuickRenderControl_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h))
+  let tmp = gen_qquickrendercontrol_types.QQuickRenderControl(h: fcQQuickRenderControl_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h), owned: true)
   fcQQuickRenderControl_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQQuickRenderControl_mvtbl = cQQuickRenderControlVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQQuickRenderControl()[])](self.fcQQuickRenderControl_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   metaObject: fcQQuickRenderControl_method_callback_metaObject,
   metacast: fcQQuickRenderControl_method_callback_metacast,
@@ -551,5 +557,3 @@ proc create*(T: type gen_qquickrendercontrol_types.QQuickRenderControl,
 
 proc staticMetaObject*(_: type gen_qquickrendercontrol_types.QQuickRenderControl): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQQuickRenderControl_staticMetaObject())
-proc delete*(self: gen_qquickrendercontrol_types.QQuickRenderControl) =
-  fcQQuickRenderControl_delete(self.h)

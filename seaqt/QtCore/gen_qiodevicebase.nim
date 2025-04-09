@@ -32,7 +32,7 @@ func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
     else:
       copyMem(addr result[0], v.data, len)
 
-const cflags = gorge("pkg-config --cflags Qt6Core")  & " -fPIC"
+const cflags = gorge("pkg-config --cflags Qt6Core") & " -fPIC"
 {.compile("gen_qiodevicebase.cpp", cflags).}
 
 

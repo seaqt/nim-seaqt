@@ -32,9 +32,6 @@ func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
     else:
       copyMem(addr result[0], v.data, len)
 
-const cflags = gorge("pkg-config --cflags Qt6Qml")  & " -fPIC"
-{.compile("gen_qqmlnetworkaccessmanagerfactory.cpp", cflags).}
-
 
 import ./gen_qqmlnetworkaccessmanagerfactory_types
 export gen_qqmlnetworkaccessmanagerfactory_types
@@ -43,10 +40,7 @@ export gen_qqmlnetworkaccessmanagerfactory_types
 type cQQmlNetworkAccessManagerFactory*{.exportc: "QQmlNetworkAccessManagerFactory", incompleteStruct.} = object
 
 proc fcQQmlNetworkAccessManagerFactory_operatorAssign(self: pointer, param1: pointer): void {.importc: "QQmlNetworkAccessManagerFactory_operatorAssign".}
-proc fcQQmlNetworkAccessManagerFactory_delete(self: pointer) {.importc: "QQmlNetworkAccessManagerFactory_delete".}
 
 proc operatorAssign*(self: gen_qqmlnetworkaccessmanagerfactory_types.QQmlNetworkAccessManagerFactory, param1: gen_qqmlnetworkaccessmanagerfactory_types.QQmlNetworkAccessManagerFactory): void =
   fcQQmlNetworkAccessManagerFactory_operatorAssign(self.h, param1.h)
 
-proc delete*(self: gen_qqmlnetworkaccessmanagerfactory_types.QQmlNetworkAccessManagerFactory) =
-  fcQQmlNetworkAccessManagerFactory_delete(self.h)

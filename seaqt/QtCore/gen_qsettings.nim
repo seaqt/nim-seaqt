@@ -32,7 +32,7 @@ func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
     else:
       copyMem(addr result[0], v.data, len)
 
-const cflags = gorge("pkg-config --cflags Qt6Core")  & " -fPIC"
+const cflags = gorge("pkg-config --cflags Qt6Core") & " -fPIC"
 {.compile("gen_qsettings.cpp", cflags).}
 
 
@@ -171,10 +171,9 @@ proc fcQSettings_new13(vtbl: pointer, vdata: csize_t, fileName: struct_miqt_stri
 proc fcQSettings_new14(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQSettings {.importc: "QSettings_new14".}
 proc fcQSettings_new15(vtbl: pointer, vdata: csize_t, scope: cint, parent: pointer): ptr cQSettings {.importc: "QSettings_new15".}
 proc fcQSettings_staticMetaObject(): pointer {.importc: "QSettings_staticMetaObject".}
-proc fcQSettings_delete(self: pointer) {.importc: "QSettings_delete".}
 
 proc metaObject*(self: gen_qsettings_types.QSettings): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQSettings_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQSettings_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qsettings_types.QSettings, param1: cstring): pointer =
   fcQSettings_metacast(self.h, param1)
@@ -270,10 +269,10 @@ proc setValue*(self: gen_qsettings_types.QSettings, key: gen_qanystringview_type
   fcQSettings_setValue(self.h, key.h, value.h)
 
 proc value*(self: gen_qsettings_types.QSettings, key: gen_qanystringview_types.QAnyStringView, defaultValue: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQSettings_value(self.h, key.h, defaultValue.h))
+  gen_qvariant_types.QVariant(h: fcQSettings_value(self.h, key.h, defaultValue.h), owned: true)
 
 proc value*(self: gen_qsettings_types.QSettings, key: gen_qanystringview_types.QAnyStringView): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQSettings_valueWithKey(self.h, key.h))
+  gen_qvariant_types.QVariant(h: fcQSettings_valueWithKey(self.h, key.h), owned: true)
 
 proc remove*(self: gen_qsettings_types.QSettings, key: gen_qanystringview_types.QAnyStringView): void =
   fcQSettings_remove(self.h, key.h)
@@ -345,7 +344,7 @@ type QSettingschildEventProc* = proc(self: QSettings, event: gen_qcoreevent_type
 type QSettingscustomEventProc* = proc(self: QSettings, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QSettingsconnectNotifyProc* = proc(self: QSettings, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QSettingsdisconnectNotifyProc* = proc(self: QSettings, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
-type QSettingsVTable* = object
+type QSettingsVTable* {.inheritable, pure.} = object
   vtbl: cQSettingsVTable
   metaObject*: QSettingsmetaObjectProc
   metacast*: QSettingsmetacastProc
@@ -358,13 +357,16 @@ type QSettingsVTable* = object
   connectNotify*: QSettingsconnectNotifyProc
   disconnectNotify*: QSettingsdisconnectNotifyProc
 proc QSettingsmetaObject*(self: gen_qsettings_types.QSettings): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQSettings_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQSettings_virtualbase_metaObject(self.h), owned: false)
 
 proc fcQSettings_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QSettingsVTable](fcQSettings_vdata(self)[])
   let self = QSettings(h: self)
   var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QSettingsmetacast*(self: gen_qsettings_types.QSettings, param1: cstring): pointer =
   fcQSettings_virtualbase_metacast(self.h, param1)
@@ -394,7 +396,7 @@ proc QSettingsevent*(self: gen_qsettings_types.QSettings, event: gen_qcoreevent_
 proc fcQSettings_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QSettingsVTable](fcQSettings_vdata(self)[])
   let self = QSettings(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
@@ -404,8 +406,8 @@ proc QSettingseventFilter*(self: gen_qsettings_types.QSettings, watched: gen_qob
 proc fcQSettings_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QSettingsVTable](fcQSettings_vdata(self)[])
   let self = QSettings(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
@@ -415,7 +417,7 @@ proc QSettingstimerEvent*(self: gen_qsettings_types.QSettings, event: gen_qcoree
 proc fcQSettings_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSettingsVTable](fcQSettings_vdata(self)[])
   let self = QSettings(h: self)
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
 proc QSettingschildEvent*(self: gen_qsettings_types.QSettings, event: gen_qcoreevent_types.QChildEvent): void =
@@ -424,7 +426,7 @@ proc QSettingschildEvent*(self: gen_qsettings_types.QSettings, event: gen_qcoree
 proc fcQSettings_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSettingsVTable](fcQSettings_vdata(self)[])
   let self = QSettings(h: self)
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
 proc QSettingscustomEvent*(self: gen_qsettings_types.QSettings, event: gen_qcoreevent_types.QEvent): void =
@@ -433,7 +435,7 @@ proc QSettingscustomEvent*(self: gen_qsettings_types.QSettings, event: gen_qcore
 proc fcQSettings_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSettingsVTable](fcQSettings_vdata(self)[])
   let self = QSettings(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
 proc QSettingsconnectNotify*(self: gen_qsettings_types.QSettings, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -442,7 +444,7 @@ proc QSettingsconnectNotify*(self: gen_qsettings_types.QSettings, signal: gen_qm
 proc fcQSettings_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSettingsVTable](fcQSettings_vdata(self)[])
   let self = QSettings(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
 proc QSettingsdisconnectNotify*(self: gen_qsettings_types.QSettings, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -451,7 +453,7 @@ proc QSettingsdisconnectNotify*(self: gen_qsettings_types.QSettings, signal: gen
 proc fcQSettings_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSettingsVTable](fcQSettings_vdata(self)[])
   let self = QSettings(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
 type VirtualQSettings* {.inheritable.} = ref object of QSettings
@@ -485,7 +487,7 @@ method event*(self: VirtualQSettings, event: gen_qcoreevent_types.QEvent): bool 
   QSettingsevent(self[], event)
 proc fcQSettings_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQSettings](fcQSettings_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
@@ -493,8 +495,8 @@ method eventFilter*(self: VirtualQSettings, watched: gen_qobject_types.QObject, 
   QSettingseventFilter(self[], watched, event)
 proc fcQSettings_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQSettings](fcQSettings_vdata(self)[])
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
@@ -502,39 +504,39 @@ method timerEvent*(self: VirtualQSettings, event: gen_qcoreevent_types.QTimerEve
   QSettingstimerEvent(self[], event)
 proc fcQSettings_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSettings](fcQSettings_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
 method childEvent*(self: VirtualQSettings, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
   QSettingschildEvent(self[], event)
 proc fcQSettings_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSettings](fcQSettings_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
 method customEvent*(self: VirtualQSettings, event: gen_qcoreevent_types.QEvent): void {.base.} =
   QSettingscustomEvent(self[], event)
 proc fcQSettings_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSettings](fcQSettings_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
 method connectNotify*(self: VirtualQSettings, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
   QSettingsconnectNotify(self[], signal)
 proc fcQSettings_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSettings](fcQSettings_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
 method disconnectNotify*(self: VirtualQSettings, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
   QSettingsdisconnectNotify(self[], signal)
 proc fcQSettings_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSettings](fcQSettings_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
 
 proc sender*(self: gen_qsettings_types.QSettings): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQSettings_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQSettings_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qsettings_types.QSettings): cint =
   fcQSettings_protectedbase_senderSignalIndex(self.h)
@@ -573,7 +575,7 @@ proc create*(T: type gen_qsettings_types.QSettings,
     vtbl[].vtbl.connectNotify = fcQSettings_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQSettings_vtable_callback_disconnectNotify
-  let tmp = gen_qsettings_types.QSettings(h: fcQSettings_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(organization) > 0: addr organization[0] else: nil, len: csize_t(len(organization)))))
+  let tmp = gen_qsettings_types.QSettings(h: fcQSettings_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(organization) > 0: addr organization[0] else: nil, len: csize_t(len(organization)))), owned: true)
   fcQSettings_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qsettings_types.QSettings,
@@ -604,7 +606,7 @@ proc create*(T: type gen_qsettings_types.QSettings,
     vtbl[].vtbl.connectNotify = fcQSettings_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQSettings_vtable_callback_disconnectNotify
-  let tmp = gen_qsettings_types.QSettings(h: fcQSettings_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(scope), struct_miqt_string(data: if len(organization) > 0: addr organization[0] else: nil, len: csize_t(len(organization)))))
+  let tmp = gen_qsettings_types.QSettings(h: fcQSettings_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(scope), struct_miqt_string(data: if len(organization) > 0: addr organization[0] else: nil, len: csize_t(len(organization)))), owned: true)
   fcQSettings_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qsettings_types.QSettings,
@@ -635,7 +637,7 @@ proc create*(T: type gen_qsettings_types.QSettings,
     vtbl[].vtbl.connectNotify = fcQSettings_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQSettings_vtable_callback_disconnectNotify
-  let tmp = gen_qsettings_types.QSettings(h: fcQSettings_new3(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(format), cint(scope), struct_miqt_string(data: if len(organization) > 0: addr organization[0] else: nil, len: csize_t(len(organization)))))
+  let tmp = gen_qsettings_types.QSettings(h: fcQSettings_new3(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(format), cint(scope), struct_miqt_string(data: if len(organization) > 0: addr organization[0] else: nil, len: csize_t(len(organization)))), owned: true)
   fcQSettings_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qsettings_types.QSettings,
@@ -666,7 +668,7 @@ proc create*(T: type gen_qsettings_types.QSettings,
     vtbl[].vtbl.connectNotify = fcQSettings_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQSettings_vtable_callback_disconnectNotify
-  let tmp = gen_qsettings_types.QSettings(h: fcQSettings_new4(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))), cint(format)))
+  let tmp = gen_qsettings_types.QSettings(h: fcQSettings_new4(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))), cint(format)), owned: true)
   fcQSettings_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qsettings_types.QSettings,
@@ -696,7 +698,7 @@ proc create*(T: type gen_qsettings_types.QSettings,
     vtbl[].vtbl.connectNotify = fcQSettings_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQSettings_vtable_callback_disconnectNotify
-  let tmp = gen_qsettings_types.QSettings(h: fcQSettings_new5(addr(vtbl[].vtbl), csize_t(sizeof(pointer))))
+  let tmp = gen_qsettings_types.QSettings(h: fcQSettings_new5(addr(vtbl[].vtbl), csize_t(sizeof(pointer))), owned: true)
   fcQSettings_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qsettings_types.QSettings,
@@ -727,7 +729,7 @@ proc create*(T: type gen_qsettings_types.QSettings,
     vtbl[].vtbl.connectNotify = fcQSettings_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQSettings_vtable_callback_disconnectNotify
-  let tmp = gen_qsettings_types.QSettings(h: fcQSettings_new6(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(scope)))
+  let tmp = gen_qsettings_types.QSettings(h: fcQSettings_new6(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(scope)), owned: true)
   fcQSettings_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qsettings_types.QSettings,
@@ -758,7 +760,7 @@ proc create*(T: type gen_qsettings_types.QSettings,
     vtbl[].vtbl.connectNotify = fcQSettings_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQSettings_vtable_callback_disconnectNotify
-  let tmp = gen_qsettings_types.QSettings(h: fcQSettings_new7(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(organization) > 0: addr organization[0] else: nil, len: csize_t(len(organization))), struct_miqt_string(data: if len(application) > 0: addr application[0] else: nil, len: csize_t(len(application)))))
+  let tmp = gen_qsettings_types.QSettings(h: fcQSettings_new7(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(organization) > 0: addr organization[0] else: nil, len: csize_t(len(organization))), struct_miqt_string(data: if len(application) > 0: addr application[0] else: nil, len: csize_t(len(application)))), owned: true)
   fcQSettings_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qsettings_types.QSettings,
@@ -789,7 +791,7 @@ proc create*(T: type gen_qsettings_types.QSettings,
     vtbl[].vtbl.connectNotify = fcQSettings_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQSettings_vtable_callback_disconnectNotify
-  let tmp = gen_qsettings_types.QSettings(h: fcQSettings_new8(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(organization) > 0: addr organization[0] else: nil, len: csize_t(len(organization))), struct_miqt_string(data: if len(application) > 0: addr application[0] else: nil, len: csize_t(len(application))), parent.h))
+  let tmp = gen_qsettings_types.QSettings(h: fcQSettings_new8(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(organization) > 0: addr organization[0] else: nil, len: csize_t(len(organization))), struct_miqt_string(data: if len(application) > 0: addr application[0] else: nil, len: csize_t(len(application))), parent.h), owned: true)
   fcQSettings_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qsettings_types.QSettings,
@@ -820,7 +822,7 @@ proc create*(T: type gen_qsettings_types.QSettings,
     vtbl[].vtbl.connectNotify = fcQSettings_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQSettings_vtable_callback_disconnectNotify
-  let tmp = gen_qsettings_types.QSettings(h: fcQSettings_new9(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(scope), struct_miqt_string(data: if len(organization) > 0: addr organization[0] else: nil, len: csize_t(len(organization))), struct_miqt_string(data: if len(application) > 0: addr application[0] else: nil, len: csize_t(len(application)))))
+  let tmp = gen_qsettings_types.QSettings(h: fcQSettings_new9(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(scope), struct_miqt_string(data: if len(organization) > 0: addr organization[0] else: nil, len: csize_t(len(organization))), struct_miqt_string(data: if len(application) > 0: addr application[0] else: nil, len: csize_t(len(application)))), owned: true)
   fcQSettings_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qsettings_types.QSettings,
@@ -851,7 +853,7 @@ proc create*(T: type gen_qsettings_types.QSettings,
     vtbl[].vtbl.connectNotify = fcQSettings_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQSettings_vtable_callback_disconnectNotify
-  let tmp = gen_qsettings_types.QSettings(h: fcQSettings_new10(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(scope), struct_miqt_string(data: if len(organization) > 0: addr organization[0] else: nil, len: csize_t(len(organization))), struct_miqt_string(data: if len(application) > 0: addr application[0] else: nil, len: csize_t(len(application))), parent.h))
+  let tmp = gen_qsettings_types.QSettings(h: fcQSettings_new10(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(scope), struct_miqt_string(data: if len(organization) > 0: addr organization[0] else: nil, len: csize_t(len(organization))), struct_miqt_string(data: if len(application) > 0: addr application[0] else: nil, len: csize_t(len(application))), parent.h), owned: true)
   fcQSettings_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qsettings_types.QSettings,
@@ -882,7 +884,7 @@ proc create*(T: type gen_qsettings_types.QSettings,
     vtbl[].vtbl.connectNotify = fcQSettings_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQSettings_vtable_callback_disconnectNotify
-  let tmp = gen_qsettings_types.QSettings(h: fcQSettings_new11(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(format), cint(scope), struct_miqt_string(data: if len(organization) > 0: addr organization[0] else: nil, len: csize_t(len(organization))), struct_miqt_string(data: if len(application) > 0: addr application[0] else: nil, len: csize_t(len(application)))))
+  let tmp = gen_qsettings_types.QSettings(h: fcQSettings_new11(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(format), cint(scope), struct_miqt_string(data: if len(organization) > 0: addr organization[0] else: nil, len: csize_t(len(organization))), struct_miqt_string(data: if len(application) > 0: addr application[0] else: nil, len: csize_t(len(application)))), owned: true)
   fcQSettings_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qsettings_types.QSettings,
@@ -913,7 +915,7 @@ proc create*(T: type gen_qsettings_types.QSettings,
     vtbl[].vtbl.connectNotify = fcQSettings_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQSettings_vtable_callback_disconnectNotify
-  let tmp = gen_qsettings_types.QSettings(h: fcQSettings_new12(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(format), cint(scope), struct_miqt_string(data: if len(organization) > 0: addr organization[0] else: nil, len: csize_t(len(organization))), struct_miqt_string(data: if len(application) > 0: addr application[0] else: nil, len: csize_t(len(application))), parent.h))
+  let tmp = gen_qsettings_types.QSettings(h: fcQSettings_new12(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(format), cint(scope), struct_miqt_string(data: if len(organization) > 0: addr organization[0] else: nil, len: csize_t(len(organization))), struct_miqt_string(data: if len(application) > 0: addr application[0] else: nil, len: csize_t(len(application))), parent.h), owned: true)
   fcQSettings_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qsettings_types.QSettings,
@@ -944,7 +946,7 @@ proc create*(T: type gen_qsettings_types.QSettings,
     vtbl[].vtbl.connectNotify = fcQSettings_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQSettings_vtable_callback_disconnectNotify
-  let tmp = gen_qsettings_types.QSettings(h: fcQSettings_new13(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))), cint(format), parent.h))
+  let tmp = gen_qsettings_types.QSettings(h: fcQSettings_new13(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))), cint(format), parent.h), owned: true)
   fcQSettings_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qsettings_types.QSettings,
@@ -975,7 +977,7 @@ proc create*(T: type gen_qsettings_types.QSettings,
     vtbl[].vtbl.connectNotify = fcQSettings_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQSettings_vtable_callback_disconnectNotify
-  let tmp = gen_qsettings_types.QSettings(h: fcQSettings_new14(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h))
+  let tmp = gen_qsettings_types.QSettings(h: fcQSettings_new14(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h), owned: true)
   fcQSettings_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qsettings_types.QSettings,
@@ -1006,13 +1008,14 @@ proc create*(T: type gen_qsettings_types.QSettings,
     vtbl[].vtbl.connectNotify = fcQSettings_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQSettings_vtable_callback_disconnectNotify
-  let tmp = gen_qsettings_types.QSettings(h: fcQSettings_new15(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(scope), parent.h))
+  let tmp = gen_qsettings_types.QSettings(h: fcQSettings_new15(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(scope), parent.h), owned: true)
   fcQSettings_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQSettings_mvtbl = cQSettingsVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQSettings()[])](self.fcQSettings_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   metaObject: fcQSettings_method_callback_metaObject,
   metacast: fcQSettings_method_callback_metacast,
@@ -1131,5 +1134,3 @@ proc create*(T: type gen_qsettings_types.QSettings,
 
 proc staticMetaObject*(_: type gen_qsettings_types.QSettings): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQSettings_staticMetaObject())
-proc delete*(self: gen_qsettings_types.QSettings) =
-  fcQSettings_delete(self.h)

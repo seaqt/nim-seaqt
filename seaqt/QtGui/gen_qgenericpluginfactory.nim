@@ -32,9 +32,6 @@ func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
     else:
       copyMem(addr result[0], v.data, len)
 
-const cflags = gorge("pkg-config --cflags Qt6Gui")  & " -fPIC"
-{.compile("gen_qgenericpluginfactory.cpp", cflags).}
-
 
 import ./gen_qgenericpluginfactory_types
 export gen_qgenericpluginfactory_types
@@ -48,7 +45,6 @@ type cQGenericPluginFactory*{.exportc: "QGenericPluginFactory", incompleteStruct
 
 proc fcQGenericPluginFactory_keys(): struct_miqt_array {.importc: "QGenericPluginFactory_keys".}
 proc fcQGenericPluginFactory_create(param1: struct_miqt_string, param2: struct_miqt_string): pointer {.importc: "QGenericPluginFactory_create".}
-proc fcQGenericPluginFactory_delete(self: pointer) {.importc: "QGenericPluginFactory_delete".}
 
 proc keys*(_: type gen_qgenericpluginfactory_types.QGenericPluginFactory): seq[string] =
   var v_ma = fcQGenericPluginFactory_keys()
@@ -63,7 +59,5 @@ proc keys*(_: type gen_qgenericpluginfactory_types.QGenericPluginFactory): seq[s
   vx_ret
 
 proc create*(_: type gen_qgenericpluginfactory_types.QGenericPluginFactory, param1: string, param2: string): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQGenericPluginFactory_create(struct_miqt_string(data: if len(param1) > 0: addr param1[0] else: nil, len: csize_t(len(param1))), struct_miqt_string(data: if len(param2) > 0: addr param2[0] else: nil, len: csize_t(len(param2)))))
+  gen_qobject_types.QObject(h: fcQGenericPluginFactory_create(struct_miqt_string(data: if len(param1) > 0: addr param1[0] else: nil, len: csize_t(len(param1))), struct_miqt_string(data: if len(param2) > 0: addr param2[0] else: nil, len: csize_t(len(param2)))), owned: false)
 
-proc delete*(self: gen_qgenericpluginfactory_types.QGenericPluginFactory) =
-  fcQGenericPluginFactory_delete(self.h)

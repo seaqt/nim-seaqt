@@ -32,9 +32,6 @@ func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
     else:
       copyMem(addr result[0], v.data, len)
 
-const cflags = gorge("pkg-config --cflags Qt6Gui")  & " -fPIC"
-{.compile("gen_qtexttable.cpp", cflags).}
-
 
 import ./gen_qtexttable_types
 export gen_qtexttable_types
@@ -80,7 +77,6 @@ proc fcQTextTableCell_endX(self: pointer): pointer {.importc: "QTextTableCell_en
 proc fcQTextTableCell_tableCellFormatIndex(self: pointer): cint {.importc: "QTextTableCell_tableCellFormatIndex".}
 proc fcQTextTableCell_new(): ptr cQTextTableCell {.importc: "QTextTableCell_new".}
 proc fcQTextTableCell_new2(o: pointer): ptr cQTextTableCell {.importc: "QTextTableCell_new2".}
-proc fcQTextTableCell_delete(self: pointer) {.importc: "QTextTableCell_delete".}
 proc fcQTextTable_metaObject(self: pointer): pointer {.importc: "QTextTable_metaObject".}
 proc fcQTextTable_metacast(self: pointer, param1: cstring): pointer {.importc: "QTextTable_metacast".}
 proc fcQTextTable_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QTextTable_metacall".}
@@ -136,7 +132,6 @@ proc fcQTextTable_protectedbase_receivers(self: pointer, signal: cstring): cint 
 proc fcQTextTable_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QTextTable_protectedbase_isSignalConnected".}
 proc fcQTextTable_new(vtbl: pointer, vdata: csize_t, doc: pointer): ptr cQTextTable {.importc: "QTextTable_new".}
 proc fcQTextTable_staticMetaObject(): pointer {.importc: "QTextTable_staticMetaObject".}
-proc fcQTextTable_delete(self: pointer) {.importc: "QTextTable_delete".}
 
 proc operatorAssign*(self: gen_qtexttable_types.QTextTableCell, o: gen_qtexttable_types.QTextTableCell): void =
   fcQTextTableCell_operatorAssign(self.h, o.h)
@@ -145,7 +140,7 @@ proc setFormat*(self: gen_qtexttable_types.QTextTableCell, format: gen_qtextform
   fcQTextTableCell_setFormat(self.h, format.h)
 
 proc format*(self: gen_qtexttable_types.QTextTableCell): gen_qtextformat_types.QTextCharFormat =
-  gen_qtextformat_types.QTextCharFormat(h: fcQTextTableCell_format(self.h))
+  gen_qtextformat_types.QTextCharFormat(h: fcQTextTableCell_format(self.h), owned: true)
 
 proc row*(self: gen_qtexttable_types.QTextTableCell): cint =
   fcQTextTableCell_row(self.h)
@@ -163,10 +158,10 @@ proc isValid*(self: gen_qtexttable_types.QTextTableCell): bool =
   fcQTextTableCell_isValid(self.h)
 
 proc firstCursorPosition*(self: gen_qtexttable_types.QTextTableCell): gen_qtextcursor_types.QTextCursor =
-  gen_qtextcursor_types.QTextCursor(h: fcQTextTableCell_firstCursorPosition(self.h))
+  gen_qtextcursor_types.QTextCursor(h: fcQTextTableCell_firstCursorPosition(self.h), owned: true)
 
 proc lastCursorPosition*(self: gen_qtexttable_types.QTextTableCell): gen_qtextcursor_types.QTextCursor =
-  gen_qtextcursor_types.QTextCursor(h: fcQTextTableCell_lastCursorPosition(self.h))
+  gen_qtextcursor_types.QTextCursor(h: fcQTextTableCell_lastCursorPosition(self.h), owned: true)
 
 proc firstPosition*(self: gen_qtexttable_types.QTextTableCell): cint =
   fcQTextTableCell_firstPosition(self.h)
@@ -181,25 +176,23 @@ proc operatorNotEqual*(self: gen_qtexttable_types.QTextTableCell, other: gen_qte
   fcQTextTableCell_operatorNotEqual(self.h, other.h)
 
 proc begin*(self: gen_qtexttable_types.QTextTableCell): gen_qtextobject_types.QTextFrameiterator =
-  gen_qtextobject_types.QTextFrameiterator(h: fcQTextTableCell_begin(self.h))
+  gen_qtextobject_types.QTextFrameiterator(h: fcQTextTableCell_begin(self.h), owned: true)
 
 proc endX*(self: gen_qtexttable_types.QTextTableCell): gen_qtextobject_types.QTextFrameiterator =
-  gen_qtextobject_types.QTextFrameiterator(h: fcQTextTableCell_endX(self.h))
+  gen_qtextobject_types.QTextFrameiterator(h: fcQTextTableCell_endX(self.h), owned: true)
 
 proc tableCellFormatIndex*(self: gen_qtexttable_types.QTextTableCell): cint =
   fcQTextTableCell_tableCellFormatIndex(self.h)
 
 proc create*(T: type gen_qtexttable_types.QTextTableCell): gen_qtexttable_types.QTextTableCell =
-  let tmp = gen_qtexttable_types.QTextTableCell(h: fcQTextTableCell_new())
+  let tmp = gen_qtexttable_types.QTextTableCell(h: fcQTextTableCell_new(), owned: true)
   tmp
 proc create*(T: type gen_qtexttable_types.QTextTableCell,
     o: gen_qtexttable_types.QTextTableCell): gen_qtexttable_types.QTextTableCell =
-  let tmp = gen_qtexttable_types.QTextTableCell(h: fcQTextTableCell_new2(o.h))
+  let tmp = gen_qtexttable_types.QTextTableCell(h: fcQTextTableCell_new2(o.h), owned: true)
   tmp
-proc delete*(self: gen_qtexttable_types.QTextTableCell) =
-  fcQTextTableCell_delete(self.h)
 proc metaObject*(self: gen_qtexttable_types.QTextTable): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQTextTable_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQTextTable_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qtexttable_types.QTextTable, param1: cstring): pointer =
   fcQTextTable_metacast(self.h, param1)
@@ -250,25 +243,25 @@ proc columns*(self: gen_qtexttable_types.QTextTable): cint =
   fcQTextTable_columns(self.h)
 
 proc cellAt*(self: gen_qtexttable_types.QTextTable, row: cint, col: cint): gen_qtexttable_types.QTextTableCell =
-  gen_qtexttable_types.QTextTableCell(h: fcQTextTable_cellAt(self.h, row, col))
+  gen_qtexttable_types.QTextTableCell(h: fcQTextTable_cellAt(self.h, row, col), owned: true)
 
 proc cellAt*(self: gen_qtexttable_types.QTextTable, position: cint): gen_qtexttable_types.QTextTableCell =
-  gen_qtexttable_types.QTextTableCell(h: fcQTextTable_cellAtWithPosition(self.h, position))
+  gen_qtexttable_types.QTextTableCell(h: fcQTextTable_cellAtWithPosition(self.h, position), owned: true)
 
 proc cellAt*(self: gen_qtexttable_types.QTextTable, c: gen_qtextcursor_types.QTextCursor): gen_qtexttable_types.QTextTableCell =
-  gen_qtexttable_types.QTextTableCell(h: fcQTextTable_cellAtWithQTextCursor(self.h, c.h))
+  gen_qtexttable_types.QTextTableCell(h: fcQTextTable_cellAtWithQTextCursor(self.h, c.h), owned: true)
 
 proc rowStart*(self: gen_qtexttable_types.QTextTable, c: gen_qtextcursor_types.QTextCursor): gen_qtextcursor_types.QTextCursor =
-  gen_qtextcursor_types.QTextCursor(h: fcQTextTable_rowStart(self.h, c.h))
+  gen_qtextcursor_types.QTextCursor(h: fcQTextTable_rowStart(self.h, c.h), owned: true)
 
 proc rowEnd*(self: gen_qtexttable_types.QTextTable, c: gen_qtextcursor_types.QTextCursor): gen_qtextcursor_types.QTextCursor =
-  gen_qtextcursor_types.QTextCursor(h: fcQTextTable_rowEnd(self.h, c.h))
+  gen_qtextcursor_types.QTextCursor(h: fcQTextTable_rowEnd(self.h, c.h), owned: true)
 
 proc setFormat*(self: gen_qtexttable_types.QTextTable, format: gen_qtextformat_types.QTextTableFormat): void =
   fcQTextTable_setFormat(self.h, format.h)
 
 proc format*(self: gen_qtexttable_types.QTextTable): gen_qtextformat_types.QTextTableFormat =
-  gen_qtextformat_types.QTextTableFormat(h: fcQTextTable_format(self.h))
+  gen_qtextformat_types.QTextTableFormat(h: fcQTextTable_format(self.h), owned: true)
 
 proc tr*(_: type gen_qtexttable_types.QTextTable, s: cstring, c: cstring): string =
   let v_ms = fcQTextTable_tr2(s, c)
@@ -292,7 +285,7 @@ type QTextTablechildEventProc* = proc(self: QTextTable, event: gen_qcoreevent_ty
 type QTextTablecustomEventProc* = proc(self: QTextTable, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QTextTableconnectNotifyProc* = proc(self: QTextTable, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QTextTabledisconnectNotifyProc* = proc(self: QTextTable, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
-type QTextTableVTable* = object
+type QTextTableVTable* {.inheritable, pure.} = object
   vtbl: cQTextTableVTable
   metaObject*: QTextTablemetaObjectProc
   metacast*: QTextTablemetacastProc
@@ -305,13 +298,16 @@ type QTextTableVTable* = object
   connectNotify*: QTextTableconnectNotifyProc
   disconnectNotify*: QTextTabledisconnectNotifyProc
 proc QTextTablemetaObject*(self: gen_qtexttable_types.QTextTable): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQTextTable_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQTextTable_virtualbase_metaObject(self.h), owned: false)
 
 proc fcQTextTable_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QTextTableVTable](fcQTextTable_vdata(self)[])
   let self = QTextTable(h: self)
   var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QTextTablemetacast*(self: gen_qtexttable_types.QTextTable, param1: cstring): pointer =
   fcQTextTable_virtualbase_metacast(self.h, param1)
@@ -341,7 +337,7 @@ proc QTextTableevent*(self: gen_qtexttable_types.QTextTable, event: gen_qcoreeve
 proc fcQTextTable_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QTextTableVTable](fcQTextTable_vdata(self)[])
   let self = QTextTable(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
@@ -351,8 +347,8 @@ proc QTextTableeventFilter*(self: gen_qtexttable_types.QTextTable, watched: gen_
 proc fcQTextTable_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QTextTableVTable](fcQTextTable_vdata(self)[])
   let self = QTextTable(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
@@ -362,7 +358,7 @@ proc QTextTabletimerEvent*(self: gen_qtexttable_types.QTextTable, event: gen_qco
 proc fcQTextTable_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTextTableVTable](fcQTextTable_vdata(self)[])
   let self = QTextTable(h: self)
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
 proc QTextTablechildEvent*(self: gen_qtexttable_types.QTextTable, event: gen_qcoreevent_types.QChildEvent): void =
@@ -371,7 +367,7 @@ proc QTextTablechildEvent*(self: gen_qtexttable_types.QTextTable, event: gen_qco
 proc fcQTextTable_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTextTableVTable](fcQTextTable_vdata(self)[])
   let self = QTextTable(h: self)
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
 proc QTextTablecustomEvent*(self: gen_qtexttable_types.QTextTable, event: gen_qcoreevent_types.QEvent): void =
@@ -380,7 +376,7 @@ proc QTextTablecustomEvent*(self: gen_qtexttable_types.QTextTable, event: gen_qc
 proc fcQTextTable_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTextTableVTable](fcQTextTable_vdata(self)[])
   let self = QTextTable(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
 proc QTextTableconnectNotify*(self: gen_qtexttable_types.QTextTable, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -389,7 +385,7 @@ proc QTextTableconnectNotify*(self: gen_qtexttable_types.QTextTable, signal: gen
 proc fcQTextTable_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTextTableVTable](fcQTextTable_vdata(self)[])
   let self = QTextTable(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
 proc QTextTabledisconnectNotify*(self: gen_qtexttable_types.QTextTable, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -398,7 +394,7 @@ proc QTextTabledisconnectNotify*(self: gen_qtexttable_types.QTextTable, signal: 
 proc fcQTextTable_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTextTableVTable](fcQTextTable_vdata(self)[])
   let self = QTextTable(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
 type VirtualQTextTable* {.inheritable.} = ref object of QTextTable
@@ -432,7 +428,7 @@ method event*(self: VirtualQTextTable, event: gen_qcoreevent_types.QEvent): bool
   QTextTableevent(self[], event)
 proc fcQTextTable_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQTextTable](fcQTextTable_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
@@ -440,8 +436,8 @@ method eventFilter*(self: VirtualQTextTable, watched: gen_qobject_types.QObject,
   QTextTableeventFilter(self[], watched, event)
 proc fcQTextTable_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQTextTable](fcQTextTable_vdata(self)[])
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
@@ -449,39 +445,39 @@ method timerEvent*(self: VirtualQTextTable, event: gen_qcoreevent_types.QTimerEv
   QTextTabletimerEvent(self[], event)
 proc fcQTextTable_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTextTable](fcQTextTable_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
 method childEvent*(self: VirtualQTextTable, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
   QTextTablechildEvent(self[], event)
 proc fcQTextTable_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTextTable](fcQTextTable_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
 method customEvent*(self: VirtualQTextTable, event: gen_qcoreevent_types.QEvent): void {.base.} =
   QTextTablecustomEvent(self[], event)
 proc fcQTextTable_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTextTable](fcQTextTable_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
 method connectNotify*(self: VirtualQTextTable, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
   QTextTableconnectNotify(self[], signal)
 proc fcQTextTable_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTextTable](fcQTextTable_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
 method disconnectNotify*(self: VirtualQTextTable, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
   QTextTabledisconnectNotify(self[], signal)
 proc fcQTextTable_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTextTable](fcQTextTable_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
 
 proc sender*(self: gen_qtexttable_types.QTextTable): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQTextTable_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQTextTable_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qtexttable_types.QTextTable): cint =
   fcQTextTable_protectedbase_senderSignalIndex(self.h)
@@ -520,13 +516,14 @@ proc create*(T: type gen_qtexttable_types.QTextTable,
     vtbl[].vtbl.connectNotify = fcQTextTable_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQTextTable_vtable_callback_disconnectNotify
-  let tmp = gen_qtexttable_types.QTextTable(h: fcQTextTable_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), doc.h))
+  let tmp = gen_qtexttable_types.QTextTable(h: fcQTextTable_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), doc.h), owned: true)
   fcQTextTable_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQTextTable_mvtbl = cQTextTableVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQTextTable()[])](self.fcQTextTable_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   metaObject: fcQTextTable_method_callback_metaObject,
   metacast: fcQTextTable_method_callback_metacast,
@@ -548,5 +545,3 @@ proc create*(T: type gen_qtexttable_types.QTextTable,
 
 proc staticMetaObject*(_: type gen_qtexttable_types.QTextTable): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQTextTable_staticMetaObject())
-proc delete*(self: gen_qtexttable_types.QTextTable) =
-  fcQTextTable_delete(self.h)

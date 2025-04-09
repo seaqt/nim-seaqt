@@ -32,9 +32,6 @@ func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
     else:
       copyMem(addr result[0], v.data, len)
 
-const cflags = gorge("pkg-config --cflags Qt6Core")  & " -fPIC"
-{.compile("gen_qeasingcurve.cpp", cflags).}
-
 
 type QEasingCurveTypeEnum* = distinct cint
 template Linear*(_: type QEasingCurveTypeEnum): untyped = 0
@@ -120,7 +117,6 @@ proc fcQEasingCurve_new(): ptr cQEasingCurve {.importc: "QEasingCurve_new".}
 proc fcQEasingCurve_new2(other: pointer): ptr cQEasingCurve {.importc: "QEasingCurve_new2".}
 proc fcQEasingCurve_new3(typeVal: cint): ptr cQEasingCurve {.importc: "QEasingCurve_new3".}
 proc fcQEasingCurve_staticMetaObject(): pointer {.importc: "QEasingCurve_staticMetaObject".}
-proc fcQEasingCurve_delete(self: pointer) {.importc: "QEasingCurve_delete".}
 
 proc operatorAssign*(self: gen_qeasingcurve_types.QEasingCurve, other: gen_qeasingcurve_types.QEasingCurve): void =
   fcQEasingCurve_operatorAssign(self.h, other.h)
@@ -163,7 +159,7 @@ proc toCubicSpline*(self: gen_qeasingcurve_types.QEasingCurve): seq[gen_qpoint_t
   var vx_ret = newSeq[gen_qpoint_types.QPointF](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qpoint_types.QPointF(h: v_outCast[i])
+    vx_ret[i] = gen_qpoint_types.QPointF(h: v_outCast[i], owned: true)
   c_free(v_ma.data)
   vx_ret
 
@@ -177,17 +173,15 @@ proc valueForProgress*(self: gen_qeasingcurve_types.QEasingCurve, progress: floa
   fcQEasingCurve_valueForProgress(self.h, progress)
 
 proc create*(T: type gen_qeasingcurve_types.QEasingCurve): gen_qeasingcurve_types.QEasingCurve =
-  let tmp = gen_qeasingcurve_types.QEasingCurve(h: fcQEasingCurve_new())
+  let tmp = gen_qeasingcurve_types.QEasingCurve(h: fcQEasingCurve_new(), owned: true)
   tmp
 proc create*(T: type gen_qeasingcurve_types.QEasingCurve,
     other: gen_qeasingcurve_types.QEasingCurve): gen_qeasingcurve_types.QEasingCurve =
-  let tmp = gen_qeasingcurve_types.QEasingCurve(h: fcQEasingCurve_new2(other.h))
+  let tmp = gen_qeasingcurve_types.QEasingCurve(h: fcQEasingCurve_new2(other.h), owned: true)
   tmp
 proc create*(T: type gen_qeasingcurve_types.QEasingCurve,
     typeVal: cint): gen_qeasingcurve_types.QEasingCurve =
-  let tmp = gen_qeasingcurve_types.QEasingCurve(h: fcQEasingCurve_new3(cint(typeVal)))
+  let tmp = gen_qeasingcurve_types.QEasingCurve(h: fcQEasingCurve_new3(cint(typeVal)), owned: true)
   tmp
 proc staticMetaObject*(_: type gen_qeasingcurve_types.QEasingCurve): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQEasingCurve_staticMetaObject())
-proc delete*(self: gen_qeasingcurve_types.QEasingCurve) =
-  fcQEasingCurve_delete(self.h)

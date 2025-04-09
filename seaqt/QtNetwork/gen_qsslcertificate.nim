@@ -32,9 +32,6 @@ func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
     else:
       copyMem(addr result[0], v.data, len)
 
-const cflags = gorge("pkg-config --cflags Qt6Network")  & " -fPIC"
-{.compile("gen_qsslcertificate.cpp", cflags).}
-
 
 type QSslCertificateSubjectInfoEnum* = distinct cint
 template Organization*(_: type QSslCertificateSubjectInfoEnum): untyped = 0
@@ -118,7 +115,6 @@ proc fcQSslCertificate_new3(other: pointer): ptr cQSslCertificate {.importc: "QS
 proc fcQSslCertificate_new4(device: pointer, format: cint): ptr cQSslCertificate {.importc: "QSslCertificate_new4".}
 proc fcQSslCertificate_new5(data: struct_miqt_string): ptr cQSslCertificate {.importc: "QSslCertificate_new5".}
 proc fcQSslCertificate_new6(data: struct_miqt_string, format: cint): ptr cQSslCertificate {.importc: "QSslCertificate_new6".}
-proc fcQSslCertificate_delete(self: pointer) {.importc: "QSslCertificate_delete".}
 
 proc operatorAssign*(self: gen_qsslcertificate_types.QSslCertificate, other: gen_qsslcertificate_types.QSslCertificate): void =
   fcQSslCertificate_operatorAssign(self.h, other.h)
@@ -247,20 +243,20 @@ proc issuerInfoAttributes*(self: gen_qsslcertificate_types.QSslCertificate): seq
   vx_ret
 
 proc effectiveDate*(self: gen_qsslcertificate_types.QSslCertificate): gen_qdatetime_types.QDateTime =
-  gen_qdatetime_types.QDateTime(h: fcQSslCertificate_effectiveDate(self.h))
+  gen_qdatetime_types.QDateTime(h: fcQSslCertificate_effectiveDate(self.h), owned: true)
 
 proc expiryDate*(self: gen_qsslcertificate_types.QSslCertificate): gen_qdatetime_types.QDateTime =
-  gen_qdatetime_types.QDateTime(h: fcQSslCertificate_expiryDate(self.h))
+  gen_qdatetime_types.QDateTime(h: fcQSslCertificate_expiryDate(self.h), owned: true)
 
 proc publicKey*(self: gen_qsslcertificate_types.QSslCertificate): gen_qsslkey_types.QSslKey =
-  gen_qsslkey_types.QSslKey(h: fcQSslCertificate_publicKey(self.h))
+  gen_qsslkey_types.QSslKey(h: fcQSslCertificate_publicKey(self.h), owned: true)
 
 proc extensions*(self: gen_qsslcertificate_types.QSslCertificate): seq[gen_qsslcertificateextension_types.QSslCertificateExtension] =
   var v_ma = fcQSslCertificate_extensions(self.h)
   var vx_ret = newSeq[gen_qsslcertificateextension_types.QSslCertificateExtension](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qsslcertificateextension_types.QSslCertificateExtension(h: v_outCast[i])
+    vx_ret[i] = gen_qsslcertificateextension_types.QSslCertificateExtension(h: v_outCast[i], owned: true)
   c_free(v_ma.data)
   vx_ret
 
@@ -287,7 +283,7 @@ proc fromPath*(_: type gen_qsslcertificate_types.QSslCertificate, path: string):
   var vx_ret = newSeq[gen_qsslcertificate_types.QSslCertificate](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qsslcertificate_types.QSslCertificate(h: v_outCast[i])
+    vx_ret[i] = gen_qsslcertificate_types.QSslCertificate(h: v_outCast[i], owned: true)
   c_free(v_ma.data)
   vx_ret
 
@@ -296,7 +292,7 @@ proc fromDevice*(_: type gen_qsslcertificate_types.QSslCertificate, device: gen_
   var vx_ret = newSeq[gen_qsslcertificate_types.QSslCertificate](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qsslcertificate_types.QSslCertificate(h: v_outCast[i])
+    vx_ret[i] = gen_qsslcertificate_types.QSslCertificate(h: v_outCast[i], owned: true)
   c_free(v_ma.data)
   vx_ret
 
@@ -305,7 +301,7 @@ proc fromData*(_: type gen_qsslcertificate_types.QSslCertificate, data: seq[byte
   var vx_ret = newSeq[gen_qsslcertificate_types.QSslCertificate](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qsslcertificate_types.QSslCertificate(h: v_outCast[i])
+    vx_ret[i] = gen_qsslcertificate_types.QSslCertificate(h: v_outCast[i], owned: true)
   c_free(v_ma.data)
   vx_ret
 
@@ -318,7 +314,7 @@ proc verify*(_: type gen_qsslcertificate_types.QSslCertificate, certificateChain
   var vx_ret = newSeq[gen_qsslerror_types.QSslError](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qsslerror_types.QSslError(h: v_outCast[i])
+    vx_ret[i] = gen_qsslerror_types.QSslError(h: v_outCast[i], owned: true)
   c_free(v_ma.data)
   vx_ret
 
@@ -339,7 +335,7 @@ proc fromPath*(_: type gen_qsslcertificate_types.QSslCertificate, path: string, 
   var vx_ret = newSeq[gen_qsslcertificate_types.QSslCertificate](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qsslcertificate_types.QSslCertificate(h: v_outCast[i])
+    vx_ret[i] = gen_qsslcertificate_types.QSslCertificate(h: v_outCast[i], owned: true)
   c_free(v_ma.data)
   vx_ret
 
@@ -348,7 +344,7 @@ proc fromPath*(_: type gen_qsslcertificate_types.QSslCertificate, path: string, 
   var vx_ret = newSeq[gen_qsslcertificate_types.QSslCertificate](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qsslcertificate_types.QSslCertificate(h: v_outCast[i])
+    vx_ret[i] = gen_qsslcertificate_types.QSslCertificate(h: v_outCast[i], owned: true)
   c_free(v_ma.data)
   vx_ret
 
@@ -357,7 +353,7 @@ proc fromDevice*(_: type gen_qsslcertificate_types.QSslCertificate, device: gen_
   var vx_ret = newSeq[gen_qsslcertificate_types.QSslCertificate](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qsslcertificate_types.QSslCertificate(h: v_outCast[i])
+    vx_ret[i] = gen_qsslcertificate_types.QSslCertificate(h: v_outCast[i], owned: true)
   c_free(v_ma.data)
   vx_ret
 
@@ -366,7 +362,7 @@ proc fromData*(_: type gen_qsslcertificate_types.QSslCertificate, data: seq[byte
   var vx_ret = newSeq[gen_qsslcertificate_types.QSslCertificate](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qsslcertificate_types.QSslCertificate(h: v_outCast[i])
+    vx_ret[i] = gen_qsslcertificate_types.QSslCertificate(h: v_outCast[i], owned: true)
   c_free(v_ma.data)
   vx_ret
 
@@ -379,7 +375,7 @@ proc verify*(_: type gen_qsslcertificate_types.QSslCertificate, certificateChain
   var vx_ret = newSeq[gen_qsslerror_types.QSslError](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qsslerror_types.QSslError(h: v_outCast[i])
+    vx_ret[i] = gen_qsslerror_types.QSslError(h: v_outCast[i], owned: true)
   c_free(v_ma.data)
   vx_ret
 
@@ -399,26 +395,24 @@ proc importPkcs12*(_: type gen_qsslcertificate_types.QSslCertificate, device: ge
 
 proc create*(T: type gen_qsslcertificate_types.QSslCertificate,
     device: gen_qiodevice_types.QIODevice): gen_qsslcertificate_types.QSslCertificate =
-  let tmp = gen_qsslcertificate_types.QSslCertificate(h: fcQSslCertificate_new(device.h))
+  let tmp = gen_qsslcertificate_types.QSslCertificate(h: fcQSslCertificate_new(device.h), owned: true)
   tmp
 proc create*(T: type gen_qsslcertificate_types.QSslCertificate): gen_qsslcertificate_types.QSslCertificate =
-  let tmp = gen_qsslcertificate_types.QSslCertificate(h: fcQSslCertificate_new2())
+  let tmp = gen_qsslcertificate_types.QSslCertificate(h: fcQSslCertificate_new2(), owned: true)
   tmp
 proc create*(T: type gen_qsslcertificate_types.QSslCertificate,
     other: gen_qsslcertificate_types.QSslCertificate): gen_qsslcertificate_types.QSslCertificate =
-  let tmp = gen_qsslcertificate_types.QSslCertificate(h: fcQSslCertificate_new3(other.h))
+  let tmp = gen_qsslcertificate_types.QSslCertificate(h: fcQSslCertificate_new3(other.h), owned: true)
   tmp
 proc create*(T: type gen_qsslcertificate_types.QSslCertificate,
     device: gen_qiodevice_types.QIODevice, format: cint): gen_qsslcertificate_types.QSslCertificate =
-  let tmp = gen_qsslcertificate_types.QSslCertificate(h: fcQSslCertificate_new4(device.h, cint(format)))
+  let tmp = gen_qsslcertificate_types.QSslCertificate(h: fcQSslCertificate_new4(device.h, cint(format)), owned: true)
   tmp
 proc create*(T: type gen_qsslcertificate_types.QSslCertificate,
     data: seq[byte]): gen_qsslcertificate_types.QSslCertificate =
-  let tmp = gen_qsslcertificate_types.QSslCertificate(h: fcQSslCertificate_new5(struct_miqt_string(data: if len(data) > 0: addr data[0] else: nil, len: csize_t(len(data)))))
+  let tmp = gen_qsslcertificate_types.QSslCertificate(h: fcQSslCertificate_new5(struct_miqt_string(data: if len(data) > 0: addr data[0] else: nil, len: csize_t(len(data)))), owned: true)
   tmp
 proc create*(T: type gen_qsslcertificate_types.QSslCertificate,
     data: seq[byte], format: cint): gen_qsslcertificate_types.QSslCertificate =
-  let tmp = gen_qsslcertificate_types.QSslCertificate(h: fcQSslCertificate_new6(struct_miqt_string(data: if len(data) > 0: addr data[0] else: nil, len: csize_t(len(data))), cint(format)))
+  let tmp = gen_qsslcertificate_types.QSslCertificate(h: fcQSslCertificate_new6(struct_miqt_string(data: if len(data) > 0: addr data[0] else: nil, len: csize_t(len(data))), cint(format)), owned: true)
   tmp
-proc delete*(self: gen_qsslcertificate_types.QSslCertificate) =
-  fcQSslCertificate_delete(self.h)

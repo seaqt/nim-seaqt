@@ -32,7 +32,7 @@ func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
     else:
       copyMem(addr result[0], v.data, len)
 
-const cflags = gorge("pkg-config --cflags Qt6WebEngineCore")  & " -fPIC"
+const cflags = gorge("pkg-config --cflags Qt6WebEngineCore") & " -fPIC"
 {.compile("gen_qwebengineclientcertificatestore.cpp", cflags).}
 
 
@@ -61,7 +61,7 @@ proc certificates*(self: gen_qwebengineclientcertificatestore_types.QWebEngineCl
   var vx_ret = newSeq[gen_qsslcertificate_types.QSslCertificate](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qsslcertificate_types.QSslCertificate(h: v_outCast[i])
+    vx_ret[i] = gen_qsslcertificate_types.QSslCertificate(h: v_outCast[i], owned: true)
   c_free(v_ma.data)
   vx_ret
 

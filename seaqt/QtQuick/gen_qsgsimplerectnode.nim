@@ -32,7 +32,7 @@ func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
     else:
       copyMem(addr result[0], v.data, len)
 
-const cflags = gorge("pkg-config --cflags Qt6Quick")  & " -fPIC"
+const cflags = gorge("pkg-config --cflags Qt6Quick") & " -fPIC"
 {.compile("gen_qsgsimplerectnode.cpp", cflags).}
 
 
@@ -65,7 +65,6 @@ proc fcQSGSimpleRectNode_virtualbase_isSubtreeBlocked(self: pointer): bool {.imp
 proc fcQSGSimpleRectNode_virtualbase_preprocess(self: pointer): void {.importc: "QSGSimpleRectNode_virtualbase_preprocess".}
 proc fcQSGSimpleRectNode_new(vtbl: pointer, vdata: csize_t, rect: pointer, color: pointer): ptr cQSGSimpleRectNode {.importc: "QSGSimpleRectNode_new".}
 proc fcQSGSimpleRectNode_new2(vtbl: pointer, vdata: csize_t): ptr cQSGSimpleRectNode {.importc: "QSGSimpleRectNode_new2".}
-proc fcQSGSimpleRectNode_delete(self: pointer) {.importc: "QSGSimpleRectNode_delete".}
 
 proc setRect*(self: gen_qsgsimplerectnode_types.QSGSimpleRectNode, rect: gen_qrect_types.QRectF): void =
   fcQSGSimpleRectNode_setRect(self.h, rect.h)
@@ -74,17 +73,17 @@ proc setRect*(self: gen_qsgsimplerectnode_types.QSGSimpleRectNode, x: float64, y
   fcQSGSimpleRectNode_setRect2(self.h, x, y, w, h)
 
 proc rect*(self: gen_qsgsimplerectnode_types.QSGSimpleRectNode): gen_qrect_types.QRectF =
-  gen_qrect_types.QRectF(h: fcQSGSimpleRectNode_rect(self.h))
+  gen_qrect_types.QRectF(h: fcQSGSimpleRectNode_rect(self.h), owned: true)
 
 proc setColor*(self: gen_qsgsimplerectnode_types.QSGSimpleRectNode, color: gen_qcolor_types.QColor): void =
   fcQSGSimpleRectNode_setColor(self.h, color.h)
 
 proc color*(self: gen_qsgsimplerectnode_types.QSGSimpleRectNode): gen_qcolor_types.QColor =
-  gen_qcolor_types.QColor(h: fcQSGSimpleRectNode_color(self.h))
+  gen_qcolor_types.QColor(h: fcQSGSimpleRectNode_color(self.h), owned: true)
 
 type QSGSimpleRectNodeisSubtreeBlockedProc* = proc(self: QSGSimpleRectNode): bool {.raises: [], gcsafe.}
 type QSGSimpleRectNodepreprocessProc* = proc(self: QSGSimpleRectNode): void {.raises: [], gcsafe.}
-type QSGSimpleRectNodeVTable* = object
+type QSGSimpleRectNodeVTable* {.inheritable, pure.} = object
   vtbl: cQSGSimpleRectNodeVTable
   isSubtreeBlocked*: QSGSimpleRectNodeisSubtreeBlockedProc
   preprocess*: QSGSimpleRectNodepreprocessProc
@@ -132,7 +131,7 @@ proc create*(T: type gen_qsgsimplerectnode_types.QSGSimpleRectNode,
     vtbl[].vtbl.isSubtreeBlocked = fcQSGSimpleRectNode_vtable_callback_isSubtreeBlocked
   if not isNil(vtbl[].preprocess):
     vtbl[].vtbl.preprocess = fcQSGSimpleRectNode_vtable_callback_preprocess
-  let tmp = gen_qsgsimplerectnode_types.QSGSimpleRectNode(h: fcQSGSimpleRectNode_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), rect.h, color.h))
+  let tmp = gen_qsgsimplerectnode_types.QSGSimpleRectNode(h: fcQSGSimpleRectNode_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), rect.h, color.h), owned: true)
   fcQSGSimpleRectNode_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qsgsimplerectnode_types.QSGSimpleRectNode,
@@ -146,13 +145,14 @@ proc create*(T: type gen_qsgsimplerectnode_types.QSGSimpleRectNode,
     vtbl[].vtbl.isSubtreeBlocked = fcQSGSimpleRectNode_vtable_callback_isSubtreeBlocked
   if not isNil(vtbl[].preprocess):
     vtbl[].vtbl.preprocess = fcQSGSimpleRectNode_vtable_callback_preprocess
-  let tmp = gen_qsgsimplerectnode_types.QSGSimpleRectNode(h: fcQSGSimpleRectNode_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer))))
+  let tmp = gen_qsgsimplerectnode_types.QSGSimpleRectNode(h: fcQSGSimpleRectNode_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer))), owned: true)
   fcQSGSimpleRectNode_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQSGSimpleRectNode_mvtbl = cQSGSimpleRectNodeVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQSGSimpleRectNode()[])](self.fcQSGSimpleRectNode_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   isSubtreeBlocked: fcQSGSimpleRectNode_method_callback_isSubtreeBlocked,
   preprocess: fcQSGSimpleRectNode_method_callback_preprocess,
@@ -170,5 +170,3 @@ proc create*(T: type gen_qsgsimplerectnode_types.QSGSimpleRectNode,
   inst[].h = fcQSGSimpleRectNode_new2(addr(cQSGSimpleRectNode_mvtbl), csize_t(sizeof(pointer)))
   fcQSGSimpleRectNode_vdata(inst[].h)[] = addr inst[]
 
-proc delete*(self: gen_qsgsimplerectnode_types.QSGSimpleRectNode) =
-  fcQSGSimpleRectNode_delete(self.h)

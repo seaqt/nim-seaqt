@@ -32,9 +32,6 @@ func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
     else:
       copyMem(addr result[0], v.data, len)
 
-const cflags = gorge("pkg-config --cflags Qt6Quick")  & " -fPIC"
-{.compile("gen_qsgnode.cpp", cflags).}
-
 
 type QSGNodeNodeTypeEnum* = distinct cint
 template BasicNodeType*(_: type QSGNodeNodeTypeEnum): untyped = 0
@@ -125,7 +122,6 @@ type cQSGNodeVTable {.pure.} = object
 proc fcQSGNode_virtualbase_isSubtreeBlocked(self: pointer): bool {.importc: "QSGNode_virtualbase_isSubtreeBlocked".}
 proc fcQSGNode_virtualbase_preprocess(self: pointer): void {.importc: "QSGNode_virtualbase_preprocess".}
 proc fcQSGNode_new(vtbl: pointer, vdata: csize_t): ptr cQSGNode {.importc: "QSGNode_new".}
-proc fcQSGNode_delete(self: pointer) {.importc: "QSGNode_delete".}
 proc fcQSGBasicGeometryNode_setGeometry(self: pointer, geometry: pointer): void {.importc: "QSGBasicGeometryNode_setGeometry".}
 proc fcQSGBasicGeometryNode_geometry(self: pointer): pointer {.importc: "QSGBasicGeometryNode_geometry".}
 proc fcQSGBasicGeometryNode_geometry2(self: pointer): pointer {.importc: "QSGBasicGeometryNode_geometry2".}
@@ -133,7 +129,6 @@ proc fcQSGBasicGeometryNode_matrix(self: pointer): pointer {.importc: "QSGBasicG
 proc fcQSGBasicGeometryNode_clipList(self: pointer): pointer {.importc: "QSGBasicGeometryNode_clipList".}
 proc fcQSGBasicGeometryNode_setRendererMatrix(self: pointer, m: pointer): void {.importc: "QSGBasicGeometryNode_setRendererMatrix".}
 proc fcQSGBasicGeometryNode_setRendererClipList(self: pointer, c: pointer): void {.importc: "QSGBasicGeometryNode_setRendererClipList".}
-proc fcQSGBasicGeometryNode_delete(self: pointer) {.importc: "QSGBasicGeometryNode_delete".}
 proc fcQSGGeometryNode_setMaterial(self: pointer, material: pointer): void {.importc: "QSGGeometryNode_setMaterial".}
 proc fcQSGGeometryNode_material(self: pointer): pointer {.importc: "QSGGeometryNode_material".}
 proc fcQSGGeometryNode_setOpaqueMaterial(self: pointer, material: pointer): void {.importc: "QSGGeometryNode_setOpaqueMaterial".}
@@ -152,7 +147,6 @@ type cQSGGeometryNodeVTable {.pure.} = object
 proc fcQSGGeometryNode_virtualbase_isSubtreeBlocked(self: pointer): bool {.importc: "QSGGeometryNode_virtualbase_isSubtreeBlocked".}
 proc fcQSGGeometryNode_virtualbase_preprocess(self: pointer): void {.importc: "QSGGeometryNode_virtualbase_preprocess".}
 proc fcQSGGeometryNode_new(vtbl: pointer, vdata: csize_t): ptr cQSGGeometryNode {.importc: "QSGGeometryNode_new".}
-proc fcQSGGeometryNode_delete(self: pointer) {.importc: "QSGGeometryNode_delete".}
 proc fcQSGClipNode_setIsRectangular(self: pointer, rectHint: bool): void {.importc: "QSGClipNode_setIsRectangular".}
 proc fcQSGClipNode_isRectangular(self: pointer): bool {.importc: "QSGClipNode_isRectangular".}
 proc fcQSGClipNode_setClipRect(self: pointer, clipRect: pointer): void {.importc: "QSGClipNode_setClipRect".}
@@ -166,7 +160,6 @@ type cQSGClipNodeVTable {.pure.} = object
 proc fcQSGClipNode_virtualbase_isSubtreeBlocked(self: pointer): bool {.importc: "QSGClipNode_virtualbase_isSubtreeBlocked".}
 proc fcQSGClipNode_virtualbase_preprocess(self: pointer): void {.importc: "QSGClipNode_virtualbase_preprocess".}
 proc fcQSGClipNode_new(vtbl: pointer, vdata: csize_t): ptr cQSGClipNode {.importc: "QSGClipNode_new".}
-proc fcQSGClipNode_delete(self: pointer) {.importc: "QSGClipNode_delete".}
 proc fcQSGTransformNode_setMatrix(self: pointer, matrix: pointer): void {.importc: "QSGTransformNode_setMatrix".}
 proc fcQSGTransformNode_matrix(self: pointer): pointer {.importc: "QSGTransformNode_matrix".}
 proc fcQSGTransformNode_setCombinedMatrix(self: pointer, matrix: pointer): void {.importc: "QSGTransformNode_setCombinedMatrix".}
@@ -180,7 +173,6 @@ type cQSGTransformNodeVTable {.pure.} = object
 proc fcQSGTransformNode_virtualbase_isSubtreeBlocked(self: pointer): bool {.importc: "QSGTransformNode_virtualbase_isSubtreeBlocked".}
 proc fcQSGTransformNode_virtualbase_preprocess(self: pointer): void {.importc: "QSGTransformNode_virtualbase_preprocess".}
 proc fcQSGTransformNode_new(vtbl: pointer, vdata: csize_t): ptr cQSGTransformNode {.importc: "QSGTransformNode_new".}
-proc fcQSGTransformNode_delete(self: pointer) {.importc: "QSGTransformNode_delete".}
 proc fcQSGRootNode_vdata(self: pointer): ptr pointer {.importc: "QSGRootNode_vdata".}
 proc fvdata_cQSGRootNode(self: pointer): pointer {.importc: "vdata_QSGRootNode".}
 type cQSGRootNodeVTable {.pure.} = object
@@ -190,7 +182,6 @@ type cQSGRootNodeVTable {.pure.} = object
 proc fcQSGRootNode_virtualbase_isSubtreeBlocked(self: pointer): bool {.importc: "QSGRootNode_virtualbase_isSubtreeBlocked".}
 proc fcQSGRootNode_virtualbase_preprocess(self: pointer): void {.importc: "QSGRootNode_virtualbase_preprocess".}
 proc fcQSGRootNode_new(vtbl: pointer, vdata: csize_t): ptr cQSGRootNode {.importc: "QSGRootNode_new".}
-proc fcQSGRootNode_delete(self: pointer) {.importc: "QSGRootNode_delete".}
 proc fcQSGOpacityNode_setOpacity(self: pointer, opacity: float64): void {.importc: "QSGOpacityNode_setOpacity".}
 proc fcQSGOpacityNode_opacity(self: pointer): float64 {.importc: "QSGOpacityNode_opacity".}
 proc fcQSGOpacityNode_setCombinedOpacity(self: pointer, opacity: float64): void {.importc: "QSGOpacityNode_setCombinedOpacity".}
@@ -205,11 +196,9 @@ type cQSGOpacityNodeVTable {.pure.} = object
 proc fcQSGOpacityNode_virtualbase_isSubtreeBlocked(self: pointer): bool {.importc: "QSGOpacityNode_virtualbase_isSubtreeBlocked".}
 proc fcQSGOpacityNode_virtualbase_preprocess(self: pointer): void {.importc: "QSGOpacityNode_virtualbase_preprocess".}
 proc fcQSGOpacityNode_new(vtbl: pointer, vdata: csize_t): ptr cQSGOpacityNode {.importc: "QSGOpacityNode_new".}
-proc fcQSGOpacityNode_delete(self: pointer) {.importc: "QSGOpacityNode_delete".}
-proc fcQSGNodeVisitor_delete(self: pointer) {.importc: "QSGNodeVisitor_delete".}
 
 proc parent*(self: gen_qsgnode_types.QSGNode): gen_qsgnode_types.QSGNode =
-  gen_qsgnode_types.QSGNode(h: fcQSGNode_parent(self.h))
+  gen_qsgnode_types.QSGNode(h: fcQSGNode_parent(self.h), owned: false)
 
 proc removeChildNode*(self: gen_qsgnode_types.QSGNode, node: gen_qsgnode_types.QSGNode): void =
   fcQSGNode_removeChildNode(self.h, node.h)
@@ -236,19 +225,19 @@ proc childCount*(self: gen_qsgnode_types.QSGNode): cint =
   fcQSGNode_childCount(self.h)
 
 proc childAtIndex*(self: gen_qsgnode_types.QSGNode, i: cint): gen_qsgnode_types.QSGNode =
-  gen_qsgnode_types.QSGNode(h: fcQSGNode_childAtIndex(self.h, i))
+  gen_qsgnode_types.QSGNode(h: fcQSGNode_childAtIndex(self.h, i), owned: false)
 
 proc firstChild*(self: gen_qsgnode_types.QSGNode): gen_qsgnode_types.QSGNode =
-  gen_qsgnode_types.QSGNode(h: fcQSGNode_firstChild(self.h))
+  gen_qsgnode_types.QSGNode(h: fcQSGNode_firstChild(self.h), owned: false)
 
 proc lastChild*(self: gen_qsgnode_types.QSGNode): gen_qsgnode_types.QSGNode =
-  gen_qsgnode_types.QSGNode(h: fcQSGNode_lastChild(self.h))
+  gen_qsgnode_types.QSGNode(h: fcQSGNode_lastChild(self.h), owned: false)
 
 proc nextSibling*(self: gen_qsgnode_types.QSGNode): gen_qsgnode_types.QSGNode =
-  gen_qsgnode_types.QSGNode(h: fcQSGNode_nextSibling(self.h))
+  gen_qsgnode_types.QSGNode(h: fcQSGNode_nextSibling(self.h), owned: false)
 
 proc previousSibling*(self: gen_qsgnode_types.QSGNode): gen_qsgnode_types.QSGNode =
-  gen_qsgnode_types.QSGNode(h: fcQSGNode_previousSibling(self.h))
+  gen_qsgnode_types.QSGNode(h: fcQSGNode_previousSibling(self.h), owned: false)
 
 proc typeX*(self: gen_qsgnode_types.QSGNode): cint =
   cint(fcQSGNode_typeX(self.h))
@@ -285,7 +274,7 @@ proc setFlags*(self: gen_qsgnode_types.QSGNode, param1: cint, param2: bool): voi
 
 type QSGNodeisSubtreeBlockedProc* = proc(self: QSGNode): bool {.raises: [], gcsafe.}
 type QSGNodepreprocessProc* = proc(self: QSGNode): void {.raises: [], gcsafe.}
-type QSGNodeVTable* = object
+type QSGNodeVTable* {.inheritable, pure.} = object
   vtbl: cQSGNodeVTable
   isSubtreeBlocked*: QSGNodeisSubtreeBlockedProc
   preprocess*: QSGNodepreprocessProc
@@ -332,13 +321,14 @@ proc create*(T: type gen_qsgnode_types.QSGNode,
     vtbl[].vtbl.isSubtreeBlocked = fcQSGNode_vtable_callback_isSubtreeBlocked
   if not isNil(vtbl[].preprocess):
     vtbl[].vtbl.preprocess = fcQSGNode_vtable_callback_preprocess
-  let tmp = gen_qsgnode_types.QSGNode(h: fcQSGNode_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))))
+  let tmp = gen_qsgnode_types.QSGNode(h: fcQSGNode_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))), owned: true)
   fcQSGNode_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQSGNode_mvtbl = cQSGNodeVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQSGNode()[])](self.fcQSGNode_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   isSubtreeBlocked: fcQSGNode_method_callback_isSubtreeBlocked,
   preprocess: fcQSGNode_method_callback_preprocess,
@@ -349,22 +339,20 @@ proc create*(T: type gen_qsgnode_types.QSGNode,
   inst[].h = fcQSGNode_new(addr(cQSGNode_mvtbl), csize_t(sizeof(pointer)))
   fcQSGNode_vdata(inst[].h)[] = addr inst[]
 
-proc delete*(self: gen_qsgnode_types.QSGNode) =
-  fcQSGNode_delete(self.h)
 proc setGeometry*(self: gen_qsgnode_types.QSGBasicGeometryNode, geometry: gen_qsggeometry_types.QSGGeometry): void =
   fcQSGBasicGeometryNode_setGeometry(self.h, geometry.h)
 
 proc geometry*(self: gen_qsgnode_types.QSGBasicGeometryNode): gen_qsggeometry_types.QSGGeometry =
-  gen_qsggeometry_types.QSGGeometry(h: fcQSGBasicGeometryNode_geometry(self.h))
+  gen_qsggeometry_types.QSGGeometry(h: fcQSGBasicGeometryNode_geometry(self.h), owned: false)
 
 proc geometry2*(self: gen_qsgnode_types.QSGBasicGeometryNode): gen_qsggeometry_types.QSGGeometry =
-  gen_qsggeometry_types.QSGGeometry(h: fcQSGBasicGeometryNode_geometry2(self.h))
+  gen_qsggeometry_types.QSGGeometry(h: fcQSGBasicGeometryNode_geometry2(self.h), owned: false)
 
 proc matrix*(self: gen_qsgnode_types.QSGBasicGeometryNode): gen_qmatrix4x4_types.QMatrix4x4 =
-  gen_qmatrix4x4_types.QMatrix4x4(h: fcQSGBasicGeometryNode_matrix(self.h))
+  gen_qmatrix4x4_types.QMatrix4x4(h: fcQSGBasicGeometryNode_matrix(self.h), owned: false)
 
 proc clipList*(self: gen_qsgnode_types.QSGBasicGeometryNode): gen_qsgnode_types.QSGClipNode =
-  gen_qsgnode_types.QSGClipNode(h: fcQSGBasicGeometryNode_clipList(self.h))
+  gen_qsgnode_types.QSGClipNode(h: fcQSGBasicGeometryNode_clipList(self.h), owned: false)
 
 proc setRendererMatrix*(self: gen_qsgnode_types.QSGBasicGeometryNode, m: gen_qmatrix4x4_types.QMatrix4x4): void =
   fcQSGBasicGeometryNode_setRendererMatrix(self.h, m.h)
@@ -372,22 +360,20 @@ proc setRendererMatrix*(self: gen_qsgnode_types.QSGBasicGeometryNode, m: gen_qma
 proc setRendererClipList*(self: gen_qsgnode_types.QSGBasicGeometryNode, c: gen_qsgnode_types.QSGClipNode): void =
   fcQSGBasicGeometryNode_setRendererClipList(self.h, c.h)
 
-proc delete*(self: gen_qsgnode_types.QSGBasicGeometryNode) =
-  fcQSGBasicGeometryNode_delete(self.h)
 proc setMaterial*(self: gen_qsgnode_types.QSGGeometryNode, material: gen_qsgmaterial_types.QSGMaterial): void =
   fcQSGGeometryNode_setMaterial(self.h, material.h)
 
 proc material*(self: gen_qsgnode_types.QSGGeometryNode): gen_qsgmaterial_types.QSGMaterial =
-  gen_qsgmaterial_types.QSGMaterial(h: fcQSGGeometryNode_material(self.h))
+  gen_qsgmaterial_types.QSGMaterial(h: fcQSGGeometryNode_material(self.h), owned: false)
 
 proc setOpaqueMaterial*(self: gen_qsgnode_types.QSGGeometryNode, material: gen_qsgmaterial_types.QSGMaterial): void =
   fcQSGGeometryNode_setOpaqueMaterial(self.h, material.h)
 
 proc opaqueMaterial*(self: gen_qsgnode_types.QSGGeometryNode): gen_qsgmaterial_types.QSGMaterial =
-  gen_qsgmaterial_types.QSGMaterial(h: fcQSGGeometryNode_opaqueMaterial(self.h))
+  gen_qsgmaterial_types.QSGMaterial(h: fcQSGGeometryNode_opaqueMaterial(self.h), owned: false)
 
 proc activeMaterial*(self: gen_qsgnode_types.QSGGeometryNode): gen_qsgmaterial_types.QSGMaterial =
-  gen_qsgmaterial_types.QSGMaterial(h: fcQSGGeometryNode_activeMaterial(self.h))
+  gen_qsgmaterial_types.QSGMaterial(h: fcQSGGeometryNode_activeMaterial(self.h), owned: false)
 
 proc setRenderOrder*(self: gen_qsgnode_types.QSGGeometryNode, order: cint): void =
   fcQSGGeometryNode_setRenderOrder(self.h, order)
@@ -403,7 +389,7 @@ proc inheritedOpacity*(self: gen_qsgnode_types.QSGGeometryNode): float64 =
 
 type QSGGeometryNodeisSubtreeBlockedProc* = proc(self: QSGGeometryNode): bool {.raises: [], gcsafe.}
 type QSGGeometryNodepreprocessProc* = proc(self: QSGGeometryNode): void {.raises: [], gcsafe.}
-type QSGGeometryNodeVTable* = object
+type QSGGeometryNodeVTable* {.inheritable, pure.} = object
   vtbl: cQSGGeometryNodeVTable
   isSubtreeBlocked*: QSGGeometryNodeisSubtreeBlockedProc
   preprocess*: QSGGeometryNodepreprocessProc
@@ -450,13 +436,14 @@ proc create*(T: type gen_qsgnode_types.QSGGeometryNode,
     vtbl[].vtbl.isSubtreeBlocked = fcQSGGeometryNode_vtable_callback_isSubtreeBlocked
   if not isNil(vtbl[].preprocess):
     vtbl[].vtbl.preprocess = fcQSGGeometryNode_vtable_callback_preprocess
-  let tmp = gen_qsgnode_types.QSGGeometryNode(h: fcQSGGeometryNode_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))))
+  let tmp = gen_qsgnode_types.QSGGeometryNode(h: fcQSGGeometryNode_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))), owned: true)
   fcQSGGeometryNode_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQSGGeometryNode_mvtbl = cQSGGeometryNodeVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQSGGeometryNode()[])](self.fcQSGGeometryNode_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   isSubtreeBlocked: fcQSGGeometryNode_method_callback_isSubtreeBlocked,
   preprocess: fcQSGGeometryNode_method_callback_preprocess,
@@ -467,8 +454,6 @@ proc create*(T: type gen_qsgnode_types.QSGGeometryNode,
   inst[].h = fcQSGGeometryNode_new(addr(cQSGGeometryNode_mvtbl), csize_t(sizeof(pointer)))
   fcQSGGeometryNode_vdata(inst[].h)[] = addr inst[]
 
-proc delete*(self: gen_qsgnode_types.QSGGeometryNode) =
-  fcQSGGeometryNode_delete(self.h)
 proc setIsRectangular*(self: gen_qsgnode_types.QSGClipNode, rectHint: bool): void =
   fcQSGClipNode_setIsRectangular(self.h, rectHint)
 
@@ -479,11 +464,11 @@ proc setClipRect*(self: gen_qsgnode_types.QSGClipNode, clipRect: gen_qrect_types
   fcQSGClipNode_setClipRect(self.h, clipRect.h)
 
 proc clipRect*(self: gen_qsgnode_types.QSGClipNode): gen_qrect_types.QRectF =
-  gen_qrect_types.QRectF(h: fcQSGClipNode_clipRect(self.h))
+  gen_qrect_types.QRectF(h: fcQSGClipNode_clipRect(self.h), owned: true)
 
 type QSGClipNodeisSubtreeBlockedProc* = proc(self: QSGClipNode): bool {.raises: [], gcsafe.}
 type QSGClipNodepreprocessProc* = proc(self: QSGClipNode): void {.raises: [], gcsafe.}
-type QSGClipNodeVTable* = object
+type QSGClipNodeVTable* {.inheritable, pure.} = object
   vtbl: cQSGClipNodeVTable
   isSubtreeBlocked*: QSGClipNodeisSubtreeBlockedProc
   preprocess*: QSGClipNodepreprocessProc
@@ -530,13 +515,14 @@ proc create*(T: type gen_qsgnode_types.QSGClipNode,
     vtbl[].vtbl.isSubtreeBlocked = fcQSGClipNode_vtable_callback_isSubtreeBlocked
   if not isNil(vtbl[].preprocess):
     vtbl[].vtbl.preprocess = fcQSGClipNode_vtable_callback_preprocess
-  let tmp = gen_qsgnode_types.QSGClipNode(h: fcQSGClipNode_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))))
+  let tmp = gen_qsgnode_types.QSGClipNode(h: fcQSGClipNode_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))), owned: true)
   fcQSGClipNode_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQSGClipNode_mvtbl = cQSGClipNodeVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQSGClipNode()[])](self.fcQSGClipNode_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   isSubtreeBlocked: fcQSGClipNode_method_callback_isSubtreeBlocked,
   preprocess: fcQSGClipNode_method_callback_preprocess,
@@ -547,23 +533,21 @@ proc create*(T: type gen_qsgnode_types.QSGClipNode,
   inst[].h = fcQSGClipNode_new(addr(cQSGClipNode_mvtbl), csize_t(sizeof(pointer)))
   fcQSGClipNode_vdata(inst[].h)[] = addr inst[]
 
-proc delete*(self: gen_qsgnode_types.QSGClipNode) =
-  fcQSGClipNode_delete(self.h)
 proc setMatrix*(self: gen_qsgnode_types.QSGTransformNode, matrix: gen_qmatrix4x4_types.QMatrix4x4): void =
   fcQSGTransformNode_setMatrix(self.h, matrix.h)
 
 proc matrix*(self: gen_qsgnode_types.QSGTransformNode): gen_qmatrix4x4_types.QMatrix4x4 =
-  gen_qmatrix4x4_types.QMatrix4x4(h: fcQSGTransformNode_matrix(self.h))
+  gen_qmatrix4x4_types.QMatrix4x4(h: fcQSGTransformNode_matrix(self.h), owned: false)
 
 proc setCombinedMatrix*(self: gen_qsgnode_types.QSGTransformNode, matrix: gen_qmatrix4x4_types.QMatrix4x4): void =
   fcQSGTransformNode_setCombinedMatrix(self.h, matrix.h)
 
 proc combinedMatrix*(self: gen_qsgnode_types.QSGTransformNode): gen_qmatrix4x4_types.QMatrix4x4 =
-  gen_qmatrix4x4_types.QMatrix4x4(h: fcQSGTransformNode_combinedMatrix(self.h))
+  gen_qmatrix4x4_types.QMatrix4x4(h: fcQSGTransformNode_combinedMatrix(self.h), owned: false)
 
 type QSGTransformNodeisSubtreeBlockedProc* = proc(self: QSGTransformNode): bool {.raises: [], gcsafe.}
 type QSGTransformNodepreprocessProc* = proc(self: QSGTransformNode): void {.raises: [], gcsafe.}
-type QSGTransformNodeVTable* = object
+type QSGTransformNodeVTable* {.inheritable, pure.} = object
   vtbl: cQSGTransformNodeVTable
   isSubtreeBlocked*: QSGTransformNodeisSubtreeBlockedProc
   preprocess*: QSGTransformNodepreprocessProc
@@ -610,13 +594,14 @@ proc create*(T: type gen_qsgnode_types.QSGTransformNode,
     vtbl[].vtbl.isSubtreeBlocked = fcQSGTransformNode_vtable_callback_isSubtreeBlocked
   if not isNil(vtbl[].preprocess):
     vtbl[].vtbl.preprocess = fcQSGTransformNode_vtable_callback_preprocess
-  let tmp = gen_qsgnode_types.QSGTransformNode(h: fcQSGTransformNode_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))))
+  let tmp = gen_qsgnode_types.QSGTransformNode(h: fcQSGTransformNode_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))), owned: true)
   fcQSGTransformNode_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQSGTransformNode_mvtbl = cQSGTransformNodeVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQSGTransformNode()[])](self.fcQSGTransformNode_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   isSubtreeBlocked: fcQSGTransformNode_method_callback_isSubtreeBlocked,
   preprocess: fcQSGTransformNode_method_callback_preprocess,
@@ -627,11 +612,9 @@ proc create*(T: type gen_qsgnode_types.QSGTransformNode,
   inst[].h = fcQSGTransformNode_new(addr(cQSGTransformNode_mvtbl), csize_t(sizeof(pointer)))
   fcQSGTransformNode_vdata(inst[].h)[] = addr inst[]
 
-proc delete*(self: gen_qsgnode_types.QSGTransformNode) =
-  fcQSGTransformNode_delete(self.h)
 type QSGRootNodeisSubtreeBlockedProc* = proc(self: QSGRootNode): bool {.raises: [], gcsafe.}
 type QSGRootNodepreprocessProc* = proc(self: QSGRootNode): void {.raises: [], gcsafe.}
-type QSGRootNodeVTable* = object
+type QSGRootNodeVTable* {.inheritable, pure.} = object
   vtbl: cQSGRootNodeVTable
   isSubtreeBlocked*: QSGRootNodeisSubtreeBlockedProc
   preprocess*: QSGRootNodepreprocessProc
@@ -678,13 +661,14 @@ proc create*(T: type gen_qsgnode_types.QSGRootNode,
     vtbl[].vtbl.isSubtreeBlocked = fcQSGRootNode_vtable_callback_isSubtreeBlocked
   if not isNil(vtbl[].preprocess):
     vtbl[].vtbl.preprocess = fcQSGRootNode_vtable_callback_preprocess
-  let tmp = gen_qsgnode_types.QSGRootNode(h: fcQSGRootNode_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))))
+  let tmp = gen_qsgnode_types.QSGRootNode(h: fcQSGRootNode_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))), owned: true)
   fcQSGRootNode_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQSGRootNode_mvtbl = cQSGRootNodeVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQSGRootNode()[])](self.fcQSGRootNode_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   isSubtreeBlocked: fcQSGRootNode_method_callback_isSubtreeBlocked,
   preprocess: fcQSGRootNode_method_callback_preprocess,
@@ -695,8 +679,6 @@ proc create*(T: type gen_qsgnode_types.QSGRootNode,
   inst[].h = fcQSGRootNode_new(addr(cQSGRootNode_mvtbl), csize_t(sizeof(pointer)))
   fcQSGRootNode_vdata(inst[].h)[] = addr inst[]
 
-proc delete*(self: gen_qsgnode_types.QSGRootNode) =
-  fcQSGRootNode_delete(self.h)
 proc setOpacity*(self: gen_qsgnode_types.QSGOpacityNode, opacity: float64): void =
   fcQSGOpacityNode_setOpacity(self.h, opacity)
 
@@ -714,7 +696,7 @@ proc isSubtreeBlocked*(self: gen_qsgnode_types.QSGOpacityNode): bool =
 
 type QSGOpacityNodeisSubtreeBlockedProc* = proc(self: QSGOpacityNode): bool {.raises: [], gcsafe.}
 type QSGOpacityNodepreprocessProc* = proc(self: QSGOpacityNode): void {.raises: [], gcsafe.}
-type QSGOpacityNodeVTable* = object
+type QSGOpacityNodeVTable* {.inheritable, pure.} = object
   vtbl: cQSGOpacityNodeVTable
   isSubtreeBlocked*: QSGOpacityNodeisSubtreeBlockedProc
   preprocess*: QSGOpacityNodepreprocessProc
@@ -761,13 +743,14 @@ proc create*(T: type gen_qsgnode_types.QSGOpacityNode,
     vtbl[].vtbl.isSubtreeBlocked = fcQSGOpacityNode_vtable_callback_isSubtreeBlocked
   if not isNil(vtbl[].preprocess):
     vtbl[].vtbl.preprocess = fcQSGOpacityNode_vtable_callback_preprocess
-  let tmp = gen_qsgnode_types.QSGOpacityNode(h: fcQSGOpacityNode_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))))
+  let tmp = gen_qsgnode_types.QSGOpacityNode(h: fcQSGOpacityNode_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))), owned: true)
   fcQSGOpacityNode_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQSGOpacityNode_mvtbl = cQSGOpacityNodeVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQSGOpacityNode()[])](self.fcQSGOpacityNode_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   isSubtreeBlocked: fcQSGOpacityNode_method_callback_isSubtreeBlocked,
   preprocess: fcQSGOpacityNode_method_callback_preprocess,
@@ -778,7 +761,3 @@ proc create*(T: type gen_qsgnode_types.QSGOpacityNode,
   inst[].h = fcQSGOpacityNode_new(addr(cQSGOpacityNode_mvtbl), csize_t(sizeof(pointer)))
   fcQSGOpacityNode_vdata(inst[].h)[] = addr inst[]
 
-proc delete*(self: gen_qsgnode_types.QSGOpacityNode) =
-  fcQSGOpacityNode_delete(self.h)
-proc delete*(self: gen_qsgnode_types.QSGNodeVisitor) =
-  fcQSGNodeVisitor_delete(self.h)

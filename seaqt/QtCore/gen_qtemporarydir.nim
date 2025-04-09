@@ -32,9 +32,6 @@ func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
     else:
       copyMem(addr result[0], v.data, len)
 
-const cflags = gorge("pkg-config --cflags Qt6Core")  & " -fPIC"
-{.compile("gen_qtemporarydir.cpp", cflags).}
-
 
 import ./gen_qtemporarydir_types
 export gen_qtemporarydir_types
@@ -52,7 +49,6 @@ proc fcQTemporaryDir_path(self: pointer): struct_miqt_string {.importc: "QTempor
 proc fcQTemporaryDir_filePath(self: pointer, fileName: struct_miqt_string): struct_miqt_string {.importc: "QTemporaryDir_filePath".}
 proc fcQTemporaryDir_new(): ptr cQTemporaryDir {.importc: "QTemporaryDir_new".}
 proc fcQTemporaryDir_new2(templateName: struct_miqt_string): ptr cQTemporaryDir {.importc: "QTemporaryDir_new2".}
-proc fcQTemporaryDir_delete(self: pointer) {.importc: "QTemporaryDir_delete".}
 
 proc swap*(self: gen_qtemporarydir_types.QTemporaryDir, other: gen_qtemporarydir_types.QTemporaryDir): void =
   fcQTemporaryDir_swap(self.h, other.h)
@@ -88,11 +84,9 @@ proc filePath*(self: gen_qtemporarydir_types.QTemporaryDir, fileName: string): s
   vx_ret
 
 proc create*(T: type gen_qtemporarydir_types.QTemporaryDir): gen_qtemporarydir_types.QTemporaryDir =
-  let tmp = gen_qtemporarydir_types.QTemporaryDir(h: fcQTemporaryDir_new())
+  let tmp = gen_qtemporarydir_types.QTemporaryDir(h: fcQTemporaryDir_new(), owned: true)
   tmp
 proc create*(T: type gen_qtemporarydir_types.QTemporaryDir,
     templateName: string): gen_qtemporarydir_types.QTemporaryDir =
-  let tmp = gen_qtemporarydir_types.QTemporaryDir(h: fcQTemporaryDir_new2(struct_miqt_string(data: if len(templateName) > 0: addr templateName[0] else: nil, len: csize_t(len(templateName)))))
+  let tmp = gen_qtemporarydir_types.QTemporaryDir(h: fcQTemporaryDir_new2(struct_miqt_string(data: if len(templateName) > 0: addr templateName[0] else: nil, len: csize_t(len(templateName)))), owned: true)
   tmp
-proc delete*(self: gen_qtemporarydir_types.QTemporaryDir) =
-  fcQTemporaryDir_delete(self.h)

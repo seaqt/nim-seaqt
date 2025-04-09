@@ -32,7 +32,7 @@ func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
     else:
       copyMem(addr result[0], v.data, len)
 
-const cflags = gorge("pkg-config --cflags Qt6Core")  & " -fPIC"
+const cflags = gorge("pkg-config --cflags Qt6Core") & " -fPIC"
 {.compile("gen_qsharedmemory.cpp", cflags).}
 
 
@@ -126,10 +126,9 @@ proc fcQSharedMemory_new2(vtbl: pointer, vdata: csize_t, key: struct_miqt_string
 proc fcQSharedMemory_new3(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQSharedMemory {.importc: "QSharedMemory_new3".}
 proc fcQSharedMemory_new4(vtbl: pointer, vdata: csize_t, key: struct_miqt_string, parent: pointer): ptr cQSharedMemory {.importc: "QSharedMemory_new4".}
 proc fcQSharedMemory_staticMetaObject(): pointer {.importc: "QSharedMemory_staticMetaObject".}
-proc fcQSharedMemory_delete(self: pointer) {.importc: "QSharedMemory_delete".}
 
 proc metaObject*(self: gen_qsharedmemory_types.QSharedMemory): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQSharedMemory_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQSharedMemory_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qsharedmemory_types.QSharedMemory, param1: cstring): pointer =
   fcQSharedMemory_metacast(self.h, param1)
@@ -228,7 +227,7 @@ type QSharedMemorychildEventProc* = proc(self: QSharedMemory, event: gen_qcoreev
 type QSharedMemorycustomEventProc* = proc(self: QSharedMemory, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QSharedMemoryconnectNotifyProc* = proc(self: QSharedMemory, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QSharedMemorydisconnectNotifyProc* = proc(self: QSharedMemory, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
-type QSharedMemoryVTable* = object
+type QSharedMemoryVTable* {.inheritable, pure.} = object
   vtbl: cQSharedMemoryVTable
   metaObject*: QSharedMemorymetaObjectProc
   metacast*: QSharedMemorymetacastProc
@@ -241,13 +240,16 @@ type QSharedMemoryVTable* = object
   connectNotify*: QSharedMemoryconnectNotifyProc
   disconnectNotify*: QSharedMemorydisconnectNotifyProc
 proc QSharedMemorymetaObject*(self: gen_qsharedmemory_types.QSharedMemory): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQSharedMemory_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQSharedMemory_virtualbase_metaObject(self.h), owned: false)
 
 proc fcQSharedMemory_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QSharedMemoryVTable](fcQSharedMemory_vdata(self)[])
   let self = QSharedMemory(h: self)
   var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QSharedMemorymetacast*(self: gen_qsharedmemory_types.QSharedMemory, param1: cstring): pointer =
   fcQSharedMemory_virtualbase_metacast(self.h, param1)
@@ -277,7 +279,7 @@ proc QSharedMemoryevent*(self: gen_qsharedmemory_types.QSharedMemory, event: gen
 proc fcQSharedMemory_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QSharedMemoryVTable](fcQSharedMemory_vdata(self)[])
   let self = QSharedMemory(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
@@ -287,8 +289,8 @@ proc QSharedMemoryeventFilter*(self: gen_qsharedmemory_types.QSharedMemory, watc
 proc fcQSharedMemory_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QSharedMemoryVTable](fcQSharedMemory_vdata(self)[])
   let self = QSharedMemory(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
@@ -298,7 +300,7 @@ proc QSharedMemorytimerEvent*(self: gen_qsharedmemory_types.QSharedMemory, event
 proc fcQSharedMemory_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSharedMemoryVTable](fcQSharedMemory_vdata(self)[])
   let self = QSharedMemory(h: self)
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
 proc QSharedMemorychildEvent*(self: gen_qsharedmemory_types.QSharedMemory, event: gen_qcoreevent_types.QChildEvent): void =
@@ -307,7 +309,7 @@ proc QSharedMemorychildEvent*(self: gen_qsharedmemory_types.QSharedMemory, event
 proc fcQSharedMemory_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSharedMemoryVTable](fcQSharedMemory_vdata(self)[])
   let self = QSharedMemory(h: self)
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
 proc QSharedMemorycustomEvent*(self: gen_qsharedmemory_types.QSharedMemory, event: gen_qcoreevent_types.QEvent): void =
@@ -316,7 +318,7 @@ proc QSharedMemorycustomEvent*(self: gen_qsharedmemory_types.QSharedMemory, even
 proc fcQSharedMemory_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSharedMemoryVTable](fcQSharedMemory_vdata(self)[])
   let self = QSharedMemory(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
 proc QSharedMemoryconnectNotify*(self: gen_qsharedmemory_types.QSharedMemory, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -325,7 +327,7 @@ proc QSharedMemoryconnectNotify*(self: gen_qsharedmemory_types.QSharedMemory, si
 proc fcQSharedMemory_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSharedMemoryVTable](fcQSharedMemory_vdata(self)[])
   let self = QSharedMemory(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
 proc QSharedMemorydisconnectNotify*(self: gen_qsharedmemory_types.QSharedMemory, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -334,7 +336,7 @@ proc QSharedMemorydisconnectNotify*(self: gen_qsharedmemory_types.QSharedMemory,
 proc fcQSharedMemory_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSharedMemoryVTable](fcQSharedMemory_vdata(self)[])
   let self = QSharedMemory(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
 type VirtualQSharedMemory* {.inheritable.} = ref object of QSharedMemory
@@ -368,7 +370,7 @@ method event*(self: VirtualQSharedMemory, event: gen_qcoreevent_types.QEvent): b
   QSharedMemoryevent(self[], event)
 proc fcQSharedMemory_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQSharedMemory](fcQSharedMemory_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
@@ -376,8 +378,8 @@ method eventFilter*(self: VirtualQSharedMemory, watched: gen_qobject_types.QObje
   QSharedMemoryeventFilter(self[], watched, event)
 proc fcQSharedMemory_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQSharedMemory](fcQSharedMemory_vdata(self)[])
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
@@ -385,39 +387,39 @@ method timerEvent*(self: VirtualQSharedMemory, event: gen_qcoreevent_types.QTime
   QSharedMemorytimerEvent(self[], event)
 proc fcQSharedMemory_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSharedMemory](fcQSharedMemory_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
 method childEvent*(self: VirtualQSharedMemory, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
   QSharedMemorychildEvent(self[], event)
 proc fcQSharedMemory_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSharedMemory](fcQSharedMemory_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
 method customEvent*(self: VirtualQSharedMemory, event: gen_qcoreevent_types.QEvent): void {.base.} =
   QSharedMemorycustomEvent(self[], event)
 proc fcQSharedMemory_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSharedMemory](fcQSharedMemory_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
 method connectNotify*(self: VirtualQSharedMemory, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
   QSharedMemoryconnectNotify(self[], signal)
 proc fcQSharedMemory_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSharedMemory](fcQSharedMemory_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
 method disconnectNotify*(self: VirtualQSharedMemory, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
   QSharedMemorydisconnectNotify(self[], signal)
 proc fcQSharedMemory_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSharedMemory](fcQSharedMemory_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
 
 proc sender*(self: gen_qsharedmemory_types.QSharedMemory): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQSharedMemory_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQSharedMemory_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qsharedmemory_types.QSharedMemory): cint =
   fcQSharedMemory_protectedbase_senderSignalIndex(self.h)
@@ -455,7 +457,7 @@ proc create*(T: type gen_qsharedmemory_types.QSharedMemory,
     vtbl[].vtbl.connectNotify = fcQSharedMemory_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQSharedMemory_vtable_callback_disconnectNotify
-  let tmp = gen_qsharedmemory_types.QSharedMemory(h: fcQSharedMemory_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))))
+  let tmp = gen_qsharedmemory_types.QSharedMemory(h: fcQSharedMemory_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))), owned: true)
   fcQSharedMemory_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qsharedmemory_types.QSharedMemory,
@@ -486,7 +488,7 @@ proc create*(T: type gen_qsharedmemory_types.QSharedMemory,
     vtbl[].vtbl.connectNotify = fcQSharedMemory_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQSharedMemory_vtable_callback_disconnectNotify
-  let tmp = gen_qsharedmemory_types.QSharedMemory(h: fcQSharedMemory_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key)))))
+  let tmp = gen_qsharedmemory_types.QSharedMemory(h: fcQSharedMemory_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key)))), owned: true)
   fcQSharedMemory_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qsharedmemory_types.QSharedMemory,
@@ -517,7 +519,7 @@ proc create*(T: type gen_qsharedmemory_types.QSharedMemory,
     vtbl[].vtbl.connectNotify = fcQSharedMemory_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQSharedMemory_vtable_callback_disconnectNotify
-  let tmp = gen_qsharedmemory_types.QSharedMemory(h: fcQSharedMemory_new3(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h))
+  let tmp = gen_qsharedmemory_types.QSharedMemory(h: fcQSharedMemory_new3(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h), owned: true)
   fcQSharedMemory_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qsharedmemory_types.QSharedMemory,
@@ -548,13 +550,14 @@ proc create*(T: type gen_qsharedmemory_types.QSharedMemory,
     vtbl[].vtbl.connectNotify = fcQSharedMemory_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQSharedMemory_vtable_callback_disconnectNotify
-  let tmp = gen_qsharedmemory_types.QSharedMemory(h: fcQSharedMemory_new4(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key))), parent.h))
+  let tmp = gen_qsharedmemory_types.QSharedMemory(h: fcQSharedMemory_new4(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key))), parent.h), owned: true)
   fcQSharedMemory_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQSharedMemory_mvtbl = cQSharedMemoryVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQSharedMemory()[])](self.fcQSharedMemory_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   metaObject: fcQSharedMemory_method_callback_metaObject,
   metacast: fcQSharedMemory_method_callback_metacast,
@@ -596,5 +599,3 @@ proc create*(T: type gen_qsharedmemory_types.QSharedMemory,
 
 proc staticMetaObject*(_: type gen_qsharedmemory_types.QSharedMemory): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQSharedMemory_staticMetaObject())
-proc delete*(self: gen_qsharedmemory_types.QSharedMemory) =
-  fcQSharedMemory_delete(self.h)

@@ -32,7 +32,7 @@ func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
     else:
       copyMem(addr result[0], v.data, len)
 
-const cflags = gorge("pkg-config --cflags Qt6Gui")  & " -fPIC"
+const cflags = gorge("pkg-config --cflags Qt6Gui") & " -fPIC"
 {.compile("gen_qwindow.cpp", cflags).}
 
 
@@ -325,10 +325,9 @@ proc fcQWindow_new(vtbl: pointer, vdata: csize_t): ptr cQWindow {.importc: "QWin
 proc fcQWindow_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQWindow {.importc: "QWindow_new2".}
 proc fcQWindow_new3(vtbl: pointer, vdata: csize_t, screen: pointer): ptr cQWindow {.importc: "QWindow_new3".}
 proc fcQWindow_staticMetaObject(): pointer {.importc: "QWindow_staticMetaObject".}
-proc fcQWindow_delete(self: pointer) {.importc: "QWindow_delete".}
 
 proc metaObject*(self: gen_qwindow_types.QWindow): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQWindow_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQWindow_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qwindow_types.QWindow, param1: cstring): pointer =
   fcQWindow_metacast(self.h, param1)
@@ -364,7 +363,7 @@ proc winId*(self: gen_qwindow_types.QWindow): uint =
   fcQWindow_winId(self.h)
 
 proc parent*(self: gen_qwindow_types.QWindow): gen_qwindow_types.QWindow =
-  gen_qwindow_types.QWindow(h: fcQWindow_parent(self.h))
+  gen_qwindow_types.QWindow(h: fcQWindow_parent(self.h), owned: false)
 
 proc setParent*(self: gen_qwindow_types.QWindow, parent: gen_qwindow_types.QWindow): void =
   fcQWindow_setParent(self.h, parent.h)
@@ -385,10 +384,10 @@ proc setFormat*(self: gen_qwindow_types.QWindow, format: gen_qsurfaceformat_type
   fcQWindow_setFormat(self.h, format.h)
 
 proc format*(self: gen_qwindow_types.QWindow): gen_qsurfaceformat_types.QSurfaceFormat =
-  gen_qsurfaceformat_types.QSurfaceFormat(h: fcQWindow_format(self.h))
+  gen_qsurfaceformat_types.QSurfaceFormat(h: fcQWindow_format(self.h), owned: true)
 
 proc requestedFormat*(self: gen_qwindow_types.QWindow): gen_qsurfaceformat_types.QSurfaceFormat =
-  gen_qsurfaceformat_types.QSurfaceFormat(h: fcQWindow_requestedFormat(self.h))
+  gen_qsurfaceformat_types.QSurfaceFormat(h: fcQWindow_requestedFormat(self.h), owned: true)
 
 proc setFlags*(self: gen_qwindow_types.QWindow, flags: cint): void =
   fcQWindow_setFlags(self.h, cint(flags))
@@ -418,7 +417,7 @@ proc setMask*(self: gen_qwindow_types.QWindow, region: gen_qregion_types.QRegion
   fcQWindow_setMask(self.h, region.h)
 
 proc mask*(self: gen_qwindow_types.QWindow): gen_qregion_types.QRegion =
-  gen_qregion_types.QRegion(h: fcQWindow_mask(self.h))
+  gen_qregion_types.QRegion(h: fcQWindow_mask(self.h), owned: true)
 
 proc isActive*(self: gen_qwindow_types.QWindow): bool =
   fcQWindow_isActive(self.h)
@@ -448,7 +447,7 @@ proc setTransientParent*(self: gen_qwindow_types.QWindow, parent: gen_qwindow_ty
   fcQWindow_setTransientParent(self.h, parent.h)
 
 proc transientParent*(self: gen_qwindow_types.QWindow): gen_qwindow_types.QWindow =
-  gen_qwindow_types.QWindow(h: fcQWindow_transientParent(self.h))
+  gen_qwindow_types.QWindow(h: fcQWindow_transientParent(self.h), owned: false)
 
 proc isAncestorOf*(self: gen_qwindow_types.QWindow, child: gen_qwindow_types.QWindow): bool =
   fcQWindow_isAncestorOf(self.h, child.h)
@@ -469,16 +468,16 @@ proc maximumHeight*(self: gen_qwindow_types.QWindow): cint =
   fcQWindow_maximumHeight(self.h)
 
 proc minimumSize*(self: gen_qwindow_types.QWindow): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQWindow_minimumSize(self.h))
+  gen_qsize_types.QSize(h: fcQWindow_minimumSize(self.h), owned: true)
 
 proc maximumSize*(self: gen_qwindow_types.QWindow): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQWindow_maximumSize(self.h))
+  gen_qsize_types.QSize(h: fcQWindow_maximumSize(self.h), owned: true)
 
 proc baseSize*(self: gen_qwindow_types.QWindow): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQWindow_baseSize(self.h))
+  gen_qsize_types.QSize(h: fcQWindow_baseSize(self.h), owned: true)
 
 proc sizeIncrement*(self: gen_qwindow_types.QWindow): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQWindow_sizeIncrement(self.h))
+  gen_qsize_types.QSize(h: fcQWindow_sizeIncrement(self.h), owned: true)
 
 proc setMinimumSize*(self: gen_qwindow_types.QWindow, size: gen_qsize_types.QSize): void =
   fcQWindow_setMinimumSize(self.h, size.h)
@@ -493,16 +492,16 @@ proc setSizeIncrement*(self: gen_qwindow_types.QWindow, size: gen_qsize_types.QS
   fcQWindow_setSizeIncrement(self.h, size.h)
 
 proc geometry*(self: gen_qwindow_types.QWindow): gen_qrect_types.QRect =
-  gen_qrect_types.QRect(h: fcQWindow_geometry(self.h))
+  gen_qrect_types.QRect(h: fcQWindow_geometry(self.h), owned: true)
 
 proc frameMargins*(self: gen_qwindow_types.QWindow): gen_qmargins_types.QMargins =
-  gen_qmargins_types.QMargins(h: fcQWindow_frameMargins(self.h))
+  gen_qmargins_types.QMargins(h: fcQWindow_frameMargins(self.h), owned: true)
 
 proc frameGeometry*(self: gen_qwindow_types.QWindow): gen_qrect_types.QRect =
-  gen_qrect_types.QRect(h: fcQWindow_frameGeometry(self.h))
+  gen_qrect_types.QRect(h: fcQWindow_frameGeometry(self.h), owned: true)
 
 proc framePosition*(self: gen_qwindow_types.QWindow): gen_qpoint_types.QPoint =
-  gen_qpoint_types.QPoint(h: fcQWindow_framePosition(self.h))
+  gen_qpoint_types.QPoint(h: fcQWindow_framePosition(self.h), owned: true)
 
 proc setFramePosition*(self: gen_qwindow_types.QWindow, point: gen_qpoint_types.QPoint): void =
   fcQWindow_setFramePosition(self.h, point.h)
@@ -520,10 +519,10 @@ proc y*(self: gen_qwindow_types.QWindow): cint =
   fcQWindow_y(self.h)
 
 proc size*(self: gen_qwindow_types.QWindow): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQWindow_size(self.h))
+  gen_qsize_types.QSize(h: fcQWindow_size(self.h), owned: true)
 
 proc position*(self: gen_qwindow_types.QWindow): gen_qpoint_types.QPoint =
-  gen_qpoint_types.QPoint(h: fcQWindow_position(self.h))
+  gen_qpoint_types.QPoint(h: fcQWindow_position(self.h), owned: true)
 
 proc setPosition*(self: gen_qwindow_types.QWindow, pt: gen_qpoint_types.QPoint): void =
   fcQWindow_setPosition(self.h, pt.h)
@@ -550,7 +549,7 @@ proc setIcon*(self: gen_qwindow_types.QWindow, icon: gen_qicon_types.QIcon): voi
   fcQWindow_setIcon(self.h, icon.h)
 
 proc icon*(self: gen_qwindow_types.QWindow): gen_qicon_types.QIcon =
-  gen_qicon_types.QIcon(h: fcQWindow_icon(self.h))
+  gen_qicon_types.QIcon(h: fcQWindow_icon(self.h), owned: true)
 
 proc destroy*(self: gen_qwindow_types.QWindow): void =
   fcQWindow_destroy(self.h)
@@ -562,31 +561,31 @@ proc setMouseGrabEnabled*(self: gen_qwindow_types.QWindow, grab: bool): bool =
   fcQWindow_setMouseGrabEnabled(self.h, grab)
 
 proc screen*(self: gen_qwindow_types.QWindow): gen_qscreen_types.QScreen =
-  gen_qscreen_types.QScreen(h: fcQWindow_screen(self.h))
+  gen_qscreen_types.QScreen(h: fcQWindow_screen(self.h), owned: false)
 
 proc setScreen*(self: gen_qwindow_types.QWindow, screen: gen_qscreen_types.QScreen): void =
   fcQWindow_setScreen(self.h, screen.h)
 
 proc accessibleRoot*(self: gen_qwindow_types.QWindow): gen_qaccessible_types.QAccessibleInterface =
-  gen_qaccessible_types.QAccessibleInterface(h: fcQWindow_accessibleRoot(self.h))
+  gen_qaccessible_types.QAccessibleInterface(h: fcQWindow_accessibleRoot(self.h), owned: false)
 
 proc focusObject*(self: gen_qwindow_types.QWindow): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQWindow_focusObject(self.h))
+  gen_qobject_types.QObject(h: fcQWindow_focusObject(self.h), owned: false)
 
 proc mapToGlobal*(self: gen_qwindow_types.QWindow, pos: gen_qpoint_types.QPointF): gen_qpoint_types.QPointF =
-  gen_qpoint_types.QPointF(h: fcQWindow_mapToGlobal(self.h, pos.h))
+  gen_qpoint_types.QPointF(h: fcQWindow_mapToGlobal(self.h, pos.h), owned: true)
 
 proc mapFromGlobal*(self: gen_qwindow_types.QWindow, pos: gen_qpoint_types.QPointF): gen_qpoint_types.QPointF =
-  gen_qpoint_types.QPointF(h: fcQWindow_mapFromGlobal(self.h, pos.h))
+  gen_qpoint_types.QPointF(h: fcQWindow_mapFromGlobal(self.h, pos.h), owned: true)
 
 proc mapToGlobal*(self: gen_qwindow_types.QWindow, pos: gen_qpoint_types.QPoint): gen_qpoint_types.QPoint =
-  gen_qpoint_types.QPoint(h: fcQWindow_mapToGlobalWithPos(self.h, pos.h))
+  gen_qpoint_types.QPoint(h: fcQWindow_mapToGlobalWithPos(self.h, pos.h), owned: true)
 
 proc mapFromGlobal*(self: gen_qwindow_types.QWindow, pos: gen_qpoint_types.QPoint): gen_qpoint_types.QPoint =
-  gen_qpoint_types.QPoint(h: fcQWindow_mapFromGlobalWithPos(self.h, pos.h))
+  gen_qpoint_types.QPoint(h: fcQWindow_mapFromGlobalWithPos(self.h, pos.h), owned: true)
 
 proc cursor*(self: gen_qwindow_types.QWindow): gen_qcursor_types.QCursor =
-  gen_qcursor_types.QCursor(h: fcQWindow_cursor(self.h))
+  gen_qcursor_types.QCursor(h: fcQWindow_cursor(self.h), owned: true)
 
 proc setCursor*(self: gen_qwindow_types.QWindow, cursor: gen_qcursor_types.QCursor): void =
   fcQWindow_setCursor(self.h, cursor.h)
@@ -595,7 +594,7 @@ proc unsetCursor*(self: gen_qwindow_types.QWindow): void =
   fcQWindow_unsetCursor(self.h)
 
 proc fromWinId*(_: type gen_qwindow_types.QWindow, id: uint): gen_qwindow_types.QWindow =
-  gen_qwindow_types.QWindow(h: fcQWindow_fromWinId(id))
+  gen_qwindow_types.QWindow(h: fcQWindow_fromWinId(id), owned: false)
 
 proc requestActivate*(self: gen_qwindow_types.QWindow): void =
   fcQWindow_requestActivate(self.h)
@@ -681,7 +680,7 @@ proc screenChanged*(self: gen_qwindow_types.QWindow, screen: gen_qscreen_types.Q
 type QWindowscreenChangedSlot* = proc(screen: gen_qscreen_types.QScreen)
 proc fcQWindow_slot_callback_screenChanged(slot: int, screen: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QWindowscreenChangedSlot](cast[pointer](slot))
-  let slotval1 = gen_qscreen_types.QScreen(h: screen)
+  let slotval1 = gen_qscreen_types.QScreen(h: screen, owned: false)
 
   nimfunc[](slotval1)
 
@@ -1002,7 +1001,7 @@ proc focusObjectChanged*(self: gen_qwindow_types.QWindow, objectVal: gen_qobject
 type QWindowfocusObjectChangedSlot* = proc(objectVal: gen_qobject_types.QObject)
 proc fcQWindow_slot_callback_focusObjectChanged(slot: int, objectVal: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QWindowfocusObjectChangedSlot](cast[pointer](slot))
-  let slotval1 = gen_qobject_types.QObject(h: objectVal)
+  let slotval1 = gen_qobject_types.QObject(h: objectVal, owned: false)
 
   nimfunc[](slotval1)
 
@@ -1042,7 +1041,7 @@ proc transientParentChanged*(self: gen_qwindow_types.QWindow, transientParent: g
 type QWindowtransientParentChangedSlot* = proc(transientParent: gen_qwindow_types.QWindow)
 proc fcQWindow_slot_callback_transientParentChanged(slot: int, transientParent: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QWindowtransientParentChangedSlot](cast[pointer](slot))
-  let slotval1 = gen_qwindow_types.QWindow(h: transientParent)
+  let slotval1 = gen_qwindow_types.QWindow(h: transientParent, owned: false)
 
   nimfunc[](slotval1)
 
@@ -1069,7 +1068,7 @@ proc tr*(_: type gen_qwindow_types.QWindow, s: cstring, c: cstring, n: cint): st
   vx_ret
 
 proc parent*(self: gen_qwindow_types.QWindow, mode: cint): gen_qwindow_types.QWindow =
-  gen_qwindow_types.QWindow(h: fcQWindow_parent1(self.h, cint(mode)))
+  gen_qwindow_types.QWindow(h: fcQWindow_parent1(self.h, cint(mode)), owned: false)
 
 proc setFlag*(self: gen_qwindow_types.QWindow, param1: cint, on: bool): void =
   fcQWindow_setFlag2(self.h, cint(param1), on)
@@ -1111,7 +1110,7 @@ type QWindowchildEventProc* = proc(self: QWindow, event: gen_qcoreevent_types.QC
 type QWindowcustomEventProc* = proc(self: QWindow, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QWindowconnectNotifyProc* = proc(self: QWindow, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QWindowdisconnectNotifyProc* = proc(self: QWindow, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
-type QWindowVTable* = object
+type QWindowVTable* {.inheritable, pure.} = object
   vtbl: cQWindowVTable
   metaObject*: QWindowmetaObjectProc
   metacast*: QWindowmetacastProc
@@ -1148,13 +1147,16 @@ type QWindowVTable* = object
   connectNotify*: QWindowconnectNotifyProc
   disconnectNotify*: QWindowdisconnectNotifyProc
 proc QWindowmetaObject*(self: gen_qwindow_types.QWindow): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQWindow_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQWindow_virtualbase_metaObject(self.h), owned: false)
 
 proc fcQWindow_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QWindowVTable](fcQWindow_vdata(self)[])
   let self = QWindow(h: self)
   var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QWindowmetacast*(self: gen_qwindow_types.QWindow, param1: cstring): pointer =
   fcQWindow_virtualbase_metacast(self.h, param1)
@@ -1188,40 +1190,52 @@ proc fcQWindow_vtable_callback_surfaceType(self: pointer): cint {.cdecl.} =
   cint(virtualReturn)
 
 proc QWindowformat*(self: gen_qwindow_types.QWindow): gen_qsurfaceformat_types.QSurfaceFormat =
-  gen_qsurfaceformat_types.QSurfaceFormat(h: fcQWindow_virtualbase_format(self.h))
+  gen_qsurfaceformat_types.QSurfaceFormat(h: fcQWindow_virtualbase_format(self.h), owned: true)
 
 proc fcQWindow_vtable_callback_format(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QWindowVTable](fcQWindow_vdata(self)[])
   let self = QWindow(h: self)
   var virtualReturn = vtbl[].format(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QWindowsize*(self: gen_qwindow_types.QWindow): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQWindow_virtualbase_size(self.h))
+  gen_qsize_types.QSize(h: fcQWindow_virtualbase_size(self.h), owned: true)
 
 proc fcQWindow_vtable_callback_size(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QWindowVTable](fcQWindow_vdata(self)[])
   let self = QWindow(h: self)
   var virtualReturn = vtbl[].size(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QWindowaccessibleRoot*(self: gen_qwindow_types.QWindow): gen_qaccessible_types.QAccessibleInterface =
-  gen_qaccessible_types.QAccessibleInterface(h: fcQWindow_virtualbase_accessibleRoot(self.h))
+  gen_qaccessible_types.QAccessibleInterface(h: fcQWindow_virtualbase_accessibleRoot(self.h), owned: false)
 
 proc fcQWindow_vtable_callback_accessibleRoot(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QWindowVTable](fcQWindow_vdata(self)[])
   let self = QWindow(h: self)
   var virtualReturn = vtbl[].accessibleRoot(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QWindowfocusObject*(self: gen_qwindow_types.QWindow): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQWindow_virtualbase_focusObject(self.h))
+  gen_qobject_types.QObject(h: fcQWindow_virtualbase_focusObject(self.h), owned: false)
 
 proc fcQWindow_vtable_callback_focusObject(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QWindowVTable](fcQWindow_vdata(self)[])
   let self = QWindow(h: self)
   var virtualReturn = vtbl[].focusObject(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QWindowexposeEvent*(self: gen_qwindow_types.QWindow, param1: gen_qevent_types.QExposeEvent): void =
   fcQWindow_virtualbase_exposeEvent(self.h, param1.h)
@@ -1229,7 +1243,7 @@ proc QWindowexposeEvent*(self: gen_qwindow_types.QWindow, param1: gen_qevent_typ
 proc fcQWindow_vtable_callback_exposeEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWindowVTable](fcQWindow_vdata(self)[])
   let self = QWindow(h: self)
-  let slotval1 = gen_qevent_types.QExposeEvent(h: param1)
+  let slotval1 = gen_qevent_types.QExposeEvent(h: param1, owned: false)
   vtbl[].exposeEvent(self, slotval1)
 
 proc QWindowresizeEvent*(self: gen_qwindow_types.QWindow, param1: gen_qevent_types.QResizeEvent): void =
@@ -1238,7 +1252,7 @@ proc QWindowresizeEvent*(self: gen_qwindow_types.QWindow, param1: gen_qevent_typ
 proc fcQWindow_vtable_callback_resizeEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWindowVTable](fcQWindow_vdata(self)[])
   let self = QWindow(h: self)
-  let slotval1 = gen_qevent_types.QResizeEvent(h: param1)
+  let slotval1 = gen_qevent_types.QResizeEvent(h: param1, owned: false)
   vtbl[].resizeEvent(self, slotval1)
 
 proc QWindowpaintEvent*(self: gen_qwindow_types.QWindow, param1: gen_qevent_types.QPaintEvent): void =
@@ -1247,7 +1261,7 @@ proc QWindowpaintEvent*(self: gen_qwindow_types.QWindow, param1: gen_qevent_type
 proc fcQWindow_vtable_callback_paintEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWindowVTable](fcQWindow_vdata(self)[])
   let self = QWindow(h: self)
-  let slotval1 = gen_qevent_types.QPaintEvent(h: param1)
+  let slotval1 = gen_qevent_types.QPaintEvent(h: param1, owned: false)
   vtbl[].paintEvent(self, slotval1)
 
 proc QWindowmoveEvent*(self: gen_qwindow_types.QWindow, param1: gen_qevent_types.QMoveEvent): void =
@@ -1256,7 +1270,7 @@ proc QWindowmoveEvent*(self: gen_qwindow_types.QWindow, param1: gen_qevent_types
 proc fcQWindow_vtable_callback_moveEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWindowVTable](fcQWindow_vdata(self)[])
   let self = QWindow(h: self)
-  let slotval1 = gen_qevent_types.QMoveEvent(h: param1)
+  let slotval1 = gen_qevent_types.QMoveEvent(h: param1, owned: false)
   vtbl[].moveEvent(self, slotval1)
 
 proc QWindowfocusInEvent*(self: gen_qwindow_types.QWindow, param1: gen_qevent_types.QFocusEvent): void =
@@ -1265,7 +1279,7 @@ proc QWindowfocusInEvent*(self: gen_qwindow_types.QWindow, param1: gen_qevent_ty
 proc fcQWindow_vtable_callback_focusInEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWindowVTable](fcQWindow_vdata(self)[])
   let self = QWindow(h: self)
-  let slotval1 = gen_qevent_types.QFocusEvent(h: param1)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: param1, owned: false)
   vtbl[].focusInEvent(self, slotval1)
 
 proc QWindowfocusOutEvent*(self: gen_qwindow_types.QWindow, param1: gen_qevent_types.QFocusEvent): void =
@@ -1274,7 +1288,7 @@ proc QWindowfocusOutEvent*(self: gen_qwindow_types.QWindow, param1: gen_qevent_t
 proc fcQWindow_vtable_callback_focusOutEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWindowVTable](fcQWindow_vdata(self)[])
   let self = QWindow(h: self)
-  let slotval1 = gen_qevent_types.QFocusEvent(h: param1)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: param1, owned: false)
   vtbl[].focusOutEvent(self, slotval1)
 
 proc QWindowshowEvent*(self: gen_qwindow_types.QWindow, param1: gen_qevent_types.QShowEvent): void =
@@ -1283,7 +1297,7 @@ proc QWindowshowEvent*(self: gen_qwindow_types.QWindow, param1: gen_qevent_types
 proc fcQWindow_vtable_callback_showEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWindowVTable](fcQWindow_vdata(self)[])
   let self = QWindow(h: self)
-  let slotval1 = gen_qevent_types.QShowEvent(h: param1)
+  let slotval1 = gen_qevent_types.QShowEvent(h: param1, owned: false)
   vtbl[].showEvent(self, slotval1)
 
 proc QWindowhideEvent*(self: gen_qwindow_types.QWindow, param1: gen_qevent_types.QHideEvent): void =
@@ -1292,7 +1306,7 @@ proc QWindowhideEvent*(self: gen_qwindow_types.QWindow, param1: gen_qevent_types
 proc fcQWindow_vtable_callback_hideEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWindowVTable](fcQWindow_vdata(self)[])
   let self = QWindow(h: self)
-  let slotval1 = gen_qevent_types.QHideEvent(h: param1)
+  let slotval1 = gen_qevent_types.QHideEvent(h: param1, owned: false)
   vtbl[].hideEvent(self, slotval1)
 
 proc QWindowcloseEvent*(self: gen_qwindow_types.QWindow, param1: gen_qevent_types.QCloseEvent): void =
@@ -1301,7 +1315,7 @@ proc QWindowcloseEvent*(self: gen_qwindow_types.QWindow, param1: gen_qevent_type
 proc fcQWindow_vtable_callback_closeEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWindowVTable](fcQWindow_vdata(self)[])
   let self = QWindow(h: self)
-  let slotval1 = gen_qevent_types.QCloseEvent(h: param1)
+  let slotval1 = gen_qevent_types.QCloseEvent(h: param1, owned: false)
   vtbl[].closeEvent(self, slotval1)
 
 proc QWindowevent*(self: gen_qwindow_types.QWindow, param1: gen_qcoreevent_types.QEvent): bool =
@@ -1310,7 +1324,7 @@ proc QWindowevent*(self: gen_qwindow_types.QWindow, param1: gen_qcoreevent_types
 proc fcQWindow_vtable_callback_event(self: pointer, param1: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QWindowVTable](fcQWindow_vdata(self)[])
   let self = QWindow(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: param1)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
@@ -1320,7 +1334,7 @@ proc QWindowkeyPressEvent*(self: gen_qwindow_types.QWindow, param1: gen_qevent_t
 proc fcQWindow_vtable_callback_keyPressEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWindowVTable](fcQWindow_vdata(self)[])
   let self = QWindow(h: self)
-  let slotval1 = gen_qevent_types.QKeyEvent(h: param1)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: param1, owned: false)
   vtbl[].keyPressEvent(self, slotval1)
 
 proc QWindowkeyReleaseEvent*(self: gen_qwindow_types.QWindow, param1: gen_qevent_types.QKeyEvent): void =
@@ -1329,7 +1343,7 @@ proc QWindowkeyReleaseEvent*(self: gen_qwindow_types.QWindow, param1: gen_qevent
 proc fcQWindow_vtable_callback_keyReleaseEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWindowVTable](fcQWindow_vdata(self)[])
   let self = QWindow(h: self)
-  let slotval1 = gen_qevent_types.QKeyEvent(h: param1)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: param1, owned: false)
   vtbl[].keyReleaseEvent(self, slotval1)
 
 proc QWindowmousePressEvent*(self: gen_qwindow_types.QWindow, param1: gen_qevent_types.QMouseEvent): void =
@@ -1338,7 +1352,7 @@ proc QWindowmousePressEvent*(self: gen_qwindow_types.QWindow, param1: gen_qevent
 proc fcQWindow_vtable_callback_mousePressEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWindowVTable](fcQWindow_vdata(self)[])
   let self = QWindow(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: param1)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: param1, owned: false)
   vtbl[].mousePressEvent(self, slotval1)
 
 proc QWindowmouseReleaseEvent*(self: gen_qwindow_types.QWindow, param1: gen_qevent_types.QMouseEvent): void =
@@ -1347,7 +1361,7 @@ proc QWindowmouseReleaseEvent*(self: gen_qwindow_types.QWindow, param1: gen_qeve
 proc fcQWindow_vtable_callback_mouseReleaseEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWindowVTable](fcQWindow_vdata(self)[])
   let self = QWindow(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: param1)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: param1, owned: false)
   vtbl[].mouseReleaseEvent(self, slotval1)
 
 proc QWindowmouseDoubleClickEvent*(self: gen_qwindow_types.QWindow, param1: gen_qevent_types.QMouseEvent): void =
@@ -1356,7 +1370,7 @@ proc QWindowmouseDoubleClickEvent*(self: gen_qwindow_types.QWindow, param1: gen_
 proc fcQWindow_vtable_callback_mouseDoubleClickEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWindowVTable](fcQWindow_vdata(self)[])
   let self = QWindow(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: param1)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: param1, owned: false)
   vtbl[].mouseDoubleClickEvent(self, slotval1)
 
 proc QWindowmouseMoveEvent*(self: gen_qwindow_types.QWindow, param1: gen_qevent_types.QMouseEvent): void =
@@ -1365,7 +1379,7 @@ proc QWindowmouseMoveEvent*(self: gen_qwindow_types.QWindow, param1: gen_qevent_
 proc fcQWindow_vtable_callback_mouseMoveEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWindowVTable](fcQWindow_vdata(self)[])
   let self = QWindow(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: param1)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: param1, owned: false)
   vtbl[].mouseMoveEvent(self, slotval1)
 
 proc QWindowwheelEvent*(self: gen_qwindow_types.QWindow, param1: gen_qevent_types.QWheelEvent): void =
@@ -1374,7 +1388,7 @@ proc QWindowwheelEvent*(self: gen_qwindow_types.QWindow, param1: gen_qevent_type
 proc fcQWindow_vtable_callback_wheelEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWindowVTable](fcQWindow_vdata(self)[])
   let self = QWindow(h: self)
-  let slotval1 = gen_qevent_types.QWheelEvent(h: param1)
+  let slotval1 = gen_qevent_types.QWheelEvent(h: param1, owned: false)
   vtbl[].wheelEvent(self, slotval1)
 
 proc QWindowtouchEvent*(self: gen_qwindow_types.QWindow, param1: gen_qevent_types.QTouchEvent): void =
@@ -1383,7 +1397,7 @@ proc QWindowtouchEvent*(self: gen_qwindow_types.QWindow, param1: gen_qevent_type
 proc fcQWindow_vtable_callback_touchEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWindowVTable](fcQWindow_vdata(self)[])
   let self = QWindow(h: self)
-  let slotval1 = gen_qevent_types.QTouchEvent(h: param1)
+  let slotval1 = gen_qevent_types.QTouchEvent(h: param1, owned: false)
   vtbl[].touchEvent(self, slotval1)
 
 proc QWindowtabletEvent*(self: gen_qwindow_types.QWindow, param1: gen_qevent_types.QTabletEvent): void =
@@ -1392,7 +1406,7 @@ proc QWindowtabletEvent*(self: gen_qwindow_types.QWindow, param1: gen_qevent_typ
 proc fcQWindow_vtable_callback_tabletEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWindowVTable](fcQWindow_vdata(self)[])
   let self = QWindow(h: self)
-  let slotval1 = gen_qevent_types.QTabletEvent(h: param1)
+  let slotval1 = gen_qevent_types.QTabletEvent(h: param1, owned: false)
   vtbl[].tabletEvent(self, slotval1)
 
 proc QWindownativeEvent*(self: gen_qwindow_types.QWindow, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool =
@@ -1416,8 +1430,8 @@ proc QWindoweventFilter*(self: gen_qwindow_types.QWindow, watched: gen_qobject_t
 proc fcQWindow_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QWindowVTable](fcQWindow_vdata(self)[])
   let self = QWindow(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
@@ -1427,7 +1441,7 @@ proc QWindowtimerEvent*(self: gen_qwindow_types.QWindow, event: gen_qcoreevent_t
 proc fcQWindow_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWindowVTable](fcQWindow_vdata(self)[])
   let self = QWindow(h: self)
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
 proc QWindowchildEvent*(self: gen_qwindow_types.QWindow, event: gen_qcoreevent_types.QChildEvent): void =
@@ -1436,7 +1450,7 @@ proc QWindowchildEvent*(self: gen_qwindow_types.QWindow, event: gen_qcoreevent_t
 proc fcQWindow_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWindowVTable](fcQWindow_vdata(self)[])
   let self = QWindow(h: self)
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
 proc QWindowcustomEvent*(self: gen_qwindow_types.QWindow, event: gen_qcoreevent_types.QEvent): void =
@@ -1445,7 +1459,7 @@ proc QWindowcustomEvent*(self: gen_qwindow_types.QWindow, event: gen_qcoreevent_
 proc fcQWindow_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWindowVTable](fcQWindow_vdata(self)[])
   let self = QWindow(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
 proc QWindowconnectNotify*(self: gen_qwindow_types.QWindow, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -1454,7 +1468,7 @@ proc QWindowconnectNotify*(self: gen_qwindow_types.QWindow, signal: gen_qmetaobj
 proc fcQWindow_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWindowVTable](fcQWindow_vdata(self)[])
   let self = QWindow(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
 proc QWindowdisconnectNotify*(self: gen_qwindow_types.QWindow, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -1463,7 +1477,7 @@ proc QWindowdisconnectNotify*(self: gen_qwindow_types.QWindow, signal: gen_qmeta
 proc fcQWindow_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWindowVTable](fcQWindow_vdata(self)[])
   let self = QWindow(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
 type VirtualQWindow* {.inheritable.} = ref object of QWindow
@@ -1532,70 +1546,70 @@ method exposeEvent*(self: VirtualQWindow, param1: gen_qevent_types.QExposeEvent)
   QWindowexposeEvent(self[], param1)
 proc fcQWindow_method_callback_exposeEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQWindow](fcQWindow_vdata(self)[])
-  let slotval1 = gen_qevent_types.QExposeEvent(h: param1)
+  let slotval1 = gen_qevent_types.QExposeEvent(h: param1, owned: false)
   inst.exposeEvent(slotval1)
 
 method resizeEvent*(self: VirtualQWindow, param1: gen_qevent_types.QResizeEvent): void {.base.} =
   QWindowresizeEvent(self[], param1)
 proc fcQWindow_method_callback_resizeEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQWindow](fcQWindow_vdata(self)[])
-  let slotval1 = gen_qevent_types.QResizeEvent(h: param1)
+  let slotval1 = gen_qevent_types.QResizeEvent(h: param1, owned: false)
   inst.resizeEvent(slotval1)
 
 method paintEvent*(self: VirtualQWindow, param1: gen_qevent_types.QPaintEvent): void {.base.} =
   QWindowpaintEvent(self[], param1)
 proc fcQWindow_method_callback_paintEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQWindow](fcQWindow_vdata(self)[])
-  let slotval1 = gen_qevent_types.QPaintEvent(h: param1)
+  let slotval1 = gen_qevent_types.QPaintEvent(h: param1, owned: false)
   inst.paintEvent(slotval1)
 
 method moveEvent*(self: VirtualQWindow, param1: gen_qevent_types.QMoveEvent): void {.base.} =
   QWindowmoveEvent(self[], param1)
 proc fcQWindow_method_callback_moveEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQWindow](fcQWindow_vdata(self)[])
-  let slotval1 = gen_qevent_types.QMoveEvent(h: param1)
+  let slotval1 = gen_qevent_types.QMoveEvent(h: param1, owned: false)
   inst.moveEvent(slotval1)
 
 method focusInEvent*(self: VirtualQWindow, param1: gen_qevent_types.QFocusEvent): void {.base.} =
   QWindowfocusInEvent(self[], param1)
 proc fcQWindow_method_callback_focusInEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQWindow](fcQWindow_vdata(self)[])
-  let slotval1 = gen_qevent_types.QFocusEvent(h: param1)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: param1, owned: false)
   inst.focusInEvent(slotval1)
 
 method focusOutEvent*(self: VirtualQWindow, param1: gen_qevent_types.QFocusEvent): void {.base.} =
   QWindowfocusOutEvent(self[], param1)
 proc fcQWindow_method_callback_focusOutEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQWindow](fcQWindow_vdata(self)[])
-  let slotval1 = gen_qevent_types.QFocusEvent(h: param1)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: param1, owned: false)
   inst.focusOutEvent(slotval1)
 
 method showEvent*(self: VirtualQWindow, param1: gen_qevent_types.QShowEvent): void {.base.} =
   QWindowshowEvent(self[], param1)
 proc fcQWindow_method_callback_showEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQWindow](fcQWindow_vdata(self)[])
-  let slotval1 = gen_qevent_types.QShowEvent(h: param1)
+  let slotval1 = gen_qevent_types.QShowEvent(h: param1, owned: false)
   inst.showEvent(slotval1)
 
 method hideEvent*(self: VirtualQWindow, param1: gen_qevent_types.QHideEvent): void {.base.} =
   QWindowhideEvent(self[], param1)
 proc fcQWindow_method_callback_hideEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQWindow](fcQWindow_vdata(self)[])
-  let slotval1 = gen_qevent_types.QHideEvent(h: param1)
+  let slotval1 = gen_qevent_types.QHideEvent(h: param1, owned: false)
   inst.hideEvent(slotval1)
 
 method closeEvent*(self: VirtualQWindow, param1: gen_qevent_types.QCloseEvent): void {.base.} =
   QWindowcloseEvent(self[], param1)
 proc fcQWindow_method_callback_closeEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQWindow](fcQWindow_vdata(self)[])
-  let slotval1 = gen_qevent_types.QCloseEvent(h: param1)
+  let slotval1 = gen_qevent_types.QCloseEvent(h: param1, owned: false)
   inst.closeEvent(slotval1)
 
 method event*(self: VirtualQWindow, param1: gen_qcoreevent_types.QEvent): bool {.base.} =
   QWindowevent(self[], param1)
 proc fcQWindow_method_callback_event(self: pointer, param1: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQWindow](fcQWindow_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: param1)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
@@ -1603,63 +1617,63 @@ method keyPressEvent*(self: VirtualQWindow, param1: gen_qevent_types.QKeyEvent):
   QWindowkeyPressEvent(self[], param1)
 proc fcQWindow_method_callback_keyPressEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQWindow](fcQWindow_vdata(self)[])
-  let slotval1 = gen_qevent_types.QKeyEvent(h: param1)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: param1, owned: false)
   inst.keyPressEvent(slotval1)
 
 method keyReleaseEvent*(self: VirtualQWindow, param1: gen_qevent_types.QKeyEvent): void {.base.} =
   QWindowkeyReleaseEvent(self[], param1)
 proc fcQWindow_method_callback_keyReleaseEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQWindow](fcQWindow_vdata(self)[])
-  let slotval1 = gen_qevent_types.QKeyEvent(h: param1)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: param1, owned: false)
   inst.keyReleaseEvent(slotval1)
 
 method mousePressEvent*(self: VirtualQWindow, param1: gen_qevent_types.QMouseEvent): void {.base.} =
   QWindowmousePressEvent(self[], param1)
 proc fcQWindow_method_callback_mousePressEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQWindow](fcQWindow_vdata(self)[])
-  let slotval1 = gen_qevent_types.QMouseEvent(h: param1)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: param1, owned: false)
   inst.mousePressEvent(slotval1)
 
 method mouseReleaseEvent*(self: VirtualQWindow, param1: gen_qevent_types.QMouseEvent): void {.base.} =
   QWindowmouseReleaseEvent(self[], param1)
 proc fcQWindow_method_callback_mouseReleaseEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQWindow](fcQWindow_vdata(self)[])
-  let slotval1 = gen_qevent_types.QMouseEvent(h: param1)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: param1, owned: false)
   inst.mouseReleaseEvent(slotval1)
 
 method mouseDoubleClickEvent*(self: VirtualQWindow, param1: gen_qevent_types.QMouseEvent): void {.base.} =
   QWindowmouseDoubleClickEvent(self[], param1)
 proc fcQWindow_method_callback_mouseDoubleClickEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQWindow](fcQWindow_vdata(self)[])
-  let slotval1 = gen_qevent_types.QMouseEvent(h: param1)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: param1, owned: false)
   inst.mouseDoubleClickEvent(slotval1)
 
 method mouseMoveEvent*(self: VirtualQWindow, param1: gen_qevent_types.QMouseEvent): void {.base.} =
   QWindowmouseMoveEvent(self[], param1)
 proc fcQWindow_method_callback_mouseMoveEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQWindow](fcQWindow_vdata(self)[])
-  let slotval1 = gen_qevent_types.QMouseEvent(h: param1)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: param1, owned: false)
   inst.mouseMoveEvent(slotval1)
 
 method wheelEvent*(self: VirtualQWindow, param1: gen_qevent_types.QWheelEvent): void {.base.} =
   QWindowwheelEvent(self[], param1)
 proc fcQWindow_method_callback_wheelEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQWindow](fcQWindow_vdata(self)[])
-  let slotval1 = gen_qevent_types.QWheelEvent(h: param1)
+  let slotval1 = gen_qevent_types.QWheelEvent(h: param1, owned: false)
   inst.wheelEvent(slotval1)
 
 method touchEvent*(self: VirtualQWindow, param1: gen_qevent_types.QTouchEvent): void {.base.} =
   QWindowtouchEvent(self[], param1)
 proc fcQWindow_method_callback_touchEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQWindow](fcQWindow_vdata(self)[])
-  let slotval1 = gen_qevent_types.QTouchEvent(h: param1)
+  let slotval1 = gen_qevent_types.QTouchEvent(h: param1, owned: false)
   inst.touchEvent(slotval1)
 
 method tabletEvent*(self: VirtualQWindow, param1: gen_qevent_types.QTabletEvent): void {.base.} =
   QWindowtabletEvent(self[], param1)
 proc fcQWindow_method_callback_tabletEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQWindow](fcQWindow_vdata(self)[])
-  let slotval1 = gen_qevent_types.QTabletEvent(h: param1)
+  let slotval1 = gen_qevent_types.QTabletEvent(h: param1, owned: false)
   inst.tabletEvent(slotval1)
 
 method nativeEvent*(self: VirtualQWindow, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
@@ -1679,8 +1693,8 @@ method eventFilter*(self: VirtualQWindow, watched: gen_qobject_types.QObject, ev
   QWindoweventFilter(self[], watched, event)
 proc fcQWindow_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQWindow](fcQWindow_vdata(self)[])
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
@@ -1688,42 +1702,42 @@ method timerEvent*(self: VirtualQWindow, event: gen_qcoreevent_types.QTimerEvent
   QWindowtimerEvent(self[], event)
 proc fcQWindow_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQWindow](fcQWindow_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
 method childEvent*(self: VirtualQWindow, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
   QWindowchildEvent(self[], event)
 proc fcQWindow_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQWindow](fcQWindow_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
 method customEvent*(self: VirtualQWindow, event: gen_qcoreevent_types.QEvent): void {.base.} =
   QWindowcustomEvent(self[], event)
 proc fcQWindow_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQWindow](fcQWindow_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
 method connectNotify*(self: VirtualQWindow, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
   QWindowconnectNotify(self[], signal)
 proc fcQWindow_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQWindow](fcQWindow_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
 method disconnectNotify*(self: VirtualQWindow, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
   QWindowdisconnectNotify(self[], signal)
 proc fcQWindow_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQWindow](fcQWindow_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
 
 proc resolveInterface*(self: gen_qwindow_types.QWindow, name: cstring, revision: cint): pointer =
   fcQWindow_protectedbase_resolveInterface(self.h, name, revision)
 
 proc sender*(self: gen_qwindow_types.QWindow): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQWindow_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQWindow_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qwindow_types.QWindow): cint =
   fcQWindow_protectedbase_senderSignalIndex(self.h)
@@ -1809,7 +1823,7 @@ proc create*(T: type gen_qwindow_types.QWindow,
     vtbl[].vtbl.connectNotify = fcQWindow_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQWindow_vtable_callback_disconnectNotify
-  let tmp = gen_qwindow_types.QWindow(h: fcQWindow_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))))
+  let tmp = gen_qwindow_types.QWindow(h: fcQWindow_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))), owned: true)
   fcQWindow_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qwindow_types.QWindow,
@@ -1888,7 +1902,7 @@ proc create*(T: type gen_qwindow_types.QWindow,
     vtbl[].vtbl.connectNotify = fcQWindow_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQWindow_vtable_callback_disconnectNotify
-  let tmp = gen_qwindow_types.QWindow(h: fcQWindow_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h))
+  let tmp = gen_qwindow_types.QWindow(h: fcQWindow_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h), owned: true)
   fcQWindow_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qwindow_types.QWindow,
@@ -1967,13 +1981,14 @@ proc create*(T: type gen_qwindow_types.QWindow,
     vtbl[].vtbl.connectNotify = fcQWindow_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQWindow_vtable_callback_disconnectNotify
-  let tmp = gen_qwindow_types.QWindow(h: fcQWindow_new3(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), screen.h))
+  let tmp = gen_qwindow_types.QWindow(h: fcQWindow_new3(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), screen.h), owned: true)
   fcQWindow_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQWindow_mvtbl = cQWindowVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQWindow()[])](self.fcQWindow_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   metaObject: fcQWindow_method_callback_metaObject,
   metacast: fcQWindow_method_callback_metacast,
@@ -2032,5 +2047,3 @@ proc create*(T: type gen_qwindow_types.QWindow,
 
 proc staticMetaObject*(_: type gen_qwindow_types.QWindow): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQWindow_staticMetaObject())
-proc delete*(self: gen_qwindow_types.QWindow) =
-  fcQWindow_delete(self.h)

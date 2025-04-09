@@ -32,7 +32,7 @@ func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
     else:
       copyMem(addr result[0], v.data, len)
 
-const cflags = gorge("pkg-config --cflags Qt6Widgets")  & " -fPIC"
+const cflags = gorge("pkg-config --cflags Qt6Widgets") & " -fPIC"
 {.compile("gen_qundoview.cpp", cflags).}
 
 
@@ -330,10 +330,9 @@ proc fcQUndoView_new4(vtbl: pointer, vdata: csize_t, group: pointer): ptr cQUndo
 proc fcQUndoView_new5(vtbl: pointer, vdata: csize_t, stack: pointer, parent: pointer): ptr cQUndoView {.importc: "QUndoView_new5".}
 proc fcQUndoView_new6(vtbl: pointer, vdata: csize_t, group: pointer, parent: pointer): ptr cQUndoView {.importc: "QUndoView_new6".}
 proc fcQUndoView_staticMetaObject(): pointer {.importc: "QUndoView_staticMetaObject".}
-proc fcQUndoView_delete(self: pointer) {.importc: "QUndoView_delete".}
 
 proc metaObject*(self: gen_qundoview_types.QUndoView): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQUndoView_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQUndoView_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qundoview_types.QUndoView, param1: cstring): pointer =
   fcQUndoView_metacast(self.h, param1)
@@ -348,10 +347,10 @@ proc tr*(_: type gen_qundoview_types.QUndoView, s: cstring): string =
   vx_ret
 
 proc stack*(self: gen_qundoview_types.QUndoView): gen_qundostack_types.QUndoStack =
-  gen_qundostack_types.QUndoStack(h: fcQUndoView_stack(self.h))
+  gen_qundostack_types.QUndoStack(h: fcQUndoView_stack(self.h), owned: false)
 
 proc group*(self: gen_qundoview_types.QUndoView): gen_qundogroup_types.QUndoGroup =
-  gen_qundogroup_types.QUndoGroup(h: fcQUndoView_group(self.h))
+  gen_qundogroup_types.QUndoGroup(h: fcQUndoView_group(self.h), owned: false)
 
 proc setEmptyLabel*(self: gen_qundoview_types.QUndoView, label: string): void =
   fcQUndoView_setEmptyLabel(self.h, struct_miqt_string(data: if len(label) > 0: addr label[0] else: nil, len: csize_t(len(label))))
@@ -366,7 +365,7 @@ proc setCleanIcon*(self: gen_qundoview_types.QUndoView, icon: gen_qicon_types.QI
   fcQUndoView_setCleanIcon(self.h, icon.h)
 
 proc cleanIcon*(self: gen_qundoview_types.QUndoView): gen_qicon_types.QIcon =
-  gen_qicon_types.QIcon(h: fcQUndoView_cleanIcon(self.h))
+  gen_qicon_types.QIcon(h: fcQUndoView_cleanIcon(self.h), owned: true)
 
 proc setStack*(self: gen_qundoview_types.QUndoView, stack: gen_qundostack_types.QUndoStack): void =
   fcQUndoView_setStack(self.h, stack.h)
@@ -480,7 +479,7 @@ type QUndoViewchildEventProc* = proc(self: QUndoView, event: gen_qcoreevent_type
 type QUndoViewcustomEventProc* = proc(self: QUndoView, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QUndoViewconnectNotifyProc* = proc(self: QUndoView, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QUndoViewdisconnectNotifyProc* = proc(self: QUndoView, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
-type QUndoViewVTable* = object
+type QUndoViewVTable* {.inheritable, pure.} = object
   vtbl: cQUndoViewVTable
   metaObject*: QUndoViewmetaObjectProc
   metacast*: QUndoViewmetacastProc
@@ -577,13 +576,16 @@ type QUndoViewVTable* = object
   connectNotify*: QUndoViewconnectNotifyProc
   disconnectNotify*: QUndoViewdisconnectNotifyProc
 proc QUndoViewmetaObject*(self: gen_qundoview_types.QUndoView): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQUndoView_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQUndoView_virtualbase_metaObject(self.h), owned: false)
 
 proc fcQUndoView_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QUndoViewVTable](fcQUndoView_vdata(self)[])
   let self = QUndoView(h: self)
   var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QUndoViewmetacast*(self: gen_qundoview_types.QUndoView, param1: cstring): pointer =
   fcQUndoView_virtualbase_metacast(self.h, param1)
@@ -608,14 +610,17 @@ proc fcQUndoView_vtable_callback_metacall(self: pointer, param1: cint, param2: c
   virtualReturn
 
 proc QUndoViewvisualRect*(self: gen_qundoview_types.QUndoView, index: gen_qabstractitemmodel_types.QModelIndex): gen_qrect_types.QRect =
-  gen_qrect_types.QRect(h: fcQUndoView_virtualbase_visualRect(self.h, index.h))
+  gen_qrect_types.QRect(h: fcQUndoView_virtualbase_visualRect(self.h, index.h), owned: true)
 
 proc fcQUndoView_vtable_callback_visualRect(self: pointer, index: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QUndoViewVTable](fcQUndoView_vdata(self)[])
   let self = QUndoView(h: self)
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var virtualReturn = vtbl[].visualRect(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QUndoViewscrollTo*(self: gen_qundoview_types.QUndoView, index: gen_qabstractitemmodel_types.QModelIndex, hint: cint): void =
   fcQUndoView_virtualbase_scrollTo(self.h, index.h, cint(hint))
@@ -623,19 +628,22 @@ proc QUndoViewscrollTo*(self: gen_qundoview_types.QUndoView, index: gen_qabstrac
 proc fcQUndoView_vtable_callback_scrollTo(self: pointer, index: pointer, hint: cint): void {.cdecl.} =
   let vtbl = cast[ptr QUndoViewVTable](fcQUndoView_vdata(self)[])
   let self = QUndoView(h: self)
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   let slotval2 = cint(hint)
   vtbl[].scrollTo(self, slotval1, slotval2)
 
 proc QUndoViewindexAt*(self: gen_qundoview_types.QUndoView, p: gen_qpoint_types.QPoint): gen_qabstractitemmodel_types.QModelIndex =
-  gen_qabstractitemmodel_types.QModelIndex(h: fcQUndoView_virtualbase_indexAt(self.h, p.h))
+  gen_qabstractitemmodel_types.QModelIndex(h: fcQUndoView_virtualbase_indexAt(self.h, p.h), owned: true)
 
 proc fcQUndoView_vtable_callback_indexAt(self: pointer, p: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QUndoViewVTable](fcQUndoView_vdata(self)[])
   let self = QUndoView(h: self)
-  let slotval1 = gen_qpoint_types.QPoint(h: p)
+  let slotval1 = gen_qpoint_types.QPoint(h: p, owned: false)
   var virtualReturn = vtbl[].indexAt(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QUndoViewdoItemsLayout*(self: gen_qundoview_types.QUndoView): void =
   fcQUndoView_virtualbase_doItemsLayout(self.h)
@@ -659,7 +667,7 @@ proc QUndoViewsetRootIndex*(self: gen_qundoview_types.QUndoView, index: gen_qabs
 proc fcQUndoView_vtable_callback_setRootIndex(self: pointer, index: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QUndoViewVTable](fcQUndoView_vdata(self)[])
   let self = QUndoView(h: self)
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   vtbl[].setRootIndex(self, slotval1)
 
 proc QUndoViewevent*(self: gen_qundoview_types.QUndoView, e: gen_qcoreevent_types.QEvent): bool =
@@ -668,7 +676,7 @@ proc QUndoViewevent*(self: gen_qundoview_types.QUndoView, e: gen_qcoreevent_type
 proc fcQUndoView_vtable_callback_event(self: pointer, e: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QUndoViewVTable](fcQUndoView_vdata(self)[])
   let self = QUndoView(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: e)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: e, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
@@ -692,8 +700,8 @@ proc QUndoViewdataChanged*(self: gen_qundoview_types.QUndoView, topLeft: gen_qab
 proc fcQUndoView_vtable_callback_dataChanged(self: pointer, topLeft: pointer, bottomRight: pointer, roles: struct_miqt_array): void {.cdecl.} =
   let vtbl = cast[ptr QUndoViewVTable](fcQUndoView_vdata(self)[])
   let self = QUndoView(h: self)
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: topLeft)
-  let slotval2 = gen_qabstractitemmodel_types.QModelIndex(h: bottomRight)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: topLeft, owned: false)
+  let slotval2 = gen_qabstractitemmodel_types.QModelIndex(h: bottomRight, owned: false)
   var vroles_ma = roles
   var vrolesx_ret = newSeq[cint](int(vroles_ma.len))
   let vroles_outCast = cast[ptr UncheckedArray[cint]](vroles_ma.data)
@@ -709,7 +717,7 @@ proc QUndoViewrowsInserted*(self: gen_qundoview_types.QUndoView, parent: gen_qab
 proc fcQUndoView_vtable_callback_rowsInserted(self: pointer, parent: pointer, start: cint, endVal: cint): void {.cdecl.} =
   let vtbl = cast[ptr QUndoViewVTable](fcQUndoView_vdata(self)[])
   let self = QUndoView(h: self)
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   let slotval2 = start
   let slotval3 = endVal
   vtbl[].rowsInserted(self, slotval1, slotval2, slotval3)
@@ -720,7 +728,7 @@ proc QUndoViewrowsAboutToBeRemoved*(self: gen_qundoview_types.QUndoView, parent:
 proc fcQUndoView_vtable_callback_rowsAboutToBeRemoved(self: pointer, parent: pointer, start: cint, endVal: cint): void {.cdecl.} =
   let vtbl = cast[ptr QUndoViewVTable](fcQUndoView_vdata(self)[])
   let self = QUndoView(h: self)
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   let slotval2 = start
   let slotval3 = endVal
   vtbl[].rowsAboutToBeRemoved(self, slotval1, slotval2, slotval3)
@@ -731,7 +739,7 @@ proc QUndoViewmouseMoveEvent*(self: gen_qundoview_types.QUndoView, e: gen_qevent
 proc fcQUndoView_vtable_callback_mouseMoveEvent(self: pointer, e: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QUndoViewVTable](fcQUndoView_vdata(self)[])
   let self = QUndoView(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: e)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: e, owned: false)
   vtbl[].mouseMoveEvent(self, slotval1)
 
 proc QUndoViewmouseReleaseEvent*(self: gen_qundoview_types.QUndoView, e: gen_qevent_types.QMouseEvent): void =
@@ -740,7 +748,7 @@ proc QUndoViewmouseReleaseEvent*(self: gen_qundoview_types.QUndoView, e: gen_qev
 proc fcQUndoView_vtable_callback_mouseReleaseEvent(self: pointer, e: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QUndoViewVTable](fcQUndoView_vdata(self)[])
   let self = QUndoView(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: e)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: e, owned: false)
   vtbl[].mouseReleaseEvent(self, slotval1)
 
 proc QUndoViewwheelEvent*(self: gen_qundoview_types.QUndoView, e: gen_qevent_types.QWheelEvent): void =
@@ -749,7 +757,7 @@ proc QUndoViewwheelEvent*(self: gen_qundoview_types.QUndoView, e: gen_qevent_typ
 proc fcQUndoView_vtable_callback_wheelEvent(self: pointer, e: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QUndoViewVTable](fcQUndoView_vdata(self)[])
   let self = QUndoView(h: self)
-  let slotval1 = gen_qevent_types.QWheelEvent(h: e)
+  let slotval1 = gen_qevent_types.QWheelEvent(h: e, owned: false)
   vtbl[].wheelEvent(self, slotval1)
 
 proc QUndoViewtimerEvent*(self: gen_qundoview_types.QUndoView, e: gen_qcoreevent_types.QTimerEvent): void =
@@ -758,7 +766,7 @@ proc QUndoViewtimerEvent*(self: gen_qundoview_types.QUndoView, e: gen_qcoreevent
 proc fcQUndoView_vtable_callback_timerEvent(self: pointer, e: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QUndoViewVTable](fcQUndoView_vdata(self)[])
   let self = QUndoView(h: self)
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: e)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: e, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
 proc QUndoViewresizeEvent*(self: gen_qundoview_types.QUndoView, e: gen_qevent_types.QResizeEvent): void =
@@ -767,7 +775,7 @@ proc QUndoViewresizeEvent*(self: gen_qundoview_types.QUndoView, e: gen_qevent_ty
 proc fcQUndoView_vtable_callback_resizeEvent(self: pointer, e: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QUndoViewVTable](fcQUndoView_vdata(self)[])
   let self = QUndoView(h: self)
-  let slotval1 = gen_qevent_types.QResizeEvent(h: e)
+  let slotval1 = gen_qevent_types.QResizeEvent(h: e, owned: false)
   vtbl[].resizeEvent(self, slotval1)
 
 proc QUndoViewdragMoveEvent*(self: gen_qundoview_types.QUndoView, e: gen_qevent_types.QDragMoveEvent): void =
@@ -776,7 +784,7 @@ proc QUndoViewdragMoveEvent*(self: gen_qundoview_types.QUndoView, e: gen_qevent_
 proc fcQUndoView_vtable_callback_dragMoveEvent(self: pointer, e: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QUndoViewVTable](fcQUndoView_vdata(self)[])
   let self = QUndoView(h: self)
-  let slotval1 = gen_qevent_types.QDragMoveEvent(h: e)
+  let slotval1 = gen_qevent_types.QDragMoveEvent(h: e, owned: false)
   vtbl[].dragMoveEvent(self, slotval1)
 
 proc QUndoViewdragLeaveEvent*(self: gen_qundoview_types.QUndoView, e: gen_qevent_types.QDragLeaveEvent): void =
@@ -785,7 +793,7 @@ proc QUndoViewdragLeaveEvent*(self: gen_qundoview_types.QUndoView, e: gen_qevent
 proc fcQUndoView_vtable_callback_dragLeaveEvent(self: pointer, e: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QUndoViewVTable](fcQUndoView_vdata(self)[])
   let self = QUndoView(h: self)
-  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: e)
+  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: e, owned: false)
   vtbl[].dragLeaveEvent(self, slotval1)
 
 proc QUndoViewdropEvent*(self: gen_qundoview_types.QUndoView, e: gen_qevent_types.QDropEvent): void =
@@ -794,7 +802,7 @@ proc QUndoViewdropEvent*(self: gen_qundoview_types.QUndoView, e: gen_qevent_type
 proc fcQUndoView_vtable_callback_dropEvent(self: pointer, e: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QUndoViewVTable](fcQUndoView_vdata(self)[])
   let self = QUndoView(h: self)
-  let slotval1 = gen_qevent_types.QDropEvent(h: e)
+  let slotval1 = gen_qevent_types.QDropEvent(h: e, owned: false)
   vtbl[].dropEvent(self, slotval1)
 
 proc QUndoViewstartDrag*(self: gen_qundoview_types.QUndoView, supportedActions: cint): void =
@@ -812,7 +820,7 @@ proc QUndoViewinitViewItemOption*(self: gen_qundoview_types.QUndoView, option: g
 proc fcQUndoView_vtable_callback_initViewItemOption(self: pointer, option: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QUndoViewVTable](fcQUndoView_vdata(self)[])
   let self = QUndoView(h: self)
-  let slotval1 = gen_qstyleoption_types.QStyleOptionViewItem(h: option)
+  let slotval1 = gen_qstyleoption_types.QStyleOptionViewItem(h: option, owned: false)
   vtbl[].initViewItemOption(self, slotval1)
 
 proc QUndoViewpaintEvent*(self: gen_qundoview_types.QUndoView, e: gen_qevent_types.QPaintEvent): void =
@@ -821,7 +829,7 @@ proc QUndoViewpaintEvent*(self: gen_qundoview_types.QUndoView, e: gen_qevent_typ
 proc fcQUndoView_vtable_callback_paintEvent(self: pointer, e: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QUndoViewVTable](fcQUndoView_vdata(self)[])
   let self = QUndoView(h: self)
-  let slotval1 = gen_qevent_types.QPaintEvent(h: e)
+  let slotval1 = gen_qevent_types.QPaintEvent(h: e, owned: false)
   vtbl[].paintEvent(self, slotval1)
 
 proc QUndoViewhorizontalOffset*(self: gen_qundoview_types.QUndoView): cint =
@@ -843,7 +851,7 @@ proc fcQUndoView_vtable_callback_verticalOffset(self: pointer): cint {.cdecl.} =
   virtualReturn
 
 proc QUndoViewmoveCursor*(self: gen_qundoview_types.QUndoView, cursorAction: cint, modifiers: cint): gen_qabstractitemmodel_types.QModelIndex =
-  gen_qabstractitemmodel_types.QModelIndex(h: fcQUndoView_virtualbase_moveCursor(self.h, cint(cursorAction), cint(modifiers)))
+  gen_qabstractitemmodel_types.QModelIndex(h: fcQUndoView_virtualbase_moveCursor(self.h, cint(cursorAction), cint(modifiers)), owned: true)
 
 proc fcQUndoView_vtable_callback_moveCursor(self: pointer, cursorAction: cint, modifiers: cint): pointer {.cdecl.} =
   let vtbl = cast[ptr QUndoViewVTable](fcQUndoView_vdata(self)[])
@@ -851,7 +859,10 @@ proc fcQUndoView_vtable_callback_moveCursor(self: pointer, cursorAction: cint, m
   let slotval1 = cint(cursorAction)
   let slotval2 = cint(modifiers)
   var virtualReturn = vtbl[].moveCursor(self, slotval1, slotval2)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QUndoViewsetSelection*(self: gen_qundoview_types.QUndoView, rect: gen_qrect_types.QRect, command: cint): void =
   fcQUndoView_virtualbase_setSelection(self.h, rect.h, cint(command))
@@ -859,26 +870,29 @@ proc QUndoViewsetSelection*(self: gen_qundoview_types.QUndoView, rect: gen_qrect
 proc fcQUndoView_vtable_callback_setSelection(self: pointer, rect: pointer, command: cint): void {.cdecl.} =
   let vtbl = cast[ptr QUndoViewVTable](fcQUndoView_vdata(self)[])
   let self = QUndoView(h: self)
-  let slotval1 = gen_qrect_types.QRect(h: rect)
+  let slotval1 = gen_qrect_types.QRect(h: rect, owned: false)
   let slotval2 = cint(command)
   vtbl[].setSelection(self, slotval1, slotval2)
 
 proc QUndoViewvisualRegionForSelection*(self: gen_qundoview_types.QUndoView, selection: gen_qitemselectionmodel_types.QItemSelection): gen_qregion_types.QRegion =
-  gen_qregion_types.QRegion(h: fcQUndoView_virtualbase_visualRegionForSelection(self.h, selection.h))
+  gen_qregion_types.QRegion(h: fcQUndoView_virtualbase_visualRegionForSelection(self.h, selection.h), owned: true)
 
 proc fcQUndoView_vtable_callback_visualRegionForSelection(self: pointer, selection: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QUndoViewVTable](fcQUndoView_vdata(self)[])
   let self = QUndoView(h: self)
-  let slotval1 = gen_qitemselectionmodel_types.QItemSelection(h: selection)
+  let slotval1 = gen_qitemselectionmodel_types.QItemSelection(h: selection, owned: false)
   var virtualReturn = vtbl[].visualRegionForSelection(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QUndoViewselectedIndexes*(self: gen_qundoview_types.QUndoView): seq[gen_qabstractitemmodel_types.QModelIndex] =
   var v_ma = fcQUndoView_virtualbase_selectedIndexes(self.h)
   var vx_ret = newSeq[gen_qabstractitemmodel_types.QModelIndex](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qabstractitemmodel_types.QModelIndex(h: v_outCast[i])
+    vx_ret[i] = gen_qabstractitemmodel_types.QModelIndex(h: v_outCast[i], owned: true)
   c_free(v_ma.data)
   vx_ret
 
@@ -888,7 +902,10 @@ proc fcQUndoView_vtable_callback_selectedIndexes(self: pointer): struct_miqt_arr
   var virtualReturn = vtbl[].selectedIndexes(self)
   var virtualReturn_CArray = cast[ptr UncheckedArray[pointer]](if len(virtualReturn) > 0: c_malloc(c_sizet(sizeof(pointer) * len(virtualReturn))) else: nil)
   for i in 0..<len(virtualReturn):
-    virtualReturn_CArray[i] = virtualReturn[i].h
+    virtualReturn[i].owned = false # TODO move?
+    let virtualReturn_i_h = virtualReturn[i].h
+    virtualReturn[i].h = nil
+    virtualReturn_CArray[i] = virtualReturn_i_h
 
   struct_miqt_array(len: csize_t(len(virtualReturn)), data: if len(virtualReturn) == 0: nil else: addr(virtualReturn_CArray[0]))
 
@@ -906,7 +923,7 @@ proc QUndoViewisIndexHidden*(self: gen_qundoview_types.QUndoView, index: gen_qab
 proc fcQUndoView_vtable_callback_isIndexHidden(self: pointer, index: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QUndoViewVTable](fcQUndoView_vdata(self)[])
   let self = QUndoView(h: self)
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var virtualReturn = vtbl[].isIndexHidden(self, slotval1)
   virtualReturn
 
@@ -916,8 +933,8 @@ proc QUndoViewselectionChanged*(self: gen_qundoview_types.QUndoView, selected: g
 proc fcQUndoView_vtable_callback_selectionChanged(self: pointer, selected: pointer, deselected: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QUndoViewVTable](fcQUndoView_vdata(self)[])
   let self = QUndoView(h: self)
-  let slotval1 = gen_qitemselectionmodel_types.QItemSelection(h: selected)
-  let slotval2 = gen_qitemselectionmodel_types.QItemSelection(h: deselected)
+  let slotval1 = gen_qitemselectionmodel_types.QItemSelection(h: selected, owned: false)
+  let slotval2 = gen_qitemselectionmodel_types.QItemSelection(h: deselected, owned: false)
   vtbl[].selectionChanged(self, slotval1, slotval2)
 
 proc QUndoViewcurrentChanged*(self: gen_qundoview_types.QUndoView, current: gen_qabstractitemmodel_types.QModelIndex, previous: gen_qabstractitemmodel_types.QModelIndex): void =
@@ -926,18 +943,21 @@ proc QUndoViewcurrentChanged*(self: gen_qundoview_types.QUndoView, current: gen_
 proc fcQUndoView_vtable_callback_currentChanged(self: pointer, current: pointer, previous: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QUndoViewVTable](fcQUndoView_vdata(self)[])
   let self = QUndoView(h: self)
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: current)
-  let slotval2 = gen_qabstractitemmodel_types.QModelIndex(h: previous)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: current, owned: false)
+  let slotval2 = gen_qabstractitemmodel_types.QModelIndex(h: previous, owned: false)
   vtbl[].currentChanged(self, slotval1, slotval2)
 
 proc QUndoViewviewportSizeHint*(self: gen_qundoview_types.QUndoView): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQUndoView_virtualbase_viewportSizeHint(self.h))
+  gen_qsize_types.QSize(h: fcQUndoView_virtualbase_viewportSizeHint(self.h), owned: true)
 
 proc fcQUndoView_vtable_callback_viewportSizeHint(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QUndoViewVTable](fcQUndoView_vdata(self)[])
   let self = QUndoView(h: self)
   var virtualReturn = vtbl[].viewportSizeHint(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QUndoViewsetModel*(self: gen_qundoview_types.QUndoView, model: gen_qabstractitemmodel_types.QAbstractItemModel): void =
   fcQUndoView_virtualbase_setModel(self.h, model.h)
@@ -945,7 +965,7 @@ proc QUndoViewsetModel*(self: gen_qundoview_types.QUndoView, model: gen_qabstrac
 proc fcQUndoView_vtable_callback_setModel(self: pointer, model: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QUndoViewVTable](fcQUndoView_vdata(self)[])
   let self = QUndoView(h: self)
-  let slotval1 = gen_qabstractitemmodel_types.QAbstractItemModel(h: model)
+  let slotval1 = gen_qabstractitemmodel_types.QAbstractItemModel(h: model, owned: false)
   vtbl[].setModel(self, slotval1)
 
 proc QUndoViewsetSelectionModel*(self: gen_qundoview_types.QUndoView, selectionModel: gen_qitemselectionmodel_types.QItemSelectionModel): void =
@@ -954,7 +974,7 @@ proc QUndoViewsetSelectionModel*(self: gen_qundoview_types.QUndoView, selectionM
 proc fcQUndoView_vtable_callback_setSelectionModel(self: pointer, selectionModel: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QUndoViewVTable](fcQUndoView_vdata(self)[])
   let self = QUndoView(h: self)
-  let slotval1 = gen_qitemselectionmodel_types.QItemSelectionModel(h: selectionModel)
+  let slotval1 = gen_qitemselectionmodel_types.QItemSelectionModel(h: selectionModel, owned: false)
   vtbl[].setSelectionModel(self, slotval1)
 
 proc QUndoViewkeyboardSearch*(self: gen_qundoview_types.QUndoView, search: string): void =
@@ -990,24 +1010,30 @@ proc fcQUndoView_vtable_callback_sizeHintForColumn(self: pointer, column: cint):
   virtualReturn
 
 proc QUndoViewitemDelegateForIndex*(self: gen_qundoview_types.QUndoView, index: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemdelegate_types.QAbstractItemDelegate =
-  gen_qabstractitemdelegate_types.QAbstractItemDelegate(h: fcQUndoView_virtualbase_itemDelegateForIndex(self.h, index.h))
+  gen_qabstractitemdelegate_types.QAbstractItemDelegate(h: fcQUndoView_virtualbase_itemDelegateForIndex(self.h, index.h), owned: false)
 
 proc fcQUndoView_vtable_callback_itemDelegateForIndex(self: pointer, index: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QUndoViewVTable](fcQUndoView_vdata(self)[])
   let self = QUndoView(h: self)
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var virtualReturn = vtbl[].itemDelegateForIndex(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QUndoViewinputMethodQuery*(self: gen_qundoview_types.QUndoView, query: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQUndoView_virtualbase_inputMethodQuery(self.h, cint(query)))
+  gen_qvariant_types.QVariant(h: fcQUndoView_virtualbase_inputMethodQuery(self.h, cint(query)), owned: true)
 
 proc fcQUndoView_vtable_callback_inputMethodQuery(self: pointer, query: cint): pointer {.cdecl.} =
   let vtbl = cast[ptr QUndoViewVTable](fcQUndoView_vdata(self)[])
   let self = QUndoView(h: self)
   let slotval1 = cint(query)
   var virtualReturn = vtbl[].inputMethodQuery(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QUndoViewselectAll*(self: gen_qundoview_types.QUndoView): void =
   fcQUndoView_virtualbase_selectAll(self.h)
@@ -1075,7 +1101,7 @@ proc QUndoViewcloseEditor*(self: gen_qundoview_types.QUndoView, editor: gen_qwid
 proc fcQUndoView_vtable_callback_closeEditor(self: pointer, editor: pointer, hint: cint): void {.cdecl.} =
   let vtbl = cast[ptr QUndoViewVTable](fcQUndoView_vdata(self)[])
   let self = QUndoView(h: self)
-  let slotval1 = gen_qwidget_types.QWidget(h: editor)
+  let slotval1 = gen_qwidget_types.QWidget(h: editor, owned: false)
   let slotval2 = cint(hint)
   vtbl[].closeEditor(self, slotval1, slotval2)
 
@@ -1085,7 +1111,7 @@ proc QUndoViewcommitData*(self: gen_qundoview_types.QUndoView, editor: gen_qwidg
 proc fcQUndoView_vtable_callback_commitData(self: pointer, editor: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QUndoViewVTable](fcQUndoView_vdata(self)[])
   let self = QUndoView(h: self)
-  let slotval1 = gen_qwidget_types.QWidget(h: editor)
+  let slotval1 = gen_qwidget_types.QWidget(h: editor, owned: false)
   vtbl[].commitData(self, slotval1)
 
 proc QUndoVieweditorDestroyed*(self: gen_qundoview_types.QUndoView, editor: gen_qobject_types.QObject): void =
@@ -1094,7 +1120,7 @@ proc QUndoVieweditorDestroyed*(self: gen_qundoview_types.QUndoView, editor: gen_
 proc fcQUndoView_vtable_callback_editorDestroyed(self: pointer, editor: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QUndoViewVTable](fcQUndoView_vdata(self)[])
   let self = QUndoView(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: editor)
+  let slotval1 = gen_qobject_types.QObject(h: editor, owned: false)
   vtbl[].editorDestroyed(self, slotval1)
 
 proc QUndoViewedit*(self: gen_qundoview_types.QUndoView, index: gen_qabstractitemmodel_types.QModelIndex, trigger: cint, event: gen_qcoreevent_types.QEvent): bool =
@@ -1103,9 +1129,9 @@ proc QUndoViewedit*(self: gen_qundoview_types.QUndoView, index: gen_qabstractite
 proc fcQUndoView_vtable_callback_edit2(self: pointer, index: pointer, trigger: cint, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QUndoViewVTable](fcQUndoView_vdata(self)[])
   let self = QUndoView(h: self)
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   let slotval2 = cint(trigger)
-  let slotval3 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval3 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].edit2(self, slotval1, slotval2, slotval3)
   virtualReturn
 
@@ -1115,8 +1141,8 @@ proc QUndoViewselectionCommand*(self: gen_qundoview_types.QUndoView, index: gen_
 proc fcQUndoView_vtable_callback_selectionCommand(self: pointer, index: pointer, event: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QUndoViewVTable](fcQUndoView_vdata(self)[])
   let self = QUndoView(h: self)
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].selectionCommand(self, slotval1, slotval2)
   cint(virtualReturn)
 
@@ -1136,7 +1162,7 @@ proc QUndoViewviewportEvent*(self: gen_qundoview_types.QUndoView, event: gen_qco
 proc fcQUndoView_vtable_callback_viewportEvent(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QUndoViewVTable](fcQUndoView_vdata(self)[])
   let self = QUndoView(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].viewportEvent(self, slotval1)
   virtualReturn
 
@@ -1146,7 +1172,7 @@ proc QUndoViewmousePressEvent*(self: gen_qundoview_types.QUndoView, event: gen_q
 proc fcQUndoView_vtable_callback_mousePressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QUndoViewVTable](fcQUndoView_vdata(self)[])
   let self = QUndoView(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mousePressEvent(self, slotval1)
 
 proc QUndoViewmouseDoubleClickEvent*(self: gen_qundoview_types.QUndoView, event: gen_qevent_types.QMouseEvent): void =
@@ -1155,7 +1181,7 @@ proc QUndoViewmouseDoubleClickEvent*(self: gen_qundoview_types.QUndoView, event:
 proc fcQUndoView_vtable_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QUndoViewVTable](fcQUndoView_vdata(self)[])
   let self = QUndoView(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseDoubleClickEvent(self, slotval1)
 
 proc QUndoViewdragEnterEvent*(self: gen_qundoview_types.QUndoView, event: gen_qevent_types.QDragEnterEvent): void =
@@ -1164,7 +1190,7 @@ proc QUndoViewdragEnterEvent*(self: gen_qundoview_types.QUndoView, event: gen_qe
 proc fcQUndoView_vtable_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QUndoViewVTable](fcQUndoView_vdata(self)[])
   let self = QUndoView(h: self)
-  let slotval1 = gen_qevent_types.QDragEnterEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragEnterEvent(h: event, owned: false)
   vtbl[].dragEnterEvent(self, slotval1)
 
 proc QUndoViewfocusInEvent*(self: gen_qundoview_types.QUndoView, event: gen_qevent_types.QFocusEvent): void =
@@ -1173,7 +1199,7 @@ proc QUndoViewfocusInEvent*(self: gen_qundoview_types.QUndoView, event: gen_qeve
 proc fcQUndoView_vtable_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QUndoViewVTable](fcQUndoView_vdata(self)[])
   let self = QUndoView(h: self)
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusInEvent(self, slotval1)
 
 proc QUndoViewfocusOutEvent*(self: gen_qundoview_types.QUndoView, event: gen_qevent_types.QFocusEvent): void =
@@ -1182,7 +1208,7 @@ proc QUndoViewfocusOutEvent*(self: gen_qundoview_types.QUndoView, event: gen_qev
 proc fcQUndoView_vtable_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QUndoViewVTable](fcQUndoView_vdata(self)[])
   let self = QUndoView(h: self)
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusOutEvent(self, slotval1)
 
 proc QUndoViewkeyPressEvent*(self: gen_qundoview_types.QUndoView, event: gen_qevent_types.QKeyEvent): void =
@@ -1191,7 +1217,7 @@ proc QUndoViewkeyPressEvent*(self: gen_qundoview_types.QUndoView, event: gen_qev
 proc fcQUndoView_vtable_callback_keyPressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QUndoViewVTable](fcQUndoView_vdata(self)[])
   let self = QUndoView(h: self)
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   vtbl[].keyPressEvent(self, slotval1)
 
 proc QUndoViewinputMethodEvent*(self: gen_qundoview_types.QUndoView, event: gen_qevent_types.QInputMethodEvent): void =
@@ -1200,7 +1226,7 @@ proc QUndoViewinputMethodEvent*(self: gen_qundoview_types.QUndoView, event: gen_
 proc fcQUndoView_vtable_callback_inputMethodEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QUndoViewVTable](fcQUndoView_vdata(self)[])
   let self = QUndoView(h: self)
-  let slotval1 = gen_qevent_types.QInputMethodEvent(h: event)
+  let slotval1 = gen_qevent_types.QInputMethodEvent(h: event, owned: false)
   vtbl[].inputMethodEvent(self, slotval1)
 
 proc QUndoVieweventFilter*(self: gen_qundoview_types.QUndoView, objectVal: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
@@ -1209,28 +1235,34 @@ proc QUndoVieweventFilter*(self: gen_qundoview_types.QUndoView, objectVal: gen_q
 proc fcQUndoView_vtable_callback_eventFilter(self: pointer, objectVal: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QUndoViewVTable](fcQUndoView_vdata(self)[])
   let self = QUndoView(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: objectVal)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: objectVal, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
 proc QUndoViewminimumSizeHint*(self: gen_qundoview_types.QUndoView): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQUndoView_virtualbase_minimumSizeHint(self.h))
+  gen_qsize_types.QSize(h: fcQUndoView_virtualbase_minimumSizeHint(self.h), owned: true)
 
 proc fcQUndoView_vtable_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QUndoViewVTable](fcQUndoView_vdata(self)[])
   let self = QUndoView(h: self)
   var virtualReturn = vtbl[].minimumSizeHint(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QUndoViewsizeHint*(self: gen_qundoview_types.QUndoView): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQUndoView_virtualbase_sizeHint(self.h))
+  gen_qsize_types.QSize(h: fcQUndoView_virtualbase_sizeHint(self.h), owned: true)
 
 proc fcQUndoView_vtable_callback_sizeHint(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QUndoViewVTable](fcQUndoView_vdata(self)[])
   let self = QUndoView(h: self)
   var virtualReturn = vtbl[].sizeHint(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QUndoViewsetupViewport*(self: gen_qundoview_types.QUndoView, viewport: gen_qwidget_types.QWidget): void =
   fcQUndoView_virtualbase_setupViewport(self.h, viewport.h)
@@ -1238,7 +1270,7 @@ proc QUndoViewsetupViewport*(self: gen_qundoview_types.QUndoView, viewport: gen_
 proc fcQUndoView_vtable_callback_setupViewport(self: pointer, viewport: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QUndoViewVTable](fcQUndoView_vdata(self)[])
   let self = QUndoView(h: self)
-  let slotval1 = gen_qwidget_types.QWidget(h: viewport)
+  let slotval1 = gen_qwidget_types.QWidget(h: viewport, owned: false)
   vtbl[].setupViewport(self, slotval1)
 
 proc QUndoViewcontextMenuEvent*(self: gen_qundoview_types.QUndoView, param1: gen_qevent_types.QContextMenuEvent): void =
@@ -1247,7 +1279,7 @@ proc QUndoViewcontextMenuEvent*(self: gen_qundoview_types.QUndoView, param1: gen
 proc fcQUndoView_vtable_callback_contextMenuEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QUndoViewVTable](fcQUndoView_vdata(self)[])
   let self = QUndoView(h: self)
-  let slotval1 = gen_qevent_types.QContextMenuEvent(h: param1)
+  let slotval1 = gen_qevent_types.QContextMenuEvent(h: param1, owned: false)
   vtbl[].contextMenuEvent(self, slotval1)
 
 proc QUndoViewchangeEvent*(self: gen_qundoview_types.QUndoView, param1: gen_qcoreevent_types.QEvent): void =
@@ -1256,7 +1288,7 @@ proc QUndoViewchangeEvent*(self: gen_qundoview_types.QUndoView, param1: gen_qcor
 proc fcQUndoView_vtable_callback_changeEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QUndoViewVTable](fcQUndoView_vdata(self)[])
   let self = QUndoView(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: param1)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
   vtbl[].changeEvent(self, slotval1)
 
 proc QUndoViewinitStyleOption*(self: gen_qundoview_types.QUndoView, option: gen_qstyleoption_types.QStyleOptionFrame): void =
@@ -1265,7 +1297,7 @@ proc QUndoViewinitStyleOption*(self: gen_qundoview_types.QUndoView, option: gen_
 proc fcQUndoView_vtable_callback_initStyleOption(self: pointer, option: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QUndoViewVTable](fcQUndoView_vdata(self)[])
   let self = QUndoView(h: self)
-  let slotval1 = gen_qstyleoption_types.QStyleOptionFrame(h: option)
+  let slotval1 = gen_qstyleoption_types.QStyleOptionFrame(h: option, owned: false)
   vtbl[].initStyleOption(self, slotval1)
 
 proc QUndoViewdevType*(self: gen_qundoview_types.QUndoView): cint =
@@ -1306,13 +1338,16 @@ proc fcQUndoView_vtable_callback_hasHeightForWidth(self: pointer): bool {.cdecl.
   virtualReturn
 
 proc QUndoViewpaintEngine*(self: gen_qundoview_types.QUndoView): gen_qpaintengine_types.QPaintEngine =
-  gen_qpaintengine_types.QPaintEngine(h: fcQUndoView_virtualbase_paintEngine(self.h))
+  gen_qpaintengine_types.QPaintEngine(h: fcQUndoView_virtualbase_paintEngine(self.h), owned: false)
 
 proc fcQUndoView_vtable_callback_paintEngine(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QUndoViewVTable](fcQUndoView_vdata(self)[])
   let self = QUndoView(h: self)
   var virtualReturn = vtbl[].paintEngine(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QUndoViewkeyReleaseEvent*(self: gen_qundoview_types.QUndoView, event: gen_qevent_types.QKeyEvent): void =
   fcQUndoView_virtualbase_keyReleaseEvent(self.h, event.h)
@@ -1320,7 +1355,7 @@ proc QUndoViewkeyReleaseEvent*(self: gen_qundoview_types.QUndoView, event: gen_q
 proc fcQUndoView_vtable_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QUndoViewVTable](fcQUndoView_vdata(self)[])
   let self = QUndoView(h: self)
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   vtbl[].keyReleaseEvent(self, slotval1)
 
 proc QUndoViewenterEvent*(self: gen_qundoview_types.QUndoView, event: gen_qevent_types.QEnterEvent): void =
@@ -1329,7 +1364,7 @@ proc QUndoViewenterEvent*(self: gen_qundoview_types.QUndoView, event: gen_qevent
 proc fcQUndoView_vtable_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QUndoViewVTable](fcQUndoView_vdata(self)[])
   let self = QUndoView(h: self)
-  let slotval1 = gen_qevent_types.QEnterEvent(h: event)
+  let slotval1 = gen_qevent_types.QEnterEvent(h: event, owned: false)
   vtbl[].enterEvent(self, slotval1)
 
 proc QUndoViewleaveEvent*(self: gen_qundoview_types.QUndoView, event: gen_qcoreevent_types.QEvent): void =
@@ -1338,7 +1373,7 @@ proc QUndoViewleaveEvent*(self: gen_qundoview_types.QUndoView, event: gen_qcoree
 proc fcQUndoView_vtable_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QUndoViewVTable](fcQUndoView_vdata(self)[])
   let self = QUndoView(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].leaveEvent(self, slotval1)
 
 proc QUndoViewmoveEvent*(self: gen_qundoview_types.QUndoView, event: gen_qevent_types.QMoveEvent): void =
@@ -1347,7 +1382,7 @@ proc QUndoViewmoveEvent*(self: gen_qundoview_types.QUndoView, event: gen_qevent_
 proc fcQUndoView_vtable_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QUndoViewVTable](fcQUndoView_vdata(self)[])
   let self = QUndoView(h: self)
-  let slotval1 = gen_qevent_types.QMoveEvent(h: event)
+  let slotval1 = gen_qevent_types.QMoveEvent(h: event, owned: false)
   vtbl[].moveEvent(self, slotval1)
 
 proc QUndoViewcloseEvent*(self: gen_qundoview_types.QUndoView, event: gen_qevent_types.QCloseEvent): void =
@@ -1356,7 +1391,7 @@ proc QUndoViewcloseEvent*(self: gen_qundoview_types.QUndoView, event: gen_qevent
 proc fcQUndoView_vtable_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QUndoViewVTable](fcQUndoView_vdata(self)[])
   let self = QUndoView(h: self)
-  let slotval1 = gen_qevent_types.QCloseEvent(h: event)
+  let slotval1 = gen_qevent_types.QCloseEvent(h: event, owned: false)
   vtbl[].closeEvent(self, slotval1)
 
 proc QUndoViewtabletEvent*(self: gen_qundoview_types.QUndoView, event: gen_qevent_types.QTabletEvent): void =
@@ -1365,7 +1400,7 @@ proc QUndoViewtabletEvent*(self: gen_qundoview_types.QUndoView, event: gen_qeven
 proc fcQUndoView_vtable_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QUndoViewVTable](fcQUndoView_vdata(self)[])
   let self = QUndoView(h: self)
-  let slotval1 = gen_qevent_types.QTabletEvent(h: event)
+  let slotval1 = gen_qevent_types.QTabletEvent(h: event, owned: false)
   vtbl[].tabletEvent(self, slotval1)
 
 proc QUndoViewactionEvent*(self: gen_qundoview_types.QUndoView, event: gen_qevent_types.QActionEvent): void =
@@ -1374,7 +1409,7 @@ proc QUndoViewactionEvent*(self: gen_qundoview_types.QUndoView, event: gen_qeven
 proc fcQUndoView_vtable_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QUndoViewVTable](fcQUndoView_vdata(self)[])
   let self = QUndoView(h: self)
-  let slotval1 = gen_qevent_types.QActionEvent(h: event)
+  let slotval1 = gen_qevent_types.QActionEvent(h: event, owned: false)
   vtbl[].actionEvent(self, slotval1)
 
 proc QUndoViewshowEvent*(self: gen_qundoview_types.QUndoView, event: gen_qevent_types.QShowEvent): void =
@@ -1383,7 +1418,7 @@ proc QUndoViewshowEvent*(self: gen_qundoview_types.QUndoView, event: gen_qevent_
 proc fcQUndoView_vtable_callback_showEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QUndoViewVTable](fcQUndoView_vdata(self)[])
   let self = QUndoView(h: self)
-  let slotval1 = gen_qevent_types.QShowEvent(h: event)
+  let slotval1 = gen_qevent_types.QShowEvent(h: event, owned: false)
   vtbl[].showEvent(self, slotval1)
 
 proc QUndoViewhideEvent*(self: gen_qundoview_types.QUndoView, event: gen_qevent_types.QHideEvent): void =
@@ -1392,7 +1427,7 @@ proc QUndoViewhideEvent*(self: gen_qundoview_types.QUndoView, event: gen_qevent_
 proc fcQUndoView_vtable_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QUndoViewVTable](fcQUndoView_vdata(self)[])
   let self = QUndoView(h: self)
-  let slotval1 = gen_qevent_types.QHideEvent(h: event)
+  let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   vtbl[].hideEvent(self, slotval1)
 
 proc QUndoViewnativeEvent*(self: gen_qundoview_types.QUndoView, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool =
@@ -1426,27 +1461,33 @@ proc QUndoViewinitPainter*(self: gen_qundoview_types.QUndoView, painter: gen_qpa
 proc fcQUndoView_vtable_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QUndoViewVTable](fcQUndoView_vdata(self)[])
   let self = QUndoView(h: self)
-  let slotval1 = gen_qpainter_types.QPainter(h: painter)
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
   vtbl[].initPainter(self, slotval1)
 
 proc QUndoViewredirected*(self: gen_qundoview_types.QUndoView, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice =
-  gen_qpaintdevice_types.QPaintDevice(h: fcQUndoView_virtualbase_redirected(self.h, offset.h))
+  gen_qpaintdevice_types.QPaintDevice(h: fcQUndoView_virtualbase_redirected(self.h, offset.h), owned: false)
 
 proc fcQUndoView_vtable_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QUndoViewVTable](fcQUndoView_vdata(self)[])
   let self = QUndoView(h: self)
-  let slotval1 = gen_qpoint_types.QPoint(h: offset)
+  let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
   var virtualReturn = vtbl[].redirected(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QUndoViewsharedPainter*(self: gen_qundoview_types.QUndoView): gen_qpainter_types.QPainter =
-  gen_qpainter_types.QPainter(h: fcQUndoView_virtualbase_sharedPainter(self.h))
+  gen_qpainter_types.QPainter(h: fcQUndoView_virtualbase_sharedPainter(self.h), owned: false)
 
 proc fcQUndoView_vtable_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QUndoViewVTable](fcQUndoView_vdata(self)[])
   let self = QUndoView(h: self)
   var virtualReturn = vtbl[].sharedPainter(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QUndoViewchildEvent*(self: gen_qundoview_types.QUndoView, event: gen_qcoreevent_types.QChildEvent): void =
   fcQUndoView_virtualbase_childEvent(self.h, event.h)
@@ -1454,7 +1495,7 @@ proc QUndoViewchildEvent*(self: gen_qundoview_types.QUndoView, event: gen_qcoree
 proc fcQUndoView_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QUndoViewVTable](fcQUndoView_vdata(self)[])
   let self = QUndoView(h: self)
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
 proc QUndoViewcustomEvent*(self: gen_qundoview_types.QUndoView, event: gen_qcoreevent_types.QEvent): void =
@@ -1463,7 +1504,7 @@ proc QUndoViewcustomEvent*(self: gen_qundoview_types.QUndoView, event: gen_qcore
 proc fcQUndoView_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QUndoViewVTable](fcQUndoView_vdata(self)[])
   let self = QUndoView(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
 proc QUndoViewconnectNotify*(self: gen_qundoview_types.QUndoView, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -1472,7 +1513,7 @@ proc QUndoViewconnectNotify*(self: gen_qundoview_types.QUndoView, signal: gen_qm
 proc fcQUndoView_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QUndoViewVTable](fcQUndoView_vdata(self)[])
   let self = QUndoView(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
 proc QUndoViewdisconnectNotify*(self: gen_qundoview_types.QUndoView, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -1481,7 +1522,7 @@ proc QUndoViewdisconnectNotify*(self: gen_qundoview_types.QUndoView, signal: gen
 proc fcQUndoView_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QUndoViewVTable](fcQUndoView_vdata(self)[])
   let self = QUndoView(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
 type VirtualQUndoView* {.inheritable.} = ref object of QUndoView
@@ -1515,7 +1556,7 @@ method visualRect*(self: VirtualQUndoView, index: gen_qabstractitemmodel_types.Q
   QUndoViewvisualRect(self[], index)
 proc fcQUndoView_method_callback_visualRect(self: pointer, index: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQUndoView](fcQUndoView_vdata(self)[])
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var virtualReturn = inst.visualRect(slotval1)
   virtualReturn.h
 
@@ -1523,7 +1564,7 @@ method scrollTo*(self: VirtualQUndoView, index: gen_qabstractitemmodel_types.QMo
   QUndoViewscrollTo(self[], index, hint)
 proc fcQUndoView_method_callback_scrollTo(self: pointer, index: pointer, hint: cint): void {.cdecl.} =
   let inst = cast[VirtualQUndoView](fcQUndoView_vdata(self)[])
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   let slotval2 = cint(hint)
   inst.scrollTo(slotval1, slotval2)
 
@@ -1531,7 +1572,7 @@ method indexAt*(self: VirtualQUndoView, p: gen_qpoint_types.QPoint): gen_qabstra
   QUndoViewindexAt(self[], p)
 proc fcQUndoView_method_callback_indexAt(self: pointer, p: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQUndoView](fcQUndoView_vdata(self)[])
-  let slotval1 = gen_qpoint_types.QPoint(h: p)
+  let slotval1 = gen_qpoint_types.QPoint(h: p, owned: false)
   var virtualReturn = inst.indexAt(slotval1)
   virtualReturn.h
 
@@ -1551,14 +1592,14 @@ method setRootIndex*(self: VirtualQUndoView, index: gen_qabstractitemmodel_types
   QUndoViewsetRootIndex(self[], index)
 proc fcQUndoView_method_callback_setRootIndex(self: pointer, index: pointer): void {.cdecl.} =
   let inst = cast[VirtualQUndoView](fcQUndoView_vdata(self)[])
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   inst.setRootIndex(slotval1)
 
 method event*(self: VirtualQUndoView, e: gen_qcoreevent_types.QEvent): bool {.base.} =
   QUndoViewevent(self[], e)
 proc fcQUndoView_method_callback_event(self: pointer, e: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQUndoView](fcQUndoView_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: e)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: e, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
@@ -1574,8 +1615,8 @@ method dataChanged*(self: VirtualQUndoView, topLeft: gen_qabstractitemmodel_type
   QUndoViewdataChanged(self[], topLeft, bottomRight, roles)
 proc fcQUndoView_method_callback_dataChanged(self: pointer, topLeft: pointer, bottomRight: pointer, roles: struct_miqt_array): void {.cdecl.} =
   let inst = cast[VirtualQUndoView](fcQUndoView_vdata(self)[])
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: topLeft)
-  let slotval2 = gen_qabstractitemmodel_types.QModelIndex(h: bottomRight)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: topLeft, owned: false)
+  let slotval2 = gen_qabstractitemmodel_types.QModelIndex(h: bottomRight, owned: false)
   var vroles_ma = roles
   var vrolesx_ret = newSeq[cint](int(vroles_ma.len))
   let vroles_outCast = cast[ptr UncheckedArray[cint]](vroles_ma.data)
@@ -1589,7 +1630,7 @@ method rowsInserted*(self: VirtualQUndoView, parent: gen_qabstractitemmodel_type
   QUndoViewrowsInserted(self[], parent, start, endVal)
 proc fcQUndoView_method_callback_rowsInserted(self: pointer, parent: pointer, start: cint, endVal: cint): void {.cdecl.} =
   let inst = cast[VirtualQUndoView](fcQUndoView_vdata(self)[])
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   let slotval2 = start
   let slotval3 = endVal
   inst.rowsInserted(slotval1, slotval2, slotval3)
@@ -1598,7 +1639,7 @@ method rowsAboutToBeRemoved*(self: VirtualQUndoView, parent: gen_qabstractitemmo
   QUndoViewrowsAboutToBeRemoved(self[], parent, start, endVal)
 proc fcQUndoView_method_callback_rowsAboutToBeRemoved(self: pointer, parent: pointer, start: cint, endVal: cint): void {.cdecl.} =
   let inst = cast[VirtualQUndoView](fcQUndoView_vdata(self)[])
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   let slotval2 = start
   let slotval3 = endVal
   inst.rowsAboutToBeRemoved(slotval1, slotval2, slotval3)
@@ -1607,56 +1648,56 @@ method mouseMoveEvent*(self: VirtualQUndoView, e: gen_qevent_types.QMouseEvent):
   QUndoViewmouseMoveEvent(self[], e)
 proc fcQUndoView_method_callback_mouseMoveEvent(self: pointer, e: pointer): void {.cdecl.} =
   let inst = cast[VirtualQUndoView](fcQUndoView_vdata(self)[])
-  let slotval1 = gen_qevent_types.QMouseEvent(h: e)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: e, owned: false)
   inst.mouseMoveEvent(slotval1)
 
 method mouseReleaseEvent*(self: VirtualQUndoView, e: gen_qevent_types.QMouseEvent): void {.base.} =
   QUndoViewmouseReleaseEvent(self[], e)
 proc fcQUndoView_method_callback_mouseReleaseEvent(self: pointer, e: pointer): void {.cdecl.} =
   let inst = cast[VirtualQUndoView](fcQUndoView_vdata(self)[])
-  let slotval1 = gen_qevent_types.QMouseEvent(h: e)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: e, owned: false)
   inst.mouseReleaseEvent(slotval1)
 
 method wheelEvent*(self: VirtualQUndoView, e: gen_qevent_types.QWheelEvent): void {.base.} =
   QUndoViewwheelEvent(self[], e)
 proc fcQUndoView_method_callback_wheelEvent(self: pointer, e: pointer): void {.cdecl.} =
   let inst = cast[VirtualQUndoView](fcQUndoView_vdata(self)[])
-  let slotval1 = gen_qevent_types.QWheelEvent(h: e)
+  let slotval1 = gen_qevent_types.QWheelEvent(h: e, owned: false)
   inst.wheelEvent(slotval1)
 
 method timerEvent*(self: VirtualQUndoView, e: gen_qcoreevent_types.QTimerEvent): void {.base.} =
   QUndoViewtimerEvent(self[], e)
 proc fcQUndoView_method_callback_timerEvent(self: pointer, e: pointer): void {.cdecl.} =
   let inst = cast[VirtualQUndoView](fcQUndoView_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: e)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: e, owned: false)
   inst.timerEvent(slotval1)
 
 method resizeEvent*(self: VirtualQUndoView, e: gen_qevent_types.QResizeEvent): void {.base.} =
   QUndoViewresizeEvent(self[], e)
 proc fcQUndoView_method_callback_resizeEvent(self: pointer, e: pointer): void {.cdecl.} =
   let inst = cast[VirtualQUndoView](fcQUndoView_vdata(self)[])
-  let slotval1 = gen_qevent_types.QResizeEvent(h: e)
+  let slotval1 = gen_qevent_types.QResizeEvent(h: e, owned: false)
   inst.resizeEvent(slotval1)
 
 method dragMoveEvent*(self: VirtualQUndoView, e: gen_qevent_types.QDragMoveEvent): void {.base.} =
   QUndoViewdragMoveEvent(self[], e)
 proc fcQUndoView_method_callback_dragMoveEvent(self: pointer, e: pointer): void {.cdecl.} =
   let inst = cast[VirtualQUndoView](fcQUndoView_vdata(self)[])
-  let slotval1 = gen_qevent_types.QDragMoveEvent(h: e)
+  let slotval1 = gen_qevent_types.QDragMoveEvent(h: e, owned: false)
   inst.dragMoveEvent(slotval1)
 
 method dragLeaveEvent*(self: VirtualQUndoView, e: gen_qevent_types.QDragLeaveEvent): void {.base.} =
   QUndoViewdragLeaveEvent(self[], e)
 proc fcQUndoView_method_callback_dragLeaveEvent(self: pointer, e: pointer): void {.cdecl.} =
   let inst = cast[VirtualQUndoView](fcQUndoView_vdata(self)[])
-  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: e)
+  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: e, owned: false)
   inst.dragLeaveEvent(slotval1)
 
 method dropEvent*(self: VirtualQUndoView, e: gen_qevent_types.QDropEvent): void {.base.} =
   QUndoViewdropEvent(self[], e)
 proc fcQUndoView_method_callback_dropEvent(self: pointer, e: pointer): void {.cdecl.} =
   let inst = cast[VirtualQUndoView](fcQUndoView_vdata(self)[])
-  let slotval1 = gen_qevent_types.QDropEvent(h: e)
+  let slotval1 = gen_qevent_types.QDropEvent(h: e, owned: false)
   inst.dropEvent(slotval1)
 
 method startDrag*(self: VirtualQUndoView, supportedActions: cint): void {.base.} =
@@ -1670,14 +1711,14 @@ method initViewItemOption*(self: VirtualQUndoView, option: gen_qstyleoption_type
   QUndoViewinitViewItemOption(self[], option)
 proc fcQUndoView_method_callback_initViewItemOption(self: pointer, option: pointer): void {.cdecl.} =
   let inst = cast[VirtualQUndoView](fcQUndoView_vdata(self)[])
-  let slotval1 = gen_qstyleoption_types.QStyleOptionViewItem(h: option)
+  let slotval1 = gen_qstyleoption_types.QStyleOptionViewItem(h: option, owned: false)
   inst.initViewItemOption(slotval1)
 
 method paintEvent*(self: VirtualQUndoView, e: gen_qevent_types.QPaintEvent): void {.base.} =
   QUndoViewpaintEvent(self[], e)
 proc fcQUndoView_method_callback_paintEvent(self: pointer, e: pointer): void {.cdecl.} =
   let inst = cast[VirtualQUndoView](fcQUndoView_vdata(self)[])
-  let slotval1 = gen_qevent_types.QPaintEvent(h: e)
+  let slotval1 = gen_qevent_types.QPaintEvent(h: e, owned: false)
   inst.paintEvent(slotval1)
 
 method horizontalOffset*(self: VirtualQUndoView): cint {.base.} =
@@ -1707,7 +1748,7 @@ method setSelection*(self: VirtualQUndoView, rect: gen_qrect_types.QRect, comman
   QUndoViewsetSelection(self[], rect, command)
 proc fcQUndoView_method_callback_setSelection(self: pointer, rect: pointer, command: cint): void {.cdecl.} =
   let inst = cast[VirtualQUndoView](fcQUndoView_vdata(self)[])
-  let slotval1 = gen_qrect_types.QRect(h: rect)
+  let slotval1 = gen_qrect_types.QRect(h: rect, owned: false)
   let slotval2 = cint(command)
   inst.setSelection(slotval1, slotval2)
 
@@ -1715,7 +1756,7 @@ method visualRegionForSelection*(self: VirtualQUndoView, selection: gen_qitemsel
   QUndoViewvisualRegionForSelection(self[], selection)
 proc fcQUndoView_method_callback_visualRegionForSelection(self: pointer, selection: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQUndoView](fcQUndoView_vdata(self)[])
-  let slotval1 = gen_qitemselectionmodel_types.QItemSelection(h: selection)
+  let slotval1 = gen_qitemselectionmodel_types.QItemSelection(h: selection, owned: false)
   var virtualReturn = inst.visualRegionForSelection(slotval1)
   virtualReturn.h
 
@@ -1740,7 +1781,7 @@ method isIndexHidden*(self: VirtualQUndoView, index: gen_qabstractitemmodel_type
   QUndoViewisIndexHidden(self[], index)
 proc fcQUndoView_method_callback_isIndexHidden(self: pointer, index: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQUndoView](fcQUndoView_vdata(self)[])
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var virtualReturn = inst.isIndexHidden(slotval1)
   virtualReturn
 
@@ -1748,16 +1789,16 @@ method selectionChanged*(self: VirtualQUndoView, selected: gen_qitemselectionmod
   QUndoViewselectionChanged(self[], selected, deselected)
 proc fcQUndoView_method_callback_selectionChanged(self: pointer, selected: pointer, deselected: pointer): void {.cdecl.} =
   let inst = cast[VirtualQUndoView](fcQUndoView_vdata(self)[])
-  let slotval1 = gen_qitemselectionmodel_types.QItemSelection(h: selected)
-  let slotval2 = gen_qitemselectionmodel_types.QItemSelection(h: deselected)
+  let slotval1 = gen_qitemselectionmodel_types.QItemSelection(h: selected, owned: false)
+  let slotval2 = gen_qitemselectionmodel_types.QItemSelection(h: deselected, owned: false)
   inst.selectionChanged(slotval1, slotval2)
 
 method currentChanged*(self: VirtualQUndoView, current: gen_qabstractitemmodel_types.QModelIndex, previous: gen_qabstractitemmodel_types.QModelIndex): void {.base.} =
   QUndoViewcurrentChanged(self[], current, previous)
 proc fcQUndoView_method_callback_currentChanged(self: pointer, current: pointer, previous: pointer): void {.cdecl.} =
   let inst = cast[VirtualQUndoView](fcQUndoView_vdata(self)[])
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: current)
-  let slotval2 = gen_qabstractitemmodel_types.QModelIndex(h: previous)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: current, owned: false)
+  let slotval2 = gen_qabstractitemmodel_types.QModelIndex(h: previous, owned: false)
   inst.currentChanged(slotval1, slotval2)
 
 method viewportSizeHint*(self: VirtualQUndoView): gen_qsize_types.QSize {.base.} =
@@ -1771,14 +1812,14 @@ method setModel*(self: VirtualQUndoView, model: gen_qabstractitemmodel_types.QAb
   QUndoViewsetModel(self[], model)
 proc fcQUndoView_method_callback_setModel(self: pointer, model: pointer): void {.cdecl.} =
   let inst = cast[VirtualQUndoView](fcQUndoView_vdata(self)[])
-  let slotval1 = gen_qabstractitemmodel_types.QAbstractItemModel(h: model)
+  let slotval1 = gen_qabstractitemmodel_types.QAbstractItemModel(h: model, owned: false)
   inst.setModel(slotval1)
 
 method setSelectionModel*(self: VirtualQUndoView, selectionModel: gen_qitemselectionmodel_types.QItemSelectionModel): void {.base.} =
   QUndoViewsetSelectionModel(self[], selectionModel)
 proc fcQUndoView_method_callback_setSelectionModel(self: pointer, selectionModel: pointer): void {.cdecl.} =
   let inst = cast[VirtualQUndoView](fcQUndoView_vdata(self)[])
-  let slotval1 = gen_qitemselectionmodel_types.QItemSelectionModel(h: selectionModel)
+  let slotval1 = gen_qitemselectionmodel_types.QItemSelectionModel(h: selectionModel, owned: false)
   inst.setSelectionModel(slotval1)
 
 method keyboardSearch*(self: VirtualQUndoView, search: string): void {.base.} =
@@ -1811,7 +1852,7 @@ method itemDelegateForIndex*(self: VirtualQUndoView, index: gen_qabstractitemmod
   QUndoViewitemDelegateForIndex(self[], index)
 proc fcQUndoView_method_callback_itemDelegateForIndex(self: pointer, index: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQUndoView](fcQUndoView_vdata(self)[])
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var virtualReturn = inst.itemDelegateForIndex(slotval1)
   virtualReturn.h
 
@@ -1873,7 +1914,7 @@ method closeEditor*(self: VirtualQUndoView, editor: gen_qwidget_types.QWidget, h
   QUndoViewcloseEditor(self[], editor, hint)
 proc fcQUndoView_method_callback_closeEditor(self: pointer, editor: pointer, hint: cint): void {.cdecl.} =
   let inst = cast[VirtualQUndoView](fcQUndoView_vdata(self)[])
-  let slotval1 = gen_qwidget_types.QWidget(h: editor)
+  let slotval1 = gen_qwidget_types.QWidget(h: editor, owned: false)
   let slotval2 = cint(hint)
   inst.closeEditor(slotval1, slotval2)
 
@@ -1881,23 +1922,23 @@ method commitData*(self: VirtualQUndoView, editor: gen_qwidget_types.QWidget): v
   QUndoViewcommitData(self[], editor)
 proc fcQUndoView_method_callback_commitData(self: pointer, editor: pointer): void {.cdecl.} =
   let inst = cast[VirtualQUndoView](fcQUndoView_vdata(self)[])
-  let slotval1 = gen_qwidget_types.QWidget(h: editor)
+  let slotval1 = gen_qwidget_types.QWidget(h: editor, owned: false)
   inst.commitData(slotval1)
 
 method editorDestroyed*(self: VirtualQUndoView, editor: gen_qobject_types.QObject): void {.base.} =
   QUndoVieweditorDestroyed(self[], editor)
 proc fcQUndoView_method_callback_editorDestroyed(self: pointer, editor: pointer): void {.cdecl.} =
   let inst = cast[VirtualQUndoView](fcQUndoView_vdata(self)[])
-  let slotval1 = gen_qobject_types.QObject(h: editor)
+  let slotval1 = gen_qobject_types.QObject(h: editor, owned: false)
   inst.editorDestroyed(slotval1)
 
 method edit*(self: VirtualQUndoView, index: gen_qabstractitemmodel_types.QModelIndex, trigger: cint, event: gen_qcoreevent_types.QEvent): bool {.base.} =
   QUndoViewedit(self[], index, trigger, event)
 proc fcQUndoView_method_callback_edit2(self: pointer, index: pointer, trigger: cint, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQUndoView](fcQUndoView_vdata(self)[])
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   let slotval2 = cint(trigger)
-  let slotval3 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval3 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.edit(slotval1, slotval2, slotval3)
   virtualReturn
 
@@ -1905,8 +1946,8 @@ method selectionCommand*(self: VirtualQUndoView, index: gen_qabstractitemmodel_t
   QUndoViewselectionCommand(self[], index, event)
 proc fcQUndoView_method_callback_selectionCommand(self: pointer, index: pointer, event: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQUndoView](fcQUndoView_vdata(self)[])
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.selectionCommand(slotval1, slotval2)
   cint(virtualReturn)
 
@@ -1922,7 +1963,7 @@ method viewportEvent*(self: VirtualQUndoView, event: gen_qcoreevent_types.QEvent
   QUndoViewviewportEvent(self[], event)
 proc fcQUndoView_method_callback_viewportEvent(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQUndoView](fcQUndoView_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.viewportEvent(slotval1)
   virtualReturn
 
@@ -1930,57 +1971,57 @@ method mousePressEvent*(self: VirtualQUndoView, event: gen_qevent_types.QMouseEv
   QUndoViewmousePressEvent(self[], event)
 proc fcQUndoView_method_callback_mousePressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQUndoView](fcQUndoView_vdata(self)[])
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mousePressEvent(slotval1)
 
 method mouseDoubleClickEvent*(self: VirtualQUndoView, event: gen_qevent_types.QMouseEvent): void {.base.} =
   QUndoViewmouseDoubleClickEvent(self[], event)
 proc fcQUndoView_method_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQUndoView](fcQUndoView_vdata(self)[])
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mouseDoubleClickEvent(slotval1)
 
 method dragEnterEvent*(self: VirtualQUndoView, event: gen_qevent_types.QDragEnterEvent): void {.base.} =
   QUndoViewdragEnterEvent(self[], event)
 proc fcQUndoView_method_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQUndoView](fcQUndoView_vdata(self)[])
-  let slotval1 = gen_qevent_types.QDragEnterEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragEnterEvent(h: event, owned: false)
   inst.dragEnterEvent(slotval1)
 
 method focusInEvent*(self: VirtualQUndoView, event: gen_qevent_types.QFocusEvent): void {.base.} =
   QUndoViewfocusInEvent(self[], event)
 proc fcQUndoView_method_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQUndoView](fcQUndoView_vdata(self)[])
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   inst.focusInEvent(slotval1)
 
 method focusOutEvent*(self: VirtualQUndoView, event: gen_qevent_types.QFocusEvent): void {.base.} =
   QUndoViewfocusOutEvent(self[], event)
 proc fcQUndoView_method_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQUndoView](fcQUndoView_vdata(self)[])
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   inst.focusOutEvent(slotval1)
 
 method keyPressEvent*(self: VirtualQUndoView, event: gen_qevent_types.QKeyEvent): void {.base.} =
   QUndoViewkeyPressEvent(self[], event)
 proc fcQUndoView_method_callback_keyPressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQUndoView](fcQUndoView_vdata(self)[])
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   inst.keyPressEvent(slotval1)
 
 method inputMethodEvent*(self: VirtualQUndoView, event: gen_qevent_types.QInputMethodEvent): void {.base.} =
   QUndoViewinputMethodEvent(self[], event)
 proc fcQUndoView_method_callback_inputMethodEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQUndoView](fcQUndoView_vdata(self)[])
-  let slotval1 = gen_qevent_types.QInputMethodEvent(h: event)
+  let slotval1 = gen_qevent_types.QInputMethodEvent(h: event, owned: false)
   inst.inputMethodEvent(slotval1)
 
 method eventFilter*(self: VirtualQUndoView, objectVal: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
   QUndoVieweventFilter(self[], objectVal, event)
 proc fcQUndoView_method_callback_eventFilter(self: pointer, objectVal: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQUndoView](fcQUndoView_vdata(self)[])
-  let slotval1 = gen_qobject_types.QObject(h: objectVal)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: objectVal, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
@@ -2002,28 +2043,28 @@ method setupViewport*(self: VirtualQUndoView, viewport: gen_qwidget_types.QWidge
   QUndoViewsetupViewport(self[], viewport)
 proc fcQUndoView_method_callback_setupViewport(self: pointer, viewport: pointer): void {.cdecl.} =
   let inst = cast[VirtualQUndoView](fcQUndoView_vdata(self)[])
-  let slotval1 = gen_qwidget_types.QWidget(h: viewport)
+  let slotval1 = gen_qwidget_types.QWidget(h: viewport, owned: false)
   inst.setupViewport(slotval1)
 
 method contextMenuEvent*(self: VirtualQUndoView, param1: gen_qevent_types.QContextMenuEvent): void {.base.} =
   QUndoViewcontextMenuEvent(self[], param1)
 proc fcQUndoView_method_callback_contextMenuEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQUndoView](fcQUndoView_vdata(self)[])
-  let slotval1 = gen_qevent_types.QContextMenuEvent(h: param1)
+  let slotval1 = gen_qevent_types.QContextMenuEvent(h: param1, owned: false)
   inst.contextMenuEvent(slotval1)
 
 method changeEvent*(self: VirtualQUndoView, param1: gen_qcoreevent_types.QEvent): void {.base.} =
   QUndoViewchangeEvent(self[], param1)
 proc fcQUndoView_method_callback_changeEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQUndoView](fcQUndoView_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: param1)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
   inst.changeEvent(slotval1)
 
 method initStyleOption*(self: VirtualQUndoView, option: gen_qstyleoption_types.QStyleOptionFrame): void {.base.} =
   QUndoViewinitStyleOption(self[], option)
 proc fcQUndoView_method_callback_initStyleOption(self: pointer, option: pointer): void {.cdecl.} =
   let inst = cast[VirtualQUndoView](fcQUndoView_vdata(self)[])
-  let slotval1 = gen_qstyleoption_types.QStyleOptionFrame(h: option)
+  let slotval1 = gen_qstyleoption_types.QStyleOptionFrame(h: option, owned: false)
   inst.initStyleOption(slotval1)
 
 method devType*(self: VirtualQUndoView): cint {.base.} =
@@ -2066,63 +2107,63 @@ method keyReleaseEvent*(self: VirtualQUndoView, event: gen_qevent_types.QKeyEven
   QUndoViewkeyReleaseEvent(self[], event)
 proc fcQUndoView_method_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQUndoView](fcQUndoView_vdata(self)[])
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   inst.keyReleaseEvent(slotval1)
 
 method enterEvent*(self: VirtualQUndoView, event: gen_qevent_types.QEnterEvent): void {.base.} =
   QUndoViewenterEvent(self[], event)
 proc fcQUndoView_method_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQUndoView](fcQUndoView_vdata(self)[])
-  let slotval1 = gen_qevent_types.QEnterEvent(h: event)
+  let slotval1 = gen_qevent_types.QEnterEvent(h: event, owned: false)
   inst.enterEvent(slotval1)
 
 method leaveEvent*(self: VirtualQUndoView, event: gen_qcoreevent_types.QEvent): void {.base.} =
   QUndoViewleaveEvent(self[], event)
 proc fcQUndoView_method_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQUndoView](fcQUndoView_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.leaveEvent(slotval1)
 
 method moveEvent*(self: VirtualQUndoView, event: gen_qevent_types.QMoveEvent): void {.base.} =
   QUndoViewmoveEvent(self[], event)
 proc fcQUndoView_method_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQUndoView](fcQUndoView_vdata(self)[])
-  let slotval1 = gen_qevent_types.QMoveEvent(h: event)
+  let slotval1 = gen_qevent_types.QMoveEvent(h: event, owned: false)
   inst.moveEvent(slotval1)
 
 method closeEvent*(self: VirtualQUndoView, event: gen_qevent_types.QCloseEvent): void {.base.} =
   QUndoViewcloseEvent(self[], event)
 proc fcQUndoView_method_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQUndoView](fcQUndoView_vdata(self)[])
-  let slotval1 = gen_qevent_types.QCloseEvent(h: event)
+  let slotval1 = gen_qevent_types.QCloseEvent(h: event, owned: false)
   inst.closeEvent(slotval1)
 
 method tabletEvent*(self: VirtualQUndoView, event: gen_qevent_types.QTabletEvent): void {.base.} =
   QUndoViewtabletEvent(self[], event)
 proc fcQUndoView_method_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQUndoView](fcQUndoView_vdata(self)[])
-  let slotval1 = gen_qevent_types.QTabletEvent(h: event)
+  let slotval1 = gen_qevent_types.QTabletEvent(h: event, owned: false)
   inst.tabletEvent(slotval1)
 
 method actionEvent*(self: VirtualQUndoView, event: gen_qevent_types.QActionEvent): void {.base.} =
   QUndoViewactionEvent(self[], event)
 proc fcQUndoView_method_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQUndoView](fcQUndoView_vdata(self)[])
-  let slotval1 = gen_qevent_types.QActionEvent(h: event)
+  let slotval1 = gen_qevent_types.QActionEvent(h: event, owned: false)
   inst.actionEvent(slotval1)
 
 method showEvent*(self: VirtualQUndoView, event: gen_qevent_types.QShowEvent): void {.base.} =
   QUndoViewshowEvent(self[], event)
 proc fcQUndoView_method_callback_showEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQUndoView](fcQUndoView_vdata(self)[])
-  let slotval1 = gen_qevent_types.QShowEvent(h: event)
+  let slotval1 = gen_qevent_types.QShowEvent(h: event, owned: false)
   inst.showEvent(slotval1)
 
 method hideEvent*(self: VirtualQUndoView, event: gen_qevent_types.QHideEvent): void {.base.} =
   QUndoViewhideEvent(self[], event)
 proc fcQUndoView_method_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQUndoView](fcQUndoView_vdata(self)[])
-  let slotval1 = gen_qevent_types.QHideEvent(h: event)
+  let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   inst.hideEvent(slotval1)
 
 method nativeEvent*(self: VirtualQUndoView, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
@@ -2150,14 +2191,14 @@ method initPainter*(self: VirtualQUndoView, painter: gen_qpainter_types.QPainter
   QUndoViewinitPainter(self[], painter)
 proc fcQUndoView_method_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
   let inst = cast[VirtualQUndoView](fcQUndoView_vdata(self)[])
-  let slotval1 = gen_qpainter_types.QPainter(h: painter)
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
   inst.initPainter(slotval1)
 
 method redirected*(self: VirtualQUndoView, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.base.} =
   QUndoViewredirected(self[], offset)
 proc fcQUndoView_method_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQUndoView](fcQUndoView_vdata(self)[])
-  let slotval1 = gen_qpoint_types.QPoint(h: offset)
+  let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
   var virtualReturn = inst.redirected(slotval1)
   virtualReturn.h
 
@@ -2172,38 +2213,38 @@ method childEvent*(self: VirtualQUndoView, event: gen_qcoreevent_types.QChildEve
   QUndoViewchildEvent(self[], event)
 proc fcQUndoView_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQUndoView](fcQUndoView_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
 method customEvent*(self: VirtualQUndoView, event: gen_qcoreevent_types.QEvent): void {.base.} =
   QUndoViewcustomEvent(self[], event)
 proc fcQUndoView_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQUndoView](fcQUndoView_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
 method connectNotify*(self: VirtualQUndoView, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
   QUndoViewconnectNotify(self[], signal)
 proc fcQUndoView_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQUndoView](fcQUndoView_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
 method disconnectNotify*(self: VirtualQUndoView, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
   QUndoViewdisconnectNotify(self[], signal)
 proc fcQUndoView_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQUndoView](fcQUndoView_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
 
 proc resizeContents*(self: gen_qundoview_types.QUndoView, width: cint, height: cint): void =
   fcQUndoView_protectedbase_resizeContents(self.h, width, height)
 
 proc contentsSize*(self: gen_qundoview_types.QUndoView): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQUndoView_protectedbase_contentsSize(self.h))
+  gen_qsize_types.QSize(h: fcQUndoView_protectedbase_contentsSize(self.h), owned: true)
 
 proc rectForIndex*(self: gen_qundoview_types.QUndoView, index: gen_qabstractitemmodel_types.QModelIndex): gen_qrect_types.QRect =
-  gen_qrect_types.QRect(h: fcQUndoView_protectedbase_rectForIndex(self.h, index.h))
+  gen_qrect_types.QRect(h: fcQUndoView_protectedbase_rectForIndex(self.h, index.h), owned: true)
 
 proc setPositionForIndex*(self: gen_qundoview_types.QUndoView, position: gen_qpoint_types.QPoint, index: gen_qabstractitemmodel_types.QModelIndex): void =
   fcQUndoView_protectedbase_setPositionForIndex(self.h, position.h, index.h)
@@ -2227,7 +2268,7 @@ proc scrollDirtyRegion*(self: gen_qundoview_types.QUndoView, dx: cint, dy: cint)
   fcQUndoView_protectedbase_scrollDirtyRegion(self.h, dx, dy)
 
 proc dirtyRegionOffset*(self: gen_qundoview_types.QUndoView): gen_qpoint_types.QPoint =
-  gen_qpoint_types.QPoint(h: fcQUndoView_protectedbase_dirtyRegionOffset(self.h))
+  gen_qpoint_types.QPoint(h: fcQUndoView_protectedbase_dirtyRegionOffset(self.h), owned: true)
 
 proc startAutoScroll*(self: gen_qundoview_types.QUndoView): void =
   fcQUndoView_protectedbase_startAutoScroll(self.h)
@@ -2245,7 +2286,7 @@ proc setViewportMargins*(self: gen_qundoview_types.QUndoView, left: cint, top: c
   fcQUndoView_protectedbase_setViewportMargins(self.h, left, top, right, bottom)
 
 proc viewportMargins*(self: gen_qundoview_types.QUndoView): gen_qmargins_types.QMargins =
-  gen_qmargins_types.QMargins(h: fcQUndoView_protectedbase_viewportMargins(self.h))
+  gen_qmargins_types.QMargins(h: fcQUndoView_protectedbase_viewportMargins(self.h), owned: true)
 
 proc drawFrame*(self: gen_qundoview_types.QUndoView, param1: gen_qpainter_types.QPainter): void =
   fcQUndoView_protectedbase_drawFrame(self.h, param1.h)
@@ -2266,7 +2307,7 @@ proc focusPreviousChild*(self: gen_qundoview_types.QUndoView): bool =
   fcQUndoView_protectedbase_focusPreviousChild(self.h)
 
 proc sender*(self: gen_qundoview_types.QUndoView): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQUndoView_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQUndoView_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qundoview_types.QUndoView): cint =
   fcQUndoView_protectedbase_senderSignalIndex(self.h)
@@ -2473,7 +2514,7 @@ proc create*(T: type gen_qundoview_types.QUndoView,
     vtbl[].vtbl.connectNotify = fcQUndoView_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQUndoView_vtable_callback_disconnectNotify
-  let tmp = gen_qundoview_types.QUndoView(h: fcQUndoView_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h))
+  let tmp = gen_qundoview_types.QUndoView(h: fcQUndoView_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h), owned: true)
   fcQUndoView_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qundoview_types.QUndoView,
@@ -2671,7 +2712,7 @@ proc create*(T: type gen_qundoview_types.QUndoView,
     vtbl[].vtbl.connectNotify = fcQUndoView_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQUndoView_vtable_callback_disconnectNotify
-  let tmp = gen_qundoview_types.QUndoView(h: fcQUndoView_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer))))
+  let tmp = gen_qundoview_types.QUndoView(h: fcQUndoView_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer))), owned: true)
   fcQUndoView_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qundoview_types.QUndoView,
@@ -2870,7 +2911,7 @@ proc create*(T: type gen_qundoview_types.QUndoView,
     vtbl[].vtbl.connectNotify = fcQUndoView_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQUndoView_vtable_callback_disconnectNotify
-  let tmp = gen_qundoview_types.QUndoView(h: fcQUndoView_new3(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), stack.h))
+  let tmp = gen_qundoview_types.QUndoView(h: fcQUndoView_new3(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), stack.h), owned: true)
   fcQUndoView_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qundoview_types.QUndoView,
@@ -3069,7 +3110,7 @@ proc create*(T: type gen_qundoview_types.QUndoView,
     vtbl[].vtbl.connectNotify = fcQUndoView_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQUndoView_vtable_callback_disconnectNotify
-  let tmp = gen_qundoview_types.QUndoView(h: fcQUndoView_new4(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), group.h))
+  let tmp = gen_qundoview_types.QUndoView(h: fcQUndoView_new4(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), group.h), owned: true)
   fcQUndoView_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qundoview_types.QUndoView,
@@ -3268,7 +3309,7 @@ proc create*(T: type gen_qundoview_types.QUndoView,
     vtbl[].vtbl.connectNotify = fcQUndoView_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQUndoView_vtable_callback_disconnectNotify
-  let tmp = gen_qundoview_types.QUndoView(h: fcQUndoView_new5(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), stack.h, parent.h))
+  let tmp = gen_qundoview_types.QUndoView(h: fcQUndoView_new5(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), stack.h, parent.h), owned: true)
   fcQUndoView_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qundoview_types.QUndoView,
@@ -3467,13 +3508,14 @@ proc create*(T: type gen_qundoview_types.QUndoView,
     vtbl[].vtbl.connectNotify = fcQUndoView_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQUndoView_vtable_callback_disconnectNotify
-  let tmp = gen_qundoview_types.QUndoView(h: fcQUndoView_new6(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), group.h, parent.h))
+  let tmp = gen_qundoview_types.QUndoView(h: fcQUndoView_new6(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), group.h, parent.h), owned: true)
   fcQUndoView_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQUndoView_mvtbl = cQUndoViewVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQUndoView()[])](self.fcQUndoView_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   metaObject: fcQUndoView_method_callback_metaObject,
   metacast: fcQUndoView_method_callback_metacast,
@@ -3613,5 +3655,3 @@ proc create*(T: type gen_qundoview_types.QUndoView,
 
 proc staticMetaObject*(_: type gen_qundoview_types.QUndoView): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQUndoView_staticMetaObject())
-proc delete*(self: gen_qundoview_types.QUndoView) =
-  fcQUndoView_delete(self.h)

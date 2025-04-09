@@ -32,9 +32,6 @@ func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
     else:
       copyMem(addr result[0], v.data, len)
 
-const cflags = gorge("pkg-config --cflags Qt6Network")  & " -fPIC"
-{.compile("gen_qhttp2configuration.cpp", cflags).}
-
 
 import ./gen_qhttp2configuration_types
 export gen_qhttp2configuration_types
@@ -56,7 +53,6 @@ proc fcQHttp2Configuration_maxFrameSize(self: pointer): cuint {.importc: "QHttp2
 proc fcQHttp2Configuration_swap(self: pointer, other: pointer): void {.importc: "QHttp2Configuration_swap".}
 proc fcQHttp2Configuration_new(): ptr cQHttp2Configuration {.importc: "QHttp2Configuration_new".}
 proc fcQHttp2Configuration_new2(other: pointer): ptr cQHttp2Configuration {.importc: "QHttp2Configuration_new2".}
-proc fcQHttp2Configuration_delete(self: pointer) {.importc: "QHttp2Configuration_delete".}
 
 proc operatorAssign*(self: gen_qhttp2configuration_types.QHttp2Configuration, other: gen_qhttp2configuration_types.QHttp2Configuration): void =
   fcQHttp2Configuration_operatorAssign(self.h, other.h)
@@ -95,11 +91,9 @@ proc swap*(self: gen_qhttp2configuration_types.QHttp2Configuration, other: gen_q
   fcQHttp2Configuration_swap(self.h, other.h)
 
 proc create*(T: type gen_qhttp2configuration_types.QHttp2Configuration): gen_qhttp2configuration_types.QHttp2Configuration =
-  let tmp = gen_qhttp2configuration_types.QHttp2Configuration(h: fcQHttp2Configuration_new())
+  let tmp = gen_qhttp2configuration_types.QHttp2Configuration(h: fcQHttp2Configuration_new(), owned: true)
   tmp
 proc create*(T: type gen_qhttp2configuration_types.QHttp2Configuration,
     other: gen_qhttp2configuration_types.QHttp2Configuration): gen_qhttp2configuration_types.QHttp2Configuration =
-  let tmp = gen_qhttp2configuration_types.QHttp2Configuration(h: fcQHttp2Configuration_new2(other.h))
+  let tmp = gen_qhttp2configuration_types.QHttp2Configuration(h: fcQHttp2Configuration_new2(other.h), owned: true)
   tmp
-proc delete*(self: gen_qhttp2configuration_types.QHttp2Configuration) =
-  fcQHttp2Configuration_delete(self.h)

@@ -32,9 +32,6 @@ func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
     else:
       copyMem(addr result[0], v.data, len)
 
-const cflags = gorge("pkg-config --cflags Qt6Core")  & " -fPIC"
-{.compile("gen_qmimetype.cpp", cflags).}
-
 
 import ./gen_qmimetype_types
 export gen_qmimetype_types
@@ -67,7 +64,6 @@ proc fcQMimeType_filterString(self: pointer): struct_miqt_string {.importc: "QMi
 proc fcQMimeType_new(): ptr cQMimeType {.importc: "QMimeType_new".}
 proc fcQMimeType_new2(other: pointer): ptr cQMimeType {.importc: "QMimeType_new2".}
 proc fcQMimeType_staticMetaObject(): pointer {.importc: "QMimeType_staticMetaObject".}
-proc fcQMimeType_delete(self: pointer) {.importc: "QMimeType_delete".}
 
 proc operatorAssign*(self: gen_qmimetype_types.QMimeType, other: gen_qmimetype_types.QMimeType): void =
   fcQMimeType_operatorAssign(self.h, other.h)
@@ -187,13 +183,11 @@ proc filterString*(self: gen_qmimetype_types.QMimeType): string =
   vx_ret
 
 proc create*(T: type gen_qmimetype_types.QMimeType): gen_qmimetype_types.QMimeType =
-  let tmp = gen_qmimetype_types.QMimeType(h: fcQMimeType_new())
+  let tmp = gen_qmimetype_types.QMimeType(h: fcQMimeType_new(), owned: true)
   tmp
 proc create*(T: type gen_qmimetype_types.QMimeType,
     other: gen_qmimetype_types.QMimeType): gen_qmimetype_types.QMimeType =
-  let tmp = gen_qmimetype_types.QMimeType(h: fcQMimeType_new2(other.h))
+  let tmp = gen_qmimetype_types.QMimeType(h: fcQMimeType_new2(other.h), owned: true)
   tmp
 proc staticMetaObject*(_: type gen_qmimetype_types.QMimeType): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQMimeType_staticMetaObject())
-proc delete*(self: gen_qmimetype_types.QMimeType) =
-  fcQMimeType_delete(self.h)

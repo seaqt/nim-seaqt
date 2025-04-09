@@ -32,9 +32,6 @@ func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
     else:
       copyMem(addr result[0], v.data, len)
 
-const cflags = gorge("pkg-config --cflags Qt6Widgets")  & " -fPIC"
-{.compile("gen_qgraphicsitem.cpp", cflags).}
-
 
 type QGraphicsItemGraphicsItemFlagEnum* = distinct cint
 template ItemIsMovable*(_: type QGraphicsItemGraphicsItemFlagEnum): untyped = 1
@@ -488,7 +485,6 @@ proc fcQGraphicsItem_protectedbase_removeFromIndex(self: pointer): void {.import
 proc fcQGraphicsItem_protectedbase_prepareGeometryChange(self: pointer): void {.importc: "QGraphicsItem_protectedbase_prepareGeometryChange".}
 proc fcQGraphicsItem_new(vtbl: pointer, vdata: csize_t): ptr cQGraphicsItem {.importc: "QGraphicsItem_new".}
 proc fcQGraphicsItem_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQGraphicsItem {.importc: "QGraphicsItem_new2".}
-proc fcQGraphicsItem_delete(self: pointer) {.importc: "QGraphicsItem_delete".}
 proc fcQGraphicsObject_metaObject(self: pointer): pointer {.importc: "QGraphicsObject_metaObject".}
 proc fcQGraphicsObject_metacast(self: pointer, param1: cstring): pointer {.importc: "QGraphicsObject_metacast".}
 proc fcQGraphicsObject_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QGraphicsObject_metacall".}
@@ -625,7 +621,6 @@ proc fcQGraphicsObject_protectedbase_prepareGeometryChange(self: pointer): void 
 proc fcQGraphicsObject_new(vtbl: pointer, vdata: csize_t): ptr cQGraphicsObject {.importc: "QGraphicsObject_new".}
 proc fcQGraphicsObject_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQGraphicsObject {.importc: "QGraphicsObject_new2".}
 proc fcQGraphicsObject_staticMetaObject(): pointer {.importc: "QGraphicsObject_staticMetaObject".}
-proc fcQGraphicsObject_delete(self: pointer) {.importc: "QGraphicsObject_delete".}
 proc fcQAbstractGraphicsShapeItem_pen(self: pointer): pointer {.importc: "QAbstractGraphicsShapeItem_pen".}
 proc fcQAbstractGraphicsShapeItem_setPen(self: pointer, pen: pointer): void {.importc: "QAbstractGraphicsShapeItem_setPen".}
 proc fcQAbstractGraphicsShapeItem_brush(self: pointer): pointer {.importc: "QAbstractGraphicsShapeItem_brush".}
@@ -710,7 +705,6 @@ proc fcQAbstractGraphicsShapeItem_protectedbase_removeFromIndex(self: pointer): 
 proc fcQAbstractGraphicsShapeItem_protectedbase_prepareGeometryChange(self: pointer): void {.importc: "QAbstractGraphicsShapeItem_protectedbase_prepareGeometryChange".}
 proc fcQAbstractGraphicsShapeItem_new(vtbl: pointer, vdata: csize_t): ptr cQAbstractGraphicsShapeItem {.importc: "QAbstractGraphicsShapeItem_new".}
 proc fcQAbstractGraphicsShapeItem_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQAbstractGraphicsShapeItem {.importc: "QAbstractGraphicsShapeItem_new2".}
-proc fcQAbstractGraphicsShapeItem_delete(self: pointer) {.importc: "QAbstractGraphicsShapeItem_delete".}
 proc fcQGraphicsPathItem_path(self: pointer): pointer {.importc: "QGraphicsPathItem_path".}
 proc fcQGraphicsPathItem_setPath(self: pointer, path: pointer): void {.importc: "QGraphicsPathItem_setPath".}
 proc fcQGraphicsPathItem_boundingRect(self: pointer): pointer {.importc: "QGraphicsPathItem_boundingRect".}
@@ -802,7 +796,6 @@ proc fcQGraphicsPathItem_new(vtbl: pointer, vdata: csize_t): ptr cQGraphicsPathI
 proc fcQGraphicsPathItem_new2(vtbl: pointer, vdata: csize_t, path: pointer): ptr cQGraphicsPathItem {.importc: "QGraphicsPathItem_new2".}
 proc fcQGraphicsPathItem_new3(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQGraphicsPathItem {.importc: "QGraphicsPathItem_new3".}
 proc fcQGraphicsPathItem_new4(vtbl: pointer, vdata: csize_t, path: pointer, parent: pointer): ptr cQGraphicsPathItem {.importc: "QGraphicsPathItem_new4".}
-proc fcQGraphicsPathItem_delete(self: pointer) {.importc: "QGraphicsPathItem_delete".}
 proc fcQGraphicsRectItem_rect(self: pointer): pointer {.importc: "QGraphicsRectItem_rect".}
 proc fcQGraphicsRectItem_setRect(self: pointer, rect: pointer): void {.importc: "QGraphicsRectItem_setRect".}
 proc fcQGraphicsRectItem_setRect2(self: pointer, x: float64, y: float64, w: float64, h: float64): void {.importc: "QGraphicsRectItem_setRect2".}
@@ -897,7 +890,6 @@ proc fcQGraphicsRectItem_new3(vtbl: pointer, vdata: csize_t, x: float64, y: floa
 proc fcQGraphicsRectItem_new4(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQGraphicsRectItem {.importc: "QGraphicsRectItem_new4".}
 proc fcQGraphicsRectItem_new5(vtbl: pointer, vdata: csize_t, rect: pointer, parent: pointer): ptr cQGraphicsRectItem {.importc: "QGraphicsRectItem_new5".}
 proc fcQGraphicsRectItem_new6(vtbl: pointer, vdata: csize_t, x: float64, y: float64, w: float64, h: float64, parent: pointer): ptr cQGraphicsRectItem {.importc: "QGraphicsRectItem_new6".}
-proc fcQGraphicsRectItem_delete(self: pointer) {.importc: "QGraphicsRectItem_delete".}
 proc fcQGraphicsEllipseItem_rect(self: pointer): pointer {.importc: "QGraphicsEllipseItem_rect".}
 proc fcQGraphicsEllipseItem_setRect(self: pointer, rect: pointer): void {.importc: "QGraphicsEllipseItem_setRect".}
 proc fcQGraphicsEllipseItem_setRect2(self: pointer, x: float64, y: float64, w: float64, h: float64): void {.importc: "QGraphicsEllipseItem_setRect2".}
@@ -996,7 +988,6 @@ proc fcQGraphicsEllipseItem_new3(vtbl: pointer, vdata: csize_t, x: float64, y: f
 proc fcQGraphicsEllipseItem_new4(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQGraphicsEllipseItem {.importc: "QGraphicsEllipseItem_new4".}
 proc fcQGraphicsEllipseItem_new5(vtbl: pointer, vdata: csize_t, rect: pointer, parent: pointer): ptr cQGraphicsEllipseItem {.importc: "QGraphicsEllipseItem_new5".}
 proc fcQGraphicsEllipseItem_new6(vtbl: pointer, vdata: csize_t, x: float64, y: float64, w: float64, h: float64, parent: pointer): ptr cQGraphicsEllipseItem {.importc: "QGraphicsEllipseItem_new6".}
-proc fcQGraphicsEllipseItem_delete(self: pointer) {.importc: "QGraphicsEllipseItem_delete".}
 proc fcQGraphicsPolygonItem_fillRule(self: pointer): cint {.importc: "QGraphicsPolygonItem_fillRule".}
 proc fcQGraphicsPolygonItem_setFillRule(self: pointer, rule: cint): void {.importc: "QGraphicsPolygonItem_setFillRule".}
 proc fcQGraphicsPolygonItem_boundingRect(self: pointer): pointer {.importc: "QGraphicsPolygonItem_boundingRect".}
@@ -1086,7 +1077,6 @@ proc fcQGraphicsPolygonItem_protectedbase_removeFromIndex(self: pointer): void {
 proc fcQGraphicsPolygonItem_protectedbase_prepareGeometryChange(self: pointer): void {.importc: "QGraphicsPolygonItem_protectedbase_prepareGeometryChange".}
 proc fcQGraphicsPolygonItem_new(vtbl: pointer, vdata: csize_t): ptr cQGraphicsPolygonItem {.importc: "QGraphicsPolygonItem_new".}
 proc fcQGraphicsPolygonItem_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQGraphicsPolygonItem {.importc: "QGraphicsPolygonItem_new2".}
-proc fcQGraphicsPolygonItem_delete(self: pointer) {.importc: "QGraphicsPolygonItem_delete".}
 proc fcQGraphicsLineItem_pen(self: pointer): pointer {.importc: "QGraphicsLineItem_pen".}
 proc fcQGraphicsLineItem_setPen(self: pointer, pen: pointer): void {.importc: "QGraphicsLineItem_setPen".}
 proc fcQGraphicsLineItem_line(self: pointer): pointer {.importc: "QGraphicsLineItem_line".}
@@ -1183,7 +1173,6 @@ proc fcQGraphicsLineItem_new3(vtbl: pointer, vdata: csize_t, x1: float64, y1: fl
 proc fcQGraphicsLineItem_new4(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQGraphicsLineItem {.importc: "QGraphicsLineItem_new4".}
 proc fcQGraphicsLineItem_new5(vtbl: pointer, vdata: csize_t, line: pointer, parent: pointer): ptr cQGraphicsLineItem {.importc: "QGraphicsLineItem_new5".}
 proc fcQGraphicsLineItem_new6(vtbl: pointer, vdata: csize_t, x1: float64, y1: float64, x2: float64, y2: float64, parent: pointer): ptr cQGraphicsLineItem {.importc: "QGraphicsLineItem_new6".}
-proc fcQGraphicsLineItem_delete(self: pointer) {.importc: "QGraphicsLineItem_delete".}
 proc fcQGraphicsPixmapItem_pixmap(self: pointer): pointer {.importc: "QGraphicsPixmapItem_pixmap".}
 proc fcQGraphicsPixmapItem_setPixmap(self: pointer, pixmap: pointer): void {.importc: "QGraphicsPixmapItem_setPixmap".}
 proc fcQGraphicsPixmapItem_transformationMode(self: pointer): cint {.importc: "QGraphicsPixmapItem_transformationMode".}
@@ -1282,7 +1271,6 @@ proc fcQGraphicsPixmapItem_new(vtbl: pointer, vdata: csize_t): ptr cQGraphicsPix
 proc fcQGraphicsPixmapItem_new2(vtbl: pointer, vdata: csize_t, pixmap: pointer): ptr cQGraphicsPixmapItem {.importc: "QGraphicsPixmapItem_new2".}
 proc fcQGraphicsPixmapItem_new3(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQGraphicsPixmapItem {.importc: "QGraphicsPixmapItem_new3".}
 proc fcQGraphicsPixmapItem_new4(vtbl: pointer, vdata: csize_t, pixmap: pointer, parent: pointer): ptr cQGraphicsPixmapItem {.importc: "QGraphicsPixmapItem_new4".}
-proc fcQGraphicsPixmapItem_delete(self: pointer) {.importc: "QGraphicsPixmapItem_delete".}
 proc fcQGraphicsTextItem_metaObject(self: pointer): pointer {.importc: "QGraphicsTextItem_metaObject".}
 proc fcQGraphicsTextItem_metacast(self: pointer, param1: cstring): pointer {.importc: "QGraphicsTextItem_metacast".}
 proc fcQGraphicsTextItem_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QGraphicsTextItem_metacall".}
@@ -1428,7 +1416,6 @@ proc fcQGraphicsTextItem_new2(vtbl: pointer, vdata: csize_t, text: struct_miqt_s
 proc fcQGraphicsTextItem_new3(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQGraphicsTextItem {.importc: "QGraphicsTextItem_new3".}
 proc fcQGraphicsTextItem_new4(vtbl: pointer, vdata: csize_t, text: struct_miqt_string, parent: pointer): ptr cQGraphicsTextItem {.importc: "QGraphicsTextItem_new4".}
 proc fcQGraphicsTextItem_staticMetaObject(): pointer {.importc: "QGraphicsTextItem_staticMetaObject".}
-proc fcQGraphicsTextItem_delete(self: pointer) {.importc: "QGraphicsTextItem_delete".}
 proc fcQGraphicsSimpleTextItem_setText(self: pointer, text: struct_miqt_string): void {.importc: "QGraphicsSimpleTextItem_setText".}
 proc fcQGraphicsSimpleTextItem_text(self: pointer): struct_miqt_string {.importc: "QGraphicsSimpleTextItem_text".}
 proc fcQGraphicsSimpleTextItem_setFont(self: pointer, font: pointer): void {.importc: "QGraphicsSimpleTextItem_setFont".}
@@ -1522,7 +1509,6 @@ proc fcQGraphicsSimpleTextItem_new(vtbl: pointer, vdata: csize_t): ptr cQGraphic
 proc fcQGraphicsSimpleTextItem_new2(vtbl: pointer, vdata: csize_t, text: struct_miqt_string): ptr cQGraphicsSimpleTextItem {.importc: "QGraphicsSimpleTextItem_new2".}
 proc fcQGraphicsSimpleTextItem_new3(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQGraphicsSimpleTextItem {.importc: "QGraphicsSimpleTextItem_new3".}
 proc fcQGraphicsSimpleTextItem_new4(vtbl: pointer, vdata: csize_t, text: struct_miqt_string, parent: pointer): ptr cQGraphicsSimpleTextItem {.importc: "QGraphicsSimpleTextItem_new4".}
-proc fcQGraphicsSimpleTextItem_delete(self: pointer) {.importc: "QGraphicsSimpleTextItem_delete".}
 proc fcQGraphicsItemGroup_addToGroup(self: pointer, item: pointer): void {.importc: "QGraphicsItemGroup_addToGroup".}
 proc fcQGraphicsItemGroup_removeFromGroup(self: pointer, item: pointer): void {.importc: "QGraphicsItemGroup_removeFromGroup".}
 proc fcQGraphicsItemGroup_boundingRect(self: pointer): pointer {.importc: "QGraphicsItemGroup_boundingRect".}
@@ -1610,31 +1596,30 @@ proc fcQGraphicsItemGroup_protectedbase_removeFromIndex(self: pointer): void {.i
 proc fcQGraphicsItemGroup_protectedbase_prepareGeometryChange(self: pointer): void {.importc: "QGraphicsItemGroup_protectedbase_prepareGeometryChange".}
 proc fcQGraphicsItemGroup_new(vtbl: pointer, vdata: csize_t): ptr cQGraphicsItemGroup {.importc: "QGraphicsItemGroup_new".}
 proc fcQGraphicsItemGroup_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQGraphicsItemGroup {.importc: "QGraphicsItemGroup_new2".}
-proc fcQGraphicsItemGroup_delete(self: pointer) {.importc: "QGraphicsItemGroup_delete".}
 
 proc scene*(self: gen_qgraphicsitem_types.QGraphicsItem): gen_qgraphicsscene_types.QGraphicsScene =
-  gen_qgraphicsscene_types.QGraphicsScene(h: fcQGraphicsItem_scene(self.h))
+  gen_qgraphicsscene_types.QGraphicsScene(h: fcQGraphicsItem_scene(self.h), owned: false)
 
 proc parentItem*(self: gen_qgraphicsitem_types.QGraphicsItem): gen_qgraphicsitem_types.QGraphicsItem =
-  gen_qgraphicsitem_types.QGraphicsItem(h: fcQGraphicsItem_parentItem(self.h))
+  gen_qgraphicsitem_types.QGraphicsItem(h: fcQGraphicsItem_parentItem(self.h), owned: false)
 
 proc topLevelItem*(self: gen_qgraphicsitem_types.QGraphicsItem): gen_qgraphicsitem_types.QGraphicsItem =
-  gen_qgraphicsitem_types.QGraphicsItem(h: fcQGraphicsItem_topLevelItem(self.h))
+  gen_qgraphicsitem_types.QGraphicsItem(h: fcQGraphicsItem_topLevelItem(self.h), owned: false)
 
 proc parentObject*(self: gen_qgraphicsitem_types.QGraphicsItem): gen_qgraphicsitem_types.QGraphicsObject =
-  gen_qgraphicsitem_types.QGraphicsObject(h: fcQGraphicsItem_parentObject(self.h))
+  gen_qgraphicsitem_types.QGraphicsObject(h: fcQGraphicsItem_parentObject(self.h), owned: false)
 
 proc parentWidget*(self: gen_qgraphicsitem_types.QGraphicsItem): gen_qgraphicswidget_types.QGraphicsWidget =
-  gen_qgraphicswidget_types.QGraphicsWidget(h: fcQGraphicsItem_parentWidget(self.h))
+  gen_qgraphicswidget_types.QGraphicsWidget(h: fcQGraphicsItem_parentWidget(self.h), owned: false)
 
 proc topLevelWidget*(self: gen_qgraphicsitem_types.QGraphicsItem): gen_qgraphicswidget_types.QGraphicsWidget =
-  gen_qgraphicswidget_types.QGraphicsWidget(h: fcQGraphicsItem_topLevelWidget(self.h))
+  gen_qgraphicswidget_types.QGraphicsWidget(h: fcQGraphicsItem_topLevelWidget(self.h), owned: false)
 
 proc window*(self: gen_qgraphicsitem_types.QGraphicsItem): gen_qgraphicswidget_types.QGraphicsWidget =
-  gen_qgraphicswidget_types.QGraphicsWidget(h: fcQGraphicsItem_window(self.h))
+  gen_qgraphicswidget_types.QGraphicsWidget(h: fcQGraphicsItem_window(self.h), owned: false)
 
 proc panel*(self: gen_qgraphicsitem_types.QGraphicsItem): gen_qgraphicsitem_types.QGraphicsItem =
-  gen_qgraphicsitem_types.QGraphicsItem(h: fcQGraphicsItem_panel(self.h))
+  gen_qgraphicsitem_types.QGraphicsItem(h: fcQGraphicsItem_panel(self.h), owned: false)
 
 proc setParentItem*(self: gen_qgraphicsitem_types.QGraphicsItem, parent: gen_qgraphicsitem_types.QGraphicsItem): void =
   fcQGraphicsItem_setParentItem(self.h, parent.h)
@@ -1644,7 +1629,7 @@ proc childItems*(self: gen_qgraphicsitem_types.QGraphicsItem): seq[gen_qgraphics
   var vx_ret = newSeq[gen_qgraphicsitem_types.QGraphicsItem](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qgraphicsitem_types.QGraphicsItem(h: v_outCast[i])
+    vx_ret[i] = gen_qgraphicsitem_types.QGraphicsItem(h: v_outCast[i], owned: false)
   c_free(v_ma.data)
   vx_ret
 
@@ -1658,13 +1643,13 @@ proc isPanel*(self: gen_qgraphicsitem_types.QGraphicsItem): bool =
   fcQGraphicsItem_isPanel(self.h)
 
 proc toGraphicsObject*(self: gen_qgraphicsitem_types.QGraphicsItem): gen_qgraphicsitem_types.QGraphicsObject =
-  gen_qgraphicsitem_types.QGraphicsObject(h: fcQGraphicsItem_toGraphicsObject(self.h))
+  gen_qgraphicsitem_types.QGraphicsObject(h: fcQGraphicsItem_toGraphicsObject(self.h), owned: false)
 
 proc toGraphicsObject2*(self: gen_qgraphicsitem_types.QGraphicsItem): gen_qgraphicsitem_types.QGraphicsObject =
-  gen_qgraphicsitem_types.QGraphicsObject(h: fcQGraphicsItem_toGraphicsObject2(self.h))
+  gen_qgraphicsitem_types.QGraphicsObject(h: fcQGraphicsItem_toGraphicsObject2(self.h), owned: false)
 
 proc group*(self: gen_qgraphicsitem_types.QGraphicsItem): gen_qgraphicsitem_types.QGraphicsItemGroup =
-  gen_qgraphicsitem_types.QGraphicsItemGroup(h: fcQGraphicsItem_group(self.h))
+  gen_qgraphicsitem_types.QGraphicsItemGroup(h: fcQGraphicsItem_group(self.h), owned: false)
 
 proc setGroup*(self: gen_qgraphicsitem_types.QGraphicsItem, group: gen_qgraphicsitem_types.QGraphicsItemGroup): void =
   fcQGraphicsItem_setGroup(self.h, group.h)
@@ -1703,7 +1688,7 @@ proc setToolTip*(self: gen_qgraphicsitem_types.QGraphicsItem, toolTip: string): 
   fcQGraphicsItem_setToolTip(self.h, struct_miqt_string(data: if len(toolTip) > 0: addr toolTip[0] else: nil, len: csize_t(len(toolTip))))
 
 proc cursor*(self: gen_qgraphicsitem_types.QGraphicsItem): gen_qcursor_types.QCursor =
-  gen_qcursor_types.QCursor(h: fcQGraphicsItem_cursor(self.h))
+  gen_qcursor_types.QCursor(h: fcQGraphicsItem_cursor(self.h), owned: true)
 
 proc setCursor*(self: gen_qgraphicsitem_types.QGraphicsItem, cursor: gen_qcursor_types.QCursor): void =
   fcQGraphicsItem_setCursor(self.h, cursor.h)
@@ -1757,7 +1742,7 @@ proc setOpacity*(self: gen_qgraphicsitem_types.QGraphicsItem, opacity: float64):
   fcQGraphicsItem_setOpacity(self.h, opacity)
 
 proc graphicsEffect*(self: gen_qgraphicsitem_types.QGraphicsItem): gen_qgraphicseffect_types.QGraphicsEffect =
-  gen_qgraphicseffect_types.QGraphicsEffect(h: fcQGraphicsItem_graphicsEffect(self.h))
+  gen_qgraphicseffect_types.QGraphicsEffect(h: fcQGraphicsItem_graphicsEffect(self.h), owned: false)
 
 proc setGraphicsEffect*(self: gen_qgraphicsitem_types.QGraphicsItem, effect: gen_qgraphicseffect_types.QGraphicsEffect): void =
   fcQGraphicsItem_setGraphicsEffect(self.h, effect.h)
@@ -1808,16 +1793,16 @@ proc clearFocus*(self: gen_qgraphicsitem_types.QGraphicsItem): void =
   fcQGraphicsItem_clearFocus(self.h)
 
 proc focusProxy*(self: gen_qgraphicsitem_types.QGraphicsItem): gen_qgraphicsitem_types.QGraphicsItem =
-  gen_qgraphicsitem_types.QGraphicsItem(h: fcQGraphicsItem_focusProxy(self.h))
+  gen_qgraphicsitem_types.QGraphicsItem(h: fcQGraphicsItem_focusProxy(self.h), owned: false)
 
 proc setFocusProxy*(self: gen_qgraphicsitem_types.QGraphicsItem, item: gen_qgraphicsitem_types.QGraphicsItem): void =
   fcQGraphicsItem_setFocusProxy(self.h, item.h)
 
 proc focusItem*(self: gen_qgraphicsitem_types.QGraphicsItem): gen_qgraphicsitem_types.QGraphicsItem =
-  gen_qgraphicsitem_types.QGraphicsItem(h: fcQGraphicsItem_focusItem(self.h))
+  gen_qgraphicsitem_types.QGraphicsItem(h: fcQGraphicsItem_focusItem(self.h), owned: false)
 
 proc focusScopeItem*(self: gen_qgraphicsitem_types.QGraphicsItem): gen_qgraphicsitem_types.QGraphicsItem =
-  gen_qgraphicsitem_types.QGraphicsItem(h: fcQGraphicsItem_focusScopeItem(self.h))
+  gen_qgraphicsitem_types.QGraphicsItem(h: fcQGraphicsItem_focusScopeItem(self.h), owned: false)
 
 proc grabMouse*(self: gen_qgraphicsitem_types.QGraphicsItem): void =
   fcQGraphicsItem_grabMouse(self.h)
@@ -1832,7 +1817,7 @@ proc ungrabKeyboard*(self: gen_qgraphicsitem_types.QGraphicsItem): void =
   fcQGraphicsItem_ungrabKeyboard(self.h)
 
 proc pos*(self: gen_qgraphicsitem_types.QGraphicsItem): gen_qpoint_types.QPointF =
-  gen_qpoint_types.QPointF(h: fcQGraphicsItem_pos(self.h))
+  gen_qpoint_types.QPointF(h: fcQGraphicsItem_pos(self.h), owned: true)
 
 proc x*(self: gen_qgraphicsitem_types.QGraphicsItem): float64 =
   fcQGraphicsItem_x(self.h)
@@ -1847,7 +1832,7 @@ proc setY*(self: gen_qgraphicsitem_types.QGraphicsItem, y: float64): void =
   fcQGraphicsItem_setY(self.h, y)
 
 proc scenePos*(self: gen_qgraphicsitem_types.QGraphicsItem): gen_qpoint_types.QPointF =
-  gen_qpoint_types.QPointF(h: fcQGraphicsItem_scenePos(self.h))
+  gen_qpoint_types.QPointF(h: fcQGraphicsItem_scenePos(self.h), owned: true)
 
 proc setPos*(self: gen_qgraphicsitem_types.QGraphicsItem, pos: gen_qpoint_types.QPointF): void =
   fcQGraphicsItem_setPos(self.h, pos.h)
@@ -1865,16 +1850,16 @@ proc ensureVisible*(self: gen_qgraphicsitem_types.QGraphicsItem, x: float64, y: 
   fcQGraphicsItem_ensureVisible2(self.h, x, y, w, h)
 
 proc transform*(self: gen_qgraphicsitem_types.QGraphicsItem): gen_qtransform_types.QTransform =
-  gen_qtransform_types.QTransform(h: fcQGraphicsItem_transform(self.h))
+  gen_qtransform_types.QTransform(h: fcQGraphicsItem_transform(self.h), owned: true)
 
 proc sceneTransform*(self: gen_qgraphicsitem_types.QGraphicsItem): gen_qtransform_types.QTransform =
-  gen_qtransform_types.QTransform(h: fcQGraphicsItem_sceneTransform(self.h))
+  gen_qtransform_types.QTransform(h: fcQGraphicsItem_sceneTransform(self.h), owned: true)
 
 proc deviceTransform*(self: gen_qgraphicsitem_types.QGraphicsItem, viewportTransform: gen_qtransform_types.QTransform): gen_qtransform_types.QTransform =
-  gen_qtransform_types.QTransform(h: fcQGraphicsItem_deviceTransform(self.h, viewportTransform.h))
+  gen_qtransform_types.QTransform(h: fcQGraphicsItem_deviceTransform(self.h, viewportTransform.h), owned: true)
 
 proc itemTransform*(self: gen_qgraphicsitem_types.QGraphicsItem, other: gen_qgraphicsitem_types.QGraphicsItem): gen_qtransform_types.QTransform =
-  gen_qtransform_types.QTransform(h: fcQGraphicsItem_itemTransform(self.h, other.h))
+  gen_qtransform_types.QTransform(h: fcQGraphicsItem_itemTransform(self.h, other.h), owned: true)
 
 proc setTransform*(self: gen_qgraphicsitem_types.QGraphicsItem, matrix: gen_qtransform_types.QTransform): void =
   fcQGraphicsItem_setTransform(self.h, matrix.h)
@@ -1899,7 +1884,7 @@ proc transformations*(self: gen_qgraphicsitem_types.QGraphicsItem): seq[gen_qgra
   var vx_ret = newSeq[gen_qgraphicstransform_types.QGraphicsTransform](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qgraphicstransform_types.QGraphicsTransform(h: v_outCast[i])
+    vx_ret[i] = gen_qgraphicstransform_types.QGraphicsTransform(h: v_outCast[i], owned: false)
   c_free(v_ma.data)
   vx_ret
 
@@ -1911,7 +1896,7 @@ proc setTransformations*(self: gen_qgraphicsitem_types.QGraphicsItem, transforma
   fcQGraphicsItem_setTransformations(self.h, struct_miqt_array(len: csize_t(len(transformations)), data: if len(transformations) == 0: nil else: addr(transformations_CArray[0])))
 
 proc transformOriginPoint*(self: gen_qgraphicsitem_types.QGraphicsItem): gen_qpoint_types.QPointF =
-  gen_qpoint_types.QPointF(h: fcQGraphicsItem_transformOriginPoint(self.h))
+  gen_qpoint_types.QPointF(h: fcQGraphicsItem_transformOriginPoint(self.h), owned: true)
 
 proc setTransformOriginPoint*(self: gen_qgraphicsitem_types.QGraphicsItem, origin: gen_qpoint_types.QPointF): void =
   fcQGraphicsItem_setTransformOriginPoint(self.h, origin.h)
@@ -1932,22 +1917,22 @@ proc stackBefore*(self: gen_qgraphicsitem_types.QGraphicsItem, sibling: gen_qgra
   fcQGraphicsItem_stackBefore(self.h, sibling.h)
 
 proc boundingRect*(self: gen_qgraphicsitem_types.QGraphicsItem): gen_qrect_types.QRectF =
-  gen_qrect_types.QRectF(h: fcQGraphicsItem_boundingRect(self.h))
+  gen_qrect_types.QRectF(h: fcQGraphicsItem_boundingRect(self.h), owned: true)
 
 proc childrenBoundingRect*(self: gen_qgraphicsitem_types.QGraphicsItem): gen_qrect_types.QRectF =
-  gen_qrect_types.QRectF(h: fcQGraphicsItem_childrenBoundingRect(self.h))
+  gen_qrect_types.QRectF(h: fcQGraphicsItem_childrenBoundingRect(self.h), owned: true)
 
 proc sceneBoundingRect*(self: gen_qgraphicsitem_types.QGraphicsItem): gen_qrect_types.QRectF =
-  gen_qrect_types.QRectF(h: fcQGraphicsItem_sceneBoundingRect(self.h))
+  gen_qrect_types.QRectF(h: fcQGraphicsItem_sceneBoundingRect(self.h), owned: true)
 
 proc shape*(self: gen_qgraphicsitem_types.QGraphicsItem): gen_qpainterpath_types.QPainterPath =
-  gen_qpainterpath_types.QPainterPath(h: fcQGraphicsItem_shape(self.h))
+  gen_qpainterpath_types.QPainterPath(h: fcQGraphicsItem_shape(self.h), owned: true)
 
 proc isClipped*(self: gen_qgraphicsitem_types.QGraphicsItem): bool =
   fcQGraphicsItem_isClipped(self.h)
 
 proc clipPath*(self: gen_qgraphicsitem_types.QGraphicsItem): gen_qpainterpath_types.QPainterPath =
-  gen_qpainterpath_types.QPainterPath(h: fcQGraphicsItem_clipPath(self.h))
+  gen_qpainterpath_types.QPainterPath(h: fcQGraphicsItem_clipPath(self.h), owned: true)
 
 proc contains*(self: gen_qgraphicsitem_types.QGraphicsItem, point: gen_qpoint_types.QPointF): bool =
   fcQGraphicsItem_contains(self.h, point.h)
@@ -1963,7 +1948,7 @@ proc collidingItems*(self: gen_qgraphicsitem_types.QGraphicsItem): seq[gen_qgrap
   var vx_ret = newSeq[gen_qgraphicsitem_types.QGraphicsItem](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qgraphicsitem_types.QGraphicsItem(h: v_outCast[i])
+    vx_ret[i] = gen_qgraphicsitem_types.QGraphicsItem(h: v_outCast[i], owned: false)
   c_free(v_ma.data)
   vx_ret
 
@@ -1977,10 +1962,10 @@ proc isObscuredBy*(self: gen_qgraphicsitem_types.QGraphicsItem, item: gen_qgraph
   fcQGraphicsItem_isObscuredBy(self.h, item.h)
 
 proc opaqueArea*(self: gen_qgraphicsitem_types.QGraphicsItem): gen_qpainterpath_types.QPainterPath =
-  gen_qpainterpath_types.QPainterPath(h: fcQGraphicsItem_opaqueArea(self.h))
+  gen_qpainterpath_types.QPainterPath(h: fcQGraphicsItem_opaqueArea(self.h), owned: true)
 
 proc boundingRegion*(self: gen_qgraphicsitem_types.QGraphicsItem, itemToDeviceTransform: gen_qtransform_types.QTransform): gen_qregion_types.QRegion =
-  gen_qregion_types.QRegion(h: fcQGraphicsItem_boundingRegion(self.h, itemToDeviceTransform.h))
+  gen_qregion_types.QRegion(h: fcQGraphicsItem_boundingRegion(self.h, itemToDeviceTransform.h), owned: true)
 
 proc boundingRegionGranularity*(self: gen_qgraphicsitem_types.QGraphicsItem): float64 =
   fcQGraphicsItem_boundingRegionGranularity(self.h)
@@ -2001,106 +1986,106 @@ proc scroll*(self: gen_qgraphicsitem_types.QGraphicsItem, dx: float64, dy: float
   fcQGraphicsItem_scroll(self.h, dx, dy)
 
 proc mapToItem*(self: gen_qgraphicsitem_types.QGraphicsItem, item: gen_qgraphicsitem_types.QGraphicsItem, point: gen_qpoint_types.QPointF): gen_qpoint_types.QPointF =
-  gen_qpoint_types.QPointF(h: fcQGraphicsItem_mapToItem(self.h, item.h, point.h))
+  gen_qpoint_types.QPointF(h: fcQGraphicsItem_mapToItem(self.h, item.h, point.h), owned: true)
 
 proc mapToParent*(self: gen_qgraphicsitem_types.QGraphicsItem, point: gen_qpoint_types.QPointF): gen_qpoint_types.QPointF =
-  gen_qpoint_types.QPointF(h: fcQGraphicsItem_mapToParent(self.h, point.h))
+  gen_qpoint_types.QPointF(h: fcQGraphicsItem_mapToParent(self.h, point.h), owned: true)
 
 proc mapToScene*(self: gen_qgraphicsitem_types.QGraphicsItem, point: gen_qpoint_types.QPointF): gen_qpoint_types.QPointF =
-  gen_qpoint_types.QPointF(h: fcQGraphicsItem_mapToScene(self.h, point.h))
+  gen_qpoint_types.QPointF(h: fcQGraphicsItem_mapToScene(self.h, point.h), owned: true)
 
 proc mapRectToItem*(self: gen_qgraphicsitem_types.QGraphicsItem, item: gen_qgraphicsitem_types.QGraphicsItem, rect: gen_qrect_types.QRectF): gen_qrect_types.QRectF =
-  gen_qrect_types.QRectF(h: fcQGraphicsItem_mapRectToItem(self.h, item.h, rect.h))
+  gen_qrect_types.QRectF(h: fcQGraphicsItem_mapRectToItem(self.h, item.h, rect.h), owned: true)
 
 proc mapRectToParent*(self: gen_qgraphicsitem_types.QGraphicsItem, rect: gen_qrect_types.QRectF): gen_qrect_types.QRectF =
-  gen_qrect_types.QRectF(h: fcQGraphicsItem_mapRectToParent(self.h, rect.h))
+  gen_qrect_types.QRectF(h: fcQGraphicsItem_mapRectToParent(self.h, rect.h), owned: true)
 
 proc mapRectToScene*(self: gen_qgraphicsitem_types.QGraphicsItem, rect: gen_qrect_types.QRectF): gen_qrect_types.QRectF =
-  gen_qrect_types.QRectF(h: fcQGraphicsItem_mapRectToScene(self.h, rect.h))
+  gen_qrect_types.QRectF(h: fcQGraphicsItem_mapRectToScene(self.h, rect.h), owned: true)
 
 proc mapToItem*(self: gen_qgraphicsitem_types.QGraphicsItem, item: gen_qgraphicsitem_types.QGraphicsItem, path: gen_qpainterpath_types.QPainterPath): gen_qpainterpath_types.QPainterPath =
-  gen_qpainterpath_types.QPainterPath(h: fcQGraphicsItem_mapToItem4(self.h, item.h, path.h))
+  gen_qpainterpath_types.QPainterPath(h: fcQGraphicsItem_mapToItem4(self.h, item.h, path.h), owned: true)
 
 proc mapToParent*(self: gen_qgraphicsitem_types.QGraphicsItem, path: gen_qpainterpath_types.QPainterPath): gen_qpainterpath_types.QPainterPath =
-  gen_qpainterpath_types.QPainterPath(h: fcQGraphicsItem_mapToParentWithPath(self.h, path.h))
+  gen_qpainterpath_types.QPainterPath(h: fcQGraphicsItem_mapToParentWithPath(self.h, path.h), owned: true)
 
 proc mapToScene*(self: gen_qgraphicsitem_types.QGraphicsItem, path: gen_qpainterpath_types.QPainterPath): gen_qpainterpath_types.QPainterPath =
-  gen_qpainterpath_types.QPainterPath(h: fcQGraphicsItem_mapToSceneWithPath(self.h, path.h))
+  gen_qpainterpath_types.QPainterPath(h: fcQGraphicsItem_mapToSceneWithPath(self.h, path.h), owned: true)
 
 proc mapFromItem*(self: gen_qgraphicsitem_types.QGraphicsItem, item: gen_qgraphicsitem_types.QGraphicsItem, point: gen_qpoint_types.QPointF): gen_qpoint_types.QPointF =
-  gen_qpoint_types.QPointF(h: fcQGraphicsItem_mapFromItem(self.h, item.h, point.h))
+  gen_qpoint_types.QPointF(h: fcQGraphicsItem_mapFromItem(self.h, item.h, point.h), owned: true)
 
 proc mapFromParent*(self: gen_qgraphicsitem_types.QGraphicsItem, point: gen_qpoint_types.QPointF): gen_qpoint_types.QPointF =
-  gen_qpoint_types.QPointF(h: fcQGraphicsItem_mapFromParent(self.h, point.h))
+  gen_qpoint_types.QPointF(h: fcQGraphicsItem_mapFromParent(self.h, point.h), owned: true)
 
 proc mapFromScene*(self: gen_qgraphicsitem_types.QGraphicsItem, point: gen_qpoint_types.QPointF): gen_qpoint_types.QPointF =
-  gen_qpoint_types.QPointF(h: fcQGraphicsItem_mapFromScene(self.h, point.h))
+  gen_qpoint_types.QPointF(h: fcQGraphicsItem_mapFromScene(self.h, point.h), owned: true)
 
 proc mapRectFromItem*(self: gen_qgraphicsitem_types.QGraphicsItem, item: gen_qgraphicsitem_types.QGraphicsItem, rect: gen_qrect_types.QRectF): gen_qrect_types.QRectF =
-  gen_qrect_types.QRectF(h: fcQGraphicsItem_mapRectFromItem(self.h, item.h, rect.h))
+  gen_qrect_types.QRectF(h: fcQGraphicsItem_mapRectFromItem(self.h, item.h, rect.h), owned: true)
 
 proc mapRectFromParent*(self: gen_qgraphicsitem_types.QGraphicsItem, rect: gen_qrect_types.QRectF): gen_qrect_types.QRectF =
-  gen_qrect_types.QRectF(h: fcQGraphicsItem_mapRectFromParent(self.h, rect.h))
+  gen_qrect_types.QRectF(h: fcQGraphicsItem_mapRectFromParent(self.h, rect.h), owned: true)
 
 proc mapRectFromScene*(self: gen_qgraphicsitem_types.QGraphicsItem, rect: gen_qrect_types.QRectF): gen_qrect_types.QRectF =
-  gen_qrect_types.QRectF(h: fcQGraphicsItem_mapRectFromScene(self.h, rect.h))
+  gen_qrect_types.QRectF(h: fcQGraphicsItem_mapRectFromScene(self.h, rect.h), owned: true)
 
 proc mapFromItem*(self: gen_qgraphicsitem_types.QGraphicsItem, item: gen_qgraphicsitem_types.QGraphicsItem, path: gen_qpainterpath_types.QPainterPath): gen_qpainterpath_types.QPainterPath =
-  gen_qpainterpath_types.QPainterPath(h: fcQGraphicsItem_mapFromItem4(self.h, item.h, path.h))
+  gen_qpainterpath_types.QPainterPath(h: fcQGraphicsItem_mapFromItem4(self.h, item.h, path.h), owned: true)
 
 proc mapFromParent*(self: gen_qgraphicsitem_types.QGraphicsItem, path: gen_qpainterpath_types.QPainterPath): gen_qpainterpath_types.QPainterPath =
-  gen_qpainterpath_types.QPainterPath(h: fcQGraphicsItem_mapFromParentWithPath(self.h, path.h))
+  gen_qpainterpath_types.QPainterPath(h: fcQGraphicsItem_mapFromParentWithPath(self.h, path.h), owned: true)
 
 proc mapFromScene*(self: gen_qgraphicsitem_types.QGraphicsItem, path: gen_qpainterpath_types.QPainterPath): gen_qpainterpath_types.QPainterPath =
-  gen_qpainterpath_types.QPainterPath(h: fcQGraphicsItem_mapFromSceneWithPath(self.h, path.h))
+  gen_qpainterpath_types.QPainterPath(h: fcQGraphicsItem_mapFromSceneWithPath(self.h, path.h), owned: true)
 
 proc mapToItem*(self: gen_qgraphicsitem_types.QGraphicsItem, item: gen_qgraphicsitem_types.QGraphicsItem, x: float64, y: float64): gen_qpoint_types.QPointF =
-  gen_qpoint_types.QPointF(h: fcQGraphicsItem_mapToItem5(self.h, item.h, x, y))
+  gen_qpoint_types.QPointF(h: fcQGraphicsItem_mapToItem5(self.h, item.h, x, y), owned: true)
 
 proc mapToParent*(self: gen_qgraphicsitem_types.QGraphicsItem, x: float64, y: float64): gen_qpoint_types.QPointF =
-  gen_qpoint_types.QPointF(h: fcQGraphicsItem_mapToParent2(self.h, x, y))
+  gen_qpoint_types.QPointF(h: fcQGraphicsItem_mapToParent2(self.h, x, y), owned: true)
 
 proc mapToScene*(self: gen_qgraphicsitem_types.QGraphicsItem, x: float64, y: float64): gen_qpoint_types.QPointF =
-  gen_qpoint_types.QPointF(h: fcQGraphicsItem_mapToScene2(self.h, x, y))
+  gen_qpoint_types.QPointF(h: fcQGraphicsItem_mapToScene2(self.h, x, y), owned: true)
 
 proc mapRectToItem*(self: gen_qgraphicsitem_types.QGraphicsItem, item: gen_qgraphicsitem_types.QGraphicsItem, x: float64, y: float64, w: float64, h: float64): gen_qrect_types.QRectF =
-  gen_qrect_types.QRectF(h: fcQGraphicsItem_mapRectToItem2(self.h, item.h, x, y, w, h))
+  gen_qrect_types.QRectF(h: fcQGraphicsItem_mapRectToItem2(self.h, item.h, x, y, w, h), owned: true)
 
 proc mapRectToParent*(self: gen_qgraphicsitem_types.QGraphicsItem, x: float64, y: float64, w: float64, h: float64): gen_qrect_types.QRectF =
-  gen_qrect_types.QRectF(h: fcQGraphicsItem_mapRectToParent2(self.h, x, y, w, h))
+  gen_qrect_types.QRectF(h: fcQGraphicsItem_mapRectToParent2(self.h, x, y, w, h), owned: true)
 
 proc mapRectToScene*(self: gen_qgraphicsitem_types.QGraphicsItem, x: float64, y: float64, w: float64, h: float64): gen_qrect_types.QRectF =
-  gen_qrect_types.QRectF(h: fcQGraphicsItem_mapRectToScene2(self.h, x, y, w, h))
+  gen_qrect_types.QRectF(h: fcQGraphicsItem_mapRectToScene2(self.h, x, y, w, h), owned: true)
 
 proc mapFromItem*(self: gen_qgraphicsitem_types.QGraphicsItem, item: gen_qgraphicsitem_types.QGraphicsItem, x: float64, y: float64): gen_qpoint_types.QPointF =
-  gen_qpoint_types.QPointF(h: fcQGraphicsItem_mapFromItem5(self.h, item.h, x, y))
+  gen_qpoint_types.QPointF(h: fcQGraphicsItem_mapFromItem5(self.h, item.h, x, y), owned: true)
 
 proc mapFromParent*(self: gen_qgraphicsitem_types.QGraphicsItem, x: float64, y: float64): gen_qpoint_types.QPointF =
-  gen_qpoint_types.QPointF(h: fcQGraphicsItem_mapFromParent2(self.h, x, y))
+  gen_qpoint_types.QPointF(h: fcQGraphicsItem_mapFromParent2(self.h, x, y), owned: true)
 
 proc mapFromScene*(self: gen_qgraphicsitem_types.QGraphicsItem, x: float64, y: float64): gen_qpoint_types.QPointF =
-  gen_qpoint_types.QPointF(h: fcQGraphicsItem_mapFromScene2(self.h, x, y))
+  gen_qpoint_types.QPointF(h: fcQGraphicsItem_mapFromScene2(self.h, x, y), owned: true)
 
 proc mapRectFromItem*(self: gen_qgraphicsitem_types.QGraphicsItem, item: gen_qgraphicsitem_types.QGraphicsItem, x: float64, y: float64, w: float64, h: float64): gen_qrect_types.QRectF =
-  gen_qrect_types.QRectF(h: fcQGraphicsItem_mapRectFromItem2(self.h, item.h, x, y, w, h))
+  gen_qrect_types.QRectF(h: fcQGraphicsItem_mapRectFromItem2(self.h, item.h, x, y, w, h), owned: true)
 
 proc mapRectFromParent*(self: gen_qgraphicsitem_types.QGraphicsItem, x: float64, y: float64, w: float64, h: float64): gen_qrect_types.QRectF =
-  gen_qrect_types.QRectF(h: fcQGraphicsItem_mapRectFromParent2(self.h, x, y, w, h))
+  gen_qrect_types.QRectF(h: fcQGraphicsItem_mapRectFromParent2(self.h, x, y, w, h), owned: true)
 
 proc mapRectFromScene*(self: gen_qgraphicsitem_types.QGraphicsItem, x: float64, y: float64, w: float64, h: float64): gen_qrect_types.QRectF =
-  gen_qrect_types.QRectF(h: fcQGraphicsItem_mapRectFromScene2(self.h, x, y, w, h))
+  gen_qrect_types.QRectF(h: fcQGraphicsItem_mapRectFromScene2(self.h, x, y, w, h), owned: true)
 
 proc isAncestorOf*(self: gen_qgraphicsitem_types.QGraphicsItem, child: gen_qgraphicsitem_types.QGraphicsItem): bool =
   fcQGraphicsItem_isAncestorOf(self.h, child.h)
 
 proc commonAncestorItem*(self: gen_qgraphicsitem_types.QGraphicsItem, other: gen_qgraphicsitem_types.QGraphicsItem): gen_qgraphicsitem_types.QGraphicsItem =
-  gen_qgraphicsitem_types.QGraphicsItem(h: fcQGraphicsItem_commonAncestorItem(self.h, other.h))
+  gen_qgraphicsitem_types.QGraphicsItem(h: fcQGraphicsItem_commonAncestorItem(self.h, other.h), owned: false)
 
 proc isUnderMouse*(self: gen_qgraphicsitem_types.QGraphicsItem): bool =
   fcQGraphicsItem_isUnderMouse(self.h)
 
 proc data*(self: gen_qgraphicsitem_types.QGraphicsItem, key: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQGraphicsItem_data(self.h, key))
+  gen_qvariant_types.QVariant(h: fcQGraphicsItem_data(self.h, key), owned: true)
 
 proc setData*(self: gen_qgraphicsitem_types.QGraphicsItem, key: cint, value: gen_qvariant_types.QVariant): void =
   fcQGraphicsItem_setData(self.h, key, value.h)
@@ -2145,7 +2130,7 @@ proc ensureVisible*(self: gen_qgraphicsitem_types.QGraphicsItem, x: float64, y: 
   fcQGraphicsItem_ensureVisible6(self.h, x, y, w, h, xmargin, ymargin)
 
 proc itemTransform*(self: gen_qgraphicsitem_types.QGraphicsItem, other: gen_qgraphicsitem_types.QGraphicsItem, ok: ptr bool): gen_qtransform_types.QTransform =
-  gen_qtransform_types.QTransform(h: fcQGraphicsItem_itemTransform2(self.h, other.h, ok))
+  gen_qtransform_types.QTransform(h: fcQGraphicsItem_itemTransform2(self.h, other.h, ok), owned: true)
 
 proc setTransform*(self: gen_qgraphicsitem_types.QGraphicsItem, matrix: gen_qtransform_types.QTransform, combine: bool): void =
   fcQGraphicsItem_setTransform2(self.h, matrix.h, combine)
@@ -2155,7 +2140,7 @@ proc collidingItems*(self: gen_qgraphicsitem_types.QGraphicsItem, mode: cint): s
   var vx_ret = newSeq[gen_qgraphicsitem_types.QGraphicsItem](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qgraphicsitem_types.QGraphicsItem(h: v_outCast[i])
+    vx_ret[i] = gen_qgraphicsitem_types.QGraphicsItem(h: v_outCast[i], owned: false)
   c_free(v_ma.data)
   vx_ret
 
@@ -2203,7 +2188,7 @@ type QGraphicsItemitemChangeProc* = proc(self: QGraphicsItem, change: cint, valu
 type QGraphicsItemsupportsExtensionProc* = proc(self: QGraphicsItem, extension: cint): bool {.raises: [], gcsafe.}
 type QGraphicsItemsetExtensionProc* = proc(self: QGraphicsItem, extension: cint, variant: gen_qvariant_types.QVariant): void {.raises: [], gcsafe.}
 type QGraphicsItemextensionProc* = proc(self: QGraphicsItem, variant: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant {.raises: [], gcsafe.}
-type QGraphicsItemVTable* = object
+type QGraphicsItemVTable* {.inheritable, pure.} = object
   vtbl: cQGraphicsItemVTable
   advance*: QGraphicsItemadvanceProc
   boundingRect*: QGraphicsItemboundingRectProc
@@ -2253,16 +2238,22 @@ proc fcQGraphicsItem_vtable_callback_boundingRect(self: pointer): pointer {.cdec
   let vtbl = cast[ptr QGraphicsItemVTable](fcQGraphicsItem_vdata(self)[])
   let self = QGraphicsItem(h: self)
   var virtualReturn = vtbl[].boundingRect(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QGraphicsItemshape*(self: gen_qgraphicsitem_types.QGraphicsItem): gen_qpainterpath_types.QPainterPath =
-  gen_qpainterpath_types.QPainterPath(h: fcQGraphicsItem_virtualbase_shape(self.h))
+  gen_qpainterpath_types.QPainterPath(h: fcQGraphicsItem_virtualbase_shape(self.h), owned: true)
 
 proc fcQGraphicsItem_vtable_callback_shape(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QGraphicsItemVTable](fcQGraphicsItem_vdata(self)[])
   let self = QGraphicsItem(h: self)
   var virtualReturn = vtbl[].shape(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QGraphicsItemcontains*(self: gen_qgraphicsitem_types.QGraphicsItem, point: gen_qpoint_types.QPointF): bool =
   fcQGraphicsItem_virtualbase_contains(self.h, point.h)
@@ -2270,7 +2261,7 @@ proc QGraphicsItemcontains*(self: gen_qgraphicsitem_types.QGraphicsItem, point: 
 proc fcQGraphicsItem_vtable_callback_contains(self: pointer, point: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QGraphicsItemVTable](fcQGraphicsItem_vdata(self)[])
   let self = QGraphicsItem(h: self)
-  let slotval1 = gen_qpoint_types.QPointF(h: point)
+  let slotval1 = gen_qpoint_types.QPointF(h: point, owned: false)
   var virtualReturn = vtbl[].contains(self, slotval1)
   virtualReturn
 
@@ -2280,7 +2271,7 @@ proc QGraphicsItemcollidesWithItem*(self: gen_qgraphicsitem_types.QGraphicsItem,
 proc fcQGraphicsItem_vtable_callback_collidesWithItem(self: pointer, other: pointer, mode: cint): bool {.cdecl.} =
   let vtbl = cast[ptr QGraphicsItemVTable](fcQGraphicsItem_vdata(self)[])
   let self = QGraphicsItem(h: self)
-  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: other)
+  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: other, owned: false)
   let slotval2 = cint(mode)
   var virtualReturn = vtbl[].collidesWithItem(self, slotval1, slotval2)
   virtualReturn
@@ -2291,7 +2282,7 @@ proc QGraphicsItemcollidesWithPath*(self: gen_qgraphicsitem_types.QGraphicsItem,
 proc fcQGraphicsItem_vtable_callback_collidesWithPath(self: pointer, path: pointer, mode: cint): bool {.cdecl.} =
   let vtbl = cast[ptr QGraphicsItemVTable](fcQGraphicsItem_vdata(self)[])
   let self = QGraphicsItem(h: self)
-  let slotval1 = gen_qpainterpath_types.QPainterPath(h: path)
+  let slotval1 = gen_qpainterpath_types.QPainterPath(h: path, owned: false)
   let slotval2 = cint(mode)
   var virtualReturn = vtbl[].collidesWithPath(self, slotval1, slotval2)
   virtualReturn
@@ -2302,25 +2293,28 @@ proc QGraphicsItemisObscuredBy*(self: gen_qgraphicsitem_types.QGraphicsItem, ite
 proc fcQGraphicsItem_vtable_callback_isObscuredBy(self: pointer, item: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QGraphicsItemVTable](fcQGraphicsItem_vdata(self)[])
   let self = QGraphicsItem(h: self)
-  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: item)
+  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: item, owned: false)
   var virtualReturn = vtbl[].isObscuredBy(self, slotval1)
   virtualReturn
 
 proc QGraphicsItemopaqueArea*(self: gen_qgraphicsitem_types.QGraphicsItem): gen_qpainterpath_types.QPainterPath =
-  gen_qpainterpath_types.QPainterPath(h: fcQGraphicsItem_virtualbase_opaqueArea(self.h))
+  gen_qpainterpath_types.QPainterPath(h: fcQGraphicsItem_virtualbase_opaqueArea(self.h), owned: true)
 
 proc fcQGraphicsItem_vtable_callback_opaqueArea(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QGraphicsItemVTable](fcQGraphicsItem_vdata(self)[])
   let self = QGraphicsItem(h: self)
   var virtualReturn = vtbl[].opaqueArea(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQGraphicsItem_vtable_callback_paint(self: pointer, painter: pointer, option: pointer, widget: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsItemVTable](fcQGraphicsItem_vdata(self)[])
   let self = QGraphicsItem(h: self)
-  let slotval1 = gen_qpainter_types.QPainter(h: painter)
-  let slotval2 = gen_qstyleoption_types.QStyleOptionGraphicsItem(h: option)
-  let slotval3 = gen_qwidget_types.QWidget(h: widget)
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
+  let slotval2 = gen_qstyleoption_types.QStyleOptionGraphicsItem(h: option, owned: false)
+  let slotval3 = gen_qwidget_types.QWidget(h: widget, owned: false)
   vtbl[].paint(self, slotval1, slotval2, slotval3)
 
 proc QGraphicsItemtypeX*(self: gen_qgraphicsitem_types.QGraphicsItem): cint =
@@ -2338,8 +2332,8 @@ proc QGraphicsItemsceneEventFilter*(self: gen_qgraphicsitem_types.QGraphicsItem,
 proc fcQGraphicsItem_vtable_callback_sceneEventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QGraphicsItemVTable](fcQGraphicsItem_vdata(self)[])
   let self = QGraphicsItem(h: self)
-  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].sceneEventFilter(self, slotval1, slotval2)
   virtualReturn
 
@@ -2349,7 +2343,7 @@ proc QGraphicsItemsceneEvent*(self: gen_qgraphicsitem_types.QGraphicsItem, event
 proc fcQGraphicsItem_vtable_callback_sceneEvent(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QGraphicsItemVTable](fcQGraphicsItem_vdata(self)[])
   let self = QGraphicsItem(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].sceneEvent(self, slotval1)
   virtualReturn
 
@@ -2359,7 +2353,7 @@ proc QGraphicsItemcontextMenuEvent*(self: gen_qgraphicsitem_types.QGraphicsItem,
 proc fcQGraphicsItem_vtable_callback_contextMenuEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsItemVTable](fcQGraphicsItem_vdata(self)[])
   let self = QGraphicsItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneContextMenuEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneContextMenuEvent(h: event, owned: false)
   vtbl[].contextMenuEvent(self, slotval1)
 
 proc QGraphicsItemdragEnterEvent*(self: gen_qgraphicsitem_types.QGraphicsItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void =
@@ -2368,7 +2362,7 @@ proc QGraphicsItemdragEnterEvent*(self: gen_qgraphicsitem_types.QGraphicsItem, e
 proc fcQGraphicsItem_vtable_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsItemVTable](fcQGraphicsItem_vdata(self)[])
   let self = QGraphicsItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event, owned: false)
   vtbl[].dragEnterEvent(self, slotval1)
 
 proc QGraphicsItemdragLeaveEvent*(self: gen_qgraphicsitem_types.QGraphicsItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void =
@@ -2377,7 +2371,7 @@ proc QGraphicsItemdragLeaveEvent*(self: gen_qgraphicsitem_types.QGraphicsItem, e
 proc fcQGraphicsItem_vtable_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsItemVTable](fcQGraphicsItem_vdata(self)[])
   let self = QGraphicsItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event, owned: false)
   vtbl[].dragLeaveEvent(self, slotval1)
 
 proc QGraphicsItemdragMoveEvent*(self: gen_qgraphicsitem_types.QGraphicsItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void =
@@ -2386,7 +2380,7 @@ proc QGraphicsItemdragMoveEvent*(self: gen_qgraphicsitem_types.QGraphicsItem, ev
 proc fcQGraphicsItem_vtable_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsItemVTable](fcQGraphicsItem_vdata(self)[])
   let self = QGraphicsItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event, owned: false)
   vtbl[].dragMoveEvent(self, slotval1)
 
 proc QGraphicsItemdropEvent*(self: gen_qgraphicsitem_types.QGraphicsItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void =
@@ -2395,7 +2389,7 @@ proc QGraphicsItemdropEvent*(self: gen_qgraphicsitem_types.QGraphicsItem, event:
 proc fcQGraphicsItem_vtable_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsItemVTable](fcQGraphicsItem_vdata(self)[])
   let self = QGraphicsItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event, owned: false)
   vtbl[].dropEvent(self, slotval1)
 
 proc QGraphicsItemfocusInEvent*(self: gen_qgraphicsitem_types.QGraphicsItem, event: gen_qevent_types.QFocusEvent): void =
@@ -2404,7 +2398,7 @@ proc QGraphicsItemfocusInEvent*(self: gen_qgraphicsitem_types.QGraphicsItem, eve
 proc fcQGraphicsItem_vtable_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsItemVTable](fcQGraphicsItem_vdata(self)[])
   let self = QGraphicsItem(h: self)
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusInEvent(self, slotval1)
 
 proc QGraphicsItemfocusOutEvent*(self: gen_qgraphicsitem_types.QGraphicsItem, event: gen_qevent_types.QFocusEvent): void =
@@ -2413,7 +2407,7 @@ proc QGraphicsItemfocusOutEvent*(self: gen_qgraphicsitem_types.QGraphicsItem, ev
 proc fcQGraphicsItem_vtable_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsItemVTable](fcQGraphicsItem_vdata(self)[])
   let self = QGraphicsItem(h: self)
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusOutEvent(self, slotval1)
 
 proc QGraphicsItemhoverEnterEvent*(self: gen_qgraphicsitem_types.QGraphicsItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent): void =
@@ -2422,7 +2416,7 @@ proc QGraphicsItemhoverEnterEvent*(self: gen_qgraphicsitem_types.QGraphicsItem, 
 proc fcQGraphicsItem_vtable_callback_hoverEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsItemVTable](fcQGraphicsItem_vdata(self)[])
   let self = QGraphicsItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event, owned: false)
   vtbl[].hoverEnterEvent(self, slotval1)
 
 proc QGraphicsItemhoverMoveEvent*(self: gen_qgraphicsitem_types.QGraphicsItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent): void =
@@ -2431,7 +2425,7 @@ proc QGraphicsItemhoverMoveEvent*(self: gen_qgraphicsitem_types.QGraphicsItem, e
 proc fcQGraphicsItem_vtable_callback_hoverMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsItemVTable](fcQGraphicsItem_vdata(self)[])
   let self = QGraphicsItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event, owned: false)
   vtbl[].hoverMoveEvent(self, slotval1)
 
 proc QGraphicsItemhoverLeaveEvent*(self: gen_qgraphicsitem_types.QGraphicsItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent): void =
@@ -2440,7 +2434,7 @@ proc QGraphicsItemhoverLeaveEvent*(self: gen_qgraphicsitem_types.QGraphicsItem, 
 proc fcQGraphicsItem_vtable_callback_hoverLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsItemVTable](fcQGraphicsItem_vdata(self)[])
   let self = QGraphicsItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event, owned: false)
   vtbl[].hoverLeaveEvent(self, slotval1)
 
 proc QGraphicsItemkeyPressEvent*(self: gen_qgraphicsitem_types.QGraphicsItem, event: gen_qevent_types.QKeyEvent): void =
@@ -2449,7 +2443,7 @@ proc QGraphicsItemkeyPressEvent*(self: gen_qgraphicsitem_types.QGraphicsItem, ev
 proc fcQGraphicsItem_vtable_callback_keyPressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsItemVTable](fcQGraphicsItem_vdata(self)[])
   let self = QGraphicsItem(h: self)
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   vtbl[].keyPressEvent(self, slotval1)
 
 proc QGraphicsItemkeyReleaseEvent*(self: gen_qgraphicsitem_types.QGraphicsItem, event: gen_qevent_types.QKeyEvent): void =
@@ -2458,7 +2452,7 @@ proc QGraphicsItemkeyReleaseEvent*(self: gen_qgraphicsitem_types.QGraphicsItem, 
 proc fcQGraphicsItem_vtable_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsItemVTable](fcQGraphicsItem_vdata(self)[])
   let self = QGraphicsItem(h: self)
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   vtbl[].keyReleaseEvent(self, slotval1)
 
 proc QGraphicsItemmousePressEvent*(self: gen_qgraphicsitem_types.QGraphicsItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void =
@@ -2467,7 +2461,7 @@ proc QGraphicsItemmousePressEvent*(self: gen_qgraphicsitem_types.QGraphicsItem, 
 proc fcQGraphicsItem_vtable_callback_mousePressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsItemVTable](fcQGraphicsItem_vdata(self)[])
   let self = QGraphicsItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event, owned: false)
   vtbl[].mousePressEvent(self, slotval1)
 
 proc QGraphicsItemmouseMoveEvent*(self: gen_qgraphicsitem_types.QGraphicsItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void =
@@ -2476,7 +2470,7 @@ proc QGraphicsItemmouseMoveEvent*(self: gen_qgraphicsitem_types.QGraphicsItem, e
 proc fcQGraphicsItem_vtable_callback_mouseMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsItemVTable](fcQGraphicsItem_vdata(self)[])
   let self = QGraphicsItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event, owned: false)
   vtbl[].mouseMoveEvent(self, slotval1)
 
 proc QGraphicsItemmouseReleaseEvent*(self: gen_qgraphicsitem_types.QGraphicsItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void =
@@ -2485,7 +2479,7 @@ proc QGraphicsItemmouseReleaseEvent*(self: gen_qgraphicsitem_types.QGraphicsItem
 proc fcQGraphicsItem_vtable_callback_mouseReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsItemVTable](fcQGraphicsItem_vdata(self)[])
   let self = QGraphicsItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event, owned: false)
   vtbl[].mouseReleaseEvent(self, slotval1)
 
 proc QGraphicsItemmouseDoubleClickEvent*(self: gen_qgraphicsitem_types.QGraphicsItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void =
@@ -2494,7 +2488,7 @@ proc QGraphicsItemmouseDoubleClickEvent*(self: gen_qgraphicsitem_types.QGraphics
 proc fcQGraphicsItem_vtable_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsItemVTable](fcQGraphicsItem_vdata(self)[])
   let self = QGraphicsItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event, owned: false)
   vtbl[].mouseDoubleClickEvent(self, slotval1)
 
 proc QGraphicsItemwheelEvent*(self: gen_qgraphicsitem_types.QGraphicsItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent): void =
@@ -2503,7 +2497,7 @@ proc QGraphicsItemwheelEvent*(self: gen_qgraphicsitem_types.QGraphicsItem, event
 proc fcQGraphicsItem_vtable_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsItemVTable](fcQGraphicsItem_vdata(self)[])
   let self = QGraphicsItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent(h: event, owned: false)
   vtbl[].wheelEvent(self, slotval1)
 
 proc QGraphicsIteminputMethodEvent*(self: gen_qgraphicsitem_types.QGraphicsItem, event: gen_qevent_types.QInputMethodEvent): void =
@@ -2512,29 +2506,35 @@ proc QGraphicsIteminputMethodEvent*(self: gen_qgraphicsitem_types.QGraphicsItem,
 proc fcQGraphicsItem_vtable_callback_inputMethodEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsItemVTable](fcQGraphicsItem_vdata(self)[])
   let self = QGraphicsItem(h: self)
-  let slotval1 = gen_qevent_types.QInputMethodEvent(h: event)
+  let slotval1 = gen_qevent_types.QInputMethodEvent(h: event, owned: false)
   vtbl[].inputMethodEvent(self, slotval1)
 
 proc QGraphicsIteminputMethodQuery*(self: gen_qgraphicsitem_types.QGraphicsItem, query: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQGraphicsItem_virtualbase_inputMethodQuery(self.h, cint(query)))
+  gen_qvariant_types.QVariant(h: fcQGraphicsItem_virtualbase_inputMethodQuery(self.h, cint(query)), owned: true)
 
 proc fcQGraphicsItem_vtable_callback_inputMethodQuery(self: pointer, query: cint): pointer {.cdecl.} =
   let vtbl = cast[ptr QGraphicsItemVTable](fcQGraphicsItem_vdata(self)[])
   let self = QGraphicsItem(h: self)
   let slotval1 = cint(query)
   var virtualReturn = vtbl[].inputMethodQuery(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QGraphicsItemitemChange*(self: gen_qgraphicsitem_types.QGraphicsItem, change: cint, value: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQGraphicsItem_virtualbase_itemChange(self.h, cint(change), value.h))
+  gen_qvariant_types.QVariant(h: fcQGraphicsItem_virtualbase_itemChange(self.h, cint(change), value.h), owned: true)
 
 proc fcQGraphicsItem_vtable_callback_itemChange(self: pointer, change: cint, value: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QGraphicsItemVTable](fcQGraphicsItem_vdata(self)[])
   let self = QGraphicsItem(h: self)
   let slotval1 = cint(change)
-  let slotval2 = gen_qvariant_types.QVariant(h: value)
+  let slotval2 = gen_qvariant_types.QVariant(h: value, owned: false)
   var virtualReturn = vtbl[].itemChange(self, slotval1, slotval2)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QGraphicsItemsupportsExtension*(self: gen_qgraphicsitem_types.QGraphicsItem, extension: cint): bool =
   fcQGraphicsItem_virtualbase_supportsExtension(self.h, cint(extension))
@@ -2553,18 +2553,21 @@ proc fcQGraphicsItem_vtable_callback_setExtension(self: pointer, extension: cint
   let vtbl = cast[ptr QGraphicsItemVTable](fcQGraphicsItem_vdata(self)[])
   let self = QGraphicsItem(h: self)
   let slotval1 = cint(extension)
-  let slotval2 = gen_qvariant_types.QVariant(h: variant)
+  let slotval2 = gen_qvariant_types.QVariant(h: variant, owned: false)
   vtbl[].setExtension(self, slotval1, slotval2)
 
 proc QGraphicsItemextension*(self: gen_qgraphicsitem_types.QGraphicsItem, variant: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQGraphicsItem_virtualbase_extension(self.h, variant.h))
+  gen_qvariant_types.QVariant(h: fcQGraphicsItem_virtualbase_extension(self.h, variant.h), owned: true)
 
 proc fcQGraphicsItem_vtable_callback_extension(self: pointer, variant: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QGraphicsItemVTable](fcQGraphicsItem_vdata(self)[])
   let self = QGraphicsItem(h: self)
-  let slotval1 = gen_qvariant_types.QVariant(h: variant)
+  let slotval1 = gen_qvariant_types.QVariant(h: variant, owned: false)
   var virtualReturn = vtbl[].extension(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 type VirtualQGraphicsItem* {.inheritable.} = ref object of QGraphicsItem
   vtbl*: cQGraphicsItemVTable
@@ -2593,7 +2596,7 @@ method contains*(self: VirtualQGraphicsItem, point: gen_qpoint_types.QPointF): b
   QGraphicsItemcontains(self[], point)
 proc fcQGraphicsItem_method_callback_contains(self: pointer, point: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQGraphicsItem](fcQGraphicsItem_vdata(self)[])
-  let slotval1 = gen_qpoint_types.QPointF(h: point)
+  let slotval1 = gen_qpoint_types.QPointF(h: point, owned: false)
   var virtualReturn = inst.contains(slotval1)
   virtualReturn
 
@@ -2601,7 +2604,7 @@ method collidesWithItem*(self: VirtualQGraphicsItem, other: gen_qgraphicsitem_ty
   QGraphicsItemcollidesWithItem(self[], other, mode)
 proc fcQGraphicsItem_method_callback_collidesWithItem(self: pointer, other: pointer, mode: cint): bool {.cdecl.} =
   let inst = cast[VirtualQGraphicsItem](fcQGraphicsItem_vdata(self)[])
-  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: other)
+  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: other, owned: false)
   let slotval2 = cint(mode)
   var virtualReturn = inst.collidesWithItem(slotval1, slotval2)
   virtualReturn
@@ -2610,7 +2613,7 @@ method collidesWithPath*(self: VirtualQGraphicsItem, path: gen_qpainterpath_type
   QGraphicsItemcollidesWithPath(self[], path, mode)
 proc fcQGraphicsItem_method_callback_collidesWithPath(self: pointer, path: pointer, mode: cint): bool {.cdecl.} =
   let inst = cast[VirtualQGraphicsItem](fcQGraphicsItem_vdata(self)[])
-  let slotval1 = gen_qpainterpath_types.QPainterPath(h: path)
+  let slotval1 = gen_qpainterpath_types.QPainterPath(h: path, owned: false)
   let slotval2 = cint(mode)
   var virtualReturn = inst.collidesWithPath(slotval1, slotval2)
   virtualReturn
@@ -2619,7 +2622,7 @@ method isObscuredBy*(self: VirtualQGraphicsItem, item: gen_qgraphicsitem_types.Q
   QGraphicsItemisObscuredBy(self[], item)
 proc fcQGraphicsItem_method_callback_isObscuredBy(self: pointer, item: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQGraphicsItem](fcQGraphicsItem_vdata(self)[])
-  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: item)
+  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: item, owned: false)
   var virtualReturn = inst.isObscuredBy(slotval1)
   virtualReturn
 
@@ -2634,9 +2637,9 @@ method paint*(self: VirtualQGraphicsItem, painter: gen_qpainter_types.QPainter, 
   raiseAssert("missing implementation of QGraphicsItem_virtualbase_paint")
 proc fcQGraphicsItem_method_callback_paint(self: pointer, painter: pointer, option: pointer, widget: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsItem](fcQGraphicsItem_vdata(self)[])
-  let slotval1 = gen_qpainter_types.QPainter(h: painter)
-  let slotval2 = gen_qstyleoption_types.QStyleOptionGraphicsItem(h: option)
-  let slotval3 = gen_qwidget_types.QWidget(h: widget)
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
+  let slotval2 = gen_qstyleoption_types.QStyleOptionGraphicsItem(h: option, owned: false)
+  let slotval3 = gen_qwidget_types.QWidget(h: widget, owned: false)
   inst.paint(slotval1, slotval2, slotval3)
 
 method typeX*(self: VirtualQGraphicsItem): cint {.base.} =
@@ -2650,8 +2653,8 @@ method sceneEventFilter*(self: VirtualQGraphicsItem, watched: gen_qgraphicsitem_
   QGraphicsItemsceneEventFilter(self[], watched, event)
 proc fcQGraphicsItem_method_callback_sceneEventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQGraphicsItem](fcQGraphicsItem_vdata(self)[])
-  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.sceneEventFilter(slotval1, slotval2)
   virtualReturn
 
@@ -2659,7 +2662,7 @@ method sceneEvent*(self: VirtualQGraphicsItem, event: gen_qcoreevent_types.QEven
   QGraphicsItemsceneEvent(self[], event)
 proc fcQGraphicsItem_method_callback_sceneEvent(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQGraphicsItem](fcQGraphicsItem_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.sceneEvent(slotval1)
   virtualReturn
 
@@ -2667,126 +2670,126 @@ method contextMenuEvent*(self: VirtualQGraphicsItem, event: gen_qgraphicssceneev
   QGraphicsItemcontextMenuEvent(self[], event)
 proc fcQGraphicsItem_method_callback_contextMenuEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsItem](fcQGraphicsItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneContextMenuEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneContextMenuEvent(h: event, owned: false)
   inst.contextMenuEvent(slotval1)
 
 method dragEnterEvent*(self: VirtualQGraphicsItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void {.base.} =
   QGraphicsItemdragEnterEvent(self[], event)
 proc fcQGraphicsItem_method_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsItem](fcQGraphicsItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event, owned: false)
   inst.dragEnterEvent(slotval1)
 
 method dragLeaveEvent*(self: VirtualQGraphicsItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void {.base.} =
   QGraphicsItemdragLeaveEvent(self[], event)
 proc fcQGraphicsItem_method_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsItem](fcQGraphicsItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event, owned: false)
   inst.dragLeaveEvent(slotval1)
 
 method dragMoveEvent*(self: VirtualQGraphicsItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void {.base.} =
   QGraphicsItemdragMoveEvent(self[], event)
 proc fcQGraphicsItem_method_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsItem](fcQGraphicsItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event, owned: false)
   inst.dragMoveEvent(slotval1)
 
 method dropEvent*(self: VirtualQGraphicsItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void {.base.} =
   QGraphicsItemdropEvent(self[], event)
 proc fcQGraphicsItem_method_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsItem](fcQGraphicsItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event, owned: false)
   inst.dropEvent(slotval1)
 
 method focusInEvent*(self: VirtualQGraphicsItem, event: gen_qevent_types.QFocusEvent): void {.base.} =
   QGraphicsItemfocusInEvent(self[], event)
 proc fcQGraphicsItem_method_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsItem](fcQGraphicsItem_vdata(self)[])
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   inst.focusInEvent(slotval1)
 
 method focusOutEvent*(self: VirtualQGraphicsItem, event: gen_qevent_types.QFocusEvent): void {.base.} =
   QGraphicsItemfocusOutEvent(self[], event)
 proc fcQGraphicsItem_method_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsItem](fcQGraphicsItem_vdata(self)[])
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   inst.focusOutEvent(slotval1)
 
 method hoverEnterEvent*(self: VirtualQGraphicsItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent): void {.base.} =
   QGraphicsItemhoverEnterEvent(self[], event)
 proc fcQGraphicsItem_method_callback_hoverEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsItem](fcQGraphicsItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event, owned: false)
   inst.hoverEnterEvent(slotval1)
 
 method hoverMoveEvent*(self: VirtualQGraphicsItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent): void {.base.} =
   QGraphicsItemhoverMoveEvent(self[], event)
 proc fcQGraphicsItem_method_callback_hoverMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsItem](fcQGraphicsItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event, owned: false)
   inst.hoverMoveEvent(slotval1)
 
 method hoverLeaveEvent*(self: VirtualQGraphicsItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent): void {.base.} =
   QGraphicsItemhoverLeaveEvent(self[], event)
 proc fcQGraphicsItem_method_callback_hoverLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsItem](fcQGraphicsItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event, owned: false)
   inst.hoverLeaveEvent(slotval1)
 
 method keyPressEvent*(self: VirtualQGraphicsItem, event: gen_qevent_types.QKeyEvent): void {.base.} =
   QGraphicsItemkeyPressEvent(self[], event)
 proc fcQGraphicsItem_method_callback_keyPressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsItem](fcQGraphicsItem_vdata(self)[])
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   inst.keyPressEvent(slotval1)
 
 method keyReleaseEvent*(self: VirtualQGraphicsItem, event: gen_qevent_types.QKeyEvent): void {.base.} =
   QGraphicsItemkeyReleaseEvent(self[], event)
 proc fcQGraphicsItem_method_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsItem](fcQGraphicsItem_vdata(self)[])
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   inst.keyReleaseEvent(slotval1)
 
 method mousePressEvent*(self: VirtualQGraphicsItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void {.base.} =
   QGraphicsItemmousePressEvent(self[], event)
 proc fcQGraphicsItem_method_callback_mousePressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsItem](fcQGraphicsItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event, owned: false)
   inst.mousePressEvent(slotval1)
 
 method mouseMoveEvent*(self: VirtualQGraphicsItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void {.base.} =
   QGraphicsItemmouseMoveEvent(self[], event)
 proc fcQGraphicsItem_method_callback_mouseMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsItem](fcQGraphicsItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event, owned: false)
   inst.mouseMoveEvent(slotval1)
 
 method mouseReleaseEvent*(self: VirtualQGraphicsItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void {.base.} =
   QGraphicsItemmouseReleaseEvent(self[], event)
 proc fcQGraphicsItem_method_callback_mouseReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsItem](fcQGraphicsItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event, owned: false)
   inst.mouseReleaseEvent(slotval1)
 
 method mouseDoubleClickEvent*(self: VirtualQGraphicsItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void {.base.} =
   QGraphicsItemmouseDoubleClickEvent(self[], event)
 proc fcQGraphicsItem_method_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsItem](fcQGraphicsItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event, owned: false)
   inst.mouseDoubleClickEvent(slotval1)
 
 method wheelEvent*(self: VirtualQGraphicsItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent): void {.base.} =
   QGraphicsItemwheelEvent(self[], event)
 proc fcQGraphicsItem_method_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsItem](fcQGraphicsItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent(h: event, owned: false)
   inst.wheelEvent(slotval1)
 
 method inputMethodEvent*(self: VirtualQGraphicsItem, event: gen_qevent_types.QInputMethodEvent): void {.base.} =
   QGraphicsIteminputMethodEvent(self[], event)
 proc fcQGraphicsItem_method_callback_inputMethodEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsItem](fcQGraphicsItem_vdata(self)[])
-  let slotval1 = gen_qevent_types.QInputMethodEvent(h: event)
+  let slotval1 = gen_qevent_types.QInputMethodEvent(h: event, owned: false)
   inst.inputMethodEvent(slotval1)
 
 method inputMethodQuery*(self: VirtualQGraphicsItem, query: cint): gen_qvariant_types.QVariant {.base.} =
@@ -2802,7 +2805,7 @@ method itemChange*(self: VirtualQGraphicsItem, change: cint, value: gen_qvariant
 proc fcQGraphicsItem_method_callback_itemChange(self: pointer, change: cint, value: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsItem](fcQGraphicsItem_vdata(self)[])
   let slotval1 = cint(change)
-  let slotval2 = gen_qvariant_types.QVariant(h: value)
+  let slotval2 = gen_qvariant_types.QVariant(h: value, owned: false)
   var virtualReturn = inst.itemChange(slotval1, slotval2)
   virtualReturn.h
 
@@ -2819,14 +2822,14 @@ method setExtension*(self: VirtualQGraphicsItem, extension: cint, variant: gen_q
 proc fcQGraphicsItem_method_callback_setExtension(self: pointer, extension: cint, variant: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsItem](fcQGraphicsItem_vdata(self)[])
   let slotval1 = cint(extension)
-  let slotval2 = gen_qvariant_types.QVariant(h: variant)
+  let slotval2 = gen_qvariant_types.QVariant(h: variant, owned: false)
   inst.setExtension(slotval1, slotval2)
 
 method extension*(self: VirtualQGraphicsItem, variant: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant {.base.} =
   QGraphicsItemextension(self[], variant)
 proc fcQGraphicsItem_method_callback_extension(self: pointer, variant: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsItem](fcQGraphicsItem_vdata(self)[])
-  let slotval1 = gen_qvariant_types.QVariant(h: variant)
+  let slotval1 = gen_qvariant_types.QVariant(h: variant, owned: false)
   var virtualReturn = inst.extension(slotval1)
   virtualReturn.h
 
@@ -2919,7 +2922,7 @@ proc create*(T: type gen_qgraphicsitem_types.QGraphicsItem,
     vtbl[].vtbl.setExtension = fcQGraphicsItem_vtable_callback_setExtension
   if not isNil(vtbl[].extension):
     vtbl[].vtbl.extension = fcQGraphicsItem_vtable_callback_extension
-  let tmp = gen_qgraphicsitem_types.QGraphicsItem(h: fcQGraphicsItem_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))))
+  let tmp = gen_qgraphicsitem_types.QGraphicsItem(h: fcQGraphicsItem_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))), owned: true)
   fcQGraphicsItem_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qgraphicsitem_types.QGraphicsItem,
@@ -3000,13 +3003,14 @@ proc create*(T: type gen_qgraphicsitem_types.QGraphicsItem,
     vtbl[].vtbl.setExtension = fcQGraphicsItem_vtable_callback_setExtension
   if not isNil(vtbl[].extension):
     vtbl[].vtbl.extension = fcQGraphicsItem_vtable_callback_extension
-  let tmp = gen_qgraphicsitem_types.QGraphicsItem(h: fcQGraphicsItem_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h))
+  let tmp = gen_qgraphicsitem_types.QGraphicsItem(h: fcQGraphicsItem_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h), owned: true)
   fcQGraphicsItem_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQGraphicsItem_mvtbl = cQGraphicsItemVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQGraphicsItem()[])](self.fcQGraphicsItem_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   advance: fcQGraphicsItem_method_callback_advance,
   boundingRect: fcQGraphicsItem_method_callback_boundingRect,
@@ -3057,10 +3061,8 @@ proc create*(T: type gen_qgraphicsitem_types.QGraphicsItem,
   inst[].h = fcQGraphicsItem_new2(addr(cQGraphicsItem_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQGraphicsItem_vdata(inst[].h)[] = addr inst[]
 
-proc delete*(self: gen_qgraphicsitem_types.QGraphicsItem) =
-  fcQGraphicsItem_delete(self.h)
 proc metaObject*(self: gen_qgraphicsitem_types.QGraphicsObject): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQGraphicsObject_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQGraphicsObject_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qgraphicsitem_types.QGraphicsObject, param1: cstring): pointer =
   fcQGraphicsObject_metacast(self.h, param1)
@@ -3356,7 +3358,7 @@ type QGraphicsObjectitemChangeProc* = proc(self: QGraphicsObject, change: cint, 
 type QGraphicsObjectsupportsExtensionProc* = proc(self: QGraphicsObject, extension: cint): bool {.raises: [], gcsafe.}
 type QGraphicsObjectsetExtensionProc* = proc(self: QGraphicsObject, extension: cint, variant: gen_qvariant_types.QVariant): void {.raises: [], gcsafe.}
 type QGraphicsObjectextensionProc* = proc(self: QGraphicsObject, variant: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant {.raises: [], gcsafe.}
-type QGraphicsObjectVTable* = object
+type QGraphicsObjectVTable* {.inheritable, pure.} = object
   vtbl: cQGraphicsObjectVTable
   metaObject*: QGraphicsObjectmetaObjectProc
   metacast*: QGraphicsObjectmetacastProc
@@ -3404,13 +3406,16 @@ type QGraphicsObjectVTable* = object
   setExtension*: QGraphicsObjectsetExtensionProc
   extension*: QGraphicsObjectextensionProc
 proc QGraphicsObjectmetaObject*(self: gen_qgraphicsitem_types.QGraphicsObject): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQGraphicsObject_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQGraphicsObject_virtualbase_metaObject(self.h), owned: false)
 
 proc fcQGraphicsObject_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QGraphicsObjectVTable](fcQGraphicsObject_vdata(self)[])
   let self = QGraphicsObject(h: self)
   var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QGraphicsObjectmetacast*(self: gen_qgraphicsitem_types.QGraphicsObject, param1: cstring): pointer =
   fcQGraphicsObject_virtualbase_metacast(self.h, param1)
@@ -3440,7 +3445,7 @@ proc QGraphicsObjectevent*(self: gen_qgraphicsitem_types.QGraphicsObject, ev: ge
 proc fcQGraphicsObject_vtable_callback_event(self: pointer, ev: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QGraphicsObjectVTable](fcQGraphicsObject_vdata(self)[])
   let self = QGraphicsObject(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: ev)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: ev, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
@@ -3450,8 +3455,8 @@ proc QGraphicsObjecteventFilter*(self: gen_qgraphicsitem_types.QGraphicsObject, 
 proc fcQGraphicsObject_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QGraphicsObjectVTable](fcQGraphicsObject_vdata(self)[])
   let self = QGraphicsObject(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
@@ -3461,7 +3466,7 @@ proc QGraphicsObjecttimerEvent*(self: gen_qgraphicsitem_types.QGraphicsObject, e
 proc fcQGraphicsObject_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsObjectVTable](fcQGraphicsObject_vdata(self)[])
   let self = QGraphicsObject(h: self)
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
 proc QGraphicsObjectchildEvent*(self: gen_qgraphicsitem_types.QGraphicsObject, event: gen_qcoreevent_types.QChildEvent): void =
@@ -3470,7 +3475,7 @@ proc QGraphicsObjectchildEvent*(self: gen_qgraphicsitem_types.QGraphicsObject, e
 proc fcQGraphicsObject_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsObjectVTable](fcQGraphicsObject_vdata(self)[])
   let self = QGraphicsObject(h: self)
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
 proc QGraphicsObjectcustomEvent*(self: gen_qgraphicsitem_types.QGraphicsObject, event: gen_qcoreevent_types.QEvent): void =
@@ -3479,7 +3484,7 @@ proc QGraphicsObjectcustomEvent*(self: gen_qgraphicsitem_types.QGraphicsObject, 
 proc fcQGraphicsObject_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsObjectVTable](fcQGraphicsObject_vdata(self)[])
   let self = QGraphicsObject(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
 proc QGraphicsObjectconnectNotify*(self: gen_qgraphicsitem_types.QGraphicsObject, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -3488,7 +3493,7 @@ proc QGraphicsObjectconnectNotify*(self: gen_qgraphicsitem_types.QGraphicsObject
 proc fcQGraphicsObject_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsObjectVTable](fcQGraphicsObject_vdata(self)[])
   let self = QGraphicsObject(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
 proc QGraphicsObjectdisconnectNotify*(self: gen_qgraphicsitem_types.QGraphicsObject, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -3497,7 +3502,7 @@ proc QGraphicsObjectdisconnectNotify*(self: gen_qgraphicsitem_types.QGraphicsObj
 proc fcQGraphicsObject_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsObjectVTable](fcQGraphicsObject_vdata(self)[])
   let self = QGraphicsObject(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
 proc QGraphicsObjectadvance*(self: gen_qgraphicsitem_types.QGraphicsObject, phase: cint): void =
@@ -3513,16 +3518,22 @@ proc fcQGraphicsObject_vtable_callback_boundingRect(self: pointer): pointer {.cd
   let vtbl = cast[ptr QGraphicsObjectVTable](fcQGraphicsObject_vdata(self)[])
   let self = QGraphicsObject(h: self)
   var virtualReturn = vtbl[].boundingRect(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QGraphicsObjectshape*(self: gen_qgraphicsitem_types.QGraphicsObject): gen_qpainterpath_types.QPainterPath =
-  gen_qpainterpath_types.QPainterPath(h: fcQGraphicsObject_virtualbase_shape(self.h))
+  gen_qpainterpath_types.QPainterPath(h: fcQGraphicsObject_virtualbase_shape(self.h), owned: true)
 
 proc fcQGraphicsObject_vtable_callback_shape(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QGraphicsObjectVTable](fcQGraphicsObject_vdata(self)[])
   let self = QGraphicsObject(h: self)
   var virtualReturn = vtbl[].shape(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QGraphicsObjectcontains*(self: gen_qgraphicsitem_types.QGraphicsObject, point: gen_qpoint_types.QPointF): bool =
   fcQGraphicsObject_virtualbase_contains(self.h, point.h)
@@ -3530,7 +3541,7 @@ proc QGraphicsObjectcontains*(self: gen_qgraphicsitem_types.QGraphicsObject, poi
 proc fcQGraphicsObject_vtable_callback_contains(self: pointer, point: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QGraphicsObjectVTable](fcQGraphicsObject_vdata(self)[])
   let self = QGraphicsObject(h: self)
-  let slotval1 = gen_qpoint_types.QPointF(h: point)
+  let slotval1 = gen_qpoint_types.QPointF(h: point, owned: false)
   var virtualReturn = vtbl[].contains(self, slotval1)
   virtualReturn
 
@@ -3540,7 +3551,7 @@ proc QGraphicsObjectcollidesWithItem*(self: gen_qgraphicsitem_types.QGraphicsObj
 proc fcQGraphicsObject_vtable_callback_collidesWithItem(self: pointer, other: pointer, mode: cint): bool {.cdecl.} =
   let vtbl = cast[ptr QGraphicsObjectVTable](fcQGraphicsObject_vdata(self)[])
   let self = QGraphicsObject(h: self)
-  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: other)
+  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: other, owned: false)
   let slotval2 = cint(mode)
   var virtualReturn = vtbl[].collidesWithItem(self, slotval1, slotval2)
   virtualReturn
@@ -3551,7 +3562,7 @@ proc QGraphicsObjectcollidesWithPath*(self: gen_qgraphicsitem_types.QGraphicsObj
 proc fcQGraphicsObject_vtable_callback_collidesWithPath(self: pointer, path: pointer, mode: cint): bool {.cdecl.} =
   let vtbl = cast[ptr QGraphicsObjectVTable](fcQGraphicsObject_vdata(self)[])
   let self = QGraphicsObject(h: self)
-  let slotval1 = gen_qpainterpath_types.QPainterPath(h: path)
+  let slotval1 = gen_qpainterpath_types.QPainterPath(h: path, owned: false)
   let slotval2 = cint(mode)
   var virtualReturn = vtbl[].collidesWithPath(self, slotval1, slotval2)
   virtualReturn
@@ -3562,25 +3573,28 @@ proc QGraphicsObjectisObscuredBy*(self: gen_qgraphicsitem_types.QGraphicsObject,
 proc fcQGraphicsObject_vtable_callback_isObscuredBy(self: pointer, item: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QGraphicsObjectVTable](fcQGraphicsObject_vdata(self)[])
   let self = QGraphicsObject(h: self)
-  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: item)
+  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: item, owned: false)
   var virtualReturn = vtbl[].isObscuredBy(self, slotval1)
   virtualReturn
 
 proc QGraphicsObjectopaqueArea*(self: gen_qgraphicsitem_types.QGraphicsObject): gen_qpainterpath_types.QPainterPath =
-  gen_qpainterpath_types.QPainterPath(h: fcQGraphicsObject_virtualbase_opaqueArea(self.h))
+  gen_qpainterpath_types.QPainterPath(h: fcQGraphicsObject_virtualbase_opaqueArea(self.h), owned: true)
 
 proc fcQGraphicsObject_vtable_callback_opaqueArea(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QGraphicsObjectVTable](fcQGraphicsObject_vdata(self)[])
   let self = QGraphicsObject(h: self)
   var virtualReturn = vtbl[].opaqueArea(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQGraphicsObject_vtable_callback_paint(self: pointer, painter: pointer, option: pointer, widget: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsObjectVTable](fcQGraphicsObject_vdata(self)[])
   let self = QGraphicsObject(h: self)
-  let slotval1 = gen_qpainter_types.QPainter(h: painter)
-  let slotval2 = gen_qstyleoption_types.QStyleOptionGraphicsItem(h: option)
-  let slotval3 = gen_qwidget_types.QWidget(h: widget)
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
+  let slotval2 = gen_qstyleoption_types.QStyleOptionGraphicsItem(h: option, owned: false)
+  let slotval3 = gen_qwidget_types.QWidget(h: widget, owned: false)
   vtbl[].paint(self, slotval1, slotval2, slotval3)
 
 proc QGraphicsObjecttypeX*(self: gen_qgraphicsitem_types.QGraphicsObject): cint =
@@ -3598,8 +3612,8 @@ proc QGraphicsObjectsceneEventFilter*(self: gen_qgraphicsitem_types.QGraphicsObj
 proc fcQGraphicsObject_vtable_callback_sceneEventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QGraphicsObjectVTable](fcQGraphicsObject_vdata(self)[])
   let self = QGraphicsObject(h: self)
-  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].sceneEventFilter(self, slotval1, slotval2)
   virtualReturn
 
@@ -3609,7 +3623,7 @@ proc QGraphicsObjectsceneEvent*(self: gen_qgraphicsitem_types.QGraphicsObject, e
 proc fcQGraphicsObject_vtable_callback_sceneEvent(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QGraphicsObjectVTable](fcQGraphicsObject_vdata(self)[])
   let self = QGraphicsObject(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].sceneEvent(self, slotval1)
   virtualReturn
 
@@ -3619,7 +3633,7 @@ proc QGraphicsObjectcontextMenuEvent*(self: gen_qgraphicsitem_types.QGraphicsObj
 proc fcQGraphicsObject_vtable_callback_contextMenuEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsObjectVTable](fcQGraphicsObject_vdata(self)[])
   let self = QGraphicsObject(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneContextMenuEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneContextMenuEvent(h: event, owned: false)
   vtbl[].contextMenuEvent(self, slotval1)
 
 proc QGraphicsObjectdragEnterEvent*(self: gen_qgraphicsitem_types.QGraphicsObject, event: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void =
@@ -3628,7 +3642,7 @@ proc QGraphicsObjectdragEnterEvent*(self: gen_qgraphicsitem_types.QGraphicsObjec
 proc fcQGraphicsObject_vtable_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsObjectVTable](fcQGraphicsObject_vdata(self)[])
   let self = QGraphicsObject(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event, owned: false)
   vtbl[].dragEnterEvent(self, slotval1)
 
 proc QGraphicsObjectdragLeaveEvent*(self: gen_qgraphicsitem_types.QGraphicsObject, event: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void =
@@ -3637,7 +3651,7 @@ proc QGraphicsObjectdragLeaveEvent*(self: gen_qgraphicsitem_types.QGraphicsObjec
 proc fcQGraphicsObject_vtable_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsObjectVTable](fcQGraphicsObject_vdata(self)[])
   let self = QGraphicsObject(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event, owned: false)
   vtbl[].dragLeaveEvent(self, slotval1)
 
 proc QGraphicsObjectdragMoveEvent*(self: gen_qgraphicsitem_types.QGraphicsObject, event: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void =
@@ -3646,7 +3660,7 @@ proc QGraphicsObjectdragMoveEvent*(self: gen_qgraphicsitem_types.QGraphicsObject
 proc fcQGraphicsObject_vtable_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsObjectVTable](fcQGraphicsObject_vdata(self)[])
   let self = QGraphicsObject(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event, owned: false)
   vtbl[].dragMoveEvent(self, slotval1)
 
 proc QGraphicsObjectdropEvent*(self: gen_qgraphicsitem_types.QGraphicsObject, event: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void =
@@ -3655,7 +3669,7 @@ proc QGraphicsObjectdropEvent*(self: gen_qgraphicsitem_types.QGraphicsObject, ev
 proc fcQGraphicsObject_vtable_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsObjectVTable](fcQGraphicsObject_vdata(self)[])
   let self = QGraphicsObject(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event, owned: false)
   vtbl[].dropEvent(self, slotval1)
 
 proc QGraphicsObjectfocusInEvent*(self: gen_qgraphicsitem_types.QGraphicsObject, event: gen_qevent_types.QFocusEvent): void =
@@ -3664,7 +3678,7 @@ proc QGraphicsObjectfocusInEvent*(self: gen_qgraphicsitem_types.QGraphicsObject,
 proc fcQGraphicsObject_vtable_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsObjectVTable](fcQGraphicsObject_vdata(self)[])
   let self = QGraphicsObject(h: self)
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusInEvent(self, slotval1)
 
 proc QGraphicsObjectfocusOutEvent*(self: gen_qgraphicsitem_types.QGraphicsObject, event: gen_qevent_types.QFocusEvent): void =
@@ -3673,7 +3687,7 @@ proc QGraphicsObjectfocusOutEvent*(self: gen_qgraphicsitem_types.QGraphicsObject
 proc fcQGraphicsObject_vtable_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsObjectVTable](fcQGraphicsObject_vdata(self)[])
   let self = QGraphicsObject(h: self)
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusOutEvent(self, slotval1)
 
 proc QGraphicsObjecthoverEnterEvent*(self: gen_qgraphicsitem_types.QGraphicsObject, event: gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent): void =
@@ -3682,7 +3696,7 @@ proc QGraphicsObjecthoverEnterEvent*(self: gen_qgraphicsitem_types.QGraphicsObje
 proc fcQGraphicsObject_vtable_callback_hoverEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsObjectVTable](fcQGraphicsObject_vdata(self)[])
   let self = QGraphicsObject(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event, owned: false)
   vtbl[].hoverEnterEvent(self, slotval1)
 
 proc QGraphicsObjecthoverMoveEvent*(self: gen_qgraphicsitem_types.QGraphicsObject, event: gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent): void =
@@ -3691,7 +3705,7 @@ proc QGraphicsObjecthoverMoveEvent*(self: gen_qgraphicsitem_types.QGraphicsObjec
 proc fcQGraphicsObject_vtable_callback_hoverMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsObjectVTable](fcQGraphicsObject_vdata(self)[])
   let self = QGraphicsObject(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event, owned: false)
   vtbl[].hoverMoveEvent(self, slotval1)
 
 proc QGraphicsObjecthoverLeaveEvent*(self: gen_qgraphicsitem_types.QGraphicsObject, event: gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent): void =
@@ -3700,7 +3714,7 @@ proc QGraphicsObjecthoverLeaveEvent*(self: gen_qgraphicsitem_types.QGraphicsObje
 proc fcQGraphicsObject_vtable_callback_hoverLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsObjectVTable](fcQGraphicsObject_vdata(self)[])
   let self = QGraphicsObject(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event, owned: false)
   vtbl[].hoverLeaveEvent(self, slotval1)
 
 proc QGraphicsObjectkeyPressEvent*(self: gen_qgraphicsitem_types.QGraphicsObject, event: gen_qevent_types.QKeyEvent): void =
@@ -3709,7 +3723,7 @@ proc QGraphicsObjectkeyPressEvent*(self: gen_qgraphicsitem_types.QGraphicsObject
 proc fcQGraphicsObject_vtable_callback_keyPressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsObjectVTable](fcQGraphicsObject_vdata(self)[])
   let self = QGraphicsObject(h: self)
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   vtbl[].keyPressEvent(self, slotval1)
 
 proc QGraphicsObjectkeyReleaseEvent*(self: gen_qgraphicsitem_types.QGraphicsObject, event: gen_qevent_types.QKeyEvent): void =
@@ -3718,7 +3732,7 @@ proc QGraphicsObjectkeyReleaseEvent*(self: gen_qgraphicsitem_types.QGraphicsObje
 proc fcQGraphicsObject_vtable_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsObjectVTable](fcQGraphicsObject_vdata(self)[])
   let self = QGraphicsObject(h: self)
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   vtbl[].keyReleaseEvent(self, slotval1)
 
 proc QGraphicsObjectmousePressEvent*(self: gen_qgraphicsitem_types.QGraphicsObject, event: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void =
@@ -3727,7 +3741,7 @@ proc QGraphicsObjectmousePressEvent*(self: gen_qgraphicsitem_types.QGraphicsObje
 proc fcQGraphicsObject_vtable_callback_mousePressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsObjectVTable](fcQGraphicsObject_vdata(self)[])
   let self = QGraphicsObject(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event, owned: false)
   vtbl[].mousePressEvent(self, slotval1)
 
 proc QGraphicsObjectmouseMoveEvent*(self: gen_qgraphicsitem_types.QGraphicsObject, event: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void =
@@ -3736,7 +3750,7 @@ proc QGraphicsObjectmouseMoveEvent*(self: gen_qgraphicsitem_types.QGraphicsObjec
 proc fcQGraphicsObject_vtable_callback_mouseMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsObjectVTable](fcQGraphicsObject_vdata(self)[])
   let self = QGraphicsObject(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event, owned: false)
   vtbl[].mouseMoveEvent(self, slotval1)
 
 proc QGraphicsObjectmouseReleaseEvent*(self: gen_qgraphicsitem_types.QGraphicsObject, event: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void =
@@ -3745,7 +3759,7 @@ proc QGraphicsObjectmouseReleaseEvent*(self: gen_qgraphicsitem_types.QGraphicsOb
 proc fcQGraphicsObject_vtable_callback_mouseReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsObjectVTable](fcQGraphicsObject_vdata(self)[])
   let self = QGraphicsObject(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event, owned: false)
   vtbl[].mouseReleaseEvent(self, slotval1)
 
 proc QGraphicsObjectmouseDoubleClickEvent*(self: gen_qgraphicsitem_types.QGraphicsObject, event: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void =
@@ -3754,7 +3768,7 @@ proc QGraphicsObjectmouseDoubleClickEvent*(self: gen_qgraphicsitem_types.QGraphi
 proc fcQGraphicsObject_vtable_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsObjectVTable](fcQGraphicsObject_vdata(self)[])
   let self = QGraphicsObject(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event, owned: false)
   vtbl[].mouseDoubleClickEvent(self, slotval1)
 
 proc QGraphicsObjectwheelEvent*(self: gen_qgraphicsitem_types.QGraphicsObject, event: gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent): void =
@@ -3763,7 +3777,7 @@ proc QGraphicsObjectwheelEvent*(self: gen_qgraphicsitem_types.QGraphicsObject, e
 proc fcQGraphicsObject_vtable_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsObjectVTable](fcQGraphicsObject_vdata(self)[])
   let self = QGraphicsObject(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent(h: event, owned: false)
   vtbl[].wheelEvent(self, slotval1)
 
 proc QGraphicsObjectinputMethodEvent*(self: gen_qgraphicsitem_types.QGraphicsObject, event: gen_qevent_types.QInputMethodEvent): void =
@@ -3772,29 +3786,35 @@ proc QGraphicsObjectinputMethodEvent*(self: gen_qgraphicsitem_types.QGraphicsObj
 proc fcQGraphicsObject_vtable_callback_inputMethodEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsObjectVTable](fcQGraphicsObject_vdata(self)[])
   let self = QGraphicsObject(h: self)
-  let slotval1 = gen_qevent_types.QInputMethodEvent(h: event)
+  let slotval1 = gen_qevent_types.QInputMethodEvent(h: event, owned: false)
   vtbl[].inputMethodEvent(self, slotval1)
 
 proc QGraphicsObjectinputMethodQuery*(self: gen_qgraphicsitem_types.QGraphicsObject, query: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQGraphicsObject_virtualbase_inputMethodQuery(self.h, cint(query)))
+  gen_qvariant_types.QVariant(h: fcQGraphicsObject_virtualbase_inputMethodQuery(self.h, cint(query)), owned: true)
 
 proc fcQGraphicsObject_vtable_callback_inputMethodQuery(self: pointer, query: cint): pointer {.cdecl.} =
   let vtbl = cast[ptr QGraphicsObjectVTable](fcQGraphicsObject_vdata(self)[])
   let self = QGraphicsObject(h: self)
   let slotval1 = cint(query)
   var virtualReturn = vtbl[].inputMethodQuery(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QGraphicsObjectitemChange*(self: gen_qgraphicsitem_types.QGraphicsObject, change: cint, value: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQGraphicsObject_virtualbase_itemChange(self.h, cint(change), value.h))
+  gen_qvariant_types.QVariant(h: fcQGraphicsObject_virtualbase_itemChange(self.h, cint(change), value.h), owned: true)
 
 proc fcQGraphicsObject_vtable_callback_itemChange(self: pointer, change: cint, value: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QGraphicsObjectVTable](fcQGraphicsObject_vdata(self)[])
   let self = QGraphicsObject(h: self)
   let slotval1 = cint(change)
-  let slotval2 = gen_qvariant_types.QVariant(h: value)
+  let slotval2 = gen_qvariant_types.QVariant(h: value, owned: false)
   var virtualReturn = vtbl[].itemChange(self, slotval1, slotval2)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QGraphicsObjectsupportsExtension*(self: gen_qgraphicsitem_types.QGraphicsObject, extension: cint): bool =
   fcQGraphicsObject_virtualbase_supportsExtension(self.h, cint(extension))
@@ -3813,18 +3833,21 @@ proc fcQGraphicsObject_vtable_callback_setExtension(self: pointer, extension: ci
   let vtbl = cast[ptr QGraphicsObjectVTable](fcQGraphicsObject_vdata(self)[])
   let self = QGraphicsObject(h: self)
   let slotval1 = cint(extension)
-  let slotval2 = gen_qvariant_types.QVariant(h: variant)
+  let slotval2 = gen_qvariant_types.QVariant(h: variant, owned: false)
   vtbl[].setExtension(self, slotval1, slotval2)
 
 proc QGraphicsObjectextension*(self: gen_qgraphicsitem_types.QGraphicsObject, variant: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQGraphicsObject_virtualbase_extension(self.h, variant.h))
+  gen_qvariant_types.QVariant(h: fcQGraphicsObject_virtualbase_extension(self.h, variant.h), owned: true)
 
 proc fcQGraphicsObject_vtable_callback_extension(self: pointer, variant: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QGraphicsObjectVTable](fcQGraphicsObject_vdata(self)[])
   let self = QGraphicsObject(h: self)
-  let slotval1 = gen_qvariant_types.QVariant(h: variant)
+  let slotval1 = gen_qvariant_types.QVariant(h: variant, owned: false)
   var virtualReturn = vtbl[].extension(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 type VirtualQGraphicsObject* {.inheritable.} = ref object of QGraphicsObject
   vtbl*: cQGraphicsObjectVTable
@@ -3857,7 +3880,7 @@ method event*(self: VirtualQGraphicsObject, ev: gen_qcoreevent_types.QEvent): bo
   QGraphicsObjectevent(self[], ev)
 proc fcQGraphicsObject_method_callback_event(self: pointer, ev: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQGraphicsObject](fcQGraphicsObject_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: ev)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: ev, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
@@ -3865,8 +3888,8 @@ method eventFilter*(self: VirtualQGraphicsObject, watched: gen_qobject_types.QOb
   QGraphicsObjecteventFilter(self[], watched, event)
 proc fcQGraphicsObject_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQGraphicsObject](fcQGraphicsObject_vdata(self)[])
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
@@ -3874,35 +3897,35 @@ method timerEvent*(self: VirtualQGraphicsObject, event: gen_qcoreevent_types.QTi
   QGraphicsObjecttimerEvent(self[], event)
 proc fcQGraphicsObject_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsObject](fcQGraphicsObject_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
 method childEvent*(self: VirtualQGraphicsObject, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
   QGraphicsObjectchildEvent(self[], event)
 proc fcQGraphicsObject_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsObject](fcQGraphicsObject_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
 method customEvent*(self: VirtualQGraphicsObject, event: gen_qcoreevent_types.QEvent): void {.base.} =
   QGraphicsObjectcustomEvent(self[], event)
 proc fcQGraphicsObject_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsObject](fcQGraphicsObject_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
 method connectNotify*(self: VirtualQGraphicsObject, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
   QGraphicsObjectconnectNotify(self[], signal)
 proc fcQGraphicsObject_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsObject](fcQGraphicsObject_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
 method disconnectNotify*(self: VirtualQGraphicsObject, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
   QGraphicsObjectdisconnectNotify(self[], signal)
 proc fcQGraphicsObject_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsObject](fcQGraphicsObject_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
 
 method advance*(self: VirtualQGraphicsObject, phase: cint): void {.base.} =
@@ -3930,7 +3953,7 @@ method contains*(self: VirtualQGraphicsObject, point: gen_qpoint_types.QPointF):
   QGraphicsObjectcontains(self[], point)
 proc fcQGraphicsObject_method_callback_contains(self: pointer, point: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQGraphicsObject](fcQGraphicsObject_vdata(self)[])
-  let slotval1 = gen_qpoint_types.QPointF(h: point)
+  let slotval1 = gen_qpoint_types.QPointF(h: point, owned: false)
   var virtualReturn = inst.contains(slotval1)
   virtualReturn
 
@@ -3938,7 +3961,7 @@ method collidesWithItem*(self: VirtualQGraphicsObject, other: gen_qgraphicsitem_
   QGraphicsObjectcollidesWithItem(self[], other, mode)
 proc fcQGraphicsObject_method_callback_collidesWithItem(self: pointer, other: pointer, mode: cint): bool {.cdecl.} =
   let inst = cast[VirtualQGraphicsObject](fcQGraphicsObject_vdata(self)[])
-  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: other)
+  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: other, owned: false)
   let slotval2 = cint(mode)
   var virtualReturn = inst.collidesWithItem(slotval1, slotval2)
   virtualReturn
@@ -3947,7 +3970,7 @@ method collidesWithPath*(self: VirtualQGraphicsObject, path: gen_qpainterpath_ty
   QGraphicsObjectcollidesWithPath(self[], path, mode)
 proc fcQGraphicsObject_method_callback_collidesWithPath(self: pointer, path: pointer, mode: cint): bool {.cdecl.} =
   let inst = cast[VirtualQGraphicsObject](fcQGraphicsObject_vdata(self)[])
-  let slotval1 = gen_qpainterpath_types.QPainterPath(h: path)
+  let slotval1 = gen_qpainterpath_types.QPainterPath(h: path, owned: false)
   let slotval2 = cint(mode)
   var virtualReturn = inst.collidesWithPath(slotval1, slotval2)
   virtualReturn
@@ -3956,7 +3979,7 @@ method isObscuredBy*(self: VirtualQGraphicsObject, item: gen_qgraphicsitem_types
   QGraphicsObjectisObscuredBy(self[], item)
 proc fcQGraphicsObject_method_callback_isObscuredBy(self: pointer, item: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQGraphicsObject](fcQGraphicsObject_vdata(self)[])
-  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: item)
+  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: item, owned: false)
   var virtualReturn = inst.isObscuredBy(slotval1)
   virtualReturn
 
@@ -3971,9 +3994,9 @@ method paint*(self: VirtualQGraphicsObject, painter: gen_qpainter_types.QPainter
   raiseAssert("missing implementation of QGraphicsObject_virtualbase_paint")
 proc fcQGraphicsObject_method_callback_paint(self: pointer, painter: pointer, option: pointer, widget: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsObject](fcQGraphicsObject_vdata(self)[])
-  let slotval1 = gen_qpainter_types.QPainter(h: painter)
-  let slotval2 = gen_qstyleoption_types.QStyleOptionGraphicsItem(h: option)
-  let slotval3 = gen_qwidget_types.QWidget(h: widget)
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
+  let slotval2 = gen_qstyleoption_types.QStyleOptionGraphicsItem(h: option, owned: false)
+  let slotval3 = gen_qwidget_types.QWidget(h: widget, owned: false)
   inst.paint(slotval1, slotval2, slotval3)
 
 method typeX*(self: VirtualQGraphicsObject): cint {.base.} =
@@ -3987,8 +4010,8 @@ method sceneEventFilter*(self: VirtualQGraphicsObject, watched: gen_qgraphicsite
   QGraphicsObjectsceneEventFilter(self[], watched, event)
 proc fcQGraphicsObject_method_callback_sceneEventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQGraphicsObject](fcQGraphicsObject_vdata(self)[])
-  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.sceneEventFilter(slotval1, slotval2)
   virtualReturn
 
@@ -3996,7 +4019,7 @@ method sceneEvent*(self: VirtualQGraphicsObject, event: gen_qcoreevent_types.QEv
   QGraphicsObjectsceneEvent(self[], event)
 proc fcQGraphicsObject_method_callback_sceneEvent(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQGraphicsObject](fcQGraphicsObject_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.sceneEvent(slotval1)
   virtualReturn
 
@@ -4004,126 +4027,126 @@ method contextMenuEvent*(self: VirtualQGraphicsObject, event: gen_qgraphicsscene
   QGraphicsObjectcontextMenuEvent(self[], event)
 proc fcQGraphicsObject_method_callback_contextMenuEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsObject](fcQGraphicsObject_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneContextMenuEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneContextMenuEvent(h: event, owned: false)
   inst.contextMenuEvent(slotval1)
 
 method dragEnterEvent*(self: VirtualQGraphicsObject, event: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void {.base.} =
   QGraphicsObjectdragEnterEvent(self[], event)
 proc fcQGraphicsObject_method_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsObject](fcQGraphicsObject_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event, owned: false)
   inst.dragEnterEvent(slotval1)
 
 method dragLeaveEvent*(self: VirtualQGraphicsObject, event: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void {.base.} =
   QGraphicsObjectdragLeaveEvent(self[], event)
 proc fcQGraphicsObject_method_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsObject](fcQGraphicsObject_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event, owned: false)
   inst.dragLeaveEvent(slotval1)
 
 method dragMoveEvent*(self: VirtualQGraphicsObject, event: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void {.base.} =
   QGraphicsObjectdragMoveEvent(self[], event)
 proc fcQGraphicsObject_method_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsObject](fcQGraphicsObject_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event, owned: false)
   inst.dragMoveEvent(slotval1)
 
 method dropEvent*(self: VirtualQGraphicsObject, event: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void {.base.} =
   QGraphicsObjectdropEvent(self[], event)
 proc fcQGraphicsObject_method_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsObject](fcQGraphicsObject_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event, owned: false)
   inst.dropEvent(slotval1)
 
 method focusInEvent*(self: VirtualQGraphicsObject, event: gen_qevent_types.QFocusEvent): void {.base.} =
   QGraphicsObjectfocusInEvent(self[], event)
 proc fcQGraphicsObject_method_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsObject](fcQGraphicsObject_vdata(self)[])
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   inst.focusInEvent(slotval1)
 
 method focusOutEvent*(self: VirtualQGraphicsObject, event: gen_qevent_types.QFocusEvent): void {.base.} =
   QGraphicsObjectfocusOutEvent(self[], event)
 proc fcQGraphicsObject_method_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsObject](fcQGraphicsObject_vdata(self)[])
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   inst.focusOutEvent(slotval1)
 
 method hoverEnterEvent*(self: VirtualQGraphicsObject, event: gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent): void {.base.} =
   QGraphicsObjecthoverEnterEvent(self[], event)
 proc fcQGraphicsObject_method_callback_hoverEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsObject](fcQGraphicsObject_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event, owned: false)
   inst.hoverEnterEvent(slotval1)
 
 method hoverMoveEvent*(self: VirtualQGraphicsObject, event: gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent): void {.base.} =
   QGraphicsObjecthoverMoveEvent(self[], event)
 proc fcQGraphicsObject_method_callback_hoverMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsObject](fcQGraphicsObject_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event, owned: false)
   inst.hoverMoveEvent(slotval1)
 
 method hoverLeaveEvent*(self: VirtualQGraphicsObject, event: gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent): void {.base.} =
   QGraphicsObjecthoverLeaveEvent(self[], event)
 proc fcQGraphicsObject_method_callback_hoverLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsObject](fcQGraphicsObject_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event, owned: false)
   inst.hoverLeaveEvent(slotval1)
 
 method keyPressEvent*(self: VirtualQGraphicsObject, event: gen_qevent_types.QKeyEvent): void {.base.} =
   QGraphicsObjectkeyPressEvent(self[], event)
 proc fcQGraphicsObject_method_callback_keyPressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsObject](fcQGraphicsObject_vdata(self)[])
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   inst.keyPressEvent(slotval1)
 
 method keyReleaseEvent*(self: VirtualQGraphicsObject, event: gen_qevent_types.QKeyEvent): void {.base.} =
   QGraphicsObjectkeyReleaseEvent(self[], event)
 proc fcQGraphicsObject_method_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsObject](fcQGraphicsObject_vdata(self)[])
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   inst.keyReleaseEvent(slotval1)
 
 method mousePressEvent*(self: VirtualQGraphicsObject, event: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void {.base.} =
   QGraphicsObjectmousePressEvent(self[], event)
 proc fcQGraphicsObject_method_callback_mousePressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsObject](fcQGraphicsObject_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event, owned: false)
   inst.mousePressEvent(slotval1)
 
 method mouseMoveEvent*(self: VirtualQGraphicsObject, event: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void {.base.} =
   QGraphicsObjectmouseMoveEvent(self[], event)
 proc fcQGraphicsObject_method_callback_mouseMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsObject](fcQGraphicsObject_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event, owned: false)
   inst.mouseMoveEvent(slotval1)
 
 method mouseReleaseEvent*(self: VirtualQGraphicsObject, event: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void {.base.} =
   QGraphicsObjectmouseReleaseEvent(self[], event)
 proc fcQGraphicsObject_method_callback_mouseReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsObject](fcQGraphicsObject_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event, owned: false)
   inst.mouseReleaseEvent(slotval1)
 
 method mouseDoubleClickEvent*(self: VirtualQGraphicsObject, event: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void {.base.} =
   QGraphicsObjectmouseDoubleClickEvent(self[], event)
 proc fcQGraphicsObject_method_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsObject](fcQGraphicsObject_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event, owned: false)
   inst.mouseDoubleClickEvent(slotval1)
 
 method wheelEvent*(self: VirtualQGraphicsObject, event: gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent): void {.base.} =
   QGraphicsObjectwheelEvent(self[], event)
 proc fcQGraphicsObject_method_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsObject](fcQGraphicsObject_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent(h: event, owned: false)
   inst.wheelEvent(slotval1)
 
 method inputMethodEvent*(self: VirtualQGraphicsObject, event: gen_qevent_types.QInputMethodEvent): void {.base.} =
   QGraphicsObjectinputMethodEvent(self[], event)
 proc fcQGraphicsObject_method_callback_inputMethodEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsObject](fcQGraphicsObject_vdata(self)[])
-  let slotval1 = gen_qevent_types.QInputMethodEvent(h: event)
+  let slotval1 = gen_qevent_types.QInputMethodEvent(h: event, owned: false)
   inst.inputMethodEvent(slotval1)
 
 method inputMethodQuery*(self: VirtualQGraphicsObject, query: cint): gen_qvariant_types.QVariant {.base.} =
@@ -4139,7 +4162,7 @@ method itemChange*(self: VirtualQGraphicsObject, change: cint, value: gen_qvaria
 proc fcQGraphicsObject_method_callback_itemChange(self: pointer, change: cint, value: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsObject](fcQGraphicsObject_vdata(self)[])
   let slotval1 = cint(change)
-  let slotval2 = gen_qvariant_types.QVariant(h: value)
+  let slotval2 = gen_qvariant_types.QVariant(h: value, owned: false)
   var virtualReturn = inst.itemChange(slotval1, slotval2)
   virtualReturn.h
 
@@ -4156,14 +4179,14 @@ method setExtension*(self: VirtualQGraphicsObject, extension: cint, variant: gen
 proc fcQGraphicsObject_method_callback_setExtension(self: pointer, extension: cint, variant: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsObject](fcQGraphicsObject_vdata(self)[])
   let slotval1 = cint(extension)
-  let slotval2 = gen_qvariant_types.QVariant(h: variant)
+  let slotval2 = gen_qvariant_types.QVariant(h: variant, owned: false)
   inst.setExtension(slotval1, slotval2)
 
 method extension*(self: VirtualQGraphicsObject, variant: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant {.base.} =
   QGraphicsObjectextension(self[], variant)
 proc fcQGraphicsObject_method_callback_extension(self: pointer, variant: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsObject](fcQGraphicsObject_vdata(self)[])
-  let slotval1 = gen_qvariant_types.QVariant(h: variant)
+  let slotval1 = gen_qvariant_types.QVariant(h: variant, owned: false)
   var virtualReturn = inst.extension(slotval1)
   virtualReturn.h
 
@@ -4171,7 +4194,7 @@ proc updateMicroFocus*(self: gen_qgraphicsitem_types.QGraphicsObject): void =
   fcQGraphicsObject_protectedbase_updateMicroFocus(self.h)
 
 proc sender*(self: gen_qgraphicsitem_types.QGraphicsObject): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQGraphicsObject_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQGraphicsObject_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qgraphicsitem_types.QGraphicsObject): cint =
   fcQGraphicsObject_protectedbase_senderSignalIndex(self.h)
@@ -4288,7 +4311,7 @@ proc create*(T: type gen_qgraphicsitem_types.QGraphicsObject,
     vtbl[].vtbl.setExtension = fcQGraphicsObject_vtable_callback_setExtension
   if not isNil(vtbl[].extension):
     vtbl[].vtbl.extension = fcQGraphicsObject_vtable_callback_extension
-  let tmp = gen_qgraphicsitem_types.QGraphicsObject(h: fcQGraphicsObject_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))))
+  let tmp = gen_qgraphicsitem_types.QGraphicsObject(h: fcQGraphicsObject_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))), owned: true)
   fcQGraphicsObject_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qgraphicsitem_types.QGraphicsObject,
@@ -4389,13 +4412,14 @@ proc create*(T: type gen_qgraphicsitem_types.QGraphicsObject,
     vtbl[].vtbl.setExtension = fcQGraphicsObject_vtable_callback_setExtension
   if not isNil(vtbl[].extension):
     vtbl[].vtbl.extension = fcQGraphicsObject_vtable_callback_extension
-  let tmp = gen_qgraphicsitem_types.QGraphicsObject(h: fcQGraphicsObject_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h))
+  let tmp = gen_qgraphicsitem_types.QGraphicsObject(h: fcQGraphicsObject_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h), owned: true)
   fcQGraphicsObject_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQGraphicsObject_mvtbl = cQGraphicsObjectVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQGraphicsObject()[])](self.fcQGraphicsObject_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   metaObject: fcQGraphicsObject_method_callback_metaObject,
   metacast: fcQGraphicsObject_method_callback_metacast,
@@ -4458,16 +4482,14 @@ proc create*(T: type gen_qgraphicsitem_types.QGraphicsObject,
 
 proc staticMetaObject*(_: type gen_qgraphicsitem_types.QGraphicsObject): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQGraphicsObject_staticMetaObject())
-proc delete*(self: gen_qgraphicsitem_types.QGraphicsObject) =
-  fcQGraphicsObject_delete(self.h)
 proc pen*(self: gen_qgraphicsitem_types.QAbstractGraphicsShapeItem): gen_qpen_types.QPen =
-  gen_qpen_types.QPen(h: fcQAbstractGraphicsShapeItem_pen(self.h))
+  gen_qpen_types.QPen(h: fcQAbstractGraphicsShapeItem_pen(self.h), owned: true)
 
 proc setPen*(self: gen_qgraphicsitem_types.QAbstractGraphicsShapeItem, pen: gen_qpen_types.QPen): void =
   fcQAbstractGraphicsShapeItem_setPen(self.h, pen.h)
 
 proc brush*(self: gen_qgraphicsitem_types.QAbstractGraphicsShapeItem): gen_qbrush_types.QBrush =
-  gen_qbrush_types.QBrush(h: fcQAbstractGraphicsShapeItem_brush(self.h))
+  gen_qbrush_types.QBrush(h: fcQAbstractGraphicsShapeItem_brush(self.h), owned: true)
 
 proc setBrush*(self: gen_qgraphicsitem_types.QAbstractGraphicsShapeItem, brush: gen_qbrush_types.QBrush): void =
   fcQAbstractGraphicsShapeItem_setBrush(self.h, brush.h)
@@ -4476,7 +4498,7 @@ proc isObscuredBy*(self: gen_qgraphicsitem_types.QAbstractGraphicsShapeItem, ite
   fcQAbstractGraphicsShapeItem_isObscuredBy(self.h, item.h)
 
 proc opaqueArea*(self: gen_qgraphicsitem_types.QAbstractGraphicsShapeItem): gen_qpainterpath_types.QPainterPath =
-  gen_qpainterpath_types.QPainterPath(h: fcQAbstractGraphicsShapeItem_opaqueArea(self.h))
+  gen_qpainterpath_types.QPainterPath(h: fcQAbstractGraphicsShapeItem_opaqueArea(self.h), owned: true)
 
 type QAbstractGraphicsShapeItemisObscuredByProc* = proc(self: QAbstractGraphicsShapeItem, item: gen_qgraphicsitem_types.QGraphicsItem): bool {.raises: [], gcsafe.}
 type QAbstractGraphicsShapeItemopaqueAreaProc* = proc(self: QAbstractGraphicsShapeItem): gen_qpainterpath_types.QPainterPath {.raises: [], gcsafe.}
@@ -4513,7 +4535,7 @@ type QAbstractGraphicsShapeItemitemChangeProc* = proc(self: QAbstractGraphicsSha
 type QAbstractGraphicsShapeItemsupportsExtensionProc* = proc(self: QAbstractGraphicsShapeItem, extension: cint): bool {.raises: [], gcsafe.}
 type QAbstractGraphicsShapeItemsetExtensionProc* = proc(self: QAbstractGraphicsShapeItem, extension: cint, variant: gen_qvariant_types.QVariant): void {.raises: [], gcsafe.}
 type QAbstractGraphicsShapeItemextensionProc* = proc(self: QAbstractGraphicsShapeItem, variant: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant {.raises: [], gcsafe.}
-type QAbstractGraphicsShapeItemVTable* = object
+type QAbstractGraphicsShapeItemVTable* {.inheritable, pure.} = object
   vtbl: cQAbstractGraphicsShapeItemVTable
   isObscuredBy*: QAbstractGraphicsShapeItemisObscuredByProc
   opaqueArea*: QAbstractGraphicsShapeItemopaqueAreaProc
@@ -4556,18 +4578,21 @@ proc QAbstractGraphicsShapeItemisObscuredBy*(self: gen_qgraphicsitem_types.QAbst
 proc fcQAbstractGraphicsShapeItem_vtable_callback_isObscuredBy(self: pointer, item: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QAbstractGraphicsShapeItemVTable](fcQAbstractGraphicsShapeItem_vdata(self)[])
   let self = QAbstractGraphicsShapeItem(h: self)
-  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: item)
+  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: item, owned: false)
   var virtualReturn = vtbl[].isObscuredBy(self, slotval1)
   virtualReturn
 
 proc QAbstractGraphicsShapeItemopaqueArea*(self: gen_qgraphicsitem_types.QAbstractGraphicsShapeItem): gen_qpainterpath_types.QPainterPath =
-  gen_qpainterpath_types.QPainterPath(h: fcQAbstractGraphicsShapeItem_virtualbase_opaqueArea(self.h))
+  gen_qpainterpath_types.QPainterPath(h: fcQAbstractGraphicsShapeItem_virtualbase_opaqueArea(self.h), owned: true)
 
 proc fcQAbstractGraphicsShapeItem_vtable_callback_opaqueArea(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QAbstractGraphicsShapeItemVTable](fcQAbstractGraphicsShapeItem_vdata(self)[])
   let self = QAbstractGraphicsShapeItem(h: self)
   var virtualReturn = vtbl[].opaqueArea(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QAbstractGraphicsShapeItemadvance*(self: gen_qgraphicsitem_types.QAbstractGraphicsShapeItem, phase: cint): void =
   fcQAbstractGraphicsShapeItem_virtualbase_advance(self.h, phase)
@@ -4582,16 +4607,22 @@ proc fcQAbstractGraphicsShapeItem_vtable_callback_boundingRect(self: pointer): p
   let vtbl = cast[ptr QAbstractGraphicsShapeItemVTable](fcQAbstractGraphicsShapeItem_vdata(self)[])
   let self = QAbstractGraphicsShapeItem(h: self)
   var virtualReturn = vtbl[].boundingRect(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QAbstractGraphicsShapeItemshape*(self: gen_qgraphicsitem_types.QAbstractGraphicsShapeItem): gen_qpainterpath_types.QPainterPath =
-  gen_qpainterpath_types.QPainterPath(h: fcQAbstractGraphicsShapeItem_virtualbase_shape(self.h))
+  gen_qpainterpath_types.QPainterPath(h: fcQAbstractGraphicsShapeItem_virtualbase_shape(self.h), owned: true)
 
 proc fcQAbstractGraphicsShapeItem_vtable_callback_shape(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QAbstractGraphicsShapeItemVTable](fcQAbstractGraphicsShapeItem_vdata(self)[])
   let self = QAbstractGraphicsShapeItem(h: self)
   var virtualReturn = vtbl[].shape(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QAbstractGraphicsShapeItemcontains*(self: gen_qgraphicsitem_types.QAbstractGraphicsShapeItem, point: gen_qpoint_types.QPointF): bool =
   fcQAbstractGraphicsShapeItem_virtualbase_contains(self.h, point.h)
@@ -4599,7 +4630,7 @@ proc QAbstractGraphicsShapeItemcontains*(self: gen_qgraphicsitem_types.QAbstract
 proc fcQAbstractGraphicsShapeItem_vtable_callback_contains(self: pointer, point: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QAbstractGraphicsShapeItemVTable](fcQAbstractGraphicsShapeItem_vdata(self)[])
   let self = QAbstractGraphicsShapeItem(h: self)
-  let slotval1 = gen_qpoint_types.QPointF(h: point)
+  let slotval1 = gen_qpoint_types.QPointF(h: point, owned: false)
   var virtualReturn = vtbl[].contains(self, slotval1)
   virtualReturn
 
@@ -4609,7 +4640,7 @@ proc QAbstractGraphicsShapeItemcollidesWithItem*(self: gen_qgraphicsitem_types.Q
 proc fcQAbstractGraphicsShapeItem_vtable_callback_collidesWithItem(self: pointer, other: pointer, mode: cint): bool {.cdecl.} =
   let vtbl = cast[ptr QAbstractGraphicsShapeItemVTable](fcQAbstractGraphicsShapeItem_vdata(self)[])
   let self = QAbstractGraphicsShapeItem(h: self)
-  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: other)
+  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: other, owned: false)
   let slotval2 = cint(mode)
   var virtualReturn = vtbl[].collidesWithItem(self, slotval1, slotval2)
   virtualReturn
@@ -4620,7 +4651,7 @@ proc QAbstractGraphicsShapeItemcollidesWithPath*(self: gen_qgraphicsitem_types.Q
 proc fcQAbstractGraphicsShapeItem_vtable_callback_collidesWithPath(self: pointer, path: pointer, mode: cint): bool {.cdecl.} =
   let vtbl = cast[ptr QAbstractGraphicsShapeItemVTable](fcQAbstractGraphicsShapeItem_vdata(self)[])
   let self = QAbstractGraphicsShapeItem(h: self)
-  let slotval1 = gen_qpainterpath_types.QPainterPath(h: path)
+  let slotval1 = gen_qpainterpath_types.QPainterPath(h: path, owned: false)
   let slotval2 = cint(mode)
   var virtualReturn = vtbl[].collidesWithPath(self, slotval1, slotval2)
   virtualReturn
@@ -4628,9 +4659,9 @@ proc fcQAbstractGraphicsShapeItem_vtable_callback_collidesWithPath(self: pointer
 proc fcQAbstractGraphicsShapeItem_vtable_callback_paint(self: pointer, painter: pointer, option: pointer, widget: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAbstractGraphicsShapeItemVTable](fcQAbstractGraphicsShapeItem_vdata(self)[])
   let self = QAbstractGraphicsShapeItem(h: self)
-  let slotval1 = gen_qpainter_types.QPainter(h: painter)
-  let slotval2 = gen_qstyleoption_types.QStyleOptionGraphicsItem(h: option)
-  let slotval3 = gen_qwidget_types.QWidget(h: widget)
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
+  let slotval2 = gen_qstyleoption_types.QStyleOptionGraphicsItem(h: option, owned: false)
+  let slotval3 = gen_qwidget_types.QWidget(h: widget, owned: false)
   vtbl[].paint(self, slotval1, slotval2, slotval3)
 
 proc QAbstractGraphicsShapeItemtypeX*(self: gen_qgraphicsitem_types.QAbstractGraphicsShapeItem): cint =
@@ -4648,8 +4679,8 @@ proc QAbstractGraphicsShapeItemsceneEventFilter*(self: gen_qgraphicsitem_types.Q
 proc fcQAbstractGraphicsShapeItem_vtable_callback_sceneEventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QAbstractGraphicsShapeItemVTable](fcQAbstractGraphicsShapeItem_vdata(self)[])
   let self = QAbstractGraphicsShapeItem(h: self)
-  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].sceneEventFilter(self, slotval1, slotval2)
   virtualReturn
 
@@ -4659,7 +4690,7 @@ proc QAbstractGraphicsShapeItemsceneEvent*(self: gen_qgraphicsitem_types.QAbstra
 proc fcQAbstractGraphicsShapeItem_vtable_callback_sceneEvent(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QAbstractGraphicsShapeItemVTable](fcQAbstractGraphicsShapeItem_vdata(self)[])
   let self = QAbstractGraphicsShapeItem(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].sceneEvent(self, slotval1)
   virtualReturn
 
@@ -4669,7 +4700,7 @@ proc QAbstractGraphicsShapeItemcontextMenuEvent*(self: gen_qgraphicsitem_types.Q
 proc fcQAbstractGraphicsShapeItem_vtable_callback_contextMenuEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAbstractGraphicsShapeItemVTable](fcQAbstractGraphicsShapeItem_vdata(self)[])
   let self = QAbstractGraphicsShapeItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneContextMenuEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneContextMenuEvent(h: event, owned: false)
   vtbl[].contextMenuEvent(self, slotval1)
 
 proc QAbstractGraphicsShapeItemdragEnterEvent*(self: gen_qgraphicsitem_types.QAbstractGraphicsShapeItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void =
@@ -4678,7 +4709,7 @@ proc QAbstractGraphicsShapeItemdragEnterEvent*(self: gen_qgraphicsitem_types.QAb
 proc fcQAbstractGraphicsShapeItem_vtable_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAbstractGraphicsShapeItemVTable](fcQAbstractGraphicsShapeItem_vdata(self)[])
   let self = QAbstractGraphicsShapeItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event, owned: false)
   vtbl[].dragEnterEvent(self, slotval1)
 
 proc QAbstractGraphicsShapeItemdragLeaveEvent*(self: gen_qgraphicsitem_types.QAbstractGraphicsShapeItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void =
@@ -4687,7 +4718,7 @@ proc QAbstractGraphicsShapeItemdragLeaveEvent*(self: gen_qgraphicsitem_types.QAb
 proc fcQAbstractGraphicsShapeItem_vtable_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAbstractGraphicsShapeItemVTable](fcQAbstractGraphicsShapeItem_vdata(self)[])
   let self = QAbstractGraphicsShapeItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event, owned: false)
   vtbl[].dragLeaveEvent(self, slotval1)
 
 proc QAbstractGraphicsShapeItemdragMoveEvent*(self: gen_qgraphicsitem_types.QAbstractGraphicsShapeItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void =
@@ -4696,7 +4727,7 @@ proc QAbstractGraphicsShapeItemdragMoveEvent*(self: gen_qgraphicsitem_types.QAbs
 proc fcQAbstractGraphicsShapeItem_vtable_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAbstractGraphicsShapeItemVTable](fcQAbstractGraphicsShapeItem_vdata(self)[])
   let self = QAbstractGraphicsShapeItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event, owned: false)
   vtbl[].dragMoveEvent(self, slotval1)
 
 proc QAbstractGraphicsShapeItemdropEvent*(self: gen_qgraphicsitem_types.QAbstractGraphicsShapeItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void =
@@ -4705,7 +4736,7 @@ proc QAbstractGraphicsShapeItemdropEvent*(self: gen_qgraphicsitem_types.QAbstrac
 proc fcQAbstractGraphicsShapeItem_vtable_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAbstractGraphicsShapeItemVTable](fcQAbstractGraphicsShapeItem_vdata(self)[])
   let self = QAbstractGraphicsShapeItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event, owned: false)
   vtbl[].dropEvent(self, slotval1)
 
 proc QAbstractGraphicsShapeItemfocusInEvent*(self: gen_qgraphicsitem_types.QAbstractGraphicsShapeItem, event: gen_qevent_types.QFocusEvent): void =
@@ -4714,7 +4745,7 @@ proc QAbstractGraphicsShapeItemfocusInEvent*(self: gen_qgraphicsitem_types.QAbst
 proc fcQAbstractGraphicsShapeItem_vtable_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAbstractGraphicsShapeItemVTable](fcQAbstractGraphicsShapeItem_vdata(self)[])
   let self = QAbstractGraphicsShapeItem(h: self)
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusInEvent(self, slotval1)
 
 proc QAbstractGraphicsShapeItemfocusOutEvent*(self: gen_qgraphicsitem_types.QAbstractGraphicsShapeItem, event: gen_qevent_types.QFocusEvent): void =
@@ -4723,7 +4754,7 @@ proc QAbstractGraphicsShapeItemfocusOutEvent*(self: gen_qgraphicsitem_types.QAbs
 proc fcQAbstractGraphicsShapeItem_vtable_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAbstractGraphicsShapeItemVTable](fcQAbstractGraphicsShapeItem_vdata(self)[])
   let self = QAbstractGraphicsShapeItem(h: self)
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusOutEvent(self, slotval1)
 
 proc QAbstractGraphicsShapeItemhoverEnterEvent*(self: gen_qgraphicsitem_types.QAbstractGraphicsShapeItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent): void =
@@ -4732,7 +4763,7 @@ proc QAbstractGraphicsShapeItemhoverEnterEvent*(self: gen_qgraphicsitem_types.QA
 proc fcQAbstractGraphicsShapeItem_vtable_callback_hoverEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAbstractGraphicsShapeItemVTable](fcQAbstractGraphicsShapeItem_vdata(self)[])
   let self = QAbstractGraphicsShapeItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event, owned: false)
   vtbl[].hoverEnterEvent(self, slotval1)
 
 proc QAbstractGraphicsShapeItemhoverMoveEvent*(self: gen_qgraphicsitem_types.QAbstractGraphicsShapeItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent): void =
@@ -4741,7 +4772,7 @@ proc QAbstractGraphicsShapeItemhoverMoveEvent*(self: gen_qgraphicsitem_types.QAb
 proc fcQAbstractGraphicsShapeItem_vtable_callback_hoverMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAbstractGraphicsShapeItemVTable](fcQAbstractGraphicsShapeItem_vdata(self)[])
   let self = QAbstractGraphicsShapeItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event, owned: false)
   vtbl[].hoverMoveEvent(self, slotval1)
 
 proc QAbstractGraphicsShapeItemhoverLeaveEvent*(self: gen_qgraphicsitem_types.QAbstractGraphicsShapeItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent): void =
@@ -4750,7 +4781,7 @@ proc QAbstractGraphicsShapeItemhoverLeaveEvent*(self: gen_qgraphicsitem_types.QA
 proc fcQAbstractGraphicsShapeItem_vtable_callback_hoverLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAbstractGraphicsShapeItemVTable](fcQAbstractGraphicsShapeItem_vdata(self)[])
   let self = QAbstractGraphicsShapeItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event, owned: false)
   vtbl[].hoverLeaveEvent(self, slotval1)
 
 proc QAbstractGraphicsShapeItemkeyPressEvent*(self: gen_qgraphicsitem_types.QAbstractGraphicsShapeItem, event: gen_qevent_types.QKeyEvent): void =
@@ -4759,7 +4790,7 @@ proc QAbstractGraphicsShapeItemkeyPressEvent*(self: gen_qgraphicsitem_types.QAbs
 proc fcQAbstractGraphicsShapeItem_vtable_callback_keyPressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAbstractGraphicsShapeItemVTable](fcQAbstractGraphicsShapeItem_vdata(self)[])
   let self = QAbstractGraphicsShapeItem(h: self)
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   vtbl[].keyPressEvent(self, slotval1)
 
 proc QAbstractGraphicsShapeItemkeyReleaseEvent*(self: gen_qgraphicsitem_types.QAbstractGraphicsShapeItem, event: gen_qevent_types.QKeyEvent): void =
@@ -4768,7 +4799,7 @@ proc QAbstractGraphicsShapeItemkeyReleaseEvent*(self: gen_qgraphicsitem_types.QA
 proc fcQAbstractGraphicsShapeItem_vtable_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAbstractGraphicsShapeItemVTable](fcQAbstractGraphicsShapeItem_vdata(self)[])
   let self = QAbstractGraphicsShapeItem(h: self)
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   vtbl[].keyReleaseEvent(self, slotval1)
 
 proc QAbstractGraphicsShapeItemmousePressEvent*(self: gen_qgraphicsitem_types.QAbstractGraphicsShapeItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void =
@@ -4777,7 +4808,7 @@ proc QAbstractGraphicsShapeItemmousePressEvent*(self: gen_qgraphicsitem_types.QA
 proc fcQAbstractGraphicsShapeItem_vtable_callback_mousePressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAbstractGraphicsShapeItemVTable](fcQAbstractGraphicsShapeItem_vdata(self)[])
   let self = QAbstractGraphicsShapeItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event, owned: false)
   vtbl[].mousePressEvent(self, slotval1)
 
 proc QAbstractGraphicsShapeItemmouseMoveEvent*(self: gen_qgraphicsitem_types.QAbstractGraphicsShapeItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void =
@@ -4786,7 +4817,7 @@ proc QAbstractGraphicsShapeItemmouseMoveEvent*(self: gen_qgraphicsitem_types.QAb
 proc fcQAbstractGraphicsShapeItem_vtable_callback_mouseMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAbstractGraphicsShapeItemVTable](fcQAbstractGraphicsShapeItem_vdata(self)[])
   let self = QAbstractGraphicsShapeItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event, owned: false)
   vtbl[].mouseMoveEvent(self, slotval1)
 
 proc QAbstractGraphicsShapeItemmouseReleaseEvent*(self: gen_qgraphicsitem_types.QAbstractGraphicsShapeItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void =
@@ -4795,7 +4826,7 @@ proc QAbstractGraphicsShapeItemmouseReleaseEvent*(self: gen_qgraphicsitem_types.
 proc fcQAbstractGraphicsShapeItem_vtable_callback_mouseReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAbstractGraphicsShapeItemVTable](fcQAbstractGraphicsShapeItem_vdata(self)[])
   let self = QAbstractGraphicsShapeItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event, owned: false)
   vtbl[].mouseReleaseEvent(self, slotval1)
 
 proc QAbstractGraphicsShapeItemmouseDoubleClickEvent*(self: gen_qgraphicsitem_types.QAbstractGraphicsShapeItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void =
@@ -4804,7 +4835,7 @@ proc QAbstractGraphicsShapeItemmouseDoubleClickEvent*(self: gen_qgraphicsitem_ty
 proc fcQAbstractGraphicsShapeItem_vtable_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAbstractGraphicsShapeItemVTable](fcQAbstractGraphicsShapeItem_vdata(self)[])
   let self = QAbstractGraphicsShapeItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event, owned: false)
   vtbl[].mouseDoubleClickEvent(self, slotval1)
 
 proc QAbstractGraphicsShapeItemwheelEvent*(self: gen_qgraphicsitem_types.QAbstractGraphicsShapeItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent): void =
@@ -4813,7 +4844,7 @@ proc QAbstractGraphicsShapeItemwheelEvent*(self: gen_qgraphicsitem_types.QAbstra
 proc fcQAbstractGraphicsShapeItem_vtable_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAbstractGraphicsShapeItemVTable](fcQAbstractGraphicsShapeItem_vdata(self)[])
   let self = QAbstractGraphicsShapeItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent(h: event, owned: false)
   vtbl[].wheelEvent(self, slotval1)
 
 proc QAbstractGraphicsShapeIteminputMethodEvent*(self: gen_qgraphicsitem_types.QAbstractGraphicsShapeItem, event: gen_qevent_types.QInputMethodEvent): void =
@@ -4822,29 +4853,35 @@ proc QAbstractGraphicsShapeIteminputMethodEvent*(self: gen_qgraphicsitem_types.Q
 proc fcQAbstractGraphicsShapeItem_vtable_callback_inputMethodEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAbstractGraphicsShapeItemVTable](fcQAbstractGraphicsShapeItem_vdata(self)[])
   let self = QAbstractGraphicsShapeItem(h: self)
-  let slotval1 = gen_qevent_types.QInputMethodEvent(h: event)
+  let slotval1 = gen_qevent_types.QInputMethodEvent(h: event, owned: false)
   vtbl[].inputMethodEvent(self, slotval1)
 
 proc QAbstractGraphicsShapeIteminputMethodQuery*(self: gen_qgraphicsitem_types.QAbstractGraphicsShapeItem, query: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQAbstractGraphicsShapeItem_virtualbase_inputMethodQuery(self.h, cint(query)))
+  gen_qvariant_types.QVariant(h: fcQAbstractGraphicsShapeItem_virtualbase_inputMethodQuery(self.h, cint(query)), owned: true)
 
 proc fcQAbstractGraphicsShapeItem_vtable_callback_inputMethodQuery(self: pointer, query: cint): pointer {.cdecl.} =
   let vtbl = cast[ptr QAbstractGraphicsShapeItemVTable](fcQAbstractGraphicsShapeItem_vdata(self)[])
   let self = QAbstractGraphicsShapeItem(h: self)
   let slotval1 = cint(query)
   var virtualReturn = vtbl[].inputMethodQuery(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QAbstractGraphicsShapeItemitemChange*(self: gen_qgraphicsitem_types.QAbstractGraphicsShapeItem, change: cint, value: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQAbstractGraphicsShapeItem_virtualbase_itemChange(self.h, cint(change), value.h))
+  gen_qvariant_types.QVariant(h: fcQAbstractGraphicsShapeItem_virtualbase_itemChange(self.h, cint(change), value.h), owned: true)
 
 proc fcQAbstractGraphicsShapeItem_vtable_callback_itemChange(self: pointer, change: cint, value: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QAbstractGraphicsShapeItemVTable](fcQAbstractGraphicsShapeItem_vdata(self)[])
   let self = QAbstractGraphicsShapeItem(h: self)
   let slotval1 = cint(change)
-  let slotval2 = gen_qvariant_types.QVariant(h: value)
+  let slotval2 = gen_qvariant_types.QVariant(h: value, owned: false)
   var virtualReturn = vtbl[].itemChange(self, slotval1, slotval2)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QAbstractGraphicsShapeItemsupportsExtension*(self: gen_qgraphicsitem_types.QAbstractGraphicsShapeItem, extension: cint): bool =
   fcQAbstractGraphicsShapeItem_virtualbase_supportsExtension(self.h, cint(extension))
@@ -4863,18 +4900,21 @@ proc fcQAbstractGraphicsShapeItem_vtable_callback_setExtension(self: pointer, ex
   let vtbl = cast[ptr QAbstractGraphicsShapeItemVTable](fcQAbstractGraphicsShapeItem_vdata(self)[])
   let self = QAbstractGraphicsShapeItem(h: self)
   let slotval1 = cint(extension)
-  let slotval2 = gen_qvariant_types.QVariant(h: variant)
+  let slotval2 = gen_qvariant_types.QVariant(h: variant, owned: false)
   vtbl[].setExtension(self, slotval1, slotval2)
 
 proc QAbstractGraphicsShapeItemextension*(self: gen_qgraphicsitem_types.QAbstractGraphicsShapeItem, variant: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQAbstractGraphicsShapeItem_virtualbase_extension(self.h, variant.h))
+  gen_qvariant_types.QVariant(h: fcQAbstractGraphicsShapeItem_virtualbase_extension(self.h, variant.h), owned: true)
 
 proc fcQAbstractGraphicsShapeItem_vtable_callback_extension(self: pointer, variant: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QAbstractGraphicsShapeItemVTable](fcQAbstractGraphicsShapeItem_vdata(self)[])
   let self = QAbstractGraphicsShapeItem(h: self)
-  let slotval1 = gen_qvariant_types.QVariant(h: variant)
+  let slotval1 = gen_qvariant_types.QVariant(h: variant, owned: false)
   var virtualReturn = vtbl[].extension(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 type VirtualQAbstractGraphicsShapeItem* {.inheritable.} = ref object of QAbstractGraphicsShapeItem
   vtbl*: cQAbstractGraphicsShapeItemVTable
@@ -4882,7 +4922,7 @@ method isObscuredBy*(self: VirtualQAbstractGraphicsShapeItem, item: gen_qgraphic
   QAbstractGraphicsShapeItemisObscuredBy(self[], item)
 proc fcQAbstractGraphicsShapeItem_method_callback_isObscuredBy(self: pointer, item: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQAbstractGraphicsShapeItem](fcQAbstractGraphicsShapeItem_vdata(self)[])
-  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: item)
+  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: item, owned: false)
   var virtualReturn = inst.isObscuredBy(slotval1)
   virtualReturn
 
@@ -4918,7 +4958,7 @@ method contains*(self: VirtualQAbstractGraphicsShapeItem, point: gen_qpoint_type
   QAbstractGraphicsShapeItemcontains(self[], point)
 proc fcQAbstractGraphicsShapeItem_method_callback_contains(self: pointer, point: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQAbstractGraphicsShapeItem](fcQAbstractGraphicsShapeItem_vdata(self)[])
-  let slotval1 = gen_qpoint_types.QPointF(h: point)
+  let slotval1 = gen_qpoint_types.QPointF(h: point, owned: false)
   var virtualReturn = inst.contains(slotval1)
   virtualReturn
 
@@ -4926,7 +4966,7 @@ method collidesWithItem*(self: VirtualQAbstractGraphicsShapeItem, other: gen_qgr
   QAbstractGraphicsShapeItemcollidesWithItem(self[], other, mode)
 proc fcQAbstractGraphicsShapeItem_method_callback_collidesWithItem(self: pointer, other: pointer, mode: cint): bool {.cdecl.} =
   let inst = cast[VirtualQAbstractGraphicsShapeItem](fcQAbstractGraphicsShapeItem_vdata(self)[])
-  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: other)
+  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: other, owned: false)
   let slotval2 = cint(mode)
   var virtualReturn = inst.collidesWithItem(slotval1, slotval2)
   virtualReturn
@@ -4935,7 +4975,7 @@ method collidesWithPath*(self: VirtualQAbstractGraphicsShapeItem, path: gen_qpai
   QAbstractGraphicsShapeItemcollidesWithPath(self[], path, mode)
 proc fcQAbstractGraphicsShapeItem_method_callback_collidesWithPath(self: pointer, path: pointer, mode: cint): bool {.cdecl.} =
   let inst = cast[VirtualQAbstractGraphicsShapeItem](fcQAbstractGraphicsShapeItem_vdata(self)[])
-  let slotval1 = gen_qpainterpath_types.QPainterPath(h: path)
+  let slotval1 = gen_qpainterpath_types.QPainterPath(h: path, owned: false)
   let slotval2 = cint(mode)
   var virtualReturn = inst.collidesWithPath(slotval1, slotval2)
   virtualReturn
@@ -4944,9 +4984,9 @@ method paint*(self: VirtualQAbstractGraphicsShapeItem, painter: gen_qpainter_typ
   raiseAssert("missing implementation of QAbstractGraphicsShapeItem_virtualbase_paint")
 proc fcQAbstractGraphicsShapeItem_method_callback_paint(self: pointer, painter: pointer, option: pointer, widget: pointer): void {.cdecl.} =
   let inst = cast[VirtualQAbstractGraphicsShapeItem](fcQAbstractGraphicsShapeItem_vdata(self)[])
-  let slotval1 = gen_qpainter_types.QPainter(h: painter)
-  let slotval2 = gen_qstyleoption_types.QStyleOptionGraphicsItem(h: option)
-  let slotval3 = gen_qwidget_types.QWidget(h: widget)
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
+  let slotval2 = gen_qstyleoption_types.QStyleOptionGraphicsItem(h: option, owned: false)
+  let slotval3 = gen_qwidget_types.QWidget(h: widget, owned: false)
   inst.paint(slotval1, slotval2, slotval3)
 
 method typeX*(self: VirtualQAbstractGraphicsShapeItem): cint {.base.} =
@@ -4960,8 +5000,8 @@ method sceneEventFilter*(self: VirtualQAbstractGraphicsShapeItem, watched: gen_q
   QAbstractGraphicsShapeItemsceneEventFilter(self[], watched, event)
 proc fcQAbstractGraphicsShapeItem_method_callback_sceneEventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQAbstractGraphicsShapeItem](fcQAbstractGraphicsShapeItem_vdata(self)[])
-  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.sceneEventFilter(slotval1, slotval2)
   virtualReturn
 
@@ -4969,7 +5009,7 @@ method sceneEvent*(self: VirtualQAbstractGraphicsShapeItem, event: gen_qcoreeven
   QAbstractGraphicsShapeItemsceneEvent(self[], event)
 proc fcQAbstractGraphicsShapeItem_method_callback_sceneEvent(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQAbstractGraphicsShapeItem](fcQAbstractGraphicsShapeItem_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.sceneEvent(slotval1)
   virtualReturn
 
@@ -4977,126 +5017,126 @@ method contextMenuEvent*(self: VirtualQAbstractGraphicsShapeItem, event: gen_qgr
   QAbstractGraphicsShapeItemcontextMenuEvent(self[], event)
 proc fcQAbstractGraphicsShapeItem_method_callback_contextMenuEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQAbstractGraphicsShapeItem](fcQAbstractGraphicsShapeItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneContextMenuEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneContextMenuEvent(h: event, owned: false)
   inst.contextMenuEvent(slotval1)
 
 method dragEnterEvent*(self: VirtualQAbstractGraphicsShapeItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void {.base.} =
   QAbstractGraphicsShapeItemdragEnterEvent(self[], event)
 proc fcQAbstractGraphicsShapeItem_method_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQAbstractGraphicsShapeItem](fcQAbstractGraphicsShapeItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event, owned: false)
   inst.dragEnterEvent(slotval1)
 
 method dragLeaveEvent*(self: VirtualQAbstractGraphicsShapeItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void {.base.} =
   QAbstractGraphicsShapeItemdragLeaveEvent(self[], event)
 proc fcQAbstractGraphicsShapeItem_method_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQAbstractGraphicsShapeItem](fcQAbstractGraphicsShapeItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event, owned: false)
   inst.dragLeaveEvent(slotval1)
 
 method dragMoveEvent*(self: VirtualQAbstractGraphicsShapeItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void {.base.} =
   QAbstractGraphicsShapeItemdragMoveEvent(self[], event)
 proc fcQAbstractGraphicsShapeItem_method_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQAbstractGraphicsShapeItem](fcQAbstractGraphicsShapeItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event, owned: false)
   inst.dragMoveEvent(slotval1)
 
 method dropEvent*(self: VirtualQAbstractGraphicsShapeItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void {.base.} =
   QAbstractGraphicsShapeItemdropEvent(self[], event)
 proc fcQAbstractGraphicsShapeItem_method_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQAbstractGraphicsShapeItem](fcQAbstractGraphicsShapeItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event, owned: false)
   inst.dropEvent(slotval1)
 
 method focusInEvent*(self: VirtualQAbstractGraphicsShapeItem, event: gen_qevent_types.QFocusEvent): void {.base.} =
   QAbstractGraphicsShapeItemfocusInEvent(self[], event)
 proc fcQAbstractGraphicsShapeItem_method_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQAbstractGraphicsShapeItem](fcQAbstractGraphicsShapeItem_vdata(self)[])
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   inst.focusInEvent(slotval1)
 
 method focusOutEvent*(self: VirtualQAbstractGraphicsShapeItem, event: gen_qevent_types.QFocusEvent): void {.base.} =
   QAbstractGraphicsShapeItemfocusOutEvent(self[], event)
 proc fcQAbstractGraphicsShapeItem_method_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQAbstractGraphicsShapeItem](fcQAbstractGraphicsShapeItem_vdata(self)[])
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   inst.focusOutEvent(slotval1)
 
 method hoverEnterEvent*(self: VirtualQAbstractGraphicsShapeItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent): void {.base.} =
   QAbstractGraphicsShapeItemhoverEnterEvent(self[], event)
 proc fcQAbstractGraphicsShapeItem_method_callback_hoverEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQAbstractGraphicsShapeItem](fcQAbstractGraphicsShapeItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event, owned: false)
   inst.hoverEnterEvent(slotval1)
 
 method hoverMoveEvent*(self: VirtualQAbstractGraphicsShapeItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent): void {.base.} =
   QAbstractGraphicsShapeItemhoverMoveEvent(self[], event)
 proc fcQAbstractGraphicsShapeItem_method_callback_hoverMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQAbstractGraphicsShapeItem](fcQAbstractGraphicsShapeItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event, owned: false)
   inst.hoverMoveEvent(slotval1)
 
 method hoverLeaveEvent*(self: VirtualQAbstractGraphicsShapeItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent): void {.base.} =
   QAbstractGraphicsShapeItemhoverLeaveEvent(self[], event)
 proc fcQAbstractGraphicsShapeItem_method_callback_hoverLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQAbstractGraphicsShapeItem](fcQAbstractGraphicsShapeItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event, owned: false)
   inst.hoverLeaveEvent(slotval1)
 
 method keyPressEvent*(self: VirtualQAbstractGraphicsShapeItem, event: gen_qevent_types.QKeyEvent): void {.base.} =
   QAbstractGraphicsShapeItemkeyPressEvent(self[], event)
 proc fcQAbstractGraphicsShapeItem_method_callback_keyPressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQAbstractGraphicsShapeItem](fcQAbstractGraphicsShapeItem_vdata(self)[])
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   inst.keyPressEvent(slotval1)
 
 method keyReleaseEvent*(self: VirtualQAbstractGraphicsShapeItem, event: gen_qevent_types.QKeyEvent): void {.base.} =
   QAbstractGraphicsShapeItemkeyReleaseEvent(self[], event)
 proc fcQAbstractGraphicsShapeItem_method_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQAbstractGraphicsShapeItem](fcQAbstractGraphicsShapeItem_vdata(self)[])
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   inst.keyReleaseEvent(slotval1)
 
 method mousePressEvent*(self: VirtualQAbstractGraphicsShapeItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void {.base.} =
   QAbstractGraphicsShapeItemmousePressEvent(self[], event)
 proc fcQAbstractGraphicsShapeItem_method_callback_mousePressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQAbstractGraphicsShapeItem](fcQAbstractGraphicsShapeItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event, owned: false)
   inst.mousePressEvent(slotval1)
 
 method mouseMoveEvent*(self: VirtualQAbstractGraphicsShapeItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void {.base.} =
   QAbstractGraphicsShapeItemmouseMoveEvent(self[], event)
 proc fcQAbstractGraphicsShapeItem_method_callback_mouseMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQAbstractGraphicsShapeItem](fcQAbstractGraphicsShapeItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event, owned: false)
   inst.mouseMoveEvent(slotval1)
 
 method mouseReleaseEvent*(self: VirtualQAbstractGraphicsShapeItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void {.base.} =
   QAbstractGraphicsShapeItemmouseReleaseEvent(self[], event)
 proc fcQAbstractGraphicsShapeItem_method_callback_mouseReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQAbstractGraphicsShapeItem](fcQAbstractGraphicsShapeItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event, owned: false)
   inst.mouseReleaseEvent(slotval1)
 
 method mouseDoubleClickEvent*(self: VirtualQAbstractGraphicsShapeItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void {.base.} =
   QAbstractGraphicsShapeItemmouseDoubleClickEvent(self[], event)
 proc fcQAbstractGraphicsShapeItem_method_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQAbstractGraphicsShapeItem](fcQAbstractGraphicsShapeItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event, owned: false)
   inst.mouseDoubleClickEvent(slotval1)
 
 method wheelEvent*(self: VirtualQAbstractGraphicsShapeItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent): void {.base.} =
   QAbstractGraphicsShapeItemwheelEvent(self[], event)
 proc fcQAbstractGraphicsShapeItem_method_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQAbstractGraphicsShapeItem](fcQAbstractGraphicsShapeItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent(h: event, owned: false)
   inst.wheelEvent(slotval1)
 
 method inputMethodEvent*(self: VirtualQAbstractGraphicsShapeItem, event: gen_qevent_types.QInputMethodEvent): void {.base.} =
   QAbstractGraphicsShapeIteminputMethodEvent(self[], event)
 proc fcQAbstractGraphicsShapeItem_method_callback_inputMethodEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQAbstractGraphicsShapeItem](fcQAbstractGraphicsShapeItem_vdata(self)[])
-  let slotval1 = gen_qevent_types.QInputMethodEvent(h: event)
+  let slotval1 = gen_qevent_types.QInputMethodEvent(h: event, owned: false)
   inst.inputMethodEvent(slotval1)
 
 method inputMethodQuery*(self: VirtualQAbstractGraphicsShapeItem, query: cint): gen_qvariant_types.QVariant {.base.} =
@@ -5112,7 +5152,7 @@ method itemChange*(self: VirtualQAbstractGraphicsShapeItem, change: cint, value:
 proc fcQAbstractGraphicsShapeItem_method_callback_itemChange(self: pointer, change: cint, value: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQAbstractGraphicsShapeItem](fcQAbstractGraphicsShapeItem_vdata(self)[])
   let slotval1 = cint(change)
-  let slotval2 = gen_qvariant_types.QVariant(h: value)
+  let slotval2 = gen_qvariant_types.QVariant(h: value, owned: false)
   var virtualReturn = inst.itemChange(slotval1, slotval2)
   virtualReturn.h
 
@@ -5129,14 +5169,14 @@ method setExtension*(self: VirtualQAbstractGraphicsShapeItem, extension: cint, v
 proc fcQAbstractGraphicsShapeItem_method_callback_setExtension(self: pointer, extension: cint, variant: pointer): void {.cdecl.} =
   let inst = cast[VirtualQAbstractGraphicsShapeItem](fcQAbstractGraphicsShapeItem_vdata(self)[])
   let slotval1 = cint(extension)
-  let slotval2 = gen_qvariant_types.QVariant(h: variant)
+  let slotval2 = gen_qvariant_types.QVariant(h: variant, owned: false)
   inst.setExtension(slotval1, slotval2)
 
 method extension*(self: VirtualQAbstractGraphicsShapeItem, variant: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant {.base.} =
   QAbstractGraphicsShapeItemextension(self[], variant)
 proc fcQAbstractGraphicsShapeItem_method_callback_extension(self: pointer, variant: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQAbstractGraphicsShapeItem](fcQAbstractGraphicsShapeItem_vdata(self)[])
-  let slotval1 = gen_qvariant_types.QVariant(h: variant)
+  let slotval1 = gen_qvariant_types.QVariant(h: variant, owned: false)
   var virtualReturn = inst.extension(slotval1)
   virtualReturn.h
 
@@ -5229,7 +5269,7 @@ proc create*(T: type gen_qgraphicsitem_types.QAbstractGraphicsShapeItem,
     vtbl[].vtbl.setExtension = fcQAbstractGraphicsShapeItem_vtable_callback_setExtension
   if not isNil(vtbl[].extension):
     vtbl[].vtbl.extension = fcQAbstractGraphicsShapeItem_vtable_callback_extension
-  let tmp = gen_qgraphicsitem_types.QAbstractGraphicsShapeItem(h: fcQAbstractGraphicsShapeItem_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))))
+  let tmp = gen_qgraphicsitem_types.QAbstractGraphicsShapeItem(h: fcQAbstractGraphicsShapeItem_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))), owned: true)
   fcQAbstractGraphicsShapeItem_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qgraphicsitem_types.QAbstractGraphicsShapeItem,
@@ -5310,13 +5350,14 @@ proc create*(T: type gen_qgraphicsitem_types.QAbstractGraphicsShapeItem,
     vtbl[].vtbl.setExtension = fcQAbstractGraphicsShapeItem_vtable_callback_setExtension
   if not isNil(vtbl[].extension):
     vtbl[].vtbl.extension = fcQAbstractGraphicsShapeItem_vtable_callback_extension
-  let tmp = gen_qgraphicsitem_types.QAbstractGraphicsShapeItem(h: fcQAbstractGraphicsShapeItem_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h))
+  let tmp = gen_qgraphicsitem_types.QAbstractGraphicsShapeItem(h: fcQAbstractGraphicsShapeItem_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h), owned: true)
   fcQAbstractGraphicsShapeItem_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQAbstractGraphicsShapeItem_mvtbl = cQAbstractGraphicsShapeItemVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQAbstractGraphicsShapeItem()[])](self.fcQAbstractGraphicsShapeItem_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   isObscuredBy: fcQAbstractGraphicsShapeItem_method_callback_isObscuredBy,
   opaqueArea: fcQAbstractGraphicsShapeItem_method_callback_opaqueArea,
@@ -5367,19 +5408,17 @@ proc create*(T: type gen_qgraphicsitem_types.QAbstractGraphicsShapeItem,
   inst[].h = fcQAbstractGraphicsShapeItem_new2(addr(cQAbstractGraphicsShapeItem_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQAbstractGraphicsShapeItem_vdata(inst[].h)[] = addr inst[]
 
-proc delete*(self: gen_qgraphicsitem_types.QAbstractGraphicsShapeItem) =
-  fcQAbstractGraphicsShapeItem_delete(self.h)
 proc path*(self: gen_qgraphicsitem_types.QGraphicsPathItem): gen_qpainterpath_types.QPainterPath =
-  gen_qpainterpath_types.QPainterPath(h: fcQGraphicsPathItem_path(self.h))
+  gen_qpainterpath_types.QPainterPath(h: fcQGraphicsPathItem_path(self.h), owned: true)
 
 proc setPath*(self: gen_qgraphicsitem_types.QGraphicsPathItem, path: gen_qpainterpath_types.QPainterPath): void =
   fcQGraphicsPathItem_setPath(self.h, path.h)
 
 proc boundingRect*(self: gen_qgraphicsitem_types.QGraphicsPathItem): gen_qrect_types.QRectF =
-  gen_qrect_types.QRectF(h: fcQGraphicsPathItem_boundingRect(self.h))
+  gen_qrect_types.QRectF(h: fcQGraphicsPathItem_boundingRect(self.h), owned: true)
 
 proc shape*(self: gen_qgraphicsitem_types.QGraphicsPathItem): gen_qpainterpath_types.QPainterPath =
-  gen_qpainterpath_types.QPainterPath(h: fcQGraphicsPathItem_shape(self.h))
+  gen_qpainterpath_types.QPainterPath(h: fcQGraphicsPathItem_shape(self.h), owned: true)
 
 proc contains*(self: gen_qgraphicsitem_types.QGraphicsPathItem, point: gen_qpoint_types.QPointF): bool =
   fcQGraphicsPathItem_contains(self.h, point.h)
@@ -5391,7 +5430,7 @@ proc isObscuredBy*(self: gen_qgraphicsitem_types.QGraphicsPathItem, item: gen_qg
   fcQGraphicsPathItem_isObscuredBy(self.h, item.h)
 
 proc opaqueArea*(self: gen_qgraphicsitem_types.QGraphicsPathItem): gen_qpainterpath_types.QPainterPath =
-  gen_qpainterpath_types.QPainterPath(h: fcQGraphicsPathItem_opaqueArea(self.h))
+  gen_qpainterpath_types.QPainterPath(h: fcQGraphicsPathItem_opaqueArea(self.h), owned: true)
 
 proc typeX*(self: gen_qgraphicsitem_types.QGraphicsPathItem): cint =
   fcQGraphicsPathItem_typeX(self.h)
@@ -5431,7 +5470,7 @@ type QGraphicsPathItemwheelEventProc* = proc(self: QGraphicsPathItem, event: gen
 type QGraphicsPathIteminputMethodEventProc* = proc(self: QGraphicsPathItem, event: gen_qevent_types.QInputMethodEvent): void {.raises: [], gcsafe.}
 type QGraphicsPathIteminputMethodQueryProc* = proc(self: QGraphicsPathItem, query: cint): gen_qvariant_types.QVariant {.raises: [], gcsafe.}
 type QGraphicsPathItemitemChangeProc* = proc(self: QGraphicsPathItem, change: cint, value: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant {.raises: [], gcsafe.}
-type QGraphicsPathItemVTable* = object
+type QGraphicsPathItemVTable* {.inheritable, pure.} = object
   vtbl: cQGraphicsPathItemVTable
   boundingRect*: QGraphicsPathItemboundingRectProc
   shape*: QGraphicsPathItemshapeProc
@@ -5469,22 +5508,28 @@ type QGraphicsPathItemVTable* = object
   inputMethodQuery*: QGraphicsPathIteminputMethodQueryProc
   itemChange*: QGraphicsPathItemitemChangeProc
 proc QGraphicsPathItemboundingRect*(self: gen_qgraphicsitem_types.QGraphicsPathItem): gen_qrect_types.QRectF =
-  gen_qrect_types.QRectF(h: fcQGraphicsPathItem_virtualbase_boundingRect(self.h))
+  gen_qrect_types.QRectF(h: fcQGraphicsPathItem_virtualbase_boundingRect(self.h), owned: true)
 
 proc fcQGraphicsPathItem_vtable_callback_boundingRect(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QGraphicsPathItemVTable](fcQGraphicsPathItem_vdata(self)[])
   let self = QGraphicsPathItem(h: self)
   var virtualReturn = vtbl[].boundingRect(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QGraphicsPathItemshape*(self: gen_qgraphicsitem_types.QGraphicsPathItem): gen_qpainterpath_types.QPainterPath =
-  gen_qpainterpath_types.QPainterPath(h: fcQGraphicsPathItem_virtualbase_shape(self.h))
+  gen_qpainterpath_types.QPainterPath(h: fcQGraphicsPathItem_virtualbase_shape(self.h), owned: true)
 
 proc fcQGraphicsPathItem_vtable_callback_shape(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QGraphicsPathItemVTable](fcQGraphicsPathItem_vdata(self)[])
   let self = QGraphicsPathItem(h: self)
   var virtualReturn = vtbl[].shape(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QGraphicsPathItemcontains*(self: gen_qgraphicsitem_types.QGraphicsPathItem, point: gen_qpoint_types.QPointF): bool =
   fcQGraphicsPathItem_virtualbase_contains(self.h, point.h)
@@ -5492,7 +5537,7 @@ proc QGraphicsPathItemcontains*(self: gen_qgraphicsitem_types.QGraphicsPathItem,
 proc fcQGraphicsPathItem_vtable_callback_contains(self: pointer, point: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QGraphicsPathItemVTable](fcQGraphicsPathItem_vdata(self)[])
   let self = QGraphicsPathItem(h: self)
-  let slotval1 = gen_qpoint_types.QPointF(h: point)
+  let slotval1 = gen_qpoint_types.QPointF(h: point, owned: false)
   var virtualReturn = vtbl[].contains(self, slotval1)
   virtualReturn
 
@@ -5502,9 +5547,9 @@ proc QGraphicsPathItempaint*(self: gen_qgraphicsitem_types.QGraphicsPathItem, pa
 proc fcQGraphicsPathItem_vtable_callback_paint(self: pointer, painter: pointer, option: pointer, widget: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsPathItemVTable](fcQGraphicsPathItem_vdata(self)[])
   let self = QGraphicsPathItem(h: self)
-  let slotval1 = gen_qpainter_types.QPainter(h: painter)
-  let slotval2 = gen_qstyleoption_types.QStyleOptionGraphicsItem(h: option)
-  let slotval3 = gen_qwidget_types.QWidget(h: widget)
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
+  let slotval2 = gen_qstyleoption_types.QStyleOptionGraphicsItem(h: option, owned: false)
+  let slotval3 = gen_qwidget_types.QWidget(h: widget, owned: false)
   vtbl[].paint(self, slotval1, slotval2, slotval3)
 
 proc QGraphicsPathItemisObscuredBy*(self: gen_qgraphicsitem_types.QGraphicsPathItem, item: gen_qgraphicsitem_types.QGraphicsItem): bool =
@@ -5513,18 +5558,21 @@ proc QGraphicsPathItemisObscuredBy*(self: gen_qgraphicsitem_types.QGraphicsPathI
 proc fcQGraphicsPathItem_vtable_callback_isObscuredBy(self: pointer, item: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QGraphicsPathItemVTable](fcQGraphicsPathItem_vdata(self)[])
   let self = QGraphicsPathItem(h: self)
-  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: item)
+  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: item, owned: false)
   var virtualReturn = vtbl[].isObscuredBy(self, slotval1)
   virtualReturn
 
 proc QGraphicsPathItemopaqueArea*(self: gen_qgraphicsitem_types.QGraphicsPathItem): gen_qpainterpath_types.QPainterPath =
-  gen_qpainterpath_types.QPainterPath(h: fcQGraphicsPathItem_virtualbase_opaqueArea(self.h))
+  gen_qpainterpath_types.QPainterPath(h: fcQGraphicsPathItem_virtualbase_opaqueArea(self.h), owned: true)
 
 proc fcQGraphicsPathItem_vtable_callback_opaqueArea(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QGraphicsPathItemVTable](fcQGraphicsPathItem_vdata(self)[])
   let self = QGraphicsPathItem(h: self)
   var virtualReturn = vtbl[].opaqueArea(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QGraphicsPathItemtypeX*(self: gen_qgraphicsitem_types.QGraphicsPathItem): cint =
   fcQGraphicsPathItem_virtualbase_typeX(self.h)
@@ -5552,18 +5600,21 @@ proc fcQGraphicsPathItem_vtable_callback_setExtension(self: pointer, extension: 
   let vtbl = cast[ptr QGraphicsPathItemVTable](fcQGraphicsPathItem_vdata(self)[])
   let self = QGraphicsPathItem(h: self)
   let slotval1 = cint(extension)
-  let slotval2 = gen_qvariant_types.QVariant(h: variant)
+  let slotval2 = gen_qvariant_types.QVariant(h: variant, owned: false)
   vtbl[].setExtension(self, slotval1, slotval2)
 
 proc QGraphicsPathItemextension*(self: gen_qgraphicsitem_types.QGraphicsPathItem, variant: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQGraphicsPathItem_virtualbase_extension(self.h, variant.h))
+  gen_qvariant_types.QVariant(h: fcQGraphicsPathItem_virtualbase_extension(self.h, variant.h), owned: true)
 
 proc fcQGraphicsPathItem_vtable_callback_extension(self: pointer, variant: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QGraphicsPathItemVTable](fcQGraphicsPathItem_vdata(self)[])
   let self = QGraphicsPathItem(h: self)
-  let slotval1 = gen_qvariant_types.QVariant(h: variant)
+  let slotval1 = gen_qvariant_types.QVariant(h: variant, owned: false)
   var virtualReturn = vtbl[].extension(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QGraphicsPathItemadvance*(self: gen_qgraphicsitem_types.QGraphicsPathItem, phase: cint): void =
   fcQGraphicsPathItem_virtualbase_advance(self.h, phase)
@@ -5580,7 +5631,7 @@ proc QGraphicsPathItemcollidesWithItem*(self: gen_qgraphicsitem_types.QGraphicsP
 proc fcQGraphicsPathItem_vtable_callback_collidesWithItem(self: pointer, other: pointer, mode: cint): bool {.cdecl.} =
   let vtbl = cast[ptr QGraphicsPathItemVTable](fcQGraphicsPathItem_vdata(self)[])
   let self = QGraphicsPathItem(h: self)
-  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: other)
+  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: other, owned: false)
   let slotval2 = cint(mode)
   var virtualReturn = vtbl[].collidesWithItem(self, slotval1, slotval2)
   virtualReturn
@@ -5591,7 +5642,7 @@ proc QGraphicsPathItemcollidesWithPath*(self: gen_qgraphicsitem_types.QGraphicsP
 proc fcQGraphicsPathItem_vtable_callback_collidesWithPath(self: pointer, path: pointer, mode: cint): bool {.cdecl.} =
   let vtbl = cast[ptr QGraphicsPathItemVTable](fcQGraphicsPathItem_vdata(self)[])
   let self = QGraphicsPathItem(h: self)
-  let slotval1 = gen_qpainterpath_types.QPainterPath(h: path)
+  let slotval1 = gen_qpainterpath_types.QPainterPath(h: path, owned: false)
   let slotval2 = cint(mode)
   var virtualReturn = vtbl[].collidesWithPath(self, slotval1, slotval2)
   virtualReturn
@@ -5602,8 +5653,8 @@ proc QGraphicsPathItemsceneEventFilter*(self: gen_qgraphicsitem_types.QGraphicsP
 proc fcQGraphicsPathItem_vtable_callback_sceneEventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QGraphicsPathItemVTable](fcQGraphicsPathItem_vdata(self)[])
   let self = QGraphicsPathItem(h: self)
-  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].sceneEventFilter(self, slotval1, slotval2)
   virtualReturn
 
@@ -5613,7 +5664,7 @@ proc QGraphicsPathItemsceneEvent*(self: gen_qgraphicsitem_types.QGraphicsPathIte
 proc fcQGraphicsPathItem_vtable_callback_sceneEvent(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QGraphicsPathItemVTable](fcQGraphicsPathItem_vdata(self)[])
   let self = QGraphicsPathItem(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].sceneEvent(self, slotval1)
   virtualReturn
 
@@ -5623,7 +5674,7 @@ proc QGraphicsPathItemcontextMenuEvent*(self: gen_qgraphicsitem_types.QGraphicsP
 proc fcQGraphicsPathItem_vtable_callback_contextMenuEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsPathItemVTable](fcQGraphicsPathItem_vdata(self)[])
   let self = QGraphicsPathItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneContextMenuEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneContextMenuEvent(h: event, owned: false)
   vtbl[].contextMenuEvent(self, slotval1)
 
 proc QGraphicsPathItemdragEnterEvent*(self: gen_qgraphicsitem_types.QGraphicsPathItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void =
@@ -5632,7 +5683,7 @@ proc QGraphicsPathItemdragEnterEvent*(self: gen_qgraphicsitem_types.QGraphicsPat
 proc fcQGraphicsPathItem_vtable_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsPathItemVTable](fcQGraphicsPathItem_vdata(self)[])
   let self = QGraphicsPathItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event, owned: false)
   vtbl[].dragEnterEvent(self, slotval1)
 
 proc QGraphicsPathItemdragLeaveEvent*(self: gen_qgraphicsitem_types.QGraphicsPathItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void =
@@ -5641,7 +5692,7 @@ proc QGraphicsPathItemdragLeaveEvent*(self: gen_qgraphicsitem_types.QGraphicsPat
 proc fcQGraphicsPathItem_vtable_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsPathItemVTable](fcQGraphicsPathItem_vdata(self)[])
   let self = QGraphicsPathItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event, owned: false)
   vtbl[].dragLeaveEvent(self, slotval1)
 
 proc QGraphicsPathItemdragMoveEvent*(self: gen_qgraphicsitem_types.QGraphicsPathItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void =
@@ -5650,7 +5701,7 @@ proc QGraphicsPathItemdragMoveEvent*(self: gen_qgraphicsitem_types.QGraphicsPath
 proc fcQGraphicsPathItem_vtable_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsPathItemVTable](fcQGraphicsPathItem_vdata(self)[])
   let self = QGraphicsPathItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event, owned: false)
   vtbl[].dragMoveEvent(self, slotval1)
 
 proc QGraphicsPathItemdropEvent*(self: gen_qgraphicsitem_types.QGraphicsPathItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void =
@@ -5659,7 +5710,7 @@ proc QGraphicsPathItemdropEvent*(self: gen_qgraphicsitem_types.QGraphicsPathItem
 proc fcQGraphicsPathItem_vtable_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsPathItemVTable](fcQGraphicsPathItem_vdata(self)[])
   let self = QGraphicsPathItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event, owned: false)
   vtbl[].dropEvent(self, slotval1)
 
 proc QGraphicsPathItemfocusInEvent*(self: gen_qgraphicsitem_types.QGraphicsPathItem, event: gen_qevent_types.QFocusEvent): void =
@@ -5668,7 +5719,7 @@ proc QGraphicsPathItemfocusInEvent*(self: gen_qgraphicsitem_types.QGraphicsPathI
 proc fcQGraphicsPathItem_vtable_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsPathItemVTable](fcQGraphicsPathItem_vdata(self)[])
   let self = QGraphicsPathItem(h: self)
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusInEvent(self, slotval1)
 
 proc QGraphicsPathItemfocusOutEvent*(self: gen_qgraphicsitem_types.QGraphicsPathItem, event: gen_qevent_types.QFocusEvent): void =
@@ -5677,7 +5728,7 @@ proc QGraphicsPathItemfocusOutEvent*(self: gen_qgraphicsitem_types.QGraphicsPath
 proc fcQGraphicsPathItem_vtable_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsPathItemVTable](fcQGraphicsPathItem_vdata(self)[])
   let self = QGraphicsPathItem(h: self)
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusOutEvent(self, slotval1)
 
 proc QGraphicsPathItemhoverEnterEvent*(self: gen_qgraphicsitem_types.QGraphicsPathItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent): void =
@@ -5686,7 +5737,7 @@ proc QGraphicsPathItemhoverEnterEvent*(self: gen_qgraphicsitem_types.QGraphicsPa
 proc fcQGraphicsPathItem_vtable_callback_hoverEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsPathItemVTable](fcQGraphicsPathItem_vdata(self)[])
   let self = QGraphicsPathItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event, owned: false)
   vtbl[].hoverEnterEvent(self, slotval1)
 
 proc QGraphicsPathItemhoverMoveEvent*(self: gen_qgraphicsitem_types.QGraphicsPathItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent): void =
@@ -5695,7 +5746,7 @@ proc QGraphicsPathItemhoverMoveEvent*(self: gen_qgraphicsitem_types.QGraphicsPat
 proc fcQGraphicsPathItem_vtable_callback_hoverMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsPathItemVTable](fcQGraphicsPathItem_vdata(self)[])
   let self = QGraphicsPathItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event, owned: false)
   vtbl[].hoverMoveEvent(self, slotval1)
 
 proc QGraphicsPathItemhoverLeaveEvent*(self: gen_qgraphicsitem_types.QGraphicsPathItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent): void =
@@ -5704,7 +5755,7 @@ proc QGraphicsPathItemhoverLeaveEvent*(self: gen_qgraphicsitem_types.QGraphicsPa
 proc fcQGraphicsPathItem_vtable_callback_hoverLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsPathItemVTable](fcQGraphicsPathItem_vdata(self)[])
   let self = QGraphicsPathItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event, owned: false)
   vtbl[].hoverLeaveEvent(self, slotval1)
 
 proc QGraphicsPathItemkeyPressEvent*(self: gen_qgraphicsitem_types.QGraphicsPathItem, event: gen_qevent_types.QKeyEvent): void =
@@ -5713,7 +5764,7 @@ proc QGraphicsPathItemkeyPressEvent*(self: gen_qgraphicsitem_types.QGraphicsPath
 proc fcQGraphicsPathItem_vtable_callback_keyPressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsPathItemVTable](fcQGraphicsPathItem_vdata(self)[])
   let self = QGraphicsPathItem(h: self)
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   vtbl[].keyPressEvent(self, slotval1)
 
 proc QGraphicsPathItemkeyReleaseEvent*(self: gen_qgraphicsitem_types.QGraphicsPathItem, event: gen_qevent_types.QKeyEvent): void =
@@ -5722,7 +5773,7 @@ proc QGraphicsPathItemkeyReleaseEvent*(self: gen_qgraphicsitem_types.QGraphicsPa
 proc fcQGraphicsPathItem_vtable_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsPathItemVTable](fcQGraphicsPathItem_vdata(self)[])
   let self = QGraphicsPathItem(h: self)
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   vtbl[].keyReleaseEvent(self, slotval1)
 
 proc QGraphicsPathItemmousePressEvent*(self: gen_qgraphicsitem_types.QGraphicsPathItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void =
@@ -5731,7 +5782,7 @@ proc QGraphicsPathItemmousePressEvent*(self: gen_qgraphicsitem_types.QGraphicsPa
 proc fcQGraphicsPathItem_vtable_callback_mousePressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsPathItemVTable](fcQGraphicsPathItem_vdata(self)[])
   let self = QGraphicsPathItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event, owned: false)
   vtbl[].mousePressEvent(self, slotval1)
 
 proc QGraphicsPathItemmouseMoveEvent*(self: gen_qgraphicsitem_types.QGraphicsPathItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void =
@@ -5740,7 +5791,7 @@ proc QGraphicsPathItemmouseMoveEvent*(self: gen_qgraphicsitem_types.QGraphicsPat
 proc fcQGraphicsPathItem_vtable_callback_mouseMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsPathItemVTable](fcQGraphicsPathItem_vdata(self)[])
   let self = QGraphicsPathItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event, owned: false)
   vtbl[].mouseMoveEvent(self, slotval1)
 
 proc QGraphicsPathItemmouseReleaseEvent*(self: gen_qgraphicsitem_types.QGraphicsPathItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void =
@@ -5749,7 +5800,7 @@ proc QGraphicsPathItemmouseReleaseEvent*(self: gen_qgraphicsitem_types.QGraphics
 proc fcQGraphicsPathItem_vtable_callback_mouseReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsPathItemVTable](fcQGraphicsPathItem_vdata(self)[])
   let self = QGraphicsPathItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event, owned: false)
   vtbl[].mouseReleaseEvent(self, slotval1)
 
 proc QGraphicsPathItemmouseDoubleClickEvent*(self: gen_qgraphicsitem_types.QGraphicsPathItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void =
@@ -5758,7 +5809,7 @@ proc QGraphicsPathItemmouseDoubleClickEvent*(self: gen_qgraphicsitem_types.QGrap
 proc fcQGraphicsPathItem_vtable_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsPathItemVTable](fcQGraphicsPathItem_vdata(self)[])
   let self = QGraphicsPathItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event, owned: false)
   vtbl[].mouseDoubleClickEvent(self, slotval1)
 
 proc QGraphicsPathItemwheelEvent*(self: gen_qgraphicsitem_types.QGraphicsPathItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent): void =
@@ -5767,7 +5818,7 @@ proc QGraphicsPathItemwheelEvent*(self: gen_qgraphicsitem_types.QGraphicsPathIte
 proc fcQGraphicsPathItem_vtable_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsPathItemVTable](fcQGraphicsPathItem_vdata(self)[])
   let self = QGraphicsPathItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent(h: event, owned: false)
   vtbl[].wheelEvent(self, slotval1)
 
 proc QGraphicsPathIteminputMethodEvent*(self: gen_qgraphicsitem_types.QGraphicsPathItem, event: gen_qevent_types.QInputMethodEvent): void =
@@ -5776,29 +5827,35 @@ proc QGraphicsPathIteminputMethodEvent*(self: gen_qgraphicsitem_types.QGraphicsP
 proc fcQGraphicsPathItem_vtable_callback_inputMethodEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsPathItemVTable](fcQGraphicsPathItem_vdata(self)[])
   let self = QGraphicsPathItem(h: self)
-  let slotval1 = gen_qevent_types.QInputMethodEvent(h: event)
+  let slotval1 = gen_qevent_types.QInputMethodEvent(h: event, owned: false)
   vtbl[].inputMethodEvent(self, slotval1)
 
 proc QGraphicsPathIteminputMethodQuery*(self: gen_qgraphicsitem_types.QGraphicsPathItem, query: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQGraphicsPathItem_virtualbase_inputMethodQuery(self.h, cint(query)))
+  gen_qvariant_types.QVariant(h: fcQGraphicsPathItem_virtualbase_inputMethodQuery(self.h, cint(query)), owned: true)
 
 proc fcQGraphicsPathItem_vtable_callback_inputMethodQuery(self: pointer, query: cint): pointer {.cdecl.} =
   let vtbl = cast[ptr QGraphicsPathItemVTable](fcQGraphicsPathItem_vdata(self)[])
   let self = QGraphicsPathItem(h: self)
   let slotval1 = cint(query)
   var virtualReturn = vtbl[].inputMethodQuery(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QGraphicsPathItemitemChange*(self: gen_qgraphicsitem_types.QGraphicsPathItem, change: cint, value: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQGraphicsPathItem_virtualbase_itemChange(self.h, cint(change), value.h))
+  gen_qvariant_types.QVariant(h: fcQGraphicsPathItem_virtualbase_itemChange(self.h, cint(change), value.h), owned: true)
 
 proc fcQGraphicsPathItem_vtable_callback_itemChange(self: pointer, change: cint, value: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QGraphicsPathItemVTable](fcQGraphicsPathItem_vdata(self)[])
   let self = QGraphicsPathItem(h: self)
   let slotval1 = cint(change)
-  let slotval2 = gen_qvariant_types.QVariant(h: value)
+  let slotval2 = gen_qvariant_types.QVariant(h: value, owned: false)
   var virtualReturn = vtbl[].itemChange(self, slotval1, slotval2)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 type VirtualQGraphicsPathItem* {.inheritable.} = ref object of QGraphicsPathItem
   vtbl*: cQGraphicsPathItemVTable
@@ -5820,7 +5877,7 @@ method contains*(self: VirtualQGraphicsPathItem, point: gen_qpoint_types.QPointF
   QGraphicsPathItemcontains(self[], point)
 proc fcQGraphicsPathItem_method_callback_contains(self: pointer, point: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQGraphicsPathItem](fcQGraphicsPathItem_vdata(self)[])
-  let slotval1 = gen_qpoint_types.QPointF(h: point)
+  let slotval1 = gen_qpoint_types.QPointF(h: point, owned: false)
   var virtualReturn = inst.contains(slotval1)
   virtualReturn
 
@@ -5828,16 +5885,16 @@ method paint*(self: VirtualQGraphicsPathItem, painter: gen_qpainter_types.QPaint
   QGraphicsPathItempaint(self[], painter, option, widget)
 proc fcQGraphicsPathItem_method_callback_paint(self: pointer, painter: pointer, option: pointer, widget: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsPathItem](fcQGraphicsPathItem_vdata(self)[])
-  let slotval1 = gen_qpainter_types.QPainter(h: painter)
-  let slotval2 = gen_qstyleoption_types.QStyleOptionGraphicsItem(h: option)
-  let slotval3 = gen_qwidget_types.QWidget(h: widget)
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
+  let slotval2 = gen_qstyleoption_types.QStyleOptionGraphicsItem(h: option, owned: false)
+  let slotval3 = gen_qwidget_types.QWidget(h: widget, owned: false)
   inst.paint(slotval1, slotval2, slotval3)
 
 method isObscuredBy*(self: VirtualQGraphicsPathItem, item: gen_qgraphicsitem_types.QGraphicsItem): bool {.base.} =
   QGraphicsPathItemisObscuredBy(self[], item)
 proc fcQGraphicsPathItem_method_callback_isObscuredBy(self: pointer, item: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQGraphicsPathItem](fcQGraphicsPathItem_vdata(self)[])
-  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: item)
+  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: item, owned: false)
   var virtualReturn = inst.isObscuredBy(slotval1)
   virtualReturn
 
@@ -5868,14 +5925,14 @@ method setExtension*(self: VirtualQGraphicsPathItem, extension: cint, variant: g
 proc fcQGraphicsPathItem_method_callback_setExtension(self: pointer, extension: cint, variant: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsPathItem](fcQGraphicsPathItem_vdata(self)[])
   let slotval1 = cint(extension)
-  let slotval2 = gen_qvariant_types.QVariant(h: variant)
+  let slotval2 = gen_qvariant_types.QVariant(h: variant, owned: false)
   inst.setExtension(slotval1, slotval2)
 
 method extension*(self: VirtualQGraphicsPathItem, variant: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant {.base.} =
   QGraphicsPathItemextension(self[], variant)
 proc fcQGraphicsPathItem_method_callback_extension(self: pointer, variant: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsPathItem](fcQGraphicsPathItem_vdata(self)[])
-  let slotval1 = gen_qvariant_types.QVariant(h: variant)
+  let slotval1 = gen_qvariant_types.QVariant(h: variant, owned: false)
   var virtualReturn = inst.extension(slotval1)
   virtualReturn.h
 
@@ -5890,7 +5947,7 @@ method collidesWithItem*(self: VirtualQGraphicsPathItem, other: gen_qgraphicsite
   QGraphicsPathItemcollidesWithItem(self[], other, mode)
 proc fcQGraphicsPathItem_method_callback_collidesWithItem(self: pointer, other: pointer, mode: cint): bool {.cdecl.} =
   let inst = cast[VirtualQGraphicsPathItem](fcQGraphicsPathItem_vdata(self)[])
-  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: other)
+  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: other, owned: false)
   let slotval2 = cint(mode)
   var virtualReturn = inst.collidesWithItem(slotval1, slotval2)
   virtualReturn
@@ -5899,7 +5956,7 @@ method collidesWithPath*(self: VirtualQGraphicsPathItem, path: gen_qpainterpath_
   QGraphicsPathItemcollidesWithPath(self[], path, mode)
 proc fcQGraphicsPathItem_method_callback_collidesWithPath(self: pointer, path: pointer, mode: cint): bool {.cdecl.} =
   let inst = cast[VirtualQGraphicsPathItem](fcQGraphicsPathItem_vdata(self)[])
-  let slotval1 = gen_qpainterpath_types.QPainterPath(h: path)
+  let slotval1 = gen_qpainterpath_types.QPainterPath(h: path, owned: false)
   let slotval2 = cint(mode)
   var virtualReturn = inst.collidesWithPath(slotval1, slotval2)
   virtualReturn
@@ -5908,8 +5965,8 @@ method sceneEventFilter*(self: VirtualQGraphicsPathItem, watched: gen_qgraphicsi
   QGraphicsPathItemsceneEventFilter(self[], watched, event)
 proc fcQGraphicsPathItem_method_callback_sceneEventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQGraphicsPathItem](fcQGraphicsPathItem_vdata(self)[])
-  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.sceneEventFilter(slotval1, slotval2)
   virtualReturn
 
@@ -5917,7 +5974,7 @@ method sceneEvent*(self: VirtualQGraphicsPathItem, event: gen_qcoreevent_types.Q
   QGraphicsPathItemsceneEvent(self[], event)
 proc fcQGraphicsPathItem_method_callback_sceneEvent(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQGraphicsPathItem](fcQGraphicsPathItem_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.sceneEvent(slotval1)
   virtualReturn
 
@@ -5925,126 +5982,126 @@ method contextMenuEvent*(self: VirtualQGraphicsPathItem, event: gen_qgraphicssce
   QGraphicsPathItemcontextMenuEvent(self[], event)
 proc fcQGraphicsPathItem_method_callback_contextMenuEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsPathItem](fcQGraphicsPathItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneContextMenuEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneContextMenuEvent(h: event, owned: false)
   inst.contextMenuEvent(slotval1)
 
 method dragEnterEvent*(self: VirtualQGraphicsPathItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void {.base.} =
   QGraphicsPathItemdragEnterEvent(self[], event)
 proc fcQGraphicsPathItem_method_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsPathItem](fcQGraphicsPathItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event, owned: false)
   inst.dragEnterEvent(slotval1)
 
 method dragLeaveEvent*(self: VirtualQGraphicsPathItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void {.base.} =
   QGraphicsPathItemdragLeaveEvent(self[], event)
 proc fcQGraphicsPathItem_method_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsPathItem](fcQGraphicsPathItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event, owned: false)
   inst.dragLeaveEvent(slotval1)
 
 method dragMoveEvent*(self: VirtualQGraphicsPathItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void {.base.} =
   QGraphicsPathItemdragMoveEvent(self[], event)
 proc fcQGraphicsPathItem_method_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsPathItem](fcQGraphicsPathItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event, owned: false)
   inst.dragMoveEvent(slotval1)
 
 method dropEvent*(self: VirtualQGraphicsPathItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void {.base.} =
   QGraphicsPathItemdropEvent(self[], event)
 proc fcQGraphicsPathItem_method_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsPathItem](fcQGraphicsPathItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event, owned: false)
   inst.dropEvent(slotval1)
 
 method focusInEvent*(self: VirtualQGraphicsPathItem, event: gen_qevent_types.QFocusEvent): void {.base.} =
   QGraphicsPathItemfocusInEvent(self[], event)
 proc fcQGraphicsPathItem_method_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsPathItem](fcQGraphicsPathItem_vdata(self)[])
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   inst.focusInEvent(slotval1)
 
 method focusOutEvent*(self: VirtualQGraphicsPathItem, event: gen_qevent_types.QFocusEvent): void {.base.} =
   QGraphicsPathItemfocusOutEvent(self[], event)
 proc fcQGraphicsPathItem_method_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsPathItem](fcQGraphicsPathItem_vdata(self)[])
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   inst.focusOutEvent(slotval1)
 
 method hoverEnterEvent*(self: VirtualQGraphicsPathItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent): void {.base.} =
   QGraphicsPathItemhoverEnterEvent(self[], event)
 proc fcQGraphicsPathItem_method_callback_hoverEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsPathItem](fcQGraphicsPathItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event, owned: false)
   inst.hoverEnterEvent(slotval1)
 
 method hoverMoveEvent*(self: VirtualQGraphicsPathItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent): void {.base.} =
   QGraphicsPathItemhoverMoveEvent(self[], event)
 proc fcQGraphicsPathItem_method_callback_hoverMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsPathItem](fcQGraphicsPathItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event, owned: false)
   inst.hoverMoveEvent(slotval1)
 
 method hoverLeaveEvent*(self: VirtualQGraphicsPathItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent): void {.base.} =
   QGraphicsPathItemhoverLeaveEvent(self[], event)
 proc fcQGraphicsPathItem_method_callback_hoverLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsPathItem](fcQGraphicsPathItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event, owned: false)
   inst.hoverLeaveEvent(slotval1)
 
 method keyPressEvent*(self: VirtualQGraphicsPathItem, event: gen_qevent_types.QKeyEvent): void {.base.} =
   QGraphicsPathItemkeyPressEvent(self[], event)
 proc fcQGraphicsPathItem_method_callback_keyPressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsPathItem](fcQGraphicsPathItem_vdata(self)[])
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   inst.keyPressEvent(slotval1)
 
 method keyReleaseEvent*(self: VirtualQGraphicsPathItem, event: gen_qevent_types.QKeyEvent): void {.base.} =
   QGraphicsPathItemkeyReleaseEvent(self[], event)
 proc fcQGraphicsPathItem_method_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsPathItem](fcQGraphicsPathItem_vdata(self)[])
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   inst.keyReleaseEvent(slotval1)
 
 method mousePressEvent*(self: VirtualQGraphicsPathItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void {.base.} =
   QGraphicsPathItemmousePressEvent(self[], event)
 proc fcQGraphicsPathItem_method_callback_mousePressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsPathItem](fcQGraphicsPathItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event, owned: false)
   inst.mousePressEvent(slotval1)
 
 method mouseMoveEvent*(self: VirtualQGraphicsPathItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void {.base.} =
   QGraphicsPathItemmouseMoveEvent(self[], event)
 proc fcQGraphicsPathItem_method_callback_mouseMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsPathItem](fcQGraphicsPathItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event, owned: false)
   inst.mouseMoveEvent(slotval1)
 
 method mouseReleaseEvent*(self: VirtualQGraphicsPathItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void {.base.} =
   QGraphicsPathItemmouseReleaseEvent(self[], event)
 proc fcQGraphicsPathItem_method_callback_mouseReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsPathItem](fcQGraphicsPathItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event, owned: false)
   inst.mouseReleaseEvent(slotval1)
 
 method mouseDoubleClickEvent*(self: VirtualQGraphicsPathItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void {.base.} =
   QGraphicsPathItemmouseDoubleClickEvent(self[], event)
 proc fcQGraphicsPathItem_method_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsPathItem](fcQGraphicsPathItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event, owned: false)
   inst.mouseDoubleClickEvent(slotval1)
 
 method wheelEvent*(self: VirtualQGraphicsPathItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent): void {.base.} =
   QGraphicsPathItemwheelEvent(self[], event)
 proc fcQGraphicsPathItem_method_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsPathItem](fcQGraphicsPathItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent(h: event, owned: false)
   inst.wheelEvent(slotval1)
 
 method inputMethodEvent*(self: VirtualQGraphicsPathItem, event: gen_qevent_types.QInputMethodEvent): void {.base.} =
   QGraphicsPathIteminputMethodEvent(self[], event)
 proc fcQGraphicsPathItem_method_callback_inputMethodEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsPathItem](fcQGraphicsPathItem_vdata(self)[])
-  let slotval1 = gen_qevent_types.QInputMethodEvent(h: event)
+  let slotval1 = gen_qevent_types.QInputMethodEvent(h: event, owned: false)
   inst.inputMethodEvent(slotval1)
 
 method inputMethodQuery*(self: VirtualQGraphicsPathItem, query: cint): gen_qvariant_types.QVariant {.base.} =
@@ -6060,7 +6117,7 @@ method itemChange*(self: VirtualQGraphicsPathItem, change: cint, value: gen_qvar
 proc fcQGraphicsPathItem_method_callback_itemChange(self: pointer, change: cint, value: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsPathItem](fcQGraphicsPathItem_vdata(self)[])
   let slotval1 = cint(change)
-  let slotval2 = gen_qvariant_types.QVariant(h: value)
+  let slotval2 = gen_qvariant_types.QVariant(h: value, owned: false)
   var virtualReturn = inst.itemChange(slotval1, slotval2)
   virtualReturn.h
 
@@ -6153,7 +6210,7 @@ proc create*(T: type gen_qgraphicsitem_types.QGraphicsPathItem,
     vtbl[].vtbl.inputMethodQuery = fcQGraphicsPathItem_vtable_callback_inputMethodQuery
   if not isNil(vtbl[].itemChange):
     vtbl[].vtbl.itemChange = fcQGraphicsPathItem_vtable_callback_itemChange
-  let tmp = gen_qgraphicsitem_types.QGraphicsPathItem(h: fcQGraphicsPathItem_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))))
+  let tmp = gen_qgraphicsitem_types.QGraphicsPathItem(h: fcQGraphicsPathItem_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))), owned: true)
   fcQGraphicsPathItem_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qgraphicsitem_types.QGraphicsPathItem,
@@ -6234,7 +6291,7 @@ proc create*(T: type gen_qgraphicsitem_types.QGraphicsPathItem,
     vtbl[].vtbl.inputMethodQuery = fcQGraphicsPathItem_vtable_callback_inputMethodQuery
   if not isNil(vtbl[].itemChange):
     vtbl[].vtbl.itemChange = fcQGraphicsPathItem_vtable_callback_itemChange
-  let tmp = gen_qgraphicsitem_types.QGraphicsPathItem(h: fcQGraphicsPathItem_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), path.h))
+  let tmp = gen_qgraphicsitem_types.QGraphicsPathItem(h: fcQGraphicsPathItem_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), path.h), owned: true)
   fcQGraphicsPathItem_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qgraphicsitem_types.QGraphicsPathItem,
@@ -6315,7 +6372,7 @@ proc create*(T: type gen_qgraphicsitem_types.QGraphicsPathItem,
     vtbl[].vtbl.inputMethodQuery = fcQGraphicsPathItem_vtable_callback_inputMethodQuery
   if not isNil(vtbl[].itemChange):
     vtbl[].vtbl.itemChange = fcQGraphicsPathItem_vtable_callback_itemChange
-  let tmp = gen_qgraphicsitem_types.QGraphicsPathItem(h: fcQGraphicsPathItem_new3(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h))
+  let tmp = gen_qgraphicsitem_types.QGraphicsPathItem(h: fcQGraphicsPathItem_new3(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h), owned: true)
   fcQGraphicsPathItem_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qgraphicsitem_types.QGraphicsPathItem,
@@ -6396,13 +6453,14 @@ proc create*(T: type gen_qgraphicsitem_types.QGraphicsPathItem,
     vtbl[].vtbl.inputMethodQuery = fcQGraphicsPathItem_vtable_callback_inputMethodQuery
   if not isNil(vtbl[].itemChange):
     vtbl[].vtbl.itemChange = fcQGraphicsPathItem_vtable_callback_itemChange
-  let tmp = gen_qgraphicsitem_types.QGraphicsPathItem(h: fcQGraphicsPathItem_new4(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), path.h, parent.h))
+  let tmp = gen_qgraphicsitem_types.QGraphicsPathItem(h: fcQGraphicsPathItem_new4(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), path.h, parent.h), owned: true)
   fcQGraphicsPathItem_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQGraphicsPathItem_mvtbl = cQGraphicsPathItemVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQGraphicsPathItem()[])](self.fcQGraphicsPathItem_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   boundingRect: fcQGraphicsPathItem_method_callback_boundingRect,
   shape: fcQGraphicsPathItem_method_callback_shape,
@@ -6467,10 +6525,8 @@ proc create*(T: type gen_qgraphicsitem_types.QGraphicsPathItem,
   inst[].h = fcQGraphicsPathItem_new4(addr(cQGraphicsPathItem_mvtbl), csize_t(sizeof(pointer)), path.h, parent.h)
   fcQGraphicsPathItem_vdata(inst[].h)[] = addr inst[]
 
-proc delete*(self: gen_qgraphicsitem_types.QGraphicsPathItem) =
-  fcQGraphicsPathItem_delete(self.h)
 proc rect*(self: gen_qgraphicsitem_types.QGraphicsRectItem): gen_qrect_types.QRectF =
-  gen_qrect_types.QRectF(h: fcQGraphicsRectItem_rect(self.h))
+  gen_qrect_types.QRectF(h: fcQGraphicsRectItem_rect(self.h), owned: true)
 
 proc setRect*(self: gen_qgraphicsitem_types.QGraphicsRectItem, rect: gen_qrect_types.QRectF): void =
   fcQGraphicsRectItem_setRect(self.h, rect.h)
@@ -6479,10 +6535,10 @@ proc setRect*(self: gen_qgraphicsitem_types.QGraphicsRectItem, x: float64, y: fl
   fcQGraphicsRectItem_setRect2(self.h, x, y, w, h)
 
 proc boundingRect*(self: gen_qgraphicsitem_types.QGraphicsRectItem): gen_qrect_types.QRectF =
-  gen_qrect_types.QRectF(h: fcQGraphicsRectItem_boundingRect(self.h))
+  gen_qrect_types.QRectF(h: fcQGraphicsRectItem_boundingRect(self.h), owned: true)
 
 proc shape*(self: gen_qgraphicsitem_types.QGraphicsRectItem): gen_qpainterpath_types.QPainterPath =
-  gen_qpainterpath_types.QPainterPath(h: fcQGraphicsRectItem_shape(self.h))
+  gen_qpainterpath_types.QPainterPath(h: fcQGraphicsRectItem_shape(self.h), owned: true)
 
 proc contains*(self: gen_qgraphicsitem_types.QGraphicsRectItem, point: gen_qpoint_types.QPointF): bool =
   fcQGraphicsRectItem_contains(self.h, point.h)
@@ -6494,7 +6550,7 @@ proc isObscuredBy*(self: gen_qgraphicsitem_types.QGraphicsRectItem, item: gen_qg
   fcQGraphicsRectItem_isObscuredBy(self.h, item.h)
 
 proc opaqueArea*(self: gen_qgraphicsitem_types.QGraphicsRectItem): gen_qpainterpath_types.QPainterPath =
-  gen_qpainterpath_types.QPainterPath(h: fcQGraphicsRectItem_opaqueArea(self.h))
+  gen_qpainterpath_types.QPainterPath(h: fcQGraphicsRectItem_opaqueArea(self.h), owned: true)
 
 proc typeX*(self: gen_qgraphicsitem_types.QGraphicsRectItem): cint =
   fcQGraphicsRectItem_typeX(self.h)
@@ -6534,7 +6590,7 @@ type QGraphicsRectItemwheelEventProc* = proc(self: QGraphicsRectItem, event: gen
 type QGraphicsRectIteminputMethodEventProc* = proc(self: QGraphicsRectItem, event: gen_qevent_types.QInputMethodEvent): void {.raises: [], gcsafe.}
 type QGraphicsRectIteminputMethodQueryProc* = proc(self: QGraphicsRectItem, query: cint): gen_qvariant_types.QVariant {.raises: [], gcsafe.}
 type QGraphicsRectItemitemChangeProc* = proc(self: QGraphicsRectItem, change: cint, value: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant {.raises: [], gcsafe.}
-type QGraphicsRectItemVTable* = object
+type QGraphicsRectItemVTable* {.inheritable, pure.} = object
   vtbl: cQGraphicsRectItemVTable
   boundingRect*: QGraphicsRectItemboundingRectProc
   shape*: QGraphicsRectItemshapeProc
@@ -6572,22 +6628,28 @@ type QGraphicsRectItemVTable* = object
   inputMethodQuery*: QGraphicsRectIteminputMethodQueryProc
   itemChange*: QGraphicsRectItemitemChangeProc
 proc QGraphicsRectItemboundingRect*(self: gen_qgraphicsitem_types.QGraphicsRectItem): gen_qrect_types.QRectF =
-  gen_qrect_types.QRectF(h: fcQGraphicsRectItem_virtualbase_boundingRect(self.h))
+  gen_qrect_types.QRectF(h: fcQGraphicsRectItem_virtualbase_boundingRect(self.h), owned: true)
 
 proc fcQGraphicsRectItem_vtable_callback_boundingRect(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QGraphicsRectItemVTable](fcQGraphicsRectItem_vdata(self)[])
   let self = QGraphicsRectItem(h: self)
   var virtualReturn = vtbl[].boundingRect(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QGraphicsRectItemshape*(self: gen_qgraphicsitem_types.QGraphicsRectItem): gen_qpainterpath_types.QPainterPath =
-  gen_qpainterpath_types.QPainterPath(h: fcQGraphicsRectItem_virtualbase_shape(self.h))
+  gen_qpainterpath_types.QPainterPath(h: fcQGraphicsRectItem_virtualbase_shape(self.h), owned: true)
 
 proc fcQGraphicsRectItem_vtable_callback_shape(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QGraphicsRectItemVTable](fcQGraphicsRectItem_vdata(self)[])
   let self = QGraphicsRectItem(h: self)
   var virtualReturn = vtbl[].shape(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QGraphicsRectItemcontains*(self: gen_qgraphicsitem_types.QGraphicsRectItem, point: gen_qpoint_types.QPointF): bool =
   fcQGraphicsRectItem_virtualbase_contains(self.h, point.h)
@@ -6595,7 +6657,7 @@ proc QGraphicsRectItemcontains*(self: gen_qgraphicsitem_types.QGraphicsRectItem,
 proc fcQGraphicsRectItem_vtable_callback_contains(self: pointer, point: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QGraphicsRectItemVTable](fcQGraphicsRectItem_vdata(self)[])
   let self = QGraphicsRectItem(h: self)
-  let slotval1 = gen_qpoint_types.QPointF(h: point)
+  let slotval1 = gen_qpoint_types.QPointF(h: point, owned: false)
   var virtualReturn = vtbl[].contains(self, slotval1)
   virtualReturn
 
@@ -6605,9 +6667,9 @@ proc QGraphicsRectItempaint*(self: gen_qgraphicsitem_types.QGraphicsRectItem, pa
 proc fcQGraphicsRectItem_vtable_callback_paint(self: pointer, painter: pointer, option: pointer, widget: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsRectItemVTable](fcQGraphicsRectItem_vdata(self)[])
   let self = QGraphicsRectItem(h: self)
-  let slotval1 = gen_qpainter_types.QPainter(h: painter)
-  let slotval2 = gen_qstyleoption_types.QStyleOptionGraphicsItem(h: option)
-  let slotval3 = gen_qwidget_types.QWidget(h: widget)
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
+  let slotval2 = gen_qstyleoption_types.QStyleOptionGraphicsItem(h: option, owned: false)
+  let slotval3 = gen_qwidget_types.QWidget(h: widget, owned: false)
   vtbl[].paint(self, slotval1, slotval2, slotval3)
 
 proc QGraphicsRectItemisObscuredBy*(self: gen_qgraphicsitem_types.QGraphicsRectItem, item: gen_qgraphicsitem_types.QGraphicsItem): bool =
@@ -6616,18 +6678,21 @@ proc QGraphicsRectItemisObscuredBy*(self: gen_qgraphicsitem_types.QGraphicsRectI
 proc fcQGraphicsRectItem_vtable_callback_isObscuredBy(self: pointer, item: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QGraphicsRectItemVTable](fcQGraphicsRectItem_vdata(self)[])
   let self = QGraphicsRectItem(h: self)
-  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: item)
+  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: item, owned: false)
   var virtualReturn = vtbl[].isObscuredBy(self, slotval1)
   virtualReturn
 
 proc QGraphicsRectItemopaqueArea*(self: gen_qgraphicsitem_types.QGraphicsRectItem): gen_qpainterpath_types.QPainterPath =
-  gen_qpainterpath_types.QPainterPath(h: fcQGraphicsRectItem_virtualbase_opaqueArea(self.h))
+  gen_qpainterpath_types.QPainterPath(h: fcQGraphicsRectItem_virtualbase_opaqueArea(self.h), owned: true)
 
 proc fcQGraphicsRectItem_vtable_callback_opaqueArea(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QGraphicsRectItemVTable](fcQGraphicsRectItem_vdata(self)[])
   let self = QGraphicsRectItem(h: self)
   var virtualReturn = vtbl[].opaqueArea(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QGraphicsRectItemtypeX*(self: gen_qgraphicsitem_types.QGraphicsRectItem): cint =
   fcQGraphicsRectItem_virtualbase_typeX(self.h)
@@ -6655,18 +6720,21 @@ proc fcQGraphicsRectItem_vtable_callback_setExtension(self: pointer, extension: 
   let vtbl = cast[ptr QGraphicsRectItemVTable](fcQGraphicsRectItem_vdata(self)[])
   let self = QGraphicsRectItem(h: self)
   let slotval1 = cint(extension)
-  let slotval2 = gen_qvariant_types.QVariant(h: variant)
+  let slotval2 = gen_qvariant_types.QVariant(h: variant, owned: false)
   vtbl[].setExtension(self, slotval1, slotval2)
 
 proc QGraphicsRectItemextension*(self: gen_qgraphicsitem_types.QGraphicsRectItem, variant: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQGraphicsRectItem_virtualbase_extension(self.h, variant.h))
+  gen_qvariant_types.QVariant(h: fcQGraphicsRectItem_virtualbase_extension(self.h, variant.h), owned: true)
 
 proc fcQGraphicsRectItem_vtable_callback_extension(self: pointer, variant: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QGraphicsRectItemVTable](fcQGraphicsRectItem_vdata(self)[])
   let self = QGraphicsRectItem(h: self)
-  let slotval1 = gen_qvariant_types.QVariant(h: variant)
+  let slotval1 = gen_qvariant_types.QVariant(h: variant, owned: false)
   var virtualReturn = vtbl[].extension(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QGraphicsRectItemadvance*(self: gen_qgraphicsitem_types.QGraphicsRectItem, phase: cint): void =
   fcQGraphicsRectItem_virtualbase_advance(self.h, phase)
@@ -6683,7 +6751,7 @@ proc QGraphicsRectItemcollidesWithItem*(self: gen_qgraphicsitem_types.QGraphicsR
 proc fcQGraphicsRectItem_vtable_callback_collidesWithItem(self: pointer, other: pointer, mode: cint): bool {.cdecl.} =
   let vtbl = cast[ptr QGraphicsRectItemVTable](fcQGraphicsRectItem_vdata(self)[])
   let self = QGraphicsRectItem(h: self)
-  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: other)
+  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: other, owned: false)
   let slotval2 = cint(mode)
   var virtualReturn = vtbl[].collidesWithItem(self, slotval1, slotval2)
   virtualReturn
@@ -6694,7 +6762,7 @@ proc QGraphicsRectItemcollidesWithPath*(self: gen_qgraphicsitem_types.QGraphicsR
 proc fcQGraphicsRectItem_vtable_callback_collidesWithPath(self: pointer, path: pointer, mode: cint): bool {.cdecl.} =
   let vtbl = cast[ptr QGraphicsRectItemVTable](fcQGraphicsRectItem_vdata(self)[])
   let self = QGraphicsRectItem(h: self)
-  let slotval1 = gen_qpainterpath_types.QPainterPath(h: path)
+  let slotval1 = gen_qpainterpath_types.QPainterPath(h: path, owned: false)
   let slotval2 = cint(mode)
   var virtualReturn = vtbl[].collidesWithPath(self, slotval1, slotval2)
   virtualReturn
@@ -6705,8 +6773,8 @@ proc QGraphicsRectItemsceneEventFilter*(self: gen_qgraphicsitem_types.QGraphicsR
 proc fcQGraphicsRectItem_vtable_callback_sceneEventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QGraphicsRectItemVTable](fcQGraphicsRectItem_vdata(self)[])
   let self = QGraphicsRectItem(h: self)
-  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].sceneEventFilter(self, slotval1, slotval2)
   virtualReturn
 
@@ -6716,7 +6784,7 @@ proc QGraphicsRectItemsceneEvent*(self: gen_qgraphicsitem_types.QGraphicsRectIte
 proc fcQGraphicsRectItem_vtable_callback_sceneEvent(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QGraphicsRectItemVTable](fcQGraphicsRectItem_vdata(self)[])
   let self = QGraphicsRectItem(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].sceneEvent(self, slotval1)
   virtualReturn
 
@@ -6726,7 +6794,7 @@ proc QGraphicsRectItemcontextMenuEvent*(self: gen_qgraphicsitem_types.QGraphicsR
 proc fcQGraphicsRectItem_vtable_callback_contextMenuEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsRectItemVTable](fcQGraphicsRectItem_vdata(self)[])
   let self = QGraphicsRectItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneContextMenuEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneContextMenuEvent(h: event, owned: false)
   vtbl[].contextMenuEvent(self, slotval1)
 
 proc QGraphicsRectItemdragEnterEvent*(self: gen_qgraphicsitem_types.QGraphicsRectItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void =
@@ -6735,7 +6803,7 @@ proc QGraphicsRectItemdragEnterEvent*(self: gen_qgraphicsitem_types.QGraphicsRec
 proc fcQGraphicsRectItem_vtable_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsRectItemVTable](fcQGraphicsRectItem_vdata(self)[])
   let self = QGraphicsRectItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event, owned: false)
   vtbl[].dragEnterEvent(self, slotval1)
 
 proc QGraphicsRectItemdragLeaveEvent*(self: gen_qgraphicsitem_types.QGraphicsRectItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void =
@@ -6744,7 +6812,7 @@ proc QGraphicsRectItemdragLeaveEvent*(self: gen_qgraphicsitem_types.QGraphicsRec
 proc fcQGraphicsRectItem_vtable_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsRectItemVTable](fcQGraphicsRectItem_vdata(self)[])
   let self = QGraphicsRectItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event, owned: false)
   vtbl[].dragLeaveEvent(self, slotval1)
 
 proc QGraphicsRectItemdragMoveEvent*(self: gen_qgraphicsitem_types.QGraphicsRectItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void =
@@ -6753,7 +6821,7 @@ proc QGraphicsRectItemdragMoveEvent*(self: gen_qgraphicsitem_types.QGraphicsRect
 proc fcQGraphicsRectItem_vtable_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsRectItemVTable](fcQGraphicsRectItem_vdata(self)[])
   let self = QGraphicsRectItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event, owned: false)
   vtbl[].dragMoveEvent(self, slotval1)
 
 proc QGraphicsRectItemdropEvent*(self: gen_qgraphicsitem_types.QGraphicsRectItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void =
@@ -6762,7 +6830,7 @@ proc QGraphicsRectItemdropEvent*(self: gen_qgraphicsitem_types.QGraphicsRectItem
 proc fcQGraphicsRectItem_vtable_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsRectItemVTable](fcQGraphicsRectItem_vdata(self)[])
   let self = QGraphicsRectItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event, owned: false)
   vtbl[].dropEvent(self, slotval1)
 
 proc QGraphicsRectItemfocusInEvent*(self: gen_qgraphicsitem_types.QGraphicsRectItem, event: gen_qevent_types.QFocusEvent): void =
@@ -6771,7 +6839,7 @@ proc QGraphicsRectItemfocusInEvent*(self: gen_qgraphicsitem_types.QGraphicsRectI
 proc fcQGraphicsRectItem_vtable_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsRectItemVTable](fcQGraphicsRectItem_vdata(self)[])
   let self = QGraphicsRectItem(h: self)
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusInEvent(self, slotval1)
 
 proc QGraphicsRectItemfocusOutEvent*(self: gen_qgraphicsitem_types.QGraphicsRectItem, event: gen_qevent_types.QFocusEvent): void =
@@ -6780,7 +6848,7 @@ proc QGraphicsRectItemfocusOutEvent*(self: gen_qgraphicsitem_types.QGraphicsRect
 proc fcQGraphicsRectItem_vtable_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsRectItemVTable](fcQGraphicsRectItem_vdata(self)[])
   let self = QGraphicsRectItem(h: self)
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusOutEvent(self, slotval1)
 
 proc QGraphicsRectItemhoverEnterEvent*(self: gen_qgraphicsitem_types.QGraphicsRectItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent): void =
@@ -6789,7 +6857,7 @@ proc QGraphicsRectItemhoverEnterEvent*(self: gen_qgraphicsitem_types.QGraphicsRe
 proc fcQGraphicsRectItem_vtable_callback_hoverEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsRectItemVTable](fcQGraphicsRectItem_vdata(self)[])
   let self = QGraphicsRectItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event, owned: false)
   vtbl[].hoverEnterEvent(self, slotval1)
 
 proc QGraphicsRectItemhoverMoveEvent*(self: gen_qgraphicsitem_types.QGraphicsRectItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent): void =
@@ -6798,7 +6866,7 @@ proc QGraphicsRectItemhoverMoveEvent*(self: gen_qgraphicsitem_types.QGraphicsRec
 proc fcQGraphicsRectItem_vtable_callback_hoverMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsRectItemVTable](fcQGraphicsRectItem_vdata(self)[])
   let self = QGraphicsRectItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event, owned: false)
   vtbl[].hoverMoveEvent(self, slotval1)
 
 proc QGraphicsRectItemhoverLeaveEvent*(self: gen_qgraphicsitem_types.QGraphicsRectItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent): void =
@@ -6807,7 +6875,7 @@ proc QGraphicsRectItemhoverLeaveEvent*(self: gen_qgraphicsitem_types.QGraphicsRe
 proc fcQGraphicsRectItem_vtable_callback_hoverLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsRectItemVTable](fcQGraphicsRectItem_vdata(self)[])
   let self = QGraphicsRectItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event, owned: false)
   vtbl[].hoverLeaveEvent(self, slotval1)
 
 proc QGraphicsRectItemkeyPressEvent*(self: gen_qgraphicsitem_types.QGraphicsRectItem, event: gen_qevent_types.QKeyEvent): void =
@@ -6816,7 +6884,7 @@ proc QGraphicsRectItemkeyPressEvent*(self: gen_qgraphicsitem_types.QGraphicsRect
 proc fcQGraphicsRectItem_vtable_callback_keyPressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsRectItemVTable](fcQGraphicsRectItem_vdata(self)[])
   let self = QGraphicsRectItem(h: self)
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   vtbl[].keyPressEvent(self, slotval1)
 
 proc QGraphicsRectItemkeyReleaseEvent*(self: gen_qgraphicsitem_types.QGraphicsRectItem, event: gen_qevent_types.QKeyEvent): void =
@@ -6825,7 +6893,7 @@ proc QGraphicsRectItemkeyReleaseEvent*(self: gen_qgraphicsitem_types.QGraphicsRe
 proc fcQGraphicsRectItem_vtable_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsRectItemVTable](fcQGraphicsRectItem_vdata(self)[])
   let self = QGraphicsRectItem(h: self)
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   vtbl[].keyReleaseEvent(self, slotval1)
 
 proc QGraphicsRectItemmousePressEvent*(self: gen_qgraphicsitem_types.QGraphicsRectItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void =
@@ -6834,7 +6902,7 @@ proc QGraphicsRectItemmousePressEvent*(self: gen_qgraphicsitem_types.QGraphicsRe
 proc fcQGraphicsRectItem_vtable_callback_mousePressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsRectItemVTable](fcQGraphicsRectItem_vdata(self)[])
   let self = QGraphicsRectItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event, owned: false)
   vtbl[].mousePressEvent(self, slotval1)
 
 proc QGraphicsRectItemmouseMoveEvent*(self: gen_qgraphicsitem_types.QGraphicsRectItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void =
@@ -6843,7 +6911,7 @@ proc QGraphicsRectItemmouseMoveEvent*(self: gen_qgraphicsitem_types.QGraphicsRec
 proc fcQGraphicsRectItem_vtable_callback_mouseMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsRectItemVTable](fcQGraphicsRectItem_vdata(self)[])
   let self = QGraphicsRectItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event, owned: false)
   vtbl[].mouseMoveEvent(self, slotval1)
 
 proc QGraphicsRectItemmouseReleaseEvent*(self: gen_qgraphicsitem_types.QGraphicsRectItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void =
@@ -6852,7 +6920,7 @@ proc QGraphicsRectItemmouseReleaseEvent*(self: gen_qgraphicsitem_types.QGraphics
 proc fcQGraphicsRectItem_vtable_callback_mouseReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsRectItemVTable](fcQGraphicsRectItem_vdata(self)[])
   let self = QGraphicsRectItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event, owned: false)
   vtbl[].mouseReleaseEvent(self, slotval1)
 
 proc QGraphicsRectItemmouseDoubleClickEvent*(self: gen_qgraphicsitem_types.QGraphicsRectItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void =
@@ -6861,7 +6929,7 @@ proc QGraphicsRectItemmouseDoubleClickEvent*(self: gen_qgraphicsitem_types.QGrap
 proc fcQGraphicsRectItem_vtable_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsRectItemVTable](fcQGraphicsRectItem_vdata(self)[])
   let self = QGraphicsRectItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event, owned: false)
   vtbl[].mouseDoubleClickEvent(self, slotval1)
 
 proc QGraphicsRectItemwheelEvent*(self: gen_qgraphicsitem_types.QGraphicsRectItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent): void =
@@ -6870,7 +6938,7 @@ proc QGraphicsRectItemwheelEvent*(self: gen_qgraphicsitem_types.QGraphicsRectIte
 proc fcQGraphicsRectItem_vtable_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsRectItemVTable](fcQGraphicsRectItem_vdata(self)[])
   let self = QGraphicsRectItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent(h: event, owned: false)
   vtbl[].wheelEvent(self, slotval1)
 
 proc QGraphicsRectIteminputMethodEvent*(self: gen_qgraphicsitem_types.QGraphicsRectItem, event: gen_qevent_types.QInputMethodEvent): void =
@@ -6879,29 +6947,35 @@ proc QGraphicsRectIteminputMethodEvent*(self: gen_qgraphicsitem_types.QGraphicsR
 proc fcQGraphicsRectItem_vtable_callback_inputMethodEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsRectItemVTable](fcQGraphicsRectItem_vdata(self)[])
   let self = QGraphicsRectItem(h: self)
-  let slotval1 = gen_qevent_types.QInputMethodEvent(h: event)
+  let slotval1 = gen_qevent_types.QInputMethodEvent(h: event, owned: false)
   vtbl[].inputMethodEvent(self, slotval1)
 
 proc QGraphicsRectIteminputMethodQuery*(self: gen_qgraphicsitem_types.QGraphicsRectItem, query: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQGraphicsRectItem_virtualbase_inputMethodQuery(self.h, cint(query)))
+  gen_qvariant_types.QVariant(h: fcQGraphicsRectItem_virtualbase_inputMethodQuery(self.h, cint(query)), owned: true)
 
 proc fcQGraphicsRectItem_vtable_callback_inputMethodQuery(self: pointer, query: cint): pointer {.cdecl.} =
   let vtbl = cast[ptr QGraphicsRectItemVTable](fcQGraphicsRectItem_vdata(self)[])
   let self = QGraphicsRectItem(h: self)
   let slotval1 = cint(query)
   var virtualReturn = vtbl[].inputMethodQuery(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QGraphicsRectItemitemChange*(self: gen_qgraphicsitem_types.QGraphicsRectItem, change: cint, value: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQGraphicsRectItem_virtualbase_itemChange(self.h, cint(change), value.h))
+  gen_qvariant_types.QVariant(h: fcQGraphicsRectItem_virtualbase_itemChange(self.h, cint(change), value.h), owned: true)
 
 proc fcQGraphicsRectItem_vtable_callback_itemChange(self: pointer, change: cint, value: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QGraphicsRectItemVTable](fcQGraphicsRectItem_vdata(self)[])
   let self = QGraphicsRectItem(h: self)
   let slotval1 = cint(change)
-  let slotval2 = gen_qvariant_types.QVariant(h: value)
+  let slotval2 = gen_qvariant_types.QVariant(h: value, owned: false)
   var virtualReturn = vtbl[].itemChange(self, slotval1, slotval2)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 type VirtualQGraphicsRectItem* {.inheritable.} = ref object of QGraphicsRectItem
   vtbl*: cQGraphicsRectItemVTable
@@ -6923,7 +6997,7 @@ method contains*(self: VirtualQGraphicsRectItem, point: gen_qpoint_types.QPointF
   QGraphicsRectItemcontains(self[], point)
 proc fcQGraphicsRectItem_method_callback_contains(self: pointer, point: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQGraphicsRectItem](fcQGraphicsRectItem_vdata(self)[])
-  let slotval1 = gen_qpoint_types.QPointF(h: point)
+  let slotval1 = gen_qpoint_types.QPointF(h: point, owned: false)
   var virtualReturn = inst.contains(slotval1)
   virtualReturn
 
@@ -6931,16 +7005,16 @@ method paint*(self: VirtualQGraphicsRectItem, painter: gen_qpainter_types.QPaint
   QGraphicsRectItempaint(self[], painter, option, widget)
 proc fcQGraphicsRectItem_method_callback_paint(self: pointer, painter: pointer, option: pointer, widget: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsRectItem](fcQGraphicsRectItem_vdata(self)[])
-  let slotval1 = gen_qpainter_types.QPainter(h: painter)
-  let slotval2 = gen_qstyleoption_types.QStyleOptionGraphicsItem(h: option)
-  let slotval3 = gen_qwidget_types.QWidget(h: widget)
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
+  let slotval2 = gen_qstyleoption_types.QStyleOptionGraphicsItem(h: option, owned: false)
+  let slotval3 = gen_qwidget_types.QWidget(h: widget, owned: false)
   inst.paint(slotval1, slotval2, slotval3)
 
 method isObscuredBy*(self: VirtualQGraphicsRectItem, item: gen_qgraphicsitem_types.QGraphicsItem): bool {.base.} =
   QGraphicsRectItemisObscuredBy(self[], item)
 proc fcQGraphicsRectItem_method_callback_isObscuredBy(self: pointer, item: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQGraphicsRectItem](fcQGraphicsRectItem_vdata(self)[])
-  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: item)
+  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: item, owned: false)
   var virtualReturn = inst.isObscuredBy(slotval1)
   virtualReturn
 
@@ -6971,14 +7045,14 @@ method setExtension*(self: VirtualQGraphicsRectItem, extension: cint, variant: g
 proc fcQGraphicsRectItem_method_callback_setExtension(self: pointer, extension: cint, variant: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsRectItem](fcQGraphicsRectItem_vdata(self)[])
   let slotval1 = cint(extension)
-  let slotval2 = gen_qvariant_types.QVariant(h: variant)
+  let slotval2 = gen_qvariant_types.QVariant(h: variant, owned: false)
   inst.setExtension(slotval1, slotval2)
 
 method extension*(self: VirtualQGraphicsRectItem, variant: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant {.base.} =
   QGraphicsRectItemextension(self[], variant)
 proc fcQGraphicsRectItem_method_callback_extension(self: pointer, variant: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsRectItem](fcQGraphicsRectItem_vdata(self)[])
-  let slotval1 = gen_qvariant_types.QVariant(h: variant)
+  let slotval1 = gen_qvariant_types.QVariant(h: variant, owned: false)
   var virtualReturn = inst.extension(slotval1)
   virtualReturn.h
 
@@ -6993,7 +7067,7 @@ method collidesWithItem*(self: VirtualQGraphicsRectItem, other: gen_qgraphicsite
   QGraphicsRectItemcollidesWithItem(self[], other, mode)
 proc fcQGraphicsRectItem_method_callback_collidesWithItem(self: pointer, other: pointer, mode: cint): bool {.cdecl.} =
   let inst = cast[VirtualQGraphicsRectItem](fcQGraphicsRectItem_vdata(self)[])
-  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: other)
+  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: other, owned: false)
   let slotval2 = cint(mode)
   var virtualReturn = inst.collidesWithItem(slotval1, slotval2)
   virtualReturn
@@ -7002,7 +7076,7 @@ method collidesWithPath*(self: VirtualQGraphicsRectItem, path: gen_qpainterpath_
   QGraphicsRectItemcollidesWithPath(self[], path, mode)
 proc fcQGraphicsRectItem_method_callback_collidesWithPath(self: pointer, path: pointer, mode: cint): bool {.cdecl.} =
   let inst = cast[VirtualQGraphicsRectItem](fcQGraphicsRectItem_vdata(self)[])
-  let slotval1 = gen_qpainterpath_types.QPainterPath(h: path)
+  let slotval1 = gen_qpainterpath_types.QPainterPath(h: path, owned: false)
   let slotval2 = cint(mode)
   var virtualReturn = inst.collidesWithPath(slotval1, slotval2)
   virtualReturn
@@ -7011,8 +7085,8 @@ method sceneEventFilter*(self: VirtualQGraphicsRectItem, watched: gen_qgraphicsi
   QGraphicsRectItemsceneEventFilter(self[], watched, event)
 proc fcQGraphicsRectItem_method_callback_sceneEventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQGraphicsRectItem](fcQGraphicsRectItem_vdata(self)[])
-  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.sceneEventFilter(slotval1, slotval2)
   virtualReturn
 
@@ -7020,7 +7094,7 @@ method sceneEvent*(self: VirtualQGraphicsRectItem, event: gen_qcoreevent_types.Q
   QGraphicsRectItemsceneEvent(self[], event)
 proc fcQGraphicsRectItem_method_callback_sceneEvent(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQGraphicsRectItem](fcQGraphicsRectItem_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.sceneEvent(slotval1)
   virtualReturn
 
@@ -7028,126 +7102,126 @@ method contextMenuEvent*(self: VirtualQGraphicsRectItem, event: gen_qgraphicssce
   QGraphicsRectItemcontextMenuEvent(self[], event)
 proc fcQGraphicsRectItem_method_callback_contextMenuEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsRectItem](fcQGraphicsRectItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneContextMenuEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneContextMenuEvent(h: event, owned: false)
   inst.contextMenuEvent(slotval1)
 
 method dragEnterEvent*(self: VirtualQGraphicsRectItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void {.base.} =
   QGraphicsRectItemdragEnterEvent(self[], event)
 proc fcQGraphicsRectItem_method_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsRectItem](fcQGraphicsRectItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event, owned: false)
   inst.dragEnterEvent(slotval1)
 
 method dragLeaveEvent*(self: VirtualQGraphicsRectItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void {.base.} =
   QGraphicsRectItemdragLeaveEvent(self[], event)
 proc fcQGraphicsRectItem_method_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsRectItem](fcQGraphicsRectItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event, owned: false)
   inst.dragLeaveEvent(slotval1)
 
 method dragMoveEvent*(self: VirtualQGraphicsRectItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void {.base.} =
   QGraphicsRectItemdragMoveEvent(self[], event)
 proc fcQGraphicsRectItem_method_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsRectItem](fcQGraphicsRectItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event, owned: false)
   inst.dragMoveEvent(slotval1)
 
 method dropEvent*(self: VirtualQGraphicsRectItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void {.base.} =
   QGraphicsRectItemdropEvent(self[], event)
 proc fcQGraphicsRectItem_method_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsRectItem](fcQGraphicsRectItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event, owned: false)
   inst.dropEvent(slotval1)
 
 method focusInEvent*(self: VirtualQGraphicsRectItem, event: gen_qevent_types.QFocusEvent): void {.base.} =
   QGraphicsRectItemfocusInEvent(self[], event)
 proc fcQGraphicsRectItem_method_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsRectItem](fcQGraphicsRectItem_vdata(self)[])
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   inst.focusInEvent(slotval1)
 
 method focusOutEvent*(self: VirtualQGraphicsRectItem, event: gen_qevent_types.QFocusEvent): void {.base.} =
   QGraphicsRectItemfocusOutEvent(self[], event)
 proc fcQGraphicsRectItem_method_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsRectItem](fcQGraphicsRectItem_vdata(self)[])
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   inst.focusOutEvent(slotval1)
 
 method hoverEnterEvent*(self: VirtualQGraphicsRectItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent): void {.base.} =
   QGraphicsRectItemhoverEnterEvent(self[], event)
 proc fcQGraphicsRectItem_method_callback_hoverEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsRectItem](fcQGraphicsRectItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event, owned: false)
   inst.hoverEnterEvent(slotval1)
 
 method hoverMoveEvent*(self: VirtualQGraphicsRectItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent): void {.base.} =
   QGraphicsRectItemhoverMoveEvent(self[], event)
 proc fcQGraphicsRectItem_method_callback_hoverMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsRectItem](fcQGraphicsRectItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event, owned: false)
   inst.hoverMoveEvent(slotval1)
 
 method hoverLeaveEvent*(self: VirtualQGraphicsRectItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent): void {.base.} =
   QGraphicsRectItemhoverLeaveEvent(self[], event)
 proc fcQGraphicsRectItem_method_callback_hoverLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsRectItem](fcQGraphicsRectItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event, owned: false)
   inst.hoverLeaveEvent(slotval1)
 
 method keyPressEvent*(self: VirtualQGraphicsRectItem, event: gen_qevent_types.QKeyEvent): void {.base.} =
   QGraphicsRectItemkeyPressEvent(self[], event)
 proc fcQGraphicsRectItem_method_callback_keyPressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsRectItem](fcQGraphicsRectItem_vdata(self)[])
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   inst.keyPressEvent(slotval1)
 
 method keyReleaseEvent*(self: VirtualQGraphicsRectItem, event: gen_qevent_types.QKeyEvent): void {.base.} =
   QGraphicsRectItemkeyReleaseEvent(self[], event)
 proc fcQGraphicsRectItem_method_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsRectItem](fcQGraphicsRectItem_vdata(self)[])
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   inst.keyReleaseEvent(slotval1)
 
 method mousePressEvent*(self: VirtualQGraphicsRectItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void {.base.} =
   QGraphicsRectItemmousePressEvent(self[], event)
 proc fcQGraphicsRectItem_method_callback_mousePressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsRectItem](fcQGraphicsRectItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event, owned: false)
   inst.mousePressEvent(slotval1)
 
 method mouseMoveEvent*(self: VirtualQGraphicsRectItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void {.base.} =
   QGraphicsRectItemmouseMoveEvent(self[], event)
 proc fcQGraphicsRectItem_method_callback_mouseMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsRectItem](fcQGraphicsRectItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event, owned: false)
   inst.mouseMoveEvent(slotval1)
 
 method mouseReleaseEvent*(self: VirtualQGraphicsRectItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void {.base.} =
   QGraphicsRectItemmouseReleaseEvent(self[], event)
 proc fcQGraphicsRectItem_method_callback_mouseReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsRectItem](fcQGraphicsRectItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event, owned: false)
   inst.mouseReleaseEvent(slotval1)
 
 method mouseDoubleClickEvent*(self: VirtualQGraphicsRectItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void {.base.} =
   QGraphicsRectItemmouseDoubleClickEvent(self[], event)
 proc fcQGraphicsRectItem_method_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsRectItem](fcQGraphicsRectItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event, owned: false)
   inst.mouseDoubleClickEvent(slotval1)
 
 method wheelEvent*(self: VirtualQGraphicsRectItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent): void {.base.} =
   QGraphicsRectItemwheelEvent(self[], event)
 proc fcQGraphicsRectItem_method_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsRectItem](fcQGraphicsRectItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent(h: event, owned: false)
   inst.wheelEvent(slotval1)
 
 method inputMethodEvent*(self: VirtualQGraphicsRectItem, event: gen_qevent_types.QInputMethodEvent): void {.base.} =
   QGraphicsRectIteminputMethodEvent(self[], event)
 proc fcQGraphicsRectItem_method_callback_inputMethodEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsRectItem](fcQGraphicsRectItem_vdata(self)[])
-  let slotval1 = gen_qevent_types.QInputMethodEvent(h: event)
+  let slotval1 = gen_qevent_types.QInputMethodEvent(h: event, owned: false)
   inst.inputMethodEvent(slotval1)
 
 method inputMethodQuery*(self: VirtualQGraphicsRectItem, query: cint): gen_qvariant_types.QVariant {.base.} =
@@ -7163,7 +7237,7 @@ method itemChange*(self: VirtualQGraphicsRectItem, change: cint, value: gen_qvar
 proc fcQGraphicsRectItem_method_callback_itemChange(self: pointer, change: cint, value: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsRectItem](fcQGraphicsRectItem_vdata(self)[])
   let slotval1 = cint(change)
-  let slotval2 = gen_qvariant_types.QVariant(h: value)
+  let slotval2 = gen_qvariant_types.QVariant(h: value, owned: false)
   var virtualReturn = inst.itemChange(slotval1, slotval2)
   virtualReturn.h
 
@@ -7256,7 +7330,7 @@ proc create*(T: type gen_qgraphicsitem_types.QGraphicsRectItem,
     vtbl[].vtbl.inputMethodQuery = fcQGraphicsRectItem_vtable_callback_inputMethodQuery
   if not isNil(vtbl[].itemChange):
     vtbl[].vtbl.itemChange = fcQGraphicsRectItem_vtable_callback_itemChange
-  let tmp = gen_qgraphicsitem_types.QGraphicsRectItem(h: fcQGraphicsRectItem_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))))
+  let tmp = gen_qgraphicsitem_types.QGraphicsRectItem(h: fcQGraphicsRectItem_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))), owned: true)
   fcQGraphicsRectItem_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qgraphicsitem_types.QGraphicsRectItem,
@@ -7337,7 +7411,7 @@ proc create*(T: type gen_qgraphicsitem_types.QGraphicsRectItem,
     vtbl[].vtbl.inputMethodQuery = fcQGraphicsRectItem_vtable_callback_inputMethodQuery
   if not isNil(vtbl[].itemChange):
     vtbl[].vtbl.itemChange = fcQGraphicsRectItem_vtable_callback_itemChange
-  let tmp = gen_qgraphicsitem_types.QGraphicsRectItem(h: fcQGraphicsRectItem_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), rect.h))
+  let tmp = gen_qgraphicsitem_types.QGraphicsRectItem(h: fcQGraphicsRectItem_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), rect.h), owned: true)
   fcQGraphicsRectItem_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qgraphicsitem_types.QGraphicsRectItem,
@@ -7418,7 +7492,7 @@ proc create*(T: type gen_qgraphicsitem_types.QGraphicsRectItem,
     vtbl[].vtbl.inputMethodQuery = fcQGraphicsRectItem_vtable_callback_inputMethodQuery
   if not isNil(vtbl[].itemChange):
     vtbl[].vtbl.itemChange = fcQGraphicsRectItem_vtable_callback_itemChange
-  let tmp = gen_qgraphicsitem_types.QGraphicsRectItem(h: fcQGraphicsRectItem_new3(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), x, y, w, h))
+  let tmp = gen_qgraphicsitem_types.QGraphicsRectItem(h: fcQGraphicsRectItem_new3(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), x, y, w, h), owned: true)
   fcQGraphicsRectItem_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qgraphicsitem_types.QGraphicsRectItem,
@@ -7499,7 +7573,7 @@ proc create*(T: type gen_qgraphicsitem_types.QGraphicsRectItem,
     vtbl[].vtbl.inputMethodQuery = fcQGraphicsRectItem_vtable_callback_inputMethodQuery
   if not isNil(vtbl[].itemChange):
     vtbl[].vtbl.itemChange = fcQGraphicsRectItem_vtable_callback_itemChange
-  let tmp = gen_qgraphicsitem_types.QGraphicsRectItem(h: fcQGraphicsRectItem_new4(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h))
+  let tmp = gen_qgraphicsitem_types.QGraphicsRectItem(h: fcQGraphicsRectItem_new4(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h), owned: true)
   fcQGraphicsRectItem_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qgraphicsitem_types.QGraphicsRectItem,
@@ -7580,7 +7654,7 @@ proc create*(T: type gen_qgraphicsitem_types.QGraphicsRectItem,
     vtbl[].vtbl.inputMethodQuery = fcQGraphicsRectItem_vtable_callback_inputMethodQuery
   if not isNil(vtbl[].itemChange):
     vtbl[].vtbl.itemChange = fcQGraphicsRectItem_vtable_callback_itemChange
-  let tmp = gen_qgraphicsitem_types.QGraphicsRectItem(h: fcQGraphicsRectItem_new5(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), rect.h, parent.h))
+  let tmp = gen_qgraphicsitem_types.QGraphicsRectItem(h: fcQGraphicsRectItem_new5(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), rect.h, parent.h), owned: true)
   fcQGraphicsRectItem_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qgraphicsitem_types.QGraphicsRectItem,
@@ -7661,13 +7735,14 @@ proc create*(T: type gen_qgraphicsitem_types.QGraphicsRectItem,
     vtbl[].vtbl.inputMethodQuery = fcQGraphicsRectItem_vtable_callback_inputMethodQuery
   if not isNil(vtbl[].itemChange):
     vtbl[].vtbl.itemChange = fcQGraphicsRectItem_vtable_callback_itemChange
-  let tmp = gen_qgraphicsitem_types.QGraphicsRectItem(h: fcQGraphicsRectItem_new6(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), x, y, w, h, parent.h))
+  let tmp = gen_qgraphicsitem_types.QGraphicsRectItem(h: fcQGraphicsRectItem_new6(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), x, y, w, h, parent.h), owned: true)
   fcQGraphicsRectItem_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQGraphicsRectItem_mvtbl = cQGraphicsRectItemVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQGraphicsRectItem()[])](self.fcQGraphicsRectItem_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   boundingRect: fcQGraphicsRectItem_method_callback_boundingRect,
   shape: fcQGraphicsRectItem_method_callback_shape,
@@ -7746,10 +7821,8 @@ proc create*(T: type gen_qgraphicsitem_types.QGraphicsRectItem,
   inst[].h = fcQGraphicsRectItem_new6(addr(cQGraphicsRectItem_mvtbl), csize_t(sizeof(pointer)), x, y, w, h, parent.h)
   fcQGraphicsRectItem_vdata(inst[].h)[] = addr inst[]
 
-proc delete*(self: gen_qgraphicsitem_types.QGraphicsRectItem) =
-  fcQGraphicsRectItem_delete(self.h)
 proc rect*(self: gen_qgraphicsitem_types.QGraphicsEllipseItem): gen_qrect_types.QRectF =
-  gen_qrect_types.QRectF(h: fcQGraphicsEllipseItem_rect(self.h))
+  gen_qrect_types.QRectF(h: fcQGraphicsEllipseItem_rect(self.h), owned: true)
 
 proc setRect*(self: gen_qgraphicsitem_types.QGraphicsEllipseItem, rect: gen_qrect_types.QRectF): void =
   fcQGraphicsEllipseItem_setRect(self.h, rect.h)
@@ -7770,10 +7843,10 @@ proc setSpanAngle*(self: gen_qgraphicsitem_types.QGraphicsEllipseItem, angle: ci
   fcQGraphicsEllipseItem_setSpanAngle(self.h, angle)
 
 proc boundingRect*(self: gen_qgraphicsitem_types.QGraphicsEllipseItem): gen_qrect_types.QRectF =
-  gen_qrect_types.QRectF(h: fcQGraphicsEllipseItem_boundingRect(self.h))
+  gen_qrect_types.QRectF(h: fcQGraphicsEllipseItem_boundingRect(self.h), owned: true)
 
 proc shape*(self: gen_qgraphicsitem_types.QGraphicsEllipseItem): gen_qpainterpath_types.QPainterPath =
-  gen_qpainterpath_types.QPainterPath(h: fcQGraphicsEllipseItem_shape(self.h))
+  gen_qpainterpath_types.QPainterPath(h: fcQGraphicsEllipseItem_shape(self.h), owned: true)
 
 proc contains*(self: gen_qgraphicsitem_types.QGraphicsEllipseItem, point: gen_qpoint_types.QPointF): bool =
   fcQGraphicsEllipseItem_contains(self.h, point.h)
@@ -7785,7 +7858,7 @@ proc isObscuredBy*(self: gen_qgraphicsitem_types.QGraphicsEllipseItem, item: gen
   fcQGraphicsEllipseItem_isObscuredBy(self.h, item.h)
 
 proc opaqueArea*(self: gen_qgraphicsitem_types.QGraphicsEllipseItem): gen_qpainterpath_types.QPainterPath =
-  gen_qpainterpath_types.QPainterPath(h: fcQGraphicsEllipseItem_opaqueArea(self.h))
+  gen_qpainterpath_types.QPainterPath(h: fcQGraphicsEllipseItem_opaqueArea(self.h), owned: true)
 
 proc typeX*(self: gen_qgraphicsitem_types.QGraphicsEllipseItem): cint =
   fcQGraphicsEllipseItem_typeX(self.h)
@@ -7825,7 +7898,7 @@ type QGraphicsEllipseItemwheelEventProc* = proc(self: QGraphicsEllipseItem, even
 type QGraphicsEllipseIteminputMethodEventProc* = proc(self: QGraphicsEllipseItem, event: gen_qevent_types.QInputMethodEvent): void {.raises: [], gcsafe.}
 type QGraphicsEllipseIteminputMethodQueryProc* = proc(self: QGraphicsEllipseItem, query: cint): gen_qvariant_types.QVariant {.raises: [], gcsafe.}
 type QGraphicsEllipseItemitemChangeProc* = proc(self: QGraphicsEllipseItem, change: cint, value: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant {.raises: [], gcsafe.}
-type QGraphicsEllipseItemVTable* = object
+type QGraphicsEllipseItemVTable* {.inheritable, pure.} = object
   vtbl: cQGraphicsEllipseItemVTable
   boundingRect*: QGraphicsEllipseItemboundingRectProc
   shape*: QGraphicsEllipseItemshapeProc
@@ -7863,22 +7936,28 @@ type QGraphicsEllipseItemVTable* = object
   inputMethodQuery*: QGraphicsEllipseIteminputMethodQueryProc
   itemChange*: QGraphicsEllipseItemitemChangeProc
 proc QGraphicsEllipseItemboundingRect*(self: gen_qgraphicsitem_types.QGraphicsEllipseItem): gen_qrect_types.QRectF =
-  gen_qrect_types.QRectF(h: fcQGraphicsEllipseItem_virtualbase_boundingRect(self.h))
+  gen_qrect_types.QRectF(h: fcQGraphicsEllipseItem_virtualbase_boundingRect(self.h), owned: true)
 
 proc fcQGraphicsEllipseItem_vtable_callback_boundingRect(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QGraphicsEllipseItemVTable](fcQGraphicsEllipseItem_vdata(self)[])
   let self = QGraphicsEllipseItem(h: self)
   var virtualReturn = vtbl[].boundingRect(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QGraphicsEllipseItemshape*(self: gen_qgraphicsitem_types.QGraphicsEllipseItem): gen_qpainterpath_types.QPainterPath =
-  gen_qpainterpath_types.QPainterPath(h: fcQGraphicsEllipseItem_virtualbase_shape(self.h))
+  gen_qpainterpath_types.QPainterPath(h: fcQGraphicsEllipseItem_virtualbase_shape(self.h), owned: true)
 
 proc fcQGraphicsEllipseItem_vtable_callback_shape(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QGraphicsEllipseItemVTable](fcQGraphicsEllipseItem_vdata(self)[])
   let self = QGraphicsEllipseItem(h: self)
   var virtualReturn = vtbl[].shape(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QGraphicsEllipseItemcontains*(self: gen_qgraphicsitem_types.QGraphicsEllipseItem, point: gen_qpoint_types.QPointF): bool =
   fcQGraphicsEllipseItem_virtualbase_contains(self.h, point.h)
@@ -7886,7 +7965,7 @@ proc QGraphicsEllipseItemcontains*(self: gen_qgraphicsitem_types.QGraphicsEllips
 proc fcQGraphicsEllipseItem_vtable_callback_contains(self: pointer, point: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QGraphicsEllipseItemVTable](fcQGraphicsEllipseItem_vdata(self)[])
   let self = QGraphicsEllipseItem(h: self)
-  let slotval1 = gen_qpoint_types.QPointF(h: point)
+  let slotval1 = gen_qpoint_types.QPointF(h: point, owned: false)
   var virtualReturn = vtbl[].contains(self, slotval1)
   virtualReturn
 
@@ -7896,9 +7975,9 @@ proc QGraphicsEllipseItempaint*(self: gen_qgraphicsitem_types.QGraphicsEllipseIt
 proc fcQGraphicsEllipseItem_vtable_callback_paint(self: pointer, painter: pointer, option: pointer, widget: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsEllipseItemVTable](fcQGraphicsEllipseItem_vdata(self)[])
   let self = QGraphicsEllipseItem(h: self)
-  let slotval1 = gen_qpainter_types.QPainter(h: painter)
-  let slotval2 = gen_qstyleoption_types.QStyleOptionGraphicsItem(h: option)
-  let slotval3 = gen_qwidget_types.QWidget(h: widget)
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
+  let slotval2 = gen_qstyleoption_types.QStyleOptionGraphicsItem(h: option, owned: false)
+  let slotval3 = gen_qwidget_types.QWidget(h: widget, owned: false)
   vtbl[].paint(self, slotval1, slotval2, slotval3)
 
 proc QGraphicsEllipseItemisObscuredBy*(self: gen_qgraphicsitem_types.QGraphicsEllipseItem, item: gen_qgraphicsitem_types.QGraphicsItem): bool =
@@ -7907,18 +7986,21 @@ proc QGraphicsEllipseItemisObscuredBy*(self: gen_qgraphicsitem_types.QGraphicsEl
 proc fcQGraphicsEllipseItem_vtable_callback_isObscuredBy(self: pointer, item: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QGraphicsEllipseItemVTable](fcQGraphicsEllipseItem_vdata(self)[])
   let self = QGraphicsEllipseItem(h: self)
-  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: item)
+  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: item, owned: false)
   var virtualReturn = vtbl[].isObscuredBy(self, slotval1)
   virtualReturn
 
 proc QGraphicsEllipseItemopaqueArea*(self: gen_qgraphicsitem_types.QGraphicsEllipseItem): gen_qpainterpath_types.QPainterPath =
-  gen_qpainterpath_types.QPainterPath(h: fcQGraphicsEllipseItem_virtualbase_opaqueArea(self.h))
+  gen_qpainterpath_types.QPainterPath(h: fcQGraphicsEllipseItem_virtualbase_opaqueArea(self.h), owned: true)
 
 proc fcQGraphicsEllipseItem_vtable_callback_opaqueArea(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QGraphicsEllipseItemVTable](fcQGraphicsEllipseItem_vdata(self)[])
   let self = QGraphicsEllipseItem(h: self)
   var virtualReturn = vtbl[].opaqueArea(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QGraphicsEllipseItemtypeX*(self: gen_qgraphicsitem_types.QGraphicsEllipseItem): cint =
   fcQGraphicsEllipseItem_virtualbase_typeX(self.h)
@@ -7946,18 +8028,21 @@ proc fcQGraphicsEllipseItem_vtable_callback_setExtension(self: pointer, extensio
   let vtbl = cast[ptr QGraphicsEllipseItemVTable](fcQGraphicsEllipseItem_vdata(self)[])
   let self = QGraphicsEllipseItem(h: self)
   let slotval1 = cint(extension)
-  let slotval2 = gen_qvariant_types.QVariant(h: variant)
+  let slotval2 = gen_qvariant_types.QVariant(h: variant, owned: false)
   vtbl[].setExtension(self, slotval1, slotval2)
 
 proc QGraphicsEllipseItemextension*(self: gen_qgraphicsitem_types.QGraphicsEllipseItem, variant: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQGraphicsEllipseItem_virtualbase_extension(self.h, variant.h))
+  gen_qvariant_types.QVariant(h: fcQGraphicsEllipseItem_virtualbase_extension(self.h, variant.h), owned: true)
 
 proc fcQGraphicsEllipseItem_vtable_callback_extension(self: pointer, variant: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QGraphicsEllipseItemVTable](fcQGraphicsEllipseItem_vdata(self)[])
   let self = QGraphicsEllipseItem(h: self)
-  let slotval1 = gen_qvariant_types.QVariant(h: variant)
+  let slotval1 = gen_qvariant_types.QVariant(h: variant, owned: false)
   var virtualReturn = vtbl[].extension(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QGraphicsEllipseItemadvance*(self: gen_qgraphicsitem_types.QGraphicsEllipseItem, phase: cint): void =
   fcQGraphicsEllipseItem_virtualbase_advance(self.h, phase)
@@ -7974,7 +8059,7 @@ proc QGraphicsEllipseItemcollidesWithItem*(self: gen_qgraphicsitem_types.QGraphi
 proc fcQGraphicsEllipseItem_vtable_callback_collidesWithItem(self: pointer, other: pointer, mode: cint): bool {.cdecl.} =
   let vtbl = cast[ptr QGraphicsEllipseItemVTable](fcQGraphicsEllipseItem_vdata(self)[])
   let self = QGraphicsEllipseItem(h: self)
-  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: other)
+  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: other, owned: false)
   let slotval2 = cint(mode)
   var virtualReturn = vtbl[].collidesWithItem(self, slotval1, slotval2)
   virtualReturn
@@ -7985,7 +8070,7 @@ proc QGraphicsEllipseItemcollidesWithPath*(self: gen_qgraphicsitem_types.QGraphi
 proc fcQGraphicsEllipseItem_vtable_callback_collidesWithPath(self: pointer, path: pointer, mode: cint): bool {.cdecl.} =
   let vtbl = cast[ptr QGraphicsEllipseItemVTable](fcQGraphicsEllipseItem_vdata(self)[])
   let self = QGraphicsEllipseItem(h: self)
-  let slotval1 = gen_qpainterpath_types.QPainterPath(h: path)
+  let slotval1 = gen_qpainterpath_types.QPainterPath(h: path, owned: false)
   let slotval2 = cint(mode)
   var virtualReturn = vtbl[].collidesWithPath(self, slotval1, slotval2)
   virtualReturn
@@ -7996,8 +8081,8 @@ proc QGraphicsEllipseItemsceneEventFilter*(self: gen_qgraphicsitem_types.QGraphi
 proc fcQGraphicsEllipseItem_vtable_callback_sceneEventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QGraphicsEllipseItemVTable](fcQGraphicsEllipseItem_vdata(self)[])
   let self = QGraphicsEllipseItem(h: self)
-  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].sceneEventFilter(self, slotval1, slotval2)
   virtualReturn
 
@@ -8007,7 +8092,7 @@ proc QGraphicsEllipseItemsceneEvent*(self: gen_qgraphicsitem_types.QGraphicsElli
 proc fcQGraphicsEllipseItem_vtable_callback_sceneEvent(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QGraphicsEllipseItemVTable](fcQGraphicsEllipseItem_vdata(self)[])
   let self = QGraphicsEllipseItem(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].sceneEvent(self, slotval1)
   virtualReturn
 
@@ -8017,7 +8102,7 @@ proc QGraphicsEllipseItemcontextMenuEvent*(self: gen_qgraphicsitem_types.QGraphi
 proc fcQGraphicsEllipseItem_vtable_callback_contextMenuEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsEllipseItemVTable](fcQGraphicsEllipseItem_vdata(self)[])
   let self = QGraphicsEllipseItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneContextMenuEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneContextMenuEvent(h: event, owned: false)
   vtbl[].contextMenuEvent(self, slotval1)
 
 proc QGraphicsEllipseItemdragEnterEvent*(self: gen_qgraphicsitem_types.QGraphicsEllipseItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void =
@@ -8026,7 +8111,7 @@ proc QGraphicsEllipseItemdragEnterEvent*(self: gen_qgraphicsitem_types.QGraphics
 proc fcQGraphicsEllipseItem_vtable_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsEllipseItemVTable](fcQGraphicsEllipseItem_vdata(self)[])
   let self = QGraphicsEllipseItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event, owned: false)
   vtbl[].dragEnterEvent(self, slotval1)
 
 proc QGraphicsEllipseItemdragLeaveEvent*(self: gen_qgraphicsitem_types.QGraphicsEllipseItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void =
@@ -8035,7 +8120,7 @@ proc QGraphicsEllipseItemdragLeaveEvent*(self: gen_qgraphicsitem_types.QGraphics
 proc fcQGraphicsEllipseItem_vtable_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsEllipseItemVTable](fcQGraphicsEllipseItem_vdata(self)[])
   let self = QGraphicsEllipseItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event, owned: false)
   vtbl[].dragLeaveEvent(self, slotval1)
 
 proc QGraphicsEllipseItemdragMoveEvent*(self: gen_qgraphicsitem_types.QGraphicsEllipseItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void =
@@ -8044,7 +8129,7 @@ proc QGraphicsEllipseItemdragMoveEvent*(self: gen_qgraphicsitem_types.QGraphicsE
 proc fcQGraphicsEllipseItem_vtable_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsEllipseItemVTable](fcQGraphicsEllipseItem_vdata(self)[])
   let self = QGraphicsEllipseItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event, owned: false)
   vtbl[].dragMoveEvent(self, slotval1)
 
 proc QGraphicsEllipseItemdropEvent*(self: gen_qgraphicsitem_types.QGraphicsEllipseItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void =
@@ -8053,7 +8138,7 @@ proc QGraphicsEllipseItemdropEvent*(self: gen_qgraphicsitem_types.QGraphicsEllip
 proc fcQGraphicsEllipseItem_vtable_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsEllipseItemVTable](fcQGraphicsEllipseItem_vdata(self)[])
   let self = QGraphicsEllipseItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event, owned: false)
   vtbl[].dropEvent(self, slotval1)
 
 proc QGraphicsEllipseItemfocusInEvent*(self: gen_qgraphicsitem_types.QGraphicsEllipseItem, event: gen_qevent_types.QFocusEvent): void =
@@ -8062,7 +8147,7 @@ proc QGraphicsEllipseItemfocusInEvent*(self: gen_qgraphicsitem_types.QGraphicsEl
 proc fcQGraphicsEllipseItem_vtable_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsEllipseItemVTable](fcQGraphicsEllipseItem_vdata(self)[])
   let self = QGraphicsEllipseItem(h: self)
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusInEvent(self, slotval1)
 
 proc QGraphicsEllipseItemfocusOutEvent*(self: gen_qgraphicsitem_types.QGraphicsEllipseItem, event: gen_qevent_types.QFocusEvent): void =
@@ -8071,7 +8156,7 @@ proc QGraphicsEllipseItemfocusOutEvent*(self: gen_qgraphicsitem_types.QGraphicsE
 proc fcQGraphicsEllipseItem_vtable_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsEllipseItemVTable](fcQGraphicsEllipseItem_vdata(self)[])
   let self = QGraphicsEllipseItem(h: self)
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusOutEvent(self, slotval1)
 
 proc QGraphicsEllipseItemhoverEnterEvent*(self: gen_qgraphicsitem_types.QGraphicsEllipseItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent): void =
@@ -8080,7 +8165,7 @@ proc QGraphicsEllipseItemhoverEnterEvent*(self: gen_qgraphicsitem_types.QGraphic
 proc fcQGraphicsEllipseItem_vtable_callback_hoverEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsEllipseItemVTable](fcQGraphicsEllipseItem_vdata(self)[])
   let self = QGraphicsEllipseItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event, owned: false)
   vtbl[].hoverEnterEvent(self, slotval1)
 
 proc QGraphicsEllipseItemhoverMoveEvent*(self: gen_qgraphicsitem_types.QGraphicsEllipseItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent): void =
@@ -8089,7 +8174,7 @@ proc QGraphicsEllipseItemhoverMoveEvent*(self: gen_qgraphicsitem_types.QGraphics
 proc fcQGraphicsEllipseItem_vtable_callback_hoverMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsEllipseItemVTable](fcQGraphicsEllipseItem_vdata(self)[])
   let self = QGraphicsEllipseItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event, owned: false)
   vtbl[].hoverMoveEvent(self, slotval1)
 
 proc QGraphicsEllipseItemhoverLeaveEvent*(self: gen_qgraphicsitem_types.QGraphicsEllipseItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent): void =
@@ -8098,7 +8183,7 @@ proc QGraphicsEllipseItemhoverLeaveEvent*(self: gen_qgraphicsitem_types.QGraphic
 proc fcQGraphicsEllipseItem_vtable_callback_hoverLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsEllipseItemVTable](fcQGraphicsEllipseItem_vdata(self)[])
   let self = QGraphicsEllipseItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event, owned: false)
   vtbl[].hoverLeaveEvent(self, slotval1)
 
 proc QGraphicsEllipseItemkeyPressEvent*(self: gen_qgraphicsitem_types.QGraphicsEllipseItem, event: gen_qevent_types.QKeyEvent): void =
@@ -8107,7 +8192,7 @@ proc QGraphicsEllipseItemkeyPressEvent*(self: gen_qgraphicsitem_types.QGraphicsE
 proc fcQGraphicsEllipseItem_vtable_callback_keyPressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsEllipseItemVTable](fcQGraphicsEllipseItem_vdata(self)[])
   let self = QGraphicsEllipseItem(h: self)
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   vtbl[].keyPressEvent(self, slotval1)
 
 proc QGraphicsEllipseItemkeyReleaseEvent*(self: gen_qgraphicsitem_types.QGraphicsEllipseItem, event: gen_qevent_types.QKeyEvent): void =
@@ -8116,7 +8201,7 @@ proc QGraphicsEllipseItemkeyReleaseEvent*(self: gen_qgraphicsitem_types.QGraphic
 proc fcQGraphicsEllipseItem_vtable_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsEllipseItemVTable](fcQGraphicsEllipseItem_vdata(self)[])
   let self = QGraphicsEllipseItem(h: self)
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   vtbl[].keyReleaseEvent(self, slotval1)
 
 proc QGraphicsEllipseItemmousePressEvent*(self: gen_qgraphicsitem_types.QGraphicsEllipseItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void =
@@ -8125,7 +8210,7 @@ proc QGraphicsEllipseItemmousePressEvent*(self: gen_qgraphicsitem_types.QGraphic
 proc fcQGraphicsEllipseItem_vtable_callback_mousePressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsEllipseItemVTable](fcQGraphicsEllipseItem_vdata(self)[])
   let self = QGraphicsEllipseItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event, owned: false)
   vtbl[].mousePressEvent(self, slotval1)
 
 proc QGraphicsEllipseItemmouseMoveEvent*(self: gen_qgraphicsitem_types.QGraphicsEllipseItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void =
@@ -8134,7 +8219,7 @@ proc QGraphicsEllipseItemmouseMoveEvent*(self: gen_qgraphicsitem_types.QGraphics
 proc fcQGraphicsEllipseItem_vtable_callback_mouseMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsEllipseItemVTable](fcQGraphicsEllipseItem_vdata(self)[])
   let self = QGraphicsEllipseItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event, owned: false)
   vtbl[].mouseMoveEvent(self, slotval1)
 
 proc QGraphicsEllipseItemmouseReleaseEvent*(self: gen_qgraphicsitem_types.QGraphicsEllipseItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void =
@@ -8143,7 +8228,7 @@ proc QGraphicsEllipseItemmouseReleaseEvent*(self: gen_qgraphicsitem_types.QGraph
 proc fcQGraphicsEllipseItem_vtable_callback_mouseReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsEllipseItemVTable](fcQGraphicsEllipseItem_vdata(self)[])
   let self = QGraphicsEllipseItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event, owned: false)
   vtbl[].mouseReleaseEvent(self, slotval1)
 
 proc QGraphicsEllipseItemmouseDoubleClickEvent*(self: gen_qgraphicsitem_types.QGraphicsEllipseItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void =
@@ -8152,7 +8237,7 @@ proc QGraphicsEllipseItemmouseDoubleClickEvent*(self: gen_qgraphicsitem_types.QG
 proc fcQGraphicsEllipseItem_vtable_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsEllipseItemVTable](fcQGraphicsEllipseItem_vdata(self)[])
   let self = QGraphicsEllipseItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event, owned: false)
   vtbl[].mouseDoubleClickEvent(self, slotval1)
 
 proc QGraphicsEllipseItemwheelEvent*(self: gen_qgraphicsitem_types.QGraphicsEllipseItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent): void =
@@ -8161,7 +8246,7 @@ proc QGraphicsEllipseItemwheelEvent*(self: gen_qgraphicsitem_types.QGraphicsElli
 proc fcQGraphicsEllipseItem_vtable_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsEllipseItemVTable](fcQGraphicsEllipseItem_vdata(self)[])
   let self = QGraphicsEllipseItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent(h: event, owned: false)
   vtbl[].wheelEvent(self, slotval1)
 
 proc QGraphicsEllipseIteminputMethodEvent*(self: gen_qgraphicsitem_types.QGraphicsEllipseItem, event: gen_qevent_types.QInputMethodEvent): void =
@@ -8170,29 +8255,35 @@ proc QGraphicsEllipseIteminputMethodEvent*(self: gen_qgraphicsitem_types.QGraphi
 proc fcQGraphicsEllipseItem_vtable_callback_inputMethodEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsEllipseItemVTable](fcQGraphicsEllipseItem_vdata(self)[])
   let self = QGraphicsEllipseItem(h: self)
-  let slotval1 = gen_qevent_types.QInputMethodEvent(h: event)
+  let slotval1 = gen_qevent_types.QInputMethodEvent(h: event, owned: false)
   vtbl[].inputMethodEvent(self, slotval1)
 
 proc QGraphicsEllipseIteminputMethodQuery*(self: gen_qgraphicsitem_types.QGraphicsEllipseItem, query: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQGraphicsEllipseItem_virtualbase_inputMethodQuery(self.h, cint(query)))
+  gen_qvariant_types.QVariant(h: fcQGraphicsEllipseItem_virtualbase_inputMethodQuery(self.h, cint(query)), owned: true)
 
 proc fcQGraphicsEllipseItem_vtable_callback_inputMethodQuery(self: pointer, query: cint): pointer {.cdecl.} =
   let vtbl = cast[ptr QGraphicsEllipseItemVTable](fcQGraphicsEllipseItem_vdata(self)[])
   let self = QGraphicsEllipseItem(h: self)
   let slotval1 = cint(query)
   var virtualReturn = vtbl[].inputMethodQuery(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QGraphicsEllipseItemitemChange*(self: gen_qgraphicsitem_types.QGraphicsEllipseItem, change: cint, value: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQGraphicsEllipseItem_virtualbase_itemChange(self.h, cint(change), value.h))
+  gen_qvariant_types.QVariant(h: fcQGraphicsEllipseItem_virtualbase_itemChange(self.h, cint(change), value.h), owned: true)
 
 proc fcQGraphicsEllipseItem_vtable_callback_itemChange(self: pointer, change: cint, value: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QGraphicsEllipseItemVTable](fcQGraphicsEllipseItem_vdata(self)[])
   let self = QGraphicsEllipseItem(h: self)
   let slotval1 = cint(change)
-  let slotval2 = gen_qvariant_types.QVariant(h: value)
+  let slotval2 = gen_qvariant_types.QVariant(h: value, owned: false)
   var virtualReturn = vtbl[].itemChange(self, slotval1, slotval2)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 type VirtualQGraphicsEllipseItem* {.inheritable.} = ref object of QGraphicsEllipseItem
   vtbl*: cQGraphicsEllipseItemVTable
@@ -8214,7 +8305,7 @@ method contains*(self: VirtualQGraphicsEllipseItem, point: gen_qpoint_types.QPoi
   QGraphicsEllipseItemcontains(self[], point)
 proc fcQGraphicsEllipseItem_method_callback_contains(self: pointer, point: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQGraphicsEllipseItem](fcQGraphicsEllipseItem_vdata(self)[])
-  let slotval1 = gen_qpoint_types.QPointF(h: point)
+  let slotval1 = gen_qpoint_types.QPointF(h: point, owned: false)
   var virtualReturn = inst.contains(slotval1)
   virtualReturn
 
@@ -8222,16 +8313,16 @@ method paint*(self: VirtualQGraphicsEllipseItem, painter: gen_qpainter_types.QPa
   QGraphicsEllipseItempaint(self[], painter, option, widget)
 proc fcQGraphicsEllipseItem_method_callback_paint(self: pointer, painter: pointer, option: pointer, widget: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsEllipseItem](fcQGraphicsEllipseItem_vdata(self)[])
-  let slotval1 = gen_qpainter_types.QPainter(h: painter)
-  let slotval2 = gen_qstyleoption_types.QStyleOptionGraphicsItem(h: option)
-  let slotval3 = gen_qwidget_types.QWidget(h: widget)
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
+  let slotval2 = gen_qstyleoption_types.QStyleOptionGraphicsItem(h: option, owned: false)
+  let slotval3 = gen_qwidget_types.QWidget(h: widget, owned: false)
   inst.paint(slotval1, slotval2, slotval3)
 
 method isObscuredBy*(self: VirtualQGraphicsEllipseItem, item: gen_qgraphicsitem_types.QGraphicsItem): bool {.base.} =
   QGraphicsEllipseItemisObscuredBy(self[], item)
 proc fcQGraphicsEllipseItem_method_callback_isObscuredBy(self: pointer, item: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQGraphicsEllipseItem](fcQGraphicsEllipseItem_vdata(self)[])
-  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: item)
+  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: item, owned: false)
   var virtualReturn = inst.isObscuredBy(slotval1)
   virtualReturn
 
@@ -8262,14 +8353,14 @@ method setExtension*(self: VirtualQGraphicsEllipseItem, extension: cint, variant
 proc fcQGraphicsEllipseItem_method_callback_setExtension(self: pointer, extension: cint, variant: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsEllipseItem](fcQGraphicsEllipseItem_vdata(self)[])
   let slotval1 = cint(extension)
-  let slotval2 = gen_qvariant_types.QVariant(h: variant)
+  let slotval2 = gen_qvariant_types.QVariant(h: variant, owned: false)
   inst.setExtension(slotval1, slotval2)
 
 method extension*(self: VirtualQGraphicsEllipseItem, variant: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant {.base.} =
   QGraphicsEllipseItemextension(self[], variant)
 proc fcQGraphicsEllipseItem_method_callback_extension(self: pointer, variant: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsEllipseItem](fcQGraphicsEllipseItem_vdata(self)[])
-  let slotval1 = gen_qvariant_types.QVariant(h: variant)
+  let slotval1 = gen_qvariant_types.QVariant(h: variant, owned: false)
   var virtualReturn = inst.extension(slotval1)
   virtualReturn.h
 
@@ -8284,7 +8375,7 @@ method collidesWithItem*(self: VirtualQGraphicsEllipseItem, other: gen_qgraphics
   QGraphicsEllipseItemcollidesWithItem(self[], other, mode)
 proc fcQGraphicsEllipseItem_method_callback_collidesWithItem(self: pointer, other: pointer, mode: cint): bool {.cdecl.} =
   let inst = cast[VirtualQGraphicsEllipseItem](fcQGraphicsEllipseItem_vdata(self)[])
-  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: other)
+  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: other, owned: false)
   let slotval2 = cint(mode)
   var virtualReturn = inst.collidesWithItem(slotval1, slotval2)
   virtualReturn
@@ -8293,7 +8384,7 @@ method collidesWithPath*(self: VirtualQGraphicsEllipseItem, path: gen_qpainterpa
   QGraphicsEllipseItemcollidesWithPath(self[], path, mode)
 proc fcQGraphicsEllipseItem_method_callback_collidesWithPath(self: pointer, path: pointer, mode: cint): bool {.cdecl.} =
   let inst = cast[VirtualQGraphicsEllipseItem](fcQGraphicsEllipseItem_vdata(self)[])
-  let slotval1 = gen_qpainterpath_types.QPainterPath(h: path)
+  let slotval1 = gen_qpainterpath_types.QPainterPath(h: path, owned: false)
   let slotval2 = cint(mode)
   var virtualReturn = inst.collidesWithPath(slotval1, slotval2)
   virtualReturn
@@ -8302,8 +8393,8 @@ method sceneEventFilter*(self: VirtualQGraphicsEllipseItem, watched: gen_qgraphi
   QGraphicsEllipseItemsceneEventFilter(self[], watched, event)
 proc fcQGraphicsEllipseItem_method_callback_sceneEventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQGraphicsEllipseItem](fcQGraphicsEllipseItem_vdata(self)[])
-  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.sceneEventFilter(slotval1, slotval2)
   virtualReturn
 
@@ -8311,7 +8402,7 @@ method sceneEvent*(self: VirtualQGraphicsEllipseItem, event: gen_qcoreevent_type
   QGraphicsEllipseItemsceneEvent(self[], event)
 proc fcQGraphicsEllipseItem_method_callback_sceneEvent(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQGraphicsEllipseItem](fcQGraphicsEllipseItem_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.sceneEvent(slotval1)
   virtualReturn
 
@@ -8319,126 +8410,126 @@ method contextMenuEvent*(self: VirtualQGraphicsEllipseItem, event: gen_qgraphics
   QGraphicsEllipseItemcontextMenuEvent(self[], event)
 proc fcQGraphicsEllipseItem_method_callback_contextMenuEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsEllipseItem](fcQGraphicsEllipseItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneContextMenuEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneContextMenuEvent(h: event, owned: false)
   inst.contextMenuEvent(slotval1)
 
 method dragEnterEvent*(self: VirtualQGraphicsEllipseItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void {.base.} =
   QGraphicsEllipseItemdragEnterEvent(self[], event)
 proc fcQGraphicsEllipseItem_method_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsEllipseItem](fcQGraphicsEllipseItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event, owned: false)
   inst.dragEnterEvent(slotval1)
 
 method dragLeaveEvent*(self: VirtualQGraphicsEllipseItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void {.base.} =
   QGraphicsEllipseItemdragLeaveEvent(self[], event)
 proc fcQGraphicsEllipseItem_method_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsEllipseItem](fcQGraphicsEllipseItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event, owned: false)
   inst.dragLeaveEvent(slotval1)
 
 method dragMoveEvent*(self: VirtualQGraphicsEllipseItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void {.base.} =
   QGraphicsEllipseItemdragMoveEvent(self[], event)
 proc fcQGraphicsEllipseItem_method_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsEllipseItem](fcQGraphicsEllipseItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event, owned: false)
   inst.dragMoveEvent(slotval1)
 
 method dropEvent*(self: VirtualQGraphicsEllipseItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void {.base.} =
   QGraphicsEllipseItemdropEvent(self[], event)
 proc fcQGraphicsEllipseItem_method_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsEllipseItem](fcQGraphicsEllipseItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event, owned: false)
   inst.dropEvent(slotval1)
 
 method focusInEvent*(self: VirtualQGraphicsEllipseItem, event: gen_qevent_types.QFocusEvent): void {.base.} =
   QGraphicsEllipseItemfocusInEvent(self[], event)
 proc fcQGraphicsEllipseItem_method_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsEllipseItem](fcQGraphicsEllipseItem_vdata(self)[])
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   inst.focusInEvent(slotval1)
 
 method focusOutEvent*(self: VirtualQGraphicsEllipseItem, event: gen_qevent_types.QFocusEvent): void {.base.} =
   QGraphicsEllipseItemfocusOutEvent(self[], event)
 proc fcQGraphicsEllipseItem_method_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsEllipseItem](fcQGraphicsEllipseItem_vdata(self)[])
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   inst.focusOutEvent(slotval1)
 
 method hoverEnterEvent*(self: VirtualQGraphicsEllipseItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent): void {.base.} =
   QGraphicsEllipseItemhoverEnterEvent(self[], event)
 proc fcQGraphicsEllipseItem_method_callback_hoverEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsEllipseItem](fcQGraphicsEllipseItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event, owned: false)
   inst.hoverEnterEvent(slotval1)
 
 method hoverMoveEvent*(self: VirtualQGraphicsEllipseItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent): void {.base.} =
   QGraphicsEllipseItemhoverMoveEvent(self[], event)
 proc fcQGraphicsEllipseItem_method_callback_hoverMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsEllipseItem](fcQGraphicsEllipseItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event, owned: false)
   inst.hoverMoveEvent(slotval1)
 
 method hoverLeaveEvent*(self: VirtualQGraphicsEllipseItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent): void {.base.} =
   QGraphicsEllipseItemhoverLeaveEvent(self[], event)
 proc fcQGraphicsEllipseItem_method_callback_hoverLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsEllipseItem](fcQGraphicsEllipseItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event, owned: false)
   inst.hoverLeaveEvent(slotval1)
 
 method keyPressEvent*(self: VirtualQGraphicsEllipseItem, event: gen_qevent_types.QKeyEvent): void {.base.} =
   QGraphicsEllipseItemkeyPressEvent(self[], event)
 proc fcQGraphicsEllipseItem_method_callback_keyPressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsEllipseItem](fcQGraphicsEllipseItem_vdata(self)[])
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   inst.keyPressEvent(slotval1)
 
 method keyReleaseEvent*(self: VirtualQGraphicsEllipseItem, event: gen_qevent_types.QKeyEvent): void {.base.} =
   QGraphicsEllipseItemkeyReleaseEvent(self[], event)
 proc fcQGraphicsEllipseItem_method_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsEllipseItem](fcQGraphicsEllipseItem_vdata(self)[])
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   inst.keyReleaseEvent(slotval1)
 
 method mousePressEvent*(self: VirtualQGraphicsEllipseItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void {.base.} =
   QGraphicsEllipseItemmousePressEvent(self[], event)
 proc fcQGraphicsEllipseItem_method_callback_mousePressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsEllipseItem](fcQGraphicsEllipseItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event, owned: false)
   inst.mousePressEvent(slotval1)
 
 method mouseMoveEvent*(self: VirtualQGraphicsEllipseItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void {.base.} =
   QGraphicsEllipseItemmouseMoveEvent(self[], event)
 proc fcQGraphicsEllipseItem_method_callback_mouseMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsEllipseItem](fcQGraphicsEllipseItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event, owned: false)
   inst.mouseMoveEvent(slotval1)
 
 method mouseReleaseEvent*(self: VirtualQGraphicsEllipseItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void {.base.} =
   QGraphicsEllipseItemmouseReleaseEvent(self[], event)
 proc fcQGraphicsEllipseItem_method_callback_mouseReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsEllipseItem](fcQGraphicsEllipseItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event, owned: false)
   inst.mouseReleaseEvent(slotval1)
 
 method mouseDoubleClickEvent*(self: VirtualQGraphicsEllipseItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void {.base.} =
   QGraphicsEllipseItemmouseDoubleClickEvent(self[], event)
 proc fcQGraphicsEllipseItem_method_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsEllipseItem](fcQGraphicsEllipseItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event, owned: false)
   inst.mouseDoubleClickEvent(slotval1)
 
 method wheelEvent*(self: VirtualQGraphicsEllipseItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent): void {.base.} =
   QGraphicsEllipseItemwheelEvent(self[], event)
 proc fcQGraphicsEllipseItem_method_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsEllipseItem](fcQGraphicsEllipseItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent(h: event, owned: false)
   inst.wheelEvent(slotval1)
 
 method inputMethodEvent*(self: VirtualQGraphicsEllipseItem, event: gen_qevent_types.QInputMethodEvent): void {.base.} =
   QGraphicsEllipseIteminputMethodEvent(self[], event)
 proc fcQGraphicsEllipseItem_method_callback_inputMethodEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsEllipseItem](fcQGraphicsEllipseItem_vdata(self)[])
-  let slotval1 = gen_qevent_types.QInputMethodEvent(h: event)
+  let slotval1 = gen_qevent_types.QInputMethodEvent(h: event, owned: false)
   inst.inputMethodEvent(slotval1)
 
 method inputMethodQuery*(self: VirtualQGraphicsEllipseItem, query: cint): gen_qvariant_types.QVariant {.base.} =
@@ -8454,7 +8545,7 @@ method itemChange*(self: VirtualQGraphicsEllipseItem, change: cint, value: gen_q
 proc fcQGraphicsEllipseItem_method_callback_itemChange(self: pointer, change: cint, value: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsEllipseItem](fcQGraphicsEllipseItem_vdata(self)[])
   let slotval1 = cint(change)
-  let slotval2 = gen_qvariant_types.QVariant(h: value)
+  let slotval2 = gen_qvariant_types.QVariant(h: value, owned: false)
   var virtualReturn = inst.itemChange(slotval1, slotval2)
   virtualReturn.h
 
@@ -8547,7 +8638,7 @@ proc create*(T: type gen_qgraphicsitem_types.QGraphicsEllipseItem,
     vtbl[].vtbl.inputMethodQuery = fcQGraphicsEllipseItem_vtable_callback_inputMethodQuery
   if not isNil(vtbl[].itemChange):
     vtbl[].vtbl.itemChange = fcQGraphicsEllipseItem_vtable_callback_itemChange
-  let tmp = gen_qgraphicsitem_types.QGraphicsEllipseItem(h: fcQGraphicsEllipseItem_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))))
+  let tmp = gen_qgraphicsitem_types.QGraphicsEllipseItem(h: fcQGraphicsEllipseItem_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))), owned: true)
   fcQGraphicsEllipseItem_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qgraphicsitem_types.QGraphicsEllipseItem,
@@ -8628,7 +8719,7 @@ proc create*(T: type gen_qgraphicsitem_types.QGraphicsEllipseItem,
     vtbl[].vtbl.inputMethodQuery = fcQGraphicsEllipseItem_vtable_callback_inputMethodQuery
   if not isNil(vtbl[].itemChange):
     vtbl[].vtbl.itemChange = fcQGraphicsEllipseItem_vtable_callback_itemChange
-  let tmp = gen_qgraphicsitem_types.QGraphicsEllipseItem(h: fcQGraphicsEllipseItem_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), rect.h))
+  let tmp = gen_qgraphicsitem_types.QGraphicsEllipseItem(h: fcQGraphicsEllipseItem_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), rect.h), owned: true)
   fcQGraphicsEllipseItem_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qgraphicsitem_types.QGraphicsEllipseItem,
@@ -8709,7 +8800,7 @@ proc create*(T: type gen_qgraphicsitem_types.QGraphicsEllipseItem,
     vtbl[].vtbl.inputMethodQuery = fcQGraphicsEllipseItem_vtable_callback_inputMethodQuery
   if not isNil(vtbl[].itemChange):
     vtbl[].vtbl.itemChange = fcQGraphicsEllipseItem_vtable_callback_itemChange
-  let tmp = gen_qgraphicsitem_types.QGraphicsEllipseItem(h: fcQGraphicsEllipseItem_new3(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), x, y, w, h))
+  let tmp = gen_qgraphicsitem_types.QGraphicsEllipseItem(h: fcQGraphicsEllipseItem_new3(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), x, y, w, h), owned: true)
   fcQGraphicsEllipseItem_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qgraphicsitem_types.QGraphicsEllipseItem,
@@ -8790,7 +8881,7 @@ proc create*(T: type gen_qgraphicsitem_types.QGraphicsEllipseItem,
     vtbl[].vtbl.inputMethodQuery = fcQGraphicsEllipseItem_vtable_callback_inputMethodQuery
   if not isNil(vtbl[].itemChange):
     vtbl[].vtbl.itemChange = fcQGraphicsEllipseItem_vtable_callback_itemChange
-  let tmp = gen_qgraphicsitem_types.QGraphicsEllipseItem(h: fcQGraphicsEllipseItem_new4(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h))
+  let tmp = gen_qgraphicsitem_types.QGraphicsEllipseItem(h: fcQGraphicsEllipseItem_new4(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h), owned: true)
   fcQGraphicsEllipseItem_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qgraphicsitem_types.QGraphicsEllipseItem,
@@ -8871,7 +8962,7 @@ proc create*(T: type gen_qgraphicsitem_types.QGraphicsEllipseItem,
     vtbl[].vtbl.inputMethodQuery = fcQGraphicsEllipseItem_vtable_callback_inputMethodQuery
   if not isNil(vtbl[].itemChange):
     vtbl[].vtbl.itemChange = fcQGraphicsEllipseItem_vtable_callback_itemChange
-  let tmp = gen_qgraphicsitem_types.QGraphicsEllipseItem(h: fcQGraphicsEllipseItem_new5(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), rect.h, parent.h))
+  let tmp = gen_qgraphicsitem_types.QGraphicsEllipseItem(h: fcQGraphicsEllipseItem_new5(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), rect.h, parent.h), owned: true)
   fcQGraphicsEllipseItem_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qgraphicsitem_types.QGraphicsEllipseItem,
@@ -8952,13 +9043,14 @@ proc create*(T: type gen_qgraphicsitem_types.QGraphicsEllipseItem,
     vtbl[].vtbl.inputMethodQuery = fcQGraphicsEllipseItem_vtable_callback_inputMethodQuery
   if not isNil(vtbl[].itemChange):
     vtbl[].vtbl.itemChange = fcQGraphicsEllipseItem_vtable_callback_itemChange
-  let tmp = gen_qgraphicsitem_types.QGraphicsEllipseItem(h: fcQGraphicsEllipseItem_new6(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), x, y, w, h, parent.h))
+  let tmp = gen_qgraphicsitem_types.QGraphicsEllipseItem(h: fcQGraphicsEllipseItem_new6(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), x, y, w, h, parent.h), owned: true)
   fcQGraphicsEllipseItem_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQGraphicsEllipseItem_mvtbl = cQGraphicsEllipseItemVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQGraphicsEllipseItem()[])](self.fcQGraphicsEllipseItem_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   boundingRect: fcQGraphicsEllipseItem_method_callback_boundingRect,
   shape: fcQGraphicsEllipseItem_method_callback_shape,
@@ -9037,8 +9129,6 @@ proc create*(T: type gen_qgraphicsitem_types.QGraphicsEllipseItem,
   inst[].h = fcQGraphicsEllipseItem_new6(addr(cQGraphicsEllipseItem_mvtbl), csize_t(sizeof(pointer)), x, y, w, h, parent.h)
   fcQGraphicsEllipseItem_vdata(inst[].h)[] = addr inst[]
 
-proc delete*(self: gen_qgraphicsitem_types.QGraphicsEllipseItem) =
-  fcQGraphicsEllipseItem_delete(self.h)
 proc fillRule*(self: gen_qgraphicsitem_types.QGraphicsPolygonItem): cint =
   cint(fcQGraphicsPolygonItem_fillRule(self.h))
 
@@ -9046,10 +9136,10 @@ proc setFillRule*(self: gen_qgraphicsitem_types.QGraphicsPolygonItem, rule: cint
   fcQGraphicsPolygonItem_setFillRule(self.h, cint(rule))
 
 proc boundingRect*(self: gen_qgraphicsitem_types.QGraphicsPolygonItem): gen_qrect_types.QRectF =
-  gen_qrect_types.QRectF(h: fcQGraphicsPolygonItem_boundingRect(self.h))
+  gen_qrect_types.QRectF(h: fcQGraphicsPolygonItem_boundingRect(self.h), owned: true)
 
 proc shape*(self: gen_qgraphicsitem_types.QGraphicsPolygonItem): gen_qpainterpath_types.QPainterPath =
-  gen_qpainterpath_types.QPainterPath(h: fcQGraphicsPolygonItem_shape(self.h))
+  gen_qpainterpath_types.QPainterPath(h: fcQGraphicsPolygonItem_shape(self.h), owned: true)
 
 proc contains*(self: gen_qgraphicsitem_types.QGraphicsPolygonItem, point: gen_qpoint_types.QPointF): bool =
   fcQGraphicsPolygonItem_contains(self.h, point.h)
@@ -9061,7 +9151,7 @@ proc isObscuredBy*(self: gen_qgraphicsitem_types.QGraphicsPolygonItem, item: gen
   fcQGraphicsPolygonItem_isObscuredBy(self.h, item.h)
 
 proc opaqueArea*(self: gen_qgraphicsitem_types.QGraphicsPolygonItem): gen_qpainterpath_types.QPainterPath =
-  gen_qpainterpath_types.QPainterPath(h: fcQGraphicsPolygonItem_opaqueArea(self.h))
+  gen_qpainterpath_types.QPainterPath(h: fcQGraphicsPolygonItem_opaqueArea(self.h), owned: true)
 
 proc typeX*(self: gen_qgraphicsitem_types.QGraphicsPolygonItem): cint =
   fcQGraphicsPolygonItem_typeX(self.h)
@@ -9101,7 +9191,7 @@ type QGraphicsPolygonItemwheelEventProc* = proc(self: QGraphicsPolygonItem, even
 type QGraphicsPolygonIteminputMethodEventProc* = proc(self: QGraphicsPolygonItem, event: gen_qevent_types.QInputMethodEvent): void {.raises: [], gcsafe.}
 type QGraphicsPolygonIteminputMethodQueryProc* = proc(self: QGraphicsPolygonItem, query: cint): gen_qvariant_types.QVariant {.raises: [], gcsafe.}
 type QGraphicsPolygonItemitemChangeProc* = proc(self: QGraphicsPolygonItem, change: cint, value: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant {.raises: [], gcsafe.}
-type QGraphicsPolygonItemVTable* = object
+type QGraphicsPolygonItemVTable* {.inheritable, pure.} = object
   vtbl: cQGraphicsPolygonItemVTable
   boundingRect*: QGraphicsPolygonItemboundingRectProc
   shape*: QGraphicsPolygonItemshapeProc
@@ -9139,22 +9229,28 @@ type QGraphicsPolygonItemVTable* = object
   inputMethodQuery*: QGraphicsPolygonIteminputMethodQueryProc
   itemChange*: QGraphicsPolygonItemitemChangeProc
 proc QGraphicsPolygonItemboundingRect*(self: gen_qgraphicsitem_types.QGraphicsPolygonItem): gen_qrect_types.QRectF =
-  gen_qrect_types.QRectF(h: fcQGraphicsPolygonItem_virtualbase_boundingRect(self.h))
+  gen_qrect_types.QRectF(h: fcQGraphicsPolygonItem_virtualbase_boundingRect(self.h), owned: true)
 
 proc fcQGraphicsPolygonItem_vtable_callback_boundingRect(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QGraphicsPolygonItemVTable](fcQGraphicsPolygonItem_vdata(self)[])
   let self = QGraphicsPolygonItem(h: self)
   var virtualReturn = vtbl[].boundingRect(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QGraphicsPolygonItemshape*(self: gen_qgraphicsitem_types.QGraphicsPolygonItem): gen_qpainterpath_types.QPainterPath =
-  gen_qpainterpath_types.QPainterPath(h: fcQGraphicsPolygonItem_virtualbase_shape(self.h))
+  gen_qpainterpath_types.QPainterPath(h: fcQGraphicsPolygonItem_virtualbase_shape(self.h), owned: true)
 
 proc fcQGraphicsPolygonItem_vtable_callback_shape(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QGraphicsPolygonItemVTable](fcQGraphicsPolygonItem_vdata(self)[])
   let self = QGraphicsPolygonItem(h: self)
   var virtualReturn = vtbl[].shape(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QGraphicsPolygonItemcontains*(self: gen_qgraphicsitem_types.QGraphicsPolygonItem, point: gen_qpoint_types.QPointF): bool =
   fcQGraphicsPolygonItem_virtualbase_contains(self.h, point.h)
@@ -9162,7 +9258,7 @@ proc QGraphicsPolygonItemcontains*(self: gen_qgraphicsitem_types.QGraphicsPolygo
 proc fcQGraphicsPolygonItem_vtable_callback_contains(self: pointer, point: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QGraphicsPolygonItemVTable](fcQGraphicsPolygonItem_vdata(self)[])
   let self = QGraphicsPolygonItem(h: self)
-  let slotval1 = gen_qpoint_types.QPointF(h: point)
+  let slotval1 = gen_qpoint_types.QPointF(h: point, owned: false)
   var virtualReturn = vtbl[].contains(self, slotval1)
   virtualReturn
 
@@ -9172,9 +9268,9 @@ proc QGraphicsPolygonItempaint*(self: gen_qgraphicsitem_types.QGraphicsPolygonIt
 proc fcQGraphicsPolygonItem_vtable_callback_paint(self: pointer, painter: pointer, option: pointer, widget: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsPolygonItemVTable](fcQGraphicsPolygonItem_vdata(self)[])
   let self = QGraphicsPolygonItem(h: self)
-  let slotval1 = gen_qpainter_types.QPainter(h: painter)
-  let slotval2 = gen_qstyleoption_types.QStyleOptionGraphicsItem(h: option)
-  let slotval3 = gen_qwidget_types.QWidget(h: widget)
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
+  let slotval2 = gen_qstyleoption_types.QStyleOptionGraphicsItem(h: option, owned: false)
+  let slotval3 = gen_qwidget_types.QWidget(h: widget, owned: false)
   vtbl[].paint(self, slotval1, slotval2, slotval3)
 
 proc QGraphicsPolygonItemisObscuredBy*(self: gen_qgraphicsitem_types.QGraphicsPolygonItem, item: gen_qgraphicsitem_types.QGraphicsItem): bool =
@@ -9183,18 +9279,21 @@ proc QGraphicsPolygonItemisObscuredBy*(self: gen_qgraphicsitem_types.QGraphicsPo
 proc fcQGraphicsPolygonItem_vtable_callback_isObscuredBy(self: pointer, item: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QGraphicsPolygonItemVTable](fcQGraphicsPolygonItem_vdata(self)[])
   let self = QGraphicsPolygonItem(h: self)
-  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: item)
+  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: item, owned: false)
   var virtualReturn = vtbl[].isObscuredBy(self, slotval1)
   virtualReturn
 
 proc QGraphicsPolygonItemopaqueArea*(self: gen_qgraphicsitem_types.QGraphicsPolygonItem): gen_qpainterpath_types.QPainterPath =
-  gen_qpainterpath_types.QPainterPath(h: fcQGraphicsPolygonItem_virtualbase_opaqueArea(self.h))
+  gen_qpainterpath_types.QPainterPath(h: fcQGraphicsPolygonItem_virtualbase_opaqueArea(self.h), owned: true)
 
 proc fcQGraphicsPolygonItem_vtable_callback_opaqueArea(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QGraphicsPolygonItemVTable](fcQGraphicsPolygonItem_vdata(self)[])
   let self = QGraphicsPolygonItem(h: self)
   var virtualReturn = vtbl[].opaqueArea(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QGraphicsPolygonItemtypeX*(self: gen_qgraphicsitem_types.QGraphicsPolygonItem): cint =
   fcQGraphicsPolygonItem_virtualbase_typeX(self.h)
@@ -9222,18 +9321,21 @@ proc fcQGraphicsPolygonItem_vtable_callback_setExtension(self: pointer, extensio
   let vtbl = cast[ptr QGraphicsPolygonItemVTable](fcQGraphicsPolygonItem_vdata(self)[])
   let self = QGraphicsPolygonItem(h: self)
   let slotval1 = cint(extension)
-  let slotval2 = gen_qvariant_types.QVariant(h: variant)
+  let slotval2 = gen_qvariant_types.QVariant(h: variant, owned: false)
   vtbl[].setExtension(self, slotval1, slotval2)
 
 proc QGraphicsPolygonItemextension*(self: gen_qgraphicsitem_types.QGraphicsPolygonItem, variant: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQGraphicsPolygonItem_virtualbase_extension(self.h, variant.h))
+  gen_qvariant_types.QVariant(h: fcQGraphicsPolygonItem_virtualbase_extension(self.h, variant.h), owned: true)
 
 proc fcQGraphicsPolygonItem_vtable_callback_extension(self: pointer, variant: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QGraphicsPolygonItemVTable](fcQGraphicsPolygonItem_vdata(self)[])
   let self = QGraphicsPolygonItem(h: self)
-  let slotval1 = gen_qvariant_types.QVariant(h: variant)
+  let slotval1 = gen_qvariant_types.QVariant(h: variant, owned: false)
   var virtualReturn = vtbl[].extension(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QGraphicsPolygonItemadvance*(self: gen_qgraphicsitem_types.QGraphicsPolygonItem, phase: cint): void =
   fcQGraphicsPolygonItem_virtualbase_advance(self.h, phase)
@@ -9250,7 +9352,7 @@ proc QGraphicsPolygonItemcollidesWithItem*(self: gen_qgraphicsitem_types.QGraphi
 proc fcQGraphicsPolygonItem_vtable_callback_collidesWithItem(self: pointer, other: pointer, mode: cint): bool {.cdecl.} =
   let vtbl = cast[ptr QGraphicsPolygonItemVTable](fcQGraphicsPolygonItem_vdata(self)[])
   let self = QGraphicsPolygonItem(h: self)
-  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: other)
+  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: other, owned: false)
   let slotval2 = cint(mode)
   var virtualReturn = vtbl[].collidesWithItem(self, slotval1, slotval2)
   virtualReturn
@@ -9261,7 +9363,7 @@ proc QGraphicsPolygonItemcollidesWithPath*(self: gen_qgraphicsitem_types.QGraphi
 proc fcQGraphicsPolygonItem_vtable_callback_collidesWithPath(self: pointer, path: pointer, mode: cint): bool {.cdecl.} =
   let vtbl = cast[ptr QGraphicsPolygonItemVTable](fcQGraphicsPolygonItem_vdata(self)[])
   let self = QGraphicsPolygonItem(h: self)
-  let slotval1 = gen_qpainterpath_types.QPainterPath(h: path)
+  let slotval1 = gen_qpainterpath_types.QPainterPath(h: path, owned: false)
   let slotval2 = cint(mode)
   var virtualReturn = vtbl[].collidesWithPath(self, slotval1, slotval2)
   virtualReturn
@@ -9272,8 +9374,8 @@ proc QGraphicsPolygonItemsceneEventFilter*(self: gen_qgraphicsitem_types.QGraphi
 proc fcQGraphicsPolygonItem_vtable_callback_sceneEventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QGraphicsPolygonItemVTable](fcQGraphicsPolygonItem_vdata(self)[])
   let self = QGraphicsPolygonItem(h: self)
-  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].sceneEventFilter(self, slotval1, slotval2)
   virtualReturn
 
@@ -9283,7 +9385,7 @@ proc QGraphicsPolygonItemsceneEvent*(self: gen_qgraphicsitem_types.QGraphicsPoly
 proc fcQGraphicsPolygonItem_vtable_callback_sceneEvent(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QGraphicsPolygonItemVTable](fcQGraphicsPolygonItem_vdata(self)[])
   let self = QGraphicsPolygonItem(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].sceneEvent(self, slotval1)
   virtualReturn
 
@@ -9293,7 +9395,7 @@ proc QGraphicsPolygonItemcontextMenuEvent*(self: gen_qgraphicsitem_types.QGraphi
 proc fcQGraphicsPolygonItem_vtable_callback_contextMenuEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsPolygonItemVTable](fcQGraphicsPolygonItem_vdata(self)[])
   let self = QGraphicsPolygonItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneContextMenuEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneContextMenuEvent(h: event, owned: false)
   vtbl[].contextMenuEvent(self, slotval1)
 
 proc QGraphicsPolygonItemdragEnterEvent*(self: gen_qgraphicsitem_types.QGraphicsPolygonItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void =
@@ -9302,7 +9404,7 @@ proc QGraphicsPolygonItemdragEnterEvent*(self: gen_qgraphicsitem_types.QGraphics
 proc fcQGraphicsPolygonItem_vtable_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsPolygonItemVTable](fcQGraphicsPolygonItem_vdata(self)[])
   let self = QGraphicsPolygonItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event, owned: false)
   vtbl[].dragEnterEvent(self, slotval1)
 
 proc QGraphicsPolygonItemdragLeaveEvent*(self: gen_qgraphicsitem_types.QGraphicsPolygonItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void =
@@ -9311,7 +9413,7 @@ proc QGraphicsPolygonItemdragLeaveEvent*(self: gen_qgraphicsitem_types.QGraphics
 proc fcQGraphicsPolygonItem_vtable_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsPolygonItemVTable](fcQGraphicsPolygonItem_vdata(self)[])
   let self = QGraphicsPolygonItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event, owned: false)
   vtbl[].dragLeaveEvent(self, slotval1)
 
 proc QGraphicsPolygonItemdragMoveEvent*(self: gen_qgraphicsitem_types.QGraphicsPolygonItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void =
@@ -9320,7 +9422,7 @@ proc QGraphicsPolygonItemdragMoveEvent*(self: gen_qgraphicsitem_types.QGraphicsP
 proc fcQGraphicsPolygonItem_vtable_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsPolygonItemVTable](fcQGraphicsPolygonItem_vdata(self)[])
   let self = QGraphicsPolygonItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event, owned: false)
   vtbl[].dragMoveEvent(self, slotval1)
 
 proc QGraphicsPolygonItemdropEvent*(self: gen_qgraphicsitem_types.QGraphicsPolygonItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void =
@@ -9329,7 +9431,7 @@ proc QGraphicsPolygonItemdropEvent*(self: gen_qgraphicsitem_types.QGraphicsPolyg
 proc fcQGraphicsPolygonItem_vtable_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsPolygonItemVTable](fcQGraphicsPolygonItem_vdata(self)[])
   let self = QGraphicsPolygonItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event, owned: false)
   vtbl[].dropEvent(self, slotval1)
 
 proc QGraphicsPolygonItemfocusInEvent*(self: gen_qgraphicsitem_types.QGraphicsPolygonItem, event: gen_qevent_types.QFocusEvent): void =
@@ -9338,7 +9440,7 @@ proc QGraphicsPolygonItemfocusInEvent*(self: gen_qgraphicsitem_types.QGraphicsPo
 proc fcQGraphicsPolygonItem_vtable_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsPolygonItemVTable](fcQGraphicsPolygonItem_vdata(self)[])
   let self = QGraphicsPolygonItem(h: self)
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusInEvent(self, slotval1)
 
 proc QGraphicsPolygonItemfocusOutEvent*(self: gen_qgraphicsitem_types.QGraphicsPolygonItem, event: gen_qevent_types.QFocusEvent): void =
@@ -9347,7 +9449,7 @@ proc QGraphicsPolygonItemfocusOutEvent*(self: gen_qgraphicsitem_types.QGraphicsP
 proc fcQGraphicsPolygonItem_vtable_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsPolygonItemVTable](fcQGraphicsPolygonItem_vdata(self)[])
   let self = QGraphicsPolygonItem(h: self)
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusOutEvent(self, slotval1)
 
 proc QGraphicsPolygonItemhoverEnterEvent*(self: gen_qgraphicsitem_types.QGraphicsPolygonItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent): void =
@@ -9356,7 +9458,7 @@ proc QGraphicsPolygonItemhoverEnterEvent*(self: gen_qgraphicsitem_types.QGraphic
 proc fcQGraphicsPolygonItem_vtable_callback_hoverEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsPolygonItemVTable](fcQGraphicsPolygonItem_vdata(self)[])
   let self = QGraphicsPolygonItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event, owned: false)
   vtbl[].hoverEnterEvent(self, slotval1)
 
 proc QGraphicsPolygonItemhoverMoveEvent*(self: gen_qgraphicsitem_types.QGraphicsPolygonItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent): void =
@@ -9365,7 +9467,7 @@ proc QGraphicsPolygonItemhoverMoveEvent*(self: gen_qgraphicsitem_types.QGraphics
 proc fcQGraphicsPolygonItem_vtable_callback_hoverMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsPolygonItemVTable](fcQGraphicsPolygonItem_vdata(self)[])
   let self = QGraphicsPolygonItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event, owned: false)
   vtbl[].hoverMoveEvent(self, slotval1)
 
 proc QGraphicsPolygonItemhoverLeaveEvent*(self: gen_qgraphicsitem_types.QGraphicsPolygonItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent): void =
@@ -9374,7 +9476,7 @@ proc QGraphicsPolygonItemhoverLeaveEvent*(self: gen_qgraphicsitem_types.QGraphic
 proc fcQGraphicsPolygonItem_vtable_callback_hoverLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsPolygonItemVTable](fcQGraphicsPolygonItem_vdata(self)[])
   let self = QGraphicsPolygonItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event, owned: false)
   vtbl[].hoverLeaveEvent(self, slotval1)
 
 proc QGraphicsPolygonItemkeyPressEvent*(self: gen_qgraphicsitem_types.QGraphicsPolygonItem, event: gen_qevent_types.QKeyEvent): void =
@@ -9383,7 +9485,7 @@ proc QGraphicsPolygonItemkeyPressEvent*(self: gen_qgraphicsitem_types.QGraphicsP
 proc fcQGraphicsPolygonItem_vtable_callback_keyPressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsPolygonItemVTable](fcQGraphicsPolygonItem_vdata(self)[])
   let self = QGraphicsPolygonItem(h: self)
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   vtbl[].keyPressEvent(self, slotval1)
 
 proc QGraphicsPolygonItemkeyReleaseEvent*(self: gen_qgraphicsitem_types.QGraphicsPolygonItem, event: gen_qevent_types.QKeyEvent): void =
@@ -9392,7 +9494,7 @@ proc QGraphicsPolygonItemkeyReleaseEvent*(self: gen_qgraphicsitem_types.QGraphic
 proc fcQGraphicsPolygonItem_vtable_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsPolygonItemVTable](fcQGraphicsPolygonItem_vdata(self)[])
   let self = QGraphicsPolygonItem(h: self)
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   vtbl[].keyReleaseEvent(self, slotval1)
 
 proc QGraphicsPolygonItemmousePressEvent*(self: gen_qgraphicsitem_types.QGraphicsPolygonItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void =
@@ -9401,7 +9503,7 @@ proc QGraphicsPolygonItemmousePressEvent*(self: gen_qgraphicsitem_types.QGraphic
 proc fcQGraphicsPolygonItem_vtable_callback_mousePressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsPolygonItemVTable](fcQGraphicsPolygonItem_vdata(self)[])
   let self = QGraphicsPolygonItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event, owned: false)
   vtbl[].mousePressEvent(self, slotval1)
 
 proc QGraphicsPolygonItemmouseMoveEvent*(self: gen_qgraphicsitem_types.QGraphicsPolygonItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void =
@@ -9410,7 +9512,7 @@ proc QGraphicsPolygonItemmouseMoveEvent*(self: gen_qgraphicsitem_types.QGraphics
 proc fcQGraphicsPolygonItem_vtable_callback_mouseMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsPolygonItemVTable](fcQGraphicsPolygonItem_vdata(self)[])
   let self = QGraphicsPolygonItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event, owned: false)
   vtbl[].mouseMoveEvent(self, slotval1)
 
 proc QGraphicsPolygonItemmouseReleaseEvent*(self: gen_qgraphicsitem_types.QGraphicsPolygonItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void =
@@ -9419,7 +9521,7 @@ proc QGraphicsPolygonItemmouseReleaseEvent*(self: gen_qgraphicsitem_types.QGraph
 proc fcQGraphicsPolygonItem_vtable_callback_mouseReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsPolygonItemVTable](fcQGraphicsPolygonItem_vdata(self)[])
   let self = QGraphicsPolygonItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event, owned: false)
   vtbl[].mouseReleaseEvent(self, slotval1)
 
 proc QGraphicsPolygonItemmouseDoubleClickEvent*(self: gen_qgraphicsitem_types.QGraphicsPolygonItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void =
@@ -9428,7 +9530,7 @@ proc QGraphicsPolygonItemmouseDoubleClickEvent*(self: gen_qgraphicsitem_types.QG
 proc fcQGraphicsPolygonItem_vtable_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsPolygonItemVTable](fcQGraphicsPolygonItem_vdata(self)[])
   let self = QGraphicsPolygonItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event, owned: false)
   vtbl[].mouseDoubleClickEvent(self, slotval1)
 
 proc QGraphicsPolygonItemwheelEvent*(self: gen_qgraphicsitem_types.QGraphicsPolygonItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent): void =
@@ -9437,7 +9539,7 @@ proc QGraphicsPolygonItemwheelEvent*(self: gen_qgraphicsitem_types.QGraphicsPoly
 proc fcQGraphicsPolygonItem_vtable_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsPolygonItemVTable](fcQGraphicsPolygonItem_vdata(self)[])
   let self = QGraphicsPolygonItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent(h: event, owned: false)
   vtbl[].wheelEvent(self, slotval1)
 
 proc QGraphicsPolygonIteminputMethodEvent*(self: gen_qgraphicsitem_types.QGraphicsPolygonItem, event: gen_qevent_types.QInputMethodEvent): void =
@@ -9446,29 +9548,35 @@ proc QGraphicsPolygonIteminputMethodEvent*(self: gen_qgraphicsitem_types.QGraphi
 proc fcQGraphicsPolygonItem_vtable_callback_inputMethodEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsPolygonItemVTable](fcQGraphicsPolygonItem_vdata(self)[])
   let self = QGraphicsPolygonItem(h: self)
-  let slotval1 = gen_qevent_types.QInputMethodEvent(h: event)
+  let slotval1 = gen_qevent_types.QInputMethodEvent(h: event, owned: false)
   vtbl[].inputMethodEvent(self, slotval1)
 
 proc QGraphicsPolygonIteminputMethodQuery*(self: gen_qgraphicsitem_types.QGraphicsPolygonItem, query: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQGraphicsPolygonItem_virtualbase_inputMethodQuery(self.h, cint(query)))
+  gen_qvariant_types.QVariant(h: fcQGraphicsPolygonItem_virtualbase_inputMethodQuery(self.h, cint(query)), owned: true)
 
 proc fcQGraphicsPolygonItem_vtable_callback_inputMethodQuery(self: pointer, query: cint): pointer {.cdecl.} =
   let vtbl = cast[ptr QGraphicsPolygonItemVTable](fcQGraphicsPolygonItem_vdata(self)[])
   let self = QGraphicsPolygonItem(h: self)
   let slotval1 = cint(query)
   var virtualReturn = vtbl[].inputMethodQuery(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QGraphicsPolygonItemitemChange*(self: gen_qgraphicsitem_types.QGraphicsPolygonItem, change: cint, value: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQGraphicsPolygonItem_virtualbase_itemChange(self.h, cint(change), value.h))
+  gen_qvariant_types.QVariant(h: fcQGraphicsPolygonItem_virtualbase_itemChange(self.h, cint(change), value.h), owned: true)
 
 proc fcQGraphicsPolygonItem_vtable_callback_itemChange(self: pointer, change: cint, value: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QGraphicsPolygonItemVTable](fcQGraphicsPolygonItem_vdata(self)[])
   let self = QGraphicsPolygonItem(h: self)
   let slotval1 = cint(change)
-  let slotval2 = gen_qvariant_types.QVariant(h: value)
+  let slotval2 = gen_qvariant_types.QVariant(h: value, owned: false)
   var virtualReturn = vtbl[].itemChange(self, slotval1, slotval2)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 type VirtualQGraphicsPolygonItem* {.inheritable.} = ref object of QGraphicsPolygonItem
   vtbl*: cQGraphicsPolygonItemVTable
@@ -9490,7 +9598,7 @@ method contains*(self: VirtualQGraphicsPolygonItem, point: gen_qpoint_types.QPoi
   QGraphicsPolygonItemcontains(self[], point)
 proc fcQGraphicsPolygonItem_method_callback_contains(self: pointer, point: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQGraphicsPolygonItem](fcQGraphicsPolygonItem_vdata(self)[])
-  let slotval1 = gen_qpoint_types.QPointF(h: point)
+  let slotval1 = gen_qpoint_types.QPointF(h: point, owned: false)
   var virtualReturn = inst.contains(slotval1)
   virtualReturn
 
@@ -9498,16 +9606,16 @@ method paint*(self: VirtualQGraphicsPolygonItem, painter: gen_qpainter_types.QPa
   QGraphicsPolygonItempaint(self[], painter, option, widget)
 proc fcQGraphicsPolygonItem_method_callback_paint(self: pointer, painter: pointer, option: pointer, widget: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsPolygonItem](fcQGraphicsPolygonItem_vdata(self)[])
-  let slotval1 = gen_qpainter_types.QPainter(h: painter)
-  let slotval2 = gen_qstyleoption_types.QStyleOptionGraphicsItem(h: option)
-  let slotval3 = gen_qwidget_types.QWidget(h: widget)
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
+  let slotval2 = gen_qstyleoption_types.QStyleOptionGraphicsItem(h: option, owned: false)
+  let slotval3 = gen_qwidget_types.QWidget(h: widget, owned: false)
   inst.paint(slotval1, slotval2, slotval3)
 
 method isObscuredBy*(self: VirtualQGraphicsPolygonItem, item: gen_qgraphicsitem_types.QGraphicsItem): bool {.base.} =
   QGraphicsPolygonItemisObscuredBy(self[], item)
 proc fcQGraphicsPolygonItem_method_callback_isObscuredBy(self: pointer, item: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQGraphicsPolygonItem](fcQGraphicsPolygonItem_vdata(self)[])
-  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: item)
+  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: item, owned: false)
   var virtualReturn = inst.isObscuredBy(slotval1)
   virtualReturn
 
@@ -9538,14 +9646,14 @@ method setExtension*(self: VirtualQGraphicsPolygonItem, extension: cint, variant
 proc fcQGraphicsPolygonItem_method_callback_setExtension(self: pointer, extension: cint, variant: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsPolygonItem](fcQGraphicsPolygonItem_vdata(self)[])
   let slotval1 = cint(extension)
-  let slotval2 = gen_qvariant_types.QVariant(h: variant)
+  let slotval2 = gen_qvariant_types.QVariant(h: variant, owned: false)
   inst.setExtension(slotval1, slotval2)
 
 method extension*(self: VirtualQGraphicsPolygonItem, variant: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant {.base.} =
   QGraphicsPolygonItemextension(self[], variant)
 proc fcQGraphicsPolygonItem_method_callback_extension(self: pointer, variant: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsPolygonItem](fcQGraphicsPolygonItem_vdata(self)[])
-  let slotval1 = gen_qvariant_types.QVariant(h: variant)
+  let slotval1 = gen_qvariant_types.QVariant(h: variant, owned: false)
   var virtualReturn = inst.extension(slotval1)
   virtualReturn.h
 
@@ -9560,7 +9668,7 @@ method collidesWithItem*(self: VirtualQGraphicsPolygonItem, other: gen_qgraphics
   QGraphicsPolygonItemcollidesWithItem(self[], other, mode)
 proc fcQGraphicsPolygonItem_method_callback_collidesWithItem(self: pointer, other: pointer, mode: cint): bool {.cdecl.} =
   let inst = cast[VirtualQGraphicsPolygonItem](fcQGraphicsPolygonItem_vdata(self)[])
-  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: other)
+  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: other, owned: false)
   let slotval2 = cint(mode)
   var virtualReturn = inst.collidesWithItem(slotval1, slotval2)
   virtualReturn
@@ -9569,7 +9677,7 @@ method collidesWithPath*(self: VirtualQGraphicsPolygonItem, path: gen_qpainterpa
   QGraphicsPolygonItemcollidesWithPath(self[], path, mode)
 proc fcQGraphicsPolygonItem_method_callback_collidesWithPath(self: pointer, path: pointer, mode: cint): bool {.cdecl.} =
   let inst = cast[VirtualQGraphicsPolygonItem](fcQGraphicsPolygonItem_vdata(self)[])
-  let slotval1 = gen_qpainterpath_types.QPainterPath(h: path)
+  let slotval1 = gen_qpainterpath_types.QPainterPath(h: path, owned: false)
   let slotval2 = cint(mode)
   var virtualReturn = inst.collidesWithPath(slotval1, slotval2)
   virtualReturn
@@ -9578,8 +9686,8 @@ method sceneEventFilter*(self: VirtualQGraphicsPolygonItem, watched: gen_qgraphi
   QGraphicsPolygonItemsceneEventFilter(self[], watched, event)
 proc fcQGraphicsPolygonItem_method_callback_sceneEventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQGraphicsPolygonItem](fcQGraphicsPolygonItem_vdata(self)[])
-  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.sceneEventFilter(slotval1, slotval2)
   virtualReturn
 
@@ -9587,7 +9695,7 @@ method sceneEvent*(self: VirtualQGraphicsPolygonItem, event: gen_qcoreevent_type
   QGraphicsPolygonItemsceneEvent(self[], event)
 proc fcQGraphicsPolygonItem_method_callback_sceneEvent(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQGraphicsPolygonItem](fcQGraphicsPolygonItem_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.sceneEvent(slotval1)
   virtualReturn
 
@@ -9595,126 +9703,126 @@ method contextMenuEvent*(self: VirtualQGraphicsPolygonItem, event: gen_qgraphics
   QGraphicsPolygonItemcontextMenuEvent(self[], event)
 proc fcQGraphicsPolygonItem_method_callback_contextMenuEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsPolygonItem](fcQGraphicsPolygonItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneContextMenuEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneContextMenuEvent(h: event, owned: false)
   inst.contextMenuEvent(slotval1)
 
 method dragEnterEvent*(self: VirtualQGraphicsPolygonItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void {.base.} =
   QGraphicsPolygonItemdragEnterEvent(self[], event)
 proc fcQGraphicsPolygonItem_method_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsPolygonItem](fcQGraphicsPolygonItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event, owned: false)
   inst.dragEnterEvent(slotval1)
 
 method dragLeaveEvent*(self: VirtualQGraphicsPolygonItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void {.base.} =
   QGraphicsPolygonItemdragLeaveEvent(self[], event)
 proc fcQGraphicsPolygonItem_method_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsPolygonItem](fcQGraphicsPolygonItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event, owned: false)
   inst.dragLeaveEvent(slotval1)
 
 method dragMoveEvent*(self: VirtualQGraphicsPolygonItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void {.base.} =
   QGraphicsPolygonItemdragMoveEvent(self[], event)
 proc fcQGraphicsPolygonItem_method_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsPolygonItem](fcQGraphicsPolygonItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event, owned: false)
   inst.dragMoveEvent(slotval1)
 
 method dropEvent*(self: VirtualQGraphicsPolygonItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void {.base.} =
   QGraphicsPolygonItemdropEvent(self[], event)
 proc fcQGraphicsPolygonItem_method_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsPolygonItem](fcQGraphicsPolygonItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event, owned: false)
   inst.dropEvent(slotval1)
 
 method focusInEvent*(self: VirtualQGraphicsPolygonItem, event: gen_qevent_types.QFocusEvent): void {.base.} =
   QGraphicsPolygonItemfocusInEvent(self[], event)
 proc fcQGraphicsPolygonItem_method_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsPolygonItem](fcQGraphicsPolygonItem_vdata(self)[])
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   inst.focusInEvent(slotval1)
 
 method focusOutEvent*(self: VirtualQGraphicsPolygonItem, event: gen_qevent_types.QFocusEvent): void {.base.} =
   QGraphicsPolygonItemfocusOutEvent(self[], event)
 proc fcQGraphicsPolygonItem_method_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsPolygonItem](fcQGraphicsPolygonItem_vdata(self)[])
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   inst.focusOutEvent(slotval1)
 
 method hoverEnterEvent*(self: VirtualQGraphicsPolygonItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent): void {.base.} =
   QGraphicsPolygonItemhoverEnterEvent(self[], event)
 proc fcQGraphicsPolygonItem_method_callback_hoverEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsPolygonItem](fcQGraphicsPolygonItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event, owned: false)
   inst.hoverEnterEvent(slotval1)
 
 method hoverMoveEvent*(self: VirtualQGraphicsPolygonItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent): void {.base.} =
   QGraphicsPolygonItemhoverMoveEvent(self[], event)
 proc fcQGraphicsPolygonItem_method_callback_hoverMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsPolygonItem](fcQGraphicsPolygonItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event, owned: false)
   inst.hoverMoveEvent(slotval1)
 
 method hoverLeaveEvent*(self: VirtualQGraphicsPolygonItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent): void {.base.} =
   QGraphicsPolygonItemhoverLeaveEvent(self[], event)
 proc fcQGraphicsPolygonItem_method_callback_hoverLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsPolygonItem](fcQGraphicsPolygonItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event, owned: false)
   inst.hoverLeaveEvent(slotval1)
 
 method keyPressEvent*(self: VirtualQGraphicsPolygonItem, event: gen_qevent_types.QKeyEvent): void {.base.} =
   QGraphicsPolygonItemkeyPressEvent(self[], event)
 proc fcQGraphicsPolygonItem_method_callback_keyPressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsPolygonItem](fcQGraphicsPolygonItem_vdata(self)[])
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   inst.keyPressEvent(slotval1)
 
 method keyReleaseEvent*(self: VirtualQGraphicsPolygonItem, event: gen_qevent_types.QKeyEvent): void {.base.} =
   QGraphicsPolygonItemkeyReleaseEvent(self[], event)
 proc fcQGraphicsPolygonItem_method_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsPolygonItem](fcQGraphicsPolygonItem_vdata(self)[])
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   inst.keyReleaseEvent(slotval1)
 
 method mousePressEvent*(self: VirtualQGraphicsPolygonItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void {.base.} =
   QGraphicsPolygonItemmousePressEvent(self[], event)
 proc fcQGraphicsPolygonItem_method_callback_mousePressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsPolygonItem](fcQGraphicsPolygonItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event, owned: false)
   inst.mousePressEvent(slotval1)
 
 method mouseMoveEvent*(self: VirtualQGraphicsPolygonItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void {.base.} =
   QGraphicsPolygonItemmouseMoveEvent(self[], event)
 proc fcQGraphicsPolygonItem_method_callback_mouseMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsPolygonItem](fcQGraphicsPolygonItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event, owned: false)
   inst.mouseMoveEvent(slotval1)
 
 method mouseReleaseEvent*(self: VirtualQGraphicsPolygonItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void {.base.} =
   QGraphicsPolygonItemmouseReleaseEvent(self[], event)
 proc fcQGraphicsPolygonItem_method_callback_mouseReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsPolygonItem](fcQGraphicsPolygonItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event, owned: false)
   inst.mouseReleaseEvent(slotval1)
 
 method mouseDoubleClickEvent*(self: VirtualQGraphicsPolygonItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void {.base.} =
   QGraphicsPolygonItemmouseDoubleClickEvent(self[], event)
 proc fcQGraphicsPolygonItem_method_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsPolygonItem](fcQGraphicsPolygonItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event, owned: false)
   inst.mouseDoubleClickEvent(slotval1)
 
 method wheelEvent*(self: VirtualQGraphicsPolygonItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent): void {.base.} =
   QGraphicsPolygonItemwheelEvent(self[], event)
 proc fcQGraphicsPolygonItem_method_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsPolygonItem](fcQGraphicsPolygonItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent(h: event, owned: false)
   inst.wheelEvent(slotval1)
 
 method inputMethodEvent*(self: VirtualQGraphicsPolygonItem, event: gen_qevent_types.QInputMethodEvent): void {.base.} =
   QGraphicsPolygonIteminputMethodEvent(self[], event)
 proc fcQGraphicsPolygonItem_method_callback_inputMethodEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsPolygonItem](fcQGraphicsPolygonItem_vdata(self)[])
-  let slotval1 = gen_qevent_types.QInputMethodEvent(h: event)
+  let slotval1 = gen_qevent_types.QInputMethodEvent(h: event, owned: false)
   inst.inputMethodEvent(slotval1)
 
 method inputMethodQuery*(self: VirtualQGraphicsPolygonItem, query: cint): gen_qvariant_types.QVariant {.base.} =
@@ -9730,7 +9838,7 @@ method itemChange*(self: VirtualQGraphicsPolygonItem, change: cint, value: gen_q
 proc fcQGraphicsPolygonItem_method_callback_itemChange(self: pointer, change: cint, value: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsPolygonItem](fcQGraphicsPolygonItem_vdata(self)[])
   let slotval1 = cint(change)
-  let slotval2 = gen_qvariant_types.QVariant(h: value)
+  let slotval2 = gen_qvariant_types.QVariant(h: value, owned: false)
   var virtualReturn = inst.itemChange(slotval1, slotval2)
   virtualReturn.h
 
@@ -9823,7 +9931,7 @@ proc create*(T: type gen_qgraphicsitem_types.QGraphicsPolygonItem,
     vtbl[].vtbl.inputMethodQuery = fcQGraphicsPolygonItem_vtable_callback_inputMethodQuery
   if not isNil(vtbl[].itemChange):
     vtbl[].vtbl.itemChange = fcQGraphicsPolygonItem_vtable_callback_itemChange
-  let tmp = gen_qgraphicsitem_types.QGraphicsPolygonItem(h: fcQGraphicsPolygonItem_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))))
+  let tmp = gen_qgraphicsitem_types.QGraphicsPolygonItem(h: fcQGraphicsPolygonItem_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))), owned: true)
   fcQGraphicsPolygonItem_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qgraphicsitem_types.QGraphicsPolygonItem,
@@ -9904,13 +10012,14 @@ proc create*(T: type gen_qgraphicsitem_types.QGraphicsPolygonItem,
     vtbl[].vtbl.inputMethodQuery = fcQGraphicsPolygonItem_vtable_callback_inputMethodQuery
   if not isNil(vtbl[].itemChange):
     vtbl[].vtbl.itemChange = fcQGraphicsPolygonItem_vtable_callback_itemChange
-  let tmp = gen_qgraphicsitem_types.QGraphicsPolygonItem(h: fcQGraphicsPolygonItem_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h))
+  let tmp = gen_qgraphicsitem_types.QGraphicsPolygonItem(h: fcQGraphicsPolygonItem_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h), owned: true)
   fcQGraphicsPolygonItem_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQGraphicsPolygonItem_mvtbl = cQGraphicsPolygonItemVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQGraphicsPolygonItem()[])](self.fcQGraphicsPolygonItem_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   boundingRect: fcQGraphicsPolygonItem_method_callback_boundingRect,
   shape: fcQGraphicsPolygonItem_method_callback_shape,
@@ -9961,16 +10070,14 @@ proc create*(T: type gen_qgraphicsitem_types.QGraphicsPolygonItem,
   inst[].h = fcQGraphicsPolygonItem_new2(addr(cQGraphicsPolygonItem_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQGraphicsPolygonItem_vdata(inst[].h)[] = addr inst[]
 
-proc delete*(self: gen_qgraphicsitem_types.QGraphicsPolygonItem) =
-  fcQGraphicsPolygonItem_delete(self.h)
 proc pen*(self: gen_qgraphicsitem_types.QGraphicsLineItem): gen_qpen_types.QPen =
-  gen_qpen_types.QPen(h: fcQGraphicsLineItem_pen(self.h))
+  gen_qpen_types.QPen(h: fcQGraphicsLineItem_pen(self.h), owned: true)
 
 proc setPen*(self: gen_qgraphicsitem_types.QGraphicsLineItem, pen: gen_qpen_types.QPen): void =
   fcQGraphicsLineItem_setPen(self.h, pen.h)
 
 proc line*(self: gen_qgraphicsitem_types.QGraphicsLineItem): gen_qline_types.QLineF =
-  gen_qline_types.QLineF(h: fcQGraphicsLineItem_line(self.h))
+  gen_qline_types.QLineF(h: fcQGraphicsLineItem_line(self.h), owned: true)
 
 proc setLine*(self: gen_qgraphicsitem_types.QGraphicsLineItem, line: gen_qline_types.QLineF): void =
   fcQGraphicsLineItem_setLine(self.h, line.h)
@@ -9979,10 +10086,10 @@ proc setLine*(self: gen_qgraphicsitem_types.QGraphicsLineItem, x1: float64, y1: 
   fcQGraphicsLineItem_setLine2(self.h, x1, y1, x2, y2)
 
 proc boundingRect*(self: gen_qgraphicsitem_types.QGraphicsLineItem): gen_qrect_types.QRectF =
-  gen_qrect_types.QRectF(h: fcQGraphicsLineItem_boundingRect(self.h))
+  gen_qrect_types.QRectF(h: fcQGraphicsLineItem_boundingRect(self.h), owned: true)
 
 proc shape*(self: gen_qgraphicsitem_types.QGraphicsLineItem): gen_qpainterpath_types.QPainterPath =
-  gen_qpainterpath_types.QPainterPath(h: fcQGraphicsLineItem_shape(self.h))
+  gen_qpainterpath_types.QPainterPath(h: fcQGraphicsLineItem_shape(self.h), owned: true)
 
 proc contains*(self: gen_qgraphicsitem_types.QGraphicsLineItem, point: gen_qpoint_types.QPointF): bool =
   fcQGraphicsLineItem_contains(self.h, point.h)
@@ -9994,7 +10101,7 @@ proc isObscuredBy*(self: gen_qgraphicsitem_types.QGraphicsLineItem, item: gen_qg
   fcQGraphicsLineItem_isObscuredBy(self.h, item.h)
 
 proc opaqueArea*(self: gen_qgraphicsitem_types.QGraphicsLineItem): gen_qpainterpath_types.QPainterPath =
-  gen_qpainterpath_types.QPainterPath(h: fcQGraphicsLineItem_opaqueArea(self.h))
+  gen_qpainterpath_types.QPainterPath(h: fcQGraphicsLineItem_opaqueArea(self.h), owned: true)
 
 proc typeX*(self: gen_qgraphicsitem_types.QGraphicsLineItem): cint =
   fcQGraphicsLineItem_typeX(self.h)
@@ -10034,7 +10141,7 @@ type QGraphicsLineItemwheelEventProc* = proc(self: QGraphicsLineItem, event: gen
 type QGraphicsLineIteminputMethodEventProc* = proc(self: QGraphicsLineItem, event: gen_qevent_types.QInputMethodEvent): void {.raises: [], gcsafe.}
 type QGraphicsLineIteminputMethodQueryProc* = proc(self: QGraphicsLineItem, query: cint): gen_qvariant_types.QVariant {.raises: [], gcsafe.}
 type QGraphicsLineItemitemChangeProc* = proc(self: QGraphicsLineItem, change: cint, value: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant {.raises: [], gcsafe.}
-type QGraphicsLineItemVTable* = object
+type QGraphicsLineItemVTable* {.inheritable, pure.} = object
   vtbl: cQGraphicsLineItemVTable
   boundingRect*: QGraphicsLineItemboundingRectProc
   shape*: QGraphicsLineItemshapeProc
@@ -10072,22 +10179,28 @@ type QGraphicsLineItemVTable* = object
   inputMethodQuery*: QGraphicsLineIteminputMethodQueryProc
   itemChange*: QGraphicsLineItemitemChangeProc
 proc QGraphicsLineItemboundingRect*(self: gen_qgraphicsitem_types.QGraphicsLineItem): gen_qrect_types.QRectF =
-  gen_qrect_types.QRectF(h: fcQGraphicsLineItem_virtualbase_boundingRect(self.h))
+  gen_qrect_types.QRectF(h: fcQGraphicsLineItem_virtualbase_boundingRect(self.h), owned: true)
 
 proc fcQGraphicsLineItem_vtable_callback_boundingRect(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QGraphicsLineItemVTable](fcQGraphicsLineItem_vdata(self)[])
   let self = QGraphicsLineItem(h: self)
   var virtualReturn = vtbl[].boundingRect(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QGraphicsLineItemshape*(self: gen_qgraphicsitem_types.QGraphicsLineItem): gen_qpainterpath_types.QPainterPath =
-  gen_qpainterpath_types.QPainterPath(h: fcQGraphicsLineItem_virtualbase_shape(self.h))
+  gen_qpainterpath_types.QPainterPath(h: fcQGraphicsLineItem_virtualbase_shape(self.h), owned: true)
 
 proc fcQGraphicsLineItem_vtable_callback_shape(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QGraphicsLineItemVTable](fcQGraphicsLineItem_vdata(self)[])
   let self = QGraphicsLineItem(h: self)
   var virtualReturn = vtbl[].shape(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QGraphicsLineItemcontains*(self: gen_qgraphicsitem_types.QGraphicsLineItem, point: gen_qpoint_types.QPointF): bool =
   fcQGraphicsLineItem_virtualbase_contains(self.h, point.h)
@@ -10095,7 +10208,7 @@ proc QGraphicsLineItemcontains*(self: gen_qgraphicsitem_types.QGraphicsLineItem,
 proc fcQGraphicsLineItem_vtable_callback_contains(self: pointer, point: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QGraphicsLineItemVTable](fcQGraphicsLineItem_vdata(self)[])
   let self = QGraphicsLineItem(h: self)
-  let slotval1 = gen_qpoint_types.QPointF(h: point)
+  let slotval1 = gen_qpoint_types.QPointF(h: point, owned: false)
   var virtualReturn = vtbl[].contains(self, slotval1)
   virtualReturn
 
@@ -10105,9 +10218,9 @@ proc QGraphicsLineItempaint*(self: gen_qgraphicsitem_types.QGraphicsLineItem, pa
 proc fcQGraphicsLineItem_vtable_callback_paint(self: pointer, painter: pointer, option: pointer, widget: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsLineItemVTable](fcQGraphicsLineItem_vdata(self)[])
   let self = QGraphicsLineItem(h: self)
-  let slotval1 = gen_qpainter_types.QPainter(h: painter)
-  let slotval2 = gen_qstyleoption_types.QStyleOptionGraphicsItem(h: option)
-  let slotval3 = gen_qwidget_types.QWidget(h: widget)
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
+  let slotval2 = gen_qstyleoption_types.QStyleOptionGraphicsItem(h: option, owned: false)
+  let slotval3 = gen_qwidget_types.QWidget(h: widget, owned: false)
   vtbl[].paint(self, slotval1, slotval2, slotval3)
 
 proc QGraphicsLineItemisObscuredBy*(self: gen_qgraphicsitem_types.QGraphicsLineItem, item: gen_qgraphicsitem_types.QGraphicsItem): bool =
@@ -10116,18 +10229,21 @@ proc QGraphicsLineItemisObscuredBy*(self: gen_qgraphicsitem_types.QGraphicsLineI
 proc fcQGraphicsLineItem_vtable_callback_isObscuredBy(self: pointer, item: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QGraphicsLineItemVTable](fcQGraphicsLineItem_vdata(self)[])
   let self = QGraphicsLineItem(h: self)
-  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: item)
+  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: item, owned: false)
   var virtualReturn = vtbl[].isObscuredBy(self, slotval1)
   virtualReturn
 
 proc QGraphicsLineItemopaqueArea*(self: gen_qgraphicsitem_types.QGraphicsLineItem): gen_qpainterpath_types.QPainterPath =
-  gen_qpainterpath_types.QPainterPath(h: fcQGraphicsLineItem_virtualbase_opaqueArea(self.h))
+  gen_qpainterpath_types.QPainterPath(h: fcQGraphicsLineItem_virtualbase_opaqueArea(self.h), owned: true)
 
 proc fcQGraphicsLineItem_vtable_callback_opaqueArea(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QGraphicsLineItemVTable](fcQGraphicsLineItem_vdata(self)[])
   let self = QGraphicsLineItem(h: self)
   var virtualReturn = vtbl[].opaqueArea(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QGraphicsLineItemtypeX*(self: gen_qgraphicsitem_types.QGraphicsLineItem): cint =
   fcQGraphicsLineItem_virtualbase_typeX(self.h)
@@ -10155,18 +10271,21 @@ proc fcQGraphicsLineItem_vtable_callback_setExtension(self: pointer, extension: 
   let vtbl = cast[ptr QGraphicsLineItemVTable](fcQGraphicsLineItem_vdata(self)[])
   let self = QGraphicsLineItem(h: self)
   let slotval1 = cint(extension)
-  let slotval2 = gen_qvariant_types.QVariant(h: variant)
+  let slotval2 = gen_qvariant_types.QVariant(h: variant, owned: false)
   vtbl[].setExtension(self, slotval1, slotval2)
 
 proc QGraphicsLineItemextension*(self: gen_qgraphicsitem_types.QGraphicsLineItem, variant: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQGraphicsLineItem_virtualbase_extension(self.h, variant.h))
+  gen_qvariant_types.QVariant(h: fcQGraphicsLineItem_virtualbase_extension(self.h, variant.h), owned: true)
 
 proc fcQGraphicsLineItem_vtable_callback_extension(self: pointer, variant: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QGraphicsLineItemVTable](fcQGraphicsLineItem_vdata(self)[])
   let self = QGraphicsLineItem(h: self)
-  let slotval1 = gen_qvariant_types.QVariant(h: variant)
+  let slotval1 = gen_qvariant_types.QVariant(h: variant, owned: false)
   var virtualReturn = vtbl[].extension(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QGraphicsLineItemadvance*(self: gen_qgraphicsitem_types.QGraphicsLineItem, phase: cint): void =
   fcQGraphicsLineItem_virtualbase_advance(self.h, phase)
@@ -10183,7 +10302,7 @@ proc QGraphicsLineItemcollidesWithItem*(self: gen_qgraphicsitem_types.QGraphicsL
 proc fcQGraphicsLineItem_vtable_callback_collidesWithItem(self: pointer, other: pointer, mode: cint): bool {.cdecl.} =
   let vtbl = cast[ptr QGraphicsLineItemVTable](fcQGraphicsLineItem_vdata(self)[])
   let self = QGraphicsLineItem(h: self)
-  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: other)
+  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: other, owned: false)
   let slotval2 = cint(mode)
   var virtualReturn = vtbl[].collidesWithItem(self, slotval1, slotval2)
   virtualReturn
@@ -10194,7 +10313,7 @@ proc QGraphicsLineItemcollidesWithPath*(self: gen_qgraphicsitem_types.QGraphicsL
 proc fcQGraphicsLineItem_vtable_callback_collidesWithPath(self: pointer, path: pointer, mode: cint): bool {.cdecl.} =
   let vtbl = cast[ptr QGraphicsLineItemVTable](fcQGraphicsLineItem_vdata(self)[])
   let self = QGraphicsLineItem(h: self)
-  let slotval1 = gen_qpainterpath_types.QPainterPath(h: path)
+  let slotval1 = gen_qpainterpath_types.QPainterPath(h: path, owned: false)
   let slotval2 = cint(mode)
   var virtualReturn = vtbl[].collidesWithPath(self, slotval1, slotval2)
   virtualReturn
@@ -10205,8 +10324,8 @@ proc QGraphicsLineItemsceneEventFilter*(self: gen_qgraphicsitem_types.QGraphicsL
 proc fcQGraphicsLineItem_vtable_callback_sceneEventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QGraphicsLineItemVTable](fcQGraphicsLineItem_vdata(self)[])
   let self = QGraphicsLineItem(h: self)
-  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].sceneEventFilter(self, slotval1, slotval2)
   virtualReturn
 
@@ -10216,7 +10335,7 @@ proc QGraphicsLineItemsceneEvent*(self: gen_qgraphicsitem_types.QGraphicsLineIte
 proc fcQGraphicsLineItem_vtable_callback_sceneEvent(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QGraphicsLineItemVTable](fcQGraphicsLineItem_vdata(self)[])
   let self = QGraphicsLineItem(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].sceneEvent(self, slotval1)
   virtualReturn
 
@@ -10226,7 +10345,7 @@ proc QGraphicsLineItemcontextMenuEvent*(self: gen_qgraphicsitem_types.QGraphicsL
 proc fcQGraphicsLineItem_vtable_callback_contextMenuEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsLineItemVTable](fcQGraphicsLineItem_vdata(self)[])
   let self = QGraphicsLineItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneContextMenuEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneContextMenuEvent(h: event, owned: false)
   vtbl[].contextMenuEvent(self, slotval1)
 
 proc QGraphicsLineItemdragEnterEvent*(self: gen_qgraphicsitem_types.QGraphicsLineItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void =
@@ -10235,7 +10354,7 @@ proc QGraphicsLineItemdragEnterEvent*(self: gen_qgraphicsitem_types.QGraphicsLin
 proc fcQGraphicsLineItem_vtable_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsLineItemVTable](fcQGraphicsLineItem_vdata(self)[])
   let self = QGraphicsLineItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event, owned: false)
   vtbl[].dragEnterEvent(self, slotval1)
 
 proc QGraphicsLineItemdragLeaveEvent*(self: gen_qgraphicsitem_types.QGraphicsLineItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void =
@@ -10244,7 +10363,7 @@ proc QGraphicsLineItemdragLeaveEvent*(self: gen_qgraphicsitem_types.QGraphicsLin
 proc fcQGraphicsLineItem_vtable_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsLineItemVTable](fcQGraphicsLineItem_vdata(self)[])
   let self = QGraphicsLineItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event, owned: false)
   vtbl[].dragLeaveEvent(self, slotval1)
 
 proc QGraphicsLineItemdragMoveEvent*(self: gen_qgraphicsitem_types.QGraphicsLineItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void =
@@ -10253,7 +10372,7 @@ proc QGraphicsLineItemdragMoveEvent*(self: gen_qgraphicsitem_types.QGraphicsLine
 proc fcQGraphicsLineItem_vtable_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsLineItemVTable](fcQGraphicsLineItem_vdata(self)[])
   let self = QGraphicsLineItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event, owned: false)
   vtbl[].dragMoveEvent(self, slotval1)
 
 proc QGraphicsLineItemdropEvent*(self: gen_qgraphicsitem_types.QGraphicsLineItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void =
@@ -10262,7 +10381,7 @@ proc QGraphicsLineItemdropEvent*(self: gen_qgraphicsitem_types.QGraphicsLineItem
 proc fcQGraphicsLineItem_vtable_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsLineItemVTable](fcQGraphicsLineItem_vdata(self)[])
   let self = QGraphicsLineItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event, owned: false)
   vtbl[].dropEvent(self, slotval1)
 
 proc QGraphicsLineItemfocusInEvent*(self: gen_qgraphicsitem_types.QGraphicsLineItem, event: gen_qevent_types.QFocusEvent): void =
@@ -10271,7 +10390,7 @@ proc QGraphicsLineItemfocusInEvent*(self: gen_qgraphicsitem_types.QGraphicsLineI
 proc fcQGraphicsLineItem_vtable_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsLineItemVTable](fcQGraphicsLineItem_vdata(self)[])
   let self = QGraphicsLineItem(h: self)
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusInEvent(self, slotval1)
 
 proc QGraphicsLineItemfocusOutEvent*(self: gen_qgraphicsitem_types.QGraphicsLineItem, event: gen_qevent_types.QFocusEvent): void =
@@ -10280,7 +10399,7 @@ proc QGraphicsLineItemfocusOutEvent*(self: gen_qgraphicsitem_types.QGraphicsLine
 proc fcQGraphicsLineItem_vtable_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsLineItemVTable](fcQGraphicsLineItem_vdata(self)[])
   let self = QGraphicsLineItem(h: self)
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusOutEvent(self, slotval1)
 
 proc QGraphicsLineItemhoverEnterEvent*(self: gen_qgraphicsitem_types.QGraphicsLineItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent): void =
@@ -10289,7 +10408,7 @@ proc QGraphicsLineItemhoverEnterEvent*(self: gen_qgraphicsitem_types.QGraphicsLi
 proc fcQGraphicsLineItem_vtable_callback_hoverEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsLineItemVTable](fcQGraphicsLineItem_vdata(self)[])
   let self = QGraphicsLineItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event, owned: false)
   vtbl[].hoverEnterEvent(self, slotval1)
 
 proc QGraphicsLineItemhoverMoveEvent*(self: gen_qgraphicsitem_types.QGraphicsLineItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent): void =
@@ -10298,7 +10417,7 @@ proc QGraphicsLineItemhoverMoveEvent*(self: gen_qgraphicsitem_types.QGraphicsLin
 proc fcQGraphicsLineItem_vtable_callback_hoverMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsLineItemVTable](fcQGraphicsLineItem_vdata(self)[])
   let self = QGraphicsLineItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event, owned: false)
   vtbl[].hoverMoveEvent(self, slotval1)
 
 proc QGraphicsLineItemhoverLeaveEvent*(self: gen_qgraphicsitem_types.QGraphicsLineItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent): void =
@@ -10307,7 +10426,7 @@ proc QGraphicsLineItemhoverLeaveEvent*(self: gen_qgraphicsitem_types.QGraphicsLi
 proc fcQGraphicsLineItem_vtable_callback_hoverLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsLineItemVTable](fcQGraphicsLineItem_vdata(self)[])
   let self = QGraphicsLineItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event, owned: false)
   vtbl[].hoverLeaveEvent(self, slotval1)
 
 proc QGraphicsLineItemkeyPressEvent*(self: gen_qgraphicsitem_types.QGraphicsLineItem, event: gen_qevent_types.QKeyEvent): void =
@@ -10316,7 +10435,7 @@ proc QGraphicsLineItemkeyPressEvent*(self: gen_qgraphicsitem_types.QGraphicsLine
 proc fcQGraphicsLineItem_vtable_callback_keyPressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsLineItemVTable](fcQGraphicsLineItem_vdata(self)[])
   let self = QGraphicsLineItem(h: self)
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   vtbl[].keyPressEvent(self, slotval1)
 
 proc QGraphicsLineItemkeyReleaseEvent*(self: gen_qgraphicsitem_types.QGraphicsLineItem, event: gen_qevent_types.QKeyEvent): void =
@@ -10325,7 +10444,7 @@ proc QGraphicsLineItemkeyReleaseEvent*(self: gen_qgraphicsitem_types.QGraphicsLi
 proc fcQGraphicsLineItem_vtable_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsLineItemVTable](fcQGraphicsLineItem_vdata(self)[])
   let self = QGraphicsLineItem(h: self)
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   vtbl[].keyReleaseEvent(self, slotval1)
 
 proc QGraphicsLineItemmousePressEvent*(self: gen_qgraphicsitem_types.QGraphicsLineItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void =
@@ -10334,7 +10453,7 @@ proc QGraphicsLineItemmousePressEvent*(self: gen_qgraphicsitem_types.QGraphicsLi
 proc fcQGraphicsLineItem_vtable_callback_mousePressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsLineItemVTable](fcQGraphicsLineItem_vdata(self)[])
   let self = QGraphicsLineItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event, owned: false)
   vtbl[].mousePressEvent(self, slotval1)
 
 proc QGraphicsLineItemmouseMoveEvent*(self: gen_qgraphicsitem_types.QGraphicsLineItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void =
@@ -10343,7 +10462,7 @@ proc QGraphicsLineItemmouseMoveEvent*(self: gen_qgraphicsitem_types.QGraphicsLin
 proc fcQGraphicsLineItem_vtable_callback_mouseMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsLineItemVTable](fcQGraphicsLineItem_vdata(self)[])
   let self = QGraphicsLineItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event, owned: false)
   vtbl[].mouseMoveEvent(self, slotval1)
 
 proc QGraphicsLineItemmouseReleaseEvent*(self: gen_qgraphicsitem_types.QGraphicsLineItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void =
@@ -10352,7 +10471,7 @@ proc QGraphicsLineItemmouseReleaseEvent*(self: gen_qgraphicsitem_types.QGraphics
 proc fcQGraphicsLineItem_vtable_callback_mouseReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsLineItemVTable](fcQGraphicsLineItem_vdata(self)[])
   let self = QGraphicsLineItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event, owned: false)
   vtbl[].mouseReleaseEvent(self, slotval1)
 
 proc QGraphicsLineItemmouseDoubleClickEvent*(self: gen_qgraphicsitem_types.QGraphicsLineItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void =
@@ -10361,7 +10480,7 @@ proc QGraphicsLineItemmouseDoubleClickEvent*(self: gen_qgraphicsitem_types.QGrap
 proc fcQGraphicsLineItem_vtable_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsLineItemVTable](fcQGraphicsLineItem_vdata(self)[])
   let self = QGraphicsLineItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event, owned: false)
   vtbl[].mouseDoubleClickEvent(self, slotval1)
 
 proc QGraphicsLineItemwheelEvent*(self: gen_qgraphicsitem_types.QGraphicsLineItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent): void =
@@ -10370,7 +10489,7 @@ proc QGraphicsLineItemwheelEvent*(self: gen_qgraphicsitem_types.QGraphicsLineIte
 proc fcQGraphicsLineItem_vtable_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsLineItemVTable](fcQGraphicsLineItem_vdata(self)[])
   let self = QGraphicsLineItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent(h: event, owned: false)
   vtbl[].wheelEvent(self, slotval1)
 
 proc QGraphicsLineIteminputMethodEvent*(self: gen_qgraphicsitem_types.QGraphicsLineItem, event: gen_qevent_types.QInputMethodEvent): void =
@@ -10379,29 +10498,35 @@ proc QGraphicsLineIteminputMethodEvent*(self: gen_qgraphicsitem_types.QGraphicsL
 proc fcQGraphicsLineItem_vtable_callback_inputMethodEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsLineItemVTable](fcQGraphicsLineItem_vdata(self)[])
   let self = QGraphicsLineItem(h: self)
-  let slotval1 = gen_qevent_types.QInputMethodEvent(h: event)
+  let slotval1 = gen_qevent_types.QInputMethodEvent(h: event, owned: false)
   vtbl[].inputMethodEvent(self, slotval1)
 
 proc QGraphicsLineIteminputMethodQuery*(self: gen_qgraphicsitem_types.QGraphicsLineItem, query: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQGraphicsLineItem_virtualbase_inputMethodQuery(self.h, cint(query)))
+  gen_qvariant_types.QVariant(h: fcQGraphicsLineItem_virtualbase_inputMethodQuery(self.h, cint(query)), owned: true)
 
 proc fcQGraphicsLineItem_vtable_callback_inputMethodQuery(self: pointer, query: cint): pointer {.cdecl.} =
   let vtbl = cast[ptr QGraphicsLineItemVTable](fcQGraphicsLineItem_vdata(self)[])
   let self = QGraphicsLineItem(h: self)
   let slotval1 = cint(query)
   var virtualReturn = vtbl[].inputMethodQuery(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QGraphicsLineItemitemChange*(self: gen_qgraphicsitem_types.QGraphicsLineItem, change: cint, value: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQGraphicsLineItem_virtualbase_itemChange(self.h, cint(change), value.h))
+  gen_qvariant_types.QVariant(h: fcQGraphicsLineItem_virtualbase_itemChange(self.h, cint(change), value.h), owned: true)
 
 proc fcQGraphicsLineItem_vtable_callback_itemChange(self: pointer, change: cint, value: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QGraphicsLineItemVTable](fcQGraphicsLineItem_vdata(self)[])
   let self = QGraphicsLineItem(h: self)
   let slotval1 = cint(change)
-  let slotval2 = gen_qvariant_types.QVariant(h: value)
+  let slotval2 = gen_qvariant_types.QVariant(h: value, owned: false)
   var virtualReturn = vtbl[].itemChange(self, slotval1, slotval2)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 type VirtualQGraphicsLineItem* {.inheritable.} = ref object of QGraphicsLineItem
   vtbl*: cQGraphicsLineItemVTable
@@ -10423,7 +10548,7 @@ method contains*(self: VirtualQGraphicsLineItem, point: gen_qpoint_types.QPointF
   QGraphicsLineItemcontains(self[], point)
 proc fcQGraphicsLineItem_method_callback_contains(self: pointer, point: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQGraphicsLineItem](fcQGraphicsLineItem_vdata(self)[])
-  let slotval1 = gen_qpoint_types.QPointF(h: point)
+  let slotval1 = gen_qpoint_types.QPointF(h: point, owned: false)
   var virtualReturn = inst.contains(slotval1)
   virtualReturn
 
@@ -10431,16 +10556,16 @@ method paint*(self: VirtualQGraphicsLineItem, painter: gen_qpainter_types.QPaint
   QGraphicsLineItempaint(self[], painter, option, widget)
 proc fcQGraphicsLineItem_method_callback_paint(self: pointer, painter: pointer, option: pointer, widget: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsLineItem](fcQGraphicsLineItem_vdata(self)[])
-  let slotval1 = gen_qpainter_types.QPainter(h: painter)
-  let slotval2 = gen_qstyleoption_types.QStyleOptionGraphicsItem(h: option)
-  let slotval3 = gen_qwidget_types.QWidget(h: widget)
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
+  let slotval2 = gen_qstyleoption_types.QStyleOptionGraphicsItem(h: option, owned: false)
+  let slotval3 = gen_qwidget_types.QWidget(h: widget, owned: false)
   inst.paint(slotval1, slotval2, slotval3)
 
 method isObscuredBy*(self: VirtualQGraphicsLineItem, item: gen_qgraphicsitem_types.QGraphicsItem): bool {.base.} =
   QGraphicsLineItemisObscuredBy(self[], item)
 proc fcQGraphicsLineItem_method_callback_isObscuredBy(self: pointer, item: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQGraphicsLineItem](fcQGraphicsLineItem_vdata(self)[])
-  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: item)
+  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: item, owned: false)
   var virtualReturn = inst.isObscuredBy(slotval1)
   virtualReturn
 
@@ -10471,14 +10596,14 @@ method setExtension*(self: VirtualQGraphicsLineItem, extension: cint, variant: g
 proc fcQGraphicsLineItem_method_callback_setExtension(self: pointer, extension: cint, variant: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsLineItem](fcQGraphicsLineItem_vdata(self)[])
   let slotval1 = cint(extension)
-  let slotval2 = gen_qvariant_types.QVariant(h: variant)
+  let slotval2 = gen_qvariant_types.QVariant(h: variant, owned: false)
   inst.setExtension(slotval1, slotval2)
 
 method extension*(self: VirtualQGraphicsLineItem, variant: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant {.base.} =
   QGraphicsLineItemextension(self[], variant)
 proc fcQGraphicsLineItem_method_callback_extension(self: pointer, variant: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsLineItem](fcQGraphicsLineItem_vdata(self)[])
-  let slotval1 = gen_qvariant_types.QVariant(h: variant)
+  let slotval1 = gen_qvariant_types.QVariant(h: variant, owned: false)
   var virtualReturn = inst.extension(slotval1)
   virtualReturn.h
 
@@ -10493,7 +10618,7 @@ method collidesWithItem*(self: VirtualQGraphicsLineItem, other: gen_qgraphicsite
   QGraphicsLineItemcollidesWithItem(self[], other, mode)
 proc fcQGraphicsLineItem_method_callback_collidesWithItem(self: pointer, other: pointer, mode: cint): bool {.cdecl.} =
   let inst = cast[VirtualQGraphicsLineItem](fcQGraphicsLineItem_vdata(self)[])
-  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: other)
+  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: other, owned: false)
   let slotval2 = cint(mode)
   var virtualReturn = inst.collidesWithItem(slotval1, slotval2)
   virtualReturn
@@ -10502,7 +10627,7 @@ method collidesWithPath*(self: VirtualQGraphicsLineItem, path: gen_qpainterpath_
   QGraphicsLineItemcollidesWithPath(self[], path, mode)
 proc fcQGraphicsLineItem_method_callback_collidesWithPath(self: pointer, path: pointer, mode: cint): bool {.cdecl.} =
   let inst = cast[VirtualQGraphicsLineItem](fcQGraphicsLineItem_vdata(self)[])
-  let slotval1 = gen_qpainterpath_types.QPainterPath(h: path)
+  let slotval1 = gen_qpainterpath_types.QPainterPath(h: path, owned: false)
   let slotval2 = cint(mode)
   var virtualReturn = inst.collidesWithPath(slotval1, slotval2)
   virtualReturn
@@ -10511,8 +10636,8 @@ method sceneEventFilter*(self: VirtualQGraphicsLineItem, watched: gen_qgraphicsi
   QGraphicsLineItemsceneEventFilter(self[], watched, event)
 proc fcQGraphicsLineItem_method_callback_sceneEventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQGraphicsLineItem](fcQGraphicsLineItem_vdata(self)[])
-  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.sceneEventFilter(slotval1, slotval2)
   virtualReturn
 
@@ -10520,7 +10645,7 @@ method sceneEvent*(self: VirtualQGraphicsLineItem, event: gen_qcoreevent_types.Q
   QGraphicsLineItemsceneEvent(self[], event)
 proc fcQGraphicsLineItem_method_callback_sceneEvent(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQGraphicsLineItem](fcQGraphicsLineItem_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.sceneEvent(slotval1)
   virtualReturn
 
@@ -10528,126 +10653,126 @@ method contextMenuEvent*(self: VirtualQGraphicsLineItem, event: gen_qgraphicssce
   QGraphicsLineItemcontextMenuEvent(self[], event)
 proc fcQGraphicsLineItem_method_callback_contextMenuEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsLineItem](fcQGraphicsLineItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneContextMenuEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneContextMenuEvent(h: event, owned: false)
   inst.contextMenuEvent(slotval1)
 
 method dragEnterEvent*(self: VirtualQGraphicsLineItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void {.base.} =
   QGraphicsLineItemdragEnterEvent(self[], event)
 proc fcQGraphicsLineItem_method_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsLineItem](fcQGraphicsLineItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event, owned: false)
   inst.dragEnterEvent(slotval1)
 
 method dragLeaveEvent*(self: VirtualQGraphicsLineItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void {.base.} =
   QGraphicsLineItemdragLeaveEvent(self[], event)
 proc fcQGraphicsLineItem_method_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsLineItem](fcQGraphicsLineItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event, owned: false)
   inst.dragLeaveEvent(slotval1)
 
 method dragMoveEvent*(self: VirtualQGraphicsLineItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void {.base.} =
   QGraphicsLineItemdragMoveEvent(self[], event)
 proc fcQGraphicsLineItem_method_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsLineItem](fcQGraphicsLineItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event, owned: false)
   inst.dragMoveEvent(slotval1)
 
 method dropEvent*(self: VirtualQGraphicsLineItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void {.base.} =
   QGraphicsLineItemdropEvent(self[], event)
 proc fcQGraphicsLineItem_method_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsLineItem](fcQGraphicsLineItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event, owned: false)
   inst.dropEvent(slotval1)
 
 method focusInEvent*(self: VirtualQGraphicsLineItem, event: gen_qevent_types.QFocusEvent): void {.base.} =
   QGraphicsLineItemfocusInEvent(self[], event)
 proc fcQGraphicsLineItem_method_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsLineItem](fcQGraphicsLineItem_vdata(self)[])
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   inst.focusInEvent(slotval1)
 
 method focusOutEvent*(self: VirtualQGraphicsLineItem, event: gen_qevent_types.QFocusEvent): void {.base.} =
   QGraphicsLineItemfocusOutEvent(self[], event)
 proc fcQGraphicsLineItem_method_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsLineItem](fcQGraphicsLineItem_vdata(self)[])
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   inst.focusOutEvent(slotval1)
 
 method hoverEnterEvent*(self: VirtualQGraphicsLineItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent): void {.base.} =
   QGraphicsLineItemhoverEnterEvent(self[], event)
 proc fcQGraphicsLineItem_method_callback_hoverEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsLineItem](fcQGraphicsLineItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event, owned: false)
   inst.hoverEnterEvent(slotval1)
 
 method hoverMoveEvent*(self: VirtualQGraphicsLineItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent): void {.base.} =
   QGraphicsLineItemhoverMoveEvent(self[], event)
 proc fcQGraphicsLineItem_method_callback_hoverMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsLineItem](fcQGraphicsLineItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event, owned: false)
   inst.hoverMoveEvent(slotval1)
 
 method hoverLeaveEvent*(self: VirtualQGraphicsLineItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent): void {.base.} =
   QGraphicsLineItemhoverLeaveEvent(self[], event)
 proc fcQGraphicsLineItem_method_callback_hoverLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsLineItem](fcQGraphicsLineItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event, owned: false)
   inst.hoverLeaveEvent(slotval1)
 
 method keyPressEvent*(self: VirtualQGraphicsLineItem, event: gen_qevent_types.QKeyEvent): void {.base.} =
   QGraphicsLineItemkeyPressEvent(self[], event)
 proc fcQGraphicsLineItem_method_callback_keyPressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsLineItem](fcQGraphicsLineItem_vdata(self)[])
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   inst.keyPressEvent(slotval1)
 
 method keyReleaseEvent*(self: VirtualQGraphicsLineItem, event: gen_qevent_types.QKeyEvent): void {.base.} =
   QGraphicsLineItemkeyReleaseEvent(self[], event)
 proc fcQGraphicsLineItem_method_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsLineItem](fcQGraphicsLineItem_vdata(self)[])
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   inst.keyReleaseEvent(slotval1)
 
 method mousePressEvent*(self: VirtualQGraphicsLineItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void {.base.} =
   QGraphicsLineItemmousePressEvent(self[], event)
 proc fcQGraphicsLineItem_method_callback_mousePressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsLineItem](fcQGraphicsLineItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event, owned: false)
   inst.mousePressEvent(slotval1)
 
 method mouseMoveEvent*(self: VirtualQGraphicsLineItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void {.base.} =
   QGraphicsLineItemmouseMoveEvent(self[], event)
 proc fcQGraphicsLineItem_method_callback_mouseMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsLineItem](fcQGraphicsLineItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event, owned: false)
   inst.mouseMoveEvent(slotval1)
 
 method mouseReleaseEvent*(self: VirtualQGraphicsLineItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void {.base.} =
   QGraphicsLineItemmouseReleaseEvent(self[], event)
 proc fcQGraphicsLineItem_method_callback_mouseReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsLineItem](fcQGraphicsLineItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event, owned: false)
   inst.mouseReleaseEvent(slotval1)
 
 method mouseDoubleClickEvent*(self: VirtualQGraphicsLineItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void {.base.} =
   QGraphicsLineItemmouseDoubleClickEvent(self[], event)
 proc fcQGraphicsLineItem_method_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsLineItem](fcQGraphicsLineItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event, owned: false)
   inst.mouseDoubleClickEvent(slotval1)
 
 method wheelEvent*(self: VirtualQGraphicsLineItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent): void {.base.} =
   QGraphicsLineItemwheelEvent(self[], event)
 proc fcQGraphicsLineItem_method_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsLineItem](fcQGraphicsLineItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent(h: event, owned: false)
   inst.wheelEvent(slotval1)
 
 method inputMethodEvent*(self: VirtualQGraphicsLineItem, event: gen_qevent_types.QInputMethodEvent): void {.base.} =
   QGraphicsLineIteminputMethodEvent(self[], event)
 proc fcQGraphicsLineItem_method_callback_inputMethodEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsLineItem](fcQGraphicsLineItem_vdata(self)[])
-  let slotval1 = gen_qevent_types.QInputMethodEvent(h: event)
+  let slotval1 = gen_qevent_types.QInputMethodEvent(h: event, owned: false)
   inst.inputMethodEvent(slotval1)
 
 method inputMethodQuery*(self: VirtualQGraphicsLineItem, query: cint): gen_qvariant_types.QVariant {.base.} =
@@ -10663,7 +10788,7 @@ method itemChange*(self: VirtualQGraphicsLineItem, change: cint, value: gen_qvar
 proc fcQGraphicsLineItem_method_callback_itemChange(self: pointer, change: cint, value: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsLineItem](fcQGraphicsLineItem_vdata(self)[])
   let slotval1 = cint(change)
-  let slotval2 = gen_qvariant_types.QVariant(h: value)
+  let slotval2 = gen_qvariant_types.QVariant(h: value, owned: false)
   var virtualReturn = inst.itemChange(slotval1, slotval2)
   virtualReturn.h
 
@@ -10756,7 +10881,7 @@ proc create*(T: type gen_qgraphicsitem_types.QGraphicsLineItem,
     vtbl[].vtbl.inputMethodQuery = fcQGraphicsLineItem_vtable_callback_inputMethodQuery
   if not isNil(vtbl[].itemChange):
     vtbl[].vtbl.itemChange = fcQGraphicsLineItem_vtable_callback_itemChange
-  let tmp = gen_qgraphicsitem_types.QGraphicsLineItem(h: fcQGraphicsLineItem_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))))
+  let tmp = gen_qgraphicsitem_types.QGraphicsLineItem(h: fcQGraphicsLineItem_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))), owned: true)
   fcQGraphicsLineItem_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qgraphicsitem_types.QGraphicsLineItem,
@@ -10837,7 +10962,7 @@ proc create*(T: type gen_qgraphicsitem_types.QGraphicsLineItem,
     vtbl[].vtbl.inputMethodQuery = fcQGraphicsLineItem_vtable_callback_inputMethodQuery
   if not isNil(vtbl[].itemChange):
     vtbl[].vtbl.itemChange = fcQGraphicsLineItem_vtable_callback_itemChange
-  let tmp = gen_qgraphicsitem_types.QGraphicsLineItem(h: fcQGraphicsLineItem_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), line.h))
+  let tmp = gen_qgraphicsitem_types.QGraphicsLineItem(h: fcQGraphicsLineItem_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), line.h), owned: true)
   fcQGraphicsLineItem_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qgraphicsitem_types.QGraphicsLineItem,
@@ -10918,7 +11043,7 @@ proc create*(T: type gen_qgraphicsitem_types.QGraphicsLineItem,
     vtbl[].vtbl.inputMethodQuery = fcQGraphicsLineItem_vtable_callback_inputMethodQuery
   if not isNil(vtbl[].itemChange):
     vtbl[].vtbl.itemChange = fcQGraphicsLineItem_vtable_callback_itemChange
-  let tmp = gen_qgraphicsitem_types.QGraphicsLineItem(h: fcQGraphicsLineItem_new3(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), x1, y1, x2, y2))
+  let tmp = gen_qgraphicsitem_types.QGraphicsLineItem(h: fcQGraphicsLineItem_new3(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), x1, y1, x2, y2), owned: true)
   fcQGraphicsLineItem_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qgraphicsitem_types.QGraphicsLineItem,
@@ -10999,7 +11124,7 @@ proc create*(T: type gen_qgraphicsitem_types.QGraphicsLineItem,
     vtbl[].vtbl.inputMethodQuery = fcQGraphicsLineItem_vtable_callback_inputMethodQuery
   if not isNil(vtbl[].itemChange):
     vtbl[].vtbl.itemChange = fcQGraphicsLineItem_vtable_callback_itemChange
-  let tmp = gen_qgraphicsitem_types.QGraphicsLineItem(h: fcQGraphicsLineItem_new4(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h))
+  let tmp = gen_qgraphicsitem_types.QGraphicsLineItem(h: fcQGraphicsLineItem_new4(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h), owned: true)
   fcQGraphicsLineItem_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qgraphicsitem_types.QGraphicsLineItem,
@@ -11080,7 +11205,7 @@ proc create*(T: type gen_qgraphicsitem_types.QGraphicsLineItem,
     vtbl[].vtbl.inputMethodQuery = fcQGraphicsLineItem_vtable_callback_inputMethodQuery
   if not isNil(vtbl[].itemChange):
     vtbl[].vtbl.itemChange = fcQGraphicsLineItem_vtable_callback_itemChange
-  let tmp = gen_qgraphicsitem_types.QGraphicsLineItem(h: fcQGraphicsLineItem_new5(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), line.h, parent.h))
+  let tmp = gen_qgraphicsitem_types.QGraphicsLineItem(h: fcQGraphicsLineItem_new5(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), line.h, parent.h), owned: true)
   fcQGraphicsLineItem_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qgraphicsitem_types.QGraphicsLineItem,
@@ -11161,13 +11286,14 @@ proc create*(T: type gen_qgraphicsitem_types.QGraphicsLineItem,
     vtbl[].vtbl.inputMethodQuery = fcQGraphicsLineItem_vtable_callback_inputMethodQuery
   if not isNil(vtbl[].itemChange):
     vtbl[].vtbl.itemChange = fcQGraphicsLineItem_vtable_callback_itemChange
-  let tmp = gen_qgraphicsitem_types.QGraphicsLineItem(h: fcQGraphicsLineItem_new6(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), x1, y1, x2, y2, parent.h))
+  let tmp = gen_qgraphicsitem_types.QGraphicsLineItem(h: fcQGraphicsLineItem_new6(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), x1, y1, x2, y2, parent.h), owned: true)
   fcQGraphicsLineItem_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQGraphicsLineItem_mvtbl = cQGraphicsLineItemVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQGraphicsLineItem()[])](self.fcQGraphicsLineItem_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   boundingRect: fcQGraphicsLineItem_method_callback_boundingRect,
   shape: fcQGraphicsLineItem_method_callback_shape,
@@ -11246,10 +11372,8 @@ proc create*(T: type gen_qgraphicsitem_types.QGraphicsLineItem,
   inst[].h = fcQGraphicsLineItem_new6(addr(cQGraphicsLineItem_mvtbl), csize_t(sizeof(pointer)), x1, y1, x2, y2, parent.h)
   fcQGraphicsLineItem_vdata(inst[].h)[] = addr inst[]
 
-proc delete*(self: gen_qgraphicsitem_types.QGraphicsLineItem) =
-  fcQGraphicsLineItem_delete(self.h)
 proc pixmap*(self: gen_qgraphicsitem_types.QGraphicsPixmapItem): gen_qpixmap_types.QPixmap =
-  gen_qpixmap_types.QPixmap(h: fcQGraphicsPixmapItem_pixmap(self.h))
+  gen_qpixmap_types.QPixmap(h: fcQGraphicsPixmapItem_pixmap(self.h), owned: true)
 
 proc setPixmap*(self: gen_qgraphicsitem_types.QGraphicsPixmapItem, pixmap: gen_qpixmap_types.QPixmap): void =
   fcQGraphicsPixmapItem_setPixmap(self.h, pixmap.h)
@@ -11261,7 +11385,7 @@ proc setTransformationMode*(self: gen_qgraphicsitem_types.QGraphicsPixmapItem, m
   fcQGraphicsPixmapItem_setTransformationMode(self.h, cint(mode))
 
 proc offset*(self: gen_qgraphicsitem_types.QGraphicsPixmapItem): gen_qpoint_types.QPointF =
-  gen_qpoint_types.QPointF(h: fcQGraphicsPixmapItem_offset(self.h))
+  gen_qpoint_types.QPointF(h: fcQGraphicsPixmapItem_offset(self.h), owned: true)
 
 proc setOffset*(self: gen_qgraphicsitem_types.QGraphicsPixmapItem, offset: gen_qpoint_types.QPointF): void =
   fcQGraphicsPixmapItem_setOffset(self.h, offset.h)
@@ -11270,10 +11394,10 @@ proc setOffset*(self: gen_qgraphicsitem_types.QGraphicsPixmapItem, x: float64, y
   fcQGraphicsPixmapItem_setOffset2(self.h, x, y)
 
 proc boundingRect*(self: gen_qgraphicsitem_types.QGraphicsPixmapItem): gen_qrect_types.QRectF =
-  gen_qrect_types.QRectF(h: fcQGraphicsPixmapItem_boundingRect(self.h))
+  gen_qrect_types.QRectF(h: fcQGraphicsPixmapItem_boundingRect(self.h), owned: true)
 
 proc shape*(self: gen_qgraphicsitem_types.QGraphicsPixmapItem): gen_qpainterpath_types.QPainterPath =
-  gen_qpainterpath_types.QPainterPath(h: fcQGraphicsPixmapItem_shape(self.h))
+  gen_qpainterpath_types.QPainterPath(h: fcQGraphicsPixmapItem_shape(self.h), owned: true)
 
 proc contains*(self: gen_qgraphicsitem_types.QGraphicsPixmapItem, point: gen_qpoint_types.QPointF): bool =
   fcQGraphicsPixmapItem_contains(self.h, point.h)
@@ -11285,7 +11409,7 @@ proc isObscuredBy*(self: gen_qgraphicsitem_types.QGraphicsPixmapItem, item: gen_
   fcQGraphicsPixmapItem_isObscuredBy(self.h, item.h)
 
 proc opaqueArea*(self: gen_qgraphicsitem_types.QGraphicsPixmapItem): gen_qpainterpath_types.QPainterPath =
-  gen_qpainterpath_types.QPainterPath(h: fcQGraphicsPixmapItem_opaqueArea(self.h))
+  gen_qpainterpath_types.QPainterPath(h: fcQGraphicsPixmapItem_opaqueArea(self.h), owned: true)
 
 proc typeX*(self: gen_qgraphicsitem_types.QGraphicsPixmapItem): cint =
   fcQGraphicsPixmapItem_typeX(self.h)
@@ -11331,7 +11455,7 @@ type QGraphicsPixmapItemwheelEventProc* = proc(self: QGraphicsPixmapItem, event:
 type QGraphicsPixmapIteminputMethodEventProc* = proc(self: QGraphicsPixmapItem, event: gen_qevent_types.QInputMethodEvent): void {.raises: [], gcsafe.}
 type QGraphicsPixmapIteminputMethodQueryProc* = proc(self: QGraphicsPixmapItem, query: cint): gen_qvariant_types.QVariant {.raises: [], gcsafe.}
 type QGraphicsPixmapItemitemChangeProc* = proc(self: QGraphicsPixmapItem, change: cint, value: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant {.raises: [], gcsafe.}
-type QGraphicsPixmapItemVTable* = object
+type QGraphicsPixmapItemVTable* {.inheritable, pure.} = object
   vtbl: cQGraphicsPixmapItemVTable
   boundingRect*: QGraphicsPixmapItemboundingRectProc
   shape*: QGraphicsPixmapItemshapeProc
@@ -11369,22 +11493,28 @@ type QGraphicsPixmapItemVTable* = object
   inputMethodQuery*: QGraphicsPixmapIteminputMethodQueryProc
   itemChange*: QGraphicsPixmapItemitemChangeProc
 proc QGraphicsPixmapItemboundingRect*(self: gen_qgraphicsitem_types.QGraphicsPixmapItem): gen_qrect_types.QRectF =
-  gen_qrect_types.QRectF(h: fcQGraphicsPixmapItem_virtualbase_boundingRect(self.h))
+  gen_qrect_types.QRectF(h: fcQGraphicsPixmapItem_virtualbase_boundingRect(self.h), owned: true)
 
 proc fcQGraphicsPixmapItem_vtable_callback_boundingRect(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QGraphicsPixmapItemVTable](fcQGraphicsPixmapItem_vdata(self)[])
   let self = QGraphicsPixmapItem(h: self)
   var virtualReturn = vtbl[].boundingRect(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QGraphicsPixmapItemshape*(self: gen_qgraphicsitem_types.QGraphicsPixmapItem): gen_qpainterpath_types.QPainterPath =
-  gen_qpainterpath_types.QPainterPath(h: fcQGraphicsPixmapItem_virtualbase_shape(self.h))
+  gen_qpainterpath_types.QPainterPath(h: fcQGraphicsPixmapItem_virtualbase_shape(self.h), owned: true)
 
 proc fcQGraphicsPixmapItem_vtable_callback_shape(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QGraphicsPixmapItemVTable](fcQGraphicsPixmapItem_vdata(self)[])
   let self = QGraphicsPixmapItem(h: self)
   var virtualReturn = vtbl[].shape(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QGraphicsPixmapItemcontains*(self: gen_qgraphicsitem_types.QGraphicsPixmapItem, point: gen_qpoint_types.QPointF): bool =
   fcQGraphicsPixmapItem_virtualbase_contains(self.h, point.h)
@@ -11392,7 +11522,7 @@ proc QGraphicsPixmapItemcontains*(self: gen_qgraphicsitem_types.QGraphicsPixmapI
 proc fcQGraphicsPixmapItem_vtable_callback_contains(self: pointer, point: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QGraphicsPixmapItemVTable](fcQGraphicsPixmapItem_vdata(self)[])
   let self = QGraphicsPixmapItem(h: self)
-  let slotval1 = gen_qpoint_types.QPointF(h: point)
+  let slotval1 = gen_qpoint_types.QPointF(h: point, owned: false)
   var virtualReturn = vtbl[].contains(self, slotval1)
   virtualReturn
 
@@ -11402,9 +11532,9 @@ proc QGraphicsPixmapItempaint*(self: gen_qgraphicsitem_types.QGraphicsPixmapItem
 proc fcQGraphicsPixmapItem_vtable_callback_paint(self: pointer, painter: pointer, option: pointer, widget: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsPixmapItemVTable](fcQGraphicsPixmapItem_vdata(self)[])
   let self = QGraphicsPixmapItem(h: self)
-  let slotval1 = gen_qpainter_types.QPainter(h: painter)
-  let slotval2 = gen_qstyleoption_types.QStyleOptionGraphicsItem(h: option)
-  let slotval3 = gen_qwidget_types.QWidget(h: widget)
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
+  let slotval2 = gen_qstyleoption_types.QStyleOptionGraphicsItem(h: option, owned: false)
+  let slotval3 = gen_qwidget_types.QWidget(h: widget, owned: false)
   vtbl[].paint(self, slotval1, slotval2, slotval3)
 
 proc QGraphicsPixmapItemisObscuredBy*(self: gen_qgraphicsitem_types.QGraphicsPixmapItem, item: gen_qgraphicsitem_types.QGraphicsItem): bool =
@@ -11413,18 +11543,21 @@ proc QGraphicsPixmapItemisObscuredBy*(self: gen_qgraphicsitem_types.QGraphicsPix
 proc fcQGraphicsPixmapItem_vtable_callback_isObscuredBy(self: pointer, item: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QGraphicsPixmapItemVTable](fcQGraphicsPixmapItem_vdata(self)[])
   let self = QGraphicsPixmapItem(h: self)
-  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: item)
+  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: item, owned: false)
   var virtualReturn = vtbl[].isObscuredBy(self, slotval1)
   virtualReturn
 
 proc QGraphicsPixmapItemopaqueArea*(self: gen_qgraphicsitem_types.QGraphicsPixmapItem): gen_qpainterpath_types.QPainterPath =
-  gen_qpainterpath_types.QPainterPath(h: fcQGraphicsPixmapItem_virtualbase_opaqueArea(self.h))
+  gen_qpainterpath_types.QPainterPath(h: fcQGraphicsPixmapItem_virtualbase_opaqueArea(self.h), owned: true)
 
 proc fcQGraphicsPixmapItem_vtable_callback_opaqueArea(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QGraphicsPixmapItemVTable](fcQGraphicsPixmapItem_vdata(self)[])
   let self = QGraphicsPixmapItem(h: self)
   var virtualReturn = vtbl[].opaqueArea(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QGraphicsPixmapItemtypeX*(self: gen_qgraphicsitem_types.QGraphicsPixmapItem): cint =
   fcQGraphicsPixmapItem_virtualbase_typeX(self.h)
@@ -11452,18 +11585,21 @@ proc fcQGraphicsPixmapItem_vtable_callback_setExtension(self: pointer, extension
   let vtbl = cast[ptr QGraphicsPixmapItemVTable](fcQGraphicsPixmapItem_vdata(self)[])
   let self = QGraphicsPixmapItem(h: self)
   let slotval1 = cint(extension)
-  let slotval2 = gen_qvariant_types.QVariant(h: variant)
+  let slotval2 = gen_qvariant_types.QVariant(h: variant, owned: false)
   vtbl[].setExtension(self, slotval1, slotval2)
 
 proc QGraphicsPixmapItemextension*(self: gen_qgraphicsitem_types.QGraphicsPixmapItem, variant: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQGraphicsPixmapItem_virtualbase_extension(self.h, variant.h))
+  gen_qvariant_types.QVariant(h: fcQGraphicsPixmapItem_virtualbase_extension(self.h, variant.h), owned: true)
 
 proc fcQGraphicsPixmapItem_vtable_callback_extension(self: pointer, variant: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QGraphicsPixmapItemVTable](fcQGraphicsPixmapItem_vdata(self)[])
   let self = QGraphicsPixmapItem(h: self)
-  let slotval1 = gen_qvariant_types.QVariant(h: variant)
+  let slotval1 = gen_qvariant_types.QVariant(h: variant, owned: false)
   var virtualReturn = vtbl[].extension(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QGraphicsPixmapItemadvance*(self: gen_qgraphicsitem_types.QGraphicsPixmapItem, phase: cint): void =
   fcQGraphicsPixmapItem_virtualbase_advance(self.h, phase)
@@ -11480,7 +11616,7 @@ proc QGraphicsPixmapItemcollidesWithItem*(self: gen_qgraphicsitem_types.QGraphic
 proc fcQGraphicsPixmapItem_vtable_callback_collidesWithItem(self: pointer, other: pointer, mode: cint): bool {.cdecl.} =
   let vtbl = cast[ptr QGraphicsPixmapItemVTable](fcQGraphicsPixmapItem_vdata(self)[])
   let self = QGraphicsPixmapItem(h: self)
-  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: other)
+  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: other, owned: false)
   let slotval2 = cint(mode)
   var virtualReturn = vtbl[].collidesWithItem(self, slotval1, slotval2)
   virtualReturn
@@ -11491,7 +11627,7 @@ proc QGraphicsPixmapItemcollidesWithPath*(self: gen_qgraphicsitem_types.QGraphic
 proc fcQGraphicsPixmapItem_vtable_callback_collidesWithPath(self: pointer, path: pointer, mode: cint): bool {.cdecl.} =
   let vtbl = cast[ptr QGraphicsPixmapItemVTable](fcQGraphicsPixmapItem_vdata(self)[])
   let self = QGraphicsPixmapItem(h: self)
-  let slotval1 = gen_qpainterpath_types.QPainterPath(h: path)
+  let slotval1 = gen_qpainterpath_types.QPainterPath(h: path, owned: false)
   let slotval2 = cint(mode)
   var virtualReturn = vtbl[].collidesWithPath(self, slotval1, slotval2)
   virtualReturn
@@ -11502,8 +11638,8 @@ proc QGraphicsPixmapItemsceneEventFilter*(self: gen_qgraphicsitem_types.QGraphic
 proc fcQGraphicsPixmapItem_vtable_callback_sceneEventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QGraphicsPixmapItemVTable](fcQGraphicsPixmapItem_vdata(self)[])
   let self = QGraphicsPixmapItem(h: self)
-  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].sceneEventFilter(self, slotval1, slotval2)
   virtualReturn
 
@@ -11513,7 +11649,7 @@ proc QGraphicsPixmapItemsceneEvent*(self: gen_qgraphicsitem_types.QGraphicsPixma
 proc fcQGraphicsPixmapItem_vtable_callback_sceneEvent(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QGraphicsPixmapItemVTable](fcQGraphicsPixmapItem_vdata(self)[])
   let self = QGraphicsPixmapItem(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].sceneEvent(self, slotval1)
   virtualReturn
 
@@ -11523,7 +11659,7 @@ proc QGraphicsPixmapItemcontextMenuEvent*(self: gen_qgraphicsitem_types.QGraphic
 proc fcQGraphicsPixmapItem_vtable_callback_contextMenuEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsPixmapItemVTable](fcQGraphicsPixmapItem_vdata(self)[])
   let self = QGraphicsPixmapItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneContextMenuEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneContextMenuEvent(h: event, owned: false)
   vtbl[].contextMenuEvent(self, slotval1)
 
 proc QGraphicsPixmapItemdragEnterEvent*(self: gen_qgraphicsitem_types.QGraphicsPixmapItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void =
@@ -11532,7 +11668,7 @@ proc QGraphicsPixmapItemdragEnterEvent*(self: gen_qgraphicsitem_types.QGraphicsP
 proc fcQGraphicsPixmapItem_vtable_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsPixmapItemVTable](fcQGraphicsPixmapItem_vdata(self)[])
   let self = QGraphicsPixmapItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event, owned: false)
   vtbl[].dragEnterEvent(self, slotval1)
 
 proc QGraphicsPixmapItemdragLeaveEvent*(self: gen_qgraphicsitem_types.QGraphicsPixmapItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void =
@@ -11541,7 +11677,7 @@ proc QGraphicsPixmapItemdragLeaveEvent*(self: gen_qgraphicsitem_types.QGraphicsP
 proc fcQGraphicsPixmapItem_vtable_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsPixmapItemVTable](fcQGraphicsPixmapItem_vdata(self)[])
   let self = QGraphicsPixmapItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event, owned: false)
   vtbl[].dragLeaveEvent(self, slotval1)
 
 proc QGraphicsPixmapItemdragMoveEvent*(self: gen_qgraphicsitem_types.QGraphicsPixmapItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void =
@@ -11550,7 +11686,7 @@ proc QGraphicsPixmapItemdragMoveEvent*(self: gen_qgraphicsitem_types.QGraphicsPi
 proc fcQGraphicsPixmapItem_vtable_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsPixmapItemVTable](fcQGraphicsPixmapItem_vdata(self)[])
   let self = QGraphicsPixmapItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event, owned: false)
   vtbl[].dragMoveEvent(self, slotval1)
 
 proc QGraphicsPixmapItemdropEvent*(self: gen_qgraphicsitem_types.QGraphicsPixmapItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void =
@@ -11559,7 +11695,7 @@ proc QGraphicsPixmapItemdropEvent*(self: gen_qgraphicsitem_types.QGraphicsPixmap
 proc fcQGraphicsPixmapItem_vtable_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsPixmapItemVTable](fcQGraphicsPixmapItem_vdata(self)[])
   let self = QGraphicsPixmapItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event, owned: false)
   vtbl[].dropEvent(self, slotval1)
 
 proc QGraphicsPixmapItemfocusInEvent*(self: gen_qgraphicsitem_types.QGraphicsPixmapItem, event: gen_qevent_types.QFocusEvent): void =
@@ -11568,7 +11704,7 @@ proc QGraphicsPixmapItemfocusInEvent*(self: gen_qgraphicsitem_types.QGraphicsPix
 proc fcQGraphicsPixmapItem_vtable_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsPixmapItemVTable](fcQGraphicsPixmapItem_vdata(self)[])
   let self = QGraphicsPixmapItem(h: self)
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusInEvent(self, slotval1)
 
 proc QGraphicsPixmapItemfocusOutEvent*(self: gen_qgraphicsitem_types.QGraphicsPixmapItem, event: gen_qevent_types.QFocusEvent): void =
@@ -11577,7 +11713,7 @@ proc QGraphicsPixmapItemfocusOutEvent*(self: gen_qgraphicsitem_types.QGraphicsPi
 proc fcQGraphicsPixmapItem_vtable_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsPixmapItemVTable](fcQGraphicsPixmapItem_vdata(self)[])
   let self = QGraphicsPixmapItem(h: self)
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusOutEvent(self, slotval1)
 
 proc QGraphicsPixmapItemhoverEnterEvent*(self: gen_qgraphicsitem_types.QGraphicsPixmapItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent): void =
@@ -11586,7 +11722,7 @@ proc QGraphicsPixmapItemhoverEnterEvent*(self: gen_qgraphicsitem_types.QGraphics
 proc fcQGraphicsPixmapItem_vtable_callback_hoverEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsPixmapItemVTable](fcQGraphicsPixmapItem_vdata(self)[])
   let self = QGraphicsPixmapItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event, owned: false)
   vtbl[].hoverEnterEvent(self, slotval1)
 
 proc QGraphicsPixmapItemhoverMoveEvent*(self: gen_qgraphicsitem_types.QGraphicsPixmapItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent): void =
@@ -11595,7 +11731,7 @@ proc QGraphicsPixmapItemhoverMoveEvent*(self: gen_qgraphicsitem_types.QGraphicsP
 proc fcQGraphicsPixmapItem_vtable_callback_hoverMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsPixmapItemVTable](fcQGraphicsPixmapItem_vdata(self)[])
   let self = QGraphicsPixmapItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event, owned: false)
   vtbl[].hoverMoveEvent(self, slotval1)
 
 proc QGraphicsPixmapItemhoverLeaveEvent*(self: gen_qgraphicsitem_types.QGraphicsPixmapItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent): void =
@@ -11604,7 +11740,7 @@ proc QGraphicsPixmapItemhoverLeaveEvent*(self: gen_qgraphicsitem_types.QGraphics
 proc fcQGraphicsPixmapItem_vtable_callback_hoverLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsPixmapItemVTable](fcQGraphicsPixmapItem_vdata(self)[])
   let self = QGraphicsPixmapItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event, owned: false)
   vtbl[].hoverLeaveEvent(self, slotval1)
 
 proc QGraphicsPixmapItemkeyPressEvent*(self: gen_qgraphicsitem_types.QGraphicsPixmapItem, event: gen_qevent_types.QKeyEvent): void =
@@ -11613,7 +11749,7 @@ proc QGraphicsPixmapItemkeyPressEvent*(self: gen_qgraphicsitem_types.QGraphicsPi
 proc fcQGraphicsPixmapItem_vtable_callback_keyPressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsPixmapItemVTable](fcQGraphicsPixmapItem_vdata(self)[])
   let self = QGraphicsPixmapItem(h: self)
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   vtbl[].keyPressEvent(self, slotval1)
 
 proc QGraphicsPixmapItemkeyReleaseEvent*(self: gen_qgraphicsitem_types.QGraphicsPixmapItem, event: gen_qevent_types.QKeyEvent): void =
@@ -11622,7 +11758,7 @@ proc QGraphicsPixmapItemkeyReleaseEvent*(self: gen_qgraphicsitem_types.QGraphics
 proc fcQGraphicsPixmapItem_vtable_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsPixmapItemVTable](fcQGraphicsPixmapItem_vdata(self)[])
   let self = QGraphicsPixmapItem(h: self)
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   vtbl[].keyReleaseEvent(self, slotval1)
 
 proc QGraphicsPixmapItemmousePressEvent*(self: gen_qgraphicsitem_types.QGraphicsPixmapItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void =
@@ -11631,7 +11767,7 @@ proc QGraphicsPixmapItemmousePressEvent*(self: gen_qgraphicsitem_types.QGraphics
 proc fcQGraphicsPixmapItem_vtable_callback_mousePressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsPixmapItemVTable](fcQGraphicsPixmapItem_vdata(self)[])
   let self = QGraphicsPixmapItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event, owned: false)
   vtbl[].mousePressEvent(self, slotval1)
 
 proc QGraphicsPixmapItemmouseMoveEvent*(self: gen_qgraphicsitem_types.QGraphicsPixmapItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void =
@@ -11640,7 +11776,7 @@ proc QGraphicsPixmapItemmouseMoveEvent*(self: gen_qgraphicsitem_types.QGraphicsP
 proc fcQGraphicsPixmapItem_vtable_callback_mouseMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsPixmapItemVTable](fcQGraphicsPixmapItem_vdata(self)[])
   let self = QGraphicsPixmapItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event, owned: false)
   vtbl[].mouseMoveEvent(self, slotval1)
 
 proc QGraphicsPixmapItemmouseReleaseEvent*(self: gen_qgraphicsitem_types.QGraphicsPixmapItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void =
@@ -11649,7 +11785,7 @@ proc QGraphicsPixmapItemmouseReleaseEvent*(self: gen_qgraphicsitem_types.QGraphi
 proc fcQGraphicsPixmapItem_vtable_callback_mouseReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsPixmapItemVTable](fcQGraphicsPixmapItem_vdata(self)[])
   let self = QGraphicsPixmapItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event, owned: false)
   vtbl[].mouseReleaseEvent(self, slotval1)
 
 proc QGraphicsPixmapItemmouseDoubleClickEvent*(self: gen_qgraphicsitem_types.QGraphicsPixmapItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void =
@@ -11658,7 +11794,7 @@ proc QGraphicsPixmapItemmouseDoubleClickEvent*(self: gen_qgraphicsitem_types.QGr
 proc fcQGraphicsPixmapItem_vtable_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsPixmapItemVTable](fcQGraphicsPixmapItem_vdata(self)[])
   let self = QGraphicsPixmapItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event, owned: false)
   vtbl[].mouseDoubleClickEvent(self, slotval1)
 
 proc QGraphicsPixmapItemwheelEvent*(self: gen_qgraphicsitem_types.QGraphicsPixmapItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent): void =
@@ -11667,7 +11803,7 @@ proc QGraphicsPixmapItemwheelEvent*(self: gen_qgraphicsitem_types.QGraphicsPixma
 proc fcQGraphicsPixmapItem_vtable_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsPixmapItemVTable](fcQGraphicsPixmapItem_vdata(self)[])
   let self = QGraphicsPixmapItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent(h: event, owned: false)
   vtbl[].wheelEvent(self, slotval1)
 
 proc QGraphicsPixmapIteminputMethodEvent*(self: gen_qgraphicsitem_types.QGraphicsPixmapItem, event: gen_qevent_types.QInputMethodEvent): void =
@@ -11676,29 +11812,35 @@ proc QGraphicsPixmapIteminputMethodEvent*(self: gen_qgraphicsitem_types.QGraphic
 proc fcQGraphicsPixmapItem_vtable_callback_inputMethodEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsPixmapItemVTable](fcQGraphicsPixmapItem_vdata(self)[])
   let self = QGraphicsPixmapItem(h: self)
-  let slotval1 = gen_qevent_types.QInputMethodEvent(h: event)
+  let slotval1 = gen_qevent_types.QInputMethodEvent(h: event, owned: false)
   vtbl[].inputMethodEvent(self, slotval1)
 
 proc QGraphicsPixmapIteminputMethodQuery*(self: gen_qgraphicsitem_types.QGraphicsPixmapItem, query: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQGraphicsPixmapItem_virtualbase_inputMethodQuery(self.h, cint(query)))
+  gen_qvariant_types.QVariant(h: fcQGraphicsPixmapItem_virtualbase_inputMethodQuery(self.h, cint(query)), owned: true)
 
 proc fcQGraphicsPixmapItem_vtable_callback_inputMethodQuery(self: pointer, query: cint): pointer {.cdecl.} =
   let vtbl = cast[ptr QGraphicsPixmapItemVTable](fcQGraphicsPixmapItem_vdata(self)[])
   let self = QGraphicsPixmapItem(h: self)
   let slotval1 = cint(query)
   var virtualReturn = vtbl[].inputMethodQuery(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QGraphicsPixmapItemitemChange*(self: gen_qgraphicsitem_types.QGraphicsPixmapItem, change: cint, value: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQGraphicsPixmapItem_virtualbase_itemChange(self.h, cint(change), value.h))
+  gen_qvariant_types.QVariant(h: fcQGraphicsPixmapItem_virtualbase_itemChange(self.h, cint(change), value.h), owned: true)
 
 proc fcQGraphicsPixmapItem_vtable_callback_itemChange(self: pointer, change: cint, value: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QGraphicsPixmapItemVTable](fcQGraphicsPixmapItem_vdata(self)[])
   let self = QGraphicsPixmapItem(h: self)
   let slotval1 = cint(change)
-  let slotval2 = gen_qvariant_types.QVariant(h: value)
+  let slotval2 = gen_qvariant_types.QVariant(h: value, owned: false)
   var virtualReturn = vtbl[].itemChange(self, slotval1, slotval2)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 type VirtualQGraphicsPixmapItem* {.inheritable.} = ref object of QGraphicsPixmapItem
   vtbl*: cQGraphicsPixmapItemVTable
@@ -11720,7 +11862,7 @@ method contains*(self: VirtualQGraphicsPixmapItem, point: gen_qpoint_types.QPoin
   QGraphicsPixmapItemcontains(self[], point)
 proc fcQGraphicsPixmapItem_method_callback_contains(self: pointer, point: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQGraphicsPixmapItem](fcQGraphicsPixmapItem_vdata(self)[])
-  let slotval1 = gen_qpoint_types.QPointF(h: point)
+  let slotval1 = gen_qpoint_types.QPointF(h: point, owned: false)
   var virtualReturn = inst.contains(slotval1)
   virtualReturn
 
@@ -11728,16 +11870,16 @@ method paint*(self: VirtualQGraphicsPixmapItem, painter: gen_qpainter_types.QPai
   QGraphicsPixmapItempaint(self[], painter, option, widget)
 proc fcQGraphicsPixmapItem_method_callback_paint(self: pointer, painter: pointer, option: pointer, widget: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsPixmapItem](fcQGraphicsPixmapItem_vdata(self)[])
-  let slotval1 = gen_qpainter_types.QPainter(h: painter)
-  let slotval2 = gen_qstyleoption_types.QStyleOptionGraphicsItem(h: option)
-  let slotval3 = gen_qwidget_types.QWidget(h: widget)
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
+  let slotval2 = gen_qstyleoption_types.QStyleOptionGraphicsItem(h: option, owned: false)
+  let slotval3 = gen_qwidget_types.QWidget(h: widget, owned: false)
   inst.paint(slotval1, slotval2, slotval3)
 
 method isObscuredBy*(self: VirtualQGraphicsPixmapItem, item: gen_qgraphicsitem_types.QGraphicsItem): bool {.base.} =
   QGraphicsPixmapItemisObscuredBy(self[], item)
 proc fcQGraphicsPixmapItem_method_callback_isObscuredBy(self: pointer, item: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQGraphicsPixmapItem](fcQGraphicsPixmapItem_vdata(self)[])
-  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: item)
+  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: item, owned: false)
   var virtualReturn = inst.isObscuredBy(slotval1)
   virtualReturn
 
@@ -11768,14 +11910,14 @@ method setExtension*(self: VirtualQGraphicsPixmapItem, extension: cint, variant:
 proc fcQGraphicsPixmapItem_method_callback_setExtension(self: pointer, extension: cint, variant: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsPixmapItem](fcQGraphicsPixmapItem_vdata(self)[])
   let slotval1 = cint(extension)
-  let slotval2 = gen_qvariant_types.QVariant(h: variant)
+  let slotval2 = gen_qvariant_types.QVariant(h: variant, owned: false)
   inst.setExtension(slotval1, slotval2)
 
 method extension*(self: VirtualQGraphicsPixmapItem, variant: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant {.base.} =
   QGraphicsPixmapItemextension(self[], variant)
 proc fcQGraphicsPixmapItem_method_callback_extension(self: pointer, variant: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsPixmapItem](fcQGraphicsPixmapItem_vdata(self)[])
-  let slotval1 = gen_qvariant_types.QVariant(h: variant)
+  let slotval1 = gen_qvariant_types.QVariant(h: variant, owned: false)
   var virtualReturn = inst.extension(slotval1)
   virtualReturn.h
 
@@ -11790,7 +11932,7 @@ method collidesWithItem*(self: VirtualQGraphicsPixmapItem, other: gen_qgraphicsi
   QGraphicsPixmapItemcollidesWithItem(self[], other, mode)
 proc fcQGraphicsPixmapItem_method_callback_collidesWithItem(self: pointer, other: pointer, mode: cint): bool {.cdecl.} =
   let inst = cast[VirtualQGraphicsPixmapItem](fcQGraphicsPixmapItem_vdata(self)[])
-  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: other)
+  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: other, owned: false)
   let slotval2 = cint(mode)
   var virtualReturn = inst.collidesWithItem(slotval1, slotval2)
   virtualReturn
@@ -11799,7 +11941,7 @@ method collidesWithPath*(self: VirtualQGraphicsPixmapItem, path: gen_qpainterpat
   QGraphicsPixmapItemcollidesWithPath(self[], path, mode)
 proc fcQGraphicsPixmapItem_method_callback_collidesWithPath(self: pointer, path: pointer, mode: cint): bool {.cdecl.} =
   let inst = cast[VirtualQGraphicsPixmapItem](fcQGraphicsPixmapItem_vdata(self)[])
-  let slotval1 = gen_qpainterpath_types.QPainterPath(h: path)
+  let slotval1 = gen_qpainterpath_types.QPainterPath(h: path, owned: false)
   let slotval2 = cint(mode)
   var virtualReturn = inst.collidesWithPath(slotval1, slotval2)
   virtualReturn
@@ -11808,8 +11950,8 @@ method sceneEventFilter*(self: VirtualQGraphicsPixmapItem, watched: gen_qgraphic
   QGraphicsPixmapItemsceneEventFilter(self[], watched, event)
 proc fcQGraphicsPixmapItem_method_callback_sceneEventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQGraphicsPixmapItem](fcQGraphicsPixmapItem_vdata(self)[])
-  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.sceneEventFilter(slotval1, slotval2)
   virtualReturn
 
@@ -11817,7 +11959,7 @@ method sceneEvent*(self: VirtualQGraphicsPixmapItem, event: gen_qcoreevent_types
   QGraphicsPixmapItemsceneEvent(self[], event)
 proc fcQGraphicsPixmapItem_method_callback_sceneEvent(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQGraphicsPixmapItem](fcQGraphicsPixmapItem_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.sceneEvent(slotval1)
   virtualReturn
 
@@ -11825,126 +11967,126 @@ method contextMenuEvent*(self: VirtualQGraphicsPixmapItem, event: gen_qgraphicss
   QGraphicsPixmapItemcontextMenuEvent(self[], event)
 proc fcQGraphicsPixmapItem_method_callback_contextMenuEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsPixmapItem](fcQGraphicsPixmapItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneContextMenuEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneContextMenuEvent(h: event, owned: false)
   inst.contextMenuEvent(slotval1)
 
 method dragEnterEvent*(self: VirtualQGraphicsPixmapItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void {.base.} =
   QGraphicsPixmapItemdragEnterEvent(self[], event)
 proc fcQGraphicsPixmapItem_method_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsPixmapItem](fcQGraphicsPixmapItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event, owned: false)
   inst.dragEnterEvent(slotval1)
 
 method dragLeaveEvent*(self: VirtualQGraphicsPixmapItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void {.base.} =
   QGraphicsPixmapItemdragLeaveEvent(self[], event)
 proc fcQGraphicsPixmapItem_method_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsPixmapItem](fcQGraphicsPixmapItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event, owned: false)
   inst.dragLeaveEvent(slotval1)
 
 method dragMoveEvent*(self: VirtualQGraphicsPixmapItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void {.base.} =
   QGraphicsPixmapItemdragMoveEvent(self[], event)
 proc fcQGraphicsPixmapItem_method_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsPixmapItem](fcQGraphicsPixmapItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event, owned: false)
   inst.dragMoveEvent(slotval1)
 
 method dropEvent*(self: VirtualQGraphicsPixmapItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void {.base.} =
   QGraphicsPixmapItemdropEvent(self[], event)
 proc fcQGraphicsPixmapItem_method_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsPixmapItem](fcQGraphicsPixmapItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event, owned: false)
   inst.dropEvent(slotval1)
 
 method focusInEvent*(self: VirtualQGraphicsPixmapItem, event: gen_qevent_types.QFocusEvent): void {.base.} =
   QGraphicsPixmapItemfocusInEvent(self[], event)
 proc fcQGraphicsPixmapItem_method_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsPixmapItem](fcQGraphicsPixmapItem_vdata(self)[])
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   inst.focusInEvent(slotval1)
 
 method focusOutEvent*(self: VirtualQGraphicsPixmapItem, event: gen_qevent_types.QFocusEvent): void {.base.} =
   QGraphicsPixmapItemfocusOutEvent(self[], event)
 proc fcQGraphicsPixmapItem_method_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsPixmapItem](fcQGraphicsPixmapItem_vdata(self)[])
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   inst.focusOutEvent(slotval1)
 
 method hoverEnterEvent*(self: VirtualQGraphicsPixmapItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent): void {.base.} =
   QGraphicsPixmapItemhoverEnterEvent(self[], event)
 proc fcQGraphicsPixmapItem_method_callback_hoverEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsPixmapItem](fcQGraphicsPixmapItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event, owned: false)
   inst.hoverEnterEvent(slotval1)
 
 method hoverMoveEvent*(self: VirtualQGraphicsPixmapItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent): void {.base.} =
   QGraphicsPixmapItemhoverMoveEvent(self[], event)
 proc fcQGraphicsPixmapItem_method_callback_hoverMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsPixmapItem](fcQGraphicsPixmapItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event, owned: false)
   inst.hoverMoveEvent(slotval1)
 
 method hoverLeaveEvent*(self: VirtualQGraphicsPixmapItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent): void {.base.} =
   QGraphicsPixmapItemhoverLeaveEvent(self[], event)
 proc fcQGraphicsPixmapItem_method_callback_hoverLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsPixmapItem](fcQGraphicsPixmapItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event, owned: false)
   inst.hoverLeaveEvent(slotval1)
 
 method keyPressEvent*(self: VirtualQGraphicsPixmapItem, event: gen_qevent_types.QKeyEvent): void {.base.} =
   QGraphicsPixmapItemkeyPressEvent(self[], event)
 proc fcQGraphicsPixmapItem_method_callback_keyPressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsPixmapItem](fcQGraphicsPixmapItem_vdata(self)[])
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   inst.keyPressEvent(slotval1)
 
 method keyReleaseEvent*(self: VirtualQGraphicsPixmapItem, event: gen_qevent_types.QKeyEvent): void {.base.} =
   QGraphicsPixmapItemkeyReleaseEvent(self[], event)
 proc fcQGraphicsPixmapItem_method_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsPixmapItem](fcQGraphicsPixmapItem_vdata(self)[])
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   inst.keyReleaseEvent(slotval1)
 
 method mousePressEvent*(self: VirtualQGraphicsPixmapItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void {.base.} =
   QGraphicsPixmapItemmousePressEvent(self[], event)
 proc fcQGraphicsPixmapItem_method_callback_mousePressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsPixmapItem](fcQGraphicsPixmapItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event, owned: false)
   inst.mousePressEvent(slotval1)
 
 method mouseMoveEvent*(self: VirtualQGraphicsPixmapItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void {.base.} =
   QGraphicsPixmapItemmouseMoveEvent(self[], event)
 proc fcQGraphicsPixmapItem_method_callback_mouseMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsPixmapItem](fcQGraphicsPixmapItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event, owned: false)
   inst.mouseMoveEvent(slotval1)
 
 method mouseReleaseEvent*(self: VirtualQGraphicsPixmapItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void {.base.} =
   QGraphicsPixmapItemmouseReleaseEvent(self[], event)
 proc fcQGraphicsPixmapItem_method_callback_mouseReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsPixmapItem](fcQGraphicsPixmapItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event, owned: false)
   inst.mouseReleaseEvent(slotval1)
 
 method mouseDoubleClickEvent*(self: VirtualQGraphicsPixmapItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void {.base.} =
   QGraphicsPixmapItemmouseDoubleClickEvent(self[], event)
 proc fcQGraphicsPixmapItem_method_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsPixmapItem](fcQGraphicsPixmapItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event, owned: false)
   inst.mouseDoubleClickEvent(slotval1)
 
 method wheelEvent*(self: VirtualQGraphicsPixmapItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent): void {.base.} =
   QGraphicsPixmapItemwheelEvent(self[], event)
 proc fcQGraphicsPixmapItem_method_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsPixmapItem](fcQGraphicsPixmapItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent(h: event, owned: false)
   inst.wheelEvent(slotval1)
 
 method inputMethodEvent*(self: VirtualQGraphicsPixmapItem, event: gen_qevent_types.QInputMethodEvent): void {.base.} =
   QGraphicsPixmapIteminputMethodEvent(self[], event)
 proc fcQGraphicsPixmapItem_method_callback_inputMethodEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsPixmapItem](fcQGraphicsPixmapItem_vdata(self)[])
-  let slotval1 = gen_qevent_types.QInputMethodEvent(h: event)
+  let slotval1 = gen_qevent_types.QInputMethodEvent(h: event, owned: false)
   inst.inputMethodEvent(slotval1)
 
 method inputMethodQuery*(self: VirtualQGraphicsPixmapItem, query: cint): gen_qvariant_types.QVariant {.base.} =
@@ -11960,7 +12102,7 @@ method itemChange*(self: VirtualQGraphicsPixmapItem, change: cint, value: gen_qv
 proc fcQGraphicsPixmapItem_method_callback_itemChange(self: pointer, change: cint, value: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsPixmapItem](fcQGraphicsPixmapItem_vdata(self)[])
   let slotval1 = cint(change)
-  let slotval2 = gen_qvariant_types.QVariant(h: value)
+  let slotval2 = gen_qvariant_types.QVariant(h: value, owned: false)
   var virtualReturn = inst.itemChange(slotval1, slotval2)
   virtualReturn.h
 
@@ -12053,7 +12195,7 @@ proc create*(T: type gen_qgraphicsitem_types.QGraphicsPixmapItem,
     vtbl[].vtbl.inputMethodQuery = fcQGraphicsPixmapItem_vtable_callback_inputMethodQuery
   if not isNil(vtbl[].itemChange):
     vtbl[].vtbl.itemChange = fcQGraphicsPixmapItem_vtable_callback_itemChange
-  let tmp = gen_qgraphicsitem_types.QGraphicsPixmapItem(h: fcQGraphicsPixmapItem_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))))
+  let tmp = gen_qgraphicsitem_types.QGraphicsPixmapItem(h: fcQGraphicsPixmapItem_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))), owned: true)
   fcQGraphicsPixmapItem_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qgraphicsitem_types.QGraphicsPixmapItem,
@@ -12134,7 +12276,7 @@ proc create*(T: type gen_qgraphicsitem_types.QGraphicsPixmapItem,
     vtbl[].vtbl.inputMethodQuery = fcQGraphicsPixmapItem_vtable_callback_inputMethodQuery
   if not isNil(vtbl[].itemChange):
     vtbl[].vtbl.itemChange = fcQGraphicsPixmapItem_vtable_callback_itemChange
-  let tmp = gen_qgraphicsitem_types.QGraphicsPixmapItem(h: fcQGraphicsPixmapItem_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), pixmap.h))
+  let tmp = gen_qgraphicsitem_types.QGraphicsPixmapItem(h: fcQGraphicsPixmapItem_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), pixmap.h), owned: true)
   fcQGraphicsPixmapItem_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qgraphicsitem_types.QGraphicsPixmapItem,
@@ -12215,7 +12357,7 @@ proc create*(T: type gen_qgraphicsitem_types.QGraphicsPixmapItem,
     vtbl[].vtbl.inputMethodQuery = fcQGraphicsPixmapItem_vtable_callback_inputMethodQuery
   if not isNil(vtbl[].itemChange):
     vtbl[].vtbl.itemChange = fcQGraphicsPixmapItem_vtable_callback_itemChange
-  let tmp = gen_qgraphicsitem_types.QGraphicsPixmapItem(h: fcQGraphicsPixmapItem_new3(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h))
+  let tmp = gen_qgraphicsitem_types.QGraphicsPixmapItem(h: fcQGraphicsPixmapItem_new3(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h), owned: true)
   fcQGraphicsPixmapItem_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qgraphicsitem_types.QGraphicsPixmapItem,
@@ -12296,13 +12438,14 @@ proc create*(T: type gen_qgraphicsitem_types.QGraphicsPixmapItem,
     vtbl[].vtbl.inputMethodQuery = fcQGraphicsPixmapItem_vtable_callback_inputMethodQuery
   if not isNil(vtbl[].itemChange):
     vtbl[].vtbl.itemChange = fcQGraphicsPixmapItem_vtable_callback_itemChange
-  let tmp = gen_qgraphicsitem_types.QGraphicsPixmapItem(h: fcQGraphicsPixmapItem_new4(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), pixmap.h, parent.h))
+  let tmp = gen_qgraphicsitem_types.QGraphicsPixmapItem(h: fcQGraphicsPixmapItem_new4(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), pixmap.h, parent.h), owned: true)
   fcQGraphicsPixmapItem_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQGraphicsPixmapItem_mvtbl = cQGraphicsPixmapItemVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQGraphicsPixmapItem()[])](self.fcQGraphicsPixmapItem_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   boundingRect: fcQGraphicsPixmapItem_method_callback_boundingRect,
   shape: fcQGraphicsPixmapItem_method_callback_shape,
@@ -12367,10 +12510,8 @@ proc create*(T: type gen_qgraphicsitem_types.QGraphicsPixmapItem,
   inst[].h = fcQGraphicsPixmapItem_new4(addr(cQGraphicsPixmapItem_mvtbl), csize_t(sizeof(pointer)), pixmap.h, parent.h)
   fcQGraphicsPixmapItem_vdata(inst[].h)[] = addr inst[]
 
-proc delete*(self: gen_qgraphicsitem_types.QGraphicsPixmapItem) =
-  fcQGraphicsPixmapItem_delete(self.h)
 proc metaObject*(self: gen_qgraphicsitem_types.QGraphicsTextItem): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQGraphicsTextItem_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQGraphicsTextItem_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qgraphicsitem_types.QGraphicsTextItem, param1: cstring): pointer =
   fcQGraphicsTextItem_metacast(self.h, param1)
@@ -12403,7 +12544,7 @@ proc setPlainText*(self: gen_qgraphicsitem_types.QGraphicsTextItem, text: string
   fcQGraphicsTextItem_setPlainText(self.h, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
 
 proc font*(self: gen_qgraphicsitem_types.QGraphicsTextItem): gen_qfont_types.QFont =
-  gen_qfont_types.QFont(h: fcQGraphicsTextItem_font(self.h))
+  gen_qfont_types.QFont(h: fcQGraphicsTextItem_font(self.h), owned: true)
 
 proc setFont*(self: gen_qgraphicsitem_types.QGraphicsTextItem, font: gen_qfont_types.QFont): void =
   fcQGraphicsTextItem_setFont(self.h, font.h)
@@ -12412,13 +12553,13 @@ proc setDefaultTextColor*(self: gen_qgraphicsitem_types.QGraphicsTextItem, c: ge
   fcQGraphicsTextItem_setDefaultTextColor(self.h, c.h)
 
 proc defaultTextColor*(self: gen_qgraphicsitem_types.QGraphicsTextItem): gen_qcolor_types.QColor =
-  gen_qcolor_types.QColor(h: fcQGraphicsTextItem_defaultTextColor(self.h))
+  gen_qcolor_types.QColor(h: fcQGraphicsTextItem_defaultTextColor(self.h), owned: true)
 
 proc boundingRect*(self: gen_qgraphicsitem_types.QGraphicsTextItem): gen_qrect_types.QRectF =
-  gen_qrect_types.QRectF(h: fcQGraphicsTextItem_boundingRect(self.h))
+  gen_qrect_types.QRectF(h: fcQGraphicsTextItem_boundingRect(self.h), owned: true)
 
 proc shape*(self: gen_qgraphicsitem_types.QGraphicsTextItem): gen_qpainterpath_types.QPainterPath =
-  gen_qpainterpath_types.QPainterPath(h: fcQGraphicsTextItem_shape(self.h))
+  gen_qpainterpath_types.QPainterPath(h: fcQGraphicsTextItem_shape(self.h), owned: true)
 
 proc contains*(self: gen_qgraphicsitem_types.QGraphicsTextItem, point: gen_qpoint_types.QPointF): bool =
   fcQGraphicsTextItem_contains(self.h, point.h)
@@ -12430,7 +12571,7 @@ proc isObscuredBy*(self: gen_qgraphicsitem_types.QGraphicsTextItem, item: gen_qg
   fcQGraphicsTextItem_isObscuredBy(self.h, item.h)
 
 proc opaqueArea*(self: gen_qgraphicsitem_types.QGraphicsTextItem): gen_qpainterpath_types.QPainterPath =
-  gen_qpainterpath_types.QPainterPath(h: fcQGraphicsTextItem_opaqueArea(self.h))
+  gen_qpainterpath_types.QPainterPath(h: fcQGraphicsTextItem_opaqueArea(self.h), owned: true)
 
 proc typeX*(self: gen_qgraphicsitem_types.QGraphicsTextItem): cint =
   fcQGraphicsTextItem_typeX(self.h)
@@ -12448,7 +12589,7 @@ proc setDocument*(self: gen_qgraphicsitem_types.QGraphicsTextItem, document: gen
   fcQGraphicsTextItem_setDocument(self.h, document.h)
 
 proc document*(self: gen_qgraphicsitem_types.QGraphicsTextItem): gen_qtextdocument_types.QTextDocument =
-  gen_qtextdocument_types.QTextDocument(h: fcQGraphicsTextItem_document(self.h))
+  gen_qtextdocument_types.QTextDocument(h: fcQGraphicsTextItem_document(self.h), owned: false)
 
 proc setTextInteractionFlags*(self: gen_qgraphicsitem_types.QGraphicsTextItem, flags: cint): void =
   fcQGraphicsTextItem_setTextInteractionFlags(self.h, cint(flags))
@@ -12472,7 +12613,7 @@ proc setTextCursor*(self: gen_qgraphicsitem_types.QGraphicsTextItem, cursor: gen
   fcQGraphicsTextItem_setTextCursor(self.h, cursor.h)
 
 proc textCursor*(self: gen_qgraphicsitem_types.QGraphicsTextItem): gen_qtextcursor_types.QTextCursor =
-  gen_qtextcursor_types.QTextCursor(h: fcQGraphicsTextItem_textCursor(self.h))
+  gen_qtextcursor_types.QTextCursor(h: fcQGraphicsTextItem_textCursor(self.h), owned: true)
 
 proc linkActivated*(self: gen_qgraphicsitem_types.QGraphicsTextItem, param1: string): void =
   fcQGraphicsTextItem_linkActivated(self.h, struct_miqt_string(data: if len(param1) > 0: addr param1[0] else: nil, len: csize_t(len(param1))))
@@ -12577,7 +12718,7 @@ type QGraphicsTextItemcollidesWithPathProc* = proc(self: QGraphicsTextItem, path
 type QGraphicsTextItemsceneEventFilterProc* = proc(self: QGraphicsTextItem, watched: gen_qgraphicsitem_types.QGraphicsItem, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
 type QGraphicsTextItemwheelEventProc* = proc(self: QGraphicsTextItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent): void {.raises: [], gcsafe.}
 type QGraphicsTextItemitemChangeProc* = proc(self: QGraphicsTextItem, change: cint, value: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant {.raises: [], gcsafe.}
-type QGraphicsTextItemVTable* = object
+type QGraphicsTextItemVTable* {.inheritable, pure.} = object
   vtbl: cQGraphicsTextItemVTable
   metaObject*: QGraphicsTextItemmetaObjectProc
   metacast*: QGraphicsTextItemmetacastProc
@@ -12625,13 +12766,16 @@ type QGraphicsTextItemVTable* = object
   wheelEvent*: QGraphicsTextItemwheelEventProc
   itemChange*: QGraphicsTextItemitemChangeProc
 proc QGraphicsTextItemmetaObject*(self: gen_qgraphicsitem_types.QGraphicsTextItem): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQGraphicsTextItem_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQGraphicsTextItem_virtualbase_metaObject(self.h), owned: false)
 
 proc fcQGraphicsTextItem_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QGraphicsTextItemVTable](fcQGraphicsTextItem_vdata(self)[])
   let self = QGraphicsTextItem(h: self)
   var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QGraphicsTextItemmetacast*(self: gen_qgraphicsitem_types.QGraphicsTextItem, param1: cstring): pointer =
   fcQGraphicsTextItem_virtualbase_metacast(self.h, param1)
@@ -12656,22 +12800,28 @@ proc fcQGraphicsTextItem_vtable_callback_metacall(self: pointer, param1: cint, p
   virtualReturn
 
 proc QGraphicsTextItemboundingRect*(self: gen_qgraphicsitem_types.QGraphicsTextItem): gen_qrect_types.QRectF =
-  gen_qrect_types.QRectF(h: fcQGraphicsTextItem_virtualbase_boundingRect(self.h))
+  gen_qrect_types.QRectF(h: fcQGraphicsTextItem_virtualbase_boundingRect(self.h), owned: true)
 
 proc fcQGraphicsTextItem_vtable_callback_boundingRect(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QGraphicsTextItemVTable](fcQGraphicsTextItem_vdata(self)[])
   let self = QGraphicsTextItem(h: self)
   var virtualReturn = vtbl[].boundingRect(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QGraphicsTextItemshape*(self: gen_qgraphicsitem_types.QGraphicsTextItem): gen_qpainterpath_types.QPainterPath =
-  gen_qpainterpath_types.QPainterPath(h: fcQGraphicsTextItem_virtualbase_shape(self.h))
+  gen_qpainterpath_types.QPainterPath(h: fcQGraphicsTextItem_virtualbase_shape(self.h), owned: true)
 
 proc fcQGraphicsTextItem_vtable_callback_shape(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QGraphicsTextItemVTable](fcQGraphicsTextItem_vdata(self)[])
   let self = QGraphicsTextItem(h: self)
   var virtualReturn = vtbl[].shape(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QGraphicsTextItemcontains*(self: gen_qgraphicsitem_types.QGraphicsTextItem, point: gen_qpoint_types.QPointF): bool =
   fcQGraphicsTextItem_virtualbase_contains(self.h, point.h)
@@ -12679,7 +12829,7 @@ proc QGraphicsTextItemcontains*(self: gen_qgraphicsitem_types.QGraphicsTextItem,
 proc fcQGraphicsTextItem_vtable_callback_contains(self: pointer, point: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QGraphicsTextItemVTable](fcQGraphicsTextItem_vdata(self)[])
   let self = QGraphicsTextItem(h: self)
-  let slotval1 = gen_qpoint_types.QPointF(h: point)
+  let slotval1 = gen_qpoint_types.QPointF(h: point, owned: false)
   var virtualReturn = vtbl[].contains(self, slotval1)
   virtualReturn
 
@@ -12689,9 +12839,9 @@ proc QGraphicsTextItempaint*(self: gen_qgraphicsitem_types.QGraphicsTextItem, pa
 proc fcQGraphicsTextItem_vtable_callback_paint(self: pointer, painter: pointer, option: pointer, widget: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsTextItemVTable](fcQGraphicsTextItem_vdata(self)[])
   let self = QGraphicsTextItem(h: self)
-  let slotval1 = gen_qpainter_types.QPainter(h: painter)
-  let slotval2 = gen_qstyleoption_types.QStyleOptionGraphicsItem(h: option)
-  let slotval3 = gen_qwidget_types.QWidget(h: widget)
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
+  let slotval2 = gen_qstyleoption_types.QStyleOptionGraphicsItem(h: option, owned: false)
+  let slotval3 = gen_qwidget_types.QWidget(h: widget, owned: false)
   vtbl[].paint(self, slotval1, slotval2, slotval3)
 
 proc QGraphicsTextItemisObscuredBy*(self: gen_qgraphicsitem_types.QGraphicsTextItem, item: gen_qgraphicsitem_types.QGraphicsItem): bool =
@@ -12700,18 +12850,21 @@ proc QGraphicsTextItemisObscuredBy*(self: gen_qgraphicsitem_types.QGraphicsTextI
 proc fcQGraphicsTextItem_vtable_callback_isObscuredBy(self: pointer, item: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QGraphicsTextItemVTable](fcQGraphicsTextItem_vdata(self)[])
   let self = QGraphicsTextItem(h: self)
-  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: item)
+  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: item, owned: false)
   var virtualReturn = vtbl[].isObscuredBy(self, slotval1)
   virtualReturn
 
 proc QGraphicsTextItemopaqueArea*(self: gen_qgraphicsitem_types.QGraphicsTextItem): gen_qpainterpath_types.QPainterPath =
-  gen_qpainterpath_types.QPainterPath(h: fcQGraphicsTextItem_virtualbase_opaqueArea(self.h))
+  gen_qpainterpath_types.QPainterPath(h: fcQGraphicsTextItem_virtualbase_opaqueArea(self.h), owned: true)
 
 proc fcQGraphicsTextItem_vtable_callback_opaqueArea(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QGraphicsTextItemVTable](fcQGraphicsTextItem_vdata(self)[])
   let self = QGraphicsTextItem(h: self)
   var virtualReturn = vtbl[].opaqueArea(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QGraphicsTextItemtypeX*(self: gen_qgraphicsitem_types.QGraphicsTextItem): cint =
   fcQGraphicsTextItem_virtualbase_typeX(self.h)
@@ -12728,7 +12881,7 @@ proc QGraphicsTextItemsceneEvent*(self: gen_qgraphicsitem_types.QGraphicsTextIte
 proc fcQGraphicsTextItem_vtable_callback_sceneEvent(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QGraphicsTextItemVTable](fcQGraphicsTextItem_vdata(self)[])
   let self = QGraphicsTextItem(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].sceneEvent(self, slotval1)
   virtualReturn
 
@@ -12738,7 +12891,7 @@ proc QGraphicsTextItemmousePressEvent*(self: gen_qgraphicsitem_types.QGraphicsTe
 proc fcQGraphicsTextItem_vtable_callback_mousePressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsTextItemVTable](fcQGraphicsTextItem_vdata(self)[])
   let self = QGraphicsTextItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event, owned: false)
   vtbl[].mousePressEvent(self, slotval1)
 
 proc QGraphicsTextItemmouseMoveEvent*(self: gen_qgraphicsitem_types.QGraphicsTextItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void =
@@ -12747,7 +12900,7 @@ proc QGraphicsTextItemmouseMoveEvent*(self: gen_qgraphicsitem_types.QGraphicsTex
 proc fcQGraphicsTextItem_vtable_callback_mouseMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsTextItemVTable](fcQGraphicsTextItem_vdata(self)[])
   let self = QGraphicsTextItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event, owned: false)
   vtbl[].mouseMoveEvent(self, slotval1)
 
 proc QGraphicsTextItemmouseReleaseEvent*(self: gen_qgraphicsitem_types.QGraphicsTextItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void =
@@ -12756,7 +12909,7 @@ proc QGraphicsTextItemmouseReleaseEvent*(self: gen_qgraphicsitem_types.QGraphics
 proc fcQGraphicsTextItem_vtable_callback_mouseReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsTextItemVTable](fcQGraphicsTextItem_vdata(self)[])
   let self = QGraphicsTextItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event, owned: false)
   vtbl[].mouseReleaseEvent(self, slotval1)
 
 proc QGraphicsTextItemmouseDoubleClickEvent*(self: gen_qgraphicsitem_types.QGraphicsTextItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void =
@@ -12765,7 +12918,7 @@ proc QGraphicsTextItemmouseDoubleClickEvent*(self: gen_qgraphicsitem_types.QGrap
 proc fcQGraphicsTextItem_vtable_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsTextItemVTable](fcQGraphicsTextItem_vdata(self)[])
   let self = QGraphicsTextItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event, owned: false)
   vtbl[].mouseDoubleClickEvent(self, slotval1)
 
 proc QGraphicsTextItemcontextMenuEvent*(self: gen_qgraphicsitem_types.QGraphicsTextItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneContextMenuEvent): void =
@@ -12774,7 +12927,7 @@ proc QGraphicsTextItemcontextMenuEvent*(self: gen_qgraphicsitem_types.QGraphicsT
 proc fcQGraphicsTextItem_vtable_callback_contextMenuEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsTextItemVTable](fcQGraphicsTextItem_vdata(self)[])
   let self = QGraphicsTextItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneContextMenuEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneContextMenuEvent(h: event, owned: false)
   vtbl[].contextMenuEvent(self, slotval1)
 
 proc QGraphicsTextItemkeyPressEvent*(self: gen_qgraphicsitem_types.QGraphicsTextItem, event: gen_qevent_types.QKeyEvent): void =
@@ -12783,7 +12936,7 @@ proc QGraphicsTextItemkeyPressEvent*(self: gen_qgraphicsitem_types.QGraphicsText
 proc fcQGraphicsTextItem_vtable_callback_keyPressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsTextItemVTable](fcQGraphicsTextItem_vdata(self)[])
   let self = QGraphicsTextItem(h: self)
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   vtbl[].keyPressEvent(self, slotval1)
 
 proc QGraphicsTextItemkeyReleaseEvent*(self: gen_qgraphicsitem_types.QGraphicsTextItem, event: gen_qevent_types.QKeyEvent): void =
@@ -12792,7 +12945,7 @@ proc QGraphicsTextItemkeyReleaseEvent*(self: gen_qgraphicsitem_types.QGraphicsTe
 proc fcQGraphicsTextItem_vtable_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsTextItemVTable](fcQGraphicsTextItem_vdata(self)[])
   let self = QGraphicsTextItem(h: self)
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   vtbl[].keyReleaseEvent(self, slotval1)
 
 proc QGraphicsTextItemfocusInEvent*(self: gen_qgraphicsitem_types.QGraphicsTextItem, event: gen_qevent_types.QFocusEvent): void =
@@ -12801,7 +12954,7 @@ proc QGraphicsTextItemfocusInEvent*(self: gen_qgraphicsitem_types.QGraphicsTextI
 proc fcQGraphicsTextItem_vtable_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsTextItemVTable](fcQGraphicsTextItem_vdata(self)[])
   let self = QGraphicsTextItem(h: self)
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusInEvent(self, slotval1)
 
 proc QGraphicsTextItemfocusOutEvent*(self: gen_qgraphicsitem_types.QGraphicsTextItem, event: gen_qevent_types.QFocusEvent): void =
@@ -12810,7 +12963,7 @@ proc QGraphicsTextItemfocusOutEvent*(self: gen_qgraphicsitem_types.QGraphicsText
 proc fcQGraphicsTextItem_vtable_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsTextItemVTable](fcQGraphicsTextItem_vdata(self)[])
   let self = QGraphicsTextItem(h: self)
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusOutEvent(self, slotval1)
 
 proc QGraphicsTextItemdragEnterEvent*(self: gen_qgraphicsitem_types.QGraphicsTextItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void =
@@ -12819,7 +12972,7 @@ proc QGraphicsTextItemdragEnterEvent*(self: gen_qgraphicsitem_types.QGraphicsTex
 proc fcQGraphicsTextItem_vtable_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsTextItemVTable](fcQGraphicsTextItem_vdata(self)[])
   let self = QGraphicsTextItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event, owned: false)
   vtbl[].dragEnterEvent(self, slotval1)
 
 proc QGraphicsTextItemdragLeaveEvent*(self: gen_qgraphicsitem_types.QGraphicsTextItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void =
@@ -12828,7 +12981,7 @@ proc QGraphicsTextItemdragLeaveEvent*(self: gen_qgraphicsitem_types.QGraphicsTex
 proc fcQGraphicsTextItem_vtable_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsTextItemVTable](fcQGraphicsTextItem_vdata(self)[])
   let self = QGraphicsTextItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event, owned: false)
   vtbl[].dragLeaveEvent(self, slotval1)
 
 proc QGraphicsTextItemdragMoveEvent*(self: gen_qgraphicsitem_types.QGraphicsTextItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void =
@@ -12837,7 +12990,7 @@ proc QGraphicsTextItemdragMoveEvent*(self: gen_qgraphicsitem_types.QGraphicsText
 proc fcQGraphicsTextItem_vtable_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsTextItemVTable](fcQGraphicsTextItem_vdata(self)[])
   let self = QGraphicsTextItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event, owned: false)
   vtbl[].dragMoveEvent(self, slotval1)
 
 proc QGraphicsTextItemdropEvent*(self: gen_qgraphicsitem_types.QGraphicsTextItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void =
@@ -12846,7 +12999,7 @@ proc QGraphicsTextItemdropEvent*(self: gen_qgraphicsitem_types.QGraphicsTextItem
 proc fcQGraphicsTextItem_vtable_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsTextItemVTable](fcQGraphicsTextItem_vdata(self)[])
   let self = QGraphicsTextItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event, owned: false)
   vtbl[].dropEvent(self, slotval1)
 
 proc QGraphicsTextIteminputMethodEvent*(self: gen_qgraphicsitem_types.QGraphicsTextItem, event: gen_qevent_types.QInputMethodEvent): void =
@@ -12855,7 +13008,7 @@ proc QGraphicsTextIteminputMethodEvent*(self: gen_qgraphicsitem_types.QGraphicsT
 proc fcQGraphicsTextItem_vtable_callback_inputMethodEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsTextItemVTable](fcQGraphicsTextItem_vdata(self)[])
   let self = QGraphicsTextItem(h: self)
-  let slotval1 = gen_qevent_types.QInputMethodEvent(h: event)
+  let slotval1 = gen_qevent_types.QInputMethodEvent(h: event, owned: false)
   vtbl[].inputMethodEvent(self, slotval1)
 
 proc QGraphicsTextItemhoverEnterEvent*(self: gen_qgraphicsitem_types.QGraphicsTextItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent): void =
@@ -12864,7 +13017,7 @@ proc QGraphicsTextItemhoverEnterEvent*(self: gen_qgraphicsitem_types.QGraphicsTe
 proc fcQGraphicsTextItem_vtable_callback_hoverEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsTextItemVTable](fcQGraphicsTextItem_vdata(self)[])
   let self = QGraphicsTextItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event, owned: false)
   vtbl[].hoverEnterEvent(self, slotval1)
 
 proc QGraphicsTextItemhoverMoveEvent*(self: gen_qgraphicsitem_types.QGraphicsTextItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent): void =
@@ -12873,7 +13026,7 @@ proc QGraphicsTextItemhoverMoveEvent*(self: gen_qgraphicsitem_types.QGraphicsTex
 proc fcQGraphicsTextItem_vtable_callback_hoverMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsTextItemVTable](fcQGraphicsTextItem_vdata(self)[])
   let self = QGraphicsTextItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event, owned: false)
   vtbl[].hoverMoveEvent(self, slotval1)
 
 proc QGraphicsTextItemhoverLeaveEvent*(self: gen_qgraphicsitem_types.QGraphicsTextItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent): void =
@@ -12882,18 +13035,21 @@ proc QGraphicsTextItemhoverLeaveEvent*(self: gen_qgraphicsitem_types.QGraphicsTe
 proc fcQGraphicsTextItem_vtable_callback_hoverLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsTextItemVTable](fcQGraphicsTextItem_vdata(self)[])
   let self = QGraphicsTextItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event, owned: false)
   vtbl[].hoverLeaveEvent(self, slotval1)
 
 proc QGraphicsTextIteminputMethodQuery*(self: gen_qgraphicsitem_types.QGraphicsTextItem, query: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQGraphicsTextItem_virtualbase_inputMethodQuery(self.h, cint(query)))
+  gen_qvariant_types.QVariant(h: fcQGraphicsTextItem_virtualbase_inputMethodQuery(self.h, cint(query)), owned: true)
 
 proc fcQGraphicsTextItem_vtable_callback_inputMethodQuery(self: pointer, query: cint): pointer {.cdecl.} =
   let vtbl = cast[ptr QGraphicsTextItemVTable](fcQGraphicsTextItem_vdata(self)[])
   let self = QGraphicsTextItem(h: self)
   let slotval1 = cint(query)
   var virtualReturn = vtbl[].inputMethodQuery(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QGraphicsTextItemsupportsExtension*(self: gen_qgraphicsitem_types.QGraphicsTextItem, extension: cint): bool =
   fcQGraphicsTextItem_virtualbase_supportsExtension(self.h, cint(extension))
@@ -12912,18 +13068,21 @@ proc fcQGraphicsTextItem_vtable_callback_setExtension(self: pointer, extension: 
   let vtbl = cast[ptr QGraphicsTextItemVTable](fcQGraphicsTextItem_vdata(self)[])
   let self = QGraphicsTextItem(h: self)
   let slotval1 = cint(extension)
-  let slotval2 = gen_qvariant_types.QVariant(h: variant)
+  let slotval2 = gen_qvariant_types.QVariant(h: variant, owned: false)
   vtbl[].setExtension(self, slotval1, slotval2)
 
 proc QGraphicsTextItemextension*(self: gen_qgraphicsitem_types.QGraphicsTextItem, variant: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQGraphicsTextItem_virtualbase_extension(self.h, variant.h))
+  gen_qvariant_types.QVariant(h: fcQGraphicsTextItem_virtualbase_extension(self.h, variant.h), owned: true)
 
 proc fcQGraphicsTextItem_vtable_callback_extension(self: pointer, variant: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QGraphicsTextItemVTable](fcQGraphicsTextItem_vdata(self)[])
   let self = QGraphicsTextItem(h: self)
-  let slotval1 = gen_qvariant_types.QVariant(h: variant)
+  let slotval1 = gen_qvariant_types.QVariant(h: variant, owned: false)
   var virtualReturn = vtbl[].extension(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QGraphicsTextItemevent*(self: gen_qgraphicsitem_types.QGraphicsTextItem, ev: gen_qcoreevent_types.QEvent): bool =
   fcQGraphicsTextItem_virtualbase_event(self.h, ev.h)
@@ -12931,7 +13090,7 @@ proc QGraphicsTextItemevent*(self: gen_qgraphicsitem_types.QGraphicsTextItem, ev
 proc fcQGraphicsTextItem_vtable_callback_event(self: pointer, ev: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QGraphicsTextItemVTable](fcQGraphicsTextItem_vdata(self)[])
   let self = QGraphicsTextItem(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: ev)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: ev, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
@@ -12941,8 +13100,8 @@ proc QGraphicsTextItemeventFilter*(self: gen_qgraphicsitem_types.QGraphicsTextIt
 proc fcQGraphicsTextItem_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QGraphicsTextItemVTable](fcQGraphicsTextItem_vdata(self)[])
   let self = QGraphicsTextItem(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
@@ -12952,7 +13111,7 @@ proc QGraphicsTextItemtimerEvent*(self: gen_qgraphicsitem_types.QGraphicsTextIte
 proc fcQGraphicsTextItem_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsTextItemVTable](fcQGraphicsTextItem_vdata(self)[])
   let self = QGraphicsTextItem(h: self)
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
 proc QGraphicsTextItemchildEvent*(self: gen_qgraphicsitem_types.QGraphicsTextItem, event: gen_qcoreevent_types.QChildEvent): void =
@@ -12961,7 +13120,7 @@ proc QGraphicsTextItemchildEvent*(self: gen_qgraphicsitem_types.QGraphicsTextIte
 proc fcQGraphicsTextItem_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsTextItemVTable](fcQGraphicsTextItem_vdata(self)[])
   let self = QGraphicsTextItem(h: self)
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
 proc QGraphicsTextItemcustomEvent*(self: gen_qgraphicsitem_types.QGraphicsTextItem, event: gen_qcoreevent_types.QEvent): void =
@@ -12970,7 +13129,7 @@ proc QGraphicsTextItemcustomEvent*(self: gen_qgraphicsitem_types.QGraphicsTextIt
 proc fcQGraphicsTextItem_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsTextItemVTable](fcQGraphicsTextItem_vdata(self)[])
   let self = QGraphicsTextItem(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
 proc QGraphicsTextItemconnectNotify*(self: gen_qgraphicsitem_types.QGraphicsTextItem, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -12979,7 +13138,7 @@ proc QGraphicsTextItemconnectNotify*(self: gen_qgraphicsitem_types.QGraphicsText
 proc fcQGraphicsTextItem_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsTextItemVTable](fcQGraphicsTextItem_vdata(self)[])
   let self = QGraphicsTextItem(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
 proc QGraphicsTextItemdisconnectNotify*(self: gen_qgraphicsitem_types.QGraphicsTextItem, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -12988,7 +13147,7 @@ proc QGraphicsTextItemdisconnectNotify*(self: gen_qgraphicsitem_types.QGraphicsT
 proc fcQGraphicsTextItem_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsTextItemVTable](fcQGraphicsTextItem_vdata(self)[])
   let self = QGraphicsTextItem(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
 proc QGraphicsTextItemadvance*(self: gen_qgraphicsitem_types.QGraphicsTextItem, phase: cint): void =
@@ -13006,7 +13165,7 @@ proc QGraphicsTextItemcollidesWithItem*(self: gen_qgraphicsitem_types.QGraphicsT
 proc fcQGraphicsTextItem_vtable_callback_collidesWithItem(self: pointer, other: pointer, mode: cint): bool {.cdecl.} =
   let vtbl = cast[ptr QGraphicsTextItemVTable](fcQGraphicsTextItem_vdata(self)[])
   let self = QGraphicsTextItem(h: self)
-  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: other)
+  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: other, owned: false)
   let slotval2 = cint(mode)
   var virtualReturn = vtbl[].collidesWithItem(self, slotval1, slotval2)
   virtualReturn
@@ -13017,7 +13176,7 @@ proc QGraphicsTextItemcollidesWithPath*(self: gen_qgraphicsitem_types.QGraphicsT
 proc fcQGraphicsTextItem_vtable_callback_collidesWithPath(self: pointer, path: pointer, mode: cint): bool {.cdecl.} =
   let vtbl = cast[ptr QGraphicsTextItemVTable](fcQGraphicsTextItem_vdata(self)[])
   let self = QGraphicsTextItem(h: self)
-  let slotval1 = gen_qpainterpath_types.QPainterPath(h: path)
+  let slotval1 = gen_qpainterpath_types.QPainterPath(h: path, owned: false)
   let slotval2 = cint(mode)
   var virtualReturn = vtbl[].collidesWithPath(self, slotval1, slotval2)
   virtualReturn
@@ -13028,8 +13187,8 @@ proc QGraphicsTextItemsceneEventFilter*(self: gen_qgraphicsitem_types.QGraphicsT
 proc fcQGraphicsTextItem_vtable_callback_sceneEventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QGraphicsTextItemVTable](fcQGraphicsTextItem_vdata(self)[])
   let self = QGraphicsTextItem(h: self)
-  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].sceneEventFilter(self, slotval1, slotval2)
   virtualReturn
 
@@ -13039,19 +13198,22 @@ proc QGraphicsTextItemwheelEvent*(self: gen_qgraphicsitem_types.QGraphicsTextIte
 proc fcQGraphicsTextItem_vtable_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsTextItemVTable](fcQGraphicsTextItem_vdata(self)[])
   let self = QGraphicsTextItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent(h: event, owned: false)
   vtbl[].wheelEvent(self, slotval1)
 
 proc QGraphicsTextItemitemChange*(self: gen_qgraphicsitem_types.QGraphicsTextItem, change: cint, value: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQGraphicsTextItem_virtualbase_itemChange(self.h, cint(change), value.h))
+  gen_qvariant_types.QVariant(h: fcQGraphicsTextItem_virtualbase_itemChange(self.h, cint(change), value.h), owned: true)
 
 proc fcQGraphicsTextItem_vtable_callback_itemChange(self: pointer, change: cint, value: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QGraphicsTextItemVTable](fcQGraphicsTextItem_vdata(self)[])
   let self = QGraphicsTextItem(h: self)
   let slotval1 = cint(change)
-  let slotval2 = gen_qvariant_types.QVariant(h: value)
+  let slotval2 = gen_qvariant_types.QVariant(h: value, owned: false)
   var virtualReturn = vtbl[].itemChange(self, slotval1, slotval2)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 type VirtualQGraphicsTextItem* {.inheritable.} = ref object of QGraphicsTextItem
   vtbl*: cQGraphicsTextItemVTable
@@ -13098,7 +13260,7 @@ method contains*(self: VirtualQGraphicsTextItem, point: gen_qpoint_types.QPointF
   QGraphicsTextItemcontains(self[], point)
 proc fcQGraphicsTextItem_method_callback_contains(self: pointer, point: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQGraphicsTextItem](fcQGraphicsTextItem_vdata(self)[])
-  let slotval1 = gen_qpoint_types.QPointF(h: point)
+  let slotval1 = gen_qpoint_types.QPointF(h: point, owned: false)
   var virtualReturn = inst.contains(slotval1)
   virtualReturn
 
@@ -13106,16 +13268,16 @@ method paint*(self: VirtualQGraphicsTextItem, painter: gen_qpainter_types.QPaint
   QGraphicsTextItempaint(self[], painter, option, widget)
 proc fcQGraphicsTextItem_method_callback_paint(self: pointer, painter: pointer, option: pointer, widget: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsTextItem](fcQGraphicsTextItem_vdata(self)[])
-  let slotval1 = gen_qpainter_types.QPainter(h: painter)
-  let slotval2 = gen_qstyleoption_types.QStyleOptionGraphicsItem(h: option)
-  let slotval3 = gen_qwidget_types.QWidget(h: widget)
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
+  let slotval2 = gen_qstyleoption_types.QStyleOptionGraphicsItem(h: option, owned: false)
+  let slotval3 = gen_qwidget_types.QWidget(h: widget, owned: false)
   inst.paint(slotval1, slotval2, slotval3)
 
 method isObscuredBy*(self: VirtualQGraphicsTextItem, item: gen_qgraphicsitem_types.QGraphicsItem): bool {.base.} =
   QGraphicsTextItemisObscuredBy(self[], item)
 proc fcQGraphicsTextItem_method_callback_isObscuredBy(self: pointer, item: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQGraphicsTextItem](fcQGraphicsTextItem_vdata(self)[])
-  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: item)
+  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: item, owned: false)
   var virtualReturn = inst.isObscuredBy(slotval1)
   virtualReturn
 
@@ -13137,7 +13299,7 @@ method sceneEvent*(self: VirtualQGraphicsTextItem, event: gen_qcoreevent_types.Q
   QGraphicsTextItemsceneEvent(self[], event)
 proc fcQGraphicsTextItem_method_callback_sceneEvent(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQGraphicsTextItem](fcQGraphicsTextItem_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.sceneEvent(slotval1)
   virtualReturn
 
@@ -13145,119 +13307,119 @@ method mousePressEvent*(self: VirtualQGraphicsTextItem, event: gen_qgraphicsscen
   QGraphicsTextItemmousePressEvent(self[], event)
 proc fcQGraphicsTextItem_method_callback_mousePressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsTextItem](fcQGraphicsTextItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event, owned: false)
   inst.mousePressEvent(slotval1)
 
 method mouseMoveEvent*(self: VirtualQGraphicsTextItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void {.base.} =
   QGraphicsTextItemmouseMoveEvent(self[], event)
 proc fcQGraphicsTextItem_method_callback_mouseMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsTextItem](fcQGraphicsTextItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event, owned: false)
   inst.mouseMoveEvent(slotval1)
 
 method mouseReleaseEvent*(self: VirtualQGraphicsTextItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void {.base.} =
   QGraphicsTextItemmouseReleaseEvent(self[], event)
 proc fcQGraphicsTextItem_method_callback_mouseReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsTextItem](fcQGraphicsTextItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event, owned: false)
   inst.mouseReleaseEvent(slotval1)
 
 method mouseDoubleClickEvent*(self: VirtualQGraphicsTextItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void {.base.} =
   QGraphicsTextItemmouseDoubleClickEvent(self[], event)
 proc fcQGraphicsTextItem_method_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsTextItem](fcQGraphicsTextItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event, owned: false)
   inst.mouseDoubleClickEvent(slotval1)
 
 method contextMenuEvent*(self: VirtualQGraphicsTextItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneContextMenuEvent): void {.base.} =
   QGraphicsTextItemcontextMenuEvent(self[], event)
 proc fcQGraphicsTextItem_method_callback_contextMenuEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsTextItem](fcQGraphicsTextItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneContextMenuEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneContextMenuEvent(h: event, owned: false)
   inst.contextMenuEvent(slotval1)
 
 method keyPressEvent*(self: VirtualQGraphicsTextItem, event: gen_qevent_types.QKeyEvent): void {.base.} =
   QGraphicsTextItemkeyPressEvent(self[], event)
 proc fcQGraphicsTextItem_method_callback_keyPressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsTextItem](fcQGraphicsTextItem_vdata(self)[])
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   inst.keyPressEvent(slotval1)
 
 method keyReleaseEvent*(self: VirtualQGraphicsTextItem, event: gen_qevent_types.QKeyEvent): void {.base.} =
   QGraphicsTextItemkeyReleaseEvent(self[], event)
 proc fcQGraphicsTextItem_method_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsTextItem](fcQGraphicsTextItem_vdata(self)[])
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   inst.keyReleaseEvent(slotval1)
 
 method focusInEvent*(self: VirtualQGraphicsTextItem, event: gen_qevent_types.QFocusEvent): void {.base.} =
   QGraphicsTextItemfocusInEvent(self[], event)
 proc fcQGraphicsTextItem_method_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsTextItem](fcQGraphicsTextItem_vdata(self)[])
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   inst.focusInEvent(slotval1)
 
 method focusOutEvent*(self: VirtualQGraphicsTextItem, event: gen_qevent_types.QFocusEvent): void {.base.} =
   QGraphicsTextItemfocusOutEvent(self[], event)
 proc fcQGraphicsTextItem_method_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsTextItem](fcQGraphicsTextItem_vdata(self)[])
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   inst.focusOutEvent(slotval1)
 
 method dragEnterEvent*(self: VirtualQGraphicsTextItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void {.base.} =
   QGraphicsTextItemdragEnterEvent(self[], event)
 proc fcQGraphicsTextItem_method_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsTextItem](fcQGraphicsTextItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event, owned: false)
   inst.dragEnterEvent(slotval1)
 
 method dragLeaveEvent*(self: VirtualQGraphicsTextItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void {.base.} =
   QGraphicsTextItemdragLeaveEvent(self[], event)
 proc fcQGraphicsTextItem_method_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsTextItem](fcQGraphicsTextItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event, owned: false)
   inst.dragLeaveEvent(slotval1)
 
 method dragMoveEvent*(self: VirtualQGraphicsTextItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void {.base.} =
   QGraphicsTextItemdragMoveEvent(self[], event)
 proc fcQGraphicsTextItem_method_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsTextItem](fcQGraphicsTextItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event, owned: false)
   inst.dragMoveEvent(slotval1)
 
 method dropEvent*(self: VirtualQGraphicsTextItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void {.base.} =
   QGraphicsTextItemdropEvent(self[], event)
 proc fcQGraphicsTextItem_method_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsTextItem](fcQGraphicsTextItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event, owned: false)
   inst.dropEvent(slotval1)
 
 method inputMethodEvent*(self: VirtualQGraphicsTextItem, event: gen_qevent_types.QInputMethodEvent): void {.base.} =
   QGraphicsTextIteminputMethodEvent(self[], event)
 proc fcQGraphicsTextItem_method_callback_inputMethodEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsTextItem](fcQGraphicsTextItem_vdata(self)[])
-  let slotval1 = gen_qevent_types.QInputMethodEvent(h: event)
+  let slotval1 = gen_qevent_types.QInputMethodEvent(h: event, owned: false)
   inst.inputMethodEvent(slotval1)
 
 method hoverEnterEvent*(self: VirtualQGraphicsTextItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent): void {.base.} =
   QGraphicsTextItemhoverEnterEvent(self[], event)
 proc fcQGraphicsTextItem_method_callback_hoverEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsTextItem](fcQGraphicsTextItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event, owned: false)
   inst.hoverEnterEvent(slotval1)
 
 method hoverMoveEvent*(self: VirtualQGraphicsTextItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent): void {.base.} =
   QGraphicsTextItemhoverMoveEvent(self[], event)
 proc fcQGraphicsTextItem_method_callback_hoverMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsTextItem](fcQGraphicsTextItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event, owned: false)
   inst.hoverMoveEvent(slotval1)
 
 method hoverLeaveEvent*(self: VirtualQGraphicsTextItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent): void {.base.} =
   QGraphicsTextItemhoverLeaveEvent(self[], event)
 proc fcQGraphicsTextItem_method_callback_hoverLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsTextItem](fcQGraphicsTextItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event, owned: false)
   inst.hoverLeaveEvent(slotval1)
 
 method inputMethodQuery*(self: VirtualQGraphicsTextItem, query: cint): gen_qvariant_types.QVariant {.base.} =
@@ -13281,14 +13443,14 @@ method setExtension*(self: VirtualQGraphicsTextItem, extension: cint, variant: g
 proc fcQGraphicsTextItem_method_callback_setExtension(self: pointer, extension: cint, variant: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsTextItem](fcQGraphicsTextItem_vdata(self)[])
   let slotval1 = cint(extension)
-  let slotval2 = gen_qvariant_types.QVariant(h: variant)
+  let slotval2 = gen_qvariant_types.QVariant(h: variant, owned: false)
   inst.setExtension(slotval1, slotval2)
 
 method extension*(self: VirtualQGraphicsTextItem, variant: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant {.base.} =
   QGraphicsTextItemextension(self[], variant)
 proc fcQGraphicsTextItem_method_callback_extension(self: pointer, variant: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsTextItem](fcQGraphicsTextItem_vdata(self)[])
-  let slotval1 = gen_qvariant_types.QVariant(h: variant)
+  let slotval1 = gen_qvariant_types.QVariant(h: variant, owned: false)
   var virtualReturn = inst.extension(slotval1)
   virtualReturn.h
 
@@ -13296,7 +13458,7 @@ method event*(self: VirtualQGraphicsTextItem, ev: gen_qcoreevent_types.QEvent): 
   QGraphicsTextItemevent(self[], ev)
 proc fcQGraphicsTextItem_method_callback_event(self: pointer, ev: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQGraphicsTextItem](fcQGraphicsTextItem_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: ev)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: ev, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
@@ -13304,8 +13466,8 @@ method eventFilter*(self: VirtualQGraphicsTextItem, watched: gen_qobject_types.Q
   QGraphicsTextItemeventFilter(self[], watched, event)
 proc fcQGraphicsTextItem_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQGraphicsTextItem](fcQGraphicsTextItem_vdata(self)[])
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
@@ -13313,35 +13475,35 @@ method timerEvent*(self: VirtualQGraphicsTextItem, event: gen_qcoreevent_types.Q
   QGraphicsTextItemtimerEvent(self[], event)
 proc fcQGraphicsTextItem_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsTextItem](fcQGraphicsTextItem_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
 method childEvent*(self: VirtualQGraphicsTextItem, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
   QGraphicsTextItemchildEvent(self[], event)
 proc fcQGraphicsTextItem_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsTextItem](fcQGraphicsTextItem_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
 method customEvent*(self: VirtualQGraphicsTextItem, event: gen_qcoreevent_types.QEvent): void {.base.} =
   QGraphicsTextItemcustomEvent(self[], event)
 proc fcQGraphicsTextItem_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsTextItem](fcQGraphicsTextItem_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
 method connectNotify*(self: VirtualQGraphicsTextItem, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
   QGraphicsTextItemconnectNotify(self[], signal)
 proc fcQGraphicsTextItem_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsTextItem](fcQGraphicsTextItem_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
 method disconnectNotify*(self: VirtualQGraphicsTextItem, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
   QGraphicsTextItemdisconnectNotify(self[], signal)
 proc fcQGraphicsTextItem_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsTextItem](fcQGraphicsTextItem_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
 
 method advance*(self: VirtualQGraphicsTextItem, phase: cint): void {.base.} =
@@ -13355,7 +13517,7 @@ method collidesWithItem*(self: VirtualQGraphicsTextItem, other: gen_qgraphicsite
   QGraphicsTextItemcollidesWithItem(self[], other, mode)
 proc fcQGraphicsTextItem_method_callback_collidesWithItem(self: pointer, other: pointer, mode: cint): bool {.cdecl.} =
   let inst = cast[VirtualQGraphicsTextItem](fcQGraphicsTextItem_vdata(self)[])
-  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: other)
+  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: other, owned: false)
   let slotval2 = cint(mode)
   var virtualReturn = inst.collidesWithItem(slotval1, slotval2)
   virtualReturn
@@ -13364,7 +13526,7 @@ method collidesWithPath*(self: VirtualQGraphicsTextItem, path: gen_qpainterpath_
   QGraphicsTextItemcollidesWithPath(self[], path, mode)
 proc fcQGraphicsTextItem_method_callback_collidesWithPath(self: pointer, path: pointer, mode: cint): bool {.cdecl.} =
   let inst = cast[VirtualQGraphicsTextItem](fcQGraphicsTextItem_vdata(self)[])
-  let slotval1 = gen_qpainterpath_types.QPainterPath(h: path)
+  let slotval1 = gen_qpainterpath_types.QPainterPath(h: path, owned: false)
   let slotval2 = cint(mode)
   var virtualReturn = inst.collidesWithPath(slotval1, slotval2)
   virtualReturn
@@ -13373,8 +13535,8 @@ method sceneEventFilter*(self: VirtualQGraphicsTextItem, watched: gen_qgraphicsi
   QGraphicsTextItemsceneEventFilter(self[], watched, event)
 proc fcQGraphicsTextItem_method_callback_sceneEventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQGraphicsTextItem](fcQGraphicsTextItem_vdata(self)[])
-  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.sceneEventFilter(slotval1, slotval2)
   virtualReturn
 
@@ -13382,7 +13544,7 @@ method wheelEvent*(self: VirtualQGraphicsTextItem, event: gen_qgraphicssceneeven
   QGraphicsTextItemwheelEvent(self[], event)
 proc fcQGraphicsTextItem_method_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsTextItem](fcQGraphicsTextItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent(h: event, owned: false)
   inst.wheelEvent(slotval1)
 
 method itemChange*(self: VirtualQGraphicsTextItem, change: cint, value: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant {.base.} =
@@ -13390,7 +13552,7 @@ method itemChange*(self: VirtualQGraphicsTextItem, change: cint, value: gen_qvar
 proc fcQGraphicsTextItem_method_callback_itemChange(self: pointer, change: cint, value: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsTextItem](fcQGraphicsTextItem_vdata(self)[])
   let slotval1 = cint(change)
-  let slotval2 = gen_qvariant_types.QVariant(h: value)
+  let slotval2 = gen_qvariant_types.QVariant(h: value, owned: false)
   var virtualReturn = inst.itemChange(slotval1, slotval2)
   virtualReturn.h
 
@@ -13398,7 +13560,7 @@ proc updateMicroFocus*(self: gen_qgraphicsitem_types.QGraphicsTextItem): void =
   fcQGraphicsTextItem_protectedbase_updateMicroFocus(self.h)
 
 proc sender*(self: gen_qgraphicsitem_types.QGraphicsTextItem): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQGraphicsTextItem_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQGraphicsTextItem_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qgraphicsitem_types.QGraphicsTextItem): cint =
   fcQGraphicsTextItem_protectedbase_senderSignalIndex(self.h)
@@ -13515,7 +13677,7 @@ proc create*(T: type gen_qgraphicsitem_types.QGraphicsTextItem,
     vtbl[].vtbl.wheelEvent = fcQGraphicsTextItem_vtable_callback_wheelEvent
   if not isNil(vtbl[].itemChange):
     vtbl[].vtbl.itemChange = fcQGraphicsTextItem_vtable_callback_itemChange
-  let tmp = gen_qgraphicsitem_types.QGraphicsTextItem(h: fcQGraphicsTextItem_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))))
+  let tmp = gen_qgraphicsitem_types.QGraphicsTextItem(h: fcQGraphicsTextItem_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))), owned: true)
   fcQGraphicsTextItem_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qgraphicsitem_types.QGraphicsTextItem,
@@ -13616,7 +13778,7 @@ proc create*(T: type gen_qgraphicsitem_types.QGraphicsTextItem,
     vtbl[].vtbl.wheelEvent = fcQGraphicsTextItem_vtable_callback_wheelEvent
   if not isNil(vtbl[].itemChange):
     vtbl[].vtbl.itemChange = fcQGraphicsTextItem_vtable_callback_itemChange
-  let tmp = gen_qgraphicsitem_types.QGraphicsTextItem(h: fcQGraphicsTextItem_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))))
+  let tmp = gen_qgraphicsitem_types.QGraphicsTextItem(h: fcQGraphicsTextItem_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))), owned: true)
   fcQGraphicsTextItem_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qgraphicsitem_types.QGraphicsTextItem,
@@ -13717,7 +13879,7 @@ proc create*(T: type gen_qgraphicsitem_types.QGraphicsTextItem,
     vtbl[].vtbl.wheelEvent = fcQGraphicsTextItem_vtable_callback_wheelEvent
   if not isNil(vtbl[].itemChange):
     vtbl[].vtbl.itemChange = fcQGraphicsTextItem_vtable_callback_itemChange
-  let tmp = gen_qgraphicsitem_types.QGraphicsTextItem(h: fcQGraphicsTextItem_new3(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h))
+  let tmp = gen_qgraphicsitem_types.QGraphicsTextItem(h: fcQGraphicsTextItem_new3(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h), owned: true)
   fcQGraphicsTextItem_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qgraphicsitem_types.QGraphicsTextItem,
@@ -13818,13 +13980,14 @@ proc create*(T: type gen_qgraphicsitem_types.QGraphicsTextItem,
     vtbl[].vtbl.wheelEvent = fcQGraphicsTextItem_vtable_callback_wheelEvent
   if not isNil(vtbl[].itemChange):
     vtbl[].vtbl.itemChange = fcQGraphicsTextItem_vtable_callback_itemChange
-  let tmp = gen_qgraphicsitem_types.QGraphicsTextItem(h: fcQGraphicsTextItem_new4(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), parent.h))
+  let tmp = gen_qgraphicsitem_types.QGraphicsTextItem(h: fcQGraphicsTextItem_new4(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), parent.h), owned: true)
   fcQGraphicsTextItem_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQGraphicsTextItem_mvtbl = cQGraphicsTextItemVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQGraphicsTextItem()[])](self.fcQGraphicsTextItem_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   metaObject: fcQGraphicsTextItem_method_callback_metaObject,
   metacast: fcQGraphicsTextItem_method_callback_metacast,
@@ -13901,8 +14064,6 @@ proc create*(T: type gen_qgraphicsitem_types.QGraphicsTextItem,
 
 proc staticMetaObject*(_: type gen_qgraphicsitem_types.QGraphicsTextItem): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQGraphicsTextItem_staticMetaObject())
-proc delete*(self: gen_qgraphicsitem_types.QGraphicsTextItem) =
-  fcQGraphicsTextItem_delete(self.h)
 proc setText*(self: gen_qgraphicsitem_types.QGraphicsSimpleTextItem, text: string): void =
   fcQGraphicsSimpleTextItem_setText(self.h, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
 
@@ -13916,13 +14077,13 @@ proc setFont*(self: gen_qgraphicsitem_types.QGraphicsSimpleTextItem, font: gen_q
   fcQGraphicsSimpleTextItem_setFont(self.h, font.h)
 
 proc font*(self: gen_qgraphicsitem_types.QGraphicsSimpleTextItem): gen_qfont_types.QFont =
-  gen_qfont_types.QFont(h: fcQGraphicsSimpleTextItem_font(self.h))
+  gen_qfont_types.QFont(h: fcQGraphicsSimpleTextItem_font(self.h), owned: true)
 
 proc boundingRect*(self: gen_qgraphicsitem_types.QGraphicsSimpleTextItem): gen_qrect_types.QRectF =
-  gen_qrect_types.QRectF(h: fcQGraphicsSimpleTextItem_boundingRect(self.h))
+  gen_qrect_types.QRectF(h: fcQGraphicsSimpleTextItem_boundingRect(self.h), owned: true)
 
 proc shape*(self: gen_qgraphicsitem_types.QGraphicsSimpleTextItem): gen_qpainterpath_types.QPainterPath =
-  gen_qpainterpath_types.QPainterPath(h: fcQGraphicsSimpleTextItem_shape(self.h))
+  gen_qpainterpath_types.QPainterPath(h: fcQGraphicsSimpleTextItem_shape(self.h), owned: true)
 
 proc contains*(self: gen_qgraphicsitem_types.QGraphicsSimpleTextItem, point: gen_qpoint_types.QPointF): bool =
   fcQGraphicsSimpleTextItem_contains(self.h, point.h)
@@ -13934,7 +14095,7 @@ proc isObscuredBy*(self: gen_qgraphicsitem_types.QGraphicsSimpleTextItem, item: 
   fcQGraphicsSimpleTextItem_isObscuredBy(self.h, item.h)
 
 proc opaqueArea*(self: gen_qgraphicsitem_types.QGraphicsSimpleTextItem): gen_qpainterpath_types.QPainterPath =
-  gen_qpainterpath_types.QPainterPath(h: fcQGraphicsSimpleTextItem_opaqueArea(self.h))
+  gen_qpainterpath_types.QPainterPath(h: fcQGraphicsSimpleTextItem_opaqueArea(self.h), owned: true)
 
 proc typeX*(self: gen_qgraphicsitem_types.QGraphicsSimpleTextItem): cint =
   fcQGraphicsSimpleTextItem_typeX(self.h)
@@ -13974,7 +14135,7 @@ type QGraphicsSimpleTextItemwheelEventProc* = proc(self: QGraphicsSimpleTextItem
 type QGraphicsSimpleTextIteminputMethodEventProc* = proc(self: QGraphicsSimpleTextItem, event: gen_qevent_types.QInputMethodEvent): void {.raises: [], gcsafe.}
 type QGraphicsSimpleTextIteminputMethodQueryProc* = proc(self: QGraphicsSimpleTextItem, query: cint): gen_qvariant_types.QVariant {.raises: [], gcsafe.}
 type QGraphicsSimpleTextItemitemChangeProc* = proc(self: QGraphicsSimpleTextItem, change: cint, value: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant {.raises: [], gcsafe.}
-type QGraphicsSimpleTextItemVTable* = object
+type QGraphicsSimpleTextItemVTable* {.inheritable, pure.} = object
   vtbl: cQGraphicsSimpleTextItemVTable
   boundingRect*: QGraphicsSimpleTextItemboundingRectProc
   shape*: QGraphicsSimpleTextItemshapeProc
@@ -14012,22 +14173,28 @@ type QGraphicsSimpleTextItemVTable* = object
   inputMethodQuery*: QGraphicsSimpleTextIteminputMethodQueryProc
   itemChange*: QGraphicsSimpleTextItemitemChangeProc
 proc QGraphicsSimpleTextItemboundingRect*(self: gen_qgraphicsitem_types.QGraphicsSimpleTextItem): gen_qrect_types.QRectF =
-  gen_qrect_types.QRectF(h: fcQGraphicsSimpleTextItem_virtualbase_boundingRect(self.h))
+  gen_qrect_types.QRectF(h: fcQGraphicsSimpleTextItem_virtualbase_boundingRect(self.h), owned: true)
 
 proc fcQGraphicsSimpleTextItem_vtable_callback_boundingRect(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QGraphicsSimpleTextItemVTable](fcQGraphicsSimpleTextItem_vdata(self)[])
   let self = QGraphicsSimpleTextItem(h: self)
   var virtualReturn = vtbl[].boundingRect(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QGraphicsSimpleTextItemshape*(self: gen_qgraphicsitem_types.QGraphicsSimpleTextItem): gen_qpainterpath_types.QPainterPath =
-  gen_qpainterpath_types.QPainterPath(h: fcQGraphicsSimpleTextItem_virtualbase_shape(self.h))
+  gen_qpainterpath_types.QPainterPath(h: fcQGraphicsSimpleTextItem_virtualbase_shape(self.h), owned: true)
 
 proc fcQGraphicsSimpleTextItem_vtable_callback_shape(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QGraphicsSimpleTextItemVTable](fcQGraphicsSimpleTextItem_vdata(self)[])
   let self = QGraphicsSimpleTextItem(h: self)
   var virtualReturn = vtbl[].shape(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QGraphicsSimpleTextItemcontains*(self: gen_qgraphicsitem_types.QGraphicsSimpleTextItem, point: gen_qpoint_types.QPointF): bool =
   fcQGraphicsSimpleTextItem_virtualbase_contains(self.h, point.h)
@@ -14035,7 +14202,7 @@ proc QGraphicsSimpleTextItemcontains*(self: gen_qgraphicsitem_types.QGraphicsSim
 proc fcQGraphicsSimpleTextItem_vtable_callback_contains(self: pointer, point: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QGraphicsSimpleTextItemVTable](fcQGraphicsSimpleTextItem_vdata(self)[])
   let self = QGraphicsSimpleTextItem(h: self)
-  let slotval1 = gen_qpoint_types.QPointF(h: point)
+  let slotval1 = gen_qpoint_types.QPointF(h: point, owned: false)
   var virtualReturn = vtbl[].contains(self, slotval1)
   virtualReturn
 
@@ -14045,9 +14212,9 @@ proc QGraphicsSimpleTextItempaint*(self: gen_qgraphicsitem_types.QGraphicsSimple
 proc fcQGraphicsSimpleTextItem_vtable_callback_paint(self: pointer, painter: pointer, option: pointer, widget: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsSimpleTextItemVTable](fcQGraphicsSimpleTextItem_vdata(self)[])
   let self = QGraphicsSimpleTextItem(h: self)
-  let slotval1 = gen_qpainter_types.QPainter(h: painter)
-  let slotval2 = gen_qstyleoption_types.QStyleOptionGraphicsItem(h: option)
-  let slotval3 = gen_qwidget_types.QWidget(h: widget)
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
+  let slotval2 = gen_qstyleoption_types.QStyleOptionGraphicsItem(h: option, owned: false)
+  let slotval3 = gen_qwidget_types.QWidget(h: widget, owned: false)
   vtbl[].paint(self, slotval1, slotval2, slotval3)
 
 proc QGraphicsSimpleTextItemisObscuredBy*(self: gen_qgraphicsitem_types.QGraphicsSimpleTextItem, item: gen_qgraphicsitem_types.QGraphicsItem): bool =
@@ -14056,18 +14223,21 @@ proc QGraphicsSimpleTextItemisObscuredBy*(self: gen_qgraphicsitem_types.QGraphic
 proc fcQGraphicsSimpleTextItem_vtable_callback_isObscuredBy(self: pointer, item: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QGraphicsSimpleTextItemVTable](fcQGraphicsSimpleTextItem_vdata(self)[])
   let self = QGraphicsSimpleTextItem(h: self)
-  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: item)
+  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: item, owned: false)
   var virtualReturn = vtbl[].isObscuredBy(self, slotval1)
   virtualReturn
 
 proc QGraphicsSimpleTextItemopaqueArea*(self: gen_qgraphicsitem_types.QGraphicsSimpleTextItem): gen_qpainterpath_types.QPainterPath =
-  gen_qpainterpath_types.QPainterPath(h: fcQGraphicsSimpleTextItem_virtualbase_opaqueArea(self.h))
+  gen_qpainterpath_types.QPainterPath(h: fcQGraphicsSimpleTextItem_virtualbase_opaqueArea(self.h), owned: true)
 
 proc fcQGraphicsSimpleTextItem_vtable_callback_opaqueArea(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QGraphicsSimpleTextItemVTable](fcQGraphicsSimpleTextItem_vdata(self)[])
   let self = QGraphicsSimpleTextItem(h: self)
   var virtualReturn = vtbl[].opaqueArea(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QGraphicsSimpleTextItemtypeX*(self: gen_qgraphicsitem_types.QGraphicsSimpleTextItem): cint =
   fcQGraphicsSimpleTextItem_virtualbase_typeX(self.h)
@@ -14095,18 +14265,21 @@ proc fcQGraphicsSimpleTextItem_vtable_callback_setExtension(self: pointer, exten
   let vtbl = cast[ptr QGraphicsSimpleTextItemVTable](fcQGraphicsSimpleTextItem_vdata(self)[])
   let self = QGraphicsSimpleTextItem(h: self)
   let slotval1 = cint(extension)
-  let slotval2 = gen_qvariant_types.QVariant(h: variant)
+  let slotval2 = gen_qvariant_types.QVariant(h: variant, owned: false)
   vtbl[].setExtension(self, slotval1, slotval2)
 
 proc QGraphicsSimpleTextItemextension*(self: gen_qgraphicsitem_types.QGraphicsSimpleTextItem, variant: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQGraphicsSimpleTextItem_virtualbase_extension(self.h, variant.h))
+  gen_qvariant_types.QVariant(h: fcQGraphicsSimpleTextItem_virtualbase_extension(self.h, variant.h), owned: true)
 
 proc fcQGraphicsSimpleTextItem_vtable_callback_extension(self: pointer, variant: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QGraphicsSimpleTextItemVTable](fcQGraphicsSimpleTextItem_vdata(self)[])
   let self = QGraphicsSimpleTextItem(h: self)
-  let slotval1 = gen_qvariant_types.QVariant(h: variant)
+  let slotval1 = gen_qvariant_types.QVariant(h: variant, owned: false)
   var virtualReturn = vtbl[].extension(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QGraphicsSimpleTextItemadvance*(self: gen_qgraphicsitem_types.QGraphicsSimpleTextItem, phase: cint): void =
   fcQGraphicsSimpleTextItem_virtualbase_advance(self.h, phase)
@@ -14123,7 +14296,7 @@ proc QGraphicsSimpleTextItemcollidesWithItem*(self: gen_qgraphicsitem_types.QGra
 proc fcQGraphicsSimpleTextItem_vtable_callback_collidesWithItem(self: pointer, other: pointer, mode: cint): bool {.cdecl.} =
   let vtbl = cast[ptr QGraphicsSimpleTextItemVTable](fcQGraphicsSimpleTextItem_vdata(self)[])
   let self = QGraphicsSimpleTextItem(h: self)
-  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: other)
+  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: other, owned: false)
   let slotval2 = cint(mode)
   var virtualReturn = vtbl[].collidesWithItem(self, slotval1, slotval2)
   virtualReturn
@@ -14134,7 +14307,7 @@ proc QGraphicsSimpleTextItemcollidesWithPath*(self: gen_qgraphicsitem_types.QGra
 proc fcQGraphicsSimpleTextItem_vtable_callback_collidesWithPath(self: pointer, path: pointer, mode: cint): bool {.cdecl.} =
   let vtbl = cast[ptr QGraphicsSimpleTextItemVTable](fcQGraphicsSimpleTextItem_vdata(self)[])
   let self = QGraphicsSimpleTextItem(h: self)
-  let slotval1 = gen_qpainterpath_types.QPainterPath(h: path)
+  let slotval1 = gen_qpainterpath_types.QPainterPath(h: path, owned: false)
   let slotval2 = cint(mode)
   var virtualReturn = vtbl[].collidesWithPath(self, slotval1, slotval2)
   virtualReturn
@@ -14145,8 +14318,8 @@ proc QGraphicsSimpleTextItemsceneEventFilter*(self: gen_qgraphicsitem_types.QGra
 proc fcQGraphicsSimpleTextItem_vtable_callback_sceneEventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QGraphicsSimpleTextItemVTable](fcQGraphicsSimpleTextItem_vdata(self)[])
   let self = QGraphicsSimpleTextItem(h: self)
-  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].sceneEventFilter(self, slotval1, slotval2)
   virtualReturn
 
@@ -14156,7 +14329,7 @@ proc QGraphicsSimpleTextItemsceneEvent*(self: gen_qgraphicsitem_types.QGraphicsS
 proc fcQGraphicsSimpleTextItem_vtable_callback_sceneEvent(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QGraphicsSimpleTextItemVTable](fcQGraphicsSimpleTextItem_vdata(self)[])
   let self = QGraphicsSimpleTextItem(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].sceneEvent(self, slotval1)
   virtualReturn
 
@@ -14166,7 +14339,7 @@ proc QGraphicsSimpleTextItemcontextMenuEvent*(self: gen_qgraphicsitem_types.QGra
 proc fcQGraphicsSimpleTextItem_vtable_callback_contextMenuEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsSimpleTextItemVTable](fcQGraphicsSimpleTextItem_vdata(self)[])
   let self = QGraphicsSimpleTextItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneContextMenuEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneContextMenuEvent(h: event, owned: false)
   vtbl[].contextMenuEvent(self, slotval1)
 
 proc QGraphicsSimpleTextItemdragEnterEvent*(self: gen_qgraphicsitem_types.QGraphicsSimpleTextItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void =
@@ -14175,7 +14348,7 @@ proc QGraphicsSimpleTextItemdragEnterEvent*(self: gen_qgraphicsitem_types.QGraph
 proc fcQGraphicsSimpleTextItem_vtable_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsSimpleTextItemVTable](fcQGraphicsSimpleTextItem_vdata(self)[])
   let self = QGraphicsSimpleTextItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event, owned: false)
   vtbl[].dragEnterEvent(self, slotval1)
 
 proc QGraphicsSimpleTextItemdragLeaveEvent*(self: gen_qgraphicsitem_types.QGraphicsSimpleTextItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void =
@@ -14184,7 +14357,7 @@ proc QGraphicsSimpleTextItemdragLeaveEvent*(self: gen_qgraphicsitem_types.QGraph
 proc fcQGraphicsSimpleTextItem_vtable_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsSimpleTextItemVTable](fcQGraphicsSimpleTextItem_vdata(self)[])
   let self = QGraphicsSimpleTextItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event, owned: false)
   vtbl[].dragLeaveEvent(self, slotval1)
 
 proc QGraphicsSimpleTextItemdragMoveEvent*(self: gen_qgraphicsitem_types.QGraphicsSimpleTextItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void =
@@ -14193,7 +14366,7 @@ proc QGraphicsSimpleTextItemdragMoveEvent*(self: gen_qgraphicsitem_types.QGraphi
 proc fcQGraphicsSimpleTextItem_vtable_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsSimpleTextItemVTable](fcQGraphicsSimpleTextItem_vdata(self)[])
   let self = QGraphicsSimpleTextItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event, owned: false)
   vtbl[].dragMoveEvent(self, slotval1)
 
 proc QGraphicsSimpleTextItemdropEvent*(self: gen_qgraphicsitem_types.QGraphicsSimpleTextItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void =
@@ -14202,7 +14375,7 @@ proc QGraphicsSimpleTextItemdropEvent*(self: gen_qgraphicsitem_types.QGraphicsSi
 proc fcQGraphicsSimpleTextItem_vtable_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsSimpleTextItemVTable](fcQGraphicsSimpleTextItem_vdata(self)[])
   let self = QGraphicsSimpleTextItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event, owned: false)
   vtbl[].dropEvent(self, slotval1)
 
 proc QGraphicsSimpleTextItemfocusInEvent*(self: gen_qgraphicsitem_types.QGraphicsSimpleTextItem, event: gen_qevent_types.QFocusEvent): void =
@@ -14211,7 +14384,7 @@ proc QGraphicsSimpleTextItemfocusInEvent*(self: gen_qgraphicsitem_types.QGraphic
 proc fcQGraphicsSimpleTextItem_vtable_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsSimpleTextItemVTable](fcQGraphicsSimpleTextItem_vdata(self)[])
   let self = QGraphicsSimpleTextItem(h: self)
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusInEvent(self, slotval1)
 
 proc QGraphicsSimpleTextItemfocusOutEvent*(self: gen_qgraphicsitem_types.QGraphicsSimpleTextItem, event: gen_qevent_types.QFocusEvent): void =
@@ -14220,7 +14393,7 @@ proc QGraphicsSimpleTextItemfocusOutEvent*(self: gen_qgraphicsitem_types.QGraphi
 proc fcQGraphicsSimpleTextItem_vtable_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsSimpleTextItemVTable](fcQGraphicsSimpleTextItem_vdata(self)[])
   let self = QGraphicsSimpleTextItem(h: self)
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusOutEvent(self, slotval1)
 
 proc QGraphicsSimpleTextItemhoverEnterEvent*(self: gen_qgraphicsitem_types.QGraphicsSimpleTextItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent): void =
@@ -14229,7 +14402,7 @@ proc QGraphicsSimpleTextItemhoverEnterEvent*(self: gen_qgraphicsitem_types.QGrap
 proc fcQGraphicsSimpleTextItem_vtable_callback_hoverEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsSimpleTextItemVTable](fcQGraphicsSimpleTextItem_vdata(self)[])
   let self = QGraphicsSimpleTextItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event, owned: false)
   vtbl[].hoverEnterEvent(self, slotval1)
 
 proc QGraphicsSimpleTextItemhoverMoveEvent*(self: gen_qgraphicsitem_types.QGraphicsSimpleTextItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent): void =
@@ -14238,7 +14411,7 @@ proc QGraphicsSimpleTextItemhoverMoveEvent*(self: gen_qgraphicsitem_types.QGraph
 proc fcQGraphicsSimpleTextItem_vtable_callback_hoverMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsSimpleTextItemVTable](fcQGraphicsSimpleTextItem_vdata(self)[])
   let self = QGraphicsSimpleTextItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event, owned: false)
   vtbl[].hoverMoveEvent(self, slotval1)
 
 proc QGraphicsSimpleTextItemhoverLeaveEvent*(self: gen_qgraphicsitem_types.QGraphicsSimpleTextItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent): void =
@@ -14247,7 +14420,7 @@ proc QGraphicsSimpleTextItemhoverLeaveEvent*(self: gen_qgraphicsitem_types.QGrap
 proc fcQGraphicsSimpleTextItem_vtable_callback_hoverLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsSimpleTextItemVTable](fcQGraphicsSimpleTextItem_vdata(self)[])
   let self = QGraphicsSimpleTextItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event, owned: false)
   vtbl[].hoverLeaveEvent(self, slotval1)
 
 proc QGraphicsSimpleTextItemkeyPressEvent*(self: gen_qgraphicsitem_types.QGraphicsSimpleTextItem, event: gen_qevent_types.QKeyEvent): void =
@@ -14256,7 +14429,7 @@ proc QGraphicsSimpleTextItemkeyPressEvent*(self: gen_qgraphicsitem_types.QGraphi
 proc fcQGraphicsSimpleTextItem_vtable_callback_keyPressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsSimpleTextItemVTable](fcQGraphicsSimpleTextItem_vdata(self)[])
   let self = QGraphicsSimpleTextItem(h: self)
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   vtbl[].keyPressEvent(self, slotval1)
 
 proc QGraphicsSimpleTextItemkeyReleaseEvent*(self: gen_qgraphicsitem_types.QGraphicsSimpleTextItem, event: gen_qevent_types.QKeyEvent): void =
@@ -14265,7 +14438,7 @@ proc QGraphicsSimpleTextItemkeyReleaseEvent*(self: gen_qgraphicsitem_types.QGrap
 proc fcQGraphicsSimpleTextItem_vtable_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsSimpleTextItemVTable](fcQGraphicsSimpleTextItem_vdata(self)[])
   let self = QGraphicsSimpleTextItem(h: self)
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   vtbl[].keyReleaseEvent(self, slotval1)
 
 proc QGraphicsSimpleTextItemmousePressEvent*(self: gen_qgraphicsitem_types.QGraphicsSimpleTextItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void =
@@ -14274,7 +14447,7 @@ proc QGraphicsSimpleTextItemmousePressEvent*(self: gen_qgraphicsitem_types.QGrap
 proc fcQGraphicsSimpleTextItem_vtable_callback_mousePressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsSimpleTextItemVTable](fcQGraphicsSimpleTextItem_vdata(self)[])
   let self = QGraphicsSimpleTextItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event, owned: false)
   vtbl[].mousePressEvent(self, slotval1)
 
 proc QGraphicsSimpleTextItemmouseMoveEvent*(self: gen_qgraphicsitem_types.QGraphicsSimpleTextItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void =
@@ -14283,7 +14456,7 @@ proc QGraphicsSimpleTextItemmouseMoveEvent*(self: gen_qgraphicsitem_types.QGraph
 proc fcQGraphicsSimpleTextItem_vtable_callback_mouseMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsSimpleTextItemVTable](fcQGraphicsSimpleTextItem_vdata(self)[])
   let self = QGraphicsSimpleTextItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event, owned: false)
   vtbl[].mouseMoveEvent(self, slotval1)
 
 proc QGraphicsSimpleTextItemmouseReleaseEvent*(self: gen_qgraphicsitem_types.QGraphicsSimpleTextItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void =
@@ -14292,7 +14465,7 @@ proc QGraphicsSimpleTextItemmouseReleaseEvent*(self: gen_qgraphicsitem_types.QGr
 proc fcQGraphicsSimpleTextItem_vtable_callback_mouseReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsSimpleTextItemVTable](fcQGraphicsSimpleTextItem_vdata(self)[])
   let self = QGraphicsSimpleTextItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event, owned: false)
   vtbl[].mouseReleaseEvent(self, slotval1)
 
 proc QGraphicsSimpleTextItemmouseDoubleClickEvent*(self: gen_qgraphicsitem_types.QGraphicsSimpleTextItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void =
@@ -14301,7 +14474,7 @@ proc QGraphicsSimpleTextItemmouseDoubleClickEvent*(self: gen_qgraphicsitem_types
 proc fcQGraphicsSimpleTextItem_vtable_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsSimpleTextItemVTable](fcQGraphicsSimpleTextItem_vdata(self)[])
   let self = QGraphicsSimpleTextItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event, owned: false)
   vtbl[].mouseDoubleClickEvent(self, slotval1)
 
 proc QGraphicsSimpleTextItemwheelEvent*(self: gen_qgraphicsitem_types.QGraphicsSimpleTextItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent): void =
@@ -14310,7 +14483,7 @@ proc QGraphicsSimpleTextItemwheelEvent*(self: gen_qgraphicsitem_types.QGraphicsS
 proc fcQGraphicsSimpleTextItem_vtable_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsSimpleTextItemVTable](fcQGraphicsSimpleTextItem_vdata(self)[])
   let self = QGraphicsSimpleTextItem(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent(h: event, owned: false)
   vtbl[].wheelEvent(self, slotval1)
 
 proc QGraphicsSimpleTextIteminputMethodEvent*(self: gen_qgraphicsitem_types.QGraphicsSimpleTextItem, event: gen_qevent_types.QInputMethodEvent): void =
@@ -14319,29 +14492,35 @@ proc QGraphicsSimpleTextIteminputMethodEvent*(self: gen_qgraphicsitem_types.QGra
 proc fcQGraphicsSimpleTextItem_vtable_callback_inputMethodEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsSimpleTextItemVTable](fcQGraphicsSimpleTextItem_vdata(self)[])
   let self = QGraphicsSimpleTextItem(h: self)
-  let slotval1 = gen_qevent_types.QInputMethodEvent(h: event)
+  let slotval1 = gen_qevent_types.QInputMethodEvent(h: event, owned: false)
   vtbl[].inputMethodEvent(self, slotval1)
 
 proc QGraphicsSimpleTextIteminputMethodQuery*(self: gen_qgraphicsitem_types.QGraphicsSimpleTextItem, query: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQGraphicsSimpleTextItem_virtualbase_inputMethodQuery(self.h, cint(query)))
+  gen_qvariant_types.QVariant(h: fcQGraphicsSimpleTextItem_virtualbase_inputMethodQuery(self.h, cint(query)), owned: true)
 
 proc fcQGraphicsSimpleTextItem_vtable_callback_inputMethodQuery(self: pointer, query: cint): pointer {.cdecl.} =
   let vtbl = cast[ptr QGraphicsSimpleTextItemVTable](fcQGraphicsSimpleTextItem_vdata(self)[])
   let self = QGraphicsSimpleTextItem(h: self)
   let slotval1 = cint(query)
   var virtualReturn = vtbl[].inputMethodQuery(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QGraphicsSimpleTextItemitemChange*(self: gen_qgraphicsitem_types.QGraphicsSimpleTextItem, change: cint, value: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQGraphicsSimpleTextItem_virtualbase_itemChange(self.h, cint(change), value.h))
+  gen_qvariant_types.QVariant(h: fcQGraphicsSimpleTextItem_virtualbase_itemChange(self.h, cint(change), value.h), owned: true)
 
 proc fcQGraphicsSimpleTextItem_vtable_callback_itemChange(self: pointer, change: cint, value: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QGraphicsSimpleTextItemVTable](fcQGraphicsSimpleTextItem_vdata(self)[])
   let self = QGraphicsSimpleTextItem(h: self)
   let slotval1 = cint(change)
-  let slotval2 = gen_qvariant_types.QVariant(h: value)
+  let slotval2 = gen_qvariant_types.QVariant(h: value, owned: false)
   var virtualReturn = vtbl[].itemChange(self, slotval1, slotval2)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 type VirtualQGraphicsSimpleTextItem* {.inheritable.} = ref object of QGraphicsSimpleTextItem
   vtbl*: cQGraphicsSimpleTextItemVTable
@@ -14363,7 +14542,7 @@ method contains*(self: VirtualQGraphicsSimpleTextItem, point: gen_qpoint_types.Q
   QGraphicsSimpleTextItemcontains(self[], point)
 proc fcQGraphicsSimpleTextItem_method_callback_contains(self: pointer, point: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQGraphicsSimpleTextItem](fcQGraphicsSimpleTextItem_vdata(self)[])
-  let slotval1 = gen_qpoint_types.QPointF(h: point)
+  let slotval1 = gen_qpoint_types.QPointF(h: point, owned: false)
   var virtualReturn = inst.contains(slotval1)
   virtualReturn
 
@@ -14371,16 +14550,16 @@ method paint*(self: VirtualQGraphicsSimpleTextItem, painter: gen_qpainter_types.
   QGraphicsSimpleTextItempaint(self[], painter, option, widget)
 proc fcQGraphicsSimpleTextItem_method_callback_paint(self: pointer, painter: pointer, option: pointer, widget: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsSimpleTextItem](fcQGraphicsSimpleTextItem_vdata(self)[])
-  let slotval1 = gen_qpainter_types.QPainter(h: painter)
-  let slotval2 = gen_qstyleoption_types.QStyleOptionGraphicsItem(h: option)
-  let slotval3 = gen_qwidget_types.QWidget(h: widget)
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
+  let slotval2 = gen_qstyleoption_types.QStyleOptionGraphicsItem(h: option, owned: false)
+  let slotval3 = gen_qwidget_types.QWidget(h: widget, owned: false)
   inst.paint(slotval1, slotval2, slotval3)
 
 method isObscuredBy*(self: VirtualQGraphicsSimpleTextItem, item: gen_qgraphicsitem_types.QGraphicsItem): bool {.base.} =
   QGraphicsSimpleTextItemisObscuredBy(self[], item)
 proc fcQGraphicsSimpleTextItem_method_callback_isObscuredBy(self: pointer, item: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQGraphicsSimpleTextItem](fcQGraphicsSimpleTextItem_vdata(self)[])
-  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: item)
+  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: item, owned: false)
   var virtualReturn = inst.isObscuredBy(slotval1)
   virtualReturn
 
@@ -14411,14 +14590,14 @@ method setExtension*(self: VirtualQGraphicsSimpleTextItem, extension: cint, vari
 proc fcQGraphicsSimpleTextItem_method_callback_setExtension(self: pointer, extension: cint, variant: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsSimpleTextItem](fcQGraphicsSimpleTextItem_vdata(self)[])
   let slotval1 = cint(extension)
-  let slotval2 = gen_qvariant_types.QVariant(h: variant)
+  let slotval2 = gen_qvariant_types.QVariant(h: variant, owned: false)
   inst.setExtension(slotval1, slotval2)
 
 method extension*(self: VirtualQGraphicsSimpleTextItem, variant: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant {.base.} =
   QGraphicsSimpleTextItemextension(self[], variant)
 proc fcQGraphicsSimpleTextItem_method_callback_extension(self: pointer, variant: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsSimpleTextItem](fcQGraphicsSimpleTextItem_vdata(self)[])
-  let slotval1 = gen_qvariant_types.QVariant(h: variant)
+  let slotval1 = gen_qvariant_types.QVariant(h: variant, owned: false)
   var virtualReturn = inst.extension(slotval1)
   virtualReturn.h
 
@@ -14433,7 +14612,7 @@ method collidesWithItem*(self: VirtualQGraphicsSimpleTextItem, other: gen_qgraph
   QGraphicsSimpleTextItemcollidesWithItem(self[], other, mode)
 proc fcQGraphicsSimpleTextItem_method_callback_collidesWithItem(self: pointer, other: pointer, mode: cint): bool {.cdecl.} =
   let inst = cast[VirtualQGraphicsSimpleTextItem](fcQGraphicsSimpleTextItem_vdata(self)[])
-  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: other)
+  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: other, owned: false)
   let slotval2 = cint(mode)
   var virtualReturn = inst.collidesWithItem(slotval1, slotval2)
   virtualReturn
@@ -14442,7 +14621,7 @@ method collidesWithPath*(self: VirtualQGraphicsSimpleTextItem, path: gen_qpainte
   QGraphicsSimpleTextItemcollidesWithPath(self[], path, mode)
 proc fcQGraphicsSimpleTextItem_method_callback_collidesWithPath(self: pointer, path: pointer, mode: cint): bool {.cdecl.} =
   let inst = cast[VirtualQGraphicsSimpleTextItem](fcQGraphicsSimpleTextItem_vdata(self)[])
-  let slotval1 = gen_qpainterpath_types.QPainterPath(h: path)
+  let slotval1 = gen_qpainterpath_types.QPainterPath(h: path, owned: false)
   let slotval2 = cint(mode)
   var virtualReturn = inst.collidesWithPath(slotval1, slotval2)
   virtualReturn
@@ -14451,8 +14630,8 @@ method sceneEventFilter*(self: VirtualQGraphicsSimpleTextItem, watched: gen_qgra
   QGraphicsSimpleTextItemsceneEventFilter(self[], watched, event)
 proc fcQGraphicsSimpleTextItem_method_callback_sceneEventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQGraphicsSimpleTextItem](fcQGraphicsSimpleTextItem_vdata(self)[])
-  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.sceneEventFilter(slotval1, slotval2)
   virtualReturn
 
@@ -14460,7 +14639,7 @@ method sceneEvent*(self: VirtualQGraphicsSimpleTextItem, event: gen_qcoreevent_t
   QGraphicsSimpleTextItemsceneEvent(self[], event)
 proc fcQGraphicsSimpleTextItem_method_callback_sceneEvent(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQGraphicsSimpleTextItem](fcQGraphicsSimpleTextItem_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.sceneEvent(slotval1)
   virtualReturn
 
@@ -14468,126 +14647,126 @@ method contextMenuEvent*(self: VirtualQGraphicsSimpleTextItem, event: gen_qgraph
   QGraphicsSimpleTextItemcontextMenuEvent(self[], event)
 proc fcQGraphicsSimpleTextItem_method_callback_contextMenuEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsSimpleTextItem](fcQGraphicsSimpleTextItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneContextMenuEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneContextMenuEvent(h: event, owned: false)
   inst.contextMenuEvent(slotval1)
 
 method dragEnterEvent*(self: VirtualQGraphicsSimpleTextItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void {.base.} =
   QGraphicsSimpleTextItemdragEnterEvent(self[], event)
 proc fcQGraphicsSimpleTextItem_method_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsSimpleTextItem](fcQGraphicsSimpleTextItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event, owned: false)
   inst.dragEnterEvent(slotval1)
 
 method dragLeaveEvent*(self: VirtualQGraphicsSimpleTextItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void {.base.} =
   QGraphicsSimpleTextItemdragLeaveEvent(self[], event)
 proc fcQGraphicsSimpleTextItem_method_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsSimpleTextItem](fcQGraphicsSimpleTextItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event, owned: false)
   inst.dragLeaveEvent(slotval1)
 
 method dragMoveEvent*(self: VirtualQGraphicsSimpleTextItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void {.base.} =
   QGraphicsSimpleTextItemdragMoveEvent(self[], event)
 proc fcQGraphicsSimpleTextItem_method_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsSimpleTextItem](fcQGraphicsSimpleTextItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event, owned: false)
   inst.dragMoveEvent(slotval1)
 
 method dropEvent*(self: VirtualQGraphicsSimpleTextItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void {.base.} =
   QGraphicsSimpleTextItemdropEvent(self[], event)
 proc fcQGraphicsSimpleTextItem_method_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsSimpleTextItem](fcQGraphicsSimpleTextItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event, owned: false)
   inst.dropEvent(slotval1)
 
 method focusInEvent*(self: VirtualQGraphicsSimpleTextItem, event: gen_qevent_types.QFocusEvent): void {.base.} =
   QGraphicsSimpleTextItemfocusInEvent(self[], event)
 proc fcQGraphicsSimpleTextItem_method_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsSimpleTextItem](fcQGraphicsSimpleTextItem_vdata(self)[])
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   inst.focusInEvent(slotval1)
 
 method focusOutEvent*(self: VirtualQGraphicsSimpleTextItem, event: gen_qevent_types.QFocusEvent): void {.base.} =
   QGraphicsSimpleTextItemfocusOutEvent(self[], event)
 proc fcQGraphicsSimpleTextItem_method_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsSimpleTextItem](fcQGraphicsSimpleTextItem_vdata(self)[])
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   inst.focusOutEvent(slotval1)
 
 method hoverEnterEvent*(self: VirtualQGraphicsSimpleTextItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent): void {.base.} =
   QGraphicsSimpleTextItemhoverEnterEvent(self[], event)
 proc fcQGraphicsSimpleTextItem_method_callback_hoverEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsSimpleTextItem](fcQGraphicsSimpleTextItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event, owned: false)
   inst.hoverEnterEvent(slotval1)
 
 method hoverMoveEvent*(self: VirtualQGraphicsSimpleTextItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent): void {.base.} =
   QGraphicsSimpleTextItemhoverMoveEvent(self[], event)
 proc fcQGraphicsSimpleTextItem_method_callback_hoverMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsSimpleTextItem](fcQGraphicsSimpleTextItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event, owned: false)
   inst.hoverMoveEvent(slotval1)
 
 method hoverLeaveEvent*(self: VirtualQGraphicsSimpleTextItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent): void {.base.} =
   QGraphicsSimpleTextItemhoverLeaveEvent(self[], event)
 proc fcQGraphicsSimpleTextItem_method_callback_hoverLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsSimpleTextItem](fcQGraphicsSimpleTextItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event, owned: false)
   inst.hoverLeaveEvent(slotval1)
 
 method keyPressEvent*(self: VirtualQGraphicsSimpleTextItem, event: gen_qevent_types.QKeyEvent): void {.base.} =
   QGraphicsSimpleTextItemkeyPressEvent(self[], event)
 proc fcQGraphicsSimpleTextItem_method_callback_keyPressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsSimpleTextItem](fcQGraphicsSimpleTextItem_vdata(self)[])
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   inst.keyPressEvent(slotval1)
 
 method keyReleaseEvent*(self: VirtualQGraphicsSimpleTextItem, event: gen_qevent_types.QKeyEvent): void {.base.} =
   QGraphicsSimpleTextItemkeyReleaseEvent(self[], event)
 proc fcQGraphicsSimpleTextItem_method_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsSimpleTextItem](fcQGraphicsSimpleTextItem_vdata(self)[])
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   inst.keyReleaseEvent(slotval1)
 
 method mousePressEvent*(self: VirtualQGraphicsSimpleTextItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void {.base.} =
   QGraphicsSimpleTextItemmousePressEvent(self[], event)
 proc fcQGraphicsSimpleTextItem_method_callback_mousePressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsSimpleTextItem](fcQGraphicsSimpleTextItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event, owned: false)
   inst.mousePressEvent(slotval1)
 
 method mouseMoveEvent*(self: VirtualQGraphicsSimpleTextItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void {.base.} =
   QGraphicsSimpleTextItemmouseMoveEvent(self[], event)
 proc fcQGraphicsSimpleTextItem_method_callback_mouseMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsSimpleTextItem](fcQGraphicsSimpleTextItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event, owned: false)
   inst.mouseMoveEvent(slotval1)
 
 method mouseReleaseEvent*(self: VirtualQGraphicsSimpleTextItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void {.base.} =
   QGraphicsSimpleTextItemmouseReleaseEvent(self[], event)
 proc fcQGraphicsSimpleTextItem_method_callback_mouseReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsSimpleTextItem](fcQGraphicsSimpleTextItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event, owned: false)
   inst.mouseReleaseEvent(slotval1)
 
 method mouseDoubleClickEvent*(self: VirtualQGraphicsSimpleTextItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void {.base.} =
   QGraphicsSimpleTextItemmouseDoubleClickEvent(self[], event)
 proc fcQGraphicsSimpleTextItem_method_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsSimpleTextItem](fcQGraphicsSimpleTextItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event, owned: false)
   inst.mouseDoubleClickEvent(slotval1)
 
 method wheelEvent*(self: VirtualQGraphicsSimpleTextItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent): void {.base.} =
   QGraphicsSimpleTextItemwheelEvent(self[], event)
 proc fcQGraphicsSimpleTextItem_method_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsSimpleTextItem](fcQGraphicsSimpleTextItem_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent(h: event, owned: false)
   inst.wheelEvent(slotval1)
 
 method inputMethodEvent*(self: VirtualQGraphicsSimpleTextItem, event: gen_qevent_types.QInputMethodEvent): void {.base.} =
   QGraphicsSimpleTextIteminputMethodEvent(self[], event)
 proc fcQGraphicsSimpleTextItem_method_callback_inputMethodEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsSimpleTextItem](fcQGraphicsSimpleTextItem_vdata(self)[])
-  let slotval1 = gen_qevent_types.QInputMethodEvent(h: event)
+  let slotval1 = gen_qevent_types.QInputMethodEvent(h: event, owned: false)
   inst.inputMethodEvent(slotval1)
 
 method inputMethodQuery*(self: VirtualQGraphicsSimpleTextItem, query: cint): gen_qvariant_types.QVariant {.base.} =
@@ -14603,7 +14782,7 @@ method itemChange*(self: VirtualQGraphicsSimpleTextItem, change: cint, value: ge
 proc fcQGraphicsSimpleTextItem_method_callback_itemChange(self: pointer, change: cint, value: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsSimpleTextItem](fcQGraphicsSimpleTextItem_vdata(self)[])
   let slotval1 = cint(change)
-  let slotval2 = gen_qvariant_types.QVariant(h: value)
+  let slotval2 = gen_qvariant_types.QVariant(h: value, owned: false)
   var virtualReturn = inst.itemChange(slotval1, slotval2)
   virtualReturn.h
 
@@ -14696,7 +14875,7 @@ proc create*(T: type gen_qgraphicsitem_types.QGraphicsSimpleTextItem,
     vtbl[].vtbl.inputMethodQuery = fcQGraphicsSimpleTextItem_vtable_callback_inputMethodQuery
   if not isNil(vtbl[].itemChange):
     vtbl[].vtbl.itemChange = fcQGraphicsSimpleTextItem_vtable_callback_itemChange
-  let tmp = gen_qgraphicsitem_types.QGraphicsSimpleTextItem(h: fcQGraphicsSimpleTextItem_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))))
+  let tmp = gen_qgraphicsitem_types.QGraphicsSimpleTextItem(h: fcQGraphicsSimpleTextItem_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))), owned: true)
   fcQGraphicsSimpleTextItem_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qgraphicsitem_types.QGraphicsSimpleTextItem,
@@ -14777,7 +14956,7 @@ proc create*(T: type gen_qgraphicsitem_types.QGraphicsSimpleTextItem,
     vtbl[].vtbl.inputMethodQuery = fcQGraphicsSimpleTextItem_vtable_callback_inputMethodQuery
   if not isNil(vtbl[].itemChange):
     vtbl[].vtbl.itemChange = fcQGraphicsSimpleTextItem_vtable_callback_itemChange
-  let tmp = gen_qgraphicsitem_types.QGraphicsSimpleTextItem(h: fcQGraphicsSimpleTextItem_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))))
+  let tmp = gen_qgraphicsitem_types.QGraphicsSimpleTextItem(h: fcQGraphicsSimpleTextItem_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))), owned: true)
   fcQGraphicsSimpleTextItem_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qgraphicsitem_types.QGraphicsSimpleTextItem,
@@ -14858,7 +15037,7 @@ proc create*(T: type gen_qgraphicsitem_types.QGraphicsSimpleTextItem,
     vtbl[].vtbl.inputMethodQuery = fcQGraphicsSimpleTextItem_vtable_callback_inputMethodQuery
   if not isNil(vtbl[].itemChange):
     vtbl[].vtbl.itemChange = fcQGraphicsSimpleTextItem_vtable_callback_itemChange
-  let tmp = gen_qgraphicsitem_types.QGraphicsSimpleTextItem(h: fcQGraphicsSimpleTextItem_new3(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h))
+  let tmp = gen_qgraphicsitem_types.QGraphicsSimpleTextItem(h: fcQGraphicsSimpleTextItem_new3(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h), owned: true)
   fcQGraphicsSimpleTextItem_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qgraphicsitem_types.QGraphicsSimpleTextItem,
@@ -14939,13 +15118,14 @@ proc create*(T: type gen_qgraphicsitem_types.QGraphicsSimpleTextItem,
     vtbl[].vtbl.inputMethodQuery = fcQGraphicsSimpleTextItem_vtable_callback_inputMethodQuery
   if not isNil(vtbl[].itemChange):
     vtbl[].vtbl.itemChange = fcQGraphicsSimpleTextItem_vtable_callback_itemChange
-  let tmp = gen_qgraphicsitem_types.QGraphicsSimpleTextItem(h: fcQGraphicsSimpleTextItem_new4(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), parent.h))
+  let tmp = gen_qgraphicsitem_types.QGraphicsSimpleTextItem(h: fcQGraphicsSimpleTextItem_new4(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), parent.h), owned: true)
   fcQGraphicsSimpleTextItem_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQGraphicsSimpleTextItem_mvtbl = cQGraphicsSimpleTextItemVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQGraphicsSimpleTextItem()[])](self.fcQGraphicsSimpleTextItem_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   boundingRect: fcQGraphicsSimpleTextItem_method_callback_boundingRect,
   shape: fcQGraphicsSimpleTextItem_method_callback_shape,
@@ -15010,8 +15190,6 @@ proc create*(T: type gen_qgraphicsitem_types.QGraphicsSimpleTextItem,
   inst[].h = fcQGraphicsSimpleTextItem_new4(addr(cQGraphicsSimpleTextItem_mvtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), parent.h)
   fcQGraphicsSimpleTextItem_vdata(inst[].h)[] = addr inst[]
 
-proc delete*(self: gen_qgraphicsitem_types.QGraphicsSimpleTextItem) =
-  fcQGraphicsSimpleTextItem_delete(self.h)
 proc addToGroup*(self: gen_qgraphicsitem_types.QGraphicsItemGroup, item: gen_qgraphicsitem_types.QGraphicsItem): void =
   fcQGraphicsItemGroup_addToGroup(self.h, item.h)
 
@@ -15019,7 +15197,7 @@ proc removeFromGroup*(self: gen_qgraphicsitem_types.QGraphicsItemGroup, item: ge
   fcQGraphicsItemGroup_removeFromGroup(self.h, item.h)
 
 proc boundingRect*(self: gen_qgraphicsitem_types.QGraphicsItemGroup): gen_qrect_types.QRectF =
-  gen_qrect_types.QRectF(h: fcQGraphicsItemGroup_boundingRect(self.h))
+  gen_qrect_types.QRectF(h: fcQGraphicsItemGroup_boundingRect(self.h), owned: true)
 
 proc paint*(self: gen_qgraphicsitem_types.QGraphicsItemGroup, painter: gen_qpainter_types.QPainter, option: gen_qstyleoption_types.QStyleOptionGraphicsItem, widget: gen_qwidget_types.QWidget): void =
   fcQGraphicsItemGroup_paint(self.h, painter.h, option.h, widget.h)
@@ -15028,7 +15206,7 @@ proc isObscuredBy*(self: gen_qgraphicsitem_types.QGraphicsItemGroup, item: gen_q
   fcQGraphicsItemGroup_isObscuredBy(self.h, item.h)
 
 proc opaqueArea*(self: gen_qgraphicsitem_types.QGraphicsItemGroup): gen_qpainterpath_types.QPainterPath =
-  gen_qpainterpath_types.QPainterPath(h: fcQGraphicsItemGroup_opaqueArea(self.h))
+  gen_qpainterpath_types.QPainterPath(h: fcQGraphicsItemGroup_opaqueArea(self.h), owned: true)
 
 proc typeX*(self: gen_qgraphicsitem_types.QGraphicsItemGroup): cint =
   fcQGraphicsItemGroup_typeX(self.h)
@@ -15068,7 +15246,7 @@ type QGraphicsItemGroupitemChangeProc* = proc(self: QGraphicsItemGroup, change: 
 type QGraphicsItemGroupsupportsExtensionProc* = proc(self: QGraphicsItemGroup, extension: cint): bool {.raises: [], gcsafe.}
 type QGraphicsItemGroupsetExtensionProc* = proc(self: QGraphicsItemGroup, extension: cint, variant: gen_qvariant_types.QVariant): void {.raises: [], gcsafe.}
 type QGraphicsItemGroupextensionProc* = proc(self: QGraphicsItemGroup, variant: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant {.raises: [], gcsafe.}
-type QGraphicsItemGroupVTable* = object
+type QGraphicsItemGroupVTable* {.inheritable, pure.} = object
   vtbl: cQGraphicsItemGroupVTable
   boundingRect*: QGraphicsItemGroupboundingRectProc
   paint*: QGraphicsItemGrouppaintProc
@@ -15106,13 +15284,16 @@ type QGraphicsItemGroupVTable* = object
   setExtension*: QGraphicsItemGroupsetExtensionProc
   extension*: QGraphicsItemGroupextensionProc
 proc QGraphicsItemGroupboundingRect*(self: gen_qgraphicsitem_types.QGraphicsItemGroup): gen_qrect_types.QRectF =
-  gen_qrect_types.QRectF(h: fcQGraphicsItemGroup_virtualbase_boundingRect(self.h))
+  gen_qrect_types.QRectF(h: fcQGraphicsItemGroup_virtualbase_boundingRect(self.h), owned: true)
 
 proc fcQGraphicsItemGroup_vtable_callback_boundingRect(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QGraphicsItemGroupVTable](fcQGraphicsItemGroup_vdata(self)[])
   let self = QGraphicsItemGroup(h: self)
   var virtualReturn = vtbl[].boundingRect(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QGraphicsItemGrouppaint*(self: gen_qgraphicsitem_types.QGraphicsItemGroup, painter: gen_qpainter_types.QPainter, option: gen_qstyleoption_types.QStyleOptionGraphicsItem, widget: gen_qwidget_types.QWidget): void =
   fcQGraphicsItemGroup_virtualbase_paint(self.h, painter.h, option.h, widget.h)
@@ -15120,9 +15301,9 @@ proc QGraphicsItemGrouppaint*(self: gen_qgraphicsitem_types.QGraphicsItemGroup, 
 proc fcQGraphicsItemGroup_vtable_callback_paint(self: pointer, painter: pointer, option: pointer, widget: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsItemGroupVTable](fcQGraphicsItemGroup_vdata(self)[])
   let self = QGraphicsItemGroup(h: self)
-  let slotval1 = gen_qpainter_types.QPainter(h: painter)
-  let slotval2 = gen_qstyleoption_types.QStyleOptionGraphicsItem(h: option)
-  let slotval3 = gen_qwidget_types.QWidget(h: widget)
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
+  let slotval2 = gen_qstyleoption_types.QStyleOptionGraphicsItem(h: option, owned: false)
+  let slotval3 = gen_qwidget_types.QWidget(h: widget, owned: false)
   vtbl[].paint(self, slotval1, slotval2, slotval3)
 
 proc QGraphicsItemGroupisObscuredBy*(self: gen_qgraphicsitem_types.QGraphicsItemGroup, item: gen_qgraphicsitem_types.QGraphicsItem): bool =
@@ -15131,18 +15312,21 @@ proc QGraphicsItemGroupisObscuredBy*(self: gen_qgraphicsitem_types.QGraphicsItem
 proc fcQGraphicsItemGroup_vtable_callback_isObscuredBy(self: pointer, item: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QGraphicsItemGroupVTable](fcQGraphicsItemGroup_vdata(self)[])
   let self = QGraphicsItemGroup(h: self)
-  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: item)
+  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: item, owned: false)
   var virtualReturn = vtbl[].isObscuredBy(self, slotval1)
   virtualReturn
 
 proc QGraphicsItemGroupopaqueArea*(self: gen_qgraphicsitem_types.QGraphicsItemGroup): gen_qpainterpath_types.QPainterPath =
-  gen_qpainterpath_types.QPainterPath(h: fcQGraphicsItemGroup_virtualbase_opaqueArea(self.h))
+  gen_qpainterpath_types.QPainterPath(h: fcQGraphicsItemGroup_virtualbase_opaqueArea(self.h), owned: true)
 
 proc fcQGraphicsItemGroup_vtable_callback_opaqueArea(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QGraphicsItemGroupVTable](fcQGraphicsItemGroup_vdata(self)[])
   let self = QGraphicsItemGroup(h: self)
   var virtualReturn = vtbl[].opaqueArea(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QGraphicsItemGrouptypeX*(self: gen_qgraphicsitem_types.QGraphicsItemGroup): cint =
   fcQGraphicsItemGroup_virtualbase_typeX(self.h)
@@ -15163,13 +15347,16 @@ proc fcQGraphicsItemGroup_vtable_callback_advance(self: pointer, phase: cint): v
   vtbl[].advance(self, slotval1)
 
 proc QGraphicsItemGroupshape*(self: gen_qgraphicsitem_types.QGraphicsItemGroup): gen_qpainterpath_types.QPainterPath =
-  gen_qpainterpath_types.QPainterPath(h: fcQGraphicsItemGroup_virtualbase_shape(self.h))
+  gen_qpainterpath_types.QPainterPath(h: fcQGraphicsItemGroup_virtualbase_shape(self.h), owned: true)
 
 proc fcQGraphicsItemGroup_vtable_callback_shape(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QGraphicsItemGroupVTable](fcQGraphicsItemGroup_vdata(self)[])
   let self = QGraphicsItemGroup(h: self)
   var virtualReturn = vtbl[].shape(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QGraphicsItemGroupcontains*(self: gen_qgraphicsitem_types.QGraphicsItemGroup, point: gen_qpoint_types.QPointF): bool =
   fcQGraphicsItemGroup_virtualbase_contains(self.h, point.h)
@@ -15177,7 +15364,7 @@ proc QGraphicsItemGroupcontains*(self: gen_qgraphicsitem_types.QGraphicsItemGrou
 proc fcQGraphicsItemGroup_vtable_callback_contains(self: pointer, point: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QGraphicsItemGroupVTable](fcQGraphicsItemGroup_vdata(self)[])
   let self = QGraphicsItemGroup(h: self)
-  let slotval1 = gen_qpoint_types.QPointF(h: point)
+  let slotval1 = gen_qpoint_types.QPointF(h: point, owned: false)
   var virtualReturn = vtbl[].contains(self, slotval1)
   virtualReturn
 
@@ -15187,7 +15374,7 @@ proc QGraphicsItemGroupcollidesWithItem*(self: gen_qgraphicsitem_types.QGraphics
 proc fcQGraphicsItemGroup_vtable_callback_collidesWithItem(self: pointer, other: pointer, mode: cint): bool {.cdecl.} =
   let vtbl = cast[ptr QGraphicsItemGroupVTable](fcQGraphicsItemGroup_vdata(self)[])
   let self = QGraphicsItemGroup(h: self)
-  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: other)
+  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: other, owned: false)
   let slotval2 = cint(mode)
   var virtualReturn = vtbl[].collidesWithItem(self, slotval1, slotval2)
   virtualReturn
@@ -15198,7 +15385,7 @@ proc QGraphicsItemGroupcollidesWithPath*(self: gen_qgraphicsitem_types.QGraphics
 proc fcQGraphicsItemGroup_vtable_callback_collidesWithPath(self: pointer, path: pointer, mode: cint): bool {.cdecl.} =
   let vtbl = cast[ptr QGraphicsItemGroupVTable](fcQGraphicsItemGroup_vdata(self)[])
   let self = QGraphicsItemGroup(h: self)
-  let slotval1 = gen_qpainterpath_types.QPainterPath(h: path)
+  let slotval1 = gen_qpainterpath_types.QPainterPath(h: path, owned: false)
   let slotval2 = cint(mode)
   var virtualReturn = vtbl[].collidesWithPath(self, slotval1, slotval2)
   virtualReturn
@@ -15209,8 +15396,8 @@ proc QGraphicsItemGroupsceneEventFilter*(self: gen_qgraphicsitem_types.QGraphics
 proc fcQGraphicsItemGroup_vtable_callback_sceneEventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QGraphicsItemGroupVTable](fcQGraphicsItemGroup_vdata(self)[])
   let self = QGraphicsItemGroup(h: self)
-  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].sceneEventFilter(self, slotval1, slotval2)
   virtualReturn
 
@@ -15220,7 +15407,7 @@ proc QGraphicsItemGroupsceneEvent*(self: gen_qgraphicsitem_types.QGraphicsItemGr
 proc fcQGraphicsItemGroup_vtable_callback_sceneEvent(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QGraphicsItemGroupVTable](fcQGraphicsItemGroup_vdata(self)[])
   let self = QGraphicsItemGroup(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].sceneEvent(self, slotval1)
   virtualReturn
 
@@ -15230,7 +15417,7 @@ proc QGraphicsItemGroupcontextMenuEvent*(self: gen_qgraphicsitem_types.QGraphics
 proc fcQGraphicsItemGroup_vtable_callback_contextMenuEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsItemGroupVTable](fcQGraphicsItemGroup_vdata(self)[])
   let self = QGraphicsItemGroup(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneContextMenuEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneContextMenuEvent(h: event, owned: false)
   vtbl[].contextMenuEvent(self, slotval1)
 
 proc QGraphicsItemGroupdragEnterEvent*(self: gen_qgraphicsitem_types.QGraphicsItemGroup, event: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void =
@@ -15239,7 +15426,7 @@ proc QGraphicsItemGroupdragEnterEvent*(self: gen_qgraphicsitem_types.QGraphicsIt
 proc fcQGraphicsItemGroup_vtable_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsItemGroupVTable](fcQGraphicsItemGroup_vdata(self)[])
   let self = QGraphicsItemGroup(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event, owned: false)
   vtbl[].dragEnterEvent(self, slotval1)
 
 proc QGraphicsItemGroupdragLeaveEvent*(self: gen_qgraphicsitem_types.QGraphicsItemGroup, event: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void =
@@ -15248,7 +15435,7 @@ proc QGraphicsItemGroupdragLeaveEvent*(self: gen_qgraphicsitem_types.QGraphicsIt
 proc fcQGraphicsItemGroup_vtable_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsItemGroupVTable](fcQGraphicsItemGroup_vdata(self)[])
   let self = QGraphicsItemGroup(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event, owned: false)
   vtbl[].dragLeaveEvent(self, slotval1)
 
 proc QGraphicsItemGroupdragMoveEvent*(self: gen_qgraphicsitem_types.QGraphicsItemGroup, event: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void =
@@ -15257,7 +15444,7 @@ proc QGraphicsItemGroupdragMoveEvent*(self: gen_qgraphicsitem_types.QGraphicsIte
 proc fcQGraphicsItemGroup_vtable_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsItemGroupVTable](fcQGraphicsItemGroup_vdata(self)[])
   let self = QGraphicsItemGroup(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event, owned: false)
   vtbl[].dragMoveEvent(self, slotval1)
 
 proc QGraphicsItemGroupdropEvent*(self: gen_qgraphicsitem_types.QGraphicsItemGroup, event: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void =
@@ -15266,7 +15453,7 @@ proc QGraphicsItemGroupdropEvent*(self: gen_qgraphicsitem_types.QGraphicsItemGro
 proc fcQGraphicsItemGroup_vtable_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsItemGroupVTable](fcQGraphicsItemGroup_vdata(self)[])
   let self = QGraphicsItemGroup(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event, owned: false)
   vtbl[].dropEvent(self, slotval1)
 
 proc QGraphicsItemGroupfocusInEvent*(self: gen_qgraphicsitem_types.QGraphicsItemGroup, event: gen_qevent_types.QFocusEvent): void =
@@ -15275,7 +15462,7 @@ proc QGraphicsItemGroupfocusInEvent*(self: gen_qgraphicsitem_types.QGraphicsItem
 proc fcQGraphicsItemGroup_vtable_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsItemGroupVTable](fcQGraphicsItemGroup_vdata(self)[])
   let self = QGraphicsItemGroup(h: self)
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusInEvent(self, slotval1)
 
 proc QGraphicsItemGroupfocusOutEvent*(self: gen_qgraphicsitem_types.QGraphicsItemGroup, event: gen_qevent_types.QFocusEvent): void =
@@ -15284,7 +15471,7 @@ proc QGraphicsItemGroupfocusOutEvent*(self: gen_qgraphicsitem_types.QGraphicsIte
 proc fcQGraphicsItemGroup_vtable_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsItemGroupVTable](fcQGraphicsItemGroup_vdata(self)[])
   let self = QGraphicsItemGroup(h: self)
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusOutEvent(self, slotval1)
 
 proc QGraphicsItemGrouphoverEnterEvent*(self: gen_qgraphicsitem_types.QGraphicsItemGroup, event: gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent): void =
@@ -15293,7 +15480,7 @@ proc QGraphicsItemGrouphoverEnterEvent*(self: gen_qgraphicsitem_types.QGraphicsI
 proc fcQGraphicsItemGroup_vtable_callback_hoverEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsItemGroupVTable](fcQGraphicsItemGroup_vdata(self)[])
   let self = QGraphicsItemGroup(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event, owned: false)
   vtbl[].hoverEnterEvent(self, slotval1)
 
 proc QGraphicsItemGrouphoverMoveEvent*(self: gen_qgraphicsitem_types.QGraphicsItemGroup, event: gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent): void =
@@ -15302,7 +15489,7 @@ proc QGraphicsItemGrouphoverMoveEvent*(self: gen_qgraphicsitem_types.QGraphicsIt
 proc fcQGraphicsItemGroup_vtable_callback_hoverMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsItemGroupVTable](fcQGraphicsItemGroup_vdata(self)[])
   let self = QGraphicsItemGroup(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event, owned: false)
   vtbl[].hoverMoveEvent(self, slotval1)
 
 proc QGraphicsItemGrouphoverLeaveEvent*(self: gen_qgraphicsitem_types.QGraphicsItemGroup, event: gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent): void =
@@ -15311,7 +15498,7 @@ proc QGraphicsItemGrouphoverLeaveEvent*(self: gen_qgraphicsitem_types.QGraphicsI
 proc fcQGraphicsItemGroup_vtable_callback_hoverLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsItemGroupVTable](fcQGraphicsItemGroup_vdata(self)[])
   let self = QGraphicsItemGroup(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event, owned: false)
   vtbl[].hoverLeaveEvent(self, slotval1)
 
 proc QGraphicsItemGroupkeyPressEvent*(self: gen_qgraphicsitem_types.QGraphicsItemGroup, event: gen_qevent_types.QKeyEvent): void =
@@ -15320,7 +15507,7 @@ proc QGraphicsItemGroupkeyPressEvent*(self: gen_qgraphicsitem_types.QGraphicsIte
 proc fcQGraphicsItemGroup_vtable_callback_keyPressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsItemGroupVTable](fcQGraphicsItemGroup_vdata(self)[])
   let self = QGraphicsItemGroup(h: self)
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   vtbl[].keyPressEvent(self, slotval1)
 
 proc QGraphicsItemGroupkeyReleaseEvent*(self: gen_qgraphicsitem_types.QGraphicsItemGroup, event: gen_qevent_types.QKeyEvent): void =
@@ -15329,7 +15516,7 @@ proc QGraphicsItemGroupkeyReleaseEvent*(self: gen_qgraphicsitem_types.QGraphicsI
 proc fcQGraphicsItemGroup_vtable_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsItemGroupVTable](fcQGraphicsItemGroup_vdata(self)[])
   let self = QGraphicsItemGroup(h: self)
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   vtbl[].keyReleaseEvent(self, slotval1)
 
 proc QGraphicsItemGroupmousePressEvent*(self: gen_qgraphicsitem_types.QGraphicsItemGroup, event: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void =
@@ -15338,7 +15525,7 @@ proc QGraphicsItemGroupmousePressEvent*(self: gen_qgraphicsitem_types.QGraphicsI
 proc fcQGraphicsItemGroup_vtable_callback_mousePressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsItemGroupVTable](fcQGraphicsItemGroup_vdata(self)[])
   let self = QGraphicsItemGroup(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event, owned: false)
   vtbl[].mousePressEvent(self, slotval1)
 
 proc QGraphicsItemGroupmouseMoveEvent*(self: gen_qgraphicsitem_types.QGraphicsItemGroup, event: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void =
@@ -15347,7 +15534,7 @@ proc QGraphicsItemGroupmouseMoveEvent*(self: gen_qgraphicsitem_types.QGraphicsIt
 proc fcQGraphicsItemGroup_vtable_callback_mouseMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsItemGroupVTable](fcQGraphicsItemGroup_vdata(self)[])
   let self = QGraphicsItemGroup(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event, owned: false)
   vtbl[].mouseMoveEvent(self, slotval1)
 
 proc QGraphicsItemGroupmouseReleaseEvent*(self: gen_qgraphicsitem_types.QGraphicsItemGroup, event: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void =
@@ -15356,7 +15543,7 @@ proc QGraphicsItemGroupmouseReleaseEvent*(self: gen_qgraphicsitem_types.QGraphic
 proc fcQGraphicsItemGroup_vtable_callback_mouseReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsItemGroupVTable](fcQGraphicsItemGroup_vdata(self)[])
   let self = QGraphicsItemGroup(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event, owned: false)
   vtbl[].mouseReleaseEvent(self, slotval1)
 
 proc QGraphicsItemGroupmouseDoubleClickEvent*(self: gen_qgraphicsitem_types.QGraphicsItemGroup, event: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void =
@@ -15365,7 +15552,7 @@ proc QGraphicsItemGroupmouseDoubleClickEvent*(self: gen_qgraphicsitem_types.QGra
 proc fcQGraphicsItemGroup_vtable_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsItemGroupVTable](fcQGraphicsItemGroup_vdata(self)[])
   let self = QGraphicsItemGroup(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event, owned: false)
   vtbl[].mouseDoubleClickEvent(self, slotval1)
 
 proc QGraphicsItemGroupwheelEvent*(self: gen_qgraphicsitem_types.QGraphicsItemGroup, event: gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent): void =
@@ -15374,7 +15561,7 @@ proc QGraphicsItemGroupwheelEvent*(self: gen_qgraphicsitem_types.QGraphicsItemGr
 proc fcQGraphicsItemGroup_vtable_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsItemGroupVTable](fcQGraphicsItemGroup_vdata(self)[])
   let self = QGraphicsItemGroup(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent(h: event, owned: false)
   vtbl[].wheelEvent(self, slotval1)
 
 proc QGraphicsItemGroupinputMethodEvent*(self: gen_qgraphicsitem_types.QGraphicsItemGroup, event: gen_qevent_types.QInputMethodEvent): void =
@@ -15383,29 +15570,35 @@ proc QGraphicsItemGroupinputMethodEvent*(self: gen_qgraphicsitem_types.QGraphics
 proc fcQGraphicsItemGroup_vtable_callback_inputMethodEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsItemGroupVTable](fcQGraphicsItemGroup_vdata(self)[])
   let self = QGraphicsItemGroup(h: self)
-  let slotval1 = gen_qevent_types.QInputMethodEvent(h: event)
+  let slotval1 = gen_qevent_types.QInputMethodEvent(h: event, owned: false)
   vtbl[].inputMethodEvent(self, slotval1)
 
 proc QGraphicsItemGroupinputMethodQuery*(self: gen_qgraphicsitem_types.QGraphicsItemGroup, query: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQGraphicsItemGroup_virtualbase_inputMethodQuery(self.h, cint(query)))
+  gen_qvariant_types.QVariant(h: fcQGraphicsItemGroup_virtualbase_inputMethodQuery(self.h, cint(query)), owned: true)
 
 proc fcQGraphicsItemGroup_vtable_callback_inputMethodQuery(self: pointer, query: cint): pointer {.cdecl.} =
   let vtbl = cast[ptr QGraphicsItemGroupVTable](fcQGraphicsItemGroup_vdata(self)[])
   let self = QGraphicsItemGroup(h: self)
   let slotval1 = cint(query)
   var virtualReturn = vtbl[].inputMethodQuery(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QGraphicsItemGroupitemChange*(self: gen_qgraphicsitem_types.QGraphicsItemGroup, change: cint, value: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQGraphicsItemGroup_virtualbase_itemChange(self.h, cint(change), value.h))
+  gen_qvariant_types.QVariant(h: fcQGraphicsItemGroup_virtualbase_itemChange(self.h, cint(change), value.h), owned: true)
 
 proc fcQGraphicsItemGroup_vtable_callback_itemChange(self: pointer, change: cint, value: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QGraphicsItemGroupVTable](fcQGraphicsItemGroup_vdata(self)[])
   let self = QGraphicsItemGroup(h: self)
   let slotval1 = cint(change)
-  let slotval2 = gen_qvariant_types.QVariant(h: value)
+  let slotval2 = gen_qvariant_types.QVariant(h: value, owned: false)
   var virtualReturn = vtbl[].itemChange(self, slotval1, slotval2)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QGraphicsItemGroupsupportsExtension*(self: gen_qgraphicsitem_types.QGraphicsItemGroup, extension: cint): bool =
   fcQGraphicsItemGroup_virtualbase_supportsExtension(self.h, cint(extension))
@@ -15424,18 +15617,21 @@ proc fcQGraphicsItemGroup_vtable_callback_setExtension(self: pointer, extension:
   let vtbl = cast[ptr QGraphicsItemGroupVTable](fcQGraphicsItemGroup_vdata(self)[])
   let self = QGraphicsItemGroup(h: self)
   let slotval1 = cint(extension)
-  let slotval2 = gen_qvariant_types.QVariant(h: variant)
+  let slotval2 = gen_qvariant_types.QVariant(h: variant, owned: false)
   vtbl[].setExtension(self, slotval1, slotval2)
 
 proc QGraphicsItemGroupextension*(self: gen_qgraphicsitem_types.QGraphicsItemGroup, variant: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQGraphicsItemGroup_virtualbase_extension(self.h, variant.h))
+  gen_qvariant_types.QVariant(h: fcQGraphicsItemGroup_virtualbase_extension(self.h, variant.h), owned: true)
 
 proc fcQGraphicsItemGroup_vtable_callback_extension(self: pointer, variant: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QGraphicsItemGroupVTable](fcQGraphicsItemGroup_vdata(self)[])
   let self = QGraphicsItemGroup(h: self)
-  let slotval1 = gen_qvariant_types.QVariant(h: variant)
+  let slotval1 = gen_qvariant_types.QVariant(h: variant, owned: false)
   var virtualReturn = vtbl[].extension(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 type VirtualQGraphicsItemGroup* {.inheritable.} = ref object of QGraphicsItemGroup
   vtbl*: cQGraphicsItemGroupVTable
@@ -15450,16 +15646,16 @@ method paint*(self: VirtualQGraphicsItemGroup, painter: gen_qpainter_types.QPain
   QGraphicsItemGrouppaint(self[], painter, option, widget)
 proc fcQGraphicsItemGroup_method_callback_paint(self: pointer, painter: pointer, option: pointer, widget: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsItemGroup](fcQGraphicsItemGroup_vdata(self)[])
-  let slotval1 = gen_qpainter_types.QPainter(h: painter)
-  let slotval2 = gen_qstyleoption_types.QStyleOptionGraphicsItem(h: option)
-  let slotval3 = gen_qwidget_types.QWidget(h: widget)
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
+  let slotval2 = gen_qstyleoption_types.QStyleOptionGraphicsItem(h: option, owned: false)
+  let slotval3 = gen_qwidget_types.QWidget(h: widget, owned: false)
   inst.paint(slotval1, slotval2, slotval3)
 
 method isObscuredBy*(self: VirtualQGraphicsItemGroup, item: gen_qgraphicsitem_types.QGraphicsItem): bool {.base.} =
   QGraphicsItemGroupisObscuredBy(self[], item)
 proc fcQGraphicsItemGroup_method_callback_isObscuredBy(self: pointer, item: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQGraphicsItemGroup](fcQGraphicsItemGroup_vdata(self)[])
-  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: item)
+  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: item, owned: false)
   var virtualReturn = inst.isObscuredBy(slotval1)
   virtualReturn
 
@@ -15495,7 +15691,7 @@ method contains*(self: VirtualQGraphicsItemGroup, point: gen_qpoint_types.QPoint
   QGraphicsItemGroupcontains(self[], point)
 proc fcQGraphicsItemGroup_method_callback_contains(self: pointer, point: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQGraphicsItemGroup](fcQGraphicsItemGroup_vdata(self)[])
-  let slotval1 = gen_qpoint_types.QPointF(h: point)
+  let slotval1 = gen_qpoint_types.QPointF(h: point, owned: false)
   var virtualReturn = inst.contains(slotval1)
   virtualReturn
 
@@ -15503,7 +15699,7 @@ method collidesWithItem*(self: VirtualQGraphicsItemGroup, other: gen_qgraphicsit
   QGraphicsItemGroupcollidesWithItem(self[], other, mode)
 proc fcQGraphicsItemGroup_method_callback_collidesWithItem(self: pointer, other: pointer, mode: cint): bool {.cdecl.} =
   let inst = cast[VirtualQGraphicsItemGroup](fcQGraphicsItemGroup_vdata(self)[])
-  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: other)
+  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: other, owned: false)
   let slotval2 = cint(mode)
   var virtualReturn = inst.collidesWithItem(slotval1, slotval2)
   virtualReturn
@@ -15512,7 +15708,7 @@ method collidesWithPath*(self: VirtualQGraphicsItemGroup, path: gen_qpainterpath
   QGraphicsItemGroupcollidesWithPath(self[], path, mode)
 proc fcQGraphicsItemGroup_method_callback_collidesWithPath(self: pointer, path: pointer, mode: cint): bool {.cdecl.} =
   let inst = cast[VirtualQGraphicsItemGroup](fcQGraphicsItemGroup_vdata(self)[])
-  let slotval1 = gen_qpainterpath_types.QPainterPath(h: path)
+  let slotval1 = gen_qpainterpath_types.QPainterPath(h: path, owned: false)
   let slotval2 = cint(mode)
   var virtualReturn = inst.collidesWithPath(slotval1, slotval2)
   virtualReturn
@@ -15521,8 +15717,8 @@ method sceneEventFilter*(self: VirtualQGraphicsItemGroup, watched: gen_qgraphics
   QGraphicsItemGroupsceneEventFilter(self[], watched, event)
 proc fcQGraphicsItemGroup_method_callback_sceneEventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQGraphicsItemGroup](fcQGraphicsItemGroup_vdata(self)[])
-  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.sceneEventFilter(slotval1, slotval2)
   virtualReturn
 
@@ -15530,7 +15726,7 @@ method sceneEvent*(self: VirtualQGraphicsItemGroup, event: gen_qcoreevent_types.
   QGraphicsItemGroupsceneEvent(self[], event)
 proc fcQGraphicsItemGroup_method_callback_sceneEvent(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQGraphicsItemGroup](fcQGraphicsItemGroup_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.sceneEvent(slotval1)
   virtualReturn
 
@@ -15538,126 +15734,126 @@ method contextMenuEvent*(self: VirtualQGraphicsItemGroup, event: gen_qgraphicssc
   QGraphicsItemGroupcontextMenuEvent(self[], event)
 proc fcQGraphicsItemGroup_method_callback_contextMenuEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsItemGroup](fcQGraphicsItemGroup_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneContextMenuEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneContextMenuEvent(h: event, owned: false)
   inst.contextMenuEvent(slotval1)
 
 method dragEnterEvent*(self: VirtualQGraphicsItemGroup, event: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void {.base.} =
   QGraphicsItemGroupdragEnterEvent(self[], event)
 proc fcQGraphicsItemGroup_method_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsItemGroup](fcQGraphicsItemGroup_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event, owned: false)
   inst.dragEnterEvent(slotval1)
 
 method dragLeaveEvent*(self: VirtualQGraphicsItemGroup, event: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void {.base.} =
   QGraphicsItemGroupdragLeaveEvent(self[], event)
 proc fcQGraphicsItemGroup_method_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsItemGroup](fcQGraphicsItemGroup_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event, owned: false)
   inst.dragLeaveEvent(slotval1)
 
 method dragMoveEvent*(self: VirtualQGraphicsItemGroup, event: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void {.base.} =
   QGraphicsItemGroupdragMoveEvent(self[], event)
 proc fcQGraphicsItemGroup_method_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsItemGroup](fcQGraphicsItemGroup_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event, owned: false)
   inst.dragMoveEvent(slotval1)
 
 method dropEvent*(self: VirtualQGraphicsItemGroup, event: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void {.base.} =
   QGraphicsItemGroupdropEvent(self[], event)
 proc fcQGraphicsItemGroup_method_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsItemGroup](fcQGraphicsItemGroup_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event, owned: false)
   inst.dropEvent(slotval1)
 
 method focusInEvent*(self: VirtualQGraphicsItemGroup, event: gen_qevent_types.QFocusEvent): void {.base.} =
   QGraphicsItemGroupfocusInEvent(self[], event)
 proc fcQGraphicsItemGroup_method_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsItemGroup](fcQGraphicsItemGroup_vdata(self)[])
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   inst.focusInEvent(slotval1)
 
 method focusOutEvent*(self: VirtualQGraphicsItemGroup, event: gen_qevent_types.QFocusEvent): void {.base.} =
   QGraphicsItemGroupfocusOutEvent(self[], event)
 proc fcQGraphicsItemGroup_method_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsItemGroup](fcQGraphicsItemGroup_vdata(self)[])
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   inst.focusOutEvent(slotval1)
 
 method hoverEnterEvent*(self: VirtualQGraphicsItemGroup, event: gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent): void {.base.} =
   QGraphicsItemGrouphoverEnterEvent(self[], event)
 proc fcQGraphicsItemGroup_method_callback_hoverEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsItemGroup](fcQGraphicsItemGroup_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event, owned: false)
   inst.hoverEnterEvent(slotval1)
 
 method hoverMoveEvent*(self: VirtualQGraphicsItemGroup, event: gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent): void {.base.} =
   QGraphicsItemGrouphoverMoveEvent(self[], event)
 proc fcQGraphicsItemGroup_method_callback_hoverMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsItemGroup](fcQGraphicsItemGroup_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event, owned: false)
   inst.hoverMoveEvent(slotval1)
 
 method hoverLeaveEvent*(self: VirtualQGraphicsItemGroup, event: gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent): void {.base.} =
   QGraphicsItemGrouphoverLeaveEvent(self[], event)
 proc fcQGraphicsItemGroup_method_callback_hoverLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsItemGroup](fcQGraphicsItemGroup_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event, owned: false)
   inst.hoverLeaveEvent(slotval1)
 
 method keyPressEvent*(self: VirtualQGraphicsItemGroup, event: gen_qevent_types.QKeyEvent): void {.base.} =
   QGraphicsItemGroupkeyPressEvent(self[], event)
 proc fcQGraphicsItemGroup_method_callback_keyPressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsItemGroup](fcQGraphicsItemGroup_vdata(self)[])
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   inst.keyPressEvent(slotval1)
 
 method keyReleaseEvent*(self: VirtualQGraphicsItemGroup, event: gen_qevent_types.QKeyEvent): void {.base.} =
   QGraphicsItemGroupkeyReleaseEvent(self[], event)
 proc fcQGraphicsItemGroup_method_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsItemGroup](fcQGraphicsItemGroup_vdata(self)[])
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   inst.keyReleaseEvent(slotval1)
 
 method mousePressEvent*(self: VirtualQGraphicsItemGroup, event: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void {.base.} =
   QGraphicsItemGroupmousePressEvent(self[], event)
 proc fcQGraphicsItemGroup_method_callback_mousePressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsItemGroup](fcQGraphicsItemGroup_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event, owned: false)
   inst.mousePressEvent(slotval1)
 
 method mouseMoveEvent*(self: VirtualQGraphicsItemGroup, event: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void {.base.} =
   QGraphicsItemGroupmouseMoveEvent(self[], event)
 proc fcQGraphicsItemGroup_method_callback_mouseMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsItemGroup](fcQGraphicsItemGroup_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event, owned: false)
   inst.mouseMoveEvent(slotval1)
 
 method mouseReleaseEvent*(self: VirtualQGraphicsItemGroup, event: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void {.base.} =
   QGraphicsItemGroupmouseReleaseEvent(self[], event)
 proc fcQGraphicsItemGroup_method_callback_mouseReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsItemGroup](fcQGraphicsItemGroup_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event, owned: false)
   inst.mouseReleaseEvent(slotval1)
 
 method mouseDoubleClickEvent*(self: VirtualQGraphicsItemGroup, event: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void {.base.} =
   QGraphicsItemGroupmouseDoubleClickEvent(self[], event)
 proc fcQGraphicsItemGroup_method_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsItemGroup](fcQGraphicsItemGroup_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event, owned: false)
   inst.mouseDoubleClickEvent(slotval1)
 
 method wheelEvent*(self: VirtualQGraphicsItemGroup, event: gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent): void {.base.} =
   QGraphicsItemGroupwheelEvent(self[], event)
 proc fcQGraphicsItemGroup_method_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsItemGroup](fcQGraphicsItemGroup_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent(h: event, owned: false)
   inst.wheelEvent(slotval1)
 
 method inputMethodEvent*(self: VirtualQGraphicsItemGroup, event: gen_qevent_types.QInputMethodEvent): void {.base.} =
   QGraphicsItemGroupinputMethodEvent(self[], event)
 proc fcQGraphicsItemGroup_method_callback_inputMethodEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsItemGroup](fcQGraphicsItemGroup_vdata(self)[])
-  let slotval1 = gen_qevent_types.QInputMethodEvent(h: event)
+  let slotval1 = gen_qevent_types.QInputMethodEvent(h: event, owned: false)
   inst.inputMethodEvent(slotval1)
 
 method inputMethodQuery*(self: VirtualQGraphicsItemGroup, query: cint): gen_qvariant_types.QVariant {.base.} =
@@ -15673,7 +15869,7 @@ method itemChange*(self: VirtualQGraphicsItemGroup, change: cint, value: gen_qva
 proc fcQGraphicsItemGroup_method_callback_itemChange(self: pointer, change: cint, value: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsItemGroup](fcQGraphicsItemGroup_vdata(self)[])
   let slotval1 = cint(change)
-  let slotval2 = gen_qvariant_types.QVariant(h: value)
+  let slotval2 = gen_qvariant_types.QVariant(h: value, owned: false)
   var virtualReturn = inst.itemChange(slotval1, slotval2)
   virtualReturn.h
 
@@ -15690,14 +15886,14 @@ method setExtension*(self: VirtualQGraphicsItemGroup, extension: cint, variant: 
 proc fcQGraphicsItemGroup_method_callback_setExtension(self: pointer, extension: cint, variant: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsItemGroup](fcQGraphicsItemGroup_vdata(self)[])
   let slotval1 = cint(extension)
-  let slotval2 = gen_qvariant_types.QVariant(h: variant)
+  let slotval2 = gen_qvariant_types.QVariant(h: variant, owned: false)
   inst.setExtension(slotval1, slotval2)
 
 method extension*(self: VirtualQGraphicsItemGroup, variant: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant {.base.} =
   QGraphicsItemGroupextension(self[], variant)
 proc fcQGraphicsItemGroup_method_callback_extension(self: pointer, variant: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsItemGroup](fcQGraphicsItemGroup_vdata(self)[])
-  let slotval1 = gen_qvariant_types.QVariant(h: variant)
+  let slotval1 = gen_qvariant_types.QVariant(h: variant, owned: false)
   var virtualReturn = inst.extension(slotval1)
   virtualReturn.h
 
@@ -15790,7 +15986,7 @@ proc create*(T: type gen_qgraphicsitem_types.QGraphicsItemGroup,
     vtbl[].vtbl.setExtension = fcQGraphicsItemGroup_vtable_callback_setExtension
   if not isNil(vtbl[].extension):
     vtbl[].vtbl.extension = fcQGraphicsItemGroup_vtable_callback_extension
-  let tmp = gen_qgraphicsitem_types.QGraphicsItemGroup(h: fcQGraphicsItemGroup_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))))
+  let tmp = gen_qgraphicsitem_types.QGraphicsItemGroup(h: fcQGraphicsItemGroup_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))), owned: true)
   fcQGraphicsItemGroup_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qgraphicsitem_types.QGraphicsItemGroup,
@@ -15871,13 +16067,14 @@ proc create*(T: type gen_qgraphicsitem_types.QGraphicsItemGroup,
     vtbl[].vtbl.setExtension = fcQGraphicsItemGroup_vtable_callback_setExtension
   if not isNil(vtbl[].extension):
     vtbl[].vtbl.extension = fcQGraphicsItemGroup_vtable_callback_extension
-  let tmp = gen_qgraphicsitem_types.QGraphicsItemGroup(h: fcQGraphicsItemGroup_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h))
+  let tmp = gen_qgraphicsitem_types.QGraphicsItemGroup(h: fcQGraphicsItemGroup_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h), owned: true)
   fcQGraphicsItemGroup_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQGraphicsItemGroup_mvtbl = cQGraphicsItemGroupVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQGraphicsItemGroup()[])](self.fcQGraphicsItemGroup_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   boundingRect: fcQGraphicsItemGroup_method_callback_boundingRect,
   paint: fcQGraphicsItemGroup_method_callback_paint,
@@ -15928,5 +16125,3 @@ proc create*(T: type gen_qgraphicsitem_types.QGraphicsItemGroup,
   inst[].h = fcQGraphicsItemGroup_new2(addr(cQGraphicsItemGroup_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQGraphicsItemGroup_vdata(inst[].h)[] = addr inst[]
 
-proc delete*(self: gen_qgraphicsitem_types.QGraphicsItemGroup) =
-  fcQGraphicsItemGroup_delete(self.h)

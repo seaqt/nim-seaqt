@@ -32,9 +32,6 @@ func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
     else:
       copyMem(addr result[0], v.data, len)
 
-const cflags = gorge("pkg-config --cflags Qt6Network")  & " -fPIC"
-{.compile("gen_qocspresponse.cpp", cflags).}
-
 
 type QOcspCertificateStatusEnum* = distinct cint
 template Good*(_: type QOcspCertificateStatusEnum): untyped = 0
@@ -72,7 +69,6 @@ proc fcQOcspResponse_subject(self: pointer): pointer {.importc: "QOcspResponse_s
 proc fcQOcspResponse_swap(self: pointer, other: pointer): void {.importc: "QOcspResponse_swap".}
 proc fcQOcspResponse_new(): ptr cQOcspResponse {.importc: "QOcspResponse_new".}
 proc fcQOcspResponse_new2(other: pointer): ptr cQOcspResponse {.importc: "QOcspResponse_new2".}
-proc fcQOcspResponse_delete(self: pointer) {.importc: "QOcspResponse_delete".}
 
 proc operatorAssign*(self: gen_qocspresponse_types.QOcspResponse, other: gen_qocspresponse_types.QOcspResponse): void =
   fcQOcspResponse_operatorAssign(self.h, other.h)
@@ -84,20 +80,18 @@ proc revocationReason*(self: gen_qocspresponse_types.QOcspResponse): cint =
   cint(fcQOcspResponse_revocationReason(self.h))
 
 proc responder*(self: gen_qocspresponse_types.QOcspResponse): gen_qsslcertificate_types.QSslCertificate =
-  gen_qsslcertificate_types.QSslCertificate(h: fcQOcspResponse_responder(self.h))
+  gen_qsslcertificate_types.QSslCertificate(h: fcQOcspResponse_responder(self.h), owned: true)
 
 proc subject*(self: gen_qocspresponse_types.QOcspResponse): gen_qsslcertificate_types.QSslCertificate =
-  gen_qsslcertificate_types.QSslCertificate(h: fcQOcspResponse_subject(self.h))
+  gen_qsslcertificate_types.QSslCertificate(h: fcQOcspResponse_subject(self.h), owned: true)
 
 proc swap*(self: gen_qocspresponse_types.QOcspResponse, other: gen_qocspresponse_types.QOcspResponse): void =
   fcQOcspResponse_swap(self.h, other.h)
 
 proc create*(T: type gen_qocspresponse_types.QOcspResponse): gen_qocspresponse_types.QOcspResponse =
-  let tmp = gen_qocspresponse_types.QOcspResponse(h: fcQOcspResponse_new())
+  let tmp = gen_qocspresponse_types.QOcspResponse(h: fcQOcspResponse_new(), owned: true)
   tmp
 proc create*(T: type gen_qocspresponse_types.QOcspResponse,
     other: gen_qocspresponse_types.QOcspResponse): gen_qocspresponse_types.QOcspResponse =
-  let tmp = gen_qocspresponse_types.QOcspResponse(h: fcQOcspResponse_new2(other.h))
+  let tmp = gen_qocspresponse_types.QOcspResponse(h: fcQOcspResponse_new2(other.h), owned: true)
   tmp
-proc delete*(self: gen_qocspresponse_types.QOcspResponse) =
-  fcQOcspResponse_delete(self.h)

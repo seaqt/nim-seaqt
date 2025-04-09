@@ -32,7 +32,7 @@ func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
     else:
       copyMem(addr result[0], v.data, len)
 
-const cflags = gorge("pkg-config --cflags Qt6Widgets")  & " -fPIC"
+const cflags = gorge("pkg-config --cflags Qt6Widgets") & " -fPIC"
 {.compile("gen_qgraphicsproxywidget.cpp", cflags).}
 
 
@@ -246,10 +246,9 @@ proc fcQGraphicsProxyWidget_new(vtbl: pointer, vdata: csize_t): ptr cQGraphicsPr
 proc fcQGraphicsProxyWidget_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQGraphicsProxyWidget {.importc: "QGraphicsProxyWidget_new2".}
 proc fcQGraphicsProxyWidget_new3(vtbl: pointer, vdata: csize_t, parent: pointer, wFlags: cint): ptr cQGraphicsProxyWidget {.importc: "QGraphicsProxyWidget_new3".}
 proc fcQGraphicsProxyWidget_staticMetaObject(): pointer {.importc: "QGraphicsProxyWidget_staticMetaObject".}
-proc fcQGraphicsProxyWidget_delete(self: pointer) {.importc: "QGraphicsProxyWidget_delete".}
 
 proc metaObject*(self: gen_qgraphicsproxywidget_types.QGraphicsProxyWidget): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQGraphicsProxyWidget_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQGraphicsProxyWidget_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qgraphicsproxywidget_types.QGraphicsProxyWidget, param1: cstring): pointer =
   fcQGraphicsProxyWidget_metacast(self.h, param1)
@@ -267,10 +266,10 @@ proc setWidget*(self: gen_qgraphicsproxywidget_types.QGraphicsProxyWidget, widge
   fcQGraphicsProxyWidget_setWidget(self.h, widget.h)
 
 proc widget*(self: gen_qgraphicsproxywidget_types.QGraphicsProxyWidget): gen_qwidget_types.QWidget =
-  gen_qwidget_types.QWidget(h: fcQGraphicsProxyWidget_widget(self.h))
+  gen_qwidget_types.QWidget(h: fcQGraphicsProxyWidget_widget(self.h), owned: false)
 
 proc subWidgetRect*(self: gen_qgraphicsproxywidget_types.QGraphicsProxyWidget, widget: gen_qwidget_types.QWidget): gen_qrect_types.QRectF =
-  gen_qrect_types.QRectF(h: fcQGraphicsProxyWidget_subWidgetRect(self.h, widget.h))
+  gen_qrect_types.QRectF(h: fcQGraphicsProxyWidget_subWidgetRect(self.h, widget.h), owned: true)
 
 proc setGeometry*(self: gen_qgraphicsproxywidget_types.QGraphicsProxyWidget, rect: gen_qrect_types.QRectF): void =
   fcQGraphicsProxyWidget_setGeometry(self.h, rect.h)
@@ -282,7 +281,7 @@ proc typeX*(self: gen_qgraphicsproxywidget_types.QGraphicsProxyWidget): cint =
   fcQGraphicsProxyWidget_typeX(self.h)
 
 proc createProxyForChildWidget*(self: gen_qgraphicsproxywidget_types.QGraphicsProxyWidget, child: gen_qwidget_types.QWidget): gen_qgraphicsproxywidget_types.QGraphicsProxyWidget =
-  gen_qgraphicsproxywidget_types.QGraphicsProxyWidget(h: fcQGraphicsProxyWidget_createProxyForChildWidget(self.h, child.h))
+  gen_qgraphicsproxywidget_types.QGraphicsProxyWidget(h: fcQGraphicsProxyWidget_createProxyForChildWidget(self.h, child.h), owned: false)
 
 proc tr*(_: type gen_qgraphicsproxywidget_types.QGraphicsProxyWidget, s: cstring, c: cstring): string =
   let v_ms = fcQGraphicsProxyWidget_tr2(s, c)
@@ -363,7 +362,7 @@ type QGraphicsProxyWidgetsupportsExtensionProc* = proc(self: QGraphicsProxyWidge
 type QGraphicsProxyWidgetsetExtensionProc* = proc(self: QGraphicsProxyWidget, extension: cint, variant: gen_qvariant_types.QVariant): void {.raises: [], gcsafe.}
 type QGraphicsProxyWidgetextensionProc* = proc(self: QGraphicsProxyWidget, variant: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant {.raises: [], gcsafe.}
 type QGraphicsProxyWidgetisEmptyProc* = proc(self: QGraphicsProxyWidget): bool {.raises: [], gcsafe.}
-type QGraphicsProxyWidgetVTable* = object
+type QGraphicsProxyWidgetVTable* {.inheritable, pure.} = object
   vtbl: cQGraphicsProxyWidgetVTable
   metaObject*: QGraphicsProxyWidgetmetaObjectProc
   metacast*: QGraphicsProxyWidgetmetacastProc
@@ -433,13 +432,16 @@ type QGraphicsProxyWidgetVTable* = object
   extension*: QGraphicsProxyWidgetextensionProc
   isEmpty*: QGraphicsProxyWidgetisEmptyProc
 proc QGraphicsProxyWidgetmetaObject*(self: gen_qgraphicsproxywidget_types.QGraphicsProxyWidget): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQGraphicsProxyWidget_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQGraphicsProxyWidget_virtualbase_metaObject(self.h), owned: false)
 
 proc fcQGraphicsProxyWidget_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QGraphicsProxyWidgetVTable](fcQGraphicsProxyWidget_vdata(self)[])
   let self = QGraphicsProxyWidget(h: self)
   var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QGraphicsProxyWidgetmetacast*(self: gen_qgraphicsproxywidget_types.QGraphicsProxyWidget, param1: cstring): pointer =
   fcQGraphicsProxyWidget_virtualbase_metacast(self.h, param1)
@@ -469,7 +471,7 @@ proc QGraphicsProxyWidgetsetGeometry*(self: gen_qgraphicsproxywidget_types.QGrap
 proc fcQGraphicsProxyWidget_vtable_callback_setGeometry(self: pointer, rect: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsProxyWidgetVTable](fcQGraphicsProxyWidget_vdata(self)[])
   let self = QGraphicsProxyWidget(h: self)
-  let slotval1 = gen_qrect_types.QRectF(h: rect)
+  let slotval1 = gen_qrect_types.QRectF(h: rect, owned: false)
   vtbl[].setGeometry(self, slotval1)
 
 proc QGraphicsProxyWidgetpaint*(self: gen_qgraphicsproxywidget_types.QGraphicsProxyWidget, painter: gen_qpainter_types.QPainter, option: gen_qstyleoption_types.QStyleOptionGraphicsItem, widget: gen_qwidget_types.QWidget): void =
@@ -478,9 +480,9 @@ proc QGraphicsProxyWidgetpaint*(self: gen_qgraphicsproxywidget_types.QGraphicsPr
 proc fcQGraphicsProxyWidget_vtable_callback_paint(self: pointer, painter: pointer, option: pointer, widget: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsProxyWidgetVTable](fcQGraphicsProxyWidget_vdata(self)[])
   let self = QGraphicsProxyWidget(h: self)
-  let slotval1 = gen_qpainter_types.QPainter(h: painter)
-  let slotval2 = gen_qstyleoption_types.QStyleOptionGraphicsItem(h: option)
-  let slotval3 = gen_qwidget_types.QWidget(h: widget)
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
+  let slotval2 = gen_qstyleoption_types.QStyleOptionGraphicsItem(h: option, owned: false)
+  let slotval3 = gen_qwidget_types.QWidget(h: widget, owned: false)
   vtbl[].paint(self, slotval1, slotval2, slotval3)
 
 proc QGraphicsProxyWidgettypeX*(self: gen_qgraphicsproxywidget_types.QGraphicsProxyWidget): cint =
@@ -493,15 +495,18 @@ proc fcQGraphicsProxyWidget_vtable_callback_typeX(self: pointer): cint {.cdecl.}
   virtualReturn
 
 proc QGraphicsProxyWidgetitemChange*(self: gen_qgraphicsproxywidget_types.QGraphicsProxyWidget, change: cint, value: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQGraphicsProxyWidget_virtualbase_itemChange(self.h, cint(change), value.h))
+  gen_qvariant_types.QVariant(h: fcQGraphicsProxyWidget_virtualbase_itemChange(self.h, cint(change), value.h), owned: true)
 
 proc fcQGraphicsProxyWidget_vtable_callback_itemChange(self: pointer, change: cint, value: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QGraphicsProxyWidgetVTable](fcQGraphicsProxyWidget_vdata(self)[])
   let self = QGraphicsProxyWidget(h: self)
   let slotval1 = cint(change)
-  let slotval2 = gen_qvariant_types.QVariant(h: value)
+  let slotval2 = gen_qvariant_types.QVariant(h: value, owned: false)
   var virtualReturn = vtbl[].itemChange(self, slotval1, slotval2)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QGraphicsProxyWidgetevent*(self: gen_qgraphicsproxywidget_types.QGraphicsProxyWidget, event: gen_qcoreevent_types.QEvent): bool =
   fcQGraphicsProxyWidget_virtualbase_event(self.h, event.h)
@@ -509,7 +514,7 @@ proc QGraphicsProxyWidgetevent*(self: gen_qgraphicsproxywidget_types.QGraphicsPr
 proc fcQGraphicsProxyWidget_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QGraphicsProxyWidgetVTable](fcQGraphicsProxyWidget_vdata(self)[])
   let self = QGraphicsProxyWidget(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
@@ -519,8 +524,8 @@ proc QGraphicsProxyWidgeteventFilter*(self: gen_qgraphicsproxywidget_types.QGrap
 proc fcQGraphicsProxyWidget_vtable_callback_eventFilter(self: pointer, objectVal: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QGraphicsProxyWidgetVTable](fcQGraphicsProxyWidget_vdata(self)[])
   let self = QGraphicsProxyWidget(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: objectVal)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: objectVal, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
@@ -530,7 +535,7 @@ proc QGraphicsProxyWidgetshowEvent*(self: gen_qgraphicsproxywidget_types.QGraphi
 proc fcQGraphicsProxyWidget_vtable_callback_showEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsProxyWidgetVTable](fcQGraphicsProxyWidget_vdata(self)[])
   let self = QGraphicsProxyWidget(h: self)
-  let slotval1 = gen_qevent_types.QShowEvent(h: event)
+  let slotval1 = gen_qevent_types.QShowEvent(h: event, owned: false)
   vtbl[].showEvent(self, slotval1)
 
 proc QGraphicsProxyWidgethideEvent*(self: gen_qgraphicsproxywidget_types.QGraphicsProxyWidget, event: gen_qevent_types.QHideEvent): void =
@@ -539,7 +544,7 @@ proc QGraphicsProxyWidgethideEvent*(self: gen_qgraphicsproxywidget_types.QGraphi
 proc fcQGraphicsProxyWidget_vtable_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsProxyWidgetVTable](fcQGraphicsProxyWidget_vdata(self)[])
   let self = QGraphicsProxyWidget(h: self)
-  let slotval1 = gen_qevent_types.QHideEvent(h: event)
+  let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   vtbl[].hideEvent(self, slotval1)
 
 proc QGraphicsProxyWidgetcontextMenuEvent*(self: gen_qgraphicsproxywidget_types.QGraphicsProxyWidget, event: gen_qgraphicssceneevent_types.QGraphicsSceneContextMenuEvent): void =
@@ -548,7 +553,7 @@ proc QGraphicsProxyWidgetcontextMenuEvent*(self: gen_qgraphicsproxywidget_types.
 proc fcQGraphicsProxyWidget_vtable_callback_contextMenuEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsProxyWidgetVTable](fcQGraphicsProxyWidget_vdata(self)[])
   let self = QGraphicsProxyWidget(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneContextMenuEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneContextMenuEvent(h: event, owned: false)
   vtbl[].contextMenuEvent(self, slotval1)
 
 proc QGraphicsProxyWidgetdragEnterEvent*(self: gen_qgraphicsproxywidget_types.QGraphicsProxyWidget, event: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void =
@@ -557,7 +562,7 @@ proc QGraphicsProxyWidgetdragEnterEvent*(self: gen_qgraphicsproxywidget_types.QG
 proc fcQGraphicsProxyWidget_vtable_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsProxyWidgetVTable](fcQGraphicsProxyWidget_vdata(self)[])
   let self = QGraphicsProxyWidget(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event, owned: false)
   vtbl[].dragEnterEvent(self, slotval1)
 
 proc QGraphicsProxyWidgetdragLeaveEvent*(self: gen_qgraphicsproxywidget_types.QGraphicsProxyWidget, event: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void =
@@ -566,7 +571,7 @@ proc QGraphicsProxyWidgetdragLeaveEvent*(self: gen_qgraphicsproxywidget_types.QG
 proc fcQGraphicsProxyWidget_vtable_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsProxyWidgetVTable](fcQGraphicsProxyWidget_vdata(self)[])
   let self = QGraphicsProxyWidget(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event, owned: false)
   vtbl[].dragLeaveEvent(self, slotval1)
 
 proc QGraphicsProxyWidgetdragMoveEvent*(self: gen_qgraphicsproxywidget_types.QGraphicsProxyWidget, event: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void =
@@ -575,7 +580,7 @@ proc QGraphicsProxyWidgetdragMoveEvent*(self: gen_qgraphicsproxywidget_types.QGr
 proc fcQGraphicsProxyWidget_vtable_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsProxyWidgetVTable](fcQGraphicsProxyWidget_vdata(self)[])
   let self = QGraphicsProxyWidget(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event, owned: false)
   vtbl[].dragMoveEvent(self, slotval1)
 
 proc QGraphicsProxyWidgetdropEvent*(self: gen_qgraphicsproxywidget_types.QGraphicsProxyWidget, event: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void =
@@ -584,7 +589,7 @@ proc QGraphicsProxyWidgetdropEvent*(self: gen_qgraphicsproxywidget_types.QGraphi
 proc fcQGraphicsProxyWidget_vtable_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsProxyWidgetVTable](fcQGraphicsProxyWidget_vdata(self)[])
   let self = QGraphicsProxyWidget(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event, owned: false)
   vtbl[].dropEvent(self, slotval1)
 
 proc QGraphicsProxyWidgethoverEnterEvent*(self: gen_qgraphicsproxywidget_types.QGraphicsProxyWidget, event: gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent): void =
@@ -593,7 +598,7 @@ proc QGraphicsProxyWidgethoverEnterEvent*(self: gen_qgraphicsproxywidget_types.Q
 proc fcQGraphicsProxyWidget_vtable_callback_hoverEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsProxyWidgetVTable](fcQGraphicsProxyWidget_vdata(self)[])
   let self = QGraphicsProxyWidget(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event, owned: false)
   vtbl[].hoverEnterEvent(self, slotval1)
 
 proc QGraphicsProxyWidgethoverLeaveEvent*(self: gen_qgraphicsproxywidget_types.QGraphicsProxyWidget, event: gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent): void =
@@ -602,7 +607,7 @@ proc QGraphicsProxyWidgethoverLeaveEvent*(self: gen_qgraphicsproxywidget_types.Q
 proc fcQGraphicsProxyWidget_vtable_callback_hoverLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsProxyWidgetVTable](fcQGraphicsProxyWidget_vdata(self)[])
   let self = QGraphicsProxyWidget(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event, owned: false)
   vtbl[].hoverLeaveEvent(self, slotval1)
 
 proc QGraphicsProxyWidgethoverMoveEvent*(self: gen_qgraphicsproxywidget_types.QGraphicsProxyWidget, event: gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent): void =
@@ -611,7 +616,7 @@ proc QGraphicsProxyWidgethoverMoveEvent*(self: gen_qgraphicsproxywidget_types.QG
 proc fcQGraphicsProxyWidget_vtable_callback_hoverMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsProxyWidgetVTable](fcQGraphicsProxyWidget_vdata(self)[])
   let self = QGraphicsProxyWidget(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event, owned: false)
   vtbl[].hoverMoveEvent(self, slotval1)
 
 proc QGraphicsProxyWidgetgrabMouseEvent*(self: gen_qgraphicsproxywidget_types.QGraphicsProxyWidget, event: gen_qcoreevent_types.QEvent): void =
@@ -620,7 +625,7 @@ proc QGraphicsProxyWidgetgrabMouseEvent*(self: gen_qgraphicsproxywidget_types.QG
 proc fcQGraphicsProxyWidget_vtable_callback_grabMouseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsProxyWidgetVTable](fcQGraphicsProxyWidget_vdata(self)[])
   let self = QGraphicsProxyWidget(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].grabMouseEvent(self, slotval1)
 
 proc QGraphicsProxyWidgetungrabMouseEvent*(self: gen_qgraphicsproxywidget_types.QGraphicsProxyWidget, event: gen_qcoreevent_types.QEvent): void =
@@ -629,7 +634,7 @@ proc QGraphicsProxyWidgetungrabMouseEvent*(self: gen_qgraphicsproxywidget_types.
 proc fcQGraphicsProxyWidget_vtable_callback_ungrabMouseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsProxyWidgetVTable](fcQGraphicsProxyWidget_vdata(self)[])
   let self = QGraphicsProxyWidget(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].ungrabMouseEvent(self, slotval1)
 
 proc QGraphicsProxyWidgetmouseMoveEvent*(self: gen_qgraphicsproxywidget_types.QGraphicsProxyWidget, event: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void =
@@ -638,7 +643,7 @@ proc QGraphicsProxyWidgetmouseMoveEvent*(self: gen_qgraphicsproxywidget_types.QG
 proc fcQGraphicsProxyWidget_vtable_callback_mouseMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsProxyWidgetVTable](fcQGraphicsProxyWidget_vdata(self)[])
   let self = QGraphicsProxyWidget(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event, owned: false)
   vtbl[].mouseMoveEvent(self, slotval1)
 
 proc QGraphicsProxyWidgetmousePressEvent*(self: gen_qgraphicsproxywidget_types.QGraphicsProxyWidget, event: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void =
@@ -647,7 +652,7 @@ proc QGraphicsProxyWidgetmousePressEvent*(self: gen_qgraphicsproxywidget_types.Q
 proc fcQGraphicsProxyWidget_vtable_callback_mousePressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsProxyWidgetVTable](fcQGraphicsProxyWidget_vdata(self)[])
   let self = QGraphicsProxyWidget(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event, owned: false)
   vtbl[].mousePressEvent(self, slotval1)
 
 proc QGraphicsProxyWidgetmouseReleaseEvent*(self: gen_qgraphicsproxywidget_types.QGraphicsProxyWidget, event: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void =
@@ -656,7 +661,7 @@ proc QGraphicsProxyWidgetmouseReleaseEvent*(self: gen_qgraphicsproxywidget_types
 proc fcQGraphicsProxyWidget_vtable_callback_mouseReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsProxyWidgetVTable](fcQGraphicsProxyWidget_vdata(self)[])
   let self = QGraphicsProxyWidget(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event, owned: false)
   vtbl[].mouseReleaseEvent(self, slotval1)
 
 proc QGraphicsProxyWidgetmouseDoubleClickEvent*(self: gen_qgraphicsproxywidget_types.QGraphicsProxyWidget, event: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void =
@@ -665,7 +670,7 @@ proc QGraphicsProxyWidgetmouseDoubleClickEvent*(self: gen_qgraphicsproxywidget_t
 proc fcQGraphicsProxyWidget_vtable_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsProxyWidgetVTable](fcQGraphicsProxyWidget_vdata(self)[])
   let self = QGraphicsProxyWidget(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event, owned: false)
   vtbl[].mouseDoubleClickEvent(self, slotval1)
 
 proc QGraphicsProxyWidgetwheelEvent*(self: gen_qgraphicsproxywidget_types.QGraphicsProxyWidget, event: gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent): void =
@@ -674,7 +679,7 @@ proc QGraphicsProxyWidgetwheelEvent*(self: gen_qgraphicsproxywidget_types.QGraph
 proc fcQGraphicsProxyWidget_vtable_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsProxyWidgetVTable](fcQGraphicsProxyWidget_vdata(self)[])
   let self = QGraphicsProxyWidget(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent(h: event, owned: false)
   vtbl[].wheelEvent(self, slotval1)
 
 proc QGraphicsProxyWidgetkeyPressEvent*(self: gen_qgraphicsproxywidget_types.QGraphicsProxyWidget, event: gen_qevent_types.QKeyEvent): void =
@@ -683,7 +688,7 @@ proc QGraphicsProxyWidgetkeyPressEvent*(self: gen_qgraphicsproxywidget_types.QGr
 proc fcQGraphicsProxyWidget_vtable_callback_keyPressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsProxyWidgetVTable](fcQGraphicsProxyWidget_vdata(self)[])
   let self = QGraphicsProxyWidget(h: self)
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   vtbl[].keyPressEvent(self, slotval1)
 
 proc QGraphicsProxyWidgetkeyReleaseEvent*(self: gen_qgraphicsproxywidget_types.QGraphicsProxyWidget, event: gen_qevent_types.QKeyEvent): void =
@@ -692,7 +697,7 @@ proc QGraphicsProxyWidgetkeyReleaseEvent*(self: gen_qgraphicsproxywidget_types.Q
 proc fcQGraphicsProxyWidget_vtable_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsProxyWidgetVTable](fcQGraphicsProxyWidget_vdata(self)[])
   let self = QGraphicsProxyWidget(h: self)
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   vtbl[].keyReleaseEvent(self, slotval1)
 
 proc QGraphicsProxyWidgetfocusInEvent*(self: gen_qgraphicsproxywidget_types.QGraphicsProxyWidget, event: gen_qevent_types.QFocusEvent): void =
@@ -701,7 +706,7 @@ proc QGraphicsProxyWidgetfocusInEvent*(self: gen_qgraphicsproxywidget_types.QGra
 proc fcQGraphicsProxyWidget_vtable_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsProxyWidgetVTable](fcQGraphicsProxyWidget_vdata(self)[])
   let self = QGraphicsProxyWidget(h: self)
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusInEvent(self, slotval1)
 
 proc QGraphicsProxyWidgetfocusOutEvent*(self: gen_qgraphicsproxywidget_types.QGraphicsProxyWidget, event: gen_qevent_types.QFocusEvent): void =
@@ -710,7 +715,7 @@ proc QGraphicsProxyWidgetfocusOutEvent*(self: gen_qgraphicsproxywidget_types.QGr
 proc fcQGraphicsProxyWidget_vtable_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsProxyWidgetVTable](fcQGraphicsProxyWidget_vdata(self)[])
   let self = QGraphicsProxyWidget(h: self)
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusOutEvent(self, slotval1)
 
 proc QGraphicsProxyWidgetfocusNextPrevChild*(self: gen_qgraphicsproxywidget_types.QGraphicsProxyWidget, next: bool): bool =
@@ -724,14 +729,17 @@ proc fcQGraphicsProxyWidget_vtable_callback_focusNextPrevChild(self: pointer, ne
   virtualReturn
 
 proc QGraphicsProxyWidgetinputMethodQuery*(self: gen_qgraphicsproxywidget_types.QGraphicsProxyWidget, query: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQGraphicsProxyWidget_virtualbase_inputMethodQuery(self.h, cint(query)))
+  gen_qvariant_types.QVariant(h: fcQGraphicsProxyWidget_virtualbase_inputMethodQuery(self.h, cint(query)), owned: true)
 
 proc fcQGraphicsProxyWidget_vtable_callback_inputMethodQuery(self: pointer, query: cint): pointer {.cdecl.} =
   let vtbl = cast[ptr QGraphicsProxyWidgetVTable](fcQGraphicsProxyWidget_vdata(self)[])
   let self = QGraphicsProxyWidget(h: self)
   let slotval1 = cint(query)
   var virtualReturn = vtbl[].inputMethodQuery(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QGraphicsProxyWidgetinputMethodEvent*(self: gen_qgraphicsproxywidget_types.QGraphicsProxyWidget, event: gen_qevent_types.QInputMethodEvent): void =
   fcQGraphicsProxyWidget_virtualbase_inputMethodEvent(self.h, event.h)
@@ -739,19 +747,22 @@ proc QGraphicsProxyWidgetinputMethodEvent*(self: gen_qgraphicsproxywidget_types.
 proc fcQGraphicsProxyWidget_vtable_callback_inputMethodEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsProxyWidgetVTable](fcQGraphicsProxyWidget_vdata(self)[])
   let self = QGraphicsProxyWidget(h: self)
-  let slotval1 = gen_qevent_types.QInputMethodEvent(h: event)
+  let slotval1 = gen_qevent_types.QInputMethodEvent(h: event, owned: false)
   vtbl[].inputMethodEvent(self, slotval1)
 
 proc QGraphicsProxyWidgetsizeHint*(self: gen_qgraphicsproxywidget_types.QGraphicsProxyWidget, which: cint, constraint: gen_qsize_types.QSizeF): gen_qsize_types.QSizeF =
-  gen_qsize_types.QSizeF(h: fcQGraphicsProxyWidget_virtualbase_sizeHint(self.h, cint(which), constraint.h))
+  gen_qsize_types.QSizeF(h: fcQGraphicsProxyWidget_virtualbase_sizeHint(self.h, cint(which), constraint.h), owned: true)
 
 proc fcQGraphicsProxyWidget_vtable_callback_sizeHint(self: pointer, which: cint, constraint: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QGraphicsProxyWidgetVTable](fcQGraphicsProxyWidget_vdata(self)[])
   let self = QGraphicsProxyWidget(h: self)
   let slotval1 = cint(which)
-  let slotval2 = gen_qsize_types.QSizeF(h: constraint)
+  let slotval2 = gen_qsize_types.QSizeF(h: constraint, owned: false)
   var virtualReturn = vtbl[].sizeHint(self, slotval1, slotval2)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QGraphicsProxyWidgetresizeEvent*(self: gen_qgraphicsproxywidget_types.QGraphicsProxyWidget, event: gen_qgraphicssceneevent_types.QGraphicsSceneResizeEvent): void =
   fcQGraphicsProxyWidget_virtualbase_resizeEvent(self.h, event.h)
@@ -759,7 +770,7 @@ proc QGraphicsProxyWidgetresizeEvent*(self: gen_qgraphicsproxywidget_types.QGrap
 proc fcQGraphicsProxyWidget_vtable_callback_resizeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsProxyWidgetVTable](fcQGraphicsProxyWidget_vdata(self)[])
   let self = QGraphicsProxyWidget(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneResizeEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneResizeEvent(h: event, owned: false)
   vtbl[].resizeEvent(self, slotval1)
 
 proc QGraphicsProxyWidgetgetContentsMargins*(self: gen_qgraphicsproxywidget_types.QGraphicsProxyWidget, left: ptr float64, top: ptr float64, right: ptr float64, bottom: ptr float64): void =
@@ -780,28 +791,34 @@ proc QGraphicsProxyWidgetpaintWindowFrame*(self: gen_qgraphicsproxywidget_types.
 proc fcQGraphicsProxyWidget_vtable_callback_paintWindowFrame(self: pointer, painter: pointer, option: pointer, widget: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsProxyWidgetVTable](fcQGraphicsProxyWidget_vdata(self)[])
   let self = QGraphicsProxyWidget(h: self)
-  let slotval1 = gen_qpainter_types.QPainter(h: painter)
-  let slotval2 = gen_qstyleoption_types.QStyleOptionGraphicsItem(h: option)
-  let slotval3 = gen_qwidget_types.QWidget(h: widget)
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
+  let slotval2 = gen_qstyleoption_types.QStyleOptionGraphicsItem(h: option, owned: false)
+  let slotval3 = gen_qwidget_types.QWidget(h: widget, owned: false)
   vtbl[].paintWindowFrame(self, slotval1, slotval2, slotval3)
 
 proc QGraphicsProxyWidgetboundingRect*(self: gen_qgraphicsproxywidget_types.QGraphicsProxyWidget): gen_qrect_types.QRectF =
-  gen_qrect_types.QRectF(h: fcQGraphicsProxyWidget_virtualbase_boundingRect(self.h))
+  gen_qrect_types.QRectF(h: fcQGraphicsProxyWidget_virtualbase_boundingRect(self.h), owned: true)
 
 proc fcQGraphicsProxyWidget_vtable_callback_boundingRect(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QGraphicsProxyWidgetVTable](fcQGraphicsProxyWidget_vdata(self)[])
   let self = QGraphicsProxyWidget(h: self)
   var virtualReturn = vtbl[].boundingRect(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QGraphicsProxyWidgetshape*(self: gen_qgraphicsproxywidget_types.QGraphicsProxyWidget): gen_qpainterpath_types.QPainterPath =
-  gen_qpainterpath_types.QPainterPath(h: fcQGraphicsProxyWidget_virtualbase_shape(self.h))
+  gen_qpainterpath_types.QPainterPath(h: fcQGraphicsProxyWidget_virtualbase_shape(self.h), owned: true)
 
 proc fcQGraphicsProxyWidget_vtable_callback_shape(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QGraphicsProxyWidgetVTable](fcQGraphicsProxyWidget_vdata(self)[])
   let self = QGraphicsProxyWidget(h: self)
   var virtualReturn = vtbl[].shape(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QGraphicsProxyWidgetinitStyleOption*(self: gen_qgraphicsproxywidget_types.QGraphicsProxyWidget, option: gen_qstyleoption_types.QStyleOption): void =
   fcQGraphicsProxyWidget_virtualbase_initStyleOption(self.h, option.h)
@@ -809,7 +826,7 @@ proc QGraphicsProxyWidgetinitStyleOption*(self: gen_qgraphicsproxywidget_types.Q
 proc fcQGraphicsProxyWidget_vtable_callback_initStyleOption(self: pointer, option: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsProxyWidgetVTable](fcQGraphicsProxyWidget_vdata(self)[])
   let self = QGraphicsProxyWidget(h: self)
-  let slotval1 = gen_qstyleoption_types.QStyleOption(h: option)
+  let slotval1 = gen_qstyleoption_types.QStyleOption(h: option, owned: false)
   vtbl[].initStyleOption(self, slotval1)
 
 proc QGraphicsProxyWidgetupdateGeometry*(self: gen_qgraphicsproxywidget_types.QGraphicsProxyWidget): void =
@@ -821,7 +838,7 @@ proc fcQGraphicsProxyWidget_vtable_callback_updateGeometry(self: pointer): void 
   vtbl[].updateGeometry(self)
 
 proc QGraphicsProxyWidgetpropertyChange*(self: gen_qgraphicsproxywidget_types.QGraphicsProxyWidget, propertyName: string, value: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQGraphicsProxyWidget_virtualbase_propertyChange(self.h, struct_miqt_string(data: if len(propertyName) > 0: addr propertyName[0] else: nil, len: csize_t(len(propertyName))), value.h))
+  gen_qvariant_types.QVariant(h: fcQGraphicsProxyWidget_virtualbase_propertyChange(self.h, struct_miqt_string(data: if len(propertyName) > 0: addr propertyName[0] else: nil, len: csize_t(len(propertyName))), value.h), owned: true)
 
 proc fcQGraphicsProxyWidget_vtable_callback_propertyChange(self: pointer, propertyName: struct_miqt_string, value: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QGraphicsProxyWidgetVTable](fcQGraphicsProxyWidget_vdata(self)[])
@@ -830,9 +847,12 @@ proc fcQGraphicsProxyWidget_vtable_callback_propertyChange(self: pointer, proper
   let vpropertyNamex_ret = string.fromBytes(vpropertyName_ms)
   c_free(vpropertyName_ms.data)
   let slotval1 = vpropertyNamex_ret
-  let slotval2 = gen_qvariant_types.QVariant(h: value)
+  let slotval2 = gen_qvariant_types.QVariant(h: value, owned: false)
   var virtualReturn = vtbl[].propertyChange(self, slotval1, slotval2)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QGraphicsProxyWidgetsceneEvent*(self: gen_qgraphicsproxywidget_types.QGraphicsProxyWidget, event: gen_qcoreevent_types.QEvent): bool =
   fcQGraphicsProxyWidget_virtualbase_sceneEvent(self.h, event.h)
@@ -840,7 +860,7 @@ proc QGraphicsProxyWidgetsceneEvent*(self: gen_qgraphicsproxywidget_types.QGraph
 proc fcQGraphicsProxyWidget_vtable_callback_sceneEvent(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QGraphicsProxyWidgetVTable](fcQGraphicsProxyWidget_vdata(self)[])
   let self = QGraphicsProxyWidget(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].sceneEvent(self, slotval1)
   virtualReturn
 
@@ -850,7 +870,7 @@ proc QGraphicsProxyWidgetwindowFrameEvent*(self: gen_qgraphicsproxywidget_types.
 proc fcQGraphicsProxyWidget_vtable_callback_windowFrameEvent(self: pointer, e: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QGraphicsProxyWidgetVTable](fcQGraphicsProxyWidget_vdata(self)[])
   let self = QGraphicsProxyWidget(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: e)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: e, owned: false)
   var virtualReturn = vtbl[].windowFrameEvent(self, slotval1)
   virtualReturn
 
@@ -860,7 +880,7 @@ proc QGraphicsProxyWidgetwindowFrameSectionAt*(self: gen_qgraphicsproxywidget_ty
 proc fcQGraphicsProxyWidget_vtable_callback_windowFrameSectionAt(self: pointer, pos: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QGraphicsProxyWidgetVTable](fcQGraphicsProxyWidget_vdata(self)[])
   let self = QGraphicsProxyWidget(h: self)
-  let slotval1 = gen_qpoint_types.QPointF(h: pos)
+  let slotval1 = gen_qpoint_types.QPointF(h: pos, owned: false)
   var virtualReturn = vtbl[].windowFrameSectionAt(self, slotval1)
   cint(virtualReturn)
 
@@ -870,7 +890,7 @@ proc QGraphicsProxyWidgetchangeEvent*(self: gen_qgraphicsproxywidget_types.QGrap
 proc fcQGraphicsProxyWidget_vtable_callback_changeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsProxyWidgetVTable](fcQGraphicsProxyWidget_vdata(self)[])
   let self = QGraphicsProxyWidget(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].changeEvent(self, slotval1)
 
 proc QGraphicsProxyWidgetcloseEvent*(self: gen_qgraphicsproxywidget_types.QGraphicsProxyWidget, event: gen_qevent_types.QCloseEvent): void =
@@ -879,7 +899,7 @@ proc QGraphicsProxyWidgetcloseEvent*(self: gen_qgraphicsproxywidget_types.QGraph
 proc fcQGraphicsProxyWidget_vtable_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsProxyWidgetVTable](fcQGraphicsProxyWidget_vdata(self)[])
   let self = QGraphicsProxyWidget(h: self)
-  let slotval1 = gen_qevent_types.QCloseEvent(h: event)
+  let slotval1 = gen_qevent_types.QCloseEvent(h: event, owned: false)
   vtbl[].closeEvent(self, slotval1)
 
 proc QGraphicsProxyWidgetmoveEvent*(self: gen_qgraphicsproxywidget_types.QGraphicsProxyWidget, event: gen_qgraphicssceneevent_types.QGraphicsSceneMoveEvent): void =
@@ -888,7 +908,7 @@ proc QGraphicsProxyWidgetmoveEvent*(self: gen_qgraphicsproxywidget_types.QGraphi
 proc fcQGraphicsProxyWidget_vtable_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsProxyWidgetVTable](fcQGraphicsProxyWidget_vdata(self)[])
   let self = QGraphicsProxyWidget(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMoveEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMoveEvent(h: event, owned: false)
   vtbl[].moveEvent(self, slotval1)
 
 proc QGraphicsProxyWidgetpolishEvent*(self: gen_qgraphicsproxywidget_types.QGraphicsProxyWidget): void =
@@ -905,7 +925,7 @@ proc QGraphicsProxyWidgetgrabKeyboardEvent*(self: gen_qgraphicsproxywidget_types
 proc fcQGraphicsProxyWidget_vtable_callback_grabKeyboardEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsProxyWidgetVTable](fcQGraphicsProxyWidget_vdata(self)[])
   let self = QGraphicsProxyWidget(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].grabKeyboardEvent(self, slotval1)
 
 proc QGraphicsProxyWidgetungrabKeyboardEvent*(self: gen_qgraphicsproxywidget_types.QGraphicsProxyWidget, event: gen_qcoreevent_types.QEvent): void =
@@ -914,7 +934,7 @@ proc QGraphicsProxyWidgetungrabKeyboardEvent*(self: gen_qgraphicsproxywidget_typ
 proc fcQGraphicsProxyWidget_vtable_callback_ungrabKeyboardEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsProxyWidgetVTable](fcQGraphicsProxyWidget_vdata(self)[])
   let self = QGraphicsProxyWidget(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].ungrabKeyboardEvent(self, slotval1)
 
 proc QGraphicsProxyWidgettimerEvent*(self: gen_qgraphicsproxywidget_types.QGraphicsProxyWidget, event: gen_qcoreevent_types.QTimerEvent): void =
@@ -923,7 +943,7 @@ proc QGraphicsProxyWidgettimerEvent*(self: gen_qgraphicsproxywidget_types.QGraph
 proc fcQGraphicsProxyWidget_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsProxyWidgetVTable](fcQGraphicsProxyWidget_vdata(self)[])
   let self = QGraphicsProxyWidget(h: self)
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
 proc QGraphicsProxyWidgetchildEvent*(self: gen_qgraphicsproxywidget_types.QGraphicsProxyWidget, event: gen_qcoreevent_types.QChildEvent): void =
@@ -932,7 +952,7 @@ proc QGraphicsProxyWidgetchildEvent*(self: gen_qgraphicsproxywidget_types.QGraph
 proc fcQGraphicsProxyWidget_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsProxyWidgetVTable](fcQGraphicsProxyWidget_vdata(self)[])
   let self = QGraphicsProxyWidget(h: self)
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
 proc QGraphicsProxyWidgetcustomEvent*(self: gen_qgraphicsproxywidget_types.QGraphicsProxyWidget, event: gen_qcoreevent_types.QEvent): void =
@@ -941,7 +961,7 @@ proc QGraphicsProxyWidgetcustomEvent*(self: gen_qgraphicsproxywidget_types.QGrap
 proc fcQGraphicsProxyWidget_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsProxyWidgetVTable](fcQGraphicsProxyWidget_vdata(self)[])
   let self = QGraphicsProxyWidget(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
 proc QGraphicsProxyWidgetconnectNotify*(self: gen_qgraphicsproxywidget_types.QGraphicsProxyWidget, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -950,7 +970,7 @@ proc QGraphicsProxyWidgetconnectNotify*(self: gen_qgraphicsproxywidget_types.QGr
 proc fcQGraphicsProxyWidget_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsProxyWidgetVTable](fcQGraphicsProxyWidget_vdata(self)[])
   let self = QGraphicsProxyWidget(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
 proc QGraphicsProxyWidgetdisconnectNotify*(self: gen_qgraphicsproxywidget_types.QGraphicsProxyWidget, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -959,7 +979,7 @@ proc QGraphicsProxyWidgetdisconnectNotify*(self: gen_qgraphicsproxywidget_types.
 proc fcQGraphicsProxyWidget_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsProxyWidgetVTable](fcQGraphicsProxyWidget_vdata(self)[])
   let self = QGraphicsProxyWidget(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
 proc QGraphicsProxyWidgetadvance*(self: gen_qgraphicsproxywidget_types.QGraphicsProxyWidget, phase: cint): void =
@@ -977,7 +997,7 @@ proc QGraphicsProxyWidgetcontains*(self: gen_qgraphicsproxywidget_types.QGraphic
 proc fcQGraphicsProxyWidget_vtable_callback_contains(self: pointer, point: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QGraphicsProxyWidgetVTable](fcQGraphicsProxyWidget_vdata(self)[])
   let self = QGraphicsProxyWidget(h: self)
-  let slotval1 = gen_qpoint_types.QPointF(h: point)
+  let slotval1 = gen_qpoint_types.QPointF(h: point, owned: false)
   var virtualReturn = vtbl[].contains(self, slotval1)
   virtualReturn
 
@@ -987,7 +1007,7 @@ proc QGraphicsProxyWidgetcollidesWithItem*(self: gen_qgraphicsproxywidget_types.
 proc fcQGraphicsProxyWidget_vtable_callback_collidesWithItem(self: pointer, other: pointer, mode: cint): bool {.cdecl.} =
   let vtbl = cast[ptr QGraphicsProxyWidgetVTable](fcQGraphicsProxyWidget_vdata(self)[])
   let self = QGraphicsProxyWidget(h: self)
-  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: other)
+  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: other, owned: false)
   let slotval2 = cint(mode)
   var virtualReturn = vtbl[].collidesWithItem(self, slotval1, slotval2)
   virtualReturn
@@ -998,7 +1018,7 @@ proc QGraphicsProxyWidgetcollidesWithPath*(self: gen_qgraphicsproxywidget_types.
 proc fcQGraphicsProxyWidget_vtable_callback_collidesWithPath(self: pointer, path: pointer, mode: cint): bool {.cdecl.} =
   let vtbl = cast[ptr QGraphicsProxyWidgetVTable](fcQGraphicsProxyWidget_vdata(self)[])
   let self = QGraphicsProxyWidget(h: self)
-  let slotval1 = gen_qpainterpath_types.QPainterPath(h: path)
+  let slotval1 = gen_qpainterpath_types.QPainterPath(h: path, owned: false)
   let slotval2 = cint(mode)
   var virtualReturn = vtbl[].collidesWithPath(self, slotval1, slotval2)
   virtualReturn
@@ -1009,18 +1029,21 @@ proc QGraphicsProxyWidgetisObscuredBy*(self: gen_qgraphicsproxywidget_types.QGra
 proc fcQGraphicsProxyWidget_vtable_callback_isObscuredBy(self: pointer, item: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QGraphicsProxyWidgetVTable](fcQGraphicsProxyWidget_vdata(self)[])
   let self = QGraphicsProxyWidget(h: self)
-  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: item)
+  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: item, owned: false)
   var virtualReturn = vtbl[].isObscuredBy(self, slotval1)
   virtualReturn
 
 proc QGraphicsProxyWidgetopaqueArea*(self: gen_qgraphicsproxywidget_types.QGraphicsProxyWidget): gen_qpainterpath_types.QPainterPath =
-  gen_qpainterpath_types.QPainterPath(h: fcQGraphicsProxyWidget_virtualbase_opaqueArea(self.h))
+  gen_qpainterpath_types.QPainterPath(h: fcQGraphicsProxyWidget_virtualbase_opaqueArea(self.h), owned: true)
 
 proc fcQGraphicsProxyWidget_vtable_callback_opaqueArea(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QGraphicsProxyWidgetVTable](fcQGraphicsProxyWidget_vdata(self)[])
   let self = QGraphicsProxyWidget(h: self)
   var virtualReturn = vtbl[].opaqueArea(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QGraphicsProxyWidgetsceneEventFilter*(self: gen_qgraphicsproxywidget_types.QGraphicsProxyWidget, watched: gen_qgraphicsitem_types.QGraphicsItem, event: gen_qcoreevent_types.QEvent): bool =
   fcQGraphicsProxyWidget_virtualbase_sceneEventFilter(self.h, watched.h, event.h)
@@ -1028,8 +1051,8 @@ proc QGraphicsProxyWidgetsceneEventFilter*(self: gen_qgraphicsproxywidget_types.
 proc fcQGraphicsProxyWidget_vtable_callback_sceneEventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QGraphicsProxyWidgetVTable](fcQGraphicsProxyWidget_vdata(self)[])
   let self = QGraphicsProxyWidget(h: self)
-  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].sceneEventFilter(self, slotval1, slotval2)
   virtualReturn
 
@@ -1050,18 +1073,21 @@ proc fcQGraphicsProxyWidget_vtable_callback_setExtension(self: pointer, extensio
   let vtbl = cast[ptr QGraphicsProxyWidgetVTable](fcQGraphicsProxyWidget_vdata(self)[])
   let self = QGraphicsProxyWidget(h: self)
   let slotval1 = cint(extension)
-  let slotval2 = gen_qvariant_types.QVariant(h: variant)
+  let slotval2 = gen_qvariant_types.QVariant(h: variant, owned: false)
   vtbl[].setExtension(self, slotval1, slotval2)
 
 proc QGraphicsProxyWidgetextension*(self: gen_qgraphicsproxywidget_types.QGraphicsProxyWidget, variant: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQGraphicsProxyWidget_virtualbase_extension(self.h, variant.h))
+  gen_qvariant_types.QVariant(h: fcQGraphicsProxyWidget_virtualbase_extension(self.h, variant.h), owned: true)
 
 proc fcQGraphicsProxyWidget_vtable_callback_extension(self: pointer, variant: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QGraphicsProxyWidgetVTable](fcQGraphicsProxyWidget_vdata(self)[])
   let self = QGraphicsProxyWidget(h: self)
-  let slotval1 = gen_qvariant_types.QVariant(h: variant)
+  let slotval1 = gen_qvariant_types.QVariant(h: variant, owned: false)
   var virtualReturn = vtbl[].extension(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QGraphicsProxyWidgetisEmpty*(self: gen_qgraphicsproxywidget_types.QGraphicsProxyWidget): bool =
   fcQGraphicsProxyWidget_virtualbase_isEmpty(self.h)
@@ -1103,16 +1129,16 @@ method setGeometry*(self: VirtualQGraphicsProxyWidget, rect: gen_qrect_types.QRe
   QGraphicsProxyWidgetsetGeometry(self[], rect)
 proc fcQGraphicsProxyWidget_method_callback_setGeometry(self: pointer, rect: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsProxyWidget](fcQGraphicsProxyWidget_vdata(self)[])
-  let slotval1 = gen_qrect_types.QRectF(h: rect)
+  let slotval1 = gen_qrect_types.QRectF(h: rect, owned: false)
   inst.setGeometry(slotval1)
 
 method paint*(self: VirtualQGraphicsProxyWidget, painter: gen_qpainter_types.QPainter, option: gen_qstyleoption_types.QStyleOptionGraphicsItem, widget: gen_qwidget_types.QWidget): void {.base.} =
   QGraphicsProxyWidgetpaint(self[], painter, option, widget)
 proc fcQGraphicsProxyWidget_method_callback_paint(self: pointer, painter: pointer, option: pointer, widget: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsProxyWidget](fcQGraphicsProxyWidget_vdata(self)[])
-  let slotval1 = gen_qpainter_types.QPainter(h: painter)
-  let slotval2 = gen_qstyleoption_types.QStyleOptionGraphicsItem(h: option)
-  let slotval3 = gen_qwidget_types.QWidget(h: widget)
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
+  let slotval2 = gen_qstyleoption_types.QStyleOptionGraphicsItem(h: option, owned: false)
+  let slotval3 = gen_qwidget_types.QWidget(h: widget, owned: false)
   inst.paint(slotval1, slotval2, slotval3)
 
 method typeX*(self: VirtualQGraphicsProxyWidget): cint {.base.} =
@@ -1127,7 +1153,7 @@ method itemChange*(self: VirtualQGraphicsProxyWidget, change: cint, value: gen_q
 proc fcQGraphicsProxyWidget_method_callback_itemChange(self: pointer, change: cint, value: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsProxyWidget](fcQGraphicsProxyWidget_vdata(self)[])
   let slotval1 = cint(change)
-  let slotval2 = gen_qvariant_types.QVariant(h: value)
+  let slotval2 = gen_qvariant_types.QVariant(h: value, owned: false)
   var virtualReturn = inst.itemChange(slotval1, slotval2)
   virtualReturn.h
 
@@ -1135,7 +1161,7 @@ method event*(self: VirtualQGraphicsProxyWidget, event: gen_qcoreevent_types.QEv
   QGraphicsProxyWidgetevent(self[], event)
 proc fcQGraphicsProxyWidget_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQGraphicsProxyWidget](fcQGraphicsProxyWidget_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
@@ -1143,8 +1169,8 @@ method eventFilter*(self: VirtualQGraphicsProxyWidget, objectVal: gen_qobject_ty
   QGraphicsProxyWidgeteventFilter(self[], objectVal, event)
 proc fcQGraphicsProxyWidget_method_callback_eventFilter(self: pointer, objectVal: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQGraphicsProxyWidget](fcQGraphicsProxyWidget_vdata(self)[])
-  let slotval1 = gen_qobject_types.QObject(h: objectVal)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: objectVal, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
@@ -1152,147 +1178,147 @@ method showEvent*(self: VirtualQGraphicsProxyWidget, event: gen_qevent_types.QSh
   QGraphicsProxyWidgetshowEvent(self[], event)
 proc fcQGraphicsProxyWidget_method_callback_showEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsProxyWidget](fcQGraphicsProxyWidget_vdata(self)[])
-  let slotval1 = gen_qevent_types.QShowEvent(h: event)
+  let slotval1 = gen_qevent_types.QShowEvent(h: event, owned: false)
   inst.showEvent(slotval1)
 
 method hideEvent*(self: VirtualQGraphicsProxyWidget, event: gen_qevent_types.QHideEvent): void {.base.} =
   QGraphicsProxyWidgethideEvent(self[], event)
 proc fcQGraphicsProxyWidget_method_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsProxyWidget](fcQGraphicsProxyWidget_vdata(self)[])
-  let slotval1 = gen_qevent_types.QHideEvent(h: event)
+  let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   inst.hideEvent(slotval1)
 
 method contextMenuEvent*(self: VirtualQGraphicsProxyWidget, event: gen_qgraphicssceneevent_types.QGraphicsSceneContextMenuEvent): void {.base.} =
   QGraphicsProxyWidgetcontextMenuEvent(self[], event)
 proc fcQGraphicsProxyWidget_method_callback_contextMenuEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsProxyWidget](fcQGraphicsProxyWidget_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneContextMenuEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneContextMenuEvent(h: event, owned: false)
   inst.contextMenuEvent(slotval1)
 
 method dragEnterEvent*(self: VirtualQGraphicsProxyWidget, event: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void {.base.} =
   QGraphicsProxyWidgetdragEnterEvent(self[], event)
 proc fcQGraphicsProxyWidget_method_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsProxyWidget](fcQGraphicsProxyWidget_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event, owned: false)
   inst.dragEnterEvent(slotval1)
 
 method dragLeaveEvent*(self: VirtualQGraphicsProxyWidget, event: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void {.base.} =
   QGraphicsProxyWidgetdragLeaveEvent(self[], event)
 proc fcQGraphicsProxyWidget_method_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsProxyWidget](fcQGraphicsProxyWidget_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event, owned: false)
   inst.dragLeaveEvent(slotval1)
 
 method dragMoveEvent*(self: VirtualQGraphicsProxyWidget, event: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void {.base.} =
   QGraphicsProxyWidgetdragMoveEvent(self[], event)
 proc fcQGraphicsProxyWidget_method_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsProxyWidget](fcQGraphicsProxyWidget_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event, owned: false)
   inst.dragMoveEvent(slotval1)
 
 method dropEvent*(self: VirtualQGraphicsProxyWidget, event: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void {.base.} =
   QGraphicsProxyWidgetdropEvent(self[], event)
 proc fcQGraphicsProxyWidget_method_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsProxyWidget](fcQGraphicsProxyWidget_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event, owned: false)
   inst.dropEvent(slotval1)
 
 method hoverEnterEvent*(self: VirtualQGraphicsProxyWidget, event: gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent): void {.base.} =
   QGraphicsProxyWidgethoverEnterEvent(self[], event)
 proc fcQGraphicsProxyWidget_method_callback_hoverEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsProxyWidget](fcQGraphicsProxyWidget_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event, owned: false)
   inst.hoverEnterEvent(slotval1)
 
 method hoverLeaveEvent*(self: VirtualQGraphicsProxyWidget, event: gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent): void {.base.} =
   QGraphicsProxyWidgethoverLeaveEvent(self[], event)
 proc fcQGraphicsProxyWidget_method_callback_hoverLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsProxyWidget](fcQGraphicsProxyWidget_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event, owned: false)
   inst.hoverLeaveEvent(slotval1)
 
 method hoverMoveEvent*(self: VirtualQGraphicsProxyWidget, event: gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent): void {.base.} =
   QGraphicsProxyWidgethoverMoveEvent(self[], event)
 proc fcQGraphicsProxyWidget_method_callback_hoverMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsProxyWidget](fcQGraphicsProxyWidget_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event, owned: false)
   inst.hoverMoveEvent(slotval1)
 
 method grabMouseEvent*(self: VirtualQGraphicsProxyWidget, event: gen_qcoreevent_types.QEvent): void {.base.} =
   QGraphicsProxyWidgetgrabMouseEvent(self[], event)
 proc fcQGraphicsProxyWidget_method_callback_grabMouseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsProxyWidget](fcQGraphicsProxyWidget_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.grabMouseEvent(slotval1)
 
 method ungrabMouseEvent*(self: VirtualQGraphicsProxyWidget, event: gen_qcoreevent_types.QEvent): void {.base.} =
   QGraphicsProxyWidgetungrabMouseEvent(self[], event)
 proc fcQGraphicsProxyWidget_method_callback_ungrabMouseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsProxyWidget](fcQGraphicsProxyWidget_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.ungrabMouseEvent(slotval1)
 
 method mouseMoveEvent*(self: VirtualQGraphicsProxyWidget, event: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void {.base.} =
   QGraphicsProxyWidgetmouseMoveEvent(self[], event)
 proc fcQGraphicsProxyWidget_method_callback_mouseMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsProxyWidget](fcQGraphicsProxyWidget_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event, owned: false)
   inst.mouseMoveEvent(slotval1)
 
 method mousePressEvent*(self: VirtualQGraphicsProxyWidget, event: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void {.base.} =
   QGraphicsProxyWidgetmousePressEvent(self[], event)
 proc fcQGraphicsProxyWidget_method_callback_mousePressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsProxyWidget](fcQGraphicsProxyWidget_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event, owned: false)
   inst.mousePressEvent(slotval1)
 
 method mouseReleaseEvent*(self: VirtualQGraphicsProxyWidget, event: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void {.base.} =
   QGraphicsProxyWidgetmouseReleaseEvent(self[], event)
 proc fcQGraphicsProxyWidget_method_callback_mouseReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsProxyWidget](fcQGraphicsProxyWidget_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event, owned: false)
   inst.mouseReleaseEvent(slotval1)
 
 method mouseDoubleClickEvent*(self: VirtualQGraphicsProxyWidget, event: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void {.base.} =
   QGraphicsProxyWidgetmouseDoubleClickEvent(self[], event)
 proc fcQGraphicsProxyWidget_method_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsProxyWidget](fcQGraphicsProxyWidget_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event, owned: false)
   inst.mouseDoubleClickEvent(slotval1)
 
 method wheelEvent*(self: VirtualQGraphicsProxyWidget, event: gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent): void {.base.} =
   QGraphicsProxyWidgetwheelEvent(self[], event)
 proc fcQGraphicsProxyWidget_method_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsProxyWidget](fcQGraphicsProxyWidget_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent(h: event, owned: false)
   inst.wheelEvent(slotval1)
 
 method keyPressEvent*(self: VirtualQGraphicsProxyWidget, event: gen_qevent_types.QKeyEvent): void {.base.} =
   QGraphicsProxyWidgetkeyPressEvent(self[], event)
 proc fcQGraphicsProxyWidget_method_callback_keyPressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsProxyWidget](fcQGraphicsProxyWidget_vdata(self)[])
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   inst.keyPressEvent(slotval1)
 
 method keyReleaseEvent*(self: VirtualQGraphicsProxyWidget, event: gen_qevent_types.QKeyEvent): void {.base.} =
   QGraphicsProxyWidgetkeyReleaseEvent(self[], event)
 proc fcQGraphicsProxyWidget_method_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsProxyWidget](fcQGraphicsProxyWidget_vdata(self)[])
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   inst.keyReleaseEvent(slotval1)
 
 method focusInEvent*(self: VirtualQGraphicsProxyWidget, event: gen_qevent_types.QFocusEvent): void {.base.} =
   QGraphicsProxyWidgetfocusInEvent(self[], event)
 proc fcQGraphicsProxyWidget_method_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsProxyWidget](fcQGraphicsProxyWidget_vdata(self)[])
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   inst.focusInEvent(slotval1)
 
 method focusOutEvent*(self: VirtualQGraphicsProxyWidget, event: gen_qevent_types.QFocusEvent): void {.base.} =
   QGraphicsProxyWidgetfocusOutEvent(self[], event)
 proc fcQGraphicsProxyWidget_method_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsProxyWidget](fcQGraphicsProxyWidget_vdata(self)[])
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   inst.focusOutEvent(slotval1)
 
 method focusNextPrevChild*(self: VirtualQGraphicsProxyWidget, next: bool): bool {.base.} =
@@ -1315,7 +1341,7 @@ method inputMethodEvent*(self: VirtualQGraphicsProxyWidget, event: gen_qevent_ty
   QGraphicsProxyWidgetinputMethodEvent(self[], event)
 proc fcQGraphicsProxyWidget_method_callback_inputMethodEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsProxyWidget](fcQGraphicsProxyWidget_vdata(self)[])
-  let slotval1 = gen_qevent_types.QInputMethodEvent(h: event)
+  let slotval1 = gen_qevent_types.QInputMethodEvent(h: event, owned: false)
   inst.inputMethodEvent(slotval1)
 
 method sizeHint*(self: VirtualQGraphicsProxyWidget, which: cint, constraint: gen_qsize_types.QSizeF): gen_qsize_types.QSizeF {.base.} =
@@ -1323,7 +1349,7 @@ method sizeHint*(self: VirtualQGraphicsProxyWidget, which: cint, constraint: gen
 proc fcQGraphicsProxyWidget_method_callback_sizeHint(self: pointer, which: cint, constraint: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsProxyWidget](fcQGraphicsProxyWidget_vdata(self)[])
   let slotval1 = cint(which)
-  let slotval2 = gen_qsize_types.QSizeF(h: constraint)
+  let slotval2 = gen_qsize_types.QSizeF(h: constraint, owned: false)
   var virtualReturn = inst.sizeHint(slotval1, slotval2)
   virtualReturn.h
 
@@ -1331,7 +1357,7 @@ method resizeEvent*(self: VirtualQGraphicsProxyWidget, event: gen_qgraphicsscene
   QGraphicsProxyWidgetresizeEvent(self[], event)
 proc fcQGraphicsProxyWidget_method_callback_resizeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsProxyWidget](fcQGraphicsProxyWidget_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneResizeEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneResizeEvent(h: event, owned: false)
   inst.resizeEvent(slotval1)
 
 method getContentsMargins*(self: VirtualQGraphicsProxyWidget, left: ptr float64, top: ptr float64, right: ptr float64, bottom: ptr float64): void {.base.} =
@@ -1348,9 +1374,9 @@ method paintWindowFrame*(self: VirtualQGraphicsProxyWidget, painter: gen_qpainte
   QGraphicsProxyWidgetpaintWindowFrame(self[], painter, option, widget)
 proc fcQGraphicsProxyWidget_method_callback_paintWindowFrame(self: pointer, painter: pointer, option: pointer, widget: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsProxyWidget](fcQGraphicsProxyWidget_vdata(self)[])
-  let slotval1 = gen_qpainter_types.QPainter(h: painter)
-  let slotval2 = gen_qstyleoption_types.QStyleOptionGraphicsItem(h: option)
-  let slotval3 = gen_qwidget_types.QWidget(h: widget)
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
+  let slotval2 = gen_qstyleoption_types.QStyleOptionGraphicsItem(h: option, owned: false)
+  let slotval3 = gen_qwidget_types.QWidget(h: widget, owned: false)
   inst.paintWindowFrame(slotval1, slotval2, slotval3)
 
 method boundingRect*(self: VirtualQGraphicsProxyWidget): gen_qrect_types.QRectF {.base.} =
@@ -1371,7 +1397,7 @@ method initStyleOption*(self: VirtualQGraphicsProxyWidget, option: gen_qstyleopt
   QGraphicsProxyWidgetinitStyleOption(self[], option)
 proc fcQGraphicsProxyWidget_method_callback_initStyleOption(self: pointer, option: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsProxyWidget](fcQGraphicsProxyWidget_vdata(self)[])
-  let slotval1 = gen_qstyleoption_types.QStyleOption(h: option)
+  let slotval1 = gen_qstyleoption_types.QStyleOption(h: option, owned: false)
   inst.initStyleOption(slotval1)
 
 method updateGeometry*(self: VirtualQGraphicsProxyWidget): void {.base.} =
@@ -1388,7 +1414,7 @@ proc fcQGraphicsProxyWidget_method_callback_propertyChange(self: pointer, proper
   let vpropertyNamex_ret = string.fromBytes(vpropertyName_ms)
   c_free(vpropertyName_ms.data)
   let slotval1 = vpropertyNamex_ret
-  let slotval2 = gen_qvariant_types.QVariant(h: value)
+  let slotval2 = gen_qvariant_types.QVariant(h: value, owned: false)
   var virtualReturn = inst.propertyChange(slotval1, slotval2)
   virtualReturn.h
 
@@ -1396,7 +1422,7 @@ method sceneEvent*(self: VirtualQGraphicsProxyWidget, event: gen_qcoreevent_type
   QGraphicsProxyWidgetsceneEvent(self[], event)
 proc fcQGraphicsProxyWidget_method_callback_sceneEvent(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQGraphicsProxyWidget](fcQGraphicsProxyWidget_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.sceneEvent(slotval1)
   virtualReturn
 
@@ -1404,7 +1430,7 @@ method windowFrameEvent*(self: VirtualQGraphicsProxyWidget, e: gen_qcoreevent_ty
   QGraphicsProxyWidgetwindowFrameEvent(self[], e)
 proc fcQGraphicsProxyWidget_method_callback_windowFrameEvent(self: pointer, e: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQGraphicsProxyWidget](fcQGraphicsProxyWidget_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: e)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: e, owned: false)
   var virtualReturn = inst.windowFrameEvent(slotval1)
   virtualReturn
 
@@ -1412,7 +1438,7 @@ method windowFrameSectionAt*(self: VirtualQGraphicsProxyWidget, pos: gen_qpoint_
   QGraphicsProxyWidgetwindowFrameSectionAt(self[], pos)
 proc fcQGraphicsProxyWidget_method_callback_windowFrameSectionAt(self: pointer, pos: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQGraphicsProxyWidget](fcQGraphicsProxyWidget_vdata(self)[])
-  let slotval1 = gen_qpoint_types.QPointF(h: pos)
+  let slotval1 = gen_qpoint_types.QPointF(h: pos, owned: false)
   var virtualReturn = inst.windowFrameSectionAt(slotval1)
   cint(virtualReturn)
 
@@ -1420,21 +1446,21 @@ method changeEvent*(self: VirtualQGraphicsProxyWidget, event: gen_qcoreevent_typ
   QGraphicsProxyWidgetchangeEvent(self[], event)
 proc fcQGraphicsProxyWidget_method_callback_changeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsProxyWidget](fcQGraphicsProxyWidget_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.changeEvent(slotval1)
 
 method closeEvent*(self: VirtualQGraphicsProxyWidget, event: gen_qevent_types.QCloseEvent): void {.base.} =
   QGraphicsProxyWidgetcloseEvent(self[], event)
 proc fcQGraphicsProxyWidget_method_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsProxyWidget](fcQGraphicsProxyWidget_vdata(self)[])
-  let slotval1 = gen_qevent_types.QCloseEvent(h: event)
+  let slotval1 = gen_qevent_types.QCloseEvent(h: event, owned: false)
   inst.closeEvent(slotval1)
 
 method moveEvent*(self: VirtualQGraphicsProxyWidget, event: gen_qgraphicssceneevent_types.QGraphicsSceneMoveEvent): void {.base.} =
   QGraphicsProxyWidgetmoveEvent(self[], event)
 proc fcQGraphicsProxyWidget_method_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsProxyWidget](fcQGraphicsProxyWidget_vdata(self)[])
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMoveEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMoveEvent(h: event, owned: false)
   inst.moveEvent(slotval1)
 
 method polishEvent*(self: VirtualQGraphicsProxyWidget): void {.base.} =
@@ -1447,49 +1473,49 @@ method grabKeyboardEvent*(self: VirtualQGraphicsProxyWidget, event: gen_qcoreeve
   QGraphicsProxyWidgetgrabKeyboardEvent(self[], event)
 proc fcQGraphicsProxyWidget_method_callback_grabKeyboardEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsProxyWidget](fcQGraphicsProxyWidget_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.grabKeyboardEvent(slotval1)
 
 method ungrabKeyboardEvent*(self: VirtualQGraphicsProxyWidget, event: gen_qcoreevent_types.QEvent): void {.base.} =
   QGraphicsProxyWidgetungrabKeyboardEvent(self[], event)
 proc fcQGraphicsProxyWidget_method_callback_ungrabKeyboardEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsProxyWidget](fcQGraphicsProxyWidget_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.ungrabKeyboardEvent(slotval1)
 
 method timerEvent*(self: VirtualQGraphicsProxyWidget, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
   QGraphicsProxyWidgettimerEvent(self[], event)
 proc fcQGraphicsProxyWidget_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsProxyWidget](fcQGraphicsProxyWidget_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
 method childEvent*(self: VirtualQGraphicsProxyWidget, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
   QGraphicsProxyWidgetchildEvent(self[], event)
 proc fcQGraphicsProxyWidget_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsProxyWidget](fcQGraphicsProxyWidget_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
 method customEvent*(self: VirtualQGraphicsProxyWidget, event: gen_qcoreevent_types.QEvent): void {.base.} =
   QGraphicsProxyWidgetcustomEvent(self[], event)
 proc fcQGraphicsProxyWidget_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsProxyWidget](fcQGraphicsProxyWidget_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
 method connectNotify*(self: VirtualQGraphicsProxyWidget, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
   QGraphicsProxyWidgetconnectNotify(self[], signal)
 proc fcQGraphicsProxyWidget_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsProxyWidget](fcQGraphicsProxyWidget_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
 method disconnectNotify*(self: VirtualQGraphicsProxyWidget, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
   QGraphicsProxyWidgetdisconnectNotify(self[], signal)
 proc fcQGraphicsProxyWidget_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsProxyWidget](fcQGraphicsProxyWidget_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
 
 method advance*(self: VirtualQGraphicsProxyWidget, phase: cint): void {.base.} =
@@ -1503,7 +1529,7 @@ method contains*(self: VirtualQGraphicsProxyWidget, point: gen_qpoint_types.QPoi
   QGraphicsProxyWidgetcontains(self[], point)
 proc fcQGraphicsProxyWidget_method_callback_contains(self: pointer, point: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQGraphicsProxyWidget](fcQGraphicsProxyWidget_vdata(self)[])
-  let slotval1 = gen_qpoint_types.QPointF(h: point)
+  let slotval1 = gen_qpoint_types.QPointF(h: point, owned: false)
   var virtualReturn = inst.contains(slotval1)
   virtualReturn
 
@@ -1511,7 +1537,7 @@ method collidesWithItem*(self: VirtualQGraphicsProxyWidget, other: gen_qgraphics
   QGraphicsProxyWidgetcollidesWithItem(self[], other, mode)
 proc fcQGraphicsProxyWidget_method_callback_collidesWithItem(self: pointer, other: pointer, mode: cint): bool {.cdecl.} =
   let inst = cast[VirtualQGraphicsProxyWidget](fcQGraphicsProxyWidget_vdata(self)[])
-  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: other)
+  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: other, owned: false)
   let slotval2 = cint(mode)
   var virtualReturn = inst.collidesWithItem(slotval1, slotval2)
   virtualReturn
@@ -1520,7 +1546,7 @@ method collidesWithPath*(self: VirtualQGraphicsProxyWidget, path: gen_qpainterpa
   QGraphicsProxyWidgetcollidesWithPath(self[], path, mode)
 proc fcQGraphicsProxyWidget_method_callback_collidesWithPath(self: pointer, path: pointer, mode: cint): bool {.cdecl.} =
   let inst = cast[VirtualQGraphicsProxyWidget](fcQGraphicsProxyWidget_vdata(self)[])
-  let slotval1 = gen_qpainterpath_types.QPainterPath(h: path)
+  let slotval1 = gen_qpainterpath_types.QPainterPath(h: path, owned: false)
   let slotval2 = cint(mode)
   var virtualReturn = inst.collidesWithPath(slotval1, slotval2)
   virtualReturn
@@ -1529,7 +1555,7 @@ method isObscuredBy*(self: VirtualQGraphicsProxyWidget, item: gen_qgraphicsitem_
   QGraphicsProxyWidgetisObscuredBy(self[], item)
 proc fcQGraphicsProxyWidget_method_callback_isObscuredBy(self: pointer, item: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQGraphicsProxyWidget](fcQGraphicsProxyWidget_vdata(self)[])
-  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: item)
+  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: item, owned: false)
   var virtualReturn = inst.isObscuredBy(slotval1)
   virtualReturn
 
@@ -1544,8 +1570,8 @@ method sceneEventFilter*(self: VirtualQGraphicsProxyWidget, watched: gen_qgraphi
   QGraphicsProxyWidgetsceneEventFilter(self[], watched, event)
 proc fcQGraphicsProxyWidget_method_callback_sceneEventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQGraphicsProxyWidget](fcQGraphicsProxyWidget_vdata(self)[])
-  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.sceneEventFilter(slotval1, slotval2)
   virtualReturn
 
@@ -1562,14 +1588,14 @@ method setExtension*(self: VirtualQGraphicsProxyWidget, extension: cint, variant
 proc fcQGraphicsProxyWidget_method_callback_setExtension(self: pointer, extension: cint, variant: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsProxyWidget](fcQGraphicsProxyWidget_vdata(self)[])
   let slotval1 = cint(extension)
-  let slotval2 = gen_qvariant_types.QVariant(h: variant)
+  let slotval2 = gen_qvariant_types.QVariant(h: variant, owned: false)
   inst.setExtension(slotval1, slotval2)
 
 method extension*(self: VirtualQGraphicsProxyWidget, variant: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant {.base.} =
   QGraphicsProxyWidgetextension(self[], variant)
 proc fcQGraphicsProxyWidget_method_callback_extension(self: pointer, variant: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsProxyWidget](fcQGraphicsProxyWidget_vdata(self)[])
-  let slotval1 = gen_qvariant_types.QVariant(h: variant)
+  let slotval1 = gen_qvariant_types.QVariant(h: variant, owned: false)
   var virtualReturn = inst.extension(slotval1)
   virtualReturn.h
 
@@ -1581,13 +1607,13 @@ proc fcQGraphicsProxyWidget_method_callback_isEmpty(self: pointer): bool {.cdecl
   virtualReturn
 
 proc newProxyWidget*(self: gen_qgraphicsproxywidget_types.QGraphicsProxyWidget, param1: gen_qwidget_types.QWidget): gen_qgraphicsproxywidget_types.QGraphicsProxyWidget =
-  gen_qgraphicsproxywidget_types.QGraphicsProxyWidget(h: fcQGraphicsProxyWidget_protectedbase_newProxyWidget(self.h, param1.h))
+  gen_qgraphicsproxywidget_types.QGraphicsProxyWidget(h: fcQGraphicsProxyWidget_protectedbase_newProxyWidget(self.h, param1.h), owned: false)
 
 proc updateMicroFocus*(self: gen_qgraphicsproxywidget_types.QGraphicsProxyWidget): void =
   fcQGraphicsProxyWidget_protectedbase_updateMicroFocus(self.h)
 
 proc sender*(self: gen_qgraphicsproxywidget_types.QGraphicsProxyWidget): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQGraphicsProxyWidget_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQGraphicsProxyWidget_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qgraphicsproxywidget_types.QGraphicsProxyWidget): cint =
   fcQGraphicsProxyWidget_protectedbase_senderSignalIndex(self.h)
@@ -1754,7 +1780,7 @@ proc create*(T: type gen_qgraphicsproxywidget_types.QGraphicsProxyWidget,
     vtbl[].vtbl.extension = fcQGraphicsProxyWidget_vtable_callback_extension
   if not isNil(vtbl[].isEmpty):
     vtbl[].vtbl.isEmpty = fcQGraphicsProxyWidget_vtable_callback_isEmpty
-  let tmp = gen_qgraphicsproxywidget_types.QGraphicsProxyWidget(h: fcQGraphicsProxyWidget_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))))
+  let tmp = gen_qgraphicsproxywidget_types.QGraphicsProxyWidget(h: fcQGraphicsProxyWidget_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))), owned: true)
   fcQGraphicsProxyWidget_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qgraphicsproxywidget_types.QGraphicsProxyWidget,
@@ -1899,7 +1925,7 @@ proc create*(T: type gen_qgraphicsproxywidget_types.QGraphicsProxyWidget,
     vtbl[].vtbl.extension = fcQGraphicsProxyWidget_vtable_callback_extension
   if not isNil(vtbl[].isEmpty):
     vtbl[].vtbl.isEmpty = fcQGraphicsProxyWidget_vtable_callback_isEmpty
-  let tmp = gen_qgraphicsproxywidget_types.QGraphicsProxyWidget(h: fcQGraphicsProxyWidget_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h))
+  let tmp = gen_qgraphicsproxywidget_types.QGraphicsProxyWidget(h: fcQGraphicsProxyWidget_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h), owned: true)
   fcQGraphicsProxyWidget_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qgraphicsproxywidget_types.QGraphicsProxyWidget,
@@ -2044,13 +2070,14 @@ proc create*(T: type gen_qgraphicsproxywidget_types.QGraphicsProxyWidget,
     vtbl[].vtbl.extension = fcQGraphicsProxyWidget_vtable_callback_extension
   if not isNil(vtbl[].isEmpty):
     vtbl[].vtbl.isEmpty = fcQGraphicsProxyWidget_vtable_callback_isEmpty
-  let tmp = gen_qgraphicsproxywidget_types.QGraphicsProxyWidget(h: fcQGraphicsProxyWidget_new3(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h, cint(wFlags)))
+  let tmp = gen_qgraphicsproxywidget_types.QGraphicsProxyWidget(h: fcQGraphicsProxyWidget_new3(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h, cint(wFlags)), owned: true)
   fcQGraphicsProxyWidget_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQGraphicsProxyWidget_mvtbl = cQGraphicsProxyWidgetVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQGraphicsProxyWidget()[])](self.fcQGraphicsProxyWidget_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   metaObject: fcQGraphicsProxyWidget_method_callback_metaObject,
   metacast: fcQGraphicsProxyWidget_method_callback_metacast,
@@ -2142,5 +2169,3 @@ proc create*(T: type gen_qgraphicsproxywidget_types.QGraphicsProxyWidget,
 
 proc staticMetaObject*(_: type gen_qgraphicsproxywidget_types.QGraphicsProxyWidget): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQGraphicsProxyWidget_staticMetaObject())
-proc delete*(self: gen_qgraphicsproxywidget_types.QGraphicsProxyWidget) =
-  fcQGraphicsProxyWidget_delete(self.h)

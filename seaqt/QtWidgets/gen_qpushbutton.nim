@@ -32,7 +32,7 @@ func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
     else:
       copyMem(addr result[0], v.data, len)
 
-const cflags = gorge("pkg-config --cflags Qt6Widgets")  & " -fPIC"
+const cflags = gorge("pkg-config --cflags Qt6Widgets") & " -fPIC"
 {.compile("gen_qpushbutton.cpp", cflags).}
 
 
@@ -221,10 +221,9 @@ proc fcQPushButton_new4(vtbl: pointer, vdata: csize_t, icon: pointer, text: stru
 proc fcQPushButton_new5(vtbl: pointer, vdata: csize_t, text: struct_miqt_string, parent: pointer): ptr cQPushButton {.importc: "QPushButton_new5".}
 proc fcQPushButton_new6(vtbl: pointer, vdata: csize_t, icon: pointer, text: struct_miqt_string, parent: pointer): ptr cQPushButton {.importc: "QPushButton_new6".}
 proc fcQPushButton_staticMetaObject(): pointer {.importc: "QPushButton_staticMetaObject".}
-proc fcQPushButton_delete(self: pointer) {.importc: "QPushButton_delete".}
 
 proc metaObject*(self: gen_qpushbutton_types.QPushButton): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQPushButton_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQPushButton_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qpushbutton_types.QPushButton, param1: cstring): pointer =
   fcQPushButton_metacast(self.h, param1)
@@ -239,10 +238,10 @@ proc tr*(_: type gen_qpushbutton_types.QPushButton, s: cstring): string =
   vx_ret
 
 proc sizeHint*(self: gen_qpushbutton_types.QPushButton): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQPushButton_sizeHint(self.h))
+  gen_qsize_types.QSize(h: fcQPushButton_sizeHint(self.h), owned: true)
 
 proc minimumSizeHint*(self: gen_qpushbutton_types.QPushButton): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQPushButton_minimumSizeHint(self.h))
+  gen_qsize_types.QSize(h: fcQPushButton_minimumSizeHint(self.h), owned: true)
 
 proc autoDefault*(self: gen_qpushbutton_types.QPushButton): bool =
   fcQPushButton_autoDefault(self.h)
@@ -260,7 +259,7 @@ proc setMenu*(self: gen_qpushbutton_types.QPushButton, menu: gen_qmenu_types.QMe
   fcQPushButton_setMenu(self.h, menu.h)
 
 proc menu*(self: gen_qpushbutton_types.QPushButton): gen_qmenu_types.QMenu =
-  gen_qmenu_types.QMenu(h: fcQPushButton_menu(self.h))
+  gen_qmenu_types.QMenu(h: fcQPushButton_menu(self.h), owned: false)
 
 proc setFlat*(self: gen_qpushbutton_types.QPushButton, flat: bool): void =
   fcQPushButton_setFlat(self.h, flat)
@@ -337,7 +336,7 @@ type QPushButtonchildEventProc* = proc(self: QPushButton, event: gen_qcoreevent_
 type QPushButtoncustomEventProc* = proc(self: QPushButton, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QPushButtonconnectNotifyProc* = proc(self: QPushButton, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QPushButtondisconnectNotifyProc* = proc(self: QPushButton, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
-type QPushButtonVTable* = object
+type QPushButtonVTable* {.inheritable, pure.} = object
   vtbl: cQPushButtonVTable
   metaObject*: QPushButtonmetaObjectProc
   metacast*: QPushButtonmetacastProc
@@ -394,13 +393,16 @@ type QPushButtonVTable* = object
   connectNotify*: QPushButtonconnectNotifyProc
   disconnectNotify*: QPushButtondisconnectNotifyProc
 proc QPushButtonmetaObject*(self: gen_qpushbutton_types.QPushButton): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQPushButton_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQPushButton_virtualbase_metaObject(self.h), owned: false)
 
 proc fcQPushButton_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QPushButtonVTable](fcQPushButton_vdata(self)[])
   let self = QPushButton(h: self)
   var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QPushButtonmetacast*(self: gen_qpushbutton_types.QPushButton, param1: cstring): pointer =
   fcQPushButton_virtualbase_metacast(self.h, param1)
@@ -425,22 +427,28 @@ proc fcQPushButton_vtable_callback_metacall(self: pointer, param1: cint, param2:
   virtualReturn
 
 proc QPushButtonsizeHint*(self: gen_qpushbutton_types.QPushButton): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQPushButton_virtualbase_sizeHint(self.h))
+  gen_qsize_types.QSize(h: fcQPushButton_virtualbase_sizeHint(self.h), owned: true)
 
 proc fcQPushButton_vtable_callback_sizeHint(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QPushButtonVTable](fcQPushButton_vdata(self)[])
   let self = QPushButton(h: self)
   var virtualReturn = vtbl[].sizeHint(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QPushButtonminimumSizeHint*(self: gen_qpushbutton_types.QPushButton): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQPushButton_virtualbase_minimumSizeHint(self.h))
+  gen_qsize_types.QSize(h: fcQPushButton_virtualbase_minimumSizeHint(self.h), owned: true)
 
 proc fcQPushButton_vtable_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QPushButtonVTable](fcQPushButton_vdata(self)[])
   let self = QPushButton(h: self)
   var virtualReturn = vtbl[].minimumSizeHint(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QPushButtonevent*(self: gen_qpushbutton_types.QPushButton, e: gen_qcoreevent_types.QEvent): bool =
   fcQPushButton_virtualbase_event(self.h, e.h)
@@ -448,7 +456,7 @@ proc QPushButtonevent*(self: gen_qpushbutton_types.QPushButton, e: gen_qcoreeven
 proc fcQPushButton_vtable_callback_event(self: pointer, e: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QPushButtonVTable](fcQPushButton_vdata(self)[])
   let self = QPushButton(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: e)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: e, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
@@ -458,7 +466,7 @@ proc QPushButtonpaintEvent*(self: gen_qpushbutton_types.QPushButton, param1: gen
 proc fcQPushButton_vtable_callback_paintEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPushButtonVTable](fcQPushButton_vdata(self)[])
   let self = QPushButton(h: self)
-  let slotval1 = gen_qevent_types.QPaintEvent(h: param1)
+  let slotval1 = gen_qevent_types.QPaintEvent(h: param1, owned: false)
   vtbl[].paintEvent(self, slotval1)
 
 proc QPushButtonkeyPressEvent*(self: gen_qpushbutton_types.QPushButton, param1: gen_qevent_types.QKeyEvent): void =
@@ -467,7 +475,7 @@ proc QPushButtonkeyPressEvent*(self: gen_qpushbutton_types.QPushButton, param1: 
 proc fcQPushButton_vtable_callback_keyPressEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPushButtonVTable](fcQPushButton_vdata(self)[])
   let self = QPushButton(h: self)
-  let slotval1 = gen_qevent_types.QKeyEvent(h: param1)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: param1, owned: false)
   vtbl[].keyPressEvent(self, slotval1)
 
 proc QPushButtonfocusInEvent*(self: gen_qpushbutton_types.QPushButton, param1: gen_qevent_types.QFocusEvent): void =
@@ -476,7 +484,7 @@ proc QPushButtonfocusInEvent*(self: gen_qpushbutton_types.QPushButton, param1: g
 proc fcQPushButton_vtable_callback_focusInEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPushButtonVTable](fcQPushButton_vdata(self)[])
   let self = QPushButton(h: self)
-  let slotval1 = gen_qevent_types.QFocusEvent(h: param1)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: param1, owned: false)
   vtbl[].focusInEvent(self, slotval1)
 
 proc QPushButtonfocusOutEvent*(self: gen_qpushbutton_types.QPushButton, param1: gen_qevent_types.QFocusEvent): void =
@@ -485,7 +493,7 @@ proc QPushButtonfocusOutEvent*(self: gen_qpushbutton_types.QPushButton, param1: 
 proc fcQPushButton_vtable_callback_focusOutEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPushButtonVTable](fcQPushButton_vdata(self)[])
   let self = QPushButton(h: self)
-  let slotval1 = gen_qevent_types.QFocusEvent(h: param1)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: param1, owned: false)
   vtbl[].focusOutEvent(self, slotval1)
 
 proc QPushButtonmouseMoveEvent*(self: gen_qpushbutton_types.QPushButton, param1: gen_qevent_types.QMouseEvent): void =
@@ -494,7 +502,7 @@ proc QPushButtonmouseMoveEvent*(self: gen_qpushbutton_types.QPushButton, param1:
 proc fcQPushButton_vtable_callback_mouseMoveEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPushButtonVTable](fcQPushButton_vdata(self)[])
   let self = QPushButton(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: param1)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: param1, owned: false)
   vtbl[].mouseMoveEvent(self, slotval1)
 
 proc QPushButtoninitStyleOption*(self: gen_qpushbutton_types.QPushButton, option: gen_qstyleoption_types.QStyleOptionButton): void =
@@ -503,7 +511,7 @@ proc QPushButtoninitStyleOption*(self: gen_qpushbutton_types.QPushButton, option
 proc fcQPushButton_vtable_callback_initStyleOption(self: pointer, option: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPushButtonVTable](fcQPushButton_vdata(self)[])
   let self = QPushButton(h: self)
-  let slotval1 = gen_qstyleoption_types.QStyleOptionButton(h: option)
+  let slotval1 = gen_qstyleoption_types.QStyleOptionButton(h: option, owned: false)
   vtbl[].initStyleOption(self, slotval1)
 
 proc QPushButtonhitButton*(self: gen_qpushbutton_types.QPushButton, pos: gen_qpoint_types.QPoint): bool =
@@ -512,7 +520,7 @@ proc QPushButtonhitButton*(self: gen_qpushbutton_types.QPushButton, pos: gen_qpo
 proc fcQPushButton_vtable_callback_hitButton(self: pointer, pos: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QPushButtonVTable](fcQPushButton_vdata(self)[])
   let self = QPushButton(h: self)
-  let slotval1 = gen_qpoint_types.QPoint(h: pos)
+  let slotval1 = gen_qpoint_types.QPoint(h: pos, owned: false)
   var virtualReturn = vtbl[].hitButton(self, slotval1)
   virtualReturn
 
@@ -538,7 +546,7 @@ proc QPushButtonkeyReleaseEvent*(self: gen_qpushbutton_types.QPushButton, e: gen
 proc fcQPushButton_vtable_callback_keyReleaseEvent(self: pointer, e: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPushButtonVTable](fcQPushButton_vdata(self)[])
   let self = QPushButton(h: self)
-  let slotval1 = gen_qevent_types.QKeyEvent(h: e)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: e, owned: false)
   vtbl[].keyReleaseEvent(self, slotval1)
 
 proc QPushButtonmousePressEvent*(self: gen_qpushbutton_types.QPushButton, e: gen_qevent_types.QMouseEvent): void =
@@ -547,7 +555,7 @@ proc QPushButtonmousePressEvent*(self: gen_qpushbutton_types.QPushButton, e: gen
 proc fcQPushButton_vtable_callback_mousePressEvent(self: pointer, e: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPushButtonVTable](fcQPushButton_vdata(self)[])
   let self = QPushButton(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: e)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: e, owned: false)
   vtbl[].mousePressEvent(self, slotval1)
 
 proc QPushButtonmouseReleaseEvent*(self: gen_qpushbutton_types.QPushButton, e: gen_qevent_types.QMouseEvent): void =
@@ -556,7 +564,7 @@ proc QPushButtonmouseReleaseEvent*(self: gen_qpushbutton_types.QPushButton, e: g
 proc fcQPushButton_vtable_callback_mouseReleaseEvent(self: pointer, e: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPushButtonVTable](fcQPushButton_vdata(self)[])
   let self = QPushButton(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: e)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: e, owned: false)
   vtbl[].mouseReleaseEvent(self, slotval1)
 
 proc QPushButtonchangeEvent*(self: gen_qpushbutton_types.QPushButton, e: gen_qcoreevent_types.QEvent): void =
@@ -565,7 +573,7 @@ proc QPushButtonchangeEvent*(self: gen_qpushbutton_types.QPushButton, e: gen_qco
 proc fcQPushButton_vtable_callback_changeEvent(self: pointer, e: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPushButtonVTable](fcQPushButton_vdata(self)[])
   let self = QPushButton(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: e)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: e, owned: false)
   vtbl[].changeEvent(self, slotval1)
 
 proc QPushButtontimerEvent*(self: gen_qpushbutton_types.QPushButton, e: gen_qcoreevent_types.QTimerEvent): void =
@@ -574,7 +582,7 @@ proc QPushButtontimerEvent*(self: gen_qpushbutton_types.QPushButton, e: gen_qcor
 proc fcQPushButton_vtable_callback_timerEvent(self: pointer, e: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPushButtonVTable](fcQPushButton_vdata(self)[])
   let self = QPushButton(h: self)
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: e)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: e, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
 proc QPushButtondevType*(self: gen_qpushbutton_types.QPushButton): cint =
@@ -615,13 +623,16 @@ proc fcQPushButton_vtable_callback_hasHeightForWidth(self: pointer): bool {.cdec
   virtualReturn
 
 proc QPushButtonpaintEngine*(self: gen_qpushbutton_types.QPushButton): gen_qpaintengine_types.QPaintEngine =
-  gen_qpaintengine_types.QPaintEngine(h: fcQPushButton_virtualbase_paintEngine(self.h))
+  gen_qpaintengine_types.QPaintEngine(h: fcQPushButton_virtualbase_paintEngine(self.h), owned: false)
 
 proc fcQPushButton_vtable_callback_paintEngine(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QPushButtonVTable](fcQPushButton_vdata(self)[])
   let self = QPushButton(h: self)
   var virtualReturn = vtbl[].paintEngine(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QPushButtonmouseDoubleClickEvent*(self: gen_qpushbutton_types.QPushButton, event: gen_qevent_types.QMouseEvent): void =
   fcQPushButton_virtualbase_mouseDoubleClickEvent(self.h, event.h)
@@ -629,7 +640,7 @@ proc QPushButtonmouseDoubleClickEvent*(self: gen_qpushbutton_types.QPushButton, 
 proc fcQPushButton_vtable_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPushButtonVTable](fcQPushButton_vdata(self)[])
   let self = QPushButton(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseDoubleClickEvent(self, slotval1)
 
 proc QPushButtonwheelEvent*(self: gen_qpushbutton_types.QPushButton, event: gen_qevent_types.QWheelEvent): void =
@@ -638,7 +649,7 @@ proc QPushButtonwheelEvent*(self: gen_qpushbutton_types.QPushButton, event: gen_
 proc fcQPushButton_vtable_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPushButtonVTable](fcQPushButton_vdata(self)[])
   let self = QPushButton(h: self)
-  let slotval1 = gen_qevent_types.QWheelEvent(h: event)
+  let slotval1 = gen_qevent_types.QWheelEvent(h: event, owned: false)
   vtbl[].wheelEvent(self, slotval1)
 
 proc QPushButtonenterEvent*(self: gen_qpushbutton_types.QPushButton, event: gen_qevent_types.QEnterEvent): void =
@@ -647,7 +658,7 @@ proc QPushButtonenterEvent*(self: gen_qpushbutton_types.QPushButton, event: gen_
 proc fcQPushButton_vtable_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPushButtonVTable](fcQPushButton_vdata(self)[])
   let self = QPushButton(h: self)
-  let slotval1 = gen_qevent_types.QEnterEvent(h: event)
+  let slotval1 = gen_qevent_types.QEnterEvent(h: event, owned: false)
   vtbl[].enterEvent(self, slotval1)
 
 proc QPushButtonleaveEvent*(self: gen_qpushbutton_types.QPushButton, event: gen_qcoreevent_types.QEvent): void =
@@ -656,7 +667,7 @@ proc QPushButtonleaveEvent*(self: gen_qpushbutton_types.QPushButton, event: gen_
 proc fcQPushButton_vtable_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPushButtonVTable](fcQPushButton_vdata(self)[])
   let self = QPushButton(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].leaveEvent(self, slotval1)
 
 proc QPushButtonmoveEvent*(self: gen_qpushbutton_types.QPushButton, event: gen_qevent_types.QMoveEvent): void =
@@ -665,7 +676,7 @@ proc QPushButtonmoveEvent*(self: gen_qpushbutton_types.QPushButton, event: gen_q
 proc fcQPushButton_vtable_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPushButtonVTable](fcQPushButton_vdata(self)[])
   let self = QPushButton(h: self)
-  let slotval1 = gen_qevent_types.QMoveEvent(h: event)
+  let slotval1 = gen_qevent_types.QMoveEvent(h: event, owned: false)
   vtbl[].moveEvent(self, slotval1)
 
 proc QPushButtonresizeEvent*(self: gen_qpushbutton_types.QPushButton, event: gen_qevent_types.QResizeEvent): void =
@@ -674,7 +685,7 @@ proc QPushButtonresizeEvent*(self: gen_qpushbutton_types.QPushButton, event: gen
 proc fcQPushButton_vtable_callback_resizeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPushButtonVTable](fcQPushButton_vdata(self)[])
   let self = QPushButton(h: self)
-  let slotval1 = gen_qevent_types.QResizeEvent(h: event)
+  let slotval1 = gen_qevent_types.QResizeEvent(h: event, owned: false)
   vtbl[].resizeEvent(self, slotval1)
 
 proc QPushButtoncloseEvent*(self: gen_qpushbutton_types.QPushButton, event: gen_qevent_types.QCloseEvent): void =
@@ -683,7 +694,7 @@ proc QPushButtoncloseEvent*(self: gen_qpushbutton_types.QPushButton, event: gen_
 proc fcQPushButton_vtable_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPushButtonVTable](fcQPushButton_vdata(self)[])
   let self = QPushButton(h: self)
-  let slotval1 = gen_qevent_types.QCloseEvent(h: event)
+  let slotval1 = gen_qevent_types.QCloseEvent(h: event, owned: false)
   vtbl[].closeEvent(self, slotval1)
 
 proc QPushButtoncontextMenuEvent*(self: gen_qpushbutton_types.QPushButton, event: gen_qevent_types.QContextMenuEvent): void =
@@ -692,7 +703,7 @@ proc QPushButtoncontextMenuEvent*(self: gen_qpushbutton_types.QPushButton, event
 proc fcQPushButton_vtable_callback_contextMenuEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPushButtonVTable](fcQPushButton_vdata(self)[])
   let self = QPushButton(h: self)
-  let slotval1 = gen_qevent_types.QContextMenuEvent(h: event)
+  let slotval1 = gen_qevent_types.QContextMenuEvent(h: event, owned: false)
   vtbl[].contextMenuEvent(self, slotval1)
 
 proc QPushButtontabletEvent*(self: gen_qpushbutton_types.QPushButton, event: gen_qevent_types.QTabletEvent): void =
@@ -701,7 +712,7 @@ proc QPushButtontabletEvent*(self: gen_qpushbutton_types.QPushButton, event: gen
 proc fcQPushButton_vtable_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPushButtonVTable](fcQPushButton_vdata(self)[])
   let self = QPushButton(h: self)
-  let slotval1 = gen_qevent_types.QTabletEvent(h: event)
+  let slotval1 = gen_qevent_types.QTabletEvent(h: event, owned: false)
   vtbl[].tabletEvent(self, slotval1)
 
 proc QPushButtonactionEvent*(self: gen_qpushbutton_types.QPushButton, event: gen_qevent_types.QActionEvent): void =
@@ -710,7 +721,7 @@ proc QPushButtonactionEvent*(self: gen_qpushbutton_types.QPushButton, event: gen
 proc fcQPushButton_vtable_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPushButtonVTable](fcQPushButton_vdata(self)[])
   let self = QPushButton(h: self)
-  let slotval1 = gen_qevent_types.QActionEvent(h: event)
+  let slotval1 = gen_qevent_types.QActionEvent(h: event, owned: false)
   vtbl[].actionEvent(self, slotval1)
 
 proc QPushButtondragEnterEvent*(self: gen_qpushbutton_types.QPushButton, event: gen_qevent_types.QDragEnterEvent): void =
@@ -719,7 +730,7 @@ proc QPushButtondragEnterEvent*(self: gen_qpushbutton_types.QPushButton, event: 
 proc fcQPushButton_vtable_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPushButtonVTable](fcQPushButton_vdata(self)[])
   let self = QPushButton(h: self)
-  let slotval1 = gen_qevent_types.QDragEnterEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragEnterEvent(h: event, owned: false)
   vtbl[].dragEnterEvent(self, slotval1)
 
 proc QPushButtondragMoveEvent*(self: gen_qpushbutton_types.QPushButton, event: gen_qevent_types.QDragMoveEvent): void =
@@ -728,7 +739,7 @@ proc QPushButtondragMoveEvent*(self: gen_qpushbutton_types.QPushButton, event: g
 proc fcQPushButton_vtable_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPushButtonVTable](fcQPushButton_vdata(self)[])
   let self = QPushButton(h: self)
-  let slotval1 = gen_qevent_types.QDragMoveEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragMoveEvent(h: event, owned: false)
   vtbl[].dragMoveEvent(self, slotval1)
 
 proc QPushButtondragLeaveEvent*(self: gen_qpushbutton_types.QPushButton, event: gen_qevent_types.QDragLeaveEvent): void =
@@ -737,7 +748,7 @@ proc QPushButtondragLeaveEvent*(self: gen_qpushbutton_types.QPushButton, event: 
 proc fcQPushButton_vtable_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPushButtonVTable](fcQPushButton_vdata(self)[])
   let self = QPushButton(h: self)
-  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event, owned: false)
   vtbl[].dragLeaveEvent(self, slotval1)
 
 proc QPushButtondropEvent*(self: gen_qpushbutton_types.QPushButton, event: gen_qevent_types.QDropEvent): void =
@@ -746,7 +757,7 @@ proc QPushButtondropEvent*(self: gen_qpushbutton_types.QPushButton, event: gen_q
 proc fcQPushButton_vtable_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPushButtonVTable](fcQPushButton_vdata(self)[])
   let self = QPushButton(h: self)
-  let slotval1 = gen_qevent_types.QDropEvent(h: event)
+  let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
   vtbl[].dropEvent(self, slotval1)
 
 proc QPushButtonshowEvent*(self: gen_qpushbutton_types.QPushButton, event: gen_qevent_types.QShowEvent): void =
@@ -755,7 +766,7 @@ proc QPushButtonshowEvent*(self: gen_qpushbutton_types.QPushButton, event: gen_q
 proc fcQPushButton_vtable_callback_showEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPushButtonVTable](fcQPushButton_vdata(self)[])
   let self = QPushButton(h: self)
-  let slotval1 = gen_qevent_types.QShowEvent(h: event)
+  let slotval1 = gen_qevent_types.QShowEvent(h: event, owned: false)
   vtbl[].showEvent(self, slotval1)
 
 proc QPushButtonhideEvent*(self: gen_qpushbutton_types.QPushButton, event: gen_qevent_types.QHideEvent): void =
@@ -764,7 +775,7 @@ proc QPushButtonhideEvent*(self: gen_qpushbutton_types.QPushButton, event: gen_q
 proc fcQPushButton_vtable_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPushButtonVTable](fcQPushButton_vdata(self)[])
   let self = QPushButton(h: self)
-  let slotval1 = gen_qevent_types.QHideEvent(h: event)
+  let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   vtbl[].hideEvent(self, slotval1)
 
 proc QPushButtonnativeEvent*(self: gen_qpushbutton_types.QPushButton, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool =
@@ -798,27 +809,33 @@ proc QPushButtoninitPainter*(self: gen_qpushbutton_types.QPushButton, painter: g
 proc fcQPushButton_vtable_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPushButtonVTable](fcQPushButton_vdata(self)[])
   let self = QPushButton(h: self)
-  let slotval1 = gen_qpainter_types.QPainter(h: painter)
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
   vtbl[].initPainter(self, slotval1)
 
 proc QPushButtonredirected*(self: gen_qpushbutton_types.QPushButton, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice =
-  gen_qpaintdevice_types.QPaintDevice(h: fcQPushButton_virtualbase_redirected(self.h, offset.h))
+  gen_qpaintdevice_types.QPaintDevice(h: fcQPushButton_virtualbase_redirected(self.h, offset.h), owned: false)
 
 proc fcQPushButton_vtable_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QPushButtonVTable](fcQPushButton_vdata(self)[])
   let self = QPushButton(h: self)
-  let slotval1 = gen_qpoint_types.QPoint(h: offset)
+  let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
   var virtualReturn = vtbl[].redirected(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QPushButtonsharedPainter*(self: gen_qpushbutton_types.QPushButton): gen_qpainter_types.QPainter =
-  gen_qpainter_types.QPainter(h: fcQPushButton_virtualbase_sharedPainter(self.h))
+  gen_qpainter_types.QPainter(h: fcQPushButton_virtualbase_sharedPainter(self.h), owned: false)
 
 proc fcQPushButton_vtable_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QPushButtonVTable](fcQPushButton_vdata(self)[])
   let self = QPushButton(h: self)
   var virtualReturn = vtbl[].sharedPainter(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QPushButtoninputMethodEvent*(self: gen_qpushbutton_types.QPushButton, param1: gen_qevent_types.QInputMethodEvent): void =
   fcQPushButton_virtualbase_inputMethodEvent(self.h, param1.h)
@@ -826,18 +843,21 @@ proc QPushButtoninputMethodEvent*(self: gen_qpushbutton_types.QPushButton, param
 proc fcQPushButton_vtable_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPushButtonVTable](fcQPushButton_vdata(self)[])
   let self = QPushButton(h: self)
-  let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1)
+  let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1, owned: false)
   vtbl[].inputMethodEvent(self, slotval1)
 
 proc QPushButtoninputMethodQuery*(self: gen_qpushbutton_types.QPushButton, param1: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQPushButton_virtualbase_inputMethodQuery(self.h, cint(param1)))
+  gen_qvariant_types.QVariant(h: fcQPushButton_virtualbase_inputMethodQuery(self.h, cint(param1)), owned: true)
 
 proc fcQPushButton_vtable_callback_inputMethodQuery(self: pointer, param1: cint): pointer {.cdecl.} =
   let vtbl = cast[ptr QPushButtonVTable](fcQPushButton_vdata(self)[])
   let self = QPushButton(h: self)
   let slotval1 = cint(param1)
   var virtualReturn = vtbl[].inputMethodQuery(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QPushButtonfocusNextPrevChild*(self: gen_qpushbutton_types.QPushButton, next: bool): bool =
   fcQPushButton_virtualbase_focusNextPrevChild(self.h, next)
@@ -855,8 +875,8 @@ proc QPushButtoneventFilter*(self: gen_qpushbutton_types.QPushButton, watched: g
 proc fcQPushButton_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QPushButtonVTable](fcQPushButton_vdata(self)[])
   let self = QPushButton(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
@@ -866,7 +886,7 @@ proc QPushButtonchildEvent*(self: gen_qpushbutton_types.QPushButton, event: gen_
 proc fcQPushButton_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPushButtonVTable](fcQPushButton_vdata(self)[])
   let self = QPushButton(h: self)
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
 proc QPushButtoncustomEvent*(self: gen_qpushbutton_types.QPushButton, event: gen_qcoreevent_types.QEvent): void =
@@ -875,7 +895,7 @@ proc QPushButtoncustomEvent*(self: gen_qpushbutton_types.QPushButton, event: gen
 proc fcQPushButton_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPushButtonVTable](fcQPushButton_vdata(self)[])
   let self = QPushButton(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
 proc QPushButtonconnectNotify*(self: gen_qpushbutton_types.QPushButton, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -884,7 +904,7 @@ proc QPushButtonconnectNotify*(self: gen_qpushbutton_types.QPushButton, signal: 
 proc fcQPushButton_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPushButtonVTable](fcQPushButton_vdata(self)[])
   let self = QPushButton(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
 proc QPushButtondisconnectNotify*(self: gen_qpushbutton_types.QPushButton, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -893,7 +913,7 @@ proc QPushButtondisconnectNotify*(self: gen_qpushbutton_types.QPushButton, signa
 proc fcQPushButton_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPushButtonVTable](fcQPushButton_vdata(self)[])
   let self = QPushButton(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
 type VirtualQPushButton* {.inheritable.} = ref object of QPushButton
@@ -941,7 +961,7 @@ method event*(self: VirtualQPushButton, e: gen_qcoreevent_types.QEvent): bool {.
   QPushButtonevent(self[], e)
 proc fcQPushButton_method_callback_event(self: pointer, e: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQPushButton](fcQPushButton_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: e)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: e, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
@@ -949,49 +969,49 @@ method paintEvent*(self: VirtualQPushButton, param1: gen_qevent_types.QPaintEven
   QPushButtonpaintEvent(self[], param1)
 proc fcQPushButton_method_callback_paintEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPushButton](fcQPushButton_vdata(self)[])
-  let slotval1 = gen_qevent_types.QPaintEvent(h: param1)
+  let slotval1 = gen_qevent_types.QPaintEvent(h: param1, owned: false)
   inst.paintEvent(slotval1)
 
 method keyPressEvent*(self: VirtualQPushButton, param1: gen_qevent_types.QKeyEvent): void {.base.} =
   QPushButtonkeyPressEvent(self[], param1)
 proc fcQPushButton_method_callback_keyPressEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPushButton](fcQPushButton_vdata(self)[])
-  let slotval1 = gen_qevent_types.QKeyEvent(h: param1)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: param1, owned: false)
   inst.keyPressEvent(slotval1)
 
 method focusInEvent*(self: VirtualQPushButton, param1: gen_qevent_types.QFocusEvent): void {.base.} =
   QPushButtonfocusInEvent(self[], param1)
 proc fcQPushButton_method_callback_focusInEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPushButton](fcQPushButton_vdata(self)[])
-  let slotval1 = gen_qevent_types.QFocusEvent(h: param1)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: param1, owned: false)
   inst.focusInEvent(slotval1)
 
 method focusOutEvent*(self: VirtualQPushButton, param1: gen_qevent_types.QFocusEvent): void {.base.} =
   QPushButtonfocusOutEvent(self[], param1)
 proc fcQPushButton_method_callback_focusOutEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPushButton](fcQPushButton_vdata(self)[])
-  let slotval1 = gen_qevent_types.QFocusEvent(h: param1)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: param1, owned: false)
   inst.focusOutEvent(slotval1)
 
 method mouseMoveEvent*(self: VirtualQPushButton, param1: gen_qevent_types.QMouseEvent): void {.base.} =
   QPushButtonmouseMoveEvent(self[], param1)
 proc fcQPushButton_method_callback_mouseMoveEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPushButton](fcQPushButton_vdata(self)[])
-  let slotval1 = gen_qevent_types.QMouseEvent(h: param1)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: param1, owned: false)
   inst.mouseMoveEvent(slotval1)
 
 method initStyleOption*(self: VirtualQPushButton, option: gen_qstyleoption_types.QStyleOptionButton): void {.base.} =
   QPushButtoninitStyleOption(self[], option)
 proc fcQPushButton_method_callback_initStyleOption(self: pointer, option: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPushButton](fcQPushButton_vdata(self)[])
-  let slotval1 = gen_qstyleoption_types.QStyleOptionButton(h: option)
+  let slotval1 = gen_qstyleoption_types.QStyleOptionButton(h: option, owned: false)
   inst.initStyleOption(slotval1)
 
 method hitButton*(self: VirtualQPushButton, pos: gen_qpoint_types.QPoint): bool {.base.} =
   QPushButtonhitButton(self[], pos)
 proc fcQPushButton_method_callback_hitButton(self: pointer, pos: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQPushButton](fcQPushButton_vdata(self)[])
-  let slotval1 = gen_qpoint_types.QPoint(h: pos)
+  let slotval1 = gen_qpoint_types.QPoint(h: pos, owned: false)
   var virtualReturn = inst.hitButton(slotval1)
   virtualReturn
 
@@ -1011,35 +1031,35 @@ method keyReleaseEvent*(self: VirtualQPushButton, e: gen_qevent_types.QKeyEvent)
   QPushButtonkeyReleaseEvent(self[], e)
 proc fcQPushButton_method_callback_keyReleaseEvent(self: pointer, e: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPushButton](fcQPushButton_vdata(self)[])
-  let slotval1 = gen_qevent_types.QKeyEvent(h: e)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: e, owned: false)
   inst.keyReleaseEvent(slotval1)
 
 method mousePressEvent*(self: VirtualQPushButton, e: gen_qevent_types.QMouseEvent): void {.base.} =
   QPushButtonmousePressEvent(self[], e)
 proc fcQPushButton_method_callback_mousePressEvent(self: pointer, e: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPushButton](fcQPushButton_vdata(self)[])
-  let slotval1 = gen_qevent_types.QMouseEvent(h: e)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: e, owned: false)
   inst.mousePressEvent(slotval1)
 
 method mouseReleaseEvent*(self: VirtualQPushButton, e: gen_qevent_types.QMouseEvent): void {.base.} =
   QPushButtonmouseReleaseEvent(self[], e)
 proc fcQPushButton_method_callback_mouseReleaseEvent(self: pointer, e: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPushButton](fcQPushButton_vdata(self)[])
-  let slotval1 = gen_qevent_types.QMouseEvent(h: e)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: e, owned: false)
   inst.mouseReleaseEvent(slotval1)
 
 method changeEvent*(self: VirtualQPushButton, e: gen_qcoreevent_types.QEvent): void {.base.} =
   QPushButtonchangeEvent(self[], e)
 proc fcQPushButton_method_callback_changeEvent(self: pointer, e: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPushButton](fcQPushButton_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: e)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: e, owned: false)
   inst.changeEvent(slotval1)
 
 method timerEvent*(self: VirtualQPushButton, e: gen_qcoreevent_types.QTimerEvent): void {.base.} =
   QPushButtontimerEvent(self[], e)
 proc fcQPushButton_method_callback_timerEvent(self: pointer, e: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPushButton](fcQPushButton_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: e)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: e, owned: false)
   inst.timerEvent(slotval1)
 
 method devType*(self: VirtualQPushButton): cint {.base.} =
@@ -1082,112 +1102,112 @@ method mouseDoubleClickEvent*(self: VirtualQPushButton, event: gen_qevent_types.
   QPushButtonmouseDoubleClickEvent(self[], event)
 proc fcQPushButton_method_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPushButton](fcQPushButton_vdata(self)[])
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mouseDoubleClickEvent(slotval1)
 
 method wheelEvent*(self: VirtualQPushButton, event: gen_qevent_types.QWheelEvent): void {.base.} =
   QPushButtonwheelEvent(self[], event)
 proc fcQPushButton_method_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPushButton](fcQPushButton_vdata(self)[])
-  let slotval1 = gen_qevent_types.QWheelEvent(h: event)
+  let slotval1 = gen_qevent_types.QWheelEvent(h: event, owned: false)
   inst.wheelEvent(slotval1)
 
 method enterEvent*(self: VirtualQPushButton, event: gen_qevent_types.QEnterEvent): void {.base.} =
   QPushButtonenterEvent(self[], event)
 proc fcQPushButton_method_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPushButton](fcQPushButton_vdata(self)[])
-  let slotval1 = gen_qevent_types.QEnterEvent(h: event)
+  let slotval1 = gen_qevent_types.QEnterEvent(h: event, owned: false)
   inst.enterEvent(slotval1)
 
 method leaveEvent*(self: VirtualQPushButton, event: gen_qcoreevent_types.QEvent): void {.base.} =
   QPushButtonleaveEvent(self[], event)
 proc fcQPushButton_method_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPushButton](fcQPushButton_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.leaveEvent(slotval1)
 
 method moveEvent*(self: VirtualQPushButton, event: gen_qevent_types.QMoveEvent): void {.base.} =
   QPushButtonmoveEvent(self[], event)
 proc fcQPushButton_method_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPushButton](fcQPushButton_vdata(self)[])
-  let slotval1 = gen_qevent_types.QMoveEvent(h: event)
+  let slotval1 = gen_qevent_types.QMoveEvent(h: event, owned: false)
   inst.moveEvent(slotval1)
 
 method resizeEvent*(self: VirtualQPushButton, event: gen_qevent_types.QResizeEvent): void {.base.} =
   QPushButtonresizeEvent(self[], event)
 proc fcQPushButton_method_callback_resizeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPushButton](fcQPushButton_vdata(self)[])
-  let slotval1 = gen_qevent_types.QResizeEvent(h: event)
+  let slotval1 = gen_qevent_types.QResizeEvent(h: event, owned: false)
   inst.resizeEvent(slotval1)
 
 method closeEvent*(self: VirtualQPushButton, event: gen_qevent_types.QCloseEvent): void {.base.} =
   QPushButtoncloseEvent(self[], event)
 proc fcQPushButton_method_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPushButton](fcQPushButton_vdata(self)[])
-  let slotval1 = gen_qevent_types.QCloseEvent(h: event)
+  let slotval1 = gen_qevent_types.QCloseEvent(h: event, owned: false)
   inst.closeEvent(slotval1)
 
 method contextMenuEvent*(self: VirtualQPushButton, event: gen_qevent_types.QContextMenuEvent): void {.base.} =
   QPushButtoncontextMenuEvent(self[], event)
 proc fcQPushButton_method_callback_contextMenuEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPushButton](fcQPushButton_vdata(self)[])
-  let slotval1 = gen_qevent_types.QContextMenuEvent(h: event)
+  let slotval1 = gen_qevent_types.QContextMenuEvent(h: event, owned: false)
   inst.contextMenuEvent(slotval1)
 
 method tabletEvent*(self: VirtualQPushButton, event: gen_qevent_types.QTabletEvent): void {.base.} =
   QPushButtontabletEvent(self[], event)
 proc fcQPushButton_method_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPushButton](fcQPushButton_vdata(self)[])
-  let slotval1 = gen_qevent_types.QTabletEvent(h: event)
+  let slotval1 = gen_qevent_types.QTabletEvent(h: event, owned: false)
   inst.tabletEvent(slotval1)
 
 method actionEvent*(self: VirtualQPushButton, event: gen_qevent_types.QActionEvent): void {.base.} =
   QPushButtonactionEvent(self[], event)
 proc fcQPushButton_method_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPushButton](fcQPushButton_vdata(self)[])
-  let slotval1 = gen_qevent_types.QActionEvent(h: event)
+  let slotval1 = gen_qevent_types.QActionEvent(h: event, owned: false)
   inst.actionEvent(slotval1)
 
 method dragEnterEvent*(self: VirtualQPushButton, event: gen_qevent_types.QDragEnterEvent): void {.base.} =
   QPushButtondragEnterEvent(self[], event)
 proc fcQPushButton_method_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPushButton](fcQPushButton_vdata(self)[])
-  let slotval1 = gen_qevent_types.QDragEnterEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragEnterEvent(h: event, owned: false)
   inst.dragEnterEvent(slotval1)
 
 method dragMoveEvent*(self: VirtualQPushButton, event: gen_qevent_types.QDragMoveEvent): void {.base.} =
   QPushButtondragMoveEvent(self[], event)
 proc fcQPushButton_method_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPushButton](fcQPushButton_vdata(self)[])
-  let slotval1 = gen_qevent_types.QDragMoveEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragMoveEvent(h: event, owned: false)
   inst.dragMoveEvent(slotval1)
 
 method dragLeaveEvent*(self: VirtualQPushButton, event: gen_qevent_types.QDragLeaveEvent): void {.base.} =
   QPushButtondragLeaveEvent(self[], event)
 proc fcQPushButton_method_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPushButton](fcQPushButton_vdata(self)[])
-  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event, owned: false)
   inst.dragLeaveEvent(slotval1)
 
 method dropEvent*(self: VirtualQPushButton, event: gen_qevent_types.QDropEvent): void {.base.} =
   QPushButtondropEvent(self[], event)
 proc fcQPushButton_method_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPushButton](fcQPushButton_vdata(self)[])
-  let slotval1 = gen_qevent_types.QDropEvent(h: event)
+  let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
   inst.dropEvent(slotval1)
 
 method showEvent*(self: VirtualQPushButton, event: gen_qevent_types.QShowEvent): void {.base.} =
   QPushButtonshowEvent(self[], event)
 proc fcQPushButton_method_callback_showEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPushButton](fcQPushButton_vdata(self)[])
-  let slotval1 = gen_qevent_types.QShowEvent(h: event)
+  let slotval1 = gen_qevent_types.QShowEvent(h: event, owned: false)
   inst.showEvent(slotval1)
 
 method hideEvent*(self: VirtualQPushButton, event: gen_qevent_types.QHideEvent): void {.base.} =
   QPushButtonhideEvent(self[], event)
 proc fcQPushButton_method_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPushButton](fcQPushButton_vdata(self)[])
-  let slotval1 = gen_qevent_types.QHideEvent(h: event)
+  let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   inst.hideEvent(slotval1)
 
 method nativeEvent*(self: VirtualQPushButton, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
@@ -1215,14 +1235,14 @@ method initPainter*(self: VirtualQPushButton, painter: gen_qpainter_types.QPaint
   QPushButtoninitPainter(self[], painter)
 proc fcQPushButton_method_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPushButton](fcQPushButton_vdata(self)[])
-  let slotval1 = gen_qpainter_types.QPainter(h: painter)
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
   inst.initPainter(slotval1)
 
 method redirected*(self: VirtualQPushButton, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.base.} =
   QPushButtonredirected(self[], offset)
 proc fcQPushButton_method_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQPushButton](fcQPushButton_vdata(self)[])
-  let slotval1 = gen_qpoint_types.QPoint(h: offset)
+  let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
   var virtualReturn = inst.redirected(slotval1)
   virtualReturn.h
 
@@ -1237,7 +1257,7 @@ method inputMethodEvent*(self: VirtualQPushButton, param1: gen_qevent_types.QInp
   QPushButtoninputMethodEvent(self[], param1)
 proc fcQPushButton_method_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPushButton](fcQPushButton_vdata(self)[])
-  let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1)
+  let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1, owned: false)
   inst.inputMethodEvent(slotval1)
 
 method inputMethodQuery*(self: VirtualQPushButton, param1: cint): gen_qvariant_types.QVariant {.base.} =
@@ -1260,8 +1280,8 @@ method eventFilter*(self: VirtualQPushButton, watched: gen_qobject_types.QObject
   QPushButtoneventFilter(self[], watched, event)
 proc fcQPushButton_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQPushButton](fcQPushButton_vdata(self)[])
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
@@ -1269,28 +1289,28 @@ method childEvent*(self: VirtualQPushButton, event: gen_qcoreevent_types.QChildE
   QPushButtonchildEvent(self[], event)
 proc fcQPushButton_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPushButton](fcQPushButton_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
 method customEvent*(self: VirtualQPushButton, event: gen_qcoreevent_types.QEvent): void {.base.} =
   QPushButtoncustomEvent(self[], event)
 proc fcQPushButton_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPushButton](fcQPushButton_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
 method connectNotify*(self: VirtualQPushButton, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
   QPushButtonconnectNotify(self[], signal)
 proc fcQPushButton_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPushButton](fcQPushButton_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
 method disconnectNotify*(self: VirtualQPushButton, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
   QPushButtondisconnectNotify(self[], signal)
 proc fcQPushButton_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPushButton](fcQPushButton_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
 
 proc updateMicroFocus*(self: gen_qpushbutton_types.QPushButton): void =
@@ -1309,7 +1329,7 @@ proc focusPreviousChild*(self: gen_qpushbutton_types.QPushButton): bool =
   fcQPushButton_protectedbase_focusPreviousChild(self.h)
 
 proc sender*(self: gen_qpushbutton_types.QPushButton): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQPushButton_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQPushButton_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qpushbutton_types.QPushButton): cint =
   fcQPushButton_protectedbase_senderSignalIndex(self.h)
@@ -1436,7 +1456,7 @@ proc create*(T: type gen_qpushbutton_types.QPushButton,
     vtbl[].vtbl.connectNotify = fcQPushButton_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQPushButton_vtable_callback_disconnectNotify
-  let tmp = gen_qpushbutton_types.QPushButton(h: fcQPushButton_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h))
+  let tmp = gen_qpushbutton_types.QPushButton(h: fcQPushButton_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h), owned: true)
   fcQPushButton_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qpushbutton_types.QPushButton,
@@ -1554,7 +1574,7 @@ proc create*(T: type gen_qpushbutton_types.QPushButton,
     vtbl[].vtbl.connectNotify = fcQPushButton_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQPushButton_vtable_callback_disconnectNotify
-  let tmp = gen_qpushbutton_types.QPushButton(h: fcQPushButton_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer))))
+  let tmp = gen_qpushbutton_types.QPushButton(h: fcQPushButton_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer))), owned: true)
   fcQPushButton_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qpushbutton_types.QPushButton,
@@ -1673,7 +1693,7 @@ proc create*(T: type gen_qpushbutton_types.QPushButton,
     vtbl[].vtbl.connectNotify = fcQPushButton_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQPushButton_vtable_callback_disconnectNotify
-  let tmp = gen_qpushbutton_types.QPushButton(h: fcQPushButton_new3(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))))
+  let tmp = gen_qpushbutton_types.QPushButton(h: fcQPushButton_new3(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))), owned: true)
   fcQPushButton_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qpushbutton_types.QPushButton,
@@ -1792,7 +1812,7 @@ proc create*(T: type gen_qpushbutton_types.QPushButton,
     vtbl[].vtbl.connectNotify = fcQPushButton_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQPushButton_vtable_callback_disconnectNotify
-  let tmp = gen_qpushbutton_types.QPushButton(h: fcQPushButton_new4(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), icon.h, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))))
+  let tmp = gen_qpushbutton_types.QPushButton(h: fcQPushButton_new4(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), icon.h, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))), owned: true)
   fcQPushButton_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qpushbutton_types.QPushButton,
@@ -1911,7 +1931,7 @@ proc create*(T: type gen_qpushbutton_types.QPushButton,
     vtbl[].vtbl.connectNotify = fcQPushButton_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQPushButton_vtable_callback_disconnectNotify
-  let tmp = gen_qpushbutton_types.QPushButton(h: fcQPushButton_new5(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), parent.h))
+  let tmp = gen_qpushbutton_types.QPushButton(h: fcQPushButton_new5(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), parent.h), owned: true)
   fcQPushButton_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qpushbutton_types.QPushButton,
@@ -2030,13 +2050,14 @@ proc create*(T: type gen_qpushbutton_types.QPushButton,
     vtbl[].vtbl.connectNotify = fcQPushButton_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQPushButton_vtable_callback_disconnectNotify
-  let tmp = gen_qpushbutton_types.QPushButton(h: fcQPushButton_new6(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), icon.h, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), parent.h))
+  let tmp = gen_qpushbutton_types.QPushButton(h: fcQPushButton_new6(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), icon.h, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), parent.h), owned: true)
   fcQPushButton_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQPushButton_mvtbl = cQPushButtonVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQPushButton()[])](self.fcQPushButton_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   metaObject: fcQPushButton_method_callback_metaObject,
   metacast: fcQPushButton_method_callback_metacast,
@@ -2136,5 +2157,3 @@ proc create*(T: type gen_qpushbutton_types.QPushButton,
 
 proc staticMetaObject*(_: type gen_qpushbutton_types.QPushButton): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQPushButton_staticMetaObject())
-proc delete*(self: gen_qpushbutton_types.QPushButton) =
-  fcQPushButton_delete(self.h)

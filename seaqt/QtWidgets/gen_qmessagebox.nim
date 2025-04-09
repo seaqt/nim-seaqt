@@ -32,7 +32,7 @@ func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
     else:
       copyMem(addr result[0], v.data, len)
 
-const cflags = gorge("pkg-config --cflags Qt6Widgets")  & " -fPIC"
+const cflags = gorge("pkg-config --cflags Qt6Widgets") & " -fPIC"
 {.compile("gen_qmessagebox.cpp", cflags).}
 
 
@@ -360,10 +360,9 @@ proc fcQMessageBox_new7(vtbl: pointer, vdata: csize_t, icon: cint, title: struct
 proc fcQMessageBox_new8(vtbl: pointer, vdata: csize_t, title: struct_miqt_string, text: struct_miqt_string, icon: cint, button0: cint, button1: cint, button2: cint, parent: pointer): ptr cQMessageBox {.importc: "QMessageBox_new8".}
 proc fcQMessageBox_new9(vtbl: pointer, vdata: csize_t, title: struct_miqt_string, text: struct_miqt_string, icon: cint, button0: cint, button1: cint, button2: cint, parent: pointer, f: cint): ptr cQMessageBox {.importc: "QMessageBox_new9".}
 proc fcQMessageBox_staticMetaObject(): pointer {.importc: "QMessageBox_staticMetaObject".}
-proc fcQMessageBox_delete(self: pointer) {.importc: "QMessageBox_delete".}
 
 proc metaObject*(self: gen_qmessagebox_types.QMessageBox): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQMessageBox_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQMessageBox_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qmessagebox_types.QMessageBox, param1: cstring): pointer =
   fcQMessageBox_metacast(self.h, param1)
@@ -381,10 +380,10 @@ proc addButton*(self: gen_qmessagebox_types.QMessageBox, button: gen_qabstractbu
   fcQMessageBox_addButton(self.h, button.h, cint(role))
 
 proc addButton*(self: gen_qmessagebox_types.QMessageBox, text: string, role: cint): gen_qpushbutton_types.QPushButton =
-  gen_qpushbutton_types.QPushButton(h: fcQMessageBox_addButton2(self.h, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), cint(role)))
+  gen_qpushbutton_types.QPushButton(h: fcQMessageBox_addButton2(self.h, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), cint(role)), owned: false)
 
 proc addButton*(self: gen_qmessagebox_types.QMessageBox, button: cint): gen_qpushbutton_types.QPushButton =
-  gen_qpushbutton_types.QPushButton(h: fcQMessageBox_addButtonWithButton(self.h, cint(button)))
+  gen_qpushbutton_types.QPushButton(h: fcQMessageBox_addButtonWithButton(self.h, cint(button)), owned: false)
 
 proc removeButton*(self: gen_qmessagebox_types.QMessageBox, button: gen_qabstractbutton_types.QAbstractButton): void =
   fcQMessageBox_removeButton(self.h, button.h)
@@ -394,7 +393,7 @@ proc buttons*(self: gen_qmessagebox_types.QMessageBox): seq[gen_qabstractbutton_
   var vx_ret = newSeq[gen_qabstractbutton_types.QAbstractButton](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qabstractbutton_types.QAbstractButton(h: v_outCast[i])
+    vx_ret[i] = gen_qabstractbutton_types.QAbstractButton(h: v_outCast[i], owned: false)
   c_free(v_ma.data)
   vx_ret
 
@@ -411,10 +410,10 @@ proc standardButton*(self: gen_qmessagebox_types.QMessageBox, button: gen_qabstr
   cint(fcQMessageBox_standardButton(self.h, button.h))
 
 proc button*(self: gen_qmessagebox_types.QMessageBox, which: cint): gen_qabstractbutton_types.QAbstractButton =
-  gen_qabstractbutton_types.QAbstractButton(h: fcQMessageBox_button(self.h, cint(which)))
+  gen_qabstractbutton_types.QAbstractButton(h: fcQMessageBox_button(self.h, cint(which)), owned: false)
 
 proc defaultButton*(self: gen_qmessagebox_types.QMessageBox): gen_qpushbutton_types.QPushButton =
-  gen_qpushbutton_types.QPushButton(h: fcQMessageBox_defaultButton(self.h))
+  gen_qpushbutton_types.QPushButton(h: fcQMessageBox_defaultButton(self.h), owned: false)
 
 proc setDefaultButton*(self: gen_qmessagebox_types.QMessageBox, button: gen_qpushbutton_types.QPushButton): void =
   fcQMessageBox_setDefaultButton(self.h, button.h)
@@ -423,7 +422,7 @@ proc setDefaultButton*(self: gen_qmessagebox_types.QMessageBox, button: cint): v
   fcQMessageBox_setDefaultButtonWithButton(self.h, cint(button))
 
 proc escapeButton*(self: gen_qmessagebox_types.QMessageBox): gen_qabstractbutton_types.QAbstractButton =
-  gen_qabstractbutton_types.QAbstractButton(h: fcQMessageBox_escapeButton(self.h))
+  gen_qabstractbutton_types.QAbstractButton(h: fcQMessageBox_escapeButton(self.h), owned: false)
 
 proc setEscapeButton*(self: gen_qmessagebox_types.QMessageBox, button: gen_qabstractbutton_types.QAbstractButton): void =
   fcQMessageBox_setEscapeButton(self.h, button.h)
@@ -432,7 +431,7 @@ proc setEscapeButton*(self: gen_qmessagebox_types.QMessageBox, button: cint): vo
   fcQMessageBox_setEscapeButtonWithButton(self.h, cint(button))
 
 proc clickedButton*(self: gen_qmessagebox_types.QMessageBox): gen_qabstractbutton_types.QAbstractButton =
-  gen_qabstractbutton_types.QAbstractButton(h: fcQMessageBox_clickedButton(self.h))
+  gen_qabstractbutton_types.QAbstractButton(h: fcQMessageBox_clickedButton(self.h), owned: false)
 
 proc text*(self: gen_qmessagebox_types.QMessageBox): string =
   let v_ms = fcQMessageBox_text(self.h)
@@ -450,7 +449,7 @@ proc setIcon*(self: gen_qmessagebox_types.QMessageBox, icon: cint): void =
   fcQMessageBox_setIcon(self.h, cint(icon))
 
 proc iconPixmap*(self: gen_qmessagebox_types.QMessageBox): gen_qpixmap_types.QPixmap =
-  gen_qpixmap_types.QPixmap(h: fcQMessageBox_iconPixmap(self.h))
+  gen_qpixmap_types.QPixmap(h: fcQMessageBox_iconPixmap(self.h), owned: true)
 
 proc setIconPixmap*(self: gen_qmessagebox_types.QMessageBox, pixmap: gen_qpixmap_types.QPixmap): void =
   fcQMessageBox_setIconPixmap(self.h, pixmap.h)
@@ -471,7 +470,7 @@ proc setCheckBox*(self: gen_qmessagebox_types.QMessageBox, cb: gen_qcheckbox_typ
   fcQMessageBox_setCheckBox(self.h, cb.h)
 
 proc checkBox*(self: gen_qmessagebox_types.QMessageBox): gen_qcheckbox_types.QCheckBox =
-  gen_qcheckbox_types.QCheckBox(h: fcQMessageBox_checkBox(self.h))
+  gen_qcheckbox_types.QCheckBox(h: fcQMessageBox_checkBox(self.h), owned: false)
 
 proc information*(_: type gen_qmessagebox_types.QMessageBox, parent: gen_qwidget_types.QWidget, title: string, text: string): cint =
   cint(fcQMessageBox_information(parent.h, struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))))
@@ -561,7 +560,7 @@ proc setWindowModality*(self: gen_qmessagebox_types.QMessageBox, windowModality:
   fcQMessageBox_setWindowModality(self.h, cint(windowModality))
 
 proc standardIcon*(_: type gen_qmessagebox_types.QMessageBox, icon: cint): gen_qpixmap_types.QPixmap =
-  gen_qpixmap_types.QPixmap(h: fcQMessageBox_standardIcon(cint(icon)))
+  gen_qpixmap_types.QPixmap(h: fcQMessageBox_standardIcon(cint(icon)), owned: true)
 
 proc buttonClicked*(self: gen_qmessagebox_types.QMessageBox, button: gen_qabstractbutton_types.QAbstractButton): void =
   fcQMessageBox_buttonClicked(self.h, button.h)
@@ -569,7 +568,7 @@ proc buttonClicked*(self: gen_qmessagebox_types.QMessageBox, button: gen_qabstra
 type QMessageBoxbuttonClickedSlot* = proc(button: gen_qabstractbutton_types.QAbstractButton)
 proc fcQMessageBox_slot_callback_buttonClicked(slot: int, button: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QMessageBoxbuttonClickedSlot](cast[pointer](slot))
-  let slotval1 = gen_qabstractbutton_types.QAbstractButton(h: button)
+  let slotval1 = gen_qabstractbutton_types.QAbstractButton(h: button, owned: false)
 
   nimfunc[](slotval1)
 
@@ -746,7 +745,7 @@ type QMessageBoxchildEventProc* = proc(self: QMessageBox, event: gen_qcoreevent_
 type QMessageBoxcustomEventProc* = proc(self: QMessageBox, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QMessageBoxconnectNotifyProc* = proc(self: QMessageBox, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QMessageBoxdisconnectNotifyProc* = proc(self: QMessageBox, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
-type QMessageBoxVTable* = object
+type QMessageBoxVTable* {.inheritable, pure.} = object
   vtbl: cQMessageBoxVTable
   metaObject*: QMessageBoxmetaObjectProc
   metacast*: QMessageBoxmetacastProc
@@ -804,13 +803,16 @@ type QMessageBoxVTable* = object
   connectNotify*: QMessageBoxconnectNotifyProc
   disconnectNotify*: QMessageBoxdisconnectNotifyProc
 proc QMessageBoxmetaObject*(self: gen_qmessagebox_types.QMessageBox): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQMessageBox_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQMessageBox_virtualbase_metaObject(self.h), owned: false)
 
 proc fcQMessageBox_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self)[])
   let self = QMessageBox(h: self)
   var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QMessageBoxmetacast*(self: gen_qmessagebox_types.QMessageBox, param1: cstring): pointer =
   fcQMessageBox_virtualbase_metacast(self.h, param1)
@@ -840,7 +842,7 @@ proc QMessageBoxevent*(self: gen_qmessagebox_types.QMessageBox, e: gen_qcoreeven
 proc fcQMessageBox_vtable_callback_event(self: pointer, e: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self)[])
   let self = QMessageBox(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: e)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: e, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
@@ -850,7 +852,7 @@ proc QMessageBoxresizeEvent*(self: gen_qmessagebox_types.QMessageBox, event: gen
 proc fcQMessageBox_vtable_callback_resizeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self)[])
   let self = QMessageBox(h: self)
-  let slotval1 = gen_qevent_types.QResizeEvent(h: event)
+  let slotval1 = gen_qevent_types.QResizeEvent(h: event, owned: false)
   vtbl[].resizeEvent(self, slotval1)
 
 proc QMessageBoxshowEvent*(self: gen_qmessagebox_types.QMessageBox, event: gen_qevent_types.QShowEvent): void =
@@ -859,7 +861,7 @@ proc QMessageBoxshowEvent*(self: gen_qmessagebox_types.QMessageBox, event: gen_q
 proc fcQMessageBox_vtable_callback_showEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self)[])
   let self = QMessageBox(h: self)
-  let slotval1 = gen_qevent_types.QShowEvent(h: event)
+  let slotval1 = gen_qevent_types.QShowEvent(h: event, owned: false)
   vtbl[].showEvent(self, slotval1)
 
 proc QMessageBoxcloseEvent*(self: gen_qmessagebox_types.QMessageBox, event: gen_qevent_types.QCloseEvent): void =
@@ -868,7 +870,7 @@ proc QMessageBoxcloseEvent*(self: gen_qmessagebox_types.QMessageBox, event: gen_
 proc fcQMessageBox_vtable_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self)[])
   let self = QMessageBox(h: self)
-  let slotval1 = gen_qevent_types.QCloseEvent(h: event)
+  let slotval1 = gen_qevent_types.QCloseEvent(h: event, owned: false)
   vtbl[].closeEvent(self, slotval1)
 
 proc QMessageBoxkeyPressEvent*(self: gen_qmessagebox_types.QMessageBox, event: gen_qevent_types.QKeyEvent): void =
@@ -877,7 +879,7 @@ proc QMessageBoxkeyPressEvent*(self: gen_qmessagebox_types.QMessageBox, event: g
 proc fcQMessageBox_vtable_callback_keyPressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self)[])
   let self = QMessageBox(h: self)
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   vtbl[].keyPressEvent(self, slotval1)
 
 proc QMessageBoxchangeEvent*(self: gen_qmessagebox_types.QMessageBox, event: gen_qcoreevent_types.QEvent): void =
@@ -886,7 +888,7 @@ proc QMessageBoxchangeEvent*(self: gen_qmessagebox_types.QMessageBox, event: gen
 proc fcQMessageBox_vtable_callback_changeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self)[])
   let self = QMessageBox(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].changeEvent(self, slotval1)
 
 proc QMessageBoxsetVisible*(self: gen_qmessagebox_types.QMessageBox, visible: bool): void =
@@ -899,22 +901,28 @@ proc fcQMessageBox_vtable_callback_setVisible(self: pointer, visible: bool): voi
   vtbl[].setVisible(self, slotval1)
 
 proc QMessageBoxsizeHint*(self: gen_qmessagebox_types.QMessageBox): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQMessageBox_virtualbase_sizeHint(self.h))
+  gen_qsize_types.QSize(h: fcQMessageBox_virtualbase_sizeHint(self.h), owned: true)
 
 proc fcQMessageBox_vtable_callback_sizeHint(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self)[])
   let self = QMessageBox(h: self)
   var virtualReturn = vtbl[].sizeHint(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QMessageBoxminimumSizeHint*(self: gen_qmessagebox_types.QMessageBox): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQMessageBox_virtualbase_minimumSizeHint(self.h))
+  gen_qsize_types.QSize(h: fcQMessageBox_virtualbase_minimumSizeHint(self.h), owned: true)
 
 proc fcQMessageBox_vtable_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self)[])
   let self = QMessageBox(h: self)
   var virtualReturn = vtbl[].minimumSizeHint(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QMessageBoxopen*(self: gen_qmessagebox_types.QMessageBox): void =
   fcQMessageBox_virtualbase_open(self.h)
@@ -964,7 +972,7 @@ proc QMessageBoxcontextMenuEvent*(self: gen_qmessagebox_types.QMessageBox, param
 proc fcQMessageBox_vtable_callback_contextMenuEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self)[])
   let self = QMessageBox(h: self)
-  let slotval1 = gen_qevent_types.QContextMenuEvent(h: param1)
+  let slotval1 = gen_qevent_types.QContextMenuEvent(h: param1, owned: false)
   vtbl[].contextMenuEvent(self, slotval1)
 
 proc QMessageBoxeventFilter*(self: gen_qmessagebox_types.QMessageBox, param1: gen_qobject_types.QObject, param2: gen_qcoreevent_types.QEvent): bool =
@@ -973,8 +981,8 @@ proc QMessageBoxeventFilter*(self: gen_qmessagebox_types.QMessageBox, param1: ge
 proc fcQMessageBox_vtable_callback_eventFilter(self: pointer, param1: pointer, param2: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self)[])
   let self = QMessageBox(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: param1)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: param2)
+  let slotval1 = gen_qobject_types.QObject(h: param1, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: param2, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
@@ -1007,13 +1015,16 @@ proc fcQMessageBox_vtable_callback_hasHeightForWidth(self: pointer): bool {.cdec
   virtualReturn
 
 proc QMessageBoxpaintEngine*(self: gen_qmessagebox_types.QMessageBox): gen_qpaintengine_types.QPaintEngine =
-  gen_qpaintengine_types.QPaintEngine(h: fcQMessageBox_virtualbase_paintEngine(self.h))
+  gen_qpaintengine_types.QPaintEngine(h: fcQMessageBox_virtualbase_paintEngine(self.h), owned: false)
 
 proc fcQMessageBox_vtable_callback_paintEngine(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self)[])
   let self = QMessageBox(h: self)
   var virtualReturn = vtbl[].paintEngine(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QMessageBoxmousePressEvent*(self: gen_qmessagebox_types.QMessageBox, event: gen_qevent_types.QMouseEvent): void =
   fcQMessageBox_virtualbase_mousePressEvent(self.h, event.h)
@@ -1021,7 +1032,7 @@ proc QMessageBoxmousePressEvent*(self: gen_qmessagebox_types.QMessageBox, event:
 proc fcQMessageBox_vtable_callback_mousePressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self)[])
   let self = QMessageBox(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mousePressEvent(self, slotval1)
 
 proc QMessageBoxmouseReleaseEvent*(self: gen_qmessagebox_types.QMessageBox, event: gen_qevent_types.QMouseEvent): void =
@@ -1030,7 +1041,7 @@ proc QMessageBoxmouseReleaseEvent*(self: gen_qmessagebox_types.QMessageBox, even
 proc fcQMessageBox_vtable_callback_mouseReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self)[])
   let self = QMessageBox(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseReleaseEvent(self, slotval1)
 
 proc QMessageBoxmouseDoubleClickEvent*(self: gen_qmessagebox_types.QMessageBox, event: gen_qevent_types.QMouseEvent): void =
@@ -1039,7 +1050,7 @@ proc QMessageBoxmouseDoubleClickEvent*(self: gen_qmessagebox_types.QMessageBox, 
 proc fcQMessageBox_vtable_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self)[])
   let self = QMessageBox(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseDoubleClickEvent(self, slotval1)
 
 proc QMessageBoxmouseMoveEvent*(self: gen_qmessagebox_types.QMessageBox, event: gen_qevent_types.QMouseEvent): void =
@@ -1048,7 +1059,7 @@ proc QMessageBoxmouseMoveEvent*(self: gen_qmessagebox_types.QMessageBox, event: 
 proc fcQMessageBox_vtable_callback_mouseMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self)[])
   let self = QMessageBox(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseMoveEvent(self, slotval1)
 
 proc QMessageBoxwheelEvent*(self: gen_qmessagebox_types.QMessageBox, event: gen_qevent_types.QWheelEvent): void =
@@ -1057,7 +1068,7 @@ proc QMessageBoxwheelEvent*(self: gen_qmessagebox_types.QMessageBox, event: gen_
 proc fcQMessageBox_vtable_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self)[])
   let self = QMessageBox(h: self)
-  let slotval1 = gen_qevent_types.QWheelEvent(h: event)
+  let slotval1 = gen_qevent_types.QWheelEvent(h: event, owned: false)
   vtbl[].wheelEvent(self, slotval1)
 
 proc QMessageBoxkeyReleaseEvent*(self: gen_qmessagebox_types.QMessageBox, event: gen_qevent_types.QKeyEvent): void =
@@ -1066,7 +1077,7 @@ proc QMessageBoxkeyReleaseEvent*(self: gen_qmessagebox_types.QMessageBox, event:
 proc fcQMessageBox_vtable_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self)[])
   let self = QMessageBox(h: self)
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   vtbl[].keyReleaseEvent(self, slotval1)
 
 proc QMessageBoxfocusInEvent*(self: gen_qmessagebox_types.QMessageBox, event: gen_qevent_types.QFocusEvent): void =
@@ -1075,7 +1086,7 @@ proc QMessageBoxfocusInEvent*(self: gen_qmessagebox_types.QMessageBox, event: ge
 proc fcQMessageBox_vtable_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self)[])
   let self = QMessageBox(h: self)
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusInEvent(self, slotval1)
 
 proc QMessageBoxfocusOutEvent*(self: gen_qmessagebox_types.QMessageBox, event: gen_qevent_types.QFocusEvent): void =
@@ -1084,7 +1095,7 @@ proc QMessageBoxfocusOutEvent*(self: gen_qmessagebox_types.QMessageBox, event: g
 proc fcQMessageBox_vtable_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self)[])
   let self = QMessageBox(h: self)
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusOutEvent(self, slotval1)
 
 proc QMessageBoxenterEvent*(self: gen_qmessagebox_types.QMessageBox, event: gen_qevent_types.QEnterEvent): void =
@@ -1093,7 +1104,7 @@ proc QMessageBoxenterEvent*(self: gen_qmessagebox_types.QMessageBox, event: gen_
 proc fcQMessageBox_vtable_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self)[])
   let self = QMessageBox(h: self)
-  let slotval1 = gen_qevent_types.QEnterEvent(h: event)
+  let slotval1 = gen_qevent_types.QEnterEvent(h: event, owned: false)
   vtbl[].enterEvent(self, slotval1)
 
 proc QMessageBoxleaveEvent*(self: gen_qmessagebox_types.QMessageBox, event: gen_qcoreevent_types.QEvent): void =
@@ -1102,7 +1113,7 @@ proc QMessageBoxleaveEvent*(self: gen_qmessagebox_types.QMessageBox, event: gen_
 proc fcQMessageBox_vtable_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self)[])
   let self = QMessageBox(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].leaveEvent(self, slotval1)
 
 proc QMessageBoxpaintEvent*(self: gen_qmessagebox_types.QMessageBox, event: gen_qevent_types.QPaintEvent): void =
@@ -1111,7 +1122,7 @@ proc QMessageBoxpaintEvent*(self: gen_qmessagebox_types.QMessageBox, event: gen_
 proc fcQMessageBox_vtable_callback_paintEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self)[])
   let self = QMessageBox(h: self)
-  let slotval1 = gen_qevent_types.QPaintEvent(h: event)
+  let slotval1 = gen_qevent_types.QPaintEvent(h: event, owned: false)
   vtbl[].paintEvent(self, slotval1)
 
 proc QMessageBoxmoveEvent*(self: gen_qmessagebox_types.QMessageBox, event: gen_qevent_types.QMoveEvent): void =
@@ -1120,7 +1131,7 @@ proc QMessageBoxmoveEvent*(self: gen_qmessagebox_types.QMessageBox, event: gen_q
 proc fcQMessageBox_vtable_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self)[])
   let self = QMessageBox(h: self)
-  let slotval1 = gen_qevent_types.QMoveEvent(h: event)
+  let slotval1 = gen_qevent_types.QMoveEvent(h: event, owned: false)
   vtbl[].moveEvent(self, slotval1)
 
 proc QMessageBoxtabletEvent*(self: gen_qmessagebox_types.QMessageBox, event: gen_qevent_types.QTabletEvent): void =
@@ -1129,7 +1140,7 @@ proc QMessageBoxtabletEvent*(self: gen_qmessagebox_types.QMessageBox, event: gen
 proc fcQMessageBox_vtable_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self)[])
   let self = QMessageBox(h: self)
-  let slotval1 = gen_qevent_types.QTabletEvent(h: event)
+  let slotval1 = gen_qevent_types.QTabletEvent(h: event, owned: false)
   vtbl[].tabletEvent(self, slotval1)
 
 proc QMessageBoxactionEvent*(self: gen_qmessagebox_types.QMessageBox, event: gen_qevent_types.QActionEvent): void =
@@ -1138,7 +1149,7 @@ proc QMessageBoxactionEvent*(self: gen_qmessagebox_types.QMessageBox, event: gen
 proc fcQMessageBox_vtable_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self)[])
   let self = QMessageBox(h: self)
-  let slotval1 = gen_qevent_types.QActionEvent(h: event)
+  let slotval1 = gen_qevent_types.QActionEvent(h: event, owned: false)
   vtbl[].actionEvent(self, slotval1)
 
 proc QMessageBoxdragEnterEvent*(self: gen_qmessagebox_types.QMessageBox, event: gen_qevent_types.QDragEnterEvent): void =
@@ -1147,7 +1158,7 @@ proc QMessageBoxdragEnterEvent*(self: gen_qmessagebox_types.QMessageBox, event: 
 proc fcQMessageBox_vtable_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self)[])
   let self = QMessageBox(h: self)
-  let slotval1 = gen_qevent_types.QDragEnterEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragEnterEvent(h: event, owned: false)
   vtbl[].dragEnterEvent(self, slotval1)
 
 proc QMessageBoxdragMoveEvent*(self: gen_qmessagebox_types.QMessageBox, event: gen_qevent_types.QDragMoveEvent): void =
@@ -1156,7 +1167,7 @@ proc QMessageBoxdragMoveEvent*(self: gen_qmessagebox_types.QMessageBox, event: g
 proc fcQMessageBox_vtable_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self)[])
   let self = QMessageBox(h: self)
-  let slotval1 = gen_qevent_types.QDragMoveEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragMoveEvent(h: event, owned: false)
   vtbl[].dragMoveEvent(self, slotval1)
 
 proc QMessageBoxdragLeaveEvent*(self: gen_qmessagebox_types.QMessageBox, event: gen_qevent_types.QDragLeaveEvent): void =
@@ -1165,7 +1176,7 @@ proc QMessageBoxdragLeaveEvent*(self: gen_qmessagebox_types.QMessageBox, event: 
 proc fcQMessageBox_vtable_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self)[])
   let self = QMessageBox(h: self)
-  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event, owned: false)
   vtbl[].dragLeaveEvent(self, slotval1)
 
 proc QMessageBoxdropEvent*(self: gen_qmessagebox_types.QMessageBox, event: gen_qevent_types.QDropEvent): void =
@@ -1174,7 +1185,7 @@ proc QMessageBoxdropEvent*(self: gen_qmessagebox_types.QMessageBox, event: gen_q
 proc fcQMessageBox_vtable_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self)[])
   let self = QMessageBox(h: self)
-  let slotval1 = gen_qevent_types.QDropEvent(h: event)
+  let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
   vtbl[].dropEvent(self, slotval1)
 
 proc QMessageBoxhideEvent*(self: gen_qmessagebox_types.QMessageBox, event: gen_qevent_types.QHideEvent): void =
@@ -1183,7 +1194,7 @@ proc QMessageBoxhideEvent*(self: gen_qmessagebox_types.QMessageBox, event: gen_q
 proc fcQMessageBox_vtable_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self)[])
   let self = QMessageBox(h: self)
-  let slotval1 = gen_qevent_types.QHideEvent(h: event)
+  let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   vtbl[].hideEvent(self, slotval1)
 
 proc QMessageBoxnativeEvent*(self: gen_qmessagebox_types.QMessageBox, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool =
@@ -1217,27 +1228,33 @@ proc QMessageBoxinitPainter*(self: gen_qmessagebox_types.QMessageBox, painter: g
 proc fcQMessageBox_vtable_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self)[])
   let self = QMessageBox(h: self)
-  let slotval1 = gen_qpainter_types.QPainter(h: painter)
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
   vtbl[].initPainter(self, slotval1)
 
 proc QMessageBoxredirected*(self: gen_qmessagebox_types.QMessageBox, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice =
-  gen_qpaintdevice_types.QPaintDevice(h: fcQMessageBox_virtualbase_redirected(self.h, offset.h))
+  gen_qpaintdevice_types.QPaintDevice(h: fcQMessageBox_virtualbase_redirected(self.h, offset.h), owned: false)
 
 proc fcQMessageBox_vtable_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self)[])
   let self = QMessageBox(h: self)
-  let slotval1 = gen_qpoint_types.QPoint(h: offset)
+  let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
   var virtualReturn = vtbl[].redirected(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QMessageBoxsharedPainter*(self: gen_qmessagebox_types.QMessageBox): gen_qpainter_types.QPainter =
-  gen_qpainter_types.QPainter(h: fcQMessageBox_virtualbase_sharedPainter(self.h))
+  gen_qpainter_types.QPainter(h: fcQMessageBox_virtualbase_sharedPainter(self.h), owned: false)
 
 proc fcQMessageBox_vtable_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self)[])
   let self = QMessageBox(h: self)
   var virtualReturn = vtbl[].sharedPainter(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QMessageBoxinputMethodEvent*(self: gen_qmessagebox_types.QMessageBox, param1: gen_qevent_types.QInputMethodEvent): void =
   fcQMessageBox_virtualbase_inputMethodEvent(self.h, param1.h)
@@ -1245,18 +1262,21 @@ proc QMessageBoxinputMethodEvent*(self: gen_qmessagebox_types.QMessageBox, param
 proc fcQMessageBox_vtable_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self)[])
   let self = QMessageBox(h: self)
-  let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1)
+  let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1, owned: false)
   vtbl[].inputMethodEvent(self, slotval1)
 
 proc QMessageBoxinputMethodQuery*(self: gen_qmessagebox_types.QMessageBox, param1: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQMessageBox_virtualbase_inputMethodQuery(self.h, cint(param1)))
+  gen_qvariant_types.QVariant(h: fcQMessageBox_virtualbase_inputMethodQuery(self.h, cint(param1)), owned: true)
 
 proc fcQMessageBox_vtable_callback_inputMethodQuery(self: pointer, param1: cint): pointer {.cdecl.} =
   let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self)[])
   let self = QMessageBox(h: self)
   let slotval1 = cint(param1)
   var virtualReturn = vtbl[].inputMethodQuery(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QMessageBoxfocusNextPrevChild*(self: gen_qmessagebox_types.QMessageBox, next: bool): bool =
   fcQMessageBox_virtualbase_focusNextPrevChild(self.h, next)
@@ -1274,7 +1294,7 @@ proc QMessageBoxtimerEvent*(self: gen_qmessagebox_types.QMessageBox, event: gen_
 proc fcQMessageBox_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self)[])
   let self = QMessageBox(h: self)
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
 proc QMessageBoxchildEvent*(self: gen_qmessagebox_types.QMessageBox, event: gen_qcoreevent_types.QChildEvent): void =
@@ -1283,7 +1303,7 @@ proc QMessageBoxchildEvent*(self: gen_qmessagebox_types.QMessageBox, event: gen_
 proc fcQMessageBox_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self)[])
   let self = QMessageBox(h: self)
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
 proc QMessageBoxcustomEvent*(self: gen_qmessagebox_types.QMessageBox, event: gen_qcoreevent_types.QEvent): void =
@@ -1292,7 +1312,7 @@ proc QMessageBoxcustomEvent*(self: gen_qmessagebox_types.QMessageBox, event: gen
 proc fcQMessageBox_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self)[])
   let self = QMessageBox(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
 proc QMessageBoxconnectNotify*(self: gen_qmessagebox_types.QMessageBox, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -1301,7 +1321,7 @@ proc QMessageBoxconnectNotify*(self: gen_qmessagebox_types.QMessageBox, signal: 
 proc fcQMessageBox_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self)[])
   let self = QMessageBox(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
 proc QMessageBoxdisconnectNotify*(self: gen_qmessagebox_types.QMessageBox, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -1310,7 +1330,7 @@ proc QMessageBoxdisconnectNotify*(self: gen_qmessagebox_types.QMessageBox, signa
 proc fcQMessageBox_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self)[])
   let self = QMessageBox(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
 type VirtualQMessageBox* {.inheritable.} = ref object of QMessageBox
@@ -1344,7 +1364,7 @@ method event*(self: VirtualQMessageBox, e: gen_qcoreevent_types.QEvent): bool {.
   QMessageBoxevent(self[], e)
 proc fcQMessageBox_method_callback_event(self: pointer, e: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: e)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: e, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
@@ -1352,35 +1372,35 @@ method resizeEvent*(self: VirtualQMessageBox, event: gen_qevent_types.QResizeEve
   QMessageBoxresizeEvent(self[], event)
 proc fcQMessageBox_method_callback_resizeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self)[])
-  let slotval1 = gen_qevent_types.QResizeEvent(h: event)
+  let slotval1 = gen_qevent_types.QResizeEvent(h: event, owned: false)
   inst.resizeEvent(slotval1)
 
 method showEvent*(self: VirtualQMessageBox, event: gen_qevent_types.QShowEvent): void {.base.} =
   QMessageBoxshowEvent(self[], event)
 proc fcQMessageBox_method_callback_showEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self)[])
-  let slotval1 = gen_qevent_types.QShowEvent(h: event)
+  let slotval1 = gen_qevent_types.QShowEvent(h: event, owned: false)
   inst.showEvent(slotval1)
 
 method closeEvent*(self: VirtualQMessageBox, event: gen_qevent_types.QCloseEvent): void {.base.} =
   QMessageBoxcloseEvent(self[], event)
 proc fcQMessageBox_method_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self)[])
-  let slotval1 = gen_qevent_types.QCloseEvent(h: event)
+  let slotval1 = gen_qevent_types.QCloseEvent(h: event, owned: false)
   inst.closeEvent(slotval1)
 
 method keyPressEvent*(self: VirtualQMessageBox, event: gen_qevent_types.QKeyEvent): void {.base.} =
   QMessageBoxkeyPressEvent(self[], event)
 proc fcQMessageBox_method_callback_keyPressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self)[])
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   inst.keyPressEvent(slotval1)
 
 method changeEvent*(self: VirtualQMessageBox, event: gen_qcoreevent_types.QEvent): void {.base.} =
   QMessageBoxchangeEvent(self[], event)
 proc fcQMessageBox_method_callback_changeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.changeEvent(slotval1)
 
 method setVisible*(self: VirtualQMessageBox, visible: bool): void {.base.} =
@@ -1440,15 +1460,15 @@ method contextMenuEvent*(self: VirtualQMessageBox, param1: gen_qevent_types.QCon
   QMessageBoxcontextMenuEvent(self[], param1)
 proc fcQMessageBox_method_callback_contextMenuEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self)[])
-  let slotval1 = gen_qevent_types.QContextMenuEvent(h: param1)
+  let slotval1 = gen_qevent_types.QContextMenuEvent(h: param1, owned: false)
   inst.contextMenuEvent(slotval1)
 
 method eventFilter*(self: VirtualQMessageBox, param1: gen_qobject_types.QObject, param2: gen_qcoreevent_types.QEvent): bool {.base.} =
   QMessageBoxeventFilter(self[], param1, param2)
 proc fcQMessageBox_method_callback_eventFilter(self: pointer, param1: pointer, param2: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self)[])
-  let slotval1 = gen_qobject_types.QObject(h: param1)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: param2)
+  let slotval1 = gen_qobject_types.QObject(h: param1, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: param2, owned: false)
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
@@ -1485,133 +1505,133 @@ method mousePressEvent*(self: VirtualQMessageBox, event: gen_qevent_types.QMouse
   QMessageBoxmousePressEvent(self[], event)
 proc fcQMessageBox_method_callback_mousePressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self)[])
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mousePressEvent(slotval1)
 
 method mouseReleaseEvent*(self: VirtualQMessageBox, event: gen_qevent_types.QMouseEvent): void {.base.} =
   QMessageBoxmouseReleaseEvent(self[], event)
 proc fcQMessageBox_method_callback_mouseReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self)[])
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mouseReleaseEvent(slotval1)
 
 method mouseDoubleClickEvent*(self: VirtualQMessageBox, event: gen_qevent_types.QMouseEvent): void {.base.} =
   QMessageBoxmouseDoubleClickEvent(self[], event)
 proc fcQMessageBox_method_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self)[])
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mouseDoubleClickEvent(slotval1)
 
 method mouseMoveEvent*(self: VirtualQMessageBox, event: gen_qevent_types.QMouseEvent): void {.base.} =
   QMessageBoxmouseMoveEvent(self[], event)
 proc fcQMessageBox_method_callback_mouseMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self)[])
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mouseMoveEvent(slotval1)
 
 method wheelEvent*(self: VirtualQMessageBox, event: gen_qevent_types.QWheelEvent): void {.base.} =
   QMessageBoxwheelEvent(self[], event)
 proc fcQMessageBox_method_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self)[])
-  let slotval1 = gen_qevent_types.QWheelEvent(h: event)
+  let slotval1 = gen_qevent_types.QWheelEvent(h: event, owned: false)
   inst.wheelEvent(slotval1)
 
 method keyReleaseEvent*(self: VirtualQMessageBox, event: gen_qevent_types.QKeyEvent): void {.base.} =
   QMessageBoxkeyReleaseEvent(self[], event)
 proc fcQMessageBox_method_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self)[])
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   inst.keyReleaseEvent(slotval1)
 
 method focusInEvent*(self: VirtualQMessageBox, event: gen_qevent_types.QFocusEvent): void {.base.} =
   QMessageBoxfocusInEvent(self[], event)
 proc fcQMessageBox_method_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self)[])
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   inst.focusInEvent(slotval1)
 
 method focusOutEvent*(self: VirtualQMessageBox, event: gen_qevent_types.QFocusEvent): void {.base.} =
   QMessageBoxfocusOutEvent(self[], event)
 proc fcQMessageBox_method_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self)[])
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   inst.focusOutEvent(slotval1)
 
 method enterEvent*(self: VirtualQMessageBox, event: gen_qevent_types.QEnterEvent): void {.base.} =
   QMessageBoxenterEvent(self[], event)
 proc fcQMessageBox_method_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self)[])
-  let slotval1 = gen_qevent_types.QEnterEvent(h: event)
+  let slotval1 = gen_qevent_types.QEnterEvent(h: event, owned: false)
   inst.enterEvent(slotval1)
 
 method leaveEvent*(self: VirtualQMessageBox, event: gen_qcoreevent_types.QEvent): void {.base.} =
   QMessageBoxleaveEvent(self[], event)
 proc fcQMessageBox_method_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.leaveEvent(slotval1)
 
 method paintEvent*(self: VirtualQMessageBox, event: gen_qevent_types.QPaintEvent): void {.base.} =
   QMessageBoxpaintEvent(self[], event)
 proc fcQMessageBox_method_callback_paintEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self)[])
-  let slotval1 = gen_qevent_types.QPaintEvent(h: event)
+  let slotval1 = gen_qevent_types.QPaintEvent(h: event, owned: false)
   inst.paintEvent(slotval1)
 
 method moveEvent*(self: VirtualQMessageBox, event: gen_qevent_types.QMoveEvent): void {.base.} =
   QMessageBoxmoveEvent(self[], event)
 proc fcQMessageBox_method_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self)[])
-  let slotval1 = gen_qevent_types.QMoveEvent(h: event)
+  let slotval1 = gen_qevent_types.QMoveEvent(h: event, owned: false)
   inst.moveEvent(slotval1)
 
 method tabletEvent*(self: VirtualQMessageBox, event: gen_qevent_types.QTabletEvent): void {.base.} =
   QMessageBoxtabletEvent(self[], event)
 proc fcQMessageBox_method_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self)[])
-  let slotval1 = gen_qevent_types.QTabletEvent(h: event)
+  let slotval1 = gen_qevent_types.QTabletEvent(h: event, owned: false)
   inst.tabletEvent(slotval1)
 
 method actionEvent*(self: VirtualQMessageBox, event: gen_qevent_types.QActionEvent): void {.base.} =
   QMessageBoxactionEvent(self[], event)
 proc fcQMessageBox_method_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self)[])
-  let slotval1 = gen_qevent_types.QActionEvent(h: event)
+  let slotval1 = gen_qevent_types.QActionEvent(h: event, owned: false)
   inst.actionEvent(slotval1)
 
 method dragEnterEvent*(self: VirtualQMessageBox, event: gen_qevent_types.QDragEnterEvent): void {.base.} =
   QMessageBoxdragEnterEvent(self[], event)
 proc fcQMessageBox_method_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self)[])
-  let slotval1 = gen_qevent_types.QDragEnterEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragEnterEvent(h: event, owned: false)
   inst.dragEnterEvent(slotval1)
 
 method dragMoveEvent*(self: VirtualQMessageBox, event: gen_qevent_types.QDragMoveEvent): void {.base.} =
   QMessageBoxdragMoveEvent(self[], event)
 proc fcQMessageBox_method_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self)[])
-  let slotval1 = gen_qevent_types.QDragMoveEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragMoveEvent(h: event, owned: false)
   inst.dragMoveEvent(slotval1)
 
 method dragLeaveEvent*(self: VirtualQMessageBox, event: gen_qevent_types.QDragLeaveEvent): void {.base.} =
   QMessageBoxdragLeaveEvent(self[], event)
 proc fcQMessageBox_method_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self)[])
-  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event, owned: false)
   inst.dragLeaveEvent(slotval1)
 
 method dropEvent*(self: VirtualQMessageBox, event: gen_qevent_types.QDropEvent): void {.base.} =
   QMessageBoxdropEvent(self[], event)
 proc fcQMessageBox_method_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self)[])
-  let slotval1 = gen_qevent_types.QDropEvent(h: event)
+  let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
   inst.dropEvent(slotval1)
 
 method hideEvent*(self: VirtualQMessageBox, event: gen_qevent_types.QHideEvent): void {.base.} =
   QMessageBoxhideEvent(self[], event)
 proc fcQMessageBox_method_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self)[])
-  let slotval1 = gen_qevent_types.QHideEvent(h: event)
+  let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   inst.hideEvent(slotval1)
 
 method nativeEvent*(self: VirtualQMessageBox, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
@@ -1639,14 +1659,14 @@ method initPainter*(self: VirtualQMessageBox, painter: gen_qpainter_types.QPaint
   QMessageBoxinitPainter(self[], painter)
 proc fcQMessageBox_method_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self)[])
-  let slotval1 = gen_qpainter_types.QPainter(h: painter)
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
   inst.initPainter(slotval1)
 
 method redirected*(self: VirtualQMessageBox, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.base.} =
   QMessageBoxredirected(self[], offset)
 proc fcQMessageBox_method_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self)[])
-  let slotval1 = gen_qpoint_types.QPoint(h: offset)
+  let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
   var virtualReturn = inst.redirected(slotval1)
   virtualReturn.h
 
@@ -1661,7 +1681,7 @@ method inputMethodEvent*(self: VirtualQMessageBox, param1: gen_qevent_types.QInp
   QMessageBoxinputMethodEvent(self[], param1)
 proc fcQMessageBox_method_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self)[])
-  let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1)
+  let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1, owned: false)
   inst.inputMethodEvent(slotval1)
 
 method inputMethodQuery*(self: VirtualQMessageBox, param1: cint): gen_qvariant_types.QVariant {.base.} =
@@ -1684,35 +1704,35 @@ method timerEvent*(self: VirtualQMessageBox, event: gen_qcoreevent_types.QTimerE
   QMessageBoxtimerEvent(self[], event)
 proc fcQMessageBox_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
 method childEvent*(self: VirtualQMessageBox, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
   QMessageBoxchildEvent(self[], event)
 proc fcQMessageBox_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
 method customEvent*(self: VirtualQMessageBox, event: gen_qcoreevent_types.QEvent): void {.base.} =
   QMessageBoxcustomEvent(self[], event)
 proc fcQMessageBox_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
 method connectNotify*(self: VirtualQMessageBox, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
   QMessageBoxconnectNotify(self[], signal)
 proc fcQMessageBox_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
 method disconnectNotify*(self: VirtualQMessageBox, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
   QMessageBoxdisconnectNotify(self[], signal)
 proc fcQMessageBox_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
 
 proc adjustPosition*(self: gen_qmessagebox_types.QMessageBox, param1: gen_qwidget_types.QWidget): void =
@@ -1734,7 +1754,7 @@ proc focusPreviousChild*(self: gen_qmessagebox_types.QMessageBox): bool =
   fcQMessageBox_protectedbase_focusPreviousChild(self.h)
 
 proc sender*(self: gen_qmessagebox_types.QMessageBox): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQMessageBox_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQMessageBox_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qmessagebox_types.QMessageBox): cint =
   fcQMessageBox_protectedbase_senderSignalIndex(self.h)
@@ -1863,7 +1883,7 @@ proc create*(T: type gen_qmessagebox_types.QMessageBox,
     vtbl[].vtbl.connectNotify = fcQMessageBox_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQMessageBox_vtable_callback_disconnectNotify
-  let tmp = gen_qmessagebox_types.QMessageBox(h: fcQMessageBox_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h))
+  let tmp = gen_qmessagebox_types.QMessageBox(h: fcQMessageBox_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h), owned: true)
   fcQMessageBox_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qmessagebox_types.QMessageBox,
@@ -1983,7 +2003,7 @@ proc create*(T: type gen_qmessagebox_types.QMessageBox,
     vtbl[].vtbl.connectNotify = fcQMessageBox_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQMessageBox_vtable_callback_disconnectNotify
-  let tmp = gen_qmessagebox_types.QMessageBox(h: fcQMessageBox_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer))))
+  let tmp = gen_qmessagebox_types.QMessageBox(h: fcQMessageBox_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer))), owned: true)
   fcQMessageBox_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qmessagebox_types.QMessageBox,
@@ -2104,7 +2124,7 @@ proc create*(T: type gen_qmessagebox_types.QMessageBox,
     vtbl[].vtbl.connectNotify = fcQMessageBox_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQMessageBox_vtable_callback_disconnectNotify
-  let tmp = gen_qmessagebox_types.QMessageBox(h: fcQMessageBox_new3(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(icon), struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))))
+  let tmp = gen_qmessagebox_types.QMessageBox(h: fcQMessageBox_new3(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(icon), struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))), owned: true)
   fcQMessageBox_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qmessagebox_types.QMessageBox,
@@ -2225,7 +2245,7 @@ proc create*(T: type gen_qmessagebox_types.QMessageBox,
     vtbl[].vtbl.connectNotify = fcQMessageBox_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQMessageBox_vtable_callback_disconnectNotify
-  let tmp = gen_qmessagebox_types.QMessageBox(h: fcQMessageBox_new4(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), cint(icon), button0, button1, button2))
+  let tmp = gen_qmessagebox_types.QMessageBox(h: fcQMessageBox_new4(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), cint(icon), button0, button1, button2), owned: true)
   fcQMessageBox_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qmessagebox_types.QMessageBox,
@@ -2346,7 +2366,7 @@ proc create*(T: type gen_qmessagebox_types.QMessageBox,
     vtbl[].vtbl.connectNotify = fcQMessageBox_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQMessageBox_vtable_callback_disconnectNotify
-  let tmp = gen_qmessagebox_types.QMessageBox(h: fcQMessageBox_new5(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(icon), struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), cint(buttons)))
+  let tmp = gen_qmessagebox_types.QMessageBox(h: fcQMessageBox_new5(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(icon), struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), cint(buttons)), owned: true)
   fcQMessageBox_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qmessagebox_types.QMessageBox,
@@ -2467,7 +2487,7 @@ proc create*(T: type gen_qmessagebox_types.QMessageBox,
     vtbl[].vtbl.connectNotify = fcQMessageBox_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQMessageBox_vtable_callback_disconnectNotify
-  let tmp = gen_qmessagebox_types.QMessageBox(h: fcQMessageBox_new6(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(icon), struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), cint(buttons), parent.h))
+  let tmp = gen_qmessagebox_types.QMessageBox(h: fcQMessageBox_new6(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(icon), struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), cint(buttons), parent.h), owned: true)
   fcQMessageBox_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qmessagebox_types.QMessageBox,
@@ -2588,7 +2608,7 @@ proc create*(T: type gen_qmessagebox_types.QMessageBox,
     vtbl[].vtbl.connectNotify = fcQMessageBox_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQMessageBox_vtable_callback_disconnectNotify
-  let tmp = gen_qmessagebox_types.QMessageBox(h: fcQMessageBox_new7(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(icon), struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), cint(buttons), parent.h, cint(flags)))
+  let tmp = gen_qmessagebox_types.QMessageBox(h: fcQMessageBox_new7(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(icon), struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), cint(buttons), parent.h, cint(flags)), owned: true)
   fcQMessageBox_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qmessagebox_types.QMessageBox,
@@ -2709,7 +2729,7 @@ proc create*(T: type gen_qmessagebox_types.QMessageBox,
     vtbl[].vtbl.connectNotify = fcQMessageBox_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQMessageBox_vtable_callback_disconnectNotify
-  let tmp = gen_qmessagebox_types.QMessageBox(h: fcQMessageBox_new8(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), cint(icon), button0, button1, button2, parent.h))
+  let tmp = gen_qmessagebox_types.QMessageBox(h: fcQMessageBox_new8(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), cint(icon), button0, button1, button2, parent.h), owned: true)
   fcQMessageBox_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qmessagebox_types.QMessageBox,
@@ -2830,13 +2850,14 @@ proc create*(T: type gen_qmessagebox_types.QMessageBox,
     vtbl[].vtbl.connectNotify = fcQMessageBox_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQMessageBox_vtable_callback_disconnectNotify
-  let tmp = gen_qmessagebox_types.QMessageBox(h: fcQMessageBox_new9(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), cint(icon), button0, button1, button2, parent.h, cint(f)))
+  let tmp = gen_qmessagebox_types.QMessageBox(h: fcQMessageBox_new9(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), cint(icon), button0, button1, button2, parent.h, cint(f)), owned: true)
   fcQMessageBox_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQMessageBox_mvtbl = cQMessageBoxVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQMessageBox()[])](self.fcQMessageBox_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   metaObject: fcQMessageBox_method_callback_metaObject,
   metacast: fcQMessageBox_method_callback_metacast,
@@ -2958,5 +2979,3 @@ proc create*(T: type gen_qmessagebox_types.QMessageBox,
 
 proc staticMetaObject*(_: type gen_qmessagebox_types.QMessageBox): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQMessageBox_staticMetaObject())
-proc delete*(self: gen_qmessagebox_types.QMessageBox) =
-  fcQMessageBox_delete(self.h)

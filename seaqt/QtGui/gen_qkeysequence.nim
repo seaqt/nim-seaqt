@@ -32,9 +32,6 @@ func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
     else:
       copyMem(addr result[0], v.data, len)
 
-const cflags = gorge("pkg-config --cflags Qt6Gui")  & " -fPIC"
-{.compile("gen_qkeysequence.cpp", cflags).}
-
 
 type QKeySequenceStandardKeyEnum* = distinct cint
 template UnknownKey*(_: type QKeySequenceStandardKeyEnum): untyped = 0
@@ -173,7 +170,6 @@ proc fcQKeySequence_new11(k1: pointer, k2: pointer): ptr cQKeySequence {.importc
 proc fcQKeySequence_new12(k1: pointer, k2: pointer, k3: pointer): ptr cQKeySequence {.importc: "QKeySequence_new12".}
 proc fcQKeySequence_new13(k1: pointer, k2: pointer, k3: pointer, k4: pointer): ptr cQKeySequence {.importc: "QKeySequence_new13".}
 proc fcQKeySequence_staticMetaObject(): pointer {.importc: "QKeySequence_staticMetaObject".}
-proc fcQKeySequence_delete(self: pointer) {.importc: "QKeySequence_delete".}
 
 proc count*(self: gen_qkeysequence_types.QKeySequence): cint =
   fcQKeySequence_count(self.h)
@@ -188,14 +184,14 @@ proc toString*(self: gen_qkeysequence_types.QKeySequence): string =
   vx_ret
 
 proc fromString*(_: type gen_qkeysequence_types.QKeySequence, str: string): gen_qkeysequence_types.QKeySequence =
-  gen_qkeysequence_types.QKeySequence(h: fcQKeySequence_fromString(struct_miqt_string(data: if len(str) > 0: addr str[0] else: nil, len: csize_t(len(str)))))
+  gen_qkeysequence_types.QKeySequence(h: fcQKeySequence_fromString(struct_miqt_string(data: if len(str) > 0: addr str[0] else: nil, len: csize_t(len(str)))), owned: true)
 
 proc listFromString*(_: type gen_qkeysequence_types.QKeySequence, str: string): seq[gen_qkeysequence_types.QKeySequence] =
   var v_ma = fcQKeySequence_listFromString(struct_miqt_string(data: if len(str) > 0: addr str[0] else: nil, len: csize_t(len(str))))
   var vx_ret = newSeq[gen_qkeysequence_types.QKeySequence](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qkeysequence_types.QKeySequence(h: v_outCast[i])
+    vx_ret[i] = gen_qkeysequence_types.QKeySequence(h: v_outCast[i], owned: true)
   c_free(v_ma.data)
   vx_ret
 
@@ -213,22 +209,22 @@ proc matches*(self: gen_qkeysequence_types.QKeySequence, seq: gen_qkeysequence_t
   cint(fcQKeySequence_matches(self.h, seq.h))
 
 proc mnemonic*(_: type gen_qkeysequence_types.QKeySequence, text: string): gen_qkeysequence_types.QKeySequence =
-  gen_qkeysequence_types.QKeySequence(h: fcQKeySequence_mnemonic(struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))))
+  gen_qkeysequence_types.QKeySequence(h: fcQKeySequence_mnemonic(struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))), owned: true)
 
 proc keyBindings*(_: type gen_qkeysequence_types.QKeySequence, key: cint): seq[gen_qkeysequence_types.QKeySequence] =
   var v_ma = fcQKeySequence_keyBindings(cint(key))
   var vx_ret = newSeq[gen_qkeysequence_types.QKeySequence](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qkeysequence_types.QKeySequence(h: v_outCast[i])
+    vx_ret[i] = gen_qkeysequence_types.QKeySequence(h: v_outCast[i], owned: true)
   c_free(v_ma.data)
   vx_ret
 
 proc ToQVariant*(self: gen_qkeysequence_types.QKeySequence): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQKeySequence_ToQVariant(self.h))
+  gen_qvariant_types.QVariant(h: fcQKeySequence_ToQVariant(self.h), owned: true)
 
 proc operatorSubscript*(self: gen_qkeysequence_types.QKeySequence, i: cuint): gen_qnamespace_types.QKeyCombination =
-  gen_qnamespace_types.QKeyCombination(h: fcQKeySequence_operatorSubscript(self.h, i))
+  gen_qnamespace_types.QKeyCombination(h: fcQKeySequence_operatorSubscript(self.h, i), owned: true)
 
 proc operatorAssign*(self: gen_qkeysequence_types.QKeySequence, other: gen_qkeysequence_types.QKeySequence): void =
   fcQKeySequence_operatorAssign(self.h, other.h)
@@ -264,14 +260,14 @@ proc toString*(self: gen_qkeysequence_types.QKeySequence, format: cint): string 
   vx_ret
 
 proc fromString*(_: type gen_qkeysequence_types.QKeySequence, str: string, format: cint): gen_qkeysequence_types.QKeySequence =
-  gen_qkeysequence_types.QKeySequence(h: fcQKeySequence_fromString2(struct_miqt_string(data: if len(str) > 0: addr str[0] else: nil, len: csize_t(len(str))), cint(format)))
+  gen_qkeysequence_types.QKeySequence(h: fcQKeySequence_fromString2(struct_miqt_string(data: if len(str) > 0: addr str[0] else: nil, len: csize_t(len(str))), cint(format)), owned: true)
 
 proc listFromString*(_: type gen_qkeysequence_types.QKeySequence, str: string, format: cint): seq[gen_qkeysequence_types.QKeySequence] =
   var v_ma = fcQKeySequence_listFromString2(struct_miqt_string(data: if len(str) > 0: addr str[0] else: nil, len: csize_t(len(str))), cint(format))
   var vx_ret = newSeq[gen_qkeysequence_types.QKeySequence](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qkeysequence_types.QKeySequence(h: v_outCast[i])
+    vx_ret[i] = gen_qkeysequence_types.QKeySequence(h: v_outCast[i], owned: true)
   c_free(v_ma.data)
   vx_ret
 
@@ -286,57 +282,55 @@ proc listToString*(_: type gen_qkeysequence_types.QKeySequence, list: seq[gen_qk
   vx_ret
 
 proc create*(T: type gen_qkeysequence_types.QKeySequence): gen_qkeysequence_types.QKeySequence =
-  let tmp = gen_qkeysequence_types.QKeySequence(h: fcQKeySequence_new())
+  let tmp = gen_qkeysequence_types.QKeySequence(h: fcQKeySequence_new(), owned: true)
   tmp
 proc create*(T: type gen_qkeysequence_types.QKeySequence,
     key: string): gen_qkeysequence_types.QKeySequence =
-  let tmp = gen_qkeysequence_types.QKeySequence(h: fcQKeySequence_new2(struct_miqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key)))))
+  let tmp = gen_qkeysequence_types.QKeySequence(h: fcQKeySequence_new2(struct_miqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key)))), owned: true)
   tmp
 proc create*(T: type gen_qkeysequence_types.QKeySequence,
     k1: cint): gen_qkeysequence_types.QKeySequence =
-  let tmp = gen_qkeysequence_types.QKeySequence(h: fcQKeySequence_new3(k1))
+  let tmp = gen_qkeysequence_types.QKeySequence(h: fcQKeySequence_new3(k1), owned: true)
   tmp
 proc create*(T: type gen_qkeysequence_types.QKeySequence,
     k1: gen_qnamespace_types.QKeyCombination): gen_qkeysequence_types.QKeySequence =
-  let tmp = gen_qkeysequence_types.QKeySequence(h: fcQKeySequence_new4(k1.h))
+  let tmp = gen_qkeysequence_types.QKeySequence(h: fcQKeySequence_new4(k1.h), owned: true)
   tmp
 proc create*(T: type gen_qkeysequence_types.QKeySequence,
     ks: gen_qkeysequence_types.QKeySequence): gen_qkeysequence_types.QKeySequence =
-  let tmp = gen_qkeysequence_types.QKeySequence(h: fcQKeySequence_new5(ks.h))
+  let tmp = gen_qkeysequence_types.QKeySequence(h: fcQKeySequence_new5(ks.h), owned: true)
   tmp
 proc create2*(T: type gen_qkeysequence_types.QKeySequence,
     key: cint): gen_qkeysequence_types.QKeySequence =
-  let tmp = gen_qkeysequence_types.QKeySequence(h: fcQKeySequence_new6(cint(key)))
+  let tmp = gen_qkeysequence_types.QKeySequence(h: fcQKeySequence_new6(cint(key)), owned: true)
   tmp
 proc create*(T: type gen_qkeysequence_types.QKeySequence,
     key: string, format: cint): gen_qkeysequence_types.QKeySequence =
-  let tmp = gen_qkeysequence_types.QKeySequence(h: fcQKeySequence_new7(struct_miqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key))), cint(format)))
+  let tmp = gen_qkeysequence_types.QKeySequence(h: fcQKeySequence_new7(struct_miqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key))), cint(format)), owned: true)
   tmp
 proc create*(T: type gen_qkeysequence_types.QKeySequence,
     k1: cint, k2: cint): gen_qkeysequence_types.QKeySequence =
-  let tmp = gen_qkeysequence_types.QKeySequence(h: fcQKeySequence_new8(k1, k2))
+  let tmp = gen_qkeysequence_types.QKeySequence(h: fcQKeySequence_new8(k1, k2), owned: true)
   tmp
 proc create*(T: type gen_qkeysequence_types.QKeySequence,
     k1: cint, k2: cint, k3: cint): gen_qkeysequence_types.QKeySequence =
-  let tmp = gen_qkeysequence_types.QKeySequence(h: fcQKeySequence_new9(k1, k2, k3))
+  let tmp = gen_qkeysequence_types.QKeySequence(h: fcQKeySequence_new9(k1, k2, k3), owned: true)
   tmp
 proc create*(T: type gen_qkeysequence_types.QKeySequence,
     k1: cint, k2: cint, k3: cint, k4: cint): gen_qkeysequence_types.QKeySequence =
-  let tmp = gen_qkeysequence_types.QKeySequence(h: fcQKeySequence_new10(k1, k2, k3, k4))
+  let tmp = gen_qkeysequence_types.QKeySequence(h: fcQKeySequence_new10(k1, k2, k3, k4), owned: true)
   tmp
 proc create*(T: type gen_qkeysequence_types.QKeySequence,
     k1: gen_qnamespace_types.QKeyCombination, k2: gen_qnamespace_types.QKeyCombination): gen_qkeysequence_types.QKeySequence =
-  let tmp = gen_qkeysequence_types.QKeySequence(h: fcQKeySequence_new11(k1.h, k2.h))
+  let tmp = gen_qkeysequence_types.QKeySequence(h: fcQKeySequence_new11(k1.h, k2.h), owned: true)
   tmp
 proc create*(T: type gen_qkeysequence_types.QKeySequence,
     k1: gen_qnamespace_types.QKeyCombination, k2: gen_qnamespace_types.QKeyCombination, k3: gen_qnamespace_types.QKeyCombination): gen_qkeysequence_types.QKeySequence =
-  let tmp = gen_qkeysequence_types.QKeySequence(h: fcQKeySequence_new12(k1.h, k2.h, k3.h))
+  let tmp = gen_qkeysequence_types.QKeySequence(h: fcQKeySequence_new12(k1.h, k2.h, k3.h), owned: true)
   tmp
 proc create*(T: type gen_qkeysequence_types.QKeySequence,
     k1: gen_qnamespace_types.QKeyCombination, k2: gen_qnamespace_types.QKeyCombination, k3: gen_qnamespace_types.QKeyCombination, k4: gen_qnamespace_types.QKeyCombination): gen_qkeysequence_types.QKeySequence =
-  let tmp = gen_qkeysequence_types.QKeySequence(h: fcQKeySequence_new13(k1.h, k2.h, k3.h, k4.h))
+  let tmp = gen_qkeysequence_types.QKeySequence(h: fcQKeySequence_new13(k1.h, k2.h, k3.h, k4.h), owned: true)
   tmp
 proc staticMetaObject*(_: type gen_qkeysequence_types.QKeySequence): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQKeySequence_staticMetaObject())
-proc delete*(self: gen_qkeysequence_types.QKeySequence) =
-  fcQKeySequence_delete(self.h)

@@ -32,9 +32,6 @@ func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
     else:
       copyMem(addr result[0], v.data, len)
 
-const cflags = gorge("pkg-config --cflags Qt6Gui")  & " -fPIC"
-{.compile("gen_qstatictext.cpp", cflags).}
-
 
 type QStaticTextPerformanceHintEnum* = distinct cint
 template ModerateCaching*(_: type QStaticTextPerformanceHintEnum): untyped = 0
@@ -78,7 +75,6 @@ proc fcQStaticText_prepare2(self: pointer, matrix: pointer, font: pointer): void
 proc fcQStaticText_new(): ptr cQStaticText {.importc: "QStaticText_new".}
 proc fcQStaticText_new2(text: struct_miqt_string): ptr cQStaticText {.importc: "QStaticText_new2".}
 proc fcQStaticText_new3(other: pointer): ptr cQStaticText {.importc: "QStaticText_new3".}
-proc fcQStaticText_delete(self: pointer) {.importc: "QStaticText_delete".}
 
 proc operatorAssign*(self: gen_qstatictext_types.QStaticText, param1: gen_qstatictext_types.QStaticText): void =
   fcQStaticText_operatorAssign(self.h, param1.h)
@@ -111,10 +107,10 @@ proc setTextOption*(self: gen_qstatictext_types.QStaticText, textOption: gen_qte
   fcQStaticText_setTextOption(self.h, textOption.h)
 
 proc textOption*(self: gen_qstatictext_types.QStaticText): gen_qtextoption_types.QTextOption =
-  gen_qtextoption_types.QTextOption(h: fcQStaticText_textOption(self.h))
+  gen_qtextoption_types.QTextOption(h: fcQStaticText_textOption(self.h), owned: true)
 
 proc size*(self: gen_qstatictext_types.QStaticText): gen_qsize_types.QSizeF =
-  gen_qsize_types.QSizeF(h: fcQStaticText_size(self.h))
+  gen_qsize_types.QSizeF(h: fcQStaticText_size(self.h), owned: true)
 
 proc prepare*(self: gen_qstatictext_types.QStaticText): void =
   fcQStaticText_prepare(self.h)
@@ -138,15 +134,13 @@ proc prepare*(self: gen_qstatictext_types.QStaticText, matrix: gen_qtransform_ty
   fcQStaticText_prepare2(self.h, matrix.h, font.h)
 
 proc create*(T: type gen_qstatictext_types.QStaticText): gen_qstatictext_types.QStaticText =
-  let tmp = gen_qstatictext_types.QStaticText(h: fcQStaticText_new())
+  let tmp = gen_qstatictext_types.QStaticText(h: fcQStaticText_new(), owned: true)
   tmp
 proc create*(T: type gen_qstatictext_types.QStaticText,
     text: string): gen_qstatictext_types.QStaticText =
-  let tmp = gen_qstatictext_types.QStaticText(h: fcQStaticText_new2(struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))))
+  let tmp = gen_qstatictext_types.QStaticText(h: fcQStaticText_new2(struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))), owned: true)
   tmp
 proc create*(T: type gen_qstatictext_types.QStaticText,
     other: gen_qstatictext_types.QStaticText): gen_qstatictext_types.QStaticText =
-  let tmp = gen_qstatictext_types.QStaticText(h: fcQStaticText_new3(other.h))
+  let tmp = gen_qstatictext_types.QStaticText(h: fcQStaticText_new3(other.h), owned: true)
   tmp
-proc delete*(self: gen_qstatictext_types.QStaticText) =
-  fcQStaticText_delete(self.h)

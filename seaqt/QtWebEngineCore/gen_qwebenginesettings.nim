@@ -32,9 +32,6 @@ func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
     else:
       copyMem(addr result[0], v.data, len)
 
-const cflags = gorge("pkg-config --cflags Qt6WebEngineCore")  & " -fPIC"
-{.compile("gen_qwebenginesettings.cpp", cflags).}
-
 
 type QWebEngineSettingsFontFamilyEnum* = distinct cint
 template StandardFont*(_: type QWebEngineSettingsFontFamilyEnum): untyped = 0
@@ -115,7 +112,6 @@ proc fcQWebEngineSettings_defaultTextEncoding(self: pointer): struct_miqt_string
 proc fcQWebEngineSettings_unknownUrlSchemePolicy(self: pointer): cint {.importc: "QWebEngineSettings_unknownUrlSchemePolicy".}
 proc fcQWebEngineSettings_setUnknownUrlSchemePolicy(self: pointer, policy: cint): void {.importc: "QWebEngineSettings_setUnknownUrlSchemePolicy".}
 proc fcQWebEngineSettings_resetUnknownUrlSchemePolicy(self: pointer): void {.importc: "QWebEngineSettings_resetUnknownUrlSchemePolicy".}
-proc fcQWebEngineSettings_delete(self: pointer) {.importc: "QWebEngineSettings_delete".}
 
 proc setFontFamily*(self: gen_qwebenginesettings_types.QWebEngineSettings, which: cint, family: string): void =
   fcQWebEngineSettings_setFontFamily(self.h, cint(which), struct_miqt_string(data: if len(family) > 0: addr family[0] else: nil, len: csize_t(len(family))))
@@ -165,5 +161,3 @@ proc setUnknownUrlSchemePolicy*(self: gen_qwebenginesettings_types.QWebEngineSet
 proc resetUnknownUrlSchemePolicy*(self: gen_qwebenginesettings_types.QWebEngineSettings): void =
   fcQWebEngineSettings_resetUnknownUrlSchemePolicy(self.h)
 
-proc delete*(self: gen_qwebenginesettings_types.QWebEngineSettings) =
-  fcQWebEngineSettings_delete(self.h)

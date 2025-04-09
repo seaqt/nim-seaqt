@@ -32,7 +32,7 @@ func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
     else:
       copyMem(addr result[0], v.data, len)
 
-const cflags = gorge("pkg-config --cflags Qt6Core")  & " -fPIC"
+const cflags = gorge("pkg-config --cflags Qt6Core") & " -fPIC"
 {.compile("gen_qstringlistmodel.cpp", cflags).}
 
 
@@ -205,10 +205,9 @@ proc fcQStringListModel_new2(vtbl: pointer, vdata: csize_t, strings: struct_miqt
 proc fcQStringListModel_new3(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQStringListModel {.importc: "QStringListModel_new3".}
 proc fcQStringListModel_new4(vtbl: pointer, vdata: csize_t, strings: struct_miqt_array, parent: pointer): ptr cQStringListModel {.importc: "QStringListModel_new4".}
 proc fcQStringListModel_staticMetaObject(): pointer {.importc: "QStringListModel_staticMetaObject".}
-proc fcQStringListModel_delete(self: pointer) {.importc: "QStringListModel_delete".}
 
 proc metaObject*(self: gen_qstringlistmodel_types.QStringListModel): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQStringListModel_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQStringListModel_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qstringlistmodel_types.QStringListModel, param1: cstring): pointer =
   fcQStringListModel_metacast(self.h, param1)
@@ -226,10 +225,10 @@ proc rowCount*(self: gen_qstringlistmodel_types.QStringListModel, parent: gen_qa
   fcQStringListModel_rowCount(self.h, parent.h)
 
 proc sibling*(self: gen_qstringlistmodel_types.QStringListModel, row: cint, column: cint, idx: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex =
-  gen_qabstractitemmodel_types.QModelIndex(h: fcQStringListModel_sibling(self.h, row, column, idx.h))
+  gen_qabstractitemmodel_types.QModelIndex(h: fcQStringListModel_sibling(self.h, row, column, idx.h), owned: true)
 
 proc data*(self: gen_qstringlistmodel_types.QStringListModel, index: gen_qabstractitemmodel_types.QModelIndex, role: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQStringListModel_data(self.h, index.h, role))
+  gen_qvariant_types.QVariant(h: fcQStringListModel_data(self.h, index.h, role), owned: true)
 
 proc setData*(self: gen_qstringlistmodel_types.QStringListModel, index: gen_qabstractitemmodel_types.QModelIndex, value: gen_qvariant_types.QVariant, role: cint): bool =
   fcQStringListModel_setData(self.h, index.h, value.h, role)
@@ -257,7 +256,7 @@ proc itemData*(self: gen_qstringlistmodel_types.QStringListModel, index: gen_qab
   for i in 0..<v_mm.len:
     var v_entry_Key = v_Keys[i]
 
-    var v_entry_Value = gen_qvariant_types.QVariant(h: v_Values[i])
+    var v_entry_Value = gen_qvariant_types.QVariant(h: v_Values[i], owned: true)
 
     vx_ret[v_entry_Key] = v_entry_Value
   c_free(v_mm.keys)
@@ -268,8 +267,11 @@ proc setItemData*(self: gen_qstringlistmodel_types.QStringListModel, index: gen_
   var roles_Keys_CArray = newSeq[cint](len(roles))
   var roles_Values_CArray = newSeq[pointer](len(roles))
   var roles_ctr = 0
-  for roles_k, roles_v in roles:
+  for roles_k in roles.keys():
     roles_Keys_CArray[roles_ctr] = roles_k
+    roles_ctr += 1
+  roles_ctr = 0
+  for roles_v in roles.values():
     roles_Values_CArray[roles_ctr] = roles_v.h
     roles_ctr += 1
 
@@ -356,7 +358,7 @@ type QStringListModelchildEventProc* = proc(self: QStringListModel, event: gen_q
 type QStringListModelcustomEventProc* = proc(self: QStringListModel, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QStringListModelconnectNotifyProc* = proc(self: QStringListModel, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QStringListModeldisconnectNotifyProc* = proc(self: QStringListModel, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
-type QStringListModelVTable* = object
+type QStringListModelVTable* {.inheritable, pure.} = object
   vtbl: cQStringListModelVTable
   metaObject*: QStringListModelmetaObjectProc
   metacast*: QStringListModelmetacastProc
@@ -403,13 +405,16 @@ type QStringListModelVTable* = object
   connectNotify*: QStringListModelconnectNotifyProc
   disconnectNotify*: QStringListModeldisconnectNotifyProc
 proc QStringListModelmetaObject*(self: gen_qstringlistmodel_types.QStringListModel): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQStringListModel_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQStringListModel_virtualbase_metaObject(self.h), owned: false)
 
 proc fcQStringListModel_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QStringListModelVTable](fcQStringListModel_vdata(self)[])
   let self = QStringListModel(h: self)
   var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QStringListModelmetacast*(self: gen_qstringlistmodel_types.QStringListModel, param1: cstring): pointer =
   fcQStringListModel_virtualbase_metacast(self.h, param1)
@@ -439,32 +444,38 @@ proc QStringListModelrowCount*(self: gen_qstringlistmodel_types.QStringListModel
 proc fcQStringListModel_vtable_callback_rowCount(self: pointer, parent: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QStringListModelVTable](fcQStringListModel_vdata(self)[])
   let self = QStringListModel(h: self)
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   var virtualReturn = vtbl[].rowCount(self, slotval1)
   virtualReturn
 
 proc QStringListModelsibling*(self: gen_qstringlistmodel_types.QStringListModel, row: cint, column: cint, idx: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex =
-  gen_qabstractitemmodel_types.QModelIndex(h: fcQStringListModel_virtualbase_sibling(self.h, row, column, idx.h))
+  gen_qabstractitemmodel_types.QModelIndex(h: fcQStringListModel_virtualbase_sibling(self.h, row, column, idx.h), owned: true)
 
 proc fcQStringListModel_vtable_callback_sibling(self: pointer, row: cint, column: cint, idx: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QStringListModelVTable](fcQStringListModel_vdata(self)[])
   let self = QStringListModel(h: self)
   let slotval1 = row
   let slotval2 = column
-  let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: idx)
+  let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: idx, owned: false)
   var virtualReturn = vtbl[].sibling(self, slotval1, slotval2, slotval3)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QStringListModeldata*(self: gen_qstringlistmodel_types.QStringListModel, index: gen_qabstractitemmodel_types.QModelIndex, role: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQStringListModel_virtualbase_data(self.h, index.h, role))
+  gen_qvariant_types.QVariant(h: fcQStringListModel_virtualbase_data(self.h, index.h, role), owned: true)
 
 proc fcQStringListModel_vtable_callback_data(self: pointer, index: pointer, role: cint): pointer {.cdecl.} =
   let vtbl = cast[ptr QStringListModelVTable](fcQStringListModel_vdata(self)[])
   let self = QStringListModel(h: self)
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   let slotval2 = role
   var virtualReturn = vtbl[].data(self, slotval1, slotval2)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QStringListModelsetData*(self: gen_qstringlistmodel_types.QStringListModel, index: gen_qabstractitemmodel_types.QModelIndex, value: gen_qvariant_types.QVariant, role: cint): bool =
   fcQStringListModel_virtualbase_setData(self.h, index.h, value.h, role)
@@ -472,8 +483,8 @@ proc QStringListModelsetData*(self: gen_qstringlistmodel_types.QStringListModel,
 proc fcQStringListModel_vtable_callback_setData(self: pointer, index: pointer, value: pointer, role: cint): bool {.cdecl.} =
   let vtbl = cast[ptr QStringListModelVTable](fcQStringListModel_vdata(self)[])
   let self = QStringListModel(h: self)
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index)
-  let slotval2 = gen_qvariant_types.QVariant(h: value)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
+  let slotval2 = gen_qvariant_types.QVariant(h: value, owned: false)
   let slotval3 = role
   var virtualReturn = vtbl[].setData(self, slotval1, slotval2, slotval3)
   virtualReturn
@@ -484,7 +495,7 @@ proc QStringListModelclearItemData*(self: gen_qstringlistmodel_types.QStringList
 proc fcQStringListModel_vtable_callback_clearItemData(self: pointer, index: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QStringListModelVTable](fcQStringListModel_vdata(self)[])
   let self = QStringListModel(h: self)
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var virtualReturn = vtbl[].clearItemData(self, slotval1)
   virtualReturn
 
@@ -494,7 +505,7 @@ proc QStringListModelflags*(self: gen_qstringlistmodel_types.QStringListModel, i
 proc fcQStringListModel_vtable_callback_flags(self: pointer, index: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QStringListModelVTable](fcQStringListModel_vdata(self)[])
   let self = QStringListModel(h: self)
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var virtualReturn = vtbl[].flags(self, slotval1)
   cint(virtualReturn)
 
@@ -506,7 +517,7 @@ proc fcQStringListModel_vtable_callback_insertRows(self: pointer, row: cint, cou
   let self = QStringListModel(h: self)
   let slotval1 = row
   let slotval2 = count
-  let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: parent)
+  let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   var virtualReturn = vtbl[].insertRows(self, slotval1, slotval2, slotval3)
   virtualReturn
 
@@ -518,7 +529,7 @@ proc fcQStringListModel_vtable_callback_removeRows(self: pointer, row: cint, cou
   let self = QStringListModel(h: self)
   let slotval1 = row
   let slotval2 = count
-  let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: parent)
+  let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   var virtualReturn = vtbl[].removeRows(self, slotval1, slotval2, slotval3)
   virtualReturn
 
@@ -528,10 +539,10 @@ proc QStringListModelmoveRows*(self: gen_qstringlistmodel_types.QStringListModel
 proc fcQStringListModel_vtable_callback_moveRows(self: pointer, sourceParent: pointer, sourceRow: cint, count: cint, destinationParent: pointer, destinationChild: cint): bool {.cdecl.} =
   let vtbl = cast[ptr QStringListModelVTable](fcQStringListModel_vdata(self)[])
   let self = QStringListModel(h: self)
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: sourceParent)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: sourceParent, owned: false)
   let slotval2 = sourceRow
   let slotval3 = count
-  let slotval4 = gen_qabstractitemmodel_types.QModelIndex(h: destinationParent)
+  let slotval4 = gen_qabstractitemmodel_types.QModelIndex(h: destinationParent, owned: false)
   let slotval5 = destinationChild
   var virtualReturn = vtbl[].moveRows(self, slotval1, slotval2, slotval3, slotval4, slotval5)
   virtualReturn
@@ -544,7 +555,7 @@ proc QStringListModelitemData*(self: gen_qstringlistmodel_types.QStringListModel
   for i in 0..<v_mm.len:
     var v_entry_Key = v_Keys[i]
 
-    var v_entry_Value = gen_qvariant_types.QVariant(h: v_Values[i])
+    var v_entry_Value = gen_qvariant_types.QVariant(h: v_Values[i], owned: true)
 
     vx_ret[v_entry_Key] = v_entry_Value
   c_free(v_mm.keys)
@@ -554,14 +565,20 @@ proc QStringListModelitemData*(self: gen_qstringlistmodel_types.QStringListModel
 proc fcQStringListModel_vtable_callback_itemData(self: pointer, index: pointer): struct_miqt_map {.cdecl.} =
   let vtbl = cast[ptr QStringListModelVTable](fcQStringListModel_vdata(self)[])
   let self = QStringListModel(h: self)
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var virtualReturn = vtbl[].itemData(self, slotval1)
   var virtualReturn_Keys_CArray = cast[ptr UncheckedArray[cint]](if len(virtualReturn) > 0: c_malloc(csize_t(sizeof(cint) * len(virtualReturn))) else: nil)
   var virtualReturn_Values_CArray = cast[ptr UncheckedArray[pointer]](if len(virtualReturn) > 0: c_malloc(csize_t(sizeof(pointer) * len(virtualReturn))) else: nil)
   var virtualReturn_ctr = 0
-  for virtualReturn_k, virtualReturn_v in virtualReturn:
+  for virtualReturn_k in virtualReturn.keys():
     virtualReturn_Keys_CArray[virtualReturn_ctr] = virtualReturn_k
-    virtualReturn_Values_CArray[virtualReturn_ctr] = virtualReturn_v.h
+    virtualReturn_ctr += 1
+  virtualReturn_ctr = 0
+  for virtualReturn_v in virtualReturn.mvalues():
+    virtualReturn_v.owned = false # TODO move?
+    let virtualReturn_v_h = virtualReturn_v.h
+    virtualReturn_v.h = nil
+    virtualReturn_Values_CArray[virtualReturn_ctr] = virtualReturn_v_h
     virtualReturn_ctr += 1
 
   struct_miqt_map(len: csize_t(len(virtualReturn)),keys: if len(virtualReturn) == 0: nil else: addr(virtualReturn_Keys_CArray[0]), values: if len(virtualReturn) == 0: nil else: addr(virtualReturn_Values_CArray[0]),)
@@ -570,8 +587,11 @@ proc QStringListModelsetItemData*(self: gen_qstringlistmodel_types.QStringListMo
   var roles_Keys_CArray = newSeq[cint](len(roles))
   var roles_Values_CArray = newSeq[pointer](len(roles))
   var roles_ctr = 0
-  for roles_k, roles_v in roles:
+  for roles_k in roles.keys():
     roles_Keys_CArray[roles_ctr] = roles_k
+    roles_ctr += 1
+  roles_ctr = 0
+  for roles_v in roles.values():
     roles_Values_CArray[roles_ctr] = roles_v.h
     roles_ctr += 1
 
@@ -580,7 +600,7 @@ proc QStringListModelsetItemData*(self: gen_qstringlistmodel_types.QStringListMo
 proc fcQStringListModel_vtable_callback_setItemData(self: pointer, index: pointer, roles: struct_miqt_map): bool {.cdecl.} =
   let vtbl = cast[ptr QStringListModelVTable](fcQStringListModel_vdata(self)[])
   let self = QStringListModel(h: self)
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var vroles_mm = roles
   var vrolesx_ret: Table[cint, gen_qvariant_types.QVariant]
   var vroles_Keys = cast[ptr UncheckedArray[cint]](vroles_mm.keys)
@@ -588,7 +608,7 @@ proc fcQStringListModel_vtable_callback_setItemData(self: pointer, index: pointe
   for i in 0..<vroles_mm.len:
     var vroles_entry_Key = vroles_Keys[i]
 
-    var vroles_entry_Value = gen_qvariant_types.QVariant(h: vroles_Values[i])
+    var vroles_entry_Value = gen_qvariant_types.QVariant(h: vroles_Values[i], owned: true)
 
     vrolesx_ret[vroles_entry_Key] = vroles_entry_Value
   c_free(vroles_mm.keys)
@@ -617,16 +637,19 @@ proc fcQStringListModel_vtable_callback_supportedDropActions(self: pointer): cin
   cint(virtualReturn)
 
 proc QStringListModelindex*(self: gen_qstringlistmodel_types.QStringListModel, row: cint, column: cint, parent: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex =
-  gen_qabstractitemmodel_types.QModelIndex(h: fcQStringListModel_virtualbase_index(self.h, row, column, parent.h))
+  gen_qabstractitemmodel_types.QModelIndex(h: fcQStringListModel_virtualbase_index(self.h, row, column, parent.h), owned: true)
 
 proc fcQStringListModel_vtable_callback_index(self: pointer, row: cint, column: cint, parent: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QStringListModelVTable](fcQStringListModel_vdata(self)[])
   let self = QStringListModel(h: self)
   let slotval1 = row
   let slotval2 = column
-  let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: parent)
+  let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   var virtualReturn = vtbl[].index(self, slotval1, slotval2, slotval3)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QStringListModeldropMimeData*(self: gen_qstringlistmodel_types.QStringListModel, data: gen_qmimedata_types.QMimeData, action: cint, row: cint, column: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool =
   fcQStringListModel_virtualbase_dropMimeData(self.h, data.h, cint(action), row, column, parent.h)
@@ -634,16 +657,16 @@ proc QStringListModeldropMimeData*(self: gen_qstringlistmodel_types.QStringListM
 proc fcQStringListModel_vtable_callback_dropMimeData(self: pointer, data: pointer, action: cint, row: cint, column: cint, parent: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QStringListModelVTable](fcQStringListModel_vdata(self)[])
   let self = QStringListModel(h: self)
-  let slotval1 = gen_qmimedata_types.QMimeData(h: data)
+  let slotval1 = gen_qmimedata_types.QMimeData(h: data, owned: false)
   let slotval2 = cint(action)
   let slotval3 = row
   let slotval4 = column
-  let slotval5 = gen_qabstractitemmodel_types.QModelIndex(h: parent)
+  let slotval5 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   var virtualReturn = vtbl[].dropMimeData(self, slotval1, slotval2, slotval3, slotval4, slotval5)
   virtualReturn
 
 proc QStringListModelheaderData*(self: gen_qstringlistmodel_types.QStringListModel, section: cint, orientation: cint, role: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQStringListModel_virtualbase_headerData(self.h, section, cint(orientation), role))
+  gen_qvariant_types.QVariant(h: fcQStringListModel_virtualbase_headerData(self.h, section, cint(orientation), role), owned: true)
 
 proc fcQStringListModel_vtable_callback_headerData(self: pointer, section: cint, orientation: cint, role: cint): pointer {.cdecl.} =
   let vtbl = cast[ptr QStringListModelVTable](fcQStringListModel_vdata(self)[])
@@ -652,7 +675,10 @@ proc fcQStringListModel_vtable_callback_headerData(self: pointer, section: cint,
   let slotval2 = cint(orientation)
   let slotval3 = role
   var virtualReturn = vtbl[].headerData(self, slotval1, slotval2, slotval3)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QStringListModelsetHeaderData*(self: gen_qstringlistmodel_types.QStringListModel, section: cint, orientation: cint, value: gen_qvariant_types.QVariant, role: cint): bool =
   fcQStringListModel_virtualbase_setHeaderData(self.h, section, cint(orientation), value.h, role)
@@ -662,7 +688,7 @@ proc fcQStringListModel_vtable_callback_setHeaderData(self: pointer, section: ci
   let self = QStringListModel(h: self)
   let slotval1 = section
   let slotval2 = cint(orientation)
-  let slotval3 = gen_qvariant_types.QVariant(h: value)
+  let slotval3 = gen_qvariant_types.QVariant(h: value, owned: false)
   let slotval4 = role
   var virtualReturn = vtbl[].setHeaderData(self, slotval1, slotval2, slotval3, slotval4)
   virtualReturn
@@ -696,7 +722,7 @@ proc QStringListModelmimeData*(self: gen_qstringlistmodel_types.QStringListModel
   for i in 0..<len(indexes):
     indexes_CArray[i] = indexes[i].h
 
-  gen_qmimedata_types.QMimeData(h: fcQStringListModel_virtualbase_mimeData(self.h, struct_miqt_array(len: csize_t(len(indexes)), data: if len(indexes) == 0: nil else: addr(indexes_CArray[0]))))
+  gen_qmimedata_types.QMimeData(h: fcQStringListModel_virtualbase_mimeData(self.h, struct_miqt_array(len: csize_t(len(indexes)), data: if len(indexes) == 0: nil else: addr(indexes_CArray[0]))), owned: false)
 
 proc fcQStringListModel_vtable_callback_mimeData(self: pointer, indexes: struct_miqt_array): pointer {.cdecl.} =
   let vtbl = cast[ptr QStringListModelVTable](fcQStringListModel_vdata(self)[])
@@ -705,11 +731,14 @@ proc fcQStringListModel_vtable_callback_mimeData(self: pointer, indexes: struct_
   var vindexesx_ret = newSeq[gen_qabstractitemmodel_types.QModelIndex](int(vindexes_ma.len))
   let vindexes_outCast = cast[ptr UncheckedArray[pointer]](vindexes_ma.data)
   for i in 0 ..< vindexes_ma.len:
-    vindexesx_ret[i] = gen_qabstractitemmodel_types.QModelIndex(h: vindexes_outCast[i])
+    vindexesx_ret[i] = gen_qabstractitemmodel_types.QModelIndex(h: vindexes_outCast[i], owned: true)
   c_free(vindexes_ma.data)
   let slotval1 = vindexesx_ret
   var virtualReturn = vtbl[].mimeData(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QStringListModelcanDropMimeData*(self: gen_qstringlistmodel_types.QStringListModel, data: gen_qmimedata_types.QMimeData, action: cint, row: cint, column: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool =
   fcQStringListModel_virtualbase_canDropMimeData(self.h, data.h, cint(action), row, column, parent.h)
@@ -717,11 +746,11 @@ proc QStringListModelcanDropMimeData*(self: gen_qstringlistmodel_types.QStringLi
 proc fcQStringListModel_vtable_callback_canDropMimeData(self: pointer, data: pointer, action: cint, row: cint, column: cint, parent: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QStringListModelVTable](fcQStringListModel_vdata(self)[])
   let self = QStringListModel(h: self)
-  let slotval1 = gen_qmimedata_types.QMimeData(h: data)
+  let slotval1 = gen_qmimedata_types.QMimeData(h: data, owned: false)
   let slotval2 = cint(action)
   let slotval3 = row
   let slotval4 = column
-  let slotval5 = gen_qabstractitemmodel_types.QModelIndex(h: parent)
+  let slotval5 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   var virtualReturn = vtbl[].canDropMimeData(self, slotval1, slotval2, slotval3, slotval4, slotval5)
   virtualReturn
 
@@ -742,7 +771,7 @@ proc fcQStringListModel_vtable_callback_insertColumns(self: pointer, column: cin
   let self = QStringListModel(h: self)
   let slotval1 = column
   let slotval2 = count
-  let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: parent)
+  let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   var virtualReturn = vtbl[].insertColumns(self, slotval1, slotval2, slotval3)
   virtualReturn
 
@@ -754,7 +783,7 @@ proc fcQStringListModel_vtable_callback_removeColumns(self: pointer, column: cin
   let self = QStringListModel(h: self)
   let slotval1 = column
   let slotval2 = count
-  let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: parent)
+  let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   var virtualReturn = vtbl[].removeColumns(self, slotval1, slotval2, slotval3)
   virtualReturn
 
@@ -764,10 +793,10 @@ proc QStringListModelmoveColumns*(self: gen_qstringlistmodel_types.QStringListMo
 proc fcQStringListModel_vtable_callback_moveColumns(self: pointer, sourceParent: pointer, sourceColumn: cint, count: cint, destinationParent: pointer, destinationChild: cint): bool {.cdecl.} =
   let vtbl = cast[ptr QStringListModelVTable](fcQStringListModel_vdata(self)[])
   let self = QStringListModel(h: self)
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: sourceParent)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: sourceParent, owned: false)
   let slotval2 = sourceColumn
   let slotval3 = count
-  let slotval4 = gen_qabstractitemmodel_types.QModelIndex(h: destinationParent)
+  let slotval4 = gen_qabstractitemmodel_types.QModelIndex(h: destinationParent, owned: false)
   let slotval5 = destinationChild
   var virtualReturn = vtbl[].moveColumns(self, slotval1, slotval2, slotval3, slotval4, slotval5)
   virtualReturn
@@ -778,7 +807,7 @@ proc QStringListModelfetchMore*(self: gen_qstringlistmodel_types.QStringListMode
 proc fcQStringListModel_vtable_callback_fetchMore(self: pointer, parent: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QStringListModelVTable](fcQStringListModel_vdata(self)[])
   let self = QStringListModel(h: self)
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   vtbl[].fetchMore(self, slotval1)
 
 proc QStringListModelcanFetchMore*(self: gen_qstringlistmodel_types.QStringListModel, parent: gen_qabstractitemmodel_types.QModelIndex): bool =
@@ -787,53 +816,62 @@ proc QStringListModelcanFetchMore*(self: gen_qstringlistmodel_types.QStringListM
 proc fcQStringListModel_vtable_callback_canFetchMore(self: pointer, parent: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QStringListModelVTable](fcQStringListModel_vdata(self)[])
   let self = QStringListModel(h: self)
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   var virtualReturn = vtbl[].canFetchMore(self, slotval1)
   virtualReturn
 
 proc QStringListModelbuddy*(self: gen_qstringlistmodel_types.QStringListModel, index: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex =
-  gen_qabstractitemmodel_types.QModelIndex(h: fcQStringListModel_virtualbase_buddy(self.h, index.h))
+  gen_qabstractitemmodel_types.QModelIndex(h: fcQStringListModel_virtualbase_buddy(self.h, index.h), owned: true)
 
 proc fcQStringListModel_vtable_callback_buddy(self: pointer, index: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QStringListModelVTable](fcQStringListModel_vdata(self)[])
   let self = QStringListModel(h: self)
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var virtualReturn = vtbl[].buddy(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QStringListModelmatch*(self: gen_qstringlistmodel_types.QStringListModel, start: gen_qabstractitemmodel_types.QModelIndex, role: cint, value: gen_qvariant_types.QVariant, hits: cint, flags: cint): seq[gen_qabstractitemmodel_types.QModelIndex] =
   var v_ma = fcQStringListModel_virtualbase_match(self.h, start.h, role, value.h, hits, cint(flags))
   var vx_ret = newSeq[gen_qabstractitemmodel_types.QModelIndex](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qabstractitemmodel_types.QModelIndex(h: v_outCast[i])
+    vx_ret[i] = gen_qabstractitemmodel_types.QModelIndex(h: v_outCast[i], owned: true)
   c_free(v_ma.data)
   vx_ret
 
 proc fcQStringListModel_vtable_callback_match(self: pointer, start: pointer, role: cint, value: pointer, hits: cint, flags: cint): struct_miqt_array {.cdecl.} =
   let vtbl = cast[ptr QStringListModelVTable](fcQStringListModel_vdata(self)[])
   let self = QStringListModel(h: self)
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: start)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: start, owned: false)
   let slotval2 = role
-  let slotval3 = gen_qvariant_types.QVariant(h: value)
+  let slotval3 = gen_qvariant_types.QVariant(h: value, owned: false)
   let slotval4 = hits
   let slotval5 = cint(flags)
   var virtualReturn = vtbl[].match(self, slotval1, slotval2, slotval3, slotval4, slotval5)
   var virtualReturn_CArray = cast[ptr UncheckedArray[pointer]](if len(virtualReturn) > 0: c_malloc(c_sizet(sizeof(pointer) * len(virtualReturn))) else: nil)
   for i in 0..<len(virtualReturn):
-    virtualReturn_CArray[i] = virtualReturn[i].h
+    virtualReturn[i].owned = false # TODO move?
+    let virtualReturn_i_h = virtualReturn[i].h
+    virtualReturn[i].h = nil
+    virtualReturn_CArray[i] = virtualReturn_i_h
 
   struct_miqt_array(len: csize_t(len(virtualReturn)), data: if len(virtualReturn) == 0: nil else: addr(virtualReturn_CArray[0]))
 
 proc QStringListModelspan*(self: gen_qstringlistmodel_types.QStringListModel, index: gen_qabstractitemmodel_types.QModelIndex): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQStringListModel_virtualbase_span(self.h, index.h))
+  gen_qsize_types.QSize(h: fcQStringListModel_virtualbase_span(self.h, index.h), owned: true)
 
 proc fcQStringListModel_vtable_callback_span(self: pointer, index: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QStringListModelVTable](fcQStringListModel_vdata(self)[])
   let self = QStringListModel(h: self)
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var virtualReturn = vtbl[].span(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QStringListModelroleNames*(self: gen_qstringlistmodel_types.QStringListModel): Table[cint,seq[byte]] =
   var v_mm = fcQStringListModel_virtualbase_roleNames(self.h)
@@ -860,8 +898,11 @@ proc fcQStringListModel_vtable_callback_roleNames(self: pointer): struct_miqt_ma
   var virtualReturn_Keys_CArray = cast[ptr UncheckedArray[cint]](if len(virtualReturn) > 0: c_malloc(csize_t(sizeof(cint) * len(virtualReturn))) else: nil)
   var virtualReturn_Values_CArray = cast[ptr UncheckedArray[struct_miqt_string]](if len(virtualReturn) > 0: c_malloc(csize_t(sizeof(struct_miqt_string) * len(virtualReturn))) else: nil)
   var virtualReturn_ctr = 0
-  for virtualReturn_k, virtualReturn_v in virtualReturn:
+  for virtualReturn_k in virtualReturn.keys():
     virtualReturn_Keys_CArray[virtualReturn_ctr] = virtualReturn_k
+    virtualReturn_ctr += 1
+  virtualReturn_ctr = 0
+  for virtualReturn_v in virtualReturn.mvalues():
     var virtualReturn_v_copy = if len(virtualReturn_v) > 0: c_malloc(csize_t(len(virtualReturn_v))) else: nil
     if len(virtualReturn_v) > 0: copyMem(virtualReturn_v_copy, addr virtualReturn_v[0], csize_t(len(virtualReturn_v)))
     virtualReturn_Values_CArray[virtualReturn_ctr] = struct_miqt_string(data: virtualReturn_v_copy, len: csize_t(len(virtualReturn_v)))
@@ -875,8 +916,8 @@ proc QStringListModelmultiData*(self: gen_qstringlistmodel_types.QStringListMode
 proc fcQStringListModel_vtable_callback_multiData(self: pointer, index: pointer, roleDataSpan: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QStringListModelVTable](fcQStringListModel_vdata(self)[])
   let self = QStringListModel(h: self)
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index)
-  let slotval2 = gen_qabstractitemmodel_types.QModelRoleDataSpan(h: roleDataSpan)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
+  let slotval2 = gen_qabstractitemmodel_types.QModelRoleDataSpan(h: roleDataSpan, owned: true)
   vtbl[].multiData(self, slotval1, slotval2)
 
 proc QStringListModelsubmit*(self: gen_qstringlistmodel_types.QStringListModel): bool =
@@ -910,7 +951,7 @@ proc QStringListModelevent*(self: gen_qstringlistmodel_types.QStringListModel, e
 proc fcQStringListModel_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QStringListModelVTable](fcQStringListModel_vdata(self)[])
   let self = QStringListModel(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
@@ -920,8 +961,8 @@ proc QStringListModeleventFilter*(self: gen_qstringlistmodel_types.QStringListMo
 proc fcQStringListModel_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QStringListModelVTable](fcQStringListModel_vdata(self)[])
   let self = QStringListModel(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
@@ -931,7 +972,7 @@ proc QStringListModeltimerEvent*(self: gen_qstringlistmodel_types.QStringListMod
 proc fcQStringListModel_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QStringListModelVTable](fcQStringListModel_vdata(self)[])
   let self = QStringListModel(h: self)
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
 proc QStringListModelchildEvent*(self: gen_qstringlistmodel_types.QStringListModel, event: gen_qcoreevent_types.QChildEvent): void =
@@ -940,7 +981,7 @@ proc QStringListModelchildEvent*(self: gen_qstringlistmodel_types.QStringListMod
 proc fcQStringListModel_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QStringListModelVTable](fcQStringListModel_vdata(self)[])
   let self = QStringListModel(h: self)
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
 proc QStringListModelcustomEvent*(self: gen_qstringlistmodel_types.QStringListModel, event: gen_qcoreevent_types.QEvent): void =
@@ -949,7 +990,7 @@ proc QStringListModelcustomEvent*(self: gen_qstringlistmodel_types.QStringListMo
 proc fcQStringListModel_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QStringListModelVTable](fcQStringListModel_vdata(self)[])
   let self = QStringListModel(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
 proc QStringListModelconnectNotify*(self: gen_qstringlistmodel_types.QStringListModel, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -958,7 +999,7 @@ proc QStringListModelconnectNotify*(self: gen_qstringlistmodel_types.QStringList
 proc fcQStringListModel_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QStringListModelVTable](fcQStringListModel_vdata(self)[])
   let self = QStringListModel(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
 proc QStringListModeldisconnectNotify*(self: gen_qstringlistmodel_types.QStringListModel, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -967,7 +1008,7 @@ proc QStringListModeldisconnectNotify*(self: gen_qstringlistmodel_types.QStringL
 proc fcQStringListModel_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QStringListModelVTable](fcQStringListModel_vdata(self)[])
   let self = QStringListModel(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
 type VirtualQStringListModel* {.inheritable.} = ref object of QStringListModel
@@ -1001,7 +1042,7 @@ method rowCount*(self: VirtualQStringListModel, parent: gen_qabstractitemmodel_t
   QStringListModelrowCount(self[], parent)
 proc fcQStringListModel_method_callback_rowCount(self: pointer, parent: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQStringListModel](fcQStringListModel_vdata(self)[])
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   var virtualReturn = inst.rowCount(slotval1)
   virtualReturn
 
@@ -1011,7 +1052,7 @@ proc fcQStringListModel_method_callback_sibling(self: pointer, row: cint, column
   let inst = cast[VirtualQStringListModel](fcQStringListModel_vdata(self)[])
   let slotval1 = row
   let slotval2 = column
-  let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: idx)
+  let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: idx, owned: false)
   var virtualReturn = inst.sibling(slotval1, slotval2, slotval3)
   virtualReturn.h
 
@@ -1019,7 +1060,7 @@ method data*(self: VirtualQStringListModel, index: gen_qabstractitemmodel_types.
   QStringListModeldata(self[], index, role)
 proc fcQStringListModel_method_callback_data(self: pointer, index: pointer, role: cint): pointer {.cdecl.} =
   let inst = cast[VirtualQStringListModel](fcQStringListModel_vdata(self)[])
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   let slotval2 = role
   var virtualReturn = inst.data(slotval1, slotval2)
   virtualReturn.h
@@ -1028,8 +1069,8 @@ method setData*(self: VirtualQStringListModel, index: gen_qabstractitemmodel_typ
   QStringListModelsetData(self[], index, value, role)
 proc fcQStringListModel_method_callback_setData(self: pointer, index: pointer, value: pointer, role: cint): bool {.cdecl.} =
   let inst = cast[VirtualQStringListModel](fcQStringListModel_vdata(self)[])
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index)
-  let slotval2 = gen_qvariant_types.QVariant(h: value)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
+  let slotval2 = gen_qvariant_types.QVariant(h: value, owned: false)
   let slotval3 = role
   var virtualReturn = inst.setData(slotval1, slotval2, slotval3)
   virtualReturn
@@ -1038,7 +1079,7 @@ method clearItemData*(self: VirtualQStringListModel, index: gen_qabstractitemmod
   QStringListModelclearItemData(self[], index)
 proc fcQStringListModel_method_callback_clearItemData(self: pointer, index: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQStringListModel](fcQStringListModel_vdata(self)[])
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var virtualReturn = inst.clearItemData(slotval1)
   virtualReturn
 
@@ -1046,7 +1087,7 @@ method flags*(self: VirtualQStringListModel, index: gen_qabstractitemmodel_types
   QStringListModelflags(self[], index)
 proc fcQStringListModel_method_callback_flags(self: pointer, index: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQStringListModel](fcQStringListModel_vdata(self)[])
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var virtualReturn = inst.flags(slotval1)
   cint(virtualReturn)
 
@@ -1056,7 +1097,7 @@ proc fcQStringListModel_method_callback_insertRows(self: pointer, row: cint, cou
   let inst = cast[VirtualQStringListModel](fcQStringListModel_vdata(self)[])
   let slotval1 = row
   let slotval2 = count
-  let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: parent)
+  let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   var virtualReturn = inst.insertRows(slotval1, slotval2, slotval3)
   virtualReturn
 
@@ -1066,7 +1107,7 @@ proc fcQStringListModel_method_callback_removeRows(self: pointer, row: cint, cou
   let inst = cast[VirtualQStringListModel](fcQStringListModel_vdata(self)[])
   let slotval1 = row
   let slotval2 = count
-  let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: parent)
+  let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   var virtualReturn = inst.removeRows(slotval1, slotval2, slotval3)
   virtualReturn
 
@@ -1074,10 +1115,10 @@ method moveRows*(self: VirtualQStringListModel, sourceParent: gen_qabstractitemm
   QStringListModelmoveRows(self[], sourceParent, sourceRow, count, destinationParent, destinationChild)
 proc fcQStringListModel_method_callback_moveRows(self: pointer, sourceParent: pointer, sourceRow: cint, count: cint, destinationParent: pointer, destinationChild: cint): bool {.cdecl.} =
   let inst = cast[VirtualQStringListModel](fcQStringListModel_vdata(self)[])
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: sourceParent)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: sourceParent, owned: false)
   let slotval2 = sourceRow
   let slotval3 = count
-  let slotval4 = gen_qabstractitemmodel_types.QModelIndex(h: destinationParent)
+  let slotval4 = gen_qabstractitemmodel_types.QModelIndex(h: destinationParent, owned: false)
   let slotval5 = destinationChild
   var virtualReturn = inst.moveRows(slotval1, slotval2, slotval3, slotval4, slotval5)
   virtualReturn
@@ -1086,13 +1127,16 @@ method itemData*(self: VirtualQStringListModel, index: gen_qabstractitemmodel_ty
   QStringListModelitemData(self[], index)
 proc fcQStringListModel_method_callback_itemData(self: pointer, index: pointer): struct_miqt_map {.cdecl.} =
   let inst = cast[VirtualQStringListModel](fcQStringListModel_vdata(self)[])
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var virtualReturn = inst.itemData(slotval1)
   var virtualReturn_Keys_CArray = newSeq[cint](len(virtualReturn))
   var virtualReturn_Values_CArray = newSeq[pointer](len(virtualReturn))
   var virtualReturn_ctr = 0
-  for virtualReturn_k, virtualReturn_v in virtualReturn:
+  for virtualReturn_k in virtualReturn.keys():
     virtualReturn_Keys_CArray[virtualReturn_ctr] = virtualReturn_k
+    virtualReturn_ctr += 1
+  virtualReturn_ctr = 0
+  for virtualReturn_v in virtualReturn.values():
     virtualReturn_Values_CArray[virtualReturn_ctr] = virtualReturn_v.h
     virtualReturn_ctr += 1
 
@@ -1102,7 +1146,7 @@ method setItemData*(self: VirtualQStringListModel, index: gen_qabstractitemmodel
   QStringListModelsetItemData(self[], index, roles)
 proc fcQStringListModel_method_callback_setItemData(self: pointer, index: pointer, roles: struct_miqt_map): bool {.cdecl.} =
   let inst = cast[VirtualQStringListModel](fcQStringListModel_vdata(self)[])
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var vroles_mm = roles
   var vrolesx_ret: Table[cint, gen_qvariant_types.QVariant]
   var vroles_Keys = cast[ptr UncheckedArray[cint]](vroles_mm.keys)
@@ -1110,7 +1154,7 @@ proc fcQStringListModel_method_callback_setItemData(self: pointer, index: pointe
   for i in 0..<vroles_mm.len:
     var vroles_entry_Key = vroles_Keys[i]
 
-    var vroles_entry_Value = gen_qvariant_types.QVariant(h: vroles_Values[i])
+    var vroles_entry_Value = gen_qvariant_types.QVariant(h: vroles_Values[i], owned: true)
 
     vrolesx_ret[vroles_entry_Key] = vroles_entry_Value
   c_free(vroles_mm.keys)
@@ -1140,7 +1184,7 @@ proc fcQStringListModel_method_callback_index(self: pointer, row: cint, column: 
   let inst = cast[VirtualQStringListModel](fcQStringListModel_vdata(self)[])
   let slotval1 = row
   let slotval2 = column
-  let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: parent)
+  let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   var virtualReturn = inst.index(slotval1, slotval2, slotval3)
   virtualReturn.h
 
@@ -1148,11 +1192,11 @@ method dropMimeData*(self: VirtualQStringListModel, data: gen_qmimedata_types.QM
   QStringListModeldropMimeData(self[], data, action, row, column, parent)
 proc fcQStringListModel_method_callback_dropMimeData(self: pointer, data: pointer, action: cint, row: cint, column: cint, parent: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQStringListModel](fcQStringListModel_vdata(self)[])
-  let slotval1 = gen_qmimedata_types.QMimeData(h: data)
+  let slotval1 = gen_qmimedata_types.QMimeData(h: data, owned: false)
   let slotval2 = cint(action)
   let slotval3 = row
   let slotval4 = column
-  let slotval5 = gen_qabstractitemmodel_types.QModelIndex(h: parent)
+  let slotval5 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   var virtualReturn = inst.dropMimeData(slotval1, slotval2, slotval3, slotval4, slotval5)
   virtualReturn
 
@@ -1172,7 +1216,7 @@ proc fcQStringListModel_method_callback_setHeaderData(self: pointer, section: ci
   let inst = cast[VirtualQStringListModel](fcQStringListModel_vdata(self)[])
   let slotval1 = section
   let slotval2 = cint(orientation)
-  let slotval3 = gen_qvariant_types.QVariant(h: value)
+  let slotval3 = gen_qvariant_types.QVariant(h: value, owned: false)
   let slotval4 = role
   var virtualReturn = inst.setHeaderData(slotval1, slotval2, slotval3, slotval4)
   virtualReturn
@@ -1196,7 +1240,7 @@ proc fcQStringListModel_method_callback_mimeData(self: pointer, indexes: struct_
   var vindexesx_ret = newSeq[gen_qabstractitemmodel_types.QModelIndex](int(vindexes_ma.len))
   let vindexes_outCast = cast[ptr UncheckedArray[pointer]](vindexes_ma.data)
   for i in 0 ..< vindexes_ma.len:
-    vindexesx_ret[i] = gen_qabstractitemmodel_types.QModelIndex(h: vindexes_outCast[i])
+    vindexesx_ret[i] = gen_qabstractitemmodel_types.QModelIndex(h: vindexes_outCast[i], owned: true)
   c_free(vindexes_ma.data)
   let slotval1 = vindexesx_ret
   var virtualReturn = inst.mimeData(slotval1)
@@ -1206,11 +1250,11 @@ method canDropMimeData*(self: VirtualQStringListModel, data: gen_qmimedata_types
   QStringListModelcanDropMimeData(self[], data, action, row, column, parent)
 proc fcQStringListModel_method_callback_canDropMimeData(self: pointer, data: pointer, action: cint, row: cint, column: cint, parent: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQStringListModel](fcQStringListModel_vdata(self)[])
-  let slotval1 = gen_qmimedata_types.QMimeData(h: data)
+  let slotval1 = gen_qmimedata_types.QMimeData(h: data, owned: false)
   let slotval2 = cint(action)
   let slotval3 = row
   let slotval4 = column
-  let slotval5 = gen_qabstractitemmodel_types.QModelIndex(h: parent)
+  let slotval5 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   var virtualReturn = inst.canDropMimeData(slotval1, slotval2, slotval3, slotval4, slotval5)
   virtualReturn
 
@@ -1227,7 +1271,7 @@ proc fcQStringListModel_method_callback_insertColumns(self: pointer, column: cin
   let inst = cast[VirtualQStringListModel](fcQStringListModel_vdata(self)[])
   let slotval1 = column
   let slotval2 = count
-  let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: parent)
+  let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   var virtualReturn = inst.insertColumns(slotval1, slotval2, slotval3)
   virtualReturn
 
@@ -1237,7 +1281,7 @@ proc fcQStringListModel_method_callback_removeColumns(self: pointer, column: cin
   let inst = cast[VirtualQStringListModel](fcQStringListModel_vdata(self)[])
   let slotval1 = column
   let slotval2 = count
-  let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: parent)
+  let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   var virtualReturn = inst.removeColumns(slotval1, slotval2, slotval3)
   virtualReturn
 
@@ -1245,10 +1289,10 @@ method moveColumns*(self: VirtualQStringListModel, sourceParent: gen_qabstractit
   QStringListModelmoveColumns(self[], sourceParent, sourceColumn, count, destinationParent, destinationChild)
 proc fcQStringListModel_method_callback_moveColumns(self: pointer, sourceParent: pointer, sourceColumn: cint, count: cint, destinationParent: pointer, destinationChild: cint): bool {.cdecl.} =
   let inst = cast[VirtualQStringListModel](fcQStringListModel_vdata(self)[])
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: sourceParent)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: sourceParent, owned: false)
   let slotval2 = sourceColumn
   let slotval3 = count
-  let slotval4 = gen_qabstractitemmodel_types.QModelIndex(h: destinationParent)
+  let slotval4 = gen_qabstractitemmodel_types.QModelIndex(h: destinationParent, owned: false)
   let slotval5 = destinationChild
   var virtualReturn = inst.moveColumns(slotval1, slotval2, slotval3, slotval4, slotval5)
   virtualReturn
@@ -1257,14 +1301,14 @@ method fetchMore*(self: VirtualQStringListModel, parent: gen_qabstractitemmodel_
   QStringListModelfetchMore(self[], parent)
 proc fcQStringListModel_method_callback_fetchMore(self: pointer, parent: pointer): void {.cdecl.} =
   let inst = cast[VirtualQStringListModel](fcQStringListModel_vdata(self)[])
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   inst.fetchMore(slotval1)
 
 method canFetchMore*(self: VirtualQStringListModel, parent: gen_qabstractitemmodel_types.QModelIndex): bool {.base.} =
   QStringListModelcanFetchMore(self[], parent)
 proc fcQStringListModel_method_callback_canFetchMore(self: pointer, parent: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQStringListModel](fcQStringListModel_vdata(self)[])
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   var virtualReturn = inst.canFetchMore(slotval1)
   virtualReturn
 
@@ -1272,7 +1316,7 @@ method buddy*(self: VirtualQStringListModel, index: gen_qabstractitemmodel_types
   QStringListModelbuddy(self[], index)
 proc fcQStringListModel_method_callback_buddy(self: pointer, index: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQStringListModel](fcQStringListModel_vdata(self)[])
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var virtualReturn = inst.buddy(slotval1)
   virtualReturn.h
 
@@ -1280,9 +1324,9 @@ method match*(self: VirtualQStringListModel, start: gen_qabstractitemmodel_types
   QStringListModelmatch(self[], start, role, value, hits, flags)
 proc fcQStringListModel_method_callback_match(self: pointer, start: pointer, role: cint, value: pointer, hits: cint, flags: cint): struct_miqt_array {.cdecl.} =
   let inst = cast[VirtualQStringListModel](fcQStringListModel_vdata(self)[])
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: start)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: start, owned: false)
   let slotval2 = role
-  let slotval3 = gen_qvariant_types.QVariant(h: value)
+  let slotval3 = gen_qvariant_types.QVariant(h: value, owned: false)
   let slotval4 = hits
   let slotval5 = cint(flags)
   var virtualReturn = inst.match(slotval1, slotval2, slotval3, slotval4, slotval5)
@@ -1296,7 +1340,7 @@ method span*(self: VirtualQStringListModel, index: gen_qabstractitemmodel_types.
   QStringListModelspan(self[], index)
 proc fcQStringListModel_method_callback_span(self: pointer, index: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQStringListModel](fcQStringListModel_vdata(self)[])
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var virtualReturn = inst.span(slotval1)
   virtualReturn.h
 
@@ -1308,8 +1352,11 @@ proc fcQStringListModel_method_callback_roleNames(self: pointer): struct_miqt_ma
   var virtualReturn_Keys_CArray = newSeq[cint](len(virtualReturn))
   var virtualReturn_Values_CArray = newSeq[struct_miqt_string](len(virtualReturn))
   var virtualReturn_ctr = 0
-  for virtualReturn_k, virtualReturn_v in virtualReturn:
+  for virtualReturn_k in virtualReturn.keys():
     virtualReturn_Keys_CArray[virtualReturn_ctr] = virtualReturn_k
+    virtualReturn_ctr += 1
+  virtualReturn_ctr = 0
+  for virtualReturn_v in virtualReturn.values():
     virtualReturn_Values_CArray[virtualReturn_ctr] = struct_miqt_string(data: if len(virtualReturn_v) > 0: addr virtualReturn_v[0] else: nil, len: csize_t(len(virtualReturn_v)))
     virtualReturn_ctr += 1
 
@@ -1319,8 +1366,8 @@ method multiData*(self: VirtualQStringListModel, index: gen_qabstractitemmodel_t
   QStringListModelmultiData(self[], index, roleDataSpan)
 proc fcQStringListModel_method_callback_multiData(self: pointer, index: pointer, roleDataSpan: pointer): void {.cdecl.} =
   let inst = cast[VirtualQStringListModel](fcQStringListModel_vdata(self)[])
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index)
-  let slotval2 = gen_qabstractitemmodel_types.QModelRoleDataSpan(h: roleDataSpan)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
+  let slotval2 = gen_qabstractitemmodel_types.QModelRoleDataSpan(h: roleDataSpan, owned: true)
   inst.multiData(slotval1, slotval2)
 
 method submit*(self: VirtualQStringListModel): bool {.base.} =
@@ -1346,7 +1393,7 @@ method event*(self: VirtualQStringListModel, event: gen_qcoreevent_types.QEvent)
   QStringListModelevent(self[], event)
 proc fcQStringListModel_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQStringListModel](fcQStringListModel_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
@@ -1354,8 +1401,8 @@ method eventFilter*(self: VirtualQStringListModel, watched: gen_qobject_types.QO
   QStringListModeleventFilter(self[], watched, event)
 proc fcQStringListModel_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQStringListModel](fcQStringListModel_vdata(self)[])
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
@@ -1363,39 +1410,39 @@ method timerEvent*(self: VirtualQStringListModel, event: gen_qcoreevent_types.QT
   QStringListModeltimerEvent(self[], event)
 proc fcQStringListModel_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQStringListModel](fcQStringListModel_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
 method childEvent*(self: VirtualQStringListModel, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
   QStringListModelchildEvent(self[], event)
 proc fcQStringListModel_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQStringListModel](fcQStringListModel_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
 method customEvent*(self: VirtualQStringListModel, event: gen_qcoreevent_types.QEvent): void {.base.} =
   QStringListModelcustomEvent(self[], event)
 proc fcQStringListModel_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQStringListModel](fcQStringListModel_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
 method connectNotify*(self: VirtualQStringListModel, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
   QStringListModelconnectNotify(self[], signal)
 proc fcQStringListModel_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQStringListModel](fcQStringListModel_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
 method disconnectNotify*(self: VirtualQStringListModel, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
   QStringListModeldisconnectNotify(self[], signal)
 proc fcQStringListModel_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQStringListModel](fcQStringListModel_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
 
 proc createIndex*(self: gen_qstringlistmodel_types.QStringListModel, row: cint, column: cint): gen_qabstractitemmodel_types.QModelIndex =
-  gen_qabstractitemmodel_types.QModelIndex(h: fcQStringListModel_protectedbase_createIndex(self.h, row, column))
+  gen_qabstractitemmodel_types.QModelIndex(h: fcQStringListModel_protectedbase_createIndex(self.h, row, column), owned: true)
 
 proc encodeData*(self: gen_qstringlistmodel_types.QStringListModel, indexes: seq[gen_qabstractitemmodel_types.QModelIndex], stream: gen_qdatastream_types.QDataStream): void =
   var indexes_CArray = newSeq[pointer](len(indexes))
@@ -1468,12 +1515,12 @@ proc persistentIndexList*(self: gen_qstringlistmodel_types.QStringListModel): se
   var vx_ret = newSeq[gen_qabstractitemmodel_types.QModelIndex](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qabstractitemmodel_types.QModelIndex(h: v_outCast[i])
+    vx_ret[i] = gen_qabstractitemmodel_types.QModelIndex(h: v_outCast[i], owned: true)
   c_free(v_ma.data)
   vx_ret
 
 proc sender*(self: gen_qstringlistmodel_types.QStringListModel): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQStringListModel_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQStringListModel_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qstringlistmodel_types.QStringListModel): cint =
   fcQStringListModel_protectedbase_senderSignalIndex(self.h)
@@ -1579,7 +1626,7 @@ proc create*(T: type gen_qstringlistmodel_types.QStringListModel,
     vtbl[].vtbl.connectNotify = fcQStringListModel_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQStringListModel_vtable_callback_disconnectNotify
-  let tmp = gen_qstringlistmodel_types.QStringListModel(h: fcQStringListModel_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))))
+  let tmp = gen_qstringlistmodel_types.QStringListModel(h: fcQStringListModel_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))), owned: true)
   fcQStringListModel_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qstringlistmodel_types.QStringListModel,
@@ -1682,7 +1729,7 @@ proc create*(T: type gen_qstringlistmodel_types.QStringListModel,
     vtbl[].vtbl.connectNotify = fcQStringListModel_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQStringListModel_vtable_callback_disconnectNotify
-  let tmp = gen_qstringlistmodel_types.QStringListModel(h: fcQStringListModel_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), struct_miqt_array(len: csize_t(len(strings)), data: if len(strings) == 0: nil else: addr(strings_CArray[0]))))
+  let tmp = gen_qstringlistmodel_types.QStringListModel(h: fcQStringListModel_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), struct_miqt_array(len: csize_t(len(strings)), data: if len(strings) == 0: nil else: addr(strings_CArray[0]))), owned: true)
   fcQStringListModel_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qstringlistmodel_types.QStringListModel,
@@ -1781,7 +1828,7 @@ proc create*(T: type gen_qstringlistmodel_types.QStringListModel,
     vtbl[].vtbl.connectNotify = fcQStringListModel_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQStringListModel_vtable_callback_disconnectNotify
-  let tmp = gen_qstringlistmodel_types.QStringListModel(h: fcQStringListModel_new3(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h))
+  let tmp = gen_qstringlistmodel_types.QStringListModel(h: fcQStringListModel_new3(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h), owned: true)
   fcQStringListModel_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qstringlistmodel_types.QStringListModel,
@@ -1884,13 +1931,14 @@ proc create*(T: type gen_qstringlistmodel_types.QStringListModel,
     vtbl[].vtbl.connectNotify = fcQStringListModel_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQStringListModel_vtable_callback_disconnectNotify
-  let tmp = gen_qstringlistmodel_types.QStringListModel(h: fcQStringListModel_new4(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), struct_miqt_array(len: csize_t(len(strings)), data: if len(strings) == 0: nil else: addr(strings_CArray[0])), parent.h))
+  let tmp = gen_qstringlistmodel_types.QStringListModel(h: fcQStringListModel_new4(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), struct_miqt_array(len: csize_t(len(strings)), data: if len(strings) == 0: nil else: addr(strings_CArray[0])), parent.h), owned: true)
   fcQStringListModel_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQStringListModel_mvtbl = cQStringListModelVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQStringListModel()[])](self.fcQStringListModel_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   metaObject: fcQStringListModel_method_callback_metaObject,
   metacast: fcQStringListModel_method_callback_metacast,
@@ -1974,5 +2022,3 @@ proc create*(T: type gen_qstringlistmodel_types.QStringListModel,
 
 proc staticMetaObject*(_: type gen_qstringlistmodel_types.QStringListModel): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQStringListModel_staticMetaObject())
-proc delete*(self: gen_qstringlistmodel_types.QStringListModel) =
-  fcQStringListModel_delete(self.h)

@@ -32,7 +32,7 @@ func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
     else:
       copyMem(addr result[0], v.data, len)
 
-const cflags = gorge("pkg-config --cflags Qt6Widgets")  & " -fPIC"
+const cflags = gorge("pkg-config --cflags Qt6Widgets") & " -fPIC"
 {.compile("gen_qcolordialog.cpp", cflags).}
 
 
@@ -236,10 +236,9 @@ proc fcQColorDialog_new2(vtbl: pointer, vdata: csize_t): ptr cQColorDialog {.imp
 proc fcQColorDialog_new3(vtbl: pointer, vdata: csize_t, initial: pointer): ptr cQColorDialog {.importc: "QColorDialog_new3".}
 proc fcQColorDialog_new4(vtbl: pointer, vdata: csize_t, initial: pointer, parent: pointer): ptr cQColorDialog {.importc: "QColorDialog_new4".}
 proc fcQColorDialog_staticMetaObject(): pointer {.importc: "QColorDialog_staticMetaObject".}
-proc fcQColorDialog_delete(self: pointer) {.importc: "QColorDialog_delete".}
 
 proc metaObject*(self: gen_qcolordialog_types.QColorDialog): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQColorDialog_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQColorDialog_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qcolordialog_types.QColorDialog, param1: cstring): pointer =
   fcQColorDialog_metacast(self.h, param1)
@@ -257,10 +256,10 @@ proc setCurrentColor*(self: gen_qcolordialog_types.QColorDialog, color: gen_qcol
   fcQColorDialog_setCurrentColor(self.h, color.h)
 
 proc currentColor*(self: gen_qcolordialog_types.QColorDialog): gen_qcolor_types.QColor =
-  gen_qcolor_types.QColor(h: fcQColorDialog_currentColor(self.h))
+  gen_qcolor_types.QColor(h: fcQColorDialog_currentColor(self.h), owned: true)
 
 proc selectedColor*(self: gen_qcolordialog_types.QColorDialog): gen_qcolor_types.QColor =
-  gen_qcolor_types.QColor(h: fcQColorDialog_selectedColor(self.h))
+  gen_qcolor_types.QColor(h: fcQColorDialog_selectedColor(self.h), owned: true)
 
 proc setOption*(self: gen_qcolordialog_types.QColorDialog, option: cint): void =
   fcQColorDialog_setOption(self.h, cint(option))
@@ -278,19 +277,19 @@ proc setVisible*(self: gen_qcolordialog_types.QColorDialog, visible: bool): void
   fcQColorDialog_setVisible(self.h, visible)
 
 proc getColor*(_: type gen_qcolordialog_types.QColorDialog): gen_qcolor_types.QColor =
-  gen_qcolor_types.QColor(h: fcQColorDialog_getColor())
+  gen_qcolor_types.QColor(h: fcQColorDialog_getColor(), owned: true)
 
 proc customCount*(_: type gen_qcolordialog_types.QColorDialog): cint =
   fcQColorDialog_customCount()
 
 proc customColor*(_: type gen_qcolordialog_types.QColorDialog, index: cint): gen_qcolor_types.QColor =
-  gen_qcolor_types.QColor(h: fcQColorDialog_customColor(index))
+  gen_qcolor_types.QColor(h: fcQColorDialog_customColor(index), owned: true)
 
 proc setCustomColor*(_: type gen_qcolordialog_types.QColorDialog, index: cint, color: gen_qcolor_types.QColor): void =
   fcQColorDialog_setCustomColor(index, color.h)
 
 proc standardColor*(_: type gen_qcolordialog_types.QColorDialog, index: cint): gen_qcolor_types.QColor =
-  gen_qcolor_types.QColor(h: fcQColorDialog_standardColor(index))
+  gen_qcolor_types.QColor(h: fcQColorDialog_standardColor(index), owned: true)
 
 proc setStandardColor*(_: type gen_qcolordialog_types.QColorDialog, index: cint, color: gen_qcolor_types.QColor): void =
   fcQColorDialog_setStandardColor(index, color.h)
@@ -301,7 +300,7 @@ proc currentColorChanged*(self: gen_qcolordialog_types.QColorDialog, color: gen_
 type QColorDialogcurrentColorChangedSlot* = proc(color: gen_qcolor_types.QColor)
 proc fcQColorDialog_slot_callback_currentColorChanged(slot: int, color: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QColorDialogcurrentColorChangedSlot](cast[pointer](slot))
-  let slotval1 = gen_qcolor_types.QColor(h: color)
+  let slotval1 = gen_qcolor_types.QColor(h: color, owned: false)
 
   nimfunc[](slotval1)
 
@@ -321,7 +320,7 @@ proc colorSelected*(self: gen_qcolordialog_types.QColorDialog, color: gen_qcolor
 type QColorDialogcolorSelectedSlot* = proc(color: gen_qcolor_types.QColor)
 proc fcQColorDialog_slot_callback_colorSelected(slot: int, color: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QColorDialogcolorSelectedSlot](cast[pointer](slot))
-  let slotval1 = gen_qcolor_types.QColor(h: color)
+  let slotval1 = gen_qcolor_types.QColor(h: color, owned: false)
 
   nimfunc[](slotval1)
 
@@ -351,16 +350,16 @@ proc setOption*(self: gen_qcolordialog_types.QColorDialog, option: cint, on: boo
   fcQColorDialog_setOption2(self.h, cint(option), on)
 
 proc getColor*(_: type gen_qcolordialog_types.QColorDialog, initial: gen_qcolor_types.QColor): gen_qcolor_types.QColor =
-  gen_qcolor_types.QColor(h: fcQColorDialog_getColor1(initial.h))
+  gen_qcolor_types.QColor(h: fcQColorDialog_getColor1(initial.h), owned: true)
 
 proc getColor*(_: type gen_qcolordialog_types.QColorDialog, initial: gen_qcolor_types.QColor, parent: gen_qwidget_types.QWidget): gen_qcolor_types.QColor =
-  gen_qcolor_types.QColor(h: fcQColorDialog_getColor2(initial.h, parent.h))
+  gen_qcolor_types.QColor(h: fcQColorDialog_getColor2(initial.h, parent.h), owned: true)
 
 proc getColor*(_: type gen_qcolordialog_types.QColorDialog, initial: gen_qcolor_types.QColor, parent: gen_qwidget_types.QWidget, title: string): gen_qcolor_types.QColor =
-  gen_qcolor_types.QColor(h: fcQColorDialog_getColor3(initial.h, parent.h, struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title)))))
+  gen_qcolor_types.QColor(h: fcQColorDialog_getColor3(initial.h, parent.h, struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title)))), owned: true)
 
 proc getColor*(_: type gen_qcolordialog_types.QColorDialog, initial: gen_qcolor_types.QColor, parent: gen_qwidget_types.QWidget, title: string, options: cint): gen_qcolor_types.QColor =
-  gen_qcolor_types.QColor(h: fcQColorDialog_getColor4(initial.h, parent.h, struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), cint(options)))
+  gen_qcolor_types.QColor(h: fcQColorDialog_getColor4(initial.h, parent.h, struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), cint(options)), owned: true)
 
 type QColorDialogmetaObjectProc* = proc(self: QColorDialog): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QColorDialogmetacastProc* = proc(self: QColorDialog, param1: cstring): pointer {.raises: [], gcsafe.}
@@ -417,7 +416,7 @@ type QColorDialogchildEventProc* = proc(self: QColorDialog, event: gen_qcoreeven
 type QColorDialogcustomEventProc* = proc(self: QColorDialog, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QColorDialogconnectNotifyProc* = proc(self: QColorDialog, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QColorDialogdisconnectNotifyProc* = proc(self: QColorDialog, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
-type QColorDialogVTable* = object
+type QColorDialogVTable* {.inheritable, pure.} = object
   vtbl: cQColorDialogVTable
   metaObject*: QColorDialogmetaObjectProc
   metacast*: QColorDialogmetacastProc
@@ -475,13 +474,16 @@ type QColorDialogVTable* = object
   connectNotify*: QColorDialogconnectNotifyProc
   disconnectNotify*: QColorDialogdisconnectNotifyProc
 proc QColorDialogmetaObject*(self: gen_qcolordialog_types.QColorDialog): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQColorDialog_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQColorDialog_virtualbase_metaObject(self.h), owned: false)
 
 proc fcQColorDialog_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QColorDialogVTable](fcQColorDialog_vdata(self)[])
   let self = QColorDialog(h: self)
   var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QColorDialogmetacast*(self: gen_qcolordialog_types.QColorDialog, param1: cstring): pointer =
   fcQColorDialog_virtualbase_metacast(self.h, param1)
@@ -520,7 +522,7 @@ proc QColorDialogchangeEvent*(self: gen_qcolordialog_types.QColorDialog, event: 
 proc fcQColorDialog_vtable_callback_changeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QColorDialogVTable](fcQColorDialog_vdata(self)[])
   let self = QColorDialog(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].changeEvent(self, slotval1)
 
 proc QColorDialogdone*(self: gen_qcolordialog_types.QColorDialog, resultVal: cint): void =
@@ -533,22 +535,28 @@ proc fcQColorDialog_vtable_callback_done(self: pointer, resultVal: cint): void {
   vtbl[].done(self, slotval1)
 
 proc QColorDialogsizeHint*(self: gen_qcolordialog_types.QColorDialog): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQColorDialog_virtualbase_sizeHint(self.h))
+  gen_qsize_types.QSize(h: fcQColorDialog_virtualbase_sizeHint(self.h), owned: true)
 
 proc fcQColorDialog_vtable_callback_sizeHint(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QColorDialogVTable](fcQColorDialog_vdata(self)[])
   let self = QColorDialog(h: self)
   var virtualReturn = vtbl[].sizeHint(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QColorDialogminimumSizeHint*(self: gen_qcolordialog_types.QColorDialog): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQColorDialog_virtualbase_minimumSizeHint(self.h))
+  gen_qsize_types.QSize(h: fcQColorDialog_virtualbase_minimumSizeHint(self.h), owned: true)
 
 proc fcQColorDialog_vtable_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QColorDialogVTable](fcQColorDialog_vdata(self)[])
   let self = QColorDialog(h: self)
   var virtualReturn = vtbl[].minimumSizeHint(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QColorDialogopen*(self: gen_qcolordialog_types.QColorDialog): void =
   fcQColorDialog_virtualbase_open(self.h)
@@ -589,7 +597,7 @@ proc QColorDialogkeyPressEvent*(self: gen_qcolordialog_types.QColorDialog, param
 proc fcQColorDialog_vtable_callback_keyPressEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QColorDialogVTable](fcQColorDialog_vdata(self)[])
   let self = QColorDialog(h: self)
-  let slotval1 = gen_qevent_types.QKeyEvent(h: param1)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: param1, owned: false)
   vtbl[].keyPressEvent(self, slotval1)
 
 proc QColorDialogcloseEvent*(self: gen_qcolordialog_types.QColorDialog, param1: gen_qevent_types.QCloseEvent): void =
@@ -598,7 +606,7 @@ proc QColorDialogcloseEvent*(self: gen_qcolordialog_types.QColorDialog, param1: 
 proc fcQColorDialog_vtable_callback_closeEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QColorDialogVTable](fcQColorDialog_vdata(self)[])
   let self = QColorDialog(h: self)
-  let slotval1 = gen_qevent_types.QCloseEvent(h: param1)
+  let slotval1 = gen_qevent_types.QCloseEvent(h: param1, owned: false)
   vtbl[].closeEvent(self, slotval1)
 
 proc QColorDialogshowEvent*(self: gen_qcolordialog_types.QColorDialog, param1: gen_qevent_types.QShowEvent): void =
@@ -607,7 +615,7 @@ proc QColorDialogshowEvent*(self: gen_qcolordialog_types.QColorDialog, param1: g
 proc fcQColorDialog_vtable_callback_showEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QColorDialogVTable](fcQColorDialog_vdata(self)[])
   let self = QColorDialog(h: self)
-  let slotval1 = gen_qevent_types.QShowEvent(h: param1)
+  let slotval1 = gen_qevent_types.QShowEvent(h: param1, owned: false)
   vtbl[].showEvent(self, slotval1)
 
 proc QColorDialogresizeEvent*(self: gen_qcolordialog_types.QColorDialog, param1: gen_qevent_types.QResizeEvent): void =
@@ -616,7 +624,7 @@ proc QColorDialogresizeEvent*(self: gen_qcolordialog_types.QColorDialog, param1:
 proc fcQColorDialog_vtable_callback_resizeEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QColorDialogVTable](fcQColorDialog_vdata(self)[])
   let self = QColorDialog(h: self)
-  let slotval1 = gen_qevent_types.QResizeEvent(h: param1)
+  let slotval1 = gen_qevent_types.QResizeEvent(h: param1, owned: false)
   vtbl[].resizeEvent(self, slotval1)
 
 proc QColorDialogcontextMenuEvent*(self: gen_qcolordialog_types.QColorDialog, param1: gen_qevent_types.QContextMenuEvent): void =
@@ -625,7 +633,7 @@ proc QColorDialogcontextMenuEvent*(self: gen_qcolordialog_types.QColorDialog, pa
 proc fcQColorDialog_vtable_callback_contextMenuEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QColorDialogVTable](fcQColorDialog_vdata(self)[])
   let self = QColorDialog(h: self)
-  let slotval1 = gen_qevent_types.QContextMenuEvent(h: param1)
+  let slotval1 = gen_qevent_types.QContextMenuEvent(h: param1, owned: false)
   vtbl[].contextMenuEvent(self, slotval1)
 
 proc QColorDialogeventFilter*(self: gen_qcolordialog_types.QColorDialog, param1: gen_qobject_types.QObject, param2: gen_qcoreevent_types.QEvent): bool =
@@ -634,8 +642,8 @@ proc QColorDialogeventFilter*(self: gen_qcolordialog_types.QColorDialog, param1:
 proc fcQColorDialog_vtable_callback_eventFilter(self: pointer, param1: pointer, param2: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QColorDialogVTable](fcQColorDialog_vdata(self)[])
   let self = QColorDialog(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: param1)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: param2)
+  let slotval1 = gen_qobject_types.QObject(h: param1, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: param2, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
@@ -668,13 +676,16 @@ proc fcQColorDialog_vtable_callback_hasHeightForWidth(self: pointer): bool {.cde
   virtualReturn
 
 proc QColorDialogpaintEngine*(self: gen_qcolordialog_types.QColorDialog): gen_qpaintengine_types.QPaintEngine =
-  gen_qpaintengine_types.QPaintEngine(h: fcQColorDialog_virtualbase_paintEngine(self.h))
+  gen_qpaintengine_types.QPaintEngine(h: fcQColorDialog_virtualbase_paintEngine(self.h), owned: false)
 
 proc fcQColorDialog_vtable_callback_paintEngine(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QColorDialogVTable](fcQColorDialog_vdata(self)[])
   let self = QColorDialog(h: self)
   var virtualReturn = vtbl[].paintEngine(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QColorDialogevent*(self: gen_qcolordialog_types.QColorDialog, event: gen_qcoreevent_types.QEvent): bool =
   fcQColorDialog_virtualbase_event(self.h, event.h)
@@ -682,7 +693,7 @@ proc QColorDialogevent*(self: gen_qcolordialog_types.QColorDialog, event: gen_qc
 proc fcQColorDialog_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QColorDialogVTable](fcQColorDialog_vdata(self)[])
   let self = QColorDialog(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
@@ -692,7 +703,7 @@ proc QColorDialogmousePressEvent*(self: gen_qcolordialog_types.QColorDialog, eve
 proc fcQColorDialog_vtable_callback_mousePressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QColorDialogVTable](fcQColorDialog_vdata(self)[])
   let self = QColorDialog(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mousePressEvent(self, slotval1)
 
 proc QColorDialogmouseReleaseEvent*(self: gen_qcolordialog_types.QColorDialog, event: gen_qevent_types.QMouseEvent): void =
@@ -701,7 +712,7 @@ proc QColorDialogmouseReleaseEvent*(self: gen_qcolordialog_types.QColorDialog, e
 proc fcQColorDialog_vtable_callback_mouseReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QColorDialogVTable](fcQColorDialog_vdata(self)[])
   let self = QColorDialog(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseReleaseEvent(self, slotval1)
 
 proc QColorDialogmouseDoubleClickEvent*(self: gen_qcolordialog_types.QColorDialog, event: gen_qevent_types.QMouseEvent): void =
@@ -710,7 +721,7 @@ proc QColorDialogmouseDoubleClickEvent*(self: gen_qcolordialog_types.QColorDialo
 proc fcQColorDialog_vtable_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QColorDialogVTable](fcQColorDialog_vdata(self)[])
   let self = QColorDialog(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseDoubleClickEvent(self, slotval1)
 
 proc QColorDialogmouseMoveEvent*(self: gen_qcolordialog_types.QColorDialog, event: gen_qevent_types.QMouseEvent): void =
@@ -719,7 +730,7 @@ proc QColorDialogmouseMoveEvent*(self: gen_qcolordialog_types.QColorDialog, even
 proc fcQColorDialog_vtable_callback_mouseMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QColorDialogVTable](fcQColorDialog_vdata(self)[])
   let self = QColorDialog(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseMoveEvent(self, slotval1)
 
 proc QColorDialogwheelEvent*(self: gen_qcolordialog_types.QColorDialog, event: gen_qevent_types.QWheelEvent): void =
@@ -728,7 +739,7 @@ proc QColorDialogwheelEvent*(self: gen_qcolordialog_types.QColorDialog, event: g
 proc fcQColorDialog_vtable_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QColorDialogVTable](fcQColorDialog_vdata(self)[])
   let self = QColorDialog(h: self)
-  let slotval1 = gen_qevent_types.QWheelEvent(h: event)
+  let slotval1 = gen_qevent_types.QWheelEvent(h: event, owned: false)
   vtbl[].wheelEvent(self, slotval1)
 
 proc QColorDialogkeyReleaseEvent*(self: gen_qcolordialog_types.QColorDialog, event: gen_qevent_types.QKeyEvent): void =
@@ -737,7 +748,7 @@ proc QColorDialogkeyReleaseEvent*(self: gen_qcolordialog_types.QColorDialog, eve
 proc fcQColorDialog_vtable_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QColorDialogVTable](fcQColorDialog_vdata(self)[])
   let self = QColorDialog(h: self)
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   vtbl[].keyReleaseEvent(self, slotval1)
 
 proc QColorDialogfocusInEvent*(self: gen_qcolordialog_types.QColorDialog, event: gen_qevent_types.QFocusEvent): void =
@@ -746,7 +757,7 @@ proc QColorDialogfocusInEvent*(self: gen_qcolordialog_types.QColorDialog, event:
 proc fcQColorDialog_vtable_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QColorDialogVTable](fcQColorDialog_vdata(self)[])
   let self = QColorDialog(h: self)
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusInEvent(self, slotval1)
 
 proc QColorDialogfocusOutEvent*(self: gen_qcolordialog_types.QColorDialog, event: gen_qevent_types.QFocusEvent): void =
@@ -755,7 +766,7 @@ proc QColorDialogfocusOutEvent*(self: gen_qcolordialog_types.QColorDialog, event
 proc fcQColorDialog_vtable_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QColorDialogVTable](fcQColorDialog_vdata(self)[])
   let self = QColorDialog(h: self)
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusOutEvent(self, slotval1)
 
 proc QColorDialogenterEvent*(self: gen_qcolordialog_types.QColorDialog, event: gen_qevent_types.QEnterEvent): void =
@@ -764,7 +775,7 @@ proc QColorDialogenterEvent*(self: gen_qcolordialog_types.QColorDialog, event: g
 proc fcQColorDialog_vtable_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QColorDialogVTable](fcQColorDialog_vdata(self)[])
   let self = QColorDialog(h: self)
-  let slotval1 = gen_qevent_types.QEnterEvent(h: event)
+  let slotval1 = gen_qevent_types.QEnterEvent(h: event, owned: false)
   vtbl[].enterEvent(self, slotval1)
 
 proc QColorDialogleaveEvent*(self: gen_qcolordialog_types.QColorDialog, event: gen_qcoreevent_types.QEvent): void =
@@ -773,7 +784,7 @@ proc QColorDialogleaveEvent*(self: gen_qcolordialog_types.QColorDialog, event: g
 proc fcQColorDialog_vtable_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QColorDialogVTable](fcQColorDialog_vdata(self)[])
   let self = QColorDialog(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].leaveEvent(self, slotval1)
 
 proc QColorDialogpaintEvent*(self: gen_qcolordialog_types.QColorDialog, event: gen_qevent_types.QPaintEvent): void =
@@ -782,7 +793,7 @@ proc QColorDialogpaintEvent*(self: gen_qcolordialog_types.QColorDialog, event: g
 proc fcQColorDialog_vtable_callback_paintEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QColorDialogVTable](fcQColorDialog_vdata(self)[])
   let self = QColorDialog(h: self)
-  let slotval1 = gen_qevent_types.QPaintEvent(h: event)
+  let slotval1 = gen_qevent_types.QPaintEvent(h: event, owned: false)
   vtbl[].paintEvent(self, slotval1)
 
 proc QColorDialogmoveEvent*(self: gen_qcolordialog_types.QColorDialog, event: gen_qevent_types.QMoveEvent): void =
@@ -791,7 +802,7 @@ proc QColorDialogmoveEvent*(self: gen_qcolordialog_types.QColorDialog, event: ge
 proc fcQColorDialog_vtable_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QColorDialogVTable](fcQColorDialog_vdata(self)[])
   let self = QColorDialog(h: self)
-  let slotval1 = gen_qevent_types.QMoveEvent(h: event)
+  let slotval1 = gen_qevent_types.QMoveEvent(h: event, owned: false)
   vtbl[].moveEvent(self, slotval1)
 
 proc QColorDialogtabletEvent*(self: gen_qcolordialog_types.QColorDialog, event: gen_qevent_types.QTabletEvent): void =
@@ -800,7 +811,7 @@ proc QColorDialogtabletEvent*(self: gen_qcolordialog_types.QColorDialog, event: 
 proc fcQColorDialog_vtable_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QColorDialogVTable](fcQColorDialog_vdata(self)[])
   let self = QColorDialog(h: self)
-  let slotval1 = gen_qevent_types.QTabletEvent(h: event)
+  let slotval1 = gen_qevent_types.QTabletEvent(h: event, owned: false)
   vtbl[].tabletEvent(self, slotval1)
 
 proc QColorDialogactionEvent*(self: gen_qcolordialog_types.QColorDialog, event: gen_qevent_types.QActionEvent): void =
@@ -809,7 +820,7 @@ proc QColorDialogactionEvent*(self: gen_qcolordialog_types.QColorDialog, event: 
 proc fcQColorDialog_vtable_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QColorDialogVTable](fcQColorDialog_vdata(self)[])
   let self = QColorDialog(h: self)
-  let slotval1 = gen_qevent_types.QActionEvent(h: event)
+  let slotval1 = gen_qevent_types.QActionEvent(h: event, owned: false)
   vtbl[].actionEvent(self, slotval1)
 
 proc QColorDialogdragEnterEvent*(self: gen_qcolordialog_types.QColorDialog, event: gen_qevent_types.QDragEnterEvent): void =
@@ -818,7 +829,7 @@ proc QColorDialogdragEnterEvent*(self: gen_qcolordialog_types.QColorDialog, even
 proc fcQColorDialog_vtable_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QColorDialogVTable](fcQColorDialog_vdata(self)[])
   let self = QColorDialog(h: self)
-  let slotval1 = gen_qevent_types.QDragEnterEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragEnterEvent(h: event, owned: false)
   vtbl[].dragEnterEvent(self, slotval1)
 
 proc QColorDialogdragMoveEvent*(self: gen_qcolordialog_types.QColorDialog, event: gen_qevent_types.QDragMoveEvent): void =
@@ -827,7 +838,7 @@ proc QColorDialogdragMoveEvent*(self: gen_qcolordialog_types.QColorDialog, event
 proc fcQColorDialog_vtable_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QColorDialogVTable](fcQColorDialog_vdata(self)[])
   let self = QColorDialog(h: self)
-  let slotval1 = gen_qevent_types.QDragMoveEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragMoveEvent(h: event, owned: false)
   vtbl[].dragMoveEvent(self, slotval1)
 
 proc QColorDialogdragLeaveEvent*(self: gen_qcolordialog_types.QColorDialog, event: gen_qevent_types.QDragLeaveEvent): void =
@@ -836,7 +847,7 @@ proc QColorDialogdragLeaveEvent*(self: gen_qcolordialog_types.QColorDialog, even
 proc fcQColorDialog_vtable_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QColorDialogVTable](fcQColorDialog_vdata(self)[])
   let self = QColorDialog(h: self)
-  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event, owned: false)
   vtbl[].dragLeaveEvent(self, slotval1)
 
 proc QColorDialogdropEvent*(self: gen_qcolordialog_types.QColorDialog, event: gen_qevent_types.QDropEvent): void =
@@ -845,7 +856,7 @@ proc QColorDialogdropEvent*(self: gen_qcolordialog_types.QColorDialog, event: ge
 proc fcQColorDialog_vtable_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QColorDialogVTable](fcQColorDialog_vdata(self)[])
   let self = QColorDialog(h: self)
-  let slotval1 = gen_qevent_types.QDropEvent(h: event)
+  let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
   vtbl[].dropEvent(self, slotval1)
 
 proc QColorDialoghideEvent*(self: gen_qcolordialog_types.QColorDialog, event: gen_qevent_types.QHideEvent): void =
@@ -854,7 +865,7 @@ proc QColorDialoghideEvent*(self: gen_qcolordialog_types.QColorDialog, event: ge
 proc fcQColorDialog_vtable_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QColorDialogVTable](fcQColorDialog_vdata(self)[])
   let self = QColorDialog(h: self)
-  let slotval1 = gen_qevent_types.QHideEvent(h: event)
+  let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   vtbl[].hideEvent(self, slotval1)
 
 proc QColorDialognativeEvent*(self: gen_qcolordialog_types.QColorDialog, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool =
@@ -888,27 +899,33 @@ proc QColorDialoginitPainter*(self: gen_qcolordialog_types.QColorDialog, painter
 proc fcQColorDialog_vtable_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QColorDialogVTable](fcQColorDialog_vdata(self)[])
   let self = QColorDialog(h: self)
-  let slotval1 = gen_qpainter_types.QPainter(h: painter)
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
   vtbl[].initPainter(self, slotval1)
 
 proc QColorDialogredirected*(self: gen_qcolordialog_types.QColorDialog, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice =
-  gen_qpaintdevice_types.QPaintDevice(h: fcQColorDialog_virtualbase_redirected(self.h, offset.h))
+  gen_qpaintdevice_types.QPaintDevice(h: fcQColorDialog_virtualbase_redirected(self.h, offset.h), owned: false)
 
 proc fcQColorDialog_vtable_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QColorDialogVTable](fcQColorDialog_vdata(self)[])
   let self = QColorDialog(h: self)
-  let slotval1 = gen_qpoint_types.QPoint(h: offset)
+  let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
   var virtualReturn = vtbl[].redirected(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QColorDialogsharedPainter*(self: gen_qcolordialog_types.QColorDialog): gen_qpainter_types.QPainter =
-  gen_qpainter_types.QPainter(h: fcQColorDialog_virtualbase_sharedPainter(self.h))
+  gen_qpainter_types.QPainter(h: fcQColorDialog_virtualbase_sharedPainter(self.h), owned: false)
 
 proc fcQColorDialog_vtable_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QColorDialogVTable](fcQColorDialog_vdata(self)[])
   let self = QColorDialog(h: self)
   var virtualReturn = vtbl[].sharedPainter(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QColorDialoginputMethodEvent*(self: gen_qcolordialog_types.QColorDialog, param1: gen_qevent_types.QInputMethodEvent): void =
   fcQColorDialog_virtualbase_inputMethodEvent(self.h, param1.h)
@@ -916,18 +933,21 @@ proc QColorDialoginputMethodEvent*(self: gen_qcolordialog_types.QColorDialog, pa
 proc fcQColorDialog_vtable_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QColorDialogVTable](fcQColorDialog_vdata(self)[])
   let self = QColorDialog(h: self)
-  let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1)
+  let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1, owned: false)
   vtbl[].inputMethodEvent(self, slotval1)
 
 proc QColorDialoginputMethodQuery*(self: gen_qcolordialog_types.QColorDialog, param1: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQColorDialog_virtualbase_inputMethodQuery(self.h, cint(param1)))
+  gen_qvariant_types.QVariant(h: fcQColorDialog_virtualbase_inputMethodQuery(self.h, cint(param1)), owned: true)
 
 proc fcQColorDialog_vtable_callback_inputMethodQuery(self: pointer, param1: cint): pointer {.cdecl.} =
   let vtbl = cast[ptr QColorDialogVTable](fcQColorDialog_vdata(self)[])
   let self = QColorDialog(h: self)
   let slotval1 = cint(param1)
   var virtualReturn = vtbl[].inputMethodQuery(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QColorDialogfocusNextPrevChild*(self: gen_qcolordialog_types.QColorDialog, next: bool): bool =
   fcQColorDialog_virtualbase_focusNextPrevChild(self.h, next)
@@ -945,7 +965,7 @@ proc QColorDialogtimerEvent*(self: gen_qcolordialog_types.QColorDialog, event: g
 proc fcQColorDialog_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QColorDialogVTable](fcQColorDialog_vdata(self)[])
   let self = QColorDialog(h: self)
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
 proc QColorDialogchildEvent*(self: gen_qcolordialog_types.QColorDialog, event: gen_qcoreevent_types.QChildEvent): void =
@@ -954,7 +974,7 @@ proc QColorDialogchildEvent*(self: gen_qcolordialog_types.QColorDialog, event: g
 proc fcQColorDialog_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QColorDialogVTable](fcQColorDialog_vdata(self)[])
   let self = QColorDialog(h: self)
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
 proc QColorDialogcustomEvent*(self: gen_qcolordialog_types.QColorDialog, event: gen_qcoreevent_types.QEvent): void =
@@ -963,7 +983,7 @@ proc QColorDialogcustomEvent*(self: gen_qcolordialog_types.QColorDialog, event: 
 proc fcQColorDialog_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QColorDialogVTable](fcQColorDialog_vdata(self)[])
   let self = QColorDialog(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
 proc QColorDialogconnectNotify*(self: gen_qcolordialog_types.QColorDialog, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -972,7 +992,7 @@ proc QColorDialogconnectNotify*(self: gen_qcolordialog_types.QColorDialog, signa
 proc fcQColorDialog_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QColorDialogVTable](fcQColorDialog_vdata(self)[])
   let self = QColorDialog(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
 proc QColorDialogdisconnectNotify*(self: gen_qcolordialog_types.QColorDialog, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -981,7 +1001,7 @@ proc QColorDialogdisconnectNotify*(self: gen_qcolordialog_types.QColorDialog, si
 proc fcQColorDialog_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QColorDialogVTable](fcQColorDialog_vdata(self)[])
   let self = QColorDialog(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
 type VirtualQColorDialog* {.inheritable.} = ref object of QColorDialog
@@ -1022,7 +1042,7 @@ method changeEvent*(self: VirtualQColorDialog, event: gen_qcoreevent_types.QEven
   QColorDialogchangeEvent(self[], event)
 proc fcQColorDialog_method_callback_changeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQColorDialog](fcQColorDialog_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.changeEvent(slotval1)
 
 method done*(self: VirtualQColorDialog, resultVal: cint): void {.base.} =
@@ -1075,43 +1095,43 @@ method keyPressEvent*(self: VirtualQColorDialog, param1: gen_qevent_types.QKeyEv
   QColorDialogkeyPressEvent(self[], param1)
 proc fcQColorDialog_method_callback_keyPressEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQColorDialog](fcQColorDialog_vdata(self)[])
-  let slotval1 = gen_qevent_types.QKeyEvent(h: param1)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: param1, owned: false)
   inst.keyPressEvent(slotval1)
 
 method closeEvent*(self: VirtualQColorDialog, param1: gen_qevent_types.QCloseEvent): void {.base.} =
   QColorDialogcloseEvent(self[], param1)
 proc fcQColorDialog_method_callback_closeEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQColorDialog](fcQColorDialog_vdata(self)[])
-  let slotval1 = gen_qevent_types.QCloseEvent(h: param1)
+  let slotval1 = gen_qevent_types.QCloseEvent(h: param1, owned: false)
   inst.closeEvent(slotval1)
 
 method showEvent*(self: VirtualQColorDialog, param1: gen_qevent_types.QShowEvent): void {.base.} =
   QColorDialogshowEvent(self[], param1)
 proc fcQColorDialog_method_callback_showEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQColorDialog](fcQColorDialog_vdata(self)[])
-  let slotval1 = gen_qevent_types.QShowEvent(h: param1)
+  let slotval1 = gen_qevent_types.QShowEvent(h: param1, owned: false)
   inst.showEvent(slotval1)
 
 method resizeEvent*(self: VirtualQColorDialog, param1: gen_qevent_types.QResizeEvent): void {.base.} =
   QColorDialogresizeEvent(self[], param1)
 proc fcQColorDialog_method_callback_resizeEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQColorDialog](fcQColorDialog_vdata(self)[])
-  let slotval1 = gen_qevent_types.QResizeEvent(h: param1)
+  let slotval1 = gen_qevent_types.QResizeEvent(h: param1, owned: false)
   inst.resizeEvent(slotval1)
 
 method contextMenuEvent*(self: VirtualQColorDialog, param1: gen_qevent_types.QContextMenuEvent): void {.base.} =
   QColorDialogcontextMenuEvent(self[], param1)
 proc fcQColorDialog_method_callback_contextMenuEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQColorDialog](fcQColorDialog_vdata(self)[])
-  let slotval1 = gen_qevent_types.QContextMenuEvent(h: param1)
+  let slotval1 = gen_qevent_types.QContextMenuEvent(h: param1, owned: false)
   inst.contextMenuEvent(slotval1)
 
 method eventFilter*(self: VirtualQColorDialog, param1: gen_qobject_types.QObject, param2: gen_qcoreevent_types.QEvent): bool {.base.} =
   QColorDialogeventFilter(self[], param1, param2)
 proc fcQColorDialog_method_callback_eventFilter(self: pointer, param1: pointer, param2: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQColorDialog](fcQColorDialog_vdata(self)[])
-  let slotval1 = gen_qobject_types.QObject(h: param1)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: param2)
+  let slotval1 = gen_qobject_types.QObject(h: param1, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: param2, owned: false)
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
@@ -1148,7 +1168,7 @@ method event*(self: VirtualQColorDialog, event: gen_qcoreevent_types.QEvent): bo
   QColorDialogevent(self[], event)
 proc fcQColorDialog_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQColorDialog](fcQColorDialog_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
@@ -1156,133 +1176,133 @@ method mousePressEvent*(self: VirtualQColorDialog, event: gen_qevent_types.QMous
   QColorDialogmousePressEvent(self[], event)
 proc fcQColorDialog_method_callback_mousePressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQColorDialog](fcQColorDialog_vdata(self)[])
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mousePressEvent(slotval1)
 
 method mouseReleaseEvent*(self: VirtualQColorDialog, event: gen_qevent_types.QMouseEvent): void {.base.} =
   QColorDialogmouseReleaseEvent(self[], event)
 proc fcQColorDialog_method_callback_mouseReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQColorDialog](fcQColorDialog_vdata(self)[])
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mouseReleaseEvent(slotval1)
 
 method mouseDoubleClickEvent*(self: VirtualQColorDialog, event: gen_qevent_types.QMouseEvent): void {.base.} =
   QColorDialogmouseDoubleClickEvent(self[], event)
 proc fcQColorDialog_method_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQColorDialog](fcQColorDialog_vdata(self)[])
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mouseDoubleClickEvent(slotval1)
 
 method mouseMoveEvent*(self: VirtualQColorDialog, event: gen_qevent_types.QMouseEvent): void {.base.} =
   QColorDialogmouseMoveEvent(self[], event)
 proc fcQColorDialog_method_callback_mouseMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQColorDialog](fcQColorDialog_vdata(self)[])
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mouseMoveEvent(slotval1)
 
 method wheelEvent*(self: VirtualQColorDialog, event: gen_qevent_types.QWheelEvent): void {.base.} =
   QColorDialogwheelEvent(self[], event)
 proc fcQColorDialog_method_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQColorDialog](fcQColorDialog_vdata(self)[])
-  let slotval1 = gen_qevent_types.QWheelEvent(h: event)
+  let slotval1 = gen_qevent_types.QWheelEvent(h: event, owned: false)
   inst.wheelEvent(slotval1)
 
 method keyReleaseEvent*(self: VirtualQColorDialog, event: gen_qevent_types.QKeyEvent): void {.base.} =
   QColorDialogkeyReleaseEvent(self[], event)
 proc fcQColorDialog_method_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQColorDialog](fcQColorDialog_vdata(self)[])
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   inst.keyReleaseEvent(slotval1)
 
 method focusInEvent*(self: VirtualQColorDialog, event: gen_qevent_types.QFocusEvent): void {.base.} =
   QColorDialogfocusInEvent(self[], event)
 proc fcQColorDialog_method_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQColorDialog](fcQColorDialog_vdata(self)[])
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   inst.focusInEvent(slotval1)
 
 method focusOutEvent*(self: VirtualQColorDialog, event: gen_qevent_types.QFocusEvent): void {.base.} =
   QColorDialogfocusOutEvent(self[], event)
 proc fcQColorDialog_method_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQColorDialog](fcQColorDialog_vdata(self)[])
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   inst.focusOutEvent(slotval1)
 
 method enterEvent*(self: VirtualQColorDialog, event: gen_qevent_types.QEnterEvent): void {.base.} =
   QColorDialogenterEvent(self[], event)
 proc fcQColorDialog_method_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQColorDialog](fcQColorDialog_vdata(self)[])
-  let slotval1 = gen_qevent_types.QEnterEvent(h: event)
+  let slotval1 = gen_qevent_types.QEnterEvent(h: event, owned: false)
   inst.enterEvent(slotval1)
 
 method leaveEvent*(self: VirtualQColorDialog, event: gen_qcoreevent_types.QEvent): void {.base.} =
   QColorDialogleaveEvent(self[], event)
 proc fcQColorDialog_method_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQColorDialog](fcQColorDialog_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.leaveEvent(slotval1)
 
 method paintEvent*(self: VirtualQColorDialog, event: gen_qevent_types.QPaintEvent): void {.base.} =
   QColorDialogpaintEvent(self[], event)
 proc fcQColorDialog_method_callback_paintEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQColorDialog](fcQColorDialog_vdata(self)[])
-  let slotval1 = gen_qevent_types.QPaintEvent(h: event)
+  let slotval1 = gen_qevent_types.QPaintEvent(h: event, owned: false)
   inst.paintEvent(slotval1)
 
 method moveEvent*(self: VirtualQColorDialog, event: gen_qevent_types.QMoveEvent): void {.base.} =
   QColorDialogmoveEvent(self[], event)
 proc fcQColorDialog_method_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQColorDialog](fcQColorDialog_vdata(self)[])
-  let slotval1 = gen_qevent_types.QMoveEvent(h: event)
+  let slotval1 = gen_qevent_types.QMoveEvent(h: event, owned: false)
   inst.moveEvent(slotval1)
 
 method tabletEvent*(self: VirtualQColorDialog, event: gen_qevent_types.QTabletEvent): void {.base.} =
   QColorDialogtabletEvent(self[], event)
 proc fcQColorDialog_method_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQColorDialog](fcQColorDialog_vdata(self)[])
-  let slotval1 = gen_qevent_types.QTabletEvent(h: event)
+  let slotval1 = gen_qevent_types.QTabletEvent(h: event, owned: false)
   inst.tabletEvent(slotval1)
 
 method actionEvent*(self: VirtualQColorDialog, event: gen_qevent_types.QActionEvent): void {.base.} =
   QColorDialogactionEvent(self[], event)
 proc fcQColorDialog_method_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQColorDialog](fcQColorDialog_vdata(self)[])
-  let slotval1 = gen_qevent_types.QActionEvent(h: event)
+  let slotval1 = gen_qevent_types.QActionEvent(h: event, owned: false)
   inst.actionEvent(slotval1)
 
 method dragEnterEvent*(self: VirtualQColorDialog, event: gen_qevent_types.QDragEnterEvent): void {.base.} =
   QColorDialogdragEnterEvent(self[], event)
 proc fcQColorDialog_method_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQColorDialog](fcQColorDialog_vdata(self)[])
-  let slotval1 = gen_qevent_types.QDragEnterEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragEnterEvent(h: event, owned: false)
   inst.dragEnterEvent(slotval1)
 
 method dragMoveEvent*(self: VirtualQColorDialog, event: gen_qevent_types.QDragMoveEvent): void {.base.} =
   QColorDialogdragMoveEvent(self[], event)
 proc fcQColorDialog_method_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQColorDialog](fcQColorDialog_vdata(self)[])
-  let slotval1 = gen_qevent_types.QDragMoveEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragMoveEvent(h: event, owned: false)
   inst.dragMoveEvent(slotval1)
 
 method dragLeaveEvent*(self: VirtualQColorDialog, event: gen_qevent_types.QDragLeaveEvent): void {.base.} =
   QColorDialogdragLeaveEvent(self[], event)
 proc fcQColorDialog_method_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQColorDialog](fcQColorDialog_vdata(self)[])
-  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event, owned: false)
   inst.dragLeaveEvent(slotval1)
 
 method dropEvent*(self: VirtualQColorDialog, event: gen_qevent_types.QDropEvent): void {.base.} =
   QColorDialogdropEvent(self[], event)
 proc fcQColorDialog_method_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQColorDialog](fcQColorDialog_vdata(self)[])
-  let slotval1 = gen_qevent_types.QDropEvent(h: event)
+  let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
   inst.dropEvent(slotval1)
 
 method hideEvent*(self: VirtualQColorDialog, event: gen_qevent_types.QHideEvent): void {.base.} =
   QColorDialoghideEvent(self[], event)
 proc fcQColorDialog_method_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQColorDialog](fcQColorDialog_vdata(self)[])
-  let slotval1 = gen_qevent_types.QHideEvent(h: event)
+  let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   inst.hideEvent(slotval1)
 
 method nativeEvent*(self: VirtualQColorDialog, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
@@ -1310,14 +1330,14 @@ method initPainter*(self: VirtualQColorDialog, painter: gen_qpainter_types.QPain
   QColorDialoginitPainter(self[], painter)
 proc fcQColorDialog_method_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
   let inst = cast[VirtualQColorDialog](fcQColorDialog_vdata(self)[])
-  let slotval1 = gen_qpainter_types.QPainter(h: painter)
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
   inst.initPainter(slotval1)
 
 method redirected*(self: VirtualQColorDialog, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.base.} =
   QColorDialogredirected(self[], offset)
 proc fcQColorDialog_method_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQColorDialog](fcQColorDialog_vdata(self)[])
-  let slotval1 = gen_qpoint_types.QPoint(h: offset)
+  let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
   var virtualReturn = inst.redirected(slotval1)
   virtualReturn.h
 
@@ -1332,7 +1352,7 @@ method inputMethodEvent*(self: VirtualQColorDialog, param1: gen_qevent_types.QIn
   QColorDialoginputMethodEvent(self[], param1)
 proc fcQColorDialog_method_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQColorDialog](fcQColorDialog_vdata(self)[])
-  let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1)
+  let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1, owned: false)
   inst.inputMethodEvent(slotval1)
 
 method inputMethodQuery*(self: VirtualQColorDialog, param1: cint): gen_qvariant_types.QVariant {.base.} =
@@ -1355,35 +1375,35 @@ method timerEvent*(self: VirtualQColorDialog, event: gen_qcoreevent_types.QTimer
   QColorDialogtimerEvent(self[], event)
 proc fcQColorDialog_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQColorDialog](fcQColorDialog_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
 method childEvent*(self: VirtualQColorDialog, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
   QColorDialogchildEvent(self[], event)
 proc fcQColorDialog_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQColorDialog](fcQColorDialog_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
 method customEvent*(self: VirtualQColorDialog, event: gen_qcoreevent_types.QEvent): void {.base.} =
   QColorDialogcustomEvent(self[], event)
 proc fcQColorDialog_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQColorDialog](fcQColorDialog_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
 method connectNotify*(self: VirtualQColorDialog, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
   QColorDialogconnectNotify(self[], signal)
 proc fcQColorDialog_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQColorDialog](fcQColorDialog_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
 method disconnectNotify*(self: VirtualQColorDialog, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
   QColorDialogdisconnectNotify(self[], signal)
 proc fcQColorDialog_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQColorDialog](fcQColorDialog_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
 
 proc adjustPosition*(self: gen_qcolordialog_types.QColorDialog, param1: gen_qwidget_types.QWidget): void =
@@ -1405,7 +1425,7 @@ proc focusPreviousChild*(self: gen_qcolordialog_types.QColorDialog): bool =
   fcQColorDialog_protectedbase_focusPreviousChild(self.h)
 
 proc sender*(self: gen_qcolordialog_types.QColorDialog): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQColorDialog_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQColorDialog_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qcolordialog_types.QColorDialog): cint =
   fcQColorDialog_protectedbase_senderSignalIndex(self.h)
@@ -1534,7 +1554,7 @@ proc create*(T: type gen_qcolordialog_types.QColorDialog,
     vtbl[].vtbl.connectNotify = fcQColorDialog_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQColorDialog_vtable_callback_disconnectNotify
-  let tmp = gen_qcolordialog_types.QColorDialog(h: fcQColorDialog_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h))
+  let tmp = gen_qcolordialog_types.QColorDialog(h: fcQColorDialog_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h), owned: true)
   fcQColorDialog_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qcolordialog_types.QColorDialog,
@@ -1654,7 +1674,7 @@ proc create*(T: type gen_qcolordialog_types.QColorDialog,
     vtbl[].vtbl.connectNotify = fcQColorDialog_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQColorDialog_vtable_callback_disconnectNotify
-  let tmp = gen_qcolordialog_types.QColorDialog(h: fcQColorDialog_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer))))
+  let tmp = gen_qcolordialog_types.QColorDialog(h: fcQColorDialog_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer))), owned: true)
   fcQColorDialog_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qcolordialog_types.QColorDialog,
@@ -1775,7 +1795,7 @@ proc create*(T: type gen_qcolordialog_types.QColorDialog,
     vtbl[].vtbl.connectNotify = fcQColorDialog_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQColorDialog_vtable_callback_disconnectNotify
-  let tmp = gen_qcolordialog_types.QColorDialog(h: fcQColorDialog_new3(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), initial.h))
+  let tmp = gen_qcolordialog_types.QColorDialog(h: fcQColorDialog_new3(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), initial.h), owned: true)
   fcQColorDialog_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qcolordialog_types.QColorDialog,
@@ -1896,13 +1916,14 @@ proc create*(T: type gen_qcolordialog_types.QColorDialog,
     vtbl[].vtbl.connectNotify = fcQColorDialog_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQColorDialog_vtable_callback_disconnectNotify
-  let tmp = gen_qcolordialog_types.QColorDialog(h: fcQColorDialog_new4(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), initial.h, parent.h))
+  let tmp = gen_qcolordialog_types.QColorDialog(h: fcQColorDialog_new4(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), initial.h, parent.h), owned: true)
   fcQColorDialog_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQColorDialog_mvtbl = cQColorDialogVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQColorDialog()[])](self.fcQColorDialog_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   metaObject: fcQColorDialog_method_callback_metaObject,
   metacast: fcQColorDialog_method_callback_metacast,
@@ -1989,5 +2010,3 @@ proc create*(T: type gen_qcolordialog_types.QColorDialog,
 
 proc staticMetaObject*(_: type gen_qcolordialog_types.QColorDialog): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQColorDialog_staticMetaObject())
-proc delete*(self: gen_qcolordialog_types.QColorDialog) =
-  fcQColorDialog_delete(self.h)

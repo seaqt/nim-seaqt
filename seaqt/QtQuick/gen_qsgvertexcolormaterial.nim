@@ -32,7 +32,7 @@ func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
     else:
       copyMem(addr result[0], v.data, len)
 
-const cflags = gorge("pkg-config --cflags Qt6Quick")  & " -fPIC"
+const cflags = gorge("pkg-config --cflags Qt6Quick") & " -fPIC"
 {.compile("gen_qsgvertexcolormaterial.cpp", cflags).}
 
 
@@ -62,7 +62,6 @@ proc fcQSGVertexColorMaterial_virtualbase_compare(self: pointer, other: pointer)
 proc fcQSGVertexColorMaterial_virtualbase_typeX(self: pointer): pointer {.importc: "QSGVertexColorMaterial_virtualbase_type".}
 proc fcQSGVertexColorMaterial_virtualbase_createShader(self: pointer, renderMode: cint): pointer {.importc: "QSGVertexColorMaterial_virtualbase_createShader".}
 proc fcQSGVertexColorMaterial_new(vtbl: pointer, vdata: csize_t): ptr cQSGVertexColorMaterial {.importc: "QSGVertexColorMaterial_new".}
-proc fcQSGVertexColorMaterial_delete(self: pointer) {.importc: "QSGVertexColorMaterial_delete".}
 
 proc compare*(self: gen_qsgvertexcolormaterial_types.QSGVertexColorMaterial, other: gen_qsgmaterial_types.QSGMaterial): cint =
   fcQSGVertexColorMaterial_compare(self.h, other.h)
@@ -70,7 +69,7 @@ proc compare*(self: gen_qsgvertexcolormaterial_types.QSGVertexColorMaterial, oth
 type QSGVertexColorMaterialcompareProc* = proc(self: QSGVertexColorMaterial, other: gen_qsgmaterial_types.QSGMaterial): cint {.raises: [], gcsafe.}
 type QSGVertexColorMaterialtypeXProc* = proc(self: QSGVertexColorMaterial): gen_qsgmaterialtype_types.QSGMaterialType {.raises: [], gcsafe.}
 type QSGVertexColorMaterialcreateShaderProc* = proc(self: QSGVertexColorMaterial, renderMode: cint): gen_qsgmaterialshader_types.QSGMaterialShader {.raises: [], gcsafe.}
-type QSGVertexColorMaterialVTable* = object
+type QSGVertexColorMaterialVTable* {.inheritable, pure.} = object
   vtbl: cQSGVertexColorMaterialVTable
   compare*: QSGVertexColorMaterialcompareProc
   typeX*: QSGVertexColorMaterialtypeXProc
@@ -81,28 +80,34 @@ proc QSGVertexColorMaterialcompare*(self: gen_qsgvertexcolormaterial_types.QSGVe
 proc fcQSGVertexColorMaterial_vtable_callback_compare(self: pointer, other: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QSGVertexColorMaterialVTable](fcQSGVertexColorMaterial_vdata(self)[])
   let self = QSGVertexColorMaterial(h: self)
-  let slotval1 = gen_qsgmaterial_types.QSGMaterial(h: other)
+  let slotval1 = gen_qsgmaterial_types.QSGMaterial(h: other, owned: false)
   var virtualReturn = vtbl[].compare(self, slotval1)
   virtualReturn
 
 proc QSGVertexColorMaterialtypeX*(self: gen_qsgvertexcolormaterial_types.QSGVertexColorMaterial): gen_qsgmaterialtype_types.QSGMaterialType =
-  gen_qsgmaterialtype_types.QSGMaterialType(h: fcQSGVertexColorMaterial_virtualbase_typeX(self.h))
+  gen_qsgmaterialtype_types.QSGMaterialType(h: fcQSGVertexColorMaterial_virtualbase_typeX(self.h), owned: false)
 
 proc fcQSGVertexColorMaterial_vtable_callback_typeX(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QSGVertexColorMaterialVTable](fcQSGVertexColorMaterial_vdata(self)[])
   let self = QSGVertexColorMaterial(h: self)
   var virtualReturn = vtbl[].typeX(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QSGVertexColorMaterialcreateShader*(self: gen_qsgvertexcolormaterial_types.QSGVertexColorMaterial, renderMode: cint): gen_qsgmaterialshader_types.QSGMaterialShader =
-  gen_qsgmaterialshader_types.QSGMaterialShader(h: fcQSGVertexColorMaterial_virtualbase_createShader(self.h, cint(renderMode)))
+  gen_qsgmaterialshader_types.QSGMaterialShader(h: fcQSGVertexColorMaterial_virtualbase_createShader(self.h, cint(renderMode)), owned: false)
 
 proc fcQSGVertexColorMaterial_vtable_callback_createShader(self: pointer, renderMode: cint): pointer {.cdecl.} =
   let vtbl = cast[ptr QSGVertexColorMaterialVTable](fcQSGVertexColorMaterial_vdata(self)[])
   let self = QSGVertexColorMaterial(h: self)
   let slotval1 = cint(renderMode)
   var virtualReturn = vtbl[].createShader(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 type VirtualQSGVertexColorMaterial* {.inheritable.} = ref object of QSGVertexColorMaterial
   vtbl*: cQSGVertexColorMaterialVTable
@@ -110,7 +115,7 @@ method compare*(self: VirtualQSGVertexColorMaterial, other: gen_qsgmaterial_type
   QSGVertexColorMaterialcompare(self[], other)
 proc fcQSGVertexColorMaterial_method_callback_compare(self: pointer, other: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQSGVertexColorMaterial](fcQSGVertexColorMaterial_vdata(self)[])
-  let slotval1 = gen_qsgmaterial_types.QSGMaterial(h: other)
+  let slotval1 = gen_qsgmaterial_types.QSGMaterial(h: other, owned: false)
   var virtualReturn = inst.compare(slotval1)
   virtualReturn
 
@@ -142,13 +147,14 @@ proc create*(T: type gen_qsgvertexcolormaterial_types.QSGVertexColorMaterial,
     vtbl[].vtbl.typeX = fcQSGVertexColorMaterial_vtable_callback_typeX
   if not isNil(vtbl[].createShader):
     vtbl[].vtbl.createShader = fcQSGVertexColorMaterial_vtable_callback_createShader
-  let tmp = gen_qsgvertexcolormaterial_types.QSGVertexColorMaterial(h: fcQSGVertexColorMaterial_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))))
+  let tmp = gen_qsgvertexcolormaterial_types.QSGVertexColorMaterial(h: fcQSGVertexColorMaterial_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))), owned: true)
   fcQSGVertexColorMaterial_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQSGVertexColorMaterial_mvtbl = cQSGVertexColorMaterialVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQSGVertexColorMaterial()[])](self.fcQSGVertexColorMaterial_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   compare: fcQSGVertexColorMaterial_method_callback_compare,
   typeX: fcQSGVertexColorMaterial_method_callback_typeX,
@@ -160,5 +166,3 @@ proc create*(T: type gen_qsgvertexcolormaterial_types.QSGVertexColorMaterial,
   inst[].h = fcQSGVertexColorMaterial_new(addr(cQSGVertexColorMaterial_mvtbl), csize_t(sizeof(pointer)))
   fcQSGVertexColorMaterial_vdata(inst[].h)[] = addr inst[]
 
-proc delete*(self: gen_qsgvertexcolormaterial_types.QSGVertexColorMaterial) =
-  fcQSGVertexColorMaterial_delete(self.h)

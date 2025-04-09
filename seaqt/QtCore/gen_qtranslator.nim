@@ -32,7 +32,7 @@ func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
     else:
       copyMem(addr result[0], v.data, len)
 
-const cflags = gorge("pkg-config --cflags Qt6Core")  & " -fPIC"
+const cflags = gorge("pkg-config --cflags Qt6Core") & " -fPIC"
 {.compile("gen_qtranslator.cpp", cflags).}
 
 
@@ -109,10 +109,9 @@ proc fcQTranslator_protectedbase_isSignalConnected(self: pointer, signal: pointe
 proc fcQTranslator_new(vtbl: pointer, vdata: csize_t): ptr cQTranslator {.importc: "QTranslator_new".}
 proc fcQTranslator_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQTranslator {.importc: "QTranslator_new2".}
 proc fcQTranslator_staticMetaObject(): pointer {.importc: "QTranslator_staticMetaObject".}
-proc fcQTranslator_delete(self: pointer) {.importc: "QTranslator_delete".}
 
 proc metaObject*(self: gen_qtranslator_types.QTranslator): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQTranslator_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQTranslator_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qtranslator_types.QTranslator, param1: cstring): pointer =
   fcQTranslator_metacast(self.h, param1)
@@ -201,7 +200,7 @@ type QTranslatorchildEventProc* = proc(self: QTranslator, event: gen_qcoreevent_
 type QTranslatorcustomEventProc* = proc(self: QTranslator, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QTranslatorconnectNotifyProc* = proc(self: QTranslator, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QTranslatordisconnectNotifyProc* = proc(self: QTranslator, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
-type QTranslatorVTable* = object
+type QTranslatorVTable* {.inheritable, pure.} = object
   vtbl: cQTranslatorVTable
   metaObject*: QTranslatormetaObjectProc
   metacast*: QTranslatormetacastProc
@@ -216,13 +215,16 @@ type QTranslatorVTable* = object
   connectNotify*: QTranslatorconnectNotifyProc
   disconnectNotify*: QTranslatordisconnectNotifyProc
 proc QTranslatormetaObject*(self: gen_qtranslator_types.QTranslator): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQTranslator_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQTranslator_virtualbase_metaObject(self.h), owned: false)
 
 proc fcQTranslator_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QTranslatorVTable](fcQTranslator_vdata(self)[])
   let self = QTranslator(h: self)
   var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QTranslatormetacast*(self: gen_qtranslator_types.QTranslator, param1: cstring): pointer =
   fcQTranslator_virtualbase_metacast(self.h, param1)
@@ -279,7 +281,7 @@ proc QTranslatorevent*(self: gen_qtranslator_types.QTranslator, event: gen_qcore
 proc fcQTranslator_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QTranslatorVTable](fcQTranslator_vdata(self)[])
   let self = QTranslator(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
@@ -289,8 +291,8 @@ proc QTranslatoreventFilter*(self: gen_qtranslator_types.QTranslator, watched: g
 proc fcQTranslator_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QTranslatorVTable](fcQTranslator_vdata(self)[])
   let self = QTranslator(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
@@ -300,7 +302,7 @@ proc QTranslatortimerEvent*(self: gen_qtranslator_types.QTranslator, event: gen_
 proc fcQTranslator_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTranslatorVTable](fcQTranslator_vdata(self)[])
   let self = QTranslator(h: self)
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
 proc QTranslatorchildEvent*(self: gen_qtranslator_types.QTranslator, event: gen_qcoreevent_types.QChildEvent): void =
@@ -309,7 +311,7 @@ proc QTranslatorchildEvent*(self: gen_qtranslator_types.QTranslator, event: gen_
 proc fcQTranslator_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTranslatorVTable](fcQTranslator_vdata(self)[])
   let self = QTranslator(h: self)
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
 proc QTranslatorcustomEvent*(self: gen_qtranslator_types.QTranslator, event: gen_qcoreevent_types.QEvent): void =
@@ -318,7 +320,7 @@ proc QTranslatorcustomEvent*(self: gen_qtranslator_types.QTranslator, event: gen
 proc fcQTranslator_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTranslatorVTable](fcQTranslator_vdata(self)[])
   let self = QTranslator(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
 proc QTranslatorconnectNotify*(self: gen_qtranslator_types.QTranslator, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -327,7 +329,7 @@ proc QTranslatorconnectNotify*(self: gen_qtranslator_types.QTranslator, signal: 
 proc fcQTranslator_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTranslatorVTable](fcQTranslator_vdata(self)[])
   let self = QTranslator(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
 proc QTranslatordisconnectNotify*(self: gen_qtranslator_types.QTranslator, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -336,7 +338,7 @@ proc QTranslatordisconnectNotify*(self: gen_qtranslator_types.QTranslator, signa
 proc fcQTranslator_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTranslatorVTable](fcQTranslator_vdata(self)[])
   let self = QTranslator(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
 type VirtualQTranslator* {.inheritable.} = ref object of QTranslator
@@ -388,7 +390,7 @@ method event*(self: VirtualQTranslator, event: gen_qcoreevent_types.QEvent): boo
   QTranslatorevent(self[], event)
 proc fcQTranslator_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQTranslator](fcQTranslator_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
@@ -396,8 +398,8 @@ method eventFilter*(self: VirtualQTranslator, watched: gen_qobject_types.QObject
   QTranslatoreventFilter(self[], watched, event)
 proc fcQTranslator_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQTranslator](fcQTranslator_vdata(self)[])
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
@@ -405,39 +407,39 @@ method timerEvent*(self: VirtualQTranslator, event: gen_qcoreevent_types.QTimerE
   QTranslatortimerEvent(self[], event)
 proc fcQTranslator_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTranslator](fcQTranslator_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
 method childEvent*(self: VirtualQTranslator, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
   QTranslatorchildEvent(self[], event)
 proc fcQTranslator_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTranslator](fcQTranslator_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
 method customEvent*(self: VirtualQTranslator, event: gen_qcoreevent_types.QEvent): void {.base.} =
   QTranslatorcustomEvent(self[], event)
 proc fcQTranslator_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTranslator](fcQTranslator_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
 method connectNotify*(self: VirtualQTranslator, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
   QTranslatorconnectNotify(self[], signal)
 proc fcQTranslator_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTranslator](fcQTranslator_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
 method disconnectNotify*(self: VirtualQTranslator, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
   QTranslatordisconnectNotify(self[], signal)
 proc fcQTranslator_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTranslator](fcQTranslator_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
 
 proc sender*(self: gen_qtranslator_types.QTranslator): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQTranslator_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQTranslator_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qtranslator_types.QTranslator): cint =
   fcQTranslator_protectedbase_senderSignalIndex(self.h)
@@ -479,7 +481,7 @@ proc create*(T: type gen_qtranslator_types.QTranslator,
     vtbl[].vtbl.connectNotify = fcQTranslator_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQTranslator_vtable_callback_disconnectNotify
-  let tmp = gen_qtranslator_types.QTranslator(h: fcQTranslator_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))))
+  let tmp = gen_qtranslator_types.QTranslator(h: fcQTranslator_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))), owned: true)
   fcQTranslator_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qtranslator_types.QTranslator,
@@ -514,13 +516,14 @@ proc create*(T: type gen_qtranslator_types.QTranslator,
     vtbl[].vtbl.connectNotify = fcQTranslator_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQTranslator_vtable_callback_disconnectNotify
-  let tmp = gen_qtranslator_types.QTranslator(h: fcQTranslator_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h))
+  let tmp = gen_qtranslator_types.QTranslator(h: fcQTranslator_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h), owned: true)
   fcQTranslator_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQTranslator_mvtbl = cQTranslatorVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQTranslator()[])](self.fcQTranslator_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   metaObject: fcQTranslator_method_callback_metaObject,
   metacast: fcQTranslator_method_callback_metacast,
@@ -550,5 +553,3 @@ proc create*(T: type gen_qtranslator_types.QTranslator,
 
 proc staticMetaObject*(_: type gen_qtranslator_types.QTranslator): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQTranslator_staticMetaObject())
-proc delete*(self: gen_qtranslator_types.QTranslator) =
-  fcQTranslator_delete(self.h)

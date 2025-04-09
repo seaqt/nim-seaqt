@@ -32,9 +32,6 @@ func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
     else:
       copyMem(addr result[0], v.data, len)
 
-const cflags = gorge("pkg-config --cflags Qt6Core")  & " -fPIC"
-{.compile("gen_qxmlstream.cpp", cflags).}
-
 
 type QXmlStreamReaderTokenTypeEnum* = distinct cint
 template NoToken*(_: type QXmlStreamReaderTokenTypeEnum): untyped = 0
@@ -88,23 +85,18 @@ proc fcQXmlStreamAttribute_new(): ptr cQXmlStreamAttribute {.importc: "QXmlStrea
 proc fcQXmlStreamAttribute_new2(qualifiedName: struct_miqt_string, value: struct_miqt_string): ptr cQXmlStreamAttribute {.importc: "QXmlStreamAttribute_new2".}
 proc fcQXmlStreamAttribute_new3(namespaceUri: struct_miqt_string, name: struct_miqt_string, value: struct_miqt_string): ptr cQXmlStreamAttribute {.importc: "QXmlStreamAttribute_new3".}
 proc fcQXmlStreamAttribute_new4(param1: pointer): ptr cQXmlStreamAttribute {.importc: "QXmlStreamAttribute_new4".}
-proc fcQXmlStreamAttribute_delete(self: pointer) {.importc: "QXmlStreamAttribute_delete".}
 proc fcQXmlStreamNamespaceDeclaration_operatorEqual(self: pointer, other: pointer): bool {.importc: "QXmlStreamNamespaceDeclaration_operatorEqual".}
 proc fcQXmlStreamNamespaceDeclaration_operatorNotEqual(self: pointer, other: pointer): bool {.importc: "QXmlStreamNamespaceDeclaration_operatorNotEqual".}
 proc fcQXmlStreamNamespaceDeclaration_new(): ptr cQXmlStreamNamespaceDeclaration {.importc: "QXmlStreamNamespaceDeclaration_new".}
 proc fcQXmlStreamNamespaceDeclaration_new2(prefix: struct_miqt_string, namespaceUri: struct_miqt_string): ptr cQXmlStreamNamespaceDeclaration {.importc: "QXmlStreamNamespaceDeclaration_new2".}
-proc fcQXmlStreamNamespaceDeclaration_delete(self: pointer) {.importc: "QXmlStreamNamespaceDeclaration_delete".}
 proc fcQXmlStreamNotationDeclaration_operatorEqual(self: pointer, other: pointer): bool {.importc: "QXmlStreamNotationDeclaration_operatorEqual".}
 proc fcQXmlStreamNotationDeclaration_operatorNotEqual(self: pointer, other: pointer): bool {.importc: "QXmlStreamNotationDeclaration_operatorNotEqual".}
 proc fcQXmlStreamNotationDeclaration_new(): ptr cQXmlStreamNotationDeclaration {.importc: "QXmlStreamNotationDeclaration_new".}
-proc fcQXmlStreamNotationDeclaration_delete(self: pointer) {.importc: "QXmlStreamNotationDeclaration_delete".}
 proc fcQXmlStreamEntityDeclaration_operatorEqual(self: pointer, other: pointer): bool {.importc: "QXmlStreamEntityDeclaration_operatorEqual".}
 proc fcQXmlStreamEntityDeclaration_operatorNotEqual(self: pointer, other: pointer): bool {.importc: "QXmlStreamEntityDeclaration_operatorNotEqual".}
 proc fcQXmlStreamEntityDeclaration_new(): ptr cQXmlStreamEntityDeclaration {.importc: "QXmlStreamEntityDeclaration_new".}
-proc fcQXmlStreamEntityDeclaration_delete(self: pointer) {.importc: "QXmlStreamEntityDeclaration_delete".}
 proc fcQXmlStreamEntityResolver_resolveEntity(self: pointer, publicId: struct_miqt_string, systemId: struct_miqt_string): struct_miqt_string {.importc: "QXmlStreamEntityResolver_resolveEntity".}
 proc fcQXmlStreamEntityResolver_resolveUndeclaredEntity(self: pointer, name: struct_miqt_string): struct_miqt_string {.importc: "QXmlStreamEntityResolver_resolveUndeclaredEntity".}
-proc fcQXmlStreamEntityResolver_delete(self: pointer) {.importc: "QXmlStreamEntityResolver_delete".}
 proc fcQXmlStreamReader_setDevice(self: pointer, device: pointer): void {.importc: "QXmlStreamReader_setDevice".}
 proc fcQXmlStreamReader_device(self: pointer): pointer {.importc: "QXmlStreamReader_device".}
 proc fcQXmlStreamReader_addData(self: pointer, data: struct_miqt_string): void {.importc: "QXmlStreamReader_addData".}
@@ -155,7 +147,6 @@ proc fcQXmlStreamReader_new2(device: pointer): ptr cQXmlStreamReader {.importc: 
 proc fcQXmlStreamReader_new3(data: struct_miqt_string): ptr cQXmlStreamReader {.importc: "QXmlStreamReader_new3".}
 proc fcQXmlStreamReader_new4(data: struct_miqt_string): ptr cQXmlStreamReader {.importc: "QXmlStreamReader_new4".}
 proc fcQXmlStreamReader_new5(data: cstring): ptr cQXmlStreamReader {.importc: "QXmlStreamReader_new5".}
-proc fcQXmlStreamReader_delete(self: pointer) {.importc: "QXmlStreamReader_delete".}
 proc fcQXmlStreamWriter_setDevice(self: pointer, device: pointer): void {.importc: "QXmlStreamWriter_setDevice".}
 proc fcQXmlStreamWriter_device(self: pointer): pointer {.importc: "QXmlStreamWriter_device".}
 proc fcQXmlStreamWriter_setAutoFormatting(self: pointer, autoFormatting: bool): void {.importc: "QXmlStreamWriter_setAutoFormatting".}
@@ -190,7 +181,6 @@ proc fcQXmlStreamWriter_writeNamespace2(self: pointer, namespaceUri: struct_miqt
 proc fcQXmlStreamWriter_writeProcessingInstruction2(self: pointer, target: struct_miqt_string, data: struct_miqt_string): void {.importc: "QXmlStreamWriter_writeProcessingInstruction2".}
 proc fcQXmlStreamWriter_new(): ptr cQXmlStreamWriter {.importc: "QXmlStreamWriter_new".}
 proc fcQXmlStreamWriter_new2(device: pointer): ptr cQXmlStreamWriter {.importc: "QXmlStreamWriter_new2".}
-proc fcQXmlStreamWriter_delete(self: pointer) {.importc: "QXmlStreamWriter_delete".}
 
 proc isDefault*(self: gen_qxmlstream_types.QXmlStreamAttribute): bool =
   fcQXmlStreamAttribute_isDefault(self.h)
@@ -205,22 +195,20 @@ proc operatorAssign*(self: gen_qxmlstream_types.QXmlStreamAttribute, param1: gen
   fcQXmlStreamAttribute_operatorAssign(self.h, param1.h)
 
 proc create*(T: type gen_qxmlstream_types.QXmlStreamAttribute): gen_qxmlstream_types.QXmlStreamAttribute =
-  let tmp = gen_qxmlstream_types.QXmlStreamAttribute(h: fcQXmlStreamAttribute_new())
+  let tmp = gen_qxmlstream_types.QXmlStreamAttribute(h: fcQXmlStreamAttribute_new(), owned: true)
   tmp
 proc create*(T: type gen_qxmlstream_types.QXmlStreamAttribute,
     qualifiedName: string, value: string): gen_qxmlstream_types.QXmlStreamAttribute =
-  let tmp = gen_qxmlstream_types.QXmlStreamAttribute(h: fcQXmlStreamAttribute_new2(struct_miqt_string(data: if len(qualifiedName) > 0: addr qualifiedName[0] else: nil, len: csize_t(len(qualifiedName))), struct_miqt_string(data: if len(value) > 0: addr value[0] else: nil, len: csize_t(len(value)))))
+  let tmp = gen_qxmlstream_types.QXmlStreamAttribute(h: fcQXmlStreamAttribute_new2(struct_miqt_string(data: if len(qualifiedName) > 0: addr qualifiedName[0] else: nil, len: csize_t(len(qualifiedName))), struct_miqt_string(data: if len(value) > 0: addr value[0] else: nil, len: csize_t(len(value)))), owned: true)
   tmp
 proc create*(T: type gen_qxmlstream_types.QXmlStreamAttribute,
     namespaceUri: string, name: string, value: string): gen_qxmlstream_types.QXmlStreamAttribute =
-  let tmp = gen_qxmlstream_types.QXmlStreamAttribute(h: fcQXmlStreamAttribute_new3(struct_miqt_string(data: if len(namespaceUri) > 0: addr namespaceUri[0] else: nil, len: csize_t(len(namespaceUri))), struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), struct_miqt_string(data: if len(value) > 0: addr value[0] else: nil, len: csize_t(len(value)))))
+  let tmp = gen_qxmlstream_types.QXmlStreamAttribute(h: fcQXmlStreamAttribute_new3(struct_miqt_string(data: if len(namespaceUri) > 0: addr namespaceUri[0] else: nil, len: csize_t(len(namespaceUri))), struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), struct_miqt_string(data: if len(value) > 0: addr value[0] else: nil, len: csize_t(len(value)))), owned: true)
   tmp
 proc create*(T: type gen_qxmlstream_types.QXmlStreamAttribute,
     param1: gen_qxmlstream_types.QXmlStreamAttribute): gen_qxmlstream_types.QXmlStreamAttribute =
-  let tmp = gen_qxmlstream_types.QXmlStreamAttribute(h: fcQXmlStreamAttribute_new4(param1.h))
+  let tmp = gen_qxmlstream_types.QXmlStreamAttribute(h: fcQXmlStreamAttribute_new4(param1.h), owned: true)
   tmp
-proc delete*(self: gen_qxmlstream_types.QXmlStreamAttribute) =
-  fcQXmlStreamAttribute_delete(self.h)
 proc operatorEqual*(self: gen_qxmlstream_types.QXmlStreamNamespaceDeclaration, other: gen_qxmlstream_types.QXmlStreamNamespaceDeclaration): bool =
   fcQXmlStreamNamespaceDeclaration_operatorEqual(self.h, other.h)
 
@@ -228,14 +216,12 @@ proc operatorNotEqual*(self: gen_qxmlstream_types.QXmlStreamNamespaceDeclaration
   fcQXmlStreamNamespaceDeclaration_operatorNotEqual(self.h, other.h)
 
 proc create*(T: type gen_qxmlstream_types.QXmlStreamNamespaceDeclaration): gen_qxmlstream_types.QXmlStreamNamespaceDeclaration =
-  let tmp = gen_qxmlstream_types.QXmlStreamNamespaceDeclaration(h: fcQXmlStreamNamespaceDeclaration_new())
+  let tmp = gen_qxmlstream_types.QXmlStreamNamespaceDeclaration(h: fcQXmlStreamNamespaceDeclaration_new(), owned: true)
   tmp
 proc create*(T: type gen_qxmlstream_types.QXmlStreamNamespaceDeclaration,
     prefix: string, namespaceUri: string): gen_qxmlstream_types.QXmlStreamNamespaceDeclaration =
-  let tmp = gen_qxmlstream_types.QXmlStreamNamespaceDeclaration(h: fcQXmlStreamNamespaceDeclaration_new2(struct_miqt_string(data: if len(prefix) > 0: addr prefix[0] else: nil, len: csize_t(len(prefix))), struct_miqt_string(data: if len(namespaceUri) > 0: addr namespaceUri[0] else: nil, len: csize_t(len(namespaceUri)))))
+  let tmp = gen_qxmlstream_types.QXmlStreamNamespaceDeclaration(h: fcQXmlStreamNamespaceDeclaration_new2(struct_miqt_string(data: if len(prefix) > 0: addr prefix[0] else: nil, len: csize_t(len(prefix))), struct_miqt_string(data: if len(namespaceUri) > 0: addr namespaceUri[0] else: nil, len: csize_t(len(namespaceUri)))), owned: true)
   tmp
-proc delete*(self: gen_qxmlstream_types.QXmlStreamNamespaceDeclaration) =
-  fcQXmlStreamNamespaceDeclaration_delete(self.h)
 proc operatorEqual*(self: gen_qxmlstream_types.QXmlStreamNotationDeclaration, other: gen_qxmlstream_types.QXmlStreamNotationDeclaration): bool =
   fcQXmlStreamNotationDeclaration_operatorEqual(self.h, other.h)
 
@@ -243,10 +229,8 @@ proc operatorNotEqual*(self: gen_qxmlstream_types.QXmlStreamNotationDeclaration,
   fcQXmlStreamNotationDeclaration_operatorNotEqual(self.h, other.h)
 
 proc create*(T: type gen_qxmlstream_types.QXmlStreamNotationDeclaration): gen_qxmlstream_types.QXmlStreamNotationDeclaration =
-  let tmp = gen_qxmlstream_types.QXmlStreamNotationDeclaration(h: fcQXmlStreamNotationDeclaration_new())
+  let tmp = gen_qxmlstream_types.QXmlStreamNotationDeclaration(h: fcQXmlStreamNotationDeclaration_new(), owned: true)
   tmp
-proc delete*(self: gen_qxmlstream_types.QXmlStreamNotationDeclaration) =
-  fcQXmlStreamNotationDeclaration_delete(self.h)
 proc operatorEqual*(self: gen_qxmlstream_types.QXmlStreamEntityDeclaration, other: gen_qxmlstream_types.QXmlStreamEntityDeclaration): bool =
   fcQXmlStreamEntityDeclaration_operatorEqual(self.h, other.h)
 
@@ -254,10 +238,8 @@ proc operatorNotEqual*(self: gen_qxmlstream_types.QXmlStreamEntityDeclaration, o
   fcQXmlStreamEntityDeclaration_operatorNotEqual(self.h, other.h)
 
 proc create*(T: type gen_qxmlstream_types.QXmlStreamEntityDeclaration): gen_qxmlstream_types.QXmlStreamEntityDeclaration =
-  let tmp = gen_qxmlstream_types.QXmlStreamEntityDeclaration(h: fcQXmlStreamEntityDeclaration_new())
+  let tmp = gen_qxmlstream_types.QXmlStreamEntityDeclaration(h: fcQXmlStreamEntityDeclaration_new(), owned: true)
   tmp
-proc delete*(self: gen_qxmlstream_types.QXmlStreamEntityDeclaration) =
-  fcQXmlStreamEntityDeclaration_delete(self.h)
 proc resolveEntity*(self: gen_qxmlstream_types.QXmlStreamEntityResolver, publicId: string, systemId: string): string =
   let v_ms = fcQXmlStreamEntityResolver_resolveEntity(self.h, struct_miqt_string(data: if len(publicId) > 0: addr publicId[0] else: nil, len: csize_t(len(publicId))), struct_miqt_string(data: if len(systemId) > 0: addr systemId[0] else: nil, len: csize_t(len(systemId))))
   let vx_ret = string.fromBytes(v_ms)
@@ -270,13 +252,11 @@ proc resolveUndeclaredEntity*(self: gen_qxmlstream_types.QXmlStreamEntityResolve
   c_free(v_ms.data)
   vx_ret
 
-proc delete*(self: gen_qxmlstream_types.QXmlStreamEntityResolver) =
-  fcQXmlStreamEntityResolver_delete(self.h)
 proc setDevice*(self: gen_qxmlstream_types.QXmlStreamReader, device: gen_qiodevice_types.QIODevice): void =
   fcQXmlStreamReader_setDevice(self.h, device.h)
 
 proc device*(self: gen_qxmlstream_types.QXmlStreamReader): gen_qiodevice_types.QIODevice =
-  gen_qiodevice_types.QIODevice(h: fcQXmlStreamReader_device(self.h))
+  gen_qiodevice_types.QIODevice(h: fcQXmlStreamReader_device(self.h), owned: false)
 
 proc addData*(self: gen_qxmlstream_types.QXmlStreamReader, data: seq[byte]): void =
   fcQXmlStreamReader_addData(self.h, struct_miqt_string(data: if len(data) > 0: addr data[0] else: nil, len: csize_t(len(data))))
@@ -373,7 +353,7 @@ proc namespaceDeclarations*(self: gen_qxmlstream_types.QXmlStreamReader): seq[ge
   var vx_ret = newSeq[gen_qxmlstream_types.QXmlStreamNamespaceDeclaration](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qxmlstream_types.QXmlStreamNamespaceDeclaration(h: v_outCast[i])
+    vx_ret[i] = gen_qxmlstream_types.QXmlStreamNamespaceDeclaration(h: v_outCast[i], owned: true)
   c_free(v_ma.data)
   vx_ret
 
@@ -392,7 +372,7 @@ proc notationDeclarations*(self: gen_qxmlstream_types.QXmlStreamReader): seq[gen
   var vx_ret = newSeq[gen_qxmlstream_types.QXmlStreamNotationDeclaration](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qxmlstream_types.QXmlStreamNotationDeclaration(h: v_outCast[i])
+    vx_ret[i] = gen_qxmlstream_types.QXmlStreamNotationDeclaration(h: v_outCast[i], owned: true)
   c_free(v_ma.data)
   vx_ret
 
@@ -401,7 +381,7 @@ proc entityDeclarations*(self: gen_qxmlstream_types.QXmlStreamReader): seq[gen_q
   var vx_ret = newSeq[gen_qxmlstream_types.QXmlStreamEntityDeclaration](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qxmlstream_types.QXmlStreamEntityDeclaration(h: v_outCast[i])
+    vx_ret[i] = gen_qxmlstream_types.QXmlStreamEntityDeclaration(h: v_outCast[i], owned: true)
   c_free(v_ma.data)
   vx_ret
 
@@ -430,7 +410,7 @@ proc setEntityResolver*(self: gen_qxmlstream_types.QXmlStreamReader, resolver: g
   fcQXmlStreamReader_setEntityResolver(self.h, resolver.h)
 
 proc entityResolver*(self: gen_qxmlstream_types.QXmlStreamReader): gen_qxmlstream_types.QXmlStreamEntityResolver =
-  gen_qxmlstream_types.QXmlStreamEntityResolver(h: fcQXmlStreamReader_entityResolver(self.h))
+  gen_qxmlstream_types.QXmlStreamEntityResolver(h: fcQXmlStreamReader_entityResolver(self.h), owned: false)
 
 proc readElementText*(self: gen_qxmlstream_types.QXmlStreamReader, behaviour: cint): string =
   let v_ms = fcQXmlStreamReader_readElementText1(self.h, cint(behaviour))
@@ -442,31 +422,29 @@ proc raiseError*(self: gen_qxmlstream_types.QXmlStreamReader, message: string): 
   fcQXmlStreamReader_raiseError1(self.h, struct_miqt_string(data: if len(message) > 0: addr message[0] else: nil, len: csize_t(len(message))))
 
 proc create*(T: type gen_qxmlstream_types.QXmlStreamReader): gen_qxmlstream_types.QXmlStreamReader =
-  let tmp = gen_qxmlstream_types.QXmlStreamReader(h: fcQXmlStreamReader_new())
+  let tmp = gen_qxmlstream_types.QXmlStreamReader(h: fcQXmlStreamReader_new(), owned: true)
   tmp
 proc create*(T: type gen_qxmlstream_types.QXmlStreamReader,
     device: gen_qiodevice_types.QIODevice): gen_qxmlstream_types.QXmlStreamReader =
-  let tmp = gen_qxmlstream_types.QXmlStreamReader(h: fcQXmlStreamReader_new2(device.h))
+  let tmp = gen_qxmlstream_types.QXmlStreamReader(h: fcQXmlStreamReader_new2(device.h), owned: true)
   tmp
 proc create*(T: type gen_qxmlstream_types.QXmlStreamReader,
     data: seq[byte]): gen_qxmlstream_types.QXmlStreamReader =
-  let tmp = gen_qxmlstream_types.QXmlStreamReader(h: fcQXmlStreamReader_new3(struct_miqt_string(data: if len(data) > 0: addr data[0] else: nil, len: csize_t(len(data)))))
+  let tmp = gen_qxmlstream_types.QXmlStreamReader(h: fcQXmlStreamReader_new3(struct_miqt_string(data: if len(data) > 0: addr data[0] else: nil, len: csize_t(len(data)))), owned: true)
   tmp
 proc create*(T: type gen_qxmlstream_types.QXmlStreamReader,
     data: string): gen_qxmlstream_types.QXmlStreamReader =
-  let tmp = gen_qxmlstream_types.QXmlStreamReader(h: fcQXmlStreamReader_new4(struct_miqt_string(data: if len(data) > 0: addr data[0] else: nil, len: csize_t(len(data)))))
+  let tmp = gen_qxmlstream_types.QXmlStreamReader(h: fcQXmlStreamReader_new4(struct_miqt_string(data: if len(data) > 0: addr data[0] else: nil, len: csize_t(len(data)))), owned: true)
   tmp
 proc create*(T: type gen_qxmlstream_types.QXmlStreamReader,
     data: cstring): gen_qxmlstream_types.QXmlStreamReader =
-  let tmp = gen_qxmlstream_types.QXmlStreamReader(h: fcQXmlStreamReader_new5(data))
+  let tmp = gen_qxmlstream_types.QXmlStreamReader(h: fcQXmlStreamReader_new5(data), owned: true)
   tmp
-proc delete*(self: gen_qxmlstream_types.QXmlStreamReader) =
-  fcQXmlStreamReader_delete(self.h)
 proc setDevice*(self: gen_qxmlstream_types.QXmlStreamWriter, device: gen_qiodevice_types.QIODevice): void =
   fcQXmlStreamWriter_setDevice(self.h, device.h)
 
 proc device*(self: gen_qxmlstream_types.QXmlStreamWriter): gen_qiodevice_types.QIODevice =
-  gen_qiodevice_types.QIODevice(h: fcQXmlStreamWriter_device(self.h))
+  gen_qiodevice_types.QIODevice(h: fcQXmlStreamWriter_device(self.h), owned: false)
 
 proc setAutoFormatting*(self: gen_qxmlstream_types.QXmlStreamWriter, autoFormatting: bool): void =
   fcQXmlStreamWriter_setAutoFormatting(self.h, autoFormatting)
@@ -559,11 +537,9 @@ proc writeProcessingInstruction*(self: gen_qxmlstream_types.QXmlStreamWriter, ta
   fcQXmlStreamWriter_writeProcessingInstruction2(self.h, struct_miqt_string(data: if len(target) > 0: addr target[0] else: nil, len: csize_t(len(target))), struct_miqt_string(data: if len(data) > 0: addr data[0] else: nil, len: csize_t(len(data))))
 
 proc create*(T: type gen_qxmlstream_types.QXmlStreamWriter): gen_qxmlstream_types.QXmlStreamWriter =
-  let tmp = gen_qxmlstream_types.QXmlStreamWriter(h: fcQXmlStreamWriter_new())
+  let tmp = gen_qxmlstream_types.QXmlStreamWriter(h: fcQXmlStreamWriter_new(), owned: true)
   tmp
 proc create*(T: type gen_qxmlstream_types.QXmlStreamWriter,
     device: gen_qiodevice_types.QIODevice): gen_qxmlstream_types.QXmlStreamWriter =
-  let tmp = gen_qxmlstream_types.QXmlStreamWriter(h: fcQXmlStreamWriter_new2(device.h))
+  let tmp = gen_qxmlstream_types.QXmlStreamWriter(h: fcQXmlStreamWriter_new2(device.h), owned: true)
   tmp
-proc delete*(self: gen_qxmlstream_types.QXmlStreamWriter) =
-  fcQXmlStreamWriter_delete(self.h)

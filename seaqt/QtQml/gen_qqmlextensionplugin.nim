@@ -32,7 +32,7 @@ func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
     else:
       copyMem(addr result[0], v.data, len)
 
-const cflags = gorge("pkg-config --cflags Qt6Qml")  & " -fPIC"
+const cflags = gorge("pkg-config --cflags Qt6Qml") & " -fPIC"
 {.compile("gen_qqmlextensionplugin.cpp", cflags).}
 
 
@@ -103,7 +103,6 @@ proc fcQQmlExtensionPlugin_protectedbase_isSignalConnected(self: pointer, signal
 proc fcQQmlExtensionPlugin_new(vtbl: pointer, vdata: csize_t): ptr cQQmlExtensionPlugin {.importc: "QQmlExtensionPlugin_new".}
 proc fcQQmlExtensionPlugin_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQQmlExtensionPlugin {.importc: "QQmlExtensionPlugin_new2".}
 proc fcQQmlExtensionPlugin_staticMetaObject(): pointer {.importc: "QQmlExtensionPlugin_staticMetaObject".}
-proc fcQQmlExtensionPlugin_delete(self: pointer) {.importc: "QQmlExtensionPlugin_delete".}
 proc fcQQmlEngineExtensionPlugin_metaObject(self: pointer): pointer {.importc: "QQmlEngineExtensionPlugin_metaObject".}
 proc fcQQmlEngineExtensionPlugin_metacast(self: pointer, param1: cstring): pointer {.importc: "QQmlEngineExtensionPlugin_metacast".}
 proc fcQQmlEngineExtensionPlugin_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QQmlEngineExtensionPlugin_metacall".}
@@ -144,10 +143,9 @@ proc fcQQmlEngineExtensionPlugin_protectedbase_isSignalConnected(self: pointer, 
 proc fcQQmlEngineExtensionPlugin_new(vtbl: pointer, vdata: csize_t): ptr cQQmlEngineExtensionPlugin {.importc: "QQmlEngineExtensionPlugin_new".}
 proc fcQQmlEngineExtensionPlugin_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQQmlEngineExtensionPlugin {.importc: "QQmlEngineExtensionPlugin_new2".}
 proc fcQQmlEngineExtensionPlugin_staticMetaObject(): pointer {.importc: "QQmlEngineExtensionPlugin_staticMetaObject".}
-proc fcQQmlEngineExtensionPlugin_delete(self: pointer) {.importc: "QQmlEngineExtensionPlugin_delete".}
 
 proc metaObject*(self: gen_qqmlextensionplugin_types.QQmlExtensionPlugin): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQQmlExtensionPlugin_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQQmlExtensionPlugin_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qqmlextensionplugin_types.QQmlExtensionPlugin, param1: cstring): pointer =
   fcQQmlExtensionPlugin_metacast(self.h, param1)
@@ -162,7 +160,7 @@ proc tr*(_: type gen_qqmlextensionplugin_types.QQmlExtensionPlugin, s: cstring):
   vx_ret
 
 proc baseUrl*(self: gen_qqmlextensionplugin_types.QQmlExtensionPlugin): gen_qurl_types.QUrl =
-  gen_qurl_types.QUrl(h: fcQQmlExtensionPlugin_baseUrl(self.h))
+  gen_qurl_types.QUrl(h: fcQQmlExtensionPlugin_baseUrl(self.h), owned: true)
 
 proc registerTypes*(self: gen_qqmlextensionplugin_types.QQmlExtensionPlugin, uri: cstring): void =
   fcQQmlExtensionPlugin_registerTypes(self.h, uri)
@@ -198,7 +196,7 @@ type QQmlExtensionPluginchildEventProc* = proc(self: QQmlExtensionPlugin, event:
 type QQmlExtensionPlugincustomEventProc* = proc(self: QQmlExtensionPlugin, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QQmlExtensionPluginconnectNotifyProc* = proc(self: QQmlExtensionPlugin, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QQmlExtensionPlugindisconnectNotifyProc* = proc(self: QQmlExtensionPlugin, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
-type QQmlExtensionPluginVTable* = object
+type QQmlExtensionPluginVTable* {.inheritable, pure.} = object
   vtbl: cQQmlExtensionPluginVTable
   metaObject*: QQmlExtensionPluginmetaObjectProc
   metacast*: QQmlExtensionPluginmetacastProc
@@ -214,13 +212,16 @@ type QQmlExtensionPluginVTable* = object
   connectNotify*: QQmlExtensionPluginconnectNotifyProc
   disconnectNotify*: QQmlExtensionPlugindisconnectNotifyProc
 proc QQmlExtensionPluginmetaObject*(self: gen_qqmlextensionplugin_types.QQmlExtensionPlugin): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQQmlExtensionPlugin_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQQmlExtensionPlugin_virtualbase_metaObject(self.h), owned: false)
 
 proc fcQQmlExtensionPlugin_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QQmlExtensionPluginVTable](fcQQmlExtensionPlugin_vdata(self)[])
   let self = QQmlExtensionPlugin(h: self)
   var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QQmlExtensionPluginmetacast*(self: gen_qqmlextensionplugin_types.QQmlExtensionPlugin, param1: cstring): pointer =
   fcQQmlExtensionPlugin_virtualbase_metacast(self.h, param1)
@@ -264,7 +265,7 @@ proc QQmlExtensionPlugininitializeEngine*(self: gen_qqmlextensionplugin_types.QQ
 proc fcQQmlExtensionPlugin_vtable_callback_initializeEngine(self: pointer, engine: pointer, uri: cstring): void {.cdecl.} =
   let vtbl = cast[ptr QQmlExtensionPluginVTable](fcQQmlExtensionPlugin_vdata(self)[])
   let self = QQmlExtensionPlugin(h: self)
-  let slotval1 = gen_qqmlengine_types.QQmlEngine(h: engine)
+  let slotval1 = gen_qqmlengine_types.QQmlEngine(h: engine, owned: false)
   let slotval2 = (uri)
   vtbl[].initializeEngine(self, slotval1, slotval2)
 
@@ -274,7 +275,7 @@ proc QQmlExtensionPluginevent*(self: gen_qqmlextensionplugin_types.QQmlExtension
 proc fcQQmlExtensionPlugin_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QQmlExtensionPluginVTable](fcQQmlExtensionPlugin_vdata(self)[])
   let self = QQmlExtensionPlugin(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
@@ -284,8 +285,8 @@ proc QQmlExtensionPlugineventFilter*(self: gen_qqmlextensionplugin_types.QQmlExt
 proc fcQQmlExtensionPlugin_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QQmlExtensionPluginVTable](fcQQmlExtensionPlugin_vdata(self)[])
   let self = QQmlExtensionPlugin(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
@@ -295,7 +296,7 @@ proc QQmlExtensionPlugintimerEvent*(self: gen_qqmlextensionplugin_types.QQmlExte
 proc fcQQmlExtensionPlugin_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QQmlExtensionPluginVTable](fcQQmlExtensionPlugin_vdata(self)[])
   let self = QQmlExtensionPlugin(h: self)
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
 proc QQmlExtensionPluginchildEvent*(self: gen_qqmlextensionplugin_types.QQmlExtensionPlugin, event: gen_qcoreevent_types.QChildEvent): void =
@@ -304,7 +305,7 @@ proc QQmlExtensionPluginchildEvent*(self: gen_qqmlextensionplugin_types.QQmlExte
 proc fcQQmlExtensionPlugin_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QQmlExtensionPluginVTable](fcQQmlExtensionPlugin_vdata(self)[])
   let self = QQmlExtensionPlugin(h: self)
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
 proc QQmlExtensionPlugincustomEvent*(self: gen_qqmlextensionplugin_types.QQmlExtensionPlugin, event: gen_qcoreevent_types.QEvent): void =
@@ -313,7 +314,7 @@ proc QQmlExtensionPlugincustomEvent*(self: gen_qqmlextensionplugin_types.QQmlExt
 proc fcQQmlExtensionPlugin_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QQmlExtensionPluginVTable](fcQQmlExtensionPlugin_vdata(self)[])
   let self = QQmlExtensionPlugin(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
 proc QQmlExtensionPluginconnectNotify*(self: gen_qqmlextensionplugin_types.QQmlExtensionPlugin, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -322,7 +323,7 @@ proc QQmlExtensionPluginconnectNotify*(self: gen_qqmlextensionplugin_types.QQmlE
 proc fcQQmlExtensionPlugin_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QQmlExtensionPluginVTable](fcQQmlExtensionPlugin_vdata(self)[])
   let self = QQmlExtensionPlugin(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
 proc QQmlExtensionPlugindisconnectNotify*(self: gen_qqmlextensionplugin_types.QQmlExtensionPlugin, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -331,7 +332,7 @@ proc QQmlExtensionPlugindisconnectNotify*(self: gen_qqmlextensionplugin_types.QQ
 proc fcQQmlExtensionPlugin_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QQmlExtensionPluginVTable](fcQQmlExtensionPlugin_vdata(self)[])
   let self = QQmlExtensionPlugin(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
 type VirtualQQmlExtensionPlugin* {.inheritable.} = ref object of QQmlExtensionPlugin
@@ -378,7 +379,7 @@ method initializeEngine*(self: VirtualQQmlExtensionPlugin, engine: gen_qqmlengin
   QQmlExtensionPlugininitializeEngine(self[], engine, uri)
 proc fcQQmlExtensionPlugin_method_callback_initializeEngine(self: pointer, engine: pointer, uri: cstring): void {.cdecl.} =
   let inst = cast[VirtualQQmlExtensionPlugin](fcQQmlExtensionPlugin_vdata(self)[])
-  let slotval1 = gen_qqmlengine_types.QQmlEngine(h: engine)
+  let slotval1 = gen_qqmlengine_types.QQmlEngine(h: engine, owned: false)
   let slotval2 = (uri)
   inst.initializeEngine(slotval1, slotval2)
 
@@ -386,7 +387,7 @@ method event*(self: VirtualQQmlExtensionPlugin, event: gen_qcoreevent_types.QEve
   QQmlExtensionPluginevent(self[], event)
 proc fcQQmlExtensionPlugin_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQQmlExtensionPlugin](fcQQmlExtensionPlugin_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
@@ -394,8 +395,8 @@ method eventFilter*(self: VirtualQQmlExtensionPlugin, watched: gen_qobject_types
   QQmlExtensionPlugineventFilter(self[], watched, event)
 proc fcQQmlExtensionPlugin_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQQmlExtensionPlugin](fcQQmlExtensionPlugin_vdata(self)[])
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
@@ -403,39 +404,39 @@ method timerEvent*(self: VirtualQQmlExtensionPlugin, event: gen_qcoreevent_types
   QQmlExtensionPlugintimerEvent(self[], event)
 proc fcQQmlExtensionPlugin_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQQmlExtensionPlugin](fcQQmlExtensionPlugin_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
 method childEvent*(self: VirtualQQmlExtensionPlugin, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
   QQmlExtensionPluginchildEvent(self[], event)
 proc fcQQmlExtensionPlugin_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQQmlExtensionPlugin](fcQQmlExtensionPlugin_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
 method customEvent*(self: VirtualQQmlExtensionPlugin, event: gen_qcoreevent_types.QEvent): void {.base.} =
   QQmlExtensionPlugincustomEvent(self[], event)
 proc fcQQmlExtensionPlugin_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQQmlExtensionPlugin](fcQQmlExtensionPlugin_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
 method connectNotify*(self: VirtualQQmlExtensionPlugin, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
   QQmlExtensionPluginconnectNotify(self[], signal)
 proc fcQQmlExtensionPlugin_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQQmlExtensionPlugin](fcQQmlExtensionPlugin_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
 method disconnectNotify*(self: VirtualQQmlExtensionPlugin, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
   QQmlExtensionPlugindisconnectNotify(self[], signal)
 proc fcQQmlExtensionPlugin_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQQmlExtensionPlugin](fcQQmlExtensionPlugin_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
 
 proc sender*(self: gen_qqmlextensionplugin_types.QQmlExtensionPlugin): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQQmlExtensionPlugin_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQQmlExtensionPlugin_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qqmlextensionplugin_types.QQmlExtensionPlugin): cint =
   fcQQmlExtensionPlugin_protectedbase_senderSignalIndex(self.h)
@@ -479,7 +480,7 @@ proc create*(T: type gen_qqmlextensionplugin_types.QQmlExtensionPlugin,
     vtbl[].vtbl.connectNotify = fcQQmlExtensionPlugin_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQQmlExtensionPlugin_vtable_callback_disconnectNotify
-  let tmp = gen_qqmlextensionplugin_types.QQmlExtensionPlugin(h: fcQQmlExtensionPlugin_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))))
+  let tmp = gen_qqmlextensionplugin_types.QQmlExtensionPlugin(h: fcQQmlExtensionPlugin_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))), owned: true)
   fcQQmlExtensionPlugin_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qqmlextensionplugin_types.QQmlExtensionPlugin,
@@ -516,13 +517,14 @@ proc create*(T: type gen_qqmlextensionplugin_types.QQmlExtensionPlugin,
     vtbl[].vtbl.connectNotify = fcQQmlExtensionPlugin_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQQmlExtensionPlugin_vtable_callback_disconnectNotify
-  let tmp = gen_qqmlextensionplugin_types.QQmlExtensionPlugin(h: fcQQmlExtensionPlugin_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h))
+  let tmp = gen_qqmlextensionplugin_types.QQmlExtensionPlugin(h: fcQQmlExtensionPlugin_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h), owned: true)
   fcQQmlExtensionPlugin_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQQmlExtensionPlugin_mvtbl = cQQmlExtensionPluginVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQQmlExtensionPlugin()[])](self.fcQQmlExtensionPlugin_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   metaObject: fcQQmlExtensionPlugin_method_callback_metaObject,
   metacast: fcQQmlExtensionPlugin_method_callback_metacast,
@@ -553,10 +555,8 @@ proc create*(T: type gen_qqmlextensionplugin_types.QQmlExtensionPlugin,
 
 proc staticMetaObject*(_: type gen_qqmlextensionplugin_types.QQmlExtensionPlugin): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQQmlExtensionPlugin_staticMetaObject())
-proc delete*(self: gen_qqmlextensionplugin_types.QQmlExtensionPlugin) =
-  fcQQmlExtensionPlugin_delete(self.h)
 proc metaObject*(self: gen_qqmlextensionplugin_types.QQmlEngineExtensionPlugin): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQQmlEngineExtensionPlugin_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQQmlEngineExtensionPlugin_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qqmlextensionplugin_types.QQmlEngineExtensionPlugin, param1: cstring): pointer =
   fcQQmlEngineExtensionPlugin_metacast(self.h, param1)
@@ -596,7 +596,7 @@ type QQmlEngineExtensionPluginchildEventProc* = proc(self: QQmlEngineExtensionPl
 type QQmlEngineExtensionPlugincustomEventProc* = proc(self: QQmlEngineExtensionPlugin, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QQmlEngineExtensionPluginconnectNotifyProc* = proc(self: QQmlEngineExtensionPlugin, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QQmlEngineExtensionPlugindisconnectNotifyProc* = proc(self: QQmlEngineExtensionPlugin, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
-type QQmlEngineExtensionPluginVTable* = object
+type QQmlEngineExtensionPluginVTable* {.inheritable, pure.} = object
   vtbl: cQQmlEngineExtensionPluginVTable
   metaObject*: QQmlEngineExtensionPluginmetaObjectProc
   metacast*: QQmlEngineExtensionPluginmetacastProc
@@ -610,13 +610,16 @@ type QQmlEngineExtensionPluginVTable* = object
   connectNotify*: QQmlEngineExtensionPluginconnectNotifyProc
   disconnectNotify*: QQmlEngineExtensionPlugindisconnectNotifyProc
 proc QQmlEngineExtensionPluginmetaObject*(self: gen_qqmlextensionplugin_types.QQmlEngineExtensionPlugin): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQQmlEngineExtensionPlugin_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQQmlEngineExtensionPlugin_virtualbase_metaObject(self.h), owned: false)
 
 proc fcQQmlEngineExtensionPlugin_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QQmlEngineExtensionPluginVTable](fcQQmlEngineExtensionPlugin_vdata(self)[])
   let self = QQmlEngineExtensionPlugin(h: self)
   var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QQmlEngineExtensionPluginmetacast*(self: gen_qqmlextensionplugin_types.QQmlEngineExtensionPlugin, param1: cstring): pointer =
   fcQQmlEngineExtensionPlugin_virtualbase_metacast(self.h, param1)
@@ -646,7 +649,7 @@ proc QQmlEngineExtensionPlugininitializeEngine*(self: gen_qqmlextensionplugin_ty
 proc fcQQmlEngineExtensionPlugin_vtable_callback_initializeEngine(self: pointer, engine: pointer, uri: cstring): void {.cdecl.} =
   let vtbl = cast[ptr QQmlEngineExtensionPluginVTable](fcQQmlEngineExtensionPlugin_vdata(self)[])
   let self = QQmlEngineExtensionPlugin(h: self)
-  let slotval1 = gen_qqmlengine_types.QQmlEngine(h: engine)
+  let slotval1 = gen_qqmlengine_types.QQmlEngine(h: engine, owned: false)
   let slotval2 = (uri)
   vtbl[].initializeEngine(self, slotval1, slotval2)
 
@@ -656,7 +659,7 @@ proc QQmlEngineExtensionPluginevent*(self: gen_qqmlextensionplugin_types.QQmlEng
 proc fcQQmlEngineExtensionPlugin_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QQmlEngineExtensionPluginVTable](fcQQmlEngineExtensionPlugin_vdata(self)[])
   let self = QQmlEngineExtensionPlugin(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
@@ -666,8 +669,8 @@ proc QQmlEngineExtensionPlugineventFilter*(self: gen_qqmlextensionplugin_types.Q
 proc fcQQmlEngineExtensionPlugin_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QQmlEngineExtensionPluginVTable](fcQQmlEngineExtensionPlugin_vdata(self)[])
   let self = QQmlEngineExtensionPlugin(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
@@ -677,7 +680,7 @@ proc QQmlEngineExtensionPlugintimerEvent*(self: gen_qqmlextensionplugin_types.QQ
 proc fcQQmlEngineExtensionPlugin_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QQmlEngineExtensionPluginVTable](fcQQmlEngineExtensionPlugin_vdata(self)[])
   let self = QQmlEngineExtensionPlugin(h: self)
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
 proc QQmlEngineExtensionPluginchildEvent*(self: gen_qqmlextensionplugin_types.QQmlEngineExtensionPlugin, event: gen_qcoreevent_types.QChildEvent): void =
@@ -686,7 +689,7 @@ proc QQmlEngineExtensionPluginchildEvent*(self: gen_qqmlextensionplugin_types.QQ
 proc fcQQmlEngineExtensionPlugin_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QQmlEngineExtensionPluginVTable](fcQQmlEngineExtensionPlugin_vdata(self)[])
   let self = QQmlEngineExtensionPlugin(h: self)
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
 proc QQmlEngineExtensionPlugincustomEvent*(self: gen_qqmlextensionplugin_types.QQmlEngineExtensionPlugin, event: gen_qcoreevent_types.QEvent): void =
@@ -695,7 +698,7 @@ proc QQmlEngineExtensionPlugincustomEvent*(self: gen_qqmlextensionplugin_types.Q
 proc fcQQmlEngineExtensionPlugin_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QQmlEngineExtensionPluginVTable](fcQQmlEngineExtensionPlugin_vdata(self)[])
   let self = QQmlEngineExtensionPlugin(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
 proc QQmlEngineExtensionPluginconnectNotify*(self: gen_qqmlextensionplugin_types.QQmlEngineExtensionPlugin, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -704,7 +707,7 @@ proc QQmlEngineExtensionPluginconnectNotify*(self: gen_qqmlextensionplugin_types
 proc fcQQmlEngineExtensionPlugin_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QQmlEngineExtensionPluginVTable](fcQQmlEngineExtensionPlugin_vdata(self)[])
   let self = QQmlEngineExtensionPlugin(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
 proc QQmlEngineExtensionPlugindisconnectNotify*(self: gen_qqmlextensionplugin_types.QQmlEngineExtensionPlugin, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -713,7 +716,7 @@ proc QQmlEngineExtensionPlugindisconnectNotify*(self: gen_qqmlextensionplugin_ty
 proc fcQQmlEngineExtensionPlugin_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QQmlEngineExtensionPluginVTable](fcQQmlEngineExtensionPlugin_vdata(self)[])
   let self = QQmlEngineExtensionPlugin(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
 type VirtualQQmlEngineExtensionPlugin* {.inheritable.} = ref object of QQmlEngineExtensionPlugin
@@ -747,7 +750,7 @@ method initializeEngine*(self: VirtualQQmlEngineExtensionPlugin, engine: gen_qqm
   QQmlEngineExtensionPlugininitializeEngine(self[], engine, uri)
 proc fcQQmlEngineExtensionPlugin_method_callback_initializeEngine(self: pointer, engine: pointer, uri: cstring): void {.cdecl.} =
   let inst = cast[VirtualQQmlEngineExtensionPlugin](fcQQmlEngineExtensionPlugin_vdata(self)[])
-  let slotval1 = gen_qqmlengine_types.QQmlEngine(h: engine)
+  let slotval1 = gen_qqmlengine_types.QQmlEngine(h: engine, owned: false)
   let slotval2 = (uri)
   inst.initializeEngine(slotval1, slotval2)
 
@@ -755,7 +758,7 @@ method event*(self: VirtualQQmlEngineExtensionPlugin, event: gen_qcoreevent_type
   QQmlEngineExtensionPluginevent(self[], event)
 proc fcQQmlEngineExtensionPlugin_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQQmlEngineExtensionPlugin](fcQQmlEngineExtensionPlugin_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
@@ -763,8 +766,8 @@ method eventFilter*(self: VirtualQQmlEngineExtensionPlugin, watched: gen_qobject
   QQmlEngineExtensionPlugineventFilter(self[], watched, event)
 proc fcQQmlEngineExtensionPlugin_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQQmlEngineExtensionPlugin](fcQQmlEngineExtensionPlugin_vdata(self)[])
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
@@ -772,39 +775,39 @@ method timerEvent*(self: VirtualQQmlEngineExtensionPlugin, event: gen_qcoreevent
   QQmlEngineExtensionPlugintimerEvent(self[], event)
 proc fcQQmlEngineExtensionPlugin_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQQmlEngineExtensionPlugin](fcQQmlEngineExtensionPlugin_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
 method childEvent*(self: VirtualQQmlEngineExtensionPlugin, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
   QQmlEngineExtensionPluginchildEvent(self[], event)
 proc fcQQmlEngineExtensionPlugin_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQQmlEngineExtensionPlugin](fcQQmlEngineExtensionPlugin_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
 method customEvent*(self: VirtualQQmlEngineExtensionPlugin, event: gen_qcoreevent_types.QEvent): void {.base.} =
   QQmlEngineExtensionPlugincustomEvent(self[], event)
 proc fcQQmlEngineExtensionPlugin_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQQmlEngineExtensionPlugin](fcQQmlEngineExtensionPlugin_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
 method connectNotify*(self: VirtualQQmlEngineExtensionPlugin, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
   QQmlEngineExtensionPluginconnectNotify(self[], signal)
 proc fcQQmlEngineExtensionPlugin_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQQmlEngineExtensionPlugin](fcQQmlEngineExtensionPlugin_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
 method disconnectNotify*(self: VirtualQQmlEngineExtensionPlugin, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
   QQmlEngineExtensionPlugindisconnectNotify(self[], signal)
 proc fcQQmlEngineExtensionPlugin_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQQmlEngineExtensionPlugin](fcQQmlEngineExtensionPlugin_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
 
 proc sender*(self: gen_qqmlextensionplugin_types.QQmlEngineExtensionPlugin): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQQmlEngineExtensionPlugin_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQQmlEngineExtensionPlugin_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qqmlextensionplugin_types.QQmlEngineExtensionPlugin): cint =
   fcQQmlEngineExtensionPlugin_protectedbase_senderSignalIndex(self.h)
@@ -844,7 +847,7 @@ proc create*(T: type gen_qqmlextensionplugin_types.QQmlEngineExtensionPlugin,
     vtbl[].vtbl.connectNotify = fcQQmlEngineExtensionPlugin_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQQmlEngineExtensionPlugin_vtable_callback_disconnectNotify
-  let tmp = gen_qqmlextensionplugin_types.QQmlEngineExtensionPlugin(h: fcQQmlEngineExtensionPlugin_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))))
+  let tmp = gen_qqmlextensionplugin_types.QQmlEngineExtensionPlugin(h: fcQQmlEngineExtensionPlugin_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))), owned: true)
   fcQQmlEngineExtensionPlugin_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qqmlextensionplugin_types.QQmlEngineExtensionPlugin,
@@ -877,13 +880,14 @@ proc create*(T: type gen_qqmlextensionplugin_types.QQmlEngineExtensionPlugin,
     vtbl[].vtbl.connectNotify = fcQQmlEngineExtensionPlugin_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQQmlEngineExtensionPlugin_vtable_callback_disconnectNotify
-  let tmp = gen_qqmlextensionplugin_types.QQmlEngineExtensionPlugin(h: fcQQmlEngineExtensionPlugin_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h))
+  let tmp = gen_qqmlextensionplugin_types.QQmlEngineExtensionPlugin(h: fcQQmlEngineExtensionPlugin_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h), owned: true)
   fcQQmlEngineExtensionPlugin_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQQmlEngineExtensionPlugin_mvtbl = cQQmlEngineExtensionPluginVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQQmlEngineExtensionPlugin()[])](self.fcQQmlEngineExtensionPlugin_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   metaObject: fcQQmlEngineExtensionPlugin_method_callback_metaObject,
   metacast: fcQQmlEngineExtensionPlugin_method_callback_metacast,
@@ -912,5 +916,3 @@ proc create*(T: type gen_qqmlextensionplugin_types.QQmlEngineExtensionPlugin,
 
 proc staticMetaObject*(_: type gen_qqmlextensionplugin_types.QQmlEngineExtensionPlugin): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQQmlEngineExtensionPlugin_staticMetaObject())
-proc delete*(self: gen_qqmlextensionplugin_types.QQmlEngineExtensionPlugin) =
-  fcQQmlEngineExtensionPlugin_delete(self.h)

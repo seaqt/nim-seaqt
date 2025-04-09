@@ -32,9 +32,6 @@ func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
     else:
       copyMem(addr result[0], v.data, len)
 
-const cflags = gorge("pkg-config --cflags Qt6Core")  & " -fPIC"
-{.compile("gen_qbytearraymatcher.cpp", cflags).}
-
 
 import ./gen_qbytearraymatcher_types
 export gen_qbytearraymatcher_types
@@ -60,7 +57,6 @@ proc fcQByteArrayMatcher_new3(pattern: pointer): ptr cQByteArrayMatcher {.import
 proc fcQByteArrayMatcher_new4(pattern: cstring): ptr cQByteArrayMatcher {.importc: "QByteArrayMatcher_new4".}
 proc fcQByteArrayMatcher_new5(other: pointer): ptr cQByteArrayMatcher {.importc: "QByteArrayMatcher_new5".}
 proc fcQByteArrayMatcher_new6(pattern: cstring, length: int64): ptr cQByteArrayMatcher {.importc: "QByteArrayMatcher_new6".}
-proc fcQByteArrayMatcher_delete(self: pointer) {.importc: "QByteArrayMatcher_delete".}
 proc fcQStaticByteArrayMatcherBase_protectedbase_indexOfIn(self: pointer, needle: cstring, nlen: csize_t, haystack: cstring, hlen: int64, fromVal: int64): int64 {.importc: "QStaticByteArrayMatcherBase_protectedbase_indexOfIn".}
 
 proc operatorAssign*(self: gen_qbytearraymatcher_types.QByteArrayMatcher, other: gen_qbytearraymatcher_types.QByteArrayMatcher): void =
@@ -88,30 +84,28 @@ proc indexIn*(self: gen_qbytearraymatcher_types.QByteArrayMatcher, data: gen_qby
   fcQByteArrayMatcher_indexIn2(self.h, data.h, fromVal)
 
 proc create*(T: type gen_qbytearraymatcher_types.QByteArrayMatcher): gen_qbytearraymatcher_types.QByteArrayMatcher =
-  let tmp = gen_qbytearraymatcher_types.QByteArrayMatcher(h: fcQByteArrayMatcher_new())
+  let tmp = gen_qbytearraymatcher_types.QByteArrayMatcher(h: fcQByteArrayMatcher_new(), owned: true)
   tmp
 proc create*(T: type gen_qbytearraymatcher_types.QByteArrayMatcher,
     pattern: seq[byte]): gen_qbytearraymatcher_types.QByteArrayMatcher =
-  let tmp = gen_qbytearraymatcher_types.QByteArrayMatcher(h: fcQByteArrayMatcher_new2(struct_miqt_string(data: if len(pattern) > 0: addr pattern[0] else: nil, len: csize_t(len(pattern)))))
+  let tmp = gen_qbytearraymatcher_types.QByteArrayMatcher(h: fcQByteArrayMatcher_new2(struct_miqt_string(data: if len(pattern) > 0: addr pattern[0] else: nil, len: csize_t(len(pattern)))), owned: true)
   tmp
 proc create*(T: type gen_qbytearraymatcher_types.QByteArrayMatcher,
     pattern: gen_qbytearrayview_types.QByteArrayView): gen_qbytearraymatcher_types.QByteArrayMatcher =
-  let tmp = gen_qbytearraymatcher_types.QByteArrayMatcher(h: fcQByteArrayMatcher_new3(pattern.h))
+  let tmp = gen_qbytearraymatcher_types.QByteArrayMatcher(h: fcQByteArrayMatcher_new3(pattern.h), owned: true)
   tmp
 proc create*(T: type gen_qbytearraymatcher_types.QByteArrayMatcher,
     pattern: cstring): gen_qbytearraymatcher_types.QByteArrayMatcher =
-  let tmp = gen_qbytearraymatcher_types.QByteArrayMatcher(h: fcQByteArrayMatcher_new4(pattern))
+  let tmp = gen_qbytearraymatcher_types.QByteArrayMatcher(h: fcQByteArrayMatcher_new4(pattern), owned: true)
   tmp
 proc create*(T: type gen_qbytearraymatcher_types.QByteArrayMatcher,
     other: gen_qbytearraymatcher_types.QByteArrayMatcher): gen_qbytearraymatcher_types.QByteArrayMatcher =
-  let tmp = gen_qbytearraymatcher_types.QByteArrayMatcher(h: fcQByteArrayMatcher_new5(other.h))
+  let tmp = gen_qbytearraymatcher_types.QByteArrayMatcher(h: fcQByteArrayMatcher_new5(other.h), owned: true)
   tmp
 proc create*(T: type gen_qbytearraymatcher_types.QByteArrayMatcher,
     pattern: cstring, length: int64): gen_qbytearraymatcher_types.QByteArrayMatcher =
-  let tmp = gen_qbytearraymatcher_types.QByteArrayMatcher(h: fcQByteArrayMatcher_new6(pattern, length))
+  let tmp = gen_qbytearraymatcher_types.QByteArrayMatcher(h: fcQByteArrayMatcher_new6(pattern, length), owned: true)
   tmp
-proc delete*(self: gen_qbytearraymatcher_types.QByteArrayMatcher) =
-  fcQByteArrayMatcher_delete(self.h)
 proc indexOfIn*(self: gen_qbytearraymatcher_types.QStaticByteArrayMatcherBase, needle: cstring, nlen: csize_t, haystack: cstring, hlen: int64, fromVal: int64): int64 =
   fcQStaticByteArrayMatcherBase_protectedbase_indexOfIn(self.h, needle, nlen, haystack, hlen, fromVal)
 

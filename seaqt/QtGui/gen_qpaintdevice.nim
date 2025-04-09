@@ -32,9 +32,6 @@ func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
     else:
       copyMem(addr result[0], v.data, len)
 
-const cflags = gorge("pkg-config --cflags Qt6Gui")  & " -fPIC"
-{.compile("gen_qpaintdevice.cpp", cflags).}
-
 
 type QPaintDevicePaintDeviceMetricEnum* = distinct cint
 template PdmWidth*(_: type QPaintDevicePaintDeviceMetricEnum): untyped = 1
@@ -77,7 +74,6 @@ proc fcQPaintDevice_devicePixelRatioF(self: pointer): float64 {.importc: "QPaint
 proc fcQPaintDevice_colorCount(self: pointer): cint {.importc: "QPaintDevice_colorCount".}
 proc fcQPaintDevice_depth(self: pointer): cint {.importc: "QPaintDevice_depth".}
 proc fcQPaintDevice_devicePixelRatioFScale(): float64 {.importc: "QPaintDevice_devicePixelRatioFScale".}
-proc fcQPaintDevice_delete(self: pointer) {.importc: "QPaintDevice_delete".}
 
 proc devType*(self: gen_qpaintdevice_types.QPaintDevice): cint =
   fcQPaintDevice_devType(self.h)
@@ -86,7 +82,7 @@ proc paintingActive*(self: gen_qpaintdevice_types.QPaintDevice): bool =
   fcQPaintDevice_paintingActive(self.h)
 
 proc paintEngine*(self: gen_qpaintdevice_types.QPaintDevice): gen_qpaintengine_types.QPaintEngine =
-  gen_qpaintengine_types.QPaintEngine(h: fcQPaintDevice_paintEngine(self.h))
+  gen_qpaintengine_types.QPaintEngine(h: fcQPaintDevice_paintEngine(self.h), owned: false)
 
 proc width*(self: gen_qpaintdevice_types.QPaintDevice): cint =
   fcQPaintDevice_width(self.h)
@@ -127,5 +123,3 @@ proc depth*(self: gen_qpaintdevice_types.QPaintDevice): cint =
 proc devicePixelRatioFScale*(_: type gen_qpaintdevice_types.QPaintDevice): float64 =
   fcQPaintDevice_devicePixelRatioFScale()
 
-proc delete*(self: gen_qpaintdevice_types.QPaintDevice) =
-  fcQPaintDevice_delete(self.h)

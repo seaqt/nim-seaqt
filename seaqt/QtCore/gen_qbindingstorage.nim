@@ -32,9 +32,6 @@ func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
     else:
       copyMem(addr result[0], v.data, len)
 
-const cflags = gorge("pkg-config --cflags Qt6Core")  & " -fPIC"
-{.compile("gen_qbindingstorage.cpp", cflags).}
-
 
 import ./gen_qbindingstorage_types
 export gen_qbindingstorage_types
@@ -47,15 +44,11 @@ export
 type cQBindingStatus*{.exportc: "QBindingStatus", incompleteStruct.} = object
 type cQBindingStorage*{.exportc: "QBindingStorage", incompleteStruct.} = object
 
-proc fcQBindingStatus_delete(self: pointer) {.importc: "QBindingStatus_delete".}
 proc fcQBindingStorage_isEmpty(self: pointer): bool {.importc: "QBindingStorage_isEmpty".}
 proc fcQBindingStorage_isValid(self: pointer): bool {.importc: "QBindingStorage_isValid".}
 proc fcQBindingStorage_registerDependency(self: pointer, data: pointer): void {.importc: "QBindingStorage_registerDependency".}
 proc fcQBindingStorage_new(): ptr cQBindingStorage {.importc: "QBindingStorage_new".}
-proc fcQBindingStorage_delete(self: pointer) {.importc: "QBindingStorage_delete".}
 
-proc delete*(self: gen_qbindingstorage_types.QBindingStatus) =
-  fcQBindingStatus_delete(self.h)
 proc isEmpty*(self: gen_qbindingstorage_types.QBindingStorage): bool =
   fcQBindingStorage_isEmpty(self.h)
 
@@ -66,7 +59,5 @@ proc registerDependency*(self: gen_qbindingstorage_types.QBindingStorage, data: 
   fcQBindingStorage_registerDependency(self.h, data.h)
 
 proc create*(T: type gen_qbindingstorage_types.QBindingStorage): gen_qbindingstorage_types.QBindingStorage =
-  let tmp = gen_qbindingstorage_types.QBindingStorage(h: fcQBindingStorage_new())
+  let tmp = gen_qbindingstorage_types.QBindingStorage(h: fcQBindingStorage_new(), owned: true)
   tmp
-proc delete*(self: gen_qbindingstorage_types.QBindingStorage) =
-  fcQBindingStorage_delete(self.h)

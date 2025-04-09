@@ -32,9 +32,6 @@ func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
     else:
       copyMem(addr result[0], v.data, len)
 
-const cflags = gorge("pkg-config --cflags Qt6Network")  & " -fPIC"
-{.compile("gen_qsslkey.cpp", cflags).}
-
 
 import ./gen_qsslkey_types
 export gen_qsslkey_types
@@ -72,7 +69,6 @@ proc fcQSslKey_new9(device: pointer, algorithm: cint, format: cint): ptr cQSslKe
 proc fcQSslKey_new10(device: pointer, algorithm: cint, format: cint, typeVal: cint): ptr cQSslKey {.importc: "QSslKey_new10".}
 proc fcQSslKey_new11(device: pointer, algorithm: cint, format: cint, typeVal: cint, passPhrase: struct_miqt_string): ptr cQSslKey {.importc: "QSslKey_new11".}
 proc fcQSslKey_new12(handle: pointer, typeVal: cint): ptr cQSslKey {.importc: "QSslKey_new12".}
-proc fcQSslKey_delete(self: pointer) {.importc: "QSslKey_delete".}
 
 proc operatorAssign*(self: gen_qsslkey_types.QSslKey, other: gen_qsslkey_types.QSslKey): void =
   fcQSslKey_operatorAssign(self.h, other.h)
@@ -129,51 +125,49 @@ proc toDer*(self: gen_qsslkey_types.QSslKey, passPhrase: seq[byte]): seq[byte] =
   vx_ret
 
 proc create*(T: type gen_qsslkey_types.QSslKey): gen_qsslkey_types.QSslKey =
-  let tmp = gen_qsslkey_types.QSslKey(h: fcQSslKey_new())
+  let tmp = gen_qsslkey_types.QSslKey(h: fcQSslKey_new(), owned: true)
   tmp
 proc create*(T: type gen_qsslkey_types.QSslKey,
     encoded: seq[byte], algorithm: cint): gen_qsslkey_types.QSslKey =
-  let tmp = gen_qsslkey_types.QSslKey(h: fcQSslKey_new2(struct_miqt_string(data: if len(encoded) > 0: addr encoded[0] else: nil, len: csize_t(len(encoded))), cint(algorithm)))
+  let tmp = gen_qsslkey_types.QSslKey(h: fcQSslKey_new2(struct_miqt_string(data: if len(encoded) > 0: addr encoded[0] else: nil, len: csize_t(len(encoded))), cint(algorithm)), owned: true)
   tmp
 proc create*(T: type gen_qsslkey_types.QSslKey,
     device: gen_qiodevice_types.QIODevice, algorithm: cint): gen_qsslkey_types.QSslKey =
-  let tmp = gen_qsslkey_types.QSslKey(h: fcQSslKey_new3(device.h, cint(algorithm)))
+  let tmp = gen_qsslkey_types.QSslKey(h: fcQSslKey_new3(device.h, cint(algorithm)), owned: true)
   tmp
 proc create*(T: type gen_qsslkey_types.QSslKey,
     handle: pointer): gen_qsslkey_types.QSslKey =
-  let tmp = gen_qsslkey_types.QSslKey(h: fcQSslKey_new4(handle))
+  let tmp = gen_qsslkey_types.QSslKey(h: fcQSslKey_new4(handle), owned: true)
   tmp
 proc create*(T: type gen_qsslkey_types.QSslKey,
     other: gen_qsslkey_types.QSslKey): gen_qsslkey_types.QSslKey =
-  let tmp = gen_qsslkey_types.QSslKey(h: fcQSslKey_new5(other.h))
+  let tmp = gen_qsslkey_types.QSslKey(h: fcQSslKey_new5(other.h), owned: true)
   tmp
 proc create*(T: type gen_qsslkey_types.QSslKey,
     encoded: seq[byte], algorithm: cint, format: cint): gen_qsslkey_types.QSslKey =
-  let tmp = gen_qsslkey_types.QSslKey(h: fcQSslKey_new6(struct_miqt_string(data: if len(encoded) > 0: addr encoded[0] else: nil, len: csize_t(len(encoded))), cint(algorithm), cint(format)))
+  let tmp = gen_qsslkey_types.QSslKey(h: fcQSslKey_new6(struct_miqt_string(data: if len(encoded) > 0: addr encoded[0] else: nil, len: csize_t(len(encoded))), cint(algorithm), cint(format)), owned: true)
   tmp
 proc create*(T: type gen_qsslkey_types.QSslKey,
     encoded: seq[byte], algorithm: cint, format: cint, typeVal: cint): gen_qsslkey_types.QSslKey =
-  let tmp = gen_qsslkey_types.QSslKey(h: fcQSslKey_new7(struct_miqt_string(data: if len(encoded) > 0: addr encoded[0] else: nil, len: csize_t(len(encoded))), cint(algorithm), cint(format), cint(typeVal)))
+  let tmp = gen_qsslkey_types.QSslKey(h: fcQSslKey_new7(struct_miqt_string(data: if len(encoded) > 0: addr encoded[0] else: nil, len: csize_t(len(encoded))), cint(algorithm), cint(format), cint(typeVal)), owned: true)
   tmp
 proc create*(T: type gen_qsslkey_types.QSslKey,
     encoded: seq[byte], algorithm: cint, format: cint, typeVal: cint, passPhrase: seq[byte]): gen_qsslkey_types.QSslKey =
-  let tmp = gen_qsslkey_types.QSslKey(h: fcQSslKey_new8(struct_miqt_string(data: if len(encoded) > 0: addr encoded[0] else: nil, len: csize_t(len(encoded))), cint(algorithm), cint(format), cint(typeVal), struct_miqt_string(data: if len(passPhrase) > 0: addr passPhrase[0] else: nil, len: csize_t(len(passPhrase)))))
+  let tmp = gen_qsslkey_types.QSslKey(h: fcQSslKey_new8(struct_miqt_string(data: if len(encoded) > 0: addr encoded[0] else: nil, len: csize_t(len(encoded))), cint(algorithm), cint(format), cint(typeVal), struct_miqt_string(data: if len(passPhrase) > 0: addr passPhrase[0] else: nil, len: csize_t(len(passPhrase)))), owned: true)
   tmp
 proc create*(T: type gen_qsslkey_types.QSslKey,
     device: gen_qiodevice_types.QIODevice, algorithm: cint, format: cint): gen_qsslkey_types.QSslKey =
-  let tmp = gen_qsslkey_types.QSslKey(h: fcQSslKey_new9(device.h, cint(algorithm), cint(format)))
+  let tmp = gen_qsslkey_types.QSslKey(h: fcQSslKey_new9(device.h, cint(algorithm), cint(format)), owned: true)
   tmp
 proc create*(T: type gen_qsslkey_types.QSslKey,
     device: gen_qiodevice_types.QIODevice, algorithm: cint, format: cint, typeVal: cint): gen_qsslkey_types.QSslKey =
-  let tmp = gen_qsslkey_types.QSslKey(h: fcQSslKey_new10(device.h, cint(algorithm), cint(format), cint(typeVal)))
+  let tmp = gen_qsslkey_types.QSslKey(h: fcQSslKey_new10(device.h, cint(algorithm), cint(format), cint(typeVal)), owned: true)
   tmp
 proc create*(T: type gen_qsslkey_types.QSslKey,
     device: gen_qiodevice_types.QIODevice, algorithm: cint, format: cint, typeVal: cint, passPhrase: seq[byte]): gen_qsslkey_types.QSslKey =
-  let tmp = gen_qsslkey_types.QSslKey(h: fcQSslKey_new11(device.h, cint(algorithm), cint(format), cint(typeVal), struct_miqt_string(data: if len(passPhrase) > 0: addr passPhrase[0] else: nil, len: csize_t(len(passPhrase)))))
+  let tmp = gen_qsslkey_types.QSslKey(h: fcQSslKey_new11(device.h, cint(algorithm), cint(format), cint(typeVal), struct_miqt_string(data: if len(passPhrase) > 0: addr passPhrase[0] else: nil, len: csize_t(len(passPhrase)))), owned: true)
   tmp
 proc create*(T: type gen_qsslkey_types.QSslKey,
     handle: pointer, typeVal: cint): gen_qsslkey_types.QSslKey =
-  let tmp = gen_qsslkey_types.QSslKey(h: fcQSslKey_new12(handle, cint(typeVal)))
+  let tmp = gen_qsslkey_types.QSslKey(h: fcQSslKey_new12(handle, cint(typeVal)), owned: true)
   tmp
-proc delete*(self: gen_qsslkey_types.QSslKey) =
-  fcQSslKey_delete(self.h)

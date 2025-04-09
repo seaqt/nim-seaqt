@@ -32,7 +32,7 @@ func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
     else:
       copyMem(addr result[0], v.data, len)
 
-const cflags = gorge("pkg-config --cflags Qt6Core")  & " -fPIC"
+const cflags = gorge("pkg-config --cflags Qt6Core") & " -fPIC"
 {.compile("gen_qsequentialanimationgroup.cpp", cflags).}
 
 
@@ -109,10 +109,9 @@ proc fcQSequentialAnimationGroup_protectedbase_isSignalConnected(self: pointer, 
 proc fcQSequentialAnimationGroup_new(vtbl: pointer, vdata: csize_t): ptr cQSequentialAnimationGroup {.importc: "QSequentialAnimationGroup_new".}
 proc fcQSequentialAnimationGroup_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQSequentialAnimationGroup {.importc: "QSequentialAnimationGroup_new2".}
 proc fcQSequentialAnimationGroup_staticMetaObject(): pointer {.importc: "QSequentialAnimationGroup_staticMetaObject".}
-proc fcQSequentialAnimationGroup_delete(self: pointer) {.importc: "QSequentialAnimationGroup_delete".}
 
 proc metaObject*(self: gen_qsequentialanimationgroup_types.QSequentialAnimationGroup): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQSequentialAnimationGroup_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQSequentialAnimationGroup_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qsequentialanimationgroup_types.QSequentialAnimationGroup, param1: cstring): pointer =
   fcQSequentialAnimationGroup_metacast(self.h, param1)
@@ -127,13 +126,13 @@ proc tr*(_: type gen_qsequentialanimationgroup_types.QSequentialAnimationGroup, 
   vx_ret
 
 proc addPause*(self: gen_qsequentialanimationgroup_types.QSequentialAnimationGroup, msecs: cint): gen_qpauseanimation_types.QPauseAnimation =
-  gen_qpauseanimation_types.QPauseAnimation(h: fcQSequentialAnimationGroup_addPause(self.h, msecs))
+  gen_qpauseanimation_types.QPauseAnimation(h: fcQSequentialAnimationGroup_addPause(self.h, msecs), owned: false)
 
 proc insertPause*(self: gen_qsequentialanimationgroup_types.QSequentialAnimationGroup, index: cint, msecs: cint): gen_qpauseanimation_types.QPauseAnimation =
-  gen_qpauseanimation_types.QPauseAnimation(h: fcQSequentialAnimationGroup_insertPause(self.h, index, msecs))
+  gen_qpauseanimation_types.QPauseAnimation(h: fcQSequentialAnimationGroup_insertPause(self.h, index, msecs), owned: false)
 
 proc currentAnimation*(self: gen_qsequentialanimationgroup_types.QSequentialAnimationGroup): gen_qabstractanimation_types.QAbstractAnimation =
-  gen_qabstractanimation_types.QAbstractAnimation(h: fcQSequentialAnimationGroup_currentAnimation(self.h))
+  gen_qabstractanimation_types.QAbstractAnimation(h: fcQSequentialAnimationGroup_currentAnimation(self.h), owned: false)
 
 proc duration*(self: gen_qsequentialanimationgroup_types.QSequentialAnimationGroup): cint =
   fcQSequentialAnimationGroup_duration(self.h)
@@ -144,7 +143,7 @@ proc currentAnimationChanged*(self: gen_qsequentialanimationgroup_types.QSequent
 type QSequentialAnimationGroupcurrentAnimationChangedSlot* = proc(current: gen_qabstractanimation_types.QAbstractAnimation)
 proc fcQSequentialAnimationGroup_slot_callback_currentAnimationChanged(slot: int, current: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QSequentialAnimationGroupcurrentAnimationChangedSlot](cast[pointer](slot))
-  let slotval1 = gen_qabstractanimation_types.QAbstractAnimation(h: current)
+  let slotval1 = gen_qabstractanimation_types.QAbstractAnimation(h: current, owned: false)
 
   nimfunc[](slotval1)
 
@@ -184,7 +183,7 @@ type QSequentialAnimationGroupchildEventProc* = proc(self: QSequentialAnimationG
 type QSequentialAnimationGroupcustomEventProc* = proc(self: QSequentialAnimationGroup, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QSequentialAnimationGroupconnectNotifyProc* = proc(self: QSequentialAnimationGroup, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QSequentialAnimationGroupdisconnectNotifyProc* = proc(self: QSequentialAnimationGroup, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
-type QSequentialAnimationGroupVTable* = object
+type QSequentialAnimationGroupVTable* {.inheritable, pure.} = object
   vtbl: cQSequentialAnimationGroupVTable
   metaObject*: QSequentialAnimationGroupmetaObjectProc
   metacast*: QSequentialAnimationGroupmetacastProc
@@ -201,13 +200,16 @@ type QSequentialAnimationGroupVTable* = object
   connectNotify*: QSequentialAnimationGroupconnectNotifyProc
   disconnectNotify*: QSequentialAnimationGroupdisconnectNotifyProc
 proc QSequentialAnimationGroupmetaObject*(self: gen_qsequentialanimationgroup_types.QSequentialAnimationGroup): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQSequentialAnimationGroup_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQSequentialAnimationGroup_virtualbase_metaObject(self.h), owned: false)
 
 proc fcQSequentialAnimationGroup_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QSequentialAnimationGroupVTable](fcQSequentialAnimationGroup_vdata(self)[])
   let self = QSequentialAnimationGroup(h: self)
   var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QSequentialAnimationGroupmetacast*(self: gen_qsequentialanimationgroup_types.QSequentialAnimationGroup, param1: cstring): pointer =
   fcQSequentialAnimationGroup_virtualbase_metacast(self.h, param1)
@@ -246,7 +248,7 @@ proc QSequentialAnimationGroupevent*(self: gen_qsequentialanimationgroup_types.Q
 proc fcQSequentialAnimationGroup_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QSequentialAnimationGroupVTable](fcQSequentialAnimationGroup_vdata(self)[])
   let self = QSequentialAnimationGroup(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
@@ -284,8 +286,8 @@ proc QSequentialAnimationGroupeventFilter*(self: gen_qsequentialanimationgroup_t
 proc fcQSequentialAnimationGroup_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QSequentialAnimationGroupVTable](fcQSequentialAnimationGroup_vdata(self)[])
   let self = QSequentialAnimationGroup(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
@@ -295,7 +297,7 @@ proc QSequentialAnimationGrouptimerEvent*(self: gen_qsequentialanimationgroup_ty
 proc fcQSequentialAnimationGroup_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSequentialAnimationGroupVTable](fcQSequentialAnimationGroup_vdata(self)[])
   let self = QSequentialAnimationGroup(h: self)
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
 proc QSequentialAnimationGroupchildEvent*(self: gen_qsequentialanimationgroup_types.QSequentialAnimationGroup, event: gen_qcoreevent_types.QChildEvent): void =
@@ -304,7 +306,7 @@ proc QSequentialAnimationGroupchildEvent*(self: gen_qsequentialanimationgroup_ty
 proc fcQSequentialAnimationGroup_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSequentialAnimationGroupVTable](fcQSequentialAnimationGroup_vdata(self)[])
   let self = QSequentialAnimationGroup(h: self)
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
 proc QSequentialAnimationGroupcustomEvent*(self: gen_qsequentialanimationgroup_types.QSequentialAnimationGroup, event: gen_qcoreevent_types.QEvent): void =
@@ -313,7 +315,7 @@ proc QSequentialAnimationGroupcustomEvent*(self: gen_qsequentialanimationgroup_t
 proc fcQSequentialAnimationGroup_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSequentialAnimationGroupVTable](fcQSequentialAnimationGroup_vdata(self)[])
   let self = QSequentialAnimationGroup(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
 proc QSequentialAnimationGroupconnectNotify*(self: gen_qsequentialanimationgroup_types.QSequentialAnimationGroup, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -322,7 +324,7 @@ proc QSequentialAnimationGroupconnectNotify*(self: gen_qsequentialanimationgroup
 proc fcQSequentialAnimationGroup_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSequentialAnimationGroupVTable](fcQSequentialAnimationGroup_vdata(self)[])
   let self = QSequentialAnimationGroup(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
 proc QSequentialAnimationGroupdisconnectNotify*(self: gen_qsequentialanimationgroup_types.QSequentialAnimationGroup, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -331,7 +333,7 @@ proc QSequentialAnimationGroupdisconnectNotify*(self: gen_qsequentialanimationgr
 proc fcQSequentialAnimationGroup_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSequentialAnimationGroupVTable](fcQSequentialAnimationGroup_vdata(self)[])
   let self = QSequentialAnimationGroup(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
 type VirtualQSequentialAnimationGroup* {.inheritable.} = ref object of QSequentialAnimationGroup
@@ -372,7 +374,7 @@ method event*(self: VirtualQSequentialAnimationGroup, event: gen_qcoreevent_type
   QSequentialAnimationGroupevent(self[], event)
 proc fcQSequentialAnimationGroup_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQSequentialAnimationGroup](fcQSequentialAnimationGroup_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
@@ -402,8 +404,8 @@ method eventFilter*(self: VirtualQSequentialAnimationGroup, watched: gen_qobject
   QSequentialAnimationGroupeventFilter(self[], watched, event)
 proc fcQSequentialAnimationGroup_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQSequentialAnimationGroup](fcQSequentialAnimationGroup_vdata(self)[])
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
@@ -411,39 +413,39 @@ method timerEvent*(self: VirtualQSequentialAnimationGroup, event: gen_qcoreevent
   QSequentialAnimationGrouptimerEvent(self[], event)
 proc fcQSequentialAnimationGroup_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSequentialAnimationGroup](fcQSequentialAnimationGroup_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
 method childEvent*(self: VirtualQSequentialAnimationGroup, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
   QSequentialAnimationGroupchildEvent(self[], event)
 proc fcQSequentialAnimationGroup_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSequentialAnimationGroup](fcQSequentialAnimationGroup_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
 method customEvent*(self: VirtualQSequentialAnimationGroup, event: gen_qcoreevent_types.QEvent): void {.base.} =
   QSequentialAnimationGroupcustomEvent(self[], event)
 proc fcQSequentialAnimationGroup_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSequentialAnimationGroup](fcQSequentialAnimationGroup_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
 method connectNotify*(self: VirtualQSequentialAnimationGroup, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
   QSequentialAnimationGroupconnectNotify(self[], signal)
 proc fcQSequentialAnimationGroup_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSequentialAnimationGroup](fcQSequentialAnimationGroup_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
 method disconnectNotify*(self: VirtualQSequentialAnimationGroup, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
   QSequentialAnimationGroupdisconnectNotify(self[], signal)
 proc fcQSequentialAnimationGroup_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSequentialAnimationGroup](fcQSequentialAnimationGroup_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
 
 proc sender*(self: gen_qsequentialanimationgroup_types.QSequentialAnimationGroup): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQSequentialAnimationGroup_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQSequentialAnimationGroup_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qsequentialanimationgroup_types.QSequentialAnimationGroup): cint =
   fcQSequentialAnimationGroup_protectedbase_senderSignalIndex(self.h)
@@ -489,7 +491,7 @@ proc create*(T: type gen_qsequentialanimationgroup_types.QSequentialAnimationGro
     vtbl[].vtbl.connectNotify = fcQSequentialAnimationGroup_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQSequentialAnimationGroup_vtable_callback_disconnectNotify
-  let tmp = gen_qsequentialanimationgroup_types.QSequentialAnimationGroup(h: fcQSequentialAnimationGroup_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))))
+  let tmp = gen_qsequentialanimationgroup_types.QSequentialAnimationGroup(h: fcQSequentialAnimationGroup_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))), owned: true)
   fcQSequentialAnimationGroup_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qsequentialanimationgroup_types.QSequentialAnimationGroup,
@@ -528,13 +530,14 @@ proc create*(T: type gen_qsequentialanimationgroup_types.QSequentialAnimationGro
     vtbl[].vtbl.connectNotify = fcQSequentialAnimationGroup_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQSequentialAnimationGroup_vtable_callback_disconnectNotify
-  let tmp = gen_qsequentialanimationgroup_types.QSequentialAnimationGroup(h: fcQSequentialAnimationGroup_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h))
+  let tmp = gen_qsequentialanimationgroup_types.QSequentialAnimationGroup(h: fcQSequentialAnimationGroup_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h), owned: true)
   fcQSequentialAnimationGroup_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQSequentialAnimationGroup_mvtbl = cQSequentialAnimationGroupVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQSequentialAnimationGroup()[])](self.fcQSequentialAnimationGroup_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   metaObject: fcQSequentialAnimationGroup_method_callback_metaObject,
   metacast: fcQSequentialAnimationGroup_method_callback_metacast,
@@ -566,5 +569,3 @@ proc create*(T: type gen_qsequentialanimationgroup_types.QSequentialAnimationGro
 
 proc staticMetaObject*(_: type gen_qsequentialanimationgroup_types.QSequentialAnimationGroup): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQSequentialAnimationGroup_staticMetaObject())
-proc delete*(self: gen_qsequentialanimationgroup_types.QSequentialAnimationGroup) =
-  fcQSequentialAnimationGroup_delete(self.h)

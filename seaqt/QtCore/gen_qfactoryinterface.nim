@@ -32,9 +32,6 @@ func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
     else:
       copyMem(addr result[0], v.data, len)
 
-const cflags = gorge("pkg-config --cflags Qt6Core")  & " -fPIC"
-{.compile("gen_qfactoryinterface.cpp", cflags).}
-
 
 import ./gen_qfactoryinterface_types
 export gen_qfactoryinterface_types
@@ -43,7 +40,6 @@ export gen_qfactoryinterface_types
 type cQFactoryInterface*{.exportc: "QFactoryInterface", incompleteStruct.} = object
 
 proc fcQFactoryInterface_keys(self: pointer): struct_miqt_array {.importc: "QFactoryInterface_keys".}
-proc fcQFactoryInterface_delete(self: pointer) {.importc: "QFactoryInterface_delete".}
 
 proc keys*(self: gen_qfactoryinterface_types.QFactoryInterface): seq[string] =
   var v_ma = fcQFactoryInterface_keys(self.h)
@@ -57,5 +53,3 @@ proc keys*(self: gen_qfactoryinterface_types.QFactoryInterface): seq[string] =
   c_free(v_ma.data)
   vx_ret
 
-proc delete*(self: gen_qfactoryinterface_types.QFactoryInterface) =
-  fcQFactoryInterface_delete(self.h)

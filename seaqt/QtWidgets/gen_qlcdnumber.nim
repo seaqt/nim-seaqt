@@ -32,7 +32,7 @@ func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
     else:
       copyMem(addr result[0], v.data, len)
 
-const cflags = gorge("pkg-config --cflags Qt6Widgets")  & " -fPIC"
+const cflags = gorge("pkg-config --cflags Qt6Widgets") & " -fPIC"
 {.compile("gen_qlcdnumber.cpp", cflags).}
 
 
@@ -234,10 +234,9 @@ proc fcQLCDNumber_new2(vtbl: pointer, vdata: csize_t): ptr cQLCDNumber {.importc
 proc fcQLCDNumber_new3(vtbl: pointer, vdata: csize_t, numDigits: cuint): ptr cQLCDNumber {.importc: "QLCDNumber_new3".}
 proc fcQLCDNumber_new4(vtbl: pointer, vdata: csize_t, numDigits: cuint, parent: pointer): ptr cQLCDNumber {.importc: "QLCDNumber_new4".}
 proc fcQLCDNumber_staticMetaObject(): pointer {.importc: "QLCDNumber_staticMetaObject".}
-proc fcQLCDNumber_delete(self: pointer) {.importc: "QLCDNumber_delete".}
 
 proc metaObject*(self: gen_qlcdnumber_types.QLCDNumber): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQLCDNumber_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQLCDNumber_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qlcdnumber_types.QLCDNumber, param1: cstring): pointer =
   fcQLCDNumber_metacast(self.h, param1)
@@ -285,7 +284,7 @@ proc intValue*(self: gen_qlcdnumber_types.QLCDNumber): cint =
   fcQLCDNumber_intValue(self.h)
 
 proc sizeHint*(self: gen_qlcdnumber_types.QLCDNumber): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQLCDNumber_sizeHint(self.h))
+  gen_qsize_types.QSize(h: fcQLCDNumber_sizeHint(self.h), owned: true)
 
 proc display*(self: gen_qlcdnumber_types.QLCDNumber, str: string): void =
   fcQLCDNumber_display(self.h, struct_miqt_string(data: if len(str) > 0: addr str[0] else: nil, len: csize_t(len(str))))
@@ -392,7 +391,7 @@ type QLCDNumberchildEventProc* = proc(self: QLCDNumber, event: gen_qcoreevent_ty
 type QLCDNumbercustomEventProc* = proc(self: QLCDNumber, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QLCDNumberconnectNotifyProc* = proc(self: QLCDNumber, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QLCDNumberdisconnectNotifyProc* = proc(self: QLCDNumber, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
-type QLCDNumberVTable* = object
+type QLCDNumberVTable* {.inheritable, pure.} = object
   vtbl: cQLCDNumberVTable
   metaObject*: QLCDNumbermetaObjectProc
   metacast*: QLCDNumbermetacastProc
@@ -446,13 +445,16 @@ type QLCDNumberVTable* = object
   connectNotify*: QLCDNumberconnectNotifyProc
   disconnectNotify*: QLCDNumberdisconnectNotifyProc
 proc QLCDNumbermetaObject*(self: gen_qlcdnumber_types.QLCDNumber): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQLCDNumber_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQLCDNumber_virtualbase_metaObject(self.h), owned: false)
 
 proc fcQLCDNumber_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QLCDNumberVTable](fcQLCDNumber_vdata(self)[])
   let self = QLCDNumber(h: self)
   var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QLCDNumbermetacast*(self: gen_qlcdnumber_types.QLCDNumber, param1: cstring): pointer =
   fcQLCDNumber_virtualbase_metacast(self.h, param1)
@@ -477,13 +479,16 @@ proc fcQLCDNumber_vtable_callback_metacall(self: pointer, param1: cint, param2: 
   virtualReturn
 
 proc QLCDNumbersizeHint*(self: gen_qlcdnumber_types.QLCDNumber): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQLCDNumber_virtualbase_sizeHint(self.h))
+  gen_qsize_types.QSize(h: fcQLCDNumber_virtualbase_sizeHint(self.h), owned: true)
 
 proc fcQLCDNumber_vtable_callback_sizeHint(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QLCDNumberVTable](fcQLCDNumber_vdata(self)[])
   let self = QLCDNumber(h: self)
   var virtualReturn = vtbl[].sizeHint(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QLCDNumberevent*(self: gen_qlcdnumber_types.QLCDNumber, e: gen_qcoreevent_types.QEvent): bool =
   fcQLCDNumber_virtualbase_event(self.h, e.h)
@@ -491,7 +496,7 @@ proc QLCDNumberevent*(self: gen_qlcdnumber_types.QLCDNumber, e: gen_qcoreevent_t
 proc fcQLCDNumber_vtable_callback_event(self: pointer, e: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QLCDNumberVTable](fcQLCDNumber_vdata(self)[])
   let self = QLCDNumber(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: e)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: e, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
@@ -501,7 +506,7 @@ proc QLCDNumberpaintEvent*(self: gen_qlcdnumber_types.QLCDNumber, param1: gen_qe
 proc fcQLCDNumber_vtable_callback_paintEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QLCDNumberVTable](fcQLCDNumber_vdata(self)[])
   let self = QLCDNumber(h: self)
-  let slotval1 = gen_qevent_types.QPaintEvent(h: param1)
+  let slotval1 = gen_qevent_types.QPaintEvent(h: param1, owned: false)
   vtbl[].paintEvent(self, slotval1)
 
 proc QLCDNumberchangeEvent*(self: gen_qlcdnumber_types.QLCDNumber, param1: gen_qcoreevent_types.QEvent): void =
@@ -510,7 +515,7 @@ proc QLCDNumberchangeEvent*(self: gen_qlcdnumber_types.QLCDNumber, param1: gen_q
 proc fcQLCDNumber_vtable_callback_changeEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QLCDNumberVTable](fcQLCDNumber_vdata(self)[])
   let self = QLCDNumber(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: param1)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
   vtbl[].changeEvent(self, slotval1)
 
 proc QLCDNumberinitStyleOption*(self: gen_qlcdnumber_types.QLCDNumber, option: gen_qstyleoption_types.QStyleOptionFrame): void =
@@ -519,7 +524,7 @@ proc QLCDNumberinitStyleOption*(self: gen_qlcdnumber_types.QLCDNumber, option: g
 proc fcQLCDNumber_vtable_callback_initStyleOption(self: pointer, option: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QLCDNumberVTable](fcQLCDNumber_vdata(self)[])
   let self = QLCDNumber(h: self)
-  let slotval1 = gen_qstyleoption_types.QStyleOptionFrame(h: option)
+  let slotval1 = gen_qstyleoption_types.QStyleOptionFrame(h: option, owned: false)
   vtbl[].initStyleOption(self, slotval1)
 
 proc QLCDNumberdevType*(self: gen_qlcdnumber_types.QLCDNumber): cint =
@@ -541,13 +546,16 @@ proc fcQLCDNumber_vtable_callback_setVisible(self: pointer, visible: bool): void
   vtbl[].setVisible(self, slotval1)
 
 proc QLCDNumberminimumSizeHint*(self: gen_qlcdnumber_types.QLCDNumber): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQLCDNumber_virtualbase_minimumSizeHint(self.h))
+  gen_qsize_types.QSize(h: fcQLCDNumber_virtualbase_minimumSizeHint(self.h), owned: true)
 
 proc fcQLCDNumber_vtable_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QLCDNumberVTable](fcQLCDNumber_vdata(self)[])
   let self = QLCDNumber(h: self)
   var virtualReturn = vtbl[].minimumSizeHint(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QLCDNumberheightForWidth*(self: gen_qlcdnumber_types.QLCDNumber, param1: cint): cint =
   fcQLCDNumber_virtualbase_heightForWidth(self.h, param1)
@@ -569,13 +577,16 @@ proc fcQLCDNumber_vtable_callback_hasHeightForWidth(self: pointer): bool {.cdecl
   virtualReturn
 
 proc QLCDNumberpaintEngine*(self: gen_qlcdnumber_types.QLCDNumber): gen_qpaintengine_types.QPaintEngine =
-  gen_qpaintengine_types.QPaintEngine(h: fcQLCDNumber_virtualbase_paintEngine(self.h))
+  gen_qpaintengine_types.QPaintEngine(h: fcQLCDNumber_virtualbase_paintEngine(self.h), owned: false)
 
 proc fcQLCDNumber_vtable_callback_paintEngine(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QLCDNumberVTable](fcQLCDNumber_vdata(self)[])
   let self = QLCDNumber(h: self)
   var virtualReturn = vtbl[].paintEngine(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QLCDNumbermousePressEvent*(self: gen_qlcdnumber_types.QLCDNumber, event: gen_qevent_types.QMouseEvent): void =
   fcQLCDNumber_virtualbase_mousePressEvent(self.h, event.h)
@@ -583,7 +594,7 @@ proc QLCDNumbermousePressEvent*(self: gen_qlcdnumber_types.QLCDNumber, event: ge
 proc fcQLCDNumber_vtable_callback_mousePressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QLCDNumberVTable](fcQLCDNumber_vdata(self)[])
   let self = QLCDNumber(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mousePressEvent(self, slotval1)
 
 proc QLCDNumbermouseReleaseEvent*(self: gen_qlcdnumber_types.QLCDNumber, event: gen_qevent_types.QMouseEvent): void =
@@ -592,7 +603,7 @@ proc QLCDNumbermouseReleaseEvent*(self: gen_qlcdnumber_types.QLCDNumber, event: 
 proc fcQLCDNumber_vtable_callback_mouseReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QLCDNumberVTable](fcQLCDNumber_vdata(self)[])
   let self = QLCDNumber(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseReleaseEvent(self, slotval1)
 
 proc QLCDNumbermouseDoubleClickEvent*(self: gen_qlcdnumber_types.QLCDNumber, event: gen_qevent_types.QMouseEvent): void =
@@ -601,7 +612,7 @@ proc QLCDNumbermouseDoubleClickEvent*(self: gen_qlcdnumber_types.QLCDNumber, eve
 proc fcQLCDNumber_vtable_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QLCDNumberVTable](fcQLCDNumber_vdata(self)[])
   let self = QLCDNumber(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseDoubleClickEvent(self, slotval1)
 
 proc QLCDNumbermouseMoveEvent*(self: gen_qlcdnumber_types.QLCDNumber, event: gen_qevent_types.QMouseEvent): void =
@@ -610,7 +621,7 @@ proc QLCDNumbermouseMoveEvent*(self: gen_qlcdnumber_types.QLCDNumber, event: gen
 proc fcQLCDNumber_vtable_callback_mouseMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QLCDNumberVTable](fcQLCDNumber_vdata(self)[])
   let self = QLCDNumber(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseMoveEvent(self, slotval1)
 
 proc QLCDNumberwheelEvent*(self: gen_qlcdnumber_types.QLCDNumber, event: gen_qevent_types.QWheelEvent): void =
@@ -619,7 +630,7 @@ proc QLCDNumberwheelEvent*(self: gen_qlcdnumber_types.QLCDNumber, event: gen_qev
 proc fcQLCDNumber_vtable_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QLCDNumberVTable](fcQLCDNumber_vdata(self)[])
   let self = QLCDNumber(h: self)
-  let slotval1 = gen_qevent_types.QWheelEvent(h: event)
+  let slotval1 = gen_qevent_types.QWheelEvent(h: event, owned: false)
   vtbl[].wheelEvent(self, slotval1)
 
 proc QLCDNumberkeyPressEvent*(self: gen_qlcdnumber_types.QLCDNumber, event: gen_qevent_types.QKeyEvent): void =
@@ -628,7 +639,7 @@ proc QLCDNumberkeyPressEvent*(self: gen_qlcdnumber_types.QLCDNumber, event: gen_
 proc fcQLCDNumber_vtable_callback_keyPressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QLCDNumberVTable](fcQLCDNumber_vdata(self)[])
   let self = QLCDNumber(h: self)
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   vtbl[].keyPressEvent(self, slotval1)
 
 proc QLCDNumberkeyReleaseEvent*(self: gen_qlcdnumber_types.QLCDNumber, event: gen_qevent_types.QKeyEvent): void =
@@ -637,7 +648,7 @@ proc QLCDNumberkeyReleaseEvent*(self: gen_qlcdnumber_types.QLCDNumber, event: ge
 proc fcQLCDNumber_vtable_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QLCDNumberVTable](fcQLCDNumber_vdata(self)[])
   let self = QLCDNumber(h: self)
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   vtbl[].keyReleaseEvent(self, slotval1)
 
 proc QLCDNumberfocusInEvent*(self: gen_qlcdnumber_types.QLCDNumber, event: gen_qevent_types.QFocusEvent): void =
@@ -646,7 +657,7 @@ proc QLCDNumberfocusInEvent*(self: gen_qlcdnumber_types.QLCDNumber, event: gen_q
 proc fcQLCDNumber_vtable_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QLCDNumberVTable](fcQLCDNumber_vdata(self)[])
   let self = QLCDNumber(h: self)
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusInEvent(self, slotval1)
 
 proc QLCDNumberfocusOutEvent*(self: gen_qlcdnumber_types.QLCDNumber, event: gen_qevent_types.QFocusEvent): void =
@@ -655,7 +666,7 @@ proc QLCDNumberfocusOutEvent*(self: gen_qlcdnumber_types.QLCDNumber, event: gen_
 proc fcQLCDNumber_vtable_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QLCDNumberVTable](fcQLCDNumber_vdata(self)[])
   let self = QLCDNumber(h: self)
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusOutEvent(self, slotval1)
 
 proc QLCDNumberenterEvent*(self: gen_qlcdnumber_types.QLCDNumber, event: gen_qevent_types.QEnterEvent): void =
@@ -664,7 +675,7 @@ proc QLCDNumberenterEvent*(self: gen_qlcdnumber_types.QLCDNumber, event: gen_qev
 proc fcQLCDNumber_vtable_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QLCDNumberVTable](fcQLCDNumber_vdata(self)[])
   let self = QLCDNumber(h: self)
-  let slotval1 = gen_qevent_types.QEnterEvent(h: event)
+  let slotval1 = gen_qevent_types.QEnterEvent(h: event, owned: false)
   vtbl[].enterEvent(self, slotval1)
 
 proc QLCDNumberleaveEvent*(self: gen_qlcdnumber_types.QLCDNumber, event: gen_qcoreevent_types.QEvent): void =
@@ -673,7 +684,7 @@ proc QLCDNumberleaveEvent*(self: gen_qlcdnumber_types.QLCDNumber, event: gen_qco
 proc fcQLCDNumber_vtable_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QLCDNumberVTable](fcQLCDNumber_vdata(self)[])
   let self = QLCDNumber(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].leaveEvent(self, slotval1)
 
 proc QLCDNumbermoveEvent*(self: gen_qlcdnumber_types.QLCDNumber, event: gen_qevent_types.QMoveEvent): void =
@@ -682,7 +693,7 @@ proc QLCDNumbermoveEvent*(self: gen_qlcdnumber_types.QLCDNumber, event: gen_qeve
 proc fcQLCDNumber_vtable_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QLCDNumberVTable](fcQLCDNumber_vdata(self)[])
   let self = QLCDNumber(h: self)
-  let slotval1 = gen_qevent_types.QMoveEvent(h: event)
+  let slotval1 = gen_qevent_types.QMoveEvent(h: event, owned: false)
   vtbl[].moveEvent(self, slotval1)
 
 proc QLCDNumberresizeEvent*(self: gen_qlcdnumber_types.QLCDNumber, event: gen_qevent_types.QResizeEvent): void =
@@ -691,7 +702,7 @@ proc QLCDNumberresizeEvent*(self: gen_qlcdnumber_types.QLCDNumber, event: gen_qe
 proc fcQLCDNumber_vtable_callback_resizeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QLCDNumberVTable](fcQLCDNumber_vdata(self)[])
   let self = QLCDNumber(h: self)
-  let slotval1 = gen_qevent_types.QResizeEvent(h: event)
+  let slotval1 = gen_qevent_types.QResizeEvent(h: event, owned: false)
   vtbl[].resizeEvent(self, slotval1)
 
 proc QLCDNumbercloseEvent*(self: gen_qlcdnumber_types.QLCDNumber, event: gen_qevent_types.QCloseEvent): void =
@@ -700,7 +711,7 @@ proc QLCDNumbercloseEvent*(self: gen_qlcdnumber_types.QLCDNumber, event: gen_qev
 proc fcQLCDNumber_vtable_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QLCDNumberVTable](fcQLCDNumber_vdata(self)[])
   let self = QLCDNumber(h: self)
-  let slotval1 = gen_qevent_types.QCloseEvent(h: event)
+  let slotval1 = gen_qevent_types.QCloseEvent(h: event, owned: false)
   vtbl[].closeEvent(self, slotval1)
 
 proc QLCDNumbercontextMenuEvent*(self: gen_qlcdnumber_types.QLCDNumber, event: gen_qevent_types.QContextMenuEvent): void =
@@ -709,7 +720,7 @@ proc QLCDNumbercontextMenuEvent*(self: gen_qlcdnumber_types.QLCDNumber, event: g
 proc fcQLCDNumber_vtable_callback_contextMenuEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QLCDNumberVTable](fcQLCDNumber_vdata(self)[])
   let self = QLCDNumber(h: self)
-  let slotval1 = gen_qevent_types.QContextMenuEvent(h: event)
+  let slotval1 = gen_qevent_types.QContextMenuEvent(h: event, owned: false)
   vtbl[].contextMenuEvent(self, slotval1)
 
 proc QLCDNumbertabletEvent*(self: gen_qlcdnumber_types.QLCDNumber, event: gen_qevent_types.QTabletEvent): void =
@@ -718,7 +729,7 @@ proc QLCDNumbertabletEvent*(self: gen_qlcdnumber_types.QLCDNumber, event: gen_qe
 proc fcQLCDNumber_vtable_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QLCDNumberVTable](fcQLCDNumber_vdata(self)[])
   let self = QLCDNumber(h: self)
-  let slotval1 = gen_qevent_types.QTabletEvent(h: event)
+  let slotval1 = gen_qevent_types.QTabletEvent(h: event, owned: false)
   vtbl[].tabletEvent(self, slotval1)
 
 proc QLCDNumberactionEvent*(self: gen_qlcdnumber_types.QLCDNumber, event: gen_qevent_types.QActionEvent): void =
@@ -727,7 +738,7 @@ proc QLCDNumberactionEvent*(self: gen_qlcdnumber_types.QLCDNumber, event: gen_qe
 proc fcQLCDNumber_vtable_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QLCDNumberVTable](fcQLCDNumber_vdata(self)[])
   let self = QLCDNumber(h: self)
-  let slotval1 = gen_qevent_types.QActionEvent(h: event)
+  let slotval1 = gen_qevent_types.QActionEvent(h: event, owned: false)
   vtbl[].actionEvent(self, slotval1)
 
 proc QLCDNumberdragEnterEvent*(self: gen_qlcdnumber_types.QLCDNumber, event: gen_qevent_types.QDragEnterEvent): void =
@@ -736,7 +747,7 @@ proc QLCDNumberdragEnterEvent*(self: gen_qlcdnumber_types.QLCDNumber, event: gen
 proc fcQLCDNumber_vtable_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QLCDNumberVTable](fcQLCDNumber_vdata(self)[])
   let self = QLCDNumber(h: self)
-  let slotval1 = gen_qevent_types.QDragEnterEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragEnterEvent(h: event, owned: false)
   vtbl[].dragEnterEvent(self, slotval1)
 
 proc QLCDNumberdragMoveEvent*(self: gen_qlcdnumber_types.QLCDNumber, event: gen_qevent_types.QDragMoveEvent): void =
@@ -745,7 +756,7 @@ proc QLCDNumberdragMoveEvent*(self: gen_qlcdnumber_types.QLCDNumber, event: gen_
 proc fcQLCDNumber_vtable_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QLCDNumberVTable](fcQLCDNumber_vdata(self)[])
   let self = QLCDNumber(h: self)
-  let slotval1 = gen_qevent_types.QDragMoveEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragMoveEvent(h: event, owned: false)
   vtbl[].dragMoveEvent(self, slotval1)
 
 proc QLCDNumberdragLeaveEvent*(self: gen_qlcdnumber_types.QLCDNumber, event: gen_qevent_types.QDragLeaveEvent): void =
@@ -754,7 +765,7 @@ proc QLCDNumberdragLeaveEvent*(self: gen_qlcdnumber_types.QLCDNumber, event: gen
 proc fcQLCDNumber_vtable_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QLCDNumberVTable](fcQLCDNumber_vdata(self)[])
   let self = QLCDNumber(h: self)
-  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event, owned: false)
   vtbl[].dragLeaveEvent(self, slotval1)
 
 proc QLCDNumberdropEvent*(self: gen_qlcdnumber_types.QLCDNumber, event: gen_qevent_types.QDropEvent): void =
@@ -763,7 +774,7 @@ proc QLCDNumberdropEvent*(self: gen_qlcdnumber_types.QLCDNumber, event: gen_qeve
 proc fcQLCDNumber_vtable_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QLCDNumberVTable](fcQLCDNumber_vdata(self)[])
   let self = QLCDNumber(h: self)
-  let slotval1 = gen_qevent_types.QDropEvent(h: event)
+  let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
   vtbl[].dropEvent(self, slotval1)
 
 proc QLCDNumbershowEvent*(self: gen_qlcdnumber_types.QLCDNumber, event: gen_qevent_types.QShowEvent): void =
@@ -772,7 +783,7 @@ proc QLCDNumbershowEvent*(self: gen_qlcdnumber_types.QLCDNumber, event: gen_qeve
 proc fcQLCDNumber_vtable_callback_showEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QLCDNumberVTable](fcQLCDNumber_vdata(self)[])
   let self = QLCDNumber(h: self)
-  let slotval1 = gen_qevent_types.QShowEvent(h: event)
+  let slotval1 = gen_qevent_types.QShowEvent(h: event, owned: false)
   vtbl[].showEvent(self, slotval1)
 
 proc QLCDNumberhideEvent*(self: gen_qlcdnumber_types.QLCDNumber, event: gen_qevent_types.QHideEvent): void =
@@ -781,7 +792,7 @@ proc QLCDNumberhideEvent*(self: gen_qlcdnumber_types.QLCDNumber, event: gen_qeve
 proc fcQLCDNumber_vtable_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QLCDNumberVTable](fcQLCDNumber_vdata(self)[])
   let self = QLCDNumber(h: self)
-  let slotval1 = gen_qevent_types.QHideEvent(h: event)
+  let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   vtbl[].hideEvent(self, slotval1)
 
 proc QLCDNumbernativeEvent*(self: gen_qlcdnumber_types.QLCDNumber, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool =
@@ -815,27 +826,33 @@ proc QLCDNumberinitPainter*(self: gen_qlcdnumber_types.QLCDNumber, painter: gen_
 proc fcQLCDNumber_vtable_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QLCDNumberVTable](fcQLCDNumber_vdata(self)[])
   let self = QLCDNumber(h: self)
-  let slotval1 = gen_qpainter_types.QPainter(h: painter)
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
   vtbl[].initPainter(self, slotval1)
 
 proc QLCDNumberredirected*(self: gen_qlcdnumber_types.QLCDNumber, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice =
-  gen_qpaintdevice_types.QPaintDevice(h: fcQLCDNumber_virtualbase_redirected(self.h, offset.h))
+  gen_qpaintdevice_types.QPaintDevice(h: fcQLCDNumber_virtualbase_redirected(self.h, offset.h), owned: false)
 
 proc fcQLCDNumber_vtable_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QLCDNumberVTable](fcQLCDNumber_vdata(self)[])
   let self = QLCDNumber(h: self)
-  let slotval1 = gen_qpoint_types.QPoint(h: offset)
+  let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
   var virtualReturn = vtbl[].redirected(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QLCDNumbersharedPainter*(self: gen_qlcdnumber_types.QLCDNumber): gen_qpainter_types.QPainter =
-  gen_qpainter_types.QPainter(h: fcQLCDNumber_virtualbase_sharedPainter(self.h))
+  gen_qpainter_types.QPainter(h: fcQLCDNumber_virtualbase_sharedPainter(self.h), owned: false)
 
 proc fcQLCDNumber_vtable_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QLCDNumberVTable](fcQLCDNumber_vdata(self)[])
   let self = QLCDNumber(h: self)
   var virtualReturn = vtbl[].sharedPainter(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QLCDNumberinputMethodEvent*(self: gen_qlcdnumber_types.QLCDNumber, param1: gen_qevent_types.QInputMethodEvent): void =
   fcQLCDNumber_virtualbase_inputMethodEvent(self.h, param1.h)
@@ -843,18 +860,21 @@ proc QLCDNumberinputMethodEvent*(self: gen_qlcdnumber_types.QLCDNumber, param1: 
 proc fcQLCDNumber_vtable_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QLCDNumberVTable](fcQLCDNumber_vdata(self)[])
   let self = QLCDNumber(h: self)
-  let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1)
+  let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1, owned: false)
   vtbl[].inputMethodEvent(self, slotval1)
 
 proc QLCDNumberinputMethodQuery*(self: gen_qlcdnumber_types.QLCDNumber, param1: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQLCDNumber_virtualbase_inputMethodQuery(self.h, cint(param1)))
+  gen_qvariant_types.QVariant(h: fcQLCDNumber_virtualbase_inputMethodQuery(self.h, cint(param1)), owned: true)
 
 proc fcQLCDNumber_vtable_callback_inputMethodQuery(self: pointer, param1: cint): pointer {.cdecl.} =
   let vtbl = cast[ptr QLCDNumberVTable](fcQLCDNumber_vdata(self)[])
   let self = QLCDNumber(h: self)
   let slotval1 = cint(param1)
   var virtualReturn = vtbl[].inputMethodQuery(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QLCDNumberfocusNextPrevChild*(self: gen_qlcdnumber_types.QLCDNumber, next: bool): bool =
   fcQLCDNumber_virtualbase_focusNextPrevChild(self.h, next)
@@ -872,8 +892,8 @@ proc QLCDNumbereventFilter*(self: gen_qlcdnumber_types.QLCDNumber, watched: gen_
 proc fcQLCDNumber_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QLCDNumberVTable](fcQLCDNumber_vdata(self)[])
   let self = QLCDNumber(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
@@ -883,7 +903,7 @@ proc QLCDNumbertimerEvent*(self: gen_qlcdnumber_types.QLCDNumber, event: gen_qco
 proc fcQLCDNumber_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QLCDNumberVTable](fcQLCDNumber_vdata(self)[])
   let self = QLCDNumber(h: self)
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
 proc QLCDNumberchildEvent*(self: gen_qlcdnumber_types.QLCDNumber, event: gen_qcoreevent_types.QChildEvent): void =
@@ -892,7 +912,7 @@ proc QLCDNumberchildEvent*(self: gen_qlcdnumber_types.QLCDNumber, event: gen_qco
 proc fcQLCDNumber_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QLCDNumberVTable](fcQLCDNumber_vdata(self)[])
   let self = QLCDNumber(h: self)
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
 proc QLCDNumbercustomEvent*(self: gen_qlcdnumber_types.QLCDNumber, event: gen_qcoreevent_types.QEvent): void =
@@ -901,7 +921,7 @@ proc QLCDNumbercustomEvent*(self: gen_qlcdnumber_types.QLCDNumber, event: gen_qc
 proc fcQLCDNumber_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QLCDNumberVTable](fcQLCDNumber_vdata(self)[])
   let self = QLCDNumber(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
 proc QLCDNumberconnectNotify*(self: gen_qlcdnumber_types.QLCDNumber, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -910,7 +930,7 @@ proc QLCDNumberconnectNotify*(self: gen_qlcdnumber_types.QLCDNumber, signal: gen
 proc fcQLCDNumber_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QLCDNumberVTable](fcQLCDNumber_vdata(self)[])
   let self = QLCDNumber(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
 proc QLCDNumberdisconnectNotify*(self: gen_qlcdnumber_types.QLCDNumber, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -919,7 +939,7 @@ proc QLCDNumberdisconnectNotify*(self: gen_qlcdnumber_types.QLCDNumber, signal: 
 proc fcQLCDNumber_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QLCDNumberVTable](fcQLCDNumber_vdata(self)[])
   let self = QLCDNumber(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
 type VirtualQLCDNumber* {.inheritable.} = ref object of QLCDNumber
@@ -960,7 +980,7 @@ method event*(self: VirtualQLCDNumber, e: gen_qcoreevent_types.QEvent): bool {.b
   QLCDNumberevent(self[], e)
 proc fcQLCDNumber_method_callback_event(self: pointer, e: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQLCDNumber](fcQLCDNumber_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: e)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: e, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
@@ -968,21 +988,21 @@ method paintEvent*(self: VirtualQLCDNumber, param1: gen_qevent_types.QPaintEvent
   QLCDNumberpaintEvent(self[], param1)
 proc fcQLCDNumber_method_callback_paintEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQLCDNumber](fcQLCDNumber_vdata(self)[])
-  let slotval1 = gen_qevent_types.QPaintEvent(h: param1)
+  let slotval1 = gen_qevent_types.QPaintEvent(h: param1, owned: false)
   inst.paintEvent(slotval1)
 
 method changeEvent*(self: VirtualQLCDNumber, param1: gen_qcoreevent_types.QEvent): void {.base.} =
   QLCDNumberchangeEvent(self[], param1)
 proc fcQLCDNumber_method_callback_changeEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQLCDNumber](fcQLCDNumber_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: param1)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
   inst.changeEvent(slotval1)
 
 method initStyleOption*(self: VirtualQLCDNumber, option: gen_qstyleoption_types.QStyleOptionFrame): void {.base.} =
   QLCDNumberinitStyleOption(self[], option)
 proc fcQLCDNumber_method_callback_initStyleOption(self: pointer, option: pointer): void {.cdecl.} =
   let inst = cast[VirtualQLCDNumber](fcQLCDNumber_vdata(self)[])
-  let slotval1 = gen_qstyleoption_types.QStyleOptionFrame(h: option)
+  let slotval1 = gen_qstyleoption_types.QStyleOptionFrame(h: option, owned: false)
   inst.initStyleOption(slotval1)
 
 method devType*(self: VirtualQLCDNumber): cint {.base.} =
@@ -1032,161 +1052,161 @@ method mousePressEvent*(self: VirtualQLCDNumber, event: gen_qevent_types.QMouseE
   QLCDNumbermousePressEvent(self[], event)
 proc fcQLCDNumber_method_callback_mousePressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQLCDNumber](fcQLCDNumber_vdata(self)[])
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mousePressEvent(slotval1)
 
 method mouseReleaseEvent*(self: VirtualQLCDNumber, event: gen_qevent_types.QMouseEvent): void {.base.} =
   QLCDNumbermouseReleaseEvent(self[], event)
 proc fcQLCDNumber_method_callback_mouseReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQLCDNumber](fcQLCDNumber_vdata(self)[])
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mouseReleaseEvent(slotval1)
 
 method mouseDoubleClickEvent*(self: VirtualQLCDNumber, event: gen_qevent_types.QMouseEvent): void {.base.} =
   QLCDNumbermouseDoubleClickEvent(self[], event)
 proc fcQLCDNumber_method_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQLCDNumber](fcQLCDNumber_vdata(self)[])
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mouseDoubleClickEvent(slotval1)
 
 method mouseMoveEvent*(self: VirtualQLCDNumber, event: gen_qevent_types.QMouseEvent): void {.base.} =
   QLCDNumbermouseMoveEvent(self[], event)
 proc fcQLCDNumber_method_callback_mouseMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQLCDNumber](fcQLCDNumber_vdata(self)[])
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mouseMoveEvent(slotval1)
 
 method wheelEvent*(self: VirtualQLCDNumber, event: gen_qevent_types.QWheelEvent): void {.base.} =
   QLCDNumberwheelEvent(self[], event)
 proc fcQLCDNumber_method_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQLCDNumber](fcQLCDNumber_vdata(self)[])
-  let slotval1 = gen_qevent_types.QWheelEvent(h: event)
+  let slotval1 = gen_qevent_types.QWheelEvent(h: event, owned: false)
   inst.wheelEvent(slotval1)
 
 method keyPressEvent*(self: VirtualQLCDNumber, event: gen_qevent_types.QKeyEvent): void {.base.} =
   QLCDNumberkeyPressEvent(self[], event)
 proc fcQLCDNumber_method_callback_keyPressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQLCDNumber](fcQLCDNumber_vdata(self)[])
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   inst.keyPressEvent(slotval1)
 
 method keyReleaseEvent*(self: VirtualQLCDNumber, event: gen_qevent_types.QKeyEvent): void {.base.} =
   QLCDNumberkeyReleaseEvent(self[], event)
 proc fcQLCDNumber_method_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQLCDNumber](fcQLCDNumber_vdata(self)[])
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   inst.keyReleaseEvent(slotval1)
 
 method focusInEvent*(self: VirtualQLCDNumber, event: gen_qevent_types.QFocusEvent): void {.base.} =
   QLCDNumberfocusInEvent(self[], event)
 proc fcQLCDNumber_method_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQLCDNumber](fcQLCDNumber_vdata(self)[])
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   inst.focusInEvent(slotval1)
 
 method focusOutEvent*(self: VirtualQLCDNumber, event: gen_qevent_types.QFocusEvent): void {.base.} =
   QLCDNumberfocusOutEvent(self[], event)
 proc fcQLCDNumber_method_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQLCDNumber](fcQLCDNumber_vdata(self)[])
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   inst.focusOutEvent(slotval1)
 
 method enterEvent*(self: VirtualQLCDNumber, event: gen_qevent_types.QEnterEvent): void {.base.} =
   QLCDNumberenterEvent(self[], event)
 proc fcQLCDNumber_method_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQLCDNumber](fcQLCDNumber_vdata(self)[])
-  let slotval1 = gen_qevent_types.QEnterEvent(h: event)
+  let slotval1 = gen_qevent_types.QEnterEvent(h: event, owned: false)
   inst.enterEvent(slotval1)
 
 method leaveEvent*(self: VirtualQLCDNumber, event: gen_qcoreevent_types.QEvent): void {.base.} =
   QLCDNumberleaveEvent(self[], event)
 proc fcQLCDNumber_method_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQLCDNumber](fcQLCDNumber_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.leaveEvent(slotval1)
 
 method moveEvent*(self: VirtualQLCDNumber, event: gen_qevent_types.QMoveEvent): void {.base.} =
   QLCDNumbermoveEvent(self[], event)
 proc fcQLCDNumber_method_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQLCDNumber](fcQLCDNumber_vdata(self)[])
-  let slotval1 = gen_qevent_types.QMoveEvent(h: event)
+  let slotval1 = gen_qevent_types.QMoveEvent(h: event, owned: false)
   inst.moveEvent(slotval1)
 
 method resizeEvent*(self: VirtualQLCDNumber, event: gen_qevent_types.QResizeEvent): void {.base.} =
   QLCDNumberresizeEvent(self[], event)
 proc fcQLCDNumber_method_callback_resizeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQLCDNumber](fcQLCDNumber_vdata(self)[])
-  let slotval1 = gen_qevent_types.QResizeEvent(h: event)
+  let slotval1 = gen_qevent_types.QResizeEvent(h: event, owned: false)
   inst.resizeEvent(slotval1)
 
 method closeEvent*(self: VirtualQLCDNumber, event: gen_qevent_types.QCloseEvent): void {.base.} =
   QLCDNumbercloseEvent(self[], event)
 proc fcQLCDNumber_method_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQLCDNumber](fcQLCDNumber_vdata(self)[])
-  let slotval1 = gen_qevent_types.QCloseEvent(h: event)
+  let slotval1 = gen_qevent_types.QCloseEvent(h: event, owned: false)
   inst.closeEvent(slotval1)
 
 method contextMenuEvent*(self: VirtualQLCDNumber, event: gen_qevent_types.QContextMenuEvent): void {.base.} =
   QLCDNumbercontextMenuEvent(self[], event)
 proc fcQLCDNumber_method_callback_contextMenuEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQLCDNumber](fcQLCDNumber_vdata(self)[])
-  let slotval1 = gen_qevent_types.QContextMenuEvent(h: event)
+  let slotval1 = gen_qevent_types.QContextMenuEvent(h: event, owned: false)
   inst.contextMenuEvent(slotval1)
 
 method tabletEvent*(self: VirtualQLCDNumber, event: gen_qevent_types.QTabletEvent): void {.base.} =
   QLCDNumbertabletEvent(self[], event)
 proc fcQLCDNumber_method_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQLCDNumber](fcQLCDNumber_vdata(self)[])
-  let slotval1 = gen_qevent_types.QTabletEvent(h: event)
+  let slotval1 = gen_qevent_types.QTabletEvent(h: event, owned: false)
   inst.tabletEvent(slotval1)
 
 method actionEvent*(self: VirtualQLCDNumber, event: gen_qevent_types.QActionEvent): void {.base.} =
   QLCDNumberactionEvent(self[], event)
 proc fcQLCDNumber_method_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQLCDNumber](fcQLCDNumber_vdata(self)[])
-  let slotval1 = gen_qevent_types.QActionEvent(h: event)
+  let slotval1 = gen_qevent_types.QActionEvent(h: event, owned: false)
   inst.actionEvent(slotval1)
 
 method dragEnterEvent*(self: VirtualQLCDNumber, event: gen_qevent_types.QDragEnterEvent): void {.base.} =
   QLCDNumberdragEnterEvent(self[], event)
 proc fcQLCDNumber_method_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQLCDNumber](fcQLCDNumber_vdata(self)[])
-  let slotval1 = gen_qevent_types.QDragEnterEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragEnterEvent(h: event, owned: false)
   inst.dragEnterEvent(slotval1)
 
 method dragMoveEvent*(self: VirtualQLCDNumber, event: gen_qevent_types.QDragMoveEvent): void {.base.} =
   QLCDNumberdragMoveEvent(self[], event)
 proc fcQLCDNumber_method_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQLCDNumber](fcQLCDNumber_vdata(self)[])
-  let slotval1 = gen_qevent_types.QDragMoveEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragMoveEvent(h: event, owned: false)
   inst.dragMoveEvent(slotval1)
 
 method dragLeaveEvent*(self: VirtualQLCDNumber, event: gen_qevent_types.QDragLeaveEvent): void {.base.} =
   QLCDNumberdragLeaveEvent(self[], event)
 proc fcQLCDNumber_method_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQLCDNumber](fcQLCDNumber_vdata(self)[])
-  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event, owned: false)
   inst.dragLeaveEvent(slotval1)
 
 method dropEvent*(self: VirtualQLCDNumber, event: gen_qevent_types.QDropEvent): void {.base.} =
   QLCDNumberdropEvent(self[], event)
 proc fcQLCDNumber_method_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQLCDNumber](fcQLCDNumber_vdata(self)[])
-  let slotval1 = gen_qevent_types.QDropEvent(h: event)
+  let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
   inst.dropEvent(slotval1)
 
 method showEvent*(self: VirtualQLCDNumber, event: gen_qevent_types.QShowEvent): void {.base.} =
   QLCDNumbershowEvent(self[], event)
 proc fcQLCDNumber_method_callback_showEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQLCDNumber](fcQLCDNumber_vdata(self)[])
-  let slotval1 = gen_qevent_types.QShowEvent(h: event)
+  let slotval1 = gen_qevent_types.QShowEvent(h: event, owned: false)
   inst.showEvent(slotval1)
 
 method hideEvent*(self: VirtualQLCDNumber, event: gen_qevent_types.QHideEvent): void {.base.} =
   QLCDNumberhideEvent(self[], event)
 proc fcQLCDNumber_method_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQLCDNumber](fcQLCDNumber_vdata(self)[])
-  let slotval1 = gen_qevent_types.QHideEvent(h: event)
+  let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   inst.hideEvent(slotval1)
 
 method nativeEvent*(self: VirtualQLCDNumber, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
@@ -1214,14 +1234,14 @@ method initPainter*(self: VirtualQLCDNumber, painter: gen_qpainter_types.QPainte
   QLCDNumberinitPainter(self[], painter)
 proc fcQLCDNumber_method_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
   let inst = cast[VirtualQLCDNumber](fcQLCDNumber_vdata(self)[])
-  let slotval1 = gen_qpainter_types.QPainter(h: painter)
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
   inst.initPainter(slotval1)
 
 method redirected*(self: VirtualQLCDNumber, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.base.} =
   QLCDNumberredirected(self[], offset)
 proc fcQLCDNumber_method_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQLCDNumber](fcQLCDNumber_vdata(self)[])
-  let slotval1 = gen_qpoint_types.QPoint(h: offset)
+  let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
   var virtualReturn = inst.redirected(slotval1)
   virtualReturn.h
 
@@ -1236,7 +1256,7 @@ method inputMethodEvent*(self: VirtualQLCDNumber, param1: gen_qevent_types.QInpu
   QLCDNumberinputMethodEvent(self[], param1)
 proc fcQLCDNumber_method_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQLCDNumber](fcQLCDNumber_vdata(self)[])
-  let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1)
+  let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1, owned: false)
   inst.inputMethodEvent(slotval1)
 
 method inputMethodQuery*(self: VirtualQLCDNumber, param1: cint): gen_qvariant_types.QVariant {.base.} =
@@ -1259,8 +1279,8 @@ method eventFilter*(self: VirtualQLCDNumber, watched: gen_qobject_types.QObject,
   QLCDNumbereventFilter(self[], watched, event)
 proc fcQLCDNumber_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQLCDNumber](fcQLCDNumber_vdata(self)[])
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
@@ -1268,35 +1288,35 @@ method timerEvent*(self: VirtualQLCDNumber, event: gen_qcoreevent_types.QTimerEv
   QLCDNumbertimerEvent(self[], event)
 proc fcQLCDNumber_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQLCDNumber](fcQLCDNumber_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
 method childEvent*(self: VirtualQLCDNumber, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
   QLCDNumberchildEvent(self[], event)
 proc fcQLCDNumber_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQLCDNumber](fcQLCDNumber_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
 method customEvent*(self: VirtualQLCDNumber, event: gen_qcoreevent_types.QEvent): void {.base.} =
   QLCDNumbercustomEvent(self[], event)
 proc fcQLCDNumber_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQLCDNumber](fcQLCDNumber_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
 method connectNotify*(self: VirtualQLCDNumber, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
   QLCDNumberconnectNotify(self[], signal)
 proc fcQLCDNumber_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQLCDNumber](fcQLCDNumber_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
 method disconnectNotify*(self: VirtualQLCDNumber, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
   QLCDNumberdisconnectNotify(self[], signal)
 proc fcQLCDNumber_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQLCDNumber](fcQLCDNumber_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
 
 proc drawFrame*(self: gen_qlcdnumber_types.QLCDNumber, param1: gen_qpainter_types.QPainter): void =
@@ -1318,7 +1338,7 @@ proc focusPreviousChild*(self: gen_qlcdnumber_types.QLCDNumber): bool =
   fcQLCDNumber_protectedbase_focusPreviousChild(self.h)
 
 proc sender*(self: gen_qlcdnumber_types.QLCDNumber): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQLCDNumber_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQLCDNumber_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qlcdnumber_types.QLCDNumber): cint =
   fcQLCDNumber_protectedbase_senderSignalIndex(self.h)
@@ -1439,7 +1459,7 @@ proc create*(T: type gen_qlcdnumber_types.QLCDNumber,
     vtbl[].vtbl.connectNotify = fcQLCDNumber_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQLCDNumber_vtable_callback_disconnectNotify
-  let tmp = gen_qlcdnumber_types.QLCDNumber(h: fcQLCDNumber_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h))
+  let tmp = gen_qlcdnumber_types.QLCDNumber(h: fcQLCDNumber_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h), owned: true)
   fcQLCDNumber_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qlcdnumber_types.QLCDNumber,
@@ -1551,7 +1571,7 @@ proc create*(T: type gen_qlcdnumber_types.QLCDNumber,
     vtbl[].vtbl.connectNotify = fcQLCDNumber_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQLCDNumber_vtable_callback_disconnectNotify
-  let tmp = gen_qlcdnumber_types.QLCDNumber(h: fcQLCDNumber_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer))))
+  let tmp = gen_qlcdnumber_types.QLCDNumber(h: fcQLCDNumber_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer))), owned: true)
   fcQLCDNumber_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qlcdnumber_types.QLCDNumber,
@@ -1664,7 +1684,7 @@ proc create*(T: type gen_qlcdnumber_types.QLCDNumber,
     vtbl[].vtbl.connectNotify = fcQLCDNumber_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQLCDNumber_vtable_callback_disconnectNotify
-  let tmp = gen_qlcdnumber_types.QLCDNumber(h: fcQLCDNumber_new3(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), numDigits))
+  let tmp = gen_qlcdnumber_types.QLCDNumber(h: fcQLCDNumber_new3(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), numDigits), owned: true)
   fcQLCDNumber_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qlcdnumber_types.QLCDNumber,
@@ -1777,13 +1797,14 @@ proc create*(T: type gen_qlcdnumber_types.QLCDNumber,
     vtbl[].vtbl.connectNotify = fcQLCDNumber_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQLCDNumber_vtable_callback_disconnectNotify
-  let tmp = gen_qlcdnumber_types.QLCDNumber(h: fcQLCDNumber_new4(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), numDigits, parent.h))
+  let tmp = gen_qlcdnumber_types.QLCDNumber(h: fcQLCDNumber_new4(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), numDigits, parent.h), owned: true)
   fcQLCDNumber_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQLCDNumber_mvtbl = cQLCDNumberVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQLCDNumber()[])](self.fcQLCDNumber_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   metaObject: fcQLCDNumber_method_callback_metaObject,
   metacast: fcQLCDNumber_method_callback_metacast,
@@ -1866,5 +1887,3 @@ proc create*(T: type gen_qlcdnumber_types.QLCDNumber,
 
 proc staticMetaObject*(_: type gen_qlcdnumber_types.QLCDNumber): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQLCDNumber_staticMetaObject())
-proc delete*(self: gen_qlcdnumber_types.QLCDNumber) =
-  fcQLCDNumber_delete(self.h)

@@ -32,7 +32,7 @@ func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
     else:
       copyMem(addr result[0], v.data, len)
 
-const cflags = gorge("pkg-config --cflags Qt6Widgets")  & " -fPIC"
+const cflags = gorge("pkg-config --cflags Qt6Widgets") & " -fPIC"
 {.compile("gen_qradiobutton.cpp", cflags).}
 
 
@@ -206,10 +206,9 @@ proc fcQRadioButton_new2(vtbl: pointer, vdata: csize_t): ptr cQRadioButton {.imp
 proc fcQRadioButton_new3(vtbl: pointer, vdata: csize_t, text: struct_miqt_string): ptr cQRadioButton {.importc: "QRadioButton_new3".}
 proc fcQRadioButton_new4(vtbl: pointer, vdata: csize_t, text: struct_miqt_string, parent: pointer): ptr cQRadioButton {.importc: "QRadioButton_new4".}
 proc fcQRadioButton_staticMetaObject(): pointer {.importc: "QRadioButton_staticMetaObject".}
-proc fcQRadioButton_delete(self: pointer) {.importc: "QRadioButton_delete".}
 
 proc metaObject*(self: gen_qradiobutton_types.QRadioButton): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQRadioButton_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQRadioButton_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qradiobutton_types.QRadioButton, param1: cstring): pointer =
   fcQRadioButton_metacast(self.h, param1)
@@ -224,10 +223,10 @@ proc tr*(_: type gen_qradiobutton_types.QRadioButton, s: cstring): string =
   vx_ret
 
 proc sizeHint*(self: gen_qradiobutton_types.QRadioButton): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQRadioButton_sizeHint(self.h))
+  gen_qsize_types.QSize(h: fcQRadioButton_sizeHint(self.h), owned: true)
 
 proc minimumSizeHint*(self: gen_qradiobutton_types.QRadioButton): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQRadioButton_minimumSizeHint(self.h))
+  gen_qsize_types.QSize(h: fcQRadioButton_minimumSizeHint(self.h), owned: true)
 
 proc tr*(_: type gen_qradiobutton_types.QRadioButton, s: cstring, c: cstring): string =
   let v_ms = fcQRadioButton_tr2(s, c)
@@ -295,7 +294,7 @@ type QRadioButtonchildEventProc* = proc(self: QRadioButton, event: gen_qcoreeven
 type QRadioButtoncustomEventProc* = proc(self: QRadioButton, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QRadioButtonconnectNotifyProc* = proc(self: QRadioButton, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QRadioButtondisconnectNotifyProc* = proc(self: QRadioButton, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
-type QRadioButtonVTable* = object
+type QRadioButtonVTable* {.inheritable, pure.} = object
   vtbl: cQRadioButtonVTable
   metaObject*: QRadioButtonmetaObjectProc
   metacast*: QRadioButtonmetacastProc
@@ -352,13 +351,16 @@ type QRadioButtonVTable* = object
   connectNotify*: QRadioButtonconnectNotifyProc
   disconnectNotify*: QRadioButtondisconnectNotifyProc
 proc QRadioButtonmetaObject*(self: gen_qradiobutton_types.QRadioButton): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQRadioButton_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQRadioButton_virtualbase_metaObject(self.h), owned: false)
 
 proc fcQRadioButton_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QRadioButtonVTable](fcQRadioButton_vdata(self)[])
   let self = QRadioButton(h: self)
   var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QRadioButtonmetacast*(self: gen_qradiobutton_types.QRadioButton, param1: cstring): pointer =
   fcQRadioButton_virtualbase_metacast(self.h, param1)
@@ -383,22 +385,28 @@ proc fcQRadioButton_vtable_callback_metacall(self: pointer, param1: cint, param2
   virtualReturn
 
 proc QRadioButtonsizeHint*(self: gen_qradiobutton_types.QRadioButton): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQRadioButton_virtualbase_sizeHint(self.h))
+  gen_qsize_types.QSize(h: fcQRadioButton_virtualbase_sizeHint(self.h), owned: true)
 
 proc fcQRadioButton_vtable_callback_sizeHint(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QRadioButtonVTable](fcQRadioButton_vdata(self)[])
   let self = QRadioButton(h: self)
   var virtualReturn = vtbl[].sizeHint(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QRadioButtonminimumSizeHint*(self: gen_qradiobutton_types.QRadioButton): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQRadioButton_virtualbase_minimumSizeHint(self.h))
+  gen_qsize_types.QSize(h: fcQRadioButton_virtualbase_minimumSizeHint(self.h), owned: true)
 
 proc fcQRadioButton_vtable_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QRadioButtonVTable](fcQRadioButton_vdata(self)[])
   let self = QRadioButton(h: self)
   var virtualReturn = vtbl[].minimumSizeHint(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QRadioButtonevent*(self: gen_qradiobutton_types.QRadioButton, e: gen_qcoreevent_types.QEvent): bool =
   fcQRadioButton_virtualbase_event(self.h, e.h)
@@ -406,7 +414,7 @@ proc QRadioButtonevent*(self: gen_qradiobutton_types.QRadioButton, e: gen_qcoree
 proc fcQRadioButton_vtable_callback_event(self: pointer, e: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QRadioButtonVTable](fcQRadioButton_vdata(self)[])
   let self = QRadioButton(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: e)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: e, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
@@ -416,7 +424,7 @@ proc QRadioButtonhitButton*(self: gen_qradiobutton_types.QRadioButton, param1: g
 proc fcQRadioButton_vtable_callback_hitButton(self: pointer, param1: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QRadioButtonVTable](fcQRadioButton_vdata(self)[])
   let self = QRadioButton(h: self)
-  let slotval1 = gen_qpoint_types.QPoint(h: param1)
+  let slotval1 = gen_qpoint_types.QPoint(h: param1, owned: false)
   var virtualReturn = vtbl[].hitButton(self, slotval1)
   virtualReturn
 
@@ -426,7 +434,7 @@ proc QRadioButtonpaintEvent*(self: gen_qradiobutton_types.QRadioButton, param1: 
 proc fcQRadioButton_vtable_callback_paintEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QRadioButtonVTable](fcQRadioButton_vdata(self)[])
   let self = QRadioButton(h: self)
-  let slotval1 = gen_qevent_types.QPaintEvent(h: param1)
+  let slotval1 = gen_qevent_types.QPaintEvent(h: param1, owned: false)
   vtbl[].paintEvent(self, slotval1)
 
 proc QRadioButtonmouseMoveEvent*(self: gen_qradiobutton_types.QRadioButton, param1: gen_qevent_types.QMouseEvent): void =
@@ -435,7 +443,7 @@ proc QRadioButtonmouseMoveEvent*(self: gen_qradiobutton_types.QRadioButton, para
 proc fcQRadioButton_vtable_callback_mouseMoveEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QRadioButtonVTable](fcQRadioButton_vdata(self)[])
   let self = QRadioButton(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: param1)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: param1, owned: false)
   vtbl[].mouseMoveEvent(self, slotval1)
 
 proc QRadioButtoninitStyleOption*(self: gen_qradiobutton_types.QRadioButton, button: gen_qstyleoption_types.QStyleOptionButton): void =
@@ -444,7 +452,7 @@ proc QRadioButtoninitStyleOption*(self: gen_qradiobutton_types.QRadioButton, but
 proc fcQRadioButton_vtable_callback_initStyleOption(self: pointer, button: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QRadioButtonVTable](fcQRadioButton_vdata(self)[])
   let self = QRadioButton(h: self)
-  let slotval1 = gen_qstyleoption_types.QStyleOptionButton(h: button)
+  let slotval1 = gen_qstyleoption_types.QStyleOptionButton(h: button, owned: false)
   vtbl[].initStyleOption(self, slotval1)
 
 proc QRadioButtoncheckStateSet*(self: gen_qradiobutton_types.QRadioButton): void =
@@ -469,7 +477,7 @@ proc QRadioButtonkeyPressEvent*(self: gen_qradiobutton_types.QRadioButton, e: ge
 proc fcQRadioButton_vtable_callback_keyPressEvent(self: pointer, e: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QRadioButtonVTable](fcQRadioButton_vdata(self)[])
   let self = QRadioButton(h: self)
-  let slotval1 = gen_qevent_types.QKeyEvent(h: e)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: e, owned: false)
   vtbl[].keyPressEvent(self, slotval1)
 
 proc QRadioButtonkeyReleaseEvent*(self: gen_qradiobutton_types.QRadioButton, e: gen_qevent_types.QKeyEvent): void =
@@ -478,7 +486,7 @@ proc QRadioButtonkeyReleaseEvent*(self: gen_qradiobutton_types.QRadioButton, e: 
 proc fcQRadioButton_vtable_callback_keyReleaseEvent(self: pointer, e: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QRadioButtonVTable](fcQRadioButton_vdata(self)[])
   let self = QRadioButton(h: self)
-  let slotval1 = gen_qevent_types.QKeyEvent(h: e)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: e, owned: false)
   vtbl[].keyReleaseEvent(self, slotval1)
 
 proc QRadioButtonmousePressEvent*(self: gen_qradiobutton_types.QRadioButton, e: gen_qevent_types.QMouseEvent): void =
@@ -487,7 +495,7 @@ proc QRadioButtonmousePressEvent*(self: gen_qradiobutton_types.QRadioButton, e: 
 proc fcQRadioButton_vtable_callback_mousePressEvent(self: pointer, e: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QRadioButtonVTable](fcQRadioButton_vdata(self)[])
   let self = QRadioButton(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: e)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: e, owned: false)
   vtbl[].mousePressEvent(self, slotval1)
 
 proc QRadioButtonmouseReleaseEvent*(self: gen_qradiobutton_types.QRadioButton, e: gen_qevent_types.QMouseEvent): void =
@@ -496,7 +504,7 @@ proc QRadioButtonmouseReleaseEvent*(self: gen_qradiobutton_types.QRadioButton, e
 proc fcQRadioButton_vtable_callback_mouseReleaseEvent(self: pointer, e: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QRadioButtonVTable](fcQRadioButton_vdata(self)[])
   let self = QRadioButton(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: e)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: e, owned: false)
   vtbl[].mouseReleaseEvent(self, slotval1)
 
 proc QRadioButtonfocusInEvent*(self: gen_qradiobutton_types.QRadioButton, e: gen_qevent_types.QFocusEvent): void =
@@ -505,7 +513,7 @@ proc QRadioButtonfocusInEvent*(self: gen_qradiobutton_types.QRadioButton, e: gen
 proc fcQRadioButton_vtable_callback_focusInEvent(self: pointer, e: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QRadioButtonVTable](fcQRadioButton_vdata(self)[])
   let self = QRadioButton(h: self)
-  let slotval1 = gen_qevent_types.QFocusEvent(h: e)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: e, owned: false)
   vtbl[].focusInEvent(self, slotval1)
 
 proc QRadioButtonfocusOutEvent*(self: gen_qradiobutton_types.QRadioButton, e: gen_qevent_types.QFocusEvent): void =
@@ -514,7 +522,7 @@ proc QRadioButtonfocusOutEvent*(self: gen_qradiobutton_types.QRadioButton, e: ge
 proc fcQRadioButton_vtable_callback_focusOutEvent(self: pointer, e: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QRadioButtonVTable](fcQRadioButton_vdata(self)[])
   let self = QRadioButton(h: self)
-  let slotval1 = gen_qevent_types.QFocusEvent(h: e)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: e, owned: false)
   vtbl[].focusOutEvent(self, slotval1)
 
 proc QRadioButtonchangeEvent*(self: gen_qradiobutton_types.QRadioButton, e: gen_qcoreevent_types.QEvent): void =
@@ -523,7 +531,7 @@ proc QRadioButtonchangeEvent*(self: gen_qradiobutton_types.QRadioButton, e: gen_
 proc fcQRadioButton_vtable_callback_changeEvent(self: pointer, e: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QRadioButtonVTable](fcQRadioButton_vdata(self)[])
   let self = QRadioButton(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: e)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: e, owned: false)
   vtbl[].changeEvent(self, slotval1)
 
 proc QRadioButtontimerEvent*(self: gen_qradiobutton_types.QRadioButton, e: gen_qcoreevent_types.QTimerEvent): void =
@@ -532,7 +540,7 @@ proc QRadioButtontimerEvent*(self: gen_qradiobutton_types.QRadioButton, e: gen_q
 proc fcQRadioButton_vtable_callback_timerEvent(self: pointer, e: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QRadioButtonVTable](fcQRadioButton_vdata(self)[])
   let self = QRadioButton(h: self)
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: e)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: e, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
 proc QRadioButtondevType*(self: gen_qradiobutton_types.QRadioButton): cint =
@@ -573,13 +581,16 @@ proc fcQRadioButton_vtable_callback_hasHeightForWidth(self: pointer): bool {.cde
   virtualReturn
 
 proc QRadioButtonpaintEngine*(self: gen_qradiobutton_types.QRadioButton): gen_qpaintengine_types.QPaintEngine =
-  gen_qpaintengine_types.QPaintEngine(h: fcQRadioButton_virtualbase_paintEngine(self.h))
+  gen_qpaintengine_types.QPaintEngine(h: fcQRadioButton_virtualbase_paintEngine(self.h), owned: false)
 
 proc fcQRadioButton_vtable_callback_paintEngine(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QRadioButtonVTable](fcQRadioButton_vdata(self)[])
   let self = QRadioButton(h: self)
   var virtualReturn = vtbl[].paintEngine(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QRadioButtonmouseDoubleClickEvent*(self: gen_qradiobutton_types.QRadioButton, event: gen_qevent_types.QMouseEvent): void =
   fcQRadioButton_virtualbase_mouseDoubleClickEvent(self.h, event.h)
@@ -587,7 +598,7 @@ proc QRadioButtonmouseDoubleClickEvent*(self: gen_qradiobutton_types.QRadioButto
 proc fcQRadioButton_vtable_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QRadioButtonVTable](fcQRadioButton_vdata(self)[])
   let self = QRadioButton(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseDoubleClickEvent(self, slotval1)
 
 proc QRadioButtonwheelEvent*(self: gen_qradiobutton_types.QRadioButton, event: gen_qevent_types.QWheelEvent): void =
@@ -596,7 +607,7 @@ proc QRadioButtonwheelEvent*(self: gen_qradiobutton_types.QRadioButton, event: g
 proc fcQRadioButton_vtable_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QRadioButtonVTable](fcQRadioButton_vdata(self)[])
   let self = QRadioButton(h: self)
-  let slotval1 = gen_qevent_types.QWheelEvent(h: event)
+  let slotval1 = gen_qevent_types.QWheelEvent(h: event, owned: false)
   vtbl[].wheelEvent(self, slotval1)
 
 proc QRadioButtonenterEvent*(self: gen_qradiobutton_types.QRadioButton, event: gen_qevent_types.QEnterEvent): void =
@@ -605,7 +616,7 @@ proc QRadioButtonenterEvent*(self: gen_qradiobutton_types.QRadioButton, event: g
 proc fcQRadioButton_vtable_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QRadioButtonVTable](fcQRadioButton_vdata(self)[])
   let self = QRadioButton(h: self)
-  let slotval1 = gen_qevent_types.QEnterEvent(h: event)
+  let slotval1 = gen_qevent_types.QEnterEvent(h: event, owned: false)
   vtbl[].enterEvent(self, slotval1)
 
 proc QRadioButtonleaveEvent*(self: gen_qradiobutton_types.QRadioButton, event: gen_qcoreevent_types.QEvent): void =
@@ -614,7 +625,7 @@ proc QRadioButtonleaveEvent*(self: gen_qradiobutton_types.QRadioButton, event: g
 proc fcQRadioButton_vtable_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QRadioButtonVTable](fcQRadioButton_vdata(self)[])
   let self = QRadioButton(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].leaveEvent(self, slotval1)
 
 proc QRadioButtonmoveEvent*(self: gen_qradiobutton_types.QRadioButton, event: gen_qevent_types.QMoveEvent): void =
@@ -623,7 +634,7 @@ proc QRadioButtonmoveEvent*(self: gen_qradiobutton_types.QRadioButton, event: ge
 proc fcQRadioButton_vtable_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QRadioButtonVTable](fcQRadioButton_vdata(self)[])
   let self = QRadioButton(h: self)
-  let slotval1 = gen_qevent_types.QMoveEvent(h: event)
+  let slotval1 = gen_qevent_types.QMoveEvent(h: event, owned: false)
   vtbl[].moveEvent(self, slotval1)
 
 proc QRadioButtonresizeEvent*(self: gen_qradiobutton_types.QRadioButton, event: gen_qevent_types.QResizeEvent): void =
@@ -632,7 +643,7 @@ proc QRadioButtonresizeEvent*(self: gen_qradiobutton_types.QRadioButton, event: 
 proc fcQRadioButton_vtable_callback_resizeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QRadioButtonVTable](fcQRadioButton_vdata(self)[])
   let self = QRadioButton(h: self)
-  let slotval1 = gen_qevent_types.QResizeEvent(h: event)
+  let slotval1 = gen_qevent_types.QResizeEvent(h: event, owned: false)
   vtbl[].resizeEvent(self, slotval1)
 
 proc QRadioButtoncloseEvent*(self: gen_qradiobutton_types.QRadioButton, event: gen_qevent_types.QCloseEvent): void =
@@ -641,7 +652,7 @@ proc QRadioButtoncloseEvent*(self: gen_qradiobutton_types.QRadioButton, event: g
 proc fcQRadioButton_vtable_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QRadioButtonVTable](fcQRadioButton_vdata(self)[])
   let self = QRadioButton(h: self)
-  let slotval1 = gen_qevent_types.QCloseEvent(h: event)
+  let slotval1 = gen_qevent_types.QCloseEvent(h: event, owned: false)
   vtbl[].closeEvent(self, slotval1)
 
 proc QRadioButtoncontextMenuEvent*(self: gen_qradiobutton_types.QRadioButton, event: gen_qevent_types.QContextMenuEvent): void =
@@ -650,7 +661,7 @@ proc QRadioButtoncontextMenuEvent*(self: gen_qradiobutton_types.QRadioButton, ev
 proc fcQRadioButton_vtable_callback_contextMenuEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QRadioButtonVTable](fcQRadioButton_vdata(self)[])
   let self = QRadioButton(h: self)
-  let slotval1 = gen_qevent_types.QContextMenuEvent(h: event)
+  let slotval1 = gen_qevent_types.QContextMenuEvent(h: event, owned: false)
   vtbl[].contextMenuEvent(self, slotval1)
 
 proc QRadioButtontabletEvent*(self: gen_qradiobutton_types.QRadioButton, event: gen_qevent_types.QTabletEvent): void =
@@ -659,7 +670,7 @@ proc QRadioButtontabletEvent*(self: gen_qradiobutton_types.QRadioButton, event: 
 proc fcQRadioButton_vtable_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QRadioButtonVTable](fcQRadioButton_vdata(self)[])
   let self = QRadioButton(h: self)
-  let slotval1 = gen_qevent_types.QTabletEvent(h: event)
+  let slotval1 = gen_qevent_types.QTabletEvent(h: event, owned: false)
   vtbl[].tabletEvent(self, slotval1)
 
 proc QRadioButtonactionEvent*(self: gen_qradiobutton_types.QRadioButton, event: gen_qevent_types.QActionEvent): void =
@@ -668,7 +679,7 @@ proc QRadioButtonactionEvent*(self: gen_qradiobutton_types.QRadioButton, event: 
 proc fcQRadioButton_vtable_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QRadioButtonVTable](fcQRadioButton_vdata(self)[])
   let self = QRadioButton(h: self)
-  let slotval1 = gen_qevent_types.QActionEvent(h: event)
+  let slotval1 = gen_qevent_types.QActionEvent(h: event, owned: false)
   vtbl[].actionEvent(self, slotval1)
 
 proc QRadioButtondragEnterEvent*(self: gen_qradiobutton_types.QRadioButton, event: gen_qevent_types.QDragEnterEvent): void =
@@ -677,7 +688,7 @@ proc QRadioButtondragEnterEvent*(self: gen_qradiobutton_types.QRadioButton, even
 proc fcQRadioButton_vtable_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QRadioButtonVTable](fcQRadioButton_vdata(self)[])
   let self = QRadioButton(h: self)
-  let slotval1 = gen_qevent_types.QDragEnterEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragEnterEvent(h: event, owned: false)
   vtbl[].dragEnterEvent(self, slotval1)
 
 proc QRadioButtondragMoveEvent*(self: gen_qradiobutton_types.QRadioButton, event: gen_qevent_types.QDragMoveEvent): void =
@@ -686,7 +697,7 @@ proc QRadioButtondragMoveEvent*(self: gen_qradiobutton_types.QRadioButton, event
 proc fcQRadioButton_vtable_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QRadioButtonVTable](fcQRadioButton_vdata(self)[])
   let self = QRadioButton(h: self)
-  let slotval1 = gen_qevent_types.QDragMoveEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragMoveEvent(h: event, owned: false)
   vtbl[].dragMoveEvent(self, slotval1)
 
 proc QRadioButtondragLeaveEvent*(self: gen_qradiobutton_types.QRadioButton, event: gen_qevent_types.QDragLeaveEvent): void =
@@ -695,7 +706,7 @@ proc QRadioButtondragLeaveEvent*(self: gen_qradiobutton_types.QRadioButton, even
 proc fcQRadioButton_vtable_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QRadioButtonVTable](fcQRadioButton_vdata(self)[])
   let self = QRadioButton(h: self)
-  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event, owned: false)
   vtbl[].dragLeaveEvent(self, slotval1)
 
 proc QRadioButtondropEvent*(self: gen_qradiobutton_types.QRadioButton, event: gen_qevent_types.QDropEvent): void =
@@ -704,7 +715,7 @@ proc QRadioButtondropEvent*(self: gen_qradiobutton_types.QRadioButton, event: ge
 proc fcQRadioButton_vtable_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QRadioButtonVTable](fcQRadioButton_vdata(self)[])
   let self = QRadioButton(h: self)
-  let slotval1 = gen_qevent_types.QDropEvent(h: event)
+  let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
   vtbl[].dropEvent(self, slotval1)
 
 proc QRadioButtonshowEvent*(self: gen_qradiobutton_types.QRadioButton, event: gen_qevent_types.QShowEvent): void =
@@ -713,7 +724,7 @@ proc QRadioButtonshowEvent*(self: gen_qradiobutton_types.QRadioButton, event: ge
 proc fcQRadioButton_vtable_callback_showEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QRadioButtonVTable](fcQRadioButton_vdata(self)[])
   let self = QRadioButton(h: self)
-  let slotval1 = gen_qevent_types.QShowEvent(h: event)
+  let slotval1 = gen_qevent_types.QShowEvent(h: event, owned: false)
   vtbl[].showEvent(self, slotval1)
 
 proc QRadioButtonhideEvent*(self: gen_qradiobutton_types.QRadioButton, event: gen_qevent_types.QHideEvent): void =
@@ -722,7 +733,7 @@ proc QRadioButtonhideEvent*(self: gen_qradiobutton_types.QRadioButton, event: ge
 proc fcQRadioButton_vtable_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QRadioButtonVTable](fcQRadioButton_vdata(self)[])
   let self = QRadioButton(h: self)
-  let slotval1 = gen_qevent_types.QHideEvent(h: event)
+  let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   vtbl[].hideEvent(self, slotval1)
 
 proc QRadioButtonnativeEvent*(self: gen_qradiobutton_types.QRadioButton, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool =
@@ -756,27 +767,33 @@ proc QRadioButtoninitPainter*(self: gen_qradiobutton_types.QRadioButton, painter
 proc fcQRadioButton_vtable_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QRadioButtonVTable](fcQRadioButton_vdata(self)[])
   let self = QRadioButton(h: self)
-  let slotval1 = gen_qpainter_types.QPainter(h: painter)
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
   vtbl[].initPainter(self, slotval1)
 
 proc QRadioButtonredirected*(self: gen_qradiobutton_types.QRadioButton, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice =
-  gen_qpaintdevice_types.QPaintDevice(h: fcQRadioButton_virtualbase_redirected(self.h, offset.h))
+  gen_qpaintdevice_types.QPaintDevice(h: fcQRadioButton_virtualbase_redirected(self.h, offset.h), owned: false)
 
 proc fcQRadioButton_vtable_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QRadioButtonVTable](fcQRadioButton_vdata(self)[])
   let self = QRadioButton(h: self)
-  let slotval1 = gen_qpoint_types.QPoint(h: offset)
+  let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
   var virtualReturn = vtbl[].redirected(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QRadioButtonsharedPainter*(self: gen_qradiobutton_types.QRadioButton): gen_qpainter_types.QPainter =
-  gen_qpainter_types.QPainter(h: fcQRadioButton_virtualbase_sharedPainter(self.h))
+  gen_qpainter_types.QPainter(h: fcQRadioButton_virtualbase_sharedPainter(self.h), owned: false)
 
 proc fcQRadioButton_vtable_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QRadioButtonVTable](fcQRadioButton_vdata(self)[])
   let self = QRadioButton(h: self)
   var virtualReturn = vtbl[].sharedPainter(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QRadioButtoninputMethodEvent*(self: gen_qradiobutton_types.QRadioButton, param1: gen_qevent_types.QInputMethodEvent): void =
   fcQRadioButton_virtualbase_inputMethodEvent(self.h, param1.h)
@@ -784,18 +801,21 @@ proc QRadioButtoninputMethodEvent*(self: gen_qradiobutton_types.QRadioButton, pa
 proc fcQRadioButton_vtable_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QRadioButtonVTable](fcQRadioButton_vdata(self)[])
   let self = QRadioButton(h: self)
-  let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1)
+  let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1, owned: false)
   vtbl[].inputMethodEvent(self, slotval1)
 
 proc QRadioButtoninputMethodQuery*(self: gen_qradiobutton_types.QRadioButton, param1: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQRadioButton_virtualbase_inputMethodQuery(self.h, cint(param1)))
+  gen_qvariant_types.QVariant(h: fcQRadioButton_virtualbase_inputMethodQuery(self.h, cint(param1)), owned: true)
 
 proc fcQRadioButton_vtable_callback_inputMethodQuery(self: pointer, param1: cint): pointer {.cdecl.} =
   let vtbl = cast[ptr QRadioButtonVTable](fcQRadioButton_vdata(self)[])
   let self = QRadioButton(h: self)
   let slotval1 = cint(param1)
   var virtualReturn = vtbl[].inputMethodQuery(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QRadioButtonfocusNextPrevChild*(self: gen_qradiobutton_types.QRadioButton, next: bool): bool =
   fcQRadioButton_virtualbase_focusNextPrevChild(self.h, next)
@@ -813,8 +833,8 @@ proc QRadioButtoneventFilter*(self: gen_qradiobutton_types.QRadioButton, watched
 proc fcQRadioButton_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QRadioButtonVTable](fcQRadioButton_vdata(self)[])
   let self = QRadioButton(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
@@ -824,7 +844,7 @@ proc QRadioButtonchildEvent*(self: gen_qradiobutton_types.QRadioButton, event: g
 proc fcQRadioButton_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QRadioButtonVTable](fcQRadioButton_vdata(self)[])
   let self = QRadioButton(h: self)
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
 proc QRadioButtoncustomEvent*(self: gen_qradiobutton_types.QRadioButton, event: gen_qcoreevent_types.QEvent): void =
@@ -833,7 +853,7 @@ proc QRadioButtoncustomEvent*(self: gen_qradiobutton_types.QRadioButton, event: 
 proc fcQRadioButton_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QRadioButtonVTable](fcQRadioButton_vdata(self)[])
   let self = QRadioButton(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
 proc QRadioButtonconnectNotify*(self: gen_qradiobutton_types.QRadioButton, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -842,7 +862,7 @@ proc QRadioButtonconnectNotify*(self: gen_qradiobutton_types.QRadioButton, signa
 proc fcQRadioButton_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QRadioButtonVTable](fcQRadioButton_vdata(self)[])
   let self = QRadioButton(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
 proc QRadioButtondisconnectNotify*(self: gen_qradiobutton_types.QRadioButton, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -851,7 +871,7 @@ proc QRadioButtondisconnectNotify*(self: gen_qradiobutton_types.QRadioButton, si
 proc fcQRadioButton_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QRadioButtonVTable](fcQRadioButton_vdata(self)[])
   let self = QRadioButton(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
 type VirtualQRadioButton* {.inheritable.} = ref object of QRadioButton
@@ -899,7 +919,7 @@ method event*(self: VirtualQRadioButton, e: gen_qcoreevent_types.QEvent): bool {
   QRadioButtonevent(self[], e)
 proc fcQRadioButton_method_callback_event(self: pointer, e: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQRadioButton](fcQRadioButton_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: e)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: e, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
@@ -907,7 +927,7 @@ method hitButton*(self: VirtualQRadioButton, param1: gen_qpoint_types.QPoint): b
   QRadioButtonhitButton(self[], param1)
 proc fcQRadioButton_method_callback_hitButton(self: pointer, param1: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQRadioButton](fcQRadioButton_vdata(self)[])
-  let slotval1 = gen_qpoint_types.QPoint(h: param1)
+  let slotval1 = gen_qpoint_types.QPoint(h: param1, owned: false)
   var virtualReturn = inst.hitButton(slotval1)
   virtualReturn
 
@@ -915,21 +935,21 @@ method paintEvent*(self: VirtualQRadioButton, param1: gen_qevent_types.QPaintEve
   QRadioButtonpaintEvent(self[], param1)
 proc fcQRadioButton_method_callback_paintEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQRadioButton](fcQRadioButton_vdata(self)[])
-  let slotval1 = gen_qevent_types.QPaintEvent(h: param1)
+  let slotval1 = gen_qevent_types.QPaintEvent(h: param1, owned: false)
   inst.paintEvent(slotval1)
 
 method mouseMoveEvent*(self: VirtualQRadioButton, param1: gen_qevent_types.QMouseEvent): void {.base.} =
   QRadioButtonmouseMoveEvent(self[], param1)
 proc fcQRadioButton_method_callback_mouseMoveEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQRadioButton](fcQRadioButton_vdata(self)[])
-  let slotval1 = gen_qevent_types.QMouseEvent(h: param1)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: param1, owned: false)
   inst.mouseMoveEvent(slotval1)
 
 method initStyleOption*(self: VirtualQRadioButton, button: gen_qstyleoption_types.QStyleOptionButton): void {.base.} =
   QRadioButtoninitStyleOption(self[], button)
 proc fcQRadioButton_method_callback_initStyleOption(self: pointer, button: pointer): void {.cdecl.} =
   let inst = cast[VirtualQRadioButton](fcQRadioButton_vdata(self)[])
-  let slotval1 = gen_qstyleoption_types.QStyleOptionButton(h: button)
+  let slotval1 = gen_qstyleoption_types.QStyleOptionButton(h: button, owned: false)
   inst.initStyleOption(slotval1)
 
 method checkStateSet*(self: VirtualQRadioButton): void {.base.} =
@@ -948,56 +968,56 @@ method keyPressEvent*(self: VirtualQRadioButton, e: gen_qevent_types.QKeyEvent):
   QRadioButtonkeyPressEvent(self[], e)
 proc fcQRadioButton_method_callback_keyPressEvent(self: pointer, e: pointer): void {.cdecl.} =
   let inst = cast[VirtualQRadioButton](fcQRadioButton_vdata(self)[])
-  let slotval1 = gen_qevent_types.QKeyEvent(h: e)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: e, owned: false)
   inst.keyPressEvent(slotval1)
 
 method keyReleaseEvent*(self: VirtualQRadioButton, e: gen_qevent_types.QKeyEvent): void {.base.} =
   QRadioButtonkeyReleaseEvent(self[], e)
 proc fcQRadioButton_method_callback_keyReleaseEvent(self: pointer, e: pointer): void {.cdecl.} =
   let inst = cast[VirtualQRadioButton](fcQRadioButton_vdata(self)[])
-  let slotval1 = gen_qevent_types.QKeyEvent(h: e)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: e, owned: false)
   inst.keyReleaseEvent(slotval1)
 
 method mousePressEvent*(self: VirtualQRadioButton, e: gen_qevent_types.QMouseEvent): void {.base.} =
   QRadioButtonmousePressEvent(self[], e)
 proc fcQRadioButton_method_callback_mousePressEvent(self: pointer, e: pointer): void {.cdecl.} =
   let inst = cast[VirtualQRadioButton](fcQRadioButton_vdata(self)[])
-  let slotval1 = gen_qevent_types.QMouseEvent(h: e)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: e, owned: false)
   inst.mousePressEvent(slotval1)
 
 method mouseReleaseEvent*(self: VirtualQRadioButton, e: gen_qevent_types.QMouseEvent): void {.base.} =
   QRadioButtonmouseReleaseEvent(self[], e)
 proc fcQRadioButton_method_callback_mouseReleaseEvent(self: pointer, e: pointer): void {.cdecl.} =
   let inst = cast[VirtualQRadioButton](fcQRadioButton_vdata(self)[])
-  let slotval1 = gen_qevent_types.QMouseEvent(h: e)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: e, owned: false)
   inst.mouseReleaseEvent(slotval1)
 
 method focusInEvent*(self: VirtualQRadioButton, e: gen_qevent_types.QFocusEvent): void {.base.} =
   QRadioButtonfocusInEvent(self[], e)
 proc fcQRadioButton_method_callback_focusInEvent(self: pointer, e: pointer): void {.cdecl.} =
   let inst = cast[VirtualQRadioButton](fcQRadioButton_vdata(self)[])
-  let slotval1 = gen_qevent_types.QFocusEvent(h: e)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: e, owned: false)
   inst.focusInEvent(slotval1)
 
 method focusOutEvent*(self: VirtualQRadioButton, e: gen_qevent_types.QFocusEvent): void {.base.} =
   QRadioButtonfocusOutEvent(self[], e)
 proc fcQRadioButton_method_callback_focusOutEvent(self: pointer, e: pointer): void {.cdecl.} =
   let inst = cast[VirtualQRadioButton](fcQRadioButton_vdata(self)[])
-  let slotval1 = gen_qevent_types.QFocusEvent(h: e)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: e, owned: false)
   inst.focusOutEvent(slotval1)
 
 method changeEvent*(self: VirtualQRadioButton, e: gen_qcoreevent_types.QEvent): void {.base.} =
   QRadioButtonchangeEvent(self[], e)
 proc fcQRadioButton_method_callback_changeEvent(self: pointer, e: pointer): void {.cdecl.} =
   let inst = cast[VirtualQRadioButton](fcQRadioButton_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: e)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: e, owned: false)
   inst.changeEvent(slotval1)
 
 method timerEvent*(self: VirtualQRadioButton, e: gen_qcoreevent_types.QTimerEvent): void {.base.} =
   QRadioButtontimerEvent(self[], e)
 proc fcQRadioButton_method_callback_timerEvent(self: pointer, e: pointer): void {.cdecl.} =
   let inst = cast[VirtualQRadioButton](fcQRadioButton_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: e)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: e, owned: false)
   inst.timerEvent(slotval1)
 
 method devType*(self: VirtualQRadioButton): cint {.base.} =
@@ -1040,112 +1060,112 @@ method mouseDoubleClickEvent*(self: VirtualQRadioButton, event: gen_qevent_types
   QRadioButtonmouseDoubleClickEvent(self[], event)
 proc fcQRadioButton_method_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQRadioButton](fcQRadioButton_vdata(self)[])
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mouseDoubleClickEvent(slotval1)
 
 method wheelEvent*(self: VirtualQRadioButton, event: gen_qevent_types.QWheelEvent): void {.base.} =
   QRadioButtonwheelEvent(self[], event)
 proc fcQRadioButton_method_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQRadioButton](fcQRadioButton_vdata(self)[])
-  let slotval1 = gen_qevent_types.QWheelEvent(h: event)
+  let slotval1 = gen_qevent_types.QWheelEvent(h: event, owned: false)
   inst.wheelEvent(slotval1)
 
 method enterEvent*(self: VirtualQRadioButton, event: gen_qevent_types.QEnterEvent): void {.base.} =
   QRadioButtonenterEvent(self[], event)
 proc fcQRadioButton_method_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQRadioButton](fcQRadioButton_vdata(self)[])
-  let slotval1 = gen_qevent_types.QEnterEvent(h: event)
+  let slotval1 = gen_qevent_types.QEnterEvent(h: event, owned: false)
   inst.enterEvent(slotval1)
 
 method leaveEvent*(self: VirtualQRadioButton, event: gen_qcoreevent_types.QEvent): void {.base.} =
   QRadioButtonleaveEvent(self[], event)
 proc fcQRadioButton_method_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQRadioButton](fcQRadioButton_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.leaveEvent(slotval1)
 
 method moveEvent*(self: VirtualQRadioButton, event: gen_qevent_types.QMoveEvent): void {.base.} =
   QRadioButtonmoveEvent(self[], event)
 proc fcQRadioButton_method_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQRadioButton](fcQRadioButton_vdata(self)[])
-  let slotval1 = gen_qevent_types.QMoveEvent(h: event)
+  let slotval1 = gen_qevent_types.QMoveEvent(h: event, owned: false)
   inst.moveEvent(slotval1)
 
 method resizeEvent*(self: VirtualQRadioButton, event: gen_qevent_types.QResizeEvent): void {.base.} =
   QRadioButtonresizeEvent(self[], event)
 proc fcQRadioButton_method_callback_resizeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQRadioButton](fcQRadioButton_vdata(self)[])
-  let slotval1 = gen_qevent_types.QResizeEvent(h: event)
+  let slotval1 = gen_qevent_types.QResizeEvent(h: event, owned: false)
   inst.resizeEvent(slotval1)
 
 method closeEvent*(self: VirtualQRadioButton, event: gen_qevent_types.QCloseEvent): void {.base.} =
   QRadioButtoncloseEvent(self[], event)
 proc fcQRadioButton_method_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQRadioButton](fcQRadioButton_vdata(self)[])
-  let slotval1 = gen_qevent_types.QCloseEvent(h: event)
+  let slotval1 = gen_qevent_types.QCloseEvent(h: event, owned: false)
   inst.closeEvent(slotval1)
 
 method contextMenuEvent*(self: VirtualQRadioButton, event: gen_qevent_types.QContextMenuEvent): void {.base.} =
   QRadioButtoncontextMenuEvent(self[], event)
 proc fcQRadioButton_method_callback_contextMenuEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQRadioButton](fcQRadioButton_vdata(self)[])
-  let slotval1 = gen_qevent_types.QContextMenuEvent(h: event)
+  let slotval1 = gen_qevent_types.QContextMenuEvent(h: event, owned: false)
   inst.contextMenuEvent(slotval1)
 
 method tabletEvent*(self: VirtualQRadioButton, event: gen_qevent_types.QTabletEvent): void {.base.} =
   QRadioButtontabletEvent(self[], event)
 proc fcQRadioButton_method_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQRadioButton](fcQRadioButton_vdata(self)[])
-  let slotval1 = gen_qevent_types.QTabletEvent(h: event)
+  let slotval1 = gen_qevent_types.QTabletEvent(h: event, owned: false)
   inst.tabletEvent(slotval1)
 
 method actionEvent*(self: VirtualQRadioButton, event: gen_qevent_types.QActionEvent): void {.base.} =
   QRadioButtonactionEvent(self[], event)
 proc fcQRadioButton_method_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQRadioButton](fcQRadioButton_vdata(self)[])
-  let slotval1 = gen_qevent_types.QActionEvent(h: event)
+  let slotval1 = gen_qevent_types.QActionEvent(h: event, owned: false)
   inst.actionEvent(slotval1)
 
 method dragEnterEvent*(self: VirtualQRadioButton, event: gen_qevent_types.QDragEnterEvent): void {.base.} =
   QRadioButtondragEnterEvent(self[], event)
 proc fcQRadioButton_method_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQRadioButton](fcQRadioButton_vdata(self)[])
-  let slotval1 = gen_qevent_types.QDragEnterEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragEnterEvent(h: event, owned: false)
   inst.dragEnterEvent(slotval1)
 
 method dragMoveEvent*(self: VirtualQRadioButton, event: gen_qevent_types.QDragMoveEvent): void {.base.} =
   QRadioButtondragMoveEvent(self[], event)
 proc fcQRadioButton_method_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQRadioButton](fcQRadioButton_vdata(self)[])
-  let slotval1 = gen_qevent_types.QDragMoveEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragMoveEvent(h: event, owned: false)
   inst.dragMoveEvent(slotval1)
 
 method dragLeaveEvent*(self: VirtualQRadioButton, event: gen_qevent_types.QDragLeaveEvent): void {.base.} =
   QRadioButtondragLeaveEvent(self[], event)
 proc fcQRadioButton_method_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQRadioButton](fcQRadioButton_vdata(self)[])
-  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event, owned: false)
   inst.dragLeaveEvent(slotval1)
 
 method dropEvent*(self: VirtualQRadioButton, event: gen_qevent_types.QDropEvent): void {.base.} =
   QRadioButtondropEvent(self[], event)
 proc fcQRadioButton_method_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQRadioButton](fcQRadioButton_vdata(self)[])
-  let slotval1 = gen_qevent_types.QDropEvent(h: event)
+  let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
   inst.dropEvent(slotval1)
 
 method showEvent*(self: VirtualQRadioButton, event: gen_qevent_types.QShowEvent): void {.base.} =
   QRadioButtonshowEvent(self[], event)
 proc fcQRadioButton_method_callback_showEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQRadioButton](fcQRadioButton_vdata(self)[])
-  let slotval1 = gen_qevent_types.QShowEvent(h: event)
+  let slotval1 = gen_qevent_types.QShowEvent(h: event, owned: false)
   inst.showEvent(slotval1)
 
 method hideEvent*(self: VirtualQRadioButton, event: gen_qevent_types.QHideEvent): void {.base.} =
   QRadioButtonhideEvent(self[], event)
 proc fcQRadioButton_method_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQRadioButton](fcQRadioButton_vdata(self)[])
-  let slotval1 = gen_qevent_types.QHideEvent(h: event)
+  let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   inst.hideEvent(slotval1)
 
 method nativeEvent*(self: VirtualQRadioButton, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
@@ -1173,14 +1193,14 @@ method initPainter*(self: VirtualQRadioButton, painter: gen_qpainter_types.QPain
   QRadioButtoninitPainter(self[], painter)
 proc fcQRadioButton_method_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
   let inst = cast[VirtualQRadioButton](fcQRadioButton_vdata(self)[])
-  let slotval1 = gen_qpainter_types.QPainter(h: painter)
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
   inst.initPainter(slotval1)
 
 method redirected*(self: VirtualQRadioButton, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.base.} =
   QRadioButtonredirected(self[], offset)
 proc fcQRadioButton_method_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQRadioButton](fcQRadioButton_vdata(self)[])
-  let slotval1 = gen_qpoint_types.QPoint(h: offset)
+  let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
   var virtualReturn = inst.redirected(slotval1)
   virtualReturn.h
 
@@ -1195,7 +1215,7 @@ method inputMethodEvent*(self: VirtualQRadioButton, param1: gen_qevent_types.QIn
   QRadioButtoninputMethodEvent(self[], param1)
 proc fcQRadioButton_method_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQRadioButton](fcQRadioButton_vdata(self)[])
-  let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1)
+  let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1, owned: false)
   inst.inputMethodEvent(slotval1)
 
 method inputMethodQuery*(self: VirtualQRadioButton, param1: cint): gen_qvariant_types.QVariant {.base.} =
@@ -1218,8 +1238,8 @@ method eventFilter*(self: VirtualQRadioButton, watched: gen_qobject_types.QObjec
   QRadioButtoneventFilter(self[], watched, event)
 proc fcQRadioButton_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQRadioButton](fcQRadioButton_vdata(self)[])
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
@@ -1227,28 +1247,28 @@ method childEvent*(self: VirtualQRadioButton, event: gen_qcoreevent_types.QChild
   QRadioButtonchildEvent(self[], event)
 proc fcQRadioButton_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQRadioButton](fcQRadioButton_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
 method customEvent*(self: VirtualQRadioButton, event: gen_qcoreevent_types.QEvent): void {.base.} =
   QRadioButtoncustomEvent(self[], event)
 proc fcQRadioButton_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQRadioButton](fcQRadioButton_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
 method connectNotify*(self: VirtualQRadioButton, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
   QRadioButtonconnectNotify(self[], signal)
 proc fcQRadioButton_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQRadioButton](fcQRadioButton_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
 method disconnectNotify*(self: VirtualQRadioButton, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
   QRadioButtondisconnectNotify(self[], signal)
 proc fcQRadioButton_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQRadioButton](fcQRadioButton_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
 
 proc updateMicroFocus*(self: gen_qradiobutton_types.QRadioButton): void =
@@ -1267,7 +1287,7 @@ proc focusPreviousChild*(self: gen_qradiobutton_types.QRadioButton): bool =
   fcQRadioButton_protectedbase_focusPreviousChild(self.h)
 
 proc sender*(self: gen_qradiobutton_types.QRadioButton): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQRadioButton_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQRadioButton_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qradiobutton_types.QRadioButton): cint =
   fcQRadioButton_protectedbase_senderSignalIndex(self.h)
@@ -1394,7 +1414,7 @@ proc create*(T: type gen_qradiobutton_types.QRadioButton,
     vtbl[].vtbl.connectNotify = fcQRadioButton_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQRadioButton_vtable_callback_disconnectNotify
-  let tmp = gen_qradiobutton_types.QRadioButton(h: fcQRadioButton_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h))
+  let tmp = gen_qradiobutton_types.QRadioButton(h: fcQRadioButton_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h), owned: true)
   fcQRadioButton_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qradiobutton_types.QRadioButton,
@@ -1512,7 +1532,7 @@ proc create*(T: type gen_qradiobutton_types.QRadioButton,
     vtbl[].vtbl.connectNotify = fcQRadioButton_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQRadioButton_vtable_callback_disconnectNotify
-  let tmp = gen_qradiobutton_types.QRadioButton(h: fcQRadioButton_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer))))
+  let tmp = gen_qradiobutton_types.QRadioButton(h: fcQRadioButton_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer))), owned: true)
   fcQRadioButton_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qradiobutton_types.QRadioButton,
@@ -1631,7 +1651,7 @@ proc create*(T: type gen_qradiobutton_types.QRadioButton,
     vtbl[].vtbl.connectNotify = fcQRadioButton_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQRadioButton_vtable_callback_disconnectNotify
-  let tmp = gen_qradiobutton_types.QRadioButton(h: fcQRadioButton_new3(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))))
+  let tmp = gen_qradiobutton_types.QRadioButton(h: fcQRadioButton_new3(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))), owned: true)
   fcQRadioButton_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qradiobutton_types.QRadioButton,
@@ -1750,13 +1770,14 @@ proc create*(T: type gen_qradiobutton_types.QRadioButton,
     vtbl[].vtbl.connectNotify = fcQRadioButton_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQRadioButton_vtable_callback_disconnectNotify
-  let tmp = gen_qradiobutton_types.QRadioButton(h: fcQRadioButton_new4(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), parent.h))
+  let tmp = gen_qradiobutton_types.QRadioButton(h: fcQRadioButton_new4(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), parent.h), owned: true)
   fcQRadioButton_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQRadioButton_mvtbl = cQRadioButtonVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQRadioButton()[])](self.fcQRadioButton_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   metaObject: fcQRadioButton_method_callback_metaObject,
   metacast: fcQRadioButton_method_callback_metacast,
@@ -1842,5 +1863,3 @@ proc create*(T: type gen_qradiobutton_types.QRadioButton,
 
 proc staticMetaObject*(_: type gen_qradiobutton_types.QRadioButton): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQRadioButton_staticMetaObject())
-proc delete*(self: gen_qradiobutton_types.QRadioButton) =
-  fcQRadioButton_delete(self.h)

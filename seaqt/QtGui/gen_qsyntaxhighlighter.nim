@@ -32,7 +32,7 @@ func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
     else:
       copyMem(addr result[0], v.data, len)
 
-const cflags = gorge("pkg-config --cflags Qt6Gui")  & " -fPIC"
+const cflags = gorge("pkg-config --cflags Qt6Gui") & " -fPIC"
 {.compile("gen_qsyntaxhighlighter.cpp", cflags).}
 
 
@@ -114,10 +114,9 @@ proc fcQSyntaxHighlighter_protectedbase_isSignalConnected(self: pointer, signal:
 proc fcQSyntaxHighlighter_new(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQSyntaxHighlighter {.importc: "QSyntaxHighlighter_new".}
 proc fcQSyntaxHighlighter_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQSyntaxHighlighter {.importc: "QSyntaxHighlighter_new2".}
 proc fcQSyntaxHighlighter_staticMetaObject(): pointer {.importc: "QSyntaxHighlighter_staticMetaObject".}
-proc fcQSyntaxHighlighter_delete(self: pointer) {.importc: "QSyntaxHighlighter_delete".}
 
 proc metaObject*(self: gen_qsyntaxhighlighter_types.QSyntaxHighlighter): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQSyntaxHighlighter_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQSyntaxHighlighter_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qsyntaxhighlighter_types.QSyntaxHighlighter, param1: cstring): pointer =
   fcQSyntaxHighlighter_metacast(self.h, param1)
@@ -135,7 +134,7 @@ proc setDocument*(self: gen_qsyntaxhighlighter_types.QSyntaxHighlighter, doc: ge
   fcQSyntaxHighlighter_setDocument(self.h, doc.h)
 
 proc document*(self: gen_qsyntaxhighlighter_types.QSyntaxHighlighter): gen_qtextdocument_types.QTextDocument =
-  gen_qtextdocument_types.QTextDocument(h: fcQSyntaxHighlighter_document(self.h))
+  gen_qtextdocument_types.QTextDocument(h: fcQSyntaxHighlighter_document(self.h), owned: false)
 
 proc rehighlight*(self: gen_qsyntaxhighlighter_types.QSyntaxHighlighter): void =
   fcQSyntaxHighlighter_rehighlight(self.h)
@@ -166,7 +165,7 @@ type QSyntaxHighlighterchildEventProc* = proc(self: QSyntaxHighlighter, event: g
 type QSyntaxHighlightercustomEventProc* = proc(self: QSyntaxHighlighter, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QSyntaxHighlighterconnectNotifyProc* = proc(self: QSyntaxHighlighter, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QSyntaxHighlighterdisconnectNotifyProc* = proc(self: QSyntaxHighlighter, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
-type QSyntaxHighlighterVTable* = object
+type QSyntaxHighlighterVTable* {.inheritable, pure.} = object
   vtbl: cQSyntaxHighlighterVTable
   metaObject*: QSyntaxHighlightermetaObjectProc
   metacast*: QSyntaxHighlightermetacastProc
@@ -180,13 +179,16 @@ type QSyntaxHighlighterVTable* = object
   connectNotify*: QSyntaxHighlighterconnectNotifyProc
   disconnectNotify*: QSyntaxHighlighterdisconnectNotifyProc
 proc QSyntaxHighlightermetaObject*(self: gen_qsyntaxhighlighter_types.QSyntaxHighlighter): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQSyntaxHighlighter_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQSyntaxHighlighter_virtualbase_metaObject(self.h), owned: false)
 
 proc fcQSyntaxHighlighter_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QSyntaxHighlighterVTable](fcQSyntaxHighlighter_vdata(self)[])
   let self = QSyntaxHighlighter(h: self)
   var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QSyntaxHighlightermetacast*(self: gen_qsyntaxhighlighter_types.QSyntaxHighlighter, param1: cstring): pointer =
   fcQSyntaxHighlighter_virtualbase_metacast(self.h, param1)
@@ -225,7 +227,7 @@ proc QSyntaxHighlighterevent*(self: gen_qsyntaxhighlighter_types.QSyntaxHighligh
 proc fcQSyntaxHighlighter_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QSyntaxHighlighterVTable](fcQSyntaxHighlighter_vdata(self)[])
   let self = QSyntaxHighlighter(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
@@ -235,8 +237,8 @@ proc QSyntaxHighlightereventFilter*(self: gen_qsyntaxhighlighter_types.QSyntaxHi
 proc fcQSyntaxHighlighter_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QSyntaxHighlighterVTable](fcQSyntaxHighlighter_vdata(self)[])
   let self = QSyntaxHighlighter(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
@@ -246,7 +248,7 @@ proc QSyntaxHighlightertimerEvent*(self: gen_qsyntaxhighlighter_types.QSyntaxHig
 proc fcQSyntaxHighlighter_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSyntaxHighlighterVTable](fcQSyntaxHighlighter_vdata(self)[])
   let self = QSyntaxHighlighter(h: self)
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
 proc QSyntaxHighlighterchildEvent*(self: gen_qsyntaxhighlighter_types.QSyntaxHighlighter, event: gen_qcoreevent_types.QChildEvent): void =
@@ -255,7 +257,7 @@ proc QSyntaxHighlighterchildEvent*(self: gen_qsyntaxhighlighter_types.QSyntaxHig
 proc fcQSyntaxHighlighter_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSyntaxHighlighterVTable](fcQSyntaxHighlighter_vdata(self)[])
   let self = QSyntaxHighlighter(h: self)
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
 proc QSyntaxHighlightercustomEvent*(self: gen_qsyntaxhighlighter_types.QSyntaxHighlighter, event: gen_qcoreevent_types.QEvent): void =
@@ -264,7 +266,7 @@ proc QSyntaxHighlightercustomEvent*(self: gen_qsyntaxhighlighter_types.QSyntaxHi
 proc fcQSyntaxHighlighter_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSyntaxHighlighterVTable](fcQSyntaxHighlighter_vdata(self)[])
   let self = QSyntaxHighlighter(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
 proc QSyntaxHighlighterconnectNotify*(self: gen_qsyntaxhighlighter_types.QSyntaxHighlighter, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -273,7 +275,7 @@ proc QSyntaxHighlighterconnectNotify*(self: gen_qsyntaxhighlighter_types.QSyntax
 proc fcQSyntaxHighlighter_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSyntaxHighlighterVTable](fcQSyntaxHighlighter_vdata(self)[])
   let self = QSyntaxHighlighter(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
 proc QSyntaxHighlighterdisconnectNotify*(self: gen_qsyntaxhighlighter_types.QSyntaxHighlighter, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -282,7 +284,7 @@ proc QSyntaxHighlighterdisconnectNotify*(self: gen_qsyntaxhighlighter_types.QSyn
 proc fcQSyntaxHighlighter_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSyntaxHighlighterVTable](fcQSyntaxHighlighter_vdata(self)[])
   let self = QSyntaxHighlighter(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
 type VirtualQSyntaxHighlighter* {.inheritable.} = ref object of QSyntaxHighlighter
@@ -326,7 +328,7 @@ method event*(self: VirtualQSyntaxHighlighter, event: gen_qcoreevent_types.QEven
   QSyntaxHighlighterevent(self[], event)
 proc fcQSyntaxHighlighter_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQSyntaxHighlighter](fcQSyntaxHighlighter_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
@@ -334,8 +336,8 @@ method eventFilter*(self: VirtualQSyntaxHighlighter, watched: gen_qobject_types.
   QSyntaxHighlightereventFilter(self[], watched, event)
 proc fcQSyntaxHighlighter_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQSyntaxHighlighter](fcQSyntaxHighlighter_vdata(self)[])
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
@@ -343,35 +345,35 @@ method timerEvent*(self: VirtualQSyntaxHighlighter, event: gen_qcoreevent_types.
   QSyntaxHighlightertimerEvent(self[], event)
 proc fcQSyntaxHighlighter_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSyntaxHighlighter](fcQSyntaxHighlighter_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
 method childEvent*(self: VirtualQSyntaxHighlighter, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
   QSyntaxHighlighterchildEvent(self[], event)
 proc fcQSyntaxHighlighter_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSyntaxHighlighter](fcQSyntaxHighlighter_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
 method customEvent*(self: VirtualQSyntaxHighlighter, event: gen_qcoreevent_types.QEvent): void {.base.} =
   QSyntaxHighlightercustomEvent(self[], event)
 proc fcQSyntaxHighlighter_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSyntaxHighlighter](fcQSyntaxHighlighter_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
 method connectNotify*(self: VirtualQSyntaxHighlighter, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
   QSyntaxHighlighterconnectNotify(self[], signal)
 proc fcQSyntaxHighlighter_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSyntaxHighlighter](fcQSyntaxHighlighter_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
 method disconnectNotify*(self: VirtualQSyntaxHighlighter, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
   QSyntaxHighlighterdisconnectNotify(self[], signal)
 proc fcQSyntaxHighlighter_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSyntaxHighlighter](fcQSyntaxHighlighter_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
 
 proc setFormat*(self: gen_qsyntaxhighlighter_types.QSyntaxHighlighter, start: cint, count: cint, format: gen_qtextformat_types.QTextCharFormat): void =
@@ -384,7 +386,7 @@ proc setFormat*(self: gen_qsyntaxhighlighter_types.QSyntaxHighlighter, start: ci
   fcQSyntaxHighlighter_protectedbase_setFormat3(self.h, start, count, font.h)
 
 proc format*(self: gen_qsyntaxhighlighter_types.QSyntaxHighlighter, pos: cint): gen_qtextformat_types.QTextCharFormat =
-  gen_qtextformat_types.QTextCharFormat(h: fcQSyntaxHighlighter_protectedbase_format(self.h, pos))
+  gen_qtextformat_types.QTextCharFormat(h: fcQSyntaxHighlighter_protectedbase_format(self.h, pos), owned: true)
 
 proc previousBlockState*(self: gen_qsyntaxhighlighter_types.QSyntaxHighlighter): cint =
   fcQSyntaxHighlighter_protectedbase_previousBlockState(self.h)
@@ -399,13 +401,13 @@ proc setCurrentBlockUserData*(self: gen_qsyntaxhighlighter_types.QSyntaxHighligh
   fcQSyntaxHighlighter_protectedbase_setCurrentBlockUserData(self.h, data.h)
 
 proc currentBlockUserData*(self: gen_qsyntaxhighlighter_types.QSyntaxHighlighter): gen_qtextobject_types.QTextBlockUserData =
-  gen_qtextobject_types.QTextBlockUserData(h: fcQSyntaxHighlighter_protectedbase_currentBlockUserData(self.h))
+  gen_qtextobject_types.QTextBlockUserData(h: fcQSyntaxHighlighter_protectedbase_currentBlockUserData(self.h), owned: false)
 
 proc currentBlock*(self: gen_qsyntaxhighlighter_types.QSyntaxHighlighter): gen_qtextobject_types.QTextBlock =
-  gen_qtextobject_types.QTextBlock(h: fcQSyntaxHighlighter_protectedbase_currentBlock(self.h))
+  gen_qtextobject_types.QTextBlock(h: fcQSyntaxHighlighter_protectedbase_currentBlock(self.h), owned: true)
 
 proc sender*(self: gen_qsyntaxhighlighter_types.QSyntaxHighlighter): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQSyntaxHighlighter_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQSyntaxHighlighter_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qsyntaxhighlighter_types.QSyntaxHighlighter): cint =
   fcQSyntaxHighlighter_protectedbase_senderSignalIndex(self.h)
@@ -446,7 +448,7 @@ proc create*(T: type gen_qsyntaxhighlighter_types.QSyntaxHighlighter,
     vtbl[].vtbl.connectNotify = fcQSyntaxHighlighter_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQSyntaxHighlighter_vtable_callback_disconnectNotify
-  let tmp = gen_qsyntaxhighlighter_types.QSyntaxHighlighter(h: fcQSyntaxHighlighter_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h))
+  let tmp = gen_qsyntaxhighlighter_types.QSyntaxHighlighter(h: fcQSyntaxHighlighter_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h), owned: true)
   fcQSyntaxHighlighter_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qsyntaxhighlighter_types.QSyntaxHighlighter,
@@ -479,13 +481,14 @@ proc create*(T: type gen_qsyntaxhighlighter_types.QSyntaxHighlighter,
     vtbl[].vtbl.connectNotify = fcQSyntaxHighlighter_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQSyntaxHighlighter_vtable_callback_disconnectNotify
-  let tmp = gen_qsyntaxhighlighter_types.QSyntaxHighlighter(h: fcQSyntaxHighlighter_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h))
+  let tmp = gen_qsyntaxhighlighter_types.QSyntaxHighlighter(h: fcQSyntaxHighlighter_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h), owned: true)
   fcQSyntaxHighlighter_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQSyntaxHighlighter_mvtbl = cQSyntaxHighlighterVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQSyntaxHighlighter()[])](self.fcQSyntaxHighlighter_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   metaObject: fcQSyntaxHighlighter_method_callback_metaObject,
   metacast: fcQSyntaxHighlighter_method_callback_metacast,
@@ -515,5 +518,3 @@ proc create*(T: type gen_qsyntaxhighlighter_types.QSyntaxHighlighter,
 
 proc staticMetaObject*(_: type gen_qsyntaxhighlighter_types.QSyntaxHighlighter): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQSyntaxHighlighter_staticMetaObject())
-proc delete*(self: gen_qsyntaxhighlighter_types.QSyntaxHighlighter) =
-  fcQSyntaxHighlighter_delete(self.h)

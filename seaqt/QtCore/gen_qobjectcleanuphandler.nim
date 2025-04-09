@@ -32,7 +32,7 @@ func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
     else:
       copyMem(addr result[0], v.data, len)
 
-const cflags = gorge("pkg-config --cflags Qt6Core")  & " -fPIC"
+const cflags = gorge("pkg-config --cflags Qt6Core") & " -fPIC"
 {.compile("gen_qobjectcleanuphandler.cpp", cflags).}
 
 
@@ -92,10 +92,9 @@ proc fcQObjectCleanupHandler_protectedbase_receivers(self: pointer, signal: cstr
 proc fcQObjectCleanupHandler_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QObjectCleanupHandler_protectedbase_isSignalConnected".}
 proc fcQObjectCleanupHandler_new(vtbl: pointer, vdata: csize_t): ptr cQObjectCleanupHandler {.importc: "QObjectCleanupHandler_new".}
 proc fcQObjectCleanupHandler_staticMetaObject(): pointer {.importc: "QObjectCleanupHandler_staticMetaObject".}
-proc fcQObjectCleanupHandler_delete(self: pointer) {.importc: "QObjectCleanupHandler_delete".}
 
 proc metaObject*(self: gen_qobjectcleanuphandler_types.QObjectCleanupHandler): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQObjectCleanupHandler_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQObjectCleanupHandler_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qobjectcleanuphandler_types.QObjectCleanupHandler, param1: cstring): pointer =
   fcQObjectCleanupHandler_metacast(self.h, param1)
@@ -110,7 +109,7 @@ proc tr*(_: type gen_qobjectcleanuphandler_types.QObjectCleanupHandler, s: cstri
   vx_ret
 
 proc add*(self: gen_qobjectcleanuphandler_types.QObjectCleanupHandler, objectVal: gen_qobject_types.QObject): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQObjectCleanupHandler_add(self.h, objectVal.h))
+  gen_qobject_types.QObject(h: fcQObjectCleanupHandler_add(self.h, objectVal.h), owned: false)
 
 proc remove*(self: gen_qobjectcleanuphandler_types.QObjectCleanupHandler, objectVal: gen_qobject_types.QObject): void =
   fcQObjectCleanupHandler_remove(self.h, objectVal.h)
@@ -143,7 +142,7 @@ type QObjectCleanupHandlerchildEventProc* = proc(self: QObjectCleanupHandler, ev
 type QObjectCleanupHandlercustomEventProc* = proc(self: QObjectCleanupHandler, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QObjectCleanupHandlerconnectNotifyProc* = proc(self: QObjectCleanupHandler, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QObjectCleanupHandlerdisconnectNotifyProc* = proc(self: QObjectCleanupHandler, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
-type QObjectCleanupHandlerVTable* = object
+type QObjectCleanupHandlerVTable* {.inheritable, pure.} = object
   vtbl: cQObjectCleanupHandlerVTable
   metaObject*: QObjectCleanupHandlermetaObjectProc
   metacast*: QObjectCleanupHandlermetacastProc
@@ -156,13 +155,16 @@ type QObjectCleanupHandlerVTable* = object
   connectNotify*: QObjectCleanupHandlerconnectNotifyProc
   disconnectNotify*: QObjectCleanupHandlerdisconnectNotifyProc
 proc QObjectCleanupHandlermetaObject*(self: gen_qobjectcleanuphandler_types.QObjectCleanupHandler): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQObjectCleanupHandler_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQObjectCleanupHandler_virtualbase_metaObject(self.h), owned: false)
 
 proc fcQObjectCleanupHandler_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QObjectCleanupHandlerVTable](fcQObjectCleanupHandler_vdata(self)[])
   let self = QObjectCleanupHandler(h: self)
   var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QObjectCleanupHandlermetacast*(self: gen_qobjectcleanuphandler_types.QObjectCleanupHandler, param1: cstring): pointer =
   fcQObjectCleanupHandler_virtualbase_metacast(self.h, param1)
@@ -192,7 +194,7 @@ proc QObjectCleanupHandlerevent*(self: gen_qobjectcleanuphandler_types.QObjectCl
 proc fcQObjectCleanupHandler_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QObjectCleanupHandlerVTable](fcQObjectCleanupHandler_vdata(self)[])
   let self = QObjectCleanupHandler(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
@@ -202,8 +204,8 @@ proc QObjectCleanupHandlereventFilter*(self: gen_qobjectcleanuphandler_types.QOb
 proc fcQObjectCleanupHandler_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QObjectCleanupHandlerVTable](fcQObjectCleanupHandler_vdata(self)[])
   let self = QObjectCleanupHandler(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
@@ -213,7 +215,7 @@ proc QObjectCleanupHandlertimerEvent*(self: gen_qobjectcleanuphandler_types.QObj
 proc fcQObjectCleanupHandler_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QObjectCleanupHandlerVTable](fcQObjectCleanupHandler_vdata(self)[])
   let self = QObjectCleanupHandler(h: self)
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
 proc QObjectCleanupHandlerchildEvent*(self: gen_qobjectcleanuphandler_types.QObjectCleanupHandler, event: gen_qcoreevent_types.QChildEvent): void =
@@ -222,7 +224,7 @@ proc QObjectCleanupHandlerchildEvent*(self: gen_qobjectcleanuphandler_types.QObj
 proc fcQObjectCleanupHandler_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QObjectCleanupHandlerVTable](fcQObjectCleanupHandler_vdata(self)[])
   let self = QObjectCleanupHandler(h: self)
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
 proc QObjectCleanupHandlercustomEvent*(self: gen_qobjectcleanuphandler_types.QObjectCleanupHandler, event: gen_qcoreevent_types.QEvent): void =
@@ -231,7 +233,7 @@ proc QObjectCleanupHandlercustomEvent*(self: gen_qobjectcleanuphandler_types.QOb
 proc fcQObjectCleanupHandler_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QObjectCleanupHandlerVTable](fcQObjectCleanupHandler_vdata(self)[])
   let self = QObjectCleanupHandler(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
 proc QObjectCleanupHandlerconnectNotify*(self: gen_qobjectcleanuphandler_types.QObjectCleanupHandler, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -240,7 +242,7 @@ proc QObjectCleanupHandlerconnectNotify*(self: gen_qobjectcleanuphandler_types.Q
 proc fcQObjectCleanupHandler_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QObjectCleanupHandlerVTable](fcQObjectCleanupHandler_vdata(self)[])
   let self = QObjectCleanupHandler(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
 proc QObjectCleanupHandlerdisconnectNotify*(self: gen_qobjectcleanuphandler_types.QObjectCleanupHandler, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -249,7 +251,7 @@ proc QObjectCleanupHandlerdisconnectNotify*(self: gen_qobjectcleanuphandler_type
 proc fcQObjectCleanupHandler_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QObjectCleanupHandlerVTable](fcQObjectCleanupHandler_vdata(self)[])
   let self = QObjectCleanupHandler(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
 type VirtualQObjectCleanupHandler* {.inheritable.} = ref object of QObjectCleanupHandler
@@ -283,7 +285,7 @@ method event*(self: VirtualQObjectCleanupHandler, event: gen_qcoreevent_types.QE
   QObjectCleanupHandlerevent(self[], event)
 proc fcQObjectCleanupHandler_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQObjectCleanupHandler](fcQObjectCleanupHandler_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
@@ -291,8 +293,8 @@ method eventFilter*(self: VirtualQObjectCleanupHandler, watched: gen_qobject_typ
   QObjectCleanupHandlereventFilter(self[], watched, event)
 proc fcQObjectCleanupHandler_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQObjectCleanupHandler](fcQObjectCleanupHandler_vdata(self)[])
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
@@ -300,39 +302,39 @@ method timerEvent*(self: VirtualQObjectCleanupHandler, event: gen_qcoreevent_typ
   QObjectCleanupHandlertimerEvent(self[], event)
 proc fcQObjectCleanupHandler_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQObjectCleanupHandler](fcQObjectCleanupHandler_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
 method childEvent*(self: VirtualQObjectCleanupHandler, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
   QObjectCleanupHandlerchildEvent(self[], event)
 proc fcQObjectCleanupHandler_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQObjectCleanupHandler](fcQObjectCleanupHandler_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
 method customEvent*(self: VirtualQObjectCleanupHandler, event: gen_qcoreevent_types.QEvent): void {.base.} =
   QObjectCleanupHandlercustomEvent(self[], event)
 proc fcQObjectCleanupHandler_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQObjectCleanupHandler](fcQObjectCleanupHandler_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
 method connectNotify*(self: VirtualQObjectCleanupHandler, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
   QObjectCleanupHandlerconnectNotify(self[], signal)
 proc fcQObjectCleanupHandler_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQObjectCleanupHandler](fcQObjectCleanupHandler_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
 method disconnectNotify*(self: VirtualQObjectCleanupHandler, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
   QObjectCleanupHandlerdisconnectNotify(self[], signal)
 proc fcQObjectCleanupHandler_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQObjectCleanupHandler](fcQObjectCleanupHandler_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
 
 proc sender*(self: gen_qobjectcleanuphandler_types.QObjectCleanupHandler): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQObjectCleanupHandler_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQObjectCleanupHandler_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qobjectcleanuphandler_types.QObjectCleanupHandler): cint =
   fcQObjectCleanupHandler_protectedbase_senderSignalIndex(self.h)
@@ -370,13 +372,14 @@ proc create*(T: type gen_qobjectcleanuphandler_types.QObjectCleanupHandler,
     vtbl[].vtbl.connectNotify = fcQObjectCleanupHandler_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQObjectCleanupHandler_vtable_callback_disconnectNotify
-  let tmp = gen_qobjectcleanuphandler_types.QObjectCleanupHandler(h: fcQObjectCleanupHandler_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))))
+  let tmp = gen_qobjectcleanuphandler_types.QObjectCleanupHandler(h: fcQObjectCleanupHandler_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))), owned: true)
   fcQObjectCleanupHandler_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQObjectCleanupHandler_mvtbl = cQObjectCleanupHandlerVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQObjectCleanupHandler()[])](self.fcQObjectCleanupHandler_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   metaObject: fcQObjectCleanupHandler_method_callback_metaObject,
   metacast: fcQObjectCleanupHandler_method_callback_metacast,
@@ -397,5 +400,3 @@ proc create*(T: type gen_qobjectcleanuphandler_types.QObjectCleanupHandler,
 
 proc staticMetaObject*(_: type gen_qobjectcleanuphandler_types.QObjectCleanupHandler): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQObjectCleanupHandler_staticMetaObject())
-proc delete*(self: gen_qobjectcleanuphandler_types.QObjectCleanupHandler) =
-  fcQObjectCleanupHandler_delete(self.h)

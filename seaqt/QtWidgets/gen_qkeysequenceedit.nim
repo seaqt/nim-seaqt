@@ -32,7 +32,7 @@ func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
     else:
       copyMem(addr result[0], v.data, len)
 
-const cflags = gorge("pkg-config --cflags Qt6Widgets")  & " -fPIC"
+const cflags = gorge("pkg-config --cflags Qt6Widgets") & " -fPIC"
 {.compile("gen_qkeysequenceedit.cpp", cflags).}
 
 
@@ -203,10 +203,9 @@ proc fcQKeySequenceEdit_new2(vtbl: pointer, vdata: csize_t): ptr cQKeySequenceEd
 proc fcQKeySequenceEdit_new3(vtbl: pointer, vdata: csize_t, keySequence: pointer): ptr cQKeySequenceEdit {.importc: "QKeySequenceEdit_new3".}
 proc fcQKeySequenceEdit_new4(vtbl: pointer, vdata: csize_t, keySequence: pointer, parent: pointer): ptr cQKeySequenceEdit {.importc: "QKeySequenceEdit_new4".}
 proc fcQKeySequenceEdit_staticMetaObject(): pointer {.importc: "QKeySequenceEdit_staticMetaObject".}
-proc fcQKeySequenceEdit_delete(self: pointer) {.importc: "QKeySequenceEdit_delete".}
 
 proc metaObject*(self: gen_qkeysequenceedit_types.QKeySequenceEdit): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQKeySequenceEdit_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQKeySequenceEdit_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qkeysequenceedit_types.QKeySequenceEdit, param1: cstring): pointer =
   fcQKeySequenceEdit_metacast(self.h, param1)
@@ -221,7 +220,7 @@ proc tr*(_: type gen_qkeysequenceedit_types.QKeySequenceEdit, s: cstring): strin
   vx_ret
 
 proc keySequence*(self: gen_qkeysequenceedit_types.QKeySequenceEdit): gen_qkeysequence_types.QKeySequence =
-  gen_qkeysequence_types.QKeySequence(h: fcQKeySequenceEdit_keySequence(self.h))
+  gen_qkeysequence_types.QKeySequence(h: fcQKeySequenceEdit_keySequence(self.h), owned: true)
 
 proc setClearButtonEnabled*(self: gen_qkeysequenceedit_types.QKeySequenceEdit, enable: bool): void =
   fcQKeySequenceEdit_setClearButtonEnabled(self.h, enable)
@@ -259,7 +258,7 @@ proc keySequenceChanged*(self: gen_qkeysequenceedit_types.QKeySequenceEdit, keyS
 type QKeySequenceEditkeySequenceChangedSlot* = proc(keySequence: gen_qkeysequence_types.QKeySequence)
 proc fcQKeySequenceEdit_slot_callback_keySequenceChanged(slot: int, keySequence: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QKeySequenceEditkeySequenceChangedSlot](cast[pointer](slot))
-  let slotval1 = gen_qkeysequence_types.QKeySequence(h: keySequence)
+  let slotval1 = gen_qkeysequence_types.QKeySequence(h: keySequence, owned: false)
 
   nimfunc[](slotval1)
 
@@ -335,7 +334,7 @@ type QKeySequenceEditchildEventProc* = proc(self: QKeySequenceEdit, event: gen_q
 type QKeySequenceEditcustomEventProc* = proc(self: QKeySequenceEdit, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QKeySequenceEditconnectNotifyProc* = proc(self: QKeySequenceEdit, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QKeySequenceEditdisconnectNotifyProc* = proc(self: QKeySequenceEdit, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
-type QKeySequenceEditVTable* = object
+type QKeySequenceEditVTable* {.inheritable, pure.} = object
   vtbl: cQKeySequenceEditVTable
   metaObject*: QKeySequenceEditmetaObjectProc
   metacast*: QKeySequenceEditmetacastProc
@@ -388,13 +387,16 @@ type QKeySequenceEditVTable* = object
   connectNotify*: QKeySequenceEditconnectNotifyProc
   disconnectNotify*: QKeySequenceEditdisconnectNotifyProc
 proc QKeySequenceEditmetaObject*(self: gen_qkeysequenceedit_types.QKeySequenceEdit): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQKeySequenceEdit_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQKeySequenceEdit_virtualbase_metaObject(self.h), owned: false)
 
 proc fcQKeySequenceEdit_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QKeySequenceEditVTable](fcQKeySequenceEdit_vdata(self)[])
   let self = QKeySequenceEdit(h: self)
   var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QKeySequenceEditmetacast*(self: gen_qkeysequenceedit_types.QKeySequenceEdit, param1: cstring): pointer =
   fcQKeySequenceEdit_virtualbase_metacast(self.h, param1)
@@ -424,7 +426,7 @@ proc QKeySequenceEditevent*(self: gen_qkeysequenceedit_types.QKeySequenceEdit, p
 proc fcQKeySequenceEdit_vtable_callback_event(self: pointer, param1: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QKeySequenceEditVTable](fcQKeySequenceEdit_vdata(self)[])
   let self = QKeySequenceEdit(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: param1)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
@@ -434,7 +436,7 @@ proc QKeySequenceEditkeyPressEvent*(self: gen_qkeysequenceedit_types.QKeySequenc
 proc fcQKeySequenceEdit_vtable_callback_keyPressEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QKeySequenceEditVTable](fcQKeySequenceEdit_vdata(self)[])
   let self = QKeySequenceEdit(h: self)
-  let slotval1 = gen_qevent_types.QKeyEvent(h: param1)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: param1, owned: false)
   vtbl[].keyPressEvent(self, slotval1)
 
 proc QKeySequenceEditkeyReleaseEvent*(self: gen_qkeysequenceedit_types.QKeySequenceEdit, param1: gen_qevent_types.QKeyEvent): void =
@@ -443,7 +445,7 @@ proc QKeySequenceEditkeyReleaseEvent*(self: gen_qkeysequenceedit_types.QKeySeque
 proc fcQKeySequenceEdit_vtable_callback_keyReleaseEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QKeySequenceEditVTable](fcQKeySequenceEdit_vdata(self)[])
   let self = QKeySequenceEdit(h: self)
-  let slotval1 = gen_qevent_types.QKeyEvent(h: param1)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: param1, owned: false)
   vtbl[].keyReleaseEvent(self, slotval1)
 
 proc QKeySequenceEdittimerEvent*(self: gen_qkeysequenceedit_types.QKeySequenceEdit, param1: gen_qcoreevent_types.QTimerEvent): void =
@@ -452,7 +454,7 @@ proc QKeySequenceEdittimerEvent*(self: gen_qkeysequenceedit_types.QKeySequenceEd
 proc fcQKeySequenceEdit_vtable_callback_timerEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QKeySequenceEditVTable](fcQKeySequenceEdit_vdata(self)[])
   let self = QKeySequenceEdit(h: self)
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: param1)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: param1, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
 proc QKeySequenceEditfocusOutEvent*(self: gen_qkeysequenceedit_types.QKeySequenceEdit, param1: gen_qevent_types.QFocusEvent): void =
@@ -461,7 +463,7 @@ proc QKeySequenceEditfocusOutEvent*(self: gen_qkeysequenceedit_types.QKeySequenc
 proc fcQKeySequenceEdit_vtable_callback_focusOutEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QKeySequenceEditVTable](fcQKeySequenceEdit_vdata(self)[])
   let self = QKeySequenceEdit(h: self)
-  let slotval1 = gen_qevent_types.QFocusEvent(h: param1)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: param1, owned: false)
   vtbl[].focusOutEvent(self, slotval1)
 
 proc QKeySequenceEditdevType*(self: gen_qkeysequenceedit_types.QKeySequenceEdit): cint =
@@ -483,22 +485,28 @@ proc fcQKeySequenceEdit_vtable_callback_setVisible(self: pointer, visible: bool)
   vtbl[].setVisible(self, slotval1)
 
 proc QKeySequenceEditsizeHint*(self: gen_qkeysequenceedit_types.QKeySequenceEdit): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQKeySequenceEdit_virtualbase_sizeHint(self.h))
+  gen_qsize_types.QSize(h: fcQKeySequenceEdit_virtualbase_sizeHint(self.h), owned: true)
 
 proc fcQKeySequenceEdit_vtable_callback_sizeHint(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QKeySequenceEditVTable](fcQKeySequenceEdit_vdata(self)[])
   let self = QKeySequenceEdit(h: self)
   var virtualReturn = vtbl[].sizeHint(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QKeySequenceEditminimumSizeHint*(self: gen_qkeysequenceedit_types.QKeySequenceEdit): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQKeySequenceEdit_virtualbase_minimumSizeHint(self.h))
+  gen_qsize_types.QSize(h: fcQKeySequenceEdit_virtualbase_minimumSizeHint(self.h), owned: true)
 
 proc fcQKeySequenceEdit_vtable_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QKeySequenceEditVTable](fcQKeySequenceEdit_vdata(self)[])
   let self = QKeySequenceEdit(h: self)
   var virtualReturn = vtbl[].minimumSizeHint(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QKeySequenceEditheightForWidth*(self: gen_qkeysequenceedit_types.QKeySequenceEdit, param1: cint): cint =
   fcQKeySequenceEdit_virtualbase_heightForWidth(self.h, param1)
@@ -520,13 +528,16 @@ proc fcQKeySequenceEdit_vtable_callback_hasHeightForWidth(self: pointer): bool {
   virtualReturn
 
 proc QKeySequenceEditpaintEngine*(self: gen_qkeysequenceedit_types.QKeySequenceEdit): gen_qpaintengine_types.QPaintEngine =
-  gen_qpaintengine_types.QPaintEngine(h: fcQKeySequenceEdit_virtualbase_paintEngine(self.h))
+  gen_qpaintengine_types.QPaintEngine(h: fcQKeySequenceEdit_virtualbase_paintEngine(self.h), owned: false)
 
 proc fcQKeySequenceEdit_vtable_callback_paintEngine(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QKeySequenceEditVTable](fcQKeySequenceEdit_vdata(self)[])
   let self = QKeySequenceEdit(h: self)
   var virtualReturn = vtbl[].paintEngine(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QKeySequenceEditmousePressEvent*(self: gen_qkeysequenceedit_types.QKeySequenceEdit, event: gen_qevent_types.QMouseEvent): void =
   fcQKeySequenceEdit_virtualbase_mousePressEvent(self.h, event.h)
@@ -534,7 +545,7 @@ proc QKeySequenceEditmousePressEvent*(self: gen_qkeysequenceedit_types.QKeySeque
 proc fcQKeySequenceEdit_vtable_callback_mousePressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QKeySequenceEditVTable](fcQKeySequenceEdit_vdata(self)[])
   let self = QKeySequenceEdit(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mousePressEvent(self, slotval1)
 
 proc QKeySequenceEditmouseReleaseEvent*(self: gen_qkeysequenceedit_types.QKeySequenceEdit, event: gen_qevent_types.QMouseEvent): void =
@@ -543,7 +554,7 @@ proc QKeySequenceEditmouseReleaseEvent*(self: gen_qkeysequenceedit_types.QKeySeq
 proc fcQKeySequenceEdit_vtable_callback_mouseReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QKeySequenceEditVTable](fcQKeySequenceEdit_vdata(self)[])
   let self = QKeySequenceEdit(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseReleaseEvent(self, slotval1)
 
 proc QKeySequenceEditmouseDoubleClickEvent*(self: gen_qkeysequenceedit_types.QKeySequenceEdit, event: gen_qevent_types.QMouseEvent): void =
@@ -552,7 +563,7 @@ proc QKeySequenceEditmouseDoubleClickEvent*(self: gen_qkeysequenceedit_types.QKe
 proc fcQKeySequenceEdit_vtable_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QKeySequenceEditVTable](fcQKeySequenceEdit_vdata(self)[])
   let self = QKeySequenceEdit(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseDoubleClickEvent(self, slotval1)
 
 proc QKeySequenceEditmouseMoveEvent*(self: gen_qkeysequenceedit_types.QKeySequenceEdit, event: gen_qevent_types.QMouseEvent): void =
@@ -561,7 +572,7 @@ proc QKeySequenceEditmouseMoveEvent*(self: gen_qkeysequenceedit_types.QKeySequen
 proc fcQKeySequenceEdit_vtable_callback_mouseMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QKeySequenceEditVTable](fcQKeySequenceEdit_vdata(self)[])
   let self = QKeySequenceEdit(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseMoveEvent(self, slotval1)
 
 proc QKeySequenceEditwheelEvent*(self: gen_qkeysequenceedit_types.QKeySequenceEdit, event: gen_qevent_types.QWheelEvent): void =
@@ -570,7 +581,7 @@ proc QKeySequenceEditwheelEvent*(self: gen_qkeysequenceedit_types.QKeySequenceEd
 proc fcQKeySequenceEdit_vtable_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QKeySequenceEditVTable](fcQKeySequenceEdit_vdata(self)[])
   let self = QKeySequenceEdit(h: self)
-  let slotval1 = gen_qevent_types.QWheelEvent(h: event)
+  let slotval1 = gen_qevent_types.QWheelEvent(h: event, owned: false)
   vtbl[].wheelEvent(self, slotval1)
 
 proc QKeySequenceEditfocusInEvent*(self: gen_qkeysequenceedit_types.QKeySequenceEdit, event: gen_qevent_types.QFocusEvent): void =
@@ -579,7 +590,7 @@ proc QKeySequenceEditfocusInEvent*(self: gen_qkeysequenceedit_types.QKeySequence
 proc fcQKeySequenceEdit_vtable_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QKeySequenceEditVTable](fcQKeySequenceEdit_vdata(self)[])
   let self = QKeySequenceEdit(h: self)
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusInEvent(self, slotval1)
 
 proc QKeySequenceEditenterEvent*(self: gen_qkeysequenceedit_types.QKeySequenceEdit, event: gen_qevent_types.QEnterEvent): void =
@@ -588,7 +599,7 @@ proc QKeySequenceEditenterEvent*(self: gen_qkeysequenceedit_types.QKeySequenceEd
 proc fcQKeySequenceEdit_vtable_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QKeySequenceEditVTable](fcQKeySequenceEdit_vdata(self)[])
   let self = QKeySequenceEdit(h: self)
-  let slotval1 = gen_qevent_types.QEnterEvent(h: event)
+  let slotval1 = gen_qevent_types.QEnterEvent(h: event, owned: false)
   vtbl[].enterEvent(self, slotval1)
 
 proc QKeySequenceEditleaveEvent*(self: gen_qkeysequenceedit_types.QKeySequenceEdit, event: gen_qcoreevent_types.QEvent): void =
@@ -597,7 +608,7 @@ proc QKeySequenceEditleaveEvent*(self: gen_qkeysequenceedit_types.QKeySequenceEd
 proc fcQKeySequenceEdit_vtable_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QKeySequenceEditVTable](fcQKeySequenceEdit_vdata(self)[])
   let self = QKeySequenceEdit(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].leaveEvent(self, slotval1)
 
 proc QKeySequenceEditpaintEvent*(self: gen_qkeysequenceedit_types.QKeySequenceEdit, event: gen_qevent_types.QPaintEvent): void =
@@ -606,7 +617,7 @@ proc QKeySequenceEditpaintEvent*(self: gen_qkeysequenceedit_types.QKeySequenceEd
 proc fcQKeySequenceEdit_vtable_callback_paintEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QKeySequenceEditVTable](fcQKeySequenceEdit_vdata(self)[])
   let self = QKeySequenceEdit(h: self)
-  let slotval1 = gen_qevent_types.QPaintEvent(h: event)
+  let slotval1 = gen_qevent_types.QPaintEvent(h: event, owned: false)
   vtbl[].paintEvent(self, slotval1)
 
 proc QKeySequenceEditmoveEvent*(self: gen_qkeysequenceedit_types.QKeySequenceEdit, event: gen_qevent_types.QMoveEvent): void =
@@ -615,7 +626,7 @@ proc QKeySequenceEditmoveEvent*(self: gen_qkeysequenceedit_types.QKeySequenceEdi
 proc fcQKeySequenceEdit_vtable_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QKeySequenceEditVTable](fcQKeySequenceEdit_vdata(self)[])
   let self = QKeySequenceEdit(h: self)
-  let slotval1 = gen_qevent_types.QMoveEvent(h: event)
+  let slotval1 = gen_qevent_types.QMoveEvent(h: event, owned: false)
   vtbl[].moveEvent(self, slotval1)
 
 proc QKeySequenceEditresizeEvent*(self: gen_qkeysequenceedit_types.QKeySequenceEdit, event: gen_qevent_types.QResizeEvent): void =
@@ -624,7 +635,7 @@ proc QKeySequenceEditresizeEvent*(self: gen_qkeysequenceedit_types.QKeySequenceE
 proc fcQKeySequenceEdit_vtable_callback_resizeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QKeySequenceEditVTable](fcQKeySequenceEdit_vdata(self)[])
   let self = QKeySequenceEdit(h: self)
-  let slotval1 = gen_qevent_types.QResizeEvent(h: event)
+  let slotval1 = gen_qevent_types.QResizeEvent(h: event, owned: false)
   vtbl[].resizeEvent(self, slotval1)
 
 proc QKeySequenceEditcloseEvent*(self: gen_qkeysequenceedit_types.QKeySequenceEdit, event: gen_qevent_types.QCloseEvent): void =
@@ -633,7 +644,7 @@ proc QKeySequenceEditcloseEvent*(self: gen_qkeysequenceedit_types.QKeySequenceEd
 proc fcQKeySequenceEdit_vtable_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QKeySequenceEditVTable](fcQKeySequenceEdit_vdata(self)[])
   let self = QKeySequenceEdit(h: self)
-  let slotval1 = gen_qevent_types.QCloseEvent(h: event)
+  let slotval1 = gen_qevent_types.QCloseEvent(h: event, owned: false)
   vtbl[].closeEvent(self, slotval1)
 
 proc QKeySequenceEditcontextMenuEvent*(self: gen_qkeysequenceedit_types.QKeySequenceEdit, event: gen_qevent_types.QContextMenuEvent): void =
@@ -642,7 +653,7 @@ proc QKeySequenceEditcontextMenuEvent*(self: gen_qkeysequenceedit_types.QKeySequ
 proc fcQKeySequenceEdit_vtable_callback_contextMenuEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QKeySequenceEditVTable](fcQKeySequenceEdit_vdata(self)[])
   let self = QKeySequenceEdit(h: self)
-  let slotval1 = gen_qevent_types.QContextMenuEvent(h: event)
+  let slotval1 = gen_qevent_types.QContextMenuEvent(h: event, owned: false)
   vtbl[].contextMenuEvent(self, slotval1)
 
 proc QKeySequenceEdittabletEvent*(self: gen_qkeysequenceedit_types.QKeySequenceEdit, event: gen_qevent_types.QTabletEvent): void =
@@ -651,7 +662,7 @@ proc QKeySequenceEdittabletEvent*(self: gen_qkeysequenceedit_types.QKeySequenceE
 proc fcQKeySequenceEdit_vtable_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QKeySequenceEditVTable](fcQKeySequenceEdit_vdata(self)[])
   let self = QKeySequenceEdit(h: self)
-  let slotval1 = gen_qevent_types.QTabletEvent(h: event)
+  let slotval1 = gen_qevent_types.QTabletEvent(h: event, owned: false)
   vtbl[].tabletEvent(self, slotval1)
 
 proc QKeySequenceEditactionEvent*(self: gen_qkeysequenceedit_types.QKeySequenceEdit, event: gen_qevent_types.QActionEvent): void =
@@ -660,7 +671,7 @@ proc QKeySequenceEditactionEvent*(self: gen_qkeysequenceedit_types.QKeySequenceE
 proc fcQKeySequenceEdit_vtable_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QKeySequenceEditVTable](fcQKeySequenceEdit_vdata(self)[])
   let self = QKeySequenceEdit(h: self)
-  let slotval1 = gen_qevent_types.QActionEvent(h: event)
+  let slotval1 = gen_qevent_types.QActionEvent(h: event, owned: false)
   vtbl[].actionEvent(self, slotval1)
 
 proc QKeySequenceEditdragEnterEvent*(self: gen_qkeysequenceedit_types.QKeySequenceEdit, event: gen_qevent_types.QDragEnterEvent): void =
@@ -669,7 +680,7 @@ proc QKeySequenceEditdragEnterEvent*(self: gen_qkeysequenceedit_types.QKeySequen
 proc fcQKeySequenceEdit_vtable_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QKeySequenceEditVTable](fcQKeySequenceEdit_vdata(self)[])
   let self = QKeySequenceEdit(h: self)
-  let slotval1 = gen_qevent_types.QDragEnterEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragEnterEvent(h: event, owned: false)
   vtbl[].dragEnterEvent(self, slotval1)
 
 proc QKeySequenceEditdragMoveEvent*(self: gen_qkeysequenceedit_types.QKeySequenceEdit, event: gen_qevent_types.QDragMoveEvent): void =
@@ -678,7 +689,7 @@ proc QKeySequenceEditdragMoveEvent*(self: gen_qkeysequenceedit_types.QKeySequenc
 proc fcQKeySequenceEdit_vtable_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QKeySequenceEditVTable](fcQKeySequenceEdit_vdata(self)[])
   let self = QKeySequenceEdit(h: self)
-  let slotval1 = gen_qevent_types.QDragMoveEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragMoveEvent(h: event, owned: false)
   vtbl[].dragMoveEvent(self, slotval1)
 
 proc QKeySequenceEditdragLeaveEvent*(self: gen_qkeysequenceedit_types.QKeySequenceEdit, event: gen_qevent_types.QDragLeaveEvent): void =
@@ -687,7 +698,7 @@ proc QKeySequenceEditdragLeaveEvent*(self: gen_qkeysequenceedit_types.QKeySequen
 proc fcQKeySequenceEdit_vtable_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QKeySequenceEditVTable](fcQKeySequenceEdit_vdata(self)[])
   let self = QKeySequenceEdit(h: self)
-  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event, owned: false)
   vtbl[].dragLeaveEvent(self, slotval1)
 
 proc QKeySequenceEditdropEvent*(self: gen_qkeysequenceedit_types.QKeySequenceEdit, event: gen_qevent_types.QDropEvent): void =
@@ -696,7 +707,7 @@ proc QKeySequenceEditdropEvent*(self: gen_qkeysequenceedit_types.QKeySequenceEdi
 proc fcQKeySequenceEdit_vtable_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QKeySequenceEditVTable](fcQKeySequenceEdit_vdata(self)[])
   let self = QKeySequenceEdit(h: self)
-  let slotval1 = gen_qevent_types.QDropEvent(h: event)
+  let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
   vtbl[].dropEvent(self, slotval1)
 
 proc QKeySequenceEditshowEvent*(self: gen_qkeysequenceedit_types.QKeySequenceEdit, event: gen_qevent_types.QShowEvent): void =
@@ -705,7 +716,7 @@ proc QKeySequenceEditshowEvent*(self: gen_qkeysequenceedit_types.QKeySequenceEdi
 proc fcQKeySequenceEdit_vtable_callback_showEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QKeySequenceEditVTable](fcQKeySequenceEdit_vdata(self)[])
   let self = QKeySequenceEdit(h: self)
-  let slotval1 = gen_qevent_types.QShowEvent(h: event)
+  let slotval1 = gen_qevent_types.QShowEvent(h: event, owned: false)
   vtbl[].showEvent(self, slotval1)
 
 proc QKeySequenceEdithideEvent*(self: gen_qkeysequenceedit_types.QKeySequenceEdit, event: gen_qevent_types.QHideEvent): void =
@@ -714,7 +725,7 @@ proc QKeySequenceEdithideEvent*(self: gen_qkeysequenceedit_types.QKeySequenceEdi
 proc fcQKeySequenceEdit_vtable_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QKeySequenceEditVTable](fcQKeySequenceEdit_vdata(self)[])
   let self = QKeySequenceEdit(h: self)
-  let slotval1 = gen_qevent_types.QHideEvent(h: event)
+  let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   vtbl[].hideEvent(self, slotval1)
 
 proc QKeySequenceEditnativeEvent*(self: gen_qkeysequenceedit_types.QKeySequenceEdit, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool =
@@ -738,7 +749,7 @@ proc QKeySequenceEditchangeEvent*(self: gen_qkeysequenceedit_types.QKeySequenceE
 proc fcQKeySequenceEdit_vtable_callback_changeEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QKeySequenceEditVTable](fcQKeySequenceEdit_vdata(self)[])
   let self = QKeySequenceEdit(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: param1)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
   vtbl[].changeEvent(self, slotval1)
 
 proc QKeySequenceEditmetric*(self: gen_qkeysequenceedit_types.QKeySequenceEdit, param1: cint): cint =
@@ -757,27 +768,33 @@ proc QKeySequenceEditinitPainter*(self: gen_qkeysequenceedit_types.QKeySequenceE
 proc fcQKeySequenceEdit_vtable_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QKeySequenceEditVTable](fcQKeySequenceEdit_vdata(self)[])
   let self = QKeySequenceEdit(h: self)
-  let slotval1 = gen_qpainter_types.QPainter(h: painter)
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
   vtbl[].initPainter(self, slotval1)
 
 proc QKeySequenceEditredirected*(self: gen_qkeysequenceedit_types.QKeySequenceEdit, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice =
-  gen_qpaintdevice_types.QPaintDevice(h: fcQKeySequenceEdit_virtualbase_redirected(self.h, offset.h))
+  gen_qpaintdevice_types.QPaintDevice(h: fcQKeySequenceEdit_virtualbase_redirected(self.h, offset.h), owned: false)
 
 proc fcQKeySequenceEdit_vtable_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QKeySequenceEditVTable](fcQKeySequenceEdit_vdata(self)[])
   let self = QKeySequenceEdit(h: self)
-  let slotval1 = gen_qpoint_types.QPoint(h: offset)
+  let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
   var virtualReturn = vtbl[].redirected(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QKeySequenceEditsharedPainter*(self: gen_qkeysequenceedit_types.QKeySequenceEdit): gen_qpainter_types.QPainter =
-  gen_qpainter_types.QPainter(h: fcQKeySequenceEdit_virtualbase_sharedPainter(self.h))
+  gen_qpainter_types.QPainter(h: fcQKeySequenceEdit_virtualbase_sharedPainter(self.h), owned: false)
 
 proc fcQKeySequenceEdit_vtable_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QKeySequenceEditVTable](fcQKeySequenceEdit_vdata(self)[])
   let self = QKeySequenceEdit(h: self)
   var virtualReturn = vtbl[].sharedPainter(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QKeySequenceEditinputMethodEvent*(self: gen_qkeysequenceedit_types.QKeySequenceEdit, param1: gen_qevent_types.QInputMethodEvent): void =
   fcQKeySequenceEdit_virtualbase_inputMethodEvent(self.h, param1.h)
@@ -785,18 +802,21 @@ proc QKeySequenceEditinputMethodEvent*(self: gen_qkeysequenceedit_types.QKeySequ
 proc fcQKeySequenceEdit_vtable_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QKeySequenceEditVTable](fcQKeySequenceEdit_vdata(self)[])
   let self = QKeySequenceEdit(h: self)
-  let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1)
+  let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1, owned: false)
   vtbl[].inputMethodEvent(self, slotval1)
 
 proc QKeySequenceEditinputMethodQuery*(self: gen_qkeysequenceedit_types.QKeySequenceEdit, param1: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQKeySequenceEdit_virtualbase_inputMethodQuery(self.h, cint(param1)))
+  gen_qvariant_types.QVariant(h: fcQKeySequenceEdit_virtualbase_inputMethodQuery(self.h, cint(param1)), owned: true)
 
 proc fcQKeySequenceEdit_vtable_callback_inputMethodQuery(self: pointer, param1: cint): pointer {.cdecl.} =
   let vtbl = cast[ptr QKeySequenceEditVTable](fcQKeySequenceEdit_vdata(self)[])
   let self = QKeySequenceEdit(h: self)
   let slotval1 = cint(param1)
   var virtualReturn = vtbl[].inputMethodQuery(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QKeySequenceEditfocusNextPrevChild*(self: gen_qkeysequenceedit_types.QKeySequenceEdit, next: bool): bool =
   fcQKeySequenceEdit_virtualbase_focusNextPrevChild(self.h, next)
@@ -814,8 +834,8 @@ proc QKeySequenceEditeventFilter*(self: gen_qkeysequenceedit_types.QKeySequenceE
 proc fcQKeySequenceEdit_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QKeySequenceEditVTable](fcQKeySequenceEdit_vdata(self)[])
   let self = QKeySequenceEdit(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
@@ -825,7 +845,7 @@ proc QKeySequenceEditchildEvent*(self: gen_qkeysequenceedit_types.QKeySequenceEd
 proc fcQKeySequenceEdit_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QKeySequenceEditVTable](fcQKeySequenceEdit_vdata(self)[])
   let self = QKeySequenceEdit(h: self)
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
 proc QKeySequenceEditcustomEvent*(self: gen_qkeysequenceedit_types.QKeySequenceEdit, event: gen_qcoreevent_types.QEvent): void =
@@ -834,7 +854,7 @@ proc QKeySequenceEditcustomEvent*(self: gen_qkeysequenceedit_types.QKeySequenceE
 proc fcQKeySequenceEdit_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QKeySequenceEditVTable](fcQKeySequenceEdit_vdata(self)[])
   let self = QKeySequenceEdit(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
 proc QKeySequenceEditconnectNotify*(self: gen_qkeysequenceedit_types.QKeySequenceEdit, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -843,7 +863,7 @@ proc QKeySequenceEditconnectNotify*(self: gen_qkeysequenceedit_types.QKeySequenc
 proc fcQKeySequenceEdit_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QKeySequenceEditVTable](fcQKeySequenceEdit_vdata(self)[])
   let self = QKeySequenceEdit(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
 proc QKeySequenceEditdisconnectNotify*(self: gen_qkeysequenceedit_types.QKeySequenceEdit, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -852,7 +872,7 @@ proc QKeySequenceEditdisconnectNotify*(self: gen_qkeysequenceedit_types.QKeySequ
 proc fcQKeySequenceEdit_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QKeySequenceEditVTable](fcQKeySequenceEdit_vdata(self)[])
   let self = QKeySequenceEdit(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
 type VirtualQKeySequenceEdit* {.inheritable.} = ref object of QKeySequenceEdit
@@ -886,7 +906,7 @@ method event*(self: VirtualQKeySequenceEdit, param1: gen_qcoreevent_types.QEvent
   QKeySequenceEditevent(self[], param1)
 proc fcQKeySequenceEdit_method_callback_event(self: pointer, param1: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQKeySequenceEdit](fcQKeySequenceEdit_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: param1)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
@@ -894,28 +914,28 @@ method keyPressEvent*(self: VirtualQKeySequenceEdit, param1: gen_qevent_types.QK
   QKeySequenceEditkeyPressEvent(self[], param1)
 proc fcQKeySequenceEdit_method_callback_keyPressEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQKeySequenceEdit](fcQKeySequenceEdit_vdata(self)[])
-  let slotval1 = gen_qevent_types.QKeyEvent(h: param1)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: param1, owned: false)
   inst.keyPressEvent(slotval1)
 
 method keyReleaseEvent*(self: VirtualQKeySequenceEdit, param1: gen_qevent_types.QKeyEvent): void {.base.} =
   QKeySequenceEditkeyReleaseEvent(self[], param1)
 proc fcQKeySequenceEdit_method_callback_keyReleaseEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQKeySequenceEdit](fcQKeySequenceEdit_vdata(self)[])
-  let slotval1 = gen_qevent_types.QKeyEvent(h: param1)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: param1, owned: false)
   inst.keyReleaseEvent(slotval1)
 
 method timerEvent*(self: VirtualQKeySequenceEdit, param1: gen_qcoreevent_types.QTimerEvent): void {.base.} =
   QKeySequenceEdittimerEvent(self[], param1)
 proc fcQKeySequenceEdit_method_callback_timerEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQKeySequenceEdit](fcQKeySequenceEdit_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: param1)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: param1, owned: false)
   inst.timerEvent(slotval1)
 
 method focusOutEvent*(self: VirtualQKeySequenceEdit, param1: gen_qevent_types.QFocusEvent): void {.base.} =
   QKeySequenceEditfocusOutEvent(self[], param1)
 proc fcQKeySequenceEdit_method_callback_focusOutEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQKeySequenceEdit](fcQKeySequenceEdit_vdata(self)[])
-  let slotval1 = gen_qevent_types.QFocusEvent(h: param1)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: param1, owned: false)
   inst.focusOutEvent(slotval1)
 
 method devType*(self: VirtualQKeySequenceEdit): cint {.base.} =
@@ -972,147 +992,147 @@ method mousePressEvent*(self: VirtualQKeySequenceEdit, event: gen_qevent_types.Q
   QKeySequenceEditmousePressEvent(self[], event)
 proc fcQKeySequenceEdit_method_callback_mousePressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQKeySequenceEdit](fcQKeySequenceEdit_vdata(self)[])
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mousePressEvent(slotval1)
 
 method mouseReleaseEvent*(self: VirtualQKeySequenceEdit, event: gen_qevent_types.QMouseEvent): void {.base.} =
   QKeySequenceEditmouseReleaseEvent(self[], event)
 proc fcQKeySequenceEdit_method_callback_mouseReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQKeySequenceEdit](fcQKeySequenceEdit_vdata(self)[])
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mouseReleaseEvent(slotval1)
 
 method mouseDoubleClickEvent*(self: VirtualQKeySequenceEdit, event: gen_qevent_types.QMouseEvent): void {.base.} =
   QKeySequenceEditmouseDoubleClickEvent(self[], event)
 proc fcQKeySequenceEdit_method_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQKeySequenceEdit](fcQKeySequenceEdit_vdata(self)[])
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mouseDoubleClickEvent(slotval1)
 
 method mouseMoveEvent*(self: VirtualQKeySequenceEdit, event: gen_qevent_types.QMouseEvent): void {.base.} =
   QKeySequenceEditmouseMoveEvent(self[], event)
 proc fcQKeySequenceEdit_method_callback_mouseMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQKeySequenceEdit](fcQKeySequenceEdit_vdata(self)[])
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mouseMoveEvent(slotval1)
 
 method wheelEvent*(self: VirtualQKeySequenceEdit, event: gen_qevent_types.QWheelEvent): void {.base.} =
   QKeySequenceEditwheelEvent(self[], event)
 proc fcQKeySequenceEdit_method_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQKeySequenceEdit](fcQKeySequenceEdit_vdata(self)[])
-  let slotval1 = gen_qevent_types.QWheelEvent(h: event)
+  let slotval1 = gen_qevent_types.QWheelEvent(h: event, owned: false)
   inst.wheelEvent(slotval1)
 
 method focusInEvent*(self: VirtualQKeySequenceEdit, event: gen_qevent_types.QFocusEvent): void {.base.} =
   QKeySequenceEditfocusInEvent(self[], event)
 proc fcQKeySequenceEdit_method_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQKeySequenceEdit](fcQKeySequenceEdit_vdata(self)[])
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   inst.focusInEvent(slotval1)
 
 method enterEvent*(self: VirtualQKeySequenceEdit, event: gen_qevent_types.QEnterEvent): void {.base.} =
   QKeySequenceEditenterEvent(self[], event)
 proc fcQKeySequenceEdit_method_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQKeySequenceEdit](fcQKeySequenceEdit_vdata(self)[])
-  let slotval1 = gen_qevent_types.QEnterEvent(h: event)
+  let slotval1 = gen_qevent_types.QEnterEvent(h: event, owned: false)
   inst.enterEvent(slotval1)
 
 method leaveEvent*(self: VirtualQKeySequenceEdit, event: gen_qcoreevent_types.QEvent): void {.base.} =
   QKeySequenceEditleaveEvent(self[], event)
 proc fcQKeySequenceEdit_method_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQKeySequenceEdit](fcQKeySequenceEdit_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.leaveEvent(slotval1)
 
 method paintEvent*(self: VirtualQKeySequenceEdit, event: gen_qevent_types.QPaintEvent): void {.base.} =
   QKeySequenceEditpaintEvent(self[], event)
 proc fcQKeySequenceEdit_method_callback_paintEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQKeySequenceEdit](fcQKeySequenceEdit_vdata(self)[])
-  let slotval1 = gen_qevent_types.QPaintEvent(h: event)
+  let slotval1 = gen_qevent_types.QPaintEvent(h: event, owned: false)
   inst.paintEvent(slotval1)
 
 method moveEvent*(self: VirtualQKeySequenceEdit, event: gen_qevent_types.QMoveEvent): void {.base.} =
   QKeySequenceEditmoveEvent(self[], event)
 proc fcQKeySequenceEdit_method_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQKeySequenceEdit](fcQKeySequenceEdit_vdata(self)[])
-  let slotval1 = gen_qevent_types.QMoveEvent(h: event)
+  let slotval1 = gen_qevent_types.QMoveEvent(h: event, owned: false)
   inst.moveEvent(slotval1)
 
 method resizeEvent*(self: VirtualQKeySequenceEdit, event: gen_qevent_types.QResizeEvent): void {.base.} =
   QKeySequenceEditresizeEvent(self[], event)
 proc fcQKeySequenceEdit_method_callback_resizeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQKeySequenceEdit](fcQKeySequenceEdit_vdata(self)[])
-  let slotval1 = gen_qevent_types.QResizeEvent(h: event)
+  let slotval1 = gen_qevent_types.QResizeEvent(h: event, owned: false)
   inst.resizeEvent(slotval1)
 
 method closeEvent*(self: VirtualQKeySequenceEdit, event: gen_qevent_types.QCloseEvent): void {.base.} =
   QKeySequenceEditcloseEvent(self[], event)
 proc fcQKeySequenceEdit_method_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQKeySequenceEdit](fcQKeySequenceEdit_vdata(self)[])
-  let slotval1 = gen_qevent_types.QCloseEvent(h: event)
+  let slotval1 = gen_qevent_types.QCloseEvent(h: event, owned: false)
   inst.closeEvent(slotval1)
 
 method contextMenuEvent*(self: VirtualQKeySequenceEdit, event: gen_qevent_types.QContextMenuEvent): void {.base.} =
   QKeySequenceEditcontextMenuEvent(self[], event)
 proc fcQKeySequenceEdit_method_callback_contextMenuEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQKeySequenceEdit](fcQKeySequenceEdit_vdata(self)[])
-  let slotval1 = gen_qevent_types.QContextMenuEvent(h: event)
+  let slotval1 = gen_qevent_types.QContextMenuEvent(h: event, owned: false)
   inst.contextMenuEvent(slotval1)
 
 method tabletEvent*(self: VirtualQKeySequenceEdit, event: gen_qevent_types.QTabletEvent): void {.base.} =
   QKeySequenceEdittabletEvent(self[], event)
 proc fcQKeySequenceEdit_method_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQKeySequenceEdit](fcQKeySequenceEdit_vdata(self)[])
-  let slotval1 = gen_qevent_types.QTabletEvent(h: event)
+  let slotval1 = gen_qevent_types.QTabletEvent(h: event, owned: false)
   inst.tabletEvent(slotval1)
 
 method actionEvent*(self: VirtualQKeySequenceEdit, event: gen_qevent_types.QActionEvent): void {.base.} =
   QKeySequenceEditactionEvent(self[], event)
 proc fcQKeySequenceEdit_method_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQKeySequenceEdit](fcQKeySequenceEdit_vdata(self)[])
-  let slotval1 = gen_qevent_types.QActionEvent(h: event)
+  let slotval1 = gen_qevent_types.QActionEvent(h: event, owned: false)
   inst.actionEvent(slotval1)
 
 method dragEnterEvent*(self: VirtualQKeySequenceEdit, event: gen_qevent_types.QDragEnterEvent): void {.base.} =
   QKeySequenceEditdragEnterEvent(self[], event)
 proc fcQKeySequenceEdit_method_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQKeySequenceEdit](fcQKeySequenceEdit_vdata(self)[])
-  let slotval1 = gen_qevent_types.QDragEnterEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragEnterEvent(h: event, owned: false)
   inst.dragEnterEvent(slotval1)
 
 method dragMoveEvent*(self: VirtualQKeySequenceEdit, event: gen_qevent_types.QDragMoveEvent): void {.base.} =
   QKeySequenceEditdragMoveEvent(self[], event)
 proc fcQKeySequenceEdit_method_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQKeySequenceEdit](fcQKeySequenceEdit_vdata(self)[])
-  let slotval1 = gen_qevent_types.QDragMoveEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragMoveEvent(h: event, owned: false)
   inst.dragMoveEvent(slotval1)
 
 method dragLeaveEvent*(self: VirtualQKeySequenceEdit, event: gen_qevent_types.QDragLeaveEvent): void {.base.} =
   QKeySequenceEditdragLeaveEvent(self[], event)
 proc fcQKeySequenceEdit_method_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQKeySequenceEdit](fcQKeySequenceEdit_vdata(self)[])
-  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event, owned: false)
   inst.dragLeaveEvent(slotval1)
 
 method dropEvent*(self: VirtualQKeySequenceEdit, event: gen_qevent_types.QDropEvent): void {.base.} =
   QKeySequenceEditdropEvent(self[], event)
 proc fcQKeySequenceEdit_method_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQKeySequenceEdit](fcQKeySequenceEdit_vdata(self)[])
-  let slotval1 = gen_qevent_types.QDropEvent(h: event)
+  let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
   inst.dropEvent(slotval1)
 
 method showEvent*(self: VirtualQKeySequenceEdit, event: gen_qevent_types.QShowEvent): void {.base.} =
   QKeySequenceEditshowEvent(self[], event)
 proc fcQKeySequenceEdit_method_callback_showEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQKeySequenceEdit](fcQKeySequenceEdit_vdata(self)[])
-  let slotval1 = gen_qevent_types.QShowEvent(h: event)
+  let slotval1 = gen_qevent_types.QShowEvent(h: event, owned: false)
   inst.showEvent(slotval1)
 
 method hideEvent*(self: VirtualQKeySequenceEdit, event: gen_qevent_types.QHideEvent): void {.base.} =
   QKeySequenceEdithideEvent(self[], event)
 proc fcQKeySequenceEdit_method_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQKeySequenceEdit](fcQKeySequenceEdit_vdata(self)[])
-  let slotval1 = gen_qevent_types.QHideEvent(h: event)
+  let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   inst.hideEvent(slotval1)
 
 method nativeEvent*(self: VirtualQKeySequenceEdit, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
@@ -1132,7 +1152,7 @@ method changeEvent*(self: VirtualQKeySequenceEdit, param1: gen_qcoreevent_types.
   QKeySequenceEditchangeEvent(self[], param1)
 proc fcQKeySequenceEdit_method_callback_changeEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQKeySequenceEdit](fcQKeySequenceEdit_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: param1)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
   inst.changeEvent(slotval1)
 
 method metric*(self: VirtualQKeySequenceEdit, param1: cint): cint {.base.} =
@@ -1147,14 +1167,14 @@ method initPainter*(self: VirtualQKeySequenceEdit, painter: gen_qpainter_types.Q
   QKeySequenceEditinitPainter(self[], painter)
 proc fcQKeySequenceEdit_method_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
   let inst = cast[VirtualQKeySequenceEdit](fcQKeySequenceEdit_vdata(self)[])
-  let slotval1 = gen_qpainter_types.QPainter(h: painter)
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
   inst.initPainter(slotval1)
 
 method redirected*(self: VirtualQKeySequenceEdit, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.base.} =
   QKeySequenceEditredirected(self[], offset)
 proc fcQKeySequenceEdit_method_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQKeySequenceEdit](fcQKeySequenceEdit_vdata(self)[])
-  let slotval1 = gen_qpoint_types.QPoint(h: offset)
+  let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
   var virtualReturn = inst.redirected(slotval1)
   virtualReturn.h
 
@@ -1169,7 +1189,7 @@ method inputMethodEvent*(self: VirtualQKeySequenceEdit, param1: gen_qevent_types
   QKeySequenceEditinputMethodEvent(self[], param1)
 proc fcQKeySequenceEdit_method_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQKeySequenceEdit](fcQKeySequenceEdit_vdata(self)[])
-  let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1)
+  let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1, owned: false)
   inst.inputMethodEvent(slotval1)
 
 method inputMethodQuery*(self: VirtualQKeySequenceEdit, param1: cint): gen_qvariant_types.QVariant {.base.} =
@@ -1192,8 +1212,8 @@ method eventFilter*(self: VirtualQKeySequenceEdit, watched: gen_qobject_types.QO
   QKeySequenceEditeventFilter(self[], watched, event)
 proc fcQKeySequenceEdit_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQKeySequenceEdit](fcQKeySequenceEdit_vdata(self)[])
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
@@ -1201,28 +1221,28 @@ method childEvent*(self: VirtualQKeySequenceEdit, event: gen_qcoreevent_types.QC
   QKeySequenceEditchildEvent(self[], event)
 proc fcQKeySequenceEdit_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQKeySequenceEdit](fcQKeySequenceEdit_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
 method customEvent*(self: VirtualQKeySequenceEdit, event: gen_qcoreevent_types.QEvent): void {.base.} =
   QKeySequenceEditcustomEvent(self[], event)
 proc fcQKeySequenceEdit_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQKeySequenceEdit](fcQKeySequenceEdit_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
 method connectNotify*(self: VirtualQKeySequenceEdit, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
   QKeySequenceEditconnectNotify(self[], signal)
 proc fcQKeySequenceEdit_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQKeySequenceEdit](fcQKeySequenceEdit_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
 method disconnectNotify*(self: VirtualQKeySequenceEdit, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
   QKeySequenceEditdisconnectNotify(self[], signal)
 proc fcQKeySequenceEdit_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQKeySequenceEdit](fcQKeySequenceEdit_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
 
 proc updateMicroFocus*(self: gen_qkeysequenceedit_types.QKeySequenceEdit): void =
@@ -1241,7 +1261,7 @@ proc focusPreviousChild*(self: gen_qkeysequenceedit_types.QKeySequenceEdit): boo
   fcQKeySequenceEdit_protectedbase_focusPreviousChild(self.h)
 
 proc sender*(self: gen_qkeysequenceedit_types.QKeySequenceEdit): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQKeySequenceEdit_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQKeySequenceEdit_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qkeysequenceedit_types.QKeySequenceEdit): cint =
   fcQKeySequenceEdit_protectedbase_senderSignalIndex(self.h)
@@ -1360,7 +1380,7 @@ proc create*(T: type gen_qkeysequenceedit_types.QKeySequenceEdit,
     vtbl[].vtbl.connectNotify = fcQKeySequenceEdit_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQKeySequenceEdit_vtable_callback_disconnectNotify
-  let tmp = gen_qkeysequenceedit_types.QKeySequenceEdit(h: fcQKeySequenceEdit_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h))
+  let tmp = gen_qkeysequenceedit_types.QKeySequenceEdit(h: fcQKeySequenceEdit_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h), owned: true)
   fcQKeySequenceEdit_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qkeysequenceedit_types.QKeySequenceEdit,
@@ -1470,7 +1490,7 @@ proc create*(T: type gen_qkeysequenceedit_types.QKeySequenceEdit,
     vtbl[].vtbl.connectNotify = fcQKeySequenceEdit_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQKeySequenceEdit_vtable_callback_disconnectNotify
-  let tmp = gen_qkeysequenceedit_types.QKeySequenceEdit(h: fcQKeySequenceEdit_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer))))
+  let tmp = gen_qkeysequenceedit_types.QKeySequenceEdit(h: fcQKeySequenceEdit_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer))), owned: true)
   fcQKeySequenceEdit_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qkeysequenceedit_types.QKeySequenceEdit,
@@ -1581,7 +1601,7 @@ proc create*(T: type gen_qkeysequenceedit_types.QKeySequenceEdit,
     vtbl[].vtbl.connectNotify = fcQKeySequenceEdit_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQKeySequenceEdit_vtable_callback_disconnectNotify
-  let tmp = gen_qkeysequenceedit_types.QKeySequenceEdit(h: fcQKeySequenceEdit_new3(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), keySequence.h))
+  let tmp = gen_qkeysequenceedit_types.QKeySequenceEdit(h: fcQKeySequenceEdit_new3(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), keySequence.h), owned: true)
   fcQKeySequenceEdit_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qkeysequenceedit_types.QKeySequenceEdit,
@@ -1692,13 +1712,14 @@ proc create*(T: type gen_qkeysequenceedit_types.QKeySequenceEdit,
     vtbl[].vtbl.connectNotify = fcQKeySequenceEdit_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQKeySequenceEdit_vtable_callback_disconnectNotify
-  let tmp = gen_qkeysequenceedit_types.QKeySequenceEdit(h: fcQKeySequenceEdit_new4(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), keySequence.h, parent.h))
+  let tmp = gen_qkeysequenceedit_types.QKeySequenceEdit(h: fcQKeySequenceEdit_new4(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), keySequence.h, parent.h), owned: true)
   fcQKeySequenceEdit_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQKeySequenceEdit_mvtbl = cQKeySequenceEditVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQKeySequenceEdit()[])](self.fcQKeySequenceEdit_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   metaObject: fcQKeySequenceEdit_method_callback_metaObject,
   metacast: fcQKeySequenceEdit_method_callback_metacast,
@@ -1780,5 +1801,3 @@ proc create*(T: type gen_qkeysequenceedit_types.QKeySequenceEdit,
 
 proc staticMetaObject*(_: type gen_qkeysequenceedit_types.QKeySequenceEdit): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQKeySequenceEdit_staticMetaObject())
-proc delete*(self: gen_qkeysequenceedit_types.QKeySequenceEdit) =
-  fcQKeySequenceEdit_delete(self.h)

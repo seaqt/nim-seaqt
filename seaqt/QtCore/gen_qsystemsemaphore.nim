@@ -32,9 +32,6 @@ func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
     else:
       copyMem(addr result[0], v.data, len)
 
-const cflags = gorge("pkg-config --cflags Qt6Core")  & " -fPIC"
-{.compile("gen_qsystemsemaphore.cpp", cflags).}
-
 
 type QSystemSemaphoreAccessModeEnum* = distinct cint
 template Open*(_: type QSystemSemaphoreAccessModeEnum): untyped = 0
@@ -72,7 +69,6 @@ proc fcQSystemSemaphore_release1(self: pointer, n: cint): bool {.importc: "QSyst
 proc fcQSystemSemaphore_new(key: struct_miqt_string): ptr cQSystemSemaphore {.importc: "QSystemSemaphore_new".}
 proc fcQSystemSemaphore_new2(key: struct_miqt_string, initialValue: cint): ptr cQSystemSemaphore {.importc: "QSystemSemaphore_new2".}
 proc fcQSystemSemaphore_new3(key: struct_miqt_string, initialValue: cint, mode: cint): ptr cQSystemSemaphore {.importc: "QSystemSemaphore_new3".}
-proc fcQSystemSemaphore_delete(self: pointer) {.importc: "QSystemSemaphore_delete".}
 
 proc tr*(_: type gen_qsystemsemaphore_types.QSystemSemaphore, sourceText: cstring): string =
   let v_ms = fcQSystemSemaphore_tr(sourceText)
@@ -127,15 +123,13 @@ proc release*(self: gen_qsystemsemaphore_types.QSystemSemaphore, n: cint): bool 
 
 proc create*(T: type gen_qsystemsemaphore_types.QSystemSemaphore,
     key: string): gen_qsystemsemaphore_types.QSystemSemaphore =
-  let tmp = gen_qsystemsemaphore_types.QSystemSemaphore(h: fcQSystemSemaphore_new(struct_miqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key)))))
+  let tmp = gen_qsystemsemaphore_types.QSystemSemaphore(h: fcQSystemSemaphore_new(struct_miqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key)))), owned: true)
   tmp
 proc create*(T: type gen_qsystemsemaphore_types.QSystemSemaphore,
     key: string, initialValue: cint): gen_qsystemsemaphore_types.QSystemSemaphore =
-  let tmp = gen_qsystemsemaphore_types.QSystemSemaphore(h: fcQSystemSemaphore_new2(struct_miqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key))), initialValue))
+  let tmp = gen_qsystemsemaphore_types.QSystemSemaphore(h: fcQSystemSemaphore_new2(struct_miqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key))), initialValue), owned: true)
   tmp
 proc create*(T: type gen_qsystemsemaphore_types.QSystemSemaphore,
     key: string, initialValue: cint, mode: cint): gen_qsystemsemaphore_types.QSystemSemaphore =
-  let tmp = gen_qsystemsemaphore_types.QSystemSemaphore(h: fcQSystemSemaphore_new3(struct_miqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key))), initialValue, cint(mode)))
+  let tmp = gen_qsystemsemaphore_types.QSystemSemaphore(h: fcQSystemSemaphore_new3(struct_miqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key))), initialValue, cint(mode)), owned: true)
   tmp
-proc delete*(self: gen_qsystemsemaphore_types.QSystemSemaphore) =
-  fcQSystemSemaphore_delete(self.h)

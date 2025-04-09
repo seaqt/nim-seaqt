@@ -1,2 +1,4 @@
-type QVLABaseBase* {.inheritable, pure.} = object
+type QVLABaseBase* {.inheritable.} = object
   h*: pointer
+  owned*: bool
+

@@ -32,7 +32,7 @@ func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
     else:
       copyMem(addr result[0], v.data, len)
 
-const cflags = gorge("pkg-config --cflags Qt6Widgets")  & " -fPIC"
+const cflags = gorge("pkg-config --cflags Qt6Widgets") & " -fPIC"
 {.compile("gen_qfocusframe.cpp", cflags).}
 
 
@@ -196,10 +196,9 @@ proc fcQFocusFrame_protectedbase_isSignalConnected(self: pointer, signal: pointe
 proc fcQFocusFrame_new(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQFocusFrame {.importc: "QFocusFrame_new".}
 proc fcQFocusFrame_new2(vtbl: pointer, vdata: csize_t): ptr cQFocusFrame {.importc: "QFocusFrame_new2".}
 proc fcQFocusFrame_staticMetaObject(): pointer {.importc: "QFocusFrame_staticMetaObject".}
-proc fcQFocusFrame_delete(self: pointer) {.importc: "QFocusFrame_delete".}
 
 proc metaObject*(self: gen_qfocusframe_types.QFocusFrame): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQFocusFrame_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQFocusFrame_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qfocusframe_types.QFocusFrame, param1: cstring): pointer =
   fcQFocusFrame_metacast(self.h, param1)
@@ -217,7 +216,7 @@ proc setWidget*(self: gen_qfocusframe_types.QFocusFrame, widget: gen_qwidget_typ
   fcQFocusFrame_setWidget(self.h, widget.h)
 
 proc widget*(self: gen_qfocusframe_types.QFocusFrame): gen_qwidget_types.QWidget =
-  gen_qwidget_types.QWidget(h: fcQFocusFrame_widget(self.h))
+  gen_qwidget_types.QWidget(h: fcQFocusFrame_widget(self.h), owned: false)
 
 proc tr*(_: type gen_qfocusframe_types.QFocusFrame, s: cstring, c: cstring): string =
   let v_ms = fcQFocusFrame_tr2(s, c)
@@ -282,7 +281,7 @@ type QFocusFramechildEventProc* = proc(self: QFocusFrame, event: gen_qcoreevent_
 type QFocusFramecustomEventProc* = proc(self: QFocusFrame, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QFocusFrameconnectNotifyProc* = proc(self: QFocusFrame, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QFocusFramedisconnectNotifyProc* = proc(self: QFocusFrame, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
-type QFocusFrameVTable* = object
+type QFocusFrameVTable* {.inheritable, pure.} = object
   vtbl: cQFocusFrameVTable
   metaObject*: QFocusFramemetaObjectProc
   metacast*: QFocusFramemetacastProc
@@ -336,13 +335,16 @@ type QFocusFrameVTable* = object
   connectNotify*: QFocusFrameconnectNotifyProc
   disconnectNotify*: QFocusFramedisconnectNotifyProc
 proc QFocusFramemetaObject*(self: gen_qfocusframe_types.QFocusFrame): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQFocusFrame_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQFocusFrame_virtualbase_metaObject(self.h), owned: false)
 
 proc fcQFocusFrame_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QFocusFrameVTable](fcQFocusFrame_vdata(self)[])
   let self = QFocusFrame(h: self)
   var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QFocusFramemetacast*(self: gen_qfocusframe_types.QFocusFrame, param1: cstring): pointer =
   fcQFocusFrame_virtualbase_metacast(self.h, param1)
@@ -372,7 +374,7 @@ proc QFocusFrameevent*(self: gen_qfocusframe_types.QFocusFrame, e: gen_qcoreeven
 proc fcQFocusFrame_vtable_callback_event(self: pointer, e: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QFocusFrameVTable](fcQFocusFrame_vdata(self)[])
   let self = QFocusFrame(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: e)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: e, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
@@ -382,8 +384,8 @@ proc QFocusFrameeventFilter*(self: gen_qfocusframe_types.QFocusFrame, param1: ge
 proc fcQFocusFrame_vtable_callback_eventFilter(self: pointer, param1: pointer, param2: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QFocusFrameVTable](fcQFocusFrame_vdata(self)[])
   let self = QFocusFrame(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: param1)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: param2)
+  let slotval1 = gen_qobject_types.QObject(h: param1, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: param2, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
@@ -393,7 +395,7 @@ proc QFocusFramepaintEvent*(self: gen_qfocusframe_types.QFocusFrame, param1: gen
 proc fcQFocusFrame_vtable_callback_paintEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFocusFrameVTable](fcQFocusFrame_vdata(self)[])
   let self = QFocusFrame(h: self)
-  let slotval1 = gen_qevent_types.QPaintEvent(h: param1)
+  let slotval1 = gen_qevent_types.QPaintEvent(h: param1, owned: false)
   vtbl[].paintEvent(self, slotval1)
 
 proc QFocusFrameinitStyleOption*(self: gen_qfocusframe_types.QFocusFrame, option: gen_qstyleoption_types.QStyleOption): void =
@@ -402,7 +404,7 @@ proc QFocusFrameinitStyleOption*(self: gen_qfocusframe_types.QFocusFrame, option
 proc fcQFocusFrame_vtable_callback_initStyleOption(self: pointer, option: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFocusFrameVTable](fcQFocusFrame_vdata(self)[])
   let self = QFocusFrame(h: self)
-  let slotval1 = gen_qstyleoption_types.QStyleOption(h: option)
+  let slotval1 = gen_qstyleoption_types.QStyleOption(h: option, owned: false)
   vtbl[].initStyleOption(self, slotval1)
 
 proc QFocusFramedevType*(self: gen_qfocusframe_types.QFocusFrame): cint =
@@ -424,22 +426,28 @@ proc fcQFocusFrame_vtable_callback_setVisible(self: pointer, visible: bool): voi
   vtbl[].setVisible(self, slotval1)
 
 proc QFocusFramesizeHint*(self: gen_qfocusframe_types.QFocusFrame): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQFocusFrame_virtualbase_sizeHint(self.h))
+  gen_qsize_types.QSize(h: fcQFocusFrame_virtualbase_sizeHint(self.h), owned: true)
 
 proc fcQFocusFrame_vtable_callback_sizeHint(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QFocusFrameVTable](fcQFocusFrame_vdata(self)[])
   let self = QFocusFrame(h: self)
   var virtualReturn = vtbl[].sizeHint(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QFocusFrameminimumSizeHint*(self: gen_qfocusframe_types.QFocusFrame): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQFocusFrame_virtualbase_minimumSizeHint(self.h))
+  gen_qsize_types.QSize(h: fcQFocusFrame_virtualbase_minimumSizeHint(self.h), owned: true)
 
 proc fcQFocusFrame_vtable_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QFocusFrameVTable](fcQFocusFrame_vdata(self)[])
   let self = QFocusFrame(h: self)
   var virtualReturn = vtbl[].minimumSizeHint(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QFocusFrameheightForWidth*(self: gen_qfocusframe_types.QFocusFrame, param1: cint): cint =
   fcQFocusFrame_virtualbase_heightForWidth(self.h, param1)
@@ -461,13 +469,16 @@ proc fcQFocusFrame_vtable_callback_hasHeightForWidth(self: pointer): bool {.cdec
   virtualReturn
 
 proc QFocusFramepaintEngine*(self: gen_qfocusframe_types.QFocusFrame): gen_qpaintengine_types.QPaintEngine =
-  gen_qpaintengine_types.QPaintEngine(h: fcQFocusFrame_virtualbase_paintEngine(self.h))
+  gen_qpaintengine_types.QPaintEngine(h: fcQFocusFrame_virtualbase_paintEngine(self.h), owned: false)
 
 proc fcQFocusFrame_vtable_callback_paintEngine(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QFocusFrameVTable](fcQFocusFrame_vdata(self)[])
   let self = QFocusFrame(h: self)
   var virtualReturn = vtbl[].paintEngine(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QFocusFramemousePressEvent*(self: gen_qfocusframe_types.QFocusFrame, event: gen_qevent_types.QMouseEvent): void =
   fcQFocusFrame_virtualbase_mousePressEvent(self.h, event.h)
@@ -475,7 +486,7 @@ proc QFocusFramemousePressEvent*(self: gen_qfocusframe_types.QFocusFrame, event:
 proc fcQFocusFrame_vtable_callback_mousePressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFocusFrameVTable](fcQFocusFrame_vdata(self)[])
   let self = QFocusFrame(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mousePressEvent(self, slotval1)
 
 proc QFocusFramemouseReleaseEvent*(self: gen_qfocusframe_types.QFocusFrame, event: gen_qevent_types.QMouseEvent): void =
@@ -484,7 +495,7 @@ proc QFocusFramemouseReleaseEvent*(self: gen_qfocusframe_types.QFocusFrame, even
 proc fcQFocusFrame_vtable_callback_mouseReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFocusFrameVTable](fcQFocusFrame_vdata(self)[])
   let self = QFocusFrame(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseReleaseEvent(self, slotval1)
 
 proc QFocusFramemouseDoubleClickEvent*(self: gen_qfocusframe_types.QFocusFrame, event: gen_qevent_types.QMouseEvent): void =
@@ -493,7 +504,7 @@ proc QFocusFramemouseDoubleClickEvent*(self: gen_qfocusframe_types.QFocusFrame, 
 proc fcQFocusFrame_vtable_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFocusFrameVTable](fcQFocusFrame_vdata(self)[])
   let self = QFocusFrame(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseDoubleClickEvent(self, slotval1)
 
 proc QFocusFramemouseMoveEvent*(self: gen_qfocusframe_types.QFocusFrame, event: gen_qevent_types.QMouseEvent): void =
@@ -502,7 +513,7 @@ proc QFocusFramemouseMoveEvent*(self: gen_qfocusframe_types.QFocusFrame, event: 
 proc fcQFocusFrame_vtable_callback_mouseMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFocusFrameVTable](fcQFocusFrame_vdata(self)[])
   let self = QFocusFrame(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseMoveEvent(self, slotval1)
 
 proc QFocusFramewheelEvent*(self: gen_qfocusframe_types.QFocusFrame, event: gen_qevent_types.QWheelEvent): void =
@@ -511,7 +522,7 @@ proc QFocusFramewheelEvent*(self: gen_qfocusframe_types.QFocusFrame, event: gen_
 proc fcQFocusFrame_vtable_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFocusFrameVTable](fcQFocusFrame_vdata(self)[])
   let self = QFocusFrame(h: self)
-  let slotval1 = gen_qevent_types.QWheelEvent(h: event)
+  let slotval1 = gen_qevent_types.QWheelEvent(h: event, owned: false)
   vtbl[].wheelEvent(self, slotval1)
 
 proc QFocusFramekeyPressEvent*(self: gen_qfocusframe_types.QFocusFrame, event: gen_qevent_types.QKeyEvent): void =
@@ -520,7 +531,7 @@ proc QFocusFramekeyPressEvent*(self: gen_qfocusframe_types.QFocusFrame, event: g
 proc fcQFocusFrame_vtable_callback_keyPressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFocusFrameVTable](fcQFocusFrame_vdata(self)[])
   let self = QFocusFrame(h: self)
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   vtbl[].keyPressEvent(self, slotval1)
 
 proc QFocusFramekeyReleaseEvent*(self: gen_qfocusframe_types.QFocusFrame, event: gen_qevent_types.QKeyEvent): void =
@@ -529,7 +540,7 @@ proc QFocusFramekeyReleaseEvent*(self: gen_qfocusframe_types.QFocusFrame, event:
 proc fcQFocusFrame_vtable_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFocusFrameVTable](fcQFocusFrame_vdata(self)[])
   let self = QFocusFrame(h: self)
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   vtbl[].keyReleaseEvent(self, slotval1)
 
 proc QFocusFramefocusInEvent*(self: gen_qfocusframe_types.QFocusFrame, event: gen_qevent_types.QFocusEvent): void =
@@ -538,7 +549,7 @@ proc QFocusFramefocusInEvent*(self: gen_qfocusframe_types.QFocusFrame, event: ge
 proc fcQFocusFrame_vtable_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFocusFrameVTable](fcQFocusFrame_vdata(self)[])
   let self = QFocusFrame(h: self)
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusInEvent(self, slotval1)
 
 proc QFocusFramefocusOutEvent*(self: gen_qfocusframe_types.QFocusFrame, event: gen_qevent_types.QFocusEvent): void =
@@ -547,7 +558,7 @@ proc QFocusFramefocusOutEvent*(self: gen_qfocusframe_types.QFocusFrame, event: g
 proc fcQFocusFrame_vtable_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFocusFrameVTable](fcQFocusFrame_vdata(self)[])
   let self = QFocusFrame(h: self)
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusOutEvent(self, slotval1)
 
 proc QFocusFrameenterEvent*(self: gen_qfocusframe_types.QFocusFrame, event: gen_qevent_types.QEnterEvent): void =
@@ -556,7 +567,7 @@ proc QFocusFrameenterEvent*(self: gen_qfocusframe_types.QFocusFrame, event: gen_
 proc fcQFocusFrame_vtable_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFocusFrameVTable](fcQFocusFrame_vdata(self)[])
   let self = QFocusFrame(h: self)
-  let slotval1 = gen_qevent_types.QEnterEvent(h: event)
+  let slotval1 = gen_qevent_types.QEnterEvent(h: event, owned: false)
   vtbl[].enterEvent(self, slotval1)
 
 proc QFocusFrameleaveEvent*(self: gen_qfocusframe_types.QFocusFrame, event: gen_qcoreevent_types.QEvent): void =
@@ -565,7 +576,7 @@ proc QFocusFrameleaveEvent*(self: gen_qfocusframe_types.QFocusFrame, event: gen_
 proc fcQFocusFrame_vtable_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFocusFrameVTable](fcQFocusFrame_vdata(self)[])
   let self = QFocusFrame(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].leaveEvent(self, slotval1)
 
 proc QFocusFramemoveEvent*(self: gen_qfocusframe_types.QFocusFrame, event: gen_qevent_types.QMoveEvent): void =
@@ -574,7 +585,7 @@ proc QFocusFramemoveEvent*(self: gen_qfocusframe_types.QFocusFrame, event: gen_q
 proc fcQFocusFrame_vtable_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFocusFrameVTable](fcQFocusFrame_vdata(self)[])
   let self = QFocusFrame(h: self)
-  let slotval1 = gen_qevent_types.QMoveEvent(h: event)
+  let slotval1 = gen_qevent_types.QMoveEvent(h: event, owned: false)
   vtbl[].moveEvent(self, slotval1)
 
 proc QFocusFrameresizeEvent*(self: gen_qfocusframe_types.QFocusFrame, event: gen_qevent_types.QResizeEvent): void =
@@ -583,7 +594,7 @@ proc QFocusFrameresizeEvent*(self: gen_qfocusframe_types.QFocusFrame, event: gen
 proc fcQFocusFrame_vtable_callback_resizeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFocusFrameVTable](fcQFocusFrame_vdata(self)[])
   let self = QFocusFrame(h: self)
-  let slotval1 = gen_qevent_types.QResizeEvent(h: event)
+  let slotval1 = gen_qevent_types.QResizeEvent(h: event, owned: false)
   vtbl[].resizeEvent(self, slotval1)
 
 proc QFocusFramecloseEvent*(self: gen_qfocusframe_types.QFocusFrame, event: gen_qevent_types.QCloseEvent): void =
@@ -592,7 +603,7 @@ proc QFocusFramecloseEvent*(self: gen_qfocusframe_types.QFocusFrame, event: gen_
 proc fcQFocusFrame_vtable_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFocusFrameVTable](fcQFocusFrame_vdata(self)[])
   let self = QFocusFrame(h: self)
-  let slotval1 = gen_qevent_types.QCloseEvent(h: event)
+  let slotval1 = gen_qevent_types.QCloseEvent(h: event, owned: false)
   vtbl[].closeEvent(self, slotval1)
 
 proc QFocusFramecontextMenuEvent*(self: gen_qfocusframe_types.QFocusFrame, event: gen_qevent_types.QContextMenuEvent): void =
@@ -601,7 +612,7 @@ proc QFocusFramecontextMenuEvent*(self: gen_qfocusframe_types.QFocusFrame, event
 proc fcQFocusFrame_vtable_callback_contextMenuEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFocusFrameVTable](fcQFocusFrame_vdata(self)[])
   let self = QFocusFrame(h: self)
-  let slotval1 = gen_qevent_types.QContextMenuEvent(h: event)
+  let slotval1 = gen_qevent_types.QContextMenuEvent(h: event, owned: false)
   vtbl[].contextMenuEvent(self, slotval1)
 
 proc QFocusFrametabletEvent*(self: gen_qfocusframe_types.QFocusFrame, event: gen_qevent_types.QTabletEvent): void =
@@ -610,7 +621,7 @@ proc QFocusFrametabletEvent*(self: gen_qfocusframe_types.QFocusFrame, event: gen
 proc fcQFocusFrame_vtable_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFocusFrameVTable](fcQFocusFrame_vdata(self)[])
   let self = QFocusFrame(h: self)
-  let slotval1 = gen_qevent_types.QTabletEvent(h: event)
+  let slotval1 = gen_qevent_types.QTabletEvent(h: event, owned: false)
   vtbl[].tabletEvent(self, slotval1)
 
 proc QFocusFrameactionEvent*(self: gen_qfocusframe_types.QFocusFrame, event: gen_qevent_types.QActionEvent): void =
@@ -619,7 +630,7 @@ proc QFocusFrameactionEvent*(self: gen_qfocusframe_types.QFocusFrame, event: gen
 proc fcQFocusFrame_vtable_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFocusFrameVTable](fcQFocusFrame_vdata(self)[])
   let self = QFocusFrame(h: self)
-  let slotval1 = gen_qevent_types.QActionEvent(h: event)
+  let slotval1 = gen_qevent_types.QActionEvent(h: event, owned: false)
   vtbl[].actionEvent(self, slotval1)
 
 proc QFocusFramedragEnterEvent*(self: gen_qfocusframe_types.QFocusFrame, event: gen_qevent_types.QDragEnterEvent): void =
@@ -628,7 +639,7 @@ proc QFocusFramedragEnterEvent*(self: gen_qfocusframe_types.QFocusFrame, event: 
 proc fcQFocusFrame_vtable_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFocusFrameVTable](fcQFocusFrame_vdata(self)[])
   let self = QFocusFrame(h: self)
-  let slotval1 = gen_qevent_types.QDragEnterEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragEnterEvent(h: event, owned: false)
   vtbl[].dragEnterEvent(self, slotval1)
 
 proc QFocusFramedragMoveEvent*(self: gen_qfocusframe_types.QFocusFrame, event: gen_qevent_types.QDragMoveEvent): void =
@@ -637,7 +648,7 @@ proc QFocusFramedragMoveEvent*(self: gen_qfocusframe_types.QFocusFrame, event: g
 proc fcQFocusFrame_vtable_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFocusFrameVTable](fcQFocusFrame_vdata(self)[])
   let self = QFocusFrame(h: self)
-  let slotval1 = gen_qevent_types.QDragMoveEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragMoveEvent(h: event, owned: false)
   vtbl[].dragMoveEvent(self, slotval1)
 
 proc QFocusFramedragLeaveEvent*(self: gen_qfocusframe_types.QFocusFrame, event: gen_qevent_types.QDragLeaveEvent): void =
@@ -646,7 +657,7 @@ proc QFocusFramedragLeaveEvent*(self: gen_qfocusframe_types.QFocusFrame, event: 
 proc fcQFocusFrame_vtable_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFocusFrameVTable](fcQFocusFrame_vdata(self)[])
   let self = QFocusFrame(h: self)
-  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event, owned: false)
   vtbl[].dragLeaveEvent(self, slotval1)
 
 proc QFocusFramedropEvent*(self: gen_qfocusframe_types.QFocusFrame, event: gen_qevent_types.QDropEvent): void =
@@ -655,7 +666,7 @@ proc QFocusFramedropEvent*(self: gen_qfocusframe_types.QFocusFrame, event: gen_q
 proc fcQFocusFrame_vtable_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFocusFrameVTable](fcQFocusFrame_vdata(self)[])
   let self = QFocusFrame(h: self)
-  let slotval1 = gen_qevent_types.QDropEvent(h: event)
+  let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
   vtbl[].dropEvent(self, slotval1)
 
 proc QFocusFrameshowEvent*(self: gen_qfocusframe_types.QFocusFrame, event: gen_qevent_types.QShowEvent): void =
@@ -664,7 +675,7 @@ proc QFocusFrameshowEvent*(self: gen_qfocusframe_types.QFocusFrame, event: gen_q
 proc fcQFocusFrame_vtable_callback_showEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFocusFrameVTable](fcQFocusFrame_vdata(self)[])
   let self = QFocusFrame(h: self)
-  let slotval1 = gen_qevent_types.QShowEvent(h: event)
+  let slotval1 = gen_qevent_types.QShowEvent(h: event, owned: false)
   vtbl[].showEvent(self, slotval1)
 
 proc QFocusFramehideEvent*(self: gen_qfocusframe_types.QFocusFrame, event: gen_qevent_types.QHideEvent): void =
@@ -673,7 +684,7 @@ proc QFocusFramehideEvent*(self: gen_qfocusframe_types.QFocusFrame, event: gen_q
 proc fcQFocusFrame_vtable_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFocusFrameVTable](fcQFocusFrame_vdata(self)[])
   let self = QFocusFrame(h: self)
-  let slotval1 = gen_qevent_types.QHideEvent(h: event)
+  let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   vtbl[].hideEvent(self, slotval1)
 
 proc QFocusFramenativeEvent*(self: gen_qfocusframe_types.QFocusFrame, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool =
@@ -697,7 +708,7 @@ proc QFocusFramechangeEvent*(self: gen_qfocusframe_types.QFocusFrame, param1: ge
 proc fcQFocusFrame_vtable_callback_changeEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFocusFrameVTable](fcQFocusFrame_vdata(self)[])
   let self = QFocusFrame(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: param1)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
   vtbl[].changeEvent(self, slotval1)
 
 proc QFocusFramemetric*(self: gen_qfocusframe_types.QFocusFrame, param1: cint): cint =
@@ -716,27 +727,33 @@ proc QFocusFrameinitPainter*(self: gen_qfocusframe_types.QFocusFrame, painter: g
 proc fcQFocusFrame_vtable_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFocusFrameVTable](fcQFocusFrame_vdata(self)[])
   let self = QFocusFrame(h: self)
-  let slotval1 = gen_qpainter_types.QPainter(h: painter)
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
   vtbl[].initPainter(self, slotval1)
 
 proc QFocusFrameredirected*(self: gen_qfocusframe_types.QFocusFrame, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice =
-  gen_qpaintdevice_types.QPaintDevice(h: fcQFocusFrame_virtualbase_redirected(self.h, offset.h))
+  gen_qpaintdevice_types.QPaintDevice(h: fcQFocusFrame_virtualbase_redirected(self.h, offset.h), owned: false)
 
 proc fcQFocusFrame_vtable_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QFocusFrameVTable](fcQFocusFrame_vdata(self)[])
   let self = QFocusFrame(h: self)
-  let slotval1 = gen_qpoint_types.QPoint(h: offset)
+  let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
   var virtualReturn = vtbl[].redirected(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QFocusFramesharedPainter*(self: gen_qfocusframe_types.QFocusFrame): gen_qpainter_types.QPainter =
-  gen_qpainter_types.QPainter(h: fcQFocusFrame_virtualbase_sharedPainter(self.h))
+  gen_qpainter_types.QPainter(h: fcQFocusFrame_virtualbase_sharedPainter(self.h), owned: false)
 
 proc fcQFocusFrame_vtable_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QFocusFrameVTable](fcQFocusFrame_vdata(self)[])
   let self = QFocusFrame(h: self)
   var virtualReturn = vtbl[].sharedPainter(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QFocusFrameinputMethodEvent*(self: gen_qfocusframe_types.QFocusFrame, param1: gen_qevent_types.QInputMethodEvent): void =
   fcQFocusFrame_virtualbase_inputMethodEvent(self.h, param1.h)
@@ -744,18 +761,21 @@ proc QFocusFrameinputMethodEvent*(self: gen_qfocusframe_types.QFocusFrame, param
 proc fcQFocusFrame_vtable_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFocusFrameVTable](fcQFocusFrame_vdata(self)[])
   let self = QFocusFrame(h: self)
-  let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1)
+  let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1, owned: false)
   vtbl[].inputMethodEvent(self, slotval1)
 
 proc QFocusFrameinputMethodQuery*(self: gen_qfocusframe_types.QFocusFrame, param1: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQFocusFrame_virtualbase_inputMethodQuery(self.h, cint(param1)))
+  gen_qvariant_types.QVariant(h: fcQFocusFrame_virtualbase_inputMethodQuery(self.h, cint(param1)), owned: true)
 
 proc fcQFocusFrame_vtable_callback_inputMethodQuery(self: pointer, param1: cint): pointer {.cdecl.} =
   let vtbl = cast[ptr QFocusFrameVTable](fcQFocusFrame_vdata(self)[])
   let self = QFocusFrame(h: self)
   let slotval1 = cint(param1)
   var virtualReturn = vtbl[].inputMethodQuery(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QFocusFramefocusNextPrevChild*(self: gen_qfocusframe_types.QFocusFrame, next: bool): bool =
   fcQFocusFrame_virtualbase_focusNextPrevChild(self.h, next)
@@ -773,7 +793,7 @@ proc QFocusFrametimerEvent*(self: gen_qfocusframe_types.QFocusFrame, event: gen_
 proc fcQFocusFrame_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFocusFrameVTable](fcQFocusFrame_vdata(self)[])
   let self = QFocusFrame(h: self)
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
 proc QFocusFramechildEvent*(self: gen_qfocusframe_types.QFocusFrame, event: gen_qcoreevent_types.QChildEvent): void =
@@ -782,7 +802,7 @@ proc QFocusFramechildEvent*(self: gen_qfocusframe_types.QFocusFrame, event: gen_
 proc fcQFocusFrame_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFocusFrameVTable](fcQFocusFrame_vdata(self)[])
   let self = QFocusFrame(h: self)
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
 proc QFocusFramecustomEvent*(self: gen_qfocusframe_types.QFocusFrame, event: gen_qcoreevent_types.QEvent): void =
@@ -791,7 +811,7 @@ proc QFocusFramecustomEvent*(self: gen_qfocusframe_types.QFocusFrame, event: gen
 proc fcQFocusFrame_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFocusFrameVTable](fcQFocusFrame_vdata(self)[])
   let self = QFocusFrame(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
 proc QFocusFrameconnectNotify*(self: gen_qfocusframe_types.QFocusFrame, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -800,7 +820,7 @@ proc QFocusFrameconnectNotify*(self: gen_qfocusframe_types.QFocusFrame, signal: 
 proc fcQFocusFrame_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFocusFrameVTable](fcQFocusFrame_vdata(self)[])
   let self = QFocusFrame(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
 proc QFocusFramedisconnectNotify*(self: gen_qfocusframe_types.QFocusFrame, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -809,7 +829,7 @@ proc QFocusFramedisconnectNotify*(self: gen_qfocusframe_types.QFocusFrame, signa
 proc fcQFocusFrame_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFocusFrameVTable](fcQFocusFrame_vdata(self)[])
   let self = QFocusFrame(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
 type VirtualQFocusFrame* {.inheritable.} = ref object of QFocusFrame
@@ -843,7 +863,7 @@ method event*(self: VirtualQFocusFrame, e: gen_qcoreevent_types.QEvent): bool {.
   QFocusFrameevent(self[], e)
 proc fcQFocusFrame_method_callback_event(self: pointer, e: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQFocusFrame](fcQFocusFrame_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: e)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: e, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
@@ -851,8 +871,8 @@ method eventFilter*(self: VirtualQFocusFrame, param1: gen_qobject_types.QObject,
   QFocusFrameeventFilter(self[], param1, param2)
 proc fcQFocusFrame_method_callback_eventFilter(self: pointer, param1: pointer, param2: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQFocusFrame](fcQFocusFrame_vdata(self)[])
-  let slotval1 = gen_qobject_types.QObject(h: param1)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: param2)
+  let slotval1 = gen_qobject_types.QObject(h: param1, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: param2, owned: false)
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
@@ -860,14 +880,14 @@ method paintEvent*(self: VirtualQFocusFrame, param1: gen_qevent_types.QPaintEven
   QFocusFramepaintEvent(self[], param1)
 proc fcQFocusFrame_method_callback_paintEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFocusFrame](fcQFocusFrame_vdata(self)[])
-  let slotval1 = gen_qevent_types.QPaintEvent(h: param1)
+  let slotval1 = gen_qevent_types.QPaintEvent(h: param1, owned: false)
   inst.paintEvent(slotval1)
 
 method initStyleOption*(self: VirtualQFocusFrame, option: gen_qstyleoption_types.QStyleOption): void {.base.} =
   QFocusFrameinitStyleOption(self[], option)
 proc fcQFocusFrame_method_callback_initStyleOption(self: pointer, option: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFocusFrame](fcQFocusFrame_vdata(self)[])
-  let slotval1 = gen_qstyleoption_types.QStyleOption(h: option)
+  let slotval1 = gen_qstyleoption_types.QStyleOption(h: option, owned: false)
   inst.initStyleOption(slotval1)
 
 method devType*(self: VirtualQFocusFrame): cint {.base.} =
@@ -924,161 +944,161 @@ method mousePressEvent*(self: VirtualQFocusFrame, event: gen_qevent_types.QMouse
   QFocusFramemousePressEvent(self[], event)
 proc fcQFocusFrame_method_callback_mousePressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFocusFrame](fcQFocusFrame_vdata(self)[])
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mousePressEvent(slotval1)
 
 method mouseReleaseEvent*(self: VirtualQFocusFrame, event: gen_qevent_types.QMouseEvent): void {.base.} =
   QFocusFramemouseReleaseEvent(self[], event)
 proc fcQFocusFrame_method_callback_mouseReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFocusFrame](fcQFocusFrame_vdata(self)[])
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mouseReleaseEvent(slotval1)
 
 method mouseDoubleClickEvent*(self: VirtualQFocusFrame, event: gen_qevent_types.QMouseEvent): void {.base.} =
   QFocusFramemouseDoubleClickEvent(self[], event)
 proc fcQFocusFrame_method_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFocusFrame](fcQFocusFrame_vdata(self)[])
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mouseDoubleClickEvent(slotval1)
 
 method mouseMoveEvent*(self: VirtualQFocusFrame, event: gen_qevent_types.QMouseEvent): void {.base.} =
   QFocusFramemouseMoveEvent(self[], event)
 proc fcQFocusFrame_method_callback_mouseMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFocusFrame](fcQFocusFrame_vdata(self)[])
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mouseMoveEvent(slotval1)
 
 method wheelEvent*(self: VirtualQFocusFrame, event: gen_qevent_types.QWheelEvent): void {.base.} =
   QFocusFramewheelEvent(self[], event)
 proc fcQFocusFrame_method_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFocusFrame](fcQFocusFrame_vdata(self)[])
-  let slotval1 = gen_qevent_types.QWheelEvent(h: event)
+  let slotval1 = gen_qevent_types.QWheelEvent(h: event, owned: false)
   inst.wheelEvent(slotval1)
 
 method keyPressEvent*(self: VirtualQFocusFrame, event: gen_qevent_types.QKeyEvent): void {.base.} =
   QFocusFramekeyPressEvent(self[], event)
 proc fcQFocusFrame_method_callback_keyPressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFocusFrame](fcQFocusFrame_vdata(self)[])
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   inst.keyPressEvent(slotval1)
 
 method keyReleaseEvent*(self: VirtualQFocusFrame, event: gen_qevent_types.QKeyEvent): void {.base.} =
   QFocusFramekeyReleaseEvent(self[], event)
 proc fcQFocusFrame_method_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFocusFrame](fcQFocusFrame_vdata(self)[])
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   inst.keyReleaseEvent(slotval1)
 
 method focusInEvent*(self: VirtualQFocusFrame, event: gen_qevent_types.QFocusEvent): void {.base.} =
   QFocusFramefocusInEvent(self[], event)
 proc fcQFocusFrame_method_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFocusFrame](fcQFocusFrame_vdata(self)[])
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   inst.focusInEvent(slotval1)
 
 method focusOutEvent*(self: VirtualQFocusFrame, event: gen_qevent_types.QFocusEvent): void {.base.} =
   QFocusFramefocusOutEvent(self[], event)
 proc fcQFocusFrame_method_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFocusFrame](fcQFocusFrame_vdata(self)[])
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   inst.focusOutEvent(slotval1)
 
 method enterEvent*(self: VirtualQFocusFrame, event: gen_qevent_types.QEnterEvent): void {.base.} =
   QFocusFrameenterEvent(self[], event)
 proc fcQFocusFrame_method_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFocusFrame](fcQFocusFrame_vdata(self)[])
-  let slotval1 = gen_qevent_types.QEnterEvent(h: event)
+  let slotval1 = gen_qevent_types.QEnterEvent(h: event, owned: false)
   inst.enterEvent(slotval1)
 
 method leaveEvent*(self: VirtualQFocusFrame, event: gen_qcoreevent_types.QEvent): void {.base.} =
   QFocusFrameleaveEvent(self[], event)
 proc fcQFocusFrame_method_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFocusFrame](fcQFocusFrame_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.leaveEvent(slotval1)
 
 method moveEvent*(self: VirtualQFocusFrame, event: gen_qevent_types.QMoveEvent): void {.base.} =
   QFocusFramemoveEvent(self[], event)
 proc fcQFocusFrame_method_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFocusFrame](fcQFocusFrame_vdata(self)[])
-  let slotval1 = gen_qevent_types.QMoveEvent(h: event)
+  let slotval1 = gen_qevent_types.QMoveEvent(h: event, owned: false)
   inst.moveEvent(slotval1)
 
 method resizeEvent*(self: VirtualQFocusFrame, event: gen_qevent_types.QResizeEvent): void {.base.} =
   QFocusFrameresizeEvent(self[], event)
 proc fcQFocusFrame_method_callback_resizeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFocusFrame](fcQFocusFrame_vdata(self)[])
-  let slotval1 = gen_qevent_types.QResizeEvent(h: event)
+  let slotval1 = gen_qevent_types.QResizeEvent(h: event, owned: false)
   inst.resizeEvent(slotval1)
 
 method closeEvent*(self: VirtualQFocusFrame, event: gen_qevent_types.QCloseEvent): void {.base.} =
   QFocusFramecloseEvent(self[], event)
 proc fcQFocusFrame_method_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFocusFrame](fcQFocusFrame_vdata(self)[])
-  let slotval1 = gen_qevent_types.QCloseEvent(h: event)
+  let slotval1 = gen_qevent_types.QCloseEvent(h: event, owned: false)
   inst.closeEvent(slotval1)
 
 method contextMenuEvent*(self: VirtualQFocusFrame, event: gen_qevent_types.QContextMenuEvent): void {.base.} =
   QFocusFramecontextMenuEvent(self[], event)
 proc fcQFocusFrame_method_callback_contextMenuEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFocusFrame](fcQFocusFrame_vdata(self)[])
-  let slotval1 = gen_qevent_types.QContextMenuEvent(h: event)
+  let slotval1 = gen_qevent_types.QContextMenuEvent(h: event, owned: false)
   inst.contextMenuEvent(slotval1)
 
 method tabletEvent*(self: VirtualQFocusFrame, event: gen_qevent_types.QTabletEvent): void {.base.} =
   QFocusFrametabletEvent(self[], event)
 proc fcQFocusFrame_method_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFocusFrame](fcQFocusFrame_vdata(self)[])
-  let slotval1 = gen_qevent_types.QTabletEvent(h: event)
+  let slotval1 = gen_qevent_types.QTabletEvent(h: event, owned: false)
   inst.tabletEvent(slotval1)
 
 method actionEvent*(self: VirtualQFocusFrame, event: gen_qevent_types.QActionEvent): void {.base.} =
   QFocusFrameactionEvent(self[], event)
 proc fcQFocusFrame_method_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFocusFrame](fcQFocusFrame_vdata(self)[])
-  let slotval1 = gen_qevent_types.QActionEvent(h: event)
+  let slotval1 = gen_qevent_types.QActionEvent(h: event, owned: false)
   inst.actionEvent(slotval1)
 
 method dragEnterEvent*(self: VirtualQFocusFrame, event: gen_qevent_types.QDragEnterEvent): void {.base.} =
   QFocusFramedragEnterEvent(self[], event)
 proc fcQFocusFrame_method_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFocusFrame](fcQFocusFrame_vdata(self)[])
-  let slotval1 = gen_qevent_types.QDragEnterEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragEnterEvent(h: event, owned: false)
   inst.dragEnterEvent(slotval1)
 
 method dragMoveEvent*(self: VirtualQFocusFrame, event: gen_qevent_types.QDragMoveEvent): void {.base.} =
   QFocusFramedragMoveEvent(self[], event)
 proc fcQFocusFrame_method_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFocusFrame](fcQFocusFrame_vdata(self)[])
-  let slotval1 = gen_qevent_types.QDragMoveEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragMoveEvent(h: event, owned: false)
   inst.dragMoveEvent(slotval1)
 
 method dragLeaveEvent*(self: VirtualQFocusFrame, event: gen_qevent_types.QDragLeaveEvent): void {.base.} =
   QFocusFramedragLeaveEvent(self[], event)
 proc fcQFocusFrame_method_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFocusFrame](fcQFocusFrame_vdata(self)[])
-  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event, owned: false)
   inst.dragLeaveEvent(slotval1)
 
 method dropEvent*(self: VirtualQFocusFrame, event: gen_qevent_types.QDropEvent): void {.base.} =
   QFocusFramedropEvent(self[], event)
 proc fcQFocusFrame_method_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFocusFrame](fcQFocusFrame_vdata(self)[])
-  let slotval1 = gen_qevent_types.QDropEvent(h: event)
+  let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
   inst.dropEvent(slotval1)
 
 method showEvent*(self: VirtualQFocusFrame, event: gen_qevent_types.QShowEvent): void {.base.} =
   QFocusFrameshowEvent(self[], event)
 proc fcQFocusFrame_method_callback_showEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFocusFrame](fcQFocusFrame_vdata(self)[])
-  let slotval1 = gen_qevent_types.QShowEvent(h: event)
+  let slotval1 = gen_qevent_types.QShowEvent(h: event, owned: false)
   inst.showEvent(slotval1)
 
 method hideEvent*(self: VirtualQFocusFrame, event: gen_qevent_types.QHideEvent): void {.base.} =
   QFocusFramehideEvent(self[], event)
 proc fcQFocusFrame_method_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFocusFrame](fcQFocusFrame_vdata(self)[])
-  let slotval1 = gen_qevent_types.QHideEvent(h: event)
+  let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   inst.hideEvent(slotval1)
 
 method nativeEvent*(self: VirtualQFocusFrame, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
@@ -1098,7 +1118,7 @@ method changeEvent*(self: VirtualQFocusFrame, param1: gen_qcoreevent_types.QEven
   QFocusFramechangeEvent(self[], param1)
 proc fcQFocusFrame_method_callback_changeEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFocusFrame](fcQFocusFrame_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: param1)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
   inst.changeEvent(slotval1)
 
 method metric*(self: VirtualQFocusFrame, param1: cint): cint {.base.} =
@@ -1113,14 +1133,14 @@ method initPainter*(self: VirtualQFocusFrame, painter: gen_qpainter_types.QPaint
   QFocusFrameinitPainter(self[], painter)
 proc fcQFocusFrame_method_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFocusFrame](fcQFocusFrame_vdata(self)[])
-  let slotval1 = gen_qpainter_types.QPainter(h: painter)
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
   inst.initPainter(slotval1)
 
 method redirected*(self: VirtualQFocusFrame, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.base.} =
   QFocusFrameredirected(self[], offset)
 proc fcQFocusFrame_method_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQFocusFrame](fcQFocusFrame_vdata(self)[])
-  let slotval1 = gen_qpoint_types.QPoint(h: offset)
+  let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
   var virtualReturn = inst.redirected(slotval1)
   virtualReturn.h
 
@@ -1135,7 +1155,7 @@ method inputMethodEvent*(self: VirtualQFocusFrame, param1: gen_qevent_types.QInp
   QFocusFrameinputMethodEvent(self[], param1)
 proc fcQFocusFrame_method_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFocusFrame](fcQFocusFrame_vdata(self)[])
-  let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1)
+  let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1, owned: false)
   inst.inputMethodEvent(slotval1)
 
 method inputMethodQuery*(self: VirtualQFocusFrame, param1: cint): gen_qvariant_types.QVariant {.base.} =
@@ -1158,35 +1178,35 @@ method timerEvent*(self: VirtualQFocusFrame, event: gen_qcoreevent_types.QTimerE
   QFocusFrametimerEvent(self[], event)
 proc fcQFocusFrame_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFocusFrame](fcQFocusFrame_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
 method childEvent*(self: VirtualQFocusFrame, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
   QFocusFramechildEvent(self[], event)
 proc fcQFocusFrame_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFocusFrame](fcQFocusFrame_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
 method customEvent*(self: VirtualQFocusFrame, event: gen_qcoreevent_types.QEvent): void {.base.} =
   QFocusFramecustomEvent(self[], event)
 proc fcQFocusFrame_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFocusFrame](fcQFocusFrame_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
 method connectNotify*(self: VirtualQFocusFrame, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
   QFocusFrameconnectNotify(self[], signal)
 proc fcQFocusFrame_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFocusFrame](fcQFocusFrame_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
 method disconnectNotify*(self: VirtualQFocusFrame, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
   QFocusFramedisconnectNotify(self[], signal)
 proc fcQFocusFrame_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFocusFrame](fcQFocusFrame_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
 
 proc updateMicroFocus*(self: gen_qfocusframe_types.QFocusFrame): void =
@@ -1205,7 +1225,7 @@ proc focusPreviousChild*(self: gen_qfocusframe_types.QFocusFrame): bool =
   fcQFocusFrame_protectedbase_focusPreviousChild(self.h)
 
 proc sender*(self: gen_qfocusframe_types.QFocusFrame): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQFocusFrame_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQFocusFrame_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qfocusframe_types.QFocusFrame): cint =
   fcQFocusFrame_protectedbase_senderSignalIndex(self.h)
@@ -1326,7 +1346,7 @@ proc create*(T: type gen_qfocusframe_types.QFocusFrame,
     vtbl[].vtbl.connectNotify = fcQFocusFrame_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQFocusFrame_vtable_callback_disconnectNotify
-  let tmp = gen_qfocusframe_types.QFocusFrame(h: fcQFocusFrame_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h))
+  let tmp = gen_qfocusframe_types.QFocusFrame(h: fcQFocusFrame_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h), owned: true)
   fcQFocusFrame_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qfocusframe_types.QFocusFrame,
@@ -1438,13 +1458,14 @@ proc create*(T: type gen_qfocusframe_types.QFocusFrame,
     vtbl[].vtbl.connectNotify = fcQFocusFrame_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQFocusFrame_vtable_callback_disconnectNotify
-  let tmp = gen_qfocusframe_types.QFocusFrame(h: fcQFocusFrame_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer))))
+  let tmp = gen_qfocusframe_types.QFocusFrame(h: fcQFocusFrame_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer))), owned: true)
   fcQFocusFrame_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQFocusFrame_mvtbl = cQFocusFrameVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQFocusFrame()[])](self.fcQFocusFrame_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   metaObject: fcQFocusFrame_method_callback_metaObject,
   metacast: fcQFocusFrame_method_callback_metacast,
@@ -1513,5 +1534,3 @@ proc create*(T: type gen_qfocusframe_types.QFocusFrame,
 
 proc staticMetaObject*(_: type gen_qfocusframe_types.QFocusFrame): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQFocusFrame_staticMetaObject())
-proc delete*(self: gen_qfocusframe_types.QFocusFrame) =
-  fcQFocusFrame_delete(self.h)

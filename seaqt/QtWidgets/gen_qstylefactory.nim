@@ -32,9 +32,6 @@ func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
     else:
       copyMem(addr result[0], v.data, len)
 
-const cflags = gorge("pkg-config --cflags Qt6Widgets")  & " -fPIC"
-{.compile("gen_qstylefactory.cpp", cflags).}
-
 
 import ./gen_qstylefactory_types
 export gen_qstylefactory_types
@@ -48,7 +45,6 @@ type cQStyleFactory*{.exportc: "QStyleFactory", incompleteStruct.} = object
 
 proc fcQStyleFactory_keys(): struct_miqt_array {.importc: "QStyleFactory_keys".}
 proc fcQStyleFactory_create(param1: struct_miqt_string): pointer {.importc: "QStyleFactory_create".}
-proc fcQStyleFactory_delete(self: pointer) {.importc: "QStyleFactory_delete".}
 
 proc keys*(_: type gen_qstylefactory_types.QStyleFactory): seq[string] =
   var v_ma = fcQStyleFactory_keys()
@@ -63,7 +59,5 @@ proc keys*(_: type gen_qstylefactory_types.QStyleFactory): seq[string] =
   vx_ret
 
 proc create*(_: type gen_qstylefactory_types.QStyleFactory, param1: string): gen_qstyle_types.QStyle =
-  gen_qstyle_types.QStyle(h: fcQStyleFactory_create(struct_miqt_string(data: if len(param1) > 0: addr param1[0] else: nil, len: csize_t(len(param1)))))
+  gen_qstyle_types.QStyle(h: fcQStyleFactory_create(struct_miqt_string(data: if len(param1) > 0: addr param1[0] else: nil, len: csize_t(len(param1)))), owned: false)
 
-proc delete*(self: gen_qstylefactory_types.QStyleFactory) =
-  fcQStyleFactory_delete(self.h)
