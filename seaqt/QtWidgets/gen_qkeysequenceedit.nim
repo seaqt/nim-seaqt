@@ -320,7 +320,7 @@ type QKeySequenceEditdragLeaveEventProc* = proc(self: QKeySequenceEdit, event: g
 type QKeySequenceEditdropEventProc* = proc(self: QKeySequenceEdit, event: gen_qevent_types.QDropEvent): void {.raises: [], gcsafe.}
 type QKeySequenceEditshowEventProc* = proc(self: QKeySequenceEdit, event: gen_qevent_types.QShowEvent): void {.raises: [], gcsafe.}
 type QKeySequenceEdithideEventProc* = proc(self: QKeySequenceEdit, event: gen_qevent_types.QHideEvent): void {.raises: [], gcsafe.}
-type QKeySequenceEditnativeEventProc* = proc(self: QKeySequenceEdit, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
+type QKeySequenceEditnativeEventProc* = proc(self: QKeySequenceEdit, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
 type QKeySequenceEditchangeEventProc* = proc(self: QKeySequenceEdit, param1: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QKeySequenceEditmetricProc* = proc(self: QKeySequenceEdit, param1: cint): cint {.raises: [], gcsafe.}
 type QKeySequenceEditinitPainterProc* = proc(self: QKeySequenceEdit, painter: gen_qpainter_types.QPainter): void {.raises: [], gcsafe.}
@@ -728,7 +728,7 @@ proc fcQKeySequenceEdit_vtable_callback_hideEvent(self: pointer, event: pointer)
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   vtbl[].hideEvent(self, slotval1)
 
-proc QKeySequenceEditnativeEvent*(self: gen_qkeysequenceedit_types.QKeySequenceEdit, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool =
+proc QKeySequenceEditnativeEvent*(self: gen_qkeysequenceedit_types.QKeySequenceEdit, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool =
   fcQKeySequenceEdit_virtualbase_nativeEvent(self.h, struct_miqt_string(data: if len(eventType) > 0: addr eventType[0] else: nil, len: csize_t(len(eventType))), message, resultVal)
 
 proc fcQKeySequenceEdit_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
@@ -1135,7 +1135,7 @@ proc fcQKeySequenceEdit_method_callback_hideEvent(self: pointer, event: pointer)
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   inst.hideEvent(slotval1)
 
-method nativeEvent*(self: VirtualQKeySequenceEdit, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
+method nativeEvent*(self: VirtualQKeySequenceEdit, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
   QKeySequenceEditnativeEvent(self[], eventType, message, resultVal)
 proc fcQKeySequenceEdit_method_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
   let inst = cast[VirtualQKeySequenceEdit](fcQKeySequenceEdit_vdata(self)[])
@@ -1778,12 +1778,14 @@ proc create*(T: type gen_qkeysequenceedit_types.QKeySequenceEdit,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQKeySequenceEdit_new(addr(cQKeySequenceEdit_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQKeySequenceEdit_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qkeysequenceedit_types.QKeySequenceEdit,
     inst: VirtualQKeySequenceEdit) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQKeySequenceEdit_new2(addr(cQKeySequenceEdit_mvtbl), csize_t(sizeof(pointer)))
   fcQKeySequenceEdit_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qkeysequenceedit_types.QKeySequenceEdit,
     keySequence: gen_qkeysequence_types.QKeySequence,
@@ -1791,6 +1793,7 @@ proc create*(T: type gen_qkeysequenceedit_types.QKeySequenceEdit,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQKeySequenceEdit_new3(addr(cQKeySequenceEdit_mvtbl), csize_t(sizeof(pointer)), keySequence.h)
   fcQKeySequenceEdit_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qkeysequenceedit_types.QKeySequenceEdit,
     keySequence: gen_qkeysequence_types.QKeySequence, parent: gen_qwidget_types.QWidget,
@@ -1798,6 +1801,7 @@ proc create*(T: type gen_qkeysequenceedit_types.QKeySequenceEdit,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQKeySequenceEdit_new4(addr(cQKeySequenceEdit_mvtbl), csize_t(sizeof(pointer)), keySequence.h, parent.h)
   fcQKeySequenceEdit_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qkeysequenceedit_types.QKeySequenceEdit): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQKeySequenceEdit_staticMetaObject())

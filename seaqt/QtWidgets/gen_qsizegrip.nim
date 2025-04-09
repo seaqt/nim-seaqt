@@ -261,7 +261,7 @@ type QSizeGripdragEnterEventProc* = proc(self: QSizeGrip, event: gen_qevent_type
 type QSizeGripdragMoveEventProc* = proc(self: QSizeGrip, event: gen_qevent_types.QDragMoveEvent): void {.raises: [], gcsafe.}
 type QSizeGripdragLeaveEventProc* = proc(self: QSizeGrip, event: gen_qevent_types.QDragLeaveEvent): void {.raises: [], gcsafe.}
 type QSizeGripdropEventProc* = proc(self: QSizeGrip, event: gen_qevent_types.QDropEvent): void {.raises: [], gcsafe.}
-type QSizeGripnativeEventProc* = proc(self: QSizeGrip, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
+type QSizeGripnativeEventProc* = proc(self: QSizeGrip, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
 type QSizeGripchangeEventProc* = proc(self: QSizeGrip, param1: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QSizeGripmetricProc* = proc(self: QSizeGrip, param1: cint): cint {.raises: [], gcsafe.}
 type QSizeGripinitPainterProc* = proc(self: QSizeGrip, painter: gen_qpainter_types.QPainter): void {.raises: [], gcsafe.}
@@ -671,7 +671,7 @@ proc fcQSizeGrip_vtable_callback_dropEvent(self: pointer, event: pointer): void 
   let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
   vtbl[].dropEvent(self, slotval1)
 
-proc QSizeGripnativeEvent*(self: gen_qsizegrip_types.QSizeGrip, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool =
+proc QSizeGripnativeEvent*(self: gen_qsizegrip_types.QSizeGrip, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool =
   fcQSizeGrip_virtualbase_nativeEvent(self.h, struct_miqt_string(data: if len(eventType) > 0: addr eventType[0] else: nil, len: csize_t(len(eventType))), message, resultVal)
 
 proc fcQSizeGrip_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
@@ -1078,7 +1078,7 @@ proc fcQSizeGrip_method_callback_dropEvent(self: pointer, event: pointer): void 
   let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
   inst.dropEvent(slotval1)
 
-method nativeEvent*(self: VirtualQSizeGrip, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
+method nativeEvent*(self: VirtualQSizeGrip, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
   QSizeGripnativeEvent(self[], eventType, message, resultVal)
 proc fcQSizeGrip_method_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
   let inst = cast[VirtualQSizeGrip](fcQSizeGrip_vdata(self)[])
@@ -1387,6 +1387,7 @@ proc create*(T: type gen_qsizegrip_types.QSizeGrip,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQSizeGrip_new(addr(cQSizeGrip_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQSizeGrip_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qsizegrip_types.QSizeGrip): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQSizeGrip_staticMetaObject())

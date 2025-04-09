@@ -247,7 +247,7 @@ proc tr*(_: type gen_qabstractprintdialog_types.QAbstractPrintDialog, s: cstring
   c_free(v_ms.data)
   vx_ret
 
-proc setOptionTabs*(self: gen_qabstractprintdialog_types.QAbstractPrintDialog, tabs: seq[gen_qwidget_types.QWidget]): void =
+proc setOptionTabs*(self: gen_qabstractprintdialog_types.QAbstractPrintDialog, tabs: openArray[gen_qwidget_types.QWidget]): void =
   var tabs_CArray = newSeq[pointer](len(tabs))
   for i in 0..<len(tabs):
     tabs_CArray[i] = tabs[i].h
@@ -334,7 +334,7 @@ type QAbstractPrintDialogdragMoveEventProc* = proc(self: QAbstractPrintDialog, e
 type QAbstractPrintDialogdragLeaveEventProc* = proc(self: QAbstractPrintDialog, event: gen_qevent_types.QDragLeaveEvent): void {.raises: [], gcsafe.}
 type QAbstractPrintDialogdropEventProc* = proc(self: QAbstractPrintDialog, event: gen_qevent_types.QDropEvent): void {.raises: [], gcsafe.}
 type QAbstractPrintDialoghideEventProc* = proc(self: QAbstractPrintDialog, event: gen_qevent_types.QHideEvent): void {.raises: [], gcsafe.}
-type QAbstractPrintDialognativeEventProc* = proc(self: QAbstractPrintDialog, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
+type QAbstractPrintDialognativeEventProc* = proc(self: QAbstractPrintDialog, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
 type QAbstractPrintDialogchangeEventProc* = proc(self: QAbstractPrintDialog, param1: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QAbstractPrintDialogmetricProc* = proc(self: QAbstractPrintDialog, param1: cint): cint {.raises: [], gcsafe.}
 type QAbstractPrintDialoginitPainterProc* = proc(self: QAbstractPrintDialog, painter: gen_qpainter_types.QPainter): void {.raises: [], gcsafe.}
@@ -791,7 +791,7 @@ proc fcQAbstractPrintDialog_vtable_callback_hideEvent(self: pointer, event: poin
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   vtbl[].hideEvent(self, slotval1)
 
-proc QAbstractPrintDialognativeEvent*(self: gen_qabstractprintdialog_types.QAbstractPrintDialog, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool =
+proc QAbstractPrintDialognativeEvent*(self: gen_qabstractprintdialog_types.QAbstractPrintDialog, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool =
   fcQAbstractPrintDialog_virtualbase_nativeEvent(self.h, struct_miqt_string(data: if len(eventType) > 0: addr eventType[0] else: nil, len: csize_t(len(eventType))), message, resultVal)
 
 proc fcQAbstractPrintDialog_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
@@ -1230,7 +1230,7 @@ proc fcQAbstractPrintDialog_method_callback_hideEvent(self: pointer, event: poin
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   inst.hideEvent(slotval1)
 
-method nativeEvent*(self: VirtualQAbstractPrintDialog, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
+method nativeEvent*(self: VirtualQAbstractPrintDialog, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
   QAbstractPrintDialognativeEvent(self[], eventType, message, resultVal)
 proc fcQAbstractPrintDialog_method_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
   let inst = cast[VirtualQAbstractPrintDialog](fcQAbstractPrintDialog_vdata(self)[])
@@ -1678,6 +1678,7 @@ proc create*(T: type gen_qabstractprintdialog_types.QAbstractPrintDialog,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQAbstractPrintDialog_new(addr(cQAbstractPrintDialog_mvtbl), csize_t(sizeof(pointer)), printer.h)
   fcQAbstractPrintDialog_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qabstractprintdialog_types.QAbstractPrintDialog,
     printer: gen_qprinter_types.QPrinter, parent: gen_qwidget_types.QWidget,
@@ -1685,6 +1686,7 @@ proc create*(T: type gen_qabstractprintdialog_types.QAbstractPrintDialog,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQAbstractPrintDialog_new2(addr(cQAbstractPrintDialog_mvtbl), csize_t(sizeof(pointer)), printer.h, parent.h)
   fcQAbstractPrintDialog_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qabstractprintdialog_types.QAbstractPrintDialog): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQAbstractPrintDialog_staticMetaObject())

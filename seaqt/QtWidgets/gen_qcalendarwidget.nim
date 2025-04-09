@@ -557,7 +557,7 @@ type QCalendarWidgetdragLeaveEventProc* = proc(self: QCalendarWidget, event: gen
 type QCalendarWidgetdropEventProc* = proc(self: QCalendarWidget, event: gen_qevent_types.QDropEvent): void {.raises: [], gcsafe.}
 type QCalendarWidgetshowEventProc* = proc(self: QCalendarWidget, event: gen_qevent_types.QShowEvent): void {.raises: [], gcsafe.}
 type QCalendarWidgethideEventProc* = proc(self: QCalendarWidget, event: gen_qevent_types.QHideEvent): void {.raises: [], gcsafe.}
-type QCalendarWidgetnativeEventProc* = proc(self: QCalendarWidget, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
+type QCalendarWidgetnativeEventProc* = proc(self: QCalendarWidget, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
 type QCalendarWidgetchangeEventProc* = proc(self: QCalendarWidget, param1: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QCalendarWidgetmetricProc* = proc(self: QCalendarWidget, param1: cint): cint {.raises: [], gcsafe.}
 type QCalendarWidgetinitPainterProc* = proc(self: QCalendarWidget, painter: gen_qpainter_types.QPainter): void {.raises: [], gcsafe.}
@@ -979,7 +979,7 @@ proc fcQCalendarWidget_vtable_callback_hideEvent(self: pointer, event: pointer):
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   vtbl[].hideEvent(self, slotval1)
 
-proc QCalendarWidgetnativeEvent*(self: gen_qcalendarwidget_types.QCalendarWidget, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool =
+proc QCalendarWidgetnativeEvent*(self: gen_qcalendarwidget_types.QCalendarWidget, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool =
   fcQCalendarWidget_virtualbase_nativeEvent(self.h, struct_miqt_string(data: if len(eventType) > 0: addr eventType[0] else: nil, len: csize_t(len(eventType))), message, resultVal)
 
 proc fcQCalendarWidget_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
@@ -1395,7 +1395,7 @@ proc fcQCalendarWidget_method_callback_hideEvent(self: pointer, event: pointer):
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   inst.hideEvent(slotval1)
 
-method nativeEvent*(self: VirtualQCalendarWidget, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
+method nativeEvent*(self: VirtualQCalendarWidget, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
   QCalendarWidgetnativeEvent(self[], eventType, message, resultVal)
 proc fcQCalendarWidget_method_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
   let inst = cast[VirtualQCalendarWidget](fcQCalendarWidget_vdata(self)[])
@@ -1825,12 +1825,14 @@ proc create*(T: type gen_qcalendarwidget_types.QCalendarWidget,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQCalendarWidget_new(addr(cQCalendarWidget_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQCalendarWidget_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qcalendarwidget_types.QCalendarWidget,
     inst: VirtualQCalendarWidget) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQCalendarWidget_new2(addr(cQCalendarWidget_mvtbl), csize_t(sizeof(pointer)))
   fcQCalendarWidget_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qcalendarwidget_types.QCalendarWidget): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQCalendarWidget_staticMetaObject())

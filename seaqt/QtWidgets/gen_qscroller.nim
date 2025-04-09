@@ -185,7 +185,7 @@ proc pixelPerMeter*(self: gen_qscroller_types.QScroller): gen_qpoint_types.QPoin
 proc scrollerProperties*(self: gen_qscroller_types.QScroller): gen_qscrollerproperties_types.QScrollerProperties =
   gen_qscrollerproperties_types.QScrollerProperties(h: fcQScroller_scrollerProperties(self.h), owned: true)
 
-proc setSnapPositionsX*(self: gen_qscroller_types.QScroller, positions: seq[float64]): void =
+proc setSnapPositionsX*(self: gen_qscroller_types.QScroller, positions: openArray[float64]): void =
   var positions_CArray = newSeq[float64](len(positions))
   for i in 0..<len(positions):
     positions_CArray[i] = positions[i]
@@ -195,7 +195,7 @@ proc setSnapPositionsX*(self: gen_qscroller_types.QScroller, positions: seq[floa
 proc setSnapPositionsX*(self: gen_qscroller_types.QScroller, first: float64, interval: float64): void =
   fcQScroller_setSnapPositionsX2(self.h, first, interval)
 
-proc setSnapPositionsY*(self: gen_qscroller_types.QScroller, positions: seq[float64]): void =
+proc setSnapPositionsY*(self: gen_qscroller_types.QScroller, positions: openArray[float64]): void =
   var positions_CArray = newSeq[float64](len(positions))
   for i in 0..<len(positions):
     positions_CArray[i] = positions[i]

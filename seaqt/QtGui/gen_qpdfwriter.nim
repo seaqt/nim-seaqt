@@ -172,7 +172,7 @@ proc title*(self: gen_qpdfwriter_types.QPdfWriter): string =
   c_free(v_ms.data)
   vx_ret
 
-proc setTitle*(self: gen_qpdfwriter_types.QPdfWriter, title: string): void =
+proc setTitle*(self: gen_qpdfwriter_types.QPdfWriter, title: openArray[char]): void =
   fcQPdfWriter_setTitle(self.h, struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))))
 
 proc creator*(self: gen_qpdfwriter_types.QPdfWriter): string =
@@ -181,7 +181,7 @@ proc creator*(self: gen_qpdfwriter_types.QPdfWriter): string =
   c_free(v_ms.data)
   vx_ret
 
-proc setCreator*(self: gen_qpdfwriter_types.QPdfWriter, creator: string): void =
+proc setCreator*(self: gen_qpdfwriter_types.QPdfWriter, creator: openArray[char]): void =
   fcQPdfWriter_setCreator(self.h, struct_miqt_string(data: if len(creator) > 0: addr creator[0] else: nil, len: csize_t(len(creator))))
 
 proc newPage*(self: gen_qpdfwriter_types.QPdfWriter): bool =
@@ -193,7 +193,7 @@ proc setResolution*(self: gen_qpdfwriter_types.QPdfWriter, resolution: cint): vo
 proc resolution*(self: gen_qpdfwriter_types.QPdfWriter): cint =
   fcQPdfWriter_resolution(self.h)
 
-proc setDocumentXmpMetadata*(self: gen_qpdfwriter_types.QPdfWriter, xmpMetadata: seq[byte]): void =
+proc setDocumentXmpMetadata*(self: gen_qpdfwriter_types.QPdfWriter, xmpMetadata: openArray[byte]): void =
   fcQPdfWriter_setDocumentXmpMetadata(self.h, struct_miqt_string(data: if len(xmpMetadata) > 0: addr xmpMetadata[0] else: nil, len: csize_t(len(xmpMetadata))))
 
 proc documentXmpMetadata*(self: gen_qpdfwriter_types.QPdfWriter): seq[byte] =
@@ -202,7 +202,7 @@ proc documentXmpMetadata*(self: gen_qpdfwriter_types.QPdfWriter): seq[byte] =
   c_free(v_bytearray.data)
   vx_ret
 
-proc addFileAttachment*(self: gen_qpdfwriter_types.QPdfWriter, fileName: string, data: seq[byte]): void =
+proc addFileAttachment*(self: gen_qpdfwriter_types.QPdfWriter, fileName: openArray[char], data: openArray[byte]): void =
   fcQPdfWriter_addFileAttachment(self.h, struct_miqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))), struct_miqt_string(data: if len(data) > 0: addr data[0] else: nil, len: csize_t(len(data))))
 
 proc tr*(_: type gen_qpdfwriter_types.QPdfWriter, s: cstring, c: cstring): string =
@@ -217,7 +217,7 @@ proc tr*(_: type gen_qpdfwriter_types.QPdfWriter, s: cstring, c: cstring, n: cin
   c_free(v_ms.data)
   vx_ret
 
-proc addFileAttachment*(self: gen_qpdfwriter_types.QPdfWriter, fileName: string, data: seq[byte], mimeType: string): void =
+proc addFileAttachment*(self: gen_qpdfwriter_types.QPdfWriter, fileName: openArray[char], data: openArray[byte], mimeType: openArray[char]): void =
   fcQPdfWriter_addFileAttachment3(self.h, struct_miqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))), struct_miqt_string(data: if len(data) > 0: addr data[0] else: nil, len: csize_t(len(data))), struct_miqt_string(data: if len(mimeType) > 0: addr mimeType[0] else: nil, len: csize_t(len(mimeType))))
 
 type QPdfWritermetaObjectProc* = proc(self: QPdfWriter): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
@@ -673,7 +673,7 @@ proc isSignalConnected*(self: gen_qpdfwriter_types.QPdfWriter, signal: gen_qmeta
   fcQPdfWriter_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qpdfwriter_types.QPdfWriter,
-    filename: string,
+    filename: openArray[char],
     vtbl: ref QPdfWriterVTable = nil): gen_qpdfwriter_types.QPdfWriter =
   let vtbl = if vtbl == nil: new QPdfWriterVTable else: vtbl
   GC_ref(vtbl)
@@ -812,11 +812,12 @@ const cQPdfWriter_mvtbl = cQPdfWriterVTable(
   sharedPainter: fcQPdfWriter_method_callback_sharedPainter,
 )
 proc create*(T: type gen_qpdfwriter_types.QPdfWriter,
-    filename: string,
+    filename: openArray[char],
     inst: VirtualQPdfWriter) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQPdfWriter_new(addr(cQPdfWriter_mvtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(filename) > 0: addr filename[0] else: nil, len: csize_t(len(filename))))
   fcQPdfWriter_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qpdfwriter_types.QPdfWriter,
     device: gen_qiodevice_types.QIODevice,
@@ -824,6 +825,7 @@ proc create*(T: type gen_qpdfwriter_types.QPdfWriter,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQPdfWriter_new2(addr(cQPdfWriter_mvtbl), csize_t(sizeof(pointer)), device.h)
   fcQPdfWriter_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qpdfwriter_types.QPdfWriter): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQPdfWriter_staticMetaObject())

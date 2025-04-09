@@ -389,7 +389,7 @@ type QMdiSubWindowdragEnterEventProc* = proc(self: QMdiSubWindow, event: gen_qev
 type QMdiSubWindowdragMoveEventProc* = proc(self: QMdiSubWindow, event: gen_qevent_types.QDragMoveEvent): void {.raises: [], gcsafe.}
 type QMdiSubWindowdragLeaveEventProc* = proc(self: QMdiSubWindow, event: gen_qevent_types.QDragLeaveEvent): void {.raises: [], gcsafe.}
 type QMdiSubWindowdropEventProc* = proc(self: QMdiSubWindow, event: gen_qevent_types.QDropEvent): void {.raises: [], gcsafe.}
-type QMdiSubWindownativeEventProc* = proc(self: QMdiSubWindow, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
+type QMdiSubWindownativeEventProc* = proc(self: QMdiSubWindow, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
 type QMdiSubWindowmetricProc* = proc(self: QMdiSubWindow, param1: cint): cint {.raises: [], gcsafe.}
 type QMdiSubWindowinitPainterProc* = proc(self: QMdiSubWindow, painter: gen_qpainter_types.QPainter): void {.raises: [], gcsafe.}
 type QMdiSubWindowredirectedProc* = proc(self: QMdiSubWindow, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.raises: [], gcsafe.}
@@ -823,7 +823,7 @@ proc fcQMdiSubWindow_vtable_callback_dropEvent(self: pointer, event: pointer): v
   let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
   vtbl[].dropEvent(self, slotval1)
 
-proc QMdiSubWindownativeEvent*(self: gen_qmdisubwindow_types.QMdiSubWindow, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool =
+proc QMdiSubWindownativeEvent*(self: gen_qmdisubwindow_types.QMdiSubWindow, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool =
   fcQMdiSubWindow_virtualbase_nativeEvent(self.h, struct_miqt_string(data: if len(eventType) > 0: addr eventType[0] else: nil, len: csize_t(len(eventType))), message, resultVal)
 
 proc fcQMdiSubWindow_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
@@ -1224,7 +1224,7 @@ proc fcQMdiSubWindow_method_callback_dropEvent(self: pointer, event: pointer): v
   let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
   inst.dropEvent(slotval1)
 
-method nativeEvent*(self: VirtualQMdiSubWindow, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
+method nativeEvent*(self: VirtualQMdiSubWindow, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
   QMdiSubWindownativeEvent(self[], eventType, message, resultVal)
 proc fcQMdiSubWindow_method_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
   let inst = cast[VirtualQMdiSubWindow](fcQMdiSubWindow_vdata(self)[])
@@ -1733,12 +1733,14 @@ proc create*(T: type gen_qmdisubwindow_types.QMdiSubWindow,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQMdiSubWindow_new(addr(cQMdiSubWindow_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQMdiSubWindow_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qmdisubwindow_types.QMdiSubWindow,
     inst: VirtualQMdiSubWindow) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQMdiSubWindow_new2(addr(cQMdiSubWindow_mvtbl), csize_t(sizeof(pointer)))
   fcQMdiSubWindow_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qmdisubwindow_types.QMdiSubWindow,
     parent: gen_qwidget_types.QWidget, flags: cint,
@@ -1746,6 +1748,7 @@ proc create*(T: type gen_qmdisubwindow_types.QMdiSubWindow,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQMdiSubWindow_new3(addr(cQMdiSubWindow_mvtbl), csize_t(sizeof(pointer)), parent.h, cint(flags))
   fcQMdiSubWindow_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qmdisubwindow_types.QMdiSubWindow): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQMdiSubWindow_staticMetaObject())

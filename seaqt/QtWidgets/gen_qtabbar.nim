@@ -321,16 +321,16 @@ proc shape*(self: gen_qtabbar_types.QTabBar): cint =
 proc setShape*(self: gen_qtabbar_types.QTabBar, shape: cint): void =
   fcQTabBar_setShape(self.h, cint(shape))
 
-proc addTab*(self: gen_qtabbar_types.QTabBar, text: string): cint =
+proc addTab*(self: gen_qtabbar_types.QTabBar, text: openArray[char]): cint =
   fcQTabBar_addTab(self.h, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
 
-proc addTab*(self: gen_qtabbar_types.QTabBar, icon: gen_qicon_types.QIcon, text: string): cint =
+proc addTab*(self: gen_qtabbar_types.QTabBar, icon: gen_qicon_types.QIcon, text: openArray[char]): cint =
   fcQTabBar_addTab2(self.h, icon.h, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
 
-proc insertTab*(self: gen_qtabbar_types.QTabBar, index: cint, text: string): cint =
+proc insertTab*(self: gen_qtabbar_types.QTabBar, index: cint, text: openArray[char]): cint =
   fcQTabBar_insertTab(self.h, index, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
 
-proc insertTab*(self: gen_qtabbar_types.QTabBar, index: cint, icon: gen_qicon_types.QIcon, text: string): cint =
+proc insertTab*(self: gen_qtabbar_types.QTabBar, index: cint, icon: gen_qicon_types.QIcon, text: openArray[char]): cint =
   fcQTabBar_insertTab2(self.h, index, icon.h, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
 
 proc removeTab*(self: gen_qtabbar_types.QTabBar, index: cint): void =
@@ -357,7 +357,7 @@ proc tabText*(self: gen_qtabbar_types.QTabBar, index: cint): string =
   c_free(v_ms.data)
   vx_ret
 
-proc setTabText*(self: gen_qtabbar_types.QTabBar, index: cint, text: string): void =
+proc setTabText*(self: gen_qtabbar_types.QTabBar, index: cint, text: openArray[char]): void =
   fcQTabBar_setTabText(self.h, index, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
 
 proc tabTextColor*(self: gen_qtabbar_types.QTabBar, index: cint): gen_qcolor_types.QColor =
@@ -378,7 +378,7 @@ proc elideMode*(self: gen_qtabbar_types.QTabBar): cint =
 proc setElideMode*(self: gen_qtabbar_types.QTabBar, mode: cint): void =
   fcQTabBar_setElideMode(self.h, cint(mode))
 
-proc setTabToolTip*(self: gen_qtabbar_types.QTabBar, index: cint, tip: string): void =
+proc setTabToolTip*(self: gen_qtabbar_types.QTabBar, index: cint, tip: openArray[char]): void =
   fcQTabBar_setTabToolTip(self.h, index, struct_miqt_string(data: if len(tip) > 0: addr tip[0] else: nil, len: csize_t(len(tip))))
 
 proc tabToolTip*(self: gen_qtabbar_types.QTabBar, index: cint): string =
@@ -387,7 +387,7 @@ proc tabToolTip*(self: gen_qtabbar_types.QTabBar, index: cint): string =
   c_free(v_ms.data)
   vx_ret
 
-proc setTabWhatsThis*(self: gen_qtabbar_types.QTabBar, index: cint, text: string): void =
+proc setTabWhatsThis*(self: gen_qtabbar_types.QTabBar, index: cint, text: openArray[char]): void =
   fcQTabBar_setTabWhatsThis(self.h, index, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
 
 proc tabWhatsThis*(self: gen_qtabbar_types.QTabBar, index: cint): string =
@@ -492,7 +492,7 @@ proc accessibleTabName*(self: gen_qtabbar_types.QTabBar, index: cint): string =
   c_free(v_ms.data)
   vx_ret
 
-proc setAccessibleTabName*(self: gen_qtabbar_types.QTabBar, index: cint, name: string): void =
+proc setAccessibleTabName*(self: gen_qtabbar_types.QTabBar, index: cint, name: openArray[char]): void =
   fcQTabBar_setAccessibleTabName(self.h, index, struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))))
 
 proc setCurrentIndex*(self: gen_qtabbar_types.QTabBar, index: cint): void =
@@ -655,7 +655,7 @@ type QTabBardragEnterEventProc* = proc(self: QTabBar, event: gen_qevent_types.QD
 type QTabBardragMoveEventProc* = proc(self: QTabBar, event: gen_qevent_types.QDragMoveEvent): void {.raises: [], gcsafe.}
 type QTabBardragLeaveEventProc* = proc(self: QTabBar, event: gen_qevent_types.QDragLeaveEvent): void {.raises: [], gcsafe.}
 type QTabBardropEventProc* = proc(self: QTabBar, event: gen_qevent_types.QDropEvent): void {.raises: [], gcsafe.}
-type QTabBarnativeEventProc* = proc(self: QTabBar, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
+type QTabBarnativeEventProc* = proc(self: QTabBar, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
 type QTabBarmetricProc* = proc(self: QTabBar, param1: cint): cint {.raises: [], gcsafe.}
 type QTabBarinitPainterProc* = proc(self: QTabBar, painter: gen_qpainter_types.QPainter): void {.raises: [], gcsafe.}
 type QTabBarredirectedProc* = proc(self: QTabBar, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.raises: [], gcsafe.}
@@ -1139,7 +1139,7 @@ proc fcQTabBar_vtable_callback_dropEvent(self: pointer, event: pointer): void {.
   let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
   vtbl[].dropEvent(self, slotval1)
 
-proc QTabBarnativeEvent*(self: gen_qtabbar_types.QTabBar, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool =
+proc QTabBarnativeEvent*(self: gen_qtabbar_types.QTabBar, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool =
   fcQTabBar_virtualbase_nativeEvent(self.h, struct_miqt_string(data: if len(eventType) > 0: addr eventType[0] else: nil, len: csize_t(len(eventType))), message, resultVal)
 
 proc fcQTabBar_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
@@ -1588,7 +1588,7 @@ proc fcQTabBar_method_callback_dropEvent(self: pointer, event: pointer): void {.
   let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
   inst.dropEvent(slotval1)
 
-method nativeEvent*(self: VirtualQTabBar, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
+method nativeEvent*(self: VirtualQTabBar, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
   QTabBarnativeEvent(self[], eventType, message, resultVal)
 proc fcQTabBar_method_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
   let inst = cast[VirtualQTabBar](fcQTabBar_vdata(self)[])
@@ -2032,12 +2032,14 @@ proc create*(T: type gen_qtabbar_types.QTabBar,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQTabBar_new(addr(cQTabBar_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQTabBar_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qtabbar_types.QTabBar,
     inst: VirtualQTabBar) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQTabBar_new2(addr(cQTabBar_mvtbl), csize_t(sizeof(pointer)))
   fcQTabBar_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qtabbar_types.QTabBar): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQTabBar_staticMetaObject())

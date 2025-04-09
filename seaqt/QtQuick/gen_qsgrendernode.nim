@@ -321,6 +321,7 @@ proc create*(T: type gen_qsgrendernode_types.QSGRenderNode,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQSGRenderNode_new(addr(cQSGRenderNode_mvtbl), csize_t(sizeof(pointer)))
   fcQSGRenderNode_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc projectionMatrix*(self: gen_qsgrendernode_types.QSGRenderNodeRenderState): gen_qmatrix4x4_types.QMatrix4x4 =
   gen_qmatrix4x4_types.QMatrix4x4(h: fcQSGRenderNodeRenderState_projectionMatrix(self.h), owned: false)

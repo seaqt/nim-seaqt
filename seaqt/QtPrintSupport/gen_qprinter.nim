@@ -239,7 +239,7 @@ proc setPdfVersion*(self: gen_qprinter_types.QPrinter, version: cint): void =
 proc pdfVersion*(self: gen_qprinter_types.QPrinter): cint =
   cint(fcQPrinter_pdfVersion(self.h))
 
-proc setPrinterName*(self: gen_qprinter_types.QPrinter, printerName: string): void =
+proc setPrinterName*(self: gen_qprinter_types.QPrinter, printerName: openArray[char]): void =
   fcQPrinter_setPrinterName(self.h, struct_miqt_string(data: if len(printerName) > 0: addr printerName[0] else: nil, len: csize_t(len(printerName))))
 
 proc printerName*(self: gen_qprinter_types.QPrinter): string =
@@ -251,7 +251,7 @@ proc printerName*(self: gen_qprinter_types.QPrinter): string =
 proc isValid*(self: gen_qprinter_types.QPrinter): bool =
   fcQPrinter_isValid(self.h)
 
-proc setOutputFileName*(self: gen_qprinter_types.QPrinter, outputFileName: string): void =
+proc setOutputFileName*(self: gen_qprinter_types.QPrinter, outputFileName: openArray[char]): void =
   fcQPrinter_setOutputFileName(self.h, struct_miqt_string(data: if len(outputFileName) > 0: addr outputFileName[0] else: nil, len: csize_t(len(outputFileName))))
 
 proc outputFileName*(self: gen_qprinter_types.QPrinter): string =
@@ -260,7 +260,7 @@ proc outputFileName*(self: gen_qprinter_types.QPrinter): string =
   c_free(v_ms.data)
   vx_ret
 
-proc setPrintProgram*(self: gen_qprinter_types.QPrinter, printProgram: string): void =
+proc setPrintProgram*(self: gen_qprinter_types.QPrinter, printProgram: openArray[char]): void =
   fcQPrinter_setPrintProgram(self.h, struct_miqt_string(data: if len(printProgram) > 0: addr printProgram[0] else: nil, len: csize_t(len(printProgram))))
 
 proc printProgram*(self: gen_qprinter_types.QPrinter): string =
@@ -269,7 +269,7 @@ proc printProgram*(self: gen_qprinter_types.QPrinter): string =
   c_free(v_ms.data)
   vx_ret
 
-proc setDocName*(self: gen_qprinter_types.QPrinter, docName: string): void =
+proc setDocName*(self: gen_qprinter_types.QPrinter, docName: openArray[char]): void =
   fcQPrinter_setDocName(self.h, struct_miqt_string(data: if len(docName) > 0: addr docName[0] else: nil, len: csize_t(len(docName))))
 
 proc docName*(self: gen_qprinter_types.QPrinter): string =
@@ -278,7 +278,7 @@ proc docName*(self: gen_qprinter_types.QPrinter): string =
   c_free(v_ms.data)
   vx_ret
 
-proc setCreator*(self: gen_qprinter_types.QPrinter, creator: string): void =
+proc setCreator*(self: gen_qprinter_types.QPrinter, creator: openArray[char]): void =
   fcQPrinter_setCreator(self.h, struct_miqt_string(data: if len(creator) > 0: addr creator[0] else: nil, len: csize_t(len(creator))))
 
 proc creator*(self: gen_qprinter_types.QPrinter): string =
@@ -365,7 +365,7 @@ proc printerSelectionOption*(self: gen_qprinter_types.QPrinter): string =
   c_free(v_ms.data)
   vx_ret
 
-proc setPrinterSelectionOption*(self: gen_qprinter_types.QPrinter, printerSelectionOption: string): void =
+proc setPrinterSelectionOption*(self: gen_qprinter_types.QPrinter, printerSelectionOption: openArray[char]): void =
   fcQPrinter_setPrinterSelectionOption(self.h, struct_miqt_string(data: if len(printerSelectionOption) > 0: addr printerSelectionOption[0] else: nil, len: csize_t(len(printerSelectionOption))))
 
 proc newPage*(self: gen_qprinter_types.QPrinter): bool =
@@ -807,6 +807,7 @@ proc create*(T: type gen_qprinter_types.QPrinter,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQPrinter_new(addr(cQPrinter_mvtbl), csize_t(sizeof(pointer)))
   fcQPrinter_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qprinter_types.QPrinter,
     printer: gen_qprinterinfo_types.QPrinterInfo,
@@ -814,6 +815,7 @@ proc create*(T: type gen_qprinter_types.QPrinter,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQPrinter_new2(addr(cQPrinter_mvtbl), csize_t(sizeof(pointer)), printer.h)
   fcQPrinter_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qprinter_types.QPrinter,
     mode: cint,
@@ -821,6 +823,7 @@ proc create*(T: type gen_qprinter_types.QPrinter,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQPrinter_new3(addr(cQPrinter_mvtbl), csize_t(sizeof(pointer)), cint(mode))
   fcQPrinter_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qprinter_types.QPrinter,
     printer: gen_qprinterinfo_types.QPrinterInfo, mode: cint,
@@ -828,4 +831,5 @@ proc create*(T: type gen_qprinter_types.QPrinter,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQPrinter_new4(addr(cQPrinter_mvtbl), csize_t(sizeof(pointer)), printer.h, cint(mode))
   fcQPrinter_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 

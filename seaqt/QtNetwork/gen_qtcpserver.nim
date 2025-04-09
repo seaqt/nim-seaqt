@@ -642,6 +642,7 @@ proc create*(T: type gen_qtcpserver_types.QTcpServer,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQTcpServer_new(addr(cQTcpServer_mvtbl), csize_t(sizeof(pointer)))
   fcQTcpServer_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qtcpserver_types.QTcpServer,
     parent: gen_qobject_types.QObject,
@@ -649,6 +650,7 @@ proc create*(T: type gen_qtcpserver_types.QTcpServer,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQTcpServer_new2(addr(cQTcpServer_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQTcpServer_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qtcpserver_types.QTcpServer): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQTcpServer_staticMetaObject())

@@ -339,7 +339,7 @@ proc hasChildren*(self: gen_qabstractproxymodel_types.QAbstractProxyModel, paren
 proc sibling*(self: gen_qabstractproxymodel_types.QAbstractProxyModel, row: cint, column: cint, idx: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex =
   gen_qabstractitemmodel_types.QModelIndex(h: fcQAbstractProxyModel_sibling(self.h, row, column, idx.h), owned: true)
 
-proc mimeData*(self: gen_qabstractproxymodel_types.QAbstractProxyModel, indexes: seq[gen_qabstractitemmodel_types.QModelIndex]): gen_qmimedata_types.QMimeData =
+proc mimeData*(self: gen_qabstractproxymodel_types.QAbstractProxyModel, indexes: openArray[gen_qabstractitemmodel_types.QModelIndex]): gen_qmimedata_types.QMimeData =
   var indexes_CArray = newSeq[pointer](len(indexes))
   for i in 0..<len(indexes):
     indexes_CArray[i] = indexes[i].h
@@ -425,7 +425,7 @@ type QAbstractProxyModelsortProc* = proc(self: QAbstractProxyModel, column: cint
 type QAbstractProxyModelspanProc* = proc(self: QAbstractProxyModel, index: gen_qabstractitemmodel_types.QModelIndex): gen_qsize_types.QSize {.raises: [], gcsafe.}
 type QAbstractProxyModelhasChildrenProc* = proc(self: QAbstractProxyModel, parent: gen_qabstractitemmodel_types.QModelIndex): bool {.raises: [], gcsafe.}
 type QAbstractProxyModelsiblingProc* = proc(self: QAbstractProxyModel, row: cint, column: cint, idx: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex {.raises: [], gcsafe.}
-type QAbstractProxyModelmimeDataProc* = proc(self: QAbstractProxyModel, indexes: seq[gen_qabstractitemmodel_types.QModelIndex]): gen_qmimedata_types.QMimeData {.raises: [], gcsafe.}
+type QAbstractProxyModelmimeDataProc* = proc(self: QAbstractProxyModel, indexes: openArray[gen_qabstractitemmodel_types.QModelIndex]): gen_qmimedata_types.QMimeData {.raises: [], gcsafe.}
 type QAbstractProxyModelcanDropMimeDataProc* = proc(self: QAbstractProxyModel, data: gen_qmimedata_types.QMimeData, action: cint, row: cint, column: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool {.raises: [], gcsafe.}
 type QAbstractProxyModeldropMimeDataProc* = proc(self: QAbstractProxyModel, data: gen_qmimedata_types.QMimeData, action: cint, row: cint, column: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool {.raises: [], gcsafe.}
 type QAbstractProxyModelmimeTypesProc* = proc(self: QAbstractProxyModel): seq[string] {.raises: [], gcsafe.}
@@ -836,7 +836,7 @@ proc fcQAbstractProxyModel_vtable_callback_sibling(self: pointer, row: cint, col
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QAbstractProxyModelmimeData*(self: gen_qabstractproxymodel_types.QAbstractProxyModel, indexes: seq[gen_qabstractitemmodel_types.QModelIndex]): gen_qmimedata_types.QMimeData =
+proc QAbstractProxyModelmimeData*(self: gen_qabstractproxymodel_types.QAbstractProxyModel, indexes: openArray[gen_qabstractitemmodel_types.QModelIndex]): gen_qmimedata_types.QMimeData =
   var indexes_CArray = newSeq[pointer](len(indexes))
   for i in 0..<len(indexes):
     indexes_CArray[i] = indexes[i].h
@@ -1421,7 +1421,7 @@ proc fcQAbstractProxyModel_method_callback_sibling(self: pointer, row: cint, col
   var virtualReturn = inst.sibling(slotval1, slotval2, slotval3)
   virtualReturn.h
 
-method mimeData*(self: VirtualQAbstractProxyModel, indexes: seq[gen_qabstractitemmodel_types.QModelIndex]): gen_qmimedata_types.QMimeData {.base.} =
+method mimeData*(self: VirtualQAbstractProxyModel, indexes: openArray[gen_qabstractitemmodel_types.QModelIndex]): gen_qmimedata_types.QMimeData {.base.} =
   QAbstractProxyModelmimeData(self[], indexes)
 proc fcQAbstractProxyModel_method_callback_mimeData(self: pointer, indexes: struct_miqt_array): pointer {.cdecl.} =
   let inst = cast[VirtualQAbstractProxyModel](fcQAbstractProxyModel_vdata(self)[])
@@ -1688,7 +1688,7 @@ proc createSourceIndex*(self: gen_qabstractproxymodel_types.QAbstractProxyModel,
 proc createIndex*(self: gen_qabstractproxymodel_types.QAbstractProxyModel, row: cint, column: cint): gen_qabstractitemmodel_types.QModelIndex =
   gen_qabstractitemmodel_types.QModelIndex(h: fcQAbstractProxyModel_protectedbase_createIndex(self.h, row, column), owned: true)
 
-proc encodeData*(self: gen_qabstractproxymodel_types.QAbstractProxyModel, indexes: seq[gen_qabstractitemmodel_types.QModelIndex], stream: gen_qdatastream_types.QDataStream): void =
+proc encodeData*(self: gen_qabstractproxymodel_types.QAbstractProxyModel, indexes: openArray[gen_qabstractitemmodel_types.QModelIndex], stream: gen_qdatastream_types.QDataStream): void =
   var indexes_CArray = newSeq[pointer](len(indexes))
   for i in 0..<len(indexes):
     indexes_CArray[i] = indexes[i].h
@@ -1743,7 +1743,7 @@ proc endResetModel*(self: gen_qabstractproxymodel_types.QAbstractProxyModel): vo
 proc changePersistentIndex*(self: gen_qabstractproxymodel_types.QAbstractProxyModel, fromVal: gen_qabstractitemmodel_types.QModelIndex, to: gen_qabstractitemmodel_types.QModelIndex): void =
   fcQAbstractProxyModel_protectedbase_changePersistentIndex(self.h, fromVal.h, to.h)
 
-proc changePersistentIndexList*(self: gen_qabstractproxymodel_types.QAbstractProxyModel, fromVal: seq[gen_qabstractitemmodel_types.QModelIndex], to: seq[gen_qabstractitemmodel_types.QModelIndex]): void =
+proc changePersistentIndexList*(self: gen_qabstractproxymodel_types.QAbstractProxyModel, fromVal: openArray[gen_qabstractitemmodel_types.QModelIndex], to: openArray[gen_qabstractitemmodel_types.QModelIndex]): void =
   var fromVal_CArray = newSeq[pointer](len(fromVal))
   for i in 0..<len(fromVal):
     fromVal_CArray[i] = fromVal[i].h
@@ -2068,6 +2068,7 @@ proc create*(T: type gen_qabstractproxymodel_types.QAbstractProxyModel,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQAbstractProxyModel_new(addr(cQAbstractProxyModel_mvtbl), csize_t(sizeof(pointer)))
   fcQAbstractProxyModel_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qabstractproxymodel_types.QAbstractProxyModel,
     parent: gen_qobject_types.QObject,
@@ -2075,6 +2076,7 @@ proc create*(T: type gen_qabstractproxymodel_types.QAbstractProxyModel,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQAbstractProxyModel_new2(addr(cQAbstractProxyModel_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQAbstractProxyModel_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qabstractproxymodel_types.QAbstractProxyModel): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQAbstractProxyModel_staticMetaObject())

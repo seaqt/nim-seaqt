@@ -607,7 +607,7 @@ proc foregroundBrush*(self: gen_qgraphicsview_types.QGraphicsView): gen_qbrush_t
 proc setForegroundBrush*(self: gen_qgraphicsview_types.QGraphicsView, brush: gen_qbrush_types.QBrush): void =
   fcQGraphicsView_setForegroundBrush(self.h, brush.h)
 
-proc updateScene*(self: gen_qgraphicsview_types.QGraphicsView, rects: seq[gen_qrect_types.QRectF]): void =
+proc updateScene*(self: gen_qgraphicsview_types.QGraphicsView, rects: openArray[gen_qrect_types.QRectF]): void =
   var rects_CArray = newSeq[pointer](len(rects))
   for i in 0..<len(rects):
     rects_CArray[i] = rects[i].h
@@ -781,7 +781,7 @@ type QGraphicsViewcloseEventProc* = proc(self: QGraphicsView, event: gen_qevent_
 type QGraphicsViewtabletEventProc* = proc(self: QGraphicsView, event: gen_qevent_types.QTabletEvent): void {.raises: [], gcsafe.}
 type QGraphicsViewactionEventProc* = proc(self: QGraphicsView, event: gen_qevent_types.QActionEvent): void {.raises: [], gcsafe.}
 type QGraphicsViewhideEventProc* = proc(self: QGraphicsView, event: gen_qevent_types.QHideEvent): void {.raises: [], gcsafe.}
-type QGraphicsViewnativeEventProc* = proc(self: QGraphicsView, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
+type QGraphicsViewnativeEventProc* = proc(self: QGraphicsView, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
 type QGraphicsViewmetricProc* = proc(self: QGraphicsView, param1: cint): cint {.raises: [], gcsafe.}
 type QGraphicsViewinitPainterProc* = proc(self: QGraphicsView, painter: gen_qpainter_types.QPainter): void {.raises: [], gcsafe.}
 type QGraphicsViewredirectedProc* = proc(self: QGraphicsView, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.raises: [], gcsafe.}
@@ -1305,7 +1305,7 @@ proc fcQGraphicsView_vtable_callback_hideEvent(self: pointer, event: pointer): v
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   vtbl[].hideEvent(self, slotval1)
 
-proc QGraphicsViewnativeEvent*(self: gen_qgraphicsview_types.QGraphicsView, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool =
+proc QGraphicsViewnativeEvent*(self: gen_qgraphicsview_types.QGraphicsView, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool =
   fcQGraphicsView_virtualbase_nativeEvent(self.h, struct_miqt_string(data: if len(eventType) > 0: addr eventType[0] else: nil, len: csize_t(len(eventType))), message, resultVal)
 
 proc fcQGraphicsView_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
@@ -1754,7 +1754,7 @@ proc fcQGraphicsView_method_callback_hideEvent(self: pointer, event: pointer): v
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   inst.hideEvent(slotval1)
 
-method nativeEvent*(self: VirtualQGraphicsView, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
+method nativeEvent*(self: VirtualQGraphicsView, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
   QGraphicsViewnativeEvent(self[], eventType, message, resultVal)
 proc fcQGraphicsView_method_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
   let inst = cast[VirtualQGraphicsView](fcQGraphicsView_vdata(self)[])
@@ -2437,12 +2437,14 @@ proc create*(T: type gen_qgraphicsview_types.QGraphicsView,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQGraphicsView_new(addr(cQGraphicsView_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQGraphicsView_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qgraphicsview_types.QGraphicsView,
     inst: VirtualQGraphicsView) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQGraphicsView_new2(addr(cQGraphicsView_mvtbl), csize_t(sizeof(pointer)))
   fcQGraphicsView_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qgraphicsview_types.QGraphicsView,
     scene: gen_qgraphicsscene_types.QGraphicsScene,
@@ -2450,6 +2452,7 @@ proc create*(T: type gen_qgraphicsview_types.QGraphicsView,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQGraphicsView_new3(addr(cQGraphicsView_mvtbl), csize_t(sizeof(pointer)), scene.h)
   fcQGraphicsView_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qgraphicsview_types.QGraphicsView,
     scene: gen_qgraphicsscene_types.QGraphicsScene, parent: gen_qwidget_types.QWidget,
@@ -2457,6 +2460,7 @@ proc create*(T: type gen_qgraphicsview_types.QGraphicsView,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQGraphicsView_new4(addr(cQGraphicsView_mvtbl), csize_t(sizeof(pointer)), scene.h, parent.h)
   fcQGraphicsView_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qgraphicsview_types.QGraphicsView): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQGraphicsView_staticMetaObject())

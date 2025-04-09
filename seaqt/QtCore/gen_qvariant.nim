@@ -600,7 +600,7 @@ proc create*(T: type gen_qvariant_types.QVariant,
   let tmp = gen_qvariant_types.QVariant(h: fcQVariant_new11(str), owned: true)
   tmp
 proc create*(T: type gen_qvariant_types.QVariant,
-    bytearray: seq[byte]): gen_qvariant_types.QVariant =
+    bytearray: openArray[byte]): gen_qvariant_types.QVariant =
   let tmp = gen_qvariant_types.QVariant(h: fcQVariant_new12(struct_miqt_string(data: if len(bytearray) > 0: addr bytearray[0] else: nil, len: csize_t(len(bytearray)))), owned: true)
   tmp
 proc create*(T: type gen_qvariant_types.QVariant,
@@ -608,11 +608,11 @@ proc create*(T: type gen_qvariant_types.QVariant,
   let tmp = gen_qvariant_types.QVariant(h: fcQVariant_new13(bitarray.h), owned: true)
   tmp
 proc create*(T: type gen_qvariant_types.QVariant,
-    string: string): gen_qvariant_types.QVariant =
+    string: openArray[char]): gen_qvariant_types.QVariant =
   let tmp = gen_qvariant_types.QVariant(h: fcQVariant_new14(struct_miqt_string(data: if len(string) > 0: addr string[0] else: nil, len: csize_t(len(string)))), owned: true)
   tmp
 proc create*(T: type gen_qvariant_types.QVariant,
-    stringlist: seq[string]): gen_qvariant_types.QVariant =
+    stringlist: openArray[string]): gen_qvariant_types.QVariant =
   var stringlist_CArray = newSeq[struct_miqt_string](len(stringlist))
   for i in 0..<len(stringlist):
     stringlist_CArray[i] = struct_miqt_string(data: if len(stringlist[i]) > 0: addr stringlist[i][0] else: nil, len: csize_t(len(stringlist[i])))
@@ -636,7 +636,7 @@ proc create*(T: type gen_qvariant_types.QVariant,
   let tmp = gen_qvariant_types.QVariant(h: fcQVariant_new19(datetime.h), owned: true)
   tmp
 proc create*(T: type gen_qvariant_types.QVariant,
-    list: seq[gen_qvariant_types.QVariant]): gen_qvariant_types.QVariant =
+    list: openArray[gen_qvariant_types.QVariant]): gen_qvariant_types.QVariant =
   var list_CArray = newSeq[pointer](len(list))
   for i in 0..<len(list):
     list_CArray[i] = list[i].h

@@ -1262,12 +1262,14 @@ proc create*(T: type gen_qstackedlayout_types.QStackedLayout,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQStackedLayout_new(addr(cQStackedLayout_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQStackedLayout_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qstackedlayout_types.QStackedLayout,
     inst: VirtualQStackedLayout) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQStackedLayout_new2(addr(cQStackedLayout_mvtbl), csize_t(sizeof(pointer)))
   fcQStackedLayout_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qstackedlayout_types.QStackedLayout,
     parentLayout: gen_qlayout_types.QLayout,
@@ -1275,6 +1277,7 @@ proc create*(T: type gen_qstackedlayout_types.QStackedLayout,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQStackedLayout_new3(addr(cQStackedLayout_mvtbl), csize_t(sizeof(pointer)), parentLayout.h)
   fcQStackedLayout_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qstackedlayout_types.QStackedLayout): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQStackedLayout_staticMetaObject())

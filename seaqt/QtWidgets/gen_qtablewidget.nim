@@ -549,7 +549,7 @@ proc text*(self: gen_qtablewidget_types.QTableWidgetItem): string =
   c_free(v_ms.data)
   vx_ret
 
-proc setText*(self: gen_qtablewidget_types.QTableWidgetItem, text: string): void =
+proc setText*(self: gen_qtablewidget_types.QTableWidgetItem, text: openArray[char]): void =
   fcQTableWidgetItem_setText(self.h, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
 
 proc icon*(self: gen_qtablewidget_types.QTableWidgetItem): gen_qicon_types.QIcon =
@@ -564,7 +564,7 @@ proc statusTip*(self: gen_qtablewidget_types.QTableWidgetItem): string =
   c_free(v_ms.data)
   vx_ret
 
-proc setStatusTip*(self: gen_qtablewidget_types.QTableWidgetItem, statusTip: string): void =
+proc setStatusTip*(self: gen_qtablewidget_types.QTableWidgetItem, statusTip: openArray[char]): void =
   fcQTableWidgetItem_setStatusTip(self.h, struct_miqt_string(data: if len(statusTip) > 0: addr statusTip[0] else: nil, len: csize_t(len(statusTip))))
 
 proc toolTip*(self: gen_qtablewidget_types.QTableWidgetItem): string =
@@ -573,7 +573,7 @@ proc toolTip*(self: gen_qtablewidget_types.QTableWidgetItem): string =
   c_free(v_ms.data)
   vx_ret
 
-proc setToolTip*(self: gen_qtablewidget_types.QTableWidgetItem, toolTip: string): void =
+proc setToolTip*(self: gen_qtablewidget_types.QTableWidgetItem, toolTip: openArray[char]): void =
   fcQTableWidgetItem_setToolTip(self.h, struct_miqt_string(data: if len(toolTip) > 0: addr toolTip[0] else: nil, len: csize_t(len(toolTip))))
 
 proc whatsThis*(self: gen_qtablewidget_types.QTableWidgetItem): string =
@@ -582,7 +582,7 @@ proc whatsThis*(self: gen_qtablewidget_types.QTableWidgetItem): string =
   c_free(v_ms.data)
   vx_ret
 
-proc setWhatsThis*(self: gen_qtablewidget_types.QTableWidgetItem, whatsThis: string): void =
+proc setWhatsThis*(self: gen_qtablewidget_types.QTableWidgetItem, whatsThis: openArray[char]): void =
   fcQTableWidgetItem_setWhatsThis(self.h, struct_miqt_string(data: if len(whatsThis) > 0: addr whatsThis[0] else: nil, len: csize_t(len(whatsThis))))
 
 proc font*(self: gen_qtablewidget_types.QTableWidgetItem): gen_qfont_types.QFont =
@@ -795,7 +795,7 @@ proc create*(T: type gen_qtablewidget_types.QTableWidgetItem,
   fcQTableWidgetItem_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qtablewidget_types.QTableWidgetItem,
-    text: string,
+    text: openArray[char],
     vtbl: ref QTableWidgetItemVTable = nil): gen_qtablewidget_types.QTableWidgetItem =
   let vtbl = if vtbl == nil: new QTableWidgetItemVTable else: vtbl
   GC_ref(vtbl)
@@ -818,7 +818,7 @@ proc create*(T: type gen_qtablewidget_types.QTableWidgetItem,
   fcQTableWidgetItem_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qtablewidget_types.QTableWidgetItem,
-    icon: gen_qicon_types.QIcon, text: string,
+    icon: gen_qicon_types.QIcon, text: openArray[char],
     vtbl: ref QTableWidgetItemVTable = nil): gen_qtablewidget_types.QTableWidgetItem =
   let vtbl = if vtbl == nil: new QTableWidgetItemVTable else: vtbl
   GC_ref(vtbl)
@@ -887,7 +887,7 @@ proc create*(T: type gen_qtablewidget_types.QTableWidgetItem,
   fcQTableWidgetItem_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qtablewidget_types.QTableWidgetItem,
-    text: string, typeVal: cint,
+    text: openArray[char], typeVal: cint,
     vtbl: ref QTableWidgetItemVTable = nil): gen_qtablewidget_types.QTableWidgetItem =
   let vtbl = if vtbl == nil: new QTableWidgetItemVTable else: vtbl
   GC_ref(vtbl)
@@ -910,7 +910,7 @@ proc create*(T: type gen_qtablewidget_types.QTableWidgetItem,
   fcQTableWidgetItem_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qtablewidget_types.QTableWidgetItem,
-    icon: gen_qicon_types.QIcon, text: string, typeVal: cint,
+    icon: gen_qicon_types.QIcon, text: openArray[char], typeVal: cint,
     vtbl: ref QTableWidgetItemVTable = nil): gen_qtablewidget_types.QTableWidgetItem =
   let vtbl = if vtbl == nil: new QTableWidgetItemVTable else: vtbl
   GC_ref(vtbl)
@@ -950,20 +950,23 @@ proc create*(T: type gen_qtablewidget_types.QTableWidgetItem,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQTableWidgetItem_new(addr(cQTableWidgetItem_mvtbl), csize_t(sizeof(pointer)))
   fcQTableWidgetItem_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qtablewidget_types.QTableWidgetItem,
-    text: string,
+    text: openArray[char],
     inst: VirtualQTableWidgetItem) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQTableWidgetItem_new2(addr(cQTableWidgetItem_mvtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
   fcQTableWidgetItem_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qtablewidget_types.QTableWidgetItem,
-    icon: gen_qicon_types.QIcon, text: string,
+    icon: gen_qicon_types.QIcon, text: openArray[char],
     inst: VirtualQTableWidgetItem) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQTableWidgetItem_new3(addr(cQTableWidgetItem_mvtbl), csize_t(sizeof(pointer)), icon.h, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
   fcQTableWidgetItem_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qtablewidget_types.QTableWidgetItem,
     other: gen_qtablewidget_types.QTableWidgetItem,
@@ -971,6 +974,7 @@ proc create*(T: type gen_qtablewidget_types.QTableWidgetItem,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQTableWidgetItem_new4(addr(cQTableWidgetItem_mvtbl), csize_t(sizeof(pointer)), other.h)
   fcQTableWidgetItem_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qtablewidget_types.QTableWidgetItem,
     typeVal: cint,
@@ -978,20 +982,23 @@ proc create*(T: type gen_qtablewidget_types.QTableWidgetItem,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQTableWidgetItem_new5(addr(cQTableWidgetItem_mvtbl), csize_t(sizeof(pointer)), typeVal)
   fcQTableWidgetItem_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qtablewidget_types.QTableWidgetItem,
-    text: string, typeVal: cint,
+    text: openArray[char], typeVal: cint,
     inst: VirtualQTableWidgetItem) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQTableWidgetItem_new6(addr(cQTableWidgetItem_mvtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), typeVal)
   fcQTableWidgetItem_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qtablewidget_types.QTableWidgetItem,
-    icon: gen_qicon_types.QIcon, text: string, typeVal: cint,
+    icon: gen_qicon_types.QIcon, text: openArray[char], typeVal: cint,
     inst: VirtualQTableWidgetItem) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQTableWidgetItem_new7(addr(cQTableWidgetItem_mvtbl), csize_t(sizeof(pointer)), icon.h, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), typeVal)
   fcQTableWidgetItem_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc metaObject*(self: gen_qtablewidget_types.QTableWidget): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQTableWidget_metaObject(self.h), owned: false)
@@ -1068,14 +1075,14 @@ proc setHorizontalHeaderItem*(self: gen_qtablewidget_types.QTableWidget, column:
 proc takeHorizontalHeaderItem*(self: gen_qtablewidget_types.QTableWidget, column: cint): gen_qtablewidget_types.QTableWidgetItem =
   gen_qtablewidget_types.QTableWidgetItem(h: fcQTableWidget_takeHorizontalHeaderItem(self.h, column), owned: false)
 
-proc setVerticalHeaderLabels*(self: gen_qtablewidget_types.QTableWidget, labels: seq[string]): void =
+proc setVerticalHeaderLabels*(self: gen_qtablewidget_types.QTableWidget, labels: openArray[string]): void =
   var labels_CArray = newSeq[struct_miqt_string](len(labels))
   for i in 0..<len(labels):
     labels_CArray[i] = struct_miqt_string(data: if len(labels[i]) > 0: addr labels[i][0] else: nil, len: csize_t(len(labels[i])))
 
   fcQTableWidget_setVerticalHeaderLabels(self.h, struct_miqt_array(len: csize_t(len(labels)), data: if len(labels) == 0: nil else: addr(labels_CArray[0])))
 
-proc setHorizontalHeaderLabels*(self: gen_qtablewidget_types.QTableWidget, labels: seq[string]): void =
+proc setHorizontalHeaderLabels*(self: gen_qtablewidget_types.QTableWidget, labels: openArray[string]): void =
   var labels_CArray = newSeq[struct_miqt_string](len(labels))
   for i in 0..<len(labels):
     labels_CArray[i] = struct_miqt_string(data: if len(labels[i]) > 0: addr labels[i][0] else: nil, len: csize_t(len(labels[i])))
@@ -1154,7 +1161,7 @@ proc selectedItems*(self: gen_qtablewidget_types.QTableWidget): seq[gen_qtablewi
   c_free(v_ma.data)
   vx_ret
 
-proc findItems*(self: gen_qtablewidget_types.QTableWidget, text: string, flags: cint): seq[gen_qtablewidget_types.QTableWidgetItem] =
+proc findItems*(self: gen_qtablewidget_types.QTableWidget, text: openArray[char], flags: cint): seq[gen_qtablewidget_types.QTableWidgetItem] =
   var v_ma = fcQTableWidget_findItems(self.h, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), cint(flags))
   var vx_ret = newSeq[gen_qtablewidget_types.QTableWidgetItem](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
@@ -1546,7 +1553,7 @@ type QTableWidgetmetacastProc* = proc(self: QTableWidget, param1: cstring): poin
 type QTableWidgetmetacallProc* = proc(self: QTableWidget, param1: cint, param2: cint, param3: pointer): cint {.raises: [], gcsafe.}
 type QTableWidgeteventProc* = proc(self: QTableWidget, e: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
 type QTableWidgetmimeTypesProc* = proc(self: QTableWidget): seq[string] {.raises: [], gcsafe.}
-type QTableWidgetmimeDataProc* = proc(self: QTableWidget, items: seq[gen_qtablewidget_types.QTableWidgetItem]): gen_qmimedata_types.QMimeData {.raises: [], gcsafe.}
+type QTableWidgetmimeDataProc* = proc(self: QTableWidget, items: openArray[gen_qtablewidget_types.QTableWidgetItem]): gen_qmimedata_types.QMimeData {.raises: [], gcsafe.}
 type QTableWidgetdropMimeDataProc* = proc(self: QTableWidget, row: cint, column: cint, data: gen_qmimedata_types.QMimeData, action: cint): bool {.raises: [], gcsafe.}
 type QTableWidgetsupportedDropActionsProc* = proc(self: QTableWidget): cint {.raises: [], gcsafe.}
 type QTableWidgetdropEventProc* = proc(self: QTableWidget, event: gen_qevent_types.QDropEvent): void {.raises: [], gcsafe.}
@@ -1575,12 +1582,12 @@ type QTableWidgethorizontalScrollbarActionProc* = proc(self: QTableWidget, actio
 type QTableWidgetisIndexHiddenProc* = proc(self: QTableWidget, index: gen_qabstractitemmodel_types.QModelIndex): bool {.raises: [], gcsafe.}
 type QTableWidgetselectionChangedProc* = proc(self: QTableWidget, selected: gen_qitemselectionmodel_types.QItemSelection, deselected: gen_qitemselectionmodel_types.QItemSelection): void {.raises: [], gcsafe.}
 type QTableWidgetcurrentChangedProc* = proc(self: QTableWidget, current: gen_qabstractitemmodel_types.QModelIndex, previous: gen_qabstractitemmodel_types.QModelIndex): void {.raises: [], gcsafe.}
-type QTableWidgetkeyboardSearchProc* = proc(self: QTableWidget, search: string): void {.raises: [], gcsafe.}
+type QTableWidgetkeyboardSearchProc* = proc(self: QTableWidget, search: openArray[char]): void {.raises: [], gcsafe.}
 type QTableWidgetitemDelegateForIndexProc* = proc(self: QTableWidget, index: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemdelegate_types.QAbstractItemDelegate {.raises: [], gcsafe.}
 type QTableWidgetinputMethodQueryProc* = proc(self: QTableWidget, query: cint): gen_qvariant_types.QVariant {.raises: [], gcsafe.}
 type QTableWidgetresetProc* = proc(self: QTableWidget): void {.raises: [], gcsafe.}
 type QTableWidgetselectAllProc* = proc(self: QTableWidget): void {.raises: [], gcsafe.}
-type QTableWidgetdataChangedProc* = proc(self: QTableWidget, topLeft: gen_qabstractitemmodel_types.QModelIndex, bottomRight: gen_qabstractitemmodel_types.QModelIndex, roles: seq[cint]): void {.raises: [], gcsafe.}
+type QTableWidgetdataChangedProc* = proc(self: QTableWidget, topLeft: gen_qabstractitemmodel_types.QModelIndex, bottomRight: gen_qabstractitemmodel_types.QModelIndex, roles: openArray[cint]): void {.raises: [], gcsafe.}
 type QTableWidgetrowsInsertedProc* = proc(self: QTableWidget, parent: gen_qabstractitemmodel_types.QModelIndex, start: cint, endVal: cint): void {.raises: [], gcsafe.}
 type QTableWidgetrowsAboutToBeRemovedProc* = proc(self: QTableWidget, parent: gen_qabstractitemmodel_types.QModelIndex, start: cint, endVal: cint): void {.raises: [], gcsafe.}
 type QTableWidgetupdateEditorDataProc* = proc(self: QTableWidget): void {.raises: [], gcsafe.}
@@ -1629,7 +1636,7 @@ type QTableWidgettabletEventProc* = proc(self: QTableWidget, event: gen_qevent_t
 type QTableWidgetactionEventProc* = proc(self: QTableWidget, event: gen_qevent_types.QActionEvent): void {.raises: [], gcsafe.}
 type QTableWidgetshowEventProc* = proc(self: QTableWidget, event: gen_qevent_types.QShowEvent): void {.raises: [], gcsafe.}
 type QTableWidgethideEventProc* = proc(self: QTableWidget, event: gen_qevent_types.QHideEvent): void {.raises: [], gcsafe.}
-type QTableWidgetnativeEventProc* = proc(self: QTableWidget, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
+type QTableWidgetnativeEventProc* = proc(self: QTableWidget, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
 type QTableWidgetmetricProc* = proc(self: QTableWidget, param1: cint): cint {.raises: [], gcsafe.}
 type QTableWidgetinitPainterProc* = proc(self: QTableWidget, painter: gen_qpainter_types.QPainter): void {.raises: [], gcsafe.}
 type QTableWidgetredirectedProc* = proc(self: QTableWidget, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.raises: [], gcsafe.}
@@ -1805,7 +1812,7 @@ proc fcQTableWidget_vtable_callback_mimeTypes(self: pointer): struct_miqt_array 
 
   struct_miqt_array(len: csize_t(len(virtualReturn)), data: if len(virtualReturn) == 0: nil else: addr(virtualReturn_CArray[0]))
 
-proc QTableWidgetmimeData*(self: gen_qtablewidget_types.QTableWidget, items: seq[gen_qtablewidget_types.QTableWidgetItem]): gen_qmimedata_types.QMimeData =
+proc QTableWidgetmimeData*(self: gen_qtablewidget_types.QTableWidget, items: openArray[gen_qtablewidget_types.QTableWidgetItem]): gen_qmimedata_types.QMimeData =
   var items_CArray = newSeq[pointer](len(items))
   for i in 0..<len(items):
     items_CArray[i] = items[i].h
@@ -2123,7 +2130,7 @@ proc fcQTableWidget_vtable_callback_currentChanged(self: pointer, current: point
   let slotval2 = gen_qabstractitemmodel_types.QModelIndex(h: previous, owned: false)
   vtbl[].currentChanged(self, slotval1, slotval2)
 
-proc QTableWidgetkeyboardSearch*(self: gen_qtablewidget_types.QTableWidget, search: string): void =
+proc QTableWidgetkeyboardSearch*(self: gen_qtablewidget_types.QTableWidget, search: openArray[char]): void =
   fcQTableWidget_virtualbase_keyboardSearch(self.h, struct_miqt_string(data: if len(search) > 0: addr search[0] else: nil, len: csize_t(len(search))))
 
 proc fcQTableWidget_vtable_callback_keyboardSearch(self: pointer, search: struct_miqt_string): void {.cdecl.} =
@@ -2177,7 +2184,7 @@ proc fcQTableWidget_vtable_callback_selectAll(self: pointer): void {.cdecl.} =
   let self = QTableWidget(h: self)
   vtbl[].selectAll(self)
 
-proc QTableWidgetdataChanged*(self: gen_qtablewidget_types.QTableWidget, topLeft: gen_qabstractitemmodel_types.QModelIndex, bottomRight: gen_qabstractitemmodel_types.QModelIndex, roles: seq[cint]): void =
+proc QTableWidgetdataChanged*(self: gen_qtablewidget_types.QTableWidget, topLeft: gen_qabstractitemmodel_types.QModelIndex, bottomRight: gen_qabstractitemmodel_types.QModelIndex, roles: openArray[cint]): void =
   var roles_CArray = newSeq[cint](len(roles))
   for i in 0..<len(roles):
     roles_CArray[i] = roles[i]
@@ -2652,7 +2659,7 @@ proc fcQTableWidget_vtable_callback_hideEvent(self: pointer, event: pointer): vo
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   vtbl[].hideEvent(self, slotval1)
 
-proc QTableWidgetnativeEvent*(self: gen_qtablewidget_types.QTableWidget, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool =
+proc QTableWidgetnativeEvent*(self: gen_qtablewidget_types.QTableWidget, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool =
   fcQTableWidget_virtualbase_nativeEvent(self.h, struct_miqt_string(data: if len(eventType) > 0: addr eventType[0] else: nil, len: csize_t(len(eventType))), message, resultVal)
 
 proc fcQTableWidget_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
@@ -2793,7 +2800,7 @@ proc fcQTableWidget_method_callback_mimeTypes(self: pointer): struct_miqt_array 
 
   struct_miqt_array(len: csize_t(len(virtualReturn)), data: if len(virtualReturn) == 0: nil else: addr(virtualReturn_CArray[0]))
 
-method mimeData*(self: VirtualQTableWidget, items: seq[gen_qtablewidget_types.QTableWidgetItem]): gen_qmimedata_types.QMimeData {.base.} =
+method mimeData*(self: VirtualQTableWidget, items: openArray[gen_qtablewidget_types.QTableWidgetItem]): gen_qmimedata_types.QMimeData {.base.} =
   QTableWidgetmimeData(self[], items)
 proc fcQTableWidget_method_callback_mimeData(self: pointer, items: struct_miqt_array): pointer {.cdecl.} =
   let inst = cast[VirtualQTableWidget](fcQTableWidget_vdata(self)[])
@@ -3022,7 +3029,7 @@ proc fcQTableWidget_method_callback_currentChanged(self: pointer, current: point
   let slotval2 = gen_qabstractitemmodel_types.QModelIndex(h: previous, owned: false)
   inst.currentChanged(slotval1, slotval2)
 
-method keyboardSearch*(self: VirtualQTableWidget, search: string): void {.base.} =
+method keyboardSearch*(self: VirtualQTableWidget, search: openArray[char]): void {.base.} =
   QTableWidgetkeyboardSearch(self[], search)
 proc fcQTableWidget_method_callback_keyboardSearch(self: pointer, search: struct_miqt_string): void {.cdecl.} =
   let inst = cast[VirtualQTableWidget](fcQTableWidget_vdata(self)[])
@@ -3060,7 +3067,7 @@ proc fcQTableWidget_method_callback_selectAll(self: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTableWidget](fcQTableWidget_vdata(self)[])
   inst.selectAll()
 
-method dataChanged*(self: VirtualQTableWidget, topLeft: gen_qabstractitemmodel_types.QModelIndex, bottomRight: gen_qabstractitemmodel_types.QModelIndex, roles: seq[cint]): void {.base.} =
+method dataChanged*(self: VirtualQTableWidget, topLeft: gen_qabstractitemmodel_types.QModelIndex, bottomRight: gen_qabstractitemmodel_types.QModelIndex, roles: openArray[cint]): void {.base.} =
   QTableWidgetdataChanged(self[], topLeft, bottomRight, roles)
 proc fcQTableWidget_method_callback_dataChanged(self: pointer, topLeft: pointer, bottomRight: pointer, roles: struct_miqt_array): void {.cdecl.} =
   let inst = cast[VirtualQTableWidget](fcQTableWidget_vdata(self)[])
@@ -3424,7 +3431,7 @@ proc fcQTableWidget_method_callback_hideEvent(self: pointer, event: pointer): vo
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   inst.hideEvent(slotval1)
 
-method nativeEvent*(self: VirtualQTableWidget, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
+method nativeEvent*(self: VirtualQTableWidget, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
   QTableWidgetnativeEvent(self[], eventType, message, resultVal)
 proc fcQTableWidget_method_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
   let inst = cast[VirtualQTableWidget](fcQTableWidget_vdata(self)[])
@@ -4511,12 +4518,14 @@ proc create*(T: type gen_qtablewidget_types.QTableWidget,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQTableWidget_new(addr(cQTableWidget_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQTableWidget_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qtablewidget_types.QTableWidget,
     inst: VirtualQTableWidget) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQTableWidget_new2(addr(cQTableWidget_mvtbl), csize_t(sizeof(pointer)))
   fcQTableWidget_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qtablewidget_types.QTableWidget,
     rows: cint, columns: cint,
@@ -4524,6 +4533,7 @@ proc create*(T: type gen_qtablewidget_types.QTableWidget,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQTableWidget_new3(addr(cQTableWidget_mvtbl), csize_t(sizeof(pointer)), rows, columns)
   fcQTableWidget_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qtablewidget_types.QTableWidget,
     rows: cint, columns: cint, parent: gen_qwidget_types.QWidget,
@@ -4531,6 +4541,7 @@ proc create*(T: type gen_qtablewidget_types.QTableWidget,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQTableWidget_new4(addr(cQTableWidget_mvtbl), csize_t(sizeof(pointer)), rows, columns, parent.h)
   fcQTableWidget_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qtablewidget_types.QTableWidget): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQTableWidget_staticMetaObject())

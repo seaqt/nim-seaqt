@@ -115,11 +115,11 @@ proc create*(T: type gen_qsslcipher_types.QSslCipher): gen_qsslcipher_types.QSsl
   let tmp = gen_qsslcipher_types.QSslCipher(h: fcQSslCipher_new(), owned: true)
   tmp
 proc create*(T: type gen_qsslcipher_types.QSslCipher,
-    name: string): gen_qsslcipher_types.QSslCipher =
+    name: openArray[char]): gen_qsslcipher_types.QSslCipher =
   let tmp = gen_qsslcipher_types.QSslCipher(h: fcQSslCipher_new2(struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name)))), owned: true)
   tmp
 proc create*(T: type gen_qsslcipher_types.QSslCipher,
-    name: string, protocol: cint): gen_qsslcipher_types.QSslCipher =
+    name: openArray[char], protocol: cint): gen_qsslcipher_types.QSslCipher =
   let tmp = gen_qsslcipher_types.QSslCipher(h: fcQSslCipher_new3(struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), cint(protocol)), owned: true)
   tmp
 proc create*(T: type gen_qsslcipher_types.QSslCipher,

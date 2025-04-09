@@ -213,13 +213,13 @@ proc tr*(_: type gen_qlocalsocket_types.QLocalSocket, s: cstring): string =
 proc connectToServer*(self: gen_qlocalsocket_types.QLocalSocket): void =
   fcQLocalSocket_connectToServer(self.h)
 
-proc connectToServer*(self: gen_qlocalsocket_types.QLocalSocket, name: string): void =
+proc connectToServer*(self: gen_qlocalsocket_types.QLocalSocket, name: openArray[char]): void =
   fcQLocalSocket_connectToServerWithName(self.h, struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))))
 
 proc disconnectFromServer*(self: gen_qlocalsocket_types.QLocalSocket): void =
   fcQLocalSocket_disconnectFromServer(self.h)
 
-proc setServerName*(self: gen_qlocalsocket_types.QLocalSocket, name: string): void =
+proc setServerName*(self: gen_qlocalsocket_types.QLocalSocket, name: openArray[char]): void =
   fcQLocalSocket_setServerName(self.h, struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))))
 
 proc serverName*(self: gen_qlocalsocket_types.QLocalSocket): string =
@@ -388,7 +388,7 @@ proc tr*(_: type gen_qlocalsocket_types.QLocalSocket, s: cstring, c: cstring, n:
 proc connectToServer*(self: gen_qlocalsocket_types.QLocalSocket, openMode: cint): void =
   fcQLocalSocket_connectToServer1(self.h, cint(openMode))
 
-proc connectToServer*(self: gen_qlocalsocket_types.QLocalSocket, name: string, openMode: cint): void =
+proc connectToServer*(self: gen_qlocalsocket_types.QLocalSocket, name: openArray[char], openMode: cint): void =
   fcQLocalSocket_connectToServer2(self.h, struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), cint(openMode))
 
 proc setSocketDescriptor*(self: gen_qlocalsocket_types.QLocalSocket, socketDescriptor: uint, socketState: cint): bool =
@@ -933,7 +933,7 @@ proc fcQLocalSocket_method_callback_disconnectNotify(self: pointer, signal: poin
 proc setOpenMode*(self: gen_qlocalsocket_types.QLocalSocket, openMode: cint): void =
   fcQLocalSocket_protectedbase_setOpenMode(self.h, cint(openMode))
 
-proc setErrorString*(self: gen_qlocalsocket_types.QLocalSocket, errorString: string): void =
+proc setErrorString*(self: gen_qlocalsocket_types.QLocalSocket, errorString: openArray[char]): void =
   fcQLocalSocket_protectedbase_setErrorString(self.h, struct_miqt_string(data: if len(errorString) > 0: addr errorString[0] else: nil, len: csize_t(len(errorString))))
 
 proc sender*(self: gen_qlocalsocket_types.QLocalSocket): gen_qobject_types.QObject =
@@ -1116,6 +1116,7 @@ proc create*(T: type gen_qlocalsocket_types.QLocalSocket,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQLocalSocket_new(addr(cQLocalSocket_mvtbl), csize_t(sizeof(pointer)))
   fcQLocalSocket_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qlocalsocket_types.QLocalSocket,
     parent: gen_qobject_types.QObject,
@@ -1123,6 +1124,7 @@ proc create*(T: type gen_qlocalsocket_types.QLocalSocket,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQLocalSocket_new2(addr(cQLocalSocket_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQLocalSocket_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qlocalsocket_types.QLocalSocket): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQLocalSocket_staticMetaObject())

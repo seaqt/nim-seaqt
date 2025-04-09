@@ -230,7 +230,7 @@ proc font*(self: gen_qtextlayout_types.QTextLayout): gen_qfont_types.QFont =
 proc setRawFont*(self: gen_qtextlayout_types.QTextLayout, rawFont: gen_qrawfont_types.QRawFont): void =
   fcQTextLayout_setRawFont(self.h, rawFont.h)
 
-proc setText*(self: gen_qtextlayout_types.QTextLayout, string: string): void =
+proc setText*(self: gen_qtextlayout_types.QTextLayout, string: openArray[char]): void =
   fcQTextLayout_setText(self.h, struct_miqt_string(data: if len(string) > 0: addr string[0] else: nil, len: csize_t(len(string))))
 
 proc text*(self: gen_qtextlayout_types.QTextLayout): string =
@@ -245,7 +245,7 @@ proc setTextOption*(self: gen_qtextlayout_types.QTextLayout, option: gen_qtextop
 proc textOption*(self: gen_qtextlayout_types.QTextLayout): gen_qtextoption_types.QTextOption =
   gen_qtextoption_types.QTextOption(h: fcQTextLayout_textOption(self.h), owned: false)
 
-proc setPreeditArea*(self: gen_qtextlayout_types.QTextLayout, position: cint, text: string): void =
+proc setPreeditArea*(self: gen_qtextlayout_types.QTextLayout, position: cint, text: openArray[char]): void =
   fcQTextLayout_setPreeditArea(self.h, position, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
 
 proc preeditAreaPosition*(self: gen_qtextlayout_types.QTextLayout): cint =
@@ -257,7 +257,7 @@ proc preeditAreaText*(self: gen_qtextlayout_types.QTextLayout): string =
   c_free(v_ms.data)
   vx_ret
 
-proc setFormats*(self: gen_qtextlayout_types.QTextLayout, overrides: seq[gen_qtextlayout_types.QTextLayoutFormatRange]): void =
+proc setFormats*(self: gen_qtextlayout_types.QTextLayout, overrides: openArray[gen_qtextlayout_types.QTextLayoutFormatRange]): void =
   var overrides_CArray = newSeq[pointer](len(overrides))
   for i in 0..<len(overrides):
     overrides_CArray[i] = overrides[i].h
@@ -366,14 +366,14 @@ proc nextCursorPosition*(self: gen_qtextlayout_types.QTextLayout, oldPos: cint, 
 proc previousCursorPosition*(self: gen_qtextlayout_types.QTextLayout, oldPos: cint, mode: cint): cint =
   fcQTextLayout_previousCursorPosition2(self.h, oldPos, cint(mode))
 
-proc draw*(self: gen_qtextlayout_types.QTextLayout, p: gen_qpainter_types.QPainter, pos: gen_qpoint_types.QPointF, selections: seq[gen_qtextlayout_types.QTextLayoutFormatRange]): void =
+proc draw*(self: gen_qtextlayout_types.QTextLayout, p: gen_qpainter_types.QPainter, pos: gen_qpoint_types.QPointF, selections: openArray[gen_qtextlayout_types.QTextLayoutFormatRange]): void =
   var selections_CArray = newSeq[pointer](len(selections))
   for i in 0..<len(selections):
     selections_CArray[i] = selections[i].h
 
   fcQTextLayout_draw3(self.h, p.h, pos.h, struct_miqt_array(len: csize_t(len(selections)), data: if len(selections) == 0: nil else: addr(selections_CArray[0])))
 
-proc draw*(self: gen_qtextlayout_types.QTextLayout, p: gen_qpainter_types.QPainter, pos: gen_qpoint_types.QPointF, selections: seq[gen_qtextlayout_types.QTextLayoutFormatRange], clip: gen_qrect_types.QRectF): void =
+proc draw*(self: gen_qtextlayout_types.QTextLayout, p: gen_qpainter_types.QPainter, pos: gen_qpoint_types.QPointF, selections: openArray[gen_qtextlayout_types.QTextLayoutFormatRange], clip: gen_qrect_types.QRectF): void =
   var selections_CArray = newSeq[pointer](len(selections))
   for i in 0..<len(selections):
     selections_CArray[i] = selections[i].h
@@ -402,11 +402,11 @@ proc create*(T: type gen_qtextlayout_types.QTextLayout): gen_qtextlayout_types.Q
   let tmp = gen_qtextlayout_types.QTextLayout(h: fcQTextLayout_new(), owned: true)
   tmp
 proc create*(T: type gen_qtextlayout_types.QTextLayout,
-    text: string): gen_qtextlayout_types.QTextLayout =
+    text: openArray[char]): gen_qtextlayout_types.QTextLayout =
   let tmp = gen_qtextlayout_types.QTextLayout(h: fcQTextLayout_new2(struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))), owned: true)
   tmp
 proc create*(T: type gen_qtextlayout_types.QTextLayout,
-    text: string, font: gen_qfont_types.QFont): gen_qtextlayout_types.QTextLayout =
+    text: openArray[char], font: gen_qfont_types.QFont): gen_qtextlayout_types.QTextLayout =
   let tmp = gen_qtextlayout_types.QTextLayout(h: fcQTextLayout_new3(struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), font.h), owned: true)
   tmp
 proc create*(T: type gen_qtextlayout_types.QTextLayout,
@@ -414,7 +414,7 @@ proc create*(T: type gen_qtextlayout_types.QTextLayout,
   let tmp = gen_qtextlayout_types.QTextLayout(h: fcQTextLayout_new4(b.h), owned: true)
   tmp
 proc create*(T: type gen_qtextlayout_types.QTextLayout,
-    text: string, font: gen_qfont_types.QFont, paintdevice: gen_qpaintdevice_types.QPaintDevice): gen_qtextlayout_types.QTextLayout =
+    text: openArray[char], font: gen_qfont_types.QFont, paintdevice: gen_qpaintdevice_types.QPaintDevice): gen_qtextlayout_types.QTextLayout =
   let tmp = gen_qtextlayout_types.QTextLayout(h: fcQTextLayout_new5(struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), font.h, paintdevice.h), owned: true)
   tmp
 proc isValid*(self: gen_qtextlayout_types.QTextLine): bool =

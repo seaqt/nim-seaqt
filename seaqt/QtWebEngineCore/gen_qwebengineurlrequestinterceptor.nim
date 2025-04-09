@@ -440,6 +440,7 @@ proc create*(T: type gen_qwebengineurlrequestinterceptor_types.QWebEngineUrlRequ
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQWebEngineUrlRequestInterceptor_new(addr(cQWebEngineUrlRequestInterceptor_mvtbl), csize_t(sizeof(pointer)))
   fcQWebEngineUrlRequestInterceptor_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qwebengineurlrequestinterceptor_types.QWebEngineUrlRequestInterceptor,
     p: gen_qobject_types.QObject,
@@ -447,6 +448,7 @@ proc create*(T: type gen_qwebengineurlrequestinterceptor_types.QWebEngineUrlRequ
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQWebEngineUrlRequestInterceptor_new2(addr(cQWebEngineUrlRequestInterceptor_mvtbl), csize_t(sizeof(pointer)), p.h)
   fcQWebEngineUrlRequestInterceptor_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qwebengineurlrequestinterceptor_types.QWebEngineUrlRequestInterceptor): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQWebEngineUrlRequestInterceptor_staticMetaObject())

@@ -124,7 +124,7 @@ proc tr*(_: type gen_qimagereader_types.QImageReader, sourceText: cstring): stri
   c_free(v_ms.data)
   vx_ret
 
-proc setFormat*(self: gen_qimagereader_types.QImageReader, format: seq[byte]): void =
+proc setFormat*(self: gen_qimagereader_types.QImageReader, format: openArray[byte]): void =
   fcQImageReader_setFormat(self.h, struct_miqt_string(data: if len(format) > 0: addr format[0] else: nil, len: csize_t(len(format))))
 
 proc format*(self: gen_qimagereader_types.QImageReader): seq[byte] =
@@ -151,7 +151,7 @@ proc setDevice*(self: gen_qimagereader_types.QImageReader, device: gen_qiodevice
 proc device*(self: gen_qimagereader_types.QImageReader): gen_qiodevice_types.QIODevice =
   gen_qiodevice_types.QIODevice(h: fcQImageReader_device(self.h), owned: false)
 
-proc setFileName*(self: gen_qimagereader_types.QImageReader, fileName: string): void =
+proc setFileName*(self: gen_qimagereader_types.QImageReader, fileName: openArray[char]): void =
   fcQImageReader_setFileName(self.h, struct_miqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))))
 
 proc fileName*(self: gen_qimagereader_types.QImageReader): string =
@@ -178,7 +178,7 @@ proc textKeys*(self: gen_qimagereader_types.QImageReader): seq[string] =
   c_free(v_ma.data)
   vx_ret
 
-proc text*(self: gen_qimagereader_types.QImageReader, key: string): string =
+proc text*(self: gen_qimagereader_types.QImageReader, key: openArray[char]): string =
   let v_ms = fcQImageReader_text(self.h, struct_miqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key))))
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
@@ -286,7 +286,7 @@ proc errorString*(self: gen_qimagereader_types.QImageReader): string =
 proc supportsOption*(self: gen_qimagereader_types.QImageReader, option: cint): bool =
   fcQImageReader_supportsOption(self.h, cint(option))
 
-proc imageFormat*(_: type gen_qimagereader_types.QImageReader, fileName: string): seq[byte] =
+proc imageFormat*(_: type gen_qimagereader_types.QImageReader, fileName: openArray[char]): seq[byte] =
   var v_bytearray = fcQImageReader_imageFormatWithFileName(struct_miqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))))
   var vx_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](v_bytearray.data), 0, int(v_bytearray.len)-1))
   c_free(v_bytearray.data)
@@ -322,7 +322,7 @@ proc supportedMimeTypes*(_: type gen_qimagereader_types.QImageReader): seq[seq[b
   c_free(v_ma.data)
   vx_ret
 
-proc imageFormatsForMimeType*(_: type gen_qimagereader_types.QImageReader, mimeType: seq[byte]): seq[seq[byte]] =
+proc imageFormatsForMimeType*(_: type gen_qimagereader_types.QImageReader, mimeType: openArray[byte]): seq[seq[byte]] =
   var v_ma = fcQImageReader_imageFormatsForMimeType(struct_miqt_string(data: if len(mimeType) > 0: addr mimeType[0] else: nil, len: csize_t(len(mimeType))))
   var vx_ret = newSeq[seq[byte]](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
@@ -360,14 +360,14 @@ proc create*(T: type gen_qimagereader_types.QImageReader,
   let tmp = gen_qimagereader_types.QImageReader(h: fcQImageReader_new2(device.h), owned: true)
   tmp
 proc create*(T: type gen_qimagereader_types.QImageReader,
-    fileName: string): gen_qimagereader_types.QImageReader =
+    fileName: openArray[char]): gen_qimagereader_types.QImageReader =
   let tmp = gen_qimagereader_types.QImageReader(h: fcQImageReader_new3(struct_miqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName)))), owned: true)
   tmp
 proc create*(T: type gen_qimagereader_types.QImageReader,
-    device: gen_qiodevice_types.QIODevice, format: seq[byte]): gen_qimagereader_types.QImageReader =
+    device: gen_qiodevice_types.QIODevice, format: openArray[byte]): gen_qimagereader_types.QImageReader =
   let tmp = gen_qimagereader_types.QImageReader(h: fcQImageReader_new4(device.h, struct_miqt_string(data: if len(format) > 0: addr format[0] else: nil, len: csize_t(len(format)))), owned: true)
   tmp
 proc create*(T: type gen_qimagereader_types.QImageReader,
-    fileName: string, format: seq[byte]): gen_qimagereader_types.QImageReader =
+    fileName: openArray[char], format: openArray[byte]): gen_qimagereader_types.QImageReader =
   let tmp = gen_qimagereader_types.QImageReader(h: fcQImageReader_new5(struct_miqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))), struct_miqt_string(data: if len(format) > 0: addr format[0] else: nil, len: csize_t(len(format)))), owned: true)
   tmp

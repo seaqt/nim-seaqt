@@ -123,7 +123,7 @@ proc tr*(_: type gen_qsignalmapper_types.QSignalMapper, s: cstring): string =
 proc setMapping*(self: gen_qsignalmapper_types.QSignalMapper, sender: gen_qobject_types.QObject, id: cint): void =
   fcQSignalMapper_setMapping(self.h, sender.h, id)
 
-proc setMapping*(self: gen_qsignalmapper_types.QSignalMapper, sender: gen_qobject_types.QObject, text: string): void =
+proc setMapping*(self: gen_qsignalmapper_types.QSignalMapper, sender: gen_qobject_types.QObject, text: openArray[char]): void =
   fcQSignalMapper_setMapping2(self.h, sender.h, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
 
 proc setMapping*(self: gen_qsignalmapper_types.QSignalMapper, sender: gen_qobject_types.QObject, objectVal: gen_qobject_types.QObject): void =
@@ -135,7 +135,7 @@ proc removeMappings*(self: gen_qsignalmapper_types.QSignalMapper, sender: gen_qo
 proc mapping*(self: gen_qsignalmapper_types.QSignalMapper, id: cint): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQSignalMapper_mapping(self.h, id), owned: false)
 
-proc mapping*(self: gen_qsignalmapper_types.QSignalMapper, text: string): gen_qobject_types.QObject =
+proc mapping*(self: gen_qsignalmapper_types.QSignalMapper, text: openArray[char]): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQSignalMapper_mappingWithText(self.h, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))), owned: false)
 
 proc mapping*(self: gen_qsignalmapper_types.QSignalMapper, objectVal: gen_qobject_types.QObject): gen_qobject_types.QObject =
@@ -161,10 +161,10 @@ proc onmappedInt*(self: gen_qsignalmapper_types.QSignalMapper, slot: QSignalMapp
   GC_ref(tmp)
   fcQSignalMapper_connect_mappedInt(self.h, cast[int](addr tmp[]), fcQSignalMapper_slot_callback_mappedInt, fcQSignalMapper_slot_callback_mappedInt_release)
 
-proc mappedString*(self: gen_qsignalmapper_types.QSignalMapper, param1: string): void =
+proc mappedString*(self: gen_qsignalmapper_types.QSignalMapper, param1: openArray[char]): void =
   fcQSignalMapper_mappedString(self.h, struct_miqt_string(data: if len(param1) > 0: addr param1[0] else: nil, len: csize_t(len(param1))))
 
-type QSignalMappermappedStringSlot* = proc(param1: string)
+type QSignalMappermappedStringSlot* = proc(param1: openArray[char])
 proc fcQSignalMapper_slot_callback_mappedString(slot: int, param1: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QSignalMappermappedStringSlot](cast[pointer](slot))
   let vparam1_ms = param1
@@ -518,6 +518,7 @@ proc create*(T: type gen_qsignalmapper_types.QSignalMapper,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQSignalMapper_new(addr(cQSignalMapper_mvtbl), csize_t(sizeof(pointer)))
   fcQSignalMapper_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qsignalmapper_types.QSignalMapper,
     parent: gen_qobject_types.QObject,
@@ -525,6 +526,7 @@ proc create*(T: type gen_qsignalmapper_types.QSignalMapper,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQSignalMapper_new2(addr(cQSignalMapper_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQSignalMapper_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qsignalmapper_types.QSignalMapper): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQSignalMapper_staticMetaObject())

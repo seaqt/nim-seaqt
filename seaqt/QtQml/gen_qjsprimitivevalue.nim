@@ -168,7 +168,7 @@ proc create*(T: type gen_qjsprimitivevalue_types.QJSPrimitiveValue,
   let tmp = gen_qjsprimitivevalue_types.QJSPrimitiveValue(h: fcQJSPrimitiveValue_new6(value), owned: true)
   tmp
 proc create*(T: type gen_qjsprimitivevalue_types.QJSPrimitiveValue,
-    string: string): gen_qjsprimitivevalue_types.QJSPrimitiveValue =
+    string: openArray[char]): gen_qjsprimitivevalue_types.QJSPrimitiveValue =
   let tmp = gen_qjsprimitivevalue_types.QJSPrimitiveValue(h: fcQJSPrimitiveValue_new7(struct_miqt_string(data: if len(string) > 0: addr string[0] else: nil, len: csize_t(len(string)))), owned: true)
   tmp
 proc create*(T: type gen_qjsprimitivevalue_types.QJSPrimitiveValue,

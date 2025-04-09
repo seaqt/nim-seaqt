@@ -147,14 +147,14 @@ proc fcQJsonArrayconst_iterator_new4(other: pointer): ptr cQJsonArrayconst_itera
 proc operatorAssign*(self: gen_qjsonarray_types.QJsonArray, other: gen_qjsonarray_types.QJsonArray): void =
   fcQJsonArray_operatorAssign(self.h, other.h)
 
-proc fromStringList*(_: type gen_qjsonarray_types.QJsonArray, list: seq[string]): gen_qjsonarray_types.QJsonArray =
+proc fromStringList*(_: type gen_qjsonarray_types.QJsonArray, list: openArray[string]): gen_qjsonarray_types.QJsonArray =
   var list_CArray = newSeq[struct_miqt_string](len(list))
   for i in 0..<len(list):
     list_CArray[i] = struct_miqt_string(data: if len(list[i]) > 0: addr list[i][0] else: nil, len: csize_t(len(list[i])))
 
   gen_qjsonarray_types.QJsonArray(h: fcQJsonArray_fromStringList(struct_miqt_array(len: csize_t(len(list)), data: if len(list) == 0: nil else: addr(list_CArray[0]))), owned: true)
 
-proc fromVariantList*(_: type gen_qjsonarray_types.QJsonArray, list: seq[gen_qvariant_types.QVariant]): gen_qjsonarray_types.QJsonArray =
+proc fromVariantList*(_: type gen_qjsonarray_types.QJsonArray, list: openArray[gen_qvariant_types.QVariant]): gen_qjsonarray_types.QJsonArray =
   var list_CArray = newSeq[pointer](len(list))
   for i in 0..<len(list):
     list_CArray[i] = list[i].h

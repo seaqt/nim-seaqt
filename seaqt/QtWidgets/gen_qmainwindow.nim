@@ -379,7 +379,7 @@ proc addToolBar*(self: gen_qmainwindow_types.QMainWindow, area: cint, toolbar: g
 proc addToolBar*(self: gen_qmainwindow_types.QMainWindow, toolbar: gen_qtoolbar_types.QToolBar): void =
   fcQMainWindow_addToolBarWithToolbar(self.h, toolbar.h)
 
-proc addToolBar*(self: gen_qmainwindow_types.QMainWindow, title: string): gen_qtoolbar_types.QToolBar =
+proc addToolBar*(self: gen_qmainwindow_types.QMainWindow, title: openArray[char]): gen_qtoolbar_types.QToolBar =
   gen_qtoolbar_types.QToolBar(h: fcQMainWindow_addToolBarWithTitle(self.h, struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title)))), owned: false)
 
 proc insertToolBar*(self: gen_qmainwindow_types.QMainWindow, before: gen_qtoolbar_types.QToolBar, toolbar: gen_qtoolbar_types.QToolBar): void =
@@ -430,7 +430,7 @@ proc restoreDockWidget*(self: gen_qmainwindow_types.QMainWindow, dockwidget: gen
 proc dockWidgetArea*(self: gen_qmainwindow_types.QMainWindow, dockwidget: gen_qdockwidget_types.QDockWidget): cint =
   cint(fcQMainWindow_dockWidgetArea(self.h, dockwidget.h))
 
-proc resizeDocks*(self: gen_qmainwindow_types.QMainWindow, docks: seq[gen_qdockwidget_types.QDockWidget], sizes: seq[cint], orientation: cint): void =
+proc resizeDocks*(self: gen_qmainwindow_types.QMainWindow, docks: openArray[gen_qdockwidget_types.QDockWidget], sizes: openArray[cint], orientation: cint): void =
   var docks_CArray = newSeq[pointer](len(docks))
   for i in 0..<len(docks):
     docks_CArray[i] = docks[i].h
@@ -447,7 +447,7 @@ proc saveState*(self: gen_qmainwindow_types.QMainWindow): seq[byte] =
   c_free(v_bytearray.data)
   vx_ret
 
-proc restoreState*(self: gen_qmainwindow_types.QMainWindow, state: seq[byte]): bool =
+proc restoreState*(self: gen_qmainwindow_types.QMainWindow, state: openArray[byte]): bool =
   fcQMainWindow_restoreState(self.h, struct_miqt_string(data: if len(state) > 0: addr state[0] else: nil, len: csize_t(len(state))))
 
 proc createPopupMenu*(self: gen_qmainwindow_types.QMainWindow): gen_qmenu_types.QMenu =
@@ -543,7 +543,7 @@ proc saveState*(self: gen_qmainwindow_types.QMainWindow, version: cint): seq[byt
   c_free(v_bytearray.data)
   vx_ret
 
-proc restoreState*(self: gen_qmainwindow_types.QMainWindow, state: seq[byte], version: cint): bool =
+proc restoreState*(self: gen_qmainwindow_types.QMainWindow, state: openArray[byte], version: cint): bool =
   fcQMainWindow_restoreState2(self.h, struct_miqt_string(data: if len(state) > 0: addr state[0] else: nil, len: csize_t(len(state))), version)
 
 type QMainWindowmetaObjectProc* = proc(self: QMainWindow): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
@@ -582,7 +582,7 @@ type QMainWindowdragLeaveEventProc* = proc(self: QMainWindow, event: gen_qevent_
 type QMainWindowdropEventProc* = proc(self: QMainWindow, event: gen_qevent_types.QDropEvent): void {.raises: [], gcsafe.}
 type QMainWindowshowEventProc* = proc(self: QMainWindow, event: gen_qevent_types.QShowEvent): void {.raises: [], gcsafe.}
 type QMainWindowhideEventProc* = proc(self: QMainWindow, event: gen_qevent_types.QHideEvent): void {.raises: [], gcsafe.}
-type QMainWindownativeEventProc* = proc(self: QMainWindow, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
+type QMainWindownativeEventProc* = proc(self: QMainWindow, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
 type QMainWindowchangeEventProc* = proc(self: QMainWindow, param1: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QMainWindowmetricProc* = proc(self: QMainWindow, param1: cint): cint {.raises: [], gcsafe.}
 type QMainWindowinitPainterProc* = proc(self: QMainWindow, painter: gen_qpainter_types.QPainter): void {.raises: [], gcsafe.}
@@ -995,7 +995,7 @@ proc fcQMainWindow_vtable_callback_hideEvent(self: pointer, event: pointer): voi
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   vtbl[].hideEvent(self, slotval1)
 
-proc QMainWindownativeEvent*(self: gen_qmainwindow_types.QMainWindow, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool =
+proc QMainWindownativeEvent*(self: gen_qmainwindow_types.QMainWindow, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool =
   fcQMainWindow_virtualbase_nativeEvent(self.h, struct_miqt_string(data: if len(eventType) > 0: addr eventType[0] else: nil, len: csize_t(len(eventType))), message, resultVal)
 
 proc fcQMainWindow_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
@@ -1411,7 +1411,7 @@ proc fcQMainWindow_method_callback_hideEvent(self: pointer, event: pointer): voi
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   inst.hideEvent(slotval1)
 
-method nativeEvent*(self: VirtualQMainWindow, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
+method nativeEvent*(self: VirtualQMainWindow, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
   QMainWindownativeEvent(self[], eventType, message, resultVal)
 proc fcQMainWindow_method_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
   let inst = cast[VirtualQMainWindow](fcQMainWindow_vdata(self)[])
@@ -1957,12 +1957,14 @@ proc create*(T: type gen_qmainwindow_types.QMainWindow,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQMainWindow_new(addr(cQMainWindow_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQMainWindow_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qmainwindow_types.QMainWindow,
     inst: VirtualQMainWindow) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQMainWindow_new2(addr(cQMainWindow_mvtbl), csize_t(sizeof(pointer)))
   fcQMainWindow_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qmainwindow_types.QMainWindow,
     parent: gen_qwidget_types.QWidget, flags: cint,
@@ -1970,6 +1972,7 @@ proc create*(T: type gen_qmainwindow_types.QMainWindow,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQMainWindow_new3(addr(cQMainWindow_mvtbl), csize_t(sizeof(pointer)), parent.h, cint(flags))
   fcQMainWindow_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qmainwindow_types.QMainWindow): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQMainWindow_staticMetaObject())

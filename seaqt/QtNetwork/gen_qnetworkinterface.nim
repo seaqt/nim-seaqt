@@ -243,10 +243,10 @@ proc addressEntries*(self: gen_qnetworkinterface_types.QNetworkInterface): seq[g
   c_free(v_ma.data)
   vx_ret
 
-proc interfaceIndexFromName*(_: type gen_qnetworkinterface_types.QNetworkInterface, name: string): cint =
+proc interfaceIndexFromName*(_: type gen_qnetworkinterface_types.QNetworkInterface, name: openArray[char]): cint =
   fcQNetworkInterface_interfaceIndexFromName(struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))))
 
-proc interfaceFromName*(_: type gen_qnetworkinterface_types.QNetworkInterface, name: string): gen_qnetworkinterface_types.QNetworkInterface =
+proc interfaceFromName*(_: type gen_qnetworkinterface_types.QNetworkInterface, name: openArray[char]): gen_qnetworkinterface_types.QNetworkInterface =
   gen_qnetworkinterface_types.QNetworkInterface(h: fcQNetworkInterface_interfaceFromName(struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name)))), owned: true)
 
 proc interfaceFromIndex*(_: type gen_qnetworkinterface_types.QNetworkInterface, index: cint): gen_qnetworkinterface_types.QNetworkInterface =

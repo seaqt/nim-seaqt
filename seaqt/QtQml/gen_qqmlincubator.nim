@@ -229,6 +229,7 @@ proc create*(T: type gen_qqmlincubator_types.QQmlIncubator,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQQmlIncubator_new(addr(cQQmlIncubator_mvtbl), csize_t(sizeof(pointer)))
   fcQQmlIncubator_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qqmlincubator_types.QQmlIncubator,
     param1: cint,
@@ -236,6 +237,7 @@ proc create*(T: type gen_qqmlincubator_types.QQmlIncubator,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQQmlIncubator_new2(addr(cQQmlIncubator_mvtbl), csize_t(sizeof(pointer)), cint(param1))
   fcQQmlIncubator_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc engine*(self: gen_qqmlincubator_types.QQmlIncubationController): gen_qqmlengine_types.QQmlEngine =
   gen_qqmlengine_types.QQmlEngine(h: fcQQmlIncubationController_engine(self.h), owned: false)
@@ -293,4 +295,5 @@ proc create*(T: type gen_qqmlincubator_types.QQmlIncubationController,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQQmlIncubationController_new(addr(cQQmlIncubationController_mvtbl), csize_t(sizeof(pointer)))
   fcQQmlIncubationController_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 

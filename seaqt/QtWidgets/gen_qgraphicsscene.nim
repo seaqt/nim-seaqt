@@ -434,7 +434,7 @@ proc setSelectionArea*(self: gen_qgraphicsscene_types.QGraphicsScene, path: gen_
 proc setSelectionArea*(self: gen_qgraphicsscene_types.QGraphicsScene, path: gen_qpainterpath_types.QPainterPath): void =
   fcQGraphicsScene_setSelectionAreaWithPath(self.h, path.h)
 
-proc createItemGroup*(self: gen_qgraphicsscene_types.QGraphicsScene, items: seq[gen_qgraphicsitem_types.QGraphicsItem]): gen_qgraphicsitem_types.QGraphicsItemGroup =
+proc createItemGroup*(self: gen_qgraphicsscene_types.QGraphicsScene, items: openArray[gen_qgraphicsitem_types.QGraphicsItem]): gen_qgraphicsitem_types.QGraphicsItemGroup =
   var items_CArray = newSeq[pointer](len(items))
   for i in 0..<len(items):
     items_CArray[i] = items[i].h
@@ -462,10 +462,10 @@ proc addPixmap*(self: gen_qgraphicsscene_types.QGraphicsScene, pixmap: gen_qpixm
 proc addRect*(self: gen_qgraphicsscene_types.QGraphicsScene, rect: gen_qrect_types.QRectF): gen_qgraphicsitem_types.QGraphicsRectItem =
   gen_qgraphicsitem_types.QGraphicsRectItem(h: fcQGraphicsScene_addRect(self.h, rect.h), owned: false)
 
-proc addText*(self: gen_qgraphicsscene_types.QGraphicsScene, text: string): gen_qgraphicsitem_types.QGraphicsTextItem =
+proc addText*(self: gen_qgraphicsscene_types.QGraphicsScene, text: openArray[char]): gen_qgraphicsitem_types.QGraphicsTextItem =
   gen_qgraphicsitem_types.QGraphicsTextItem(h: fcQGraphicsScene_addText(self.h, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))), owned: false)
 
-proc addSimpleText*(self: gen_qgraphicsscene_types.QGraphicsScene, text: string): gen_qgraphicsitem_types.QGraphicsSimpleTextItem =
+proc addSimpleText*(self: gen_qgraphicsscene_types.QGraphicsScene, text: openArray[char]): gen_qgraphicsitem_types.QGraphicsSimpleTextItem =
   gen_qgraphicsitem_types.QGraphicsSimpleTextItem(h: fcQGraphicsScene_addSimpleText(self.h, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))), owned: false)
 
 proc addWidget*(self: gen_qgraphicsscene_types.QGraphicsScene, widget: gen_qwidget_types.QWidget): gen_qgraphicsproxywidget_types.QGraphicsProxyWidget =
@@ -600,14 +600,14 @@ proc clearSelection*(self: gen_qgraphicsscene_types.QGraphicsScene): void =
 proc clear*(self: gen_qgraphicsscene_types.QGraphicsScene): void =
   fcQGraphicsScene_clear(self.h)
 
-proc changed*(self: gen_qgraphicsscene_types.QGraphicsScene, region: seq[gen_qrect_types.QRectF]): void =
+proc changed*(self: gen_qgraphicsscene_types.QGraphicsScene, region: openArray[gen_qrect_types.QRectF]): void =
   var region_CArray = newSeq[pointer](len(region))
   for i in 0..<len(region):
     region_CArray[i] = region[i].h
 
   fcQGraphicsScene_changed(self.h, struct_miqt_array(len: csize_t(len(region)), data: if len(region) == 0: nil else: addr(region_CArray[0])))
 
-type QGraphicsScenechangedSlot* = proc(region: seq[gen_qrect_types.QRectF])
+type QGraphicsScenechangedSlot* = proc(region: openArray[gen_qrect_types.QRectF])
 proc fcQGraphicsScene_slot_callback_changed(slot: int, region: struct_miqt_array) {.cdecl.} =
   let nimfunc = cast[ptr QGraphicsScenechangedSlot](cast[pointer](slot))
   var vregion_ma = region
@@ -851,10 +851,10 @@ proc addRect*(self: gen_qgraphicsscene_types.QGraphicsScene, rect: gen_qrect_typ
 proc addRect*(self: gen_qgraphicsscene_types.QGraphicsScene, rect: gen_qrect_types.QRectF, pen: gen_qpen_types.QPen, brush: gen_qbrush_types.QBrush): gen_qgraphicsitem_types.QGraphicsRectItem =
   gen_qgraphicsitem_types.QGraphicsRectItem(h: fcQGraphicsScene_addRect3(self.h, rect.h, pen.h, brush.h), owned: false)
 
-proc addText*(self: gen_qgraphicsscene_types.QGraphicsScene, text: string, font: gen_qfont_types.QFont): gen_qgraphicsitem_types.QGraphicsTextItem =
+proc addText*(self: gen_qgraphicsscene_types.QGraphicsScene, text: openArray[char], font: gen_qfont_types.QFont): gen_qgraphicsitem_types.QGraphicsTextItem =
   gen_qgraphicsitem_types.QGraphicsTextItem(h: fcQGraphicsScene_addText2(self.h, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), font.h), owned: false)
 
-proc addSimpleText*(self: gen_qgraphicsscene_types.QGraphicsScene, text: string, font: gen_qfont_types.QFont): gen_qgraphicsitem_types.QGraphicsSimpleTextItem =
+proc addSimpleText*(self: gen_qgraphicsscene_types.QGraphicsScene, text: openArray[char], font: gen_qfont_types.QFont): gen_qgraphicsitem_types.QGraphicsSimpleTextItem =
   gen_qgraphicsitem_types.QGraphicsSimpleTextItem(h: fcQGraphicsScene_addSimpleText2(self.h, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), font.h), owned: false)
 
 proc addWidget*(self: gen_qgraphicsscene_types.QGraphicsScene, widget: gen_qwidget_types.QWidget, wFlags: cint): gen_qgraphicsproxywidget_types.QGraphicsProxyWidget =
@@ -1944,6 +1944,7 @@ proc create*(T: type gen_qgraphicsscene_types.QGraphicsScene,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQGraphicsScene_new(addr(cQGraphicsScene_mvtbl), csize_t(sizeof(pointer)))
   fcQGraphicsScene_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qgraphicsscene_types.QGraphicsScene,
     sceneRect: gen_qrect_types.QRectF,
@@ -1951,6 +1952,7 @@ proc create*(T: type gen_qgraphicsscene_types.QGraphicsScene,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQGraphicsScene_new2(addr(cQGraphicsScene_mvtbl), csize_t(sizeof(pointer)), sceneRect.h)
   fcQGraphicsScene_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qgraphicsscene_types.QGraphicsScene,
     x: float64, y: float64, width: float64, height: float64,
@@ -1958,6 +1960,7 @@ proc create*(T: type gen_qgraphicsscene_types.QGraphicsScene,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQGraphicsScene_new3(addr(cQGraphicsScene_mvtbl), csize_t(sizeof(pointer)), x, y, width, height)
   fcQGraphicsScene_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qgraphicsscene_types.QGraphicsScene,
     parent: gen_qobject_types.QObject,
@@ -1965,6 +1968,7 @@ proc create*(T: type gen_qgraphicsscene_types.QGraphicsScene,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQGraphicsScene_new4(addr(cQGraphicsScene_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQGraphicsScene_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qgraphicsscene_types.QGraphicsScene,
     sceneRect: gen_qrect_types.QRectF, parent: gen_qobject_types.QObject,
@@ -1972,6 +1976,7 @@ proc create*(T: type gen_qgraphicsscene_types.QGraphicsScene,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQGraphicsScene_new5(addr(cQGraphicsScene_mvtbl), csize_t(sizeof(pointer)), sceneRect.h, parent.h)
   fcQGraphicsScene_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qgraphicsscene_types.QGraphicsScene,
     x: float64, y: float64, width: float64, height: float64, parent: gen_qobject_types.QObject,
@@ -1979,6 +1984,7 @@ proc create*(T: type gen_qgraphicsscene_types.QGraphicsScene,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQGraphicsScene_new6(addr(cQGraphicsScene_mvtbl), csize_t(sizeof(pointer)), x, y, width, height, parent.h)
   fcQGraphicsScene_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qgraphicsscene_types.QGraphicsScene): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQGraphicsScene_staticMetaObject())

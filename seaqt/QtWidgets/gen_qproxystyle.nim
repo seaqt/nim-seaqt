@@ -218,7 +218,7 @@ proc drawControl*(self: gen_qproxystyle_types.QProxyStyle, element: cint, option
 proc drawComplexControl*(self: gen_qproxystyle_types.QProxyStyle, control: cint, option: gen_qstyleoption_types.QStyleOptionComplex, painter: gen_qpainter_types.QPainter, widget: gen_qwidget_types.QWidget): void =
   fcQProxyStyle_drawComplexControl(self.h, cint(control), option.h, painter.h, widget.h)
 
-proc drawItemText*(self: gen_qproxystyle_types.QProxyStyle, painter: gen_qpainter_types.QPainter, rect: gen_qrect_types.QRect, flags: cint, pal: gen_qpalette_types.QPalette, enabled: bool, text: string, textRole: cint): void =
+proc drawItemText*(self: gen_qproxystyle_types.QProxyStyle, painter: gen_qpainter_types.QPainter, rect: gen_qrect_types.QRect, flags: cint, pal: gen_qpalette_types.QPalette, enabled: bool, text: openArray[char], textRole: cint): void =
   fcQProxyStyle_drawItemText(self.h, painter.h, rect.h, flags, pal.h, enabled, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), cint(textRole))
 
 proc drawItemPixmap*(self: gen_qproxystyle_types.QProxyStyle, painter: gen_qpainter_types.QPainter, rect: gen_qrect_types.QRect, alignment: cint, pixmap: gen_qpixmap_types.QPixmap): void =
@@ -233,7 +233,7 @@ proc subElementRect*(self: gen_qproxystyle_types.QProxyStyle, element: cint, opt
 proc subControlRect*(self: gen_qproxystyle_types.QProxyStyle, cc: cint, opt: gen_qstyleoption_types.QStyleOptionComplex, sc: cint, widget: gen_qwidget_types.QWidget): gen_qrect_types.QRect =
   gen_qrect_types.QRect(h: fcQProxyStyle_subControlRect(self.h, cint(cc), opt.h, cint(sc), widget.h), owned: true)
 
-proc itemTextRect*(self: gen_qproxystyle_types.QProxyStyle, fm: gen_qfontmetrics_types.QFontMetrics, r: gen_qrect_types.QRect, flags: cint, enabled: bool, text: string): gen_qrect_types.QRect =
+proc itemTextRect*(self: gen_qproxystyle_types.QProxyStyle, fm: gen_qfontmetrics_types.QFontMetrics, r: gen_qrect_types.QRect, flags: cint, enabled: bool, text: openArray[char]): gen_qrect_types.QRect =
   gen_qrect_types.QRect(h: fcQProxyStyle_itemTextRect(self.h, fm.h, r.h, flags, enabled, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))), owned: true)
 
 proc itemPixmapRect*(self: gen_qproxystyle_types.QProxyStyle, r: gen_qrect_types.QRect, flags: cint, pixmap: gen_qpixmap_types.QPixmap): gen_qrect_types.QRect =
@@ -296,12 +296,12 @@ type QProxyStylemetacallProc* = proc(self: QProxyStyle, param1: cint, param2: ci
 type QProxyStyledrawPrimitiveProc* = proc(self: QProxyStyle, element: cint, option: gen_qstyleoption_types.QStyleOption, painter: gen_qpainter_types.QPainter, widget: gen_qwidget_types.QWidget): void {.raises: [], gcsafe.}
 type QProxyStyledrawControlProc* = proc(self: QProxyStyle, element: cint, option: gen_qstyleoption_types.QStyleOption, painter: gen_qpainter_types.QPainter, widget: gen_qwidget_types.QWidget): void {.raises: [], gcsafe.}
 type QProxyStyledrawComplexControlProc* = proc(self: QProxyStyle, control: cint, option: gen_qstyleoption_types.QStyleOptionComplex, painter: gen_qpainter_types.QPainter, widget: gen_qwidget_types.QWidget): void {.raises: [], gcsafe.}
-type QProxyStyledrawItemTextProc* = proc(self: QProxyStyle, painter: gen_qpainter_types.QPainter, rect: gen_qrect_types.QRect, flags: cint, pal: gen_qpalette_types.QPalette, enabled: bool, text: string, textRole: cint): void {.raises: [], gcsafe.}
+type QProxyStyledrawItemTextProc* = proc(self: QProxyStyle, painter: gen_qpainter_types.QPainter, rect: gen_qrect_types.QRect, flags: cint, pal: gen_qpalette_types.QPalette, enabled: bool, text: openArray[char], textRole: cint): void {.raises: [], gcsafe.}
 type QProxyStyledrawItemPixmapProc* = proc(self: QProxyStyle, painter: gen_qpainter_types.QPainter, rect: gen_qrect_types.QRect, alignment: cint, pixmap: gen_qpixmap_types.QPixmap): void {.raises: [], gcsafe.}
 type QProxyStylesizeFromContentsProc* = proc(self: QProxyStyle, typeVal: cint, option: gen_qstyleoption_types.QStyleOption, size: gen_qsize_types.QSize, widget: gen_qwidget_types.QWidget): gen_qsize_types.QSize {.raises: [], gcsafe.}
 type QProxyStylesubElementRectProc* = proc(self: QProxyStyle, element: cint, option: gen_qstyleoption_types.QStyleOption, widget: gen_qwidget_types.QWidget): gen_qrect_types.QRect {.raises: [], gcsafe.}
 type QProxyStylesubControlRectProc* = proc(self: QProxyStyle, cc: cint, opt: gen_qstyleoption_types.QStyleOptionComplex, sc: cint, widget: gen_qwidget_types.QWidget): gen_qrect_types.QRect {.raises: [], gcsafe.}
-type QProxyStyleitemTextRectProc* = proc(self: QProxyStyle, fm: gen_qfontmetrics_types.QFontMetrics, r: gen_qrect_types.QRect, flags: cint, enabled: bool, text: string): gen_qrect_types.QRect {.raises: [], gcsafe.}
+type QProxyStyleitemTextRectProc* = proc(self: QProxyStyle, fm: gen_qfontmetrics_types.QFontMetrics, r: gen_qrect_types.QRect, flags: cint, enabled: bool, text: openArray[char]): gen_qrect_types.QRect {.raises: [], gcsafe.}
 type QProxyStyleitemPixmapRectProc* = proc(self: QProxyStyle, r: gen_qrect_types.QRect, flags: cint, pixmap: gen_qpixmap_types.QPixmap): gen_qrect_types.QRect {.raises: [], gcsafe.}
 type QProxyStylehitTestComplexControlProc* = proc(self: QProxyStyle, control: cint, option: gen_qstyleoption_types.QStyleOptionComplex, pos: gen_qpoint_types.QPoint, widget: gen_qwidget_types.QWidget): cint {.raises: [], gcsafe.}
 type QProxyStylestyleHintProc* = proc(self: QProxyStyle, hint: cint, option: gen_qstyleoption_types.QStyleOption, widget: gen_qwidget_types.QWidget, returnData: gen_qstyleoption_types.QStyleHintReturn): cint {.raises: [], gcsafe.}
@@ -428,7 +428,7 @@ proc fcQProxyStyle_vtable_callback_drawComplexControl(self: pointer, control: ci
   let slotval4 = gen_qwidget_types.QWidget(h: widget, owned: false)
   vtbl[].drawComplexControl(self, slotval1, slotval2, slotval3, slotval4)
 
-proc QProxyStyledrawItemText*(self: gen_qproxystyle_types.QProxyStyle, painter: gen_qpainter_types.QPainter, rect: gen_qrect_types.QRect, flags: cint, pal: gen_qpalette_types.QPalette, enabled: bool, text: string, textRole: cint): void =
+proc QProxyStyledrawItemText*(self: gen_qproxystyle_types.QProxyStyle, painter: gen_qpainter_types.QPainter, rect: gen_qrect_types.QRect, flags: cint, pal: gen_qpalette_types.QPalette, enabled: bool, text: openArray[char], textRole: cint): void =
   fcQProxyStyle_virtualbase_drawItemText(self.h, painter.h, rect.h, flags, pal.h, enabled, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), cint(textRole))
 
 proc fcQProxyStyle_vtable_callback_drawItemText(self: pointer, painter: pointer, rect: pointer, flags: cint, pal: pointer, enabled: bool, text: struct_miqt_string, textRole: cint): void {.cdecl.} =
@@ -505,7 +505,7 @@ proc fcQProxyStyle_vtable_callback_subControlRect(self: pointer, cc: cint, opt: 
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QProxyStyleitemTextRect*(self: gen_qproxystyle_types.QProxyStyle, fm: gen_qfontmetrics_types.QFontMetrics, r: gen_qrect_types.QRect, flags: cint, enabled: bool, text: string): gen_qrect_types.QRect =
+proc QProxyStyleitemTextRect*(self: gen_qproxystyle_types.QProxyStyle, fm: gen_qfontmetrics_types.QFontMetrics, r: gen_qrect_types.QRect, flags: cint, enabled: bool, text: openArray[char]): gen_qrect_types.QRect =
   gen_qrect_types.QRect(h: fcQProxyStyle_virtualbase_itemTextRect(self.h, fm.h, r.h, flags, enabled, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))), owned: true)
 
 proc fcQProxyStyle_vtable_callback_itemTextRect(self: pointer, fm: pointer, r: pointer, flags: cint, enabled: bool, text: struct_miqt_string): pointer {.cdecl.} =
@@ -817,7 +817,7 @@ proc fcQProxyStyle_method_callback_drawComplexControl(self: pointer, control: ci
   let slotval4 = gen_qwidget_types.QWidget(h: widget, owned: false)
   inst.drawComplexControl(slotval1, slotval2, slotval3, slotval4)
 
-method drawItemText*(self: VirtualQProxyStyle, painter: gen_qpainter_types.QPainter, rect: gen_qrect_types.QRect, flags: cint, pal: gen_qpalette_types.QPalette, enabled: bool, text: string, textRole: cint): void {.base.} =
+method drawItemText*(self: VirtualQProxyStyle, painter: gen_qpainter_types.QPainter, rect: gen_qrect_types.QRect, flags: cint, pal: gen_qpalette_types.QPalette, enabled: bool, text: openArray[char], textRole: cint): void {.base.} =
   QProxyStyledrawItemText(self[], painter, rect, flags, pal, enabled, text, textRole)
 proc fcQProxyStyle_method_callback_drawItemText(self: pointer, painter: pointer, rect: pointer, flags: cint, pal: pointer, enabled: bool, text: struct_miqt_string, textRole: cint): void {.cdecl.} =
   let inst = cast[VirtualQProxyStyle](fcQProxyStyle_vdata(self)[])
@@ -875,7 +875,7 @@ proc fcQProxyStyle_method_callback_subControlRect(self: pointer, cc: cint, opt: 
   var virtualReturn = inst.subControlRect(slotval1, slotval2, slotval3, slotval4)
   virtualReturn.h
 
-method itemTextRect*(self: VirtualQProxyStyle, fm: gen_qfontmetrics_types.QFontMetrics, r: gen_qrect_types.QRect, flags: cint, enabled: bool, text: string): gen_qrect_types.QRect {.base.} =
+method itemTextRect*(self: VirtualQProxyStyle, fm: gen_qfontmetrics_types.QFontMetrics, r: gen_qrect_types.QRect, flags: cint, enabled: bool, text: openArray[char]): gen_qrect_types.QRect {.base.} =
   QProxyStyleitemTextRect(self[], fm, r, flags, enabled, text)
 proc fcQProxyStyle_method_callback_itemTextRect(self: pointer, fm: pointer, r: pointer, flags: cint, enabled: bool, text: struct_miqt_string): pointer {.cdecl.} =
   let inst = cast[VirtualQProxyStyle](fcQProxyStyle_vdata(self)[])
@@ -1157,7 +1157,7 @@ proc create*(T: type gen_qproxystyle_types.QProxyStyle,
   fcQProxyStyle_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qproxystyle_types.QProxyStyle,
-    key: string,
+    key: openArray[char],
     vtbl: ref QProxyStyleVTable = nil): gen_qproxystyle_types.QProxyStyle =
   let vtbl = if vtbl == nil: new QProxyStyleVTable else: vtbl
   GC_ref(vtbl)
@@ -1355,13 +1355,15 @@ proc create*(T: type gen_qproxystyle_types.QProxyStyle,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQProxyStyle_new(addr(cQProxyStyle_mvtbl), csize_t(sizeof(pointer)))
   fcQProxyStyle_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qproxystyle_types.QProxyStyle,
-    key: string,
+    key: openArray[char],
     inst: VirtualQProxyStyle) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQProxyStyle_new2(addr(cQProxyStyle_mvtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key))))
   fcQProxyStyle_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qproxystyle_types.QProxyStyle,
     style: gen_qstyle_types.QStyle,
@@ -1369,6 +1371,7 @@ proc create*(T: type gen_qproxystyle_types.QProxyStyle,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQProxyStyle_new3(addr(cQProxyStyle_mvtbl), csize_t(sizeof(pointer)), style.h)
   fcQProxyStyle_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qproxystyle_types.QProxyStyle): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQProxyStyle_staticMetaObject())

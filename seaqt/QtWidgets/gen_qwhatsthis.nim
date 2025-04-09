@@ -67,7 +67,7 @@ proc inWhatsThisMode*(_: type gen_qwhatsthis_types.QWhatsThis): bool =
 proc leaveWhatsThisMode*(_: type gen_qwhatsthis_types.QWhatsThis): void =
   fcQWhatsThis_leaveWhatsThisMode()
 
-proc showText*(_: type gen_qwhatsthis_types.QWhatsThis, pos: gen_qpoint_types.QPoint, text: string): void =
+proc showText*(_: type gen_qwhatsthis_types.QWhatsThis, pos: gen_qpoint_types.QPoint, text: openArray[char]): void =
   fcQWhatsThis_showText(pos.h, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
 
 proc hideText*(_: type gen_qwhatsthis_types.QWhatsThis): void =
@@ -76,7 +76,7 @@ proc hideText*(_: type gen_qwhatsthis_types.QWhatsThis): void =
 proc createAction*(_: type gen_qwhatsthis_types.QWhatsThis): gen_qaction_types.QAction =
   gen_qaction_types.QAction(h: fcQWhatsThis_createAction(), owned: false)
 
-proc showText*(_: type gen_qwhatsthis_types.QWhatsThis, pos: gen_qpoint_types.QPoint, text: string, w: gen_qwidget_types.QWidget): void =
+proc showText*(_: type gen_qwhatsthis_types.QWhatsThis, pos: gen_qpoint_types.QPoint, text: openArray[char], w: gen_qwidget_types.QWidget): void =
   fcQWhatsThis_showText3(pos.h, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), w.h)
 
 proc createAction*(_: type gen_qwhatsthis_types.QWhatsThis, parent: gen_qobject_types.QObject): gen_qaction_types.QAction =

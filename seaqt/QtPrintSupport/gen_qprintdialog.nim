@@ -334,7 +334,7 @@ type QPrintDialogdragMoveEventProc* = proc(self: QPrintDialog, event: gen_qevent
 type QPrintDialogdragLeaveEventProc* = proc(self: QPrintDialog, event: gen_qevent_types.QDragLeaveEvent): void {.raises: [], gcsafe.}
 type QPrintDialogdropEventProc* = proc(self: QPrintDialog, event: gen_qevent_types.QDropEvent): void {.raises: [], gcsafe.}
 type QPrintDialoghideEventProc* = proc(self: QPrintDialog, event: gen_qevent_types.QHideEvent): void {.raises: [], gcsafe.}
-type QPrintDialognativeEventProc* = proc(self: QPrintDialog, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
+type QPrintDialognativeEventProc* = proc(self: QPrintDialog, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
 type QPrintDialogchangeEventProc* = proc(self: QPrintDialog, param1: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QPrintDialogmetricProc* = proc(self: QPrintDialog, param1: cint): cint {.raises: [], gcsafe.}
 type QPrintDialoginitPainterProc* = proc(self: QPrintDialog, painter: gen_qpainter_types.QPainter): void {.raises: [], gcsafe.}
@@ -791,7 +791,7 @@ proc fcQPrintDialog_vtable_callback_hideEvent(self: pointer, event: pointer): vo
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   vtbl[].hideEvent(self, slotval1)
 
-proc QPrintDialognativeEvent*(self: gen_qprintdialog_types.QPrintDialog, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool =
+proc QPrintDialognativeEvent*(self: gen_qprintdialog_types.QPrintDialog, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool =
   fcQPrintDialog_virtualbase_nativeEvent(self.h, struct_miqt_string(data: if len(eventType) > 0: addr eventType[0] else: nil, len: csize_t(len(eventType))), message, resultVal)
 
 proc fcQPrintDialog_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
@@ -1230,7 +1230,7 @@ proc fcQPrintDialog_method_callback_hideEvent(self: pointer, event: pointer): vo
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   inst.hideEvent(slotval1)
 
-method nativeEvent*(self: VirtualQPrintDialog, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
+method nativeEvent*(self: VirtualQPrintDialog, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
   QPrintDialognativeEvent(self[], eventType, message, resultVal)
 proc fcQPrintDialog_method_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
   let inst = cast[VirtualQPrintDialog](fcQPrintDialog_vdata(self)[])
@@ -1919,6 +1919,7 @@ proc create*(T: type gen_qprintdialog_types.QPrintDialog,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQPrintDialog_new(addr(cQPrintDialog_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQPrintDialog_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qprintdialog_types.QPrintDialog,
     printer: gen_qprinter_types.QPrinter,
@@ -1926,12 +1927,14 @@ proc create*(T: type gen_qprintdialog_types.QPrintDialog,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQPrintDialog_new2(addr(cQPrintDialog_mvtbl), csize_t(sizeof(pointer)), printer.h)
   fcQPrintDialog_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qprintdialog_types.QPrintDialog,
     inst: VirtualQPrintDialog) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQPrintDialog_new3(addr(cQPrintDialog_mvtbl), csize_t(sizeof(pointer)))
   fcQPrintDialog_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qprintdialog_types.QPrintDialog,
     printer: gen_qprinter_types.QPrinter, parent: gen_qwidget_types.QWidget,
@@ -1939,6 +1942,7 @@ proc create*(T: type gen_qprintdialog_types.QPrintDialog,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQPrintDialog_new4(addr(cQPrintDialog_mvtbl), csize_t(sizeof(pointer)), printer.h, parent.h)
   fcQPrintDialog_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qprintdialog_types.QPrintDialog): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQPrintDialog_staticMetaObject())

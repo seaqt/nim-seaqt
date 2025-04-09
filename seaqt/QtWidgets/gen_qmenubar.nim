@@ -248,10 +248,10 @@ proc tr*(_: type gen_qmenubar_types.QMenuBar, s: cstring): string =
 proc addMenu*(self: gen_qmenubar_types.QMenuBar, menu: gen_qmenu_types.QMenu): gen_qaction_types.QAction =
   gen_qaction_types.QAction(h: fcQMenuBar_addMenu(self.h, menu.h), owned: false)
 
-proc addMenu*(self: gen_qmenubar_types.QMenuBar, title: string): gen_qmenu_types.QMenu =
+proc addMenu*(self: gen_qmenubar_types.QMenuBar, title: openArray[char]): gen_qmenu_types.QMenu =
   gen_qmenu_types.QMenu(h: fcQMenuBar_addMenuWithTitle(self.h, struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title)))), owned: false)
 
-proc addMenu*(self: gen_qmenubar_types.QMenuBar, icon: gen_qicon_types.QIcon, title: string): gen_qmenu_types.QMenu =
+proc addMenu*(self: gen_qmenubar_types.QMenuBar, icon: gen_qicon_types.QIcon, title: openArray[char]): gen_qmenu_types.QMenu =
   gen_qmenu_types.QMenu(h: fcQMenuBar_addMenu2(self.h, icon.h, struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title)))), owned: false)
 
 proc addSeparator*(self: gen_qmenubar_types.QMenuBar): gen_qaction_types.QAction =
@@ -405,7 +405,7 @@ type QMenuBardragLeaveEventProc* = proc(self: QMenuBar, event: gen_qevent_types.
 type QMenuBardropEventProc* = proc(self: QMenuBar, event: gen_qevent_types.QDropEvent): void {.raises: [], gcsafe.}
 type QMenuBarshowEventProc* = proc(self: QMenuBar, event: gen_qevent_types.QShowEvent): void {.raises: [], gcsafe.}
 type QMenuBarhideEventProc* = proc(self: QMenuBar, event: gen_qevent_types.QHideEvent): void {.raises: [], gcsafe.}
-type QMenuBarnativeEventProc* = proc(self: QMenuBar, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
+type QMenuBarnativeEventProc* = proc(self: QMenuBar, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
 type QMenuBarmetricProc* = proc(self: QMenuBar, param1: cint): cint {.raises: [], gcsafe.}
 type QMenuBarinitPainterProc* = proc(self: QMenuBar, painter: gen_qpainter_types.QPainter): void {.raises: [], gcsafe.}
 type QMenuBarredirectedProc* = proc(self: QMenuBar, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.raises: [], gcsafe.}
@@ -842,7 +842,7 @@ proc fcQMenuBar_vtable_callback_hideEvent(self: pointer, event: pointer): void {
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   vtbl[].hideEvent(self, slotval1)
 
-proc QMenuBarnativeEvent*(self: gen_qmenubar_types.QMenuBar, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool =
+proc QMenuBarnativeEvent*(self: gen_qmenubar_types.QMenuBar, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool =
   fcQMenuBar_virtualbase_nativeEvent(self.h, struct_miqt_string(data: if len(eventType) > 0: addr eventType[0] else: nil, len: csize_t(len(eventType))), message, resultVal)
 
 proc fcQMenuBar_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
@@ -1253,7 +1253,7 @@ proc fcQMenuBar_method_callback_hideEvent(self: pointer, event: pointer): void {
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   inst.hideEvent(slotval1)
 
-method nativeEvent*(self: VirtualQMenuBar, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
+method nativeEvent*(self: VirtualQMenuBar, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
   QMenuBarnativeEvent(self[], eventType, message, resultVal)
 proc fcQMenuBar_method_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
   let inst = cast[VirtualQMenuBar](fcQMenuBar_vdata(self)[])
@@ -1663,12 +1663,14 @@ proc create*(T: type gen_qmenubar_types.QMenuBar,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQMenuBar_new(addr(cQMenuBar_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQMenuBar_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qmenubar_types.QMenuBar,
     inst: VirtualQMenuBar) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQMenuBar_new2(addr(cQMenuBar_mvtbl), csize_t(sizeof(pointer)))
   fcQMenuBar_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qmenubar_types.QMenuBar): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQMenuBar_staticMetaObject())

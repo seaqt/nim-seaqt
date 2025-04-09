@@ -88,7 +88,7 @@ proc drawControl*(self: gen_qstylepainter_types.QStylePainter, ce: cint, opt: ge
 proc drawComplexControl*(self: gen_qstylepainter_types.QStylePainter, cc: cint, opt: gen_qstyleoption_types.QStyleOptionComplex): void =
   fcQStylePainter_drawComplexControl(self.h, cint(cc), opt.h)
 
-proc drawItemText*(self: gen_qstylepainter_types.QStylePainter, r: gen_qrect_types.QRect, flags: cint, pal: gen_qpalette_types.QPalette, enabled: bool, text: string): void =
+proc drawItemText*(self: gen_qstylepainter_types.QStylePainter, r: gen_qrect_types.QRect, flags: cint, pal: gen_qpalette_types.QPalette, enabled: bool, text: openArray[char]): void =
   fcQStylePainter_drawItemText(self.h, r.h, flags, pal.h, enabled, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
 
 proc drawItemPixmap*(self: gen_qstylepainter_types.QStylePainter, r: gen_qrect_types.QRect, flags: cint, pixmap: gen_qpixmap_types.QPixmap): void =
@@ -97,7 +97,7 @@ proc drawItemPixmap*(self: gen_qstylepainter_types.QStylePainter, r: gen_qrect_t
 proc style*(self: gen_qstylepainter_types.QStylePainter): gen_qstyle_types.QStyle =
   gen_qstyle_types.QStyle(h: fcQStylePainter_style(self.h), owned: false)
 
-proc drawItemText*(self: gen_qstylepainter_types.QStylePainter, r: gen_qrect_types.QRect, flags: cint, pal: gen_qpalette_types.QPalette, enabled: bool, text: string, textRole: cint): void =
+proc drawItemText*(self: gen_qstylepainter_types.QStylePainter, r: gen_qrect_types.QRect, flags: cint, pal: gen_qpalette_types.QPalette, enabled: bool, text: openArray[char], textRole: cint): void =
   fcQStylePainter_drawItemText6(self.h, r.h, flags, pal.h, enabled, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), cint(textRole))
 
 proc create*(T: type gen_qstylepainter_types.QStylePainter,

@@ -62,7 +62,7 @@ proc count*(self: gen_qwebenginescriptcollection_types.QWebEngineScriptCollectio
 proc contains*(self: gen_qwebenginescriptcollection_types.QWebEngineScriptCollection, value: gen_qwebenginescript_types.QWebEngineScript): bool =
   fcQWebEngineScriptCollection_contains(self.h, value.h)
 
-proc find*(self: gen_qwebenginescriptcollection_types.QWebEngineScriptCollection, name: string): seq[gen_qwebenginescript_types.QWebEngineScript] =
+proc find*(self: gen_qwebenginescriptcollection_types.QWebEngineScriptCollection, name: openArray[char]): seq[gen_qwebenginescript_types.QWebEngineScript] =
   var v_ma = fcQWebEngineScriptCollection_find(self.h, struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))))
   var vx_ret = newSeq[gen_qwebenginescript_types.QWebEngineScript](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
@@ -74,7 +74,7 @@ proc find*(self: gen_qwebenginescriptcollection_types.QWebEngineScriptCollection
 proc insert*(self: gen_qwebenginescriptcollection_types.QWebEngineScriptCollection, param1: gen_qwebenginescript_types.QWebEngineScript): void =
   fcQWebEngineScriptCollection_insert(self.h, param1.h)
 
-proc insert*(self: gen_qwebenginescriptcollection_types.QWebEngineScriptCollection, list: seq[gen_qwebenginescript_types.QWebEngineScript]): void =
+proc insert*(self: gen_qwebenginescriptcollection_types.QWebEngineScriptCollection, list: openArray[gen_qwebenginescript_types.QWebEngineScript]): void =
   var list_CArray = newSeq[pointer](len(list))
   for i in 0..<len(list):
     list_CArray[i] = list[i].h

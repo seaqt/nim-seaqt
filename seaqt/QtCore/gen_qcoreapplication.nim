@@ -199,7 +199,7 @@ proc setAttribute*(_: type gen_qcoreapplication_types.QCoreApplication, attribut
 proc testAttribute*(_: type gen_qcoreapplication_types.QCoreApplication, attribute: cint): bool =
   fcQCoreApplication_testAttribute(cint(attribute))
 
-proc setOrganizationDomain*(_: type gen_qcoreapplication_types.QCoreApplication, orgDomain: string): void =
+proc setOrganizationDomain*(_: type gen_qcoreapplication_types.QCoreApplication, orgDomain: openArray[char]): void =
   fcQCoreApplication_setOrganizationDomain(struct_miqt_string(data: if len(orgDomain) > 0: addr orgDomain[0] else: nil, len: csize_t(len(orgDomain))))
 
 proc organizationDomain*(_: type gen_qcoreapplication_types.QCoreApplication): string =
@@ -208,7 +208,7 @@ proc organizationDomain*(_: type gen_qcoreapplication_types.QCoreApplication): s
   c_free(v_ms.data)
   vx_ret
 
-proc setOrganizationName*(_: type gen_qcoreapplication_types.QCoreApplication, orgName: string): void =
+proc setOrganizationName*(_: type gen_qcoreapplication_types.QCoreApplication, orgName: openArray[char]): void =
   fcQCoreApplication_setOrganizationName(struct_miqt_string(data: if len(orgName) > 0: addr orgName[0] else: nil, len: csize_t(len(orgName))))
 
 proc organizationName*(_: type gen_qcoreapplication_types.QCoreApplication): string =
@@ -217,7 +217,7 @@ proc organizationName*(_: type gen_qcoreapplication_types.QCoreApplication): str
   c_free(v_ms.data)
   vx_ret
 
-proc setApplicationName*(_: type gen_qcoreapplication_types.QCoreApplication, application: string): void =
+proc setApplicationName*(_: type gen_qcoreapplication_types.QCoreApplication, application: openArray[char]): void =
   fcQCoreApplication_setApplicationName(struct_miqt_string(data: if len(application) > 0: addr application[0] else: nil, len: csize_t(len(application))))
 
 proc applicationName*(_: type gen_qcoreapplication_types.QCoreApplication): string =
@@ -226,7 +226,7 @@ proc applicationName*(_: type gen_qcoreapplication_types.QCoreApplication): stri
   c_free(v_ms.data)
   vx_ret
 
-proc setApplicationVersion*(_: type gen_qcoreapplication_types.QCoreApplication, version: string): void =
+proc setApplicationVersion*(_: type gen_qcoreapplication_types.QCoreApplication, version: openArray[char]): void =
   fcQCoreApplication_setApplicationVersion(struct_miqt_string(data: if len(version) > 0: addr version[0] else: nil, len: csize_t(len(version))))
 
 proc applicationVersion*(_: type gen_qcoreapplication_types.QCoreApplication): string =
@@ -295,7 +295,7 @@ proc applicationFilePath*(_: type gen_qcoreapplication_types.QCoreApplication): 
 proc applicationPid*(_: type gen_qcoreapplication_types.QCoreApplication): clonglong =
   fcQCoreApplication_applicationPid()
 
-proc setLibraryPaths*(_: type gen_qcoreapplication_types.QCoreApplication, libraryPaths: seq[string]): void =
+proc setLibraryPaths*(_: type gen_qcoreapplication_types.QCoreApplication, libraryPaths: openArray[string]): void =
   var libraryPaths_CArray = newSeq[struct_miqt_string](len(libraryPaths))
   for i in 0..<len(libraryPaths):
     libraryPaths_CArray[i] = struct_miqt_string(data: if len(libraryPaths[i]) > 0: addr libraryPaths[i][0] else: nil, len: csize_t(len(libraryPaths[i])))
@@ -314,10 +314,10 @@ proc libraryPaths*(_: type gen_qcoreapplication_types.QCoreApplication): seq[str
   c_free(v_ma.data)
   vx_ret
 
-proc addLibraryPath*(_: type gen_qcoreapplication_types.QCoreApplication, param1: string): void =
+proc addLibraryPath*(_: type gen_qcoreapplication_types.QCoreApplication, param1: openArray[char]): void =
   fcQCoreApplication_addLibraryPath(struct_miqt_string(data: if len(param1) > 0: addr param1[0] else: nil, len: csize_t(len(param1))))
 
-proc removeLibraryPath*(_: type gen_qcoreapplication_types.QCoreApplication, param1: string): void =
+proc removeLibraryPath*(_: type gen_qcoreapplication_types.QCoreApplication, param1: openArray[char]): void =
   fcQCoreApplication_removeLibraryPath(struct_miqt_string(data: if len(param1) > 0: addr param1[0] else: nil, len: csize_t(len(param1))))
 
 proc installTranslator*(_: type gen_qcoreapplication_types.QCoreApplication, messageFile: gen_qtranslator_types.QTranslator): bool =
@@ -845,6 +845,7 @@ proc create*(T: type gen_qcoreapplication_types.QCoreApplication,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQCoreApplication_new(addr(cQCoreApplication_mvtbl), csize_t(sizeof(pointer)), addr argc, argv)
   fcQCoreApplication_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qcoreapplication_types.QCoreApplication,
     param3: cint,
@@ -858,6 +859,7 @@ proc create*(T: type gen_qcoreapplication_types.QCoreApplication,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQCoreApplication_new2(addr(cQCoreApplication_mvtbl), csize_t(sizeof(pointer)), addr argc, argv, param3)
   fcQCoreApplication_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qcoreapplication_types.QCoreApplication): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQCoreApplication_staticMetaObject())

@@ -1561,6 +1561,7 @@ proc create*(T: type gen_qquickpainteditem_types.QQuickPaintedItem,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQQuickPaintedItem_new(addr(cQQuickPaintedItem_mvtbl), csize_t(sizeof(pointer)))
   fcQQuickPaintedItem_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qquickpainteditem_types.QQuickPaintedItem,
     parent: gen_qquickitem_types.QQuickItem,
@@ -1568,6 +1569,7 @@ proc create*(T: type gen_qquickpainteditem_types.QQuickPaintedItem,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQQuickPaintedItem_new2(addr(cQQuickPaintedItem_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQQuickPaintedItem_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qquickpainteditem_types.QQuickPaintedItem): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQQuickPaintedItem_staticMetaObject())

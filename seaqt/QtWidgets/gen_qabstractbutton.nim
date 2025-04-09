@@ -253,7 +253,7 @@ proc tr*(_: type gen_qabstractbutton_types.QAbstractButton, s: cstring): string 
   c_free(v_ms.data)
   vx_ret
 
-proc setText*(self: gen_qabstractbutton_types.QAbstractButton, text: string): void =
+proc setText*(self: gen_qabstractbutton_types.QAbstractButton, text: openArray[char]): void =
   fcQAbstractButton_setText(self.h, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
 
 proc text*(self: gen_qabstractbutton_types.QAbstractButton): string =
@@ -480,7 +480,7 @@ type QAbstractButtondragLeaveEventProc* = proc(self: QAbstractButton, event: gen
 type QAbstractButtondropEventProc* = proc(self: QAbstractButton, event: gen_qevent_types.QDropEvent): void {.raises: [], gcsafe.}
 type QAbstractButtonshowEventProc* = proc(self: QAbstractButton, event: gen_qevent_types.QShowEvent): void {.raises: [], gcsafe.}
 type QAbstractButtonhideEventProc* = proc(self: QAbstractButton, event: gen_qevent_types.QHideEvent): void {.raises: [], gcsafe.}
-type QAbstractButtonnativeEventProc* = proc(self: QAbstractButton, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
+type QAbstractButtonnativeEventProc* = proc(self: QAbstractButton, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
 type QAbstractButtonmetricProc* = proc(self: QAbstractButton, param1: cint): cint {.raises: [], gcsafe.}
 type QAbstractButtoninitPainterProc* = proc(self: QAbstractButton, painter: gen_qpainter_types.QPainter): void {.raises: [], gcsafe.}
 type QAbstractButtonredirectedProc* = proc(self: QAbstractButton, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.raises: [], gcsafe.}
@@ -922,7 +922,7 @@ proc fcQAbstractButton_vtable_callback_hideEvent(self: pointer, event: pointer):
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   vtbl[].hideEvent(self, slotval1)
 
-proc QAbstractButtonnativeEvent*(self: gen_qabstractbutton_types.QAbstractButton, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool =
+proc QAbstractButtonnativeEvent*(self: gen_qabstractbutton_types.QAbstractButton, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool =
   fcQAbstractButton_virtualbase_nativeEvent(self.h, struct_miqt_string(data: if len(eventType) > 0: addr eventType[0] else: nil, len: csize_t(len(eventType))), message, resultVal)
 
 proc fcQAbstractButton_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
@@ -1347,7 +1347,7 @@ proc fcQAbstractButton_method_callback_hideEvent(self: pointer, event: pointer):
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   inst.hideEvent(slotval1)
 
-method nativeEvent*(self: VirtualQAbstractButton, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
+method nativeEvent*(self: VirtualQAbstractButton, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
   QAbstractButtonnativeEvent(self[], eventType, message, resultVal)
 proc fcQAbstractButton_method_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
   let inst = cast[VirtualQAbstractButton](fcQAbstractButton_vdata(self)[])
@@ -1776,12 +1776,14 @@ proc create*(T: type gen_qabstractbutton_types.QAbstractButton,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQAbstractButton_new(addr(cQAbstractButton_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQAbstractButton_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qabstractbutton_types.QAbstractButton,
     inst: VirtualQAbstractButton) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQAbstractButton_new2(addr(cQAbstractButton_mvtbl), csize_t(sizeof(pointer)))
   fcQAbstractButton_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qabstractbutton_types.QAbstractButton): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQAbstractButton_staticMetaObject())

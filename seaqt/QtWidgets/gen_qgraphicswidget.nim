@@ -430,7 +430,7 @@ proc setWindowFlags*(self: gen_qgraphicswidget_types.QGraphicsWidget, wFlags: ci
 proc isActiveWindow*(self: gen_qgraphicswidget_types.QGraphicsWidget): bool =
   fcQGraphicsWidget_isActiveWindow(self.h)
 
-proc setWindowTitle*(self: gen_qgraphicswidget_types.QGraphicsWidget, title: string): void =
+proc setWindowTitle*(self: gen_qgraphicswidget_types.QGraphicsWidget, title: openArray[char]): void =
   fcQGraphicsWidget_setWindowTitle(self.h, struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))))
 
 proc windowTitle*(self: gen_qgraphicswidget_types.QGraphicsWidget): string =
@@ -466,14 +466,14 @@ proc setShortcutAutoRepeat*(self: gen_qgraphicswidget_types.QGraphicsWidget, id:
 proc addAction*(self: gen_qgraphicswidget_types.QGraphicsWidget, action: gen_qaction_types.QAction): void =
   fcQGraphicsWidget_addAction(self.h, action.h)
 
-proc addActions*(self: gen_qgraphicswidget_types.QGraphicsWidget, actions: seq[gen_qaction_types.QAction]): void =
+proc addActions*(self: gen_qgraphicswidget_types.QGraphicsWidget, actions: openArray[gen_qaction_types.QAction]): void =
   var actions_CArray = newSeq[pointer](len(actions))
   for i in 0..<len(actions):
     actions_CArray[i] = actions[i].h
 
   fcQGraphicsWidget_addActions(self.h, struct_miqt_array(len: csize_t(len(actions)), data: if len(actions) == 0: nil else: addr(actions_CArray[0])))
 
-proc insertActions*(self: gen_qgraphicswidget_types.QGraphicsWidget, before: gen_qaction_types.QAction, actions: seq[gen_qaction_types.QAction]): void =
+proc insertActions*(self: gen_qgraphicswidget_types.QGraphicsWidget, before: gen_qaction_types.QAction, actions: openArray[gen_qaction_types.QAction]): void =
   var actions_CArray = newSeq[pointer](len(actions))
   for i in 0..<len(actions):
     actions_CArray[i] = actions[i].h
@@ -593,7 +593,7 @@ type QGraphicsWidgetinitStyleOptionProc* = proc(self: QGraphicsWidget, option: g
 type QGraphicsWidgetsizeHintProc* = proc(self: QGraphicsWidget, which: cint, constraint: gen_qsize_types.QSizeF): gen_qsize_types.QSizeF {.raises: [], gcsafe.}
 type QGraphicsWidgetupdateGeometryProc* = proc(self: QGraphicsWidget): void {.raises: [], gcsafe.}
 type QGraphicsWidgetitemChangeProc* = proc(self: QGraphicsWidget, change: cint, value: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant {.raises: [], gcsafe.}
-type QGraphicsWidgetpropertyChangeProc* = proc(self: QGraphicsWidget, propertyName: string, value: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant {.raises: [], gcsafe.}
+type QGraphicsWidgetpropertyChangeProc* = proc(self: QGraphicsWidget, propertyName: openArray[char], value: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant {.raises: [], gcsafe.}
 type QGraphicsWidgetsceneEventProc* = proc(self: QGraphicsWidget, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
 type QGraphicsWidgetwindowFrameEventProc* = proc(self: QGraphicsWidget, e: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
 type QGraphicsWidgetwindowFrameSectionAtProc* = proc(self: QGraphicsWidget, pos: gen_qpoint_types.QPointF): cint {.raises: [], gcsafe.}
@@ -870,7 +870,7 @@ proc fcQGraphicsWidget_vtable_callback_itemChange(self: pointer, change: cint, v
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QGraphicsWidgetpropertyChange*(self: gen_qgraphicswidget_types.QGraphicsWidget, propertyName: string, value: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant =
+proc QGraphicsWidgetpropertyChange*(self: gen_qgraphicswidget_types.QGraphicsWidget, propertyName: openArray[char], value: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant =
   gen_qvariant_types.QVariant(h: fcQGraphicsWidget_virtualbase_propertyChange(self.h, struct_miqt_string(data: if len(propertyName) > 0: addr propertyName[0] else: nil, len: csize_t(len(propertyName))), value.h), owned: true)
 
 proc fcQGraphicsWidget_vtable_callback_propertyChange(self: pointer, propertyName: struct_miqt_string, value: pointer): pointer {.cdecl.} =
@@ -1496,7 +1496,7 @@ proc fcQGraphicsWidget_method_callback_itemChange(self: pointer, change: cint, v
   var virtualReturn = inst.itemChange(slotval1, slotval2)
   virtualReturn.h
 
-method propertyChange*(self: VirtualQGraphicsWidget, propertyName: string, value: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant {.base.} =
+method propertyChange*(self: VirtualQGraphicsWidget, propertyName: openArray[char], value: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant {.base.} =
   QGraphicsWidgetpropertyChange(self[], propertyName, value)
 proc fcQGraphicsWidget_method_callback_propertyChange(self: pointer, propertyName: struct_miqt_string, value: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsWidget](fcQGraphicsWidget_vdata(self)[])
@@ -2433,6 +2433,7 @@ proc create*(T: type gen_qgraphicswidget_types.QGraphicsWidget,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQGraphicsWidget_new(addr(cQGraphicsWidget_mvtbl), csize_t(sizeof(pointer)))
   fcQGraphicsWidget_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qgraphicswidget_types.QGraphicsWidget,
     parent: gen_qgraphicsitem_types.QGraphicsItem,
@@ -2440,6 +2441,7 @@ proc create*(T: type gen_qgraphicswidget_types.QGraphicsWidget,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQGraphicsWidget_new2(addr(cQGraphicsWidget_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQGraphicsWidget_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qgraphicswidget_types.QGraphicsWidget,
     parent: gen_qgraphicsitem_types.QGraphicsItem, wFlags: cint,
@@ -2447,6 +2449,7 @@ proc create*(T: type gen_qgraphicswidget_types.QGraphicsWidget,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQGraphicsWidget_new3(addr(cQGraphicsWidget_mvtbl), csize_t(sizeof(pointer)), parent.h, cint(wFlags))
   fcQGraphicsWidget_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qgraphicswidget_types.QGraphicsWidget): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQGraphicsWidget_staticMetaObject())

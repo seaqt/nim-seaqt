@@ -210,7 +210,7 @@ proc fcQSGMaterialShader_method_callback_updateGraphicsPipelineState(self: point
   var virtualReturn = inst.updateGraphicsPipelineState(slotval1, slotval2, slotval3, slotval4)
   virtualReturn
 
-proc setShaderFileName*(self: gen_qsgmaterialshader_types.QSGMaterialShader, stage: cint, filename: string): void =
+proc setShaderFileName*(self: gen_qsgmaterialshader_types.QSGMaterialShader, stage: cint, filename: openArray[char]): void =
   fcQSGMaterialShader_protectedbase_setShaderFileName(self.h, cint(stage), struct_miqt_string(data: if len(filename) > 0: addr filename[0] else: nil, len: csize_t(len(filename))))
 
 proc create*(T: type gen_qsgmaterialshader_types.QSGMaterialShader,
@@ -241,6 +241,7 @@ proc create*(T: type gen_qsgmaterialshader_types.QSGMaterialShader,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQSGMaterialShader_new(addr(cQSGMaterialShader_mvtbl), csize_t(sizeof(pointer)))
   fcQSGMaterialShader_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc dirtyStates*(self: gen_qsgmaterialshader_types.QSGMaterialShaderRenderState): cint =
   cint(fcQSGMaterialShaderRenderState_dirtyStates(self.h))

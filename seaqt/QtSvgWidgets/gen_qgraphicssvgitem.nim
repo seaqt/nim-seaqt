@@ -226,7 +226,7 @@ proc setSharedRenderer*(self: gen_qgraphicssvgitem_types.QGraphicsSvgItem, rende
 proc renderer*(self: gen_qgraphicssvgitem_types.QGraphicsSvgItem): gen_qsvgrenderer_types.QSvgRenderer =
   gen_qsvgrenderer_types.QSvgRenderer(h: fcQGraphicsSvgItem_renderer(self.h), owned: false)
 
-proc setElementId*(self: gen_qgraphicssvgitem_types.QGraphicsSvgItem, id: string): void =
+proc setElementId*(self: gen_qgraphicssvgitem_types.QGraphicsSvgItem, id: openArray[char]): void =
   fcQGraphicsSvgItem_setElementId(self.h, struct_miqt_string(data: if len(id) > 0: addr id[0] else: nil, len: csize_t(len(id))))
 
 proc elementId*(self: gen_qgraphicssvgitem_types.QGraphicsSvgItem): string =
@@ -1276,7 +1276,7 @@ proc create*(T: type gen_qgraphicssvgitem_types.QGraphicsSvgItem,
   fcQGraphicsSvgItem_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qgraphicssvgitem_types.QGraphicsSvgItem,
-    fileName: string,
+    fileName: openArray[char],
     vtbl: ref QGraphicsSvgItemVTable = nil): gen_qgraphicssvgitem_types.QGraphicsSvgItem =
   let vtbl = if vtbl == nil: new QGraphicsSvgItemVTable else: vtbl
   GC_ref(vtbl)
@@ -1478,7 +1478,7 @@ proc create*(T: type gen_qgraphicssvgitem_types.QGraphicsSvgItem,
   fcQGraphicsSvgItem_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qgraphicssvgitem_types.QGraphicsSvgItem,
-    fileName: string, parentItem: gen_qgraphicsitem_types.QGraphicsItem,
+    fileName: openArray[char], parentItem: gen_qgraphicsitem_types.QGraphicsItem,
     vtbl: ref QGraphicsSvgItemVTable = nil): gen_qgraphicssvgitem_types.QGraphicsSvgItem =
   let vtbl = if vtbl == nil: new QGraphicsSvgItemVTable else: vtbl
   GC_ref(vtbl)
@@ -1635,13 +1635,15 @@ proc create*(T: type gen_qgraphicssvgitem_types.QGraphicsSvgItem,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQGraphicsSvgItem_new(addr(cQGraphicsSvgItem_mvtbl), csize_t(sizeof(pointer)))
   fcQGraphicsSvgItem_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qgraphicssvgitem_types.QGraphicsSvgItem,
-    fileName: string,
+    fileName: openArray[char],
     inst: VirtualQGraphicsSvgItem) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQGraphicsSvgItem_new2(addr(cQGraphicsSvgItem_mvtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))))
   fcQGraphicsSvgItem_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qgraphicssvgitem_types.QGraphicsSvgItem,
     parentItem: gen_qgraphicsitem_types.QGraphicsItem,
@@ -1649,13 +1651,15 @@ proc create*(T: type gen_qgraphicssvgitem_types.QGraphicsSvgItem,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQGraphicsSvgItem_new3(addr(cQGraphicsSvgItem_mvtbl), csize_t(sizeof(pointer)), parentItem.h)
   fcQGraphicsSvgItem_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qgraphicssvgitem_types.QGraphicsSvgItem,
-    fileName: string, parentItem: gen_qgraphicsitem_types.QGraphicsItem,
+    fileName: openArray[char], parentItem: gen_qgraphicsitem_types.QGraphicsItem,
     inst: VirtualQGraphicsSvgItem) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQGraphicsSvgItem_new4(addr(cQGraphicsSvgItem_mvtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))), parentItem.h)
   fcQGraphicsSvgItem_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qgraphicssvgitem_types.QGraphicsSvgItem): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQGraphicsSvgItem_staticMetaObject())

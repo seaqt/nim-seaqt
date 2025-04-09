@@ -461,6 +461,7 @@ proc create*(T: type gen_qtimer_types.QTimer,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQTimer_new(addr(cQTimer_mvtbl), csize_t(sizeof(pointer)))
   fcQTimer_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qtimer_types.QTimer,
     parent: gen_qobject_types.QObject,
@@ -468,6 +469,7 @@ proc create*(T: type gen_qtimer_types.QTimer,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQTimer_new2(addr(cQTimer_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQTimer_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qtimer_types.QTimer): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQTimer_staticMetaObject())

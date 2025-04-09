@@ -338,6 +338,7 @@ proc create*(T: type gen_qsgnode_types.QSGNode,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQSGNode_new(addr(cQSGNode_mvtbl), csize_t(sizeof(pointer)))
   fcQSGNode_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc setGeometry*(self: gen_qsgnode_types.QSGBasicGeometryNode, geometry: gen_qsggeometry_types.QSGGeometry): void =
   fcQSGBasicGeometryNode_setGeometry(self.h, geometry.h)
@@ -453,6 +454,7 @@ proc create*(T: type gen_qsgnode_types.QSGGeometryNode,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQSGGeometryNode_new(addr(cQSGGeometryNode_mvtbl), csize_t(sizeof(pointer)))
   fcQSGGeometryNode_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc setIsRectangular*(self: gen_qsgnode_types.QSGClipNode, rectHint: bool): void =
   fcQSGClipNode_setIsRectangular(self.h, rectHint)
@@ -532,6 +534,7 @@ proc create*(T: type gen_qsgnode_types.QSGClipNode,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQSGClipNode_new(addr(cQSGClipNode_mvtbl), csize_t(sizeof(pointer)))
   fcQSGClipNode_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc setMatrix*(self: gen_qsgnode_types.QSGTransformNode, matrix: gen_qmatrix4x4_types.QMatrix4x4): void =
   fcQSGTransformNode_setMatrix(self.h, matrix.h)
@@ -611,6 +614,7 @@ proc create*(T: type gen_qsgnode_types.QSGTransformNode,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQSGTransformNode_new(addr(cQSGTransformNode_mvtbl), csize_t(sizeof(pointer)))
   fcQSGTransformNode_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 type QSGRootNodeisSubtreeBlockedProc* = proc(self: QSGRootNode): bool {.raises: [], gcsafe.}
 type QSGRootNodepreprocessProc* = proc(self: QSGRootNode): void {.raises: [], gcsafe.}
@@ -678,6 +682,7 @@ proc create*(T: type gen_qsgnode_types.QSGRootNode,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQSGRootNode_new(addr(cQSGRootNode_mvtbl), csize_t(sizeof(pointer)))
   fcQSGRootNode_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc setOpacity*(self: gen_qsgnode_types.QSGOpacityNode, opacity: float64): void =
   fcQSGOpacityNode_setOpacity(self.h, opacity)
@@ -760,4 +765,5 @@ proc create*(T: type gen_qsgnode_types.QSGOpacityNode,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQSGOpacityNode_new(addr(cQSGOpacityNode_mvtbl), csize_t(sizeof(pointer)))
   fcQSGOpacityNode_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 

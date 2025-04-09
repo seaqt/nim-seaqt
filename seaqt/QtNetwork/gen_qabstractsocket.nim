@@ -320,7 +320,7 @@ proc bindX*(self: gen_qabstractsocket_types.QAbstractSocket, address: gen_qhosta
 proc bindX*(self: gen_qabstractsocket_types.QAbstractSocket): bool =
   fcQAbstractSocket_bind2(self.h)
 
-proc connectToHost*(self: gen_qabstractsocket_types.QAbstractSocket, hostName: string, port: cushort, mode: cint, protocol: cint): void =
+proc connectToHost*(self: gen_qabstractsocket_types.QAbstractSocket, hostName: openArray[char], port: cushort, mode: cint, protocol: cint): void =
   fcQAbstractSocket_connectToHost(self.h, struct_miqt_string(data: if len(hostName) > 0: addr hostName[0] else: nil, len: csize_t(len(hostName))), port, cint(mode), cint(protocol))
 
 proc connectToHost*(self: gen_qabstractsocket_types.QAbstractSocket, address: gen_qhostaddress_types.QHostAddress, port: cushort): void =
@@ -419,7 +419,7 @@ proc protocolTag*(self: gen_qabstractsocket_types.QAbstractSocket): string =
   c_free(v_ms.data)
   vx_ret
 
-proc setProtocolTag*(self: gen_qabstractsocket_types.QAbstractSocket, tag: string): void =
+proc setProtocolTag*(self: gen_qabstractsocket_types.QAbstractSocket, tag: openArray[char]): void =
   fcQAbstractSocket_setProtocolTag(self.h, struct_miqt_string(data: if len(tag) > 0: addr tag[0] else: nil, len: csize_t(len(tag))))
 
 proc hostFound*(self: gen_qabstractsocket_types.QAbstractSocket): void =
@@ -564,7 +564,7 @@ type QAbstractSocketmetacastProc* = proc(self: QAbstractSocket, param1: cstring)
 type QAbstractSocketmetacallProc* = proc(self: QAbstractSocket, param1: cint, param2: cint, param3: pointer): cint {.raises: [], gcsafe.}
 type QAbstractSocketresumeProc* = proc(self: QAbstractSocket): void {.raises: [], gcsafe.}
 type QAbstractSocketbindXProc* = proc(self: QAbstractSocket, address: gen_qhostaddress_types.QHostAddress, port: cushort, mode: cint): bool {.raises: [], gcsafe.}
-type QAbstractSocketconnectToHostProc* = proc(self: QAbstractSocket, hostName: string, port: cushort, mode: cint, protocol: cint): void {.raises: [], gcsafe.}
+type QAbstractSocketconnectToHostProc* = proc(self: QAbstractSocket, hostName: openArray[char], port: cushort, mode: cint, protocol: cint): void {.raises: [], gcsafe.}
 type QAbstractSocketdisconnectFromHostProc* = proc(self: QAbstractSocket): void {.raises: [], gcsafe.}
 type QAbstractSocketbytesAvailableProc* = proc(self: QAbstractSocket): clonglong {.raises: [], gcsafe.}
 type QAbstractSocketbytesToWriteProc* = proc(self: QAbstractSocket): clonglong {.raises: [], gcsafe.}
@@ -691,7 +691,7 @@ proc fcQAbstractSocket_vtable_callback_bindX(self: pointer, address: pointer, po
   var virtualReturn = vtbl[].bindX(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QAbstractSocketconnectToHost*(self: gen_qabstractsocket_types.QAbstractSocket, hostName: string, port: cushort, mode: cint, protocol: cint): void =
+proc QAbstractSocketconnectToHost*(self: gen_qabstractsocket_types.QAbstractSocket, hostName: openArray[char], port: cushort, mode: cint, protocol: cint): void =
   fcQAbstractSocket_virtualbase_connectToHost(self.h, struct_miqt_string(data: if len(hostName) > 0: addr hostName[0] else: nil, len: csize_t(len(hostName))), port, cint(mode), cint(protocol))
 
 proc fcQAbstractSocket_vtable_callback_connectToHost(self: pointer, hostName: struct_miqt_string, port: cushort, mode: cint, protocol: cint): void {.cdecl.} =
@@ -1059,7 +1059,7 @@ proc fcQAbstractSocket_method_callback_bindX(self: pointer, address: pointer, po
   var virtualReturn = inst.bindX(slotval1, slotval2, slotval3)
   virtualReturn
 
-method connectToHost*(self: VirtualQAbstractSocket, hostName: string, port: cushort, mode: cint, protocol: cint): void {.base.} =
+method connectToHost*(self: VirtualQAbstractSocket, hostName: openArray[char], port: cushort, mode: cint, protocol: cint): void {.base.} =
   QAbstractSocketconnectToHost(self[], hostName, port, mode, protocol)
 proc fcQAbstractSocket_method_callback_connectToHost(self: pointer, hostName: struct_miqt_string, port: cushort, mode: cint, protocol: cint): void {.cdecl.} =
   let inst = cast[VirtualQAbstractSocket](fcQAbstractSocket_vdata(self)[])
@@ -1333,13 +1333,13 @@ proc setPeerPort*(self: gen_qabstractsocket_types.QAbstractSocket, port: cushort
 proc setPeerAddress*(self: gen_qabstractsocket_types.QAbstractSocket, address: gen_qhostaddress_types.QHostAddress): void =
   fcQAbstractSocket_protectedbase_setPeerAddress(self.h, address.h)
 
-proc setPeerName*(self: gen_qabstractsocket_types.QAbstractSocket, name: string): void =
+proc setPeerName*(self: gen_qabstractsocket_types.QAbstractSocket, name: openArray[char]): void =
   fcQAbstractSocket_protectedbase_setPeerName(self.h, struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))))
 
 proc setOpenMode*(self: gen_qabstractsocket_types.QAbstractSocket, openMode: cint): void =
   fcQAbstractSocket_protectedbase_setOpenMode(self.h, cint(openMode))
 
-proc setErrorString*(self: gen_qabstractsocket_types.QAbstractSocket, errorString: string): void =
+proc setErrorString*(self: gen_qabstractsocket_types.QAbstractSocket, errorString: openArray[char]): void =
   fcQAbstractSocket_protectedbase_setErrorString(self.h, struct_miqt_string(data: if len(errorString) > 0: addr errorString[0] else: nil, len: csize_t(len(errorString))))
 
 proc sender*(self: gen_qabstractsocket_types.QAbstractSocket): gen_qobject_types.QObject =
@@ -1492,6 +1492,7 @@ proc create*(T: type gen_qabstractsocket_types.QAbstractSocket,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQAbstractSocket_new(addr(cQAbstractSocket_mvtbl), csize_t(sizeof(pointer)), cint(socketType), parent.h)
   fcQAbstractSocket_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qabstractsocket_types.QAbstractSocket): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQAbstractSocket_staticMetaObject())

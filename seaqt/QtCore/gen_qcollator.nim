@@ -111,16 +111,16 @@ proc setIgnorePunctuation*(self: gen_qcollator_types.QCollator, on: bool): void 
 proc ignorePunctuation*(self: gen_qcollator_types.QCollator): bool =
   fcQCollator_ignorePunctuation(self.h)
 
-proc compare*(self: gen_qcollator_types.QCollator, s1: string, s2: string): cint =
+proc compare*(self: gen_qcollator_types.QCollator, s1: openArray[char], s2: openArray[char]): cint =
   fcQCollator_compare(self.h, struct_miqt_string(data: if len(s1) > 0: addr s1[0] else: nil, len: csize_t(len(s1))), struct_miqt_string(data: if len(s2) > 0: addr s2[0] else: nil, len: csize_t(len(s2))))
 
 proc compare*(self: gen_qcollator_types.QCollator, s1: gen_qchar_types.QChar, len1: int64, s2: gen_qchar_types.QChar, len2: int64): cint =
   fcQCollator_compare2(self.h, s1.h, len1, s2.h, len2)
 
-proc operatorCall*(self: gen_qcollator_types.QCollator, s1: string, s2: string): bool =
+proc operatorCall*(self: gen_qcollator_types.QCollator, s1: openArray[char], s2: openArray[char]): bool =
   fcQCollator_operatorCall(self.h, struct_miqt_string(data: if len(s1) > 0: addr s1[0] else: nil, len: csize_t(len(s1))), struct_miqt_string(data: if len(s2) > 0: addr s2[0] else: nil, len: csize_t(len(s2))))
 
-proc sortKey*(self: gen_qcollator_types.QCollator, string: string): gen_qcollator_types.QCollatorSortKey =
+proc sortKey*(self: gen_qcollator_types.QCollator, string: openArray[char]): gen_qcollator_types.QCollatorSortKey =
   gen_qcollator_types.QCollatorSortKey(h: fcQCollator_sortKey(self.h, struct_miqt_string(data: if len(string) > 0: addr string[0] else: nil, len: csize_t(len(string)))), owned: true)
 
 proc create*(T: type gen_qcollator_types.QCollator): gen_qcollator_types.QCollator =

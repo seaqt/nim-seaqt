@@ -149,13 +149,11 @@ import ./gen_qmetatype_types
 export gen_qmetatype_types
 
 import
-  ./gen_qbytearrayview_types,
   ./gen_qcompare_types,
   ./gen_qdatastream_types,
   ./gen_qdebug_types,
   ./gen_qobjectdefs_types
 export
-  gen_qbytearrayview_types,
   gen_qcompare_types,
   gen_qdatastream_types,
   gen_qdebug_types,
@@ -196,7 +194,7 @@ proc fcQMetaType_load(self: pointer, stream: pointer, data: pointer): bool {.imp
 proc fcQMetaType_hasRegisteredDataStreamOperators(self: pointer): bool {.importc: "QMetaType_hasRegisteredDataStreamOperators".}
 proc fcQMetaType_save2(stream: pointer, typeVal: cint, data: pointer): bool {.importc: "QMetaType_save2".}
 proc fcQMetaType_load2(stream: pointer, typeVal: cint, data: pointer): bool {.importc: "QMetaType_load2".}
-proc fcQMetaType_fromName(name: pointer): pointer {.importc: "QMetaType_fromName".}
+proc fcQMetaType_fromName(name: struct_miqt_string): pointer {.importc: "QMetaType_fromName".}
 proc fcQMetaType_debugStream(self: pointer, dbg: pointer, rhs: pointer): bool {.importc: "QMetaType_debugStream".}
 proc fcQMetaType_hasRegisteredDebugStreamOperator(self: pointer): bool {.importc: "QMetaType_hasRegisteredDebugStreamOperator".}
 proc fcQMetaType_debugStream2(dbg: pointer, rhs: pointer, typeId: cint): bool {.importc: "QMetaType_debugStream2".}
@@ -221,13 +219,13 @@ proc fcQMetaType_new(typeVal: cint): ptr cQMetaType {.importc: "QMetaType_new".}
 proc fcQMetaType_new2(): ptr cQMetaType {.importc: "QMetaType_new2".}
 proc fcQMetaType_new3(param1: pointer): ptr cQMetaType {.importc: "QMetaType_new3".}
 
-proc registerNormalizedTypedef*(_: type gen_qmetatype_types.QMetaType, normalizedTypeName: seq[byte], typeVal: gen_qmetatype_types.QMetaType): void =
+proc registerNormalizedTypedef*(_: type gen_qmetatype_types.QMetaType, normalizedTypeName: openArray[byte], typeVal: gen_qmetatype_types.QMetaType): void =
   fcQMetaType_registerNormalizedTypedef(struct_miqt_string(data: if len(normalizedTypeName) > 0: addr normalizedTypeName[0] else: nil, len: csize_t(len(normalizedTypeName))), typeVal.h)
 
 proc typeX*(_: type gen_qmetatype_types.QMetaType, typeName: cstring): cint =
   fcQMetaType_typeX(typeName)
 
-proc typeX*(_: type gen_qmetatype_types.QMetaType, typeName: seq[byte]): cint =
+proc typeX*(_: type gen_qmetatype_types.QMetaType, typeName: openArray[byte]): cint =
   fcQMetaType_typeWithTypeName(struct_miqt_string(data: if len(typeName) > 0: addr typeName[0] else: nil, len: csize_t(len(typeName))))
 
 proc typeName*(_: type gen_qmetatype_types.QMetaType, typeVal: cint): cstring =
@@ -320,8 +318,8 @@ proc save*(_: type gen_qmetatype_types.QMetaType, stream: gen_qdatastream_types.
 proc load*(_: type gen_qmetatype_types.QMetaType, stream: gen_qdatastream_types.QDataStream, typeVal: cint, data: pointer): bool =
   fcQMetaType_load2(stream.h, typeVal, data)
 
-proc fromName*(_: type gen_qmetatype_types.QMetaType, name: gen_qbytearrayview_types.QByteArrayView): gen_qmetatype_types.QMetaType =
-  gen_qmetatype_types.QMetaType(h: fcQMetaType_fromName(name.h), owned: true)
+proc fromName*(_: type gen_qmetatype_types.QMetaType, name: openArray[byte]): gen_qmetatype_types.QMetaType =
+  gen_qmetatype_types.QMetaType(h: fcQMetaType_fromName(struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name)))), owned: true)
 
 proc debugStream*(self: gen_qmetatype_types.QMetaType, dbg: gen_qdebug_types.QDebug, rhs: pointer): bool =
   fcQMetaType_debugStream(self.h, dbg.h, rhs)

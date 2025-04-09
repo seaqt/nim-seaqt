@@ -93,7 +93,7 @@ proc image*(self: gen_qquickitemgrabresult_types.QQuickItemGrabResult): gen_qima
 proc url*(self: gen_qquickitemgrabresult_types.QQuickItemGrabResult): gen_qurl_types.QUrl =
   gen_qurl_types.QUrl(h: fcQQuickItemGrabResult_url(self.h), owned: true)
 
-proc saveToFile*(self: gen_qquickitemgrabresult_types.QQuickItemGrabResult, fileName: string): bool =
+proc saveToFile*(self: gen_qquickitemgrabresult_types.QQuickItemGrabResult, fileName: openArray[char]): bool =
   fcQQuickItemGrabResult_saveToFile(self.h, struct_miqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))))
 
 proc saveToFile*(self: gen_qquickitemgrabresult_types.QQuickItemGrabResult, fileName: gen_qurl_types.QUrl): bool =

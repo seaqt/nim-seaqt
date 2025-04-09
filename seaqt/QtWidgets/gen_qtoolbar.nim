@@ -537,7 +537,7 @@ type QToolBardragLeaveEventProc* = proc(self: QToolBar, event: gen_qevent_types.
 type QToolBardropEventProc* = proc(self: QToolBar, event: gen_qevent_types.QDropEvent): void {.raises: [], gcsafe.}
 type QToolBarshowEventProc* = proc(self: QToolBar, event: gen_qevent_types.QShowEvent): void {.raises: [], gcsafe.}
 type QToolBarhideEventProc* = proc(self: QToolBar, event: gen_qevent_types.QHideEvent): void {.raises: [], gcsafe.}
-type QToolBarnativeEventProc* = proc(self: QToolBar, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
+type QToolBarnativeEventProc* = proc(self: QToolBar, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
 type QToolBarmetricProc* = proc(self: QToolBar, param1: cint): cint {.raises: [], gcsafe.}
 type QToolBarinitPainterProc* = proc(self: QToolBar, painter: gen_qpainter_types.QPainter): void {.raises: [], gcsafe.}
 type QToolBarredirectedProc* = proc(self: QToolBar, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.raises: [], gcsafe.}
@@ -955,7 +955,7 @@ proc fcQToolBar_vtable_callback_hideEvent(self: pointer, event: pointer): void {
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   vtbl[].hideEvent(self, slotval1)
 
-proc QToolBarnativeEvent*(self: gen_qtoolbar_types.QToolBar, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool =
+proc QToolBarnativeEvent*(self: gen_qtoolbar_types.QToolBar, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool =
   fcQToolBar_virtualbase_nativeEvent(self.h, struct_miqt_string(data: if len(eventType) > 0: addr eventType[0] else: nil, len: csize_t(len(eventType))), message, resultVal)
 
 proc fcQToolBar_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
@@ -1369,7 +1369,7 @@ proc fcQToolBar_method_callback_hideEvent(self: pointer, event: pointer): void {
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   inst.hideEvent(slotval1)
 
-method nativeEvent*(self: VirtualQToolBar, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
+method nativeEvent*(self: VirtualQToolBar, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
   QToolBarnativeEvent(self[], eventType, message, resultVal)
 proc fcQToolBar_method_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
   let inst = cast[VirtualQToolBar](fcQToolBar_vdata(self)[])
@@ -1620,7 +1620,7 @@ proc create*(T: type gen_qtoolbar_types.QToolBar,
   fcQToolBar_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qtoolbar_types.QToolBar,
-    title: string,
+    title: openArray[char],
     vtbl: ref QToolBarVTable = nil): gen_qtoolbar_types.QToolBar =
   let vtbl = if vtbl == nil: new QToolBarVTable else: vtbl
   GC_ref(vtbl)
@@ -1845,7 +1845,7 @@ proc create*(T: type gen_qtoolbar_types.QToolBar,
   fcQToolBar_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qtoolbar_types.QToolBar,
-    title: string, parent: gen_qwidget_types.QWidget,
+    title: openArray[char], parent: gen_qwidget_types.QWidget,
     vtbl: ref QToolBarVTable = nil): gen_qtoolbar_types.QToolBar =
   let vtbl = if vtbl == nil: new QToolBarVTable else: vtbl
   GC_ref(vtbl)
@@ -2021,26 +2021,30 @@ proc create*(T: type gen_qtoolbar_types.QToolBar,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQToolBar_new(addr(cQToolBar_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQToolBar_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qtoolbar_types.QToolBar,
-    title: string,
+    title: openArray[char],
     inst: VirtualQToolBar) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQToolBar_new2(addr(cQToolBar_mvtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))))
   fcQToolBar_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qtoolbar_types.QToolBar,
     inst: VirtualQToolBar) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQToolBar_new3(addr(cQToolBar_mvtbl), csize_t(sizeof(pointer)))
   fcQToolBar_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qtoolbar_types.QToolBar,
-    title: string, parent: gen_qwidget_types.QWidget,
+    title: openArray[char], parent: gen_qwidget_types.QWidget,
     inst: VirtualQToolBar) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQToolBar_new4(addr(cQToolBar_mvtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), parent.h)
   fcQToolBar_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qtoolbar_types.QToolBar): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQToolBar_staticMetaObject())

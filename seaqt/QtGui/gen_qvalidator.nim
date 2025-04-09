@@ -303,10 +303,10 @@ proc setLocale*(self: gen_qvalidator_types.QValidator, locale: gen_qlocale_types
 proc locale*(self: gen_qvalidator_types.QValidator): gen_qlocale_types.QLocale =
   gen_qlocale_types.QLocale(h: fcQValidator_locale(self.h), owned: true)
 
-proc validate*(self: gen_qvalidator_types.QValidator, param1: string, param2: ptr cint): cint =
+proc validate*(self: gen_qvalidator_types.QValidator, param1: openArray[char], param2: ptr cint): cint =
   cint(fcQValidator_validate(self.h, struct_miqt_string(data: if len(param1) > 0: addr param1[0] else: nil, len: csize_t(len(param1))), param2))
 
-proc fixup*(self: gen_qvalidator_types.QValidator, param1: string): void =
+proc fixup*(self: gen_qvalidator_types.QValidator, param1: openArray[char]): void =
   fcQValidator_fixup(self.h, struct_miqt_string(data: if len(param1) > 0: addr param1[0] else: nil, len: csize_t(len(param1))))
 
 proc changed*(self: gen_qvalidator_types.QValidator): void =
@@ -342,8 +342,8 @@ proc tr*(_: type gen_qvalidator_types.QValidator, s: cstring, c: cstring, n: cin
 type QValidatormetaObjectProc* = proc(self: QValidator): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QValidatormetacastProc* = proc(self: QValidator, param1: cstring): pointer {.raises: [], gcsafe.}
 type QValidatormetacallProc* = proc(self: QValidator, param1: cint, param2: cint, param3: pointer): cint {.raises: [], gcsafe.}
-type QValidatorvalidateProc* = proc(self: QValidator, param1: string, param2: ptr cint): cint {.raises: [], gcsafe.}
-type QValidatorfixupProc* = proc(self: QValidator, param1: string): void {.raises: [], gcsafe.}
+type QValidatorvalidateProc* = proc(self: QValidator, param1: openArray[char], param2: ptr cint): cint {.raises: [], gcsafe.}
+type QValidatorfixupProc* = proc(self: QValidator, param1: openArray[char]): void {.raises: [], gcsafe.}
 type QValidatoreventProc* = proc(self: QValidator, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
 type QValidatoreventFilterProc* = proc(self: QValidator, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
 type QValidatortimerEventProc* = proc(self: QValidator, event: gen_qcoreevent_types.QTimerEvent): void {.raises: [], gcsafe.}
@@ -410,7 +410,7 @@ proc fcQValidator_vtable_callback_validate(self: pointer, param1: struct_miqt_st
   var virtualReturn = vtbl[].validate(self, slotval1, slotval2)
   cint(virtualReturn)
 
-proc QValidatorfixup*(self: gen_qvalidator_types.QValidator, param1: string): void =
+proc QValidatorfixup*(self: gen_qvalidator_types.QValidator, param1: openArray[char]): void =
   fcQValidator_virtualbase_fixup(self.h, struct_miqt_string(data: if len(param1) > 0: addr param1[0] else: nil, len: csize_t(len(param1))))
 
 proc fcQValidator_vtable_callback_fixup(self: pointer, param1: struct_miqt_string): void {.cdecl.} =
@@ -515,7 +515,7 @@ proc fcQValidator_method_callback_metacall(self: pointer, param1: cint, param2: 
   var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
-method validate*(self: VirtualQValidator, param1: string, param2: ptr cint): cint {.base.} =
+method validate*(self: VirtualQValidator, param1: openArray[char], param2: ptr cint): cint {.base.} =
   raiseAssert("missing implementation of QValidator_virtualbase_validate")
 proc fcQValidator_method_callback_validate(self: pointer, param1: struct_miqt_string, param2: ptr cint): cint {.cdecl.} =
   let inst = cast[VirtualQValidator](fcQValidator_vdata(self)[])
@@ -527,7 +527,7 @@ proc fcQValidator_method_callback_validate(self: pointer, param1: struct_miqt_st
   var virtualReturn = inst.validate(slotval1, slotval2)
   cint(virtualReturn)
 
-method fixup*(self: VirtualQValidator, param1: string): void {.base.} =
+method fixup*(self: VirtualQValidator, param1: openArray[char]): void {.base.} =
   QValidatorfixup(self[], param1)
 proc fcQValidator_method_callback_fixup(self: pointer, param1: struct_miqt_string): void {.cdecl.} =
   let inst = cast[VirtualQValidator](fcQValidator_vdata(self)[])
@@ -694,6 +694,7 @@ proc create*(T: type gen_qvalidator_types.QValidator,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQValidator_new(addr(cQValidator_mvtbl), csize_t(sizeof(pointer)))
   fcQValidator_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qvalidator_types.QValidator,
     parent: gen_qobject_types.QObject,
@@ -701,6 +702,7 @@ proc create*(T: type gen_qvalidator_types.QValidator,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQValidator_new2(addr(cQValidator_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQValidator_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qvalidator_types.QValidator): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQValidator_staticMetaObject())
@@ -719,10 +721,10 @@ proc tr*(_: type gen_qvalidator_types.QIntValidator, s: cstring): string =
   c_free(v_ms.data)
   vx_ret
 
-proc validate*(self: gen_qvalidator_types.QIntValidator, param1: string, param2: ptr cint): cint =
+proc validate*(self: gen_qvalidator_types.QIntValidator, param1: openArray[char], param2: ptr cint): cint =
   cint(fcQIntValidator_validate(self.h, struct_miqt_string(data: if len(param1) > 0: addr param1[0] else: nil, len: csize_t(len(param1))), param2))
 
-proc fixup*(self: gen_qvalidator_types.QIntValidator, input: string): void =
+proc fixup*(self: gen_qvalidator_types.QIntValidator, input: openArray[char]): void =
   fcQIntValidator_fixup(self.h, struct_miqt_string(data: if len(input) > 0: addr input[0] else: nil, len: csize_t(len(input))))
 
 proc setBottom*(self: gen_qvalidator_types.QIntValidator, bottom: cint): void =
@@ -795,8 +797,8 @@ proc tr*(_: type gen_qvalidator_types.QIntValidator, s: cstring, c: cstring, n: 
 type QIntValidatormetaObjectProc* = proc(self: QIntValidator): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QIntValidatormetacastProc* = proc(self: QIntValidator, param1: cstring): pointer {.raises: [], gcsafe.}
 type QIntValidatormetacallProc* = proc(self: QIntValidator, param1: cint, param2: cint, param3: pointer): cint {.raises: [], gcsafe.}
-type QIntValidatorvalidateProc* = proc(self: QIntValidator, param1: string, param2: ptr cint): cint {.raises: [], gcsafe.}
-type QIntValidatorfixupProc* = proc(self: QIntValidator, input: string): void {.raises: [], gcsafe.}
+type QIntValidatorvalidateProc* = proc(self: QIntValidator, param1: openArray[char], param2: ptr cint): cint {.raises: [], gcsafe.}
+type QIntValidatorfixupProc* = proc(self: QIntValidator, input: openArray[char]): void {.raises: [], gcsafe.}
 type QIntValidatoreventProc* = proc(self: QIntValidator, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
 type QIntValidatoreventFilterProc* = proc(self: QIntValidator, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
 type QIntValidatortimerEventProc* = proc(self: QIntValidator, event: gen_qcoreevent_types.QTimerEvent): void {.raises: [], gcsafe.}
@@ -852,7 +854,7 @@ proc fcQIntValidator_vtable_callback_metacall(self: pointer, param1: cint, param
   var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QIntValidatorvalidate*(self: gen_qvalidator_types.QIntValidator, param1: string, param2: ptr cint): cint =
+proc QIntValidatorvalidate*(self: gen_qvalidator_types.QIntValidator, param1: openArray[char], param2: ptr cint): cint =
   cint(fcQIntValidator_virtualbase_validate(self.h, struct_miqt_string(data: if len(param1) > 0: addr param1[0] else: nil, len: csize_t(len(param1))), param2))
 
 proc fcQIntValidator_vtable_callback_validate(self: pointer, param1: struct_miqt_string, param2: ptr cint): cint {.cdecl.} =
@@ -866,7 +868,7 @@ proc fcQIntValidator_vtable_callback_validate(self: pointer, param1: struct_miqt
   var virtualReturn = vtbl[].validate(self, slotval1, slotval2)
   cint(virtualReturn)
 
-proc QIntValidatorfixup*(self: gen_qvalidator_types.QIntValidator, input: string): void =
+proc QIntValidatorfixup*(self: gen_qvalidator_types.QIntValidator, input: openArray[char]): void =
   fcQIntValidator_virtualbase_fixup(self.h, struct_miqt_string(data: if len(input) > 0: addr input[0] else: nil, len: csize_t(len(input))))
 
 proc fcQIntValidator_vtable_callback_fixup(self: pointer, input: struct_miqt_string): void {.cdecl.} =
@@ -971,7 +973,7 @@ proc fcQIntValidator_method_callback_metacall(self: pointer, param1: cint, param
   var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
-method validate*(self: VirtualQIntValidator, param1: string, param2: ptr cint): cint {.base.} =
+method validate*(self: VirtualQIntValidator, param1: openArray[char], param2: ptr cint): cint {.base.} =
   QIntValidatorvalidate(self[], param1, param2)
 proc fcQIntValidator_method_callback_validate(self: pointer, param1: struct_miqt_string, param2: ptr cint): cint {.cdecl.} =
   let inst = cast[VirtualQIntValidator](fcQIntValidator_vdata(self)[])
@@ -983,7 +985,7 @@ proc fcQIntValidator_method_callback_validate(self: pointer, param1: struct_miqt
   var virtualReturn = inst.validate(slotval1, slotval2)
   cint(virtualReturn)
 
-method fixup*(self: VirtualQIntValidator, input: string): void {.base.} =
+method fixup*(self: VirtualQIntValidator, input: openArray[char]): void {.base.} =
   QIntValidatorfixup(self[], input)
 proc fcQIntValidator_method_callback_fixup(self: pointer, input: struct_miqt_string): void {.cdecl.} =
   let inst = cast[VirtualQIntValidator](fcQIntValidator_vdata(self)[])
@@ -1220,6 +1222,7 @@ proc create*(T: type gen_qvalidator_types.QIntValidator,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQIntValidator_new(addr(cQIntValidator_mvtbl), csize_t(sizeof(pointer)))
   fcQIntValidator_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qvalidator_types.QIntValidator,
     bottom: cint, top: cint,
@@ -1227,6 +1230,7 @@ proc create*(T: type gen_qvalidator_types.QIntValidator,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQIntValidator_new2(addr(cQIntValidator_mvtbl), csize_t(sizeof(pointer)), bottom, top)
   fcQIntValidator_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qvalidator_types.QIntValidator,
     parent: gen_qobject_types.QObject,
@@ -1234,6 +1238,7 @@ proc create*(T: type gen_qvalidator_types.QIntValidator,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQIntValidator_new3(addr(cQIntValidator_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQIntValidator_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qvalidator_types.QIntValidator,
     bottom: cint, top: cint, parent: gen_qobject_types.QObject,
@@ -1241,6 +1246,7 @@ proc create*(T: type gen_qvalidator_types.QIntValidator,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQIntValidator_new4(addr(cQIntValidator_mvtbl), csize_t(sizeof(pointer)), bottom, top, parent.h)
   fcQIntValidator_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qvalidator_types.QIntValidator): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQIntValidator_staticMetaObject())
@@ -1259,10 +1265,10 @@ proc tr*(_: type gen_qvalidator_types.QDoubleValidator, s: cstring): string =
   c_free(v_ms.data)
   vx_ret
 
-proc validate*(self: gen_qvalidator_types.QDoubleValidator, param1: string, param2: ptr cint): cint =
+proc validate*(self: gen_qvalidator_types.QDoubleValidator, param1: openArray[char], param2: ptr cint): cint =
   cint(fcQDoubleValidator_validate(self.h, struct_miqt_string(data: if len(param1) > 0: addr param1[0] else: nil, len: csize_t(len(param1))), param2))
 
-proc fixup*(self: gen_qvalidator_types.QDoubleValidator, input: string): void =
+proc fixup*(self: gen_qvalidator_types.QDoubleValidator, input: openArray[char]): void =
   fcQDoubleValidator_fixup(self.h, struct_miqt_string(data: if len(input) > 0: addr input[0] else: nil, len: csize_t(len(input))))
 
 proc setRange*(self: gen_qvalidator_types.QDoubleValidator, bottom: float64, top: float64, decimals: cint): void =
@@ -1390,8 +1396,8 @@ proc tr*(_: type gen_qvalidator_types.QDoubleValidator, s: cstring, c: cstring, 
 type QDoubleValidatormetaObjectProc* = proc(self: QDoubleValidator): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QDoubleValidatormetacastProc* = proc(self: QDoubleValidator, param1: cstring): pointer {.raises: [], gcsafe.}
 type QDoubleValidatormetacallProc* = proc(self: QDoubleValidator, param1: cint, param2: cint, param3: pointer): cint {.raises: [], gcsafe.}
-type QDoubleValidatorvalidateProc* = proc(self: QDoubleValidator, param1: string, param2: ptr cint): cint {.raises: [], gcsafe.}
-type QDoubleValidatorfixupProc* = proc(self: QDoubleValidator, input: string): void {.raises: [], gcsafe.}
+type QDoubleValidatorvalidateProc* = proc(self: QDoubleValidator, param1: openArray[char], param2: ptr cint): cint {.raises: [], gcsafe.}
+type QDoubleValidatorfixupProc* = proc(self: QDoubleValidator, input: openArray[char]): void {.raises: [], gcsafe.}
 type QDoubleValidatoreventProc* = proc(self: QDoubleValidator, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
 type QDoubleValidatoreventFilterProc* = proc(self: QDoubleValidator, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
 type QDoubleValidatortimerEventProc* = proc(self: QDoubleValidator, event: gen_qcoreevent_types.QTimerEvent): void {.raises: [], gcsafe.}
@@ -1447,7 +1453,7 @@ proc fcQDoubleValidator_vtable_callback_metacall(self: pointer, param1: cint, pa
   var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QDoubleValidatorvalidate*(self: gen_qvalidator_types.QDoubleValidator, param1: string, param2: ptr cint): cint =
+proc QDoubleValidatorvalidate*(self: gen_qvalidator_types.QDoubleValidator, param1: openArray[char], param2: ptr cint): cint =
   cint(fcQDoubleValidator_virtualbase_validate(self.h, struct_miqt_string(data: if len(param1) > 0: addr param1[0] else: nil, len: csize_t(len(param1))), param2))
 
 proc fcQDoubleValidator_vtable_callback_validate(self: pointer, param1: struct_miqt_string, param2: ptr cint): cint {.cdecl.} =
@@ -1461,7 +1467,7 @@ proc fcQDoubleValidator_vtable_callback_validate(self: pointer, param1: struct_m
   var virtualReturn = vtbl[].validate(self, slotval1, slotval2)
   cint(virtualReturn)
 
-proc QDoubleValidatorfixup*(self: gen_qvalidator_types.QDoubleValidator, input: string): void =
+proc QDoubleValidatorfixup*(self: gen_qvalidator_types.QDoubleValidator, input: openArray[char]): void =
   fcQDoubleValidator_virtualbase_fixup(self.h, struct_miqt_string(data: if len(input) > 0: addr input[0] else: nil, len: csize_t(len(input))))
 
 proc fcQDoubleValidator_vtable_callback_fixup(self: pointer, input: struct_miqt_string): void {.cdecl.} =
@@ -1566,7 +1572,7 @@ proc fcQDoubleValidator_method_callback_metacall(self: pointer, param1: cint, pa
   var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
-method validate*(self: VirtualQDoubleValidator, param1: string, param2: ptr cint): cint {.base.} =
+method validate*(self: VirtualQDoubleValidator, param1: openArray[char], param2: ptr cint): cint {.base.} =
   QDoubleValidatorvalidate(self[], param1, param2)
 proc fcQDoubleValidator_method_callback_validate(self: pointer, param1: struct_miqt_string, param2: ptr cint): cint {.cdecl.} =
   let inst = cast[VirtualQDoubleValidator](fcQDoubleValidator_vdata(self)[])
@@ -1578,7 +1584,7 @@ proc fcQDoubleValidator_method_callback_validate(self: pointer, param1: struct_m
   var virtualReturn = inst.validate(slotval1, slotval2)
   cint(virtualReturn)
 
-method fixup*(self: VirtualQDoubleValidator, input: string): void {.base.} =
+method fixup*(self: VirtualQDoubleValidator, input: openArray[char]): void {.base.} =
   QDoubleValidatorfixup(self[], input)
 proc fcQDoubleValidator_method_callback_fixup(self: pointer, input: struct_miqt_string): void {.cdecl.} =
   let inst = cast[VirtualQDoubleValidator](fcQDoubleValidator_vdata(self)[])
@@ -1815,6 +1821,7 @@ proc create*(T: type gen_qvalidator_types.QDoubleValidator,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQDoubleValidator_new(addr(cQDoubleValidator_mvtbl), csize_t(sizeof(pointer)))
   fcQDoubleValidator_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qvalidator_types.QDoubleValidator,
     bottom: float64, top: float64, decimals: cint,
@@ -1822,6 +1829,7 @@ proc create*(T: type gen_qvalidator_types.QDoubleValidator,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQDoubleValidator_new2(addr(cQDoubleValidator_mvtbl), csize_t(sizeof(pointer)), bottom, top, decimals)
   fcQDoubleValidator_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qvalidator_types.QDoubleValidator,
     parent: gen_qobject_types.QObject,
@@ -1829,6 +1837,7 @@ proc create*(T: type gen_qvalidator_types.QDoubleValidator,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQDoubleValidator_new3(addr(cQDoubleValidator_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQDoubleValidator_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qvalidator_types.QDoubleValidator,
     bottom: float64, top: float64, decimals: cint, parent: gen_qobject_types.QObject,
@@ -1836,6 +1845,7 @@ proc create*(T: type gen_qvalidator_types.QDoubleValidator,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQDoubleValidator_new4(addr(cQDoubleValidator_mvtbl), csize_t(sizeof(pointer)), bottom, top, decimals, parent.h)
   fcQDoubleValidator_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qvalidator_types.QDoubleValidator): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQDoubleValidator_staticMetaObject())
@@ -1854,7 +1864,7 @@ proc tr*(_: type gen_qvalidator_types.QRegularExpressionValidator, s: cstring): 
   c_free(v_ms.data)
   vx_ret
 
-proc validate*(self: gen_qvalidator_types.QRegularExpressionValidator, input: string, pos: ptr cint): cint =
+proc validate*(self: gen_qvalidator_types.QRegularExpressionValidator, input: openArray[char], pos: ptr cint): cint =
   cint(fcQRegularExpressionValidator_validate(self.h, struct_miqt_string(data: if len(input) > 0: addr input[0] else: nil, len: csize_t(len(input))), pos))
 
 proc regularExpression*(self: gen_qvalidator_types.QRegularExpressionValidator): gen_qregularexpression_types.QRegularExpression =
@@ -1898,8 +1908,8 @@ proc tr*(_: type gen_qvalidator_types.QRegularExpressionValidator, s: cstring, c
 type QRegularExpressionValidatormetaObjectProc* = proc(self: QRegularExpressionValidator): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QRegularExpressionValidatormetacastProc* = proc(self: QRegularExpressionValidator, param1: cstring): pointer {.raises: [], gcsafe.}
 type QRegularExpressionValidatormetacallProc* = proc(self: QRegularExpressionValidator, param1: cint, param2: cint, param3: pointer): cint {.raises: [], gcsafe.}
-type QRegularExpressionValidatorvalidateProc* = proc(self: QRegularExpressionValidator, input: string, pos: ptr cint): cint {.raises: [], gcsafe.}
-type QRegularExpressionValidatorfixupProc* = proc(self: QRegularExpressionValidator, param1: string): void {.raises: [], gcsafe.}
+type QRegularExpressionValidatorvalidateProc* = proc(self: QRegularExpressionValidator, input: openArray[char], pos: ptr cint): cint {.raises: [], gcsafe.}
+type QRegularExpressionValidatorfixupProc* = proc(self: QRegularExpressionValidator, param1: openArray[char]): void {.raises: [], gcsafe.}
 type QRegularExpressionValidatoreventProc* = proc(self: QRegularExpressionValidator, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
 type QRegularExpressionValidatoreventFilterProc* = proc(self: QRegularExpressionValidator, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
 type QRegularExpressionValidatortimerEventProc* = proc(self: QRegularExpressionValidator, event: gen_qcoreevent_types.QTimerEvent): void {.raises: [], gcsafe.}
@@ -1955,7 +1965,7 @@ proc fcQRegularExpressionValidator_vtable_callback_metacall(self: pointer, param
   var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QRegularExpressionValidatorvalidate*(self: gen_qvalidator_types.QRegularExpressionValidator, input: string, pos: ptr cint): cint =
+proc QRegularExpressionValidatorvalidate*(self: gen_qvalidator_types.QRegularExpressionValidator, input: openArray[char], pos: ptr cint): cint =
   cint(fcQRegularExpressionValidator_virtualbase_validate(self.h, struct_miqt_string(data: if len(input) > 0: addr input[0] else: nil, len: csize_t(len(input))), pos))
 
 proc fcQRegularExpressionValidator_vtable_callback_validate(self: pointer, input: struct_miqt_string, pos: ptr cint): cint {.cdecl.} =
@@ -1969,7 +1979,7 @@ proc fcQRegularExpressionValidator_vtable_callback_validate(self: pointer, input
   var virtualReturn = vtbl[].validate(self, slotval1, slotval2)
   cint(virtualReturn)
 
-proc QRegularExpressionValidatorfixup*(self: gen_qvalidator_types.QRegularExpressionValidator, param1: string): void =
+proc QRegularExpressionValidatorfixup*(self: gen_qvalidator_types.QRegularExpressionValidator, param1: openArray[char]): void =
   fcQRegularExpressionValidator_virtualbase_fixup(self.h, struct_miqt_string(data: if len(param1) > 0: addr param1[0] else: nil, len: csize_t(len(param1))))
 
 proc fcQRegularExpressionValidator_vtable_callback_fixup(self: pointer, param1: struct_miqt_string): void {.cdecl.} =
@@ -2074,7 +2084,7 @@ proc fcQRegularExpressionValidator_method_callback_metacall(self: pointer, param
   var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
-method validate*(self: VirtualQRegularExpressionValidator, input: string, pos: ptr cint): cint {.base.} =
+method validate*(self: VirtualQRegularExpressionValidator, input: openArray[char], pos: ptr cint): cint {.base.} =
   QRegularExpressionValidatorvalidate(self[], input, pos)
 proc fcQRegularExpressionValidator_method_callback_validate(self: pointer, input: struct_miqt_string, pos: ptr cint): cint {.cdecl.} =
   let inst = cast[VirtualQRegularExpressionValidator](fcQRegularExpressionValidator_vdata(self)[])
@@ -2086,7 +2096,7 @@ proc fcQRegularExpressionValidator_method_callback_validate(self: pointer, input
   var virtualReturn = inst.validate(slotval1, slotval2)
   cint(virtualReturn)
 
-method fixup*(self: VirtualQRegularExpressionValidator, param1: string): void {.base.} =
+method fixup*(self: VirtualQRegularExpressionValidator, param1: openArray[char]): void {.base.} =
   QRegularExpressionValidatorfixup(self[], param1)
 proc fcQRegularExpressionValidator_method_callback_fixup(self: pointer, param1: struct_miqt_string): void {.cdecl.} =
   let inst = cast[VirtualQRegularExpressionValidator](fcQRegularExpressionValidator_vdata(self)[])
@@ -2323,6 +2333,7 @@ proc create*(T: type gen_qvalidator_types.QRegularExpressionValidator,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQRegularExpressionValidator_new(addr(cQRegularExpressionValidator_mvtbl), csize_t(sizeof(pointer)))
   fcQRegularExpressionValidator_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qvalidator_types.QRegularExpressionValidator,
     re: gen_qregularexpression_types.QRegularExpression,
@@ -2330,6 +2341,7 @@ proc create*(T: type gen_qvalidator_types.QRegularExpressionValidator,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQRegularExpressionValidator_new2(addr(cQRegularExpressionValidator_mvtbl), csize_t(sizeof(pointer)), re.h)
   fcQRegularExpressionValidator_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qvalidator_types.QRegularExpressionValidator,
     parent: gen_qobject_types.QObject,
@@ -2337,6 +2349,7 @@ proc create*(T: type gen_qvalidator_types.QRegularExpressionValidator,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQRegularExpressionValidator_new3(addr(cQRegularExpressionValidator_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQRegularExpressionValidator_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qvalidator_types.QRegularExpressionValidator,
     re: gen_qregularexpression_types.QRegularExpression, parent: gen_qobject_types.QObject,
@@ -2344,6 +2357,7 @@ proc create*(T: type gen_qvalidator_types.QRegularExpressionValidator,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQRegularExpressionValidator_new4(addr(cQRegularExpressionValidator_mvtbl), csize_t(sizeof(pointer)), re.h, parent.h)
   fcQRegularExpressionValidator_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qvalidator_types.QRegularExpressionValidator): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQRegularExpressionValidator_staticMetaObject())

@@ -275,16 +275,16 @@ proc inheritsFromParent*(self: gen_qprocess_types.QProcessEnvironment): bool =
 proc clear*(self: gen_qprocess_types.QProcessEnvironment): void =
   fcQProcessEnvironment_clear(self.h)
 
-proc contains*(self: gen_qprocess_types.QProcessEnvironment, name: string): bool =
+proc contains*(self: gen_qprocess_types.QProcessEnvironment, name: openArray[char]): bool =
   fcQProcessEnvironment_contains(self.h, struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))))
 
-proc insert*(self: gen_qprocess_types.QProcessEnvironment, name: string, value: string): void =
+proc insert*(self: gen_qprocess_types.QProcessEnvironment, name: openArray[char], value: openArray[char]): void =
   fcQProcessEnvironment_insert(self.h, struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), struct_miqt_string(data: if len(value) > 0: addr value[0] else: nil, len: csize_t(len(value))))
 
-proc remove*(self: gen_qprocess_types.QProcessEnvironment, name: string): void =
+proc remove*(self: gen_qprocess_types.QProcessEnvironment, name: openArray[char]): void =
   fcQProcessEnvironment_remove(self.h, struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))))
 
-proc value*(self: gen_qprocess_types.QProcessEnvironment, name: string): string =
+proc value*(self: gen_qprocess_types.QProcessEnvironment, name: openArray[char]): string =
   let v_ms = fcQProcessEnvironment_value(self.h, struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))))
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
@@ -320,7 +320,7 @@ proc insert*(self: gen_qprocess_types.QProcessEnvironment, e: gen_qprocess_types
 proc systemEnvironment*(_: type gen_qprocess_types.QProcessEnvironment): gen_qprocess_types.QProcessEnvironment =
   gen_qprocess_types.QProcessEnvironment(h: fcQProcessEnvironment_systemEnvironment(), owned: true)
 
-proc value*(self: gen_qprocess_types.QProcessEnvironment, name: string, defaultValue: string): string =
+proc value*(self: gen_qprocess_types.QProcessEnvironment, name: openArray[char], defaultValue: openArray[char]): string =
   let v_ms = fcQProcessEnvironment_value2(self.h, struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), struct_miqt_string(data: if len(defaultValue) > 0: addr defaultValue[0] else: nil, len: csize_t(len(defaultValue))))
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
@@ -352,13 +352,13 @@ proc tr*(_: type gen_qprocess_types.QProcess, s: cstring): string =
   c_free(v_ms.data)
   vx_ret
 
-proc start*(self: gen_qprocess_types.QProcess, program: string): void =
+proc start*(self: gen_qprocess_types.QProcess, program: openArray[char]): void =
   fcQProcess_start(self.h, struct_miqt_string(data: if len(program) > 0: addr program[0] else: nil, len: csize_t(len(program))))
 
 proc start*(self: gen_qprocess_types.QProcess): void =
   fcQProcess_start2(self.h)
 
-proc startCommand*(self: gen_qprocess_types.QProcess, command: string): void =
+proc startCommand*(self: gen_qprocess_types.QProcess, command: openArray[char]): void =
   fcQProcess_startCommand(self.h, struct_miqt_string(data: if len(command) > 0: addr command[0] else: nil, len: csize_t(len(command))))
 
 proc startDetached*(self: gen_qprocess_types.QProcess): bool =
@@ -373,7 +373,7 @@ proc program*(self: gen_qprocess_types.QProcess): string =
   c_free(v_ms.data)
   vx_ret
 
-proc setProgram*(self: gen_qprocess_types.QProcess, program: string): void =
+proc setProgram*(self: gen_qprocess_types.QProcess, program: openArray[char]): void =
   fcQProcess_setProgram(self.h, struct_miqt_string(data: if len(program) > 0: addr program[0] else: nil, len: csize_t(len(program))))
 
 proc arguments*(self: gen_qprocess_types.QProcess): seq[string] =
@@ -388,7 +388,7 @@ proc arguments*(self: gen_qprocess_types.QProcess): seq[string] =
   c_free(v_ma.data)
   vx_ret
 
-proc setArguments*(self: gen_qprocess_types.QProcess, arguments: seq[string]): void =
+proc setArguments*(self: gen_qprocess_types.QProcess, arguments: openArray[string]): void =
   var arguments_CArray = newSeq[struct_miqt_string](len(arguments))
   for i in 0..<len(arguments):
     arguments_CArray[i] = struct_miqt_string(data: if len(arguments[i]) > 0: addr arguments[i][0] else: nil, len: csize_t(len(arguments[i])))
@@ -419,13 +419,13 @@ proc closeReadChannel*(self: gen_qprocess_types.QProcess, channel: cint): void =
 proc closeWriteChannel*(self: gen_qprocess_types.QProcess): void =
   fcQProcess_closeWriteChannel(self.h)
 
-proc setStandardInputFile*(self: gen_qprocess_types.QProcess, fileName: string): void =
+proc setStandardInputFile*(self: gen_qprocess_types.QProcess, fileName: openArray[char]): void =
   fcQProcess_setStandardInputFile(self.h, struct_miqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))))
 
-proc setStandardOutputFile*(self: gen_qprocess_types.QProcess, fileName: string): void =
+proc setStandardOutputFile*(self: gen_qprocess_types.QProcess, fileName: openArray[char]): void =
   fcQProcess_setStandardOutputFile(self.h, struct_miqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))))
 
-proc setStandardErrorFile*(self: gen_qprocess_types.QProcess, fileName: string): void =
+proc setStandardErrorFile*(self: gen_qprocess_types.QProcess, fileName: openArray[char]): void =
   fcQProcess_setStandardErrorFile(self.h, struct_miqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))))
 
 proc setStandardOutputProcess*(self: gen_qprocess_types.QProcess, destination: gen_qprocess_types.QProcess): void =
@@ -437,10 +437,10 @@ proc workingDirectory*(self: gen_qprocess_types.QProcess): string =
   c_free(v_ms.data)
   vx_ret
 
-proc setWorkingDirectory*(self: gen_qprocess_types.QProcess, dir: string): void =
+proc setWorkingDirectory*(self: gen_qprocess_types.QProcess, dir: openArray[char]): void =
   fcQProcess_setWorkingDirectory(self.h, struct_miqt_string(data: if len(dir) > 0: addr dir[0] else: nil, len: csize_t(len(dir))))
 
-proc setEnvironment*(self: gen_qprocess_types.QProcess, environment: seq[string]): void =
+proc setEnvironment*(self: gen_qprocess_types.QProcess, environment: openArray[string]): void =
   var environment_CArray = newSeq[struct_miqt_string](len(environment))
   for i in 0..<len(environment):
     environment_CArray[i] = struct_miqt_string(data: if len(environment[i]) > 0: addr environment[i][0] else: nil, len: csize_t(len(environment[i])))
@@ -513,10 +513,10 @@ proc isSequential*(self: gen_qprocess_types.QProcess): bool =
 proc close*(self: gen_qprocess_types.QProcess): void =
   fcQProcess_close(self.h)
 
-proc execute*(_: type gen_qprocess_types.QProcess, program: string): cint =
+proc execute*(_: type gen_qprocess_types.QProcess, program: openArray[char]): cint =
   fcQProcess_execute(struct_miqt_string(data: if len(program) > 0: addr program[0] else: nil, len: csize_t(len(program))))
 
-proc startDetached*(_: type gen_qprocess_types.QProcess, program: string): bool =
+proc startDetached*(_: type gen_qprocess_types.QProcess, program: openArray[char]): bool =
   fcQProcess_startDetachedWithProgram(struct_miqt_string(data: if len(program) > 0: addr program[0] else: nil, len: csize_t(len(program))))
 
 proc systemEnvironment*(_: type gen_qprocess_types.QProcess): seq[string] =
@@ -595,14 +595,14 @@ proc tr*(_: type gen_qprocess_types.QProcess, s: cstring, c: cstring, n: cint): 
   c_free(v_ms.data)
   vx_ret
 
-proc start*(self: gen_qprocess_types.QProcess, program: string, arguments: seq[string]): void =
+proc start*(self: gen_qprocess_types.QProcess, program: openArray[char], arguments: openArray[string]): void =
   var arguments_CArray = newSeq[struct_miqt_string](len(arguments))
   for i in 0..<len(arguments):
     arguments_CArray[i] = struct_miqt_string(data: if len(arguments[i]) > 0: addr arguments[i][0] else: nil, len: csize_t(len(arguments[i])))
 
   fcQProcess_start22(self.h, struct_miqt_string(data: if len(program) > 0: addr program[0] else: nil, len: csize_t(len(program))), struct_miqt_array(len: csize_t(len(arguments)), data: if len(arguments) == 0: nil else: addr(arguments_CArray[0])))
 
-proc start*(self: gen_qprocess_types.QProcess, program: string, arguments: seq[string], mode: cint): void =
+proc start*(self: gen_qprocess_types.QProcess, program: openArray[char], arguments: openArray[string], mode: cint): void =
   var arguments_CArray = newSeq[struct_miqt_string](len(arguments))
   for i in 0..<len(arguments):
     arguments_CArray[i] = struct_miqt_string(data: if len(arguments[i]) > 0: addr arguments[i][0] else: nil, len: csize_t(len(arguments[i])))
@@ -612,16 +612,16 @@ proc start*(self: gen_qprocess_types.QProcess, program: string, arguments: seq[s
 proc start*(self: gen_qprocess_types.QProcess, mode: cint): void =
   fcQProcess_start1(self.h, cint(mode))
 
-proc startCommand*(self: gen_qprocess_types.QProcess, command: string, mode: cint): void =
+proc startCommand*(self: gen_qprocess_types.QProcess, command: openArray[char], mode: cint): void =
   fcQProcess_startCommand2(self.h, struct_miqt_string(data: if len(command) > 0: addr command[0] else: nil, len: csize_t(len(command))), cint(mode))
 
 proc startDetached*(self: gen_qprocess_types.QProcess, pid: ptr clonglong): bool =
   fcQProcess_startDetached1(self.h, pid)
 
-proc setStandardOutputFile*(self: gen_qprocess_types.QProcess, fileName: string, mode: cint): void =
+proc setStandardOutputFile*(self: gen_qprocess_types.QProcess, fileName: openArray[char], mode: cint): void =
   fcQProcess_setStandardOutputFile2(self.h, struct_miqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))), cint(mode))
 
-proc setStandardErrorFile*(self: gen_qprocess_types.QProcess, fileName: string, mode: cint): void =
+proc setStandardErrorFile*(self: gen_qprocess_types.QProcess, fileName: openArray[char], mode: cint): void =
   fcQProcess_setStandardErrorFile2(self.h, struct_miqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))), cint(mode))
 
 proc waitForStarted*(self: gen_qprocess_types.QProcess, msecs: cint): bool =
@@ -630,28 +630,28 @@ proc waitForStarted*(self: gen_qprocess_types.QProcess, msecs: cint): bool =
 proc waitForFinished*(self: gen_qprocess_types.QProcess, msecs: cint): bool =
   fcQProcess_waitForFinished1(self.h, msecs)
 
-proc execute*(_: type gen_qprocess_types.QProcess, program: string, arguments: seq[string]): cint =
+proc execute*(_: type gen_qprocess_types.QProcess, program: openArray[char], arguments: openArray[string]): cint =
   var arguments_CArray = newSeq[struct_miqt_string](len(arguments))
   for i in 0..<len(arguments):
     arguments_CArray[i] = struct_miqt_string(data: if len(arguments[i]) > 0: addr arguments[i][0] else: nil, len: csize_t(len(arguments[i])))
 
   fcQProcess_execute2(struct_miqt_string(data: if len(program) > 0: addr program[0] else: nil, len: csize_t(len(program))), struct_miqt_array(len: csize_t(len(arguments)), data: if len(arguments) == 0: nil else: addr(arguments_CArray[0])))
 
-proc startDetached*(_: type gen_qprocess_types.QProcess, program: string, arguments: seq[string]): bool =
+proc startDetached*(_: type gen_qprocess_types.QProcess, program: openArray[char], arguments: openArray[string]): bool =
   var arguments_CArray = newSeq[struct_miqt_string](len(arguments))
   for i in 0..<len(arguments):
     arguments_CArray[i] = struct_miqt_string(data: if len(arguments[i]) > 0: addr arguments[i][0] else: nil, len: csize_t(len(arguments[i])))
 
   fcQProcess_startDetached2(struct_miqt_string(data: if len(program) > 0: addr program[0] else: nil, len: csize_t(len(program))), struct_miqt_array(len: csize_t(len(arguments)), data: if len(arguments) == 0: nil else: addr(arguments_CArray[0])))
 
-proc startDetached*(_: type gen_qprocess_types.QProcess, program: string, arguments: seq[string], workingDirectory: string): bool =
+proc startDetached*(_: type gen_qprocess_types.QProcess, program: openArray[char], arguments: openArray[string], workingDirectory: openArray[char]): bool =
   var arguments_CArray = newSeq[struct_miqt_string](len(arguments))
   for i in 0..<len(arguments):
     arguments_CArray[i] = struct_miqt_string(data: if len(arguments[i]) > 0: addr arguments[i][0] else: nil, len: csize_t(len(arguments[i])))
 
   fcQProcess_startDetached3(struct_miqt_string(data: if len(program) > 0: addr program[0] else: nil, len: csize_t(len(program))), struct_miqt_array(len: csize_t(len(arguments)), data: if len(arguments) == 0: nil else: addr(arguments_CArray[0])), struct_miqt_string(data: if len(workingDirectory) > 0: addr workingDirectory[0] else: nil, len: csize_t(len(workingDirectory))))
 
-proc startDetached*(_: type gen_qprocess_types.QProcess, program: string, arguments: seq[string], workingDirectory: string, pid: ptr clonglong): bool =
+proc startDetached*(_: type gen_qprocess_types.QProcess, program: openArray[char], arguments: openArray[string], workingDirectory: openArray[char], pid: ptr clonglong): bool =
   var arguments_CArray = newSeq[struct_miqt_string](len(arguments))
   for i in 0..<len(arguments):
     arguments_CArray[i] = struct_miqt_string(data: if len(arguments[i]) > 0: addr arguments[i][0] else: nil, len: csize_t(len(arguments[i])))
@@ -1213,7 +1213,7 @@ proc setProcessState*(self: gen_qprocess_types.QProcess, state: cint): void =
 proc setOpenMode*(self: gen_qprocess_types.QProcess, openMode: cint): void =
   fcQProcess_protectedbase_setOpenMode(self.h, cint(openMode))
 
-proc setErrorString*(self: gen_qprocess_types.QProcess, errorString: string): void =
+proc setErrorString*(self: gen_qprocess_types.QProcess, errorString: openArray[char]): void =
   fcQProcess_protectedbase_setErrorString(self.h, struct_miqt_string(data: if len(errorString) > 0: addr errorString[0] else: nil, len: csize_t(len(errorString))))
 
 proc sender*(self: gen_qprocess_types.QProcess): gen_qobject_types.QObject =
@@ -1396,6 +1396,7 @@ proc create*(T: type gen_qprocess_types.QProcess,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQProcess_new(addr(cQProcess_mvtbl), csize_t(sizeof(pointer)))
   fcQProcess_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qprocess_types.QProcess,
     parent: gen_qobject_types.QObject,
@@ -1403,6 +1404,7 @@ proc create*(T: type gen_qprocess_types.QProcess,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQProcess_new2(addr(cQProcess_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQProcess_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qprocess_types.QProcess): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQProcess_staticMetaObject())

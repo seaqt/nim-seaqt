@@ -288,7 +288,7 @@ type QPageSetupDialogdragMoveEventProc* = proc(self: QPageSetupDialog, event: ge
 type QPageSetupDialogdragLeaveEventProc* = proc(self: QPageSetupDialog, event: gen_qevent_types.QDragLeaveEvent): void {.raises: [], gcsafe.}
 type QPageSetupDialogdropEventProc* = proc(self: QPageSetupDialog, event: gen_qevent_types.QDropEvent): void {.raises: [], gcsafe.}
 type QPageSetupDialoghideEventProc* = proc(self: QPageSetupDialog, event: gen_qevent_types.QHideEvent): void {.raises: [], gcsafe.}
-type QPageSetupDialognativeEventProc* = proc(self: QPageSetupDialog, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
+type QPageSetupDialognativeEventProc* = proc(self: QPageSetupDialog, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
 type QPageSetupDialogchangeEventProc* = proc(self: QPageSetupDialog, param1: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QPageSetupDialogmetricProc* = proc(self: QPageSetupDialog, param1: cint): cint {.raises: [], gcsafe.}
 type QPageSetupDialoginitPainterProc* = proc(self: QPageSetupDialog, painter: gen_qpainter_types.QPainter): void {.raises: [], gcsafe.}
@@ -745,7 +745,7 @@ proc fcQPageSetupDialog_vtable_callback_hideEvent(self: pointer, event: pointer)
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   vtbl[].hideEvent(self, slotval1)
 
-proc QPageSetupDialognativeEvent*(self: gen_qpagesetupdialog_types.QPageSetupDialog, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool =
+proc QPageSetupDialognativeEvent*(self: gen_qpagesetupdialog_types.QPageSetupDialog, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool =
   fcQPageSetupDialog_virtualbase_nativeEvent(self.h, struct_miqt_string(data: if len(eventType) > 0: addr eventType[0] else: nil, len: csize_t(len(eventType))), message, resultVal)
 
 proc fcQPageSetupDialog_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
@@ -1184,7 +1184,7 @@ proc fcQPageSetupDialog_method_callback_hideEvent(self: pointer, event: pointer)
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   inst.hideEvent(slotval1)
 
-method nativeEvent*(self: VirtualQPageSetupDialog, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
+method nativeEvent*(self: VirtualQPageSetupDialog, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
   QPageSetupDialognativeEvent(self[], eventType, message, resultVal)
 proc fcQPageSetupDialog_method_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
   let inst = cast[VirtualQPageSetupDialog](fcQPageSetupDialog_vdata(self)[])
@@ -1873,6 +1873,7 @@ proc create*(T: type gen_qpagesetupdialog_types.QPageSetupDialog,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQPageSetupDialog_new(addr(cQPageSetupDialog_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQPageSetupDialog_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qpagesetupdialog_types.QPageSetupDialog,
     printer: gen_qprinter_types.QPrinter,
@@ -1880,12 +1881,14 @@ proc create*(T: type gen_qpagesetupdialog_types.QPageSetupDialog,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQPageSetupDialog_new2(addr(cQPageSetupDialog_mvtbl), csize_t(sizeof(pointer)), printer.h)
   fcQPageSetupDialog_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qpagesetupdialog_types.QPageSetupDialog,
     inst: VirtualQPageSetupDialog) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQPageSetupDialog_new3(addr(cQPageSetupDialog_mvtbl), csize_t(sizeof(pointer)))
   fcQPageSetupDialog_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qpagesetupdialog_types.QPageSetupDialog,
     printer: gen_qprinter_types.QPrinter, parent: gen_qwidget_types.QWidget,
@@ -1893,6 +1896,7 @@ proc create*(T: type gen_qpagesetupdialog_types.QPageSetupDialog,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQPageSetupDialog_new4(addr(cQPageSetupDialog_mvtbl), csize_t(sizeof(pointer)), printer.h, parent.h)
   fcQPageSetupDialog_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qpagesetupdialog_types.QPageSetupDialog): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQPageSetupDialog_staticMetaObject())

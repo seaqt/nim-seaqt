@@ -181,4 +181,5 @@ proc create*(T: type gen_qsgmaterial_types.QSGMaterial,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQSGMaterial_new(addr(cQSGMaterial_mvtbl), csize_t(sizeof(pointer)))
   fcQSGMaterial_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 

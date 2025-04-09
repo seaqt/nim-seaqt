@@ -355,10 +355,10 @@ proc getColor*(_: type gen_qcolordialog_types.QColorDialog, initial: gen_qcolor_
 proc getColor*(_: type gen_qcolordialog_types.QColorDialog, initial: gen_qcolor_types.QColor, parent: gen_qwidget_types.QWidget): gen_qcolor_types.QColor =
   gen_qcolor_types.QColor(h: fcQColorDialog_getColor2(initial.h, parent.h), owned: true)
 
-proc getColor*(_: type gen_qcolordialog_types.QColorDialog, initial: gen_qcolor_types.QColor, parent: gen_qwidget_types.QWidget, title: string): gen_qcolor_types.QColor =
+proc getColor*(_: type gen_qcolordialog_types.QColorDialog, initial: gen_qcolor_types.QColor, parent: gen_qwidget_types.QWidget, title: openArray[char]): gen_qcolor_types.QColor =
   gen_qcolor_types.QColor(h: fcQColorDialog_getColor3(initial.h, parent.h, struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title)))), owned: true)
 
-proc getColor*(_: type gen_qcolordialog_types.QColorDialog, initial: gen_qcolor_types.QColor, parent: gen_qwidget_types.QWidget, title: string, options: cint): gen_qcolor_types.QColor =
+proc getColor*(_: type gen_qcolordialog_types.QColorDialog, initial: gen_qcolor_types.QColor, parent: gen_qwidget_types.QWidget, title: openArray[char], options: cint): gen_qcolor_types.QColor =
   gen_qcolor_types.QColor(h: fcQColorDialog_getColor4(initial.h, parent.h, struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), cint(options)), owned: true)
 
 type QColorDialogmetaObjectProc* = proc(self: QColorDialog): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
@@ -403,7 +403,7 @@ type QColorDialogdragMoveEventProc* = proc(self: QColorDialog, event: gen_qevent
 type QColorDialogdragLeaveEventProc* = proc(self: QColorDialog, event: gen_qevent_types.QDragLeaveEvent): void {.raises: [], gcsafe.}
 type QColorDialogdropEventProc* = proc(self: QColorDialog, event: gen_qevent_types.QDropEvent): void {.raises: [], gcsafe.}
 type QColorDialoghideEventProc* = proc(self: QColorDialog, event: gen_qevent_types.QHideEvent): void {.raises: [], gcsafe.}
-type QColorDialognativeEventProc* = proc(self: QColorDialog, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
+type QColorDialognativeEventProc* = proc(self: QColorDialog, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
 type QColorDialogmetricProc* = proc(self: QColorDialog, param1: cint): cint {.raises: [], gcsafe.}
 type QColorDialoginitPainterProc* = proc(self: QColorDialog, painter: gen_qpainter_types.QPainter): void {.raises: [], gcsafe.}
 type QColorDialogredirectedProc* = proc(self: QColorDialog, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.raises: [], gcsafe.}
@@ -868,7 +868,7 @@ proc fcQColorDialog_vtable_callback_hideEvent(self: pointer, event: pointer): vo
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   vtbl[].hideEvent(self, slotval1)
 
-proc QColorDialognativeEvent*(self: gen_qcolordialog_types.QColorDialog, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool =
+proc QColorDialognativeEvent*(self: gen_qcolordialog_types.QColorDialog, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool =
   fcQColorDialog_virtualbase_nativeEvent(self.h, struct_miqt_string(data: if len(eventType) > 0: addr eventType[0] else: nil, len: csize_t(len(eventType))), message, resultVal)
 
 proc fcQColorDialog_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
@@ -1305,7 +1305,7 @@ proc fcQColorDialog_method_callback_hideEvent(self: pointer, event: pointer): vo
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   inst.hideEvent(slotval1)
 
-method nativeEvent*(self: VirtualQColorDialog, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
+method nativeEvent*(self: VirtualQColorDialog, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
   QColorDialognativeEvent(self[], eventType, message, resultVal)
 proc fcQColorDialog_method_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
   let inst = cast[VirtualQColorDialog](fcQColorDialog_vdata(self)[])
@@ -1987,12 +1987,14 @@ proc create*(T: type gen_qcolordialog_types.QColorDialog,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQColorDialog_new(addr(cQColorDialog_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQColorDialog_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qcolordialog_types.QColorDialog,
     inst: VirtualQColorDialog) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQColorDialog_new2(addr(cQColorDialog_mvtbl), csize_t(sizeof(pointer)))
   fcQColorDialog_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qcolordialog_types.QColorDialog,
     initial: gen_qcolor_types.QColor,
@@ -2000,6 +2002,7 @@ proc create*(T: type gen_qcolordialog_types.QColorDialog,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQColorDialog_new3(addr(cQColorDialog_mvtbl), csize_t(sizeof(pointer)), initial.h)
   fcQColorDialog_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qcolordialog_types.QColorDialog,
     initial: gen_qcolor_types.QColor, parent: gen_qwidget_types.QWidget,
@@ -2007,6 +2010,7 @@ proc create*(T: type gen_qcolordialog_types.QColorDialog,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQColorDialog_new4(addr(cQColorDialog_mvtbl), csize_t(sizeof(pointer)), initial.h, parent.h)
   fcQColorDialog_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qcolordialog_types.QColorDialog): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQColorDialog_staticMetaObject())

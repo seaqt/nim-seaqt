@@ -146,10 +146,10 @@ proc filePath*(self: gen_qtranslator_types.QTranslator): string =
   c_free(v_ms.data)
   vx_ret
 
-proc load*(self: gen_qtranslator_types.QTranslator, filename: string): bool =
+proc load*(self: gen_qtranslator_types.QTranslator, filename: openArray[char]): bool =
   fcQTranslator_load(self.h, struct_miqt_string(data: if len(filename) > 0: addr filename[0] else: nil, len: csize_t(len(filename))))
 
-proc load*(self: gen_qtranslator_types.QTranslator, locale: gen_qlocale_types.QLocale, filename: string): bool =
+proc load*(self: gen_qtranslator_types.QTranslator, locale: gen_qlocale_types.QLocale, filename: openArray[char]): bool =
   fcQTranslator_load2(self.h, locale.h, struct_miqt_string(data: if len(filename) > 0: addr filename[0] else: nil, len: csize_t(len(filename))))
 
 proc load*(self: gen_qtranslator_types.QTranslator, data: ptr uint8, len: cint): bool =
@@ -167,25 +167,25 @@ proc tr*(_: type gen_qtranslator_types.QTranslator, s: cstring, c: cstring, n: c
   c_free(v_ms.data)
   vx_ret
 
-proc load*(self: gen_qtranslator_types.QTranslator, filename: string, directory: string): bool =
+proc load*(self: gen_qtranslator_types.QTranslator, filename: openArray[char], directory: openArray[char]): bool =
   fcQTranslator_load22(self.h, struct_miqt_string(data: if len(filename) > 0: addr filename[0] else: nil, len: csize_t(len(filename))), struct_miqt_string(data: if len(directory) > 0: addr directory[0] else: nil, len: csize_t(len(directory))))
 
-proc load*(self: gen_qtranslator_types.QTranslator, filename: string, directory: string, search_delimiters: string): bool =
+proc load*(self: gen_qtranslator_types.QTranslator, filename: openArray[char], directory: openArray[char], search_delimiters: openArray[char]): bool =
   fcQTranslator_load32(self.h, struct_miqt_string(data: if len(filename) > 0: addr filename[0] else: nil, len: csize_t(len(filename))), struct_miqt_string(data: if len(directory) > 0: addr directory[0] else: nil, len: csize_t(len(directory))), struct_miqt_string(data: if len(search_delimiters) > 0: addr search_delimiters[0] else: nil, len: csize_t(len(search_delimiters))))
 
-proc load*(self: gen_qtranslator_types.QTranslator, filename: string, directory: string, search_delimiters: string, suffix: string): bool =
+proc load*(self: gen_qtranslator_types.QTranslator, filename: openArray[char], directory: openArray[char], search_delimiters: openArray[char], suffix: openArray[char]): bool =
   fcQTranslator_load4(self.h, struct_miqt_string(data: if len(filename) > 0: addr filename[0] else: nil, len: csize_t(len(filename))), struct_miqt_string(data: if len(directory) > 0: addr directory[0] else: nil, len: csize_t(len(directory))), struct_miqt_string(data: if len(search_delimiters) > 0: addr search_delimiters[0] else: nil, len: csize_t(len(search_delimiters))), struct_miqt_string(data: if len(suffix) > 0: addr suffix[0] else: nil, len: csize_t(len(suffix))))
 
-proc load*(self: gen_qtranslator_types.QTranslator, locale: gen_qlocale_types.QLocale, filename: string, prefix: string): bool =
+proc load*(self: gen_qtranslator_types.QTranslator, locale: gen_qlocale_types.QLocale, filename: openArray[char], prefix: openArray[char]): bool =
   fcQTranslator_load33(self.h, locale.h, struct_miqt_string(data: if len(filename) > 0: addr filename[0] else: nil, len: csize_t(len(filename))), struct_miqt_string(data: if len(prefix) > 0: addr prefix[0] else: nil, len: csize_t(len(prefix))))
 
-proc load*(self: gen_qtranslator_types.QTranslator, locale: gen_qlocale_types.QLocale, filename: string, prefix: string, directory: string): bool =
+proc load*(self: gen_qtranslator_types.QTranslator, locale: gen_qlocale_types.QLocale, filename: openArray[char], prefix: openArray[char], directory: openArray[char]): bool =
   fcQTranslator_load42(self.h, locale.h, struct_miqt_string(data: if len(filename) > 0: addr filename[0] else: nil, len: csize_t(len(filename))), struct_miqt_string(data: if len(prefix) > 0: addr prefix[0] else: nil, len: csize_t(len(prefix))), struct_miqt_string(data: if len(directory) > 0: addr directory[0] else: nil, len: csize_t(len(directory))))
 
-proc load*(self: gen_qtranslator_types.QTranslator, locale: gen_qlocale_types.QLocale, filename: string, prefix: string, directory: string, suffix: string): bool =
+proc load*(self: gen_qtranslator_types.QTranslator, locale: gen_qlocale_types.QLocale, filename: openArray[char], prefix: openArray[char], directory: openArray[char], suffix: openArray[char]): bool =
   fcQTranslator_load5(self.h, locale.h, struct_miqt_string(data: if len(filename) > 0: addr filename[0] else: nil, len: csize_t(len(filename))), struct_miqt_string(data: if len(prefix) > 0: addr prefix[0] else: nil, len: csize_t(len(prefix))), struct_miqt_string(data: if len(directory) > 0: addr directory[0] else: nil, len: csize_t(len(directory))), struct_miqt_string(data: if len(suffix) > 0: addr suffix[0] else: nil, len: csize_t(len(suffix))))
 
-proc load*(self: gen_qtranslator_types.QTranslator, data: ptr uint8, len: cint, directory: string): bool =
+proc load*(self: gen_qtranslator_types.QTranslator, data: ptr uint8, len: cint, directory: openArray[char]): bool =
   fcQTranslator_load34(self.h, data, len, struct_miqt_string(data: if len(directory) > 0: addr directory[0] else: nil, len: csize_t(len(directory))))
 
 type QTranslatormetaObjectProc* = proc(self: QTranslator): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
@@ -543,6 +543,7 @@ proc create*(T: type gen_qtranslator_types.QTranslator,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQTranslator_new(addr(cQTranslator_mvtbl), csize_t(sizeof(pointer)))
   fcQTranslator_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qtranslator_types.QTranslator,
     parent: gen_qobject_types.QObject,
@@ -550,6 +551,7 @@ proc create*(T: type gen_qtranslator_types.QTranslator,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQTranslator_new2(addr(cQTranslator_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQTranslator_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qtranslator_types.QTranslator): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQTranslator_staticMetaObject())

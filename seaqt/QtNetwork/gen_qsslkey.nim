@@ -112,13 +112,13 @@ proc operatorEqual*(self: gen_qsslkey_types.QSslKey, key: gen_qsslkey_types.QSsl
 proc operatorNotEqual*(self: gen_qsslkey_types.QSslKey, key: gen_qsslkey_types.QSslKey): bool =
   fcQSslKey_operatorNotEqual(self.h, key.h)
 
-proc toPem*(self: gen_qsslkey_types.QSslKey, passPhrase: seq[byte]): seq[byte] =
+proc toPem*(self: gen_qsslkey_types.QSslKey, passPhrase: openArray[byte]): seq[byte] =
   var v_bytearray = fcQSslKey_toPem1(self.h, struct_miqt_string(data: if len(passPhrase) > 0: addr passPhrase[0] else: nil, len: csize_t(len(passPhrase))))
   var vx_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](v_bytearray.data), 0, int(v_bytearray.len)-1))
   c_free(v_bytearray.data)
   vx_ret
 
-proc toDer*(self: gen_qsslkey_types.QSslKey, passPhrase: seq[byte]): seq[byte] =
+proc toDer*(self: gen_qsslkey_types.QSslKey, passPhrase: openArray[byte]): seq[byte] =
   var v_bytearray = fcQSslKey_toDer1(self.h, struct_miqt_string(data: if len(passPhrase) > 0: addr passPhrase[0] else: nil, len: csize_t(len(passPhrase))))
   var vx_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](v_bytearray.data), 0, int(v_bytearray.len)-1))
   c_free(v_bytearray.data)
@@ -128,7 +128,7 @@ proc create*(T: type gen_qsslkey_types.QSslKey): gen_qsslkey_types.QSslKey =
   let tmp = gen_qsslkey_types.QSslKey(h: fcQSslKey_new(), owned: true)
   tmp
 proc create*(T: type gen_qsslkey_types.QSslKey,
-    encoded: seq[byte], algorithm: cint): gen_qsslkey_types.QSslKey =
+    encoded: openArray[byte], algorithm: cint): gen_qsslkey_types.QSslKey =
   let tmp = gen_qsslkey_types.QSslKey(h: fcQSslKey_new2(struct_miqt_string(data: if len(encoded) > 0: addr encoded[0] else: nil, len: csize_t(len(encoded))), cint(algorithm)), owned: true)
   tmp
 proc create*(T: type gen_qsslkey_types.QSslKey,
@@ -144,15 +144,15 @@ proc create*(T: type gen_qsslkey_types.QSslKey,
   let tmp = gen_qsslkey_types.QSslKey(h: fcQSslKey_new5(other.h), owned: true)
   tmp
 proc create*(T: type gen_qsslkey_types.QSslKey,
-    encoded: seq[byte], algorithm: cint, format: cint): gen_qsslkey_types.QSslKey =
+    encoded: openArray[byte], algorithm: cint, format: cint): gen_qsslkey_types.QSslKey =
   let tmp = gen_qsslkey_types.QSslKey(h: fcQSslKey_new6(struct_miqt_string(data: if len(encoded) > 0: addr encoded[0] else: nil, len: csize_t(len(encoded))), cint(algorithm), cint(format)), owned: true)
   tmp
 proc create*(T: type gen_qsslkey_types.QSslKey,
-    encoded: seq[byte], algorithm: cint, format: cint, typeVal: cint): gen_qsslkey_types.QSslKey =
+    encoded: openArray[byte], algorithm: cint, format: cint, typeVal: cint): gen_qsslkey_types.QSslKey =
   let tmp = gen_qsslkey_types.QSslKey(h: fcQSslKey_new7(struct_miqt_string(data: if len(encoded) > 0: addr encoded[0] else: nil, len: csize_t(len(encoded))), cint(algorithm), cint(format), cint(typeVal)), owned: true)
   tmp
 proc create*(T: type gen_qsslkey_types.QSslKey,
-    encoded: seq[byte], algorithm: cint, format: cint, typeVal: cint, passPhrase: seq[byte]): gen_qsslkey_types.QSslKey =
+    encoded: openArray[byte], algorithm: cint, format: cint, typeVal: cint, passPhrase: openArray[byte]): gen_qsslkey_types.QSslKey =
   let tmp = gen_qsslkey_types.QSslKey(h: fcQSslKey_new8(struct_miqt_string(data: if len(encoded) > 0: addr encoded[0] else: nil, len: csize_t(len(encoded))), cint(algorithm), cint(format), cint(typeVal), struct_miqt_string(data: if len(passPhrase) > 0: addr passPhrase[0] else: nil, len: csize_t(len(passPhrase)))), owned: true)
   tmp
 proc create*(T: type gen_qsslkey_types.QSslKey,
@@ -164,7 +164,7 @@ proc create*(T: type gen_qsslkey_types.QSslKey,
   let tmp = gen_qsslkey_types.QSslKey(h: fcQSslKey_new10(device.h, cint(algorithm), cint(format), cint(typeVal)), owned: true)
   tmp
 proc create*(T: type gen_qsslkey_types.QSslKey,
-    device: gen_qiodevice_types.QIODevice, algorithm: cint, format: cint, typeVal: cint, passPhrase: seq[byte]): gen_qsslkey_types.QSslKey =
+    device: gen_qiodevice_types.QIODevice, algorithm: cint, format: cint, typeVal: cint, passPhrase: openArray[byte]): gen_qsslkey_types.QSslKey =
   let tmp = gen_qsslkey_types.QSslKey(h: fcQSslKey_new11(device.h, cint(algorithm), cint(format), cint(typeVal), struct_miqt_string(data: if len(passPhrase) > 0: addr passPhrase[0] else: nil, len: csize_t(len(passPhrase)))), owned: true)
   tmp
 proc create*(T: type gen_qsslkey_types.QSslKey,

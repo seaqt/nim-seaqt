@@ -383,10 +383,10 @@ proc onprogressValueChanged*(self: gen_qfuturewatcher_types.QFutureWatcherBase, 
   GC_ref(tmp)
   fcQFutureWatcherBase_connect_progressValueChanged(self.h, cast[int](addr tmp[]), fcQFutureWatcherBase_slot_callback_progressValueChanged, fcQFutureWatcherBase_slot_callback_progressValueChanged_release)
 
-proc progressTextChanged*(self: gen_qfuturewatcher_types.QFutureWatcherBase, progressText: string): void =
+proc progressTextChanged*(self: gen_qfuturewatcher_types.QFutureWatcherBase, progressText: openArray[char]): void =
   fcQFutureWatcherBase_progressTextChanged(self.h, struct_miqt_string(data: if len(progressText) > 0: addr progressText[0] else: nil, len: csize_t(len(progressText))))
 
-type QFutureWatcherBaseprogressTextChangedSlot* = proc(progressText: string)
+type QFutureWatcherBaseprogressTextChangedSlot* = proc(progressText: openArray[char])
 proc fcQFutureWatcherBase_slot_callback_progressTextChanged(slot: int, progressText: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QFutureWatcherBaseprogressTextChangedSlot](cast[pointer](slot))
   let vprogressText_ms = progressText

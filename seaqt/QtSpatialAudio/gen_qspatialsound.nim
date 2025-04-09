@@ -810,6 +810,7 @@ proc create*(T: type gen_qspatialsound_types.QSpatialSound,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQSpatialSound_new(addr(cQSpatialSound_mvtbl), csize_t(sizeof(pointer)), engine.h)
   fcQSpatialSound_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qspatialsound_types.QSpatialSound): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQSpatialSound_staticMetaObject())

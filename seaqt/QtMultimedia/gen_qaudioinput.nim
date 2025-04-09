@@ -567,6 +567,7 @@ proc create*(T: type gen_qaudioinput_types.QAudioInput,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQAudioInput_new(addr(cQAudioInput_mvtbl), csize_t(sizeof(pointer)))
   fcQAudioInput_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qaudioinput_types.QAudioInput,
     deviceInfo: gen_qaudiodevice_types.QAudioDevice,
@@ -574,6 +575,7 @@ proc create*(T: type gen_qaudioinput_types.QAudioInput,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQAudioInput_new2(addr(cQAudioInput_mvtbl), csize_t(sizeof(pointer)), deviceInfo.h)
   fcQAudioInput_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qaudioinput_types.QAudioInput,
     parent: gen_qobject_types.QObject,
@@ -581,6 +583,7 @@ proc create*(T: type gen_qaudioinput_types.QAudioInput,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQAudioInput_new3(addr(cQAudioInput_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQAudioInput_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qaudioinput_types.QAudioInput,
     deviceInfo: gen_qaudiodevice_types.QAudioDevice, parent: gen_qobject_types.QObject,
@@ -588,6 +591,7 @@ proc create*(T: type gen_qaudioinput_types.QAudioInput,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQAudioInput_new4(addr(cQAudioInput_mvtbl), csize_t(sizeof(pointer)), deviceInfo.h, parent.h)
   fcQAudioInput_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qaudioinput_types.QAudioInput): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQAudioInput_staticMetaObject())

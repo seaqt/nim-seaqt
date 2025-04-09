@@ -350,6 +350,7 @@ proc create*(T: type gen_qgraphicssceneevent_types.QGraphicsSceneEvent,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQGraphicsSceneEvent_new(addr(cQGraphicsSceneEvent_mvtbl), csize_t(sizeof(pointer)), cint(typeVal))
   fcQGraphicsSceneEvent_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc pos*(self: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): gen_qpoint_types.QPointF =
   gen_qpoint_types.QPointF(h: fcQGraphicsSceneMouseEvent_pos(self.h), owned: true)
@@ -521,6 +522,7 @@ proc create*(T: type gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQGraphicsSceneMouseEvent_new(addr(cQGraphicsSceneMouseEvent_mvtbl), csize_t(sizeof(pointer)))
   fcQGraphicsSceneMouseEvent_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent,
     typeVal: cint,
@@ -528,6 +530,7 @@ proc create*(T: type gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQGraphicsSceneMouseEvent_new2(addr(cQGraphicsSceneMouseEvent_mvtbl), csize_t(sizeof(pointer)), cint(typeVal))
   fcQGraphicsSceneMouseEvent_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc pos*(self: gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent): gen_qpoint_types.QPointF =
   gen_qpoint_types.QPointF(h: fcQGraphicsSceneWheelEvent_pos(self.h), owned: true)
@@ -675,6 +678,7 @@ proc create*(T: type gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQGraphicsSceneWheelEvent_new(addr(cQGraphicsSceneWheelEvent_mvtbl), csize_t(sizeof(pointer)))
   fcQGraphicsSceneWheelEvent_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent,
     typeVal: cint,
@@ -682,6 +686,7 @@ proc create*(T: type gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQGraphicsSceneWheelEvent_new2(addr(cQGraphicsSceneWheelEvent_mvtbl), csize_t(sizeof(pointer)), cint(typeVal))
   fcQGraphicsSceneWheelEvent_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc pos*(self: gen_qgraphicssceneevent_types.QGraphicsSceneContextMenuEvent): gen_qpoint_types.QPointF =
   gen_qpoint_types.QPointF(h: fcQGraphicsSceneContextMenuEvent_pos(self.h), owned: true)
@@ -799,6 +804,7 @@ proc create*(T: type gen_qgraphicssceneevent_types.QGraphicsSceneContextMenuEven
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQGraphicsSceneContextMenuEvent_new(addr(cQGraphicsSceneContextMenuEvent_mvtbl), csize_t(sizeof(pointer)))
   fcQGraphicsSceneContextMenuEvent_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qgraphicssceneevent_types.QGraphicsSceneContextMenuEvent,
     typeVal: cint,
@@ -806,6 +812,7 @@ proc create*(T: type gen_qgraphicssceneevent_types.QGraphicsSceneContextMenuEven
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQGraphicsSceneContextMenuEvent_new2(addr(cQGraphicsSceneContextMenuEvent_mvtbl), csize_t(sizeof(pointer)), cint(typeVal))
   fcQGraphicsSceneContextMenuEvent_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc pos*(self: gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent): gen_qpoint_types.QPointF =
   gen_qpoint_types.QPointF(h: fcQGraphicsSceneHoverEvent_pos(self.h), owned: true)
@@ -935,6 +942,7 @@ proc create*(T: type gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQGraphicsSceneHoverEvent_new(addr(cQGraphicsSceneHoverEvent_mvtbl), csize_t(sizeof(pointer)))
   fcQGraphicsSceneHoverEvent_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent,
     typeVal: cint,
@@ -942,6 +950,7 @@ proc create*(T: type gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQGraphicsSceneHoverEvent_new2(addr(cQGraphicsSceneHoverEvent_mvtbl), csize_t(sizeof(pointer)), cint(typeVal))
   fcQGraphicsSceneHoverEvent_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc scenePos*(self: gen_qgraphicssceneevent_types.QGraphicsSceneHelpEvent): gen_qpoint_types.QPointF =
   gen_qpoint_types.QPointF(h: fcQGraphicsSceneHelpEvent_scenePos(self.h), owned: true)
@@ -1041,6 +1050,7 @@ proc create*(T: type gen_qgraphicssceneevent_types.QGraphicsSceneHelpEvent,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQGraphicsSceneHelpEvent_new(addr(cQGraphicsSceneHelpEvent_mvtbl), csize_t(sizeof(pointer)))
   fcQGraphicsSceneHelpEvent_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qgraphicssceneevent_types.QGraphicsSceneHelpEvent,
     typeVal: cint,
@@ -1048,6 +1058,7 @@ proc create*(T: type gen_qgraphicssceneevent_types.QGraphicsSceneHelpEvent,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQGraphicsSceneHelpEvent_new2(addr(cQGraphicsSceneHelpEvent_mvtbl), csize_t(sizeof(pointer)), cint(typeVal))
   fcQGraphicsSceneHelpEvent_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc pos*(self: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): gen_qpoint_types.QPointF =
   gen_qpoint_types.QPointF(h: fcQGraphicsSceneDragDropEvent_pos(self.h), owned: true)
@@ -1198,6 +1209,7 @@ proc create*(T: type gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQGraphicsSceneDragDropEvent_new(addr(cQGraphicsSceneDragDropEvent_mvtbl), csize_t(sizeof(pointer)))
   fcQGraphicsSceneDragDropEvent_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent,
     typeVal: cint,
@@ -1205,6 +1217,7 @@ proc create*(T: type gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQGraphicsSceneDragDropEvent_new2(addr(cQGraphicsSceneDragDropEvent_mvtbl), csize_t(sizeof(pointer)), cint(typeVal))
   fcQGraphicsSceneDragDropEvent_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc oldSize*(self: gen_qgraphicssceneevent_types.QGraphicsSceneResizeEvent): gen_qsize_types.QSizeF =
   gen_qsize_types.QSizeF(h: fcQGraphicsSceneResizeEvent_oldSize(self.h), owned: true)
@@ -1289,6 +1302,7 @@ proc create*(T: type gen_qgraphicssceneevent_types.QGraphicsSceneResizeEvent,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQGraphicsSceneResizeEvent_new(addr(cQGraphicsSceneResizeEvent_mvtbl), csize_t(sizeof(pointer)))
   fcQGraphicsSceneResizeEvent_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc oldPos*(self: gen_qgraphicssceneevent_types.QGraphicsSceneMoveEvent): gen_qpoint_types.QPointF =
   gen_qpoint_types.QPointF(h: fcQGraphicsSceneMoveEvent_oldPos(self.h), owned: true)
@@ -1373,4 +1387,5 @@ proc create*(T: type gen_qgraphicssceneevent_types.QGraphicsSceneMoveEvent,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQGraphicsSceneMoveEvent_new(addr(cQGraphicsSceneMoveEvent_mvtbl), csize_t(sizeof(pointer)))
   fcQGraphicsSceneMoveEvent_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 

@@ -58,6 +58,6 @@ proc keys*(_: type gen_qstylefactory_types.QStyleFactory): seq[string] =
   c_free(v_ma.data)
   vx_ret
 
-proc create*(_: type gen_qstylefactory_types.QStyleFactory, param1: string): gen_qstyle_types.QStyle =
+proc create*(_: type gen_qstylefactory_types.QStyleFactory, param1: openArray[char]): gen_qstyle_types.QStyle =
   gen_qstyle_types.QStyle(h: fcQStyleFactory_create(struct_miqt_string(data: if len(param1) > 0: addr param1[0] else: nil, len: csize_t(len(param1)))), owned: false)
 

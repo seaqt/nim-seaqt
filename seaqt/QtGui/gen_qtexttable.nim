@@ -542,6 +542,7 @@ proc create*(T: type gen_qtexttable_types.QTextTable,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQTextTable_new(addr(cQTextTable_mvtbl), csize_t(sizeof(pointer)), doc.h)
   fcQTextTable_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qtexttable_types.QTextTable): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQTextTable_staticMetaObject())

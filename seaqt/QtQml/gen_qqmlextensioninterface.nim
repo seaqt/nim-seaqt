@@ -117,6 +117,7 @@ proc create*(T: type gen_qqmlextensioninterface_types.QQmlTypesExtensionInterfac
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQQmlTypesExtensionInterface_new(addr(cQQmlTypesExtensionInterface_mvtbl), csize_t(sizeof(pointer)), param1.h)
   fcQQmlTypesExtensionInterface_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc initializeEngine*(self: gen_qqmlextensioninterface_types.QQmlExtensionInterface, engine: gen_qqmlengine_types.QQmlEngine, uri: cstring): void =
   fcQQmlExtensionInterface_initializeEngine(self.h, engine.h, uri)
@@ -190,6 +191,7 @@ proc create*(T: type gen_qqmlextensioninterface_types.QQmlExtensionInterface,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQQmlExtensionInterface_new(addr(cQQmlExtensionInterface_mvtbl), csize_t(sizeof(pointer)), param1.h)
   fcQQmlExtensionInterface_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc initializeEngine*(self: gen_qqmlextensioninterface_types.QQmlEngineExtensionInterface, engine: gen_qqmlengine_types.QQmlEngine, uri: cstring): void =
   fcQQmlEngineExtensionInterface_initializeEngine(self.h, engine.h, uri)

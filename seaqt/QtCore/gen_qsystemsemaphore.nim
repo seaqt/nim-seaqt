@@ -76,7 +76,7 @@ proc tr*(_: type gen_qsystemsemaphore_types.QSystemSemaphore, sourceText: cstrin
   c_free(v_ms.data)
   vx_ret
 
-proc setKey*(self: gen_qsystemsemaphore_types.QSystemSemaphore, key: string): void =
+proc setKey*(self: gen_qsystemsemaphore_types.QSystemSemaphore, key: openArray[char]): void =
   fcQSystemSemaphore_setKey(self.h, struct_miqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key))))
 
 proc key*(self: gen_qsystemsemaphore_types.QSystemSemaphore): string =
@@ -112,24 +112,24 @@ proc tr*(_: type gen_qsystemsemaphore_types.QSystemSemaphore, sourceText: cstrin
   c_free(v_ms.data)
   vx_ret
 
-proc setKey*(self: gen_qsystemsemaphore_types.QSystemSemaphore, key: string, initialValue: cint): void =
+proc setKey*(self: gen_qsystemsemaphore_types.QSystemSemaphore, key: openArray[char], initialValue: cint): void =
   fcQSystemSemaphore_setKey2(self.h, struct_miqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key))), initialValue)
 
-proc setKey*(self: gen_qsystemsemaphore_types.QSystemSemaphore, key: string, initialValue: cint, mode: cint): void =
+proc setKey*(self: gen_qsystemsemaphore_types.QSystemSemaphore, key: openArray[char], initialValue: cint, mode: cint): void =
   fcQSystemSemaphore_setKey3(self.h, struct_miqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key))), initialValue, cint(mode))
 
 proc release*(self: gen_qsystemsemaphore_types.QSystemSemaphore, n: cint): bool =
   fcQSystemSemaphore_release1(self.h, n)
 
 proc create*(T: type gen_qsystemsemaphore_types.QSystemSemaphore,
-    key: string): gen_qsystemsemaphore_types.QSystemSemaphore =
+    key: openArray[char]): gen_qsystemsemaphore_types.QSystemSemaphore =
   let tmp = gen_qsystemsemaphore_types.QSystemSemaphore(h: fcQSystemSemaphore_new(struct_miqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key)))), owned: true)
   tmp
 proc create*(T: type gen_qsystemsemaphore_types.QSystemSemaphore,
-    key: string, initialValue: cint): gen_qsystemsemaphore_types.QSystemSemaphore =
+    key: openArray[char], initialValue: cint): gen_qsystemsemaphore_types.QSystemSemaphore =
   let tmp = gen_qsystemsemaphore_types.QSystemSemaphore(h: fcQSystemSemaphore_new2(struct_miqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key))), initialValue), owned: true)
   tmp
 proc create*(T: type gen_qsystemsemaphore_types.QSystemSemaphore,
-    key: string, initialValue: cint, mode: cint): gen_qsystemsemaphore_types.QSystemSemaphore =
+    key: openArray[char], initialValue: cint, mode: cint): gen_qsystemsemaphore_types.QSystemSemaphore =
   let tmp = gen_qsystemsemaphore_types.QSystemSemaphore(h: fcQSystemSemaphore_new3(struct_miqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key))), initialValue, cint(mode)), owned: true)
   tmp

@@ -347,7 +347,7 @@ proc create*(T: type gen_qbitmap_types.QBitmap,
   fcQBitmap_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qbitmap_types.QBitmap,
-    fileName: string,
+    fileName: openArray[char],
     vtbl: ref QBitmapVTable = nil): gen_qbitmap_types.QBitmap =
   let vtbl = if vtbl == nil: new QBitmapVTable else: vtbl
   GC_ref(vtbl)
@@ -393,7 +393,7 @@ proc create*(T: type gen_qbitmap_types.QBitmap,
   fcQBitmap_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qbitmap_types.QBitmap,
-    fileName: string, format: cstring,
+    fileName: openArray[char], format: cstring,
     vtbl: ref QBitmapVTable = nil): gen_qbitmap_types.QBitmap =
   let vtbl = if vtbl == nil: new QBitmapVTable else: vtbl
   GC_ref(vtbl)
@@ -433,6 +433,7 @@ proc create*(T: type gen_qbitmap_types.QBitmap,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQBitmap_new(addr(cQBitmap_mvtbl), csize_t(sizeof(pointer)))
   fcQBitmap_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qbitmap_types.QBitmap,
     param1: gen_qpixmap_types.QPixmap,
@@ -440,6 +441,7 @@ proc create*(T: type gen_qbitmap_types.QBitmap,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQBitmap_new2(addr(cQBitmap_mvtbl), csize_t(sizeof(pointer)), param1.h)
   fcQBitmap_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qbitmap_types.QBitmap,
     w: cint, h: cint,
@@ -447,6 +449,7 @@ proc create*(T: type gen_qbitmap_types.QBitmap,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQBitmap_new3(addr(cQBitmap_mvtbl), csize_t(sizeof(pointer)), w, h)
   fcQBitmap_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qbitmap_types.QBitmap,
     param1: gen_qsize_types.QSize,
@@ -454,13 +457,15 @@ proc create*(T: type gen_qbitmap_types.QBitmap,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQBitmap_new4(addr(cQBitmap_mvtbl), csize_t(sizeof(pointer)), param1.h)
   fcQBitmap_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qbitmap_types.QBitmap,
-    fileName: string,
+    fileName: openArray[char],
     inst: VirtualQBitmap) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQBitmap_new5(addr(cQBitmap_mvtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))))
   fcQBitmap_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qbitmap_types.QBitmap,
     param1: gen_qbitmap_types.QBitmap,
@@ -468,11 +473,13 @@ proc create*(T: type gen_qbitmap_types.QBitmap,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQBitmap_new6(addr(cQBitmap_mvtbl), csize_t(sizeof(pointer)), param1.h)
   fcQBitmap_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qbitmap_types.QBitmap,
-    fileName: string, format: cstring,
+    fileName: openArray[char], format: cstring,
     inst: VirtualQBitmap) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQBitmap_new7(addr(cQBitmap_mvtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))), format)
   fcQBitmap_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 

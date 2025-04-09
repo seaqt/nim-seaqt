@@ -521,6 +521,7 @@ proc create*(T: type gen_qparallelanimationgroup_types.QParallelAnimationGroup,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQParallelAnimationGroup_new(addr(cQParallelAnimationGroup_mvtbl), csize_t(sizeof(pointer)))
   fcQParallelAnimationGroup_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qparallelanimationgroup_types.QParallelAnimationGroup,
     parent: gen_qobject_types.QObject,
@@ -528,6 +529,7 @@ proc create*(T: type gen_qparallelanimationgroup_types.QParallelAnimationGroup,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQParallelAnimationGroup_new2(addr(cQParallelAnimationGroup_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQParallelAnimationGroup_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qparallelanimationgroup_types.QParallelAnimationGroup): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQParallelAnimationGroup_staticMetaObject())

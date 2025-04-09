@@ -147,7 +147,7 @@ proc writingSystems*(_: type gen_qfontdatabase_types.QFontDatabase): seq[cint] =
   c_free(v_ma.data)
   vx_ret
 
-proc writingSystems*(_: type gen_qfontdatabase_types.QFontDatabase, family: string): seq[cint] =
+proc writingSystems*(_: type gen_qfontdatabase_types.QFontDatabase, family: openArray[char]): seq[cint] =
   var v_ma = fcQFontDatabase_writingSystemsWithFamily(struct_miqt_string(data: if len(family) > 0: addr family[0] else: nil, len: csize_t(len(family))))
   var vx_ret = newSeq[cint](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[cint]](v_ma.data)
@@ -168,7 +168,7 @@ proc families*(_: type gen_qfontdatabase_types.QFontDatabase): seq[string] =
   c_free(v_ma.data)
   vx_ret
 
-proc styles*(_: type gen_qfontdatabase_types.QFontDatabase, family: string): seq[string] =
+proc styles*(_: type gen_qfontdatabase_types.QFontDatabase, family: openArray[char]): seq[string] =
   var v_ma = fcQFontDatabase_styles(struct_miqt_string(data: if len(family) > 0: addr family[0] else: nil, len: csize_t(len(family))))
   var vx_ret = newSeq[string](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
@@ -180,7 +180,7 @@ proc styles*(_: type gen_qfontdatabase_types.QFontDatabase, family: string): seq
   c_free(v_ma.data)
   vx_ret
 
-proc pointSizes*(_: type gen_qfontdatabase_types.QFontDatabase, family: string): seq[cint] =
+proc pointSizes*(_: type gen_qfontdatabase_types.QFontDatabase, family: openArray[char]): seq[cint] =
   var v_ma = fcQFontDatabase_pointSizes(struct_miqt_string(data: if len(family) > 0: addr family[0] else: nil, len: csize_t(len(family))))
   var vx_ret = newSeq[cint](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[cint]](v_ma.data)
@@ -189,7 +189,7 @@ proc pointSizes*(_: type gen_qfontdatabase_types.QFontDatabase, family: string):
   c_free(v_ma.data)
   vx_ret
 
-proc smoothSizes*(_: type gen_qfontdatabase_types.QFontDatabase, family: string, style: string): seq[cint] =
+proc smoothSizes*(_: type gen_qfontdatabase_types.QFontDatabase, family: openArray[char], style: openArray[char]): seq[cint] =
   var v_ma = fcQFontDatabase_smoothSizes(struct_miqt_string(data: if len(family) > 0: addr family[0] else: nil, len: csize_t(len(family))), struct_miqt_string(data: if len(style) > 0: addr style[0] else: nil, len: csize_t(len(style))))
   var vx_ret = newSeq[cint](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[cint]](v_ma.data)
@@ -210,34 +210,34 @@ proc styleString*(_: type gen_qfontdatabase_types.QFontDatabase, fontInfo: gen_q
   c_free(v_ms.data)
   vx_ret
 
-proc font*(_: type gen_qfontdatabase_types.QFontDatabase, family: string, style: string, pointSize: cint): gen_qfont_types.QFont =
+proc font*(_: type gen_qfontdatabase_types.QFontDatabase, family: openArray[char], style: openArray[char], pointSize: cint): gen_qfont_types.QFont =
   gen_qfont_types.QFont(h: fcQFontDatabase_font(struct_miqt_string(data: if len(family) > 0: addr family[0] else: nil, len: csize_t(len(family))), struct_miqt_string(data: if len(style) > 0: addr style[0] else: nil, len: csize_t(len(style))), pointSize), owned: true)
 
-proc isBitmapScalable*(_: type gen_qfontdatabase_types.QFontDatabase, family: string): bool =
+proc isBitmapScalable*(_: type gen_qfontdatabase_types.QFontDatabase, family: openArray[char]): bool =
   fcQFontDatabase_isBitmapScalable(struct_miqt_string(data: if len(family) > 0: addr family[0] else: nil, len: csize_t(len(family))))
 
-proc isSmoothlyScalable*(_: type gen_qfontdatabase_types.QFontDatabase, family: string): bool =
+proc isSmoothlyScalable*(_: type gen_qfontdatabase_types.QFontDatabase, family: openArray[char]): bool =
   fcQFontDatabase_isSmoothlyScalable(struct_miqt_string(data: if len(family) > 0: addr family[0] else: nil, len: csize_t(len(family))))
 
-proc isScalable*(_: type gen_qfontdatabase_types.QFontDatabase, family: string): bool =
+proc isScalable*(_: type gen_qfontdatabase_types.QFontDatabase, family: openArray[char]): bool =
   fcQFontDatabase_isScalable(struct_miqt_string(data: if len(family) > 0: addr family[0] else: nil, len: csize_t(len(family))))
 
-proc isFixedPitch*(_: type gen_qfontdatabase_types.QFontDatabase, family: string): bool =
+proc isFixedPitch*(_: type gen_qfontdatabase_types.QFontDatabase, family: openArray[char]): bool =
   fcQFontDatabase_isFixedPitch(struct_miqt_string(data: if len(family) > 0: addr family[0] else: nil, len: csize_t(len(family))))
 
-proc italic*(_: type gen_qfontdatabase_types.QFontDatabase, family: string, style: string): bool =
+proc italic*(_: type gen_qfontdatabase_types.QFontDatabase, family: openArray[char], style: openArray[char]): bool =
   fcQFontDatabase_italic(struct_miqt_string(data: if len(family) > 0: addr family[0] else: nil, len: csize_t(len(family))), struct_miqt_string(data: if len(style) > 0: addr style[0] else: nil, len: csize_t(len(style))))
 
-proc bold*(_: type gen_qfontdatabase_types.QFontDatabase, family: string, style: string): bool =
+proc bold*(_: type gen_qfontdatabase_types.QFontDatabase, family: openArray[char], style: openArray[char]): bool =
   fcQFontDatabase_bold(struct_miqt_string(data: if len(family) > 0: addr family[0] else: nil, len: csize_t(len(family))), struct_miqt_string(data: if len(style) > 0: addr style[0] else: nil, len: csize_t(len(style))))
 
-proc weight*(_: type gen_qfontdatabase_types.QFontDatabase, family: string, style: string): cint =
+proc weight*(_: type gen_qfontdatabase_types.QFontDatabase, family: openArray[char], style: openArray[char]): cint =
   fcQFontDatabase_weight(struct_miqt_string(data: if len(family) > 0: addr family[0] else: nil, len: csize_t(len(family))), struct_miqt_string(data: if len(style) > 0: addr style[0] else: nil, len: csize_t(len(style))))
 
-proc hasFamily*(_: type gen_qfontdatabase_types.QFontDatabase, family: string): bool =
+proc hasFamily*(_: type gen_qfontdatabase_types.QFontDatabase, family: openArray[char]): bool =
   fcQFontDatabase_hasFamily(struct_miqt_string(data: if len(family) > 0: addr family[0] else: nil, len: csize_t(len(family))))
 
-proc isPrivateFamily*(_: type gen_qfontdatabase_types.QFontDatabase, family: string): bool =
+proc isPrivateFamily*(_: type gen_qfontdatabase_types.QFontDatabase, family: openArray[char]): bool =
   fcQFontDatabase_isPrivateFamily(struct_miqt_string(data: if len(family) > 0: addr family[0] else: nil, len: csize_t(len(family))))
 
 proc writingSystemName*(_: type gen_qfontdatabase_types.QFontDatabase, writingSystem: cint): string =
@@ -252,10 +252,10 @@ proc writingSystemSample*(_: type gen_qfontdatabase_types.QFontDatabase, writing
   c_free(v_ms.data)
   vx_ret
 
-proc addApplicationFont*(_: type gen_qfontdatabase_types.QFontDatabase, fileName: string): cint =
+proc addApplicationFont*(_: type gen_qfontdatabase_types.QFontDatabase, fileName: openArray[char]): cint =
   fcQFontDatabase_addApplicationFont(struct_miqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))))
 
-proc addApplicationFontFromData*(_: type gen_qfontdatabase_types.QFontDatabase, fontData: seq[byte]): cint =
+proc addApplicationFontFromData*(_: type gen_qfontdatabase_types.QFontDatabase, fontData: openArray[byte]): cint =
   fcQFontDatabase_addApplicationFontFromData(struct_miqt_string(data: if len(fontData) > 0: addr fontData[0] else: nil, len: csize_t(len(fontData))))
 
 proc applicationFontFamilies*(_: type gen_qfontdatabase_types.QFontDatabase, id: cint): seq[string] =
@@ -291,7 +291,7 @@ proc families*(_: type gen_qfontdatabase_types.QFontDatabase, writingSystem: cin
   c_free(v_ma.data)
   vx_ret
 
-proc pointSizes*(_: type gen_qfontdatabase_types.QFontDatabase, family: string, style: string): seq[cint] =
+proc pointSizes*(_: type gen_qfontdatabase_types.QFontDatabase, family: openArray[char], style: openArray[char]): seq[cint] =
   var v_ma = fcQFontDatabase_pointSizes2(struct_miqt_string(data: if len(family) > 0: addr family[0] else: nil, len: csize_t(len(family))), struct_miqt_string(data: if len(style) > 0: addr style[0] else: nil, len: csize_t(len(style))))
   var vx_ret = newSeq[cint](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[cint]](v_ma.data)
@@ -300,16 +300,16 @@ proc pointSizes*(_: type gen_qfontdatabase_types.QFontDatabase, family: string, 
   c_free(v_ma.data)
   vx_ret
 
-proc isBitmapScalable*(_: type gen_qfontdatabase_types.QFontDatabase, family: string, style: string): bool =
+proc isBitmapScalable*(_: type gen_qfontdatabase_types.QFontDatabase, family: openArray[char], style: openArray[char]): bool =
   fcQFontDatabase_isBitmapScalable2(struct_miqt_string(data: if len(family) > 0: addr family[0] else: nil, len: csize_t(len(family))), struct_miqt_string(data: if len(style) > 0: addr style[0] else: nil, len: csize_t(len(style))))
 
-proc isSmoothlyScalable*(_: type gen_qfontdatabase_types.QFontDatabase, family: string, style: string): bool =
+proc isSmoothlyScalable*(_: type gen_qfontdatabase_types.QFontDatabase, family: openArray[char], style: openArray[char]): bool =
   fcQFontDatabase_isSmoothlyScalable2(struct_miqt_string(data: if len(family) > 0: addr family[0] else: nil, len: csize_t(len(family))), struct_miqt_string(data: if len(style) > 0: addr style[0] else: nil, len: csize_t(len(style))))
 
-proc isScalable*(_: type gen_qfontdatabase_types.QFontDatabase, family: string, style: string): bool =
+proc isScalable*(_: type gen_qfontdatabase_types.QFontDatabase, family: openArray[char], style: openArray[char]): bool =
   fcQFontDatabase_isScalable2(struct_miqt_string(data: if len(family) > 0: addr family[0] else: nil, len: csize_t(len(family))), struct_miqt_string(data: if len(style) > 0: addr style[0] else: nil, len: csize_t(len(style))))
 
-proc isFixedPitch*(_: type gen_qfontdatabase_types.QFontDatabase, family: string, style: string): bool =
+proc isFixedPitch*(_: type gen_qfontdatabase_types.QFontDatabase, family: openArray[char], style: openArray[char]): bool =
   fcQFontDatabase_isFixedPitch2(struct_miqt_string(data: if len(family) > 0: addr family[0] else: nil, len: csize_t(len(family))), struct_miqt_string(data: if len(style) > 0: addr style[0] else: nil, len: csize_t(len(style))))
 
 proc create*(T: type gen_qfontdatabase_types.QFontDatabase): gen_qfontdatabase_types.QFontDatabase =

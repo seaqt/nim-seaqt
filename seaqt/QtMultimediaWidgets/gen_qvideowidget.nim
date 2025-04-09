@@ -319,7 +319,7 @@ type QVideoWidgetdragEnterEventProc* = proc(self: QVideoWidget, event: gen_qeven
 type QVideoWidgetdragMoveEventProc* = proc(self: QVideoWidget, event: gen_qevent_types.QDragMoveEvent): void {.raises: [], gcsafe.}
 type QVideoWidgetdragLeaveEventProc* = proc(self: QVideoWidget, event: gen_qevent_types.QDragLeaveEvent): void {.raises: [], gcsafe.}
 type QVideoWidgetdropEventProc* = proc(self: QVideoWidget, event: gen_qevent_types.QDropEvent): void {.raises: [], gcsafe.}
-type QVideoWidgetnativeEventProc* = proc(self: QVideoWidget, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
+type QVideoWidgetnativeEventProc* = proc(self: QVideoWidget, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
 type QVideoWidgetchangeEventProc* = proc(self: QVideoWidget, param1: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QVideoWidgetmetricProc* = proc(self: QVideoWidget, param1: cint): cint {.raises: [], gcsafe.}
 type QVideoWidgetinitPainterProc* = proc(self: QVideoWidget, painter: gen_qpainter_types.QPainter): void {.raises: [], gcsafe.}
@@ -719,7 +719,7 @@ proc fcQVideoWidget_vtable_callback_dropEvent(self: pointer, event: pointer): vo
   let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
   vtbl[].dropEvent(self, slotval1)
 
-proc QVideoWidgetnativeEvent*(self: gen_qvideowidget_types.QVideoWidget, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool =
+proc QVideoWidgetnativeEvent*(self: gen_qvideowidget_types.QVideoWidget, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool =
   fcQVideoWidget_virtualbase_nativeEvent(self.h, struct_miqt_string(data: if len(eventType) > 0: addr eventType[0] else: nil, len: csize_t(len(eventType))), message, resultVal)
 
 proc fcQVideoWidget_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
@@ -1128,7 +1128,7 @@ proc fcQVideoWidget_method_callback_dropEvent(self: pointer, event: pointer): vo
   let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
   inst.dropEvent(slotval1)
 
-method nativeEvent*(self: VirtualQVideoWidget, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
+method nativeEvent*(self: VirtualQVideoWidget, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
   QVideoWidgetnativeEvent(self[], eventType, message, resultVal)
 proc fcQVideoWidget_method_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
   let inst = cast[VirtualQVideoWidget](fcQVideoWidget_vdata(self)[])
@@ -1556,12 +1556,14 @@ proc create*(T: type gen_qvideowidget_types.QVideoWidget,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQVideoWidget_new(addr(cQVideoWidget_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQVideoWidget_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qvideowidget_types.QVideoWidget,
     inst: VirtualQVideoWidget) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQVideoWidget_new2(addr(cQVideoWidget_mvtbl), csize_t(sizeof(pointer)))
   fcQVideoWidget_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qvideowidget_types.QVideoWidget): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQVideoWidget_staticMetaObject())

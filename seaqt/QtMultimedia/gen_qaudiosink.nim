@@ -637,6 +637,7 @@ proc create*(T: type gen_qaudiosink_types.QAudioSink,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQAudioSink_new(addr(cQAudioSink_mvtbl), csize_t(sizeof(pointer)))
   fcQAudioSink_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qaudiosink_types.QAudioSink,
     audioDeviceInfo: gen_qaudiodevice_types.QAudioDevice,
@@ -644,6 +645,7 @@ proc create*(T: type gen_qaudiosink_types.QAudioSink,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQAudioSink_new2(addr(cQAudioSink_mvtbl), csize_t(sizeof(pointer)), audioDeviceInfo.h)
   fcQAudioSink_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qaudiosink_types.QAudioSink,
     format: gen_qaudioformat_types.QAudioFormat,
@@ -651,6 +653,7 @@ proc create*(T: type gen_qaudiosink_types.QAudioSink,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQAudioSink_new3(addr(cQAudioSink_mvtbl), csize_t(sizeof(pointer)), format.h)
   fcQAudioSink_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qaudiosink_types.QAudioSink,
     format: gen_qaudioformat_types.QAudioFormat, parent: gen_qobject_types.QObject,
@@ -658,6 +661,7 @@ proc create*(T: type gen_qaudiosink_types.QAudioSink,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQAudioSink_new4(addr(cQAudioSink_mvtbl), csize_t(sizeof(pointer)), format.h, parent.h)
   fcQAudioSink_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qaudiosink_types.QAudioSink,
     audioDeviceInfo: gen_qaudiodevice_types.QAudioDevice, format: gen_qaudioformat_types.QAudioFormat,
@@ -665,6 +669,7 @@ proc create*(T: type gen_qaudiosink_types.QAudioSink,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQAudioSink_new5(addr(cQAudioSink_mvtbl), csize_t(sizeof(pointer)), audioDeviceInfo.h, format.h)
   fcQAudioSink_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qaudiosink_types.QAudioSink,
     audioDeviceInfo: gen_qaudiodevice_types.QAudioDevice, format: gen_qaudioformat_types.QAudioFormat, parent: gen_qobject_types.QObject,
@@ -672,6 +677,7 @@ proc create*(T: type gen_qaudiosink_types.QAudioSink,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQAudioSink_new6(addr(cQAudioSink_mvtbl), csize_t(sizeof(pointer)), audioDeviceInfo.h, format.h, parent.h)
   fcQAudioSink_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qaudiosink_types.QAudioSink): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQAudioSink_staticMetaObject())

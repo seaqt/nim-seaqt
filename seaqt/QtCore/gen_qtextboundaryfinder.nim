@@ -125,7 +125,7 @@ proc create*(T: type gen_qtextboundaryfinder_types.QTextBoundaryFinder,
   let tmp = gen_qtextboundaryfinder_types.QTextBoundaryFinder(h: fcQTextBoundaryFinder_new2(other.h), owned: true)
   tmp
 proc create*(T: type gen_qtextboundaryfinder_types.QTextBoundaryFinder,
-    typeVal: cint, string: string): gen_qtextboundaryfinder_types.QTextBoundaryFinder =
+    typeVal: cint, string: openArray[char]): gen_qtextboundaryfinder_types.QTextBoundaryFinder =
   let tmp = gen_qtextboundaryfinder_types.QTextBoundaryFinder(h: fcQTextBoundaryFinder_new3(cint(typeVal), struct_miqt_string(data: if len(string) > 0: addr string[0] else: nil, len: csize_t(len(string)))), owned: true)
   tmp
 proc create*(T: type gen_qtextboundaryfinder_types.QTextBoundaryFinder,

@@ -142,7 +142,7 @@ proc tr*(_: type gen_qsharedmemory_types.QSharedMemory, s: cstring): string =
   c_free(v_ms.data)
   vx_ret
 
-proc setKey*(self: gen_qsharedmemory_types.QSharedMemory, key: string): void =
+proc setKey*(self: gen_qsharedmemory_types.QSharedMemory, key: openArray[char]): void =
   fcQSharedMemory_setKey(self.h, struct_miqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key))))
 
 proc key*(self: gen_qsharedmemory_types.QSharedMemory): string =
@@ -151,7 +151,7 @@ proc key*(self: gen_qsharedmemory_types.QSharedMemory): string =
   c_free(v_ms.data)
   vx_ret
 
-proc setNativeKey*(self: gen_qsharedmemory_types.QSharedMemory, key: string): void =
+proc setNativeKey*(self: gen_qsharedmemory_types.QSharedMemory, key: openArray[char]): void =
   fcQSharedMemory_setNativeKey(self.h, struct_miqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key))))
 
 proc nativeKey*(self: gen_qsharedmemory_types.QSharedMemory): string =
@@ -461,7 +461,7 @@ proc create*(T: type gen_qsharedmemory_types.QSharedMemory,
   fcQSharedMemory_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qsharedmemory_types.QSharedMemory,
-    key: string,
+    key: openArray[char],
     vtbl: ref QSharedMemoryVTable = nil): gen_qsharedmemory_types.QSharedMemory =
   let vtbl = if vtbl == nil: new QSharedMemoryVTable else: vtbl
   GC_ref(vtbl)
@@ -523,7 +523,7 @@ proc create*(T: type gen_qsharedmemory_types.QSharedMemory,
   fcQSharedMemory_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qsharedmemory_types.QSharedMemory,
-    key: string, parent: gen_qobject_types.QObject,
+    key: openArray[char], parent: gen_qobject_types.QObject,
     vtbl: ref QSharedMemoryVTable = nil): gen_qsharedmemory_types.QSharedMemory =
   let vtbl = if vtbl == nil: new QSharedMemoryVTable else: vtbl
   GC_ref(vtbl)
@@ -575,13 +575,15 @@ proc create*(T: type gen_qsharedmemory_types.QSharedMemory,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQSharedMemory_new(addr(cQSharedMemory_mvtbl), csize_t(sizeof(pointer)))
   fcQSharedMemory_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qsharedmemory_types.QSharedMemory,
-    key: string,
+    key: openArray[char],
     inst: VirtualQSharedMemory) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQSharedMemory_new2(addr(cQSharedMemory_mvtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key))))
   fcQSharedMemory_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qsharedmemory_types.QSharedMemory,
     parent: gen_qobject_types.QObject,
@@ -589,13 +591,15 @@ proc create*(T: type gen_qsharedmemory_types.QSharedMemory,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQSharedMemory_new3(addr(cQSharedMemory_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQSharedMemory_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qsharedmemory_types.QSharedMemory,
-    key: string, parent: gen_qobject_types.QObject,
+    key: openArray[char], parent: gen_qobject_types.QObject,
     inst: VirtualQSharedMemory) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQSharedMemory_new4(addr(cQSharedMemory_mvtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key))), parent.h)
   fcQSharedMemory_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qsharedmemory_types.QSharedMemory): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQSharedMemory_staticMetaObject())

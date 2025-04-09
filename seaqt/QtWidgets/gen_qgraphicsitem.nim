@@ -1684,7 +1684,7 @@ proc toolTip*(self: gen_qgraphicsitem_types.QGraphicsItem): string =
   c_free(v_ms.data)
   vx_ret
 
-proc setToolTip*(self: gen_qgraphicsitem_types.QGraphicsItem, toolTip: string): void =
+proc setToolTip*(self: gen_qgraphicsitem_types.QGraphicsItem, toolTip: openArray[char]): void =
   fcQGraphicsItem_setToolTip(self.h, struct_miqt_string(data: if len(toolTip) > 0: addr toolTip[0] else: nil, len: csize_t(len(toolTip))))
 
 proc cursor*(self: gen_qgraphicsitem_types.QGraphicsItem): gen_qcursor_types.QCursor =
@@ -1888,7 +1888,7 @@ proc transformations*(self: gen_qgraphicsitem_types.QGraphicsItem): seq[gen_qgra
   c_free(v_ma.data)
   vx_ret
 
-proc setTransformations*(self: gen_qgraphicsitem_types.QGraphicsItem, transformations: seq[gen_qgraphicstransform_types.QGraphicsTransform]): void =
+proc setTransformations*(self: gen_qgraphicsitem_types.QGraphicsItem, transformations: openArray[gen_qgraphicstransform_types.QGraphicsTransform]): void =
   var transformations_CArray = newSeq[pointer](len(transformations))
   for i in 0..<len(transformations):
     transformations_CArray[i] = transformations[i].h
@@ -3053,6 +3053,7 @@ proc create*(T: type gen_qgraphicsitem_types.QGraphicsItem,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQGraphicsItem_new(addr(cQGraphicsItem_mvtbl), csize_t(sizeof(pointer)))
   fcQGraphicsItem_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qgraphicsitem_types.QGraphicsItem,
     parent: gen_qgraphicsitem_types.QGraphicsItem,
@@ -3060,6 +3061,7 @@ proc create*(T: type gen_qgraphicsitem_types.QGraphicsItem,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQGraphicsItem_new2(addr(cQGraphicsItem_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQGraphicsItem_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc metaObject*(self: gen_qgraphicsitem_types.QGraphicsObject): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQGraphicsObject_metaObject(self.h), owned: false)
@@ -4472,6 +4474,7 @@ proc create*(T: type gen_qgraphicsitem_types.QGraphicsObject,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQGraphicsObject_new(addr(cQGraphicsObject_mvtbl), csize_t(sizeof(pointer)))
   fcQGraphicsObject_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qgraphicsitem_types.QGraphicsObject,
     parent: gen_qgraphicsitem_types.QGraphicsItem,
@@ -4479,6 +4482,7 @@ proc create*(T: type gen_qgraphicsitem_types.QGraphicsObject,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQGraphicsObject_new2(addr(cQGraphicsObject_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQGraphicsObject_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qgraphicsitem_types.QGraphicsObject): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQGraphicsObject_staticMetaObject())
@@ -5400,6 +5404,7 @@ proc create*(T: type gen_qgraphicsitem_types.QAbstractGraphicsShapeItem,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQAbstractGraphicsShapeItem_new(addr(cQAbstractGraphicsShapeItem_mvtbl), csize_t(sizeof(pointer)))
   fcQAbstractGraphicsShapeItem_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qgraphicsitem_types.QAbstractGraphicsShapeItem,
     parent: gen_qgraphicsitem_types.QGraphicsItem,
@@ -5407,6 +5412,7 @@ proc create*(T: type gen_qgraphicsitem_types.QAbstractGraphicsShapeItem,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQAbstractGraphicsShapeItem_new2(addr(cQAbstractGraphicsShapeItem_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQAbstractGraphicsShapeItem_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc path*(self: gen_qgraphicsitem_types.QGraphicsPathItem): gen_qpainterpath_types.QPainterPath =
   gen_qpainterpath_types.QPainterPath(h: fcQGraphicsPathItem_path(self.h), owned: true)
@@ -6503,6 +6509,7 @@ proc create*(T: type gen_qgraphicsitem_types.QGraphicsPathItem,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQGraphicsPathItem_new(addr(cQGraphicsPathItem_mvtbl), csize_t(sizeof(pointer)))
   fcQGraphicsPathItem_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qgraphicsitem_types.QGraphicsPathItem,
     path: gen_qpainterpath_types.QPainterPath,
@@ -6510,6 +6517,7 @@ proc create*(T: type gen_qgraphicsitem_types.QGraphicsPathItem,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQGraphicsPathItem_new2(addr(cQGraphicsPathItem_mvtbl), csize_t(sizeof(pointer)), path.h)
   fcQGraphicsPathItem_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qgraphicsitem_types.QGraphicsPathItem,
     parent: gen_qgraphicsitem_types.QGraphicsItem,
@@ -6517,6 +6525,7 @@ proc create*(T: type gen_qgraphicsitem_types.QGraphicsPathItem,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQGraphicsPathItem_new3(addr(cQGraphicsPathItem_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQGraphicsPathItem_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qgraphicsitem_types.QGraphicsPathItem,
     path: gen_qpainterpath_types.QPainterPath, parent: gen_qgraphicsitem_types.QGraphicsItem,
@@ -6524,6 +6533,7 @@ proc create*(T: type gen_qgraphicsitem_types.QGraphicsPathItem,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQGraphicsPathItem_new4(addr(cQGraphicsPathItem_mvtbl), csize_t(sizeof(pointer)), path.h, parent.h)
   fcQGraphicsPathItem_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc rect*(self: gen_qgraphicsitem_types.QGraphicsRectItem): gen_qrect_types.QRectF =
   gen_qrect_types.QRectF(h: fcQGraphicsRectItem_rect(self.h), owned: true)
@@ -7785,6 +7795,7 @@ proc create*(T: type gen_qgraphicsitem_types.QGraphicsRectItem,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQGraphicsRectItem_new(addr(cQGraphicsRectItem_mvtbl), csize_t(sizeof(pointer)))
   fcQGraphicsRectItem_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qgraphicsitem_types.QGraphicsRectItem,
     rect: gen_qrect_types.QRectF,
@@ -7792,6 +7803,7 @@ proc create*(T: type gen_qgraphicsitem_types.QGraphicsRectItem,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQGraphicsRectItem_new2(addr(cQGraphicsRectItem_mvtbl), csize_t(sizeof(pointer)), rect.h)
   fcQGraphicsRectItem_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qgraphicsitem_types.QGraphicsRectItem,
     x: float64, y: float64, w: float64, h: float64,
@@ -7799,6 +7811,7 @@ proc create*(T: type gen_qgraphicsitem_types.QGraphicsRectItem,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQGraphicsRectItem_new3(addr(cQGraphicsRectItem_mvtbl), csize_t(sizeof(pointer)), x, y, w, h)
   fcQGraphicsRectItem_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qgraphicsitem_types.QGraphicsRectItem,
     parent: gen_qgraphicsitem_types.QGraphicsItem,
@@ -7806,6 +7819,7 @@ proc create*(T: type gen_qgraphicsitem_types.QGraphicsRectItem,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQGraphicsRectItem_new4(addr(cQGraphicsRectItem_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQGraphicsRectItem_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qgraphicsitem_types.QGraphicsRectItem,
     rect: gen_qrect_types.QRectF, parent: gen_qgraphicsitem_types.QGraphicsItem,
@@ -7813,6 +7827,7 @@ proc create*(T: type gen_qgraphicsitem_types.QGraphicsRectItem,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQGraphicsRectItem_new5(addr(cQGraphicsRectItem_mvtbl), csize_t(sizeof(pointer)), rect.h, parent.h)
   fcQGraphicsRectItem_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qgraphicsitem_types.QGraphicsRectItem,
     x: float64, y: float64, w: float64, h: float64, parent: gen_qgraphicsitem_types.QGraphicsItem,
@@ -7820,6 +7835,7 @@ proc create*(T: type gen_qgraphicsitem_types.QGraphicsRectItem,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQGraphicsRectItem_new6(addr(cQGraphicsRectItem_mvtbl), csize_t(sizeof(pointer)), x, y, w, h, parent.h)
   fcQGraphicsRectItem_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc rect*(self: gen_qgraphicsitem_types.QGraphicsEllipseItem): gen_qrect_types.QRectF =
   gen_qrect_types.QRectF(h: fcQGraphicsEllipseItem_rect(self.h), owned: true)
@@ -9093,6 +9109,7 @@ proc create*(T: type gen_qgraphicsitem_types.QGraphicsEllipseItem,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQGraphicsEllipseItem_new(addr(cQGraphicsEllipseItem_mvtbl), csize_t(sizeof(pointer)))
   fcQGraphicsEllipseItem_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qgraphicsitem_types.QGraphicsEllipseItem,
     rect: gen_qrect_types.QRectF,
@@ -9100,6 +9117,7 @@ proc create*(T: type gen_qgraphicsitem_types.QGraphicsEllipseItem,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQGraphicsEllipseItem_new2(addr(cQGraphicsEllipseItem_mvtbl), csize_t(sizeof(pointer)), rect.h)
   fcQGraphicsEllipseItem_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qgraphicsitem_types.QGraphicsEllipseItem,
     x: float64, y: float64, w: float64, h: float64,
@@ -9107,6 +9125,7 @@ proc create*(T: type gen_qgraphicsitem_types.QGraphicsEllipseItem,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQGraphicsEllipseItem_new3(addr(cQGraphicsEllipseItem_mvtbl), csize_t(sizeof(pointer)), x, y, w, h)
   fcQGraphicsEllipseItem_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qgraphicsitem_types.QGraphicsEllipseItem,
     parent: gen_qgraphicsitem_types.QGraphicsItem,
@@ -9114,6 +9133,7 @@ proc create*(T: type gen_qgraphicsitem_types.QGraphicsEllipseItem,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQGraphicsEllipseItem_new4(addr(cQGraphicsEllipseItem_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQGraphicsEllipseItem_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qgraphicsitem_types.QGraphicsEllipseItem,
     rect: gen_qrect_types.QRectF, parent: gen_qgraphicsitem_types.QGraphicsItem,
@@ -9121,6 +9141,7 @@ proc create*(T: type gen_qgraphicsitem_types.QGraphicsEllipseItem,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQGraphicsEllipseItem_new5(addr(cQGraphicsEllipseItem_mvtbl), csize_t(sizeof(pointer)), rect.h, parent.h)
   fcQGraphicsEllipseItem_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qgraphicsitem_types.QGraphicsEllipseItem,
     x: float64, y: float64, w: float64, h: float64, parent: gen_qgraphicsitem_types.QGraphicsItem,
@@ -9128,6 +9149,7 @@ proc create*(T: type gen_qgraphicsitem_types.QGraphicsEllipseItem,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQGraphicsEllipseItem_new6(addr(cQGraphicsEllipseItem_mvtbl), csize_t(sizeof(pointer)), x, y, w, h, parent.h)
   fcQGraphicsEllipseItem_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc fillRule*(self: gen_qgraphicsitem_types.QGraphicsPolygonItem): cint =
   cint(fcQGraphicsPolygonItem_fillRule(self.h))
@@ -10062,6 +10084,7 @@ proc create*(T: type gen_qgraphicsitem_types.QGraphicsPolygonItem,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQGraphicsPolygonItem_new(addr(cQGraphicsPolygonItem_mvtbl), csize_t(sizeof(pointer)))
   fcQGraphicsPolygonItem_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qgraphicsitem_types.QGraphicsPolygonItem,
     parent: gen_qgraphicsitem_types.QGraphicsItem,
@@ -10069,6 +10092,7 @@ proc create*(T: type gen_qgraphicsitem_types.QGraphicsPolygonItem,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQGraphicsPolygonItem_new2(addr(cQGraphicsPolygonItem_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQGraphicsPolygonItem_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc pen*(self: gen_qgraphicsitem_types.QGraphicsLineItem): gen_qpen_types.QPen =
   gen_qpen_types.QPen(h: fcQGraphicsLineItem_pen(self.h), owned: true)
@@ -11336,6 +11360,7 @@ proc create*(T: type gen_qgraphicsitem_types.QGraphicsLineItem,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQGraphicsLineItem_new(addr(cQGraphicsLineItem_mvtbl), csize_t(sizeof(pointer)))
   fcQGraphicsLineItem_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qgraphicsitem_types.QGraphicsLineItem,
     line: gen_qline_types.QLineF,
@@ -11343,6 +11368,7 @@ proc create*(T: type gen_qgraphicsitem_types.QGraphicsLineItem,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQGraphicsLineItem_new2(addr(cQGraphicsLineItem_mvtbl), csize_t(sizeof(pointer)), line.h)
   fcQGraphicsLineItem_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qgraphicsitem_types.QGraphicsLineItem,
     x1: float64, y1: float64, x2: float64, y2: float64,
@@ -11350,6 +11376,7 @@ proc create*(T: type gen_qgraphicsitem_types.QGraphicsLineItem,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQGraphicsLineItem_new3(addr(cQGraphicsLineItem_mvtbl), csize_t(sizeof(pointer)), x1, y1, x2, y2)
   fcQGraphicsLineItem_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qgraphicsitem_types.QGraphicsLineItem,
     parent: gen_qgraphicsitem_types.QGraphicsItem,
@@ -11357,6 +11384,7 @@ proc create*(T: type gen_qgraphicsitem_types.QGraphicsLineItem,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQGraphicsLineItem_new4(addr(cQGraphicsLineItem_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQGraphicsLineItem_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qgraphicsitem_types.QGraphicsLineItem,
     line: gen_qline_types.QLineF, parent: gen_qgraphicsitem_types.QGraphicsItem,
@@ -11364,6 +11392,7 @@ proc create*(T: type gen_qgraphicsitem_types.QGraphicsLineItem,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQGraphicsLineItem_new5(addr(cQGraphicsLineItem_mvtbl), csize_t(sizeof(pointer)), line.h, parent.h)
   fcQGraphicsLineItem_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qgraphicsitem_types.QGraphicsLineItem,
     x1: float64, y1: float64, x2: float64, y2: float64, parent: gen_qgraphicsitem_types.QGraphicsItem,
@@ -11371,6 +11400,7 @@ proc create*(T: type gen_qgraphicsitem_types.QGraphicsLineItem,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQGraphicsLineItem_new6(addr(cQGraphicsLineItem_mvtbl), csize_t(sizeof(pointer)), x1, y1, x2, y2, parent.h)
   fcQGraphicsLineItem_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc pixmap*(self: gen_qgraphicsitem_types.QGraphicsPixmapItem): gen_qpixmap_types.QPixmap =
   gen_qpixmap_types.QPixmap(h: fcQGraphicsPixmapItem_pixmap(self.h), owned: true)
@@ -12488,6 +12518,7 @@ proc create*(T: type gen_qgraphicsitem_types.QGraphicsPixmapItem,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQGraphicsPixmapItem_new(addr(cQGraphicsPixmapItem_mvtbl), csize_t(sizeof(pointer)))
   fcQGraphicsPixmapItem_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qgraphicsitem_types.QGraphicsPixmapItem,
     pixmap: gen_qpixmap_types.QPixmap,
@@ -12495,6 +12526,7 @@ proc create*(T: type gen_qgraphicsitem_types.QGraphicsPixmapItem,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQGraphicsPixmapItem_new2(addr(cQGraphicsPixmapItem_mvtbl), csize_t(sizeof(pointer)), pixmap.h)
   fcQGraphicsPixmapItem_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qgraphicsitem_types.QGraphicsPixmapItem,
     parent: gen_qgraphicsitem_types.QGraphicsItem,
@@ -12502,6 +12534,7 @@ proc create*(T: type gen_qgraphicsitem_types.QGraphicsPixmapItem,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQGraphicsPixmapItem_new3(addr(cQGraphicsPixmapItem_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQGraphicsPixmapItem_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qgraphicsitem_types.QGraphicsPixmapItem,
     pixmap: gen_qpixmap_types.QPixmap, parent: gen_qgraphicsitem_types.QGraphicsItem,
@@ -12509,6 +12542,7 @@ proc create*(T: type gen_qgraphicsitem_types.QGraphicsPixmapItem,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQGraphicsPixmapItem_new4(addr(cQGraphicsPixmapItem_mvtbl), csize_t(sizeof(pointer)), pixmap.h, parent.h)
   fcQGraphicsPixmapItem_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc metaObject*(self: gen_qgraphicsitem_types.QGraphicsTextItem): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQGraphicsTextItem_metaObject(self.h), owned: false)
@@ -12531,7 +12565,7 @@ proc toHtml*(self: gen_qgraphicsitem_types.QGraphicsTextItem): string =
   c_free(v_ms.data)
   vx_ret
 
-proc setHtml*(self: gen_qgraphicsitem_types.QGraphicsTextItem, html: string): void =
+proc setHtml*(self: gen_qgraphicsitem_types.QGraphicsTextItem, html: openArray[char]): void =
   fcQGraphicsTextItem_setHtml(self.h, struct_miqt_string(data: if len(html) > 0: addr html[0] else: nil, len: csize_t(len(html))))
 
 proc toPlainText*(self: gen_qgraphicsitem_types.QGraphicsTextItem): string =
@@ -12540,7 +12574,7 @@ proc toPlainText*(self: gen_qgraphicsitem_types.QGraphicsTextItem): string =
   c_free(v_ms.data)
   vx_ret
 
-proc setPlainText*(self: gen_qgraphicsitem_types.QGraphicsTextItem, text: string): void =
+proc setPlainText*(self: gen_qgraphicsitem_types.QGraphicsTextItem, text: openArray[char]): void =
   fcQGraphicsTextItem_setPlainText(self.h, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
 
 proc font*(self: gen_qgraphicsitem_types.QGraphicsTextItem): gen_qfont_types.QFont =
@@ -12615,10 +12649,10 @@ proc setTextCursor*(self: gen_qgraphicsitem_types.QGraphicsTextItem, cursor: gen
 proc textCursor*(self: gen_qgraphicsitem_types.QGraphicsTextItem): gen_qtextcursor_types.QTextCursor =
   gen_qtextcursor_types.QTextCursor(h: fcQGraphicsTextItem_textCursor(self.h), owned: true)
 
-proc linkActivated*(self: gen_qgraphicsitem_types.QGraphicsTextItem, param1: string): void =
+proc linkActivated*(self: gen_qgraphicsitem_types.QGraphicsTextItem, param1: openArray[char]): void =
   fcQGraphicsTextItem_linkActivated(self.h, struct_miqt_string(data: if len(param1) > 0: addr param1[0] else: nil, len: csize_t(len(param1))))
 
-type QGraphicsTextItemlinkActivatedSlot* = proc(param1: string)
+type QGraphicsTextItemlinkActivatedSlot* = proc(param1: openArray[char])
 proc fcQGraphicsTextItem_slot_callback_linkActivated(slot: int, param1: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QGraphicsTextItemlinkActivatedSlot](cast[pointer](slot))
   let vparam1_ms = param1
@@ -12638,10 +12672,10 @@ proc onlinkActivated*(self: gen_qgraphicsitem_types.QGraphicsTextItem, slot: QGr
   GC_ref(tmp)
   fcQGraphicsTextItem_connect_linkActivated(self.h, cast[int](addr tmp[]), fcQGraphicsTextItem_slot_callback_linkActivated, fcQGraphicsTextItem_slot_callback_linkActivated_release)
 
-proc linkHovered*(self: gen_qgraphicsitem_types.QGraphicsTextItem, param1: string): void =
+proc linkHovered*(self: gen_qgraphicsitem_types.QGraphicsTextItem, param1: openArray[char]): void =
   fcQGraphicsTextItem_linkHovered(self.h, struct_miqt_string(data: if len(param1) > 0: addr param1[0] else: nil, len: csize_t(len(param1))))
 
-type QGraphicsTextItemlinkHoveredSlot* = proc(param1: string)
+type QGraphicsTextItemlinkHoveredSlot* = proc(param1: openArray[char])
 proc fcQGraphicsTextItem_slot_callback_linkHovered(slot: int, param1: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QGraphicsTextItemlinkHoveredSlot](cast[pointer](slot))
   let vparam1_ms = param1
@@ -13681,7 +13715,7 @@ proc create*(T: type gen_qgraphicsitem_types.QGraphicsTextItem,
   fcQGraphicsTextItem_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qgraphicsitem_types.QGraphicsTextItem,
-    text: string,
+    text: openArray[char],
     vtbl: ref QGraphicsTextItemVTable = nil): gen_qgraphicsitem_types.QGraphicsTextItem =
   let vtbl = if vtbl == nil: new QGraphicsTextItemVTable else: vtbl
   GC_ref(vtbl)
@@ -13883,7 +13917,7 @@ proc create*(T: type gen_qgraphicsitem_types.QGraphicsTextItem,
   fcQGraphicsTextItem_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qgraphicsitem_types.QGraphicsTextItem,
-    text: string, parent: gen_qgraphicsitem_types.QGraphicsItem,
+    text: openArray[char], parent: gen_qgraphicsitem_types.QGraphicsItem,
     vtbl: ref QGraphicsTextItemVTable = nil): gen_qgraphicsitem_types.QGraphicsTextItem =
   let vtbl = if vtbl == nil: new QGraphicsTextItemVTable else: vtbl
   GC_ref(vtbl)
@@ -14040,13 +14074,15 @@ proc create*(T: type gen_qgraphicsitem_types.QGraphicsTextItem,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQGraphicsTextItem_new(addr(cQGraphicsTextItem_mvtbl), csize_t(sizeof(pointer)))
   fcQGraphicsTextItem_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qgraphicsitem_types.QGraphicsTextItem,
-    text: string,
+    text: openArray[char],
     inst: VirtualQGraphicsTextItem) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQGraphicsTextItem_new2(addr(cQGraphicsTextItem_mvtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
   fcQGraphicsTextItem_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qgraphicsitem_types.QGraphicsTextItem,
     parent: gen_qgraphicsitem_types.QGraphicsItem,
@@ -14054,17 +14090,19 @@ proc create*(T: type gen_qgraphicsitem_types.QGraphicsTextItem,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQGraphicsTextItem_new3(addr(cQGraphicsTextItem_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQGraphicsTextItem_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qgraphicsitem_types.QGraphicsTextItem,
-    text: string, parent: gen_qgraphicsitem_types.QGraphicsItem,
+    text: openArray[char], parent: gen_qgraphicsitem_types.QGraphicsItem,
     inst: VirtualQGraphicsTextItem) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQGraphicsTextItem_new4(addr(cQGraphicsTextItem_mvtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), parent.h)
   fcQGraphicsTextItem_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qgraphicsitem_types.QGraphicsTextItem): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQGraphicsTextItem_staticMetaObject())
-proc setText*(self: gen_qgraphicsitem_types.QGraphicsSimpleTextItem, text: string): void =
+proc setText*(self: gen_qgraphicsitem_types.QGraphicsSimpleTextItem, text: openArray[char]): void =
   fcQGraphicsSimpleTextItem_setText(self.h, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
 
 proc text*(self: gen_qgraphicsitem_types.QGraphicsSimpleTextItem): string =
@@ -14879,7 +14917,7 @@ proc create*(T: type gen_qgraphicsitem_types.QGraphicsSimpleTextItem,
   fcQGraphicsSimpleTextItem_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qgraphicsitem_types.QGraphicsSimpleTextItem,
-    text: string,
+    text: openArray[char],
     vtbl: ref QGraphicsSimpleTextItemVTable = nil): gen_qgraphicsitem_types.QGraphicsSimpleTextItem =
   let vtbl = if vtbl == nil: new QGraphicsSimpleTextItemVTable else: vtbl
   GC_ref(vtbl)
@@ -15041,7 +15079,7 @@ proc create*(T: type gen_qgraphicsitem_types.QGraphicsSimpleTextItem,
   fcQGraphicsSimpleTextItem_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qgraphicsitem_types.QGraphicsSimpleTextItem,
-    text: string, parent: gen_qgraphicsitem_types.QGraphicsItem,
+    text: openArray[char], parent: gen_qgraphicsitem_types.QGraphicsItem,
     vtbl: ref QGraphicsSimpleTextItemVTable = nil): gen_qgraphicsitem_types.QGraphicsSimpleTextItem =
   let vtbl = if vtbl == nil: new QGraphicsSimpleTextItemVTable else: vtbl
   GC_ref(vtbl)
@@ -15168,13 +15206,15 @@ proc create*(T: type gen_qgraphicsitem_types.QGraphicsSimpleTextItem,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQGraphicsSimpleTextItem_new(addr(cQGraphicsSimpleTextItem_mvtbl), csize_t(sizeof(pointer)))
   fcQGraphicsSimpleTextItem_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qgraphicsitem_types.QGraphicsSimpleTextItem,
-    text: string,
+    text: openArray[char],
     inst: VirtualQGraphicsSimpleTextItem) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQGraphicsSimpleTextItem_new2(addr(cQGraphicsSimpleTextItem_mvtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
   fcQGraphicsSimpleTextItem_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qgraphicsitem_types.QGraphicsSimpleTextItem,
     parent: gen_qgraphicsitem_types.QGraphicsItem,
@@ -15182,13 +15222,15 @@ proc create*(T: type gen_qgraphicsitem_types.QGraphicsSimpleTextItem,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQGraphicsSimpleTextItem_new3(addr(cQGraphicsSimpleTextItem_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQGraphicsSimpleTextItem_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qgraphicsitem_types.QGraphicsSimpleTextItem,
-    text: string, parent: gen_qgraphicsitem_types.QGraphicsItem,
+    text: openArray[char], parent: gen_qgraphicsitem_types.QGraphicsItem,
     inst: VirtualQGraphicsSimpleTextItem) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQGraphicsSimpleTextItem_new4(addr(cQGraphicsSimpleTextItem_mvtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), parent.h)
   fcQGraphicsSimpleTextItem_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc addToGroup*(self: gen_qgraphicsitem_types.QGraphicsItemGroup, item: gen_qgraphicsitem_types.QGraphicsItem): void =
   fcQGraphicsItemGroup_addToGroup(self.h, item.h)
@@ -16117,6 +16159,7 @@ proc create*(T: type gen_qgraphicsitem_types.QGraphicsItemGroup,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQGraphicsItemGroup_new(addr(cQGraphicsItemGroup_mvtbl), csize_t(sizeof(pointer)))
   fcQGraphicsItemGroup_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qgraphicsitem_types.QGraphicsItemGroup,
     parent: gen_qgraphicsitem_types.QGraphicsItem,
@@ -16124,4 +16167,5 @@ proc create*(T: type gen_qgraphicsitem_types.QGraphicsItemGroup,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQGraphicsItemGroup_new2(addr(cQGraphicsItemGroup_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQGraphicsItemGroup_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 

@@ -234,7 +234,7 @@ proc tr*(_: type gen_qpointingdevice_types.QPointingDevice, s: cstring, c: cstri
   c_free(v_ms.data)
   vx_ret
 
-proc primaryPointingDevice*(_: type gen_qpointingdevice_types.QPointingDevice, seatName: string): gen_qpointingdevice_types.QPointingDevice =
+proc primaryPointingDevice*(_: type gen_qpointingdevice_types.QPointingDevice, seatName: openArray[char]): gen_qpointingdevice_types.QPointingDevice =
   gen_qpointingdevice_types.QPointingDevice(h: fcQPointingDevice_primaryPointingDevice1(struct_miqt_string(data: if len(seatName) > 0: addr seatName[0] else: nil, len: csize_t(len(seatName)))), owned: false)
 
 type QPointingDevicemetaObjectProc* = proc(self: QPointingDevice): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
@@ -481,7 +481,7 @@ proc create*(T: type gen_qpointingdevice_types.QPointingDevice,
   fcQPointingDevice_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qpointingdevice_types.QPointingDevice,
-    name: string, systemId: clonglong, devType: cint, pType: cint, caps: cint, maxPoints: cint, buttonCount: cint,
+    name: openArray[char], systemId: clonglong, devType: cint, pType: cint, caps: cint, maxPoints: cint, buttonCount: cint,
     vtbl: ref QPointingDeviceVTable = nil): gen_qpointingdevice_types.QPointingDevice =
   let vtbl = if vtbl == nil: new QPointingDeviceVTable else: vtbl
   GC_ref(vtbl)
@@ -543,7 +543,7 @@ proc create*(T: type gen_qpointingdevice_types.QPointingDevice,
   fcQPointingDevice_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qpointingdevice_types.QPointingDevice,
-    name: string, systemId: clonglong, devType: cint, pType: cint, caps: cint, maxPoints: cint, buttonCount: cint, seatName: string,
+    name: openArray[char], systemId: clonglong, devType: cint, pType: cint, caps: cint, maxPoints: cint, buttonCount: cint, seatName: openArray[char],
     vtbl: ref QPointingDeviceVTable = nil): gen_qpointingdevice_types.QPointingDevice =
   let vtbl = if vtbl == nil: new QPointingDeviceVTable else: vtbl
   GC_ref(vtbl)
@@ -574,7 +574,7 @@ proc create*(T: type gen_qpointingdevice_types.QPointingDevice,
   fcQPointingDevice_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qpointingdevice_types.QPointingDevice,
-    name: string, systemId: clonglong, devType: cint, pType: cint, caps: cint, maxPoints: cint, buttonCount: cint, seatName: string, uniqueId: gen_qpointingdevice_types.QPointingDeviceUniqueId,
+    name: openArray[char], systemId: clonglong, devType: cint, pType: cint, caps: cint, maxPoints: cint, buttonCount: cint, seatName: openArray[char], uniqueId: gen_qpointingdevice_types.QPointingDeviceUniqueId,
     vtbl: ref QPointingDeviceVTable = nil): gen_qpointingdevice_types.QPointingDevice =
   let vtbl = if vtbl == nil: new QPointingDeviceVTable else: vtbl
   GC_ref(vtbl)
@@ -605,7 +605,7 @@ proc create*(T: type gen_qpointingdevice_types.QPointingDevice,
   fcQPointingDevice_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qpointingdevice_types.QPointingDevice,
-    name: string, systemId: clonglong, devType: cint, pType: cint, caps: cint, maxPoints: cint, buttonCount: cint, seatName: string, uniqueId: gen_qpointingdevice_types.QPointingDeviceUniqueId, parent: gen_qobject_types.QObject,
+    name: openArray[char], systemId: clonglong, devType: cint, pType: cint, caps: cint, maxPoints: cint, buttonCount: cint, seatName: openArray[char], uniqueId: gen_qpointingdevice_types.QPointingDeviceUniqueId, parent: gen_qobject_types.QObject,
     vtbl: ref QPointingDeviceVTable = nil): gen_qpointingdevice_types.QPointingDevice =
   let vtbl = if vtbl == nil: new QPointingDeviceVTable else: vtbl
   GC_ref(vtbl)
@@ -657,13 +657,15 @@ proc create*(T: type gen_qpointingdevice_types.QPointingDevice,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQPointingDevice_new(addr(cQPointingDevice_mvtbl), csize_t(sizeof(pointer)))
   fcQPointingDevice_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qpointingdevice_types.QPointingDevice,
-    name: string, systemId: clonglong, devType: cint, pType: cint, caps: cint, maxPoints: cint, buttonCount: cint,
+    name: openArray[char], systemId: clonglong, devType: cint, pType: cint, caps: cint, maxPoints: cint, buttonCount: cint,
     inst: VirtualQPointingDevice) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQPointingDevice_new2(addr(cQPointingDevice_mvtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), systemId, cint(devType), cint(pType), cint(caps), maxPoints, buttonCount)
   fcQPointingDevice_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qpointingdevice_types.QPointingDevice,
     parent: gen_qobject_types.QObject,
@@ -671,27 +673,31 @@ proc create*(T: type gen_qpointingdevice_types.QPointingDevice,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQPointingDevice_new3(addr(cQPointingDevice_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQPointingDevice_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qpointingdevice_types.QPointingDevice,
-    name: string, systemId: clonglong, devType: cint, pType: cint, caps: cint, maxPoints: cint, buttonCount: cint, seatName: string,
+    name: openArray[char], systemId: clonglong, devType: cint, pType: cint, caps: cint, maxPoints: cint, buttonCount: cint, seatName: openArray[char],
     inst: VirtualQPointingDevice) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQPointingDevice_new4(addr(cQPointingDevice_mvtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), systemId, cint(devType), cint(pType), cint(caps), maxPoints, buttonCount, struct_miqt_string(data: if len(seatName) > 0: addr seatName[0] else: nil, len: csize_t(len(seatName))))
   fcQPointingDevice_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qpointingdevice_types.QPointingDevice,
-    name: string, systemId: clonglong, devType: cint, pType: cint, caps: cint, maxPoints: cint, buttonCount: cint, seatName: string, uniqueId: gen_qpointingdevice_types.QPointingDeviceUniqueId,
+    name: openArray[char], systemId: clonglong, devType: cint, pType: cint, caps: cint, maxPoints: cint, buttonCount: cint, seatName: openArray[char], uniqueId: gen_qpointingdevice_types.QPointingDeviceUniqueId,
     inst: VirtualQPointingDevice) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQPointingDevice_new5(addr(cQPointingDevice_mvtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), systemId, cint(devType), cint(pType), cint(caps), maxPoints, buttonCount, struct_miqt_string(data: if len(seatName) > 0: addr seatName[0] else: nil, len: csize_t(len(seatName))), uniqueId.h)
   fcQPointingDevice_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qpointingdevice_types.QPointingDevice,
-    name: string, systemId: clonglong, devType: cint, pType: cint, caps: cint, maxPoints: cint, buttonCount: cint, seatName: string, uniqueId: gen_qpointingdevice_types.QPointingDeviceUniqueId, parent: gen_qobject_types.QObject,
+    name: openArray[char], systemId: clonglong, devType: cint, pType: cint, caps: cint, maxPoints: cint, buttonCount: cint, seatName: openArray[char], uniqueId: gen_qpointingdevice_types.QPointingDeviceUniqueId, parent: gen_qobject_types.QObject,
     inst: VirtualQPointingDevice) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQPointingDevice_new6(addr(cQPointingDevice_mvtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), systemId, cint(devType), cint(pType), cint(caps), maxPoints, buttonCount, struct_miqt_string(data: if len(seatName) > 0: addr seatName[0] else: nil, len: csize_t(len(seatName))), uniqueId.h, parent.h)
   fcQPointingDevice_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qpointingdevice_types.QPointingDevice): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQPointingDevice_staticMetaObject())

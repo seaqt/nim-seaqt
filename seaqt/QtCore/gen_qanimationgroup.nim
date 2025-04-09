@@ -541,6 +541,7 @@ proc create*(T: type gen_qanimationgroup_types.QAnimationGroup,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQAnimationGroup_new(addr(cQAnimationGroup_mvtbl), csize_t(sizeof(pointer)))
   fcQAnimationGroup_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qanimationgroup_types.QAnimationGroup,
     parent: gen_qobject_types.QObject,
@@ -548,6 +549,7 @@ proc create*(T: type gen_qanimationgroup_types.QAnimationGroup,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQAnimationGroup_new2(addr(cQAnimationGroup_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQAnimationGroup_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qanimationgroup_types.QAnimationGroup): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQAnimationGroup_staticMetaObject())

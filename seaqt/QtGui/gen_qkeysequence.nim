@@ -183,10 +183,10 @@ proc toString*(self: gen_qkeysequence_types.QKeySequence): string =
   c_free(v_ms.data)
   vx_ret
 
-proc fromString*(_: type gen_qkeysequence_types.QKeySequence, str: string): gen_qkeysequence_types.QKeySequence =
+proc fromString*(_: type gen_qkeysequence_types.QKeySequence, str: openArray[char]): gen_qkeysequence_types.QKeySequence =
   gen_qkeysequence_types.QKeySequence(h: fcQKeySequence_fromString(struct_miqt_string(data: if len(str) > 0: addr str[0] else: nil, len: csize_t(len(str)))), owned: true)
 
-proc listFromString*(_: type gen_qkeysequence_types.QKeySequence, str: string): seq[gen_qkeysequence_types.QKeySequence] =
+proc listFromString*(_: type gen_qkeysequence_types.QKeySequence, str: openArray[char]): seq[gen_qkeysequence_types.QKeySequence] =
   var v_ma = fcQKeySequence_listFromString(struct_miqt_string(data: if len(str) > 0: addr str[0] else: nil, len: csize_t(len(str))))
   var vx_ret = newSeq[gen_qkeysequence_types.QKeySequence](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
@@ -195,7 +195,7 @@ proc listFromString*(_: type gen_qkeysequence_types.QKeySequence, str: string): 
   c_free(v_ma.data)
   vx_ret
 
-proc listToString*(_: type gen_qkeysequence_types.QKeySequence, list: seq[gen_qkeysequence_types.QKeySequence]): string =
+proc listToString*(_: type gen_qkeysequence_types.QKeySequence, list: openArray[gen_qkeysequence_types.QKeySequence]): string =
   var list_CArray = newSeq[pointer](len(list))
   for i in 0..<len(list):
     list_CArray[i] = list[i].h
@@ -208,7 +208,7 @@ proc listToString*(_: type gen_qkeysequence_types.QKeySequence, list: seq[gen_qk
 proc matches*(self: gen_qkeysequence_types.QKeySequence, seq: gen_qkeysequence_types.QKeySequence): cint =
   cint(fcQKeySequence_matches(self.h, seq.h))
 
-proc mnemonic*(_: type gen_qkeysequence_types.QKeySequence, text: string): gen_qkeysequence_types.QKeySequence =
+proc mnemonic*(_: type gen_qkeysequence_types.QKeySequence, text: openArray[char]): gen_qkeysequence_types.QKeySequence =
   gen_qkeysequence_types.QKeySequence(h: fcQKeySequence_mnemonic(struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))), owned: true)
 
 proc keyBindings*(_: type gen_qkeysequence_types.QKeySequence, key: cint): seq[gen_qkeysequence_types.QKeySequence] =
@@ -259,10 +259,10 @@ proc toString*(self: gen_qkeysequence_types.QKeySequence, format: cint): string 
   c_free(v_ms.data)
   vx_ret
 
-proc fromString*(_: type gen_qkeysequence_types.QKeySequence, str: string, format: cint): gen_qkeysequence_types.QKeySequence =
+proc fromString*(_: type gen_qkeysequence_types.QKeySequence, str: openArray[char], format: cint): gen_qkeysequence_types.QKeySequence =
   gen_qkeysequence_types.QKeySequence(h: fcQKeySequence_fromString2(struct_miqt_string(data: if len(str) > 0: addr str[0] else: nil, len: csize_t(len(str))), cint(format)), owned: true)
 
-proc listFromString*(_: type gen_qkeysequence_types.QKeySequence, str: string, format: cint): seq[gen_qkeysequence_types.QKeySequence] =
+proc listFromString*(_: type gen_qkeysequence_types.QKeySequence, str: openArray[char], format: cint): seq[gen_qkeysequence_types.QKeySequence] =
   var v_ma = fcQKeySequence_listFromString2(struct_miqt_string(data: if len(str) > 0: addr str[0] else: nil, len: csize_t(len(str))), cint(format))
   var vx_ret = newSeq[gen_qkeysequence_types.QKeySequence](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
@@ -271,7 +271,7 @@ proc listFromString*(_: type gen_qkeysequence_types.QKeySequence, str: string, f
   c_free(v_ma.data)
   vx_ret
 
-proc listToString*(_: type gen_qkeysequence_types.QKeySequence, list: seq[gen_qkeysequence_types.QKeySequence], format: cint): string =
+proc listToString*(_: type gen_qkeysequence_types.QKeySequence, list: openArray[gen_qkeysequence_types.QKeySequence], format: cint): string =
   var list_CArray = newSeq[pointer](len(list))
   for i in 0..<len(list):
     list_CArray[i] = list[i].h
@@ -285,7 +285,7 @@ proc create*(T: type gen_qkeysequence_types.QKeySequence): gen_qkeysequence_type
   let tmp = gen_qkeysequence_types.QKeySequence(h: fcQKeySequence_new(), owned: true)
   tmp
 proc create*(T: type gen_qkeysequence_types.QKeySequence,
-    key: string): gen_qkeysequence_types.QKeySequence =
+    key: openArray[char]): gen_qkeysequence_types.QKeySequence =
   let tmp = gen_qkeysequence_types.QKeySequence(h: fcQKeySequence_new2(struct_miqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key)))), owned: true)
   tmp
 proc create*(T: type gen_qkeysequence_types.QKeySequence,
@@ -305,7 +305,7 @@ proc create2*(T: type gen_qkeysequence_types.QKeySequence,
   let tmp = gen_qkeysequence_types.QKeySequence(h: fcQKeySequence_new6(cint(key)), owned: true)
   tmp
 proc create*(T: type gen_qkeysequence_types.QKeySequence,
-    key: string, format: cint): gen_qkeysequence_types.QKeySequence =
+    key: openArray[char], format: cint): gen_qkeysequence_types.QKeySequence =
   let tmp = gen_qkeysequence_types.QKeySequence(h: fcQKeySequence_new7(struct_miqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key))), cint(format)), owned: true)
   tmp
 proc create*(T: type gen_qkeysequence_types.QKeySequence,

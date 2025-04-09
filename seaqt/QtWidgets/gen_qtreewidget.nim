@@ -564,7 +564,7 @@ proc text*(self: gen_qtreewidget_types.QTreeWidgetItem, column: cint): string =
   c_free(v_ms.data)
   vx_ret
 
-proc setText*(self: gen_qtreewidget_types.QTreeWidgetItem, column: cint, text: string): void =
+proc setText*(self: gen_qtreewidget_types.QTreeWidgetItem, column: cint, text: openArray[char]): void =
   fcQTreeWidgetItem_setText(self.h, column, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
 
 proc icon*(self: gen_qtreewidget_types.QTreeWidgetItem, column: cint): gen_qicon_types.QIcon =
@@ -579,7 +579,7 @@ proc statusTip*(self: gen_qtreewidget_types.QTreeWidgetItem, column: cint): stri
   c_free(v_ms.data)
   vx_ret
 
-proc setStatusTip*(self: gen_qtreewidget_types.QTreeWidgetItem, column: cint, statusTip: string): void =
+proc setStatusTip*(self: gen_qtreewidget_types.QTreeWidgetItem, column: cint, statusTip: openArray[char]): void =
   fcQTreeWidgetItem_setStatusTip(self.h, column, struct_miqt_string(data: if len(statusTip) > 0: addr statusTip[0] else: nil, len: csize_t(len(statusTip))))
 
 proc toolTip*(self: gen_qtreewidget_types.QTreeWidgetItem, column: cint): string =
@@ -588,7 +588,7 @@ proc toolTip*(self: gen_qtreewidget_types.QTreeWidgetItem, column: cint): string
   c_free(v_ms.data)
   vx_ret
 
-proc setToolTip*(self: gen_qtreewidget_types.QTreeWidgetItem, column: cint, toolTip: string): void =
+proc setToolTip*(self: gen_qtreewidget_types.QTreeWidgetItem, column: cint, toolTip: openArray[char]): void =
   fcQTreeWidgetItem_setToolTip(self.h, column, struct_miqt_string(data: if len(toolTip) > 0: addr toolTip[0] else: nil, len: csize_t(len(toolTip))))
 
 proc whatsThis*(self: gen_qtreewidget_types.QTreeWidgetItem, column: cint): string =
@@ -597,7 +597,7 @@ proc whatsThis*(self: gen_qtreewidget_types.QTreeWidgetItem, column: cint): stri
   c_free(v_ms.data)
   vx_ret
 
-proc setWhatsThis*(self: gen_qtreewidget_types.QTreeWidgetItem, column: cint, whatsThis: string): void =
+proc setWhatsThis*(self: gen_qtreewidget_types.QTreeWidgetItem, column: cint, whatsThis: openArray[char]): void =
   fcQTreeWidgetItem_setWhatsThis(self.h, column, struct_miqt_string(data: if len(whatsThis) > 0: addr whatsThis[0] else: nil, len: csize_t(len(whatsThis))))
 
 proc font*(self: gen_qtreewidget_types.QTreeWidgetItem, column: cint): gen_qfont_types.QFont =
@@ -687,14 +687,14 @@ proc removeChild*(self: gen_qtreewidget_types.QTreeWidgetItem, child: gen_qtreew
 proc takeChild*(self: gen_qtreewidget_types.QTreeWidgetItem, index: cint): gen_qtreewidget_types.QTreeWidgetItem =
   gen_qtreewidget_types.QTreeWidgetItem(h: fcQTreeWidgetItem_takeChild(self.h, index), owned: false)
 
-proc addChildren*(self: gen_qtreewidget_types.QTreeWidgetItem, children: seq[gen_qtreewidget_types.QTreeWidgetItem]): void =
+proc addChildren*(self: gen_qtreewidget_types.QTreeWidgetItem, children: openArray[gen_qtreewidget_types.QTreeWidgetItem]): void =
   var children_CArray = newSeq[pointer](len(children))
   for i in 0..<len(children):
     children_CArray[i] = children[i].h
 
   fcQTreeWidgetItem_addChildren(self.h, struct_miqt_array(len: csize_t(len(children)), data: if len(children) == 0: nil else: addr(children_CArray[0])))
 
-proc insertChildren*(self: gen_qtreewidget_types.QTreeWidgetItem, index: cint, children: seq[gen_qtreewidget_types.QTreeWidgetItem]): void =
+proc insertChildren*(self: gen_qtreewidget_types.QTreeWidgetItem, index: cint, children: openArray[gen_qtreewidget_types.QTreeWidgetItem]): void =
   var children_CArray = newSeq[pointer](len(children))
   for i in 0..<len(children):
     children_CArray[i] = children[i].h
@@ -870,7 +870,7 @@ proc create*(T: type gen_qtreewidget_types.QTreeWidgetItem,
   fcQTreeWidgetItem_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qtreewidget_types.QTreeWidgetItem,
-    strings: seq[string],
+    strings: openArray[string],
     vtbl: ref QTreeWidgetItemVTable = nil): gen_qtreewidget_types.QTreeWidgetItem =
   var strings_CArray = newSeq[struct_miqt_string](len(strings))
   for i in 0..<len(strings):
@@ -920,7 +920,7 @@ proc create*(T: type gen_qtreewidget_types.QTreeWidgetItem,
   fcQTreeWidgetItem_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qtreewidget_types.QTreeWidgetItem,
-    treeview: gen_qtreewidget_types.QTreeWidget, strings: seq[string],
+    treeview: gen_qtreewidget_types.QTreeWidget, strings: openArray[string],
     vtbl: ref QTreeWidgetItemVTable = nil): gen_qtreewidget_types.QTreeWidgetItem =
   var strings_CArray = newSeq[struct_miqt_string](len(strings))
   for i in 0..<len(strings):
@@ -993,7 +993,7 @@ proc create*(T: type gen_qtreewidget_types.QTreeWidgetItem,
   fcQTreeWidgetItem_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qtreewidget_types.QTreeWidgetItem,
-    parent: gen_qtreewidget_types.QTreeWidgetItem, strings: seq[string],
+    parent: gen_qtreewidget_types.QTreeWidgetItem, strings: openArray[string],
     vtbl: ref QTreeWidgetItemVTable = nil): gen_qtreewidget_types.QTreeWidgetItem =
   var strings_CArray = newSeq[struct_miqt_string](len(strings))
   for i in 0..<len(strings):
@@ -1089,7 +1089,7 @@ proc create*(T: type gen_qtreewidget_types.QTreeWidgetItem,
   fcQTreeWidgetItem_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qtreewidget_types.QTreeWidgetItem,
-    strings: seq[string], typeVal: cint,
+    strings: openArray[string], typeVal: cint,
     vtbl: ref QTreeWidgetItemVTable = nil): gen_qtreewidget_types.QTreeWidgetItem =
   var strings_CArray = newSeq[struct_miqt_string](len(strings))
   for i in 0..<len(strings):
@@ -1139,7 +1139,7 @@ proc create*(T: type gen_qtreewidget_types.QTreeWidgetItem,
   fcQTreeWidgetItem_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qtreewidget_types.QTreeWidgetItem,
-    treeview: gen_qtreewidget_types.QTreeWidget, strings: seq[string], typeVal: cint,
+    treeview: gen_qtreewidget_types.QTreeWidget, strings: openArray[string], typeVal: cint,
     vtbl: ref QTreeWidgetItemVTable = nil): gen_qtreewidget_types.QTreeWidgetItem =
   var strings_CArray = newSeq[struct_miqt_string](len(strings))
   for i in 0..<len(strings):
@@ -1212,7 +1212,7 @@ proc create*(T: type gen_qtreewidget_types.QTreeWidgetItem,
   fcQTreeWidgetItem_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qtreewidget_types.QTreeWidgetItem,
-    parent: gen_qtreewidget_types.QTreeWidgetItem, strings: seq[string], typeVal: cint,
+    parent: gen_qtreewidget_types.QTreeWidgetItem, strings: openArray[string], typeVal: cint,
     vtbl: ref QTreeWidgetItemVTable = nil): gen_qtreewidget_types.QTreeWidgetItem =
   var strings_CArray = newSeq[struct_miqt_string](len(strings))
   for i in 0..<len(strings):
@@ -1279,9 +1279,10 @@ proc create*(T: type gen_qtreewidget_types.QTreeWidgetItem,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQTreeWidgetItem_new(addr(cQTreeWidgetItem_mvtbl), csize_t(sizeof(pointer)))
   fcQTreeWidgetItem_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qtreewidget_types.QTreeWidgetItem,
-    strings: seq[string],
+    strings: openArray[string],
     inst: VirtualQTreeWidgetItem) =
   var strings_CArray = newSeq[struct_miqt_string](len(strings))
   for i in 0..<len(strings):
@@ -1290,6 +1291,7 @@ proc create*(T: type gen_qtreewidget_types.QTreeWidgetItem,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQTreeWidgetItem_new2(addr(cQTreeWidgetItem_mvtbl), csize_t(sizeof(pointer)), struct_miqt_array(len: csize_t(len(strings)), data: if len(strings) == 0: nil else: addr(strings_CArray[0])))
   fcQTreeWidgetItem_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qtreewidget_types.QTreeWidgetItem,
     treeview: gen_qtreewidget_types.QTreeWidget,
@@ -1297,9 +1299,10 @@ proc create*(T: type gen_qtreewidget_types.QTreeWidgetItem,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQTreeWidgetItem_new3(addr(cQTreeWidgetItem_mvtbl), csize_t(sizeof(pointer)), treeview.h)
   fcQTreeWidgetItem_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qtreewidget_types.QTreeWidgetItem,
-    treeview: gen_qtreewidget_types.QTreeWidget, strings: seq[string],
+    treeview: gen_qtreewidget_types.QTreeWidget, strings: openArray[string],
     inst: VirtualQTreeWidgetItem) =
   var strings_CArray = newSeq[struct_miqt_string](len(strings))
   for i in 0..<len(strings):
@@ -1308,6 +1311,7 @@ proc create*(T: type gen_qtreewidget_types.QTreeWidgetItem,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQTreeWidgetItem_new4(addr(cQTreeWidgetItem_mvtbl), csize_t(sizeof(pointer)), treeview.h, struct_miqt_array(len: csize_t(len(strings)), data: if len(strings) == 0: nil else: addr(strings_CArray[0])))
   fcQTreeWidgetItem_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qtreewidget_types.QTreeWidgetItem,
     treeview: gen_qtreewidget_types.QTreeWidget, after: gen_qtreewidget_types.QTreeWidgetItem,
@@ -1315,6 +1319,7 @@ proc create*(T: type gen_qtreewidget_types.QTreeWidgetItem,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQTreeWidgetItem_new5(addr(cQTreeWidgetItem_mvtbl), csize_t(sizeof(pointer)), treeview.h, after.h)
   fcQTreeWidgetItem_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qtreewidget_types.QTreeWidgetItem,
     parent: gen_qtreewidget_types.QTreeWidgetItem,
@@ -1322,9 +1327,10 @@ proc create*(T: type gen_qtreewidget_types.QTreeWidgetItem,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQTreeWidgetItem_new6(addr(cQTreeWidgetItem_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQTreeWidgetItem_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qtreewidget_types.QTreeWidgetItem,
-    parent: gen_qtreewidget_types.QTreeWidgetItem, strings: seq[string],
+    parent: gen_qtreewidget_types.QTreeWidgetItem, strings: openArray[string],
     inst: VirtualQTreeWidgetItem) =
   var strings_CArray = newSeq[struct_miqt_string](len(strings))
   for i in 0..<len(strings):
@@ -1333,6 +1339,7 @@ proc create*(T: type gen_qtreewidget_types.QTreeWidgetItem,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQTreeWidgetItem_new7(addr(cQTreeWidgetItem_mvtbl), csize_t(sizeof(pointer)), parent.h, struct_miqt_array(len: csize_t(len(strings)), data: if len(strings) == 0: nil else: addr(strings_CArray[0])))
   fcQTreeWidgetItem_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qtreewidget_types.QTreeWidgetItem,
     parent: gen_qtreewidget_types.QTreeWidgetItem, after: gen_qtreewidget_types.QTreeWidgetItem,
@@ -1340,6 +1347,7 @@ proc create*(T: type gen_qtreewidget_types.QTreeWidgetItem,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQTreeWidgetItem_new8(addr(cQTreeWidgetItem_mvtbl), csize_t(sizeof(pointer)), parent.h, after.h)
   fcQTreeWidgetItem_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create2*(T: type gen_qtreewidget_types.QTreeWidgetItem,
     other: gen_qtreewidget_types.QTreeWidgetItem,
@@ -1347,6 +1355,7 @@ proc create2*(T: type gen_qtreewidget_types.QTreeWidgetItem,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQTreeWidgetItem_new9(addr(cQTreeWidgetItem_mvtbl), csize_t(sizeof(pointer)), other.h)
   fcQTreeWidgetItem_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qtreewidget_types.QTreeWidgetItem,
     typeVal: cint,
@@ -1354,9 +1363,10 @@ proc create*(T: type gen_qtreewidget_types.QTreeWidgetItem,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQTreeWidgetItem_new10(addr(cQTreeWidgetItem_mvtbl), csize_t(sizeof(pointer)), typeVal)
   fcQTreeWidgetItem_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qtreewidget_types.QTreeWidgetItem,
-    strings: seq[string], typeVal: cint,
+    strings: openArray[string], typeVal: cint,
     inst: VirtualQTreeWidgetItem) =
   var strings_CArray = newSeq[struct_miqt_string](len(strings))
   for i in 0..<len(strings):
@@ -1365,6 +1375,7 @@ proc create*(T: type gen_qtreewidget_types.QTreeWidgetItem,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQTreeWidgetItem_new11(addr(cQTreeWidgetItem_mvtbl), csize_t(sizeof(pointer)), struct_miqt_array(len: csize_t(len(strings)), data: if len(strings) == 0: nil else: addr(strings_CArray[0])), typeVal)
   fcQTreeWidgetItem_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qtreewidget_types.QTreeWidgetItem,
     treeview: gen_qtreewidget_types.QTreeWidget, typeVal: cint,
@@ -1372,9 +1383,10 @@ proc create*(T: type gen_qtreewidget_types.QTreeWidgetItem,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQTreeWidgetItem_new12(addr(cQTreeWidgetItem_mvtbl), csize_t(sizeof(pointer)), treeview.h, typeVal)
   fcQTreeWidgetItem_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qtreewidget_types.QTreeWidgetItem,
-    treeview: gen_qtreewidget_types.QTreeWidget, strings: seq[string], typeVal: cint,
+    treeview: gen_qtreewidget_types.QTreeWidget, strings: openArray[string], typeVal: cint,
     inst: VirtualQTreeWidgetItem) =
   var strings_CArray = newSeq[struct_miqt_string](len(strings))
   for i in 0..<len(strings):
@@ -1383,6 +1395,7 @@ proc create*(T: type gen_qtreewidget_types.QTreeWidgetItem,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQTreeWidgetItem_new13(addr(cQTreeWidgetItem_mvtbl), csize_t(sizeof(pointer)), treeview.h, struct_miqt_array(len: csize_t(len(strings)), data: if len(strings) == 0: nil else: addr(strings_CArray[0])), typeVal)
   fcQTreeWidgetItem_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qtreewidget_types.QTreeWidgetItem,
     treeview: gen_qtreewidget_types.QTreeWidget, after: gen_qtreewidget_types.QTreeWidgetItem, typeVal: cint,
@@ -1390,6 +1403,7 @@ proc create*(T: type gen_qtreewidget_types.QTreeWidgetItem,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQTreeWidgetItem_new14(addr(cQTreeWidgetItem_mvtbl), csize_t(sizeof(pointer)), treeview.h, after.h, typeVal)
   fcQTreeWidgetItem_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qtreewidget_types.QTreeWidgetItem,
     parent: gen_qtreewidget_types.QTreeWidgetItem, typeVal: cint,
@@ -1397,9 +1411,10 @@ proc create*(T: type gen_qtreewidget_types.QTreeWidgetItem,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQTreeWidgetItem_new15(addr(cQTreeWidgetItem_mvtbl), csize_t(sizeof(pointer)), parent.h, typeVal)
   fcQTreeWidgetItem_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qtreewidget_types.QTreeWidgetItem,
-    parent: gen_qtreewidget_types.QTreeWidgetItem, strings: seq[string], typeVal: cint,
+    parent: gen_qtreewidget_types.QTreeWidgetItem, strings: openArray[string], typeVal: cint,
     inst: VirtualQTreeWidgetItem) =
   var strings_CArray = newSeq[struct_miqt_string](len(strings))
   for i in 0..<len(strings):
@@ -1408,6 +1423,7 @@ proc create*(T: type gen_qtreewidget_types.QTreeWidgetItem,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQTreeWidgetItem_new16(addr(cQTreeWidgetItem_mvtbl), csize_t(sizeof(pointer)), parent.h, struct_miqt_array(len: csize_t(len(strings)), data: if len(strings) == 0: nil else: addr(strings_CArray[0])), typeVal)
   fcQTreeWidgetItem_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qtreewidget_types.QTreeWidgetItem,
     parent: gen_qtreewidget_types.QTreeWidgetItem, after: gen_qtreewidget_types.QTreeWidgetItem, typeVal: cint,
@@ -1415,6 +1431,7 @@ proc create*(T: type gen_qtreewidget_types.QTreeWidgetItem,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQTreeWidgetItem_new17(addr(cQTreeWidgetItem_mvtbl), csize_t(sizeof(pointer)), parent.h, after.h, typeVal)
   fcQTreeWidgetItem_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc metaObject*(self: gen_qtreewidget_types.QTreeWidget): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQTreeWidget_metaObject(self.h), owned: false)
@@ -1458,14 +1475,14 @@ proc takeTopLevelItem*(self: gen_qtreewidget_types.QTreeWidget, index: cint): ge
 proc indexOfTopLevelItem*(self: gen_qtreewidget_types.QTreeWidget, item: gen_qtreewidget_types.QTreeWidgetItem): cint =
   fcQTreeWidget_indexOfTopLevelItem(self.h, item.h)
 
-proc insertTopLevelItems*(self: gen_qtreewidget_types.QTreeWidget, index: cint, items: seq[gen_qtreewidget_types.QTreeWidgetItem]): void =
+proc insertTopLevelItems*(self: gen_qtreewidget_types.QTreeWidget, index: cint, items: openArray[gen_qtreewidget_types.QTreeWidgetItem]): void =
   var items_CArray = newSeq[pointer](len(items))
   for i in 0..<len(items):
     items_CArray[i] = items[i].h
 
   fcQTreeWidget_insertTopLevelItems(self.h, index, struct_miqt_array(len: csize_t(len(items)), data: if len(items) == 0: nil else: addr(items_CArray[0])))
 
-proc addTopLevelItems*(self: gen_qtreewidget_types.QTreeWidget, items: seq[gen_qtreewidget_types.QTreeWidgetItem]): void =
+proc addTopLevelItems*(self: gen_qtreewidget_types.QTreeWidget, items: openArray[gen_qtreewidget_types.QTreeWidgetItem]): void =
   var items_CArray = newSeq[pointer](len(items))
   for i in 0..<len(items):
     items_CArray[i] = items[i].h
@@ -1478,14 +1495,14 @@ proc headerItem*(self: gen_qtreewidget_types.QTreeWidget): gen_qtreewidget_types
 proc setHeaderItem*(self: gen_qtreewidget_types.QTreeWidget, item: gen_qtreewidget_types.QTreeWidgetItem): void =
   fcQTreeWidget_setHeaderItem(self.h, item.h)
 
-proc setHeaderLabels*(self: gen_qtreewidget_types.QTreeWidget, labels: seq[string]): void =
+proc setHeaderLabels*(self: gen_qtreewidget_types.QTreeWidget, labels: openArray[string]): void =
   var labels_CArray = newSeq[struct_miqt_string](len(labels))
   for i in 0..<len(labels):
     labels_CArray[i] = struct_miqt_string(data: if len(labels[i]) > 0: addr labels[i][0] else: nil, len: csize_t(len(labels[i])))
 
   fcQTreeWidget_setHeaderLabels(self.h, struct_miqt_array(len: csize_t(len(labels)), data: if len(labels) == 0: nil else: addr(labels_CArray[0])))
 
-proc setHeaderLabel*(self: gen_qtreewidget_types.QTreeWidget, label: string): void =
+proc setHeaderLabel*(self: gen_qtreewidget_types.QTreeWidget, label: openArray[char]): void =
   fcQTreeWidget_setHeaderLabel(self.h, struct_miqt_string(data: if len(label) > 0: addr label[0] else: nil, len: csize_t(len(label))))
 
 proc currentItem*(self: gen_qtreewidget_types.QTreeWidget): gen_qtreewidget_types.QTreeWidgetItem =
@@ -1548,7 +1565,7 @@ proc selectedItems*(self: gen_qtreewidget_types.QTreeWidget): seq[gen_qtreewidge
   c_free(v_ma.data)
   vx_ret
 
-proc findItems*(self: gen_qtreewidget_types.QTreeWidget, text: string, flags: cint): seq[gen_qtreewidget_types.QTreeWidgetItem] =
+proc findItems*(self: gen_qtreewidget_types.QTreeWidget, text: openArray[char], flags: cint): seq[gen_qtreewidget_types.QTreeWidgetItem] =
   var v_ma = fcQTreeWidget_findItems(self.h, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), cint(flags))
   var vx_ret = newSeq[gen_qtreewidget_types.QTreeWidgetItem](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
@@ -1820,7 +1837,7 @@ proc closePersistentEditor*(self: gen_qtreewidget_types.QTreeWidget, item: gen_q
 proc isPersistentEditorOpen*(self: gen_qtreewidget_types.QTreeWidget, item: gen_qtreewidget_types.QTreeWidgetItem, column: cint): bool =
   fcQTreeWidget_isPersistentEditorOpen2(self.h, item.h, column)
 
-proc findItems*(self: gen_qtreewidget_types.QTreeWidget, text: string, flags: cint, column: cint): seq[gen_qtreewidget_types.QTreeWidgetItem] =
+proc findItems*(self: gen_qtreewidget_types.QTreeWidget, text: openArray[char], flags: cint, column: cint): seq[gen_qtreewidget_types.QTreeWidgetItem] =
   var v_ma = fcQTreeWidget_findItems3(self.h, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), cint(flags), column)
   var vx_ret = newSeq[gen_qtreewidget_types.QTreeWidgetItem](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
@@ -1841,18 +1858,18 @@ type QTreeWidgetmetacallProc* = proc(self: QTreeWidget, param1: cint, param2: ci
 type QTreeWidgetsetSelectionModelProc* = proc(self: QTreeWidget, selectionModel: gen_qitemselectionmodel_types.QItemSelectionModel): void {.raises: [], gcsafe.}
 type QTreeWidgeteventProc* = proc(self: QTreeWidget, e: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
 type QTreeWidgetmimeTypesProc* = proc(self: QTreeWidget): seq[string] {.raises: [], gcsafe.}
-type QTreeWidgetmimeDataProc* = proc(self: QTreeWidget, items: seq[gen_qtreewidget_types.QTreeWidgetItem]): gen_qmimedata_types.QMimeData {.raises: [], gcsafe.}
+type QTreeWidgetmimeDataProc* = proc(self: QTreeWidget, items: openArray[gen_qtreewidget_types.QTreeWidgetItem]): gen_qmimedata_types.QMimeData {.raises: [], gcsafe.}
 type QTreeWidgetdropMimeDataProc* = proc(self: QTreeWidget, parent: gen_qtreewidget_types.QTreeWidgetItem, index: cint, data: gen_qmimedata_types.QMimeData, action: cint): bool {.raises: [], gcsafe.}
 type QTreeWidgetsupportedDropActionsProc* = proc(self: QTreeWidget): cint {.raises: [], gcsafe.}
 type QTreeWidgetdropEventProc* = proc(self: QTreeWidget, event: gen_qevent_types.QDropEvent): void {.raises: [], gcsafe.}
 type QTreeWidgetsetRootIndexProc* = proc(self: QTreeWidget, index: gen_qabstractitemmodel_types.QModelIndex): void {.raises: [], gcsafe.}
-type QTreeWidgetkeyboardSearchProc* = proc(self: QTreeWidget, search: string): void {.raises: [], gcsafe.}
+type QTreeWidgetkeyboardSearchProc* = proc(self: QTreeWidget, search: openArray[char]): void {.raises: [], gcsafe.}
 type QTreeWidgetvisualRectProc* = proc(self: QTreeWidget, index: gen_qabstractitemmodel_types.QModelIndex): gen_qrect_types.QRect {.raises: [], gcsafe.}
 type QTreeWidgetscrollToProc* = proc(self: QTreeWidget, index: gen_qabstractitemmodel_types.QModelIndex, hint: cint): void {.raises: [], gcsafe.}
 type QTreeWidgetindexAtProc* = proc(self: QTreeWidget, p: gen_qpoint_types.QPoint): gen_qabstractitemmodel_types.QModelIndex {.raises: [], gcsafe.}
 type QTreeWidgetdoItemsLayoutProc* = proc(self: QTreeWidget): void {.raises: [], gcsafe.}
 type QTreeWidgetresetProc* = proc(self: QTreeWidget): void {.raises: [], gcsafe.}
-type QTreeWidgetdataChangedProc* = proc(self: QTreeWidget, topLeft: gen_qabstractitemmodel_types.QModelIndex, bottomRight: gen_qabstractitemmodel_types.QModelIndex, roles: seq[cint]): void {.raises: [], gcsafe.}
+type QTreeWidgetdataChangedProc* = proc(self: QTreeWidget, topLeft: gen_qabstractitemmodel_types.QModelIndex, bottomRight: gen_qabstractitemmodel_types.QModelIndex, roles: openArray[cint]): void {.raises: [], gcsafe.}
 type QTreeWidgetselectAllProc* = proc(self: QTreeWidget): void {.raises: [], gcsafe.}
 type QTreeWidgetverticalScrollbarValueChangedProc* = proc(self: QTreeWidget, value: cint): void {.raises: [], gcsafe.}
 type QTreeWidgetscrollContentsByProc* = proc(self: QTreeWidget, dx: cint, dy: cint): void {.raises: [], gcsafe.}
@@ -1925,7 +1942,7 @@ type QTreeWidgettabletEventProc* = proc(self: QTreeWidget, event: gen_qevent_typ
 type QTreeWidgetactionEventProc* = proc(self: QTreeWidget, event: gen_qevent_types.QActionEvent): void {.raises: [], gcsafe.}
 type QTreeWidgetshowEventProc* = proc(self: QTreeWidget, event: gen_qevent_types.QShowEvent): void {.raises: [], gcsafe.}
 type QTreeWidgethideEventProc* = proc(self: QTreeWidget, event: gen_qevent_types.QHideEvent): void {.raises: [], gcsafe.}
-type QTreeWidgetnativeEventProc* = proc(self: QTreeWidget, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
+type QTreeWidgetnativeEventProc* = proc(self: QTreeWidget, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
 type QTreeWidgetmetricProc* = proc(self: QTreeWidget, param1: cint): cint {.raises: [], gcsafe.}
 type QTreeWidgetinitPainterProc* = proc(self: QTreeWidget, painter: gen_qpainter_types.QPainter): void {.raises: [], gcsafe.}
 type QTreeWidgetredirectedProc* = proc(self: QTreeWidget, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.raises: [], gcsafe.}
@@ -2112,7 +2129,7 @@ proc fcQTreeWidget_vtable_callback_mimeTypes(self: pointer): struct_miqt_array {
 
   struct_miqt_array(len: csize_t(len(virtualReturn)), data: if len(virtualReturn) == 0: nil else: addr(virtualReturn_CArray[0]))
 
-proc QTreeWidgetmimeData*(self: gen_qtreewidget_types.QTreeWidget, items: seq[gen_qtreewidget_types.QTreeWidgetItem]): gen_qmimedata_types.QMimeData =
+proc QTreeWidgetmimeData*(self: gen_qtreewidget_types.QTreeWidget, items: openArray[gen_qtreewidget_types.QTreeWidgetItem]): gen_qmimedata_types.QMimeData =
   var items_CArray = newSeq[pointer](len(items))
   for i in 0..<len(items):
     items_CArray[i] = items[i].h
@@ -2175,7 +2192,7 @@ proc fcQTreeWidget_vtable_callback_setRootIndex(self: pointer, index: pointer): 
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   vtbl[].setRootIndex(self, slotval1)
 
-proc QTreeWidgetkeyboardSearch*(self: gen_qtreewidget_types.QTreeWidget, search: string): void =
+proc QTreeWidgetkeyboardSearch*(self: gen_qtreewidget_types.QTreeWidget, search: openArray[char]): void =
   fcQTreeWidget_virtualbase_keyboardSearch(self.h, struct_miqt_string(data: if len(search) > 0: addr search[0] else: nil, len: csize_t(len(search))))
 
 proc fcQTreeWidget_vtable_callback_keyboardSearch(self: pointer, search: struct_miqt_string): void {.cdecl.} =
@@ -2239,7 +2256,7 @@ proc fcQTreeWidget_vtable_callback_reset(self: pointer): void {.cdecl.} =
   let self = QTreeWidget(h: self)
   vtbl[].reset(self)
 
-proc QTreeWidgetdataChanged*(self: gen_qtreewidget_types.QTreeWidget, topLeft: gen_qabstractitemmodel_types.QModelIndex, bottomRight: gen_qabstractitemmodel_types.QModelIndex, roles: seq[cint]): void =
+proc QTreeWidgetdataChanged*(self: gen_qtreewidget_types.QTreeWidget, topLeft: gen_qabstractitemmodel_types.QModelIndex, bottomRight: gen_qabstractitemmodel_types.QModelIndex, roles: openArray[cint]): void =
   var roles_CArray = newSeq[cint](len(roles))
   for i in 0..<len(roles):
     roles_CArray[i] = roles[i]
@@ -2972,7 +2989,7 @@ proc fcQTreeWidget_vtable_callback_hideEvent(self: pointer, event: pointer): voi
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   vtbl[].hideEvent(self, slotval1)
 
-proc QTreeWidgetnativeEvent*(self: gen_qtreewidget_types.QTreeWidget, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool =
+proc QTreeWidgetnativeEvent*(self: gen_qtreewidget_types.QTreeWidget, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool =
   fcQTreeWidget_virtualbase_nativeEvent(self.h, struct_miqt_string(data: if len(eventType) > 0: addr eventType[0] else: nil, len: csize_t(len(eventType))), message, resultVal)
 
 proc fcQTreeWidget_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
@@ -3120,7 +3137,7 @@ proc fcQTreeWidget_method_callback_mimeTypes(self: pointer): struct_miqt_array {
 
   struct_miqt_array(len: csize_t(len(virtualReturn)), data: if len(virtualReturn) == 0: nil else: addr(virtualReturn_CArray[0]))
 
-method mimeData*(self: VirtualQTreeWidget, items: seq[gen_qtreewidget_types.QTreeWidgetItem]): gen_qmimedata_types.QMimeData {.base.} =
+method mimeData*(self: VirtualQTreeWidget, items: openArray[gen_qtreewidget_types.QTreeWidgetItem]): gen_qmimedata_types.QMimeData {.base.} =
   QTreeWidgetmimeData(self[], items)
 proc fcQTreeWidget_method_callback_mimeData(self: pointer, items: struct_miqt_array): pointer {.cdecl.} =
   let inst = cast[VirtualQTreeWidget](fcQTreeWidget_vdata(self)[])
@@ -3166,7 +3183,7 @@ proc fcQTreeWidget_method_callback_setRootIndex(self: pointer, index: pointer): 
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   inst.setRootIndex(slotval1)
 
-method keyboardSearch*(self: VirtualQTreeWidget, search: string): void {.base.} =
+method keyboardSearch*(self: VirtualQTreeWidget, search: openArray[char]): void {.base.} =
   QTreeWidgetkeyboardSearch(self[], search)
 proc fcQTreeWidget_method_callback_keyboardSearch(self: pointer, search: struct_miqt_string): void {.cdecl.} =
   let inst = cast[VirtualQTreeWidget](fcQTreeWidget_vdata(self)[])
@@ -3212,7 +3229,7 @@ proc fcQTreeWidget_method_callback_reset(self: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTreeWidget](fcQTreeWidget_vdata(self)[])
   inst.reset()
 
-method dataChanged*(self: VirtualQTreeWidget, topLeft: gen_qabstractitemmodel_types.QModelIndex, bottomRight: gen_qabstractitemmodel_types.QModelIndex, roles: seq[cint]): void {.base.} =
+method dataChanged*(self: VirtualQTreeWidget, topLeft: gen_qabstractitemmodel_types.QModelIndex, bottomRight: gen_qabstractitemmodel_types.QModelIndex, roles: openArray[cint]): void {.base.} =
   QTreeWidgetdataChanged(self[], topLeft, bottomRight, roles)
 proc fcQTreeWidget_method_callback_dataChanged(self: pointer, topLeft: pointer, bottomRight: pointer, roles: struct_miqt_array): void {.cdecl.} =
   let inst = cast[VirtualQTreeWidget](fcQTreeWidget_vdata(self)[])
@@ -3762,7 +3779,7 @@ proc fcQTreeWidget_method_callback_hideEvent(self: pointer, event: pointer): voi
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   inst.hideEvent(slotval1)
 
-method nativeEvent*(self: VirtualQTreeWidget, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
+method nativeEvent*(self: VirtualQTreeWidget, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
   QTreeWidgetnativeEvent(self[], eventType, message, resultVal)
 proc fcQTreeWidget_method_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
   let inst = cast[VirtualQTreeWidget](fcQTreeWidget_vdata(self)[])
@@ -4455,12 +4472,14 @@ proc create*(T: type gen_qtreewidget_types.QTreeWidget,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQTreeWidget_new(addr(cQTreeWidget_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQTreeWidget_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qtreewidget_types.QTreeWidget,
     inst: VirtualQTreeWidget) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQTreeWidget_new2(addr(cQTreeWidget_mvtbl), csize_t(sizeof(pointer)))
   fcQTreeWidget_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qtreewidget_types.QTreeWidget): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQTreeWidget_staticMetaObject())

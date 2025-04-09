@@ -293,10 +293,10 @@ proc oncanRedoChanged*(self: gen_qundogroup_types.QUndoGroup, slot: QUndoGroupca
   GC_ref(tmp)
   fcQUndoGroup_connect_canRedoChanged(self.h, cast[int](addr tmp[]), fcQUndoGroup_slot_callback_canRedoChanged, fcQUndoGroup_slot_callback_canRedoChanged_release)
 
-proc undoTextChanged*(self: gen_qundogroup_types.QUndoGroup, undoText: string): void =
+proc undoTextChanged*(self: gen_qundogroup_types.QUndoGroup, undoText: openArray[char]): void =
   fcQUndoGroup_undoTextChanged(self.h, struct_miqt_string(data: if len(undoText) > 0: addr undoText[0] else: nil, len: csize_t(len(undoText))))
 
-type QUndoGroupundoTextChangedSlot* = proc(undoText: string)
+type QUndoGroupundoTextChangedSlot* = proc(undoText: openArray[char])
 proc fcQUndoGroup_slot_callback_undoTextChanged(slot: int, undoText: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QUndoGroupundoTextChangedSlot](cast[pointer](slot))
   let vundoText_ms = undoText
@@ -316,10 +316,10 @@ proc onundoTextChanged*(self: gen_qundogroup_types.QUndoGroup, slot: QUndoGroupu
   GC_ref(tmp)
   fcQUndoGroup_connect_undoTextChanged(self.h, cast[int](addr tmp[]), fcQUndoGroup_slot_callback_undoTextChanged, fcQUndoGroup_slot_callback_undoTextChanged_release)
 
-proc redoTextChanged*(self: gen_qundogroup_types.QUndoGroup, redoText: string): void =
+proc redoTextChanged*(self: gen_qundogroup_types.QUndoGroup, redoText: openArray[char]): void =
   fcQUndoGroup_redoTextChanged(self.h, struct_miqt_string(data: if len(redoText) > 0: addr redoText[0] else: nil, len: csize_t(len(redoText))))
 
-type QUndoGroupredoTextChangedSlot* = proc(redoText: string)
+type QUndoGroupredoTextChangedSlot* = proc(redoText: openArray[char])
 proc fcQUndoGroup_slot_callback_redoTextChanged(slot: int, redoText: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QUndoGroupredoTextChangedSlot](cast[pointer](slot))
   let vredoText_ms = redoText
@@ -351,10 +351,10 @@ proc tr*(_: type gen_qundogroup_types.QUndoGroup, s: cstring, c: cstring, n: cin
   c_free(v_ms.data)
   vx_ret
 
-proc createUndoAction*(self: gen_qundogroup_types.QUndoGroup, parent: gen_qobject_types.QObject, prefix: string): gen_qaction_types.QAction =
+proc createUndoAction*(self: gen_qundogroup_types.QUndoGroup, parent: gen_qobject_types.QObject, prefix: openArray[char]): gen_qaction_types.QAction =
   gen_qaction_types.QAction(h: fcQUndoGroup_createUndoAction2(self.h, parent.h, struct_miqt_string(data: if len(prefix) > 0: addr prefix[0] else: nil, len: csize_t(len(prefix)))), owned: false)
 
-proc createRedoAction*(self: gen_qundogroup_types.QUndoGroup, parent: gen_qobject_types.QObject, prefix: string): gen_qaction_types.QAction =
+proc createRedoAction*(self: gen_qundogroup_types.QUndoGroup, parent: gen_qobject_types.QObject, prefix: openArray[char]): gen_qaction_types.QAction =
   gen_qaction_types.QAction(h: fcQUndoGroup_createRedoAction2(self.h, parent.h, struct_miqt_string(data: if len(prefix) > 0: addr prefix[0] else: nil, len: csize_t(len(prefix)))), owned: false)
 
 type QUndoGroupmetaObjectProc* = proc(self: QUndoGroup): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
@@ -653,6 +653,7 @@ proc create*(T: type gen_qundogroup_types.QUndoGroup,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQUndoGroup_new(addr(cQUndoGroup_mvtbl), csize_t(sizeof(pointer)))
   fcQUndoGroup_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qundogroup_types.QUndoGroup,
     parent: gen_qobject_types.QObject,
@@ -660,6 +661,7 @@ proc create*(T: type gen_qundogroup_types.QUndoGroup,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQUndoGroup_new2(addr(cQUndoGroup_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQUndoGroup_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qundogroup_types.QUndoGroup): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQUndoGroup_staticMetaObject())

@@ -139,7 +139,7 @@ proc propertyName*(self: gen_qpropertyanimation_types.QPropertyAnimation): seq[b
   c_free(v_bytearray.data)
   vx_ret
 
-proc setPropertyName*(self: gen_qpropertyanimation_types.QPropertyAnimation, propertyName: seq[byte]): void =
+proc setPropertyName*(self: gen_qpropertyanimation_types.QPropertyAnimation, propertyName: openArray[byte]): void =
   fcQPropertyAnimation_setPropertyName(self.h, struct_miqt_string(data: if len(propertyName) > 0: addr propertyName[0] else: nil, len: csize_t(len(propertyName))))
 
 proc tr*(_: type gen_qpropertyanimation_types.QPropertyAnimation, s: cstring, c: cstring): string =
@@ -529,7 +529,7 @@ proc create*(T: type gen_qpropertyanimation_types.QPropertyAnimation,
   fcQPropertyAnimation_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qpropertyanimation_types.QPropertyAnimation,
-    target: gen_qobject_types.QObject, propertyName: seq[byte],
+    target: gen_qobject_types.QObject, propertyName: openArray[byte],
     vtbl: ref QPropertyAnimationVTable = nil): gen_qpropertyanimation_types.QPropertyAnimation =
   let vtbl = if vtbl == nil: new QPropertyAnimationVTable else: vtbl
   GC_ref(vtbl)
@@ -615,7 +615,7 @@ proc create*(T: type gen_qpropertyanimation_types.QPropertyAnimation,
   fcQPropertyAnimation_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qpropertyanimation_types.QPropertyAnimation,
-    target: gen_qobject_types.QObject, propertyName: seq[byte], parent: gen_qobject_types.QObject,
+    target: gen_qobject_types.QObject, propertyName: openArray[byte], parent: gen_qobject_types.QObject,
     vtbl: ref QPropertyAnimationVTable = nil): gen_qpropertyanimation_types.QPropertyAnimation =
   let vtbl = if vtbl == nil: new QPropertyAnimationVTable else: vtbl
   GC_ref(vtbl)
@@ -685,13 +685,15 @@ proc create*(T: type gen_qpropertyanimation_types.QPropertyAnimation,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQPropertyAnimation_new(addr(cQPropertyAnimation_mvtbl), csize_t(sizeof(pointer)))
   fcQPropertyAnimation_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qpropertyanimation_types.QPropertyAnimation,
-    target: gen_qobject_types.QObject, propertyName: seq[byte],
+    target: gen_qobject_types.QObject, propertyName: openArray[byte],
     inst: VirtualQPropertyAnimation) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQPropertyAnimation_new2(addr(cQPropertyAnimation_mvtbl), csize_t(sizeof(pointer)), target.h, struct_miqt_string(data: if len(propertyName) > 0: addr propertyName[0] else: nil, len: csize_t(len(propertyName))))
   fcQPropertyAnimation_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qpropertyanimation_types.QPropertyAnimation,
     parent: gen_qobject_types.QObject,
@@ -699,13 +701,15 @@ proc create*(T: type gen_qpropertyanimation_types.QPropertyAnimation,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQPropertyAnimation_new3(addr(cQPropertyAnimation_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQPropertyAnimation_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qpropertyanimation_types.QPropertyAnimation,
-    target: gen_qobject_types.QObject, propertyName: seq[byte], parent: gen_qobject_types.QObject,
+    target: gen_qobject_types.QObject, propertyName: openArray[byte], parent: gen_qobject_types.QObject,
     inst: VirtualQPropertyAnimation) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQPropertyAnimation_new4(addr(cQPropertyAnimation_mvtbl), csize_t(sizeof(pointer)), target.h, struct_miqt_string(data: if len(propertyName) > 0: addr propertyName[0] else: nil, len: csize_t(len(propertyName))), parent.h)
   fcQPropertyAnimation_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qpropertyanimation_types.QPropertyAnimation): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQPropertyAnimation_staticMetaObject())

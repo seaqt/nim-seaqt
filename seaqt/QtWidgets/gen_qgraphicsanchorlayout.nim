@@ -515,6 +515,7 @@ proc create*(T: type gen_qgraphicsanchorlayout_types.QGraphicsAnchorLayout,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQGraphicsAnchorLayout_new(addr(cQGraphicsAnchorLayout_mvtbl), csize_t(sizeof(pointer)))
   fcQGraphicsAnchorLayout_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qgraphicsanchorlayout_types.QGraphicsAnchorLayout,
     parent: gen_qgraphicslayoutitem_types.QGraphicsLayoutItem,
@@ -522,4 +523,5 @@ proc create*(T: type gen_qgraphicsanchorlayout_types.QGraphicsAnchorLayout,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQGraphicsAnchorLayout_new2(addr(cQGraphicsAnchorLayout_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQGraphicsAnchorLayout_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 

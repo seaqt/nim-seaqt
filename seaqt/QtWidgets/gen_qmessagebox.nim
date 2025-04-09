@@ -379,7 +379,7 @@ proc tr*(_: type gen_qmessagebox_types.QMessageBox, s: cstring): string =
 proc addButton*(self: gen_qmessagebox_types.QMessageBox, button: gen_qabstractbutton_types.QAbstractButton, role: cint): void =
   fcQMessageBox_addButton(self.h, button.h, cint(role))
 
-proc addButton*(self: gen_qmessagebox_types.QMessageBox, text: string, role: cint): gen_qpushbutton_types.QPushButton =
+proc addButton*(self: gen_qmessagebox_types.QMessageBox, text: openArray[char], role: cint): gen_qpushbutton_types.QPushButton =
   gen_qpushbutton_types.QPushButton(h: fcQMessageBox_addButton2(self.h, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), cint(role)), owned: false)
 
 proc addButton*(self: gen_qmessagebox_types.QMessageBox, button: cint): gen_qpushbutton_types.QPushButton =
@@ -439,7 +439,7 @@ proc text*(self: gen_qmessagebox_types.QMessageBox): string =
   c_free(v_ms.data)
   vx_ret
 
-proc setText*(self: gen_qmessagebox_types.QMessageBox, text: string): void =
+proc setText*(self: gen_qmessagebox_types.QMessageBox, text: openArray[char]): void =
   fcQMessageBox_setText(self.h, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
 
 proc icon*(self: gen_qmessagebox_types.QMessageBox): cint =
@@ -472,58 +472,58 @@ proc setCheckBox*(self: gen_qmessagebox_types.QMessageBox, cb: gen_qcheckbox_typ
 proc checkBox*(self: gen_qmessagebox_types.QMessageBox): gen_qcheckbox_types.QCheckBox =
   gen_qcheckbox_types.QCheckBox(h: fcQMessageBox_checkBox(self.h), owned: false)
 
-proc information*(_: type gen_qmessagebox_types.QMessageBox, parent: gen_qwidget_types.QWidget, title: string, text: string): cint =
+proc information*(_: type gen_qmessagebox_types.QMessageBox, parent: gen_qwidget_types.QWidget, title: openArray[char], text: openArray[char]): cint =
   cint(fcQMessageBox_information(parent.h, struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))))
 
-proc information*(_: type gen_qmessagebox_types.QMessageBox, parent: gen_qwidget_types.QWidget, title: string, text: string, button0: cint): cint =
+proc information*(_: type gen_qmessagebox_types.QMessageBox, parent: gen_qwidget_types.QWidget, title: openArray[char], text: openArray[char], button0: cint): cint =
   cint(fcQMessageBox_information2(parent.h, struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), cint(button0)))
 
-proc question*(_: type gen_qmessagebox_types.QMessageBox, parent: gen_qwidget_types.QWidget, title: string, text: string): cint =
+proc question*(_: type gen_qmessagebox_types.QMessageBox, parent: gen_qwidget_types.QWidget, title: openArray[char], text: openArray[char]): cint =
   cint(fcQMessageBox_question(parent.h, struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))))
 
-proc question*(_: type gen_qmessagebox_types.QMessageBox, parent: gen_qwidget_types.QWidget, title: string, text: string, button0: cint, button1: cint): cint =
+proc question*(_: type gen_qmessagebox_types.QMessageBox, parent: gen_qwidget_types.QWidget, title: openArray[char], text: openArray[char], button0: cint, button1: cint): cint =
   fcQMessageBox_question2(parent.h, struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), cint(button0), cint(button1))
 
-proc warning*(_: type gen_qmessagebox_types.QMessageBox, parent: gen_qwidget_types.QWidget, title: string, text: string): cint =
+proc warning*(_: type gen_qmessagebox_types.QMessageBox, parent: gen_qwidget_types.QWidget, title: openArray[char], text: openArray[char]): cint =
   cint(fcQMessageBox_warning(parent.h, struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))))
 
-proc warning*(_: type gen_qmessagebox_types.QMessageBox, parent: gen_qwidget_types.QWidget, title: string, text: string, button0: cint, button1: cint): cint =
+proc warning*(_: type gen_qmessagebox_types.QMessageBox, parent: gen_qwidget_types.QWidget, title: openArray[char], text: openArray[char], button0: cint, button1: cint): cint =
   fcQMessageBox_warning2(parent.h, struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), cint(button0), cint(button1))
 
-proc critical*(_: type gen_qmessagebox_types.QMessageBox, parent: gen_qwidget_types.QWidget, title: string, text: string): cint =
+proc critical*(_: type gen_qmessagebox_types.QMessageBox, parent: gen_qwidget_types.QWidget, title: openArray[char], text: openArray[char]): cint =
   cint(fcQMessageBox_critical(parent.h, struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))))
 
-proc critical*(_: type gen_qmessagebox_types.QMessageBox, parent: gen_qwidget_types.QWidget, title: string, text: string, button0: cint, button1: cint): cint =
+proc critical*(_: type gen_qmessagebox_types.QMessageBox, parent: gen_qwidget_types.QWidget, title: openArray[char], text: openArray[char], button0: cint, button1: cint): cint =
   fcQMessageBox_critical2(parent.h, struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), cint(button0), cint(button1))
 
-proc about*(_: type gen_qmessagebox_types.QMessageBox, parent: gen_qwidget_types.QWidget, title: string, text: string): void =
+proc about*(_: type gen_qmessagebox_types.QMessageBox, parent: gen_qwidget_types.QWidget, title: openArray[char], text: openArray[char]): void =
   fcQMessageBox_about(parent.h, struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
 
 proc aboutQt*(_: type gen_qmessagebox_types.QMessageBox, parent: gen_qwidget_types.QWidget): void =
   fcQMessageBox_aboutQt(parent.h)
 
-proc information2*(_: type gen_qmessagebox_types.QMessageBox, parent: gen_qwidget_types.QWidget, title: string, text: string, button0: cint): cint =
+proc information2*(_: type gen_qmessagebox_types.QMessageBox, parent: gen_qwidget_types.QWidget, title: openArray[char], text: openArray[char], button0: cint): cint =
   fcQMessageBox_information3(parent.h, struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), button0)
 
-proc information*(_: type gen_qmessagebox_types.QMessageBox, parent: gen_qwidget_types.QWidget, title: string, text: string, button0Text: string): cint =
+proc information*(_: type gen_qmessagebox_types.QMessageBox, parent: gen_qwidget_types.QWidget, title: openArray[char], text: openArray[char], button0Text: openArray[char]): cint =
   fcQMessageBox_information4(parent.h, struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), struct_miqt_string(data: if len(button0Text) > 0: addr button0Text[0] else: nil, len: csize_t(len(button0Text))))
 
-proc question*(_: type gen_qmessagebox_types.QMessageBox, parent: gen_qwidget_types.QWidget, title: string, text: string, button0: cint): cint =
+proc question*(_: type gen_qmessagebox_types.QMessageBox, parent: gen_qwidget_types.QWidget, title: openArray[char], text: openArray[char], button0: cint): cint =
   fcQMessageBox_question3(parent.h, struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), button0)
 
-proc question*(_: type gen_qmessagebox_types.QMessageBox, parent: gen_qwidget_types.QWidget, title: string, text: string, button0Text: string): cint =
+proc question*(_: type gen_qmessagebox_types.QMessageBox, parent: gen_qwidget_types.QWidget, title: openArray[char], text: openArray[char], button0Text: openArray[char]): cint =
   fcQMessageBox_question4(parent.h, struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), struct_miqt_string(data: if len(button0Text) > 0: addr button0Text[0] else: nil, len: csize_t(len(button0Text))))
 
-proc warning2*(_: type gen_qmessagebox_types.QMessageBox, parent: gen_qwidget_types.QWidget, title: string, text: string, button0: cint, button1: cint): cint =
+proc warning2*(_: type gen_qmessagebox_types.QMessageBox, parent: gen_qwidget_types.QWidget, title: openArray[char], text: openArray[char], button0: cint, button1: cint): cint =
   fcQMessageBox_warning3(parent.h, struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), button0, button1)
 
-proc warning*(_: type gen_qmessagebox_types.QMessageBox, parent: gen_qwidget_types.QWidget, title: string, text: string, button0Text: string): cint =
+proc warning*(_: type gen_qmessagebox_types.QMessageBox, parent: gen_qwidget_types.QWidget, title: openArray[char], text: openArray[char], button0Text: openArray[char]): cint =
   fcQMessageBox_warning4(parent.h, struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), struct_miqt_string(data: if len(button0Text) > 0: addr button0Text[0] else: nil, len: csize_t(len(button0Text))))
 
-proc critical2*(_: type gen_qmessagebox_types.QMessageBox, parent: gen_qwidget_types.QWidget, title: string, text: string, button0: cint, button1: cint): cint =
+proc critical2*(_: type gen_qmessagebox_types.QMessageBox, parent: gen_qwidget_types.QWidget, title: openArray[char], text: openArray[char], button0: cint, button1: cint): cint =
   fcQMessageBox_critical3(parent.h, struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), button0, button1)
 
-proc critical*(_: type gen_qmessagebox_types.QMessageBox, parent: gen_qwidget_types.QWidget, title: string, text: string, button0Text: string): cint =
+proc critical*(_: type gen_qmessagebox_types.QMessageBox, parent: gen_qwidget_types.QWidget, title: openArray[char], text: openArray[char], button0Text: openArray[char]): cint =
   fcQMessageBox_critical4(parent.h, struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), struct_miqt_string(data: if len(button0Text) > 0: addr button0Text[0] else: nil, len: csize_t(len(button0Text))))
 
 proc buttonText*(self: gen_qmessagebox_types.QMessageBox, button: cint): string =
@@ -532,7 +532,7 @@ proc buttonText*(self: gen_qmessagebox_types.QMessageBox, button: cint): string 
   c_free(v_ms.data)
   vx_ret
 
-proc setButtonText*(self: gen_qmessagebox_types.QMessageBox, button: cint, text: string): void =
+proc setButtonText*(self: gen_qmessagebox_types.QMessageBox, button: cint, text: openArray[char]): void =
   fcQMessageBox_setButtonText(self.h, button, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
 
 proc informativeText*(self: gen_qmessagebox_types.QMessageBox): string =
@@ -541,7 +541,7 @@ proc informativeText*(self: gen_qmessagebox_types.QMessageBox): string =
   c_free(v_ms.data)
   vx_ret
 
-proc setInformativeText*(self: gen_qmessagebox_types.QMessageBox, text: string): void =
+proc setInformativeText*(self: gen_qmessagebox_types.QMessageBox, text: openArray[char]): void =
   fcQMessageBox_setInformativeText(self.h, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
 
 proc detailedText*(self: gen_qmessagebox_types.QMessageBox): string =
@@ -550,10 +550,10 @@ proc detailedText*(self: gen_qmessagebox_types.QMessageBox): string =
   c_free(v_ms.data)
   vx_ret
 
-proc setDetailedText*(self: gen_qmessagebox_types.QMessageBox, text: string): void =
+proc setDetailedText*(self: gen_qmessagebox_types.QMessageBox, text: openArray[char]): void =
   fcQMessageBox_setDetailedText(self.h, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
 
-proc setWindowTitle*(self: gen_qmessagebox_types.QMessageBox, title: string): void =
+proc setWindowTitle*(self: gen_qmessagebox_types.QMessageBox, title: openArray[char]): void =
   fcQMessageBox_setWindowTitle(self.h, struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))))
 
 proc setWindowModality*(self: gen_qmessagebox_types.QMessageBox, windowModality: cint): void =
@@ -594,100 +594,100 @@ proc tr*(_: type gen_qmessagebox_types.QMessageBox, s: cstring, c: cstring, n: c
   c_free(v_ms.data)
   vx_ret
 
-proc information3*(_: type gen_qmessagebox_types.QMessageBox, parent: gen_qwidget_types.QWidget, title: string, text: string, buttons: cint): cint =
+proc information3*(_: type gen_qmessagebox_types.QMessageBox, parent: gen_qwidget_types.QWidget, title: openArray[char], text: openArray[char], buttons: cint): cint =
   cint(fcQMessageBox_information42(parent.h, struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), cint(buttons)))
 
-proc information*(_: type gen_qmessagebox_types.QMessageBox, parent: gen_qwidget_types.QWidget, title: string, text: string, buttons: cint, defaultButton: cint): cint =
+proc information*(_: type gen_qmessagebox_types.QMessageBox, parent: gen_qwidget_types.QWidget, title: openArray[char], text: openArray[char], buttons: cint, defaultButton: cint): cint =
   cint(fcQMessageBox_information5(parent.h, struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), cint(buttons), cint(defaultButton)))
 
-proc information2*(_: type gen_qmessagebox_types.QMessageBox, parent: gen_qwidget_types.QWidget, title: string, text: string, button0: cint, button1: cint): cint =
+proc information2*(_: type gen_qmessagebox_types.QMessageBox, parent: gen_qwidget_types.QWidget, title: openArray[char], text: openArray[char], button0: cint, button1: cint): cint =
   cint(fcQMessageBox_information52(parent.h, struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), cint(button0), cint(button1)))
 
-proc question2*(_: type gen_qmessagebox_types.QMessageBox, parent: gen_qwidget_types.QWidget, title: string, text: string, buttons: cint): cint =
+proc question2*(_: type gen_qmessagebox_types.QMessageBox, parent: gen_qwidget_types.QWidget, title: openArray[char], text: openArray[char], buttons: cint): cint =
   cint(fcQMessageBox_question42(parent.h, struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), cint(buttons)))
 
-proc question2*(_: type gen_qmessagebox_types.QMessageBox, parent: gen_qwidget_types.QWidget, title: string, text: string, buttons: cint, defaultButton: cint): cint =
+proc question2*(_: type gen_qmessagebox_types.QMessageBox, parent: gen_qwidget_types.QWidget, title: openArray[char], text: openArray[char], buttons: cint, defaultButton: cint): cint =
   cint(fcQMessageBox_question5(parent.h, struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), cint(buttons), cint(defaultButton)))
 
-proc warning*(_: type gen_qmessagebox_types.QMessageBox, parent: gen_qwidget_types.QWidget, title: string, text: string, buttons: cint): cint =
+proc warning*(_: type gen_qmessagebox_types.QMessageBox, parent: gen_qwidget_types.QWidget, title: openArray[char], text: openArray[char], buttons: cint): cint =
   cint(fcQMessageBox_warning42(parent.h, struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), cint(buttons)))
 
-proc warning3*(_: type gen_qmessagebox_types.QMessageBox, parent: gen_qwidget_types.QWidget, title: string, text: string, buttons: cint, defaultButton: cint): cint =
+proc warning3*(_: type gen_qmessagebox_types.QMessageBox, parent: gen_qwidget_types.QWidget, title: openArray[char], text: openArray[char], buttons: cint, defaultButton: cint): cint =
   cint(fcQMessageBox_warning5(parent.h, struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), cint(buttons), cint(defaultButton)))
 
-proc critical*(_: type gen_qmessagebox_types.QMessageBox, parent: gen_qwidget_types.QWidget, title: string, text: string, buttons: cint): cint =
+proc critical*(_: type gen_qmessagebox_types.QMessageBox, parent: gen_qwidget_types.QWidget, title: openArray[char], text: openArray[char], buttons: cint): cint =
   cint(fcQMessageBox_critical42(parent.h, struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), cint(buttons)))
 
-proc critical3*(_: type gen_qmessagebox_types.QMessageBox, parent: gen_qwidget_types.QWidget, title: string, text: string, buttons: cint, defaultButton: cint): cint =
+proc critical3*(_: type gen_qmessagebox_types.QMessageBox, parent: gen_qwidget_types.QWidget, title: openArray[char], text: openArray[char], buttons: cint, defaultButton: cint): cint =
   cint(fcQMessageBox_critical5(parent.h, struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), cint(buttons), cint(defaultButton)))
 
-proc aboutQt*(_: type gen_qmessagebox_types.QMessageBox, parent: gen_qwidget_types.QWidget, title: string): void =
+proc aboutQt*(_: type gen_qmessagebox_types.QMessageBox, parent: gen_qwidget_types.QWidget, title: openArray[char]): void =
   fcQMessageBox_aboutQt2(parent.h, struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))))
 
-proc information3*(_: type gen_qmessagebox_types.QMessageBox, parent: gen_qwidget_types.QWidget, title: string, text: string, button0: cint, button1: cint): cint =
+proc information3*(_: type gen_qmessagebox_types.QMessageBox, parent: gen_qwidget_types.QWidget, title: openArray[char], text: openArray[char], button0: cint, button1: cint): cint =
   fcQMessageBox_information53(parent.h, struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), button0, button1)
 
-proc information*(_: type gen_qmessagebox_types.QMessageBox, parent: gen_qwidget_types.QWidget, title: string, text: string, button0: cint, button1: cint, button2: cint): cint =
+proc information*(_: type gen_qmessagebox_types.QMessageBox, parent: gen_qwidget_types.QWidget, title: openArray[char], text: openArray[char], button0: cint, button1: cint, button2: cint): cint =
   fcQMessageBox_information6(parent.h, struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), button0, button1, button2)
 
-proc information*(_: type gen_qmessagebox_types.QMessageBox, parent: gen_qwidget_types.QWidget, title: string, text: string, button0Text: string, button1Text: string): cint =
+proc information*(_: type gen_qmessagebox_types.QMessageBox, parent: gen_qwidget_types.QWidget, title: openArray[char], text: openArray[char], button0Text: openArray[char], button1Text: openArray[char]): cint =
   fcQMessageBox_information54(parent.h, struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), struct_miqt_string(data: if len(button0Text) > 0: addr button0Text[0] else: nil, len: csize_t(len(button0Text))), struct_miqt_string(data: if len(button1Text) > 0: addr button1Text[0] else: nil, len: csize_t(len(button1Text))))
 
-proc information*(_: type gen_qmessagebox_types.QMessageBox, parent: gen_qwidget_types.QWidget, title: string, text: string, button0Text: string, button1Text: string, button2Text: string): cint =
+proc information*(_: type gen_qmessagebox_types.QMessageBox, parent: gen_qwidget_types.QWidget, title: openArray[char], text: openArray[char], button0Text: openArray[char], button1Text: openArray[char], button2Text: openArray[char]): cint =
   fcQMessageBox_information62(parent.h, struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), struct_miqt_string(data: if len(button0Text) > 0: addr button0Text[0] else: nil, len: csize_t(len(button0Text))), struct_miqt_string(data: if len(button1Text) > 0: addr button1Text[0] else: nil, len: csize_t(len(button1Text))), struct_miqt_string(data: if len(button2Text) > 0: addr button2Text[0] else: nil, len: csize_t(len(button2Text))))
 
-proc information*(_: type gen_qmessagebox_types.QMessageBox, parent: gen_qwidget_types.QWidget, title: string, text: string, button0Text: string, button1Text: string, button2Text: string, defaultButtonNumber: cint): cint =
+proc information*(_: type gen_qmessagebox_types.QMessageBox, parent: gen_qwidget_types.QWidget, title: openArray[char], text: openArray[char], button0Text: openArray[char], button1Text: openArray[char], button2Text: openArray[char], defaultButtonNumber: cint): cint =
   fcQMessageBox_information7(parent.h, struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), struct_miqt_string(data: if len(button0Text) > 0: addr button0Text[0] else: nil, len: csize_t(len(button0Text))), struct_miqt_string(data: if len(button1Text) > 0: addr button1Text[0] else: nil, len: csize_t(len(button1Text))), struct_miqt_string(data: if len(button2Text) > 0: addr button2Text[0] else: nil, len: csize_t(len(button2Text))), defaultButtonNumber)
 
-proc information*(_: type gen_qmessagebox_types.QMessageBox, parent: gen_qwidget_types.QWidget, title: string, text: string, button0Text: string, button1Text: string, button2Text: string, defaultButtonNumber: cint, escapeButtonNumber: cint): cint =
+proc information*(_: type gen_qmessagebox_types.QMessageBox, parent: gen_qwidget_types.QWidget, title: openArray[char], text: openArray[char], button0Text: openArray[char], button1Text: openArray[char], button2Text: openArray[char], defaultButtonNumber: cint, escapeButtonNumber: cint): cint =
   fcQMessageBox_information8(parent.h, struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), struct_miqt_string(data: if len(button0Text) > 0: addr button0Text[0] else: nil, len: csize_t(len(button0Text))), struct_miqt_string(data: if len(button1Text) > 0: addr button1Text[0] else: nil, len: csize_t(len(button1Text))), struct_miqt_string(data: if len(button2Text) > 0: addr button2Text[0] else: nil, len: csize_t(len(button2Text))), defaultButtonNumber, escapeButtonNumber)
 
-proc question3*(_: type gen_qmessagebox_types.QMessageBox, parent: gen_qwidget_types.QWidget, title: string, text: string, button0: cint, button1: cint): cint =
+proc question3*(_: type gen_qmessagebox_types.QMessageBox, parent: gen_qwidget_types.QWidget, title: openArray[char], text: openArray[char], button0: cint, button1: cint): cint =
   fcQMessageBox_question52(parent.h, struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), button0, button1)
 
-proc question*(_: type gen_qmessagebox_types.QMessageBox, parent: gen_qwidget_types.QWidget, title: string, text: string, button0: cint, button1: cint, button2: cint): cint =
+proc question*(_: type gen_qmessagebox_types.QMessageBox, parent: gen_qwidget_types.QWidget, title: openArray[char], text: openArray[char], button0: cint, button1: cint, button2: cint): cint =
   fcQMessageBox_question6(parent.h, struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), button0, button1, button2)
 
-proc question*(_: type gen_qmessagebox_types.QMessageBox, parent: gen_qwidget_types.QWidget, title: string, text: string, button0Text: string, button1Text: string): cint =
+proc question*(_: type gen_qmessagebox_types.QMessageBox, parent: gen_qwidget_types.QWidget, title: openArray[char], text: openArray[char], button0Text: openArray[char], button1Text: openArray[char]): cint =
   fcQMessageBox_question53(parent.h, struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), struct_miqt_string(data: if len(button0Text) > 0: addr button0Text[0] else: nil, len: csize_t(len(button0Text))), struct_miqt_string(data: if len(button1Text) > 0: addr button1Text[0] else: nil, len: csize_t(len(button1Text))))
 
-proc question*(_: type gen_qmessagebox_types.QMessageBox, parent: gen_qwidget_types.QWidget, title: string, text: string, button0Text: string, button1Text: string, button2Text: string): cint =
+proc question*(_: type gen_qmessagebox_types.QMessageBox, parent: gen_qwidget_types.QWidget, title: openArray[char], text: openArray[char], button0Text: openArray[char], button1Text: openArray[char], button2Text: openArray[char]): cint =
   fcQMessageBox_question62(parent.h, struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), struct_miqt_string(data: if len(button0Text) > 0: addr button0Text[0] else: nil, len: csize_t(len(button0Text))), struct_miqt_string(data: if len(button1Text) > 0: addr button1Text[0] else: nil, len: csize_t(len(button1Text))), struct_miqt_string(data: if len(button2Text) > 0: addr button2Text[0] else: nil, len: csize_t(len(button2Text))))
 
-proc question*(_: type gen_qmessagebox_types.QMessageBox, parent: gen_qwidget_types.QWidget, title: string, text: string, button0Text: string, button1Text: string, button2Text: string, defaultButtonNumber: cint): cint =
+proc question*(_: type gen_qmessagebox_types.QMessageBox, parent: gen_qwidget_types.QWidget, title: openArray[char], text: openArray[char], button0Text: openArray[char], button1Text: openArray[char], button2Text: openArray[char], defaultButtonNumber: cint): cint =
   fcQMessageBox_question7(parent.h, struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), struct_miqt_string(data: if len(button0Text) > 0: addr button0Text[0] else: nil, len: csize_t(len(button0Text))), struct_miqt_string(data: if len(button1Text) > 0: addr button1Text[0] else: nil, len: csize_t(len(button1Text))), struct_miqt_string(data: if len(button2Text) > 0: addr button2Text[0] else: nil, len: csize_t(len(button2Text))), defaultButtonNumber)
 
-proc question*(_: type gen_qmessagebox_types.QMessageBox, parent: gen_qwidget_types.QWidget, title: string, text: string, button0Text: string, button1Text: string, button2Text: string, defaultButtonNumber: cint, escapeButtonNumber: cint): cint =
+proc question*(_: type gen_qmessagebox_types.QMessageBox, parent: gen_qwidget_types.QWidget, title: openArray[char], text: openArray[char], button0Text: openArray[char], button1Text: openArray[char], button2Text: openArray[char], defaultButtonNumber: cint, escapeButtonNumber: cint): cint =
   fcQMessageBox_question8(parent.h, struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), struct_miqt_string(data: if len(button0Text) > 0: addr button0Text[0] else: nil, len: csize_t(len(button0Text))), struct_miqt_string(data: if len(button1Text) > 0: addr button1Text[0] else: nil, len: csize_t(len(button1Text))), struct_miqt_string(data: if len(button2Text) > 0: addr button2Text[0] else: nil, len: csize_t(len(button2Text))), defaultButtonNumber, escapeButtonNumber)
 
-proc warning*(_: type gen_qmessagebox_types.QMessageBox, parent: gen_qwidget_types.QWidget, title: string, text: string, button0: cint, button1: cint, button2: cint): cint =
+proc warning*(_: type gen_qmessagebox_types.QMessageBox, parent: gen_qwidget_types.QWidget, title: openArray[char], text: openArray[char], button0: cint, button1: cint, button2: cint): cint =
   fcQMessageBox_warning6(parent.h, struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), button0, button1, button2)
 
-proc warning*(_: type gen_qmessagebox_types.QMessageBox, parent: gen_qwidget_types.QWidget, title: string, text: string, button0Text: string, button1Text: string): cint =
+proc warning*(_: type gen_qmessagebox_types.QMessageBox, parent: gen_qwidget_types.QWidget, title: openArray[char], text: openArray[char], button0Text: openArray[char], button1Text: openArray[char]): cint =
   fcQMessageBox_warning52(parent.h, struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), struct_miqt_string(data: if len(button0Text) > 0: addr button0Text[0] else: nil, len: csize_t(len(button0Text))), struct_miqt_string(data: if len(button1Text) > 0: addr button1Text[0] else: nil, len: csize_t(len(button1Text))))
 
-proc warning*(_: type gen_qmessagebox_types.QMessageBox, parent: gen_qwidget_types.QWidget, title: string, text: string, button0Text: string, button1Text: string, button2Text: string): cint =
+proc warning*(_: type gen_qmessagebox_types.QMessageBox, parent: gen_qwidget_types.QWidget, title: openArray[char], text: openArray[char], button0Text: openArray[char], button1Text: openArray[char], button2Text: openArray[char]): cint =
   fcQMessageBox_warning62(parent.h, struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), struct_miqt_string(data: if len(button0Text) > 0: addr button0Text[0] else: nil, len: csize_t(len(button0Text))), struct_miqt_string(data: if len(button1Text) > 0: addr button1Text[0] else: nil, len: csize_t(len(button1Text))), struct_miqt_string(data: if len(button2Text) > 0: addr button2Text[0] else: nil, len: csize_t(len(button2Text))))
 
-proc warning*(_: type gen_qmessagebox_types.QMessageBox, parent: gen_qwidget_types.QWidget, title: string, text: string, button0Text: string, button1Text: string, button2Text: string, defaultButtonNumber: cint): cint =
+proc warning*(_: type gen_qmessagebox_types.QMessageBox, parent: gen_qwidget_types.QWidget, title: openArray[char], text: openArray[char], button0Text: openArray[char], button1Text: openArray[char], button2Text: openArray[char], defaultButtonNumber: cint): cint =
   fcQMessageBox_warning7(parent.h, struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), struct_miqt_string(data: if len(button0Text) > 0: addr button0Text[0] else: nil, len: csize_t(len(button0Text))), struct_miqt_string(data: if len(button1Text) > 0: addr button1Text[0] else: nil, len: csize_t(len(button1Text))), struct_miqt_string(data: if len(button2Text) > 0: addr button2Text[0] else: nil, len: csize_t(len(button2Text))), defaultButtonNumber)
 
-proc warning*(_: type gen_qmessagebox_types.QMessageBox, parent: gen_qwidget_types.QWidget, title: string, text: string, button0Text: string, button1Text: string, button2Text: string, defaultButtonNumber: cint, escapeButtonNumber: cint): cint =
+proc warning*(_: type gen_qmessagebox_types.QMessageBox, parent: gen_qwidget_types.QWidget, title: openArray[char], text: openArray[char], button0Text: openArray[char], button1Text: openArray[char], button2Text: openArray[char], defaultButtonNumber: cint, escapeButtonNumber: cint): cint =
   fcQMessageBox_warning8(parent.h, struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), struct_miqt_string(data: if len(button0Text) > 0: addr button0Text[0] else: nil, len: csize_t(len(button0Text))), struct_miqt_string(data: if len(button1Text) > 0: addr button1Text[0] else: nil, len: csize_t(len(button1Text))), struct_miqt_string(data: if len(button2Text) > 0: addr button2Text[0] else: nil, len: csize_t(len(button2Text))), defaultButtonNumber, escapeButtonNumber)
 
-proc critical*(_: type gen_qmessagebox_types.QMessageBox, parent: gen_qwidget_types.QWidget, title: string, text: string, button0: cint, button1: cint, button2: cint): cint =
+proc critical*(_: type gen_qmessagebox_types.QMessageBox, parent: gen_qwidget_types.QWidget, title: openArray[char], text: openArray[char], button0: cint, button1: cint, button2: cint): cint =
   fcQMessageBox_critical6(parent.h, struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), button0, button1, button2)
 
-proc critical*(_: type gen_qmessagebox_types.QMessageBox, parent: gen_qwidget_types.QWidget, title: string, text: string, button0Text: string, button1Text: string): cint =
+proc critical*(_: type gen_qmessagebox_types.QMessageBox, parent: gen_qwidget_types.QWidget, title: openArray[char], text: openArray[char], button0Text: openArray[char], button1Text: openArray[char]): cint =
   fcQMessageBox_critical52(parent.h, struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), struct_miqt_string(data: if len(button0Text) > 0: addr button0Text[0] else: nil, len: csize_t(len(button0Text))), struct_miqt_string(data: if len(button1Text) > 0: addr button1Text[0] else: nil, len: csize_t(len(button1Text))))
 
-proc critical*(_: type gen_qmessagebox_types.QMessageBox, parent: gen_qwidget_types.QWidget, title: string, text: string, button0Text: string, button1Text: string, button2Text: string): cint =
+proc critical*(_: type gen_qmessagebox_types.QMessageBox, parent: gen_qwidget_types.QWidget, title: openArray[char], text: openArray[char], button0Text: openArray[char], button1Text: openArray[char], button2Text: openArray[char]): cint =
   fcQMessageBox_critical62(parent.h, struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), struct_miqt_string(data: if len(button0Text) > 0: addr button0Text[0] else: nil, len: csize_t(len(button0Text))), struct_miqt_string(data: if len(button1Text) > 0: addr button1Text[0] else: nil, len: csize_t(len(button1Text))), struct_miqt_string(data: if len(button2Text) > 0: addr button2Text[0] else: nil, len: csize_t(len(button2Text))))
 
-proc critical*(_: type gen_qmessagebox_types.QMessageBox, parent: gen_qwidget_types.QWidget, title: string, text: string, button0Text: string, button1Text: string, button2Text: string, defaultButtonNumber: cint): cint =
+proc critical*(_: type gen_qmessagebox_types.QMessageBox, parent: gen_qwidget_types.QWidget, title: openArray[char], text: openArray[char], button0Text: openArray[char], button1Text: openArray[char], button2Text: openArray[char], defaultButtonNumber: cint): cint =
   fcQMessageBox_critical7(parent.h, struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), struct_miqt_string(data: if len(button0Text) > 0: addr button0Text[0] else: nil, len: csize_t(len(button0Text))), struct_miqt_string(data: if len(button1Text) > 0: addr button1Text[0] else: nil, len: csize_t(len(button1Text))), struct_miqt_string(data: if len(button2Text) > 0: addr button2Text[0] else: nil, len: csize_t(len(button2Text))), defaultButtonNumber)
 
-proc critical*(_: type gen_qmessagebox_types.QMessageBox, parent: gen_qwidget_types.QWidget, title: string, text: string, button0Text: string, button1Text: string, button2Text: string, defaultButtonNumber: cint, escapeButtonNumber: cint): cint =
+proc critical*(_: type gen_qmessagebox_types.QMessageBox, parent: gen_qwidget_types.QWidget, title: openArray[char], text: openArray[char], button0Text: openArray[char], button1Text: openArray[char], button2Text: openArray[char], defaultButtonNumber: cint, escapeButtonNumber: cint): cint =
   fcQMessageBox_critical8(parent.h, struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), struct_miqt_string(data: if len(button0Text) > 0: addr button0Text[0] else: nil, len: csize_t(len(button0Text))), struct_miqt_string(data: if len(button1Text) > 0: addr button1Text[0] else: nil, len: csize_t(len(button1Text))), struct_miqt_string(data: if len(button2Text) > 0: addr button2Text[0] else: nil, len: csize_t(len(button2Text))), defaultButtonNumber, escapeButtonNumber)
 
 type QMessageBoxmetaObjectProc* = proc(self: QMessageBox): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
@@ -732,7 +732,7 @@ type QMessageBoxdragMoveEventProc* = proc(self: QMessageBox, event: gen_qevent_t
 type QMessageBoxdragLeaveEventProc* = proc(self: QMessageBox, event: gen_qevent_types.QDragLeaveEvent): void {.raises: [], gcsafe.}
 type QMessageBoxdropEventProc* = proc(self: QMessageBox, event: gen_qevent_types.QDropEvent): void {.raises: [], gcsafe.}
 type QMessageBoxhideEventProc* = proc(self: QMessageBox, event: gen_qevent_types.QHideEvent): void {.raises: [], gcsafe.}
-type QMessageBoxnativeEventProc* = proc(self: QMessageBox, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
+type QMessageBoxnativeEventProc* = proc(self: QMessageBox, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
 type QMessageBoxmetricProc* = proc(self: QMessageBox, param1: cint): cint {.raises: [], gcsafe.}
 type QMessageBoxinitPainterProc* = proc(self: QMessageBox, painter: gen_qpainter_types.QPainter): void {.raises: [], gcsafe.}
 type QMessageBoxredirectedProc* = proc(self: QMessageBox, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.raises: [], gcsafe.}
@@ -1197,7 +1197,7 @@ proc fcQMessageBox_vtable_callback_hideEvent(self: pointer, event: pointer): voi
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   vtbl[].hideEvent(self, slotval1)
 
-proc QMessageBoxnativeEvent*(self: gen_qmessagebox_types.QMessageBox, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool =
+proc QMessageBoxnativeEvent*(self: gen_qmessagebox_types.QMessageBox, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool =
   fcQMessageBox_virtualbase_nativeEvent(self.h, struct_miqt_string(data: if len(eventType) > 0: addr eventType[0] else: nil, len: csize_t(len(eventType))), message, resultVal)
 
 proc fcQMessageBox_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
@@ -1634,7 +1634,7 @@ proc fcQMessageBox_method_callback_hideEvent(self: pointer, event: pointer): voi
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   inst.hideEvent(slotval1)
 
-method nativeEvent*(self: VirtualQMessageBox, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
+method nativeEvent*(self: VirtualQMessageBox, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
   QMessageBoxnativeEvent(self[], eventType, message, resultVal)
 proc fcQMessageBox_method_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
   let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self)[])
@@ -2007,7 +2007,7 @@ proc create*(T: type gen_qmessagebox_types.QMessageBox,
   fcQMessageBox_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qmessagebox_types.QMessageBox,
-    icon: cint, title: string, text: string,
+    icon: cint, title: openArray[char], text: openArray[char],
     vtbl: ref QMessageBoxVTable = nil): gen_qmessagebox_types.QMessageBox =
   let vtbl = if vtbl == nil: new QMessageBoxVTable else: vtbl
   GC_ref(vtbl)
@@ -2128,7 +2128,7 @@ proc create*(T: type gen_qmessagebox_types.QMessageBox,
   fcQMessageBox_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qmessagebox_types.QMessageBox,
-    title: string, text: string, icon: cint, button0: cint, button1: cint, button2: cint,
+    title: openArray[char], text: openArray[char], icon: cint, button0: cint, button1: cint, button2: cint,
     vtbl: ref QMessageBoxVTable = nil): gen_qmessagebox_types.QMessageBox =
   let vtbl = if vtbl == nil: new QMessageBoxVTable else: vtbl
   GC_ref(vtbl)
@@ -2249,7 +2249,7 @@ proc create*(T: type gen_qmessagebox_types.QMessageBox,
   fcQMessageBox_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qmessagebox_types.QMessageBox,
-    icon: cint, title: string, text: string, buttons: cint,
+    icon: cint, title: openArray[char], text: openArray[char], buttons: cint,
     vtbl: ref QMessageBoxVTable = nil): gen_qmessagebox_types.QMessageBox =
   let vtbl = if vtbl == nil: new QMessageBoxVTable else: vtbl
   GC_ref(vtbl)
@@ -2370,7 +2370,7 @@ proc create*(T: type gen_qmessagebox_types.QMessageBox,
   fcQMessageBox_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qmessagebox_types.QMessageBox,
-    icon: cint, title: string, text: string, buttons: cint, parent: gen_qwidget_types.QWidget,
+    icon: cint, title: openArray[char], text: openArray[char], buttons: cint, parent: gen_qwidget_types.QWidget,
     vtbl: ref QMessageBoxVTable = nil): gen_qmessagebox_types.QMessageBox =
   let vtbl = if vtbl == nil: new QMessageBoxVTable else: vtbl
   GC_ref(vtbl)
@@ -2491,7 +2491,7 @@ proc create*(T: type gen_qmessagebox_types.QMessageBox,
   fcQMessageBox_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qmessagebox_types.QMessageBox,
-    icon: cint, title: string, text: string, buttons: cint, parent: gen_qwidget_types.QWidget, flags: cint,
+    icon: cint, title: openArray[char], text: openArray[char], buttons: cint, parent: gen_qwidget_types.QWidget, flags: cint,
     vtbl: ref QMessageBoxVTable = nil): gen_qmessagebox_types.QMessageBox =
   let vtbl = if vtbl == nil: new QMessageBoxVTable else: vtbl
   GC_ref(vtbl)
@@ -2612,7 +2612,7 @@ proc create*(T: type gen_qmessagebox_types.QMessageBox,
   fcQMessageBox_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qmessagebox_types.QMessageBox,
-    title: string, text: string, icon: cint, button0: cint, button1: cint, button2: cint, parent: gen_qwidget_types.QWidget,
+    title: openArray[char], text: openArray[char], icon: cint, button0: cint, button1: cint, button2: cint, parent: gen_qwidget_types.QWidget,
     vtbl: ref QMessageBoxVTable = nil): gen_qmessagebox_types.QMessageBox =
   let vtbl = if vtbl == nil: new QMessageBoxVTable else: vtbl
   GC_ref(vtbl)
@@ -2733,7 +2733,7 @@ proc create*(T: type gen_qmessagebox_types.QMessageBox,
   fcQMessageBox_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qmessagebox_types.QMessageBox,
-    title: string, text: string, icon: cint, button0: cint, button1: cint, button2: cint, parent: gen_qwidget_types.QWidget, f: cint,
+    title: openArray[char], text: openArray[char], icon: cint, button0: cint, button1: cint, button2: cint, parent: gen_qwidget_types.QWidget, f: cint,
     vtbl: ref QMessageBoxVTable = nil): gen_qmessagebox_types.QMessageBox =
   let vtbl = if vtbl == nil: new QMessageBoxVTable else: vtbl
   GC_ref(vtbl)
@@ -2921,61 +2921,70 @@ proc create*(T: type gen_qmessagebox_types.QMessageBox,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQMessageBox_new(addr(cQMessageBox_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQMessageBox_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qmessagebox_types.QMessageBox,
     inst: VirtualQMessageBox) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQMessageBox_new2(addr(cQMessageBox_mvtbl), csize_t(sizeof(pointer)))
   fcQMessageBox_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qmessagebox_types.QMessageBox,
-    icon: cint, title: string, text: string,
+    icon: cint, title: openArray[char], text: openArray[char],
     inst: VirtualQMessageBox) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQMessageBox_new3(addr(cQMessageBox_mvtbl), csize_t(sizeof(pointer)), cint(icon), struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
   fcQMessageBox_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qmessagebox_types.QMessageBox,
-    title: string, text: string, icon: cint, button0: cint, button1: cint, button2: cint,
+    title: openArray[char], text: openArray[char], icon: cint, button0: cint, button1: cint, button2: cint,
     inst: VirtualQMessageBox) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQMessageBox_new4(addr(cQMessageBox_mvtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), cint(icon), button0, button1, button2)
   fcQMessageBox_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qmessagebox_types.QMessageBox,
-    icon: cint, title: string, text: string, buttons: cint,
+    icon: cint, title: openArray[char], text: openArray[char], buttons: cint,
     inst: VirtualQMessageBox) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQMessageBox_new5(addr(cQMessageBox_mvtbl), csize_t(sizeof(pointer)), cint(icon), struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), cint(buttons))
   fcQMessageBox_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qmessagebox_types.QMessageBox,
-    icon: cint, title: string, text: string, buttons: cint, parent: gen_qwidget_types.QWidget,
+    icon: cint, title: openArray[char], text: openArray[char], buttons: cint, parent: gen_qwidget_types.QWidget,
     inst: VirtualQMessageBox) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQMessageBox_new6(addr(cQMessageBox_mvtbl), csize_t(sizeof(pointer)), cint(icon), struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), cint(buttons), parent.h)
   fcQMessageBox_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qmessagebox_types.QMessageBox,
-    icon: cint, title: string, text: string, buttons: cint, parent: gen_qwidget_types.QWidget, flags: cint,
+    icon: cint, title: openArray[char], text: openArray[char], buttons: cint, parent: gen_qwidget_types.QWidget, flags: cint,
     inst: VirtualQMessageBox) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQMessageBox_new7(addr(cQMessageBox_mvtbl), csize_t(sizeof(pointer)), cint(icon), struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), cint(buttons), parent.h, cint(flags))
   fcQMessageBox_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qmessagebox_types.QMessageBox,
-    title: string, text: string, icon: cint, button0: cint, button1: cint, button2: cint, parent: gen_qwidget_types.QWidget,
+    title: openArray[char], text: openArray[char], icon: cint, button0: cint, button1: cint, button2: cint, parent: gen_qwidget_types.QWidget,
     inst: VirtualQMessageBox) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQMessageBox_new8(addr(cQMessageBox_mvtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), cint(icon), button0, button1, button2, parent.h)
   fcQMessageBox_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qmessagebox_types.QMessageBox,
-    title: string, text: string, icon: cint, button0: cint, button1: cint, button2: cint, parent: gen_qwidget_types.QWidget, f: cint,
+    title: openArray[char], text: openArray[char], icon: cint, button0: cint, button1: cint, button2: cint, parent: gen_qwidget_types.QWidget, f: cint,
     inst: VirtualQMessageBox) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQMessageBox_new9(addr(cQMessageBox_mvtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), cint(icon), button0, button1, button2, parent.h, cint(f))
   fcQMessageBox_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qmessagebox_types.QMessageBox): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQMessageBox_staticMetaObject())

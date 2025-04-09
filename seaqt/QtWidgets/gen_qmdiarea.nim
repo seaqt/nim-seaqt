@@ -474,7 +474,7 @@ type QMdiAreacloseEventProc* = proc(self: QMdiArea, event: gen_qevent_types.QClo
 type QMdiAreatabletEventProc* = proc(self: QMdiArea, event: gen_qevent_types.QTabletEvent): void {.raises: [], gcsafe.}
 type QMdiAreaactionEventProc* = proc(self: QMdiArea, event: gen_qevent_types.QActionEvent): void {.raises: [], gcsafe.}
 type QMdiAreahideEventProc* = proc(self: QMdiArea, event: gen_qevent_types.QHideEvent): void {.raises: [], gcsafe.}
-type QMdiAreanativeEventProc* = proc(self: QMdiArea, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
+type QMdiAreanativeEventProc* = proc(self: QMdiArea, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
 type QMdiAreametricProc* = proc(self: QMdiArea, param1: cint): cint {.raises: [], gcsafe.}
 type QMdiAreainitPainterProc* = proc(self: QMdiArea, painter: gen_qpainter_types.QPainter): void {.raises: [], gcsafe.}
 type QMdiArearedirectedProc* = proc(self: QMdiArea, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.raises: [], gcsafe.}
@@ -963,7 +963,7 @@ proc fcQMdiArea_vtable_callback_hideEvent(self: pointer, event: pointer): void {
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   vtbl[].hideEvent(self, slotval1)
 
-proc QMdiAreanativeEvent*(self: gen_qmdiarea_types.QMdiArea, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool =
+proc QMdiAreanativeEvent*(self: gen_qmdiarea_types.QMdiArea, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool =
   fcQMdiArea_virtualbase_nativeEvent(self.h, struct_miqt_string(data: if len(eventType) > 0: addr eventType[0] else: nil, len: csize_t(len(eventType))), message, resultVal)
 
 proc fcQMdiArea_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
@@ -1401,7 +1401,7 @@ proc fcQMdiArea_method_callback_hideEvent(self: pointer, event: pointer): void {
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   inst.hideEvent(slotval1)
 
-method nativeEvent*(self: VirtualQMdiArea, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
+method nativeEvent*(self: VirtualQMdiArea, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
   QMdiAreanativeEvent(self[], eventType, message, resultVal)
 proc fcQMdiArea_method_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
   let inst = cast[VirtualQMdiArea](fcQMdiArea_vdata(self)[])
@@ -1833,12 +1833,14 @@ proc create*(T: type gen_qmdiarea_types.QMdiArea,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQMdiArea_new(addr(cQMdiArea_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQMdiArea_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qmdiarea_types.QMdiArea,
     inst: VirtualQMdiArea) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQMdiArea_new2(addr(cQMdiArea_mvtbl), csize_t(sizeof(pointer)))
   fcQMdiArea_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qmdiarea_types.QMdiArea): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQMdiArea_staticMetaObject())

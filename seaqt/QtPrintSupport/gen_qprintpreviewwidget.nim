@@ -413,7 +413,7 @@ type QPrintPreviewWidgetdragLeaveEventProc* = proc(self: QPrintPreviewWidget, ev
 type QPrintPreviewWidgetdropEventProc* = proc(self: QPrintPreviewWidget, event: gen_qevent_types.QDropEvent): void {.raises: [], gcsafe.}
 type QPrintPreviewWidgetshowEventProc* = proc(self: QPrintPreviewWidget, event: gen_qevent_types.QShowEvent): void {.raises: [], gcsafe.}
 type QPrintPreviewWidgethideEventProc* = proc(self: QPrintPreviewWidget, event: gen_qevent_types.QHideEvent): void {.raises: [], gcsafe.}
-type QPrintPreviewWidgetnativeEventProc* = proc(self: QPrintPreviewWidget, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
+type QPrintPreviewWidgetnativeEventProc* = proc(self: QPrintPreviewWidget, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
 type QPrintPreviewWidgetchangeEventProc* = proc(self: QPrintPreviewWidget, param1: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QPrintPreviewWidgetmetricProc* = proc(self: QPrintPreviewWidget, param1: cint): cint {.raises: [], gcsafe.}
 type QPrintPreviewWidgetinitPainterProc* = proc(self: QPrintPreviewWidget, painter: gen_qpainter_types.QPainter): void {.raises: [], gcsafe.}
@@ -813,7 +813,7 @@ proc fcQPrintPreviewWidget_vtable_callback_hideEvent(self: pointer, event: point
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   vtbl[].hideEvent(self, slotval1)
 
-proc QPrintPreviewWidgetnativeEvent*(self: gen_qprintpreviewwidget_types.QPrintPreviewWidget, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool =
+proc QPrintPreviewWidgetnativeEvent*(self: gen_qprintpreviewwidget_types.QPrintPreviewWidget, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool =
   fcQPrintPreviewWidget_virtualbase_nativeEvent(self.h, struct_miqt_string(data: if len(eventType) > 0: addr eventType[0] else: nil, len: csize_t(len(eventType))), message, resultVal)
 
 proc fcQPrintPreviewWidget_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
@@ -1222,7 +1222,7 @@ proc fcQPrintPreviewWidget_method_callback_hideEvent(self: pointer, event: point
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   inst.hideEvent(slotval1)
 
-method nativeEvent*(self: VirtualQPrintPreviewWidget, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
+method nativeEvent*(self: VirtualQPrintPreviewWidget, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
   QPrintPreviewWidgetnativeEvent(self[], eventType, message, resultVal)
 proc fcQPrintPreviewWidget_method_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
   let inst = cast[VirtualQPrintPreviewWidget](fcQPrintPreviewWidget_vdata(self)[])
@@ -2094,6 +2094,7 @@ proc create*(T: type gen_qprintpreviewwidget_types.QPrintPreviewWidget,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQPrintPreviewWidget_new(addr(cQPrintPreviewWidget_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQPrintPreviewWidget_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qprintpreviewwidget_types.QPrintPreviewWidget,
     printer: gen_qprinter_types.QPrinter,
@@ -2101,12 +2102,14 @@ proc create*(T: type gen_qprintpreviewwidget_types.QPrintPreviewWidget,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQPrintPreviewWidget_new2(addr(cQPrintPreviewWidget_mvtbl), csize_t(sizeof(pointer)), printer.h)
   fcQPrintPreviewWidget_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qprintpreviewwidget_types.QPrintPreviewWidget,
     inst: VirtualQPrintPreviewWidget) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQPrintPreviewWidget_new3(addr(cQPrintPreviewWidget_mvtbl), csize_t(sizeof(pointer)))
   fcQPrintPreviewWidget_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qprintpreviewwidget_types.QPrintPreviewWidget,
     printer: gen_qprinter_types.QPrinter, parent: gen_qwidget_types.QWidget,
@@ -2114,6 +2117,7 @@ proc create*(T: type gen_qprintpreviewwidget_types.QPrintPreviewWidget,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQPrintPreviewWidget_new4(addr(cQPrintPreviewWidget_mvtbl), csize_t(sizeof(pointer)), printer.h, parent.h)
   fcQPrintPreviewWidget_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qprintpreviewwidget_types.QPrintPreviewWidget,
     printer: gen_qprinter_types.QPrinter, parent: gen_qwidget_types.QWidget, flags: cint,
@@ -2121,6 +2125,7 @@ proc create*(T: type gen_qprintpreviewwidget_types.QPrintPreviewWidget,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQPrintPreviewWidget_new5(addr(cQPrintPreviewWidget_mvtbl), csize_t(sizeof(pointer)), printer.h, parent.h, cint(flags))
   fcQPrintPreviewWidget_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qprintpreviewwidget_types.QPrintPreviewWidget,
     parent: gen_qwidget_types.QWidget, flags: cint,
@@ -2128,6 +2133,7 @@ proc create*(T: type gen_qprintpreviewwidget_types.QPrintPreviewWidget,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQPrintPreviewWidget_new6(addr(cQPrintPreviewWidget_mvtbl), csize_t(sizeof(pointer)), parent.h, cint(flags))
   fcQPrintPreviewWidget_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qprintpreviewwidget_types.QPrintPreviewWidget): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQPrintPreviewWidget_staticMetaObject())

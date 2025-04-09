@@ -741,6 +741,7 @@ proc create*(T: type gen_qabstractanimation_types.QAbstractAnimation,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQAbstractAnimation_new(addr(cQAbstractAnimation_mvtbl), csize_t(sizeof(pointer)))
   fcQAbstractAnimation_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qabstractanimation_types.QAbstractAnimation,
     parent: gen_qobject_types.QObject,
@@ -748,6 +749,7 @@ proc create*(T: type gen_qabstractanimation_types.QAbstractAnimation,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQAbstractAnimation_new2(addr(cQAbstractAnimation_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQAbstractAnimation_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qabstractanimation_types.QAbstractAnimation): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQAbstractAnimation_staticMetaObject())
@@ -1214,6 +1216,7 @@ proc create*(T: type gen_qabstractanimation_types.QAnimationDriver,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQAnimationDriver_new(addr(cQAnimationDriver_mvtbl), csize_t(sizeof(pointer)))
   fcQAnimationDriver_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qabstractanimation_types.QAnimationDriver,
     parent: gen_qobject_types.QObject,
@@ -1221,6 +1224,7 @@ proc create*(T: type gen_qabstractanimation_types.QAnimationDriver,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQAnimationDriver_new2(addr(cQAnimationDriver_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQAnimationDriver_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qabstractanimation_types.QAnimationDriver): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQAnimationDriver_staticMetaObject())

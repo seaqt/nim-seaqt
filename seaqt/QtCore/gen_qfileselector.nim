@@ -112,7 +112,7 @@ proc tr*(_: type gen_qfileselector_types.QFileSelector, s: cstring): string =
   c_free(v_ms.data)
   vx_ret
 
-proc select*(self: gen_qfileselector_types.QFileSelector, filePath: string): string =
+proc select*(self: gen_qfileselector_types.QFileSelector, filePath: openArray[char]): string =
   let v_ms = fcQFileSelector_select(self.h, struct_miqt_string(data: if len(filePath) > 0: addr filePath[0] else: nil, len: csize_t(len(filePath))))
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
@@ -133,7 +133,7 @@ proc extraSelectors*(self: gen_qfileselector_types.QFileSelector): seq[string] =
   c_free(v_ma.data)
   vx_ret
 
-proc setExtraSelectors*(self: gen_qfileselector_types.QFileSelector, list: seq[string]): void =
+proc setExtraSelectors*(self: gen_qfileselector_types.QFileSelector, list: openArray[string]): void =
   var list_CArray = newSeq[struct_miqt_string](len(list))
   for i in 0..<len(list):
     list_CArray[i] = struct_miqt_string(data: if len(list[i]) > 0: addr list[i][0] else: nil, len: csize_t(len(list[i])))
@@ -460,6 +460,7 @@ proc create*(T: type gen_qfileselector_types.QFileSelector,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQFileSelector_new(addr(cQFileSelector_mvtbl), csize_t(sizeof(pointer)))
   fcQFileSelector_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qfileselector_types.QFileSelector,
     parent: gen_qobject_types.QObject,
@@ -467,6 +468,7 @@ proc create*(T: type gen_qfileselector_types.QFileSelector,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQFileSelector_new2(addr(cQFileSelector_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQFileSelector_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qfileselector_types.QFileSelector): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQFileSelector_staticMetaObject())

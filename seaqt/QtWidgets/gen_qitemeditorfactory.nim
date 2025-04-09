@@ -190,6 +190,7 @@ proc create*(T: type gen_qitemeditorfactory_types.QItemEditorFactory,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQItemEditorFactory_new(addr(cQItemEditorFactory_mvtbl), csize_t(sizeof(pointer)))
   fcQItemEditorFactory_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qitemeditorfactory_types.QItemEditorFactory,
     param1: gen_qitemeditorfactory_types.QItemEditorFactory,
@@ -197,4 +198,5 @@ proc create*(T: type gen_qitemeditorfactory_types.QItemEditorFactory,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQItemEditorFactory_new2(addr(cQItemEditorFactory_mvtbl), csize_t(sizeof(pointer)), param1.h)
   fcQItemEditorFactory_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 

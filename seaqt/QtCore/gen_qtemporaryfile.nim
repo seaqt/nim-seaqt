@@ -183,13 +183,13 @@ proc fileTemplate*(self: gen_qtemporaryfile_types.QTemporaryFile): string =
   c_free(v_ms.data)
   vx_ret
 
-proc setFileTemplate*(self: gen_qtemporaryfile_types.QTemporaryFile, name: string): void =
+proc setFileTemplate*(self: gen_qtemporaryfile_types.QTemporaryFile, name: openArray[char]): void =
   fcQTemporaryFile_setFileTemplate(self.h, struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))))
 
-proc rename*(self: gen_qtemporaryfile_types.QTemporaryFile, newName: string): bool =
+proc rename*(self: gen_qtemporaryfile_types.QTemporaryFile, newName: openArray[char]): bool =
   fcQTemporaryFile_rename(self.h, struct_miqt_string(data: if len(newName) > 0: addr newName[0] else: nil, len: csize_t(len(newName))))
 
-proc createNativeFile*(_: type gen_qtemporaryfile_types.QTemporaryFile, fileName: string): gen_qtemporaryfile_types.QTemporaryFile =
+proc createNativeFile*(_: type gen_qtemporaryfile_types.QTemporaryFile, fileName: openArray[char]): gen_qtemporaryfile_types.QTemporaryFile =
   gen_qtemporaryfile_types.QTemporaryFile(h: fcQTemporaryFile_createNativeFile(struct_miqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName)))), owned: false)
 
 proc createNativeFile*(_: type gen_qtemporaryfile_types.QTemporaryFile, file: gen_qfile_types.QFile): gen_qtemporaryfile_types.QTemporaryFile =
@@ -818,7 +818,7 @@ proc fcQTemporaryFile_method_callback_disconnectNotify(self: pointer, signal: po
 proc setOpenMode*(self: gen_qtemporaryfile_types.QTemporaryFile, openMode: cint): void =
   fcQTemporaryFile_protectedbase_setOpenMode(self.h, cint(openMode))
 
-proc setErrorString*(self: gen_qtemporaryfile_types.QTemporaryFile, errorString: string): void =
+proc setErrorString*(self: gen_qtemporaryfile_types.QTemporaryFile, errorString: openArray[char]): void =
   fcQTemporaryFile_protectedbase_setErrorString(self.h, struct_miqt_string(data: if len(errorString) > 0: addr errorString[0] else: nil, len: csize_t(len(errorString))))
 
 proc sender*(self: gen_qtemporaryfile_types.QTemporaryFile): gen_qobject_types.QObject =
@@ -906,7 +906,7 @@ proc create*(T: type gen_qtemporaryfile_types.QTemporaryFile,
   fcQTemporaryFile_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qtemporaryfile_types.QTemporaryFile,
-    templateName: string,
+    templateName: openArray[char],
     vtbl: ref QTemporaryFileVTable = nil): gen_qtemporaryfile_types.QTemporaryFile =
   let vtbl = if vtbl == nil: new QTemporaryFileVTable else: vtbl
   GC_ref(vtbl)
@@ -1052,7 +1052,7 @@ proc create*(T: type gen_qtemporaryfile_types.QTemporaryFile,
   fcQTemporaryFile_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qtemporaryfile_types.QTemporaryFile,
-    templateName: string, parent: gen_qobject_types.QObject,
+    templateName: openArray[char], parent: gen_qobject_types.QObject,
     vtbl: ref QTemporaryFileVTable = nil): gen_qtemporaryfile_types.QTemporaryFile =
   let vtbl = if vtbl == nil: new QTemporaryFileVTable else: vtbl
   GC_ref(vtbl)
@@ -1167,13 +1167,15 @@ proc create*(T: type gen_qtemporaryfile_types.QTemporaryFile,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQTemporaryFile_new(addr(cQTemporaryFile_mvtbl), csize_t(sizeof(pointer)))
   fcQTemporaryFile_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qtemporaryfile_types.QTemporaryFile,
-    templateName: string,
+    templateName: openArray[char],
     inst: VirtualQTemporaryFile) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQTemporaryFile_new2(addr(cQTemporaryFile_mvtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(templateName) > 0: addr templateName[0] else: nil, len: csize_t(len(templateName))))
   fcQTemporaryFile_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qtemporaryfile_types.QTemporaryFile,
     parent: gen_qobject_types.QObject,
@@ -1181,13 +1183,15 @@ proc create*(T: type gen_qtemporaryfile_types.QTemporaryFile,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQTemporaryFile_new3(addr(cQTemporaryFile_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQTemporaryFile_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qtemporaryfile_types.QTemporaryFile,
-    templateName: string, parent: gen_qobject_types.QObject,
+    templateName: openArray[char], parent: gen_qobject_types.QObject,
     inst: VirtualQTemporaryFile) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQTemporaryFile_new4(addr(cQTemporaryFile_mvtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(templateName) > 0: addr templateName[0] else: nil, len: csize_t(len(templateName))), parent.h)
   fcQTemporaryFile_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qtemporaryfile_types.QTemporaryFile): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQTemporaryFile_staticMetaObject())

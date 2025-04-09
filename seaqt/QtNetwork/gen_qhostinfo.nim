@@ -81,7 +81,7 @@ proc hostName*(self: gen_qhostinfo_types.QHostInfo): string =
   c_free(v_ms.data)
   vx_ret
 
-proc setHostName*(self: gen_qhostinfo_types.QHostInfo, name: string): void =
+proc setHostName*(self: gen_qhostinfo_types.QHostInfo, name: openArray[char]): void =
   fcQHostInfo_setHostName(self.h, struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))))
 
 proc addresses*(self: gen_qhostinfo_types.QHostInfo): seq[gen_qhostaddress_types.QHostAddress] =
@@ -93,7 +93,7 @@ proc addresses*(self: gen_qhostinfo_types.QHostInfo): seq[gen_qhostaddress_types
   c_free(v_ma.data)
   vx_ret
 
-proc setAddresses*(self: gen_qhostinfo_types.QHostInfo, addresses: seq[gen_qhostaddress_types.QHostAddress]): void =
+proc setAddresses*(self: gen_qhostinfo_types.QHostInfo, addresses: openArray[gen_qhostaddress_types.QHostAddress]): void =
   var addresses_CArray = newSeq[pointer](len(addresses))
   for i in 0..<len(addresses):
     addresses_CArray[i] = addresses[i].h
@@ -112,7 +112,7 @@ proc errorString*(self: gen_qhostinfo_types.QHostInfo): string =
   c_free(v_ms.data)
   vx_ret
 
-proc setErrorString*(self: gen_qhostinfo_types.QHostInfo, errorString: string): void =
+proc setErrorString*(self: gen_qhostinfo_types.QHostInfo, errorString: openArray[char]): void =
   fcQHostInfo_setErrorString(self.h, struct_miqt_string(data: if len(errorString) > 0: addr errorString[0] else: nil, len: csize_t(len(errorString))))
 
 proc setLookupId*(self: gen_qhostinfo_types.QHostInfo, id: cint): void =
@@ -124,7 +124,7 @@ proc lookupId*(self: gen_qhostinfo_types.QHostInfo): cint =
 proc abortHostLookup*(_: type gen_qhostinfo_types.QHostInfo, lookupId: cint): void =
   fcQHostInfo_abortHostLookup(lookupId)
 
-proc fromName*(_: type gen_qhostinfo_types.QHostInfo, name: string): gen_qhostinfo_types.QHostInfo =
+proc fromName*(_: type gen_qhostinfo_types.QHostInfo, name: openArray[char]): gen_qhostinfo_types.QHostInfo =
   gen_qhostinfo_types.QHostInfo(h: fcQHostInfo_fromName(struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name)))), owned: true)
 
 proc localHostName*(_: type gen_qhostinfo_types.QHostInfo): string =

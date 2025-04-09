@@ -536,7 +536,7 @@ proc resize*(self: gen_qwindow_types.QWindow, newSize: gen_qsize_types.QSize): v
 proc resize*(self: gen_qwindow_types.QWindow, w: cint, h: cint): void =
   fcQWindow_resize2(self.h, w, h)
 
-proc setFilePath*(self: gen_qwindow_types.QWindow, filePath: string): void =
+proc setFilePath*(self: gen_qwindow_types.QWindow, filePath: openArray[char]): void =
   fcQWindow_setFilePath(self.h, struct_miqt_string(data: if len(filePath) > 0: addr filePath[0] else: nil, len: csize_t(len(filePath))))
 
 proc filePath*(self: gen_qwindow_types.QWindow): string =
@@ -635,7 +635,7 @@ proc startSystemResize*(self: gen_qwindow_types.QWindow, edges: cint): bool =
 proc startSystemMove*(self: gen_qwindow_types.QWindow): bool =
   fcQWindow_startSystemMove(self.h)
 
-proc setTitle*(self: gen_qwindow_types.QWindow, title: string): void =
+proc setTitle*(self: gen_qwindow_types.QWindow, title: openArray[char]): void =
   fcQWindow_setTitle(self.h, struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))))
 
 proc setX*(self: gen_qwindow_types.QWindow, arg: cint): void =
@@ -734,10 +734,10 @@ proc onwindowStateChanged*(self: gen_qwindow_types.QWindow, slot: QWindowwindowS
   GC_ref(tmp)
   fcQWindow_connect_windowStateChanged(self.h, cast[int](addr tmp[]), fcQWindow_slot_callback_windowStateChanged, fcQWindow_slot_callback_windowStateChanged_release)
 
-proc windowTitleChanged*(self: gen_qwindow_types.QWindow, title: string): void =
+proc windowTitleChanged*(self: gen_qwindow_types.QWindow, title: openArray[char]): void =
   fcQWindow_windowTitleChanged(self.h, struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))))
 
-type QWindowwindowTitleChangedSlot* = proc(title: string)
+type QWindowwindowTitleChangedSlot* = proc(title: openArray[char])
 proc fcQWindow_slot_callback_windowTitleChanged(slot: int, title: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QWindowwindowTitleChangedSlot](cast[pointer](slot))
   let vtitle_ms = title
@@ -1103,7 +1103,7 @@ type QWindowmouseMoveEventProc* = proc(self: QWindow, param1: gen_qevent_types.Q
 type QWindowwheelEventProc* = proc(self: QWindow, param1: gen_qevent_types.QWheelEvent): void {.raises: [], gcsafe.}
 type QWindowtouchEventProc* = proc(self: QWindow, param1: gen_qevent_types.QTouchEvent): void {.raises: [], gcsafe.}
 type QWindowtabletEventProc* = proc(self: QWindow, param1: gen_qevent_types.QTabletEvent): void {.raises: [], gcsafe.}
-type QWindownativeEventProc* = proc(self: QWindow, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
+type QWindownativeEventProc* = proc(self: QWindow, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
 type QWindoweventFilterProc* = proc(self: QWindow, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
 type QWindowtimerEventProc* = proc(self: QWindow, event: gen_qcoreevent_types.QTimerEvent): void {.raises: [], gcsafe.}
 type QWindowchildEventProc* = proc(self: QWindow, event: gen_qcoreevent_types.QChildEvent): void {.raises: [], gcsafe.}
@@ -1409,7 +1409,7 @@ proc fcQWindow_vtable_callback_tabletEvent(self: pointer, param1: pointer): void
   let slotval1 = gen_qevent_types.QTabletEvent(h: param1, owned: false)
   vtbl[].tabletEvent(self, slotval1)
 
-proc QWindownativeEvent*(self: gen_qwindow_types.QWindow, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool =
+proc QWindownativeEvent*(self: gen_qwindow_types.QWindow, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool =
   fcQWindow_virtualbase_nativeEvent(self.h, struct_miqt_string(data: if len(eventType) > 0: addr eventType[0] else: nil, len: csize_t(len(eventType))), message, resultVal)
 
 proc fcQWindow_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
@@ -1676,7 +1676,7 @@ proc fcQWindow_method_callback_tabletEvent(self: pointer, param1: pointer): void
   let slotval1 = gen_qevent_types.QTabletEvent(h: param1, owned: false)
   inst.tabletEvent(slotval1)
 
-method nativeEvent*(self: VirtualQWindow, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
+method nativeEvent*(self: VirtualQWindow, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
   QWindownativeEvent(self[], eventType, message, resultVal)
 proc fcQWindow_method_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
   let inst = cast[VirtualQWindow](fcQWindow_vdata(self)[])
@@ -2030,6 +2030,7 @@ proc create*(T: type gen_qwindow_types.QWindow,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQWindow_new(addr(cQWindow_mvtbl), csize_t(sizeof(pointer)))
   fcQWindow_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qwindow_types.QWindow,
     parent: gen_qwindow_types.QWindow,
@@ -2037,6 +2038,7 @@ proc create*(T: type gen_qwindow_types.QWindow,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQWindow_new2(addr(cQWindow_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQWindow_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qwindow_types.QWindow,
     screen: gen_qscreen_types.QScreen,
@@ -2044,6 +2046,7 @@ proc create*(T: type gen_qwindow_types.QWindow,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQWindow_new3(addr(cQWindow_mvtbl), csize_t(sizeof(pointer)), screen.h)
   fcQWindow_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qwindow_types.QWindow): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQWindow_staticMetaObject())

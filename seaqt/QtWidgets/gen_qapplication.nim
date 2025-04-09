@@ -182,7 +182,7 @@ proc style*(_: type gen_qapplication_types.QApplication): gen_qstyle_types.QStyl
 proc setStyle*(_: type gen_qapplication_types.QApplication, style: gen_qstyle_types.QStyle): void =
   fcQApplication_setStyle(style.h)
 
-proc setStyle*(_: type gen_qapplication_types.QApplication, style: string): gen_qstyle_types.QStyle =
+proc setStyle*(_: type gen_qapplication_types.QApplication, style: openArray[char]): gen_qstyle_types.QStyle =
   gen_qstyle_types.QStyle(h: fcQApplication_setStyleWithStyle(struct_miqt_string(data: if len(style) > 0: addr style[0] else: nil, len: csize_t(len(style)))), owned: false)
 
 proc palette*(_: type gen_qapplication_types.QApplication, param1: gen_qwidget_types.QWidget): gen_qpalette_types.QPalette =
@@ -336,7 +336,7 @@ proc styleSheet*(self: gen_qapplication_types.QApplication): string =
   c_free(v_ms.data)
   vx_ret
 
-proc setStyleSheet*(self: gen_qapplication_types.QApplication, sheet: string): void =
+proc setStyleSheet*(self: gen_qapplication_types.QApplication, sheet: openArray[char]): void =
   fcQApplication_setStyleSheet(self.h, struct_miqt_string(data: if len(sheet) > 0: addr sheet[0] else: nil, len: csize_t(len(sheet))))
 
 proc setAutoSipEnabled*(self: gen_qapplication_types.QApplication, enabled: bool): void =
@@ -719,6 +719,7 @@ proc create*(T: type gen_qapplication_types.QApplication,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQApplication_new(addr(cQApplication_mvtbl), csize_t(sizeof(pointer)), addr argc, argv)
   fcQApplication_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qapplication_types.QApplication,
     param3: cint,
@@ -732,6 +733,7 @@ proc create*(T: type gen_qapplication_types.QApplication,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQApplication_new2(addr(cQApplication_mvtbl), csize_t(sizeof(pointer)), addr argc, argv, param3)
   fcQApplication_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qapplication_types.QApplication): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQApplication_staticMetaObject())

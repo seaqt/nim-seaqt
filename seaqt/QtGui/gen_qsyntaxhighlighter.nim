@@ -157,7 +157,7 @@ proc tr*(_: type gen_qsyntaxhighlighter_types.QSyntaxHighlighter, s: cstring, c:
 type QSyntaxHighlightermetaObjectProc* = proc(self: QSyntaxHighlighter): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QSyntaxHighlightermetacastProc* = proc(self: QSyntaxHighlighter, param1: cstring): pointer {.raises: [], gcsafe.}
 type QSyntaxHighlightermetacallProc* = proc(self: QSyntaxHighlighter, param1: cint, param2: cint, param3: pointer): cint {.raises: [], gcsafe.}
-type QSyntaxHighlighterhighlightBlockProc* = proc(self: QSyntaxHighlighter, text: string): void {.raises: [], gcsafe.}
+type QSyntaxHighlighterhighlightBlockProc* = proc(self: QSyntaxHighlighter, text: openArray[char]): void {.raises: [], gcsafe.}
 type QSyntaxHighlightereventProc* = proc(self: QSyntaxHighlighter, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
 type QSyntaxHighlightereventFilterProc* = proc(self: QSyntaxHighlighter, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
 type QSyntaxHighlightertimerEventProc* = proc(self: QSyntaxHighlighter, event: gen_qcoreevent_types.QTimerEvent): void {.raises: [], gcsafe.}
@@ -314,7 +314,7 @@ proc fcQSyntaxHighlighter_method_callback_metacall(self: pointer, param1: cint, 
   var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
-method highlightBlock*(self: VirtualQSyntaxHighlighter, text: string): void {.base.} =
+method highlightBlock*(self: VirtualQSyntaxHighlighter, text: openArray[char]): void {.base.} =
   raiseAssert("missing implementation of QSyntaxHighlighter_virtualbase_highlightBlock")
 proc fcQSyntaxHighlighter_method_callback_highlightBlock(self: pointer, text: struct_miqt_string): void {.cdecl.} =
   let inst = cast[VirtualQSyntaxHighlighter](fcQSyntaxHighlighter_vdata(self)[])
@@ -508,6 +508,7 @@ proc create*(T: type gen_qsyntaxhighlighter_types.QSyntaxHighlighter,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQSyntaxHighlighter_new(addr(cQSyntaxHighlighter_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQSyntaxHighlighter_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qsyntaxhighlighter_types.QSyntaxHighlighter,
     parent: gen_qtextdocument_types.QTextDocument,
@@ -515,6 +516,7 @@ proc create*(T: type gen_qsyntaxhighlighter_types.QSyntaxHighlighter,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQSyntaxHighlighter_new2(addr(cQSyntaxHighlighter_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQSyntaxHighlighter_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qsyntaxhighlighter_types.QSyntaxHighlighter): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQSyntaxHighlighter_staticMetaObject())

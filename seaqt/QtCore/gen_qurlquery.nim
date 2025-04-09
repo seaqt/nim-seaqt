@@ -103,7 +103,7 @@ proc query*(self: gen_qurlquery_types.QUrlQuery): string =
   c_free(v_ms.data)
   vx_ret
 
-proc setQuery*(self: gen_qurlquery_types.QUrlQuery, queryString: string): void =
+proc setQuery*(self: gen_qurlquery_types.QUrlQuery, queryString: openArray[char]): void =
   fcQUrlQuery_setQuery(self.h, struct_miqt_string(data: if len(queryString) > 0: addr queryString[0] else: nil, len: csize_t(len(queryString))))
 
 proc toString*(self: gen_qurlquery_types.QUrlQuery): string =
@@ -121,7 +121,7 @@ proc queryValueDelimiter*(self: gen_qurlquery_types.QUrlQuery): gen_qchar_types.
 proc queryPairDelimiter*(self: gen_qurlquery_types.QUrlQuery): gen_qchar_types.QChar =
   gen_qchar_types.QChar(h: fcQUrlQuery_queryPairDelimiter(self.h), owned: true)
 
-proc setQueryItems*(self: gen_qurlquery_types.QUrlQuery, query: seq[tuple[first: string, second: string]]): void =
+proc setQueryItems*(self: gen_qurlquery_types.QUrlQuery, query: openArray[tuple[first: string, second: string]]): void =
   var query_CArray = newSeq[struct_miqt_map](len(query))
   for i in 0..<len(query):
     var query_i_CArray_First: struct_miqt_string
@@ -156,22 +156,22 @@ proc queryItems*(self: gen_qurlquery_types.QUrlQuery): seq[tuple[first: string, 
   c_free(v_ma.data)
   vx_ret
 
-proc hasQueryItem*(self: gen_qurlquery_types.QUrlQuery, key: string): bool =
+proc hasQueryItem*(self: gen_qurlquery_types.QUrlQuery, key: openArray[char]): bool =
   fcQUrlQuery_hasQueryItem(self.h, struct_miqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key))))
 
-proc addQueryItem*(self: gen_qurlquery_types.QUrlQuery, key: string, value: string): void =
+proc addQueryItem*(self: gen_qurlquery_types.QUrlQuery, key: openArray[char], value: openArray[char]): void =
   fcQUrlQuery_addQueryItem(self.h, struct_miqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key))), struct_miqt_string(data: if len(value) > 0: addr value[0] else: nil, len: csize_t(len(value))))
 
-proc removeQueryItem*(self: gen_qurlquery_types.QUrlQuery, key: string): void =
+proc removeQueryItem*(self: gen_qurlquery_types.QUrlQuery, key: openArray[char]): void =
   fcQUrlQuery_removeQueryItem(self.h, struct_miqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key))))
 
-proc queryItemValue*(self: gen_qurlquery_types.QUrlQuery, key: string): string =
+proc queryItemValue*(self: gen_qurlquery_types.QUrlQuery, key: openArray[char]): string =
   let v_ms = fcQUrlQuery_queryItemValue(self.h, struct_miqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key))))
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc allQueryItemValues*(self: gen_qurlquery_types.QUrlQuery, key: string): seq[string] =
+proc allQueryItemValues*(self: gen_qurlquery_types.QUrlQuery, key: openArray[char]): seq[string] =
   var v_ma = fcQUrlQuery_allQueryItemValues(self.h, struct_miqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key))))
   var vx_ret = newSeq[string](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
@@ -183,7 +183,7 @@ proc allQueryItemValues*(self: gen_qurlquery_types.QUrlQuery, key: string): seq[
   c_free(v_ma.data)
   vx_ret
 
-proc removeAllQueryItems*(self: gen_qurlquery_types.QUrlQuery, key: string): void =
+proc removeAllQueryItems*(self: gen_qurlquery_types.QUrlQuery, key: openArray[char]): void =
   fcQUrlQuery_removeAllQueryItems(self.h, struct_miqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key))))
 
 proc query*(self: gen_qurlquery_types.QUrlQuery, encoding: cint): string =
@@ -222,13 +222,13 @@ proc queryItems*(self: gen_qurlquery_types.QUrlQuery, encoding: cint): seq[tuple
   c_free(v_ma.data)
   vx_ret
 
-proc queryItemValue*(self: gen_qurlquery_types.QUrlQuery, key: string, encoding: cint): string =
+proc queryItemValue*(self: gen_qurlquery_types.QUrlQuery, key: openArray[char], encoding: cint): string =
   let v_ms = fcQUrlQuery_queryItemValue2(self.h, struct_miqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key))), cint(encoding))
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc allQueryItemValues*(self: gen_qurlquery_types.QUrlQuery, key: string, encoding: cint): seq[string] =
+proc allQueryItemValues*(self: gen_qurlquery_types.QUrlQuery, key: openArray[char], encoding: cint): seq[string] =
   var v_ma = fcQUrlQuery_allQueryItemValues2(self.h, struct_miqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key))), cint(encoding))
   var vx_ret = newSeq[string](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
@@ -248,7 +248,7 @@ proc create*(T: type gen_qurlquery_types.QUrlQuery,
   let tmp = gen_qurlquery_types.QUrlQuery(h: fcQUrlQuery_new2(url.h), owned: true)
   tmp
 proc create*(T: type gen_qurlquery_types.QUrlQuery,
-    queryString: string): gen_qurlquery_types.QUrlQuery =
+    queryString: openArray[char]): gen_qurlquery_types.QUrlQuery =
   let tmp = gen_qurlquery_types.QUrlQuery(h: fcQUrlQuery_new3(struct_miqt_string(data: if len(queryString) > 0: addr queryString[0] else: nil, len: csize_t(len(queryString)))), owned: true)
   tmp
 proc create*(T: type gen_qurlquery_types.QUrlQuery,

@@ -486,7 +486,7 @@ proc text*(self: gen_qlistwidget_types.QListWidgetItem): string =
   c_free(v_ms.data)
   vx_ret
 
-proc setText*(self: gen_qlistwidget_types.QListWidgetItem, text: string): void =
+proc setText*(self: gen_qlistwidget_types.QListWidgetItem, text: openArray[char]): void =
   fcQListWidgetItem_setText(self.h, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
 
 proc icon*(self: gen_qlistwidget_types.QListWidgetItem): gen_qicon_types.QIcon =
@@ -501,7 +501,7 @@ proc statusTip*(self: gen_qlistwidget_types.QListWidgetItem): string =
   c_free(v_ms.data)
   vx_ret
 
-proc setStatusTip*(self: gen_qlistwidget_types.QListWidgetItem, statusTip: string): void =
+proc setStatusTip*(self: gen_qlistwidget_types.QListWidgetItem, statusTip: openArray[char]): void =
   fcQListWidgetItem_setStatusTip(self.h, struct_miqt_string(data: if len(statusTip) > 0: addr statusTip[0] else: nil, len: csize_t(len(statusTip))))
 
 proc toolTip*(self: gen_qlistwidget_types.QListWidgetItem): string =
@@ -510,7 +510,7 @@ proc toolTip*(self: gen_qlistwidget_types.QListWidgetItem): string =
   c_free(v_ms.data)
   vx_ret
 
-proc setToolTip*(self: gen_qlistwidget_types.QListWidgetItem, toolTip: string): void =
+proc setToolTip*(self: gen_qlistwidget_types.QListWidgetItem, toolTip: openArray[char]): void =
   fcQListWidgetItem_setToolTip(self.h, struct_miqt_string(data: if len(toolTip) > 0: addr toolTip[0] else: nil, len: csize_t(len(toolTip))))
 
 proc whatsThis*(self: gen_qlistwidget_types.QListWidgetItem): string =
@@ -519,7 +519,7 @@ proc whatsThis*(self: gen_qlistwidget_types.QListWidgetItem): string =
   c_free(v_ms.data)
   vx_ret
 
-proc setWhatsThis*(self: gen_qlistwidget_types.QListWidgetItem, whatsThis: string): void =
+proc setWhatsThis*(self: gen_qlistwidget_types.QListWidgetItem, whatsThis: openArray[char]): void =
   fcQListWidgetItem_setWhatsThis(self.h, struct_miqt_string(data: if len(whatsThis) > 0: addr whatsThis[0] else: nil, len: csize_t(len(whatsThis))))
 
 proc font*(self: gen_qlistwidget_types.QListWidgetItem): gen_qfont_types.QFont =
@@ -732,7 +732,7 @@ proc create*(T: type gen_qlistwidget_types.QListWidgetItem,
   fcQListWidgetItem_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qlistwidget_types.QListWidgetItem,
-    text: string,
+    text: openArray[char],
     vtbl: ref QListWidgetItemVTable = nil): gen_qlistwidget_types.QListWidgetItem =
   let vtbl = if vtbl == nil: new QListWidgetItemVTable else: vtbl
   GC_ref(vtbl)
@@ -755,7 +755,7 @@ proc create*(T: type gen_qlistwidget_types.QListWidgetItem,
   fcQListWidgetItem_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qlistwidget_types.QListWidgetItem,
-    icon: gen_qicon_types.QIcon, text: string,
+    icon: gen_qicon_types.QIcon, text: openArray[char],
     vtbl: ref QListWidgetItemVTable = nil): gen_qlistwidget_types.QListWidgetItem =
   let vtbl = if vtbl == nil: new QListWidgetItemVTable else: vtbl
   GC_ref(vtbl)
@@ -847,7 +847,7 @@ proc create*(T: type gen_qlistwidget_types.QListWidgetItem,
   fcQListWidgetItem_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qlistwidget_types.QListWidgetItem,
-    text: string, listview: gen_qlistwidget_types.QListWidget,
+    text: openArray[char], listview: gen_qlistwidget_types.QListWidget,
     vtbl: ref QListWidgetItemVTable = nil): gen_qlistwidget_types.QListWidgetItem =
   let vtbl = if vtbl == nil: new QListWidgetItemVTable else: vtbl
   GC_ref(vtbl)
@@ -870,7 +870,7 @@ proc create*(T: type gen_qlistwidget_types.QListWidgetItem,
   fcQListWidgetItem_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qlistwidget_types.QListWidgetItem,
-    text: string, listview: gen_qlistwidget_types.QListWidget, typeVal: cint,
+    text: openArray[char], listview: gen_qlistwidget_types.QListWidget, typeVal: cint,
     vtbl: ref QListWidgetItemVTable = nil): gen_qlistwidget_types.QListWidgetItem =
   let vtbl = if vtbl == nil: new QListWidgetItemVTable else: vtbl
   GC_ref(vtbl)
@@ -893,7 +893,7 @@ proc create*(T: type gen_qlistwidget_types.QListWidgetItem,
   fcQListWidgetItem_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qlistwidget_types.QListWidgetItem,
-    icon: gen_qicon_types.QIcon, text: string, listview: gen_qlistwidget_types.QListWidget,
+    icon: gen_qicon_types.QIcon, text: openArray[char], listview: gen_qlistwidget_types.QListWidget,
     vtbl: ref QListWidgetItemVTable = nil): gen_qlistwidget_types.QListWidgetItem =
   let vtbl = if vtbl == nil: new QListWidgetItemVTable else: vtbl
   GC_ref(vtbl)
@@ -916,7 +916,7 @@ proc create*(T: type gen_qlistwidget_types.QListWidgetItem,
   fcQListWidgetItem_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qlistwidget_types.QListWidgetItem,
-    icon: gen_qicon_types.QIcon, text: string, listview: gen_qlistwidget_types.QListWidget, typeVal: cint,
+    icon: gen_qicon_types.QIcon, text: openArray[char], listview: gen_qlistwidget_types.QListWidget, typeVal: cint,
     vtbl: ref QListWidgetItemVTable = nil): gen_qlistwidget_types.QListWidgetItem =
   let vtbl = if vtbl == nil: new QListWidgetItemVTable else: vtbl
   GC_ref(vtbl)
@@ -956,20 +956,23 @@ proc create*(T: type gen_qlistwidget_types.QListWidgetItem,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQListWidgetItem_new(addr(cQListWidgetItem_mvtbl), csize_t(sizeof(pointer)))
   fcQListWidgetItem_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qlistwidget_types.QListWidgetItem,
-    text: string,
+    text: openArray[char],
     inst: VirtualQListWidgetItem) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQListWidgetItem_new2(addr(cQListWidgetItem_mvtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
   fcQListWidgetItem_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qlistwidget_types.QListWidgetItem,
-    icon: gen_qicon_types.QIcon, text: string,
+    icon: gen_qicon_types.QIcon, text: openArray[char],
     inst: VirtualQListWidgetItem) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQListWidgetItem_new3(addr(cQListWidgetItem_mvtbl), csize_t(sizeof(pointer)), icon.h, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
   fcQListWidgetItem_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qlistwidget_types.QListWidgetItem,
     other: gen_qlistwidget_types.QListWidgetItem,
@@ -977,6 +980,7 @@ proc create*(T: type gen_qlistwidget_types.QListWidgetItem,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQListWidgetItem_new4(addr(cQListWidgetItem_mvtbl), csize_t(sizeof(pointer)), other.h)
   fcQListWidgetItem_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qlistwidget_types.QListWidgetItem,
     listview: gen_qlistwidget_types.QListWidget,
@@ -984,6 +988,7 @@ proc create*(T: type gen_qlistwidget_types.QListWidgetItem,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQListWidgetItem_new5(addr(cQListWidgetItem_mvtbl), csize_t(sizeof(pointer)), listview.h)
   fcQListWidgetItem_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qlistwidget_types.QListWidgetItem,
     listview: gen_qlistwidget_types.QListWidget, typeVal: cint,
@@ -991,34 +996,39 @@ proc create*(T: type gen_qlistwidget_types.QListWidgetItem,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQListWidgetItem_new6(addr(cQListWidgetItem_mvtbl), csize_t(sizeof(pointer)), listview.h, typeVal)
   fcQListWidgetItem_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qlistwidget_types.QListWidgetItem,
-    text: string, listview: gen_qlistwidget_types.QListWidget,
+    text: openArray[char], listview: gen_qlistwidget_types.QListWidget,
     inst: VirtualQListWidgetItem) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQListWidgetItem_new7(addr(cQListWidgetItem_mvtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), listview.h)
   fcQListWidgetItem_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qlistwidget_types.QListWidgetItem,
-    text: string, listview: gen_qlistwidget_types.QListWidget, typeVal: cint,
+    text: openArray[char], listview: gen_qlistwidget_types.QListWidget, typeVal: cint,
     inst: VirtualQListWidgetItem) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQListWidgetItem_new8(addr(cQListWidgetItem_mvtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), listview.h, typeVal)
   fcQListWidgetItem_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qlistwidget_types.QListWidgetItem,
-    icon: gen_qicon_types.QIcon, text: string, listview: gen_qlistwidget_types.QListWidget,
+    icon: gen_qicon_types.QIcon, text: openArray[char], listview: gen_qlistwidget_types.QListWidget,
     inst: VirtualQListWidgetItem) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQListWidgetItem_new9(addr(cQListWidgetItem_mvtbl), csize_t(sizeof(pointer)), icon.h, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), listview.h)
   fcQListWidgetItem_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qlistwidget_types.QListWidgetItem,
-    icon: gen_qicon_types.QIcon, text: string, listview: gen_qlistwidget_types.QListWidget, typeVal: cint,
+    icon: gen_qicon_types.QIcon, text: openArray[char], listview: gen_qlistwidget_types.QListWidget, typeVal: cint,
     inst: VirtualQListWidgetItem) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQListWidgetItem_new10(addr(cQListWidgetItem_mvtbl), csize_t(sizeof(pointer)), icon.h, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), listview.h, typeVal)
   fcQListWidgetItem_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc metaObject*(self: gen_qlistwidget_types.QListWidget): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQListWidget_metaObject(self.h), owned: false)
@@ -1047,23 +1057,23 @@ proc row*(self: gen_qlistwidget_types.QListWidget, item: gen_qlistwidget_types.Q
 proc insertItem*(self: gen_qlistwidget_types.QListWidget, row: cint, item: gen_qlistwidget_types.QListWidgetItem): void =
   fcQListWidget_insertItem(self.h, row, item.h)
 
-proc insertItem*(self: gen_qlistwidget_types.QListWidget, row: cint, label: string): void =
+proc insertItem*(self: gen_qlistwidget_types.QListWidget, row: cint, label: openArray[char]): void =
   fcQListWidget_insertItem2(self.h, row, struct_miqt_string(data: if len(label) > 0: addr label[0] else: nil, len: csize_t(len(label))))
 
-proc insertItems*(self: gen_qlistwidget_types.QListWidget, row: cint, labels: seq[string]): void =
+proc insertItems*(self: gen_qlistwidget_types.QListWidget, row: cint, labels: openArray[string]): void =
   var labels_CArray = newSeq[struct_miqt_string](len(labels))
   for i in 0..<len(labels):
     labels_CArray[i] = struct_miqt_string(data: if len(labels[i]) > 0: addr labels[i][0] else: nil, len: csize_t(len(labels[i])))
 
   fcQListWidget_insertItems(self.h, row, struct_miqt_array(len: csize_t(len(labels)), data: if len(labels) == 0: nil else: addr(labels_CArray[0])))
 
-proc addItem*(self: gen_qlistwidget_types.QListWidget, label: string): void =
+proc addItem*(self: gen_qlistwidget_types.QListWidget, label: openArray[char]): void =
   fcQListWidget_addItem(self.h, struct_miqt_string(data: if len(label) > 0: addr label[0] else: nil, len: csize_t(len(label))))
 
 proc addItem*(self: gen_qlistwidget_types.QListWidget, item: gen_qlistwidget_types.QListWidgetItem): void =
   fcQListWidget_addItemWithItem(self.h, item.h)
 
-proc addItems*(self: gen_qlistwidget_types.QListWidget, labels: seq[string]): void =
+proc addItems*(self: gen_qlistwidget_types.QListWidget, labels: openArray[string]): void =
   var labels_CArray = newSeq[struct_miqt_string](len(labels))
   for i in 0..<len(labels):
     labels_CArray[i] = struct_miqt_string(data: if len(labels[i]) > 0: addr labels[i][0] else: nil, len: csize_t(len(labels[i])))
@@ -1142,7 +1152,7 @@ proc selectedItems*(self: gen_qlistwidget_types.QListWidget): seq[gen_qlistwidge
   c_free(v_ma.data)
   vx_ret
 
-proc findItems*(self: gen_qlistwidget_types.QListWidget, text: string, flags: cint): seq[gen_qlistwidget_types.QListWidgetItem] =
+proc findItems*(self: gen_qlistwidget_types.QListWidget, text: openArray[char], flags: cint): seq[gen_qlistwidget_types.QListWidgetItem] =
   var v_ma = fcQListWidget_findItems(self.h, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), cint(flags))
   var vx_ret = newSeq[gen_qlistwidget_types.QListWidgetItem](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
@@ -1314,10 +1324,10 @@ proc oncurrentItemChanged*(self: gen_qlistwidget_types.QListWidget, slot: QListW
   GC_ref(tmp)
   fcQListWidget_connect_currentItemChanged(self.h, cast[int](addr tmp[]), fcQListWidget_slot_callback_currentItemChanged, fcQListWidget_slot_callback_currentItemChanged_release)
 
-proc currentTextChanged*(self: gen_qlistwidget_types.QListWidget, currentText: string): void =
+proc currentTextChanged*(self: gen_qlistwidget_types.QListWidget, currentText: openArray[char]): void =
   fcQListWidget_currentTextChanged(self.h, struct_miqt_string(data: if len(currentText) > 0: addr currentText[0] else: nil, len: csize_t(len(currentText))))
 
-type QListWidgetcurrentTextChangedSlot* = proc(currentText: string)
+type QListWidgetcurrentTextChangedSlot* = proc(currentText: openArray[char])
 proc fcQListWidget_slot_callback_currentTextChanged(slot: int, currentText: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QListWidgetcurrentTextChangedSlot](cast[pointer](slot))
   let vcurrentText_ms = currentText
@@ -1400,7 +1410,7 @@ type QListWidgetsetSelectionModelProc* = proc(self: QListWidget, selectionModel:
 type QListWidgetdropEventProc* = proc(self: QListWidget, event: gen_qevent_types.QDropEvent): void {.raises: [], gcsafe.}
 type QListWidgeteventProc* = proc(self: QListWidget, e: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
 type QListWidgetmimeTypesProc* = proc(self: QListWidget): seq[string] {.raises: [], gcsafe.}
-type QListWidgetmimeDataProc* = proc(self: QListWidget, items: seq[gen_qlistwidget_types.QListWidgetItem]): gen_qmimedata_types.QMimeData {.raises: [], gcsafe.}
+type QListWidgetmimeDataProc* = proc(self: QListWidget, items: openArray[gen_qlistwidget_types.QListWidgetItem]): gen_qmimedata_types.QMimeData {.raises: [], gcsafe.}
 type QListWidgetdropMimeDataProc* = proc(self: QListWidget, index: cint, data: gen_qmimedata_types.QMimeData, action: cint): bool {.raises: [], gcsafe.}
 type QListWidgetsupportedDropActionsProc* = proc(self: QListWidget): cint {.raises: [], gcsafe.}
 type QListWidgetvisualRectProc* = proc(self: QListWidget, index: gen_qabstractitemmodel_types.QModelIndex): gen_qrect_types.QRect {.raises: [], gcsafe.}
@@ -1410,7 +1420,7 @@ type QListWidgetdoItemsLayoutProc* = proc(self: QListWidget): void {.raises: [],
 type QListWidgetresetProc* = proc(self: QListWidget): void {.raises: [], gcsafe.}
 type QListWidgetsetRootIndexProc* = proc(self: QListWidget, index: gen_qabstractitemmodel_types.QModelIndex): void {.raises: [], gcsafe.}
 type QListWidgetscrollContentsByProc* = proc(self: QListWidget, dx: cint, dy: cint): void {.raises: [], gcsafe.}
-type QListWidgetdataChangedProc* = proc(self: QListWidget, topLeft: gen_qabstractitemmodel_types.QModelIndex, bottomRight: gen_qabstractitemmodel_types.QModelIndex, roles: seq[cint]): void {.raises: [], gcsafe.}
+type QListWidgetdataChangedProc* = proc(self: QListWidget, topLeft: gen_qabstractitemmodel_types.QModelIndex, bottomRight: gen_qabstractitemmodel_types.QModelIndex, roles: openArray[cint]): void {.raises: [], gcsafe.}
 type QListWidgetrowsInsertedProc* = proc(self: QListWidget, parent: gen_qabstractitemmodel_types.QModelIndex, start: cint, endVal: cint): void {.raises: [], gcsafe.}
 type QListWidgetrowsAboutToBeRemovedProc* = proc(self: QListWidget, parent: gen_qabstractitemmodel_types.QModelIndex, start: cint, endVal: cint): void {.raises: [], gcsafe.}
 type QListWidgetmouseMoveEventProc* = proc(self: QListWidget, e: gen_qevent_types.QMouseEvent): void {.raises: [], gcsafe.}
@@ -1434,7 +1444,7 @@ type QListWidgetisIndexHiddenProc* = proc(self: QListWidget, index: gen_qabstrac
 type QListWidgetselectionChangedProc* = proc(self: QListWidget, selected: gen_qitemselectionmodel_types.QItemSelection, deselected: gen_qitemselectionmodel_types.QItemSelection): void {.raises: [], gcsafe.}
 type QListWidgetcurrentChangedProc* = proc(self: QListWidget, current: gen_qabstractitemmodel_types.QModelIndex, previous: gen_qabstractitemmodel_types.QModelIndex): void {.raises: [], gcsafe.}
 type QListWidgetviewportSizeHintProc* = proc(self: QListWidget): gen_qsize_types.QSize {.raises: [], gcsafe.}
-type QListWidgetkeyboardSearchProc* = proc(self: QListWidget, search: string): void {.raises: [], gcsafe.}
+type QListWidgetkeyboardSearchProc* = proc(self: QListWidget, search: openArray[char]): void {.raises: [], gcsafe.}
 type QListWidgetsizeHintForRowProc* = proc(self: QListWidget, row: cint): cint {.raises: [], gcsafe.}
 type QListWidgetsizeHintForColumnProc* = proc(self: QListWidget, column: cint): cint {.raises: [], gcsafe.}
 type QListWidgetitemDelegateForIndexProc* = proc(self: QListWidget, index: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemdelegate_types.QAbstractItemDelegate {.raises: [], gcsafe.}
@@ -1481,7 +1491,7 @@ type QListWidgettabletEventProc* = proc(self: QListWidget, event: gen_qevent_typ
 type QListWidgetactionEventProc* = proc(self: QListWidget, event: gen_qevent_types.QActionEvent): void {.raises: [], gcsafe.}
 type QListWidgetshowEventProc* = proc(self: QListWidget, event: gen_qevent_types.QShowEvent): void {.raises: [], gcsafe.}
 type QListWidgethideEventProc* = proc(self: QListWidget, event: gen_qevent_types.QHideEvent): void {.raises: [], gcsafe.}
-type QListWidgetnativeEventProc* = proc(self: QListWidget, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
+type QListWidgetnativeEventProc* = proc(self: QListWidget, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
 type QListWidgetmetricProc* = proc(self: QListWidget, param1: cint): cint {.raises: [], gcsafe.}
 type QListWidgetinitPainterProc* = proc(self: QListWidget, painter: gen_qpainter_types.QPainter): void {.raises: [], gcsafe.}
 type QListWidgetredirectedProc* = proc(self: QListWidget, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.raises: [], gcsafe.}
@@ -1675,7 +1685,7 @@ proc fcQListWidget_vtable_callback_mimeTypes(self: pointer): struct_miqt_array {
 
   struct_miqt_array(len: csize_t(len(virtualReturn)), data: if len(virtualReturn) == 0: nil else: addr(virtualReturn_CArray[0]))
 
-proc QListWidgetmimeData*(self: gen_qlistwidget_types.QListWidget, items: seq[gen_qlistwidget_types.QListWidgetItem]): gen_qmimedata_types.QMimeData =
+proc QListWidgetmimeData*(self: gen_qlistwidget_types.QListWidget, items: openArray[gen_qlistwidget_types.QListWidgetItem]): gen_qmimedata_types.QMimeData =
   var items_CArray = newSeq[pointer](len(items))
   for i in 0..<len(items):
     items_CArray[i] = items[i].h
@@ -1790,7 +1800,7 @@ proc fcQListWidget_vtable_callback_scrollContentsBy(self: pointer, dx: cint, dy:
   let slotval2 = dy
   vtbl[].scrollContentsBy(self, slotval1, slotval2)
 
-proc QListWidgetdataChanged*(self: gen_qlistwidget_types.QListWidget, topLeft: gen_qabstractitemmodel_types.QModelIndex, bottomRight: gen_qabstractitemmodel_types.QModelIndex, roles: seq[cint]): void =
+proc QListWidgetdataChanged*(self: gen_qlistwidget_types.QListWidget, topLeft: gen_qabstractitemmodel_types.QModelIndex, bottomRight: gen_qabstractitemmodel_types.QModelIndex, roles: openArray[cint]): void =
   var roles_CArray = newSeq[cint](len(roles))
   for i in 0..<len(roles):
     roles_CArray[i] = roles[i]
@@ -2050,7 +2060,7 @@ proc fcQListWidget_vtable_callback_viewportSizeHint(self: pointer): pointer {.cd
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QListWidgetkeyboardSearch*(self: gen_qlistwidget_types.QListWidget, search: string): void =
+proc QListWidgetkeyboardSearch*(self: gen_qlistwidget_types.QListWidget, search: openArray[char]): void =
   fcQListWidget_virtualbase_keyboardSearch(self.h, struct_miqt_string(data: if len(search) > 0: addr search[0] else: nil, len: csize_t(len(search))))
 
 proc fcQListWidget_vtable_callback_keyboardSearch(self: pointer, search: struct_miqt_string): void {.cdecl.} =
@@ -2503,7 +2513,7 @@ proc fcQListWidget_vtable_callback_hideEvent(self: pointer, event: pointer): voi
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   vtbl[].hideEvent(self, slotval1)
 
-proc QListWidgetnativeEvent*(self: gen_qlistwidget_types.QListWidget, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool =
+proc QListWidgetnativeEvent*(self: gen_qlistwidget_types.QListWidget, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool =
   fcQListWidget_virtualbase_nativeEvent(self.h, struct_miqt_string(data: if len(eventType) > 0: addr eventType[0] else: nil, len: csize_t(len(eventType))), message, resultVal)
 
 proc fcQListWidget_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
@@ -2658,7 +2668,7 @@ proc fcQListWidget_method_callback_mimeTypes(self: pointer): struct_miqt_array {
 
   struct_miqt_array(len: csize_t(len(virtualReturn)), data: if len(virtualReturn) == 0: nil else: addr(virtualReturn_CArray[0]))
 
-method mimeData*(self: VirtualQListWidget, items: seq[gen_qlistwidget_types.QListWidgetItem]): gen_qmimedata_types.QMimeData {.base.} =
+method mimeData*(self: VirtualQListWidget, items: openArray[gen_qlistwidget_types.QListWidgetItem]): gen_qmimedata_types.QMimeData {.base.} =
   QListWidgetmimeData(self[], items)
 proc fcQListWidget_method_callback_mimeData(self: pointer, items: struct_miqt_array): pointer {.cdecl.} =
   let inst = cast[VirtualQListWidget](fcQListWidget_vdata(self)[])
@@ -2740,7 +2750,7 @@ proc fcQListWidget_method_callback_scrollContentsBy(self: pointer, dx: cint, dy:
   let slotval2 = dy
   inst.scrollContentsBy(slotval1, slotval2)
 
-method dataChanged*(self: VirtualQListWidget, topLeft: gen_qabstractitemmodel_types.QModelIndex, bottomRight: gen_qabstractitemmodel_types.QModelIndex, roles: seq[cint]): void {.base.} =
+method dataChanged*(self: VirtualQListWidget, topLeft: gen_qabstractitemmodel_types.QModelIndex, bottomRight: gen_qabstractitemmodel_types.QModelIndex, roles: openArray[cint]): void {.base.} =
   QListWidgetdataChanged(self[], topLeft, bottomRight, roles)
 proc fcQListWidget_method_callback_dataChanged(self: pointer, topLeft: pointer, bottomRight: pointer, roles: struct_miqt_array): void {.cdecl.} =
   let inst = cast[VirtualQListWidget](fcQListWidget_vdata(self)[])
@@ -2930,7 +2940,7 @@ proc fcQListWidget_method_callback_viewportSizeHint(self: pointer): pointer {.cd
   var virtualReturn = inst.viewportSizeHint()
   virtualReturn.h
 
-method keyboardSearch*(self: VirtualQListWidget, search: string): void {.base.} =
+method keyboardSearch*(self: VirtualQListWidget, search: openArray[char]): void {.base.} =
   QListWidgetkeyboardSearch(self[], search)
 proc fcQListWidget_method_callback_keyboardSearch(self: pointer, search: struct_miqt_string): void {.cdecl.} =
   let inst = cast[VirtualQListWidget](fcQListWidget_vdata(self)[])
@@ -3274,7 +3284,7 @@ proc fcQListWidget_method_callback_hideEvent(self: pointer, event: pointer): voi
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   inst.hideEvent(slotval1)
 
-method nativeEvent*(self: VirtualQListWidget, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
+method nativeEvent*(self: VirtualQListWidget, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
   QListWidgetnativeEvent(self[], eventType, message, resultVal)
 proc fcQListWidget_method_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
   let inst = cast[VirtualQListWidget](fcQListWidget_vdata(self)[])
@@ -3945,12 +3955,14 @@ proc create*(T: type gen_qlistwidget_types.QListWidget,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQListWidget_new(addr(cQListWidget_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQListWidget_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qlistwidget_types.QListWidget,
     inst: VirtualQListWidget) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQListWidget_new2(addr(cQListWidget_mvtbl), csize_t(sizeof(pointer)))
   fcQListWidget_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qlistwidget_types.QListWidget): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQListWidget_staticMetaObject())

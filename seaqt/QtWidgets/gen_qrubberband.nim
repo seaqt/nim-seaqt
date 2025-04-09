@@ -294,7 +294,7 @@ type QRubberBanddragMoveEventProc* = proc(self: QRubberBand, event: gen_qevent_t
 type QRubberBanddragLeaveEventProc* = proc(self: QRubberBand, event: gen_qevent_types.QDragLeaveEvent): void {.raises: [], gcsafe.}
 type QRubberBanddropEventProc* = proc(self: QRubberBand, event: gen_qevent_types.QDropEvent): void {.raises: [], gcsafe.}
 type QRubberBandhideEventProc* = proc(self: QRubberBand, event: gen_qevent_types.QHideEvent): void {.raises: [], gcsafe.}
-type QRubberBandnativeEventProc* = proc(self: QRubberBand, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
+type QRubberBandnativeEventProc* = proc(self: QRubberBand, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
 type QRubberBandmetricProc* = proc(self: QRubberBand, param1: cint): cint {.raises: [], gcsafe.}
 type QRubberBandinitPainterProc* = proc(self: QRubberBand, painter: gen_qpainter_types.QPainter): void {.raises: [], gcsafe.}
 type QRubberBandredirectedProc* = proc(self: QRubberBand, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.raises: [], gcsafe.}
@@ -712,7 +712,7 @@ proc fcQRubberBand_vtable_callback_hideEvent(self: pointer, event: pointer): voi
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   vtbl[].hideEvent(self, slotval1)
 
-proc QRubberBandnativeEvent*(self: gen_qrubberband_types.QRubberBand, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool =
+proc QRubberBandnativeEvent*(self: gen_qrubberband_types.QRubberBand, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool =
   fcQRubberBand_virtualbase_nativeEvent(self.h, struct_miqt_string(data: if len(eventType) > 0: addr eventType[0] else: nil, len: csize_t(len(eventType))), message, resultVal)
 
 proc fcQRubberBand_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
@@ -1126,7 +1126,7 @@ proc fcQRubberBand_method_callback_hideEvent(self: pointer, event: pointer): voi
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   inst.hideEvent(slotval1)
 
-method nativeEvent*(self: VirtualQRubberBand, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
+method nativeEvent*(self: VirtualQRubberBand, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
   QRubberBandnativeEvent(self[], eventType, message, resultVal)
 proc fcQRubberBand_method_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
   let inst = cast[VirtualQRubberBand](fcQRubberBand_vdata(self)[])
@@ -1553,6 +1553,7 @@ proc create*(T: type gen_qrubberband_types.QRubberBand,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQRubberBand_new(addr(cQRubberBand_mvtbl), csize_t(sizeof(pointer)), cint(param1))
   fcQRubberBand_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qrubberband_types.QRubberBand,
     param1: cint, param2: gen_qwidget_types.QWidget,
@@ -1560,6 +1561,7 @@ proc create*(T: type gen_qrubberband_types.QRubberBand,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQRubberBand_new2(addr(cQRubberBand_mvtbl), csize_t(sizeof(pointer)), cint(param1), param2.h)
   fcQRubberBand_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qrubberband_types.QRubberBand): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQRubberBand_staticMetaObject())

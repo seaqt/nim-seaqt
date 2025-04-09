@@ -119,7 +119,7 @@ proc selector*(self: gen_qqmlfileselector_types.QQmlFileSelector): gen_qfilesele
 proc setSelector*(self: gen_qqmlfileselector_types.QQmlFileSelector, selector: gen_qfileselector_types.QFileSelector): void =
   fcQQmlFileSelector_setSelector(self.h, selector.h)
 
-proc setExtraSelectors*(self: gen_qqmlfileselector_types.QQmlFileSelector, strings: seq[string]): void =
+proc setExtraSelectors*(self: gen_qqmlfileselector_types.QQmlFileSelector, strings: openArray[string]): void =
   var strings_CArray = newSeq[struct_miqt_string](len(strings))
   for i in 0..<len(strings):
     strings_CArray[i] = struct_miqt_string(data: if len(strings[i]) > 0: addr strings[i][0] else: nil, len: csize_t(len(strings[i])))
@@ -439,6 +439,7 @@ proc create*(T: type gen_qqmlfileselector_types.QQmlFileSelector,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQQmlFileSelector_new(addr(cQQmlFileSelector_mvtbl), csize_t(sizeof(pointer)), engine.h)
   fcQQmlFileSelector_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qqmlfileselector_types.QQmlFileSelector,
     engine: gen_qqmlengine_types.QQmlEngine, parent: gen_qobject_types.QObject,
@@ -446,6 +447,7 @@ proc create*(T: type gen_qqmlfileselector_types.QQmlFileSelector,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQQmlFileSelector_new2(addr(cQQmlFileSelector_mvtbl), csize_t(sizeof(pointer)), engine.h, parent.h)
   fcQQmlFileSelector_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qqmlfileselector_types.QQmlFileSelector): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQQmlFileSelector_staticMetaObject())

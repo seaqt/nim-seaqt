@@ -340,7 +340,7 @@ type QFramedragLeaveEventProc* = proc(self: QFrame, event: gen_qevent_types.QDra
 type QFramedropEventProc* = proc(self: QFrame, event: gen_qevent_types.QDropEvent): void {.raises: [], gcsafe.}
 type QFrameshowEventProc* = proc(self: QFrame, event: gen_qevent_types.QShowEvent): void {.raises: [], gcsafe.}
 type QFramehideEventProc* = proc(self: QFrame, event: gen_qevent_types.QHideEvent): void {.raises: [], gcsafe.}
-type QFramenativeEventProc* = proc(self: QFrame, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
+type QFramenativeEventProc* = proc(self: QFrame, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
 type QFramemetricProc* = proc(self: QFrame, param1: cint): cint {.raises: [], gcsafe.}
 type QFrameinitPainterProc* = proc(self: QFrame, painter: gen_qpainter_types.QPainter): void {.raises: [], gcsafe.}
 type QFrameredirectedProc* = proc(self: QFrame, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.raises: [], gcsafe.}
@@ -758,7 +758,7 @@ proc fcQFrame_vtable_callback_hideEvent(self: pointer, event: pointer): void {.c
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   vtbl[].hideEvent(self, slotval1)
 
-proc QFramenativeEvent*(self: gen_qframe_types.QFrame, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool =
+proc QFramenativeEvent*(self: gen_qframe_types.QFrame, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool =
   fcQFrame_virtualbase_nativeEvent(self.h, struct_miqt_string(data: if len(eventType) > 0: addr eventType[0] else: nil, len: csize_t(len(eventType))), message, resultVal)
 
 proc fcQFrame_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
@@ -1172,7 +1172,7 @@ proc fcQFrame_method_callback_hideEvent(self: pointer, event: pointer): void {.c
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   inst.hideEvent(slotval1)
 
-method nativeEvent*(self: VirtualQFrame, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
+method nativeEvent*(self: VirtualQFrame, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
   QFramenativeEvent(self[], eventType, message, resultVal)
 proc fcQFrame_method_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
   let inst = cast[VirtualQFrame](fcQFrame_vdata(self)[])
@@ -1714,12 +1714,14 @@ proc create*(T: type gen_qframe_types.QFrame,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQFrame_new(addr(cQFrame_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQFrame_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qframe_types.QFrame,
     inst: VirtualQFrame) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQFrame_new2(addr(cQFrame_mvtbl), csize_t(sizeof(pointer)))
   fcQFrame_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qframe_types.QFrame,
     parent: gen_qwidget_types.QWidget, f: cint,
@@ -1727,6 +1729,7 @@ proc create*(T: type gen_qframe_types.QFrame,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQFrame_new3(addr(cQFrame_mvtbl), csize_t(sizeof(pointer)), parent.h, cint(f))
   fcQFrame_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qframe_types.QFrame): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQFrame_staticMetaObject())

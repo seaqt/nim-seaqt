@@ -967,6 +967,7 @@ proc create*(T: type gen_qevent_types.QInputEvent,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQInputEvent_new(addr(cQInputEvent_mvtbl), csize_t(sizeof(pointer)), cint(typeVal), m_dev.h)
   fcQInputEvent_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qevent_types.QInputEvent,
     typeVal: cint, m_dev: gen_qinputdevice_types.QInputDevice, modifiers: cint,
@@ -974,6 +975,7 @@ proc create*(T: type gen_qevent_types.QInputEvent,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQInputEvent_new2(addr(cQInputEvent_mvtbl), csize_t(sizeof(pointer)), cint(typeVal), m_dev.h, cint(modifiers))
   fcQInputEvent_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc clone*(self: gen_qevent_types.QPointerEvent): gen_qevent_types.QPointerEvent =
   gen_qevent_types.QPointerEvent(h: fcQPointerEvent_clone(self.h), owned: false)
@@ -1200,7 +1202,7 @@ proc create*(T: type gen_qevent_types.QPointerEvent,
   fcQPointerEvent_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qevent_types.QPointerEvent,
-    typeVal: cint, dev: gen_qpointingdevice_types.QPointingDevice, modifiers: cint, points: seq[gen_qeventpoint_types.QEventPoint],
+    typeVal: cint, dev: gen_qpointingdevice_types.QPointingDevice, modifiers: cint, points: openArray[gen_qeventpoint_types.QEventPoint],
     vtbl: ref QPointerEventVTable = nil): gen_qevent_types.QPointerEvent =
   var points_CArray = newSeq[pointer](len(points))
   for i in 0..<len(points):
@@ -1245,6 +1247,7 @@ proc create*(T: type gen_qevent_types.QPointerEvent,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQPointerEvent_new(addr(cQPointerEvent_mvtbl), csize_t(sizeof(pointer)), cint(typeVal), dev.h)
   fcQPointerEvent_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qevent_types.QPointerEvent,
     typeVal: cint, dev: gen_qpointingdevice_types.QPointingDevice, modifiers: cint,
@@ -1252,9 +1255,10 @@ proc create*(T: type gen_qevent_types.QPointerEvent,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQPointerEvent_new2(addr(cQPointerEvent_mvtbl), csize_t(sizeof(pointer)), cint(typeVal), dev.h, cint(modifiers))
   fcQPointerEvent_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qevent_types.QPointerEvent,
-    typeVal: cint, dev: gen_qpointingdevice_types.QPointingDevice, modifiers: cint, points: seq[gen_qeventpoint_types.QEventPoint],
+    typeVal: cint, dev: gen_qpointingdevice_types.QPointingDevice, modifiers: cint, points: openArray[gen_qeventpoint_types.QEventPoint],
     inst: VirtualQPointerEvent) =
   var points_CArray = newSeq[pointer](len(points))
   for i in 0..<len(points):
@@ -1263,6 +1267,7 @@ proc create*(T: type gen_qevent_types.QPointerEvent,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQPointerEvent_new3(addr(cQPointerEvent_mvtbl), csize_t(sizeof(pointer)), cint(typeVal), dev.h, cint(modifiers), struct_miqt_array(len: csize_t(len(points)), data: if len(points) == 0: nil else: addr(points_CArray[0])))
   fcQPointerEvent_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc clone*(self: gen_qevent_types.QSinglePointEvent): gen_qevent_types.QSinglePointEvent =
   gen_qevent_types.QSinglePointEvent(h: fcQSinglePointEvent_clone(self.h), owned: false)
@@ -1509,6 +1514,7 @@ proc create*(T: type gen_qevent_types.QEnterEvent,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQEnterEvent_new(addr(cQEnterEvent_mvtbl), csize_t(sizeof(pointer)), localPos.h, scenePos.h, globalPos.h)
   fcQEnterEvent_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qevent_types.QEnterEvent,
     localPos: gen_qpoint_types.QPointF, scenePos: gen_qpoint_types.QPointF, globalPos: gen_qpoint_types.QPointF, device: gen_qpointingdevice_types.QPointingDevice,
@@ -1516,6 +1522,7 @@ proc create*(T: type gen_qevent_types.QEnterEvent,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQEnterEvent_new2(addr(cQEnterEvent_mvtbl), csize_t(sizeof(pointer)), localPos.h, scenePos.h, globalPos.h, device.h)
   fcQEnterEvent_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc clone*(self: gen_qevent_types.QMouseEvent): gen_qevent_types.QMouseEvent =
   gen_qevent_types.QMouseEvent(h: fcQMouseEvent_clone(self.h), owned: false)
@@ -1871,6 +1878,7 @@ proc create*(T: type gen_qevent_types.QMouseEvent,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQMouseEvent_new(addr(cQMouseEvent_mvtbl), csize_t(sizeof(pointer)), cint(typeVal), localPos.h, cint(button), cint(buttons), cint(modifiers))
   fcQMouseEvent_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qevent_types.QMouseEvent,
     typeVal: cint, localPos: gen_qpoint_types.QPointF, globalPos: gen_qpoint_types.QPointF, button: cint, buttons: cint, modifiers: cint,
@@ -1878,6 +1886,7 @@ proc create*(T: type gen_qevent_types.QMouseEvent,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQMouseEvent_new2(addr(cQMouseEvent_mvtbl), csize_t(sizeof(pointer)), cint(typeVal), localPos.h, globalPos.h, cint(button), cint(buttons), cint(modifiers))
   fcQMouseEvent_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qevent_types.QMouseEvent,
     typeVal: cint, localPos: gen_qpoint_types.QPointF, scenePos: gen_qpoint_types.QPointF, globalPos: gen_qpoint_types.QPointF, button: cint, buttons: cint, modifiers: cint,
@@ -1885,6 +1894,7 @@ proc create*(T: type gen_qevent_types.QMouseEvent,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQMouseEvent_new3(addr(cQMouseEvent_mvtbl), csize_t(sizeof(pointer)), cint(typeVal), localPos.h, scenePos.h, globalPos.h, cint(button), cint(buttons), cint(modifiers))
   fcQMouseEvent_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qevent_types.QMouseEvent,
     typeVal: cint, localPos: gen_qpoint_types.QPointF, scenePos: gen_qpoint_types.QPointF, globalPos: gen_qpoint_types.QPointF, button: cint, buttons: cint, modifiers: cint, source: cint,
@@ -1892,6 +1902,7 @@ proc create*(T: type gen_qevent_types.QMouseEvent,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQMouseEvent_new4(addr(cQMouseEvent_mvtbl), csize_t(sizeof(pointer)), cint(typeVal), localPos.h, scenePos.h, globalPos.h, cint(button), cint(buttons), cint(modifiers), cint(source))
   fcQMouseEvent_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qevent_types.QMouseEvent,
     typeVal: cint, localPos: gen_qpoint_types.QPointF, button: cint, buttons: cint, modifiers: cint, device: gen_qpointingdevice_types.QPointingDevice,
@@ -1899,6 +1910,7 @@ proc create*(T: type gen_qevent_types.QMouseEvent,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQMouseEvent_new5(addr(cQMouseEvent_mvtbl), csize_t(sizeof(pointer)), cint(typeVal), localPos.h, cint(button), cint(buttons), cint(modifiers), device.h)
   fcQMouseEvent_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qevent_types.QMouseEvent,
     typeVal: cint, localPos: gen_qpoint_types.QPointF, globalPos: gen_qpoint_types.QPointF, button: cint, buttons: cint, modifiers: cint, device: gen_qpointingdevice_types.QPointingDevice,
@@ -1906,6 +1918,7 @@ proc create*(T: type gen_qevent_types.QMouseEvent,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQMouseEvent_new6(addr(cQMouseEvent_mvtbl), csize_t(sizeof(pointer)), cint(typeVal), localPos.h, globalPos.h, cint(button), cint(buttons), cint(modifiers), device.h)
   fcQMouseEvent_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qevent_types.QMouseEvent,
     typeVal: cint, localPos: gen_qpoint_types.QPointF, scenePos: gen_qpoint_types.QPointF, globalPos: gen_qpoint_types.QPointF, button: cint, buttons: cint, modifiers: cint, device: gen_qpointingdevice_types.QPointingDevice,
@@ -1913,6 +1926,7 @@ proc create*(T: type gen_qevent_types.QMouseEvent,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQMouseEvent_new7(addr(cQMouseEvent_mvtbl), csize_t(sizeof(pointer)), cint(typeVal), localPos.h, scenePos.h, globalPos.h, cint(button), cint(buttons), cint(modifiers), device.h)
   fcQMouseEvent_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qevent_types.QMouseEvent,
     typeVal: cint, localPos: gen_qpoint_types.QPointF, scenePos: gen_qpoint_types.QPointF, globalPos: gen_qpoint_types.QPointF, button: cint, buttons: cint, modifiers: cint, source: cint, device: gen_qpointingdevice_types.QPointingDevice,
@@ -1920,6 +1934,7 @@ proc create*(T: type gen_qevent_types.QMouseEvent,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQMouseEvent_new8(addr(cQMouseEvent_mvtbl), csize_t(sizeof(pointer)), cint(typeVal), localPos.h, scenePos.h, globalPos.h, cint(button), cint(buttons), cint(modifiers), cint(source), device.h)
   fcQMouseEvent_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc clone*(self: gen_qevent_types.QHoverEvent): gen_qevent_types.QHoverEvent =
   gen_qevent_types.QHoverEvent(h: fcQHoverEvent_clone(self.h), owned: false)
@@ -2211,6 +2226,7 @@ proc create*(T: type gen_qevent_types.QHoverEvent,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQHoverEvent_new(addr(cQHoverEvent_mvtbl), csize_t(sizeof(pointer)), cint(typeVal), scenePos.h, globalPos.h, oldPos.h)
   fcQHoverEvent_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qevent_types.QHoverEvent,
     typeVal: cint, pos: gen_qpoint_types.QPointF, oldPos: gen_qpoint_types.QPointF,
@@ -2218,6 +2234,7 @@ proc create*(T: type gen_qevent_types.QHoverEvent,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQHoverEvent_new2(addr(cQHoverEvent_mvtbl), csize_t(sizeof(pointer)), cint(typeVal), pos.h, oldPos.h)
   fcQHoverEvent_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qevent_types.QHoverEvent,
     typeVal: cint, scenePos: gen_qpoint_types.QPointF, globalPos: gen_qpoint_types.QPointF, oldPos: gen_qpoint_types.QPointF, modifiers: cint,
@@ -2225,6 +2242,7 @@ proc create*(T: type gen_qevent_types.QHoverEvent,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQHoverEvent_new3(addr(cQHoverEvent_mvtbl), csize_t(sizeof(pointer)), cint(typeVal), scenePos.h, globalPos.h, oldPos.h, cint(modifiers))
   fcQHoverEvent_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qevent_types.QHoverEvent,
     typeVal: cint, scenePos: gen_qpoint_types.QPointF, globalPos: gen_qpoint_types.QPointF, oldPos: gen_qpoint_types.QPointF, modifiers: cint, device: gen_qpointingdevice_types.QPointingDevice,
@@ -2232,6 +2250,7 @@ proc create*(T: type gen_qevent_types.QHoverEvent,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQHoverEvent_new4(addr(cQHoverEvent_mvtbl), csize_t(sizeof(pointer)), cint(typeVal), scenePos.h, globalPos.h, oldPos.h, cint(modifiers), device.h)
   fcQHoverEvent_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qevent_types.QHoverEvent,
     typeVal: cint, pos: gen_qpoint_types.QPointF, oldPos: gen_qpoint_types.QPointF, modifiers: cint,
@@ -2239,6 +2258,7 @@ proc create*(T: type gen_qevent_types.QHoverEvent,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQHoverEvent_new5(addr(cQHoverEvent_mvtbl), csize_t(sizeof(pointer)), cint(typeVal), pos.h, oldPos.h, cint(modifiers))
   fcQHoverEvent_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qevent_types.QHoverEvent,
     typeVal: cint, pos: gen_qpoint_types.QPointF, oldPos: gen_qpoint_types.QPointF, modifiers: cint, device: gen_qpointingdevice_types.QPointingDevice,
@@ -2246,6 +2266,7 @@ proc create*(T: type gen_qevent_types.QHoverEvent,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQHoverEvent_new6(addr(cQHoverEvent_mvtbl), csize_t(sizeof(pointer)), cint(typeVal), pos.h, oldPos.h, cint(modifiers), device.h)
   fcQHoverEvent_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc clone*(self: gen_qevent_types.QWheelEvent): gen_qevent_types.QWheelEvent =
   gen_qevent_types.QWheelEvent(h: fcQWheelEvent_clone(self.h), owned: false)
@@ -2483,6 +2504,7 @@ proc create*(T: type gen_qevent_types.QWheelEvent,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQWheelEvent_new(addr(cQWheelEvent_mvtbl), csize_t(sizeof(pointer)), pos.h, globalPos.h, pixelDelta.h, angleDelta.h, cint(buttons), cint(modifiers), cint(phase), inverted)
   fcQWheelEvent_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qevent_types.QWheelEvent,
     pos: gen_qpoint_types.QPointF, globalPos: gen_qpoint_types.QPointF, pixelDelta: gen_qpoint_types.QPoint, angleDelta: gen_qpoint_types.QPoint, buttons: cint, modifiers: cint, phase: cint, inverted: bool, source: cint,
@@ -2490,6 +2512,7 @@ proc create*(T: type gen_qevent_types.QWheelEvent,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQWheelEvent_new2(addr(cQWheelEvent_mvtbl), csize_t(sizeof(pointer)), pos.h, globalPos.h, pixelDelta.h, angleDelta.h, cint(buttons), cint(modifiers), cint(phase), inverted, cint(source))
   fcQWheelEvent_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qevent_types.QWheelEvent,
     pos: gen_qpoint_types.QPointF, globalPos: gen_qpoint_types.QPointF, pixelDelta: gen_qpoint_types.QPoint, angleDelta: gen_qpoint_types.QPoint, buttons: cint, modifiers: cint, phase: cint, inverted: bool, source: cint, device: gen_qpointingdevice_types.QPointingDevice,
@@ -2497,6 +2520,7 @@ proc create*(T: type gen_qevent_types.QWheelEvent,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQWheelEvent_new3(addr(cQWheelEvent_mvtbl), csize_t(sizeof(pointer)), pos.h, globalPos.h, pixelDelta.h, angleDelta.h, cint(buttons), cint(modifiers), cint(phase), inverted, cint(source), device.h)
   fcQWheelEvent_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qevent_types.QWheelEvent): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQWheelEvent_staticMetaObject())
@@ -2711,6 +2735,7 @@ proc create*(T: type gen_qevent_types.QTabletEvent,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQTabletEvent_new(addr(cQTabletEvent_mvtbl), csize_t(sizeof(pointer)), cint(t), device.h, pos.h, globalPos.h, pressure, xTilt, yTilt, tangentialPressure, rotation, z, cint(keyState), cint(button), cint(buttons))
   fcQTabletEvent_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc clone*(self: gen_qevent_types.QNativeGestureEvent): gen_qevent_types.QNativeGestureEvent =
   gen_qevent_types.QNativeGestureEvent(h: fcQNativeGestureEvent_clone(self.h), owned: false)
@@ -2945,6 +2970,7 @@ proc create*(T: type gen_qevent_types.QNativeGestureEvent,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQNativeGestureEvent_new(addr(cQNativeGestureEvent_mvtbl), csize_t(sizeof(pointer)), cint(typeVal), dev.h, localPos.h, scenePos.h, globalPos.h, value, sequenceId, intArgument)
   fcQNativeGestureEvent_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qevent_types.QNativeGestureEvent,
     typeVal: cint, dev: gen_qpointingdevice_types.QPointingDevice, fingerCount: cint, localPos: gen_qpoint_types.QPointF, scenePos: gen_qpoint_types.QPointF, globalPos: gen_qpoint_types.QPointF, value: float64, delta: gen_qpoint_types.QPointF,
@@ -2952,6 +2978,7 @@ proc create*(T: type gen_qevent_types.QNativeGestureEvent,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQNativeGestureEvent_new2(addr(cQNativeGestureEvent_mvtbl), csize_t(sizeof(pointer)), cint(typeVal), dev.h, fingerCount, localPos.h, scenePos.h, globalPos.h, value, delta.h)
   fcQNativeGestureEvent_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qevent_types.QNativeGestureEvent,
     typeVal: cint, dev: gen_qpointingdevice_types.QPointingDevice, fingerCount: cint, localPos: gen_qpoint_types.QPointF, scenePos: gen_qpoint_types.QPointF, globalPos: gen_qpoint_types.QPointF, value: float64, delta: gen_qpoint_types.QPointF, sequenceId: culonglong,
@@ -2959,6 +2986,7 @@ proc create*(T: type gen_qevent_types.QNativeGestureEvent,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQNativeGestureEvent_new3(addr(cQNativeGestureEvent_mvtbl), csize_t(sizeof(pointer)), cint(typeVal), dev.h, fingerCount, localPos.h, scenePos.h, globalPos.h, value, delta.h, sequenceId)
   fcQNativeGestureEvent_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc clone*(self: gen_qevent_types.QKeyEvent): gen_qevent_types.QKeyEvent =
   gen_qevent_types.QKeyEvent(h: fcQKeyEvent_clone(self.h), owned: false)
@@ -3092,7 +3120,7 @@ proc create*(T: type gen_qevent_types.QKeyEvent,
   fcQKeyEvent_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qevent_types.QKeyEvent,
-    typeVal: cint, key: cint, modifiers: cint, text: string,
+    typeVal: cint, key: cint, modifiers: cint, text: openArray[char],
     vtbl: ref QKeyEventVTable = nil): gen_qevent_types.QKeyEvent =
   let vtbl = if vtbl == nil: new QKeyEventVTable else: vtbl
   GC_ref(vtbl)
@@ -3109,7 +3137,7 @@ proc create*(T: type gen_qevent_types.QKeyEvent,
   fcQKeyEvent_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qevent_types.QKeyEvent,
-    typeVal: cint, key: cint, modifiers: cint, text: string, autorep: bool,
+    typeVal: cint, key: cint, modifiers: cint, text: openArray[char], autorep: bool,
     vtbl: ref QKeyEventVTable = nil): gen_qevent_types.QKeyEvent =
   let vtbl = if vtbl == nil: new QKeyEventVTable else: vtbl
   GC_ref(vtbl)
@@ -3126,7 +3154,7 @@ proc create*(T: type gen_qevent_types.QKeyEvent,
   fcQKeyEvent_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qevent_types.QKeyEvent,
-    typeVal: cint, key: cint, modifiers: cint, text: string, autorep: bool, count: cushort,
+    typeVal: cint, key: cint, modifiers: cint, text: openArray[char], autorep: bool, count: cushort,
     vtbl: ref QKeyEventVTable = nil): gen_qevent_types.QKeyEvent =
   let vtbl = if vtbl == nil: new QKeyEventVTable else: vtbl
   GC_ref(vtbl)
@@ -3143,7 +3171,7 @@ proc create*(T: type gen_qevent_types.QKeyEvent,
   fcQKeyEvent_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qevent_types.QKeyEvent,
-    typeVal: cint, key: cint, modifiers: cint, nativeScanCode: cuint, nativeVirtualKey: cuint, nativeModifiers: cuint, text: string,
+    typeVal: cint, key: cint, modifiers: cint, nativeScanCode: cuint, nativeVirtualKey: cuint, nativeModifiers: cuint, text: openArray[char],
     vtbl: ref QKeyEventVTable = nil): gen_qevent_types.QKeyEvent =
   let vtbl = if vtbl == nil: new QKeyEventVTable else: vtbl
   GC_ref(vtbl)
@@ -3160,7 +3188,7 @@ proc create*(T: type gen_qevent_types.QKeyEvent,
   fcQKeyEvent_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qevent_types.QKeyEvent,
-    typeVal: cint, key: cint, modifiers: cint, nativeScanCode: cuint, nativeVirtualKey: cuint, nativeModifiers: cuint, text: string, autorep: bool,
+    typeVal: cint, key: cint, modifiers: cint, nativeScanCode: cuint, nativeVirtualKey: cuint, nativeModifiers: cuint, text: openArray[char], autorep: bool,
     vtbl: ref QKeyEventVTable = nil): gen_qevent_types.QKeyEvent =
   let vtbl = if vtbl == nil: new QKeyEventVTable else: vtbl
   GC_ref(vtbl)
@@ -3177,7 +3205,7 @@ proc create*(T: type gen_qevent_types.QKeyEvent,
   fcQKeyEvent_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qevent_types.QKeyEvent,
-    typeVal: cint, key: cint, modifiers: cint, nativeScanCode: cuint, nativeVirtualKey: cuint, nativeModifiers: cuint, text: string, autorep: bool, count: cushort,
+    typeVal: cint, key: cint, modifiers: cint, nativeScanCode: cuint, nativeVirtualKey: cuint, nativeModifiers: cuint, text: openArray[char], autorep: bool, count: cushort,
     vtbl: ref QKeyEventVTable = nil): gen_qevent_types.QKeyEvent =
   let vtbl = if vtbl == nil: new QKeyEventVTable else: vtbl
   GC_ref(vtbl)
@@ -3194,7 +3222,7 @@ proc create*(T: type gen_qevent_types.QKeyEvent,
   fcQKeyEvent_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qevent_types.QKeyEvent,
-    typeVal: cint, key: cint, modifiers: cint, nativeScanCode: cuint, nativeVirtualKey: cuint, nativeModifiers: cuint, text: string, autorep: bool, count: cushort, device: gen_qinputdevice_types.QInputDevice,
+    typeVal: cint, key: cint, modifiers: cint, nativeScanCode: cuint, nativeVirtualKey: cuint, nativeModifiers: cuint, text: openArray[char], autorep: bool, count: cushort, device: gen_qinputdevice_types.QInputDevice,
     vtbl: ref QKeyEventVTable = nil): gen_qevent_types.QKeyEvent =
   let vtbl = if vtbl == nil: new QKeyEventVTable else: vtbl
   GC_ref(vtbl)
@@ -3226,6 +3254,7 @@ proc create*(T: type gen_qevent_types.QKeyEvent,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQKeyEvent_new(addr(cQKeyEvent_mvtbl), csize_t(sizeof(pointer)), cint(typeVal), key, cint(modifiers))
   fcQKeyEvent_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qevent_types.QKeyEvent,
     typeVal: cint, key: cint, modifiers: cint, nativeScanCode: cuint, nativeVirtualKey: cuint, nativeModifiers: cuint,
@@ -3233,55 +3262,63 @@ proc create*(T: type gen_qevent_types.QKeyEvent,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQKeyEvent_new2(addr(cQKeyEvent_mvtbl), csize_t(sizeof(pointer)), cint(typeVal), key, cint(modifiers), nativeScanCode, nativeVirtualKey, nativeModifiers)
   fcQKeyEvent_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qevent_types.QKeyEvent,
-    typeVal: cint, key: cint, modifiers: cint, text: string,
+    typeVal: cint, key: cint, modifiers: cint, text: openArray[char],
     inst: VirtualQKeyEvent) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQKeyEvent_new3(addr(cQKeyEvent_mvtbl), csize_t(sizeof(pointer)), cint(typeVal), key, cint(modifiers), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
   fcQKeyEvent_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qevent_types.QKeyEvent,
-    typeVal: cint, key: cint, modifiers: cint, text: string, autorep: bool,
+    typeVal: cint, key: cint, modifiers: cint, text: openArray[char], autorep: bool,
     inst: VirtualQKeyEvent) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQKeyEvent_new4(addr(cQKeyEvent_mvtbl), csize_t(sizeof(pointer)), cint(typeVal), key, cint(modifiers), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), autorep)
   fcQKeyEvent_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qevent_types.QKeyEvent,
-    typeVal: cint, key: cint, modifiers: cint, text: string, autorep: bool, count: cushort,
+    typeVal: cint, key: cint, modifiers: cint, text: openArray[char], autorep: bool, count: cushort,
     inst: VirtualQKeyEvent) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQKeyEvent_new5(addr(cQKeyEvent_mvtbl), csize_t(sizeof(pointer)), cint(typeVal), key, cint(modifiers), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), autorep, count)
   fcQKeyEvent_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qevent_types.QKeyEvent,
-    typeVal: cint, key: cint, modifiers: cint, nativeScanCode: cuint, nativeVirtualKey: cuint, nativeModifiers: cuint, text: string,
+    typeVal: cint, key: cint, modifiers: cint, nativeScanCode: cuint, nativeVirtualKey: cuint, nativeModifiers: cuint, text: openArray[char],
     inst: VirtualQKeyEvent) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQKeyEvent_new6(addr(cQKeyEvent_mvtbl), csize_t(sizeof(pointer)), cint(typeVal), key, cint(modifiers), nativeScanCode, nativeVirtualKey, nativeModifiers, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
   fcQKeyEvent_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qevent_types.QKeyEvent,
-    typeVal: cint, key: cint, modifiers: cint, nativeScanCode: cuint, nativeVirtualKey: cuint, nativeModifiers: cuint, text: string, autorep: bool,
+    typeVal: cint, key: cint, modifiers: cint, nativeScanCode: cuint, nativeVirtualKey: cuint, nativeModifiers: cuint, text: openArray[char], autorep: bool,
     inst: VirtualQKeyEvent) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQKeyEvent_new7(addr(cQKeyEvent_mvtbl), csize_t(sizeof(pointer)), cint(typeVal), key, cint(modifiers), nativeScanCode, nativeVirtualKey, nativeModifiers, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), autorep)
   fcQKeyEvent_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qevent_types.QKeyEvent,
-    typeVal: cint, key: cint, modifiers: cint, nativeScanCode: cuint, nativeVirtualKey: cuint, nativeModifiers: cuint, text: string, autorep: bool, count: cushort,
+    typeVal: cint, key: cint, modifiers: cint, nativeScanCode: cuint, nativeVirtualKey: cuint, nativeModifiers: cuint, text: openArray[char], autorep: bool, count: cushort,
     inst: VirtualQKeyEvent) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQKeyEvent_new8(addr(cQKeyEvent_mvtbl), csize_t(sizeof(pointer)), cint(typeVal), key, cint(modifiers), nativeScanCode, nativeVirtualKey, nativeModifiers, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), autorep, count)
   fcQKeyEvent_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qevent_types.QKeyEvent,
-    typeVal: cint, key: cint, modifiers: cint, nativeScanCode: cuint, nativeVirtualKey: cuint, nativeModifiers: cuint, text: string, autorep: bool, count: cushort, device: gen_qinputdevice_types.QInputDevice,
+    typeVal: cint, key: cint, modifiers: cint, nativeScanCode: cuint, nativeVirtualKey: cuint, nativeModifiers: cuint, text: openArray[char], autorep: bool, count: cushort, device: gen_qinputdevice_types.QInputDevice,
     inst: VirtualQKeyEvent) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQKeyEvent_new9(addr(cQKeyEvent_mvtbl), csize_t(sizeof(pointer)), cint(typeVal), key, cint(modifiers), nativeScanCode, nativeVirtualKey, nativeModifiers, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), autorep, count, device.h)
   fcQKeyEvent_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc clone*(self: gen_qevent_types.QFocusEvent): gen_qevent_types.QFocusEvent =
   gen_qevent_types.QFocusEvent(h: fcQFocusEvent_clone(self.h), owned: false)
@@ -3383,6 +3420,7 @@ proc create*(T: type gen_qevent_types.QFocusEvent,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQFocusEvent_new(addr(cQFocusEvent_mvtbl), csize_t(sizeof(pointer)), cint(typeVal))
   fcQFocusEvent_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qevent_types.QFocusEvent,
     typeVal: cint, reason: cint,
@@ -3390,6 +3428,7 @@ proc create*(T: type gen_qevent_types.QFocusEvent,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQFocusEvent_new2(addr(cQFocusEvent_mvtbl), csize_t(sizeof(pointer)), cint(typeVal), cint(reason))
   fcQFocusEvent_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc clone*(self: gen_qevent_types.QPaintEvent): gen_qevent_types.QPaintEvent =
   gen_qevent_types.QPaintEvent(h: fcQPaintEvent_clone(self.h), owned: false)
@@ -3488,6 +3527,7 @@ proc create*(T: type gen_qevent_types.QPaintEvent,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQPaintEvent_new(addr(cQPaintEvent_mvtbl), csize_t(sizeof(pointer)), paintRegion.h)
   fcQPaintEvent_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qevent_types.QPaintEvent,
     paintRect: gen_qrect_types.QRect,
@@ -3495,6 +3535,7 @@ proc create*(T: type gen_qevent_types.QPaintEvent,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQPaintEvent_new2(addr(cQPaintEvent_mvtbl), csize_t(sizeof(pointer)), paintRect.h)
   fcQPaintEvent_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc clone*(self: gen_qevent_types.QMoveEvent): gen_qevent_types.QMoveEvent =
   gen_qevent_types.QMoveEvent(h: fcQMoveEvent_clone(self.h), owned: false)
@@ -3578,6 +3619,7 @@ proc create*(T: type gen_qevent_types.QMoveEvent,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQMoveEvent_new(addr(cQMoveEvent_mvtbl), csize_t(sizeof(pointer)), pos.h, oldPos.h)
   fcQMoveEvent_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc clone*(self: gen_qevent_types.QExposeEvent): gen_qevent_types.QExposeEvent =
   gen_qevent_types.QExposeEvent(h: fcQExposeEvent_clone(self.h), owned: false)
@@ -3658,6 +3700,7 @@ proc create*(T: type gen_qevent_types.QExposeEvent,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQExposeEvent_new(addr(cQExposeEvent_mvtbl), csize_t(sizeof(pointer)), m_region.h)
   fcQExposeEvent_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc clone*(self: gen_qevent_types.QPlatformSurfaceEvent): gen_qevent_types.QPlatformSurfaceEvent =
   gen_qevent_types.QPlatformSurfaceEvent(h: fcQPlatformSurfaceEvent_clone(self.h), owned: false)
@@ -3738,6 +3781,7 @@ proc create*(T: type gen_qevent_types.QPlatformSurfaceEvent,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQPlatformSurfaceEvent_new(addr(cQPlatformSurfaceEvent_mvtbl), csize_t(sizeof(pointer)), cint(surfaceEventType))
   fcQPlatformSurfaceEvent_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc clone*(self: gen_qevent_types.QResizeEvent): gen_qevent_types.QResizeEvent =
   gen_qevent_types.QResizeEvent(h: fcQResizeEvent_clone(self.h), owned: false)
@@ -3821,6 +3865,7 @@ proc create*(T: type gen_qevent_types.QResizeEvent,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQResizeEvent_new(addr(cQResizeEvent_mvtbl), csize_t(sizeof(pointer)), size.h, oldSize.h)
   fcQResizeEvent_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc clone*(self: gen_qevent_types.QCloseEvent): gen_qevent_types.QCloseEvent =
   gen_qevent_types.QCloseEvent(h: fcQCloseEvent_clone(self.h), owned: false)
@@ -3896,6 +3941,7 @@ proc create*(T: type gen_qevent_types.QCloseEvent,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQCloseEvent_new(addr(cQCloseEvent_mvtbl), csize_t(sizeof(pointer)))
   fcQCloseEvent_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc clone*(self: gen_qevent_types.QIconDragEvent): gen_qevent_types.QIconDragEvent =
   gen_qevent_types.QIconDragEvent(h: fcQIconDragEvent_clone(self.h), owned: false)
@@ -3971,6 +4017,7 @@ proc create*(T: type gen_qevent_types.QIconDragEvent,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQIconDragEvent_new(addr(cQIconDragEvent_mvtbl), csize_t(sizeof(pointer)))
   fcQIconDragEvent_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc clone*(self: gen_qevent_types.QShowEvent): gen_qevent_types.QShowEvent =
   gen_qevent_types.QShowEvent(h: fcQShowEvent_clone(self.h), owned: false)
@@ -4046,6 +4093,7 @@ proc create*(T: type gen_qevent_types.QShowEvent,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQShowEvent_new(addr(cQShowEvent_mvtbl), csize_t(sizeof(pointer)))
   fcQShowEvent_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc clone*(self: gen_qevent_types.QHideEvent): gen_qevent_types.QHideEvent =
   gen_qevent_types.QHideEvent(h: fcQHideEvent_clone(self.h), owned: false)
@@ -4121,6 +4169,7 @@ proc create*(T: type gen_qevent_types.QHideEvent,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQHideEvent_new(addr(cQHideEvent_mvtbl), csize_t(sizeof(pointer)))
   fcQHideEvent_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc clone*(self: gen_qevent_types.QContextMenuEvent): gen_qevent_types.QContextMenuEvent =
   gen_qevent_types.QContextMenuEvent(h: fcQContextMenuEvent_clone(self.h), owned: false)
@@ -4274,6 +4323,7 @@ proc create*(T: type gen_qevent_types.QContextMenuEvent,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQContextMenuEvent_new(addr(cQContextMenuEvent_mvtbl), csize_t(sizeof(pointer)), cint(reason), pos.h, globalPos.h)
   fcQContextMenuEvent_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qevent_types.QContextMenuEvent,
     reason: cint, pos: gen_qpoint_types.QPoint,
@@ -4281,6 +4331,7 @@ proc create*(T: type gen_qevent_types.QContextMenuEvent,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQContextMenuEvent_new2(addr(cQContextMenuEvent_mvtbl), csize_t(sizeof(pointer)), cint(reason), pos.h)
   fcQContextMenuEvent_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qevent_types.QContextMenuEvent,
     reason: cint, pos: gen_qpoint_types.QPoint, globalPos: gen_qpoint_types.QPoint, modifiers: cint,
@@ -4288,11 +4339,12 @@ proc create*(T: type gen_qevent_types.QContextMenuEvent,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQContextMenuEvent_new3(addr(cQContextMenuEvent_mvtbl), csize_t(sizeof(pointer)), cint(reason), pos.h, globalPos.h, cint(modifiers))
   fcQContextMenuEvent_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc clone*(self: gen_qevent_types.QInputMethodEvent): gen_qevent_types.QInputMethodEvent =
   gen_qevent_types.QInputMethodEvent(h: fcQInputMethodEvent_clone(self.h), owned: false)
 
-proc setCommitString*(self: gen_qevent_types.QInputMethodEvent, commitString: string): void =
+proc setCommitString*(self: gen_qevent_types.QInputMethodEvent, commitString: openArray[char]): void =
   fcQInputMethodEvent_setCommitString(self.h, struct_miqt_string(data: if len(commitString) > 0: addr commitString[0] else: nil, len: csize_t(len(commitString))))
 
 proc attributes*(self: gen_qevent_types.QInputMethodEvent): seq[gen_qevent_types.QInputMethodEventAttribute] =
@@ -4322,10 +4374,10 @@ proc replacementStart*(self: gen_qevent_types.QInputMethodEvent): cint =
 proc replacementLength*(self: gen_qevent_types.QInputMethodEvent): cint =
   fcQInputMethodEvent_replacementLength(self.h)
 
-proc setCommitString*(self: gen_qevent_types.QInputMethodEvent, commitString: string, replaceFrom: cint): void =
+proc setCommitString*(self: gen_qevent_types.QInputMethodEvent, commitString: openArray[char], replaceFrom: cint): void =
   fcQInputMethodEvent_setCommitString2(self.h, struct_miqt_string(data: if len(commitString) > 0: addr commitString[0] else: nil, len: csize_t(len(commitString))), replaceFrom)
 
-proc setCommitString*(self: gen_qevent_types.QInputMethodEvent, commitString: string, replaceFrom: cint, replaceLength: cint): void =
+proc setCommitString*(self: gen_qevent_types.QInputMethodEvent, commitString: openArray[char], replaceFrom: cint, replaceLength: cint): void =
   fcQInputMethodEvent_setCommitString3(self.h, struct_miqt_string(data: if len(commitString) > 0: addr commitString[0] else: nil, len: csize_t(len(commitString))), replaceFrom, replaceLength)
 
 type QInputMethodEventcloneProc* = proc(self: QInputMethodEvent): gen_qevent_types.QInputMethodEvent {.raises: [], gcsafe.}
@@ -4386,7 +4438,7 @@ proc create*(T: type gen_qevent_types.QInputMethodEvent,
   fcQInputMethodEvent_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qevent_types.QInputMethodEvent,
-    preeditText: string, attributes: seq[gen_qevent_types.QInputMethodEventAttribute],
+    preeditText: openArray[char], attributes: openArray[gen_qevent_types.QInputMethodEventAttribute],
     vtbl: ref QInputMethodEventVTable = nil): gen_qevent_types.QInputMethodEvent =
   var attributes_CArray = newSeq[pointer](len(attributes))
   for i in 0..<len(attributes):
@@ -4418,9 +4470,10 @@ proc create*(T: type gen_qevent_types.QInputMethodEvent,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQInputMethodEvent_new(addr(cQInputMethodEvent_mvtbl), csize_t(sizeof(pointer)))
   fcQInputMethodEvent_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qevent_types.QInputMethodEvent,
-    preeditText: string, attributes: seq[gen_qevent_types.QInputMethodEventAttribute],
+    preeditText: openArray[char], attributes: openArray[gen_qevent_types.QInputMethodEventAttribute],
     inst: VirtualQInputMethodEvent) =
   var attributes_CArray = newSeq[pointer](len(attributes))
   for i in 0..<len(attributes):
@@ -4429,6 +4482,7 @@ proc create*(T: type gen_qevent_types.QInputMethodEvent,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQInputMethodEvent_new2(addr(cQInputMethodEvent_mvtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(preeditText) > 0: addr preeditText[0] else: nil, len: csize_t(len(preeditText))), struct_miqt_array(len: csize_t(len(attributes)), data: if len(attributes) == 0: nil else: addr(attributes_CArray[0])))
   fcQInputMethodEvent_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc clone*(self: gen_qevent_types.QInputMethodQueryEvent): gen_qevent_types.QInputMethodQueryEvent =
   gen_qevent_types.QInputMethodQueryEvent(h: fcQInputMethodQueryEvent_clone(self.h), owned: false)
@@ -4515,6 +4569,7 @@ proc create*(T: type gen_qevent_types.QInputMethodQueryEvent,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQInputMethodQueryEvent_new(addr(cQInputMethodQueryEvent_mvtbl), csize_t(sizeof(pointer)), cint(queries))
   fcQInputMethodQueryEvent_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc clone*(self: gen_qevent_types.QDropEvent): gen_qevent_types.QDropEvent =
   gen_qevent_types.QDropEvent(h: fcQDropEvent_clone(self.h), owned: false)
@@ -4649,6 +4704,7 @@ proc create*(T: type gen_qevent_types.QDropEvent,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQDropEvent_new(addr(cQDropEvent_mvtbl), csize_t(sizeof(pointer)), pos.h, cint(actions), data.h, cint(buttons), cint(modifiers))
   fcQDropEvent_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qevent_types.QDropEvent,
     pos: gen_qpoint_types.QPointF, actions: cint, data: gen_qmimedata_types.QMimeData, buttons: cint, modifiers: cint, typeVal: cint,
@@ -4656,6 +4712,7 @@ proc create*(T: type gen_qevent_types.QDropEvent,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQDropEvent_new2(addr(cQDropEvent_mvtbl), csize_t(sizeof(pointer)), pos.h, cint(actions), data.h, cint(buttons), cint(modifiers), cint(typeVal))
   fcQDropEvent_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc clone*(self: gen_qevent_types.QDragMoveEvent): gen_qevent_types.QDragMoveEvent =
   gen_qevent_types.QDragMoveEvent(h: fcQDragMoveEvent_clone(self.h), owned: false)
@@ -4763,6 +4820,7 @@ proc create*(T: type gen_qevent_types.QDragMoveEvent,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQDragMoveEvent_new(addr(cQDragMoveEvent_mvtbl), csize_t(sizeof(pointer)), pos.h, cint(actions), data.h, cint(buttons), cint(modifiers))
   fcQDragMoveEvent_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qevent_types.QDragMoveEvent,
     pos: gen_qpoint_types.QPoint, actions: cint, data: gen_qmimedata_types.QMimeData, buttons: cint, modifiers: cint, typeVal: cint,
@@ -4770,6 +4828,7 @@ proc create*(T: type gen_qevent_types.QDragMoveEvent,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQDragMoveEvent_new2(addr(cQDragMoveEvent_mvtbl), csize_t(sizeof(pointer)), pos.h, cint(actions), data.h, cint(buttons), cint(modifiers), cint(typeVal))
   fcQDragMoveEvent_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc clone*(self: gen_qevent_types.QDragEnterEvent): gen_qevent_types.QDragEnterEvent =
   gen_qevent_types.QDragEnterEvent(h: fcQDragEnterEvent_clone(self.h), owned: false)
@@ -4847,6 +4906,7 @@ proc create*(T: type gen_qevent_types.QDragEnterEvent,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQDragEnterEvent_new(addr(cQDragEnterEvent_mvtbl), csize_t(sizeof(pointer)), pos.h, cint(actions), data.h, cint(buttons), cint(modifiers))
   fcQDragEnterEvent_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc clone*(self: gen_qevent_types.QDragLeaveEvent): gen_qevent_types.QDragLeaveEvent =
   gen_qevent_types.QDragLeaveEvent(h: fcQDragLeaveEvent_clone(self.h), owned: false)
@@ -4922,6 +4982,7 @@ proc create*(T: type gen_qevent_types.QDragLeaveEvent,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQDragLeaveEvent_new(addr(cQDragLeaveEvent_mvtbl), csize_t(sizeof(pointer)))
   fcQDragLeaveEvent_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc clone*(self: gen_qevent_types.QHelpEvent): gen_qevent_types.QHelpEvent =
   gen_qevent_types.QHelpEvent(h: fcQHelpEvent_clone(self.h), owned: false)
@@ -5017,6 +5078,7 @@ proc create*(T: type gen_qevent_types.QHelpEvent,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQHelpEvent_new(addr(cQHelpEvent_mvtbl), csize_t(sizeof(pointer)), cint(typeVal), pos.h, globalPos.h)
   fcQHelpEvent_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc clone*(self: gen_qevent_types.QStatusTipEvent): gen_qevent_types.QStatusTipEvent =
   gen_qevent_types.QStatusTipEvent(h: fcQStatusTipEvent_clone(self.h), owned: false)
@@ -5071,7 +5133,7 @@ proc fcQStatusTipEvent_method_callback_setAccepted(self: pointer, accepted: bool
   inst.setAccepted(slotval1)
 
 proc create*(T: type gen_qevent_types.QStatusTipEvent,
-    tip: string,
+    tip: openArray[char],
     vtbl: ref QStatusTipEventVTable = nil): gen_qevent_types.QStatusTipEvent =
   let vtbl = if vtbl == nil: new QStatusTipEventVTable else: vtbl
   GC_ref(vtbl)
@@ -5095,11 +5157,12 @@ const cQStatusTipEvent_mvtbl = cQStatusTipEventVTable(
   setAccepted: fcQStatusTipEvent_method_callback_setAccepted,
 )
 proc create*(T: type gen_qevent_types.QStatusTipEvent,
-    tip: string,
+    tip: openArray[char],
     inst: VirtualQStatusTipEvent) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQStatusTipEvent_new(addr(cQStatusTipEvent_mvtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(tip) > 0: addr tip[0] else: nil, len: csize_t(len(tip))))
   fcQStatusTipEvent_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc clone*(self: gen_qevent_types.QWhatsThisClickedEvent): gen_qevent_types.QWhatsThisClickedEvent =
   gen_qevent_types.QWhatsThisClickedEvent(h: fcQWhatsThisClickedEvent_clone(self.h), owned: false)
@@ -5154,7 +5217,7 @@ proc fcQWhatsThisClickedEvent_method_callback_setAccepted(self: pointer, accepte
   inst.setAccepted(slotval1)
 
 proc create*(T: type gen_qevent_types.QWhatsThisClickedEvent,
-    href: string,
+    href: openArray[char],
     vtbl: ref QWhatsThisClickedEventVTable = nil): gen_qevent_types.QWhatsThisClickedEvent =
   let vtbl = if vtbl == nil: new QWhatsThisClickedEventVTable else: vtbl
   GC_ref(vtbl)
@@ -5178,11 +5241,12 @@ const cQWhatsThisClickedEvent_mvtbl = cQWhatsThisClickedEventVTable(
   setAccepted: fcQWhatsThisClickedEvent_method_callback_setAccepted,
 )
 proc create*(T: type gen_qevent_types.QWhatsThisClickedEvent,
-    href: string,
+    href: openArray[char],
     inst: VirtualQWhatsThisClickedEvent) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQWhatsThisClickedEvent_new(addr(cQWhatsThisClickedEvent_mvtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(href) > 0: addr href[0] else: nil, len: csize_t(len(href))))
   fcQWhatsThisClickedEvent_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc clone*(self: gen_qevent_types.QActionEvent): gen_qevent_types.QActionEvent =
   gen_qevent_types.QActionEvent(h: fcQActionEvent_clone(self.h), owned: false)
@@ -5246,7 +5310,7 @@ proc fcQFileOpenEvent_method_callback_setAccepted(self: pointer, accepted: bool)
   inst.setAccepted(slotval1)
 
 proc create*(T: type gen_qevent_types.QFileOpenEvent,
-    file: string,
+    file: openArray[char],
     vtbl: ref QFileOpenEventVTable = nil): gen_qevent_types.QFileOpenEvent =
   let vtbl = if vtbl == nil: new QFileOpenEventVTable else: vtbl
   GC_ref(vtbl)
@@ -5285,11 +5349,12 @@ const cQFileOpenEvent_mvtbl = cQFileOpenEventVTable(
   setAccepted: fcQFileOpenEvent_method_callback_setAccepted,
 )
 proc create*(T: type gen_qevent_types.QFileOpenEvent,
-    file: string,
+    file: openArray[char],
     inst: VirtualQFileOpenEvent) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQFileOpenEvent_new(addr(cQFileOpenEvent_mvtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(file) > 0: addr file[0] else: nil, len: csize_t(len(file))))
   fcQFileOpenEvent_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qevent_types.QFileOpenEvent,
     url: gen_qurl_types.QUrl,
@@ -5297,6 +5362,7 @@ proc create*(T: type gen_qevent_types.QFileOpenEvent,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQFileOpenEvent_new2(addr(cQFileOpenEvent_mvtbl), csize_t(sizeof(pointer)), url.h)
   fcQFileOpenEvent_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc clone*(self: gen_qevent_types.QToolBarChangeEvent): gen_qevent_types.QToolBarChangeEvent =
   gen_qevent_types.QToolBarChangeEvent(h: fcQToolBarChangeEvent_clone(self.h), owned: false)
@@ -5377,6 +5443,7 @@ proc create*(T: type gen_qevent_types.QToolBarChangeEvent,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQToolBarChangeEvent_new(addr(cQToolBarChangeEvent_mvtbl), csize_t(sizeof(pointer)), t)
   fcQToolBarChangeEvent_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc clone*(self: gen_qevent_types.QShortcutEvent): gen_qevent_types.QShortcutEvent =
   gen_qevent_types.QShortcutEvent(h: fcQShortcutEvent_clone(self.h), owned: false)
@@ -5478,6 +5545,7 @@ proc create*(T: type gen_qevent_types.QShortcutEvent,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQShortcutEvent_new(addr(cQShortcutEvent_mvtbl), csize_t(sizeof(pointer)), key.h, id)
   fcQShortcutEvent_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qevent_types.QShortcutEvent,
     key: gen_qkeysequence_types.QKeySequence, id: cint, ambiguous: bool,
@@ -5485,6 +5553,7 @@ proc create*(T: type gen_qevent_types.QShortcutEvent,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQShortcutEvent_new2(addr(cQShortcutEvent_mvtbl), csize_t(sizeof(pointer)), key.h, id, ambiguous)
   fcQShortcutEvent_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc clone*(self: gen_qevent_types.QWindowStateChangeEvent): gen_qevent_types.QWindowStateChangeEvent =
   gen_qevent_types.QWindowStateChangeEvent(h: fcQWindowStateChangeEvent_clone(self.h), owned: false)
@@ -5583,6 +5652,7 @@ proc create*(T: type gen_qevent_types.QWindowStateChangeEvent,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQWindowStateChangeEvent_new(addr(cQWindowStateChangeEvent_mvtbl), csize_t(sizeof(pointer)), cint(oldState))
   fcQWindowStateChangeEvent_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qevent_types.QWindowStateChangeEvent,
     oldState: cint, isOverride: bool,
@@ -5590,6 +5660,7 @@ proc create*(T: type gen_qevent_types.QWindowStateChangeEvent,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQWindowStateChangeEvent_new2(addr(cQWindowStateChangeEvent_mvtbl), csize_t(sizeof(pointer)), cint(oldState), isOverride)
   fcQWindowStateChangeEvent_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc clone*(self: gen_qevent_types.QTouchEvent): gen_qevent_types.QTouchEvent =
   gen_qevent_types.QTouchEvent(h: fcQTouchEvent_clone(self.h), owned: false)
@@ -5826,7 +5897,7 @@ proc create*(T: type gen_qevent_types.QTouchEvent,
   fcQTouchEvent_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qevent_types.QTouchEvent,
-    eventType: cint, device: gen_qpointingdevice_types.QPointingDevice, modifiers: cint, touchPoints: seq[gen_qeventpoint_types.QEventPoint],
+    eventType: cint, device: gen_qpointingdevice_types.QPointingDevice, modifiers: cint, touchPoints: openArray[gen_qeventpoint_types.QEventPoint],
     vtbl: ref QTouchEventVTable = nil): gen_qevent_types.QTouchEvent =
   var touchPoints_CArray = newSeq[pointer](len(touchPoints))
   for i in 0..<len(touchPoints):
@@ -5853,7 +5924,7 @@ proc create*(T: type gen_qevent_types.QTouchEvent,
   fcQTouchEvent_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qevent_types.QTouchEvent,
-    eventType: cint, device: gen_qpointingdevice_types.QPointingDevice, modifiers: cint, touchPointStates: cint, touchPoints: seq[gen_qeventpoint_types.QEventPoint],
+    eventType: cint, device: gen_qpointingdevice_types.QPointingDevice, modifiers: cint, touchPointStates: cint, touchPoints: openArray[gen_qeventpoint_types.QEventPoint],
     vtbl: ref QTouchEventVTable = nil): gen_qevent_types.QTouchEvent =
   var touchPoints_CArray = newSeq[pointer](len(touchPoints))
   for i in 0..<len(touchPoints):
@@ -5898,6 +5969,7 @@ proc create*(T: type gen_qevent_types.QTouchEvent,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQTouchEvent_new(addr(cQTouchEvent_mvtbl), csize_t(sizeof(pointer)), cint(eventType))
   fcQTouchEvent_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qevent_types.QTouchEvent,
     eventType: cint, device: gen_qpointingdevice_types.QPointingDevice, modifiers: cint, touchPointStates: cint,
@@ -5905,6 +5977,7 @@ proc create*(T: type gen_qevent_types.QTouchEvent,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQTouchEvent_new2(addr(cQTouchEvent_mvtbl), csize_t(sizeof(pointer)), cint(eventType), device.h, cint(modifiers), cint(touchPointStates))
   fcQTouchEvent_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qevent_types.QTouchEvent,
     eventType: cint, device: gen_qpointingdevice_types.QPointingDevice,
@@ -5912,6 +5985,7 @@ proc create*(T: type gen_qevent_types.QTouchEvent,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQTouchEvent_new3(addr(cQTouchEvent_mvtbl), csize_t(sizeof(pointer)), cint(eventType), device.h)
   fcQTouchEvent_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qevent_types.QTouchEvent,
     eventType: cint, device: gen_qpointingdevice_types.QPointingDevice, modifiers: cint,
@@ -5919,9 +5993,10 @@ proc create*(T: type gen_qevent_types.QTouchEvent,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQTouchEvent_new4(addr(cQTouchEvent_mvtbl), csize_t(sizeof(pointer)), cint(eventType), device.h, cint(modifiers))
   fcQTouchEvent_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qevent_types.QTouchEvent,
-    eventType: cint, device: gen_qpointingdevice_types.QPointingDevice, modifiers: cint, touchPoints: seq[gen_qeventpoint_types.QEventPoint],
+    eventType: cint, device: gen_qpointingdevice_types.QPointingDevice, modifiers: cint, touchPoints: openArray[gen_qeventpoint_types.QEventPoint],
     inst: VirtualQTouchEvent) =
   var touchPoints_CArray = newSeq[pointer](len(touchPoints))
   for i in 0..<len(touchPoints):
@@ -5930,9 +6005,10 @@ proc create*(T: type gen_qevent_types.QTouchEvent,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQTouchEvent_new5(addr(cQTouchEvent_mvtbl), csize_t(sizeof(pointer)), cint(eventType), device.h, cint(modifiers), struct_miqt_array(len: csize_t(len(touchPoints)), data: if len(touchPoints) == 0: nil else: addr(touchPoints_CArray[0])))
   fcQTouchEvent_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qevent_types.QTouchEvent,
-    eventType: cint, device: gen_qpointingdevice_types.QPointingDevice, modifiers: cint, touchPointStates: cint, touchPoints: seq[gen_qeventpoint_types.QEventPoint],
+    eventType: cint, device: gen_qpointingdevice_types.QPointingDevice, modifiers: cint, touchPointStates: cint, touchPoints: openArray[gen_qeventpoint_types.QEventPoint],
     inst: VirtualQTouchEvent) =
   var touchPoints_CArray = newSeq[pointer](len(touchPoints))
   for i in 0..<len(touchPoints):
@@ -5941,6 +6017,7 @@ proc create*(T: type gen_qevent_types.QTouchEvent,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQTouchEvent_new6(addr(cQTouchEvent_mvtbl), csize_t(sizeof(pointer)), cint(eventType), device.h, cint(modifiers), cint(touchPointStates), struct_miqt_array(len: csize_t(len(touchPoints)), data: if len(touchPoints) == 0: nil else: addr(touchPoints_CArray[0])))
   fcQTouchEvent_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc clone*(self: gen_qevent_types.QScrollPrepareEvent): gen_qevent_types.QScrollPrepareEvent =
   gen_qevent_types.QScrollPrepareEvent(h: fcQScrollPrepareEvent_clone(self.h), owned: false)
@@ -6039,6 +6116,7 @@ proc create*(T: type gen_qevent_types.QScrollPrepareEvent,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQScrollPrepareEvent_new(addr(cQScrollPrepareEvent_mvtbl), csize_t(sizeof(pointer)), startPos.h)
   fcQScrollPrepareEvent_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc clone*(self: gen_qevent_types.QScrollEvent): gen_qevent_types.QScrollEvent =
   gen_qevent_types.QScrollEvent(h: fcQScrollEvent_clone(self.h), owned: false)
@@ -6125,6 +6203,7 @@ proc create*(T: type gen_qevent_types.QScrollEvent,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQScrollEvent_new(addr(cQScrollEvent_mvtbl), csize_t(sizeof(pointer)), contentPos.h, overshoot.h, cint(scrollState))
   fcQScrollEvent_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc clone*(self: gen_qevent_types.QScreenOrientationChangeEvent): gen_qevent_types.QScreenOrientationChangeEvent =
   gen_qevent_types.QScreenOrientationChangeEvent(h: fcQScreenOrientationChangeEvent_clone(self.h), owned: false)
@@ -6208,6 +6287,7 @@ proc create*(T: type gen_qevent_types.QScreenOrientationChangeEvent,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQScreenOrientationChangeEvent_new(addr(cQScreenOrientationChangeEvent_mvtbl), csize_t(sizeof(pointer)), screen.h, cint(orientation))
   fcQScreenOrientationChangeEvent_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc clone*(self: gen_qevent_types.QApplicationStateChangeEvent): gen_qevent_types.QApplicationStateChangeEvent =
   gen_qevent_types.QApplicationStateChangeEvent(h: fcQApplicationStateChangeEvent_clone(self.h), owned: false)
@@ -6288,6 +6368,7 @@ proc create*(T: type gen_qevent_types.QApplicationStateChangeEvent,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQApplicationStateChangeEvent_new(addr(cQApplicationStateChangeEvent_mvtbl), csize_t(sizeof(pointer)), cint(state))
   fcQApplicationStateChangeEvent_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc operatorAssign*(self: gen_qevent_types.QInputMethodEventAttribute, param1: gen_qevent_types.QInputMethodEventAttribute): void =
   fcQInputMethodEventAttribute_operatorAssign(self.h, param1.h)

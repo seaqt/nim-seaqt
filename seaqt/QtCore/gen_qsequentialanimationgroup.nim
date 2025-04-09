@@ -559,6 +559,7 @@ proc create*(T: type gen_qsequentialanimationgroup_types.QSequentialAnimationGro
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQSequentialAnimationGroup_new(addr(cQSequentialAnimationGroup_mvtbl), csize_t(sizeof(pointer)))
   fcQSequentialAnimationGroup_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qsequentialanimationgroup_types.QSequentialAnimationGroup,
     parent: gen_qobject_types.QObject,
@@ -566,6 +567,7 @@ proc create*(T: type gen_qsequentialanimationgroup_types.QSequentialAnimationGro
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQSequentialAnimationGroup_new2(addr(cQSequentialAnimationGroup_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQSequentialAnimationGroup_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qsequentialanimationgroup_types.QSequentialAnimationGroup): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQSequentialAnimationGroup_staticMetaObject())

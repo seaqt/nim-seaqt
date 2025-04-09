@@ -174,7 +174,7 @@ proc keyValues*(self: gen_qvariantanimation_types.QVariantAnimation): seq[tuple[
   c_free(v_ma.data)
   vx_ret
 
-proc setKeyValues*(self: gen_qvariantanimation_types.QVariantAnimation, values: seq[tuple[first: float64, second: gen_qvariant_types.QVariant]]): void =
+proc setKeyValues*(self: gen_qvariantanimation_types.QVariantAnimation, values: openArray[tuple[first: float64, second: gen_qvariant_types.QVariant]]): void =
   var values_CArray = newSeq[struct_miqt_map](len(values))
   for i in 0..<len(values):
     var values_i_CArray_First: float64
@@ -677,6 +677,7 @@ proc create*(T: type gen_qvariantanimation_types.QVariantAnimation,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQVariantAnimation_new(addr(cQVariantAnimation_mvtbl), csize_t(sizeof(pointer)))
   fcQVariantAnimation_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qvariantanimation_types.QVariantAnimation,
     parent: gen_qobject_types.QObject,
@@ -684,6 +685,7 @@ proc create*(T: type gen_qvariantanimation_types.QVariantAnimation,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQVariantAnimation_new2(addr(cQVariantAnimation_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQVariantAnimation_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qvariantanimation_types.QVariantAnimation): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQVariantAnimation_staticMetaObject())

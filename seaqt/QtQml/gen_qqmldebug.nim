@@ -116,7 +116,7 @@ proc nativeDebuggerServices*(_: type gen_qqmldebug_types.QQmlDebuggingEnabler): 
   c_free(v_ma.data)
   vx_ret
 
-proc setServices*(_: type gen_qqmldebug_types.QQmlDebuggingEnabler, services: seq[string]): void =
+proc setServices*(_: type gen_qqmldebug_types.QQmlDebuggingEnabler, services: openArray[string]): void =
   var services_CArray = newSeq[struct_miqt_string](len(services))
   for i in 0..<len(services):
     services_CArray[i] = struct_miqt_string(data: if len(services[i]) > 0: addr services[i][0] else: nil, len: csize_t(len(services[i])))
@@ -126,22 +126,22 @@ proc setServices*(_: type gen_qqmldebug_types.QQmlDebuggingEnabler, services: se
 proc startTcpDebugServer*(_: type gen_qqmldebug_types.QQmlDebuggingEnabler, port: cint): bool =
   fcQQmlDebuggingEnabler_startTcpDebugServer(port)
 
-proc connectToLocalDebugger*(_: type gen_qqmldebug_types.QQmlDebuggingEnabler, socketFileName: string): bool =
+proc connectToLocalDebugger*(_: type gen_qqmldebug_types.QQmlDebuggingEnabler, socketFileName: openArray[char]): bool =
   fcQQmlDebuggingEnabler_connectToLocalDebugger(struct_miqt_string(data: if len(socketFileName) > 0: addr socketFileName[0] else: nil, len: csize_t(len(socketFileName))))
 
-proc startDebugConnector*(_: type gen_qqmldebug_types.QQmlDebuggingEnabler, pluginName: string): bool =
+proc startDebugConnector*(_: type gen_qqmldebug_types.QQmlDebuggingEnabler, pluginName: openArray[char]): bool =
   fcQQmlDebuggingEnabler_startDebugConnector(struct_miqt_string(data: if len(pluginName) > 0: addr pluginName[0] else: nil, len: csize_t(len(pluginName))))
 
 proc startTcpDebugServer*(_: type gen_qqmldebug_types.QQmlDebuggingEnabler, port: cint, mode: cint): bool =
   fcQQmlDebuggingEnabler_startTcpDebugServer2(port, cint(mode))
 
-proc startTcpDebugServer*(_: type gen_qqmldebug_types.QQmlDebuggingEnabler, port: cint, mode: cint, hostName: string): bool =
+proc startTcpDebugServer*(_: type gen_qqmldebug_types.QQmlDebuggingEnabler, port: cint, mode: cint, hostName: openArray[char]): bool =
   fcQQmlDebuggingEnabler_startTcpDebugServer3(port, cint(mode), struct_miqt_string(data: if len(hostName) > 0: addr hostName[0] else: nil, len: csize_t(len(hostName))))
 
-proc connectToLocalDebugger*(_: type gen_qqmldebug_types.QQmlDebuggingEnabler, socketFileName: string, mode: cint): bool =
+proc connectToLocalDebugger*(_: type gen_qqmldebug_types.QQmlDebuggingEnabler, socketFileName: openArray[char], mode: cint): bool =
   fcQQmlDebuggingEnabler_connectToLocalDebugger2(struct_miqt_string(data: if len(socketFileName) > 0: addr socketFileName[0] else: nil, len: csize_t(len(socketFileName))), cint(mode))
 
-proc startDebugConnector*(_: type gen_qqmldebug_types.QQmlDebuggingEnabler, pluginName: string, configuration: Table[string,gen_qvariant_types.QVariant]): bool =
+proc startDebugConnector*(_: type gen_qqmldebug_types.QQmlDebuggingEnabler, pluginName: openArray[char], configuration: Table[string,gen_qvariant_types.QVariant]): bool =
   var configuration_Keys_CArray = newSeq[struct_miqt_string](len(configuration))
   var configuration_Values_CArray = newSeq[pointer](len(configuration))
   var configuration_ctr = 0

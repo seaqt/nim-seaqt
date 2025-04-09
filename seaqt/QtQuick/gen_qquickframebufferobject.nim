@@ -1419,6 +1419,7 @@ proc create*(T: type gen_qquickframebufferobject_types.QQuickFramebufferObject,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQQuickFramebufferObject_new(addr(cQQuickFramebufferObject_mvtbl), csize_t(sizeof(pointer)))
   fcQQuickFramebufferObject_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qquickframebufferobject_types.QQuickFramebufferObject,
     parent: gen_qquickitem_types.QQuickItem,
@@ -1426,6 +1427,7 @@ proc create*(T: type gen_qquickframebufferobject_types.QQuickFramebufferObject,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQQuickFramebufferObject_new2(addr(cQQuickFramebufferObject_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQQuickFramebufferObject_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qquickframebufferobject_types.QQuickFramebufferObject): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQQuickFramebufferObject_staticMetaObject())

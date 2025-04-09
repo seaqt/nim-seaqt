@@ -189,7 +189,7 @@ proc header*(self: gen_qnetworkrequest_types.QNetworkRequest, header: cint): gen
 proc setHeader*(self: gen_qnetworkrequest_types.QNetworkRequest, header: cint, value: gen_qvariant_types.QVariant): void =
   fcQNetworkRequest_setHeader(self.h, cint(header), value.h)
 
-proc hasRawHeader*(self: gen_qnetworkrequest_types.QNetworkRequest, headerName: seq[byte]): bool =
+proc hasRawHeader*(self: gen_qnetworkrequest_types.QNetworkRequest, headerName: openArray[byte]): bool =
   fcQNetworkRequest_hasRawHeader(self.h, struct_miqt_string(data: if len(headerName) > 0: addr headerName[0] else: nil, len: csize_t(len(headerName))))
 
 proc rawHeaderList*(self: gen_qnetworkrequest_types.QNetworkRequest): seq[seq[byte]] =
@@ -204,13 +204,13 @@ proc rawHeaderList*(self: gen_qnetworkrequest_types.QNetworkRequest): seq[seq[by
   c_free(v_ma.data)
   vx_ret
 
-proc rawHeader*(self: gen_qnetworkrequest_types.QNetworkRequest, headerName: seq[byte]): seq[byte] =
+proc rawHeader*(self: gen_qnetworkrequest_types.QNetworkRequest, headerName: openArray[byte]): seq[byte] =
   var v_bytearray = fcQNetworkRequest_rawHeader(self.h, struct_miqt_string(data: if len(headerName) > 0: addr headerName[0] else: nil, len: csize_t(len(headerName))))
   var vx_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](v_bytearray.data), 0, int(v_bytearray.len)-1))
   c_free(v_bytearray.data)
   vx_ret
 
-proc setRawHeader*(self: gen_qnetworkrequest_types.QNetworkRequest, headerName: seq[byte], value: seq[byte]): void =
+proc setRawHeader*(self: gen_qnetworkrequest_types.QNetworkRequest, headerName: openArray[byte], value: openArray[byte]): void =
   fcQNetworkRequest_setRawHeader(self.h, struct_miqt_string(data: if len(headerName) > 0: addr headerName[0] else: nil, len: csize_t(len(headerName))), struct_miqt_string(data: if len(value) > 0: addr value[0] else: nil, len: csize_t(len(value))))
 
 proc attribute*(self: gen_qnetworkrequest_types.QNetworkRequest, code: cint): gen_qvariant_types.QVariant =
@@ -249,7 +249,7 @@ proc peerVerifyName*(self: gen_qnetworkrequest_types.QNetworkRequest): string =
   c_free(v_ms.data)
   vx_ret
 
-proc setPeerVerifyName*(self: gen_qnetworkrequest_types.QNetworkRequest, peerName: string): void =
+proc setPeerVerifyName*(self: gen_qnetworkrequest_types.QNetworkRequest, peerName: openArray[char]): void =
   fcQNetworkRequest_setPeerVerifyName(self.h, struct_miqt_string(data: if len(peerName) > 0: addr peerName[0] else: nil, len: csize_t(len(peerName))))
 
 proc http2Configuration*(self: gen_qnetworkrequest_types.QNetworkRequest): gen_qhttp2configuration_types.QHttp2Configuration =

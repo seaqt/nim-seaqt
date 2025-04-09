@@ -220,16 +220,16 @@ proc prototype*(self: gen_qjsvalue_types.QJSValue): gen_qjsvalue_types.QJSValue 
 proc setPrototype*(self: gen_qjsvalue_types.QJSValue, prototype: gen_qjsvalue_types.QJSValue): void =
   fcQJSValue_setPrototype(self.h, prototype.h)
 
-proc property*(self: gen_qjsvalue_types.QJSValue, name: string): gen_qjsvalue_types.QJSValue =
+proc property*(self: gen_qjsvalue_types.QJSValue, name: openArray[char]): gen_qjsvalue_types.QJSValue =
   gen_qjsvalue_types.QJSValue(h: fcQJSValue_property(self.h, struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name)))), owned: true)
 
-proc setProperty*(self: gen_qjsvalue_types.QJSValue, name: string, value: gen_qjsvalue_types.QJSValue): void =
+proc setProperty*(self: gen_qjsvalue_types.QJSValue, name: openArray[char], value: gen_qjsvalue_types.QJSValue): void =
   fcQJSValue_setProperty(self.h, struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), value.h)
 
-proc hasProperty*(self: gen_qjsvalue_types.QJSValue, name: string): bool =
+proc hasProperty*(self: gen_qjsvalue_types.QJSValue, name: openArray[char]): bool =
   fcQJSValue_hasProperty(self.h, struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))))
 
-proc hasOwnProperty*(self: gen_qjsvalue_types.QJSValue, name: string): bool =
+proc hasOwnProperty*(self: gen_qjsvalue_types.QJSValue, name: openArray[char]): bool =
   fcQJSValue_hasOwnProperty(self.h, struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))))
 
 proc property*(self: gen_qjsvalue_types.QJSValue, arrayIndex: cuint): gen_qjsvalue_types.QJSValue =
@@ -238,7 +238,7 @@ proc property*(self: gen_qjsvalue_types.QJSValue, arrayIndex: cuint): gen_qjsval
 proc setProperty*(self: gen_qjsvalue_types.QJSValue, arrayIndex: cuint, value: gen_qjsvalue_types.QJSValue): void =
   fcQJSValue_setProperty2(self.h, arrayIndex, value.h)
 
-proc deleteProperty*(self: gen_qjsvalue_types.QJSValue, name: string): bool =
+proc deleteProperty*(self: gen_qjsvalue_types.QJSValue, name: openArray[char]): bool =
   fcQJSValue_deleteProperty(self.h, struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))))
 
 proc isCallable*(self: gen_qjsvalue_types.QJSValue): bool =
@@ -256,21 +256,21 @@ proc callAsConstructor*(self: gen_qjsvalue_types.QJSValue): gen_qjsvalue_types.Q
 proc errorType*(self: gen_qjsvalue_types.QJSValue): cint =
   cint(fcQJSValue_errorType(self.h))
 
-proc call*(self: gen_qjsvalue_types.QJSValue, args: seq[gen_qjsvalue_types.QJSValue]): gen_qjsvalue_types.QJSValue =
+proc call*(self: gen_qjsvalue_types.QJSValue, args: openArray[gen_qjsvalue_types.QJSValue]): gen_qjsvalue_types.QJSValue =
   var args_CArray = newSeq[pointer](len(args))
   for i in 0..<len(args):
     args_CArray[i] = args[i].h
 
   gen_qjsvalue_types.QJSValue(h: fcQJSValue_call1(self.h, struct_miqt_array(len: csize_t(len(args)), data: if len(args) == 0: nil else: addr(args_CArray[0]))), owned: true)
 
-proc callWithInstance*(self: gen_qjsvalue_types.QJSValue, instance: gen_qjsvalue_types.QJSValue, args: seq[gen_qjsvalue_types.QJSValue]): gen_qjsvalue_types.QJSValue =
+proc callWithInstance*(self: gen_qjsvalue_types.QJSValue, instance: gen_qjsvalue_types.QJSValue, args: openArray[gen_qjsvalue_types.QJSValue]): gen_qjsvalue_types.QJSValue =
   var args_CArray = newSeq[pointer](len(args))
   for i in 0..<len(args):
     args_CArray[i] = args[i].h
 
   gen_qjsvalue_types.QJSValue(h: fcQJSValue_callWithInstance2(self.h, instance.h, struct_miqt_array(len: csize_t(len(args)), data: if len(args) == 0: nil else: addr(args_CArray[0]))), owned: true)
 
-proc callAsConstructor*(self: gen_qjsvalue_types.QJSValue, args: seq[gen_qjsvalue_types.QJSValue]): gen_qjsvalue_types.QJSValue =
+proc callAsConstructor*(self: gen_qjsvalue_types.QJSValue, args: openArray[gen_qjsvalue_types.QJSValue]): gen_qjsvalue_types.QJSValue =
   var args_CArray = newSeq[pointer](len(args))
   for i in 0..<len(args):
     args_CArray[i] = args[i].h
@@ -301,7 +301,7 @@ proc create*(T: type gen_qjsvalue_types.QJSValue,
   let tmp = gen_qjsvalue_types.QJSValue(h: fcQJSValue_new6(value), owned: true)
   tmp
 proc create*(T: type gen_qjsvalue_types.QJSValue,
-    value: string): gen_qjsvalue_types.QJSValue =
+    value: openArray[char]): gen_qjsvalue_types.QJSValue =
   let tmp = gen_qjsvalue_types.QJSValue(h: fcQJSValue_new7(struct_miqt_string(data: if len(value) > 0: addr value[0] else: nil, len: csize_t(len(value)))), owned: true)
   tmp
 proc create*(T: type gen_qjsvalue_types.QJSValue,

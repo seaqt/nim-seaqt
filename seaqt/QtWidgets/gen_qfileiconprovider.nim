@@ -222,4 +222,5 @@ proc create*(T: type gen_qfileiconprovider_types.QFileIconProvider,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQFileIconProvider_new(addr(cQFileIconProvider_mvtbl), csize_t(sizeof(pointer)))
   fcQFileIconProvider_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 

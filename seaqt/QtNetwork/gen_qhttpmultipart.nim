@@ -130,10 +130,10 @@ proc operatorNotEqual*(self: gen_qhttpmultipart_types.QHttpPart, other: gen_qhtt
 proc setHeader*(self: gen_qhttpmultipart_types.QHttpPart, header: cint, value: gen_qvariant_types.QVariant): void =
   fcQHttpPart_setHeader(self.h, cint(header), value.h)
 
-proc setRawHeader*(self: gen_qhttpmultipart_types.QHttpPart, headerName: seq[byte], headerValue: seq[byte]): void =
+proc setRawHeader*(self: gen_qhttpmultipart_types.QHttpPart, headerName: openArray[byte], headerValue: openArray[byte]): void =
   fcQHttpPart_setRawHeader(self.h, struct_miqt_string(data: if len(headerName) > 0: addr headerName[0] else: nil, len: csize_t(len(headerName))), struct_miqt_string(data: if len(headerValue) > 0: addr headerValue[0] else: nil, len: csize_t(len(headerValue))))
 
-proc setBody*(self: gen_qhttpmultipart_types.QHttpPart, body: seq[byte]): void =
+proc setBody*(self: gen_qhttpmultipart_types.QHttpPart, body: openArray[byte]): void =
   fcQHttpPart_setBody(self.h, struct_miqt_string(data: if len(body) > 0: addr body[0] else: nil, len: csize_t(len(body))))
 
 proc setBodyDevice*(self: gen_qhttpmultipart_types.QHttpPart, device: gen_qiodevice_types.QIODevice): void =
@@ -173,7 +173,7 @@ proc boundary*(self: gen_qhttpmultipart_types.QHttpMultiPart): seq[byte] =
   c_free(v_bytearray.data)
   vx_ret
 
-proc setBoundary*(self: gen_qhttpmultipart_types.QHttpMultiPart, boundary: seq[byte]): void =
+proc setBoundary*(self: gen_qhttpmultipart_types.QHttpMultiPart, boundary: openArray[byte]): void =
   fcQHttpMultiPart_setBoundary(self.h, struct_miqt_string(data: if len(boundary) > 0: addr boundary[0] else: nil, len: csize_t(len(boundary))))
 
 proc tr*(_: type gen_qhttpmultipart_types.QHttpMultiPart, s: cstring, c: cstring): string =
@@ -546,6 +546,7 @@ proc create*(T: type gen_qhttpmultipart_types.QHttpMultiPart,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQHttpMultiPart_new(addr(cQHttpMultiPart_mvtbl), csize_t(sizeof(pointer)))
   fcQHttpMultiPart_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qhttpmultipart_types.QHttpMultiPart,
     contentType: cint,
@@ -553,6 +554,7 @@ proc create*(T: type gen_qhttpmultipart_types.QHttpMultiPart,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQHttpMultiPart_new2(addr(cQHttpMultiPart_mvtbl), csize_t(sizeof(pointer)), cint(contentType))
   fcQHttpMultiPart_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qhttpmultipart_types.QHttpMultiPart,
     parent: gen_qobject_types.QObject,
@@ -560,6 +562,7 @@ proc create*(T: type gen_qhttpmultipart_types.QHttpMultiPart,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQHttpMultiPart_new3(addr(cQHttpMultiPart_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQHttpMultiPart_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qhttpmultipart_types.QHttpMultiPart,
     contentType: cint, parent: gen_qobject_types.QObject,
@@ -567,6 +570,7 @@ proc create*(T: type gen_qhttpmultipart_types.QHttpMultiPart,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQHttpMultiPart_new4(addr(cQHttpMultiPart_mvtbl), csize_t(sizeof(pointer)), cint(contentType), parent.h)
   fcQHttpMultiPart_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qhttpmultipart_types.QHttpMultiPart): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQHttpMultiPart_staticMetaObject())

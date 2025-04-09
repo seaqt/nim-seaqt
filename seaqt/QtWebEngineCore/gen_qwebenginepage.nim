@@ -441,7 +441,7 @@ proc action*(self: gen_qwebenginepage_types.QWebEnginePage, action: cint): gen_q
 proc triggerAction*(self: gen_qwebenginepage_types.QWebEnginePage, action: cint, checked: bool): void =
   fcQWebEnginePage_triggerAction(self.h, cint(action), checked)
 
-proc replaceMisspelledWord*(self: gen_qwebenginepage_types.QWebEnginePage, replacement: string): void =
+proc replaceMisspelledWord*(self: gen_qwebenginepage_types.QWebEnginePage, replacement: openArray[char]): void =
   fcQWebEnginePage_replaceMisspelledWord(self.h, struct_miqt_string(data: if len(replacement) > 0: addr replacement[0] else: nil, len: csize_t(len(replacement))))
 
 proc event*(self: gen_qwebenginepage_types.QWebEnginePage, param1: gen_qcoreevent_types.QEvent): bool =
@@ -462,10 +462,10 @@ proc load*(self: gen_qwebenginepage_types.QWebEnginePage, request: gen_qwebengin
 proc download*(self: gen_qwebenginepage_types.QWebEnginePage, url: gen_qurl_types.QUrl): void =
   fcQWebEnginePage_download(self.h, url.h)
 
-proc setHtml*(self: gen_qwebenginepage_types.QWebEnginePage, html: string): void =
+proc setHtml*(self: gen_qwebenginepage_types.QWebEnginePage, html: openArray[char]): void =
   fcQWebEnginePage_setHtml(self.h, struct_miqt_string(data: if len(html) > 0: addr html[0] else: nil, len: csize_t(len(html))))
 
-proc setContent*(self: gen_qwebenginepage_types.QWebEnginePage, data: seq[byte]): void =
+proc setContent*(self: gen_qwebenginepage_types.QWebEnginePage, data: openArray[byte]): void =
   fcQWebEnginePage_setContent(self.h, struct_miqt_string(data: if len(data) > 0: addr data[0] else: nil, len: csize_t(len(data))))
 
 proc title*(self: gen_qwebenginepage_types.QWebEnginePage): string =
@@ -519,7 +519,7 @@ proc backgroundColor*(self: gen_qwebenginepage_types.QWebEnginePage): gen_qcolor
 proc setBackgroundColor*(self: gen_qwebenginepage_types.QWebEnginePage, color: gen_qcolor_types.QColor): void =
   fcQWebEnginePage_setBackgroundColor(self.h, color.h)
 
-proc save*(self: gen_qwebenginepage_types.QWebEnginePage, filePath: string): void =
+proc save*(self: gen_qwebenginepage_types.QWebEnginePage, filePath: openArray[char]): void =
   fcQWebEnginePage_save(self.h, struct_miqt_string(data: if len(filePath) > 0: addr filePath[0] else: nil, len: csize_t(len(filePath))))
 
 proc isAudioMuted*(self: gen_qwebenginepage_types.QWebEnginePage): bool =
@@ -534,7 +534,7 @@ proc recentlyAudible*(self: gen_qwebenginepage_types.QWebEnginePage): bool =
 proc renderProcessPid*(self: gen_qwebenginepage_types.QWebEnginePage): clonglong =
   fcQWebEnginePage_renderProcessPid(self.h)
 
-proc printToPdf*(self: gen_qwebenginepage_types.QWebEnginePage, filePath: string): void =
+proc printToPdf*(self: gen_qwebenginepage_types.QWebEnginePage, filePath: openArray[char]): void =
   fcQWebEnginePage_printToPdf(self.h, struct_miqt_string(data: if len(filePath) > 0: addr filePath[0] else: nil, len: csize_t(len(filePath))))
 
 proc setInspectedPage*(self: gen_qwebenginepage_types.QWebEnginePage, page: gen_qwebenginepage_types.QWebEnginePage): void =
@@ -648,10 +648,10 @@ proc onloadingChanged*(self: gen_qwebenginepage_types.QWebEnginePage, slot: QWeb
   GC_ref(tmp)
   fcQWebEnginePage_connect_loadingChanged(self.h, cast[int](addr tmp[]), fcQWebEnginePage_slot_callback_loadingChanged, fcQWebEnginePage_slot_callback_loadingChanged_release)
 
-proc linkHovered*(self: gen_qwebenginepage_types.QWebEnginePage, url: string): void =
+proc linkHovered*(self: gen_qwebenginepage_types.QWebEnginePage, url: openArray[char]): void =
   fcQWebEnginePage_linkHovered(self.h, struct_miqt_string(data: if len(url) > 0: addr url[0] else: nil, len: csize_t(len(url))))
 
-type QWebEnginePagelinkHoveredSlot* = proc(url: string)
+type QWebEnginePagelinkHoveredSlot* = proc(url: openArray[char])
 proc fcQWebEnginePage_slot_callback_linkHovered(slot: int, url: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QWebEnginePagelinkHoveredSlot](cast[pointer](slot))
   let vurl_ms = url
@@ -893,10 +893,10 @@ proc onauthenticationRequired*(self: gen_qwebenginepage_types.QWebEnginePage, sl
   GC_ref(tmp)
   fcQWebEnginePage_connect_authenticationRequired(self.h, cast[int](addr tmp[]), fcQWebEnginePage_slot_callback_authenticationRequired, fcQWebEnginePage_slot_callback_authenticationRequired_release)
 
-proc proxyAuthenticationRequired*(self: gen_qwebenginepage_types.QWebEnginePage, requestUrl: gen_qurl_types.QUrl, authenticator: gen_qauthenticator_types.QAuthenticator, proxyHost: string): void =
+proc proxyAuthenticationRequired*(self: gen_qwebenginepage_types.QWebEnginePage, requestUrl: gen_qurl_types.QUrl, authenticator: gen_qauthenticator_types.QAuthenticator, proxyHost: openArray[char]): void =
   fcQWebEnginePage_proxyAuthenticationRequired(self.h, requestUrl.h, authenticator.h, struct_miqt_string(data: if len(proxyHost) > 0: addr proxyHost[0] else: nil, len: csize_t(len(proxyHost))))
 
-type QWebEnginePageproxyAuthenticationRequiredSlot* = proc(requestUrl: gen_qurl_types.QUrl, authenticator: gen_qauthenticator_types.QAuthenticator, proxyHost: string)
+type QWebEnginePageproxyAuthenticationRequiredSlot* = proc(requestUrl: gen_qurl_types.QUrl, authenticator: gen_qauthenticator_types.QAuthenticator, proxyHost: openArray[char])
 proc fcQWebEnginePage_slot_callback_proxyAuthenticationRequired(slot: int, requestUrl: pointer, authenticator: pointer, proxyHost: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QWebEnginePageproxyAuthenticationRequiredSlot](cast[pointer](slot))
   let slotval1 = gen_qurl_types.QUrl(h: requestUrl, owned: false)
@@ -1002,10 +1002,10 @@ proc onnewWindowRequested*(self: gen_qwebenginepage_types.QWebEnginePage, slot: 
   GC_ref(tmp)
   fcQWebEnginePage_connect_newWindowRequested(self.h, cast[int](addr tmp[]), fcQWebEnginePage_slot_callback_newWindowRequested, fcQWebEnginePage_slot_callback_newWindowRequested_release)
 
-proc titleChanged*(self: gen_qwebenginepage_types.QWebEnginePage, title: string): void =
+proc titleChanged*(self: gen_qwebenginepage_types.QWebEnginePage, title: openArray[char]): void =
   fcQWebEnginePage_titleChanged(self.h, struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))))
 
-type QWebEnginePagetitleChangedSlot* = proc(title: string)
+type QWebEnginePagetitleChangedSlot* = proc(title: openArray[char])
 proc fcQWebEnginePage_slot_callback_titleChanged(slot: int, title: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QWebEnginePagetitleChangedSlot](cast[pointer](slot))
   let vtitle_ms = title
@@ -1185,10 +1185,10 @@ proc onrenderProcessPidChanged*(self: gen_qwebenginepage_types.QWebEnginePage, s
   GC_ref(tmp)
   fcQWebEnginePage_connect_renderProcessPidChanged(self.h, cast[int](addr tmp[]), fcQWebEnginePage_slot_callback_renderProcessPidChanged, fcQWebEnginePage_slot_callback_renderProcessPidChanged_release)
 
-proc pdfPrintingFinished*(self: gen_qwebenginepage_types.QWebEnginePage, filePath: string, success: bool): void =
+proc pdfPrintingFinished*(self: gen_qwebenginepage_types.QWebEnginePage, filePath: openArray[char], success: bool): void =
   fcQWebEnginePage_pdfPrintingFinished(self.h, struct_miqt_string(data: if len(filePath) > 0: addr filePath[0] else: nil, len: csize_t(len(filePath))), success)
 
-type QWebEnginePagepdfPrintingFinishedSlot* = proc(filePath: string, success: bool)
+type QWebEnginePagepdfPrintingFinishedSlot* = proc(filePath: openArray[char], success: bool)
 proc fcQWebEnginePage_slot_callback_pdfPrintingFinished(slot: int, filePath: struct_miqt_string, success: bool) {.cdecl.} =
   let nimfunc = cast[ptr QWebEnginePagepdfPrintingFinishedSlot](cast[pointer](slot))
   let vfilePath_ms = filePath
@@ -1338,28 +1338,28 @@ proc tr*(_: type gen_qwebenginepage_types.QWebEnginePage, s: cstring, c: cstring
   c_free(v_ms.data)
   vx_ret
 
-proc download*(self: gen_qwebenginepage_types.QWebEnginePage, url: gen_qurl_types.QUrl, filename: string): void =
+proc download*(self: gen_qwebenginepage_types.QWebEnginePage, url: gen_qurl_types.QUrl, filename: openArray[char]): void =
   fcQWebEnginePage_download2(self.h, url.h, struct_miqt_string(data: if len(filename) > 0: addr filename[0] else: nil, len: csize_t(len(filename))))
 
-proc setHtml*(self: gen_qwebenginepage_types.QWebEnginePage, html: string, baseUrl: gen_qurl_types.QUrl): void =
+proc setHtml*(self: gen_qwebenginepage_types.QWebEnginePage, html: openArray[char], baseUrl: gen_qurl_types.QUrl): void =
   fcQWebEnginePage_setHtml2(self.h, struct_miqt_string(data: if len(html) > 0: addr html[0] else: nil, len: csize_t(len(html))), baseUrl.h)
 
-proc setContent*(self: gen_qwebenginepage_types.QWebEnginePage, data: seq[byte], mimeType: string): void =
+proc setContent*(self: gen_qwebenginepage_types.QWebEnginePage, data: openArray[byte], mimeType: openArray[char]): void =
   fcQWebEnginePage_setContent2(self.h, struct_miqt_string(data: if len(data) > 0: addr data[0] else: nil, len: csize_t(len(data))), struct_miqt_string(data: if len(mimeType) > 0: addr mimeType[0] else: nil, len: csize_t(len(mimeType))))
 
-proc setContent*(self: gen_qwebenginepage_types.QWebEnginePage, data: seq[byte], mimeType: string, baseUrl: gen_qurl_types.QUrl): void =
+proc setContent*(self: gen_qwebenginepage_types.QWebEnginePage, data: openArray[byte], mimeType: openArray[char], baseUrl: gen_qurl_types.QUrl): void =
   fcQWebEnginePage_setContent3(self.h, struct_miqt_string(data: if len(data) > 0: addr data[0] else: nil, len: csize_t(len(data))), struct_miqt_string(data: if len(mimeType) > 0: addr mimeType[0] else: nil, len: csize_t(len(mimeType))), baseUrl.h)
 
 proc setWebChannel*(self: gen_qwebenginepage_types.QWebEnginePage, param1: gen_qwebchannel_types.QWebChannel, worldId: cuint): void =
   fcQWebEnginePage_setWebChannel2(self.h, param1.h, worldId)
 
-proc save*(self: gen_qwebenginepage_types.QWebEnginePage, filePath: string, format: cint): void =
+proc save*(self: gen_qwebenginepage_types.QWebEnginePage, filePath: openArray[char], format: cint): void =
   fcQWebEnginePage_save2(self.h, struct_miqt_string(data: if len(filePath) > 0: addr filePath[0] else: nil, len: csize_t(len(filePath))), cint(format))
 
-proc printToPdf*(self: gen_qwebenginepage_types.QWebEnginePage, filePath: string, layout: gen_qpagelayout_types.QPageLayout): void =
+proc printToPdf*(self: gen_qwebenginepage_types.QWebEnginePage, filePath: openArray[char], layout: gen_qpagelayout_types.QPageLayout): void =
   fcQWebEnginePage_printToPdf2(self.h, struct_miqt_string(data: if len(filePath) > 0: addr filePath[0] else: nil, len: csize_t(len(filePath))), layout.h)
 
-proc printToPdf*(self: gen_qwebenginepage_types.QWebEnginePage, filePath: string, layout: gen_qpagelayout_types.QPageLayout, ranges: gen_qpageranges_types.QPageRanges): void =
+proc printToPdf*(self: gen_qwebenginepage_types.QWebEnginePage, filePath: openArray[char], layout: gen_qpagelayout_types.QPageLayout, ranges: gen_qpageranges_types.QPageRanges): void =
   fcQWebEnginePage_printToPdf3(self.h, struct_miqt_string(data: if len(filePath) > 0: addr filePath[0] else: nil, len: csize_t(len(filePath))), layout.h, ranges.h)
 
 type QWebEnginePagemetaObjectProc* = proc(self: QWebEnginePage): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
@@ -1368,10 +1368,10 @@ type QWebEnginePagemetacallProc* = proc(self: QWebEnginePage, param1: cint, para
 type QWebEnginePagetriggerActionProc* = proc(self: QWebEnginePage, action: cint, checked: bool): void {.raises: [], gcsafe.}
 type QWebEnginePageeventProc* = proc(self: QWebEnginePage, param1: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
 type QWebEnginePagecreateWindowProc* = proc(self: QWebEnginePage, typeVal: cint): gen_qwebenginepage_types.QWebEnginePage {.raises: [], gcsafe.}
-type QWebEnginePagechooseFilesProc* = proc(self: QWebEnginePage, mode: cint, oldFiles: seq[string], acceptedMimeTypes: seq[string]): seq[string] {.raises: [], gcsafe.}
-type QWebEnginePagejavaScriptAlertProc* = proc(self: QWebEnginePage, securityOrigin: gen_qurl_types.QUrl, msg: string): void {.raises: [], gcsafe.}
-type QWebEnginePagejavaScriptConfirmProc* = proc(self: QWebEnginePage, securityOrigin: gen_qurl_types.QUrl, msg: string): bool {.raises: [], gcsafe.}
-type QWebEnginePagejavaScriptConsoleMessageProc* = proc(self: QWebEnginePage, level: cint, message: string, lineNumber: cint, sourceID: string): void {.raises: [], gcsafe.}
+type QWebEnginePagechooseFilesProc* = proc(self: QWebEnginePage, mode: cint, oldFiles: openArray[string], acceptedMimeTypes: openArray[string]): seq[string] {.raises: [], gcsafe.}
+type QWebEnginePagejavaScriptAlertProc* = proc(self: QWebEnginePage, securityOrigin: gen_qurl_types.QUrl, msg: openArray[char]): void {.raises: [], gcsafe.}
+type QWebEnginePagejavaScriptConfirmProc* = proc(self: QWebEnginePage, securityOrigin: gen_qurl_types.QUrl, msg: openArray[char]): bool {.raises: [], gcsafe.}
+type QWebEnginePagejavaScriptConsoleMessageProc* = proc(self: QWebEnginePage, level: cint, message: openArray[char], lineNumber: cint, sourceID: openArray[char]): void {.raises: [], gcsafe.}
 type QWebEnginePageacceptNavigationRequestProc* = proc(self: QWebEnginePage, url: gen_qurl_types.QUrl, typeVal: cint, isMainFrame: bool): bool {.raises: [], gcsafe.}
 type QWebEnginePageeventFilterProc* = proc(self: QWebEnginePage, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
 type QWebEnginePagetimerEventProc* = proc(self: QWebEnginePage, event: gen_qcoreevent_types.QTimerEvent): void {.raises: [], gcsafe.}
@@ -1465,7 +1465,7 @@ proc fcQWebEnginePage_vtable_callback_createWindow(self: pointer, typeVal: cint)
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QWebEnginePagechooseFiles*(self: gen_qwebenginepage_types.QWebEnginePage, mode: cint, oldFiles: seq[string], acceptedMimeTypes: seq[string]): seq[string] =
+proc QWebEnginePagechooseFiles*(self: gen_qwebenginepage_types.QWebEnginePage, mode: cint, oldFiles: openArray[string], acceptedMimeTypes: openArray[string]): seq[string] =
   var oldFiles_CArray = newSeq[struct_miqt_string](len(oldFiles))
   for i in 0..<len(oldFiles):
     oldFiles_CArray[i] = struct_miqt_string(data: if len(oldFiles[i]) > 0: addr oldFiles[i][0] else: nil, len: csize_t(len(oldFiles[i])))
@@ -1518,7 +1518,7 @@ proc fcQWebEnginePage_vtable_callback_chooseFiles(self: pointer, mode: cint, old
 
   struct_miqt_array(len: csize_t(len(virtualReturn)), data: if len(virtualReturn) == 0: nil else: addr(virtualReturn_CArray[0]))
 
-proc QWebEnginePagejavaScriptAlert*(self: gen_qwebenginepage_types.QWebEnginePage, securityOrigin: gen_qurl_types.QUrl, msg: string): void =
+proc QWebEnginePagejavaScriptAlert*(self: gen_qwebenginepage_types.QWebEnginePage, securityOrigin: gen_qurl_types.QUrl, msg: openArray[char]): void =
   fcQWebEnginePage_virtualbase_javaScriptAlert(self.h, securityOrigin.h, struct_miqt_string(data: if len(msg) > 0: addr msg[0] else: nil, len: csize_t(len(msg))))
 
 proc fcQWebEnginePage_vtable_callback_javaScriptAlert(self: pointer, securityOrigin: pointer, msg: struct_miqt_string): void {.cdecl.} =
@@ -1531,7 +1531,7 @@ proc fcQWebEnginePage_vtable_callback_javaScriptAlert(self: pointer, securityOri
   let slotval2 = vmsgx_ret
   vtbl[].javaScriptAlert(self, slotval1, slotval2)
 
-proc QWebEnginePagejavaScriptConfirm*(self: gen_qwebenginepage_types.QWebEnginePage, securityOrigin: gen_qurl_types.QUrl, msg: string): bool =
+proc QWebEnginePagejavaScriptConfirm*(self: gen_qwebenginepage_types.QWebEnginePage, securityOrigin: gen_qurl_types.QUrl, msg: openArray[char]): bool =
   fcQWebEnginePage_virtualbase_javaScriptConfirm(self.h, securityOrigin.h, struct_miqt_string(data: if len(msg) > 0: addr msg[0] else: nil, len: csize_t(len(msg))))
 
 proc fcQWebEnginePage_vtable_callback_javaScriptConfirm(self: pointer, securityOrigin: pointer, msg: struct_miqt_string): bool {.cdecl.} =
@@ -1545,7 +1545,7 @@ proc fcQWebEnginePage_vtable_callback_javaScriptConfirm(self: pointer, securityO
   var virtualReturn = vtbl[].javaScriptConfirm(self, slotval1, slotval2)
   virtualReturn
 
-proc QWebEnginePagejavaScriptConsoleMessage*(self: gen_qwebenginepage_types.QWebEnginePage, level: cint, message: string, lineNumber: cint, sourceID: string): void =
+proc QWebEnginePagejavaScriptConsoleMessage*(self: gen_qwebenginepage_types.QWebEnginePage, level: cint, message: openArray[char], lineNumber: cint, sourceID: openArray[char]): void =
   fcQWebEnginePage_virtualbase_javaScriptConsoleMessage(self.h, cint(level), struct_miqt_string(data: if len(message) > 0: addr message[0] else: nil, len: csize_t(len(message))), lineNumber, struct_miqt_string(data: if len(sourceID) > 0: addr sourceID[0] else: nil, len: csize_t(len(sourceID))))
 
 proc fcQWebEnginePage_vtable_callback_javaScriptConsoleMessage(self: pointer, level: cint, message: struct_miqt_string, lineNumber: cint, sourceID: struct_miqt_string): void {.cdecl.} =
@@ -1682,7 +1682,7 @@ proc fcQWebEnginePage_method_callback_createWindow(self: pointer, typeVal: cint)
   var virtualReturn = inst.createWindow(slotval1)
   virtualReturn.h
 
-method chooseFiles*(self: VirtualQWebEnginePage, mode: cint, oldFiles: seq[string], acceptedMimeTypes: seq[string]): seq[string] {.base.} =
+method chooseFiles*(self: VirtualQWebEnginePage, mode: cint, oldFiles: openArray[string], acceptedMimeTypes: openArray[string]): seq[string] {.base.} =
   QWebEnginePagechooseFiles(self[], mode, oldFiles, acceptedMimeTypes)
 proc fcQWebEnginePage_method_callback_chooseFiles(self: pointer, mode: cint, oldFiles: struct_miqt_array, acceptedMimeTypes: struct_miqt_array): struct_miqt_array {.cdecl.} =
   let inst = cast[VirtualQWebEnginePage](fcQWebEnginePage_vdata(self)[])
@@ -1714,7 +1714,7 @@ proc fcQWebEnginePage_method_callback_chooseFiles(self: pointer, mode: cint, old
 
   struct_miqt_array(len: csize_t(len(virtualReturn)), data: if len(virtualReturn) == 0: nil else: addr(virtualReturn_CArray[0]))
 
-method javaScriptAlert*(self: VirtualQWebEnginePage, securityOrigin: gen_qurl_types.QUrl, msg: string): void {.base.} =
+method javaScriptAlert*(self: VirtualQWebEnginePage, securityOrigin: gen_qurl_types.QUrl, msg: openArray[char]): void {.base.} =
   QWebEnginePagejavaScriptAlert(self[], securityOrigin, msg)
 proc fcQWebEnginePage_method_callback_javaScriptAlert(self: pointer, securityOrigin: pointer, msg: struct_miqt_string): void {.cdecl.} =
   let inst = cast[VirtualQWebEnginePage](fcQWebEnginePage_vdata(self)[])
@@ -1725,7 +1725,7 @@ proc fcQWebEnginePage_method_callback_javaScriptAlert(self: pointer, securityOri
   let slotval2 = vmsgx_ret
   inst.javaScriptAlert(slotval1, slotval2)
 
-method javaScriptConfirm*(self: VirtualQWebEnginePage, securityOrigin: gen_qurl_types.QUrl, msg: string): bool {.base.} =
+method javaScriptConfirm*(self: VirtualQWebEnginePage, securityOrigin: gen_qurl_types.QUrl, msg: openArray[char]): bool {.base.} =
   QWebEnginePagejavaScriptConfirm(self[], securityOrigin, msg)
 proc fcQWebEnginePage_method_callback_javaScriptConfirm(self: pointer, securityOrigin: pointer, msg: struct_miqt_string): bool {.cdecl.} =
   let inst = cast[VirtualQWebEnginePage](fcQWebEnginePage_vdata(self)[])
@@ -1737,7 +1737,7 @@ proc fcQWebEnginePage_method_callback_javaScriptConfirm(self: pointer, securityO
   var virtualReturn = inst.javaScriptConfirm(slotval1, slotval2)
   virtualReturn
 
-method javaScriptConsoleMessage*(self: VirtualQWebEnginePage, level: cint, message: string, lineNumber: cint, sourceID: string): void {.base.} =
+method javaScriptConsoleMessage*(self: VirtualQWebEnginePage, level: cint, message: openArray[char], lineNumber: cint, sourceID: openArray[char]): void {.base.} =
   QWebEnginePagejavaScriptConsoleMessage(self[], level, message, lineNumber, sourceID)
 proc fcQWebEnginePage_method_callback_javaScriptConsoleMessage(self: pointer, level: cint, message: struct_miqt_string, lineNumber: cint, sourceID: struct_miqt_string): void {.cdecl.} =
   let inst = cast[VirtualQWebEnginePage](fcQWebEnginePage_vdata(self)[])
@@ -2027,6 +2027,7 @@ proc create*(T: type gen_qwebenginepage_types.QWebEnginePage,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQWebEnginePage_new(addr(cQWebEnginePage_mvtbl), csize_t(sizeof(pointer)))
   fcQWebEnginePage_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qwebenginepage_types.QWebEnginePage,
     profile: gen_qwebengineprofile_types.QWebEngineProfile,
@@ -2034,6 +2035,7 @@ proc create*(T: type gen_qwebenginepage_types.QWebEnginePage,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQWebEnginePage_new2(addr(cQWebEnginePage_mvtbl), csize_t(sizeof(pointer)), profile.h)
   fcQWebEnginePage_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qwebenginepage_types.QWebEnginePage,
     parent: gen_qobject_types.QObject,
@@ -2041,6 +2043,7 @@ proc create*(T: type gen_qwebenginepage_types.QWebEnginePage,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQWebEnginePage_new3(addr(cQWebEnginePage_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQWebEnginePage_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qwebenginepage_types.QWebEnginePage,
     profile: gen_qwebengineprofile_types.QWebEngineProfile, parent: gen_qobject_types.QObject,
@@ -2048,6 +2051,7 @@ proc create*(T: type gen_qwebenginepage_types.QWebEnginePage,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQWebEnginePage_new4(addr(cQWebEnginePage_mvtbl), csize_t(sizeof(pointer)), profile.h, parent.h)
   fcQWebEnginePage_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qwebenginepage_types.QWebEnginePage): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQWebEnginePage_staticMetaObject())

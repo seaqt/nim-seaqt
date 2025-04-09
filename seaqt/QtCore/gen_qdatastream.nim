@@ -310,6 +310,6 @@ proc create*(T: type gen_qdatastream_types.QDataStream,
   let tmp = gen_qdatastream_types.QDataStream(h: fcQDataStream_new2(param1.h), owned: true)
   tmp
 proc create*(T: type gen_qdatastream_types.QDataStream,
-    param1: seq[byte]): gen_qdatastream_types.QDataStream =
+    param1: openArray[byte]): gen_qdatastream_types.QDataStream =
   let tmp = gen_qdatastream_types.QDataStream(h: fcQDataStream_new3(struct_miqt_string(data: if len(param1) > 0: addr param1[0] else: nil, len: csize_t(len(param1)))), owned: true)
   tmp

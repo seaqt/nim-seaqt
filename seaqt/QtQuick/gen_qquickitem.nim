@@ -799,6 +799,7 @@ proc create*(T: type gen_qquickitem_types.QQuickTransform,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQQuickTransform_new(addr(cQQuickTransform_mvtbl), csize_t(sizeof(pointer)))
   fcQQuickTransform_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qquickitem_types.QQuickTransform,
     parent: gen_qobject_types.QObject,
@@ -806,6 +807,7 @@ proc create*(T: type gen_qquickitem_types.QQuickTransform,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQQuickTransform_new2(addr(cQQuickTransform_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQQuickTransform_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qquickitem_types.QQuickTransform): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQQuickTransform_staticMetaObject())
@@ -863,7 +865,7 @@ proc state*(self: gen_qquickitem_types.QQuickItem): string =
   c_free(v_ms.data)
   vx_ret
 
-proc setState*(self: gen_qquickitem_types.QQuickItem, state: string): void =
+proc setState*(self: gen_qquickitem_types.QQuickItem, state: openArray[char]): void =
   fcQQuickItem_setState(self.h, struct_miqt_string(data: if len(state) > 0: addr state[0] else: nil, len: csize_t(len(state))))
 
 proc baselineOffset*(self: gen_qquickitem_types.QQuickItem): float64 =
@@ -1082,7 +1084,7 @@ proc filtersChildMouseEvents*(self: gen_qquickitem_types.QQuickItem): bool =
 proc setFiltersChildMouseEvents*(self: gen_qquickitem_types.QQuickItem, filter: bool): void =
   fcQQuickItem_setFiltersChildMouseEvents(self.h, filter)
 
-proc grabTouchPoints*(self: gen_qquickitem_types.QQuickItem, ids: seq[cint]): void =
+proc grabTouchPoints*(self: gen_qquickitem_types.QQuickItem, ids: openArray[cint]): void =
   var ids_CArray = newSeq[cint](len(ids))
   for i in 0..<len(ids):
     ids_CArray[i] = ids[i]
@@ -1216,10 +1218,10 @@ proc onbaselineOffsetChanged*(self: gen_qquickitem_types.QQuickItem, slot: QQuic
   GC_ref(tmp)
   fcQQuickItem_connect_baselineOffsetChanged(self.h, cast[int](addr tmp[]), fcQQuickItem_slot_callback_baselineOffsetChanged, fcQQuickItem_slot_callback_baselineOffsetChanged_release)
 
-proc stateChanged*(self: gen_qquickitem_types.QQuickItem, param1: string): void =
+proc stateChanged*(self: gen_qquickitem_types.QQuickItem, param1: openArray[char]): void =
   fcQQuickItem_stateChanged(self.h, struct_miqt_string(data: if len(param1) > 0: addr param1[0] else: nil, len: csize_t(len(param1))))
 
-type QQuickItemstateChangedSlot* = proc(param1: string)
+type QQuickItemstateChangedSlot* = proc(param1: openArray[char])
 proc fcQQuickItem_slot_callback_stateChanged(slot: int, param1: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QQuickItemstateChangedSlot](cast[pointer](slot))
   let vparam1_ms = param1
@@ -2861,6 +2863,7 @@ proc create*(T: type gen_qquickitem_types.QQuickItem,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQQuickItem_new(addr(cQQuickItem_mvtbl), csize_t(sizeof(pointer)))
   fcQQuickItem_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qquickitem_types.QQuickItem,
     parent: gen_qquickitem_types.QQuickItem,
@@ -2868,6 +2871,7 @@ proc create*(T: type gen_qquickitem_types.QQuickItem,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQQuickItem_new2(addr(cQQuickItem_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQQuickItem_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qquickitem_types.QQuickItem): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQQuickItem_staticMetaObject())

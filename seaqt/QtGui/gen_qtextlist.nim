@@ -507,6 +507,7 @@ proc create*(T: type gen_qtextlist_types.QTextList,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQTextList_new(addr(cQTextList_mvtbl), csize_t(sizeof(pointer)), doc.h)
   fcQTextList_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qtextlist_types.QTextList): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQTextList_staticMetaObject())

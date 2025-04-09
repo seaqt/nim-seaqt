@@ -160,10 +160,10 @@ proc actionNames*(self: gen_qaccessiblewidget_types.QAccessibleWidget): seq[stri
   c_free(v_ma.data)
   vx_ret
 
-proc doAction*(self: gen_qaccessiblewidget_types.QAccessibleWidget, actionName: string): void =
+proc doAction*(self: gen_qaccessiblewidget_types.QAccessibleWidget, actionName: openArray[char]): void =
   fcQAccessibleWidget_doAction(self.h, struct_miqt_string(data: if len(actionName) > 0: addr actionName[0] else: nil, len: csize_t(len(actionName))))
 
-proc keyBindingsForAction*(self: gen_qaccessiblewidget_types.QAccessibleWidget, actionName: string): seq[string] =
+proc keyBindingsForAction*(self: gen_qaccessiblewidget_types.QAccessibleWidget, actionName: openArray[char]): seq[string] =
   var v_ma = fcQAccessibleWidget_keyBindingsForAction(self.h, struct_miqt_string(data: if len(actionName) > 0: addr actionName[0] else: nil, len: csize_t(len(actionName))))
   var vx_ret = newSeq[string](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
@@ -181,7 +181,7 @@ proc widget*(self: gen_qaccessiblewidget_types.QAccessibleWidget): gen_qwidget_t
 proc parentObject*(self: gen_qaccessiblewidget_types.QAccessibleWidget): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQAccessibleWidget_protectedbase_parentObject(self.h), owned: false)
 
-proc addControllingSignal*(self: gen_qaccessiblewidget_types.QAccessibleWidget, signal: string): void =
+proc addControllingSignal*(self: gen_qaccessiblewidget_types.QAccessibleWidget, signal: openArray[char]): void =
   fcQAccessibleWidget_protectedbase_addControllingSignal(self.h, struct_miqt_string(data: if len(signal) > 0: addr signal[0] else: nil, len: csize_t(len(signal))))
 
 proc create*(T: type gen_qaccessiblewidget_types.QAccessibleWidget,
@@ -193,6 +193,6 @@ proc create*(T: type gen_qaccessiblewidget_types.QAccessibleWidget,
   let tmp = gen_qaccessiblewidget_types.QAccessibleWidget(h: fcQAccessibleWidget_new2(o.h, cint(r)), owned: true)
   tmp
 proc create*(T: type gen_qaccessiblewidget_types.QAccessibleWidget,
-    o: gen_qwidget_types.QWidget, r: cint, name: string): gen_qaccessiblewidget_types.QAccessibleWidget =
+    o: gen_qwidget_types.QWidget, r: cint, name: openArray[char]): gen_qaccessiblewidget_types.QAccessibleWidget =
   let tmp = gen_qaccessiblewidget_types.QAccessibleWidget(h: fcQAccessibleWidget_new3(o.h, cint(r), struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name)))), owned: true)
   tmp

@@ -399,7 +399,7 @@ proc previewWidget*(self: gen_qcolumnview_types.QColumnView): gen_qwidget_types.
 proc setPreviewWidget*(self: gen_qcolumnview_types.QColumnView, widget: gen_qwidget_types.QWidget): void =
   fcQColumnView_setPreviewWidget(self.h, widget.h)
 
-proc setColumnWidths*(self: gen_qcolumnview_types.QColumnView, list: seq[cint]): void =
+proc setColumnWidths*(self: gen_qcolumnview_types.QColumnView, list: openArray[cint]): void =
   var list_CArray = newSeq[cint](len(list))
   for i in 0..<len(list):
     list_CArray[i] = list[i]
@@ -449,14 +449,14 @@ type QColumnViewrowsInsertedProc* = proc(self: QColumnView, parent: gen_qabstrac
 type QColumnViewcurrentChangedProc* = proc(self: QColumnView, current: gen_qabstractitemmodel_types.QModelIndex, previous: gen_qabstractitemmodel_types.QModelIndex): void {.raises: [], gcsafe.}
 type QColumnViewscrollContentsByProc* = proc(self: QColumnView, dx: cint, dy: cint): void {.raises: [], gcsafe.}
 type QColumnViewcreateColumnProc* = proc(self: QColumnView, rootIndex: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemview_types.QAbstractItemView {.raises: [], gcsafe.}
-type QColumnViewkeyboardSearchProc* = proc(self: QColumnView, search: string): void {.raises: [], gcsafe.}
+type QColumnViewkeyboardSearchProc* = proc(self: QColumnView, search: openArray[char]): void {.raises: [], gcsafe.}
 type QColumnViewsizeHintForRowProc* = proc(self: QColumnView, row: cint): cint {.raises: [], gcsafe.}
 type QColumnViewsizeHintForColumnProc* = proc(self: QColumnView, column: cint): cint {.raises: [], gcsafe.}
 type QColumnViewitemDelegateForIndexProc* = proc(self: QColumnView, index: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemdelegate_types.QAbstractItemDelegate {.raises: [], gcsafe.}
 type QColumnViewinputMethodQueryProc* = proc(self: QColumnView, query: cint): gen_qvariant_types.QVariant {.raises: [], gcsafe.}
 type QColumnViewresetProc* = proc(self: QColumnView): void {.raises: [], gcsafe.}
 type QColumnViewdoItemsLayoutProc* = proc(self: QColumnView): void {.raises: [], gcsafe.}
-type QColumnViewdataChangedProc* = proc(self: QColumnView, topLeft: gen_qabstractitemmodel_types.QModelIndex, bottomRight: gen_qabstractitemmodel_types.QModelIndex, roles: seq[cint]): void {.raises: [], gcsafe.}
+type QColumnViewdataChangedProc* = proc(self: QColumnView, topLeft: gen_qabstractitemmodel_types.QModelIndex, bottomRight: gen_qabstractitemmodel_types.QModelIndex, roles: openArray[cint]): void {.raises: [], gcsafe.}
 type QColumnViewrowsAboutToBeRemovedProc* = proc(self: QColumnView, parent: gen_qabstractitemmodel_types.QModelIndex, start: cint, endVal: cint): void {.raises: [], gcsafe.}
 type QColumnViewselectionChangedProc* = proc(self: QColumnView, selected: gen_qitemselectionmodel_types.QItemSelection, deselected: gen_qitemselectionmodel_types.QItemSelection): void {.raises: [], gcsafe.}
 type QColumnViewupdateEditorDataProc* = proc(self: QColumnView): void {.raises: [], gcsafe.}
@@ -513,7 +513,7 @@ type QColumnViewtabletEventProc* = proc(self: QColumnView, event: gen_qevent_typ
 type QColumnViewactionEventProc* = proc(self: QColumnView, event: gen_qevent_types.QActionEvent): void {.raises: [], gcsafe.}
 type QColumnViewshowEventProc* = proc(self: QColumnView, event: gen_qevent_types.QShowEvent): void {.raises: [], gcsafe.}
 type QColumnViewhideEventProc* = proc(self: QColumnView, event: gen_qevent_types.QHideEvent): void {.raises: [], gcsafe.}
-type QColumnViewnativeEventProc* = proc(self: QColumnView, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
+type QColumnViewnativeEventProc* = proc(self: QColumnView, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
 type QColumnViewmetricProc* = proc(self: QColumnView, param1: cint): cint {.raises: [], gcsafe.}
 type QColumnViewinitPainterProc* = proc(self: QColumnView, painter: gen_qpainter_types.QPainter): void {.raises: [], gcsafe.}
 type QColumnViewredirectedProc* = proc(self: QColumnView, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.raises: [], gcsafe.}
@@ -854,7 +854,7 @@ proc fcQColumnView_vtable_callback_createColumn(self: pointer, rootIndex: pointe
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QColumnViewkeyboardSearch*(self: gen_qcolumnview_types.QColumnView, search: string): void =
+proc QColumnViewkeyboardSearch*(self: gen_qcolumnview_types.QColumnView, search: openArray[char]): void =
   fcQColumnView_virtualbase_keyboardSearch(self.h, struct_miqt_string(data: if len(search) > 0: addr search[0] else: nil, len: csize_t(len(search))))
 
 proc fcQColumnView_vtable_callback_keyboardSearch(self: pointer, search: struct_miqt_string): void {.cdecl.} =
@@ -928,7 +928,7 @@ proc fcQColumnView_vtable_callback_doItemsLayout(self: pointer): void {.cdecl.} 
   let self = QColumnView(h: self)
   vtbl[].doItemsLayout(self)
 
-proc QColumnViewdataChanged*(self: gen_qcolumnview_types.QColumnView, topLeft: gen_qabstractitemmodel_types.QModelIndex, bottomRight: gen_qabstractitemmodel_types.QModelIndex, roles: seq[cint]): void =
+proc QColumnViewdataChanged*(self: gen_qcolumnview_types.QColumnView, topLeft: gen_qabstractitemmodel_types.QModelIndex, bottomRight: gen_qabstractitemmodel_types.QModelIndex, roles: openArray[cint]): void =
   var roles_CArray = newSeq[cint](len(roles))
   for i in 0..<len(roles):
     roles_CArray[i] = roles[i]
@@ -1487,7 +1487,7 @@ proc fcQColumnView_vtable_callback_hideEvent(self: pointer, event: pointer): voi
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   vtbl[].hideEvent(self, slotval1)
 
-proc QColumnViewnativeEvent*(self: gen_qcolumnview_types.QColumnView, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool =
+proc QColumnViewnativeEvent*(self: gen_qcolumnview_types.QColumnView, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool =
   fcQColumnView_virtualbase_nativeEvent(self.h, struct_miqt_string(data: if len(eventType) > 0: addr eventType[0] else: nil, len: csize_t(len(eventType))), message, resultVal)
 
 proc fcQColumnView_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
@@ -1754,7 +1754,7 @@ proc fcQColumnView_method_callback_createColumn(self: pointer, rootIndex: pointe
   var virtualReturn = inst.createColumn(slotval1)
   virtualReturn.h
 
-method keyboardSearch*(self: VirtualQColumnView, search: string): void {.base.} =
+method keyboardSearch*(self: VirtualQColumnView, search: openArray[char]): void {.base.} =
   QColumnViewkeyboardSearch(self[], search)
 proc fcQColumnView_method_callback_keyboardSearch(self: pointer, search: struct_miqt_string): void {.cdecl.} =
   let inst = cast[VirtualQColumnView](fcQColumnView_vdata(self)[])
@@ -1808,7 +1808,7 @@ proc fcQColumnView_method_callback_doItemsLayout(self: pointer): void {.cdecl.} 
   let inst = cast[VirtualQColumnView](fcQColumnView_vdata(self)[])
   inst.doItemsLayout()
 
-method dataChanged*(self: VirtualQColumnView, topLeft: gen_qabstractitemmodel_types.QModelIndex, bottomRight: gen_qabstractitemmodel_types.QModelIndex, roles: seq[cint]): void {.base.} =
+method dataChanged*(self: VirtualQColumnView, topLeft: gen_qabstractitemmodel_types.QModelIndex, bottomRight: gen_qabstractitemmodel_types.QModelIndex, roles: openArray[cint]): void {.base.} =
   QColumnViewdataChanged(self[], topLeft, bottomRight, roles)
 proc fcQColumnView_method_callback_dataChanged(self: pointer, topLeft: pointer, bottomRight: pointer, roles: struct_miqt_array): void {.cdecl.} =
   let inst = cast[VirtualQColumnView](fcQColumnView_vdata(self)[])
@@ -2231,7 +2231,7 @@ proc fcQColumnView_method_callback_hideEvent(self: pointer, event: pointer): voi
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   inst.hideEvent(slotval1)
 
-method nativeEvent*(self: VirtualQColumnView, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
+method nativeEvent*(self: VirtualQColumnView, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
   QColumnViewnativeEvent(self[], eventType, message, resultVal)
 proc fcQColumnView_method_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
   let inst = cast[VirtualQColumnView](fcQColumnView_vdata(self)[])
@@ -2883,12 +2883,14 @@ proc create*(T: type gen_qcolumnview_types.QColumnView,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQColumnView_new(addr(cQColumnView_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQColumnView_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qcolumnview_types.QColumnView,
     inst: VirtualQColumnView) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQColumnView_new2(addr(cQColumnView_mvtbl), csize_t(sizeof(pointer)))
   fcQColumnView_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qcolumnview_types.QColumnView): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQColumnView_staticMetaObject())

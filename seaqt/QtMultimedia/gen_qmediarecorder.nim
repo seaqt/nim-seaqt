@@ -393,10 +393,10 @@ proc onencoderSettingsChanged*(self: gen_qmediarecorder_types.QMediaRecorder, sl
   GC_ref(tmp)
   fcQMediaRecorder_connect_encoderSettingsChanged(self.h, cast[int](addr tmp[]), fcQMediaRecorder_slot_callback_encoderSettingsChanged, fcQMediaRecorder_slot_callback_encoderSettingsChanged_release)
 
-proc errorOccurred*(self: gen_qmediarecorder_types.QMediaRecorder, error: cint, errorString: string): void =
+proc errorOccurred*(self: gen_qmediarecorder_types.QMediaRecorder, error: cint, errorString: openArray[char]): void =
   fcQMediaRecorder_errorOccurred(self.h, cint(error), struct_miqt_string(data: if len(errorString) > 0: addr errorString[0] else: nil, len: csize_t(len(errorString))))
 
-type QMediaRecordererrorOccurredSlot* = proc(error: cint, errorString: string)
+type QMediaRecordererrorOccurredSlot* = proc(error: cint, errorString: openArray[char])
 proc fcQMediaRecorder_slot_callback_errorOccurred(slot: int, error: cint, errorString: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QMediaRecordererrorOccurredSlot](cast[pointer](slot))
   let slotval1 = cint(error)
@@ -924,6 +924,7 @@ proc create*(T: type gen_qmediarecorder_types.QMediaRecorder,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQMediaRecorder_new(addr(cQMediaRecorder_mvtbl), csize_t(sizeof(pointer)))
   fcQMediaRecorder_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qmediarecorder_types.QMediaRecorder,
     parent: gen_qobject_types.QObject,
@@ -931,6 +932,7 @@ proc create*(T: type gen_qmediarecorder_types.QMediaRecorder,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQMediaRecorder_new2(addr(cQMediaRecorder_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQMediaRecorder_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qmediarecorder_types.QMediaRecorder): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQMediaRecorder_staticMetaObject())

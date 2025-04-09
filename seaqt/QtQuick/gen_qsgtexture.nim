@@ -653,6 +653,7 @@ proc create*(T: type gen_qsgtexture_types.QSGTexture,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQSGTexture_new(addr(cQSGTexture_mvtbl), csize_t(sizeof(pointer)))
   fcQSGTexture_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qsgtexture_types.QSGTexture): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQSGTexture_staticMetaObject())
@@ -1092,6 +1093,7 @@ proc create*(T: type gen_qsgtexture_types.QSGDynamicTexture,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQSGDynamicTexture_new(addr(cQSGDynamicTexture_mvtbl), csize_t(sizeof(pointer)))
   fcQSGDynamicTexture_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qsgtexture_types.QSGDynamicTexture): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQSGDynamicTexture_staticMetaObject())

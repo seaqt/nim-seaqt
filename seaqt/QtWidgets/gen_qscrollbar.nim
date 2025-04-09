@@ -277,7 +277,7 @@ type QScrollBardragMoveEventProc* = proc(self: QScrollBar, event: gen_qevent_typ
 type QScrollBardragLeaveEventProc* = proc(self: QScrollBar, event: gen_qevent_types.QDragLeaveEvent): void {.raises: [], gcsafe.}
 type QScrollBardropEventProc* = proc(self: QScrollBar, event: gen_qevent_types.QDropEvent): void {.raises: [], gcsafe.}
 type QScrollBarshowEventProc* = proc(self: QScrollBar, event: gen_qevent_types.QShowEvent): void {.raises: [], gcsafe.}
-type QScrollBarnativeEventProc* = proc(self: QScrollBar, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
+type QScrollBarnativeEventProc* = proc(self: QScrollBar, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
 type QScrollBarmetricProc* = proc(self: QScrollBar, param1: cint): cint {.raises: [], gcsafe.}
 type QScrollBarinitPainterProc* = proc(self: QScrollBar, painter: gen_qpainter_types.QPainter): void {.raises: [], gcsafe.}
 type QScrollBarredirectedProc* = proc(self: QScrollBar, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.raises: [], gcsafe.}
@@ -713,7 +713,7 @@ proc fcQScrollBar_vtable_callback_showEvent(self: pointer, event: pointer): void
   let slotval1 = gen_qevent_types.QShowEvent(h: event, owned: false)
   vtbl[].showEvent(self, slotval1)
 
-proc QScrollBarnativeEvent*(self: gen_qscrollbar_types.QScrollBar, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool =
+proc QScrollBarnativeEvent*(self: gen_qscrollbar_types.QScrollBar, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool =
   fcQScrollBar_virtualbase_nativeEvent(self.h, struct_miqt_string(data: if len(eventType) > 0: addr eventType[0] else: nil, len: csize_t(len(eventType))), message, resultVal)
 
 proc fcQScrollBar_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
@@ -1132,7 +1132,7 @@ proc fcQScrollBar_method_callback_showEvent(self: pointer, event: pointer): void
   let slotval1 = gen_qevent_types.QShowEvent(h: event, owned: false)
   inst.showEvent(slotval1)
 
-method nativeEvent*(self: VirtualQScrollBar, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
+method nativeEvent*(self: VirtualQScrollBar, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
   QScrollBarnativeEvent(self[], eventType, message, resultVal)
 proc fcQScrollBar_method_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
   let inst = cast[VirtualQScrollBar](fcQScrollBar_vdata(self)[])
@@ -1792,12 +1792,14 @@ proc create*(T: type gen_qscrollbar_types.QScrollBar,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQScrollBar_new(addr(cQScrollBar_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQScrollBar_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qscrollbar_types.QScrollBar,
     inst: VirtualQScrollBar) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQScrollBar_new2(addr(cQScrollBar_mvtbl), csize_t(sizeof(pointer)))
   fcQScrollBar_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qscrollbar_types.QScrollBar,
     param1: cint,
@@ -1805,6 +1807,7 @@ proc create*(T: type gen_qscrollbar_types.QScrollBar,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQScrollBar_new3(addr(cQScrollBar_mvtbl), csize_t(sizeof(pointer)), cint(param1))
   fcQScrollBar_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qscrollbar_types.QScrollBar,
     param1: cint, parent: gen_qwidget_types.QWidget,
@@ -1812,6 +1815,7 @@ proc create*(T: type gen_qscrollbar_types.QScrollBar,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQScrollBar_new4(addr(cQScrollBar_mvtbl), csize_t(sizeof(pointer)), cint(param1), parent.h)
   fcQScrollBar_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qscrollbar_types.QScrollBar): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQScrollBar_staticMetaObject())

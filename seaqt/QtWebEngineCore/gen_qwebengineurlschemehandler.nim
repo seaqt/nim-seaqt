@@ -440,6 +440,7 @@ proc create*(T: type gen_qwebengineurlschemehandler_types.QWebEngineUrlSchemeHan
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQWebEngineUrlSchemeHandler_new(addr(cQWebEngineUrlSchemeHandler_mvtbl), csize_t(sizeof(pointer)))
   fcQWebEngineUrlSchemeHandler_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qwebengineurlschemehandler_types.QWebEngineUrlSchemeHandler,
     parent: gen_qobject_types.QObject,
@@ -447,6 +448,7 @@ proc create*(T: type gen_qwebengineurlschemehandler_types.QWebEngineUrlSchemeHan
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQWebEngineUrlSchemeHandler_new2(addr(cQWebEngineUrlSchemeHandler_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQWebEngineUrlSchemeHandler_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qwebengineurlschemehandler_types.QWebEngineUrlSchemeHandler): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQWebEngineUrlSchemeHandler_staticMetaObject())

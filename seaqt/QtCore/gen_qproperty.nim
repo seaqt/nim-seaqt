@@ -141,7 +141,7 @@ proc create*(T: type gen_qproperty_types.QPropertyBindingError,
   let tmp = gen_qproperty_types.QPropertyBindingError(h: fcQPropertyBindingError_new3(other.h), owned: true)
   tmp
 proc create*(T: type gen_qproperty_types.QPropertyBindingError,
-    typeVal: cint, description: string): gen_qproperty_types.QPropertyBindingError =
+    typeVal: cint, description: openArray[char]): gen_qproperty_types.QPropertyBindingError =
   let tmp = gen_qproperty_types.QPropertyBindingError(h: fcQPropertyBindingError_new4(cint(typeVal), struct_miqt_string(data: if len(description) > 0: addr description[0] else: nil, len: csize_t(len(description)))), owned: true)
   tmp
 proc operatorAssign*(self: gen_qproperty_types.QUntypedPropertyBinding, other: gen_qproperty_types.QUntypedPropertyBinding): void =

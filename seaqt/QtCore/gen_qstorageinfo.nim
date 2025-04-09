@@ -74,7 +74,7 @@ proc operatorAssign*(self: gen_qstorageinfo_types.QStorageInfo, other: gen_qstor
 proc swap*(self: gen_qstorageinfo_types.QStorageInfo, other: gen_qstorageinfo_types.QStorageInfo): void =
   fcQStorageInfo_swap(self.h, other.h)
 
-proc setPath*(self: gen_qstorageinfo_types.QStorageInfo, path: string): void =
+proc setPath*(self: gen_qstorageinfo_types.QStorageInfo, path: openArray[char]): void =
   fcQStorageInfo_setPath(self.h, struct_miqt_string(data: if len(path) > 0: addr path[0] else: nil, len: csize_t(len(path))))
 
 proc rootPath*(self: gen_qstorageinfo_types.QStorageInfo): string =
@@ -156,7 +156,7 @@ proc create*(T: type gen_qstorageinfo_types.QStorageInfo): gen_qstorageinfo_type
   let tmp = gen_qstorageinfo_types.QStorageInfo(h: fcQStorageInfo_new(), owned: true)
   tmp
 proc create*(T: type gen_qstorageinfo_types.QStorageInfo,
-    path: string): gen_qstorageinfo_types.QStorageInfo =
+    path: openArray[char]): gen_qstorageinfo_types.QStorageInfo =
   let tmp = gen_qstorageinfo_types.QStorageInfo(h: fcQStorageInfo_new2(struct_miqt_string(data: if len(path) > 0: addr path[0] else: nil, len: csize_t(len(path)))), owned: true)
   tmp
 proc create*(T: type gen_qstorageinfo_types.QStorageInfo,

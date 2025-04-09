@@ -100,4 +100,5 @@ proc create*(T: type gen_qrunnable_types.QRunnable,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQRunnable_new(addr(cQRunnable_mvtbl), csize_t(sizeof(pointer)))
   fcQRunnable_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 

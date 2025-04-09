@@ -995,6 +995,7 @@ proc create*(T: type gen_qitemselectionmodel_types.QItemSelectionModel,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQItemSelectionModel_new(addr(cQItemSelectionModel_mvtbl), csize_t(sizeof(pointer)))
   fcQItemSelectionModel_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qitemselectionmodel_types.QItemSelectionModel,
     model: gen_qabstractitemmodel_types.QAbstractItemModel, parent: gen_qobject_types.QObject,
@@ -1002,6 +1003,7 @@ proc create*(T: type gen_qitemselectionmodel_types.QItemSelectionModel,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQItemSelectionModel_new2(addr(cQItemSelectionModel_mvtbl), csize_t(sizeof(pointer)), model.h, parent.h)
   fcQItemSelectionModel_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qitemselectionmodel_types.QItemSelectionModel,
     model: gen_qabstractitemmodel_types.QAbstractItemModel,
@@ -1009,6 +1011,7 @@ proc create*(T: type gen_qitemselectionmodel_types.QItemSelectionModel,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQItemSelectionModel_new3(addr(cQItemSelectionModel_mvtbl), csize_t(sizeof(pointer)), model.h)
   fcQItemSelectionModel_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qitemselectionmodel_types.QItemSelectionModel): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQItemSelectionModel_staticMetaObject())

@@ -89,7 +89,7 @@ proc toString*(self: gen_qpageranges_types.QPageRanges): string =
   c_free(v_ms.data)
   vx_ret
 
-proc fromString*(_: type gen_qpageranges_types.QPageRanges, ranges: string): gen_qpageranges_types.QPageRanges =
+proc fromString*(_: type gen_qpageranges_types.QPageRanges, ranges: openArray[char]): gen_qpageranges_types.QPageRanges =
   gen_qpageranges_types.QPageRanges(h: fcQPageRanges_fromString(struct_miqt_string(data: if len(ranges) > 0: addr ranges[0] else: nil, len: csize_t(len(ranges)))), owned: true)
 
 proc contains*(self: gen_qpageranges_types.QPageRanges, pageNumber: cint): bool =

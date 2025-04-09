@@ -364,7 +364,7 @@ proc selectedText*(self: gen_qlabel_types.QLabel): string =
 proc selectionStart*(self: gen_qlabel_types.QLabel): cint =
   fcQLabel_selectionStart(self.h)
 
-proc setText*(self: gen_qlabel_types.QLabel, text: string): void =
+proc setText*(self: gen_qlabel_types.QLabel, text: openArray[char]): void =
   fcQLabel_setText(self.h, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
 
 proc setPixmap*(self: gen_qlabel_types.QLabel, pixmap: gen_qpixmap_types.QPixmap): void =
@@ -385,10 +385,10 @@ proc setNum*(self: gen_qlabel_types.QLabel, num: float64): void =
 proc clear*(self: gen_qlabel_types.QLabel): void =
   fcQLabel_clear(self.h)
 
-proc linkActivated*(self: gen_qlabel_types.QLabel, link: string): void =
+proc linkActivated*(self: gen_qlabel_types.QLabel, link: openArray[char]): void =
   fcQLabel_linkActivated(self.h, struct_miqt_string(data: if len(link) > 0: addr link[0] else: nil, len: csize_t(len(link))))
 
-type QLabellinkActivatedSlot* = proc(link: string)
+type QLabellinkActivatedSlot* = proc(link: openArray[char])
 proc fcQLabel_slot_callback_linkActivated(slot: int, link: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QLabellinkActivatedSlot](cast[pointer](slot))
   let vlink_ms = link
@@ -408,10 +408,10 @@ proc onlinkActivated*(self: gen_qlabel_types.QLabel, slot: QLabellinkActivatedSl
   GC_ref(tmp)
   fcQLabel_connect_linkActivated(self.h, cast[int](addr tmp[]), fcQLabel_slot_callback_linkActivated, fcQLabel_slot_callback_linkActivated_release)
 
-proc linkHovered*(self: gen_qlabel_types.QLabel, link: string): void =
+proc linkHovered*(self: gen_qlabel_types.QLabel, link: openArray[char]): void =
   fcQLabel_linkHovered(self.h, struct_miqt_string(data: if len(link) > 0: addr link[0] else: nil, len: csize_t(len(link))))
 
-type QLabellinkHoveredSlot* = proc(link: string)
+type QLabellinkHoveredSlot* = proc(link: openArray[char])
 proc fcQLabel_slot_callback_linkHovered(slot: int, link: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QLabellinkHoveredSlot](cast[pointer](slot))
   let vlink_ms = link
@@ -481,7 +481,7 @@ type QLabeldragLeaveEventProc* = proc(self: QLabel, event: gen_qevent_types.QDra
 type QLabeldropEventProc* = proc(self: QLabel, event: gen_qevent_types.QDropEvent): void {.raises: [], gcsafe.}
 type QLabelshowEventProc* = proc(self: QLabel, event: gen_qevent_types.QShowEvent): void {.raises: [], gcsafe.}
 type QLabelhideEventProc* = proc(self: QLabel, event: gen_qevent_types.QHideEvent): void {.raises: [], gcsafe.}
-type QLabelnativeEventProc* = proc(self: QLabel, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
+type QLabelnativeEventProc* = proc(self: QLabel, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
 type QLabelmetricProc* = proc(self: QLabel, param1: cint): cint {.raises: [], gcsafe.}
 type QLabelinitPainterProc* = proc(self: QLabel, painter: gen_qpainter_types.QPainter): void {.raises: [], gcsafe.}
 type QLabelredirectedProc* = proc(self: QLabel, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.raises: [], gcsafe.}
@@ -908,7 +908,7 @@ proc fcQLabel_vtable_callback_hideEvent(self: pointer, event: pointer): void {.c
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   vtbl[].hideEvent(self, slotval1)
 
-proc QLabelnativeEvent*(self: gen_qlabel_types.QLabel, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool =
+proc QLabelnativeEvent*(self: gen_qlabel_types.QLabel, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool =
   fcQLabel_virtualbase_nativeEvent(self.h, struct_miqt_string(data: if len(eventType) > 0: addr eventType[0] else: nil, len: csize_t(len(eventType))), message, resultVal)
 
 proc fcQLabel_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
@@ -1320,7 +1320,7 @@ proc fcQLabel_method_callback_hideEvent(self: pointer, event: pointer): void {.c
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   inst.hideEvent(slotval1)
 
-method nativeEvent*(self: VirtualQLabel, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
+method nativeEvent*(self: VirtualQLabel, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
   QLabelnativeEvent(self[], eventType, message, resultVal)
 proc fcQLabel_method_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
   let inst = cast[VirtualQLabel](fcQLabel_vdata(self)[])
@@ -1678,7 +1678,7 @@ proc create*(T: type gen_qlabel_types.QLabel,
   fcQLabel_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qlabel_types.QLabel,
-    text: string,
+    text: openArray[char],
     vtbl: ref QLabelVTable = nil): gen_qlabel_types.QLabel =
   let vtbl = if vtbl == nil: new QLabelVTable else: vtbl
   GC_ref(vtbl)
@@ -1904,7 +1904,7 @@ proc create*(T: type gen_qlabel_types.QLabel,
   fcQLabel_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qlabel_types.QLabel,
-    text: string, parent: gen_qwidget_types.QWidget,
+    text: openArray[char], parent: gen_qwidget_types.QWidget,
     vtbl: ref QLabelVTable = nil): gen_qlabel_types.QLabel =
   let vtbl = if vtbl == nil: new QLabelVTable else: vtbl
   GC_ref(vtbl)
@@ -2017,7 +2017,7 @@ proc create*(T: type gen_qlabel_types.QLabel,
   fcQLabel_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qlabel_types.QLabel,
-    text: string, parent: gen_qwidget_types.QWidget, f: cint,
+    text: openArray[char], parent: gen_qwidget_types.QWidget, f: cint,
     vtbl: ref QLabelVTable = nil): gen_qlabel_types.QLabel =
   let vtbl = if vtbl == nil: new QLabelVTable else: vtbl
   GC_ref(vtbl)
@@ -2193,19 +2193,22 @@ proc create*(T: type gen_qlabel_types.QLabel,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQLabel_new(addr(cQLabel_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQLabel_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qlabel_types.QLabel,
     inst: VirtualQLabel) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQLabel_new2(addr(cQLabel_mvtbl), csize_t(sizeof(pointer)))
   fcQLabel_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qlabel_types.QLabel,
-    text: string,
+    text: openArray[char],
     inst: VirtualQLabel) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQLabel_new3(addr(cQLabel_mvtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
   fcQLabel_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qlabel_types.QLabel,
     parent: gen_qwidget_types.QWidget, f: cint,
@@ -2213,20 +2216,23 @@ proc create*(T: type gen_qlabel_types.QLabel,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQLabel_new4(addr(cQLabel_mvtbl), csize_t(sizeof(pointer)), parent.h, cint(f))
   fcQLabel_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qlabel_types.QLabel,
-    text: string, parent: gen_qwidget_types.QWidget,
+    text: openArray[char], parent: gen_qwidget_types.QWidget,
     inst: VirtualQLabel) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQLabel_new5(addr(cQLabel_mvtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), parent.h)
   fcQLabel_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qlabel_types.QLabel,
-    text: string, parent: gen_qwidget_types.QWidget, f: cint,
+    text: openArray[char], parent: gen_qwidget_types.QWidget, f: cint,
     inst: VirtualQLabel) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQLabel_new6(addr(cQLabel_mvtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), parent.h, cint(f))
   fcQLabel_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qlabel_types.QLabel): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQLabel_staticMetaObject())

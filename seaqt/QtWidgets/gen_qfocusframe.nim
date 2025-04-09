@@ -267,7 +267,7 @@ type QFocusFramedragLeaveEventProc* = proc(self: QFocusFrame, event: gen_qevent_
 type QFocusFramedropEventProc* = proc(self: QFocusFrame, event: gen_qevent_types.QDropEvent): void {.raises: [], gcsafe.}
 type QFocusFrameshowEventProc* = proc(self: QFocusFrame, event: gen_qevent_types.QShowEvent): void {.raises: [], gcsafe.}
 type QFocusFramehideEventProc* = proc(self: QFocusFrame, event: gen_qevent_types.QHideEvent): void {.raises: [], gcsafe.}
-type QFocusFramenativeEventProc* = proc(self: QFocusFrame, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
+type QFocusFramenativeEventProc* = proc(self: QFocusFrame, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
 type QFocusFramechangeEventProc* = proc(self: QFocusFrame, param1: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QFocusFramemetricProc* = proc(self: QFocusFrame, param1: cint): cint {.raises: [], gcsafe.}
 type QFocusFrameinitPainterProc* = proc(self: QFocusFrame, painter: gen_qpainter_types.QPainter): void {.raises: [], gcsafe.}
@@ -687,7 +687,7 @@ proc fcQFocusFrame_vtable_callback_hideEvent(self: pointer, event: pointer): voi
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   vtbl[].hideEvent(self, slotval1)
 
-proc QFocusFramenativeEvent*(self: gen_qfocusframe_types.QFocusFrame, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool =
+proc QFocusFramenativeEvent*(self: gen_qfocusframe_types.QFocusFrame, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool =
   fcQFocusFrame_virtualbase_nativeEvent(self.h, struct_miqt_string(data: if len(eventType) > 0: addr eventType[0] else: nil, len: csize_t(len(eventType))), message, resultVal)
 
 proc fcQFocusFrame_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
@@ -1101,7 +1101,7 @@ proc fcQFocusFrame_method_callback_hideEvent(self: pointer, event: pointer): voi
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   inst.hideEvent(slotval1)
 
-method nativeEvent*(self: VirtualQFocusFrame, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
+method nativeEvent*(self: VirtualQFocusFrame, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
   QFocusFramenativeEvent(self[], eventType, message, resultVal)
 proc fcQFocusFrame_method_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
   let inst = cast[VirtualQFocusFrame](fcQFocusFrame_vdata(self)[])
@@ -1525,12 +1525,14 @@ proc create*(T: type gen_qfocusframe_types.QFocusFrame,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQFocusFrame_new(addr(cQFocusFrame_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQFocusFrame_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qfocusframe_types.QFocusFrame,
     inst: VirtualQFocusFrame) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQFocusFrame_new2(addr(cQFocusFrame_mvtbl), csize_t(sizeof(pointer)))
   fcQFocusFrame_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qfocusframe_types.QFocusFrame): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQFocusFrame_staticMetaObject())

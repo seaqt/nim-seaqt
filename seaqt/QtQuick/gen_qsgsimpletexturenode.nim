@@ -188,4 +188,5 @@ proc create*(T: type gen_qsgsimpletexturenode_types.QSGSimpleTextureNode,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQSGSimpleTextureNode_new(addr(cQSGSimpleTextureNode_mvtbl), csize_t(sizeof(pointer)))
   fcQSGSimpleTextureNode_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 

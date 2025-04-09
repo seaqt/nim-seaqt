@@ -346,18 +346,18 @@ proc create*(T: type gen_qpagesize_types.QPageSize,
   let tmp = gen_qpagesize_types.QPageSize(h: fcQPageSize_new5(other.h), owned: true)
   tmp
 proc create*(T: type gen_qpagesize_types.QPageSize,
-    pointSize: gen_qsize_types.QSize, name: string): gen_qpagesize_types.QPageSize =
+    pointSize: gen_qsize_types.QSize, name: openArray[char]): gen_qpagesize_types.QPageSize =
   let tmp = gen_qpagesize_types.QPageSize(h: fcQPageSize_new6(pointSize.h, struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name)))), owned: true)
   tmp
 proc create*(T: type gen_qpagesize_types.QPageSize,
-    pointSize: gen_qsize_types.QSize, name: string, matchPolicy: cint): gen_qpagesize_types.QPageSize =
+    pointSize: gen_qsize_types.QSize, name: openArray[char], matchPolicy: cint): gen_qpagesize_types.QPageSize =
   let tmp = gen_qpagesize_types.QPageSize(h: fcQPageSize_new7(pointSize.h, struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), cint(matchPolicy)), owned: true)
   tmp
 proc create*(T: type gen_qpagesize_types.QPageSize,
-    size: gen_qsize_types.QSizeF, units: cint, name: string): gen_qpagesize_types.QPageSize =
+    size: gen_qsize_types.QSizeF, units: cint, name: openArray[char]): gen_qpagesize_types.QPageSize =
   let tmp = gen_qpagesize_types.QPageSize(h: fcQPageSize_new8(size.h, cint(units), struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name)))), owned: true)
   tmp
 proc create*(T: type gen_qpagesize_types.QPageSize,
-    size: gen_qsize_types.QSizeF, units: cint, name: string, matchPolicy: cint): gen_qpagesize_types.QPageSize =
+    size: gen_qsize_types.QSizeF, units: cint, name: openArray[char], matchPolicy: cint): gen_qpagesize_types.QPageSize =
   let tmp = gen_qpagesize_types.QPageSize(h: fcQPageSize_new9(size.h, cint(units), struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), cint(matchPolicy)), owned: true)
   tmp

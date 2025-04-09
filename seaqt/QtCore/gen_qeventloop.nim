@@ -471,6 +471,7 @@ proc create*(T: type gen_qeventloop_types.QEventLoop,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQEventLoop_new(addr(cQEventLoop_mvtbl), csize_t(sizeof(pointer)))
   fcQEventLoop_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qeventloop_types.QEventLoop,
     parent: gen_qobject_types.QObject,
@@ -478,6 +479,7 @@ proc create*(T: type gen_qeventloop_types.QEventLoop,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQEventLoop_new2(addr(cQEventLoop_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQEventLoop_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qeventloop_types.QEventLoop): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQEventLoop_staticMetaObject())

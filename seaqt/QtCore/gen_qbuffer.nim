@@ -167,7 +167,7 @@ proc buffer2*(self: gen_qbuffer_types.QBuffer): seq[byte] =
   c_free(v_bytearray.data)
   vx_ret
 
-proc setData*(self: gen_qbuffer_types.QBuffer, data: seq[byte]): void =
+proc setData*(self: gen_qbuffer_types.QBuffer, data: openArray[byte]): void =
   fcQBuffer_setData(self.h, struct_miqt_string(data: if len(data) > 0: addr data[0] else: nil, len: csize_t(len(data))))
 
 proc setData*(self: gen_qbuffer_types.QBuffer, data: cstring, len: cint): void =
@@ -742,7 +742,7 @@ proc fcQBuffer_method_callback_customEvent(self: pointer, event: pointer): void 
 proc setOpenMode*(self: gen_qbuffer_types.QBuffer, openMode: cint): void =
   fcQBuffer_protectedbase_setOpenMode(self.h, cint(openMode))
 
-proc setErrorString*(self: gen_qbuffer_types.QBuffer, errorString: string): void =
+proc setErrorString*(self: gen_qbuffer_types.QBuffer, errorString: openArray[char]): void =
   fcQBuffer_protectedbase_setErrorString(self.h, struct_miqt_string(data: if len(errorString) > 0: addr errorString[0] else: nil, len: csize_t(len(errorString))))
 
 proc sender*(self: gen_qbuffer_types.QBuffer): gen_qobject_types.QObject =
@@ -925,6 +925,7 @@ proc create*(T: type gen_qbuffer_types.QBuffer,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQBuffer_new(addr(cQBuffer_mvtbl), csize_t(sizeof(pointer)))
   fcQBuffer_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qbuffer_types.QBuffer,
     parent: gen_qobject_types.QObject,
@@ -932,6 +933,7 @@ proc create*(T: type gen_qbuffer_types.QBuffer,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQBuffer_new2(addr(cQBuffer_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQBuffer_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qbuffer_types.QBuffer): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQBuffer_staticMetaObject())

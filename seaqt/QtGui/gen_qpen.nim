@@ -106,7 +106,7 @@ proc dashPattern*(self: gen_qpen_types.QPen): seq[float64] =
   c_free(v_ma.data)
   vx_ret
 
-proc setDashPattern*(self: gen_qpen_types.QPen, pattern: seq[float64]): void =
+proc setDashPattern*(self: gen_qpen_types.QPen, pattern: openArray[float64]): void =
   var pattern_CArray = newSeq[float64](len(pattern))
   for i in 0..<len(pattern):
     pattern_CArray[i] = pattern[i]

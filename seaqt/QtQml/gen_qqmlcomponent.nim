@@ -268,7 +268,7 @@ proc loadUrl*(self: gen_qqmlcomponent_types.QQmlComponent, url: gen_qurl_types.Q
 proc loadUrl*(self: gen_qqmlcomponent_types.QQmlComponent, url: gen_qurl_types.QUrl, mode: cint): void =
   fcQQmlComponent_loadUrl2(self.h, url.h, cint(mode))
 
-proc setData*(self: gen_qqmlcomponent_types.QQmlComponent, param1: seq[byte], baseUrl: gen_qurl_types.QUrl): void =
+proc setData*(self: gen_qqmlcomponent_types.QQmlComponent, param1: openArray[byte], baseUrl: gen_qurl_types.QUrl): void =
   fcQQmlComponent_setData(self.h, struct_miqt_string(data: if len(param1) > 0: addr param1[0] else: nil, len: csize_t(len(param1))), baseUrl.h)
 
 proc statusChanged*(self: gen_qqmlcomponent_types.QQmlComponent, param1: cint): void =
@@ -712,7 +712,7 @@ proc create*(T: type gen_qqmlcomponent_types.QQmlComponent,
   fcQQmlComponent_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qqmlcomponent_types.QQmlComponent,
-    param1: gen_qqmlengine_types.QQmlEngine, fileName: string,
+    param1: gen_qqmlengine_types.QQmlEngine, fileName: openArray[char],
     vtbl: ref QQmlComponentVTable = nil): gen_qqmlcomponent_types.QQmlComponent =
   let vtbl = if vtbl == nil: new QQmlComponentVTable else: vtbl
   GC_ref(vtbl)
@@ -749,7 +749,7 @@ proc create*(T: type gen_qqmlcomponent_types.QQmlComponent,
   fcQQmlComponent_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qqmlcomponent_types.QQmlComponent,
-    param1: gen_qqmlengine_types.QQmlEngine, fileName: string, mode: cint,
+    param1: gen_qqmlengine_types.QQmlEngine, fileName: openArray[char], mode: cint,
     vtbl: ref QQmlComponentVTable = nil): gen_qqmlcomponent_types.QQmlComponent =
   let vtbl = if vtbl == nil: new QQmlComponentVTable else: vtbl
   GC_ref(vtbl)
@@ -934,7 +934,7 @@ proc create*(T: type gen_qqmlcomponent_types.QQmlComponent,
   fcQQmlComponent_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qqmlcomponent_types.QQmlComponent,
-    param1: gen_qqmlengine_types.QQmlEngine, fileName: string, parent: gen_qobject_types.QObject,
+    param1: gen_qqmlengine_types.QQmlEngine, fileName: openArray[char], parent: gen_qobject_types.QObject,
     vtbl: ref QQmlComponentVTable = nil): gen_qqmlcomponent_types.QQmlComponent =
   let vtbl = if vtbl == nil: new QQmlComponentVTable else: vtbl
   GC_ref(vtbl)
@@ -971,7 +971,7 @@ proc create*(T: type gen_qqmlcomponent_types.QQmlComponent,
   fcQQmlComponent_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qqmlcomponent_types.QQmlComponent,
-    param1: gen_qqmlengine_types.QQmlEngine, fileName: string, mode: cint, parent: gen_qobject_types.QObject,
+    param1: gen_qqmlengine_types.QQmlEngine, fileName: openArray[char], mode: cint, parent: gen_qobject_types.QObject,
     vtbl: ref QQmlComponentVTable = nil): gen_qqmlcomponent_types.QQmlComponent =
   let vtbl = if vtbl == nil: new QQmlComponentVTable else: vtbl
   GC_ref(vtbl)
@@ -1106,6 +1106,7 @@ proc create*(T: type gen_qqmlcomponent_types.QQmlComponent,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQQmlComponent_new(addr(cQQmlComponent_mvtbl), csize_t(sizeof(pointer)))
   fcQQmlComponent_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qqmlcomponent_types.QQmlComponent,
     param1: gen_qqmlengine_types.QQmlEngine,
@@ -1113,20 +1114,23 @@ proc create*(T: type gen_qqmlcomponent_types.QQmlComponent,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQQmlComponent_new2(addr(cQQmlComponent_mvtbl), csize_t(sizeof(pointer)), param1.h)
   fcQQmlComponent_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qqmlcomponent_types.QQmlComponent,
-    param1: gen_qqmlengine_types.QQmlEngine, fileName: string,
+    param1: gen_qqmlengine_types.QQmlEngine, fileName: openArray[char],
     inst: VirtualQQmlComponent) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQQmlComponent_new3(addr(cQQmlComponent_mvtbl), csize_t(sizeof(pointer)), param1.h, struct_miqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))))
   fcQQmlComponent_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qqmlcomponent_types.QQmlComponent,
-    param1: gen_qqmlengine_types.QQmlEngine, fileName: string, mode: cint,
+    param1: gen_qqmlengine_types.QQmlEngine, fileName: openArray[char], mode: cint,
     inst: VirtualQQmlComponent) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQQmlComponent_new4(addr(cQQmlComponent_mvtbl), csize_t(sizeof(pointer)), param1.h, struct_miqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))), cint(mode))
   fcQQmlComponent_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qqmlcomponent_types.QQmlComponent,
     param1: gen_qqmlengine_types.QQmlEngine, url: gen_qurl_types.QUrl,
@@ -1134,6 +1138,7 @@ proc create*(T: type gen_qqmlcomponent_types.QQmlComponent,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQQmlComponent_new5(addr(cQQmlComponent_mvtbl), csize_t(sizeof(pointer)), param1.h, url.h)
   fcQQmlComponent_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qqmlcomponent_types.QQmlComponent,
     param1: gen_qqmlengine_types.QQmlEngine, url: gen_qurl_types.QUrl, mode: cint,
@@ -1141,6 +1146,7 @@ proc create*(T: type gen_qqmlcomponent_types.QQmlComponent,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQQmlComponent_new6(addr(cQQmlComponent_mvtbl), csize_t(sizeof(pointer)), param1.h, url.h, cint(mode))
   fcQQmlComponent_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qqmlcomponent_types.QQmlComponent,
     parent: gen_qobject_types.QObject,
@@ -1148,6 +1154,7 @@ proc create*(T: type gen_qqmlcomponent_types.QQmlComponent,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQQmlComponent_new7(addr(cQQmlComponent_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQQmlComponent_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qqmlcomponent_types.QQmlComponent,
     param1: gen_qqmlengine_types.QQmlEngine, parent: gen_qobject_types.QObject,
@@ -1155,20 +1162,23 @@ proc create*(T: type gen_qqmlcomponent_types.QQmlComponent,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQQmlComponent_new8(addr(cQQmlComponent_mvtbl), csize_t(sizeof(pointer)), param1.h, parent.h)
   fcQQmlComponent_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qqmlcomponent_types.QQmlComponent,
-    param1: gen_qqmlengine_types.QQmlEngine, fileName: string, parent: gen_qobject_types.QObject,
+    param1: gen_qqmlengine_types.QQmlEngine, fileName: openArray[char], parent: gen_qobject_types.QObject,
     inst: VirtualQQmlComponent) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQQmlComponent_new9(addr(cQQmlComponent_mvtbl), csize_t(sizeof(pointer)), param1.h, struct_miqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))), parent.h)
   fcQQmlComponent_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qqmlcomponent_types.QQmlComponent,
-    param1: gen_qqmlengine_types.QQmlEngine, fileName: string, mode: cint, parent: gen_qobject_types.QObject,
+    param1: gen_qqmlengine_types.QQmlEngine, fileName: openArray[char], mode: cint, parent: gen_qobject_types.QObject,
     inst: VirtualQQmlComponent) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQQmlComponent_new10(addr(cQQmlComponent_mvtbl), csize_t(sizeof(pointer)), param1.h, struct_miqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))), cint(mode), parent.h)
   fcQQmlComponent_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qqmlcomponent_types.QQmlComponent,
     param1: gen_qqmlengine_types.QQmlEngine, url: gen_qurl_types.QUrl, parent: gen_qobject_types.QObject,
@@ -1176,6 +1186,7 @@ proc create*(T: type gen_qqmlcomponent_types.QQmlComponent,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQQmlComponent_new11(addr(cQQmlComponent_mvtbl), csize_t(sizeof(pointer)), param1.h, url.h, parent.h)
   fcQQmlComponent_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qqmlcomponent_types.QQmlComponent,
     param1: gen_qqmlengine_types.QQmlEngine, url: gen_qurl_types.QUrl, mode: cint, parent: gen_qobject_types.QObject,
@@ -1183,6 +1194,7 @@ proc create*(T: type gen_qqmlcomponent_types.QQmlComponent,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQQmlComponent_new12(addr(cQQmlComponent_mvtbl), csize_t(sizeof(pointer)), param1.h, url.h, cint(mode), parent.h)
   fcQQmlComponent_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qqmlcomponent_types.QQmlComponent): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQQmlComponent_staticMetaObject())

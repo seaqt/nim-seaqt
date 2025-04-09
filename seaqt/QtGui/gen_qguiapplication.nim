@@ -211,7 +211,7 @@ proc tr*(_: type gen_qguiapplication_types.QGuiApplication, s: cstring): string 
   c_free(v_ms.data)
   vx_ret
 
-proc setApplicationDisplayName*(_: type gen_qguiapplication_types.QGuiApplication, name: string): void =
+proc setApplicationDisplayName*(_: type gen_qguiapplication_types.QGuiApplication, name: openArray[char]): void =
   fcQGuiApplication_setApplicationDisplayName(struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))))
 
 proc applicationDisplayName*(_: type gen_qguiapplication_types.QGuiApplication): string =
@@ -220,7 +220,7 @@ proc applicationDisplayName*(_: type gen_qguiapplication_types.QGuiApplication):
   c_free(v_ms.data)
   vx_ret
 
-proc setDesktopFileName*(_: type gen_qguiapplication_types.QGuiApplication, name: string): void =
+proc setDesktopFileName*(_: type gen_qguiapplication_types.QGuiApplication, name: openArray[char]): void =
   fcQGuiApplication_setDesktopFileName(struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))))
 
 proc desktopFileName*(_: type gen_qguiapplication_types.QGuiApplication): string =
@@ -1021,6 +1021,7 @@ proc create*(T: type gen_qguiapplication_types.QGuiApplication,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQGuiApplication_new(addr(cQGuiApplication_mvtbl), csize_t(sizeof(pointer)), addr argc, argv)
   fcQGuiApplication_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qguiapplication_types.QGuiApplication,
     param3: cint,
@@ -1034,6 +1035,7 @@ proc create*(T: type gen_qguiapplication_types.QGuiApplication,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQGuiApplication_new2(addr(cQGuiApplication_mvtbl), csize_t(sizeof(pointer)), addr argc, argv, param3)
   fcQGuiApplication_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qguiapplication_types.QGuiApplication): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQGuiApplication_staticMetaObject())

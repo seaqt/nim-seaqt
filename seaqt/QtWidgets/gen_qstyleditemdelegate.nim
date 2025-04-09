@@ -847,6 +847,7 @@ proc create*(T: type gen_qstyleditemdelegate_types.QStyledItemDelegate,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQStyledItemDelegate_new(addr(cQStyledItemDelegate_mvtbl), csize_t(sizeof(pointer)))
   fcQStyledItemDelegate_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qstyleditemdelegate_types.QStyledItemDelegate,
     parent: gen_qobject_types.QObject,
@@ -854,6 +855,7 @@ proc create*(T: type gen_qstyleditemdelegate_types.QStyledItemDelegate,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQStyledItemDelegate_new2(addr(cQStyledItemDelegate_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQStyledItemDelegate_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qstyleditemdelegate_types.QStyledItemDelegate): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQStyledItemDelegate_staticMetaObject())

@@ -62,13 +62,13 @@ proc fcQStringMatcher_new6(uc: pointer, len: int64, cs: cint): ptr cQStringMatch
 proc operatorAssign*(self: gen_qstringmatcher_types.QStringMatcher, other: gen_qstringmatcher_types.QStringMatcher): void =
   fcQStringMatcher_operatorAssign(self.h, other.h)
 
-proc setPattern*(self: gen_qstringmatcher_types.QStringMatcher, pattern: string): void =
+proc setPattern*(self: gen_qstringmatcher_types.QStringMatcher, pattern: openArray[char]): void =
   fcQStringMatcher_setPattern(self.h, struct_miqt_string(data: if len(pattern) > 0: addr pattern[0] else: nil, len: csize_t(len(pattern))))
 
 proc setCaseSensitivity*(self: gen_qstringmatcher_types.QStringMatcher, cs: cint): void =
   fcQStringMatcher_setCaseSensitivity(self.h, cint(cs))
 
-proc indexIn*(self: gen_qstringmatcher_types.QStringMatcher, str: string): int64 =
+proc indexIn*(self: gen_qstringmatcher_types.QStringMatcher, str: openArray[char]): int64 =
   fcQStringMatcher_indexIn(self.h, struct_miqt_string(data: if len(str) > 0: addr str[0] else: nil, len: csize_t(len(str))))
 
 proc indexIn*(self: gen_qstringmatcher_types.QStringMatcher, str: gen_qchar_types.QChar, length: int64): int64 =
@@ -83,7 +83,7 @@ proc pattern*(self: gen_qstringmatcher_types.QStringMatcher): string =
 proc caseSensitivity*(self: gen_qstringmatcher_types.QStringMatcher): cint =
   cint(fcQStringMatcher_caseSensitivity(self.h))
 
-proc indexIn*(self: gen_qstringmatcher_types.QStringMatcher, str: string, fromVal: int64): int64 =
+proc indexIn*(self: gen_qstringmatcher_types.QStringMatcher, str: openArray[char], fromVal: int64): int64 =
   fcQStringMatcher_indexIn22(self.h, struct_miqt_string(data: if len(str) > 0: addr str[0] else: nil, len: csize_t(len(str))), fromVal)
 
 proc indexIn*(self: gen_qstringmatcher_types.QStringMatcher, str: gen_qchar_types.QChar, length: int64, fromVal: int64): int64 =
@@ -93,7 +93,7 @@ proc create*(T: type gen_qstringmatcher_types.QStringMatcher): gen_qstringmatche
   let tmp = gen_qstringmatcher_types.QStringMatcher(h: fcQStringMatcher_new(), owned: true)
   tmp
 proc create*(T: type gen_qstringmatcher_types.QStringMatcher,
-    pattern: string): gen_qstringmatcher_types.QStringMatcher =
+    pattern: openArray[char]): gen_qstringmatcher_types.QStringMatcher =
   let tmp = gen_qstringmatcher_types.QStringMatcher(h: fcQStringMatcher_new2(struct_miqt_string(data: if len(pattern) > 0: addr pattern[0] else: nil, len: csize_t(len(pattern)))), owned: true)
   tmp
 proc create*(T: type gen_qstringmatcher_types.QStringMatcher,
@@ -105,7 +105,7 @@ proc create*(T: type gen_qstringmatcher_types.QStringMatcher,
   let tmp = gen_qstringmatcher_types.QStringMatcher(h: fcQStringMatcher_new4(other.h), owned: true)
   tmp
 proc create*(T: type gen_qstringmatcher_types.QStringMatcher,
-    pattern: string, cs: cint): gen_qstringmatcher_types.QStringMatcher =
+    pattern: openArray[char], cs: cint): gen_qstringmatcher_types.QStringMatcher =
   let tmp = gen_qstringmatcher_types.QStringMatcher(h: fcQStringMatcher_new5(struct_miqt_string(data: if len(pattern) > 0: addr pattern[0] else: nil, len: csize_t(len(pattern))), cint(cs)), owned: true)
   tmp
 proc create*(T: type gen_qstringmatcher_types.QStringMatcher,

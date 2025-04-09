@@ -164,7 +164,7 @@ proc fileName*(self: gen_qsavefile_types.QSaveFile): string =
   c_free(v_ms.data)
   vx_ret
 
-proc setFileName*(self: gen_qsavefile_types.QSaveFile, name: string): void =
+proc setFileName*(self: gen_qsavefile_types.QSaveFile, name: openArray[char]): void =
   fcQSaveFile_setFileName(self.h, struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))))
 
 proc open*(self: gen_qsavefile_types.QSaveFile, flags: cint): bool =
@@ -789,7 +789,7 @@ proc fcQSaveFile_method_callback_disconnectNotify(self: pointer, signal: pointer
 proc setOpenMode*(self: gen_qsavefile_types.QSaveFile, openMode: cint): void =
   fcQSaveFile_protectedbase_setOpenMode(self.h, cint(openMode))
 
-proc setErrorString*(self: gen_qsavefile_types.QSaveFile, errorString: string): void =
+proc setErrorString*(self: gen_qsavefile_types.QSaveFile, errorString: openArray[char]): void =
   fcQSaveFile_protectedbase_setErrorString(self.h, struct_miqt_string(data: if len(errorString) > 0: addr errorString[0] else: nil, len: csize_t(len(errorString))))
 
 proc sender*(self: gen_qsavefile_types.QSaveFile): gen_qobject_types.QObject =
@@ -805,7 +805,7 @@ proc isSignalConnected*(self: gen_qsavefile_types.QSaveFile, signal: gen_qmetaob
   fcQSaveFile_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qsavefile_types.QSaveFile,
-    name: string,
+    name: openArray[char],
     vtbl: ref QSaveFileVTable = nil): gen_qsavefile_types.QSaveFile =
   let vtbl = if vtbl == nil: new QSaveFileVTable else: vtbl
   GC_ref(vtbl)
@@ -946,7 +946,7 @@ proc create*(T: type gen_qsavefile_types.QSaveFile,
   fcQSaveFile_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qsavefile_types.QSaveFile,
-    name: string, parent: gen_qobject_types.QObject,
+    name: openArray[char], parent: gen_qobject_types.QObject,
     vtbl: ref QSaveFileVTable = nil): gen_qsavefile_types.QSaveFile =
   let vtbl = if vtbl == nil: new QSaveFileVTable else: vtbl
   GC_ref(vtbl)
@@ -1125,24 +1125,27 @@ const cQSaveFile_mvtbl = cQSaveFileVTable(
   disconnectNotify: fcQSaveFile_method_callback_disconnectNotify,
 )
 proc create*(T: type gen_qsavefile_types.QSaveFile,
-    name: string,
+    name: openArray[char],
     inst: VirtualQSaveFile) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQSaveFile_new(addr(cQSaveFile_mvtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))))
   fcQSaveFile_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qsavefile_types.QSaveFile,
     inst: VirtualQSaveFile) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQSaveFile_new2(addr(cQSaveFile_mvtbl), csize_t(sizeof(pointer)))
   fcQSaveFile_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qsavefile_types.QSaveFile,
-    name: string, parent: gen_qobject_types.QObject,
+    name: openArray[char], parent: gen_qobject_types.QObject,
     inst: VirtualQSaveFile) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQSaveFile_new3(addr(cQSaveFile_mvtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), parent.h)
   fcQSaveFile_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qsavefile_types.QSaveFile,
     parent: gen_qobject_types.QObject,
@@ -1150,6 +1153,7 @@ proc create*(T: type gen_qsavefile_types.QSaveFile,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQSaveFile_new4(addr(cQSaveFile_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQSaveFile_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qsavefile_types.QSaveFile): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQSaveFile_staticMetaObject())

@@ -109,7 +109,7 @@ proc tr*(_: type gen_qiconengineplugin_types.QIconEnginePlugin, s: cstring): str
   c_free(v_ms.data)
   vx_ret
 
-proc create*(self: gen_qiconengineplugin_types.QIconEnginePlugin, filename: string): gen_qiconengine_types.QIconEngine =
+proc create*(self: gen_qiconengineplugin_types.QIconEnginePlugin, filename: openArray[char]): gen_qiconengine_types.QIconEngine =
   gen_qiconengine_types.QIconEngine(h: fcQIconEnginePlugin_create(self.h, struct_miqt_string(data: if len(filename) > 0: addr filename[0] else: nil, len: csize_t(len(filename)))), owned: false)
 
 proc tr*(_: type gen_qiconengineplugin_types.QIconEnginePlugin, s: cstring, c: cstring): string =
@@ -127,7 +127,7 @@ proc tr*(_: type gen_qiconengineplugin_types.QIconEnginePlugin, s: cstring, c: c
 type QIconEnginePluginmetaObjectProc* = proc(self: QIconEnginePlugin): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QIconEnginePluginmetacastProc* = proc(self: QIconEnginePlugin, param1: cstring): pointer {.raises: [], gcsafe.}
 type QIconEnginePluginmetacallProc* = proc(self: QIconEnginePlugin, param1: cint, param2: cint, param3: pointer): cint {.raises: [], gcsafe.}
-type QIconEnginePlugincreateProc* = proc(self: QIconEnginePlugin, filename: string): gen_qiconengine_types.QIconEngine {.raises: [], gcsafe.}
+type QIconEnginePlugincreateProc* = proc(self: QIconEnginePlugin, filename: openArray[char]): gen_qiconengine_types.QIconEngine {.raises: [], gcsafe.}
 type QIconEnginePlugineventProc* = proc(self: QIconEnginePlugin, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
 type QIconEnginePlugineventFilterProc* = proc(self: QIconEnginePlugin, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
 type QIconEnginePlugintimerEventProc* = proc(self: QIconEnginePlugin, event: gen_qcoreevent_types.QTimerEvent): void {.raises: [], gcsafe.}
@@ -288,7 +288,7 @@ proc fcQIconEnginePlugin_method_callback_metacall(self: pointer, param1: cint, p
   var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
-method create*(self: VirtualQIconEnginePlugin, filename: string): gen_qiconengine_types.QIconEngine {.base.} =
+method create*(self: VirtualQIconEnginePlugin, filename: openArray[char]): gen_qiconengine_types.QIconEngine {.base.} =
   raiseAssert("missing implementation of QIconEnginePlugin_virtualbase_create")
 proc fcQIconEnginePlugin_method_callback_create(self: pointer, filename: struct_miqt_string): pointer {.cdecl.} =
   let inst = cast[VirtualQIconEnginePlugin](fcQIconEnginePlugin_vdata(self)[])
@@ -451,6 +451,7 @@ proc create*(T: type gen_qiconengineplugin_types.QIconEnginePlugin,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQIconEnginePlugin_new(addr(cQIconEnginePlugin_mvtbl), csize_t(sizeof(pointer)))
   fcQIconEnginePlugin_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qiconengineplugin_types.QIconEnginePlugin,
     parent: gen_qobject_types.QObject,
@@ -458,6 +459,7 @@ proc create*(T: type gen_qiconengineplugin_types.QIconEnginePlugin,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQIconEnginePlugin_new2(addr(cQIconEnginePlugin_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQIconEnginePlugin_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qiconengineplugin_types.QIconEnginePlugin): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQIconEnginePlugin_staticMetaObject())

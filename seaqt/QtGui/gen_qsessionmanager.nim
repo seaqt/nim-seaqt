@@ -130,7 +130,7 @@ proc setRestartHint*(self: gen_qsessionmanager_types.QSessionManager, restartHin
 proc restartHint*(self: gen_qsessionmanager_types.QSessionManager): cint =
   cint(fcQSessionManager_restartHint(self.h))
 
-proc setRestartCommand*(self: gen_qsessionmanager_types.QSessionManager, restartCommand: seq[string]): void =
+proc setRestartCommand*(self: gen_qsessionmanager_types.QSessionManager, restartCommand: openArray[string]): void =
   var restartCommand_CArray = newSeq[struct_miqt_string](len(restartCommand))
   for i in 0..<len(restartCommand):
     restartCommand_CArray[i] = struct_miqt_string(data: if len(restartCommand[i]) > 0: addr restartCommand[i][0] else: nil, len: csize_t(len(restartCommand[i])))
@@ -149,7 +149,7 @@ proc restartCommand*(self: gen_qsessionmanager_types.QSessionManager): seq[strin
   c_free(v_ma.data)
   vx_ret
 
-proc setDiscardCommand*(self: gen_qsessionmanager_types.QSessionManager, discardCommand: seq[string]): void =
+proc setDiscardCommand*(self: gen_qsessionmanager_types.QSessionManager, discardCommand: openArray[string]): void =
   var discardCommand_CArray = newSeq[struct_miqt_string](len(discardCommand))
   for i in 0..<len(discardCommand):
     discardCommand_CArray[i] = struct_miqt_string(data: if len(discardCommand[i]) > 0: addr discardCommand[i][0] else: nil, len: csize_t(len(discardCommand[i])))
@@ -168,10 +168,10 @@ proc discardCommand*(self: gen_qsessionmanager_types.QSessionManager): seq[strin
   c_free(v_ma.data)
   vx_ret
 
-proc setManagerProperty*(self: gen_qsessionmanager_types.QSessionManager, name: string, value: string): void =
+proc setManagerProperty*(self: gen_qsessionmanager_types.QSessionManager, name: openArray[char], value: openArray[char]): void =
   fcQSessionManager_setManagerProperty(self.h, struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), struct_miqt_string(data: if len(value) > 0: addr value[0] else: nil, len: csize_t(len(value))))
 
-proc setManagerProperty*(self: gen_qsessionmanager_types.QSessionManager, name: string, value: seq[string]): void =
+proc setManagerProperty*(self: gen_qsessionmanager_types.QSessionManager, name: openArray[char], value: openArray[string]): void =
   var value_CArray = newSeq[struct_miqt_string](len(value))
   for i in 0..<len(value):
     value_CArray[i] = struct_miqt_string(data: if len(value[i]) > 0: addr value[i][0] else: nil, len: csize_t(len(value[i])))

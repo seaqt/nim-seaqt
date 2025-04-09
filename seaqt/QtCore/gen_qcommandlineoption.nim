@@ -84,7 +84,7 @@ proc names*(self: gen_qcommandlineoption_types.QCommandLineOption): seq[string] 
   c_free(v_ma.data)
   vx_ret
 
-proc setValueName*(self: gen_qcommandlineoption_types.QCommandLineOption, name: string): void =
+proc setValueName*(self: gen_qcommandlineoption_types.QCommandLineOption, name: openArray[char]): void =
   fcQCommandLineOption_setValueName(self.h, struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))))
 
 proc valueName*(self: gen_qcommandlineoption_types.QCommandLineOption): string =
@@ -93,7 +93,7 @@ proc valueName*(self: gen_qcommandlineoption_types.QCommandLineOption): string =
   c_free(v_ms.data)
   vx_ret
 
-proc setDescription*(self: gen_qcommandlineoption_types.QCommandLineOption, description: string): void =
+proc setDescription*(self: gen_qcommandlineoption_types.QCommandLineOption, description: openArray[char]): void =
   fcQCommandLineOption_setDescription(self.h, struct_miqt_string(data: if len(description) > 0: addr description[0] else: nil, len: csize_t(len(description))))
 
 proc description*(self: gen_qcommandlineoption_types.QCommandLineOption): string =
@@ -102,10 +102,10 @@ proc description*(self: gen_qcommandlineoption_types.QCommandLineOption): string
   c_free(v_ms.data)
   vx_ret
 
-proc setDefaultValue*(self: gen_qcommandlineoption_types.QCommandLineOption, defaultValue: string): void =
+proc setDefaultValue*(self: gen_qcommandlineoption_types.QCommandLineOption, defaultValue: openArray[char]): void =
   fcQCommandLineOption_setDefaultValue(self.h, struct_miqt_string(data: if len(defaultValue) > 0: addr defaultValue[0] else: nil, len: csize_t(len(defaultValue))))
 
-proc setDefaultValues*(self: gen_qcommandlineoption_types.QCommandLineOption, defaultValues: seq[string]): void =
+proc setDefaultValues*(self: gen_qcommandlineoption_types.QCommandLineOption, defaultValues: openArray[string]): void =
   var defaultValues_CArray = newSeq[struct_miqt_string](len(defaultValues))
   for i in 0..<len(defaultValues):
     defaultValues_CArray[i] = struct_miqt_string(data: if len(defaultValues[i]) > 0: addr defaultValues[i][0] else: nil, len: csize_t(len(defaultValues[i])))
@@ -131,11 +131,11 @@ proc setFlags*(self: gen_qcommandlineoption_types.QCommandLineOption, aflags: ci
   fcQCommandLineOption_setFlags(self.h, cint(aflags))
 
 proc create*(T: type gen_qcommandlineoption_types.QCommandLineOption,
-    name: string): gen_qcommandlineoption_types.QCommandLineOption =
+    name: openArray[char]): gen_qcommandlineoption_types.QCommandLineOption =
   let tmp = gen_qcommandlineoption_types.QCommandLineOption(h: fcQCommandLineOption_new(struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name)))), owned: true)
   tmp
 proc create*(T: type gen_qcommandlineoption_types.QCommandLineOption,
-    names: seq[string]): gen_qcommandlineoption_types.QCommandLineOption =
+    names: openArray[string]): gen_qcommandlineoption_types.QCommandLineOption =
   var names_CArray = newSeq[struct_miqt_string](len(names))
   for i in 0..<len(names):
     names_CArray[i] = struct_miqt_string(data: if len(names[i]) > 0: addr names[i][0] else: nil, len: csize_t(len(names[i])))
@@ -143,11 +143,11 @@ proc create*(T: type gen_qcommandlineoption_types.QCommandLineOption,
   let tmp = gen_qcommandlineoption_types.QCommandLineOption(h: fcQCommandLineOption_new2(struct_miqt_array(len: csize_t(len(names)), data: if len(names) == 0: nil else: addr(names_CArray[0]))), owned: true)
   tmp
 proc create*(T: type gen_qcommandlineoption_types.QCommandLineOption,
-    name: string, description: string): gen_qcommandlineoption_types.QCommandLineOption =
+    name: openArray[char], description: openArray[char]): gen_qcommandlineoption_types.QCommandLineOption =
   let tmp = gen_qcommandlineoption_types.QCommandLineOption(h: fcQCommandLineOption_new3(struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), struct_miqt_string(data: if len(description) > 0: addr description[0] else: nil, len: csize_t(len(description)))), owned: true)
   tmp
 proc create*(T: type gen_qcommandlineoption_types.QCommandLineOption,
-    names: seq[string], description: string): gen_qcommandlineoption_types.QCommandLineOption =
+    names: openArray[string], description: openArray[char]): gen_qcommandlineoption_types.QCommandLineOption =
   var names_CArray = newSeq[struct_miqt_string](len(names))
   for i in 0..<len(names):
     names_CArray[i] = struct_miqt_string(data: if len(names[i]) > 0: addr names[i][0] else: nil, len: csize_t(len(names[i])))
@@ -159,15 +159,15 @@ proc create*(T: type gen_qcommandlineoption_types.QCommandLineOption,
   let tmp = gen_qcommandlineoption_types.QCommandLineOption(h: fcQCommandLineOption_new5(other.h), owned: true)
   tmp
 proc create*(T: type gen_qcommandlineoption_types.QCommandLineOption,
-    name: string, description: string, valueName: string): gen_qcommandlineoption_types.QCommandLineOption =
+    name: openArray[char], description: openArray[char], valueName: openArray[char]): gen_qcommandlineoption_types.QCommandLineOption =
   let tmp = gen_qcommandlineoption_types.QCommandLineOption(h: fcQCommandLineOption_new6(struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), struct_miqt_string(data: if len(description) > 0: addr description[0] else: nil, len: csize_t(len(description))), struct_miqt_string(data: if len(valueName) > 0: addr valueName[0] else: nil, len: csize_t(len(valueName)))), owned: true)
   tmp
 proc create*(T: type gen_qcommandlineoption_types.QCommandLineOption,
-    name: string, description: string, valueName: string, defaultValue: string): gen_qcommandlineoption_types.QCommandLineOption =
+    name: openArray[char], description: openArray[char], valueName: openArray[char], defaultValue: openArray[char]): gen_qcommandlineoption_types.QCommandLineOption =
   let tmp = gen_qcommandlineoption_types.QCommandLineOption(h: fcQCommandLineOption_new7(struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), struct_miqt_string(data: if len(description) > 0: addr description[0] else: nil, len: csize_t(len(description))), struct_miqt_string(data: if len(valueName) > 0: addr valueName[0] else: nil, len: csize_t(len(valueName))), struct_miqt_string(data: if len(defaultValue) > 0: addr defaultValue[0] else: nil, len: csize_t(len(defaultValue)))), owned: true)
   tmp
 proc create*(T: type gen_qcommandlineoption_types.QCommandLineOption,
-    names: seq[string], description: string, valueName: string): gen_qcommandlineoption_types.QCommandLineOption =
+    names: openArray[string], description: openArray[char], valueName: openArray[char]): gen_qcommandlineoption_types.QCommandLineOption =
   var names_CArray = newSeq[struct_miqt_string](len(names))
   for i in 0..<len(names):
     names_CArray[i] = struct_miqt_string(data: if len(names[i]) > 0: addr names[i][0] else: nil, len: csize_t(len(names[i])))
@@ -175,7 +175,7 @@ proc create*(T: type gen_qcommandlineoption_types.QCommandLineOption,
   let tmp = gen_qcommandlineoption_types.QCommandLineOption(h: fcQCommandLineOption_new8(struct_miqt_array(len: csize_t(len(names)), data: if len(names) == 0: nil else: addr(names_CArray[0])), struct_miqt_string(data: if len(description) > 0: addr description[0] else: nil, len: csize_t(len(description))), struct_miqt_string(data: if len(valueName) > 0: addr valueName[0] else: nil, len: csize_t(len(valueName)))), owned: true)
   tmp
 proc create*(T: type gen_qcommandlineoption_types.QCommandLineOption,
-    names: seq[string], description: string, valueName: string, defaultValue: string): gen_qcommandlineoption_types.QCommandLineOption =
+    names: openArray[string], description: openArray[char], valueName: openArray[char], defaultValue: openArray[char]): gen_qcommandlineoption_types.QCommandLineOption =
   var names_CArray = newSeq[struct_miqt_string](len(names))
   for i in 0..<len(names):
     names_CArray[i] = struct_miqt_string(data: if len(names[i]) > 0: addr names[i][0] else: nil, len: csize_t(len(names[i])))

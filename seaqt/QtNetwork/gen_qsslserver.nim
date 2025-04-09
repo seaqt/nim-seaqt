@@ -156,14 +156,14 @@ proc setHandshakeTimeout*(self: gen_qsslserver_types.QSslServer, timeout: cint):
 proc handshakeTimeout*(self: gen_qsslserver_types.QSslServer): cint =
   fcQSslServer_handshakeTimeout(self.h)
 
-proc sslErrors*(self: gen_qsslserver_types.QSslServer, socket: gen_qsslsocket_types.QSslSocket, errors: seq[gen_qsslerror_types.QSslError]): void =
+proc sslErrors*(self: gen_qsslserver_types.QSslServer, socket: gen_qsslsocket_types.QSslSocket, errors: openArray[gen_qsslerror_types.QSslError]): void =
   var errors_CArray = newSeq[pointer](len(errors))
   for i in 0..<len(errors):
     errors_CArray[i] = errors[i].h
 
   fcQSslServer_sslErrors(self.h, socket.h, struct_miqt_array(len: csize_t(len(errors)), data: if len(errors) == 0: nil else: addr(errors_CArray[0])))
 
-type QSslServersslErrorsSlot* = proc(socket: gen_qsslsocket_types.QSslSocket, errors: seq[gen_qsslerror_types.QSslError])
+type QSslServersslErrorsSlot* = proc(socket: gen_qsslsocket_types.QSslSocket, errors: openArray[gen_qsslerror_types.QSslError])
 proc fcQSslServer_slot_callback_sslErrors(slot: int, socket: pointer, errors: struct_miqt_array) {.cdecl.} =
   let nimfunc = cast[ptr QSslServersslErrorsSlot](cast[pointer](slot))
   let slotval1 = gen_qsslsocket_types.QSslSocket(h: socket, owned: false)
@@ -254,10 +254,10 @@ proc onpreSharedKeyAuthenticationRequired*(self: gen_qsslserver_types.QSslServer
   GC_ref(tmp)
   fcQSslServer_connect_preSharedKeyAuthenticationRequired(self.h, cast[int](addr tmp[]), fcQSslServer_slot_callback_preSharedKeyAuthenticationRequired, fcQSslServer_slot_callback_preSharedKeyAuthenticationRequired_release)
 
-proc alertSent*(self: gen_qsslserver_types.QSslServer, socket: gen_qsslsocket_types.QSslSocket, level: cint, typeVal: cint, description: string): void =
+proc alertSent*(self: gen_qsslserver_types.QSslServer, socket: gen_qsslsocket_types.QSslSocket, level: cint, typeVal: cint, description: openArray[char]): void =
   fcQSslServer_alertSent(self.h, socket.h, cint(level), cint(typeVal), struct_miqt_string(data: if len(description) > 0: addr description[0] else: nil, len: csize_t(len(description))))
 
-type QSslServeralertSentSlot* = proc(socket: gen_qsslsocket_types.QSslSocket, level: cint, typeVal: cint, description: string)
+type QSslServeralertSentSlot* = proc(socket: gen_qsslsocket_types.QSslSocket, level: cint, typeVal: cint, description: openArray[char])
 proc fcQSslServer_slot_callback_alertSent(slot: int, socket: pointer, level: cint, typeVal: cint, description: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QSslServeralertSentSlot](cast[pointer](slot))
   let slotval1 = gen_qsslsocket_types.QSslSocket(h: socket, owned: false)
@@ -283,10 +283,10 @@ proc onalertSent*(self: gen_qsslserver_types.QSslServer, slot: QSslServeralertSe
   GC_ref(tmp)
   fcQSslServer_connect_alertSent(self.h, cast[int](addr tmp[]), fcQSslServer_slot_callback_alertSent, fcQSslServer_slot_callback_alertSent_release)
 
-proc alertReceived*(self: gen_qsslserver_types.QSslServer, socket: gen_qsslsocket_types.QSslSocket, level: cint, typeVal: cint, description: string): void =
+proc alertReceived*(self: gen_qsslserver_types.QSslServer, socket: gen_qsslsocket_types.QSslSocket, level: cint, typeVal: cint, description: openArray[char]): void =
   fcQSslServer_alertReceived(self.h, socket.h, cint(level), cint(typeVal), struct_miqt_string(data: if len(description) > 0: addr description[0] else: nil, len: csize_t(len(description))))
 
-type QSslServeralertReceivedSlot* = proc(socket: gen_qsslsocket_types.QSslSocket, level: cint, typeVal: cint, description: string)
+type QSslServeralertReceivedSlot* = proc(socket: gen_qsslsocket_types.QSslSocket, level: cint, typeVal: cint, description: openArray[char])
 proc fcQSslServer_slot_callback_alertReceived(slot: int, socket: pointer, level: cint, typeVal: cint, description: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QSslServeralertReceivedSlot](cast[pointer](slot))
   let slotval1 = gen_qsslsocket_types.QSslSocket(h: socket, owned: false)
@@ -737,6 +737,7 @@ proc create*(T: type gen_qsslserver_types.QSslServer,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQSslServer_new(addr(cQSslServer_mvtbl), csize_t(sizeof(pointer)))
   fcQSslServer_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qsslserver_types.QSslServer,
     parent: gen_qobject_types.QObject,
@@ -744,6 +745,7 @@ proc create*(T: type gen_qsslserver_types.QSslServer,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQSslServer_new2(addr(cQSslServer_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQSslServer_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qsslserver_types.QSslServer): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQSslServer_staticMetaObject())

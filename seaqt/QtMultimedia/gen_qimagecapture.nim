@@ -279,10 +279,10 @@ proc onerrorChanged*(self: gen_qimagecapture_types.QImageCapture, slot: QImageCa
   GC_ref(tmp)
   fcQImageCapture_connect_errorChanged(self.h, cast[int](addr tmp[]), fcQImageCapture_slot_callback_errorChanged, fcQImageCapture_slot_callback_errorChanged_release)
 
-proc errorOccurred*(self: gen_qimagecapture_types.QImageCapture, id: cint, error: cint, errorString: string): void =
+proc errorOccurred*(self: gen_qimagecapture_types.QImageCapture, id: cint, error: cint, errorString: openArray[char]): void =
   fcQImageCapture_errorOccurred(self.h, id, cint(error), struct_miqt_string(data: if len(errorString) > 0: addr errorString[0] else: nil, len: csize_t(len(errorString))))
 
-type QImageCaptureerrorOccurredSlot* = proc(id: cint, error: cint, errorString: string)
+type QImageCaptureerrorOccurredSlot* = proc(id: cint, error: cint, errorString: openArray[char])
 proc fcQImageCapture_slot_callback_errorOccurred(slot: int, id: cint, error: cint, errorString: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QImageCaptureerrorOccurredSlot](cast[pointer](slot))
   let slotval1 = id
@@ -484,10 +484,10 @@ proc onimageAvailable*(self: gen_qimagecapture_types.QImageCapture, slot: QImage
   GC_ref(tmp)
   fcQImageCapture_connect_imageAvailable(self.h, cast[int](addr tmp[]), fcQImageCapture_slot_callback_imageAvailable, fcQImageCapture_slot_callback_imageAvailable_release)
 
-proc imageSaved*(self: gen_qimagecapture_types.QImageCapture, id: cint, fileName: string): void =
+proc imageSaved*(self: gen_qimagecapture_types.QImageCapture, id: cint, fileName: openArray[char]): void =
   fcQImageCapture_imageSaved(self.h, id, struct_miqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))))
 
-type QImageCaptureimageSavedSlot* = proc(id: cint, fileName: string)
+type QImageCaptureimageSavedSlot* = proc(id: cint, fileName: openArray[char])
 proc fcQImageCapture_slot_callback_imageSaved(slot: int, id: cint, fileName: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QImageCaptureimageSavedSlot](cast[pointer](slot))
   let slotval1 = id
@@ -521,7 +521,7 @@ proc tr*(_: type gen_qimagecapture_types.QImageCapture, s: cstring, c: cstring, 
   c_free(v_ms.data)
   vx_ret
 
-proc captureToFile*(self: gen_qimagecapture_types.QImageCapture, location: string): cint =
+proc captureToFile*(self: gen_qimagecapture_types.QImageCapture, location: openArray[char]): cint =
   fcQImageCapture_captureToFile1(self.h, struct_miqt_string(data: if len(location) > 0: addr location[0] else: nil, len: csize_t(len(location))))
 
 type QImageCapturemetaObjectProc* = proc(self: QImageCapture): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
@@ -820,6 +820,7 @@ proc create*(T: type gen_qimagecapture_types.QImageCapture,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQImageCapture_new(addr(cQImageCapture_mvtbl), csize_t(sizeof(pointer)))
   fcQImageCapture_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qimagecapture_types.QImageCapture,
     parent: gen_qobject_types.QObject,
@@ -827,6 +828,7 @@ proc create*(T: type gen_qimagecapture_types.QImageCapture,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQImageCapture_new2(addr(cQImageCapture_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQImageCapture_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qimagecapture_types.QImageCapture): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQImageCapture_staticMetaObject())

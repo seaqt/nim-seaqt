@@ -336,7 +336,7 @@ type QGraphicsProxyWidgetboundingRectProc* = proc(self: QGraphicsProxyWidget): g
 type QGraphicsProxyWidgetshapeProc* = proc(self: QGraphicsProxyWidget): gen_qpainterpath_types.QPainterPath {.raises: [], gcsafe.}
 type QGraphicsProxyWidgetinitStyleOptionProc* = proc(self: QGraphicsProxyWidget, option: gen_qstyleoption_types.QStyleOption): void {.raises: [], gcsafe.}
 type QGraphicsProxyWidgetupdateGeometryProc* = proc(self: QGraphicsProxyWidget): void {.raises: [], gcsafe.}
-type QGraphicsProxyWidgetpropertyChangeProc* = proc(self: QGraphicsProxyWidget, propertyName: string, value: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant {.raises: [], gcsafe.}
+type QGraphicsProxyWidgetpropertyChangeProc* = proc(self: QGraphicsProxyWidget, propertyName: openArray[char], value: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant {.raises: [], gcsafe.}
 type QGraphicsProxyWidgetsceneEventProc* = proc(self: QGraphicsProxyWidget, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
 type QGraphicsProxyWidgetwindowFrameEventProc* = proc(self: QGraphicsProxyWidget, e: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
 type QGraphicsProxyWidgetwindowFrameSectionAtProc* = proc(self: QGraphicsProxyWidget, pos: gen_qpoint_types.QPointF): cint {.raises: [], gcsafe.}
@@ -837,7 +837,7 @@ proc fcQGraphicsProxyWidget_vtable_callback_updateGeometry(self: pointer): void 
   let self = QGraphicsProxyWidget(h: self)
   vtbl[].updateGeometry(self)
 
-proc QGraphicsProxyWidgetpropertyChange*(self: gen_qgraphicsproxywidget_types.QGraphicsProxyWidget, propertyName: string, value: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant =
+proc QGraphicsProxyWidgetpropertyChange*(self: gen_qgraphicsproxywidget_types.QGraphicsProxyWidget, propertyName: openArray[char], value: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant =
   gen_qvariant_types.QVariant(h: fcQGraphicsProxyWidget_virtualbase_propertyChange(self.h, struct_miqt_string(data: if len(propertyName) > 0: addr propertyName[0] else: nil, len: csize_t(len(propertyName))), value.h), owned: true)
 
 proc fcQGraphicsProxyWidget_vtable_callback_propertyChange(self: pointer, propertyName: struct_miqt_string, value: pointer): pointer {.cdecl.} =
@@ -1406,7 +1406,7 @@ proc fcQGraphicsProxyWidget_method_callback_updateGeometry(self: pointer): void 
   let inst = cast[VirtualQGraphicsProxyWidget](fcQGraphicsProxyWidget_vdata(self)[])
   inst.updateGeometry()
 
-method propertyChange*(self: VirtualQGraphicsProxyWidget, propertyName: string, value: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant {.base.} =
+method propertyChange*(self: VirtualQGraphicsProxyWidget, propertyName: openArray[char], value: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant {.base.} =
   QGraphicsProxyWidgetpropertyChange(self[], propertyName, value)
 proc fcQGraphicsProxyWidget_method_callback_propertyChange(self: pointer, propertyName: struct_miqt_string, value: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsProxyWidget](fcQGraphicsProxyWidget_vdata(self)[])
@@ -2152,6 +2152,7 @@ proc create*(T: type gen_qgraphicsproxywidget_types.QGraphicsProxyWidget,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQGraphicsProxyWidget_new(addr(cQGraphicsProxyWidget_mvtbl), csize_t(sizeof(pointer)))
   fcQGraphicsProxyWidget_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qgraphicsproxywidget_types.QGraphicsProxyWidget,
     parent: gen_qgraphicsitem_types.QGraphicsItem,
@@ -2159,6 +2160,7 @@ proc create*(T: type gen_qgraphicsproxywidget_types.QGraphicsProxyWidget,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQGraphicsProxyWidget_new2(addr(cQGraphicsProxyWidget_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQGraphicsProxyWidget_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qgraphicsproxywidget_types.QGraphicsProxyWidget,
     parent: gen_qgraphicsitem_types.QGraphicsItem, wFlags: cint,
@@ -2166,6 +2168,7 @@ proc create*(T: type gen_qgraphicsproxywidget_types.QGraphicsProxyWidget,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQGraphicsProxyWidget_new3(addr(cQGraphicsProxyWidget_mvtbl), csize_t(sizeof(pointer)), parent.h, cint(wFlags))
   fcQGraphicsProxyWidget_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qgraphicsproxywidget_types.QGraphicsProxyWidget): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQGraphicsProxyWidget_staticMetaObject())

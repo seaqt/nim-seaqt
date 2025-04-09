@@ -78,7 +78,7 @@ proc fcQResource_new(): ptr cQResource {.importc: "QResource_new".}
 proc fcQResource_new2(file: struct_miqt_string): ptr cQResource {.importc: "QResource_new2".}
 proc fcQResource_new3(file: struct_miqt_string, locale: pointer): ptr cQResource {.importc: "QResource_new3".}
 
-proc setFileName*(self: gen_qresource_types.QResource, file: string): void =
+proc setFileName*(self: gen_qresource_types.QResource, file: openArray[char]): void =
   fcQResource_setFileName(self.h, struct_miqt_string(data: if len(file) > 0: addr file[0] else: nil, len: csize_t(len(file))))
 
 proc fileName*(self: gen_qresource_types.QResource): string =
@@ -123,10 +123,10 @@ proc uncompressedData*(self: gen_qresource_types.QResource): seq[byte] =
 proc lastModified*(self: gen_qresource_types.QResource): gen_qdatetime_types.QDateTime =
   gen_qdatetime_types.QDateTime(h: fcQResource_lastModified(self.h), owned: true)
 
-proc registerResource*(_: type gen_qresource_types.QResource, rccFilename: string): bool =
+proc registerResource*(_: type gen_qresource_types.QResource, rccFilename: openArray[char]): bool =
   fcQResource_registerResource(struct_miqt_string(data: if len(rccFilename) > 0: addr rccFilename[0] else: nil, len: csize_t(len(rccFilename))))
 
-proc unregisterResource*(_: type gen_qresource_types.QResource, rccFilename: string): bool =
+proc unregisterResource*(_: type gen_qresource_types.QResource, rccFilename: openArray[char]): bool =
   fcQResource_unregisterResource(struct_miqt_string(data: if len(rccFilename) > 0: addr rccFilename[0] else: nil, len: csize_t(len(rccFilename))))
 
 proc registerResource*(_: type gen_qresource_types.QResource, rccData: ptr uint8): bool =
@@ -135,16 +135,16 @@ proc registerResource*(_: type gen_qresource_types.QResource, rccData: ptr uint8
 proc unregisterResource*(_: type gen_qresource_types.QResource, rccData: ptr uint8): bool =
   fcQResource_unregisterResourceWithRccData(rccData)
 
-proc registerResource*(_: type gen_qresource_types.QResource, rccFilename: string, resourceRoot: string): bool =
+proc registerResource*(_: type gen_qresource_types.QResource, rccFilename: openArray[char], resourceRoot: openArray[char]): bool =
   fcQResource_registerResource2(struct_miqt_string(data: if len(rccFilename) > 0: addr rccFilename[0] else: nil, len: csize_t(len(rccFilename))), struct_miqt_string(data: if len(resourceRoot) > 0: addr resourceRoot[0] else: nil, len: csize_t(len(resourceRoot))))
 
-proc unregisterResource*(_: type gen_qresource_types.QResource, rccFilename: string, resourceRoot: string): bool =
+proc unregisterResource*(_: type gen_qresource_types.QResource, rccFilename: openArray[char], resourceRoot: openArray[char]): bool =
   fcQResource_unregisterResource2(struct_miqt_string(data: if len(rccFilename) > 0: addr rccFilename[0] else: nil, len: csize_t(len(rccFilename))), struct_miqt_string(data: if len(resourceRoot) > 0: addr resourceRoot[0] else: nil, len: csize_t(len(resourceRoot))))
 
-proc registerResource*(_: type gen_qresource_types.QResource, rccData: ptr uint8, resourceRoot: string): bool =
+proc registerResource*(_: type gen_qresource_types.QResource, rccData: ptr uint8, resourceRoot: openArray[char]): bool =
   fcQResource_registerResource22(rccData, struct_miqt_string(data: if len(resourceRoot) > 0: addr resourceRoot[0] else: nil, len: csize_t(len(resourceRoot))))
 
-proc unregisterResource*(_: type gen_qresource_types.QResource, rccData: ptr uint8, resourceRoot: string): bool =
+proc unregisterResource*(_: type gen_qresource_types.QResource, rccData: ptr uint8, resourceRoot: openArray[char]): bool =
   fcQResource_unregisterResource22(rccData, struct_miqt_string(data: if len(resourceRoot) > 0: addr resourceRoot[0] else: nil, len: csize_t(len(resourceRoot))))
 
 proc isDir*(self: gen_qresource_types.QResource): bool =
@@ -169,10 +169,10 @@ proc create*(T: type gen_qresource_types.QResource): gen_qresource_types.QResour
   let tmp = gen_qresource_types.QResource(h: fcQResource_new(), owned: true)
   tmp
 proc create*(T: type gen_qresource_types.QResource,
-    file: string): gen_qresource_types.QResource =
+    file: openArray[char]): gen_qresource_types.QResource =
   let tmp = gen_qresource_types.QResource(h: fcQResource_new2(struct_miqt_string(data: if len(file) > 0: addr file[0] else: nil, len: csize_t(len(file)))), owned: true)
   tmp
 proc create*(T: type gen_qresource_types.QResource,
-    file: string, locale: gen_qlocale_types.QLocale): gen_qresource_types.QResource =
+    file: openArray[char], locale: gen_qlocale_types.QLocale): gen_qresource_types.QResource =
   let tmp = gen_qresource_types.QResource(h: fcQResource_new3(struct_miqt_string(data: if len(file) > 0: addr file[0] else: nil, len: csize_t(len(file))), locale.h), owned: true)
   tmp

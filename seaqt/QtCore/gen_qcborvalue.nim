@@ -465,7 +465,7 @@ proc toMap*(self: gen_qcborvalue_types.QCborValue): gen_qcbormap_types.QCborMap 
 proc toMap*(self: gen_qcborvalue_types.QCborValue, defaultValue: gen_qcbormap_types.QCborMap): gen_qcbormap_types.QCborMap =
   gen_qcbormap_types.QCborMap(h: fcQCborValue_toMapWithDefaultValue(self.h, defaultValue.h), owned: true)
 
-proc operatorSubscript*(self: gen_qcborvalue_types.QCborValue, key: string): gen_qcborvalue_types.QCborValue =
+proc operatorSubscript*(self: gen_qcborvalue_types.QCborValue, key: openArray[char]): gen_qcborvalue_types.QCborValue =
   gen_qcborvalue_types.QCborValue(h: fcQCborValue_operatorSubscript(self.h, struct_miqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key)))), owned: true)
 
 proc operatorSubscript*(self: gen_qcborvalue_types.QCborValue, key: clonglong): gen_qcborvalue_types.QCborValue =
@@ -474,7 +474,7 @@ proc operatorSubscript*(self: gen_qcborvalue_types.QCborValue, key: clonglong): 
 proc operatorSubscript2*(self: gen_qcborvalue_types.QCborValue, key: clonglong): gen_qcborvalue_types.QCborValueRef =
   gen_qcborvalue_types.QCborValueRef(h: fcQCborValue_operatorSubscript3(self.h, key), owned: true)
 
-proc operatorSubscript2*(self: gen_qcborvalue_types.QCborValue, key: string): gen_qcborvalue_types.QCborValueRef =
+proc operatorSubscript2*(self: gen_qcborvalue_types.QCborValue, key: openArray[char]): gen_qcborvalue_types.QCborValueRef =
   gen_qcborvalue_types.QCborValueRef(h: fcQCborValue_operatorSubscript5(self.h, struct_miqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key)))), owned: true)
 
 proc compare*(self: gen_qcborvalue_types.QCborValue, other: gen_qcborvalue_types.QCborValue): cint =
@@ -504,7 +504,7 @@ proc toJsonValue*(self: gen_qcborvalue_types.QCborValue): gen_qjsonvalue_types.Q
 proc fromCbor*(_: type gen_qcborvalue_types.QCborValue, reader: gen_qcborstreamreader_types.QCborStreamReader): gen_qcborvalue_types.QCborValue =
   gen_qcborvalue_types.QCborValue(h: fcQCborValue_fromCbor(reader.h), owned: true)
 
-proc fromCbor*(_: type gen_qcborvalue_types.QCborValue, ba: seq[byte]): gen_qcborvalue_types.QCborValue =
+proc fromCbor*(_: type gen_qcborvalue_types.QCborValue, ba: openArray[byte]): gen_qcborvalue_types.QCborValue =
   gen_qcborvalue_types.QCborValue(h: fcQCborValue_fromCborWithBa(struct_miqt_string(data: if len(ba) > 0: addr ba[0] else: nil, len: csize_t(len(ba)))), owned: true)
 
 proc fromCbor*(_: type gen_qcborvalue_types.QCborValue, data: cstring, len: int64): gen_qcborvalue_types.QCborValue =
@@ -546,13 +546,13 @@ proc tag*(self: gen_qcborvalue_types.QCborValue, defaultValue: cint): cint =
 proc taggedValue*(self: gen_qcborvalue_types.QCborValue, defaultValue: gen_qcborvalue_types.QCborValue): gen_qcborvalue_types.QCborValue =
   gen_qcborvalue_types.QCborValue(h: fcQCborValue_taggedValue1(self.h, defaultValue.h), owned: true)
 
-proc toByteArray*(self: gen_qcborvalue_types.QCborValue, defaultValue: seq[byte]): seq[byte] =
+proc toByteArray*(self: gen_qcborvalue_types.QCborValue, defaultValue: openArray[byte]): seq[byte] =
   var v_bytearray = fcQCborValue_toByteArray1(self.h, struct_miqt_string(data: if len(defaultValue) > 0: addr defaultValue[0] else: nil, len: csize_t(len(defaultValue))))
   var vx_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](v_bytearray.data), 0, int(v_bytearray.len)-1))
   c_free(v_bytearray.data)
   vx_ret
 
-proc toString*(self: gen_qcborvalue_types.QCborValue, defaultValue: string): string =
+proc toString*(self: gen_qcborvalue_types.QCborValue, defaultValue: openArray[char]): string =
   let v_ms = fcQCborValue_toString1(self.h, struct_miqt_string(data: if len(defaultValue) > 0: addr defaultValue[0] else: nil, len: csize_t(len(defaultValue))))
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
@@ -570,7 +570,7 @@ proc toRegularExpression*(self: gen_qcborvalue_types.QCborValue, defaultValue: g
 proc toUuid*(self: gen_qcborvalue_types.QCborValue, defaultValue: gen_quuid_types.QUuid): gen_quuid_types.QUuid =
   gen_quuid_types.QUuid(h: fcQCborValue_toUuid1(self.h, defaultValue.h), owned: true)
 
-proc fromCbor*(_: type gen_qcborvalue_types.QCborValue, ba: seq[byte], error: gen_qcborvalue_types.QCborParserError): gen_qcborvalue_types.QCborValue =
+proc fromCbor*(_: type gen_qcborvalue_types.QCborValue, ba: openArray[byte], error: gen_qcborvalue_types.QCborParserError): gen_qcborvalue_types.QCborValue =
   gen_qcborvalue_types.QCborValue(h: fcQCborValue_fromCbor22(struct_miqt_string(data: if len(ba) > 0: addr ba[0] else: nil, len: csize_t(len(ba))), error.h), owned: true)
 
 proc fromCbor*(_: type gen_qcborvalue_types.QCborValue, data: cstring, len: int64, error: gen_qcborvalue_types.QCborParserError): gen_qcborvalue_types.QCborValue =
@@ -626,11 +626,11 @@ proc create3*(T: type gen_qcborvalue_types.QCborValue,
   let tmp = gen_qcborvalue_types.QCborValue(h: fcQCborValue_new8(cint(st)), owned: true)
   tmp
 proc create*(T: type gen_qcborvalue_types.QCborValue,
-    ba: seq[byte]): gen_qcborvalue_types.QCborValue =
+    ba: openArray[byte]): gen_qcborvalue_types.QCborValue =
   let tmp = gen_qcborvalue_types.QCborValue(h: fcQCborValue_new9(struct_miqt_string(data: if len(ba) > 0: addr ba[0] else: nil, len: csize_t(len(ba)))), owned: true)
   tmp
 proc create*(T: type gen_qcborvalue_types.QCborValue,
-    s: string): gen_qcborvalue_types.QCborValue =
+    s: openArray[char]): gen_qcborvalue_types.QCborValue =
   let tmp = gen_qcborvalue_types.QCborValue(h: fcQCborValue_new10(struct_miqt_string(data: if len(s) > 0: addr s[0] else: nil, len: csize_t(len(s)))), owned: true)
   tmp
 proc create*(T: type gen_qcborvalue_types.QCborValue,
@@ -803,7 +803,7 @@ proc toMap*(self: gen_qcborvalue_types.QCborValueConstRef): gen_qcbormap_types.Q
 proc toMap*(self: gen_qcborvalue_types.QCborValueConstRef, m: gen_qcbormap_types.QCborMap): gen_qcbormap_types.QCborMap =
   gen_qcbormap_types.QCborMap(h: fcQCborValueConstRef_toMapWithQCborMap(self.h, m.h), owned: true)
 
-proc operatorSubscript*(self: gen_qcborvalue_types.QCborValueConstRef, key: string): gen_qcborvalue_types.QCborValue =
+proc operatorSubscript*(self: gen_qcborvalue_types.QCborValueConstRef, key: openArray[char]): gen_qcborvalue_types.QCborValue =
   gen_qcborvalue_types.QCborValue(h: fcQCborValueConstRef_operatorSubscript(self.h, struct_miqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key)))), owned: true)
 
 proc operatorSubscript*(self: gen_qcborvalue_types.QCborValueConstRef, key: clonglong): gen_qcborvalue_types.QCborValue =
@@ -860,13 +860,13 @@ proc toBool*(self: gen_qcborvalue_types.QCborValueConstRef, defaultValue: bool):
 proc toDouble*(self: gen_qcborvalue_types.QCborValueConstRef, defaultValue: float64): float64 =
   fcQCborValueConstRef_toDouble1(self.h, defaultValue)
 
-proc toByteArray*(self: gen_qcborvalue_types.QCborValueConstRef, defaultValue: seq[byte]): seq[byte] =
+proc toByteArray*(self: gen_qcborvalue_types.QCborValueConstRef, defaultValue: openArray[byte]): seq[byte] =
   var v_bytearray = fcQCborValueConstRef_toByteArray1(self.h, struct_miqt_string(data: if len(defaultValue) > 0: addr defaultValue[0] else: nil, len: csize_t(len(defaultValue))))
   var vx_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](v_bytearray.data), 0, int(v_bytearray.len)-1))
   c_free(v_bytearray.data)
   vx_ret
 
-proc toString*(self: gen_qcborvalue_types.QCborValueConstRef, defaultValue: string): string =
+proc toString*(self: gen_qcborvalue_types.QCborValueConstRef, defaultValue: openArray[char]): string =
   let v_ms = fcQCborValueConstRef_toString1(self.h, struct_miqt_string(data: if len(defaultValue) > 0: addr defaultValue[0] else: nil, len: csize_t(len(defaultValue))))
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
@@ -915,7 +915,7 @@ proc operatorAssign*(self: gen_qcborvalue_types.QCborValueRef, other: gen_qcborv
 proc operatorSubscript*(self: gen_qcborvalue_types.QCborValueRef, key: clonglong): gen_qcborvalue_types.QCborValueRef =
   gen_qcborvalue_types.QCborValueRef(h: fcQCborValueRef_operatorSubscript(self.h, key), owned: true)
 
-proc operatorSubscript*(self: gen_qcborvalue_types.QCborValueRef, key: string): gen_qcborvalue_types.QCborValueRef =
+proc operatorSubscript*(self: gen_qcborvalue_types.QCborValueRef, key: openArray[char]): gen_qcborvalue_types.QCborValueRef =
   gen_qcborvalue_types.QCborValueRef(h: fcQCborValueRef_operatorSubscript2(self.h, struct_miqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key)))), owned: true)
 
 proc ToQCborValue*(self: gen_qcborvalue_types.QCborValueRef): gen_qcborvalue_types.QCborValue =
@@ -1038,7 +1038,7 @@ proc toMap*(self: gen_qcborvalue_types.QCborValueRef): gen_qcbormap_types.QCborM
 proc toMap*(self: gen_qcborvalue_types.QCborValueRef, m: gen_qcbormap_types.QCborMap): gen_qcbormap_types.QCborMap =
   gen_qcbormap_types.QCborMap(h: fcQCborValueRef_toMapWithQCborMap(self.h, m.h), owned: true)
 
-proc operatorSubscript2*(self: gen_qcborvalue_types.QCborValueRef, key: string): gen_qcborvalue_types.QCborValue =
+proc operatorSubscript2*(self: gen_qcborvalue_types.QCborValueRef, key: openArray[char]): gen_qcborvalue_types.QCborValue =
   gen_qcborvalue_types.QCborValue(h: fcQCborValueRef_operatorSubscript3(self.h, struct_miqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key)))), owned: true)
 
 proc operatorSubscript2*(self: gen_qcborvalue_types.QCborValueRef, key: clonglong): gen_qcborvalue_types.QCborValue =
@@ -1095,13 +1095,13 @@ proc toBool*(self: gen_qcborvalue_types.QCborValueRef, defaultValue: bool): bool
 proc toDouble*(self: gen_qcborvalue_types.QCborValueRef, defaultValue: float64): float64 =
   fcQCborValueRef_toDouble1(self.h, defaultValue)
 
-proc toByteArray*(self: gen_qcborvalue_types.QCborValueRef, defaultValue: seq[byte]): seq[byte] =
+proc toByteArray*(self: gen_qcborvalue_types.QCborValueRef, defaultValue: openArray[byte]): seq[byte] =
   var v_bytearray = fcQCborValueRef_toByteArray1(self.h, struct_miqt_string(data: if len(defaultValue) > 0: addr defaultValue[0] else: nil, len: csize_t(len(defaultValue))))
   var vx_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](v_bytearray.data), 0, int(v_bytearray.len)-1))
   c_free(v_bytearray.data)
   vx_ret
 
-proc toString*(self: gen_qcborvalue_types.QCborValueRef, defaultValue: string): string =
+proc toString*(self: gen_qcborvalue_types.QCborValueRef, defaultValue: openArray[char]): string =
   let v_ms = fcQCborValueRef_toString1(self.h, struct_miqt_string(data: if len(defaultValue) > 0: addr defaultValue[0] else: nil, len: csize_t(len(defaultValue))))
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)

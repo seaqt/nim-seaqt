@@ -107,7 +107,7 @@ proc tr*(_: type gen_qgenericplugin_types.QGenericPlugin, s: cstring): string =
   c_free(v_ms.data)
   vx_ret
 
-proc create*(self: gen_qgenericplugin_types.QGenericPlugin, name: string, spec: string): gen_qobject_types.QObject =
+proc create*(self: gen_qgenericplugin_types.QGenericPlugin, name: openArray[char], spec: openArray[char]): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQGenericPlugin_create(self.h, struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), struct_miqt_string(data: if len(spec) > 0: addr spec[0] else: nil, len: csize_t(len(spec)))), owned: false)
 
 proc tr*(_: type gen_qgenericplugin_types.QGenericPlugin, s: cstring, c: cstring): string =
@@ -125,7 +125,7 @@ proc tr*(_: type gen_qgenericplugin_types.QGenericPlugin, s: cstring, c: cstring
 type QGenericPluginmetaObjectProc* = proc(self: QGenericPlugin): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QGenericPluginmetacastProc* = proc(self: QGenericPlugin, param1: cstring): pointer {.raises: [], gcsafe.}
 type QGenericPluginmetacallProc* = proc(self: QGenericPlugin, param1: cint, param2: cint, param3: pointer): cint {.raises: [], gcsafe.}
-type QGenericPlugincreateProc* = proc(self: QGenericPlugin, name: string, spec: string): gen_qobject_types.QObject {.raises: [], gcsafe.}
+type QGenericPlugincreateProc* = proc(self: QGenericPlugin, name: openArray[char], spec: openArray[char]): gen_qobject_types.QObject {.raises: [], gcsafe.}
 type QGenericPlugineventProc* = proc(self: QGenericPlugin, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
 type QGenericPlugineventFilterProc* = proc(self: QGenericPlugin, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
 type QGenericPlugintimerEventProc* = proc(self: QGenericPlugin, event: gen_qcoreevent_types.QTimerEvent): void {.raises: [], gcsafe.}
@@ -290,7 +290,7 @@ proc fcQGenericPlugin_method_callback_metacall(self: pointer, param1: cint, para
   var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
-method create*(self: VirtualQGenericPlugin, name: string, spec: string): gen_qobject_types.QObject {.base.} =
+method create*(self: VirtualQGenericPlugin, name: openArray[char], spec: openArray[char]): gen_qobject_types.QObject {.base.} =
   raiseAssert("missing implementation of QGenericPlugin_virtualbase_create")
 proc fcQGenericPlugin_method_callback_create(self: pointer, name: struct_miqt_string, spec: struct_miqt_string): pointer {.cdecl.} =
   let inst = cast[VirtualQGenericPlugin](fcQGenericPlugin_vdata(self)[])
@@ -457,6 +457,7 @@ proc create*(T: type gen_qgenericplugin_types.QGenericPlugin,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQGenericPlugin_new(addr(cQGenericPlugin_mvtbl), csize_t(sizeof(pointer)))
   fcQGenericPlugin_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qgenericplugin_types.QGenericPlugin,
     parent: gen_qobject_types.QObject,
@@ -464,6 +465,7 @@ proc create*(T: type gen_qgenericplugin_types.QGenericPlugin,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQGenericPlugin_new2(addr(cQGenericPlugin_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQGenericPlugin_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qgenericplugin_types.QGenericPlugin): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQGenericPlugin_staticMetaObject())

@@ -141,7 +141,7 @@ proc rawHeaders*(self: gen_qabstractnetworkcache_types.QNetworkCacheMetaData): s
   c_free(v_ma.data)
   vx_ret
 
-proc setRawHeaders*(self: gen_qabstractnetworkcache_types.QNetworkCacheMetaData, headers: seq[tuple[first: seq[byte], second: seq[byte]]]): void =
+proc setRawHeaders*(self: gen_qabstractnetworkcache_types.QNetworkCacheMetaData, headers: openArray[tuple[first: seq[byte], second: seq[byte]]]): void =
   var headers_CArray = newSeq[struct_miqt_map](len(headers))
   for i in 0..<len(headers):
     var headers_i_CArray_First: struct_miqt_string

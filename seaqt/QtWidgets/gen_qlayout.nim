@@ -1255,12 +1255,14 @@ proc create*(T: type gen_qlayout_types.QLayout,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQLayout_new(addr(cQLayout_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQLayout_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qlayout_types.QLayout,
     inst: VirtualQLayout) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQLayout_new2(addr(cQLayout_mvtbl), csize_t(sizeof(pointer)))
   fcQLayout_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qlayout_types.QLayout): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQLayout_staticMetaObject())

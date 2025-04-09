@@ -98,7 +98,7 @@ proc title*(self: gen_qsvggenerator_types.QSvgGenerator): string =
   c_free(v_ms.data)
   vx_ret
 
-proc setTitle*(self: gen_qsvggenerator_types.QSvgGenerator, title: string): void =
+proc setTitle*(self: gen_qsvggenerator_types.QSvgGenerator, title: openArray[char]): void =
   fcQSvgGenerator_setTitle(self.h, struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))))
 
 proc description*(self: gen_qsvggenerator_types.QSvgGenerator): string =
@@ -107,7 +107,7 @@ proc description*(self: gen_qsvggenerator_types.QSvgGenerator): string =
   c_free(v_ms.data)
   vx_ret
 
-proc setDescription*(self: gen_qsvggenerator_types.QSvgGenerator, description: string): void =
+proc setDescription*(self: gen_qsvggenerator_types.QSvgGenerator, description: openArray[char]): void =
   fcQSvgGenerator_setDescription(self.h, struct_miqt_string(data: if len(description) > 0: addr description[0] else: nil, len: csize_t(len(description))))
 
 proc size*(self: gen_qsvggenerator_types.QSvgGenerator): gen_qsize_types.QSize =
@@ -134,7 +134,7 @@ proc fileName*(self: gen_qsvggenerator_types.QSvgGenerator): string =
   c_free(v_ms.data)
   vx_ret
 
-proc setFileName*(self: gen_qsvggenerator_types.QSvgGenerator, fileName: string): void =
+proc setFileName*(self: gen_qsvggenerator_types.QSvgGenerator, fileName: openArray[char]): void =
   fcQSvgGenerator_setFileName(self.h, struct_miqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))))
 
 proc outputDevice*(self: gen_qsvggenerator_types.QSvgGenerator): gen_qiodevice_types.QIODevice =
@@ -314,4 +314,5 @@ proc create*(T: type gen_qsvggenerator_types.QSvgGenerator,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQSvgGenerator_new(addr(cQSvgGenerator_mvtbl), csize_t(sizeof(pointer)))
   fcQSvgGenerator_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 

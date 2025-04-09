@@ -137,7 +137,7 @@ proc cookiesForUrl*(self: gen_qnetworkcookiejar_types.QNetworkCookieJar, url: ge
   c_free(v_ma.data)
   vx_ret
 
-proc setCookiesFromUrl*(self: gen_qnetworkcookiejar_types.QNetworkCookieJar, cookieList: seq[gen_qnetworkcookie_types.QNetworkCookie], url: gen_qurl_types.QUrl): bool =
+proc setCookiesFromUrl*(self: gen_qnetworkcookiejar_types.QNetworkCookieJar, cookieList: openArray[gen_qnetworkcookie_types.QNetworkCookie], url: gen_qurl_types.QUrl): bool =
   var cookieList_CArray = newSeq[pointer](len(cookieList))
   for i in 0..<len(cookieList):
     cookieList_CArray[i] = cookieList[i].h
@@ -169,7 +169,7 @@ type QNetworkCookieJarmetaObjectProc* = proc(self: QNetworkCookieJar): gen_qobje
 type QNetworkCookieJarmetacastProc* = proc(self: QNetworkCookieJar, param1: cstring): pointer {.raises: [], gcsafe.}
 type QNetworkCookieJarmetacallProc* = proc(self: QNetworkCookieJar, param1: cint, param2: cint, param3: pointer): cint {.raises: [], gcsafe.}
 type QNetworkCookieJarcookiesForUrlProc* = proc(self: QNetworkCookieJar, url: gen_qurl_types.QUrl): seq[gen_qnetworkcookie_types.QNetworkCookie] {.raises: [], gcsafe.}
-type QNetworkCookieJarsetCookiesFromUrlProc* = proc(self: QNetworkCookieJar, cookieList: seq[gen_qnetworkcookie_types.QNetworkCookie], url: gen_qurl_types.QUrl): bool {.raises: [], gcsafe.}
+type QNetworkCookieJarsetCookiesFromUrlProc* = proc(self: QNetworkCookieJar, cookieList: openArray[gen_qnetworkcookie_types.QNetworkCookie], url: gen_qurl_types.QUrl): bool {.raises: [], gcsafe.}
 type QNetworkCookieJarinsertCookieProc* = proc(self: QNetworkCookieJar, cookie: gen_qnetworkcookie_types.QNetworkCookie): bool {.raises: [], gcsafe.}
 type QNetworkCookieJarupdateCookieProc* = proc(self: QNetworkCookieJar, cookie: gen_qnetworkcookie_types.QNetworkCookie): bool {.raises: [], gcsafe.}
 type QNetworkCookieJardeleteCookieProc* = proc(self: QNetworkCookieJar, cookie: gen_qnetworkcookie_types.QNetworkCookie): bool {.raises: [], gcsafe.}
@@ -256,7 +256,7 @@ proc fcQNetworkCookieJar_vtable_callback_cookiesForUrl(self: pointer, url: point
 
   struct_miqt_array(len: csize_t(len(virtualReturn)), data: if len(virtualReturn) == 0: nil else: addr(virtualReturn_CArray[0]))
 
-proc QNetworkCookieJarsetCookiesFromUrl*(self: gen_qnetworkcookiejar_types.QNetworkCookieJar, cookieList: seq[gen_qnetworkcookie_types.QNetworkCookie], url: gen_qurl_types.QUrl): bool =
+proc QNetworkCookieJarsetCookiesFromUrl*(self: gen_qnetworkcookiejar_types.QNetworkCookieJar, cookieList: openArray[gen_qnetworkcookie_types.QNetworkCookie], url: gen_qurl_types.QUrl): bool =
   var cookieList_CArray = newSeq[pointer](len(cookieList))
   for i in 0..<len(cookieList):
     cookieList_CArray[i] = cookieList[i].h
@@ -423,7 +423,7 @@ proc fcQNetworkCookieJar_method_callback_cookiesForUrl(self: pointer, url: point
 
   struct_miqt_array(len: csize_t(len(virtualReturn)), data: if len(virtualReturn) == 0: nil else: addr(virtualReturn_CArray[0]))
 
-method setCookiesFromUrl*(self: VirtualQNetworkCookieJar, cookieList: seq[gen_qnetworkcookie_types.QNetworkCookie], url: gen_qurl_types.QUrl): bool {.base.} =
+method setCookiesFromUrl*(self: VirtualQNetworkCookieJar, cookieList: openArray[gen_qnetworkcookie_types.QNetworkCookie], url: gen_qurl_types.QUrl): bool {.base.} =
   QNetworkCookieJarsetCookiesFromUrl(self[], cookieList, url)
 proc fcQNetworkCookieJar_method_callback_setCookiesFromUrl(self: pointer, cookieList: struct_miqt_array, url: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQNetworkCookieJar](fcQNetworkCookieJar_vdata(self)[])
@@ -532,7 +532,7 @@ proc allCookies*(self: gen_qnetworkcookiejar_types.QNetworkCookieJar): seq[gen_q
   c_free(v_ma.data)
   vx_ret
 
-proc setAllCookies*(self: gen_qnetworkcookiejar_types.QNetworkCookieJar, cookieList: seq[gen_qnetworkcookie_types.QNetworkCookie]): void =
+proc setAllCookies*(self: gen_qnetworkcookiejar_types.QNetworkCookieJar, cookieList: openArray[gen_qnetworkcookie_types.QNetworkCookie]): void =
   var cookieList_CArray = newSeq[pointer](len(cookieList))
   for i in 0..<len(cookieList):
     cookieList_CArray[i] = cookieList[i].h
@@ -664,6 +664,7 @@ proc create*(T: type gen_qnetworkcookiejar_types.QNetworkCookieJar,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQNetworkCookieJar_new(addr(cQNetworkCookieJar_mvtbl), csize_t(sizeof(pointer)))
   fcQNetworkCookieJar_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qnetworkcookiejar_types.QNetworkCookieJar,
     parent: gen_qobject_types.QObject,
@@ -671,6 +672,7 @@ proc create*(T: type gen_qnetworkcookiejar_types.QNetworkCookieJar,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQNetworkCookieJar_new2(addr(cQNetworkCookieJar_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQNetworkCookieJar_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qnetworkcookiejar_types.QNetworkCookieJar): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQNetworkCookieJar_staticMetaObject())

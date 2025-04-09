@@ -258,14 +258,14 @@ proc importPathList*(self: gen_qqmlengine_types.QQmlEngine): seq[string] =
   c_free(v_ma.data)
   vx_ret
 
-proc setImportPathList*(self: gen_qqmlengine_types.QQmlEngine, paths: seq[string]): void =
+proc setImportPathList*(self: gen_qqmlengine_types.QQmlEngine, paths: openArray[string]): void =
   var paths_CArray = newSeq[struct_miqt_string](len(paths))
   for i in 0..<len(paths):
     paths_CArray[i] = struct_miqt_string(data: if len(paths[i]) > 0: addr paths[i][0] else: nil, len: csize_t(len(paths[i])))
 
   fcQQmlEngine_setImportPathList(self.h, struct_miqt_array(len: csize_t(len(paths)), data: if len(paths) == 0: nil else: addr(paths_CArray[0])))
 
-proc addImportPath*(self: gen_qqmlengine_types.QQmlEngine, dir: string): void =
+proc addImportPath*(self: gen_qqmlengine_types.QQmlEngine, dir: openArray[char]): void =
   fcQQmlEngine_addImportPath(self.h, struct_miqt_string(data: if len(dir) > 0: addr dir[0] else: nil, len: csize_t(len(dir))))
 
 proc pluginPathList*(self: gen_qqmlengine_types.QQmlEngine): seq[string] =
@@ -280,20 +280,20 @@ proc pluginPathList*(self: gen_qqmlengine_types.QQmlEngine): seq[string] =
   c_free(v_ma.data)
   vx_ret
 
-proc setPluginPathList*(self: gen_qqmlengine_types.QQmlEngine, paths: seq[string]): void =
+proc setPluginPathList*(self: gen_qqmlengine_types.QQmlEngine, paths: openArray[string]): void =
   var paths_CArray = newSeq[struct_miqt_string](len(paths))
   for i in 0..<len(paths):
     paths_CArray[i] = struct_miqt_string(data: if len(paths[i]) > 0: addr paths[i][0] else: nil, len: csize_t(len(paths[i])))
 
   fcQQmlEngine_setPluginPathList(self.h, struct_miqt_array(len: csize_t(len(paths)), data: if len(paths) == 0: nil else: addr(paths_CArray[0])))
 
-proc addPluginPath*(self: gen_qqmlengine_types.QQmlEngine, dir: string): void =
+proc addPluginPath*(self: gen_qqmlengine_types.QQmlEngine, dir: openArray[char]): void =
   fcQQmlEngine_addPluginPath(self.h, struct_miqt_string(data: if len(dir) > 0: addr dir[0] else: nil, len: csize_t(len(dir))))
 
-proc addNamedBundle*(self: gen_qqmlengine_types.QQmlEngine, param1: string, param2: string): bool =
+proc addNamedBundle*(self: gen_qqmlengine_types.QQmlEngine, param1: openArray[char], param2: openArray[char]): bool =
   fcQQmlEngine_addNamedBundle(self.h, struct_miqt_string(data: if len(param1) > 0: addr param1[0] else: nil, len: csize_t(len(param1))), struct_miqt_string(data: if len(param2) > 0: addr param2[0] else: nil, len: csize_t(len(param2))))
 
-proc importPlugin*(self: gen_qqmlengine_types.QQmlEngine, filePath: string, uri: string, errors: seq[gen_qqmlerror_types.QQmlError]): bool =
+proc importPlugin*(self: gen_qqmlengine_types.QQmlEngine, filePath: openArray[char], uri: openArray[char], errors: openArray[gen_qqmlerror_types.QQmlError]): bool =
   var errors_CArray = newSeq[pointer](len(errors))
   for i in 0..<len(errors):
     errors_CArray[i] = errors[i].h
@@ -330,13 +330,13 @@ proc urlInterceptors*(self: gen_qqmlengine_types.QQmlEngine): seq[gen_qqmlabstra
 proc interceptUrl*(self: gen_qqmlengine_types.QQmlEngine, url: gen_qurl_types.QUrl, typeVal: cint): gen_qurl_types.QUrl =
   gen_qurl_types.QUrl(h: fcQQmlEngine_interceptUrl(self.h, url.h, cint(typeVal)), owned: true)
 
-proc addImageProvider*(self: gen_qqmlengine_types.QQmlEngine, id: string, param2: gen_qqmlengine_types.QQmlImageProviderBase): void =
+proc addImageProvider*(self: gen_qqmlengine_types.QQmlEngine, id: openArray[char], param2: gen_qqmlengine_types.QQmlImageProviderBase): void =
   fcQQmlEngine_addImageProvider(self.h, struct_miqt_string(data: if len(id) > 0: addr id[0] else: nil, len: csize_t(len(id))), param2.h)
 
-proc imageProvider*(self: gen_qqmlengine_types.QQmlEngine, id: string): gen_qqmlengine_types.QQmlImageProviderBase =
+proc imageProvider*(self: gen_qqmlengine_types.QQmlEngine, id: openArray[char]): gen_qqmlengine_types.QQmlImageProviderBase =
   gen_qqmlengine_types.QQmlImageProviderBase(h: fcQQmlEngine_imageProvider(self.h, struct_miqt_string(data: if len(id) > 0: addr id[0] else: nil, len: csize_t(len(id)))), owned: false)
 
-proc removeImageProvider*(self: gen_qqmlengine_types.QQmlEngine, id: string): void =
+proc removeImageProvider*(self: gen_qqmlengine_types.QQmlEngine, id: openArray[char]): void =
   fcQQmlEngine_removeImageProvider(self.h, struct_miqt_string(data: if len(id) > 0: addr id[0] else: nil, len: csize_t(len(id))))
 
 proc setIncubationController*(self: gen_qqmlengine_types.QQmlEngine, incubationController: gen_qqmlincubator_types.QQmlIncubationController): void =
@@ -345,7 +345,7 @@ proc setIncubationController*(self: gen_qqmlengine_types.QQmlEngine, incubationC
 proc incubationController*(self: gen_qqmlengine_types.QQmlEngine): gen_qqmlincubator_types.QQmlIncubationController =
   gen_qqmlincubator_types.QQmlIncubationController(h: fcQQmlEngine_incubationController(self.h), owned: false)
 
-proc setOfflineStoragePath*(self: gen_qqmlengine_types.QQmlEngine, dir: string): void =
+proc setOfflineStoragePath*(self: gen_qqmlengine_types.QQmlEngine, dir: openArray[char]): void =
   fcQQmlEngine_setOfflineStoragePath(self.h, struct_miqt_string(data: if len(dir) > 0: addr dir[0] else: nil, len: csize_t(len(dir))))
 
 proc offlineStoragePath*(self: gen_qqmlengine_types.QQmlEngine): string =
@@ -354,7 +354,7 @@ proc offlineStoragePath*(self: gen_qqmlengine_types.QQmlEngine): string =
   c_free(v_ms.data)
   vx_ret
 
-proc offlineStorageDatabaseFilePath*(self: gen_qqmlengine_types.QQmlEngine, databaseName: string): string =
+proc offlineStorageDatabaseFilePath*(self: gen_qqmlengine_types.QQmlEngine, databaseName: openArray[char]): string =
   let v_ms = fcQQmlEngine_offlineStorageDatabaseFilePath(self.h, struct_miqt_string(data: if len(databaseName) > 0: addr databaseName[0] else: nil, len: csize_t(len(databaseName))))
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
@@ -422,14 +422,14 @@ proc onexit*(self: gen_qqmlengine_types.QQmlEngine, slot: QQmlEngineexitSlot) =
   GC_ref(tmp)
   fcQQmlEngine_connect_exit(self.h, cast[int](addr tmp[]), fcQQmlEngine_slot_callback_exit, fcQQmlEngine_slot_callback_exit_release)
 
-proc warnings*(self: gen_qqmlengine_types.QQmlEngine, warnings: seq[gen_qqmlerror_types.QQmlError]): void =
+proc warnings*(self: gen_qqmlengine_types.QQmlEngine, warnings: openArray[gen_qqmlerror_types.QQmlError]): void =
   var warnings_CArray = newSeq[pointer](len(warnings))
   for i in 0..<len(warnings):
     warnings_CArray[i] = warnings[i].h
 
   fcQQmlEngine_warnings(self.h, struct_miqt_array(len: csize_t(len(warnings)), data: if len(warnings) == 0: nil else: addr(warnings_CArray[0])))
 
-type QQmlEnginewarningsSlot* = proc(warnings: seq[gen_qqmlerror_types.QQmlError])
+type QQmlEnginewarningsSlot* = proc(warnings: openArray[gen_qqmlerror_types.QQmlError])
 proc fcQQmlEngine_slot_callback_warnings(slot: int, warnings: struct_miqt_array) {.cdecl.} =
   let nimfunc = cast[ptr QQmlEnginewarningsSlot](cast[pointer](slot))
   var vwarnings_ma = warnings
@@ -760,6 +760,7 @@ proc create*(T: type gen_qqmlengine_types.QQmlEngine,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQQmlEngine_new(addr(cQQmlEngine_mvtbl), csize_t(sizeof(pointer)))
   fcQQmlEngine_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qqmlengine_types.QQmlEngine,
     p: gen_qobject_types.QObject,
@@ -767,6 +768,7 @@ proc create*(T: type gen_qqmlengine_types.QQmlEngine,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQQmlEngine_new2(addr(cQQmlEngine_mvtbl), csize_t(sizeof(pointer)), p.h)
   fcQQmlEngine_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qqmlengine_types.QQmlEngine): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQQmlEngine_staticMetaObject())

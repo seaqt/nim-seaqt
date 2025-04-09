@@ -139,10 +139,10 @@ proc unload*(self: gen_qlibrary_types.QLibrary): bool =
 proc isLoaded*(self: gen_qlibrary_types.QLibrary): bool =
   fcQLibrary_isLoaded(self.h)
 
-proc isLibrary*(_: type gen_qlibrary_types.QLibrary, fileName: string): bool =
+proc isLibrary*(_: type gen_qlibrary_types.QLibrary, fileName: openArray[char]): bool =
   fcQLibrary_isLibrary(struct_miqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))))
 
-proc setFileName*(self: gen_qlibrary_types.QLibrary, fileName: string): void =
+proc setFileName*(self: gen_qlibrary_types.QLibrary, fileName: openArray[char]): void =
   fcQLibrary_setFileName(self.h, struct_miqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))))
 
 proc fileName*(self: gen_qlibrary_types.QLibrary): string =
@@ -151,10 +151,10 @@ proc fileName*(self: gen_qlibrary_types.QLibrary): string =
   c_free(v_ms.data)
   vx_ret
 
-proc setFileNameAndVersion*(self: gen_qlibrary_types.QLibrary, fileName: string, verNum: cint): void =
+proc setFileNameAndVersion*(self: gen_qlibrary_types.QLibrary, fileName: openArray[char], verNum: cint): void =
   fcQLibrary_setFileNameAndVersion(self.h, struct_miqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))), verNum)
 
-proc setFileNameAndVersion*(self: gen_qlibrary_types.QLibrary, fileName: string, version: string): void =
+proc setFileNameAndVersion*(self: gen_qlibrary_types.QLibrary, fileName: openArray[char], version: openArray[char]): void =
   fcQLibrary_setFileNameAndVersion2(self.h, struct_miqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))), struct_miqt_string(data: if len(version) > 0: addr version[0] else: nil, len: csize_t(len(version))))
 
 proc errorString*(self: gen_qlibrary_types.QLibrary): string =
@@ -425,7 +425,7 @@ proc create*(T: type gen_qlibrary_types.QLibrary,
   fcQLibrary_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qlibrary_types.QLibrary,
-    fileName: string,
+    fileName: openArray[char],
     vtbl: ref QLibraryVTable = nil): gen_qlibrary_types.QLibrary =
   let vtbl = if vtbl == nil: new QLibraryVTable else: vtbl
   GC_ref(vtbl)
@@ -456,7 +456,7 @@ proc create*(T: type gen_qlibrary_types.QLibrary,
   fcQLibrary_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qlibrary_types.QLibrary,
-    fileName: string, verNum: cint,
+    fileName: openArray[char], verNum: cint,
     vtbl: ref QLibraryVTable = nil): gen_qlibrary_types.QLibrary =
   let vtbl = if vtbl == nil: new QLibraryVTable else: vtbl
   GC_ref(vtbl)
@@ -487,7 +487,7 @@ proc create*(T: type gen_qlibrary_types.QLibrary,
   fcQLibrary_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qlibrary_types.QLibrary,
-    fileName: string, version: string,
+    fileName: openArray[char], version: openArray[char],
     vtbl: ref QLibraryVTable = nil): gen_qlibrary_types.QLibrary =
   let vtbl = if vtbl == nil: new QLibraryVTable else: vtbl
   GC_ref(vtbl)
@@ -549,7 +549,7 @@ proc create*(T: type gen_qlibrary_types.QLibrary,
   fcQLibrary_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qlibrary_types.QLibrary,
-    fileName: string, parent: gen_qobject_types.QObject,
+    fileName: openArray[char], parent: gen_qobject_types.QObject,
     vtbl: ref QLibraryVTable = nil): gen_qlibrary_types.QLibrary =
   let vtbl = if vtbl == nil: new QLibraryVTable else: vtbl
   GC_ref(vtbl)
@@ -580,7 +580,7 @@ proc create*(T: type gen_qlibrary_types.QLibrary,
   fcQLibrary_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qlibrary_types.QLibrary,
-    fileName: string, verNum: cint, parent: gen_qobject_types.QObject,
+    fileName: openArray[char], verNum: cint, parent: gen_qobject_types.QObject,
     vtbl: ref QLibraryVTable = nil): gen_qlibrary_types.QLibrary =
   let vtbl = if vtbl == nil: new QLibraryVTable else: vtbl
   GC_ref(vtbl)
@@ -611,7 +611,7 @@ proc create*(T: type gen_qlibrary_types.QLibrary,
   fcQLibrary_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qlibrary_types.QLibrary,
-    fileName: string, version: string, parent: gen_qobject_types.QObject,
+    fileName: openArray[char], version: openArray[char], parent: gen_qobject_types.QObject,
     vtbl: ref QLibraryVTable = nil): gen_qlibrary_types.QLibrary =
   let vtbl = if vtbl == nil: new QLibraryVTable else: vtbl
   GC_ref(vtbl)
@@ -663,27 +663,31 @@ proc create*(T: type gen_qlibrary_types.QLibrary,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQLibrary_new(addr(cQLibrary_mvtbl), csize_t(sizeof(pointer)))
   fcQLibrary_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qlibrary_types.QLibrary,
-    fileName: string,
+    fileName: openArray[char],
     inst: VirtualQLibrary) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQLibrary_new2(addr(cQLibrary_mvtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))))
   fcQLibrary_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qlibrary_types.QLibrary,
-    fileName: string, verNum: cint,
+    fileName: openArray[char], verNum: cint,
     inst: VirtualQLibrary) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQLibrary_new3(addr(cQLibrary_mvtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))), verNum)
   fcQLibrary_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qlibrary_types.QLibrary,
-    fileName: string, version: string,
+    fileName: openArray[char], version: openArray[char],
     inst: VirtualQLibrary) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQLibrary_new4(addr(cQLibrary_mvtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))), struct_miqt_string(data: if len(version) > 0: addr version[0] else: nil, len: csize_t(len(version))))
   fcQLibrary_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qlibrary_types.QLibrary,
     parent: gen_qobject_types.QObject,
@@ -691,27 +695,31 @@ proc create*(T: type gen_qlibrary_types.QLibrary,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQLibrary_new5(addr(cQLibrary_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQLibrary_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qlibrary_types.QLibrary,
-    fileName: string, parent: gen_qobject_types.QObject,
+    fileName: openArray[char], parent: gen_qobject_types.QObject,
     inst: VirtualQLibrary) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQLibrary_new6(addr(cQLibrary_mvtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))), parent.h)
   fcQLibrary_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qlibrary_types.QLibrary,
-    fileName: string, verNum: cint, parent: gen_qobject_types.QObject,
+    fileName: openArray[char], verNum: cint, parent: gen_qobject_types.QObject,
     inst: VirtualQLibrary) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQLibrary_new7(addr(cQLibrary_mvtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))), verNum, parent.h)
   fcQLibrary_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qlibrary_types.QLibrary,
-    fileName: string, version: string, parent: gen_qobject_types.QObject,
+    fileName: openArray[char], version: openArray[char], parent: gen_qobject_types.QObject,
     inst: VirtualQLibrary) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQLibrary_new8(addr(cQLibrary_mvtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))), struct_miqt_string(data: if len(version) > 0: addr version[0] else: nil, len: csize_t(len(version))), parent.h)
   fcQLibrary_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qlibrary_types.QLibrary): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQLibrary_staticMetaObject())

@@ -51,12 +51,10 @@ import ./gen_qcalendar_types
 export gen_qcalendar_types
 
 import
-  ./gen_qanystringview_types,
   ./gen_qdatetime_types,
   ./gen_qlocale_types,
   ./gen_qobjectdefs_types
 export
-  gen_qanystringview_types,
   gen_qdatetime_types,
   gen_qlocale_types,
   gen_qobjectdefs_types
@@ -99,7 +97,7 @@ proc fcQCalendar_weekDayName3(self: pointer, locale: pointer, day: cint, format:
 proc fcQCalendar_standaloneWeekDayName3(self: pointer, locale: pointer, day: cint, format: cint): struct_miqt_string {.importc: "QCalendar_standaloneWeekDayName3".}
 proc fcQCalendar_new(): ptr cQCalendar {.importc: "QCalendar_new".}
 proc fcQCalendar_new2(system: cint): ptr cQCalendar {.importc: "QCalendar_new2".}
-proc fcQCalendar_new3(name: pointer): ptr cQCalendar {.importc: "QCalendar_new3".}
+proc fcQCalendar_new3(name: struct_miqt_string): ptr cQCalendar {.importc: "QCalendar_new3".}
 proc fcQCalendar_new4(id: pointer): ptr cQCalendar {.importc: "QCalendar_new4".}
 proc fcQCalendar_staticMetaObject(): pointer {.importc: "QCalendar_staticMetaObject".}
 proc fcQCalendarYearMonthDay_isValid(self: pointer): bool {.importc: "QCalendar__YearMonthDay_isValid".}
@@ -257,8 +255,8 @@ proc create*(T: type gen_qcalendar_types.QCalendar,
   let tmp = gen_qcalendar_types.QCalendar(h: fcQCalendar_new2(cint(system)), owned: true)
   tmp
 proc create*(T: type gen_qcalendar_types.QCalendar,
-    name: gen_qanystringview_types.QAnyStringView): gen_qcalendar_types.QCalendar =
-  let tmp = gen_qcalendar_types.QCalendar(h: fcQCalendar_new3(name.h), owned: true)
+    name: openArray[char]): gen_qcalendar_types.QCalendar =
+  let tmp = gen_qcalendar_types.QCalendar(h: fcQCalendar_new3(struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name)))), owned: true)
   tmp
 proc create*(T: type gen_qcalendar_types.QCalendar,
     id: gen_qcalendar_types.QCalendarSystemId): gen_qcalendar_types.QCalendar =

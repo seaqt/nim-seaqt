@@ -813,13 +813,13 @@ proc unpolish*(self: gen_qstyle_types.QStyle, application: gen_qapplication_type
 proc polish*(self: gen_qstyle_types.QStyle, palette: gen_qpalette_types.QPalette): void =
   fcQStyle_polishWithPalette(self.h, palette.h)
 
-proc itemTextRect*(self: gen_qstyle_types.QStyle, fm: gen_qfontmetrics_types.QFontMetrics, r: gen_qrect_types.QRect, flags: cint, enabled: bool, text: string): gen_qrect_types.QRect =
+proc itemTextRect*(self: gen_qstyle_types.QStyle, fm: gen_qfontmetrics_types.QFontMetrics, r: gen_qrect_types.QRect, flags: cint, enabled: bool, text: openArray[char]): gen_qrect_types.QRect =
   gen_qrect_types.QRect(h: fcQStyle_itemTextRect(self.h, fm.h, r.h, flags, enabled, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))), owned: true)
 
 proc itemPixmapRect*(self: gen_qstyle_types.QStyle, r: gen_qrect_types.QRect, flags: cint, pixmap: gen_qpixmap_types.QPixmap): gen_qrect_types.QRect =
   gen_qrect_types.QRect(h: fcQStyle_itemPixmapRect(self.h, r.h, flags, pixmap.h), owned: true)
 
-proc drawItemText*(self: gen_qstyle_types.QStyle, painter: gen_qpainter_types.QPainter, rect: gen_qrect_types.QRect, flags: cint, pal: gen_qpalette_types.QPalette, enabled: bool, text: string, textRole: cint): void =
+proc drawItemText*(self: gen_qstyle_types.QStyle, painter: gen_qpainter_types.QPainter, rect: gen_qrect_types.QRect, flags: cint, pal: gen_qpalette_types.QPalette, enabled: bool, text: openArray[char], textRole: cint): void =
   fcQStyle_drawItemText(self.h, painter.h, rect.h, flags, pal.h, enabled, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), cint(textRole))
 
 proc drawItemPixmap*(self: gen_qstyle_types.QStyle, painter: gen_qpainter_types.QPainter, rect: gen_qrect_types.QRect, alignment: cint, pixmap: gen_qpixmap_types.QPixmap): void =
@@ -923,9 +923,9 @@ type QStyleunpolishProc* = proc(self: QStyle, widget: gen_qwidget_types.QWidget)
 type QStylepolishWithApplicationProc* = proc(self: QStyle, application: gen_qapplication_types.QApplication): void {.raises: [], gcsafe.}
 type QStyleunpolishWithApplicationProc* = proc(self: QStyle, application: gen_qapplication_types.QApplication): void {.raises: [], gcsafe.}
 type QStylepolishWithPaletteProc* = proc(self: QStyle, palette: gen_qpalette_types.QPalette): void {.raises: [], gcsafe.}
-type QStyleitemTextRectProc* = proc(self: QStyle, fm: gen_qfontmetrics_types.QFontMetrics, r: gen_qrect_types.QRect, flags: cint, enabled: bool, text: string): gen_qrect_types.QRect {.raises: [], gcsafe.}
+type QStyleitemTextRectProc* = proc(self: QStyle, fm: gen_qfontmetrics_types.QFontMetrics, r: gen_qrect_types.QRect, flags: cint, enabled: bool, text: openArray[char]): gen_qrect_types.QRect {.raises: [], gcsafe.}
 type QStyleitemPixmapRectProc* = proc(self: QStyle, r: gen_qrect_types.QRect, flags: cint, pixmap: gen_qpixmap_types.QPixmap): gen_qrect_types.QRect {.raises: [], gcsafe.}
-type QStyledrawItemTextProc* = proc(self: QStyle, painter: gen_qpainter_types.QPainter, rect: gen_qrect_types.QRect, flags: cint, pal: gen_qpalette_types.QPalette, enabled: bool, text: string, textRole: cint): void {.raises: [], gcsafe.}
+type QStyledrawItemTextProc* = proc(self: QStyle, painter: gen_qpainter_types.QPainter, rect: gen_qrect_types.QRect, flags: cint, pal: gen_qpalette_types.QPalette, enabled: bool, text: openArray[char], textRole: cint): void {.raises: [], gcsafe.}
 type QStyledrawItemPixmapProc* = proc(self: QStyle, painter: gen_qpainter_types.QPainter, rect: gen_qrect_types.QRect, alignment: cint, pixmap: gen_qpixmap_types.QPixmap): void {.raises: [], gcsafe.}
 type QStylestandardPaletteProc* = proc(self: QStyle): gen_qpalette_types.QPalette {.raises: [], gcsafe.}
 type QStyledrawPrimitiveProc* = proc(self: QStyle, pe: cint, opt: gen_qstyleoption_types.QStyleOption, p: gen_qpainter_types.QPainter, w: gen_qwidget_types.QWidget): void {.raises: [], gcsafe.}
@@ -1062,7 +1062,7 @@ proc fcQStyle_vtable_callback_polishWithPalette(self: pointer, palette: pointer)
   let slotval1 = gen_qpalette_types.QPalette(h: palette, owned: false)
   vtbl[].polishWithPalette(self, slotval1)
 
-proc QStyleitemTextRect*(self: gen_qstyle_types.QStyle, fm: gen_qfontmetrics_types.QFontMetrics, r: gen_qrect_types.QRect, flags: cint, enabled: bool, text: string): gen_qrect_types.QRect =
+proc QStyleitemTextRect*(self: gen_qstyle_types.QStyle, fm: gen_qfontmetrics_types.QFontMetrics, r: gen_qrect_types.QRect, flags: cint, enabled: bool, text: openArray[char]): gen_qrect_types.QRect =
   gen_qrect_types.QRect(h: fcQStyle_virtualbase_itemTextRect(self.h, fm.h, r.h, flags, enabled, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))), owned: true)
 
 proc fcQStyle_vtable_callback_itemTextRect(self: pointer, fm: pointer, r: pointer, flags: cint, enabled: bool, text: struct_miqt_string): pointer {.cdecl.} =
@@ -1097,7 +1097,7 @@ proc fcQStyle_vtable_callback_itemPixmapRect(self: pointer, r: pointer, flags: c
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QStyledrawItemText*(self: gen_qstyle_types.QStyle, painter: gen_qpainter_types.QPainter, rect: gen_qrect_types.QRect, flags: cint, pal: gen_qpalette_types.QPalette, enabled: bool, text: string, textRole: cint): void =
+proc QStyledrawItemText*(self: gen_qstyle_types.QStyle, painter: gen_qpainter_types.QPainter, rect: gen_qrect_types.QRect, flags: cint, pal: gen_qpalette_types.QPalette, enabled: bool, text: openArray[char], textRole: cint): void =
   fcQStyle_virtualbase_drawItemText(self.h, painter.h, rect.h, flags, pal.h, enabled, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), cint(textRole))
 
 proc fcQStyle_vtable_callback_drawItemText(self: pointer, painter: pointer, rect: pointer, flags: cint, pal: pointer, enabled: bool, text: struct_miqt_string, textRole: cint): void {.cdecl.} =
@@ -1408,7 +1408,7 @@ proc fcQStyle_method_callback_polishWithPalette(self: pointer, palette: pointer)
   let slotval1 = gen_qpalette_types.QPalette(h: palette, owned: false)
   inst.polish(slotval1)
 
-method itemTextRect*(self: VirtualQStyle, fm: gen_qfontmetrics_types.QFontMetrics, r: gen_qrect_types.QRect, flags: cint, enabled: bool, text: string): gen_qrect_types.QRect {.base.} =
+method itemTextRect*(self: VirtualQStyle, fm: gen_qfontmetrics_types.QFontMetrics, r: gen_qrect_types.QRect, flags: cint, enabled: bool, text: openArray[char]): gen_qrect_types.QRect {.base.} =
   QStyleitemTextRect(self[], fm, r, flags, enabled, text)
 proc fcQStyle_method_callback_itemTextRect(self: pointer, fm: pointer, r: pointer, flags: cint, enabled: bool, text: struct_miqt_string): pointer {.cdecl.} =
   let inst = cast[VirtualQStyle](fcQStyle_vdata(self)[])
@@ -1433,7 +1433,7 @@ proc fcQStyle_method_callback_itemPixmapRect(self: pointer, r: pointer, flags: c
   var virtualReturn = inst.itemPixmapRect(slotval1, slotval2, slotval3)
   virtualReturn.h
 
-method drawItemText*(self: VirtualQStyle, painter: gen_qpainter_types.QPainter, rect: gen_qrect_types.QRect, flags: cint, pal: gen_qpalette_types.QPalette, enabled: bool, text: string, textRole: cint): void {.base.} =
+method drawItemText*(self: VirtualQStyle, painter: gen_qpainter_types.QPainter, rect: gen_qrect_types.QRect, flags: cint, pal: gen_qpalette_types.QPalette, enabled: bool, text: openArray[char], textRole: cint): void {.base.} =
   QStyledrawItemText(self[], painter, rect, flags, pal, enabled, text, textRole)
 proc fcQStyle_method_callback_drawItemText(self: pointer, painter: pointer, rect: pointer, flags: cint, pal: pointer, enabled: bool, text: struct_miqt_string, textRole: cint): void {.cdecl.} =
   let inst = cast[VirtualQStyle](fcQStyle_vdata(self)[])
@@ -1787,6 +1787,7 @@ proc create*(T: type gen_qstyle_types.QStyle,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQStyle_new(addr(cQStyle_mvtbl), csize_t(sizeof(pointer)))
   fcQStyle_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qstyle_types.QStyle): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQStyle_staticMetaObject())

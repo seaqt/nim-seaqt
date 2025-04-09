@@ -545,6 +545,7 @@ proc create*(T: type gen_qqmlextensionplugin_types.QQmlExtensionPlugin,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQQmlExtensionPlugin_new(addr(cQQmlExtensionPlugin_mvtbl), csize_t(sizeof(pointer)))
   fcQQmlExtensionPlugin_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qqmlextensionplugin_types.QQmlExtensionPlugin,
     parent: gen_qobject_types.QObject,
@@ -552,6 +553,7 @@ proc create*(T: type gen_qqmlextensionplugin_types.QQmlExtensionPlugin,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQQmlExtensionPlugin_new2(addr(cQQmlExtensionPlugin_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQQmlExtensionPlugin_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qqmlextensionplugin_types.QQmlExtensionPlugin): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQQmlExtensionPlugin_staticMetaObject())
@@ -906,6 +908,7 @@ proc create*(T: type gen_qqmlextensionplugin_types.QQmlEngineExtensionPlugin,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQQmlEngineExtensionPlugin_new(addr(cQQmlEngineExtensionPlugin_mvtbl), csize_t(sizeof(pointer)))
   fcQQmlEngineExtensionPlugin_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qqmlextensionplugin_types.QQmlEngineExtensionPlugin,
     parent: gen_qobject_types.QObject,
@@ -913,6 +916,7 @@ proc create*(T: type gen_qqmlextensionplugin_types.QQmlEngineExtensionPlugin,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQQmlEngineExtensionPlugin_new2(addr(cQQmlEngineExtensionPlugin_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQQmlEngineExtensionPlugin_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qqmlextensionplugin_types.QQmlEngineExtensionPlugin): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQQmlEngineExtensionPlugin_staticMetaObject())

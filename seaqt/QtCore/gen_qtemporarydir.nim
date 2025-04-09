@@ -77,7 +77,7 @@ proc path*(self: gen_qtemporarydir_types.QTemporaryDir): string =
   c_free(v_ms.data)
   vx_ret
 
-proc filePath*(self: gen_qtemporarydir_types.QTemporaryDir, fileName: string): string =
+proc filePath*(self: gen_qtemporarydir_types.QTemporaryDir, fileName: openArray[char]): string =
   let v_ms = fcQTemporaryDir_filePath(self.h, struct_miqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))))
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
@@ -87,6 +87,6 @@ proc create*(T: type gen_qtemporarydir_types.QTemporaryDir): gen_qtemporarydir_t
   let tmp = gen_qtemporarydir_types.QTemporaryDir(h: fcQTemporaryDir_new(), owned: true)
   tmp
 proc create*(T: type gen_qtemporarydir_types.QTemporaryDir,
-    templateName: string): gen_qtemporarydir_types.QTemporaryDir =
+    templateName: openArray[char]): gen_qtemporarydir_types.QTemporaryDir =
   let tmp = gen_qtemporarydir_types.QTemporaryDir(h: fcQTemporaryDir_new2(struct_miqt_string(data: if len(templateName) > 0: addr templateName[0] else: nil, len: csize_t(len(templateName)))), owned: true)
   tmp

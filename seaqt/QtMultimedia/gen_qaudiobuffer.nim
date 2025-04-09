@@ -98,7 +98,7 @@ proc create*(T: type gen_qaudiobuffer_types.QAudioBuffer,
   let tmp = gen_qaudiobuffer_types.QAudioBuffer(h: fcQAudioBuffer_new2(other.h), owned: true)
   tmp
 proc create*(T: type gen_qaudiobuffer_types.QAudioBuffer,
-    data: seq[byte], format: gen_qaudioformat_types.QAudioFormat): gen_qaudiobuffer_types.QAudioBuffer =
+    data: openArray[byte], format: gen_qaudioformat_types.QAudioFormat): gen_qaudiobuffer_types.QAudioBuffer =
   let tmp = gen_qaudiobuffer_types.QAudioBuffer(h: fcQAudioBuffer_new3(struct_miqt_string(data: if len(data) > 0: addr data[0] else: nil, len: csize_t(len(data))), format.h), owned: true)
   tmp
 proc create*(T: type gen_qaudiobuffer_types.QAudioBuffer,
@@ -106,7 +106,7 @@ proc create*(T: type gen_qaudiobuffer_types.QAudioBuffer,
   let tmp = gen_qaudiobuffer_types.QAudioBuffer(h: fcQAudioBuffer_new4(numFrames, format.h), owned: true)
   tmp
 proc create*(T: type gen_qaudiobuffer_types.QAudioBuffer,
-    data: seq[byte], format: gen_qaudioformat_types.QAudioFormat, startTime: clonglong): gen_qaudiobuffer_types.QAudioBuffer =
+    data: openArray[byte], format: gen_qaudioformat_types.QAudioFormat, startTime: clonglong): gen_qaudiobuffer_types.QAudioBuffer =
   let tmp = gen_qaudiobuffer_types.QAudioBuffer(h: fcQAudioBuffer_new5(struct_miqt_string(data: if len(data) > 0: addr data[0] else: nil, len: csize_t(len(data))), format.h, startTime), owned: true)
   tmp
 proc create*(T: type gen_qaudiobuffer_types.QAudioBuffer,

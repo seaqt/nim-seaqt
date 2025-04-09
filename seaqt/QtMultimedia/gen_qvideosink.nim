@@ -129,7 +129,7 @@ proc subtitleText*(self: gen_qvideosink_types.QVideoSink): string =
   c_free(v_ms.data)
   vx_ret
 
-proc setSubtitleText*(self: gen_qvideosink_types.QVideoSink, subtitle: string): void =
+proc setSubtitleText*(self: gen_qvideosink_types.QVideoSink, subtitle: openArray[char]): void =
   fcQVideoSink_setSubtitleText(self.h, struct_miqt_string(data: if len(subtitle) > 0: addr subtitle[0] else: nil, len: csize_t(len(subtitle))))
 
 proc setVideoFrame*(self: gen_qvideosink_types.QVideoSink, frame: gen_qvideoframe_types.QVideoFrame): void =
@@ -158,10 +158,10 @@ proc onvideoFrameChanged*(self: gen_qvideosink_types.QVideoSink, slot: QVideoSin
   GC_ref(tmp)
   fcQVideoSink_connect_videoFrameChanged(self.h, cast[int](addr tmp[]), fcQVideoSink_slot_callback_videoFrameChanged, fcQVideoSink_slot_callback_videoFrameChanged_release)
 
-proc subtitleTextChanged*(self: gen_qvideosink_types.QVideoSink, subtitleText: string): void =
+proc subtitleTextChanged*(self: gen_qvideosink_types.QVideoSink, subtitleText: openArray[char]): void =
   fcQVideoSink_subtitleTextChanged(self.h, struct_miqt_string(data: if len(subtitleText) > 0: addr subtitleText[0] else: nil, len: csize_t(len(subtitleText))))
 
-type QVideoSinksubtitleTextChangedSlot* = proc(subtitleText: string)
+type QVideoSinksubtitleTextChangedSlot* = proc(subtitleText: openArray[char])
 proc fcQVideoSink_slot_callback_subtitleTextChanged(slot: int, subtitleText: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QVideoSinksubtitleTextChangedSlot](cast[pointer](slot))
   let vsubtitleText_ms = subtitleText
@@ -507,6 +507,7 @@ proc create*(T: type gen_qvideosink_types.QVideoSink,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQVideoSink_new(addr(cQVideoSink_mvtbl), csize_t(sizeof(pointer)))
   fcQVideoSink_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qvideosink_types.QVideoSink,
     parent: gen_qobject_types.QObject,
@@ -514,6 +515,7 @@ proc create*(T: type gen_qvideosink_types.QVideoSink,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQVideoSink_new2(addr(cQVideoSink_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQVideoSink_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qvideosink_types.QVideoSink): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQVideoSink_staticMetaObject())

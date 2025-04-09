@@ -441,6 +441,7 @@ proc create*(T: type gen_qqmlwebchannel_types.QQmlWebChannel,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQQmlWebChannel_new(addr(cQQmlWebChannel_mvtbl), csize_t(sizeof(pointer)))
   fcQQmlWebChannel_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qqmlwebchannel_types.QQmlWebChannel,
     parent: gen_qobject_types.QObject,
@@ -448,6 +449,7 @@ proc create*(T: type gen_qqmlwebchannel_types.QQmlWebChannel,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQQmlWebChannel_new2(addr(cQQmlWebChannel_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQQmlWebChannel_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qqmlwebchannel_types.QQmlWebChannel): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQQmlWebChannel_staticMetaObject())

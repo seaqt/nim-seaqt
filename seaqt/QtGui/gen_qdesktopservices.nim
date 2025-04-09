@@ -52,9 +52,9 @@ proc fcQDesktopServices_unsetUrlHandler(scheme: struct_miqt_string): void {.impo
 proc openUrl*(_: type gen_qdesktopservices_types.QDesktopServices, url: gen_qurl_types.QUrl): bool =
   fcQDesktopServices_openUrl(url.h)
 
-proc setUrlHandler*(_: type gen_qdesktopservices_types.QDesktopServices, scheme: string, receiver: gen_qobject_types.QObject, methodVal: cstring): void =
+proc setUrlHandler*(_: type gen_qdesktopservices_types.QDesktopServices, scheme: openArray[char], receiver: gen_qobject_types.QObject, methodVal: cstring): void =
   fcQDesktopServices_setUrlHandler(struct_miqt_string(data: if len(scheme) > 0: addr scheme[0] else: nil, len: csize_t(len(scheme))), receiver.h, methodVal)
 
-proc unsetUrlHandler*(_: type gen_qdesktopservices_types.QDesktopServices, scheme: string): void =
+proc unsetUrlHandler*(_: type gen_qdesktopservices_types.QDesktopServices, scheme: openArray[char]): void =
   fcQDesktopServices_unsetUrlHandler(struct_miqt_string(data: if len(scheme) > 0: addr scheme[0] else: nil, len: csize_t(len(scheme))))
 

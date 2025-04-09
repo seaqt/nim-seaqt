@@ -234,7 +234,7 @@ proc description*(self: gen_qcommandlinkbutton_types.QCommandLinkButton): string
   c_free(v_ms.data)
   vx_ret
 
-proc setDescription*(self: gen_qcommandlinkbutton_types.QCommandLinkButton, description: string): void =
+proc setDescription*(self: gen_qcommandlinkbutton_types.QCommandLinkButton, description: openArray[char]): void =
   fcQCommandLinkButton_setDescription(self.h, struct_miqt_string(data: if len(description) > 0: addr description[0] else: nil, len: csize_t(len(description))))
 
 proc sizeHint*(self: gen_qcommandlinkbutton_types.QCommandLinkButton): gen_qsize_types.QSize =
@@ -302,7 +302,7 @@ type QCommandLinkButtondragLeaveEventProc* = proc(self: QCommandLinkButton, even
 type QCommandLinkButtondropEventProc* = proc(self: QCommandLinkButton, event: gen_qevent_types.QDropEvent): void {.raises: [], gcsafe.}
 type QCommandLinkButtonshowEventProc* = proc(self: QCommandLinkButton, event: gen_qevent_types.QShowEvent): void {.raises: [], gcsafe.}
 type QCommandLinkButtonhideEventProc* = proc(self: QCommandLinkButton, event: gen_qevent_types.QHideEvent): void {.raises: [], gcsafe.}
-type QCommandLinkButtonnativeEventProc* = proc(self: QCommandLinkButton, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
+type QCommandLinkButtonnativeEventProc* = proc(self: QCommandLinkButton, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
 type QCommandLinkButtonmetricProc* = proc(self: QCommandLinkButton, param1: cint): cint {.raises: [], gcsafe.}
 type QCommandLinkButtoninitPainterProc* = proc(self: QCommandLinkButton, painter: gen_qpainter_types.QPainter): void {.raises: [], gcsafe.}
 type QCommandLinkButtonredirectedProc* = proc(self: QCommandLinkButton, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.raises: [], gcsafe.}
@@ -757,7 +757,7 @@ proc fcQCommandLinkButton_vtable_callback_hideEvent(self: pointer, event: pointe
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   vtbl[].hideEvent(self, slotval1)
 
-proc QCommandLinkButtonnativeEvent*(self: gen_qcommandlinkbutton_types.QCommandLinkButton, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool =
+proc QCommandLinkButtonnativeEvent*(self: gen_qcommandlinkbutton_types.QCommandLinkButton, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool =
   fcQCommandLinkButton_virtualbase_nativeEvent(self.h, struct_miqt_string(data: if len(eventType) > 0: addr eventType[0] else: nil, len: csize_t(len(eventType))), message, resultVal)
 
 proc fcQCommandLinkButton_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
@@ -1189,7 +1189,7 @@ proc fcQCommandLinkButton_method_callback_hideEvent(self: pointer, event: pointe
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   inst.hideEvent(slotval1)
 
-method nativeEvent*(self: VirtualQCommandLinkButton, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
+method nativeEvent*(self: VirtualQCommandLinkButton, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
   QCommandLinkButtonnativeEvent(self[], eventType, message, resultVal)
 proc fcQCommandLinkButton_method_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
   let inst = cast[VirtualQCommandLinkButton](fcQCommandLinkButton_vdata(self)[])
@@ -1557,7 +1557,7 @@ proc create*(T: type gen_qcommandlinkbutton_types.QCommandLinkButton,
   fcQCommandLinkButton_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qcommandlinkbutton_types.QCommandLinkButton,
-    text: string,
+    text: openArray[char],
     vtbl: ref QCommandLinkButtonVTable = nil): gen_qcommandlinkbutton_types.QCommandLinkButton =
   let vtbl = if vtbl == nil: new QCommandLinkButtonVTable else: vtbl
   GC_ref(vtbl)
@@ -1676,7 +1676,7 @@ proc create*(T: type gen_qcommandlinkbutton_types.QCommandLinkButton,
   fcQCommandLinkButton_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qcommandlinkbutton_types.QCommandLinkButton,
-    text: string, description: string,
+    text: openArray[char], description: openArray[char],
     vtbl: ref QCommandLinkButtonVTable = nil): gen_qcommandlinkbutton_types.QCommandLinkButton =
   let vtbl = if vtbl == nil: new QCommandLinkButtonVTable else: vtbl
   GC_ref(vtbl)
@@ -1795,7 +1795,7 @@ proc create*(T: type gen_qcommandlinkbutton_types.QCommandLinkButton,
   fcQCommandLinkButton_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qcommandlinkbutton_types.QCommandLinkButton,
-    text: string, parent: gen_qwidget_types.QWidget,
+    text: openArray[char], parent: gen_qwidget_types.QWidget,
     vtbl: ref QCommandLinkButtonVTable = nil): gen_qcommandlinkbutton_types.QCommandLinkButton =
   let vtbl = if vtbl == nil: new QCommandLinkButtonVTable else: vtbl
   GC_ref(vtbl)
@@ -1914,7 +1914,7 @@ proc create*(T: type gen_qcommandlinkbutton_types.QCommandLinkButton,
   fcQCommandLinkButton_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qcommandlinkbutton_types.QCommandLinkButton,
-    text: string, description: string, parent: gen_qwidget_types.QWidget,
+    text: openArray[char], description: openArray[char], parent: gen_qwidget_types.QWidget,
     vtbl: ref QCommandLinkButtonVTable = nil): gen_qcommandlinkbutton_types.QCommandLinkButton =
   let vtbl = if vtbl == nil: new QCommandLinkButtonVTable else: vtbl
   GC_ref(vtbl)
@@ -2099,40 +2099,46 @@ proc create*(T: type gen_qcommandlinkbutton_types.QCommandLinkButton,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQCommandLinkButton_new(addr(cQCommandLinkButton_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQCommandLinkButton_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qcommandlinkbutton_types.QCommandLinkButton,
     inst: VirtualQCommandLinkButton) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQCommandLinkButton_new2(addr(cQCommandLinkButton_mvtbl), csize_t(sizeof(pointer)))
   fcQCommandLinkButton_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qcommandlinkbutton_types.QCommandLinkButton,
-    text: string,
+    text: openArray[char],
     inst: VirtualQCommandLinkButton) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQCommandLinkButton_new3(addr(cQCommandLinkButton_mvtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
   fcQCommandLinkButton_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qcommandlinkbutton_types.QCommandLinkButton,
-    text: string, description: string,
+    text: openArray[char], description: openArray[char],
     inst: VirtualQCommandLinkButton) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQCommandLinkButton_new4(addr(cQCommandLinkButton_mvtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), struct_miqt_string(data: if len(description) > 0: addr description[0] else: nil, len: csize_t(len(description))))
   fcQCommandLinkButton_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qcommandlinkbutton_types.QCommandLinkButton,
-    text: string, parent: gen_qwidget_types.QWidget,
+    text: openArray[char], parent: gen_qwidget_types.QWidget,
     inst: VirtualQCommandLinkButton) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQCommandLinkButton_new5(addr(cQCommandLinkButton_mvtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), parent.h)
   fcQCommandLinkButton_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qcommandlinkbutton_types.QCommandLinkButton,
-    text: string, description: string, parent: gen_qwidget_types.QWidget,
+    text: openArray[char], description: openArray[char], parent: gen_qwidget_types.QWidget,
     inst: VirtualQCommandLinkButton) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQCommandLinkButton_new6(addr(cQCommandLinkButton_mvtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), struct_miqt_string(data: if len(description) > 0: addr description[0] else: nil, len: csize_t(len(description))), parent.h)
   fcQCommandLinkButton_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qcommandlinkbutton_types.QCommandLinkButton): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQCommandLinkButton_staticMetaObject())

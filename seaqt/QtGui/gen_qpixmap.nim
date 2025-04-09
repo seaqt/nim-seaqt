@@ -258,16 +258,16 @@ proc fromImage*(_: type gen_qpixmap_types.QPixmap, image: gen_qimage_types.QImag
 proc fromImageReader*(_: type gen_qpixmap_types.QPixmap, imageReader: gen_qimagereader_types.QImageReader): gen_qpixmap_types.QPixmap =
   gen_qpixmap_types.QPixmap(h: fcQPixmap_fromImageReader(imageReader.h), owned: true)
 
-proc load*(self: gen_qpixmap_types.QPixmap, fileName: string): bool =
+proc load*(self: gen_qpixmap_types.QPixmap, fileName: openArray[char]): bool =
   fcQPixmap_load(self.h, struct_miqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))))
 
 proc loadFromData*(self: gen_qpixmap_types.QPixmap, buf: ptr uint8, len: cuint): bool =
   fcQPixmap_loadFromData(self.h, buf, len)
 
-proc loadFromData*(self: gen_qpixmap_types.QPixmap, data: seq[byte]): bool =
+proc loadFromData*(self: gen_qpixmap_types.QPixmap, data: openArray[byte]): bool =
   fcQPixmap_loadFromDataWithData(self.h, struct_miqt_string(data: if len(data) > 0: addr data[0] else: nil, len: csize_t(len(data))))
 
-proc save*(self: gen_qpixmap_types.QPixmap, fileName: string): bool =
+proc save*(self: gen_qpixmap_types.QPixmap, fileName: openArray[char]): bool =
   fcQPixmap_save(self.h, struct_miqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))))
 
 proc save*(self: gen_qpixmap_types.QPixmap, device: gen_qiodevice_types.QIODevice): bool =
@@ -342,10 +342,10 @@ proc fromImage*(_: type gen_qpixmap_types.QPixmap, image: gen_qimage_types.QImag
 proc fromImageReader*(_: type gen_qpixmap_types.QPixmap, imageReader: gen_qimagereader_types.QImageReader, flags: cint): gen_qpixmap_types.QPixmap =
   gen_qpixmap_types.QPixmap(h: fcQPixmap_fromImageReader2(imageReader.h, cint(flags)), owned: true)
 
-proc load*(self: gen_qpixmap_types.QPixmap, fileName: string, format: cstring): bool =
+proc load*(self: gen_qpixmap_types.QPixmap, fileName: openArray[char], format: cstring): bool =
   fcQPixmap_load2(self.h, struct_miqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))), format)
 
-proc load*(self: gen_qpixmap_types.QPixmap, fileName: string, format: cstring, flags: cint): bool =
+proc load*(self: gen_qpixmap_types.QPixmap, fileName: openArray[char], format: cstring, flags: cint): bool =
   fcQPixmap_load3(self.h, struct_miqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))), format, cint(flags))
 
 proc loadFromData*(self: gen_qpixmap_types.QPixmap, buf: ptr uint8, len: cuint, format: cstring): bool =
@@ -354,16 +354,16 @@ proc loadFromData*(self: gen_qpixmap_types.QPixmap, buf: ptr uint8, len: cuint, 
 proc loadFromData*(self: gen_qpixmap_types.QPixmap, buf: ptr uint8, len: cuint, format: cstring, flags: cint): bool =
   fcQPixmap_loadFromData4(self.h, buf, len, format, cint(flags))
 
-proc loadFromData*(self: gen_qpixmap_types.QPixmap, data: seq[byte], format: cstring): bool =
+proc loadFromData*(self: gen_qpixmap_types.QPixmap, data: openArray[byte], format: cstring): bool =
   fcQPixmap_loadFromData2(self.h, struct_miqt_string(data: if len(data) > 0: addr data[0] else: nil, len: csize_t(len(data))), format)
 
-proc loadFromData*(self: gen_qpixmap_types.QPixmap, data: seq[byte], format: cstring, flags: cint): bool =
+proc loadFromData*(self: gen_qpixmap_types.QPixmap, data: openArray[byte], format: cstring, flags: cint): bool =
   fcQPixmap_loadFromData32(self.h, struct_miqt_string(data: if len(data) > 0: addr data[0] else: nil, len: csize_t(len(data))), format, cint(flags))
 
-proc save*(self: gen_qpixmap_types.QPixmap, fileName: string, format: cstring): bool =
+proc save*(self: gen_qpixmap_types.QPixmap, fileName: openArray[char], format: cstring): bool =
   fcQPixmap_save2(self.h, struct_miqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))), format)
 
-proc save*(self: gen_qpixmap_types.QPixmap, fileName: string, format: cstring, quality: cint): bool =
+proc save*(self: gen_qpixmap_types.QPixmap, fileName: openArray[char], format: cstring, quality: cint): bool =
   fcQPixmap_save3(self.h, struct_miqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))), format, quality)
 
 proc save*(self: gen_qpixmap_types.QPixmap, device: gen_qiodevice_types.QIODevice, format: cstring): bool =
@@ -578,7 +578,7 @@ proc create*(T: type gen_qpixmap_types.QPixmap,
   fcQPixmap_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qpixmap_types.QPixmap,
-    fileName: string,
+    fileName: openArray[char],
     vtbl: ref QPixmapVTable = nil): gen_qpixmap_types.QPixmap =
   let vtbl = if vtbl == nil: new QPixmapVTable else: vtbl
   GC_ref(vtbl)
@@ -624,7 +624,7 @@ proc create*(T: type gen_qpixmap_types.QPixmap,
   fcQPixmap_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qpixmap_types.QPixmap,
-    fileName: string, format: cstring,
+    fileName: openArray[char], format: cstring,
     vtbl: ref QPixmapVTable = nil): gen_qpixmap_types.QPixmap =
   let vtbl = if vtbl == nil: new QPixmapVTable else: vtbl
   GC_ref(vtbl)
@@ -647,7 +647,7 @@ proc create*(T: type gen_qpixmap_types.QPixmap,
   fcQPixmap_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qpixmap_types.QPixmap,
-    fileName: string, format: cstring, flags: cint,
+    fileName: openArray[char], format: cstring, flags: cint,
     vtbl: ref QPixmapVTable = nil): gen_qpixmap_types.QPixmap =
   let vtbl = if vtbl == nil: new QPixmapVTable else: vtbl
   GC_ref(vtbl)
@@ -687,6 +687,7 @@ proc create*(T: type gen_qpixmap_types.QPixmap,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQPixmap_new(addr(cQPixmap_mvtbl), csize_t(sizeof(pointer)))
   fcQPixmap_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qpixmap_types.QPixmap,
     w: cint, h: cint,
@@ -694,6 +695,7 @@ proc create*(T: type gen_qpixmap_types.QPixmap,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQPixmap_new2(addr(cQPixmap_mvtbl), csize_t(sizeof(pointer)), w, h)
   fcQPixmap_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qpixmap_types.QPixmap,
     param1: gen_qsize_types.QSize,
@@ -701,13 +703,15 @@ proc create*(T: type gen_qpixmap_types.QPixmap,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQPixmap_new3(addr(cQPixmap_mvtbl), csize_t(sizeof(pointer)), param1.h)
   fcQPixmap_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qpixmap_types.QPixmap,
-    fileName: string,
+    fileName: openArray[char],
     inst: VirtualQPixmap) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQPixmap_new4(addr(cQPixmap_mvtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))))
   fcQPixmap_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qpixmap_types.QPixmap,
     param1: gen_qpixmap_types.QPixmap,
@@ -715,18 +719,21 @@ proc create*(T: type gen_qpixmap_types.QPixmap,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQPixmap_new5(addr(cQPixmap_mvtbl), csize_t(sizeof(pointer)), param1.h)
   fcQPixmap_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qpixmap_types.QPixmap,
-    fileName: string, format: cstring,
+    fileName: openArray[char], format: cstring,
     inst: VirtualQPixmap) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQPixmap_new6(addr(cQPixmap_mvtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))), format)
   fcQPixmap_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qpixmap_types.QPixmap,
-    fileName: string, format: cstring, flags: cint,
+    fileName: openArray[char], format: cstring, flags: cint,
     inst: VirtualQPixmap) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQPixmap_new7(addr(cQPixmap_mvtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))), format, cint(flags))
   fcQPixmap_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 

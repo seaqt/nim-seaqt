@@ -725,7 +725,7 @@ proc fcQWaveDecoder_method_callback_disconnectNotify(self: pointer, signal: poin
 proc setOpenMode*(self: gen_qwavedecoder_types.QWaveDecoder, openMode: cint): void =
   fcQWaveDecoder_protectedbase_setOpenMode(self.h, cint(openMode))
 
-proc setErrorString*(self: gen_qwavedecoder_types.QWaveDecoder, errorString: string): void =
+proc setErrorString*(self: gen_qwavedecoder_types.QWaveDecoder, errorString: openArray[char]): void =
   fcQWaveDecoder_protectedbase_setErrorString(self.h, struct_miqt_string(data: if len(errorString) > 0: addr errorString[0] else: nil, len: csize_t(len(errorString))))
 
 proc sender*(self: gen_qwavedecoder_types.QWaveDecoder): gen_qobject_types.QObject =
@@ -1022,6 +1022,7 @@ proc create*(T: type gen_qwavedecoder_types.QWaveDecoder,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQWaveDecoder_new(addr(cQWaveDecoder_mvtbl), csize_t(sizeof(pointer)), device.h)
   fcQWaveDecoder_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qwavedecoder_types.QWaveDecoder,
     device: gen_qiodevice_types.QIODevice, format: gen_qaudioformat_types.QAudioFormat,
@@ -1029,6 +1030,7 @@ proc create*(T: type gen_qwavedecoder_types.QWaveDecoder,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQWaveDecoder_new2(addr(cQWaveDecoder_mvtbl), csize_t(sizeof(pointer)), device.h, format.h)
   fcQWaveDecoder_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qwavedecoder_types.QWaveDecoder,
     device: gen_qiodevice_types.QIODevice, parent: gen_qobject_types.QObject,
@@ -1036,6 +1038,7 @@ proc create*(T: type gen_qwavedecoder_types.QWaveDecoder,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQWaveDecoder_new3(addr(cQWaveDecoder_mvtbl), csize_t(sizeof(pointer)), device.h, parent.h)
   fcQWaveDecoder_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qwavedecoder_types.QWaveDecoder,
     device: gen_qiodevice_types.QIODevice, format: gen_qaudioformat_types.QAudioFormat, parent: gen_qobject_types.QObject,
@@ -1043,6 +1046,7 @@ proc create*(T: type gen_qwavedecoder_types.QWaveDecoder,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQWaveDecoder_new4(addr(cQWaveDecoder_mvtbl), csize_t(sizeof(pointer)), device.h, format.h, parent.h)
   fcQWaveDecoder_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qwavedecoder_types.QWaveDecoder): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQWaveDecoder_staticMetaObject())

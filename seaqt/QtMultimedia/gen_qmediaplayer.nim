@@ -691,10 +691,10 @@ proc onerrorChanged*(self: gen_qmediaplayer_types.QMediaPlayer, slot: QMediaPlay
   GC_ref(tmp)
   fcQMediaPlayer_connect_errorChanged(self.h, cast[int](addr tmp[]), fcQMediaPlayer_slot_callback_errorChanged, fcQMediaPlayer_slot_callback_errorChanged_release)
 
-proc errorOccurred*(self: gen_qmediaplayer_types.QMediaPlayer, error: cint, errorString: string): void =
+proc errorOccurred*(self: gen_qmediaplayer_types.QMediaPlayer, error: cint, errorString: openArray[char]): void =
   fcQMediaPlayer_errorOccurred(self.h, cint(error), struct_miqt_string(data: if len(errorString) > 0: addr errorString[0] else: nil, len: csize_t(len(errorString))))
 
-type QMediaPlayererrorOccurredSlot* = proc(error: cint, errorString: string)
+type QMediaPlayererrorOccurredSlot* = proc(error: cint, errorString: openArray[char])
 proc fcQMediaPlayer_slot_callback_errorOccurred(slot: int, error: cint, errorString: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QMediaPlayererrorOccurredSlot](cast[pointer](slot))
   let slotval1 = cint(error)
@@ -1027,6 +1027,7 @@ proc create*(T: type gen_qmediaplayer_types.QMediaPlayer,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQMediaPlayer_new(addr(cQMediaPlayer_mvtbl), csize_t(sizeof(pointer)))
   fcQMediaPlayer_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qmediaplayer_types.QMediaPlayer,
     parent: gen_qobject_types.QObject,
@@ -1034,6 +1035,7 @@ proc create*(T: type gen_qmediaplayer_types.QMediaPlayer,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQMediaPlayer_new2(addr(cQMediaPlayer_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQMediaPlayer_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qmediaplayer_types.QMediaPlayer): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQMediaPlayer_staticMetaObject())

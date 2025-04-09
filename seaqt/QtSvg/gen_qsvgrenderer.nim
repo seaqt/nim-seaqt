@@ -189,19 +189,19 @@ proc setCurrentFrame*(self: gen_qsvgrenderer_types.QSvgRenderer, currentFrame: c
 proc animationDuration*(self: gen_qsvgrenderer_types.QSvgRenderer): cint =
   fcQSvgRenderer_animationDuration(self.h)
 
-proc boundsOnElement*(self: gen_qsvgrenderer_types.QSvgRenderer, id: string): gen_qrect_types.QRectF =
+proc boundsOnElement*(self: gen_qsvgrenderer_types.QSvgRenderer, id: openArray[char]): gen_qrect_types.QRectF =
   gen_qrect_types.QRectF(h: fcQSvgRenderer_boundsOnElement(self.h, struct_miqt_string(data: if len(id) > 0: addr id[0] else: nil, len: csize_t(len(id)))), owned: true)
 
-proc elementExists*(self: gen_qsvgrenderer_types.QSvgRenderer, id: string): bool =
+proc elementExists*(self: gen_qsvgrenderer_types.QSvgRenderer, id: openArray[char]): bool =
   fcQSvgRenderer_elementExists(self.h, struct_miqt_string(data: if len(id) > 0: addr id[0] else: nil, len: csize_t(len(id))))
 
-proc transformForElement*(self: gen_qsvgrenderer_types.QSvgRenderer, id: string): gen_qtransform_types.QTransform =
+proc transformForElement*(self: gen_qsvgrenderer_types.QSvgRenderer, id: openArray[char]): gen_qtransform_types.QTransform =
   gen_qtransform_types.QTransform(h: fcQSvgRenderer_transformForElement(self.h, struct_miqt_string(data: if len(id) > 0: addr id[0] else: nil, len: csize_t(len(id)))), owned: true)
 
-proc load*(self: gen_qsvgrenderer_types.QSvgRenderer, filename: string): bool =
+proc load*(self: gen_qsvgrenderer_types.QSvgRenderer, filename: openArray[char]): bool =
   fcQSvgRenderer_load(self.h, struct_miqt_string(data: if len(filename) > 0: addr filename[0] else: nil, len: csize_t(len(filename))))
 
-proc load*(self: gen_qsvgrenderer_types.QSvgRenderer, contents: seq[byte]): bool =
+proc load*(self: gen_qsvgrenderer_types.QSvgRenderer, contents: openArray[byte]): bool =
   fcQSvgRenderer_loadWithContents(self.h, struct_miqt_string(data: if len(contents) > 0: addr contents[0] else: nil, len: csize_t(len(contents))))
 
 proc load*(self: gen_qsvgrenderer_types.QSvgRenderer, contents: gen_qxmlstream_types.QXmlStreamReader): bool =
@@ -213,7 +213,7 @@ proc render*(self: gen_qsvgrenderer_types.QSvgRenderer, p: gen_qpainter_types.QP
 proc render*(self: gen_qsvgrenderer_types.QSvgRenderer, p: gen_qpainter_types.QPainter, bounds: gen_qrect_types.QRectF): void =
   fcQSvgRenderer_render2(self.h, p.h, bounds.h)
 
-proc render*(self: gen_qsvgrenderer_types.QSvgRenderer, p: gen_qpainter_types.QPainter, elementId: string): void =
+proc render*(self: gen_qsvgrenderer_types.QSvgRenderer, p: gen_qpainter_types.QPainter, elementId: openArray[char]): void =
   fcQSvgRenderer_render3(self.h, p.h, struct_miqt_string(data: if len(elementId) > 0: addr elementId[0] else: nil, len: csize_t(len(elementId))))
 
 proc repaintNeeded*(self: gen_qsvgrenderer_types.QSvgRenderer): void =
@@ -246,7 +246,7 @@ proc tr*(_: type gen_qsvgrenderer_types.QSvgRenderer, s: cstring, c: cstring, n:
   c_free(v_ms.data)
   vx_ret
 
-proc render*(self: gen_qsvgrenderer_types.QSvgRenderer, p: gen_qpainter_types.QPainter, elementId: string, bounds: gen_qrect_types.QRectF): void =
+proc render*(self: gen_qsvgrenderer_types.QSvgRenderer, p: gen_qpainter_types.QPainter, elementId: openArray[char], bounds: gen_qrect_types.QRectF): void =
   fcQSvgRenderer_render32(self.h, p.h, struct_miqt_string(data: if len(elementId) > 0: addr elementId[0] else: nil, len: csize_t(len(elementId))), bounds.h)
 
 type QSvgRenderermetaObjectProc* = proc(self: QSvgRenderer): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
@@ -493,7 +493,7 @@ proc create*(T: type gen_qsvgrenderer_types.QSvgRenderer,
   fcQSvgRenderer_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qsvgrenderer_types.QSvgRenderer,
-    filename: string,
+    filename: openArray[char],
     vtbl: ref QSvgRendererVTable = nil): gen_qsvgrenderer_types.QSvgRenderer =
   let vtbl = if vtbl == nil: new QSvgRendererVTable else: vtbl
   GC_ref(vtbl)
@@ -524,7 +524,7 @@ proc create*(T: type gen_qsvgrenderer_types.QSvgRenderer,
   fcQSvgRenderer_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qsvgrenderer_types.QSvgRenderer,
-    contents: seq[byte],
+    contents: openArray[byte],
     vtbl: ref QSvgRendererVTable = nil): gen_qsvgrenderer_types.QSvgRenderer =
   let vtbl = if vtbl == nil: new QSvgRendererVTable else: vtbl
   GC_ref(vtbl)
@@ -617,7 +617,7 @@ proc create*(T: type gen_qsvgrenderer_types.QSvgRenderer,
   fcQSvgRenderer_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qsvgrenderer_types.QSvgRenderer,
-    filename: string, parent: gen_qobject_types.QObject,
+    filename: openArray[char], parent: gen_qobject_types.QObject,
     vtbl: ref QSvgRendererVTable = nil): gen_qsvgrenderer_types.QSvgRenderer =
   let vtbl = if vtbl == nil: new QSvgRendererVTable else: vtbl
   GC_ref(vtbl)
@@ -648,7 +648,7 @@ proc create*(T: type gen_qsvgrenderer_types.QSvgRenderer,
   fcQSvgRenderer_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qsvgrenderer_types.QSvgRenderer,
-    contents: seq[byte], parent: gen_qobject_types.QObject,
+    contents: openArray[byte], parent: gen_qobject_types.QObject,
     vtbl: ref QSvgRendererVTable = nil): gen_qsvgrenderer_types.QSvgRenderer =
   let vtbl = if vtbl == nil: new QSvgRendererVTable else: vtbl
   GC_ref(vtbl)
@@ -731,20 +731,23 @@ proc create*(T: type gen_qsvgrenderer_types.QSvgRenderer,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQSvgRenderer_new(addr(cQSvgRenderer_mvtbl), csize_t(sizeof(pointer)))
   fcQSvgRenderer_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qsvgrenderer_types.QSvgRenderer,
-    filename: string,
+    filename: openArray[char],
     inst: VirtualQSvgRenderer) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQSvgRenderer_new2(addr(cQSvgRenderer_mvtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(filename) > 0: addr filename[0] else: nil, len: csize_t(len(filename))))
   fcQSvgRenderer_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qsvgrenderer_types.QSvgRenderer,
-    contents: seq[byte],
+    contents: openArray[byte],
     inst: VirtualQSvgRenderer) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQSvgRenderer_new3(addr(cQSvgRenderer_mvtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(contents) > 0: addr contents[0] else: nil, len: csize_t(len(contents))))
   fcQSvgRenderer_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qsvgrenderer_types.QSvgRenderer,
     contents: gen_qxmlstream_types.QXmlStreamReader,
@@ -752,6 +755,7 @@ proc create*(T: type gen_qsvgrenderer_types.QSvgRenderer,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQSvgRenderer_new4(addr(cQSvgRenderer_mvtbl), csize_t(sizeof(pointer)), contents.h)
   fcQSvgRenderer_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qsvgrenderer_types.QSvgRenderer,
     parent: gen_qobject_types.QObject,
@@ -759,20 +763,23 @@ proc create*(T: type gen_qsvgrenderer_types.QSvgRenderer,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQSvgRenderer_new5(addr(cQSvgRenderer_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQSvgRenderer_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qsvgrenderer_types.QSvgRenderer,
-    filename: string, parent: gen_qobject_types.QObject,
+    filename: openArray[char], parent: gen_qobject_types.QObject,
     inst: VirtualQSvgRenderer) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQSvgRenderer_new6(addr(cQSvgRenderer_mvtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(filename) > 0: addr filename[0] else: nil, len: csize_t(len(filename))), parent.h)
   fcQSvgRenderer_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qsvgrenderer_types.QSvgRenderer,
-    contents: seq[byte], parent: gen_qobject_types.QObject,
+    contents: openArray[byte], parent: gen_qobject_types.QObject,
     inst: VirtualQSvgRenderer) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQSvgRenderer_new7(addr(cQSvgRenderer_mvtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(contents) > 0: addr contents[0] else: nil, len: csize_t(len(contents))), parent.h)
   fcQSvgRenderer_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qsvgrenderer_types.QSvgRenderer,
     contents: gen_qxmlstream_types.QXmlStreamReader, parent: gen_qobject_types.QObject,
@@ -780,6 +787,7 @@ proc create*(T: type gen_qsvgrenderer_types.QSvgRenderer,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQSvgRenderer_new8(addr(cQSvgRenderer_mvtbl), csize_t(sizeof(pointer)), contents.h, parent.h)
   fcQSvgRenderer_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qsvgrenderer_types.QSvgRenderer): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQSvgRenderer_staticMetaObject())

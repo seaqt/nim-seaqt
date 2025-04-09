@@ -649,6 +649,7 @@ proc create*(T: type gen_qaudioroom_types.QAudioRoom,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQAudioRoom_new(addr(cQAudioRoom_mvtbl), csize_t(sizeof(pointer)), engine.h)
   fcQAudioRoom_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qaudioroom_types.QAudioRoom): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQAudioRoom_staticMetaObject())

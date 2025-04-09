@@ -189,7 +189,7 @@ proc persistentStoragePath*(self: gen_qwebengineprofile_types.QWebEngineProfile)
   c_free(v_ms.data)
   vx_ret
 
-proc setPersistentStoragePath*(self: gen_qwebengineprofile_types.QWebEngineProfile, path: string): void =
+proc setPersistentStoragePath*(self: gen_qwebengineprofile_types.QWebEngineProfile, path: openArray[char]): void =
   fcQWebEngineProfile_setPersistentStoragePath(self.h, struct_miqt_string(data: if len(path) > 0: addr path[0] else: nil, len: csize_t(len(path))))
 
 proc cachePath*(self: gen_qwebengineprofile_types.QWebEngineProfile): string =
@@ -198,7 +198,7 @@ proc cachePath*(self: gen_qwebengineprofile_types.QWebEngineProfile): string =
   c_free(v_ms.data)
   vx_ret
 
-proc setCachePath*(self: gen_qwebengineprofile_types.QWebEngineProfile, path: string): void =
+proc setCachePath*(self: gen_qwebengineprofile_types.QWebEngineProfile, path: openArray[char]): void =
   fcQWebEngineProfile_setCachePath(self.h, struct_miqt_string(data: if len(path) > 0: addr path[0] else: nil, len: csize_t(len(path))))
 
 proc httpUserAgent*(self: gen_qwebengineprofile_types.QWebEngineProfile): string =
@@ -207,7 +207,7 @@ proc httpUserAgent*(self: gen_qwebengineprofile_types.QWebEngineProfile): string
   c_free(v_ms.data)
   vx_ret
 
-proc setHttpUserAgent*(self: gen_qwebengineprofile_types.QWebEngineProfile, userAgent: string): void =
+proc setHttpUserAgent*(self: gen_qwebengineprofile_types.QWebEngineProfile, userAgent: openArray[char]): void =
   fcQWebEngineProfile_setHttpUserAgent(self.h, struct_miqt_string(data: if len(userAgent) > 0: addr userAgent[0] else: nil, len: csize_t(len(userAgent))))
 
 proc httpCacheType*(self: gen_qwebengineprofile_types.QWebEngineProfile): cint =
@@ -216,7 +216,7 @@ proc httpCacheType*(self: gen_qwebengineprofile_types.QWebEngineProfile): cint =
 proc setHttpCacheType*(self: gen_qwebengineprofile_types.QWebEngineProfile, httpCacheType: cint): void =
   fcQWebEngineProfile_setHttpCacheType(self.h, cint(httpCacheType))
 
-proc setHttpAcceptLanguage*(self: gen_qwebengineprofile_types.QWebEngineProfile, httpAcceptLanguage: string): void =
+proc setHttpAcceptLanguage*(self: gen_qwebengineprofile_types.QWebEngineProfile, httpAcceptLanguage: openArray[char]): void =
   fcQWebEngineProfile_setHttpAcceptLanguage(self.h, struct_miqt_string(data: if len(httpAcceptLanguage) > 0: addr httpAcceptLanguage[0] else: nil, len: csize_t(len(httpAcceptLanguage))))
 
 proc httpAcceptLanguage*(self: gen_qwebengineprofile_types.QWebEngineProfile): string =
@@ -246,7 +246,7 @@ proc setUrlRequestInterceptor*(self: gen_qwebengineprofile_types.QWebEngineProfi
 proc clearAllVisitedLinks*(self: gen_qwebengineprofile_types.QWebEngineProfile): void =
   fcQWebEngineProfile_clearAllVisitedLinks(self.h)
 
-proc clearVisitedLinks*(self: gen_qwebengineprofile_types.QWebEngineProfile, urls: seq[gen_qurl_types.QUrl]): void =
+proc clearVisitedLinks*(self: gen_qwebengineprofile_types.QWebEngineProfile, urls: openArray[gen_qurl_types.QUrl]): void =
   var urls_CArray = newSeq[pointer](len(urls))
   for i in 0..<len(urls):
     urls_CArray[i] = urls[i].h
@@ -262,13 +262,13 @@ proc settings*(self: gen_qwebengineprofile_types.QWebEngineProfile): gen_qwebeng
 proc scripts*(self: gen_qwebengineprofile_types.QWebEngineProfile): gen_qwebenginescriptcollection_types.QWebEngineScriptCollection =
   gen_qwebenginescriptcollection_types.QWebEngineScriptCollection(h: fcQWebEngineProfile_scripts(self.h), owned: false)
 
-proc urlSchemeHandler*(self: gen_qwebengineprofile_types.QWebEngineProfile, param1: seq[byte]): gen_qwebengineurlschemehandler_types.QWebEngineUrlSchemeHandler =
+proc urlSchemeHandler*(self: gen_qwebengineprofile_types.QWebEngineProfile, param1: openArray[byte]): gen_qwebengineurlschemehandler_types.QWebEngineUrlSchemeHandler =
   gen_qwebengineurlschemehandler_types.QWebEngineUrlSchemeHandler(h: fcQWebEngineProfile_urlSchemeHandler(self.h, struct_miqt_string(data: if len(param1) > 0: addr param1[0] else: nil, len: csize_t(len(param1)))), owned: false)
 
-proc installUrlSchemeHandler*(self: gen_qwebengineprofile_types.QWebEngineProfile, scheme: seq[byte], param2: gen_qwebengineurlschemehandler_types.QWebEngineUrlSchemeHandler): void =
+proc installUrlSchemeHandler*(self: gen_qwebengineprofile_types.QWebEngineProfile, scheme: openArray[byte], param2: gen_qwebengineurlschemehandler_types.QWebEngineUrlSchemeHandler): void =
   fcQWebEngineProfile_installUrlSchemeHandler(self.h, struct_miqt_string(data: if len(scheme) > 0: addr scheme[0] else: nil, len: csize_t(len(scheme))), param2.h)
 
-proc removeUrlScheme*(self: gen_qwebengineprofile_types.QWebEngineProfile, scheme: seq[byte]): void =
+proc removeUrlScheme*(self: gen_qwebengineprofile_types.QWebEngineProfile, scheme: openArray[byte]): void =
   fcQWebEngineProfile_removeUrlScheme(self.h, struct_miqt_string(data: if len(scheme) > 0: addr scheme[0] else: nil, len: csize_t(len(scheme))))
 
 proc removeUrlSchemeHandler*(self: gen_qwebengineprofile_types.QWebEngineProfile, param1: gen_qwebengineurlschemehandler_types.QWebEngineUrlSchemeHandler): void =
@@ -280,7 +280,7 @@ proc removeAllUrlSchemeHandlers*(self: gen_qwebengineprofile_types.QWebEnginePro
 proc clearHttpCache*(self: gen_qwebengineprofile_types.QWebEngineProfile): void =
   fcQWebEngineProfile_clearHttpCache(self.h)
 
-proc setSpellCheckLanguages*(self: gen_qwebengineprofile_types.QWebEngineProfile, languages: seq[string]): void =
+proc setSpellCheckLanguages*(self: gen_qwebengineprofile_types.QWebEngineProfile, languages: openArray[string]): void =
   var languages_CArray = newSeq[struct_miqt_string](len(languages))
   for i in 0..<len(languages):
     languages_CArray[i] = struct_miqt_string(data: if len(languages[i]) > 0: addr languages[i][0] else: nil, len: csize_t(len(languages[i])))
@@ -311,7 +311,7 @@ proc downloadPath*(self: gen_qwebengineprofile_types.QWebEngineProfile): string 
   c_free(v_ms.data)
   vx_ret
 
-proc setDownloadPath*(self: gen_qwebengineprofile_types.QWebEngineProfile, path: string): void =
+proc setDownloadPath*(self: gen_qwebengineprofile_types.QWebEngineProfile, path: openArray[char]): void =
   fcQWebEngineProfile_setDownloadPath(self.h, struct_miqt_string(data: if len(path) > 0: addr path[0] else: nil, len: csize_t(len(path))))
 
 proc clientCertificateStore*(self: gen_qwebengineprofile_types.QWebEngineProfile): gen_qwebengineclientcertificatestore_types.QWebEngineClientCertificateStore =
@@ -596,7 +596,7 @@ proc create*(T: type gen_qwebengineprofile_types.QWebEngineProfile,
   fcQWebEngineProfile_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qwebengineprofile_types.QWebEngineProfile,
-    name: string,
+    name: openArray[char],
     vtbl: ref QWebEngineProfileVTable = nil): gen_qwebengineprofile_types.QWebEngineProfile =
   let vtbl = if vtbl == nil: new QWebEngineProfileVTable else: vtbl
   GC_ref(vtbl)
@@ -658,7 +658,7 @@ proc create*(T: type gen_qwebengineprofile_types.QWebEngineProfile,
   fcQWebEngineProfile_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qwebengineprofile_types.QWebEngineProfile,
-    name: string, parent: gen_qobject_types.QObject,
+    name: openArray[char], parent: gen_qobject_types.QObject,
     vtbl: ref QWebEngineProfileVTable = nil): gen_qwebengineprofile_types.QWebEngineProfile =
   let vtbl = if vtbl == nil: new QWebEngineProfileVTable else: vtbl
   GC_ref(vtbl)
@@ -710,13 +710,15 @@ proc create*(T: type gen_qwebengineprofile_types.QWebEngineProfile,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQWebEngineProfile_new(addr(cQWebEngineProfile_mvtbl), csize_t(sizeof(pointer)))
   fcQWebEngineProfile_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qwebengineprofile_types.QWebEngineProfile,
-    name: string,
+    name: openArray[char],
     inst: VirtualQWebEngineProfile) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQWebEngineProfile_new2(addr(cQWebEngineProfile_mvtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))))
   fcQWebEngineProfile_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qwebengineprofile_types.QWebEngineProfile,
     parent: gen_qobject_types.QObject,
@@ -724,13 +726,15 @@ proc create*(T: type gen_qwebengineprofile_types.QWebEngineProfile,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQWebEngineProfile_new3(addr(cQWebEngineProfile_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQWebEngineProfile_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qwebengineprofile_types.QWebEngineProfile,
-    name: string, parent: gen_qobject_types.QObject,
+    name: openArray[char], parent: gen_qobject_types.QObject,
     inst: VirtualQWebEngineProfile) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQWebEngineProfile_new4(addr(cQWebEngineProfile_mvtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), parent.h)
   fcQWebEngineProfile_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qwebengineprofile_types.QWebEngineProfile): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQWebEngineProfile_staticMetaObject())

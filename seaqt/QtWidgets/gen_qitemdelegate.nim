@@ -227,7 +227,7 @@ type QItemDelegatecreateEditorProc* = proc(self: QItemDelegate, parent: gen_qwid
 type QItemDelegatesetEditorDataProc* = proc(self: QItemDelegate, editor: gen_qwidget_types.QWidget, index: gen_qabstractitemmodel_types.QModelIndex): void {.raises: [], gcsafe.}
 type QItemDelegatesetModelDataProc* = proc(self: QItemDelegate, editor: gen_qwidget_types.QWidget, model: gen_qabstractitemmodel_types.QAbstractItemModel, index: gen_qabstractitemmodel_types.QModelIndex): void {.raises: [], gcsafe.}
 type QItemDelegateupdateEditorGeometryProc* = proc(self: QItemDelegate, editor: gen_qwidget_types.QWidget, option: gen_qstyleoption_types.QStyleOptionViewItem, index: gen_qabstractitemmodel_types.QModelIndex): void {.raises: [], gcsafe.}
-type QItemDelegatedrawDisplayProc* = proc(self: QItemDelegate, painter: gen_qpainter_types.QPainter, option: gen_qstyleoption_types.QStyleOptionViewItem, rect: gen_qrect_types.QRect, text: string): void {.raises: [], gcsafe.}
+type QItemDelegatedrawDisplayProc* = proc(self: QItemDelegate, painter: gen_qpainter_types.QPainter, option: gen_qstyleoption_types.QStyleOptionViewItem, rect: gen_qrect_types.QRect, text: openArray[char]): void {.raises: [], gcsafe.}
 type QItemDelegatedrawDecorationProc* = proc(self: QItemDelegate, painter: gen_qpainter_types.QPainter, option: gen_qstyleoption_types.QStyleOptionViewItem, rect: gen_qrect_types.QRect, pixmap: gen_qpixmap_types.QPixmap): void {.raises: [], gcsafe.}
 type QItemDelegatedrawFocusProc* = proc(self: QItemDelegate, painter: gen_qpainter_types.QPainter, option: gen_qstyleoption_types.QStyleOptionViewItem, rect: gen_qrect_types.QRect): void {.raises: [], gcsafe.}
 type QItemDelegatedrawCheckProc* = proc(self: QItemDelegate, painter: gen_qpainter_types.QPainter, option: gen_qstyleoption_types.QStyleOptionViewItem, rect: gen_qrect_types.QRect, state: cint): void {.raises: [], gcsafe.}
@@ -374,7 +374,7 @@ proc fcQItemDelegate_vtable_callback_updateEditorGeometry(self: pointer, editor:
   let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   vtbl[].updateEditorGeometry(self, slotval1, slotval2, slotval3)
 
-proc QItemDelegatedrawDisplay*(self: gen_qitemdelegate_types.QItemDelegate, painter: gen_qpainter_types.QPainter, option: gen_qstyleoption_types.QStyleOptionViewItem, rect: gen_qrect_types.QRect, text: string): void =
+proc QItemDelegatedrawDisplay*(self: gen_qitemdelegate_types.QItemDelegate, painter: gen_qpainter_types.QPainter, option: gen_qstyleoption_types.QStyleOptionViewItem, rect: gen_qrect_types.QRect, text: openArray[char]): void =
   fcQItemDelegate_virtualbase_drawDisplay(self.h, painter.h, option.h, rect.h, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
 
 proc fcQItemDelegate_vtable_callback_drawDisplay(self: pointer, painter: pointer, option: pointer, rect: pointer, text: struct_miqt_string): void {.cdecl.} =
@@ -626,7 +626,7 @@ proc fcQItemDelegate_method_callback_updateEditorGeometry(self: pointer, editor:
   let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   inst.updateEditorGeometry(slotval1, slotval2, slotval3)
 
-method drawDisplay*(self: VirtualQItemDelegate, painter: gen_qpainter_types.QPainter, option: gen_qstyleoption_types.QStyleOptionViewItem, rect: gen_qrect_types.QRect, text: string): void {.base.} =
+method drawDisplay*(self: VirtualQItemDelegate, painter: gen_qpainter_types.QPainter, option: gen_qstyleoption_types.QStyleOptionViewItem, rect: gen_qrect_types.QRect, text: openArray[char]): void {.base.} =
   QItemDelegatedrawDisplay(self[], painter, option, rect, text)
 proc fcQItemDelegate_method_callback_drawDisplay(self: pointer, painter: pointer, option: pointer, rect: pointer, text: struct_miqt_string): void {.cdecl.} =
   let inst = cast[VirtualQItemDelegate](fcQItemDelegate_vdata(self)[])
@@ -779,7 +779,7 @@ proc decoration*(self: gen_qitemdelegate_types.QItemDelegate, option: gen_qstyle
 proc doCheck*(self: gen_qitemdelegate_types.QItemDelegate, option: gen_qstyleoption_types.QStyleOptionViewItem, bounding: gen_qrect_types.QRect, variant: gen_qvariant_types.QVariant): gen_qrect_types.QRect =
   gen_qrect_types.QRect(h: fcQItemDelegate_protectedbase_doCheck(self.h, option.h, bounding.h, variant.h), owned: true)
 
-proc textRectangle*(self: gen_qitemdelegate_types.QItemDelegate, painter: gen_qpainter_types.QPainter, rect: gen_qrect_types.QRect, font: gen_qfont_types.QFont, text: string): gen_qrect_types.QRect =
+proc textRectangle*(self: gen_qitemdelegate_types.QItemDelegate, painter: gen_qpainter_types.QPainter, rect: gen_qrect_types.QRect, font: gen_qfont_types.QFont, text: openArray[char]): gen_qrect_types.QRect =
   gen_qrect_types.QRect(h: fcQItemDelegate_protectedbase_textRectangle(self.h, painter.h, rect.h, font.h, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))), owned: true)
 
 proc sender*(self: gen_qitemdelegate_types.QItemDelegate): gen_qobject_types.QObject =
@@ -947,6 +947,7 @@ proc create*(T: type gen_qitemdelegate_types.QItemDelegate,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQItemDelegate_new(addr(cQItemDelegate_mvtbl), csize_t(sizeof(pointer)))
   fcQItemDelegate_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qitemdelegate_types.QItemDelegate,
     parent: gen_qobject_types.QObject,
@@ -954,6 +955,7 @@ proc create*(T: type gen_qitemdelegate_types.QItemDelegate,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQItemDelegate_new2(addr(cQItemDelegate_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQItemDelegate_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qitemdelegate_types.QItemDelegate): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQItemDelegate_staticMetaObject())

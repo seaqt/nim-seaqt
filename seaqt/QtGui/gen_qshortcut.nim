@@ -141,7 +141,7 @@ proc key*(self: gen_qshortcut_types.QShortcut): gen_qkeysequence_types.QKeySeque
 proc setKeys*(self: gen_qshortcut_types.QShortcut, key: cint): void =
   fcQShortcut_setKeys(self.h, cint(key))
 
-proc setKeys*(self: gen_qshortcut_types.QShortcut, keys: seq[gen_qkeysequence_types.QKeySequence]): void =
+proc setKeys*(self: gen_qshortcut_types.QShortcut, keys: openArray[gen_qkeysequence_types.QKeySequence]): void =
   var keys_CArray = newSeq[pointer](len(keys))
   for i in 0..<len(keys):
     keys_CArray[i] = keys[i].h
@@ -178,7 +178,7 @@ proc autoRepeat*(self: gen_qshortcut_types.QShortcut): bool =
 proc id*(self: gen_qshortcut_types.QShortcut): cint =
   fcQShortcut_id(self.h)
 
-proc setWhatsThis*(self: gen_qshortcut_types.QShortcut, text: string): void =
+proc setWhatsThis*(self: gen_qshortcut_types.QShortcut, text: openArray[char]): void =
   fcQShortcut_setWhatsThis(self.h, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
 
 proc whatsThis*(self: gen_qshortcut_types.QShortcut): string =
@@ -750,6 +750,7 @@ proc create*(T: type gen_qshortcut_types.QShortcut,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQShortcut_new(addr(cQShortcut_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQShortcut_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qshortcut_types.QShortcut,
     key: gen_qkeysequence_types.QKeySequence, parent: gen_qobject_types.QObject,
@@ -757,6 +758,7 @@ proc create*(T: type gen_qshortcut_types.QShortcut,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQShortcut_new2(addr(cQShortcut_mvtbl), csize_t(sizeof(pointer)), key.h, parent.h)
   fcQShortcut_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qshortcut_types.QShortcut,
     key: cint, parent: gen_qobject_types.QObject,
@@ -764,6 +766,7 @@ proc create*(T: type gen_qshortcut_types.QShortcut,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQShortcut_new3(addr(cQShortcut_mvtbl), csize_t(sizeof(pointer)), cint(key), parent.h)
   fcQShortcut_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qshortcut_types.QShortcut,
     key: gen_qkeysequence_types.QKeySequence, parent: gen_qobject_types.QObject, member: cstring,
@@ -771,6 +774,7 @@ proc create*(T: type gen_qshortcut_types.QShortcut,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQShortcut_new4(addr(cQShortcut_mvtbl), csize_t(sizeof(pointer)), key.h, parent.h, member)
   fcQShortcut_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qshortcut_types.QShortcut,
     key: gen_qkeysequence_types.QKeySequence, parent: gen_qobject_types.QObject, member: cstring, ambiguousMember: cstring,
@@ -778,6 +782,7 @@ proc create*(T: type gen_qshortcut_types.QShortcut,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQShortcut_new5(addr(cQShortcut_mvtbl), csize_t(sizeof(pointer)), key.h, parent.h, member, ambiguousMember)
   fcQShortcut_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qshortcut_types.QShortcut,
     key: gen_qkeysequence_types.QKeySequence, parent: gen_qobject_types.QObject, member: cstring, ambiguousMember: cstring, context: cint,
@@ -785,6 +790,7 @@ proc create*(T: type gen_qshortcut_types.QShortcut,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQShortcut_new6(addr(cQShortcut_mvtbl), csize_t(sizeof(pointer)), key.h, parent.h, member, ambiguousMember, cint(context))
   fcQShortcut_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qshortcut_types.QShortcut,
     key: cint, parent: gen_qobject_types.QObject, member: cstring,
@@ -792,6 +798,7 @@ proc create*(T: type gen_qshortcut_types.QShortcut,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQShortcut_new7(addr(cQShortcut_mvtbl), csize_t(sizeof(pointer)), cint(key), parent.h, member)
   fcQShortcut_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qshortcut_types.QShortcut,
     key: cint, parent: gen_qobject_types.QObject, member: cstring, ambiguousMember: cstring,
@@ -799,6 +806,7 @@ proc create*(T: type gen_qshortcut_types.QShortcut,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQShortcut_new8(addr(cQShortcut_mvtbl), csize_t(sizeof(pointer)), cint(key), parent.h, member, ambiguousMember)
   fcQShortcut_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qshortcut_types.QShortcut,
     key: cint, parent: gen_qobject_types.QObject, member: cstring, ambiguousMember: cstring, context: cint,
@@ -806,6 +814,7 @@ proc create*(T: type gen_qshortcut_types.QShortcut,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQShortcut_new9(addr(cQShortcut_mvtbl), csize_t(sizeof(pointer)), cint(key), parent.h, member, ambiguousMember, cint(context))
   fcQShortcut_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qshortcut_types.QShortcut): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQShortcut_staticMetaObject())

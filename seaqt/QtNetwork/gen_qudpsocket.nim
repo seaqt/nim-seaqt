@@ -238,7 +238,7 @@ proc writeDatagram*(self: gen_qudpsocket_types.QUdpSocket, datagram: gen_qnetwor
 proc writeDatagram*(self: gen_qudpsocket_types.QUdpSocket, data: cstring, len: clonglong, host: gen_qhostaddress_types.QHostAddress, port: cushort): clonglong =
   fcQUdpSocket_writeDatagram2(self.h, data, len, host.h, port)
 
-proc writeDatagram*(self: gen_qudpsocket_types.QUdpSocket, datagram: seq[byte], host: gen_qhostaddress_types.QHostAddress, port: cushort): clonglong =
+proc writeDatagram*(self: gen_qudpsocket_types.QUdpSocket, datagram: openArray[byte], host: gen_qhostaddress_types.QHostAddress, port: cushort): clonglong =
   fcQUdpSocket_writeDatagram3(self.h, struct_miqt_string(data: if len(datagram) > 0: addr datagram[0] else: nil, len: csize_t(len(datagram))), host.h, port)
 
 proc tr*(_: type gen_qudpsocket_types.QUdpSocket, s: cstring, c: cstring): string =
@@ -273,7 +273,7 @@ type QUdpSocketmetacastProc* = proc(self: QUdpSocket, param1: cstring): pointer 
 type QUdpSocketmetacallProc* = proc(self: QUdpSocket, param1: cint, param2: cint, param3: pointer): cint {.raises: [], gcsafe.}
 type QUdpSocketresumeProc* = proc(self: QUdpSocket): void {.raises: [], gcsafe.}
 type QUdpSocketbindXProc* = proc(self: QUdpSocket, address: gen_qhostaddress_types.QHostAddress, port: cushort, mode: cint): bool {.raises: [], gcsafe.}
-type QUdpSocketconnectToHostProc* = proc(self: QUdpSocket, hostName: string, port: cushort, mode: cint, protocol: cint): void {.raises: [], gcsafe.}
+type QUdpSocketconnectToHostProc* = proc(self: QUdpSocket, hostName: openArray[char], port: cushort, mode: cint, protocol: cint): void {.raises: [], gcsafe.}
 type QUdpSocketdisconnectFromHostProc* = proc(self: QUdpSocket): void {.raises: [], gcsafe.}
 type QUdpSocketbytesAvailableProc* = proc(self: QUdpSocket): clonglong {.raises: [], gcsafe.}
 type QUdpSocketbytesToWriteProc* = proc(self: QUdpSocket): clonglong {.raises: [], gcsafe.}
@@ -400,7 +400,7 @@ proc fcQUdpSocket_vtable_callback_bindX(self: pointer, address: pointer, port: c
   var virtualReturn = vtbl[].bindX(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QUdpSocketconnectToHost*(self: gen_qudpsocket_types.QUdpSocket, hostName: string, port: cushort, mode: cint, protocol: cint): void =
+proc QUdpSocketconnectToHost*(self: gen_qudpsocket_types.QUdpSocket, hostName: openArray[char], port: cushort, mode: cint, protocol: cint): void =
   fcQUdpSocket_virtualbase_connectToHost(self.h, struct_miqt_string(data: if len(hostName) > 0: addr hostName[0] else: nil, len: csize_t(len(hostName))), port, cint(mode), cint(protocol))
 
 proc fcQUdpSocket_vtable_callback_connectToHost(self: pointer, hostName: struct_miqt_string, port: cushort, mode: cint, protocol: cint): void {.cdecl.} =
@@ -768,7 +768,7 @@ proc fcQUdpSocket_method_callback_bindX(self: pointer, address: pointer, port: c
   var virtualReturn = inst.bindX(slotval1, slotval2, slotval3)
   virtualReturn
 
-method connectToHost*(self: VirtualQUdpSocket, hostName: string, port: cushort, mode: cint, protocol: cint): void {.base.} =
+method connectToHost*(self: VirtualQUdpSocket, hostName: openArray[char], port: cushort, mode: cint, protocol: cint): void {.base.} =
   QUdpSocketconnectToHost(self[], hostName, port, mode, protocol)
 proc fcQUdpSocket_method_callback_connectToHost(self: pointer, hostName: struct_miqt_string, port: cushort, mode: cint, protocol: cint): void {.cdecl.} =
   let inst = cast[VirtualQUdpSocket](fcQUdpSocket_vdata(self)[])
@@ -1042,13 +1042,13 @@ proc setPeerPort*(self: gen_qudpsocket_types.QUdpSocket, port: cushort): void =
 proc setPeerAddress*(self: gen_qudpsocket_types.QUdpSocket, address: gen_qhostaddress_types.QHostAddress): void =
   fcQUdpSocket_protectedbase_setPeerAddress(self.h, address.h)
 
-proc setPeerName*(self: gen_qudpsocket_types.QUdpSocket, name: string): void =
+proc setPeerName*(self: gen_qudpsocket_types.QUdpSocket, name: openArray[char]): void =
   fcQUdpSocket_protectedbase_setPeerName(self.h, struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))))
 
 proc setOpenMode*(self: gen_qudpsocket_types.QUdpSocket, openMode: cint): void =
   fcQUdpSocket_protectedbase_setOpenMode(self.h, cint(openMode))
 
-proc setErrorString*(self: gen_qudpsocket_types.QUdpSocket, errorString: string): void =
+proc setErrorString*(self: gen_qudpsocket_types.QUdpSocket, errorString: openArray[char]): void =
   fcQUdpSocket_protectedbase_setErrorString(self.h, struct_miqt_string(data: if len(errorString) > 0: addr errorString[0] else: nil, len: csize_t(len(errorString))))
 
 proc sender*(self: gen_qudpsocket_types.QUdpSocket): gen_qobject_types.QObject =
@@ -1286,6 +1286,7 @@ proc create*(T: type gen_qudpsocket_types.QUdpSocket,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQUdpSocket_new(addr(cQUdpSocket_mvtbl), csize_t(sizeof(pointer)))
   fcQUdpSocket_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qudpsocket_types.QUdpSocket,
     parent: gen_qobject_types.QObject,
@@ -1293,6 +1294,7 @@ proc create*(T: type gen_qudpsocket_types.QUdpSocket,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQUdpSocket_new2(addr(cQUdpSocket_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQUdpSocket_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qudpsocket_types.QUdpSocket): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQUdpSocket_staticMetaObject())

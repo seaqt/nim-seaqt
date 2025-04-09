@@ -67,11 +67,9 @@ import ./gen_qcryptographichash_types
 export gen_qcryptographichash_types
 
 import
-  ./gen_qbytearrayview_types,
   ./gen_qiodevice_types,
   ./gen_qobjectdefs_types
 export
-  gen_qbytearrayview_types,
   gen_qiodevice_types,
   gen_qobjectdefs_types
 
@@ -79,11 +77,11 @@ type cQCryptographicHash*{.exportc: "QCryptographicHash", incompleteStruct.} = o
 
 proc fcQCryptographicHash_reset(self: pointer): void {.importc: "QCryptographicHash_reset".}
 proc fcQCryptographicHash_addData(self: pointer, data: cstring, length: int64): void {.importc: "QCryptographicHash_addData".}
-proc fcQCryptographicHash_addDataWithData(self: pointer, data: pointer): void {.importc: "QCryptographicHash_addDataWithData".}
+proc fcQCryptographicHash_addDataWithData(self: pointer, data: struct_miqt_string): void {.importc: "QCryptographicHash_addDataWithData".}
 proc fcQCryptographicHash_addDataWithDevice(self: pointer, device: pointer): bool {.importc: "QCryptographicHash_addDataWithDevice".}
 proc fcQCryptographicHash_resultX(self: pointer): struct_miqt_string {.importc: "QCryptographicHash_result".}
-proc fcQCryptographicHash_resultView(self: pointer): pointer {.importc: "QCryptographicHash_resultView".}
-proc fcQCryptographicHash_hash(data: pointer, methodVal: cint): struct_miqt_string {.importc: "QCryptographicHash_hash".}
+proc fcQCryptographicHash_resultView(self: pointer): struct_miqt_string {.importc: "QCryptographicHash_resultView".}
+proc fcQCryptographicHash_hash(data: struct_miqt_string, methodVal: cint): struct_miqt_string {.importc: "QCryptographicHash_hash".}
 proc fcQCryptographicHash_hashLength(methodVal: cint): cint {.importc: "QCryptographicHash_hashLength".}
 proc fcQCryptographicHash_new(methodVal: cint): ptr cQCryptographicHash {.importc: "QCryptographicHash_new".}
 proc fcQCryptographicHash_staticMetaObject(): pointer {.importc: "QCryptographicHash_staticMetaObject".}
@@ -94,8 +92,8 @@ proc reset*(self: gen_qcryptographichash_types.QCryptographicHash): void =
 proc addData*(self: gen_qcryptographichash_types.QCryptographicHash, data: cstring, length: int64): void =
   fcQCryptographicHash_addData(self.h, data, length)
 
-proc addData*(self: gen_qcryptographichash_types.QCryptographicHash, data: gen_qbytearrayview_types.QByteArrayView): void =
-  fcQCryptographicHash_addDataWithData(self.h, data.h)
+proc addData*(self: gen_qcryptographichash_types.QCryptographicHash, data: openArray[byte]): void =
+  fcQCryptographicHash_addDataWithData(self.h, struct_miqt_string(data: if len(data) > 0: addr data[0] else: nil, len: csize_t(len(data))))
 
 proc addData*(self: gen_qcryptographichash_types.QCryptographicHash, device: gen_qiodevice_types.QIODevice): bool =
   fcQCryptographicHash_addDataWithDevice(self.h, device.h)
@@ -106,11 +104,14 @@ proc resultX*(self: gen_qcryptographichash_types.QCryptographicHash): seq[byte] 
   c_free(v_bytearray.data)
   vx_ret
 
-proc resultView*(self: gen_qcryptographichash_types.QCryptographicHash): gen_qbytearrayview_types.QByteArrayView =
-  gen_qbytearrayview_types.QByteArrayView(h: fcQCryptographicHash_resultView(self.h), owned: true)
+proc resultView*(self: gen_qcryptographichash_types.QCryptographicHash): seq[byte] =
+  var v_bytearray = fcQCryptographicHash_resultView(self.h)
+  var vx_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](v_bytearray.data), 0, int(v_bytearray.len)-1))
+  c_free(v_bytearray.data)
+  vx_ret
 
-proc hash*(_: type gen_qcryptographichash_types.QCryptographicHash, data: gen_qbytearrayview_types.QByteArrayView, methodVal: cint): seq[byte] =
-  var v_bytearray = fcQCryptographicHash_hash(data.h, cint(methodVal))
+proc hash*(_: type gen_qcryptographichash_types.QCryptographicHash, data: openArray[byte], methodVal: cint): seq[byte] =
+  var v_bytearray = fcQCryptographicHash_hash(struct_miqt_string(data: if len(data) > 0: addr data[0] else: nil, len: csize_t(len(data))), cint(methodVal))
   var vx_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](v_bytearray.data), 0, int(v_bytearray.len)-1))
   c_free(v_bytearray.data)
   vx_ret

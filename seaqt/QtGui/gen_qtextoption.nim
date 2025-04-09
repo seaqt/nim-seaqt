@@ -127,7 +127,7 @@ proc setTabStopDistance*(self: gen_qtextoption_types.QTextOption, tabStopDistanc
 proc tabStopDistance*(self: gen_qtextoption_types.QTextOption): float64 =
   fcQTextOption_tabStopDistance(self.h)
 
-proc setTabArray*(self: gen_qtextoption_types.QTextOption, tabStops: seq[float64]): void =
+proc setTabArray*(self: gen_qtextoption_types.QTextOption, tabStops: openArray[float64]): void =
   var tabStops_CArray = newSeq[float64](len(tabStops))
   for i in 0..<len(tabStops):
     tabStops_CArray[i] = tabStops[i]
@@ -143,7 +143,7 @@ proc tabArray*(self: gen_qtextoption_types.QTextOption): seq[float64] =
   c_free(v_ma.data)
   vx_ret
 
-proc setTabs*(self: gen_qtextoption_types.QTextOption, tabStops: seq[gen_qtextoption_types.QTextOptionTab]): void =
+proc setTabs*(self: gen_qtextoption_types.QTextOption, tabStops: openArray[gen_qtextoption_types.QTextOptionTab]): void =
   var tabStops_CArray = newSeq[pointer](len(tabStops))
   for i in 0..<len(tabStops):
     tabStops_CArray[i] = tabStops[i].h

@@ -179,4 +179,5 @@ proc create*(T: type gen_qtestsupport_widgets_types.QTestQTouchEventWidgetSequen
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQTestQTouchEventWidgetSequence_new(addr(cQTestQTouchEventWidgetSequence_mvtbl), csize_t(sizeof(pointer)), param1.h)
   fcQTestQTouchEventWidgetSequence_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 

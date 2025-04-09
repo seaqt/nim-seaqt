@@ -165,4 +165,5 @@ proc create*(T: type gen_qsgvertexcolormaterial_types.QSGVertexColorMaterial,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQSGVertexColorMaterial_new(addr(cQSGVertexColorMaterial_mvtbl), csize_t(sizeof(pointer)))
   fcQSGVertexColorMaterial_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 

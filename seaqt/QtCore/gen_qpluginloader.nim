@@ -156,7 +156,7 @@ proc unload*(self: gen_qpluginloader_types.QPluginLoader): bool =
 proc isLoaded*(self: gen_qpluginloader_types.QPluginLoader): bool =
   fcQPluginLoader_isLoaded(self.h)
 
-proc setFileName*(self: gen_qpluginloader_types.QPluginLoader, fileName: string): void =
+proc setFileName*(self: gen_qpluginloader_types.QPluginLoader, fileName: openArray[char]): void =
   fcQPluginLoader_setFileName(self.h, struct_miqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))))
 
 proc fileName*(self: gen_qpluginloader_types.QPluginLoader): string =
@@ -433,7 +433,7 @@ proc create*(T: type gen_qpluginloader_types.QPluginLoader,
   fcQPluginLoader_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qpluginloader_types.QPluginLoader,
-    fileName: string,
+    fileName: openArray[char],
     vtbl: ref QPluginLoaderVTable = nil): gen_qpluginloader_types.QPluginLoader =
   let vtbl = if vtbl == nil: new QPluginLoaderVTable else: vtbl
   GC_ref(vtbl)
@@ -495,7 +495,7 @@ proc create*(T: type gen_qpluginloader_types.QPluginLoader,
   fcQPluginLoader_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qpluginloader_types.QPluginLoader,
-    fileName: string, parent: gen_qobject_types.QObject,
+    fileName: openArray[char], parent: gen_qobject_types.QObject,
     vtbl: ref QPluginLoaderVTable = nil): gen_qpluginloader_types.QPluginLoader =
   let vtbl = if vtbl == nil: new QPluginLoaderVTable else: vtbl
   GC_ref(vtbl)
@@ -547,13 +547,15 @@ proc create*(T: type gen_qpluginloader_types.QPluginLoader,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQPluginLoader_new(addr(cQPluginLoader_mvtbl), csize_t(sizeof(pointer)))
   fcQPluginLoader_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qpluginloader_types.QPluginLoader,
-    fileName: string,
+    fileName: openArray[char],
     inst: VirtualQPluginLoader) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQPluginLoader_new2(addr(cQPluginLoader_mvtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))))
   fcQPluginLoader_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qpluginloader_types.QPluginLoader,
     parent: gen_qobject_types.QObject,
@@ -561,13 +563,15 @@ proc create*(T: type gen_qpluginloader_types.QPluginLoader,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQPluginLoader_new3(addr(cQPluginLoader_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQPluginLoader_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qpluginloader_types.QPluginLoader,
-    fileName: string, parent: gen_qobject_types.QObject,
+    fileName: openArray[char], parent: gen_qobject_types.QObject,
     inst: VirtualQPluginLoader) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQPluginLoader_new4(addr(cQPluginLoader_mvtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))), parent.h)
   fcQPluginLoader_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qpluginloader_types.QPluginLoader): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQPluginLoader_staticMetaObject())

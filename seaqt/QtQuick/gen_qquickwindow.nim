@@ -378,7 +378,7 @@ proc setGraphicsApi*(_: type gen_qquickwindow_types.QQuickWindow, api: cint): vo
 proc graphicsApi*(_: type gen_qquickwindow_types.QQuickWindow): cint =
   cint(fcQQuickWindow_graphicsApi())
 
-proc setSceneGraphBackend*(_: type gen_qquickwindow_types.QQuickWindow, backend: string): void =
+proc setSceneGraphBackend*(_: type gen_qquickwindow_types.QQuickWindow, backend: openArray[char]): void =
   fcQQuickWindow_setSceneGraphBackend(struct_miqt_string(data: if len(backend) > 0: addr backend[0] else: nil, len: csize_t(len(backend))))
 
 proc sceneGraphBackend*(_: type gen_qquickwindow_types.QQuickWindow): string =
@@ -614,10 +614,10 @@ proc onactiveFocusItemChanged*(self: gen_qquickwindow_types.QQuickWindow, slot: 
   GC_ref(tmp)
   fcQQuickWindow_connect_activeFocusItemChanged(self.h, cast[int](addr tmp[]), fcQQuickWindow_slot_callback_activeFocusItemChanged, fcQQuickWindow_slot_callback_activeFocusItemChanged_release)
 
-proc sceneGraphError*(self: gen_qquickwindow_types.QQuickWindow, error: cint, message: string): void =
+proc sceneGraphError*(self: gen_qquickwindow_types.QQuickWindow, error: cint, message: openArray[char]): void =
   fcQQuickWindow_sceneGraphError(self.h, cint(error), struct_miqt_string(data: if len(message) > 0: addr message[0] else: nil, len: csize_t(len(message))))
 
-type QQuickWindowsceneGraphErrorSlot* = proc(error: cint, message: string)
+type QQuickWindowsceneGraphErrorSlot* = proc(error: cint, message: openArray[char])
 proc fcQQuickWindow_slot_callback_sceneGraphError(slot: int, error: cint, message: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QQuickWindowsceneGraphErrorSlot](cast[pointer](slot))
   let slotval1 = cint(error)
@@ -792,7 +792,7 @@ type QQuickWindowsizeProc* = proc(self: QQuickWindow): gen_qsize_types.QSize {.r
 type QQuickWindowpaintEventProc* = proc(self: QQuickWindow, param1: gen_qevent_types.QPaintEvent): void {.raises: [], gcsafe.}
 type QQuickWindowmoveEventProc* = proc(self: QQuickWindow, param1: gen_qevent_types.QMoveEvent): void {.raises: [], gcsafe.}
 type QQuickWindowtouchEventProc* = proc(self: QQuickWindow, param1: gen_qevent_types.QTouchEvent): void {.raises: [], gcsafe.}
-type QQuickWindownativeEventProc* = proc(self: QQuickWindow, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
+type QQuickWindownativeEventProc* = proc(self: QQuickWindow, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
 type QQuickWindoweventFilterProc* = proc(self: QQuickWindow, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
 type QQuickWindowtimerEventProc* = proc(self: QQuickWindow, event: gen_qcoreevent_types.QTimerEvent): void {.raises: [], gcsafe.}
 type QQuickWindowchildEventProc* = proc(self: QQuickWindow, event: gen_qcoreevent_types.QChildEvent): void {.raises: [], gcsafe.}
@@ -1098,7 +1098,7 @@ proc fcQQuickWindow_vtable_callback_touchEvent(self: pointer, param1: pointer): 
   let slotval1 = gen_qevent_types.QTouchEvent(h: param1, owned: false)
   vtbl[].touchEvent(self, slotval1)
 
-proc QQuickWindownativeEvent*(self: gen_qquickwindow_types.QQuickWindow, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool =
+proc QQuickWindownativeEvent*(self: gen_qquickwindow_types.QQuickWindow, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool =
   fcQQuickWindow_virtualbase_nativeEvent(self.h, struct_miqt_string(data: if len(eventType) > 0: addr eventType[0] else: nil, len: csize_t(len(eventType))), message, resultVal)
 
 proc fcQQuickWindow_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
@@ -1365,7 +1365,7 @@ proc fcQQuickWindow_method_callback_touchEvent(self: pointer, param1: pointer): 
   let slotval1 = gen_qevent_types.QTouchEvent(h: param1, owned: false)
   inst.touchEvent(slotval1)
 
-method nativeEvent*(self: VirtualQQuickWindow, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
+method nativeEvent*(self: VirtualQQuickWindow, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
   QQuickWindownativeEvent(self[], eventType, message, resultVal)
 proc fcQQuickWindow_method_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
   let inst = cast[VirtualQQuickWindow](fcQQuickWindow_vdata(self)[])
@@ -1719,6 +1719,7 @@ proc create*(T: type gen_qquickwindow_types.QQuickWindow,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQQuickWindow_new(addr(cQQuickWindow_mvtbl), csize_t(sizeof(pointer)))
   fcQQuickWindow_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qquickwindow_types.QQuickWindow,
     renderControl: gen_qquickrendercontrol_types.QQuickRenderControl,
@@ -1726,6 +1727,7 @@ proc create*(T: type gen_qquickwindow_types.QQuickWindow,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQQuickWindow_new2(addr(cQQuickWindow_mvtbl), csize_t(sizeof(pointer)), renderControl.h)
   fcQQuickWindow_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qquickwindow_types.QQuickWindow,
     parent: gen_qwindow_types.QWindow,
@@ -1733,6 +1735,7 @@ proc create*(T: type gen_qquickwindow_types.QQuickWindow,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQQuickWindow_new3(addr(cQQuickWindow_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQQuickWindow_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qquickwindow_types.QQuickWindow): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQQuickWindow_staticMetaObject())

@@ -519,6 +519,7 @@ proc create*(T: type gen_qmediadevices_types.QMediaDevices,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQMediaDevices_new(addr(cQMediaDevices_mvtbl), csize_t(sizeof(pointer)))
   fcQMediaDevices_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qmediadevices_types.QMediaDevices,
     parent: gen_qobject_types.QObject,
@@ -526,6 +527,7 @@ proc create*(T: type gen_qmediadevices_types.QMediaDevices,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQMediaDevices_new2(addr(cQMediaDevices_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQMediaDevices_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qmediadevices_types.QMediaDevices): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQMediaDevices_staticMetaObject())

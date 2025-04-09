@@ -252,16 +252,16 @@ proc currentMessage*(self: gen_qstatusbar_types.QStatusBar): string =
   c_free(v_ms.data)
   vx_ret
 
-proc showMessage*(self: gen_qstatusbar_types.QStatusBar, text: string): void =
+proc showMessage*(self: gen_qstatusbar_types.QStatusBar, text: openArray[char]): void =
   fcQStatusBar_showMessage(self.h, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
 
 proc clearMessage*(self: gen_qstatusbar_types.QStatusBar): void =
   fcQStatusBar_clearMessage(self.h)
 
-proc messageChanged*(self: gen_qstatusbar_types.QStatusBar, text: string): void =
+proc messageChanged*(self: gen_qstatusbar_types.QStatusBar, text: openArray[char]): void =
   fcQStatusBar_messageChanged(self.h, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
 
-type QStatusBarmessageChangedSlot* = proc(text: string)
+type QStatusBarmessageChangedSlot* = proc(text: openArray[char])
 proc fcQStatusBar_slot_callback_messageChanged(slot: int, text: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QStatusBarmessageChangedSlot](cast[pointer](slot))
   let vtext_ms = text
@@ -305,7 +305,7 @@ proc addPermanentWidget*(self: gen_qstatusbar_types.QStatusBar, widget: gen_qwid
 proc insertPermanentWidget*(self: gen_qstatusbar_types.QStatusBar, index: cint, widget: gen_qwidget_types.QWidget, stretch: cint): cint =
   fcQStatusBar_insertPermanentWidget3(self.h, index, widget.h, stretch)
 
-proc showMessage*(self: gen_qstatusbar_types.QStatusBar, text: string, timeout: cint): void =
+proc showMessage*(self: gen_qstatusbar_types.QStatusBar, text: openArray[char], timeout: cint): void =
   fcQStatusBar_showMessage2(self.h, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), timeout)
 
 type QStatusBarmetaObjectProc* = proc(self: QStatusBar): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
@@ -343,7 +343,7 @@ type QStatusBardragMoveEventProc* = proc(self: QStatusBar, event: gen_qevent_typ
 type QStatusBardragLeaveEventProc* = proc(self: QStatusBar, event: gen_qevent_types.QDragLeaveEvent): void {.raises: [], gcsafe.}
 type QStatusBardropEventProc* = proc(self: QStatusBar, event: gen_qevent_types.QDropEvent): void {.raises: [], gcsafe.}
 type QStatusBarhideEventProc* = proc(self: QStatusBar, event: gen_qevent_types.QHideEvent): void {.raises: [], gcsafe.}
-type QStatusBarnativeEventProc* = proc(self: QStatusBar, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
+type QStatusBarnativeEventProc* = proc(self: QStatusBar, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
 type QStatusBarchangeEventProc* = proc(self: QStatusBar, param1: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QStatusBarmetricProc* = proc(self: QStatusBar, param1: cint): cint {.raises: [], gcsafe.}
 type QStatusBarinitPainterProc* = proc(self: QStatusBar, painter: gen_qpainter_types.QPainter): void {.raises: [], gcsafe.}
@@ -743,7 +743,7 @@ proc fcQStatusBar_vtable_callback_hideEvent(self: pointer, event: pointer): void
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   vtbl[].hideEvent(self, slotval1)
 
-proc QStatusBarnativeEvent*(self: gen_qstatusbar_types.QStatusBar, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool =
+proc QStatusBarnativeEvent*(self: gen_qstatusbar_types.QStatusBar, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool =
   fcQStatusBar_virtualbase_nativeEvent(self.h, struct_miqt_string(data: if len(eventType) > 0: addr eventType[0] else: nil, len: csize_t(len(eventType))), message, resultVal)
 
 proc fcQStatusBar_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
@@ -1152,7 +1152,7 @@ proc fcQStatusBar_method_callback_hideEvent(self: pointer, event: pointer): void
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   inst.hideEvent(slotval1)
 
-method nativeEvent*(self: VirtualQStatusBar, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
+method nativeEvent*(self: VirtualQStatusBar, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
   QStatusBarnativeEvent(self[], eventType, message, resultVal)
 proc fcQStatusBar_method_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
   let inst = cast[VirtualQStatusBar](fcQStatusBar_vdata(self)[])
@@ -1586,12 +1586,14 @@ proc create*(T: type gen_qstatusbar_types.QStatusBar,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQStatusBar_new(addr(cQStatusBar_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQStatusBar_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qstatusbar_types.QStatusBar,
     inst: VirtualQStatusBar) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQStatusBar_new2(addr(cQStatusBar_mvtbl), csize_t(sizeof(pointer)))
   fcQStatusBar_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qstatusbar_types.QStatusBar): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQStatusBar_staticMetaObject())

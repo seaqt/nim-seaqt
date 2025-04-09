@@ -196,7 +196,7 @@ proc defaultPrinterName*(_: type gen_qprinterinfo_types.QPrinterInfo): string =
 proc defaultPrinter*(_: type gen_qprinterinfo_types.QPrinterInfo): gen_qprinterinfo_types.QPrinterInfo =
   gen_qprinterinfo_types.QPrinterInfo(h: fcQPrinterInfo_defaultPrinter(), owned: true)
 
-proc printerInfo*(_: type gen_qprinterinfo_types.QPrinterInfo, printerName: string): gen_qprinterinfo_types.QPrinterInfo =
+proc printerInfo*(_: type gen_qprinterinfo_types.QPrinterInfo, printerName: openArray[char]): gen_qprinterinfo_types.QPrinterInfo =
   gen_qprinterinfo_types.QPrinterInfo(h: fcQPrinterInfo_printerInfo(struct_miqt_string(data: if len(printerName) > 0: addr printerName[0] else: nil, len: csize_t(len(printerName)))), owned: true)
 
 proc create*(T: type gen_qprinterinfo_types.QPrinterInfo): gen_qprinterinfo_types.QPrinterInfo =

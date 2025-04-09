@@ -221,7 +221,7 @@ proc downloadDirectory*(self: gen_qwebenginedownloadrequest_types.QWebEngineDown
   c_free(v_ms.data)
   vx_ret
 
-proc setDownloadDirectory*(self: gen_qwebenginedownloadrequest_types.QWebEngineDownloadRequest, directory: string): void =
+proc setDownloadDirectory*(self: gen_qwebenginedownloadrequest_types.QWebEngineDownloadRequest, directory: openArray[char]): void =
   fcQWebEngineDownloadRequest_setDownloadDirectory(self.h, struct_miqt_string(data: if len(directory) > 0: addr directory[0] else: nil, len: csize_t(len(directory))))
 
 proc downloadFileName*(self: gen_qwebenginedownloadrequest_types.QWebEngineDownloadRequest): string =
@@ -230,7 +230,7 @@ proc downloadFileName*(self: gen_qwebenginedownloadrequest_types.QWebEngineDownl
   c_free(v_ms.data)
   vx_ret
 
-proc setDownloadFileName*(self: gen_qwebenginedownloadrequest_types.QWebEngineDownloadRequest, fileName: string): void =
+proc setDownloadFileName*(self: gen_qwebenginedownloadrequest_types.QWebEngineDownloadRequest, fileName: openArray[char]): void =
   fcQWebEngineDownloadRequest_setDownloadFileName(self.h, struct_miqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))))
 
 proc page*(self: gen_qwebenginedownloadrequest_types.QWebEngineDownloadRequest): gen_qwebenginepage_types.QWebEnginePage =

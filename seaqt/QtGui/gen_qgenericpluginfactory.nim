@@ -58,6 +58,6 @@ proc keys*(_: type gen_qgenericpluginfactory_types.QGenericPluginFactory): seq[s
   c_free(v_ma.data)
   vx_ret
 
-proc create*(_: type gen_qgenericpluginfactory_types.QGenericPluginFactory, param1: string, param2: string): gen_qobject_types.QObject =
+proc create*(_: type gen_qgenericpluginfactory_types.QGenericPluginFactory, param1: openArray[char], param2: openArray[char]): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQGenericPluginFactory_create(struct_miqt_string(data: if len(param1) > 0: addr param1[0] else: nil, len: csize_t(len(param1))), struct_miqt_string(data: if len(param2) > 0: addr param2[0] else: nil, len: csize_t(len(param2)))), owned: false)
 

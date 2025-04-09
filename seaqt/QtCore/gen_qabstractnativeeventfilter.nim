@@ -47,10 +47,10 @@ type cQAbstractNativeEventFilterVTable {.pure.} = object
   nativeEventFilter*: proc(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl, raises: [], gcsafe.}
 proc fcQAbstractNativeEventFilter_new(vtbl: pointer, vdata: csize_t): ptr cQAbstractNativeEventFilter {.importc: "QAbstractNativeEventFilter_new".}
 
-proc nativeEventFilter*(self: gen_qabstractnativeeventfilter_types.QAbstractNativeEventFilter, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool =
+proc nativeEventFilter*(self: gen_qabstractnativeeventfilter_types.QAbstractNativeEventFilter, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool =
   fcQAbstractNativeEventFilter_nativeEventFilter(self.h, struct_miqt_string(data: if len(eventType) > 0: addr eventType[0] else: nil, len: csize_t(len(eventType))), message, resultVal)
 
-type QAbstractNativeEventFilternativeEventFilterProc* = proc(self: QAbstractNativeEventFilter, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
+type QAbstractNativeEventFilternativeEventFilterProc* = proc(self: QAbstractNativeEventFilter, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
 type QAbstractNativeEventFilterVTable* {.inheritable, pure.} = object
   vtbl: cQAbstractNativeEventFilterVTable
   nativeEventFilter*: QAbstractNativeEventFilternativeEventFilterProc
@@ -68,7 +68,7 @@ proc fcQAbstractNativeEventFilter_vtable_callback_nativeEventFilter(self: pointe
 
 type VirtualQAbstractNativeEventFilter* {.inheritable.} = ref object of QAbstractNativeEventFilter
   vtbl*: cQAbstractNativeEventFilterVTable
-method nativeEventFilter*(self: VirtualQAbstractNativeEventFilter, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
+method nativeEventFilter*(self: VirtualQAbstractNativeEventFilter, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
   raiseAssert("missing implementation of QAbstractNativeEventFilter_virtualbase_nativeEventFilter")
 proc fcQAbstractNativeEventFilter_method_callback_nativeEventFilter(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
   let inst = cast[VirtualQAbstractNativeEventFilter](fcQAbstractNativeEventFilter_vdata(self)[])
@@ -106,4 +106,5 @@ proc create*(T: type gen_qabstractnativeeventfilter_types.QAbstractNativeEventFi
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQAbstractNativeEventFilter_new(addr(cQAbstractNativeEventFilter_mvtbl), csize_t(sizeof(pointer)))
   fcQAbstractNativeEventFilter_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 

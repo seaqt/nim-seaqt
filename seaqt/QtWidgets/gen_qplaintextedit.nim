@@ -440,7 +440,7 @@ proc setDocument*(self: gen_qplaintextedit_types.QPlainTextEdit, document: gen_q
 proc document*(self: gen_qplaintextedit_types.QPlainTextEdit): gen_qtextdocument_types.QTextDocument =
   gen_qtextdocument_types.QTextDocument(h: fcQPlainTextEdit_document(self.h), owned: false)
 
-proc setPlaceholderText*(self: gen_qplaintextedit_types.QPlainTextEdit, placeholderText: string): void =
+proc setPlaceholderText*(self: gen_qplaintextedit_types.QPlainTextEdit, placeholderText: openArray[char]): void =
   fcQPlainTextEdit_setPlaceholderText(self.h, struct_miqt_string(data: if len(placeholderText) > 0: addr placeholderText[0] else: nil, len: csize_t(len(placeholderText))))
 
 proc placeholderText*(self: gen_qplaintextedit_types.QPlainTextEdit): string =
@@ -482,7 +482,7 @@ proc tabChangesFocus*(self: gen_qplaintextedit_types.QPlainTextEdit): bool =
 proc setTabChangesFocus*(self: gen_qplaintextedit_types.QPlainTextEdit, b: bool): void =
   fcQPlainTextEdit_setTabChangesFocus(self.h, b)
 
-proc setDocumentTitle*(self: gen_qplaintextedit_types.QPlainTextEdit, title: string): void =
+proc setDocumentTitle*(self: gen_qplaintextedit_types.QPlainTextEdit, title: openArray[char]): void =
   fcQPlainTextEdit_setDocumentTitle(self.h, struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))))
 
 proc documentTitle*(self: gen_qplaintextedit_types.QPlainTextEdit): string =
@@ -527,7 +527,7 @@ proc setCenterOnScroll*(self: gen_qplaintextedit_types.QPlainTextEdit, enabled: 
 proc centerOnScroll*(self: gen_qplaintextedit_types.QPlainTextEdit): bool =
   fcQPlainTextEdit_centerOnScroll(self.h)
 
-proc find*(self: gen_qplaintextedit_types.QPlainTextEdit, exp: string): bool =
+proc find*(self: gen_qplaintextedit_types.QPlainTextEdit, exp: openArray[char]): bool =
   fcQPlainTextEdit_find(self.h, struct_miqt_string(data: if len(exp) > 0: addr exp[0] else: nil, len: csize_t(len(exp))))
 
 proc find*(self: gen_qplaintextedit_types.QPlainTextEdit, exp: gen_qregularexpression_types.QRegularExpression): bool =
@@ -584,7 +584,7 @@ proc cursorWidth*(self: gen_qplaintextedit_types.QPlainTextEdit): cint =
 proc setCursorWidth*(self: gen_qplaintextedit_types.QPlainTextEdit, width: cint): void =
   fcQPlainTextEdit_setCursorWidth(self.h, width)
 
-proc setExtraSelections*(self: gen_qplaintextedit_types.QPlainTextEdit, selections: seq[gen_qtextedit_types.QTextEditExtraSelection]): void =
+proc setExtraSelections*(self: gen_qplaintextedit_types.QPlainTextEdit, selections: openArray[gen_qtextedit_types.QTextEditExtraSelection]): void =
   var selections_CArray = newSeq[pointer](len(selections))
   for i in 0..<len(selections):
     selections_CArray[i] = selections[i].h
@@ -618,7 +618,7 @@ proc inputMethodQuery*(self: gen_qplaintextedit_types.QPlainTextEdit, property: 
 proc inputMethodQuery*(self: gen_qplaintextedit_types.QPlainTextEdit, query: cint, argument: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant =
   gen_qvariant_types.QVariant(h: fcQPlainTextEdit_inputMethodQuery2(self.h, cint(query), argument.h), owned: true)
 
-proc setPlainText*(self: gen_qplaintextedit_types.QPlainTextEdit, text: string): void =
+proc setPlainText*(self: gen_qplaintextedit_types.QPlainTextEdit, text: openArray[char]): void =
   fcQPlainTextEdit_setPlainText(self.h, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
 
 proc cut*(self: gen_qplaintextedit_types.QPlainTextEdit): void =
@@ -642,13 +642,13 @@ proc clear*(self: gen_qplaintextedit_types.QPlainTextEdit): void =
 proc selectAll*(self: gen_qplaintextedit_types.QPlainTextEdit): void =
   fcQPlainTextEdit_selectAll(self.h)
 
-proc insertPlainText*(self: gen_qplaintextedit_types.QPlainTextEdit, text: string): void =
+proc insertPlainText*(self: gen_qplaintextedit_types.QPlainTextEdit, text: openArray[char]): void =
   fcQPlainTextEdit_insertPlainText(self.h, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
 
-proc appendPlainText*(self: gen_qplaintextedit_types.QPlainTextEdit, text: string): void =
+proc appendPlainText*(self: gen_qplaintextedit_types.QPlainTextEdit, text: openArray[char]): void =
   fcQPlainTextEdit_appendPlainText(self.h, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
 
-proc appendHtml*(self: gen_qplaintextedit_types.QPlainTextEdit, html: string): void =
+proc appendHtml*(self: gen_qplaintextedit_types.QPlainTextEdit, html: openArray[char]): void =
   fcQPlainTextEdit_appendHtml(self.h, struct_miqt_string(data: if len(html) > 0: addr html[0] else: nil, len: csize_t(len(html))))
 
 proc centerCursor*(self: gen_qplaintextedit_types.QPlainTextEdit): void =
@@ -848,7 +848,7 @@ proc tr*(_: type gen_qplaintextedit_types.QPlainTextEdit, s: cstring, c: cstring
   c_free(v_ms.data)
   vx_ret
 
-proc find*(self: gen_qplaintextedit_types.QPlainTextEdit, exp: string, options: cint): bool =
+proc find*(self: gen_qplaintextedit_types.QPlainTextEdit, exp: openArray[char], options: cint): bool =
   fcQPlainTextEdit_find2(self.h, struct_miqt_string(data: if len(exp) > 0: addr exp[0] else: nil, len: csize_t(len(exp))), cint(options))
 
 proc find*(self: gen_qplaintextedit_types.QPlainTextEdit, exp: gen_qregularexpression_types.QRegularExpression, options: cint): bool =
@@ -914,7 +914,7 @@ type QPlainTextEditcloseEventProc* = proc(self: QPlainTextEdit, event: gen_qeven
 type QPlainTextEdittabletEventProc* = proc(self: QPlainTextEdit, event: gen_qevent_types.QTabletEvent): void {.raises: [], gcsafe.}
 type QPlainTextEditactionEventProc* = proc(self: QPlainTextEdit, event: gen_qevent_types.QActionEvent): void {.raises: [], gcsafe.}
 type QPlainTextEdithideEventProc* = proc(self: QPlainTextEdit, event: gen_qevent_types.QHideEvent): void {.raises: [], gcsafe.}
-type QPlainTextEditnativeEventProc* = proc(self: QPlainTextEdit, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
+type QPlainTextEditnativeEventProc* = proc(self: QPlainTextEdit, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
 type QPlainTextEditmetricProc* = proc(self: QPlainTextEdit, param1: cint): cint {.raises: [], gcsafe.}
 type QPlainTextEditinitPainterProc* = proc(self: QPlainTextEdit, painter: gen_qpainter_types.QPainter): void {.raises: [], gcsafe.}
 type QPlainTextEditredirectedProc* = proc(self: QPlainTextEdit, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.raises: [], gcsafe.}
@@ -1483,7 +1483,7 @@ proc fcQPlainTextEdit_vtable_callback_hideEvent(self: pointer, event: pointer): 
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   vtbl[].hideEvent(self, slotval1)
 
-proc QPlainTextEditnativeEvent*(self: gen_qplaintextedit_types.QPlainTextEdit, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool =
+proc QPlainTextEditnativeEvent*(self: gen_qplaintextedit_types.QPlainTextEdit, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool =
   fcQPlainTextEdit_virtualbase_nativeEvent(self.h, struct_miqt_string(data: if len(eventType) > 0: addr eventType[0] else: nil, len: csize_t(len(eventType))), message, resultVal)
 
 proc fcQPlainTextEdit_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
@@ -1952,7 +1952,7 @@ proc fcQPlainTextEdit_method_callback_hideEvent(self: pointer, event: pointer): 
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   inst.hideEvent(slotval1)
 
-method nativeEvent*(self: VirtualQPlainTextEdit, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
+method nativeEvent*(self: VirtualQPlainTextEdit, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
   QPlainTextEditnativeEvent(self[], eventType, message, resultVal)
 proc fcQPlainTextEdit_method_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
   let inst = cast[VirtualQPlainTextEdit](fcQPlainTextEdit_vdata(self)[])
@@ -2339,7 +2339,7 @@ proc create*(T: type gen_qplaintextedit_types.QPlainTextEdit,
   fcQPlainTextEdit_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qplaintextedit_types.QPlainTextEdit,
-    text: string,
+    text: openArray[char],
     vtbl: ref QPlainTextEditVTable = nil): gen_qplaintextedit_types.QPlainTextEdit =
   let vtbl = if vtbl == nil: new QPlainTextEditVTable else: vtbl
   GC_ref(vtbl)
@@ -2470,7 +2470,7 @@ proc create*(T: type gen_qplaintextedit_types.QPlainTextEdit,
   fcQPlainTextEdit_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qplaintextedit_types.QPlainTextEdit,
-    text: string, parent: gen_qwidget_types.QWidget,
+    text: openArray[char], parent: gen_qwidget_types.QWidget,
     vtbl: ref QPlainTextEditVTable = nil): gen_qplaintextedit_types.QPlainTextEdit =
   let vtbl = if vtbl == nil: new QPlainTextEditVTable else: vtbl
   GC_ref(vtbl)
@@ -2673,26 +2673,30 @@ proc create*(T: type gen_qplaintextedit_types.QPlainTextEdit,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQPlainTextEdit_new(addr(cQPlainTextEdit_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQPlainTextEdit_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qplaintextedit_types.QPlainTextEdit,
     inst: VirtualQPlainTextEdit) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQPlainTextEdit_new2(addr(cQPlainTextEdit_mvtbl), csize_t(sizeof(pointer)))
   fcQPlainTextEdit_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qplaintextedit_types.QPlainTextEdit,
-    text: string,
+    text: openArray[char],
     inst: VirtualQPlainTextEdit) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQPlainTextEdit_new3(addr(cQPlainTextEdit_mvtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
   fcQPlainTextEdit_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qplaintextedit_types.QPlainTextEdit,
-    text: string, parent: gen_qwidget_types.QWidget,
+    text: openArray[char], parent: gen_qwidget_types.QWidget,
     inst: VirtualQPlainTextEdit) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQPlainTextEdit_new4(addr(cQPlainTextEdit_mvtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), parent.h)
   fcQPlainTextEdit_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qplaintextedit_types.QPlainTextEdit): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQPlainTextEdit_staticMetaObject())
@@ -3275,6 +3279,7 @@ proc create*(T: type gen_qplaintextedit_types.QPlainTextDocumentLayout,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQPlainTextDocumentLayout_new(addr(cQPlainTextDocumentLayout_mvtbl), csize_t(sizeof(pointer)), document.h)
   fcQPlainTextDocumentLayout_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qplaintextedit_types.QPlainTextDocumentLayout): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQPlainTextDocumentLayout_staticMetaObject())

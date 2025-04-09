@@ -352,7 +352,7 @@ proc stack*(self: gen_qundoview_types.QUndoView): gen_qundostack_types.QUndoStac
 proc group*(self: gen_qundoview_types.QUndoView): gen_qundogroup_types.QUndoGroup =
   gen_qundogroup_types.QUndoGroup(h: fcQUndoView_group(self.h), owned: false)
 
-proc setEmptyLabel*(self: gen_qundoview_types.QUndoView, label: string): void =
+proc setEmptyLabel*(self: gen_qundoview_types.QUndoView, label: openArray[char]): void =
   fcQUndoView_setEmptyLabel(self.h, struct_miqt_string(data: if len(label) > 0: addr label[0] else: nil, len: csize_t(len(label))))
 
 proc emptyLabel*(self: gen_qundoview_types.QUndoView): string =
@@ -396,7 +396,7 @@ type QUndoViewresetProc* = proc(self: QUndoView): void {.raises: [], gcsafe.}
 type QUndoViewsetRootIndexProc* = proc(self: QUndoView, index: gen_qabstractitemmodel_types.QModelIndex): void {.raises: [], gcsafe.}
 type QUndoVieweventProc* = proc(self: QUndoView, e: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
 type QUndoViewscrollContentsByProc* = proc(self: QUndoView, dx: cint, dy: cint): void {.raises: [], gcsafe.}
-type QUndoViewdataChangedProc* = proc(self: QUndoView, topLeft: gen_qabstractitemmodel_types.QModelIndex, bottomRight: gen_qabstractitemmodel_types.QModelIndex, roles: seq[cint]): void {.raises: [], gcsafe.}
+type QUndoViewdataChangedProc* = proc(self: QUndoView, topLeft: gen_qabstractitemmodel_types.QModelIndex, bottomRight: gen_qabstractitemmodel_types.QModelIndex, roles: openArray[cint]): void {.raises: [], gcsafe.}
 type QUndoViewrowsInsertedProc* = proc(self: QUndoView, parent: gen_qabstractitemmodel_types.QModelIndex, start: cint, endVal: cint): void {.raises: [], gcsafe.}
 type QUndoViewrowsAboutToBeRemovedProc* = proc(self: QUndoView, parent: gen_qabstractitemmodel_types.QModelIndex, start: cint, endVal: cint): void {.raises: [], gcsafe.}
 type QUndoViewmouseMoveEventProc* = proc(self: QUndoView, e: gen_qevent_types.QMouseEvent): void {.raises: [], gcsafe.}
@@ -423,7 +423,7 @@ type QUndoViewcurrentChangedProc* = proc(self: QUndoView, current: gen_qabstract
 type QUndoViewviewportSizeHintProc* = proc(self: QUndoView): gen_qsize_types.QSize {.raises: [], gcsafe.}
 type QUndoViewsetModelProc* = proc(self: QUndoView, model: gen_qabstractitemmodel_types.QAbstractItemModel): void {.raises: [], gcsafe.}
 type QUndoViewsetSelectionModelProc* = proc(self: QUndoView, selectionModel: gen_qitemselectionmodel_types.QItemSelectionModel): void {.raises: [], gcsafe.}
-type QUndoViewkeyboardSearchProc* = proc(self: QUndoView, search: string): void {.raises: [], gcsafe.}
+type QUndoViewkeyboardSearchProc* = proc(self: QUndoView, search: openArray[char]): void {.raises: [], gcsafe.}
 type QUndoViewsizeHintForRowProc* = proc(self: QUndoView, row: cint): cint {.raises: [], gcsafe.}
 type QUndoViewsizeHintForColumnProc* = proc(self: QUndoView, column: cint): cint {.raises: [], gcsafe.}
 type QUndoViewitemDelegateForIndexProc* = proc(self: QUndoView, index: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemdelegate_types.QAbstractItemDelegate {.raises: [], gcsafe.}
@@ -470,7 +470,7 @@ type QUndoViewtabletEventProc* = proc(self: QUndoView, event: gen_qevent_types.Q
 type QUndoViewactionEventProc* = proc(self: QUndoView, event: gen_qevent_types.QActionEvent): void {.raises: [], gcsafe.}
 type QUndoViewshowEventProc* = proc(self: QUndoView, event: gen_qevent_types.QShowEvent): void {.raises: [], gcsafe.}
 type QUndoViewhideEventProc* = proc(self: QUndoView, event: gen_qevent_types.QHideEvent): void {.raises: [], gcsafe.}
-type QUndoViewnativeEventProc* = proc(self: QUndoView, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
+type QUndoViewnativeEventProc* = proc(self: QUndoView, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
 type QUndoViewmetricProc* = proc(self: QUndoView, param1: cint): cint {.raises: [], gcsafe.}
 type QUndoViewinitPainterProc* = proc(self: QUndoView, painter: gen_qpainter_types.QPainter): void {.raises: [], gcsafe.}
 type QUndoViewredirectedProc* = proc(self: QUndoView, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.raises: [], gcsafe.}
@@ -690,7 +690,7 @@ proc fcQUndoView_vtable_callback_scrollContentsBy(self: pointer, dx: cint, dy: c
   let slotval2 = dy
   vtbl[].scrollContentsBy(self, slotval1, slotval2)
 
-proc QUndoViewdataChanged*(self: gen_qundoview_types.QUndoView, topLeft: gen_qabstractitemmodel_types.QModelIndex, bottomRight: gen_qabstractitemmodel_types.QModelIndex, roles: seq[cint]): void =
+proc QUndoViewdataChanged*(self: gen_qundoview_types.QUndoView, topLeft: gen_qabstractitemmodel_types.QModelIndex, bottomRight: gen_qabstractitemmodel_types.QModelIndex, roles: openArray[cint]): void =
   var roles_CArray = newSeq[cint](len(roles))
   for i in 0..<len(roles):
     roles_CArray[i] = roles[i]
@@ -977,7 +977,7 @@ proc fcQUndoView_vtable_callback_setSelectionModel(self: pointer, selectionModel
   let slotval1 = gen_qitemselectionmodel_types.QItemSelectionModel(h: selectionModel, owned: false)
   vtbl[].setSelectionModel(self, slotval1)
 
-proc QUndoViewkeyboardSearch*(self: gen_qundoview_types.QUndoView, search: string): void =
+proc QUndoViewkeyboardSearch*(self: gen_qundoview_types.QUndoView, search: openArray[char]): void =
   fcQUndoView_virtualbase_keyboardSearch(self.h, struct_miqt_string(data: if len(search) > 0: addr search[0] else: nil, len: csize_t(len(search))))
 
 proc fcQUndoView_vtable_callback_keyboardSearch(self: pointer, search: struct_miqt_string): void {.cdecl.} =
@@ -1430,7 +1430,7 @@ proc fcQUndoView_vtable_callback_hideEvent(self: pointer, event: pointer): void 
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   vtbl[].hideEvent(self, slotval1)
 
-proc QUndoViewnativeEvent*(self: gen_qundoview_types.QUndoView, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool =
+proc QUndoViewnativeEvent*(self: gen_qundoview_types.QUndoView, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool =
   fcQUndoView_virtualbase_nativeEvent(self.h, struct_miqt_string(data: if len(eventType) > 0: addr eventType[0] else: nil, len: csize_t(len(eventType))), message, resultVal)
 
 proc fcQUndoView_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
@@ -1611,7 +1611,7 @@ proc fcQUndoView_method_callback_scrollContentsBy(self: pointer, dx: cint, dy: c
   let slotval2 = dy
   inst.scrollContentsBy(slotval1, slotval2)
 
-method dataChanged*(self: VirtualQUndoView, topLeft: gen_qabstractitemmodel_types.QModelIndex, bottomRight: gen_qabstractitemmodel_types.QModelIndex, roles: seq[cint]): void {.base.} =
+method dataChanged*(self: VirtualQUndoView, topLeft: gen_qabstractitemmodel_types.QModelIndex, bottomRight: gen_qabstractitemmodel_types.QModelIndex, roles: openArray[cint]): void {.base.} =
   QUndoViewdataChanged(self[], topLeft, bottomRight, roles)
 proc fcQUndoView_method_callback_dataChanged(self: pointer, topLeft: pointer, bottomRight: pointer, roles: struct_miqt_array): void {.cdecl.} =
   let inst = cast[VirtualQUndoView](fcQUndoView_vdata(self)[])
@@ -1822,7 +1822,7 @@ proc fcQUndoView_method_callback_setSelectionModel(self: pointer, selectionModel
   let slotval1 = gen_qitemselectionmodel_types.QItemSelectionModel(h: selectionModel, owned: false)
   inst.setSelectionModel(slotval1)
 
-method keyboardSearch*(self: VirtualQUndoView, search: string): void {.base.} =
+method keyboardSearch*(self: VirtualQUndoView, search: openArray[char]): void {.base.} =
   QUndoViewkeyboardSearch(self[], search)
 proc fcQUndoView_method_callback_keyboardSearch(self: pointer, search: struct_miqt_string): void {.cdecl.} =
   let inst = cast[VirtualQUndoView](fcQUndoView_vdata(self)[])
@@ -2166,7 +2166,7 @@ proc fcQUndoView_method_callback_hideEvent(self: pointer, event: pointer): void 
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   inst.hideEvent(slotval1)
 
-method nativeEvent*(self: VirtualQUndoView, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
+method nativeEvent*(self: VirtualQUndoView, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
   QUndoViewnativeEvent(self[], eventType, message, resultVal)
 proc fcQUndoView_method_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
   let inst = cast[VirtualQUndoView](fcQUndoView_vdata(self)[])
@@ -3618,12 +3618,14 @@ proc create*(T: type gen_qundoview_types.QUndoView,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQUndoView_new(addr(cQUndoView_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQUndoView_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qundoview_types.QUndoView,
     inst: VirtualQUndoView) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQUndoView_new2(addr(cQUndoView_mvtbl), csize_t(sizeof(pointer)))
   fcQUndoView_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qundoview_types.QUndoView,
     stack: gen_qundostack_types.QUndoStack,
@@ -3631,6 +3633,7 @@ proc create*(T: type gen_qundoview_types.QUndoView,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQUndoView_new3(addr(cQUndoView_mvtbl), csize_t(sizeof(pointer)), stack.h)
   fcQUndoView_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qundoview_types.QUndoView,
     group: gen_qundogroup_types.QUndoGroup,
@@ -3638,6 +3641,7 @@ proc create*(T: type gen_qundoview_types.QUndoView,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQUndoView_new4(addr(cQUndoView_mvtbl), csize_t(sizeof(pointer)), group.h)
   fcQUndoView_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qundoview_types.QUndoView,
     stack: gen_qundostack_types.QUndoStack, parent: gen_qwidget_types.QWidget,
@@ -3645,6 +3649,7 @@ proc create*(T: type gen_qundoview_types.QUndoView,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQUndoView_new5(addr(cQUndoView_mvtbl), csize_t(sizeof(pointer)), stack.h, parent.h)
   fcQUndoView_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qundoview_types.QUndoView,
     group: gen_qundogroup_types.QUndoGroup, parent: gen_qwidget_types.QWidget,
@@ -3652,6 +3657,7 @@ proc create*(T: type gen_qundoview_types.QUndoView,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQUndoView_new6(addr(cQUndoView_mvtbl), csize_t(sizeof(pointer)), group.h, parent.h)
   fcQUndoView_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qundoview_types.QUndoView): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQUndoView_staticMetaObject())

@@ -292,7 +292,7 @@ proc stringList*(self: gen_qstringlistmodel_types.QStringListModel): seq[string]
   c_free(v_ma.data)
   vx_ret
 
-proc setStringList*(self: gen_qstringlistmodel_types.QStringListModel, strings: seq[string]): void =
+proc setStringList*(self: gen_qstringlistmodel_types.QStringListModel, strings: openArray[string]): void =
   var strings_CArray = newSeq[struct_miqt_string](len(strings))
   for i in 0..<len(strings):
     strings_CArray[i] = struct_miqt_string(data: if len(strings[i]) > 0: addr strings[i][0] else: nil, len: csize_t(len(strings[i])))
@@ -335,7 +335,7 @@ type QStringListModeldropMimeDataProc* = proc(self: QStringListModel, data: gen_
 type QStringListModelheaderDataProc* = proc(self: QStringListModel, section: cint, orientation: cint, role: cint): gen_qvariant_types.QVariant {.raises: [], gcsafe.}
 type QStringListModelsetHeaderDataProc* = proc(self: QStringListModel, section: cint, orientation: cint, value: gen_qvariant_types.QVariant, role: cint): bool {.raises: [], gcsafe.}
 type QStringListModelmimeTypesProc* = proc(self: QStringListModel): seq[string] {.raises: [], gcsafe.}
-type QStringListModelmimeDataProc* = proc(self: QStringListModel, indexes: seq[gen_qabstractitemmodel_types.QModelIndex]): gen_qmimedata_types.QMimeData {.raises: [], gcsafe.}
+type QStringListModelmimeDataProc* = proc(self: QStringListModel, indexes: openArray[gen_qabstractitemmodel_types.QModelIndex]): gen_qmimedata_types.QMimeData {.raises: [], gcsafe.}
 type QStringListModelcanDropMimeDataProc* = proc(self: QStringListModel, data: gen_qmimedata_types.QMimeData, action: cint, row: cint, column: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool {.raises: [], gcsafe.}
 type QStringListModelsupportedDragActionsProc* = proc(self: QStringListModel): cint {.raises: [], gcsafe.}
 type QStringListModelinsertColumnsProc* = proc(self: QStringListModel, column: cint, count: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool {.raises: [], gcsafe.}
@@ -717,7 +717,7 @@ proc fcQStringListModel_vtable_callback_mimeTypes(self: pointer): struct_miqt_ar
 
   struct_miqt_array(len: csize_t(len(virtualReturn)), data: if len(virtualReturn) == 0: nil else: addr(virtualReturn_CArray[0]))
 
-proc QStringListModelmimeData*(self: gen_qstringlistmodel_types.QStringListModel, indexes: seq[gen_qabstractitemmodel_types.QModelIndex]): gen_qmimedata_types.QMimeData =
+proc QStringListModelmimeData*(self: gen_qstringlistmodel_types.QStringListModel, indexes: openArray[gen_qabstractitemmodel_types.QModelIndex]): gen_qmimedata_types.QMimeData =
   var indexes_CArray = newSeq[pointer](len(indexes))
   for i in 0..<len(indexes):
     indexes_CArray[i] = indexes[i].h
@@ -1232,7 +1232,7 @@ proc fcQStringListModel_method_callback_mimeTypes(self: pointer): struct_miqt_ar
 
   struct_miqt_array(len: csize_t(len(virtualReturn)), data: if len(virtualReturn) == 0: nil else: addr(virtualReturn_CArray[0]))
 
-method mimeData*(self: VirtualQStringListModel, indexes: seq[gen_qabstractitemmodel_types.QModelIndex]): gen_qmimedata_types.QMimeData {.base.} =
+method mimeData*(self: VirtualQStringListModel, indexes: openArray[gen_qabstractitemmodel_types.QModelIndex]): gen_qmimedata_types.QMimeData {.base.} =
   QStringListModelmimeData(self[], indexes)
 proc fcQStringListModel_method_callback_mimeData(self: pointer, indexes: struct_miqt_array): pointer {.cdecl.} =
   let inst = cast[VirtualQStringListModel](fcQStringListModel_vdata(self)[])
@@ -1444,7 +1444,7 @@ proc fcQStringListModel_method_callback_disconnectNotify(self: pointer, signal: 
 proc createIndex*(self: gen_qstringlistmodel_types.QStringListModel, row: cint, column: cint): gen_qabstractitemmodel_types.QModelIndex =
   gen_qabstractitemmodel_types.QModelIndex(h: fcQStringListModel_protectedbase_createIndex(self.h, row, column), owned: true)
 
-proc encodeData*(self: gen_qstringlistmodel_types.QStringListModel, indexes: seq[gen_qabstractitemmodel_types.QModelIndex], stream: gen_qdatastream_types.QDataStream): void =
+proc encodeData*(self: gen_qstringlistmodel_types.QStringListModel, indexes: openArray[gen_qabstractitemmodel_types.QModelIndex], stream: gen_qdatastream_types.QDataStream): void =
   var indexes_CArray = newSeq[pointer](len(indexes))
   for i in 0..<len(indexes):
     indexes_CArray[i] = indexes[i].h
@@ -1499,7 +1499,7 @@ proc endResetModel*(self: gen_qstringlistmodel_types.QStringListModel): void =
 proc changePersistentIndex*(self: gen_qstringlistmodel_types.QStringListModel, fromVal: gen_qabstractitemmodel_types.QModelIndex, to: gen_qabstractitemmodel_types.QModelIndex): void =
   fcQStringListModel_protectedbase_changePersistentIndex(self.h, fromVal.h, to.h)
 
-proc changePersistentIndexList*(self: gen_qstringlistmodel_types.QStringListModel, fromVal: seq[gen_qabstractitemmodel_types.QModelIndex], to: seq[gen_qabstractitemmodel_types.QModelIndex]): void =
+proc changePersistentIndexList*(self: gen_qstringlistmodel_types.QStringListModel, fromVal: openArray[gen_qabstractitemmodel_types.QModelIndex], to: openArray[gen_qabstractitemmodel_types.QModelIndex]): void =
   var fromVal_CArray = newSeq[pointer](len(fromVal))
   for i in 0..<len(fromVal):
     fromVal_CArray[i] = fromVal[i].h
@@ -1630,7 +1630,7 @@ proc create*(T: type gen_qstringlistmodel_types.QStringListModel,
   fcQStringListModel_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qstringlistmodel_types.QStringListModel,
-    strings: seq[string],
+    strings: openArray[string],
     vtbl: ref QStringListModelVTable = nil): gen_qstringlistmodel_types.QStringListModel =
   var strings_CArray = newSeq[struct_miqt_string](len(strings))
   for i in 0..<len(strings):
@@ -1832,7 +1832,7 @@ proc create*(T: type gen_qstringlistmodel_types.QStringListModel,
   fcQStringListModel_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qstringlistmodel_types.QStringListModel,
-    strings: seq[string], parent: gen_qobject_types.QObject,
+    strings: openArray[string], parent: gen_qobject_types.QObject,
     vtbl: ref QStringListModelVTable = nil): gen_qstringlistmodel_types.QStringListModel =
   var strings_CArray = newSeq[struct_miqt_string](len(strings))
   for i in 0..<len(strings):
@@ -1990,9 +1990,10 @@ proc create*(T: type gen_qstringlistmodel_types.QStringListModel,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQStringListModel_new(addr(cQStringListModel_mvtbl), csize_t(sizeof(pointer)))
   fcQStringListModel_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qstringlistmodel_types.QStringListModel,
-    strings: seq[string],
+    strings: openArray[string],
     inst: VirtualQStringListModel) =
   var strings_CArray = newSeq[struct_miqt_string](len(strings))
   for i in 0..<len(strings):
@@ -2001,6 +2002,7 @@ proc create*(T: type gen_qstringlistmodel_types.QStringListModel,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQStringListModel_new2(addr(cQStringListModel_mvtbl), csize_t(sizeof(pointer)), struct_miqt_array(len: csize_t(len(strings)), data: if len(strings) == 0: nil else: addr(strings_CArray[0])))
   fcQStringListModel_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qstringlistmodel_types.QStringListModel,
     parent: gen_qobject_types.QObject,
@@ -2008,9 +2010,10 @@ proc create*(T: type gen_qstringlistmodel_types.QStringListModel,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQStringListModel_new3(addr(cQStringListModel_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQStringListModel_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qstringlistmodel_types.QStringListModel,
-    strings: seq[string], parent: gen_qobject_types.QObject,
+    strings: openArray[string], parent: gen_qobject_types.QObject,
     inst: VirtualQStringListModel) =
   var strings_CArray = newSeq[struct_miqt_string](len(strings))
   for i in 0..<len(strings):
@@ -2019,6 +2022,7 @@ proc create*(T: type gen_qstringlistmodel_types.QStringListModel,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQStringListModel_new4(addr(cQStringListModel_mvtbl), csize_t(sizeof(pointer)), struct_miqt_array(len: csize_t(len(strings)), data: if len(strings) == 0: nil else: addr(strings_CArray[0])), parent.h)
   fcQStringListModel_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qstringlistmodel_types.QStringListModel): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQStringListModel_staticMetaObject())

@@ -356,7 +356,7 @@ type QIdentityProxyModelfetchMoreProc* = proc(self: QIdentityProxyModel, parent:
 type QIdentityProxyModelsortProc* = proc(self: QIdentityProxyModel, column: cint, order: cint): void {.raises: [], gcsafe.}
 type QIdentityProxyModelspanProc* = proc(self: QIdentityProxyModel, index: gen_qabstractitemmodel_types.QModelIndex): gen_qsize_types.QSize {.raises: [], gcsafe.}
 type QIdentityProxyModelhasChildrenProc* = proc(self: QIdentityProxyModel, parent: gen_qabstractitemmodel_types.QModelIndex): bool {.raises: [], gcsafe.}
-type QIdentityProxyModelmimeDataProc* = proc(self: QIdentityProxyModel, indexes: seq[gen_qabstractitemmodel_types.QModelIndex]): gen_qmimedata_types.QMimeData {.raises: [], gcsafe.}
+type QIdentityProxyModelmimeDataProc* = proc(self: QIdentityProxyModel, indexes: openArray[gen_qabstractitemmodel_types.QModelIndex]): gen_qmimedata_types.QMimeData {.raises: [], gcsafe.}
 type QIdentityProxyModelcanDropMimeDataProc* = proc(self: QIdentityProxyModel, data: gen_qmimedata_types.QMimeData, action: cint, row: cint, column: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool {.raises: [], gcsafe.}
 type QIdentityProxyModelmimeTypesProc* = proc(self: QIdentityProxyModel): seq[string] {.raises: [], gcsafe.}
 type QIdentityProxyModelsupportedDragActionsProc* = proc(self: QIdentityProxyModel): cint {.raises: [], gcsafe.}
@@ -926,7 +926,7 @@ proc fcQIdentityProxyModel_vtable_callback_hasChildren(self: pointer, parent: po
   var virtualReturn = vtbl[].hasChildren(self, slotval1)
   virtualReturn
 
-proc QIdentityProxyModelmimeData*(self: gen_qidentityproxymodel_types.QIdentityProxyModel, indexes: seq[gen_qabstractitemmodel_types.QModelIndex]): gen_qmimedata_types.QMimeData =
+proc QIdentityProxyModelmimeData*(self: gen_qidentityproxymodel_types.QIdentityProxyModel, indexes: openArray[gen_qabstractitemmodel_types.QModelIndex]): gen_qmimedata_types.QMimeData =
   var indexes_CArray = newSeq[pointer](len(indexes))
   for i in 0..<len(indexes):
     indexes_CArray[i] = indexes[i].h
@@ -1484,7 +1484,7 @@ proc fcQIdentityProxyModel_method_callback_hasChildren(self: pointer, parent: po
   var virtualReturn = inst.hasChildren(slotval1)
   virtualReturn
 
-method mimeData*(self: VirtualQIdentityProxyModel, indexes: seq[gen_qabstractitemmodel_types.QModelIndex]): gen_qmimedata_types.QMimeData {.base.} =
+method mimeData*(self: VirtualQIdentityProxyModel, indexes: openArray[gen_qabstractitemmodel_types.QModelIndex]): gen_qmimedata_types.QMimeData {.base.} =
   QIdentityProxyModelmimeData(self[], indexes)
 proc fcQIdentityProxyModel_method_callback_mimeData(self: pointer, indexes: struct_miqt_array): pointer {.cdecl.} =
   let inst = cast[VirtualQIdentityProxyModel](fcQIdentityProxyModel_vdata(self)[])
@@ -1625,7 +1625,7 @@ proc createSourceIndex*(self: gen_qidentityproxymodel_types.QIdentityProxyModel,
 proc createIndex*(self: gen_qidentityproxymodel_types.QIdentityProxyModel, row: cint, column: cint): gen_qabstractitemmodel_types.QModelIndex =
   gen_qabstractitemmodel_types.QModelIndex(h: fcQIdentityProxyModel_protectedbase_createIndex(self.h, row, column), owned: true)
 
-proc encodeData*(self: gen_qidentityproxymodel_types.QIdentityProxyModel, indexes: seq[gen_qabstractitemmodel_types.QModelIndex], stream: gen_qdatastream_types.QDataStream): void =
+proc encodeData*(self: gen_qidentityproxymodel_types.QIdentityProxyModel, indexes: openArray[gen_qabstractitemmodel_types.QModelIndex], stream: gen_qdatastream_types.QDataStream): void =
   var indexes_CArray = newSeq[pointer](len(indexes))
   for i in 0..<len(indexes):
     indexes_CArray[i] = indexes[i].h
@@ -1680,7 +1680,7 @@ proc endResetModel*(self: gen_qidentityproxymodel_types.QIdentityProxyModel): vo
 proc changePersistentIndex*(self: gen_qidentityproxymodel_types.QIdentityProxyModel, fromVal: gen_qabstractitemmodel_types.QModelIndex, to: gen_qabstractitemmodel_types.QModelIndex): void =
   fcQIdentityProxyModel_protectedbase_changePersistentIndex(self.h, fromVal.h, to.h)
 
-proc changePersistentIndexList*(self: gen_qidentityproxymodel_types.QIdentityProxyModel, fromVal: seq[gen_qabstractitemmodel_types.QModelIndex], to: seq[gen_qabstractitemmodel_types.QModelIndex]): void =
+proc changePersistentIndexList*(self: gen_qidentityproxymodel_types.QIdentityProxyModel, fromVal: openArray[gen_qabstractitemmodel_types.QModelIndex], to: openArray[gen_qabstractitemmodel_types.QModelIndex]): void =
   var fromVal_CArray = newSeq[pointer](len(fromVal))
   for i in 0..<len(fromVal):
     fromVal_CArray[i] = fromVal[i].h
@@ -2005,6 +2005,7 @@ proc create*(T: type gen_qidentityproxymodel_types.QIdentityProxyModel,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQIdentityProxyModel_new(addr(cQIdentityProxyModel_mvtbl), csize_t(sizeof(pointer)))
   fcQIdentityProxyModel_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qidentityproxymodel_types.QIdentityProxyModel,
     parent: gen_qobject_types.QObject,
@@ -2012,6 +2013,7 @@ proc create*(T: type gen_qidentityproxymodel_types.QIdentityProxyModel,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQIdentityProxyModel_new2(addr(cQIdentityProxyModel_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQIdentityProxyModel_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qidentityproxymodel_types.QIdentityProxyModel): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQIdentityProxyModel_staticMetaObject())

@@ -117,7 +117,7 @@ proc fromVariant*(_: type gen_qjsondocument_types.QJsonDocument, variant: gen_qv
 proc toVariant*(self: gen_qjsondocument_types.QJsonDocument): gen_qvariant_types.QVariant =
   gen_qvariant_types.QVariant(h: fcQJsonDocument_toVariant(self.h), owned: true)
 
-proc fromJson*(_: type gen_qjsondocument_types.QJsonDocument, json: seq[byte]): gen_qjsondocument_types.QJsonDocument =
+proc fromJson*(_: type gen_qjsondocument_types.QJsonDocument, json: openArray[byte]): gen_qjsondocument_types.QJsonDocument =
   gen_qjsondocument_types.QJsonDocument(h: fcQJsonDocument_fromJson(struct_miqt_string(data: if len(json) > 0: addr json[0] else: nil, len: csize_t(len(json)))), owned: true)
 
 proc toJson*(self: gen_qjsondocument_types.QJsonDocument): seq[byte] =
@@ -147,7 +147,7 @@ proc setObject*(self: gen_qjsondocument_types.QJsonDocument, objectVal: gen_qjso
 proc setArray*(self: gen_qjsondocument_types.QJsonDocument, array: gen_qjsonarray_types.QJsonArray): void =
   fcQJsonDocument_setArray(self.h, array.h)
 
-proc operatorSubscript*(self: gen_qjsondocument_types.QJsonDocument, key: string): gen_qjsonvalue_types.QJsonValue =
+proc operatorSubscript*(self: gen_qjsondocument_types.QJsonDocument, key: openArray[char]): gen_qjsonvalue_types.QJsonValue =
   gen_qjsonvalue_types.QJsonValue(h: fcQJsonDocument_operatorSubscript(self.h, struct_miqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key)))), owned: true)
 
 proc operatorSubscript*(self: gen_qjsondocument_types.QJsonDocument, i: int64): gen_qjsonvalue_types.QJsonValue =
@@ -162,7 +162,7 @@ proc operatorNotEqual*(self: gen_qjsondocument_types.QJsonDocument, other: gen_q
 proc isNull*(self: gen_qjsondocument_types.QJsonDocument): bool =
   fcQJsonDocument_isNull(self.h)
 
-proc fromJson*(_: type gen_qjsondocument_types.QJsonDocument, json: seq[byte], error: gen_qjsondocument_types.QJsonParseError): gen_qjsondocument_types.QJsonDocument =
+proc fromJson*(_: type gen_qjsondocument_types.QJsonDocument, json: openArray[byte], error: gen_qjsondocument_types.QJsonParseError): gen_qjsondocument_types.QJsonDocument =
   gen_qjsondocument_types.QJsonDocument(h: fcQJsonDocument_fromJson2(struct_miqt_string(data: if len(json) > 0: addr json[0] else: nil, len: csize_t(len(json))), error.h), owned: true)
 
 proc toJson*(self: gen_qjsondocument_types.QJsonDocument, format: cint): seq[byte] =

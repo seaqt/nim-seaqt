@@ -229,7 +229,7 @@ proc tr*(_: type gen_qwebenginehistory_types.QWebEngineHistoryModel, s: cstring,
 proc createIndex*(self: gen_qwebenginehistory_types.QWebEngineHistoryModel, row: cint, column: cint): gen_qabstractitemmodel_types.QModelIndex =
   gen_qabstractitemmodel_types.QModelIndex(h: fcQWebEngineHistoryModel_protectedbase_createIndex(self.h, row, column), owned: true)
 
-proc encodeData*(self: gen_qwebenginehistory_types.QWebEngineHistoryModel, indexes: seq[gen_qabstractitemmodel_types.QModelIndex], stream: gen_qdatastream_types.QDataStream): void =
+proc encodeData*(self: gen_qwebenginehistory_types.QWebEngineHistoryModel, indexes: openArray[gen_qabstractitemmodel_types.QModelIndex], stream: gen_qdatastream_types.QDataStream): void =
   var indexes_CArray = newSeq[pointer](len(indexes))
   for i in 0..<len(indexes):
     indexes_CArray[i] = indexes[i].h
@@ -284,7 +284,7 @@ proc endResetModel*(self: gen_qwebenginehistory_types.QWebEngineHistoryModel): v
 proc changePersistentIndex*(self: gen_qwebenginehistory_types.QWebEngineHistoryModel, fromVal: gen_qabstractitemmodel_types.QModelIndex, to: gen_qabstractitemmodel_types.QModelIndex): void =
   fcQWebEngineHistoryModel_protectedbase_changePersistentIndex(self.h, fromVal.h, to.h)
 
-proc changePersistentIndexList*(self: gen_qwebenginehistory_types.QWebEngineHistoryModel, fromVal: seq[gen_qabstractitemmodel_types.QModelIndex], to: seq[gen_qabstractitemmodel_types.QModelIndex]): void =
+proc changePersistentIndexList*(self: gen_qwebenginehistory_types.QWebEngineHistoryModel, fromVal: openArray[gen_qabstractitemmodel_types.QModelIndex], to: openArray[gen_qabstractitemmodel_types.QModelIndex]): void =
   var fromVal_CArray = newSeq[pointer](len(fromVal))
   for i in 0..<len(fromVal):
     fromVal_CArray[i] = fromVal[i].h

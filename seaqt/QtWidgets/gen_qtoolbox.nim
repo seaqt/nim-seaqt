@@ -242,16 +242,16 @@ proc tr*(_: type gen_qtoolbox_types.QToolBox, s: cstring): string =
   c_free(v_ms.data)
   vx_ret
 
-proc addItem*(self: gen_qtoolbox_types.QToolBox, widget: gen_qwidget_types.QWidget, text: string): cint =
+proc addItem*(self: gen_qtoolbox_types.QToolBox, widget: gen_qwidget_types.QWidget, text: openArray[char]): cint =
   fcQToolBox_addItem(self.h, widget.h, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
 
-proc addItem*(self: gen_qtoolbox_types.QToolBox, widget: gen_qwidget_types.QWidget, icon: gen_qicon_types.QIcon, text: string): cint =
+proc addItem*(self: gen_qtoolbox_types.QToolBox, widget: gen_qwidget_types.QWidget, icon: gen_qicon_types.QIcon, text: openArray[char]): cint =
   fcQToolBox_addItem2(self.h, widget.h, icon.h, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
 
-proc insertItem*(self: gen_qtoolbox_types.QToolBox, index: cint, widget: gen_qwidget_types.QWidget, text: string): cint =
+proc insertItem*(self: gen_qtoolbox_types.QToolBox, index: cint, widget: gen_qwidget_types.QWidget, text: openArray[char]): cint =
   fcQToolBox_insertItem(self.h, index, widget.h, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
 
-proc insertItem*(self: gen_qtoolbox_types.QToolBox, index: cint, widget: gen_qwidget_types.QWidget, icon: gen_qicon_types.QIcon, text: string): cint =
+proc insertItem*(self: gen_qtoolbox_types.QToolBox, index: cint, widget: gen_qwidget_types.QWidget, icon: gen_qicon_types.QIcon, text: openArray[char]): cint =
   fcQToolBox_insertItem2(self.h, index, widget.h, icon.h, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
 
 proc removeItem*(self: gen_qtoolbox_types.QToolBox, index: cint): void =
@@ -263,7 +263,7 @@ proc setItemEnabled*(self: gen_qtoolbox_types.QToolBox, index: cint, enabled: bo
 proc isItemEnabled*(self: gen_qtoolbox_types.QToolBox, index: cint): bool =
   fcQToolBox_isItemEnabled(self.h, index)
 
-proc setItemText*(self: gen_qtoolbox_types.QToolBox, index: cint, text: string): void =
+proc setItemText*(self: gen_qtoolbox_types.QToolBox, index: cint, text: openArray[char]): void =
   fcQToolBox_setItemText(self.h, index, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
 
 proc itemText*(self: gen_qtoolbox_types.QToolBox, index: cint): string =
@@ -278,7 +278,7 @@ proc setItemIcon*(self: gen_qtoolbox_types.QToolBox, index: cint, icon: gen_qico
 proc itemIcon*(self: gen_qtoolbox_types.QToolBox, index: cint): gen_qicon_types.QIcon =
   gen_qicon_types.QIcon(h: fcQToolBox_itemIcon(self.h, index), owned: true)
 
-proc setItemToolTip*(self: gen_qtoolbox_types.QToolBox, index: cint, toolTip: string): void =
+proc setItemToolTip*(self: gen_qtoolbox_types.QToolBox, index: cint, toolTip: openArray[char]): void =
   fcQToolBox_setItemToolTip(self.h, index, struct_miqt_string(data: if len(toolTip) > 0: addr toolTip[0] else: nil, len: csize_t(len(toolTip))))
 
 proc itemToolTip*(self: gen_qtoolbox_types.QToolBox, index: cint): string =
@@ -379,7 +379,7 @@ type QToolBoxdragMoveEventProc* = proc(self: QToolBox, event: gen_qevent_types.Q
 type QToolBoxdragLeaveEventProc* = proc(self: QToolBox, event: gen_qevent_types.QDragLeaveEvent): void {.raises: [], gcsafe.}
 type QToolBoxdropEventProc* = proc(self: QToolBox, event: gen_qevent_types.QDropEvent): void {.raises: [], gcsafe.}
 type QToolBoxhideEventProc* = proc(self: QToolBox, event: gen_qevent_types.QHideEvent): void {.raises: [], gcsafe.}
-type QToolBoxnativeEventProc* = proc(self: QToolBox, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
+type QToolBoxnativeEventProc* = proc(self: QToolBox, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
 type QToolBoxmetricProc* = proc(self: QToolBox, param1: cint): cint {.raises: [], gcsafe.}
 type QToolBoxinitPainterProc* = proc(self: QToolBox, painter: gen_qpainter_types.QPainter): void {.raises: [], gcsafe.}
 type QToolBoxredirectedProc* = proc(self: QToolBox, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.raises: [], gcsafe.}
@@ -817,7 +817,7 @@ proc fcQToolBox_vtable_callback_hideEvent(self: pointer, event: pointer): void {
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   vtbl[].hideEvent(self, slotval1)
 
-proc QToolBoxnativeEvent*(self: gen_qtoolbox_types.QToolBox, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool =
+proc QToolBoxnativeEvent*(self: gen_qtoolbox_types.QToolBox, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool =
   fcQToolBox_virtualbase_nativeEvent(self.h, struct_miqt_string(data: if len(eventType) > 0: addr eventType[0] else: nil, len: csize_t(len(eventType))), message, resultVal)
 
 proc fcQToolBox_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
@@ -1245,7 +1245,7 @@ proc fcQToolBox_method_callback_hideEvent(self: pointer, event: pointer): void {
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   inst.hideEvent(slotval1)
 
-method nativeEvent*(self: VirtualQToolBox, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
+method nativeEvent*(self: VirtualQToolBox, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
   QToolBoxnativeEvent(self[], eventType, message, resultVal)
 proc fcQToolBox_method_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
   let inst = cast[VirtualQToolBox](fcQToolBox_vdata(self)[])
@@ -1801,12 +1801,14 @@ proc create*(T: type gen_qtoolbox_types.QToolBox,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQToolBox_new(addr(cQToolBox_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQToolBox_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qtoolbox_types.QToolBox,
     inst: VirtualQToolBox) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQToolBox_new2(addr(cQToolBox_mvtbl), csize_t(sizeof(pointer)))
   fcQToolBox_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qtoolbox_types.QToolBox,
     parent: gen_qwidget_types.QWidget, f: cint,
@@ -1814,6 +1816,7 @@ proc create*(T: type gen_qtoolbox_types.QToolBox,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQToolBox_new3(addr(cQToolBox_mvtbl), csize_t(sizeof(pointer)), parent.h, cint(f))
   fcQToolBox_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qtoolbox_types.QToolBox): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQToolBox_staticMetaObject())

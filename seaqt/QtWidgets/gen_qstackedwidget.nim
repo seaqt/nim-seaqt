@@ -346,7 +346,7 @@ type QStackedWidgetdragLeaveEventProc* = proc(self: QStackedWidget, event: gen_q
 type QStackedWidgetdropEventProc* = proc(self: QStackedWidget, event: gen_qevent_types.QDropEvent): void {.raises: [], gcsafe.}
 type QStackedWidgetshowEventProc* = proc(self: QStackedWidget, event: gen_qevent_types.QShowEvent): void {.raises: [], gcsafe.}
 type QStackedWidgethideEventProc* = proc(self: QStackedWidget, event: gen_qevent_types.QHideEvent): void {.raises: [], gcsafe.}
-type QStackedWidgetnativeEventProc* = proc(self: QStackedWidget, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
+type QStackedWidgetnativeEventProc* = proc(self: QStackedWidget, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
 type QStackedWidgetmetricProc* = proc(self: QStackedWidget, param1: cint): cint {.raises: [], gcsafe.}
 type QStackedWidgetinitPainterProc* = proc(self: QStackedWidget, painter: gen_qpainter_types.QPainter): void {.raises: [], gcsafe.}
 type QStackedWidgetredirectedProc* = proc(self: QStackedWidget, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.raises: [], gcsafe.}
@@ -764,7 +764,7 @@ proc fcQStackedWidget_vtable_callback_hideEvent(self: pointer, event: pointer): 
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   vtbl[].hideEvent(self, slotval1)
 
-proc QStackedWidgetnativeEvent*(self: gen_qstackedwidget_types.QStackedWidget, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool =
+proc QStackedWidgetnativeEvent*(self: gen_qstackedwidget_types.QStackedWidget, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool =
   fcQStackedWidget_virtualbase_nativeEvent(self.h, struct_miqt_string(data: if len(eventType) > 0: addr eventType[0] else: nil, len: csize_t(len(eventType))), message, resultVal)
 
 proc fcQStackedWidget_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
@@ -1178,7 +1178,7 @@ proc fcQStackedWidget_method_callback_hideEvent(self: pointer, event: pointer): 
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   inst.hideEvent(slotval1)
 
-method nativeEvent*(self: VirtualQStackedWidget, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
+method nativeEvent*(self: VirtualQStackedWidget, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
   QStackedWidgetnativeEvent(self[], eventType, message, resultVal)
 proc fcQStackedWidget_method_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
   let inst = cast[VirtualQStackedWidget](fcQStackedWidget_vdata(self)[])
@@ -1607,12 +1607,14 @@ proc create*(T: type gen_qstackedwidget_types.QStackedWidget,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQStackedWidget_new(addr(cQStackedWidget_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQStackedWidget_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qstackedwidget_types.QStackedWidget,
     inst: VirtualQStackedWidget) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQStackedWidget_new2(addr(cQStackedWidget_mvtbl), csize_t(sizeof(pointer)))
   fcQStackedWidget_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qstackedwidget_types.QStackedWidget): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQStackedWidget_staticMetaObject())

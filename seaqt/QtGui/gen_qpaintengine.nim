@@ -972,6 +972,7 @@ proc create*(T: type gen_qpaintengine_types.QPaintEngine,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQPaintEngine_new(addr(cQPaintEngine_mvtbl), csize_t(sizeof(pointer)))
   fcQPaintEngine_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qpaintengine_types.QPaintEngine,
     features: cint,
@@ -979,6 +980,7 @@ proc create*(T: type gen_qpaintengine_types.QPaintEngine,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQPaintEngine_new2(addr(cQPaintEngine_mvtbl), csize_t(sizeof(pointer)), cint(features))
   fcQPaintEngine_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc state*(self: gen_qpaintengine_types.QPaintEngineState): cint =
   cint(fcQPaintEngineState_state(self.h))

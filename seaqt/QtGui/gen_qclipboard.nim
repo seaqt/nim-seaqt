@@ -147,13 +147,13 @@ proc text*(self: gen_qclipboard_types.QClipboard): string =
   c_free(v_ms.data)
   vx_ret
 
-proc text*(self: gen_qclipboard_types.QClipboard, subtype: string): string =
+proc text*(self: gen_qclipboard_types.QClipboard, subtype: openArray[char]): string =
   let v_ms = fcQClipboard_textWithSubtype(self.h, struct_miqt_string(data: if len(subtype) > 0: addr subtype[0] else: nil, len: csize_t(len(subtype))))
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc setText*(self: gen_qclipboard_types.QClipboard, param1: string): void =
+proc setText*(self: gen_qclipboard_types.QClipboard, param1: openArray[char]): void =
   fcQClipboard_setText(self.h, struct_miqt_string(data: if len(param1) > 0: addr param1[0] else: nil, len: csize_t(len(param1))))
 
 proc mimeData*(self: gen_qclipboard_types.QClipboard): gen_qmimedata_types.QMimeData =
@@ -269,13 +269,13 @@ proc text*(self: gen_qclipboard_types.QClipboard, mode: cint): string =
   c_free(v_ms.data)
   vx_ret
 
-proc text*(self: gen_qclipboard_types.QClipboard, subtype: string, mode: cint): string =
+proc text*(self: gen_qclipboard_types.QClipboard, subtype: openArray[char], mode: cint): string =
   let v_ms = fcQClipboard_text2(self.h, struct_miqt_string(data: if len(subtype) > 0: addr subtype[0] else: nil, len: csize_t(len(subtype))), cint(mode))
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc setText*(self: gen_qclipboard_types.QClipboard, param1: string, mode: cint): void =
+proc setText*(self: gen_qclipboard_types.QClipboard, param1: openArray[char], mode: cint): void =
   fcQClipboard_setText2(self.h, struct_miqt_string(data: if len(param1) > 0: addr param1[0] else: nil, len: csize_t(len(param1))), cint(mode))
 
 proc mimeData*(self: gen_qclipboard_types.QClipboard, mode: cint): gen_qmimedata_types.QMimeData =

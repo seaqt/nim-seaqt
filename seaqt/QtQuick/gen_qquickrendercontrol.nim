@@ -547,6 +547,7 @@ proc create*(T: type gen_qquickrendercontrol_types.QQuickRenderControl,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQQuickRenderControl_new(addr(cQQuickRenderControl_mvtbl), csize_t(sizeof(pointer)))
   fcQQuickRenderControl_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qquickrendercontrol_types.QQuickRenderControl,
     parent: gen_qobject_types.QObject,
@@ -554,6 +555,7 @@ proc create*(T: type gen_qquickrendercontrol_types.QQuickRenderControl,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQQuickRenderControl_new2(addr(cQQuickRenderControl_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQQuickRenderControl_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qquickrendercontrol_types.QQuickRenderControl): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQQuickRenderControl_staticMetaObject())

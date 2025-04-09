@@ -520,6 +520,7 @@ proc create*(T: type gen_qambientsound_types.QAmbientSound,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQAmbientSound_new(addr(cQAmbientSound_mvtbl), csize_t(sizeof(pointer)), engine.h)
   fcQAmbientSound_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qambientsound_types.QAmbientSound): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQAmbientSound_staticMetaObject())

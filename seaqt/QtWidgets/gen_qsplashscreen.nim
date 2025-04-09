@@ -247,16 +247,16 @@ proc message*(self: gen_qsplashscreen_types.QSplashScreen): string =
   c_free(v_ms.data)
   vx_ret
 
-proc showMessage*(self: gen_qsplashscreen_types.QSplashScreen, message: string): void =
+proc showMessage*(self: gen_qsplashscreen_types.QSplashScreen, message: openArray[char]): void =
   fcQSplashScreen_showMessage(self.h, struct_miqt_string(data: if len(message) > 0: addr message[0] else: nil, len: csize_t(len(message))))
 
 proc clearMessage*(self: gen_qsplashscreen_types.QSplashScreen): void =
   fcQSplashScreen_clearMessage(self.h)
 
-proc messageChanged*(self: gen_qsplashscreen_types.QSplashScreen, message: string): void =
+proc messageChanged*(self: gen_qsplashscreen_types.QSplashScreen, message: openArray[char]): void =
   fcQSplashScreen_messageChanged(self.h, struct_miqt_string(data: if len(message) > 0: addr message[0] else: nil, len: csize_t(len(message))))
 
-type QSplashScreenmessageChangedSlot* = proc(message: string)
+type QSplashScreenmessageChangedSlot* = proc(message: openArray[char])
 proc fcQSplashScreen_slot_callback_messageChanged(slot: int, message: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QSplashScreenmessageChangedSlot](cast[pointer](slot))
   let vmessage_ms = message
@@ -288,10 +288,10 @@ proc tr*(_: type gen_qsplashscreen_types.QSplashScreen, s: cstring, c: cstring, 
   c_free(v_ms.data)
   vx_ret
 
-proc showMessage*(self: gen_qsplashscreen_types.QSplashScreen, message: string, alignment: cint): void =
+proc showMessage*(self: gen_qsplashscreen_types.QSplashScreen, message: openArray[char], alignment: cint): void =
   fcQSplashScreen_showMessage2(self.h, struct_miqt_string(data: if len(message) > 0: addr message[0] else: nil, len: csize_t(len(message))), alignment)
 
-proc showMessage*(self: gen_qsplashscreen_types.QSplashScreen, message: string, alignment: cint, color: gen_qcolor_types.QColor): void =
+proc showMessage*(self: gen_qsplashscreen_types.QSplashScreen, message: openArray[char], alignment: cint, color: gen_qcolor_types.QColor): void =
   fcQSplashScreen_showMessage3(self.h, struct_miqt_string(data: if len(message) > 0: addr message[0] else: nil, len: csize_t(len(message))), alignment, color.h)
 
 type QSplashScreenmetaObjectProc* = proc(self: QSplashScreen): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
@@ -330,7 +330,7 @@ type QSplashScreendragLeaveEventProc* = proc(self: QSplashScreen, event: gen_qev
 type QSplashScreendropEventProc* = proc(self: QSplashScreen, event: gen_qevent_types.QDropEvent): void {.raises: [], gcsafe.}
 type QSplashScreenshowEventProc* = proc(self: QSplashScreen, event: gen_qevent_types.QShowEvent): void {.raises: [], gcsafe.}
 type QSplashScreenhideEventProc* = proc(self: QSplashScreen, event: gen_qevent_types.QHideEvent): void {.raises: [], gcsafe.}
-type QSplashScreennativeEventProc* = proc(self: QSplashScreen, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
+type QSplashScreennativeEventProc* = proc(self: QSplashScreen, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
 type QSplashScreenchangeEventProc* = proc(self: QSplashScreen, param1: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QSplashScreenmetricProc* = proc(self: QSplashScreen, param1: cint): cint {.raises: [], gcsafe.}
 type QSplashScreeninitPainterProc* = proc(self: QSplashScreen, painter: gen_qpainter_types.QPainter): void {.raises: [], gcsafe.}
@@ -740,7 +740,7 @@ proc fcQSplashScreen_vtable_callback_hideEvent(self: pointer, event: pointer): v
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   vtbl[].hideEvent(self, slotval1)
 
-proc QSplashScreennativeEvent*(self: gen_qsplashscreen_types.QSplashScreen, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool =
+proc QSplashScreennativeEvent*(self: gen_qsplashscreen_types.QSplashScreen, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool =
   fcQSplashScreen_virtualbase_nativeEvent(self.h, struct_miqt_string(data: if len(eventType) > 0: addr eventType[0] else: nil, len: csize_t(len(eventType))), message, resultVal)
 
 proc fcQSplashScreen_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
@@ -1156,7 +1156,7 @@ proc fcQSplashScreen_method_callback_hideEvent(self: pointer, event: pointer): v
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   inst.hideEvent(slotval1)
 
-method nativeEvent*(self: VirtualQSplashScreen, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
+method nativeEvent*(self: VirtualQSplashScreen, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
   QSplashScreennativeEvent(self[], eventType, message, resultVal)
 proc fcQSplashScreen_method_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
   let inst = cast[VirtualQSplashScreen](fcQSplashScreen_vdata(self)[])
@@ -2040,6 +2040,7 @@ proc create*(T: type gen_qsplashscreen_types.QSplashScreen,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQSplashScreen_new(addr(cQSplashScreen_mvtbl), csize_t(sizeof(pointer)))
   fcQSplashScreen_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qsplashscreen_types.QSplashScreen,
     screen: gen_qscreen_types.QScreen,
@@ -2047,6 +2048,7 @@ proc create*(T: type gen_qsplashscreen_types.QSplashScreen,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQSplashScreen_new2(addr(cQSplashScreen_mvtbl), csize_t(sizeof(pointer)), screen.h)
   fcQSplashScreen_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qsplashscreen_types.QSplashScreen,
     pixmap: gen_qpixmap_types.QPixmap,
@@ -2054,6 +2056,7 @@ proc create*(T: type gen_qsplashscreen_types.QSplashScreen,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQSplashScreen_new3(addr(cQSplashScreen_mvtbl), csize_t(sizeof(pointer)), pixmap.h)
   fcQSplashScreen_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qsplashscreen_types.QSplashScreen,
     pixmap: gen_qpixmap_types.QPixmap, f: cint,
@@ -2061,6 +2064,7 @@ proc create*(T: type gen_qsplashscreen_types.QSplashScreen,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQSplashScreen_new4(addr(cQSplashScreen_mvtbl), csize_t(sizeof(pointer)), pixmap.h, cint(f))
   fcQSplashScreen_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qsplashscreen_types.QSplashScreen,
     screen: gen_qscreen_types.QScreen, pixmap: gen_qpixmap_types.QPixmap,
@@ -2068,6 +2072,7 @@ proc create*(T: type gen_qsplashscreen_types.QSplashScreen,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQSplashScreen_new5(addr(cQSplashScreen_mvtbl), csize_t(sizeof(pointer)), screen.h, pixmap.h)
   fcQSplashScreen_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qsplashscreen_types.QSplashScreen,
     screen: gen_qscreen_types.QScreen, pixmap: gen_qpixmap_types.QPixmap, f: cint,
@@ -2075,6 +2080,7 @@ proc create*(T: type gen_qsplashscreen_types.QSplashScreen,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQSplashScreen_new6(addr(cQSplashScreen_mvtbl), csize_t(sizeof(pointer)), screen.h, pixmap.h, cint(f))
   fcQSplashScreen_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qsplashscreen_types.QSplashScreen): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQSplashScreen_staticMetaObject())

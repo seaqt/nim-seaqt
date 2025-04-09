@@ -86,7 +86,7 @@ proc append*(self: gen_qcborstreamwriter_types.QCborStreamWriter, i: clonglong):
 proc append*(self: gen_qcborstreamwriter_types.QCborStreamWriter, n: cint): void =
   fcQCborStreamWriter_appendWithQCborNegativeInteger(self.h, cint(n))
 
-proc append*(self: gen_qcborstreamwriter_types.QCborStreamWriter, ba: seq[byte]): void =
+proc append*(self: gen_qcborstreamwriter_types.QCborStreamWriter, ba: openArray[byte]): void =
   fcQCborStreamWriter_appendWithBa(self.h, struct_miqt_string(data: if len(ba) > 0: addr ba[0] else: nil, len: csize_t(len(ba))))
 
 proc append2*(self: gen_qcborstreamwriter_types.QCborStreamWriter, tag: cint): void =

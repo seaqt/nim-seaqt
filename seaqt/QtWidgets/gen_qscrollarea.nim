@@ -340,7 +340,7 @@ type QScrollAreatabletEventProc* = proc(self: QScrollArea, event: gen_qevent_typ
 type QScrollAreaactionEventProc* = proc(self: QScrollArea, event: gen_qevent_types.QActionEvent): void {.raises: [], gcsafe.}
 type QScrollAreashowEventProc* = proc(self: QScrollArea, event: gen_qevent_types.QShowEvent): void {.raises: [], gcsafe.}
 type QScrollAreahideEventProc* = proc(self: QScrollArea, event: gen_qevent_types.QHideEvent): void {.raises: [], gcsafe.}
-type QScrollAreanativeEventProc* = proc(self: QScrollArea, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
+type QScrollAreanativeEventProc* = proc(self: QScrollArea, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
 type QScrollAreametricProc* = proc(self: QScrollArea, param1: cint): cint {.raises: [], gcsafe.}
 type QScrollAreainitPainterProc* = proc(self: QScrollArea, painter: gen_qpainter_types.QPainter): void {.raises: [], gcsafe.}
 type QScrollArearedirectedProc* = proc(self: QScrollArea, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.raises: [], gcsafe.}
@@ -822,7 +822,7 @@ proc fcQScrollArea_vtable_callback_hideEvent(self: pointer, event: pointer): voi
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   vtbl[].hideEvent(self, slotval1)
 
-proc QScrollAreanativeEvent*(self: gen_qscrollarea_types.QScrollArea, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool =
+proc QScrollAreanativeEvent*(self: gen_qscrollarea_types.QScrollArea, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool =
   fcQScrollArea_virtualbase_nativeEvent(self.h, struct_miqt_string(data: if len(eventType) > 0: addr eventType[0] else: nil, len: csize_t(len(eventType))), message, resultVal)
 
 proc fcQScrollArea_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
@@ -1262,7 +1262,7 @@ proc fcQScrollArea_method_callback_hideEvent(self: pointer, event: pointer): voi
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   inst.hideEvent(slotval1)
 
-method nativeEvent*(self: VirtualQScrollArea, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
+method nativeEvent*(self: VirtualQScrollArea, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
   QScrollAreanativeEvent(self[], eventType, message, resultVal)
 proc fcQScrollArea_method_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
   let inst = cast[VirtualQScrollArea](fcQScrollArea_vdata(self)[])
@@ -1700,12 +1700,14 @@ proc create*(T: type gen_qscrollarea_types.QScrollArea,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQScrollArea_new(addr(cQScrollArea_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQScrollArea_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qscrollarea_types.QScrollArea,
     inst: VirtualQScrollArea) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQScrollArea_new2(addr(cQScrollArea_mvtbl), csize_t(sizeof(pointer)))
   fcQScrollArea_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qscrollarea_types.QScrollArea): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQScrollArea_staticMetaObject())

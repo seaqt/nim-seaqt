@@ -601,6 +601,7 @@ proc create*(T: type gen_qmediacapturesession_types.QMediaCaptureSession,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQMediaCaptureSession_new(addr(cQMediaCaptureSession_mvtbl), csize_t(sizeof(pointer)))
   fcQMediaCaptureSession_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qmediacapturesession_types.QMediaCaptureSession,
     parent: gen_qobject_types.QObject,
@@ -608,6 +609,7 @@ proc create*(T: type gen_qmediacapturesession_types.QMediaCaptureSession,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQMediaCaptureSession_new2(addr(cQMediaCaptureSession_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQMediaCaptureSession_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qmediacapturesession_types.QMediaCaptureSession): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQMediaCaptureSession_staticMetaObject())

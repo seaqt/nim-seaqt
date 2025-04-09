@@ -313,10 +313,10 @@ proc operatorShiftRight*(self: gen_qtextstream_types.QTextStream, f: ptr float32
 proc operatorShiftRight*(self: gen_qtextstream_types.QTextStream, f: ptr float64): gen_qtextstream_types.QTextStream =
   gen_qtextstream_types.QTextStream(h: fcQTextStream_operatorShiftRightWithDouble(self.h, f), owned: false)
 
-proc operatorShiftRight*(self: gen_qtextstream_types.QTextStream, s: string): gen_qtextstream_types.QTextStream =
+proc operatorShiftRight*(self: gen_qtextstream_types.QTextStream, s: openArray[char]): gen_qtextstream_types.QTextStream =
   gen_qtextstream_types.QTextStream(h: fcQTextStream_operatorShiftRightWithQString(self.h, struct_miqt_string(data: if len(s) > 0: addr s[0] else: nil, len: csize_t(len(s)))), owned: false)
 
-proc operatorShiftRight*(self: gen_qtextstream_types.QTextStream, array: seq[byte]): gen_qtextstream_types.QTextStream =
+proc operatorShiftRight*(self: gen_qtextstream_types.QTextStream, array: openArray[byte]): gen_qtextstream_types.QTextStream =
   gen_qtextstream_types.QTextStream(h: fcQTextStream_operatorShiftRightWithArray(self.h, struct_miqt_string(data: if len(array) > 0: addr array[0] else: nil, len: csize_t(len(array)))), owned: false)
 
 proc operatorShiftRight*(self: gen_qtextstream_types.QTextStream, c: cstring): gen_qtextstream_types.QTextStream =
@@ -358,10 +358,10 @@ proc operatorShiftLeft*(self: gen_qtextstream_types.QTextStream, f: float32): ge
 proc operatorShiftLeft*(self: gen_qtextstream_types.QTextStream, f: float64): gen_qtextstream_types.QTextStream =
   gen_qtextstream_types.QTextStream(h: fcQTextStream_operatorShiftLeftWithDouble(self.h, f), owned: false)
 
-proc operatorShiftLeft*(self: gen_qtextstream_types.QTextStream, s: string): gen_qtextstream_types.QTextStream =
+proc operatorShiftLeft*(self: gen_qtextstream_types.QTextStream, s: openArray[char]): gen_qtextstream_types.QTextStream =
   gen_qtextstream_types.QTextStream(h: fcQTextStream_operatorShiftLeftWithQString(self.h, struct_miqt_string(data: if len(s) > 0: addr s[0] else: nil, len: csize_t(len(s)))), owned: false)
 
-proc operatorShiftLeft*(self: gen_qtextstream_types.QTextStream, array: seq[byte]): gen_qtextstream_types.QTextStream =
+proc operatorShiftLeft*(self: gen_qtextstream_types.QTextStream, array: openArray[byte]): gen_qtextstream_types.QTextStream =
   gen_qtextstream_types.QTextStream(h: fcQTextStream_operatorShiftLeftWithArray(self.h, struct_miqt_string(data: if len(array) > 0: addr array[0] else: nil, len: csize_t(len(array)))), owned: false)
 
 proc operatorShiftLeft*(self: gen_qtextstream_types.QTextStream, c: cstring): gen_qtextstream_types.QTextStream =
@@ -384,10 +384,10 @@ proc create*(T: type gen_qtextstream_types.QTextStream,
   let tmp = gen_qtextstream_types.QTextStream(h: fcQTextStream_new2(device.h), owned: true)
   tmp
 proc create*(T: type gen_qtextstream_types.QTextStream,
-    array: seq[byte]): gen_qtextstream_types.QTextStream =
+    array: openArray[byte]): gen_qtextstream_types.QTextStream =
   let tmp = gen_qtextstream_types.QTextStream(h: fcQTextStream_new3(struct_miqt_string(data: if len(array) > 0: addr array[0] else: nil, len: csize_t(len(array)))), owned: true)
   tmp
 proc create*(T: type gen_qtextstream_types.QTextStream,
-    array: seq[byte], openMode: cint): gen_qtextstream_types.QTextStream =
+    array: openArray[byte], openMode: cint): gen_qtextstream_types.QTextStream =
   let tmp = gen_qtextstream_types.QTextStream(h: fcQTextStream_new4(struct_miqt_string(data: if len(array) > 0: addr array[0] else: nil, len: csize_t(len(array))), cint(openMode)), owned: true)
   tmp

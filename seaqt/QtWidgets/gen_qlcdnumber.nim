@@ -286,7 +286,7 @@ proc intValue*(self: gen_qlcdnumber_types.QLCDNumber): cint =
 proc sizeHint*(self: gen_qlcdnumber_types.QLCDNumber): gen_qsize_types.QSize =
   gen_qsize_types.QSize(h: fcQLCDNumber_sizeHint(self.h), owned: true)
 
-proc display*(self: gen_qlcdnumber_types.QLCDNumber, str: string): void =
+proc display*(self: gen_qlcdnumber_types.QLCDNumber, str: openArray[char]): void =
   fcQLCDNumber_display(self.h, struct_miqt_string(data: if len(str) > 0: addr str[0] else: nil, len: csize_t(len(str))))
 
 proc display*(self: gen_qlcdnumber_types.QLCDNumber, num: cint): void =
@@ -377,7 +377,7 @@ type QLCDNumberdragLeaveEventProc* = proc(self: QLCDNumber, event: gen_qevent_ty
 type QLCDNumberdropEventProc* = proc(self: QLCDNumber, event: gen_qevent_types.QDropEvent): void {.raises: [], gcsafe.}
 type QLCDNumbershowEventProc* = proc(self: QLCDNumber, event: gen_qevent_types.QShowEvent): void {.raises: [], gcsafe.}
 type QLCDNumberhideEventProc* = proc(self: QLCDNumber, event: gen_qevent_types.QHideEvent): void {.raises: [], gcsafe.}
-type QLCDNumbernativeEventProc* = proc(self: QLCDNumber, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
+type QLCDNumbernativeEventProc* = proc(self: QLCDNumber, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
 type QLCDNumbermetricProc* = proc(self: QLCDNumber, param1: cint): cint {.raises: [], gcsafe.}
 type QLCDNumberinitPainterProc* = proc(self: QLCDNumber, painter: gen_qpainter_types.QPainter): void {.raises: [], gcsafe.}
 type QLCDNumberredirectedProc* = proc(self: QLCDNumber, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.raises: [], gcsafe.}
@@ -795,7 +795,7 @@ proc fcQLCDNumber_vtable_callback_hideEvent(self: pointer, event: pointer): void
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   vtbl[].hideEvent(self, slotval1)
 
-proc QLCDNumbernativeEvent*(self: gen_qlcdnumber_types.QLCDNumber, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool =
+proc QLCDNumbernativeEvent*(self: gen_qlcdnumber_types.QLCDNumber, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool =
   fcQLCDNumber_virtualbase_nativeEvent(self.h, struct_miqt_string(data: if len(eventType) > 0: addr eventType[0] else: nil, len: csize_t(len(eventType))), message, resultVal)
 
 proc fcQLCDNumber_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
@@ -1209,7 +1209,7 @@ proc fcQLCDNumber_method_callback_hideEvent(self: pointer, event: pointer): void
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   inst.hideEvent(slotval1)
 
-method nativeEvent*(self: VirtualQLCDNumber, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
+method nativeEvent*(self: VirtualQLCDNumber, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
   QLCDNumbernativeEvent(self[], eventType, message, resultVal)
 proc fcQLCDNumber_method_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
   let inst = cast[VirtualQLCDNumber](fcQLCDNumber_vdata(self)[])
@@ -1864,12 +1864,14 @@ proc create*(T: type gen_qlcdnumber_types.QLCDNumber,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQLCDNumber_new(addr(cQLCDNumber_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQLCDNumber_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qlcdnumber_types.QLCDNumber,
     inst: VirtualQLCDNumber) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQLCDNumber_new2(addr(cQLCDNumber_mvtbl), csize_t(sizeof(pointer)))
   fcQLCDNumber_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qlcdnumber_types.QLCDNumber,
     numDigits: cuint,
@@ -1877,6 +1879,7 @@ proc create*(T: type gen_qlcdnumber_types.QLCDNumber,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQLCDNumber_new3(addr(cQLCDNumber_mvtbl), csize_t(sizeof(pointer)), numDigits)
   fcQLCDNumber_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qlcdnumber_types.QLCDNumber,
     numDigits: cuint, parent: gen_qwidget_types.QWidget,
@@ -1884,6 +1887,7 @@ proc create*(T: type gen_qlcdnumber_types.QLCDNumber,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQLCDNumber_new4(addr(cQLCDNumber_mvtbl), csize_t(sizeof(pointer)), numDigits, parent.h)
   fcQLCDNumber_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qlcdnumber_types.QLCDNumber): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQLCDNumber_staticMetaObject())

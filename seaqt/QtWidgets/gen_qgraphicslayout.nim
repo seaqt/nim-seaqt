@@ -406,6 +406,7 @@ proc create*(T: type gen_qgraphicslayout_types.QGraphicsLayout,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQGraphicsLayout_new(addr(cQGraphicsLayout_mvtbl), csize_t(sizeof(pointer)))
   fcQGraphicsLayout_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qgraphicslayout_types.QGraphicsLayout,
     parent: gen_qgraphicslayoutitem_types.QGraphicsLayoutItem,
@@ -413,4 +414,5 @@ proc create*(T: type gen_qgraphicslayout_types.QGraphicsLayout,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQGraphicsLayout_new2(addr(cQGraphicsLayout_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQGraphicsLayout_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 

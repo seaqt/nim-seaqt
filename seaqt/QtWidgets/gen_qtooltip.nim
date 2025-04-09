@@ -63,7 +63,7 @@ proc fcQToolTip_showText3(pos: pointer, text: struct_miqt_string, w: pointer): v
 proc fcQToolTip_showText4(pos: pointer, text: struct_miqt_string, w: pointer, rect: pointer): void {.importc: "QToolTip_showText4".}
 proc fcQToolTip_showText5(pos: pointer, text: struct_miqt_string, w: pointer, rect: pointer, msecShowTime: cint): void {.importc: "QToolTip_showText5".}
 
-proc showText*(_: type gen_qtooltip_types.QToolTip, pos: gen_qpoint_types.QPoint, text: string): void =
+proc showText*(_: type gen_qtooltip_types.QToolTip, pos: gen_qpoint_types.QPoint, text: openArray[char]): void =
   fcQToolTip_showText(pos.h, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
 
 proc hideText*(_: type gen_qtooltip_types.QToolTip): void =
@@ -90,12 +90,12 @@ proc font*(_: type gen_qtooltip_types.QToolTip): gen_qfont_types.QFont =
 proc setFont*(_: type gen_qtooltip_types.QToolTip, font: gen_qfont_types.QFont): void =
   fcQToolTip_setFont(font.h)
 
-proc showText*(_: type gen_qtooltip_types.QToolTip, pos: gen_qpoint_types.QPoint, text: string, w: gen_qwidget_types.QWidget): void =
+proc showText*(_: type gen_qtooltip_types.QToolTip, pos: gen_qpoint_types.QPoint, text: openArray[char], w: gen_qwidget_types.QWidget): void =
   fcQToolTip_showText3(pos.h, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), w.h)
 
-proc showText*(_: type gen_qtooltip_types.QToolTip, pos: gen_qpoint_types.QPoint, text: string, w: gen_qwidget_types.QWidget, rect: gen_qrect_types.QRect): void =
+proc showText*(_: type gen_qtooltip_types.QToolTip, pos: gen_qpoint_types.QPoint, text: openArray[char], w: gen_qwidget_types.QWidget, rect: gen_qrect_types.QRect): void =
   fcQToolTip_showText4(pos.h, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), w.h, rect.h)
 
-proc showText*(_: type gen_qtooltip_types.QToolTip, pos: gen_qpoint_types.QPoint, text: string, w: gen_qwidget_types.QWidget, rect: gen_qrect_types.QRect, msecShowTime: cint): void =
+proc showText*(_: type gen_qtooltip_types.QToolTip, pos: gen_qpoint_types.QPoint, text: openArray[char], w: gen_qwidget_types.QWidget, rect: gen_qrect_types.QRect, msecShowTime: cint): void =
   fcQToolTip_showText5(pos.h, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), w.h, rect.h, msecShowTime)
 

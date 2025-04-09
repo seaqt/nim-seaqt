@@ -116,4 +116,5 @@ proc create*(T: type gen_qqmlabstracturlinterceptor_types.QQmlAbstractUrlInterce
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQQmlAbstractUrlInterceptor_new(addr(cQQmlAbstractUrlInterceptor_mvtbl), csize_t(sizeof(pointer)))
   fcQQmlAbstractUrlInterceptor_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 

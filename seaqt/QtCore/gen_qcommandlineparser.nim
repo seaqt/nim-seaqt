@@ -103,7 +103,7 @@ proc setOptionsAfterPositionalArgumentsMode*(self: gen_qcommandlineparser_types.
 proc addOption*(self: gen_qcommandlineparser_types.QCommandLineParser, commandLineOption: gen_qcommandlineoption_types.QCommandLineOption): bool =
   fcQCommandLineParser_addOption(self.h, commandLineOption.h)
 
-proc addOptions*(self: gen_qcommandlineparser_types.QCommandLineParser, options: seq[gen_qcommandlineoption_types.QCommandLineOption]): bool =
+proc addOptions*(self: gen_qcommandlineparser_types.QCommandLineParser, options: openArray[gen_qcommandlineoption_types.QCommandLineOption]): bool =
   var options_CArray = newSeq[pointer](len(options))
   for i in 0..<len(options):
     options_CArray[i] = options[i].h
@@ -116,7 +116,7 @@ proc addVersionOption*(self: gen_qcommandlineparser_types.QCommandLineParser): g
 proc addHelpOption*(self: gen_qcommandlineparser_types.QCommandLineParser): gen_qcommandlineoption_types.QCommandLineOption =
   gen_qcommandlineoption_types.QCommandLineOption(h: fcQCommandLineParser_addHelpOption(self.h), owned: true)
 
-proc setApplicationDescription*(self: gen_qcommandlineparser_types.QCommandLineParser, description: string): void =
+proc setApplicationDescription*(self: gen_qcommandlineparser_types.QCommandLineParser, description: openArray[char]): void =
   fcQCommandLineParser_setApplicationDescription(self.h, struct_miqt_string(data: if len(description) > 0: addr description[0] else: nil, len: csize_t(len(description))))
 
 proc applicationDescription*(self: gen_qcommandlineparser_types.QCommandLineParser): string =
@@ -125,13 +125,13 @@ proc applicationDescription*(self: gen_qcommandlineparser_types.QCommandLinePars
   c_free(v_ms.data)
   vx_ret
 
-proc addPositionalArgument*(self: gen_qcommandlineparser_types.QCommandLineParser, name: string, description: string): void =
+proc addPositionalArgument*(self: gen_qcommandlineparser_types.QCommandLineParser, name: openArray[char], description: openArray[char]): void =
   fcQCommandLineParser_addPositionalArgument(self.h, struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), struct_miqt_string(data: if len(description) > 0: addr description[0] else: nil, len: csize_t(len(description))))
 
 proc clearPositionalArguments*(self: gen_qcommandlineparser_types.QCommandLineParser): void =
   fcQCommandLineParser_clearPositionalArguments(self.h)
 
-proc process*(self: gen_qcommandlineparser_types.QCommandLineParser, arguments: seq[string]): void =
+proc process*(self: gen_qcommandlineparser_types.QCommandLineParser, arguments: openArray[string]): void =
   var arguments_CArray = newSeq[struct_miqt_string](len(arguments))
   for i in 0..<len(arguments):
     arguments_CArray[i] = struct_miqt_string(data: if len(arguments[i]) > 0: addr arguments[i][0] else: nil, len: csize_t(len(arguments[i])))
@@ -141,7 +141,7 @@ proc process*(self: gen_qcommandlineparser_types.QCommandLineParser, arguments: 
 proc process*(self: gen_qcommandlineparser_types.QCommandLineParser, app: gen_qcoreapplication_types.QCoreApplication): void =
   fcQCommandLineParser_processWithApp(self.h, app.h)
 
-proc parse*(self: gen_qcommandlineparser_types.QCommandLineParser, arguments: seq[string]): bool =
+proc parse*(self: gen_qcommandlineparser_types.QCommandLineParser, arguments: openArray[string]): bool =
   var arguments_CArray = newSeq[struct_miqt_string](len(arguments))
   for i in 0..<len(arguments):
     arguments_CArray[i] = struct_miqt_string(data: if len(arguments[i]) > 0: addr arguments[i][0] else: nil, len: csize_t(len(arguments[i])))
@@ -154,16 +154,16 @@ proc errorText*(self: gen_qcommandlineparser_types.QCommandLineParser): string =
   c_free(v_ms.data)
   vx_ret
 
-proc isSet*(self: gen_qcommandlineparser_types.QCommandLineParser, name: string): bool =
+proc isSet*(self: gen_qcommandlineparser_types.QCommandLineParser, name: openArray[char]): bool =
   fcQCommandLineParser_isSet(self.h, struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))))
 
-proc value*(self: gen_qcommandlineparser_types.QCommandLineParser, name: string): string =
+proc value*(self: gen_qcommandlineparser_types.QCommandLineParser, name: openArray[char]): string =
   let v_ms = fcQCommandLineParser_value(self.h, struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))))
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc values*(self: gen_qcommandlineparser_types.QCommandLineParser, name: string): seq[string] =
+proc values*(self: gen_qcommandlineparser_types.QCommandLineParser, name: openArray[char]): seq[string] =
   var v_ma = fcQCommandLineParser_values(self.h, struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))))
   var vx_ret = newSeq[string](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
@@ -256,7 +256,7 @@ proc tr*(_: type gen_qcommandlineparser_types.QCommandLineParser, sourceText: cs
   c_free(v_ms.data)
   vx_ret
 
-proc addPositionalArgument*(self: gen_qcommandlineparser_types.QCommandLineParser, name: string, description: string, syntax: string): void =
+proc addPositionalArgument*(self: gen_qcommandlineparser_types.QCommandLineParser, name: openArray[char], description: openArray[char], syntax: openArray[char]): void =
   fcQCommandLineParser_addPositionalArgument3(self.h, struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), struct_miqt_string(data: if len(description) > 0: addr description[0] else: nil, len: csize_t(len(description))), struct_miqt_string(data: if len(syntax) > 0: addr syntax[0] else: nil, len: csize_t(len(syntax))))
 
 proc showHelp*(self: gen_qcommandlineparser_types.QCommandLineParser, exitCode: cint): void =

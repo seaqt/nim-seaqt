@@ -178,7 +178,7 @@ proc hasPendingConnections*(self: gen_qlocalserver_types.QLocalServer): bool =
 proc isListening*(self: gen_qlocalserver_types.QLocalServer): bool =
   fcQLocalServer_isListening(self.h)
 
-proc listen*(self: gen_qlocalserver_types.QLocalServer, name: string): bool =
+proc listen*(self: gen_qlocalserver_types.QLocalServer, name: openArray[char]): bool =
   fcQLocalServer_listen(self.h, struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))))
 
 proc listen*(self: gen_qlocalserver_types.QLocalServer, socketDescriptor: uint): bool =
@@ -202,7 +202,7 @@ proc fullServerName*(self: gen_qlocalserver_types.QLocalServer): string =
   c_free(v_ms.data)
   vx_ret
 
-proc removeServer*(_: type gen_qlocalserver_types.QLocalServer, name: string): bool =
+proc removeServer*(_: type gen_qlocalserver_types.QLocalServer, name: openArray[char]): bool =
   fcQLocalServer_removeServer(struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))))
 
 proc serverError*(self: gen_qlocalserver_types.QLocalServer): cint =
@@ -615,6 +615,7 @@ proc create*(T: type gen_qlocalserver_types.QLocalServer,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQLocalServer_new(addr(cQLocalServer_mvtbl), csize_t(sizeof(pointer)))
   fcQLocalServer_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qlocalserver_types.QLocalServer,
     parent: gen_qobject_types.QObject,
@@ -622,6 +623,7 @@ proc create*(T: type gen_qlocalserver_types.QLocalServer,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQLocalServer_new2(addr(cQLocalServer_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQLocalServer_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qlocalserver_types.QLocalServer): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQLocalServer_staticMetaObject())

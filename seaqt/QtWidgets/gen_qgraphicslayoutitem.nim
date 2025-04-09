@@ -407,6 +407,7 @@ proc create*(T: type gen_qgraphicslayoutitem_types.QGraphicsLayoutItem,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQGraphicsLayoutItem_new(addr(cQGraphicsLayoutItem_mvtbl), csize_t(sizeof(pointer)))
   fcQGraphicsLayoutItem_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qgraphicslayoutitem_types.QGraphicsLayoutItem,
     parent: gen_qgraphicslayoutitem_types.QGraphicsLayoutItem,
@@ -414,6 +415,7 @@ proc create*(T: type gen_qgraphicslayoutitem_types.QGraphicsLayoutItem,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQGraphicsLayoutItem_new2(addr(cQGraphicsLayoutItem_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQGraphicsLayoutItem_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qgraphicslayoutitem_types.QGraphicsLayoutItem,
     parent: gen_qgraphicslayoutitem_types.QGraphicsLayoutItem, isLayout: bool,
@@ -421,4 +423,5 @@ proc create*(T: type gen_qgraphicslayoutitem_types.QGraphicsLayoutItem,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQGraphicsLayoutItem_new3(addr(cQGraphicsLayoutItem_mvtbl), csize_t(sizeof(pointer)), parent.h, isLayout)
   fcQGraphicsLayoutItem_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 

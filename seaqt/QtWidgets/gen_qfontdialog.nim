@@ -342,10 +342,10 @@ proc getFont*(_: type gen_qfontdialog_types.QFontDialog, ok: ptr bool, parent: g
 proc getFont*(_: type gen_qfontdialog_types.QFontDialog, ok: ptr bool, initial: gen_qfont_types.QFont, parent: gen_qwidget_types.QWidget): gen_qfont_types.QFont =
   gen_qfont_types.QFont(h: fcQFontDialog_getFont3(ok, initial.h, parent.h), owned: true)
 
-proc getFont*(_: type gen_qfontdialog_types.QFontDialog, ok: ptr bool, initial: gen_qfont_types.QFont, parent: gen_qwidget_types.QWidget, title: string): gen_qfont_types.QFont =
+proc getFont*(_: type gen_qfontdialog_types.QFontDialog, ok: ptr bool, initial: gen_qfont_types.QFont, parent: gen_qwidget_types.QWidget, title: openArray[char]): gen_qfont_types.QFont =
   gen_qfont_types.QFont(h: fcQFontDialog_getFont4(ok, initial.h, parent.h, struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title)))), owned: true)
 
-proc getFont*(_: type gen_qfontdialog_types.QFontDialog, ok: ptr bool, initial: gen_qfont_types.QFont, parent: gen_qwidget_types.QWidget, title: string, options: cint): gen_qfont_types.QFont =
+proc getFont*(_: type gen_qfontdialog_types.QFontDialog, ok: ptr bool, initial: gen_qfont_types.QFont, parent: gen_qwidget_types.QWidget, title: openArray[char], options: cint): gen_qfont_types.QFont =
   gen_qfont_types.QFont(h: fcQFontDialog_getFont5(ok, initial.h, parent.h, struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), cint(options)), owned: true)
 
 type QFontDialogmetaObjectProc* = proc(self: QFontDialog): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
@@ -390,7 +390,7 @@ type QFontDialogdragMoveEventProc* = proc(self: QFontDialog, event: gen_qevent_t
 type QFontDialogdragLeaveEventProc* = proc(self: QFontDialog, event: gen_qevent_types.QDragLeaveEvent): void {.raises: [], gcsafe.}
 type QFontDialogdropEventProc* = proc(self: QFontDialog, event: gen_qevent_types.QDropEvent): void {.raises: [], gcsafe.}
 type QFontDialoghideEventProc* = proc(self: QFontDialog, event: gen_qevent_types.QHideEvent): void {.raises: [], gcsafe.}
-type QFontDialognativeEventProc* = proc(self: QFontDialog, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
+type QFontDialognativeEventProc* = proc(self: QFontDialog, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
 type QFontDialogmetricProc* = proc(self: QFontDialog, param1: cint): cint {.raises: [], gcsafe.}
 type QFontDialoginitPainterProc* = proc(self: QFontDialog, painter: gen_qpainter_types.QPainter): void {.raises: [], gcsafe.}
 type QFontDialogredirectedProc* = proc(self: QFontDialog, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.raises: [], gcsafe.}
@@ -855,7 +855,7 @@ proc fcQFontDialog_vtable_callback_hideEvent(self: pointer, event: pointer): voi
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   vtbl[].hideEvent(self, slotval1)
 
-proc QFontDialognativeEvent*(self: gen_qfontdialog_types.QFontDialog, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool =
+proc QFontDialognativeEvent*(self: gen_qfontdialog_types.QFontDialog, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool =
   fcQFontDialog_virtualbase_nativeEvent(self.h, struct_miqt_string(data: if len(eventType) > 0: addr eventType[0] else: nil, len: csize_t(len(eventType))), message, resultVal)
 
 proc fcQFontDialog_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
@@ -1292,7 +1292,7 @@ proc fcQFontDialog_method_callback_hideEvent(self: pointer, event: pointer): voi
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   inst.hideEvent(slotval1)
 
-method nativeEvent*(self: VirtualQFontDialog, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
+method nativeEvent*(self: VirtualQFontDialog, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
   QFontDialognativeEvent(self[], eventType, message, resultVal)
 proc fcQFontDialog_method_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
   let inst = cast[VirtualQFontDialog](fcQFontDialog_vdata(self)[])
@@ -1974,12 +1974,14 @@ proc create*(T: type gen_qfontdialog_types.QFontDialog,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQFontDialog_new(addr(cQFontDialog_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQFontDialog_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qfontdialog_types.QFontDialog,
     inst: VirtualQFontDialog) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQFontDialog_new2(addr(cQFontDialog_mvtbl), csize_t(sizeof(pointer)))
   fcQFontDialog_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qfontdialog_types.QFontDialog,
     initial: gen_qfont_types.QFont,
@@ -1987,6 +1989,7 @@ proc create*(T: type gen_qfontdialog_types.QFontDialog,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQFontDialog_new3(addr(cQFontDialog_mvtbl), csize_t(sizeof(pointer)), initial.h)
   fcQFontDialog_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qfontdialog_types.QFontDialog,
     initial: gen_qfont_types.QFont, parent: gen_qwidget_types.QWidget,
@@ -1994,6 +1997,7 @@ proc create*(T: type gen_qfontdialog_types.QFontDialog,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQFontDialog_new4(addr(cQFontDialog_mvtbl), csize_t(sizeof(pointer)), initial.h, parent.h)
   fcQFontDialog_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qfontdialog_types.QFontDialog): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQFontDialog_staticMetaObject())

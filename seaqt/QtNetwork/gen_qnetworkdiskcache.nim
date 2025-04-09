@@ -148,7 +148,7 @@ proc cacheDirectory*(self: gen_qnetworkdiskcache_types.QNetworkDiskCache): strin
   c_free(v_ms.data)
   vx_ret
 
-proc setCacheDirectory*(self: gen_qnetworkdiskcache_types.QNetworkDiskCache, cacheDir: string): void =
+proc setCacheDirectory*(self: gen_qnetworkdiskcache_types.QNetworkDiskCache, cacheDir: openArray[char]): void =
   fcQNetworkDiskCache_setCacheDirectory(self.h, struct_miqt_string(data: if len(cacheDir) > 0: addr cacheDir[0] else: nil, len: csize_t(len(cacheDir))))
 
 proc maximumCacheSize*(self: gen_qnetworkdiskcache_types.QNetworkDiskCache): clonglong =
@@ -178,7 +178,7 @@ proc prepare*(self: gen_qnetworkdiskcache_types.QNetworkDiskCache, metaData: gen
 proc insert*(self: gen_qnetworkdiskcache_types.QNetworkDiskCache, device: gen_qiodevice_types.QIODevice): void =
   fcQNetworkDiskCache_insert(self.h, device.h)
 
-proc fileMetaData*(self: gen_qnetworkdiskcache_types.QNetworkDiskCache, fileName: string): gen_qabstractnetworkcache_types.QNetworkCacheMetaData =
+proc fileMetaData*(self: gen_qnetworkdiskcache_types.QNetworkDiskCache, fileName: openArray[char]): gen_qabstractnetworkcache_types.QNetworkCacheMetaData =
   gen_qabstractnetworkcache_types.QNetworkCacheMetaData(h: fcQNetworkDiskCache_fileMetaData(self.h, struct_miqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName)))), owned: true)
 
 proc clear*(self: gen_qnetworkdiskcache_types.QNetworkDiskCache): void =
@@ -714,6 +714,7 @@ proc create*(T: type gen_qnetworkdiskcache_types.QNetworkDiskCache,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQNetworkDiskCache_new(addr(cQNetworkDiskCache_mvtbl), csize_t(sizeof(pointer)))
   fcQNetworkDiskCache_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qnetworkdiskcache_types.QNetworkDiskCache,
     parent: gen_qobject_types.QObject,
@@ -721,6 +722,7 @@ proc create*(T: type gen_qnetworkdiskcache_types.QNetworkDiskCache,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQNetworkDiskCache_new2(addr(cQNetworkDiskCache_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQNetworkDiskCache_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qnetworkdiskcache_types.QNetworkDiskCache): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQNetworkDiskCache_staticMetaObject())

@@ -119,7 +119,7 @@ proc tr*(_: type gen_qaccessiblebridge_types.QAccessibleBridgePlugin, s: cstring
   c_free(v_ms.data)
   vx_ret
 
-proc create*(self: gen_qaccessiblebridge_types.QAccessibleBridgePlugin, key: string): gen_qaccessiblebridge_types.QAccessibleBridge =
+proc create*(self: gen_qaccessiblebridge_types.QAccessibleBridgePlugin, key: openArray[char]): gen_qaccessiblebridge_types.QAccessibleBridge =
   gen_qaccessiblebridge_types.QAccessibleBridge(h: fcQAccessibleBridgePlugin_create(self.h, struct_miqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key)))), owned: false)
 
 proc tr*(_: type gen_qaccessiblebridge_types.QAccessibleBridgePlugin, s: cstring, c: cstring): string =
@@ -137,7 +137,7 @@ proc tr*(_: type gen_qaccessiblebridge_types.QAccessibleBridgePlugin, s: cstring
 type QAccessibleBridgePluginmetaObjectProc* = proc(self: QAccessibleBridgePlugin): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QAccessibleBridgePluginmetacastProc* = proc(self: QAccessibleBridgePlugin, param1: cstring): pointer {.raises: [], gcsafe.}
 type QAccessibleBridgePluginmetacallProc* = proc(self: QAccessibleBridgePlugin, param1: cint, param2: cint, param3: pointer): cint {.raises: [], gcsafe.}
-type QAccessibleBridgePlugincreateProc* = proc(self: QAccessibleBridgePlugin, key: string): gen_qaccessiblebridge_types.QAccessibleBridge {.raises: [], gcsafe.}
+type QAccessibleBridgePlugincreateProc* = proc(self: QAccessibleBridgePlugin, key: openArray[char]): gen_qaccessiblebridge_types.QAccessibleBridge {.raises: [], gcsafe.}
 type QAccessibleBridgePlugineventProc* = proc(self: QAccessibleBridgePlugin, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
 type QAccessibleBridgePlugineventFilterProc* = proc(self: QAccessibleBridgePlugin, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
 type QAccessibleBridgePlugintimerEventProc* = proc(self: QAccessibleBridgePlugin, event: gen_qcoreevent_types.QTimerEvent): void {.raises: [], gcsafe.}
@@ -298,7 +298,7 @@ proc fcQAccessibleBridgePlugin_method_callback_metacall(self: pointer, param1: c
   var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
-method create*(self: VirtualQAccessibleBridgePlugin, key: string): gen_qaccessiblebridge_types.QAccessibleBridge {.base.} =
+method create*(self: VirtualQAccessibleBridgePlugin, key: openArray[char]): gen_qaccessiblebridge_types.QAccessibleBridge {.base.} =
   raiseAssert("missing implementation of QAccessibleBridgePlugin_virtualbase_create")
 proc fcQAccessibleBridgePlugin_method_callback_create(self: pointer, key: struct_miqt_string): pointer {.cdecl.} =
   let inst = cast[VirtualQAccessibleBridgePlugin](fcQAccessibleBridgePlugin_vdata(self)[])
@@ -461,6 +461,7 @@ proc create*(T: type gen_qaccessiblebridge_types.QAccessibleBridgePlugin,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQAccessibleBridgePlugin_new(addr(cQAccessibleBridgePlugin_mvtbl), csize_t(sizeof(pointer)))
   fcQAccessibleBridgePlugin_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qaccessiblebridge_types.QAccessibleBridgePlugin,
     parent: gen_qobject_types.QObject,
@@ -468,6 +469,7 @@ proc create*(T: type gen_qaccessiblebridge_types.QAccessibleBridgePlugin,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQAccessibleBridgePlugin_new2(addr(cQAccessibleBridgePlugin_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQAccessibleBridgePlugin_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qaccessiblebridge_types.QAccessibleBridgePlugin): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQAccessibleBridgePlugin_staticMetaObject())

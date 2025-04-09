@@ -190,4 +190,5 @@ proc create*(T: type gen_qgesturerecognizer_types.QGestureRecognizer,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQGestureRecognizer_new(addr(cQGestureRecognizer_mvtbl), csize_t(sizeof(pointer)))
   fcQGestureRecognizer_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 

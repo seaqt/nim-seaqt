@@ -113,7 +113,7 @@ proc fcQWebEngineSettings_unknownUrlSchemePolicy(self: pointer): cint {.importc:
 proc fcQWebEngineSettings_setUnknownUrlSchemePolicy(self: pointer, policy: cint): void {.importc: "QWebEngineSettings_setUnknownUrlSchemePolicy".}
 proc fcQWebEngineSettings_resetUnknownUrlSchemePolicy(self: pointer): void {.importc: "QWebEngineSettings_resetUnknownUrlSchemePolicy".}
 
-proc setFontFamily*(self: gen_qwebenginesettings_types.QWebEngineSettings, which: cint, family: string): void =
+proc setFontFamily*(self: gen_qwebenginesettings_types.QWebEngineSettings, which: cint, family: openArray[char]): void =
   fcQWebEngineSettings_setFontFamily(self.h, cint(which), struct_miqt_string(data: if len(family) > 0: addr family[0] else: nil, len: csize_t(len(family))))
 
 proc fontFamily*(self: gen_qwebenginesettings_types.QWebEngineSettings, which: cint): string =
@@ -143,7 +143,7 @@ proc testAttribute*(self: gen_qwebenginesettings_types.QWebEngineSettings, attr:
 proc resetAttribute*(self: gen_qwebenginesettings_types.QWebEngineSettings, attr: cint): void =
   fcQWebEngineSettings_resetAttribute(self.h, cint(attr))
 
-proc setDefaultTextEncoding*(self: gen_qwebenginesettings_types.QWebEngineSettings, encoding: string): void =
+proc setDefaultTextEncoding*(self: gen_qwebenginesettings_types.QWebEngineSettings, encoding: openArray[char]): void =
   fcQWebEngineSettings_setDefaultTextEncoding(self.h, struct_miqt_string(data: if len(encoding) > 0: addr encoding[0] else: nil, len: csize_t(len(encoding))))
 
 proc defaultTextEncoding*(self: gen_qwebenginesettings_types.QWebEngineSettings): string =

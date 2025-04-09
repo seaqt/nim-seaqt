@@ -392,6 +392,7 @@ proc create*(T: type gen_qcoreevent_types.QEvent,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQEvent_new(addr(cQEvent_mvtbl), csize_t(sizeof(pointer)), cint(typeVal))
   fcQEvent_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qcoreevent_types.QEvent): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQEvent_staticMetaObject())
@@ -474,6 +475,7 @@ proc create*(T: type gen_qcoreevent_types.QTimerEvent,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQTimerEvent_new(addr(cQTimerEvent_mvtbl), csize_t(sizeof(pointer)), timerId)
   fcQTimerEvent_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc clone*(self: gen_qcoreevent_types.QChildEvent): gen_qcoreevent_types.QChildEvent =
   gen_qcoreevent_types.QChildEvent(h: fcQChildEvent_clone(self.h), owned: false)
@@ -563,6 +565,7 @@ proc create*(T: type gen_qcoreevent_types.QChildEvent,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQChildEvent_new(addr(cQChildEvent_mvtbl), csize_t(sizeof(pointer)), cint(typeVal), child.h)
   fcQChildEvent_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc clone*(self: gen_qcoreevent_types.QDynamicPropertyChangeEvent): gen_qcoreevent_types.QDynamicPropertyChangeEvent =
   gen_qcoreevent_types.QDynamicPropertyChangeEvent(h: fcQDynamicPropertyChangeEvent_clone(self.h), owned: false)
@@ -617,7 +620,7 @@ proc fcQDynamicPropertyChangeEvent_method_callback_setAccepted(self: pointer, ac
   inst.setAccepted(slotval1)
 
 proc create*(T: type gen_qcoreevent_types.QDynamicPropertyChangeEvent,
-    name: seq[byte],
+    name: openArray[byte],
     vtbl: ref QDynamicPropertyChangeEventVTable = nil): gen_qcoreevent_types.QDynamicPropertyChangeEvent =
   let vtbl = if vtbl == nil: new QDynamicPropertyChangeEventVTable else: vtbl
   GC_ref(vtbl)
@@ -641,9 +644,10 @@ const cQDynamicPropertyChangeEvent_mvtbl = cQDynamicPropertyChangeEventVTable(
   setAccepted: fcQDynamicPropertyChangeEvent_method_callback_setAccepted,
 )
 proc create*(T: type gen_qcoreevent_types.QDynamicPropertyChangeEvent,
-    name: seq[byte],
+    name: openArray[byte],
     inst: VirtualQDynamicPropertyChangeEvent) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQDynamicPropertyChangeEvent_new(addr(cQDynamicPropertyChangeEvent_mvtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))))
   fcQDynamicPropertyChangeEvent_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 

@@ -109,7 +109,7 @@ proc glyphIndexes*(self: gen_qglyphrun_types.QGlyphRun): seq[cuint] =
   c_free(v_ma.data)
   vx_ret
 
-proc setGlyphIndexes*(self: gen_qglyphrun_types.QGlyphRun, glyphIndexes: seq[cuint]): void =
+proc setGlyphIndexes*(self: gen_qglyphrun_types.QGlyphRun, glyphIndexes: openArray[cuint]): void =
   var glyphIndexes_CArray = newSeq[cuint](len(glyphIndexes))
   for i in 0..<len(glyphIndexes):
     glyphIndexes_CArray[i] = glyphIndexes[i]
@@ -125,7 +125,7 @@ proc positions*(self: gen_qglyphrun_types.QGlyphRun): seq[gen_qpoint_types.QPoin
   c_free(v_ma.data)
   vx_ret
 
-proc setPositions*(self: gen_qglyphrun_types.QGlyphRun, positions: seq[gen_qpoint_types.QPointF]): void =
+proc setPositions*(self: gen_qglyphrun_types.QGlyphRun, positions: openArray[gen_qpoint_types.QPointF]): void =
   var positions_CArray = newSeq[pointer](len(positions))
   for i in 0..<len(positions):
     positions_CArray[i] = positions[i].h

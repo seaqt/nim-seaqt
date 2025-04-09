@@ -875,6 +875,7 @@ proc create*(T: type gen_qabstractitemdelegate_types.QAbstractItemDelegate,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQAbstractItemDelegate_new(addr(cQAbstractItemDelegate_mvtbl), csize_t(sizeof(pointer)))
   fcQAbstractItemDelegate_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qabstractitemdelegate_types.QAbstractItemDelegate,
     parent: gen_qobject_types.QObject,
@@ -882,6 +883,7 @@ proc create*(T: type gen_qabstractitemdelegate_types.QAbstractItemDelegate,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQAbstractItemDelegate_new2(addr(cQAbstractItemDelegate_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQAbstractItemDelegate_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qabstractitemdelegate_types.QAbstractItemDelegate): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQAbstractItemDelegate_staticMetaObject())

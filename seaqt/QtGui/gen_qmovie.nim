@@ -197,7 +197,7 @@ proc setDevice*(self: gen_qmovie_types.QMovie, device: gen_qiodevice_types.QIODe
 proc device*(self: gen_qmovie_types.QMovie): gen_qiodevice_types.QIODevice =
   gen_qiodevice_types.QIODevice(h: fcQMovie_device(self.h), owned: false)
 
-proc setFileName*(self: gen_qmovie_types.QMovie, fileName: string): void =
+proc setFileName*(self: gen_qmovie_types.QMovie, fileName: openArray[char]): void =
   fcQMovie_setFileName(self.h, struct_miqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))))
 
 proc fileName*(self: gen_qmovie_types.QMovie): string =
@@ -206,7 +206,7 @@ proc fileName*(self: gen_qmovie_types.QMovie): string =
   c_free(v_ms.data)
   vx_ret
 
-proc setFormat*(self: gen_qmovie_types.QMovie, format: seq[byte]): void =
+proc setFormat*(self: gen_qmovie_types.QMovie, format: openArray[byte]): void =
   fcQMovie_setFormat(self.h, struct_miqt_string(data: if len(format) > 0: addr format[0] else: nil, len: csize_t(len(format))))
 
 proc format*(self: gen_qmovie_types.QMovie): seq[byte] =
@@ -713,7 +713,7 @@ proc create*(T: type gen_qmovie_types.QMovie,
   fcQMovie_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qmovie_types.QMovie,
-    fileName: string,
+    fileName: openArray[char],
     vtbl: ref QMovieVTable = nil): gen_qmovie_types.QMovie =
   let vtbl = if vtbl == nil: new QMovieVTable else: vtbl
   GC_ref(vtbl)
@@ -775,7 +775,7 @@ proc create*(T: type gen_qmovie_types.QMovie,
   fcQMovie_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qmovie_types.QMovie,
-    device: gen_qiodevice_types.QIODevice, format: seq[byte],
+    device: gen_qiodevice_types.QIODevice, format: openArray[byte],
     vtbl: ref QMovieVTable = nil): gen_qmovie_types.QMovie =
   let vtbl = if vtbl == nil: new QMovieVTable else: vtbl
   GC_ref(vtbl)
@@ -806,7 +806,7 @@ proc create*(T: type gen_qmovie_types.QMovie,
   fcQMovie_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qmovie_types.QMovie,
-    device: gen_qiodevice_types.QIODevice, format: seq[byte], parent: gen_qobject_types.QObject,
+    device: gen_qiodevice_types.QIODevice, format: openArray[byte], parent: gen_qobject_types.QObject,
     vtbl: ref QMovieVTable = nil): gen_qmovie_types.QMovie =
   let vtbl = if vtbl == nil: new QMovieVTable else: vtbl
   GC_ref(vtbl)
@@ -837,7 +837,7 @@ proc create*(T: type gen_qmovie_types.QMovie,
   fcQMovie_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qmovie_types.QMovie,
-    fileName: string, format: seq[byte],
+    fileName: openArray[char], format: openArray[byte],
     vtbl: ref QMovieVTable = nil): gen_qmovie_types.QMovie =
   let vtbl = if vtbl == nil: new QMovieVTable else: vtbl
   GC_ref(vtbl)
@@ -868,7 +868,7 @@ proc create*(T: type gen_qmovie_types.QMovie,
   fcQMovie_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qmovie_types.QMovie,
-    fileName: string, format: seq[byte], parent: gen_qobject_types.QObject,
+    fileName: openArray[char], format: openArray[byte], parent: gen_qobject_types.QObject,
     vtbl: ref QMovieVTable = nil): gen_qmovie_types.QMovie =
   let vtbl = if vtbl == nil: new QMovieVTable else: vtbl
   GC_ref(vtbl)
@@ -920,6 +920,7 @@ proc create*(T: type gen_qmovie_types.QMovie,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQMovie_new(addr(cQMovie_mvtbl), csize_t(sizeof(pointer)))
   fcQMovie_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qmovie_types.QMovie,
     device: gen_qiodevice_types.QIODevice,
@@ -927,13 +928,15 @@ proc create*(T: type gen_qmovie_types.QMovie,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQMovie_new2(addr(cQMovie_mvtbl), csize_t(sizeof(pointer)), device.h)
   fcQMovie_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qmovie_types.QMovie,
-    fileName: string,
+    fileName: openArray[char],
     inst: VirtualQMovie) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQMovie_new3(addr(cQMovie_mvtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))))
   fcQMovie_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qmovie_types.QMovie,
     parent: gen_qobject_types.QObject,
@@ -941,34 +944,39 @@ proc create*(T: type gen_qmovie_types.QMovie,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQMovie_new4(addr(cQMovie_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQMovie_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qmovie_types.QMovie,
-    device: gen_qiodevice_types.QIODevice, format: seq[byte],
+    device: gen_qiodevice_types.QIODevice, format: openArray[byte],
     inst: VirtualQMovie) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQMovie_new5(addr(cQMovie_mvtbl), csize_t(sizeof(pointer)), device.h, struct_miqt_string(data: if len(format) > 0: addr format[0] else: nil, len: csize_t(len(format))))
   fcQMovie_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qmovie_types.QMovie,
-    device: gen_qiodevice_types.QIODevice, format: seq[byte], parent: gen_qobject_types.QObject,
+    device: gen_qiodevice_types.QIODevice, format: openArray[byte], parent: gen_qobject_types.QObject,
     inst: VirtualQMovie) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQMovie_new6(addr(cQMovie_mvtbl), csize_t(sizeof(pointer)), device.h, struct_miqt_string(data: if len(format) > 0: addr format[0] else: nil, len: csize_t(len(format))), parent.h)
   fcQMovie_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qmovie_types.QMovie,
-    fileName: string, format: seq[byte],
+    fileName: openArray[char], format: openArray[byte],
     inst: VirtualQMovie) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQMovie_new7(addr(cQMovie_mvtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))), struct_miqt_string(data: if len(format) > 0: addr format[0] else: nil, len: csize_t(len(format))))
   fcQMovie_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qmovie_types.QMovie,
-    fileName: string, format: seq[byte], parent: gen_qobject_types.QObject,
+    fileName: openArray[char], format: openArray[byte], parent: gen_qobject_types.QObject,
     inst: VirtualQMovie) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQMovie_new8(addr(cQMovie_mvtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))), struct_miqt_string(data: if len(format) > 0: addr format[0] else: nil, len: csize_t(len(format))), parent.h)
   fcQMovie_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qmovie_types.QMovie): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQMovie_staticMetaObject())

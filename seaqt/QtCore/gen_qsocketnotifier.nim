@@ -512,6 +512,7 @@ proc create*(T: type gen_qsocketnotifier_types.QSocketNotifier,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQSocketNotifier_new(addr(cQSocketNotifier_mvtbl), csize_t(sizeof(pointer)), cint(param1))
   fcQSocketNotifier_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qsocketnotifier_types.QSocketNotifier,
     socket: uint, param2: cint,
@@ -519,6 +520,7 @@ proc create*(T: type gen_qsocketnotifier_types.QSocketNotifier,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQSocketNotifier_new2(addr(cQSocketNotifier_mvtbl), csize_t(sizeof(pointer)), socket, cint(param2))
   fcQSocketNotifier_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qsocketnotifier_types.QSocketNotifier,
     param1: cint, parent: gen_qobject_types.QObject,
@@ -526,6 +528,7 @@ proc create*(T: type gen_qsocketnotifier_types.QSocketNotifier,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQSocketNotifier_new3(addr(cQSocketNotifier_mvtbl), csize_t(sizeof(pointer)), cint(param1), parent.h)
   fcQSocketNotifier_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qsocketnotifier_types.QSocketNotifier,
     socket: uint, param2: cint, parent: gen_qobject_types.QObject,
@@ -533,6 +536,7 @@ proc create*(T: type gen_qsocketnotifier_types.QSocketNotifier,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQSocketNotifier_new4(addr(cQSocketNotifier_mvtbl), csize_t(sizeof(pointer)), socket, cint(param2), parent.h)
   fcQSocketNotifier_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qsocketnotifier_types.QSocketNotifier): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQSocketNotifier_staticMetaObject())

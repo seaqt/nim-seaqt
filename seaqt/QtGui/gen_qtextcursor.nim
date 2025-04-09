@@ -202,10 +202,10 @@ proc positionInBlock*(self: gen_qtextcursor_types.QTextCursor): cint =
 proc anchor*(self: gen_qtextcursor_types.QTextCursor): cint =
   fcQTextCursor_anchor(self.h)
 
-proc insertText*(self: gen_qtextcursor_types.QTextCursor, text: string): void =
+proc insertText*(self: gen_qtextcursor_types.QTextCursor, text: openArray[char]): void =
   fcQTextCursor_insertText(self.h, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
 
-proc insertText*(self: gen_qtextcursor_types.QTextCursor, text: string, format: gen_qtextformat_types.QTextCharFormat): void =
+proc insertText*(self: gen_qtextcursor_types.QTextCursor, text: openArray[char], format: gen_qtextformat_types.QTextCharFormat): void =
   fcQTextCursor_insertText2(self.h, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), format.h)
 
 proc movePosition*(self: gen_qtextcursor_types.QTextCursor, op: cint): bool =
@@ -352,10 +352,10 @@ proc currentFrame*(self: gen_qtextcursor_types.QTextCursor): gen_qtextobject_typ
 proc insertFragment*(self: gen_qtextcursor_types.QTextCursor, fragment: gen_qtextdocumentfragment_types.QTextDocumentFragment): void =
   fcQTextCursor_insertFragment(self.h, fragment.h)
 
-proc insertHtml*(self: gen_qtextcursor_types.QTextCursor, html: string): void =
+proc insertHtml*(self: gen_qtextcursor_types.QTextCursor, html: openArray[char]): void =
   fcQTextCursor_insertHtml(self.h, struct_miqt_string(data: if len(html) > 0: addr html[0] else: nil, len: csize_t(len(html))))
 
-proc insertMarkdown*(self: gen_qtextcursor_types.QTextCursor, markdown: string): void =
+proc insertMarkdown*(self: gen_qtextcursor_types.QTextCursor, markdown: openArray[char]): void =
   fcQTextCursor_insertMarkdown(self.h, struct_miqt_string(data: if len(markdown) > 0: addr markdown[0] else: nil, len: csize_t(len(markdown))))
 
 proc insertImage*(self: gen_qtextcursor_types.QTextCursor, format: gen_qtextformat_types.QTextImageFormat, alignment: cint): void =
@@ -364,7 +364,7 @@ proc insertImage*(self: gen_qtextcursor_types.QTextCursor, format: gen_qtextform
 proc insertImage*(self: gen_qtextcursor_types.QTextCursor, format: gen_qtextformat_types.QTextImageFormat): void =
   fcQTextCursor_insertImageWithFormat(self.h, format.h)
 
-proc insertImage*(self: gen_qtextcursor_types.QTextCursor, name: string): void =
+proc insertImage*(self: gen_qtextcursor_types.QTextCursor, name: openArray[char]): void =
   fcQTextCursor_insertImageWithName(self.h, struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))))
 
 proc insertImage*(self: gen_qtextcursor_types.QTextCursor, image: gen_qimage_types.QImage): void =
@@ -418,10 +418,10 @@ proc movePosition*(self: gen_qtextcursor_types.QTextCursor, op: cint, param2: ci
 proc movePosition*(self: gen_qtextcursor_types.QTextCursor, op: cint, param2: cint, n: cint): bool =
   fcQTextCursor_movePosition3(self.h, cint(op), cint(param2), n)
 
-proc insertMarkdown*(self: gen_qtextcursor_types.QTextCursor, markdown: string, features: cint): void =
+proc insertMarkdown*(self: gen_qtextcursor_types.QTextCursor, markdown: openArray[char], features: cint): void =
   fcQTextCursor_insertMarkdown2(self.h, struct_miqt_string(data: if len(markdown) > 0: addr markdown[0] else: nil, len: csize_t(len(markdown))), cint(features))
 
-proc insertImage*(self: gen_qtextcursor_types.QTextCursor, image: gen_qimage_types.QImage, name: string): void =
+proc insertImage*(self: gen_qtextcursor_types.QTextCursor, image: gen_qimage_types.QImage, name: openArray[char]): void =
   fcQTextCursor_insertImage2(self.h, image.h, struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))))
 
 proc create*(T: type gen_qtextcursor_types.QTextCursor): gen_qtextcursor_types.QTextCursor =

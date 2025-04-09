@@ -92,6 +92,6 @@ proc tryLock*(self: gen_qlockfile_types.QLockFile, timeout: cint): bool =
   fcQLockFile_tryLock1(self.h, timeout)
 
 proc create*(T: type gen_qlockfile_types.QLockFile,
-    fileName: string): gen_qlockfile_types.QLockFile =
+    fileName: openArray[char]): gen_qlockfile_types.QLockFile =
   let tmp = gen_qlockfile_types.QLockFile(h: fcQLockFile_new(struct_miqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName)))), owned: true)
   tmp

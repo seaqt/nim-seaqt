@@ -595,6 +595,7 @@ proc create*(T: type gen_qtimeline_types.QTimeLine,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQTimeLine_new(addr(cQTimeLine_mvtbl), csize_t(sizeof(pointer)))
   fcQTimeLine_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qtimeline_types.QTimeLine,
     duration: cint,
@@ -602,6 +603,7 @@ proc create*(T: type gen_qtimeline_types.QTimeLine,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQTimeLine_new2(addr(cQTimeLine_mvtbl), csize_t(sizeof(pointer)), duration)
   fcQTimeLine_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qtimeline_types.QTimeLine,
     duration: cint, parent: gen_qobject_types.QObject,
@@ -609,6 +611,7 @@ proc create*(T: type gen_qtimeline_types.QTimeLine,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQTimeLine_new3(addr(cQTimeLine_mvtbl), csize_t(sizeof(pointer)), duration, parent.h)
   fcQTimeLine_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qtimeline_types.QTimeLine): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQTimeLine_staticMetaObject())

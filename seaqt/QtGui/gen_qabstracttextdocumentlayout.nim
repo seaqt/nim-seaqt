@@ -840,6 +840,7 @@ proc create*(T: type gen_qabstracttextdocumentlayout_types.QAbstractTextDocument
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQAbstractTextDocumentLayout_new(addr(cQAbstractTextDocumentLayout_mvtbl), csize_t(sizeof(pointer)), doc.h)
   fcQAbstractTextDocumentLayout_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qabstracttextdocumentlayout_types.QAbstractTextDocumentLayout): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQAbstractTextDocumentLayout_staticMetaObject())

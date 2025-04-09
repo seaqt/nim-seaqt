@@ -63,7 +63,7 @@ proc identityHint*(self: gen_qsslpresharedkeyauthenticator_types.QSslPreSharedKe
   c_free(v_bytearray.data)
   vx_ret
 
-proc setIdentity*(self: gen_qsslpresharedkeyauthenticator_types.QSslPreSharedKeyAuthenticator, identity: seq[byte]): void =
+proc setIdentity*(self: gen_qsslpresharedkeyauthenticator_types.QSslPreSharedKeyAuthenticator, identity: openArray[byte]): void =
   fcQSslPreSharedKeyAuthenticator_setIdentity(self.h, struct_miqt_string(data: if len(identity) > 0: addr identity[0] else: nil, len: csize_t(len(identity))))
 
 proc identity*(self: gen_qsslpresharedkeyauthenticator_types.QSslPreSharedKeyAuthenticator): seq[byte] =
@@ -75,7 +75,7 @@ proc identity*(self: gen_qsslpresharedkeyauthenticator_types.QSslPreSharedKeyAut
 proc maximumIdentityLength*(self: gen_qsslpresharedkeyauthenticator_types.QSslPreSharedKeyAuthenticator): cint =
   fcQSslPreSharedKeyAuthenticator_maximumIdentityLength(self.h)
 
-proc setPreSharedKey*(self: gen_qsslpresharedkeyauthenticator_types.QSslPreSharedKeyAuthenticator, preSharedKey: seq[byte]): void =
+proc setPreSharedKey*(self: gen_qsslpresharedkeyauthenticator_types.QSslPreSharedKeyAuthenticator, preSharedKey: openArray[byte]): void =
   fcQSslPreSharedKeyAuthenticator_setPreSharedKey(self.h, struct_miqt_string(data: if len(preSharedKey) > 0: addr preSharedKey[0] else: nil, len: csize_t(len(preSharedKey))))
 
 proc preSharedKey*(self: gen_qsslpresharedkeyauthenticator_types.QSslPreSharedKeyAuthenticator): seq[byte] =

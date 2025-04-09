@@ -464,6 +464,7 @@ proc create*(T: type gen_qwidgetaction_types.QWidgetAction,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQWidgetAction_new(addr(cQWidgetAction_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQWidgetAction_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qwidgetaction_types.QWidgetAction): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQWidgetAction_staticMetaObject())

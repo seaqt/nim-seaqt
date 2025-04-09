@@ -215,7 +215,7 @@ proc toString*(self: gen_qjsonvalue_types.QJsonValue): string =
   c_free(v_ms.data)
   vx_ret
 
-proc toString*(self: gen_qjsonvalue_types.QJsonValue, defaultValue: string): string =
+proc toString*(self: gen_qjsonvalue_types.QJsonValue, defaultValue: openArray[char]): string =
   let v_ms = fcQJsonValue_toStringWithDefaultValue(self.h, struct_miqt_string(data: if len(defaultValue) > 0: addr defaultValue[0] else: nil, len: csize_t(len(defaultValue))))
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
@@ -233,7 +233,7 @@ proc toObject*(self: gen_qjsonvalue_types.QJsonValue): gen_qjsonobject_types.QJs
 proc toObject*(self: gen_qjsonvalue_types.QJsonValue, defaultValue: gen_qjsonobject_types.QJsonObject): gen_qjsonobject_types.QJsonObject =
   gen_qjsonobject_types.QJsonObject(h: fcQJsonValue_toObjectWithDefaultValue(self.h, defaultValue.h), owned: true)
 
-proc operatorSubscript*(self: gen_qjsonvalue_types.QJsonValue, key: string): gen_qjsonvalue_types.QJsonValue =
+proc operatorSubscript*(self: gen_qjsonvalue_types.QJsonValue, key: openArray[char]): gen_qjsonvalue_types.QJsonValue =
   gen_qjsonvalue_types.QJsonValue(h: fcQJsonValue_operatorSubscript(self.h, struct_miqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key)))), owned: true)
 
 proc operatorSubscript*(self: gen_qjsonvalue_types.QJsonValue, i: int64): gen_qjsonvalue_types.QJsonValue =
@@ -277,7 +277,7 @@ proc create*(T: type gen_qjsonvalue_types.QJsonValue,
   let tmp = gen_qjsonvalue_types.QJsonValue(h: fcQJsonValue_new5(v), owned: true)
   tmp
 proc create*(T: type gen_qjsonvalue_types.QJsonValue,
-    s: string): gen_qjsonvalue_types.QJsonValue =
+    s: openArray[char]): gen_qjsonvalue_types.QJsonValue =
   let tmp = gen_qjsonvalue_types.QJsonValue(h: fcQJsonValue_new6(struct_miqt_string(data: if len(s) > 0: addr s[0] else: nil, len: csize_t(len(s)))), owned: true)
   tmp
 proc create*(T: type gen_qjsonvalue_types.QJsonValue,
@@ -375,7 +375,7 @@ proc toInteger*(self: gen_qjsonvalue_types.QJsonValueConstRef, defaultValue: clo
 proc toDouble*(self: gen_qjsonvalue_types.QJsonValueConstRef, defaultValue: float64): float64 =
   fcQJsonValueConstRef_toDouble1(self.h, defaultValue)
 
-proc toString*(self: gen_qjsonvalue_types.QJsonValueConstRef, defaultValue: string): string =
+proc toString*(self: gen_qjsonvalue_types.QJsonValueConstRef, defaultValue: openArray[char]): string =
   let v_ms = fcQJsonValueConstRef_toString1(self.h, struct_miqt_string(data: if len(defaultValue) > 0: addr defaultValue[0] else: nil, len: csize_t(len(defaultValue))))
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
@@ -475,7 +475,7 @@ proc toInteger*(self: gen_qjsonvalue_types.QJsonValueRef, defaultValue: clonglon
 proc toDouble*(self: gen_qjsonvalue_types.QJsonValueRef, defaultValue: float64): float64 =
   fcQJsonValueRef_toDouble1(self.h, defaultValue)
 
-proc toString*(self: gen_qjsonvalue_types.QJsonValueRef, defaultValue: string): string =
+proc toString*(self: gen_qjsonvalue_types.QJsonValueRef, defaultValue: openArray[char]): string =
   let v_ms = fcQJsonValueRef_toString1(self.h, struct_miqt_string(data: if len(defaultValue) > 0: addr defaultValue[0] else: nil, len: csize_t(len(defaultValue))))
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)

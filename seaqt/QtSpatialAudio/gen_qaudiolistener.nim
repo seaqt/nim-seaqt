@@ -375,4 +375,5 @@ proc create*(T: type gen_qaudiolistener_types.QAudioListener,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQAudioListener_new(addr(cQAudioListener_mvtbl), csize_t(sizeof(pointer)), engine.h)
   fcQAudioListener_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 

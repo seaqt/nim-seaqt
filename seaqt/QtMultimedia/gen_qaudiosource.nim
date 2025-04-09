@@ -637,6 +637,7 @@ proc create*(T: type gen_qaudiosource_types.QAudioSource,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQAudioSource_new(addr(cQAudioSource_mvtbl), csize_t(sizeof(pointer)))
   fcQAudioSource_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qaudiosource_types.QAudioSource,
     audioDeviceInfo: gen_qaudiodevice_types.QAudioDevice,
@@ -644,6 +645,7 @@ proc create*(T: type gen_qaudiosource_types.QAudioSource,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQAudioSource_new2(addr(cQAudioSource_mvtbl), csize_t(sizeof(pointer)), audioDeviceInfo.h)
   fcQAudioSource_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qaudiosource_types.QAudioSource,
     format: gen_qaudioformat_types.QAudioFormat,
@@ -651,6 +653,7 @@ proc create*(T: type gen_qaudiosource_types.QAudioSource,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQAudioSource_new3(addr(cQAudioSource_mvtbl), csize_t(sizeof(pointer)), format.h)
   fcQAudioSource_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qaudiosource_types.QAudioSource,
     format: gen_qaudioformat_types.QAudioFormat, parent: gen_qobject_types.QObject,
@@ -658,6 +661,7 @@ proc create*(T: type gen_qaudiosource_types.QAudioSource,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQAudioSource_new4(addr(cQAudioSource_mvtbl), csize_t(sizeof(pointer)), format.h, parent.h)
   fcQAudioSource_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qaudiosource_types.QAudioSource,
     audioDeviceInfo: gen_qaudiodevice_types.QAudioDevice, format: gen_qaudioformat_types.QAudioFormat,
@@ -665,6 +669,7 @@ proc create*(T: type gen_qaudiosource_types.QAudioSource,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQAudioSource_new5(addr(cQAudioSource_mvtbl), csize_t(sizeof(pointer)), audioDeviceInfo.h, format.h)
   fcQAudioSource_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qaudiosource_types.QAudioSource,
     audioDeviceInfo: gen_qaudiodevice_types.QAudioDevice, format: gen_qaudioformat_types.QAudioFormat, parent: gen_qobject_types.QObject,
@@ -672,6 +677,7 @@ proc create*(T: type gen_qaudiosource_types.QAudioSource,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQAudioSource_new6(addr(cQAudioSource_mvtbl), csize_t(sizeof(pointer)), audioDeviceInfo.h, format.h, parent.h)
   fcQAudioSource_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qaudiosource_types.QAudioSource): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQAudioSource_staticMetaObject())

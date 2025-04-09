@@ -677,6 +677,7 @@ proc create*(T: type gen_qtextobject_types.QTextFrame,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQTextFrame_new(addr(cQTextFrame_mvtbl), csize_t(sizeof(pointer)), doc.h)
   fcQTextFrame_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qtextobject_types.QTextFrame): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQTextFrame_staticMetaObject())

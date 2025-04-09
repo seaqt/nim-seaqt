@@ -241,7 +241,7 @@ proc tr*(_: type gen_qinputdevice_types.QInputDevice, s: cstring, c: cstring, n:
   c_free(v_ms.data)
   vx_ret
 
-proc primaryKeyboard*(_: type gen_qinputdevice_types.QInputDevice, seatName: string): gen_qinputdevice_types.QInputDevice =
+proc primaryKeyboard*(_: type gen_qinputdevice_types.QInputDevice, seatName: openArray[char]): gen_qinputdevice_types.QInputDevice =
   gen_qinputdevice_types.QInputDevice(h: fcQInputDevice_primaryKeyboard1(struct_miqt_string(data: if len(seatName) > 0: addr seatName[0] else: nil, len: csize_t(len(seatName)))), owned: false)
 
 type QInputDevicemetaObjectProc* = proc(self: QInputDevice): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
@@ -488,7 +488,7 @@ proc create*(T: type gen_qinputdevice_types.QInputDevice,
   fcQInputDevice_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qinputdevice_types.QInputDevice,
-    name: string, systemId: clonglong, typeVal: cint,
+    name: openArray[char], systemId: clonglong, typeVal: cint,
     vtbl: ref QInputDeviceVTable = nil): gen_qinputdevice_types.QInputDevice =
   let vtbl = if vtbl == nil: new QInputDeviceVTable else: vtbl
   GC_ref(vtbl)
@@ -550,7 +550,7 @@ proc create*(T: type gen_qinputdevice_types.QInputDevice,
   fcQInputDevice_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qinputdevice_types.QInputDevice,
-    name: string, systemId: clonglong, typeVal: cint, seatName: string,
+    name: openArray[char], systemId: clonglong, typeVal: cint, seatName: openArray[char],
     vtbl: ref QInputDeviceVTable = nil): gen_qinputdevice_types.QInputDevice =
   let vtbl = if vtbl == nil: new QInputDeviceVTable else: vtbl
   GC_ref(vtbl)
@@ -581,7 +581,7 @@ proc create*(T: type gen_qinputdevice_types.QInputDevice,
   fcQInputDevice_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qinputdevice_types.QInputDevice,
-    name: string, systemId: clonglong, typeVal: cint, seatName: string, parent: gen_qobject_types.QObject,
+    name: openArray[char], systemId: clonglong, typeVal: cint, seatName: openArray[char], parent: gen_qobject_types.QObject,
     vtbl: ref QInputDeviceVTable = nil): gen_qinputdevice_types.QInputDevice =
   let vtbl = if vtbl == nil: new QInputDeviceVTable else: vtbl
   GC_ref(vtbl)
@@ -633,13 +633,15 @@ proc create*(T: type gen_qinputdevice_types.QInputDevice,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQInputDevice_new(addr(cQInputDevice_mvtbl), csize_t(sizeof(pointer)))
   fcQInputDevice_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qinputdevice_types.QInputDevice,
-    name: string, systemId: clonglong, typeVal: cint,
+    name: openArray[char], systemId: clonglong, typeVal: cint,
     inst: VirtualQInputDevice) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQInputDevice_new2(addr(cQInputDevice_mvtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), systemId, cint(typeVal))
   fcQInputDevice_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qinputdevice_types.QInputDevice,
     parent: gen_qobject_types.QObject,
@@ -647,20 +649,23 @@ proc create*(T: type gen_qinputdevice_types.QInputDevice,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQInputDevice_new3(addr(cQInputDevice_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQInputDevice_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qinputdevice_types.QInputDevice,
-    name: string, systemId: clonglong, typeVal: cint, seatName: string,
+    name: openArray[char], systemId: clonglong, typeVal: cint, seatName: openArray[char],
     inst: VirtualQInputDevice) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQInputDevice_new4(addr(cQInputDevice_mvtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), systemId, cint(typeVal), struct_miqt_string(data: if len(seatName) > 0: addr seatName[0] else: nil, len: csize_t(len(seatName))))
   fcQInputDevice_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qinputdevice_types.QInputDevice,
-    name: string, systemId: clonglong, typeVal: cint, seatName: string, parent: gen_qobject_types.QObject,
+    name: openArray[char], systemId: clonglong, typeVal: cint, seatName: openArray[char], parent: gen_qobject_types.QObject,
     inst: VirtualQInputDevice) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQInputDevice_new5(addr(cQInputDevice_mvtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), systemId, cint(typeVal), struct_miqt_string(data: if len(seatName) > 0: addr seatName[0] else: nil, len: csize_t(len(seatName))), parent.h)
   fcQInputDevice_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qinputdevice_types.QInputDevice): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQInputDevice_staticMetaObject())

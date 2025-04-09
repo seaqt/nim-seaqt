@@ -391,6 +391,7 @@ proc create*(T: type gen_qquicktextdocument_types.QQuickTextDocument,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQQuickTextDocument_new(addr(cQQuickTextDocument_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQQuickTextDocument_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qquicktextdocument_types.QQuickTextDocument): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQQuickTextDocument_staticMetaObject())

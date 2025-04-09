@@ -286,10 +286,10 @@ proc addRow*(self: gen_qformlayout_types.QFormLayout, label: gen_qwidget_types.Q
 proc addRow*(self: gen_qformlayout_types.QFormLayout, label: gen_qwidget_types.QWidget, field: gen_qlayout_types.QLayout): void =
   fcQFormLayout_addRow2(self.h, label.h, field.h)
 
-proc addRow*(self: gen_qformlayout_types.QFormLayout, labelText: string, field: gen_qwidget_types.QWidget): void =
+proc addRow*(self: gen_qformlayout_types.QFormLayout, labelText: openArray[char], field: gen_qwidget_types.QWidget): void =
   fcQFormLayout_addRow3(self.h, struct_miqt_string(data: if len(labelText) > 0: addr labelText[0] else: nil, len: csize_t(len(labelText))), field.h)
 
-proc addRow*(self: gen_qformlayout_types.QFormLayout, labelText: string, field: gen_qlayout_types.QLayout): void =
+proc addRow*(self: gen_qformlayout_types.QFormLayout, labelText: openArray[char], field: gen_qlayout_types.QLayout): void =
   fcQFormLayout_addRow4(self.h, struct_miqt_string(data: if len(labelText) > 0: addr labelText[0] else: nil, len: csize_t(len(labelText))), field.h)
 
 proc addRow*(self: gen_qformlayout_types.QFormLayout, widget: gen_qwidget_types.QWidget): void =
@@ -304,10 +304,10 @@ proc insertRow*(self: gen_qformlayout_types.QFormLayout, row: cint, label: gen_q
 proc insertRow*(self: gen_qformlayout_types.QFormLayout, row: cint, label: gen_qwidget_types.QWidget, field: gen_qlayout_types.QLayout): void =
   fcQFormLayout_insertRow2(self.h, row, label.h, field.h)
 
-proc insertRow*(self: gen_qformlayout_types.QFormLayout, row: cint, labelText: string, field: gen_qwidget_types.QWidget): void =
+proc insertRow*(self: gen_qformlayout_types.QFormLayout, row: cint, labelText: openArray[char], field: gen_qwidget_types.QWidget): void =
   fcQFormLayout_insertRow3(self.h, row, struct_miqt_string(data: if len(labelText) > 0: addr labelText[0] else: nil, len: csize_t(len(labelText))), field.h)
 
-proc insertRow*(self: gen_qformlayout_types.QFormLayout, row: cint, labelText: string, field: gen_qlayout_types.QLayout): void =
+proc insertRow*(self: gen_qformlayout_types.QFormLayout, row: cint, labelText: openArray[char], field: gen_qlayout_types.QLayout): void =
   fcQFormLayout_insertRow4(self.h, row, struct_miqt_string(data: if len(labelText) > 0: addr labelText[0] else: nil, len: csize_t(len(labelText))), field.h)
 
 proc insertRow*(self: gen_qformlayout_types.QFormLayout, row: cint, widget: gen_qwidget_types.QWidget): void =
@@ -1303,12 +1303,14 @@ proc create*(T: type gen_qformlayout_types.QFormLayout,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQFormLayout_new(addr(cQFormLayout_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQFormLayout_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qformlayout_types.QFormLayout,
     inst: VirtualQFormLayout) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQFormLayout_new2(addr(cQFormLayout_mvtbl), csize_t(sizeof(pointer)))
   fcQFormLayout_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qformlayout_types.QFormLayout): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQFormLayout_staticMetaObject())

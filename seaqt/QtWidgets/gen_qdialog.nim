@@ -390,7 +390,7 @@ type QDialogdragMoveEventProc* = proc(self: QDialog, event: gen_qevent_types.QDr
 type QDialogdragLeaveEventProc* = proc(self: QDialog, event: gen_qevent_types.QDragLeaveEvent): void {.raises: [], gcsafe.}
 type QDialogdropEventProc* = proc(self: QDialog, event: gen_qevent_types.QDropEvent): void {.raises: [], gcsafe.}
 type QDialoghideEventProc* = proc(self: QDialog, event: gen_qevent_types.QHideEvent): void {.raises: [], gcsafe.}
-type QDialognativeEventProc* = proc(self: QDialog, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
+type QDialognativeEventProc* = proc(self: QDialog, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
 type QDialogchangeEventProc* = proc(self: QDialog, param1: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QDialogmetricProc* = proc(self: QDialog, param1: cint): cint {.raises: [], gcsafe.}
 type QDialoginitPainterProc* = proc(self: QDialog, painter: gen_qpainter_types.QPainter): void {.raises: [], gcsafe.}
@@ -847,7 +847,7 @@ proc fcQDialog_vtable_callback_hideEvent(self: pointer, event: pointer): void {.
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   vtbl[].hideEvent(self, slotval1)
 
-proc QDialognativeEvent*(self: gen_qdialog_types.QDialog, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool =
+proc QDialognativeEvent*(self: gen_qdialog_types.QDialog, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool =
   fcQDialog_virtualbase_nativeEvent(self.h, struct_miqt_string(data: if len(eventType) > 0: addr eventType[0] else: nil, len: csize_t(len(eventType))), message, resultVal)
 
 proc fcQDialog_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
@@ -1286,7 +1286,7 @@ proc fcQDialog_method_callback_hideEvent(self: pointer, event: pointer): void {.
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   inst.hideEvent(slotval1)
 
-method nativeEvent*(self: VirtualQDialog, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
+method nativeEvent*(self: VirtualQDialog, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
   QDialognativeEvent(self[], eventType, message, resultVal)
 proc fcQDialog_method_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
   let inst = cast[VirtualQDialog](fcQDialog_vdata(self)[])
@@ -1854,12 +1854,14 @@ proc create*(T: type gen_qdialog_types.QDialog,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQDialog_new(addr(cQDialog_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQDialog_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qdialog_types.QDialog,
     inst: VirtualQDialog) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQDialog_new2(addr(cQDialog_mvtbl), csize_t(sizeof(pointer)))
   fcQDialog_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qdialog_types.QDialog,
     parent: gen_qwidget_types.QWidget, f: cint,
@@ -1867,6 +1869,7 @@ proc create*(T: type gen_qdialog_types.QDialog,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQDialog_new3(addr(cQDialog_mvtbl), csize_t(sizeof(pointer)), parent.h, cint(f))
   fcQDialog_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qdialog_types.QDialog): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQDialog_staticMetaObject())

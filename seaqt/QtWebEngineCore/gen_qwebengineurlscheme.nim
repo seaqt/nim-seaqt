@@ -98,7 +98,7 @@ proc name*(self: gen_qwebengineurlscheme_types.QWebEngineUrlScheme): seq[byte] =
   c_free(v_bytearray.data)
   vx_ret
 
-proc setName*(self: gen_qwebengineurlscheme_types.QWebEngineUrlScheme, newValue: seq[byte]): void =
+proc setName*(self: gen_qwebengineurlscheme_types.QWebEngineUrlScheme, newValue: openArray[byte]): void =
   fcQWebEngineUrlScheme_setName(self.h, struct_miqt_string(data: if len(newValue) > 0: addr newValue[0] else: nil, len: csize_t(len(newValue))))
 
 proc syntax*(self: gen_qwebengineurlscheme_types.QWebEngineUrlScheme): cint =
@@ -122,14 +122,14 @@ proc setFlags*(self: gen_qwebengineurlscheme_types.QWebEngineUrlScheme, newValue
 proc registerScheme*(_: type gen_qwebengineurlscheme_types.QWebEngineUrlScheme, scheme: gen_qwebengineurlscheme_types.QWebEngineUrlScheme): void =
   fcQWebEngineUrlScheme_registerScheme(scheme.h)
 
-proc schemeByName*(_: type gen_qwebengineurlscheme_types.QWebEngineUrlScheme, name: seq[byte]): gen_qwebengineurlscheme_types.QWebEngineUrlScheme =
+proc schemeByName*(_: type gen_qwebengineurlscheme_types.QWebEngineUrlScheme, name: openArray[byte]): gen_qwebengineurlscheme_types.QWebEngineUrlScheme =
   gen_qwebengineurlscheme_types.QWebEngineUrlScheme(h: fcQWebEngineUrlScheme_schemeByName(struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name)))), owned: true)
 
 proc create*(T: type gen_qwebengineurlscheme_types.QWebEngineUrlScheme): gen_qwebengineurlscheme_types.QWebEngineUrlScheme =
   let tmp = gen_qwebengineurlscheme_types.QWebEngineUrlScheme(h: fcQWebEngineUrlScheme_new(), owned: true)
   tmp
 proc create*(T: type gen_qwebengineurlscheme_types.QWebEngineUrlScheme,
-    name: seq[byte]): gen_qwebengineurlscheme_types.QWebEngineUrlScheme =
+    name: openArray[byte]): gen_qwebengineurlscheme_types.QWebEngineUrlScheme =
   let tmp = gen_qwebengineurlscheme_types.QWebEngineUrlScheme(h: fcQWebEngineUrlScheme_new2(struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name)))), owned: true)
   tmp
 proc create*(T: type gen_qwebengineurlscheme_types.QWebEngineUrlScheme,

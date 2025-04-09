@@ -151,7 +151,7 @@ proc expression*(self: gen_qqmlexpression_types.QQmlExpression): string =
   c_free(v_ms.data)
   vx_ret
 
-proc setExpression*(self: gen_qqmlexpression_types.QQmlExpression, expression: string): void =
+proc setExpression*(self: gen_qqmlexpression_types.QQmlExpression, expression: openArray[char]): void =
   fcQQmlExpression_setExpression(self.h, struct_miqt_string(data: if len(expression) > 0: addr expression[0] else: nil, len: csize_t(len(expression))))
 
 proc notifyOnValueChanged*(self: gen_qqmlexpression_types.QQmlExpression): bool =
@@ -172,7 +172,7 @@ proc lineNumber*(self: gen_qqmlexpression_types.QQmlExpression): cint =
 proc columnNumber*(self: gen_qqmlexpression_types.QQmlExpression): cint =
   fcQQmlExpression_columnNumber(self.h)
 
-proc setSourceLocation*(self: gen_qqmlexpression_types.QQmlExpression, fileName: string, line: cint): void =
+proc setSourceLocation*(self: gen_qqmlexpression_types.QQmlExpression, fileName: openArray[char], line: cint): void =
   fcQQmlExpression_setSourceLocation(self.h, struct_miqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))), line)
 
 proc scopeObject*(self: gen_qqmlexpression_types.QQmlExpression): gen_qobject_types.QObject =
@@ -220,7 +220,7 @@ proc tr*(_: type gen_qqmlexpression_types.QQmlExpression, s: cstring, c: cstring
   c_free(v_ms.data)
   vx_ret
 
-proc setSourceLocation*(self: gen_qqmlexpression_types.QQmlExpression, fileName: string, line: cint, column: cint): void =
+proc setSourceLocation*(self: gen_qqmlexpression_types.QQmlExpression, fileName: openArray[char], line: cint, column: cint): void =
   fcQQmlExpression_setSourceLocation3(self.h, struct_miqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))), line, column)
 
 proc evaluate*(self: gen_qqmlexpression_types.QQmlExpression, valueIsUndefined: ptr bool): gen_qvariant_types.QVariant =
@@ -470,7 +470,7 @@ proc create*(T: type gen_qqmlexpression_types.QQmlExpression,
   fcQQmlExpression_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qqmlexpression_types.QQmlExpression,
-    param1: gen_qqmlcontext_types.QQmlContext, param2: gen_qobject_types.QObject, param3: string,
+    param1: gen_qqmlcontext_types.QQmlContext, param2: gen_qobject_types.QObject, param3: openArray[char],
     vtbl: ref QQmlExpressionVTable = nil): gen_qqmlexpression_types.QQmlExpression =
   let vtbl = if vtbl == nil: new QQmlExpressionVTable else: vtbl
   GC_ref(vtbl)
@@ -532,7 +532,7 @@ proc create*(T: type gen_qqmlexpression_types.QQmlExpression,
   fcQQmlExpression_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qqmlexpression_types.QQmlExpression,
-    param1: gen_qqmlcontext_types.QQmlContext, param2: gen_qobject_types.QObject, param3: string, param4: gen_qobject_types.QObject,
+    param1: gen_qqmlcontext_types.QQmlContext, param2: gen_qobject_types.QObject, param3: openArray[char], param4: gen_qobject_types.QObject,
     vtbl: ref QQmlExpressionVTable = nil): gen_qqmlexpression_types.QQmlExpression =
   let vtbl = if vtbl == nil: new QQmlExpressionVTable else: vtbl
   GC_ref(vtbl)
@@ -677,13 +677,15 @@ proc create*(T: type gen_qqmlexpression_types.QQmlExpression,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQQmlExpression_new(addr(cQQmlExpression_mvtbl), csize_t(sizeof(pointer)))
   fcQQmlExpression_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qqmlexpression_types.QQmlExpression,
-    param1: gen_qqmlcontext_types.QQmlContext, param2: gen_qobject_types.QObject, param3: string,
+    param1: gen_qqmlcontext_types.QQmlContext, param2: gen_qobject_types.QObject, param3: openArray[char],
     inst: VirtualQQmlExpression) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQQmlExpression_new2(addr(cQQmlExpression_mvtbl), csize_t(sizeof(pointer)), param1.h, param2.h, struct_miqt_string(data: if len(param3) > 0: addr param3[0] else: nil, len: csize_t(len(param3))))
   fcQQmlExpression_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qqmlexpression_types.QQmlExpression,
     param1: gen_qqmlscriptstring_types.QQmlScriptString,
@@ -691,13 +693,15 @@ proc create*(T: type gen_qqmlexpression_types.QQmlExpression,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQQmlExpression_new3(addr(cQQmlExpression_mvtbl), csize_t(sizeof(pointer)), param1.h)
   fcQQmlExpression_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qqmlexpression_types.QQmlExpression,
-    param1: gen_qqmlcontext_types.QQmlContext, param2: gen_qobject_types.QObject, param3: string, param4: gen_qobject_types.QObject,
+    param1: gen_qqmlcontext_types.QQmlContext, param2: gen_qobject_types.QObject, param3: openArray[char], param4: gen_qobject_types.QObject,
     inst: VirtualQQmlExpression) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQQmlExpression_new4(addr(cQQmlExpression_mvtbl), csize_t(sizeof(pointer)), param1.h, param2.h, struct_miqt_string(data: if len(param3) > 0: addr param3[0] else: nil, len: csize_t(len(param3))), param4.h)
   fcQQmlExpression_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qqmlexpression_types.QQmlExpression,
     param1: gen_qqmlscriptstring_types.QQmlScriptString, param2: gen_qqmlcontext_types.QQmlContext,
@@ -705,6 +709,7 @@ proc create*(T: type gen_qqmlexpression_types.QQmlExpression,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQQmlExpression_new5(addr(cQQmlExpression_mvtbl), csize_t(sizeof(pointer)), param1.h, param2.h)
   fcQQmlExpression_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qqmlexpression_types.QQmlExpression,
     param1: gen_qqmlscriptstring_types.QQmlScriptString, param2: gen_qqmlcontext_types.QQmlContext, param3: gen_qobject_types.QObject,
@@ -712,6 +717,7 @@ proc create*(T: type gen_qqmlexpression_types.QQmlExpression,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQQmlExpression_new6(addr(cQQmlExpression_mvtbl), csize_t(sizeof(pointer)), param1.h, param2.h, param3.h)
   fcQQmlExpression_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qqmlexpression_types.QQmlExpression,
     param1: gen_qqmlscriptstring_types.QQmlScriptString, param2: gen_qqmlcontext_types.QQmlContext, param3: gen_qobject_types.QObject, param4: gen_qobject_types.QObject,
@@ -719,6 +725,7 @@ proc create*(T: type gen_qqmlexpression_types.QQmlExpression,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQQmlExpression_new7(addr(cQQmlExpression_mvtbl), csize_t(sizeof(pointer)), param1.h, param2.h, param3.h, param4.h)
   fcQQmlExpression_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qqmlexpression_types.QQmlExpression): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQQmlExpression_staticMetaObject())

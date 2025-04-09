@@ -123,19 +123,19 @@ proc operatorEqual*(self: gen_qfileinfo_types.QFileInfo, fileinfo: gen_qfileinfo
 proc operatorNotEqual*(self: gen_qfileinfo_types.QFileInfo, fileinfo: gen_qfileinfo_types.QFileInfo): bool =
   fcQFileInfo_operatorNotEqual(self.h, fileinfo.h)
 
-proc setFile*(self: gen_qfileinfo_types.QFileInfo, file: string): void =
+proc setFile*(self: gen_qfileinfo_types.QFileInfo, file: openArray[char]): void =
   fcQFileInfo_setFile(self.h, struct_miqt_string(data: if len(file) > 0: addr file[0] else: nil, len: csize_t(len(file))))
 
 proc setFile*(self: gen_qfileinfo_types.QFileInfo, file: gen_qfiledevice_types.QFileDevice): void =
   fcQFileInfo_setFileWithFile(self.h, file.h)
 
-proc setFile*(self: gen_qfileinfo_types.QFileInfo, dir: gen_qdir_types.QDir, file: string): void =
+proc setFile*(self: gen_qfileinfo_types.QFileInfo, dir: gen_qdir_types.QDir, file: openArray[char]): void =
   fcQFileInfo_setFile2(self.h, dir.h, struct_miqt_string(data: if len(file) > 0: addr file[0] else: nil, len: csize_t(len(file))))
 
 proc exists*(self: gen_qfileinfo_types.QFileInfo): bool =
   fcQFileInfo_exists(self.h)
 
-proc exists*(_: type gen_qfileinfo_types.QFileInfo, file: string): bool =
+proc exists*(_: type gen_qfileinfo_types.QFileInfo, file: openArray[char]): bool =
   fcQFileInfo_existsWithFile(struct_miqt_string(data: if len(file) > 0: addr file[0] else: nil, len: csize_t(len(file))))
 
 proc refresh*(self: gen_qfileinfo_types.QFileInfo): void =
@@ -337,7 +337,7 @@ proc create*(T: type gen_qfileinfo_types.QFileInfo): gen_qfileinfo_types.QFileIn
   let tmp = gen_qfileinfo_types.QFileInfo(h: fcQFileInfo_new(), owned: true)
   tmp
 proc create*(T: type gen_qfileinfo_types.QFileInfo,
-    file: string): gen_qfileinfo_types.QFileInfo =
+    file: openArray[char]): gen_qfileinfo_types.QFileInfo =
   let tmp = gen_qfileinfo_types.QFileInfo(h: fcQFileInfo_new2(struct_miqt_string(data: if len(file) > 0: addr file[0] else: nil, len: csize_t(len(file)))), owned: true)
   tmp
 proc create*(T: type gen_qfileinfo_types.QFileInfo,
@@ -345,7 +345,7 @@ proc create*(T: type gen_qfileinfo_types.QFileInfo,
   let tmp = gen_qfileinfo_types.QFileInfo(h: fcQFileInfo_new3(file.h), owned: true)
   tmp
 proc create*(T: type gen_qfileinfo_types.QFileInfo,
-    dir: gen_qdir_types.QDir, file: string): gen_qfileinfo_types.QFileInfo =
+    dir: gen_qdir_types.QDir, file: openArray[char]): gen_qfileinfo_types.QFileInfo =
   let tmp = gen_qfileinfo_types.QFileInfo(h: fcQFileInfo_new4(dir.h, struct_miqt_string(data: if len(file) > 0: addr file[0] else: nil, len: csize_t(len(file)))), owned: true)
   tmp
 proc create*(T: type gen_qfileinfo_types.QFileInfo,

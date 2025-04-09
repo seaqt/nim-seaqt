@@ -15,12 +15,10 @@ extern "C" {
 #endif
 
 #ifdef __cplusplus
-class QByteArrayView;
 class QCryptographicHash;
 class QIODevice;
 class QMetaObject;
 #else
-typedef struct QByteArrayView QByteArrayView;
 typedef struct QCryptographicHash QCryptographicHash;
 typedef struct QIODevice QIODevice;
 typedef struct QMetaObject QMetaObject;
@@ -30,11 +28,11 @@ QCryptographicHash* QCryptographicHash_new(int method);
 
 void QCryptographicHash_reset(QCryptographicHash* self);
 void QCryptographicHash_addData(QCryptographicHash* self, const char* data, ptrdiff_t length);
-void QCryptographicHash_addDataWithData(QCryptographicHash* self, QByteArrayView* data);
+void QCryptographicHash_addDataWithData(QCryptographicHash* self, struct miqt_string data);
 bool QCryptographicHash_addDataWithDevice(QCryptographicHash* self, QIODevice* device);
 struct miqt_string QCryptographicHash_result(const QCryptographicHash* self);
-QByteArrayView* QCryptographicHash_resultView(const QCryptographicHash* self);
-struct miqt_string QCryptographicHash_hash(QByteArrayView* data, int method);
+struct miqt_string QCryptographicHash_resultView(const QCryptographicHash* self);
+struct miqt_string QCryptographicHash_hash(struct miqt_string data, int method);
 int QCryptographicHash_hashLength(int method);
 
 const QMetaObject* QCryptographicHash_staticMetaObject();

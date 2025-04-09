@@ -291,7 +291,7 @@ proc setTextDirection*(self: gen_qprogressbar_types.QProgressBar, textDirection:
 proc textDirection*(self: gen_qprogressbar_types.QProgressBar): cint =
   cint(fcQProgressBar_textDirection(self.h))
 
-proc setFormat*(self: gen_qprogressbar_types.QProgressBar, format: string): void =
+proc setFormat*(self: gen_qprogressbar_types.QProgressBar, format: openArray[char]): void =
   fcQProgressBar_setFormat(self.h, struct_miqt_string(data: if len(format) > 0: addr format[0] else: nil, len: csize_t(len(format))))
 
 proc resetFormat*(self: gen_qprogressbar_types.QProgressBar): void =
@@ -390,7 +390,7 @@ type QProgressBardragLeaveEventProc* = proc(self: QProgressBar, event: gen_qeven
 type QProgressBardropEventProc* = proc(self: QProgressBar, event: gen_qevent_types.QDropEvent): void {.raises: [], gcsafe.}
 type QProgressBarshowEventProc* = proc(self: QProgressBar, event: gen_qevent_types.QShowEvent): void {.raises: [], gcsafe.}
 type QProgressBarhideEventProc* = proc(self: QProgressBar, event: gen_qevent_types.QHideEvent): void {.raises: [], gcsafe.}
-type QProgressBarnativeEventProc* = proc(self: QProgressBar, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
+type QProgressBarnativeEventProc* = proc(self: QProgressBar, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
 type QProgressBarchangeEventProc* = proc(self: QProgressBar, param1: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QProgressBarmetricProc* = proc(self: QProgressBar, param1: cint): cint {.raises: [], gcsafe.}
 type QProgressBarinitPainterProc* = proc(self: QProgressBar, painter: gen_qpainter_types.QPainter): void {.raises: [], gcsafe.}
@@ -815,7 +815,7 @@ proc fcQProgressBar_vtable_callback_hideEvent(self: pointer, event: pointer): vo
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   vtbl[].hideEvent(self, slotval1)
 
-proc QProgressBarnativeEvent*(self: gen_qprogressbar_types.QProgressBar, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool =
+proc QProgressBarnativeEvent*(self: gen_qprogressbar_types.QProgressBar, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool =
   fcQProgressBar_virtualbase_nativeEvent(self.h, struct_miqt_string(data: if len(eventType) > 0: addr eventType[0] else: nil, len: csize_t(len(eventType))), message, resultVal)
 
 proc fcQProgressBar_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
@@ -1238,7 +1238,7 @@ proc fcQProgressBar_method_callback_hideEvent(self: pointer, event: pointer): vo
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   inst.hideEvent(slotval1)
 
-method nativeEvent*(self: VirtualQProgressBar, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
+method nativeEvent*(self: VirtualQProgressBar, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
   QProgressBarnativeEvent(self[], eventType, message, resultVal)
 proc fcQProgressBar_method_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
   let inst = cast[VirtualQProgressBar](fcQProgressBar_vdata(self)[])
@@ -1676,12 +1676,14 @@ proc create*(T: type gen_qprogressbar_types.QProgressBar,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQProgressBar_new(addr(cQProgressBar_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQProgressBar_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qprogressbar_types.QProgressBar,
     inst: VirtualQProgressBar) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQProgressBar_new2(addr(cQProgressBar_mvtbl), csize_t(sizeof(pointer)))
   fcQProgressBar_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qprogressbar_types.QProgressBar): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQProgressBar_staticMetaObject())

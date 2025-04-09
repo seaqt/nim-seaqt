@@ -294,7 +294,7 @@ proc orientation*(self: gen_qdialogbuttonbox_types.QDialogButtonBox): cint =
 proc addButton*(self: gen_qdialogbuttonbox_types.QDialogButtonBox, button: gen_qabstractbutton_types.QAbstractButton, role: cint): void =
   fcQDialogButtonBox_addButton(self.h, button.h, cint(role))
 
-proc addButton*(self: gen_qdialogbuttonbox_types.QDialogButtonBox, text: string, role: cint): gen_qpushbutton_types.QPushButton =
+proc addButton*(self: gen_qdialogbuttonbox_types.QDialogButtonBox, text: openArray[char], role: cint): gen_qpushbutton_types.QPushButton =
   gen_qpushbutton_types.QPushButton(h: fcQDialogButtonBox_addButton2(self.h, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), cint(role)), owned: false)
 
 proc addButton*(self: gen_qdialogbuttonbox_types.QDialogButtonBox, button: cint): gen_qpushbutton_types.QPushButton =
@@ -458,7 +458,7 @@ type QDialogButtonBoxdragLeaveEventProc* = proc(self: QDialogButtonBox, event: g
 type QDialogButtonBoxdropEventProc* = proc(self: QDialogButtonBox, event: gen_qevent_types.QDropEvent): void {.raises: [], gcsafe.}
 type QDialogButtonBoxshowEventProc* = proc(self: QDialogButtonBox, event: gen_qevent_types.QShowEvent): void {.raises: [], gcsafe.}
 type QDialogButtonBoxhideEventProc* = proc(self: QDialogButtonBox, event: gen_qevent_types.QHideEvent): void {.raises: [], gcsafe.}
-type QDialogButtonBoxnativeEventProc* = proc(self: QDialogButtonBox, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
+type QDialogButtonBoxnativeEventProc* = proc(self: QDialogButtonBox, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
 type QDialogButtonBoxmetricProc* = proc(self: QDialogButtonBox, param1: cint): cint {.raises: [], gcsafe.}
 type QDialogButtonBoxinitPainterProc* = proc(self: QDialogButtonBox, painter: gen_qpainter_types.QPainter): void {.raises: [], gcsafe.}
 type QDialogButtonBoxredirectedProc* = proc(self: QDialogButtonBox, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.raises: [], gcsafe.}
@@ -866,7 +866,7 @@ proc fcQDialogButtonBox_vtable_callback_hideEvent(self: pointer, event: pointer)
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   vtbl[].hideEvent(self, slotval1)
 
-proc QDialogButtonBoxnativeEvent*(self: gen_qdialogbuttonbox_types.QDialogButtonBox, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool =
+proc QDialogButtonBoxnativeEvent*(self: gen_qdialogbuttonbox_types.QDialogButtonBox, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool =
   fcQDialogButtonBox_virtualbase_nativeEvent(self.h, struct_miqt_string(data: if len(eventType) > 0: addr eventType[0] else: nil, len: csize_t(len(eventType))), message, resultVal)
 
 proc fcQDialogButtonBox_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
@@ -1273,7 +1273,7 @@ proc fcQDialogButtonBox_method_callback_hideEvent(self: pointer, event: pointer)
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   inst.hideEvent(slotval1)
 
-method nativeEvent*(self: VirtualQDialogButtonBox, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
+method nativeEvent*(self: VirtualQDialogButtonBox, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
   QDialogButtonBoxnativeEvent(self[], eventType, message, resultVal)
 proc fcQDialogButtonBox_method_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
   let inst = cast[VirtualQDialogButtonBox](fcQDialogButtonBox_vdata(self)[])
@@ -2360,12 +2360,14 @@ proc create*(T: type gen_qdialogbuttonbox_types.QDialogButtonBox,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQDialogButtonBox_new(addr(cQDialogButtonBox_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQDialogButtonBox_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qdialogbuttonbox_types.QDialogButtonBox,
     inst: VirtualQDialogButtonBox) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQDialogButtonBox_new2(addr(cQDialogButtonBox_mvtbl), csize_t(sizeof(pointer)))
   fcQDialogButtonBox_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qdialogbuttonbox_types.QDialogButtonBox,
     orientation: cint,
@@ -2373,6 +2375,7 @@ proc create*(T: type gen_qdialogbuttonbox_types.QDialogButtonBox,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQDialogButtonBox_new3(addr(cQDialogButtonBox_mvtbl), csize_t(sizeof(pointer)), cint(orientation))
   fcQDialogButtonBox_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create2*(T: type gen_qdialogbuttonbox_types.QDialogButtonBox,
     buttons: cint,
@@ -2380,6 +2383,7 @@ proc create2*(T: type gen_qdialogbuttonbox_types.QDialogButtonBox,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQDialogButtonBox_new4(addr(cQDialogButtonBox_mvtbl), csize_t(sizeof(pointer)), cint(buttons))
   fcQDialogButtonBox_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qdialogbuttonbox_types.QDialogButtonBox,
     buttons: cint, orientation: cint,
@@ -2387,6 +2391,7 @@ proc create*(T: type gen_qdialogbuttonbox_types.QDialogButtonBox,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQDialogButtonBox_new5(addr(cQDialogButtonBox_mvtbl), csize_t(sizeof(pointer)), cint(buttons), cint(orientation))
   fcQDialogButtonBox_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qdialogbuttonbox_types.QDialogButtonBox,
     orientation: cint, parent: gen_qwidget_types.QWidget,
@@ -2394,6 +2399,7 @@ proc create*(T: type gen_qdialogbuttonbox_types.QDialogButtonBox,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQDialogButtonBox_new6(addr(cQDialogButtonBox_mvtbl), csize_t(sizeof(pointer)), cint(orientation), parent.h)
   fcQDialogButtonBox_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create2*(T: type gen_qdialogbuttonbox_types.QDialogButtonBox,
     buttons: cint, parent: gen_qwidget_types.QWidget,
@@ -2401,6 +2407,7 @@ proc create2*(T: type gen_qdialogbuttonbox_types.QDialogButtonBox,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQDialogButtonBox_new7(addr(cQDialogButtonBox_mvtbl), csize_t(sizeof(pointer)), cint(buttons), parent.h)
   fcQDialogButtonBox_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qdialogbuttonbox_types.QDialogButtonBox,
     buttons: cint, orientation: cint, parent: gen_qwidget_types.QWidget,
@@ -2408,6 +2415,7 @@ proc create*(T: type gen_qdialogbuttonbox_types.QDialogButtonBox,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQDialogButtonBox_new8(addr(cQDialogButtonBox_mvtbl), csize_t(sizeof(pointer)), cint(buttons), cint(orientation), parent.h)
   fcQDialogButtonBox_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qdialogbuttonbox_types.QDialogButtonBox): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQDialogButtonBox_staticMetaObject())

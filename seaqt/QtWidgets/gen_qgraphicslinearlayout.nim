@@ -540,6 +540,7 @@ proc create*(T: type gen_qgraphicslinearlayout_types.QGraphicsLinearLayout,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQGraphicsLinearLayout_new(addr(cQGraphicsLinearLayout_mvtbl), csize_t(sizeof(pointer)))
   fcQGraphicsLinearLayout_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qgraphicslinearlayout_types.QGraphicsLinearLayout,
     orientation: cint,
@@ -547,6 +548,7 @@ proc create*(T: type gen_qgraphicslinearlayout_types.QGraphicsLinearLayout,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQGraphicsLinearLayout_new2(addr(cQGraphicsLinearLayout_mvtbl), csize_t(sizeof(pointer)), cint(orientation))
   fcQGraphicsLinearLayout_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qgraphicslinearlayout_types.QGraphicsLinearLayout,
     parent: gen_qgraphicslayoutitem_types.QGraphicsLayoutItem,
@@ -554,6 +556,7 @@ proc create*(T: type gen_qgraphicslinearlayout_types.QGraphicsLinearLayout,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQGraphicsLinearLayout_new3(addr(cQGraphicsLinearLayout_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQGraphicsLinearLayout_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qgraphicslinearlayout_types.QGraphicsLinearLayout,
     orientation: cint, parent: gen_qgraphicslayoutitem_types.QGraphicsLayoutItem,
@@ -561,4 +564,5 @@ proc create*(T: type gen_qgraphicslinearlayout_types.QGraphicsLinearLayout,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQGraphicsLinearLayout_new4(addr(cQGraphicsLinearLayout_mvtbl), csize_t(sizeof(pointer)), cint(orientation), parent.h)
   fcQGraphicsLinearLayout_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 

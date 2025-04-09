@@ -68,13 +68,13 @@ proc cacheLimit*(_: type gen_qpixmapcache_types.QPixmapCache): cint =
 proc setCacheLimit*(_: type gen_qpixmapcache_types.QPixmapCache, cacheLimit: cint): void =
   fcQPixmapCache_setCacheLimit(cacheLimit)
 
-proc find*(_: type gen_qpixmapcache_types.QPixmapCache, key: string, pixmap: gen_qpixmap_types.QPixmap): bool =
+proc find*(_: type gen_qpixmapcache_types.QPixmapCache, key: openArray[char], pixmap: gen_qpixmap_types.QPixmap): bool =
   fcQPixmapCache_find(struct_miqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key))), pixmap.h)
 
 proc find*(_: type gen_qpixmapcache_types.QPixmapCache, key: gen_qpixmapcache_types.QPixmapCacheKey, pixmap: gen_qpixmap_types.QPixmap): bool =
   fcQPixmapCache_find2(key.h, pixmap.h)
 
-proc insert*(_: type gen_qpixmapcache_types.QPixmapCache, key: string, pixmap: gen_qpixmap_types.QPixmap): bool =
+proc insert*(_: type gen_qpixmapcache_types.QPixmapCache, key: openArray[char], pixmap: gen_qpixmap_types.QPixmap): bool =
   fcQPixmapCache_insert(struct_miqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key))), pixmap.h)
 
 proc insert*(_: type gen_qpixmapcache_types.QPixmapCache, pixmap: gen_qpixmap_types.QPixmap): gen_qpixmapcache_types.QPixmapCacheKey =
@@ -83,7 +83,7 @@ proc insert*(_: type gen_qpixmapcache_types.QPixmapCache, pixmap: gen_qpixmap_ty
 proc replace*(_: type gen_qpixmapcache_types.QPixmapCache, key: gen_qpixmapcache_types.QPixmapCacheKey, pixmap: gen_qpixmap_types.QPixmap): bool =
   fcQPixmapCache_replace(key.h, pixmap.h)
 
-proc remove*(_: type gen_qpixmapcache_types.QPixmapCache, key: string): void =
+proc remove*(_: type gen_qpixmapcache_types.QPixmapCache, key: openArray[char]): void =
   fcQPixmapCache_remove(struct_miqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key))))
 
 proc remove*(_: type gen_qpixmapcache_types.QPixmapCache, key: gen_qpixmapcache_types.QPixmapCacheKey): void =

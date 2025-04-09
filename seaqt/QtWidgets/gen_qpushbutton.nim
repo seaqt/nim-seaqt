@@ -323,7 +323,7 @@ type QPushButtondragLeaveEventProc* = proc(self: QPushButton, event: gen_qevent_
 type QPushButtondropEventProc* = proc(self: QPushButton, event: gen_qevent_types.QDropEvent): void {.raises: [], gcsafe.}
 type QPushButtonshowEventProc* = proc(self: QPushButton, event: gen_qevent_types.QShowEvent): void {.raises: [], gcsafe.}
 type QPushButtonhideEventProc* = proc(self: QPushButton, event: gen_qevent_types.QHideEvent): void {.raises: [], gcsafe.}
-type QPushButtonnativeEventProc* = proc(self: QPushButton, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
+type QPushButtonnativeEventProc* = proc(self: QPushButton, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
 type QPushButtonmetricProc* = proc(self: QPushButton, param1: cint): cint {.raises: [], gcsafe.}
 type QPushButtoninitPainterProc* = proc(self: QPushButton, painter: gen_qpainter_types.QPainter): void {.raises: [], gcsafe.}
 type QPushButtonredirectedProc* = proc(self: QPushButton, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.raises: [], gcsafe.}
@@ -778,7 +778,7 @@ proc fcQPushButton_vtable_callback_hideEvent(self: pointer, event: pointer): voi
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   vtbl[].hideEvent(self, slotval1)
 
-proc QPushButtonnativeEvent*(self: gen_qpushbutton_types.QPushButton, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool =
+proc QPushButtonnativeEvent*(self: gen_qpushbutton_types.QPushButton, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool =
   fcQPushButton_virtualbase_nativeEvent(self.h, struct_miqt_string(data: if len(eventType) > 0: addr eventType[0] else: nil, len: csize_t(len(eventType))), message, resultVal)
 
 proc fcQPushButton_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
@@ -1210,7 +1210,7 @@ proc fcQPushButton_method_callback_hideEvent(self: pointer, event: pointer): voi
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   inst.hideEvent(slotval1)
 
-method nativeEvent*(self: VirtualQPushButton, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
+method nativeEvent*(self: VirtualQPushButton, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
   QPushButtonnativeEvent(self[], eventType, message, resultVal)
 proc fcQPushButton_method_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
   let inst = cast[VirtualQPushButton](fcQPushButton_vdata(self)[])
@@ -1578,7 +1578,7 @@ proc create*(T: type gen_qpushbutton_types.QPushButton,
   fcQPushButton_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qpushbutton_types.QPushButton,
-    text: string,
+    text: openArray[char],
     vtbl: ref QPushButtonVTable = nil): gen_qpushbutton_types.QPushButton =
   let vtbl = if vtbl == nil: new QPushButtonVTable else: vtbl
   GC_ref(vtbl)
@@ -1697,7 +1697,7 @@ proc create*(T: type gen_qpushbutton_types.QPushButton,
   fcQPushButton_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qpushbutton_types.QPushButton,
-    icon: gen_qicon_types.QIcon, text: string,
+    icon: gen_qicon_types.QIcon, text: openArray[char],
     vtbl: ref QPushButtonVTable = nil): gen_qpushbutton_types.QPushButton =
   let vtbl = if vtbl == nil: new QPushButtonVTable else: vtbl
   GC_ref(vtbl)
@@ -1816,7 +1816,7 @@ proc create*(T: type gen_qpushbutton_types.QPushButton,
   fcQPushButton_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qpushbutton_types.QPushButton,
-    text: string, parent: gen_qwidget_types.QWidget,
+    text: openArray[char], parent: gen_qwidget_types.QWidget,
     vtbl: ref QPushButtonVTable = nil): gen_qpushbutton_types.QPushButton =
   let vtbl = if vtbl == nil: new QPushButtonVTable else: vtbl
   GC_ref(vtbl)
@@ -1935,7 +1935,7 @@ proc create*(T: type gen_qpushbutton_types.QPushButton,
   fcQPushButton_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qpushbutton_types.QPushButton,
-    icon: gen_qicon_types.QIcon, text: string, parent: gen_qwidget_types.QWidget,
+    icon: gen_qicon_types.QIcon, text: openArray[char], parent: gen_qwidget_types.QWidget,
     vtbl: ref QPushButtonVTable = nil): gen_qpushbutton_types.QPushButton =
   let vtbl = if vtbl == nil: new QPushButtonVTable else: vtbl
   GC_ref(vtbl)
@@ -2120,40 +2120,46 @@ proc create*(T: type gen_qpushbutton_types.QPushButton,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQPushButton_new(addr(cQPushButton_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQPushButton_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qpushbutton_types.QPushButton,
     inst: VirtualQPushButton) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQPushButton_new2(addr(cQPushButton_mvtbl), csize_t(sizeof(pointer)))
   fcQPushButton_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qpushbutton_types.QPushButton,
-    text: string,
+    text: openArray[char],
     inst: VirtualQPushButton) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQPushButton_new3(addr(cQPushButton_mvtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
   fcQPushButton_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qpushbutton_types.QPushButton,
-    icon: gen_qicon_types.QIcon, text: string,
+    icon: gen_qicon_types.QIcon, text: openArray[char],
     inst: VirtualQPushButton) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQPushButton_new4(addr(cQPushButton_mvtbl), csize_t(sizeof(pointer)), icon.h, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
   fcQPushButton_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qpushbutton_types.QPushButton,
-    text: string, parent: gen_qwidget_types.QWidget,
+    text: openArray[char], parent: gen_qwidget_types.QWidget,
     inst: VirtualQPushButton) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQPushButton_new5(addr(cQPushButton_mvtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), parent.h)
   fcQPushButton_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qpushbutton_types.QPushButton,
-    icon: gen_qicon_types.QIcon, text: string, parent: gen_qwidget_types.QWidget,
+    icon: gen_qicon_types.QIcon, text: openArray[char], parent: gen_qwidget_types.QWidget,
     inst: VirtualQPushButton) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQPushButton_new6(addr(cQPushButton_mvtbl), csize_t(sizeof(pointer)), icon.h, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), parent.h)
   fcQPushButton_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qpushbutton_types.QPushButton): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQPushButton_staticMetaObject())

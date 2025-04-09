@@ -306,7 +306,7 @@ type QSliderdragLeaveEventProc* = proc(self: QSlider, event: gen_qevent_types.QD
 type QSliderdropEventProc* = proc(self: QSlider, event: gen_qevent_types.QDropEvent): void {.raises: [], gcsafe.}
 type QSlidershowEventProc* = proc(self: QSlider, event: gen_qevent_types.QShowEvent): void {.raises: [], gcsafe.}
 type QSliderhideEventProc* = proc(self: QSlider, event: gen_qevent_types.QHideEvent): void {.raises: [], gcsafe.}
-type QSlidernativeEventProc* = proc(self: QSlider, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
+type QSlidernativeEventProc* = proc(self: QSlider, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
 type QSlidermetricProc* = proc(self: QSlider, param1: cint): cint {.raises: [], gcsafe.}
 type QSliderinitPainterProc* = proc(self: QSlider, painter: gen_qpainter_types.QPainter): void {.raises: [], gcsafe.}
 type QSliderredirectedProc* = proc(self: QSlider, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.raises: [], gcsafe.}
@@ -742,7 +742,7 @@ proc fcQSlider_vtable_callback_hideEvent(self: pointer, event: pointer): void {.
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   vtbl[].hideEvent(self, slotval1)
 
-proc QSlidernativeEvent*(self: gen_qslider_types.QSlider, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool =
+proc QSlidernativeEvent*(self: gen_qslider_types.QSlider, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool =
   fcQSlider_virtualbase_nativeEvent(self.h, struct_miqt_string(data: if len(eventType) > 0: addr eventType[0] else: nil, len: csize_t(len(eventType))), message, resultVal)
 
 proc fcQSlider_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
@@ -1161,7 +1161,7 @@ proc fcQSlider_method_callback_hideEvent(self: pointer, event: pointer): void {.
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   inst.hideEvent(slotval1)
 
-method nativeEvent*(self: VirtualQSlider, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
+method nativeEvent*(self: VirtualQSlider, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
   QSlidernativeEvent(self[], eventType, message, resultVal)
 proc fcQSlider_method_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
   let inst = cast[VirtualQSlider](fcQSlider_vdata(self)[])
@@ -1821,12 +1821,14 @@ proc create*(T: type gen_qslider_types.QSlider,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQSlider_new(addr(cQSlider_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQSlider_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qslider_types.QSlider,
     inst: VirtualQSlider) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQSlider_new2(addr(cQSlider_mvtbl), csize_t(sizeof(pointer)))
   fcQSlider_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qslider_types.QSlider,
     orientation: cint,
@@ -1834,6 +1836,7 @@ proc create*(T: type gen_qslider_types.QSlider,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQSlider_new3(addr(cQSlider_mvtbl), csize_t(sizeof(pointer)), cint(orientation))
   fcQSlider_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qslider_types.QSlider,
     orientation: cint, parent: gen_qwidget_types.QWidget,
@@ -1841,6 +1844,7 @@ proc create*(T: type gen_qslider_types.QSlider,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQSlider_new4(addr(cQSlider_mvtbl), csize_t(sizeof(pointer)), cint(orientation), parent.h)
   fcQSlider_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qslider_types.QSlider): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQSlider_staticMetaObject())

@@ -274,19 +274,19 @@ proc tr*(_: type gen_qmenu_types.QMenu, s: cstring): string =
 proc addMenu*(self: gen_qmenu_types.QMenu, menu: gen_qmenu_types.QMenu): gen_qaction_types.QAction =
   gen_qaction_types.QAction(h: fcQMenu_addMenu(self.h, menu.h), owned: false)
 
-proc addMenu*(self: gen_qmenu_types.QMenu, title: string): gen_qmenu_types.QMenu =
+proc addMenu*(self: gen_qmenu_types.QMenu, title: openArray[char]): gen_qmenu_types.QMenu =
   gen_qmenu_types.QMenu(h: fcQMenu_addMenuWithTitle(self.h, struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title)))), owned: false)
 
-proc addMenu*(self: gen_qmenu_types.QMenu, icon: gen_qicon_types.QIcon, title: string): gen_qmenu_types.QMenu =
+proc addMenu*(self: gen_qmenu_types.QMenu, icon: gen_qicon_types.QIcon, title: openArray[char]): gen_qmenu_types.QMenu =
   gen_qmenu_types.QMenu(h: fcQMenu_addMenu2(self.h, icon.h, struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title)))), owned: false)
 
 proc addSeparator*(self: gen_qmenu_types.QMenu): gen_qaction_types.QAction =
   gen_qaction_types.QAction(h: fcQMenu_addSeparator(self.h), owned: false)
 
-proc addSection*(self: gen_qmenu_types.QMenu, text: string): gen_qaction_types.QAction =
+proc addSection*(self: gen_qmenu_types.QMenu, text: openArray[char]): gen_qaction_types.QAction =
   gen_qaction_types.QAction(h: fcQMenu_addSection(self.h, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))), owned: false)
 
-proc addSection*(self: gen_qmenu_types.QMenu, icon: gen_qicon_types.QIcon, text: string): gen_qaction_types.QAction =
+proc addSection*(self: gen_qmenu_types.QMenu, icon: gen_qicon_types.QIcon, text: openArray[char]): gen_qaction_types.QAction =
   gen_qaction_types.QAction(h: fcQMenu_addSection2(self.h, icon.h, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))), owned: false)
 
 proc insertMenu*(self: gen_qmenu_types.QMenu, before: gen_qaction_types.QAction, menu: gen_qmenu_types.QMenu): gen_qaction_types.QAction =
@@ -295,10 +295,10 @@ proc insertMenu*(self: gen_qmenu_types.QMenu, before: gen_qaction_types.QAction,
 proc insertSeparator*(self: gen_qmenu_types.QMenu, before: gen_qaction_types.QAction): gen_qaction_types.QAction =
   gen_qaction_types.QAction(h: fcQMenu_insertSeparator(self.h, before.h), owned: false)
 
-proc insertSection*(self: gen_qmenu_types.QMenu, before: gen_qaction_types.QAction, text: string): gen_qaction_types.QAction =
+proc insertSection*(self: gen_qmenu_types.QMenu, before: gen_qaction_types.QAction, text: openArray[char]): gen_qaction_types.QAction =
   gen_qaction_types.QAction(h: fcQMenu_insertSection(self.h, before.h, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))), owned: false)
 
-proc insertSection*(self: gen_qmenu_types.QMenu, before: gen_qaction_types.QAction, icon: gen_qicon_types.QIcon, text: string): gen_qaction_types.QAction =
+proc insertSection*(self: gen_qmenu_types.QMenu, before: gen_qaction_types.QAction, icon: gen_qicon_types.QIcon, text: openArray[char]): gen_qaction_types.QAction =
   gen_qaction_types.QAction(h: fcQMenu_insertSection2(self.h, before.h, icon.h, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))), owned: false)
 
 proc isEmpty*(self: gen_qmenu_types.QMenu): bool =
@@ -346,7 +346,7 @@ proc exec*(self: gen_qmenu_types.QMenu): gen_qaction_types.QAction =
 proc exec*(self: gen_qmenu_types.QMenu, pos: gen_qpoint_types.QPoint): gen_qaction_types.QAction =
   gen_qaction_types.QAction(h: fcQMenu_execWithPos(self.h, pos.h), owned: false)
 
-proc exec*(_: type gen_qmenu_types.QMenu, actions: seq[gen_qaction_types.QAction], pos: gen_qpoint_types.QPoint): gen_qaction_types.QAction =
+proc exec*(_: type gen_qmenu_types.QMenu, actions: openArray[gen_qaction_types.QAction], pos: gen_qpoint_types.QPoint): gen_qaction_types.QAction =
   var actions_CArray = newSeq[pointer](len(actions))
   for i in 0..<len(actions):
     actions_CArray[i] = actions[i].h
@@ -374,7 +374,7 @@ proc title*(self: gen_qmenu_types.QMenu): string =
   c_free(v_ms.data)
   vx_ret
 
-proc setTitle*(self: gen_qmenu_types.QMenu, title: string): void =
+proc setTitle*(self: gen_qmenu_types.QMenu, title: openArray[char]): void =
   fcQMenu_setTitle(self.h, struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))))
 
 proc icon*(self: gen_qmenu_types.QMenu): gen_qicon_types.QIcon =
@@ -492,14 +492,14 @@ proc popup*(self: gen_qmenu_types.QMenu, pos: gen_qpoint_types.QPoint, at: gen_q
 proc exec*(self: gen_qmenu_types.QMenu, pos: gen_qpoint_types.QPoint, at: gen_qaction_types.QAction): gen_qaction_types.QAction =
   gen_qaction_types.QAction(h: fcQMenu_exec22(self.h, pos.h, at.h), owned: false)
 
-proc exec*(_: type gen_qmenu_types.QMenu, actions: seq[gen_qaction_types.QAction], pos: gen_qpoint_types.QPoint, at: gen_qaction_types.QAction): gen_qaction_types.QAction =
+proc exec*(_: type gen_qmenu_types.QMenu, actions: openArray[gen_qaction_types.QAction], pos: gen_qpoint_types.QPoint, at: gen_qaction_types.QAction): gen_qaction_types.QAction =
   var actions_CArray = newSeq[pointer](len(actions))
   for i in 0..<len(actions):
     actions_CArray[i] = actions[i].h
 
   gen_qaction_types.QAction(h: fcQMenu_exec3(struct_miqt_array(len: csize_t(len(actions)), data: if len(actions) == 0: nil else: addr(actions_CArray[0])), pos.h, at.h), owned: false)
 
-proc exec*(_: type gen_qmenu_types.QMenu, actions: seq[gen_qaction_types.QAction], pos: gen_qpoint_types.QPoint, at: gen_qaction_types.QAction, parent: gen_qwidget_types.QWidget): gen_qaction_types.QAction =
+proc exec*(_: type gen_qmenu_types.QMenu, actions: openArray[gen_qaction_types.QAction], pos: gen_qpoint_types.QPoint, at: gen_qaction_types.QAction, parent: gen_qwidget_types.QWidget): gen_qaction_types.QAction =
   var actions_CArray = newSeq[pointer](len(actions))
   for i in 0..<len(actions):
     actions_CArray[i] = actions[i].h
@@ -545,7 +545,7 @@ type QMenudragMoveEventProc* = proc(self: QMenu, event: gen_qevent_types.QDragMo
 type QMenudragLeaveEventProc* = proc(self: QMenu, event: gen_qevent_types.QDragLeaveEvent): void {.raises: [], gcsafe.}
 type QMenudropEventProc* = proc(self: QMenu, event: gen_qevent_types.QDropEvent): void {.raises: [], gcsafe.}
 type QMenushowEventProc* = proc(self: QMenu, event: gen_qevent_types.QShowEvent): void {.raises: [], gcsafe.}
-type QMenunativeEventProc* = proc(self: QMenu, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
+type QMenunativeEventProc* = proc(self: QMenu, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
 type QMenumetricProc* = proc(self: QMenu, param1: cint): cint {.raises: [], gcsafe.}
 type QMenuinitPainterProc* = proc(self: QMenu, painter: gen_qpainter_types.QPainter): void {.raises: [], gcsafe.}
 type QMenuredirectedProc* = proc(self: QMenu, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.raises: [], gcsafe.}
@@ -981,7 +981,7 @@ proc fcQMenu_vtable_callback_showEvent(self: pointer, event: pointer): void {.cd
   let slotval1 = gen_qevent_types.QShowEvent(h: event, owned: false)
   vtbl[].showEvent(self, slotval1)
 
-proc QMenunativeEvent*(self: gen_qmenu_types.QMenu, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool =
+proc QMenunativeEvent*(self: gen_qmenu_types.QMenu, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool =
   fcQMenu_virtualbase_nativeEvent(self.h, struct_miqt_string(data: if len(eventType) > 0: addr eventType[0] else: nil, len: csize_t(len(eventType))), message, resultVal)
 
 proc fcQMenu_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
@@ -1392,7 +1392,7 @@ proc fcQMenu_method_callback_showEvent(self: pointer, event: pointer): void {.cd
   let slotval1 = gen_qevent_types.QShowEvent(h: event, owned: false)
   inst.showEvent(slotval1)
 
-method nativeEvent*(self: VirtualQMenu, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
+method nativeEvent*(self: VirtualQMenu, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
   QMenunativeEvent(self[], eventType, message, resultVal)
 proc fcQMenu_method_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
   let inst = cast[VirtualQMenu](fcQMenu_vdata(self)[])
@@ -1743,7 +1743,7 @@ proc create*(T: type gen_qmenu_types.QMenu,
   fcQMenu_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qmenu_types.QMenu,
-    title: string,
+    title: openArray[char],
     vtbl: ref QMenuVTable = nil): gen_qmenu_types.QMenu =
   let vtbl = if vtbl == nil: new QMenuVTable else: vtbl
   GC_ref(vtbl)
@@ -1856,7 +1856,7 @@ proc create*(T: type gen_qmenu_types.QMenu,
   fcQMenu_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qmenu_types.QMenu,
-    title: string, parent: gen_qwidget_types.QWidget,
+    title: openArray[char], parent: gen_qwidget_types.QWidget,
     vtbl: ref QMenuVTable = nil): gen_qmenu_types.QMenu =
   let vtbl = if vtbl == nil: new QMenuVTable else: vtbl
   GC_ref(vtbl)
@@ -2032,26 +2032,30 @@ proc create*(T: type gen_qmenu_types.QMenu,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQMenu_new(addr(cQMenu_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQMenu_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qmenu_types.QMenu,
     inst: VirtualQMenu) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQMenu_new2(addr(cQMenu_mvtbl), csize_t(sizeof(pointer)))
   fcQMenu_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qmenu_types.QMenu,
-    title: string,
+    title: openArray[char],
     inst: VirtualQMenu) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQMenu_new3(addr(cQMenu_mvtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))))
   fcQMenu_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qmenu_types.QMenu,
-    title: string, parent: gen_qwidget_types.QWidget,
+    title: openArray[char], parent: gen_qwidget_types.QWidget,
     inst: VirtualQMenu) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQMenu_new4(addr(cQMenu_mvtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), parent.h)
   fcQMenu_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qmenu_types.QMenu): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQMenu_staticMetaObject())

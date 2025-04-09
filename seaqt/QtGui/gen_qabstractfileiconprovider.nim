@@ -246,4 +246,5 @@ proc create*(T: type gen_qabstractfileiconprovider_types.QAbstractFileIconProvid
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQAbstractFileIconProvider_new(addr(cQAbstractFileIconProvider_mvtbl), csize_t(sizeof(pointer)))
   fcQAbstractFileIconProvider_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 

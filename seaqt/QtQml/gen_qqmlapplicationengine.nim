@@ -139,7 +139,7 @@ proc rootObjects*(self: gen_qqmlapplicationengine_types.QQmlApplicationEngine): 
 proc load*(self: gen_qqmlapplicationengine_types.QQmlApplicationEngine, url: gen_qurl_types.QUrl): void =
   fcQQmlApplicationEngine_load(self.h, url.h)
 
-proc load*(self: gen_qqmlapplicationengine_types.QQmlApplicationEngine, filePath: string): void =
+proc load*(self: gen_qqmlapplicationengine_types.QQmlApplicationEngine, filePath: openArray[char]): void =
   fcQQmlApplicationEngine_loadWithFilePath(self.h, struct_miqt_string(data: if len(filePath) > 0: addr filePath[0] else: nil, len: csize_t(len(filePath))))
 
 proc setInitialProperties*(self: gen_qqmlapplicationengine_types.QQmlApplicationEngine, initialProperties: Table[string,gen_qvariant_types.QVariant]): void =
@@ -156,14 +156,14 @@ proc setInitialProperties*(self: gen_qqmlapplicationengine_types.QQmlApplication
 
   fcQQmlApplicationEngine_setInitialProperties(self.h, struct_miqt_map(len: csize_t(len(initialProperties)),keys: if len(initialProperties) == 0: nil else: addr(initialProperties_Keys_CArray[0]), values: if len(initialProperties) == 0: nil else: addr(initialProperties_Values_CArray[0]),))
 
-proc setExtraFileSelectors*(self: gen_qqmlapplicationengine_types.QQmlApplicationEngine, extraFileSelectors: seq[string]): void =
+proc setExtraFileSelectors*(self: gen_qqmlapplicationengine_types.QQmlApplicationEngine, extraFileSelectors: openArray[string]): void =
   var extraFileSelectors_CArray = newSeq[struct_miqt_string](len(extraFileSelectors))
   for i in 0..<len(extraFileSelectors):
     extraFileSelectors_CArray[i] = struct_miqt_string(data: if len(extraFileSelectors[i]) > 0: addr extraFileSelectors[i][0] else: nil, len: csize_t(len(extraFileSelectors[i])))
 
   fcQQmlApplicationEngine_setExtraFileSelectors(self.h, struct_miqt_array(len: csize_t(len(extraFileSelectors)), data: if len(extraFileSelectors) == 0: nil else: addr(extraFileSelectors_CArray[0])))
 
-proc loadData*(self: gen_qqmlapplicationengine_types.QQmlApplicationEngine, data: seq[byte]): void =
+proc loadData*(self: gen_qqmlapplicationengine_types.QQmlApplicationEngine, data: openArray[byte]): void =
   fcQQmlApplicationEngine_loadData(self.h, struct_miqt_string(data: if len(data) > 0: addr data[0] else: nil, len: csize_t(len(data))))
 
 proc objectCreated*(self: gen_qqmlapplicationengine_types.QQmlApplicationEngine, objectVal: gen_qobject_types.QObject, url: gen_qurl_types.QUrl): void =
@@ -220,7 +220,7 @@ proc tr*(_: type gen_qqmlapplicationengine_types.QQmlApplicationEngine, s: cstri
   c_free(v_ms.data)
   vx_ret
 
-proc loadData*(self: gen_qqmlapplicationengine_types.QQmlApplicationEngine, data: seq[byte], url: gen_qurl_types.QUrl): void =
+proc loadData*(self: gen_qqmlapplicationengine_types.QQmlApplicationEngine, data: openArray[byte], url: gen_qurl_types.QUrl): void =
   fcQQmlApplicationEngine_loadData2(self.h, struct_miqt_string(data: if len(data) > 0: addr data[0] else: nil, len: csize_t(len(data))), url.h)
 
 type QQmlApplicationEnginemetaObjectProc* = proc(self: QQmlApplicationEngine): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
@@ -498,7 +498,7 @@ proc create*(T: type gen_qqmlapplicationengine_types.QQmlApplicationEngine,
   fcQQmlApplicationEngine_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qqmlapplicationengine_types.QQmlApplicationEngine,
-    filePath: string,
+    filePath: openArray[char],
     vtbl: ref QQmlApplicationEngineVTable = nil): gen_qqmlapplicationengine_types.QQmlApplicationEngine =
   let vtbl = if vtbl == nil: new QQmlApplicationEngineVTable else: vtbl
   GC_ref(vtbl)
@@ -591,7 +591,7 @@ proc create*(T: type gen_qqmlapplicationengine_types.QQmlApplicationEngine,
   fcQQmlApplicationEngine_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qqmlapplicationengine_types.QQmlApplicationEngine,
-    filePath: string, parent: gen_qobject_types.QObject,
+    filePath: openArray[char], parent: gen_qobject_types.QObject,
     vtbl: ref QQmlApplicationEngineVTable = nil): gen_qqmlapplicationengine_types.QQmlApplicationEngine =
   let vtbl = if vtbl == nil: new QQmlApplicationEngineVTable else: vtbl
   GC_ref(vtbl)
@@ -643,6 +643,7 @@ proc create*(T: type gen_qqmlapplicationengine_types.QQmlApplicationEngine,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQQmlApplicationEngine_new(addr(cQQmlApplicationEngine_mvtbl), csize_t(sizeof(pointer)))
   fcQQmlApplicationEngine_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qqmlapplicationengine_types.QQmlApplicationEngine,
     url: gen_qurl_types.QUrl,
@@ -650,13 +651,15 @@ proc create*(T: type gen_qqmlapplicationengine_types.QQmlApplicationEngine,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQQmlApplicationEngine_new2(addr(cQQmlApplicationEngine_mvtbl), csize_t(sizeof(pointer)), url.h)
   fcQQmlApplicationEngine_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qqmlapplicationengine_types.QQmlApplicationEngine,
-    filePath: string,
+    filePath: openArray[char],
     inst: VirtualQQmlApplicationEngine) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQQmlApplicationEngine_new3(addr(cQQmlApplicationEngine_mvtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(filePath) > 0: addr filePath[0] else: nil, len: csize_t(len(filePath))))
   fcQQmlApplicationEngine_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qqmlapplicationengine_types.QQmlApplicationEngine,
     parent: gen_qobject_types.QObject,
@@ -664,6 +667,7 @@ proc create*(T: type gen_qqmlapplicationengine_types.QQmlApplicationEngine,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQQmlApplicationEngine_new4(addr(cQQmlApplicationEngine_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQQmlApplicationEngine_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qqmlapplicationengine_types.QQmlApplicationEngine,
     url: gen_qurl_types.QUrl, parent: gen_qobject_types.QObject,
@@ -671,13 +675,15 @@ proc create*(T: type gen_qqmlapplicationengine_types.QQmlApplicationEngine,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQQmlApplicationEngine_new5(addr(cQQmlApplicationEngine_mvtbl), csize_t(sizeof(pointer)), url.h, parent.h)
   fcQQmlApplicationEngine_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qqmlapplicationengine_types.QQmlApplicationEngine,
-    filePath: string, parent: gen_qobject_types.QObject,
+    filePath: openArray[char], parent: gen_qobject_types.QObject,
     inst: VirtualQQmlApplicationEngine) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQQmlApplicationEngine_new6(addr(cQQmlApplicationEngine_mvtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(filePath) > 0: addr filePath[0] else: nil, len: csize_t(len(filePath))), parent.h)
   fcQQmlApplicationEngine_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qqmlapplicationengine_types.QQmlApplicationEngine): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQQmlApplicationEngine_staticMetaObject())

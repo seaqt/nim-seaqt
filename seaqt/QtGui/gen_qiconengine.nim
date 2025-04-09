@@ -117,7 +117,7 @@ proc pixmap*(self: gen_qiconengine_types.QIconEngine, size: gen_qsize_types.QSiz
 proc addPixmap*(self: gen_qiconengine_types.QIconEngine, pixmap: gen_qpixmap_types.QPixmap, mode: cint, state: cint): void =
   fcQIconEngine_addPixmap(self.h, pixmap.h, cint(mode), cint(state))
 
-proc addFile*(self: gen_qiconengine_types.QIconEngine, fileName: string, size: gen_qsize_types.QSize, mode: cint, state: cint): void =
+proc addFile*(self: gen_qiconengine_types.QIconEngine, fileName: openArray[char], size: gen_qsize_types.QSize, mode: cint, state: cint): void =
   fcQIconEngine_addFile(self.h, struct_miqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))), size.h, cint(mode), cint(state))
 
 proc key*(self: gen_qiconengine_types.QIconEngine): string =
@@ -163,7 +163,7 @@ type QIconEnginepaintProc* = proc(self: QIconEngine, painter: gen_qpainter_types
 type QIconEngineactualSizeProc* = proc(self: QIconEngine, size: gen_qsize_types.QSize, mode: cint, state: cint): gen_qsize_types.QSize {.raises: [], gcsafe.}
 type QIconEnginepixmapProc* = proc(self: QIconEngine, size: gen_qsize_types.QSize, mode: cint, state: cint): gen_qpixmap_types.QPixmap {.raises: [], gcsafe.}
 type QIconEngineaddPixmapProc* = proc(self: QIconEngine, pixmap: gen_qpixmap_types.QPixmap, mode: cint, state: cint): void {.raises: [], gcsafe.}
-type QIconEngineaddFileProc* = proc(self: QIconEngine, fileName: string, size: gen_qsize_types.QSize, mode: cint, state: cint): void {.raises: [], gcsafe.}
+type QIconEngineaddFileProc* = proc(self: QIconEngine, fileName: openArray[char], size: gen_qsize_types.QSize, mode: cint, state: cint): void {.raises: [], gcsafe.}
 type QIconEnginekeyProc* = proc(self: QIconEngine): string {.raises: [], gcsafe.}
 type QIconEnginecloneProc* = proc(self: QIconEngine): gen_qiconengine_types.QIconEngine {.raises: [], gcsafe.}
 type QIconEnginereadProc* = proc(self: QIconEngine, inVal: gen_qdatastream_types.QDataStream): bool {.raises: [], gcsafe.}
@@ -239,7 +239,7 @@ proc fcQIconEngine_vtable_callback_addPixmap(self: pointer, pixmap: pointer, mod
   let slotval3 = cint(state)
   vtbl[].addPixmap(self, slotval1, slotval2, slotval3)
 
-proc QIconEngineaddFile*(self: gen_qiconengine_types.QIconEngine, fileName: string, size: gen_qsize_types.QSize, mode: cint, state: cint): void =
+proc QIconEngineaddFile*(self: gen_qiconengine_types.QIconEngine, fileName: openArray[char], size: gen_qsize_types.QSize, mode: cint, state: cint): void =
   fcQIconEngine_virtualbase_addFile(self.h, struct_miqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))), size.h, cint(mode), cint(state))
 
 proc fcQIconEngine_vtable_callback_addFile(self: pointer, fileName: struct_miqt_string, size: pointer, mode: cint, state: cint): void {.cdecl.} =
@@ -411,7 +411,7 @@ proc fcQIconEngine_method_callback_addPixmap(self: pointer, pixmap: pointer, mod
   let slotval3 = cint(state)
   inst.addPixmap(slotval1, slotval2, slotval3)
 
-method addFile*(self: VirtualQIconEngine, fileName: string, size: gen_qsize_types.QSize, mode: cint, state: cint): void {.base.} =
+method addFile*(self: VirtualQIconEngine, fileName: openArray[char], size: gen_qsize_types.QSize, mode: cint, state: cint): void {.base.} =
   QIconEngineaddFile(self[], fileName, size, mode, state)
 proc fcQIconEngine_method_callback_addFile(self: pointer, fileName: struct_miqt_string, size: pointer, mode: cint, state: cint): void {.cdecl.} =
   let inst = cast[VirtualQIconEngine](fcQIconEngine_vdata(self)[])
@@ -564,6 +564,7 @@ proc create*(T: type gen_qiconengine_types.QIconEngine,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQIconEngine_new(addr(cQIconEngine_mvtbl), csize_t(sizeof(pointer)))
   fcQIconEngine_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc operatorAssign*(self: gen_qiconengine_types.QIconEngineScaledPixmapArgument, param1: gen_qiconengine_types.QIconEngineScaledPixmapArgument): void =
   fcQIconEngineScaledPixmapArgument_operatorAssign(self.h, param1.h)

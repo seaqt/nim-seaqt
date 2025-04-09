@@ -43,12 +43,10 @@ import ./gen_qdebug_types
 export gen_qdebug_types
 
 import
-  ./gen_qbytearrayview_types,
   ./gen_qchar_types,
   ./gen_qiodevice_types,
   ./gen_qiodevicebase
 export
-  gen_qbytearrayview_types,
   gen_qchar_types,
   gen_qiodevice_types,
   gen_qiodevicebase
@@ -87,7 +85,7 @@ proc fcQDebug_operatorShiftLeftWithDouble(self: pointer, t: float64): pointer {.
 proc fcQDebug_operatorShiftLeft2(self: pointer, t: cstring): pointer {.importc: "QDebug_operatorShiftLeft2".}
 proc fcQDebug_operatorShiftLeftWithQString(self: pointer, t: struct_miqt_string): pointer {.importc: "QDebug_operatorShiftLeftWithQString".}
 proc fcQDebug_operatorShiftLeftWithQByteArray(self: pointer, t: struct_miqt_string): pointer {.importc: "QDebug_operatorShiftLeftWithQByteArray".}
-proc fcQDebug_operatorShiftLeftWithQByteArrayView(self: pointer, t: pointer): pointer {.importc: "QDebug_operatorShiftLeftWithQByteArrayView".}
+proc fcQDebug_operatorShiftLeftWithQByteArrayView(self: pointer, t: struct_miqt_string): pointer {.importc: "QDebug_operatorShiftLeftWithQByteArrayView".}
 proc fcQDebug_operatorShiftLeftWithVoid(self: pointer, t: pointer): pointer {.importc: "QDebug_operatorShiftLeftWithVoid".}
 proc fcQDebug_maybeQuote1(self: pointer, c: cchar): pointer {.importc: "QDebug_maybeQuote1".}
 proc fcQDebug_new(device: pointer): ptr cQDebug {.importc: "QDebug_new".}
@@ -186,14 +184,14 @@ proc operatorShiftLeft*(self: gen_qdebug_types.QDebug, t: float64): gen_qdebug_t
 proc operatorShiftLeft*(self: gen_qdebug_types.QDebug, t: cstring): gen_qdebug_types.QDebug =
   gen_qdebug_types.QDebug(h: fcQDebug_operatorShiftLeft2(self.h, t), owned: false)
 
-proc operatorShiftLeft*(self: gen_qdebug_types.QDebug, t: string): gen_qdebug_types.QDebug =
+proc operatorShiftLeft*(self: gen_qdebug_types.QDebug, t: openArray[char]): gen_qdebug_types.QDebug =
   gen_qdebug_types.QDebug(h: fcQDebug_operatorShiftLeftWithQString(self.h, struct_miqt_string(data: if len(t) > 0: addr t[0] else: nil, len: csize_t(len(t)))), owned: false)
 
-proc operatorShiftLeft*(self: gen_qdebug_types.QDebug, t: seq[byte]): gen_qdebug_types.QDebug =
+proc operatorShiftLeft*(self: gen_qdebug_types.QDebug, t: openArray[byte]): gen_qdebug_types.QDebug =
   gen_qdebug_types.QDebug(h: fcQDebug_operatorShiftLeftWithQByteArray(self.h, struct_miqt_string(data: if len(t) > 0: addr t[0] else: nil, len: csize_t(len(t)))), owned: false)
 
-proc operatorShiftLeft*(self: gen_qdebug_types.QDebug, t: gen_qbytearrayview_types.QByteArrayView): gen_qdebug_types.QDebug =
-  gen_qdebug_types.QDebug(h: fcQDebug_operatorShiftLeftWithQByteArrayView(self.h, t.h), owned: false)
+proc operatorShiftLeft2*(self: gen_qdebug_types.QDebug, t: openArray[byte]): gen_qdebug_types.QDebug =
+  gen_qdebug_types.QDebug(h: fcQDebug_operatorShiftLeftWithQByteArrayView(self.h, struct_miqt_string(data: if len(t) > 0: addr t[0] else: nil, len: csize_t(len(t)))), owned: false)
 
 proc operatorShiftLeft*(self: gen_qdebug_types.QDebug, t: pointer): gen_qdebug_types.QDebug =
   gen_qdebug_types.QDebug(h: fcQDebug_operatorShiftLeftWithVoid(self.h, t), owned: false)

@@ -653,6 +653,7 @@ proc create*(T: type gen_qaudioengine_types.QAudioEngine,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQAudioEngine_new(addr(cQAudioEngine_mvtbl), csize_t(sizeof(pointer)))
   fcQAudioEngine_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qaudioengine_types.QAudioEngine,
     parent: gen_qobject_types.QObject,
@@ -660,6 +661,7 @@ proc create*(T: type gen_qaudioengine_types.QAudioEngine,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQAudioEngine_new2(addr(cQAudioEngine_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQAudioEngine_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qaudioengine_types.QAudioEngine,
     sampleRate: cint,
@@ -667,6 +669,7 @@ proc create*(T: type gen_qaudioengine_types.QAudioEngine,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQAudioEngine_new3(addr(cQAudioEngine_mvtbl), csize_t(sizeof(pointer)), sampleRate)
   fcQAudioEngine_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qaudioengine_types.QAudioEngine,
     sampleRate: cint, parent: gen_qobject_types.QObject,
@@ -674,6 +677,7 @@ proc create*(T: type gen_qaudioengine_types.QAudioEngine,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQAudioEngine_new4(addr(cQAudioEngine_mvtbl), csize_t(sizeof(pointer)), sampleRate, parent.h)
   fcQAudioEngine_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qaudioengine_types.QAudioEngine): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQAudioEngine_staticMetaObject())

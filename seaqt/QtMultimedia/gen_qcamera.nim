@@ -499,10 +499,10 @@ proc onerrorChanged*(self: gen_qcamera_types.QCamera, slot: QCameraerrorChangedS
   GC_ref(tmp)
   fcQCamera_connect_errorChanged(self.h, cast[int](addr tmp[]), fcQCamera_slot_callback_errorChanged, fcQCamera_slot_callback_errorChanged_release)
 
-proc errorOccurred*(self: gen_qcamera_types.QCamera, error: cint, errorString: string): void =
+proc errorOccurred*(self: gen_qcamera_types.QCamera, error: cint, errorString: openArray[char]): void =
   fcQCamera_errorOccurred(self.h, cint(error), struct_miqt_string(data: if len(errorString) > 0: addr errorString[0] else: nil, len: csize_t(len(errorString))))
 
-type QCameraerrorOccurredSlot* = proc(error: cint, errorString: string)
+type QCameraerrorOccurredSlot* = proc(error: cint, errorString: openArray[char])
 proc fcQCamera_slot_callback_errorOccurred(slot: int, error: cint, errorString: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QCameraerrorOccurredSlot](cast[pointer](slot))
   let slotval1 = cint(error)
@@ -1426,6 +1426,7 @@ proc create*(T: type gen_qcamera_types.QCamera,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQCamera_new(addr(cQCamera_mvtbl), csize_t(sizeof(pointer)))
   fcQCamera_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qcamera_types.QCamera,
     cameraDevice: gen_qcameradevice_types.QCameraDevice,
@@ -1433,6 +1434,7 @@ proc create*(T: type gen_qcamera_types.QCamera,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQCamera_new2(addr(cQCamera_mvtbl), csize_t(sizeof(pointer)), cameraDevice.h)
   fcQCamera_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qcamera_types.QCamera,
     position: cint,
@@ -1440,6 +1442,7 @@ proc create*(T: type gen_qcamera_types.QCamera,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQCamera_new3(addr(cQCamera_mvtbl), csize_t(sizeof(pointer)), cint(position))
   fcQCamera_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qcamera_types.QCamera,
     parent: gen_qobject_types.QObject,
@@ -1447,6 +1450,7 @@ proc create*(T: type gen_qcamera_types.QCamera,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQCamera_new4(addr(cQCamera_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQCamera_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qcamera_types.QCamera,
     cameraDevice: gen_qcameradevice_types.QCameraDevice, parent: gen_qobject_types.QObject,
@@ -1454,6 +1458,7 @@ proc create*(T: type gen_qcamera_types.QCamera,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQCamera_new5(addr(cQCamera_mvtbl), csize_t(sizeof(pointer)), cameraDevice.h, parent.h)
   fcQCamera_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qcamera_types.QCamera,
     position: cint, parent: gen_qobject_types.QObject,
@@ -1461,6 +1466,7 @@ proc create*(T: type gen_qcamera_types.QCamera,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQCamera_new6(addr(cQCamera_mvtbl), csize_t(sizeof(pointer)), cint(position), parent.h)
   fcQCamera_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qcamera_types.QCamera): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQCamera_staticMetaObject())

@@ -307,7 +307,7 @@ proc write*(self: gen_qiodevice_types.QIODevice, data: cstring, len: clonglong):
 proc write*(self: gen_qiodevice_types.QIODevice, data: cstring): clonglong =
   fcQIODevice_writeWithData(self.h, data)
 
-proc write*(self: gen_qiodevice_types.QIODevice, data: seq[byte]): clonglong =
+proc write*(self: gen_qiodevice_types.QIODevice, data: openArray[byte]): clonglong =
   fcQIODevice_write2(self.h, struct_miqt_string(data: if len(data) > 0: addr data[0] else: nil, len: csize_t(len(data))))
 
 proc peek*(self: gen_qiodevice_types.QIODevice, data: cstring, maxlen: clonglong): clonglong =
@@ -1001,7 +1001,7 @@ proc fcQIODevice_method_callback_disconnectNotify(self: pointer, signal: pointer
 proc setOpenMode*(self: gen_qiodevice_types.QIODevice, openMode: cint): void =
   fcQIODevice_protectedbase_setOpenMode(self.h, cint(openMode))
 
-proc setErrorString*(self: gen_qiodevice_types.QIODevice, errorString: string): void =
+proc setErrorString*(self: gen_qiodevice_types.QIODevice, errorString: openArray[char]): void =
   fcQIODevice_protectedbase_setErrorString(self.h, struct_miqt_string(data: if len(errorString) > 0: addr errorString[0] else: nil, len: csize_t(len(errorString))))
 
 proc sender*(self: gen_qiodevice_types.QIODevice): gen_qobject_types.QObject =
@@ -1184,6 +1184,7 @@ proc create*(T: type gen_qiodevice_types.QIODevice,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQIODevice_new(addr(cQIODevice_mvtbl), csize_t(sizeof(pointer)))
   fcQIODevice_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qiodevice_types.QIODevice,
     parent: gen_qobject_types.QObject,
@@ -1191,6 +1192,7 @@ proc create*(T: type gen_qiodevice_types.QIODevice,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQIODevice_new2(addr(cQIODevice_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQIODevice_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qiodevice_types.QIODevice): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQIODevice_staticMetaObject())

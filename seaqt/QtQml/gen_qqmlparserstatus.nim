@@ -113,4 +113,5 @@ proc create*(T: type gen_qqmlparserstatus_types.QQmlParserStatus,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQQmlParserStatus_new(addr(cQQmlParserStatus_mvtbl), csize_t(sizeof(pointer)))
   fcQQmlParserStatus_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 

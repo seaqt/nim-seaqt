@@ -1251,12 +1251,14 @@ proc create*(T: type gen_qgridlayout_types.QGridLayout,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQGridLayout_new(addr(cQGridLayout_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQGridLayout_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qgridlayout_types.QGridLayout,
     inst: VirtualQGridLayout) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQGridLayout_new2(addr(cQGridLayout_mvtbl), csize_t(sizeof(pointer)))
   fcQGridLayout_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qgridlayout_types.QGridLayout): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQGridLayout_staticMetaObject())

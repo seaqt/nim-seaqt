@@ -102,4 +102,5 @@ proc create*(T: type gen_qqmlpropertyvaluesource_types.QQmlPropertyValueSource,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQQmlPropertyValueSource_new(addr(cQQmlPropertyValueSource_mvtbl), csize_t(sizeof(pointer)))
   fcQQmlPropertyValueSource_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 

@@ -838,6 +838,7 @@ proc create*(T: type gen_qgraphicseffect_types.QGraphicsEffect,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQGraphicsEffect_new(addr(cQGraphicsEffect_mvtbl), csize_t(sizeof(pointer)))
   fcQGraphicsEffect_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qgraphicseffect_types.QGraphicsEffect,
     parent: gen_qobject_types.QObject,
@@ -845,6 +846,7 @@ proc create*(T: type gen_qgraphicseffect_types.QGraphicsEffect,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQGraphicsEffect_new2(addr(cQGraphicsEffect_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQGraphicsEffect_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qgraphicseffect_types.QGraphicsEffect): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQGraphicsEffect_staticMetaObject())
@@ -1312,6 +1314,7 @@ proc create*(T: type gen_qgraphicseffect_types.QGraphicsColorizeEffect,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQGraphicsColorizeEffect_new(addr(cQGraphicsColorizeEffect_mvtbl), csize_t(sizeof(pointer)))
   fcQGraphicsColorizeEffect_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qgraphicseffect_types.QGraphicsColorizeEffect,
     parent: gen_qobject_types.QObject,
@@ -1319,6 +1322,7 @@ proc create*(T: type gen_qgraphicseffect_types.QGraphicsColorizeEffect,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQGraphicsColorizeEffect_new2(addr(cQGraphicsColorizeEffect_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQGraphicsColorizeEffect_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qgraphicseffect_types.QGraphicsColorizeEffect): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQGraphicsColorizeEffect_staticMetaObject())
@@ -1789,6 +1793,7 @@ proc create*(T: type gen_qgraphicseffect_types.QGraphicsBlurEffect,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQGraphicsBlurEffect_new(addr(cQGraphicsBlurEffect_mvtbl), csize_t(sizeof(pointer)))
   fcQGraphicsBlurEffect_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qgraphicseffect_types.QGraphicsBlurEffect,
     parent: gen_qobject_types.QObject,
@@ -1796,6 +1801,7 @@ proc create*(T: type gen_qgraphicseffect_types.QGraphicsBlurEffect,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQGraphicsBlurEffect_new2(addr(cQGraphicsBlurEffect_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQGraphicsBlurEffect_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qgraphicseffect_types.QGraphicsBlurEffect): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQGraphicsBlurEffect_staticMetaObject())
@@ -2310,6 +2316,7 @@ proc create*(T: type gen_qgraphicseffect_types.QGraphicsDropShadowEffect,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQGraphicsDropShadowEffect_new(addr(cQGraphicsDropShadowEffect_mvtbl), csize_t(sizeof(pointer)))
   fcQGraphicsDropShadowEffect_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qgraphicseffect_types.QGraphicsDropShadowEffect,
     parent: gen_qobject_types.QObject,
@@ -2317,6 +2324,7 @@ proc create*(T: type gen_qgraphicseffect_types.QGraphicsDropShadowEffect,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQGraphicsDropShadowEffect_new2(addr(cQGraphicsDropShadowEffect_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQGraphicsDropShadowEffect_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qgraphicseffect_types.QGraphicsDropShadowEffect): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQGraphicsDropShadowEffect_staticMetaObject())
@@ -2784,6 +2792,7 @@ proc create*(T: type gen_qgraphicseffect_types.QGraphicsOpacityEffect,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQGraphicsOpacityEffect_new(addr(cQGraphicsOpacityEffect_mvtbl), csize_t(sizeof(pointer)))
   fcQGraphicsOpacityEffect_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qgraphicseffect_types.QGraphicsOpacityEffect,
     parent: gen_qobject_types.QObject,
@@ -2791,6 +2800,7 @@ proc create*(T: type gen_qgraphicseffect_types.QGraphicsOpacityEffect,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQGraphicsOpacityEffect_new2(addr(cQGraphicsOpacityEffect_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQGraphicsOpacityEffect_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qgraphicseffect_types.QGraphicsOpacityEffect): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQGraphicsOpacityEffect_staticMetaObject())

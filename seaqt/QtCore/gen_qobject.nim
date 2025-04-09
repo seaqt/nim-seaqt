@@ -41,7 +41,6 @@ import ./gen_qobject_types
 export gen_qobject_types
 
 import
-  ./gen_qanystringview_types,
   ./gen_qbindingstorage_types,
   ./gen_qcoreevent_types,
   ./gen_qmetaobject_types,
@@ -49,7 +48,6 @@ import
   ./gen_qthread_types,
   ./gen_qvariant_types
 export
-  gen_qanystringview_types,
   gen_qbindingstorage_types,
   gen_qcoreevent_types,
   gen_qmetaobject_types,
@@ -129,7 +127,7 @@ proc fcQObject_tr(s: cstring): struct_miqt_string {.importc: "QObject_tr".}
 proc fcQObject_event(self: pointer, event: pointer): bool {.importc: "QObject_event".}
 proc fcQObject_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.importc: "QObject_eventFilter".}
 proc fcQObject_objectName(self: pointer): struct_miqt_string {.importc: "QObject_objectName".}
-proc fcQObject_setObjectName(self: pointer, name: pointer): void {.importc: "QObject_setObjectName".}
+proc fcQObject_setObjectName(self: pointer, name: struct_miqt_string): void {.importc: "QObject_setObjectName".}
 proc fcQObject_isWidgetType(self: pointer): bool {.importc: "QObject_isWidgetType".}
 proc fcQObject_isWindowType(self: pointer): bool {.importc: "QObject_isWindowType".}
 proc fcQObject_isQuickItemType(self: pointer): bool {.importc: "QObject_isQuickItemType".}
@@ -231,8 +229,8 @@ proc objectName*(self: gen_qobject_types.QObject): string =
   c_free(v_ms.data)
   vx_ret
 
-proc setObjectName*(self: gen_qobject_types.QObject, name: gen_qanystringview_types.QAnyStringView): void =
-  fcQObject_setObjectName(self.h, name.h)
+proc setObjectName*(self: gen_qobject_types.QObject, name: openArray[char]): void =
+  fcQObject_setObjectName(self.h, struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))))
 
 proc isWidgetType*(self: gen_qobject_types.QObject): bool =
   fcQObject_isWidgetType(self.h)
@@ -682,6 +680,7 @@ proc create*(T: type gen_qobject_types.QObject,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQObject_new(addr(cQObject_mvtbl), csize_t(sizeof(pointer)))
   fcQObject_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qobject_types.QObject,
     parent: gen_qobject_types.QObject,
@@ -689,6 +688,7 @@ proc create*(T: type gen_qobject_types.QObject,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQObject_new2(addr(cQObject_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQObject_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qobject_types.QObject): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQObject_staticMetaObject())

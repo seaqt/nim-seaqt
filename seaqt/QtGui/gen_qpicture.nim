@@ -116,13 +116,13 @@ proc play*(self: gen_qpicture_types.QPicture, p: gen_qpainter_types.QPainter): b
 proc load*(self: gen_qpicture_types.QPicture, dev: gen_qiodevice_types.QIODevice): bool =
   fcQPicture_load(self.h, dev.h)
 
-proc load*(self: gen_qpicture_types.QPicture, fileName: string): bool =
+proc load*(self: gen_qpicture_types.QPicture, fileName: openArray[char]): bool =
   fcQPicture_loadWithFileName(self.h, struct_miqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))))
 
 proc save*(self: gen_qpicture_types.QPicture, dev: gen_qiodevice_types.QIODevice): bool =
   fcQPicture_save(self.h, dev.h)
 
-proc save*(self: gen_qpicture_types.QPicture, fileName: string): bool =
+proc save*(self: gen_qpicture_types.QPicture, fileName: openArray[char]): bool =
   fcQPicture_saveWithFileName(self.h, struct_miqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))))
 
 proc boundingRect*(self: gen_qpicture_types.QPicture): gen_qrect_types.QRect =
@@ -384,6 +384,7 @@ proc create*(T: type gen_qpicture_types.QPicture,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQPicture_new(addr(cQPicture_mvtbl), csize_t(sizeof(pointer)))
   fcQPicture_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qpicture_types.QPicture,
     param1: gen_qpicture_types.QPicture,
@@ -391,6 +392,7 @@ proc create*(T: type gen_qpicture_types.QPicture,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQPicture_new2(addr(cQPicture_mvtbl), csize_t(sizeof(pointer)), param1.h)
   fcQPicture_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qpicture_types.QPicture,
     formatVersion: cint,
@@ -398,4 +400,5 @@ proc create*(T: type gen_qpicture_types.QPicture,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQPicture_new3(addr(cQPicture_mvtbl), csize_t(sizeof(pointer)), formatVersion)
   fcQPicture_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 

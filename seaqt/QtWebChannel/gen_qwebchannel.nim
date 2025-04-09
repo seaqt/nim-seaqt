@@ -152,7 +152,7 @@ proc registeredObjects*(self: gen_qwebchannel_types.QWebChannel): Table[string,g
   c_free(v_mm.values)
   vx_ret
 
-proc registerObject*(self: gen_qwebchannel_types.QWebChannel, id: string, objectVal: gen_qobject_types.QObject): void =
+proc registerObject*(self: gen_qwebchannel_types.QWebChannel, id: openArray[char], objectVal: gen_qobject_types.QObject): void =
   fcQWebChannel_registerObject(self.h, struct_miqt_string(data: if len(id) > 0: addr id[0] else: nil, len: csize_t(len(id))), objectVal.h)
 
 proc deregisterObject*(self: gen_qwebchannel_types.QWebChannel, objectVal: gen_qobject_types.QObject): void =
@@ -504,6 +504,7 @@ proc create*(T: type gen_qwebchannel_types.QWebChannel,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQWebChannel_new(addr(cQWebChannel_mvtbl), csize_t(sizeof(pointer)))
   fcQWebChannel_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qwebchannel_types.QWebChannel,
     parent: gen_qobject_types.QObject,
@@ -511,6 +512,7 @@ proc create*(T: type gen_qwebchannel_types.QWebChannel,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQWebChannel_new2(addr(cQWebChannel_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQWebChannel_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qwebchannel_types.QWebChannel): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQWebChannel_staticMetaObject())

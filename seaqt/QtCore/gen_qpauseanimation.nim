@@ -605,6 +605,7 @@ proc create*(T: type gen_qpauseanimation_types.QPauseAnimation,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQPauseAnimation_new(addr(cQPauseAnimation_mvtbl), csize_t(sizeof(pointer)))
   fcQPauseAnimation_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qpauseanimation_types.QPauseAnimation,
     msecs: cint,
@@ -612,6 +613,7 @@ proc create*(T: type gen_qpauseanimation_types.QPauseAnimation,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQPauseAnimation_new2(addr(cQPauseAnimation_mvtbl), csize_t(sizeof(pointer)), msecs)
   fcQPauseAnimation_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qpauseanimation_types.QPauseAnimation,
     parent: gen_qobject_types.QObject,
@@ -619,6 +621,7 @@ proc create*(T: type gen_qpauseanimation_types.QPauseAnimation,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQPauseAnimation_new3(addr(cQPauseAnimation_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQPauseAnimation_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qpauseanimation_types.QPauseAnimation,
     msecs: cint, parent: gen_qobject_types.QObject,
@@ -626,6 +629,7 @@ proc create*(T: type gen_qpauseanimation_types.QPauseAnimation,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQPauseAnimation_new4(addr(cQPauseAnimation_mvtbl), csize_t(sizeof(pointer)), msecs, parent.h)
   fcQPauseAnimation_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qpauseanimation_types.QPauseAnimation): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQPauseAnimation_staticMetaObject())

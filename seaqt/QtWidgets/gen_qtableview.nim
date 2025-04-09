@@ -565,12 +565,12 @@ type QTableViewhorizontalScrollbarActionProc* = proc(self: QTableView, action: c
 type QTableViewisIndexHiddenProc* = proc(self: QTableView, index: gen_qabstractitemmodel_types.QModelIndex): bool {.raises: [], gcsafe.}
 type QTableViewselectionChangedProc* = proc(self: QTableView, selected: gen_qitemselectionmodel_types.QItemSelection, deselected: gen_qitemselectionmodel_types.QItemSelection): void {.raises: [], gcsafe.}
 type QTableViewcurrentChangedProc* = proc(self: QTableView, current: gen_qabstractitemmodel_types.QModelIndex, previous: gen_qabstractitemmodel_types.QModelIndex): void {.raises: [], gcsafe.}
-type QTableViewkeyboardSearchProc* = proc(self: QTableView, search: string): void {.raises: [], gcsafe.}
+type QTableViewkeyboardSearchProc* = proc(self: QTableView, search: openArray[char]): void {.raises: [], gcsafe.}
 type QTableViewitemDelegateForIndexProc* = proc(self: QTableView, index: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemdelegate_types.QAbstractItemDelegate {.raises: [], gcsafe.}
 type QTableViewinputMethodQueryProc* = proc(self: QTableView, query: cint): gen_qvariant_types.QVariant {.raises: [], gcsafe.}
 type QTableViewresetProc* = proc(self: QTableView): void {.raises: [], gcsafe.}
 type QTableViewselectAllProc* = proc(self: QTableView): void {.raises: [], gcsafe.}
-type QTableViewdataChangedProc* = proc(self: QTableView, topLeft: gen_qabstractitemmodel_types.QModelIndex, bottomRight: gen_qabstractitemmodel_types.QModelIndex, roles: seq[cint]): void {.raises: [], gcsafe.}
+type QTableViewdataChangedProc* = proc(self: QTableView, topLeft: gen_qabstractitemmodel_types.QModelIndex, bottomRight: gen_qabstractitemmodel_types.QModelIndex, roles: openArray[cint]): void {.raises: [], gcsafe.}
 type QTableViewrowsInsertedProc* = proc(self: QTableView, parent: gen_qabstractitemmodel_types.QModelIndex, start: cint, endVal: cint): void {.raises: [], gcsafe.}
 type QTableViewrowsAboutToBeRemovedProc* = proc(self: QTableView, parent: gen_qabstractitemmodel_types.QModelIndex, start: cint, endVal: cint): void {.raises: [], gcsafe.}
 type QTableViewupdateEditorDataProc* = proc(self: QTableView): void {.raises: [], gcsafe.}
@@ -621,7 +621,7 @@ type QTableViewtabletEventProc* = proc(self: QTableView, event: gen_qevent_types
 type QTableViewactionEventProc* = proc(self: QTableView, event: gen_qevent_types.QActionEvent): void {.raises: [], gcsafe.}
 type QTableViewshowEventProc* = proc(self: QTableView, event: gen_qevent_types.QShowEvent): void {.raises: [], gcsafe.}
 type QTableViewhideEventProc* = proc(self: QTableView, event: gen_qevent_types.QHideEvent): void {.raises: [], gcsafe.}
-type QTableViewnativeEventProc* = proc(self: QTableView, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
+type QTableViewnativeEventProc* = proc(self: QTableView, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
 type QTableViewmetricProc* = proc(self: QTableView, param1: cint): cint {.raises: [], gcsafe.}
 type QTableViewinitPainterProc* = proc(self: QTableView, painter: gen_qpainter_types.QPainter): void {.raises: [], gcsafe.}
 type QTableViewredirectedProc* = proc(self: QTableView, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.raises: [], gcsafe.}
@@ -1033,7 +1033,7 @@ proc fcQTableView_vtable_callback_currentChanged(self: pointer, current: pointer
   let slotval2 = gen_qabstractitemmodel_types.QModelIndex(h: previous, owned: false)
   vtbl[].currentChanged(self, slotval1, slotval2)
 
-proc QTableViewkeyboardSearch*(self: gen_qtableview_types.QTableView, search: string): void =
+proc QTableViewkeyboardSearch*(self: gen_qtableview_types.QTableView, search: openArray[char]): void =
   fcQTableView_virtualbase_keyboardSearch(self.h, struct_miqt_string(data: if len(search) > 0: addr search[0] else: nil, len: csize_t(len(search))))
 
 proc fcQTableView_vtable_callback_keyboardSearch(self: pointer, search: struct_miqt_string): void {.cdecl.} =
@@ -1087,7 +1087,7 @@ proc fcQTableView_vtable_callback_selectAll(self: pointer): void {.cdecl.} =
   let self = QTableView(h: self)
   vtbl[].selectAll(self)
 
-proc QTableViewdataChanged*(self: gen_qtableview_types.QTableView, topLeft: gen_qabstractitemmodel_types.QModelIndex, bottomRight: gen_qabstractitemmodel_types.QModelIndex, roles: seq[cint]): void =
+proc QTableViewdataChanged*(self: gen_qtableview_types.QTableView, topLeft: gen_qabstractitemmodel_types.QModelIndex, bottomRight: gen_qabstractitemmodel_types.QModelIndex, roles: openArray[cint]): void =
   var roles_CArray = newSeq[cint](len(roles))
   for i in 0..<len(roles):
     roles_CArray[i] = roles[i]
@@ -1581,7 +1581,7 @@ proc fcQTableView_vtable_callback_hideEvent(self: pointer, event: pointer): void
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   vtbl[].hideEvent(self, slotval1)
 
-proc QTableViewnativeEvent*(self: gen_qtableview_types.QTableView, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool =
+proc QTableViewnativeEvent*(self: gen_qtableview_types.QTableView, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool =
   fcQTableView_virtualbase_nativeEvent(self.h, struct_miqt_string(data: if len(eventType) > 0: addr eventType[0] else: nil, len: csize_t(len(eventType))), message, resultVal)
 
 proc fcQTableView_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
@@ -1900,7 +1900,7 @@ proc fcQTableView_method_callback_currentChanged(self: pointer, current: pointer
   let slotval2 = gen_qabstractitemmodel_types.QModelIndex(h: previous, owned: false)
   inst.currentChanged(slotval1, slotval2)
 
-method keyboardSearch*(self: VirtualQTableView, search: string): void {.base.} =
+method keyboardSearch*(self: VirtualQTableView, search: openArray[char]): void {.base.} =
   QTableViewkeyboardSearch(self[], search)
 proc fcQTableView_method_callback_keyboardSearch(self: pointer, search: struct_miqt_string): void {.cdecl.} =
   let inst = cast[VirtualQTableView](fcQTableView_vdata(self)[])
@@ -1938,7 +1938,7 @@ proc fcQTableView_method_callback_selectAll(self: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTableView](fcQTableView_vdata(self)[])
   inst.selectAll()
 
-method dataChanged*(self: VirtualQTableView, topLeft: gen_qabstractitemmodel_types.QModelIndex, bottomRight: gen_qabstractitemmodel_types.QModelIndex, roles: seq[cint]): void {.base.} =
+method dataChanged*(self: VirtualQTableView, topLeft: gen_qabstractitemmodel_types.QModelIndex, bottomRight: gen_qabstractitemmodel_types.QModelIndex, roles: openArray[cint]): void {.base.} =
   QTableViewdataChanged(self[], topLeft, bottomRight, roles)
 proc fcQTableView_method_callback_dataChanged(self: pointer, topLeft: pointer, bottomRight: pointer, roles: struct_miqt_array): void {.cdecl.} =
   let inst = cast[VirtualQTableView](fcQTableView_vdata(self)[])
@@ -2317,7 +2317,7 @@ proc fcQTableView_method_callback_hideEvent(self: pointer, event: pointer): void
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   inst.hideEvent(slotval1)
 
-method nativeEvent*(self: VirtualQTableView, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
+method nativeEvent*(self: VirtualQTableView, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
   QTableViewnativeEvent(self[], eventType, message, resultVal)
 proc fcQTableView_method_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
   let inst = cast[VirtualQTableView](fcQTableView_vdata(self)[])
@@ -2979,12 +2979,14 @@ proc create*(T: type gen_qtableview_types.QTableView,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQTableView_new(addr(cQTableView_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQTableView_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qtableview_types.QTableView,
     inst: VirtualQTableView) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQTableView_new2(addr(cQTableView_mvtbl), csize_t(sizeof(pointer)))
   fcQTableView_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qtableview_types.QTableView): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQTableView_staticMetaObject())

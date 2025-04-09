@@ -175,7 +175,7 @@ proc actionText*(self: gen_qundostack_types.QUndoCommand): string =
   c_free(v_ms.data)
   vx_ret
 
-proc setText*(self: gen_qundostack_types.QUndoCommand, text: string): void =
+proc setText*(self: gen_qundostack_types.QUndoCommand, text: openArray[char]): void =
   fcQUndoCommand_setText(self.h, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
 
 proc isObsolete*(self: gen_qundostack_types.QUndoCommand): bool =
@@ -289,7 +289,7 @@ proc create*(T: type gen_qundostack_types.QUndoCommand,
   fcQUndoCommand_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qundostack_types.QUndoCommand,
-    text: string,
+    text: openArray[char],
     vtbl: ref QUndoCommandVTable = nil): gen_qundostack_types.QUndoCommand =
   let vtbl = if vtbl == nil: new QUndoCommandVTable else: vtbl
   GC_ref(vtbl)
@@ -327,7 +327,7 @@ proc create*(T: type gen_qundostack_types.QUndoCommand,
   fcQUndoCommand_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qundostack_types.QUndoCommand,
-    text: string, parent: gen_qundostack_types.QUndoCommand,
+    text: openArray[char], parent: gen_qundostack_types.QUndoCommand,
     vtbl: ref QUndoCommandVTable = nil): gen_qundostack_types.QUndoCommand =
   let vtbl = if vtbl == nil: new QUndoCommandVTable else: vtbl
   GC_ref(vtbl)
@@ -361,13 +361,15 @@ proc create*(T: type gen_qundostack_types.QUndoCommand,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQUndoCommand_new(addr(cQUndoCommand_mvtbl), csize_t(sizeof(pointer)))
   fcQUndoCommand_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qundostack_types.QUndoCommand,
-    text: string,
+    text: openArray[char],
     inst: VirtualQUndoCommand) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQUndoCommand_new2(addr(cQUndoCommand_mvtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
   fcQUndoCommand_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qundostack_types.QUndoCommand,
     parent: gen_qundostack_types.QUndoCommand,
@@ -375,13 +377,15 @@ proc create*(T: type gen_qundostack_types.QUndoCommand,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQUndoCommand_new3(addr(cQUndoCommand_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQUndoCommand_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qundostack_types.QUndoCommand,
-    text: string, parent: gen_qundostack_types.QUndoCommand,
+    text: openArray[char], parent: gen_qundostack_types.QUndoCommand,
     inst: VirtualQUndoCommand) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQUndoCommand_new4(addr(cQUndoCommand_mvtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), parent.h)
   fcQUndoCommand_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc metaObject*(self: gen_qundostack_types.QUndoStack): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQUndoStack_metaObject(self.h), owned: false)
@@ -449,7 +453,7 @@ proc isClean*(self: gen_qundostack_types.QUndoStack): bool =
 proc cleanIndex*(self: gen_qundostack_types.QUndoStack): cint =
   fcQUndoStack_cleanIndex(self.h)
 
-proc beginMacro*(self: gen_qundostack_types.QUndoStack, text: string): void =
+proc beginMacro*(self: gen_qundostack_types.QUndoStack, text: openArray[char]): void =
   fcQUndoStack_beginMacro(self.h, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
 
 proc endMacro*(self: gen_qundostack_types.QUndoStack): void =
@@ -562,10 +566,10 @@ proc oncanRedoChanged*(self: gen_qundostack_types.QUndoStack, slot: QUndoStackca
   GC_ref(tmp)
   fcQUndoStack_connect_canRedoChanged(self.h, cast[int](addr tmp[]), fcQUndoStack_slot_callback_canRedoChanged, fcQUndoStack_slot_callback_canRedoChanged_release)
 
-proc undoTextChanged*(self: gen_qundostack_types.QUndoStack, undoText: string): void =
+proc undoTextChanged*(self: gen_qundostack_types.QUndoStack, undoText: openArray[char]): void =
   fcQUndoStack_undoTextChanged(self.h, struct_miqt_string(data: if len(undoText) > 0: addr undoText[0] else: nil, len: csize_t(len(undoText))))
 
-type QUndoStackundoTextChangedSlot* = proc(undoText: string)
+type QUndoStackundoTextChangedSlot* = proc(undoText: openArray[char])
 proc fcQUndoStack_slot_callback_undoTextChanged(slot: int, undoText: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QUndoStackundoTextChangedSlot](cast[pointer](slot))
   let vundoText_ms = undoText
@@ -585,10 +589,10 @@ proc onundoTextChanged*(self: gen_qundostack_types.QUndoStack, slot: QUndoStacku
   GC_ref(tmp)
   fcQUndoStack_connect_undoTextChanged(self.h, cast[int](addr tmp[]), fcQUndoStack_slot_callback_undoTextChanged, fcQUndoStack_slot_callback_undoTextChanged_release)
 
-proc redoTextChanged*(self: gen_qundostack_types.QUndoStack, redoText: string): void =
+proc redoTextChanged*(self: gen_qundostack_types.QUndoStack, redoText: openArray[char]): void =
   fcQUndoStack_redoTextChanged(self.h, struct_miqt_string(data: if len(redoText) > 0: addr redoText[0] else: nil, len: csize_t(len(redoText))))
 
-type QUndoStackredoTextChangedSlot* = proc(redoText: string)
+type QUndoStackredoTextChangedSlot* = proc(redoText: openArray[char])
 proc fcQUndoStack_slot_callback_redoTextChanged(slot: int, redoText: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QUndoStackredoTextChangedSlot](cast[pointer](slot))
   let vredoText_ms = redoText
@@ -620,10 +624,10 @@ proc tr*(_: type gen_qundostack_types.QUndoStack, s: cstring, c: cstring, n: cin
   c_free(v_ms.data)
   vx_ret
 
-proc createUndoAction*(self: gen_qundostack_types.QUndoStack, parent: gen_qobject_types.QObject, prefix: string): gen_qaction_types.QAction =
+proc createUndoAction*(self: gen_qundostack_types.QUndoStack, parent: gen_qobject_types.QObject, prefix: openArray[char]): gen_qaction_types.QAction =
   gen_qaction_types.QAction(h: fcQUndoStack_createUndoAction2(self.h, parent.h, struct_miqt_string(data: if len(prefix) > 0: addr prefix[0] else: nil, len: csize_t(len(prefix)))), owned: false)
 
-proc createRedoAction*(self: gen_qundostack_types.QUndoStack, parent: gen_qobject_types.QObject, prefix: string): gen_qaction_types.QAction =
+proc createRedoAction*(self: gen_qundostack_types.QUndoStack, parent: gen_qobject_types.QObject, prefix: openArray[char]): gen_qaction_types.QAction =
   gen_qaction_types.QAction(h: fcQUndoStack_createRedoAction2(self.h, parent.h, struct_miqt_string(data: if len(prefix) > 0: addr prefix[0] else: nil, len: csize_t(len(prefix)))), owned: false)
 
 proc setActive*(self: gen_qundostack_types.QUndoStack, active: bool): void =
@@ -925,6 +929,7 @@ proc create*(T: type gen_qundostack_types.QUndoStack,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQUndoStack_new(addr(cQUndoStack_mvtbl), csize_t(sizeof(pointer)))
   fcQUndoStack_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qundostack_types.QUndoStack,
     parent: gen_qobject_types.QObject,
@@ -932,6 +937,7 @@ proc create*(T: type gen_qundostack_types.QUndoStack,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQUndoStack_new2(addr(cQUndoStack_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQUndoStack_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qundostack_types.QUndoStack): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQUndoStack_staticMetaObject())

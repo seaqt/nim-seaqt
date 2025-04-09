@@ -89,7 +89,7 @@ proc location*(_: type gen_qlibraryinfo_types.QLibraryInfo, location: cint): str
   c_free(v_ms.data)
   vx_ret
 
-proc platformPluginArguments*(_: type gen_qlibraryinfo_types.QLibraryInfo, platformName: string): seq[string] =
+proc platformPluginArguments*(_: type gen_qlibraryinfo_types.QLibraryInfo, platformName: openArray[char]): seq[string] =
   var v_ma = fcQLibraryInfo_platformPluginArguments(struct_miqt_string(data: if len(platformName) > 0: addr platformName[0] else: nil, len: csize_t(len(platformName))))
   var vx_ret = newSeq[string](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)

@@ -124,10 +124,10 @@ proc tr*(_: type gen_qqmlpropertymap_types.QQmlPropertyMap, s: cstring): string 
   c_free(v_ms.data)
   vx_ret
 
-proc value*(self: gen_qqmlpropertymap_types.QQmlPropertyMap, key: string): gen_qvariant_types.QVariant =
+proc value*(self: gen_qqmlpropertymap_types.QQmlPropertyMap, key: openArray[char]): gen_qvariant_types.QVariant =
   gen_qvariant_types.QVariant(h: fcQQmlPropertyMap_value(self.h, struct_miqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key)))), owned: true)
 
-proc insert*(self: gen_qqmlpropertymap_types.QQmlPropertyMap, key: string, value: gen_qvariant_types.QVariant): void =
+proc insert*(self: gen_qqmlpropertymap_types.QQmlPropertyMap, key: openArray[char], value: gen_qvariant_types.QVariant): void =
   fcQQmlPropertyMap_insert(self.h, struct_miqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key))), value.h)
 
 proc insert*(self: gen_qqmlpropertymap_types.QQmlPropertyMap, values: Table[string,gen_qvariant_types.QVariant]): void =
@@ -144,7 +144,7 @@ proc insert*(self: gen_qqmlpropertymap_types.QQmlPropertyMap, values: Table[stri
 
   fcQQmlPropertyMap_insertWithValues(self.h, struct_miqt_map(len: csize_t(len(values)),keys: if len(values) == 0: nil else: addr(values_Keys_CArray[0]), values: if len(values) == 0: nil else: addr(values_Values_CArray[0]),))
 
-proc clear*(self: gen_qqmlpropertymap_types.QQmlPropertyMap, key: string): void =
+proc clear*(self: gen_qqmlpropertymap_types.QQmlPropertyMap, key: openArray[char]): void =
   fcQQmlPropertyMap_clear(self.h, struct_miqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key))))
 
 proc freeze*(self: gen_qqmlpropertymap_types.QQmlPropertyMap): void =
@@ -171,19 +171,19 @@ proc size*(self: gen_qqmlpropertymap_types.QQmlPropertyMap): cint =
 proc isEmpty*(self: gen_qqmlpropertymap_types.QQmlPropertyMap): bool =
   fcQQmlPropertyMap_isEmpty(self.h)
 
-proc contains*(self: gen_qqmlpropertymap_types.QQmlPropertyMap, key: string): bool =
+proc contains*(self: gen_qqmlpropertymap_types.QQmlPropertyMap, key: openArray[char]): bool =
   fcQQmlPropertyMap_contains(self.h, struct_miqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key))))
 
-proc operatorSubscript*(self: gen_qqmlpropertymap_types.QQmlPropertyMap, key: string): gen_qvariant_types.QVariant =
+proc operatorSubscript*(self: gen_qqmlpropertymap_types.QQmlPropertyMap, key: openArray[char]): gen_qvariant_types.QVariant =
   gen_qvariant_types.QVariant(h: fcQQmlPropertyMap_operatorSubscript(self.h, struct_miqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key)))), owned: false)
 
-proc operatorSubscript2*(self: gen_qqmlpropertymap_types.QQmlPropertyMap, key: string): gen_qvariant_types.QVariant =
+proc operatorSubscript2*(self: gen_qqmlpropertymap_types.QQmlPropertyMap, key: openArray[char]): gen_qvariant_types.QVariant =
   gen_qvariant_types.QVariant(h: fcQQmlPropertyMap_operatorSubscriptWithKey(self.h, struct_miqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key)))), owned: true)
 
-proc valueChanged*(self: gen_qqmlpropertymap_types.QQmlPropertyMap, key: string, value: gen_qvariant_types.QVariant): void =
+proc valueChanged*(self: gen_qqmlpropertymap_types.QQmlPropertyMap, key: openArray[char], value: gen_qvariant_types.QVariant): void =
   fcQQmlPropertyMap_valueChanged(self.h, struct_miqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key))), value.h)
 
-type QQmlPropertyMapvalueChangedSlot* = proc(key: string, value: gen_qvariant_types.QVariant)
+type QQmlPropertyMapvalueChangedSlot* = proc(key: openArray[char], value: gen_qvariant_types.QVariant)
 proc fcQQmlPropertyMap_slot_callback_valueChanged(slot: int, key: struct_miqt_string, value: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QQmlPropertyMapvalueChangedSlot](cast[pointer](slot))
   let vkey_ms = key
@@ -220,7 +220,7 @@ proc tr*(_: type gen_qqmlpropertymap_types.QQmlPropertyMap, s: cstring, c: cstri
 type QQmlPropertyMapmetaObjectProc* = proc(self: QQmlPropertyMap): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QQmlPropertyMapmetacastProc* = proc(self: QQmlPropertyMap, param1: cstring): pointer {.raises: [], gcsafe.}
 type QQmlPropertyMapmetacallProc* = proc(self: QQmlPropertyMap, param1: cint, param2: cint, param3: pointer): cint {.raises: [], gcsafe.}
-type QQmlPropertyMapupdateValueProc* = proc(self: QQmlPropertyMap, key: string, input: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant {.raises: [], gcsafe.}
+type QQmlPropertyMapupdateValueProc* = proc(self: QQmlPropertyMap, key: openArray[char], input: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant {.raises: [], gcsafe.}
 type QQmlPropertyMapeventProc* = proc(self: QQmlPropertyMap, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
 type QQmlPropertyMapeventFilterProc* = proc(self: QQmlPropertyMap, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
 type QQmlPropertyMaptimerEventProc* = proc(self: QQmlPropertyMap, event: gen_qcoreevent_types.QTimerEvent): void {.raises: [], gcsafe.}
@@ -275,7 +275,7 @@ proc fcQQmlPropertyMap_vtable_callback_metacall(self: pointer, param1: cint, par
   var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QQmlPropertyMapupdateValue*(self: gen_qqmlpropertymap_types.QQmlPropertyMap, key: string, input: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant =
+proc QQmlPropertyMapupdateValue*(self: gen_qqmlpropertymap_types.QQmlPropertyMap, key: openArray[char], input: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant =
   gen_qvariant_types.QVariant(h: fcQQmlPropertyMap_virtualbase_updateValue(self.h, struct_miqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key))), input.h), owned: true)
 
 proc fcQQmlPropertyMap_vtable_callback_updateValue(self: pointer, key: struct_miqt_string, input: pointer): pointer {.cdecl.} =
@@ -385,7 +385,7 @@ proc fcQQmlPropertyMap_method_callback_metacall(self: pointer, param1: cint, par
   var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
-method updateValue*(self: VirtualQQmlPropertyMap, key: string, input: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant {.base.} =
+method updateValue*(self: VirtualQQmlPropertyMap, key: openArray[char], input: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant {.base.} =
   QQmlPropertyMapupdateValue(self[], key, input)
 proc fcQQmlPropertyMap_method_callback_updateValue(self: pointer, key: struct_miqt_string, input: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQQmlPropertyMap](fcQQmlPropertyMap_vdata(self)[])
@@ -549,6 +549,7 @@ proc create*(T: type gen_qqmlpropertymap_types.QQmlPropertyMap,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQQmlPropertyMap_new(addr(cQQmlPropertyMap_mvtbl), csize_t(sizeof(pointer)))
   fcQQmlPropertyMap_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qqmlpropertymap_types.QQmlPropertyMap,
     parent: gen_qobject_types.QObject,
@@ -556,6 +557,7 @@ proc create*(T: type gen_qqmlpropertymap_types.QQmlPropertyMap,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQQmlPropertyMap_new2(addr(cQQmlPropertyMap_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQQmlPropertyMap_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qqmlpropertymap_types.QQmlPropertyMap): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQQmlPropertyMap_staticMetaObject())

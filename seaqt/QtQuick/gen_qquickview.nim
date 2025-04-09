@@ -330,7 +330,7 @@ type QQuickViewsizeProc* = proc(self: QQuickView): gen_qsize_types.QSize {.raise
 type QQuickViewpaintEventProc* = proc(self: QQuickView, param1: gen_qevent_types.QPaintEvent): void {.raises: [], gcsafe.}
 type QQuickViewmoveEventProc* = proc(self: QQuickView, param1: gen_qevent_types.QMoveEvent): void {.raises: [], gcsafe.}
 type QQuickViewtouchEventProc* = proc(self: QQuickView, param1: gen_qevent_types.QTouchEvent): void {.raises: [], gcsafe.}
-type QQuickViewnativeEventProc* = proc(self: QQuickView, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
+type QQuickViewnativeEventProc* = proc(self: QQuickView, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
 type QQuickVieweventFilterProc* = proc(self: QQuickView, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
 type QQuickViewchildEventProc* = proc(self: QQuickView, event: gen_qcoreevent_types.QChildEvent): void {.raises: [], gcsafe.}
 type QQuickViewcustomEventProc* = proc(self: QQuickView, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
@@ -644,7 +644,7 @@ proc fcQQuickView_vtable_callback_touchEvent(self: pointer, param1: pointer): vo
   let slotval1 = gen_qevent_types.QTouchEvent(h: param1, owned: false)
   vtbl[].touchEvent(self, slotval1)
 
-proc QQuickViewnativeEvent*(self: gen_qquickview_types.QQuickView, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool =
+proc QQuickViewnativeEvent*(self: gen_qquickview_types.QQuickView, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool =
   fcQQuickView_virtualbase_nativeEvent(self.h, struct_miqt_string(data: if len(eventType) > 0: addr eventType[0] else: nil, len: csize_t(len(eventType))), message, resultVal)
 
 proc fcQQuickView_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
@@ -909,7 +909,7 @@ proc fcQQuickView_method_callback_touchEvent(self: pointer, param1: pointer): vo
   let slotval1 = gen_qevent_types.QTouchEvent(h: param1, owned: false)
   inst.touchEvent(slotval1)
 
-method nativeEvent*(self: VirtualQQuickView, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
+method nativeEvent*(self: VirtualQQuickView, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
   QQuickViewnativeEvent(self[], eventType, message, resultVal)
 proc fcQQuickView_method_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
   let inst = cast[VirtualQQuickView](fcQQuickView_vdata(self)[])
@@ -1493,6 +1493,7 @@ proc create*(T: type gen_qquickview_types.QQuickView,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQQuickView_new(addr(cQQuickView_mvtbl), csize_t(sizeof(pointer)))
   fcQQuickView_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qquickview_types.QQuickView,
     engine: gen_qqmlengine_types.QQmlEngine, parent: gen_qwindow_types.QWindow,
@@ -1500,6 +1501,7 @@ proc create*(T: type gen_qquickview_types.QQuickView,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQQuickView_new2(addr(cQQuickView_mvtbl), csize_t(sizeof(pointer)), engine.h, parent.h)
   fcQQuickView_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qquickview_types.QQuickView,
     source: gen_qurl_types.QUrl,
@@ -1507,6 +1509,7 @@ proc create*(T: type gen_qquickview_types.QQuickView,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQQuickView_new3(addr(cQQuickView_mvtbl), csize_t(sizeof(pointer)), source.h)
   fcQQuickView_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qquickview_types.QQuickView,
     source: gen_qurl_types.QUrl, renderControl: gen_qquickrendercontrol_types.QQuickRenderControl,
@@ -1514,6 +1517,7 @@ proc create*(T: type gen_qquickview_types.QQuickView,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQQuickView_new4(addr(cQQuickView_mvtbl), csize_t(sizeof(pointer)), source.h, renderControl.h)
   fcQQuickView_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qquickview_types.QQuickView,
     parent: gen_qwindow_types.QWindow,
@@ -1521,6 +1525,7 @@ proc create*(T: type gen_qquickview_types.QQuickView,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQQuickView_new5(addr(cQQuickView_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQQuickView_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qquickview_types.QQuickView,
     source: gen_qurl_types.QUrl, parent: gen_qwindow_types.QWindow,
@@ -1528,6 +1533,7 @@ proc create*(T: type gen_qquickview_types.QQuickView,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQQuickView_new6(addr(cQQuickView_mvtbl), csize_t(sizeof(pointer)), source.h, parent.h)
   fcQQuickView_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qquickview_types.QQuickView): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQQuickView_staticMetaObject())

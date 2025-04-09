@@ -86,7 +86,7 @@ proc name*(self: gen_qwebenginescript_types.QWebEngineScript): string =
   c_free(v_ms.data)
   vx_ret
 
-proc setName*(self: gen_qwebenginescript_types.QWebEngineScript, name: string): void =
+proc setName*(self: gen_qwebenginescript_types.QWebEngineScript, name: openArray[char]): void =
   fcQWebEngineScript_setName(self.h, struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))))
 
 proc sourceUrl*(self: gen_qwebenginescript_types.QWebEngineScript): gen_qurl_types.QUrl =
@@ -101,7 +101,7 @@ proc sourceCode*(self: gen_qwebenginescript_types.QWebEngineScript): string =
   c_free(v_ms.data)
   vx_ret
 
-proc setSourceCode*(self: gen_qwebenginescript_types.QWebEngineScript, sourceCode: string): void =
+proc setSourceCode*(self: gen_qwebenginescript_types.QWebEngineScript, sourceCode: openArray[char]): void =
   fcQWebEngineScript_setSourceCode(self.h, struct_miqt_string(data: if len(sourceCode) > 0: addr sourceCode[0] else: nil, len: csize_t(len(sourceCode))))
 
 proc injectionPoint*(self: gen_qwebenginescript_types.QWebEngineScript): cint =

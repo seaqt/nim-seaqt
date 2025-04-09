@@ -397,6 +397,7 @@ proc create*(T: type gen_qobjectcleanuphandler_types.QObjectCleanupHandler,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQObjectCleanupHandler_new(addr(cQObjectCleanupHandler_mvtbl), csize_t(sizeof(pointer)))
   fcQObjectCleanupHandler_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qobjectcleanuphandler_types.QObjectCleanupHandler): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQObjectCleanupHandler_staticMetaObject())

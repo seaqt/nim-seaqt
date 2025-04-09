@@ -74,7 +74,7 @@ proc operatorCall2*(self: gen_qloggingcategory_types.QLoggingCategory): gen_qlog
 proc defaultCategory*(_: type gen_qloggingcategory_types.QLoggingCategory): gen_qloggingcategory_types.QLoggingCategory =
   gen_qloggingcategory_types.QLoggingCategory(h: fcQLoggingCategory_defaultCategory(), owned: false)
 
-proc setFilterRules*(_: type gen_qloggingcategory_types.QLoggingCategory, rules: string): void =
+proc setFilterRules*(_: type gen_qloggingcategory_types.QLoggingCategory, rules: openArray[char]): void =
   fcQLoggingCategory_setFilterRules(struct_miqt_string(data: if len(rules) > 0: addr rules[0] else: nil, len: csize_t(len(rules))))
 
 proc create*(T: type gen_qloggingcategory_types.QLoggingCategory,

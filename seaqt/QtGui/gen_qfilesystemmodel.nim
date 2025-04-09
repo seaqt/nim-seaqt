@@ -293,10 +293,10 @@ proc tr*(_: type gen_qfilesystemmodel_types.QFileSystemModel, s: cstring): strin
   c_free(v_ms.data)
   vx_ret
 
-proc rootPathChanged*(self: gen_qfilesystemmodel_types.QFileSystemModel, newPath: string): void =
+proc rootPathChanged*(self: gen_qfilesystemmodel_types.QFileSystemModel, newPath: openArray[char]): void =
   fcQFileSystemModel_rootPathChanged(self.h, struct_miqt_string(data: if len(newPath) > 0: addr newPath[0] else: nil, len: csize_t(len(newPath))))
 
-type QFileSystemModelrootPathChangedSlot* = proc(newPath: string)
+type QFileSystemModelrootPathChangedSlot* = proc(newPath: openArray[char])
 proc fcQFileSystemModel_slot_callback_rootPathChanged(slot: int, newPath: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QFileSystemModelrootPathChangedSlot](cast[pointer](slot))
   let vnewPath_ms = newPath
@@ -316,10 +316,10 @@ proc onrootPathChanged*(self: gen_qfilesystemmodel_types.QFileSystemModel, slot:
   GC_ref(tmp)
   fcQFileSystemModel_connect_rootPathChanged(self.h, cast[int](addr tmp[]), fcQFileSystemModel_slot_callback_rootPathChanged, fcQFileSystemModel_slot_callback_rootPathChanged_release)
 
-proc fileRenamed*(self: gen_qfilesystemmodel_types.QFileSystemModel, path: string, oldName: string, newName: string): void =
+proc fileRenamed*(self: gen_qfilesystemmodel_types.QFileSystemModel, path: openArray[char], oldName: openArray[char], newName: openArray[char]): void =
   fcQFileSystemModel_fileRenamed(self.h, struct_miqt_string(data: if len(path) > 0: addr path[0] else: nil, len: csize_t(len(path))), struct_miqt_string(data: if len(oldName) > 0: addr oldName[0] else: nil, len: csize_t(len(oldName))), struct_miqt_string(data: if len(newName) > 0: addr newName[0] else: nil, len: csize_t(len(newName))))
 
-type QFileSystemModelfileRenamedSlot* = proc(path: string, oldName: string, newName: string)
+type QFileSystemModelfileRenamedSlot* = proc(path: openArray[char], oldName: openArray[char], newName: openArray[char])
 proc fcQFileSystemModel_slot_callback_fileRenamed(slot: int, path: struct_miqt_string, oldName: struct_miqt_string, newName: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QFileSystemModelfileRenamedSlot](cast[pointer](slot))
   let vpath_ms = path
@@ -349,10 +349,10 @@ proc onfileRenamed*(self: gen_qfilesystemmodel_types.QFileSystemModel, slot: QFi
   GC_ref(tmp)
   fcQFileSystemModel_connect_fileRenamed(self.h, cast[int](addr tmp[]), fcQFileSystemModel_slot_callback_fileRenamed, fcQFileSystemModel_slot_callback_fileRenamed_release)
 
-proc directoryLoaded*(self: gen_qfilesystemmodel_types.QFileSystemModel, path: string): void =
+proc directoryLoaded*(self: gen_qfilesystemmodel_types.QFileSystemModel, path: openArray[char]): void =
   fcQFileSystemModel_directoryLoaded(self.h, struct_miqt_string(data: if len(path) > 0: addr path[0] else: nil, len: csize_t(len(path))))
 
-type QFileSystemModeldirectoryLoadedSlot* = proc(path: string)
+type QFileSystemModeldirectoryLoadedSlot* = proc(path: openArray[char])
 proc fcQFileSystemModel_slot_callback_directoryLoaded(slot: int, path: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QFileSystemModeldirectoryLoadedSlot](cast[pointer](slot))
   let vpath_ms = path
@@ -375,7 +375,7 @@ proc ondirectoryLoaded*(self: gen_qfilesystemmodel_types.QFileSystemModel, slot:
 proc index*(self: gen_qfilesystemmodel_types.QFileSystemModel, row: cint, column: cint, parent: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex =
   gen_qabstractitemmodel_types.QModelIndex(h: fcQFileSystemModel_index(self.h, row, column, parent.h), owned: true)
 
-proc index*(self: gen_qfilesystemmodel_types.QFileSystemModel, path: string): gen_qabstractitemmodel_types.QModelIndex =
+proc index*(self: gen_qfilesystemmodel_types.QFileSystemModel, path: openArray[char]): gen_qabstractitemmodel_types.QModelIndex =
   gen_qabstractitemmodel_types.QModelIndex(h: fcQFileSystemModel_indexWithPath(self.h, struct_miqt_string(data: if len(path) > 0: addr path[0] else: nil, len: csize_t(len(path)))), owned: true)
 
 proc parent*(self: gen_qfilesystemmodel_types.QFileSystemModel, child: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex =
@@ -429,7 +429,7 @@ proc mimeTypes*(self: gen_qfilesystemmodel_types.QFileSystemModel): seq[string] 
   c_free(v_ma.data)
   vx_ret
 
-proc mimeData*(self: gen_qfilesystemmodel_types.QFileSystemModel, indexes: seq[gen_qabstractitemmodel_types.QModelIndex]): gen_qmimedata_types.QMimeData =
+proc mimeData*(self: gen_qfilesystemmodel_types.QFileSystemModel, indexes: openArray[gen_qabstractitemmodel_types.QModelIndex]): gen_qmimedata_types.QMimeData =
   var indexes_CArray = newSeq[pointer](len(indexes))
   for i in 0..<len(indexes):
     indexes_CArray[i] = indexes[i].h
@@ -460,7 +460,7 @@ proc roleNames*(self: gen_qfilesystemmodel_types.QFileSystemModel): Table[cint,s
   c_free(v_mm.values)
   vx_ret
 
-proc setRootPath*(self: gen_qfilesystemmodel_types.QFileSystemModel, path: string): gen_qabstractitemmodel_types.QModelIndex =
+proc setRootPath*(self: gen_qfilesystemmodel_types.QFileSystemModel, path: openArray[char]): gen_qabstractitemmodel_types.QModelIndex =
   gen_qabstractitemmodel_types.QModelIndex(h: fcQFileSystemModel_setRootPath(self.h, struct_miqt_string(data: if len(path) > 0: addr path[0] else: nil, len: csize_t(len(path)))), owned: true)
 
 proc rootPath*(self: gen_qfilesystemmodel_types.QFileSystemModel): string =
@@ -502,7 +502,7 @@ proc setNameFilterDisables*(self: gen_qfilesystemmodel_types.QFileSystemModel, e
 proc nameFilterDisables*(self: gen_qfilesystemmodel_types.QFileSystemModel): bool =
   fcQFileSystemModel_nameFilterDisables(self.h)
 
-proc setNameFilters*(self: gen_qfilesystemmodel_types.QFileSystemModel, filters: seq[string]): void =
+proc setNameFilters*(self: gen_qfilesystemmodel_types.QFileSystemModel, filters: openArray[string]): void =
   var filters_CArray = newSeq[struct_miqt_string](len(filters))
   for i in 0..<len(filters):
     filters_CArray[i] = struct_miqt_string(data: if len(filters[i]) > 0: addr filters[i][0] else: nil, len: csize_t(len(filters[i])))
@@ -554,7 +554,7 @@ proc typeX*(self: gen_qfilesystemmodel_types.QFileSystemModel, index: gen_qabstr
 proc lastModified*(self: gen_qfilesystemmodel_types.QFileSystemModel, index: gen_qabstractitemmodel_types.QModelIndex): gen_qdatetime_types.QDateTime =
   gen_qdatetime_types.QDateTime(h: fcQFileSystemModel_lastModified(self.h, index.h), owned: true)
 
-proc mkdir*(self: gen_qfilesystemmodel_types.QFileSystemModel, parent: gen_qabstractitemmodel_types.QModelIndex, name: string): gen_qabstractitemmodel_types.QModelIndex =
+proc mkdir*(self: gen_qfilesystemmodel_types.QFileSystemModel, parent: gen_qabstractitemmodel_types.QModelIndex, name: openArray[char]): gen_qabstractitemmodel_types.QModelIndex =
   gen_qabstractitemmodel_types.QModelIndex(h: fcQFileSystemModel_mkdir(self.h, parent.h, struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name)))), owned: true)
 
 proc rmdir*(self: gen_qfilesystemmodel_types.QFileSystemModel, index: gen_qabstractitemmodel_types.QModelIndex): bool =
@@ -590,7 +590,7 @@ proc tr*(_: type gen_qfilesystemmodel_types.QFileSystemModel, s: cstring, c: cst
   c_free(v_ms.data)
   vx_ret
 
-proc index*(self: gen_qfilesystemmodel_types.QFileSystemModel, path: string, column: cint): gen_qabstractitemmodel_types.QModelIndex =
+proc index*(self: gen_qfilesystemmodel_types.QFileSystemModel, path: openArray[char], column: cint): gen_qabstractitemmodel_types.QModelIndex =
   gen_qabstractitemmodel_types.QModelIndex(h: fcQFileSystemModel_index2(self.h, struct_miqt_string(data: if len(path) > 0: addr path[0] else: nil, len: csize_t(len(path))), column), owned: true)
 
 proc myComputer*(self: gen_qfilesystemmodel_types.QFileSystemModel, role: cint): gen_qvariant_types.QVariant =
@@ -616,7 +616,7 @@ type QFileSystemModelheaderDataProc* = proc(self: QFileSystemModel, section: cin
 type QFileSystemModelflagsProc* = proc(self: QFileSystemModel, index: gen_qabstractitemmodel_types.QModelIndex): cint {.raises: [], gcsafe.}
 type QFileSystemModelsortProc* = proc(self: QFileSystemModel, column: cint, order: cint): void {.raises: [], gcsafe.}
 type QFileSystemModelmimeTypesProc* = proc(self: QFileSystemModel): seq[string] {.raises: [], gcsafe.}
-type QFileSystemModelmimeDataProc* = proc(self: QFileSystemModel, indexes: seq[gen_qabstractitemmodel_types.QModelIndex]): gen_qmimedata_types.QMimeData {.raises: [], gcsafe.}
+type QFileSystemModelmimeDataProc* = proc(self: QFileSystemModel, indexes: openArray[gen_qabstractitemmodel_types.QModelIndex]): gen_qmimedata_types.QMimeData {.raises: [], gcsafe.}
 type QFileSystemModeldropMimeDataProc* = proc(self: QFileSystemModel, data: gen_qmimedata_types.QMimeData, action: cint, row: cint, column: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool {.raises: [], gcsafe.}
 type QFileSystemModelsupportedDropActionsProc* = proc(self: QFileSystemModel): cint {.raises: [], gcsafe.}
 type QFileSystemModelroleNamesProc* = proc(self: QFileSystemModel): Table[cint,seq[byte]] {.raises: [], gcsafe.}
@@ -906,7 +906,7 @@ proc fcQFileSystemModel_vtable_callback_mimeTypes(self: pointer): struct_miqt_ar
 
   struct_miqt_array(len: csize_t(len(virtualReturn)), data: if len(virtualReturn) == 0: nil else: addr(virtualReturn_CArray[0]))
 
-proc QFileSystemModelmimeData*(self: gen_qfilesystemmodel_types.QFileSystemModel, indexes: seq[gen_qabstractitemmodel_types.QModelIndex]): gen_qmimedata_types.QMimeData =
+proc QFileSystemModelmimeData*(self: gen_qfilesystemmodel_types.QFileSystemModel, indexes: openArray[gen_qabstractitemmodel_types.QModelIndex]): gen_qmimedata_types.QMimeData =
   var indexes_CArray = newSeq[pointer](len(indexes))
   for i in 0..<len(indexes):
     indexes_CArray[i] = indexes[i].h
@@ -1485,7 +1485,7 @@ proc fcQFileSystemModel_method_callback_mimeTypes(self: pointer): struct_miqt_ar
 
   struct_miqt_array(len: csize_t(len(virtualReturn)), data: if len(virtualReturn) == 0: nil else: addr(virtualReturn_CArray[0]))
 
-method mimeData*(self: VirtualQFileSystemModel, indexes: seq[gen_qabstractitemmodel_types.QModelIndex]): gen_qmimedata_types.QMimeData {.base.} =
+method mimeData*(self: VirtualQFileSystemModel, indexes: openArray[gen_qabstractitemmodel_types.QModelIndex]): gen_qmimedata_types.QMimeData {.base.} =
   QFileSystemModelmimeData(self[], indexes)
 proc fcQFileSystemModel_method_callback_mimeData(self: pointer, indexes: struct_miqt_array): pointer {.cdecl.} =
   let inst = cast[VirtualQFileSystemModel](fcQFileSystemModel_vdata(self)[])
@@ -1792,7 +1792,7 @@ proc fcQFileSystemModel_method_callback_disconnectNotify(self: pointer, signal: 
 proc createIndex*(self: gen_qfilesystemmodel_types.QFileSystemModel, row: cint, column: cint): gen_qabstractitemmodel_types.QModelIndex =
   gen_qabstractitemmodel_types.QModelIndex(h: fcQFileSystemModel_protectedbase_createIndex(self.h, row, column), owned: true)
 
-proc encodeData*(self: gen_qfilesystemmodel_types.QFileSystemModel, indexes: seq[gen_qabstractitemmodel_types.QModelIndex], stream: gen_qdatastream_types.QDataStream): void =
+proc encodeData*(self: gen_qfilesystemmodel_types.QFileSystemModel, indexes: openArray[gen_qabstractitemmodel_types.QModelIndex], stream: gen_qdatastream_types.QDataStream): void =
   var indexes_CArray = newSeq[pointer](len(indexes))
   for i in 0..<len(indexes):
     indexes_CArray[i] = indexes[i].h
@@ -1847,7 +1847,7 @@ proc endResetModel*(self: gen_qfilesystemmodel_types.QFileSystemModel): void =
 proc changePersistentIndex*(self: gen_qfilesystemmodel_types.QFileSystemModel, fromVal: gen_qabstractitemmodel_types.QModelIndex, to: gen_qabstractitemmodel_types.QModelIndex): void =
   fcQFileSystemModel_protectedbase_changePersistentIndex(self.h, fromVal.h, to.h)
 
-proc changePersistentIndexList*(self: gen_qfilesystemmodel_types.QFileSystemModel, fromVal: seq[gen_qabstractitemmodel_types.QModelIndex], to: seq[gen_qabstractitemmodel_types.QModelIndex]): void =
+proc changePersistentIndexList*(self: gen_qfilesystemmodel_types.QFileSystemModel, fromVal: openArray[gen_qabstractitemmodel_types.QModelIndex], to: openArray[gen_qabstractitemmodel_types.QModelIndex]): void =
   var fromVal_CArray = newSeq[pointer](len(fromVal))
   for i in 0..<len(fromVal):
     fromVal_CArray[i] = fromVal[i].h
@@ -2147,6 +2147,7 @@ proc create*(T: type gen_qfilesystemmodel_types.QFileSystemModel,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQFileSystemModel_new(addr(cQFileSystemModel_mvtbl), csize_t(sizeof(pointer)))
   fcQFileSystemModel_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qfilesystemmodel_types.QFileSystemModel,
     parent: gen_qobject_types.QObject,
@@ -2154,6 +2155,7 @@ proc create*(T: type gen_qfilesystemmodel_types.QFileSystemModel,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQFileSystemModel_new2(addr(cQFileSystemModel_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQFileSystemModel_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qfilesystemmodel_types.QFileSystemModel): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQFileSystemModel_staticMetaObject())

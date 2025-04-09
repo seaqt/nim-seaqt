@@ -82,7 +82,7 @@ proc operatorAssign*(self: gen_qstatictext_types.QStaticText, param1: gen_qstati
 proc swap*(self: gen_qstatictext_types.QStaticText, other: gen_qstatictext_types.QStaticText): void =
   fcQStaticText_swap(self.h, other.h)
 
-proc setText*(self: gen_qstatictext_types.QStaticText, text: string): void =
+proc setText*(self: gen_qstatictext_types.QStaticText, text: openArray[char]): void =
   fcQStaticText_setText(self.h, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
 
 proc text*(self: gen_qstatictext_types.QStaticText): string =
@@ -137,7 +137,7 @@ proc create*(T: type gen_qstatictext_types.QStaticText): gen_qstatictext_types.Q
   let tmp = gen_qstatictext_types.QStaticText(h: fcQStaticText_new(), owned: true)
   tmp
 proc create*(T: type gen_qstatictext_types.QStaticText,
-    text: string): gen_qstatictext_types.QStaticText =
+    text: openArray[char]): gen_qstatictext_types.QStaticText =
   let tmp = gen_qstatictext_types.QStaticText(h: fcQStaticText_new2(struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))), owned: true)
   tmp
 proc create*(T: type gen_qstatictext_types.QStaticText,

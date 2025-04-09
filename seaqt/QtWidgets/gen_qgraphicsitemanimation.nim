@@ -646,6 +646,7 @@ proc create*(T: type gen_qgraphicsitemanimation_types.QGraphicsItemAnimation,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQGraphicsItemAnimation_new(addr(cQGraphicsItemAnimation_mvtbl), csize_t(sizeof(pointer)))
   fcQGraphicsItemAnimation_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qgraphicsitemanimation_types.QGraphicsItemAnimation,
     parent: gen_qobject_types.QObject,
@@ -653,6 +654,7 @@ proc create*(T: type gen_qgraphicsitemanimation_types.QGraphicsItemAnimation,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQGraphicsItemAnimation_new2(addr(cQGraphicsItemAnimation_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQGraphicsItemAnimation_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qgraphicsitemanimation_types.QGraphicsItemAnimation): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQGraphicsItemAnimation_staticMetaObject())

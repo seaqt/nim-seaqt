@@ -225,10 +225,10 @@ proc tr*(_: type gen_qerrormessage_types.QErrorMessage, s: cstring): string =
 proc qtHandler*(_: type gen_qerrormessage_types.QErrorMessage): gen_qerrormessage_types.QErrorMessage =
   gen_qerrormessage_types.QErrorMessage(h: fcQErrorMessage_qtHandler(), owned: false)
 
-proc showMessage*(self: gen_qerrormessage_types.QErrorMessage, message: string): void =
+proc showMessage*(self: gen_qerrormessage_types.QErrorMessage, message: openArray[char]): void =
   fcQErrorMessage_showMessage(self.h, struct_miqt_string(data: if len(message) > 0: addr message[0] else: nil, len: csize_t(len(message))))
 
-proc showMessage*(self: gen_qerrormessage_types.QErrorMessage, message: string, typeVal: string): void =
+proc showMessage*(self: gen_qerrormessage_types.QErrorMessage, message: openArray[char], typeVal: openArray[char]): void =
   fcQErrorMessage_showMessage2(self.h, struct_miqt_string(data: if len(message) > 0: addr message[0] else: nil, len: csize_t(len(message))), struct_miqt_string(data: if len(typeVal) > 0: addr typeVal[0] else: nil, len: csize_t(len(typeVal))))
 
 proc tr*(_: type gen_qerrormessage_types.QErrorMessage, s: cstring, c: cstring): string =
@@ -285,7 +285,7 @@ type QErrorMessagedragMoveEventProc* = proc(self: QErrorMessage, event: gen_qeve
 type QErrorMessagedragLeaveEventProc* = proc(self: QErrorMessage, event: gen_qevent_types.QDragLeaveEvent): void {.raises: [], gcsafe.}
 type QErrorMessagedropEventProc* = proc(self: QErrorMessage, event: gen_qevent_types.QDropEvent): void {.raises: [], gcsafe.}
 type QErrorMessagehideEventProc* = proc(self: QErrorMessage, event: gen_qevent_types.QHideEvent): void {.raises: [], gcsafe.}
-type QErrorMessagenativeEventProc* = proc(self: QErrorMessage, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
+type QErrorMessagenativeEventProc* = proc(self: QErrorMessage, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
 type QErrorMessagemetricProc* = proc(self: QErrorMessage, param1: cint): cint {.raises: [], gcsafe.}
 type QErrorMessageinitPainterProc* = proc(self: QErrorMessage, painter: gen_qpainter_types.QPainter): void {.raises: [], gcsafe.}
 type QErrorMessageredirectedProc* = proc(self: QErrorMessage, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.raises: [], gcsafe.}
@@ -750,7 +750,7 @@ proc fcQErrorMessage_vtable_callback_hideEvent(self: pointer, event: pointer): v
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   vtbl[].hideEvent(self, slotval1)
 
-proc QErrorMessagenativeEvent*(self: gen_qerrormessage_types.QErrorMessage, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool =
+proc QErrorMessagenativeEvent*(self: gen_qerrormessage_types.QErrorMessage, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool =
   fcQErrorMessage_virtualbase_nativeEvent(self.h, struct_miqt_string(data: if len(eventType) > 0: addr eventType[0] else: nil, len: csize_t(len(eventType))), message, resultVal)
 
 proc fcQErrorMessage_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
@@ -1187,7 +1187,7 @@ proc fcQErrorMessage_method_callback_hideEvent(self: pointer, event: pointer): v
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   inst.hideEvent(slotval1)
 
-method nativeEvent*(self: VirtualQErrorMessage, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
+method nativeEvent*(self: VirtualQErrorMessage, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
   QErrorMessagenativeEvent(self[], eventType, message, resultVal)
 proc fcQErrorMessage_method_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
   let inst = cast[VirtualQErrorMessage](fcQErrorMessage_vdata(self)[])
@@ -1627,12 +1627,14 @@ proc create*(T: type gen_qerrormessage_types.QErrorMessage,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQErrorMessage_new(addr(cQErrorMessage_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQErrorMessage_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qerrormessage_types.QErrorMessage,
     inst: VirtualQErrorMessage) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQErrorMessage_new2(addr(cQErrorMessage_mvtbl), csize_t(sizeof(pointer)))
   fcQErrorMessage_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qerrormessage_types.QErrorMessage): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQErrorMessage_staticMetaObject())

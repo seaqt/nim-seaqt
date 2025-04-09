@@ -212,7 +212,7 @@ proc subtitleText*(self: gen_qvideoframe_types.QVideoFrame): string =
   c_free(v_ms.data)
   vx_ret
 
-proc setSubtitleText*(self: gen_qvideoframe_types.QVideoFrame, text: string): void =
+proc setSubtitleText*(self: gen_qvideoframe_types.QVideoFrame, text: openArray[char]): void =
   fcQVideoFrame_setSubtitleText(self.h, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
 
 proc paint*(self: gen_qvideoframe_types.QVideoFrame, painter: gen_qpainter_types.QPainter, rect: gen_qrect_types.QRectF, options: gen_qvideoframe_types.QVideoFramePaintOptions): void =

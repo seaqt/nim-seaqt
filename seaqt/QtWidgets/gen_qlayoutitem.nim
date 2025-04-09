@@ -714,6 +714,7 @@ proc create*(T: type gen_qlayoutitem_types.QLayoutItem,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQLayoutItem_new(addr(cQLayoutItem_mvtbl), csize_t(sizeof(pointer)))
   fcQLayoutItem_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qlayoutitem_types.QLayoutItem,
     param1: gen_qlayoutitem_types.QLayoutItem,
@@ -721,6 +722,7 @@ proc create*(T: type gen_qlayoutitem_types.QLayoutItem,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQLayoutItem_new2(addr(cQLayoutItem_mvtbl), csize_t(sizeof(pointer)), param1.h)
   fcQLayoutItem_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qlayoutitem_types.QLayoutItem,
     alignment: cint,
@@ -728,6 +730,7 @@ proc create*(T: type gen_qlayoutitem_types.QLayoutItem,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQLayoutItem_new3(addr(cQLayoutItem_mvtbl), csize_t(sizeof(pointer)), cint(alignment))
   fcQLayoutItem_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc changeSize*(self: gen_qlayoutitem_types.QSpacerItem, w: cint, h: cint): void =
   fcQSpacerItem_changeSize(self.h, w, h)
@@ -1254,6 +1257,7 @@ proc create*(T: type gen_qlayoutitem_types.QSpacerItem,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQSpacerItem_new(addr(cQSpacerItem_mvtbl), csize_t(sizeof(pointer)), w, h)
   fcQSpacerItem_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qlayoutitem_types.QSpacerItem,
     param1: gen_qlayoutitem_types.QSpacerItem,
@@ -1261,6 +1265,7 @@ proc create*(T: type gen_qlayoutitem_types.QSpacerItem,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQSpacerItem_new2(addr(cQSpacerItem_mvtbl), csize_t(sizeof(pointer)), param1.h)
   fcQSpacerItem_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qlayoutitem_types.QSpacerItem,
     w: cint, h: cint, hData: cint,
@@ -1268,6 +1273,7 @@ proc create*(T: type gen_qlayoutitem_types.QSpacerItem,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQSpacerItem_new3(addr(cQSpacerItem_mvtbl), csize_t(sizeof(pointer)), w, h, cint(hData))
   fcQSpacerItem_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qlayoutitem_types.QSpacerItem,
     w: cint, h: cint, hData: cint, vData: cint,
@@ -1275,6 +1281,7 @@ proc create*(T: type gen_qlayoutitem_types.QSpacerItem,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQSpacerItem_new4(addr(cQSpacerItem_mvtbl), csize_t(sizeof(pointer)), w, h, cint(hData), cint(vData))
   fcQSpacerItem_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc sizeHint*(self: gen_qlayoutitem_types.QWidgetItem): gen_qsize_types.QSize =
   gen_qsize_types.QSize(h: fcQWidgetItem_sizeHint(self.h), owned: true)
@@ -1678,6 +1685,7 @@ proc create*(T: type gen_qlayoutitem_types.QWidgetItem,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQWidgetItem_new(addr(cQWidgetItem_mvtbl), csize_t(sizeof(pointer)), w.h)
   fcQWidgetItem_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc sizeHint*(self: gen_qlayoutitem_types.QWidgetItemV2): gen_qsize_types.QSize =
   gen_qsize_types.QSize(h: fcQWidgetItemV2_sizeHint(self.h), owned: true)
@@ -2057,4 +2065,5 @@ proc create*(T: type gen_qlayoutitem_types.QWidgetItemV2,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQWidgetItemV2_new(addr(cQWidgetItemV2_mvtbl), csize_t(sizeof(pointer)), widget.h)
   fcQWidgetItemV2_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 

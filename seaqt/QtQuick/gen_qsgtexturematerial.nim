@@ -226,6 +226,7 @@ proc create*(T: type gen_qsgtexturematerial_types.QSGOpaqueTextureMaterial,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQSGOpaqueTextureMaterial_new(addr(cQSGOpaqueTextureMaterial_mvtbl), csize_t(sizeof(pointer)))
   fcQSGOpaqueTextureMaterial_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc typeX*(self: gen_qsgtexturematerial_types.QSGTextureMaterial): gen_qsgmaterialtype_types.QSGMaterialType =
   gen_qsgmaterialtype_types.QSGMaterialType(h: fcQSGTextureMaterial_typeX(self.h), owned: false)

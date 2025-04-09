@@ -403,7 +403,7 @@ proc text*(self: gen_qstandarditemmodel_types.QStandardItem): string =
   c_free(v_ms.data)
   vx_ret
 
-proc setText*(self: gen_qstandarditemmodel_types.QStandardItem, text: string): void =
+proc setText*(self: gen_qstandarditemmodel_types.QStandardItem, text: openArray[char]): void =
   fcQStandardItem_setText(self.h, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
 
 proc icon*(self: gen_qstandarditemmodel_types.QStandardItem): gen_qicon_types.QIcon =
@@ -418,7 +418,7 @@ proc toolTip*(self: gen_qstandarditemmodel_types.QStandardItem): string =
   c_free(v_ms.data)
   vx_ret
 
-proc setToolTip*(self: gen_qstandarditemmodel_types.QStandardItem, toolTip: string): void =
+proc setToolTip*(self: gen_qstandarditemmodel_types.QStandardItem, toolTip: openArray[char]): void =
   fcQStandardItem_setToolTip(self.h, struct_miqt_string(data: if len(toolTip) > 0: addr toolTip[0] else: nil, len: csize_t(len(toolTip))))
 
 proc statusTip*(self: gen_qstandarditemmodel_types.QStandardItem): string =
@@ -427,7 +427,7 @@ proc statusTip*(self: gen_qstandarditemmodel_types.QStandardItem): string =
   c_free(v_ms.data)
   vx_ret
 
-proc setStatusTip*(self: gen_qstandarditemmodel_types.QStandardItem, statusTip: string): void =
+proc setStatusTip*(self: gen_qstandarditemmodel_types.QStandardItem, statusTip: openArray[char]): void =
   fcQStandardItem_setStatusTip(self.h, struct_miqt_string(data: if len(statusTip) > 0: addr statusTip[0] else: nil, len: csize_t(len(statusTip))))
 
 proc whatsThis*(self: gen_qstandarditemmodel_types.QStandardItem): string =
@@ -436,7 +436,7 @@ proc whatsThis*(self: gen_qstandarditemmodel_types.QStandardItem): string =
   c_free(v_ms.data)
   vx_ret
 
-proc setWhatsThis*(self: gen_qstandarditemmodel_types.QStandardItem, whatsThis: string): void =
+proc setWhatsThis*(self: gen_qstandarditemmodel_types.QStandardItem, whatsThis: openArray[char]): void =
   fcQStandardItem_setWhatsThis(self.h, struct_miqt_string(data: if len(whatsThis) > 0: addr whatsThis[0] else: nil, len: csize_t(len(whatsThis))))
 
 proc sizeHint*(self: gen_qstandarditemmodel_types.QStandardItem): gen_qsize_types.QSize =
@@ -481,7 +481,7 @@ proc accessibleText*(self: gen_qstandarditemmodel_types.QStandardItem): string =
   c_free(v_ms.data)
   vx_ret
 
-proc setAccessibleText*(self: gen_qstandarditemmodel_types.QStandardItem, accessibleText: string): void =
+proc setAccessibleText*(self: gen_qstandarditemmodel_types.QStandardItem, accessibleText: openArray[char]): void =
   fcQStandardItem_setAccessibleText(self.h, struct_miqt_string(data: if len(accessibleText) > 0: addr accessibleText[0] else: nil, len: csize_t(len(accessibleText))))
 
 proc accessibleDescription*(self: gen_qstandarditemmodel_types.QStandardItem): string =
@@ -490,7 +490,7 @@ proc accessibleDescription*(self: gen_qstandarditemmodel_types.QStandardItem): s
   c_free(v_ms.data)
   vx_ret
 
-proc setAccessibleDescription*(self: gen_qstandarditemmodel_types.QStandardItem, accessibleDescription: string): void =
+proc setAccessibleDescription*(self: gen_qstandarditemmodel_types.QStandardItem, accessibleDescription: openArray[char]): void =
   fcQStandardItem_setAccessibleDescription(self.h, struct_miqt_string(data: if len(accessibleDescription) > 0: addr accessibleDescription[0] else: nil, len: csize_t(len(accessibleDescription))))
 
 proc flags*(self: gen_qstandarditemmodel_types.QStandardItem): cint =
@@ -586,21 +586,21 @@ proc setChild*(self: gen_qstandarditemmodel_types.QStandardItem, row: cint, colu
 proc setChild*(self: gen_qstandarditemmodel_types.QStandardItem, row: cint, item: gen_qstandarditemmodel_types.QStandardItem): void =
   fcQStandardItem_setChild2(self.h, row, item.h)
 
-proc insertRow*(self: gen_qstandarditemmodel_types.QStandardItem, row: cint, items: seq[gen_qstandarditemmodel_types.QStandardItem]): void =
+proc insertRow*(self: gen_qstandarditemmodel_types.QStandardItem, row: cint, items: openArray[gen_qstandarditemmodel_types.QStandardItem]): void =
   var items_CArray = newSeq[pointer](len(items))
   for i in 0..<len(items):
     items_CArray[i] = items[i].h
 
   fcQStandardItem_insertRow(self.h, row, struct_miqt_array(len: csize_t(len(items)), data: if len(items) == 0: nil else: addr(items_CArray[0])))
 
-proc insertColumn*(self: gen_qstandarditemmodel_types.QStandardItem, column: cint, items: seq[gen_qstandarditemmodel_types.QStandardItem]): void =
+proc insertColumn*(self: gen_qstandarditemmodel_types.QStandardItem, column: cint, items: openArray[gen_qstandarditemmodel_types.QStandardItem]): void =
   var items_CArray = newSeq[pointer](len(items))
   for i in 0..<len(items):
     items_CArray[i] = items[i].h
 
   fcQStandardItem_insertColumn(self.h, column, struct_miqt_array(len: csize_t(len(items)), data: if len(items) == 0: nil else: addr(items_CArray[0])))
 
-proc insertRows*(self: gen_qstandarditemmodel_types.QStandardItem, row: cint, items: seq[gen_qstandarditemmodel_types.QStandardItem]): void =
+proc insertRows*(self: gen_qstandarditemmodel_types.QStandardItem, row: cint, items: openArray[gen_qstandarditemmodel_types.QStandardItem]): void =
   var items_CArray = newSeq[pointer](len(items))
   for i in 0..<len(items):
     items_CArray[i] = items[i].h
@@ -625,21 +625,21 @@ proc removeRows*(self: gen_qstandarditemmodel_types.QStandardItem, row: cint, co
 proc removeColumns*(self: gen_qstandarditemmodel_types.QStandardItem, column: cint, count: cint): void =
   fcQStandardItem_removeColumns(self.h, column, count)
 
-proc appendRow*(self: gen_qstandarditemmodel_types.QStandardItem, items: seq[gen_qstandarditemmodel_types.QStandardItem]): void =
+proc appendRow*(self: gen_qstandarditemmodel_types.QStandardItem, items: openArray[gen_qstandarditemmodel_types.QStandardItem]): void =
   var items_CArray = newSeq[pointer](len(items))
   for i in 0..<len(items):
     items_CArray[i] = items[i].h
 
   fcQStandardItem_appendRow(self.h, struct_miqt_array(len: csize_t(len(items)), data: if len(items) == 0: nil else: addr(items_CArray[0])))
 
-proc appendRows*(self: gen_qstandarditemmodel_types.QStandardItem, items: seq[gen_qstandarditemmodel_types.QStandardItem]): void =
+proc appendRows*(self: gen_qstandarditemmodel_types.QStandardItem, items: openArray[gen_qstandarditemmodel_types.QStandardItem]): void =
   var items_CArray = newSeq[pointer](len(items))
   for i in 0..<len(items):
     items_CArray[i] = items[i].h
 
   fcQStandardItem_appendRows(self.h, struct_miqt_array(len: csize_t(len(items)), data: if len(items) == 0: nil else: addr(items_CArray[0])))
 
-proc appendColumn*(self: gen_qstandarditemmodel_types.QStandardItem, items: seq[gen_qstandarditemmodel_types.QStandardItem]): void =
+proc appendColumn*(self: gen_qstandarditemmodel_types.QStandardItem, items: openArray[gen_qstandarditemmodel_types.QStandardItem]): void =
   var items_CArray = newSeq[pointer](len(items))
   for i in 0..<len(items):
     items_CArray[i] = items[i].h
@@ -890,7 +890,7 @@ proc create*(T: type gen_qstandarditemmodel_types.QStandardItem,
   fcQStandardItem_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qstandarditemmodel_types.QStandardItem,
-    text: string,
+    text: openArray[char],
     vtbl: ref QStandardItemVTable = nil): gen_qstandarditemmodel_types.QStandardItem =
   let vtbl = if vtbl == nil: new QStandardItemVTable else: vtbl
   GC_ref(vtbl)
@@ -917,7 +917,7 @@ proc create*(T: type gen_qstandarditemmodel_types.QStandardItem,
   fcQStandardItem_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qstandarditemmodel_types.QStandardItem,
-    icon: gen_qicon_types.QIcon, text: string,
+    icon: gen_qicon_types.QIcon, text: openArray[char],
     vtbl: ref QStandardItemVTable = nil): gen_qstandarditemmodel_types.QStandardItem =
   let vtbl = if vtbl == nil: new QStandardItemVTable else: vtbl
   GC_ref(vtbl)
@@ -1017,20 +1017,23 @@ proc create*(T: type gen_qstandarditemmodel_types.QStandardItem,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQStandardItem_new(addr(cQStandardItem_mvtbl), csize_t(sizeof(pointer)))
   fcQStandardItem_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qstandarditemmodel_types.QStandardItem,
-    text: string,
+    text: openArray[char],
     inst: VirtualQStandardItem) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQStandardItem_new2(addr(cQStandardItem_mvtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
   fcQStandardItem_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qstandarditemmodel_types.QStandardItem,
-    icon: gen_qicon_types.QIcon, text: string,
+    icon: gen_qicon_types.QIcon, text: openArray[char],
     inst: VirtualQStandardItem) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQStandardItem_new3(addr(cQStandardItem_mvtbl), csize_t(sizeof(pointer)), icon.h, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
   fcQStandardItem_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qstandarditemmodel_types.QStandardItem,
     rows: cint,
@@ -1038,6 +1041,7 @@ proc create*(T: type gen_qstandarditemmodel_types.QStandardItem,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQStandardItem_new4(addr(cQStandardItem_mvtbl), csize_t(sizeof(pointer)), rows)
   fcQStandardItem_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qstandarditemmodel_types.QStandardItem,
     rows: cint, columns: cint,
@@ -1045,6 +1049,7 @@ proc create*(T: type gen_qstandarditemmodel_types.QStandardItem,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQStandardItem_new5(addr(cQStandardItem_mvtbl), csize_t(sizeof(pointer)), rows, columns)
   fcQStandardItem_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc metaObject*(self: gen_qstandarditemmodel_types.QStandardItemModel): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQStandardItemModel_metaObject(self.h), owned: false)
@@ -1209,14 +1214,14 @@ proc verticalHeaderItem*(self: gen_qstandarditemmodel_types.QStandardItemModel, 
 proc setVerticalHeaderItem*(self: gen_qstandarditemmodel_types.QStandardItemModel, row: cint, item: gen_qstandarditemmodel_types.QStandardItem): void =
   fcQStandardItemModel_setVerticalHeaderItem(self.h, row, item.h)
 
-proc setHorizontalHeaderLabels*(self: gen_qstandarditemmodel_types.QStandardItemModel, labels: seq[string]): void =
+proc setHorizontalHeaderLabels*(self: gen_qstandarditemmodel_types.QStandardItemModel, labels: openArray[string]): void =
   var labels_CArray = newSeq[struct_miqt_string](len(labels))
   for i in 0..<len(labels):
     labels_CArray[i] = struct_miqt_string(data: if len(labels[i]) > 0: addr labels[i][0] else: nil, len: csize_t(len(labels[i])))
 
   fcQStandardItemModel_setHorizontalHeaderLabels(self.h, struct_miqt_array(len: csize_t(len(labels)), data: if len(labels) == 0: nil else: addr(labels_CArray[0])))
 
-proc setVerticalHeaderLabels*(self: gen_qstandarditemmodel_types.QStandardItemModel, labels: seq[string]): void =
+proc setVerticalHeaderLabels*(self: gen_qstandarditemmodel_types.QStandardItemModel, labels: openArray[string]): void =
   var labels_CArray = newSeq[struct_miqt_string](len(labels))
   for i in 0..<len(labels):
     labels_CArray[i] = struct_miqt_string(data: if len(labels[i]) > 0: addr labels[i][0] else: nil, len: csize_t(len(labels[i])))
@@ -1229,14 +1234,14 @@ proc setRowCount*(self: gen_qstandarditemmodel_types.QStandardItemModel, rows: c
 proc setColumnCount*(self: gen_qstandarditemmodel_types.QStandardItemModel, columns: cint): void =
   fcQStandardItemModel_setColumnCount(self.h, columns)
 
-proc appendRow*(self: gen_qstandarditemmodel_types.QStandardItemModel, items: seq[gen_qstandarditemmodel_types.QStandardItem]): void =
+proc appendRow*(self: gen_qstandarditemmodel_types.QStandardItemModel, items: openArray[gen_qstandarditemmodel_types.QStandardItem]): void =
   var items_CArray = newSeq[pointer](len(items))
   for i in 0..<len(items):
     items_CArray[i] = items[i].h
 
   fcQStandardItemModel_appendRow(self.h, struct_miqt_array(len: csize_t(len(items)), data: if len(items) == 0: nil else: addr(items_CArray[0])))
 
-proc appendColumn*(self: gen_qstandarditemmodel_types.QStandardItemModel, items: seq[gen_qstandarditemmodel_types.QStandardItem]): void =
+proc appendColumn*(self: gen_qstandarditemmodel_types.QStandardItemModel, items: openArray[gen_qstandarditemmodel_types.QStandardItem]): void =
   var items_CArray = newSeq[pointer](len(items))
   for i in 0..<len(items):
     items_CArray[i] = items[i].h
@@ -1246,14 +1251,14 @@ proc appendColumn*(self: gen_qstandarditemmodel_types.QStandardItemModel, items:
 proc appendRow*(self: gen_qstandarditemmodel_types.QStandardItemModel, item: gen_qstandarditemmodel_types.QStandardItem): void =
   fcQStandardItemModel_appendRowWithItem(self.h, item.h)
 
-proc insertRow*(self: gen_qstandarditemmodel_types.QStandardItemModel, row: cint, items: seq[gen_qstandarditemmodel_types.QStandardItem]): void =
+proc insertRow*(self: gen_qstandarditemmodel_types.QStandardItemModel, row: cint, items: openArray[gen_qstandarditemmodel_types.QStandardItem]): void =
   var items_CArray = newSeq[pointer](len(items))
   for i in 0..<len(items):
     items_CArray[i] = items[i].h
 
   fcQStandardItemModel_insertRow(self.h, row, struct_miqt_array(len: csize_t(len(items)), data: if len(items) == 0: nil else: addr(items_CArray[0])))
 
-proc insertColumn*(self: gen_qstandarditemmodel_types.QStandardItemModel, column: cint, items: seq[gen_qstandarditemmodel_types.QStandardItem]): void =
+proc insertColumn*(self: gen_qstandarditemmodel_types.QStandardItemModel, column: cint, items: openArray[gen_qstandarditemmodel_types.QStandardItem]): void =
   var items_CArray = newSeq[pointer](len(items))
   for i in 0..<len(items):
     items_CArray[i] = items[i].h
@@ -1302,7 +1307,7 @@ proc itemPrototype*(self: gen_qstandarditemmodel_types.QStandardItemModel): gen_
 proc setItemPrototype*(self: gen_qstandarditemmodel_types.QStandardItemModel, item: gen_qstandarditemmodel_types.QStandardItem): void =
   fcQStandardItemModel_setItemPrototype(self.h, item.h)
 
-proc findItems*(self: gen_qstandarditemmodel_types.QStandardItemModel, text: string): seq[gen_qstandarditemmodel_types.QStandardItem] =
+proc findItems*(self: gen_qstandarditemmodel_types.QStandardItemModel, text: openArray[char]): seq[gen_qstandarditemmodel_types.QStandardItem] =
   var v_ma = fcQStandardItemModel_findItems(self.h, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
   var vx_ret = newSeq[gen_qstandarditemmodel_types.QStandardItem](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
@@ -1329,7 +1334,7 @@ proc mimeTypes*(self: gen_qstandarditemmodel_types.QStandardItemModel): seq[stri
   c_free(v_ma.data)
   vx_ret
 
-proc mimeData*(self: gen_qstandarditemmodel_types.QStandardItemModel, indexes: seq[gen_qabstractitemmodel_types.QModelIndex]): gen_qmimedata_types.QMimeData =
+proc mimeData*(self: gen_qstandarditemmodel_types.QStandardItemModel, indexes: openArray[gen_qabstractitemmodel_types.QModelIndex]): gen_qmimedata_types.QMimeData =
   var indexes_CArray = newSeq[pointer](len(indexes))
   for i in 0..<len(indexes):
     indexes_CArray[i] = indexes[i].h
@@ -1383,7 +1388,7 @@ proc insertColumn*(self: gen_qstandarditemmodel_types.QStandardItemModel, column
 proc takeItem*(self: gen_qstandarditemmodel_types.QStandardItemModel, row: cint, column: cint): gen_qstandarditemmodel_types.QStandardItem =
   gen_qstandarditemmodel_types.QStandardItem(h: fcQStandardItemModel_takeItem2(self.h, row, column), owned: false)
 
-proc findItems*(self: gen_qstandarditemmodel_types.QStandardItemModel, text: string, flags: cint): seq[gen_qstandarditemmodel_types.QStandardItem] =
+proc findItems*(self: gen_qstandarditemmodel_types.QStandardItemModel, text: openArray[char], flags: cint): seq[gen_qstandarditemmodel_types.QStandardItem] =
   var v_ma = fcQStandardItemModel_findItems2(self.h, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), cint(flags))
   var vx_ret = newSeq[gen_qstandarditemmodel_types.QStandardItem](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
@@ -1392,7 +1397,7 @@ proc findItems*(self: gen_qstandarditemmodel_types.QStandardItemModel, text: str
   c_free(v_ma.data)
   vx_ret
 
-proc findItems*(self: gen_qstandarditemmodel_types.QStandardItemModel, text: string, flags: cint, column: cint): seq[gen_qstandarditemmodel_types.QStandardItem] =
+proc findItems*(self: gen_qstandarditemmodel_types.QStandardItemModel, text: openArray[char], flags: cint, column: cint): seq[gen_qstandarditemmodel_types.QStandardItem] =
   var v_ma = fcQStandardItemModel_findItems3(self.h, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), cint(flags), column)
   var vx_ret = newSeq[gen_qstandarditemmodel_types.QStandardItem](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
@@ -1426,7 +1431,7 @@ type QStandardItemModelitemDataProc* = proc(self: QStandardItemModel, index: gen
 type QStandardItemModelsetItemDataProc* = proc(self: QStandardItemModel, index: gen_qabstractitemmodel_types.QModelIndex, roles: Table[cint,gen_qvariant_types.QVariant]): bool {.raises: [], gcsafe.}
 type QStandardItemModelsortProc* = proc(self: QStandardItemModel, column: cint, order: cint): void {.raises: [], gcsafe.}
 type QStandardItemModelmimeTypesProc* = proc(self: QStandardItemModel): seq[string] {.raises: [], gcsafe.}
-type QStandardItemModelmimeDataProc* = proc(self: QStandardItemModel, indexes: seq[gen_qabstractitemmodel_types.QModelIndex]): gen_qmimedata_types.QMimeData {.raises: [], gcsafe.}
+type QStandardItemModelmimeDataProc* = proc(self: QStandardItemModel, indexes: openArray[gen_qabstractitemmodel_types.QModelIndex]): gen_qmimedata_types.QMimeData {.raises: [], gcsafe.}
 type QStandardItemModeldropMimeDataProc* = proc(self: QStandardItemModel, data: gen_qmimedata_types.QMimeData, action: cint, row: cint, column: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool {.raises: [], gcsafe.}
 type QStandardItemModelsiblingProc* = proc(self: QStandardItemModel, row: cint, column: cint, idx: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex {.raises: [], gcsafe.}
 type QStandardItemModelcanDropMimeDataProc* = proc(self: QStandardItemModel, data: gen_qmimedata_types.QMimeData, action: cint, row: cint, column: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool {.raises: [], gcsafe.}
@@ -1871,7 +1876,7 @@ proc fcQStandardItemModel_vtable_callback_mimeTypes(self: pointer): struct_miqt_
 
   struct_miqt_array(len: csize_t(len(virtualReturn)), data: if len(virtualReturn) == 0: nil else: addr(virtualReturn_CArray[0]))
 
-proc QStandardItemModelmimeData*(self: gen_qstandarditemmodel_types.QStandardItemModel, indexes: seq[gen_qabstractitemmodel_types.QModelIndex]): gen_qmimedata_types.QMimeData =
+proc QStandardItemModelmimeData*(self: gen_qstandarditemmodel_types.QStandardItemModel, indexes: openArray[gen_qabstractitemmodel_types.QModelIndex]): gen_qmimedata_types.QMimeData =
   var indexes_CArray = newSeq[pointer](len(indexes))
   for i in 0..<len(indexes):
     indexes_CArray[i] = indexes[i].h
@@ -2394,7 +2399,7 @@ proc fcQStandardItemModel_method_callback_mimeTypes(self: pointer): struct_miqt_
 
   struct_miqt_array(len: csize_t(len(virtualReturn)), data: if len(virtualReturn) == 0: nil else: addr(virtualReturn_CArray[0]))
 
-method mimeData*(self: VirtualQStandardItemModel, indexes: seq[gen_qabstractitemmodel_types.QModelIndex]): gen_qmimedata_types.QMimeData {.base.} =
+method mimeData*(self: VirtualQStandardItemModel, indexes: openArray[gen_qabstractitemmodel_types.QModelIndex]): gen_qmimedata_types.QMimeData {.base.} =
   QStandardItemModelmimeData(self[], indexes)
 proc fcQStandardItemModel_method_callback_mimeData(self: pointer, indexes: struct_miqt_array): pointer {.cdecl.} =
   let inst = cast[VirtualQStandardItemModel](fcQStandardItemModel_vdata(self)[])
@@ -2594,7 +2599,7 @@ proc fcQStandardItemModel_method_callback_disconnectNotify(self: pointer, signal
 proc createIndex*(self: gen_qstandarditemmodel_types.QStandardItemModel, row: cint, column: cint): gen_qabstractitemmodel_types.QModelIndex =
   gen_qabstractitemmodel_types.QModelIndex(h: fcQStandardItemModel_protectedbase_createIndex(self.h, row, column), owned: true)
 
-proc encodeData*(self: gen_qstandarditemmodel_types.QStandardItemModel, indexes: seq[gen_qabstractitemmodel_types.QModelIndex], stream: gen_qdatastream_types.QDataStream): void =
+proc encodeData*(self: gen_qstandarditemmodel_types.QStandardItemModel, indexes: openArray[gen_qabstractitemmodel_types.QModelIndex], stream: gen_qdatastream_types.QDataStream): void =
   var indexes_CArray = newSeq[pointer](len(indexes))
   for i in 0..<len(indexes):
     indexes_CArray[i] = indexes[i].h
@@ -2649,7 +2654,7 @@ proc endResetModel*(self: gen_qstandarditemmodel_types.QStandardItemModel): void
 proc changePersistentIndex*(self: gen_qstandarditemmodel_types.QStandardItemModel, fromVal: gen_qabstractitemmodel_types.QModelIndex, to: gen_qabstractitemmodel_types.QModelIndex): void =
   fcQStandardItemModel_protectedbase_changePersistentIndex(self.h, fromVal.h, to.h)
 
-proc changePersistentIndexList*(self: gen_qstandarditemmodel_types.QStandardItemModel, fromVal: seq[gen_qabstractitemmodel_types.QModelIndex], to: seq[gen_qabstractitemmodel_types.QModelIndex]): void =
+proc changePersistentIndexList*(self: gen_qstandarditemmodel_types.QStandardItemModel, fromVal: openArray[gen_qabstractitemmodel_types.QModelIndex], to: openArray[gen_qabstractitemmodel_types.QModelIndex]): void =
   var fromVal_CArray = newSeq[pointer](len(fromVal))
   for i in 0..<len(fromVal):
     fromVal_CArray[i] = fromVal[i].h
@@ -3159,6 +3164,7 @@ proc create*(T: type gen_qstandarditemmodel_types.QStandardItemModel,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQStandardItemModel_new(addr(cQStandardItemModel_mvtbl), csize_t(sizeof(pointer)))
   fcQStandardItemModel_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qstandarditemmodel_types.QStandardItemModel,
     rows: cint, columns: cint,
@@ -3166,6 +3172,7 @@ proc create*(T: type gen_qstandarditemmodel_types.QStandardItemModel,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQStandardItemModel_new2(addr(cQStandardItemModel_mvtbl), csize_t(sizeof(pointer)), rows, columns)
   fcQStandardItemModel_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qstandarditemmodel_types.QStandardItemModel,
     parent: gen_qobject_types.QObject,
@@ -3173,6 +3180,7 @@ proc create*(T: type gen_qstandarditemmodel_types.QStandardItemModel,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQStandardItemModel_new3(addr(cQStandardItemModel_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQStandardItemModel_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qstandarditemmodel_types.QStandardItemModel,
     rows: cint, columns: cint, parent: gen_qobject_types.QObject,
@@ -3180,6 +3188,7 @@ proc create*(T: type gen_qstandarditemmodel_types.QStandardItemModel,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQStandardItemModel_new4(addr(cQStandardItemModel_mvtbl), csize_t(sizeof(pointer)), rows, columns, parent.h)
   fcQStandardItemModel_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qstandarditemmodel_types.QStandardItemModel): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQStandardItemModel_staticMetaObject())

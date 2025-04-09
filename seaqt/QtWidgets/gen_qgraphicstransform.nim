@@ -561,6 +561,7 @@ proc create*(T: type gen_qgraphicstransform_types.QGraphicsTransform,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQGraphicsTransform_new(addr(cQGraphicsTransform_mvtbl), csize_t(sizeof(pointer)))
   fcQGraphicsTransform_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qgraphicstransform_types.QGraphicsTransform,
     parent: gen_qobject_types.QObject,
@@ -568,6 +569,7 @@ proc create*(T: type gen_qgraphicstransform_types.QGraphicsTransform,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQGraphicsTransform_new2(addr(cQGraphicsTransform_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQGraphicsTransform_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qgraphicstransform_types.QGraphicsTransform): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQGraphicsTransform_staticMetaObject())
@@ -1037,6 +1039,7 @@ proc create*(T: type gen_qgraphicstransform_types.QGraphicsScale,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQGraphicsScale_new(addr(cQGraphicsScale_mvtbl), csize_t(sizeof(pointer)))
   fcQGraphicsScale_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qgraphicstransform_types.QGraphicsScale,
     parent: gen_qobject_types.QObject,
@@ -1044,6 +1047,7 @@ proc create*(T: type gen_qgraphicstransform_types.QGraphicsScale,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQGraphicsScale_new2(addr(cQGraphicsScale_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQGraphicsScale_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qgraphicstransform_types.QGraphicsScale): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQGraphicsScale_staticMetaObject())
@@ -1474,6 +1478,7 @@ proc create*(T: type gen_qgraphicstransform_types.QGraphicsRotation,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQGraphicsRotation_new(addr(cQGraphicsRotation_mvtbl), csize_t(sizeof(pointer)))
   fcQGraphicsRotation_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qgraphicstransform_types.QGraphicsRotation,
     parent: gen_qobject_types.QObject,
@@ -1481,6 +1486,7 @@ proc create*(T: type gen_qgraphicstransform_types.QGraphicsRotation,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQGraphicsRotation_new2(addr(cQGraphicsRotation_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQGraphicsRotation_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qgraphicstransform_types.QGraphicsRotation): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQGraphicsRotation_staticMetaObject())

@@ -363,7 +363,7 @@ type QToolButtondragLeaveEventProc* = proc(self: QToolButton, event: gen_qevent_
 type QToolButtondropEventProc* = proc(self: QToolButton, event: gen_qevent_types.QDropEvent): void {.raises: [], gcsafe.}
 type QToolButtonshowEventProc* = proc(self: QToolButton, event: gen_qevent_types.QShowEvent): void {.raises: [], gcsafe.}
 type QToolButtonhideEventProc* = proc(self: QToolButton, event: gen_qevent_types.QHideEvent): void {.raises: [], gcsafe.}
-type QToolButtonnativeEventProc* = proc(self: QToolButton, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
+type QToolButtonnativeEventProc* = proc(self: QToolButton, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
 type QToolButtonmetricProc* = proc(self: QToolButton, param1: cint): cint {.raises: [], gcsafe.}
 type QToolButtoninitPainterProc* = proc(self: QToolButton, painter: gen_qpainter_types.QPainter): void {.raises: [], gcsafe.}
 type QToolButtonredirectedProc* = proc(self: QToolButton, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.raises: [], gcsafe.}
@@ -818,7 +818,7 @@ proc fcQToolButton_vtable_callback_hideEvent(self: pointer, event: pointer): voi
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   vtbl[].hideEvent(self, slotval1)
 
-proc QToolButtonnativeEvent*(self: gen_qtoolbutton_types.QToolButton, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool =
+proc QToolButtonnativeEvent*(self: gen_qtoolbutton_types.QToolButton, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool =
   fcQToolButton_virtualbase_nativeEvent(self.h, struct_miqt_string(data: if len(eventType) > 0: addr eventType[0] else: nil, len: csize_t(len(eventType))), message, resultVal)
 
 proc fcQToolButton_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
@@ -1250,7 +1250,7 @@ proc fcQToolButton_method_callback_hideEvent(self: pointer, event: pointer): voi
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   inst.hideEvent(slotval1)
 
-method nativeEvent*(self: VirtualQToolButton, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
+method nativeEvent*(self: VirtualQToolButton, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
   QToolButtonnativeEvent(self[], eventType, message, resultVal)
 proc fcQToolButton_method_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
   let inst = cast[VirtualQToolButton](fcQToolButton_vdata(self)[])
@@ -1684,12 +1684,14 @@ proc create*(T: type gen_qtoolbutton_types.QToolButton,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQToolButton_new(addr(cQToolButton_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQToolButton_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qtoolbutton_types.QToolButton,
     inst: VirtualQToolButton) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQToolButton_new2(addr(cQToolButton_mvtbl), csize_t(sizeof(pointer)))
   fcQToolButton_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qtoolbutton_types.QToolButton): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQToolButton_staticMetaObject())

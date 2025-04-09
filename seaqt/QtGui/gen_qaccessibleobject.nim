@@ -80,7 +80,7 @@ proc objectX*(self: gen_qaccessibleobject_types.QAccessibleObject): gen_qobject_
 proc rect*(self: gen_qaccessibleobject_types.QAccessibleObject): gen_qrect_types.QRect =
   gen_qrect_types.QRect(h: fcQAccessibleObject_rect(self.h), owned: true)
 
-proc setText*(self: gen_qaccessibleobject_types.QAccessibleObject, t: cint, text: string): void =
+proc setText*(self: gen_qaccessibleobject_types.QAccessibleObject, t: cint, text: openArray[char]): void =
   fcQAccessibleObject_setText(self.h, cint(t), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
 
 proc childAt*(self: gen_qaccessibleobject_types.QAccessibleObject, x: cint, y: cint): gen_qaccessible_types.QAccessibleInterface =

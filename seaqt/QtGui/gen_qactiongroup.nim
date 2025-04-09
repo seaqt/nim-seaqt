@@ -136,10 +136,10 @@ proc tr*(_: type gen_qactiongroup_types.QActionGroup, s: cstring): string =
 proc addAction*(self: gen_qactiongroup_types.QActionGroup, a: gen_qaction_types.QAction): gen_qaction_types.QAction =
   gen_qaction_types.QAction(h: fcQActionGroup_addAction(self.h, a.h), owned: false)
 
-proc addAction*(self: gen_qactiongroup_types.QActionGroup, text: string): gen_qaction_types.QAction =
+proc addAction*(self: gen_qactiongroup_types.QActionGroup, text: openArray[char]): gen_qaction_types.QAction =
   gen_qaction_types.QAction(h: fcQActionGroup_addActionWithText(self.h, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))), owned: false)
 
-proc addAction*(self: gen_qactiongroup_types.QActionGroup, icon: gen_qicon_types.QIcon, text: string): gen_qaction_types.QAction =
+proc addAction*(self: gen_qactiongroup_types.QActionGroup, icon: gen_qicon_types.QIcon, text: openArray[char]): gen_qaction_types.QAction =
   gen_qaction_types.QAction(h: fcQActionGroup_addAction2(self.h, icon.h, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))), owned: false)
 
 proc removeAction*(self: gen_qactiongroup_types.QActionGroup, a: gen_qaction_types.QAction): void =
@@ -503,6 +503,7 @@ proc create*(T: type gen_qactiongroup_types.QActionGroup,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQActionGroup_new(addr(cQActionGroup_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQActionGroup_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qactiongroup_types.QActionGroup): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQActionGroup_staticMetaObject())

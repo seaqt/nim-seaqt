@@ -83,7 +83,7 @@ proc description*(self: gen_qqmlerror_types.QQmlError): string =
   c_free(v_ms.data)
   vx_ret
 
-proc setDescription*(self: gen_qqmlerror_types.QQmlError, description: string): void =
+proc setDescription*(self: gen_qqmlerror_types.QQmlError, description: openArray[char]): void =
   fcQQmlError_setDescription(self.h, struct_miqt_string(data: if len(description) > 0: addr description[0] else: nil, len: csize_t(len(description))))
 
 proc line*(self: gen_qqmlerror_types.QQmlError): cint =

@@ -227,7 +227,7 @@ type QSctpSocketreadDataProc* = proc(self: QSctpSocket, data: cstring, maxlen: c
 type QSctpSocketreadLineDataProc* = proc(self: QSctpSocket, data: cstring, maxlen: clonglong): clonglong {.raises: [], gcsafe.}
 type QSctpSocketresumeProc* = proc(self: QSctpSocket): void {.raises: [], gcsafe.}
 type QSctpSocketbindXProc* = proc(self: QSctpSocket, address: gen_qhostaddress_types.QHostAddress, port: cushort, mode: cint): bool {.raises: [], gcsafe.}
-type QSctpSocketconnectToHostProc* = proc(self: QSctpSocket, hostName: string, port: cushort, mode: cint, protocol: cint): void {.raises: [], gcsafe.}
+type QSctpSocketconnectToHostProc* = proc(self: QSctpSocket, hostName: openArray[char], port: cushort, mode: cint, protocol: cint): void {.raises: [], gcsafe.}
 type QSctpSocketbytesAvailableProc* = proc(self: QSctpSocket): clonglong {.raises: [], gcsafe.}
 type QSctpSocketbytesToWriteProc* = proc(self: QSctpSocket): clonglong {.raises: [], gcsafe.}
 type QSctpSocketsetReadBufferSizeProc* = proc(self: QSctpSocket, size: clonglong): void {.raises: [], gcsafe.}
@@ -388,7 +388,7 @@ proc fcQSctpSocket_vtable_callback_bindX(self: pointer, address: pointer, port: 
   var virtualReturn = vtbl[].bindX(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QSctpSocketconnectToHost*(self: gen_qsctpsocket_types.QSctpSocket, hostName: string, port: cushort, mode: cint, protocol: cint): void =
+proc QSctpSocketconnectToHost*(self: gen_qsctpsocket_types.QSctpSocket, hostName: openArray[char], port: cushort, mode: cint, protocol: cint): void =
   fcQSctpSocket_virtualbase_connectToHost(self.h, struct_miqt_string(data: if len(hostName) > 0: addr hostName[0] else: nil, len: csize_t(len(hostName))), port, cint(mode), cint(protocol))
 
 proc fcQSctpSocket_vtable_callback_connectToHost(self: pointer, hostName: struct_miqt_string, port: cushort, mode: cint, protocol: cint): void {.cdecl.} =
@@ -748,7 +748,7 @@ proc fcQSctpSocket_method_callback_bindX(self: pointer, address: pointer, port: 
   var virtualReturn = inst.bindX(slotval1, slotval2, slotval3)
   virtualReturn
 
-method connectToHost*(self: VirtualQSctpSocket, hostName: string, port: cushort, mode: cint, protocol: cint): void {.base.} =
+method connectToHost*(self: VirtualQSctpSocket, hostName: openArray[char], port: cushort, mode: cint, protocol: cint): void {.base.} =
   QSctpSocketconnectToHost(self[], hostName, port, mode, protocol)
 proc fcQSctpSocket_method_callback_connectToHost(self: pointer, hostName: struct_miqt_string, port: cushort, mode: cint, protocol: cint): void {.cdecl.} =
   let inst = cast[VirtualQSctpSocket](fcQSctpSocket_vdata(self)[])
@@ -992,13 +992,13 @@ proc setPeerPort*(self: gen_qsctpsocket_types.QSctpSocket, port: cushort): void 
 proc setPeerAddress*(self: gen_qsctpsocket_types.QSctpSocket, address: gen_qhostaddress_types.QHostAddress): void =
   fcQSctpSocket_protectedbase_setPeerAddress(self.h, address.h)
 
-proc setPeerName*(self: gen_qsctpsocket_types.QSctpSocket, name: string): void =
+proc setPeerName*(self: gen_qsctpsocket_types.QSctpSocket, name: openArray[char]): void =
   fcQSctpSocket_protectedbase_setPeerName(self.h, struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))))
 
 proc setOpenMode*(self: gen_qsctpsocket_types.QSctpSocket, openMode: cint): void =
   fcQSctpSocket_protectedbase_setOpenMode(self.h, cint(openMode))
 
-proc setErrorString*(self: gen_qsctpsocket_types.QSctpSocket, errorString: string): void =
+proc setErrorString*(self: gen_qsctpsocket_types.QSctpSocket, errorString: openArray[char]): void =
   fcQSctpSocket_protectedbase_setErrorString(self.h, struct_miqt_string(data: if len(errorString) > 0: addr errorString[0] else: nil, len: csize_t(len(errorString))))
 
 proc sender*(self: gen_qsctpsocket_types.QSctpSocket): gen_qobject_types.QObject =
@@ -1236,6 +1236,7 @@ proc create*(T: type gen_qsctpsocket_types.QSctpSocket,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQSctpSocket_new(addr(cQSctpSocket_mvtbl), csize_t(sizeof(pointer)))
   fcQSctpSocket_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qsctpsocket_types.QSctpSocket,
     parent: gen_qobject_types.QObject,
@@ -1243,6 +1244,7 @@ proc create*(T: type gen_qsctpsocket_types.QSctpSocket,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQSctpSocket_new2(addr(cQSctpSocket_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQSctpSocket_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qsctpsocket_types.QSctpSocket): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQSctpSocket_staticMetaObject())

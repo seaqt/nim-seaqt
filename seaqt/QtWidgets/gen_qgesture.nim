@@ -723,6 +723,7 @@ proc create*(T: type gen_qgesture_types.QGesture,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQGesture_new(addr(cQGesture_mvtbl), csize_t(sizeof(pointer)))
   fcQGesture_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qgesture_types.QGesture,
     parent: gen_qobject_types.QObject,
@@ -730,6 +731,7 @@ proc create*(T: type gen_qgesture_types.QGesture,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQGesture_new2(addr(cQGesture_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQGesture_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qgesture_types.QGesture): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQGesture_staticMetaObject())
@@ -1077,6 +1079,7 @@ proc create*(T: type gen_qgesture_types.QPanGesture,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQPanGesture_new(addr(cQPanGesture_mvtbl), csize_t(sizeof(pointer)))
   fcQPanGesture_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qgesture_types.QPanGesture,
     parent: gen_qobject_types.QObject,
@@ -1084,6 +1087,7 @@ proc create*(T: type gen_qgesture_types.QPanGesture,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQPanGesture_new2(addr(cQPanGesture_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQPanGesture_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qgesture_types.QPanGesture): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQPanGesture_staticMetaObject())
@@ -1476,6 +1480,7 @@ proc create*(T: type gen_qgesture_types.QPinchGesture,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQPinchGesture_new(addr(cQPinchGesture_mvtbl), csize_t(sizeof(pointer)))
   fcQPinchGesture_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qgesture_types.QPinchGesture,
     parent: gen_qobject_types.QObject,
@@ -1483,6 +1488,7 @@ proc create*(T: type gen_qgesture_types.QPinchGesture,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQPinchGesture_new2(addr(cQPinchGesture_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQPinchGesture_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qgesture_types.QPinchGesture): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQPinchGesture_staticMetaObject())
@@ -1821,6 +1827,7 @@ proc create*(T: type gen_qgesture_types.QSwipeGesture,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQSwipeGesture_new(addr(cQSwipeGesture_mvtbl), csize_t(sizeof(pointer)))
   fcQSwipeGesture_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qgesture_types.QSwipeGesture,
     parent: gen_qobject_types.QObject,
@@ -1828,6 +1835,7 @@ proc create*(T: type gen_qgesture_types.QSwipeGesture,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQSwipeGesture_new2(addr(cQSwipeGesture_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQSwipeGesture_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qgesture_types.QSwipeGesture): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQSwipeGesture_staticMetaObject())
@@ -2160,6 +2168,7 @@ proc create*(T: type gen_qgesture_types.QTapGesture,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQTapGesture_new(addr(cQTapGesture_mvtbl), csize_t(sizeof(pointer)))
   fcQTapGesture_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qgesture_types.QTapGesture,
     parent: gen_qobject_types.QObject,
@@ -2167,6 +2176,7 @@ proc create*(T: type gen_qgesture_types.QTapGesture,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQTapGesture_new2(addr(cQTapGesture_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQTapGesture_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qgesture_types.QTapGesture): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQTapGesture_staticMetaObject())
@@ -2505,6 +2515,7 @@ proc create*(T: type gen_qgesture_types.QTapAndHoldGesture,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQTapAndHoldGesture_new(addr(cQTapAndHoldGesture_mvtbl), csize_t(sizeof(pointer)))
   fcQTapAndHoldGesture_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qgesture_types.QTapAndHoldGesture,
     parent: gen_qobject_types.QObject,
@@ -2512,6 +2523,7 @@ proc create*(T: type gen_qgesture_types.QTapAndHoldGesture,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQTapAndHoldGesture_new2(addr(cQTapAndHoldGesture_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQTapAndHoldGesture_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qgesture_types.QTapAndHoldGesture): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQTapAndHoldGesture_staticMetaObject())
@@ -2622,7 +2634,7 @@ proc fcQGestureEvent_method_callback_clone(self: pointer): pointer {.cdecl.} =
   virtualReturn.h
 
 proc create*(T: type gen_qgesture_types.QGestureEvent,
-    gestures: seq[gen_qgesture_types.QGesture],
+    gestures: openArray[gen_qgesture_types.QGesture],
     vtbl: ref QGestureEventVTable = nil): gen_qgesture_types.QGestureEvent =
   var gestures_CArray = newSeq[pointer](len(gestures))
   for i in 0..<len(gestures):
@@ -2665,7 +2677,7 @@ const cQGestureEvent_mvtbl = cQGestureEventVTable(
   clone: fcQGestureEvent_method_callback_clone,
 )
 proc create*(T: type gen_qgesture_types.QGestureEvent,
-    gestures: seq[gen_qgesture_types.QGesture],
+    gestures: openArray[gen_qgesture_types.QGesture],
     inst: VirtualQGestureEvent) =
   var gestures_CArray = newSeq[pointer](len(gestures))
   for i in 0..<len(gestures):
@@ -2674,6 +2686,7 @@ proc create*(T: type gen_qgesture_types.QGestureEvent,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQGestureEvent_new(addr(cQGestureEvent_mvtbl), csize_t(sizeof(pointer)), struct_miqt_array(len: csize_t(len(gestures)), data: if len(gestures) == 0: nil else: addr(gestures_CArray[0])))
   fcQGestureEvent_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qgesture_types.QGestureEvent,
     param1: gen_qgesture_types.QGestureEvent,
@@ -2681,4 +2694,5 @@ proc create*(T: type gen_qgesture_types.QGestureEvent,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQGestureEvent_new2(addr(cQGestureEvent_mvtbl), csize_t(sizeof(pointer)), param1.h)
   fcQGestureEvent_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 

@@ -205,7 +205,7 @@ type QTcpSocketmetacastProc* = proc(self: QTcpSocket, param1: cstring): pointer 
 type QTcpSocketmetacallProc* = proc(self: QTcpSocket, param1: cint, param2: cint, param3: pointer): cint {.raises: [], gcsafe.}
 type QTcpSocketresumeProc* = proc(self: QTcpSocket): void {.raises: [], gcsafe.}
 type QTcpSocketbindXProc* = proc(self: QTcpSocket, address: gen_qhostaddress_types.QHostAddress, port: cushort, mode: cint): bool {.raises: [], gcsafe.}
-type QTcpSocketconnectToHostProc* = proc(self: QTcpSocket, hostName: string, port: cushort, mode: cint, protocol: cint): void {.raises: [], gcsafe.}
+type QTcpSocketconnectToHostProc* = proc(self: QTcpSocket, hostName: openArray[char], port: cushort, mode: cint, protocol: cint): void {.raises: [], gcsafe.}
 type QTcpSocketdisconnectFromHostProc* = proc(self: QTcpSocket): void {.raises: [], gcsafe.}
 type QTcpSocketbytesAvailableProc* = proc(self: QTcpSocket): clonglong {.raises: [], gcsafe.}
 type QTcpSocketbytesToWriteProc* = proc(self: QTcpSocket): clonglong {.raises: [], gcsafe.}
@@ -332,7 +332,7 @@ proc fcQTcpSocket_vtable_callback_bindX(self: pointer, address: pointer, port: c
   var virtualReturn = vtbl[].bindX(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QTcpSocketconnectToHost*(self: gen_qtcpsocket_types.QTcpSocket, hostName: string, port: cushort, mode: cint, protocol: cint): void =
+proc QTcpSocketconnectToHost*(self: gen_qtcpsocket_types.QTcpSocket, hostName: openArray[char], port: cushort, mode: cint, protocol: cint): void =
   fcQTcpSocket_virtualbase_connectToHost(self.h, struct_miqt_string(data: if len(hostName) > 0: addr hostName[0] else: nil, len: csize_t(len(hostName))), port, cint(mode), cint(protocol))
 
 proc fcQTcpSocket_vtable_callback_connectToHost(self: pointer, hostName: struct_miqt_string, port: cushort, mode: cint, protocol: cint): void {.cdecl.} =
@@ -700,7 +700,7 @@ proc fcQTcpSocket_method_callback_bindX(self: pointer, address: pointer, port: c
   var virtualReturn = inst.bindX(slotval1, slotval2, slotval3)
   virtualReturn
 
-method connectToHost*(self: VirtualQTcpSocket, hostName: string, port: cushort, mode: cint, protocol: cint): void {.base.} =
+method connectToHost*(self: VirtualQTcpSocket, hostName: openArray[char], port: cushort, mode: cint, protocol: cint): void {.base.} =
   QTcpSocketconnectToHost(self[], hostName, port, mode, protocol)
 proc fcQTcpSocket_method_callback_connectToHost(self: pointer, hostName: struct_miqt_string, port: cushort, mode: cint, protocol: cint): void {.cdecl.} =
   let inst = cast[VirtualQTcpSocket](fcQTcpSocket_vdata(self)[])
@@ -974,13 +974,13 @@ proc setPeerPort*(self: gen_qtcpsocket_types.QTcpSocket, port: cushort): void =
 proc setPeerAddress*(self: gen_qtcpsocket_types.QTcpSocket, address: gen_qhostaddress_types.QHostAddress): void =
   fcQTcpSocket_protectedbase_setPeerAddress(self.h, address.h)
 
-proc setPeerName*(self: gen_qtcpsocket_types.QTcpSocket, name: string): void =
+proc setPeerName*(self: gen_qtcpsocket_types.QTcpSocket, name: openArray[char]): void =
   fcQTcpSocket_protectedbase_setPeerName(self.h, struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))))
 
 proc setOpenMode*(self: gen_qtcpsocket_types.QTcpSocket, openMode: cint): void =
   fcQTcpSocket_protectedbase_setOpenMode(self.h, cint(openMode))
 
-proc setErrorString*(self: gen_qtcpsocket_types.QTcpSocket, errorString: string): void =
+proc setErrorString*(self: gen_qtcpsocket_types.QTcpSocket, errorString: openArray[char]): void =
   fcQTcpSocket_protectedbase_setErrorString(self.h, struct_miqt_string(data: if len(errorString) > 0: addr errorString[0] else: nil, len: csize_t(len(errorString))))
 
 proc sender*(self: gen_qtcpsocket_types.QTcpSocket): gen_qobject_types.QObject =
@@ -1218,6 +1218,7 @@ proc create*(T: type gen_qtcpsocket_types.QTcpSocket,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQTcpSocket_new(addr(cQTcpSocket_mvtbl), csize_t(sizeof(pointer)))
   fcQTcpSocket_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qtcpsocket_types.QTcpSocket,
     parent: gen_qobject_types.QObject,
@@ -1225,6 +1226,7 @@ proc create*(T: type gen_qtcpsocket_types.QTcpSocket,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQTcpSocket_new2(addr(cQTcpSocket_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQTcpSocket_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qtcpsocket_types.QTcpSocket): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQTcpSocket_staticMetaObject())

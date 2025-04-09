@@ -303,7 +303,7 @@ type QDialdragLeaveEventProc* = proc(self: QDial, event: gen_qevent_types.QDragL
 type QDialdropEventProc* = proc(self: QDial, event: gen_qevent_types.QDropEvent): void {.raises: [], gcsafe.}
 type QDialshowEventProc* = proc(self: QDial, event: gen_qevent_types.QShowEvent): void {.raises: [], gcsafe.}
 type QDialhideEventProc* = proc(self: QDial, event: gen_qevent_types.QHideEvent): void {.raises: [], gcsafe.}
-type QDialnativeEventProc* = proc(self: QDial, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
+type QDialnativeEventProc* = proc(self: QDial, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
 type QDialmetricProc* = proc(self: QDial, param1: cint): cint {.raises: [], gcsafe.}
 type QDialinitPainterProc* = proc(self: QDial, painter: gen_qpainter_types.QPainter): void {.raises: [], gcsafe.}
 type QDialredirectedProc* = proc(self: QDial, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.raises: [], gcsafe.}
@@ -739,7 +739,7 @@ proc fcQDial_vtable_callback_hideEvent(self: pointer, event: pointer): void {.cd
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   vtbl[].hideEvent(self, slotval1)
 
-proc QDialnativeEvent*(self: gen_qdial_types.QDial, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool =
+proc QDialnativeEvent*(self: gen_qdial_types.QDial, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool =
   fcQDial_virtualbase_nativeEvent(self.h, struct_miqt_string(data: if len(eventType) > 0: addr eventType[0] else: nil, len: csize_t(len(eventType))), message, resultVal)
 
 proc fcQDial_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
@@ -1158,7 +1158,7 @@ proc fcQDial_method_callback_hideEvent(self: pointer, event: pointer): void {.cd
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   inst.hideEvent(slotval1)
 
-method nativeEvent*(self: VirtualQDial, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
+method nativeEvent*(self: VirtualQDial, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
   QDialnativeEvent(self[], eventType, message, resultVal)
 proc fcQDial_method_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
   let inst = cast[VirtualQDial](fcQDial_vdata(self)[])
@@ -1588,12 +1588,14 @@ proc create*(T: type gen_qdial_types.QDial,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQDial_new(addr(cQDial_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQDial_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qdial_types.QDial,
     inst: VirtualQDial) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQDial_new2(addr(cQDial_mvtbl), csize_t(sizeof(pointer)))
   fcQDial_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qdial_types.QDial): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQDial_staticMetaObject())

@@ -545,10 +545,10 @@ proc validateCurrentPage*(self: gen_qwizard_types.QWizard): bool =
 proc nextId*(self: gen_qwizard_types.QWizard): cint =
   fcQWizard_nextId(self.h)
 
-proc setField*(self: gen_qwizard_types.QWizard, name: string, value: gen_qvariant_types.QVariant): void =
+proc setField*(self: gen_qwizard_types.QWizard, name: openArray[char], value: gen_qvariant_types.QVariant): void =
   fcQWizard_setField(self.h, struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), value.h)
 
-proc field*(self: gen_qwizard_types.QWizard, name: string): gen_qvariant_types.QVariant =
+proc field*(self: gen_qwizard_types.QWizard, name: openArray[char]): gen_qvariant_types.QVariant =
   gen_qvariant_types.QVariant(h: fcQWizard_field(self.h, struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name)))), owned: true)
 
 proc setWizardStyle*(self: gen_qwizard_types.QWizard, style: cint): void =
@@ -569,7 +569,7 @@ proc setOptions*(self: gen_qwizard_types.QWizard, options: cint): void =
 proc options*(self: gen_qwizard_types.QWizard): cint =
   cint(fcQWizard_options(self.h))
 
-proc setButtonText*(self: gen_qwizard_types.QWizard, which: cint, text: string): void =
+proc setButtonText*(self: gen_qwizard_types.QWizard, which: cint, text: openArray[char]): void =
   fcQWizard_setButtonText(self.h, cint(which), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
 
 proc buttonText*(self: gen_qwizard_types.QWizard, which: cint): string =
@@ -578,7 +578,7 @@ proc buttonText*(self: gen_qwizard_types.QWizard, which: cint): string =
   c_free(v_ms.data)
   vx_ret
 
-proc setButtonLayout*(self: gen_qwizard_types.QWizard, layout: seq[cint]): void =
+proc setButtonLayout*(self: gen_qwizard_types.QWizard, layout: openArray[cint]): void =
   var layout_CArray = newSeq[cint](len(layout))
   for i in 0..<len(layout):
     layout_CArray[i] = cint(layout[i])
@@ -794,7 +794,7 @@ type QWizarddragMoveEventProc* = proc(self: QWizard, event: gen_qevent_types.QDr
 type QWizarddragLeaveEventProc* = proc(self: QWizard, event: gen_qevent_types.QDragLeaveEvent): void {.raises: [], gcsafe.}
 type QWizarddropEventProc* = proc(self: QWizard, event: gen_qevent_types.QDropEvent): void {.raises: [], gcsafe.}
 type QWizardhideEventProc* = proc(self: QWizard, event: gen_qevent_types.QHideEvent): void {.raises: [], gcsafe.}
-type QWizardnativeEventProc* = proc(self: QWizard, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
+type QWizardnativeEventProc* = proc(self: QWizard, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
 type QWizardchangeEventProc* = proc(self: QWizard, param1: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QWizardmetricProc* = proc(self: QWizard, param1: cint): cint {.raises: [], gcsafe.}
 type QWizardinitPainterProc* = proc(self: QWizard, painter: gen_qpainter_types.QPainter): void {.raises: [], gcsafe.}
@@ -1291,7 +1291,7 @@ proc fcQWizard_vtable_callback_hideEvent(self: pointer, event: pointer): void {.
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   vtbl[].hideEvent(self, slotval1)
 
-proc QWizardnativeEvent*(self: gen_qwizard_types.QWizard, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool =
+proc QWizardnativeEvent*(self: gen_qwizard_types.QWizard, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool =
   fcQWizard_virtualbase_nativeEvent(self.h, struct_miqt_string(data: if len(eventType) > 0: addr eventType[0] else: nil, len: csize_t(len(eventType))), message, resultVal)
 
 proc fcQWizard_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
@@ -1758,7 +1758,7 @@ proc fcQWizard_method_callback_hideEvent(self: pointer, event: pointer): void {.
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   inst.hideEvent(slotval1)
 
-method nativeEvent*(self: VirtualQWizard, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
+method nativeEvent*(self: VirtualQWizard, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
   QWizardnativeEvent(self[], eventType, message, resultVal)
 proc fcQWizard_method_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
   let inst = cast[VirtualQWizard](fcQWizard_vdata(self)[])
@@ -2354,12 +2354,14 @@ proc create*(T: type gen_qwizard_types.QWizard,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQWizard_new(addr(cQWizard_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQWizard_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qwizard_types.QWizard,
     inst: VirtualQWizard) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQWizard_new2(addr(cQWizard_mvtbl), csize_t(sizeof(pointer)))
   fcQWizard_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qwizard_types.QWizard,
     parent: gen_qwidget_types.QWidget, flags: cint,
@@ -2367,6 +2369,7 @@ proc create*(T: type gen_qwizard_types.QWizard,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQWizard_new3(addr(cQWizard_mvtbl), csize_t(sizeof(pointer)), parent.h, cint(flags))
   fcQWizard_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qwizard_types.QWizard): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQWizard_staticMetaObject())
@@ -2385,7 +2388,7 @@ proc tr*(_: type gen_qwizard_types.QWizardPage, s: cstring): string =
   c_free(v_ms.data)
   vx_ret
 
-proc setTitle*(self: gen_qwizard_types.QWizardPage, title: string): void =
+proc setTitle*(self: gen_qwizard_types.QWizardPage, title: openArray[char]): void =
   fcQWizardPage_setTitle(self.h, struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))))
 
 proc title*(self: gen_qwizard_types.QWizardPage): string =
@@ -2394,7 +2397,7 @@ proc title*(self: gen_qwizard_types.QWizardPage): string =
   c_free(v_ms.data)
   vx_ret
 
-proc setSubTitle*(self: gen_qwizard_types.QWizardPage, subTitle: string): void =
+proc setSubTitle*(self: gen_qwizard_types.QWizardPage, subTitle: openArray[char]): void =
   fcQWizardPage_setSubTitle(self.h, struct_miqt_string(data: if len(subTitle) > 0: addr subTitle[0] else: nil, len: csize_t(len(subTitle))))
 
 proc subTitle*(self: gen_qwizard_types.QWizardPage): string =
@@ -2421,7 +2424,7 @@ proc setCommitPage*(self: gen_qwizard_types.QWizardPage, commitPage: bool): void
 proc isCommitPage*(self: gen_qwizard_types.QWizardPage): bool =
   fcQWizardPage_isCommitPage(self.h)
 
-proc setButtonText*(self: gen_qwizard_types.QWizardPage, which: cint, text: string): void =
+proc setButtonText*(self: gen_qwizard_types.QWizardPage, which: cint, text: openArray[char]): void =
   fcQWizardPage_setButtonText(self.h, cint(which), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
 
 proc buttonText*(self: gen_qwizard_types.QWizardPage, which: cint): string =
@@ -2515,7 +2518,7 @@ type QWizardPagedragLeaveEventProc* = proc(self: QWizardPage, event: gen_qevent_
 type QWizardPagedropEventProc* = proc(self: QWizardPage, event: gen_qevent_types.QDropEvent): void {.raises: [], gcsafe.}
 type QWizardPageshowEventProc* = proc(self: QWizardPage, event: gen_qevent_types.QShowEvent): void {.raises: [], gcsafe.}
 type QWizardPagehideEventProc* = proc(self: QWizardPage, event: gen_qevent_types.QHideEvent): void {.raises: [], gcsafe.}
-type QWizardPagenativeEventProc* = proc(self: QWizardPage, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
+type QWizardPagenativeEventProc* = proc(self: QWizardPage, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
 type QWizardPagechangeEventProc* = proc(self: QWizardPage, param1: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QWizardPagemetricProc* = proc(self: QWizardPage, param1: cint): cint {.raises: [], gcsafe.}
 type QWizardPageinitPainterProc* = proc(self: QWizardPage, painter: gen_qpainter_types.QPainter): void {.raises: [], gcsafe.}
@@ -2963,7 +2966,7 @@ proc fcQWizardPage_vtable_callback_hideEvent(self: pointer, event: pointer): voi
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   vtbl[].hideEvent(self, slotval1)
 
-proc QWizardPagenativeEvent*(self: gen_qwizard_types.QWizardPage, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool =
+proc QWizardPagenativeEvent*(self: gen_qwizard_types.QWizardPage, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool =
   fcQWizardPage_virtualbase_nativeEvent(self.h, struct_miqt_string(data: if len(eventType) > 0: addr eventType[0] else: nil, len: csize_t(len(eventType))), message, resultVal)
 
 proc fcQWizardPage_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
@@ -3405,7 +3408,7 @@ proc fcQWizardPage_method_callback_hideEvent(self: pointer, event: pointer): voi
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   inst.hideEvent(slotval1)
 
-method nativeEvent*(self: VirtualQWizardPage, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
+method nativeEvent*(self: VirtualQWizardPage, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
   QWizardPagenativeEvent(self[], eventType, message, resultVal)
 proc fcQWizardPage_method_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
   let inst = cast[VirtualQWizardPage](fcQWizardPage_vdata(self)[])
@@ -3522,22 +3525,22 @@ proc fcQWizardPage_method_callback_disconnectNotify(self: pointer, signal: point
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
 
-proc setField*(self: gen_qwizard_types.QWizardPage, name: string, value: gen_qvariant_types.QVariant): void =
+proc setField*(self: gen_qwizard_types.QWizardPage, name: openArray[char], value: gen_qvariant_types.QVariant): void =
   fcQWizardPage_protectedbase_setField(self.h, struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), value.h)
 
-proc field*(self: gen_qwizard_types.QWizardPage, name: string): gen_qvariant_types.QVariant =
+proc field*(self: gen_qwizard_types.QWizardPage, name: openArray[char]): gen_qvariant_types.QVariant =
   gen_qvariant_types.QVariant(h: fcQWizardPage_protectedbase_field(self.h, struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name)))), owned: true)
 
-proc registerField*(self: gen_qwizard_types.QWizardPage, name: string, widget: gen_qwidget_types.QWidget): void =
+proc registerField*(self: gen_qwizard_types.QWizardPage, name: openArray[char], widget: gen_qwidget_types.QWidget): void =
   fcQWizardPage_protectedbase_registerField(self.h, struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), widget.h)
 
 proc wizard*(self: gen_qwizard_types.QWizardPage): gen_qwizard_types.QWizard =
   gen_qwizard_types.QWizard(h: fcQWizardPage_protectedbase_wizard(self.h), owned: false)
 
-proc registerField*(self: gen_qwizard_types.QWizardPage, name: string, widget: gen_qwidget_types.QWidget, property: cstring): void =
+proc registerField*(self: gen_qwizard_types.QWizardPage, name: openArray[char], widget: gen_qwidget_types.QWidget, property: cstring): void =
   fcQWizardPage_protectedbase_registerField3(self.h, struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), widget.h, property)
 
-proc registerField*(self: gen_qwizard_types.QWizardPage, name: string, widget: gen_qwidget_types.QWidget, property: cstring, changedSignal: cstring): void =
+proc registerField*(self: gen_qwizard_types.QWizardPage, name: openArray[char], widget: gen_qwidget_types.QWidget, property: cstring, changedSignal: cstring): void =
   fcQWizardPage_protectedbase_registerField4(self.h, struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), widget.h, property, changedSignal)
 
 proc updateMicroFocus*(self: gen_qwizard_types.QWizardPage): void =
@@ -3876,12 +3879,14 @@ proc create*(T: type gen_qwizard_types.QWizardPage,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQWizardPage_new(addr(cQWizardPage_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQWizardPage_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qwizard_types.QWizardPage,
     inst: VirtualQWizardPage) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQWizardPage_new2(addr(cQWizardPage_mvtbl), csize_t(sizeof(pointer)))
   fcQWizardPage_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qwizard_types.QWizardPage): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQWizardPage_staticMetaObject())

@@ -183,4 +183,5 @@ proc create*(T: type gen_qsgflatcolormaterial_types.QSGFlatColorMaterial,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQSGFlatColorMaterial_new(addr(cQSGFlatColorMaterial_mvtbl), csize_t(sizeof(pointer)))
   fcQSGFlatColorMaterial_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 

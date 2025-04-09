@@ -238,22 +238,22 @@ proc length*(self: gen_qjsonobject_types.QJsonObject): int64 =
 proc isEmpty*(self: gen_qjsonobject_types.QJsonObject): bool =
   fcQJsonObject_isEmpty(self.h)
 
-proc value*(self: gen_qjsonobject_types.QJsonObject, key: string): gen_qjsonvalue_types.QJsonValue =
+proc value*(self: gen_qjsonobject_types.QJsonObject, key: openArray[char]): gen_qjsonvalue_types.QJsonValue =
   gen_qjsonvalue_types.QJsonValue(h: fcQJsonObject_value(self.h, struct_miqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key)))), owned: true)
 
-proc operatorSubscript*(self: gen_qjsonobject_types.QJsonObject, key: string): gen_qjsonvalue_types.QJsonValue =
+proc operatorSubscript*(self: gen_qjsonobject_types.QJsonObject, key: openArray[char]): gen_qjsonvalue_types.QJsonValue =
   gen_qjsonvalue_types.QJsonValue(h: fcQJsonObject_operatorSubscript(self.h, struct_miqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key)))), owned: true)
 
-proc operatorSubscript2*(self: gen_qjsonobject_types.QJsonObject, key: string): gen_qjsonvalue_types.QJsonValueRef =
+proc operatorSubscript2*(self: gen_qjsonobject_types.QJsonObject, key: openArray[char]): gen_qjsonvalue_types.QJsonValueRef =
   gen_qjsonvalue_types.QJsonValueRef(h: fcQJsonObject_operatorSubscriptWithKey(self.h, struct_miqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key)))), owned: true)
 
-proc remove*(self: gen_qjsonobject_types.QJsonObject, key: string): void =
+proc remove*(self: gen_qjsonobject_types.QJsonObject, key: openArray[char]): void =
   fcQJsonObject_remove(self.h, struct_miqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key))))
 
-proc take*(self: gen_qjsonobject_types.QJsonObject, key: string): gen_qjsonvalue_types.QJsonValue =
+proc take*(self: gen_qjsonobject_types.QJsonObject, key: openArray[char]): gen_qjsonvalue_types.QJsonValue =
   gen_qjsonvalue_types.QJsonValue(h: fcQJsonObject_take(self.h, struct_miqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key)))), owned: true)
 
-proc contains*(self: gen_qjsonobject_types.QJsonObject, key: string): bool =
+proc contains*(self: gen_qjsonobject_types.QJsonObject, key: openArray[char]): bool =
   fcQJsonObject_contains(self.h, struct_miqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key))))
 
 proc operatorEqual*(self: gen_qjsonobject_types.QJsonObject, other: gen_qjsonobject_types.QJsonObject): bool =
@@ -283,16 +283,16 @@ proc constEnd*(self: gen_qjsonobject_types.QJsonObject): gen_qjsonobject_types.Q
 proc erase*(self: gen_qjsonobject_types.QJsonObject, it: gen_qjsonobject_types.QJsonObjectiterator): gen_qjsonobject_types.QJsonObjectiterator =
   gen_qjsonobject_types.QJsonObjectiterator(h: fcQJsonObject_erase(self.h, it.h), owned: true)
 
-proc find*(self: gen_qjsonobject_types.QJsonObject, key: string): gen_qjsonobject_types.QJsonObjectiterator =
+proc find*(self: gen_qjsonobject_types.QJsonObject, key: openArray[char]): gen_qjsonobject_types.QJsonObjectiterator =
   gen_qjsonobject_types.QJsonObjectiterator(h: fcQJsonObject_find(self.h, struct_miqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key)))), owned: true)
 
-proc find2*(self: gen_qjsonobject_types.QJsonObject, key: string): gen_qjsonobject_types.QJsonObjectconst_iterator =
+proc find2*(self: gen_qjsonobject_types.QJsonObject, key: openArray[char]): gen_qjsonobject_types.QJsonObjectconst_iterator =
   gen_qjsonobject_types.QJsonObjectconst_iterator(h: fcQJsonObject_findWithKey(self.h, struct_miqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key)))), owned: true)
 
-proc constFind*(self: gen_qjsonobject_types.QJsonObject, key: string): gen_qjsonobject_types.QJsonObjectconst_iterator =
+proc constFind*(self: gen_qjsonobject_types.QJsonObject, key: openArray[char]): gen_qjsonobject_types.QJsonObjectconst_iterator =
   gen_qjsonobject_types.QJsonObjectconst_iterator(h: fcQJsonObject_constFind(self.h, struct_miqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key)))), owned: true)
 
-proc insert*(self: gen_qjsonobject_types.QJsonObject, key: string, value: gen_qjsonvalue_types.QJsonValue): gen_qjsonobject_types.QJsonObjectiterator =
+proc insert*(self: gen_qjsonobject_types.QJsonObject, key: openArray[char], value: gen_qjsonvalue_types.QJsonValue): gen_qjsonobject_types.QJsonObjectiterator =
   gen_qjsonobject_types.QJsonObjectiterator(h: fcQJsonObject_insert(self.h, struct_miqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key))), value.h), owned: true)
 
 proc empty*(self: gen_qjsonobject_types.QJsonObject): bool =

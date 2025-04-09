@@ -230,10 +230,10 @@ proc addEllipse*(self: gen_qpainterpath_types.QPainterPath, x: float64, y: float
 proc addEllipse*(self: gen_qpainterpath_types.QPainterPath, center: gen_qpoint_types.QPointF, rx: float64, ry: float64): void =
   fcQPainterPath_addEllipse3(self.h, center.h, rx, ry)
 
-proc addText*(self: gen_qpainterpath_types.QPainterPath, point: gen_qpoint_types.QPointF, f: gen_qfont_types.QFont, text: string): void =
+proc addText*(self: gen_qpainterpath_types.QPainterPath, point: gen_qpoint_types.QPointF, f: gen_qfont_types.QFont, text: openArray[char]): void =
   fcQPainterPath_addText(self.h, point.h, f.h, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
 
-proc addText*(self: gen_qpainterpath_types.QPainterPath, x: float64, y: float64, f: gen_qfont_types.QFont, text: string): void =
+proc addText*(self: gen_qpainterpath_types.QPainterPath, x: float64, y: float64, f: gen_qfont_types.QFont, text: openArray[char]): void =
   fcQPainterPath_addText2(self.h, x, y, f.h, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
 
 proc addPath*(self: gen_qpainterpath_types.QPainterPath, path: gen_qpainterpath_types.QPainterPath): void =
@@ -412,7 +412,7 @@ proc curveThreshold*(self: gen_qpainterpath_types.QPainterPathStroker): float64 
 proc setDashPattern*(self: gen_qpainterpath_types.QPainterPathStroker, dashPattern: cint): void =
   fcQPainterPathStroker_setDashPattern(self.h, cint(dashPattern))
 
-proc setDashPattern*(self: gen_qpainterpath_types.QPainterPathStroker, dashPattern: seq[float64]): void =
+proc setDashPattern*(self: gen_qpainterpath_types.QPainterPathStroker, dashPattern: openArray[float64]): void =
   var dashPattern_CArray = newSeq[float64](len(dashPattern))
   for i in 0..<len(dashPattern):
     dashPattern_CArray[i] = dashPattern[i]

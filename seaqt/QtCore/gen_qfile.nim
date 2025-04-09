@@ -189,16 +189,16 @@ proc fileName*(self: gen_qfile_types.QFile): string =
   c_free(v_ms.data)
   vx_ret
 
-proc setFileName*(self: gen_qfile_types.QFile, name: string): void =
+proc setFileName*(self: gen_qfile_types.QFile, name: openArray[char]): void =
   fcQFile_setFileName(self.h, struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))))
 
-proc encodeName*(_: type gen_qfile_types.QFile, fileName: string): seq[byte] =
+proc encodeName*(_: type gen_qfile_types.QFile, fileName: openArray[char]): seq[byte] =
   var v_bytearray = fcQFile_encodeName(struct_miqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))))
   var vx_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](v_bytearray.data), 0, int(v_bytearray.len)-1))
   c_free(v_bytearray.data)
   vx_ret
 
-proc decodeName*(_: type gen_qfile_types.QFile, localFileName: seq[byte]): string =
+proc decodeName*(_: type gen_qfile_types.QFile, localFileName: openArray[byte]): string =
   let v_ms = fcQFile_decodeName(struct_miqt_string(data: if len(localFileName) > 0: addr localFileName[0] else: nil, len: csize_t(len(localFileName))))
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
@@ -213,7 +213,7 @@ proc decodeName*(_: type gen_qfile_types.QFile, localFileName: cstring): string 
 proc exists*(self: gen_qfile_types.QFile): bool =
   fcQFile_exists(self.h)
 
-proc exists*(_: type gen_qfile_types.QFile, fileName: string): bool =
+proc exists*(_: type gen_qfile_types.QFile, fileName: openArray[char]): bool =
   fcQFile_existsWithFileName(struct_miqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))))
 
 proc symLinkTarget*(self: gen_qfile_types.QFile): string =
@@ -222,7 +222,7 @@ proc symLinkTarget*(self: gen_qfile_types.QFile): string =
   c_free(v_ms.data)
   vx_ret
 
-proc symLinkTarget*(_: type gen_qfile_types.QFile, fileName: string): string =
+proc symLinkTarget*(_: type gen_qfile_types.QFile, fileName: openArray[char]): string =
   let v_ms = fcQFile_symLinkTargetWithFileName(struct_miqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))))
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
@@ -231,31 +231,31 @@ proc symLinkTarget*(_: type gen_qfile_types.QFile, fileName: string): string =
 proc remove*(self: gen_qfile_types.QFile): bool =
   fcQFile_remove(self.h)
 
-proc remove*(_: type gen_qfile_types.QFile, fileName: string): bool =
+proc remove*(_: type gen_qfile_types.QFile, fileName: openArray[char]): bool =
   fcQFile_removeWithFileName(struct_miqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))))
 
 proc moveToTrash*(self: gen_qfile_types.QFile): bool =
   fcQFile_moveToTrash(self.h)
 
-proc moveToTrash*(_: type gen_qfile_types.QFile, fileName: string): bool =
+proc moveToTrash*(_: type gen_qfile_types.QFile, fileName: openArray[char]): bool =
   fcQFile_moveToTrashWithFileName(struct_miqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))))
 
-proc rename*(self: gen_qfile_types.QFile, newName: string): bool =
+proc rename*(self: gen_qfile_types.QFile, newName: openArray[char]): bool =
   fcQFile_rename(self.h, struct_miqt_string(data: if len(newName) > 0: addr newName[0] else: nil, len: csize_t(len(newName))))
 
-proc rename*(_: type gen_qfile_types.QFile, oldName: string, newName: string): bool =
+proc rename*(_: type gen_qfile_types.QFile, oldName: openArray[char], newName: openArray[char]): bool =
   fcQFile_rename2(struct_miqt_string(data: if len(oldName) > 0: addr oldName[0] else: nil, len: csize_t(len(oldName))), struct_miqt_string(data: if len(newName) > 0: addr newName[0] else: nil, len: csize_t(len(newName))))
 
-proc link*(self: gen_qfile_types.QFile, newName: string): bool =
+proc link*(self: gen_qfile_types.QFile, newName: openArray[char]): bool =
   fcQFile_link(self.h, struct_miqt_string(data: if len(newName) > 0: addr newName[0] else: nil, len: csize_t(len(newName))))
 
-proc link*(_: type gen_qfile_types.QFile, fileName: string, newName: string): bool =
+proc link*(_: type gen_qfile_types.QFile, fileName: openArray[char], newName: openArray[char]): bool =
   fcQFile_link2(struct_miqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))), struct_miqt_string(data: if len(newName) > 0: addr newName[0] else: nil, len: csize_t(len(newName))))
 
-proc copy*(self: gen_qfile_types.QFile, newName: string): bool =
+proc copy*(self: gen_qfile_types.QFile, newName: openArray[char]): bool =
   fcQFile_copy(self.h, struct_miqt_string(data: if len(newName) > 0: addr newName[0] else: nil, len: csize_t(len(newName))))
 
-proc copy*(_: type gen_qfile_types.QFile, fileName: string, newName: string): bool =
+proc copy*(_: type gen_qfile_types.QFile, fileName: openArray[char], newName: openArray[char]): bool =
   fcQFile_copy2(struct_miqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))), struct_miqt_string(data: if len(newName) > 0: addr newName[0] else: nil, len: csize_t(len(newName))))
 
 proc open*(self: gen_qfile_types.QFile, flags: cint): bool =
@@ -273,19 +273,19 @@ proc size*(self: gen_qfile_types.QFile): clonglong =
 proc resize*(self: gen_qfile_types.QFile, sz: clonglong): bool =
   fcQFile_resize(self.h, sz)
 
-proc resize*(_: type gen_qfile_types.QFile, filename: string, sz: clonglong): bool =
+proc resize*(_: type gen_qfile_types.QFile, filename: openArray[char], sz: clonglong): bool =
   fcQFile_resize2(struct_miqt_string(data: if len(filename) > 0: addr filename[0] else: nil, len: csize_t(len(filename))), sz)
 
 proc permissions*(self: gen_qfile_types.QFile): cint =
   cint(fcQFile_permissions(self.h))
 
-proc permissions*(_: type gen_qfile_types.QFile, filename: string): cint =
+proc permissions*(_: type gen_qfile_types.QFile, filename: openArray[char]): cint =
   cint(fcQFile_permissionsWithFilename(struct_miqt_string(data: if len(filename) > 0: addr filename[0] else: nil, len: csize_t(len(filename)))))
 
 proc setPermissions*(self: gen_qfile_types.QFile, permissionSpec: cint): bool =
   fcQFile_setPermissions(self.h, cint(permissionSpec))
 
-proc setPermissions*(_: type gen_qfile_types.QFile, filename: string, permissionSpec: cint): bool =
+proc setPermissions*(_: type gen_qfile_types.QFile, filename: openArray[char], permissionSpec: cint): bool =
   fcQFile_setPermissions2(struct_miqt_string(data: if len(filename) > 0: addr filename[0] else: nil, len: csize_t(len(filename))), cint(permissionSpec))
 
 proc tr*(_: type gen_qfile_types.QFile, s: cstring, c: cstring): string =
@@ -914,7 +914,7 @@ proc fcQFile_method_callback_disconnectNotify(self: pointer, signal: pointer): v
 proc setOpenMode*(self: gen_qfile_types.QFile, openMode: cint): void =
   fcQFile_protectedbase_setOpenMode(self.h, cint(openMode))
 
-proc setErrorString*(self: gen_qfile_types.QFile, errorString: string): void =
+proc setErrorString*(self: gen_qfile_types.QFile, errorString: openArray[char]): void =
   fcQFile_protectedbase_setErrorString(self.h, struct_miqt_string(data: if len(errorString) > 0: addr errorString[0] else: nil, len: csize_t(len(errorString))))
 
 proc sender*(self: gen_qfile_types.QFile): gen_qobject_types.QObject =
@@ -1002,7 +1002,7 @@ proc create*(T: type gen_qfile_types.QFile,
   fcQFile_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qfile_types.QFile,
-    name: string,
+    name: openArray[char],
     vtbl: ref QFileVTable = nil): gen_qfile_types.QFile =
   let vtbl = if vtbl == nil: new QFileVTable else: vtbl
   GC_ref(vtbl)
@@ -1148,7 +1148,7 @@ proc create*(T: type gen_qfile_types.QFile,
   fcQFile_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qfile_types.QFile,
-    name: string, parent: gen_qobject_types.QObject,
+    name: openArray[char], parent: gen_qobject_types.QObject,
     vtbl: ref QFileVTable = nil): gen_qfile_types.QFile =
   let vtbl = if vtbl == nil: new QFileVTable else: vtbl
   GC_ref(vtbl)
@@ -1263,13 +1263,15 @@ proc create*(T: type gen_qfile_types.QFile,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQFile_new(addr(cQFile_mvtbl), csize_t(sizeof(pointer)))
   fcQFile_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qfile_types.QFile,
-    name: string,
+    name: openArray[char],
     inst: VirtualQFile) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQFile_new2(addr(cQFile_mvtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))))
   fcQFile_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qfile_types.QFile,
     parent: gen_qobject_types.QObject,
@@ -1277,13 +1279,15 @@ proc create*(T: type gen_qfile_types.QFile,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQFile_new3(addr(cQFile_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQFile_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qfile_types.QFile,
-    name: string, parent: gen_qobject_types.QObject,
+    name: openArray[char], parent: gen_qobject_types.QObject,
     inst: VirtualQFile) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQFile_new4(addr(cQFile_mvtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), parent.h)
   fcQFile_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qfile_types.QFile): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQFile_staticMetaObject())

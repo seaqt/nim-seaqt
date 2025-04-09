@@ -501,6 +501,7 @@ proc create*(T: type gen_qthreadpool_types.QThreadPool,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQThreadPool_new(addr(cQThreadPool_mvtbl), csize_t(sizeof(pointer)))
   fcQThreadPool_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qthreadpool_types.QThreadPool,
     parent: gen_qobject_types.QObject,
@@ -508,6 +509,7 @@ proc create*(T: type gen_qthreadpool_types.QThreadPool,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQThreadPool_new2(addr(cQThreadPool_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQThreadPool_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qthreadpool_types.QThreadPool): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQThreadPool_staticMetaObject())

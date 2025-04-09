@@ -567,6 +567,7 @@ proc create*(T: type gen_qthread_types.QThread,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQThread_new(addr(cQThread_mvtbl), csize_t(sizeof(pointer)))
   fcQThread_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qthread_types.QThread,
     parent: gen_qobject_types.QObject,
@@ -574,6 +575,7 @@ proc create*(T: type gen_qthread_types.QThread,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQThread_new2(addr(cQThread_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQThread_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qthread_types.QThread): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQThread_staticMetaObject())

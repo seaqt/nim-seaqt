@@ -645,6 +645,7 @@ proc create*(T: type gen_qbuttongroup_types.QButtonGroup,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQButtonGroup_new(addr(cQButtonGroup_mvtbl), csize_t(sizeof(pointer)))
   fcQButtonGroup_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qbuttongroup_types.QButtonGroup,
     parent: gen_qobject_types.QObject,
@@ -652,6 +653,7 @@ proc create*(T: type gen_qbuttongroup_types.QButtonGroup,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQButtonGroup_new2(addr(cQButtonGroup_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQButtonGroup_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qbuttongroup_types.QButtonGroup): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQButtonGroup_staticMetaObject())

@@ -1450,6 +1450,7 @@ proc create*(T: type gen_qgraphicsvideoitem_types.QGraphicsVideoItem,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQGraphicsVideoItem_new(addr(cQGraphicsVideoItem_mvtbl), csize_t(sizeof(pointer)))
   fcQGraphicsVideoItem_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qgraphicsvideoitem_types.QGraphicsVideoItem,
     parent: gen_qgraphicsitem_types.QGraphicsItem,
@@ -1457,6 +1458,7 @@ proc create*(T: type gen_qgraphicsvideoitem_types.QGraphicsVideoItem,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQGraphicsVideoItem_new2(addr(cQGraphicsVideoItem_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQGraphicsVideoItem_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qgraphicsvideoitem_types.QGraphicsVideoItem): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQGraphicsVideoItem_staticMetaObject())

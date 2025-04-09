@@ -327,7 +327,7 @@ proc setInputMode*(self: gen_qinputdialog_types.QInputDialog, mode: cint): void 
 proc inputMode*(self: gen_qinputdialog_types.QInputDialog): cint =
   cint(fcQInputDialog_inputMode(self.h))
 
-proc setLabelText*(self: gen_qinputdialog_types.QInputDialog, text: string): void =
+proc setLabelText*(self: gen_qinputdialog_types.QInputDialog, text: openArray[char]): void =
   fcQInputDialog_setLabelText(self.h, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
 
 proc labelText*(self: gen_qinputdialog_types.QInputDialog): string =
@@ -348,7 +348,7 @@ proc setOptions*(self: gen_qinputdialog_types.QInputDialog, options: cint): void
 proc options*(self: gen_qinputdialog_types.QInputDialog): cint =
   cint(fcQInputDialog_options(self.h))
 
-proc setTextValue*(self: gen_qinputdialog_types.QInputDialog, text: string): void =
+proc setTextValue*(self: gen_qinputdialog_types.QInputDialog, text: openArray[char]): void =
   fcQInputDialog_setTextValue(self.h, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
 
 proc textValue*(self: gen_qinputdialog_types.QInputDialog): string =
@@ -369,7 +369,7 @@ proc setComboBoxEditable*(self: gen_qinputdialog_types.QInputDialog, editable: b
 proc isComboBoxEditable*(self: gen_qinputdialog_types.QInputDialog): bool =
   fcQInputDialog_isComboBoxEditable(self.h)
 
-proc setComboBoxItems*(self: gen_qinputdialog_types.QInputDialog, items: seq[string]): void =
+proc setComboBoxItems*(self: gen_qinputdialog_types.QInputDialog, items: openArray[string]): void =
   var items_CArray = newSeq[struct_miqt_string](len(items))
   for i in 0..<len(items):
     items_CArray[i] = struct_miqt_string(data: if len(items[i]) > 0: addr items[i][0] else: nil, len: csize_t(len(items[i])))
@@ -442,7 +442,7 @@ proc setDoubleDecimals*(self: gen_qinputdialog_types.QInputDialog, decimals: cin
 proc doubleDecimals*(self: gen_qinputdialog_types.QInputDialog): cint =
   fcQInputDialog_doubleDecimals(self.h)
 
-proc setOkButtonText*(self: gen_qinputdialog_types.QInputDialog, text: string): void =
+proc setOkButtonText*(self: gen_qinputdialog_types.QInputDialog, text: openArray[char]): void =
   fcQInputDialog_setOkButtonText(self.h, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
 
 proc okButtonText*(self: gen_qinputdialog_types.QInputDialog): string =
@@ -451,7 +451,7 @@ proc okButtonText*(self: gen_qinputdialog_types.QInputDialog): string =
   c_free(v_ms.data)
   vx_ret
 
-proc setCancelButtonText*(self: gen_qinputdialog_types.QInputDialog, text: string): void =
+proc setCancelButtonText*(self: gen_qinputdialog_types.QInputDialog, text: openArray[char]): void =
   fcQInputDialog_setCancelButtonText(self.h, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
 
 proc cancelButtonText*(self: gen_qinputdialog_types.QInputDialog): string =
@@ -469,19 +469,19 @@ proc sizeHint*(self: gen_qinputdialog_types.QInputDialog): gen_qsize_types.QSize
 proc setVisible*(self: gen_qinputdialog_types.QInputDialog, visible: bool): void =
   fcQInputDialog_setVisible(self.h, visible)
 
-proc getText*(_: type gen_qinputdialog_types.QInputDialog, parent: gen_qwidget_types.QWidget, title: string, label: string): string =
+proc getText*(_: type gen_qinputdialog_types.QInputDialog, parent: gen_qwidget_types.QWidget, title: openArray[char], label: openArray[char]): string =
   let v_ms = fcQInputDialog_getText(parent.h, struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), struct_miqt_string(data: if len(label) > 0: addr label[0] else: nil, len: csize_t(len(label))))
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc getMultiLineText*(_: type gen_qinputdialog_types.QInputDialog, parent: gen_qwidget_types.QWidget, title: string, label: string): string =
+proc getMultiLineText*(_: type gen_qinputdialog_types.QInputDialog, parent: gen_qwidget_types.QWidget, title: openArray[char], label: openArray[char]): string =
   let v_ms = fcQInputDialog_getMultiLineText(parent.h, struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), struct_miqt_string(data: if len(label) > 0: addr label[0] else: nil, len: csize_t(len(label))))
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc getItem*(_: type gen_qinputdialog_types.QInputDialog, parent: gen_qwidget_types.QWidget, title: string, label: string, items: seq[string]): string =
+proc getItem*(_: type gen_qinputdialog_types.QInputDialog, parent: gen_qwidget_types.QWidget, title: openArray[char], label: openArray[char], items: openArray[string]): string =
   var items_CArray = newSeq[struct_miqt_string](len(items))
   for i in 0..<len(items):
     items_CArray[i] = struct_miqt_string(data: if len(items[i]) > 0: addr items[i][0] else: nil, len: csize_t(len(items[i])))
@@ -491,10 +491,10 @@ proc getItem*(_: type gen_qinputdialog_types.QInputDialog, parent: gen_qwidget_t
   c_free(v_ms.data)
   vx_ret
 
-proc getInt*(_: type gen_qinputdialog_types.QInputDialog, parent: gen_qwidget_types.QWidget, title: string, label: string): cint =
+proc getInt*(_: type gen_qinputdialog_types.QInputDialog, parent: gen_qwidget_types.QWidget, title: openArray[char], label: openArray[char]): cint =
   fcQInputDialog_getInt(parent.h, struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), struct_miqt_string(data: if len(label) > 0: addr label[0] else: nil, len: csize_t(len(label))))
 
-proc getDouble*(_: type gen_qinputdialog_types.QInputDialog, parent: gen_qwidget_types.QWidget, title: string, label: string): float64 =
+proc getDouble*(_: type gen_qinputdialog_types.QInputDialog, parent: gen_qwidget_types.QWidget, title: openArray[char], label: openArray[char]): float64 =
   fcQInputDialog_getDouble(parent.h, struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), struct_miqt_string(data: if len(label) > 0: addr label[0] else: nil, len: csize_t(len(label))))
 
 proc setDoubleStep*(self: gen_qinputdialog_types.QInputDialog, step: float64): void =
@@ -503,10 +503,10 @@ proc setDoubleStep*(self: gen_qinputdialog_types.QInputDialog, step: float64): v
 proc doubleStep*(self: gen_qinputdialog_types.QInputDialog): float64 =
   fcQInputDialog_doubleStep(self.h)
 
-proc textValueChanged*(self: gen_qinputdialog_types.QInputDialog, text: string): void =
+proc textValueChanged*(self: gen_qinputdialog_types.QInputDialog, text: openArray[char]): void =
   fcQInputDialog_textValueChanged(self.h, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
 
-type QInputDialogtextValueChangedSlot* = proc(text: string)
+type QInputDialogtextValueChangedSlot* = proc(text: openArray[char])
 proc fcQInputDialog_slot_callback_textValueChanged(slot: int, text: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QInputDialogtextValueChangedSlot](cast[pointer](slot))
   let vtext_ms = text
@@ -526,10 +526,10 @@ proc ontextValueChanged*(self: gen_qinputdialog_types.QInputDialog, slot: QInput
   GC_ref(tmp)
   fcQInputDialog_connect_textValueChanged(self.h, cast[int](addr tmp[]), fcQInputDialog_slot_callback_textValueChanged, fcQInputDialog_slot_callback_textValueChanged_release)
 
-proc textValueSelected*(self: gen_qinputdialog_types.QInputDialog, text: string): void =
+proc textValueSelected*(self: gen_qinputdialog_types.QInputDialog, text: openArray[char]): void =
   fcQInputDialog_textValueSelected(self.h, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
 
-type QInputDialogtextValueSelectedSlot* = proc(text: string)
+type QInputDialogtextValueSelectedSlot* = proc(text: openArray[char])
 proc fcQInputDialog_slot_callback_textValueSelected(slot: int, text: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QInputDialogtextValueSelectedSlot](cast[pointer](slot))
   let vtext_ms = text
@@ -647,61 +647,61 @@ proc tr*(_: type gen_qinputdialog_types.QInputDialog, s: cstring, c: cstring, n:
 proc setOption*(self: gen_qinputdialog_types.QInputDialog, option: cint, on: bool): void =
   fcQInputDialog_setOption2(self.h, cint(option), on)
 
-proc getText*(_: type gen_qinputdialog_types.QInputDialog, parent: gen_qwidget_types.QWidget, title: string, label: string, echo: cint): string =
+proc getText*(_: type gen_qinputdialog_types.QInputDialog, parent: gen_qwidget_types.QWidget, title: openArray[char], label: openArray[char], echo: cint): string =
   let v_ms = fcQInputDialog_getText4(parent.h, struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), struct_miqt_string(data: if len(label) > 0: addr label[0] else: nil, len: csize_t(len(label))), cint(echo))
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc getText*(_: type gen_qinputdialog_types.QInputDialog, parent: gen_qwidget_types.QWidget, title: string, label: string, echo: cint, text: string): string =
+proc getText*(_: type gen_qinputdialog_types.QInputDialog, parent: gen_qwidget_types.QWidget, title: openArray[char], label: openArray[char], echo: cint, text: openArray[char]): string =
   let v_ms = fcQInputDialog_getText5(parent.h, struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), struct_miqt_string(data: if len(label) > 0: addr label[0] else: nil, len: csize_t(len(label))), cint(echo), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc getText*(_: type gen_qinputdialog_types.QInputDialog, parent: gen_qwidget_types.QWidget, title: string, label: string, echo: cint, text: string, ok: ptr bool): string =
+proc getText*(_: type gen_qinputdialog_types.QInputDialog, parent: gen_qwidget_types.QWidget, title: openArray[char], label: openArray[char], echo: cint, text: openArray[char], ok: ptr bool): string =
   let v_ms = fcQInputDialog_getText6(parent.h, struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), struct_miqt_string(data: if len(label) > 0: addr label[0] else: nil, len: csize_t(len(label))), cint(echo), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), ok)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc getText*(_: type gen_qinputdialog_types.QInputDialog, parent: gen_qwidget_types.QWidget, title: string, label: string, echo: cint, text: string, ok: ptr bool, flags: cint): string =
+proc getText*(_: type gen_qinputdialog_types.QInputDialog, parent: gen_qwidget_types.QWidget, title: openArray[char], label: openArray[char], echo: cint, text: openArray[char], ok: ptr bool, flags: cint): string =
   let v_ms = fcQInputDialog_getText7(parent.h, struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), struct_miqt_string(data: if len(label) > 0: addr label[0] else: nil, len: csize_t(len(label))), cint(echo), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), ok, cint(flags))
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc getText*(_: type gen_qinputdialog_types.QInputDialog, parent: gen_qwidget_types.QWidget, title: string, label: string, echo: cint, text: string, ok: ptr bool, flags: cint, inputMethodHints: cint): string =
+proc getText*(_: type gen_qinputdialog_types.QInputDialog, parent: gen_qwidget_types.QWidget, title: openArray[char], label: openArray[char], echo: cint, text: openArray[char], ok: ptr bool, flags: cint, inputMethodHints: cint): string =
   let v_ms = fcQInputDialog_getText8(parent.h, struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), struct_miqt_string(data: if len(label) > 0: addr label[0] else: nil, len: csize_t(len(label))), cint(echo), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), ok, cint(flags), cint(inputMethodHints))
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc getMultiLineText*(_: type gen_qinputdialog_types.QInputDialog, parent: gen_qwidget_types.QWidget, title: string, label: string, text: string): string =
+proc getMultiLineText*(_: type gen_qinputdialog_types.QInputDialog, parent: gen_qwidget_types.QWidget, title: openArray[char], label: openArray[char], text: openArray[char]): string =
   let v_ms = fcQInputDialog_getMultiLineText4(parent.h, struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), struct_miqt_string(data: if len(label) > 0: addr label[0] else: nil, len: csize_t(len(label))), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc getMultiLineText*(_: type gen_qinputdialog_types.QInputDialog, parent: gen_qwidget_types.QWidget, title: string, label: string, text: string, ok: ptr bool): string =
+proc getMultiLineText*(_: type gen_qinputdialog_types.QInputDialog, parent: gen_qwidget_types.QWidget, title: openArray[char], label: openArray[char], text: openArray[char], ok: ptr bool): string =
   let v_ms = fcQInputDialog_getMultiLineText5(parent.h, struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), struct_miqt_string(data: if len(label) > 0: addr label[0] else: nil, len: csize_t(len(label))), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), ok)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc getMultiLineText*(_: type gen_qinputdialog_types.QInputDialog, parent: gen_qwidget_types.QWidget, title: string, label: string, text: string, ok: ptr bool, flags: cint): string =
+proc getMultiLineText*(_: type gen_qinputdialog_types.QInputDialog, parent: gen_qwidget_types.QWidget, title: openArray[char], label: openArray[char], text: openArray[char], ok: ptr bool, flags: cint): string =
   let v_ms = fcQInputDialog_getMultiLineText6(parent.h, struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), struct_miqt_string(data: if len(label) > 0: addr label[0] else: nil, len: csize_t(len(label))), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), ok, cint(flags))
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc getMultiLineText*(_: type gen_qinputdialog_types.QInputDialog, parent: gen_qwidget_types.QWidget, title: string, label: string, text: string, ok: ptr bool, flags: cint, inputMethodHints: cint): string =
+proc getMultiLineText*(_: type gen_qinputdialog_types.QInputDialog, parent: gen_qwidget_types.QWidget, title: openArray[char], label: openArray[char], text: openArray[char], ok: ptr bool, flags: cint, inputMethodHints: cint): string =
   let v_ms = fcQInputDialog_getMultiLineText7(parent.h, struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), struct_miqt_string(data: if len(label) > 0: addr label[0] else: nil, len: csize_t(len(label))), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), ok, cint(flags), cint(inputMethodHints))
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc getItem*(_: type gen_qinputdialog_types.QInputDialog, parent: gen_qwidget_types.QWidget, title: string, label: string, items: seq[string], current: cint): string =
+proc getItem*(_: type gen_qinputdialog_types.QInputDialog, parent: gen_qwidget_types.QWidget, title: openArray[char], label: openArray[char], items: openArray[string], current: cint): string =
   var items_CArray = newSeq[struct_miqt_string](len(items))
   for i in 0..<len(items):
     items_CArray[i] = struct_miqt_string(data: if len(items[i]) > 0: addr items[i][0] else: nil, len: csize_t(len(items[i])))
@@ -711,7 +711,7 @@ proc getItem*(_: type gen_qinputdialog_types.QInputDialog, parent: gen_qwidget_t
   c_free(v_ms.data)
   vx_ret
 
-proc getItem*(_: type gen_qinputdialog_types.QInputDialog, parent: gen_qwidget_types.QWidget, title: string, label: string, items: seq[string], current: cint, editable: bool): string =
+proc getItem*(_: type gen_qinputdialog_types.QInputDialog, parent: gen_qwidget_types.QWidget, title: openArray[char], label: openArray[char], items: openArray[string], current: cint, editable: bool): string =
   var items_CArray = newSeq[struct_miqt_string](len(items))
   for i in 0..<len(items):
     items_CArray[i] = struct_miqt_string(data: if len(items[i]) > 0: addr items[i][0] else: nil, len: csize_t(len(items[i])))
@@ -721,7 +721,7 @@ proc getItem*(_: type gen_qinputdialog_types.QInputDialog, parent: gen_qwidget_t
   c_free(v_ms.data)
   vx_ret
 
-proc getItem*(_: type gen_qinputdialog_types.QInputDialog, parent: gen_qwidget_types.QWidget, title: string, label: string, items: seq[string], current: cint, editable: bool, ok: ptr bool): string =
+proc getItem*(_: type gen_qinputdialog_types.QInputDialog, parent: gen_qwidget_types.QWidget, title: openArray[char], label: openArray[char], items: openArray[string], current: cint, editable: bool, ok: ptr bool): string =
   var items_CArray = newSeq[struct_miqt_string](len(items))
   for i in 0..<len(items):
     items_CArray[i] = struct_miqt_string(data: if len(items[i]) > 0: addr items[i][0] else: nil, len: csize_t(len(items[i])))
@@ -731,7 +731,7 @@ proc getItem*(_: type gen_qinputdialog_types.QInputDialog, parent: gen_qwidget_t
   c_free(v_ms.data)
   vx_ret
 
-proc getItem*(_: type gen_qinputdialog_types.QInputDialog, parent: gen_qwidget_types.QWidget, title: string, label: string, items: seq[string], current: cint, editable: bool, ok: ptr bool, flags: cint): string =
+proc getItem*(_: type gen_qinputdialog_types.QInputDialog, parent: gen_qwidget_types.QWidget, title: openArray[char], label: openArray[char], items: openArray[string], current: cint, editable: bool, ok: ptr bool, flags: cint): string =
   var items_CArray = newSeq[struct_miqt_string](len(items))
   for i in 0..<len(items):
     items_CArray[i] = struct_miqt_string(data: if len(items[i]) > 0: addr items[i][0] else: nil, len: csize_t(len(items[i])))
@@ -741,7 +741,7 @@ proc getItem*(_: type gen_qinputdialog_types.QInputDialog, parent: gen_qwidget_t
   c_free(v_ms.data)
   vx_ret
 
-proc getItem*(_: type gen_qinputdialog_types.QInputDialog, parent: gen_qwidget_types.QWidget, title: string, label: string, items: seq[string], current: cint, editable: bool, ok: ptr bool, flags: cint, inputMethodHints: cint): string =
+proc getItem*(_: type gen_qinputdialog_types.QInputDialog, parent: gen_qwidget_types.QWidget, title: openArray[char], label: openArray[char], items: openArray[string], current: cint, editable: bool, ok: ptr bool, flags: cint, inputMethodHints: cint): string =
   var items_CArray = newSeq[struct_miqt_string](len(items))
   for i in 0..<len(items):
     items_CArray[i] = struct_miqt_string(data: if len(items[i]) > 0: addr items[i][0] else: nil, len: csize_t(len(items[i])))
@@ -751,43 +751,43 @@ proc getItem*(_: type gen_qinputdialog_types.QInputDialog, parent: gen_qwidget_t
   c_free(v_ms.data)
   vx_ret
 
-proc getInt*(_: type gen_qinputdialog_types.QInputDialog, parent: gen_qwidget_types.QWidget, title: string, label: string, value: cint): cint =
+proc getInt*(_: type gen_qinputdialog_types.QInputDialog, parent: gen_qwidget_types.QWidget, title: openArray[char], label: openArray[char], value: cint): cint =
   fcQInputDialog_getInt4(parent.h, struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), struct_miqt_string(data: if len(label) > 0: addr label[0] else: nil, len: csize_t(len(label))), value)
 
-proc getInt*(_: type gen_qinputdialog_types.QInputDialog, parent: gen_qwidget_types.QWidget, title: string, label: string, value: cint, minValue: cint): cint =
+proc getInt*(_: type gen_qinputdialog_types.QInputDialog, parent: gen_qwidget_types.QWidget, title: openArray[char], label: openArray[char], value: cint, minValue: cint): cint =
   fcQInputDialog_getInt5(parent.h, struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), struct_miqt_string(data: if len(label) > 0: addr label[0] else: nil, len: csize_t(len(label))), value, minValue)
 
-proc getInt*(_: type gen_qinputdialog_types.QInputDialog, parent: gen_qwidget_types.QWidget, title: string, label: string, value: cint, minValue: cint, maxValue: cint): cint =
+proc getInt*(_: type gen_qinputdialog_types.QInputDialog, parent: gen_qwidget_types.QWidget, title: openArray[char], label: openArray[char], value: cint, minValue: cint, maxValue: cint): cint =
   fcQInputDialog_getInt6(parent.h, struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), struct_miqt_string(data: if len(label) > 0: addr label[0] else: nil, len: csize_t(len(label))), value, minValue, maxValue)
 
-proc getInt*(_: type gen_qinputdialog_types.QInputDialog, parent: gen_qwidget_types.QWidget, title: string, label: string, value: cint, minValue: cint, maxValue: cint, step: cint): cint =
+proc getInt*(_: type gen_qinputdialog_types.QInputDialog, parent: gen_qwidget_types.QWidget, title: openArray[char], label: openArray[char], value: cint, minValue: cint, maxValue: cint, step: cint): cint =
   fcQInputDialog_getInt7(parent.h, struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), struct_miqt_string(data: if len(label) > 0: addr label[0] else: nil, len: csize_t(len(label))), value, minValue, maxValue, step)
 
-proc getInt*(_: type gen_qinputdialog_types.QInputDialog, parent: gen_qwidget_types.QWidget, title: string, label: string, value: cint, minValue: cint, maxValue: cint, step: cint, ok: ptr bool): cint =
+proc getInt*(_: type gen_qinputdialog_types.QInputDialog, parent: gen_qwidget_types.QWidget, title: openArray[char], label: openArray[char], value: cint, minValue: cint, maxValue: cint, step: cint, ok: ptr bool): cint =
   fcQInputDialog_getInt8(parent.h, struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), struct_miqt_string(data: if len(label) > 0: addr label[0] else: nil, len: csize_t(len(label))), value, minValue, maxValue, step, ok)
 
-proc getInt*(_: type gen_qinputdialog_types.QInputDialog, parent: gen_qwidget_types.QWidget, title: string, label: string, value: cint, minValue: cint, maxValue: cint, step: cint, ok: ptr bool, flags: cint): cint =
+proc getInt*(_: type gen_qinputdialog_types.QInputDialog, parent: gen_qwidget_types.QWidget, title: openArray[char], label: openArray[char], value: cint, minValue: cint, maxValue: cint, step: cint, ok: ptr bool, flags: cint): cint =
   fcQInputDialog_getInt9(parent.h, struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), struct_miqt_string(data: if len(label) > 0: addr label[0] else: nil, len: csize_t(len(label))), value, minValue, maxValue, step, ok, cint(flags))
 
-proc getDouble*(_: type gen_qinputdialog_types.QInputDialog, parent: gen_qwidget_types.QWidget, title: string, label: string, value: float64): float64 =
+proc getDouble*(_: type gen_qinputdialog_types.QInputDialog, parent: gen_qwidget_types.QWidget, title: openArray[char], label: openArray[char], value: float64): float64 =
   fcQInputDialog_getDouble4(parent.h, struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), struct_miqt_string(data: if len(label) > 0: addr label[0] else: nil, len: csize_t(len(label))), value)
 
-proc getDouble*(_: type gen_qinputdialog_types.QInputDialog, parent: gen_qwidget_types.QWidget, title: string, label: string, value: float64, minValue: float64): float64 =
+proc getDouble*(_: type gen_qinputdialog_types.QInputDialog, parent: gen_qwidget_types.QWidget, title: openArray[char], label: openArray[char], value: float64, minValue: float64): float64 =
   fcQInputDialog_getDouble5(parent.h, struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), struct_miqt_string(data: if len(label) > 0: addr label[0] else: nil, len: csize_t(len(label))), value, minValue)
 
-proc getDouble*(_: type gen_qinputdialog_types.QInputDialog, parent: gen_qwidget_types.QWidget, title: string, label: string, value: float64, minValue: float64, maxValue: float64): float64 =
+proc getDouble*(_: type gen_qinputdialog_types.QInputDialog, parent: gen_qwidget_types.QWidget, title: openArray[char], label: openArray[char], value: float64, minValue: float64, maxValue: float64): float64 =
   fcQInputDialog_getDouble6(parent.h, struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), struct_miqt_string(data: if len(label) > 0: addr label[0] else: nil, len: csize_t(len(label))), value, minValue, maxValue)
 
-proc getDouble*(_: type gen_qinputdialog_types.QInputDialog, parent: gen_qwidget_types.QWidget, title: string, label: string, value: float64, minValue: float64, maxValue: float64, decimals: cint): float64 =
+proc getDouble*(_: type gen_qinputdialog_types.QInputDialog, parent: gen_qwidget_types.QWidget, title: openArray[char], label: openArray[char], value: float64, minValue: float64, maxValue: float64, decimals: cint): float64 =
   fcQInputDialog_getDouble7(parent.h, struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), struct_miqt_string(data: if len(label) > 0: addr label[0] else: nil, len: csize_t(len(label))), value, minValue, maxValue, decimals)
 
-proc getDouble*(_: type gen_qinputdialog_types.QInputDialog, parent: gen_qwidget_types.QWidget, title: string, label: string, value: float64, minValue: float64, maxValue: float64, decimals: cint, ok: ptr bool): float64 =
+proc getDouble*(_: type gen_qinputdialog_types.QInputDialog, parent: gen_qwidget_types.QWidget, title: openArray[char], label: openArray[char], value: float64, minValue: float64, maxValue: float64, decimals: cint, ok: ptr bool): float64 =
   fcQInputDialog_getDouble8(parent.h, struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), struct_miqt_string(data: if len(label) > 0: addr label[0] else: nil, len: csize_t(len(label))), value, minValue, maxValue, decimals, ok)
 
-proc getDouble*(_: type gen_qinputdialog_types.QInputDialog, parent: gen_qwidget_types.QWidget, title: string, label: string, value: float64, minValue: float64, maxValue: float64, decimals: cint, ok: ptr bool, flags: cint): float64 =
+proc getDouble*(_: type gen_qinputdialog_types.QInputDialog, parent: gen_qwidget_types.QWidget, title: openArray[char], label: openArray[char], value: float64, minValue: float64, maxValue: float64, decimals: cint, ok: ptr bool, flags: cint): float64 =
   fcQInputDialog_getDouble9(parent.h, struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), struct_miqt_string(data: if len(label) > 0: addr label[0] else: nil, len: csize_t(len(label))), value, minValue, maxValue, decimals, ok, cint(flags))
 
-proc getDouble*(_: type gen_qinputdialog_types.QInputDialog, parent: gen_qwidget_types.QWidget, title: string, label: string, value: float64, minValue: float64, maxValue: float64, decimals: cint, ok: ptr bool, flags: cint, step: float64): float64 =
+proc getDouble*(_: type gen_qinputdialog_types.QInputDialog, parent: gen_qwidget_types.QWidget, title: openArray[char], label: openArray[char], value: float64, minValue: float64, maxValue: float64, decimals: cint, ok: ptr bool, flags: cint, step: float64): float64 =
   fcQInputDialog_getDouble10(parent.h, struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), struct_miqt_string(data: if len(label) > 0: addr label[0] else: nil, len: csize_t(len(label))), value, minValue, maxValue, decimals, ok, cint(flags), step)
 
 type QInputDialogmetaObjectProc* = proc(self: QInputDialog): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
@@ -831,7 +831,7 @@ type QInputDialogdragMoveEventProc* = proc(self: QInputDialog, event: gen_qevent
 type QInputDialogdragLeaveEventProc* = proc(self: QInputDialog, event: gen_qevent_types.QDragLeaveEvent): void {.raises: [], gcsafe.}
 type QInputDialogdropEventProc* = proc(self: QInputDialog, event: gen_qevent_types.QDropEvent): void {.raises: [], gcsafe.}
 type QInputDialoghideEventProc* = proc(self: QInputDialog, event: gen_qevent_types.QHideEvent): void {.raises: [], gcsafe.}
-type QInputDialognativeEventProc* = proc(self: QInputDialog, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
+type QInputDialognativeEventProc* = proc(self: QInputDialog, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
 type QInputDialogchangeEventProc* = proc(self: QInputDialog, param1: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QInputDialogmetricProc* = proc(self: QInputDialog, param1: cint): cint {.raises: [], gcsafe.}
 type QInputDialoginitPainterProc* = proc(self: QInputDialog, painter: gen_qpainter_types.QPainter): void {.raises: [], gcsafe.}
@@ -1288,7 +1288,7 @@ proc fcQInputDialog_vtable_callback_hideEvent(self: pointer, event: pointer): vo
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   vtbl[].hideEvent(self, slotval1)
 
-proc QInputDialognativeEvent*(self: gen_qinputdialog_types.QInputDialog, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool =
+proc QInputDialognativeEvent*(self: gen_qinputdialog_types.QInputDialog, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool =
   fcQInputDialog_virtualbase_nativeEvent(self.h, struct_miqt_string(data: if len(eventType) > 0: addr eventType[0] else: nil, len: csize_t(len(eventType))), message, resultVal)
 
 proc fcQInputDialog_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
@@ -1727,7 +1727,7 @@ proc fcQInputDialog_method_callback_hideEvent(self: pointer, event: pointer): vo
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   inst.hideEvent(slotval1)
 
-method nativeEvent*(self: VirtualQInputDialog, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
+method nativeEvent*(self: VirtualQInputDialog, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
   QInputDialognativeEvent(self[], eventType, message, resultVal)
 proc fcQInputDialog_method_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
   let inst = cast[VirtualQInputDialog](fcQInputDialog_vdata(self)[])
@@ -2295,12 +2295,14 @@ proc create*(T: type gen_qinputdialog_types.QInputDialog,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQInputDialog_new(addr(cQInputDialog_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQInputDialog_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qinputdialog_types.QInputDialog,
     inst: VirtualQInputDialog) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQInputDialog_new2(addr(cQInputDialog_mvtbl), csize_t(sizeof(pointer)))
   fcQInputDialog_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qinputdialog_types.QInputDialog,
     parent: gen_qwidget_types.QWidget, flags: cint,
@@ -2308,6 +2310,7 @@ proc create*(T: type gen_qinputdialog_types.QInputDialog,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQInputDialog_new3(addr(cQInputDialog_mvtbl), csize_t(sizeof(pointer)), parent.h, cint(flags))
   fcQInputDialog_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qinputdialog_types.QInputDialog): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQInputDialog_staticMetaObject())

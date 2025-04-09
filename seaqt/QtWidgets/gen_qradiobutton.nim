@@ -281,7 +281,7 @@ type QRadioButtondragLeaveEventProc* = proc(self: QRadioButton, event: gen_qeven
 type QRadioButtondropEventProc* = proc(self: QRadioButton, event: gen_qevent_types.QDropEvent): void {.raises: [], gcsafe.}
 type QRadioButtonshowEventProc* = proc(self: QRadioButton, event: gen_qevent_types.QShowEvent): void {.raises: [], gcsafe.}
 type QRadioButtonhideEventProc* = proc(self: QRadioButton, event: gen_qevent_types.QHideEvent): void {.raises: [], gcsafe.}
-type QRadioButtonnativeEventProc* = proc(self: QRadioButton, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
+type QRadioButtonnativeEventProc* = proc(self: QRadioButton, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
 type QRadioButtonmetricProc* = proc(self: QRadioButton, param1: cint): cint {.raises: [], gcsafe.}
 type QRadioButtoninitPainterProc* = proc(self: QRadioButton, painter: gen_qpainter_types.QPainter): void {.raises: [], gcsafe.}
 type QRadioButtonredirectedProc* = proc(self: QRadioButton, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.raises: [], gcsafe.}
@@ -736,7 +736,7 @@ proc fcQRadioButton_vtable_callback_hideEvent(self: pointer, event: pointer): vo
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   vtbl[].hideEvent(self, slotval1)
 
-proc QRadioButtonnativeEvent*(self: gen_qradiobutton_types.QRadioButton, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool =
+proc QRadioButtonnativeEvent*(self: gen_qradiobutton_types.QRadioButton, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool =
   fcQRadioButton_virtualbase_nativeEvent(self.h, struct_miqt_string(data: if len(eventType) > 0: addr eventType[0] else: nil, len: csize_t(len(eventType))), message, resultVal)
 
 proc fcQRadioButton_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
@@ -1168,7 +1168,7 @@ proc fcQRadioButton_method_callback_hideEvent(self: pointer, event: pointer): vo
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   inst.hideEvent(slotval1)
 
-method nativeEvent*(self: VirtualQRadioButton, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
+method nativeEvent*(self: VirtualQRadioButton, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
   QRadioButtonnativeEvent(self[], eventType, message, resultVal)
 proc fcQRadioButton_method_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
   let inst = cast[VirtualQRadioButton](fcQRadioButton_vdata(self)[])
@@ -1536,7 +1536,7 @@ proc create*(T: type gen_qradiobutton_types.QRadioButton,
   fcQRadioButton_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qradiobutton_types.QRadioButton,
-    text: string,
+    text: openArray[char],
     vtbl: ref QRadioButtonVTable = nil): gen_qradiobutton_types.QRadioButton =
   let vtbl = if vtbl == nil: new QRadioButtonVTable else: vtbl
   GC_ref(vtbl)
@@ -1655,7 +1655,7 @@ proc create*(T: type gen_qradiobutton_types.QRadioButton,
   fcQRadioButton_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qradiobutton_types.QRadioButton,
-    text: string, parent: gen_qwidget_types.QWidget,
+    text: openArray[char], parent: gen_qwidget_types.QWidget,
     vtbl: ref QRadioButtonVTable = nil): gen_qradiobutton_types.QRadioButton =
   let vtbl = if vtbl == nil: new QRadioButtonVTable else: vtbl
   GC_ref(vtbl)
@@ -1840,26 +1840,30 @@ proc create*(T: type gen_qradiobutton_types.QRadioButton,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQRadioButton_new(addr(cQRadioButton_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQRadioButton_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qradiobutton_types.QRadioButton,
     inst: VirtualQRadioButton) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQRadioButton_new2(addr(cQRadioButton_mvtbl), csize_t(sizeof(pointer)))
   fcQRadioButton_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qradiobutton_types.QRadioButton,
-    text: string,
+    text: openArray[char],
     inst: VirtualQRadioButton) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQRadioButton_new3(addr(cQRadioButton_mvtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
   fcQRadioButton_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qradiobutton_types.QRadioButton,
-    text: string, parent: gen_qwidget_types.QWidget,
+    text: openArray[char], parent: gen_qwidget_types.QWidget,
     inst: VirtualQRadioButton) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQRadioButton_new4(addr(cQRadioButton_mvtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), parent.h)
   fcQRadioButton_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qradiobutton_types.QRadioButton): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQRadioButton_staticMetaObject())

@@ -114,10 +114,10 @@ proc postData*(self: gen_qwebenginehttprequest_types.QWebEngineHttpRequest): seq
   c_free(v_bytearray.data)
   vx_ret
 
-proc setPostData*(self: gen_qwebenginehttprequest_types.QWebEngineHttpRequest, postData: seq[byte]): void =
+proc setPostData*(self: gen_qwebenginehttprequest_types.QWebEngineHttpRequest, postData: openArray[byte]): void =
   fcQWebEngineHttpRequest_setPostData(self.h, struct_miqt_string(data: if len(postData) > 0: addr postData[0] else: nil, len: csize_t(len(postData))))
 
-proc hasHeader*(self: gen_qwebenginehttprequest_types.QWebEngineHttpRequest, headerName: seq[byte]): bool =
+proc hasHeader*(self: gen_qwebenginehttprequest_types.QWebEngineHttpRequest, headerName: openArray[byte]): bool =
   fcQWebEngineHttpRequest_hasHeader(self.h, struct_miqt_string(data: if len(headerName) > 0: addr headerName[0] else: nil, len: csize_t(len(headerName))))
 
 proc headers*(self: gen_qwebenginehttprequest_types.QWebEngineHttpRequest): seq[seq[byte]] =
@@ -132,16 +132,16 @@ proc headers*(self: gen_qwebenginehttprequest_types.QWebEngineHttpRequest): seq[
   c_free(v_ma.data)
   vx_ret
 
-proc header*(self: gen_qwebenginehttprequest_types.QWebEngineHttpRequest, headerName: seq[byte]): seq[byte] =
+proc header*(self: gen_qwebenginehttprequest_types.QWebEngineHttpRequest, headerName: openArray[byte]): seq[byte] =
   var v_bytearray = fcQWebEngineHttpRequest_header(self.h, struct_miqt_string(data: if len(headerName) > 0: addr headerName[0] else: nil, len: csize_t(len(headerName))))
   var vx_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](v_bytearray.data), 0, int(v_bytearray.len)-1))
   c_free(v_bytearray.data)
   vx_ret
 
-proc setHeader*(self: gen_qwebenginehttprequest_types.QWebEngineHttpRequest, headerName: seq[byte], value: seq[byte]): void =
+proc setHeader*(self: gen_qwebenginehttprequest_types.QWebEngineHttpRequest, headerName: openArray[byte], value: openArray[byte]): void =
   fcQWebEngineHttpRequest_setHeader(self.h, struct_miqt_string(data: if len(headerName) > 0: addr headerName[0] else: nil, len: csize_t(len(headerName))), struct_miqt_string(data: if len(value) > 0: addr value[0] else: nil, len: csize_t(len(value))))
 
-proc unsetHeader*(self: gen_qwebenginehttprequest_types.QWebEngineHttpRequest, headerName: seq[byte]): void =
+proc unsetHeader*(self: gen_qwebenginehttprequest_types.QWebEngineHttpRequest, headerName: openArray[byte]): void =
   fcQWebEngineHttpRequest_unsetHeader(self.h, struct_miqt_string(data: if len(headerName) > 0: addr headerName[0] else: nil, len: csize_t(len(headerName))))
 
 proc create*(T: type gen_qwebenginehttprequest_types.QWebEngineHttpRequest): gen_qwebenginehttprequest_types.QWebEngineHttpRequest =

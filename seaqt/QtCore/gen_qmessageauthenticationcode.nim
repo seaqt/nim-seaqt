@@ -56,13 +56,13 @@ proc fcQMessageAuthenticationCode_new2(methodVal: cint, key: struct_miqt_string)
 proc reset*(self: gen_qmessageauthenticationcode_types.QMessageAuthenticationCode): void =
   fcQMessageAuthenticationCode_reset(self.h)
 
-proc setKey*(self: gen_qmessageauthenticationcode_types.QMessageAuthenticationCode, key: seq[byte]): void =
+proc setKey*(self: gen_qmessageauthenticationcode_types.QMessageAuthenticationCode, key: openArray[byte]): void =
   fcQMessageAuthenticationCode_setKey(self.h, struct_miqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key))))
 
 proc addData*(self: gen_qmessageauthenticationcode_types.QMessageAuthenticationCode, data: cstring, length: int64): void =
   fcQMessageAuthenticationCode_addData(self.h, data, length)
 
-proc addData*(self: gen_qmessageauthenticationcode_types.QMessageAuthenticationCode, data: seq[byte]): void =
+proc addData*(self: gen_qmessageauthenticationcode_types.QMessageAuthenticationCode, data: openArray[byte]): void =
   fcQMessageAuthenticationCode_addDataWithData(self.h, struct_miqt_string(data: if len(data) > 0: addr data[0] else: nil, len: csize_t(len(data))))
 
 proc addData*(self: gen_qmessageauthenticationcode_types.QMessageAuthenticationCode, device: gen_qiodevice_types.QIODevice): bool =
@@ -74,7 +74,7 @@ proc resultX*(self: gen_qmessageauthenticationcode_types.QMessageAuthenticationC
   c_free(v_bytearray.data)
   vx_ret
 
-proc hash*(_: type gen_qmessageauthenticationcode_types.QMessageAuthenticationCode, message: seq[byte], key: seq[byte], methodVal: cint): seq[byte] =
+proc hash*(_: type gen_qmessageauthenticationcode_types.QMessageAuthenticationCode, message: openArray[byte], key: openArray[byte], methodVal: cint): seq[byte] =
   var v_bytearray = fcQMessageAuthenticationCode_hash(struct_miqt_string(data: if len(message) > 0: addr message[0] else: nil, len: csize_t(len(message))), struct_miqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key))), cint(methodVal))
   var vx_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](v_bytearray.data), 0, int(v_bytearray.len)-1))
   c_free(v_bytearray.data)
@@ -85,6 +85,6 @@ proc create*(T: type gen_qmessageauthenticationcode_types.QMessageAuthentication
   let tmp = gen_qmessageauthenticationcode_types.QMessageAuthenticationCode(h: fcQMessageAuthenticationCode_new(cint(methodVal)), owned: true)
   tmp
 proc create*(T: type gen_qmessageauthenticationcode_types.QMessageAuthenticationCode,
-    methodVal: cint, key: seq[byte]): gen_qmessageauthenticationcode_types.QMessageAuthenticationCode =
+    methodVal: cint, key: openArray[byte]): gen_qmessageauthenticationcode_types.QMessageAuthenticationCode =
   let tmp = gen_qmessageauthenticationcode_types.QMessageAuthenticationCode(h: fcQMessageAuthenticationCode_new2(cint(methodVal), struct_miqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key)))), owned: true)
   tmp

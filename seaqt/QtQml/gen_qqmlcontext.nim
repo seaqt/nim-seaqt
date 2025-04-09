@@ -145,16 +145,16 @@ proc contextObject*(self: gen_qqmlcontext_types.QQmlContext): gen_qobject_types.
 proc setContextObject*(self: gen_qqmlcontext_types.QQmlContext, contextObject: gen_qobject_types.QObject): void =
   fcQQmlContext_setContextObject(self.h, contextObject.h)
 
-proc contextProperty*(self: gen_qqmlcontext_types.QQmlContext, param1: string): gen_qvariant_types.QVariant =
+proc contextProperty*(self: gen_qqmlcontext_types.QQmlContext, param1: openArray[char]): gen_qvariant_types.QVariant =
   gen_qvariant_types.QVariant(h: fcQQmlContext_contextProperty(self.h, struct_miqt_string(data: if len(param1) > 0: addr param1[0] else: nil, len: csize_t(len(param1)))), owned: true)
 
-proc setContextProperty*(self: gen_qqmlcontext_types.QQmlContext, param1: string, param2: gen_qobject_types.QObject): void =
+proc setContextProperty*(self: gen_qqmlcontext_types.QQmlContext, param1: openArray[char], param2: gen_qobject_types.QObject): void =
   fcQQmlContext_setContextProperty(self.h, struct_miqt_string(data: if len(param1) > 0: addr param1[0] else: nil, len: csize_t(len(param1))), param2.h)
 
-proc setContextProperty*(self: gen_qqmlcontext_types.QQmlContext, param1: string, param2: gen_qvariant_types.QVariant): void =
+proc setContextProperty*(self: gen_qqmlcontext_types.QQmlContext, param1: openArray[char], param2: gen_qvariant_types.QVariant): void =
   fcQQmlContext_setContextProperty2(self.h, struct_miqt_string(data: if len(param1) > 0: addr param1[0] else: nil, len: csize_t(len(param1))), param2.h)
 
-proc setContextProperties*(self: gen_qqmlcontext_types.QQmlContext, properties: seq[gen_qqmlcontext_types.QQmlContextPropertyPair]): void =
+proc setContextProperties*(self: gen_qqmlcontext_types.QQmlContext, properties: openArray[gen_qqmlcontext_types.QQmlContextPropertyPair]): void =
   var properties_CArray = newSeq[pointer](len(properties))
   for i in 0..<len(properties):
     properties_CArray[i] = properties[i].h
@@ -167,7 +167,7 @@ proc nameForObject*(self: gen_qqmlcontext_types.QQmlContext, param1: gen_qobject
   c_free(v_ms.data)
   vx_ret
 
-proc objectForName*(self: gen_qqmlcontext_types.QQmlContext, param1: string): gen_qobject_types.QObject =
+proc objectForName*(self: gen_qqmlcontext_types.QQmlContext, param1: openArray[char]): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQQmlContext_objectForName(self.h, struct_miqt_string(data: if len(param1) > 0: addr param1[0] else: nil, len: csize_t(len(param1)))), owned: false)
 
 proc resolvedUrl*(self: gen_qqmlcontext_types.QQmlContext, param1: gen_qurl_types.QUrl): gen_qurl_types.QUrl =
@@ -179,7 +179,7 @@ proc setBaseUrl*(self: gen_qqmlcontext_types.QQmlContext, baseUrl: gen_qurl_type
 proc baseUrl*(self: gen_qqmlcontext_types.QQmlContext): gen_qurl_types.QUrl =
   gen_qurl_types.QUrl(h: fcQQmlContext_baseUrl(self.h), owned: true)
 
-proc importedScript*(self: gen_qqmlcontext_types.QQmlContext, name: string): gen_qjsvalue_types.QJSValue =
+proc importedScript*(self: gen_qqmlcontext_types.QQmlContext, name: openArray[char]): gen_qjsvalue_types.QJSValue =
   gen_qjsvalue_types.QJSValue(h: fcQQmlContext_importedScript(self.h, struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name)))), owned: true)
 
 proc tr*(_: type gen_qqmlcontext_types.QQmlContext, s: cstring, c: cstring): string =
@@ -554,6 +554,7 @@ proc create*(T: type gen_qqmlcontext_types.QQmlContext,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQQmlContext_new(addr(cQQmlContext_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQQmlContext_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qqmlcontext_types.QQmlContext,
     parent: gen_qqmlcontext_types.QQmlContext,
@@ -561,6 +562,7 @@ proc create*(T: type gen_qqmlcontext_types.QQmlContext,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQQmlContext_new2(addr(cQQmlContext_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQQmlContext_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qqmlcontext_types.QQmlContext,
     parent: gen_qqmlengine_types.QQmlEngine, objParent: gen_qobject_types.QObject,
@@ -568,6 +570,7 @@ proc create*(T: type gen_qqmlcontext_types.QQmlContext,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQQmlContext_new3(addr(cQQmlContext_mvtbl), csize_t(sizeof(pointer)), parent.h, objParent.h)
   fcQQmlContext_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qqmlcontext_types.QQmlContext,
     parent: gen_qqmlcontext_types.QQmlContext, objParent: gen_qobject_types.QObject,
@@ -575,6 +578,7 @@ proc create*(T: type gen_qqmlcontext_types.QQmlContext,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQQmlContext_new4(addr(cQQmlContext_mvtbl), csize_t(sizeof(pointer)), parent.h, objParent.h)
   fcQQmlContext_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qqmlcontext_types.QQmlContext): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQQmlContext_staticMetaObject())

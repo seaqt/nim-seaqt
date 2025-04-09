@@ -749,6 +749,7 @@ proc create*(T: type gen_qsoundeffect_types.QSoundEffect,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQSoundEffect_new(addr(cQSoundEffect_mvtbl), csize_t(sizeof(pointer)))
   fcQSoundEffect_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qsoundeffect_types.QSoundEffect,
     audioDevice: gen_qaudiodevice_types.QAudioDevice,
@@ -756,6 +757,7 @@ proc create*(T: type gen_qsoundeffect_types.QSoundEffect,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQSoundEffect_new2(addr(cQSoundEffect_mvtbl), csize_t(sizeof(pointer)), audioDevice.h)
   fcQSoundEffect_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qsoundeffect_types.QSoundEffect,
     parent: gen_qobject_types.QObject,
@@ -763,6 +765,7 @@ proc create*(T: type gen_qsoundeffect_types.QSoundEffect,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQSoundEffect_new3(addr(cQSoundEffect_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQSoundEffect_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qsoundeffect_types.QSoundEffect,
     audioDevice: gen_qaudiodevice_types.QAudioDevice, parent: gen_qobject_types.QObject,
@@ -770,6 +773,7 @@ proc create*(T: type gen_qsoundeffect_types.QSoundEffect,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQSoundEffect_new4(addr(cQSoundEffect_mvtbl), csize_t(sizeof(pointer)), audioDevice.h, parent.h)
   fcQSoundEffect_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qsoundeffect_types.QSoundEffect): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQSoundEffect_staticMetaObject())

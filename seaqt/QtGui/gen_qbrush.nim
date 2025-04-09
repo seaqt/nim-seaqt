@@ -471,7 +471,7 @@ proc spread*(self: gen_qbrush_types.QGradient): cint =
 proc setColorAt*(self: gen_qbrush_types.QGradient, pos: float64, color: gen_qcolor_types.QColor): void =
   fcQGradient_setColorAt(self.h, pos, color.h)
 
-proc setStops*(self: gen_qbrush_types.QGradient, stops: seq[tuple[first: float64, second: gen_qcolor_types.QColor]]): void =
+proc setStops*(self: gen_qbrush_types.QGradient, stops: openArray[tuple[first: float64, second: gen_qcolor_types.QColor]]): void =
   var stops_CArray = newSeq[struct_miqt_map](len(stops))
   for i in 0..<len(stops):
     var stops_i_CArray_First: float64

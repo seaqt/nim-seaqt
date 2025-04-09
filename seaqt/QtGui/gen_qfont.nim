@@ -246,7 +246,7 @@ proc family*(self: gen_qfont_types.QFont): string =
   c_free(v_ms.data)
   vx_ret
 
-proc setFamily*(self: gen_qfont_types.QFont, family: string): void =
+proc setFamily*(self: gen_qfont_types.QFont, family: openArray[char]): void =
   fcQFont_setFamily(self.h, struct_miqt_string(data: if len(family) > 0: addr family[0] else: nil, len: csize_t(len(family))))
 
 proc families*(self: gen_qfont_types.QFont): seq[string] =
@@ -261,7 +261,7 @@ proc families*(self: gen_qfont_types.QFont): seq[string] =
   c_free(v_ma.data)
   vx_ret
 
-proc setFamilies*(self: gen_qfont_types.QFont, families: seq[string]): void =
+proc setFamilies*(self: gen_qfont_types.QFont, families: openArray[string]): void =
   var families_CArray = newSeq[struct_miqt_string](len(families))
   for i in 0..<len(families):
     families_CArray[i] = struct_miqt_string(data: if len(families[i]) > 0: addr families[i][0] else: nil, len: csize_t(len(families[i])))
@@ -274,7 +274,7 @@ proc styleName*(self: gen_qfont_types.QFont): string =
   c_free(v_ms.data)
   vx_ret
 
-proc setStyleName*(self: gen_qfont_types.QFont, styleName: string): void =
+proc setStyleName*(self: gen_qfont_types.QFont, styleName: openArray[char]): void =
   fcQFont_setStyleName(self.h, struct_miqt_string(data: if len(styleName) > 0: addr styleName[0] else: nil, len: csize_t(len(styleName))))
 
 proc pointSize*(self: gen_qfont_types.QFont): cint =
@@ -427,16 +427,16 @@ proc toString*(self: gen_qfont_types.QFont): string =
   c_free(v_ms.data)
   vx_ret
 
-proc fromString*(self: gen_qfont_types.QFont, param1: string): bool =
+proc fromString*(self: gen_qfont_types.QFont, param1: openArray[char]): bool =
   fcQFont_fromString(self.h, struct_miqt_string(data: if len(param1) > 0: addr param1[0] else: nil, len: csize_t(len(param1))))
 
-proc substitute*(_: type gen_qfont_types.QFont, param1: string): string =
+proc substitute*(_: type gen_qfont_types.QFont, param1: openArray[char]): string =
   let v_ms = fcQFont_substitute(struct_miqt_string(data: if len(param1) > 0: addr param1[0] else: nil, len: csize_t(len(param1))))
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc substitutes*(_: type gen_qfont_types.QFont, param1: string): seq[string] =
+proc substitutes*(_: type gen_qfont_types.QFont, param1: openArray[char]): seq[string] =
   var v_ma = fcQFont_substitutes(struct_miqt_string(data: if len(param1) > 0: addr param1[0] else: nil, len: csize_t(len(param1))))
   var vx_ret = newSeq[string](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
@@ -460,17 +460,17 @@ proc substitutions*(_: type gen_qfont_types.QFont): seq[string] =
   c_free(v_ma.data)
   vx_ret
 
-proc insertSubstitution*(_: type gen_qfont_types.QFont, param1: string, param2: string): void =
+proc insertSubstitution*(_: type gen_qfont_types.QFont, param1: openArray[char], param2: openArray[char]): void =
   fcQFont_insertSubstitution(struct_miqt_string(data: if len(param1) > 0: addr param1[0] else: nil, len: csize_t(len(param1))), struct_miqt_string(data: if len(param2) > 0: addr param2[0] else: nil, len: csize_t(len(param2))))
 
-proc insertSubstitutions*(_: type gen_qfont_types.QFont, param1: string, param2: seq[string]): void =
+proc insertSubstitutions*(_: type gen_qfont_types.QFont, param1: openArray[char], param2: openArray[string]): void =
   var param2_CArray = newSeq[struct_miqt_string](len(param2))
   for i in 0..<len(param2):
     param2_CArray[i] = struct_miqt_string(data: if len(param2[i]) > 0: addr param2[i][0] else: nil, len: csize_t(len(param2[i])))
 
   fcQFont_insertSubstitutions(struct_miqt_string(data: if len(param1) > 0: addr param1[0] else: nil, len: csize_t(len(param1))), struct_miqt_array(len: csize_t(len(param2)), data: if len(param2) == 0: nil else: addr(param2_CArray[0])))
 
-proc removeSubstitutions*(_: type gen_qfont_types.QFont, param1: string): void =
+proc removeSubstitutions*(_: type gen_qfont_types.QFont, param1: openArray[char]): void =
   fcQFont_removeSubstitutions(struct_miqt_string(data: if len(param1) > 0: addr param1[0] else: nil, len: csize_t(len(param1))))
 
 proc initialize*(_: type gen_qfont_types.QFont): void =
@@ -510,11 +510,11 @@ proc create*(T: type gen_qfont_types.QFont): gen_qfont_types.QFont =
   let tmp = gen_qfont_types.QFont(h: fcQFont_new(), owned: true)
   tmp
 proc create*(T: type gen_qfont_types.QFont,
-    family: string): gen_qfont_types.QFont =
+    family: openArray[char]): gen_qfont_types.QFont =
   let tmp = gen_qfont_types.QFont(h: fcQFont_new2(struct_miqt_string(data: if len(family) > 0: addr family[0] else: nil, len: csize_t(len(family)))), owned: true)
   tmp
 proc create*(T: type gen_qfont_types.QFont,
-    families: seq[string]): gen_qfont_types.QFont =
+    families: openArray[string]): gen_qfont_types.QFont =
   var families_CArray = newSeq[struct_miqt_string](len(families))
   for i in 0..<len(families):
     families_CArray[i] = struct_miqt_string(data: if len(families[i]) > 0: addr families[i][0] else: nil, len: csize_t(len(families[i])))
@@ -530,19 +530,19 @@ proc create*(T: type gen_qfont_types.QFont,
   let tmp = gen_qfont_types.QFont(h: fcQFont_new5(font.h), owned: true)
   tmp
 proc create*(T: type gen_qfont_types.QFont,
-    family: string, pointSize: cint): gen_qfont_types.QFont =
+    family: openArray[char], pointSize: cint): gen_qfont_types.QFont =
   let tmp = gen_qfont_types.QFont(h: fcQFont_new6(struct_miqt_string(data: if len(family) > 0: addr family[0] else: nil, len: csize_t(len(family))), pointSize), owned: true)
   tmp
 proc create*(T: type gen_qfont_types.QFont,
-    family: string, pointSize: cint, weight: cint): gen_qfont_types.QFont =
+    family: openArray[char], pointSize: cint, weight: cint): gen_qfont_types.QFont =
   let tmp = gen_qfont_types.QFont(h: fcQFont_new7(struct_miqt_string(data: if len(family) > 0: addr family[0] else: nil, len: csize_t(len(family))), pointSize, weight), owned: true)
   tmp
 proc create*(T: type gen_qfont_types.QFont,
-    family: string, pointSize: cint, weight: cint, italic: bool): gen_qfont_types.QFont =
+    family: openArray[char], pointSize: cint, weight: cint, italic: bool): gen_qfont_types.QFont =
   let tmp = gen_qfont_types.QFont(h: fcQFont_new8(struct_miqt_string(data: if len(family) > 0: addr family[0] else: nil, len: csize_t(len(family))), pointSize, weight, italic), owned: true)
   tmp
 proc create*(T: type gen_qfont_types.QFont,
-    families: seq[string], pointSize: cint): gen_qfont_types.QFont =
+    families: openArray[string], pointSize: cint): gen_qfont_types.QFont =
   var families_CArray = newSeq[struct_miqt_string](len(families))
   for i in 0..<len(families):
     families_CArray[i] = struct_miqt_string(data: if len(families[i]) > 0: addr families[i][0] else: nil, len: csize_t(len(families[i])))
@@ -550,7 +550,7 @@ proc create*(T: type gen_qfont_types.QFont,
   let tmp = gen_qfont_types.QFont(h: fcQFont_new9(struct_miqt_array(len: csize_t(len(families)), data: if len(families) == 0: nil else: addr(families_CArray[0])), pointSize), owned: true)
   tmp
 proc create*(T: type gen_qfont_types.QFont,
-    families: seq[string], pointSize: cint, weight: cint): gen_qfont_types.QFont =
+    families: openArray[string], pointSize: cint, weight: cint): gen_qfont_types.QFont =
   var families_CArray = newSeq[struct_miqt_string](len(families))
   for i in 0..<len(families):
     families_CArray[i] = struct_miqt_string(data: if len(families[i]) > 0: addr families[i][0] else: nil, len: csize_t(len(families[i])))
@@ -558,7 +558,7 @@ proc create*(T: type gen_qfont_types.QFont,
   let tmp = gen_qfont_types.QFont(h: fcQFont_new10(struct_miqt_array(len: csize_t(len(families)), data: if len(families) == 0: nil else: addr(families_CArray[0])), pointSize, weight), owned: true)
   tmp
 proc create*(T: type gen_qfont_types.QFont,
-    families: seq[string], pointSize: cint, weight: cint, italic: bool): gen_qfont_types.QFont =
+    families: openArray[string], pointSize: cint, weight: cint, italic: bool): gen_qfont_types.QFont =
   var families_CArray = newSeq[struct_miqt_string](len(families))
   for i in 0..<len(families):
     families_CArray[i] = struct_miqt_string(data: if len(families[i]) > 0: addr families[i][0] else: nil, len: csize_t(len(families[i])))

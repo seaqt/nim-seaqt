@@ -235,7 +235,7 @@ proc title*(self: gen_qgroupbox_types.QGroupBox): string =
   c_free(v_ms.data)
   vx_ret
 
-proc setTitle*(self: gen_qgroupbox_types.QGroupBox, title: string): void =
+proc setTitle*(self: gen_qgroupbox_types.QGroupBox, title: openArray[char]): void =
   fcQGroupBox_setTitle(self.h, struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))))
 
 proc alignment*(self: gen_qgroupbox_types.QGroupBox): cint =
@@ -373,7 +373,7 @@ type QGroupBoxdragLeaveEventProc* = proc(self: QGroupBox, event: gen_qevent_type
 type QGroupBoxdropEventProc* = proc(self: QGroupBox, event: gen_qevent_types.QDropEvent): void {.raises: [], gcsafe.}
 type QGroupBoxshowEventProc* = proc(self: QGroupBox, event: gen_qevent_types.QShowEvent): void {.raises: [], gcsafe.}
 type QGroupBoxhideEventProc* = proc(self: QGroupBox, event: gen_qevent_types.QHideEvent): void {.raises: [], gcsafe.}
-type QGroupBoxnativeEventProc* = proc(self: QGroupBox, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
+type QGroupBoxnativeEventProc* = proc(self: QGroupBox, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
 type QGroupBoxmetricProc* = proc(self: QGroupBox, param1: cint): cint {.raises: [], gcsafe.}
 type QGroupBoxinitPainterProc* = proc(self: QGroupBox, painter: gen_qpainter_types.QPainter): void {.raises: [], gcsafe.}
 type QGroupBoxredirectedProc* = proc(self: QGroupBox, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.raises: [], gcsafe.}
@@ -799,7 +799,7 @@ proc fcQGroupBox_vtable_callback_hideEvent(self: pointer, event: pointer): void 
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   vtbl[].hideEvent(self, slotval1)
 
-proc QGroupBoxnativeEvent*(self: gen_qgroupbox_types.QGroupBox, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool =
+proc QGroupBoxnativeEvent*(self: gen_qgroupbox_types.QGroupBox, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool =
   fcQGroupBox_virtualbase_nativeEvent(self.h, struct_miqt_string(data: if len(eventType) > 0: addr eventType[0] else: nil, len: csize_t(len(eventType))), message, resultVal)
 
 proc fcQGroupBox_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
@@ -1211,7 +1211,7 @@ proc fcQGroupBox_method_callback_hideEvent(self: pointer, event: pointer): void 
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   inst.hideEvent(slotval1)
 
-method nativeEvent*(self: VirtualQGroupBox, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
+method nativeEvent*(self: VirtualQGroupBox, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
   QGroupBoxnativeEvent(self[], eventType, message, resultVal)
 proc fcQGroupBox_method_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
   let inst = cast[VirtualQGroupBox](fcQGroupBox_vdata(self)[])
@@ -1567,7 +1567,7 @@ proc create*(T: type gen_qgroupbox_types.QGroupBox,
   fcQGroupBox_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qgroupbox_types.QGroupBox,
-    title: string,
+    title: openArray[char],
     vtbl: ref QGroupBoxVTable = nil): gen_qgroupbox_types.QGroupBox =
   let vtbl = if vtbl == nil: new QGroupBoxVTable else: vtbl
   GC_ref(vtbl)
@@ -1680,7 +1680,7 @@ proc create*(T: type gen_qgroupbox_types.QGroupBox,
   fcQGroupBox_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qgroupbox_types.QGroupBox,
-    title: string, parent: gen_qwidget_types.QWidget,
+    title: openArray[char], parent: gen_qwidget_types.QWidget,
     vtbl: ref QGroupBoxVTable = nil): gen_qgroupbox_types.QGroupBox =
   let vtbl = if vtbl == nil: new QGroupBoxVTable else: vtbl
   GC_ref(vtbl)
@@ -1856,26 +1856,30 @@ proc create*(T: type gen_qgroupbox_types.QGroupBox,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQGroupBox_new(addr(cQGroupBox_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQGroupBox_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qgroupbox_types.QGroupBox,
     inst: VirtualQGroupBox) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQGroupBox_new2(addr(cQGroupBox_mvtbl), csize_t(sizeof(pointer)))
   fcQGroupBox_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qgroupbox_types.QGroupBox,
-    title: string,
+    title: openArray[char],
     inst: VirtualQGroupBox) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQGroupBox_new3(addr(cQGroupBox_mvtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))))
   fcQGroupBox_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qgroupbox_types.QGroupBox,
-    title: string, parent: gen_qwidget_types.QWidget,
+    title: openArray[char], parent: gen_qwidget_types.QWidget,
     inst: VirtualQGroupBox) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQGroupBox_new4(addr(cQGroupBox_mvtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), parent.h)
   fcQGroupBox_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qgroupbox_types.QGroupBox): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQGroupBox_staticMetaObject())

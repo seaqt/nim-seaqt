@@ -308,14 +308,14 @@ proc operatorPlusAssign*(self: gen_qcborarray_types.QCborArray, v: gen_qcborvalu
 proc operatorShiftLeft*(self: gen_qcborarray_types.QCborArray, v: gen_qcborvalue_types.QCborValue): gen_qcborarray_types.QCborArray =
   gen_qcborarray_types.QCborArray(h: fcQCborArray_operatorShiftLeft(self.h, v.h), owned: false)
 
-proc fromStringList*(_: type gen_qcborarray_types.QCborArray, list: seq[string]): gen_qcborarray_types.QCborArray =
+proc fromStringList*(_: type gen_qcborarray_types.QCborArray, list: openArray[string]): gen_qcborarray_types.QCborArray =
   var list_CArray = newSeq[struct_miqt_string](len(list))
   for i in 0..<len(list):
     list_CArray[i] = struct_miqt_string(data: if len(list[i]) > 0: addr list[i][0] else: nil, len: csize_t(len(list[i])))
 
   gen_qcborarray_types.QCborArray(h: fcQCborArray_fromStringList(struct_miqt_array(len: csize_t(len(list)), data: if len(list) == 0: nil else: addr(list_CArray[0]))), owned: true)
 
-proc fromVariantList*(_: type gen_qcborarray_types.QCborArray, list: seq[gen_qvariant_types.QVariant]): gen_qcborarray_types.QCborArray =
+proc fromVariantList*(_: type gen_qcborarray_types.QCborArray, list: openArray[gen_qvariant_types.QVariant]): gen_qcborarray_types.QCborArray =
   var list_CArray = newSeq[pointer](len(list))
   for i in 0..<len(list):
     list_CArray[i] = list[i].h

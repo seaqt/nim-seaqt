@@ -374,7 +374,7 @@ type QAbstractScrollAreatabletEventProc* = proc(self: QAbstractScrollArea, event
 type QAbstractScrollAreaactionEventProc* = proc(self: QAbstractScrollArea, event: gen_qevent_types.QActionEvent): void {.raises: [], gcsafe.}
 type QAbstractScrollAreashowEventProc* = proc(self: QAbstractScrollArea, event: gen_qevent_types.QShowEvent): void {.raises: [], gcsafe.}
 type QAbstractScrollAreahideEventProc* = proc(self: QAbstractScrollArea, event: gen_qevent_types.QHideEvent): void {.raises: [], gcsafe.}
-type QAbstractScrollAreanativeEventProc* = proc(self: QAbstractScrollArea, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
+type QAbstractScrollAreanativeEventProc* = proc(self: QAbstractScrollArea, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
 type QAbstractScrollAreametricProc* = proc(self: QAbstractScrollArea, param1: cint): cint {.raises: [], gcsafe.}
 type QAbstractScrollAreainitPainterProc* = proc(self: QAbstractScrollArea, painter: gen_qpainter_types.QPainter): void {.raises: [], gcsafe.}
 type QAbstractScrollArearedirectedProc* = proc(self: QAbstractScrollArea, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.raises: [], gcsafe.}
@@ -847,7 +847,7 @@ proc fcQAbstractScrollArea_vtable_callback_hideEvent(self: pointer, event: point
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   vtbl[].hideEvent(self, slotval1)
 
-proc QAbstractScrollAreanativeEvent*(self: gen_qabstractscrollarea_types.QAbstractScrollArea, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool =
+proc QAbstractScrollAreanativeEvent*(self: gen_qabstractscrollarea_types.QAbstractScrollArea, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool =
   fcQAbstractScrollArea_virtualbase_nativeEvent(self.h, struct_miqt_string(data: if len(eventType) > 0: addr eventType[0] else: nil, len: csize_t(len(eventType))), message, resultVal)
 
 proc fcQAbstractScrollArea_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
@@ -1289,7 +1289,7 @@ proc fcQAbstractScrollArea_method_callback_hideEvent(self: pointer, event: point
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   inst.hideEvent(slotval1)
 
-method nativeEvent*(self: VirtualQAbstractScrollArea, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
+method nativeEvent*(self: VirtualQAbstractScrollArea, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
   QAbstractScrollAreanativeEvent(self[], eventType, message, resultVal)
 proc fcQAbstractScrollArea_method_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
   let inst = cast[VirtualQAbstractScrollArea](fcQAbstractScrollArea_vdata(self)[])
@@ -1738,12 +1738,14 @@ proc create*(T: type gen_qabstractscrollarea_types.QAbstractScrollArea,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQAbstractScrollArea_new(addr(cQAbstractScrollArea_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQAbstractScrollArea_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qabstractscrollarea_types.QAbstractScrollArea,
     inst: VirtualQAbstractScrollArea) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQAbstractScrollArea_new2(addr(cQAbstractScrollArea_mvtbl), csize_t(sizeof(pointer)))
   fcQAbstractScrollArea_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qabstractscrollarea_types.QAbstractScrollArea): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQAbstractScrollArea_staticMetaObject())

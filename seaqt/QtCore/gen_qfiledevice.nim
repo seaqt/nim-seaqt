@@ -227,7 +227,7 @@ proc map*(self: gen_qfiledevice_types.QFileDevice, offset: clonglong, size: clon
 proc setOpenMode*(self: gen_qfiledevice_types.QFileDevice, openMode: cint): void =
   fcQFileDevice_protectedbase_setOpenMode(self.h, cint(openMode))
 
-proc setErrorString*(self: gen_qfiledevice_types.QFileDevice, errorString: string): void =
+proc setErrorString*(self: gen_qfiledevice_types.QFileDevice, errorString: openArray[char]): void =
   fcQFileDevice_protectedbase_setErrorString(self.h, struct_miqt_string(data: if len(errorString) > 0: addr errorString[0] else: nil, len: csize_t(len(errorString))))
 
 proc sender*(self: gen_qfiledevice_types.QFileDevice): gen_qobject_types.QObject =

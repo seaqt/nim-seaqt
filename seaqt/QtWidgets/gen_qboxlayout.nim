@@ -1415,6 +1415,7 @@ proc create*(T: type gen_qboxlayout_types.QBoxLayout,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQBoxLayout_new(addr(cQBoxLayout_mvtbl), csize_t(sizeof(pointer)), cint(param1))
   fcQBoxLayout_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qboxlayout_types.QBoxLayout,
     param1: cint, parent: gen_qwidget_types.QWidget,
@@ -1422,6 +1423,7 @@ proc create*(T: type gen_qboxlayout_types.QBoxLayout,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQBoxLayout_new2(addr(cQBoxLayout_mvtbl), csize_t(sizeof(pointer)), cint(param1), parent.h)
   fcQBoxLayout_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qboxlayout_types.QBoxLayout): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQBoxLayout_staticMetaObject())
@@ -2337,12 +2339,14 @@ proc create*(T: type gen_qboxlayout_types.QHBoxLayout,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQHBoxLayout_new(addr(cQHBoxLayout_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQHBoxLayout_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qboxlayout_types.QHBoxLayout,
     inst: VirtualQHBoxLayout) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQHBoxLayout_new2(addr(cQHBoxLayout_mvtbl), csize_t(sizeof(pointer)))
   fcQHBoxLayout_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qboxlayout_types.QHBoxLayout): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQHBoxLayout_staticMetaObject())
@@ -3258,12 +3262,14 @@ proc create*(T: type gen_qboxlayout_types.QVBoxLayout,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQVBoxLayout_new(addr(cQVBoxLayout_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQVBoxLayout_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qboxlayout_types.QVBoxLayout,
     inst: VirtualQVBoxLayout) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQVBoxLayout_new2(addr(cQVBoxLayout_mvtbl), csize_t(sizeof(pointer)))
   fcQVBoxLayout_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qboxlayout_types.QVBoxLayout): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQVBoxLayout_staticMetaObject())

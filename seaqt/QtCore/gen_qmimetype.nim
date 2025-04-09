@@ -173,7 +173,7 @@ proc preferredSuffix*(self: gen_qmimetype_types.QMimeType): string =
   c_free(v_ms.data)
   vx_ret
 
-proc inherits*(self: gen_qmimetype_types.QMimeType, mimeTypeName: string): bool =
+proc inherits*(self: gen_qmimetype_types.QMimeType, mimeTypeName: openArray[char]): bool =
   fcQMimeType_inherits(self.h, struct_miqt_string(data: if len(mimeTypeName) > 0: addr mimeTypeName[0] else: nil, len: csize_t(len(mimeTypeName))))
 
 proc filterString*(self: gen_qmimetype_types.QMimeType): string =

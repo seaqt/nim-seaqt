@@ -174,7 +174,7 @@ proc setProgressValue*(self: gen_qfutureinterface_types.QFutureInterfaceBase, pr
 proc progressValue*(self: gen_qfutureinterface_types.QFutureInterfaceBase): cint =
   fcQFutureInterfaceBase_progressValue(self.h)
 
-proc setProgressValueAndText*(self: gen_qfutureinterface_types.QFutureInterfaceBase, progressValue: cint, progressText: string): void =
+proc setProgressValueAndText*(self: gen_qfutureinterface_types.QFutureInterfaceBase, progressValue: cint, progressText: openArray[char]): void =
   fcQFutureInterfaceBase_setProgressValueAndText(self.h, progressValue, struct_miqt_string(data: if len(progressText) > 0: addr progressText[0] else: nil, len: csize_t(len(progressText))))
 
 proc progressText*(self: gen_qfutureinterface_types.QFutureInterfaceBase): string =

@@ -604,6 +604,7 @@ proc create*(T: type gen_qoffscreensurface_types.QOffscreenSurface,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQOffscreenSurface_new(addr(cQOffscreenSurface_mvtbl), csize_t(sizeof(pointer)))
   fcQOffscreenSurface_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qoffscreensurface_types.QOffscreenSurface,
     screen: gen_qscreen_types.QScreen,
@@ -611,6 +612,7 @@ proc create*(T: type gen_qoffscreensurface_types.QOffscreenSurface,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQOffscreenSurface_new2(addr(cQOffscreenSurface_mvtbl), csize_t(sizeof(pointer)), screen.h)
   fcQOffscreenSurface_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qoffscreensurface_types.QOffscreenSurface,
     screen: gen_qscreen_types.QScreen, parent: gen_qobject_types.QObject,
@@ -618,6 +620,7 @@ proc create*(T: type gen_qoffscreensurface_types.QOffscreenSurface,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQOffscreenSurface_new3(addr(cQOffscreenSurface_mvtbl), csize_t(sizeof(pointer)), screen.h, parent.h)
   fcQOffscreenSurface_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qoffscreensurface_types.QOffscreenSurface): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQOffscreenSurface_staticMetaObject())

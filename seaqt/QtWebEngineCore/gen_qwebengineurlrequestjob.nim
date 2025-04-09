@@ -108,7 +108,7 @@ proc requestMethod*(self: gen_qwebengineurlrequestjob_types.QWebEngineUrlRequest
 proc initiator*(self: gen_qwebengineurlrequestjob_types.QWebEngineUrlRequestJob): gen_qurl_types.QUrl =
   gen_qurl_types.QUrl(h: fcQWebEngineUrlRequestJob_initiator(self.h), owned: true)
 
-proc reply*(self: gen_qwebengineurlrequestjob_types.QWebEngineUrlRequestJob, contentType: seq[byte], device: gen_qiodevice_types.QIODevice): void =
+proc reply*(self: gen_qwebengineurlrequestjob_types.QWebEngineUrlRequestJob, contentType: openArray[byte], device: gen_qiodevice_types.QIODevice): void =
   fcQWebEngineUrlRequestJob_reply(self.h, struct_miqt_string(data: if len(contentType) > 0: addr contentType[0] else: nil, len: csize_t(len(contentType))), device.h)
 
 proc fail*(self: gen_qwebengineurlrequestjob_types.QWebEngineUrlRequestJob, error: cint): void =

@@ -112,10 +112,10 @@ proc operatorShiftLeft*(self: gen_qqmlinfo_types.QQmlInfo, t: float64): gen_qqml
 proc operatorShiftLeft*(self: gen_qqmlinfo_types.QQmlInfo, t: cstring): gen_qqmlinfo_types.QQmlInfo =
   gen_qqmlinfo_types.QQmlInfo(h: fcQQmlInfo_operatorShiftLeft2(self.h, t), owned: false)
 
-proc operatorShiftLeft*(self: gen_qqmlinfo_types.QQmlInfo, t: string): gen_qqmlinfo_types.QQmlInfo =
+proc operatorShiftLeft*(self: gen_qqmlinfo_types.QQmlInfo, t: openArray[char]): gen_qqmlinfo_types.QQmlInfo =
   gen_qqmlinfo_types.QQmlInfo(h: fcQQmlInfo_operatorShiftLeftWithQString(self.h, struct_miqt_string(data: if len(t) > 0: addr t[0] else: nil, len: csize_t(len(t)))), owned: false)
 
-proc operatorShiftLeft*(self: gen_qqmlinfo_types.QQmlInfo, t: seq[byte]): gen_qqmlinfo_types.QQmlInfo =
+proc operatorShiftLeft*(self: gen_qqmlinfo_types.QQmlInfo, t: openArray[byte]): gen_qqmlinfo_types.QQmlInfo =
   gen_qqmlinfo_types.QQmlInfo(h: fcQQmlInfo_operatorShiftLeftWithQByteArray(self.h, struct_miqt_string(data: if len(t) > 0: addr t[0] else: nil, len: csize_t(len(t)))), owned: false)
 
 proc operatorShiftLeft*(self: gen_qqmlinfo_types.QQmlInfo, t: pointer): gen_qqmlinfo_types.QQmlInfo =

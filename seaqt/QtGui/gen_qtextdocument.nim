@@ -340,7 +340,7 @@ proc setDocumentLayout*(self: gen_qtextdocument_types.QTextDocument, layout: gen
 proc documentLayout*(self: gen_qtextdocument_types.QTextDocument): gen_qabstracttextdocumentlayout_types.QAbstractTextDocumentLayout =
   gen_qabstracttextdocumentlayout_types.QAbstractTextDocumentLayout(h: fcQTextDocument_documentLayout(self.h), owned: false)
 
-proc setMetaInformation*(self: gen_qtextdocument_types.QTextDocument, info: cint, param2: string): void =
+proc setMetaInformation*(self: gen_qtextdocument_types.QTextDocument, info: cint, param2: openArray[char]): void =
   fcQTextDocument_setMetaInformation(self.h, cint(info), struct_miqt_string(data: if len(param2) > 0: addr param2[0] else: nil, len: csize_t(len(param2))))
 
 proc metaInformation*(self: gen_qtextdocument_types.QTextDocument, info: cint): string =
@@ -355,7 +355,7 @@ proc toHtml*(self: gen_qtextdocument_types.QTextDocument): string =
   c_free(v_ms.data)
   vx_ret
 
-proc setHtml*(self: gen_qtextdocument_types.QTextDocument, html: string): void =
+proc setHtml*(self: gen_qtextdocument_types.QTextDocument, html: openArray[char]): void =
   fcQTextDocument_setHtml(self.h, struct_miqt_string(data: if len(html) > 0: addr html[0] else: nil, len: csize_t(len(html))))
 
 proc toMarkdown*(self: gen_qtextdocument_types.QTextDocument): string =
@@ -364,7 +364,7 @@ proc toMarkdown*(self: gen_qtextdocument_types.QTextDocument): string =
   c_free(v_ms.data)
   vx_ret
 
-proc setMarkdown*(self: gen_qtextdocument_types.QTextDocument, markdown: string): void =
+proc setMarkdown*(self: gen_qtextdocument_types.QTextDocument, markdown: openArray[char]): void =
   fcQTextDocument_setMarkdown(self.h, struct_miqt_string(data: if len(markdown) > 0: addr markdown[0] else: nil, len: csize_t(len(markdown))))
 
 proc toRawText*(self: gen_qtextdocument_types.QTextDocument): string =
@@ -379,16 +379,16 @@ proc toPlainText*(self: gen_qtextdocument_types.QTextDocument): string =
   c_free(v_ms.data)
   vx_ret
 
-proc setPlainText*(self: gen_qtextdocument_types.QTextDocument, text: string): void =
+proc setPlainText*(self: gen_qtextdocument_types.QTextDocument, text: openArray[char]): void =
   fcQTextDocument_setPlainText(self.h, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
 
 proc characterAt*(self: gen_qtextdocument_types.QTextDocument, pos: cint): gen_qchar_types.QChar =
   gen_qchar_types.QChar(h: fcQTextDocument_characterAt(self.h, pos), owned: true)
 
-proc find*(self: gen_qtextdocument_types.QTextDocument, subString: string): gen_qtextcursor_types.QTextCursor =
+proc find*(self: gen_qtextdocument_types.QTextDocument, subString: openArray[char]): gen_qtextcursor_types.QTextCursor =
   gen_qtextcursor_types.QTextCursor(h: fcQTextDocument_find(self.h, struct_miqt_string(data: if len(subString) > 0: addr subString[0] else: nil, len: csize_t(len(subString)))), owned: true)
 
-proc find*(self: gen_qtextdocument_types.QTextDocument, subString: string, cursor: gen_qtextcursor_types.QTextCursor): gen_qtextcursor_types.QTextCursor =
+proc find*(self: gen_qtextdocument_types.QTextDocument, subString: openArray[char], cursor: gen_qtextcursor_types.QTextCursor): gen_qtextcursor_types.QTextCursor =
   gen_qtextcursor_types.QTextCursor(h: fcQTextDocument_find2(self.h, struct_miqt_string(data: if len(subString) > 0: addr subString[0] else: nil, len: csize_t(len(subString))), cursor.h), owned: true)
 
 proc find*(self: gen_qtextdocument_types.QTextDocument, expr: gen_qregularexpression_types.QRegularExpression): gen_qtextcursor_types.QTextCursor =
@@ -538,7 +538,7 @@ proc lineCount*(self: gen_qtextdocument_types.QTextDocument): cint =
 proc characterCount*(self: gen_qtextdocument_types.QTextDocument): cint =
   fcQTextDocument_characterCount(self.h)
 
-proc setDefaultStyleSheet*(self: gen_qtextdocument_types.QTextDocument, sheet: string): void =
+proc setDefaultStyleSheet*(self: gen_qtextdocument_types.QTextDocument, sheet: openArray[char]): void =
   fcQTextDocument_setDefaultStyleSheet(self.h, struct_miqt_string(data: if len(sheet) > 0: addr sheet[0] else: nil, len: csize_t(len(sheet))))
 
 proc defaultStyleSheet*(self: gen_qtextdocument_types.QTextDocument): string =
@@ -811,16 +811,16 @@ proc toMarkdown*(self: gen_qtextdocument_types.QTextDocument, features: cint): s
   c_free(v_ms.data)
   vx_ret
 
-proc setMarkdown*(self: gen_qtextdocument_types.QTextDocument, markdown: string, features: cint): void =
+proc setMarkdown*(self: gen_qtextdocument_types.QTextDocument, markdown: openArray[char], features: cint): void =
   fcQTextDocument_setMarkdown2(self.h, struct_miqt_string(data: if len(markdown) > 0: addr markdown[0] else: nil, len: csize_t(len(markdown))), cint(features))
 
-proc find*(self: gen_qtextdocument_types.QTextDocument, subString: string, fromVal: cint): gen_qtextcursor_types.QTextCursor =
+proc find*(self: gen_qtextdocument_types.QTextDocument, subString: openArray[char], fromVal: cint): gen_qtextcursor_types.QTextCursor =
   gen_qtextcursor_types.QTextCursor(h: fcQTextDocument_find22(self.h, struct_miqt_string(data: if len(subString) > 0: addr subString[0] else: nil, len: csize_t(len(subString))), fromVal), owned: true)
 
-proc find*(self: gen_qtextdocument_types.QTextDocument, subString: string, fromVal: cint, options: cint): gen_qtextcursor_types.QTextCursor =
+proc find*(self: gen_qtextdocument_types.QTextDocument, subString: openArray[char], fromVal: cint, options: cint): gen_qtextcursor_types.QTextCursor =
   gen_qtextcursor_types.QTextCursor(h: fcQTextDocument_find32(self.h, struct_miqt_string(data: if len(subString) > 0: addr subString[0] else: nil, len: csize_t(len(subString))), fromVal, cint(options)), owned: true)
 
-proc find*(self: gen_qtextdocument_types.QTextDocument, subString: string, cursor: gen_qtextcursor_types.QTextCursor, options: cint): gen_qtextcursor_types.QTextCursor =
+proc find*(self: gen_qtextdocument_types.QTextDocument, subString: openArray[char], cursor: gen_qtextcursor_types.QTextCursor, options: cint): gen_qtextcursor_types.QTextCursor =
   gen_qtextcursor_types.QTextCursor(h: fcQTextDocument_find33(self.h, struct_miqt_string(data: if len(subString) > 0: addr subString[0] else: nil, len: csize_t(len(subString))), cursor.h, cint(options)), owned: true)
 
 proc find*(self: gen_qtextdocument_types.QTextDocument, expr: gen_qregularexpression_types.QRegularExpression, fromVal: cint): gen_qtextcursor_types.QTextCursor =
@@ -1155,7 +1155,7 @@ proc create*(T: type gen_qtextdocument_types.QTextDocument,
   fcQTextDocument_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qtextdocument_types.QTextDocument,
-    text: string,
+    text: openArray[char],
     vtbl: ref QTextDocumentVTable = nil): gen_qtextdocument_types.QTextDocument =
   let vtbl = if vtbl == nil: new QTextDocumentVTable else: vtbl
   GC_ref(vtbl)
@@ -1229,7 +1229,7 @@ proc create*(T: type gen_qtextdocument_types.QTextDocument,
   fcQTextDocument_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qtextdocument_types.QTextDocument,
-    text: string, parent: gen_qobject_types.QObject,
+    text: openArray[char], parent: gen_qobject_types.QObject,
     vtbl: ref QTextDocumentVTable = nil): gen_qtextdocument_types.QTextDocument =
   let vtbl = if vtbl == nil: new QTextDocumentVTable else: vtbl
   GC_ref(vtbl)
@@ -1290,13 +1290,15 @@ proc create*(T: type gen_qtextdocument_types.QTextDocument,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQTextDocument_new(addr(cQTextDocument_mvtbl), csize_t(sizeof(pointer)))
   fcQTextDocument_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qtextdocument_types.QTextDocument,
-    text: string,
+    text: openArray[char],
     inst: VirtualQTextDocument) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQTextDocument_new2(addr(cQTextDocument_mvtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
   fcQTextDocument_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qtextdocument_types.QTextDocument,
     parent: gen_qobject_types.QObject,
@@ -1304,13 +1306,15 @@ proc create*(T: type gen_qtextdocument_types.QTextDocument,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQTextDocument_new3(addr(cQTextDocument_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQTextDocument_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qtextdocument_types.QTextDocument,
-    text: string, parent: gen_qobject_types.QObject,
+    text: openArray[char], parent: gen_qobject_types.QObject,
     inst: VirtualQTextDocument) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQTextDocument_new4(addr(cQTextDocument_mvtbl), csize_t(sizeof(pointer)), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), parent.h)
   fcQTextDocument_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qtextdocument_types.QTextDocument): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQTextDocument_staticMetaObject())

@@ -134,7 +134,7 @@ proc setDevice*(self: gen_qcborstreamreader_types.QCborStreamReader, device: gen
 proc device*(self: gen_qcborstreamreader_types.QCborStreamReader): gen_qiodevice_types.QIODevice =
   gen_qiodevice_types.QIODevice(h: fcQCborStreamReader_device(self.h), owned: false)
 
-proc addData*(self: gen_qcborstreamreader_types.QCborStreamReader, data: seq[byte]): void =
+proc addData*(self: gen_qcborstreamreader_types.QCborStreamReader, data: openArray[byte]): void =
   fcQCborStreamReader_addData(self.h, struct_miqt_string(data: if len(data) > 0: addr data[0] else: nil, len: csize_t(len(data))))
 
 proc addData*(self: gen_qcborstreamreader_types.QCborStreamReader, data: cstring, len: int64): void =
@@ -290,7 +290,7 @@ proc create*(T: type gen_qcborstreamreader_types.QCborStreamReader,
   let tmp = gen_qcborstreamreader_types.QCborStreamReader(h: fcQCborStreamReader_new3(data, len), owned: true)
   tmp
 proc create*(T: type gen_qcborstreamreader_types.QCborStreamReader,
-    data: seq[byte]): gen_qcborstreamreader_types.QCborStreamReader =
+    data: openArray[byte]): gen_qcborstreamreader_types.QCborStreamReader =
   let tmp = gen_qcborstreamreader_types.QCborStreamReader(h: fcQCborStreamReader_new4(struct_miqt_string(data: if len(data) > 0: addr data[0] else: nil, len: csize_t(len(data)))), owned: true)
   tmp
 proc create*(T: type gen_qcborstreamreader_types.QCborStreamReader,

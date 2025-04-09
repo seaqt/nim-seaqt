@@ -429,7 +429,7 @@ proc sizes*(self: gen_qsplitter_types.QSplitter): seq[cint] =
   c_free(v_ma.data)
   vx_ret
 
-proc setSizes*(self: gen_qsplitter_types.QSplitter, list: seq[cint]): void =
+proc setSizes*(self: gen_qsplitter_types.QSplitter, list: openArray[cint]): void =
   var list_CArray = newSeq[cint](len(list))
   for i in 0..<len(list):
     list_CArray[i] = list[i]
@@ -442,7 +442,7 @@ proc saveState*(self: gen_qsplitter_types.QSplitter): seq[byte] =
   c_free(v_bytearray.data)
   vx_ret
 
-proc restoreState*(self: gen_qsplitter_types.QSplitter, state: seq[byte]): bool =
+proc restoreState*(self: gen_qsplitter_types.QSplitter, state: openArray[byte]): bool =
   fcQSplitter_restoreState(self.h, struct_miqt_string(data: if len(state) > 0: addr state[0] else: nil, len: csize_t(len(state))))
 
 proc handleWidth*(self: gen_qsplitter_types.QSplitter): cint =
@@ -545,7 +545,7 @@ type QSplitterdragLeaveEventProc* = proc(self: QSplitter, event: gen_qevent_type
 type QSplitterdropEventProc* = proc(self: QSplitter, event: gen_qevent_types.QDropEvent): void {.raises: [], gcsafe.}
 type QSplittershowEventProc* = proc(self: QSplitter, event: gen_qevent_types.QShowEvent): void {.raises: [], gcsafe.}
 type QSplitterhideEventProc* = proc(self: QSplitter, event: gen_qevent_types.QHideEvent): void {.raises: [], gcsafe.}
-type QSplitternativeEventProc* = proc(self: QSplitter, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
+type QSplitternativeEventProc* = proc(self: QSplitter, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
 type QSplittermetricProc* = proc(self: QSplitter, param1: cint): cint {.raises: [], gcsafe.}
 type QSplitterinitPainterProc* = proc(self: QSplitter, painter: gen_qpainter_types.QPainter): void {.raises: [], gcsafe.}
 type QSplitterredirectedProc* = proc(self: QSplitter, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.raises: [], gcsafe.}
@@ -984,7 +984,7 @@ proc fcQSplitter_vtable_callback_hideEvent(self: pointer, event: pointer): void 
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   vtbl[].hideEvent(self, slotval1)
 
-proc QSplitternativeEvent*(self: gen_qsplitter_types.QSplitter, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool =
+proc QSplitternativeEvent*(self: gen_qsplitter_types.QSplitter, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool =
   fcQSplitter_virtualbase_nativeEvent(self.h, struct_miqt_string(data: if len(eventType) > 0: addr eventType[0] else: nil, len: csize_t(len(eventType))), message, resultVal)
 
 proc fcQSplitter_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
@@ -1403,7 +1403,7 @@ proc fcQSplitter_method_callback_hideEvent(self: pointer, event: pointer): void 
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   inst.hideEvent(slotval1)
 
-method nativeEvent*(self: VirtualQSplitter, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
+method nativeEvent*(self: VirtualQSplitter, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
   QSplitternativeEvent(self[], eventType, message, resultVal)
 proc fcQSplitter_method_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
   let inst = cast[VirtualQSplitter](fcQSplitter_vdata(self)[])
@@ -2069,12 +2069,14 @@ proc create*(T: type gen_qsplitter_types.QSplitter,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQSplitter_new(addr(cQSplitter_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQSplitter_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qsplitter_types.QSplitter,
     inst: VirtualQSplitter) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQSplitter_new2(addr(cQSplitter_mvtbl), csize_t(sizeof(pointer)))
   fcQSplitter_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qsplitter_types.QSplitter,
     param1: cint,
@@ -2082,6 +2084,7 @@ proc create*(T: type gen_qsplitter_types.QSplitter,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQSplitter_new3(addr(cQSplitter_mvtbl), csize_t(sizeof(pointer)), cint(param1))
   fcQSplitter_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qsplitter_types.QSplitter,
     param1: cint, parent: gen_qwidget_types.QWidget,
@@ -2089,6 +2092,7 @@ proc create*(T: type gen_qsplitter_types.QSplitter,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQSplitter_new4(addr(cQSplitter_mvtbl), csize_t(sizeof(pointer)), cint(param1), parent.h)
   fcQSplitter_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qsplitter_types.QSplitter): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQSplitter_staticMetaObject())
@@ -2169,7 +2173,7 @@ type QSplitterHandledragLeaveEventProc* = proc(self: QSplitterHandle, event: gen
 type QSplitterHandledropEventProc* = proc(self: QSplitterHandle, event: gen_qevent_types.QDropEvent): void {.raises: [], gcsafe.}
 type QSplitterHandleshowEventProc* = proc(self: QSplitterHandle, event: gen_qevent_types.QShowEvent): void {.raises: [], gcsafe.}
 type QSplitterHandlehideEventProc* = proc(self: QSplitterHandle, event: gen_qevent_types.QHideEvent): void {.raises: [], gcsafe.}
-type QSplitterHandlenativeEventProc* = proc(self: QSplitterHandle, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
+type QSplitterHandlenativeEventProc* = proc(self: QSplitterHandle, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
 type QSplitterHandlechangeEventProc* = proc(self: QSplitterHandle, param1: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QSplitterHandlemetricProc* = proc(self: QSplitterHandle, param1: cint): cint {.raises: [], gcsafe.}
 type QSplitterHandleinitPainterProc* = proc(self: QSplitterHandle, painter: gen_qpainter_types.QPainter): void {.raises: [], gcsafe.}
@@ -2569,7 +2573,7 @@ proc fcQSplitterHandle_vtable_callback_hideEvent(self: pointer, event: pointer):
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   vtbl[].hideEvent(self, slotval1)
 
-proc QSplitterHandlenativeEvent*(self: gen_qsplitter_types.QSplitterHandle, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool =
+proc QSplitterHandlenativeEvent*(self: gen_qsplitter_types.QSplitterHandle, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool =
   fcQSplitterHandle_virtualbase_nativeEvent(self.h, struct_miqt_string(data: if len(eventType) > 0: addr eventType[0] else: nil, len: csize_t(len(eventType))), message, resultVal)
 
 proc fcQSplitterHandle_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
@@ -2978,7 +2982,7 @@ proc fcQSplitterHandle_method_callback_hideEvent(self: pointer, event: pointer):
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   inst.hideEvent(slotval1)
 
-method nativeEvent*(self: VirtualQSplitterHandle, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
+method nativeEvent*(self: VirtualQSplitterHandle, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
   QSplitterHandlenativeEvent(self[], eventType, message, resultVal)
 proc fcQSplitterHandle_method_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
   let inst = cast[VirtualQSplitterHandle](fcQSplitterHandle_vdata(self)[])
@@ -3302,6 +3306,7 @@ proc create*(T: type gen_qsplitter_types.QSplitterHandle,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQSplitterHandle_new(addr(cQSplitterHandle_mvtbl), csize_t(sizeof(pointer)), cint(o), parent.h)
   fcQSplitterHandle_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qsplitter_types.QSplitterHandle): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQSplitterHandle_staticMetaObject())

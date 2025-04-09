@@ -688,6 +688,7 @@ proc create*(T: type gen_qaudiodecoder_types.QAudioDecoder,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQAudioDecoder_new(addr(cQAudioDecoder_mvtbl), csize_t(sizeof(pointer)))
   fcQAudioDecoder_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qaudiodecoder_types.QAudioDecoder,
     parent: gen_qobject_types.QObject,
@@ -695,6 +696,7 @@ proc create*(T: type gen_qaudiodecoder_types.QAudioDecoder,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQAudioDecoder_new2(addr(cQAudioDecoder_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQAudioDecoder_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qaudiodecoder_types.QAudioDecoder): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQAudioDecoder_staticMetaObject())

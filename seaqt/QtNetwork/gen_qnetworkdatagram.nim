@@ -119,10 +119,10 @@ proc data*(self: gen_qnetworkdatagram_types.QNetworkDatagram): seq[byte] =
   c_free(v_bytearray.data)
   vx_ret
 
-proc setData*(self: gen_qnetworkdatagram_types.QNetworkDatagram, data: seq[byte]): void =
+proc setData*(self: gen_qnetworkdatagram_types.QNetworkDatagram, data: openArray[byte]): void =
   fcQNetworkDatagram_setData(self.h, struct_miqt_string(data: if len(data) > 0: addr data[0] else: nil, len: csize_t(len(data))))
 
-proc makeReply*(self: gen_qnetworkdatagram_types.QNetworkDatagram, payload: seq[byte]): gen_qnetworkdatagram_types.QNetworkDatagram =
+proc makeReply*(self: gen_qnetworkdatagram_types.QNetworkDatagram, payload: openArray[byte]): gen_qnetworkdatagram_types.QNetworkDatagram =
   gen_qnetworkdatagram_types.QNetworkDatagram(h: fcQNetworkDatagram_makeReply(self.h, struct_miqt_string(data: if len(payload) > 0: addr payload[0] else: nil, len: csize_t(len(payload)))), owned: true)
 
 proc setSender*(self: gen_qnetworkdatagram_types.QNetworkDatagram, address: gen_qhostaddress_types.QHostAddress, port: cushort): void =
@@ -132,7 +132,7 @@ proc create*(T: type gen_qnetworkdatagram_types.QNetworkDatagram): gen_qnetworkd
   let tmp = gen_qnetworkdatagram_types.QNetworkDatagram(h: fcQNetworkDatagram_new(), owned: true)
   tmp
 proc create*(T: type gen_qnetworkdatagram_types.QNetworkDatagram,
-    data: seq[byte]): gen_qnetworkdatagram_types.QNetworkDatagram =
+    data: openArray[byte]): gen_qnetworkdatagram_types.QNetworkDatagram =
   let tmp = gen_qnetworkdatagram_types.QNetworkDatagram(h: fcQNetworkDatagram_new2(struct_miqt_string(data: if len(data) > 0: addr data[0] else: nil, len: csize_t(len(data)))), owned: true)
   tmp
 proc create*(T: type gen_qnetworkdatagram_types.QNetworkDatagram,
@@ -140,10 +140,10 @@ proc create*(T: type gen_qnetworkdatagram_types.QNetworkDatagram,
   let tmp = gen_qnetworkdatagram_types.QNetworkDatagram(h: fcQNetworkDatagram_new3(other.h), owned: true)
   tmp
 proc create*(T: type gen_qnetworkdatagram_types.QNetworkDatagram,
-    data: seq[byte], destinationAddress: gen_qhostaddress_types.QHostAddress): gen_qnetworkdatagram_types.QNetworkDatagram =
+    data: openArray[byte], destinationAddress: gen_qhostaddress_types.QHostAddress): gen_qnetworkdatagram_types.QNetworkDatagram =
   let tmp = gen_qnetworkdatagram_types.QNetworkDatagram(h: fcQNetworkDatagram_new4(struct_miqt_string(data: if len(data) > 0: addr data[0] else: nil, len: csize_t(len(data))), destinationAddress.h), owned: true)
   tmp
 proc create*(T: type gen_qnetworkdatagram_types.QNetworkDatagram,
-    data: seq[byte], destinationAddress: gen_qhostaddress_types.QHostAddress, port: cushort): gen_qnetworkdatagram_types.QNetworkDatagram =
+    data: openArray[byte], destinationAddress: gen_qhostaddress_types.QHostAddress, port: cushort): gen_qnetworkdatagram_types.QNetworkDatagram =
   let tmp = gen_qnetworkdatagram_types.QNetworkDatagram(h: fcQNetworkDatagram_new5(struct_miqt_string(data: if len(data) > 0: addr data[0] else: nil, len: csize_t(len(data))), destinationAddress.h, port), owned: true)
   tmp

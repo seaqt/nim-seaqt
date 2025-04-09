@@ -513,6 +513,7 @@ proc create*(T: type gen_qsctpserver_types.QSctpServer,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQSctpServer_new(addr(cQSctpServer_mvtbl), csize_t(sizeof(pointer)))
   fcQSctpServer_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qsctpserver_types.QSctpServer,
     parent: gen_qobject_types.QObject,
@@ -520,6 +521,7 @@ proc create*(T: type gen_qsctpserver_types.QSctpServer,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQSctpServer_new2(addr(cQSctpServer_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQSctpServer_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qsctpserver_types.QSctpServer): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQSctpServer_staticMetaObject())

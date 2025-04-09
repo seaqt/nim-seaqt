@@ -109,7 +109,7 @@ proc tr*(_: type gen_qaccessibleplugin_types.QAccessiblePlugin, s: cstring): str
   c_free(v_ms.data)
   vx_ret
 
-proc create*(self: gen_qaccessibleplugin_types.QAccessiblePlugin, key: string, objectVal: gen_qobject_types.QObject): gen_qaccessible_types.QAccessibleInterface =
+proc create*(self: gen_qaccessibleplugin_types.QAccessiblePlugin, key: openArray[char], objectVal: gen_qobject_types.QObject): gen_qaccessible_types.QAccessibleInterface =
   gen_qaccessible_types.QAccessibleInterface(h: fcQAccessiblePlugin_create(self.h, struct_miqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key))), objectVal.h), owned: false)
 
 proc tr*(_: type gen_qaccessibleplugin_types.QAccessiblePlugin, s: cstring, c: cstring): string =
@@ -127,7 +127,7 @@ proc tr*(_: type gen_qaccessibleplugin_types.QAccessiblePlugin, s: cstring, c: c
 type QAccessiblePluginmetaObjectProc* = proc(self: QAccessiblePlugin): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QAccessiblePluginmetacastProc* = proc(self: QAccessiblePlugin, param1: cstring): pointer {.raises: [], gcsafe.}
 type QAccessiblePluginmetacallProc* = proc(self: QAccessiblePlugin, param1: cint, param2: cint, param3: pointer): cint {.raises: [], gcsafe.}
-type QAccessiblePlugincreateProc* = proc(self: QAccessiblePlugin, key: string, objectVal: gen_qobject_types.QObject): gen_qaccessible_types.QAccessibleInterface {.raises: [], gcsafe.}
+type QAccessiblePlugincreateProc* = proc(self: QAccessiblePlugin, key: openArray[char], objectVal: gen_qobject_types.QObject): gen_qaccessible_types.QAccessibleInterface {.raises: [], gcsafe.}
 type QAccessiblePlugineventProc* = proc(self: QAccessiblePlugin, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
 type QAccessiblePlugineventFilterProc* = proc(self: QAccessiblePlugin, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
 type QAccessiblePlugintimerEventProc* = proc(self: QAccessiblePlugin, event: gen_qcoreevent_types.QTimerEvent): void {.raises: [], gcsafe.}
@@ -289,7 +289,7 @@ proc fcQAccessiblePlugin_method_callback_metacall(self: pointer, param1: cint, p
   var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
-method create*(self: VirtualQAccessiblePlugin, key: string, objectVal: gen_qobject_types.QObject): gen_qaccessible_types.QAccessibleInterface {.base.} =
+method create*(self: VirtualQAccessiblePlugin, key: openArray[char], objectVal: gen_qobject_types.QObject): gen_qaccessible_types.QAccessibleInterface {.base.} =
   raiseAssert("missing implementation of QAccessiblePlugin_virtualbase_create")
 proc fcQAccessiblePlugin_method_callback_create(self: pointer, key: struct_miqt_string, objectVal: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQAccessiblePlugin](fcQAccessiblePlugin_vdata(self)[])
@@ -453,6 +453,7 @@ proc create*(T: type gen_qaccessibleplugin_types.QAccessiblePlugin,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQAccessiblePlugin_new(addr(cQAccessiblePlugin_mvtbl), csize_t(sizeof(pointer)))
   fcQAccessiblePlugin_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qaccessibleplugin_types.QAccessiblePlugin,
     parent: gen_qobject_types.QObject,
@@ -460,6 +461,7 @@ proc create*(T: type gen_qaccessibleplugin_types.QAccessiblePlugin,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQAccessiblePlugin_new2(addr(cQAccessiblePlugin_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQAccessiblePlugin_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qaccessibleplugin_types.QAccessiblePlugin): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQAccessiblePlugin_staticMetaObject())

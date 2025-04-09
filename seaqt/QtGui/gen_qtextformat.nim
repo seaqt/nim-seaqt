@@ -656,7 +656,7 @@ proc lengthVectorProperty*(self: gen_qtextformat_types.QTextFormat, propertyId: 
   c_free(v_ma.data)
   vx_ret
 
-proc setProperty*(self: gen_qtextformat_types.QTextFormat, propertyId: cint, lengths: seq[gen_qtextformat_types.QTextLength]): void =
+proc setProperty*(self: gen_qtextformat_types.QTextFormat, propertyId: cint, lengths: openArray[gen_qtextformat_types.QTextLength]): void =
   var lengths_CArray = newSeq[pointer](len(lengths))
   for i in 0..<len(lengths):
     lengths_CArray[i] = lengths[i].h
@@ -784,7 +784,7 @@ proc setFont*(self: gen_qtextformat_types.QTextCharFormat, font: gen_qfont_types
 proc font*(self: gen_qtextformat_types.QTextCharFormat): gen_qfont_types.QFont =
   gen_qfont_types.QFont(h: fcQTextCharFormat_font(self.h), owned: true)
 
-proc setFontFamily*(self: gen_qtextformat_types.QTextCharFormat, family: string): void =
+proc setFontFamily*(self: gen_qtextformat_types.QTextCharFormat, family: openArray[char]): void =
   fcQTextCharFormat_setFontFamily(self.h, struct_miqt_string(data: if len(family) > 0: addr family[0] else: nil, len: csize_t(len(family))))
 
 proc fontFamily*(self: gen_qtextformat_types.QTextCharFormat): string =
@@ -793,7 +793,7 @@ proc fontFamily*(self: gen_qtextformat_types.QTextCharFormat): string =
   c_free(v_ms.data)
   vx_ret
 
-proc setFontFamilies*(self: gen_qtextformat_types.QTextCharFormat, families: seq[string]): void =
+proc setFontFamilies*(self: gen_qtextformat_types.QTextCharFormat, families: openArray[string]): void =
   var families_CArray = newSeq[struct_miqt_string](len(families))
   for i in 0..<len(families):
     families_CArray[i] = struct_miqt_string(data: if len(families[i]) > 0: addr families[i][0] else: nil, len: csize_t(len(families[i])))
@@ -803,7 +803,7 @@ proc setFontFamilies*(self: gen_qtextformat_types.QTextCharFormat, families: seq
 proc fontFamilies*(self: gen_qtextformat_types.QTextCharFormat): gen_qvariant_types.QVariant =
   gen_qvariant_types.QVariant(h: fcQTextCharFormat_fontFamilies(self.h), owned: true)
 
-proc setFontStyleName*(self: gen_qtextformat_types.QTextCharFormat, styleName: string): void =
+proc setFontStyleName*(self: gen_qtextformat_types.QTextCharFormat, styleName: openArray[char]): void =
   fcQTextCharFormat_setFontStyleName(self.h, struct_miqt_string(data: if len(styleName) > 0: addr styleName[0] else: nil, len: csize_t(len(styleName))))
 
 proc fontStyleName*(self: gen_qtextformat_types.QTextCharFormat): gen_qvariant_types.QVariant =
@@ -929,7 +929,7 @@ proc setTextOutline*(self: gen_qtextformat_types.QTextCharFormat, pen: gen_qpen_
 proc textOutline*(self: gen_qtextformat_types.QTextCharFormat): gen_qpen_types.QPen =
   gen_qpen_types.QPen(h: fcQTextCharFormat_textOutline(self.h), owned: true)
 
-proc setToolTip*(self: gen_qtextformat_types.QTextCharFormat, tip: string): void =
+proc setToolTip*(self: gen_qtextformat_types.QTextCharFormat, tip: openArray[char]): void =
   fcQTextCharFormat_setToolTip(self.h, struct_miqt_string(data: if len(tip) > 0: addr tip[0] else: nil, len: csize_t(len(tip))))
 
 proc toolTip*(self: gen_qtextformat_types.QTextCharFormat): string =
@@ -962,7 +962,7 @@ proc setAnchor*(self: gen_qtextformat_types.QTextCharFormat, anchor: bool): void
 proc isAnchor*(self: gen_qtextformat_types.QTextCharFormat): bool =
   fcQTextCharFormat_isAnchor(self.h)
 
-proc setAnchorHref*(self: gen_qtextformat_types.QTextCharFormat, value: string): void =
+proc setAnchorHref*(self: gen_qtextformat_types.QTextCharFormat, value: openArray[char]): void =
   fcQTextCharFormat_setAnchorHref(self.h, struct_miqt_string(data: if len(value) > 0: addr value[0] else: nil, len: csize_t(len(value))))
 
 proc anchorHref*(self: gen_qtextformat_types.QTextCharFormat): string =
@@ -971,7 +971,7 @@ proc anchorHref*(self: gen_qtextformat_types.QTextCharFormat): string =
   c_free(v_ms.data)
   vx_ret
 
-proc setAnchorNames*(self: gen_qtextformat_types.QTextCharFormat, names: seq[string]): void =
+proc setAnchorNames*(self: gen_qtextformat_types.QTextCharFormat, names: openArray[string]): void =
   var names_CArray = newSeq[struct_miqt_string](len(names))
   for i in 0..<len(names):
     names_CArray[i] = struct_miqt_string(data: if len(names[i]) > 0: addr names[i][0] else: nil, len: csize_t(len(names[i])))
@@ -1090,7 +1090,7 @@ proc setPageBreakPolicy*(self: gen_qtextformat_types.QTextBlockFormat, flags: ci
 proc pageBreakPolicy*(self: gen_qtextformat_types.QTextBlockFormat): cint =
   cint(fcQTextBlockFormat_pageBreakPolicy(self.h))
 
-proc setTabPositions*(self: gen_qtextformat_types.QTextBlockFormat, tabs: seq[gen_qtextoption_types.QTextOptionTab]): void =
+proc setTabPositions*(self: gen_qtextformat_types.QTextBlockFormat, tabs: openArray[gen_qtextoption_types.QTextOptionTab]): void =
   var tabs_CArray = newSeq[pointer](len(tabs))
   for i in 0..<len(tabs):
     tabs_CArray[i] = tabs[i].h
@@ -1134,7 +1134,7 @@ proc setIndent*(self: gen_qtextformat_types.QTextListFormat, indent: cint): void
 proc indent*(self: gen_qtextformat_types.QTextListFormat): cint =
   fcQTextListFormat_indent(self.h)
 
-proc setNumberPrefix*(self: gen_qtextformat_types.QTextListFormat, numberPrefix: string): void =
+proc setNumberPrefix*(self: gen_qtextformat_types.QTextListFormat, numberPrefix: openArray[char]): void =
   fcQTextListFormat_setNumberPrefix(self.h, struct_miqt_string(data: if len(numberPrefix) > 0: addr numberPrefix[0] else: nil, len: csize_t(len(numberPrefix))))
 
 proc numberPrefix*(self: gen_qtextformat_types.QTextListFormat): string =
@@ -1143,7 +1143,7 @@ proc numberPrefix*(self: gen_qtextformat_types.QTextListFormat): string =
   c_free(v_ms.data)
   vx_ret
 
-proc setNumberSuffix*(self: gen_qtextformat_types.QTextListFormat, numberSuffix: string): void =
+proc setNumberSuffix*(self: gen_qtextformat_types.QTextListFormat, numberSuffix: openArray[char]): void =
   fcQTextListFormat_setNumberSuffix(self.h, struct_miqt_string(data: if len(numberSuffix) > 0: addr numberSuffix[0] else: nil, len: csize_t(len(numberSuffix))))
 
 proc numberSuffix*(self: gen_qtextformat_types.QTextListFormat): string =
@@ -1162,7 +1162,7 @@ proc create*(T: type gen_qtextformat_types.QTextListFormat,
 proc isValid*(self: gen_qtextformat_types.QTextImageFormat): bool =
   fcQTextImageFormat_isValid(self.h)
 
-proc setName*(self: gen_qtextformat_types.QTextImageFormat, name: string): void =
+proc setName*(self: gen_qtextformat_types.QTextImageFormat, name: openArray[char]): void =
   fcQTextImageFormat_setName(self.h, struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))))
 
 proc name*(self: gen_qtextformat_types.QTextImageFormat): string =
@@ -1298,7 +1298,7 @@ proc columns*(self: gen_qtextformat_types.QTextTableFormat): cint =
 proc setColumns*(self: gen_qtextformat_types.QTextTableFormat, columns: cint): void =
   fcQTextTableFormat_setColumns(self.h, columns)
 
-proc setColumnWidthConstraints*(self: gen_qtextformat_types.QTextTableFormat, constraints: seq[gen_qtextformat_types.QTextLength]): void =
+proc setColumnWidthConstraints*(self: gen_qtextformat_types.QTextTableFormat, constraints: openArray[gen_qtextformat_types.QTextLength]): void =
   var constraints_CArray = newSeq[pointer](len(constraints))
   for i in 0..<len(constraints):
     constraints_CArray[i] = constraints[i].h

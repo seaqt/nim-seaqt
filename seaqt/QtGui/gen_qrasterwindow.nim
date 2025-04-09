@@ -223,7 +223,7 @@ type QRasterWindowmouseMoveEventProc* = proc(self: QRasterWindow, param1: gen_qe
 type QRasterWindowwheelEventProc* = proc(self: QRasterWindow, param1: gen_qevent_types.QWheelEvent): void {.raises: [], gcsafe.}
 type QRasterWindowtouchEventProc* = proc(self: QRasterWindow, param1: gen_qevent_types.QTouchEvent): void {.raises: [], gcsafe.}
 type QRasterWindowtabletEventProc* = proc(self: QRasterWindow, param1: gen_qevent_types.QTabletEvent): void {.raises: [], gcsafe.}
-type QRasterWindownativeEventProc* = proc(self: QRasterWindow, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
+type QRasterWindownativeEventProc* = proc(self: QRasterWindow, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
 type QRasterWindoweventFilterProc* = proc(self: QRasterWindow, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
 type QRasterWindowtimerEventProc* = proc(self: QRasterWindow, event: gen_qcoreevent_types.QTimerEvent): void {.raises: [], gcsafe.}
 type QRasterWindowchildEventProc* = proc(self: QRasterWindow, event: gen_qcoreevent_types.QChildEvent): void {.raises: [], gcsafe.}
@@ -560,7 +560,7 @@ proc fcQRasterWindow_vtable_callback_tabletEvent(self: pointer, param1: pointer)
   let slotval1 = gen_qevent_types.QTabletEvent(h: param1, owned: false)
   vtbl[].tabletEvent(self, slotval1)
 
-proc QRasterWindownativeEvent*(self: gen_qrasterwindow_types.QRasterWindow, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool =
+proc QRasterWindownativeEvent*(self: gen_qrasterwindow_types.QRasterWindow, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool =
   fcQRasterWindow_virtualbase_nativeEvent(self.h, struct_miqt_string(data: if len(eventType) > 0: addr eventType[0] else: nil, len: csize_t(len(eventType))), message, resultVal)
 
 proc fcQRasterWindow_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
@@ -873,7 +873,7 @@ proc fcQRasterWindow_method_callback_tabletEvent(self: pointer, param1: pointer)
   let slotval1 = gen_qevent_types.QTabletEvent(h: param1, owned: false)
   inst.tabletEvent(slotval1)
 
-method nativeEvent*(self: VirtualQRasterWindow, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
+method nativeEvent*(self: VirtualQRasterWindow, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
   QRasterWindownativeEvent(self[], eventType, message, resultVal)
 proc fcQRasterWindow_method_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
   let inst = cast[VirtualQRasterWindow](fcQRasterWindow_vdata(self)[])
@@ -1194,6 +1194,7 @@ proc create*(T: type gen_qrasterwindow_types.QRasterWindow,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQRasterWindow_new(addr(cQRasterWindow_mvtbl), csize_t(sizeof(pointer)))
   fcQRasterWindow_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qrasterwindow_types.QRasterWindow,
     parent: gen_qwindow_types.QWindow,
@@ -1201,6 +1202,7 @@ proc create*(T: type gen_qrasterwindow_types.QRasterWindow,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQRasterWindow_new2(addr(cQRasterWindow_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQRasterWindow_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qrasterwindow_types.QRasterWindow): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQRasterWindow_staticMetaObject())

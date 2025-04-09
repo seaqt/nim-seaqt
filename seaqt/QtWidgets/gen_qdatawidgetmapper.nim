@@ -179,7 +179,7 @@ proc submitPolicy*(self: gen_qdatawidgetmapper_types.QDataWidgetMapper): cint =
 proc addMapping*(self: gen_qdatawidgetmapper_types.QDataWidgetMapper, widget: gen_qwidget_types.QWidget, section: cint): void =
   fcQDataWidgetMapper_addMapping(self.h, widget.h, section)
 
-proc addMapping*(self: gen_qdatawidgetmapper_types.QDataWidgetMapper, widget: gen_qwidget_types.QWidget, section: cint, propertyName: seq[byte]): void =
+proc addMapping*(self: gen_qdatawidgetmapper_types.QDataWidgetMapper, widget: gen_qwidget_types.QWidget, section: cint, propertyName: openArray[byte]): void =
   fcQDataWidgetMapper_addMapping2(self.h, widget.h, section, struct_miqt_string(data: if len(propertyName) > 0: addr propertyName[0] else: nil, len: csize_t(len(propertyName))))
 
 proc removeMapping*(self: gen_qdatawidgetmapper_types.QDataWidgetMapper, widget: gen_qwidget_types.QWidget): void =
@@ -578,6 +578,7 @@ proc create*(T: type gen_qdatawidgetmapper_types.QDataWidgetMapper,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQDataWidgetMapper_new(addr(cQDataWidgetMapper_mvtbl), csize_t(sizeof(pointer)))
   fcQDataWidgetMapper_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qdatawidgetmapper_types.QDataWidgetMapper,
     parent: gen_qobject_types.QObject,
@@ -585,6 +586,7 @@ proc create*(T: type gen_qdatawidgetmapper_types.QDataWidgetMapper,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQDataWidgetMapper_new2(addr(cQDataWidgetMapper_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQDataWidgetMapper_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qdatawidgetmapper_types.QDataWidgetMapper): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQDataWidgetMapper_staticMetaObject())

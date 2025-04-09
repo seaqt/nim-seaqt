@@ -106,13 +106,13 @@ proc standardLocations*(_: type gen_qstandardpaths_types.QStandardPaths, typeVal
   c_free(v_ma.data)
   vx_ret
 
-proc locate*(_: type gen_qstandardpaths_types.QStandardPaths, typeVal: cint, fileName: string): string =
+proc locate*(_: type gen_qstandardpaths_types.QStandardPaths, typeVal: cint, fileName: openArray[char]): string =
   let v_ms = fcQStandardPaths_locate(cint(typeVal), struct_miqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))))
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc locateAll*(_: type gen_qstandardpaths_types.QStandardPaths, typeVal: cint, fileName: string): seq[string] =
+proc locateAll*(_: type gen_qstandardpaths_types.QStandardPaths, typeVal: cint, fileName: openArray[char]): seq[string] =
   var v_ma = fcQStandardPaths_locateAll(cint(typeVal), struct_miqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))))
   var vx_ret = newSeq[string](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
@@ -130,7 +130,7 @@ proc displayName*(_: type gen_qstandardpaths_types.QStandardPaths, typeVal: cint
   c_free(v_ms.data)
   vx_ret
 
-proc findExecutable*(_: type gen_qstandardpaths_types.QStandardPaths, executableName: string): string =
+proc findExecutable*(_: type gen_qstandardpaths_types.QStandardPaths, executableName: openArray[char]): string =
   let v_ms = fcQStandardPaths_findExecutable(struct_miqt_string(data: if len(executableName) > 0: addr executableName[0] else: nil, len: csize_t(len(executableName))))
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
@@ -142,13 +142,13 @@ proc setTestModeEnabled*(_: type gen_qstandardpaths_types.QStandardPaths, testMo
 proc isTestModeEnabled*(_: type gen_qstandardpaths_types.QStandardPaths): bool =
   fcQStandardPaths_isTestModeEnabled()
 
-proc locate*(_: type gen_qstandardpaths_types.QStandardPaths, typeVal: cint, fileName: string, options: cint): string =
+proc locate*(_: type gen_qstandardpaths_types.QStandardPaths, typeVal: cint, fileName: openArray[char], options: cint): string =
   let v_ms = fcQStandardPaths_locate3(cint(typeVal), struct_miqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))), cint(options))
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc locateAll*(_: type gen_qstandardpaths_types.QStandardPaths, typeVal: cint, fileName: string, options: cint): seq[string] =
+proc locateAll*(_: type gen_qstandardpaths_types.QStandardPaths, typeVal: cint, fileName: openArray[char], options: cint): seq[string] =
   var v_ma = fcQStandardPaths_locateAll3(cint(typeVal), struct_miqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))), cint(options))
   var vx_ret = newSeq[string](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
@@ -160,7 +160,7 @@ proc locateAll*(_: type gen_qstandardpaths_types.QStandardPaths, typeVal: cint, 
   c_free(v_ma.data)
   vx_ret
 
-proc findExecutable*(_: type gen_qstandardpaths_types.QStandardPaths, executableName: string, paths: seq[string]): string =
+proc findExecutable*(_: type gen_qstandardpaths_types.QStandardPaths, executableName: openArray[char], paths: openArray[string]): string =
   var paths_CArray = newSeq[struct_miqt_string](len(paths))
   for i in 0..<len(paths):
     paths_CArray[i] = struct_miqt_string(data: if len(paths[i]) > 0: addr paths[i][0] else: nil, len: csize_t(len(paths[i])))

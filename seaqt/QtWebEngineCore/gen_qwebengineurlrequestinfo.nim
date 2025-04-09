@@ -123,6 +123,6 @@ proc blockX*(self: gen_qwebengineurlrequestinfo_types.QWebEngineUrlRequestInfo, 
 proc redirect*(self: gen_qwebengineurlrequestinfo_types.QWebEngineUrlRequestInfo, url: gen_qurl_types.QUrl): void =
   fcQWebEngineUrlRequestInfo_redirect(self.h, url.h)
 
-proc setHttpHeader*(self: gen_qwebengineurlrequestinfo_types.QWebEngineUrlRequestInfo, name: seq[byte], value: seq[byte]): void =
+proc setHttpHeader*(self: gen_qwebengineurlrequestinfo_types.QWebEngineUrlRequestInfo, name: openArray[byte], value: openArray[byte]): void =
   fcQWebEngineUrlRequestInfo_setHttpHeader(self.h, struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), struct_miqt_string(data: if len(value) > 0: addr value[0] else: nil, len: csize_t(len(value))))
 

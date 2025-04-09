@@ -497,6 +497,7 @@ proc create*(T: type gen_qdrag_types.QDrag,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQDrag_new(addr(cQDrag_mvtbl), csize_t(sizeof(pointer)), dragSource.h)
   fcQDrag_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qdrag_types.QDrag): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQDrag_staticMetaObject())

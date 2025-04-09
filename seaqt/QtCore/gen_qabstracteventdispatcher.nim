@@ -158,7 +158,7 @@ proc installNativeEventFilter*(self: gen_qabstracteventdispatcher_types.QAbstrac
 proc removeNativeEventFilter*(self: gen_qabstracteventdispatcher_types.QAbstractEventDispatcher, filterObj: gen_qabstractnativeeventfilter_types.QAbstractNativeEventFilter): void =
   fcQAbstractEventDispatcher_removeNativeEventFilter(self.h, filterObj.h)
 
-proc filterNativeEvent*(self: gen_qabstracteventdispatcher_types.QAbstractEventDispatcher, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool =
+proc filterNativeEvent*(self: gen_qabstracteventdispatcher_types.QAbstractEventDispatcher, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool =
   fcQAbstractEventDispatcher_filterNativeEvent(self.h, struct_miqt_string(data: if len(eventType) > 0: addr eventType[0] else: nil, len: csize_t(len(eventType))), message, resultVal)
 
 proc aboutToBlock*(self: gen_qabstracteventdispatcher_types.QAbstractEventDispatcher): void =

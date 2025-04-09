@@ -163,10 +163,12 @@ proc create*(T: type gen_qsgsimplerectnode_types.QSGSimpleRectNode,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQSGSimpleRectNode_new(addr(cQSGSimpleRectNode_mvtbl), csize_t(sizeof(pointer)), rect.h, color.h)
   fcQSGSimpleRectNode_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qsgsimplerectnode_types.QSGSimpleRectNode,
     inst: VirtualQSGSimpleRectNode) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQSGSimpleRectNode_new2(addr(cQSGSimpleRectNode_mvtbl), csize_t(sizeof(pointer)))
   fcQSGSimpleRectNode_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 

@@ -464,6 +464,7 @@ proc create*(T: type gen_qwebchannelabstracttransport_types.QWebChannelAbstractT
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQWebChannelAbstractTransport_new(addr(cQWebChannelAbstractTransport_mvtbl), csize_t(sizeof(pointer)))
   fcQWebChannelAbstractTransport_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qwebchannelabstracttransport_types.QWebChannelAbstractTransport,
     parent: gen_qobject_types.QObject,
@@ -471,6 +472,7 @@ proc create*(T: type gen_qwebchannelabstracttransport_types.QWebChannelAbstractT
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQWebChannelAbstractTransport_new2(addr(cQWebChannelAbstractTransport_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQWebChannelAbstractTransport_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qwebchannelabstracttransport_types.QWebChannelAbstractTransport): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQWebChannelAbstractTransport_staticMetaObject())

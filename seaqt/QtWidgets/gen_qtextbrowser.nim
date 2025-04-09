@@ -304,7 +304,7 @@ proc searchPaths*(self: gen_qtextbrowser_types.QTextBrowser): seq[string] =
   c_free(v_ma.data)
   vx_ret
 
-proc setSearchPaths*(self: gen_qtextbrowser_types.QTextBrowser, paths: seq[string]): void =
+proc setSearchPaths*(self: gen_qtextbrowser_types.QTextBrowser, paths: openArray[string]): void =
   var paths_CArray = newSeq[struct_miqt_string](len(paths))
   for i in 0..<len(paths):
     paths_CArray[i] = struct_miqt_string(data: if len(paths[i]) > 0: addr paths[i][0] else: nil, len: csize_t(len(paths[i])))
@@ -554,7 +554,7 @@ type QTextBrowsercloseEventProc* = proc(self: QTextBrowser, event: gen_qevent_ty
 type QTextBrowsertabletEventProc* = proc(self: QTextBrowser, event: gen_qevent_types.QTabletEvent): void {.raises: [], gcsafe.}
 type QTextBrowseractionEventProc* = proc(self: QTextBrowser, event: gen_qevent_types.QActionEvent): void {.raises: [], gcsafe.}
 type QTextBrowserhideEventProc* = proc(self: QTextBrowser, event: gen_qevent_types.QHideEvent): void {.raises: [], gcsafe.}
-type QTextBrowsernativeEventProc* = proc(self: QTextBrowser, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
+type QTextBrowsernativeEventProc* = proc(self: QTextBrowser, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
 type QTextBrowsermetricProc* = proc(self: QTextBrowser, param1: cint): cint {.raises: [], gcsafe.}
 type QTextBrowserinitPainterProc* = proc(self: QTextBrowser, painter: gen_qpainter_types.QPainter): void {.raises: [], gcsafe.}
 type QTextBrowserredirectedProc* = proc(self: QTextBrowser, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.raises: [], gcsafe.}
@@ -1170,7 +1170,7 @@ proc fcQTextBrowser_vtable_callback_hideEvent(self: pointer, event: pointer): vo
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   vtbl[].hideEvent(self, slotval1)
 
-proc QTextBrowsernativeEvent*(self: gen_qtextbrowser_types.QTextBrowser, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool =
+proc QTextBrowsernativeEvent*(self: gen_qtextbrowser_types.QTextBrowser, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool =
   fcQTextBrowser_virtualbase_nativeEvent(self.h, struct_miqt_string(data: if len(eventType) > 0: addr eventType[0] else: nil, len: csize_t(len(eventType))), message, resultVal)
 
 proc fcQTextBrowser_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
@@ -1671,7 +1671,7 @@ proc fcQTextBrowser_method_callback_hideEvent(self: pointer, event: pointer): vo
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   inst.hideEvent(slotval1)
 
-method nativeEvent*(self: VirtualQTextBrowser, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
+method nativeEvent*(self: VirtualQTextBrowser, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
   QTextBrowsernativeEvent(self[], eventType, message, resultVal)
 proc fcQTextBrowser_method_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
   let inst = cast[VirtualQTextBrowser](fcQTextBrowser_vdata(self)[])
@@ -2140,12 +2140,14 @@ proc create*(T: type gen_qtextbrowser_types.QTextBrowser,
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQTextBrowser_new(addr(cQTextBrowser_mvtbl), csize_t(sizeof(pointer)), parent.h)
   fcQTextBrowser_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc create*(T: type gen_qtextbrowser_types.QTextBrowser,
     inst: VirtualQTextBrowser) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQTextBrowser_new2(addr(cQTextBrowser_mvtbl), csize_t(sizeof(pointer)))
   fcQTextBrowser_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qtextbrowser_types.QTextBrowser): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQTextBrowser_staticMetaObject())

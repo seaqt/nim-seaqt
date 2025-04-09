@@ -136,7 +136,7 @@ proc domain*(self: gen_qnetworkcookie_types.QNetworkCookie): string =
   c_free(v_ms.data)
   vx_ret
 
-proc setDomain*(self: gen_qnetworkcookie_types.QNetworkCookie, domain: string): void =
+proc setDomain*(self: gen_qnetworkcookie_types.QNetworkCookie, domain: openArray[char]): void =
   fcQNetworkCookie_setDomain(self.h, struct_miqt_string(data: if len(domain) > 0: addr domain[0] else: nil, len: csize_t(len(domain))))
 
 proc path*(self: gen_qnetworkcookie_types.QNetworkCookie): string =
@@ -145,7 +145,7 @@ proc path*(self: gen_qnetworkcookie_types.QNetworkCookie): string =
   c_free(v_ms.data)
   vx_ret
 
-proc setPath*(self: gen_qnetworkcookie_types.QNetworkCookie, path: string): void =
+proc setPath*(self: gen_qnetworkcookie_types.QNetworkCookie, path: openArray[char]): void =
   fcQNetworkCookie_setPath(self.h, struct_miqt_string(data: if len(path) > 0: addr path[0] else: nil, len: csize_t(len(path))))
 
 proc name*(self: gen_qnetworkcookie_types.QNetworkCookie): seq[byte] =
@@ -154,7 +154,7 @@ proc name*(self: gen_qnetworkcookie_types.QNetworkCookie): seq[byte] =
   c_free(v_bytearray.data)
   vx_ret
 
-proc setName*(self: gen_qnetworkcookie_types.QNetworkCookie, cookieName: seq[byte]): void =
+proc setName*(self: gen_qnetworkcookie_types.QNetworkCookie, cookieName: openArray[byte]): void =
   fcQNetworkCookie_setName(self.h, struct_miqt_string(data: if len(cookieName) > 0: addr cookieName[0] else: nil, len: csize_t(len(cookieName))))
 
 proc value*(self: gen_qnetworkcookie_types.QNetworkCookie): seq[byte] =
@@ -163,7 +163,7 @@ proc value*(self: gen_qnetworkcookie_types.QNetworkCookie): seq[byte] =
   c_free(v_bytearray.data)
   vx_ret
 
-proc setValue*(self: gen_qnetworkcookie_types.QNetworkCookie, value: seq[byte]): void =
+proc setValue*(self: gen_qnetworkcookie_types.QNetworkCookie, value: openArray[byte]): void =
   fcQNetworkCookie_setValue(self.h, struct_miqt_string(data: if len(value) > 0: addr value[0] else: nil, len: csize_t(len(value))))
 
 proc toRawForm*(self: gen_qnetworkcookie_types.QNetworkCookie): seq[byte] =
@@ -178,7 +178,7 @@ proc hasSameIdentifier*(self: gen_qnetworkcookie_types.QNetworkCookie, other: ge
 proc normalize*(self: gen_qnetworkcookie_types.QNetworkCookie, url: gen_qurl_types.QUrl): void =
   fcQNetworkCookie_normalize(self.h, url.h)
 
-proc parseCookies*(_: type gen_qnetworkcookie_types.QNetworkCookie, cookieString: seq[byte]): seq[gen_qnetworkcookie_types.QNetworkCookie] =
+proc parseCookies*(_: type gen_qnetworkcookie_types.QNetworkCookie, cookieString: openArray[byte]): seq[gen_qnetworkcookie_types.QNetworkCookie] =
   var v_ma = fcQNetworkCookie_parseCookies(struct_miqt_string(data: if len(cookieString) > 0: addr cookieString[0] else: nil, len: csize_t(len(cookieString))))
   var vx_ret = newSeq[gen_qnetworkcookie_types.QNetworkCookie](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
@@ -201,11 +201,11 @@ proc create*(T: type gen_qnetworkcookie_types.QNetworkCookie,
   let tmp = gen_qnetworkcookie_types.QNetworkCookie(h: fcQNetworkCookie_new2(other.h), owned: true)
   tmp
 proc create*(T: type gen_qnetworkcookie_types.QNetworkCookie,
-    name: seq[byte]): gen_qnetworkcookie_types.QNetworkCookie =
+    name: openArray[byte]): gen_qnetworkcookie_types.QNetworkCookie =
   let tmp = gen_qnetworkcookie_types.QNetworkCookie(h: fcQNetworkCookie_new3(struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name)))), owned: true)
   tmp
 proc create*(T: type gen_qnetworkcookie_types.QNetworkCookie,
-    name: seq[byte], value: seq[byte]): gen_qnetworkcookie_types.QNetworkCookie =
+    name: openArray[byte], value: openArray[byte]): gen_qnetworkcookie_types.QNetworkCookie =
   let tmp = gen_qnetworkcookie_types.QNetworkCookie(h: fcQNetworkCookie_new4(struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), struct_miqt_string(data: if len(value) > 0: addr value[0] else: nil, len: csize_t(len(value)))), owned: true)
   tmp
 proc staticMetaObject*(_: type gen_qnetworkcookie_types.QNetworkCookie): gen_qobjectdefs_types.QMetaObject =
