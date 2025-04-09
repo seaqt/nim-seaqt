@@ -110,6 +110,7 @@ proc fcQSoundEffect_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "
 proc fcQSoundEffect_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QSoundEffect_tr3".}
 proc fcQSoundEffect_vdata(self: pointer): ptr pointer {.importc: "QSoundEffect_vdata".}
 proc fvdata_cQSoundEffect(self: pointer): pointer {.importc: "vdata_QSoundEffect".}
+
 type cQSoundEffectVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -223,7 +224,7 @@ proc fcQSoundEffect_slot_callback_sourceChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QSoundEffectsourceChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onsourceChanged*(self: gen_qsoundeffect_types.QSoundEffect, slot: QSoundEffectsourceChangedSlot) =
+proc onSourceChanged*(self: gen_qsoundeffect_types.QSoundEffect, slot: QSoundEffectsourceChangedSlot) =
   var tmp = new QSoundEffectsourceChangedSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -241,7 +242,7 @@ proc fcQSoundEffect_slot_callback_loopCountChanged_release(slot: int) {.cdecl.} 
   let nimfunc = cast[ref QSoundEffectloopCountChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onloopCountChanged*(self: gen_qsoundeffect_types.QSoundEffect, slot: QSoundEffectloopCountChangedSlot) =
+proc onLoopCountChanged*(self: gen_qsoundeffect_types.QSoundEffect, slot: QSoundEffectloopCountChangedSlot) =
   var tmp = new QSoundEffectloopCountChangedSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -259,7 +260,7 @@ proc fcQSoundEffect_slot_callback_loopsRemainingChanged_release(slot: int) {.cde
   let nimfunc = cast[ref QSoundEffectloopsRemainingChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onloopsRemainingChanged*(self: gen_qsoundeffect_types.QSoundEffect, slot: QSoundEffectloopsRemainingChangedSlot) =
+proc onLoopsRemainingChanged*(self: gen_qsoundeffect_types.QSoundEffect, slot: QSoundEffectloopsRemainingChangedSlot) =
   var tmp = new QSoundEffectloopsRemainingChangedSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -277,7 +278,7 @@ proc fcQSoundEffect_slot_callback_volumeChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QSoundEffectvolumeChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onvolumeChanged*(self: gen_qsoundeffect_types.QSoundEffect, slot: QSoundEffectvolumeChangedSlot) =
+proc onVolumeChanged*(self: gen_qsoundeffect_types.QSoundEffect, slot: QSoundEffectvolumeChangedSlot) =
   var tmp = new QSoundEffectvolumeChangedSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -295,7 +296,7 @@ proc fcQSoundEffect_slot_callback_mutedChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QSoundEffectmutedChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onmutedChanged*(self: gen_qsoundeffect_types.QSoundEffect, slot: QSoundEffectmutedChangedSlot) =
+proc onMutedChanged*(self: gen_qsoundeffect_types.QSoundEffect, slot: QSoundEffectmutedChangedSlot) =
   var tmp = new QSoundEffectmutedChangedSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -313,7 +314,7 @@ proc fcQSoundEffect_slot_callback_loadedChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QSoundEffectloadedChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onloadedChanged*(self: gen_qsoundeffect_types.QSoundEffect, slot: QSoundEffectloadedChangedSlot) =
+proc onLoadedChanged*(self: gen_qsoundeffect_types.QSoundEffect, slot: QSoundEffectloadedChangedSlot) =
   var tmp = new QSoundEffectloadedChangedSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -331,7 +332,7 @@ proc fcQSoundEffect_slot_callback_playingChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QSoundEffectplayingChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onplayingChanged*(self: gen_qsoundeffect_types.QSoundEffect, slot: QSoundEffectplayingChangedSlot) =
+proc onPlayingChanged*(self: gen_qsoundeffect_types.QSoundEffect, slot: QSoundEffectplayingChangedSlot) =
   var tmp = new QSoundEffectplayingChangedSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -349,7 +350,7 @@ proc fcQSoundEffect_slot_callback_statusChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QSoundEffectstatusChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onstatusChanged*(self: gen_qsoundeffect_types.QSoundEffect, slot: QSoundEffectstatusChangedSlot) =
+proc onStatusChanged*(self: gen_qsoundeffect_types.QSoundEffect, slot: QSoundEffectstatusChangedSlot) =
   var tmp = new QSoundEffectstatusChangedSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -367,7 +368,7 @@ proc fcQSoundEffect_slot_callback_audioDeviceChanged_release(slot: int) {.cdecl.
   let nimfunc = cast[ref QSoundEffectaudioDeviceChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onaudioDeviceChanged*(self: gen_qsoundeffect_types.QSoundEffect, slot: QSoundEffectaudioDeviceChangedSlot) =
+proc onAudioDeviceChanged*(self: gen_qsoundeffect_types.QSoundEffect, slot: QSoundEffectaudioDeviceChangedSlot) =
   var tmp = new QSoundEffectaudioDeviceChangedSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -401,6 +402,7 @@ type QSoundEffectchildEventProc* = proc(self: QSoundEffect, event: gen_qcoreeven
 type QSoundEffectcustomEventProc* = proc(self: QSoundEffect, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QSoundEffectconnectNotifyProc* = proc(self: QSoundEffect, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QSoundEffectdisconnectNotifyProc* = proc(self: QSoundEffect, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+
 type QSoundEffectVTable* {.inheritable, pure.} = object
   vtbl: cQSoundEffectVTable
   metaObject*: QSoundEffectmetaObjectProc
@@ -413,8 +415,37 @@ type QSoundEffectVTable* {.inheritable, pure.} = object
   customEvent*: QSoundEffectcustomEventProc
   connectNotify*: QSoundEffectconnectNotifyProc
   disconnectNotify*: QSoundEffectdisconnectNotifyProc
+
 proc QSoundEffectmetaObject*(self: gen_qsoundeffect_types.QSoundEffect): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQSoundEffect_virtualbase_metaObject(self.h), owned: false)
+
+proc QSoundEffectmetacast*(self: gen_qsoundeffect_types.QSoundEffect, param1: cstring): pointer =
+  fcQSoundEffect_virtualbase_metacast(self.h, param1)
+
+proc QSoundEffectmetacall*(self: gen_qsoundeffect_types.QSoundEffect, param1: cint, param2: cint, param3: pointer): cint =
+  fcQSoundEffect_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+proc QSoundEffectevent*(self: gen_qsoundeffect_types.QSoundEffect, event: gen_qcoreevent_types.QEvent): bool =
+  fcQSoundEffect_virtualbase_event(self.h, event.h)
+
+proc QSoundEffecteventFilter*(self: gen_qsoundeffect_types.QSoundEffect, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
+  fcQSoundEffect_virtualbase_eventFilter(self.h, watched.h, event.h)
+
+proc QSoundEffecttimerEvent*(self: gen_qsoundeffect_types.QSoundEffect, event: gen_qcoreevent_types.QTimerEvent): void =
+  fcQSoundEffect_virtualbase_timerEvent(self.h, event.h)
+
+proc QSoundEffectchildEvent*(self: gen_qsoundeffect_types.QSoundEffect, event: gen_qcoreevent_types.QChildEvent): void =
+  fcQSoundEffect_virtualbase_childEvent(self.h, event.h)
+
+proc QSoundEffectcustomEvent*(self: gen_qsoundeffect_types.QSoundEffect, event: gen_qcoreevent_types.QEvent): void =
+  fcQSoundEffect_virtualbase_customEvent(self.h, event.h)
+
+proc QSoundEffectconnectNotify*(self: gen_qsoundeffect_types.QSoundEffect, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQSoundEffect_virtualbase_connectNotify(self.h, signal.h)
+
+proc QSoundEffectdisconnectNotify*(self: gen_qsoundeffect_types.QSoundEffect, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQSoundEffect_virtualbase_disconnectNotify(self.h, signal.h)
+
 
 proc fcQSoundEffect_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QSoundEffectVTable](fcQSoundEffect_vdata(self)[])
@@ -425,18 +456,12 @@ proc fcQSoundEffect_vtable_callback_metaObject(self: pointer): pointer {.cdecl.}
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QSoundEffectmetacast*(self: gen_qsoundeffect_types.QSoundEffect, param1: cstring): pointer =
-  fcQSoundEffect_virtualbase_metacast(self.h, param1)
-
 proc fcQSoundEffect_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QSoundEffectVTable](fcQSoundEffect_vdata(self)[])
   let self = QSoundEffect(h: self)
   let slotval1 = (param1)
   var virtualReturn = vtbl[].metacast(self, slotval1)
   virtualReturn
-
-proc QSoundEffectmetacall*(self: gen_qsoundeffect_types.QSoundEffect, param1: cint, param2: cint, param3: pointer): cint =
-  fcQSoundEffect_virtualbase_metacall(self.h, cint(param1), param2, param3)
 
 proc fcQSoundEffect_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QSoundEffectVTable](fcQSoundEffect_vdata(self)[])
@@ -447,18 +472,12 @@ proc fcQSoundEffect_vtable_callback_metacall(self: pointer, param1: cint, param2
   var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QSoundEffectevent*(self: gen_qsoundeffect_types.QSoundEffect, event: gen_qcoreevent_types.QEvent): bool =
-  fcQSoundEffect_virtualbase_event(self.h, event.h)
-
 proc fcQSoundEffect_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QSoundEffectVTable](fcQSoundEffect_vdata(self)[])
   let self = QSoundEffect(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
-
-proc QSoundEffecteventFilter*(self: gen_qsoundeffect_types.QSoundEffect, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
-  fcQSoundEffect_virtualbase_eventFilter(self.h, watched.h, event.h)
 
 proc fcQSoundEffect_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QSoundEffectVTable](fcQSoundEffect_vdata(self)[])
@@ -468,17 +487,11 @@ proc fcQSoundEffect_vtable_callback_eventFilter(self: pointer, watched: pointer,
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
-proc QSoundEffecttimerEvent*(self: gen_qsoundeffect_types.QSoundEffect, event: gen_qcoreevent_types.QTimerEvent): void =
-  fcQSoundEffect_virtualbase_timerEvent(self.h, event.h)
-
 proc fcQSoundEffect_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSoundEffectVTable](fcQSoundEffect_vdata(self)[])
   let self = QSoundEffect(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
-
-proc QSoundEffectchildEvent*(self: gen_qsoundeffect_types.QSoundEffect, event: gen_qcoreevent_types.QChildEvent): void =
-  fcQSoundEffect_virtualbase_childEvent(self.h, event.h)
 
 proc fcQSoundEffect_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSoundEffectVTable](fcQSoundEffect_vdata(self)[])
@@ -486,26 +499,17 @@ proc fcQSoundEffect_vtable_callback_childEvent(self: pointer, event: pointer): v
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
-proc QSoundEffectcustomEvent*(self: gen_qsoundeffect_types.QSoundEffect, event: gen_qcoreevent_types.QEvent): void =
-  fcQSoundEffect_virtualbase_customEvent(self.h, event.h)
-
 proc fcQSoundEffect_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSoundEffectVTable](fcQSoundEffect_vdata(self)[])
   let self = QSoundEffect(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
-proc QSoundEffectconnectNotify*(self: gen_qsoundeffect_types.QSoundEffect, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQSoundEffect_virtualbase_connectNotify(self.h, signal.h)
-
 proc fcQSoundEffect_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSoundEffectVTable](fcQSoundEffect_vdata(self)[])
   let self = QSoundEffect(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
-
-proc QSoundEffectdisconnectNotify*(self: gen_qsoundeffect_types.QSoundEffect, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQSoundEffect_virtualbase_disconnectNotify(self.h, signal.h)
 
 proc fcQSoundEffect_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSoundEffectVTable](fcQSoundEffect_vdata(self)[])
@@ -515,23 +519,39 @@ proc fcQSoundEffect_vtable_callback_disconnectNotify(self: pointer, signal: poin
 
 type VirtualQSoundEffect* {.inheritable.} = ref object of QSoundEffect
   vtbl*: cQSoundEffectVTable
+
 method metaObject*(self: VirtualQSoundEffect): gen_qobjectdefs_types.QMetaObject {.base.} =
   QSoundEffectmetaObject(self[])
+method metacast*(self: VirtualQSoundEffect, param1: cstring): pointer {.base.} =
+  QSoundEffectmetacast(self[], param1)
+method metacall*(self: VirtualQSoundEffect, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QSoundEffectmetacall(self[], param1, param2, param3)
+method event*(self: VirtualQSoundEffect, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QSoundEffectevent(self[], event)
+method eventFilter*(self: VirtualQSoundEffect, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QSoundEffecteventFilter(self[], watched, event)
+method timerEvent*(self: VirtualQSoundEffect, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QSoundEffecttimerEvent(self[], event)
+method childEvent*(self: VirtualQSoundEffect, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QSoundEffectchildEvent(self[], event)
+method customEvent*(self: VirtualQSoundEffect, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QSoundEffectcustomEvent(self[], event)
+method connectNotify*(self: VirtualQSoundEffect, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QSoundEffectconnectNotify(self[], signal)
+method disconnectNotify*(self: VirtualQSoundEffect, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QSoundEffectdisconnectNotify(self[], signal)
+
 proc fcQSoundEffect_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQSoundEffect](fcQSoundEffect_vdata(self)[])
   var virtualReturn = inst.metaObject()
   virtualReturn.h
 
-method metacast*(self: VirtualQSoundEffect, param1: cstring): pointer {.base.} =
-  QSoundEffectmetacast(self[], param1)
 proc fcQSoundEffect_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQSoundEffect](fcQSoundEffect_vdata(self)[])
   let slotval1 = (param1)
   var virtualReturn = inst.metacast(slotval1)
   virtualReturn
 
-method metacall*(self: VirtualQSoundEffect, param1: cint, param2: cint, param3: pointer): cint {.base.} =
-  QSoundEffectmetacall(self[], param1, param2, param3)
 proc fcQSoundEffect_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQSoundEffect](fcQSoundEffect_vdata(self)[])
   let slotval1 = cint(param1)
@@ -540,16 +560,12 @@ proc fcQSoundEffect_method_callback_metacall(self: pointer, param1: cint, param2
   var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
-method event*(self: VirtualQSoundEffect, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QSoundEffectevent(self[], event)
 proc fcQSoundEffect_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQSoundEffect](fcQSoundEffect_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
-method eventFilter*(self: VirtualQSoundEffect, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QSoundEffecteventFilter(self[], watched, event)
 proc fcQSoundEffect_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQSoundEffect](fcQSoundEffect_vdata(self)[])
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
@@ -557,40 +573,31 @@ proc fcQSoundEffect_method_callback_eventFilter(self: pointer, watched: pointer,
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
-method timerEvent*(self: VirtualQSoundEffect, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
-  QSoundEffecttimerEvent(self[], event)
 proc fcQSoundEffect_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSoundEffect](fcQSoundEffect_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
-method childEvent*(self: VirtualQSoundEffect, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
-  QSoundEffectchildEvent(self[], event)
 proc fcQSoundEffect_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSoundEffect](fcQSoundEffect_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
-method customEvent*(self: VirtualQSoundEffect, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QSoundEffectcustomEvent(self[], event)
 proc fcQSoundEffect_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSoundEffect](fcQSoundEffect_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
-method connectNotify*(self: VirtualQSoundEffect, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QSoundEffectconnectNotify(self[], signal)
 proc fcQSoundEffect_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSoundEffect](fcQSoundEffect_vdata(self)[])
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
-method disconnectNotify*(self: VirtualQSoundEffect, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QSoundEffectdisconnectNotify(self[], signal)
 proc fcQSoundEffect_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSoundEffect](fcQSoundEffect_vdata(self)[])
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
+
 
 proc sender*(self: gen_qsoundeffect_types.QSoundEffect): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQSoundEffect_protectedbase_sender(self.h), owned: false)

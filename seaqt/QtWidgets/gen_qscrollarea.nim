@@ -97,6 +97,7 @@ proc fcQScrollArea_ensureWidgetVisible2(self: pointer, childWidget: pointer, xma
 proc fcQScrollArea_ensureWidgetVisible3(self: pointer, childWidget: pointer, xmargin: cint, ymargin: cint): void {.importc: "QScrollArea_ensureWidgetVisible3".}
 proc fcQScrollArea_vdata(self: pointer): ptr pointer {.importc: "QScrollArea_vdata".}
 proc fvdata_cQScrollArea(self: pointer): pointer {.importc: "vdata_QScrollArea".}
+
 type cQScrollAreaVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -352,6 +353,7 @@ type QScrollAreachildEventProc* = proc(self: QScrollArea, event: gen_qcoreevent_
 type QScrollAreacustomEventProc* = proc(self: QScrollArea, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QScrollAreaconnectNotifyProc* = proc(self: QScrollArea, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QScrollAreadisconnectNotifyProc* = proc(self: QScrollArea, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+
 type QScrollAreaVTable* {.inheritable, pure.} = object
   vtbl: cQScrollAreaVTable
   metaObject*: QScrollAreametaObjectProc
@@ -409,8 +411,172 @@ type QScrollAreaVTable* {.inheritable, pure.} = object
   customEvent*: QScrollAreacustomEventProc
   connectNotify*: QScrollAreaconnectNotifyProc
   disconnectNotify*: QScrollAreadisconnectNotifyProc
+
 proc QScrollAreametaObject*(self: gen_qscrollarea_types.QScrollArea): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQScrollArea_virtualbase_metaObject(self.h), owned: false)
+
+proc QScrollAreametacast*(self: gen_qscrollarea_types.QScrollArea, param1: cstring): pointer =
+  fcQScrollArea_virtualbase_metacast(self.h, param1)
+
+proc QScrollAreametacall*(self: gen_qscrollarea_types.QScrollArea, param1: cint, param2: cint, param3: pointer): cint =
+  fcQScrollArea_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+proc QScrollAreasizeHint*(self: gen_qscrollarea_types.QScrollArea): gen_qsize_types.QSize =
+  gen_qsize_types.QSize(h: fcQScrollArea_virtualbase_sizeHint(self.h), owned: true)
+
+proc QScrollAreafocusNextPrevChild*(self: gen_qscrollarea_types.QScrollArea, next: bool): bool =
+  fcQScrollArea_virtualbase_focusNextPrevChild(self.h, next)
+
+proc QScrollAreaevent*(self: gen_qscrollarea_types.QScrollArea, param1: gen_qcoreevent_types.QEvent): bool =
+  fcQScrollArea_virtualbase_event(self.h, param1.h)
+
+proc QScrollAreaeventFilter*(self: gen_qscrollarea_types.QScrollArea, param1: gen_qobject_types.QObject, param2: gen_qcoreevent_types.QEvent): bool =
+  fcQScrollArea_virtualbase_eventFilter(self.h, param1.h, param2.h)
+
+proc QScrollArearesizeEvent*(self: gen_qscrollarea_types.QScrollArea, param1: gen_qevent_types.QResizeEvent): void =
+  fcQScrollArea_virtualbase_resizeEvent(self.h, param1.h)
+
+proc QScrollAreascrollContentsBy*(self: gen_qscrollarea_types.QScrollArea, dx: cint, dy: cint): void =
+  fcQScrollArea_virtualbase_scrollContentsBy(self.h, dx, dy)
+
+proc QScrollAreaviewportSizeHint*(self: gen_qscrollarea_types.QScrollArea): gen_qsize_types.QSize =
+  gen_qsize_types.QSize(h: fcQScrollArea_virtualbase_viewportSizeHint(self.h), owned: true)
+
+proc QScrollAreaminimumSizeHint*(self: gen_qscrollarea_types.QScrollArea): gen_qsize_types.QSize =
+  gen_qsize_types.QSize(h: fcQScrollArea_virtualbase_minimumSizeHint(self.h), owned: true)
+
+proc QScrollAreasetupViewport*(self: gen_qscrollarea_types.QScrollArea, viewport: gen_qwidget_types.QWidget): void =
+  fcQScrollArea_virtualbase_setupViewport(self.h, viewport.h)
+
+proc QScrollAreaviewportEvent*(self: gen_qscrollarea_types.QScrollArea, param1: gen_qcoreevent_types.QEvent): bool =
+  fcQScrollArea_virtualbase_viewportEvent(self.h, param1.h)
+
+proc QScrollAreapaintEvent*(self: gen_qscrollarea_types.QScrollArea, param1: gen_qevent_types.QPaintEvent): void =
+  fcQScrollArea_virtualbase_paintEvent(self.h, param1.h)
+
+proc QScrollAreamousePressEvent*(self: gen_qscrollarea_types.QScrollArea, param1: gen_qevent_types.QMouseEvent): void =
+  fcQScrollArea_virtualbase_mousePressEvent(self.h, param1.h)
+
+proc QScrollAreamouseReleaseEvent*(self: gen_qscrollarea_types.QScrollArea, param1: gen_qevent_types.QMouseEvent): void =
+  fcQScrollArea_virtualbase_mouseReleaseEvent(self.h, param1.h)
+
+proc QScrollAreamouseDoubleClickEvent*(self: gen_qscrollarea_types.QScrollArea, param1: gen_qevent_types.QMouseEvent): void =
+  fcQScrollArea_virtualbase_mouseDoubleClickEvent(self.h, param1.h)
+
+proc QScrollAreamouseMoveEvent*(self: gen_qscrollarea_types.QScrollArea, param1: gen_qevent_types.QMouseEvent): void =
+  fcQScrollArea_virtualbase_mouseMoveEvent(self.h, param1.h)
+
+proc QScrollAreawheelEvent*(self: gen_qscrollarea_types.QScrollArea, param1: gen_qevent_types.QWheelEvent): void =
+  fcQScrollArea_virtualbase_wheelEvent(self.h, param1.h)
+
+proc QScrollAreacontextMenuEvent*(self: gen_qscrollarea_types.QScrollArea, param1: gen_qevent_types.QContextMenuEvent): void =
+  fcQScrollArea_virtualbase_contextMenuEvent(self.h, param1.h)
+
+proc QScrollAreadragEnterEvent*(self: gen_qscrollarea_types.QScrollArea, param1: gen_qevent_types.QDragEnterEvent): void =
+  fcQScrollArea_virtualbase_dragEnterEvent(self.h, param1.h)
+
+proc QScrollAreadragMoveEvent*(self: gen_qscrollarea_types.QScrollArea, param1: gen_qevent_types.QDragMoveEvent): void =
+  fcQScrollArea_virtualbase_dragMoveEvent(self.h, param1.h)
+
+proc QScrollAreadragLeaveEvent*(self: gen_qscrollarea_types.QScrollArea, param1: gen_qevent_types.QDragLeaveEvent): void =
+  fcQScrollArea_virtualbase_dragLeaveEvent(self.h, param1.h)
+
+proc QScrollAreadropEvent*(self: gen_qscrollarea_types.QScrollArea, param1: gen_qevent_types.QDropEvent): void =
+  fcQScrollArea_virtualbase_dropEvent(self.h, param1.h)
+
+proc QScrollAreakeyPressEvent*(self: gen_qscrollarea_types.QScrollArea, param1: gen_qevent_types.QKeyEvent): void =
+  fcQScrollArea_virtualbase_keyPressEvent(self.h, param1.h)
+
+proc QScrollAreachangeEvent*(self: gen_qscrollarea_types.QScrollArea, param1: gen_qcoreevent_types.QEvent): void =
+  fcQScrollArea_virtualbase_changeEvent(self.h, param1.h)
+
+proc QScrollAreainitStyleOption*(self: gen_qscrollarea_types.QScrollArea, option: gen_qstyleoption_types.QStyleOptionFrame): void =
+  fcQScrollArea_virtualbase_initStyleOption(self.h, option.h)
+
+proc QScrollAreadevType*(self: gen_qscrollarea_types.QScrollArea): cint =
+  fcQScrollArea_virtualbase_devType(self.h)
+
+proc QScrollAreasetVisible*(self: gen_qscrollarea_types.QScrollArea, visible: bool): void =
+  fcQScrollArea_virtualbase_setVisible(self.h, visible)
+
+proc QScrollAreaheightForWidth*(self: gen_qscrollarea_types.QScrollArea, param1: cint): cint =
+  fcQScrollArea_virtualbase_heightForWidth(self.h, param1)
+
+proc QScrollAreahasHeightForWidth*(self: gen_qscrollarea_types.QScrollArea): bool =
+  fcQScrollArea_virtualbase_hasHeightForWidth(self.h)
+
+proc QScrollAreapaintEngine*(self: gen_qscrollarea_types.QScrollArea): gen_qpaintengine_types.QPaintEngine =
+  gen_qpaintengine_types.QPaintEngine(h: fcQScrollArea_virtualbase_paintEngine(self.h), owned: false)
+
+proc QScrollAreakeyReleaseEvent*(self: gen_qscrollarea_types.QScrollArea, event: gen_qevent_types.QKeyEvent): void =
+  fcQScrollArea_virtualbase_keyReleaseEvent(self.h, event.h)
+
+proc QScrollAreafocusInEvent*(self: gen_qscrollarea_types.QScrollArea, event: gen_qevent_types.QFocusEvent): void =
+  fcQScrollArea_virtualbase_focusInEvent(self.h, event.h)
+
+proc QScrollAreafocusOutEvent*(self: gen_qscrollarea_types.QScrollArea, event: gen_qevent_types.QFocusEvent): void =
+  fcQScrollArea_virtualbase_focusOutEvent(self.h, event.h)
+
+proc QScrollAreaenterEvent*(self: gen_qscrollarea_types.QScrollArea, event: gen_qevent_types.QEnterEvent): void =
+  fcQScrollArea_virtualbase_enterEvent(self.h, event.h)
+
+proc QScrollArealeaveEvent*(self: gen_qscrollarea_types.QScrollArea, event: gen_qcoreevent_types.QEvent): void =
+  fcQScrollArea_virtualbase_leaveEvent(self.h, event.h)
+
+proc QScrollAreamoveEvent*(self: gen_qscrollarea_types.QScrollArea, event: gen_qevent_types.QMoveEvent): void =
+  fcQScrollArea_virtualbase_moveEvent(self.h, event.h)
+
+proc QScrollAreacloseEvent*(self: gen_qscrollarea_types.QScrollArea, event: gen_qevent_types.QCloseEvent): void =
+  fcQScrollArea_virtualbase_closeEvent(self.h, event.h)
+
+proc QScrollAreatabletEvent*(self: gen_qscrollarea_types.QScrollArea, event: gen_qevent_types.QTabletEvent): void =
+  fcQScrollArea_virtualbase_tabletEvent(self.h, event.h)
+
+proc QScrollAreaactionEvent*(self: gen_qscrollarea_types.QScrollArea, event: gen_qevent_types.QActionEvent): void =
+  fcQScrollArea_virtualbase_actionEvent(self.h, event.h)
+
+proc QScrollAreashowEvent*(self: gen_qscrollarea_types.QScrollArea, event: gen_qevent_types.QShowEvent): void =
+  fcQScrollArea_virtualbase_showEvent(self.h, event.h)
+
+proc QScrollAreahideEvent*(self: gen_qscrollarea_types.QScrollArea, event: gen_qevent_types.QHideEvent): void =
+  fcQScrollArea_virtualbase_hideEvent(self.h, event.h)
+
+proc QScrollAreanativeEvent*(self: gen_qscrollarea_types.QScrollArea, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool =
+  fcQScrollArea_virtualbase_nativeEvent(self.h, struct_miqt_string(data: if len(eventType) > 0: addr eventType[0] else: nil, len: csize_t(len(eventType))), message, resultVal)
+
+proc QScrollAreametric*(self: gen_qscrollarea_types.QScrollArea, param1: cint): cint =
+  fcQScrollArea_virtualbase_metric(self.h, cint(param1))
+
+proc QScrollAreainitPainter*(self: gen_qscrollarea_types.QScrollArea, painter: gen_qpainter_types.QPainter): void =
+  fcQScrollArea_virtualbase_initPainter(self.h, painter.h)
+
+proc QScrollArearedirected*(self: gen_qscrollarea_types.QScrollArea, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice =
+  gen_qpaintdevice_types.QPaintDevice(h: fcQScrollArea_virtualbase_redirected(self.h, offset.h), owned: false)
+
+proc QScrollAreasharedPainter*(self: gen_qscrollarea_types.QScrollArea): gen_qpainter_types.QPainter =
+  gen_qpainter_types.QPainter(h: fcQScrollArea_virtualbase_sharedPainter(self.h), owned: false)
+
+proc QScrollAreainputMethodEvent*(self: gen_qscrollarea_types.QScrollArea, param1: gen_qevent_types.QInputMethodEvent): void =
+  fcQScrollArea_virtualbase_inputMethodEvent(self.h, param1.h)
+
+proc QScrollAreainputMethodQuery*(self: gen_qscrollarea_types.QScrollArea, param1: cint): gen_qvariant_types.QVariant =
+  gen_qvariant_types.QVariant(h: fcQScrollArea_virtualbase_inputMethodQuery(self.h, cint(param1)), owned: true)
+
+proc QScrollAreatimerEvent*(self: gen_qscrollarea_types.QScrollArea, event: gen_qcoreevent_types.QTimerEvent): void =
+  fcQScrollArea_virtualbase_timerEvent(self.h, event.h)
+
+proc QScrollAreachildEvent*(self: gen_qscrollarea_types.QScrollArea, event: gen_qcoreevent_types.QChildEvent): void =
+  fcQScrollArea_virtualbase_childEvent(self.h, event.h)
+
+proc QScrollAreacustomEvent*(self: gen_qscrollarea_types.QScrollArea, event: gen_qcoreevent_types.QEvent): void =
+  fcQScrollArea_virtualbase_customEvent(self.h, event.h)
+
+proc QScrollAreaconnectNotify*(self: gen_qscrollarea_types.QScrollArea, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQScrollArea_virtualbase_connectNotify(self.h, signal.h)
+
+proc QScrollAreadisconnectNotify*(self: gen_qscrollarea_types.QScrollArea, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQScrollArea_virtualbase_disconnectNotify(self.h, signal.h)
+
 
 proc fcQScrollArea_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QScrollAreaVTable](fcQScrollArea_vdata(self)[])
@@ -421,18 +587,12 @@ proc fcQScrollArea_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} 
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QScrollAreametacast*(self: gen_qscrollarea_types.QScrollArea, param1: cstring): pointer =
-  fcQScrollArea_virtualbase_metacast(self.h, param1)
-
 proc fcQScrollArea_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QScrollAreaVTable](fcQScrollArea_vdata(self)[])
   let self = QScrollArea(h: self)
   let slotval1 = (param1)
   var virtualReturn = vtbl[].metacast(self, slotval1)
   virtualReturn
-
-proc QScrollAreametacall*(self: gen_qscrollarea_types.QScrollArea, param1: cint, param2: cint, param3: pointer): cint =
-  fcQScrollArea_virtualbase_metacall(self.h, cint(param1), param2, param3)
 
 proc fcQScrollArea_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QScrollAreaVTable](fcQScrollArea_vdata(self)[])
@@ -443,9 +603,6 @@ proc fcQScrollArea_vtable_callback_metacall(self: pointer, param1: cint, param2:
   var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QScrollAreasizeHint*(self: gen_qscrollarea_types.QScrollArea): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQScrollArea_virtualbase_sizeHint(self.h), owned: true)
-
 proc fcQScrollArea_vtable_callback_sizeHint(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QScrollAreaVTable](fcQScrollArea_vdata(self)[])
   let self = QScrollArea(h: self)
@@ -455,9 +612,6 @@ proc fcQScrollArea_vtable_callback_sizeHint(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QScrollAreafocusNextPrevChild*(self: gen_qscrollarea_types.QScrollArea, next: bool): bool =
-  fcQScrollArea_virtualbase_focusNextPrevChild(self.h, next)
-
 proc fcQScrollArea_vtable_callback_focusNextPrevChild(self: pointer, next: bool): bool {.cdecl.} =
   let vtbl = cast[ptr QScrollAreaVTable](fcQScrollArea_vdata(self)[])
   let self = QScrollArea(h: self)
@@ -465,18 +619,12 @@ proc fcQScrollArea_vtable_callback_focusNextPrevChild(self: pointer, next: bool)
   var virtualReturn = vtbl[].focusNextPrevChild(self, slotval1)
   virtualReturn
 
-proc QScrollAreaevent*(self: gen_qscrollarea_types.QScrollArea, param1: gen_qcoreevent_types.QEvent): bool =
-  fcQScrollArea_virtualbase_event(self.h, param1.h)
-
 proc fcQScrollArea_vtable_callback_event(self: pointer, param1: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QScrollAreaVTable](fcQScrollArea_vdata(self)[])
   let self = QScrollArea(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
-
-proc QScrollAreaeventFilter*(self: gen_qscrollarea_types.QScrollArea, param1: gen_qobject_types.QObject, param2: gen_qcoreevent_types.QEvent): bool =
-  fcQScrollArea_virtualbase_eventFilter(self.h, param1.h, param2.h)
 
 proc fcQScrollArea_vtable_callback_eventFilter(self: pointer, param1: pointer, param2: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QScrollAreaVTable](fcQScrollArea_vdata(self)[])
@@ -486,17 +634,11 @@ proc fcQScrollArea_vtable_callback_eventFilter(self: pointer, param1: pointer, p
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
-proc QScrollArearesizeEvent*(self: gen_qscrollarea_types.QScrollArea, param1: gen_qevent_types.QResizeEvent): void =
-  fcQScrollArea_virtualbase_resizeEvent(self.h, param1.h)
-
 proc fcQScrollArea_vtable_callback_resizeEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QScrollAreaVTable](fcQScrollArea_vdata(self)[])
   let self = QScrollArea(h: self)
   let slotval1 = gen_qevent_types.QResizeEvent(h: param1, owned: false)
   vtbl[].resizeEvent(self, slotval1)
-
-proc QScrollAreascrollContentsBy*(self: gen_qscrollarea_types.QScrollArea, dx: cint, dy: cint): void =
-  fcQScrollArea_virtualbase_scrollContentsBy(self.h, dx, dy)
 
 proc fcQScrollArea_vtable_callback_scrollContentsBy(self: pointer, dx: cint, dy: cint): void {.cdecl.} =
   let vtbl = cast[ptr QScrollAreaVTable](fcQScrollArea_vdata(self)[])
@@ -504,9 +646,6 @@ proc fcQScrollArea_vtable_callback_scrollContentsBy(self: pointer, dx: cint, dy:
   let slotval1 = dx
   let slotval2 = dy
   vtbl[].scrollContentsBy(self, slotval1, slotval2)
-
-proc QScrollAreaviewportSizeHint*(self: gen_qscrollarea_types.QScrollArea): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQScrollArea_virtualbase_viewportSizeHint(self.h), owned: true)
 
 proc fcQScrollArea_vtable_callback_viewportSizeHint(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QScrollAreaVTable](fcQScrollArea_vdata(self)[])
@@ -517,9 +656,6 @@ proc fcQScrollArea_vtable_callback_viewportSizeHint(self: pointer): pointer {.cd
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QScrollAreaminimumSizeHint*(self: gen_qscrollarea_types.QScrollArea): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQScrollArea_virtualbase_minimumSizeHint(self.h), owned: true)
-
 proc fcQScrollArea_vtable_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QScrollAreaVTable](fcQScrollArea_vdata(self)[])
   let self = QScrollArea(h: self)
@@ -529,17 +665,11 @@ proc fcQScrollArea_vtable_callback_minimumSizeHint(self: pointer): pointer {.cde
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QScrollAreasetupViewport*(self: gen_qscrollarea_types.QScrollArea, viewport: gen_qwidget_types.QWidget): void =
-  fcQScrollArea_virtualbase_setupViewport(self.h, viewport.h)
-
 proc fcQScrollArea_vtable_callback_setupViewport(self: pointer, viewport: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QScrollAreaVTable](fcQScrollArea_vdata(self)[])
   let self = QScrollArea(h: self)
   let slotval1 = gen_qwidget_types.QWidget(h: viewport, owned: false)
   vtbl[].setupViewport(self, slotval1)
-
-proc QScrollAreaviewportEvent*(self: gen_qscrollarea_types.QScrollArea, param1: gen_qcoreevent_types.QEvent): bool =
-  fcQScrollArea_virtualbase_viewportEvent(self.h, param1.h)
 
 proc fcQScrollArea_vtable_callback_viewportEvent(self: pointer, param1: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QScrollAreaVTable](fcQScrollArea_vdata(self)[])
@@ -548,17 +678,11 @@ proc fcQScrollArea_vtable_callback_viewportEvent(self: pointer, param1: pointer)
   var virtualReturn = vtbl[].viewportEvent(self, slotval1)
   virtualReturn
 
-proc QScrollAreapaintEvent*(self: gen_qscrollarea_types.QScrollArea, param1: gen_qevent_types.QPaintEvent): void =
-  fcQScrollArea_virtualbase_paintEvent(self.h, param1.h)
-
 proc fcQScrollArea_vtable_callback_paintEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QScrollAreaVTable](fcQScrollArea_vdata(self)[])
   let self = QScrollArea(h: self)
   let slotval1 = gen_qevent_types.QPaintEvent(h: param1, owned: false)
   vtbl[].paintEvent(self, slotval1)
-
-proc QScrollAreamousePressEvent*(self: gen_qscrollarea_types.QScrollArea, param1: gen_qevent_types.QMouseEvent): void =
-  fcQScrollArea_virtualbase_mousePressEvent(self.h, param1.h)
 
 proc fcQScrollArea_vtable_callback_mousePressEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QScrollAreaVTable](fcQScrollArea_vdata(self)[])
@@ -566,17 +690,11 @@ proc fcQScrollArea_vtable_callback_mousePressEvent(self: pointer, param1: pointe
   let slotval1 = gen_qevent_types.QMouseEvent(h: param1, owned: false)
   vtbl[].mousePressEvent(self, slotval1)
 
-proc QScrollAreamouseReleaseEvent*(self: gen_qscrollarea_types.QScrollArea, param1: gen_qevent_types.QMouseEvent): void =
-  fcQScrollArea_virtualbase_mouseReleaseEvent(self.h, param1.h)
-
 proc fcQScrollArea_vtable_callback_mouseReleaseEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QScrollAreaVTable](fcQScrollArea_vdata(self)[])
   let self = QScrollArea(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: param1, owned: false)
   vtbl[].mouseReleaseEvent(self, slotval1)
-
-proc QScrollAreamouseDoubleClickEvent*(self: gen_qscrollarea_types.QScrollArea, param1: gen_qevent_types.QMouseEvent): void =
-  fcQScrollArea_virtualbase_mouseDoubleClickEvent(self.h, param1.h)
 
 proc fcQScrollArea_vtable_callback_mouseDoubleClickEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QScrollAreaVTable](fcQScrollArea_vdata(self)[])
@@ -584,17 +702,11 @@ proc fcQScrollArea_vtable_callback_mouseDoubleClickEvent(self: pointer, param1: 
   let slotval1 = gen_qevent_types.QMouseEvent(h: param1, owned: false)
   vtbl[].mouseDoubleClickEvent(self, slotval1)
 
-proc QScrollAreamouseMoveEvent*(self: gen_qscrollarea_types.QScrollArea, param1: gen_qevent_types.QMouseEvent): void =
-  fcQScrollArea_virtualbase_mouseMoveEvent(self.h, param1.h)
-
 proc fcQScrollArea_vtable_callback_mouseMoveEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QScrollAreaVTable](fcQScrollArea_vdata(self)[])
   let self = QScrollArea(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: param1, owned: false)
   vtbl[].mouseMoveEvent(self, slotval1)
-
-proc QScrollAreawheelEvent*(self: gen_qscrollarea_types.QScrollArea, param1: gen_qevent_types.QWheelEvent): void =
-  fcQScrollArea_virtualbase_wheelEvent(self.h, param1.h)
 
 proc fcQScrollArea_vtable_callback_wheelEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QScrollAreaVTable](fcQScrollArea_vdata(self)[])
@@ -602,17 +714,11 @@ proc fcQScrollArea_vtable_callback_wheelEvent(self: pointer, param1: pointer): v
   let slotval1 = gen_qevent_types.QWheelEvent(h: param1, owned: false)
   vtbl[].wheelEvent(self, slotval1)
 
-proc QScrollAreacontextMenuEvent*(self: gen_qscrollarea_types.QScrollArea, param1: gen_qevent_types.QContextMenuEvent): void =
-  fcQScrollArea_virtualbase_contextMenuEvent(self.h, param1.h)
-
 proc fcQScrollArea_vtable_callback_contextMenuEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QScrollAreaVTable](fcQScrollArea_vdata(self)[])
   let self = QScrollArea(h: self)
   let slotval1 = gen_qevent_types.QContextMenuEvent(h: param1, owned: false)
   vtbl[].contextMenuEvent(self, slotval1)
-
-proc QScrollAreadragEnterEvent*(self: gen_qscrollarea_types.QScrollArea, param1: gen_qevent_types.QDragEnterEvent): void =
-  fcQScrollArea_virtualbase_dragEnterEvent(self.h, param1.h)
 
 proc fcQScrollArea_vtable_callback_dragEnterEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QScrollAreaVTable](fcQScrollArea_vdata(self)[])
@@ -620,17 +726,11 @@ proc fcQScrollArea_vtable_callback_dragEnterEvent(self: pointer, param1: pointer
   let slotval1 = gen_qevent_types.QDragEnterEvent(h: param1, owned: false)
   vtbl[].dragEnterEvent(self, slotval1)
 
-proc QScrollAreadragMoveEvent*(self: gen_qscrollarea_types.QScrollArea, param1: gen_qevent_types.QDragMoveEvent): void =
-  fcQScrollArea_virtualbase_dragMoveEvent(self.h, param1.h)
-
 proc fcQScrollArea_vtable_callback_dragMoveEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QScrollAreaVTable](fcQScrollArea_vdata(self)[])
   let self = QScrollArea(h: self)
   let slotval1 = gen_qevent_types.QDragMoveEvent(h: param1, owned: false)
   vtbl[].dragMoveEvent(self, slotval1)
-
-proc QScrollAreadragLeaveEvent*(self: gen_qscrollarea_types.QScrollArea, param1: gen_qevent_types.QDragLeaveEvent): void =
-  fcQScrollArea_virtualbase_dragLeaveEvent(self.h, param1.h)
 
 proc fcQScrollArea_vtable_callback_dragLeaveEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QScrollAreaVTable](fcQScrollArea_vdata(self)[])
@@ -638,17 +738,11 @@ proc fcQScrollArea_vtable_callback_dragLeaveEvent(self: pointer, param1: pointer
   let slotval1 = gen_qevent_types.QDragLeaveEvent(h: param1, owned: false)
   vtbl[].dragLeaveEvent(self, slotval1)
 
-proc QScrollAreadropEvent*(self: gen_qscrollarea_types.QScrollArea, param1: gen_qevent_types.QDropEvent): void =
-  fcQScrollArea_virtualbase_dropEvent(self.h, param1.h)
-
 proc fcQScrollArea_vtable_callback_dropEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QScrollAreaVTable](fcQScrollArea_vdata(self)[])
   let self = QScrollArea(h: self)
   let slotval1 = gen_qevent_types.QDropEvent(h: param1, owned: false)
   vtbl[].dropEvent(self, slotval1)
-
-proc QScrollAreakeyPressEvent*(self: gen_qscrollarea_types.QScrollArea, param1: gen_qevent_types.QKeyEvent): void =
-  fcQScrollArea_virtualbase_keyPressEvent(self.h, param1.h)
 
 proc fcQScrollArea_vtable_callback_keyPressEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QScrollAreaVTable](fcQScrollArea_vdata(self)[])
@@ -656,17 +750,11 @@ proc fcQScrollArea_vtable_callback_keyPressEvent(self: pointer, param1: pointer)
   let slotval1 = gen_qevent_types.QKeyEvent(h: param1, owned: false)
   vtbl[].keyPressEvent(self, slotval1)
 
-proc QScrollAreachangeEvent*(self: gen_qscrollarea_types.QScrollArea, param1: gen_qcoreevent_types.QEvent): void =
-  fcQScrollArea_virtualbase_changeEvent(self.h, param1.h)
-
 proc fcQScrollArea_vtable_callback_changeEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QScrollAreaVTable](fcQScrollArea_vdata(self)[])
   let self = QScrollArea(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
   vtbl[].changeEvent(self, slotval1)
-
-proc QScrollAreainitStyleOption*(self: gen_qscrollarea_types.QScrollArea, option: gen_qstyleoption_types.QStyleOptionFrame): void =
-  fcQScrollArea_virtualbase_initStyleOption(self.h, option.h)
 
 proc fcQScrollArea_vtable_callback_initStyleOption(self: pointer, option: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QScrollAreaVTable](fcQScrollArea_vdata(self)[])
@@ -674,26 +762,17 @@ proc fcQScrollArea_vtable_callback_initStyleOption(self: pointer, option: pointe
   let slotval1 = gen_qstyleoption_types.QStyleOptionFrame(h: option, owned: false)
   vtbl[].initStyleOption(self, slotval1)
 
-proc QScrollAreadevType*(self: gen_qscrollarea_types.QScrollArea): cint =
-  fcQScrollArea_virtualbase_devType(self.h)
-
 proc fcQScrollArea_vtable_callback_devType(self: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QScrollAreaVTable](fcQScrollArea_vdata(self)[])
   let self = QScrollArea(h: self)
   var virtualReturn = vtbl[].devType(self)
   virtualReturn
 
-proc QScrollAreasetVisible*(self: gen_qscrollarea_types.QScrollArea, visible: bool): void =
-  fcQScrollArea_virtualbase_setVisible(self.h, visible)
-
 proc fcQScrollArea_vtable_callback_setVisible(self: pointer, visible: bool): void {.cdecl.} =
   let vtbl = cast[ptr QScrollAreaVTable](fcQScrollArea_vdata(self)[])
   let self = QScrollArea(h: self)
   let slotval1 = visible
   vtbl[].setVisible(self, slotval1)
-
-proc QScrollAreaheightForWidth*(self: gen_qscrollarea_types.QScrollArea, param1: cint): cint =
-  fcQScrollArea_virtualbase_heightForWidth(self.h, param1)
 
 proc fcQScrollArea_vtable_callback_heightForWidth(self: pointer, param1: cint): cint {.cdecl.} =
   let vtbl = cast[ptr QScrollAreaVTable](fcQScrollArea_vdata(self)[])
@@ -702,17 +781,11 @@ proc fcQScrollArea_vtable_callback_heightForWidth(self: pointer, param1: cint): 
   var virtualReturn = vtbl[].heightForWidth(self, slotval1)
   virtualReturn
 
-proc QScrollAreahasHeightForWidth*(self: gen_qscrollarea_types.QScrollArea): bool =
-  fcQScrollArea_virtualbase_hasHeightForWidth(self.h)
-
 proc fcQScrollArea_vtable_callback_hasHeightForWidth(self: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QScrollAreaVTable](fcQScrollArea_vdata(self)[])
   let self = QScrollArea(h: self)
   var virtualReturn = vtbl[].hasHeightForWidth(self)
   virtualReturn
-
-proc QScrollAreapaintEngine*(self: gen_qscrollarea_types.QScrollArea): gen_qpaintengine_types.QPaintEngine =
-  gen_qpaintengine_types.QPaintEngine(h: fcQScrollArea_virtualbase_paintEngine(self.h), owned: false)
 
 proc fcQScrollArea_vtable_callback_paintEngine(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QScrollAreaVTable](fcQScrollArea_vdata(self)[])
@@ -723,17 +796,11 @@ proc fcQScrollArea_vtable_callback_paintEngine(self: pointer): pointer {.cdecl.}
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QScrollAreakeyReleaseEvent*(self: gen_qscrollarea_types.QScrollArea, event: gen_qevent_types.QKeyEvent): void =
-  fcQScrollArea_virtualbase_keyReleaseEvent(self.h, event.h)
-
 proc fcQScrollArea_vtable_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QScrollAreaVTable](fcQScrollArea_vdata(self)[])
   let self = QScrollArea(h: self)
   let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   vtbl[].keyReleaseEvent(self, slotval1)
-
-proc QScrollAreafocusInEvent*(self: gen_qscrollarea_types.QScrollArea, event: gen_qevent_types.QFocusEvent): void =
-  fcQScrollArea_virtualbase_focusInEvent(self.h, event.h)
 
 proc fcQScrollArea_vtable_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QScrollAreaVTable](fcQScrollArea_vdata(self)[])
@@ -741,17 +808,11 @@ proc fcQScrollArea_vtable_callback_focusInEvent(self: pointer, event: pointer): 
   let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusInEvent(self, slotval1)
 
-proc QScrollAreafocusOutEvent*(self: gen_qscrollarea_types.QScrollArea, event: gen_qevent_types.QFocusEvent): void =
-  fcQScrollArea_virtualbase_focusOutEvent(self.h, event.h)
-
 proc fcQScrollArea_vtable_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QScrollAreaVTable](fcQScrollArea_vdata(self)[])
   let self = QScrollArea(h: self)
   let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusOutEvent(self, slotval1)
-
-proc QScrollAreaenterEvent*(self: gen_qscrollarea_types.QScrollArea, event: gen_qevent_types.QEnterEvent): void =
-  fcQScrollArea_virtualbase_enterEvent(self.h, event.h)
 
 proc fcQScrollArea_vtable_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QScrollAreaVTable](fcQScrollArea_vdata(self)[])
@@ -759,17 +820,11 @@ proc fcQScrollArea_vtable_callback_enterEvent(self: pointer, event: pointer): vo
   let slotval1 = gen_qevent_types.QEnterEvent(h: event, owned: false)
   vtbl[].enterEvent(self, slotval1)
 
-proc QScrollArealeaveEvent*(self: gen_qscrollarea_types.QScrollArea, event: gen_qcoreevent_types.QEvent): void =
-  fcQScrollArea_virtualbase_leaveEvent(self.h, event.h)
-
 proc fcQScrollArea_vtable_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QScrollAreaVTable](fcQScrollArea_vdata(self)[])
   let self = QScrollArea(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].leaveEvent(self, slotval1)
-
-proc QScrollAreamoveEvent*(self: gen_qscrollarea_types.QScrollArea, event: gen_qevent_types.QMoveEvent): void =
-  fcQScrollArea_virtualbase_moveEvent(self.h, event.h)
 
 proc fcQScrollArea_vtable_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QScrollAreaVTable](fcQScrollArea_vdata(self)[])
@@ -777,17 +832,11 @@ proc fcQScrollArea_vtable_callback_moveEvent(self: pointer, event: pointer): voi
   let slotval1 = gen_qevent_types.QMoveEvent(h: event, owned: false)
   vtbl[].moveEvent(self, slotval1)
 
-proc QScrollAreacloseEvent*(self: gen_qscrollarea_types.QScrollArea, event: gen_qevent_types.QCloseEvent): void =
-  fcQScrollArea_virtualbase_closeEvent(self.h, event.h)
-
 proc fcQScrollArea_vtable_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QScrollAreaVTable](fcQScrollArea_vdata(self)[])
   let self = QScrollArea(h: self)
   let slotval1 = gen_qevent_types.QCloseEvent(h: event, owned: false)
   vtbl[].closeEvent(self, slotval1)
-
-proc QScrollAreatabletEvent*(self: gen_qscrollarea_types.QScrollArea, event: gen_qevent_types.QTabletEvent): void =
-  fcQScrollArea_virtualbase_tabletEvent(self.h, event.h)
 
 proc fcQScrollArea_vtable_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QScrollAreaVTable](fcQScrollArea_vdata(self)[])
@@ -795,17 +844,11 @@ proc fcQScrollArea_vtable_callback_tabletEvent(self: pointer, event: pointer): v
   let slotval1 = gen_qevent_types.QTabletEvent(h: event, owned: false)
   vtbl[].tabletEvent(self, slotval1)
 
-proc QScrollAreaactionEvent*(self: gen_qscrollarea_types.QScrollArea, event: gen_qevent_types.QActionEvent): void =
-  fcQScrollArea_virtualbase_actionEvent(self.h, event.h)
-
 proc fcQScrollArea_vtable_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QScrollAreaVTable](fcQScrollArea_vdata(self)[])
   let self = QScrollArea(h: self)
   let slotval1 = gen_qevent_types.QActionEvent(h: event, owned: false)
   vtbl[].actionEvent(self, slotval1)
-
-proc QScrollAreashowEvent*(self: gen_qscrollarea_types.QScrollArea, event: gen_qevent_types.QShowEvent): void =
-  fcQScrollArea_virtualbase_showEvent(self.h, event.h)
 
 proc fcQScrollArea_vtable_callback_showEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QScrollAreaVTable](fcQScrollArea_vdata(self)[])
@@ -813,17 +856,11 @@ proc fcQScrollArea_vtable_callback_showEvent(self: pointer, event: pointer): voi
   let slotval1 = gen_qevent_types.QShowEvent(h: event, owned: false)
   vtbl[].showEvent(self, slotval1)
 
-proc QScrollAreahideEvent*(self: gen_qscrollarea_types.QScrollArea, event: gen_qevent_types.QHideEvent): void =
-  fcQScrollArea_virtualbase_hideEvent(self.h, event.h)
-
 proc fcQScrollArea_vtable_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QScrollAreaVTable](fcQScrollArea_vdata(self)[])
   let self = QScrollArea(h: self)
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   vtbl[].hideEvent(self, slotval1)
-
-proc QScrollAreanativeEvent*(self: gen_qscrollarea_types.QScrollArea, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool =
-  fcQScrollArea_virtualbase_nativeEvent(self.h, struct_miqt_string(data: if len(eventType) > 0: addr eventType[0] else: nil, len: csize_t(len(eventType))), message, resultVal)
 
 proc fcQScrollArea_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
   let vtbl = cast[ptr QScrollAreaVTable](fcQScrollArea_vdata(self)[])
@@ -837,9 +874,6 @@ proc fcQScrollArea_vtable_callback_nativeEvent(self: pointer, eventType: struct_
   var virtualReturn = vtbl[].nativeEvent(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QScrollAreametric*(self: gen_qscrollarea_types.QScrollArea, param1: cint): cint =
-  fcQScrollArea_virtualbase_metric(self.h, cint(param1))
-
 proc fcQScrollArea_vtable_callback_metric(self: pointer, param1: cint): cint {.cdecl.} =
   let vtbl = cast[ptr QScrollAreaVTable](fcQScrollArea_vdata(self)[])
   let self = QScrollArea(h: self)
@@ -847,17 +881,11 @@ proc fcQScrollArea_vtable_callback_metric(self: pointer, param1: cint): cint {.c
   var virtualReturn = vtbl[].metric(self, slotval1)
   virtualReturn
 
-proc QScrollAreainitPainter*(self: gen_qscrollarea_types.QScrollArea, painter: gen_qpainter_types.QPainter): void =
-  fcQScrollArea_virtualbase_initPainter(self.h, painter.h)
-
 proc fcQScrollArea_vtable_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QScrollAreaVTable](fcQScrollArea_vdata(self)[])
   let self = QScrollArea(h: self)
   let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
   vtbl[].initPainter(self, slotval1)
-
-proc QScrollArearedirected*(self: gen_qscrollarea_types.QScrollArea, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice =
-  gen_qpaintdevice_types.QPaintDevice(h: fcQScrollArea_virtualbase_redirected(self.h, offset.h), owned: false)
 
 proc fcQScrollArea_vtable_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QScrollAreaVTable](fcQScrollArea_vdata(self)[])
@@ -869,9 +897,6 @@ proc fcQScrollArea_vtable_callback_redirected(self: pointer, offset: pointer): p
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QScrollAreasharedPainter*(self: gen_qscrollarea_types.QScrollArea): gen_qpainter_types.QPainter =
-  gen_qpainter_types.QPainter(h: fcQScrollArea_virtualbase_sharedPainter(self.h), owned: false)
-
 proc fcQScrollArea_vtable_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QScrollAreaVTable](fcQScrollArea_vdata(self)[])
   let self = QScrollArea(h: self)
@@ -881,17 +906,11 @@ proc fcQScrollArea_vtable_callback_sharedPainter(self: pointer): pointer {.cdecl
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QScrollAreainputMethodEvent*(self: gen_qscrollarea_types.QScrollArea, param1: gen_qevent_types.QInputMethodEvent): void =
-  fcQScrollArea_virtualbase_inputMethodEvent(self.h, param1.h)
-
 proc fcQScrollArea_vtable_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QScrollAreaVTable](fcQScrollArea_vdata(self)[])
   let self = QScrollArea(h: self)
   let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1, owned: false)
   vtbl[].inputMethodEvent(self, slotval1)
-
-proc QScrollAreainputMethodQuery*(self: gen_qscrollarea_types.QScrollArea, param1: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQScrollArea_virtualbase_inputMethodQuery(self.h, cint(param1)), owned: true)
 
 proc fcQScrollArea_vtable_callback_inputMethodQuery(self: pointer, param1: cint): pointer {.cdecl.} =
   let vtbl = cast[ptr QScrollAreaVTable](fcQScrollArea_vdata(self)[])
@@ -903,17 +922,11 @@ proc fcQScrollArea_vtable_callback_inputMethodQuery(self: pointer, param1: cint)
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QScrollAreatimerEvent*(self: gen_qscrollarea_types.QScrollArea, event: gen_qcoreevent_types.QTimerEvent): void =
-  fcQScrollArea_virtualbase_timerEvent(self.h, event.h)
-
 proc fcQScrollArea_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QScrollAreaVTable](fcQScrollArea_vdata(self)[])
   let self = QScrollArea(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
-
-proc QScrollAreachildEvent*(self: gen_qscrollarea_types.QScrollArea, event: gen_qcoreevent_types.QChildEvent): void =
-  fcQScrollArea_virtualbase_childEvent(self.h, event.h)
 
 proc fcQScrollArea_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QScrollAreaVTable](fcQScrollArea_vdata(self)[])
@@ -921,26 +934,17 @@ proc fcQScrollArea_vtable_callback_childEvent(self: pointer, event: pointer): vo
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
-proc QScrollAreacustomEvent*(self: gen_qscrollarea_types.QScrollArea, event: gen_qcoreevent_types.QEvent): void =
-  fcQScrollArea_virtualbase_customEvent(self.h, event.h)
-
 proc fcQScrollArea_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QScrollAreaVTable](fcQScrollArea_vdata(self)[])
   let self = QScrollArea(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
-proc QScrollAreaconnectNotify*(self: gen_qscrollarea_types.QScrollArea, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQScrollArea_virtualbase_connectNotify(self.h, signal.h)
-
 proc fcQScrollArea_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QScrollAreaVTable](fcQScrollArea_vdata(self)[])
   let self = QScrollArea(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
-
-proc QScrollAreadisconnectNotify*(self: gen_qscrollarea_types.QScrollArea, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQScrollArea_virtualbase_disconnectNotify(self.h, signal.h)
 
 proc fcQScrollArea_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QScrollAreaVTable](fcQScrollArea_vdata(self)[])
@@ -950,23 +954,129 @@ proc fcQScrollArea_vtable_callback_disconnectNotify(self: pointer, signal: point
 
 type VirtualQScrollArea* {.inheritable.} = ref object of QScrollArea
   vtbl*: cQScrollAreaVTable
+
 method metaObject*(self: VirtualQScrollArea): gen_qobjectdefs_types.QMetaObject {.base.} =
   QScrollAreametaObject(self[])
+method metacast*(self: VirtualQScrollArea, param1: cstring): pointer {.base.} =
+  QScrollAreametacast(self[], param1)
+method metacall*(self: VirtualQScrollArea, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QScrollAreametacall(self[], param1, param2, param3)
+method sizeHint*(self: VirtualQScrollArea): gen_qsize_types.QSize {.base.} =
+  QScrollAreasizeHint(self[])
+method focusNextPrevChild*(self: VirtualQScrollArea, next: bool): bool {.base.} =
+  QScrollAreafocusNextPrevChild(self[], next)
+method event*(self: VirtualQScrollArea, param1: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QScrollAreaevent(self[], param1)
+method eventFilter*(self: VirtualQScrollArea, param1: gen_qobject_types.QObject, param2: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QScrollAreaeventFilter(self[], param1, param2)
+method resizeEvent*(self: VirtualQScrollArea, param1: gen_qevent_types.QResizeEvent): void {.base.} =
+  QScrollArearesizeEvent(self[], param1)
+method scrollContentsBy*(self: VirtualQScrollArea, dx: cint, dy: cint): void {.base.} =
+  QScrollAreascrollContentsBy(self[], dx, dy)
+method viewportSizeHint*(self: VirtualQScrollArea): gen_qsize_types.QSize {.base.} =
+  QScrollAreaviewportSizeHint(self[])
+method minimumSizeHint*(self: VirtualQScrollArea): gen_qsize_types.QSize {.base.} =
+  QScrollAreaminimumSizeHint(self[])
+method setupViewport*(self: VirtualQScrollArea, viewport: gen_qwidget_types.QWidget): void {.base.} =
+  QScrollAreasetupViewport(self[], viewport)
+method viewportEvent*(self: VirtualQScrollArea, param1: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QScrollAreaviewportEvent(self[], param1)
+method paintEvent*(self: VirtualQScrollArea, param1: gen_qevent_types.QPaintEvent): void {.base.} =
+  QScrollAreapaintEvent(self[], param1)
+method mousePressEvent*(self: VirtualQScrollArea, param1: gen_qevent_types.QMouseEvent): void {.base.} =
+  QScrollAreamousePressEvent(self[], param1)
+method mouseReleaseEvent*(self: VirtualQScrollArea, param1: gen_qevent_types.QMouseEvent): void {.base.} =
+  QScrollAreamouseReleaseEvent(self[], param1)
+method mouseDoubleClickEvent*(self: VirtualQScrollArea, param1: gen_qevent_types.QMouseEvent): void {.base.} =
+  QScrollAreamouseDoubleClickEvent(self[], param1)
+method mouseMoveEvent*(self: VirtualQScrollArea, param1: gen_qevent_types.QMouseEvent): void {.base.} =
+  QScrollAreamouseMoveEvent(self[], param1)
+method wheelEvent*(self: VirtualQScrollArea, param1: gen_qevent_types.QWheelEvent): void {.base.} =
+  QScrollAreawheelEvent(self[], param1)
+method contextMenuEvent*(self: VirtualQScrollArea, param1: gen_qevent_types.QContextMenuEvent): void {.base.} =
+  QScrollAreacontextMenuEvent(self[], param1)
+method dragEnterEvent*(self: VirtualQScrollArea, param1: gen_qevent_types.QDragEnterEvent): void {.base.} =
+  QScrollAreadragEnterEvent(self[], param1)
+method dragMoveEvent*(self: VirtualQScrollArea, param1: gen_qevent_types.QDragMoveEvent): void {.base.} =
+  QScrollAreadragMoveEvent(self[], param1)
+method dragLeaveEvent*(self: VirtualQScrollArea, param1: gen_qevent_types.QDragLeaveEvent): void {.base.} =
+  QScrollAreadragLeaveEvent(self[], param1)
+method dropEvent*(self: VirtualQScrollArea, param1: gen_qevent_types.QDropEvent): void {.base.} =
+  QScrollAreadropEvent(self[], param1)
+method keyPressEvent*(self: VirtualQScrollArea, param1: gen_qevent_types.QKeyEvent): void {.base.} =
+  QScrollAreakeyPressEvent(self[], param1)
+method changeEvent*(self: VirtualQScrollArea, param1: gen_qcoreevent_types.QEvent): void {.base.} =
+  QScrollAreachangeEvent(self[], param1)
+method initStyleOption*(self: VirtualQScrollArea, option: gen_qstyleoption_types.QStyleOptionFrame): void {.base.} =
+  QScrollAreainitStyleOption(self[], option)
+method devType*(self: VirtualQScrollArea): cint {.base.} =
+  QScrollAreadevType(self[])
+method setVisible*(self: VirtualQScrollArea, visible: bool): void {.base.} =
+  QScrollAreasetVisible(self[], visible)
+method heightForWidth*(self: VirtualQScrollArea, param1: cint): cint {.base.} =
+  QScrollAreaheightForWidth(self[], param1)
+method hasHeightForWidth*(self: VirtualQScrollArea): bool {.base.} =
+  QScrollAreahasHeightForWidth(self[])
+method paintEngine*(self: VirtualQScrollArea): gen_qpaintengine_types.QPaintEngine {.base.} =
+  QScrollAreapaintEngine(self[])
+method keyReleaseEvent*(self: VirtualQScrollArea, event: gen_qevent_types.QKeyEvent): void {.base.} =
+  QScrollAreakeyReleaseEvent(self[], event)
+method focusInEvent*(self: VirtualQScrollArea, event: gen_qevent_types.QFocusEvent): void {.base.} =
+  QScrollAreafocusInEvent(self[], event)
+method focusOutEvent*(self: VirtualQScrollArea, event: gen_qevent_types.QFocusEvent): void {.base.} =
+  QScrollAreafocusOutEvent(self[], event)
+method enterEvent*(self: VirtualQScrollArea, event: gen_qevent_types.QEnterEvent): void {.base.} =
+  QScrollAreaenterEvent(self[], event)
+method leaveEvent*(self: VirtualQScrollArea, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QScrollArealeaveEvent(self[], event)
+method moveEvent*(self: VirtualQScrollArea, event: gen_qevent_types.QMoveEvent): void {.base.} =
+  QScrollAreamoveEvent(self[], event)
+method closeEvent*(self: VirtualQScrollArea, event: gen_qevent_types.QCloseEvent): void {.base.} =
+  QScrollAreacloseEvent(self[], event)
+method tabletEvent*(self: VirtualQScrollArea, event: gen_qevent_types.QTabletEvent): void {.base.} =
+  QScrollAreatabletEvent(self[], event)
+method actionEvent*(self: VirtualQScrollArea, event: gen_qevent_types.QActionEvent): void {.base.} =
+  QScrollAreaactionEvent(self[], event)
+method showEvent*(self: VirtualQScrollArea, event: gen_qevent_types.QShowEvent): void {.base.} =
+  QScrollAreashowEvent(self[], event)
+method hideEvent*(self: VirtualQScrollArea, event: gen_qevent_types.QHideEvent): void {.base.} =
+  QScrollAreahideEvent(self[], event)
+method nativeEvent*(self: VirtualQScrollArea, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
+  QScrollAreanativeEvent(self[], eventType, message, resultVal)
+method metric*(self: VirtualQScrollArea, param1: cint): cint {.base.} =
+  QScrollAreametric(self[], param1)
+method initPainter*(self: VirtualQScrollArea, painter: gen_qpainter_types.QPainter): void {.base.} =
+  QScrollAreainitPainter(self[], painter)
+method redirected*(self: VirtualQScrollArea, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.base.} =
+  QScrollArearedirected(self[], offset)
+method sharedPainter*(self: VirtualQScrollArea): gen_qpainter_types.QPainter {.base.} =
+  QScrollAreasharedPainter(self[])
+method inputMethodEvent*(self: VirtualQScrollArea, param1: gen_qevent_types.QInputMethodEvent): void {.base.} =
+  QScrollAreainputMethodEvent(self[], param1)
+method inputMethodQuery*(self: VirtualQScrollArea, param1: cint): gen_qvariant_types.QVariant {.base.} =
+  QScrollAreainputMethodQuery(self[], param1)
+method timerEvent*(self: VirtualQScrollArea, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QScrollAreatimerEvent(self[], event)
+method childEvent*(self: VirtualQScrollArea, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QScrollAreachildEvent(self[], event)
+method customEvent*(self: VirtualQScrollArea, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QScrollAreacustomEvent(self[], event)
+method connectNotify*(self: VirtualQScrollArea, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QScrollAreaconnectNotify(self[], signal)
+method disconnectNotify*(self: VirtualQScrollArea, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QScrollAreadisconnectNotify(self[], signal)
+
 proc fcQScrollArea_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQScrollArea](fcQScrollArea_vdata(self)[])
   var virtualReturn = inst.metaObject()
   virtualReturn.h
 
-method metacast*(self: VirtualQScrollArea, param1: cstring): pointer {.base.} =
-  QScrollAreametacast(self[], param1)
 proc fcQScrollArea_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQScrollArea](fcQScrollArea_vdata(self)[])
   let slotval1 = (param1)
   var virtualReturn = inst.metacast(slotval1)
   virtualReturn
 
-method metacall*(self: VirtualQScrollArea, param1: cint, param2: cint, param3: pointer): cint {.base.} =
-  QScrollAreametacall(self[], param1, param2, param3)
 proc fcQScrollArea_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQScrollArea](fcQScrollArea_vdata(self)[])
   let slotval1 = cint(param1)
@@ -975,31 +1085,23 @@ proc fcQScrollArea_method_callback_metacall(self: pointer, param1: cint, param2:
   var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
-method sizeHint*(self: VirtualQScrollArea): gen_qsize_types.QSize {.base.} =
-  QScrollAreasizeHint(self[])
 proc fcQScrollArea_method_callback_sizeHint(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQScrollArea](fcQScrollArea_vdata(self)[])
   var virtualReturn = inst.sizeHint()
   virtualReturn.h
 
-method focusNextPrevChild*(self: VirtualQScrollArea, next: bool): bool {.base.} =
-  QScrollAreafocusNextPrevChild(self[], next)
 proc fcQScrollArea_method_callback_focusNextPrevChild(self: pointer, next: bool): bool {.cdecl.} =
   let inst = cast[VirtualQScrollArea](fcQScrollArea_vdata(self)[])
   let slotval1 = next
   var virtualReturn = inst.focusNextPrevChild(slotval1)
   virtualReturn
 
-method event*(self: VirtualQScrollArea, param1: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QScrollAreaevent(self[], param1)
 proc fcQScrollArea_method_callback_event(self: pointer, param1: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQScrollArea](fcQScrollArea_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
-method eventFilter*(self: VirtualQScrollArea, param1: gen_qobject_types.QObject, param2: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QScrollAreaeventFilter(self[], param1, param2)
 proc fcQScrollArea_method_callback_eventFilter(self: pointer, param1: pointer, param2: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQScrollArea](fcQScrollArea_vdata(self)[])
   let slotval1 = gen_qobject_types.QObject(h: param1, owned: false)
@@ -1007,263 +1109,189 @@ proc fcQScrollArea_method_callback_eventFilter(self: pointer, param1: pointer, p
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
-method resizeEvent*(self: VirtualQScrollArea, param1: gen_qevent_types.QResizeEvent): void {.base.} =
-  QScrollArearesizeEvent(self[], param1)
 proc fcQScrollArea_method_callback_resizeEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQScrollArea](fcQScrollArea_vdata(self)[])
   let slotval1 = gen_qevent_types.QResizeEvent(h: param1, owned: false)
   inst.resizeEvent(slotval1)
 
-method scrollContentsBy*(self: VirtualQScrollArea, dx: cint, dy: cint): void {.base.} =
-  QScrollAreascrollContentsBy(self[], dx, dy)
 proc fcQScrollArea_method_callback_scrollContentsBy(self: pointer, dx: cint, dy: cint): void {.cdecl.} =
   let inst = cast[VirtualQScrollArea](fcQScrollArea_vdata(self)[])
   let slotval1 = dx
   let slotval2 = dy
   inst.scrollContentsBy(slotval1, slotval2)
 
-method viewportSizeHint*(self: VirtualQScrollArea): gen_qsize_types.QSize {.base.} =
-  QScrollAreaviewportSizeHint(self[])
 proc fcQScrollArea_method_callback_viewportSizeHint(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQScrollArea](fcQScrollArea_vdata(self)[])
   var virtualReturn = inst.viewportSizeHint()
   virtualReturn.h
 
-method minimumSizeHint*(self: VirtualQScrollArea): gen_qsize_types.QSize {.base.} =
-  QScrollAreaminimumSizeHint(self[])
 proc fcQScrollArea_method_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQScrollArea](fcQScrollArea_vdata(self)[])
   var virtualReturn = inst.minimumSizeHint()
   virtualReturn.h
 
-method setupViewport*(self: VirtualQScrollArea, viewport: gen_qwidget_types.QWidget): void {.base.} =
-  QScrollAreasetupViewport(self[], viewport)
 proc fcQScrollArea_method_callback_setupViewport(self: pointer, viewport: pointer): void {.cdecl.} =
   let inst = cast[VirtualQScrollArea](fcQScrollArea_vdata(self)[])
   let slotval1 = gen_qwidget_types.QWidget(h: viewport, owned: false)
   inst.setupViewport(slotval1)
 
-method viewportEvent*(self: VirtualQScrollArea, param1: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QScrollAreaviewportEvent(self[], param1)
 proc fcQScrollArea_method_callback_viewportEvent(self: pointer, param1: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQScrollArea](fcQScrollArea_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
   var virtualReturn = inst.viewportEvent(slotval1)
   virtualReturn
 
-method paintEvent*(self: VirtualQScrollArea, param1: gen_qevent_types.QPaintEvent): void {.base.} =
-  QScrollAreapaintEvent(self[], param1)
 proc fcQScrollArea_method_callback_paintEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQScrollArea](fcQScrollArea_vdata(self)[])
   let slotval1 = gen_qevent_types.QPaintEvent(h: param1, owned: false)
   inst.paintEvent(slotval1)
 
-method mousePressEvent*(self: VirtualQScrollArea, param1: gen_qevent_types.QMouseEvent): void {.base.} =
-  QScrollAreamousePressEvent(self[], param1)
 proc fcQScrollArea_method_callback_mousePressEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQScrollArea](fcQScrollArea_vdata(self)[])
   let slotval1 = gen_qevent_types.QMouseEvent(h: param1, owned: false)
   inst.mousePressEvent(slotval1)
 
-method mouseReleaseEvent*(self: VirtualQScrollArea, param1: gen_qevent_types.QMouseEvent): void {.base.} =
-  QScrollAreamouseReleaseEvent(self[], param1)
 proc fcQScrollArea_method_callback_mouseReleaseEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQScrollArea](fcQScrollArea_vdata(self)[])
   let slotval1 = gen_qevent_types.QMouseEvent(h: param1, owned: false)
   inst.mouseReleaseEvent(slotval1)
 
-method mouseDoubleClickEvent*(self: VirtualQScrollArea, param1: gen_qevent_types.QMouseEvent): void {.base.} =
-  QScrollAreamouseDoubleClickEvent(self[], param1)
 proc fcQScrollArea_method_callback_mouseDoubleClickEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQScrollArea](fcQScrollArea_vdata(self)[])
   let slotval1 = gen_qevent_types.QMouseEvent(h: param1, owned: false)
   inst.mouseDoubleClickEvent(slotval1)
 
-method mouseMoveEvent*(self: VirtualQScrollArea, param1: gen_qevent_types.QMouseEvent): void {.base.} =
-  QScrollAreamouseMoveEvent(self[], param1)
 proc fcQScrollArea_method_callback_mouseMoveEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQScrollArea](fcQScrollArea_vdata(self)[])
   let slotval1 = gen_qevent_types.QMouseEvent(h: param1, owned: false)
   inst.mouseMoveEvent(slotval1)
 
-method wheelEvent*(self: VirtualQScrollArea, param1: gen_qevent_types.QWheelEvent): void {.base.} =
-  QScrollAreawheelEvent(self[], param1)
 proc fcQScrollArea_method_callback_wheelEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQScrollArea](fcQScrollArea_vdata(self)[])
   let slotval1 = gen_qevent_types.QWheelEvent(h: param1, owned: false)
   inst.wheelEvent(slotval1)
 
-method contextMenuEvent*(self: VirtualQScrollArea, param1: gen_qevent_types.QContextMenuEvent): void {.base.} =
-  QScrollAreacontextMenuEvent(self[], param1)
 proc fcQScrollArea_method_callback_contextMenuEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQScrollArea](fcQScrollArea_vdata(self)[])
   let slotval1 = gen_qevent_types.QContextMenuEvent(h: param1, owned: false)
   inst.contextMenuEvent(slotval1)
 
-method dragEnterEvent*(self: VirtualQScrollArea, param1: gen_qevent_types.QDragEnterEvent): void {.base.} =
-  QScrollAreadragEnterEvent(self[], param1)
 proc fcQScrollArea_method_callback_dragEnterEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQScrollArea](fcQScrollArea_vdata(self)[])
   let slotval1 = gen_qevent_types.QDragEnterEvent(h: param1, owned: false)
   inst.dragEnterEvent(slotval1)
 
-method dragMoveEvent*(self: VirtualQScrollArea, param1: gen_qevent_types.QDragMoveEvent): void {.base.} =
-  QScrollAreadragMoveEvent(self[], param1)
 proc fcQScrollArea_method_callback_dragMoveEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQScrollArea](fcQScrollArea_vdata(self)[])
   let slotval1 = gen_qevent_types.QDragMoveEvent(h: param1, owned: false)
   inst.dragMoveEvent(slotval1)
 
-method dragLeaveEvent*(self: VirtualQScrollArea, param1: gen_qevent_types.QDragLeaveEvent): void {.base.} =
-  QScrollAreadragLeaveEvent(self[], param1)
 proc fcQScrollArea_method_callback_dragLeaveEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQScrollArea](fcQScrollArea_vdata(self)[])
   let slotval1 = gen_qevent_types.QDragLeaveEvent(h: param1, owned: false)
   inst.dragLeaveEvent(slotval1)
 
-method dropEvent*(self: VirtualQScrollArea, param1: gen_qevent_types.QDropEvent): void {.base.} =
-  QScrollAreadropEvent(self[], param1)
 proc fcQScrollArea_method_callback_dropEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQScrollArea](fcQScrollArea_vdata(self)[])
   let slotval1 = gen_qevent_types.QDropEvent(h: param1, owned: false)
   inst.dropEvent(slotval1)
 
-method keyPressEvent*(self: VirtualQScrollArea, param1: gen_qevent_types.QKeyEvent): void {.base.} =
-  QScrollAreakeyPressEvent(self[], param1)
 proc fcQScrollArea_method_callback_keyPressEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQScrollArea](fcQScrollArea_vdata(self)[])
   let slotval1 = gen_qevent_types.QKeyEvent(h: param1, owned: false)
   inst.keyPressEvent(slotval1)
 
-method changeEvent*(self: VirtualQScrollArea, param1: gen_qcoreevent_types.QEvent): void {.base.} =
-  QScrollAreachangeEvent(self[], param1)
 proc fcQScrollArea_method_callback_changeEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQScrollArea](fcQScrollArea_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
   inst.changeEvent(slotval1)
 
-method initStyleOption*(self: VirtualQScrollArea, option: gen_qstyleoption_types.QStyleOptionFrame): void {.base.} =
-  QScrollAreainitStyleOption(self[], option)
 proc fcQScrollArea_method_callback_initStyleOption(self: pointer, option: pointer): void {.cdecl.} =
   let inst = cast[VirtualQScrollArea](fcQScrollArea_vdata(self)[])
   let slotval1 = gen_qstyleoption_types.QStyleOptionFrame(h: option, owned: false)
   inst.initStyleOption(slotval1)
 
-method devType*(self: VirtualQScrollArea): cint {.base.} =
-  QScrollAreadevType(self[])
 proc fcQScrollArea_method_callback_devType(self: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQScrollArea](fcQScrollArea_vdata(self)[])
   var virtualReturn = inst.devType()
   virtualReturn
 
-method setVisible*(self: VirtualQScrollArea, visible: bool): void {.base.} =
-  QScrollAreasetVisible(self[], visible)
 proc fcQScrollArea_method_callback_setVisible(self: pointer, visible: bool): void {.cdecl.} =
   let inst = cast[VirtualQScrollArea](fcQScrollArea_vdata(self)[])
   let slotval1 = visible
   inst.setVisible(slotval1)
 
-method heightForWidth*(self: VirtualQScrollArea, param1: cint): cint {.base.} =
-  QScrollAreaheightForWidth(self[], param1)
 proc fcQScrollArea_method_callback_heightForWidth(self: pointer, param1: cint): cint {.cdecl.} =
   let inst = cast[VirtualQScrollArea](fcQScrollArea_vdata(self)[])
   let slotval1 = param1
   var virtualReturn = inst.heightForWidth(slotval1)
   virtualReturn
 
-method hasHeightForWidth*(self: VirtualQScrollArea): bool {.base.} =
-  QScrollAreahasHeightForWidth(self[])
 proc fcQScrollArea_method_callback_hasHeightForWidth(self: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQScrollArea](fcQScrollArea_vdata(self)[])
   var virtualReturn = inst.hasHeightForWidth()
   virtualReturn
 
-method paintEngine*(self: VirtualQScrollArea): gen_qpaintengine_types.QPaintEngine {.base.} =
-  QScrollAreapaintEngine(self[])
 proc fcQScrollArea_method_callback_paintEngine(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQScrollArea](fcQScrollArea_vdata(self)[])
   var virtualReturn = inst.paintEngine()
   virtualReturn.h
 
-method keyReleaseEvent*(self: VirtualQScrollArea, event: gen_qevent_types.QKeyEvent): void {.base.} =
-  QScrollAreakeyReleaseEvent(self[], event)
 proc fcQScrollArea_method_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQScrollArea](fcQScrollArea_vdata(self)[])
   let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   inst.keyReleaseEvent(slotval1)
 
-method focusInEvent*(self: VirtualQScrollArea, event: gen_qevent_types.QFocusEvent): void {.base.} =
-  QScrollAreafocusInEvent(self[], event)
 proc fcQScrollArea_method_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQScrollArea](fcQScrollArea_vdata(self)[])
   let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   inst.focusInEvent(slotval1)
 
-method focusOutEvent*(self: VirtualQScrollArea, event: gen_qevent_types.QFocusEvent): void {.base.} =
-  QScrollAreafocusOutEvent(self[], event)
 proc fcQScrollArea_method_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQScrollArea](fcQScrollArea_vdata(self)[])
   let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   inst.focusOutEvent(slotval1)
 
-method enterEvent*(self: VirtualQScrollArea, event: gen_qevent_types.QEnterEvent): void {.base.} =
-  QScrollAreaenterEvent(self[], event)
 proc fcQScrollArea_method_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQScrollArea](fcQScrollArea_vdata(self)[])
   let slotval1 = gen_qevent_types.QEnterEvent(h: event, owned: false)
   inst.enterEvent(slotval1)
 
-method leaveEvent*(self: VirtualQScrollArea, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QScrollArealeaveEvent(self[], event)
 proc fcQScrollArea_method_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQScrollArea](fcQScrollArea_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.leaveEvent(slotval1)
 
-method moveEvent*(self: VirtualQScrollArea, event: gen_qevent_types.QMoveEvent): void {.base.} =
-  QScrollAreamoveEvent(self[], event)
 proc fcQScrollArea_method_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQScrollArea](fcQScrollArea_vdata(self)[])
   let slotval1 = gen_qevent_types.QMoveEvent(h: event, owned: false)
   inst.moveEvent(slotval1)
 
-method closeEvent*(self: VirtualQScrollArea, event: gen_qevent_types.QCloseEvent): void {.base.} =
-  QScrollAreacloseEvent(self[], event)
 proc fcQScrollArea_method_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQScrollArea](fcQScrollArea_vdata(self)[])
   let slotval1 = gen_qevent_types.QCloseEvent(h: event, owned: false)
   inst.closeEvent(slotval1)
 
-method tabletEvent*(self: VirtualQScrollArea, event: gen_qevent_types.QTabletEvent): void {.base.} =
-  QScrollAreatabletEvent(self[], event)
 proc fcQScrollArea_method_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQScrollArea](fcQScrollArea_vdata(self)[])
   let slotval1 = gen_qevent_types.QTabletEvent(h: event, owned: false)
   inst.tabletEvent(slotval1)
 
-method actionEvent*(self: VirtualQScrollArea, event: gen_qevent_types.QActionEvent): void {.base.} =
-  QScrollAreaactionEvent(self[], event)
 proc fcQScrollArea_method_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQScrollArea](fcQScrollArea_vdata(self)[])
   let slotval1 = gen_qevent_types.QActionEvent(h: event, owned: false)
   inst.actionEvent(slotval1)
 
-method showEvent*(self: VirtualQScrollArea, event: gen_qevent_types.QShowEvent): void {.base.} =
-  QScrollAreashowEvent(self[], event)
 proc fcQScrollArea_method_callback_showEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQScrollArea](fcQScrollArea_vdata(self)[])
   let slotval1 = gen_qevent_types.QShowEvent(h: event, owned: false)
   inst.showEvent(slotval1)
 
-method hideEvent*(self: VirtualQScrollArea, event: gen_qevent_types.QHideEvent): void {.base.} =
-  QScrollAreahideEvent(self[], event)
 proc fcQScrollArea_method_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQScrollArea](fcQScrollArea_vdata(self)[])
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   inst.hideEvent(slotval1)
 
-method nativeEvent*(self: VirtualQScrollArea, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
-  QScrollAreanativeEvent(self[], eventType, message, resultVal)
 proc fcQScrollArea_method_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
   let inst = cast[VirtualQScrollArea](fcQScrollArea_vdata(self)[])
   var veventType_bytearray = eventType
@@ -1275,85 +1303,64 @@ proc fcQScrollArea_method_callback_nativeEvent(self: pointer, eventType: struct_
   var virtualReturn = inst.nativeEvent(slotval1, slotval2, slotval3)
   virtualReturn
 
-method metric*(self: VirtualQScrollArea, param1: cint): cint {.base.} =
-  QScrollAreametric(self[], param1)
 proc fcQScrollArea_method_callback_metric(self: pointer, param1: cint): cint {.cdecl.} =
   let inst = cast[VirtualQScrollArea](fcQScrollArea_vdata(self)[])
   let slotval1 = cint(param1)
   var virtualReturn = inst.metric(slotval1)
   virtualReturn
 
-method initPainter*(self: VirtualQScrollArea, painter: gen_qpainter_types.QPainter): void {.base.} =
-  QScrollAreainitPainter(self[], painter)
 proc fcQScrollArea_method_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
   let inst = cast[VirtualQScrollArea](fcQScrollArea_vdata(self)[])
   let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
   inst.initPainter(slotval1)
 
-method redirected*(self: VirtualQScrollArea, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.base.} =
-  QScrollArearedirected(self[], offset)
 proc fcQScrollArea_method_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQScrollArea](fcQScrollArea_vdata(self)[])
   let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
   var virtualReturn = inst.redirected(slotval1)
   virtualReturn.h
 
-method sharedPainter*(self: VirtualQScrollArea): gen_qpainter_types.QPainter {.base.} =
-  QScrollAreasharedPainter(self[])
 proc fcQScrollArea_method_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQScrollArea](fcQScrollArea_vdata(self)[])
   var virtualReturn = inst.sharedPainter()
   virtualReturn.h
 
-method inputMethodEvent*(self: VirtualQScrollArea, param1: gen_qevent_types.QInputMethodEvent): void {.base.} =
-  QScrollAreainputMethodEvent(self[], param1)
 proc fcQScrollArea_method_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQScrollArea](fcQScrollArea_vdata(self)[])
   let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1, owned: false)
   inst.inputMethodEvent(slotval1)
 
-method inputMethodQuery*(self: VirtualQScrollArea, param1: cint): gen_qvariant_types.QVariant {.base.} =
-  QScrollAreainputMethodQuery(self[], param1)
 proc fcQScrollArea_method_callback_inputMethodQuery(self: pointer, param1: cint): pointer {.cdecl.} =
   let inst = cast[VirtualQScrollArea](fcQScrollArea_vdata(self)[])
   let slotval1 = cint(param1)
   var virtualReturn = inst.inputMethodQuery(slotval1)
   virtualReturn.h
 
-method timerEvent*(self: VirtualQScrollArea, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
-  QScrollAreatimerEvent(self[], event)
 proc fcQScrollArea_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQScrollArea](fcQScrollArea_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
-method childEvent*(self: VirtualQScrollArea, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
-  QScrollAreachildEvent(self[], event)
 proc fcQScrollArea_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQScrollArea](fcQScrollArea_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
-method customEvent*(self: VirtualQScrollArea, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QScrollAreacustomEvent(self[], event)
 proc fcQScrollArea_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQScrollArea](fcQScrollArea_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
-method connectNotify*(self: VirtualQScrollArea, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QScrollAreaconnectNotify(self[], signal)
 proc fcQScrollArea_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQScrollArea](fcQScrollArea_vdata(self)[])
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
-method disconnectNotify*(self: VirtualQScrollArea, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QScrollAreadisconnectNotify(self[], signal)
 proc fcQScrollArea_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQScrollArea](fcQScrollArea_vdata(self)[])
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
+
 
 proc setViewportMargins*(self: gen_qscrollarea_types.QScrollArea, left: cint, top: cint, right: cint, bottom: cint): void =
   fcQScrollArea_protectedbase_setViewportMargins(self.h, left, top, right, bottom)

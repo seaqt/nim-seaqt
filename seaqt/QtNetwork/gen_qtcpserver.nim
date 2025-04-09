@@ -94,6 +94,7 @@ proc fcQTcpServer_waitForNewConnection1(self: pointer, msec: cint): bool {.impor
 proc fcQTcpServer_waitForNewConnection2(self: pointer, msec: cint, timedOut: ptr bool): bool {.importc: "QTcpServer_waitForNewConnection2".}
 proc fcQTcpServer_vdata(self: pointer): ptr pointer {.importc: "QTcpServer_vdata".}
 proc fvdata_cQTcpServer(self: pointer): pointer {.importc: "vdata_QTcpServer".}
+
 type cQTcpServerVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -221,7 +222,7 @@ proc fcQTcpServer_slot_callback_newConnection_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QTcpServernewConnectionSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onnewConnection*(self: gen_qtcpserver_types.QTcpServer, slot: QTcpServernewConnectionSlot) =
+proc onNewConnection*(self: gen_qtcpserver_types.QTcpServer, slot: QTcpServernewConnectionSlot) =
   var tmp = new QTcpServernewConnectionSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -241,7 +242,7 @@ proc fcQTcpServer_slot_callback_acceptError_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QTcpServeracceptErrorSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onacceptError*(self: gen_qtcpserver_types.QTcpServer, slot: QTcpServeracceptErrorSlot) =
+proc onAcceptError*(self: gen_qtcpserver_types.QTcpServer, slot: QTcpServeracceptErrorSlot) =
   var tmp = new QTcpServeracceptErrorSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -284,6 +285,7 @@ type QTcpServerchildEventProc* = proc(self: QTcpServer, event: gen_qcoreevent_ty
 type QTcpServercustomEventProc* = proc(self: QTcpServer, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QTcpServerconnectNotifyProc* = proc(self: QTcpServer, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QTcpServerdisconnectNotifyProc* = proc(self: QTcpServer, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+
 type QTcpServerVTable* {.inheritable, pure.} = object
   vtbl: cQTcpServerVTable
   metaObject*: QTcpServermetaObjectProc
@@ -299,8 +301,46 @@ type QTcpServerVTable* {.inheritable, pure.} = object
   customEvent*: QTcpServercustomEventProc
   connectNotify*: QTcpServerconnectNotifyProc
   disconnectNotify*: QTcpServerdisconnectNotifyProc
+
 proc QTcpServermetaObject*(self: gen_qtcpserver_types.QTcpServer): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQTcpServer_virtualbase_metaObject(self.h), owned: false)
+
+proc QTcpServermetacast*(self: gen_qtcpserver_types.QTcpServer, param1: cstring): pointer =
+  fcQTcpServer_virtualbase_metacast(self.h, param1)
+
+proc QTcpServermetacall*(self: gen_qtcpserver_types.QTcpServer, param1: cint, param2: cint, param3: pointer): cint =
+  fcQTcpServer_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+proc QTcpServerhasPendingConnections*(self: gen_qtcpserver_types.QTcpServer): bool =
+  fcQTcpServer_virtualbase_hasPendingConnections(self.h)
+
+proc QTcpServernextPendingConnection*(self: gen_qtcpserver_types.QTcpServer): gen_qtcpsocket_types.QTcpSocket =
+  gen_qtcpsocket_types.QTcpSocket(h: fcQTcpServer_virtualbase_nextPendingConnection(self.h), owned: false)
+
+proc QTcpServerincomingConnection*(self: gen_qtcpserver_types.QTcpServer, handle: uint): void =
+  fcQTcpServer_virtualbase_incomingConnection(self.h, handle)
+
+proc QTcpServerevent*(self: gen_qtcpserver_types.QTcpServer, event: gen_qcoreevent_types.QEvent): bool =
+  fcQTcpServer_virtualbase_event(self.h, event.h)
+
+proc QTcpServereventFilter*(self: gen_qtcpserver_types.QTcpServer, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
+  fcQTcpServer_virtualbase_eventFilter(self.h, watched.h, event.h)
+
+proc QTcpServertimerEvent*(self: gen_qtcpserver_types.QTcpServer, event: gen_qcoreevent_types.QTimerEvent): void =
+  fcQTcpServer_virtualbase_timerEvent(self.h, event.h)
+
+proc QTcpServerchildEvent*(self: gen_qtcpserver_types.QTcpServer, event: gen_qcoreevent_types.QChildEvent): void =
+  fcQTcpServer_virtualbase_childEvent(self.h, event.h)
+
+proc QTcpServercustomEvent*(self: gen_qtcpserver_types.QTcpServer, event: gen_qcoreevent_types.QEvent): void =
+  fcQTcpServer_virtualbase_customEvent(self.h, event.h)
+
+proc QTcpServerconnectNotify*(self: gen_qtcpserver_types.QTcpServer, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQTcpServer_virtualbase_connectNotify(self.h, signal.h)
+
+proc QTcpServerdisconnectNotify*(self: gen_qtcpserver_types.QTcpServer, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQTcpServer_virtualbase_disconnectNotify(self.h, signal.h)
+
 
 proc fcQTcpServer_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QTcpServerVTable](fcQTcpServer_vdata(self)[])
@@ -311,18 +351,12 @@ proc fcQTcpServer_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QTcpServermetacast*(self: gen_qtcpserver_types.QTcpServer, param1: cstring): pointer =
-  fcQTcpServer_virtualbase_metacast(self.h, param1)
-
 proc fcQTcpServer_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QTcpServerVTable](fcQTcpServer_vdata(self)[])
   let self = QTcpServer(h: self)
   let slotval1 = (param1)
   var virtualReturn = vtbl[].metacast(self, slotval1)
   virtualReturn
-
-proc QTcpServermetacall*(self: gen_qtcpserver_types.QTcpServer, param1: cint, param2: cint, param3: pointer): cint =
-  fcQTcpServer_virtualbase_metacall(self.h, cint(param1), param2, param3)
 
 proc fcQTcpServer_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QTcpServerVTable](fcQTcpServer_vdata(self)[])
@@ -333,17 +367,11 @@ proc fcQTcpServer_vtable_callback_metacall(self: pointer, param1: cint, param2: 
   var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QTcpServerhasPendingConnections*(self: gen_qtcpserver_types.QTcpServer): bool =
-  fcQTcpServer_virtualbase_hasPendingConnections(self.h)
-
 proc fcQTcpServer_vtable_callback_hasPendingConnections(self: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QTcpServerVTable](fcQTcpServer_vdata(self)[])
   let self = QTcpServer(h: self)
   var virtualReturn = vtbl[].hasPendingConnections(self)
   virtualReturn
-
-proc QTcpServernextPendingConnection*(self: gen_qtcpserver_types.QTcpServer): gen_qtcpsocket_types.QTcpSocket =
-  gen_qtcpsocket_types.QTcpSocket(h: fcQTcpServer_virtualbase_nextPendingConnection(self.h), owned: false)
 
 proc fcQTcpServer_vtable_callback_nextPendingConnection(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QTcpServerVTable](fcQTcpServer_vdata(self)[])
@@ -354,17 +382,11 @@ proc fcQTcpServer_vtable_callback_nextPendingConnection(self: pointer): pointer 
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QTcpServerincomingConnection*(self: gen_qtcpserver_types.QTcpServer, handle: uint): void =
-  fcQTcpServer_virtualbase_incomingConnection(self.h, handle)
-
 proc fcQTcpServer_vtable_callback_incomingConnection(self: pointer, handle: uint): void {.cdecl.} =
   let vtbl = cast[ptr QTcpServerVTable](fcQTcpServer_vdata(self)[])
   let self = QTcpServer(h: self)
   let slotval1 = handle
   vtbl[].incomingConnection(self, slotval1)
-
-proc QTcpServerevent*(self: gen_qtcpserver_types.QTcpServer, event: gen_qcoreevent_types.QEvent): bool =
-  fcQTcpServer_virtualbase_event(self.h, event.h)
 
 proc fcQTcpServer_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QTcpServerVTable](fcQTcpServer_vdata(self)[])
@@ -372,9 +394,6 @@ proc fcQTcpServer_vtable_callback_event(self: pointer, event: pointer): bool {.c
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
-
-proc QTcpServereventFilter*(self: gen_qtcpserver_types.QTcpServer, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
-  fcQTcpServer_virtualbase_eventFilter(self.h, watched.h, event.h)
 
 proc fcQTcpServer_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QTcpServerVTable](fcQTcpServer_vdata(self)[])
@@ -384,17 +403,11 @@ proc fcQTcpServer_vtable_callback_eventFilter(self: pointer, watched: pointer, e
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
-proc QTcpServertimerEvent*(self: gen_qtcpserver_types.QTcpServer, event: gen_qcoreevent_types.QTimerEvent): void =
-  fcQTcpServer_virtualbase_timerEvent(self.h, event.h)
-
 proc fcQTcpServer_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTcpServerVTable](fcQTcpServer_vdata(self)[])
   let self = QTcpServer(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
-
-proc QTcpServerchildEvent*(self: gen_qtcpserver_types.QTcpServer, event: gen_qcoreevent_types.QChildEvent): void =
-  fcQTcpServer_virtualbase_childEvent(self.h, event.h)
 
 proc fcQTcpServer_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTcpServerVTable](fcQTcpServer_vdata(self)[])
@@ -402,26 +415,17 @@ proc fcQTcpServer_vtable_callback_childEvent(self: pointer, event: pointer): voi
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
-proc QTcpServercustomEvent*(self: gen_qtcpserver_types.QTcpServer, event: gen_qcoreevent_types.QEvent): void =
-  fcQTcpServer_virtualbase_customEvent(self.h, event.h)
-
 proc fcQTcpServer_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTcpServerVTable](fcQTcpServer_vdata(self)[])
   let self = QTcpServer(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
-proc QTcpServerconnectNotify*(self: gen_qtcpserver_types.QTcpServer, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQTcpServer_virtualbase_connectNotify(self.h, signal.h)
-
 proc fcQTcpServer_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTcpServerVTable](fcQTcpServer_vdata(self)[])
   let self = QTcpServer(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
-
-proc QTcpServerdisconnectNotify*(self: gen_qtcpserver_types.QTcpServer, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQTcpServer_virtualbase_disconnectNotify(self.h, signal.h)
 
 proc fcQTcpServer_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTcpServerVTable](fcQTcpServer_vdata(self)[])
@@ -431,23 +435,45 @@ proc fcQTcpServer_vtable_callback_disconnectNotify(self: pointer, signal: pointe
 
 type VirtualQTcpServer* {.inheritable.} = ref object of QTcpServer
   vtbl*: cQTcpServerVTable
+
 method metaObject*(self: VirtualQTcpServer): gen_qobjectdefs_types.QMetaObject {.base.} =
   QTcpServermetaObject(self[])
+method metacast*(self: VirtualQTcpServer, param1: cstring): pointer {.base.} =
+  QTcpServermetacast(self[], param1)
+method metacall*(self: VirtualQTcpServer, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QTcpServermetacall(self[], param1, param2, param3)
+method hasPendingConnections*(self: VirtualQTcpServer): bool {.base.} =
+  QTcpServerhasPendingConnections(self[])
+method nextPendingConnection*(self: VirtualQTcpServer): gen_qtcpsocket_types.QTcpSocket {.base.} =
+  QTcpServernextPendingConnection(self[])
+method incomingConnection*(self: VirtualQTcpServer, handle: uint): void {.base.} =
+  QTcpServerincomingConnection(self[], handle)
+method event*(self: VirtualQTcpServer, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QTcpServerevent(self[], event)
+method eventFilter*(self: VirtualQTcpServer, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QTcpServereventFilter(self[], watched, event)
+method timerEvent*(self: VirtualQTcpServer, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QTcpServertimerEvent(self[], event)
+method childEvent*(self: VirtualQTcpServer, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QTcpServerchildEvent(self[], event)
+method customEvent*(self: VirtualQTcpServer, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QTcpServercustomEvent(self[], event)
+method connectNotify*(self: VirtualQTcpServer, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QTcpServerconnectNotify(self[], signal)
+method disconnectNotify*(self: VirtualQTcpServer, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QTcpServerdisconnectNotify(self[], signal)
+
 proc fcQTcpServer_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQTcpServer](fcQTcpServer_vdata(self)[])
   var virtualReturn = inst.metaObject()
   virtualReturn.h
 
-method metacast*(self: VirtualQTcpServer, param1: cstring): pointer {.base.} =
-  QTcpServermetacast(self[], param1)
 proc fcQTcpServer_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQTcpServer](fcQTcpServer_vdata(self)[])
   let slotval1 = (param1)
   var virtualReturn = inst.metacast(slotval1)
   virtualReturn
 
-method metacall*(self: VirtualQTcpServer, param1: cint, param2: cint, param3: pointer): cint {.base.} =
-  QTcpServermetacall(self[], param1, param2, param3)
 proc fcQTcpServer_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQTcpServer](fcQTcpServer_vdata(self)[])
   let slotval1 = cint(param1)
@@ -456,37 +482,27 @@ proc fcQTcpServer_method_callback_metacall(self: pointer, param1: cint, param2: 
   var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
-method hasPendingConnections*(self: VirtualQTcpServer): bool {.base.} =
-  QTcpServerhasPendingConnections(self[])
 proc fcQTcpServer_method_callback_hasPendingConnections(self: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQTcpServer](fcQTcpServer_vdata(self)[])
   var virtualReturn = inst.hasPendingConnections()
   virtualReturn
 
-method nextPendingConnection*(self: VirtualQTcpServer): gen_qtcpsocket_types.QTcpSocket {.base.} =
-  QTcpServernextPendingConnection(self[])
 proc fcQTcpServer_method_callback_nextPendingConnection(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQTcpServer](fcQTcpServer_vdata(self)[])
   var virtualReturn = inst.nextPendingConnection()
   virtualReturn.h
 
-method incomingConnection*(self: VirtualQTcpServer, handle: uint): void {.base.} =
-  QTcpServerincomingConnection(self[], handle)
 proc fcQTcpServer_method_callback_incomingConnection(self: pointer, handle: uint): void {.cdecl.} =
   let inst = cast[VirtualQTcpServer](fcQTcpServer_vdata(self)[])
   let slotval1 = handle
   inst.incomingConnection(slotval1)
 
-method event*(self: VirtualQTcpServer, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QTcpServerevent(self[], event)
 proc fcQTcpServer_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQTcpServer](fcQTcpServer_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
-method eventFilter*(self: VirtualQTcpServer, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QTcpServereventFilter(self[], watched, event)
 proc fcQTcpServer_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQTcpServer](fcQTcpServer_vdata(self)[])
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
@@ -494,40 +510,31 @@ proc fcQTcpServer_method_callback_eventFilter(self: pointer, watched: pointer, e
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
-method timerEvent*(self: VirtualQTcpServer, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
-  QTcpServertimerEvent(self[], event)
 proc fcQTcpServer_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTcpServer](fcQTcpServer_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
-method childEvent*(self: VirtualQTcpServer, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
-  QTcpServerchildEvent(self[], event)
 proc fcQTcpServer_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTcpServer](fcQTcpServer_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
-method customEvent*(self: VirtualQTcpServer, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QTcpServercustomEvent(self[], event)
 proc fcQTcpServer_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTcpServer](fcQTcpServer_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
-method connectNotify*(self: VirtualQTcpServer, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QTcpServerconnectNotify(self[], signal)
 proc fcQTcpServer_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTcpServer](fcQTcpServer_vdata(self)[])
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
-method disconnectNotify*(self: VirtualQTcpServer, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QTcpServerdisconnectNotify(self[], signal)
 proc fcQTcpServer_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTcpServer](fcQTcpServer_vdata(self)[])
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
+
 
 proc addPendingConnection*(self: gen_qtcpserver_types.QTcpServer, socket: gen_qtcpsocket_types.QTcpSocket): void =
   fcQTcpServer_protectedbase_addPendingConnection(self.h, socket.h)

@@ -715,6 +715,7 @@ proc fcQStyle_combinedLayoutSpacing4(self: pointer, controls1: cint, controls2: 
 proc fcQStyle_combinedLayoutSpacing5(self: pointer, controls1: cint, controls2: cint, orientation: cint, option: pointer, widget: pointer): cint {.importc: "QStyle_combinedLayoutSpacing5".}
 proc fcQStyle_vdata(self: pointer): ptr pointer {.importc: "QStyle_vdata".}
 proc fvdata_cQStyle(self: pointer): pointer {.importc: "vdata_QStyle".}
+
 type cQStyleVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -948,6 +949,7 @@ type QStylechildEventProc* = proc(self: QStyle, event: gen_qcoreevent_types.QChi
 type QStylecustomEventProc* = proc(self: QStyle, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QStyleconnectNotifyProc* = proc(self: QStyle, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QStyledisconnectNotifyProc* = proc(self: QStyle, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+
 type QStyleVTable* {.inheritable, pure.} = object
   vtbl: cQStyleVTable
   metaObject*: QStylemetaObjectProc
@@ -983,8 +985,67 @@ type QStyleVTable* {.inheritable, pure.} = object
   customEvent*: QStylecustomEventProc
   connectNotify*: QStyleconnectNotifyProc
   disconnectNotify*: QStyledisconnectNotifyProc
+
 proc QStylemetaObject*(self: gen_qstyle_types.QStyle): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQStyle_virtualbase_metaObject(self.h), owned: false)
+
+proc QStylemetacast*(self: gen_qstyle_types.QStyle, param1: cstring): pointer =
+  fcQStyle_virtualbase_metacast(self.h, param1)
+
+proc QStylemetacall*(self: gen_qstyle_types.QStyle, param1: cint, param2: cint, param3: pointer): cint =
+  fcQStyle_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+proc QStylepolish*(self: gen_qstyle_types.QStyle, widget: gen_qwidget_types.QWidget): void =
+  fcQStyle_virtualbase_polish(self.h, widget.h)
+
+proc QStyleunpolish*(self: gen_qstyle_types.QStyle, widget: gen_qwidget_types.QWidget): void =
+  fcQStyle_virtualbase_unpolish(self.h, widget.h)
+
+proc QStylepolish*(self: gen_qstyle_types.QStyle, application: gen_qapplication_types.QApplication): void =
+  fcQStyle_virtualbase_polishWithApplication(self.h, application.h)
+
+proc QStyleunpolish*(self: gen_qstyle_types.QStyle, application: gen_qapplication_types.QApplication): void =
+  fcQStyle_virtualbase_unpolishWithApplication(self.h, application.h)
+
+proc QStylepolish*(self: gen_qstyle_types.QStyle, palette: gen_qpalette_types.QPalette): void =
+  fcQStyle_virtualbase_polishWithPalette(self.h, palette.h)
+
+proc QStyleitemTextRect*(self: gen_qstyle_types.QStyle, fm: gen_qfontmetrics_types.QFontMetrics, r: gen_qrect_types.QRect, flags: cint, enabled: bool, text: openArray[char]): gen_qrect_types.QRect =
+  gen_qrect_types.QRect(h: fcQStyle_virtualbase_itemTextRect(self.h, fm.h, r.h, flags, enabled, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))), owned: true)
+
+proc QStyleitemPixmapRect*(self: gen_qstyle_types.QStyle, r: gen_qrect_types.QRect, flags: cint, pixmap: gen_qpixmap_types.QPixmap): gen_qrect_types.QRect =
+  gen_qrect_types.QRect(h: fcQStyle_virtualbase_itemPixmapRect(self.h, r.h, flags, pixmap.h), owned: true)
+
+proc QStyledrawItemText*(self: gen_qstyle_types.QStyle, painter: gen_qpainter_types.QPainter, rect: gen_qrect_types.QRect, flags: cint, pal: gen_qpalette_types.QPalette, enabled: bool, text: openArray[char], textRole: cint): void =
+  fcQStyle_virtualbase_drawItemText(self.h, painter.h, rect.h, flags, pal.h, enabled, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), cint(textRole))
+
+proc QStyledrawItemPixmap*(self: gen_qstyle_types.QStyle, painter: gen_qpainter_types.QPainter, rect: gen_qrect_types.QRect, alignment: cint, pixmap: gen_qpixmap_types.QPixmap): void =
+  fcQStyle_virtualbase_drawItemPixmap(self.h, painter.h, rect.h, alignment, pixmap.h)
+
+proc QStylestandardPalette*(self: gen_qstyle_types.QStyle): gen_qpalette_types.QPalette =
+  gen_qpalette_types.QPalette(h: fcQStyle_virtualbase_standardPalette(self.h), owned: true)
+
+proc QStyleevent*(self: gen_qstyle_types.QStyle, event: gen_qcoreevent_types.QEvent): bool =
+  fcQStyle_virtualbase_event(self.h, event.h)
+
+proc QStyleeventFilter*(self: gen_qstyle_types.QStyle, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
+  fcQStyle_virtualbase_eventFilter(self.h, watched.h, event.h)
+
+proc QStyletimerEvent*(self: gen_qstyle_types.QStyle, event: gen_qcoreevent_types.QTimerEvent): void =
+  fcQStyle_virtualbase_timerEvent(self.h, event.h)
+
+proc QStylechildEvent*(self: gen_qstyle_types.QStyle, event: gen_qcoreevent_types.QChildEvent): void =
+  fcQStyle_virtualbase_childEvent(self.h, event.h)
+
+proc QStylecustomEvent*(self: gen_qstyle_types.QStyle, event: gen_qcoreevent_types.QEvent): void =
+  fcQStyle_virtualbase_customEvent(self.h, event.h)
+
+proc QStyleconnectNotify*(self: gen_qstyle_types.QStyle, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQStyle_virtualbase_connectNotify(self.h, signal.h)
+
+proc QStyledisconnectNotify*(self: gen_qstyle_types.QStyle, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQStyle_virtualbase_disconnectNotify(self.h, signal.h)
+
 
 proc fcQStyle_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QStyleVTable](fcQStyle_vdata(self)[])
@@ -995,18 +1056,12 @@ proc fcQStyle_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QStylemetacast*(self: gen_qstyle_types.QStyle, param1: cstring): pointer =
-  fcQStyle_virtualbase_metacast(self.h, param1)
-
 proc fcQStyle_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QStyleVTable](fcQStyle_vdata(self)[])
   let self = QStyle(h: self)
   let slotval1 = (param1)
   var virtualReturn = vtbl[].metacast(self, slotval1)
   virtualReturn
-
-proc QStylemetacall*(self: gen_qstyle_types.QStyle, param1: cint, param2: cint, param3: pointer): cint =
-  fcQStyle_virtualbase_metacall(self.h, cint(param1), param2, param3)
 
 proc fcQStyle_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QStyleVTable](fcQStyle_vdata(self)[])
@@ -1017,17 +1072,11 @@ proc fcQStyle_vtable_callback_metacall(self: pointer, param1: cint, param2: cint
   var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QStylepolish*(self: gen_qstyle_types.QStyle, widget: gen_qwidget_types.QWidget): void =
-  fcQStyle_virtualbase_polish(self.h, widget.h)
-
 proc fcQStyle_vtable_callback_polish(self: pointer, widget: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QStyleVTable](fcQStyle_vdata(self)[])
   let self = QStyle(h: self)
   let slotval1 = gen_qwidget_types.QWidget(h: widget, owned: false)
   vtbl[].polish(self, slotval1)
-
-proc QStyleunpolish*(self: gen_qstyle_types.QStyle, widget: gen_qwidget_types.QWidget): void =
-  fcQStyle_virtualbase_unpolish(self.h, widget.h)
 
 proc fcQStyle_vtable_callback_unpolish(self: pointer, widget: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QStyleVTable](fcQStyle_vdata(self)[])
@@ -1035,17 +1084,11 @@ proc fcQStyle_vtable_callback_unpolish(self: pointer, widget: pointer): void {.c
   let slotval1 = gen_qwidget_types.QWidget(h: widget, owned: false)
   vtbl[].unpolish(self, slotval1)
 
-proc QStylepolish*(self: gen_qstyle_types.QStyle, application: gen_qapplication_types.QApplication): void =
-  fcQStyle_virtualbase_polishWithApplication(self.h, application.h)
-
 proc fcQStyle_vtable_callback_polishWithApplication(self: pointer, application: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QStyleVTable](fcQStyle_vdata(self)[])
   let self = QStyle(h: self)
   let slotval1 = gen_qapplication_types.QApplication(h: application, owned: false)
   vtbl[].polishWithApplication(self, slotval1)
-
-proc QStyleunpolish*(self: gen_qstyle_types.QStyle, application: gen_qapplication_types.QApplication): void =
-  fcQStyle_virtualbase_unpolishWithApplication(self.h, application.h)
 
 proc fcQStyle_vtable_callback_unpolishWithApplication(self: pointer, application: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QStyleVTable](fcQStyle_vdata(self)[])
@@ -1053,17 +1096,11 @@ proc fcQStyle_vtable_callback_unpolishWithApplication(self: pointer, application
   let slotval1 = gen_qapplication_types.QApplication(h: application, owned: false)
   vtbl[].unpolishWithApplication(self, slotval1)
 
-proc QStylepolish*(self: gen_qstyle_types.QStyle, palette: gen_qpalette_types.QPalette): void =
-  fcQStyle_virtualbase_polishWithPalette(self.h, palette.h)
-
 proc fcQStyle_vtable_callback_polishWithPalette(self: pointer, palette: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QStyleVTable](fcQStyle_vdata(self)[])
   let self = QStyle(h: self)
   let slotval1 = gen_qpalette_types.QPalette(h: palette, owned: false)
   vtbl[].polishWithPalette(self, slotval1)
-
-proc QStyleitemTextRect*(self: gen_qstyle_types.QStyle, fm: gen_qfontmetrics_types.QFontMetrics, r: gen_qrect_types.QRect, flags: cint, enabled: bool, text: openArray[char]): gen_qrect_types.QRect =
-  gen_qrect_types.QRect(h: fcQStyle_virtualbase_itemTextRect(self.h, fm.h, r.h, flags, enabled, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))), owned: true)
 
 proc fcQStyle_vtable_callback_itemTextRect(self: pointer, fm: pointer, r: pointer, flags: cint, enabled: bool, text: struct_miqt_string): pointer {.cdecl.} =
   let vtbl = cast[ptr QStyleVTable](fcQStyle_vdata(self)[])
@@ -1082,9 +1119,6 @@ proc fcQStyle_vtable_callback_itemTextRect(self: pointer, fm: pointer, r: pointe
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QStyleitemPixmapRect*(self: gen_qstyle_types.QStyle, r: gen_qrect_types.QRect, flags: cint, pixmap: gen_qpixmap_types.QPixmap): gen_qrect_types.QRect =
-  gen_qrect_types.QRect(h: fcQStyle_virtualbase_itemPixmapRect(self.h, r.h, flags, pixmap.h), owned: true)
-
 proc fcQStyle_vtable_callback_itemPixmapRect(self: pointer, r: pointer, flags: cint, pixmap: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QStyleVTable](fcQStyle_vdata(self)[])
   let self = QStyle(h: self)
@@ -1096,9 +1130,6 @@ proc fcQStyle_vtable_callback_itemPixmapRect(self: pointer, r: pointer, flags: c
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
   virtualReturn_h
-
-proc QStyledrawItemText*(self: gen_qstyle_types.QStyle, painter: gen_qpainter_types.QPainter, rect: gen_qrect_types.QRect, flags: cint, pal: gen_qpalette_types.QPalette, enabled: bool, text: openArray[char], textRole: cint): void =
-  fcQStyle_virtualbase_drawItemText(self.h, painter.h, rect.h, flags, pal.h, enabled, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), cint(textRole))
 
 proc fcQStyle_vtable_callback_drawItemText(self: pointer, painter: pointer, rect: pointer, flags: cint, pal: pointer, enabled: bool, text: struct_miqt_string, textRole: cint): void {.cdecl.} =
   let vtbl = cast[ptr QStyleVTable](fcQStyle_vdata(self)[])
@@ -1115,9 +1146,6 @@ proc fcQStyle_vtable_callback_drawItemText(self: pointer, painter: pointer, rect
   let slotval7 = cint(textRole)
   vtbl[].drawItemText(self, slotval1, slotval2, slotval3, slotval4, slotval5, slotval6, slotval7)
 
-proc QStyledrawItemPixmap*(self: gen_qstyle_types.QStyle, painter: gen_qpainter_types.QPainter, rect: gen_qrect_types.QRect, alignment: cint, pixmap: gen_qpixmap_types.QPixmap): void =
-  fcQStyle_virtualbase_drawItemPixmap(self.h, painter.h, rect.h, alignment, pixmap.h)
-
 proc fcQStyle_vtable_callback_drawItemPixmap(self: pointer, painter: pointer, rect: pointer, alignment: cint, pixmap: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QStyleVTable](fcQStyle_vdata(self)[])
   let self = QStyle(h: self)
@@ -1126,9 +1154,6 @@ proc fcQStyle_vtable_callback_drawItemPixmap(self: pointer, painter: pointer, re
   let slotval3 = alignment
   let slotval4 = gen_qpixmap_types.QPixmap(h: pixmap, owned: false)
   vtbl[].drawItemPixmap(self, slotval1, slotval2, slotval3, slotval4)
-
-proc QStylestandardPalette*(self: gen_qstyle_types.QStyle): gen_qpalette_types.QPalette =
-  gen_qpalette_types.QPalette(h: fcQStyle_virtualbase_standardPalette(self.h), owned: true)
 
 proc fcQStyle_vtable_callback_standardPalette(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QStyleVTable](fcQStyle_vdata(self)[])
@@ -1280,18 +1305,12 @@ proc fcQStyle_vtable_callback_layoutSpacing(self: pointer, control1: cint, contr
   var virtualReturn = vtbl[].layoutSpacing(self, slotval1, slotval2, slotval3, slotval4, slotval5)
   virtualReturn
 
-proc QStyleevent*(self: gen_qstyle_types.QStyle, event: gen_qcoreevent_types.QEvent): bool =
-  fcQStyle_virtualbase_event(self.h, event.h)
-
 proc fcQStyle_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QStyleVTable](fcQStyle_vdata(self)[])
   let self = QStyle(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
-
-proc QStyleeventFilter*(self: gen_qstyle_types.QStyle, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
-  fcQStyle_virtualbase_eventFilter(self.h, watched.h, event.h)
 
 proc fcQStyle_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QStyleVTable](fcQStyle_vdata(self)[])
@@ -1301,17 +1320,11 @@ proc fcQStyle_vtable_callback_eventFilter(self: pointer, watched: pointer, event
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
-proc QStyletimerEvent*(self: gen_qstyle_types.QStyle, event: gen_qcoreevent_types.QTimerEvent): void =
-  fcQStyle_virtualbase_timerEvent(self.h, event.h)
-
 proc fcQStyle_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QStyleVTable](fcQStyle_vdata(self)[])
   let self = QStyle(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
-
-proc QStylechildEvent*(self: gen_qstyle_types.QStyle, event: gen_qcoreevent_types.QChildEvent): void =
-  fcQStyle_virtualbase_childEvent(self.h, event.h)
 
 proc fcQStyle_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QStyleVTable](fcQStyle_vdata(self)[])
@@ -1319,26 +1332,17 @@ proc fcQStyle_vtable_callback_childEvent(self: pointer, event: pointer): void {.
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
-proc QStylecustomEvent*(self: gen_qstyle_types.QStyle, event: gen_qcoreevent_types.QEvent): void =
-  fcQStyle_virtualbase_customEvent(self.h, event.h)
-
 proc fcQStyle_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QStyleVTable](fcQStyle_vdata(self)[])
   let self = QStyle(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
-proc QStyleconnectNotify*(self: gen_qstyle_types.QStyle, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQStyle_virtualbase_connectNotify(self.h, signal.h)
-
 proc fcQStyle_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QStyleVTable](fcQStyle_vdata(self)[])
   let self = QStyle(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
-
-proc QStyledisconnectNotify*(self: gen_qstyle_types.QStyle, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQStyle_virtualbase_disconnectNotify(self.h, signal.h)
 
 proc fcQStyle_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QStyleVTable](fcQStyle_vdata(self)[])
@@ -1348,23 +1352,85 @@ proc fcQStyle_vtable_callback_disconnectNotify(self: pointer, signal: pointer): 
 
 type VirtualQStyle* {.inheritable.} = ref object of QStyle
   vtbl*: cQStyleVTable
+
 method metaObject*(self: VirtualQStyle): gen_qobjectdefs_types.QMetaObject {.base.} =
   QStylemetaObject(self[])
+method metacast*(self: VirtualQStyle, param1: cstring): pointer {.base.} =
+  QStylemetacast(self[], param1)
+method metacall*(self: VirtualQStyle, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QStylemetacall(self[], param1, param2, param3)
+method polish*(self: VirtualQStyle, widget: gen_qwidget_types.QWidget): void {.base.} =
+  QStylepolish(self[], widget)
+method unpolish*(self: VirtualQStyle, widget: gen_qwidget_types.QWidget): void {.base.} =
+  QStyleunpolish(self[], widget)
+method polish*(self: VirtualQStyle, application: gen_qapplication_types.QApplication): void {.base.} =
+  QStylepolish(self[], application)
+method unpolish*(self: VirtualQStyle, application: gen_qapplication_types.QApplication): void {.base.} =
+  QStyleunpolish(self[], application)
+method polish*(self: VirtualQStyle, palette: gen_qpalette_types.QPalette): void {.base.} =
+  QStylepolish(self[], palette)
+method itemTextRect*(self: VirtualQStyle, fm: gen_qfontmetrics_types.QFontMetrics, r: gen_qrect_types.QRect, flags: cint, enabled: bool, text: openArray[char]): gen_qrect_types.QRect {.base.} =
+  QStyleitemTextRect(self[], fm, r, flags, enabled, text)
+method itemPixmapRect*(self: VirtualQStyle, r: gen_qrect_types.QRect, flags: cint, pixmap: gen_qpixmap_types.QPixmap): gen_qrect_types.QRect {.base.} =
+  QStyleitemPixmapRect(self[], r, flags, pixmap)
+method drawItemText*(self: VirtualQStyle, painter: gen_qpainter_types.QPainter, rect: gen_qrect_types.QRect, flags: cint, pal: gen_qpalette_types.QPalette, enabled: bool, text: openArray[char], textRole: cint): void {.base.} =
+  QStyledrawItemText(self[], painter, rect, flags, pal, enabled, text, textRole)
+method drawItemPixmap*(self: VirtualQStyle, painter: gen_qpainter_types.QPainter, rect: gen_qrect_types.QRect, alignment: cint, pixmap: gen_qpixmap_types.QPixmap): void {.base.} =
+  QStyledrawItemPixmap(self[], painter, rect, alignment, pixmap)
+method standardPalette*(self: VirtualQStyle): gen_qpalette_types.QPalette {.base.} =
+  QStylestandardPalette(self[])
+method drawPrimitive*(self: VirtualQStyle, pe: cint, opt: gen_qstyleoption_types.QStyleOption, p: gen_qpainter_types.QPainter, w: gen_qwidget_types.QWidget): void {.base.} =
+  raiseAssert("missing implementation of QStyle.drawPrimitive")
+method drawControl*(self: VirtualQStyle, element: cint, opt: gen_qstyleoption_types.QStyleOption, p: gen_qpainter_types.QPainter, w: gen_qwidget_types.QWidget): void {.base.} =
+  raiseAssert("missing implementation of QStyle.drawControl")
+method subElementRect*(self: VirtualQStyle, subElement: cint, option: gen_qstyleoption_types.QStyleOption, widget: gen_qwidget_types.QWidget): gen_qrect_types.QRect {.base.} =
+  raiseAssert("missing implementation of QStyle.subElementRect")
+method drawComplexControl*(self: VirtualQStyle, cc: cint, opt: gen_qstyleoption_types.QStyleOptionComplex, p: gen_qpainter_types.QPainter, widget: gen_qwidget_types.QWidget): void {.base.} =
+  raiseAssert("missing implementation of QStyle.drawComplexControl")
+method hitTestComplexControl*(self: VirtualQStyle, cc: cint, opt: gen_qstyleoption_types.QStyleOptionComplex, pt: gen_qpoint_types.QPoint, widget: gen_qwidget_types.QWidget): cint {.base.} =
+  raiseAssert("missing implementation of QStyle.hitTestComplexControl")
+method subControlRect*(self: VirtualQStyle, cc: cint, opt: gen_qstyleoption_types.QStyleOptionComplex, sc: cint, widget: gen_qwidget_types.QWidget): gen_qrect_types.QRect {.base.} =
+  raiseAssert("missing implementation of QStyle.subControlRect")
+method pixelMetric*(self: VirtualQStyle, metric: cint, option: gen_qstyleoption_types.QStyleOption, widget: gen_qwidget_types.QWidget): cint {.base.} =
+  raiseAssert("missing implementation of QStyle.pixelMetric")
+method sizeFromContents*(self: VirtualQStyle, ct: cint, opt: gen_qstyleoption_types.QStyleOption, contentsSize: gen_qsize_types.QSize, w: gen_qwidget_types.QWidget): gen_qsize_types.QSize {.base.} =
+  raiseAssert("missing implementation of QStyle.sizeFromContents")
+method styleHint*(self: VirtualQStyle, stylehint: cint, opt: gen_qstyleoption_types.QStyleOption, widget: gen_qwidget_types.QWidget, returnData: gen_qstyleoption_types.QStyleHintReturn): cint {.base.} =
+  raiseAssert("missing implementation of QStyle.styleHint")
+method standardPixmap*(self: VirtualQStyle, standardPixmap: cint, opt: gen_qstyleoption_types.QStyleOption, widget: gen_qwidget_types.QWidget): gen_qpixmap_types.QPixmap {.base.} =
+  raiseAssert("missing implementation of QStyle.standardPixmap")
+method standardIcon*(self: VirtualQStyle, standardIcon: cint, option: gen_qstyleoption_types.QStyleOption, widget: gen_qwidget_types.QWidget): gen_qicon_types.QIcon {.base.} =
+  raiseAssert("missing implementation of QStyle.standardIcon")
+method generatedIconPixmap*(self: VirtualQStyle, iconMode: cint, pixmap: gen_qpixmap_types.QPixmap, opt: gen_qstyleoption_types.QStyleOption): gen_qpixmap_types.QPixmap {.base.} =
+  raiseAssert("missing implementation of QStyle.generatedIconPixmap")
+method layoutSpacing*(self: VirtualQStyle, control1: cint, control2: cint, orientation: cint, option: gen_qstyleoption_types.QStyleOption, widget: gen_qwidget_types.QWidget): cint {.base.} =
+  raiseAssert("missing implementation of QStyle.layoutSpacing")
+method event*(self: VirtualQStyle, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QStyleevent(self[], event)
+method eventFilter*(self: VirtualQStyle, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QStyleeventFilter(self[], watched, event)
+method timerEvent*(self: VirtualQStyle, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QStyletimerEvent(self[], event)
+method childEvent*(self: VirtualQStyle, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QStylechildEvent(self[], event)
+method customEvent*(self: VirtualQStyle, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QStylecustomEvent(self[], event)
+method connectNotify*(self: VirtualQStyle, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QStyleconnectNotify(self[], signal)
+method disconnectNotify*(self: VirtualQStyle, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QStyledisconnectNotify(self[], signal)
+
 proc fcQStyle_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQStyle](fcQStyle_vdata(self)[])
   var virtualReturn = inst.metaObject()
   virtualReturn.h
 
-method metacast*(self: VirtualQStyle, param1: cstring): pointer {.base.} =
-  QStylemetacast(self[], param1)
 proc fcQStyle_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQStyle](fcQStyle_vdata(self)[])
   let slotval1 = (param1)
   var virtualReturn = inst.metacast(slotval1)
   virtualReturn
 
-method metacall*(self: VirtualQStyle, param1: cint, param2: cint, param3: pointer): cint {.base.} =
-  QStylemetacall(self[], param1, param2, param3)
 proc fcQStyle_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQStyle](fcQStyle_vdata(self)[])
   let slotval1 = cint(param1)
@@ -1373,43 +1439,31 @@ proc fcQStyle_method_callback_metacall(self: pointer, param1: cint, param2: cint
   var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
-method polish*(self: VirtualQStyle, widget: gen_qwidget_types.QWidget): void {.base.} =
-  QStylepolish(self[], widget)
 proc fcQStyle_method_callback_polish(self: pointer, widget: pointer): void {.cdecl.} =
   let inst = cast[VirtualQStyle](fcQStyle_vdata(self)[])
   let slotval1 = gen_qwidget_types.QWidget(h: widget, owned: false)
   inst.polish(slotval1)
 
-method unpolish*(self: VirtualQStyle, widget: gen_qwidget_types.QWidget): void {.base.} =
-  QStyleunpolish(self[], widget)
 proc fcQStyle_method_callback_unpolish(self: pointer, widget: pointer): void {.cdecl.} =
   let inst = cast[VirtualQStyle](fcQStyle_vdata(self)[])
   let slotval1 = gen_qwidget_types.QWidget(h: widget, owned: false)
   inst.unpolish(slotval1)
 
-method polish*(self: VirtualQStyle, application: gen_qapplication_types.QApplication): void {.base.} =
-  QStylepolish(self[], application)
 proc fcQStyle_method_callback_polishWithApplication(self: pointer, application: pointer): void {.cdecl.} =
   let inst = cast[VirtualQStyle](fcQStyle_vdata(self)[])
   let slotval1 = gen_qapplication_types.QApplication(h: application, owned: false)
   inst.polish(slotval1)
 
-method unpolish*(self: VirtualQStyle, application: gen_qapplication_types.QApplication): void {.base.} =
-  QStyleunpolish(self[], application)
 proc fcQStyle_method_callback_unpolishWithApplication(self: pointer, application: pointer): void {.cdecl.} =
   let inst = cast[VirtualQStyle](fcQStyle_vdata(self)[])
   let slotval1 = gen_qapplication_types.QApplication(h: application, owned: false)
   inst.unpolish(slotval1)
 
-method polish*(self: VirtualQStyle, palette: gen_qpalette_types.QPalette): void {.base.} =
-  QStylepolish(self[], palette)
 proc fcQStyle_method_callback_polishWithPalette(self: pointer, palette: pointer): void {.cdecl.} =
   let inst = cast[VirtualQStyle](fcQStyle_vdata(self)[])
   let slotval1 = gen_qpalette_types.QPalette(h: palette, owned: false)
   inst.polish(slotval1)
 
-method itemTextRect*(self: VirtualQStyle, fm: gen_qfontmetrics_types.QFontMetrics, r: gen_qrect_types.QRect, flags: cint, enabled: bool, text: openArray[char]): gen_qrect_types.QRect {.base.} =
-  QStyleitemTextRect(self[], fm, r, flags, enabled, text)
 proc fcQStyle_method_callback_itemTextRect(self: pointer, fm: pointer, r: pointer, flags: cint, enabled: bool, text: struct_miqt_string): pointer {.cdecl.} =
   let inst = cast[VirtualQStyle](fcQStyle_vdata(self)[])
   let slotval1 = gen_qfontmetrics_types.QFontMetrics(h: fm, owned: false)
@@ -1423,8 +1477,6 @@ proc fcQStyle_method_callback_itemTextRect(self: pointer, fm: pointer, r: pointe
   var virtualReturn = inst.itemTextRect(slotval1, slotval2, slotval3, slotval4, slotval5)
   virtualReturn.h
 
-method itemPixmapRect*(self: VirtualQStyle, r: gen_qrect_types.QRect, flags: cint, pixmap: gen_qpixmap_types.QPixmap): gen_qrect_types.QRect {.base.} =
-  QStyleitemPixmapRect(self[], r, flags, pixmap)
 proc fcQStyle_method_callback_itemPixmapRect(self: pointer, r: pointer, flags: cint, pixmap: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQStyle](fcQStyle_vdata(self)[])
   let slotval1 = gen_qrect_types.QRect(h: r, owned: false)
@@ -1433,8 +1485,6 @@ proc fcQStyle_method_callback_itemPixmapRect(self: pointer, r: pointer, flags: c
   var virtualReturn = inst.itemPixmapRect(slotval1, slotval2, slotval3)
   virtualReturn.h
 
-method drawItemText*(self: VirtualQStyle, painter: gen_qpainter_types.QPainter, rect: gen_qrect_types.QRect, flags: cint, pal: gen_qpalette_types.QPalette, enabled: bool, text: openArray[char], textRole: cint): void {.base.} =
-  QStyledrawItemText(self[], painter, rect, flags, pal, enabled, text, textRole)
 proc fcQStyle_method_callback_drawItemText(self: pointer, painter: pointer, rect: pointer, flags: cint, pal: pointer, enabled: bool, text: struct_miqt_string, textRole: cint): void {.cdecl.} =
   let inst = cast[VirtualQStyle](fcQStyle_vdata(self)[])
   let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
@@ -1449,8 +1499,6 @@ proc fcQStyle_method_callback_drawItemText(self: pointer, painter: pointer, rect
   let slotval7 = cint(textRole)
   inst.drawItemText(slotval1, slotval2, slotval3, slotval4, slotval5, slotval6, slotval7)
 
-method drawItemPixmap*(self: VirtualQStyle, painter: gen_qpainter_types.QPainter, rect: gen_qrect_types.QRect, alignment: cint, pixmap: gen_qpixmap_types.QPixmap): void {.base.} =
-  QStyledrawItemPixmap(self[], painter, rect, alignment, pixmap)
 proc fcQStyle_method_callback_drawItemPixmap(self: pointer, painter: pointer, rect: pointer, alignment: cint, pixmap: pointer): void {.cdecl.} =
   let inst = cast[VirtualQStyle](fcQStyle_vdata(self)[])
   let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
@@ -1459,15 +1507,11 @@ proc fcQStyle_method_callback_drawItemPixmap(self: pointer, painter: pointer, re
   let slotval4 = gen_qpixmap_types.QPixmap(h: pixmap, owned: false)
   inst.drawItemPixmap(slotval1, slotval2, slotval3, slotval4)
 
-method standardPalette*(self: VirtualQStyle): gen_qpalette_types.QPalette {.base.} =
-  QStylestandardPalette(self[])
 proc fcQStyle_method_callback_standardPalette(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQStyle](fcQStyle_vdata(self)[])
   var virtualReturn = inst.standardPalette()
   virtualReturn.h
 
-method drawPrimitive*(self: VirtualQStyle, pe: cint, opt: gen_qstyleoption_types.QStyleOption, p: gen_qpainter_types.QPainter, w: gen_qwidget_types.QWidget): void {.base.} =
-  raiseAssert("missing implementation of QStyle_virtualbase_drawPrimitive")
 proc fcQStyle_method_callback_drawPrimitive(self: pointer, pe: cint, opt: pointer, p: pointer, w: pointer): void {.cdecl.} =
   let inst = cast[VirtualQStyle](fcQStyle_vdata(self)[])
   let slotval1 = cint(pe)
@@ -1476,8 +1520,6 @@ proc fcQStyle_method_callback_drawPrimitive(self: pointer, pe: cint, opt: pointe
   let slotval4 = gen_qwidget_types.QWidget(h: w, owned: false)
   inst.drawPrimitive(slotval1, slotval2, slotval3, slotval4)
 
-method drawControl*(self: VirtualQStyle, element: cint, opt: gen_qstyleoption_types.QStyleOption, p: gen_qpainter_types.QPainter, w: gen_qwidget_types.QWidget): void {.base.} =
-  raiseAssert("missing implementation of QStyle_virtualbase_drawControl")
 proc fcQStyle_method_callback_drawControl(self: pointer, element: cint, opt: pointer, p: pointer, w: pointer): void {.cdecl.} =
   let inst = cast[VirtualQStyle](fcQStyle_vdata(self)[])
   let slotval1 = cint(element)
@@ -1486,8 +1528,6 @@ proc fcQStyle_method_callback_drawControl(self: pointer, element: cint, opt: poi
   let slotval4 = gen_qwidget_types.QWidget(h: w, owned: false)
   inst.drawControl(slotval1, slotval2, slotval3, slotval4)
 
-method subElementRect*(self: VirtualQStyle, subElement: cint, option: gen_qstyleoption_types.QStyleOption, widget: gen_qwidget_types.QWidget): gen_qrect_types.QRect {.base.} =
-  raiseAssert("missing implementation of QStyle_virtualbase_subElementRect")
 proc fcQStyle_method_callback_subElementRect(self: pointer, subElement: cint, option: pointer, widget: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQStyle](fcQStyle_vdata(self)[])
   let slotval1 = cint(subElement)
@@ -1496,8 +1536,6 @@ proc fcQStyle_method_callback_subElementRect(self: pointer, subElement: cint, op
   var virtualReturn = inst.subElementRect(slotval1, slotval2, slotval3)
   virtualReturn.h
 
-method drawComplexControl*(self: VirtualQStyle, cc: cint, opt: gen_qstyleoption_types.QStyleOptionComplex, p: gen_qpainter_types.QPainter, widget: gen_qwidget_types.QWidget): void {.base.} =
-  raiseAssert("missing implementation of QStyle_virtualbase_drawComplexControl")
 proc fcQStyle_method_callback_drawComplexControl(self: pointer, cc: cint, opt: pointer, p: pointer, widget: pointer): void {.cdecl.} =
   let inst = cast[VirtualQStyle](fcQStyle_vdata(self)[])
   let slotval1 = cint(cc)
@@ -1506,8 +1544,6 @@ proc fcQStyle_method_callback_drawComplexControl(self: pointer, cc: cint, opt: p
   let slotval4 = gen_qwidget_types.QWidget(h: widget, owned: false)
   inst.drawComplexControl(slotval1, slotval2, slotval3, slotval4)
 
-method hitTestComplexControl*(self: VirtualQStyle, cc: cint, opt: gen_qstyleoption_types.QStyleOptionComplex, pt: gen_qpoint_types.QPoint, widget: gen_qwidget_types.QWidget): cint {.base.} =
-  raiseAssert("missing implementation of QStyle_virtualbase_hitTestComplexControl")
 proc fcQStyle_method_callback_hitTestComplexControl(self: pointer, cc: cint, opt: pointer, pt: pointer, widget: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQStyle](fcQStyle_vdata(self)[])
   let slotval1 = cint(cc)
@@ -1517,8 +1553,6 @@ proc fcQStyle_method_callback_hitTestComplexControl(self: pointer, cc: cint, opt
   var virtualReturn = inst.hitTestComplexControl(slotval1, slotval2, slotval3, slotval4)
   cint(virtualReturn)
 
-method subControlRect*(self: VirtualQStyle, cc: cint, opt: gen_qstyleoption_types.QStyleOptionComplex, sc: cint, widget: gen_qwidget_types.QWidget): gen_qrect_types.QRect {.base.} =
-  raiseAssert("missing implementation of QStyle_virtualbase_subControlRect")
 proc fcQStyle_method_callback_subControlRect(self: pointer, cc: cint, opt: pointer, sc: cint, widget: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQStyle](fcQStyle_vdata(self)[])
   let slotval1 = cint(cc)
@@ -1528,8 +1562,6 @@ proc fcQStyle_method_callback_subControlRect(self: pointer, cc: cint, opt: point
   var virtualReturn = inst.subControlRect(slotval1, slotval2, slotval3, slotval4)
   virtualReturn.h
 
-method pixelMetric*(self: VirtualQStyle, metric: cint, option: gen_qstyleoption_types.QStyleOption, widget: gen_qwidget_types.QWidget): cint {.base.} =
-  raiseAssert("missing implementation of QStyle_virtualbase_pixelMetric")
 proc fcQStyle_method_callback_pixelMetric(self: pointer, metric: cint, option: pointer, widget: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQStyle](fcQStyle_vdata(self)[])
   let slotval1 = cint(metric)
@@ -1538,8 +1570,6 @@ proc fcQStyle_method_callback_pixelMetric(self: pointer, metric: cint, option: p
   var virtualReturn = inst.pixelMetric(slotval1, slotval2, slotval3)
   virtualReturn
 
-method sizeFromContents*(self: VirtualQStyle, ct: cint, opt: gen_qstyleoption_types.QStyleOption, contentsSize: gen_qsize_types.QSize, w: gen_qwidget_types.QWidget): gen_qsize_types.QSize {.base.} =
-  raiseAssert("missing implementation of QStyle_virtualbase_sizeFromContents")
 proc fcQStyle_method_callback_sizeFromContents(self: pointer, ct: cint, opt: pointer, contentsSize: pointer, w: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQStyle](fcQStyle_vdata(self)[])
   let slotval1 = cint(ct)
@@ -1549,8 +1579,6 @@ proc fcQStyle_method_callback_sizeFromContents(self: pointer, ct: cint, opt: poi
   var virtualReturn = inst.sizeFromContents(slotval1, slotval2, slotval3, slotval4)
   virtualReturn.h
 
-method styleHint*(self: VirtualQStyle, stylehint: cint, opt: gen_qstyleoption_types.QStyleOption, widget: gen_qwidget_types.QWidget, returnData: gen_qstyleoption_types.QStyleHintReturn): cint {.base.} =
-  raiseAssert("missing implementation of QStyle_virtualbase_styleHint")
 proc fcQStyle_method_callback_styleHint(self: pointer, stylehint: cint, opt: pointer, widget: pointer, returnData: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQStyle](fcQStyle_vdata(self)[])
   let slotval1 = cint(stylehint)
@@ -1560,8 +1588,6 @@ proc fcQStyle_method_callback_styleHint(self: pointer, stylehint: cint, opt: poi
   var virtualReturn = inst.styleHint(slotval1, slotval2, slotval3, slotval4)
   virtualReturn
 
-method standardPixmap*(self: VirtualQStyle, standardPixmap: cint, opt: gen_qstyleoption_types.QStyleOption, widget: gen_qwidget_types.QWidget): gen_qpixmap_types.QPixmap {.base.} =
-  raiseAssert("missing implementation of QStyle_virtualbase_standardPixmap")
 proc fcQStyle_method_callback_standardPixmap(self: pointer, standardPixmap: cint, opt: pointer, widget: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQStyle](fcQStyle_vdata(self)[])
   let slotval1 = cint(standardPixmap)
@@ -1570,8 +1596,6 @@ proc fcQStyle_method_callback_standardPixmap(self: pointer, standardPixmap: cint
   var virtualReturn = inst.standardPixmap(slotval1, slotval2, slotval3)
   virtualReturn.h
 
-method standardIcon*(self: VirtualQStyle, standardIcon: cint, option: gen_qstyleoption_types.QStyleOption, widget: gen_qwidget_types.QWidget): gen_qicon_types.QIcon {.base.} =
-  raiseAssert("missing implementation of QStyle_virtualbase_standardIcon")
 proc fcQStyle_method_callback_standardIcon(self: pointer, standardIcon: cint, option: pointer, widget: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQStyle](fcQStyle_vdata(self)[])
   let slotval1 = cint(standardIcon)
@@ -1580,8 +1604,6 @@ proc fcQStyle_method_callback_standardIcon(self: pointer, standardIcon: cint, op
   var virtualReturn = inst.standardIcon(slotval1, slotval2, slotval3)
   virtualReturn.h
 
-method generatedIconPixmap*(self: VirtualQStyle, iconMode: cint, pixmap: gen_qpixmap_types.QPixmap, opt: gen_qstyleoption_types.QStyleOption): gen_qpixmap_types.QPixmap {.base.} =
-  raiseAssert("missing implementation of QStyle_virtualbase_generatedIconPixmap")
 proc fcQStyle_method_callback_generatedIconPixmap(self: pointer, iconMode: cint, pixmap: pointer, opt: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQStyle](fcQStyle_vdata(self)[])
   let slotval1 = cint(iconMode)
@@ -1590,8 +1612,6 @@ proc fcQStyle_method_callback_generatedIconPixmap(self: pointer, iconMode: cint,
   var virtualReturn = inst.generatedIconPixmap(slotval1, slotval2, slotval3)
   virtualReturn.h
 
-method layoutSpacing*(self: VirtualQStyle, control1: cint, control2: cint, orientation: cint, option: gen_qstyleoption_types.QStyleOption, widget: gen_qwidget_types.QWidget): cint {.base.} =
-  raiseAssert("missing implementation of QStyle_virtualbase_layoutSpacing")
 proc fcQStyle_method_callback_layoutSpacing(self: pointer, control1: cint, control2: cint, orientation: cint, option: pointer, widget: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQStyle](fcQStyle_vdata(self)[])
   let slotval1 = cint(control1)
@@ -1602,16 +1622,12 @@ proc fcQStyle_method_callback_layoutSpacing(self: pointer, control1: cint, contr
   var virtualReturn = inst.layoutSpacing(slotval1, slotval2, slotval3, slotval4, slotval5)
   virtualReturn
 
-method event*(self: VirtualQStyle, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QStyleevent(self[], event)
 proc fcQStyle_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQStyle](fcQStyle_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
-method eventFilter*(self: VirtualQStyle, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QStyleeventFilter(self[], watched, event)
 proc fcQStyle_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQStyle](fcQStyle_vdata(self)[])
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
@@ -1619,40 +1635,31 @@ proc fcQStyle_method_callback_eventFilter(self: pointer, watched: pointer, event
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
-method timerEvent*(self: VirtualQStyle, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
-  QStyletimerEvent(self[], event)
 proc fcQStyle_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQStyle](fcQStyle_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
-method childEvent*(self: VirtualQStyle, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
-  QStylechildEvent(self[], event)
 proc fcQStyle_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQStyle](fcQStyle_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
-method customEvent*(self: VirtualQStyle, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QStylecustomEvent(self[], event)
 proc fcQStyle_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQStyle](fcQStyle_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
-method connectNotify*(self: VirtualQStyle, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QStyleconnectNotify(self[], signal)
 proc fcQStyle_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQStyle](fcQStyle_vdata(self)[])
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
-method disconnectNotify*(self: VirtualQStyle, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QStyledisconnectNotify(self[], signal)
 proc fcQStyle_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQStyle](fcQStyle_vdata(self)[])
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
+
 
 proc sender*(self: gen_qstyle_types.QStyle): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQStyle_protectedbase_sender(self.h), owned: false)

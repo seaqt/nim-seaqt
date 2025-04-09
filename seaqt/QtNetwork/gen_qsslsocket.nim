@@ -194,6 +194,7 @@ proc fcQSslSocket_supportedFeatures1(backendName: struct_miqt_string): struct_mi
 proc fcQSslSocket_isFeatureSupported2(feat: cint, backendName: struct_miqt_string): bool {.importc: "QSslSocket_isFeatureSupported2".}
 proc fcQSslSocket_vdata(self: pointer): ptr pointer {.importc: "QSslSocket_vdata".}
 proc fvdata_cQSslSocket(self: pointer): pointer {.importc: "vdata_QSslSocket".}
+
 type cQSslSocketVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -585,7 +586,7 @@ proc fcQSslSocket_slot_callback_encrypted_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QSslSocketencryptedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onencrypted*(self: gen_qsslsocket_types.QSslSocket, slot: QSslSocketencryptedSlot) =
+proc onEncrypted*(self: gen_qsslsocket_types.QSslSocket, slot: QSslSocketencryptedSlot) =
   var tmp = new QSslSocketencryptedSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -605,7 +606,7 @@ proc fcQSslSocket_slot_callback_peerVerifyError_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QSslSocketpeerVerifyErrorSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onpeerVerifyError*(self: gen_qsslsocket_types.QSslSocket, slot: QSslSocketpeerVerifyErrorSlot) =
+proc onPeerVerifyError*(self: gen_qsslsocket_types.QSslSocket, slot: QSslSocketpeerVerifyErrorSlot) =
   var tmp = new QSslSocketpeerVerifyErrorSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -635,7 +636,7 @@ proc fcQSslSocket_slot_callback_sslErrors_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QSslSocketsslErrorsSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onsslErrors*(self: gen_qsslsocket_types.QSslSocket, slot: QSslSocketsslErrorsSlot) =
+proc onSslErrors*(self: gen_qsslsocket_types.QSslSocket, slot: QSslSocketsslErrorsSlot) =
   var tmp = new QSslSocketsslErrorsSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -655,7 +656,7 @@ proc fcQSslSocket_slot_callback_modeChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QSslSocketmodeChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onmodeChanged*(self: gen_qsslsocket_types.QSslSocket, slot: QSslSocketmodeChangedSlot) =
+proc onModeChanged*(self: gen_qsslsocket_types.QSslSocket, slot: QSslSocketmodeChangedSlot) =
   var tmp = new QSslSocketmodeChangedSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -675,7 +676,7 @@ proc fcQSslSocket_slot_callback_encryptedBytesWritten_release(slot: int) {.cdecl
   let nimfunc = cast[ref QSslSocketencryptedBytesWrittenSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onencryptedBytesWritten*(self: gen_qsslsocket_types.QSslSocket, slot: QSslSocketencryptedBytesWrittenSlot) =
+proc onEncryptedBytesWritten*(self: gen_qsslsocket_types.QSslSocket, slot: QSslSocketencryptedBytesWrittenSlot) =
   var tmp = new QSslSocketencryptedBytesWrittenSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -695,7 +696,7 @@ proc fcQSslSocket_slot_callback_preSharedKeyAuthenticationRequired_release(slot:
   let nimfunc = cast[ref QSslSocketpreSharedKeyAuthenticationRequiredSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onpreSharedKeyAuthenticationRequired*(self: gen_qsslsocket_types.QSslSocket, slot: QSslSocketpreSharedKeyAuthenticationRequiredSlot) =
+proc onPreSharedKeyAuthenticationRequired*(self: gen_qsslsocket_types.QSslSocket, slot: QSslSocketpreSharedKeyAuthenticationRequiredSlot) =
   var tmp = new QSslSocketpreSharedKeyAuthenticationRequiredSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -713,7 +714,7 @@ proc fcQSslSocket_slot_callback_newSessionTicketReceived_release(slot: int) {.cd
   let nimfunc = cast[ref QSslSocketnewSessionTicketReceivedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onnewSessionTicketReceived*(self: gen_qsslsocket_types.QSslSocket, slot: QSslSocketnewSessionTicketReceivedSlot) =
+proc onNewSessionTicketReceived*(self: gen_qsslsocket_types.QSslSocket, slot: QSslSocketnewSessionTicketReceivedSlot) =
   var tmp = new QSslSocketnewSessionTicketReceivedSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -740,7 +741,7 @@ proc fcQSslSocket_slot_callback_alertSent_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QSslSocketalertSentSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onalertSent*(self: gen_qsslsocket_types.QSslSocket, slot: QSslSocketalertSentSlot) =
+proc onAlertSent*(self: gen_qsslsocket_types.QSslSocket, slot: QSslSocketalertSentSlot) =
   var tmp = new QSslSocketalertSentSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -767,7 +768,7 @@ proc fcQSslSocket_slot_callback_alertReceived_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QSslSocketalertReceivedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onalertReceived*(self: gen_qsslsocket_types.QSslSocket, slot: QSslSocketalertReceivedSlot) =
+proc onAlertReceived*(self: gen_qsslsocket_types.QSslSocket, slot: QSslSocketalertReceivedSlot) =
   var tmp = new QSslSocketalertReceivedSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -787,7 +788,7 @@ proc fcQSslSocket_slot_callback_handshakeInterruptedOnError_release(slot: int) {
   let nimfunc = cast[ref QSslSockethandshakeInterruptedOnErrorSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onhandshakeInterruptedOnError*(self: gen_qsslsocket_types.QSslSocket, slot: QSslSockethandshakeInterruptedOnErrorSlot) =
+proc onHandshakeInterruptedOnError*(self: gen_qsslsocket_types.QSslSocket, slot: QSslSockethandshakeInterruptedOnErrorSlot) =
   var tmp = new QSslSockethandshakeInterruptedOnErrorSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -906,6 +907,7 @@ type QSslSocketchildEventProc* = proc(self: QSslSocket, event: gen_qcoreevent_ty
 type QSslSocketcustomEventProc* = proc(self: QSslSocket, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QSslSocketconnectNotifyProc* = proc(self: QSslSocket, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QSslSocketdisconnectNotifyProc* = proc(self: QSslSocket, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+
 type QSslSocketVTable* {.inheritable, pure.} = object
   vtbl: cQSslSocketVTable
   metaObject*: QSslSocketmetaObjectProc
@@ -946,8 +948,121 @@ type QSslSocketVTable* {.inheritable, pure.} = object
   customEvent*: QSslSocketcustomEventProc
   connectNotify*: QSslSocketconnectNotifyProc
   disconnectNotify*: QSslSocketdisconnectNotifyProc
+
 proc QSslSocketmetaObject*(self: gen_qsslsocket_types.QSslSocket): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQSslSocket_virtualbase_metaObject(self.h), owned: false)
+
+proc QSslSocketmetacast*(self: gen_qsslsocket_types.QSslSocket, param1: cstring): pointer =
+  fcQSslSocket_virtualbase_metacast(self.h, param1)
+
+proc QSslSocketmetacall*(self: gen_qsslsocket_types.QSslSocket, param1: cint, param2: cint, param3: pointer): cint =
+  fcQSslSocket_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+proc QSslSocketresume*(self: gen_qsslsocket_types.QSslSocket): void =
+  fcQSslSocket_virtualbase_resume(self.h)
+
+proc QSslSocketsetSocketDescriptor*(self: gen_qsslsocket_types.QSslSocket, socketDescriptor: uint, state: cint, openMode: cint): bool =
+  fcQSslSocket_virtualbase_setSocketDescriptor(self.h, socketDescriptor, cint(state), cint(openMode))
+
+proc QSslSocketconnectToHost*(self: gen_qsslsocket_types.QSslSocket, hostName: openArray[char], port: cushort, openMode: cint, protocol: cint): void =
+  fcQSslSocket_virtualbase_connectToHost(self.h, struct_miqt_string(data: if len(hostName) > 0: addr hostName[0] else: nil, len: csize_t(len(hostName))), port, cint(openMode), cint(protocol))
+
+proc QSslSocketdisconnectFromHost*(self: gen_qsslsocket_types.QSslSocket): void =
+  fcQSslSocket_virtualbase_disconnectFromHost(self.h)
+
+proc QSslSocketsetSocketOption*(self: gen_qsslsocket_types.QSslSocket, option: cint, value: gen_qvariant_types.QVariant): void =
+  fcQSslSocket_virtualbase_setSocketOption(self.h, cint(option), value.h)
+
+proc QSslSocketsocketOption*(self: gen_qsslsocket_types.QSslSocket, option: cint): gen_qvariant_types.QVariant =
+  gen_qvariant_types.QVariant(h: fcQSslSocket_virtualbase_socketOption(self.h, cint(option)), owned: true)
+
+proc QSslSocketbytesAvailable*(self: gen_qsslsocket_types.QSslSocket): clonglong =
+  fcQSslSocket_virtualbase_bytesAvailable(self.h)
+
+proc QSslSocketbytesToWrite*(self: gen_qsslsocket_types.QSslSocket): clonglong =
+  fcQSslSocket_virtualbase_bytesToWrite(self.h)
+
+proc QSslSocketcanReadLine*(self: gen_qsslsocket_types.QSslSocket): bool =
+  fcQSslSocket_virtualbase_canReadLine(self.h)
+
+proc QSslSocketclose*(self: gen_qsslsocket_types.QSslSocket): void =
+  fcQSslSocket_virtualbase_close(self.h)
+
+proc QSslSocketatEnd*(self: gen_qsslsocket_types.QSslSocket): bool =
+  fcQSslSocket_virtualbase_atEnd(self.h)
+
+proc QSslSocketsetReadBufferSize*(self: gen_qsslsocket_types.QSslSocket, size: clonglong): void =
+  fcQSslSocket_virtualbase_setReadBufferSize(self.h, size)
+
+proc QSslSocketwaitForConnected*(self: gen_qsslsocket_types.QSslSocket, msecs: cint): bool =
+  fcQSslSocket_virtualbase_waitForConnected(self.h, msecs)
+
+proc QSslSocketwaitForReadyRead*(self: gen_qsslsocket_types.QSslSocket, msecs: cint): bool =
+  fcQSslSocket_virtualbase_waitForReadyRead(self.h, msecs)
+
+proc QSslSocketwaitForBytesWritten*(self: gen_qsslsocket_types.QSslSocket, msecs: cint): bool =
+  fcQSslSocket_virtualbase_waitForBytesWritten(self.h, msecs)
+
+proc QSslSocketwaitForDisconnected*(self: gen_qsslsocket_types.QSslSocket, msecs: cint): bool =
+  fcQSslSocket_virtualbase_waitForDisconnected(self.h, msecs)
+
+proc QSslSocketreadData*(self: gen_qsslsocket_types.QSslSocket, data: cstring, maxlen: clonglong): clonglong =
+  fcQSslSocket_virtualbase_readData(self.h, data, maxlen)
+
+proc QSslSocketskipData*(self: gen_qsslsocket_types.QSslSocket, maxSize: clonglong): clonglong =
+  fcQSslSocket_virtualbase_skipData(self.h, maxSize)
+
+proc QSslSocketwriteData*(self: gen_qsslsocket_types.QSslSocket, data: cstring, len: clonglong): clonglong =
+  fcQSslSocket_virtualbase_writeData(self.h, data, len)
+
+proc QSslSocketbindX*(self: gen_qsslsocket_types.QSslSocket, address: gen_qhostaddress_types.QHostAddress, port: cushort, mode: cint): bool =
+  fcQSslSocket_virtualbase_bindX(self.h, address.h, port, cint(mode))
+
+proc QSslSocketsocketDescriptor*(self: gen_qsslsocket_types.QSslSocket): uint =
+  fcQSslSocket_virtualbase_socketDescriptor(self.h)
+
+proc QSslSocketisSequential*(self: gen_qsslsocket_types.QSslSocket): bool =
+  fcQSslSocket_virtualbase_isSequential(self.h)
+
+proc QSslSocketreadLineData*(self: gen_qsslsocket_types.QSslSocket, data: cstring, maxlen: clonglong): clonglong =
+  fcQSslSocket_virtualbase_readLineData(self.h, data, maxlen)
+
+proc QSslSocketopen*(self: gen_qsslsocket_types.QSslSocket, mode: cint): bool =
+  fcQSslSocket_virtualbase_open(self.h, cint(mode))
+
+proc QSslSocketpos*(self: gen_qsslsocket_types.QSslSocket): clonglong =
+  fcQSslSocket_virtualbase_pos(self.h)
+
+proc QSslSocketsize*(self: gen_qsslsocket_types.QSslSocket): clonglong =
+  fcQSslSocket_virtualbase_size(self.h)
+
+proc QSslSocketseek*(self: gen_qsslsocket_types.QSslSocket, pos: clonglong): bool =
+  fcQSslSocket_virtualbase_seek(self.h, pos)
+
+proc QSslSocketreset*(self: gen_qsslsocket_types.QSslSocket): bool =
+  fcQSslSocket_virtualbase_reset(self.h)
+
+proc QSslSocketevent*(self: gen_qsslsocket_types.QSslSocket, event: gen_qcoreevent_types.QEvent): bool =
+  fcQSslSocket_virtualbase_event(self.h, event.h)
+
+proc QSslSocketeventFilter*(self: gen_qsslsocket_types.QSslSocket, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
+  fcQSslSocket_virtualbase_eventFilter(self.h, watched.h, event.h)
+
+proc QSslSockettimerEvent*(self: gen_qsslsocket_types.QSslSocket, event: gen_qcoreevent_types.QTimerEvent): void =
+  fcQSslSocket_virtualbase_timerEvent(self.h, event.h)
+
+proc QSslSocketchildEvent*(self: gen_qsslsocket_types.QSslSocket, event: gen_qcoreevent_types.QChildEvent): void =
+  fcQSslSocket_virtualbase_childEvent(self.h, event.h)
+
+proc QSslSocketcustomEvent*(self: gen_qsslsocket_types.QSslSocket, event: gen_qcoreevent_types.QEvent): void =
+  fcQSslSocket_virtualbase_customEvent(self.h, event.h)
+
+proc QSslSocketconnectNotify*(self: gen_qsslsocket_types.QSslSocket, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQSslSocket_virtualbase_connectNotify(self.h, signal.h)
+
+proc QSslSocketdisconnectNotify*(self: gen_qsslsocket_types.QSslSocket, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQSslSocket_virtualbase_disconnectNotify(self.h, signal.h)
+
 
 proc fcQSslSocket_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QSslSocketVTable](fcQSslSocket_vdata(self)[])
@@ -958,18 +1073,12 @@ proc fcQSslSocket_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QSslSocketmetacast*(self: gen_qsslsocket_types.QSslSocket, param1: cstring): pointer =
-  fcQSslSocket_virtualbase_metacast(self.h, param1)
-
 proc fcQSslSocket_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QSslSocketVTable](fcQSslSocket_vdata(self)[])
   let self = QSslSocket(h: self)
   let slotval1 = (param1)
   var virtualReturn = vtbl[].metacast(self, slotval1)
   virtualReturn
-
-proc QSslSocketmetacall*(self: gen_qsslsocket_types.QSslSocket, param1: cint, param2: cint, param3: pointer): cint =
-  fcQSslSocket_virtualbase_metacall(self.h, cint(param1), param2, param3)
 
 proc fcQSslSocket_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QSslSocketVTable](fcQSslSocket_vdata(self)[])
@@ -980,16 +1089,10 @@ proc fcQSslSocket_vtable_callback_metacall(self: pointer, param1: cint, param2: 
   var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QSslSocketresume*(self: gen_qsslsocket_types.QSslSocket): void =
-  fcQSslSocket_virtualbase_resume(self.h)
-
 proc fcQSslSocket_vtable_callback_resume(self: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSslSocketVTable](fcQSslSocket_vdata(self)[])
   let self = QSslSocket(h: self)
   vtbl[].resume(self)
-
-proc QSslSocketsetSocketDescriptor*(self: gen_qsslsocket_types.QSslSocket, socketDescriptor: uint, state: cint, openMode: cint): bool =
-  fcQSslSocket_virtualbase_setSocketDescriptor(self.h, socketDescriptor, cint(state), cint(openMode))
 
 proc fcQSslSocket_vtable_callback_setSocketDescriptor(self: pointer, socketDescriptor: uint, state: cint, openMode: cint): bool {.cdecl.} =
   let vtbl = cast[ptr QSslSocketVTable](fcQSslSocket_vdata(self)[])
@@ -999,9 +1102,6 @@ proc fcQSslSocket_vtable_callback_setSocketDescriptor(self: pointer, socketDescr
   let slotval3 = cint(openMode)
   var virtualReturn = vtbl[].setSocketDescriptor(self, slotval1, slotval2, slotval3)
   virtualReturn
-
-proc QSslSocketconnectToHost*(self: gen_qsslsocket_types.QSslSocket, hostName: openArray[char], port: cushort, openMode: cint, protocol: cint): void =
-  fcQSslSocket_virtualbase_connectToHost(self.h, struct_miqt_string(data: if len(hostName) > 0: addr hostName[0] else: nil, len: csize_t(len(hostName))), port, cint(openMode), cint(protocol))
 
 proc fcQSslSocket_vtable_callback_connectToHost(self: pointer, hostName: struct_miqt_string, port: cushort, openMode: cint, protocol: cint): void {.cdecl.} =
   let vtbl = cast[ptr QSslSocketVTable](fcQSslSocket_vdata(self)[])
@@ -1015,16 +1115,10 @@ proc fcQSslSocket_vtable_callback_connectToHost(self: pointer, hostName: struct_
   let slotval4 = cint(protocol)
   vtbl[].connectToHost(self, slotval1, slotval2, slotval3, slotval4)
 
-proc QSslSocketdisconnectFromHost*(self: gen_qsslsocket_types.QSslSocket): void =
-  fcQSslSocket_virtualbase_disconnectFromHost(self.h)
-
 proc fcQSslSocket_vtable_callback_disconnectFromHost(self: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSslSocketVTable](fcQSslSocket_vdata(self)[])
   let self = QSslSocket(h: self)
   vtbl[].disconnectFromHost(self)
-
-proc QSslSocketsetSocketOption*(self: gen_qsslsocket_types.QSslSocket, option: cint, value: gen_qvariant_types.QVariant): void =
-  fcQSslSocket_virtualbase_setSocketOption(self.h, cint(option), value.h)
 
 proc fcQSslSocket_vtable_callback_setSocketOption(self: pointer, option: cint, value: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSslSocketVTable](fcQSslSocket_vdata(self)[])
@@ -1032,9 +1126,6 @@ proc fcQSslSocket_vtable_callback_setSocketOption(self: pointer, option: cint, v
   let slotval1 = cint(option)
   let slotval2 = gen_qvariant_types.QVariant(h: value, owned: false)
   vtbl[].setSocketOption(self, slotval1, slotval2)
-
-proc QSslSocketsocketOption*(self: gen_qsslsocket_types.QSslSocket, option: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQSslSocket_virtualbase_socketOption(self.h, cint(option)), owned: true)
 
 proc fcQSslSocket_vtable_callback_socketOption(self: pointer, option: cint): pointer {.cdecl.} =
   let vtbl = cast[ptr QSslSocketVTable](fcQSslSocket_vdata(self)[])
@@ -1046,17 +1137,11 @@ proc fcQSslSocket_vtable_callback_socketOption(self: pointer, option: cint): poi
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QSslSocketbytesAvailable*(self: gen_qsslsocket_types.QSslSocket): clonglong =
-  fcQSslSocket_virtualbase_bytesAvailable(self.h)
-
 proc fcQSslSocket_vtable_callback_bytesAvailable(self: pointer): clonglong {.cdecl.} =
   let vtbl = cast[ptr QSslSocketVTable](fcQSslSocket_vdata(self)[])
   let self = QSslSocket(h: self)
   var virtualReturn = vtbl[].bytesAvailable(self)
   virtualReturn
-
-proc QSslSocketbytesToWrite*(self: gen_qsslsocket_types.QSslSocket): clonglong =
-  fcQSslSocket_virtualbase_bytesToWrite(self.h)
 
 proc fcQSslSocket_vtable_callback_bytesToWrite(self: pointer): clonglong {.cdecl.} =
   let vtbl = cast[ptr QSslSocketVTable](fcQSslSocket_vdata(self)[])
@@ -1064,25 +1149,16 @@ proc fcQSslSocket_vtable_callback_bytesToWrite(self: pointer): clonglong {.cdecl
   var virtualReturn = vtbl[].bytesToWrite(self)
   virtualReturn
 
-proc QSslSocketcanReadLine*(self: gen_qsslsocket_types.QSslSocket): bool =
-  fcQSslSocket_virtualbase_canReadLine(self.h)
-
 proc fcQSslSocket_vtable_callback_canReadLine(self: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QSslSocketVTable](fcQSslSocket_vdata(self)[])
   let self = QSslSocket(h: self)
   var virtualReturn = vtbl[].canReadLine(self)
   virtualReturn
 
-proc QSslSocketclose*(self: gen_qsslsocket_types.QSslSocket): void =
-  fcQSslSocket_virtualbase_close(self.h)
-
 proc fcQSslSocket_vtable_callback_close(self: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSslSocketVTable](fcQSslSocket_vdata(self)[])
   let self = QSslSocket(h: self)
   vtbl[].close(self)
-
-proc QSslSocketatEnd*(self: gen_qsslsocket_types.QSslSocket): bool =
-  fcQSslSocket_virtualbase_atEnd(self.h)
 
 proc fcQSslSocket_vtable_callback_atEnd(self: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QSslSocketVTable](fcQSslSocket_vdata(self)[])
@@ -1090,17 +1166,11 @@ proc fcQSslSocket_vtable_callback_atEnd(self: pointer): bool {.cdecl.} =
   var virtualReturn = vtbl[].atEnd(self)
   virtualReturn
 
-proc QSslSocketsetReadBufferSize*(self: gen_qsslsocket_types.QSslSocket, size: clonglong): void =
-  fcQSslSocket_virtualbase_setReadBufferSize(self.h, size)
-
 proc fcQSslSocket_vtable_callback_setReadBufferSize(self: pointer, size: clonglong): void {.cdecl.} =
   let vtbl = cast[ptr QSslSocketVTable](fcQSslSocket_vdata(self)[])
   let self = QSslSocket(h: self)
   let slotval1 = size
   vtbl[].setReadBufferSize(self, slotval1)
-
-proc QSslSocketwaitForConnected*(self: gen_qsslsocket_types.QSslSocket, msecs: cint): bool =
-  fcQSslSocket_virtualbase_waitForConnected(self.h, msecs)
 
 proc fcQSslSocket_vtable_callback_waitForConnected(self: pointer, msecs: cint): bool {.cdecl.} =
   let vtbl = cast[ptr QSslSocketVTable](fcQSslSocket_vdata(self)[])
@@ -1109,18 +1179,12 @@ proc fcQSslSocket_vtable_callback_waitForConnected(self: pointer, msecs: cint): 
   var virtualReturn = vtbl[].waitForConnected(self, slotval1)
   virtualReturn
 
-proc QSslSocketwaitForReadyRead*(self: gen_qsslsocket_types.QSslSocket, msecs: cint): bool =
-  fcQSslSocket_virtualbase_waitForReadyRead(self.h, msecs)
-
 proc fcQSslSocket_vtable_callback_waitForReadyRead(self: pointer, msecs: cint): bool {.cdecl.} =
   let vtbl = cast[ptr QSslSocketVTable](fcQSslSocket_vdata(self)[])
   let self = QSslSocket(h: self)
   let slotval1 = msecs
   var virtualReturn = vtbl[].waitForReadyRead(self, slotval1)
   virtualReturn
-
-proc QSslSocketwaitForBytesWritten*(self: gen_qsslsocket_types.QSslSocket, msecs: cint): bool =
-  fcQSslSocket_virtualbase_waitForBytesWritten(self.h, msecs)
 
 proc fcQSslSocket_vtable_callback_waitForBytesWritten(self: pointer, msecs: cint): bool {.cdecl.} =
   let vtbl = cast[ptr QSslSocketVTable](fcQSslSocket_vdata(self)[])
@@ -1129,18 +1193,12 @@ proc fcQSslSocket_vtable_callback_waitForBytesWritten(self: pointer, msecs: cint
   var virtualReturn = vtbl[].waitForBytesWritten(self, slotval1)
   virtualReturn
 
-proc QSslSocketwaitForDisconnected*(self: gen_qsslsocket_types.QSslSocket, msecs: cint): bool =
-  fcQSslSocket_virtualbase_waitForDisconnected(self.h, msecs)
-
 proc fcQSslSocket_vtable_callback_waitForDisconnected(self: pointer, msecs: cint): bool {.cdecl.} =
   let vtbl = cast[ptr QSslSocketVTable](fcQSslSocket_vdata(self)[])
   let self = QSslSocket(h: self)
   let slotval1 = msecs
   var virtualReturn = vtbl[].waitForDisconnected(self, slotval1)
   virtualReturn
-
-proc QSslSocketreadData*(self: gen_qsslsocket_types.QSslSocket, data: cstring, maxlen: clonglong): clonglong =
-  fcQSslSocket_virtualbase_readData(self.h, data, maxlen)
 
 proc fcQSslSocket_vtable_callback_readData(self: pointer, data: cstring, maxlen: clonglong): clonglong {.cdecl.} =
   let vtbl = cast[ptr QSslSocketVTable](fcQSslSocket_vdata(self)[])
@@ -1150,18 +1208,12 @@ proc fcQSslSocket_vtable_callback_readData(self: pointer, data: cstring, maxlen:
   var virtualReturn = vtbl[].readData(self, slotval1, slotval2)
   virtualReturn
 
-proc QSslSocketskipData*(self: gen_qsslsocket_types.QSslSocket, maxSize: clonglong): clonglong =
-  fcQSslSocket_virtualbase_skipData(self.h, maxSize)
-
 proc fcQSslSocket_vtable_callback_skipData(self: pointer, maxSize: clonglong): clonglong {.cdecl.} =
   let vtbl = cast[ptr QSslSocketVTable](fcQSslSocket_vdata(self)[])
   let self = QSslSocket(h: self)
   let slotval1 = maxSize
   var virtualReturn = vtbl[].skipData(self, slotval1)
   virtualReturn
-
-proc QSslSocketwriteData*(self: gen_qsslsocket_types.QSslSocket, data: cstring, len: clonglong): clonglong =
-  fcQSslSocket_virtualbase_writeData(self.h, data, len)
 
 proc fcQSslSocket_vtable_callback_writeData(self: pointer, data: cstring, len: clonglong): clonglong {.cdecl.} =
   let vtbl = cast[ptr QSslSocketVTable](fcQSslSocket_vdata(self)[])
@@ -1170,9 +1222,6 @@ proc fcQSslSocket_vtable_callback_writeData(self: pointer, data: cstring, len: c
   let slotval2 = len
   var virtualReturn = vtbl[].writeData(self, slotval1, slotval2)
   virtualReturn
-
-proc QSslSocketbindX*(self: gen_qsslsocket_types.QSslSocket, address: gen_qhostaddress_types.QHostAddress, port: cushort, mode: cint): bool =
-  fcQSslSocket_virtualbase_bindX(self.h, address.h, port, cint(mode))
 
 proc fcQSslSocket_vtable_callback_bindX(self: pointer, address: pointer, port: cushort, mode: cint): bool {.cdecl.} =
   let vtbl = cast[ptr QSslSocketVTable](fcQSslSocket_vdata(self)[])
@@ -1183,26 +1232,17 @@ proc fcQSslSocket_vtable_callback_bindX(self: pointer, address: pointer, port: c
   var virtualReturn = vtbl[].bindX(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QSslSocketsocketDescriptor*(self: gen_qsslsocket_types.QSslSocket): uint =
-  fcQSslSocket_virtualbase_socketDescriptor(self.h)
-
 proc fcQSslSocket_vtable_callback_socketDescriptor(self: pointer): uint {.cdecl.} =
   let vtbl = cast[ptr QSslSocketVTable](fcQSslSocket_vdata(self)[])
   let self = QSslSocket(h: self)
   var virtualReturn = vtbl[].socketDescriptor(self)
   virtualReturn
 
-proc QSslSocketisSequential*(self: gen_qsslsocket_types.QSslSocket): bool =
-  fcQSslSocket_virtualbase_isSequential(self.h)
-
 proc fcQSslSocket_vtable_callback_isSequential(self: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QSslSocketVTable](fcQSslSocket_vdata(self)[])
   let self = QSslSocket(h: self)
   var virtualReturn = vtbl[].isSequential(self)
   virtualReturn
-
-proc QSslSocketreadLineData*(self: gen_qsslsocket_types.QSslSocket, data: cstring, maxlen: clonglong): clonglong =
-  fcQSslSocket_virtualbase_readLineData(self.h, data, maxlen)
 
 proc fcQSslSocket_vtable_callback_readLineData(self: pointer, data: cstring, maxlen: clonglong): clonglong {.cdecl.} =
   let vtbl = cast[ptr QSslSocketVTable](fcQSslSocket_vdata(self)[])
@@ -1212,9 +1252,6 @@ proc fcQSslSocket_vtable_callback_readLineData(self: pointer, data: cstring, max
   var virtualReturn = vtbl[].readLineData(self, slotval1, slotval2)
   virtualReturn
 
-proc QSslSocketopen*(self: gen_qsslsocket_types.QSslSocket, mode: cint): bool =
-  fcQSslSocket_virtualbase_open(self.h, cint(mode))
-
 proc fcQSslSocket_vtable_callback_open(self: pointer, mode: cint): bool {.cdecl.} =
   let vtbl = cast[ptr QSslSocketVTable](fcQSslSocket_vdata(self)[])
   let self = QSslSocket(h: self)
@@ -1222,26 +1259,17 @@ proc fcQSslSocket_vtable_callback_open(self: pointer, mode: cint): bool {.cdecl.
   var virtualReturn = vtbl[].open(self, slotval1)
   virtualReturn
 
-proc QSslSocketpos*(self: gen_qsslsocket_types.QSslSocket): clonglong =
-  fcQSslSocket_virtualbase_pos(self.h)
-
 proc fcQSslSocket_vtable_callback_pos(self: pointer): clonglong {.cdecl.} =
   let vtbl = cast[ptr QSslSocketVTable](fcQSslSocket_vdata(self)[])
   let self = QSslSocket(h: self)
   var virtualReturn = vtbl[].pos(self)
   virtualReturn
 
-proc QSslSocketsize*(self: gen_qsslsocket_types.QSslSocket): clonglong =
-  fcQSslSocket_virtualbase_size(self.h)
-
 proc fcQSslSocket_vtable_callback_size(self: pointer): clonglong {.cdecl.} =
   let vtbl = cast[ptr QSslSocketVTable](fcQSslSocket_vdata(self)[])
   let self = QSslSocket(h: self)
   var virtualReturn = vtbl[].size(self)
   virtualReturn
-
-proc QSslSocketseek*(self: gen_qsslsocket_types.QSslSocket, pos: clonglong): bool =
-  fcQSslSocket_virtualbase_seek(self.h, pos)
 
 proc fcQSslSocket_vtable_callback_seek(self: pointer, pos: clonglong): bool {.cdecl.} =
   let vtbl = cast[ptr QSslSocketVTable](fcQSslSocket_vdata(self)[])
@@ -1250,17 +1278,11 @@ proc fcQSslSocket_vtable_callback_seek(self: pointer, pos: clonglong): bool {.cd
   var virtualReturn = vtbl[].seek(self, slotval1)
   virtualReturn
 
-proc QSslSocketreset*(self: gen_qsslsocket_types.QSslSocket): bool =
-  fcQSslSocket_virtualbase_reset(self.h)
-
 proc fcQSslSocket_vtable_callback_reset(self: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QSslSocketVTable](fcQSslSocket_vdata(self)[])
   let self = QSslSocket(h: self)
   var virtualReturn = vtbl[].reset(self)
   virtualReturn
-
-proc QSslSocketevent*(self: gen_qsslsocket_types.QSslSocket, event: gen_qcoreevent_types.QEvent): bool =
-  fcQSslSocket_virtualbase_event(self.h, event.h)
 
 proc fcQSslSocket_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QSslSocketVTable](fcQSslSocket_vdata(self)[])
@@ -1268,9 +1290,6 @@ proc fcQSslSocket_vtable_callback_event(self: pointer, event: pointer): bool {.c
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
-
-proc QSslSocketeventFilter*(self: gen_qsslsocket_types.QSslSocket, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
-  fcQSslSocket_virtualbase_eventFilter(self.h, watched.h, event.h)
 
 proc fcQSslSocket_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QSslSocketVTable](fcQSslSocket_vdata(self)[])
@@ -1280,17 +1299,11 @@ proc fcQSslSocket_vtable_callback_eventFilter(self: pointer, watched: pointer, e
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
-proc QSslSockettimerEvent*(self: gen_qsslsocket_types.QSslSocket, event: gen_qcoreevent_types.QTimerEvent): void =
-  fcQSslSocket_virtualbase_timerEvent(self.h, event.h)
-
 proc fcQSslSocket_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSslSocketVTable](fcQSslSocket_vdata(self)[])
   let self = QSslSocket(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
-
-proc QSslSocketchildEvent*(self: gen_qsslsocket_types.QSslSocket, event: gen_qcoreevent_types.QChildEvent): void =
-  fcQSslSocket_virtualbase_childEvent(self.h, event.h)
 
 proc fcQSslSocket_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSslSocketVTable](fcQSslSocket_vdata(self)[])
@@ -1298,26 +1311,17 @@ proc fcQSslSocket_vtable_callback_childEvent(self: pointer, event: pointer): voi
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
-proc QSslSocketcustomEvent*(self: gen_qsslsocket_types.QSslSocket, event: gen_qcoreevent_types.QEvent): void =
-  fcQSslSocket_virtualbase_customEvent(self.h, event.h)
-
 proc fcQSslSocket_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSslSocketVTable](fcQSslSocket_vdata(self)[])
   let self = QSslSocket(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
-proc QSslSocketconnectNotify*(self: gen_qsslsocket_types.QSslSocket, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQSslSocket_virtualbase_connectNotify(self.h, signal.h)
-
 proc fcQSslSocket_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSslSocketVTable](fcQSslSocket_vdata(self)[])
   let self = QSslSocket(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
-
-proc QSslSocketdisconnectNotify*(self: gen_qsslsocket_types.QSslSocket, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQSslSocket_virtualbase_disconnectNotify(self.h, signal.h)
 
 proc fcQSslSocket_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSslSocketVTable](fcQSslSocket_vdata(self)[])
@@ -1327,23 +1331,95 @@ proc fcQSslSocket_vtable_callback_disconnectNotify(self: pointer, signal: pointe
 
 type VirtualQSslSocket* {.inheritable.} = ref object of QSslSocket
   vtbl*: cQSslSocketVTable
+
 method metaObject*(self: VirtualQSslSocket): gen_qobjectdefs_types.QMetaObject {.base.} =
   QSslSocketmetaObject(self[])
+method metacast*(self: VirtualQSslSocket, param1: cstring): pointer {.base.} =
+  QSslSocketmetacast(self[], param1)
+method metacall*(self: VirtualQSslSocket, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QSslSocketmetacall(self[], param1, param2, param3)
+method resume*(self: VirtualQSslSocket): void {.base.} =
+  QSslSocketresume(self[])
+method setSocketDescriptor*(self: VirtualQSslSocket, socketDescriptor: uint, state: cint, openMode: cint): bool {.base.} =
+  QSslSocketsetSocketDescriptor(self[], socketDescriptor, state, openMode)
+method connectToHost*(self: VirtualQSslSocket, hostName: openArray[char], port: cushort, openMode: cint, protocol: cint): void {.base.} =
+  QSslSocketconnectToHost(self[], hostName, port, openMode, protocol)
+method disconnectFromHost*(self: VirtualQSslSocket): void {.base.} =
+  QSslSocketdisconnectFromHost(self[])
+method setSocketOption*(self: VirtualQSslSocket, option: cint, value: gen_qvariant_types.QVariant): void {.base.} =
+  QSslSocketsetSocketOption(self[], option, value)
+method socketOption*(self: VirtualQSslSocket, option: cint): gen_qvariant_types.QVariant {.base.} =
+  QSslSocketsocketOption(self[], option)
+method bytesAvailable*(self: VirtualQSslSocket): clonglong {.base.} =
+  QSslSocketbytesAvailable(self[])
+method bytesToWrite*(self: VirtualQSslSocket): clonglong {.base.} =
+  QSslSocketbytesToWrite(self[])
+method canReadLine*(self: VirtualQSslSocket): bool {.base.} =
+  QSslSocketcanReadLine(self[])
+method close*(self: VirtualQSslSocket): void {.base.} =
+  QSslSocketclose(self[])
+method atEnd*(self: VirtualQSslSocket): bool {.base.} =
+  QSslSocketatEnd(self[])
+method setReadBufferSize*(self: VirtualQSslSocket, size: clonglong): void {.base.} =
+  QSslSocketsetReadBufferSize(self[], size)
+method waitForConnected*(self: VirtualQSslSocket, msecs: cint): bool {.base.} =
+  QSslSocketwaitForConnected(self[], msecs)
+method waitForReadyRead*(self: VirtualQSslSocket, msecs: cint): bool {.base.} =
+  QSslSocketwaitForReadyRead(self[], msecs)
+method waitForBytesWritten*(self: VirtualQSslSocket, msecs: cint): bool {.base.} =
+  QSslSocketwaitForBytesWritten(self[], msecs)
+method waitForDisconnected*(self: VirtualQSslSocket, msecs: cint): bool {.base.} =
+  QSslSocketwaitForDisconnected(self[], msecs)
+method readData*(self: VirtualQSslSocket, data: cstring, maxlen: clonglong): clonglong {.base.} =
+  QSslSocketreadData(self[], data, maxlen)
+method skipData*(self: VirtualQSslSocket, maxSize: clonglong): clonglong {.base.} =
+  QSslSocketskipData(self[], maxSize)
+method writeData*(self: VirtualQSslSocket, data: cstring, len: clonglong): clonglong {.base.} =
+  QSslSocketwriteData(self[], data, len)
+method bindX*(self: VirtualQSslSocket, address: gen_qhostaddress_types.QHostAddress, port: cushort, mode: cint): bool {.base.} =
+  QSslSocketbindX(self[], address, port, mode)
+method socketDescriptor*(self: VirtualQSslSocket): uint {.base.} =
+  QSslSocketsocketDescriptor(self[])
+method isSequential*(self: VirtualQSslSocket): bool {.base.} =
+  QSslSocketisSequential(self[])
+method readLineData*(self: VirtualQSslSocket, data: cstring, maxlen: clonglong): clonglong {.base.} =
+  QSslSocketreadLineData(self[], data, maxlen)
+method open*(self: VirtualQSslSocket, mode: cint): bool {.base.} =
+  QSslSocketopen(self[], mode)
+method pos*(self: VirtualQSslSocket): clonglong {.base.} =
+  QSslSocketpos(self[])
+method size*(self: VirtualQSslSocket): clonglong {.base.} =
+  QSslSocketsize(self[])
+method seek*(self: VirtualQSslSocket, pos: clonglong): bool {.base.} =
+  QSslSocketseek(self[], pos)
+method reset*(self: VirtualQSslSocket): bool {.base.} =
+  QSslSocketreset(self[])
+method event*(self: VirtualQSslSocket, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QSslSocketevent(self[], event)
+method eventFilter*(self: VirtualQSslSocket, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QSslSocketeventFilter(self[], watched, event)
+method timerEvent*(self: VirtualQSslSocket, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QSslSockettimerEvent(self[], event)
+method childEvent*(self: VirtualQSslSocket, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QSslSocketchildEvent(self[], event)
+method customEvent*(self: VirtualQSslSocket, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QSslSocketcustomEvent(self[], event)
+method connectNotify*(self: VirtualQSslSocket, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QSslSocketconnectNotify(self[], signal)
+method disconnectNotify*(self: VirtualQSslSocket, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QSslSocketdisconnectNotify(self[], signal)
+
 proc fcQSslSocket_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQSslSocket](fcQSslSocket_vdata(self)[])
   var virtualReturn = inst.metaObject()
   virtualReturn.h
 
-method metacast*(self: VirtualQSslSocket, param1: cstring): pointer {.base.} =
-  QSslSocketmetacast(self[], param1)
 proc fcQSslSocket_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQSslSocket](fcQSslSocket_vdata(self)[])
   let slotval1 = (param1)
   var virtualReturn = inst.metacast(slotval1)
   virtualReturn
 
-method metacall*(self: VirtualQSslSocket, param1: cint, param2: cint, param3: pointer): cint {.base.} =
-  QSslSocketmetacall(self[], param1, param2, param3)
 proc fcQSslSocket_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQSslSocket](fcQSslSocket_vdata(self)[])
   let slotval1 = cint(param1)
@@ -1352,14 +1428,10 @@ proc fcQSslSocket_method_callback_metacall(self: pointer, param1: cint, param2: 
   var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
-method resume*(self: VirtualQSslSocket): void {.base.} =
-  QSslSocketresume(self[])
 proc fcQSslSocket_method_callback_resume(self: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSslSocket](fcQSslSocket_vdata(self)[])
   inst.resume()
 
-method setSocketDescriptor*(self: VirtualQSslSocket, socketDescriptor: uint, state: cint, openMode: cint): bool {.base.} =
-  QSslSocketsetSocketDescriptor(self[], socketDescriptor, state, openMode)
 proc fcQSslSocket_method_callback_setSocketDescriptor(self: pointer, socketDescriptor: uint, state: cint, openMode: cint): bool {.cdecl.} =
   let inst = cast[VirtualQSslSocket](fcQSslSocket_vdata(self)[])
   let slotval1 = socketDescriptor
@@ -1368,8 +1440,6 @@ proc fcQSslSocket_method_callback_setSocketDescriptor(self: pointer, socketDescr
   var virtualReturn = inst.setSocketDescriptor(slotval1, slotval2, slotval3)
   virtualReturn
 
-method connectToHost*(self: VirtualQSslSocket, hostName: openArray[char], port: cushort, openMode: cint, protocol: cint): void {.base.} =
-  QSslSocketconnectToHost(self[], hostName, port, openMode, protocol)
 proc fcQSslSocket_method_callback_connectToHost(self: pointer, hostName: struct_miqt_string, port: cushort, openMode: cint, protocol: cint): void {.cdecl.} =
   let inst = cast[VirtualQSslSocket](fcQSslSocket_vdata(self)[])
   let vhostName_ms = hostName
@@ -1381,103 +1451,75 @@ proc fcQSslSocket_method_callback_connectToHost(self: pointer, hostName: struct_
   let slotval4 = cint(protocol)
   inst.connectToHost(slotval1, slotval2, slotval3, slotval4)
 
-method disconnectFromHost*(self: VirtualQSslSocket): void {.base.} =
-  QSslSocketdisconnectFromHost(self[])
 proc fcQSslSocket_method_callback_disconnectFromHost(self: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSslSocket](fcQSslSocket_vdata(self)[])
   inst.disconnectFromHost()
 
-method setSocketOption*(self: VirtualQSslSocket, option: cint, value: gen_qvariant_types.QVariant): void {.base.} =
-  QSslSocketsetSocketOption(self[], option, value)
 proc fcQSslSocket_method_callback_setSocketOption(self: pointer, option: cint, value: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSslSocket](fcQSslSocket_vdata(self)[])
   let slotval1 = cint(option)
   let slotval2 = gen_qvariant_types.QVariant(h: value, owned: false)
   inst.setSocketOption(slotval1, slotval2)
 
-method socketOption*(self: VirtualQSslSocket, option: cint): gen_qvariant_types.QVariant {.base.} =
-  QSslSocketsocketOption(self[], option)
 proc fcQSslSocket_method_callback_socketOption(self: pointer, option: cint): pointer {.cdecl.} =
   let inst = cast[VirtualQSslSocket](fcQSslSocket_vdata(self)[])
   let slotval1 = cint(option)
   var virtualReturn = inst.socketOption(slotval1)
   virtualReturn.h
 
-method bytesAvailable*(self: VirtualQSslSocket): clonglong {.base.} =
-  QSslSocketbytesAvailable(self[])
 proc fcQSslSocket_method_callback_bytesAvailable(self: pointer): clonglong {.cdecl.} =
   let inst = cast[VirtualQSslSocket](fcQSslSocket_vdata(self)[])
   var virtualReturn = inst.bytesAvailable()
   virtualReturn
 
-method bytesToWrite*(self: VirtualQSslSocket): clonglong {.base.} =
-  QSslSocketbytesToWrite(self[])
 proc fcQSslSocket_method_callback_bytesToWrite(self: pointer): clonglong {.cdecl.} =
   let inst = cast[VirtualQSslSocket](fcQSslSocket_vdata(self)[])
   var virtualReturn = inst.bytesToWrite()
   virtualReturn
 
-method canReadLine*(self: VirtualQSslSocket): bool {.base.} =
-  QSslSocketcanReadLine(self[])
 proc fcQSslSocket_method_callback_canReadLine(self: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQSslSocket](fcQSslSocket_vdata(self)[])
   var virtualReturn = inst.canReadLine()
   virtualReturn
 
-method close*(self: VirtualQSslSocket): void {.base.} =
-  QSslSocketclose(self[])
 proc fcQSslSocket_method_callback_close(self: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSslSocket](fcQSslSocket_vdata(self)[])
   inst.close()
 
-method atEnd*(self: VirtualQSslSocket): bool {.base.} =
-  QSslSocketatEnd(self[])
 proc fcQSslSocket_method_callback_atEnd(self: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQSslSocket](fcQSslSocket_vdata(self)[])
   var virtualReturn = inst.atEnd()
   virtualReturn
 
-method setReadBufferSize*(self: VirtualQSslSocket, size: clonglong): void {.base.} =
-  QSslSocketsetReadBufferSize(self[], size)
 proc fcQSslSocket_method_callback_setReadBufferSize(self: pointer, size: clonglong): void {.cdecl.} =
   let inst = cast[VirtualQSslSocket](fcQSslSocket_vdata(self)[])
   let slotval1 = size
   inst.setReadBufferSize(slotval1)
 
-method waitForConnected*(self: VirtualQSslSocket, msecs: cint): bool {.base.} =
-  QSslSocketwaitForConnected(self[], msecs)
 proc fcQSslSocket_method_callback_waitForConnected(self: pointer, msecs: cint): bool {.cdecl.} =
   let inst = cast[VirtualQSslSocket](fcQSslSocket_vdata(self)[])
   let slotval1 = msecs
   var virtualReturn = inst.waitForConnected(slotval1)
   virtualReturn
 
-method waitForReadyRead*(self: VirtualQSslSocket, msecs: cint): bool {.base.} =
-  QSslSocketwaitForReadyRead(self[], msecs)
 proc fcQSslSocket_method_callback_waitForReadyRead(self: pointer, msecs: cint): bool {.cdecl.} =
   let inst = cast[VirtualQSslSocket](fcQSslSocket_vdata(self)[])
   let slotval1 = msecs
   var virtualReturn = inst.waitForReadyRead(slotval1)
   virtualReturn
 
-method waitForBytesWritten*(self: VirtualQSslSocket, msecs: cint): bool {.base.} =
-  QSslSocketwaitForBytesWritten(self[], msecs)
 proc fcQSslSocket_method_callback_waitForBytesWritten(self: pointer, msecs: cint): bool {.cdecl.} =
   let inst = cast[VirtualQSslSocket](fcQSslSocket_vdata(self)[])
   let slotval1 = msecs
   var virtualReturn = inst.waitForBytesWritten(slotval1)
   virtualReturn
 
-method waitForDisconnected*(self: VirtualQSslSocket, msecs: cint): bool {.base.} =
-  QSslSocketwaitForDisconnected(self[], msecs)
 proc fcQSslSocket_method_callback_waitForDisconnected(self: pointer, msecs: cint): bool {.cdecl.} =
   let inst = cast[VirtualQSslSocket](fcQSslSocket_vdata(self)[])
   let slotval1 = msecs
   var virtualReturn = inst.waitForDisconnected(slotval1)
   virtualReturn
 
-method readData*(self: VirtualQSslSocket, data: cstring, maxlen: clonglong): clonglong {.base.} =
-  QSslSocketreadData(self[], data, maxlen)
 proc fcQSslSocket_method_callback_readData(self: pointer, data: cstring, maxlen: clonglong): clonglong {.cdecl.} =
   let inst = cast[VirtualQSslSocket](fcQSslSocket_vdata(self)[])
   let slotval1 = (data)
@@ -1485,16 +1527,12 @@ proc fcQSslSocket_method_callback_readData(self: pointer, data: cstring, maxlen:
   var virtualReturn = inst.readData(slotval1, slotval2)
   virtualReturn
 
-method skipData*(self: VirtualQSslSocket, maxSize: clonglong): clonglong {.base.} =
-  QSslSocketskipData(self[], maxSize)
 proc fcQSslSocket_method_callback_skipData(self: pointer, maxSize: clonglong): clonglong {.cdecl.} =
   let inst = cast[VirtualQSslSocket](fcQSslSocket_vdata(self)[])
   let slotval1 = maxSize
   var virtualReturn = inst.skipData(slotval1)
   virtualReturn
 
-method writeData*(self: VirtualQSslSocket, data: cstring, len: clonglong): clonglong {.base.} =
-  QSslSocketwriteData(self[], data, len)
 proc fcQSslSocket_method_callback_writeData(self: pointer, data: cstring, len: clonglong): clonglong {.cdecl.} =
   let inst = cast[VirtualQSslSocket](fcQSslSocket_vdata(self)[])
   let slotval1 = (data)
@@ -1502,8 +1540,6 @@ proc fcQSslSocket_method_callback_writeData(self: pointer, data: cstring, len: c
   var virtualReturn = inst.writeData(slotval1, slotval2)
   virtualReturn
 
-method bindX*(self: VirtualQSslSocket, address: gen_qhostaddress_types.QHostAddress, port: cushort, mode: cint): bool {.base.} =
-  QSslSocketbindX(self[], address, port, mode)
 proc fcQSslSocket_method_callback_bindX(self: pointer, address: pointer, port: cushort, mode: cint): bool {.cdecl.} =
   let inst = cast[VirtualQSslSocket](fcQSslSocket_vdata(self)[])
   let slotval1 = gen_qhostaddress_types.QHostAddress(h: address, owned: false)
@@ -1512,22 +1548,16 @@ proc fcQSslSocket_method_callback_bindX(self: pointer, address: pointer, port: c
   var virtualReturn = inst.bindX(slotval1, slotval2, slotval3)
   virtualReturn
 
-method socketDescriptor*(self: VirtualQSslSocket): uint {.base.} =
-  QSslSocketsocketDescriptor(self[])
 proc fcQSslSocket_method_callback_socketDescriptor(self: pointer): uint {.cdecl.} =
   let inst = cast[VirtualQSslSocket](fcQSslSocket_vdata(self)[])
   var virtualReturn = inst.socketDescriptor()
   virtualReturn
 
-method isSequential*(self: VirtualQSslSocket): bool {.base.} =
-  QSslSocketisSequential(self[])
 proc fcQSslSocket_method_callback_isSequential(self: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQSslSocket](fcQSslSocket_vdata(self)[])
   var virtualReturn = inst.isSequential()
   virtualReturn
 
-method readLineData*(self: VirtualQSslSocket, data: cstring, maxlen: clonglong): clonglong {.base.} =
-  QSslSocketreadLineData(self[], data, maxlen)
 proc fcQSslSocket_method_callback_readLineData(self: pointer, data: cstring, maxlen: clonglong): clonglong {.cdecl.} =
   let inst = cast[VirtualQSslSocket](fcQSslSocket_vdata(self)[])
   let slotval1 = (data)
@@ -1535,53 +1565,39 @@ proc fcQSslSocket_method_callback_readLineData(self: pointer, data: cstring, max
   var virtualReturn = inst.readLineData(slotval1, slotval2)
   virtualReturn
 
-method open*(self: VirtualQSslSocket, mode: cint): bool {.base.} =
-  QSslSocketopen(self[], mode)
 proc fcQSslSocket_method_callback_open(self: pointer, mode: cint): bool {.cdecl.} =
   let inst = cast[VirtualQSslSocket](fcQSslSocket_vdata(self)[])
   let slotval1 = cint(mode)
   var virtualReturn = inst.open(slotval1)
   virtualReturn
 
-method pos*(self: VirtualQSslSocket): clonglong {.base.} =
-  QSslSocketpos(self[])
 proc fcQSslSocket_method_callback_pos(self: pointer): clonglong {.cdecl.} =
   let inst = cast[VirtualQSslSocket](fcQSslSocket_vdata(self)[])
   var virtualReturn = inst.pos()
   virtualReturn
 
-method size*(self: VirtualQSslSocket): clonglong {.base.} =
-  QSslSocketsize(self[])
 proc fcQSslSocket_method_callback_size(self: pointer): clonglong {.cdecl.} =
   let inst = cast[VirtualQSslSocket](fcQSslSocket_vdata(self)[])
   var virtualReturn = inst.size()
   virtualReturn
 
-method seek*(self: VirtualQSslSocket, pos: clonglong): bool {.base.} =
-  QSslSocketseek(self[], pos)
 proc fcQSslSocket_method_callback_seek(self: pointer, pos: clonglong): bool {.cdecl.} =
   let inst = cast[VirtualQSslSocket](fcQSslSocket_vdata(self)[])
   let slotval1 = pos
   var virtualReturn = inst.seek(slotval1)
   virtualReturn
 
-method reset*(self: VirtualQSslSocket): bool {.base.} =
-  QSslSocketreset(self[])
 proc fcQSslSocket_method_callback_reset(self: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQSslSocket](fcQSslSocket_vdata(self)[])
   var virtualReturn = inst.reset()
   virtualReturn
 
-method event*(self: VirtualQSslSocket, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QSslSocketevent(self[], event)
 proc fcQSslSocket_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQSslSocket](fcQSslSocket_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
-method eventFilter*(self: VirtualQSslSocket, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QSslSocketeventFilter(self[], watched, event)
 proc fcQSslSocket_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQSslSocket](fcQSslSocket_vdata(self)[])
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
@@ -1589,40 +1605,31 @@ proc fcQSslSocket_method_callback_eventFilter(self: pointer, watched: pointer, e
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
-method timerEvent*(self: VirtualQSslSocket, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
-  QSslSockettimerEvent(self[], event)
 proc fcQSslSocket_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSslSocket](fcQSslSocket_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
-method childEvent*(self: VirtualQSslSocket, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
-  QSslSocketchildEvent(self[], event)
 proc fcQSslSocket_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSslSocket](fcQSslSocket_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
-method customEvent*(self: VirtualQSslSocket, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QSslSocketcustomEvent(self[], event)
 proc fcQSslSocket_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSslSocket](fcQSslSocket_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
-method connectNotify*(self: VirtualQSslSocket, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QSslSocketconnectNotify(self[], signal)
 proc fcQSslSocket_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSslSocket](fcQSslSocket_vdata(self)[])
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
-method disconnectNotify*(self: VirtualQSslSocket, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QSslSocketdisconnectNotify(self[], signal)
 proc fcQSslSocket_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSslSocket](fcQSslSocket_vdata(self)[])
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
+
 
 proc setSocketState*(self: gen_qsslsocket_types.QSslSocket, state: cint): void =
   fcQSslSocket_protectedbase_setSocketState(self.h, cint(state))

@@ -87,6 +87,7 @@ proc fcQQuickFramebufferObject_tr2(s: cstring, c: cstring): struct_miqt_string {
 proc fcQQuickFramebufferObject_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QQuickFramebufferObject_tr3".}
 proc fcQQuickFramebufferObject_vdata(self: pointer): ptr pointer {.importc: "QQuickFramebufferObject_vdata".}
 proc fvdata_cQQuickFramebufferObject(self: pointer): pointer {.importc: "vdata_QQuickFramebufferObject".}
+
 type cQQuickFramebufferObjectVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -246,7 +247,7 @@ proc fcQQuickFramebufferObject_slot_callback_textureFollowsItemSizeChanged_relea
   let nimfunc = cast[ref QQuickFramebufferObjecttextureFollowsItemSizeChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc ontextureFollowsItemSizeChanged*(self: gen_qquickframebufferobject_types.QQuickFramebufferObject, slot: QQuickFramebufferObjecttextureFollowsItemSizeChangedSlot) =
+proc onTextureFollowsItemSizeChanged*(self: gen_qquickframebufferobject_types.QQuickFramebufferObject, slot: QQuickFramebufferObjecttextureFollowsItemSizeChangedSlot) =
   var tmp = new QQuickFramebufferObjecttextureFollowsItemSizeChangedSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -266,7 +267,7 @@ proc fcQQuickFramebufferObject_slot_callback_mirrorVerticallyChanged_release(slo
   let nimfunc = cast[ref QQuickFramebufferObjectmirrorVerticallyChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onmirrorVerticallyChanged*(self: gen_qquickframebufferobject_types.QQuickFramebufferObject, slot: QQuickFramebufferObjectmirrorVerticallyChangedSlot) =
+proc onMirrorVerticallyChanged*(self: gen_qquickframebufferobject_types.QQuickFramebufferObject, slot: QQuickFramebufferObjectmirrorVerticallyChangedSlot) =
   var tmp = new QQuickFramebufferObjectmirrorVerticallyChangedSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -329,6 +330,7 @@ type QQuickFramebufferObjectchildEventProc* = proc(self: QQuickFramebufferObject
 type QQuickFramebufferObjectcustomEventProc* = proc(self: QQuickFramebufferObject, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QQuickFramebufferObjectconnectNotifyProc* = proc(self: QQuickFramebufferObject, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QQuickFramebufferObjectdisconnectNotifyProc* = proc(self: QQuickFramebufferObject, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+
 type QQuickFramebufferObjectVTable* {.inheritable, pure.} = object
   vtbl: cQQuickFramebufferObjectVTable
   metaObject*: QQuickFramebufferObjectmetaObjectProc
@@ -376,8 +378,139 @@ type QQuickFramebufferObjectVTable* {.inheritable, pure.} = object
   customEvent*: QQuickFramebufferObjectcustomEventProc
   connectNotify*: QQuickFramebufferObjectconnectNotifyProc
   disconnectNotify*: QQuickFramebufferObjectdisconnectNotifyProc
+
 proc QQuickFramebufferObjectmetaObject*(self: gen_qquickframebufferobject_types.QQuickFramebufferObject): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQQuickFramebufferObject_virtualbase_metaObject(self.h), owned: false)
+
+proc QQuickFramebufferObjectmetacast*(self: gen_qquickframebufferobject_types.QQuickFramebufferObject, param1: cstring): pointer =
+  fcQQuickFramebufferObject_virtualbase_metacast(self.h, param1)
+
+proc QQuickFramebufferObjectmetacall*(self: gen_qquickframebufferobject_types.QQuickFramebufferObject, param1: cint, param2: cint, param3: pointer): cint =
+  fcQQuickFramebufferObject_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+proc QQuickFramebufferObjectisTextureProvider*(self: gen_qquickframebufferobject_types.QQuickFramebufferObject): bool =
+  fcQQuickFramebufferObject_virtualbase_isTextureProvider(self.h)
+
+proc QQuickFramebufferObjecttextureProvider*(self: gen_qquickframebufferobject_types.QQuickFramebufferObject): gen_qsgtextureprovider_types.QSGTextureProvider =
+  gen_qsgtextureprovider_types.QSGTextureProvider(h: fcQQuickFramebufferObject_virtualbase_textureProvider(self.h), owned: false)
+
+proc QQuickFramebufferObjectreleaseResources*(self: gen_qquickframebufferobject_types.QQuickFramebufferObject): void =
+  fcQQuickFramebufferObject_virtualbase_releaseResources(self.h)
+
+proc QQuickFramebufferObjectgeometryChange*(self: gen_qquickframebufferobject_types.QQuickFramebufferObject, newGeometry: gen_qrect_types.QRectF, oldGeometry: gen_qrect_types.QRectF): void =
+  fcQQuickFramebufferObject_virtualbase_geometryChange(self.h, newGeometry.h, oldGeometry.h)
+
+proc QQuickFramebufferObjectupdatePaintNode*(self: gen_qquickframebufferobject_types.QQuickFramebufferObject, param1: gen_qsgnode_types.QSGNode, param2: gen_qquickitem_types.QQuickItemUpdatePaintNodeData): gen_qsgnode_types.QSGNode =
+  gen_qsgnode_types.QSGNode(h: fcQQuickFramebufferObject_virtualbase_updatePaintNode(self.h, param1.h, param2.h), owned: false)
+
+proc QQuickFramebufferObjectboundingRect*(self: gen_qquickframebufferobject_types.QQuickFramebufferObject): gen_qrect_types.QRectF =
+  gen_qrect_types.QRectF(h: fcQQuickFramebufferObject_virtualbase_boundingRect(self.h), owned: true)
+
+proc QQuickFramebufferObjectclipRect*(self: gen_qquickframebufferobject_types.QQuickFramebufferObject): gen_qrect_types.QRectF =
+  gen_qrect_types.QRectF(h: fcQQuickFramebufferObject_virtualbase_clipRect(self.h), owned: true)
+
+proc QQuickFramebufferObjectcontains*(self: gen_qquickframebufferobject_types.QQuickFramebufferObject, point: gen_qpoint_types.QPointF): bool =
+  fcQQuickFramebufferObject_virtualbase_contains(self.h, point.h)
+
+proc QQuickFramebufferObjectinputMethodQuery*(self: gen_qquickframebufferobject_types.QQuickFramebufferObject, query: cint): gen_qvariant_types.QVariant =
+  gen_qvariant_types.QVariant(h: fcQQuickFramebufferObject_virtualbase_inputMethodQuery(self.h, cint(query)), owned: true)
+
+proc QQuickFramebufferObjectevent*(self: gen_qquickframebufferobject_types.QQuickFramebufferObject, param1: gen_qcoreevent_types.QEvent): bool =
+  fcQQuickFramebufferObject_virtualbase_event(self.h, param1.h)
+
+proc QQuickFramebufferObjectitemChange*(self: gen_qquickframebufferobject_types.QQuickFramebufferObject, param1: cint, param2: gen_qquickitem_types.QQuickItemItemChangeData): void =
+  fcQQuickFramebufferObject_virtualbase_itemChange(self.h, cint(param1), param2.h)
+
+proc QQuickFramebufferObjectclassBegin*(self: gen_qquickframebufferobject_types.QQuickFramebufferObject): void =
+  fcQQuickFramebufferObject_virtualbase_classBegin(self.h)
+
+proc QQuickFramebufferObjectcomponentComplete*(self: gen_qquickframebufferobject_types.QQuickFramebufferObject): void =
+  fcQQuickFramebufferObject_virtualbase_componentComplete(self.h)
+
+proc QQuickFramebufferObjectkeyPressEvent*(self: gen_qquickframebufferobject_types.QQuickFramebufferObject, event: gen_qevent_types.QKeyEvent): void =
+  fcQQuickFramebufferObject_virtualbase_keyPressEvent(self.h, event.h)
+
+proc QQuickFramebufferObjectkeyReleaseEvent*(self: gen_qquickframebufferobject_types.QQuickFramebufferObject, event: gen_qevent_types.QKeyEvent): void =
+  fcQQuickFramebufferObject_virtualbase_keyReleaseEvent(self.h, event.h)
+
+proc QQuickFramebufferObjectinputMethodEvent*(self: gen_qquickframebufferobject_types.QQuickFramebufferObject, param1: gen_qevent_types.QInputMethodEvent): void =
+  fcQQuickFramebufferObject_virtualbase_inputMethodEvent(self.h, param1.h)
+
+proc QQuickFramebufferObjectfocusInEvent*(self: gen_qquickframebufferobject_types.QQuickFramebufferObject, param1: gen_qevent_types.QFocusEvent): void =
+  fcQQuickFramebufferObject_virtualbase_focusInEvent(self.h, param1.h)
+
+proc QQuickFramebufferObjectfocusOutEvent*(self: gen_qquickframebufferobject_types.QQuickFramebufferObject, param1: gen_qevent_types.QFocusEvent): void =
+  fcQQuickFramebufferObject_virtualbase_focusOutEvent(self.h, param1.h)
+
+proc QQuickFramebufferObjectmousePressEvent*(self: gen_qquickframebufferobject_types.QQuickFramebufferObject, event: gen_qevent_types.QMouseEvent): void =
+  fcQQuickFramebufferObject_virtualbase_mousePressEvent(self.h, event.h)
+
+proc QQuickFramebufferObjectmouseMoveEvent*(self: gen_qquickframebufferobject_types.QQuickFramebufferObject, event: gen_qevent_types.QMouseEvent): void =
+  fcQQuickFramebufferObject_virtualbase_mouseMoveEvent(self.h, event.h)
+
+proc QQuickFramebufferObjectmouseReleaseEvent*(self: gen_qquickframebufferobject_types.QQuickFramebufferObject, event: gen_qevent_types.QMouseEvent): void =
+  fcQQuickFramebufferObject_virtualbase_mouseReleaseEvent(self.h, event.h)
+
+proc QQuickFramebufferObjectmouseDoubleClickEvent*(self: gen_qquickframebufferobject_types.QQuickFramebufferObject, event: gen_qevent_types.QMouseEvent): void =
+  fcQQuickFramebufferObject_virtualbase_mouseDoubleClickEvent(self.h, event.h)
+
+proc QQuickFramebufferObjectmouseUngrabEvent*(self: gen_qquickframebufferobject_types.QQuickFramebufferObject): void =
+  fcQQuickFramebufferObject_virtualbase_mouseUngrabEvent(self.h)
+
+proc QQuickFramebufferObjecttouchUngrabEvent*(self: gen_qquickframebufferobject_types.QQuickFramebufferObject): void =
+  fcQQuickFramebufferObject_virtualbase_touchUngrabEvent(self.h)
+
+proc QQuickFramebufferObjectwheelEvent*(self: gen_qquickframebufferobject_types.QQuickFramebufferObject, event: gen_qevent_types.QWheelEvent): void =
+  fcQQuickFramebufferObject_virtualbase_wheelEvent(self.h, event.h)
+
+proc QQuickFramebufferObjecttouchEvent*(self: gen_qquickframebufferobject_types.QQuickFramebufferObject, event: gen_qevent_types.QTouchEvent): void =
+  fcQQuickFramebufferObject_virtualbase_touchEvent(self.h, event.h)
+
+proc QQuickFramebufferObjecthoverEnterEvent*(self: gen_qquickframebufferobject_types.QQuickFramebufferObject, event: gen_qevent_types.QHoverEvent): void =
+  fcQQuickFramebufferObject_virtualbase_hoverEnterEvent(self.h, event.h)
+
+proc QQuickFramebufferObjecthoverMoveEvent*(self: gen_qquickframebufferobject_types.QQuickFramebufferObject, event: gen_qevent_types.QHoverEvent): void =
+  fcQQuickFramebufferObject_virtualbase_hoverMoveEvent(self.h, event.h)
+
+proc QQuickFramebufferObjecthoverLeaveEvent*(self: gen_qquickframebufferobject_types.QQuickFramebufferObject, event: gen_qevent_types.QHoverEvent): void =
+  fcQQuickFramebufferObject_virtualbase_hoverLeaveEvent(self.h, event.h)
+
+proc QQuickFramebufferObjectdragEnterEvent*(self: gen_qquickframebufferobject_types.QQuickFramebufferObject, param1: gen_qevent_types.QDragEnterEvent): void =
+  fcQQuickFramebufferObject_virtualbase_dragEnterEvent(self.h, param1.h)
+
+proc QQuickFramebufferObjectdragMoveEvent*(self: gen_qquickframebufferobject_types.QQuickFramebufferObject, param1: gen_qevent_types.QDragMoveEvent): void =
+  fcQQuickFramebufferObject_virtualbase_dragMoveEvent(self.h, param1.h)
+
+proc QQuickFramebufferObjectdragLeaveEvent*(self: gen_qquickframebufferobject_types.QQuickFramebufferObject, param1: gen_qevent_types.QDragLeaveEvent): void =
+  fcQQuickFramebufferObject_virtualbase_dragLeaveEvent(self.h, param1.h)
+
+proc QQuickFramebufferObjectdropEvent*(self: gen_qquickframebufferobject_types.QQuickFramebufferObject, param1: gen_qevent_types.QDropEvent): void =
+  fcQQuickFramebufferObject_virtualbase_dropEvent(self.h, param1.h)
+
+proc QQuickFramebufferObjectchildMouseEventFilter*(self: gen_qquickframebufferobject_types.QQuickFramebufferObject, param1: gen_qquickitem_types.QQuickItem, param2: gen_qcoreevent_types.QEvent): bool =
+  fcQQuickFramebufferObject_virtualbase_childMouseEventFilter(self.h, param1.h, param2.h)
+
+proc QQuickFramebufferObjectupdatePolish*(self: gen_qquickframebufferobject_types.QQuickFramebufferObject): void =
+  fcQQuickFramebufferObject_virtualbase_updatePolish(self.h)
+
+proc QQuickFramebufferObjecteventFilter*(self: gen_qquickframebufferobject_types.QQuickFramebufferObject, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
+  fcQQuickFramebufferObject_virtualbase_eventFilter(self.h, watched.h, event.h)
+
+proc QQuickFramebufferObjecttimerEvent*(self: gen_qquickframebufferobject_types.QQuickFramebufferObject, event: gen_qcoreevent_types.QTimerEvent): void =
+  fcQQuickFramebufferObject_virtualbase_timerEvent(self.h, event.h)
+
+proc QQuickFramebufferObjectchildEvent*(self: gen_qquickframebufferobject_types.QQuickFramebufferObject, event: gen_qcoreevent_types.QChildEvent): void =
+  fcQQuickFramebufferObject_virtualbase_childEvent(self.h, event.h)
+
+proc QQuickFramebufferObjectcustomEvent*(self: gen_qquickframebufferobject_types.QQuickFramebufferObject, event: gen_qcoreevent_types.QEvent): void =
+  fcQQuickFramebufferObject_virtualbase_customEvent(self.h, event.h)
+
+proc QQuickFramebufferObjectconnectNotify*(self: gen_qquickframebufferobject_types.QQuickFramebufferObject, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQQuickFramebufferObject_virtualbase_connectNotify(self.h, signal.h)
+
+proc QQuickFramebufferObjectdisconnectNotify*(self: gen_qquickframebufferobject_types.QQuickFramebufferObject, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQQuickFramebufferObject_virtualbase_disconnectNotify(self.h, signal.h)
+
 
 proc fcQQuickFramebufferObject_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QQuickFramebufferObjectVTable](fcQQuickFramebufferObject_vdata(self)[])
@@ -388,18 +521,12 @@ proc fcQQuickFramebufferObject_vtable_callback_metaObject(self: pointer): pointe
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QQuickFramebufferObjectmetacast*(self: gen_qquickframebufferobject_types.QQuickFramebufferObject, param1: cstring): pointer =
-  fcQQuickFramebufferObject_virtualbase_metacast(self.h, param1)
-
 proc fcQQuickFramebufferObject_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QQuickFramebufferObjectVTable](fcQQuickFramebufferObject_vdata(self)[])
   let self = QQuickFramebufferObject(h: self)
   let slotval1 = (param1)
   var virtualReturn = vtbl[].metacast(self, slotval1)
   virtualReturn
-
-proc QQuickFramebufferObjectmetacall*(self: gen_qquickframebufferobject_types.QQuickFramebufferObject, param1: cint, param2: cint, param3: pointer): cint =
-  fcQQuickFramebufferObject_virtualbase_metacall(self.h, cint(param1), param2, param3)
 
 proc fcQQuickFramebufferObject_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QQuickFramebufferObjectVTable](fcQQuickFramebufferObject_vdata(self)[])
@@ -419,17 +546,11 @@ proc fcQQuickFramebufferObject_vtable_callback_createRenderer(self: pointer): po
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QQuickFramebufferObjectisTextureProvider*(self: gen_qquickframebufferobject_types.QQuickFramebufferObject): bool =
-  fcQQuickFramebufferObject_virtualbase_isTextureProvider(self.h)
-
 proc fcQQuickFramebufferObject_vtable_callback_isTextureProvider(self: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QQuickFramebufferObjectVTable](fcQQuickFramebufferObject_vdata(self)[])
   let self = QQuickFramebufferObject(h: self)
   var virtualReturn = vtbl[].isTextureProvider(self)
   virtualReturn
-
-proc QQuickFramebufferObjecttextureProvider*(self: gen_qquickframebufferobject_types.QQuickFramebufferObject): gen_qsgtextureprovider_types.QSGTextureProvider =
-  gen_qsgtextureprovider_types.QSGTextureProvider(h: fcQQuickFramebufferObject_virtualbase_textureProvider(self.h), owned: false)
 
 proc fcQQuickFramebufferObject_vtable_callback_textureProvider(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QQuickFramebufferObjectVTable](fcQQuickFramebufferObject_vdata(self)[])
@@ -440,16 +561,10 @@ proc fcQQuickFramebufferObject_vtable_callback_textureProvider(self: pointer): p
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QQuickFramebufferObjectreleaseResources*(self: gen_qquickframebufferobject_types.QQuickFramebufferObject): void =
-  fcQQuickFramebufferObject_virtualbase_releaseResources(self.h)
-
 proc fcQQuickFramebufferObject_vtable_callback_releaseResources(self: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QQuickFramebufferObjectVTable](fcQQuickFramebufferObject_vdata(self)[])
   let self = QQuickFramebufferObject(h: self)
   vtbl[].releaseResources(self)
-
-proc QQuickFramebufferObjectgeometryChange*(self: gen_qquickframebufferobject_types.QQuickFramebufferObject, newGeometry: gen_qrect_types.QRectF, oldGeometry: gen_qrect_types.QRectF): void =
-  fcQQuickFramebufferObject_virtualbase_geometryChange(self.h, newGeometry.h, oldGeometry.h)
 
 proc fcQQuickFramebufferObject_vtable_callback_geometryChange(self: pointer, newGeometry: pointer, oldGeometry: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QQuickFramebufferObjectVTable](fcQQuickFramebufferObject_vdata(self)[])
@@ -457,9 +572,6 @@ proc fcQQuickFramebufferObject_vtable_callback_geometryChange(self: pointer, new
   let slotval1 = gen_qrect_types.QRectF(h: newGeometry, owned: false)
   let slotval2 = gen_qrect_types.QRectF(h: oldGeometry, owned: false)
   vtbl[].geometryChange(self, slotval1, slotval2)
-
-proc QQuickFramebufferObjectupdatePaintNode*(self: gen_qquickframebufferobject_types.QQuickFramebufferObject, param1: gen_qsgnode_types.QSGNode, param2: gen_qquickitem_types.QQuickItemUpdatePaintNodeData): gen_qsgnode_types.QSGNode =
-  gen_qsgnode_types.QSGNode(h: fcQQuickFramebufferObject_virtualbase_updatePaintNode(self.h, param1.h, param2.h), owned: false)
 
 proc fcQQuickFramebufferObject_vtable_callback_updatePaintNode(self: pointer, param1: pointer, param2: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QQuickFramebufferObjectVTable](fcQQuickFramebufferObject_vdata(self)[])
@@ -472,9 +584,6 @@ proc fcQQuickFramebufferObject_vtable_callback_updatePaintNode(self: pointer, pa
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QQuickFramebufferObjectboundingRect*(self: gen_qquickframebufferobject_types.QQuickFramebufferObject): gen_qrect_types.QRectF =
-  gen_qrect_types.QRectF(h: fcQQuickFramebufferObject_virtualbase_boundingRect(self.h), owned: true)
-
 proc fcQQuickFramebufferObject_vtable_callback_boundingRect(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QQuickFramebufferObjectVTable](fcQQuickFramebufferObject_vdata(self)[])
   let self = QQuickFramebufferObject(h: self)
@@ -483,9 +592,6 @@ proc fcQQuickFramebufferObject_vtable_callback_boundingRect(self: pointer): poin
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
   virtualReturn_h
-
-proc QQuickFramebufferObjectclipRect*(self: gen_qquickframebufferobject_types.QQuickFramebufferObject): gen_qrect_types.QRectF =
-  gen_qrect_types.QRectF(h: fcQQuickFramebufferObject_virtualbase_clipRect(self.h), owned: true)
 
 proc fcQQuickFramebufferObject_vtable_callback_clipRect(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QQuickFramebufferObjectVTable](fcQQuickFramebufferObject_vdata(self)[])
@@ -496,18 +602,12 @@ proc fcQQuickFramebufferObject_vtable_callback_clipRect(self: pointer): pointer 
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QQuickFramebufferObjectcontains*(self: gen_qquickframebufferobject_types.QQuickFramebufferObject, point: gen_qpoint_types.QPointF): bool =
-  fcQQuickFramebufferObject_virtualbase_contains(self.h, point.h)
-
 proc fcQQuickFramebufferObject_vtable_callback_contains(self: pointer, point: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QQuickFramebufferObjectVTable](fcQQuickFramebufferObject_vdata(self)[])
   let self = QQuickFramebufferObject(h: self)
   let slotval1 = gen_qpoint_types.QPointF(h: point, owned: false)
   var virtualReturn = vtbl[].contains(self, slotval1)
   virtualReturn
-
-proc QQuickFramebufferObjectinputMethodQuery*(self: gen_qquickframebufferobject_types.QQuickFramebufferObject, query: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQQuickFramebufferObject_virtualbase_inputMethodQuery(self.h, cint(query)), owned: true)
 
 proc fcQQuickFramebufferObject_vtable_callback_inputMethodQuery(self: pointer, query: cint): pointer {.cdecl.} =
   let vtbl = cast[ptr QQuickFramebufferObjectVTable](fcQQuickFramebufferObject_vdata(self)[])
@@ -519,18 +619,12 @@ proc fcQQuickFramebufferObject_vtable_callback_inputMethodQuery(self: pointer, q
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QQuickFramebufferObjectevent*(self: gen_qquickframebufferobject_types.QQuickFramebufferObject, param1: gen_qcoreevent_types.QEvent): bool =
-  fcQQuickFramebufferObject_virtualbase_event(self.h, param1.h)
-
 proc fcQQuickFramebufferObject_vtable_callback_event(self: pointer, param1: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QQuickFramebufferObjectVTable](fcQQuickFramebufferObject_vdata(self)[])
   let self = QQuickFramebufferObject(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
-
-proc QQuickFramebufferObjectitemChange*(self: gen_qquickframebufferobject_types.QQuickFramebufferObject, param1: cint, param2: gen_qquickitem_types.QQuickItemItemChangeData): void =
-  fcQQuickFramebufferObject_virtualbase_itemChange(self.h, cint(param1), param2.h)
 
 proc fcQQuickFramebufferObject_vtable_callback_itemChange(self: pointer, param1: cint, param2: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QQuickFramebufferObjectVTable](fcQQuickFramebufferObject_vdata(self)[])
@@ -539,24 +633,15 @@ proc fcQQuickFramebufferObject_vtable_callback_itemChange(self: pointer, param1:
   let slotval2 = gen_qquickitem_types.QQuickItemItemChangeData(h: param2, owned: false)
   vtbl[].itemChange(self, slotval1, slotval2)
 
-proc QQuickFramebufferObjectclassBegin*(self: gen_qquickframebufferobject_types.QQuickFramebufferObject): void =
-  fcQQuickFramebufferObject_virtualbase_classBegin(self.h)
-
 proc fcQQuickFramebufferObject_vtable_callback_classBegin(self: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QQuickFramebufferObjectVTable](fcQQuickFramebufferObject_vdata(self)[])
   let self = QQuickFramebufferObject(h: self)
   vtbl[].classBegin(self)
 
-proc QQuickFramebufferObjectcomponentComplete*(self: gen_qquickframebufferobject_types.QQuickFramebufferObject): void =
-  fcQQuickFramebufferObject_virtualbase_componentComplete(self.h)
-
 proc fcQQuickFramebufferObject_vtable_callback_componentComplete(self: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QQuickFramebufferObjectVTable](fcQQuickFramebufferObject_vdata(self)[])
   let self = QQuickFramebufferObject(h: self)
   vtbl[].componentComplete(self)
-
-proc QQuickFramebufferObjectkeyPressEvent*(self: gen_qquickframebufferobject_types.QQuickFramebufferObject, event: gen_qevent_types.QKeyEvent): void =
-  fcQQuickFramebufferObject_virtualbase_keyPressEvent(self.h, event.h)
 
 proc fcQQuickFramebufferObject_vtable_callback_keyPressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QQuickFramebufferObjectVTable](fcQQuickFramebufferObject_vdata(self)[])
@@ -564,17 +649,11 @@ proc fcQQuickFramebufferObject_vtable_callback_keyPressEvent(self: pointer, even
   let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   vtbl[].keyPressEvent(self, slotval1)
 
-proc QQuickFramebufferObjectkeyReleaseEvent*(self: gen_qquickframebufferobject_types.QQuickFramebufferObject, event: gen_qevent_types.QKeyEvent): void =
-  fcQQuickFramebufferObject_virtualbase_keyReleaseEvent(self.h, event.h)
-
 proc fcQQuickFramebufferObject_vtable_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QQuickFramebufferObjectVTable](fcQQuickFramebufferObject_vdata(self)[])
   let self = QQuickFramebufferObject(h: self)
   let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   vtbl[].keyReleaseEvent(self, slotval1)
-
-proc QQuickFramebufferObjectinputMethodEvent*(self: gen_qquickframebufferobject_types.QQuickFramebufferObject, param1: gen_qevent_types.QInputMethodEvent): void =
-  fcQQuickFramebufferObject_virtualbase_inputMethodEvent(self.h, param1.h)
 
 proc fcQQuickFramebufferObject_vtable_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QQuickFramebufferObjectVTable](fcQQuickFramebufferObject_vdata(self)[])
@@ -582,17 +661,11 @@ proc fcQQuickFramebufferObject_vtable_callback_inputMethodEvent(self: pointer, p
   let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1, owned: false)
   vtbl[].inputMethodEvent(self, slotval1)
 
-proc QQuickFramebufferObjectfocusInEvent*(self: gen_qquickframebufferobject_types.QQuickFramebufferObject, param1: gen_qevent_types.QFocusEvent): void =
-  fcQQuickFramebufferObject_virtualbase_focusInEvent(self.h, param1.h)
-
 proc fcQQuickFramebufferObject_vtable_callback_focusInEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QQuickFramebufferObjectVTable](fcQQuickFramebufferObject_vdata(self)[])
   let self = QQuickFramebufferObject(h: self)
   let slotval1 = gen_qevent_types.QFocusEvent(h: param1, owned: false)
   vtbl[].focusInEvent(self, slotval1)
-
-proc QQuickFramebufferObjectfocusOutEvent*(self: gen_qquickframebufferobject_types.QQuickFramebufferObject, param1: gen_qevent_types.QFocusEvent): void =
-  fcQQuickFramebufferObject_virtualbase_focusOutEvent(self.h, param1.h)
 
 proc fcQQuickFramebufferObject_vtable_callback_focusOutEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QQuickFramebufferObjectVTable](fcQQuickFramebufferObject_vdata(self)[])
@@ -600,17 +673,11 @@ proc fcQQuickFramebufferObject_vtable_callback_focusOutEvent(self: pointer, para
   let slotval1 = gen_qevent_types.QFocusEvent(h: param1, owned: false)
   vtbl[].focusOutEvent(self, slotval1)
 
-proc QQuickFramebufferObjectmousePressEvent*(self: gen_qquickframebufferobject_types.QQuickFramebufferObject, event: gen_qevent_types.QMouseEvent): void =
-  fcQQuickFramebufferObject_virtualbase_mousePressEvent(self.h, event.h)
-
 proc fcQQuickFramebufferObject_vtable_callback_mousePressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QQuickFramebufferObjectVTable](fcQQuickFramebufferObject_vdata(self)[])
   let self = QQuickFramebufferObject(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mousePressEvent(self, slotval1)
-
-proc QQuickFramebufferObjectmouseMoveEvent*(self: gen_qquickframebufferobject_types.QQuickFramebufferObject, event: gen_qevent_types.QMouseEvent): void =
-  fcQQuickFramebufferObject_virtualbase_mouseMoveEvent(self.h, event.h)
 
 proc fcQQuickFramebufferObject_vtable_callback_mouseMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QQuickFramebufferObjectVTable](fcQQuickFramebufferObject_vdata(self)[])
@@ -618,17 +685,11 @@ proc fcQQuickFramebufferObject_vtable_callback_mouseMoveEvent(self: pointer, eve
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseMoveEvent(self, slotval1)
 
-proc QQuickFramebufferObjectmouseReleaseEvent*(self: gen_qquickframebufferobject_types.QQuickFramebufferObject, event: gen_qevent_types.QMouseEvent): void =
-  fcQQuickFramebufferObject_virtualbase_mouseReleaseEvent(self.h, event.h)
-
 proc fcQQuickFramebufferObject_vtable_callback_mouseReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QQuickFramebufferObjectVTable](fcQQuickFramebufferObject_vdata(self)[])
   let self = QQuickFramebufferObject(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseReleaseEvent(self, slotval1)
-
-proc QQuickFramebufferObjectmouseDoubleClickEvent*(self: gen_qquickframebufferobject_types.QQuickFramebufferObject, event: gen_qevent_types.QMouseEvent): void =
-  fcQQuickFramebufferObject_virtualbase_mouseDoubleClickEvent(self.h, event.h)
 
 proc fcQQuickFramebufferObject_vtable_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QQuickFramebufferObjectVTable](fcQQuickFramebufferObject_vdata(self)[])
@@ -636,24 +697,15 @@ proc fcQQuickFramebufferObject_vtable_callback_mouseDoubleClickEvent(self: point
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseDoubleClickEvent(self, slotval1)
 
-proc QQuickFramebufferObjectmouseUngrabEvent*(self: gen_qquickframebufferobject_types.QQuickFramebufferObject): void =
-  fcQQuickFramebufferObject_virtualbase_mouseUngrabEvent(self.h)
-
 proc fcQQuickFramebufferObject_vtable_callback_mouseUngrabEvent(self: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QQuickFramebufferObjectVTable](fcQQuickFramebufferObject_vdata(self)[])
   let self = QQuickFramebufferObject(h: self)
   vtbl[].mouseUngrabEvent(self)
 
-proc QQuickFramebufferObjecttouchUngrabEvent*(self: gen_qquickframebufferobject_types.QQuickFramebufferObject): void =
-  fcQQuickFramebufferObject_virtualbase_touchUngrabEvent(self.h)
-
 proc fcQQuickFramebufferObject_vtable_callback_touchUngrabEvent(self: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QQuickFramebufferObjectVTable](fcQQuickFramebufferObject_vdata(self)[])
   let self = QQuickFramebufferObject(h: self)
   vtbl[].touchUngrabEvent(self)
-
-proc QQuickFramebufferObjectwheelEvent*(self: gen_qquickframebufferobject_types.QQuickFramebufferObject, event: gen_qevent_types.QWheelEvent): void =
-  fcQQuickFramebufferObject_virtualbase_wheelEvent(self.h, event.h)
 
 proc fcQQuickFramebufferObject_vtable_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QQuickFramebufferObjectVTable](fcQQuickFramebufferObject_vdata(self)[])
@@ -661,17 +713,11 @@ proc fcQQuickFramebufferObject_vtable_callback_wheelEvent(self: pointer, event: 
   let slotval1 = gen_qevent_types.QWheelEvent(h: event, owned: false)
   vtbl[].wheelEvent(self, slotval1)
 
-proc QQuickFramebufferObjecttouchEvent*(self: gen_qquickframebufferobject_types.QQuickFramebufferObject, event: gen_qevent_types.QTouchEvent): void =
-  fcQQuickFramebufferObject_virtualbase_touchEvent(self.h, event.h)
-
 proc fcQQuickFramebufferObject_vtable_callback_touchEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QQuickFramebufferObjectVTable](fcQQuickFramebufferObject_vdata(self)[])
   let self = QQuickFramebufferObject(h: self)
   let slotval1 = gen_qevent_types.QTouchEvent(h: event, owned: false)
   vtbl[].touchEvent(self, slotval1)
-
-proc QQuickFramebufferObjecthoverEnterEvent*(self: gen_qquickframebufferobject_types.QQuickFramebufferObject, event: gen_qevent_types.QHoverEvent): void =
-  fcQQuickFramebufferObject_virtualbase_hoverEnterEvent(self.h, event.h)
 
 proc fcQQuickFramebufferObject_vtable_callback_hoverEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QQuickFramebufferObjectVTable](fcQQuickFramebufferObject_vdata(self)[])
@@ -679,17 +725,11 @@ proc fcQQuickFramebufferObject_vtable_callback_hoverEnterEvent(self: pointer, ev
   let slotval1 = gen_qevent_types.QHoverEvent(h: event, owned: false)
   vtbl[].hoverEnterEvent(self, slotval1)
 
-proc QQuickFramebufferObjecthoverMoveEvent*(self: gen_qquickframebufferobject_types.QQuickFramebufferObject, event: gen_qevent_types.QHoverEvent): void =
-  fcQQuickFramebufferObject_virtualbase_hoverMoveEvent(self.h, event.h)
-
 proc fcQQuickFramebufferObject_vtable_callback_hoverMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QQuickFramebufferObjectVTable](fcQQuickFramebufferObject_vdata(self)[])
   let self = QQuickFramebufferObject(h: self)
   let slotval1 = gen_qevent_types.QHoverEvent(h: event, owned: false)
   vtbl[].hoverMoveEvent(self, slotval1)
-
-proc QQuickFramebufferObjecthoverLeaveEvent*(self: gen_qquickframebufferobject_types.QQuickFramebufferObject, event: gen_qevent_types.QHoverEvent): void =
-  fcQQuickFramebufferObject_virtualbase_hoverLeaveEvent(self.h, event.h)
 
 proc fcQQuickFramebufferObject_vtable_callback_hoverLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QQuickFramebufferObjectVTable](fcQQuickFramebufferObject_vdata(self)[])
@@ -697,17 +737,11 @@ proc fcQQuickFramebufferObject_vtable_callback_hoverLeaveEvent(self: pointer, ev
   let slotval1 = gen_qevent_types.QHoverEvent(h: event, owned: false)
   vtbl[].hoverLeaveEvent(self, slotval1)
 
-proc QQuickFramebufferObjectdragEnterEvent*(self: gen_qquickframebufferobject_types.QQuickFramebufferObject, param1: gen_qevent_types.QDragEnterEvent): void =
-  fcQQuickFramebufferObject_virtualbase_dragEnterEvent(self.h, param1.h)
-
 proc fcQQuickFramebufferObject_vtable_callback_dragEnterEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QQuickFramebufferObjectVTable](fcQQuickFramebufferObject_vdata(self)[])
   let self = QQuickFramebufferObject(h: self)
   let slotval1 = gen_qevent_types.QDragEnterEvent(h: param1, owned: false)
   vtbl[].dragEnterEvent(self, slotval1)
-
-proc QQuickFramebufferObjectdragMoveEvent*(self: gen_qquickframebufferobject_types.QQuickFramebufferObject, param1: gen_qevent_types.QDragMoveEvent): void =
-  fcQQuickFramebufferObject_virtualbase_dragMoveEvent(self.h, param1.h)
 
 proc fcQQuickFramebufferObject_vtable_callback_dragMoveEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QQuickFramebufferObjectVTable](fcQQuickFramebufferObject_vdata(self)[])
@@ -715,26 +749,17 @@ proc fcQQuickFramebufferObject_vtable_callback_dragMoveEvent(self: pointer, para
   let slotval1 = gen_qevent_types.QDragMoveEvent(h: param1, owned: false)
   vtbl[].dragMoveEvent(self, slotval1)
 
-proc QQuickFramebufferObjectdragLeaveEvent*(self: gen_qquickframebufferobject_types.QQuickFramebufferObject, param1: gen_qevent_types.QDragLeaveEvent): void =
-  fcQQuickFramebufferObject_virtualbase_dragLeaveEvent(self.h, param1.h)
-
 proc fcQQuickFramebufferObject_vtable_callback_dragLeaveEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QQuickFramebufferObjectVTable](fcQQuickFramebufferObject_vdata(self)[])
   let self = QQuickFramebufferObject(h: self)
   let slotval1 = gen_qevent_types.QDragLeaveEvent(h: param1, owned: false)
   vtbl[].dragLeaveEvent(self, slotval1)
 
-proc QQuickFramebufferObjectdropEvent*(self: gen_qquickframebufferobject_types.QQuickFramebufferObject, param1: gen_qevent_types.QDropEvent): void =
-  fcQQuickFramebufferObject_virtualbase_dropEvent(self.h, param1.h)
-
 proc fcQQuickFramebufferObject_vtable_callback_dropEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QQuickFramebufferObjectVTable](fcQQuickFramebufferObject_vdata(self)[])
   let self = QQuickFramebufferObject(h: self)
   let slotval1 = gen_qevent_types.QDropEvent(h: param1, owned: false)
   vtbl[].dropEvent(self, slotval1)
-
-proc QQuickFramebufferObjectchildMouseEventFilter*(self: gen_qquickframebufferobject_types.QQuickFramebufferObject, param1: gen_qquickitem_types.QQuickItem, param2: gen_qcoreevent_types.QEvent): bool =
-  fcQQuickFramebufferObject_virtualbase_childMouseEventFilter(self.h, param1.h, param2.h)
 
 proc fcQQuickFramebufferObject_vtable_callback_childMouseEventFilter(self: pointer, param1: pointer, param2: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QQuickFramebufferObjectVTable](fcQQuickFramebufferObject_vdata(self)[])
@@ -744,16 +769,10 @@ proc fcQQuickFramebufferObject_vtable_callback_childMouseEventFilter(self: point
   var virtualReturn = vtbl[].childMouseEventFilter(self, slotval1, slotval2)
   virtualReturn
 
-proc QQuickFramebufferObjectupdatePolish*(self: gen_qquickframebufferobject_types.QQuickFramebufferObject): void =
-  fcQQuickFramebufferObject_virtualbase_updatePolish(self.h)
-
 proc fcQQuickFramebufferObject_vtable_callback_updatePolish(self: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QQuickFramebufferObjectVTable](fcQQuickFramebufferObject_vdata(self)[])
   let self = QQuickFramebufferObject(h: self)
   vtbl[].updatePolish(self)
-
-proc QQuickFramebufferObjecteventFilter*(self: gen_qquickframebufferobject_types.QQuickFramebufferObject, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
-  fcQQuickFramebufferObject_virtualbase_eventFilter(self.h, watched.h, event.h)
 
 proc fcQQuickFramebufferObject_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QQuickFramebufferObjectVTable](fcQQuickFramebufferObject_vdata(self)[])
@@ -763,17 +782,11 @@ proc fcQQuickFramebufferObject_vtable_callback_eventFilter(self: pointer, watche
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
-proc QQuickFramebufferObjecttimerEvent*(self: gen_qquickframebufferobject_types.QQuickFramebufferObject, event: gen_qcoreevent_types.QTimerEvent): void =
-  fcQQuickFramebufferObject_virtualbase_timerEvent(self.h, event.h)
-
 proc fcQQuickFramebufferObject_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QQuickFramebufferObjectVTable](fcQQuickFramebufferObject_vdata(self)[])
   let self = QQuickFramebufferObject(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
-
-proc QQuickFramebufferObjectchildEvent*(self: gen_qquickframebufferobject_types.QQuickFramebufferObject, event: gen_qcoreevent_types.QChildEvent): void =
-  fcQQuickFramebufferObject_virtualbase_childEvent(self.h, event.h)
 
 proc fcQQuickFramebufferObject_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QQuickFramebufferObjectVTable](fcQQuickFramebufferObject_vdata(self)[])
@@ -781,26 +794,17 @@ proc fcQQuickFramebufferObject_vtable_callback_childEvent(self: pointer, event: 
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
-proc QQuickFramebufferObjectcustomEvent*(self: gen_qquickframebufferobject_types.QQuickFramebufferObject, event: gen_qcoreevent_types.QEvent): void =
-  fcQQuickFramebufferObject_virtualbase_customEvent(self.h, event.h)
-
 proc fcQQuickFramebufferObject_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QQuickFramebufferObjectVTable](fcQQuickFramebufferObject_vdata(self)[])
   let self = QQuickFramebufferObject(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
-proc QQuickFramebufferObjectconnectNotify*(self: gen_qquickframebufferobject_types.QQuickFramebufferObject, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQQuickFramebufferObject_virtualbase_connectNotify(self.h, signal.h)
-
 proc fcQQuickFramebufferObject_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QQuickFramebufferObjectVTable](fcQQuickFramebufferObject_vdata(self)[])
   let self = QQuickFramebufferObject(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
-
-proc QQuickFramebufferObjectdisconnectNotify*(self: gen_qquickframebufferobject_types.QQuickFramebufferObject, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQQuickFramebufferObject_virtualbase_disconnectNotify(self.h, signal.h)
 
 proc fcQQuickFramebufferObject_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QQuickFramebufferObjectVTable](fcQQuickFramebufferObject_vdata(self)[])
@@ -810,23 +814,109 @@ proc fcQQuickFramebufferObject_vtable_callback_disconnectNotify(self: pointer, s
 
 type VirtualQQuickFramebufferObject* {.inheritable.} = ref object of QQuickFramebufferObject
   vtbl*: cQQuickFramebufferObjectVTable
+
 method metaObject*(self: VirtualQQuickFramebufferObject): gen_qobjectdefs_types.QMetaObject {.base.} =
   QQuickFramebufferObjectmetaObject(self[])
+method metacast*(self: VirtualQQuickFramebufferObject, param1: cstring): pointer {.base.} =
+  QQuickFramebufferObjectmetacast(self[], param1)
+method metacall*(self: VirtualQQuickFramebufferObject, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QQuickFramebufferObjectmetacall(self[], param1, param2, param3)
+method createRenderer*(self: VirtualQQuickFramebufferObject): gen_qquickframebufferobject_types.QQuickFramebufferObjectRenderer {.base.} =
+  raiseAssert("missing implementation of QQuickFramebufferObject.createRenderer")
+method isTextureProvider*(self: VirtualQQuickFramebufferObject): bool {.base.} =
+  QQuickFramebufferObjectisTextureProvider(self[])
+method textureProvider*(self: VirtualQQuickFramebufferObject): gen_qsgtextureprovider_types.QSGTextureProvider {.base.} =
+  QQuickFramebufferObjecttextureProvider(self[])
+method releaseResources*(self: VirtualQQuickFramebufferObject): void {.base.} =
+  QQuickFramebufferObjectreleaseResources(self[])
+method geometryChange*(self: VirtualQQuickFramebufferObject, newGeometry: gen_qrect_types.QRectF, oldGeometry: gen_qrect_types.QRectF): void {.base.} =
+  QQuickFramebufferObjectgeometryChange(self[], newGeometry, oldGeometry)
+method updatePaintNode*(self: VirtualQQuickFramebufferObject, param1: gen_qsgnode_types.QSGNode, param2: gen_qquickitem_types.QQuickItemUpdatePaintNodeData): gen_qsgnode_types.QSGNode {.base.} =
+  QQuickFramebufferObjectupdatePaintNode(self[], param1, param2)
+method boundingRect*(self: VirtualQQuickFramebufferObject): gen_qrect_types.QRectF {.base.} =
+  QQuickFramebufferObjectboundingRect(self[])
+method clipRect*(self: VirtualQQuickFramebufferObject): gen_qrect_types.QRectF {.base.} =
+  QQuickFramebufferObjectclipRect(self[])
+method contains*(self: VirtualQQuickFramebufferObject, point: gen_qpoint_types.QPointF): bool {.base.} =
+  QQuickFramebufferObjectcontains(self[], point)
+method inputMethodQuery*(self: VirtualQQuickFramebufferObject, query: cint): gen_qvariant_types.QVariant {.base.} =
+  QQuickFramebufferObjectinputMethodQuery(self[], query)
+method event*(self: VirtualQQuickFramebufferObject, param1: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QQuickFramebufferObjectevent(self[], param1)
+method itemChange*(self: VirtualQQuickFramebufferObject, param1: cint, param2: gen_qquickitem_types.QQuickItemItemChangeData): void {.base.} =
+  QQuickFramebufferObjectitemChange(self[], param1, param2)
+method classBegin*(self: VirtualQQuickFramebufferObject): void {.base.} =
+  QQuickFramebufferObjectclassBegin(self[])
+method componentComplete*(self: VirtualQQuickFramebufferObject): void {.base.} =
+  QQuickFramebufferObjectcomponentComplete(self[])
+method keyPressEvent*(self: VirtualQQuickFramebufferObject, event: gen_qevent_types.QKeyEvent): void {.base.} =
+  QQuickFramebufferObjectkeyPressEvent(self[], event)
+method keyReleaseEvent*(self: VirtualQQuickFramebufferObject, event: gen_qevent_types.QKeyEvent): void {.base.} =
+  QQuickFramebufferObjectkeyReleaseEvent(self[], event)
+method inputMethodEvent*(self: VirtualQQuickFramebufferObject, param1: gen_qevent_types.QInputMethodEvent): void {.base.} =
+  QQuickFramebufferObjectinputMethodEvent(self[], param1)
+method focusInEvent*(self: VirtualQQuickFramebufferObject, param1: gen_qevent_types.QFocusEvent): void {.base.} =
+  QQuickFramebufferObjectfocusInEvent(self[], param1)
+method focusOutEvent*(self: VirtualQQuickFramebufferObject, param1: gen_qevent_types.QFocusEvent): void {.base.} =
+  QQuickFramebufferObjectfocusOutEvent(self[], param1)
+method mousePressEvent*(self: VirtualQQuickFramebufferObject, event: gen_qevent_types.QMouseEvent): void {.base.} =
+  QQuickFramebufferObjectmousePressEvent(self[], event)
+method mouseMoveEvent*(self: VirtualQQuickFramebufferObject, event: gen_qevent_types.QMouseEvent): void {.base.} =
+  QQuickFramebufferObjectmouseMoveEvent(self[], event)
+method mouseReleaseEvent*(self: VirtualQQuickFramebufferObject, event: gen_qevent_types.QMouseEvent): void {.base.} =
+  QQuickFramebufferObjectmouseReleaseEvent(self[], event)
+method mouseDoubleClickEvent*(self: VirtualQQuickFramebufferObject, event: gen_qevent_types.QMouseEvent): void {.base.} =
+  QQuickFramebufferObjectmouseDoubleClickEvent(self[], event)
+method mouseUngrabEvent*(self: VirtualQQuickFramebufferObject): void {.base.} =
+  QQuickFramebufferObjectmouseUngrabEvent(self[])
+method touchUngrabEvent*(self: VirtualQQuickFramebufferObject): void {.base.} =
+  QQuickFramebufferObjecttouchUngrabEvent(self[])
+method wheelEvent*(self: VirtualQQuickFramebufferObject, event: gen_qevent_types.QWheelEvent): void {.base.} =
+  QQuickFramebufferObjectwheelEvent(self[], event)
+method touchEvent*(self: VirtualQQuickFramebufferObject, event: gen_qevent_types.QTouchEvent): void {.base.} =
+  QQuickFramebufferObjecttouchEvent(self[], event)
+method hoverEnterEvent*(self: VirtualQQuickFramebufferObject, event: gen_qevent_types.QHoverEvent): void {.base.} =
+  QQuickFramebufferObjecthoverEnterEvent(self[], event)
+method hoverMoveEvent*(self: VirtualQQuickFramebufferObject, event: gen_qevent_types.QHoverEvent): void {.base.} =
+  QQuickFramebufferObjecthoverMoveEvent(self[], event)
+method hoverLeaveEvent*(self: VirtualQQuickFramebufferObject, event: gen_qevent_types.QHoverEvent): void {.base.} =
+  QQuickFramebufferObjecthoverLeaveEvent(self[], event)
+method dragEnterEvent*(self: VirtualQQuickFramebufferObject, param1: gen_qevent_types.QDragEnterEvent): void {.base.} =
+  QQuickFramebufferObjectdragEnterEvent(self[], param1)
+method dragMoveEvent*(self: VirtualQQuickFramebufferObject, param1: gen_qevent_types.QDragMoveEvent): void {.base.} =
+  QQuickFramebufferObjectdragMoveEvent(self[], param1)
+method dragLeaveEvent*(self: VirtualQQuickFramebufferObject, param1: gen_qevent_types.QDragLeaveEvent): void {.base.} =
+  QQuickFramebufferObjectdragLeaveEvent(self[], param1)
+method dropEvent*(self: VirtualQQuickFramebufferObject, param1: gen_qevent_types.QDropEvent): void {.base.} =
+  QQuickFramebufferObjectdropEvent(self[], param1)
+method childMouseEventFilter*(self: VirtualQQuickFramebufferObject, param1: gen_qquickitem_types.QQuickItem, param2: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QQuickFramebufferObjectchildMouseEventFilter(self[], param1, param2)
+method updatePolish*(self: VirtualQQuickFramebufferObject): void {.base.} =
+  QQuickFramebufferObjectupdatePolish(self[])
+method eventFilter*(self: VirtualQQuickFramebufferObject, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QQuickFramebufferObjecteventFilter(self[], watched, event)
+method timerEvent*(self: VirtualQQuickFramebufferObject, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QQuickFramebufferObjecttimerEvent(self[], event)
+method childEvent*(self: VirtualQQuickFramebufferObject, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QQuickFramebufferObjectchildEvent(self[], event)
+method customEvent*(self: VirtualQQuickFramebufferObject, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QQuickFramebufferObjectcustomEvent(self[], event)
+method connectNotify*(self: VirtualQQuickFramebufferObject, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QQuickFramebufferObjectconnectNotify(self[], signal)
+method disconnectNotify*(self: VirtualQQuickFramebufferObject, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QQuickFramebufferObjectdisconnectNotify(self[], signal)
+
 proc fcQQuickFramebufferObject_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQQuickFramebufferObject](fcQQuickFramebufferObject_vdata(self)[])
   var virtualReturn = inst.metaObject()
   virtualReturn.h
 
-method metacast*(self: VirtualQQuickFramebufferObject, param1: cstring): pointer {.base.} =
-  QQuickFramebufferObjectmetacast(self[], param1)
 proc fcQQuickFramebufferObject_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQQuickFramebufferObject](fcQQuickFramebufferObject_vdata(self)[])
   let slotval1 = (param1)
   var virtualReturn = inst.metacast(slotval1)
   virtualReturn
 
-method metacall*(self: VirtualQQuickFramebufferObject, param1: cint, param2: cint, param3: pointer): cint {.base.} =
-  QQuickFramebufferObjectmetacall(self[], param1, param2, param3)
 proc fcQQuickFramebufferObject_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQQuickFramebufferObject](fcQQuickFramebufferObject_vdata(self)[])
   let slotval1 = cint(param1)
@@ -835,43 +925,31 @@ proc fcQQuickFramebufferObject_method_callback_metacall(self: pointer, param1: c
   var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
-method createRenderer*(self: VirtualQQuickFramebufferObject): gen_qquickframebufferobject_types.QQuickFramebufferObjectRenderer {.base.} =
-  raiseAssert("missing implementation of QQuickFramebufferObject_virtualbase_createRenderer")
 proc fcQQuickFramebufferObject_method_callback_createRenderer(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQQuickFramebufferObject](fcQQuickFramebufferObject_vdata(self)[])
   var virtualReturn = inst.createRenderer()
   virtualReturn.h
 
-method isTextureProvider*(self: VirtualQQuickFramebufferObject): bool {.base.} =
-  QQuickFramebufferObjectisTextureProvider(self[])
 proc fcQQuickFramebufferObject_method_callback_isTextureProvider(self: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQQuickFramebufferObject](fcQQuickFramebufferObject_vdata(self)[])
   var virtualReturn = inst.isTextureProvider()
   virtualReturn
 
-method textureProvider*(self: VirtualQQuickFramebufferObject): gen_qsgtextureprovider_types.QSGTextureProvider {.base.} =
-  QQuickFramebufferObjecttextureProvider(self[])
 proc fcQQuickFramebufferObject_method_callback_textureProvider(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQQuickFramebufferObject](fcQQuickFramebufferObject_vdata(self)[])
   var virtualReturn = inst.textureProvider()
   virtualReturn.h
 
-method releaseResources*(self: VirtualQQuickFramebufferObject): void {.base.} =
-  QQuickFramebufferObjectreleaseResources(self[])
 proc fcQQuickFramebufferObject_method_callback_releaseResources(self: pointer): void {.cdecl.} =
   let inst = cast[VirtualQQuickFramebufferObject](fcQQuickFramebufferObject_vdata(self)[])
   inst.releaseResources()
 
-method geometryChange*(self: VirtualQQuickFramebufferObject, newGeometry: gen_qrect_types.QRectF, oldGeometry: gen_qrect_types.QRectF): void {.base.} =
-  QQuickFramebufferObjectgeometryChange(self[], newGeometry, oldGeometry)
 proc fcQQuickFramebufferObject_method_callback_geometryChange(self: pointer, newGeometry: pointer, oldGeometry: pointer): void {.cdecl.} =
   let inst = cast[VirtualQQuickFramebufferObject](fcQQuickFramebufferObject_vdata(self)[])
   let slotval1 = gen_qrect_types.QRectF(h: newGeometry, owned: false)
   let slotval2 = gen_qrect_types.QRectF(h: oldGeometry, owned: false)
   inst.geometryChange(slotval1, slotval2)
 
-method updatePaintNode*(self: VirtualQQuickFramebufferObject, param1: gen_qsgnode_types.QSGNode, param2: gen_qquickitem_types.QQuickItemUpdatePaintNodeData): gen_qsgnode_types.QSGNode {.base.} =
-  QQuickFramebufferObjectupdatePaintNode(self[], param1, param2)
 proc fcQQuickFramebufferObject_method_callback_updatePaintNode(self: pointer, param1: pointer, param2: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQQuickFramebufferObject](fcQQuickFramebufferObject_vdata(self)[])
   let slotval1 = gen_qsgnode_types.QSGNode(h: param1, owned: false)
@@ -879,204 +957,146 @@ proc fcQQuickFramebufferObject_method_callback_updatePaintNode(self: pointer, pa
   var virtualReturn = inst.updatePaintNode(slotval1, slotval2)
   virtualReturn.h
 
-method boundingRect*(self: VirtualQQuickFramebufferObject): gen_qrect_types.QRectF {.base.} =
-  QQuickFramebufferObjectboundingRect(self[])
 proc fcQQuickFramebufferObject_method_callback_boundingRect(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQQuickFramebufferObject](fcQQuickFramebufferObject_vdata(self)[])
   var virtualReturn = inst.boundingRect()
   virtualReturn.h
 
-method clipRect*(self: VirtualQQuickFramebufferObject): gen_qrect_types.QRectF {.base.} =
-  QQuickFramebufferObjectclipRect(self[])
 proc fcQQuickFramebufferObject_method_callback_clipRect(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQQuickFramebufferObject](fcQQuickFramebufferObject_vdata(self)[])
   var virtualReturn = inst.clipRect()
   virtualReturn.h
 
-method contains*(self: VirtualQQuickFramebufferObject, point: gen_qpoint_types.QPointF): bool {.base.} =
-  QQuickFramebufferObjectcontains(self[], point)
 proc fcQQuickFramebufferObject_method_callback_contains(self: pointer, point: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQQuickFramebufferObject](fcQQuickFramebufferObject_vdata(self)[])
   let slotval1 = gen_qpoint_types.QPointF(h: point, owned: false)
   var virtualReturn = inst.contains(slotval1)
   virtualReturn
 
-method inputMethodQuery*(self: VirtualQQuickFramebufferObject, query: cint): gen_qvariant_types.QVariant {.base.} =
-  QQuickFramebufferObjectinputMethodQuery(self[], query)
 proc fcQQuickFramebufferObject_method_callback_inputMethodQuery(self: pointer, query: cint): pointer {.cdecl.} =
   let inst = cast[VirtualQQuickFramebufferObject](fcQQuickFramebufferObject_vdata(self)[])
   let slotval1 = cint(query)
   var virtualReturn = inst.inputMethodQuery(slotval1)
   virtualReturn.h
 
-method event*(self: VirtualQQuickFramebufferObject, param1: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QQuickFramebufferObjectevent(self[], param1)
 proc fcQQuickFramebufferObject_method_callback_event(self: pointer, param1: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQQuickFramebufferObject](fcQQuickFramebufferObject_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
-method itemChange*(self: VirtualQQuickFramebufferObject, param1: cint, param2: gen_qquickitem_types.QQuickItemItemChangeData): void {.base.} =
-  QQuickFramebufferObjectitemChange(self[], param1, param2)
 proc fcQQuickFramebufferObject_method_callback_itemChange(self: pointer, param1: cint, param2: pointer): void {.cdecl.} =
   let inst = cast[VirtualQQuickFramebufferObject](fcQQuickFramebufferObject_vdata(self)[])
   let slotval1 = cint(param1)
   let slotval2 = gen_qquickitem_types.QQuickItemItemChangeData(h: param2, owned: false)
   inst.itemChange(slotval1, slotval2)
 
-method classBegin*(self: VirtualQQuickFramebufferObject): void {.base.} =
-  QQuickFramebufferObjectclassBegin(self[])
 proc fcQQuickFramebufferObject_method_callback_classBegin(self: pointer): void {.cdecl.} =
   let inst = cast[VirtualQQuickFramebufferObject](fcQQuickFramebufferObject_vdata(self)[])
   inst.classBegin()
 
-method componentComplete*(self: VirtualQQuickFramebufferObject): void {.base.} =
-  QQuickFramebufferObjectcomponentComplete(self[])
 proc fcQQuickFramebufferObject_method_callback_componentComplete(self: pointer): void {.cdecl.} =
   let inst = cast[VirtualQQuickFramebufferObject](fcQQuickFramebufferObject_vdata(self)[])
   inst.componentComplete()
 
-method keyPressEvent*(self: VirtualQQuickFramebufferObject, event: gen_qevent_types.QKeyEvent): void {.base.} =
-  QQuickFramebufferObjectkeyPressEvent(self[], event)
 proc fcQQuickFramebufferObject_method_callback_keyPressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQQuickFramebufferObject](fcQQuickFramebufferObject_vdata(self)[])
   let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   inst.keyPressEvent(slotval1)
 
-method keyReleaseEvent*(self: VirtualQQuickFramebufferObject, event: gen_qevent_types.QKeyEvent): void {.base.} =
-  QQuickFramebufferObjectkeyReleaseEvent(self[], event)
 proc fcQQuickFramebufferObject_method_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQQuickFramebufferObject](fcQQuickFramebufferObject_vdata(self)[])
   let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   inst.keyReleaseEvent(slotval1)
 
-method inputMethodEvent*(self: VirtualQQuickFramebufferObject, param1: gen_qevent_types.QInputMethodEvent): void {.base.} =
-  QQuickFramebufferObjectinputMethodEvent(self[], param1)
 proc fcQQuickFramebufferObject_method_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQQuickFramebufferObject](fcQQuickFramebufferObject_vdata(self)[])
   let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1, owned: false)
   inst.inputMethodEvent(slotval1)
 
-method focusInEvent*(self: VirtualQQuickFramebufferObject, param1: gen_qevent_types.QFocusEvent): void {.base.} =
-  QQuickFramebufferObjectfocusInEvent(self[], param1)
 proc fcQQuickFramebufferObject_method_callback_focusInEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQQuickFramebufferObject](fcQQuickFramebufferObject_vdata(self)[])
   let slotval1 = gen_qevent_types.QFocusEvent(h: param1, owned: false)
   inst.focusInEvent(slotval1)
 
-method focusOutEvent*(self: VirtualQQuickFramebufferObject, param1: gen_qevent_types.QFocusEvent): void {.base.} =
-  QQuickFramebufferObjectfocusOutEvent(self[], param1)
 proc fcQQuickFramebufferObject_method_callback_focusOutEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQQuickFramebufferObject](fcQQuickFramebufferObject_vdata(self)[])
   let slotval1 = gen_qevent_types.QFocusEvent(h: param1, owned: false)
   inst.focusOutEvent(slotval1)
 
-method mousePressEvent*(self: VirtualQQuickFramebufferObject, event: gen_qevent_types.QMouseEvent): void {.base.} =
-  QQuickFramebufferObjectmousePressEvent(self[], event)
 proc fcQQuickFramebufferObject_method_callback_mousePressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQQuickFramebufferObject](fcQQuickFramebufferObject_vdata(self)[])
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mousePressEvent(slotval1)
 
-method mouseMoveEvent*(self: VirtualQQuickFramebufferObject, event: gen_qevent_types.QMouseEvent): void {.base.} =
-  QQuickFramebufferObjectmouseMoveEvent(self[], event)
 proc fcQQuickFramebufferObject_method_callback_mouseMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQQuickFramebufferObject](fcQQuickFramebufferObject_vdata(self)[])
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mouseMoveEvent(slotval1)
 
-method mouseReleaseEvent*(self: VirtualQQuickFramebufferObject, event: gen_qevent_types.QMouseEvent): void {.base.} =
-  QQuickFramebufferObjectmouseReleaseEvent(self[], event)
 proc fcQQuickFramebufferObject_method_callback_mouseReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQQuickFramebufferObject](fcQQuickFramebufferObject_vdata(self)[])
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mouseReleaseEvent(slotval1)
 
-method mouseDoubleClickEvent*(self: VirtualQQuickFramebufferObject, event: gen_qevent_types.QMouseEvent): void {.base.} =
-  QQuickFramebufferObjectmouseDoubleClickEvent(self[], event)
 proc fcQQuickFramebufferObject_method_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQQuickFramebufferObject](fcQQuickFramebufferObject_vdata(self)[])
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mouseDoubleClickEvent(slotval1)
 
-method mouseUngrabEvent*(self: VirtualQQuickFramebufferObject): void {.base.} =
-  QQuickFramebufferObjectmouseUngrabEvent(self[])
 proc fcQQuickFramebufferObject_method_callback_mouseUngrabEvent(self: pointer): void {.cdecl.} =
   let inst = cast[VirtualQQuickFramebufferObject](fcQQuickFramebufferObject_vdata(self)[])
   inst.mouseUngrabEvent()
 
-method touchUngrabEvent*(self: VirtualQQuickFramebufferObject): void {.base.} =
-  QQuickFramebufferObjecttouchUngrabEvent(self[])
 proc fcQQuickFramebufferObject_method_callback_touchUngrabEvent(self: pointer): void {.cdecl.} =
   let inst = cast[VirtualQQuickFramebufferObject](fcQQuickFramebufferObject_vdata(self)[])
   inst.touchUngrabEvent()
 
-method wheelEvent*(self: VirtualQQuickFramebufferObject, event: gen_qevent_types.QWheelEvent): void {.base.} =
-  QQuickFramebufferObjectwheelEvent(self[], event)
 proc fcQQuickFramebufferObject_method_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQQuickFramebufferObject](fcQQuickFramebufferObject_vdata(self)[])
   let slotval1 = gen_qevent_types.QWheelEvent(h: event, owned: false)
   inst.wheelEvent(slotval1)
 
-method touchEvent*(self: VirtualQQuickFramebufferObject, event: gen_qevent_types.QTouchEvent): void {.base.} =
-  QQuickFramebufferObjecttouchEvent(self[], event)
 proc fcQQuickFramebufferObject_method_callback_touchEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQQuickFramebufferObject](fcQQuickFramebufferObject_vdata(self)[])
   let slotval1 = gen_qevent_types.QTouchEvent(h: event, owned: false)
   inst.touchEvent(slotval1)
 
-method hoverEnterEvent*(self: VirtualQQuickFramebufferObject, event: gen_qevent_types.QHoverEvent): void {.base.} =
-  QQuickFramebufferObjecthoverEnterEvent(self[], event)
 proc fcQQuickFramebufferObject_method_callback_hoverEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQQuickFramebufferObject](fcQQuickFramebufferObject_vdata(self)[])
   let slotval1 = gen_qevent_types.QHoverEvent(h: event, owned: false)
   inst.hoverEnterEvent(slotval1)
 
-method hoverMoveEvent*(self: VirtualQQuickFramebufferObject, event: gen_qevent_types.QHoverEvent): void {.base.} =
-  QQuickFramebufferObjecthoverMoveEvent(self[], event)
 proc fcQQuickFramebufferObject_method_callback_hoverMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQQuickFramebufferObject](fcQQuickFramebufferObject_vdata(self)[])
   let slotval1 = gen_qevent_types.QHoverEvent(h: event, owned: false)
   inst.hoverMoveEvent(slotval1)
 
-method hoverLeaveEvent*(self: VirtualQQuickFramebufferObject, event: gen_qevent_types.QHoverEvent): void {.base.} =
-  QQuickFramebufferObjecthoverLeaveEvent(self[], event)
 proc fcQQuickFramebufferObject_method_callback_hoverLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQQuickFramebufferObject](fcQQuickFramebufferObject_vdata(self)[])
   let slotval1 = gen_qevent_types.QHoverEvent(h: event, owned: false)
   inst.hoverLeaveEvent(slotval1)
 
-method dragEnterEvent*(self: VirtualQQuickFramebufferObject, param1: gen_qevent_types.QDragEnterEvent): void {.base.} =
-  QQuickFramebufferObjectdragEnterEvent(self[], param1)
 proc fcQQuickFramebufferObject_method_callback_dragEnterEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQQuickFramebufferObject](fcQQuickFramebufferObject_vdata(self)[])
   let slotval1 = gen_qevent_types.QDragEnterEvent(h: param1, owned: false)
   inst.dragEnterEvent(slotval1)
 
-method dragMoveEvent*(self: VirtualQQuickFramebufferObject, param1: gen_qevent_types.QDragMoveEvent): void {.base.} =
-  QQuickFramebufferObjectdragMoveEvent(self[], param1)
 proc fcQQuickFramebufferObject_method_callback_dragMoveEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQQuickFramebufferObject](fcQQuickFramebufferObject_vdata(self)[])
   let slotval1 = gen_qevent_types.QDragMoveEvent(h: param1, owned: false)
   inst.dragMoveEvent(slotval1)
 
-method dragLeaveEvent*(self: VirtualQQuickFramebufferObject, param1: gen_qevent_types.QDragLeaveEvent): void {.base.} =
-  QQuickFramebufferObjectdragLeaveEvent(self[], param1)
 proc fcQQuickFramebufferObject_method_callback_dragLeaveEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQQuickFramebufferObject](fcQQuickFramebufferObject_vdata(self)[])
   let slotval1 = gen_qevent_types.QDragLeaveEvent(h: param1, owned: false)
   inst.dragLeaveEvent(slotval1)
 
-method dropEvent*(self: VirtualQQuickFramebufferObject, param1: gen_qevent_types.QDropEvent): void {.base.} =
-  QQuickFramebufferObjectdropEvent(self[], param1)
 proc fcQQuickFramebufferObject_method_callback_dropEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQQuickFramebufferObject](fcQQuickFramebufferObject_vdata(self)[])
   let slotval1 = gen_qevent_types.QDropEvent(h: param1, owned: false)
   inst.dropEvent(slotval1)
 
-method childMouseEventFilter*(self: VirtualQQuickFramebufferObject, param1: gen_qquickitem_types.QQuickItem, param2: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QQuickFramebufferObjectchildMouseEventFilter(self[], param1, param2)
 proc fcQQuickFramebufferObject_method_callback_childMouseEventFilter(self: pointer, param1: pointer, param2: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQQuickFramebufferObject](fcQQuickFramebufferObject_vdata(self)[])
   let slotval1 = gen_qquickitem_types.QQuickItem(h: param1, owned: false)
@@ -1084,14 +1104,10 @@ proc fcQQuickFramebufferObject_method_callback_childMouseEventFilter(self: point
   var virtualReturn = inst.childMouseEventFilter(slotval1, slotval2)
   virtualReturn
 
-method updatePolish*(self: VirtualQQuickFramebufferObject): void {.base.} =
-  QQuickFramebufferObjectupdatePolish(self[])
 proc fcQQuickFramebufferObject_method_callback_updatePolish(self: pointer): void {.cdecl.} =
   let inst = cast[VirtualQQuickFramebufferObject](fcQQuickFramebufferObject_vdata(self)[])
   inst.updatePolish()
 
-method eventFilter*(self: VirtualQQuickFramebufferObject, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QQuickFramebufferObjecteventFilter(self[], watched, event)
 proc fcQQuickFramebufferObject_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQQuickFramebufferObject](fcQQuickFramebufferObject_vdata(self)[])
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
@@ -1099,40 +1115,31 @@ proc fcQQuickFramebufferObject_method_callback_eventFilter(self: pointer, watche
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
-method timerEvent*(self: VirtualQQuickFramebufferObject, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
-  QQuickFramebufferObjecttimerEvent(self[], event)
 proc fcQQuickFramebufferObject_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQQuickFramebufferObject](fcQQuickFramebufferObject_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
-method childEvent*(self: VirtualQQuickFramebufferObject, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
-  QQuickFramebufferObjectchildEvent(self[], event)
 proc fcQQuickFramebufferObject_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQQuickFramebufferObject](fcQQuickFramebufferObject_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
-method customEvent*(self: VirtualQQuickFramebufferObject, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QQuickFramebufferObjectcustomEvent(self[], event)
 proc fcQQuickFramebufferObject_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQQuickFramebufferObject](fcQQuickFramebufferObject_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
-method connectNotify*(self: VirtualQQuickFramebufferObject, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QQuickFramebufferObjectconnectNotify(self[], signal)
 proc fcQQuickFramebufferObject_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQQuickFramebufferObject](fcQQuickFramebufferObject_vdata(self)[])
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
-method disconnectNotify*(self: VirtualQQuickFramebufferObject, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QQuickFramebufferObjectdisconnectNotify(self[], signal)
 proc fcQQuickFramebufferObject_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQQuickFramebufferObject](fcQQuickFramebufferObject_vdata(self)[])
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
+
 
 proc isComponentComplete*(self: gen_qquickframebufferobject_types.QQuickFramebufferObject): bool =
   fcQQuickFramebufferObject_protectedbase_isComponentComplete(self.h)

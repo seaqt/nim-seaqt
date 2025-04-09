@@ -136,6 +136,7 @@ proc fcQItemSelectionModel_selectedRows1(self: pointer, column: cint): struct_mi
 proc fcQItemSelectionModel_selectedColumns1(self: pointer, row: cint): struct_miqt_array {.importc: "QItemSelectionModel_selectedColumns1".}
 proc fcQItemSelectionModel_vdata(self: pointer): ptr pointer {.importc: "QItemSelectionModel_vdata".}
 proc fvdata_cQItemSelectionModel(self: pointer): pointer {.importc: "vdata_QItemSelectionModel".}
+
 type cQItemSelectionModelVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -381,7 +382,7 @@ proc fcQItemSelectionModel_slot_callback_selectionChanged_release(slot: int) {.c
   let nimfunc = cast[ref QItemSelectionModelselectionChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onselectionChanged*(self: gen_qitemselectionmodel_types.QItemSelectionModel, slot: QItemSelectionModelselectionChangedSlot) =
+proc onSelectionChanged*(self: gen_qitemselectionmodel_types.QItemSelectionModel, slot: QItemSelectionModelselectionChangedSlot) =
   var tmp = new QItemSelectionModelselectionChangedSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -403,7 +404,7 @@ proc fcQItemSelectionModel_slot_callback_currentChanged_release(slot: int) {.cde
   let nimfunc = cast[ref QItemSelectionModelcurrentChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc oncurrentChanged*(self: gen_qitemselectionmodel_types.QItemSelectionModel, slot: QItemSelectionModelcurrentChangedSlot) =
+proc onCurrentChanged*(self: gen_qitemselectionmodel_types.QItemSelectionModel, slot: QItemSelectionModelcurrentChangedSlot) =
   var tmp = new QItemSelectionModelcurrentChangedSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -425,7 +426,7 @@ proc fcQItemSelectionModel_slot_callback_currentRowChanged_release(slot: int) {.
   let nimfunc = cast[ref QItemSelectionModelcurrentRowChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc oncurrentRowChanged*(self: gen_qitemselectionmodel_types.QItemSelectionModel, slot: QItemSelectionModelcurrentRowChangedSlot) =
+proc onCurrentRowChanged*(self: gen_qitemselectionmodel_types.QItemSelectionModel, slot: QItemSelectionModelcurrentRowChangedSlot) =
   var tmp = new QItemSelectionModelcurrentRowChangedSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -447,7 +448,7 @@ proc fcQItemSelectionModel_slot_callback_currentColumnChanged_release(slot: int)
   let nimfunc = cast[ref QItemSelectionModelcurrentColumnChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc oncurrentColumnChanged*(self: gen_qitemselectionmodel_types.QItemSelectionModel, slot: QItemSelectionModelcurrentColumnChangedSlot) =
+proc onCurrentColumnChanged*(self: gen_qitemselectionmodel_types.QItemSelectionModel, slot: QItemSelectionModelcurrentColumnChangedSlot) =
   var tmp = new QItemSelectionModelcurrentColumnChangedSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -467,7 +468,7 @@ proc fcQItemSelectionModel_slot_callback_modelChanged_release(slot: int) {.cdecl
   let nimfunc = cast[ref QItemSelectionModelmodelChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onmodelChanged*(self: gen_qitemselectionmodel_types.QItemSelectionModel, slot: QItemSelectionModelmodelChangedSlot) =
+proc onModelChanged*(self: gen_qitemselectionmodel_types.QItemSelectionModel, slot: QItemSelectionModelmodelChangedSlot) =
   var tmp = new QItemSelectionModelmodelChangedSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -531,6 +532,7 @@ type QItemSelectionModelchildEventProc* = proc(self: QItemSelectionModel, event:
 type QItemSelectionModelcustomEventProc* = proc(self: QItemSelectionModel, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QItemSelectionModelconnectNotifyProc* = proc(self: QItemSelectionModel, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QItemSelectionModeldisconnectNotifyProc* = proc(self: QItemSelectionModel, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+
 type QItemSelectionModelVTable* {.inheritable, pure.} = object
   vtbl: cQItemSelectionModelVTable
   metaObject*: QItemSelectionModelmetaObjectProc
@@ -549,8 +551,55 @@ type QItemSelectionModelVTable* {.inheritable, pure.} = object
   customEvent*: QItemSelectionModelcustomEventProc
   connectNotify*: QItemSelectionModelconnectNotifyProc
   disconnectNotify*: QItemSelectionModeldisconnectNotifyProc
+
 proc QItemSelectionModelmetaObject*(self: gen_qitemselectionmodel_types.QItemSelectionModel): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQItemSelectionModel_virtualbase_metaObject(self.h), owned: false)
+
+proc QItemSelectionModelmetacast*(self: gen_qitemselectionmodel_types.QItemSelectionModel, param1: cstring): pointer =
+  fcQItemSelectionModel_virtualbase_metacast(self.h, param1)
+
+proc QItemSelectionModelmetacall*(self: gen_qitemselectionmodel_types.QItemSelectionModel, param1: cint, param2: cint, param3: pointer): cint =
+  fcQItemSelectionModel_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+proc QItemSelectionModelsetCurrentIndex*(self: gen_qitemselectionmodel_types.QItemSelectionModel, index: gen_qabstractitemmodel_types.QModelIndex, command: cint): void =
+  fcQItemSelectionModel_virtualbase_setCurrentIndex(self.h, index.h, cint(command))
+
+proc QItemSelectionModelselect*(self: gen_qitemselectionmodel_types.QItemSelectionModel, index: gen_qabstractitemmodel_types.QModelIndex, command: cint): void =
+  fcQItemSelectionModel_virtualbase_select(self.h, index.h, cint(command))
+
+proc QItemSelectionModelselect*(self: gen_qitemselectionmodel_types.QItemSelectionModel, selection: gen_qitemselectionmodel_types.QItemSelection, command: cint): void =
+  fcQItemSelectionModel_virtualbase_select2(self.h, selection.h, cint(command))
+
+proc QItemSelectionModelclear*(self: gen_qitemselectionmodel_types.QItemSelectionModel): void =
+  fcQItemSelectionModel_virtualbase_clear(self.h)
+
+proc QItemSelectionModelreset*(self: gen_qitemselectionmodel_types.QItemSelectionModel): void =
+  fcQItemSelectionModel_virtualbase_reset(self.h)
+
+proc QItemSelectionModelclearCurrentIndex*(self: gen_qitemselectionmodel_types.QItemSelectionModel): void =
+  fcQItemSelectionModel_virtualbase_clearCurrentIndex(self.h)
+
+proc QItemSelectionModelevent*(self: gen_qitemselectionmodel_types.QItemSelectionModel, event: gen_qcoreevent_types.QEvent): bool =
+  fcQItemSelectionModel_virtualbase_event(self.h, event.h)
+
+proc QItemSelectionModeleventFilter*(self: gen_qitemselectionmodel_types.QItemSelectionModel, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
+  fcQItemSelectionModel_virtualbase_eventFilter(self.h, watched.h, event.h)
+
+proc QItemSelectionModeltimerEvent*(self: gen_qitemselectionmodel_types.QItemSelectionModel, event: gen_qcoreevent_types.QTimerEvent): void =
+  fcQItemSelectionModel_virtualbase_timerEvent(self.h, event.h)
+
+proc QItemSelectionModelchildEvent*(self: gen_qitemselectionmodel_types.QItemSelectionModel, event: gen_qcoreevent_types.QChildEvent): void =
+  fcQItemSelectionModel_virtualbase_childEvent(self.h, event.h)
+
+proc QItemSelectionModelcustomEvent*(self: gen_qitemselectionmodel_types.QItemSelectionModel, event: gen_qcoreevent_types.QEvent): void =
+  fcQItemSelectionModel_virtualbase_customEvent(self.h, event.h)
+
+proc QItemSelectionModelconnectNotify*(self: gen_qitemselectionmodel_types.QItemSelectionModel, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQItemSelectionModel_virtualbase_connectNotify(self.h, signal.h)
+
+proc QItemSelectionModeldisconnectNotify*(self: gen_qitemselectionmodel_types.QItemSelectionModel, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQItemSelectionModel_virtualbase_disconnectNotify(self.h, signal.h)
+
 
 proc fcQItemSelectionModel_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QItemSelectionModelVTable](fcQItemSelectionModel_vdata(self)[])
@@ -561,18 +610,12 @@ proc fcQItemSelectionModel_vtable_callback_metaObject(self: pointer): pointer {.
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QItemSelectionModelmetacast*(self: gen_qitemselectionmodel_types.QItemSelectionModel, param1: cstring): pointer =
-  fcQItemSelectionModel_virtualbase_metacast(self.h, param1)
-
 proc fcQItemSelectionModel_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QItemSelectionModelVTable](fcQItemSelectionModel_vdata(self)[])
   let self = QItemSelectionModel(h: self)
   let slotval1 = (param1)
   var virtualReturn = vtbl[].metacast(self, slotval1)
   virtualReturn
-
-proc QItemSelectionModelmetacall*(self: gen_qitemselectionmodel_types.QItemSelectionModel, param1: cint, param2: cint, param3: pointer): cint =
-  fcQItemSelectionModel_virtualbase_metacall(self.h, cint(param1), param2, param3)
 
 proc fcQItemSelectionModel_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QItemSelectionModelVTable](fcQItemSelectionModel_vdata(self)[])
@@ -583,18 +626,12 @@ proc fcQItemSelectionModel_vtable_callback_metacall(self: pointer, param1: cint,
   var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QItemSelectionModelsetCurrentIndex*(self: gen_qitemselectionmodel_types.QItemSelectionModel, index: gen_qabstractitemmodel_types.QModelIndex, command: cint): void =
-  fcQItemSelectionModel_virtualbase_setCurrentIndex(self.h, index.h, cint(command))
-
 proc fcQItemSelectionModel_vtable_callback_setCurrentIndex(self: pointer, index: pointer, command: cint): void {.cdecl.} =
   let vtbl = cast[ptr QItemSelectionModelVTable](fcQItemSelectionModel_vdata(self)[])
   let self = QItemSelectionModel(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   let slotval2 = cint(command)
   vtbl[].setCurrentIndex(self, slotval1, slotval2)
-
-proc QItemSelectionModelselect*(self: gen_qitemselectionmodel_types.QItemSelectionModel, index: gen_qabstractitemmodel_types.QModelIndex, command: cint): void =
-  fcQItemSelectionModel_virtualbase_select(self.h, index.h, cint(command))
 
 proc fcQItemSelectionModel_vtable_callback_select(self: pointer, index: pointer, command: cint): void {.cdecl.} =
   let vtbl = cast[ptr QItemSelectionModelVTable](fcQItemSelectionModel_vdata(self)[])
@@ -603,9 +640,6 @@ proc fcQItemSelectionModel_vtable_callback_select(self: pointer, index: pointer,
   let slotval2 = cint(command)
   vtbl[].select(self, slotval1, slotval2)
 
-proc QItemSelectionModelselect*(self: gen_qitemselectionmodel_types.QItemSelectionModel, selection: gen_qitemselectionmodel_types.QItemSelection, command: cint): void =
-  fcQItemSelectionModel_virtualbase_select2(self.h, selection.h, cint(command))
-
 proc fcQItemSelectionModel_vtable_callback_select2(self: pointer, selection: pointer, command: cint): void {.cdecl.} =
   let vtbl = cast[ptr QItemSelectionModelVTable](fcQItemSelectionModel_vdata(self)[])
   let self = QItemSelectionModel(h: self)
@@ -613,32 +647,20 @@ proc fcQItemSelectionModel_vtable_callback_select2(self: pointer, selection: poi
   let slotval2 = cint(command)
   vtbl[].select2(self, slotval1, slotval2)
 
-proc QItemSelectionModelclear*(self: gen_qitemselectionmodel_types.QItemSelectionModel): void =
-  fcQItemSelectionModel_virtualbase_clear(self.h)
-
 proc fcQItemSelectionModel_vtable_callback_clear(self: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QItemSelectionModelVTable](fcQItemSelectionModel_vdata(self)[])
   let self = QItemSelectionModel(h: self)
   vtbl[].clear(self)
-
-proc QItemSelectionModelreset*(self: gen_qitemselectionmodel_types.QItemSelectionModel): void =
-  fcQItemSelectionModel_virtualbase_reset(self.h)
 
 proc fcQItemSelectionModel_vtable_callback_reset(self: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QItemSelectionModelVTable](fcQItemSelectionModel_vdata(self)[])
   let self = QItemSelectionModel(h: self)
   vtbl[].reset(self)
 
-proc QItemSelectionModelclearCurrentIndex*(self: gen_qitemselectionmodel_types.QItemSelectionModel): void =
-  fcQItemSelectionModel_virtualbase_clearCurrentIndex(self.h)
-
 proc fcQItemSelectionModel_vtable_callback_clearCurrentIndex(self: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QItemSelectionModelVTable](fcQItemSelectionModel_vdata(self)[])
   let self = QItemSelectionModel(h: self)
   vtbl[].clearCurrentIndex(self)
-
-proc QItemSelectionModelevent*(self: gen_qitemselectionmodel_types.QItemSelectionModel, event: gen_qcoreevent_types.QEvent): bool =
-  fcQItemSelectionModel_virtualbase_event(self.h, event.h)
 
 proc fcQItemSelectionModel_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QItemSelectionModelVTable](fcQItemSelectionModel_vdata(self)[])
@@ -646,9 +668,6 @@ proc fcQItemSelectionModel_vtable_callback_event(self: pointer, event: pointer):
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
-
-proc QItemSelectionModeleventFilter*(self: gen_qitemselectionmodel_types.QItemSelectionModel, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
-  fcQItemSelectionModel_virtualbase_eventFilter(self.h, watched.h, event.h)
 
 proc fcQItemSelectionModel_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QItemSelectionModelVTable](fcQItemSelectionModel_vdata(self)[])
@@ -658,17 +677,11 @@ proc fcQItemSelectionModel_vtable_callback_eventFilter(self: pointer, watched: p
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
-proc QItemSelectionModeltimerEvent*(self: gen_qitemselectionmodel_types.QItemSelectionModel, event: gen_qcoreevent_types.QTimerEvent): void =
-  fcQItemSelectionModel_virtualbase_timerEvent(self.h, event.h)
-
 proc fcQItemSelectionModel_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QItemSelectionModelVTable](fcQItemSelectionModel_vdata(self)[])
   let self = QItemSelectionModel(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
-
-proc QItemSelectionModelchildEvent*(self: gen_qitemselectionmodel_types.QItemSelectionModel, event: gen_qcoreevent_types.QChildEvent): void =
-  fcQItemSelectionModel_virtualbase_childEvent(self.h, event.h)
 
 proc fcQItemSelectionModel_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QItemSelectionModelVTable](fcQItemSelectionModel_vdata(self)[])
@@ -676,26 +689,17 @@ proc fcQItemSelectionModel_vtable_callback_childEvent(self: pointer, event: poin
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
-proc QItemSelectionModelcustomEvent*(self: gen_qitemselectionmodel_types.QItemSelectionModel, event: gen_qcoreevent_types.QEvent): void =
-  fcQItemSelectionModel_virtualbase_customEvent(self.h, event.h)
-
 proc fcQItemSelectionModel_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QItemSelectionModelVTable](fcQItemSelectionModel_vdata(self)[])
   let self = QItemSelectionModel(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
-proc QItemSelectionModelconnectNotify*(self: gen_qitemselectionmodel_types.QItemSelectionModel, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQItemSelectionModel_virtualbase_connectNotify(self.h, signal.h)
-
 proc fcQItemSelectionModel_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QItemSelectionModelVTable](fcQItemSelectionModel_vdata(self)[])
   let self = QItemSelectionModel(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
-
-proc QItemSelectionModeldisconnectNotify*(self: gen_qitemselectionmodel_types.QItemSelectionModel, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQItemSelectionModel_virtualbase_disconnectNotify(self.h, signal.h)
 
 proc fcQItemSelectionModel_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QItemSelectionModelVTable](fcQItemSelectionModel_vdata(self)[])
@@ -705,23 +709,51 @@ proc fcQItemSelectionModel_vtable_callback_disconnectNotify(self: pointer, signa
 
 type VirtualQItemSelectionModel* {.inheritable.} = ref object of QItemSelectionModel
   vtbl*: cQItemSelectionModelVTable
+
 method metaObject*(self: VirtualQItemSelectionModel): gen_qobjectdefs_types.QMetaObject {.base.} =
   QItemSelectionModelmetaObject(self[])
+method metacast*(self: VirtualQItemSelectionModel, param1: cstring): pointer {.base.} =
+  QItemSelectionModelmetacast(self[], param1)
+method metacall*(self: VirtualQItemSelectionModel, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QItemSelectionModelmetacall(self[], param1, param2, param3)
+method setCurrentIndex*(self: VirtualQItemSelectionModel, index: gen_qabstractitemmodel_types.QModelIndex, command: cint): void {.base.} =
+  QItemSelectionModelsetCurrentIndex(self[], index, command)
+method select*(self: VirtualQItemSelectionModel, index: gen_qabstractitemmodel_types.QModelIndex, command: cint): void {.base.} =
+  QItemSelectionModelselect(self[], index, command)
+method select*(self: VirtualQItemSelectionModel, selection: gen_qitemselectionmodel_types.QItemSelection, command: cint): void {.base.} =
+  QItemSelectionModelselect(self[], selection, command)
+method clear*(self: VirtualQItemSelectionModel): void {.base.} =
+  QItemSelectionModelclear(self[])
+method reset*(self: VirtualQItemSelectionModel): void {.base.} =
+  QItemSelectionModelreset(self[])
+method clearCurrentIndex*(self: VirtualQItemSelectionModel): void {.base.} =
+  QItemSelectionModelclearCurrentIndex(self[])
+method event*(self: VirtualQItemSelectionModel, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QItemSelectionModelevent(self[], event)
+method eventFilter*(self: VirtualQItemSelectionModel, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QItemSelectionModeleventFilter(self[], watched, event)
+method timerEvent*(self: VirtualQItemSelectionModel, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QItemSelectionModeltimerEvent(self[], event)
+method childEvent*(self: VirtualQItemSelectionModel, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QItemSelectionModelchildEvent(self[], event)
+method customEvent*(self: VirtualQItemSelectionModel, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QItemSelectionModelcustomEvent(self[], event)
+method connectNotify*(self: VirtualQItemSelectionModel, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QItemSelectionModelconnectNotify(self[], signal)
+method disconnectNotify*(self: VirtualQItemSelectionModel, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QItemSelectionModeldisconnectNotify(self[], signal)
+
 proc fcQItemSelectionModel_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQItemSelectionModel](fcQItemSelectionModel_vdata(self)[])
   var virtualReturn = inst.metaObject()
   virtualReturn.h
 
-method metacast*(self: VirtualQItemSelectionModel, param1: cstring): pointer {.base.} =
-  QItemSelectionModelmetacast(self[], param1)
 proc fcQItemSelectionModel_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQItemSelectionModel](fcQItemSelectionModel_vdata(self)[])
   let slotval1 = (param1)
   var virtualReturn = inst.metacast(slotval1)
   virtualReturn
 
-method metacall*(self: VirtualQItemSelectionModel, param1: cint, param2: cint, param3: pointer): cint {.base.} =
-  QItemSelectionModelmetacall(self[], param1, param2, param3)
 proc fcQItemSelectionModel_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQItemSelectionModel](fcQItemSelectionModel_vdata(self)[])
   let slotval1 = cint(param1)
@@ -730,58 +762,42 @@ proc fcQItemSelectionModel_method_callback_metacall(self: pointer, param1: cint,
   var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
-method setCurrentIndex*(self: VirtualQItemSelectionModel, index: gen_qabstractitemmodel_types.QModelIndex, command: cint): void {.base.} =
-  QItemSelectionModelsetCurrentIndex(self[], index, command)
 proc fcQItemSelectionModel_method_callback_setCurrentIndex(self: pointer, index: pointer, command: cint): void {.cdecl.} =
   let inst = cast[VirtualQItemSelectionModel](fcQItemSelectionModel_vdata(self)[])
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   let slotval2 = cint(command)
   inst.setCurrentIndex(slotval1, slotval2)
 
-method select*(self: VirtualQItemSelectionModel, index: gen_qabstractitemmodel_types.QModelIndex, command: cint): void {.base.} =
-  QItemSelectionModelselect(self[], index, command)
 proc fcQItemSelectionModel_method_callback_select(self: pointer, index: pointer, command: cint): void {.cdecl.} =
   let inst = cast[VirtualQItemSelectionModel](fcQItemSelectionModel_vdata(self)[])
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   let slotval2 = cint(command)
   inst.select(slotval1, slotval2)
 
-method select*(self: VirtualQItemSelectionModel, selection: gen_qitemselectionmodel_types.QItemSelection, command: cint): void {.base.} =
-  QItemSelectionModelselect(self[], selection, command)
 proc fcQItemSelectionModel_method_callback_select2(self: pointer, selection: pointer, command: cint): void {.cdecl.} =
   let inst = cast[VirtualQItemSelectionModel](fcQItemSelectionModel_vdata(self)[])
   let slotval1 = gen_qitemselectionmodel_types.QItemSelection(h: selection, owned: false)
   let slotval2 = cint(command)
   inst.select(slotval1, slotval2)
 
-method clear*(self: VirtualQItemSelectionModel): void {.base.} =
-  QItemSelectionModelclear(self[])
 proc fcQItemSelectionModel_method_callback_clear(self: pointer): void {.cdecl.} =
   let inst = cast[VirtualQItemSelectionModel](fcQItemSelectionModel_vdata(self)[])
   inst.clear()
 
-method reset*(self: VirtualQItemSelectionModel): void {.base.} =
-  QItemSelectionModelreset(self[])
 proc fcQItemSelectionModel_method_callback_reset(self: pointer): void {.cdecl.} =
   let inst = cast[VirtualQItemSelectionModel](fcQItemSelectionModel_vdata(self)[])
   inst.reset()
 
-method clearCurrentIndex*(self: VirtualQItemSelectionModel): void {.base.} =
-  QItemSelectionModelclearCurrentIndex(self[])
 proc fcQItemSelectionModel_method_callback_clearCurrentIndex(self: pointer): void {.cdecl.} =
   let inst = cast[VirtualQItemSelectionModel](fcQItemSelectionModel_vdata(self)[])
   inst.clearCurrentIndex()
 
-method event*(self: VirtualQItemSelectionModel, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QItemSelectionModelevent(self[], event)
 proc fcQItemSelectionModel_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQItemSelectionModel](fcQItemSelectionModel_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
-method eventFilter*(self: VirtualQItemSelectionModel, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QItemSelectionModeleventFilter(self[], watched, event)
 proc fcQItemSelectionModel_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQItemSelectionModel](fcQItemSelectionModel_vdata(self)[])
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
@@ -789,40 +805,31 @@ proc fcQItemSelectionModel_method_callback_eventFilter(self: pointer, watched: p
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
-method timerEvent*(self: VirtualQItemSelectionModel, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
-  QItemSelectionModeltimerEvent(self[], event)
 proc fcQItemSelectionModel_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQItemSelectionModel](fcQItemSelectionModel_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
-method childEvent*(self: VirtualQItemSelectionModel, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
-  QItemSelectionModelchildEvent(self[], event)
 proc fcQItemSelectionModel_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQItemSelectionModel](fcQItemSelectionModel_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
-method customEvent*(self: VirtualQItemSelectionModel, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QItemSelectionModelcustomEvent(self[], event)
 proc fcQItemSelectionModel_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQItemSelectionModel](fcQItemSelectionModel_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
-method connectNotify*(self: VirtualQItemSelectionModel, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QItemSelectionModelconnectNotify(self[], signal)
 proc fcQItemSelectionModel_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQItemSelectionModel](fcQItemSelectionModel_vdata(self)[])
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
-method disconnectNotify*(self: VirtualQItemSelectionModel, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QItemSelectionModeldisconnectNotify(self[], signal)
 proc fcQItemSelectionModel_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQItemSelectionModel](fcQItemSelectionModel_vdata(self)[])
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
+
 
 proc emitSelectionChanged*(self: gen_qitemselectionmodel_types.QItemSelectionModel, newSelection: gen_qitemselectionmodel_types.QItemSelection, oldSelection: gen_qitemselectionmodel_types.QItemSelection): void =
   fcQItemSelectionModel_protectedbase_emitSelectionChanged(self.h, newSelection.h, oldSelection.h)

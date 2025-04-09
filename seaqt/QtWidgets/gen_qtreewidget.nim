@@ -165,6 +165,7 @@ proc fcQTreeWidgetItem_typeX(self: pointer): cint {.importc: "QTreeWidgetItem_ty
 proc fcQTreeWidgetItem_sortChildren(self: pointer, column: cint, order: cint): void {.importc: "QTreeWidgetItem_sortChildren".}
 proc fcQTreeWidgetItem_vdata(self: pointer): ptr pointer {.importc: "QTreeWidgetItem_vdata".}
 proc fvdata_cQTreeWidgetItem(self: pointer): pointer {.importc: "vdata_QTreeWidgetItem".}
+
 type cQTreeWidgetItemVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   clone*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -275,6 +276,7 @@ proc fcQTreeWidget_indexFromItem2(self: pointer, item: pointer, column: cint): p
 proc fcQTreeWidget_scrollToItem2(self: pointer, item: pointer, hint: cint): void {.importc: "QTreeWidget_scrollToItem2".}
 proc fcQTreeWidget_vdata(self: pointer): ptr pointer {.importc: "QTreeWidget_vdata".}
 proc fvdata_cQTreeWidget(self: pointer): pointer {.importc: "vdata_QTreeWidget".}
+
 type cQTreeWidgetVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -722,6 +724,7 @@ type QTreeWidgetItemsetDataProc* = proc(self: QTreeWidgetItem, column: cint, rol
 type QTreeWidgetItemoperatorLesserProc* = proc(self: QTreeWidgetItem, other: gen_qtreewidget_types.QTreeWidgetItem): bool {.raises: [], gcsafe.}
 type QTreeWidgetItemreadProc* = proc(self: QTreeWidgetItem, inVal: gen_qdatastream_types.QDataStream): void {.raises: [], gcsafe.}
 type QTreeWidgetItemwriteProc* = proc(self: QTreeWidgetItem, outVal: gen_qdatastream_types.QDataStream): void {.raises: [], gcsafe.}
+
 type QTreeWidgetItemVTable* {.inheritable, pure.} = object
   vtbl: cQTreeWidgetItemVTable
   clone*: QTreeWidgetItemcloneProc
@@ -730,8 +733,25 @@ type QTreeWidgetItemVTable* {.inheritable, pure.} = object
   operatorLesser*: QTreeWidgetItemoperatorLesserProc
   read*: QTreeWidgetItemreadProc
   write*: QTreeWidgetItemwriteProc
+
 proc QTreeWidgetItemclone*(self: gen_qtreewidget_types.QTreeWidgetItem): gen_qtreewidget_types.QTreeWidgetItem =
   gen_qtreewidget_types.QTreeWidgetItem(h: fcQTreeWidgetItem_virtualbase_clone(self.h), owned: false)
+
+proc QTreeWidgetItemdata*(self: gen_qtreewidget_types.QTreeWidgetItem, column: cint, role: cint): gen_qvariant_types.QVariant =
+  gen_qvariant_types.QVariant(h: fcQTreeWidgetItem_virtualbase_data(self.h, column, role), owned: true)
+
+proc QTreeWidgetItemsetData*(self: gen_qtreewidget_types.QTreeWidgetItem, column: cint, role: cint, value: gen_qvariant_types.QVariant): void =
+  fcQTreeWidgetItem_virtualbase_setData(self.h, column, role, value.h)
+
+proc QTreeWidgetItemoperatorLesser*(self: gen_qtreewidget_types.QTreeWidgetItem, other: gen_qtreewidget_types.QTreeWidgetItem): bool =
+  fcQTreeWidgetItem_virtualbase_operatorLesser(self.h, other.h)
+
+proc QTreeWidgetItemread*(self: gen_qtreewidget_types.QTreeWidgetItem, inVal: gen_qdatastream_types.QDataStream): void =
+  fcQTreeWidgetItem_virtualbase_read(self.h, inVal.h)
+
+proc QTreeWidgetItemwrite*(self: gen_qtreewidget_types.QTreeWidgetItem, outVal: gen_qdatastream_types.QDataStream): void =
+  fcQTreeWidgetItem_virtualbase_write(self.h, outVal.h)
+
 
 proc fcQTreeWidgetItem_vtable_callback_clone(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QTreeWidgetItemVTable](fcQTreeWidgetItem_vdata(self)[])
@@ -741,9 +761,6 @@ proc fcQTreeWidgetItem_vtable_callback_clone(self: pointer): pointer {.cdecl.} =
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
   virtualReturn_h
-
-proc QTreeWidgetItemdata*(self: gen_qtreewidget_types.QTreeWidgetItem, column: cint, role: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQTreeWidgetItem_virtualbase_data(self.h, column, role), owned: true)
 
 proc fcQTreeWidgetItem_vtable_callback_data(self: pointer, column: cint, role: cint): pointer {.cdecl.} =
   let vtbl = cast[ptr QTreeWidgetItemVTable](fcQTreeWidgetItem_vdata(self)[])
@@ -756,9 +773,6 @@ proc fcQTreeWidgetItem_vtable_callback_data(self: pointer, column: cint, role: c
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QTreeWidgetItemsetData*(self: gen_qtreewidget_types.QTreeWidgetItem, column: cint, role: cint, value: gen_qvariant_types.QVariant): void =
-  fcQTreeWidgetItem_virtualbase_setData(self.h, column, role, value.h)
-
 proc fcQTreeWidgetItem_vtable_callback_setData(self: pointer, column: cint, role: cint, value: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTreeWidgetItemVTable](fcQTreeWidgetItem_vdata(self)[])
   let self = QTreeWidgetItem(h: self)
@@ -767,9 +781,6 @@ proc fcQTreeWidgetItem_vtable_callback_setData(self: pointer, column: cint, role
   let slotval3 = gen_qvariant_types.QVariant(h: value, owned: false)
   vtbl[].setData(self, slotval1, slotval2, slotval3)
 
-proc QTreeWidgetItemoperatorLesser*(self: gen_qtreewidget_types.QTreeWidgetItem, other: gen_qtreewidget_types.QTreeWidgetItem): bool =
-  fcQTreeWidgetItem_virtualbase_operatorLesser(self.h, other.h)
-
 proc fcQTreeWidgetItem_vtable_callback_operatorLesser(self: pointer, other: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QTreeWidgetItemVTable](fcQTreeWidgetItem_vdata(self)[])
   let self = QTreeWidgetItem(h: self)
@@ -777,17 +788,11 @@ proc fcQTreeWidgetItem_vtable_callback_operatorLesser(self: pointer, other: poin
   var virtualReturn = vtbl[].operatorLesser(self, slotval1)
   virtualReturn
 
-proc QTreeWidgetItemread*(self: gen_qtreewidget_types.QTreeWidgetItem, inVal: gen_qdatastream_types.QDataStream): void =
-  fcQTreeWidgetItem_virtualbase_read(self.h, inVal.h)
-
 proc fcQTreeWidgetItem_vtable_callback_read(self: pointer, inVal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTreeWidgetItemVTable](fcQTreeWidgetItem_vdata(self)[])
   let self = QTreeWidgetItem(h: self)
   let slotval1 = gen_qdatastream_types.QDataStream(h: inVal, owned: false)
   vtbl[].read(self, slotval1)
-
-proc QTreeWidgetItemwrite*(self: gen_qtreewidget_types.QTreeWidgetItem, outVal: gen_qdatastream_types.QDataStream): void =
-  fcQTreeWidgetItem_virtualbase_write(self.h, outVal.h)
 
 proc fcQTreeWidgetItem_vtable_callback_write(self: pointer, outVal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTreeWidgetItemVTable](fcQTreeWidgetItem_vdata(self)[])
@@ -797,15 +802,25 @@ proc fcQTreeWidgetItem_vtable_callback_write(self: pointer, outVal: pointer): vo
 
 type VirtualQTreeWidgetItem* {.inheritable.} = ref object of QTreeWidgetItem
   vtbl*: cQTreeWidgetItemVTable
+
 method clone*(self: VirtualQTreeWidgetItem): gen_qtreewidget_types.QTreeWidgetItem {.base.} =
   QTreeWidgetItemclone(self[])
+method data*(self: VirtualQTreeWidgetItem, column: cint, role: cint): gen_qvariant_types.QVariant {.base.} =
+  QTreeWidgetItemdata(self[], column, role)
+method setData*(self: VirtualQTreeWidgetItem, column: cint, role: cint, value: gen_qvariant_types.QVariant): void {.base.} =
+  QTreeWidgetItemsetData(self[], column, role, value)
+method operatorLesser*(self: VirtualQTreeWidgetItem, other: gen_qtreewidget_types.QTreeWidgetItem): bool {.base.} =
+  QTreeWidgetItemoperatorLesser(self[], other)
+method read*(self: VirtualQTreeWidgetItem, inVal: gen_qdatastream_types.QDataStream): void {.base.} =
+  QTreeWidgetItemread(self[], inVal)
+method write*(self: VirtualQTreeWidgetItem, outVal: gen_qdatastream_types.QDataStream): void {.base.} =
+  QTreeWidgetItemwrite(self[], outVal)
+
 proc fcQTreeWidgetItem_method_callback_clone(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQTreeWidgetItem](fcQTreeWidgetItem_vdata(self)[])
   var virtualReturn = inst.clone()
   virtualReturn.h
 
-method data*(self: VirtualQTreeWidgetItem, column: cint, role: cint): gen_qvariant_types.QVariant {.base.} =
-  QTreeWidgetItemdata(self[], column, role)
 proc fcQTreeWidgetItem_method_callback_data(self: pointer, column: cint, role: cint): pointer {.cdecl.} =
   let inst = cast[VirtualQTreeWidgetItem](fcQTreeWidgetItem_vdata(self)[])
   let slotval1 = column
@@ -813,8 +828,6 @@ proc fcQTreeWidgetItem_method_callback_data(self: pointer, column: cint, role: c
   var virtualReturn = inst.data(slotval1, slotval2)
   virtualReturn.h
 
-method setData*(self: VirtualQTreeWidgetItem, column: cint, role: cint, value: gen_qvariant_types.QVariant): void {.base.} =
-  QTreeWidgetItemsetData(self[], column, role, value)
 proc fcQTreeWidgetItem_method_callback_setData(self: pointer, column: cint, role: cint, value: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTreeWidgetItem](fcQTreeWidgetItem_vdata(self)[])
   let slotval1 = column
@@ -822,27 +835,22 @@ proc fcQTreeWidgetItem_method_callback_setData(self: pointer, column: cint, role
   let slotval3 = gen_qvariant_types.QVariant(h: value, owned: false)
   inst.setData(slotval1, slotval2, slotval3)
 
-method operatorLesser*(self: VirtualQTreeWidgetItem, other: gen_qtreewidget_types.QTreeWidgetItem): bool {.base.} =
-  QTreeWidgetItemoperatorLesser(self[], other)
 proc fcQTreeWidgetItem_method_callback_operatorLesser(self: pointer, other: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQTreeWidgetItem](fcQTreeWidgetItem_vdata(self)[])
   let slotval1 = gen_qtreewidget_types.QTreeWidgetItem(h: other, owned: false)
   var virtualReturn = inst.operatorLesser(slotval1)
   virtualReturn
 
-method read*(self: VirtualQTreeWidgetItem, inVal: gen_qdatastream_types.QDataStream): void {.base.} =
-  QTreeWidgetItemread(self[], inVal)
 proc fcQTreeWidgetItem_method_callback_read(self: pointer, inVal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTreeWidgetItem](fcQTreeWidgetItem_vdata(self)[])
   let slotval1 = gen_qdatastream_types.QDataStream(h: inVal, owned: false)
   inst.read(slotval1)
 
-method write*(self: VirtualQTreeWidgetItem, outVal: gen_qdatastream_types.QDataStream): void {.base.} =
-  QTreeWidgetItemwrite(self[], outVal)
 proc fcQTreeWidgetItem_method_callback_write(self: pointer, outVal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTreeWidgetItem](fcQTreeWidgetItem_vdata(self)[])
   let slotval1 = gen_qdatastream_types.QDataStream(h: outVal, owned: false)
   inst.write(slotval1)
+
 
 proc emitDataChanged*(self: gen_qtreewidget_types.QTreeWidgetItem): void =
   fcQTreeWidgetItem_protectedbase_emitDataChanged(self.h)
@@ -1617,7 +1625,7 @@ proc fcQTreeWidget_slot_callback_itemPressed_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QTreeWidgetitemPressedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onitemPressed*(self: gen_qtreewidget_types.QTreeWidget, slot: QTreeWidgetitemPressedSlot) =
+proc onItemPressed*(self: gen_qtreewidget_types.QTreeWidget, slot: QTreeWidgetitemPressedSlot) =
   var tmp = new QTreeWidgetitemPressedSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -1639,7 +1647,7 @@ proc fcQTreeWidget_slot_callback_itemClicked_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QTreeWidgetitemClickedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onitemClicked*(self: gen_qtreewidget_types.QTreeWidget, slot: QTreeWidgetitemClickedSlot) =
+proc onItemClicked*(self: gen_qtreewidget_types.QTreeWidget, slot: QTreeWidgetitemClickedSlot) =
   var tmp = new QTreeWidgetitemClickedSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -1661,7 +1669,7 @@ proc fcQTreeWidget_slot_callback_itemDoubleClicked_release(slot: int) {.cdecl.} 
   let nimfunc = cast[ref QTreeWidgetitemDoubleClickedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onitemDoubleClicked*(self: gen_qtreewidget_types.QTreeWidget, slot: QTreeWidgetitemDoubleClickedSlot) =
+proc onItemDoubleClicked*(self: gen_qtreewidget_types.QTreeWidget, slot: QTreeWidgetitemDoubleClickedSlot) =
   var tmp = new QTreeWidgetitemDoubleClickedSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -1683,7 +1691,7 @@ proc fcQTreeWidget_slot_callback_itemActivated_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QTreeWidgetitemActivatedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onitemActivated*(self: gen_qtreewidget_types.QTreeWidget, slot: QTreeWidgetitemActivatedSlot) =
+proc onItemActivated*(self: gen_qtreewidget_types.QTreeWidget, slot: QTreeWidgetitemActivatedSlot) =
   var tmp = new QTreeWidgetitemActivatedSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -1705,7 +1713,7 @@ proc fcQTreeWidget_slot_callback_itemEntered_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QTreeWidgetitemEnteredSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onitemEntered*(self: gen_qtreewidget_types.QTreeWidget, slot: QTreeWidgetitemEnteredSlot) =
+proc onItemEntered*(self: gen_qtreewidget_types.QTreeWidget, slot: QTreeWidgetitemEnteredSlot) =
   var tmp = new QTreeWidgetitemEnteredSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -1727,7 +1735,7 @@ proc fcQTreeWidget_slot_callback_itemChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QTreeWidgetitemChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onitemChanged*(self: gen_qtreewidget_types.QTreeWidget, slot: QTreeWidgetitemChangedSlot) =
+proc onItemChanged*(self: gen_qtreewidget_types.QTreeWidget, slot: QTreeWidgetitemChangedSlot) =
   var tmp = new QTreeWidgetitemChangedSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -1747,7 +1755,7 @@ proc fcQTreeWidget_slot_callback_itemExpanded_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QTreeWidgetitemExpandedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onitemExpanded*(self: gen_qtreewidget_types.QTreeWidget, slot: QTreeWidgetitemExpandedSlot) =
+proc onItemExpanded*(self: gen_qtreewidget_types.QTreeWidget, slot: QTreeWidgetitemExpandedSlot) =
   var tmp = new QTreeWidgetitemExpandedSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -1767,7 +1775,7 @@ proc fcQTreeWidget_slot_callback_itemCollapsed_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QTreeWidgetitemCollapsedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onitemCollapsed*(self: gen_qtreewidget_types.QTreeWidget, slot: QTreeWidgetitemCollapsedSlot) =
+proc onItemCollapsed*(self: gen_qtreewidget_types.QTreeWidget, slot: QTreeWidgetitemCollapsedSlot) =
   var tmp = new QTreeWidgetitemCollapsedSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -1789,7 +1797,7 @@ proc fcQTreeWidget_slot_callback_currentItemChanged_release(slot: int) {.cdecl.}
   let nimfunc = cast[ref QTreeWidgetcurrentItemChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc oncurrentItemChanged*(self: gen_qtreewidget_types.QTreeWidget, slot: QTreeWidgetcurrentItemChangedSlot) =
+proc onCurrentItemChanged*(self: gen_qtreewidget_types.QTreeWidget, slot: QTreeWidgetcurrentItemChangedSlot) =
   var tmp = new QTreeWidgetcurrentItemChangedSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -1807,7 +1815,7 @@ proc fcQTreeWidget_slot_callback_itemSelectionChanged_release(slot: int) {.cdecl
   let nimfunc = cast[ref QTreeWidgetitemSelectionChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onitemSelectionChanged*(self: gen_qtreewidget_types.QTreeWidget, slot: QTreeWidgetitemSelectionChangedSlot) =
+proc onItemSelectionChanged*(self: gen_qtreewidget_types.QTreeWidget, slot: QTreeWidgetitemSelectionChangedSlot) =
   var tmp = new QTreeWidgetitemSelectionChangedSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -1951,6 +1959,7 @@ type QTreeWidgetchildEventProc* = proc(self: QTreeWidget, event: gen_qcoreevent_
 type QTreeWidgetcustomEventProc* = proc(self: QTreeWidget, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QTreeWidgetconnectNotifyProc* = proc(self: QTreeWidget, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QTreeWidgetdisconnectNotifyProc* = proc(self: QTreeWidget, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+
 type QTreeWidgetVTable* {.inheritable, pure.} = object
   vtbl: cQTreeWidgetVTable
   metaObject*: QTreeWidgetmetaObjectProc
@@ -2052,58 +2061,21 @@ type QTreeWidgetVTable* {.inheritable, pure.} = object
   customEvent*: QTreeWidgetcustomEventProc
   connectNotify*: QTreeWidgetconnectNotifyProc
   disconnectNotify*: QTreeWidgetdisconnectNotifyProc
+
 proc QTreeWidgetmetaObject*(self: gen_qtreewidget_types.QTreeWidget): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQTreeWidget_virtualbase_metaObject(self.h), owned: false)
-
-proc fcQTreeWidget_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
-  let vtbl = cast[ptr QTreeWidgetVTable](fcQTreeWidget_vdata(self)[])
-  let self = QTreeWidget(h: self)
-  var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.owned = false # TODO move?
-  let virtualReturn_h = virtualReturn.h
-  virtualReturn.h = nil
-  virtualReturn_h
 
 proc QTreeWidgetmetacast*(self: gen_qtreewidget_types.QTreeWidget, param1: cstring): pointer =
   fcQTreeWidget_virtualbase_metacast(self.h, param1)
 
-proc fcQTreeWidget_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
-  let vtbl = cast[ptr QTreeWidgetVTable](fcQTreeWidget_vdata(self)[])
-  let self = QTreeWidget(h: self)
-  let slotval1 = (param1)
-  var virtualReturn = vtbl[].metacast(self, slotval1)
-  virtualReturn
-
 proc QTreeWidgetmetacall*(self: gen_qtreewidget_types.QTreeWidget, param1: cint, param2: cint, param3: pointer): cint =
   fcQTreeWidget_virtualbase_metacall(self.h, cint(param1), param2, param3)
-
-proc fcQTreeWidget_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
-  let vtbl = cast[ptr QTreeWidgetVTable](fcQTreeWidget_vdata(self)[])
-  let self = QTreeWidget(h: self)
-  let slotval1 = cint(param1)
-  let slotval2 = param2
-  let slotval3 = param3
-  var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
-  virtualReturn
 
 proc QTreeWidgetsetSelectionModel*(self: gen_qtreewidget_types.QTreeWidget, selectionModel: gen_qitemselectionmodel_types.QItemSelectionModel): void =
   fcQTreeWidget_virtualbase_setSelectionModel(self.h, selectionModel.h)
 
-proc fcQTreeWidget_vtable_callback_setSelectionModel(self: pointer, selectionModel: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QTreeWidgetVTable](fcQTreeWidget_vdata(self)[])
-  let self = QTreeWidget(h: self)
-  let slotval1 = gen_qitemselectionmodel_types.QItemSelectionModel(h: selectionModel, owned: false)
-  vtbl[].setSelectionModel(self, slotval1)
-
 proc QTreeWidgetevent*(self: gen_qtreewidget_types.QTreeWidget, e: gen_qcoreevent_types.QEvent): bool =
   fcQTreeWidget_virtualbase_event(self.h, e.h)
-
-proc fcQTreeWidget_vtable_callback_event(self: pointer, e: pointer): bool {.cdecl.} =
-  let vtbl = cast[ptr QTreeWidgetVTable](fcQTreeWidget_vdata(self)[])
-  let self = QTreeWidget(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: e, owned: false)
-  var virtualReturn = vtbl[].event(self, slotval1)
-  virtualReturn
 
 proc QTreeWidgetmimeTypes*(self: gen_qtreewidget_types.QTreeWidget): seq[string] =
   var v_ma = fcQTreeWidget_virtualbase_mimeTypes(self.h)
@@ -2117,6 +2089,338 @@ proc QTreeWidgetmimeTypes*(self: gen_qtreewidget_types.QTreeWidget): seq[string]
   c_free(v_ma.data)
   vx_ret
 
+proc QTreeWidgetmimeData*(self: gen_qtreewidget_types.QTreeWidget, items: openArray[gen_qtreewidget_types.QTreeWidgetItem]): gen_qmimedata_types.QMimeData =
+  var items_CArray = newSeq[pointer](len(items))
+  for i in 0..<len(items):
+    items_CArray[i] = items[i].h
+
+  gen_qmimedata_types.QMimeData(h: fcQTreeWidget_virtualbase_mimeData(self.h, struct_miqt_array(len: csize_t(len(items)), data: if len(items) == 0: nil else: addr(items_CArray[0]))), owned: false)
+
+proc QTreeWidgetdropMimeData*(self: gen_qtreewidget_types.QTreeWidget, parent: gen_qtreewidget_types.QTreeWidgetItem, index: cint, data: gen_qmimedata_types.QMimeData, action: cint): bool =
+  fcQTreeWidget_virtualbase_dropMimeData(self.h, parent.h, index, data.h, cint(action))
+
+proc QTreeWidgetsupportedDropActions*(self: gen_qtreewidget_types.QTreeWidget): cint =
+  cint(fcQTreeWidget_virtualbase_supportedDropActions(self.h))
+
+proc QTreeWidgetdropEvent*(self: gen_qtreewidget_types.QTreeWidget, event: gen_qevent_types.QDropEvent): void =
+  fcQTreeWidget_virtualbase_dropEvent(self.h, event.h)
+
+proc QTreeWidgetsetRootIndex*(self: gen_qtreewidget_types.QTreeWidget, index: gen_qabstractitemmodel_types.QModelIndex): void =
+  fcQTreeWidget_virtualbase_setRootIndex(self.h, index.h)
+
+proc QTreeWidgetkeyboardSearch*(self: gen_qtreewidget_types.QTreeWidget, search: openArray[char]): void =
+  fcQTreeWidget_virtualbase_keyboardSearch(self.h, struct_miqt_string(data: if len(search) > 0: addr search[0] else: nil, len: csize_t(len(search))))
+
+proc QTreeWidgetvisualRect*(self: gen_qtreewidget_types.QTreeWidget, index: gen_qabstractitemmodel_types.QModelIndex): gen_qrect_types.QRect =
+  gen_qrect_types.QRect(h: fcQTreeWidget_virtualbase_visualRect(self.h, index.h), owned: true)
+
+proc QTreeWidgetscrollTo*(self: gen_qtreewidget_types.QTreeWidget, index: gen_qabstractitemmodel_types.QModelIndex, hint: cint): void =
+  fcQTreeWidget_virtualbase_scrollTo(self.h, index.h, cint(hint))
+
+proc QTreeWidgetindexAt*(self: gen_qtreewidget_types.QTreeWidget, p: gen_qpoint_types.QPoint): gen_qabstractitemmodel_types.QModelIndex =
+  gen_qabstractitemmodel_types.QModelIndex(h: fcQTreeWidget_virtualbase_indexAt(self.h, p.h), owned: true)
+
+proc QTreeWidgetdoItemsLayout*(self: gen_qtreewidget_types.QTreeWidget): void =
+  fcQTreeWidget_virtualbase_doItemsLayout(self.h)
+
+proc QTreeWidgetreset*(self: gen_qtreewidget_types.QTreeWidget): void =
+  fcQTreeWidget_virtualbase_reset(self.h)
+
+proc QTreeWidgetdataChanged*(self: gen_qtreewidget_types.QTreeWidget, topLeft: gen_qabstractitemmodel_types.QModelIndex, bottomRight: gen_qabstractitemmodel_types.QModelIndex, roles: openArray[cint]): void =
+  var roles_CArray = newSeq[cint](len(roles))
+  for i in 0..<len(roles):
+    roles_CArray[i] = roles[i]
+
+  fcQTreeWidget_virtualbase_dataChanged(self.h, topLeft.h, bottomRight.h, struct_miqt_array(len: csize_t(len(roles)), data: if len(roles) == 0: nil else: addr(roles_CArray[0])))
+
+proc QTreeWidgetselectAll*(self: gen_qtreewidget_types.QTreeWidget): void =
+  fcQTreeWidget_virtualbase_selectAll(self.h)
+
+proc QTreeWidgetverticalScrollbarValueChanged*(self: gen_qtreewidget_types.QTreeWidget, value: cint): void =
+  fcQTreeWidget_virtualbase_verticalScrollbarValueChanged(self.h, value)
+
+proc QTreeWidgetscrollContentsBy*(self: gen_qtreewidget_types.QTreeWidget, dx: cint, dy: cint): void =
+  fcQTreeWidget_virtualbase_scrollContentsBy(self.h, dx, dy)
+
+proc QTreeWidgetrowsInserted*(self: gen_qtreewidget_types.QTreeWidget, parent: gen_qabstractitemmodel_types.QModelIndex, start: cint, endVal: cint): void =
+  fcQTreeWidget_virtualbase_rowsInserted(self.h, parent.h, start, endVal)
+
+proc QTreeWidgetrowsAboutToBeRemoved*(self: gen_qtreewidget_types.QTreeWidget, parent: gen_qabstractitemmodel_types.QModelIndex, start: cint, endVal: cint): void =
+  fcQTreeWidget_virtualbase_rowsAboutToBeRemoved(self.h, parent.h, start, endVal)
+
+proc QTreeWidgetmoveCursor*(self: gen_qtreewidget_types.QTreeWidget, cursorAction: cint, modifiers: cint): gen_qabstractitemmodel_types.QModelIndex =
+  gen_qabstractitemmodel_types.QModelIndex(h: fcQTreeWidget_virtualbase_moveCursor(self.h, cint(cursorAction), cint(modifiers)), owned: true)
+
+proc QTreeWidgethorizontalOffset*(self: gen_qtreewidget_types.QTreeWidget): cint =
+  fcQTreeWidget_virtualbase_horizontalOffset(self.h)
+
+proc QTreeWidgetverticalOffset*(self: gen_qtreewidget_types.QTreeWidget): cint =
+  fcQTreeWidget_virtualbase_verticalOffset(self.h)
+
+proc QTreeWidgetsetSelection*(self: gen_qtreewidget_types.QTreeWidget, rect: gen_qrect_types.QRect, command: cint): void =
+  fcQTreeWidget_virtualbase_setSelection(self.h, rect.h, cint(command))
+
+proc QTreeWidgetvisualRegionForSelection*(self: gen_qtreewidget_types.QTreeWidget, selection: gen_qitemselectionmodel_types.QItemSelection): gen_qregion_types.QRegion =
+  gen_qregion_types.QRegion(h: fcQTreeWidget_virtualbase_visualRegionForSelection(self.h, selection.h), owned: true)
+
+proc QTreeWidgetselectedIndexes*(self: gen_qtreewidget_types.QTreeWidget): seq[gen_qabstractitemmodel_types.QModelIndex] =
+  var v_ma = fcQTreeWidget_virtualbase_selectedIndexes(self.h)
+  var vx_ret = newSeq[gen_qabstractitemmodel_types.QModelIndex](int(v_ma.len))
+  let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
+  for i in 0 ..< v_ma.len:
+    vx_ret[i] = gen_qabstractitemmodel_types.QModelIndex(h: v_outCast[i], owned: true)
+  c_free(v_ma.data)
+  vx_ret
+
+proc QTreeWidgetchangeEvent*(self: gen_qtreewidget_types.QTreeWidget, event: gen_qcoreevent_types.QEvent): void =
+  fcQTreeWidget_virtualbase_changeEvent(self.h, event.h)
+
+proc QTreeWidgettimerEvent*(self: gen_qtreewidget_types.QTreeWidget, event: gen_qcoreevent_types.QTimerEvent): void =
+  fcQTreeWidget_virtualbase_timerEvent(self.h, event.h)
+
+proc QTreeWidgetpaintEvent*(self: gen_qtreewidget_types.QTreeWidget, event: gen_qevent_types.QPaintEvent): void =
+  fcQTreeWidget_virtualbase_paintEvent(self.h, event.h)
+
+proc QTreeWidgetdrawRow*(self: gen_qtreewidget_types.QTreeWidget, painter: gen_qpainter_types.QPainter, options: gen_qstyleoption_types.QStyleOptionViewItem, index: gen_qabstractitemmodel_types.QModelIndex): void =
+  fcQTreeWidget_virtualbase_drawRow(self.h, painter.h, options.h, index.h)
+
+proc QTreeWidgetdrawBranches*(self: gen_qtreewidget_types.QTreeWidget, painter: gen_qpainter_types.QPainter, rect: gen_qrect_types.QRect, index: gen_qabstractitemmodel_types.QModelIndex): void =
+  fcQTreeWidget_virtualbase_drawBranches(self.h, painter.h, rect.h, index.h)
+
+proc QTreeWidgetmousePressEvent*(self: gen_qtreewidget_types.QTreeWidget, event: gen_qevent_types.QMouseEvent): void =
+  fcQTreeWidget_virtualbase_mousePressEvent(self.h, event.h)
+
+proc QTreeWidgetmouseReleaseEvent*(self: gen_qtreewidget_types.QTreeWidget, event: gen_qevent_types.QMouseEvent): void =
+  fcQTreeWidget_virtualbase_mouseReleaseEvent(self.h, event.h)
+
+proc QTreeWidgetmouseDoubleClickEvent*(self: gen_qtreewidget_types.QTreeWidget, event: gen_qevent_types.QMouseEvent): void =
+  fcQTreeWidget_virtualbase_mouseDoubleClickEvent(self.h, event.h)
+
+proc QTreeWidgetmouseMoveEvent*(self: gen_qtreewidget_types.QTreeWidget, event: gen_qevent_types.QMouseEvent): void =
+  fcQTreeWidget_virtualbase_mouseMoveEvent(self.h, event.h)
+
+proc QTreeWidgetkeyPressEvent*(self: gen_qtreewidget_types.QTreeWidget, event: gen_qevent_types.QKeyEvent): void =
+  fcQTreeWidget_virtualbase_keyPressEvent(self.h, event.h)
+
+proc QTreeWidgetdragMoveEvent*(self: gen_qtreewidget_types.QTreeWidget, event: gen_qevent_types.QDragMoveEvent): void =
+  fcQTreeWidget_virtualbase_dragMoveEvent(self.h, event.h)
+
+proc QTreeWidgetviewportEvent*(self: gen_qtreewidget_types.QTreeWidget, event: gen_qcoreevent_types.QEvent): bool =
+  fcQTreeWidget_virtualbase_viewportEvent(self.h, event.h)
+
+proc QTreeWidgetupdateGeometries*(self: gen_qtreewidget_types.QTreeWidget): void =
+  fcQTreeWidget_virtualbase_updateGeometries(self.h)
+
+proc QTreeWidgetviewportSizeHint*(self: gen_qtreewidget_types.QTreeWidget): gen_qsize_types.QSize =
+  gen_qsize_types.QSize(h: fcQTreeWidget_virtualbase_viewportSizeHint(self.h), owned: true)
+
+proc QTreeWidgetsizeHintForColumn*(self: gen_qtreewidget_types.QTreeWidget, column: cint): cint =
+  fcQTreeWidget_virtualbase_sizeHintForColumn(self.h, column)
+
+proc QTreeWidgethorizontalScrollbarAction*(self: gen_qtreewidget_types.QTreeWidget, action: cint): void =
+  fcQTreeWidget_virtualbase_horizontalScrollbarAction(self.h, action)
+
+proc QTreeWidgetisIndexHidden*(self: gen_qtreewidget_types.QTreeWidget, index: gen_qabstractitemmodel_types.QModelIndex): bool =
+  fcQTreeWidget_virtualbase_isIndexHidden(self.h, index.h)
+
+proc QTreeWidgetselectionChanged*(self: gen_qtreewidget_types.QTreeWidget, selected: gen_qitemselectionmodel_types.QItemSelection, deselected: gen_qitemselectionmodel_types.QItemSelection): void =
+  fcQTreeWidget_virtualbase_selectionChanged(self.h, selected.h, deselected.h)
+
+proc QTreeWidgetcurrentChanged*(self: gen_qtreewidget_types.QTreeWidget, current: gen_qabstractitemmodel_types.QModelIndex, previous: gen_qabstractitemmodel_types.QModelIndex): void =
+  fcQTreeWidget_virtualbase_currentChanged(self.h, current.h, previous.h)
+
+proc QTreeWidgetsizeHintForRow*(self: gen_qtreewidget_types.QTreeWidget, row: cint): cint =
+  fcQTreeWidget_virtualbase_sizeHintForRow(self.h, row)
+
+proc QTreeWidgetitemDelegateForIndex*(self: gen_qtreewidget_types.QTreeWidget, index: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemdelegate_types.QAbstractItemDelegate =
+  gen_qabstractitemdelegate_types.QAbstractItemDelegate(h: fcQTreeWidget_virtualbase_itemDelegateForIndex(self.h, index.h), owned: false)
+
+proc QTreeWidgetinputMethodQuery*(self: gen_qtreewidget_types.QTreeWidget, query: cint): gen_qvariant_types.QVariant =
+  gen_qvariant_types.QVariant(h: fcQTreeWidget_virtualbase_inputMethodQuery(self.h, cint(query)), owned: true)
+
+proc QTreeWidgetupdateEditorData*(self: gen_qtreewidget_types.QTreeWidget): void =
+  fcQTreeWidget_virtualbase_updateEditorData(self.h)
+
+proc QTreeWidgetupdateEditorGeometries*(self: gen_qtreewidget_types.QTreeWidget): void =
+  fcQTreeWidget_virtualbase_updateEditorGeometries(self.h)
+
+proc QTreeWidgetverticalScrollbarAction*(self: gen_qtreewidget_types.QTreeWidget, action: cint): void =
+  fcQTreeWidget_virtualbase_verticalScrollbarAction(self.h, action)
+
+proc QTreeWidgethorizontalScrollbarValueChanged*(self: gen_qtreewidget_types.QTreeWidget, value: cint): void =
+  fcQTreeWidget_virtualbase_horizontalScrollbarValueChanged(self.h, value)
+
+proc QTreeWidgetcloseEditor*(self: gen_qtreewidget_types.QTreeWidget, editor: gen_qwidget_types.QWidget, hint: cint): void =
+  fcQTreeWidget_virtualbase_closeEditor(self.h, editor.h, cint(hint))
+
+proc QTreeWidgetcommitData*(self: gen_qtreewidget_types.QTreeWidget, editor: gen_qwidget_types.QWidget): void =
+  fcQTreeWidget_virtualbase_commitData(self.h, editor.h)
+
+proc QTreeWidgeteditorDestroyed*(self: gen_qtreewidget_types.QTreeWidget, editor: gen_qobject_types.QObject): void =
+  fcQTreeWidget_virtualbase_editorDestroyed(self.h, editor.h)
+
+proc QTreeWidgetedit*(self: gen_qtreewidget_types.QTreeWidget, index: gen_qabstractitemmodel_types.QModelIndex, trigger: cint, event: gen_qcoreevent_types.QEvent): bool =
+  fcQTreeWidget_virtualbase_edit2(self.h, index.h, cint(trigger), event.h)
+
+proc QTreeWidgetselectionCommand*(self: gen_qtreewidget_types.QTreeWidget, index: gen_qabstractitemmodel_types.QModelIndex, event: gen_qcoreevent_types.QEvent): cint =
+  cint(fcQTreeWidget_virtualbase_selectionCommand(self.h, index.h, event.h))
+
+proc QTreeWidgetstartDrag*(self: gen_qtreewidget_types.QTreeWidget, supportedActions: cint): void =
+  fcQTreeWidget_virtualbase_startDrag(self.h, cint(supportedActions))
+
+proc QTreeWidgetinitViewItemOption*(self: gen_qtreewidget_types.QTreeWidget, option: gen_qstyleoption_types.QStyleOptionViewItem): void =
+  fcQTreeWidget_virtualbase_initViewItemOption(self.h, option.h)
+
+proc QTreeWidgetfocusNextPrevChild*(self: gen_qtreewidget_types.QTreeWidget, next: bool): bool =
+  fcQTreeWidget_virtualbase_focusNextPrevChild(self.h, next)
+
+proc QTreeWidgetdragEnterEvent*(self: gen_qtreewidget_types.QTreeWidget, event: gen_qevent_types.QDragEnterEvent): void =
+  fcQTreeWidget_virtualbase_dragEnterEvent(self.h, event.h)
+
+proc QTreeWidgetdragLeaveEvent*(self: gen_qtreewidget_types.QTreeWidget, event: gen_qevent_types.QDragLeaveEvent): void =
+  fcQTreeWidget_virtualbase_dragLeaveEvent(self.h, event.h)
+
+proc QTreeWidgetfocusInEvent*(self: gen_qtreewidget_types.QTreeWidget, event: gen_qevent_types.QFocusEvent): void =
+  fcQTreeWidget_virtualbase_focusInEvent(self.h, event.h)
+
+proc QTreeWidgetfocusOutEvent*(self: gen_qtreewidget_types.QTreeWidget, event: gen_qevent_types.QFocusEvent): void =
+  fcQTreeWidget_virtualbase_focusOutEvent(self.h, event.h)
+
+proc QTreeWidgetresizeEvent*(self: gen_qtreewidget_types.QTreeWidget, event: gen_qevent_types.QResizeEvent): void =
+  fcQTreeWidget_virtualbase_resizeEvent(self.h, event.h)
+
+proc QTreeWidgetinputMethodEvent*(self: gen_qtreewidget_types.QTreeWidget, event: gen_qevent_types.QInputMethodEvent): void =
+  fcQTreeWidget_virtualbase_inputMethodEvent(self.h, event.h)
+
+proc QTreeWidgeteventFilter*(self: gen_qtreewidget_types.QTreeWidget, objectVal: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
+  fcQTreeWidget_virtualbase_eventFilter(self.h, objectVal.h, event.h)
+
+proc QTreeWidgetminimumSizeHint*(self: gen_qtreewidget_types.QTreeWidget): gen_qsize_types.QSize =
+  gen_qsize_types.QSize(h: fcQTreeWidget_virtualbase_minimumSizeHint(self.h), owned: true)
+
+proc QTreeWidgetsizeHint*(self: gen_qtreewidget_types.QTreeWidget): gen_qsize_types.QSize =
+  gen_qsize_types.QSize(h: fcQTreeWidget_virtualbase_sizeHint(self.h), owned: true)
+
+proc QTreeWidgetsetupViewport*(self: gen_qtreewidget_types.QTreeWidget, viewport: gen_qwidget_types.QWidget): void =
+  fcQTreeWidget_virtualbase_setupViewport(self.h, viewport.h)
+
+proc QTreeWidgetwheelEvent*(self: gen_qtreewidget_types.QTreeWidget, param1: gen_qevent_types.QWheelEvent): void =
+  fcQTreeWidget_virtualbase_wheelEvent(self.h, param1.h)
+
+proc QTreeWidgetcontextMenuEvent*(self: gen_qtreewidget_types.QTreeWidget, param1: gen_qevent_types.QContextMenuEvent): void =
+  fcQTreeWidget_virtualbase_contextMenuEvent(self.h, param1.h)
+
+proc QTreeWidgetinitStyleOption*(self: gen_qtreewidget_types.QTreeWidget, option: gen_qstyleoption_types.QStyleOptionFrame): void =
+  fcQTreeWidget_virtualbase_initStyleOption(self.h, option.h)
+
+proc QTreeWidgetdevType*(self: gen_qtreewidget_types.QTreeWidget): cint =
+  fcQTreeWidget_virtualbase_devType(self.h)
+
+proc QTreeWidgetsetVisible*(self: gen_qtreewidget_types.QTreeWidget, visible: bool): void =
+  fcQTreeWidget_virtualbase_setVisible(self.h, visible)
+
+proc QTreeWidgetheightForWidth*(self: gen_qtreewidget_types.QTreeWidget, param1: cint): cint =
+  fcQTreeWidget_virtualbase_heightForWidth(self.h, param1)
+
+proc QTreeWidgethasHeightForWidth*(self: gen_qtreewidget_types.QTreeWidget): bool =
+  fcQTreeWidget_virtualbase_hasHeightForWidth(self.h)
+
+proc QTreeWidgetpaintEngine*(self: gen_qtreewidget_types.QTreeWidget): gen_qpaintengine_types.QPaintEngine =
+  gen_qpaintengine_types.QPaintEngine(h: fcQTreeWidget_virtualbase_paintEngine(self.h), owned: false)
+
+proc QTreeWidgetkeyReleaseEvent*(self: gen_qtreewidget_types.QTreeWidget, event: gen_qevent_types.QKeyEvent): void =
+  fcQTreeWidget_virtualbase_keyReleaseEvent(self.h, event.h)
+
+proc QTreeWidgetenterEvent*(self: gen_qtreewidget_types.QTreeWidget, event: gen_qevent_types.QEnterEvent): void =
+  fcQTreeWidget_virtualbase_enterEvent(self.h, event.h)
+
+proc QTreeWidgetleaveEvent*(self: gen_qtreewidget_types.QTreeWidget, event: gen_qcoreevent_types.QEvent): void =
+  fcQTreeWidget_virtualbase_leaveEvent(self.h, event.h)
+
+proc QTreeWidgetmoveEvent*(self: gen_qtreewidget_types.QTreeWidget, event: gen_qevent_types.QMoveEvent): void =
+  fcQTreeWidget_virtualbase_moveEvent(self.h, event.h)
+
+proc QTreeWidgetcloseEvent*(self: gen_qtreewidget_types.QTreeWidget, event: gen_qevent_types.QCloseEvent): void =
+  fcQTreeWidget_virtualbase_closeEvent(self.h, event.h)
+
+proc QTreeWidgettabletEvent*(self: gen_qtreewidget_types.QTreeWidget, event: gen_qevent_types.QTabletEvent): void =
+  fcQTreeWidget_virtualbase_tabletEvent(self.h, event.h)
+
+proc QTreeWidgetactionEvent*(self: gen_qtreewidget_types.QTreeWidget, event: gen_qevent_types.QActionEvent): void =
+  fcQTreeWidget_virtualbase_actionEvent(self.h, event.h)
+
+proc QTreeWidgetshowEvent*(self: gen_qtreewidget_types.QTreeWidget, event: gen_qevent_types.QShowEvent): void =
+  fcQTreeWidget_virtualbase_showEvent(self.h, event.h)
+
+proc QTreeWidgethideEvent*(self: gen_qtreewidget_types.QTreeWidget, event: gen_qevent_types.QHideEvent): void =
+  fcQTreeWidget_virtualbase_hideEvent(self.h, event.h)
+
+proc QTreeWidgetnativeEvent*(self: gen_qtreewidget_types.QTreeWidget, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool =
+  fcQTreeWidget_virtualbase_nativeEvent(self.h, struct_miqt_string(data: if len(eventType) > 0: addr eventType[0] else: nil, len: csize_t(len(eventType))), message, resultVal)
+
+proc QTreeWidgetmetric*(self: gen_qtreewidget_types.QTreeWidget, param1: cint): cint =
+  fcQTreeWidget_virtualbase_metric(self.h, cint(param1))
+
+proc QTreeWidgetinitPainter*(self: gen_qtreewidget_types.QTreeWidget, painter: gen_qpainter_types.QPainter): void =
+  fcQTreeWidget_virtualbase_initPainter(self.h, painter.h)
+
+proc QTreeWidgetredirected*(self: gen_qtreewidget_types.QTreeWidget, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice =
+  gen_qpaintdevice_types.QPaintDevice(h: fcQTreeWidget_virtualbase_redirected(self.h, offset.h), owned: false)
+
+proc QTreeWidgetsharedPainter*(self: gen_qtreewidget_types.QTreeWidget): gen_qpainter_types.QPainter =
+  gen_qpainter_types.QPainter(h: fcQTreeWidget_virtualbase_sharedPainter(self.h), owned: false)
+
+proc QTreeWidgetchildEvent*(self: gen_qtreewidget_types.QTreeWidget, event: gen_qcoreevent_types.QChildEvent): void =
+  fcQTreeWidget_virtualbase_childEvent(self.h, event.h)
+
+proc QTreeWidgetcustomEvent*(self: gen_qtreewidget_types.QTreeWidget, event: gen_qcoreevent_types.QEvent): void =
+  fcQTreeWidget_virtualbase_customEvent(self.h, event.h)
+
+proc QTreeWidgetconnectNotify*(self: gen_qtreewidget_types.QTreeWidget, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQTreeWidget_virtualbase_connectNotify(self.h, signal.h)
+
+proc QTreeWidgetdisconnectNotify*(self: gen_qtreewidget_types.QTreeWidget, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQTreeWidget_virtualbase_disconnectNotify(self.h, signal.h)
+
+
+proc fcQTreeWidget_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QTreeWidgetVTable](fcQTreeWidget_vdata(self)[])
+  let self = QTreeWidget(h: self)
+  var virtualReturn = vtbl[].metaObject(self)
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+proc fcQTreeWidget_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+  let vtbl = cast[ptr QTreeWidgetVTable](fcQTreeWidget_vdata(self)[])
+  let self = QTreeWidget(h: self)
+  let slotval1 = (param1)
+  var virtualReturn = vtbl[].metacast(self, slotval1)
+  virtualReturn
+
+proc fcQTreeWidget_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QTreeWidgetVTable](fcQTreeWidget_vdata(self)[])
+  let self = QTreeWidget(h: self)
+  let slotval1 = cint(param1)
+  let slotval2 = param2
+  let slotval3 = param3
+  var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
+  virtualReturn
+
+proc fcQTreeWidget_vtable_callback_setSelectionModel(self: pointer, selectionModel: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QTreeWidgetVTable](fcQTreeWidget_vdata(self)[])
+  let self = QTreeWidget(h: self)
+  let slotval1 = gen_qitemselectionmodel_types.QItemSelectionModel(h: selectionModel, owned: false)
+  vtbl[].setSelectionModel(self, slotval1)
+
+proc fcQTreeWidget_vtable_callback_event(self: pointer, e: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QTreeWidgetVTable](fcQTreeWidget_vdata(self)[])
+  let self = QTreeWidget(h: self)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: e, owned: false)
+  var virtualReturn = vtbl[].event(self, slotval1)
+  virtualReturn
+
 proc fcQTreeWidget_vtable_callback_mimeTypes(self: pointer): struct_miqt_array {.cdecl.} =
   let vtbl = cast[ptr QTreeWidgetVTable](fcQTreeWidget_vdata(self)[])
   let self = QTreeWidget(h: self)
@@ -2128,13 +2432,6 @@ proc fcQTreeWidget_vtable_callback_mimeTypes(self: pointer): struct_miqt_array {
     virtualReturn_CArray[i] = struct_miqt_string(data: virtualReturn_i_copy, len: csize_t(len(virtualReturn[i])))
 
   struct_miqt_array(len: csize_t(len(virtualReturn)), data: if len(virtualReturn) == 0: nil else: addr(virtualReturn_CArray[0]))
-
-proc QTreeWidgetmimeData*(self: gen_qtreewidget_types.QTreeWidget, items: openArray[gen_qtreewidget_types.QTreeWidgetItem]): gen_qmimedata_types.QMimeData =
-  var items_CArray = newSeq[pointer](len(items))
-  for i in 0..<len(items):
-    items_CArray[i] = items[i].h
-
-  gen_qmimedata_types.QMimeData(h: fcQTreeWidget_virtualbase_mimeData(self.h, struct_miqt_array(len: csize_t(len(items)), data: if len(items) == 0: nil else: addr(items_CArray[0]))), owned: false)
 
 proc fcQTreeWidget_vtable_callback_mimeData(self: pointer, items: struct_miqt_array): pointer {.cdecl.} =
   let vtbl = cast[ptr QTreeWidgetVTable](fcQTreeWidget_vdata(self)[])
@@ -2152,9 +2449,6 @@ proc fcQTreeWidget_vtable_callback_mimeData(self: pointer, items: struct_miqt_ar
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QTreeWidgetdropMimeData*(self: gen_qtreewidget_types.QTreeWidget, parent: gen_qtreewidget_types.QTreeWidgetItem, index: cint, data: gen_qmimedata_types.QMimeData, action: cint): bool =
-  fcQTreeWidget_virtualbase_dropMimeData(self.h, parent.h, index, data.h, cint(action))
-
 proc fcQTreeWidget_vtable_callback_dropMimeData(self: pointer, parent: pointer, index: cint, data: pointer, action: cint): bool {.cdecl.} =
   let vtbl = cast[ptr QTreeWidgetVTable](fcQTreeWidget_vdata(self)[])
   let self = QTreeWidget(h: self)
@@ -2165,17 +2459,11 @@ proc fcQTreeWidget_vtable_callback_dropMimeData(self: pointer, parent: pointer, 
   var virtualReturn = vtbl[].dropMimeData(self, slotval1, slotval2, slotval3, slotval4)
   virtualReturn
 
-proc QTreeWidgetsupportedDropActions*(self: gen_qtreewidget_types.QTreeWidget): cint =
-  cint(fcQTreeWidget_virtualbase_supportedDropActions(self.h))
-
 proc fcQTreeWidget_vtable_callback_supportedDropActions(self: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QTreeWidgetVTable](fcQTreeWidget_vdata(self)[])
   let self = QTreeWidget(h: self)
   var virtualReturn = vtbl[].supportedDropActions(self)
   cint(virtualReturn)
-
-proc QTreeWidgetdropEvent*(self: gen_qtreewidget_types.QTreeWidget, event: gen_qevent_types.QDropEvent): void =
-  fcQTreeWidget_virtualbase_dropEvent(self.h, event.h)
 
 proc fcQTreeWidget_vtable_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTreeWidgetVTable](fcQTreeWidget_vdata(self)[])
@@ -2183,17 +2471,11 @@ proc fcQTreeWidget_vtable_callback_dropEvent(self: pointer, event: pointer): voi
   let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
   vtbl[].dropEvent(self, slotval1)
 
-proc QTreeWidgetsetRootIndex*(self: gen_qtreewidget_types.QTreeWidget, index: gen_qabstractitemmodel_types.QModelIndex): void =
-  fcQTreeWidget_virtualbase_setRootIndex(self.h, index.h)
-
 proc fcQTreeWidget_vtable_callback_setRootIndex(self: pointer, index: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTreeWidgetVTable](fcQTreeWidget_vdata(self)[])
   let self = QTreeWidget(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   vtbl[].setRootIndex(self, slotval1)
-
-proc QTreeWidgetkeyboardSearch*(self: gen_qtreewidget_types.QTreeWidget, search: openArray[char]): void =
-  fcQTreeWidget_virtualbase_keyboardSearch(self.h, struct_miqt_string(data: if len(search) > 0: addr search[0] else: nil, len: csize_t(len(search))))
 
 proc fcQTreeWidget_vtable_callback_keyboardSearch(self: pointer, search: struct_miqt_string): void {.cdecl.} =
   let vtbl = cast[ptr QTreeWidgetVTable](fcQTreeWidget_vdata(self)[])
@@ -2203,9 +2485,6 @@ proc fcQTreeWidget_vtable_callback_keyboardSearch(self: pointer, search: struct_
   c_free(vsearch_ms.data)
   let slotval1 = vsearchx_ret
   vtbl[].keyboardSearch(self, slotval1)
-
-proc QTreeWidgetvisualRect*(self: gen_qtreewidget_types.QTreeWidget, index: gen_qabstractitemmodel_types.QModelIndex): gen_qrect_types.QRect =
-  gen_qrect_types.QRect(h: fcQTreeWidget_virtualbase_visualRect(self.h, index.h), owned: true)
 
 proc fcQTreeWidget_vtable_callback_visualRect(self: pointer, index: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QTreeWidgetVTable](fcQTreeWidget_vdata(self)[])
@@ -2217,18 +2496,12 @@ proc fcQTreeWidget_vtable_callback_visualRect(self: pointer, index: pointer): po
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QTreeWidgetscrollTo*(self: gen_qtreewidget_types.QTreeWidget, index: gen_qabstractitemmodel_types.QModelIndex, hint: cint): void =
-  fcQTreeWidget_virtualbase_scrollTo(self.h, index.h, cint(hint))
-
 proc fcQTreeWidget_vtable_callback_scrollTo(self: pointer, index: pointer, hint: cint): void {.cdecl.} =
   let vtbl = cast[ptr QTreeWidgetVTable](fcQTreeWidget_vdata(self)[])
   let self = QTreeWidget(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   let slotval2 = cint(hint)
   vtbl[].scrollTo(self, slotval1, slotval2)
-
-proc QTreeWidgetindexAt*(self: gen_qtreewidget_types.QTreeWidget, p: gen_qpoint_types.QPoint): gen_qabstractitemmodel_types.QModelIndex =
-  gen_qabstractitemmodel_types.QModelIndex(h: fcQTreeWidget_virtualbase_indexAt(self.h, p.h), owned: true)
 
 proc fcQTreeWidget_vtable_callback_indexAt(self: pointer, p: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QTreeWidgetVTable](fcQTreeWidget_vdata(self)[])
@@ -2240,28 +2513,15 @@ proc fcQTreeWidget_vtable_callback_indexAt(self: pointer, p: pointer): pointer {
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QTreeWidgetdoItemsLayout*(self: gen_qtreewidget_types.QTreeWidget): void =
-  fcQTreeWidget_virtualbase_doItemsLayout(self.h)
-
 proc fcQTreeWidget_vtable_callback_doItemsLayout(self: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTreeWidgetVTable](fcQTreeWidget_vdata(self)[])
   let self = QTreeWidget(h: self)
   vtbl[].doItemsLayout(self)
 
-proc QTreeWidgetreset*(self: gen_qtreewidget_types.QTreeWidget): void =
-  fcQTreeWidget_virtualbase_reset(self.h)
-
 proc fcQTreeWidget_vtable_callback_reset(self: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTreeWidgetVTable](fcQTreeWidget_vdata(self)[])
   let self = QTreeWidget(h: self)
   vtbl[].reset(self)
-
-proc QTreeWidgetdataChanged*(self: gen_qtreewidget_types.QTreeWidget, topLeft: gen_qabstractitemmodel_types.QModelIndex, bottomRight: gen_qabstractitemmodel_types.QModelIndex, roles: openArray[cint]): void =
-  var roles_CArray = newSeq[cint](len(roles))
-  for i in 0..<len(roles):
-    roles_CArray[i] = roles[i]
-
-  fcQTreeWidget_virtualbase_dataChanged(self.h, topLeft.h, bottomRight.h, struct_miqt_array(len: csize_t(len(roles)), data: if len(roles) == 0: nil else: addr(roles_CArray[0])))
 
 proc fcQTreeWidget_vtable_callback_dataChanged(self: pointer, topLeft: pointer, bottomRight: pointer, roles: struct_miqt_array): void {.cdecl.} =
   let vtbl = cast[ptr QTreeWidgetVTable](fcQTreeWidget_vdata(self)[])
@@ -2277,16 +2537,10 @@ proc fcQTreeWidget_vtable_callback_dataChanged(self: pointer, topLeft: pointer, 
   let slotval3 = vrolesx_ret
   vtbl[].dataChanged(self, slotval1, slotval2, slotval3)
 
-proc QTreeWidgetselectAll*(self: gen_qtreewidget_types.QTreeWidget): void =
-  fcQTreeWidget_virtualbase_selectAll(self.h)
-
 proc fcQTreeWidget_vtable_callback_selectAll(self: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTreeWidgetVTable](fcQTreeWidget_vdata(self)[])
   let self = QTreeWidget(h: self)
   vtbl[].selectAll(self)
-
-proc QTreeWidgetverticalScrollbarValueChanged*(self: gen_qtreewidget_types.QTreeWidget, value: cint): void =
-  fcQTreeWidget_virtualbase_verticalScrollbarValueChanged(self.h, value)
 
 proc fcQTreeWidget_vtable_callback_verticalScrollbarValueChanged(self: pointer, value: cint): void {.cdecl.} =
   let vtbl = cast[ptr QTreeWidgetVTable](fcQTreeWidget_vdata(self)[])
@@ -2294,18 +2548,12 @@ proc fcQTreeWidget_vtable_callback_verticalScrollbarValueChanged(self: pointer, 
   let slotval1 = value
   vtbl[].verticalScrollbarValueChanged(self, slotval1)
 
-proc QTreeWidgetscrollContentsBy*(self: gen_qtreewidget_types.QTreeWidget, dx: cint, dy: cint): void =
-  fcQTreeWidget_virtualbase_scrollContentsBy(self.h, dx, dy)
-
 proc fcQTreeWidget_vtable_callback_scrollContentsBy(self: pointer, dx: cint, dy: cint): void {.cdecl.} =
   let vtbl = cast[ptr QTreeWidgetVTable](fcQTreeWidget_vdata(self)[])
   let self = QTreeWidget(h: self)
   let slotval1 = dx
   let slotval2 = dy
   vtbl[].scrollContentsBy(self, slotval1, slotval2)
-
-proc QTreeWidgetrowsInserted*(self: gen_qtreewidget_types.QTreeWidget, parent: gen_qabstractitemmodel_types.QModelIndex, start: cint, endVal: cint): void =
-  fcQTreeWidget_virtualbase_rowsInserted(self.h, parent.h, start, endVal)
 
 proc fcQTreeWidget_vtable_callback_rowsInserted(self: pointer, parent: pointer, start: cint, endVal: cint): void {.cdecl.} =
   let vtbl = cast[ptr QTreeWidgetVTable](fcQTreeWidget_vdata(self)[])
@@ -2315,9 +2563,6 @@ proc fcQTreeWidget_vtable_callback_rowsInserted(self: pointer, parent: pointer, 
   let slotval3 = endVal
   vtbl[].rowsInserted(self, slotval1, slotval2, slotval3)
 
-proc QTreeWidgetrowsAboutToBeRemoved*(self: gen_qtreewidget_types.QTreeWidget, parent: gen_qabstractitemmodel_types.QModelIndex, start: cint, endVal: cint): void =
-  fcQTreeWidget_virtualbase_rowsAboutToBeRemoved(self.h, parent.h, start, endVal)
-
 proc fcQTreeWidget_vtable_callback_rowsAboutToBeRemoved(self: pointer, parent: pointer, start: cint, endVal: cint): void {.cdecl.} =
   let vtbl = cast[ptr QTreeWidgetVTable](fcQTreeWidget_vdata(self)[])
   let self = QTreeWidget(h: self)
@@ -2325,9 +2570,6 @@ proc fcQTreeWidget_vtable_callback_rowsAboutToBeRemoved(self: pointer, parent: p
   let slotval2 = start
   let slotval3 = endVal
   vtbl[].rowsAboutToBeRemoved(self, slotval1, slotval2, slotval3)
-
-proc QTreeWidgetmoveCursor*(self: gen_qtreewidget_types.QTreeWidget, cursorAction: cint, modifiers: cint): gen_qabstractitemmodel_types.QModelIndex =
-  gen_qabstractitemmodel_types.QModelIndex(h: fcQTreeWidget_virtualbase_moveCursor(self.h, cint(cursorAction), cint(modifiers)), owned: true)
 
 proc fcQTreeWidget_vtable_callback_moveCursor(self: pointer, cursorAction: cint, modifiers: cint): pointer {.cdecl.} =
   let vtbl = cast[ptr QTreeWidgetVTable](fcQTreeWidget_vdata(self)[])
@@ -2340,17 +2582,11 @@ proc fcQTreeWidget_vtable_callback_moveCursor(self: pointer, cursorAction: cint,
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QTreeWidgethorizontalOffset*(self: gen_qtreewidget_types.QTreeWidget): cint =
-  fcQTreeWidget_virtualbase_horizontalOffset(self.h)
-
 proc fcQTreeWidget_vtable_callback_horizontalOffset(self: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QTreeWidgetVTable](fcQTreeWidget_vdata(self)[])
   let self = QTreeWidget(h: self)
   var virtualReturn = vtbl[].horizontalOffset(self)
   virtualReturn
-
-proc QTreeWidgetverticalOffset*(self: gen_qtreewidget_types.QTreeWidget): cint =
-  fcQTreeWidget_virtualbase_verticalOffset(self.h)
 
 proc fcQTreeWidget_vtable_callback_verticalOffset(self: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QTreeWidgetVTable](fcQTreeWidget_vdata(self)[])
@@ -2358,18 +2594,12 @@ proc fcQTreeWidget_vtable_callback_verticalOffset(self: pointer): cint {.cdecl.}
   var virtualReturn = vtbl[].verticalOffset(self)
   virtualReturn
 
-proc QTreeWidgetsetSelection*(self: gen_qtreewidget_types.QTreeWidget, rect: gen_qrect_types.QRect, command: cint): void =
-  fcQTreeWidget_virtualbase_setSelection(self.h, rect.h, cint(command))
-
 proc fcQTreeWidget_vtable_callback_setSelection(self: pointer, rect: pointer, command: cint): void {.cdecl.} =
   let vtbl = cast[ptr QTreeWidgetVTable](fcQTreeWidget_vdata(self)[])
   let self = QTreeWidget(h: self)
   let slotval1 = gen_qrect_types.QRect(h: rect, owned: false)
   let slotval2 = cint(command)
   vtbl[].setSelection(self, slotval1, slotval2)
-
-proc QTreeWidgetvisualRegionForSelection*(self: gen_qtreewidget_types.QTreeWidget, selection: gen_qitemselectionmodel_types.QItemSelection): gen_qregion_types.QRegion =
-  gen_qregion_types.QRegion(h: fcQTreeWidget_virtualbase_visualRegionForSelection(self.h, selection.h), owned: true)
 
 proc fcQTreeWidget_vtable_callback_visualRegionForSelection(self: pointer, selection: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QTreeWidgetVTable](fcQTreeWidget_vdata(self)[])
@@ -2380,15 +2610,6 @@ proc fcQTreeWidget_vtable_callback_visualRegionForSelection(self: pointer, selec
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
   virtualReturn_h
-
-proc QTreeWidgetselectedIndexes*(self: gen_qtreewidget_types.QTreeWidget): seq[gen_qabstractitemmodel_types.QModelIndex] =
-  var v_ma = fcQTreeWidget_virtualbase_selectedIndexes(self.h)
-  var vx_ret = newSeq[gen_qabstractitemmodel_types.QModelIndex](int(v_ma.len))
-  let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
-  for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qabstractitemmodel_types.QModelIndex(h: v_outCast[i], owned: true)
-  c_free(v_ma.data)
-  vx_ret
 
 proc fcQTreeWidget_vtable_callback_selectedIndexes(self: pointer): struct_miqt_array {.cdecl.} =
   let vtbl = cast[ptr QTreeWidgetVTable](fcQTreeWidget_vdata(self)[])
@@ -2403,17 +2624,11 @@ proc fcQTreeWidget_vtable_callback_selectedIndexes(self: pointer): struct_miqt_a
 
   struct_miqt_array(len: csize_t(len(virtualReturn)), data: if len(virtualReturn) == 0: nil else: addr(virtualReturn_CArray[0]))
 
-proc QTreeWidgetchangeEvent*(self: gen_qtreewidget_types.QTreeWidget, event: gen_qcoreevent_types.QEvent): void =
-  fcQTreeWidget_virtualbase_changeEvent(self.h, event.h)
-
 proc fcQTreeWidget_vtable_callback_changeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTreeWidgetVTable](fcQTreeWidget_vdata(self)[])
   let self = QTreeWidget(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].changeEvent(self, slotval1)
-
-proc QTreeWidgettimerEvent*(self: gen_qtreewidget_types.QTreeWidget, event: gen_qcoreevent_types.QTimerEvent): void =
-  fcQTreeWidget_virtualbase_timerEvent(self.h, event.h)
 
 proc fcQTreeWidget_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTreeWidgetVTable](fcQTreeWidget_vdata(self)[])
@@ -2421,17 +2636,11 @@ proc fcQTreeWidget_vtable_callback_timerEvent(self: pointer, event: pointer): vo
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
-proc QTreeWidgetpaintEvent*(self: gen_qtreewidget_types.QTreeWidget, event: gen_qevent_types.QPaintEvent): void =
-  fcQTreeWidget_virtualbase_paintEvent(self.h, event.h)
-
 proc fcQTreeWidget_vtable_callback_paintEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTreeWidgetVTable](fcQTreeWidget_vdata(self)[])
   let self = QTreeWidget(h: self)
   let slotval1 = gen_qevent_types.QPaintEvent(h: event, owned: false)
   vtbl[].paintEvent(self, slotval1)
-
-proc QTreeWidgetdrawRow*(self: gen_qtreewidget_types.QTreeWidget, painter: gen_qpainter_types.QPainter, options: gen_qstyleoption_types.QStyleOptionViewItem, index: gen_qabstractitemmodel_types.QModelIndex): void =
-  fcQTreeWidget_virtualbase_drawRow(self.h, painter.h, options.h, index.h)
 
 proc fcQTreeWidget_vtable_callback_drawRow(self: pointer, painter: pointer, options: pointer, index: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTreeWidgetVTable](fcQTreeWidget_vdata(self)[])
@@ -2441,9 +2650,6 @@ proc fcQTreeWidget_vtable_callback_drawRow(self: pointer, painter: pointer, opti
   let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   vtbl[].drawRow(self, slotval1, slotval2, slotval3)
 
-proc QTreeWidgetdrawBranches*(self: gen_qtreewidget_types.QTreeWidget, painter: gen_qpainter_types.QPainter, rect: gen_qrect_types.QRect, index: gen_qabstractitemmodel_types.QModelIndex): void =
-  fcQTreeWidget_virtualbase_drawBranches(self.h, painter.h, rect.h, index.h)
-
 proc fcQTreeWidget_vtable_callback_drawBranches(self: pointer, painter: pointer, rect: pointer, index: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTreeWidgetVTable](fcQTreeWidget_vdata(self)[])
   let self = QTreeWidget(h: self)
@@ -2452,17 +2658,11 @@ proc fcQTreeWidget_vtable_callback_drawBranches(self: pointer, painter: pointer,
   let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   vtbl[].drawBranches(self, slotval1, slotval2, slotval3)
 
-proc QTreeWidgetmousePressEvent*(self: gen_qtreewidget_types.QTreeWidget, event: gen_qevent_types.QMouseEvent): void =
-  fcQTreeWidget_virtualbase_mousePressEvent(self.h, event.h)
-
 proc fcQTreeWidget_vtable_callback_mousePressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTreeWidgetVTable](fcQTreeWidget_vdata(self)[])
   let self = QTreeWidget(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mousePressEvent(self, slotval1)
-
-proc QTreeWidgetmouseReleaseEvent*(self: gen_qtreewidget_types.QTreeWidget, event: gen_qevent_types.QMouseEvent): void =
-  fcQTreeWidget_virtualbase_mouseReleaseEvent(self.h, event.h)
 
 proc fcQTreeWidget_vtable_callback_mouseReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTreeWidgetVTable](fcQTreeWidget_vdata(self)[])
@@ -2470,17 +2670,11 @@ proc fcQTreeWidget_vtable_callback_mouseReleaseEvent(self: pointer, event: point
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseReleaseEvent(self, slotval1)
 
-proc QTreeWidgetmouseDoubleClickEvent*(self: gen_qtreewidget_types.QTreeWidget, event: gen_qevent_types.QMouseEvent): void =
-  fcQTreeWidget_virtualbase_mouseDoubleClickEvent(self.h, event.h)
-
 proc fcQTreeWidget_vtable_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTreeWidgetVTable](fcQTreeWidget_vdata(self)[])
   let self = QTreeWidget(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseDoubleClickEvent(self, slotval1)
-
-proc QTreeWidgetmouseMoveEvent*(self: gen_qtreewidget_types.QTreeWidget, event: gen_qevent_types.QMouseEvent): void =
-  fcQTreeWidget_virtualbase_mouseMoveEvent(self.h, event.h)
 
 proc fcQTreeWidget_vtable_callback_mouseMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTreeWidgetVTable](fcQTreeWidget_vdata(self)[])
@@ -2488,26 +2682,17 @@ proc fcQTreeWidget_vtable_callback_mouseMoveEvent(self: pointer, event: pointer)
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseMoveEvent(self, slotval1)
 
-proc QTreeWidgetkeyPressEvent*(self: gen_qtreewidget_types.QTreeWidget, event: gen_qevent_types.QKeyEvent): void =
-  fcQTreeWidget_virtualbase_keyPressEvent(self.h, event.h)
-
 proc fcQTreeWidget_vtable_callback_keyPressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTreeWidgetVTable](fcQTreeWidget_vdata(self)[])
   let self = QTreeWidget(h: self)
   let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   vtbl[].keyPressEvent(self, slotval1)
 
-proc QTreeWidgetdragMoveEvent*(self: gen_qtreewidget_types.QTreeWidget, event: gen_qevent_types.QDragMoveEvent): void =
-  fcQTreeWidget_virtualbase_dragMoveEvent(self.h, event.h)
-
 proc fcQTreeWidget_vtable_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTreeWidgetVTable](fcQTreeWidget_vdata(self)[])
   let self = QTreeWidget(h: self)
   let slotval1 = gen_qevent_types.QDragMoveEvent(h: event, owned: false)
   vtbl[].dragMoveEvent(self, slotval1)
-
-proc QTreeWidgetviewportEvent*(self: gen_qtreewidget_types.QTreeWidget, event: gen_qcoreevent_types.QEvent): bool =
-  fcQTreeWidget_virtualbase_viewportEvent(self.h, event.h)
 
 proc fcQTreeWidget_vtable_callback_viewportEvent(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QTreeWidgetVTable](fcQTreeWidget_vdata(self)[])
@@ -2516,16 +2701,10 @@ proc fcQTreeWidget_vtable_callback_viewportEvent(self: pointer, event: pointer):
   var virtualReturn = vtbl[].viewportEvent(self, slotval1)
   virtualReturn
 
-proc QTreeWidgetupdateGeometries*(self: gen_qtreewidget_types.QTreeWidget): void =
-  fcQTreeWidget_virtualbase_updateGeometries(self.h)
-
 proc fcQTreeWidget_vtable_callback_updateGeometries(self: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTreeWidgetVTable](fcQTreeWidget_vdata(self)[])
   let self = QTreeWidget(h: self)
   vtbl[].updateGeometries(self)
-
-proc QTreeWidgetviewportSizeHint*(self: gen_qtreewidget_types.QTreeWidget): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQTreeWidget_virtualbase_viewportSizeHint(self.h), owned: true)
 
 proc fcQTreeWidget_vtable_callback_viewportSizeHint(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QTreeWidgetVTable](fcQTreeWidget_vdata(self)[])
@@ -2536,9 +2715,6 @@ proc fcQTreeWidget_vtable_callback_viewportSizeHint(self: pointer): pointer {.cd
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QTreeWidgetsizeHintForColumn*(self: gen_qtreewidget_types.QTreeWidget, column: cint): cint =
-  fcQTreeWidget_virtualbase_sizeHintForColumn(self.h, column)
-
 proc fcQTreeWidget_vtable_callback_sizeHintForColumn(self: pointer, column: cint): cint {.cdecl.} =
   let vtbl = cast[ptr QTreeWidgetVTable](fcQTreeWidget_vdata(self)[])
   let self = QTreeWidget(h: self)
@@ -2546,17 +2722,11 @@ proc fcQTreeWidget_vtable_callback_sizeHintForColumn(self: pointer, column: cint
   var virtualReturn = vtbl[].sizeHintForColumn(self, slotval1)
   virtualReturn
 
-proc QTreeWidgethorizontalScrollbarAction*(self: gen_qtreewidget_types.QTreeWidget, action: cint): void =
-  fcQTreeWidget_virtualbase_horizontalScrollbarAction(self.h, action)
-
 proc fcQTreeWidget_vtable_callback_horizontalScrollbarAction(self: pointer, action: cint): void {.cdecl.} =
   let vtbl = cast[ptr QTreeWidgetVTable](fcQTreeWidget_vdata(self)[])
   let self = QTreeWidget(h: self)
   let slotval1 = action
   vtbl[].horizontalScrollbarAction(self, slotval1)
-
-proc QTreeWidgetisIndexHidden*(self: gen_qtreewidget_types.QTreeWidget, index: gen_qabstractitemmodel_types.QModelIndex): bool =
-  fcQTreeWidget_virtualbase_isIndexHidden(self.h, index.h)
 
 proc fcQTreeWidget_vtable_callback_isIndexHidden(self: pointer, index: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QTreeWidgetVTable](fcQTreeWidget_vdata(self)[])
@@ -2565,18 +2735,12 @@ proc fcQTreeWidget_vtable_callback_isIndexHidden(self: pointer, index: pointer):
   var virtualReturn = vtbl[].isIndexHidden(self, slotval1)
   virtualReturn
 
-proc QTreeWidgetselectionChanged*(self: gen_qtreewidget_types.QTreeWidget, selected: gen_qitemselectionmodel_types.QItemSelection, deselected: gen_qitemselectionmodel_types.QItemSelection): void =
-  fcQTreeWidget_virtualbase_selectionChanged(self.h, selected.h, deselected.h)
-
 proc fcQTreeWidget_vtable_callback_selectionChanged(self: pointer, selected: pointer, deselected: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTreeWidgetVTable](fcQTreeWidget_vdata(self)[])
   let self = QTreeWidget(h: self)
   let slotval1 = gen_qitemselectionmodel_types.QItemSelection(h: selected, owned: false)
   let slotval2 = gen_qitemselectionmodel_types.QItemSelection(h: deselected, owned: false)
   vtbl[].selectionChanged(self, slotval1, slotval2)
-
-proc QTreeWidgetcurrentChanged*(self: gen_qtreewidget_types.QTreeWidget, current: gen_qabstractitemmodel_types.QModelIndex, previous: gen_qabstractitemmodel_types.QModelIndex): void =
-  fcQTreeWidget_virtualbase_currentChanged(self.h, current.h, previous.h)
 
 proc fcQTreeWidget_vtable_callback_currentChanged(self: pointer, current: pointer, previous: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTreeWidgetVTable](fcQTreeWidget_vdata(self)[])
@@ -2585,18 +2749,12 @@ proc fcQTreeWidget_vtable_callback_currentChanged(self: pointer, current: pointe
   let slotval2 = gen_qabstractitemmodel_types.QModelIndex(h: previous, owned: false)
   vtbl[].currentChanged(self, slotval1, slotval2)
 
-proc QTreeWidgetsizeHintForRow*(self: gen_qtreewidget_types.QTreeWidget, row: cint): cint =
-  fcQTreeWidget_virtualbase_sizeHintForRow(self.h, row)
-
 proc fcQTreeWidget_vtable_callback_sizeHintForRow(self: pointer, row: cint): cint {.cdecl.} =
   let vtbl = cast[ptr QTreeWidgetVTable](fcQTreeWidget_vdata(self)[])
   let self = QTreeWidget(h: self)
   let slotval1 = row
   var virtualReturn = vtbl[].sizeHintForRow(self, slotval1)
   virtualReturn
-
-proc QTreeWidgetitemDelegateForIndex*(self: gen_qtreewidget_types.QTreeWidget, index: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemdelegate_types.QAbstractItemDelegate =
-  gen_qabstractitemdelegate_types.QAbstractItemDelegate(h: fcQTreeWidget_virtualbase_itemDelegateForIndex(self.h, index.h), owned: false)
 
 proc fcQTreeWidget_vtable_callback_itemDelegateForIndex(self: pointer, index: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QTreeWidgetVTable](fcQTreeWidget_vdata(self)[])
@@ -2608,9 +2766,6 @@ proc fcQTreeWidget_vtable_callback_itemDelegateForIndex(self: pointer, index: po
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QTreeWidgetinputMethodQuery*(self: gen_qtreewidget_types.QTreeWidget, query: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQTreeWidget_virtualbase_inputMethodQuery(self.h, cint(query)), owned: true)
-
 proc fcQTreeWidget_vtable_callback_inputMethodQuery(self: pointer, query: cint): pointer {.cdecl.} =
   let vtbl = cast[ptr QTreeWidgetVTable](fcQTreeWidget_vdata(self)[])
   let self = QTreeWidget(h: self)
@@ -2621,24 +2776,15 @@ proc fcQTreeWidget_vtable_callback_inputMethodQuery(self: pointer, query: cint):
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QTreeWidgetupdateEditorData*(self: gen_qtreewidget_types.QTreeWidget): void =
-  fcQTreeWidget_virtualbase_updateEditorData(self.h)
-
 proc fcQTreeWidget_vtable_callback_updateEditorData(self: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTreeWidgetVTable](fcQTreeWidget_vdata(self)[])
   let self = QTreeWidget(h: self)
   vtbl[].updateEditorData(self)
 
-proc QTreeWidgetupdateEditorGeometries*(self: gen_qtreewidget_types.QTreeWidget): void =
-  fcQTreeWidget_virtualbase_updateEditorGeometries(self.h)
-
 proc fcQTreeWidget_vtable_callback_updateEditorGeometries(self: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTreeWidgetVTable](fcQTreeWidget_vdata(self)[])
   let self = QTreeWidget(h: self)
   vtbl[].updateEditorGeometries(self)
-
-proc QTreeWidgetverticalScrollbarAction*(self: gen_qtreewidget_types.QTreeWidget, action: cint): void =
-  fcQTreeWidget_virtualbase_verticalScrollbarAction(self.h, action)
 
 proc fcQTreeWidget_vtable_callback_verticalScrollbarAction(self: pointer, action: cint): void {.cdecl.} =
   let vtbl = cast[ptr QTreeWidgetVTable](fcQTreeWidget_vdata(self)[])
@@ -2646,17 +2792,11 @@ proc fcQTreeWidget_vtable_callback_verticalScrollbarAction(self: pointer, action
   let slotval1 = action
   vtbl[].verticalScrollbarAction(self, slotval1)
 
-proc QTreeWidgethorizontalScrollbarValueChanged*(self: gen_qtreewidget_types.QTreeWidget, value: cint): void =
-  fcQTreeWidget_virtualbase_horizontalScrollbarValueChanged(self.h, value)
-
 proc fcQTreeWidget_vtable_callback_horizontalScrollbarValueChanged(self: pointer, value: cint): void {.cdecl.} =
   let vtbl = cast[ptr QTreeWidgetVTable](fcQTreeWidget_vdata(self)[])
   let self = QTreeWidget(h: self)
   let slotval1 = value
   vtbl[].horizontalScrollbarValueChanged(self, slotval1)
-
-proc QTreeWidgetcloseEditor*(self: gen_qtreewidget_types.QTreeWidget, editor: gen_qwidget_types.QWidget, hint: cint): void =
-  fcQTreeWidget_virtualbase_closeEditor(self.h, editor.h, cint(hint))
 
 proc fcQTreeWidget_vtable_callback_closeEditor(self: pointer, editor: pointer, hint: cint): void {.cdecl.} =
   let vtbl = cast[ptr QTreeWidgetVTable](fcQTreeWidget_vdata(self)[])
@@ -2665,26 +2805,17 @@ proc fcQTreeWidget_vtable_callback_closeEditor(self: pointer, editor: pointer, h
   let slotval2 = cint(hint)
   vtbl[].closeEditor(self, slotval1, slotval2)
 
-proc QTreeWidgetcommitData*(self: gen_qtreewidget_types.QTreeWidget, editor: gen_qwidget_types.QWidget): void =
-  fcQTreeWidget_virtualbase_commitData(self.h, editor.h)
-
 proc fcQTreeWidget_vtable_callback_commitData(self: pointer, editor: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTreeWidgetVTable](fcQTreeWidget_vdata(self)[])
   let self = QTreeWidget(h: self)
   let slotval1 = gen_qwidget_types.QWidget(h: editor, owned: false)
   vtbl[].commitData(self, slotval1)
 
-proc QTreeWidgeteditorDestroyed*(self: gen_qtreewidget_types.QTreeWidget, editor: gen_qobject_types.QObject): void =
-  fcQTreeWidget_virtualbase_editorDestroyed(self.h, editor.h)
-
 proc fcQTreeWidget_vtable_callback_editorDestroyed(self: pointer, editor: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTreeWidgetVTable](fcQTreeWidget_vdata(self)[])
   let self = QTreeWidget(h: self)
   let slotval1 = gen_qobject_types.QObject(h: editor, owned: false)
   vtbl[].editorDestroyed(self, slotval1)
-
-proc QTreeWidgetedit*(self: gen_qtreewidget_types.QTreeWidget, index: gen_qabstractitemmodel_types.QModelIndex, trigger: cint, event: gen_qcoreevent_types.QEvent): bool =
-  fcQTreeWidget_virtualbase_edit2(self.h, index.h, cint(trigger), event.h)
 
 proc fcQTreeWidget_vtable_callback_edit2(self: pointer, index: pointer, trigger: cint, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QTreeWidgetVTable](fcQTreeWidget_vdata(self)[])
@@ -2695,9 +2826,6 @@ proc fcQTreeWidget_vtable_callback_edit2(self: pointer, index: pointer, trigger:
   var virtualReturn = vtbl[].edit2(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QTreeWidgetselectionCommand*(self: gen_qtreewidget_types.QTreeWidget, index: gen_qabstractitemmodel_types.QModelIndex, event: gen_qcoreevent_types.QEvent): cint =
-  cint(fcQTreeWidget_virtualbase_selectionCommand(self.h, index.h, event.h))
-
 proc fcQTreeWidget_vtable_callback_selectionCommand(self: pointer, index: pointer, event: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QTreeWidgetVTable](fcQTreeWidget_vdata(self)[])
   let self = QTreeWidget(h: self)
@@ -2706,26 +2834,17 @@ proc fcQTreeWidget_vtable_callback_selectionCommand(self: pointer, index: pointe
   var virtualReturn = vtbl[].selectionCommand(self, slotval1, slotval2)
   cint(virtualReturn)
 
-proc QTreeWidgetstartDrag*(self: gen_qtreewidget_types.QTreeWidget, supportedActions: cint): void =
-  fcQTreeWidget_virtualbase_startDrag(self.h, cint(supportedActions))
-
 proc fcQTreeWidget_vtable_callback_startDrag(self: pointer, supportedActions: cint): void {.cdecl.} =
   let vtbl = cast[ptr QTreeWidgetVTable](fcQTreeWidget_vdata(self)[])
   let self = QTreeWidget(h: self)
   let slotval1 = cint(supportedActions)
   vtbl[].startDrag(self, slotval1)
 
-proc QTreeWidgetinitViewItemOption*(self: gen_qtreewidget_types.QTreeWidget, option: gen_qstyleoption_types.QStyleOptionViewItem): void =
-  fcQTreeWidget_virtualbase_initViewItemOption(self.h, option.h)
-
 proc fcQTreeWidget_vtable_callback_initViewItemOption(self: pointer, option: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTreeWidgetVTable](fcQTreeWidget_vdata(self)[])
   let self = QTreeWidget(h: self)
   let slotval1 = gen_qstyleoption_types.QStyleOptionViewItem(h: option, owned: false)
   vtbl[].initViewItemOption(self, slotval1)
-
-proc QTreeWidgetfocusNextPrevChild*(self: gen_qtreewidget_types.QTreeWidget, next: bool): bool =
-  fcQTreeWidget_virtualbase_focusNextPrevChild(self.h, next)
 
 proc fcQTreeWidget_vtable_callback_focusNextPrevChild(self: pointer, next: bool): bool {.cdecl.} =
   let vtbl = cast[ptr QTreeWidgetVTable](fcQTreeWidget_vdata(self)[])
@@ -2734,17 +2853,11 @@ proc fcQTreeWidget_vtable_callback_focusNextPrevChild(self: pointer, next: bool)
   var virtualReturn = vtbl[].focusNextPrevChild(self, slotval1)
   virtualReturn
 
-proc QTreeWidgetdragEnterEvent*(self: gen_qtreewidget_types.QTreeWidget, event: gen_qevent_types.QDragEnterEvent): void =
-  fcQTreeWidget_virtualbase_dragEnterEvent(self.h, event.h)
-
 proc fcQTreeWidget_vtable_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTreeWidgetVTable](fcQTreeWidget_vdata(self)[])
   let self = QTreeWidget(h: self)
   let slotval1 = gen_qevent_types.QDragEnterEvent(h: event, owned: false)
   vtbl[].dragEnterEvent(self, slotval1)
-
-proc QTreeWidgetdragLeaveEvent*(self: gen_qtreewidget_types.QTreeWidget, event: gen_qevent_types.QDragLeaveEvent): void =
-  fcQTreeWidget_virtualbase_dragLeaveEvent(self.h, event.h)
 
 proc fcQTreeWidget_vtable_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTreeWidgetVTable](fcQTreeWidget_vdata(self)[])
@@ -2752,17 +2865,11 @@ proc fcQTreeWidget_vtable_callback_dragLeaveEvent(self: pointer, event: pointer)
   let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event, owned: false)
   vtbl[].dragLeaveEvent(self, slotval1)
 
-proc QTreeWidgetfocusInEvent*(self: gen_qtreewidget_types.QTreeWidget, event: gen_qevent_types.QFocusEvent): void =
-  fcQTreeWidget_virtualbase_focusInEvent(self.h, event.h)
-
 proc fcQTreeWidget_vtable_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTreeWidgetVTable](fcQTreeWidget_vdata(self)[])
   let self = QTreeWidget(h: self)
   let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusInEvent(self, slotval1)
-
-proc QTreeWidgetfocusOutEvent*(self: gen_qtreewidget_types.QTreeWidget, event: gen_qevent_types.QFocusEvent): void =
-  fcQTreeWidget_virtualbase_focusOutEvent(self.h, event.h)
 
 proc fcQTreeWidget_vtable_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTreeWidgetVTable](fcQTreeWidget_vdata(self)[])
@@ -2770,26 +2877,17 @@ proc fcQTreeWidget_vtable_callback_focusOutEvent(self: pointer, event: pointer):
   let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusOutEvent(self, slotval1)
 
-proc QTreeWidgetresizeEvent*(self: gen_qtreewidget_types.QTreeWidget, event: gen_qevent_types.QResizeEvent): void =
-  fcQTreeWidget_virtualbase_resizeEvent(self.h, event.h)
-
 proc fcQTreeWidget_vtable_callback_resizeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTreeWidgetVTable](fcQTreeWidget_vdata(self)[])
   let self = QTreeWidget(h: self)
   let slotval1 = gen_qevent_types.QResizeEvent(h: event, owned: false)
   vtbl[].resizeEvent(self, slotval1)
 
-proc QTreeWidgetinputMethodEvent*(self: gen_qtreewidget_types.QTreeWidget, event: gen_qevent_types.QInputMethodEvent): void =
-  fcQTreeWidget_virtualbase_inputMethodEvent(self.h, event.h)
-
 proc fcQTreeWidget_vtable_callback_inputMethodEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTreeWidgetVTable](fcQTreeWidget_vdata(self)[])
   let self = QTreeWidget(h: self)
   let slotval1 = gen_qevent_types.QInputMethodEvent(h: event, owned: false)
   vtbl[].inputMethodEvent(self, slotval1)
-
-proc QTreeWidgeteventFilter*(self: gen_qtreewidget_types.QTreeWidget, objectVal: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
-  fcQTreeWidget_virtualbase_eventFilter(self.h, objectVal.h, event.h)
 
 proc fcQTreeWidget_vtable_callback_eventFilter(self: pointer, objectVal: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QTreeWidgetVTable](fcQTreeWidget_vdata(self)[])
@@ -2798,9 +2896,6 @@ proc fcQTreeWidget_vtable_callback_eventFilter(self: pointer, objectVal: pointer
   let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
-
-proc QTreeWidgetminimumSizeHint*(self: gen_qtreewidget_types.QTreeWidget): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQTreeWidget_virtualbase_minimumSizeHint(self.h), owned: true)
 
 proc fcQTreeWidget_vtable_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QTreeWidgetVTable](fcQTreeWidget_vdata(self)[])
@@ -2811,9 +2906,6 @@ proc fcQTreeWidget_vtable_callback_minimumSizeHint(self: pointer): pointer {.cde
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QTreeWidgetsizeHint*(self: gen_qtreewidget_types.QTreeWidget): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQTreeWidget_virtualbase_sizeHint(self.h), owned: true)
-
 proc fcQTreeWidget_vtable_callback_sizeHint(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QTreeWidgetVTable](fcQTreeWidget_vdata(self)[])
   let self = QTreeWidget(h: self)
@@ -2823,17 +2915,11 @@ proc fcQTreeWidget_vtable_callback_sizeHint(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QTreeWidgetsetupViewport*(self: gen_qtreewidget_types.QTreeWidget, viewport: gen_qwidget_types.QWidget): void =
-  fcQTreeWidget_virtualbase_setupViewport(self.h, viewport.h)
-
 proc fcQTreeWidget_vtable_callback_setupViewport(self: pointer, viewport: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTreeWidgetVTable](fcQTreeWidget_vdata(self)[])
   let self = QTreeWidget(h: self)
   let slotval1 = gen_qwidget_types.QWidget(h: viewport, owned: false)
   vtbl[].setupViewport(self, slotval1)
-
-proc QTreeWidgetwheelEvent*(self: gen_qtreewidget_types.QTreeWidget, param1: gen_qevent_types.QWheelEvent): void =
-  fcQTreeWidget_virtualbase_wheelEvent(self.h, param1.h)
 
 proc fcQTreeWidget_vtable_callback_wheelEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTreeWidgetVTable](fcQTreeWidget_vdata(self)[])
@@ -2841,17 +2927,11 @@ proc fcQTreeWidget_vtable_callback_wheelEvent(self: pointer, param1: pointer): v
   let slotval1 = gen_qevent_types.QWheelEvent(h: param1, owned: false)
   vtbl[].wheelEvent(self, slotval1)
 
-proc QTreeWidgetcontextMenuEvent*(self: gen_qtreewidget_types.QTreeWidget, param1: gen_qevent_types.QContextMenuEvent): void =
-  fcQTreeWidget_virtualbase_contextMenuEvent(self.h, param1.h)
-
 proc fcQTreeWidget_vtable_callback_contextMenuEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTreeWidgetVTable](fcQTreeWidget_vdata(self)[])
   let self = QTreeWidget(h: self)
   let slotval1 = gen_qevent_types.QContextMenuEvent(h: param1, owned: false)
   vtbl[].contextMenuEvent(self, slotval1)
-
-proc QTreeWidgetinitStyleOption*(self: gen_qtreewidget_types.QTreeWidget, option: gen_qstyleoption_types.QStyleOptionFrame): void =
-  fcQTreeWidget_virtualbase_initStyleOption(self.h, option.h)
 
 proc fcQTreeWidget_vtable_callback_initStyleOption(self: pointer, option: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTreeWidgetVTable](fcQTreeWidget_vdata(self)[])
@@ -2859,26 +2939,17 @@ proc fcQTreeWidget_vtable_callback_initStyleOption(self: pointer, option: pointe
   let slotval1 = gen_qstyleoption_types.QStyleOptionFrame(h: option, owned: false)
   vtbl[].initStyleOption(self, slotval1)
 
-proc QTreeWidgetdevType*(self: gen_qtreewidget_types.QTreeWidget): cint =
-  fcQTreeWidget_virtualbase_devType(self.h)
-
 proc fcQTreeWidget_vtable_callback_devType(self: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QTreeWidgetVTable](fcQTreeWidget_vdata(self)[])
   let self = QTreeWidget(h: self)
   var virtualReturn = vtbl[].devType(self)
   virtualReturn
 
-proc QTreeWidgetsetVisible*(self: gen_qtreewidget_types.QTreeWidget, visible: bool): void =
-  fcQTreeWidget_virtualbase_setVisible(self.h, visible)
-
 proc fcQTreeWidget_vtable_callback_setVisible(self: pointer, visible: bool): void {.cdecl.} =
   let vtbl = cast[ptr QTreeWidgetVTable](fcQTreeWidget_vdata(self)[])
   let self = QTreeWidget(h: self)
   let slotval1 = visible
   vtbl[].setVisible(self, slotval1)
-
-proc QTreeWidgetheightForWidth*(self: gen_qtreewidget_types.QTreeWidget, param1: cint): cint =
-  fcQTreeWidget_virtualbase_heightForWidth(self.h, param1)
 
 proc fcQTreeWidget_vtable_callback_heightForWidth(self: pointer, param1: cint): cint {.cdecl.} =
   let vtbl = cast[ptr QTreeWidgetVTable](fcQTreeWidget_vdata(self)[])
@@ -2887,17 +2958,11 @@ proc fcQTreeWidget_vtable_callback_heightForWidth(self: pointer, param1: cint): 
   var virtualReturn = vtbl[].heightForWidth(self, slotval1)
   virtualReturn
 
-proc QTreeWidgethasHeightForWidth*(self: gen_qtreewidget_types.QTreeWidget): bool =
-  fcQTreeWidget_virtualbase_hasHeightForWidth(self.h)
-
 proc fcQTreeWidget_vtable_callback_hasHeightForWidth(self: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QTreeWidgetVTable](fcQTreeWidget_vdata(self)[])
   let self = QTreeWidget(h: self)
   var virtualReturn = vtbl[].hasHeightForWidth(self)
   virtualReturn
-
-proc QTreeWidgetpaintEngine*(self: gen_qtreewidget_types.QTreeWidget): gen_qpaintengine_types.QPaintEngine =
-  gen_qpaintengine_types.QPaintEngine(h: fcQTreeWidget_virtualbase_paintEngine(self.h), owned: false)
 
 proc fcQTreeWidget_vtable_callback_paintEngine(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QTreeWidgetVTable](fcQTreeWidget_vdata(self)[])
@@ -2908,17 +2973,11 @@ proc fcQTreeWidget_vtable_callback_paintEngine(self: pointer): pointer {.cdecl.}
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QTreeWidgetkeyReleaseEvent*(self: gen_qtreewidget_types.QTreeWidget, event: gen_qevent_types.QKeyEvent): void =
-  fcQTreeWidget_virtualbase_keyReleaseEvent(self.h, event.h)
-
 proc fcQTreeWidget_vtable_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTreeWidgetVTable](fcQTreeWidget_vdata(self)[])
   let self = QTreeWidget(h: self)
   let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   vtbl[].keyReleaseEvent(self, slotval1)
-
-proc QTreeWidgetenterEvent*(self: gen_qtreewidget_types.QTreeWidget, event: gen_qevent_types.QEnterEvent): void =
-  fcQTreeWidget_virtualbase_enterEvent(self.h, event.h)
 
 proc fcQTreeWidget_vtable_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTreeWidgetVTable](fcQTreeWidget_vdata(self)[])
@@ -2926,17 +2985,11 @@ proc fcQTreeWidget_vtable_callback_enterEvent(self: pointer, event: pointer): vo
   let slotval1 = gen_qevent_types.QEnterEvent(h: event, owned: false)
   vtbl[].enterEvent(self, slotval1)
 
-proc QTreeWidgetleaveEvent*(self: gen_qtreewidget_types.QTreeWidget, event: gen_qcoreevent_types.QEvent): void =
-  fcQTreeWidget_virtualbase_leaveEvent(self.h, event.h)
-
 proc fcQTreeWidget_vtable_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTreeWidgetVTable](fcQTreeWidget_vdata(self)[])
   let self = QTreeWidget(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].leaveEvent(self, slotval1)
-
-proc QTreeWidgetmoveEvent*(self: gen_qtreewidget_types.QTreeWidget, event: gen_qevent_types.QMoveEvent): void =
-  fcQTreeWidget_virtualbase_moveEvent(self.h, event.h)
 
 proc fcQTreeWidget_vtable_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTreeWidgetVTable](fcQTreeWidget_vdata(self)[])
@@ -2944,17 +2997,11 @@ proc fcQTreeWidget_vtable_callback_moveEvent(self: pointer, event: pointer): voi
   let slotval1 = gen_qevent_types.QMoveEvent(h: event, owned: false)
   vtbl[].moveEvent(self, slotval1)
 
-proc QTreeWidgetcloseEvent*(self: gen_qtreewidget_types.QTreeWidget, event: gen_qevent_types.QCloseEvent): void =
-  fcQTreeWidget_virtualbase_closeEvent(self.h, event.h)
-
 proc fcQTreeWidget_vtable_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTreeWidgetVTable](fcQTreeWidget_vdata(self)[])
   let self = QTreeWidget(h: self)
   let slotval1 = gen_qevent_types.QCloseEvent(h: event, owned: false)
   vtbl[].closeEvent(self, slotval1)
-
-proc QTreeWidgettabletEvent*(self: gen_qtreewidget_types.QTreeWidget, event: gen_qevent_types.QTabletEvent): void =
-  fcQTreeWidget_virtualbase_tabletEvent(self.h, event.h)
 
 proc fcQTreeWidget_vtable_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTreeWidgetVTable](fcQTreeWidget_vdata(self)[])
@@ -2962,17 +3009,11 @@ proc fcQTreeWidget_vtable_callback_tabletEvent(self: pointer, event: pointer): v
   let slotval1 = gen_qevent_types.QTabletEvent(h: event, owned: false)
   vtbl[].tabletEvent(self, slotval1)
 
-proc QTreeWidgetactionEvent*(self: gen_qtreewidget_types.QTreeWidget, event: gen_qevent_types.QActionEvent): void =
-  fcQTreeWidget_virtualbase_actionEvent(self.h, event.h)
-
 proc fcQTreeWidget_vtable_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTreeWidgetVTable](fcQTreeWidget_vdata(self)[])
   let self = QTreeWidget(h: self)
   let slotval1 = gen_qevent_types.QActionEvent(h: event, owned: false)
   vtbl[].actionEvent(self, slotval1)
-
-proc QTreeWidgetshowEvent*(self: gen_qtreewidget_types.QTreeWidget, event: gen_qevent_types.QShowEvent): void =
-  fcQTreeWidget_virtualbase_showEvent(self.h, event.h)
 
 proc fcQTreeWidget_vtable_callback_showEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTreeWidgetVTable](fcQTreeWidget_vdata(self)[])
@@ -2980,17 +3021,11 @@ proc fcQTreeWidget_vtable_callback_showEvent(self: pointer, event: pointer): voi
   let slotval1 = gen_qevent_types.QShowEvent(h: event, owned: false)
   vtbl[].showEvent(self, slotval1)
 
-proc QTreeWidgethideEvent*(self: gen_qtreewidget_types.QTreeWidget, event: gen_qevent_types.QHideEvent): void =
-  fcQTreeWidget_virtualbase_hideEvent(self.h, event.h)
-
 proc fcQTreeWidget_vtable_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTreeWidgetVTable](fcQTreeWidget_vdata(self)[])
   let self = QTreeWidget(h: self)
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   vtbl[].hideEvent(self, slotval1)
-
-proc QTreeWidgetnativeEvent*(self: gen_qtreewidget_types.QTreeWidget, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool =
-  fcQTreeWidget_virtualbase_nativeEvent(self.h, struct_miqt_string(data: if len(eventType) > 0: addr eventType[0] else: nil, len: csize_t(len(eventType))), message, resultVal)
 
 proc fcQTreeWidget_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
   let vtbl = cast[ptr QTreeWidgetVTable](fcQTreeWidget_vdata(self)[])
@@ -3004,9 +3039,6 @@ proc fcQTreeWidget_vtable_callback_nativeEvent(self: pointer, eventType: struct_
   var virtualReturn = vtbl[].nativeEvent(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QTreeWidgetmetric*(self: gen_qtreewidget_types.QTreeWidget, param1: cint): cint =
-  fcQTreeWidget_virtualbase_metric(self.h, cint(param1))
-
 proc fcQTreeWidget_vtable_callback_metric(self: pointer, param1: cint): cint {.cdecl.} =
   let vtbl = cast[ptr QTreeWidgetVTable](fcQTreeWidget_vdata(self)[])
   let self = QTreeWidget(h: self)
@@ -3014,17 +3046,11 @@ proc fcQTreeWidget_vtable_callback_metric(self: pointer, param1: cint): cint {.c
   var virtualReturn = vtbl[].metric(self, slotval1)
   virtualReturn
 
-proc QTreeWidgetinitPainter*(self: gen_qtreewidget_types.QTreeWidget, painter: gen_qpainter_types.QPainter): void =
-  fcQTreeWidget_virtualbase_initPainter(self.h, painter.h)
-
 proc fcQTreeWidget_vtable_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTreeWidgetVTable](fcQTreeWidget_vdata(self)[])
   let self = QTreeWidget(h: self)
   let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
   vtbl[].initPainter(self, slotval1)
-
-proc QTreeWidgetredirected*(self: gen_qtreewidget_types.QTreeWidget, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice =
-  gen_qpaintdevice_types.QPaintDevice(h: fcQTreeWidget_virtualbase_redirected(self.h, offset.h), owned: false)
 
 proc fcQTreeWidget_vtable_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QTreeWidgetVTable](fcQTreeWidget_vdata(self)[])
@@ -3036,9 +3062,6 @@ proc fcQTreeWidget_vtable_callback_redirected(self: pointer, offset: pointer): p
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QTreeWidgetsharedPainter*(self: gen_qtreewidget_types.QTreeWidget): gen_qpainter_types.QPainter =
-  gen_qpainter_types.QPainter(h: fcQTreeWidget_virtualbase_sharedPainter(self.h), owned: false)
-
 proc fcQTreeWidget_vtable_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QTreeWidgetVTable](fcQTreeWidget_vdata(self)[])
   let self = QTreeWidget(h: self)
@@ -3048,17 +3071,11 @@ proc fcQTreeWidget_vtable_callback_sharedPainter(self: pointer): pointer {.cdecl
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QTreeWidgetchildEvent*(self: gen_qtreewidget_types.QTreeWidget, event: gen_qcoreevent_types.QChildEvent): void =
-  fcQTreeWidget_virtualbase_childEvent(self.h, event.h)
-
 proc fcQTreeWidget_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTreeWidgetVTable](fcQTreeWidget_vdata(self)[])
   let self = QTreeWidget(h: self)
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
-
-proc QTreeWidgetcustomEvent*(self: gen_qtreewidget_types.QTreeWidget, event: gen_qcoreevent_types.QEvent): void =
-  fcQTreeWidget_virtualbase_customEvent(self.h, event.h)
 
 proc fcQTreeWidget_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTreeWidgetVTable](fcQTreeWidget_vdata(self)[])
@@ -3066,17 +3083,11 @@ proc fcQTreeWidget_vtable_callback_customEvent(self: pointer, event: pointer): v
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
-proc QTreeWidgetconnectNotify*(self: gen_qtreewidget_types.QTreeWidget, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQTreeWidget_virtualbase_connectNotify(self.h, signal.h)
-
 proc fcQTreeWidget_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTreeWidgetVTable](fcQTreeWidget_vdata(self)[])
   let self = QTreeWidget(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
-
-proc QTreeWidgetdisconnectNotify*(self: gen_qtreewidget_types.QTreeWidget, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQTreeWidget_virtualbase_disconnectNotify(self.h, signal.h)
 
 proc fcQTreeWidget_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTreeWidgetVTable](fcQTreeWidget_vdata(self)[])
@@ -3086,23 +3097,217 @@ proc fcQTreeWidget_vtable_callback_disconnectNotify(self: pointer, signal: point
 
 type VirtualQTreeWidget* {.inheritable.} = ref object of QTreeWidget
   vtbl*: cQTreeWidgetVTable
+
 method metaObject*(self: VirtualQTreeWidget): gen_qobjectdefs_types.QMetaObject {.base.} =
   QTreeWidgetmetaObject(self[])
+method metacast*(self: VirtualQTreeWidget, param1: cstring): pointer {.base.} =
+  QTreeWidgetmetacast(self[], param1)
+method metacall*(self: VirtualQTreeWidget, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QTreeWidgetmetacall(self[], param1, param2, param3)
+method setSelectionModel*(self: VirtualQTreeWidget, selectionModel: gen_qitemselectionmodel_types.QItemSelectionModel): void {.base.} =
+  QTreeWidgetsetSelectionModel(self[], selectionModel)
+method event*(self: VirtualQTreeWidget, e: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QTreeWidgetevent(self[], e)
+method mimeTypes*(self: VirtualQTreeWidget): seq[string] {.base.} =
+  QTreeWidgetmimeTypes(self[])
+method mimeData*(self: VirtualQTreeWidget, items: openArray[gen_qtreewidget_types.QTreeWidgetItem]): gen_qmimedata_types.QMimeData {.base.} =
+  QTreeWidgetmimeData(self[], items)
+method dropMimeData*(self: VirtualQTreeWidget, parent: gen_qtreewidget_types.QTreeWidgetItem, index: cint, data: gen_qmimedata_types.QMimeData, action: cint): bool {.base.} =
+  QTreeWidgetdropMimeData(self[], parent, index, data, action)
+method supportedDropActions*(self: VirtualQTreeWidget): cint {.base.} =
+  QTreeWidgetsupportedDropActions(self[])
+method dropEvent*(self: VirtualQTreeWidget, event: gen_qevent_types.QDropEvent): void {.base.} =
+  QTreeWidgetdropEvent(self[], event)
+method setRootIndex*(self: VirtualQTreeWidget, index: gen_qabstractitemmodel_types.QModelIndex): void {.base.} =
+  QTreeWidgetsetRootIndex(self[], index)
+method keyboardSearch*(self: VirtualQTreeWidget, search: openArray[char]): void {.base.} =
+  QTreeWidgetkeyboardSearch(self[], search)
+method visualRect*(self: VirtualQTreeWidget, index: gen_qabstractitemmodel_types.QModelIndex): gen_qrect_types.QRect {.base.} =
+  QTreeWidgetvisualRect(self[], index)
+method scrollTo*(self: VirtualQTreeWidget, index: gen_qabstractitemmodel_types.QModelIndex, hint: cint): void {.base.} =
+  QTreeWidgetscrollTo(self[], index, hint)
+method indexAt*(self: VirtualQTreeWidget, p: gen_qpoint_types.QPoint): gen_qabstractitemmodel_types.QModelIndex {.base.} =
+  QTreeWidgetindexAt(self[], p)
+method doItemsLayout*(self: VirtualQTreeWidget): void {.base.} =
+  QTreeWidgetdoItemsLayout(self[])
+method reset*(self: VirtualQTreeWidget): void {.base.} =
+  QTreeWidgetreset(self[])
+method dataChanged*(self: VirtualQTreeWidget, topLeft: gen_qabstractitemmodel_types.QModelIndex, bottomRight: gen_qabstractitemmodel_types.QModelIndex, roles: openArray[cint]): void {.base.} =
+  QTreeWidgetdataChanged(self[], topLeft, bottomRight, roles)
+method selectAll*(self: VirtualQTreeWidget): void {.base.} =
+  QTreeWidgetselectAll(self[])
+method verticalScrollbarValueChanged*(self: VirtualQTreeWidget, value: cint): void {.base.} =
+  QTreeWidgetverticalScrollbarValueChanged(self[], value)
+method scrollContentsBy*(self: VirtualQTreeWidget, dx: cint, dy: cint): void {.base.} =
+  QTreeWidgetscrollContentsBy(self[], dx, dy)
+method rowsInserted*(self: VirtualQTreeWidget, parent: gen_qabstractitemmodel_types.QModelIndex, start: cint, endVal: cint): void {.base.} =
+  QTreeWidgetrowsInserted(self[], parent, start, endVal)
+method rowsAboutToBeRemoved*(self: VirtualQTreeWidget, parent: gen_qabstractitemmodel_types.QModelIndex, start: cint, endVal: cint): void {.base.} =
+  QTreeWidgetrowsAboutToBeRemoved(self[], parent, start, endVal)
+method moveCursor*(self: VirtualQTreeWidget, cursorAction: cint, modifiers: cint): gen_qabstractitemmodel_types.QModelIndex {.base.} =
+  QTreeWidgetmoveCursor(self[], cursorAction, modifiers)
+method horizontalOffset*(self: VirtualQTreeWidget): cint {.base.} =
+  QTreeWidgethorizontalOffset(self[])
+method verticalOffset*(self: VirtualQTreeWidget): cint {.base.} =
+  QTreeWidgetverticalOffset(self[])
+method setSelection*(self: VirtualQTreeWidget, rect: gen_qrect_types.QRect, command: cint): void {.base.} =
+  QTreeWidgetsetSelection(self[], rect, command)
+method visualRegionForSelection*(self: VirtualQTreeWidget, selection: gen_qitemselectionmodel_types.QItemSelection): gen_qregion_types.QRegion {.base.} =
+  QTreeWidgetvisualRegionForSelection(self[], selection)
+method selectedIndexes*(self: VirtualQTreeWidget): seq[gen_qabstractitemmodel_types.QModelIndex] {.base.} =
+  QTreeWidgetselectedIndexes(self[])
+method changeEvent*(self: VirtualQTreeWidget, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QTreeWidgetchangeEvent(self[], event)
+method timerEvent*(self: VirtualQTreeWidget, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QTreeWidgettimerEvent(self[], event)
+method paintEvent*(self: VirtualQTreeWidget, event: gen_qevent_types.QPaintEvent): void {.base.} =
+  QTreeWidgetpaintEvent(self[], event)
+method drawRow*(self: VirtualQTreeWidget, painter: gen_qpainter_types.QPainter, options: gen_qstyleoption_types.QStyleOptionViewItem, index: gen_qabstractitemmodel_types.QModelIndex): void {.base.} =
+  QTreeWidgetdrawRow(self[], painter, options, index)
+method drawBranches*(self: VirtualQTreeWidget, painter: gen_qpainter_types.QPainter, rect: gen_qrect_types.QRect, index: gen_qabstractitemmodel_types.QModelIndex): void {.base.} =
+  QTreeWidgetdrawBranches(self[], painter, rect, index)
+method mousePressEvent*(self: VirtualQTreeWidget, event: gen_qevent_types.QMouseEvent): void {.base.} =
+  QTreeWidgetmousePressEvent(self[], event)
+method mouseReleaseEvent*(self: VirtualQTreeWidget, event: gen_qevent_types.QMouseEvent): void {.base.} =
+  QTreeWidgetmouseReleaseEvent(self[], event)
+method mouseDoubleClickEvent*(self: VirtualQTreeWidget, event: gen_qevent_types.QMouseEvent): void {.base.} =
+  QTreeWidgetmouseDoubleClickEvent(self[], event)
+method mouseMoveEvent*(self: VirtualQTreeWidget, event: gen_qevent_types.QMouseEvent): void {.base.} =
+  QTreeWidgetmouseMoveEvent(self[], event)
+method keyPressEvent*(self: VirtualQTreeWidget, event: gen_qevent_types.QKeyEvent): void {.base.} =
+  QTreeWidgetkeyPressEvent(self[], event)
+method dragMoveEvent*(self: VirtualQTreeWidget, event: gen_qevent_types.QDragMoveEvent): void {.base.} =
+  QTreeWidgetdragMoveEvent(self[], event)
+method viewportEvent*(self: VirtualQTreeWidget, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QTreeWidgetviewportEvent(self[], event)
+method updateGeometries*(self: VirtualQTreeWidget): void {.base.} =
+  QTreeWidgetupdateGeometries(self[])
+method viewportSizeHint*(self: VirtualQTreeWidget): gen_qsize_types.QSize {.base.} =
+  QTreeWidgetviewportSizeHint(self[])
+method sizeHintForColumn*(self: VirtualQTreeWidget, column: cint): cint {.base.} =
+  QTreeWidgetsizeHintForColumn(self[], column)
+method horizontalScrollbarAction*(self: VirtualQTreeWidget, action: cint): void {.base.} =
+  QTreeWidgethorizontalScrollbarAction(self[], action)
+method isIndexHidden*(self: VirtualQTreeWidget, index: gen_qabstractitemmodel_types.QModelIndex): bool {.base.} =
+  QTreeWidgetisIndexHidden(self[], index)
+method selectionChanged*(self: VirtualQTreeWidget, selected: gen_qitemselectionmodel_types.QItemSelection, deselected: gen_qitemselectionmodel_types.QItemSelection): void {.base.} =
+  QTreeWidgetselectionChanged(self[], selected, deselected)
+method currentChanged*(self: VirtualQTreeWidget, current: gen_qabstractitemmodel_types.QModelIndex, previous: gen_qabstractitemmodel_types.QModelIndex): void {.base.} =
+  QTreeWidgetcurrentChanged(self[], current, previous)
+method sizeHintForRow*(self: VirtualQTreeWidget, row: cint): cint {.base.} =
+  QTreeWidgetsizeHintForRow(self[], row)
+method itemDelegateForIndex*(self: VirtualQTreeWidget, index: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemdelegate_types.QAbstractItemDelegate {.base.} =
+  QTreeWidgetitemDelegateForIndex(self[], index)
+method inputMethodQuery*(self: VirtualQTreeWidget, query: cint): gen_qvariant_types.QVariant {.base.} =
+  QTreeWidgetinputMethodQuery(self[], query)
+method updateEditorData*(self: VirtualQTreeWidget): void {.base.} =
+  QTreeWidgetupdateEditorData(self[])
+method updateEditorGeometries*(self: VirtualQTreeWidget): void {.base.} =
+  QTreeWidgetupdateEditorGeometries(self[])
+method verticalScrollbarAction*(self: VirtualQTreeWidget, action: cint): void {.base.} =
+  QTreeWidgetverticalScrollbarAction(self[], action)
+method horizontalScrollbarValueChanged*(self: VirtualQTreeWidget, value: cint): void {.base.} =
+  QTreeWidgethorizontalScrollbarValueChanged(self[], value)
+method closeEditor*(self: VirtualQTreeWidget, editor: gen_qwidget_types.QWidget, hint: cint): void {.base.} =
+  QTreeWidgetcloseEditor(self[], editor, hint)
+method commitData*(self: VirtualQTreeWidget, editor: gen_qwidget_types.QWidget): void {.base.} =
+  QTreeWidgetcommitData(self[], editor)
+method editorDestroyed*(self: VirtualQTreeWidget, editor: gen_qobject_types.QObject): void {.base.} =
+  QTreeWidgeteditorDestroyed(self[], editor)
+method edit*(self: VirtualQTreeWidget, index: gen_qabstractitemmodel_types.QModelIndex, trigger: cint, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QTreeWidgetedit(self[], index, trigger, event)
+method selectionCommand*(self: VirtualQTreeWidget, index: gen_qabstractitemmodel_types.QModelIndex, event: gen_qcoreevent_types.QEvent): cint {.base.} =
+  QTreeWidgetselectionCommand(self[], index, event)
+method startDrag*(self: VirtualQTreeWidget, supportedActions: cint): void {.base.} =
+  QTreeWidgetstartDrag(self[], supportedActions)
+method initViewItemOption*(self: VirtualQTreeWidget, option: gen_qstyleoption_types.QStyleOptionViewItem): void {.base.} =
+  QTreeWidgetinitViewItemOption(self[], option)
+method focusNextPrevChild*(self: VirtualQTreeWidget, next: bool): bool {.base.} =
+  QTreeWidgetfocusNextPrevChild(self[], next)
+method dragEnterEvent*(self: VirtualQTreeWidget, event: gen_qevent_types.QDragEnterEvent): void {.base.} =
+  QTreeWidgetdragEnterEvent(self[], event)
+method dragLeaveEvent*(self: VirtualQTreeWidget, event: gen_qevent_types.QDragLeaveEvent): void {.base.} =
+  QTreeWidgetdragLeaveEvent(self[], event)
+method focusInEvent*(self: VirtualQTreeWidget, event: gen_qevent_types.QFocusEvent): void {.base.} =
+  QTreeWidgetfocusInEvent(self[], event)
+method focusOutEvent*(self: VirtualQTreeWidget, event: gen_qevent_types.QFocusEvent): void {.base.} =
+  QTreeWidgetfocusOutEvent(self[], event)
+method resizeEvent*(self: VirtualQTreeWidget, event: gen_qevent_types.QResizeEvent): void {.base.} =
+  QTreeWidgetresizeEvent(self[], event)
+method inputMethodEvent*(self: VirtualQTreeWidget, event: gen_qevent_types.QInputMethodEvent): void {.base.} =
+  QTreeWidgetinputMethodEvent(self[], event)
+method eventFilter*(self: VirtualQTreeWidget, objectVal: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QTreeWidgeteventFilter(self[], objectVal, event)
+method minimumSizeHint*(self: VirtualQTreeWidget): gen_qsize_types.QSize {.base.} =
+  QTreeWidgetminimumSizeHint(self[])
+method sizeHint*(self: VirtualQTreeWidget): gen_qsize_types.QSize {.base.} =
+  QTreeWidgetsizeHint(self[])
+method setupViewport*(self: VirtualQTreeWidget, viewport: gen_qwidget_types.QWidget): void {.base.} =
+  QTreeWidgetsetupViewport(self[], viewport)
+method wheelEvent*(self: VirtualQTreeWidget, param1: gen_qevent_types.QWheelEvent): void {.base.} =
+  QTreeWidgetwheelEvent(self[], param1)
+method contextMenuEvent*(self: VirtualQTreeWidget, param1: gen_qevent_types.QContextMenuEvent): void {.base.} =
+  QTreeWidgetcontextMenuEvent(self[], param1)
+method initStyleOption*(self: VirtualQTreeWidget, option: gen_qstyleoption_types.QStyleOptionFrame): void {.base.} =
+  QTreeWidgetinitStyleOption(self[], option)
+method devType*(self: VirtualQTreeWidget): cint {.base.} =
+  QTreeWidgetdevType(self[])
+method setVisible*(self: VirtualQTreeWidget, visible: bool): void {.base.} =
+  QTreeWidgetsetVisible(self[], visible)
+method heightForWidth*(self: VirtualQTreeWidget, param1: cint): cint {.base.} =
+  QTreeWidgetheightForWidth(self[], param1)
+method hasHeightForWidth*(self: VirtualQTreeWidget): bool {.base.} =
+  QTreeWidgethasHeightForWidth(self[])
+method paintEngine*(self: VirtualQTreeWidget): gen_qpaintengine_types.QPaintEngine {.base.} =
+  QTreeWidgetpaintEngine(self[])
+method keyReleaseEvent*(self: VirtualQTreeWidget, event: gen_qevent_types.QKeyEvent): void {.base.} =
+  QTreeWidgetkeyReleaseEvent(self[], event)
+method enterEvent*(self: VirtualQTreeWidget, event: gen_qevent_types.QEnterEvent): void {.base.} =
+  QTreeWidgetenterEvent(self[], event)
+method leaveEvent*(self: VirtualQTreeWidget, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QTreeWidgetleaveEvent(self[], event)
+method moveEvent*(self: VirtualQTreeWidget, event: gen_qevent_types.QMoveEvent): void {.base.} =
+  QTreeWidgetmoveEvent(self[], event)
+method closeEvent*(self: VirtualQTreeWidget, event: gen_qevent_types.QCloseEvent): void {.base.} =
+  QTreeWidgetcloseEvent(self[], event)
+method tabletEvent*(self: VirtualQTreeWidget, event: gen_qevent_types.QTabletEvent): void {.base.} =
+  QTreeWidgettabletEvent(self[], event)
+method actionEvent*(self: VirtualQTreeWidget, event: gen_qevent_types.QActionEvent): void {.base.} =
+  QTreeWidgetactionEvent(self[], event)
+method showEvent*(self: VirtualQTreeWidget, event: gen_qevent_types.QShowEvent): void {.base.} =
+  QTreeWidgetshowEvent(self[], event)
+method hideEvent*(self: VirtualQTreeWidget, event: gen_qevent_types.QHideEvent): void {.base.} =
+  QTreeWidgethideEvent(self[], event)
+method nativeEvent*(self: VirtualQTreeWidget, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
+  QTreeWidgetnativeEvent(self[], eventType, message, resultVal)
+method metric*(self: VirtualQTreeWidget, param1: cint): cint {.base.} =
+  QTreeWidgetmetric(self[], param1)
+method initPainter*(self: VirtualQTreeWidget, painter: gen_qpainter_types.QPainter): void {.base.} =
+  QTreeWidgetinitPainter(self[], painter)
+method redirected*(self: VirtualQTreeWidget, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.base.} =
+  QTreeWidgetredirected(self[], offset)
+method sharedPainter*(self: VirtualQTreeWidget): gen_qpainter_types.QPainter {.base.} =
+  QTreeWidgetsharedPainter(self[])
+method childEvent*(self: VirtualQTreeWidget, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QTreeWidgetchildEvent(self[], event)
+method customEvent*(self: VirtualQTreeWidget, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QTreeWidgetcustomEvent(self[], event)
+method connectNotify*(self: VirtualQTreeWidget, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QTreeWidgetconnectNotify(self[], signal)
+method disconnectNotify*(self: VirtualQTreeWidget, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QTreeWidgetdisconnectNotify(self[], signal)
+
 proc fcQTreeWidget_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQTreeWidget](fcQTreeWidget_vdata(self)[])
   var virtualReturn = inst.metaObject()
   virtualReturn.h
 
-method metacast*(self: VirtualQTreeWidget, param1: cstring): pointer {.base.} =
-  QTreeWidgetmetacast(self[], param1)
 proc fcQTreeWidget_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQTreeWidget](fcQTreeWidget_vdata(self)[])
   let slotval1 = (param1)
   var virtualReturn = inst.metacast(slotval1)
   virtualReturn
 
-method metacall*(self: VirtualQTreeWidget, param1: cint, param2: cint, param3: pointer): cint {.base.} =
-  QTreeWidgetmetacall(self[], param1, param2, param3)
 proc fcQTreeWidget_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQTreeWidget](fcQTreeWidget_vdata(self)[])
   let slotval1 = cint(param1)
@@ -3111,23 +3316,17 @@ proc fcQTreeWidget_method_callback_metacall(self: pointer, param1: cint, param2:
   var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
-method setSelectionModel*(self: VirtualQTreeWidget, selectionModel: gen_qitemselectionmodel_types.QItemSelectionModel): void {.base.} =
-  QTreeWidgetsetSelectionModel(self[], selectionModel)
 proc fcQTreeWidget_method_callback_setSelectionModel(self: pointer, selectionModel: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTreeWidget](fcQTreeWidget_vdata(self)[])
   let slotval1 = gen_qitemselectionmodel_types.QItemSelectionModel(h: selectionModel, owned: false)
   inst.setSelectionModel(slotval1)
 
-method event*(self: VirtualQTreeWidget, e: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QTreeWidgetevent(self[], e)
 proc fcQTreeWidget_method_callback_event(self: pointer, e: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQTreeWidget](fcQTreeWidget_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QEvent(h: e, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
-method mimeTypes*(self: VirtualQTreeWidget): seq[string] {.base.} =
-  QTreeWidgetmimeTypes(self[])
 proc fcQTreeWidget_method_callback_mimeTypes(self: pointer): struct_miqt_array {.cdecl.} =
   let inst = cast[VirtualQTreeWidget](fcQTreeWidget_vdata(self)[])
   var virtualReturn = inst.mimeTypes()
@@ -3137,8 +3336,6 @@ proc fcQTreeWidget_method_callback_mimeTypes(self: pointer): struct_miqt_array {
 
   struct_miqt_array(len: csize_t(len(virtualReturn)), data: if len(virtualReturn) == 0: nil else: addr(virtualReturn_CArray[0]))
 
-method mimeData*(self: VirtualQTreeWidget, items: openArray[gen_qtreewidget_types.QTreeWidgetItem]): gen_qmimedata_types.QMimeData {.base.} =
-  QTreeWidgetmimeData(self[], items)
 proc fcQTreeWidget_method_callback_mimeData(self: pointer, items: struct_miqt_array): pointer {.cdecl.} =
   let inst = cast[VirtualQTreeWidget](fcQTreeWidget_vdata(self)[])
   var vitems_ma = items
@@ -3151,8 +3348,6 @@ proc fcQTreeWidget_method_callback_mimeData(self: pointer, items: struct_miqt_ar
   var virtualReturn = inst.mimeData(slotval1)
   virtualReturn.h
 
-method dropMimeData*(self: VirtualQTreeWidget, parent: gen_qtreewidget_types.QTreeWidgetItem, index: cint, data: gen_qmimedata_types.QMimeData, action: cint): bool {.base.} =
-  QTreeWidgetdropMimeData(self[], parent, index, data, action)
 proc fcQTreeWidget_method_callback_dropMimeData(self: pointer, parent: pointer, index: cint, data: pointer, action: cint): bool {.cdecl.} =
   let inst = cast[VirtualQTreeWidget](fcQTreeWidget_vdata(self)[])
   let slotval1 = gen_qtreewidget_types.QTreeWidgetItem(h: parent, owned: false)
@@ -3162,29 +3357,21 @@ proc fcQTreeWidget_method_callback_dropMimeData(self: pointer, parent: pointer, 
   var virtualReturn = inst.dropMimeData(slotval1, slotval2, slotval3, slotval4)
   virtualReturn
 
-method supportedDropActions*(self: VirtualQTreeWidget): cint {.base.} =
-  QTreeWidgetsupportedDropActions(self[])
 proc fcQTreeWidget_method_callback_supportedDropActions(self: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQTreeWidget](fcQTreeWidget_vdata(self)[])
   var virtualReturn = inst.supportedDropActions()
   cint(virtualReturn)
 
-method dropEvent*(self: VirtualQTreeWidget, event: gen_qevent_types.QDropEvent): void {.base.} =
-  QTreeWidgetdropEvent(self[], event)
 proc fcQTreeWidget_method_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTreeWidget](fcQTreeWidget_vdata(self)[])
   let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
   inst.dropEvent(slotval1)
 
-method setRootIndex*(self: VirtualQTreeWidget, index: gen_qabstractitemmodel_types.QModelIndex): void {.base.} =
-  QTreeWidgetsetRootIndex(self[], index)
 proc fcQTreeWidget_method_callback_setRootIndex(self: pointer, index: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTreeWidget](fcQTreeWidget_vdata(self)[])
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   inst.setRootIndex(slotval1)
 
-method keyboardSearch*(self: VirtualQTreeWidget, search: openArray[char]): void {.base.} =
-  QTreeWidgetkeyboardSearch(self[], search)
 proc fcQTreeWidget_method_callback_keyboardSearch(self: pointer, search: struct_miqt_string): void {.cdecl.} =
   let inst = cast[VirtualQTreeWidget](fcQTreeWidget_vdata(self)[])
   let vsearch_ms = search
@@ -3193,44 +3380,32 @@ proc fcQTreeWidget_method_callback_keyboardSearch(self: pointer, search: struct_
   let slotval1 = vsearchx_ret
   inst.keyboardSearch(slotval1)
 
-method visualRect*(self: VirtualQTreeWidget, index: gen_qabstractitemmodel_types.QModelIndex): gen_qrect_types.QRect {.base.} =
-  QTreeWidgetvisualRect(self[], index)
 proc fcQTreeWidget_method_callback_visualRect(self: pointer, index: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQTreeWidget](fcQTreeWidget_vdata(self)[])
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var virtualReturn = inst.visualRect(slotval1)
   virtualReturn.h
 
-method scrollTo*(self: VirtualQTreeWidget, index: gen_qabstractitemmodel_types.QModelIndex, hint: cint): void {.base.} =
-  QTreeWidgetscrollTo(self[], index, hint)
 proc fcQTreeWidget_method_callback_scrollTo(self: pointer, index: pointer, hint: cint): void {.cdecl.} =
   let inst = cast[VirtualQTreeWidget](fcQTreeWidget_vdata(self)[])
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   let slotval2 = cint(hint)
   inst.scrollTo(slotval1, slotval2)
 
-method indexAt*(self: VirtualQTreeWidget, p: gen_qpoint_types.QPoint): gen_qabstractitemmodel_types.QModelIndex {.base.} =
-  QTreeWidgetindexAt(self[], p)
 proc fcQTreeWidget_method_callback_indexAt(self: pointer, p: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQTreeWidget](fcQTreeWidget_vdata(self)[])
   let slotval1 = gen_qpoint_types.QPoint(h: p, owned: false)
   var virtualReturn = inst.indexAt(slotval1)
   virtualReturn.h
 
-method doItemsLayout*(self: VirtualQTreeWidget): void {.base.} =
-  QTreeWidgetdoItemsLayout(self[])
 proc fcQTreeWidget_method_callback_doItemsLayout(self: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTreeWidget](fcQTreeWidget_vdata(self)[])
   inst.doItemsLayout()
 
-method reset*(self: VirtualQTreeWidget): void {.base.} =
-  QTreeWidgetreset(self[])
 proc fcQTreeWidget_method_callback_reset(self: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTreeWidget](fcQTreeWidget_vdata(self)[])
   inst.reset()
 
-method dataChanged*(self: VirtualQTreeWidget, topLeft: gen_qabstractitemmodel_types.QModelIndex, bottomRight: gen_qabstractitemmodel_types.QModelIndex, roles: openArray[cint]): void {.base.} =
-  QTreeWidgetdataChanged(self[], topLeft, bottomRight, roles)
 proc fcQTreeWidget_method_callback_dataChanged(self: pointer, topLeft: pointer, bottomRight: pointer, roles: struct_miqt_array): void {.cdecl.} =
   let inst = cast[VirtualQTreeWidget](fcQTreeWidget_vdata(self)[])
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: topLeft, owned: false)
@@ -3244,29 +3419,21 @@ proc fcQTreeWidget_method_callback_dataChanged(self: pointer, topLeft: pointer, 
   let slotval3 = vrolesx_ret
   inst.dataChanged(slotval1, slotval2, slotval3)
 
-method selectAll*(self: VirtualQTreeWidget): void {.base.} =
-  QTreeWidgetselectAll(self[])
 proc fcQTreeWidget_method_callback_selectAll(self: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTreeWidget](fcQTreeWidget_vdata(self)[])
   inst.selectAll()
 
-method verticalScrollbarValueChanged*(self: VirtualQTreeWidget, value: cint): void {.base.} =
-  QTreeWidgetverticalScrollbarValueChanged(self[], value)
 proc fcQTreeWidget_method_callback_verticalScrollbarValueChanged(self: pointer, value: cint): void {.cdecl.} =
   let inst = cast[VirtualQTreeWidget](fcQTreeWidget_vdata(self)[])
   let slotval1 = value
   inst.verticalScrollbarValueChanged(slotval1)
 
-method scrollContentsBy*(self: VirtualQTreeWidget, dx: cint, dy: cint): void {.base.} =
-  QTreeWidgetscrollContentsBy(self[], dx, dy)
 proc fcQTreeWidget_method_callback_scrollContentsBy(self: pointer, dx: cint, dy: cint): void {.cdecl.} =
   let inst = cast[VirtualQTreeWidget](fcQTreeWidget_vdata(self)[])
   let slotval1 = dx
   let slotval2 = dy
   inst.scrollContentsBy(slotval1, slotval2)
 
-method rowsInserted*(self: VirtualQTreeWidget, parent: gen_qabstractitemmodel_types.QModelIndex, start: cint, endVal: cint): void {.base.} =
-  QTreeWidgetrowsInserted(self[], parent, start, endVal)
 proc fcQTreeWidget_method_callback_rowsInserted(self: pointer, parent: pointer, start: cint, endVal: cint): void {.cdecl.} =
   let inst = cast[VirtualQTreeWidget](fcQTreeWidget_vdata(self)[])
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
@@ -3274,8 +3441,6 @@ proc fcQTreeWidget_method_callback_rowsInserted(self: pointer, parent: pointer, 
   let slotval3 = endVal
   inst.rowsInserted(slotval1, slotval2, slotval3)
 
-method rowsAboutToBeRemoved*(self: VirtualQTreeWidget, parent: gen_qabstractitemmodel_types.QModelIndex, start: cint, endVal: cint): void {.base.} =
-  QTreeWidgetrowsAboutToBeRemoved(self[], parent, start, endVal)
 proc fcQTreeWidget_method_callback_rowsAboutToBeRemoved(self: pointer, parent: pointer, start: cint, endVal: cint): void {.cdecl.} =
   let inst = cast[VirtualQTreeWidget](fcQTreeWidget_vdata(self)[])
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
@@ -3283,8 +3448,6 @@ proc fcQTreeWidget_method_callback_rowsAboutToBeRemoved(self: pointer, parent: p
   let slotval3 = endVal
   inst.rowsAboutToBeRemoved(slotval1, slotval2, slotval3)
 
-method moveCursor*(self: VirtualQTreeWidget, cursorAction: cint, modifiers: cint): gen_qabstractitemmodel_types.QModelIndex {.base.} =
-  QTreeWidgetmoveCursor(self[], cursorAction, modifiers)
 proc fcQTreeWidget_method_callback_moveCursor(self: pointer, cursorAction: cint, modifiers: cint): pointer {.cdecl.} =
   let inst = cast[VirtualQTreeWidget](fcQTreeWidget_vdata(self)[])
   let slotval1 = cint(cursorAction)
@@ -3292,38 +3455,28 @@ proc fcQTreeWidget_method_callback_moveCursor(self: pointer, cursorAction: cint,
   var virtualReturn = inst.moveCursor(slotval1, slotval2)
   virtualReturn.h
 
-method horizontalOffset*(self: VirtualQTreeWidget): cint {.base.} =
-  QTreeWidgethorizontalOffset(self[])
 proc fcQTreeWidget_method_callback_horizontalOffset(self: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQTreeWidget](fcQTreeWidget_vdata(self)[])
   var virtualReturn = inst.horizontalOffset()
   virtualReturn
 
-method verticalOffset*(self: VirtualQTreeWidget): cint {.base.} =
-  QTreeWidgetverticalOffset(self[])
 proc fcQTreeWidget_method_callback_verticalOffset(self: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQTreeWidget](fcQTreeWidget_vdata(self)[])
   var virtualReturn = inst.verticalOffset()
   virtualReturn
 
-method setSelection*(self: VirtualQTreeWidget, rect: gen_qrect_types.QRect, command: cint): void {.base.} =
-  QTreeWidgetsetSelection(self[], rect, command)
 proc fcQTreeWidget_method_callback_setSelection(self: pointer, rect: pointer, command: cint): void {.cdecl.} =
   let inst = cast[VirtualQTreeWidget](fcQTreeWidget_vdata(self)[])
   let slotval1 = gen_qrect_types.QRect(h: rect, owned: false)
   let slotval2 = cint(command)
   inst.setSelection(slotval1, slotval2)
 
-method visualRegionForSelection*(self: VirtualQTreeWidget, selection: gen_qitemselectionmodel_types.QItemSelection): gen_qregion_types.QRegion {.base.} =
-  QTreeWidgetvisualRegionForSelection(self[], selection)
 proc fcQTreeWidget_method_callback_visualRegionForSelection(self: pointer, selection: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQTreeWidget](fcQTreeWidget_vdata(self)[])
   let slotval1 = gen_qitemselectionmodel_types.QItemSelection(h: selection, owned: false)
   var virtualReturn = inst.visualRegionForSelection(slotval1)
   virtualReturn.h
 
-method selectedIndexes*(self: VirtualQTreeWidget): seq[gen_qabstractitemmodel_types.QModelIndex] {.base.} =
-  QTreeWidgetselectedIndexes(self[])
 proc fcQTreeWidget_method_callback_selectedIndexes(self: pointer): struct_miqt_array {.cdecl.} =
   let inst = cast[VirtualQTreeWidget](fcQTreeWidget_vdata(self)[])
   var virtualReturn = inst.selectedIndexes()
@@ -3333,29 +3486,21 @@ proc fcQTreeWidget_method_callback_selectedIndexes(self: pointer): struct_miqt_a
 
   struct_miqt_array(len: csize_t(len(virtualReturn)), data: if len(virtualReturn) == 0: nil else: addr(virtualReturn_CArray[0]))
 
-method changeEvent*(self: VirtualQTreeWidget, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QTreeWidgetchangeEvent(self[], event)
 proc fcQTreeWidget_method_callback_changeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTreeWidget](fcQTreeWidget_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.changeEvent(slotval1)
 
-method timerEvent*(self: VirtualQTreeWidget, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
-  QTreeWidgettimerEvent(self[], event)
 proc fcQTreeWidget_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTreeWidget](fcQTreeWidget_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
-method paintEvent*(self: VirtualQTreeWidget, event: gen_qevent_types.QPaintEvent): void {.base.} =
-  QTreeWidgetpaintEvent(self[], event)
 proc fcQTreeWidget_method_callback_paintEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTreeWidget](fcQTreeWidget_vdata(self)[])
   let slotval1 = gen_qevent_types.QPaintEvent(h: event, owned: false)
   inst.paintEvent(slotval1)
 
-method drawRow*(self: VirtualQTreeWidget, painter: gen_qpainter_types.QPainter, options: gen_qstyleoption_types.QStyleOptionViewItem, index: gen_qabstractitemmodel_types.QModelIndex): void {.base.} =
-  QTreeWidgetdrawRow(self[], painter, options, index)
 proc fcQTreeWidget_method_callback_drawRow(self: pointer, painter: pointer, options: pointer, index: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTreeWidget](fcQTreeWidget_vdata(self)[])
   let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
@@ -3363,8 +3508,6 @@ proc fcQTreeWidget_method_callback_drawRow(self: pointer, painter: pointer, opti
   let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   inst.drawRow(slotval1, slotval2, slotval3)
 
-method drawBranches*(self: VirtualQTreeWidget, painter: gen_qpainter_types.QPainter, rect: gen_qrect_types.QRect, index: gen_qabstractitemmodel_types.QModelIndex): void {.base.} =
-  QTreeWidgetdrawBranches(self[], painter, rect, index)
 proc fcQTreeWidget_method_callback_drawBranches(self: pointer, painter: pointer, rect: pointer, index: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTreeWidget](fcQTreeWidget_vdata(self)[])
   let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
@@ -3372,182 +3515,132 @@ proc fcQTreeWidget_method_callback_drawBranches(self: pointer, painter: pointer,
   let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   inst.drawBranches(slotval1, slotval2, slotval3)
 
-method mousePressEvent*(self: VirtualQTreeWidget, event: gen_qevent_types.QMouseEvent): void {.base.} =
-  QTreeWidgetmousePressEvent(self[], event)
 proc fcQTreeWidget_method_callback_mousePressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTreeWidget](fcQTreeWidget_vdata(self)[])
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mousePressEvent(slotval1)
 
-method mouseReleaseEvent*(self: VirtualQTreeWidget, event: gen_qevent_types.QMouseEvent): void {.base.} =
-  QTreeWidgetmouseReleaseEvent(self[], event)
 proc fcQTreeWidget_method_callback_mouseReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTreeWidget](fcQTreeWidget_vdata(self)[])
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mouseReleaseEvent(slotval1)
 
-method mouseDoubleClickEvent*(self: VirtualQTreeWidget, event: gen_qevent_types.QMouseEvent): void {.base.} =
-  QTreeWidgetmouseDoubleClickEvent(self[], event)
 proc fcQTreeWidget_method_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTreeWidget](fcQTreeWidget_vdata(self)[])
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mouseDoubleClickEvent(slotval1)
 
-method mouseMoveEvent*(self: VirtualQTreeWidget, event: gen_qevent_types.QMouseEvent): void {.base.} =
-  QTreeWidgetmouseMoveEvent(self[], event)
 proc fcQTreeWidget_method_callback_mouseMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTreeWidget](fcQTreeWidget_vdata(self)[])
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mouseMoveEvent(slotval1)
 
-method keyPressEvent*(self: VirtualQTreeWidget, event: gen_qevent_types.QKeyEvent): void {.base.} =
-  QTreeWidgetkeyPressEvent(self[], event)
 proc fcQTreeWidget_method_callback_keyPressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTreeWidget](fcQTreeWidget_vdata(self)[])
   let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   inst.keyPressEvent(slotval1)
 
-method dragMoveEvent*(self: VirtualQTreeWidget, event: gen_qevent_types.QDragMoveEvent): void {.base.} =
-  QTreeWidgetdragMoveEvent(self[], event)
 proc fcQTreeWidget_method_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTreeWidget](fcQTreeWidget_vdata(self)[])
   let slotval1 = gen_qevent_types.QDragMoveEvent(h: event, owned: false)
   inst.dragMoveEvent(slotval1)
 
-method viewportEvent*(self: VirtualQTreeWidget, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QTreeWidgetviewportEvent(self[], event)
 proc fcQTreeWidget_method_callback_viewportEvent(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQTreeWidget](fcQTreeWidget_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.viewportEvent(slotval1)
   virtualReturn
 
-method updateGeometries*(self: VirtualQTreeWidget): void {.base.} =
-  QTreeWidgetupdateGeometries(self[])
 proc fcQTreeWidget_method_callback_updateGeometries(self: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTreeWidget](fcQTreeWidget_vdata(self)[])
   inst.updateGeometries()
 
-method viewportSizeHint*(self: VirtualQTreeWidget): gen_qsize_types.QSize {.base.} =
-  QTreeWidgetviewportSizeHint(self[])
 proc fcQTreeWidget_method_callback_viewportSizeHint(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQTreeWidget](fcQTreeWidget_vdata(self)[])
   var virtualReturn = inst.viewportSizeHint()
   virtualReturn.h
 
-method sizeHintForColumn*(self: VirtualQTreeWidget, column: cint): cint {.base.} =
-  QTreeWidgetsizeHintForColumn(self[], column)
 proc fcQTreeWidget_method_callback_sizeHintForColumn(self: pointer, column: cint): cint {.cdecl.} =
   let inst = cast[VirtualQTreeWidget](fcQTreeWidget_vdata(self)[])
   let slotval1 = column
   var virtualReturn = inst.sizeHintForColumn(slotval1)
   virtualReturn
 
-method horizontalScrollbarAction*(self: VirtualQTreeWidget, action: cint): void {.base.} =
-  QTreeWidgethorizontalScrollbarAction(self[], action)
 proc fcQTreeWidget_method_callback_horizontalScrollbarAction(self: pointer, action: cint): void {.cdecl.} =
   let inst = cast[VirtualQTreeWidget](fcQTreeWidget_vdata(self)[])
   let slotval1 = action
   inst.horizontalScrollbarAction(slotval1)
 
-method isIndexHidden*(self: VirtualQTreeWidget, index: gen_qabstractitemmodel_types.QModelIndex): bool {.base.} =
-  QTreeWidgetisIndexHidden(self[], index)
 proc fcQTreeWidget_method_callback_isIndexHidden(self: pointer, index: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQTreeWidget](fcQTreeWidget_vdata(self)[])
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var virtualReturn = inst.isIndexHidden(slotval1)
   virtualReturn
 
-method selectionChanged*(self: VirtualQTreeWidget, selected: gen_qitemselectionmodel_types.QItemSelection, deselected: gen_qitemselectionmodel_types.QItemSelection): void {.base.} =
-  QTreeWidgetselectionChanged(self[], selected, deselected)
 proc fcQTreeWidget_method_callback_selectionChanged(self: pointer, selected: pointer, deselected: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTreeWidget](fcQTreeWidget_vdata(self)[])
   let slotval1 = gen_qitemselectionmodel_types.QItemSelection(h: selected, owned: false)
   let slotval2 = gen_qitemselectionmodel_types.QItemSelection(h: deselected, owned: false)
   inst.selectionChanged(slotval1, slotval2)
 
-method currentChanged*(self: VirtualQTreeWidget, current: gen_qabstractitemmodel_types.QModelIndex, previous: gen_qabstractitemmodel_types.QModelIndex): void {.base.} =
-  QTreeWidgetcurrentChanged(self[], current, previous)
 proc fcQTreeWidget_method_callback_currentChanged(self: pointer, current: pointer, previous: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTreeWidget](fcQTreeWidget_vdata(self)[])
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: current, owned: false)
   let slotval2 = gen_qabstractitemmodel_types.QModelIndex(h: previous, owned: false)
   inst.currentChanged(slotval1, slotval2)
 
-method sizeHintForRow*(self: VirtualQTreeWidget, row: cint): cint {.base.} =
-  QTreeWidgetsizeHintForRow(self[], row)
 proc fcQTreeWidget_method_callback_sizeHintForRow(self: pointer, row: cint): cint {.cdecl.} =
   let inst = cast[VirtualQTreeWidget](fcQTreeWidget_vdata(self)[])
   let slotval1 = row
   var virtualReturn = inst.sizeHintForRow(slotval1)
   virtualReturn
 
-method itemDelegateForIndex*(self: VirtualQTreeWidget, index: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemdelegate_types.QAbstractItemDelegate {.base.} =
-  QTreeWidgetitemDelegateForIndex(self[], index)
 proc fcQTreeWidget_method_callback_itemDelegateForIndex(self: pointer, index: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQTreeWidget](fcQTreeWidget_vdata(self)[])
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var virtualReturn = inst.itemDelegateForIndex(slotval1)
   virtualReturn.h
 
-method inputMethodQuery*(self: VirtualQTreeWidget, query: cint): gen_qvariant_types.QVariant {.base.} =
-  QTreeWidgetinputMethodQuery(self[], query)
 proc fcQTreeWidget_method_callback_inputMethodQuery(self: pointer, query: cint): pointer {.cdecl.} =
   let inst = cast[VirtualQTreeWidget](fcQTreeWidget_vdata(self)[])
   let slotval1 = cint(query)
   var virtualReturn = inst.inputMethodQuery(slotval1)
   virtualReturn.h
 
-method updateEditorData*(self: VirtualQTreeWidget): void {.base.} =
-  QTreeWidgetupdateEditorData(self[])
 proc fcQTreeWidget_method_callback_updateEditorData(self: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTreeWidget](fcQTreeWidget_vdata(self)[])
   inst.updateEditorData()
 
-method updateEditorGeometries*(self: VirtualQTreeWidget): void {.base.} =
-  QTreeWidgetupdateEditorGeometries(self[])
 proc fcQTreeWidget_method_callback_updateEditorGeometries(self: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTreeWidget](fcQTreeWidget_vdata(self)[])
   inst.updateEditorGeometries()
 
-method verticalScrollbarAction*(self: VirtualQTreeWidget, action: cint): void {.base.} =
-  QTreeWidgetverticalScrollbarAction(self[], action)
 proc fcQTreeWidget_method_callback_verticalScrollbarAction(self: pointer, action: cint): void {.cdecl.} =
   let inst = cast[VirtualQTreeWidget](fcQTreeWidget_vdata(self)[])
   let slotval1 = action
   inst.verticalScrollbarAction(slotval1)
 
-method horizontalScrollbarValueChanged*(self: VirtualQTreeWidget, value: cint): void {.base.} =
-  QTreeWidgethorizontalScrollbarValueChanged(self[], value)
 proc fcQTreeWidget_method_callback_horizontalScrollbarValueChanged(self: pointer, value: cint): void {.cdecl.} =
   let inst = cast[VirtualQTreeWidget](fcQTreeWidget_vdata(self)[])
   let slotval1 = value
   inst.horizontalScrollbarValueChanged(slotval1)
 
-method closeEditor*(self: VirtualQTreeWidget, editor: gen_qwidget_types.QWidget, hint: cint): void {.base.} =
-  QTreeWidgetcloseEditor(self[], editor, hint)
 proc fcQTreeWidget_method_callback_closeEditor(self: pointer, editor: pointer, hint: cint): void {.cdecl.} =
   let inst = cast[VirtualQTreeWidget](fcQTreeWidget_vdata(self)[])
   let slotval1 = gen_qwidget_types.QWidget(h: editor, owned: false)
   let slotval2 = cint(hint)
   inst.closeEditor(slotval1, slotval2)
 
-method commitData*(self: VirtualQTreeWidget, editor: gen_qwidget_types.QWidget): void {.base.} =
-  QTreeWidgetcommitData(self[], editor)
 proc fcQTreeWidget_method_callback_commitData(self: pointer, editor: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTreeWidget](fcQTreeWidget_vdata(self)[])
   let slotval1 = gen_qwidget_types.QWidget(h: editor, owned: false)
   inst.commitData(slotval1)
 
-method editorDestroyed*(self: VirtualQTreeWidget, editor: gen_qobject_types.QObject): void {.base.} =
-  QTreeWidgeteditorDestroyed(self[], editor)
 proc fcQTreeWidget_method_callback_editorDestroyed(self: pointer, editor: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTreeWidget](fcQTreeWidget_vdata(self)[])
   let slotval1 = gen_qobject_types.QObject(h: editor, owned: false)
   inst.editorDestroyed(slotval1)
 
-method edit*(self: VirtualQTreeWidget, index: gen_qabstractitemmodel_types.QModelIndex, trigger: cint, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QTreeWidgetedit(self[], index, trigger, event)
 proc fcQTreeWidget_method_callback_edit2(self: pointer, index: pointer, trigger: cint, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQTreeWidget](fcQTreeWidget_vdata(self)[])
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
@@ -3556,8 +3649,6 @@ proc fcQTreeWidget_method_callback_edit2(self: pointer, index: pointer, trigger:
   var virtualReturn = inst.edit(slotval1, slotval2, slotval3)
   virtualReturn
 
-method selectionCommand*(self: VirtualQTreeWidget, index: gen_qabstractitemmodel_types.QModelIndex, event: gen_qcoreevent_types.QEvent): cint {.base.} =
-  QTreeWidgetselectionCommand(self[], index, event)
 proc fcQTreeWidget_method_callback_selectionCommand(self: pointer, index: pointer, event: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQTreeWidget](fcQTreeWidget_vdata(self)[])
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
@@ -3565,72 +3656,52 @@ proc fcQTreeWidget_method_callback_selectionCommand(self: pointer, index: pointe
   var virtualReturn = inst.selectionCommand(slotval1, slotval2)
   cint(virtualReturn)
 
-method startDrag*(self: VirtualQTreeWidget, supportedActions: cint): void {.base.} =
-  QTreeWidgetstartDrag(self[], supportedActions)
 proc fcQTreeWidget_method_callback_startDrag(self: pointer, supportedActions: cint): void {.cdecl.} =
   let inst = cast[VirtualQTreeWidget](fcQTreeWidget_vdata(self)[])
   let slotval1 = cint(supportedActions)
   inst.startDrag(slotval1)
 
-method initViewItemOption*(self: VirtualQTreeWidget, option: gen_qstyleoption_types.QStyleOptionViewItem): void {.base.} =
-  QTreeWidgetinitViewItemOption(self[], option)
 proc fcQTreeWidget_method_callback_initViewItemOption(self: pointer, option: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTreeWidget](fcQTreeWidget_vdata(self)[])
   let slotval1 = gen_qstyleoption_types.QStyleOptionViewItem(h: option, owned: false)
   inst.initViewItemOption(slotval1)
 
-method focusNextPrevChild*(self: VirtualQTreeWidget, next: bool): bool {.base.} =
-  QTreeWidgetfocusNextPrevChild(self[], next)
 proc fcQTreeWidget_method_callback_focusNextPrevChild(self: pointer, next: bool): bool {.cdecl.} =
   let inst = cast[VirtualQTreeWidget](fcQTreeWidget_vdata(self)[])
   let slotval1 = next
   var virtualReturn = inst.focusNextPrevChild(slotval1)
   virtualReturn
 
-method dragEnterEvent*(self: VirtualQTreeWidget, event: gen_qevent_types.QDragEnterEvent): void {.base.} =
-  QTreeWidgetdragEnterEvent(self[], event)
 proc fcQTreeWidget_method_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTreeWidget](fcQTreeWidget_vdata(self)[])
   let slotval1 = gen_qevent_types.QDragEnterEvent(h: event, owned: false)
   inst.dragEnterEvent(slotval1)
 
-method dragLeaveEvent*(self: VirtualQTreeWidget, event: gen_qevent_types.QDragLeaveEvent): void {.base.} =
-  QTreeWidgetdragLeaveEvent(self[], event)
 proc fcQTreeWidget_method_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTreeWidget](fcQTreeWidget_vdata(self)[])
   let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event, owned: false)
   inst.dragLeaveEvent(slotval1)
 
-method focusInEvent*(self: VirtualQTreeWidget, event: gen_qevent_types.QFocusEvent): void {.base.} =
-  QTreeWidgetfocusInEvent(self[], event)
 proc fcQTreeWidget_method_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTreeWidget](fcQTreeWidget_vdata(self)[])
   let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   inst.focusInEvent(slotval1)
 
-method focusOutEvent*(self: VirtualQTreeWidget, event: gen_qevent_types.QFocusEvent): void {.base.} =
-  QTreeWidgetfocusOutEvent(self[], event)
 proc fcQTreeWidget_method_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTreeWidget](fcQTreeWidget_vdata(self)[])
   let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   inst.focusOutEvent(slotval1)
 
-method resizeEvent*(self: VirtualQTreeWidget, event: gen_qevent_types.QResizeEvent): void {.base.} =
-  QTreeWidgetresizeEvent(self[], event)
 proc fcQTreeWidget_method_callback_resizeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTreeWidget](fcQTreeWidget_vdata(self)[])
   let slotval1 = gen_qevent_types.QResizeEvent(h: event, owned: false)
   inst.resizeEvent(slotval1)
 
-method inputMethodEvent*(self: VirtualQTreeWidget, event: gen_qevent_types.QInputMethodEvent): void {.base.} =
-  QTreeWidgetinputMethodEvent(self[], event)
 proc fcQTreeWidget_method_callback_inputMethodEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTreeWidget](fcQTreeWidget_vdata(self)[])
   let slotval1 = gen_qevent_types.QInputMethodEvent(h: event, owned: false)
   inst.inputMethodEvent(slotval1)
 
-method eventFilter*(self: VirtualQTreeWidget, objectVal: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QTreeWidgeteventFilter(self[], objectVal, event)
 proc fcQTreeWidget_method_callback_eventFilter(self: pointer, objectVal: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQTreeWidget](fcQTreeWidget_vdata(self)[])
   let slotval1 = gen_qobject_types.QObject(h: objectVal, owned: false)
@@ -3638,149 +3709,107 @@ proc fcQTreeWidget_method_callback_eventFilter(self: pointer, objectVal: pointer
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
-method minimumSizeHint*(self: VirtualQTreeWidget): gen_qsize_types.QSize {.base.} =
-  QTreeWidgetminimumSizeHint(self[])
 proc fcQTreeWidget_method_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQTreeWidget](fcQTreeWidget_vdata(self)[])
   var virtualReturn = inst.minimumSizeHint()
   virtualReturn.h
 
-method sizeHint*(self: VirtualQTreeWidget): gen_qsize_types.QSize {.base.} =
-  QTreeWidgetsizeHint(self[])
 proc fcQTreeWidget_method_callback_sizeHint(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQTreeWidget](fcQTreeWidget_vdata(self)[])
   var virtualReturn = inst.sizeHint()
   virtualReturn.h
 
-method setupViewport*(self: VirtualQTreeWidget, viewport: gen_qwidget_types.QWidget): void {.base.} =
-  QTreeWidgetsetupViewport(self[], viewport)
 proc fcQTreeWidget_method_callback_setupViewport(self: pointer, viewport: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTreeWidget](fcQTreeWidget_vdata(self)[])
   let slotval1 = gen_qwidget_types.QWidget(h: viewport, owned: false)
   inst.setupViewport(slotval1)
 
-method wheelEvent*(self: VirtualQTreeWidget, param1: gen_qevent_types.QWheelEvent): void {.base.} =
-  QTreeWidgetwheelEvent(self[], param1)
 proc fcQTreeWidget_method_callback_wheelEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTreeWidget](fcQTreeWidget_vdata(self)[])
   let slotval1 = gen_qevent_types.QWheelEvent(h: param1, owned: false)
   inst.wheelEvent(slotval1)
 
-method contextMenuEvent*(self: VirtualQTreeWidget, param1: gen_qevent_types.QContextMenuEvent): void {.base.} =
-  QTreeWidgetcontextMenuEvent(self[], param1)
 proc fcQTreeWidget_method_callback_contextMenuEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTreeWidget](fcQTreeWidget_vdata(self)[])
   let slotval1 = gen_qevent_types.QContextMenuEvent(h: param1, owned: false)
   inst.contextMenuEvent(slotval1)
 
-method initStyleOption*(self: VirtualQTreeWidget, option: gen_qstyleoption_types.QStyleOptionFrame): void {.base.} =
-  QTreeWidgetinitStyleOption(self[], option)
 proc fcQTreeWidget_method_callback_initStyleOption(self: pointer, option: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTreeWidget](fcQTreeWidget_vdata(self)[])
   let slotval1 = gen_qstyleoption_types.QStyleOptionFrame(h: option, owned: false)
   inst.initStyleOption(slotval1)
 
-method devType*(self: VirtualQTreeWidget): cint {.base.} =
-  QTreeWidgetdevType(self[])
 proc fcQTreeWidget_method_callback_devType(self: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQTreeWidget](fcQTreeWidget_vdata(self)[])
   var virtualReturn = inst.devType()
   virtualReturn
 
-method setVisible*(self: VirtualQTreeWidget, visible: bool): void {.base.} =
-  QTreeWidgetsetVisible(self[], visible)
 proc fcQTreeWidget_method_callback_setVisible(self: pointer, visible: bool): void {.cdecl.} =
   let inst = cast[VirtualQTreeWidget](fcQTreeWidget_vdata(self)[])
   let slotval1 = visible
   inst.setVisible(slotval1)
 
-method heightForWidth*(self: VirtualQTreeWidget, param1: cint): cint {.base.} =
-  QTreeWidgetheightForWidth(self[], param1)
 proc fcQTreeWidget_method_callback_heightForWidth(self: pointer, param1: cint): cint {.cdecl.} =
   let inst = cast[VirtualQTreeWidget](fcQTreeWidget_vdata(self)[])
   let slotval1 = param1
   var virtualReturn = inst.heightForWidth(slotval1)
   virtualReturn
 
-method hasHeightForWidth*(self: VirtualQTreeWidget): bool {.base.} =
-  QTreeWidgethasHeightForWidth(self[])
 proc fcQTreeWidget_method_callback_hasHeightForWidth(self: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQTreeWidget](fcQTreeWidget_vdata(self)[])
   var virtualReturn = inst.hasHeightForWidth()
   virtualReturn
 
-method paintEngine*(self: VirtualQTreeWidget): gen_qpaintengine_types.QPaintEngine {.base.} =
-  QTreeWidgetpaintEngine(self[])
 proc fcQTreeWidget_method_callback_paintEngine(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQTreeWidget](fcQTreeWidget_vdata(self)[])
   var virtualReturn = inst.paintEngine()
   virtualReturn.h
 
-method keyReleaseEvent*(self: VirtualQTreeWidget, event: gen_qevent_types.QKeyEvent): void {.base.} =
-  QTreeWidgetkeyReleaseEvent(self[], event)
 proc fcQTreeWidget_method_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTreeWidget](fcQTreeWidget_vdata(self)[])
   let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   inst.keyReleaseEvent(slotval1)
 
-method enterEvent*(self: VirtualQTreeWidget, event: gen_qevent_types.QEnterEvent): void {.base.} =
-  QTreeWidgetenterEvent(self[], event)
 proc fcQTreeWidget_method_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTreeWidget](fcQTreeWidget_vdata(self)[])
   let slotval1 = gen_qevent_types.QEnterEvent(h: event, owned: false)
   inst.enterEvent(slotval1)
 
-method leaveEvent*(self: VirtualQTreeWidget, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QTreeWidgetleaveEvent(self[], event)
 proc fcQTreeWidget_method_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTreeWidget](fcQTreeWidget_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.leaveEvent(slotval1)
 
-method moveEvent*(self: VirtualQTreeWidget, event: gen_qevent_types.QMoveEvent): void {.base.} =
-  QTreeWidgetmoveEvent(self[], event)
 proc fcQTreeWidget_method_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTreeWidget](fcQTreeWidget_vdata(self)[])
   let slotval1 = gen_qevent_types.QMoveEvent(h: event, owned: false)
   inst.moveEvent(slotval1)
 
-method closeEvent*(self: VirtualQTreeWidget, event: gen_qevent_types.QCloseEvent): void {.base.} =
-  QTreeWidgetcloseEvent(self[], event)
 proc fcQTreeWidget_method_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTreeWidget](fcQTreeWidget_vdata(self)[])
   let slotval1 = gen_qevent_types.QCloseEvent(h: event, owned: false)
   inst.closeEvent(slotval1)
 
-method tabletEvent*(self: VirtualQTreeWidget, event: gen_qevent_types.QTabletEvent): void {.base.} =
-  QTreeWidgettabletEvent(self[], event)
 proc fcQTreeWidget_method_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTreeWidget](fcQTreeWidget_vdata(self)[])
   let slotval1 = gen_qevent_types.QTabletEvent(h: event, owned: false)
   inst.tabletEvent(slotval1)
 
-method actionEvent*(self: VirtualQTreeWidget, event: gen_qevent_types.QActionEvent): void {.base.} =
-  QTreeWidgetactionEvent(self[], event)
 proc fcQTreeWidget_method_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTreeWidget](fcQTreeWidget_vdata(self)[])
   let slotval1 = gen_qevent_types.QActionEvent(h: event, owned: false)
   inst.actionEvent(slotval1)
 
-method showEvent*(self: VirtualQTreeWidget, event: gen_qevent_types.QShowEvent): void {.base.} =
-  QTreeWidgetshowEvent(self[], event)
 proc fcQTreeWidget_method_callback_showEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTreeWidget](fcQTreeWidget_vdata(self)[])
   let slotval1 = gen_qevent_types.QShowEvent(h: event, owned: false)
   inst.showEvent(slotval1)
 
-method hideEvent*(self: VirtualQTreeWidget, event: gen_qevent_types.QHideEvent): void {.base.} =
-  QTreeWidgethideEvent(self[], event)
 proc fcQTreeWidget_method_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTreeWidget](fcQTreeWidget_vdata(self)[])
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   inst.hideEvent(slotval1)
 
-method nativeEvent*(self: VirtualQTreeWidget, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
-  QTreeWidgetnativeEvent(self[], eventType, message, resultVal)
 proc fcQTreeWidget_method_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
   let inst = cast[VirtualQTreeWidget](fcQTreeWidget_vdata(self)[])
   var veventType_bytearray = eventType
@@ -3792,63 +3821,48 @@ proc fcQTreeWidget_method_callback_nativeEvent(self: pointer, eventType: struct_
   var virtualReturn = inst.nativeEvent(slotval1, slotval2, slotval3)
   virtualReturn
 
-method metric*(self: VirtualQTreeWidget, param1: cint): cint {.base.} =
-  QTreeWidgetmetric(self[], param1)
 proc fcQTreeWidget_method_callback_metric(self: pointer, param1: cint): cint {.cdecl.} =
   let inst = cast[VirtualQTreeWidget](fcQTreeWidget_vdata(self)[])
   let slotval1 = cint(param1)
   var virtualReturn = inst.metric(slotval1)
   virtualReturn
 
-method initPainter*(self: VirtualQTreeWidget, painter: gen_qpainter_types.QPainter): void {.base.} =
-  QTreeWidgetinitPainter(self[], painter)
 proc fcQTreeWidget_method_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTreeWidget](fcQTreeWidget_vdata(self)[])
   let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
   inst.initPainter(slotval1)
 
-method redirected*(self: VirtualQTreeWidget, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.base.} =
-  QTreeWidgetredirected(self[], offset)
 proc fcQTreeWidget_method_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQTreeWidget](fcQTreeWidget_vdata(self)[])
   let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
   var virtualReturn = inst.redirected(slotval1)
   virtualReturn.h
 
-method sharedPainter*(self: VirtualQTreeWidget): gen_qpainter_types.QPainter {.base.} =
-  QTreeWidgetsharedPainter(self[])
 proc fcQTreeWidget_method_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQTreeWidget](fcQTreeWidget_vdata(self)[])
   var virtualReturn = inst.sharedPainter()
   virtualReturn.h
 
-method childEvent*(self: VirtualQTreeWidget, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
-  QTreeWidgetchildEvent(self[], event)
 proc fcQTreeWidget_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTreeWidget](fcQTreeWidget_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
-method customEvent*(self: VirtualQTreeWidget, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QTreeWidgetcustomEvent(self[], event)
 proc fcQTreeWidget_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTreeWidget](fcQTreeWidget_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
-method connectNotify*(self: VirtualQTreeWidget, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QTreeWidgetconnectNotify(self[], signal)
 proc fcQTreeWidget_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTreeWidget](fcQTreeWidget_vdata(self)[])
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
-method disconnectNotify*(self: VirtualQTreeWidget, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QTreeWidgetdisconnectNotify(self[], signal)
 proc fcQTreeWidget_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTreeWidget](fcQTreeWidget_vdata(self)[])
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
+
 
 proc columnResized*(self: gen_qtreewidget_types.QTreeWidget, column: cint, oldSize: cint, newSize: cint): void =
   fcQTreeWidget_protectedbase_columnResized(self.h, column, oldSize, newSize)

@@ -152,6 +152,7 @@ proc fcQDnsLookup_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QD
 proc fcQDnsLookup_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QDnsLookup_tr3".}
 proc fcQDnsLookup_vdata(self: pointer): ptr pointer {.importc: "QDnsLookup_vdata".}
 proc fvdata_cQDnsLookup(self: pointer): pointer {.importc: "vdata_QDnsLookup".}
+
 type cQDnsLookupVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -470,7 +471,7 @@ proc fcQDnsLookup_slot_callback_finished_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QDnsLookupfinishedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onfinished*(self: gen_qdnslookup_types.QDnsLookup, slot: QDnsLookupfinishedSlot) =
+proc onFinished*(self: gen_qdnslookup_types.QDnsLookup, slot: QDnsLookupfinishedSlot) =
   var tmp = new QDnsLookupfinishedSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -493,7 +494,7 @@ proc fcQDnsLookup_slot_callback_nameChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QDnsLookupnameChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onnameChanged*(self: gen_qdnslookup_types.QDnsLookup, slot: QDnsLookupnameChangedSlot) =
+proc onNameChanged*(self: gen_qdnslookup_types.QDnsLookup, slot: QDnsLookupnameChangedSlot) =
   var tmp = new QDnsLookupnameChangedSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -513,7 +514,7 @@ proc fcQDnsLookup_slot_callback_typeChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QDnsLookuptypeChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc ontypeChanged*(self: gen_qdnslookup_types.QDnsLookup, slot: QDnsLookuptypeChangedSlot) =
+proc onTypeChanged*(self: gen_qdnslookup_types.QDnsLookup, slot: QDnsLookuptypeChangedSlot) =
   var tmp = new QDnsLookuptypeChangedSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -533,7 +534,7 @@ proc fcQDnsLookup_slot_callback_nameserverChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QDnsLookupnameserverChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onnameserverChanged*(self: gen_qdnslookup_types.QDnsLookup, slot: QDnsLookupnameserverChangedSlot) =
+proc onNameserverChanged*(self: gen_qdnslookup_types.QDnsLookup, slot: QDnsLookupnameserverChangedSlot) =
   var tmp = new QDnsLookupnameserverChangedSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -561,6 +562,7 @@ type QDnsLookupchildEventProc* = proc(self: QDnsLookup, event: gen_qcoreevent_ty
 type QDnsLookupcustomEventProc* = proc(self: QDnsLookup, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QDnsLookupconnectNotifyProc* = proc(self: QDnsLookup, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QDnsLookupdisconnectNotifyProc* = proc(self: QDnsLookup, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+
 type QDnsLookupVTable* {.inheritable, pure.} = object
   vtbl: cQDnsLookupVTable
   metaObject*: QDnsLookupmetaObjectProc
@@ -573,8 +575,37 @@ type QDnsLookupVTable* {.inheritable, pure.} = object
   customEvent*: QDnsLookupcustomEventProc
   connectNotify*: QDnsLookupconnectNotifyProc
   disconnectNotify*: QDnsLookupdisconnectNotifyProc
+
 proc QDnsLookupmetaObject*(self: gen_qdnslookup_types.QDnsLookup): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQDnsLookup_virtualbase_metaObject(self.h), owned: false)
+
+proc QDnsLookupmetacast*(self: gen_qdnslookup_types.QDnsLookup, param1: cstring): pointer =
+  fcQDnsLookup_virtualbase_metacast(self.h, param1)
+
+proc QDnsLookupmetacall*(self: gen_qdnslookup_types.QDnsLookup, param1: cint, param2: cint, param3: pointer): cint =
+  fcQDnsLookup_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+proc QDnsLookupevent*(self: gen_qdnslookup_types.QDnsLookup, event: gen_qcoreevent_types.QEvent): bool =
+  fcQDnsLookup_virtualbase_event(self.h, event.h)
+
+proc QDnsLookupeventFilter*(self: gen_qdnslookup_types.QDnsLookup, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
+  fcQDnsLookup_virtualbase_eventFilter(self.h, watched.h, event.h)
+
+proc QDnsLookuptimerEvent*(self: gen_qdnslookup_types.QDnsLookup, event: gen_qcoreevent_types.QTimerEvent): void =
+  fcQDnsLookup_virtualbase_timerEvent(self.h, event.h)
+
+proc QDnsLookupchildEvent*(self: gen_qdnslookup_types.QDnsLookup, event: gen_qcoreevent_types.QChildEvent): void =
+  fcQDnsLookup_virtualbase_childEvent(self.h, event.h)
+
+proc QDnsLookupcustomEvent*(self: gen_qdnslookup_types.QDnsLookup, event: gen_qcoreevent_types.QEvent): void =
+  fcQDnsLookup_virtualbase_customEvent(self.h, event.h)
+
+proc QDnsLookupconnectNotify*(self: gen_qdnslookup_types.QDnsLookup, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQDnsLookup_virtualbase_connectNotify(self.h, signal.h)
+
+proc QDnsLookupdisconnectNotify*(self: gen_qdnslookup_types.QDnsLookup, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQDnsLookup_virtualbase_disconnectNotify(self.h, signal.h)
+
 
 proc fcQDnsLookup_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QDnsLookupVTable](fcQDnsLookup_vdata(self)[])
@@ -585,18 +616,12 @@ proc fcQDnsLookup_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QDnsLookupmetacast*(self: gen_qdnslookup_types.QDnsLookup, param1: cstring): pointer =
-  fcQDnsLookup_virtualbase_metacast(self.h, param1)
-
 proc fcQDnsLookup_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QDnsLookupVTable](fcQDnsLookup_vdata(self)[])
   let self = QDnsLookup(h: self)
   let slotval1 = (param1)
   var virtualReturn = vtbl[].metacast(self, slotval1)
   virtualReturn
-
-proc QDnsLookupmetacall*(self: gen_qdnslookup_types.QDnsLookup, param1: cint, param2: cint, param3: pointer): cint =
-  fcQDnsLookup_virtualbase_metacall(self.h, cint(param1), param2, param3)
 
 proc fcQDnsLookup_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QDnsLookupVTable](fcQDnsLookup_vdata(self)[])
@@ -607,18 +632,12 @@ proc fcQDnsLookup_vtable_callback_metacall(self: pointer, param1: cint, param2: 
   var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QDnsLookupevent*(self: gen_qdnslookup_types.QDnsLookup, event: gen_qcoreevent_types.QEvent): bool =
-  fcQDnsLookup_virtualbase_event(self.h, event.h)
-
 proc fcQDnsLookup_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QDnsLookupVTable](fcQDnsLookup_vdata(self)[])
   let self = QDnsLookup(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
-
-proc QDnsLookupeventFilter*(self: gen_qdnslookup_types.QDnsLookup, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
-  fcQDnsLookup_virtualbase_eventFilter(self.h, watched.h, event.h)
 
 proc fcQDnsLookup_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QDnsLookupVTable](fcQDnsLookup_vdata(self)[])
@@ -628,17 +647,11 @@ proc fcQDnsLookup_vtable_callback_eventFilter(self: pointer, watched: pointer, e
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
-proc QDnsLookuptimerEvent*(self: gen_qdnslookup_types.QDnsLookup, event: gen_qcoreevent_types.QTimerEvent): void =
-  fcQDnsLookup_virtualbase_timerEvent(self.h, event.h)
-
 proc fcQDnsLookup_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDnsLookupVTable](fcQDnsLookup_vdata(self)[])
   let self = QDnsLookup(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
-
-proc QDnsLookupchildEvent*(self: gen_qdnslookup_types.QDnsLookup, event: gen_qcoreevent_types.QChildEvent): void =
-  fcQDnsLookup_virtualbase_childEvent(self.h, event.h)
 
 proc fcQDnsLookup_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDnsLookupVTable](fcQDnsLookup_vdata(self)[])
@@ -646,26 +659,17 @@ proc fcQDnsLookup_vtable_callback_childEvent(self: pointer, event: pointer): voi
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
-proc QDnsLookupcustomEvent*(self: gen_qdnslookup_types.QDnsLookup, event: gen_qcoreevent_types.QEvent): void =
-  fcQDnsLookup_virtualbase_customEvent(self.h, event.h)
-
 proc fcQDnsLookup_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDnsLookupVTable](fcQDnsLookup_vdata(self)[])
   let self = QDnsLookup(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
-proc QDnsLookupconnectNotify*(self: gen_qdnslookup_types.QDnsLookup, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQDnsLookup_virtualbase_connectNotify(self.h, signal.h)
-
 proc fcQDnsLookup_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDnsLookupVTable](fcQDnsLookup_vdata(self)[])
   let self = QDnsLookup(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
-
-proc QDnsLookupdisconnectNotify*(self: gen_qdnslookup_types.QDnsLookup, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQDnsLookup_virtualbase_disconnectNotify(self.h, signal.h)
 
 proc fcQDnsLookup_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDnsLookupVTable](fcQDnsLookup_vdata(self)[])
@@ -675,23 +679,39 @@ proc fcQDnsLookup_vtable_callback_disconnectNotify(self: pointer, signal: pointe
 
 type VirtualQDnsLookup* {.inheritable.} = ref object of QDnsLookup
   vtbl*: cQDnsLookupVTable
+
 method metaObject*(self: VirtualQDnsLookup): gen_qobjectdefs_types.QMetaObject {.base.} =
   QDnsLookupmetaObject(self[])
+method metacast*(self: VirtualQDnsLookup, param1: cstring): pointer {.base.} =
+  QDnsLookupmetacast(self[], param1)
+method metacall*(self: VirtualQDnsLookup, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QDnsLookupmetacall(self[], param1, param2, param3)
+method event*(self: VirtualQDnsLookup, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QDnsLookupevent(self[], event)
+method eventFilter*(self: VirtualQDnsLookup, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QDnsLookupeventFilter(self[], watched, event)
+method timerEvent*(self: VirtualQDnsLookup, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QDnsLookuptimerEvent(self[], event)
+method childEvent*(self: VirtualQDnsLookup, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QDnsLookupchildEvent(self[], event)
+method customEvent*(self: VirtualQDnsLookup, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QDnsLookupcustomEvent(self[], event)
+method connectNotify*(self: VirtualQDnsLookup, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QDnsLookupconnectNotify(self[], signal)
+method disconnectNotify*(self: VirtualQDnsLookup, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QDnsLookupdisconnectNotify(self[], signal)
+
 proc fcQDnsLookup_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQDnsLookup](fcQDnsLookup_vdata(self)[])
   var virtualReturn = inst.metaObject()
   virtualReturn.h
 
-method metacast*(self: VirtualQDnsLookup, param1: cstring): pointer {.base.} =
-  QDnsLookupmetacast(self[], param1)
 proc fcQDnsLookup_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQDnsLookup](fcQDnsLookup_vdata(self)[])
   let slotval1 = (param1)
   var virtualReturn = inst.metacast(slotval1)
   virtualReturn
 
-method metacall*(self: VirtualQDnsLookup, param1: cint, param2: cint, param3: pointer): cint {.base.} =
-  QDnsLookupmetacall(self[], param1, param2, param3)
 proc fcQDnsLookup_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQDnsLookup](fcQDnsLookup_vdata(self)[])
   let slotval1 = cint(param1)
@@ -700,16 +720,12 @@ proc fcQDnsLookup_method_callback_metacall(self: pointer, param1: cint, param2: 
   var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
-method event*(self: VirtualQDnsLookup, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QDnsLookupevent(self[], event)
 proc fcQDnsLookup_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQDnsLookup](fcQDnsLookup_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
-method eventFilter*(self: VirtualQDnsLookup, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QDnsLookupeventFilter(self[], watched, event)
 proc fcQDnsLookup_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQDnsLookup](fcQDnsLookup_vdata(self)[])
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
@@ -717,40 +733,31 @@ proc fcQDnsLookup_method_callback_eventFilter(self: pointer, watched: pointer, e
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
-method timerEvent*(self: VirtualQDnsLookup, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
-  QDnsLookuptimerEvent(self[], event)
 proc fcQDnsLookup_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDnsLookup](fcQDnsLookup_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
-method childEvent*(self: VirtualQDnsLookup, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
-  QDnsLookupchildEvent(self[], event)
 proc fcQDnsLookup_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDnsLookup](fcQDnsLookup_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
-method customEvent*(self: VirtualQDnsLookup, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QDnsLookupcustomEvent(self[], event)
 proc fcQDnsLookup_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDnsLookup](fcQDnsLookup_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
-method connectNotify*(self: VirtualQDnsLookup, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QDnsLookupconnectNotify(self[], signal)
 proc fcQDnsLookup_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDnsLookup](fcQDnsLookup_vdata(self)[])
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
-method disconnectNotify*(self: VirtualQDnsLookup, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QDnsLookupdisconnectNotify(self[], signal)
 proc fcQDnsLookup_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDnsLookup](fcQDnsLookup_vdata(self)[])
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
+
 
 proc sender*(self: gen_qdnslookup_types.QDnsLookup): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQDnsLookup_protectedbase_sender(self.h), owned: false)

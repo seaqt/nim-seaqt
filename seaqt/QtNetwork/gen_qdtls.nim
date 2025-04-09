@@ -96,6 +96,7 @@ proc fcQDtlsClientVerifier_tr2(s: cstring, c: cstring): struct_miqt_string {.imp
 proc fcQDtlsClientVerifier_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QDtlsClientVerifier_tr3".}
 proc fcQDtlsClientVerifier_vdata(self: pointer): ptr pointer {.importc: "QDtlsClientVerifier_vdata".}
 proc fvdata_cQDtlsClientVerifier(self: pointer): pointer {.importc: "vdata_QDtlsClientVerifier".}
+
 type cQDtlsClientVerifierVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -166,6 +167,7 @@ proc fcQDtls_setPeer3(self: pointer, address: pointer, port: cushort, verificati
 proc fcQDtls_doHandshake2(self: pointer, socket: pointer, dgram: struct_miqt_string): bool {.importc: "QDtls_doHandshake2".}
 proc fcQDtls_vdata(self: pointer): ptr pointer {.importc: "QDtls_vdata".}
 proc fvdata_cQDtls(self: pointer): pointer {.importc: "vdata_QDtls".}
+
 type cQDtlsVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -261,6 +263,7 @@ type QDtlsClientVerifierchildEventProc* = proc(self: QDtlsClientVerifier, event:
 type QDtlsClientVerifiercustomEventProc* = proc(self: QDtlsClientVerifier, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QDtlsClientVerifierconnectNotifyProc* = proc(self: QDtlsClientVerifier, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QDtlsClientVerifierdisconnectNotifyProc* = proc(self: QDtlsClientVerifier, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+
 type QDtlsClientVerifierVTable* {.inheritable, pure.} = object
   vtbl: cQDtlsClientVerifierVTable
   metaObject*: QDtlsClientVerifiermetaObjectProc
@@ -273,8 +276,37 @@ type QDtlsClientVerifierVTable* {.inheritable, pure.} = object
   customEvent*: QDtlsClientVerifiercustomEventProc
   connectNotify*: QDtlsClientVerifierconnectNotifyProc
   disconnectNotify*: QDtlsClientVerifierdisconnectNotifyProc
+
 proc QDtlsClientVerifiermetaObject*(self: gen_qdtls_types.QDtlsClientVerifier): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQDtlsClientVerifier_virtualbase_metaObject(self.h), owned: false)
+
+proc QDtlsClientVerifiermetacast*(self: gen_qdtls_types.QDtlsClientVerifier, param1: cstring): pointer =
+  fcQDtlsClientVerifier_virtualbase_metacast(self.h, param1)
+
+proc QDtlsClientVerifiermetacall*(self: gen_qdtls_types.QDtlsClientVerifier, param1: cint, param2: cint, param3: pointer): cint =
+  fcQDtlsClientVerifier_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+proc QDtlsClientVerifierevent*(self: gen_qdtls_types.QDtlsClientVerifier, event: gen_qcoreevent_types.QEvent): bool =
+  fcQDtlsClientVerifier_virtualbase_event(self.h, event.h)
+
+proc QDtlsClientVerifiereventFilter*(self: gen_qdtls_types.QDtlsClientVerifier, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
+  fcQDtlsClientVerifier_virtualbase_eventFilter(self.h, watched.h, event.h)
+
+proc QDtlsClientVerifiertimerEvent*(self: gen_qdtls_types.QDtlsClientVerifier, event: gen_qcoreevent_types.QTimerEvent): void =
+  fcQDtlsClientVerifier_virtualbase_timerEvent(self.h, event.h)
+
+proc QDtlsClientVerifierchildEvent*(self: gen_qdtls_types.QDtlsClientVerifier, event: gen_qcoreevent_types.QChildEvent): void =
+  fcQDtlsClientVerifier_virtualbase_childEvent(self.h, event.h)
+
+proc QDtlsClientVerifiercustomEvent*(self: gen_qdtls_types.QDtlsClientVerifier, event: gen_qcoreevent_types.QEvent): void =
+  fcQDtlsClientVerifier_virtualbase_customEvent(self.h, event.h)
+
+proc QDtlsClientVerifierconnectNotify*(self: gen_qdtls_types.QDtlsClientVerifier, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQDtlsClientVerifier_virtualbase_connectNotify(self.h, signal.h)
+
+proc QDtlsClientVerifierdisconnectNotify*(self: gen_qdtls_types.QDtlsClientVerifier, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQDtlsClientVerifier_virtualbase_disconnectNotify(self.h, signal.h)
+
 
 proc fcQDtlsClientVerifier_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QDtlsClientVerifierVTable](fcQDtlsClientVerifier_vdata(self)[])
@@ -285,18 +317,12 @@ proc fcQDtlsClientVerifier_vtable_callback_metaObject(self: pointer): pointer {.
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QDtlsClientVerifiermetacast*(self: gen_qdtls_types.QDtlsClientVerifier, param1: cstring): pointer =
-  fcQDtlsClientVerifier_virtualbase_metacast(self.h, param1)
-
 proc fcQDtlsClientVerifier_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QDtlsClientVerifierVTable](fcQDtlsClientVerifier_vdata(self)[])
   let self = QDtlsClientVerifier(h: self)
   let slotval1 = (param1)
   var virtualReturn = vtbl[].metacast(self, slotval1)
   virtualReturn
-
-proc QDtlsClientVerifiermetacall*(self: gen_qdtls_types.QDtlsClientVerifier, param1: cint, param2: cint, param3: pointer): cint =
-  fcQDtlsClientVerifier_virtualbase_metacall(self.h, cint(param1), param2, param3)
 
 proc fcQDtlsClientVerifier_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QDtlsClientVerifierVTable](fcQDtlsClientVerifier_vdata(self)[])
@@ -307,18 +333,12 @@ proc fcQDtlsClientVerifier_vtable_callback_metacall(self: pointer, param1: cint,
   var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QDtlsClientVerifierevent*(self: gen_qdtls_types.QDtlsClientVerifier, event: gen_qcoreevent_types.QEvent): bool =
-  fcQDtlsClientVerifier_virtualbase_event(self.h, event.h)
-
 proc fcQDtlsClientVerifier_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QDtlsClientVerifierVTable](fcQDtlsClientVerifier_vdata(self)[])
   let self = QDtlsClientVerifier(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
-
-proc QDtlsClientVerifiereventFilter*(self: gen_qdtls_types.QDtlsClientVerifier, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
-  fcQDtlsClientVerifier_virtualbase_eventFilter(self.h, watched.h, event.h)
 
 proc fcQDtlsClientVerifier_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QDtlsClientVerifierVTable](fcQDtlsClientVerifier_vdata(self)[])
@@ -328,17 +348,11 @@ proc fcQDtlsClientVerifier_vtable_callback_eventFilter(self: pointer, watched: p
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
-proc QDtlsClientVerifiertimerEvent*(self: gen_qdtls_types.QDtlsClientVerifier, event: gen_qcoreevent_types.QTimerEvent): void =
-  fcQDtlsClientVerifier_virtualbase_timerEvent(self.h, event.h)
-
 proc fcQDtlsClientVerifier_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDtlsClientVerifierVTable](fcQDtlsClientVerifier_vdata(self)[])
   let self = QDtlsClientVerifier(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
-
-proc QDtlsClientVerifierchildEvent*(self: gen_qdtls_types.QDtlsClientVerifier, event: gen_qcoreevent_types.QChildEvent): void =
-  fcQDtlsClientVerifier_virtualbase_childEvent(self.h, event.h)
 
 proc fcQDtlsClientVerifier_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDtlsClientVerifierVTable](fcQDtlsClientVerifier_vdata(self)[])
@@ -346,26 +360,17 @@ proc fcQDtlsClientVerifier_vtable_callback_childEvent(self: pointer, event: poin
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
-proc QDtlsClientVerifiercustomEvent*(self: gen_qdtls_types.QDtlsClientVerifier, event: gen_qcoreevent_types.QEvent): void =
-  fcQDtlsClientVerifier_virtualbase_customEvent(self.h, event.h)
-
 proc fcQDtlsClientVerifier_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDtlsClientVerifierVTable](fcQDtlsClientVerifier_vdata(self)[])
   let self = QDtlsClientVerifier(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
-proc QDtlsClientVerifierconnectNotify*(self: gen_qdtls_types.QDtlsClientVerifier, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQDtlsClientVerifier_virtualbase_connectNotify(self.h, signal.h)
-
 proc fcQDtlsClientVerifier_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDtlsClientVerifierVTable](fcQDtlsClientVerifier_vdata(self)[])
   let self = QDtlsClientVerifier(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
-
-proc QDtlsClientVerifierdisconnectNotify*(self: gen_qdtls_types.QDtlsClientVerifier, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQDtlsClientVerifier_virtualbase_disconnectNotify(self.h, signal.h)
 
 proc fcQDtlsClientVerifier_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDtlsClientVerifierVTable](fcQDtlsClientVerifier_vdata(self)[])
@@ -375,23 +380,39 @@ proc fcQDtlsClientVerifier_vtable_callback_disconnectNotify(self: pointer, signa
 
 type VirtualQDtlsClientVerifier* {.inheritable.} = ref object of QDtlsClientVerifier
   vtbl*: cQDtlsClientVerifierVTable
+
 method metaObject*(self: VirtualQDtlsClientVerifier): gen_qobjectdefs_types.QMetaObject {.base.} =
   QDtlsClientVerifiermetaObject(self[])
+method metacast*(self: VirtualQDtlsClientVerifier, param1: cstring): pointer {.base.} =
+  QDtlsClientVerifiermetacast(self[], param1)
+method metacall*(self: VirtualQDtlsClientVerifier, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QDtlsClientVerifiermetacall(self[], param1, param2, param3)
+method event*(self: VirtualQDtlsClientVerifier, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QDtlsClientVerifierevent(self[], event)
+method eventFilter*(self: VirtualQDtlsClientVerifier, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QDtlsClientVerifiereventFilter(self[], watched, event)
+method timerEvent*(self: VirtualQDtlsClientVerifier, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QDtlsClientVerifiertimerEvent(self[], event)
+method childEvent*(self: VirtualQDtlsClientVerifier, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QDtlsClientVerifierchildEvent(self[], event)
+method customEvent*(self: VirtualQDtlsClientVerifier, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QDtlsClientVerifiercustomEvent(self[], event)
+method connectNotify*(self: VirtualQDtlsClientVerifier, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QDtlsClientVerifierconnectNotify(self[], signal)
+method disconnectNotify*(self: VirtualQDtlsClientVerifier, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QDtlsClientVerifierdisconnectNotify(self[], signal)
+
 proc fcQDtlsClientVerifier_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQDtlsClientVerifier](fcQDtlsClientVerifier_vdata(self)[])
   var virtualReturn = inst.metaObject()
   virtualReturn.h
 
-method metacast*(self: VirtualQDtlsClientVerifier, param1: cstring): pointer {.base.} =
-  QDtlsClientVerifiermetacast(self[], param1)
 proc fcQDtlsClientVerifier_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQDtlsClientVerifier](fcQDtlsClientVerifier_vdata(self)[])
   let slotval1 = (param1)
   var virtualReturn = inst.metacast(slotval1)
   virtualReturn
 
-method metacall*(self: VirtualQDtlsClientVerifier, param1: cint, param2: cint, param3: pointer): cint {.base.} =
-  QDtlsClientVerifiermetacall(self[], param1, param2, param3)
 proc fcQDtlsClientVerifier_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQDtlsClientVerifier](fcQDtlsClientVerifier_vdata(self)[])
   let slotval1 = cint(param1)
@@ -400,16 +421,12 @@ proc fcQDtlsClientVerifier_method_callback_metacall(self: pointer, param1: cint,
   var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
-method event*(self: VirtualQDtlsClientVerifier, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QDtlsClientVerifierevent(self[], event)
 proc fcQDtlsClientVerifier_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQDtlsClientVerifier](fcQDtlsClientVerifier_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
-method eventFilter*(self: VirtualQDtlsClientVerifier, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QDtlsClientVerifiereventFilter(self[], watched, event)
 proc fcQDtlsClientVerifier_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQDtlsClientVerifier](fcQDtlsClientVerifier_vdata(self)[])
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
@@ -417,40 +434,31 @@ proc fcQDtlsClientVerifier_method_callback_eventFilter(self: pointer, watched: p
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
-method timerEvent*(self: VirtualQDtlsClientVerifier, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
-  QDtlsClientVerifiertimerEvent(self[], event)
 proc fcQDtlsClientVerifier_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDtlsClientVerifier](fcQDtlsClientVerifier_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
-method childEvent*(self: VirtualQDtlsClientVerifier, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
-  QDtlsClientVerifierchildEvent(self[], event)
 proc fcQDtlsClientVerifier_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDtlsClientVerifier](fcQDtlsClientVerifier_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
-method customEvent*(self: VirtualQDtlsClientVerifier, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QDtlsClientVerifiercustomEvent(self[], event)
 proc fcQDtlsClientVerifier_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDtlsClientVerifier](fcQDtlsClientVerifier_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
-method connectNotify*(self: VirtualQDtlsClientVerifier, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QDtlsClientVerifierconnectNotify(self[], signal)
 proc fcQDtlsClientVerifier_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDtlsClientVerifier](fcQDtlsClientVerifier_vdata(self)[])
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
-method disconnectNotify*(self: VirtualQDtlsClientVerifier, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QDtlsClientVerifierdisconnectNotify(self[], signal)
 proc fcQDtlsClientVerifier_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDtlsClientVerifier](fcQDtlsClientVerifier_vdata(self)[])
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
+
 
 proc sender*(self: gen_qdtls_types.QDtlsClientVerifier): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQDtlsClientVerifier_protectedbase_sender(self.h), owned: false)
@@ -688,7 +696,7 @@ proc fcQDtls_slot_callback_pskRequired_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QDtlspskRequiredSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onpskRequired*(self: gen_qdtls_types.QDtls, slot: QDtlspskRequiredSlot) =
+proc onPskRequired*(self: gen_qdtls_types.QDtls, slot: QDtlspskRequiredSlot) =
   var tmp = new QDtlspskRequiredSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -706,7 +714,7 @@ proc fcQDtls_slot_callback_handshakeTimeout_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QDtlshandshakeTimeoutSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onhandshakeTimeout*(self: gen_qdtls_types.QDtls, slot: QDtlshandshakeTimeoutSlot) =
+proc onHandshakeTimeout*(self: gen_qdtls_types.QDtls, slot: QDtlshandshakeTimeoutSlot) =
   var tmp = new QDtlshandshakeTimeoutSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -740,6 +748,7 @@ type QDtlschildEventProc* = proc(self: QDtls, event: gen_qcoreevent_types.QChild
 type QDtlscustomEventProc* = proc(self: QDtls, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QDtlsconnectNotifyProc* = proc(self: QDtls, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QDtlsdisconnectNotifyProc* = proc(self: QDtls, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+
 type QDtlsVTable* {.inheritable, pure.} = object
   vtbl: cQDtlsVTable
   metaObject*: QDtlsmetaObjectProc
@@ -752,8 +761,37 @@ type QDtlsVTable* {.inheritable, pure.} = object
   customEvent*: QDtlscustomEventProc
   connectNotify*: QDtlsconnectNotifyProc
   disconnectNotify*: QDtlsdisconnectNotifyProc
+
 proc QDtlsmetaObject*(self: gen_qdtls_types.QDtls): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQDtls_virtualbase_metaObject(self.h), owned: false)
+
+proc QDtlsmetacast*(self: gen_qdtls_types.QDtls, param1: cstring): pointer =
+  fcQDtls_virtualbase_metacast(self.h, param1)
+
+proc QDtlsmetacall*(self: gen_qdtls_types.QDtls, param1: cint, param2: cint, param3: pointer): cint =
+  fcQDtls_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+proc QDtlsevent*(self: gen_qdtls_types.QDtls, event: gen_qcoreevent_types.QEvent): bool =
+  fcQDtls_virtualbase_event(self.h, event.h)
+
+proc QDtlseventFilter*(self: gen_qdtls_types.QDtls, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
+  fcQDtls_virtualbase_eventFilter(self.h, watched.h, event.h)
+
+proc QDtlstimerEvent*(self: gen_qdtls_types.QDtls, event: gen_qcoreevent_types.QTimerEvent): void =
+  fcQDtls_virtualbase_timerEvent(self.h, event.h)
+
+proc QDtlschildEvent*(self: gen_qdtls_types.QDtls, event: gen_qcoreevent_types.QChildEvent): void =
+  fcQDtls_virtualbase_childEvent(self.h, event.h)
+
+proc QDtlscustomEvent*(self: gen_qdtls_types.QDtls, event: gen_qcoreevent_types.QEvent): void =
+  fcQDtls_virtualbase_customEvent(self.h, event.h)
+
+proc QDtlsconnectNotify*(self: gen_qdtls_types.QDtls, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQDtls_virtualbase_connectNotify(self.h, signal.h)
+
+proc QDtlsdisconnectNotify*(self: gen_qdtls_types.QDtls, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQDtls_virtualbase_disconnectNotify(self.h, signal.h)
+
 
 proc fcQDtls_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QDtlsVTable](fcQDtls_vdata(self)[])
@@ -764,18 +802,12 @@ proc fcQDtls_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QDtlsmetacast*(self: gen_qdtls_types.QDtls, param1: cstring): pointer =
-  fcQDtls_virtualbase_metacast(self.h, param1)
-
 proc fcQDtls_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QDtlsVTable](fcQDtls_vdata(self)[])
   let self = QDtls(h: self)
   let slotval1 = (param1)
   var virtualReturn = vtbl[].metacast(self, slotval1)
   virtualReturn
-
-proc QDtlsmetacall*(self: gen_qdtls_types.QDtls, param1: cint, param2: cint, param3: pointer): cint =
-  fcQDtls_virtualbase_metacall(self.h, cint(param1), param2, param3)
 
 proc fcQDtls_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QDtlsVTable](fcQDtls_vdata(self)[])
@@ -786,18 +818,12 @@ proc fcQDtls_vtable_callback_metacall(self: pointer, param1: cint, param2: cint,
   var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QDtlsevent*(self: gen_qdtls_types.QDtls, event: gen_qcoreevent_types.QEvent): bool =
-  fcQDtls_virtualbase_event(self.h, event.h)
-
 proc fcQDtls_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QDtlsVTable](fcQDtls_vdata(self)[])
   let self = QDtls(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
-
-proc QDtlseventFilter*(self: gen_qdtls_types.QDtls, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
-  fcQDtls_virtualbase_eventFilter(self.h, watched.h, event.h)
 
 proc fcQDtls_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QDtlsVTable](fcQDtls_vdata(self)[])
@@ -807,17 +833,11 @@ proc fcQDtls_vtable_callback_eventFilter(self: pointer, watched: pointer, event:
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
-proc QDtlstimerEvent*(self: gen_qdtls_types.QDtls, event: gen_qcoreevent_types.QTimerEvent): void =
-  fcQDtls_virtualbase_timerEvent(self.h, event.h)
-
 proc fcQDtls_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDtlsVTable](fcQDtls_vdata(self)[])
   let self = QDtls(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
-
-proc QDtlschildEvent*(self: gen_qdtls_types.QDtls, event: gen_qcoreevent_types.QChildEvent): void =
-  fcQDtls_virtualbase_childEvent(self.h, event.h)
 
 proc fcQDtls_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDtlsVTable](fcQDtls_vdata(self)[])
@@ -825,26 +845,17 @@ proc fcQDtls_vtable_callback_childEvent(self: pointer, event: pointer): void {.c
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
-proc QDtlscustomEvent*(self: gen_qdtls_types.QDtls, event: gen_qcoreevent_types.QEvent): void =
-  fcQDtls_virtualbase_customEvent(self.h, event.h)
-
 proc fcQDtls_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDtlsVTable](fcQDtls_vdata(self)[])
   let self = QDtls(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
-proc QDtlsconnectNotify*(self: gen_qdtls_types.QDtls, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQDtls_virtualbase_connectNotify(self.h, signal.h)
-
 proc fcQDtls_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDtlsVTable](fcQDtls_vdata(self)[])
   let self = QDtls(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
-
-proc QDtlsdisconnectNotify*(self: gen_qdtls_types.QDtls, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQDtls_virtualbase_disconnectNotify(self.h, signal.h)
 
 proc fcQDtls_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDtlsVTable](fcQDtls_vdata(self)[])
@@ -854,23 +865,39 @@ proc fcQDtls_vtable_callback_disconnectNotify(self: pointer, signal: pointer): v
 
 type VirtualQDtls* {.inheritable.} = ref object of QDtls
   vtbl*: cQDtlsVTable
+
 method metaObject*(self: VirtualQDtls): gen_qobjectdefs_types.QMetaObject {.base.} =
   QDtlsmetaObject(self[])
+method metacast*(self: VirtualQDtls, param1: cstring): pointer {.base.} =
+  QDtlsmetacast(self[], param1)
+method metacall*(self: VirtualQDtls, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QDtlsmetacall(self[], param1, param2, param3)
+method event*(self: VirtualQDtls, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QDtlsevent(self[], event)
+method eventFilter*(self: VirtualQDtls, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QDtlseventFilter(self[], watched, event)
+method timerEvent*(self: VirtualQDtls, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QDtlstimerEvent(self[], event)
+method childEvent*(self: VirtualQDtls, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QDtlschildEvent(self[], event)
+method customEvent*(self: VirtualQDtls, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QDtlscustomEvent(self[], event)
+method connectNotify*(self: VirtualQDtls, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QDtlsconnectNotify(self[], signal)
+method disconnectNotify*(self: VirtualQDtls, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QDtlsdisconnectNotify(self[], signal)
+
 proc fcQDtls_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQDtls](fcQDtls_vdata(self)[])
   var virtualReturn = inst.metaObject()
   virtualReturn.h
 
-method metacast*(self: VirtualQDtls, param1: cstring): pointer {.base.} =
-  QDtlsmetacast(self[], param1)
 proc fcQDtls_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQDtls](fcQDtls_vdata(self)[])
   let slotval1 = (param1)
   var virtualReturn = inst.metacast(slotval1)
   virtualReturn
 
-method metacall*(self: VirtualQDtls, param1: cint, param2: cint, param3: pointer): cint {.base.} =
-  QDtlsmetacall(self[], param1, param2, param3)
 proc fcQDtls_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQDtls](fcQDtls_vdata(self)[])
   let slotval1 = cint(param1)
@@ -879,16 +906,12 @@ proc fcQDtls_method_callback_metacall(self: pointer, param1: cint, param2: cint,
   var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
-method event*(self: VirtualQDtls, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QDtlsevent(self[], event)
 proc fcQDtls_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQDtls](fcQDtls_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
-method eventFilter*(self: VirtualQDtls, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QDtlseventFilter(self[], watched, event)
 proc fcQDtls_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQDtls](fcQDtls_vdata(self)[])
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
@@ -896,40 +919,31 @@ proc fcQDtls_method_callback_eventFilter(self: pointer, watched: pointer, event:
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
-method timerEvent*(self: VirtualQDtls, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
-  QDtlstimerEvent(self[], event)
 proc fcQDtls_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDtls](fcQDtls_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
-method childEvent*(self: VirtualQDtls, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
-  QDtlschildEvent(self[], event)
 proc fcQDtls_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDtls](fcQDtls_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
-method customEvent*(self: VirtualQDtls, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QDtlscustomEvent(self[], event)
 proc fcQDtls_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDtls](fcQDtls_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
-method connectNotify*(self: VirtualQDtls, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QDtlsconnectNotify(self[], signal)
 proc fcQDtls_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDtls](fcQDtls_vdata(self)[])
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
-method disconnectNotify*(self: VirtualQDtls, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QDtlsdisconnectNotify(self[], signal)
 proc fcQDtls_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDtls](fcQDtls_vdata(self)[])
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
+
 
 proc sender*(self: gen_qdtls_types.QDtls): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQDtls_protectedbase_sender(self.h), owned: false)

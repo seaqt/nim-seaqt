@@ -138,6 +138,7 @@ proc fcQAbstractSpinBox_tr2(s: cstring, c: cstring): struct_miqt_string {.import
 proc fcQAbstractSpinBox_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QAbstractSpinBox_tr3".}
 proc fcQAbstractSpinBox_vdata(self: pointer): ptr pointer {.importc: "QAbstractSpinBox_vdata".}
 proc fvdata_cQAbstractSpinBox(self: pointer): pointer {.importc: "vdata_QAbstractSpinBox".}
+
 type cQAbstractSpinBoxVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -402,7 +403,7 @@ proc fcQAbstractSpinBox_slot_callback_editingFinished_release(slot: int) {.cdecl
   let nimfunc = cast[ref QAbstractSpinBoxeditingFinishedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc oneditingFinished*(self: gen_qabstractspinbox_types.QAbstractSpinBox, slot: QAbstractSpinBoxeditingFinishedSlot) =
+proc onEditingFinished*(self: gen_qabstractspinbox_types.QAbstractSpinBox, slot: QAbstractSpinBoxeditingFinishedSlot) =
   var tmp = new QAbstractSpinBoxeditingFinishedSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -476,6 +477,7 @@ type QAbstractSpinBoxchildEventProc* = proc(self: QAbstractSpinBox, event: gen_q
 type QAbstractSpinBoxcustomEventProc* = proc(self: QAbstractSpinBox, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QAbstractSpinBoxconnectNotifyProc* = proc(self: QAbstractSpinBox, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QAbstractSpinBoxdisconnectNotifyProc* = proc(self: QAbstractSpinBox, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+
 type QAbstractSpinBoxVTable* {.inheritable, pure.} = object
   vtbl: cQAbstractSpinBoxVTable
   metaObject*: QAbstractSpinBoxmetaObjectProc
@@ -534,8 +536,175 @@ type QAbstractSpinBoxVTable* {.inheritable, pure.} = object
   customEvent*: QAbstractSpinBoxcustomEventProc
   connectNotify*: QAbstractSpinBoxconnectNotifyProc
   disconnectNotify*: QAbstractSpinBoxdisconnectNotifyProc
+
 proc QAbstractSpinBoxmetaObject*(self: gen_qabstractspinbox_types.QAbstractSpinBox): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQAbstractSpinBox_virtualbase_metaObject(self.h), owned: false)
+
+proc QAbstractSpinBoxmetacast*(self: gen_qabstractspinbox_types.QAbstractSpinBox, param1: cstring): pointer =
+  fcQAbstractSpinBox_virtualbase_metacast(self.h, param1)
+
+proc QAbstractSpinBoxmetacall*(self: gen_qabstractspinbox_types.QAbstractSpinBox, param1: cint, param2: cint, param3: pointer): cint =
+  fcQAbstractSpinBox_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+proc QAbstractSpinBoxsizeHint*(self: gen_qabstractspinbox_types.QAbstractSpinBox): gen_qsize_types.QSize =
+  gen_qsize_types.QSize(h: fcQAbstractSpinBox_virtualbase_sizeHint(self.h), owned: true)
+
+proc QAbstractSpinBoxminimumSizeHint*(self: gen_qabstractspinbox_types.QAbstractSpinBox): gen_qsize_types.QSize =
+  gen_qsize_types.QSize(h: fcQAbstractSpinBox_virtualbase_minimumSizeHint(self.h), owned: true)
+
+proc QAbstractSpinBoxevent*(self: gen_qabstractspinbox_types.QAbstractSpinBox, event: gen_qcoreevent_types.QEvent): bool =
+  fcQAbstractSpinBox_virtualbase_event(self.h, event.h)
+
+proc QAbstractSpinBoxinputMethodQuery*(self: gen_qabstractspinbox_types.QAbstractSpinBox, param1: cint): gen_qvariant_types.QVariant =
+  gen_qvariant_types.QVariant(h: fcQAbstractSpinBox_virtualbase_inputMethodQuery(self.h, cint(param1)), owned: true)
+
+proc QAbstractSpinBoxvalidate*(self: gen_qabstractspinbox_types.QAbstractSpinBox, input: openArray[char], pos: ptr cint): cint =
+  cint(fcQAbstractSpinBox_virtualbase_validate(self.h, struct_miqt_string(data: if len(input) > 0: addr input[0] else: nil, len: csize_t(len(input))), pos))
+
+proc QAbstractSpinBoxfixup*(self: gen_qabstractspinbox_types.QAbstractSpinBox, input: openArray[char]): void =
+  fcQAbstractSpinBox_virtualbase_fixup(self.h, struct_miqt_string(data: if len(input) > 0: addr input[0] else: nil, len: csize_t(len(input))))
+
+proc QAbstractSpinBoxstepBy*(self: gen_qabstractspinbox_types.QAbstractSpinBox, steps: cint): void =
+  fcQAbstractSpinBox_virtualbase_stepBy(self.h, steps)
+
+proc QAbstractSpinBoxclear*(self: gen_qabstractspinbox_types.QAbstractSpinBox): void =
+  fcQAbstractSpinBox_virtualbase_clear(self.h)
+
+proc QAbstractSpinBoxresizeEvent*(self: gen_qabstractspinbox_types.QAbstractSpinBox, event: gen_qevent_types.QResizeEvent): void =
+  fcQAbstractSpinBox_virtualbase_resizeEvent(self.h, event.h)
+
+proc QAbstractSpinBoxkeyPressEvent*(self: gen_qabstractspinbox_types.QAbstractSpinBox, event: gen_qevent_types.QKeyEvent): void =
+  fcQAbstractSpinBox_virtualbase_keyPressEvent(self.h, event.h)
+
+proc QAbstractSpinBoxkeyReleaseEvent*(self: gen_qabstractspinbox_types.QAbstractSpinBox, event: gen_qevent_types.QKeyEvent): void =
+  fcQAbstractSpinBox_virtualbase_keyReleaseEvent(self.h, event.h)
+
+proc QAbstractSpinBoxwheelEvent*(self: gen_qabstractspinbox_types.QAbstractSpinBox, event: gen_qevent_types.QWheelEvent): void =
+  fcQAbstractSpinBox_virtualbase_wheelEvent(self.h, event.h)
+
+proc QAbstractSpinBoxfocusInEvent*(self: gen_qabstractspinbox_types.QAbstractSpinBox, event: gen_qevent_types.QFocusEvent): void =
+  fcQAbstractSpinBox_virtualbase_focusInEvent(self.h, event.h)
+
+proc QAbstractSpinBoxfocusOutEvent*(self: gen_qabstractspinbox_types.QAbstractSpinBox, event: gen_qevent_types.QFocusEvent): void =
+  fcQAbstractSpinBox_virtualbase_focusOutEvent(self.h, event.h)
+
+proc QAbstractSpinBoxcontextMenuEvent*(self: gen_qabstractspinbox_types.QAbstractSpinBox, event: gen_qevent_types.QContextMenuEvent): void =
+  fcQAbstractSpinBox_virtualbase_contextMenuEvent(self.h, event.h)
+
+proc QAbstractSpinBoxchangeEvent*(self: gen_qabstractspinbox_types.QAbstractSpinBox, event: gen_qcoreevent_types.QEvent): void =
+  fcQAbstractSpinBox_virtualbase_changeEvent(self.h, event.h)
+
+proc QAbstractSpinBoxcloseEvent*(self: gen_qabstractspinbox_types.QAbstractSpinBox, event: gen_qevent_types.QCloseEvent): void =
+  fcQAbstractSpinBox_virtualbase_closeEvent(self.h, event.h)
+
+proc QAbstractSpinBoxhideEvent*(self: gen_qabstractspinbox_types.QAbstractSpinBox, event: gen_qevent_types.QHideEvent): void =
+  fcQAbstractSpinBox_virtualbase_hideEvent(self.h, event.h)
+
+proc QAbstractSpinBoxmousePressEvent*(self: gen_qabstractspinbox_types.QAbstractSpinBox, event: gen_qevent_types.QMouseEvent): void =
+  fcQAbstractSpinBox_virtualbase_mousePressEvent(self.h, event.h)
+
+proc QAbstractSpinBoxmouseReleaseEvent*(self: gen_qabstractspinbox_types.QAbstractSpinBox, event: gen_qevent_types.QMouseEvent): void =
+  fcQAbstractSpinBox_virtualbase_mouseReleaseEvent(self.h, event.h)
+
+proc QAbstractSpinBoxmouseMoveEvent*(self: gen_qabstractspinbox_types.QAbstractSpinBox, event: gen_qevent_types.QMouseEvent): void =
+  fcQAbstractSpinBox_virtualbase_mouseMoveEvent(self.h, event.h)
+
+proc QAbstractSpinBoxtimerEvent*(self: gen_qabstractspinbox_types.QAbstractSpinBox, event: gen_qcoreevent_types.QTimerEvent): void =
+  fcQAbstractSpinBox_virtualbase_timerEvent(self.h, event.h)
+
+proc QAbstractSpinBoxpaintEvent*(self: gen_qabstractspinbox_types.QAbstractSpinBox, event: gen_qevent_types.QPaintEvent): void =
+  fcQAbstractSpinBox_virtualbase_paintEvent(self.h, event.h)
+
+proc QAbstractSpinBoxshowEvent*(self: gen_qabstractspinbox_types.QAbstractSpinBox, event: gen_qevent_types.QShowEvent): void =
+  fcQAbstractSpinBox_virtualbase_showEvent(self.h, event.h)
+
+proc QAbstractSpinBoxinitStyleOption*(self: gen_qabstractspinbox_types.QAbstractSpinBox, option: gen_qstyleoption_types.QStyleOptionSpinBox): void =
+  fcQAbstractSpinBox_virtualbase_initStyleOption(self.h, option.h)
+
+proc QAbstractSpinBoxstepEnabled*(self: gen_qabstractspinbox_types.QAbstractSpinBox): cint =
+  cint(fcQAbstractSpinBox_virtualbase_stepEnabled(self.h))
+
+proc QAbstractSpinBoxdevType*(self: gen_qabstractspinbox_types.QAbstractSpinBox): cint =
+  fcQAbstractSpinBox_virtualbase_devType(self.h)
+
+proc QAbstractSpinBoxsetVisible*(self: gen_qabstractspinbox_types.QAbstractSpinBox, visible: bool): void =
+  fcQAbstractSpinBox_virtualbase_setVisible(self.h, visible)
+
+proc QAbstractSpinBoxheightForWidth*(self: gen_qabstractspinbox_types.QAbstractSpinBox, param1: cint): cint =
+  fcQAbstractSpinBox_virtualbase_heightForWidth(self.h, param1)
+
+proc QAbstractSpinBoxhasHeightForWidth*(self: gen_qabstractspinbox_types.QAbstractSpinBox): bool =
+  fcQAbstractSpinBox_virtualbase_hasHeightForWidth(self.h)
+
+proc QAbstractSpinBoxpaintEngine*(self: gen_qabstractspinbox_types.QAbstractSpinBox): gen_qpaintengine_types.QPaintEngine =
+  gen_qpaintengine_types.QPaintEngine(h: fcQAbstractSpinBox_virtualbase_paintEngine(self.h), owned: false)
+
+proc QAbstractSpinBoxmouseDoubleClickEvent*(self: gen_qabstractspinbox_types.QAbstractSpinBox, event: gen_qevent_types.QMouseEvent): void =
+  fcQAbstractSpinBox_virtualbase_mouseDoubleClickEvent(self.h, event.h)
+
+proc QAbstractSpinBoxenterEvent*(self: gen_qabstractspinbox_types.QAbstractSpinBox, event: gen_qevent_types.QEnterEvent): void =
+  fcQAbstractSpinBox_virtualbase_enterEvent(self.h, event.h)
+
+proc QAbstractSpinBoxleaveEvent*(self: gen_qabstractspinbox_types.QAbstractSpinBox, event: gen_qcoreevent_types.QEvent): void =
+  fcQAbstractSpinBox_virtualbase_leaveEvent(self.h, event.h)
+
+proc QAbstractSpinBoxmoveEvent*(self: gen_qabstractspinbox_types.QAbstractSpinBox, event: gen_qevent_types.QMoveEvent): void =
+  fcQAbstractSpinBox_virtualbase_moveEvent(self.h, event.h)
+
+proc QAbstractSpinBoxtabletEvent*(self: gen_qabstractspinbox_types.QAbstractSpinBox, event: gen_qevent_types.QTabletEvent): void =
+  fcQAbstractSpinBox_virtualbase_tabletEvent(self.h, event.h)
+
+proc QAbstractSpinBoxactionEvent*(self: gen_qabstractspinbox_types.QAbstractSpinBox, event: gen_qevent_types.QActionEvent): void =
+  fcQAbstractSpinBox_virtualbase_actionEvent(self.h, event.h)
+
+proc QAbstractSpinBoxdragEnterEvent*(self: gen_qabstractspinbox_types.QAbstractSpinBox, event: gen_qevent_types.QDragEnterEvent): void =
+  fcQAbstractSpinBox_virtualbase_dragEnterEvent(self.h, event.h)
+
+proc QAbstractSpinBoxdragMoveEvent*(self: gen_qabstractspinbox_types.QAbstractSpinBox, event: gen_qevent_types.QDragMoveEvent): void =
+  fcQAbstractSpinBox_virtualbase_dragMoveEvent(self.h, event.h)
+
+proc QAbstractSpinBoxdragLeaveEvent*(self: gen_qabstractspinbox_types.QAbstractSpinBox, event: gen_qevent_types.QDragLeaveEvent): void =
+  fcQAbstractSpinBox_virtualbase_dragLeaveEvent(self.h, event.h)
+
+proc QAbstractSpinBoxdropEvent*(self: gen_qabstractspinbox_types.QAbstractSpinBox, event: gen_qevent_types.QDropEvent): void =
+  fcQAbstractSpinBox_virtualbase_dropEvent(self.h, event.h)
+
+proc QAbstractSpinBoxnativeEvent*(self: gen_qabstractspinbox_types.QAbstractSpinBox, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool =
+  fcQAbstractSpinBox_virtualbase_nativeEvent(self.h, struct_miqt_string(data: if len(eventType) > 0: addr eventType[0] else: nil, len: csize_t(len(eventType))), message, resultVal)
+
+proc QAbstractSpinBoxmetric*(self: gen_qabstractspinbox_types.QAbstractSpinBox, param1: cint): cint =
+  fcQAbstractSpinBox_virtualbase_metric(self.h, cint(param1))
+
+proc QAbstractSpinBoxinitPainter*(self: gen_qabstractspinbox_types.QAbstractSpinBox, painter: gen_qpainter_types.QPainter): void =
+  fcQAbstractSpinBox_virtualbase_initPainter(self.h, painter.h)
+
+proc QAbstractSpinBoxredirected*(self: gen_qabstractspinbox_types.QAbstractSpinBox, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice =
+  gen_qpaintdevice_types.QPaintDevice(h: fcQAbstractSpinBox_virtualbase_redirected(self.h, offset.h), owned: false)
+
+proc QAbstractSpinBoxsharedPainter*(self: gen_qabstractspinbox_types.QAbstractSpinBox): gen_qpainter_types.QPainter =
+  gen_qpainter_types.QPainter(h: fcQAbstractSpinBox_virtualbase_sharedPainter(self.h), owned: false)
+
+proc QAbstractSpinBoxinputMethodEvent*(self: gen_qabstractspinbox_types.QAbstractSpinBox, param1: gen_qevent_types.QInputMethodEvent): void =
+  fcQAbstractSpinBox_virtualbase_inputMethodEvent(self.h, param1.h)
+
+proc QAbstractSpinBoxfocusNextPrevChild*(self: gen_qabstractspinbox_types.QAbstractSpinBox, next: bool): bool =
+  fcQAbstractSpinBox_virtualbase_focusNextPrevChild(self.h, next)
+
+proc QAbstractSpinBoxeventFilter*(self: gen_qabstractspinbox_types.QAbstractSpinBox, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
+  fcQAbstractSpinBox_virtualbase_eventFilter(self.h, watched.h, event.h)
+
+proc QAbstractSpinBoxchildEvent*(self: gen_qabstractspinbox_types.QAbstractSpinBox, event: gen_qcoreevent_types.QChildEvent): void =
+  fcQAbstractSpinBox_virtualbase_childEvent(self.h, event.h)
+
+proc QAbstractSpinBoxcustomEvent*(self: gen_qabstractspinbox_types.QAbstractSpinBox, event: gen_qcoreevent_types.QEvent): void =
+  fcQAbstractSpinBox_virtualbase_customEvent(self.h, event.h)
+
+proc QAbstractSpinBoxconnectNotify*(self: gen_qabstractspinbox_types.QAbstractSpinBox, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQAbstractSpinBox_virtualbase_connectNotify(self.h, signal.h)
+
+proc QAbstractSpinBoxdisconnectNotify*(self: gen_qabstractspinbox_types.QAbstractSpinBox, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQAbstractSpinBox_virtualbase_disconnectNotify(self.h, signal.h)
+
 
 proc fcQAbstractSpinBox_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QAbstractSpinBoxVTable](fcQAbstractSpinBox_vdata(self)[])
@@ -546,18 +715,12 @@ proc fcQAbstractSpinBox_vtable_callback_metaObject(self: pointer): pointer {.cde
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QAbstractSpinBoxmetacast*(self: gen_qabstractspinbox_types.QAbstractSpinBox, param1: cstring): pointer =
-  fcQAbstractSpinBox_virtualbase_metacast(self.h, param1)
-
 proc fcQAbstractSpinBox_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QAbstractSpinBoxVTable](fcQAbstractSpinBox_vdata(self)[])
   let self = QAbstractSpinBox(h: self)
   let slotval1 = (param1)
   var virtualReturn = vtbl[].metacast(self, slotval1)
   virtualReturn
-
-proc QAbstractSpinBoxmetacall*(self: gen_qabstractspinbox_types.QAbstractSpinBox, param1: cint, param2: cint, param3: pointer): cint =
-  fcQAbstractSpinBox_virtualbase_metacall(self.h, cint(param1), param2, param3)
 
 proc fcQAbstractSpinBox_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QAbstractSpinBoxVTable](fcQAbstractSpinBox_vdata(self)[])
@@ -568,9 +731,6 @@ proc fcQAbstractSpinBox_vtable_callback_metacall(self: pointer, param1: cint, pa
   var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QAbstractSpinBoxsizeHint*(self: gen_qabstractspinbox_types.QAbstractSpinBox): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQAbstractSpinBox_virtualbase_sizeHint(self.h), owned: true)
-
 proc fcQAbstractSpinBox_vtable_callback_sizeHint(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QAbstractSpinBoxVTable](fcQAbstractSpinBox_vdata(self)[])
   let self = QAbstractSpinBox(h: self)
@@ -579,9 +739,6 @@ proc fcQAbstractSpinBox_vtable_callback_sizeHint(self: pointer): pointer {.cdecl
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
   virtualReturn_h
-
-proc QAbstractSpinBoxminimumSizeHint*(self: gen_qabstractspinbox_types.QAbstractSpinBox): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQAbstractSpinBox_virtualbase_minimumSizeHint(self.h), owned: true)
 
 proc fcQAbstractSpinBox_vtable_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QAbstractSpinBoxVTable](fcQAbstractSpinBox_vdata(self)[])
@@ -592,18 +749,12 @@ proc fcQAbstractSpinBox_vtable_callback_minimumSizeHint(self: pointer): pointer 
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QAbstractSpinBoxevent*(self: gen_qabstractspinbox_types.QAbstractSpinBox, event: gen_qcoreevent_types.QEvent): bool =
-  fcQAbstractSpinBox_virtualbase_event(self.h, event.h)
-
 proc fcQAbstractSpinBox_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QAbstractSpinBoxVTable](fcQAbstractSpinBox_vdata(self)[])
   let self = QAbstractSpinBox(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
-
-proc QAbstractSpinBoxinputMethodQuery*(self: gen_qabstractspinbox_types.QAbstractSpinBox, param1: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQAbstractSpinBox_virtualbase_inputMethodQuery(self.h, cint(param1)), owned: true)
 
 proc fcQAbstractSpinBox_vtable_callback_inputMethodQuery(self: pointer, param1: cint): pointer {.cdecl.} =
   let vtbl = cast[ptr QAbstractSpinBoxVTable](fcQAbstractSpinBox_vdata(self)[])
@@ -614,9 +765,6 @@ proc fcQAbstractSpinBox_vtable_callback_inputMethodQuery(self: pointer, param1: 
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
   virtualReturn_h
-
-proc QAbstractSpinBoxvalidate*(self: gen_qabstractspinbox_types.QAbstractSpinBox, input: openArray[char], pos: ptr cint): cint =
-  cint(fcQAbstractSpinBox_virtualbase_validate(self.h, struct_miqt_string(data: if len(input) > 0: addr input[0] else: nil, len: csize_t(len(input))), pos))
 
 proc fcQAbstractSpinBox_vtable_callback_validate(self: pointer, input: struct_miqt_string, pos: ptr cint): cint {.cdecl.} =
   let vtbl = cast[ptr QAbstractSpinBoxVTable](fcQAbstractSpinBox_vdata(self)[])
@@ -629,9 +777,6 @@ proc fcQAbstractSpinBox_vtable_callback_validate(self: pointer, input: struct_mi
   var virtualReturn = vtbl[].validate(self, slotval1, slotval2)
   cint(virtualReturn)
 
-proc QAbstractSpinBoxfixup*(self: gen_qabstractspinbox_types.QAbstractSpinBox, input: openArray[char]): void =
-  fcQAbstractSpinBox_virtualbase_fixup(self.h, struct_miqt_string(data: if len(input) > 0: addr input[0] else: nil, len: csize_t(len(input))))
-
 proc fcQAbstractSpinBox_vtable_callback_fixup(self: pointer, input: struct_miqt_string): void {.cdecl.} =
   let vtbl = cast[ptr QAbstractSpinBoxVTable](fcQAbstractSpinBox_vdata(self)[])
   let self = QAbstractSpinBox(h: self)
@@ -641,25 +786,16 @@ proc fcQAbstractSpinBox_vtable_callback_fixup(self: pointer, input: struct_miqt_
   let slotval1 = vinputx_ret
   vtbl[].fixup(self, slotval1)
 
-proc QAbstractSpinBoxstepBy*(self: gen_qabstractspinbox_types.QAbstractSpinBox, steps: cint): void =
-  fcQAbstractSpinBox_virtualbase_stepBy(self.h, steps)
-
 proc fcQAbstractSpinBox_vtable_callback_stepBy(self: pointer, steps: cint): void {.cdecl.} =
   let vtbl = cast[ptr QAbstractSpinBoxVTable](fcQAbstractSpinBox_vdata(self)[])
   let self = QAbstractSpinBox(h: self)
   let slotval1 = steps
   vtbl[].stepBy(self, slotval1)
 
-proc QAbstractSpinBoxclear*(self: gen_qabstractspinbox_types.QAbstractSpinBox): void =
-  fcQAbstractSpinBox_virtualbase_clear(self.h)
-
 proc fcQAbstractSpinBox_vtable_callback_clear(self: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAbstractSpinBoxVTable](fcQAbstractSpinBox_vdata(self)[])
   let self = QAbstractSpinBox(h: self)
   vtbl[].clear(self)
-
-proc QAbstractSpinBoxresizeEvent*(self: gen_qabstractspinbox_types.QAbstractSpinBox, event: gen_qevent_types.QResizeEvent): void =
-  fcQAbstractSpinBox_virtualbase_resizeEvent(self.h, event.h)
 
 proc fcQAbstractSpinBox_vtable_callback_resizeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAbstractSpinBoxVTable](fcQAbstractSpinBox_vdata(self)[])
@@ -667,17 +803,11 @@ proc fcQAbstractSpinBox_vtable_callback_resizeEvent(self: pointer, event: pointe
   let slotval1 = gen_qevent_types.QResizeEvent(h: event, owned: false)
   vtbl[].resizeEvent(self, slotval1)
 
-proc QAbstractSpinBoxkeyPressEvent*(self: gen_qabstractspinbox_types.QAbstractSpinBox, event: gen_qevent_types.QKeyEvent): void =
-  fcQAbstractSpinBox_virtualbase_keyPressEvent(self.h, event.h)
-
 proc fcQAbstractSpinBox_vtable_callback_keyPressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAbstractSpinBoxVTable](fcQAbstractSpinBox_vdata(self)[])
   let self = QAbstractSpinBox(h: self)
   let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   vtbl[].keyPressEvent(self, slotval1)
-
-proc QAbstractSpinBoxkeyReleaseEvent*(self: gen_qabstractspinbox_types.QAbstractSpinBox, event: gen_qevent_types.QKeyEvent): void =
-  fcQAbstractSpinBox_virtualbase_keyReleaseEvent(self.h, event.h)
 
 proc fcQAbstractSpinBox_vtable_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAbstractSpinBoxVTable](fcQAbstractSpinBox_vdata(self)[])
@@ -685,17 +815,11 @@ proc fcQAbstractSpinBox_vtable_callback_keyReleaseEvent(self: pointer, event: po
   let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   vtbl[].keyReleaseEvent(self, slotval1)
 
-proc QAbstractSpinBoxwheelEvent*(self: gen_qabstractspinbox_types.QAbstractSpinBox, event: gen_qevent_types.QWheelEvent): void =
-  fcQAbstractSpinBox_virtualbase_wheelEvent(self.h, event.h)
-
 proc fcQAbstractSpinBox_vtable_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAbstractSpinBoxVTable](fcQAbstractSpinBox_vdata(self)[])
   let self = QAbstractSpinBox(h: self)
   let slotval1 = gen_qevent_types.QWheelEvent(h: event, owned: false)
   vtbl[].wheelEvent(self, slotval1)
-
-proc QAbstractSpinBoxfocusInEvent*(self: gen_qabstractspinbox_types.QAbstractSpinBox, event: gen_qevent_types.QFocusEvent): void =
-  fcQAbstractSpinBox_virtualbase_focusInEvent(self.h, event.h)
 
 proc fcQAbstractSpinBox_vtable_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAbstractSpinBoxVTable](fcQAbstractSpinBox_vdata(self)[])
@@ -703,17 +827,11 @@ proc fcQAbstractSpinBox_vtable_callback_focusInEvent(self: pointer, event: point
   let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusInEvent(self, slotval1)
 
-proc QAbstractSpinBoxfocusOutEvent*(self: gen_qabstractspinbox_types.QAbstractSpinBox, event: gen_qevent_types.QFocusEvent): void =
-  fcQAbstractSpinBox_virtualbase_focusOutEvent(self.h, event.h)
-
 proc fcQAbstractSpinBox_vtable_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAbstractSpinBoxVTable](fcQAbstractSpinBox_vdata(self)[])
   let self = QAbstractSpinBox(h: self)
   let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusOutEvent(self, slotval1)
-
-proc QAbstractSpinBoxcontextMenuEvent*(self: gen_qabstractspinbox_types.QAbstractSpinBox, event: gen_qevent_types.QContextMenuEvent): void =
-  fcQAbstractSpinBox_virtualbase_contextMenuEvent(self.h, event.h)
 
 proc fcQAbstractSpinBox_vtable_callback_contextMenuEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAbstractSpinBoxVTable](fcQAbstractSpinBox_vdata(self)[])
@@ -721,17 +839,11 @@ proc fcQAbstractSpinBox_vtable_callback_contextMenuEvent(self: pointer, event: p
   let slotval1 = gen_qevent_types.QContextMenuEvent(h: event, owned: false)
   vtbl[].contextMenuEvent(self, slotval1)
 
-proc QAbstractSpinBoxchangeEvent*(self: gen_qabstractspinbox_types.QAbstractSpinBox, event: gen_qcoreevent_types.QEvent): void =
-  fcQAbstractSpinBox_virtualbase_changeEvent(self.h, event.h)
-
 proc fcQAbstractSpinBox_vtable_callback_changeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAbstractSpinBoxVTable](fcQAbstractSpinBox_vdata(self)[])
   let self = QAbstractSpinBox(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].changeEvent(self, slotval1)
-
-proc QAbstractSpinBoxcloseEvent*(self: gen_qabstractspinbox_types.QAbstractSpinBox, event: gen_qevent_types.QCloseEvent): void =
-  fcQAbstractSpinBox_virtualbase_closeEvent(self.h, event.h)
 
 proc fcQAbstractSpinBox_vtable_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAbstractSpinBoxVTable](fcQAbstractSpinBox_vdata(self)[])
@@ -739,17 +851,11 @@ proc fcQAbstractSpinBox_vtable_callback_closeEvent(self: pointer, event: pointer
   let slotval1 = gen_qevent_types.QCloseEvent(h: event, owned: false)
   vtbl[].closeEvent(self, slotval1)
 
-proc QAbstractSpinBoxhideEvent*(self: gen_qabstractspinbox_types.QAbstractSpinBox, event: gen_qevent_types.QHideEvent): void =
-  fcQAbstractSpinBox_virtualbase_hideEvent(self.h, event.h)
-
 proc fcQAbstractSpinBox_vtable_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAbstractSpinBoxVTable](fcQAbstractSpinBox_vdata(self)[])
   let self = QAbstractSpinBox(h: self)
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   vtbl[].hideEvent(self, slotval1)
-
-proc QAbstractSpinBoxmousePressEvent*(self: gen_qabstractspinbox_types.QAbstractSpinBox, event: gen_qevent_types.QMouseEvent): void =
-  fcQAbstractSpinBox_virtualbase_mousePressEvent(self.h, event.h)
 
 proc fcQAbstractSpinBox_vtable_callback_mousePressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAbstractSpinBoxVTable](fcQAbstractSpinBox_vdata(self)[])
@@ -757,17 +863,11 @@ proc fcQAbstractSpinBox_vtable_callback_mousePressEvent(self: pointer, event: po
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mousePressEvent(self, slotval1)
 
-proc QAbstractSpinBoxmouseReleaseEvent*(self: gen_qabstractspinbox_types.QAbstractSpinBox, event: gen_qevent_types.QMouseEvent): void =
-  fcQAbstractSpinBox_virtualbase_mouseReleaseEvent(self.h, event.h)
-
 proc fcQAbstractSpinBox_vtable_callback_mouseReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAbstractSpinBoxVTable](fcQAbstractSpinBox_vdata(self)[])
   let self = QAbstractSpinBox(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseReleaseEvent(self, slotval1)
-
-proc QAbstractSpinBoxmouseMoveEvent*(self: gen_qabstractspinbox_types.QAbstractSpinBox, event: gen_qevent_types.QMouseEvent): void =
-  fcQAbstractSpinBox_virtualbase_mouseMoveEvent(self.h, event.h)
 
 proc fcQAbstractSpinBox_vtable_callback_mouseMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAbstractSpinBoxVTable](fcQAbstractSpinBox_vdata(self)[])
@@ -775,17 +875,11 @@ proc fcQAbstractSpinBox_vtable_callback_mouseMoveEvent(self: pointer, event: poi
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseMoveEvent(self, slotval1)
 
-proc QAbstractSpinBoxtimerEvent*(self: gen_qabstractspinbox_types.QAbstractSpinBox, event: gen_qcoreevent_types.QTimerEvent): void =
-  fcQAbstractSpinBox_virtualbase_timerEvent(self.h, event.h)
-
 proc fcQAbstractSpinBox_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAbstractSpinBoxVTable](fcQAbstractSpinBox_vdata(self)[])
   let self = QAbstractSpinBox(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
-
-proc QAbstractSpinBoxpaintEvent*(self: gen_qabstractspinbox_types.QAbstractSpinBox, event: gen_qevent_types.QPaintEvent): void =
-  fcQAbstractSpinBox_virtualbase_paintEvent(self.h, event.h)
 
 proc fcQAbstractSpinBox_vtable_callback_paintEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAbstractSpinBoxVTable](fcQAbstractSpinBox_vdata(self)[])
@@ -793,17 +887,11 @@ proc fcQAbstractSpinBox_vtable_callback_paintEvent(self: pointer, event: pointer
   let slotval1 = gen_qevent_types.QPaintEvent(h: event, owned: false)
   vtbl[].paintEvent(self, slotval1)
 
-proc QAbstractSpinBoxshowEvent*(self: gen_qabstractspinbox_types.QAbstractSpinBox, event: gen_qevent_types.QShowEvent): void =
-  fcQAbstractSpinBox_virtualbase_showEvent(self.h, event.h)
-
 proc fcQAbstractSpinBox_vtable_callback_showEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAbstractSpinBoxVTable](fcQAbstractSpinBox_vdata(self)[])
   let self = QAbstractSpinBox(h: self)
   let slotval1 = gen_qevent_types.QShowEvent(h: event, owned: false)
   vtbl[].showEvent(self, slotval1)
-
-proc QAbstractSpinBoxinitStyleOption*(self: gen_qabstractspinbox_types.QAbstractSpinBox, option: gen_qstyleoption_types.QStyleOptionSpinBox): void =
-  fcQAbstractSpinBox_virtualbase_initStyleOption(self.h, option.h)
 
 proc fcQAbstractSpinBox_vtable_callback_initStyleOption(self: pointer, option: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAbstractSpinBoxVTable](fcQAbstractSpinBox_vdata(self)[])
@@ -811,17 +899,11 @@ proc fcQAbstractSpinBox_vtable_callback_initStyleOption(self: pointer, option: p
   let slotval1 = gen_qstyleoption_types.QStyleOptionSpinBox(h: option, owned: false)
   vtbl[].initStyleOption(self, slotval1)
 
-proc QAbstractSpinBoxstepEnabled*(self: gen_qabstractspinbox_types.QAbstractSpinBox): cint =
-  cint(fcQAbstractSpinBox_virtualbase_stepEnabled(self.h))
-
 proc fcQAbstractSpinBox_vtable_callback_stepEnabled(self: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QAbstractSpinBoxVTable](fcQAbstractSpinBox_vdata(self)[])
   let self = QAbstractSpinBox(h: self)
   var virtualReturn = vtbl[].stepEnabled(self)
   cint(virtualReturn)
-
-proc QAbstractSpinBoxdevType*(self: gen_qabstractspinbox_types.QAbstractSpinBox): cint =
-  fcQAbstractSpinBox_virtualbase_devType(self.h)
 
 proc fcQAbstractSpinBox_vtable_callback_devType(self: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QAbstractSpinBoxVTable](fcQAbstractSpinBox_vdata(self)[])
@@ -829,17 +911,11 @@ proc fcQAbstractSpinBox_vtable_callback_devType(self: pointer): cint {.cdecl.} =
   var virtualReturn = vtbl[].devType(self)
   virtualReturn
 
-proc QAbstractSpinBoxsetVisible*(self: gen_qabstractspinbox_types.QAbstractSpinBox, visible: bool): void =
-  fcQAbstractSpinBox_virtualbase_setVisible(self.h, visible)
-
 proc fcQAbstractSpinBox_vtable_callback_setVisible(self: pointer, visible: bool): void {.cdecl.} =
   let vtbl = cast[ptr QAbstractSpinBoxVTable](fcQAbstractSpinBox_vdata(self)[])
   let self = QAbstractSpinBox(h: self)
   let slotval1 = visible
   vtbl[].setVisible(self, slotval1)
-
-proc QAbstractSpinBoxheightForWidth*(self: gen_qabstractspinbox_types.QAbstractSpinBox, param1: cint): cint =
-  fcQAbstractSpinBox_virtualbase_heightForWidth(self.h, param1)
 
 proc fcQAbstractSpinBox_vtable_callback_heightForWidth(self: pointer, param1: cint): cint {.cdecl.} =
   let vtbl = cast[ptr QAbstractSpinBoxVTable](fcQAbstractSpinBox_vdata(self)[])
@@ -848,17 +924,11 @@ proc fcQAbstractSpinBox_vtable_callback_heightForWidth(self: pointer, param1: ci
   var virtualReturn = vtbl[].heightForWidth(self, slotval1)
   virtualReturn
 
-proc QAbstractSpinBoxhasHeightForWidth*(self: gen_qabstractspinbox_types.QAbstractSpinBox): bool =
-  fcQAbstractSpinBox_virtualbase_hasHeightForWidth(self.h)
-
 proc fcQAbstractSpinBox_vtable_callback_hasHeightForWidth(self: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QAbstractSpinBoxVTable](fcQAbstractSpinBox_vdata(self)[])
   let self = QAbstractSpinBox(h: self)
   var virtualReturn = vtbl[].hasHeightForWidth(self)
   virtualReturn
-
-proc QAbstractSpinBoxpaintEngine*(self: gen_qabstractspinbox_types.QAbstractSpinBox): gen_qpaintengine_types.QPaintEngine =
-  gen_qpaintengine_types.QPaintEngine(h: fcQAbstractSpinBox_virtualbase_paintEngine(self.h), owned: false)
 
 proc fcQAbstractSpinBox_vtable_callback_paintEngine(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QAbstractSpinBoxVTable](fcQAbstractSpinBox_vdata(self)[])
@@ -869,17 +939,11 @@ proc fcQAbstractSpinBox_vtable_callback_paintEngine(self: pointer): pointer {.cd
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QAbstractSpinBoxmouseDoubleClickEvent*(self: gen_qabstractspinbox_types.QAbstractSpinBox, event: gen_qevent_types.QMouseEvent): void =
-  fcQAbstractSpinBox_virtualbase_mouseDoubleClickEvent(self.h, event.h)
-
 proc fcQAbstractSpinBox_vtable_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAbstractSpinBoxVTable](fcQAbstractSpinBox_vdata(self)[])
   let self = QAbstractSpinBox(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseDoubleClickEvent(self, slotval1)
-
-proc QAbstractSpinBoxenterEvent*(self: gen_qabstractspinbox_types.QAbstractSpinBox, event: gen_qevent_types.QEnterEvent): void =
-  fcQAbstractSpinBox_virtualbase_enterEvent(self.h, event.h)
 
 proc fcQAbstractSpinBox_vtable_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAbstractSpinBoxVTable](fcQAbstractSpinBox_vdata(self)[])
@@ -887,17 +951,11 @@ proc fcQAbstractSpinBox_vtable_callback_enterEvent(self: pointer, event: pointer
   let slotval1 = gen_qevent_types.QEnterEvent(h: event, owned: false)
   vtbl[].enterEvent(self, slotval1)
 
-proc QAbstractSpinBoxleaveEvent*(self: gen_qabstractspinbox_types.QAbstractSpinBox, event: gen_qcoreevent_types.QEvent): void =
-  fcQAbstractSpinBox_virtualbase_leaveEvent(self.h, event.h)
-
 proc fcQAbstractSpinBox_vtable_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAbstractSpinBoxVTable](fcQAbstractSpinBox_vdata(self)[])
   let self = QAbstractSpinBox(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].leaveEvent(self, slotval1)
-
-proc QAbstractSpinBoxmoveEvent*(self: gen_qabstractspinbox_types.QAbstractSpinBox, event: gen_qevent_types.QMoveEvent): void =
-  fcQAbstractSpinBox_virtualbase_moveEvent(self.h, event.h)
 
 proc fcQAbstractSpinBox_vtable_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAbstractSpinBoxVTable](fcQAbstractSpinBox_vdata(self)[])
@@ -905,17 +963,11 @@ proc fcQAbstractSpinBox_vtable_callback_moveEvent(self: pointer, event: pointer)
   let slotval1 = gen_qevent_types.QMoveEvent(h: event, owned: false)
   vtbl[].moveEvent(self, slotval1)
 
-proc QAbstractSpinBoxtabletEvent*(self: gen_qabstractspinbox_types.QAbstractSpinBox, event: gen_qevent_types.QTabletEvent): void =
-  fcQAbstractSpinBox_virtualbase_tabletEvent(self.h, event.h)
-
 proc fcQAbstractSpinBox_vtable_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAbstractSpinBoxVTable](fcQAbstractSpinBox_vdata(self)[])
   let self = QAbstractSpinBox(h: self)
   let slotval1 = gen_qevent_types.QTabletEvent(h: event, owned: false)
   vtbl[].tabletEvent(self, slotval1)
-
-proc QAbstractSpinBoxactionEvent*(self: gen_qabstractspinbox_types.QAbstractSpinBox, event: gen_qevent_types.QActionEvent): void =
-  fcQAbstractSpinBox_virtualbase_actionEvent(self.h, event.h)
 
 proc fcQAbstractSpinBox_vtable_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAbstractSpinBoxVTable](fcQAbstractSpinBox_vdata(self)[])
@@ -923,17 +975,11 @@ proc fcQAbstractSpinBox_vtable_callback_actionEvent(self: pointer, event: pointe
   let slotval1 = gen_qevent_types.QActionEvent(h: event, owned: false)
   vtbl[].actionEvent(self, slotval1)
 
-proc QAbstractSpinBoxdragEnterEvent*(self: gen_qabstractspinbox_types.QAbstractSpinBox, event: gen_qevent_types.QDragEnterEvent): void =
-  fcQAbstractSpinBox_virtualbase_dragEnterEvent(self.h, event.h)
-
 proc fcQAbstractSpinBox_vtable_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAbstractSpinBoxVTable](fcQAbstractSpinBox_vdata(self)[])
   let self = QAbstractSpinBox(h: self)
   let slotval1 = gen_qevent_types.QDragEnterEvent(h: event, owned: false)
   vtbl[].dragEnterEvent(self, slotval1)
-
-proc QAbstractSpinBoxdragMoveEvent*(self: gen_qabstractspinbox_types.QAbstractSpinBox, event: gen_qevent_types.QDragMoveEvent): void =
-  fcQAbstractSpinBox_virtualbase_dragMoveEvent(self.h, event.h)
 
 proc fcQAbstractSpinBox_vtable_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAbstractSpinBoxVTable](fcQAbstractSpinBox_vdata(self)[])
@@ -941,26 +987,17 @@ proc fcQAbstractSpinBox_vtable_callback_dragMoveEvent(self: pointer, event: poin
   let slotval1 = gen_qevent_types.QDragMoveEvent(h: event, owned: false)
   vtbl[].dragMoveEvent(self, slotval1)
 
-proc QAbstractSpinBoxdragLeaveEvent*(self: gen_qabstractspinbox_types.QAbstractSpinBox, event: gen_qevent_types.QDragLeaveEvent): void =
-  fcQAbstractSpinBox_virtualbase_dragLeaveEvent(self.h, event.h)
-
 proc fcQAbstractSpinBox_vtable_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAbstractSpinBoxVTable](fcQAbstractSpinBox_vdata(self)[])
   let self = QAbstractSpinBox(h: self)
   let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event, owned: false)
   vtbl[].dragLeaveEvent(self, slotval1)
 
-proc QAbstractSpinBoxdropEvent*(self: gen_qabstractspinbox_types.QAbstractSpinBox, event: gen_qevent_types.QDropEvent): void =
-  fcQAbstractSpinBox_virtualbase_dropEvent(self.h, event.h)
-
 proc fcQAbstractSpinBox_vtable_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAbstractSpinBoxVTable](fcQAbstractSpinBox_vdata(self)[])
   let self = QAbstractSpinBox(h: self)
   let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
   vtbl[].dropEvent(self, slotval1)
-
-proc QAbstractSpinBoxnativeEvent*(self: gen_qabstractspinbox_types.QAbstractSpinBox, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool =
-  fcQAbstractSpinBox_virtualbase_nativeEvent(self.h, struct_miqt_string(data: if len(eventType) > 0: addr eventType[0] else: nil, len: csize_t(len(eventType))), message, resultVal)
 
 proc fcQAbstractSpinBox_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
   let vtbl = cast[ptr QAbstractSpinBoxVTable](fcQAbstractSpinBox_vdata(self)[])
@@ -974,9 +1011,6 @@ proc fcQAbstractSpinBox_vtable_callback_nativeEvent(self: pointer, eventType: st
   var virtualReturn = vtbl[].nativeEvent(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QAbstractSpinBoxmetric*(self: gen_qabstractspinbox_types.QAbstractSpinBox, param1: cint): cint =
-  fcQAbstractSpinBox_virtualbase_metric(self.h, cint(param1))
-
 proc fcQAbstractSpinBox_vtable_callback_metric(self: pointer, param1: cint): cint {.cdecl.} =
   let vtbl = cast[ptr QAbstractSpinBoxVTable](fcQAbstractSpinBox_vdata(self)[])
   let self = QAbstractSpinBox(h: self)
@@ -984,17 +1018,11 @@ proc fcQAbstractSpinBox_vtable_callback_metric(self: pointer, param1: cint): cin
   var virtualReturn = vtbl[].metric(self, slotval1)
   virtualReturn
 
-proc QAbstractSpinBoxinitPainter*(self: gen_qabstractspinbox_types.QAbstractSpinBox, painter: gen_qpainter_types.QPainter): void =
-  fcQAbstractSpinBox_virtualbase_initPainter(self.h, painter.h)
-
 proc fcQAbstractSpinBox_vtable_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAbstractSpinBoxVTable](fcQAbstractSpinBox_vdata(self)[])
   let self = QAbstractSpinBox(h: self)
   let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
   vtbl[].initPainter(self, slotval1)
-
-proc QAbstractSpinBoxredirected*(self: gen_qabstractspinbox_types.QAbstractSpinBox, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice =
-  gen_qpaintdevice_types.QPaintDevice(h: fcQAbstractSpinBox_virtualbase_redirected(self.h, offset.h), owned: false)
 
 proc fcQAbstractSpinBox_vtable_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QAbstractSpinBoxVTable](fcQAbstractSpinBox_vdata(self)[])
@@ -1006,9 +1034,6 @@ proc fcQAbstractSpinBox_vtable_callback_redirected(self: pointer, offset: pointe
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QAbstractSpinBoxsharedPainter*(self: gen_qabstractspinbox_types.QAbstractSpinBox): gen_qpainter_types.QPainter =
-  gen_qpainter_types.QPainter(h: fcQAbstractSpinBox_virtualbase_sharedPainter(self.h), owned: false)
-
 proc fcQAbstractSpinBox_vtable_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QAbstractSpinBoxVTable](fcQAbstractSpinBox_vdata(self)[])
   let self = QAbstractSpinBox(h: self)
@@ -1018,17 +1043,11 @@ proc fcQAbstractSpinBox_vtable_callback_sharedPainter(self: pointer): pointer {.
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QAbstractSpinBoxinputMethodEvent*(self: gen_qabstractspinbox_types.QAbstractSpinBox, param1: gen_qevent_types.QInputMethodEvent): void =
-  fcQAbstractSpinBox_virtualbase_inputMethodEvent(self.h, param1.h)
-
 proc fcQAbstractSpinBox_vtable_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAbstractSpinBoxVTable](fcQAbstractSpinBox_vdata(self)[])
   let self = QAbstractSpinBox(h: self)
   let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1, owned: false)
   vtbl[].inputMethodEvent(self, slotval1)
-
-proc QAbstractSpinBoxfocusNextPrevChild*(self: gen_qabstractspinbox_types.QAbstractSpinBox, next: bool): bool =
-  fcQAbstractSpinBox_virtualbase_focusNextPrevChild(self.h, next)
 
 proc fcQAbstractSpinBox_vtable_callback_focusNextPrevChild(self: pointer, next: bool): bool {.cdecl.} =
   let vtbl = cast[ptr QAbstractSpinBoxVTable](fcQAbstractSpinBox_vdata(self)[])
@@ -1036,9 +1055,6 @@ proc fcQAbstractSpinBox_vtable_callback_focusNextPrevChild(self: pointer, next: 
   let slotval1 = next
   var virtualReturn = vtbl[].focusNextPrevChild(self, slotval1)
   virtualReturn
-
-proc QAbstractSpinBoxeventFilter*(self: gen_qabstractspinbox_types.QAbstractSpinBox, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
-  fcQAbstractSpinBox_virtualbase_eventFilter(self.h, watched.h, event.h)
 
 proc fcQAbstractSpinBox_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QAbstractSpinBoxVTable](fcQAbstractSpinBox_vdata(self)[])
@@ -1048,17 +1064,11 @@ proc fcQAbstractSpinBox_vtable_callback_eventFilter(self: pointer, watched: poin
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
-proc QAbstractSpinBoxchildEvent*(self: gen_qabstractspinbox_types.QAbstractSpinBox, event: gen_qcoreevent_types.QChildEvent): void =
-  fcQAbstractSpinBox_virtualbase_childEvent(self.h, event.h)
-
 proc fcQAbstractSpinBox_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAbstractSpinBoxVTable](fcQAbstractSpinBox_vdata(self)[])
   let self = QAbstractSpinBox(h: self)
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
-
-proc QAbstractSpinBoxcustomEvent*(self: gen_qabstractspinbox_types.QAbstractSpinBox, event: gen_qcoreevent_types.QEvent): void =
-  fcQAbstractSpinBox_virtualbase_customEvent(self.h, event.h)
 
 proc fcQAbstractSpinBox_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAbstractSpinBoxVTable](fcQAbstractSpinBox_vdata(self)[])
@@ -1066,17 +1076,11 @@ proc fcQAbstractSpinBox_vtable_callback_customEvent(self: pointer, event: pointe
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
-proc QAbstractSpinBoxconnectNotify*(self: gen_qabstractspinbox_types.QAbstractSpinBox, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQAbstractSpinBox_virtualbase_connectNotify(self.h, signal.h)
-
 proc fcQAbstractSpinBox_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAbstractSpinBoxVTable](fcQAbstractSpinBox_vdata(self)[])
   let self = QAbstractSpinBox(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
-
-proc QAbstractSpinBoxdisconnectNotify*(self: gen_qabstractspinbox_types.QAbstractSpinBox, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQAbstractSpinBox_virtualbase_disconnectNotify(self.h, signal.h)
 
 proc fcQAbstractSpinBox_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAbstractSpinBoxVTable](fcQAbstractSpinBox_vdata(self)[])
@@ -1086,23 +1090,131 @@ proc fcQAbstractSpinBox_vtable_callback_disconnectNotify(self: pointer, signal: 
 
 type VirtualQAbstractSpinBox* {.inheritable.} = ref object of QAbstractSpinBox
   vtbl*: cQAbstractSpinBoxVTable
+
 method metaObject*(self: VirtualQAbstractSpinBox): gen_qobjectdefs_types.QMetaObject {.base.} =
   QAbstractSpinBoxmetaObject(self[])
+method metacast*(self: VirtualQAbstractSpinBox, param1: cstring): pointer {.base.} =
+  QAbstractSpinBoxmetacast(self[], param1)
+method metacall*(self: VirtualQAbstractSpinBox, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QAbstractSpinBoxmetacall(self[], param1, param2, param3)
+method sizeHint*(self: VirtualQAbstractSpinBox): gen_qsize_types.QSize {.base.} =
+  QAbstractSpinBoxsizeHint(self[])
+method minimumSizeHint*(self: VirtualQAbstractSpinBox): gen_qsize_types.QSize {.base.} =
+  QAbstractSpinBoxminimumSizeHint(self[])
+method event*(self: VirtualQAbstractSpinBox, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QAbstractSpinBoxevent(self[], event)
+method inputMethodQuery*(self: VirtualQAbstractSpinBox, param1: cint): gen_qvariant_types.QVariant {.base.} =
+  QAbstractSpinBoxinputMethodQuery(self[], param1)
+method validate*(self: VirtualQAbstractSpinBox, input: openArray[char], pos: ptr cint): cint {.base.} =
+  QAbstractSpinBoxvalidate(self[], input, pos)
+method fixup*(self: VirtualQAbstractSpinBox, input: openArray[char]): void {.base.} =
+  QAbstractSpinBoxfixup(self[], input)
+method stepBy*(self: VirtualQAbstractSpinBox, steps: cint): void {.base.} =
+  QAbstractSpinBoxstepBy(self[], steps)
+method clear*(self: VirtualQAbstractSpinBox): void {.base.} =
+  QAbstractSpinBoxclear(self[])
+method resizeEvent*(self: VirtualQAbstractSpinBox, event: gen_qevent_types.QResizeEvent): void {.base.} =
+  QAbstractSpinBoxresizeEvent(self[], event)
+method keyPressEvent*(self: VirtualQAbstractSpinBox, event: gen_qevent_types.QKeyEvent): void {.base.} =
+  QAbstractSpinBoxkeyPressEvent(self[], event)
+method keyReleaseEvent*(self: VirtualQAbstractSpinBox, event: gen_qevent_types.QKeyEvent): void {.base.} =
+  QAbstractSpinBoxkeyReleaseEvent(self[], event)
+method wheelEvent*(self: VirtualQAbstractSpinBox, event: gen_qevent_types.QWheelEvent): void {.base.} =
+  QAbstractSpinBoxwheelEvent(self[], event)
+method focusInEvent*(self: VirtualQAbstractSpinBox, event: gen_qevent_types.QFocusEvent): void {.base.} =
+  QAbstractSpinBoxfocusInEvent(self[], event)
+method focusOutEvent*(self: VirtualQAbstractSpinBox, event: gen_qevent_types.QFocusEvent): void {.base.} =
+  QAbstractSpinBoxfocusOutEvent(self[], event)
+method contextMenuEvent*(self: VirtualQAbstractSpinBox, event: gen_qevent_types.QContextMenuEvent): void {.base.} =
+  QAbstractSpinBoxcontextMenuEvent(self[], event)
+method changeEvent*(self: VirtualQAbstractSpinBox, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QAbstractSpinBoxchangeEvent(self[], event)
+method closeEvent*(self: VirtualQAbstractSpinBox, event: gen_qevent_types.QCloseEvent): void {.base.} =
+  QAbstractSpinBoxcloseEvent(self[], event)
+method hideEvent*(self: VirtualQAbstractSpinBox, event: gen_qevent_types.QHideEvent): void {.base.} =
+  QAbstractSpinBoxhideEvent(self[], event)
+method mousePressEvent*(self: VirtualQAbstractSpinBox, event: gen_qevent_types.QMouseEvent): void {.base.} =
+  QAbstractSpinBoxmousePressEvent(self[], event)
+method mouseReleaseEvent*(self: VirtualQAbstractSpinBox, event: gen_qevent_types.QMouseEvent): void {.base.} =
+  QAbstractSpinBoxmouseReleaseEvent(self[], event)
+method mouseMoveEvent*(self: VirtualQAbstractSpinBox, event: gen_qevent_types.QMouseEvent): void {.base.} =
+  QAbstractSpinBoxmouseMoveEvent(self[], event)
+method timerEvent*(self: VirtualQAbstractSpinBox, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QAbstractSpinBoxtimerEvent(self[], event)
+method paintEvent*(self: VirtualQAbstractSpinBox, event: gen_qevent_types.QPaintEvent): void {.base.} =
+  QAbstractSpinBoxpaintEvent(self[], event)
+method showEvent*(self: VirtualQAbstractSpinBox, event: gen_qevent_types.QShowEvent): void {.base.} =
+  QAbstractSpinBoxshowEvent(self[], event)
+method initStyleOption*(self: VirtualQAbstractSpinBox, option: gen_qstyleoption_types.QStyleOptionSpinBox): void {.base.} =
+  QAbstractSpinBoxinitStyleOption(self[], option)
+method stepEnabled*(self: VirtualQAbstractSpinBox): cint {.base.} =
+  QAbstractSpinBoxstepEnabled(self[])
+method devType*(self: VirtualQAbstractSpinBox): cint {.base.} =
+  QAbstractSpinBoxdevType(self[])
+method setVisible*(self: VirtualQAbstractSpinBox, visible: bool): void {.base.} =
+  QAbstractSpinBoxsetVisible(self[], visible)
+method heightForWidth*(self: VirtualQAbstractSpinBox, param1: cint): cint {.base.} =
+  QAbstractSpinBoxheightForWidth(self[], param1)
+method hasHeightForWidth*(self: VirtualQAbstractSpinBox): bool {.base.} =
+  QAbstractSpinBoxhasHeightForWidth(self[])
+method paintEngine*(self: VirtualQAbstractSpinBox): gen_qpaintengine_types.QPaintEngine {.base.} =
+  QAbstractSpinBoxpaintEngine(self[])
+method mouseDoubleClickEvent*(self: VirtualQAbstractSpinBox, event: gen_qevent_types.QMouseEvent): void {.base.} =
+  QAbstractSpinBoxmouseDoubleClickEvent(self[], event)
+method enterEvent*(self: VirtualQAbstractSpinBox, event: gen_qevent_types.QEnterEvent): void {.base.} =
+  QAbstractSpinBoxenterEvent(self[], event)
+method leaveEvent*(self: VirtualQAbstractSpinBox, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QAbstractSpinBoxleaveEvent(self[], event)
+method moveEvent*(self: VirtualQAbstractSpinBox, event: gen_qevent_types.QMoveEvent): void {.base.} =
+  QAbstractSpinBoxmoveEvent(self[], event)
+method tabletEvent*(self: VirtualQAbstractSpinBox, event: gen_qevent_types.QTabletEvent): void {.base.} =
+  QAbstractSpinBoxtabletEvent(self[], event)
+method actionEvent*(self: VirtualQAbstractSpinBox, event: gen_qevent_types.QActionEvent): void {.base.} =
+  QAbstractSpinBoxactionEvent(self[], event)
+method dragEnterEvent*(self: VirtualQAbstractSpinBox, event: gen_qevent_types.QDragEnterEvent): void {.base.} =
+  QAbstractSpinBoxdragEnterEvent(self[], event)
+method dragMoveEvent*(self: VirtualQAbstractSpinBox, event: gen_qevent_types.QDragMoveEvent): void {.base.} =
+  QAbstractSpinBoxdragMoveEvent(self[], event)
+method dragLeaveEvent*(self: VirtualQAbstractSpinBox, event: gen_qevent_types.QDragLeaveEvent): void {.base.} =
+  QAbstractSpinBoxdragLeaveEvent(self[], event)
+method dropEvent*(self: VirtualQAbstractSpinBox, event: gen_qevent_types.QDropEvent): void {.base.} =
+  QAbstractSpinBoxdropEvent(self[], event)
+method nativeEvent*(self: VirtualQAbstractSpinBox, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
+  QAbstractSpinBoxnativeEvent(self[], eventType, message, resultVal)
+method metric*(self: VirtualQAbstractSpinBox, param1: cint): cint {.base.} =
+  QAbstractSpinBoxmetric(self[], param1)
+method initPainter*(self: VirtualQAbstractSpinBox, painter: gen_qpainter_types.QPainter): void {.base.} =
+  QAbstractSpinBoxinitPainter(self[], painter)
+method redirected*(self: VirtualQAbstractSpinBox, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.base.} =
+  QAbstractSpinBoxredirected(self[], offset)
+method sharedPainter*(self: VirtualQAbstractSpinBox): gen_qpainter_types.QPainter {.base.} =
+  QAbstractSpinBoxsharedPainter(self[])
+method inputMethodEvent*(self: VirtualQAbstractSpinBox, param1: gen_qevent_types.QInputMethodEvent): void {.base.} =
+  QAbstractSpinBoxinputMethodEvent(self[], param1)
+method focusNextPrevChild*(self: VirtualQAbstractSpinBox, next: bool): bool {.base.} =
+  QAbstractSpinBoxfocusNextPrevChild(self[], next)
+method eventFilter*(self: VirtualQAbstractSpinBox, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QAbstractSpinBoxeventFilter(self[], watched, event)
+method childEvent*(self: VirtualQAbstractSpinBox, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QAbstractSpinBoxchildEvent(self[], event)
+method customEvent*(self: VirtualQAbstractSpinBox, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QAbstractSpinBoxcustomEvent(self[], event)
+method connectNotify*(self: VirtualQAbstractSpinBox, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QAbstractSpinBoxconnectNotify(self[], signal)
+method disconnectNotify*(self: VirtualQAbstractSpinBox, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QAbstractSpinBoxdisconnectNotify(self[], signal)
+
 proc fcQAbstractSpinBox_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQAbstractSpinBox](fcQAbstractSpinBox_vdata(self)[])
   var virtualReturn = inst.metaObject()
   virtualReturn.h
 
-method metacast*(self: VirtualQAbstractSpinBox, param1: cstring): pointer {.base.} =
-  QAbstractSpinBoxmetacast(self[], param1)
 proc fcQAbstractSpinBox_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQAbstractSpinBox](fcQAbstractSpinBox_vdata(self)[])
   let slotval1 = (param1)
   var virtualReturn = inst.metacast(slotval1)
   virtualReturn
 
-method metacall*(self: VirtualQAbstractSpinBox, param1: cint, param2: cint, param3: pointer): cint {.base.} =
-  QAbstractSpinBoxmetacall(self[], param1, param2, param3)
 proc fcQAbstractSpinBox_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQAbstractSpinBox](fcQAbstractSpinBox_vdata(self)[])
   let slotval1 = cint(param1)
@@ -1111,38 +1223,28 @@ proc fcQAbstractSpinBox_method_callback_metacall(self: pointer, param1: cint, pa
   var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
-method sizeHint*(self: VirtualQAbstractSpinBox): gen_qsize_types.QSize {.base.} =
-  QAbstractSpinBoxsizeHint(self[])
 proc fcQAbstractSpinBox_method_callback_sizeHint(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQAbstractSpinBox](fcQAbstractSpinBox_vdata(self)[])
   var virtualReturn = inst.sizeHint()
   virtualReturn.h
 
-method minimumSizeHint*(self: VirtualQAbstractSpinBox): gen_qsize_types.QSize {.base.} =
-  QAbstractSpinBoxminimumSizeHint(self[])
 proc fcQAbstractSpinBox_method_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQAbstractSpinBox](fcQAbstractSpinBox_vdata(self)[])
   var virtualReturn = inst.minimumSizeHint()
   virtualReturn.h
 
-method event*(self: VirtualQAbstractSpinBox, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QAbstractSpinBoxevent(self[], event)
 proc fcQAbstractSpinBox_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQAbstractSpinBox](fcQAbstractSpinBox_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
-method inputMethodQuery*(self: VirtualQAbstractSpinBox, param1: cint): gen_qvariant_types.QVariant {.base.} =
-  QAbstractSpinBoxinputMethodQuery(self[], param1)
 proc fcQAbstractSpinBox_method_callback_inputMethodQuery(self: pointer, param1: cint): pointer {.cdecl.} =
   let inst = cast[VirtualQAbstractSpinBox](fcQAbstractSpinBox_vdata(self)[])
   let slotval1 = cint(param1)
   var virtualReturn = inst.inputMethodQuery(slotval1)
   virtualReturn.h
 
-method validate*(self: VirtualQAbstractSpinBox, input: openArray[char], pos: ptr cint): cint {.base.} =
-  QAbstractSpinBoxvalidate(self[], input, pos)
 proc fcQAbstractSpinBox_method_callback_validate(self: pointer, input: struct_miqt_string, pos: ptr cint): cint {.cdecl.} =
   let inst = cast[VirtualQAbstractSpinBox](fcQAbstractSpinBox_vdata(self)[])
   let vinput_ms = input
@@ -1153,8 +1255,6 @@ proc fcQAbstractSpinBox_method_callback_validate(self: pointer, input: struct_mi
   var virtualReturn = inst.validate(slotval1, slotval2)
   cint(virtualReturn)
 
-method fixup*(self: VirtualQAbstractSpinBox, input: openArray[char]): void {.base.} =
-  QAbstractSpinBoxfixup(self[], input)
 proc fcQAbstractSpinBox_method_callback_fixup(self: pointer, input: struct_miqt_string): void {.cdecl.} =
   let inst = cast[VirtualQAbstractSpinBox](fcQAbstractSpinBox_vdata(self)[])
   let vinput_ms = input
@@ -1163,253 +1263,181 @@ proc fcQAbstractSpinBox_method_callback_fixup(self: pointer, input: struct_miqt_
   let slotval1 = vinputx_ret
   inst.fixup(slotval1)
 
-method stepBy*(self: VirtualQAbstractSpinBox, steps: cint): void {.base.} =
-  QAbstractSpinBoxstepBy(self[], steps)
 proc fcQAbstractSpinBox_method_callback_stepBy(self: pointer, steps: cint): void {.cdecl.} =
   let inst = cast[VirtualQAbstractSpinBox](fcQAbstractSpinBox_vdata(self)[])
   let slotval1 = steps
   inst.stepBy(slotval1)
 
-method clear*(self: VirtualQAbstractSpinBox): void {.base.} =
-  QAbstractSpinBoxclear(self[])
 proc fcQAbstractSpinBox_method_callback_clear(self: pointer): void {.cdecl.} =
   let inst = cast[VirtualQAbstractSpinBox](fcQAbstractSpinBox_vdata(self)[])
   inst.clear()
 
-method resizeEvent*(self: VirtualQAbstractSpinBox, event: gen_qevent_types.QResizeEvent): void {.base.} =
-  QAbstractSpinBoxresizeEvent(self[], event)
 proc fcQAbstractSpinBox_method_callback_resizeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQAbstractSpinBox](fcQAbstractSpinBox_vdata(self)[])
   let slotval1 = gen_qevent_types.QResizeEvent(h: event, owned: false)
   inst.resizeEvent(slotval1)
 
-method keyPressEvent*(self: VirtualQAbstractSpinBox, event: gen_qevent_types.QKeyEvent): void {.base.} =
-  QAbstractSpinBoxkeyPressEvent(self[], event)
 proc fcQAbstractSpinBox_method_callback_keyPressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQAbstractSpinBox](fcQAbstractSpinBox_vdata(self)[])
   let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   inst.keyPressEvent(slotval1)
 
-method keyReleaseEvent*(self: VirtualQAbstractSpinBox, event: gen_qevent_types.QKeyEvent): void {.base.} =
-  QAbstractSpinBoxkeyReleaseEvent(self[], event)
 proc fcQAbstractSpinBox_method_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQAbstractSpinBox](fcQAbstractSpinBox_vdata(self)[])
   let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   inst.keyReleaseEvent(slotval1)
 
-method wheelEvent*(self: VirtualQAbstractSpinBox, event: gen_qevent_types.QWheelEvent): void {.base.} =
-  QAbstractSpinBoxwheelEvent(self[], event)
 proc fcQAbstractSpinBox_method_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQAbstractSpinBox](fcQAbstractSpinBox_vdata(self)[])
   let slotval1 = gen_qevent_types.QWheelEvent(h: event, owned: false)
   inst.wheelEvent(slotval1)
 
-method focusInEvent*(self: VirtualQAbstractSpinBox, event: gen_qevent_types.QFocusEvent): void {.base.} =
-  QAbstractSpinBoxfocusInEvent(self[], event)
 proc fcQAbstractSpinBox_method_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQAbstractSpinBox](fcQAbstractSpinBox_vdata(self)[])
   let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   inst.focusInEvent(slotval1)
 
-method focusOutEvent*(self: VirtualQAbstractSpinBox, event: gen_qevent_types.QFocusEvent): void {.base.} =
-  QAbstractSpinBoxfocusOutEvent(self[], event)
 proc fcQAbstractSpinBox_method_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQAbstractSpinBox](fcQAbstractSpinBox_vdata(self)[])
   let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   inst.focusOutEvent(slotval1)
 
-method contextMenuEvent*(self: VirtualQAbstractSpinBox, event: gen_qevent_types.QContextMenuEvent): void {.base.} =
-  QAbstractSpinBoxcontextMenuEvent(self[], event)
 proc fcQAbstractSpinBox_method_callback_contextMenuEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQAbstractSpinBox](fcQAbstractSpinBox_vdata(self)[])
   let slotval1 = gen_qevent_types.QContextMenuEvent(h: event, owned: false)
   inst.contextMenuEvent(slotval1)
 
-method changeEvent*(self: VirtualQAbstractSpinBox, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QAbstractSpinBoxchangeEvent(self[], event)
 proc fcQAbstractSpinBox_method_callback_changeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQAbstractSpinBox](fcQAbstractSpinBox_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.changeEvent(slotval1)
 
-method closeEvent*(self: VirtualQAbstractSpinBox, event: gen_qevent_types.QCloseEvent): void {.base.} =
-  QAbstractSpinBoxcloseEvent(self[], event)
 proc fcQAbstractSpinBox_method_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQAbstractSpinBox](fcQAbstractSpinBox_vdata(self)[])
   let slotval1 = gen_qevent_types.QCloseEvent(h: event, owned: false)
   inst.closeEvent(slotval1)
 
-method hideEvent*(self: VirtualQAbstractSpinBox, event: gen_qevent_types.QHideEvent): void {.base.} =
-  QAbstractSpinBoxhideEvent(self[], event)
 proc fcQAbstractSpinBox_method_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQAbstractSpinBox](fcQAbstractSpinBox_vdata(self)[])
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   inst.hideEvent(slotval1)
 
-method mousePressEvent*(self: VirtualQAbstractSpinBox, event: gen_qevent_types.QMouseEvent): void {.base.} =
-  QAbstractSpinBoxmousePressEvent(self[], event)
 proc fcQAbstractSpinBox_method_callback_mousePressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQAbstractSpinBox](fcQAbstractSpinBox_vdata(self)[])
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mousePressEvent(slotval1)
 
-method mouseReleaseEvent*(self: VirtualQAbstractSpinBox, event: gen_qevent_types.QMouseEvent): void {.base.} =
-  QAbstractSpinBoxmouseReleaseEvent(self[], event)
 proc fcQAbstractSpinBox_method_callback_mouseReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQAbstractSpinBox](fcQAbstractSpinBox_vdata(self)[])
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mouseReleaseEvent(slotval1)
 
-method mouseMoveEvent*(self: VirtualQAbstractSpinBox, event: gen_qevent_types.QMouseEvent): void {.base.} =
-  QAbstractSpinBoxmouseMoveEvent(self[], event)
 proc fcQAbstractSpinBox_method_callback_mouseMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQAbstractSpinBox](fcQAbstractSpinBox_vdata(self)[])
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mouseMoveEvent(slotval1)
 
-method timerEvent*(self: VirtualQAbstractSpinBox, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
-  QAbstractSpinBoxtimerEvent(self[], event)
 proc fcQAbstractSpinBox_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQAbstractSpinBox](fcQAbstractSpinBox_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
-method paintEvent*(self: VirtualQAbstractSpinBox, event: gen_qevent_types.QPaintEvent): void {.base.} =
-  QAbstractSpinBoxpaintEvent(self[], event)
 proc fcQAbstractSpinBox_method_callback_paintEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQAbstractSpinBox](fcQAbstractSpinBox_vdata(self)[])
   let slotval1 = gen_qevent_types.QPaintEvent(h: event, owned: false)
   inst.paintEvent(slotval1)
 
-method showEvent*(self: VirtualQAbstractSpinBox, event: gen_qevent_types.QShowEvent): void {.base.} =
-  QAbstractSpinBoxshowEvent(self[], event)
 proc fcQAbstractSpinBox_method_callback_showEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQAbstractSpinBox](fcQAbstractSpinBox_vdata(self)[])
   let slotval1 = gen_qevent_types.QShowEvent(h: event, owned: false)
   inst.showEvent(slotval1)
 
-method initStyleOption*(self: VirtualQAbstractSpinBox, option: gen_qstyleoption_types.QStyleOptionSpinBox): void {.base.} =
-  QAbstractSpinBoxinitStyleOption(self[], option)
 proc fcQAbstractSpinBox_method_callback_initStyleOption(self: pointer, option: pointer): void {.cdecl.} =
   let inst = cast[VirtualQAbstractSpinBox](fcQAbstractSpinBox_vdata(self)[])
   let slotval1 = gen_qstyleoption_types.QStyleOptionSpinBox(h: option, owned: false)
   inst.initStyleOption(slotval1)
 
-method stepEnabled*(self: VirtualQAbstractSpinBox): cint {.base.} =
-  QAbstractSpinBoxstepEnabled(self[])
 proc fcQAbstractSpinBox_method_callback_stepEnabled(self: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQAbstractSpinBox](fcQAbstractSpinBox_vdata(self)[])
   var virtualReturn = inst.stepEnabled()
   cint(virtualReturn)
 
-method devType*(self: VirtualQAbstractSpinBox): cint {.base.} =
-  QAbstractSpinBoxdevType(self[])
 proc fcQAbstractSpinBox_method_callback_devType(self: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQAbstractSpinBox](fcQAbstractSpinBox_vdata(self)[])
   var virtualReturn = inst.devType()
   virtualReturn
 
-method setVisible*(self: VirtualQAbstractSpinBox, visible: bool): void {.base.} =
-  QAbstractSpinBoxsetVisible(self[], visible)
 proc fcQAbstractSpinBox_method_callback_setVisible(self: pointer, visible: bool): void {.cdecl.} =
   let inst = cast[VirtualQAbstractSpinBox](fcQAbstractSpinBox_vdata(self)[])
   let slotval1 = visible
   inst.setVisible(slotval1)
 
-method heightForWidth*(self: VirtualQAbstractSpinBox, param1: cint): cint {.base.} =
-  QAbstractSpinBoxheightForWidth(self[], param1)
 proc fcQAbstractSpinBox_method_callback_heightForWidth(self: pointer, param1: cint): cint {.cdecl.} =
   let inst = cast[VirtualQAbstractSpinBox](fcQAbstractSpinBox_vdata(self)[])
   let slotval1 = param1
   var virtualReturn = inst.heightForWidth(slotval1)
   virtualReturn
 
-method hasHeightForWidth*(self: VirtualQAbstractSpinBox): bool {.base.} =
-  QAbstractSpinBoxhasHeightForWidth(self[])
 proc fcQAbstractSpinBox_method_callback_hasHeightForWidth(self: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQAbstractSpinBox](fcQAbstractSpinBox_vdata(self)[])
   var virtualReturn = inst.hasHeightForWidth()
   virtualReturn
 
-method paintEngine*(self: VirtualQAbstractSpinBox): gen_qpaintengine_types.QPaintEngine {.base.} =
-  QAbstractSpinBoxpaintEngine(self[])
 proc fcQAbstractSpinBox_method_callback_paintEngine(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQAbstractSpinBox](fcQAbstractSpinBox_vdata(self)[])
   var virtualReturn = inst.paintEngine()
   virtualReturn.h
 
-method mouseDoubleClickEvent*(self: VirtualQAbstractSpinBox, event: gen_qevent_types.QMouseEvent): void {.base.} =
-  QAbstractSpinBoxmouseDoubleClickEvent(self[], event)
 proc fcQAbstractSpinBox_method_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQAbstractSpinBox](fcQAbstractSpinBox_vdata(self)[])
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mouseDoubleClickEvent(slotval1)
 
-method enterEvent*(self: VirtualQAbstractSpinBox, event: gen_qevent_types.QEnterEvent): void {.base.} =
-  QAbstractSpinBoxenterEvent(self[], event)
 proc fcQAbstractSpinBox_method_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQAbstractSpinBox](fcQAbstractSpinBox_vdata(self)[])
   let slotval1 = gen_qevent_types.QEnterEvent(h: event, owned: false)
   inst.enterEvent(slotval1)
 
-method leaveEvent*(self: VirtualQAbstractSpinBox, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QAbstractSpinBoxleaveEvent(self[], event)
 proc fcQAbstractSpinBox_method_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQAbstractSpinBox](fcQAbstractSpinBox_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.leaveEvent(slotval1)
 
-method moveEvent*(self: VirtualQAbstractSpinBox, event: gen_qevent_types.QMoveEvent): void {.base.} =
-  QAbstractSpinBoxmoveEvent(self[], event)
 proc fcQAbstractSpinBox_method_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQAbstractSpinBox](fcQAbstractSpinBox_vdata(self)[])
   let slotval1 = gen_qevent_types.QMoveEvent(h: event, owned: false)
   inst.moveEvent(slotval1)
 
-method tabletEvent*(self: VirtualQAbstractSpinBox, event: gen_qevent_types.QTabletEvent): void {.base.} =
-  QAbstractSpinBoxtabletEvent(self[], event)
 proc fcQAbstractSpinBox_method_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQAbstractSpinBox](fcQAbstractSpinBox_vdata(self)[])
   let slotval1 = gen_qevent_types.QTabletEvent(h: event, owned: false)
   inst.tabletEvent(slotval1)
 
-method actionEvent*(self: VirtualQAbstractSpinBox, event: gen_qevent_types.QActionEvent): void {.base.} =
-  QAbstractSpinBoxactionEvent(self[], event)
 proc fcQAbstractSpinBox_method_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQAbstractSpinBox](fcQAbstractSpinBox_vdata(self)[])
   let slotval1 = gen_qevent_types.QActionEvent(h: event, owned: false)
   inst.actionEvent(slotval1)
 
-method dragEnterEvent*(self: VirtualQAbstractSpinBox, event: gen_qevent_types.QDragEnterEvent): void {.base.} =
-  QAbstractSpinBoxdragEnterEvent(self[], event)
 proc fcQAbstractSpinBox_method_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQAbstractSpinBox](fcQAbstractSpinBox_vdata(self)[])
   let slotval1 = gen_qevent_types.QDragEnterEvent(h: event, owned: false)
   inst.dragEnterEvent(slotval1)
 
-method dragMoveEvent*(self: VirtualQAbstractSpinBox, event: gen_qevent_types.QDragMoveEvent): void {.base.} =
-  QAbstractSpinBoxdragMoveEvent(self[], event)
 proc fcQAbstractSpinBox_method_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQAbstractSpinBox](fcQAbstractSpinBox_vdata(self)[])
   let slotval1 = gen_qevent_types.QDragMoveEvent(h: event, owned: false)
   inst.dragMoveEvent(slotval1)
 
-method dragLeaveEvent*(self: VirtualQAbstractSpinBox, event: gen_qevent_types.QDragLeaveEvent): void {.base.} =
-  QAbstractSpinBoxdragLeaveEvent(self[], event)
 proc fcQAbstractSpinBox_method_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQAbstractSpinBox](fcQAbstractSpinBox_vdata(self)[])
   let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event, owned: false)
   inst.dragLeaveEvent(slotval1)
 
-method dropEvent*(self: VirtualQAbstractSpinBox, event: gen_qevent_types.QDropEvent): void {.base.} =
-  QAbstractSpinBoxdropEvent(self[], event)
 proc fcQAbstractSpinBox_method_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQAbstractSpinBox](fcQAbstractSpinBox_vdata(self)[])
   let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
   inst.dropEvent(slotval1)
 
-method nativeEvent*(self: VirtualQAbstractSpinBox, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
-  QAbstractSpinBoxnativeEvent(self[], eventType, message, resultVal)
 proc fcQAbstractSpinBox_method_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
   let inst = cast[VirtualQAbstractSpinBox](fcQAbstractSpinBox_vdata(self)[])
   var veventType_bytearray = eventType
@@ -1421,53 +1449,39 @@ proc fcQAbstractSpinBox_method_callback_nativeEvent(self: pointer, eventType: st
   var virtualReturn = inst.nativeEvent(slotval1, slotval2, slotval3)
   virtualReturn
 
-method metric*(self: VirtualQAbstractSpinBox, param1: cint): cint {.base.} =
-  QAbstractSpinBoxmetric(self[], param1)
 proc fcQAbstractSpinBox_method_callback_metric(self: pointer, param1: cint): cint {.cdecl.} =
   let inst = cast[VirtualQAbstractSpinBox](fcQAbstractSpinBox_vdata(self)[])
   let slotval1 = cint(param1)
   var virtualReturn = inst.metric(slotval1)
   virtualReturn
 
-method initPainter*(self: VirtualQAbstractSpinBox, painter: gen_qpainter_types.QPainter): void {.base.} =
-  QAbstractSpinBoxinitPainter(self[], painter)
 proc fcQAbstractSpinBox_method_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
   let inst = cast[VirtualQAbstractSpinBox](fcQAbstractSpinBox_vdata(self)[])
   let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
   inst.initPainter(slotval1)
 
-method redirected*(self: VirtualQAbstractSpinBox, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.base.} =
-  QAbstractSpinBoxredirected(self[], offset)
 proc fcQAbstractSpinBox_method_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQAbstractSpinBox](fcQAbstractSpinBox_vdata(self)[])
   let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
   var virtualReturn = inst.redirected(slotval1)
   virtualReturn.h
 
-method sharedPainter*(self: VirtualQAbstractSpinBox): gen_qpainter_types.QPainter {.base.} =
-  QAbstractSpinBoxsharedPainter(self[])
 proc fcQAbstractSpinBox_method_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQAbstractSpinBox](fcQAbstractSpinBox_vdata(self)[])
   var virtualReturn = inst.sharedPainter()
   virtualReturn.h
 
-method inputMethodEvent*(self: VirtualQAbstractSpinBox, param1: gen_qevent_types.QInputMethodEvent): void {.base.} =
-  QAbstractSpinBoxinputMethodEvent(self[], param1)
 proc fcQAbstractSpinBox_method_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQAbstractSpinBox](fcQAbstractSpinBox_vdata(self)[])
   let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1, owned: false)
   inst.inputMethodEvent(slotval1)
 
-method focusNextPrevChild*(self: VirtualQAbstractSpinBox, next: bool): bool {.base.} =
-  QAbstractSpinBoxfocusNextPrevChild(self[], next)
 proc fcQAbstractSpinBox_method_callback_focusNextPrevChild(self: pointer, next: bool): bool {.cdecl.} =
   let inst = cast[VirtualQAbstractSpinBox](fcQAbstractSpinBox_vdata(self)[])
   let slotval1 = next
   var virtualReturn = inst.focusNextPrevChild(slotval1)
   virtualReturn
 
-method eventFilter*(self: VirtualQAbstractSpinBox, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QAbstractSpinBoxeventFilter(self[], watched, event)
 proc fcQAbstractSpinBox_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQAbstractSpinBox](fcQAbstractSpinBox_vdata(self)[])
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
@@ -1475,33 +1489,26 @@ proc fcQAbstractSpinBox_method_callback_eventFilter(self: pointer, watched: poin
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
-method childEvent*(self: VirtualQAbstractSpinBox, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
-  QAbstractSpinBoxchildEvent(self[], event)
 proc fcQAbstractSpinBox_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQAbstractSpinBox](fcQAbstractSpinBox_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
-method customEvent*(self: VirtualQAbstractSpinBox, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QAbstractSpinBoxcustomEvent(self[], event)
 proc fcQAbstractSpinBox_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQAbstractSpinBox](fcQAbstractSpinBox_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
-method connectNotify*(self: VirtualQAbstractSpinBox, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QAbstractSpinBoxconnectNotify(self[], signal)
 proc fcQAbstractSpinBox_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQAbstractSpinBox](fcQAbstractSpinBox_vdata(self)[])
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
-method disconnectNotify*(self: VirtualQAbstractSpinBox, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QAbstractSpinBoxdisconnectNotify(self[], signal)
 proc fcQAbstractSpinBox_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQAbstractSpinBox](fcQAbstractSpinBox_vdata(self)[])
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
+
 
 proc lineEdit*(self: gen_qabstractspinbox_types.QAbstractSpinBox): gen_qlineedit_types.QLineEdit =
   gen_qlineedit_types.QLineEdit(h: fcQAbstractSpinBox_protectedbase_lineEdit(self.h), owned: false)

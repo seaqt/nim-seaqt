@@ -301,7 +301,7 @@ proc fcQNetworkReply_slot_callback_socketStartedConnecting_release(slot: int) {.
   let nimfunc = cast[ref QNetworkReplysocketStartedConnectingSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onsocketStartedConnecting*(self: gen_qnetworkreply_types.QNetworkReply, slot: QNetworkReplysocketStartedConnectingSlot) =
+proc onSocketStartedConnecting*(self: gen_qnetworkreply_types.QNetworkReply, slot: QNetworkReplysocketStartedConnectingSlot) =
   var tmp = new QNetworkReplysocketStartedConnectingSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -319,7 +319,7 @@ proc fcQNetworkReply_slot_callback_requestSent_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QNetworkReplyrequestSentSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onrequestSent*(self: gen_qnetworkreply_types.QNetworkReply, slot: QNetworkReplyrequestSentSlot) =
+proc onRequestSent*(self: gen_qnetworkreply_types.QNetworkReply, slot: QNetworkReplyrequestSentSlot) =
   var tmp = new QNetworkReplyrequestSentSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -337,7 +337,7 @@ proc fcQNetworkReply_slot_callback_metaDataChanged_release(slot: int) {.cdecl.} 
   let nimfunc = cast[ref QNetworkReplymetaDataChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onmetaDataChanged*(self: gen_qnetworkreply_types.QNetworkReply, slot: QNetworkReplymetaDataChangedSlot) =
+proc onMetaDataChanged*(self: gen_qnetworkreply_types.QNetworkReply, slot: QNetworkReplymetaDataChangedSlot) =
   var tmp = new QNetworkReplymetaDataChangedSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -355,7 +355,7 @@ proc fcQNetworkReply_slot_callback_finished_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QNetworkReplyfinishedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onfinished*(self: gen_qnetworkreply_types.QNetworkReply, slot: QNetworkReplyfinishedSlot) =
+proc onFinished*(self: gen_qnetworkreply_types.QNetworkReply, slot: QNetworkReplyfinishedSlot) =
   var tmp = new QNetworkReplyfinishedSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -375,7 +375,7 @@ proc fcQNetworkReply_slot_callback_errorOccurred_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QNetworkReplyerrorOccurredSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onerrorOccurred*(self: gen_qnetworkreply_types.QNetworkReply, slot: QNetworkReplyerrorOccurredSlot) =
+proc onErrorOccurred*(self: gen_qnetworkreply_types.QNetworkReply, slot: QNetworkReplyerrorOccurredSlot) =
   var tmp = new QNetworkReplyerrorOccurredSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -393,7 +393,7 @@ proc fcQNetworkReply_slot_callback_encrypted_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QNetworkReplyencryptedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onencrypted*(self: gen_qnetworkreply_types.QNetworkReply, slot: QNetworkReplyencryptedSlot) =
+proc onEncrypted*(self: gen_qnetworkreply_types.QNetworkReply, slot: QNetworkReplyencryptedSlot) =
   var tmp = new QNetworkReplyencryptedSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -423,7 +423,7 @@ proc fcQNetworkReply_slot_callback_sslErrors_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QNetworkReplysslErrorsSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onsslErrors*(self: gen_qnetworkreply_types.QNetworkReply, slot: QNetworkReplysslErrorsSlot) =
+proc onSslErrors*(self: gen_qnetworkreply_types.QNetworkReply, slot: QNetworkReplysslErrorsSlot) =
   var tmp = new QNetworkReplysslErrorsSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -443,7 +443,7 @@ proc fcQNetworkReply_slot_callback_preSharedKeyAuthenticationRequired_release(sl
   let nimfunc = cast[ref QNetworkReplypreSharedKeyAuthenticationRequiredSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onpreSharedKeyAuthenticationRequired*(self: gen_qnetworkreply_types.QNetworkReply, slot: QNetworkReplypreSharedKeyAuthenticationRequiredSlot) =
+proc onPreSharedKeyAuthenticationRequired*(self: gen_qnetworkreply_types.QNetworkReply, slot: QNetworkReplypreSharedKeyAuthenticationRequiredSlot) =
   var tmp = new QNetworkReplypreSharedKeyAuthenticationRequiredSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -463,7 +463,7 @@ proc fcQNetworkReply_slot_callback_redirected_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QNetworkReplyredirectedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onredirected*(self: gen_qnetworkreply_types.QNetworkReply, slot: QNetworkReplyredirectedSlot) =
+proc onRedirected*(self: gen_qnetworkreply_types.QNetworkReply, slot: QNetworkReplyredirectedSlot) =
   var tmp = new QNetworkReplyredirectedSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -481,7 +481,7 @@ proc fcQNetworkReply_slot_callback_redirectAllowed_release(slot: int) {.cdecl.} 
   let nimfunc = cast[ref QNetworkReplyredirectAllowedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onredirectAllowed*(self: gen_qnetworkreply_types.QNetworkReply, slot: QNetworkReplyredirectAllowedSlot) =
+proc onRedirectAllowed*(self: gen_qnetworkreply_types.QNetworkReply, slot: QNetworkReplyredirectAllowedSlot) =
   var tmp = new QNetworkReplyredirectAllowedSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -503,7 +503,7 @@ proc fcQNetworkReply_slot_callback_uploadProgress_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QNetworkReplyuploadProgressSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onuploadProgress*(self: gen_qnetworkreply_types.QNetworkReply, slot: QNetworkReplyuploadProgressSlot) =
+proc onUploadProgress*(self: gen_qnetworkreply_types.QNetworkReply, slot: QNetworkReplyuploadProgressSlot) =
   var tmp = new QNetworkReplyuploadProgressSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -525,7 +525,7 @@ proc fcQNetworkReply_slot_callback_downloadProgress_release(slot: int) {.cdecl.}
   let nimfunc = cast[ref QNetworkReplydownloadProgressSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc ondownloadProgress*(self: gen_qnetworkreply_types.QNetworkReply, slot: QNetworkReplydownloadProgressSlot) =
+proc onDownloadProgress*(self: gen_qnetworkreply_types.QNetworkReply, slot: QNetworkReplydownloadProgressSlot) =
   var tmp = new QNetworkReplydownloadProgressSlot
   tmp[] = slot
   GC_ref(tmp)

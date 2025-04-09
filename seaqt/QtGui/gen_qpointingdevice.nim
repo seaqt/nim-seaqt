@@ -102,6 +102,7 @@ proc fcQPointingDevice_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string 
 proc fcQPointingDevice_primaryPointingDevice1(seatName: struct_miqt_string): pointer {.importc: "QPointingDevice_primaryPointingDevice1".}
 proc fcQPointingDevice_vdata(self: pointer): ptr pointer {.importc: "QPointingDevice_vdata".}
 proc fvdata_cQPointingDevice(self: pointer): pointer {.importc: "vdata_QPointingDevice".}
+
 type cQPointingDeviceVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -216,7 +217,7 @@ proc fcQPointingDevice_slot_callback_grabChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QPointingDevicegrabChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc ongrabChanged*(self: gen_qpointingdevice_types.QPointingDevice, slot: QPointingDevicegrabChangedSlot) =
+proc onGrabChanged*(self: gen_qpointingdevice_types.QPointingDevice, slot: QPointingDevicegrabChangedSlot) =
   var tmp = new QPointingDevicegrabChangedSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -247,6 +248,7 @@ type QPointingDevicechildEventProc* = proc(self: QPointingDevice, event: gen_qco
 type QPointingDevicecustomEventProc* = proc(self: QPointingDevice, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QPointingDeviceconnectNotifyProc* = proc(self: QPointingDevice, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QPointingDevicedisconnectNotifyProc* = proc(self: QPointingDevice, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+
 type QPointingDeviceVTable* {.inheritable, pure.} = object
   vtbl: cQPointingDeviceVTable
   metaObject*: QPointingDevicemetaObjectProc
@@ -259,8 +261,37 @@ type QPointingDeviceVTable* {.inheritable, pure.} = object
   customEvent*: QPointingDevicecustomEventProc
   connectNotify*: QPointingDeviceconnectNotifyProc
   disconnectNotify*: QPointingDevicedisconnectNotifyProc
+
 proc QPointingDevicemetaObject*(self: gen_qpointingdevice_types.QPointingDevice): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQPointingDevice_virtualbase_metaObject(self.h), owned: false)
+
+proc QPointingDevicemetacast*(self: gen_qpointingdevice_types.QPointingDevice, param1: cstring): pointer =
+  fcQPointingDevice_virtualbase_metacast(self.h, param1)
+
+proc QPointingDevicemetacall*(self: gen_qpointingdevice_types.QPointingDevice, param1: cint, param2: cint, param3: pointer): cint =
+  fcQPointingDevice_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+proc QPointingDeviceevent*(self: gen_qpointingdevice_types.QPointingDevice, event: gen_qcoreevent_types.QEvent): bool =
+  fcQPointingDevice_virtualbase_event(self.h, event.h)
+
+proc QPointingDeviceeventFilter*(self: gen_qpointingdevice_types.QPointingDevice, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
+  fcQPointingDevice_virtualbase_eventFilter(self.h, watched.h, event.h)
+
+proc QPointingDevicetimerEvent*(self: gen_qpointingdevice_types.QPointingDevice, event: gen_qcoreevent_types.QTimerEvent): void =
+  fcQPointingDevice_virtualbase_timerEvent(self.h, event.h)
+
+proc QPointingDevicechildEvent*(self: gen_qpointingdevice_types.QPointingDevice, event: gen_qcoreevent_types.QChildEvent): void =
+  fcQPointingDevice_virtualbase_childEvent(self.h, event.h)
+
+proc QPointingDevicecustomEvent*(self: gen_qpointingdevice_types.QPointingDevice, event: gen_qcoreevent_types.QEvent): void =
+  fcQPointingDevice_virtualbase_customEvent(self.h, event.h)
+
+proc QPointingDeviceconnectNotify*(self: gen_qpointingdevice_types.QPointingDevice, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQPointingDevice_virtualbase_connectNotify(self.h, signal.h)
+
+proc QPointingDevicedisconnectNotify*(self: gen_qpointingdevice_types.QPointingDevice, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQPointingDevice_virtualbase_disconnectNotify(self.h, signal.h)
+
 
 proc fcQPointingDevice_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QPointingDeviceVTable](fcQPointingDevice_vdata(self)[])
@@ -271,18 +302,12 @@ proc fcQPointingDevice_vtable_callback_metaObject(self: pointer): pointer {.cdec
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QPointingDevicemetacast*(self: gen_qpointingdevice_types.QPointingDevice, param1: cstring): pointer =
-  fcQPointingDevice_virtualbase_metacast(self.h, param1)
-
 proc fcQPointingDevice_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QPointingDeviceVTable](fcQPointingDevice_vdata(self)[])
   let self = QPointingDevice(h: self)
   let slotval1 = (param1)
   var virtualReturn = vtbl[].metacast(self, slotval1)
   virtualReturn
-
-proc QPointingDevicemetacall*(self: gen_qpointingdevice_types.QPointingDevice, param1: cint, param2: cint, param3: pointer): cint =
-  fcQPointingDevice_virtualbase_metacall(self.h, cint(param1), param2, param3)
 
 proc fcQPointingDevice_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QPointingDeviceVTable](fcQPointingDevice_vdata(self)[])
@@ -293,18 +318,12 @@ proc fcQPointingDevice_vtable_callback_metacall(self: pointer, param1: cint, par
   var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QPointingDeviceevent*(self: gen_qpointingdevice_types.QPointingDevice, event: gen_qcoreevent_types.QEvent): bool =
-  fcQPointingDevice_virtualbase_event(self.h, event.h)
-
 proc fcQPointingDevice_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QPointingDeviceVTable](fcQPointingDevice_vdata(self)[])
   let self = QPointingDevice(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
-
-proc QPointingDeviceeventFilter*(self: gen_qpointingdevice_types.QPointingDevice, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
-  fcQPointingDevice_virtualbase_eventFilter(self.h, watched.h, event.h)
 
 proc fcQPointingDevice_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QPointingDeviceVTable](fcQPointingDevice_vdata(self)[])
@@ -314,17 +333,11 @@ proc fcQPointingDevice_vtable_callback_eventFilter(self: pointer, watched: point
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
-proc QPointingDevicetimerEvent*(self: gen_qpointingdevice_types.QPointingDevice, event: gen_qcoreevent_types.QTimerEvent): void =
-  fcQPointingDevice_virtualbase_timerEvent(self.h, event.h)
-
 proc fcQPointingDevice_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPointingDeviceVTable](fcQPointingDevice_vdata(self)[])
   let self = QPointingDevice(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
-
-proc QPointingDevicechildEvent*(self: gen_qpointingdevice_types.QPointingDevice, event: gen_qcoreevent_types.QChildEvent): void =
-  fcQPointingDevice_virtualbase_childEvent(self.h, event.h)
 
 proc fcQPointingDevice_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPointingDeviceVTable](fcQPointingDevice_vdata(self)[])
@@ -332,26 +345,17 @@ proc fcQPointingDevice_vtable_callback_childEvent(self: pointer, event: pointer)
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
-proc QPointingDevicecustomEvent*(self: gen_qpointingdevice_types.QPointingDevice, event: gen_qcoreevent_types.QEvent): void =
-  fcQPointingDevice_virtualbase_customEvent(self.h, event.h)
-
 proc fcQPointingDevice_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPointingDeviceVTable](fcQPointingDevice_vdata(self)[])
   let self = QPointingDevice(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
-proc QPointingDeviceconnectNotify*(self: gen_qpointingdevice_types.QPointingDevice, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQPointingDevice_virtualbase_connectNotify(self.h, signal.h)
-
 proc fcQPointingDevice_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPointingDeviceVTable](fcQPointingDevice_vdata(self)[])
   let self = QPointingDevice(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
-
-proc QPointingDevicedisconnectNotify*(self: gen_qpointingdevice_types.QPointingDevice, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQPointingDevice_virtualbase_disconnectNotify(self.h, signal.h)
 
 proc fcQPointingDevice_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPointingDeviceVTable](fcQPointingDevice_vdata(self)[])
@@ -361,23 +365,39 @@ proc fcQPointingDevice_vtable_callback_disconnectNotify(self: pointer, signal: p
 
 type VirtualQPointingDevice* {.inheritable.} = ref object of QPointingDevice
   vtbl*: cQPointingDeviceVTable
+
 method metaObject*(self: VirtualQPointingDevice): gen_qobjectdefs_types.QMetaObject {.base.} =
   QPointingDevicemetaObject(self[])
+method metacast*(self: VirtualQPointingDevice, param1: cstring): pointer {.base.} =
+  QPointingDevicemetacast(self[], param1)
+method metacall*(self: VirtualQPointingDevice, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QPointingDevicemetacall(self[], param1, param2, param3)
+method event*(self: VirtualQPointingDevice, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QPointingDeviceevent(self[], event)
+method eventFilter*(self: VirtualQPointingDevice, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QPointingDeviceeventFilter(self[], watched, event)
+method timerEvent*(self: VirtualQPointingDevice, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QPointingDevicetimerEvent(self[], event)
+method childEvent*(self: VirtualQPointingDevice, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QPointingDevicechildEvent(self[], event)
+method customEvent*(self: VirtualQPointingDevice, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QPointingDevicecustomEvent(self[], event)
+method connectNotify*(self: VirtualQPointingDevice, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QPointingDeviceconnectNotify(self[], signal)
+method disconnectNotify*(self: VirtualQPointingDevice, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QPointingDevicedisconnectNotify(self[], signal)
+
 proc fcQPointingDevice_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQPointingDevice](fcQPointingDevice_vdata(self)[])
   var virtualReturn = inst.metaObject()
   virtualReturn.h
 
-method metacast*(self: VirtualQPointingDevice, param1: cstring): pointer {.base.} =
-  QPointingDevicemetacast(self[], param1)
 proc fcQPointingDevice_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQPointingDevice](fcQPointingDevice_vdata(self)[])
   let slotval1 = (param1)
   var virtualReturn = inst.metacast(slotval1)
   virtualReturn
 
-method metacall*(self: VirtualQPointingDevice, param1: cint, param2: cint, param3: pointer): cint {.base.} =
-  QPointingDevicemetacall(self[], param1, param2, param3)
 proc fcQPointingDevice_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQPointingDevice](fcQPointingDevice_vdata(self)[])
   let slotval1 = cint(param1)
@@ -386,16 +406,12 @@ proc fcQPointingDevice_method_callback_metacall(self: pointer, param1: cint, par
   var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
-method event*(self: VirtualQPointingDevice, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QPointingDeviceevent(self[], event)
 proc fcQPointingDevice_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQPointingDevice](fcQPointingDevice_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
-method eventFilter*(self: VirtualQPointingDevice, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QPointingDeviceeventFilter(self[], watched, event)
 proc fcQPointingDevice_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQPointingDevice](fcQPointingDevice_vdata(self)[])
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
@@ -403,40 +419,31 @@ proc fcQPointingDevice_method_callback_eventFilter(self: pointer, watched: point
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
-method timerEvent*(self: VirtualQPointingDevice, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
-  QPointingDevicetimerEvent(self[], event)
 proc fcQPointingDevice_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPointingDevice](fcQPointingDevice_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
-method childEvent*(self: VirtualQPointingDevice, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
-  QPointingDevicechildEvent(self[], event)
 proc fcQPointingDevice_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPointingDevice](fcQPointingDevice_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
-method customEvent*(self: VirtualQPointingDevice, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QPointingDevicecustomEvent(self[], event)
 proc fcQPointingDevice_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPointingDevice](fcQPointingDevice_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
-method connectNotify*(self: VirtualQPointingDevice, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QPointingDeviceconnectNotify(self[], signal)
 proc fcQPointingDevice_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPointingDevice](fcQPointingDevice_vdata(self)[])
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
-method disconnectNotify*(self: VirtualQPointingDevice, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QPointingDevicedisconnectNotify(self[], signal)
 proc fcQPointingDevice_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPointingDevice](fcQPointingDevice_vdata(self)[])
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
+
 
 proc sender*(self: gen_qpointingdevice_types.QPointingDevice): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQPointingDevice_protectedbase_sender(self.h), owned: false)

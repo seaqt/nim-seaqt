@@ -78,6 +78,7 @@ proc fcQQmlApplicationEngine_tr3(s: cstring, c: cstring, n: cint): struct_miqt_s
 proc fcQQmlApplicationEngine_loadData2(self: pointer, data: struct_miqt_string, url: pointer): void {.importc: "QQmlApplicationEngine_loadData2".}
 proc fcQQmlApplicationEngine_vdata(self: pointer): ptr pointer {.importc: "QQmlApplicationEngine_vdata".}
 proc fvdata_cQQmlApplicationEngine(self: pointer): pointer {.importc: "vdata_QQmlApplicationEngine".}
+
 type cQQmlApplicationEngineVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -182,7 +183,7 @@ proc fcQQmlApplicationEngine_slot_callback_objectCreated_release(slot: int) {.cd
   let nimfunc = cast[ref QQmlApplicationEngineobjectCreatedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onobjectCreated*(self: gen_qqmlapplicationengine_types.QQmlApplicationEngine, slot: QQmlApplicationEngineobjectCreatedSlot) =
+proc onObjectCreated*(self: gen_qqmlapplicationengine_types.QQmlApplicationEngine, slot: QQmlApplicationEngineobjectCreatedSlot) =
   var tmp = new QQmlApplicationEngineobjectCreatedSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -202,7 +203,7 @@ proc fcQQmlApplicationEngine_slot_callback_objectCreationFailed_release(slot: in
   let nimfunc = cast[ref QQmlApplicationEngineobjectCreationFailedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onobjectCreationFailed*(self: gen_qqmlapplicationengine_types.QQmlApplicationEngine, slot: QQmlApplicationEngineobjectCreationFailedSlot) =
+proc onObjectCreationFailed*(self: gen_qqmlapplicationengine_types.QQmlApplicationEngine, slot: QQmlApplicationEngineobjectCreationFailedSlot) =
   var tmp = new QQmlApplicationEngineobjectCreationFailedSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -233,6 +234,7 @@ type QQmlApplicationEnginechildEventProc* = proc(self: QQmlApplicationEngine, ev
 type QQmlApplicationEnginecustomEventProc* = proc(self: QQmlApplicationEngine, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QQmlApplicationEngineconnectNotifyProc* = proc(self: QQmlApplicationEngine, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QQmlApplicationEnginedisconnectNotifyProc* = proc(self: QQmlApplicationEngine, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+
 type QQmlApplicationEngineVTable* {.inheritable, pure.} = object
   vtbl: cQQmlApplicationEngineVTable
   metaObject*: QQmlApplicationEnginemetaObjectProc
@@ -245,8 +247,37 @@ type QQmlApplicationEngineVTable* {.inheritable, pure.} = object
   customEvent*: QQmlApplicationEnginecustomEventProc
   connectNotify*: QQmlApplicationEngineconnectNotifyProc
   disconnectNotify*: QQmlApplicationEnginedisconnectNotifyProc
+
 proc QQmlApplicationEnginemetaObject*(self: gen_qqmlapplicationengine_types.QQmlApplicationEngine): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQQmlApplicationEngine_virtualbase_metaObject(self.h), owned: false)
+
+proc QQmlApplicationEnginemetacast*(self: gen_qqmlapplicationengine_types.QQmlApplicationEngine, param1: cstring): pointer =
+  fcQQmlApplicationEngine_virtualbase_metacast(self.h, param1)
+
+proc QQmlApplicationEnginemetacall*(self: gen_qqmlapplicationengine_types.QQmlApplicationEngine, param1: cint, param2: cint, param3: pointer): cint =
+  fcQQmlApplicationEngine_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+proc QQmlApplicationEngineevent*(self: gen_qqmlapplicationengine_types.QQmlApplicationEngine, param1: gen_qcoreevent_types.QEvent): bool =
+  fcQQmlApplicationEngine_virtualbase_event(self.h, param1.h)
+
+proc QQmlApplicationEngineeventFilter*(self: gen_qqmlapplicationengine_types.QQmlApplicationEngine, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
+  fcQQmlApplicationEngine_virtualbase_eventFilter(self.h, watched.h, event.h)
+
+proc QQmlApplicationEnginetimerEvent*(self: gen_qqmlapplicationengine_types.QQmlApplicationEngine, event: gen_qcoreevent_types.QTimerEvent): void =
+  fcQQmlApplicationEngine_virtualbase_timerEvent(self.h, event.h)
+
+proc QQmlApplicationEnginechildEvent*(self: gen_qqmlapplicationengine_types.QQmlApplicationEngine, event: gen_qcoreevent_types.QChildEvent): void =
+  fcQQmlApplicationEngine_virtualbase_childEvent(self.h, event.h)
+
+proc QQmlApplicationEnginecustomEvent*(self: gen_qqmlapplicationengine_types.QQmlApplicationEngine, event: gen_qcoreevent_types.QEvent): void =
+  fcQQmlApplicationEngine_virtualbase_customEvent(self.h, event.h)
+
+proc QQmlApplicationEngineconnectNotify*(self: gen_qqmlapplicationengine_types.QQmlApplicationEngine, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQQmlApplicationEngine_virtualbase_connectNotify(self.h, signal.h)
+
+proc QQmlApplicationEnginedisconnectNotify*(self: gen_qqmlapplicationengine_types.QQmlApplicationEngine, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQQmlApplicationEngine_virtualbase_disconnectNotify(self.h, signal.h)
+
 
 proc fcQQmlApplicationEngine_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QQmlApplicationEngineVTable](fcQQmlApplicationEngine_vdata(self)[])
@@ -257,18 +288,12 @@ proc fcQQmlApplicationEngine_vtable_callback_metaObject(self: pointer): pointer 
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QQmlApplicationEnginemetacast*(self: gen_qqmlapplicationengine_types.QQmlApplicationEngine, param1: cstring): pointer =
-  fcQQmlApplicationEngine_virtualbase_metacast(self.h, param1)
-
 proc fcQQmlApplicationEngine_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QQmlApplicationEngineVTable](fcQQmlApplicationEngine_vdata(self)[])
   let self = QQmlApplicationEngine(h: self)
   let slotval1 = (param1)
   var virtualReturn = vtbl[].metacast(self, slotval1)
   virtualReturn
-
-proc QQmlApplicationEnginemetacall*(self: gen_qqmlapplicationengine_types.QQmlApplicationEngine, param1: cint, param2: cint, param3: pointer): cint =
-  fcQQmlApplicationEngine_virtualbase_metacall(self.h, cint(param1), param2, param3)
 
 proc fcQQmlApplicationEngine_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QQmlApplicationEngineVTable](fcQQmlApplicationEngine_vdata(self)[])
@@ -279,18 +304,12 @@ proc fcQQmlApplicationEngine_vtable_callback_metacall(self: pointer, param1: cin
   var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QQmlApplicationEngineevent*(self: gen_qqmlapplicationengine_types.QQmlApplicationEngine, param1: gen_qcoreevent_types.QEvent): bool =
-  fcQQmlApplicationEngine_virtualbase_event(self.h, param1.h)
-
 proc fcQQmlApplicationEngine_vtable_callback_event(self: pointer, param1: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QQmlApplicationEngineVTable](fcQQmlApplicationEngine_vdata(self)[])
   let self = QQmlApplicationEngine(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
-
-proc QQmlApplicationEngineeventFilter*(self: gen_qqmlapplicationengine_types.QQmlApplicationEngine, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
-  fcQQmlApplicationEngine_virtualbase_eventFilter(self.h, watched.h, event.h)
 
 proc fcQQmlApplicationEngine_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QQmlApplicationEngineVTable](fcQQmlApplicationEngine_vdata(self)[])
@@ -300,17 +319,11 @@ proc fcQQmlApplicationEngine_vtable_callback_eventFilter(self: pointer, watched:
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
-proc QQmlApplicationEnginetimerEvent*(self: gen_qqmlapplicationengine_types.QQmlApplicationEngine, event: gen_qcoreevent_types.QTimerEvent): void =
-  fcQQmlApplicationEngine_virtualbase_timerEvent(self.h, event.h)
-
 proc fcQQmlApplicationEngine_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QQmlApplicationEngineVTable](fcQQmlApplicationEngine_vdata(self)[])
   let self = QQmlApplicationEngine(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
-
-proc QQmlApplicationEnginechildEvent*(self: gen_qqmlapplicationengine_types.QQmlApplicationEngine, event: gen_qcoreevent_types.QChildEvent): void =
-  fcQQmlApplicationEngine_virtualbase_childEvent(self.h, event.h)
 
 proc fcQQmlApplicationEngine_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QQmlApplicationEngineVTable](fcQQmlApplicationEngine_vdata(self)[])
@@ -318,26 +331,17 @@ proc fcQQmlApplicationEngine_vtable_callback_childEvent(self: pointer, event: po
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
-proc QQmlApplicationEnginecustomEvent*(self: gen_qqmlapplicationengine_types.QQmlApplicationEngine, event: gen_qcoreevent_types.QEvent): void =
-  fcQQmlApplicationEngine_virtualbase_customEvent(self.h, event.h)
-
 proc fcQQmlApplicationEngine_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QQmlApplicationEngineVTable](fcQQmlApplicationEngine_vdata(self)[])
   let self = QQmlApplicationEngine(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
-proc QQmlApplicationEngineconnectNotify*(self: gen_qqmlapplicationengine_types.QQmlApplicationEngine, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQQmlApplicationEngine_virtualbase_connectNotify(self.h, signal.h)
-
 proc fcQQmlApplicationEngine_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QQmlApplicationEngineVTable](fcQQmlApplicationEngine_vdata(self)[])
   let self = QQmlApplicationEngine(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
-
-proc QQmlApplicationEnginedisconnectNotify*(self: gen_qqmlapplicationengine_types.QQmlApplicationEngine, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQQmlApplicationEngine_virtualbase_disconnectNotify(self.h, signal.h)
 
 proc fcQQmlApplicationEngine_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QQmlApplicationEngineVTable](fcQQmlApplicationEngine_vdata(self)[])
@@ -347,23 +351,39 @@ proc fcQQmlApplicationEngine_vtable_callback_disconnectNotify(self: pointer, sig
 
 type VirtualQQmlApplicationEngine* {.inheritable.} = ref object of QQmlApplicationEngine
   vtbl*: cQQmlApplicationEngineVTable
+
 method metaObject*(self: VirtualQQmlApplicationEngine): gen_qobjectdefs_types.QMetaObject {.base.} =
   QQmlApplicationEnginemetaObject(self[])
+method metacast*(self: VirtualQQmlApplicationEngine, param1: cstring): pointer {.base.} =
+  QQmlApplicationEnginemetacast(self[], param1)
+method metacall*(self: VirtualQQmlApplicationEngine, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QQmlApplicationEnginemetacall(self[], param1, param2, param3)
+method event*(self: VirtualQQmlApplicationEngine, param1: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QQmlApplicationEngineevent(self[], param1)
+method eventFilter*(self: VirtualQQmlApplicationEngine, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QQmlApplicationEngineeventFilter(self[], watched, event)
+method timerEvent*(self: VirtualQQmlApplicationEngine, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QQmlApplicationEnginetimerEvent(self[], event)
+method childEvent*(self: VirtualQQmlApplicationEngine, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QQmlApplicationEnginechildEvent(self[], event)
+method customEvent*(self: VirtualQQmlApplicationEngine, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QQmlApplicationEnginecustomEvent(self[], event)
+method connectNotify*(self: VirtualQQmlApplicationEngine, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QQmlApplicationEngineconnectNotify(self[], signal)
+method disconnectNotify*(self: VirtualQQmlApplicationEngine, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QQmlApplicationEnginedisconnectNotify(self[], signal)
+
 proc fcQQmlApplicationEngine_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQQmlApplicationEngine](fcQQmlApplicationEngine_vdata(self)[])
   var virtualReturn = inst.metaObject()
   virtualReturn.h
 
-method metacast*(self: VirtualQQmlApplicationEngine, param1: cstring): pointer {.base.} =
-  QQmlApplicationEnginemetacast(self[], param1)
 proc fcQQmlApplicationEngine_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQQmlApplicationEngine](fcQQmlApplicationEngine_vdata(self)[])
   let slotval1 = (param1)
   var virtualReturn = inst.metacast(slotval1)
   virtualReturn
 
-method metacall*(self: VirtualQQmlApplicationEngine, param1: cint, param2: cint, param3: pointer): cint {.base.} =
-  QQmlApplicationEnginemetacall(self[], param1, param2, param3)
 proc fcQQmlApplicationEngine_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQQmlApplicationEngine](fcQQmlApplicationEngine_vdata(self)[])
   let slotval1 = cint(param1)
@@ -372,16 +392,12 @@ proc fcQQmlApplicationEngine_method_callback_metacall(self: pointer, param1: cin
   var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
-method event*(self: VirtualQQmlApplicationEngine, param1: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QQmlApplicationEngineevent(self[], param1)
 proc fcQQmlApplicationEngine_method_callback_event(self: pointer, param1: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQQmlApplicationEngine](fcQQmlApplicationEngine_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
-method eventFilter*(self: VirtualQQmlApplicationEngine, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QQmlApplicationEngineeventFilter(self[], watched, event)
 proc fcQQmlApplicationEngine_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQQmlApplicationEngine](fcQQmlApplicationEngine_vdata(self)[])
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
@@ -389,40 +405,31 @@ proc fcQQmlApplicationEngine_method_callback_eventFilter(self: pointer, watched:
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
-method timerEvent*(self: VirtualQQmlApplicationEngine, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
-  QQmlApplicationEnginetimerEvent(self[], event)
 proc fcQQmlApplicationEngine_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQQmlApplicationEngine](fcQQmlApplicationEngine_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
-method childEvent*(self: VirtualQQmlApplicationEngine, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
-  QQmlApplicationEnginechildEvent(self[], event)
 proc fcQQmlApplicationEngine_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQQmlApplicationEngine](fcQQmlApplicationEngine_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
-method customEvent*(self: VirtualQQmlApplicationEngine, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QQmlApplicationEnginecustomEvent(self[], event)
 proc fcQQmlApplicationEngine_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQQmlApplicationEngine](fcQQmlApplicationEngine_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
-method connectNotify*(self: VirtualQQmlApplicationEngine, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QQmlApplicationEngineconnectNotify(self[], signal)
 proc fcQQmlApplicationEngine_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQQmlApplicationEngine](fcQQmlApplicationEngine_vdata(self)[])
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
-method disconnectNotify*(self: VirtualQQmlApplicationEngine, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QQmlApplicationEnginedisconnectNotify(self[], signal)
 proc fcQQmlApplicationEngine_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQQmlApplicationEngine](fcQQmlApplicationEngine_vdata(self)[])
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
+
 
 proc sender*(self: gen_qqmlapplicationengine_types.QQmlApplicationEngine): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQQmlApplicationEngine_protectedbase_sender(self.h), owned: false)

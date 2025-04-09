@@ -182,7 +182,7 @@ proc fcQNetworkInformation_slot_callback_reachabilityChanged_release(slot: int) 
   let nimfunc = cast[ref QNetworkInformationreachabilityChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onreachabilityChanged*(self: gen_qnetworkinformation_types.QNetworkInformation, slot: QNetworkInformationreachabilityChangedSlot) =
+proc onReachabilityChanged*(self: gen_qnetworkinformation_types.QNetworkInformation, slot: QNetworkInformationreachabilityChangedSlot) =
   var tmp = new QNetworkInformationreachabilityChangedSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -202,7 +202,7 @@ proc fcQNetworkInformation_slot_callback_isBehindCaptivePortalChanged_release(sl
   let nimfunc = cast[ref QNetworkInformationisBehindCaptivePortalChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onisBehindCaptivePortalChanged*(self: gen_qnetworkinformation_types.QNetworkInformation, slot: QNetworkInformationisBehindCaptivePortalChangedSlot) =
+proc onIsBehindCaptivePortalChanged*(self: gen_qnetworkinformation_types.QNetworkInformation, slot: QNetworkInformationisBehindCaptivePortalChangedSlot) =
   var tmp = new QNetworkInformationisBehindCaptivePortalChangedSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -222,7 +222,7 @@ proc fcQNetworkInformation_slot_callback_transportMediumChanged_release(slot: in
   let nimfunc = cast[ref QNetworkInformationtransportMediumChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc ontransportMediumChanged*(self: gen_qnetworkinformation_types.QNetworkInformation, slot: QNetworkInformationtransportMediumChangedSlot) =
+proc onTransportMediumChanged*(self: gen_qnetworkinformation_types.QNetworkInformation, slot: QNetworkInformationtransportMediumChangedSlot) =
   var tmp = new QNetworkInformationtransportMediumChangedSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -242,7 +242,7 @@ proc fcQNetworkInformation_slot_callback_isMeteredChanged_release(slot: int) {.c
   let nimfunc = cast[ref QNetworkInformationisMeteredChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onisMeteredChanged*(self: gen_qnetworkinformation_types.QNetworkInformation, slot: QNetworkInformationisMeteredChangedSlot) =
+proc onIsMeteredChanged*(self: gen_qnetworkinformation_types.QNetworkInformation, slot: QNetworkInformationisMeteredChangedSlot) =
   var tmp = new QNetworkInformationisMeteredChangedSlot
   tmp[] = slot
   GC_ref(tmp)

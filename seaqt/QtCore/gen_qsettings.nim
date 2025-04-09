@@ -127,6 +127,7 @@ proc fcQSettings_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.impo
 proc fcQSettings_beginWriteArray2(self: pointer, prefix: struct_miqt_string, size: cint): void {.importc: "QSettings_beginWriteArray2".}
 proc fcQSettings_vdata(self: pointer): ptr pointer {.importc: "QSettings_vdata".}
 proc fvdata_cQSettings(self: pointer): pointer {.importc: "vdata_QSettings".}
+
 type cQSettingsVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -342,6 +343,7 @@ type QSettingschildEventProc* = proc(self: QSettings, event: gen_qcoreevent_type
 type QSettingscustomEventProc* = proc(self: QSettings, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QSettingsconnectNotifyProc* = proc(self: QSettings, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QSettingsdisconnectNotifyProc* = proc(self: QSettings, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+
 type QSettingsVTable* {.inheritable, pure.} = object
   vtbl: cQSettingsVTable
   metaObject*: QSettingsmetaObjectProc
@@ -354,8 +356,37 @@ type QSettingsVTable* {.inheritable, pure.} = object
   customEvent*: QSettingscustomEventProc
   connectNotify*: QSettingsconnectNotifyProc
   disconnectNotify*: QSettingsdisconnectNotifyProc
+
 proc QSettingsmetaObject*(self: gen_qsettings_types.QSettings): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQSettings_virtualbase_metaObject(self.h), owned: false)
+
+proc QSettingsmetacast*(self: gen_qsettings_types.QSettings, param1: cstring): pointer =
+  fcQSettings_virtualbase_metacast(self.h, param1)
+
+proc QSettingsmetacall*(self: gen_qsettings_types.QSettings, param1: cint, param2: cint, param3: pointer): cint =
+  fcQSettings_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+proc QSettingsevent*(self: gen_qsettings_types.QSettings, event: gen_qcoreevent_types.QEvent): bool =
+  fcQSettings_virtualbase_event(self.h, event.h)
+
+proc QSettingseventFilter*(self: gen_qsettings_types.QSettings, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
+  fcQSettings_virtualbase_eventFilter(self.h, watched.h, event.h)
+
+proc QSettingstimerEvent*(self: gen_qsettings_types.QSettings, event: gen_qcoreevent_types.QTimerEvent): void =
+  fcQSettings_virtualbase_timerEvent(self.h, event.h)
+
+proc QSettingschildEvent*(self: gen_qsettings_types.QSettings, event: gen_qcoreevent_types.QChildEvent): void =
+  fcQSettings_virtualbase_childEvent(self.h, event.h)
+
+proc QSettingscustomEvent*(self: gen_qsettings_types.QSettings, event: gen_qcoreevent_types.QEvent): void =
+  fcQSettings_virtualbase_customEvent(self.h, event.h)
+
+proc QSettingsconnectNotify*(self: gen_qsettings_types.QSettings, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQSettings_virtualbase_connectNotify(self.h, signal.h)
+
+proc QSettingsdisconnectNotify*(self: gen_qsettings_types.QSettings, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQSettings_virtualbase_disconnectNotify(self.h, signal.h)
+
 
 proc fcQSettings_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QSettingsVTable](fcQSettings_vdata(self)[])
@@ -366,18 +397,12 @@ proc fcQSettings_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QSettingsmetacast*(self: gen_qsettings_types.QSettings, param1: cstring): pointer =
-  fcQSettings_virtualbase_metacast(self.h, param1)
-
 proc fcQSettings_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QSettingsVTable](fcQSettings_vdata(self)[])
   let self = QSettings(h: self)
   let slotval1 = (param1)
   var virtualReturn = vtbl[].metacast(self, slotval1)
   virtualReturn
-
-proc QSettingsmetacall*(self: gen_qsettings_types.QSettings, param1: cint, param2: cint, param3: pointer): cint =
-  fcQSettings_virtualbase_metacall(self.h, cint(param1), param2, param3)
 
 proc fcQSettings_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QSettingsVTable](fcQSettings_vdata(self)[])
@@ -388,18 +413,12 @@ proc fcQSettings_vtable_callback_metacall(self: pointer, param1: cint, param2: c
   var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QSettingsevent*(self: gen_qsettings_types.QSettings, event: gen_qcoreevent_types.QEvent): bool =
-  fcQSettings_virtualbase_event(self.h, event.h)
-
 proc fcQSettings_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QSettingsVTable](fcQSettings_vdata(self)[])
   let self = QSettings(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
-
-proc QSettingseventFilter*(self: gen_qsettings_types.QSettings, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
-  fcQSettings_virtualbase_eventFilter(self.h, watched.h, event.h)
 
 proc fcQSettings_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QSettingsVTable](fcQSettings_vdata(self)[])
@@ -409,17 +428,11 @@ proc fcQSettings_vtable_callback_eventFilter(self: pointer, watched: pointer, ev
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
-proc QSettingstimerEvent*(self: gen_qsettings_types.QSettings, event: gen_qcoreevent_types.QTimerEvent): void =
-  fcQSettings_virtualbase_timerEvent(self.h, event.h)
-
 proc fcQSettings_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSettingsVTable](fcQSettings_vdata(self)[])
   let self = QSettings(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
-
-proc QSettingschildEvent*(self: gen_qsettings_types.QSettings, event: gen_qcoreevent_types.QChildEvent): void =
-  fcQSettings_virtualbase_childEvent(self.h, event.h)
 
 proc fcQSettings_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSettingsVTable](fcQSettings_vdata(self)[])
@@ -427,26 +440,17 @@ proc fcQSettings_vtable_callback_childEvent(self: pointer, event: pointer): void
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
-proc QSettingscustomEvent*(self: gen_qsettings_types.QSettings, event: gen_qcoreevent_types.QEvent): void =
-  fcQSettings_virtualbase_customEvent(self.h, event.h)
-
 proc fcQSettings_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSettingsVTable](fcQSettings_vdata(self)[])
   let self = QSettings(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
-proc QSettingsconnectNotify*(self: gen_qsettings_types.QSettings, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQSettings_virtualbase_connectNotify(self.h, signal.h)
-
 proc fcQSettings_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSettingsVTable](fcQSettings_vdata(self)[])
   let self = QSettings(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
-
-proc QSettingsdisconnectNotify*(self: gen_qsettings_types.QSettings, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQSettings_virtualbase_disconnectNotify(self.h, signal.h)
 
 proc fcQSettings_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSettingsVTable](fcQSettings_vdata(self)[])
@@ -456,23 +460,39 @@ proc fcQSettings_vtable_callback_disconnectNotify(self: pointer, signal: pointer
 
 type VirtualQSettings* {.inheritable.} = ref object of QSettings
   vtbl*: cQSettingsVTable
+
 method metaObject*(self: VirtualQSettings): gen_qobjectdefs_types.QMetaObject {.base.} =
   QSettingsmetaObject(self[])
+method metacast*(self: VirtualQSettings, param1: cstring): pointer {.base.} =
+  QSettingsmetacast(self[], param1)
+method metacall*(self: VirtualQSettings, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QSettingsmetacall(self[], param1, param2, param3)
+method event*(self: VirtualQSettings, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QSettingsevent(self[], event)
+method eventFilter*(self: VirtualQSettings, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QSettingseventFilter(self[], watched, event)
+method timerEvent*(self: VirtualQSettings, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QSettingstimerEvent(self[], event)
+method childEvent*(self: VirtualQSettings, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QSettingschildEvent(self[], event)
+method customEvent*(self: VirtualQSettings, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QSettingscustomEvent(self[], event)
+method connectNotify*(self: VirtualQSettings, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QSettingsconnectNotify(self[], signal)
+method disconnectNotify*(self: VirtualQSettings, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QSettingsdisconnectNotify(self[], signal)
+
 proc fcQSettings_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQSettings](fcQSettings_vdata(self)[])
   var virtualReturn = inst.metaObject()
   virtualReturn.h
 
-method metacast*(self: VirtualQSettings, param1: cstring): pointer {.base.} =
-  QSettingsmetacast(self[], param1)
 proc fcQSettings_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQSettings](fcQSettings_vdata(self)[])
   let slotval1 = (param1)
   var virtualReturn = inst.metacast(slotval1)
   virtualReturn
 
-method metacall*(self: VirtualQSettings, param1: cint, param2: cint, param3: pointer): cint {.base.} =
-  QSettingsmetacall(self[], param1, param2, param3)
 proc fcQSettings_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQSettings](fcQSettings_vdata(self)[])
   let slotval1 = cint(param1)
@@ -481,16 +501,12 @@ proc fcQSettings_method_callback_metacall(self: pointer, param1: cint, param2: c
   var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
-method event*(self: VirtualQSettings, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QSettingsevent(self[], event)
 proc fcQSettings_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQSettings](fcQSettings_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
-method eventFilter*(self: VirtualQSettings, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QSettingseventFilter(self[], watched, event)
 proc fcQSettings_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQSettings](fcQSettings_vdata(self)[])
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
@@ -498,40 +514,31 @@ proc fcQSettings_method_callback_eventFilter(self: pointer, watched: pointer, ev
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
-method timerEvent*(self: VirtualQSettings, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
-  QSettingstimerEvent(self[], event)
 proc fcQSettings_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSettings](fcQSettings_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
-method childEvent*(self: VirtualQSettings, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
-  QSettingschildEvent(self[], event)
 proc fcQSettings_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSettings](fcQSettings_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
-method customEvent*(self: VirtualQSettings, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QSettingscustomEvent(self[], event)
 proc fcQSettings_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSettings](fcQSettings_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
-method connectNotify*(self: VirtualQSettings, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QSettingsconnectNotify(self[], signal)
 proc fcQSettings_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSettings](fcQSettings_vdata(self)[])
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
-method disconnectNotify*(self: VirtualQSettings, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QSettingsdisconnectNotify(self[], signal)
 proc fcQSettings_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSettings](fcQSettings_vdata(self)[])
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
+
 
 proc sender*(self: gen_qsettings_types.QSettings): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQSettings_protectedbase_sender(self.h), owned: false)

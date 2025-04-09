@@ -153,6 +153,7 @@ proc fcQInputEvent_timestamp(self: pointer): culonglong {.importc: "QInputEvent_
 proc fcQInputEvent_setTimestamp(self: pointer, timestamp: culonglong): void {.importc: "QInputEvent_setTimestamp".}
 proc fcQInputEvent_vdata(self: pointer): ptr pointer {.importc: "QInputEvent_vdata".}
 proc fvdata_cQInputEvent(self: pointer): pointer {.importc: "vdata_QInputEvent".}
+
 type cQInputEventVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   clone*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -184,6 +185,7 @@ proc fcQPointerEvent_addPassiveGrabber(self: pointer, point: pointer, grabber: p
 proc fcQPointerEvent_removePassiveGrabber(self: pointer, point: pointer, grabber: pointer): bool {.importc: "QPointerEvent_removePassiveGrabber".}
 proc fcQPointerEvent_vdata(self: pointer): ptr pointer {.importc: "QPointerEvent_vdata".}
 proc fvdata_cQPointerEvent(self: pointer): pointer {.importc: "vdata_QPointerEvent".}
+
 type cQPointerEventVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   clone*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -225,6 +227,7 @@ proc fcQEnterEvent_windowPos(self: pointer): pointer {.importc: "QEnterEvent_win
 proc fcQEnterEvent_screenPos(self: pointer): pointer {.importc: "QEnterEvent_screenPos".}
 proc fcQEnterEvent_vdata(self: pointer): ptr pointer {.importc: "QEnterEvent_vdata".}
 proc fvdata_cQEnterEvent(self: pointer): pointer {.importc: "vdata_QEnterEvent".}
+
 type cQEnterEventVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   clone*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -255,6 +258,7 @@ proc fcQMouseEvent_source(self: pointer): cint {.importc: "QMouseEvent_source".}
 proc fcQMouseEvent_flags(self: pointer): cint {.importc: "QMouseEvent_flags".}
 proc fcQMouseEvent_vdata(self: pointer): ptr pointer {.importc: "QMouseEvent_vdata".}
 proc fvdata_cQMouseEvent(self: pointer): pointer {.importc: "vdata_QMouseEvent".}
+
 type cQMouseEventVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   clone*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -285,6 +289,7 @@ proc fcQHoverEvent_oldPos(self: pointer): pointer {.importc: "QHoverEvent_oldPos
 proc fcQHoverEvent_oldPosF(self: pointer): pointer {.importc: "QHoverEvent_oldPosF".}
 proc fcQHoverEvent_vdata(self: pointer): ptr pointer {.importc: "QHoverEvent_vdata".}
 proc fvdata_cQHoverEvent(self: pointer): pointer {.importc: "vdata_QHoverEvent".}
+
 type cQHoverEventVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   clone*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -318,6 +323,7 @@ proc fcQWheelEvent_isEndEvent(self: pointer): bool {.importc: "QWheelEvent_isEnd
 proc fcQWheelEvent_source(self: pointer): cint {.importc: "QWheelEvent_source".}
 proc fcQWheelEvent_vdata(self: pointer): ptr pointer {.importc: "QWheelEvent_vdata".}
 proc fvdata_cQWheelEvent(self: pointer): pointer {.importc: "vdata_QWheelEvent".}
+
 type cQWheelEventVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   clone*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -356,6 +362,7 @@ proc fcQTabletEvent_xTilt(self: pointer): float64 {.importc: "QTabletEvent_xTilt
 proc fcQTabletEvent_yTilt(self: pointer): float64 {.importc: "QTabletEvent_yTilt".}
 proc fcQTabletEvent_vdata(self: pointer): ptr pointer {.importc: "QTabletEvent_vdata".}
 proc fvdata_cQTabletEvent(self: pointer): pointer {.importc: "vdata_QTabletEvent".}
+
 type cQTabletEventVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   clone*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -383,6 +390,7 @@ proc fcQNativeGestureEvent_windowPos(self: pointer): pointer {.importc: "QNative
 proc fcQNativeGestureEvent_screenPos(self: pointer): pointer {.importc: "QNativeGestureEvent_screenPos".}
 proc fcQNativeGestureEvent_vdata(self: pointer): ptr pointer {.importc: "QNativeGestureEvent_vdata".}
 proc fvdata_cQNativeGestureEvent(self: pointer): pointer {.importc: "vdata_QNativeGestureEvent".}
+
 type cQNativeGestureEventVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   clone*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -413,6 +421,7 @@ proc fcQKeyEvent_nativeVirtualKey(self: pointer): cuint {.importc: "QKeyEvent_na
 proc fcQKeyEvent_nativeModifiers(self: pointer): cuint {.importc: "QKeyEvent_nativeModifiers".}
 proc fcQKeyEvent_vdata(self: pointer): ptr pointer {.importc: "QKeyEvent_vdata".}
 proc fvdata_cQKeyEvent(self: pointer): pointer {.importc: "vdata_QKeyEvent".}
+
 type cQKeyEventVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   clone*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -436,6 +445,7 @@ proc fcQFocusEvent_lostFocus(self: pointer): bool {.importc: "QFocusEvent_lostFo
 proc fcQFocusEvent_reason(self: pointer): cint {.importc: "QFocusEvent_reason".}
 proc fcQFocusEvent_vdata(self: pointer): ptr pointer {.importc: "QFocusEvent_vdata".}
 proc fvdata_cQFocusEvent(self: pointer): pointer {.importc: "vdata_QFocusEvent".}
+
 type cQFocusEventVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   clone*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -449,6 +459,7 @@ proc fcQPaintEvent_rect(self: pointer): pointer {.importc: "QPaintEvent_rect".}
 proc fcQPaintEvent_region(self: pointer): pointer {.importc: "QPaintEvent_region".}
 proc fcQPaintEvent_vdata(self: pointer): ptr pointer {.importc: "QPaintEvent_vdata".}
 proc fvdata_cQPaintEvent(self: pointer): pointer {.importc: "vdata_QPaintEvent".}
+
 type cQPaintEventVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   clone*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -462,6 +473,7 @@ proc fcQMoveEvent_pos(self: pointer): pointer {.importc: "QMoveEvent_pos".}
 proc fcQMoveEvent_oldPos(self: pointer): pointer {.importc: "QMoveEvent_oldPos".}
 proc fcQMoveEvent_vdata(self: pointer): ptr pointer {.importc: "QMoveEvent_vdata".}
 proc fvdata_cQMoveEvent(self: pointer): pointer {.importc: "vdata_QMoveEvent".}
+
 type cQMoveEventVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   clone*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -473,6 +485,7 @@ proc fcQExposeEvent_clone(self: pointer): pointer {.importc: "QExposeEvent_clone
 proc fcQExposeEvent_region(self: pointer): pointer {.importc: "QExposeEvent_region".}
 proc fcQExposeEvent_vdata(self: pointer): ptr pointer {.importc: "QExposeEvent_vdata".}
 proc fvdata_cQExposeEvent(self: pointer): pointer {.importc: "vdata_QExposeEvent".}
+
 type cQExposeEventVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   clone*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -484,6 +497,7 @@ proc fcQPlatformSurfaceEvent_clone(self: pointer): pointer {.importc: "QPlatform
 proc fcQPlatformSurfaceEvent_surfaceEventType(self: pointer): cint {.importc: "QPlatformSurfaceEvent_surfaceEventType".}
 proc fcQPlatformSurfaceEvent_vdata(self: pointer): ptr pointer {.importc: "QPlatformSurfaceEvent_vdata".}
 proc fvdata_cQPlatformSurfaceEvent(self: pointer): pointer {.importc: "vdata_QPlatformSurfaceEvent".}
+
 type cQPlatformSurfaceEventVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   clone*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -496,6 +510,7 @@ proc fcQResizeEvent_size(self: pointer): pointer {.importc: "QResizeEvent_size".
 proc fcQResizeEvent_oldSize(self: pointer): pointer {.importc: "QResizeEvent_oldSize".}
 proc fcQResizeEvent_vdata(self: pointer): ptr pointer {.importc: "QResizeEvent_vdata".}
 proc fvdata_cQResizeEvent(self: pointer): pointer {.importc: "vdata_QResizeEvent".}
+
 type cQResizeEventVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   clone*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -506,6 +521,7 @@ proc fcQResizeEvent_new(vtbl: pointer, vdata: csize_t, size: pointer, oldSize: p
 proc fcQCloseEvent_clone(self: pointer): pointer {.importc: "QCloseEvent_clone".}
 proc fcQCloseEvent_vdata(self: pointer): ptr pointer {.importc: "QCloseEvent_vdata".}
 proc fvdata_cQCloseEvent(self: pointer): pointer {.importc: "vdata_QCloseEvent".}
+
 type cQCloseEventVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   clone*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -516,6 +532,7 @@ proc fcQCloseEvent_new(vtbl: pointer, vdata: csize_t): ptr cQCloseEvent {.import
 proc fcQIconDragEvent_clone(self: pointer): pointer {.importc: "QIconDragEvent_clone".}
 proc fcQIconDragEvent_vdata(self: pointer): ptr pointer {.importc: "QIconDragEvent_vdata".}
 proc fvdata_cQIconDragEvent(self: pointer): pointer {.importc: "vdata_QIconDragEvent".}
+
 type cQIconDragEventVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   clone*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -526,6 +543,7 @@ proc fcQIconDragEvent_new(vtbl: pointer, vdata: csize_t): ptr cQIconDragEvent {.
 proc fcQShowEvent_clone(self: pointer): pointer {.importc: "QShowEvent_clone".}
 proc fcQShowEvent_vdata(self: pointer): ptr pointer {.importc: "QShowEvent_vdata".}
 proc fvdata_cQShowEvent(self: pointer): pointer {.importc: "vdata_QShowEvent".}
+
 type cQShowEventVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   clone*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -536,6 +554,7 @@ proc fcQShowEvent_new(vtbl: pointer, vdata: csize_t): ptr cQShowEvent {.importc:
 proc fcQHideEvent_clone(self: pointer): pointer {.importc: "QHideEvent_clone".}
 proc fcQHideEvent_vdata(self: pointer): ptr pointer {.importc: "QHideEvent_vdata".}
 proc fvdata_cQHideEvent(self: pointer): pointer {.importc: "vdata_QHideEvent".}
+
 type cQHideEventVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   clone*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -553,6 +572,7 @@ proc fcQContextMenuEvent_globalPos(self: pointer): pointer {.importc: "QContextM
 proc fcQContextMenuEvent_reason(self: pointer): cint {.importc: "QContextMenuEvent_reason".}
 proc fcQContextMenuEvent_vdata(self: pointer): ptr pointer {.importc: "QContextMenuEvent_vdata".}
 proc fvdata_cQContextMenuEvent(self: pointer): pointer {.importc: "vdata_QContextMenuEvent".}
+
 type cQContextMenuEventVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   clone*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -575,6 +595,7 @@ proc fcQInputMethodEvent_setCommitString2(self: pointer, commitString: struct_mi
 proc fcQInputMethodEvent_setCommitString3(self: pointer, commitString: struct_miqt_string, replaceFrom: cint, replaceLength: cint): void {.importc: "QInputMethodEvent_setCommitString3".}
 proc fcQInputMethodEvent_vdata(self: pointer): ptr pointer {.importc: "QInputMethodEvent_vdata".}
 proc fvdata_cQInputMethodEvent(self: pointer): pointer {.importc: "vdata_QInputMethodEvent".}
+
 type cQInputMethodEventVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   clone*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -589,6 +610,7 @@ proc fcQInputMethodQueryEvent_setValue(self: pointer, query: cint, value: pointe
 proc fcQInputMethodQueryEvent_value(self: pointer, query: cint): pointer {.importc: "QInputMethodQueryEvent_value".}
 proc fcQInputMethodQueryEvent_vdata(self: pointer): ptr pointer {.importc: "QInputMethodQueryEvent_vdata".}
 proc fvdata_cQInputMethodQueryEvent(self: pointer): pointer {.importc: "vdata_QInputMethodQueryEvent".}
+
 type cQInputMethodQueryEventVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   clone*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -613,6 +635,7 @@ proc fcQDropEvent_source(self: pointer): pointer {.importc: "QDropEvent_source".
 proc fcQDropEvent_mimeData(self: pointer): pointer {.importc: "QDropEvent_mimeData".}
 proc fcQDropEvent_vdata(self: pointer): ptr pointer {.importc: "QDropEvent_vdata".}
 proc fvdata_cQDropEvent(self: pointer): pointer {.importc: "vdata_QDropEvent".}
+
 type cQDropEventVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   clone*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -629,6 +652,7 @@ proc fcQDragMoveEvent_acceptWithQRect(self: pointer, r: pointer): void {.importc
 proc fcQDragMoveEvent_ignoreWithQRect(self: pointer, r: pointer): void {.importc: "QDragMoveEvent_ignoreWithQRect".}
 proc fcQDragMoveEvent_vdata(self: pointer): ptr pointer {.importc: "QDragMoveEvent_vdata".}
 proc fvdata_cQDragMoveEvent(self: pointer): pointer {.importc: "vdata_QDragMoveEvent".}
+
 type cQDragMoveEventVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   clone*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -640,6 +664,7 @@ proc fcQDragMoveEvent_new2(vtbl: pointer, vdata: csize_t, pos: pointer, actions:
 proc fcQDragEnterEvent_clone(self: pointer): pointer {.importc: "QDragEnterEvent_clone".}
 proc fcQDragEnterEvent_vdata(self: pointer): ptr pointer {.importc: "QDragEnterEvent_vdata".}
 proc fvdata_cQDragEnterEvent(self: pointer): pointer {.importc: "vdata_QDragEnterEvent".}
+
 type cQDragEnterEventVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   clone*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -650,6 +675,7 @@ proc fcQDragEnterEvent_new(vtbl: pointer, vdata: csize_t, pos: pointer, actions:
 proc fcQDragLeaveEvent_clone(self: pointer): pointer {.importc: "QDragLeaveEvent_clone".}
 proc fcQDragLeaveEvent_vdata(self: pointer): ptr pointer {.importc: "QDragLeaveEvent_vdata".}
 proc fvdata_cQDragLeaveEvent(self: pointer): pointer {.importc: "vdata_QDragLeaveEvent".}
+
 type cQDragLeaveEventVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   clone*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -666,6 +692,7 @@ proc fcQHelpEvent_pos(self: pointer): pointer {.importc: "QHelpEvent_pos".}
 proc fcQHelpEvent_globalPos(self: pointer): pointer {.importc: "QHelpEvent_globalPos".}
 proc fcQHelpEvent_vdata(self: pointer): ptr pointer {.importc: "QHelpEvent_vdata".}
 proc fvdata_cQHelpEvent(self: pointer): pointer {.importc: "vdata_QHelpEvent".}
+
 type cQHelpEventVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   clone*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -677,6 +704,7 @@ proc fcQStatusTipEvent_clone(self: pointer): pointer {.importc: "QStatusTipEvent
 proc fcQStatusTipEvent_tip(self: pointer): struct_miqt_string {.importc: "QStatusTipEvent_tip".}
 proc fcQStatusTipEvent_vdata(self: pointer): ptr pointer {.importc: "QStatusTipEvent_vdata".}
 proc fvdata_cQStatusTipEvent(self: pointer): pointer {.importc: "vdata_QStatusTipEvent".}
+
 type cQStatusTipEventVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   clone*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -688,6 +716,7 @@ proc fcQWhatsThisClickedEvent_clone(self: pointer): pointer {.importc: "QWhatsTh
 proc fcQWhatsThisClickedEvent_href(self: pointer): struct_miqt_string {.importc: "QWhatsThisClickedEvent_href".}
 proc fcQWhatsThisClickedEvent_vdata(self: pointer): ptr pointer {.importc: "QWhatsThisClickedEvent_vdata".}
 proc fvdata_cQWhatsThisClickedEvent(self: pointer): pointer {.importc: "vdata_QWhatsThisClickedEvent".}
+
 type cQWhatsThisClickedEventVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   clone*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -702,6 +731,7 @@ proc fcQFileOpenEvent_url(self: pointer): pointer {.importc: "QFileOpenEvent_url
 proc fcQFileOpenEvent_openFile(self: pointer, file: pointer, flags: cint): bool {.importc: "QFileOpenEvent_openFile".}
 proc fcQFileOpenEvent_vdata(self: pointer): ptr pointer {.importc: "QFileOpenEvent_vdata".}
 proc fvdata_cQFileOpenEvent(self: pointer): pointer {.importc: "vdata_QFileOpenEvent".}
+
 type cQFileOpenEventVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   clone*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -714,6 +744,7 @@ proc fcQToolBarChangeEvent_clone(self: pointer): pointer {.importc: "QToolBarCha
 proc fcQToolBarChangeEvent_toggle(self: pointer): bool {.importc: "QToolBarChangeEvent_toggle".}
 proc fcQToolBarChangeEvent_vdata(self: pointer): ptr pointer {.importc: "QToolBarChangeEvent_vdata".}
 proc fvdata_cQToolBarChangeEvent(self: pointer): pointer {.importc: "vdata_QToolBarChangeEvent".}
+
 type cQToolBarChangeEventVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   clone*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -727,6 +758,7 @@ proc fcQShortcutEvent_shortcutId(self: pointer): cint {.importc: "QShortcutEvent
 proc fcQShortcutEvent_isAmbiguous(self: pointer): bool {.importc: "QShortcutEvent_isAmbiguous".}
 proc fcQShortcutEvent_vdata(self: pointer): ptr pointer {.importc: "QShortcutEvent_vdata".}
 proc fvdata_cQShortcutEvent(self: pointer): pointer {.importc: "vdata_QShortcutEvent".}
+
 type cQShortcutEventVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   clone*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -740,6 +772,7 @@ proc fcQWindowStateChangeEvent_oldState(self: pointer): cint {.importc: "QWindow
 proc fcQWindowStateChangeEvent_isOverride(self: pointer): bool {.importc: "QWindowStateChangeEvent_isOverride".}
 proc fcQWindowStateChangeEvent_vdata(self: pointer): ptr pointer {.importc: "QWindowStateChangeEvent_vdata".}
 proc fvdata_cQWindowStateChangeEvent(self: pointer): pointer {.importc: "vdata_QWindowStateChangeEvent".}
+
 type cQWindowStateChangeEventVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   clone*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -757,6 +790,7 @@ proc fcQTouchEvent_isUpdateEvent(self: pointer): bool {.importc: "QTouchEvent_is
 proc fcQTouchEvent_isEndEvent(self: pointer): bool {.importc: "QTouchEvent_isEndEvent".}
 proc fcQTouchEvent_vdata(self: pointer): ptr pointer {.importc: "QTouchEvent_vdata".}
 proc fvdata_cQTouchEvent(self: pointer): pointer {.importc: "vdata_QTouchEvent".}
+
 type cQTouchEventVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   clone*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -787,6 +821,7 @@ proc fcQScrollPrepareEvent_setContentPosRange(self: pointer, rect: pointer): voi
 proc fcQScrollPrepareEvent_setContentPos(self: pointer, pos: pointer): void {.importc: "QScrollPrepareEvent_setContentPos".}
 proc fcQScrollPrepareEvent_vdata(self: pointer): ptr pointer {.importc: "QScrollPrepareEvent_vdata".}
 proc fvdata_cQScrollPrepareEvent(self: pointer): pointer {.importc: "vdata_QScrollPrepareEvent".}
+
 type cQScrollPrepareEventVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   clone*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -800,6 +835,7 @@ proc fcQScrollEvent_overshootDistance(self: pointer): pointer {.importc: "QScrol
 proc fcQScrollEvent_scrollState(self: pointer): cint {.importc: "QScrollEvent_scrollState".}
 proc fcQScrollEvent_vdata(self: pointer): ptr pointer {.importc: "QScrollEvent_vdata".}
 proc fvdata_cQScrollEvent(self: pointer): pointer {.importc: "vdata_QScrollEvent".}
+
 type cQScrollEventVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   clone*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -812,6 +848,7 @@ proc fcQScreenOrientationChangeEvent_screen(self: pointer): pointer {.importc: "
 proc fcQScreenOrientationChangeEvent_orientation(self: pointer): cint {.importc: "QScreenOrientationChangeEvent_orientation".}
 proc fcQScreenOrientationChangeEvent_vdata(self: pointer): ptr pointer {.importc: "QScreenOrientationChangeEvent_vdata".}
 proc fvdata_cQScreenOrientationChangeEvent(self: pointer): pointer {.importc: "vdata_QScreenOrientationChangeEvent".}
+
 type cQScreenOrientationChangeEventVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   clone*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -823,6 +860,7 @@ proc fcQApplicationStateChangeEvent_clone(self: pointer): pointer {.importc: "QA
 proc fcQApplicationStateChangeEvent_applicationState(self: pointer): cint {.importc: "QApplicationStateChangeEvent_applicationState".}
 proc fcQApplicationStateChangeEvent_vdata(self: pointer): ptr pointer {.importc: "QApplicationStateChangeEvent_vdata".}
 proc fvdata_cQApplicationStateChangeEvent(self: pointer): pointer {.importc: "vdata_QApplicationStateChangeEvent".}
+
 type cQApplicationStateChangeEventVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   clone*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -859,13 +897,22 @@ proc setTimestamp*(self: gen_qevent_types.QInputEvent, timestamp: culonglong): v
 type QInputEventcloneProc* = proc(self: QInputEvent): gen_qevent_types.QInputEvent {.raises: [], gcsafe.}
 type QInputEventsetTimestampProc* = proc(self: QInputEvent, timestamp: culonglong): void {.raises: [], gcsafe.}
 type QInputEventsetAcceptedProc* = proc(self: QInputEvent, accepted: bool): void {.raises: [], gcsafe.}
+
 type QInputEventVTable* {.inheritable, pure.} = object
   vtbl: cQInputEventVTable
   clone*: QInputEventcloneProc
   setTimestamp*: QInputEventsetTimestampProc
   setAccepted*: QInputEventsetAcceptedProc
+
 proc QInputEventclone*(self: gen_qevent_types.QInputEvent): gen_qevent_types.QInputEvent =
   gen_qevent_types.QInputEvent(h: fcQInputEvent_virtualbase_clone(self.h), owned: false)
+
+proc QInputEventsetTimestamp*(self: gen_qevent_types.QInputEvent, timestamp: culonglong): void =
+  fcQInputEvent_virtualbase_setTimestamp(self.h, timestamp)
+
+proc QInputEventsetAccepted*(self: gen_qevent_types.QInputEvent, accepted: bool): void =
+  fcQInputEvent_virtualbase_setAccepted(self.h, accepted)
+
 
 proc fcQInputEvent_vtable_callback_clone(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QInputEventVTable](fcQInputEvent_vdata(self)[])
@@ -876,17 +923,11 @@ proc fcQInputEvent_vtable_callback_clone(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QInputEventsetTimestamp*(self: gen_qevent_types.QInputEvent, timestamp: culonglong): void =
-  fcQInputEvent_virtualbase_setTimestamp(self.h, timestamp)
-
 proc fcQInputEvent_vtable_callback_setTimestamp(self: pointer, timestamp: culonglong): void {.cdecl.} =
   let vtbl = cast[ptr QInputEventVTable](fcQInputEvent_vdata(self)[])
   let self = QInputEvent(h: self)
   let slotval1 = timestamp
   vtbl[].setTimestamp(self, slotval1)
-
-proc QInputEventsetAccepted*(self: gen_qevent_types.QInputEvent, accepted: bool): void =
-  fcQInputEvent_virtualbase_setAccepted(self.h, accepted)
 
 proc fcQInputEvent_vtable_callback_setAccepted(self: pointer, accepted: bool): void {.cdecl.} =
   let vtbl = cast[ptr QInputEventVTable](fcQInputEvent_vdata(self)[])
@@ -896,26 +937,29 @@ proc fcQInputEvent_vtable_callback_setAccepted(self: pointer, accepted: bool): v
 
 type VirtualQInputEvent* {.inheritable.} = ref object of QInputEvent
   vtbl*: cQInputEventVTable
+
 method clone*(self: VirtualQInputEvent): gen_qevent_types.QInputEvent {.base.} =
   QInputEventclone(self[])
+method setTimestamp*(self: VirtualQInputEvent, timestamp: culonglong): void {.base.} =
+  QInputEventsetTimestamp(self[], timestamp)
+method setAccepted*(self: VirtualQInputEvent, accepted: bool): void {.base.} =
+  QInputEventsetAccepted(self[], accepted)
+
 proc fcQInputEvent_method_callback_clone(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQInputEvent](fcQInputEvent_vdata(self)[])
   var virtualReturn = inst.clone()
   virtualReturn.h
 
-method setTimestamp*(self: VirtualQInputEvent, timestamp: culonglong): void {.base.} =
-  QInputEventsetTimestamp(self[], timestamp)
 proc fcQInputEvent_method_callback_setTimestamp(self: pointer, timestamp: culonglong): void {.cdecl.} =
   let inst = cast[VirtualQInputEvent](fcQInputEvent_vdata(self)[])
   let slotval1 = timestamp
   inst.setTimestamp(slotval1)
 
-method setAccepted*(self: VirtualQInputEvent, accepted: bool): void {.base.} =
-  QInputEventsetAccepted(self[], accepted)
 proc fcQInputEvent_method_callback_setAccepted(self: pointer, accepted: bool): void {.cdecl.} =
   let inst = cast[VirtualQInputEvent](fcQInputEvent_vdata(self)[])
   let slotval1 = accepted
   inst.setAccepted(slotval1)
+
 
 proc create*(T: type gen_qevent_types.QInputEvent,
     typeVal: cint, m_dev: gen_qinputdevice_types.QInputDevice,
@@ -1046,6 +1090,7 @@ type QPointerEventisBeginEventProc* = proc(self: QPointerEvent): bool {.raises: 
 type QPointerEventisUpdateEventProc* = proc(self: QPointerEvent): bool {.raises: [], gcsafe.}
 type QPointerEventisEndEventProc* = proc(self: QPointerEvent): bool {.raises: [], gcsafe.}
 type QPointerEventsetAcceptedProc* = proc(self: QPointerEvent, accepted: bool): void {.raises: [], gcsafe.}
+
 type QPointerEventVTable* {.inheritable, pure.} = object
   vtbl: cQPointerEventVTable
   clone*: QPointerEventcloneProc
@@ -1054,8 +1099,25 @@ type QPointerEventVTable* {.inheritable, pure.} = object
   isUpdateEvent*: QPointerEventisUpdateEventProc
   isEndEvent*: QPointerEventisEndEventProc
   setAccepted*: QPointerEventsetAcceptedProc
+
 proc QPointerEventclone*(self: gen_qevent_types.QPointerEvent): gen_qevent_types.QPointerEvent =
   gen_qevent_types.QPointerEvent(h: fcQPointerEvent_virtualbase_clone(self.h), owned: false)
+
+proc QPointerEventsetTimestamp*(self: gen_qevent_types.QPointerEvent, timestamp: culonglong): void =
+  fcQPointerEvent_virtualbase_setTimestamp(self.h, timestamp)
+
+proc QPointerEventisBeginEvent*(self: gen_qevent_types.QPointerEvent): bool =
+  fcQPointerEvent_virtualbase_isBeginEvent(self.h)
+
+proc QPointerEventisUpdateEvent*(self: gen_qevent_types.QPointerEvent): bool =
+  fcQPointerEvent_virtualbase_isUpdateEvent(self.h)
+
+proc QPointerEventisEndEvent*(self: gen_qevent_types.QPointerEvent): bool =
+  fcQPointerEvent_virtualbase_isEndEvent(self.h)
+
+proc QPointerEventsetAccepted*(self: gen_qevent_types.QPointerEvent, accepted: bool): void =
+  fcQPointerEvent_virtualbase_setAccepted(self.h, accepted)
+
 
 proc fcQPointerEvent_vtable_callback_clone(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QPointerEventVTable](fcQPointerEvent_vdata(self)[])
@@ -1066,17 +1128,11 @@ proc fcQPointerEvent_vtable_callback_clone(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QPointerEventsetTimestamp*(self: gen_qevent_types.QPointerEvent, timestamp: culonglong): void =
-  fcQPointerEvent_virtualbase_setTimestamp(self.h, timestamp)
-
 proc fcQPointerEvent_vtable_callback_setTimestamp(self: pointer, timestamp: culonglong): void {.cdecl.} =
   let vtbl = cast[ptr QPointerEventVTable](fcQPointerEvent_vdata(self)[])
   let self = QPointerEvent(h: self)
   let slotval1 = timestamp
   vtbl[].setTimestamp(self, slotval1)
-
-proc QPointerEventisBeginEvent*(self: gen_qevent_types.QPointerEvent): bool =
-  fcQPointerEvent_virtualbase_isBeginEvent(self.h)
 
 proc fcQPointerEvent_vtable_callback_isBeginEvent(self: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QPointerEventVTable](fcQPointerEvent_vdata(self)[])
@@ -1084,26 +1140,17 @@ proc fcQPointerEvent_vtable_callback_isBeginEvent(self: pointer): bool {.cdecl.}
   var virtualReturn = vtbl[].isBeginEvent(self)
   virtualReturn
 
-proc QPointerEventisUpdateEvent*(self: gen_qevent_types.QPointerEvent): bool =
-  fcQPointerEvent_virtualbase_isUpdateEvent(self.h)
-
 proc fcQPointerEvent_vtable_callback_isUpdateEvent(self: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QPointerEventVTable](fcQPointerEvent_vdata(self)[])
   let self = QPointerEvent(h: self)
   var virtualReturn = vtbl[].isUpdateEvent(self)
   virtualReturn
 
-proc QPointerEventisEndEvent*(self: gen_qevent_types.QPointerEvent): bool =
-  fcQPointerEvent_virtualbase_isEndEvent(self.h)
-
 proc fcQPointerEvent_vtable_callback_isEndEvent(self: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QPointerEventVTable](fcQPointerEvent_vdata(self)[])
   let self = QPointerEvent(h: self)
   var virtualReturn = vtbl[].isEndEvent(self)
   virtualReturn
-
-proc QPointerEventsetAccepted*(self: gen_qevent_types.QPointerEvent, accepted: bool): void =
-  fcQPointerEvent_virtualbase_setAccepted(self.h, accepted)
 
 proc fcQPointerEvent_vtable_callback_setAccepted(self: pointer, accepted: bool): void {.cdecl.} =
   let vtbl = cast[ptr QPointerEventVTable](fcQPointerEvent_vdata(self)[])
@@ -1113,47 +1160,50 @@ proc fcQPointerEvent_vtable_callback_setAccepted(self: pointer, accepted: bool):
 
 type VirtualQPointerEvent* {.inheritable.} = ref object of QPointerEvent
   vtbl*: cQPointerEventVTable
+
 method clone*(self: VirtualQPointerEvent): gen_qevent_types.QPointerEvent {.base.} =
   QPointerEventclone(self[])
+method setTimestamp*(self: VirtualQPointerEvent, timestamp: culonglong): void {.base.} =
+  QPointerEventsetTimestamp(self[], timestamp)
+method isBeginEvent*(self: VirtualQPointerEvent): bool {.base.} =
+  QPointerEventisBeginEvent(self[])
+method isUpdateEvent*(self: VirtualQPointerEvent): bool {.base.} =
+  QPointerEventisUpdateEvent(self[])
+method isEndEvent*(self: VirtualQPointerEvent): bool {.base.} =
+  QPointerEventisEndEvent(self[])
+method setAccepted*(self: VirtualQPointerEvent, accepted: bool): void {.base.} =
+  QPointerEventsetAccepted(self[], accepted)
+
 proc fcQPointerEvent_method_callback_clone(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQPointerEvent](fcQPointerEvent_vdata(self)[])
   var virtualReturn = inst.clone()
   virtualReturn.h
 
-method setTimestamp*(self: VirtualQPointerEvent, timestamp: culonglong): void {.base.} =
-  QPointerEventsetTimestamp(self[], timestamp)
 proc fcQPointerEvent_method_callback_setTimestamp(self: pointer, timestamp: culonglong): void {.cdecl.} =
   let inst = cast[VirtualQPointerEvent](fcQPointerEvent_vdata(self)[])
   let slotval1 = timestamp
   inst.setTimestamp(slotval1)
 
-method isBeginEvent*(self: VirtualQPointerEvent): bool {.base.} =
-  QPointerEventisBeginEvent(self[])
 proc fcQPointerEvent_method_callback_isBeginEvent(self: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQPointerEvent](fcQPointerEvent_vdata(self)[])
   var virtualReturn = inst.isBeginEvent()
   virtualReturn
 
-method isUpdateEvent*(self: VirtualQPointerEvent): bool {.base.} =
-  QPointerEventisUpdateEvent(self[])
 proc fcQPointerEvent_method_callback_isUpdateEvent(self: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQPointerEvent](fcQPointerEvent_vdata(self)[])
   var virtualReturn = inst.isUpdateEvent()
   virtualReturn
 
-method isEndEvent*(self: VirtualQPointerEvent): bool {.base.} =
-  QPointerEventisEndEvent(self[])
 proc fcQPointerEvent_method_callback_isEndEvent(self: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQPointerEvent](fcQPointerEvent_vdata(self)[])
   var virtualReturn = inst.isEndEvent()
   virtualReturn
 
-method setAccepted*(self: VirtualQPointerEvent, accepted: bool): void {.base.} =
-  QPointerEventsetAccepted(self[], accepted)
 proc fcQPointerEvent_method_callback_setAccepted(self: pointer, accepted: bool): void {.cdecl.} =
   let inst = cast[VirtualQPointerEvent](fcQPointerEvent_vdata(self)[])
   let slotval1 = accepted
   inst.setAccepted(slotval1)
+
 
 proc create*(T: type gen_qevent_types.QPointerEvent,
     typeVal: cint, dev: gen_qpointingdevice_types.QPointingDevice,
@@ -1340,6 +1390,7 @@ type QEnterEventisUpdateEventProc* = proc(self: QEnterEvent): bool {.raises: [],
 type QEnterEventisEndEventProc* = proc(self: QEnterEvent): bool {.raises: [], gcsafe.}
 type QEnterEventsetTimestampProc* = proc(self: QEnterEvent, timestamp: culonglong): void {.raises: [], gcsafe.}
 type QEnterEventsetAcceptedProc* = proc(self: QEnterEvent, accepted: bool): void {.raises: [], gcsafe.}
+
 type QEnterEventVTable* {.inheritable, pure.} = object
   vtbl: cQEnterEventVTable
   clone*: QEnterEventcloneProc
@@ -1348,8 +1399,25 @@ type QEnterEventVTable* {.inheritable, pure.} = object
   isEndEvent*: QEnterEventisEndEventProc
   setTimestamp*: QEnterEventsetTimestampProc
   setAccepted*: QEnterEventsetAcceptedProc
+
 proc QEnterEventclone*(self: gen_qevent_types.QEnterEvent): gen_qevent_types.QEnterEvent =
   gen_qevent_types.QEnterEvent(h: fcQEnterEvent_virtualbase_clone(self.h), owned: false)
+
+proc QEnterEventisBeginEvent*(self: gen_qevent_types.QEnterEvent): bool =
+  fcQEnterEvent_virtualbase_isBeginEvent(self.h)
+
+proc QEnterEventisUpdateEvent*(self: gen_qevent_types.QEnterEvent): bool =
+  fcQEnterEvent_virtualbase_isUpdateEvent(self.h)
+
+proc QEnterEventisEndEvent*(self: gen_qevent_types.QEnterEvent): bool =
+  fcQEnterEvent_virtualbase_isEndEvent(self.h)
+
+proc QEnterEventsetTimestamp*(self: gen_qevent_types.QEnterEvent, timestamp: culonglong): void =
+  fcQEnterEvent_virtualbase_setTimestamp(self.h, timestamp)
+
+proc QEnterEventsetAccepted*(self: gen_qevent_types.QEnterEvent, accepted: bool): void =
+  fcQEnterEvent_virtualbase_setAccepted(self.h, accepted)
+
 
 proc fcQEnterEvent_vtable_callback_clone(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QEnterEventVTable](fcQEnterEvent_vdata(self)[])
@@ -1360,17 +1428,11 @@ proc fcQEnterEvent_vtable_callback_clone(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QEnterEventisBeginEvent*(self: gen_qevent_types.QEnterEvent): bool =
-  fcQEnterEvent_virtualbase_isBeginEvent(self.h)
-
 proc fcQEnterEvent_vtable_callback_isBeginEvent(self: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QEnterEventVTable](fcQEnterEvent_vdata(self)[])
   let self = QEnterEvent(h: self)
   var virtualReturn = vtbl[].isBeginEvent(self)
   virtualReturn
-
-proc QEnterEventisUpdateEvent*(self: gen_qevent_types.QEnterEvent): bool =
-  fcQEnterEvent_virtualbase_isUpdateEvent(self.h)
 
 proc fcQEnterEvent_vtable_callback_isUpdateEvent(self: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QEnterEventVTable](fcQEnterEvent_vdata(self)[])
@@ -1378,26 +1440,17 @@ proc fcQEnterEvent_vtable_callback_isUpdateEvent(self: pointer): bool {.cdecl.} 
   var virtualReturn = vtbl[].isUpdateEvent(self)
   virtualReturn
 
-proc QEnterEventisEndEvent*(self: gen_qevent_types.QEnterEvent): bool =
-  fcQEnterEvent_virtualbase_isEndEvent(self.h)
-
 proc fcQEnterEvent_vtable_callback_isEndEvent(self: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QEnterEventVTable](fcQEnterEvent_vdata(self)[])
   let self = QEnterEvent(h: self)
   var virtualReturn = vtbl[].isEndEvent(self)
   virtualReturn
 
-proc QEnterEventsetTimestamp*(self: gen_qevent_types.QEnterEvent, timestamp: culonglong): void =
-  fcQEnterEvent_virtualbase_setTimestamp(self.h, timestamp)
-
 proc fcQEnterEvent_vtable_callback_setTimestamp(self: pointer, timestamp: culonglong): void {.cdecl.} =
   let vtbl = cast[ptr QEnterEventVTable](fcQEnterEvent_vdata(self)[])
   let self = QEnterEvent(h: self)
   let slotval1 = timestamp
   vtbl[].setTimestamp(self, slotval1)
-
-proc QEnterEventsetAccepted*(self: gen_qevent_types.QEnterEvent, accepted: bool): void =
-  fcQEnterEvent_virtualbase_setAccepted(self.h, accepted)
 
 proc fcQEnterEvent_vtable_callback_setAccepted(self: pointer, accepted: bool): void {.cdecl.} =
   let vtbl = cast[ptr QEnterEventVTable](fcQEnterEvent_vdata(self)[])
@@ -1407,47 +1460,50 @@ proc fcQEnterEvent_vtable_callback_setAccepted(self: pointer, accepted: bool): v
 
 type VirtualQEnterEvent* {.inheritable.} = ref object of QEnterEvent
   vtbl*: cQEnterEventVTable
+
 method clone*(self: VirtualQEnterEvent): gen_qevent_types.QEnterEvent {.base.} =
   QEnterEventclone(self[])
+method isBeginEvent*(self: VirtualQEnterEvent): bool {.base.} =
+  QEnterEventisBeginEvent(self[])
+method isUpdateEvent*(self: VirtualQEnterEvent): bool {.base.} =
+  QEnterEventisUpdateEvent(self[])
+method isEndEvent*(self: VirtualQEnterEvent): bool {.base.} =
+  QEnterEventisEndEvent(self[])
+method setTimestamp*(self: VirtualQEnterEvent, timestamp: culonglong): void {.base.} =
+  QEnterEventsetTimestamp(self[], timestamp)
+method setAccepted*(self: VirtualQEnterEvent, accepted: bool): void {.base.} =
+  QEnterEventsetAccepted(self[], accepted)
+
 proc fcQEnterEvent_method_callback_clone(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQEnterEvent](fcQEnterEvent_vdata(self)[])
   var virtualReturn = inst.clone()
   virtualReturn.h
 
-method isBeginEvent*(self: VirtualQEnterEvent): bool {.base.} =
-  QEnterEventisBeginEvent(self[])
 proc fcQEnterEvent_method_callback_isBeginEvent(self: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQEnterEvent](fcQEnterEvent_vdata(self)[])
   var virtualReturn = inst.isBeginEvent()
   virtualReturn
 
-method isUpdateEvent*(self: VirtualQEnterEvent): bool {.base.} =
-  QEnterEventisUpdateEvent(self[])
 proc fcQEnterEvent_method_callback_isUpdateEvent(self: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQEnterEvent](fcQEnterEvent_vdata(self)[])
   var virtualReturn = inst.isUpdateEvent()
   virtualReturn
 
-method isEndEvent*(self: VirtualQEnterEvent): bool {.base.} =
-  QEnterEventisEndEvent(self[])
 proc fcQEnterEvent_method_callback_isEndEvent(self: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQEnterEvent](fcQEnterEvent_vdata(self)[])
   var virtualReturn = inst.isEndEvent()
   virtualReturn
 
-method setTimestamp*(self: VirtualQEnterEvent, timestamp: culonglong): void {.base.} =
-  QEnterEventsetTimestamp(self[], timestamp)
 proc fcQEnterEvent_method_callback_setTimestamp(self: pointer, timestamp: culonglong): void {.cdecl.} =
   let inst = cast[VirtualQEnterEvent](fcQEnterEvent_vdata(self)[])
   let slotval1 = timestamp
   inst.setTimestamp(slotval1)
 
-method setAccepted*(self: VirtualQEnterEvent, accepted: bool): void {.base.} =
-  QEnterEventsetAccepted(self[], accepted)
 proc fcQEnterEvent_method_callback_setAccepted(self: pointer, accepted: bool): void {.cdecl.} =
   let inst = cast[VirtualQEnterEvent](fcQEnterEvent_vdata(self)[])
   let slotval1 = accepted
   inst.setAccepted(slotval1)
+
 
 proc create*(T: type gen_qevent_types.QEnterEvent,
     localPos: gen_qpoint_types.QPointF, scenePos: gen_qpoint_types.QPointF, globalPos: gen_qpoint_types.QPointF,
@@ -1566,6 +1622,7 @@ type QMouseEventisUpdateEventProc* = proc(self: QMouseEvent): bool {.raises: [],
 type QMouseEventisEndEventProc* = proc(self: QMouseEvent): bool {.raises: [], gcsafe.}
 type QMouseEventsetTimestampProc* = proc(self: QMouseEvent, timestamp: culonglong): void {.raises: [], gcsafe.}
 type QMouseEventsetAcceptedProc* = proc(self: QMouseEvent, accepted: bool): void {.raises: [], gcsafe.}
+
 type QMouseEventVTable* {.inheritable, pure.} = object
   vtbl: cQMouseEventVTable
   clone*: QMouseEventcloneProc
@@ -1574,8 +1631,25 @@ type QMouseEventVTable* {.inheritable, pure.} = object
   isEndEvent*: QMouseEventisEndEventProc
   setTimestamp*: QMouseEventsetTimestampProc
   setAccepted*: QMouseEventsetAcceptedProc
+
 proc QMouseEventclone*(self: gen_qevent_types.QMouseEvent): gen_qevent_types.QMouseEvent =
   gen_qevent_types.QMouseEvent(h: fcQMouseEvent_virtualbase_clone(self.h), owned: false)
+
+proc QMouseEventisBeginEvent*(self: gen_qevent_types.QMouseEvent): bool =
+  fcQMouseEvent_virtualbase_isBeginEvent(self.h)
+
+proc QMouseEventisUpdateEvent*(self: gen_qevent_types.QMouseEvent): bool =
+  fcQMouseEvent_virtualbase_isUpdateEvent(self.h)
+
+proc QMouseEventisEndEvent*(self: gen_qevent_types.QMouseEvent): bool =
+  fcQMouseEvent_virtualbase_isEndEvent(self.h)
+
+proc QMouseEventsetTimestamp*(self: gen_qevent_types.QMouseEvent, timestamp: culonglong): void =
+  fcQMouseEvent_virtualbase_setTimestamp(self.h, timestamp)
+
+proc QMouseEventsetAccepted*(self: gen_qevent_types.QMouseEvent, accepted: bool): void =
+  fcQMouseEvent_virtualbase_setAccepted(self.h, accepted)
+
 
 proc fcQMouseEvent_vtable_callback_clone(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QMouseEventVTable](fcQMouseEvent_vdata(self)[])
@@ -1586,17 +1660,11 @@ proc fcQMouseEvent_vtable_callback_clone(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QMouseEventisBeginEvent*(self: gen_qevent_types.QMouseEvent): bool =
-  fcQMouseEvent_virtualbase_isBeginEvent(self.h)
-
 proc fcQMouseEvent_vtable_callback_isBeginEvent(self: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QMouseEventVTable](fcQMouseEvent_vdata(self)[])
   let self = QMouseEvent(h: self)
   var virtualReturn = vtbl[].isBeginEvent(self)
   virtualReturn
-
-proc QMouseEventisUpdateEvent*(self: gen_qevent_types.QMouseEvent): bool =
-  fcQMouseEvent_virtualbase_isUpdateEvent(self.h)
 
 proc fcQMouseEvent_vtable_callback_isUpdateEvent(self: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QMouseEventVTable](fcQMouseEvent_vdata(self)[])
@@ -1604,26 +1672,17 @@ proc fcQMouseEvent_vtable_callback_isUpdateEvent(self: pointer): bool {.cdecl.} 
   var virtualReturn = vtbl[].isUpdateEvent(self)
   virtualReturn
 
-proc QMouseEventisEndEvent*(self: gen_qevent_types.QMouseEvent): bool =
-  fcQMouseEvent_virtualbase_isEndEvent(self.h)
-
 proc fcQMouseEvent_vtable_callback_isEndEvent(self: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QMouseEventVTable](fcQMouseEvent_vdata(self)[])
   let self = QMouseEvent(h: self)
   var virtualReturn = vtbl[].isEndEvent(self)
   virtualReturn
 
-proc QMouseEventsetTimestamp*(self: gen_qevent_types.QMouseEvent, timestamp: culonglong): void =
-  fcQMouseEvent_virtualbase_setTimestamp(self.h, timestamp)
-
 proc fcQMouseEvent_vtable_callback_setTimestamp(self: pointer, timestamp: culonglong): void {.cdecl.} =
   let vtbl = cast[ptr QMouseEventVTable](fcQMouseEvent_vdata(self)[])
   let self = QMouseEvent(h: self)
   let slotval1 = timestamp
   vtbl[].setTimestamp(self, slotval1)
-
-proc QMouseEventsetAccepted*(self: gen_qevent_types.QMouseEvent, accepted: bool): void =
-  fcQMouseEvent_virtualbase_setAccepted(self.h, accepted)
 
 proc fcQMouseEvent_vtable_callback_setAccepted(self: pointer, accepted: bool): void {.cdecl.} =
   let vtbl = cast[ptr QMouseEventVTable](fcQMouseEvent_vdata(self)[])
@@ -1633,47 +1692,50 @@ proc fcQMouseEvent_vtable_callback_setAccepted(self: pointer, accepted: bool): v
 
 type VirtualQMouseEvent* {.inheritable.} = ref object of QMouseEvent
   vtbl*: cQMouseEventVTable
+
 method clone*(self: VirtualQMouseEvent): gen_qevent_types.QMouseEvent {.base.} =
   QMouseEventclone(self[])
+method isBeginEvent*(self: VirtualQMouseEvent): bool {.base.} =
+  QMouseEventisBeginEvent(self[])
+method isUpdateEvent*(self: VirtualQMouseEvent): bool {.base.} =
+  QMouseEventisUpdateEvent(self[])
+method isEndEvent*(self: VirtualQMouseEvent): bool {.base.} =
+  QMouseEventisEndEvent(self[])
+method setTimestamp*(self: VirtualQMouseEvent, timestamp: culonglong): void {.base.} =
+  QMouseEventsetTimestamp(self[], timestamp)
+method setAccepted*(self: VirtualQMouseEvent, accepted: bool): void {.base.} =
+  QMouseEventsetAccepted(self[], accepted)
+
 proc fcQMouseEvent_method_callback_clone(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQMouseEvent](fcQMouseEvent_vdata(self)[])
   var virtualReturn = inst.clone()
   virtualReturn.h
 
-method isBeginEvent*(self: VirtualQMouseEvent): bool {.base.} =
-  QMouseEventisBeginEvent(self[])
 proc fcQMouseEvent_method_callback_isBeginEvent(self: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQMouseEvent](fcQMouseEvent_vdata(self)[])
   var virtualReturn = inst.isBeginEvent()
   virtualReturn
 
-method isUpdateEvent*(self: VirtualQMouseEvent): bool {.base.} =
-  QMouseEventisUpdateEvent(self[])
 proc fcQMouseEvent_method_callback_isUpdateEvent(self: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQMouseEvent](fcQMouseEvent_vdata(self)[])
   var virtualReturn = inst.isUpdateEvent()
   virtualReturn
 
-method isEndEvent*(self: VirtualQMouseEvent): bool {.base.} =
-  QMouseEventisEndEvent(self[])
 proc fcQMouseEvent_method_callback_isEndEvent(self: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQMouseEvent](fcQMouseEvent_vdata(self)[])
   var virtualReturn = inst.isEndEvent()
   virtualReturn
 
-method setTimestamp*(self: VirtualQMouseEvent, timestamp: culonglong): void {.base.} =
-  QMouseEventsetTimestamp(self[], timestamp)
 proc fcQMouseEvent_method_callback_setTimestamp(self: pointer, timestamp: culonglong): void {.cdecl.} =
   let inst = cast[VirtualQMouseEvent](fcQMouseEvent_vdata(self)[])
   let slotval1 = timestamp
   inst.setTimestamp(slotval1)
 
-method setAccepted*(self: VirtualQMouseEvent, accepted: bool): void {.base.} =
-  QMouseEventsetAccepted(self[], accepted)
 proc fcQMouseEvent_method_callback_setAccepted(self: pointer, accepted: bool): void {.cdecl.} =
   let inst = cast[VirtualQMouseEvent](fcQMouseEvent_vdata(self)[])
   let slotval1 = accepted
   inst.setAccepted(slotval1)
+
 
 proc create*(T: type gen_qevent_types.QMouseEvent,
     typeVal: cint, localPos: gen_qpoint_types.QPointF, button: cint, buttons: cint, modifiers: cint,
@@ -1960,6 +2022,7 @@ type QHoverEventisBeginEventProc* = proc(self: QHoverEvent): bool {.raises: [], 
 type QHoverEventisEndEventProc* = proc(self: QHoverEvent): bool {.raises: [], gcsafe.}
 type QHoverEventsetTimestampProc* = proc(self: QHoverEvent, timestamp: culonglong): void {.raises: [], gcsafe.}
 type QHoverEventsetAcceptedProc* = proc(self: QHoverEvent, accepted: bool): void {.raises: [], gcsafe.}
+
 type QHoverEventVTable* {.inheritable, pure.} = object
   vtbl: cQHoverEventVTable
   clone*: QHoverEventcloneProc
@@ -1968,8 +2031,25 @@ type QHoverEventVTable* {.inheritable, pure.} = object
   isEndEvent*: QHoverEventisEndEventProc
   setTimestamp*: QHoverEventsetTimestampProc
   setAccepted*: QHoverEventsetAcceptedProc
+
 proc QHoverEventclone*(self: gen_qevent_types.QHoverEvent): gen_qevent_types.QHoverEvent =
   gen_qevent_types.QHoverEvent(h: fcQHoverEvent_virtualbase_clone(self.h), owned: false)
+
+proc QHoverEventisUpdateEvent*(self: gen_qevent_types.QHoverEvent): bool =
+  fcQHoverEvent_virtualbase_isUpdateEvent(self.h)
+
+proc QHoverEventisBeginEvent*(self: gen_qevent_types.QHoverEvent): bool =
+  fcQHoverEvent_virtualbase_isBeginEvent(self.h)
+
+proc QHoverEventisEndEvent*(self: gen_qevent_types.QHoverEvent): bool =
+  fcQHoverEvent_virtualbase_isEndEvent(self.h)
+
+proc QHoverEventsetTimestamp*(self: gen_qevent_types.QHoverEvent, timestamp: culonglong): void =
+  fcQHoverEvent_virtualbase_setTimestamp(self.h, timestamp)
+
+proc QHoverEventsetAccepted*(self: gen_qevent_types.QHoverEvent, accepted: bool): void =
+  fcQHoverEvent_virtualbase_setAccepted(self.h, accepted)
+
 
 proc fcQHoverEvent_vtable_callback_clone(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QHoverEventVTable](fcQHoverEvent_vdata(self)[])
@@ -1980,17 +2060,11 @@ proc fcQHoverEvent_vtable_callback_clone(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QHoverEventisUpdateEvent*(self: gen_qevent_types.QHoverEvent): bool =
-  fcQHoverEvent_virtualbase_isUpdateEvent(self.h)
-
 proc fcQHoverEvent_vtable_callback_isUpdateEvent(self: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QHoverEventVTable](fcQHoverEvent_vdata(self)[])
   let self = QHoverEvent(h: self)
   var virtualReturn = vtbl[].isUpdateEvent(self)
   virtualReturn
-
-proc QHoverEventisBeginEvent*(self: gen_qevent_types.QHoverEvent): bool =
-  fcQHoverEvent_virtualbase_isBeginEvent(self.h)
 
 proc fcQHoverEvent_vtable_callback_isBeginEvent(self: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QHoverEventVTable](fcQHoverEvent_vdata(self)[])
@@ -1998,26 +2072,17 @@ proc fcQHoverEvent_vtable_callback_isBeginEvent(self: pointer): bool {.cdecl.} =
   var virtualReturn = vtbl[].isBeginEvent(self)
   virtualReturn
 
-proc QHoverEventisEndEvent*(self: gen_qevent_types.QHoverEvent): bool =
-  fcQHoverEvent_virtualbase_isEndEvent(self.h)
-
 proc fcQHoverEvent_vtable_callback_isEndEvent(self: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QHoverEventVTable](fcQHoverEvent_vdata(self)[])
   let self = QHoverEvent(h: self)
   var virtualReturn = vtbl[].isEndEvent(self)
   virtualReturn
 
-proc QHoverEventsetTimestamp*(self: gen_qevent_types.QHoverEvent, timestamp: culonglong): void =
-  fcQHoverEvent_virtualbase_setTimestamp(self.h, timestamp)
-
 proc fcQHoverEvent_vtable_callback_setTimestamp(self: pointer, timestamp: culonglong): void {.cdecl.} =
   let vtbl = cast[ptr QHoverEventVTable](fcQHoverEvent_vdata(self)[])
   let self = QHoverEvent(h: self)
   let slotval1 = timestamp
   vtbl[].setTimestamp(self, slotval1)
-
-proc QHoverEventsetAccepted*(self: gen_qevent_types.QHoverEvent, accepted: bool): void =
-  fcQHoverEvent_virtualbase_setAccepted(self.h, accepted)
 
 proc fcQHoverEvent_vtable_callback_setAccepted(self: pointer, accepted: bool): void {.cdecl.} =
   let vtbl = cast[ptr QHoverEventVTable](fcQHoverEvent_vdata(self)[])
@@ -2027,47 +2092,50 @@ proc fcQHoverEvent_vtable_callback_setAccepted(self: pointer, accepted: bool): v
 
 type VirtualQHoverEvent* {.inheritable.} = ref object of QHoverEvent
   vtbl*: cQHoverEventVTable
+
 method clone*(self: VirtualQHoverEvent): gen_qevent_types.QHoverEvent {.base.} =
   QHoverEventclone(self[])
+method isUpdateEvent*(self: VirtualQHoverEvent): bool {.base.} =
+  QHoverEventisUpdateEvent(self[])
+method isBeginEvent*(self: VirtualQHoverEvent): bool {.base.} =
+  QHoverEventisBeginEvent(self[])
+method isEndEvent*(self: VirtualQHoverEvent): bool {.base.} =
+  QHoverEventisEndEvent(self[])
+method setTimestamp*(self: VirtualQHoverEvent, timestamp: culonglong): void {.base.} =
+  QHoverEventsetTimestamp(self[], timestamp)
+method setAccepted*(self: VirtualQHoverEvent, accepted: bool): void {.base.} =
+  QHoverEventsetAccepted(self[], accepted)
+
 proc fcQHoverEvent_method_callback_clone(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQHoverEvent](fcQHoverEvent_vdata(self)[])
   var virtualReturn = inst.clone()
   virtualReturn.h
 
-method isUpdateEvent*(self: VirtualQHoverEvent): bool {.base.} =
-  QHoverEventisUpdateEvent(self[])
 proc fcQHoverEvent_method_callback_isUpdateEvent(self: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQHoverEvent](fcQHoverEvent_vdata(self)[])
   var virtualReturn = inst.isUpdateEvent()
   virtualReturn
 
-method isBeginEvent*(self: VirtualQHoverEvent): bool {.base.} =
-  QHoverEventisBeginEvent(self[])
 proc fcQHoverEvent_method_callback_isBeginEvent(self: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQHoverEvent](fcQHoverEvent_vdata(self)[])
   var virtualReturn = inst.isBeginEvent()
   virtualReturn
 
-method isEndEvent*(self: VirtualQHoverEvent): bool {.base.} =
-  QHoverEventisEndEvent(self[])
 proc fcQHoverEvent_method_callback_isEndEvent(self: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQHoverEvent](fcQHoverEvent_vdata(self)[])
   var virtualReturn = inst.isEndEvent()
   virtualReturn
 
-method setTimestamp*(self: VirtualQHoverEvent, timestamp: culonglong): void {.base.} =
-  QHoverEventsetTimestamp(self[], timestamp)
 proc fcQHoverEvent_method_callback_setTimestamp(self: pointer, timestamp: culonglong): void {.cdecl.} =
   let inst = cast[VirtualQHoverEvent](fcQHoverEvent_vdata(self)[])
   let slotval1 = timestamp
   inst.setTimestamp(slotval1)
 
-method setAccepted*(self: VirtualQHoverEvent, accepted: bool): void {.base.} =
-  QHoverEventsetAccepted(self[], accepted)
 proc fcQHoverEvent_method_callback_setAccepted(self: pointer, accepted: bool): void {.cdecl.} =
   let inst = cast[VirtualQHoverEvent](fcQHoverEvent_vdata(self)[])
   let slotval1 = accepted
   inst.setAccepted(slotval1)
+
 
 proc create*(T: type gen_qevent_types.QHoverEvent,
     typeVal: cint, scenePos: gen_qpoint_types.QPointF, globalPos: gen_qpoint_types.QPointF, oldPos: gen_qpoint_types.QPointF,
@@ -2307,6 +2375,7 @@ type QWheelEventisUpdateEventProc* = proc(self: QWheelEvent): bool {.raises: [],
 type QWheelEventisEndEventProc* = proc(self: QWheelEvent): bool {.raises: [], gcsafe.}
 type QWheelEventsetTimestampProc* = proc(self: QWheelEvent, timestamp: culonglong): void {.raises: [], gcsafe.}
 type QWheelEventsetAcceptedProc* = proc(self: QWheelEvent, accepted: bool): void {.raises: [], gcsafe.}
+
 type QWheelEventVTable* {.inheritable, pure.} = object
   vtbl: cQWheelEventVTable
   clone*: QWheelEventcloneProc
@@ -2315,8 +2384,25 @@ type QWheelEventVTable* {.inheritable, pure.} = object
   isEndEvent*: QWheelEventisEndEventProc
   setTimestamp*: QWheelEventsetTimestampProc
   setAccepted*: QWheelEventsetAcceptedProc
+
 proc QWheelEventclone*(self: gen_qevent_types.QWheelEvent): gen_qevent_types.QWheelEvent =
   gen_qevent_types.QWheelEvent(h: fcQWheelEvent_virtualbase_clone(self.h), owned: false)
+
+proc QWheelEventisBeginEvent*(self: gen_qevent_types.QWheelEvent): bool =
+  fcQWheelEvent_virtualbase_isBeginEvent(self.h)
+
+proc QWheelEventisUpdateEvent*(self: gen_qevent_types.QWheelEvent): bool =
+  fcQWheelEvent_virtualbase_isUpdateEvent(self.h)
+
+proc QWheelEventisEndEvent*(self: gen_qevent_types.QWheelEvent): bool =
+  fcQWheelEvent_virtualbase_isEndEvent(self.h)
+
+proc QWheelEventsetTimestamp*(self: gen_qevent_types.QWheelEvent, timestamp: culonglong): void =
+  fcQWheelEvent_virtualbase_setTimestamp(self.h, timestamp)
+
+proc QWheelEventsetAccepted*(self: gen_qevent_types.QWheelEvent, accepted: bool): void =
+  fcQWheelEvent_virtualbase_setAccepted(self.h, accepted)
+
 
 proc fcQWheelEvent_vtable_callback_clone(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QWheelEventVTable](fcQWheelEvent_vdata(self)[])
@@ -2327,17 +2413,11 @@ proc fcQWheelEvent_vtable_callback_clone(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QWheelEventisBeginEvent*(self: gen_qevent_types.QWheelEvent): bool =
-  fcQWheelEvent_virtualbase_isBeginEvent(self.h)
-
 proc fcQWheelEvent_vtable_callback_isBeginEvent(self: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QWheelEventVTable](fcQWheelEvent_vdata(self)[])
   let self = QWheelEvent(h: self)
   var virtualReturn = vtbl[].isBeginEvent(self)
   virtualReturn
-
-proc QWheelEventisUpdateEvent*(self: gen_qevent_types.QWheelEvent): bool =
-  fcQWheelEvent_virtualbase_isUpdateEvent(self.h)
 
 proc fcQWheelEvent_vtable_callback_isUpdateEvent(self: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QWheelEventVTable](fcQWheelEvent_vdata(self)[])
@@ -2345,26 +2425,17 @@ proc fcQWheelEvent_vtable_callback_isUpdateEvent(self: pointer): bool {.cdecl.} 
   var virtualReturn = vtbl[].isUpdateEvent(self)
   virtualReturn
 
-proc QWheelEventisEndEvent*(self: gen_qevent_types.QWheelEvent): bool =
-  fcQWheelEvent_virtualbase_isEndEvent(self.h)
-
 proc fcQWheelEvent_vtable_callback_isEndEvent(self: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QWheelEventVTable](fcQWheelEvent_vdata(self)[])
   let self = QWheelEvent(h: self)
   var virtualReturn = vtbl[].isEndEvent(self)
   virtualReturn
 
-proc QWheelEventsetTimestamp*(self: gen_qevent_types.QWheelEvent, timestamp: culonglong): void =
-  fcQWheelEvent_virtualbase_setTimestamp(self.h, timestamp)
-
 proc fcQWheelEvent_vtable_callback_setTimestamp(self: pointer, timestamp: culonglong): void {.cdecl.} =
   let vtbl = cast[ptr QWheelEventVTable](fcQWheelEvent_vdata(self)[])
   let self = QWheelEvent(h: self)
   let slotval1 = timestamp
   vtbl[].setTimestamp(self, slotval1)
-
-proc QWheelEventsetAccepted*(self: gen_qevent_types.QWheelEvent, accepted: bool): void =
-  fcQWheelEvent_virtualbase_setAccepted(self.h, accepted)
 
 proc fcQWheelEvent_vtable_callback_setAccepted(self: pointer, accepted: bool): void {.cdecl.} =
   let vtbl = cast[ptr QWheelEventVTable](fcQWheelEvent_vdata(self)[])
@@ -2374,47 +2445,50 @@ proc fcQWheelEvent_vtable_callback_setAccepted(self: pointer, accepted: bool): v
 
 type VirtualQWheelEvent* {.inheritable.} = ref object of QWheelEvent
   vtbl*: cQWheelEventVTable
+
 method clone*(self: VirtualQWheelEvent): gen_qevent_types.QWheelEvent {.base.} =
   QWheelEventclone(self[])
+method isBeginEvent*(self: VirtualQWheelEvent): bool {.base.} =
+  QWheelEventisBeginEvent(self[])
+method isUpdateEvent*(self: VirtualQWheelEvent): bool {.base.} =
+  QWheelEventisUpdateEvent(self[])
+method isEndEvent*(self: VirtualQWheelEvent): bool {.base.} =
+  QWheelEventisEndEvent(self[])
+method setTimestamp*(self: VirtualQWheelEvent, timestamp: culonglong): void {.base.} =
+  QWheelEventsetTimestamp(self[], timestamp)
+method setAccepted*(self: VirtualQWheelEvent, accepted: bool): void {.base.} =
+  QWheelEventsetAccepted(self[], accepted)
+
 proc fcQWheelEvent_method_callback_clone(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQWheelEvent](fcQWheelEvent_vdata(self)[])
   var virtualReturn = inst.clone()
   virtualReturn.h
 
-method isBeginEvent*(self: VirtualQWheelEvent): bool {.base.} =
-  QWheelEventisBeginEvent(self[])
 proc fcQWheelEvent_method_callback_isBeginEvent(self: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQWheelEvent](fcQWheelEvent_vdata(self)[])
   var virtualReturn = inst.isBeginEvent()
   virtualReturn
 
-method isUpdateEvent*(self: VirtualQWheelEvent): bool {.base.} =
-  QWheelEventisUpdateEvent(self[])
 proc fcQWheelEvent_method_callback_isUpdateEvent(self: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQWheelEvent](fcQWheelEvent_vdata(self)[])
   var virtualReturn = inst.isUpdateEvent()
   virtualReturn
 
-method isEndEvent*(self: VirtualQWheelEvent): bool {.base.} =
-  QWheelEventisEndEvent(self[])
 proc fcQWheelEvent_method_callback_isEndEvent(self: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQWheelEvent](fcQWheelEvent_vdata(self)[])
   var virtualReturn = inst.isEndEvent()
   virtualReturn
 
-method setTimestamp*(self: VirtualQWheelEvent, timestamp: culonglong): void {.base.} =
-  QWheelEventsetTimestamp(self[], timestamp)
 proc fcQWheelEvent_method_callback_setTimestamp(self: pointer, timestamp: culonglong): void {.cdecl.} =
   let inst = cast[VirtualQWheelEvent](fcQWheelEvent_vdata(self)[])
   let slotval1 = timestamp
   inst.setTimestamp(slotval1)
 
-method setAccepted*(self: VirtualQWheelEvent, accepted: bool): void {.base.} =
-  QWheelEventsetAccepted(self[], accepted)
 proc fcQWheelEvent_method_callback_setAccepted(self: pointer, accepted: bool): void {.cdecl.} =
   let inst = cast[VirtualQWheelEvent](fcQWheelEvent_vdata(self)[])
   let slotval1 = accepted
   inst.setAccepted(slotval1)
+
 
 proc create*(T: type gen_qevent_types.QWheelEvent,
     pos: gen_qpoint_types.QPointF, globalPos: gen_qpoint_types.QPointF, pixelDelta: gen_qpoint_types.QPoint, angleDelta: gen_qpoint_types.QPoint, buttons: cint, modifiers: cint, phase: cint, inverted: bool,
@@ -2584,6 +2658,7 @@ type QTabletEventisUpdateEventProc* = proc(self: QTabletEvent): bool {.raises: [
 type QTabletEventisEndEventProc* = proc(self: QTabletEvent): bool {.raises: [], gcsafe.}
 type QTabletEventsetTimestampProc* = proc(self: QTabletEvent, timestamp: culonglong): void {.raises: [], gcsafe.}
 type QTabletEventsetAcceptedProc* = proc(self: QTabletEvent, accepted: bool): void {.raises: [], gcsafe.}
+
 type QTabletEventVTable* {.inheritable, pure.} = object
   vtbl: cQTabletEventVTable
   clone*: QTabletEventcloneProc
@@ -2592,8 +2667,25 @@ type QTabletEventVTable* {.inheritable, pure.} = object
   isEndEvent*: QTabletEventisEndEventProc
   setTimestamp*: QTabletEventsetTimestampProc
   setAccepted*: QTabletEventsetAcceptedProc
+
 proc QTabletEventclone*(self: gen_qevent_types.QTabletEvent): gen_qevent_types.QTabletEvent =
   gen_qevent_types.QTabletEvent(h: fcQTabletEvent_virtualbase_clone(self.h), owned: false)
+
+proc QTabletEventisBeginEvent*(self: gen_qevent_types.QTabletEvent): bool =
+  fcQTabletEvent_virtualbase_isBeginEvent(self.h)
+
+proc QTabletEventisUpdateEvent*(self: gen_qevent_types.QTabletEvent): bool =
+  fcQTabletEvent_virtualbase_isUpdateEvent(self.h)
+
+proc QTabletEventisEndEvent*(self: gen_qevent_types.QTabletEvent): bool =
+  fcQTabletEvent_virtualbase_isEndEvent(self.h)
+
+proc QTabletEventsetTimestamp*(self: gen_qevent_types.QTabletEvent, timestamp: culonglong): void =
+  fcQTabletEvent_virtualbase_setTimestamp(self.h, timestamp)
+
+proc QTabletEventsetAccepted*(self: gen_qevent_types.QTabletEvent, accepted: bool): void =
+  fcQTabletEvent_virtualbase_setAccepted(self.h, accepted)
+
 
 proc fcQTabletEvent_vtable_callback_clone(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QTabletEventVTable](fcQTabletEvent_vdata(self)[])
@@ -2604,17 +2696,11 @@ proc fcQTabletEvent_vtable_callback_clone(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QTabletEventisBeginEvent*(self: gen_qevent_types.QTabletEvent): bool =
-  fcQTabletEvent_virtualbase_isBeginEvent(self.h)
-
 proc fcQTabletEvent_vtable_callback_isBeginEvent(self: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QTabletEventVTable](fcQTabletEvent_vdata(self)[])
   let self = QTabletEvent(h: self)
   var virtualReturn = vtbl[].isBeginEvent(self)
   virtualReturn
-
-proc QTabletEventisUpdateEvent*(self: gen_qevent_types.QTabletEvent): bool =
-  fcQTabletEvent_virtualbase_isUpdateEvent(self.h)
 
 proc fcQTabletEvent_vtable_callback_isUpdateEvent(self: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QTabletEventVTable](fcQTabletEvent_vdata(self)[])
@@ -2622,26 +2708,17 @@ proc fcQTabletEvent_vtable_callback_isUpdateEvent(self: pointer): bool {.cdecl.}
   var virtualReturn = vtbl[].isUpdateEvent(self)
   virtualReturn
 
-proc QTabletEventisEndEvent*(self: gen_qevent_types.QTabletEvent): bool =
-  fcQTabletEvent_virtualbase_isEndEvent(self.h)
-
 proc fcQTabletEvent_vtable_callback_isEndEvent(self: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QTabletEventVTable](fcQTabletEvent_vdata(self)[])
   let self = QTabletEvent(h: self)
   var virtualReturn = vtbl[].isEndEvent(self)
   virtualReturn
 
-proc QTabletEventsetTimestamp*(self: gen_qevent_types.QTabletEvent, timestamp: culonglong): void =
-  fcQTabletEvent_virtualbase_setTimestamp(self.h, timestamp)
-
 proc fcQTabletEvent_vtable_callback_setTimestamp(self: pointer, timestamp: culonglong): void {.cdecl.} =
   let vtbl = cast[ptr QTabletEventVTable](fcQTabletEvent_vdata(self)[])
   let self = QTabletEvent(h: self)
   let slotval1 = timestamp
   vtbl[].setTimestamp(self, slotval1)
-
-proc QTabletEventsetAccepted*(self: gen_qevent_types.QTabletEvent, accepted: bool): void =
-  fcQTabletEvent_virtualbase_setAccepted(self.h, accepted)
 
 proc fcQTabletEvent_vtable_callback_setAccepted(self: pointer, accepted: bool): void {.cdecl.} =
   let vtbl = cast[ptr QTabletEventVTable](fcQTabletEvent_vdata(self)[])
@@ -2651,47 +2728,50 @@ proc fcQTabletEvent_vtable_callback_setAccepted(self: pointer, accepted: bool): 
 
 type VirtualQTabletEvent* {.inheritable.} = ref object of QTabletEvent
   vtbl*: cQTabletEventVTable
+
 method clone*(self: VirtualQTabletEvent): gen_qevent_types.QTabletEvent {.base.} =
   QTabletEventclone(self[])
+method isBeginEvent*(self: VirtualQTabletEvent): bool {.base.} =
+  QTabletEventisBeginEvent(self[])
+method isUpdateEvent*(self: VirtualQTabletEvent): bool {.base.} =
+  QTabletEventisUpdateEvent(self[])
+method isEndEvent*(self: VirtualQTabletEvent): bool {.base.} =
+  QTabletEventisEndEvent(self[])
+method setTimestamp*(self: VirtualQTabletEvent, timestamp: culonglong): void {.base.} =
+  QTabletEventsetTimestamp(self[], timestamp)
+method setAccepted*(self: VirtualQTabletEvent, accepted: bool): void {.base.} =
+  QTabletEventsetAccepted(self[], accepted)
+
 proc fcQTabletEvent_method_callback_clone(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQTabletEvent](fcQTabletEvent_vdata(self)[])
   var virtualReturn = inst.clone()
   virtualReturn.h
 
-method isBeginEvent*(self: VirtualQTabletEvent): bool {.base.} =
-  QTabletEventisBeginEvent(self[])
 proc fcQTabletEvent_method_callback_isBeginEvent(self: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQTabletEvent](fcQTabletEvent_vdata(self)[])
   var virtualReturn = inst.isBeginEvent()
   virtualReturn
 
-method isUpdateEvent*(self: VirtualQTabletEvent): bool {.base.} =
-  QTabletEventisUpdateEvent(self[])
 proc fcQTabletEvent_method_callback_isUpdateEvent(self: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQTabletEvent](fcQTabletEvent_vdata(self)[])
   var virtualReturn = inst.isUpdateEvent()
   virtualReturn
 
-method isEndEvent*(self: VirtualQTabletEvent): bool {.base.} =
-  QTabletEventisEndEvent(self[])
 proc fcQTabletEvent_method_callback_isEndEvent(self: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQTabletEvent](fcQTabletEvent_vdata(self)[])
   var virtualReturn = inst.isEndEvent()
   virtualReturn
 
-method setTimestamp*(self: VirtualQTabletEvent, timestamp: culonglong): void {.base.} =
-  QTabletEventsetTimestamp(self[], timestamp)
 proc fcQTabletEvent_method_callback_setTimestamp(self: pointer, timestamp: culonglong): void {.cdecl.} =
   let inst = cast[VirtualQTabletEvent](fcQTabletEvent_vdata(self)[])
   let slotval1 = timestamp
   inst.setTimestamp(slotval1)
 
-method setAccepted*(self: VirtualQTabletEvent, accepted: bool): void {.base.} =
-  QTabletEventsetAccepted(self[], accepted)
 proc fcQTabletEvent_method_callback_setAccepted(self: pointer, accepted: bool): void {.cdecl.} =
   let inst = cast[VirtualQTabletEvent](fcQTabletEvent_vdata(self)[])
   let slotval1 = accepted
   inst.setAccepted(slotval1)
+
 
 proc create*(T: type gen_qevent_types.QTabletEvent,
     t: cint, device: gen_qpointingdevice_types.QPointingDevice, pos: gen_qpoint_types.QPointF, globalPos: gen_qpoint_types.QPointF, pressure: float64, xTilt: float32, yTilt: float32, tangentialPressure: float32, rotation: float64, z: float32, keyState: cint, button: cint, buttons: cint,
@@ -2773,6 +2853,7 @@ type QNativeGestureEventisUpdateEventProc* = proc(self: QNativeGestureEvent): bo
 type QNativeGestureEventisEndEventProc* = proc(self: QNativeGestureEvent): bool {.raises: [], gcsafe.}
 type QNativeGestureEventsetTimestampProc* = proc(self: QNativeGestureEvent, timestamp: culonglong): void {.raises: [], gcsafe.}
 type QNativeGestureEventsetAcceptedProc* = proc(self: QNativeGestureEvent, accepted: bool): void {.raises: [], gcsafe.}
+
 type QNativeGestureEventVTable* {.inheritable, pure.} = object
   vtbl: cQNativeGestureEventVTable
   clone*: QNativeGestureEventcloneProc
@@ -2781,8 +2862,25 @@ type QNativeGestureEventVTable* {.inheritable, pure.} = object
   isEndEvent*: QNativeGestureEventisEndEventProc
   setTimestamp*: QNativeGestureEventsetTimestampProc
   setAccepted*: QNativeGestureEventsetAcceptedProc
+
 proc QNativeGestureEventclone*(self: gen_qevent_types.QNativeGestureEvent): gen_qevent_types.QNativeGestureEvent =
   gen_qevent_types.QNativeGestureEvent(h: fcQNativeGestureEvent_virtualbase_clone(self.h), owned: false)
+
+proc QNativeGestureEventisBeginEvent*(self: gen_qevent_types.QNativeGestureEvent): bool =
+  fcQNativeGestureEvent_virtualbase_isBeginEvent(self.h)
+
+proc QNativeGestureEventisUpdateEvent*(self: gen_qevent_types.QNativeGestureEvent): bool =
+  fcQNativeGestureEvent_virtualbase_isUpdateEvent(self.h)
+
+proc QNativeGestureEventisEndEvent*(self: gen_qevent_types.QNativeGestureEvent): bool =
+  fcQNativeGestureEvent_virtualbase_isEndEvent(self.h)
+
+proc QNativeGestureEventsetTimestamp*(self: gen_qevent_types.QNativeGestureEvent, timestamp: culonglong): void =
+  fcQNativeGestureEvent_virtualbase_setTimestamp(self.h, timestamp)
+
+proc QNativeGestureEventsetAccepted*(self: gen_qevent_types.QNativeGestureEvent, accepted: bool): void =
+  fcQNativeGestureEvent_virtualbase_setAccepted(self.h, accepted)
+
 
 proc fcQNativeGestureEvent_vtable_callback_clone(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QNativeGestureEventVTable](fcQNativeGestureEvent_vdata(self)[])
@@ -2793,17 +2891,11 @@ proc fcQNativeGestureEvent_vtable_callback_clone(self: pointer): pointer {.cdecl
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QNativeGestureEventisBeginEvent*(self: gen_qevent_types.QNativeGestureEvent): bool =
-  fcQNativeGestureEvent_virtualbase_isBeginEvent(self.h)
-
 proc fcQNativeGestureEvent_vtable_callback_isBeginEvent(self: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QNativeGestureEventVTable](fcQNativeGestureEvent_vdata(self)[])
   let self = QNativeGestureEvent(h: self)
   var virtualReturn = vtbl[].isBeginEvent(self)
   virtualReturn
-
-proc QNativeGestureEventisUpdateEvent*(self: gen_qevent_types.QNativeGestureEvent): bool =
-  fcQNativeGestureEvent_virtualbase_isUpdateEvent(self.h)
 
 proc fcQNativeGestureEvent_vtable_callback_isUpdateEvent(self: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QNativeGestureEventVTable](fcQNativeGestureEvent_vdata(self)[])
@@ -2811,26 +2903,17 @@ proc fcQNativeGestureEvent_vtable_callback_isUpdateEvent(self: pointer): bool {.
   var virtualReturn = vtbl[].isUpdateEvent(self)
   virtualReturn
 
-proc QNativeGestureEventisEndEvent*(self: gen_qevent_types.QNativeGestureEvent): bool =
-  fcQNativeGestureEvent_virtualbase_isEndEvent(self.h)
-
 proc fcQNativeGestureEvent_vtable_callback_isEndEvent(self: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QNativeGestureEventVTable](fcQNativeGestureEvent_vdata(self)[])
   let self = QNativeGestureEvent(h: self)
   var virtualReturn = vtbl[].isEndEvent(self)
   virtualReturn
 
-proc QNativeGestureEventsetTimestamp*(self: gen_qevent_types.QNativeGestureEvent, timestamp: culonglong): void =
-  fcQNativeGestureEvent_virtualbase_setTimestamp(self.h, timestamp)
-
 proc fcQNativeGestureEvent_vtable_callback_setTimestamp(self: pointer, timestamp: culonglong): void {.cdecl.} =
   let vtbl = cast[ptr QNativeGestureEventVTable](fcQNativeGestureEvent_vdata(self)[])
   let self = QNativeGestureEvent(h: self)
   let slotval1 = timestamp
   vtbl[].setTimestamp(self, slotval1)
-
-proc QNativeGestureEventsetAccepted*(self: gen_qevent_types.QNativeGestureEvent, accepted: bool): void =
-  fcQNativeGestureEvent_virtualbase_setAccepted(self.h, accepted)
 
 proc fcQNativeGestureEvent_vtable_callback_setAccepted(self: pointer, accepted: bool): void {.cdecl.} =
   let vtbl = cast[ptr QNativeGestureEventVTable](fcQNativeGestureEvent_vdata(self)[])
@@ -2840,47 +2923,50 @@ proc fcQNativeGestureEvent_vtable_callback_setAccepted(self: pointer, accepted: 
 
 type VirtualQNativeGestureEvent* {.inheritable.} = ref object of QNativeGestureEvent
   vtbl*: cQNativeGestureEventVTable
+
 method clone*(self: VirtualQNativeGestureEvent): gen_qevent_types.QNativeGestureEvent {.base.} =
   QNativeGestureEventclone(self[])
+method isBeginEvent*(self: VirtualQNativeGestureEvent): bool {.base.} =
+  QNativeGestureEventisBeginEvent(self[])
+method isUpdateEvent*(self: VirtualQNativeGestureEvent): bool {.base.} =
+  QNativeGestureEventisUpdateEvent(self[])
+method isEndEvent*(self: VirtualQNativeGestureEvent): bool {.base.} =
+  QNativeGestureEventisEndEvent(self[])
+method setTimestamp*(self: VirtualQNativeGestureEvent, timestamp: culonglong): void {.base.} =
+  QNativeGestureEventsetTimestamp(self[], timestamp)
+method setAccepted*(self: VirtualQNativeGestureEvent, accepted: bool): void {.base.} =
+  QNativeGestureEventsetAccepted(self[], accepted)
+
 proc fcQNativeGestureEvent_method_callback_clone(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQNativeGestureEvent](fcQNativeGestureEvent_vdata(self)[])
   var virtualReturn = inst.clone()
   virtualReturn.h
 
-method isBeginEvent*(self: VirtualQNativeGestureEvent): bool {.base.} =
-  QNativeGestureEventisBeginEvent(self[])
 proc fcQNativeGestureEvent_method_callback_isBeginEvent(self: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQNativeGestureEvent](fcQNativeGestureEvent_vdata(self)[])
   var virtualReturn = inst.isBeginEvent()
   virtualReturn
 
-method isUpdateEvent*(self: VirtualQNativeGestureEvent): bool {.base.} =
-  QNativeGestureEventisUpdateEvent(self[])
 proc fcQNativeGestureEvent_method_callback_isUpdateEvent(self: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQNativeGestureEvent](fcQNativeGestureEvent_vdata(self)[])
   var virtualReturn = inst.isUpdateEvent()
   virtualReturn
 
-method isEndEvent*(self: VirtualQNativeGestureEvent): bool {.base.} =
-  QNativeGestureEventisEndEvent(self[])
 proc fcQNativeGestureEvent_method_callback_isEndEvent(self: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQNativeGestureEvent](fcQNativeGestureEvent_vdata(self)[])
   var virtualReturn = inst.isEndEvent()
   virtualReturn
 
-method setTimestamp*(self: VirtualQNativeGestureEvent, timestamp: culonglong): void {.base.} =
-  QNativeGestureEventsetTimestamp(self[], timestamp)
 proc fcQNativeGestureEvent_method_callback_setTimestamp(self: pointer, timestamp: culonglong): void {.cdecl.} =
   let inst = cast[VirtualQNativeGestureEvent](fcQNativeGestureEvent_vdata(self)[])
   let slotval1 = timestamp
   inst.setTimestamp(slotval1)
 
-method setAccepted*(self: VirtualQNativeGestureEvent, accepted: bool): void {.base.} =
-  QNativeGestureEventsetAccepted(self[], accepted)
 proc fcQNativeGestureEvent_method_callback_setAccepted(self: pointer, accepted: bool): void {.cdecl.} =
   let inst = cast[VirtualQNativeGestureEvent](fcQNativeGestureEvent_vdata(self)[])
   let slotval1 = accepted
   inst.setAccepted(slotval1)
+
 
 proc create*(T: type gen_qevent_types.QNativeGestureEvent,
     typeVal: cint, dev: gen_qpointingdevice_types.QPointingDevice, localPos: gen_qpoint_types.QPointF, scenePos: gen_qpoint_types.QPointF, globalPos: gen_qpoint_types.QPointF, value: float64, sequenceId: culonglong, intArgument: culonglong,
@@ -3027,13 +3113,22 @@ proc nativeModifiers*(self: gen_qevent_types.QKeyEvent): cuint =
 type QKeyEventcloneProc* = proc(self: QKeyEvent): gen_qevent_types.QKeyEvent {.raises: [], gcsafe.}
 type QKeyEventsetTimestampProc* = proc(self: QKeyEvent, timestamp: culonglong): void {.raises: [], gcsafe.}
 type QKeyEventsetAcceptedProc* = proc(self: QKeyEvent, accepted: bool): void {.raises: [], gcsafe.}
+
 type QKeyEventVTable* {.inheritable, pure.} = object
   vtbl: cQKeyEventVTable
   clone*: QKeyEventcloneProc
   setTimestamp*: QKeyEventsetTimestampProc
   setAccepted*: QKeyEventsetAcceptedProc
+
 proc QKeyEventclone*(self: gen_qevent_types.QKeyEvent): gen_qevent_types.QKeyEvent =
   gen_qevent_types.QKeyEvent(h: fcQKeyEvent_virtualbase_clone(self.h), owned: false)
+
+proc QKeyEventsetTimestamp*(self: gen_qevent_types.QKeyEvent, timestamp: culonglong): void =
+  fcQKeyEvent_virtualbase_setTimestamp(self.h, timestamp)
+
+proc QKeyEventsetAccepted*(self: gen_qevent_types.QKeyEvent, accepted: bool): void =
+  fcQKeyEvent_virtualbase_setAccepted(self.h, accepted)
+
 
 proc fcQKeyEvent_vtable_callback_clone(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QKeyEventVTable](fcQKeyEvent_vdata(self)[])
@@ -3044,17 +3139,11 @@ proc fcQKeyEvent_vtable_callback_clone(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QKeyEventsetTimestamp*(self: gen_qevent_types.QKeyEvent, timestamp: culonglong): void =
-  fcQKeyEvent_virtualbase_setTimestamp(self.h, timestamp)
-
 proc fcQKeyEvent_vtable_callback_setTimestamp(self: pointer, timestamp: culonglong): void {.cdecl.} =
   let vtbl = cast[ptr QKeyEventVTable](fcQKeyEvent_vdata(self)[])
   let self = QKeyEvent(h: self)
   let slotval1 = timestamp
   vtbl[].setTimestamp(self, slotval1)
-
-proc QKeyEventsetAccepted*(self: gen_qevent_types.QKeyEvent, accepted: bool): void =
-  fcQKeyEvent_virtualbase_setAccepted(self.h, accepted)
 
 proc fcQKeyEvent_vtable_callback_setAccepted(self: pointer, accepted: bool): void {.cdecl.} =
   let vtbl = cast[ptr QKeyEventVTable](fcQKeyEvent_vdata(self)[])
@@ -3064,26 +3153,29 @@ proc fcQKeyEvent_vtable_callback_setAccepted(self: pointer, accepted: bool): voi
 
 type VirtualQKeyEvent* {.inheritable.} = ref object of QKeyEvent
   vtbl*: cQKeyEventVTable
+
 method clone*(self: VirtualQKeyEvent): gen_qevent_types.QKeyEvent {.base.} =
   QKeyEventclone(self[])
+method setTimestamp*(self: VirtualQKeyEvent, timestamp: culonglong): void {.base.} =
+  QKeyEventsetTimestamp(self[], timestamp)
+method setAccepted*(self: VirtualQKeyEvent, accepted: bool): void {.base.} =
+  QKeyEventsetAccepted(self[], accepted)
+
 proc fcQKeyEvent_method_callback_clone(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQKeyEvent](fcQKeyEvent_vdata(self)[])
   var virtualReturn = inst.clone()
   virtualReturn.h
 
-method setTimestamp*(self: VirtualQKeyEvent, timestamp: culonglong): void {.base.} =
-  QKeyEventsetTimestamp(self[], timestamp)
 proc fcQKeyEvent_method_callback_setTimestamp(self: pointer, timestamp: culonglong): void {.cdecl.} =
   let inst = cast[VirtualQKeyEvent](fcQKeyEvent_vdata(self)[])
   let slotval1 = timestamp
   inst.setTimestamp(slotval1)
 
-method setAccepted*(self: VirtualQKeyEvent, accepted: bool): void {.base.} =
-  QKeyEventsetAccepted(self[], accepted)
 proc fcQKeyEvent_method_callback_setAccepted(self: pointer, accepted: bool): void {.cdecl.} =
   let inst = cast[VirtualQKeyEvent](fcQKeyEvent_vdata(self)[])
   let slotval1 = accepted
   inst.setAccepted(slotval1)
+
 
 proc create*(T: type gen_qevent_types.QKeyEvent,
     typeVal: cint, key: cint, modifiers: cint,
@@ -3334,12 +3426,18 @@ proc reason*(self: gen_qevent_types.QFocusEvent): cint =
 
 type QFocusEventcloneProc* = proc(self: QFocusEvent): gen_qevent_types.QFocusEvent {.raises: [], gcsafe.}
 type QFocusEventsetAcceptedProc* = proc(self: QFocusEvent, accepted: bool): void {.raises: [], gcsafe.}
+
 type QFocusEventVTable* {.inheritable, pure.} = object
   vtbl: cQFocusEventVTable
   clone*: QFocusEventcloneProc
   setAccepted*: QFocusEventsetAcceptedProc
+
 proc QFocusEventclone*(self: gen_qevent_types.QFocusEvent): gen_qevent_types.QFocusEvent =
   gen_qevent_types.QFocusEvent(h: fcQFocusEvent_virtualbase_clone(self.h), owned: false)
+
+proc QFocusEventsetAccepted*(self: gen_qevent_types.QFocusEvent, accepted: bool): void =
+  fcQFocusEvent_virtualbase_setAccepted(self.h, accepted)
+
 
 proc fcQFocusEvent_vtable_callback_clone(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QFocusEventVTable](fcQFocusEvent_vdata(self)[])
@@ -3350,9 +3448,6 @@ proc fcQFocusEvent_vtable_callback_clone(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QFocusEventsetAccepted*(self: gen_qevent_types.QFocusEvent, accepted: bool): void =
-  fcQFocusEvent_virtualbase_setAccepted(self.h, accepted)
-
 proc fcQFocusEvent_vtable_callback_setAccepted(self: pointer, accepted: bool): void {.cdecl.} =
   let vtbl = cast[ptr QFocusEventVTable](fcQFocusEvent_vdata(self)[])
   let self = QFocusEvent(h: self)
@@ -3361,19 +3456,22 @@ proc fcQFocusEvent_vtable_callback_setAccepted(self: pointer, accepted: bool): v
 
 type VirtualQFocusEvent* {.inheritable.} = ref object of QFocusEvent
   vtbl*: cQFocusEventVTable
+
 method clone*(self: VirtualQFocusEvent): gen_qevent_types.QFocusEvent {.base.} =
   QFocusEventclone(self[])
+method setAccepted*(self: VirtualQFocusEvent, accepted: bool): void {.base.} =
+  QFocusEventsetAccepted(self[], accepted)
+
 proc fcQFocusEvent_method_callback_clone(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQFocusEvent](fcQFocusEvent_vdata(self)[])
   var virtualReturn = inst.clone()
   virtualReturn.h
 
-method setAccepted*(self: VirtualQFocusEvent, accepted: bool): void {.base.} =
-  QFocusEventsetAccepted(self[], accepted)
 proc fcQFocusEvent_method_callback_setAccepted(self: pointer, accepted: bool): void {.cdecl.} =
   let inst = cast[VirtualQFocusEvent](fcQFocusEvent_vdata(self)[])
   let slotval1 = accepted
   inst.setAccepted(slotval1)
+
 
 proc create*(T: type gen_qevent_types.QFocusEvent,
     typeVal: cint,
@@ -3441,12 +3539,18 @@ proc region*(self: gen_qevent_types.QPaintEvent): gen_qregion_types.QRegion =
 
 type QPaintEventcloneProc* = proc(self: QPaintEvent): gen_qevent_types.QPaintEvent {.raises: [], gcsafe.}
 type QPaintEventsetAcceptedProc* = proc(self: QPaintEvent, accepted: bool): void {.raises: [], gcsafe.}
+
 type QPaintEventVTable* {.inheritable, pure.} = object
   vtbl: cQPaintEventVTable
   clone*: QPaintEventcloneProc
   setAccepted*: QPaintEventsetAcceptedProc
+
 proc QPaintEventclone*(self: gen_qevent_types.QPaintEvent): gen_qevent_types.QPaintEvent =
   gen_qevent_types.QPaintEvent(h: fcQPaintEvent_virtualbase_clone(self.h), owned: false)
+
+proc QPaintEventsetAccepted*(self: gen_qevent_types.QPaintEvent, accepted: bool): void =
+  fcQPaintEvent_virtualbase_setAccepted(self.h, accepted)
+
 
 proc fcQPaintEvent_vtable_callback_clone(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QPaintEventVTable](fcQPaintEvent_vdata(self)[])
@@ -3457,9 +3561,6 @@ proc fcQPaintEvent_vtable_callback_clone(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QPaintEventsetAccepted*(self: gen_qevent_types.QPaintEvent, accepted: bool): void =
-  fcQPaintEvent_virtualbase_setAccepted(self.h, accepted)
-
 proc fcQPaintEvent_vtable_callback_setAccepted(self: pointer, accepted: bool): void {.cdecl.} =
   let vtbl = cast[ptr QPaintEventVTable](fcQPaintEvent_vdata(self)[])
   let self = QPaintEvent(h: self)
@@ -3468,19 +3569,22 @@ proc fcQPaintEvent_vtable_callback_setAccepted(self: pointer, accepted: bool): v
 
 type VirtualQPaintEvent* {.inheritable.} = ref object of QPaintEvent
   vtbl*: cQPaintEventVTable
+
 method clone*(self: VirtualQPaintEvent): gen_qevent_types.QPaintEvent {.base.} =
   QPaintEventclone(self[])
+method setAccepted*(self: VirtualQPaintEvent, accepted: bool): void {.base.} =
+  QPaintEventsetAccepted(self[], accepted)
+
 proc fcQPaintEvent_method_callback_clone(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQPaintEvent](fcQPaintEvent_vdata(self)[])
   var virtualReturn = inst.clone()
   virtualReturn.h
 
-method setAccepted*(self: VirtualQPaintEvent, accepted: bool): void {.base.} =
-  QPaintEventsetAccepted(self[], accepted)
 proc fcQPaintEvent_method_callback_setAccepted(self: pointer, accepted: bool): void {.cdecl.} =
   let inst = cast[VirtualQPaintEvent](fcQPaintEvent_vdata(self)[])
   let slotval1 = accepted
   inst.setAccepted(slotval1)
+
 
 proc create*(T: type gen_qevent_types.QPaintEvent,
     paintRegion: gen_qregion_types.QRegion,
@@ -3548,12 +3652,18 @@ proc oldPos*(self: gen_qevent_types.QMoveEvent): gen_qpoint_types.QPoint =
 
 type QMoveEventcloneProc* = proc(self: QMoveEvent): gen_qevent_types.QMoveEvent {.raises: [], gcsafe.}
 type QMoveEventsetAcceptedProc* = proc(self: QMoveEvent, accepted: bool): void {.raises: [], gcsafe.}
+
 type QMoveEventVTable* {.inheritable, pure.} = object
   vtbl: cQMoveEventVTable
   clone*: QMoveEventcloneProc
   setAccepted*: QMoveEventsetAcceptedProc
+
 proc QMoveEventclone*(self: gen_qevent_types.QMoveEvent): gen_qevent_types.QMoveEvent =
   gen_qevent_types.QMoveEvent(h: fcQMoveEvent_virtualbase_clone(self.h), owned: false)
+
+proc QMoveEventsetAccepted*(self: gen_qevent_types.QMoveEvent, accepted: bool): void =
+  fcQMoveEvent_virtualbase_setAccepted(self.h, accepted)
+
 
 proc fcQMoveEvent_vtable_callback_clone(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QMoveEventVTable](fcQMoveEvent_vdata(self)[])
@@ -3564,9 +3674,6 @@ proc fcQMoveEvent_vtable_callback_clone(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QMoveEventsetAccepted*(self: gen_qevent_types.QMoveEvent, accepted: bool): void =
-  fcQMoveEvent_virtualbase_setAccepted(self.h, accepted)
-
 proc fcQMoveEvent_vtable_callback_setAccepted(self: pointer, accepted: bool): void {.cdecl.} =
   let vtbl = cast[ptr QMoveEventVTable](fcQMoveEvent_vdata(self)[])
   let self = QMoveEvent(h: self)
@@ -3575,19 +3682,22 @@ proc fcQMoveEvent_vtable_callback_setAccepted(self: pointer, accepted: bool): vo
 
 type VirtualQMoveEvent* {.inheritable.} = ref object of QMoveEvent
   vtbl*: cQMoveEventVTable
+
 method clone*(self: VirtualQMoveEvent): gen_qevent_types.QMoveEvent {.base.} =
   QMoveEventclone(self[])
+method setAccepted*(self: VirtualQMoveEvent, accepted: bool): void {.base.} =
+  QMoveEventsetAccepted(self[], accepted)
+
 proc fcQMoveEvent_method_callback_clone(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQMoveEvent](fcQMoveEvent_vdata(self)[])
   var virtualReturn = inst.clone()
   virtualReturn.h
 
-method setAccepted*(self: VirtualQMoveEvent, accepted: bool): void {.base.} =
-  QMoveEventsetAccepted(self[], accepted)
 proc fcQMoveEvent_method_callback_setAccepted(self: pointer, accepted: bool): void {.cdecl.} =
   let inst = cast[VirtualQMoveEvent](fcQMoveEvent_vdata(self)[])
   let slotval1 = accepted
   inst.setAccepted(slotval1)
+
 
 proc create*(T: type gen_qevent_types.QMoveEvent,
     pos: gen_qpoint_types.QPoint, oldPos: gen_qpoint_types.QPoint,
@@ -3629,12 +3739,18 @@ proc region*(self: gen_qevent_types.QExposeEvent): gen_qregion_types.QRegion =
 
 type QExposeEventcloneProc* = proc(self: QExposeEvent): gen_qevent_types.QExposeEvent {.raises: [], gcsafe.}
 type QExposeEventsetAcceptedProc* = proc(self: QExposeEvent, accepted: bool): void {.raises: [], gcsafe.}
+
 type QExposeEventVTable* {.inheritable, pure.} = object
   vtbl: cQExposeEventVTable
   clone*: QExposeEventcloneProc
   setAccepted*: QExposeEventsetAcceptedProc
+
 proc QExposeEventclone*(self: gen_qevent_types.QExposeEvent): gen_qevent_types.QExposeEvent =
   gen_qevent_types.QExposeEvent(h: fcQExposeEvent_virtualbase_clone(self.h), owned: false)
+
+proc QExposeEventsetAccepted*(self: gen_qevent_types.QExposeEvent, accepted: bool): void =
+  fcQExposeEvent_virtualbase_setAccepted(self.h, accepted)
+
 
 proc fcQExposeEvent_vtable_callback_clone(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QExposeEventVTable](fcQExposeEvent_vdata(self)[])
@@ -3645,9 +3761,6 @@ proc fcQExposeEvent_vtable_callback_clone(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QExposeEventsetAccepted*(self: gen_qevent_types.QExposeEvent, accepted: bool): void =
-  fcQExposeEvent_virtualbase_setAccepted(self.h, accepted)
-
 proc fcQExposeEvent_vtable_callback_setAccepted(self: pointer, accepted: bool): void {.cdecl.} =
   let vtbl = cast[ptr QExposeEventVTable](fcQExposeEvent_vdata(self)[])
   let self = QExposeEvent(h: self)
@@ -3656,19 +3769,22 @@ proc fcQExposeEvent_vtable_callback_setAccepted(self: pointer, accepted: bool): 
 
 type VirtualQExposeEvent* {.inheritable.} = ref object of QExposeEvent
   vtbl*: cQExposeEventVTable
+
 method clone*(self: VirtualQExposeEvent): gen_qevent_types.QExposeEvent {.base.} =
   QExposeEventclone(self[])
+method setAccepted*(self: VirtualQExposeEvent, accepted: bool): void {.base.} =
+  QExposeEventsetAccepted(self[], accepted)
+
 proc fcQExposeEvent_method_callback_clone(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQExposeEvent](fcQExposeEvent_vdata(self)[])
   var virtualReturn = inst.clone()
   virtualReturn.h
 
-method setAccepted*(self: VirtualQExposeEvent, accepted: bool): void {.base.} =
-  QExposeEventsetAccepted(self[], accepted)
 proc fcQExposeEvent_method_callback_setAccepted(self: pointer, accepted: bool): void {.cdecl.} =
   let inst = cast[VirtualQExposeEvent](fcQExposeEvent_vdata(self)[])
   let slotval1 = accepted
   inst.setAccepted(slotval1)
+
 
 proc create*(T: type gen_qevent_types.QExposeEvent,
     m_region: gen_qregion_types.QRegion,
@@ -3710,12 +3826,18 @@ proc surfaceEventType*(self: gen_qevent_types.QPlatformSurfaceEvent): cint =
 
 type QPlatformSurfaceEventcloneProc* = proc(self: QPlatformSurfaceEvent): gen_qevent_types.QPlatformSurfaceEvent {.raises: [], gcsafe.}
 type QPlatformSurfaceEventsetAcceptedProc* = proc(self: QPlatformSurfaceEvent, accepted: bool): void {.raises: [], gcsafe.}
+
 type QPlatformSurfaceEventVTable* {.inheritable, pure.} = object
   vtbl: cQPlatformSurfaceEventVTable
   clone*: QPlatformSurfaceEventcloneProc
   setAccepted*: QPlatformSurfaceEventsetAcceptedProc
+
 proc QPlatformSurfaceEventclone*(self: gen_qevent_types.QPlatformSurfaceEvent): gen_qevent_types.QPlatformSurfaceEvent =
   gen_qevent_types.QPlatformSurfaceEvent(h: fcQPlatformSurfaceEvent_virtualbase_clone(self.h), owned: false)
+
+proc QPlatformSurfaceEventsetAccepted*(self: gen_qevent_types.QPlatformSurfaceEvent, accepted: bool): void =
+  fcQPlatformSurfaceEvent_virtualbase_setAccepted(self.h, accepted)
+
 
 proc fcQPlatformSurfaceEvent_vtable_callback_clone(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QPlatformSurfaceEventVTable](fcQPlatformSurfaceEvent_vdata(self)[])
@@ -3726,9 +3848,6 @@ proc fcQPlatformSurfaceEvent_vtable_callback_clone(self: pointer): pointer {.cde
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QPlatformSurfaceEventsetAccepted*(self: gen_qevent_types.QPlatformSurfaceEvent, accepted: bool): void =
-  fcQPlatformSurfaceEvent_virtualbase_setAccepted(self.h, accepted)
-
 proc fcQPlatformSurfaceEvent_vtable_callback_setAccepted(self: pointer, accepted: bool): void {.cdecl.} =
   let vtbl = cast[ptr QPlatformSurfaceEventVTable](fcQPlatformSurfaceEvent_vdata(self)[])
   let self = QPlatformSurfaceEvent(h: self)
@@ -3737,19 +3856,22 @@ proc fcQPlatformSurfaceEvent_vtable_callback_setAccepted(self: pointer, accepted
 
 type VirtualQPlatformSurfaceEvent* {.inheritable.} = ref object of QPlatformSurfaceEvent
   vtbl*: cQPlatformSurfaceEventVTable
+
 method clone*(self: VirtualQPlatformSurfaceEvent): gen_qevent_types.QPlatformSurfaceEvent {.base.} =
   QPlatformSurfaceEventclone(self[])
+method setAccepted*(self: VirtualQPlatformSurfaceEvent, accepted: bool): void {.base.} =
+  QPlatformSurfaceEventsetAccepted(self[], accepted)
+
 proc fcQPlatformSurfaceEvent_method_callback_clone(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQPlatformSurfaceEvent](fcQPlatformSurfaceEvent_vdata(self)[])
   var virtualReturn = inst.clone()
   virtualReturn.h
 
-method setAccepted*(self: VirtualQPlatformSurfaceEvent, accepted: bool): void {.base.} =
-  QPlatformSurfaceEventsetAccepted(self[], accepted)
 proc fcQPlatformSurfaceEvent_method_callback_setAccepted(self: pointer, accepted: bool): void {.cdecl.} =
   let inst = cast[VirtualQPlatformSurfaceEvent](fcQPlatformSurfaceEvent_vdata(self)[])
   let slotval1 = accepted
   inst.setAccepted(slotval1)
+
 
 proc create*(T: type gen_qevent_types.QPlatformSurfaceEvent,
     surfaceEventType: cint,
@@ -3794,12 +3916,18 @@ proc oldSize*(self: gen_qevent_types.QResizeEvent): gen_qsize_types.QSize =
 
 type QResizeEventcloneProc* = proc(self: QResizeEvent): gen_qevent_types.QResizeEvent {.raises: [], gcsafe.}
 type QResizeEventsetAcceptedProc* = proc(self: QResizeEvent, accepted: bool): void {.raises: [], gcsafe.}
+
 type QResizeEventVTable* {.inheritable, pure.} = object
   vtbl: cQResizeEventVTable
   clone*: QResizeEventcloneProc
   setAccepted*: QResizeEventsetAcceptedProc
+
 proc QResizeEventclone*(self: gen_qevent_types.QResizeEvent): gen_qevent_types.QResizeEvent =
   gen_qevent_types.QResizeEvent(h: fcQResizeEvent_virtualbase_clone(self.h), owned: false)
+
+proc QResizeEventsetAccepted*(self: gen_qevent_types.QResizeEvent, accepted: bool): void =
+  fcQResizeEvent_virtualbase_setAccepted(self.h, accepted)
+
 
 proc fcQResizeEvent_vtable_callback_clone(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QResizeEventVTable](fcQResizeEvent_vdata(self)[])
@@ -3810,9 +3938,6 @@ proc fcQResizeEvent_vtable_callback_clone(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QResizeEventsetAccepted*(self: gen_qevent_types.QResizeEvent, accepted: bool): void =
-  fcQResizeEvent_virtualbase_setAccepted(self.h, accepted)
-
 proc fcQResizeEvent_vtable_callback_setAccepted(self: pointer, accepted: bool): void {.cdecl.} =
   let vtbl = cast[ptr QResizeEventVTable](fcQResizeEvent_vdata(self)[])
   let self = QResizeEvent(h: self)
@@ -3821,19 +3946,22 @@ proc fcQResizeEvent_vtable_callback_setAccepted(self: pointer, accepted: bool): 
 
 type VirtualQResizeEvent* {.inheritable.} = ref object of QResizeEvent
   vtbl*: cQResizeEventVTable
+
 method clone*(self: VirtualQResizeEvent): gen_qevent_types.QResizeEvent {.base.} =
   QResizeEventclone(self[])
+method setAccepted*(self: VirtualQResizeEvent, accepted: bool): void {.base.} =
+  QResizeEventsetAccepted(self[], accepted)
+
 proc fcQResizeEvent_method_callback_clone(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQResizeEvent](fcQResizeEvent_vdata(self)[])
   var virtualReturn = inst.clone()
   virtualReturn.h
 
-method setAccepted*(self: VirtualQResizeEvent, accepted: bool): void {.base.} =
-  QResizeEventsetAccepted(self[], accepted)
 proc fcQResizeEvent_method_callback_setAccepted(self: pointer, accepted: bool): void {.cdecl.} =
   let inst = cast[VirtualQResizeEvent](fcQResizeEvent_vdata(self)[])
   let slotval1 = accepted
   inst.setAccepted(slotval1)
+
 
 proc create*(T: type gen_qevent_types.QResizeEvent,
     size: gen_qsize_types.QSize, oldSize: gen_qsize_types.QSize,
@@ -3872,12 +4000,18 @@ proc clone*(self: gen_qevent_types.QCloseEvent): gen_qevent_types.QCloseEvent =
 
 type QCloseEventcloneProc* = proc(self: QCloseEvent): gen_qevent_types.QCloseEvent {.raises: [], gcsafe.}
 type QCloseEventsetAcceptedProc* = proc(self: QCloseEvent, accepted: bool): void {.raises: [], gcsafe.}
+
 type QCloseEventVTable* {.inheritable, pure.} = object
   vtbl: cQCloseEventVTable
   clone*: QCloseEventcloneProc
   setAccepted*: QCloseEventsetAcceptedProc
+
 proc QCloseEventclone*(self: gen_qevent_types.QCloseEvent): gen_qevent_types.QCloseEvent =
   gen_qevent_types.QCloseEvent(h: fcQCloseEvent_virtualbase_clone(self.h), owned: false)
+
+proc QCloseEventsetAccepted*(self: gen_qevent_types.QCloseEvent, accepted: bool): void =
+  fcQCloseEvent_virtualbase_setAccepted(self.h, accepted)
+
 
 proc fcQCloseEvent_vtable_callback_clone(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QCloseEventVTable](fcQCloseEvent_vdata(self)[])
@@ -3888,9 +4022,6 @@ proc fcQCloseEvent_vtable_callback_clone(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QCloseEventsetAccepted*(self: gen_qevent_types.QCloseEvent, accepted: bool): void =
-  fcQCloseEvent_virtualbase_setAccepted(self.h, accepted)
-
 proc fcQCloseEvent_vtable_callback_setAccepted(self: pointer, accepted: bool): void {.cdecl.} =
   let vtbl = cast[ptr QCloseEventVTable](fcQCloseEvent_vdata(self)[])
   let self = QCloseEvent(h: self)
@@ -3899,19 +4030,22 @@ proc fcQCloseEvent_vtable_callback_setAccepted(self: pointer, accepted: bool): v
 
 type VirtualQCloseEvent* {.inheritable.} = ref object of QCloseEvent
   vtbl*: cQCloseEventVTable
+
 method clone*(self: VirtualQCloseEvent): gen_qevent_types.QCloseEvent {.base.} =
   QCloseEventclone(self[])
+method setAccepted*(self: VirtualQCloseEvent, accepted: bool): void {.base.} =
+  QCloseEventsetAccepted(self[], accepted)
+
 proc fcQCloseEvent_method_callback_clone(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQCloseEvent](fcQCloseEvent_vdata(self)[])
   var virtualReturn = inst.clone()
   virtualReturn.h
 
-method setAccepted*(self: VirtualQCloseEvent, accepted: bool): void {.base.} =
-  QCloseEventsetAccepted(self[], accepted)
 proc fcQCloseEvent_method_callback_setAccepted(self: pointer, accepted: bool): void {.cdecl.} =
   let inst = cast[VirtualQCloseEvent](fcQCloseEvent_vdata(self)[])
   let slotval1 = accepted
   inst.setAccepted(slotval1)
+
 
 proc create*(T: type gen_qevent_types.QCloseEvent,
     vtbl: ref QCloseEventVTable = nil): gen_qevent_types.QCloseEvent =
@@ -3948,12 +4082,18 @@ proc clone*(self: gen_qevent_types.QIconDragEvent): gen_qevent_types.QIconDragEv
 
 type QIconDragEventcloneProc* = proc(self: QIconDragEvent): gen_qevent_types.QIconDragEvent {.raises: [], gcsafe.}
 type QIconDragEventsetAcceptedProc* = proc(self: QIconDragEvent, accepted: bool): void {.raises: [], gcsafe.}
+
 type QIconDragEventVTable* {.inheritable, pure.} = object
   vtbl: cQIconDragEventVTable
   clone*: QIconDragEventcloneProc
   setAccepted*: QIconDragEventsetAcceptedProc
+
 proc QIconDragEventclone*(self: gen_qevent_types.QIconDragEvent): gen_qevent_types.QIconDragEvent =
   gen_qevent_types.QIconDragEvent(h: fcQIconDragEvent_virtualbase_clone(self.h), owned: false)
+
+proc QIconDragEventsetAccepted*(self: gen_qevent_types.QIconDragEvent, accepted: bool): void =
+  fcQIconDragEvent_virtualbase_setAccepted(self.h, accepted)
+
 
 proc fcQIconDragEvent_vtable_callback_clone(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QIconDragEventVTable](fcQIconDragEvent_vdata(self)[])
@@ -3964,9 +4104,6 @@ proc fcQIconDragEvent_vtable_callback_clone(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QIconDragEventsetAccepted*(self: gen_qevent_types.QIconDragEvent, accepted: bool): void =
-  fcQIconDragEvent_virtualbase_setAccepted(self.h, accepted)
-
 proc fcQIconDragEvent_vtable_callback_setAccepted(self: pointer, accepted: bool): void {.cdecl.} =
   let vtbl = cast[ptr QIconDragEventVTable](fcQIconDragEvent_vdata(self)[])
   let self = QIconDragEvent(h: self)
@@ -3975,19 +4112,22 @@ proc fcQIconDragEvent_vtable_callback_setAccepted(self: pointer, accepted: bool)
 
 type VirtualQIconDragEvent* {.inheritable.} = ref object of QIconDragEvent
   vtbl*: cQIconDragEventVTable
+
 method clone*(self: VirtualQIconDragEvent): gen_qevent_types.QIconDragEvent {.base.} =
   QIconDragEventclone(self[])
+method setAccepted*(self: VirtualQIconDragEvent, accepted: bool): void {.base.} =
+  QIconDragEventsetAccepted(self[], accepted)
+
 proc fcQIconDragEvent_method_callback_clone(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQIconDragEvent](fcQIconDragEvent_vdata(self)[])
   var virtualReturn = inst.clone()
   virtualReturn.h
 
-method setAccepted*(self: VirtualQIconDragEvent, accepted: bool): void {.base.} =
-  QIconDragEventsetAccepted(self[], accepted)
 proc fcQIconDragEvent_method_callback_setAccepted(self: pointer, accepted: bool): void {.cdecl.} =
   let inst = cast[VirtualQIconDragEvent](fcQIconDragEvent_vdata(self)[])
   let slotval1 = accepted
   inst.setAccepted(slotval1)
+
 
 proc create*(T: type gen_qevent_types.QIconDragEvent,
     vtbl: ref QIconDragEventVTable = nil): gen_qevent_types.QIconDragEvent =
@@ -4024,12 +4164,18 @@ proc clone*(self: gen_qevent_types.QShowEvent): gen_qevent_types.QShowEvent =
 
 type QShowEventcloneProc* = proc(self: QShowEvent): gen_qevent_types.QShowEvent {.raises: [], gcsafe.}
 type QShowEventsetAcceptedProc* = proc(self: QShowEvent, accepted: bool): void {.raises: [], gcsafe.}
+
 type QShowEventVTable* {.inheritable, pure.} = object
   vtbl: cQShowEventVTable
   clone*: QShowEventcloneProc
   setAccepted*: QShowEventsetAcceptedProc
+
 proc QShowEventclone*(self: gen_qevent_types.QShowEvent): gen_qevent_types.QShowEvent =
   gen_qevent_types.QShowEvent(h: fcQShowEvent_virtualbase_clone(self.h), owned: false)
+
+proc QShowEventsetAccepted*(self: gen_qevent_types.QShowEvent, accepted: bool): void =
+  fcQShowEvent_virtualbase_setAccepted(self.h, accepted)
+
 
 proc fcQShowEvent_vtable_callback_clone(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QShowEventVTable](fcQShowEvent_vdata(self)[])
@@ -4040,9 +4186,6 @@ proc fcQShowEvent_vtable_callback_clone(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QShowEventsetAccepted*(self: gen_qevent_types.QShowEvent, accepted: bool): void =
-  fcQShowEvent_virtualbase_setAccepted(self.h, accepted)
-
 proc fcQShowEvent_vtable_callback_setAccepted(self: pointer, accepted: bool): void {.cdecl.} =
   let vtbl = cast[ptr QShowEventVTable](fcQShowEvent_vdata(self)[])
   let self = QShowEvent(h: self)
@@ -4051,19 +4194,22 @@ proc fcQShowEvent_vtable_callback_setAccepted(self: pointer, accepted: bool): vo
 
 type VirtualQShowEvent* {.inheritable.} = ref object of QShowEvent
   vtbl*: cQShowEventVTable
+
 method clone*(self: VirtualQShowEvent): gen_qevent_types.QShowEvent {.base.} =
   QShowEventclone(self[])
+method setAccepted*(self: VirtualQShowEvent, accepted: bool): void {.base.} =
+  QShowEventsetAccepted(self[], accepted)
+
 proc fcQShowEvent_method_callback_clone(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQShowEvent](fcQShowEvent_vdata(self)[])
   var virtualReturn = inst.clone()
   virtualReturn.h
 
-method setAccepted*(self: VirtualQShowEvent, accepted: bool): void {.base.} =
-  QShowEventsetAccepted(self[], accepted)
 proc fcQShowEvent_method_callback_setAccepted(self: pointer, accepted: bool): void {.cdecl.} =
   let inst = cast[VirtualQShowEvent](fcQShowEvent_vdata(self)[])
   let slotval1 = accepted
   inst.setAccepted(slotval1)
+
 
 proc create*(T: type gen_qevent_types.QShowEvent,
     vtbl: ref QShowEventVTable = nil): gen_qevent_types.QShowEvent =
@@ -4100,12 +4246,18 @@ proc clone*(self: gen_qevent_types.QHideEvent): gen_qevent_types.QHideEvent =
 
 type QHideEventcloneProc* = proc(self: QHideEvent): gen_qevent_types.QHideEvent {.raises: [], gcsafe.}
 type QHideEventsetAcceptedProc* = proc(self: QHideEvent, accepted: bool): void {.raises: [], gcsafe.}
+
 type QHideEventVTable* {.inheritable, pure.} = object
   vtbl: cQHideEventVTable
   clone*: QHideEventcloneProc
   setAccepted*: QHideEventsetAcceptedProc
+
 proc QHideEventclone*(self: gen_qevent_types.QHideEvent): gen_qevent_types.QHideEvent =
   gen_qevent_types.QHideEvent(h: fcQHideEvent_virtualbase_clone(self.h), owned: false)
+
+proc QHideEventsetAccepted*(self: gen_qevent_types.QHideEvent, accepted: bool): void =
+  fcQHideEvent_virtualbase_setAccepted(self.h, accepted)
+
 
 proc fcQHideEvent_vtable_callback_clone(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QHideEventVTable](fcQHideEvent_vdata(self)[])
@@ -4116,9 +4268,6 @@ proc fcQHideEvent_vtable_callback_clone(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QHideEventsetAccepted*(self: gen_qevent_types.QHideEvent, accepted: bool): void =
-  fcQHideEvent_virtualbase_setAccepted(self.h, accepted)
-
 proc fcQHideEvent_vtable_callback_setAccepted(self: pointer, accepted: bool): void {.cdecl.} =
   let vtbl = cast[ptr QHideEventVTable](fcQHideEvent_vdata(self)[])
   let self = QHideEvent(h: self)
@@ -4127,19 +4276,22 @@ proc fcQHideEvent_vtable_callback_setAccepted(self: pointer, accepted: bool): vo
 
 type VirtualQHideEvent* {.inheritable.} = ref object of QHideEvent
   vtbl*: cQHideEventVTable
+
 method clone*(self: VirtualQHideEvent): gen_qevent_types.QHideEvent {.base.} =
   QHideEventclone(self[])
+method setAccepted*(self: VirtualQHideEvent, accepted: bool): void {.base.} =
+  QHideEventsetAccepted(self[], accepted)
+
 proc fcQHideEvent_method_callback_clone(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQHideEvent](fcQHideEvent_vdata(self)[])
   var virtualReturn = inst.clone()
   virtualReturn.h
 
-method setAccepted*(self: VirtualQHideEvent, accepted: bool): void {.base.} =
-  QHideEventsetAccepted(self[], accepted)
 proc fcQHideEvent_method_callback_setAccepted(self: pointer, accepted: bool): void {.cdecl.} =
   let inst = cast[VirtualQHideEvent](fcQHideEvent_vdata(self)[])
   let slotval1 = accepted
   inst.setAccepted(slotval1)
+
 
 proc create*(T: type gen_qevent_types.QHideEvent,
     vtbl: ref QHideEventVTable = nil): gen_qevent_types.QHideEvent =
@@ -4198,13 +4350,22 @@ proc reason*(self: gen_qevent_types.QContextMenuEvent): cint =
 type QContextMenuEventcloneProc* = proc(self: QContextMenuEvent): gen_qevent_types.QContextMenuEvent {.raises: [], gcsafe.}
 type QContextMenuEventsetTimestampProc* = proc(self: QContextMenuEvent, timestamp: culonglong): void {.raises: [], gcsafe.}
 type QContextMenuEventsetAcceptedProc* = proc(self: QContextMenuEvent, accepted: bool): void {.raises: [], gcsafe.}
+
 type QContextMenuEventVTable* {.inheritable, pure.} = object
   vtbl: cQContextMenuEventVTable
   clone*: QContextMenuEventcloneProc
   setTimestamp*: QContextMenuEventsetTimestampProc
   setAccepted*: QContextMenuEventsetAcceptedProc
+
 proc QContextMenuEventclone*(self: gen_qevent_types.QContextMenuEvent): gen_qevent_types.QContextMenuEvent =
   gen_qevent_types.QContextMenuEvent(h: fcQContextMenuEvent_virtualbase_clone(self.h), owned: false)
+
+proc QContextMenuEventsetTimestamp*(self: gen_qevent_types.QContextMenuEvent, timestamp: culonglong): void =
+  fcQContextMenuEvent_virtualbase_setTimestamp(self.h, timestamp)
+
+proc QContextMenuEventsetAccepted*(self: gen_qevent_types.QContextMenuEvent, accepted: bool): void =
+  fcQContextMenuEvent_virtualbase_setAccepted(self.h, accepted)
+
 
 proc fcQContextMenuEvent_vtable_callback_clone(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QContextMenuEventVTable](fcQContextMenuEvent_vdata(self)[])
@@ -4215,17 +4376,11 @@ proc fcQContextMenuEvent_vtable_callback_clone(self: pointer): pointer {.cdecl.}
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QContextMenuEventsetTimestamp*(self: gen_qevent_types.QContextMenuEvent, timestamp: culonglong): void =
-  fcQContextMenuEvent_virtualbase_setTimestamp(self.h, timestamp)
-
 proc fcQContextMenuEvent_vtable_callback_setTimestamp(self: pointer, timestamp: culonglong): void {.cdecl.} =
   let vtbl = cast[ptr QContextMenuEventVTable](fcQContextMenuEvent_vdata(self)[])
   let self = QContextMenuEvent(h: self)
   let slotval1 = timestamp
   vtbl[].setTimestamp(self, slotval1)
-
-proc QContextMenuEventsetAccepted*(self: gen_qevent_types.QContextMenuEvent, accepted: bool): void =
-  fcQContextMenuEvent_virtualbase_setAccepted(self.h, accepted)
 
 proc fcQContextMenuEvent_vtable_callback_setAccepted(self: pointer, accepted: bool): void {.cdecl.} =
   let vtbl = cast[ptr QContextMenuEventVTable](fcQContextMenuEvent_vdata(self)[])
@@ -4235,26 +4390,29 @@ proc fcQContextMenuEvent_vtable_callback_setAccepted(self: pointer, accepted: bo
 
 type VirtualQContextMenuEvent* {.inheritable.} = ref object of QContextMenuEvent
   vtbl*: cQContextMenuEventVTable
+
 method clone*(self: VirtualQContextMenuEvent): gen_qevent_types.QContextMenuEvent {.base.} =
   QContextMenuEventclone(self[])
+method setTimestamp*(self: VirtualQContextMenuEvent, timestamp: culonglong): void {.base.} =
+  QContextMenuEventsetTimestamp(self[], timestamp)
+method setAccepted*(self: VirtualQContextMenuEvent, accepted: bool): void {.base.} =
+  QContextMenuEventsetAccepted(self[], accepted)
+
 proc fcQContextMenuEvent_method_callback_clone(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQContextMenuEvent](fcQContextMenuEvent_vdata(self)[])
   var virtualReturn = inst.clone()
   virtualReturn.h
 
-method setTimestamp*(self: VirtualQContextMenuEvent, timestamp: culonglong): void {.base.} =
-  QContextMenuEventsetTimestamp(self[], timestamp)
 proc fcQContextMenuEvent_method_callback_setTimestamp(self: pointer, timestamp: culonglong): void {.cdecl.} =
   let inst = cast[VirtualQContextMenuEvent](fcQContextMenuEvent_vdata(self)[])
   let slotval1 = timestamp
   inst.setTimestamp(slotval1)
 
-method setAccepted*(self: VirtualQContextMenuEvent, accepted: bool): void {.base.} =
-  QContextMenuEventsetAccepted(self[], accepted)
 proc fcQContextMenuEvent_method_callback_setAccepted(self: pointer, accepted: bool): void {.cdecl.} =
   let inst = cast[VirtualQContextMenuEvent](fcQContextMenuEvent_vdata(self)[])
   let slotval1 = accepted
   inst.setAccepted(slotval1)
+
 
 proc create*(T: type gen_qevent_types.QContextMenuEvent,
     reason: cint, pos: gen_qpoint_types.QPoint, globalPos: gen_qpoint_types.QPoint,
@@ -4382,12 +4540,18 @@ proc setCommitString*(self: gen_qevent_types.QInputMethodEvent, commitString: op
 
 type QInputMethodEventcloneProc* = proc(self: QInputMethodEvent): gen_qevent_types.QInputMethodEvent {.raises: [], gcsafe.}
 type QInputMethodEventsetAcceptedProc* = proc(self: QInputMethodEvent, accepted: bool): void {.raises: [], gcsafe.}
+
 type QInputMethodEventVTable* {.inheritable, pure.} = object
   vtbl: cQInputMethodEventVTable
   clone*: QInputMethodEventcloneProc
   setAccepted*: QInputMethodEventsetAcceptedProc
+
 proc QInputMethodEventclone*(self: gen_qevent_types.QInputMethodEvent): gen_qevent_types.QInputMethodEvent =
   gen_qevent_types.QInputMethodEvent(h: fcQInputMethodEvent_virtualbase_clone(self.h), owned: false)
+
+proc QInputMethodEventsetAccepted*(self: gen_qevent_types.QInputMethodEvent, accepted: bool): void =
+  fcQInputMethodEvent_virtualbase_setAccepted(self.h, accepted)
+
 
 proc fcQInputMethodEvent_vtable_callback_clone(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QInputMethodEventVTable](fcQInputMethodEvent_vdata(self)[])
@@ -4398,9 +4562,6 @@ proc fcQInputMethodEvent_vtable_callback_clone(self: pointer): pointer {.cdecl.}
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QInputMethodEventsetAccepted*(self: gen_qevent_types.QInputMethodEvent, accepted: bool): void =
-  fcQInputMethodEvent_virtualbase_setAccepted(self.h, accepted)
-
 proc fcQInputMethodEvent_vtable_callback_setAccepted(self: pointer, accepted: bool): void {.cdecl.} =
   let vtbl = cast[ptr QInputMethodEventVTable](fcQInputMethodEvent_vdata(self)[])
   let self = QInputMethodEvent(h: self)
@@ -4409,19 +4570,22 @@ proc fcQInputMethodEvent_vtable_callback_setAccepted(self: pointer, accepted: bo
 
 type VirtualQInputMethodEvent* {.inheritable.} = ref object of QInputMethodEvent
   vtbl*: cQInputMethodEventVTable
+
 method clone*(self: VirtualQInputMethodEvent): gen_qevent_types.QInputMethodEvent {.base.} =
   QInputMethodEventclone(self[])
+method setAccepted*(self: VirtualQInputMethodEvent, accepted: bool): void {.base.} =
+  QInputMethodEventsetAccepted(self[], accepted)
+
 proc fcQInputMethodEvent_method_callback_clone(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQInputMethodEvent](fcQInputMethodEvent_vdata(self)[])
   var virtualReturn = inst.clone()
   virtualReturn.h
 
-method setAccepted*(self: VirtualQInputMethodEvent, accepted: bool): void {.base.} =
-  QInputMethodEventsetAccepted(self[], accepted)
 proc fcQInputMethodEvent_method_callback_setAccepted(self: pointer, accepted: bool): void {.cdecl.} =
   let inst = cast[VirtualQInputMethodEvent](fcQInputMethodEvent_vdata(self)[])
   let slotval1 = accepted
   inst.setAccepted(slotval1)
+
 
 proc create*(T: type gen_qevent_types.QInputMethodEvent,
     vtbl: ref QInputMethodEventVTable = nil): gen_qevent_types.QInputMethodEvent =
@@ -4498,12 +4662,18 @@ proc value*(self: gen_qevent_types.QInputMethodQueryEvent, query: cint): gen_qva
 
 type QInputMethodQueryEventcloneProc* = proc(self: QInputMethodQueryEvent): gen_qevent_types.QInputMethodQueryEvent {.raises: [], gcsafe.}
 type QInputMethodQueryEventsetAcceptedProc* = proc(self: QInputMethodQueryEvent, accepted: bool): void {.raises: [], gcsafe.}
+
 type QInputMethodQueryEventVTable* {.inheritable, pure.} = object
   vtbl: cQInputMethodQueryEventVTable
   clone*: QInputMethodQueryEventcloneProc
   setAccepted*: QInputMethodQueryEventsetAcceptedProc
+
 proc QInputMethodQueryEventclone*(self: gen_qevent_types.QInputMethodQueryEvent): gen_qevent_types.QInputMethodQueryEvent =
   gen_qevent_types.QInputMethodQueryEvent(h: fcQInputMethodQueryEvent_virtualbase_clone(self.h), owned: false)
+
+proc QInputMethodQueryEventsetAccepted*(self: gen_qevent_types.QInputMethodQueryEvent, accepted: bool): void =
+  fcQInputMethodQueryEvent_virtualbase_setAccepted(self.h, accepted)
+
 
 proc fcQInputMethodQueryEvent_vtable_callback_clone(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QInputMethodQueryEventVTable](fcQInputMethodQueryEvent_vdata(self)[])
@@ -4514,9 +4684,6 @@ proc fcQInputMethodQueryEvent_vtable_callback_clone(self: pointer): pointer {.cd
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QInputMethodQueryEventsetAccepted*(self: gen_qevent_types.QInputMethodQueryEvent, accepted: bool): void =
-  fcQInputMethodQueryEvent_virtualbase_setAccepted(self.h, accepted)
-
 proc fcQInputMethodQueryEvent_vtable_callback_setAccepted(self: pointer, accepted: bool): void {.cdecl.} =
   let vtbl = cast[ptr QInputMethodQueryEventVTable](fcQInputMethodQueryEvent_vdata(self)[])
   let self = QInputMethodQueryEvent(h: self)
@@ -4525,19 +4692,22 @@ proc fcQInputMethodQueryEvent_vtable_callback_setAccepted(self: pointer, accepte
 
 type VirtualQInputMethodQueryEvent* {.inheritable.} = ref object of QInputMethodQueryEvent
   vtbl*: cQInputMethodQueryEventVTable
+
 method clone*(self: VirtualQInputMethodQueryEvent): gen_qevent_types.QInputMethodQueryEvent {.base.} =
   QInputMethodQueryEventclone(self[])
+method setAccepted*(self: VirtualQInputMethodQueryEvent, accepted: bool): void {.base.} =
+  QInputMethodQueryEventsetAccepted(self[], accepted)
+
 proc fcQInputMethodQueryEvent_method_callback_clone(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQInputMethodQueryEvent](fcQInputMethodQueryEvent_vdata(self)[])
   var virtualReturn = inst.clone()
   virtualReturn.h
 
-method setAccepted*(self: VirtualQInputMethodQueryEvent, accepted: bool): void {.base.} =
-  QInputMethodQueryEventsetAccepted(self[], accepted)
 proc fcQInputMethodQueryEvent_method_callback_setAccepted(self: pointer, accepted: bool): void {.cdecl.} =
   let inst = cast[VirtualQInputMethodQueryEvent](fcQInputMethodQueryEvent_vdata(self)[])
   let slotval1 = accepted
   inst.setAccepted(slotval1)
+
 
 proc create*(T: type gen_qevent_types.QInputMethodQueryEvent,
     queries: cint,
@@ -4618,12 +4788,18 @@ proc mimeData*(self: gen_qevent_types.QDropEvent): gen_qmimedata_types.QMimeData
 
 type QDropEventcloneProc* = proc(self: QDropEvent): gen_qevent_types.QDropEvent {.raises: [], gcsafe.}
 type QDropEventsetAcceptedProc* = proc(self: QDropEvent, accepted: bool): void {.raises: [], gcsafe.}
+
 type QDropEventVTable* {.inheritable, pure.} = object
   vtbl: cQDropEventVTable
   clone*: QDropEventcloneProc
   setAccepted*: QDropEventsetAcceptedProc
+
 proc QDropEventclone*(self: gen_qevent_types.QDropEvent): gen_qevent_types.QDropEvent =
   gen_qevent_types.QDropEvent(h: fcQDropEvent_virtualbase_clone(self.h), owned: false)
+
+proc QDropEventsetAccepted*(self: gen_qevent_types.QDropEvent, accepted: bool): void =
+  fcQDropEvent_virtualbase_setAccepted(self.h, accepted)
+
 
 proc fcQDropEvent_vtable_callback_clone(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QDropEventVTable](fcQDropEvent_vdata(self)[])
@@ -4634,9 +4810,6 @@ proc fcQDropEvent_vtable_callback_clone(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QDropEventsetAccepted*(self: gen_qevent_types.QDropEvent, accepted: bool): void =
-  fcQDropEvent_virtualbase_setAccepted(self.h, accepted)
-
 proc fcQDropEvent_vtable_callback_setAccepted(self: pointer, accepted: bool): void {.cdecl.} =
   let vtbl = cast[ptr QDropEventVTable](fcQDropEvent_vdata(self)[])
   let self = QDropEvent(h: self)
@@ -4645,19 +4818,22 @@ proc fcQDropEvent_vtable_callback_setAccepted(self: pointer, accepted: bool): vo
 
 type VirtualQDropEvent* {.inheritable.} = ref object of QDropEvent
   vtbl*: cQDropEventVTable
+
 method clone*(self: VirtualQDropEvent): gen_qevent_types.QDropEvent {.base.} =
   QDropEventclone(self[])
+method setAccepted*(self: VirtualQDropEvent, accepted: bool): void {.base.} =
+  QDropEventsetAccepted(self[], accepted)
+
 proc fcQDropEvent_method_callback_clone(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQDropEvent](fcQDropEvent_vdata(self)[])
   var virtualReturn = inst.clone()
   virtualReturn.h
 
-method setAccepted*(self: VirtualQDropEvent, accepted: bool): void {.base.} =
-  QDropEventsetAccepted(self[], accepted)
 proc fcQDropEvent_method_callback_setAccepted(self: pointer, accepted: bool): void {.cdecl.} =
   let inst = cast[VirtualQDropEvent](fcQDropEvent_vdata(self)[])
   let slotval1 = accepted
   inst.setAccepted(slotval1)
+
 
 proc create*(T: type gen_qevent_types.QDropEvent,
     pos: gen_qpoint_types.QPointF, actions: cint, data: gen_qmimedata_types.QMimeData, buttons: cint, modifiers: cint,
@@ -4734,12 +4910,18 @@ proc ignore*(self: gen_qevent_types.QDragMoveEvent, r: gen_qrect_types.QRect): v
 
 type QDragMoveEventcloneProc* = proc(self: QDragMoveEvent): gen_qevent_types.QDragMoveEvent {.raises: [], gcsafe.}
 type QDragMoveEventsetAcceptedProc* = proc(self: QDragMoveEvent, accepted: bool): void {.raises: [], gcsafe.}
+
 type QDragMoveEventVTable* {.inheritable, pure.} = object
   vtbl: cQDragMoveEventVTable
   clone*: QDragMoveEventcloneProc
   setAccepted*: QDragMoveEventsetAcceptedProc
+
 proc QDragMoveEventclone*(self: gen_qevent_types.QDragMoveEvent): gen_qevent_types.QDragMoveEvent =
   gen_qevent_types.QDragMoveEvent(h: fcQDragMoveEvent_virtualbase_clone(self.h), owned: false)
+
+proc QDragMoveEventsetAccepted*(self: gen_qevent_types.QDragMoveEvent, accepted: bool): void =
+  fcQDragMoveEvent_virtualbase_setAccepted(self.h, accepted)
+
 
 proc fcQDragMoveEvent_vtable_callback_clone(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QDragMoveEventVTable](fcQDragMoveEvent_vdata(self)[])
@@ -4750,9 +4932,6 @@ proc fcQDragMoveEvent_vtable_callback_clone(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QDragMoveEventsetAccepted*(self: gen_qevent_types.QDragMoveEvent, accepted: bool): void =
-  fcQDragMoveEvent_virtualbase_setAccepted(self.h, accepted)
-
 proc fcQDragMoveEvent_vtable_callback_setAccepted(self: pointer, accepted: bool): void {.cdecl.} =
   let vtbl = cast[ptr QDragMoveEventVTable](fcQDragMoveEvent_vdata(self)[])
   let self = QDragMoveEvent(h: self)
@@ -4761,19 +4940,22 @@ proc fcQDragMoveEvent_vtable_callback_setAccepted(self: pointer, accepted: bool)
 
 type VirtualQDragMoveEvent* {.inheritable.} = ref object of QDragMoveEvent
   vtbl*: cQDragMoveEventVTable
+
 method clone*(self: VirtualQDragMoveEvent): gen_qevent_types.QDragMoveEvent {.base.} =
   QDragMoveEventclone(self[])
+method setAccepted*(self: VirtualQDragMoveEvent, accepted: bool): void {.base.} =
+  QDragMoveEventsetAccepted(self[], accepted)
+
 proc fcQDragMoveEvent_method_callback_clone(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQDragMoveEvent](fcQDragMoveEvent_vdata(self)[])
   var virtualReturn = inst.clone()
   virtualReturn.h
 
-method setAccepted*(self: VirtualQDragMoveEvent, accepted: bool): void {.base.} =
-  QDragMoveEventsetAccepted(self[], accepted)
 proc fcQDragMoveEvent_method_callback_setAccepted(self: pointer, accepted: bool): void {.cdecl.} =
   let inst = cast[VirtualQDragMoveEvent](fcQDragMoveEvent_vdata(self)[])
   let slotval1 = accepted
   inst.setAccepted(slotval1)
+
 
 proc create*(T: type gen_qevent_types.QDragMoveEvent,
     pos: gen_qpoint_types.QPoint, actions: cint, data: gen_qmimedata_types.QMimeData, buttons: cint, modifiers: cint,
@@ -4835,12 +5017,18 @@ proc clone*(self: gen_qevent_types.QDragEnterEvent): gen_qevent_types.QDragEnter
 
 type QDragEnterEventcloneProc* = proc(self: QDragEnterEvent): gen_qevent_types.QDragEnterEvent {.raises: [], gcsafe.}
 type QDragEnterEventsetAcceptedProc* = proc(self: QDragEnterEvent, accepted: bool): void {.raises: [], gcsafe.}
+
 type QDragEnterEventVTable* {.inheritable, pure.} = object
   vtbl: cQDragEnterEventVTable
   clone*: QDragEnterEventcloneProc
   setAccepted*: QDragEnterEventsetAcceptedProc
+
 proc QDragEnterEventclone*(self: gen_qevent_types.QDragEnterEvent): gen_qevent_types.QDragEnterEvent =
   gen_qevent_types.QDragEnterEvent(h: fcQDragEnterEvent_virtualbase_clone(self.h), owned: false)
+
+proc QDragEnterEventsetAccepted*(self: gen_qevent_types.QDragEnterEvent, accepted: bool): void =
+  fcQDragEnterEvent_virtualbase_setAccepted(self.h, accepted)
+
 
 proc fcQDragEnterEvent_vtable_callback_clone(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QDragEnterEventVTable](fcQDragEnterEvent_vdata(self)[])
@@ -4851,9 +5039,6 @@ proc fcQDragEnterEvent_vtable_callback_clone(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QDragEnterEventsetAccepted*(self: gen_qevent_types.QDragEnterEvent, accepted: bool): void =
-  fcQDragEnterEvent_virtualbase_setAccepted(self.h, accepted)
-
 proc fcQDragEnterEvent_vtable_callback_setAccepted(self: pointer, accepted: bool): void {.cdecl.} =
   let vtbl = cast[ptr QDragEnterEventVTable](fcQDragEnterEvent_vdata(self)[])
   let self = QDragEnterEvent(h: self)
@@ -4862,19 +5047,22 @@ proc fcQDragEnterEvent_vtable_callback_setAccepted(self: pointer, accepted: bool
 
 type VirtualQDragEnterEvent* {.inheritable.} = ref object of QDragEnterEvent
   vtbl*: cQDragEnterEventVTable
+
 method clone*(self: VirtualQDragEnterEvent): gen_qevent_types.QDragEnterEvent {.base.} =
   QDragEnterEventclone(self[])
+method setAccepted*(self: VirtualQDragEnterEvent, accepted: bool): void {.base.} =
+  QDragEnterEventsetAccepted(self[], accepted)
+
 proc fcQDragEnterEvent_method_callback_clone(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQDragEnterEvent](fcQDragEnterEvent_vdata(self)[])
   var virtualReturn = inst.clone()
   virtualReturn.h
 
-method setAccepted*(self: VirtualQDragEnterEvent, accepted: bool): void {.base.} =
-  QDragEnterEventsetAccepted(self[], accepted)
 proc fcQDragEnterEvent_method_callback_setAccepted(self: pointer, accepted: bool): void {.cdecl.} =
   let inst = cast[VirtualQDragEnterEvent](fcQDragEnterEvent_vdata(self)[])
   let slotval1 = accepted
   inst.setAccepted(slotval1)
+
 
 proc create*(T: type gen_qevent_types.QDragEnterEvent,
     pos: gen_qpoint_types.QPoint, actions: cint, data: gen_qmimedata_types.QMimeData, buttons: cint, modifiers: cint,
@@ -4913,12 +5101,18 @@ proc clone*(self: gen_qevent_types.QDragLeaveEvent): gen_qevent_types.QDragLeave
 
 type QDragLeaveEventcloneProc* = proc(self: QDragLeaveEvent): gen_qevent_types.QDragLeaveEvent {.raises: [], gcsafe.}
 type QDragLeaveEventsetAcceptedProc* = proc(self: QDragLeaveEvent, accepted: bool): void {.raises: [], gcsafe.}
+
 type QDragLeaveEventVTable* {.inheritable, pure.} = object
   vtbl: cQDragLeaveEventVTable
   clone*: QDragLeaveEventcloneProc
   setAccepted*: QDragLeaveEventsetAcceptedProc
+
 proc QDragLeaveEventclone*(self: gen_qevent_types.QDragLeaveEvent): gen_qevent_types.QDragLeaveEvent =
   gen_qevent_types.QDragLeaveEvent(h: fcQDragLeaveEvent_virtualbase_clone(self.h), owned: false)
+
+proc QDragLeaveEventsetAccepted*(self: gen_qevent_types.QDragLeaveEvent, accepted: bool): void =
+  fcQDragLeaveEvent_virtualbase_setAccepted(self.h, accepted)
+
 
 proc fcQDragLeaveEvent_vtable_callback_clone(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QDragLeaveEventVTable](fcQDragLeaveEvent_vdata(self)[])
@@ -4929,9 +5123,6 @@ proc fcQDragLeaveEvent_vtable_callback_clone(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QDragLeaveEventsetAccepted*(self: gen_qevent_types.QDragLeaveEvent, accepted: bool): void =
-  fcQDragLeaveEvent_virtualbase_setAccepted(self.h, accepted)
-
 proc fcQDragLeaveEvent_vtable_callback_setAccepted(self: pointer, accepted: bool): void {.cdecl.} =
   let vtbl = cast[ptr QDragLeaveEventVTable](fcQDragLeaveEvent_vdata(self)[])
   let self = QDragLeaveEvent(h: self)
@@ -4940,19 +5131,22 @@ proc fcQDragLeaveEvent_vtable_callback_setAccepted(self: pointer, accepted: bool
 
 type VirtualQDragLeaveEvent* {.inheritable.} = ref object of QDragLeaveEvent
   vtbl*: cQDragLeaveEventVTable
+
 method clone*(self: VirtualQDragLeaveEvent): gen_qevent_types.QDragLeaveEvent {.base.} =
   QDragLeaveEventclone(self[])
+method setAccepted*(self: VirtualQDragLeaveEvent, accepted: bool): void {.base.} =
+  QDragLeaveEventsetAccepted(self[], accepted)
+
 proc fcQDragLeaveEvent_method_callback_clone(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQDragLeaveEvent](fcQDragLeaveEvent_vdata(self)[])
   var virtualReturn = inst.clone()
   virtualReturn.h
 
-method setAccepted*(self: VirtualQDragLeaveEvent, accepted: bool): void {.base.} =
-  QDragLeaveEventsetAccepted(self[], accepted)
 proc fcQDragLeaveEvent_method_callback_setAccepted(self: pointer, accepted: bool): void {.cdecl.} =
   let inst = cast[VirtualQDragLeaveEvent](fcQDragLeaveEvent_vdata(self)[])
   let slotval1 = accepted
   inst.setAccepted(slotval1)
+
 
 proc create*(T: type gen_qevent_types.QDragLeaveEvent,
     vtbl: ref QDragLeaveEventVTable = nil): gen_qevent_types.QDragLeaveEvent =
@@ -5007,12 +5201,18 @@ proc globalPos*(self: gen_qevent_types.QHelpEvent): gen_qpoint_types.QPoint =
 
 type QHelpEventcloneProc* = proc(self: QHelpEvent): gen_qevent_types.QHelpEvent {.raises: [], gcsafe.}
 type QHelpEventsetAcceptedProc* = proc(self: QHelpEvent, accepted: bool): void {.raises: [], gcsafe.}
+
 type QHelpEventVTable* {.inheritable, pure.} = object
   vtbl: cQHelpEventVTable
   clone*: QHelpEventcloneProc
   setAccepted*: QHelpEventsetAcceptedProc
+
 proc QHelpEventclone*(self: gen_qevent_types.QHelpEvent): gen_qevent_types.QHelpEvent =
   gen_qevent_types.QHelpEvent(h: fcQHelpEvent_virtualbase_clone(self.h), owned: false)
+
+proc QHelpEventsetAccepted*(self: gen_qevent_types.QHelpEvent, accepted: bool): void =
+  fcQHelpEvent_virtualbase_setAccepted(self.h, accepted)
+
 
 proc fcQHelpEvent_vtable_callback_clone(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QHelpEventVTable](fcQHelpEvent_vdata(self)[])
@@ -5023,9 +5223,6 @@ proc fcQHelpEvent_vtable_callback_clone(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QHelpEventsetAccepted*(self: gen_qevent_types.QHelpEvent, accepted: bool): void =
-  fcQHelpEvent_virtualbase_setAccepted(self.h, accepted)
-
 proc fcQHelpEvent_vtable_callback_setAccepted(self: pointer, accepted: bool): void {.cdecl.} =
   let vtbl = cast[ptr QHelpEventVTable](fcQHelpEvent_vdata(self)[])
   let self = QHelpEvent(h: self)
@@ -5034,19 +5231,22 @@ proc fcQHelpEvent_vtable_callback_setAccepted(self: pointer, accepted: bool): vo
 
 type VirtualQHelpEvent* {.inheritable.} = ref object of QHelpEvent
   vtbl*: cQHelpEventVTable
+
 method clone*(self: VirtualQHelpEvent): gen_qevent_types.QHelpEvent {.base.} =
   QHelpEventclone(self[])
+method setAccepted*(self: VirtualQHelpEvent, accepted: bool): void {.base.} =
+  QHelpEventsetAccepted(self[], accepted)
+
 proc fcQHelpEvent_method_callback_clone(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQHelpEvent](fcQHelpEvent_vdata(self)[])
   var virtualReturn = inst.clone()
   virtualReturn.h
 
-method setAccepted*(self: VirtualQHelpEvent, accepted: bool): void {.base.} =
-  QHelpEventsetAccepted(self[], accepted)
 proc fcQHelpEvent_method_callback_setAccepted(self: pointer, accepted: bool): void {.cdecl.} =
   let inst = cast[VirtualQHelpEvent](fcQHelpEvent_vdata(self)[])
   let slotval1 = accepted
   inst.setAccepted(slotval1)
+
 
 proc create*(T: type gen_qevent_types.QHelpEvent,
     typeVal: cint, pos: gen_qpoint_types.QPoint, globalPos: gen_qpoint_types.QPoint,
@@ -5091,12 +5291,18 @@ proc tip*(self: gen_qevent_types.QStatusTipEvent): string =
 
 type QStatusTipEventcloneProc* = proc(self: QStatusTipEvent): gen_qevent_types.QStatusTipEvent {.raises: [], gcsafe.}
 type QStatusTipEventsetAcceptedProc* = proc(self: QStatusTipEvent, accepted: bool): void {.raises: [], gcsafe.}
+
 type QStatusTipEventVTable* {.inheritable, pure.} = object
   vtbl: cQStatusTipEventVTable
   clone*: QStatusTipEventcloneProc
   setAccepted*: QStatusTipEventsetAcceptedProc
+
 proc QStatusTipEventclone*(self: gen_qevent_types.QStatusTipEvent): gen_qevent_types.QStatusTipEvent =
   gen_qevent_types.QStatusTipEvent(h: fcQStatusTipEvent_virtualbase_clone(self.h), owned: false)
+
+proc QStatusTipEventsetAccepted*(self: gen_qevent_types.QStatusTipEvent, accepted: bool): void =
+  fcQStatusTipEvent_virtualbase_setAccepted(self.h, accepted)
+
 
 proc fcQStatusTipEvent_vtable_callback_clone(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QStatusTipEventVTable](fcQStatusTipEvent_vdata(self)[])
@@ -5107,9 +5313,6 @@ proc fcQStatusTipEvent_vtable_callback_clone(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QStatusTipEventsetAccepted*(self: gen_qevent_types.QStatusTipEvent, accepted: bool): void =
-  fcQStatusTipEvent_virtualbase_setAccepted(self.h, accepted)
-
 proc fcQStatusTipEvent_vtable_callback_setAccepted(self: pointer, accepted: bool): void {.cdecl.} =
   let vtbl = cast[ptr QStatusTipEventVTable](fcQStatusTipEvent_vdata(self)[])
   let self = QStatusTipEvent(h: self)
@@ -5118,19 +5321,22 @@ proc fcQStatusTipEvent_vtable_callback_setAccepted(self: pointer, accepted: bool
 
 type VirtualQStatusTipEvent* {.inheritable.} = ref object of QStatusTipEvent
   vtbl*: cQStatusTipEventVTable
+
 method clone*(self: VirtualQStatusTipEvent): gen_qevent_types.QStatusTipEvent {.base.} =
   QStatusTipEventclone(self[])
+method setAccepted*(self: VirtualQStatusTipEvent, accepted: bool): void {.base.} =
+  QStatusTipEventsetAccepted(self[], accepted)
+
 proc fcQStatusTipEvent_method_callback_clone(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQStatusTipEvent](fcQStatusTipEvent_vdata(self)[])
   var virtualReturn = inst.clone()
   virtualReturn.h
 
-method setAccepted*(self: VirtualQStatusTipEvent, accepted: bool): void {.base.} =
-  QStatusTipEventsetAccepted(self[], accepted)
 proc fcQStatusTipEvent_method_callback_setAccepted(self: pointer, accepted: bool): void {.cdecl.} =
   let inst = cast[VirtualQStatusTipEvent](fcQStatusTipEvent_vdata(self)[])
   let slotval1 = accepted
   inst.setAccepted(slotval1)
+
 
 proc create*(T: type gen_qevent_types.QStatusTipEvent,
     tip: openArray[char],
@@ -5175,12 +5381,18 @@ proc href*(self: gen_qevent_types.QWhatsThisClickedEvent): string =
 
 type QWhatsThisClickedEventcloneProc* = proc(self: QWhatsThisClickedEvent): gen_qevent_types.QWhatsThisClickedEvent {.raises: [], gcsafe.}
 type QWhatsThisClickedEventsetAcceptedProc* = proc(self: QWhatsThisClickedEvent, accepted: bool): void {.raises: [], gcsafe.}
+
 type QWhatsThisClickedEventVTable* {.inheritable, pure.} = object
   vtbl: cQWhatsThisClickedEventVTable
   clone*: QWhatsThisClickedEventcloneProc
   setAccepted*: QWhatsThisClickedEventsetAcceptedProc
+
 proc QWhatsThisClickedEventclone*(self: gen_qevent_types.QWhatsThisClickedEvent): gen_qevent_types.QWhatsThisClickedEvent =
   gen_qevent_types.QWhatsThisClickedEvent(h: fcQWhatsThisClickedEvent_virtualbase_clone(self.h), owned: false)
+
+proc QWhatsThisClickedEventsetAccepted*(self: gen_qevent_types.QWhatsThisClickedEvent, accepted: bool): void =
+  fcQWhatsThisClickedEvent_virtualbase_setAccepted(self.h, accepted)
+
 
 proc fcQWhatsThisClickedEvent_vtable_callback_clone(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QWhatsThisClickedEventVTable](fcQWhatsThisClickedEvent_vdata(self)[])
@@ -5191,9 +5403,6 @@ proc fcQWhatsThisClickedEvent_vtable_callback_clone(self: pointer): pointer {.cd
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QWhatsThisClickedEventsetAccepted*(self: gen_qevent_types.QWhatsThisClickedEvent, accepted: bool): void =
-  fcQWhatsThisClickedEvent_virtualbase_setAccepted(self.h, accepted)
-
 proc fcQWhatsThisClickedEvent_vtable_callback_setAccepted(self: pointer, accepted: bool): void {.cdecl.} =
   let vtbl = cast[ptr QWhatsThisClickedEventVTable](fcQWhatsThisClickedEvent_vdata(self)[])
   let self = QWhatsThisClickedEvent(h: self)
@@ -5202,19 +5411,22 @@ proc fcQWhatsThisClickedEvent_vtable_callback_setAccepted(self: pointer, accepte
 
 type VirtualQWhatsThisClickedEvent* {.inheritable.} = ref object of QWhatsThisClickedEvent
   vtbl*: cQWhatsThisClickedEventVTable
+
 method clone*(self: VirtualQWhatsThisClickedEvent): gen_qevent_types.QWhatsThisClickedEvent {.base.} =
   QWhatsThisClickedEventclone(self[])
+method setAccepted*(self: VirtualQWhatsThisClickedEvent, accepted: bool): void {.base.} =
+  QWhatsThisClickedEventsetAccepted(self[], accepted)
+
 proc fcQWhatsThisClickedEvent_method_callback_clone(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQWhatsThisClickedEvent](fcQWhatsThisClickedEvent_vdata(self)[])
   var virtualReturn = inst.clone()
   virtualReturn.h
 
-method setAccepted*(self: VirtualQWhatsThisClickedEvent, accepted: bool): void {.base.} =
-  QWhatsThisClickedEventsetAccepted(self[], accepted)
 proc fcQWhatsThisClickedEvent_method_callback_setAccepted(self: pointer, accepted: bool): void {.cdecl.} =
   let inst = cast[VirtualQWhatsThisClickedEvent](fcQWhatsThisClickedEvent_vdata(self)[])
   let slotval1 = accepted
   inst.setAccepted(slotval1)
+
 
 proc create*(T: type gen_qevent_types.QWhatsThisClickedEvent,
     href: openArray[char],
@@ -5268,12 +5480,18 @@ proc openFile*(self: gen_qevent_types.QFileOpenEvent, file: gen_qfile_types.QFil
 
 type QFileOpenEventcloneProc* = proc(self: QFileOpenEvent): gen_qevent_types.QFileOpenEvent {.raises: [], gcsafe.}
 type QFileOpenEventsetAcceptedProc* = proc(self: QFileOpenEvent, accepted: bool): void {.raises: [], gcsafe.}
+
 type QFileOpenEventVTable* {.inheritable, pure.} = object
   vtbl: cQFileOpenEventVTable
   clone*: QFileOpenEventcloneProc
   setAccepted*: QFileOpenEventsetAcceptedProc
+
 proc QFileOpenEventclone*(self: gen_qevent_types.QFileOpenEvent): gen_qevent_types.QFileOpenEvent =
   gen_qevent_types.QFileOpenEvent(h: fcQFileOpenEvent_virtualbase_clone(self.h), owned: false)
+
+proc QFileOpenEventsetAccepted*(self: gen_qevent_types.QFileOpenEvent, accepted: bool): void =
+  fcQFileOpenEvent_virtualbase_setAccepted(self.h, accepted)
+
 
 proc fcQFileOpenEvent_vtable_callback_clone(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QFileOpenEventVTable](fcQFileOpenEvent_vdata(self)[])
@@ -5284,9 +5502,6 @@ proc fcQFileOpenEvent_vtable_callback_clone(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QFileOpenEventsetAccepted*(self: gen_qevent_types.QFileOpenEvent, accepted: bool): void =
-  fcQFileOpenEvent_virtualbase_setAccepted(self.h, accepted)
-
 proc fcQFileOpenEvent_vtable_callback_setAccepted(self: pointer, accepted: bool): void {.cdecl.} =
   let vtbl = cast[ptr QFileOpenEventVTable](fcQFileOpenEvent_vdata(self)[])
   let self = QFileOpenEvent(h: self)
@@ -5295,19 +5510,22 @@ proc fcQFileOpenEvent_vtable_callback_setAccepted(self: pointer, accepted: bool)
 
 type VirtualQFileOpenEvent* {.inheritable.} = ref object of QFileOpenEvent
   vtbl*: cQFileOpenEventVTable
+
 method clone*(self: VirtualQFileOpenEvent): gen_qevent_types.QFileOpenEvent {.base.} =
   QFileOpenEventclone(self[])
+method setAccepted*(self: VirtualQFileOpenEvent, accepted: bool): void {.base.} =
+  QFileOpenEventsetAccepted(self[], accepted)
+
 proc fcQFileOpenEvent_method_callback_clone(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQFileOpenEvent](fcQFileOpenEvent_vdata(self)[])
   var virtualReturn = inst.clone()
   virtualReturn.h
 
-method setAccepted*(self: VirtualQFileOpenEvent, accepted: bool): void {.base.} =
-  QFileOpenEventsetAccepted(self[], accepted)
 proc fcQFileOpenEvent_method_callback_setAccepted(self: pointer, accepted: bool): void {.cdecl.} =
   let inst = cast[VirtualQFileOpenEvent](fcQFileOpenEvent_vdata(self)[])
   let slotval1 = accepted
   inst.setAccepted(slotval1)
+
 
 proc create*(T: type gen_qevent_types.QFileOpenEvent,
     file: openArray[char],
@@ -5372,12 +5590,18 @@ proc toggle*(self: gen_qevent_types.QToolBarChangeEvent): bool =
 
 type QToolBarChangeEventcloneProc* = proc(self: QToolBarChangeEvent): gen_qevent_types.QToolBarChangeEvent {.raises: [], gcsafe.}
 type QToolBarChangeEventsetAcceptedProc* = proc(self: QToolBarChangeEvent, accepted: bool): void {.raises: [], gcsafe.}
+
 type QToolBarChangeEventVTable* {.inheritable, pure.} = object
   vtbl: cQToolBarChangeEventVTable
   clone*: QToolBarChangeEventcloneProc
   setAccepted*: QToolBarChangeEventsetAcceptedProc
+
 proc QToolBarChangeEventclone*(self: gen_qevent_types.QToolBarChangeEvent): gen_qevent_types.QToolBarChangeEvent =
   gen_qevent_types.QToolBarChangeEvent(h: fcQToolBarChangeEvent_virtualbase_clone(self.h), owned: false)
+
+proc QToolBarChangeEventsetAccepted*(self: gen_qevent_types.QToolBarChangeEvent, accepted: bool): void =
+  fcQToolBarChangeEvent_virtualbase_setAccepted(self.h, accepted)
+
 
 proc fcQToolBarChangeEvent_vtable_callback_clone(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QToolBarChangeEventVTable](fcQToolBarChangeEvent_vdata(self)[])
@@ -5388,9 +5612,6 @@ proc fcQToolBarChangeEvent_vtable_callback_clone(self: pointer): pointer {.cdecl
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QToolBarChangeEventsetAccepted*(self: gen_qevent_types.QToolBarChangeEvent, accepted: bool): void =
-  fcQToolBarChangeEvent_virtualbase_setAccepted(self.h, accepted)
-
 proc fcQToolBarChangeEvent_vtable_callback_setAccepted(self: pointer, accepted: bool): void {.cdecl.} =
   let vtbl = cast[ptr QToolBarChangeEventVTable](fcQToolBarChangeEvent_vdata(self)[])
   let self = QToolBarChangeEvent(h: self)
@@ -5399,19 +5620,22 @@ proc fcQToolBarChangeEvent_vtable_callback_setAccepted(self: pointer, accepted: 
 
 type VirtualQToolBarChangeEvent* {.inheritable.} = ref object of QToolBarChangeEvent
   vtbl*: cQToolBarChangeEventVTable
+
 method clone*(self: VirtualQToolBarChangeEvent): gen_qevent_types.QToolBarChangeEvent {.base.} =
   QToolBarChangeEventclone(self[])
+method setAccepted*(self: VirtualQToolBarChangeEvent, accepted: bool): void {.base.} =
+  QToolBarChangeEventsetAccepted(self[], accepted)
+
 proc fcQToolBarChangeEvent_method_callback_clone(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQToolBarChangeEvent](fcQToolBarChangeEvent_vdata(self)[])
   var virtualReturn = inst.clone()
   virtualReturn.h
 
-method setAccepted*(self: VirtualQToolBarChangeEvent, accepted: bool): void {.base.} =
-  QToolBarChangeEventsetAccepted(self[], accepted)
 proc fcQToolBarChangeEvent_method_callback_setAccepted(self: pointer, accepted: bool): void {.cdecl.} =
   let inst = cast[VirtualQToolBarChangeEvent](fcQToolBarChangeEvent_vdata(self)[])
   let slotval1 = accepted
   inst.setAccepted(slotval1)
+
 
 proc create*(T: type gen_qevent_types.QToolBarChangeEvent,
     t: bool,
@@ -5459,12 +5683,18 @@ proc isAmbiguous*(self: gen_qevent_types.QShortcutEvent): bool =
 
 type QShortcutEventcloneProc* = proc(self: QShortcutEvent): gen_qevent_types.QShortcutEvent {.raises: [], gcsafe.}
 type QShortcutEventsetAcceptedProc* = proc(self: QShortcutEvent, accepted: bool): void {.raises: [], gcsafe.}
+
 type QShortcutEventVTable* {.inheritable, pure.} = object
   vtbl: cQShortcutEventVTable
   clone*: QShortcutEventcloneProc
   setAccepted*: QShortcutEventsetAcceptedProc
+
 proc QShortcutEventclone*(self: gen_qevent_types.QShortcutEvent): gen_qevent_types.QShortcutEvent =
   gen_qevent_types.QShortcutEvent(h: fcQShortcutEvent_virtualbase_clone(self.h), owned: false)
+
+proc QShortcutEventsetAccepted*(self: gen_qevent_types.QShortcutEvent, accepted: bool): void =
+  fcQShortcutEvent_virtualbase_setAccepted(self.h, accepted)
+
 
 proc fcQShortcutEvent_vtable_callback_clone(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QShortcutEventVTable](fcQShortcutEvent_vdata(self)[])
@@ -5475,9 +5705,6 @@ proc fcQShortcutEvent_vtable_callback_clone(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QShortcutEventsetAccepted*(self: gen_qevent_types.QShortcutEvent, accepted: bool): void =
-  fcQShortcutEvent_virtualbase_setAccepted(self.h, accepted)
-
 proc fcQShortcutEvent_vtable_callback_setAccepted(self: pointer, accepted: bool): void {.cdecl.} =
   let vtbl = cast[ptr QShortcutEventVTable](fcQShortcutEvent_vdata(self)[])
   let self = QShortcutEvent(h: self)
@@ -5486,19 +5713,22 @@ proc fcQShortcutEvent_vtable_callback_setAccepted(self: pointer, accepted: bool)
 
 type VirtualQShortcutEvent* {.inheritable.} = ref object of QShortcutEvent
   vtbl*: cQShortcutEventVTable
+
 method clone*(self: VirtualQShortcutEvent): gen_qevent_types.QShortcutEvent {.base.} =
   QShortcutEventclone(self[])
+method setAccepted*(self: VirtualQShortcutEvent, accepted: bool): void {.base.} =
+  QShortcutEventsetAccepted(self[], accepted)
+
 proc fcQShortcutEvent_method_callback_clone(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQShortcutEvent](fcQShortcutEvent_vdata(self)[])
   var virtualReturn = inst.clone()
   virtualReturn.h
 
-method setAccepted*(self: VirtualQShortcutEvent, accepted: bool): void {.base.} =
-  QShortcutEventsetAccepted(self[], accepted)
 proc fcQShortcutEvent_method_callback_setAccepted(self: pointer, accepted: bool): void {.cdecl.} =
   let inst = cast[VirtualQShortcutEvent](fcQShortcutEvent_vdata(self)[])
   let slotval1 = accepted
   inst.setAccepted(slotval1)
+
 
 proc create*(T: type gen_qevent_types.QShortcutEvent,
     key: gen_qkeysequence_types.QKeySequence, id: cint,
@@ -5566,12 +5796,18 @@ proc isOverride*(self: gen_qevent_types.QWindowStateChangeEvent): bool =
 
 type QWindowStateChangeEventcloneProc* = proc(self: QWindowStateChangeEvent): gen_qevent_types.QWindowStateChangeEvent {.raises: [], gcsafe.}
 type QWindowStateChangeEventsetAcceptedProc* = proc(self: QWindowStateChangeEvent, accepted: bool): void {.raises: [], gcsafe.}
+
 type QWindowStateChangeEventVTable* {.inheritable, pure.} = object
   vtbl: cQWindowStateChangeEventVTable
   clone*: QWindowStateChangeEventcloneProc
   setAccepted*: QWindowStateChangeEventsetAcceptedProc
+
 proc QWindowStateChangeEventclone*(self: gen_qevent_types.QWindowStateChangeEvent): gen_qevent_types.QWindowStateChangeEvent =
   gen_qevent_types.QWindowStateChangeEvent(h: fcQWindowStateChangeEvent_virtualbase_clone(self.h), owned: false)
+
+proc QWindowStateChangeEventsetAccepted*(self: gen_qevent_types.QWindowStateChangeEvent, accepted: bool): void =
+  fcQWindowStateChangeEvent_virtualbase_setAccepted(self.h, accepted)
+
 
 proc fcQWindowStateChangeEvent_vtable_callback_clone(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QWindowStateChangeEventVTable](fcQWindowStateChangeEvent_vdata(self)[])
@@ -5582,9 +5818,6 @@ proc fcQWindowStateChangeEvent_vtable_callback_clone(self: pointer): pointer {.c
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QWindowStateChangeEventsetAccepted*(self: gen_qevent_types.QWindowStateChangeEvent, accepted: bool): void =
-  fcQWindowStateChangeEvent_virtualbase_setAccepted(self.h, accepted)
-
 proc fcQWindowStateChangeEvent_vtable_callback_setAccepted(self: pointer, accepted: bool): void {.cdecl.} =
   let vtbl = cast[ptr QWindowStateChangeEventVTable](fcQWindowStateChangeEvent_vdata(self)[])
   let self = QWindowStateChangeEvent(h: self)
@@ -5593,19 +5826,22 @@ proc fcQWindowStateChangeEvent_vtable_callback_setAccepted(self: pointer, accept
 
 type VirtualQWindowStateChangeEvent* {.inheritable.} = ref object of QWindowStateChangeEvent
   vtbl*: cQWindowStateChangeEventVTable
+
 method clone*(self: VirtualQWindowStateChangeEvent): gen_qevent_types.QWindowStateChangeEvent {.base.} =
   QWindowStateChangeEventclone(self[])
+method setAccepted*(self: VirtualQWindowStateChangeEvent, accepted: bool): void {.base.} =
+  QWindowStateChangeEventsetAccepted(self[], accepted)
+
 proc fcQWindowStateChangeEvent_method_callback_clone(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQWindowStateChangeEvent](fcQWindowStateChangeEvent_vdata(self)[])
   var virtualReturn = inst.clone()
   virtualReturn.h
 
-method setAccepted*(self: VirtualQWindowStateChangeEvent, accepted: bool): void {.base.} =
-  QWindowStateChangeEventsetAccepted(self[], accepted)
 proc fcQWindowStateChangeEvent_method_callback_setAccepted(self: pointer, accepted: bool): void {.cdecl.} =
   let inst = cast[VirtualQWindowStateChangeEvent](fcQWindowStateChangeEvent_vdata(self)[])
   let slotval1 = accepted
   inst.setAccepted(slotval1)
+
 
 proc create*(T: type gen_qevent_types.QWindowStateChangeEvent,
     oldState: cint,
@@ -5695,6 +5931,7 @@ type QTouchEventisUpdateEventProc* = proc(self: QTouchEvent): bool {.raises: [],
 type QTouchEventisEndEventProc* = proc(self: QTouchEvent): bool {.raises: [], gcsafe.}
 type QTouchEventsetTimestampProc* = proc(self: QTouchEvent, timestamp: culonglong): void {.raises: [], gcsafe.}
 type QTouchEventsetAcceptedProc* = proc(self: QTouchEvent, accepted: bool): void {.raises: [], gcsafe.}
+
 type QTouchEventVTable* {.inheritable, pure.} = object
   vtbl: cQTouchEventVTable
   clone*: QTouchEventcloneProc
@@ -5703,8 +5940,25 @@ type QTouchEventVTable* {.inheritable, pure.} = object
   isEndEvent*: QTouchEventisEndEventProc
   setTimestamp*: QTouchEventsetTimestampProc
   setAccepted*: QTouchEventsetAcceptedProc
+
 proc QTouchEventclone*(self: gen_qevent_types.QTouchEvent): gen_qevent_types.QTouchEvent =
   gen_qevent_types.QTouchEvent(h: fcQTouchEvent_virtualbase_clone(self.h), owned: false)
+
+proc QTouchEventisBeginEvent*(self: gen_qevent_types.QTouchEvent): bool =
+  fcQTouchEvent_virtualbase_isBeginEvent(self.h)
+
+proc QTouchEventisUpdateEvent*(self: gen_qevent_types.QTouchEvent): bool =
+  fcQTouchEvent_virtualbase_isUpdateEvent(self.h)
+
+proc QTouchEventisEndEvent*(self: gen_qevent_types.QTouchEvent): bool =
+  fcQTouchEvent_virtualbase_isEndEvent(self.h)
+
+proc QTouchEventsetTimestamp*(self: gen_qevent_types.QTouchEvent, timestamp: culonglong): void =
+  fcQTouchEvent_virtualbase_setTimestamp(self.h, timestamp)
+
+proc QTouchEventsetAccepted*(self: gen_qevent_types.QTouchEvent, accepted: bool): void =
+  fcQTouchEvent_virtualbase_setAccepted(self.h, accepted)
+
 
 proc fcQTouchEvent_vtable_callback_clone(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QTouchEventVTable](fcQTouchEvent_vdata(self)[])
@@ -5715,17 +5969,11 @@ proc fcQTouchEvent_vtable_callback_clone(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QTouchEventisBeginEvent*(self: gen_qevent_types.QTouchEvent): bool =
-  fcQTouchEvent_virtualbase_isBeginEvent(self.h)
-
 proc fcQTouchEvent_vtable_callback_isBeginEvent(self: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QTouchEventVTable](fcQTouchEvent_vdata(self)[])
   let self = QTouchEvent(h: self)
   var virtualReturn = vtbl[].isBeginEvent(self)
   virtualReturn
-
-proc QTouchEventisUpdateEvent*(self: gen_qevent_types.QTouchEvent): bool =
-  fcQTouchEvent_virtualbase_isUpdateEvent(self.h)
 
 proc fcQTouchEvent_vtable_callback_isUpdateEvent(self: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QTouchEventVTable](fcQTouchEvent_vdata(self)[])
@@ -5733,26 +5981,17 @@ proc fcQTouchEvent_vtable_callback_isUpdateEvent(self: pointer): bool {.cdecl.} 
   var virtualReturn = vtbl[].isUpdateEvent(self)
   virtualReturn
 
-proc QTouchEventisEndEvent*(self: gen_qevent_types.QTouchEvent): bool =
-  fcQTouchEvent_virtualbase_isEndEvent(self.h)
-
 proc fcQTouchEvent_vtable_callback_isEndEvent(self: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QTouchEventVTable](fcQTouchEvent_vdata(self)[])
   let self = QTouchEvent(h: self)
   var virtualReturn = vtbl[].isEndEvent(self)
   virtualReturn
 
-proc QTouchEventsetTimestamp*(self: gen_qevent_types.QTouchEvent, timestamp: culonglong): void =
-  fcQTouchEvent_virtualbase_setTimestamp(self.h, timestamp)
-
 proc fcQTouchEvent_vtable_callback_setTimestamp(self: pointer, timestamp: culonglong): void {.cdecl.} =
   let vtbl = cast[ptr QTouchEventVTable](fcQTouchEvent_vdata(self)[])
   let self = QTouchEvent(h: self)
   let slotval1 = timestamp
   vtbl[].setTimestamp(self, slotval1)
-
-proc QTouchEventsetAccepted*(self: gen_qevent_types.QTouchEvent, accepted: bool): void =
-  fcQTouchEvent_virtualbase_setAccepted(self.h, accepted)
 
 proc fcQTouchEvent_vtable_callback_setAccepted(self: pointer, accepted: bool): void {.cdecl.} =
   let vtbl = cast[ptr QTouchEventVTable](fcQTouchEvent_vdata(self)[])
@@ -5762,47 +6001,50 @@ proc fcQTouchEvent_vtable_callback_setAccepted(self: pointer, accepted: bool): v
 
 type VirtualQTouchEvent* {.inheritable.} = ref object of QTouchEvent
   vtbl*: cQTouchEventVTable
+
 method clone*(self: VirtualQTouchEvent): gen_qevent_types.QTouchEvent {.base.} =
   QTouchEventclone(self[])
+method isBeginEvent*(self: VirtualQTouchEvent): bool {.base.} =
+  QTouchEventisBeginEvent(self[])
+method isUpdateEvent*(self: VirtualQTouchEvent): bool {.base.} =
+  QTouchEventisUpdateEvent(self[])
+method isEndEvent*(self: VirtualQTouchEvent): bool {.base.} =
+  QTouchEventisEndEvent(self[])
+method setTimestamp*(self: VirtualQTouchEvent, timestamp: culonglong): void {.base.} =
+  QTouchEventsetTimestamp(self[], timestamp)
+method setAccepted*(self: VirtualQTouchEvent, accepted: bool): void {.base.} =
+  QTouchEventsetAccepted(self[], accepted)
+
 proc fcQTouchEvent_method_callback_clone(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQTouchEvent](fcQTouchEvent_vdata(self)[])
   var virtualReturn = inst.clone()
   virtualReturn.h
 
-method isBeginEvent*(self: VirtualQTouchEvent): bool {.base.} =
-  QTouchEventisBeginEvent(self[])
 proc fcQTouchEvent_method_callback_isBeginEvent(self: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQTouchEvent](fcQTouchEvent_vdata(self)[])
   var virtualReturn = inst.isBeginEvent()
   virtualReturn
 
-method isUpdateEvent*(self: VirtualQTouchEvent): bool {.base.} =
-  QTouchEventisUpdateEvent(self[])
 proc fcQTouchEvent_method_callback_isUpdateEvent(self: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQTouchEvent](fcQTouchEvent_vdata(self)[])
   var virtualReturn = inst.isUpdateEvent()
   virtualReturn
 
-method isEndEvent*(self: VirtualQTouchEvent): bool {.base.} =
-  QTouchEventisEndEvent(self[])
 proc fcQTouchEvent_method_callback_isEndEvent(self: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQTouchEvent](fcQTouchEvent_vdata(self)[])
   var virtualReturn = inst.isEndEvent()
   virtualReturn
 
-method setTimestamp*(self: VirtualQTouchEvent, timestamp: culonglong): void {.base.} =
-  QTouchEventsetTimestamp(self[], timestamp)
 proc fcQTouchEvent_method_callback_setTimestamp(self: pointer, timestamp: culonglong): void {.cdecl.} =
   let inst = cast[VirtualQTouchEvent](fcQTouchEvent_vdata(self)[])
   let slotval1 = timestamp
   inst.setTimestamp(slotval1)
 
-method setAccepted*(self: VirtualQTouchEvent, accepted: bool): void {.base.} =
-  QTouchEventsetAccepted(self[], accepted)
 proc fcQTouchEvent_method_callback_setAccepted(self: pointer, accepted: bool): void {.cdecl.} =
   let inst = cast[VirtualQTouchEvent](fcQTouchEvent_vdata(self)[])
   let slotval1 = accepted
   inst.setAccepted(slotval1)
+
 
 proc create*(T: type gen_qevent_types.QTouchEvent,
     eventType: cint,
@@ -6045,12 +6287,18 @@ proc setContentPos*(self: gen_qevent_types.QScrollPrepareEvent, pos: gen_qpoint_
 
 type QScrollPrepareEventcloneProc* = proc(self: QScrollPrepareEvent): gen_qevent_types.QScrollPrepareEvent {.raises: [], gcsafe.}
 type QScrollPrepareEventsetAcceptedProc* = proc(self: QScrollPrepareEvent, accepted: bool): void {.raises: [], gcsafe.}
+
 type QScrollPrepareEventVTable* {.inheritable, pure.} = object
   vtbl: cQScrollPrepareEventVTable
   clone*: QScrollPrepareEventcloneProc
   setAccepted*: QScrollPrepareEventsetAcceptedProc
+
 proc QScrollPrepareEventclone*(self: gen_qevent_types.QScrollPrepareEvent): gen_qevent_types.QScrollPrepareEvent =
   gen_qevent_types.QScrollPrepareEvent(h: fcQScrollPrepareEvent_virtualbase_clone(self.h), owned: false)
+
+proc QScrollPrepareEventsetAccepted*(self: gen_qevent_types.QScrollPrepareEvent, accepted: bool): void =
+  fcQScrollPrepareEvent_virtualbase_setAccepted(self.h, accepted)
+
 
 proc fcQScrollPrepareEvent_vtable_callback_clone(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QScrollPrepareEventVTable](fcQScrollPrepareEvent_vdata(self)[])
@@ -6061,9 +6309,6 @@ proc fcQScrollPrepareEvent_vtable_callback_clone(self: pointer): pointer {.cdecl
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QScrollPrepareEventsetAccepted*(self: gen_qevent_types.QScrollPrepareEvent, accepted: bool): void =
-  fcQScrollPrepareEvent_virtualbase_setAccepted(self.h, accepted)
-
 proc fcQScrollPrepareEvent_vtable_callback_setAccepted(self: pointer, accepted: bool): void {.cdecl.} =
   let vtbl = cast[ptr QScrollPrepareEventVTable](fcQScrollPrepareEvent_vdata(self)[])
   let self = QScrollPrepareEvent(h: self)
@@ -6072,19 +6317,22 @@ proc fcQScrollPrepareEvent_vtable_callback_setAccepted(self: pointer, accepted: 
 
 type VirtualQScrollPrepareEvent* {.inheritable.} = ref object of QScrollPrepareEvent
   vtbl*: cQScrollPrepareEventVTable
+
 method clone*(self: VirtualQScrollPrepareEvent): gen_qevent_types.QScrollPrepareEvent {.base.} =
   QScrollPrepareEventclone(self[])
+method setAccepted*(self: VirtualQScrollPrepareEvent, accepted: bool): void {.base.} =
+  QScrollPrepareEventsetAccepted(self[], accepted)
+
 proc fcQScrollPrepareEvent_method_callback_clone(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQScrollPrepareEvent](fcQScrollPrepareEvent_vdata(self)[])
   var virtualReturn = inst.clone()
   virtualReturn.h
 
-method setAccepted*(self: VirtualQScrollPrepareEvent, accepted: bool): void {.base.} =
-  QScrollPrepareEventsetAccepted(self[], accepted)
 proc fcQScrollPrepareEvent_method_callback_setAccepted(self: pointer, accepted: bool): void {.cdecl.} =
   let inst = cast[VirtualQScrollPrepareEvent](fcQScrollPrepareEvent_vdata(self)[])
   let slotval1 = accepted
   inst.setAccepted(slotval1)
+
 
 proc create*(T: type gen_qevent_types.QScrollPrepareEvent,
     startPos: gen_qpoint_types.QPointF,
@@ -6132,12 +6380,18 @@ proc scrollState*(self: gen_qevent_types.QScrollEvent): cint =
 
 type QScrollEventcloneProc* = proc(self: QScrollEvent): gen_qevent_types.QScrollEvent {.raises: [], gcsafe.}
 type QScrollEventsetAcceptedProc* = proc(self: QScrollEvent, accepted: bool): void {.raises: [], gcsafe.}
+
 type QScrollEventVTable* {.inheritable, pure.} = object
   vtbl: cQScrollEventVTable
   clone*: QScrollEventcloneProc
   setAccepted*: QScrollEventsetAcceptedProc
+
 proc QScrollEventclone*(self: gen_qevent_types.QScrollEvent): gen_qevent_types.QScrollEvent =
   gen_qevent_types.QScrollEvent(h: fcQScrollEvent_virtualbase_clone(self.h), owned: false)
+
+proc QScrollEventsetAccepted*(self: gen_qevent_types.QScrollEvent, accepted: bool): void =
+  fcQScrollEvent_virtualbase_setAccepted(self.h, accepted)
+
 
 proc fcQScrollEvent_vtable_callback_clone(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QScrollEventVTable](fcQScrollEvent_vdata(self)[])
@@ -6148,9 +6402,6 @@ proc fcQScrollEvent_vtable_callback_clone(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QScrollEventsetAccepted*(self: gen_qevent_types.QScrollEvent, accepted: bool): void =
-  fcQScrollEvent_virtualbase_setAccepted(self.h, accepted)
-
 proc fcQScrollEvent_vtable_callback_setAccepted(self: pointer, accepted: bool): void {.cdecl.} =
   let vtbl = cast[ptr QScrollEventVTable](fcQScrollEvent_vdata(self)[])
   let self = QScrollEvent(h: self)
@@ -6159,19 +6410,22 @@ proc fcQScrollEvent_vtable_callback_setAccepted(self: pointer, accepted: bool): 
 
 type VirtualQScrollEvent* {.inheritable.} = ref object of QScrollEvent
   vtbl*: cQScrollEventVTable
+
 method clone*(self: VirtualQScrollEvent): gen_qevent_types.QScrollEvent {.base.} =
   QScrollEventclone(self[])
+method setAccepted*(self: VirtualQScrollEvent, accepted: bool): void {.base.} =
+  QScrollEventsetAccepted(self[], accepted)
+
 proc fcQScrollEvent_method_callback_clone(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQScrollEvent](fcQScrollEvent_vdata(self)[])
   var virtualReturn = inst.clone()
   virtualReturn.h
 
-method setAccepted*(self: VirtualQScrollEvent, accepted: bool): void {.base.} =
-  QScrollEventsetAccepted(self[], accepted)
 proc fcQScrollEvent_method_callback_setAccepted(self: pointer, accepted: bool): void {.cdecl.} =
   let inst = cast[VirtualQScrollEvent](fcQScrollEvent_vdata(self)[])
   let slotval1 = accepted
   inst.setAccepted(slotval1)
+
 
 proc create*(T: type gen_qevent_types.QScrollEvent,
     contentPos: gen_qpoint_types.QPointF, overshoot: gen_qpoint_types.QPointF, scrollState: cint,
@@ -6216,12 +6470,18 @@ proc orientation*(self: gen_qevent_types.QScreenOrientationChangeEvent): cint =
 
 type QScreenOrientationChangeEventcloneProc* = proc(self: QScreenOrientationChangeEvent): gen_qevent_types.QScreenOrientationChangeEvent {.raises: [], gcsafe.}
 type QScreenOrientationChangeEventsetAcceptedProc* = proc(self: QScreenOrientationChangeEvent, accepted: bool): void {.raises: [], gcsafe.}
+
 type QScreenOrientationChangeEventVTable* {.inheritable, pure.} = object
   vtbl: cQScreenOrientationChangeEventVTable
   clone*: QScreenOrientationChangeEventcloneProc
   setAccepted*: QScreenOrientationChangeEventsetAcceptedProc
+
 proc QScreenOrientationChangeEventclone*(self: gen_qevent_types.QScreenOrientationChangeEvent): gen_qevent_types.QScreenOrientationChangeEvent =
   gen_qevent_types.QScreenOrientationChangeEvent(h: fcQScreenOrientationChangeEvent_virtualbase_clone(self.h), owned: false)
+
+proc QScreenOrientationChangeEventsetAccepted*(self: gen_qevent_types.QScreenOrientationChangeEvent, accepted: bool): void =
+  fcQScreenOrientationChangeEvent_virtualbase_setAccepted(self.h, accepted)
+
 
 proc fcQScreenOrientationChangeEvent_vtable_callback_clone(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QScreenOrientationChangeEventVTable](fcQScreenOrientationChangeEvent_vdata(self)[])
@@ -6232,9 +6492,6 @@ proc fcQScreenOrientationChangeEvent_vtable_callback_clone(self: pointer): point
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QScreenOrientationChangeEventsetAccepted*(self: gen_qevent_types.QScreenOrientationChangeEvent, accepted: bool): void =
-  fcQScreenOrientationChangeEvent_virtualbase_setAccepted(self.h, accepted)
-
 proc fcQScreenOrientationChangeEvent_vtable_callback_setAccepted(self: pointer, accepted: bool): void {.cdecl.} =
   let vtbl = cast[ptr QScreenOrientationChangeEventVTable](fcQScreenOrientationChangeEvent_vdata(self)[])
   let self = QScreenOrientationChangeEvent(h: self)
@@ -6243,19 +6500,22 @@ proc fcQScreenOrientationChangeEvent_vtable_callback_setAccepted(self: pointer, 
 
 type VirtualQScreenOrientationChangeEvent* {.inheritable.} = ref object of QScreenOrientationChangeEvent
   vtbl*: cQScreenOrientationChangeEventVTable
+
 method clone*(self: VirtualQScreenOrientationChangeEvent): gen_qevent_types.QScreenOrientationChangeEvent {.base.} =
   QScreenOrientationChangeEventclone(self[])
+method setAccepted*(self: VirtualQScreenOrientationChangeEvent, accepted: bool): void {.base.} =
+  QScreenOrientationChangeEventsetAccepted(self[], accepted)
+
 proc fcQScreenOrientationChangeEvent_method_callback_clone(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQScreenOrientationChangeEvent](fcQScreenOrientationChangeEvent_vdata(self)[])
   var virtualReturn = inst.clone()
   virtualReturn.h
 
-method setAccepted*(self: VirtualQScreenOrientationChangeEvent, accepted: bool): void {.base.} =
-  QScreenOrientationChangeEventsetAccepted(self[], accepted)
 proc fcQScreenOrientationChangeEvent_method_callback_setAccepted(self: pointer, accepted: bool): void {.cdecl.} =
   let inst = cast[VirtualQScreenOrientationChangeEvent](fcQScreenOrientationChangeEvent_vdata(self)[])
   let slotval1 = accepted
   inst.setAccepted(slotval1)
+
 
 proc create*(T: type gen_qevent_types.QScreenOrientationChangeEvent,
     screen: gen_qscreen_types.QScreen, orientation: cint,
@@ -6297,12 +6557,18 @@ proc applicationState*(self: gen_qevent_types.QApplicationStateChangeEvent): cin
 
 type QApplicationStateChangeEventcloneProc* = proc(self: QApplicationStateChangeEvent): gen_qevent_types.QApplicationStateChangeEvent {.raises: [], gcsafe.}
 type QApplicationStateChangeEventsetAcceptedProc* = proc(self: QApplicationStateChangeEvent, accepted: bool): void {.raises: [], gcsafe.}
+
 type QApplicationStateChangeEventVTable* {.inheritable, pure.} = object
   vtbl: cQApplicationStateChangeEventVTable
   clone*: QApplicationStateChangeEventcloneProc
   setAccepted*: QApplicationStateChangeEventsetAcceptedProc
+
 proc QApplicationStateChangeEventclone*(self: gen_qevent_types.QApplicationStateChangeEvent): gen_qevent_types.QApplicationStateChangeEvent =
   gen_qevent_types.QApplicationStateChangeEvent(h: fcQApplicationStateChangeEvent_virtualbase_clone(self.h), owned: false)
+
+proc QApplicationStateChangeEventsetAccepted*(self: gen_qevent_types.QApplicationStateChangeEvent, accepted: bool): void =
+  fcQApplicationStateChangeEvent_virtualbase_setAccepted(self.h, accepted)
+
 
 proc fcQApplicationStateChangeEvent_vtable_callback_clone(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QApplicationStateChangeEventVTable](fcQApplicationStateChangeEvent_vdata(self)[])
@@ -6313,9 +6579,6 @@ proc fcQApplicationStateChangeEvent_vtable_callback_clone(self: pointer): pointe
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QApplicationStateChangeEventsetAccepted*(self: gen_qevent_types.QApplicationStateChangeEvent, accepted: bool): void =
-  fcQApplicationStateChangeEvent_virtualbase_setAccepted(self.h, accepted)
-
 proc fcQApplicationStateChangeEvent_vtable_callback_setAccepted(self: pointer, accepted: bool): void {.cdecl.} =
   let vtbl = cast[ptr QApplicationStateChangeEventVTable](fcQApplicationStateChangeEvent_vdata(self)[])
   let self = QApplicationStateChangeEvent(h: self)
@@ -6324,19 +6587,22 @@ proc fcQApplicationStateChangeEvent_vtable_callback_setAccepted(self: pointer, a
 
 type VirtualQApplicationStateChangeEvent* {.inheritable.} = ref object of QApplicationStateChangeEvent
   vtbl*: cQApplicationStateChangeEventVTable
+
 method clone*(self: VirtualQApplicationStateChangeEvent): gen_qevent_types.QApplicationStateChangeEvent {.base.} =
   QApplicationStateChangeEventclone(self[])
+method setAccepted*(self: VirtualQApplicationStateChangeEvent, accepted: bool): void {.base.} =
+  QApplicationStateChangeEventsetAccepted(self[], accepted)
+
 proc fcQApplicationStateChangeEvent_method_callback_clone(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQApplicationStateChangeEvent](fcQApplicationStateChangeEvent_vdata(self)[])
   var virtualReturn = inst.clone()
   virtualReturn.h
 
-method setAccepted*(self: VirtualQApplicationStateChangeEvent, accepted: bool): void {.base.} =
-  QApplicationStateChangeEventsetAccepted(self[], accepted)
 proc fcQApplicationStateChangeEvent_method_callback_setAccepted(self: pointer, accepted: bool): void {.cdecl.} =
   let inst = cast[VirtualQApplicationStateChangeEvent](fcQApplicationStateChangeEvent_vdata(self)[])
   let slotval1 = accepted
   inst.setAccepted(slotval1)
+
 
 proc create*(T: type gen_qevent_types.QApplicationStateChangeEvent,
     state: cint,

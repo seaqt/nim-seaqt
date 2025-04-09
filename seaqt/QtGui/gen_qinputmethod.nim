@@ -198,7 +198,7 @@ proc fcQInputMethod_slot_callback_cursorRectangleChanged_release(slot: int) {.cd
   let nimfunc = cast[ref QInputMethodcursorRectangleChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc oncursorRectangleChanged*(self: gen_qinputmethod_types.QInputMethod, slot: QInputMethodcursorRectangleChangedSlot) =
+proc onCursorRectangleChanged*(self: gen_qinputmethod_types.QInputMethod, slot: QInputMethodcursorRectangleChangedSlot) =
   var tmp = new QInputMethodcursorRectangleChangedSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -216,7 +216,7 @@ proc fcQInputMethod_slot_callback_anchorRectangleChanged_release(slot: int) {.cd
   let nimfunc = cast[ref QInputMethodanchorRectangleChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onanchorRectangleChanged*(self: gen_qinputmethod_types.QInputMethod, slot: QInputMethodanchorRectangleChangedSlot) =
+proc onAnchorRectangleChanged*(self: gen_qinputmethod_types.QInputMethod, slot: QInputMethodanchorRectangleChangedSlot) =
   var tmp = new QInputMethodanchorRectangleChangedSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -234,7 +234,7 @@ proc fcQInputMethod_slot_callback_keyboardRectangleChanged_release(slot: int) {.
   let nimfunc = cast[ref QInputMethodkeyboardRectangleChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onkeyboardRectangleChanged*(self: gen_qinputmethod_types.QInputMethod, slot: QInputMethodkeyboardRectangleChangedSlot) =
+proc onKeyboardRectangleChanged*(self: gen_qinputmethod_types.QInputMethod, slot: QInputMethodkeyboardRectangleChangedSlot) =
   var tmp = new QInputMethodkeyboardRectangleChangedSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -252,7 +252,7 @@ proc fcQInputMethod_slot_callback_inputItemClipRectangleChanged_release(slot: in
   let nimfunc = cast[ref QInputMethodinputItemClipRectangleChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc oninputItemClipRectangleChanged*(self: gen_qinputmethod_types.QInputMethod, slot: QInputMethodinputItemClipRectangleChangedSlot) =
+proc onInputItemClipRectangleChanged*(self: gen_qinputmethod_types.QInputMethod, slot: QInputMethodinputItemClipRectangleChangedSlot) =
   var tmp = new QInputMethodinputItemClipRectangleChangedSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -270,7 +270,7 @@ proc fcQInputMethod_slot_callback_visibleChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QInputMethodvisibleChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onvisibleChanged*(self: gen_qinputmethod_types.QInputMethod, slot: QInputMethodvisibleChangedSlot) =
+proc onVisibleChanged*(self: gen_qinputmethod_types.QInputMethod, slot: QInputMethodvisibleChangedSlot) =
   var tmp = new QInputMethodvisibleChangedSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -288,7 +288,7 @@ proc fcQInputMethod_slot_callback_animatingChanged_release(slot: int) {.cdecl.} 
   let nimfunc = cast[ref QInputMethodanimatingChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onanimatingChanged*(self: gen_qinputmethod_types.QInputMethod, slot: QInputMethodanimatingChangedSlot) =
+proc onAnimatingChanged*(self: gen_qinputmethod_types.QInputMethod, slot: QInputMethodanimatingChangedSlot) =
   var tmp = new QInputMethodanimatingChangedSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -306,7 +306,7 @@ proc fcQInputMethod_slot_callback_localeChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QInputMethodlocaleChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onlocaleChanged*(self: gen_qinputmethod_types.QInputMethod, slot: QInputMethodlocaleChangedSlot) =
+proc onLocaleChanged*(self: gen_qinputmethod_types.QInputMethod, slot: QInputMethodlocaleChangedSlot) =
   var tmp = new QInputMethodlocaleChangedSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -326,7 +326,7 @@ proc fcQInputMethod_slot_callback_inputDirectionChanged_release(slot: int) {.cde
   let nimfunc = cast[ref QInputMethodinputDirectionChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc oninputDirectionChanged*(self: gen_qinputmethod_types.QInputMethod, slot: QInputMethodinputDirectionChangedSlot) =
+proc onInputDirectionChanged*(self: gen_qinputmethod_types.QInputMethod, slot: QInputMethodinputDirectionChangedSlot) =
   var tmp = new QInputMethodinputDirectionChangedSlot
   tmp[] = slot
   GC_ref(tmp)

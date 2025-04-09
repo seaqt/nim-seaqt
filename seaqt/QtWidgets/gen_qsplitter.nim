@@ -110,6 +110,7 @@ proc fcQSplitter_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.impo
 proc fcQSplitter_setOpaqueResize1(self: pointer, opaque: bool): void {.importc: "QSplitter_setOpaqueResize1".}
 proc fcQSplitter_vdata(self: pointer): ptr pointer {.importc: "QSplitter_vdata".}
 proc fvdata_cQSplitter(self: pointer): pointer {.importc: "vdata_QSplitter".}
+
 type cQSplitterVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -247,6 +248,7 @@ proc fcQSplitterHandle_tr2(s: cstring, c: cstring): struct_miqt_string {.importc
 proc fcQSplitterHandle_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QSplitterHandle_tr3".}
 proc fcQSplitterHandle_vdata(self: pointer): ptr pointer {.importc: "QSplitterHandle_vdata".}
 proc fvdata_cQSplitterHandle(self: pointer): pointer {.importc: "vdata_QSplitterHandle".}
+
 type cQSplitterHandleVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -485,7 +487,7 @@ proc fcQSplitter_slot_callback_splitterMoved_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QSplittersplitterMovedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onsplitterMoved*(self: gen_qsplitter_types.QSplitter, slot: QSplittersplitterMovedSlot) =
+proc onSplitterMoved*(self: gen_qsplitter_types.QSplitter, slot: QSplittersplitterMovedSlot) =
   var tmp = new QSplittersplitterMovedSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -558,6 +560,7 @@ type QSplittertimerEventProc* = proc(self: QSplitter, event: gen_qcoreevent_type
 type QSplittercustomEventProc* = proc(self: QSplitter, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QSplitterconnectNotifyProc* = proc(self: QSplitter, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QSplitterdisconnectNotifyProc* = proc(self: QSplitter, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+
 type QSplitterVTable* {.inheritable, pure.} = object
   vtbl: cQSplitterVTable
   metaObject*: QSplittermetaObjectProc
@@ -612,8 +615,163 @@ type QSplitterVTable* {.inheritable, pure.} = object
   customEvent*: QSplittercustomEventProc
   connectNotify*: QSplitterconnectNotifyProc
   disconnectNotify*: QSplitterdisconnectNotifyProc
+
 proc QSplittermetaObject*(self: gen_qsplitter_types.QSplitter): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQSplitter_virtualbase_metaObject(self.h), owned: false)
+
+proc QSplittermetacast*(self: gen_qsplitter_types.QSplitter, param1: cstring): pointer =
+  fcQSplitter_virtualbase_metacast(self.h, param1)
+
+proc QSplittermetacall*(self: gen_qsplitter_types.QSplitter, param1: cint, param2: cint, param3: pointer): cint =
+  fcQSplitter_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+proc QSplittersizeHint*(self: gen_qsplitter_types.QSplitter): gen_qsize_types.QSize =
+  gen_qsize_types.QSize(h: fcQSplitter_virtualbase_sizeHint(self.h), owned: true)
+
+proc QSplitterminimumSizeHint*(self: gen_qsplitter_types.QSplitter): gen_qsize_types.QSize =
+  gen_qsize_types.QSize(h: fcQSplitter_virtualbase_minimumSizeHint(self.h), owned: true)
+
+proc QSplittercreateHandle*(self: gen_qsplitter_types.QSplitter): gen_qsplitter_types.QSplitterHandle =
+  gen_qsplitter_types.QSplitterHandle(h: fcQSplitter_virtualbase_createHandle(self.h), owned: false)
+
+proc QSplitterchildEvent*(self: gen_qsplitter_types.QSplitter, param1: gen_qcoreevent_types.QChildEvent): void =
+  fcQSplitter_virtualbase_childEvent(self.h, param1.h)
+
+proc QSplitterevent*(self: gen_qsplitter_types.QSplitter, param1: gen_qcoreevent_types.QEvent): bool =
+  fcQSplitter_virtualbase_event(self.h, param1.h)
+
+proc QSplitterresizeEvent*(self: gen_qsplitter_types.QSplitter, param1: gen_qevent_types.QResizeEvent): void =
+  fcQSplitter_virtualbase_resizeEvent(self.h, param1.h)
+
+proc QSplitterchangeEvent*(self: gen_qsplitter_types.QSplitter, param1: gen_qcoreevent_types.QEvent): void =
+  fcQSplitter_virtualbase_changeEvent(self.h, param1.h)
+
+proc QSplitterpaintEvent*(self: gen_qsplitter_types.QSplitter, param1: gen_qevent_types.QPaintEvent): void =
+  fcQSplitter_virtualbase_paintEvent(self.h, param1.h)
+
+proc QSplitterinitStyleOption*(self: gen_qsplitter_types.QSplitter, option: gen_qstyleoption_types.QStyleOptionFrame): void =
+  fcQSplitter_virtualbase_initStyleOption(self.h, option.h)
+
+proc QSplitterdevType*(self: gen_qsplitter_types.QSplitter): cint =
+  fcQSplitter_virtualbase_devType(self.h)
+
+proc QSplittersetVisible*(self: gen_qsplitter_types.QSplitter, visible: bool): void =
+  fcQSplitter_virtualbase_setVisible(self.h, visible)
+
+proc QSplitterheightForWidth*(self: gen_qsplitter_types.QSplitter, param1: cint): cint =
+  fcQSplitter_virtualbase_heightForWidth(self.h, param1)
+
+proc QSplitterhasHeightForWidth*(self: gen_qsplitter_types.QSplitter): bool =
+  fcQSplitter_virtualbase_hasHeightForWidth(self.h)
+
+proc QSplitterpaintEngine*(self: gen_qsplitter_types.QSplitter): gen_qpaintengine_types.QPaintEngine =
+  gen_qpaintengine_types.QPaintEngine(h: fcQSplitter_virtualbase_paintEngine(self.h), owned: false)
+
+proc QSplittermousePressEvent*(self: gen_qsplitter_types.QSplitter, event: gen_qevent_types.QMouseEvent): void =
+  fcQSplitter_virtualbase_mousePressEvent(self.h, event.h)
+
+proc QSplittermouseReleaseEvent*(self: gen_qsplitter_types.QSplitter, event: gen_qevent_types.QMouseEvent): void =
+  fcQSplitter_virtualbase_mouseReleaseEvent(self.h, event.h)
+
+proc QSplittermouseDoubleClickEvent*(self: gen_qsplitter_types.QSplitter, event: gen_qevent_types.QMouseEvent): void =
+  fcQSplitter_virtualbase_mouseDoubleClickEvent(self.h, event.h)
+
+proc QSplittermouseMoveEvent*(self: gen_qsplitter_types.QSplitter, event: gen_qevent_types.QMouseEvent): void =
+  fcQSplitter_virtualbase_mouseMoveEvent(self.h, event.h)
+
+proc QSplitterwheelEvent*(self: gen_qsplitter_types.QSplitter, event: gen_qevent_types.QWheelEvent): void =
+  fcQSplitter_virtualbase_wheelEvent(self.h, event.h)
+
+proc QSplitterkeyPressEvent*(self: gen_qsplitter_types.QSplitter, event: gen_qevent_types.QKeyEvent): void =
+  fcQSplitter_virtualbase_keyPressEvent(self.h, event.h)
+
+proc QSplitterkeyReleaseEvent*(self: gen_qsplitter_types.QSplitter, event: gen_qevent_types.QKeyEvent): void =
+  fcQSplitter_virtualbase_keyReleaseEvent(self.h, event.h)
+
+proc QSplitterfocusInEvent*(self: gen_qsplitter_types.QSplitter, event: gen_qevent_types.QFocusEvent): void =
+  fcQSplitter_virtualbase_focusInEvent(self.h, event.h)
+
+proc QSplitterfocusOutEvent*(self: gen_qsplitter_types.QSplitter, event: gen_qevent_types.QFocusEvent): void =
+  fcQSplitter_virtualbase_focusOutEvent(self.h, event.h)
+
+proc QSplitterenterEvent*(self: gen_qsplitter_types.QSplitter, event: gen_qevent_types.QEnterEvent): void =
+  fcQSplitter_virtualbase_enterEvent(self.h, event.h)
+
+proc QSplitterleaveEvent*(self: gen_qsplitter_types.QSplitter, event: gen_qcoreevent_types.QEvent): void =
+  fcQSplitter_virtualbase_leaveEvent(self.h, event.h)
+
+proc QSplittermoveEvent*(self: gen_qsplitter_types.QSplitter, event: gen_qevent_types.QMoveEvent): void =
+  fcQSplitter_virtualbase_moveEvent(self.h, event.h)
+
+proc QSplittercloseEvent*(self: gen_qsplitter_types.QSplitter, event: gen_qevent_types.QCloseEvent): void =
+  fcQSplitter_virtualbase_closeEvent(self.h, event.h)
+
+proc QSplittercontextMenuEvent*(self: gen_qsplitter_types.QSplitter, event: gen_qevent_types.QContextMenuEvent): void =
+  fcQSplitter_virtualbase_contextMenuEvent(self.h, event.h)
+
+proc QSplittertabletEvent*(self: gen_qsplitter_types.QSplitter, event: gen_qevent_types.QTabletEvent): void =
+  fcQSplitter_virtualbase_tabletEvent(self.h, event.h)
+
+proc QSplitteractionEvent*(self: gen_qsplitter_types.QSplitter, event: gen_qevent_types.QActionEvent): void =
+  fcQSplitter_virtualbase_actionEvent(self.h, event.h)
+
+proc QSplitterdragEnterEvent*(self: gen_qsplitter_types.QSplitter, event: gen_qevent_types.QDragEnterEvent): void =
+  fcQSplitter_virtualbase_dragEnterEvent(self.h, event.h)
+
+proc QSplitterdragMoveEvent*(self: gen_qsplitter_types.QSplitter, event: gen_qevent_types.QDragMoveEvent): void =
+  fcQSplitter_virtualbase_dragMoveEvent(self.h, event.h)
+
+proc QSplitterdragLeaveEvent*(self: gen_qsplitter_types.QSplitter, event: gen_qevent_types.QDragLeaveEvent): void =
+  fcQSplitter_virtualbase_dragLeaveEvent(self.h, event.h)
+
+proc QSplitterdropEvent*(self: gen_qsplitter_types.QSplitter, event: gen_qevent_types.QDropEvent): void =
+  fcQSplitter_virtualbase_dropEvent(self.h, event.h)
+
+proc QSplittershowEvent*(self: gen_qsplitter_types.QSplitter, event: gen_qevent_types.QShowEvent): void =
+  fcQSplitter_virtualbase_showEvent(self.h, event.h)
+
+proc QSplitterhideEvent*(self: gen_qsplitter_types.QSplitter, event: gen_qevent_types.QHideEvent): void =
+  fcQSplitter_virtualbase_hideEvent(self.h, event.h)
+
+proc QSplitternativeEvent*(self: gen_qsplitter_types.QSplitter, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool =
+  fcQSplitter_virtualbase_nativeEvent(self.h, struct_miqt_string(data: if len(eventType) > 0: addr eventType[0] else: nil, len: csize_t(len(eventType))), message, resultVal)
+
+proc QSplittermetric*(self: gen_qsplitter_types.QSplitter, param1: cint): cint =
+  fcQSplitter_virtualbase_metric(self.h, cint(param1))
+
+proc QSplitterinitPainter*(self: gen_qsplitter_types.QSplitter, painter: gen_qpainter_types.QPainter): void =
+  fcQSplitter_virtualbase_initPainter(self.h, painter.h)
+
+proc QSplitterredirected*(self: gen_qsplitter_types.QSplitter, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice =
+  gen_qpaintdevice_types.QPaintDevice(h: fcQSplitter_virtualbase_redirected(self.h, offset.h), owned: false)
+
+proc QSplittersharedPainter*(self: gen_qsplitter_types.QSplitter): gen_qpainter_types.QPainter =
+  gen_qpainter_types.QPainter(h: fcQSplitter_virtualbase_sharedPainter(self.h), owned: false)
+
+proc QSplitterinputMethodEvent*(self: gen_qsplitter_types.QSplitter, param1: gen_qevent_types.QInputMethodEvent): void =
+  fcQSplitter_virtualbase_inputMethodEvent(self.h, param1.h)
+
+proc QSplitterinputMethodQuery*(self: gen_qsplitter_types.QSplitter, param1: cint): gen_qvariant_types.QVariant =
+  gen_qvariant_types.QVariant(h: fcQSplitter_virtualbase_inputMethodQuery(self.h, cint(param1)), owned: true)
+
+proc QSplitterfocusNextPrevChild*(self: gen_qsplitter_types.QSplitter, next: bool): bool =
+  fcQSplitter_virtualbase_focusNextPrevChild(self.h, next)
+
+proc QSplittereventFilter*(self: gen_qsplitter_types.QSplitter, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
+  fcQSplitter_virtualbase_eventFilter(self.h, watched.h, event.h)
+
+proc QSplittertimerEvent*(self: gen_qsplitter_types.QSplitter, event: gen_qcoreevent_types.QTimerEvent): void =
+  fcQSplitter_virtualbase_timerEvent(self.h, event.h)
+
+proc QSplittercustomEvent*(self: gen_qsplitter_types.QSplitter, event: gen_qcoreevent_types.QEvent): void =
+  fcQSplitter_virtualbase_customEvent(self.h, event.h)
+
+proc QSplitterconnectNotify*(self: gen_qsplitter_types.QSplitter, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQSplitter_virtualbase_connectNotify(self.h, signal.h)
+
+proc QSplitterdisconnectNotify*(self: gen_qsplitter_types.QSplitter, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQSplitter_virtualbase_disconnectNotify(self.h, signal.h)
+
 
 proc fcQSplitter_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QSplitterVTable](fcQSplitter_vdata(self)[])
@@ -624,18 +782,12 @@ proc fcQSplitter_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QSplittermetacast*(self: gen_qsplitter_types.QSplitter, param1: cstring): pointer =
-  fcQSplitter_virtualbase_metacast(self.h, param1)
-
 proc fcQSplitter_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QSplitterVTable](fcQSplitter_vdata(self)[])
   let self = QSplitter(h: self)
   let slotval1 = (param1)
   var virtualReturn = vtbl[].metacast(self, slotval1)
   virtualReturn
-
-proc QSplittermetacall*(self: gen_qsplitter_types.QSplitter, param1: cint, param2: cint, param3: pointer): cint =
-  fcQSplitter_virtualbase_metacall(self.h, cint(param1), param2, param3)
 
 proc fcQSplitter_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QSplitterVTable](fcQSplitter_vdata(self)[])
@@ -646,9 +798,6 @@ proc fcQSplitter_vtable_callback_metacall(self: pointer, param1: cint, param2: c
   var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QSplittersizeHint*(self: gen_qsplitter_types.QSplitter): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQSplitter_virtualbase_sizeHint(self.h), owned: true)
-
 proc fcQSplitter_vtable_callback_sizeHint(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QSplitterVTable](fcQSplitter_vdata(self)[])
   let self = QSplitter(h: self)
@@ -657,9 +806,6 @@ proc fcQSplitter_vtable_callback_sizeHint(self: pointer): pointer {.cdecl.} =
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
   virtualReturn_h
-
-proc QSplitterminimumSizeHint*(self: gen_qsplitter_types.QSplitter): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQSplitter_virtualbase_minimumSizeHint(self.h), owned: true)
 
 proc fcQSplitter_vtable_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QSplitterVTable](fcQSplitter_vdata(self)[])
@@ -670,9 +816,6 @@ proc fcQSplitter_vtable_callback_minimumSizeHint(self: pointer): pointer {.cdecl
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QSplittercreateHandle*(self: gen_qsplitter_types.QSplitter): gen_qsplitter_types.QSplitterHandle =
-  gen_qsplitter_types.QSplitterHandle(h: fcQSplitter_virtualbase_createHandle(self.h), owned: false)
-
 proc fcQSplitter_vtable_callback_createHandle(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QSplitterVTable](fcQSplitter_vdata(self)[])
   let self = QSplitter(h: self)
@@ -682,17 +825,11 @@ proc fcQSplitter_vtable_callback_createHandle(self: pointer): pointer {.cdecl.} 
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QSplitterchildEvent*(self: gen_qsplitter_types.QSplitter, param1: gen_qcoreevent_types.QChildEvent): void =
-  fcQSplitter_virtualbase_childEvent(self.h, param1.h)
-
 proc fcQSplitter_vtable_callback_childEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSplitterVTable](fcQSplitter_vdata(self)[])
   let self = QSplitter(h: self)
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: param1, owned: false)
   vtbl[].childEvent(self, slotval1)
-
-proc QSplitterevent*(self: gen_qsplitter_types.QSplitter, param1: gen_qcoreevent_types.QEvent): bool =
-  fcQSplitter_virtualbase_event(self.h, param1.h)
 
 proc fcQSplitter_vtable_callback_event(self: pointer, param1: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QSplitterVTable](fcQSplitter_vdata(self)[])
@@ -701,17 +838,11 @@ proc fcQSplitter_vtable_callback_event(self: pointer, param1: pointer): bool {.c
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
-proc QSplitterresizeEvent*(self: gen_qsplitter_types.QSplitter, param1: gen_qevent_types.QResizeEvent): void =
-  fcQSplitter_virtualbase_resizeEvent(self.h, param1.h)
-
 proc fcQSplitter_vtable_callback_resizeEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSplitterVTable](fcQSplitter_vdata(self)[])
   let self = QSplitter(h: self)
   let slotval1 = gen_qevent_types.QResizeEvent(h: param1, owned: false)
   vtbl[].resizeEvent(self, slotval1)
-
-proc QSplitterchangeEvent*(self: gen_qsplitter_types.QSplitter, param1: gen_qcoreevent_types.QEvent): void =
-  fcQSplitter_virtualbase_changeEvent(self.h, param1.h)
 
 proc fcQSplitter_vtable_callback_changeEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSplitterVTable](fcQSplitter_vdata(self)[])
@@ -719,17 +850,11 @@ proc fcQSplitter_vtable_callback_changeEvent(self: pointer, param1: pointer): vo
   let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
   vtbl[].changeEvent(self, slotval1)
 
-proc QSplitterpaintEvent*(self: gen_qsplitter_types.QSplitter, param1: gen_qevent_types.QPaintEvent): void =
-  fcQSplitter_virtualbase_paintEvent(self.h, param1.h)
-
 proc fcQSplitter_vtable_callback_paintEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSplitterVTable](fcQSplitter_vdata(self)[])
   let self = QSplitter(h: self)
   let slotval1 = gen_qevent_types.QPaintEvent(h: param1, owned: false)
   vtbl[].paintEvent(self, slotval1)
-
-proc QSplitterinitStyleOption*(self: gen_qsplitter_types.QSplitter, option: gen_qstyleoption_types.QStyleOptionFrame): void =
-  fcQSplitter_virtualbase_initStyleOption(self.h, option.h)
 
 proc fcQSplitter_vtable_callback_initStyleOption(self: pointer, option: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSplitterVTable](fcQSplitter_vdata(self)[])
@@ -737,26 +862,17 @@ proc fcQSplitter_vtable_callback_initStyleOption(self: pointer, option: pointer)
   let slotval1 = gen_qstyleoption_types.QStyleOptionFrame(h: option, owned: false)
   vtbl[].initStyleOption(self, slotval1)
 
-proc QSplitterdevType*(self: gen_qsplitter_types.QSplitter): cint =
-  fcQSplitter_virtualbase_devType(self.h)
-
 proc fcQSplitter_vtable_callback_devType(self: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QSplitterVTable](fcQSplitter_vdata(self)[])
   let self = QSplitter(h: self)
   var virtualReturn = vtbl[].devType(self)
   virtualReturn
 
-proc QSplittersetVisible*(self: gen_qsplitter_types.QSplitter, visible: bool): void =
-  fcQSplitter_virtualbase_setVisible(self.h, visible)
-
 proc fcQSplitter_vtable_callback_setVisible(self: pointer, visible: bool): void {.cdecl.} =
   let vtbl = cast[ptr QSplitterVTable](fcQSplitter_vdata(self)[])
   let self = QSplitter(h: self)
   let slotval1 = visible
   vtbl[].setVisible(self, slotval1)
-
-proc QSplitterheightForWidth*(self: gen_qsplitter_types.QSplitter, param1: cint): cint =
-  fcQSplitter_virtualbase_heightForWidth(self.h, param1)
 
 proc fcQSplitter_vtable_callback_heightForWidth(self: pointer, param1: cint): cint {.cdecl.} =
   let vtbl = cast[ptr QSplitterVTable](fcQSplitter_vdata(self)[])
@@ -765,17 +881,11 @@ proc fcQSplitter_vtable_callback_heightForWidth(self: pointer, param1: cint): ci
   var virtualReturn = vtbl[].heightForWidth(self, slotval1)
   virtualReturn
 
-proc QSplitterhasHeightForWidth*(self: gen_qsplitter_types.QSplitter): bool =
-  fcQSplitter_virtualbase_hasHeightForWidth(self.h)
-
 proc fcQSplitter_vtable_callback_hasHeightForWidth(self: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QSplitterVTable](fcQSplitter_vdata(self)[])
   let self = QSplitter(h: self)
   var virtualReturn = vtbl[].hasHeightForWidth(self)
   virtualReturn
-
-proc QSplitterpaintEngine*(self: gen_qsplitter_types.QSplitter): gen_qpaintengine_types.QPaintEngine =
-  gen_qpaintengine_types.QPaintEngine(h: fcQSplitter_virtualbase_paintEngine(self.h), owned: false)
 
 proc fcQSplitter_vtable_callback_paintEngine(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QSplitterVTable](fcQSplitter_vdata(self)[])
@@ -786,17 +896,11 @@ proc fcQSplitter_vtable_callback_paintEngine(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QSplittermousePressEvent*(self: gen_qsplitter_types.QSplitter, event: gen_qevent_types.QMouseEvent): void =
-  fcQSplitter_virtualbase_mousePressEvent(self.h, event.h)
-
 proc fcQSplitter_vtable_callback_mousePressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSplitterVTable](fcQSplitter_vdata(self)[])
   let self = QSplitter(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mousePressEvent(self, slotval1)
-
-proc QSplittermouseReleaseEvent*(self: gen_qsplitter_types.QSplitter, event: gen_qevent_types.QMouseEvent): void =
-  fcQSplitter_virtualbase_mouseReleaseEvent(self.h, event.h)
 
 proc fcQSplitter_vtable_callback_mouseReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSplitterVTable](fcQSplitter_vdata(self)[])
@@ -804,17 +908,11 @@ proc fcQSplitter_vtable_callback_mouseReleaseEvent(self: pointer, event: pointer
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseReleaseEvent(self, slotval1)
 
-proc QSplittermouseDoubleClickEvent*(self: gen_qsplitter_types.QSplitter, event: gen_qevent_types.QMouseEvent): void =
-  fcQSplitter_virtualbase_mouseDoubleClickEvent(self.h, event.h)
-
 proc fcQSplitter_vtable_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSplitterVTable](fcQSplitter_vdata(self)[])
   let self = QSplitter(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseDoubleClickEvent(self, slotval1)
-
-proc QSplittermouseMoveEvent*(self: gen_qsplitter_types.QSplitter, event: gen_qevent_types.QMouseEvent): void =
-  fcQSplitter_virtualbase_mouseMoveEvent(self.h, event.h)
 
 proc fcQSplitter_vtable_callback_mouseMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSplitterVTable](fcQSplitter_vdata(self)[])
@@ -822,17 +920,11 @@ proc fcQSplitter_vtable_callback_mouseMoveEvent(self: pointer, event: pointer): 
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseMoveEvent(self, slotval1)
 
-proc QSplitterwheelEvent*(self: gen_qsplitter_types.QSplitter, event: gen_qevent_types.QWheelEvent): void =
-  fcQSplitter_virtualbase_wheelEvent(self.h, event.h)
-
 proc fcQSplitter_vtable_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSplitterVTable](fcQSplitter_vdata(self)[])
   let self = QSplitter(h: self)
   let slotval1 = gen_qevent_types.QWheelEvent(h: event, owned: false)
   vtbl[].wheelEvent(self, slotval1)
-
-proc QSplitterkeyPressEvent*(self: gen_qsplitter_types.QSplitter, event: gen_qevent_types.QKeyEvent): void =
-  fcQSplitter_virtualbase_keyPressEvent(self.h, event.h)
 
 proc fcQSplitter_vtable_callback_keyPressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSplitterVTable](fcQSplitter_vdata(self)[])
@@ -840,17 +932,11 @@ proc fcQSplitter_vtable_callback_keyPressEvent(self: pointer, event: pointer): v
   let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   vtbl[].keyPressEvent(self, slotval1)
 
-proc QSplitterkeyReleaseEvent*(self: gen_qsplitter_types.QSplitter, event: gen_qevent_types.QKeyEvent): void =
-  fcQSplitter_virtualbase_keyReleaseEvent(self.h, event.h)
-
 proc fcQSplitter_vtable_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSplitterVTable](fcQSplitter_vdata(self)[])
   let self = QSplitter(h: self)
   let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   vtbl[].keyReleaseEvent(self, slotval1)
-
-proc QSplitterfocusInEvent*(self: gen_qsplitter_types.QSplitter, event: gen_qevent_types.QFocusEvent): void =
-  fcQSplitter_virtualbase_focusInEvent(self.h, event.h)
 
 proc fcQSplitter_vtable_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSplitterVTable](fcQSplitter_vdata(self)[])
@@ -858,17 +944,11 @@ proc fcQSplitter_vtable_callback_focusInEvent(self: pointer, event: pointer): vo
   let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusInEvent(self, slotval1)
 
-proc QSplitterfocusOutEvent*(self: gen_qsplitter_types.QSplitter, event: gen_qevent_types.QFocusEvent): void =
-  fcQSplitter_virtualbase_focusOutEvent(self.h, event.h)
-
 proc fcQSplitter_vtable_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSplitterVTable](fcQSplitter_vdata(self)[])
   let self = QSplitter(h: self)
   let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusOutEvent(self, slotval1)
-
-proc QSplitterenterEvent*(self: gen_qsplitter_types.QSplitter, event: gen_qevent_types.QEnterEvent): void =
-  fcQSplitter_virtualbase_enterEvent(self.h, event.h)
 
 proc fcQSplitter_vtable_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSplitterVTable](fcQSplitter_vdata(self)[])
@@ -876,17 +956,11 @@ proc fcQSplitter_vtable_callback_enterEvent(self: pointer, event: pointer): void
   let slotval1 = gen_qevent_types.QEnterEvent(h: event, owned: false)
   vtbl[].enterEvent(self, slotval1)
 
-proc QSplitterleaveEvent*(self: gen_qsplitter_types.QSplitter, event: gen_qcoreevent_types.QEvent): void =
-  fcQSplitter_virtualbase_leaveEvent(self.h, event.h)
-
 proc fcQSplitter_vtable_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSplitterVTable](fcQSplitter_vdata(self)[])
   let self = QSplitter(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].leaveEvent(self, slotval1)
-
-proc QSplittermoveEvent*(self: gen_qsplitter_types.QSplitter, event: gen_qevent_types.QMoveEvent): void =
-  fcQSplitter_virtualbase_moveEvent(self.h, event.h)
 
 proc fcQSplitter_vtable_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSplitterVTable](fcQSplitter_vdata(self)[])
@@ -894,17 +968,11 @@ proc fcQSplitter_vtable_callback_moveEvent(self: pointer, event: pointer): void 
   let slotval1 = gen_qevent_types.QMoveEvent(h: event, owned: false)
   vtbl[].moveEvent(self, slotval1)
 
-proc QSplittercloseEvent*(self: gen_qsplitter_types.QSplitter, event: gen_qevent_types.QCloseEvent): void =
-  fcQSplitter_virtualbase_closeEvent(self.h, event.h)
-
 proc fcQSplitter_vtable_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSplitterVTable](fcQSplitter_vdata(self)[])
   let self = QSplitter(h: self)
   let slotval1 = gen_qevent_types.QCloseEvent(h: event, owned: false)
   vtbl[].closeEvent(self, slotval1)
-
-proc QSplittercontextMenuEvent*(self: gen_qsplitter_types.QSplitter, event: gen_qevent_types.QContextMenuEvent): void =
-  fcQSplitter_virtualbase_contextMenuEvent(self.h, event.h)
 
 proc fcQSplitter_vtable_callback_contextMenuEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSplitterVTable](fcQSplitter_vdata(self)[])
@@ -912,17 +980,11 @@ proc fcQSplitter_vtable_callback_contextMenuEvent(self: pointer, event: pointer)
   let slotval1 = gen_qevent_types.QContextMenuEvent(h: event, owned: false)
   vtbl[].contextMenuEvent(self, slotval1)
 
-proc QSplittertabletEvent*(self: gen_qsplitter_types.QSplitter, event: gen_qevent_types.QTabletEvent): void =
-  fcQSplitter_virtualbase_tabletEvent(self.h, event.h)
-
 proc fcQSplitter_vtable_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSplitterVTable](fcQSplitter_vdata(self)[])
   let self = QSplitter(h: self)
   let slotval1 = gen_qevent_types.QTabletEvent(h: event, owned: false)
   vtbl[].tabletEvent(self, slotval1)
-
-proc QSplitteractionEvent*(self: gen_qsplitter_types.QSplitter, event: gen_qevent_types.QActionEvent): void =
-  fcQSplitter_virtualbase_actionEvent(self.h, event.h)
 
 proc fcQSplitter_vtable_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSplitterVTable](fcQSplitter_vdata(self)[])
@@ -930,17 +992,11 @@ proc fcQSplitter_vtable_callback_actionEvent(self: pointer, event: pointer): voi
   let slotval1 = gen_qevent_types.QActionEvent(h: event, owned: false)
   vtbl[].actionEvent(self, slotval1)
 
-proc QSplitterdragEnterEvent*(self: gen_qsplitter_types.QSplitter, event: gen_qevent_types.QDragEnterEvent): void =
-  fcQSplitter_virtualbase_dragEnterEvent(self.h, event.h)
-
 proc fcQSplitter_vtable_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSplitterVTable](fcQSplitter_vdata(self)[])
   let self = QSplitter(h: self)
   let slotval1 = gen_qevent_types.QDragEnterEvent(h: event, owned: false)
   vtbl[].dragEnterEvent(self, slotval1)
-
-proc QSplitterdragMoveEvent*(self: gen_qsplitter_types.QSplitter, event: gen_qevent_types.QDragMoveEvent): void =
-  fcQSplitter_virtualbase_dragMoveEvent(self.h, event.h)
 
 proc fcQSplitter_vtable_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSplitterVTable](fcQSplitter_vdata(self)[])
@@ -948,17 +1004,11 @@ proc fcQSplitter_vtable_callback_dragMoveEvent(self: pointer, event: pointer): v
   let slotval1 = gen_qevent_types.QDragMoveEvent(h: event, owned: false)
   vtbl[].dragMoveEvent(self, slotval1)
 
-proc QSplitterdragLeaveEvent*(self: gen_qsplitter_types.QSplitter, event: gen_qevent_types.QDragLeaveEvent): void =
-  fcQSplitter_virtualbase_dragLeaveEvent(self.h, event.h)
-
 proc fcQSplitter_vtable_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSplitterVTable](fcQSplitter_vdata(self)[])
   let self = QSplitter(h: self)
   let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event, owned: false)
   vtbl[].dragLeaveEvent(self, slotval1)
-
-proc QSplitterdropEvent*(self: gen_qsplitter_types.QSplitter, event: gen_qevent_types.QDropEvent): void =
-  fcQSplitter_virtualbase_dropEvent(self.h, event.h)
 
 proc fcQSplitter_vtable_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSplitterVTable](fcQSplitter_vdata(self)[])
@@ -966,26 +1016,17 @@ proc fcQSplitter_vtable_callback_dropEvent(self: pointer, event: pointer): void 
   let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
   vtbl[].dropEvent(self, slotval1)
 
-proc QSplittershowEvent*(self: gen_qsplitter_types.QSplitter, event: gen_qevent_types.QShowEvent): void =
-  fcQSplitter_virtualbase_showEvent(self.h, event.h)
-
 proc fcQSplitter_vtable_callback_showEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSplitterVTable](fcQSplitter_vdata(self)[])
   let self = QSplitter(h: self)
   let slotval1 = gen_qevent_types.QShowEvent(h: event, owned: false)
   vtbl[].showEvent(self, slotval1)
 
-proc QSplitterhideEvent*(self: gen_qsplitter_types.QSplitter, event: gen_qevent_types.QHideEvent): void =
-  fcQSplitter_virtualbase_hideEvent(self.h, event.h)
-
 proc fcQSplitter_vtable_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSplitterVTable](fcQSplitter_vdata(self)[])
   let self = QSplitter(h: self)
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   vtbl[].hideEvent(self, slotval1)
-
-proc QSplitternativeEvent*(self: gen_qsplitter_types.QSplitter, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool =
-  fcQSplitter_virtualbase_nativeEvent(self.h, struct_miqt_string(data: if len(eventType) > 0: addr eventType[0] else: nil, len: csize_t(len(eventType))), message, resultVal)
 
 proc fcQSplitter_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
   let vtbl = cast[ptr QSplitterVTable](fcQSplitter_vdata(self)[])
@@ -999,9 +1040,6 @@ proc fcQSplitter_vtable_callback_nativeEvent(self: pointer, eventType: struct_mi
   var virtualReturn = vtbl[].nativeEvent(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QSplittermetric*(self: gen_qsplitter_types.QSplitter, param1: cint): cint =
-  fcQSplitter_virtualbase_metric(self.h, cint(param1))
-
 proc fcQSplitter_vtable_callback_metric(self: pointer, param1: cint): cint {.cdecl.} =
   let vtbl = cast[ptr QSplitterVTable](fcQSplitter_vdata(self)[])
   let self = QSplitter(h: self)
@@ -1009,17 +1047,11 @@ proc fcQSplitter_vtable_callback_metric(self: pointer, param1: cint): cint {.cde
   var virtualReturn = vtbl[].metric(self, slotval1)
   virtualReturn
 
-proc QSplitterinitPainter*(self: gen_qsplitter_types.QSplitter, painter: gen_qpainter_types.QPainter): void =
-  fcQSplitter_virtualbase_initPainter(self.h, painter.h)
-
 proc fcQSplitter_vtable_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSplitterVTable](fcQSplitter_vdata(self)[])
   let self = QSplitter(h: self)
   let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
   vtbl[].initPainter(self, slotval1)
-
-proc QSplitterredirected*(self: gen_qsplitter_types.QSplitter, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice =
-  gen_qpaintdevice_types.QPaintDevice(h: fcQSplitter_virtualbase_redirected(self.h, offset.h), owned: false)
 
 proc fcQSplitter_vtable_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QSplitterVTable](fcQSplitter_vdata(self)[])
@@ -1031,9 +1063,6 @@ proc fcQSplitter_vtable_callback_redirected(self: pointer, offset: pointer): poi
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QSplittersharedPainter*(self: gen_qsplitter_types.QSplitter): gen_qpainter_types.QPainter =
-  gen_qpainter_types.QPainter(h: fcQSplitter_virtualbase_sharedPainter(self.h), owned: false)
-
 proc fcQSplitter_vtable_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QSplitterVTable](fcQSplitter_vdata(self)[])
   let self = QSplitter(h: self)
@@ -1043,17 +1072,11 @@ proc fcQSplitter_vtable_callback_sharedPainter(self: pointer): pointer {.cdecl.}
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QSplitterinputMethodEvent*(self: gen_qsplitter_types.QSplitter, param1: gen_qevent_types.QInputMethodEvent): void =
-  fcQSplitter_virtualbase_inputMethodEvent(self.h, param1.h)
-
 proc fcQSplitter_vtable_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSplitterVTable](fcQSplitter_vdata(self)[])
   let self = QSplitter(h: self)
   let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1, owned: false)
   vtbl[].inputMethodEvent(self, slotval1)
-
-proc QSplitterinputMethodQuery*(self: gen_qsplitter_types.QSplitter, param1: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQSplitter_virtualbase_inputMethodQuery(self.h, cint(param1)), owned: true)
 
 proc fcQSplitter_vtable_callback_inputMethodQuery(self: pointer, param1: cint): pointer {.cdecl.} =
   let vtbl = cast[ptr QSplitterVTable](fcQSplitter_vdata(self)[])
@@ -1065,18 +1088,12 @@ proc fcQSplitter_vtable_callback_inputMethodQuery(self: pointer, param1: cint): 
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QSplitterfocusNextPrevChild*(self: gen_qsplitter_types.QSplitter, next: bool): bool =
-  fcQSplitter_virtualbase_focusNextPrevChild(self.h, next)
-
 proc fcQSplitter_vtable_callback_focusNextPrevChild(self: pointer, next: bool): bool {.cdecl.} =
   let vtbl = cast[ptr QSplitterVTable](fcQSplitter_vdata(self)[])
   let self = QSplitter(h: self)
   let slotval1 = next
   var virtualReturn = vtbl[].focusNextPrevChild(self, slotval1)
   virtualReturn
-
-proc QSplittereventFilter*(self: gen_qsplitter_types.QSplitter, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
-  fcQSplitter_virtualbase_eventFilter(self.h, watched.h, event.h)
 
 proc fcQSplitter_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QSplitterVTable](fcQSplitter_vdata(self)[])
@@ -1086,17 +1103,11 @@ proc fcQSplitter_vtable_callback_eventFilter(self: pointer, watched: pointer, ev
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
-proc QSplittertimerEvent*(self: gen_qsplitter_types.QSplitter, event: gen_qcoreevent_types.QTimerEvent): void =
-  fcQSplitter_virtualbase_timerEvent(self.h, event.h)
-
 proc fcQSplitter_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSplitterVTable](fcQSplitter_vdata(self)[])
   let self = QSplitter(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
-
-proc QSplittercustomEvent*(self: gen_qsplitter_types.QSplitter, event: gen_qcoreevent_types.QEvent): void =
-  fcQSplitter_virtualbase_customEvent(self.h, event.h)
 
 proc fcQSplitter_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSplitterVTable](fcQSplitter_vdata(self)[])
@@ -1104,17 +1115,11 @@ proc fcQSplitter_vtable_callback_customEvent(self: pointer, event: pointer): voi
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
-proc QSplitterconnectNotify*(self: gen_qsplitter_types.QSplitter, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQSplitter_virtualbase_connectNotify(self.h, signal.h)
-
 proc fcQSplitter_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSplitterVTable](fcQSplitter_vdata(self)[])
   let self = QSplitter(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
-
-proc QSplitterdisconnectNotify*(self: gen_qsplitter_types.QSplitter, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQSplitter_virtualbase_disconnectNotify(self.h, signal.h)
 
 proc fcQSplitter_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSplitterVTable](fcQSplitter_vdata(self)[])
@@ -1124,23 +1129,123 @@ proc fcQSplitter_vtable_callback_disconnectNotify(self: pointer, signal: pointer
 
 type VirtualQSplitter* {.inheritable.} = ref object of QSplitter
   vtbl*: cQSplitterVTable
+
 method metaObject*(self: VirtualQSplitter): gen_qobjectdefs_types.QMetaObject {.base.} =
   QSplittermetaObject(self[])
+method metacast*(self: VirtualQSplitter, param1: cstring): pointer {.base.} =
+  QSplittermetacast(self[], param1)
+method metacall*(self: VirtualQSplitter, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QSplittermetacall(self[], param1, param2, param3)
+method sizeHint*(self: VirtualQSplitter): gen_qsize_types.QSize {.base.} =
+  QSplittersizeHint(self[])
+method minimumSizeHint*(self: VirtualQSplitter): gen_qsize_types.QSize {.base.} =
+  QSplitterminimumSizeHint(self[])
+method createHandle*(self: VirtualQSplitter): gen_qsplitter_types.QSplitterHandle {.base.} =
+  QSplittercreateHandle(self[])
+method childEvent*(self: VirtualQSplitter, param1: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QSplitterchildEvent(self[], param1)
+method event*(self: VirtualQSplitter, param1: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QSplitterevent(self[], param1)
+method resizeEvent*(self: VirtualQSplitter, param1: gen_qevent_types.QResizeEvent): void {.base.} =
+  QSplitterresizeEvent(self[], param1)
+method changeEvent*(self: VirtualQSplitter, param1: gen_qcoreevent_types.QEvent): void {.base.} =
+  QSplitterchangeEvent(self[], param1)
+method paintEvent*(self: VirtualQSplitter, param1: gen_qevent_types.QPaintEvent): void {.base.} =
+  QSplitterpaintEvent(self[], param1)
+method initStyleOption*(self: VirtualQSplitter, option: gen_qstyleoption_types.QStyleOptionFrame): void {.base.} =
+  QSplitterinitStyleOption(self[], option)
+method devType*(self: VirtualQSplitter): cint {.base.} =
+  QSplitterdevType(self[])
+method setVisible*(self: VirtualQSplitter, visible: bool): void {.base.} =
+  QSplittersetVisible(self[], visible)
+method heightForWidth*(self: VirtualQSplitter, param1: cint): cint {.base.} =
+  QSplitterheightForWidth(self[], param1)
+method hasHeightForWidth*(self: VirtualQSplitter): bool {.base.} =
+  QSplitterhasHeightForWidth(self[])
+method paintEngine*(self: VirtualQSplitter): gen_qpaintengine_types.QPaintEngine {.base.} =
+  QSplitterpaintEngine(self[])
+method mousePressEvent*(self: VirtualQSplitter, event: gen_qevent_types.QMouseEvent): void {.base.} =
+  QSplittermousePressEvent(self[], event)
+method mouseReleaseEvent*(self: VirtualQSplitter, event: gen_qevent_types.QMouseEvent): void {.base.} =
+  QSplittermouseReleaseEvent(self[], event)
+method mouseDoubleClickEvent*(self: VirtualQSplitter, event: gen_qevent_types.QMouseEvent): void {.base.} =
+  QSplittermouseDoubleClickEvent(self[], event)
+method mouseMoveEvent*(self: VirtualQSplitter, event: gen_qevent_types.QMouseEvent): void {.base.} =
+  QSplittermouseMoveEvent(self[], event)
+method wheelEvent*(self: VirtualQSplitter, event: gen_qevent_types.QWheelEvent): void {.base.} =
+  QSplitterwheelEvent(self[], event)
+method keyPressEvent*(self: VirtualQSplitter, event: gen_qevent_types.QKeyEvent): void {.base.} =
+  QSplitterkeyPressEvent(self[], event)
+method keyReleaseEvent*(self: VirtualQSplitter, event: gen_qevent_types.QKeyEvent): void {.base.} =
+  QSplitterkeyReleaseEvent(self[], event)
+method focusInEvent*(self: VirtualQSplitter, event: gen_qevent_types.QFocusEvent): void {.base.} =
+  QSplitterfocusInEvent(self[], event)
+method focusOutEvent*(self: VirtualQSplitter, event: gen_qevent_types.QFocusEvent): void {.base.} =
+  QSplitterfocusOutEvent(self[], event)
+method enterEvent*(self: VirtualQSplitter, event: gen_qevent_types.QEnterEvent): void {.base.} =
+  QSplitterenterEvent(self[], event)
+method leaveEvent*(self: VirtualQSplitter, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QSplitterleaveEvent(self[], event)
+method moveEvent*(self: VirtualQSplitter, event: gen_qevent_types.QMoveEvent): void {.base.} =
+  QSplittermoveEvent(self[], event)
+method closeEvent*(self: VirtualQSplitter, event: gen_qevent_types.QCloseEvent): void {.base.} =
+  QSplittercloseEvent(self[], event)
+method contextMenuEvent*(self: VirtualQSplitter, event: gen_qevent_types.QContextMenuEvent): void {.base.} =
+  QSplittercontextMenuEvent(self[], event)
+method tabletEvent*(self: VirtualQSplitter, event: gen_qevent_types.QTabletEvent): void {.base.} =
+  QSplittertabletEvent(self[], event)
+method actionEvent*(self: VirtualQSplitter, event: gen_qevent_types.QActionEvent): void {.base.} =
+  QSplitteractionEvent(self[], event)
+method dragEnterEvent*(self: VirtualQSplitter, event: gen_qevent_types.QDragEnterEvent): void {.base.} =
+  QSplitterdragEnterEvent(self[], event)
+method dragMoveEvent*(self: VirtualQSplitter, event: gen_qevent_types.QDragMoveEvent): void {.base.} =
+  QSplitterdragMoveEvent(self[], event)
+method dragLeaveEvent*(self: VirtualQSplitter, event: gen_qevent_types.QDragLeaveEvent): void {.base.} =
+  QSplitterdragLeaveEvent(self[], event)
+method dropEvent*(self: VirtualQSplitter, event: gen_qevent_types.QDropEvent): void {.base.} =
+  QSplitterdropEvent(self[], event)
+method showEvent*(self: VirtualQSplitter, event: gen_qevent_types.QShowEvent): void {.base.} =
+  QSplittershowEvent(self[], event)
+method hideEvent*(self: VirtualQSplitter, event: gen_qevent_types.QHideEvent): void {.base.} =
+  QSplitterhideEvent(self[], event)
+method nativeEvent*(self: VirtualQSplitter, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
+  QSplitternativeEvent(self[], eventType, message, resultVal)
+method metric*(self: VirtualQSplitter, param1: cint): cint {.base.} =
+  QSplittermetric(self[], param1)
+method initPainter*(self: VirtualQSplitter, painter: gen_qpainter_types.QPainter): void {.base.} =
+  QSplitterinitPainter(self[], painter)
+method redirected*(self: VirtualQSplitter, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.base.} =
+  QSplitterredirected(self[], offset)
+method sharedPainter*(self: VirtualQSplitter): gen_qpainter_types.QPainter {.base.} =
+  QSplittersharedPainter(self[])
+method inputMethodEvent*(self: VirtualQSplitter, param1: gen_qevent_types.QInputMethodEvent): void {.base.} =
+  QSplitterinputMethodEvent(self[], param1)
+method inputMethodQuery*(self: VirtualQSplitter, param1: cint): gen_qvariant_types.QVariant {.base.} =
+  QSplitterinputMethodQuery(self[], param1)
+method focusNextPrevChild*(self: VirtualQSplitter, next: bool): bool {.base.} =
+  QSplitterfocusNextPrevChild(self[], next)
+method eventFilter*(self: VirtualQSplitter, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QSplittereventFilter(self[], watched, event)
+method timerEvent*(self: VirtualQSplitter, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QSplittertimerEvent(self[], event)
+method customEvent*(self: VirtualQSplitter, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QSplittercustomEvent(self[], event)
+method connectNotify*(self: VirtualQSplitter, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QSplitterconnectNotify(self[], signal)
+method disconnectNotify*(self: VirtualQSplitter, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QSplitterdisconnectNotify(self[], signal)
+
 proc fcQSplitter_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQSplitter](fcQSplitter_vdata(self)[])
   var virtualReturn = inst.metaObject()
   virtualReturn.h
 
-method metacast*(self: VirtualQSplitter, param1: cstring): pointer {.base.} =
-  QSplittermetacast(self[], param1)
 proc fcQSplitter_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQSplitter](fcQSplitter_vdata(self)[])
   let slotval1 = (param1)
   var virtualReturn = inst.metacast(slotval1)
   virtualReturn
 
-method metacall*(self: VirtualQSplitter, param1: cint, param2: cint, param3: pointer): cint {.base.} =
-  QSplittermetacall(self[], param1, param2, param3)
 proc fcQSplitter_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQSplitter](fcQSplitter_vdata(self)[])
   let slotval1 = cint(param1)
@@ -1149,262 +1254,188 @@ proc fcQSplitter_method_callback_metacall(self: pointer, param1: cint, param2: c
   var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
-method sizeHint*(self: VirtualQSplitter): gen_qsize_types.QSize {.base.} =
-  QSplittersizeHint(self[])
 proc fcQSplitter_method_callback_sizeHint(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQSplitter](fcQSplitter_vdata(self)[])
   var virtualReturn = inst.sizeHint()
   virtualReturn.h
 
-method minimumSizeHint*(self: VirtualQSplitter): gen_qsize_types.QSize {.base.} =
-  QSplitterminimumSizeHint(self[])
 proc fcQSplitter_method_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQSplitter](fcQSplitter_vdata(self)[])
   var virtualReturn = inst.minimumSizeHint()
   virtualReturn.h
 
-method createHandle*(self: VirtualQSplitter): gen_qsplitter_types.QSplitterHandle {.base.} =
-  QSplittercreateHandle(self[])
 proc fcQSplitter_method_callback_createHandle(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQSplitter](fcQSplitter_vdata(self)[])
   var virtualReturn = inst.createHandle()
   virtualReturn.h
 
-method childEvent*(self: VirtualQSplitter, param1: gen_qcoreevent_types.QChildEvent): void {.base.} =
-  QSplitterchildEvent(self[], param1)
 proc fcQSplitter_method_callback_childEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSplitter](fcQSplitter_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: param1, owned: false)
   inst.childEvent(slotval1)
 
-method event*(self: VirtualQSplitter, param1: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QSplitterevent(self[], param1)
 proc fcQSplitter_method_callback_event(self: pointer, param1: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQSplitter](fcQSplitter_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
-method resizeEvent*(self: VirtualQSplitter, param1: gen_qevent_types.QResizeEvent): void {.base.} =
-  QSplitterresizeEvent(self[], param1)
 proc fcQSplitter_method_callback_resizeEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSplitter](fcQSplitter_vdata(self)[])
   let slotval1 = gen_qevent_types.QResizeEvent(h: param1, owned: false)
   inst.resizeEvent(slotval1)
 
-method changeEvent*(self: VirtualQSplitter, param1: gen_qcoreevent_types.QEvent): void {.base.} =
-  QSplitterchangeEvent(self[], param1)
 proc fcQSplitter_method_callback_changeEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSplitter](fcQSplitter_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
   inst.changeEvent(slotval1)
 
-method paintEvent*(self: VirtualQSplitter, param1: gen_qevent_types.QPaintEvent): void {.base.} =
-  QSplitterpaintEvent(self[], param1)
 proc fcQSplitter_method_callback_paintEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSplitter](fcQSplitter_vdata(self)[])
   let slotval1 = gen_qevent_types.QPaintEvent(h: param1, owned: false)
   inst.paintEvent(slotval1)
 
-method initStyleOption*(self: VirtualQSplitter, option: gen_qstyleoption_types.QStyleOptionFrame): void {.base.} =
-  QSplitterinitStyleOption(self[], option)
 proc fcQSplitter_method_callback_initStyleOption(self: pointer, option: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSplitter](fcQSplitter_vdata(self)[])
   let slotval1 = gen_qstyleoption_types.QStyleOptionFrame(h: option, owned: false)
   inst.initStyleOption(slotval1)
 
-method devType*(self: VirtualQSplitter): cint {.base.} =
-  QSplitterdevType(self[])
 proc fcQSplitter_method_callback_devType(self: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQSplitter](fcQSplitter_vdata(self)[])
   var virtualReturn = inst.devType()
   virtualReturn
 
-method setVisible*(self: VirtualQSplitter, visible: bool): void {.base.} =
-  QSplittersetVisible(self[], visible)
 proc fcQSplitter_method_callback_setVisible(self: pointer, visible: bool): void {.cdecl.} =
   let inst = cast[VirtualQSplitter](fcQSplitter_vdata(self)[])
   let slotval1 = visible
   inst.setVisible(slotval1)
 
-method heightForWidth*(self: VirtualQSplitter, param1: cint): cint {.base.} =
-  QSplitterheightForWidth(self[], param1)
 proc fcQSplitter_method_callback_heightForWidth(self: pointer, param1: cint): cint {.cdecl.} =
   let inst = cast[VirtualQSplitter](fcQSplitter_vdata(self)[])
   let slotval1 = param1
   var virtualReturn = inst.heightForWidth(slotval1)
   virtualReturn
 
-method hasHeightForWidth*(self: VirtualQSplitter): bool {.base.} =
-  QSplitterhasHeightForWidth(self[])
 proc fcQSplitter_method_callback_hasHeightForWidth(self: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQSplitter](fcQSplitter_vdata(self)[])
   var virtualReturn = inst.hasHeightForWidth()
   virtualReturn
 
-method paintEngine*(self: VirtualQSplitter): gen_qpaintengine_types.QPaintEngine {.base.} =
-  QSplitterpaintEngine(self[])
 proc fcQSplitter_method_callback_paintEngine(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQSplitter](fcQSplitter_vdata(self)[])
   var virtualReturn = inst.paintEngine()
   virtualReturn.h
 
-method mousePressEvent*(self: VirtualQSplitter, event: gen_qevent_types.QMouseEvent): void {.base.} =
-  QSplittermousePressEvent(self[], event)
 proc fcQSplitter_method_callback_mousePressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSplitter](fcQSplitter_vdata(self)[])
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mousePressEvent(slotval1)
 
-method mouseReleaseEvent*(self: VirtualQSplitter, event: gen_qevent_types.QMouseEvent): void {.base.} =
-  QSplittermouseReleaseEvent(self[], event)
 proc fcQSplitter_method_callback_mouseReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSplitter](fcQSplitter_vdata(self)[])
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mouseReleaseEvent(slotval1)
 
-method mouseDoubleClickEvent*(self: VirtualQSplitter, event: gen_qevent_types.QMouseEvent): void {.base.} =
-  QSplittermouseDoubleClickEvent(self[], event)
 proc fcQSplitter_method_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSplitter](fcQSplitter_vdata(self)[])
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mouseDoubleClickEvent(slotval1)
 
-method mouseMoveEvent*(self: VirtualQSplitter, event: gen_qevent_types.QMouseEvent): void {.base.} =
-  QSplittermouseMoveEvent(self[], event)
 proc fcQSplitter_method_callback_mouseMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSplitter](fcQSplitter_vdata(self)[])
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mouseMoveEvent(slotval1)
 
-method wheelEvent*(self: VirtualQSplitter, event: gen_qevent_types.QWheelEvent): void {.base.} =
-  QSplitterwheelEvent(self[], event)
 proc fcQSplitter_method_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSplitter](fcQSplitter_vdata(self)[])
   let slotval1 = gen_qevent_types.QWheelEvent(h: event, owned: false)
   inst.wheelEvent(slotval1)
 
-method keyPressEvent*(self: VirtualQSplitter, event: gen_qevent_types.QKeyEvent): void {.base.} =
-  QSplitterkeyPressEvent(self[], event)
 proc fcQSplitter_method_callback_keyPressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSplitter](fcQSplitter_vdata(self)[])
   let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   inst.keyPressEvent(slotval1)
 
-method keyReleaseEvent*(self: VirtualQSplitter, event: gen_qevent_types.QKeyEvent): void {.base.} =
-  QSplitterkeyReleaseEvent(self[], event)
 proc fcQSplitter_method_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSplitter](fcQSplitter_vdata(self)[])
   let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   inst.keyReleaseEvent(slotval1)
 
-method focusInEvent*(self: VirtualQSplitter, event: gen_qevent_types.QFocusEvent): void {.base.} =
-  QSplitterfocusInEvent(self[], event)
 proc fcQSplitter_method_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSplitter](fcQSplitter_vdata(self)[])
   let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   inst.focusInEvent(slotval1)
 
-method focusOutEvent*(self: VirtualQSplitter, event: gen_qevent_types.QFocusEvent): void {.base.} =
-  QSplitterfocusOutEvent(self[], event)
 proc fcQSplitter_method_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSplitter](fcQSplitter_vdata(self)[])
   let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   inst.focusOutEvent(slotval1)
 
-method enterEvent*(self: VirtualQSplitter, event: gen_qevent_types.QEnterEvent): void {.base.} =
-  QSplitterenterEvent(self[], event)
 proc fcQSplitter_method_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSplitter](fcQSplitter_vdata(self)[])
   let slotval1 = gen_qevent_types.QEnterEvent(h: event, owned: false)
   inst.enterEvent(slotval1)
 
-method leaveEvent*(self: VirtualQSplitter, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QSplitterleaveEvent(self[], event)
 proc fcQSplitter_method_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSplitter](fcQSplitter_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.leaveEvent(slotval1)
 
-method moveEvent*(self: VirtualQSplitter, event: gen_qevent_types.QMoveEvent): void {.base.} =
-  QSplittermoveEvent(self[], event)
 proc fcQSplitter_method_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSplitter](fcQSplitter_vdata(self)[])
   let slotval1 = gen_qevent_types.QMoveEvent(h: event, owned: false)
   inst.moveEvent(slotval1)
 
-method closeEvent*(self: VirtualQSplitter, event: gen_qevent_types.QCloseEvent): void {.base.} =
-  QSplittercloseEvent(self[], event)
 proc fcQSplitter_method_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSplitter](fcQSplitter_vdata(self)[])
   let slotval1 = gen_qevent_types.QCloseEvent(h: event, owned: false)
   inst.closeEvent(slotval1)
 
-method contextMenuEvent*(self: VirtualQSplitter, event: gen_qevent_types.QContextMenuEvent): void {.base.} =
-  QSplittercontextMenuEvent(self[], event)
 proc fcQSplitter_method_callback_contextMenuEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSplitter](fcQSplitter_vdata(self)[])
   let slotval1 = gen_qevent_types.QContextMenuEvent(h: event, owned: false)
   inst.contextMenuEvent(slotval1)
 
-method tabletEvent*(self: VirtualQSplitter, event: gen_qevent_types.QTabletEvent): void {.base.} =
-  QSplittertabletEvent(self[], event)
 proc fcQSplitter_method_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSplitter](fcQSplitter_vdata(self)[])
   let slotval1 = gen_qevent_types.QTabletEvent(h: event, owned: false)
   inst.tabletEvent(slotval1)
 
-method actionEvent*(self: VirtualQSplitter, event: gen_qevent_types.QActionEvent): void {.base.} =
-  QSplitteractionEvent(self[], event)
 proc fcQSplitter_method_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSplitter](fcQSplitter_vdata(self)[])
   let slotval1 = gen_qevent_types.QActionEvent(h: event, owned: false)
   inst.actionEvent(slotval1)
 
-method dragEnterEvent*(self: VirtualQSplitter, event: gen_qevent_types.QDragEnterEvent): void {.base.} =
-  QSplitterdragEnterEvent(self[], event)
 proc fcQSplitter_method_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSplitter](fcQSplitter_vdata(self)[])
   let slotval1 = gen_qevent_types.QDragEnterEvent(h: event, owned: false)
   inst.dragEnterEvent(slotval1)
 
-method dragMoveEvent*(self: VirtualQSplitter, event: gen_qevent_types.QDragMoveEvent): void {.base.} =
-  QSplitterdragMoveEvent(self[], event)
 proc fcQSplitter_method_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSplitter](fcQSplitter_vdata(self)[])
   let slotval1 = gen_qevent_types.QDragMoveEvent(h: event, owned: false)
   inst.dragMoveEvent(slotval1)
 
-method dragLeaveEvent*(self: VirtualQSplitter, event: gen_qevent_types.QDragLeaveEvent): void {.base.} =
-  QSplitterdragLeaveEvent(self[], event)
 proc fcQSplitter_method_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSplitter](fcQSplitter_vdata(self)[])
   let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event, owned: false)
   inst.dragLeaveEvent(slotval1)
 
-method dropEvent*(self: VirtualQSplitter, event: gen_qevent_types.QDropEvent): void {.base.} =
-  QSplitterdropEvent(self[], event)
 proc fcQSplitter_method_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSplitter](fcQSplitter_vdata(self)[])
   let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
   inst.dropEvent(slotval1)
 
-method showEvent*(self: VirtualQSplitter, event: gen_qevent_types.QShowEvent): void {.base.} =
-  QSplittershowEvent(self[], event)
 proc fcQSplitter_method_callback_showEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSplitter](fcQSplitter_vdata(self)[])
   let slotval1 = gen_qevent_types.QShowEvent(h: event, owned: false)
   inst.showEvent(slotval1)
 
-method hideEvent*(self: VirtualQSplitter, event: gen_qevent_types.QHideEvent): void {.base.} =
-  QSplitterhideEvent(self[], event)
 proc fcQSplitter_method_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSplitter](fcQSplitter_vdata(self)[])
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   inst.hideEvent(slotval1)
 
-method nativeEvent*(self: VirtualQSplitter, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
-  QSplitternativeEvent(self[], eventType, message, resultVal)
 proc fcQSplitter_method_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
   let inst = cast[VirtualQSplitter](fcQSplitter_vdata(self)[])
   var veventType_bytearray = eventType
@@ -1416,61 +1447,45 @@ proc fcQSplitter_method_callback_nativeEvent(self: pointer, eventType: struct_mi
   var virtualReturn = inst.nativeEvent(slotval1, slotval2, slotval3)
   virtualReturn
 
-method metric*(self: VirtualQSplitter, param1: cint): cint {.base.} =
-  QSplittermetric(self[], param1)
 proc fcQSplitter_method_callback_metric(self: pointer, param1: cint): cint {.cdecl.} =
   let inst = cast[VirtualQSplitter](fcQSplitter_vdata(self)[])
   let slotval1 = cint(param1)
   var virtualReturn = inst.metric(slotval1)
   virtualReturn
 
-method initPainter*(self: VirtualQSplitter, painter: gen_qpainter_types.QPainter): void {.base.} =
-  QSplitterinitPainter(self[], painter)
 proc fcQSplitter_method_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSplitter](fcQSplitter_vdata(self)[])
   let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
   inst.initPainter(slotval1)
 
-method redirected*(self: VirtualQSplitter, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.base.} =
-  QSplitterredirected(self[], offset)
 proc fcQSplitter_method_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQSplitter](fcQSplitter_vdata(self)[])
   let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
   var virtualReturn = inst.redirected(slotval1)
   virtualReturn.h
 
-method sharedPainter*(self: VirtualQSplitter): gen_qpainter_types.QPainter {.base.} =
-  QSplittersharedPainter(self[])
 proc fcQSplitter_method_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQSplitter](fcQSplitter_vdata(self)[])
   var virtualReturn = inst.sharedPainter()
   virtualReturn.h
 
-method inputMethodEvent*(self: VirtualQSplitter, param1: gen_qevent_types.QInputMethodEvent): void {.base.} =
-  QSplitterinputMethodEvent(self[], param1)
 proc fcQSplitter_method_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSplitter](fcQSplitter_vdata(self)[])
   let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1, owned: false)
   inst.inputMethodEvent(slotval1)
 
-method inputMethodQuery*(self: VirtualQSplitter, param1: cint): gen_qvariant_types.QVariant {.base.} =
-  QSplitterinputMethodQuery(self[], param1)
 proc fcQSplitter_method_callback_inputMethodQuery(self: pointer, param1: cint): pointer {.cdecl.} =
   let inst = cast[VirtualQSplitter](fcQSplitter_vdata(self)[])
   let slotval1 = cint(param1)
   var virtualReturn = inst.inputMethodQuery(slotval1)
   virtualReturn.h
 
-method focusNextPrevChild*(self: VirtualQSplitter, next: bool): bool {.base.} =
-  QSplitterfocusNextPrevChild(self[], next)
 proc fcQSplitter_method_callback_focusNextPrevChild(self: pointer, next: bool): bool {.cdecl.} =
   let inst = cast[VirtualQSplitter](fcQSplitter_vdata(self)[])
   let slotval1 = next
   var virtualReturn = inst.focusNextPrevChild(slotval1)
   virtualReturn
 
-method eventFilter*(self: VirtualQSplitter, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QSplittereventFilter(self[], watched, event)
 proc fcQSplitter_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQSplitter](fcQSplitter_vdata(self)[])
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
@@ -1478,33 +1493,26 @@ proc fcQSplitter_method_callback_eventFilter(self: pointer, watched: pointer, ev
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
-method timerEvent*(self: VirtualQSplitter, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
-  QSplittertimerEvent(self[], event)
 proc fcQSplitter_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSplitter](fcQSplitter_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
-method customEvent*(self: VirtualQSplitter, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QSplittercustomEvent(self[], event)
 proc fcQSplitter_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSplitter](fcQSplitter_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
-method connectNotify*(self: VirtualQSplitter, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QSplitterconnectNotify(self[], signal)
 proc fcQSplitter_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSplitter](fcQSplitter_vdata(self)[])
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
-method disconnectNotify*(self: VirtualQSplitter, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QSplitterdisconnectNotify(self[], signal)
 proc fcQSplitter_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSplitter](fcQSplitter_vdata(self)[])
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
+
 
 proc moveSplitter*(self: gen_qsplitter_types.QSplitter, pos: cint, index: cint): void =
   fcQSplitter_protectedbase_moveSplitter(self.h, pos, index)
@@ -2188,6 +2196,7 @@ type QSplitterHandlechildEventProc* = proc(self: QSplitterHandle, event: gen_qco
 type QSplitterHandlecustomEventProc* = proc(self: QSplitterHandle, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QSplitterHandleconnectNotifyProc* = proc(self: QSplitterHandle, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QSplitterHandledisconnectNotifyProc* = proc(self: QSplitterHandle, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+
 type QSplitterHandleVTable* {.inheritable, pure.} = object
   vtbl: cQSplitterHandleVTable
   metaObject*: QSplitterHandlemetaObjectProc
@@ -2240,8 +2249,157 @@ type QSplitterHandleVTable* {.inheritable, pure.} = object
   customEvent*: QSplitterHandlecustomEventProc
   connectNotify*: QSplitterHandleconnectNotifyProc
   disconnectNotify*: QSplitterHandledisconnectNotifyProc
+
 proc QSplitterHandlemetaObject*(self: gen_qsplitter_types.QSplitterHandle): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQSplitterHandle_virtualbase_metaObject(self.h), owned: false)
+
+proc QSplitterHandlemetacast*(self: gen_qsplitter_types.QSplitterHandle, param1: cstring): pointer =
+  fcQSplitterHandle_virtualbase_metacast(self.h, param1)
+
+proc QSplitterHandlemetacall*(self: gen_qsplitter_types.QSplitterHandle, param1: cint, param2: cint, param3: pointer): cint =
+  fcQSplitterHandle_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+proc QSplitterHandlesizeHint*(self: gen_qsplitter_types.QSplitterHandle): gen_qsize_types.QSize =
+  gen_qsize_types.QSize(h: fcQSplitterHandle_virtualbase_sizeHint(self.h), owned: true)
+
+proc QSplitterHandlepaintEvent*(self: gen_qsplitter_types.QSplitterHandle, param1: gen_qevent_types.QPaintEvent): void =
+  fcQSplitterHandle_virtualbase_paintEvent(self.h, param1.h)
+
+proc QSplitterHandlemouseMoveEvent*(self: gen_qsplitter_types.QSplitterHandle, param1: gen_qevent_types.QMouseEvent): void =
+  fcQSplitterHandle_virtualbase_mouseMoveEvent(self.h, param1.h)
+
+proc QSplitterHandlemousePressEvent*(self: gen_qsplitter_types.QSplitterHandle, param1: gen_qevent_types.QMouseEvent): void =
+  fcQSplitterHandle_virtualbase_mousePressEvent(self.h, param1.h)
+
+proc QSplitterHandlemouseReleaseEvent*(self: gen_qsplitter_types.QSplitterHandle, param1: gen_qevent_types.QMouseEvent): void =
+  fcQSplitterHandle_virtualbase_mouseReleaseEvent(self.h, param1.h)
+
+proc QSplitterHandleresizeEvent*(self: gen_qsplitter_types.QSplitterHandle, param1: gen_qevent_types.QResizeEvent): void =
+  fcQSplitterHandle_virtualbase_resizeEvent(self.h, param1.h)
+
+proc QSplitterHandleevent*(self: gen_qsplitter_types.QSplitterHandle, param1: gen_qcoreevent_types.QEvent): bool =
+  fcQSplitterHandle_virtualbase_event(self.h, param1.h)
+
+proc QSplitterHandledevType*(self: gen_qsplitter_types.QSplitterHandle): cint =
+  fcQSplitterHandle_virtualbase_devType(self.h)
+
+proc QSplitterHandlesetVisible*(self: gen_qsplitter_types.QSplitterHandle, visible: bool): void =
+  fcQSplitterHandle_virtualbase_setVisible(self.h, visible)
+
+proc QSplitterHandleminimumSizeHint*(self: gen_qsplitter_types.QSplitterHandle): gen_qsize_types.QSize =
+  gen_qsize_types.QSize(h: fcQSplitterHandle_virtualbase_minimumSizeHint(self.h), owned: true)
+
+proc QSplitterHandleheightForWidth*(self: gen_qsplitter_types.QSplitterHandle, param1: cint): cint =
+  fcQSplitterHandle_virtualbase_heightForWidth(self.h, param1)
+
+proc QSplitterHandlehasHeightForWidth*(self: gen_qsplitter_types.QSplitterHandle): bool =
+  fcQSplitterHandle_virtualbase_hasHeightForWidth(self.h)
+
+proc QSplitterHandlepaintEngine*(self: gen_qsplitter_types.QSplitterHandle): gen_qpaintengine_types.QPaintEngine =
+  gen_qpaintengine_types.QPaintEngine(h: fcQSplitterHandle_virtualbase_paintEngine(self.h), owned: false)
+
+proc QSplitterHandlemouseDoubleClickEvent*(self: gen_qsplitter_types.QSplitterHandle, event: gen_qevent_types.QMouseEvent): void =
+  fcQSplitterHandle_virtualbase_mouseDoubleClickEvent(self.h, event.h)
+
+proc QSplitterHandlewheelEvent*(self: gen_qsplitter_types.QSplitterHandle, event: gen_qevent_types.QWheelEvent): void =
+  fcQSplitterHandle_virtualbase_wheelEvent(self.h, event.h)
+
+proc QSplitterHandlekeyPressEvent*(self: gen_qsplitter_types.QSplitterHandle, event: gen_qevent_types.QKeyEvent): void =
+  fcQSplitterHandle_virtualbase_keyPressEvent(self.h, event.h)
+
+proc QSplitterHandlekeyReleaseEvent*(self: gen_qsplitter_types.QSplitterHandle, event: gen_qevent_types.QKeyEvent): void =
+  fcQSplitterHandle_virtualbase_keyReleaseEvent(self.h, event.h)
+
+proc QSplitterHandlefocusInEvent*(self: gen_qsplitter_types.QSplitterHandle, event: gen_qevent_types.QFocusEvent): void =
+  fcQSplitterHandle_virtualbase_focusInEvent(self.h, event.h)
+
+proc QSplitterHandlefocusOutEvent*(self: gen_qsplitter_types.QSplitterHandle, event: gen_qevent_types.QFocusEvent): void =
+  fcQSplitterHandle_virtualbase_focusOutEvent(self.h, event.h)
+
+proc QSplitterHandleenterEvent*(self: gen_qsplitter_types.QSplitterHandle, event: gen_qevent_types.QEnterEvent): void =
+  fcQSplitterHandle_virtualbase_enterEvent(self.h, event.h)
+
+proc QSplitterHandleleaveEvent*(self: gen_qsplitter_types.QSplitterHandle, event: gen_qcoreevent_types.QEvent): void =
+  fcQSplitterHandle_virtualbase_leaveEvent(self.h, event.h)
+
+proc QSplitterHandlemoveEvent*(self: gen_qsplitter_types.QSplitterHandle, event: gen_qevent_types.QMoveEvent): void =
+  fcQSplitterHandle_virtualbase_moveEvent(self.h, event.h)
+
+proc QSplitterHandlecloseEvent*(self: gen_qsplitter_types.QSplitterHandle, event: gen_qevent_types.QCloseEvent): void =
+  fcQSplitterHandle_virtualbase_closeEvent(self.h, event.h)
+
+proc QSplitterHandlecontextMenuEvent*(self: gen_qsplitter_types.QSplitterHandle, event: gen_qevent_types.QContextMenuEvent): void =
+  fcQSplitterHandle_virtualbase_contextMenuEvent(self.h, event.h)
+
+proc QSplitterHandletabletEvent*(self: gen_qsplitter_types.QSplitterHandle, event: gen_qevent_types.QTabletEvent): void =
+  fcQSplitterHandle_virtualbase_tabletEvent(self.h, event.h)
+
+proc QSplitterHandleactionEvent*(self: gen_qsplitter_types.QSplitterHandle, event: gen_qevent_types.QActionEvent): void =
+  fcQSplitterHandle_virtualbase_actionEvent(self.h, event.h)
+
+proc QSplitterHandledragEnterEvent*(self: gen_qsplitter_types.QSplitterHandle, event: gen_qevent_types.QDragEnterEvent): void =
+  fcQSplitterHandle_virtualbase_dragEnterEvent(self.h, event.h)
+
+proc QSplitterHandledragMoveEvent*(self: gen_qsplitter_types.QSplitterHandle, event: gen_qevent_types.QDragMoveEvent): void =
+  fcQSplitterHandle_virtualbase_dragMoveEvent(self.h, event.h)
+
+proc QSplitterHandledragLeaveEvent*(self: gen_qsplitter_types.QSplitterHandle, event: gen_qevent_types.QDragLeaveEvent): void =
+  fcQSplitterHandle_virtualbase_dragLeaveEvent(self.h, event.h)
+
+proc QSplitterHandledropEvent*(self: gen_qsplitter_types.QSplitterHandle, event: gen_qevent_types.QDropEvent): void =
+  fcQSplitterHandle_virtualbase_dropEvent(self.h, event.h)
+
+proc QSplitterHandleshowEvent*(self: gen_qsplitter_types.QSplitterHandle, event: gen_qevent_types.QShowEvent): void =
+  fcQSplitterHandle_virtualbase_showEvent(self.h, event.h)
+
+proc QSplitterHandlehideEvent*(self: gen_qsplitter_types.QSplitterHandle, event: gen_qevent_types.QHideEvent): void =
+  fcQSplitterHandle_virtualbase_hideEvent(self.h, event.h)
+
+proc QSplitterHandlenativeEvent*(self: gen_qsplitter_types.QSplitterHandle, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool =
+  fcQSplitterHandle_virtualbase_nativeEvent(self.h, struct_miqt_string(data: if len(eventType) > 0: addr eventType[0] else: nil, len: csize_t(len(eventType))), message, resultVal)
+
+proc QSplitterHandlechangeEvent*(self: gen_qsplitter_types.QSplitterHandle, param1: gen_qcoreevent_types.QEvent): void =
+  fcQSplitterHandle_virtualbase_changeEvent(self.h, param1.h)
+
+proc QSplitterHandlemetric*(self: gen_qsplitter_types.QSplitterHandle, param1: cint): cint =
+  fcQSplitterHandle_virtualbase_metric(self.h, cint(param1))
+
+proc QSplitterHandleinitPainter*(self: gen_qsplitter_types.QSplitterHandle, painter: gen_qpainter_types.QPainter): void =
+  fcQSplitterHandle_virtualbase_initPainter(self.h, painter.h)
+
+proc QSplitterHandleredirected*(self: gen_qsplitter_types.QSplitterHandle, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice =
+  gen_qpaintdevice_types.QPaintDevice(h: fcQSplitterHandle_virtualbase_redirected(self.h, offset.h), owned: false)
+
+proc QSplitterHandlesharedPainter*(self: gen_qsplitter_types.QSplitterHandle): gen_qpainter_types.QPainter =
+  gen_qpainter_types.QPainter(h: fcQSplitterHandle_virtualbase_sharedPainter(self.h), owned: false)
+
+proc QSplitterHandleinputMethodEvent*(self: gen_qsplitter_types.QSplitterHandle, param1: gen_qevent_types.QInputMethodEvent): void =
+  fcQSplitterHandle_virtualbase_inputMethodEvent(self.h, param1.h)
+
+proc QSplitterHandleinputMethodQuery*(self: gen_qsplitter_types.QSplitterHandle, param1: cint): gen_qvariant_types.QVariant =
+  gen_qvariant_types.QVariant(h: fcQSplitterHandle_virtualbase_inputMethodQuery(self.h, cint(param1)), owned: true)
+
+proc QSplitterHandlefocusNextPrevChild*(self: gen_qsplitter_types.QSplitterHandle, next: bool): bool =
+  fcQSplitterHandle_virtualbase_focusNextPrevChild(self.h, next)
+
+proc QSplitterHandleeventFilter*(self: gen_qsplitter_types.QSplitterHandle, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
+  fcQSplitterHandle_virtualbase_eventFilter(self.h, watched.h, event.h)
+
+proc QSplitterHandletimerEvent*(self: gen_qsplitter_types.QSplitterHandle, event: gen_qcoreevent_types.QTimerEvent): void =
+  fcQSplitterHandle_virtualbase_timerEvent(self.h, event.h)
+
+proc QSplitterHandlechildEvent*(self: gen_qsplitter_types.QSplitterHandle, event: gen_qcoreevent_types.QChildEvent): void =
+  fcQSplitterHandle_virtualbase_childEvent(self.h, event.h)
+
+proc QSplitterHandlecustomEvent*(self: gen_qsplitter_types.QSplitterHandle, event: gen_qcoreevent_types.QEvent): void =
+  fcQSplitterHandle_virtualbase_customEvent(self.h, event.h)
+
+proc QSplitterHandleconnectNotify*(self: gen_qsplitter_types.QSplitterHandle, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQSplitterHandle_virtualbase_connectNotify(self.h, signal.h)
+
+proc QSplitterHandledisconnectNotify*(self: gen_qsplitter_types.QSplitterHandle, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQSplitterHandle_virtualbase_disconnectNotify(self.h, signal.h)
+
 
 proc fcQSplitterHandle_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QSplitterHandleVTable](fcQSplitterHandle_vdata(self)[])
@@ -2252,18 +2410,12 @@ proc fcQSplitterHandle_vtable_callback_metaObject(self: pointer): pointer {.cdec
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QSplitterHandlemetacast*(self: gen_qsplitter_types.QSplitterHandle, param1: cstring): pointer =
-  fcQSplitterHandle_virtualbase_metacast(self.h, param1)
-
 proc fcQSplitterHandle_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QSplitterHandleVTable](fcQSplitterHandle_vdata(self)[])
   let self = QSplitterHandle(h: self)
   let slotval1 = (param1)
   var virtualReturn = vtbl[].metacast(self, slotval1)
   virtualReturn
-
-proc QSplitterHandlemetacall*(self: gen_qsplitter_types.QSplitterHandle, param1: cint, param2: cint, param3: pointer): cint =
-  fcQSplitterHandle_virtualbase_metacall(self.h, cint(param1), param2, param3)
 
 proc fcQSplitterHandle_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QSplitterHandleVTable](fcQSplitterHandle_vdata(self)[])
@@ -2274,9 +2426,6 @@ proc fcQSplitterHandle_vtable_callback_metacall(self: pointer, param1: cint, par
   var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QSplitterHandlesizeHint*(self: gen_qsplitter_types.QSplitterHandle): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQSplitterHandle_virtualbase_sizeHint(self.h), owned: true)
-
 proc fcQSplitterHandle_vtable_callback_sizeHint(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QSplitterHandleVTable](fcQSplitterHandle_vdata(self)[])
   let self = QSplitterHandle(h: self)
@@ -2286,17 +2435,11 @@ proc fcQSplitterHandle_vtable_callback_sizeHint(self: pointer): pointer {.cdecl.
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QSplitterHandlepaintEvent*(self: gen_qsplitter_types.QSplitterHandle, param1: gen_qevent_types.QPaintEvent): void =
-  fcQSplitterHandle_virtualbase_paintEvent(self.h, param1.h)
-
 proc fcQSplitterHandle_vtable_callback_paintEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSplitterHandleVTable](fcQSplitterHandle_vdata(self)[])
   let self = QSplitterHandle(h: self)
   let slotval1 = gen_qevent_types.QPaintEvent(h: param1, owned: false)
   vtbl[].paintEvent(self, slotval1)
-
-proc QSplitterHandlemouseMoveEvent*(self: gen_qsplitter_types.QSplitterHandle, param1: gen_qevent_types.QMouseEvent): void =
-  fcQSplitterHandle_virtualbase_mouseMoveEvent(self.h, param1.h)
 
 proc fcQSplitterHandle_vtable_callback_mouseMoveEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSplitterHandleVTable](fcQSplitterHandle_vdata(self)[])
@@ -2304,17 +2447,11 @@ proc fcQSplitterHandle_vtable_callback_mouseMoveEvent(self: pointer, param1: poi
   let slotval1 = gen_qevent_types.QMouseEvent(h: param1, owned: false)
   vtbl[].mouseMoveEvent(self, slotval1)
 
-proc QSplitterHandlemousePressEvent*(self: gen_qsplitter_types.QSplitterHandle, param1: gen_qevent_types.QMouseEvent): void =
-  fcQSplitterHandle_virtualbase_mousePressEvent(self.h, param1.h)
-
 proc fcQSplitterHandle_vtable_callback_mousePressEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSplitterHandleVTable](fcQSplitterHandle_vdata(self)[])
   let self = QSplitterHandle(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: param1, owned: false)
   vtbl[].mousePressEvent(self, slotval1)
-
-proc QSplitterHandlemouseReleaseEvent*(self: gen_qsplitter_types.QSplitterHandle, param1: gen_qevent_types.QMouseEvent): void =
-  fcQSplitterHandle_virtualbase_mouseReleaseEvent(self.h, param1.h)
 
 proc fcQSplitterHandle_vtable_callback_mouseReleaseEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSplitterHandleVTable](fcQSplitterHandle_vdata(self)[])
@@ -2322,17 +2459,11 @@ proc fcQSplitterHandle_vtable_callback_mouseReleaseEvent(self: pointer, param1: 
   let slotval1 = gen_qevent_types.QMouseEvent(h: param1, owned: false)
   vtbl[].mouseReleaseEvent(self, slotval1)
 
-proc QSplitterHandleresizeEvent*(self: gen_qsplitter_types.QSplitterHandle, param1: gen_qevent_types.QResizeEvent): void =
-  fcQSplitterHandle_virtualbase_resizeEvent(self.h, param1.h)
-
 proc fcQSplitterHandle_vtable_callback_resizeEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSplitterHandleVTable](fcQSplitterHandle_vdata(self)[])
   let self = QSplitterHandle(h: self)
   let slotval1 = gen_qevent_types.QResizeEvent(h: param1, owned: false)
   vtbl[].resizeEvent(self, slotval1)
-
-proc QSplitterHandleevent*(self: gen_qsplitter_types.QSplitterHandle, param1: gen_qcoreevent_types.QEvent): bool =
-  fcQSplitterHandle_virtualbase_event(self.h, param1.h)
 
 proc fcQSplitterHandle_vtable_callback_event(self: pointer, param1: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QSplitterHandleVTable](fcQSplitterHandle_vdata(self)[])
@@ -2341,26 +2472,17 @@ proc fcQSplitterHandle_vtable_callback_event(self: pointer, param1: pointer): bo
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
-proc QSplitterHandledevType*(self: gen_qsplitter_types.QSplitterHandle): cint =
-  fcQSplitterHandle_virtualbase_devType(self.h)
-
 proc fcQSplitterHandle_vtable_callback_devType(self: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QSplitterHandleVTable](fcQSplitterHandle_vdata(self)[])
   let self = QSplitterHandle(h: self)
   var virtualReturn = vtbl[].devType(self)
   virtualReturn
 
-proc QSplitterHandlesetVisible*(self: gen_qsplitter_types.QSplitterHandle, visible: bool): void =
-  fcQSplitterHandle_virtualbase_setVisible(self.h, visible)
-
 proc fcQSplitterHandle_vtable_callback_setVisible(self: pointer, visible: bool): void {.cdecl.} =
   let vtbl = cast[ptr QSplitterHandleVTable](fcQSplitterHandle_vdata(self)[])
   let self = QSplitterHandle(h: self)
   let slotval1 = visible
   vtbl[].setVisible(self, slotval1)
-
-proc QSplitterHandleminimumSizeHint*(self: gen_qsplitter_types.QSplitterHandle): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQSplitterHandle_virtualbase_minimumSizeHint(self.h), owned: true)
 
 proc fcQSplitterHandle_vtable_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QSplitterHandleVTable](fcQSplitterHandle_vdata(self)[])
@@ -2371,9 +2493,6 @@ proc fcQSplitterHandle_vtable_callback_minimumSizeHint(self: pointer): pointer {
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QSplitterHandleheightForWidth*(self: gen_qsplitter_types.QSplitterHandle, param1: cint): cint =
-  fcQSplitterHandle_virtualbase_heightForWidth(self.h, param1)
-
 proc fcQSplitterHandle_vtable_callback_heightForWidth(self: pointer, param1: cint): cint {.cdecl.} =
   let vtbl = cast[ptr QSplitterHandleVTable](fcQSplitterHandle_vdata(self)[])
   let self = QSplitterHandle(h: self)
@@ -2381,17 +2500,11 @@ proc fcQSplitterHandle_vtable_callback_heightForWidth(self: pointer, param1: cin
   var virtualReturn = vtbl[].heightForWidth(self, slotval1)
   virtualReturn
 
-proc QSplitterHandlehasHeightForWidth*(self: gen_qsplitter_types.QSplitterHandle): bool =
-  fcQSplitterHandle_virtualbase_hasHeightForWidth(self.h)
-
 proc fcQSplitterHandle_vtable_callback_hasHeightForWidth(self: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QSplitterHandleVTable](fcQSplitterHandle_vdata(self)[])
   let self = QSplitterHandle(h: self)
   var virtualReturn = vtbl[].hasHeightForWidth(self)
   virtualReturn
-
-proc QSplitterHandlepaintEngine*(self: gen_qsplitter_types.QSplitterHandle): gen_qpaintengine_types.QPaintEngine =
-  gen_qpaintengine_types.QPaintEngine(h: fcQSplitterHandle_virtualbase_paintEngine(self.h), owned: false)
 
 proc fcQSplitterHandle_vtable_callback_paintEngine(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QSplitterHandleVTable](fcQSplitterHandle_vdata(self)[])
@@ -2402,17 +2515,11 @@ proc fcQSplitterHandle_vtable_callback_paintEngine(self: pointer): pointer {.cde
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QSplitterHandlemouseDoubleClickEvent*(self: gen_qsplitter_types.QSplitterHandle, event: gen_qevent_types.QMouseEvent): void =
-  fcQSplitterHandle_virtualbase_mouseDoubleClickEvent(self.h, event.h)
-
 proc fcQSplitterHandle_vtable_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSplitterHandleVTable](fcQSplitterHandle_vdata(self)[])
   let self = QSplitterHandle(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseDoubleClickEvent(self, slotval1)
-
-proc QSplitterHandlewheelEvent*(self: gen_qsplitter_types.QSplitterHandle, event: gen_qevent_types.QWheelEvent): void =
-  fcQSplitterHandle_virtualbase_wheelEvent(self.h, event.h)
 
 proc fcQSplitterHandle_vtable_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSplitterHandleVTable](fcQSplitterHandle_vdata(self)[])
@@ -2420,17 +2527,11 @@ proc fcQSplitterHandle_vtable_callback_wheelEvent(self: pointer, event: pointer)
   let slotval1 = gen_qevent_types.QWheelEvent(h: event, owned: false)
   vtbl[].wheelEvent(self, slotval1)
 
-proc QSplitterHandlekeyPressEvent*(self: gen_qsplitter_types.QSplitterHandle, event: gen_qevent_types.QKeyEvent): void =
-  fcQSplitterHandle_virtualbase_keyPressEvent(self.h, event.h)
-
 proc fcQSplitterHandle_vtable_callback_keyPressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSplitterHandleVTable](fcQSplitterHandle_vdata(self)[])
   let self = QSplitterHandle(h: self)
   let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   vtbl[].keyPressEvent(self, slotval1)
-
-proc QSplitterHandlekeyReleaseEvent*(self: gen_qsplitter_types.QSplitterHandle, event: gen_qevent_types.QKeyEvent): void =
-  fcQSplitterHandle_virtualbase_keyReleaseEvent(self.h, event.h)
 
 proc fcQSplitterHandle_vtable_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSplitterHandleVTable](fcQSplitterHandle_vdata(self)[])
@@ -2438,17 +2539,11 @@ proc fcQSplitterHandle_vtable_callback_keyReleaseEvent(self: pointer, event: poi
   let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   vtbl[].keyReleaseEvent(self, slotval1)
 
-proc QSplitterHandlefocusInEvent*(self: gen_qsplitter_types.QSplitterHandle, event: gen_qevent_types.QFocusEvent): void =
-  fcQSplitterHandle_virtualbase_focusInEvent(self.h, event.h)
-
 proc fcQSplitterHandle_vtable_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSplitterHandleVTable](fcQSplitterHandle_vdata(self)[])
   let self = QSplitterHandle(h: self)
   let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusInEvent(self, slotval1)
-
-proc QSplitterHandlefocusOutEvent*(self: gen_qsplitter_types.QSplitterHandle, event: gen_qevent_types.QFocusEvent): void =
-  fcQSplitterHandle_virtualbase_focusOutEvent(self.h, event.h)
 
 proc fcQSplitterHandle_vtable_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSplitterHandleVTable](fcQSplitterHandle_vdata(self)[])
@@ -2456,17 +2551,11 @@ proc fcQSplitterHandle_vtable_callback_focusOutEvent(self: pointer, event: point
   let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusOutEvent(self, slotval1)
 
-proc QSplitterHandleenterEvent*(self: gen_qsplitter_types.QSplitterHandle, event: gen_qevent_types.QEnterEvent): void =
-  fcQSplitterHandle_virtualbase_enterEvent(self.h, event.h)
-
 proc fcQSplitterHandle_vtable_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSplitterHandleVTable](fcQSplitterHandle_vdata(self)[])
   let self = QSplitterHandle(h: self)
   let slotval1 = gen_qevent_types.QEnterEvent(h: event, owned: false)
   vtbl[].enterEvent(self, slotval1)
-
-proc QSplitterHandleleaveEvent*(self: gen_qsplitter_types.QSplitterHandle, event: gen_qcoreevent_types.QEvent): void =
-  fcQSplitterHandle_virtualbase_leaveEvent(self.h, event.h)
 
 proc fcQSplitterHandle_vtable_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSplitterHandleVTable](fcQSplitterHandle_vdata(self)[])
@@ -2474,17 +2563,11 @@ proc fcQSplitterHandle_vtable_callback_leaveEvent(self: pointer, event: pointer)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].leaveEvent(self, slotval1)
 
-proc QSplitterHandlemoveEvent*(self: gen_qsplitter_types.QSplitterHandle, event: gen_qevent_types.QMoveEvent): void =
-  fcQSplitterHandle_virtualbase_moveEvent(self.h, event.h)
-
 proc fcQSplitterHandle_vtable_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSplitterHandleVTable](fcQSplitterHandle_vdata(self)[])
   let self = QSplitterHandle(h: self)
   let slotval1 = gen_qevent_types.QMoveEvent(h: event, owned: false)
   vtbl[].moveEvent(self, slotval1)
-
-proc QSplitterHandlecloseEvent*(self: gen_qsplitter_types.QSplitterHandle, event: gen_qevent_types.QCloseEvent): void =
-  fcQSplitterHandle_virtualbase_closeEvent(self.h, event.h)
 
 proc fcQSplitterHandle_vtable_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSplitterHandleVTable](fcQSplitterHandle_vdata(self)[])
@@ -2492,17 +2575,11 @@ proc fcQSplitterHandle_vtable_callback_closeEvent(self: pointer, event: pointer)
   let slotval1 = gen_qevent_types.QCloseEvent(h: event, owned: false)
   vtbl[].closeEvent(self, slotval1)
 
-proc QSplitterHandlecontextMenuEvent*(self: gen_qsplitter_types.QSplitterHandle, event: gen_qevent_types.QContextMenuEvent): void =
-  fcQSplitterHandle_virtualbase_contextMenuEvent(self.h, event.h)
-
 proc fcQSplitterHandle_vtable_callback_contextMenuEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSplitterHandleVTable](fcQSplitterHandle_vdata(self)[])
   let self = QSplitterHandle(h: self)
   let slotval1 = gen_qevent_types.QContextMenuEvent(h: event, owned: false)
   vtbl[].contextMenuEvent(self, slotval1)
-
-proc QSplitterHandletabletEvent*(self: gen_qsplitter_types.QSplitterHandle, event: gen_qevent_types.QTabletEvent): void =
-  fcQSplitterHandle_virtualbase_tabletEvent(self.h, event.h)
 
 proc fcQSplitterHandle_vtable_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSplitterHandleVTable](fcQSplitterHandle_vdata(self)[])
@@ -2510,17 +2587,11 @@ proc fcQSplitterHandle_vtable_callback_tabletEvent(self: pointer, event: pointer
   let slotval1 = gen_qevent_types.QTabletEvent(h: event, owned: false)
   vtbl[].tabletEvent(self, slotval1)
 
-proc QSplitterHandleactionEvent*(self: gen_qsplitter_types.QSplitterHandle, event: gen_qevent_types.QActionEvent): void =
-  fcQSplitterHandle_virtualbase_actionEvent(self.h, event.h)
-
 proc fcQSplitterHandle_vtable_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSplitterHandleVTable](fcQSplitterHandle_vdata(self)[])
   let self = QSplitterHandle(h: self)
   let slotval1 = gen_qevent_types.QActionEvent(h: event, owned: false)
   vtbl[].actionEvent(self, slotval1)
-
-proc QSplitterHandledragEnterEvent*(self: gen_qsplitter_types.QSplitterHandle, event: gen_qevent_types.QDragEnterEvent): void =
-  fcQSplitterHandle_virtualbase_dragEnterEvent(self.h, event.h)
 
 proc fcQSplitterHandle_vtable_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSplitterHandleVTable](fcQSplitterHandle_vdata(self)[])
@@ -2528,17 +2599,11 @@ proc fcQSplitterHandle_vtable_callback_dragEnterEvent(self: pointer, event: poin
   let slotval1 = gen_qevent_types.QDragEnterEvent(h: event, owned: false)
   vtbl[].dragEnterEvent(self, slotval1)
 
-proc QSplitterHandledragMoveEvent*(self: gen_qsplitter_types.QSplitterHandle, event: gen_qevent_types.QDragMoveEvent): void =
-  fcQSplitterHandle_virtualbase_dragMoveEvent(self.h, event.h)
-
 proc fcQSplitterHandle_vtable_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSplitterHandleVTable](fcQSplitterHandle_vdata(self)[])
   let self = QSplitterHandle(h: self)
   let slotval1 = gen_qevent_types.QDragMoveEvent(h: event, owned: false)
   vtbl[].dragMoveEvent(self, slotval1)
-
-proc QSplitterHandledragLeaveEvent*(self: gen_qsplitter_types.QSplitterHandle, event: gen_qevent_types.QDragLeaveEvent): void =
-  fcQSplitterHandle_virtualbase_dragLeaveEvent(self.h, event.h)
 
 proc fcQSplitterHandle_vtable_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSplitterHandleVTable](fcQSplitterHandle_vdata(self)[])
@@ -2546,17 +2611,11 @@ proc fcQSplitterHandle_vtable_callback_dragLeaveEvent(self: pointer, event: poin
   let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event, owned: false)
   vtbl[].dragLeaveEvent(self, slotval1)
 
-proc QSplitterHandledropEvent*(self: gen_qsplitter_types.QSplitterHandle, event: gen_qevent_types.QDropEvent): void =
-  fcQSplitterHandle_virtualbase_dropEvent(self.h, event.h)
-
 proc fcQSplitterHandle_vtable_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSplitterHandleVTable](fcQSplitterHandle_vdata(self)[])
   let self = QSplitterHandle(h: self)
   let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
   vtbl[].dropEvent(self, slotval1)
-
-proc QSplitterHandleshowEvent*(self: gen_qsplitter_types.QSplitterHandle, event: gen_qevent_types.QShowEvent): void =
-  fcQSplitterHandle_virtualbase_showEvent(self.h, event.h)
 
 proc fcQSplitterHandle_vtable_callback_showEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSplitterHandleVTable](fcQSplitterHandle_vdata(self)[])
@@ -2564,17 +2623,11 @@ proc fcQSplitterHandle_vtable_callback_showEvent(self: pointer, event: pointer):
   let slotval1 = gen_qevent_types.QShowEvent(h: event, owned: false)
   vtbl[].showEvent(self, slotval1)
 
-proc QSplitterHandlehideEvent*(self: gen_qsplitter_types.QSplitterHandle, event: gen_qevent_types.QHideEvent): void =
-  fcQSplitterHandle_virtualbase_hideEvent(self.h, event.h)
-
 proc fcQSplitterHandle_vtable_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSplitterHandleVTable](fcQSplitterHandle_vdata(self)[])
   let self = QSplitterHandle(h: self)
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   vtbl[].hideEvent(self, slotval1)
-
-proc QSplitterHandlenativeEvent*(self: gen_qsplitter_types.QSplitterHandle, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool =
-  fcQSplitterHandle_virtualbase_nativeEvent(self.h, struct_miqt_string(data: if len(eventType) > 0: addr eventType[0] else: nil, len: csize_t(len(eventType))), message, resultVal)
 
 proc fcQSplitterHandle_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
   let vtbl = cast[ptr QSplitterHandleVTable](fcQSplitterHandle_vdata(self)[])
@@ -2588,17 +2641,11 @@ proc fcQSplitterHandle_vtable_callback_nativeEvent(self: pointer, eventType: str
   var virtualReturn = vtbl[].nativeEvent(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QSplitterHandlechangeEvent*(self: gen_qsplitter_types.QSplitterHandle, param1: gen_qcoreevent_types.QEvent): void =
-  fcQSplitterHandle_virtualbase_changeEvent(self.h, param1.h)
-
 proc fcQSplitterHandle_vtable_callback_changeEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSplitterHandleVTable](fcQSplitterHandle_vdata(self)[])
   let self = QSplitterHandle(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
   vtbl[].changeEvent(self, slotval1)
-
-proc QSplitterHandlemetric*(self: gen_qsplitter_types.QSplitterHandle, param1: cint): cint =
-  fcQSplitterHandle_virtualbase_metric(self.h, cint(param1))
 
 proc fcQSplitterHandle_vtable_callback_metric(self: pointer, param1: cint): cint {.cdecl.} =
   let vtbl = cast[ptr QSplitterHandleVTable](fcQSplitterHandle_vdata(self)[])
@@ -2607,17 +2654,11 @@ proc fcQSplitterHandle_vtable_callback_metric(self: pointer, param1: cint): cint
   var virtualReturn = vtbl[].metric(self, slotval1)
   virtualReturn
 
-proc QSplitterHandleinitPainter*(self: gen_qsplitter_types.QSplitterHandle, painter: gen_qpainter_types.QPainter): void =
-  fcQSplitterHandle_virtualbase_initPainter(self.h, painter.h)
-
 proc fcQSplitterHandle_vtable_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSplitterHandleVTable](fcQSplitterHandle_vdata(self)[])
   let self = QSplitterHandle(h: self)
   let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
   vtbl[].initPainter(self, slotval1)
-
-proc QSplitterHandleredirected*(self: gen_qsplitter_types.QSplitterHandle, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice =
-  gen_qpaintdevice_types.QPaintDevice(h: fcQSplitterHandle_virtualbase_redirected(self.h, offset.h), owned: false)
 
 proc fcQSplitterHandle_vtable_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QSplitterHandleVTable](fcQSplitterHandle_vdata(self)[])
@@ -2629,9 +2670,6 @@ proc fcQSplitterHandle_vtable_callback_redirected(self: pointer, offset: pointer
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QSplitterHandlesharedPainter*(self: gen_qsplitter_types.QSplitterHandle): gen_qpainter_types.QPainter =
-  gen_qpainter_types.QPainter(h: fcQSplitterHandle_virtualbase_sharedPainter(self.h), owned: false)
-
 proc fcQSplitterHandle_vtable_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QSplitterHandleVTable](fcQSplitterHandle_vdata(self)[])
   let self = QSplitterHandle(h: self)
@@ -2641,17 +2679,11 @@ proc fcQSplitterHandle_vtable_callback_sharedPainter(self: pointer): pointer {.c
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QSplitterHandleinputMethodEvent*(self: gen_qsplitter_types.QSplitterHandle, param1: gen_qevent_types.QInputMethodEvent): void =
-  fcQSplitterHandle_virtualbase_inputMethodEvent(self.h, param1.h)
-
 proc fcQSplitterHandle_vtable_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSplitterHandleVTable](fcQSplitterHandle_vdata(self)[])
   let self = QSplitterHandle(h: self)
   let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1, owned: false)
   vtbl[].inputMethodEvent(self, slotval1)
-
-proc QSplitterHandleinputMethodQuery*(self: gen_qsplitter_types.QSplitterHandle, param1: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQSplitterHandle_virtualbase_inputMethodQuery(self.h, cint(param1)), owned: true)
 
 proc fcQSplitterHandle_vtable_callback_inputMethodQuery(self: pointer, param1: cint): pointer {.cdecl.} =
   let vtbl = cast[ptr QSplitterHandleVTable](fcQSplitterHandle_vdata(self)[])
@@ -2663,18 +2695,12 @@ proc fcQSplitterHandle_vtable_callback_inputMethodQuery(self: pointer, param1: c
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QSplitterHandlefocusNextPrevChild*(self: gen_qsplitter_types.QSplitterHandle, next: bool): bool =
-  fcQSplitterHandle_virtualbase_focusNextPrevChild(self.h, next)
-
 proc fcQSplitterHandle_vtable_callback_focusNextPrevChild(self: pointer, next: bool): bool {.cdecl.} =
   let vtbl = cast[ptr QSplitterHandleVTable](fcQSplitterHandle_vdata(self)[])
   let self = QSplitterHandle(h: self)
   let slotval1 = next
   var virtualReturn = vtbl[].focusNextPrevChild(self, slotval1)
   virtualReturn
-
-proc QSplitterHandleeventFilter*(self: gen_qsplitter_types.QSplitterHandle, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
-  fcQSplitterHandle_virtualbase_eventFilter(self.h, watched.h, event.h)
 
 proc fcQSplitterHandle_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QSplitterHandleVTable](fcQSplitterHandle_vdata(self)[])
@@ -2684,17 +2710,11 @@ proc fcQSplitterHandle_vtable_callback_eventFilter(self: pointer, watched: point
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
-proc QSplitterHandletimerEvent*(self: gen_qsplitter_types.QSplitterHandle, event: gen_qcoreevent_types.QTimerEvent): void =
-  fcQSplitterHandle_virtualbase_timerEvent(self.h, event.h)
-
 proc fcQSplitterHandle_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSplitterHandleVTable](fcQSplitterHandle_vdata(self)[])
   let self = QSplitterHandle(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
-
-proc QSplitterHandlechildEvent*(self: gen_qsplitter_types.QSplitterHandle, event: gen_qcoreevent_types.QChildEvent): void =
-  fcQSplitterHandle_virtualbase_childEvent(self.h, event.h)
 
 proc fcQSplitterHandle_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSplitterHandleVTable](fcQSplitterHandle_vdata(self)[])
@@ -2702,26 +2722,17 @@ proc fcQSplitterHandle_vtable_callback_childEvent(self: pointer, event: pointer)
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
-proc QSplitterHandlecustomEvent*(self: gen_qsplitter_types.QSplitterHandle, event: gen_qcoreevent_types.QEvent): void =
-  fcQSplitterHandle_virtualbase_customEvent(self.h, event.h)
-
 proc fcQSplitterHandle_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSplitterHandleVTable](fcQSplitterHandle_vdata(self)[])
   let self = QSplitterHandle(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
-proc QSplitterHandleconnectNotify*(self: gen_qsplitter_types.QSplitterHandle, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQSplitterHandle_virtualbase_connectNotify(self.h, signal.h)
-
 proc fcQSplitterHandle_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSplitterHandleVTable](fcQSplitterHandle_vdata(self)[])
   let self = QSplitterHandle(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
-
-proc QSplitterHandledisconnectNotify*(self: gen_qsplitter_types.QSplitterHandle, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQSplitterHandle_virtualbase_disconnectNotify(self.h, signal.h)
 
 proc fcQSplitterHandle_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSplitterHandleVTable](fcQSplitterHandle_vdata(self)[])
@@ -2731,23 +2742,119 @@ proc fcQSplitterHandle_vtable_callback_disconnectNotify(self: pointer, signal: p
 
 type VirtualQSplitterHandle* {.inheritable.} = ref object of QSplitterHandle
   vtbl*: cQSplitterHandleVTable
+
 method metaObject*(self: VirtualQSplitterHandle): gen_qobjectdefs_types.QMetaObject {.base.} =
   QSplitterHandlemetaObject(self[])
+method metacast*(self: VirtualQSplitterHandle, param1: cstring): pointer {.base.} =
+  QSplitterHandlemetacast(self[], param1)
+method metacall*(self: VirtualQSplitterHandle, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QSplitterHandlemetacall(self[], param1, param2, param3)
+method sizeHint*(self: VirtualQSplitterHandle): gen_qsize_types.QSize {.base.} =
+  QSplitterHandlesizeHint(self[])
+method paintEvent*(self: VirtualQSplitterHandle, param1: gen_qevent_types.QPaintEvent): void {.base.} =
+  QSplitterHandlepaintEvent(self[], param1)
+method mouseMoveEvent*(self: VirtualQSplitterHandle, param1: gen_qevent_types.QMouseEvent): void {.base.} =
+  QSplitterHandlemouseMoveEvent(self[], param1)
+method mousePressEvent*(self: VirtualQSplitterHandle, param1: gen_qevent_types.QMouseEvent): void {.base.} =
+  QSplitterHandlemousePressEvent(self[], param1)
+method mouseReleaseEvent*(self: VirtualQSplitterHandle, param1: gen_qevent_types.QMouseEvent): void {.base.} =
+  QSplitterHandlemouseReleaseEvent(self[], param1)
+method resizeEvent*(self: VirtualQSplitterHandle, param1: gen_qevent_types.QResizeEvent): void {.base.} =
+  QSplitterHandleresizeEvent(self[], param1)
+method event*(self: VirtualQSplitterHandle, param1: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QSplitterHandleevent(self[], param1)
+method devType*(self: VirtualQSplitterHandle): cint {.base.} =
+  QSplitterHandledevType(self[])
+method setVisible*(self: VirtualQSplitterHandle, visible: bool): void {.base.} =
+  QSplitterHandlesetVisible(self[], visible)
+method minimumSizeHint*(self: VirtualQSplitterHandle): gen_qsize_types.QSize {.base.} =
+  QSplitterHandleminimumSizeHint(self[])
+method heightForWidth*(self: VirtualQSplitterHandle, param1: cint): cint {.base.} =
+  QSplitterHandleheightForWidth(self[], param1)
+method hasHeightForWidth*(self: VirtualQSplitterHandle): bool {.base.} =
+  QSplitterHandlehasHeightForWidth(self[])
+method paintEngine*(self: VirtualQSplitterHandle): gen_qpaintengine_types.QPaintEngine {.base.} =
+  QSplitterHandlepaintEngine(self[])
+method mouseDoubleClickEvent*(self: VirtualQSplitterHandle, event: gen_qevent_types.QMouseEvent): void {.base.} =
+  QSplitterHandlemouseDoubleClickEvent(self[], event)
+method wheelEvent*(self: VirtualQSplitterHandle, event: gen_qevent_types.QWheelEvent): void {.base.} =
+  QSplitterHandlewheelEvent(self[], event)
+method keyPressEvent*(self: VirtualQSplitterHandle, event: gen_qevent_types.QKeyEvent): void {.base.} =
+  QSplitterHandlekeyPressEvent(self[], event)
+method keyReleaseEvent*(self: VirtualQSplitterHandle, event: gen_qevent_types.QKeyEvent): void {.base.} =
+  QSplitterHandlekeyReleaseEvent(self[], event)
+method focusInEvent*(self: VirtualQSplitterHandle, event: gen_qevent_types.QFocusEvent): void {.base.} =
+  QSplitterHandlefocusInEvent(self[], event)
+method focusOutEvent*(self: VirtualQSplitterHandle, event: gen_qevent_types.QFocusEvent): void {.base.} =
+  QSplitterHandlefocusOutEvent(self[], event)
+method enterEvent*(self: VirtualQSplitterHandle, event: gen_qevent_types.QEnterEvent): void {.base.} =
+  QSplitterHandleenterEvent(self[], event)
+method leaveEvent*(self: VirtualQSplitterHandle, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QSplitterHandleleaveEvent(self[], event)
+method moveEvent*(self: VirtualQSplitterHandle, event: gen_qevent_types.QMoveEvent): void {.base.} =
+  QSplitterHandlemoveEvent(self[], event)
+method closeEvent*(self: VirtualQSplitterHandle, event: gen_qevent_types.QCloseEvent): void {.base.} =
+  QSplitterHandlecloseEvent(self[], event)
+method contextMenuEvent*(self: VirtualQSplitterHandle, event: gen_qevent_types.QContextMenuEvent): void {.base.} =
+  QSplitterHandlecontextMenuEvent(self[], event)
+method tabletEvent*(self: VirtualQSplitterHandle, event: gen_qevent_types.QTabletEvent): void {.base.} =
+  QSplitterHandletabletEvent(self[], event)
+method actionEvent*(self: VirtualQSplitterHandle, event: gen_qevent_types.QActionEvent): void {.base.} =
+  QSplitterHandleactionEvent(self[], event)
+method dragEnterEvent*(self: VirtualQSplitterHandle, event: gen_qevent_types.QDragEnterEvent): void {.base.} =
+  QSplitterHandledragEnterEvent(self[], event)
+method dragMoveEvent*(self: VirtualQSplitterHandle, event: gen_qevent_types.QDragMoveEvent): void {.base.} =
+  QSplitterHandledragMoveEvent(self[], event)
+method dragLeaveEvent*(self: VirtualQSplitterHandle, event: gen_qevent_types.QDragLeaveEvent): void {.base.} =
+  QSplitterHandledragLeaveEvent(self[], event)
+method dropEvent*(self: VirtualQSplitterHandle, event: gen_qevent_types.QDropEvent): void {.base.} =
+  QSplitterHandledropEvent(self[], event)
+method showEvent*(self: VirtualQSplitterHandle, event: gen_qevent_types.QShowEvent): void {.base.} =
+  QSplitterHandleshowEvent(self[], event)
+method hideEvent*(self: VirtualQSplitterHandle, event: gen_qevent_types.QHideEvent): void {.base.} =
+  QSplitterHandlehideEvent(self[], event)
+method nativeEvent*(self: VirtualQSplitterHandle, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
+  QSplitterHandlenativeEvent(self[], eventType, message, resultVal)
+method changeEvent*(self: VirtualQSplitterHandle, param1: gen_qcoreevent_types.QEvent): void {.base.} =
+  QSplitterHandlechangeEvent(self[], param1)
+method metric*(self: VirtualQSplitterHandle, param1: cint): cint {.base.} =
+  QSplitterHandlemetric(self[], param1)
+method initPainter*(self: VirtualQSplitterHandle, painter: gen_qpainter_types.QPainter): void {.base.} =
+  QSplitterHandleinitPainter(self[], painter)
+method redirected*(self: VirtualQSplitterHandle, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.base.} =
+  QSplitterHandleredirected(self[], offset)
+method sharedPainter*(self: VirtualQSplitterHandle): gen_qpainter_types.QPainter {.base.} =
+  QSplitterHandlesharedPainter(self[])
+method inputMethodEvent*(self: VirtualQSplitterHandle, param1: gen_qevent_types.QInputMethodEvent): void {.base.} =
+  QSplitterHandleinputMethodEvent(self[], param1)
+method inputMethodQuery*(self: VirtualQSplitterHandle, param1: cint): gen_qvariant_types.QVariant {.base.} =
+  QSplitterHandleinputMethodQuery(self[], param1)
+method focusNextPrevChild*(self: VirtualQSplitterHandle, next: bool): bool {.base.} =
+  QSplitterHandlefocusNextPrevChild(self[], next)
+method eventFilter*(self: VirtualQSplitterHandle, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QSplitterHandleeventFilter(self[], watched, event)
+method timerEvent*(self: VirtualQSplitterHandle, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QSplitterHandletimerEvent(self[], event)
+method childEvent*(self: VirtualQSplitterHandle, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QSplitterHandlechildEvent(self[], event)
+method customEvent*(self: VirtualQSplitterHandle, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QSplitterHandlecustomEvent(self[], event)
+method connectNotify*(self: VirtualQSplitterHandle, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QSplitterHandleconnectNotify(self[], signal)
+method disconnectNotify*(self: VirtualQSplitterHandle, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QSplitterHandledisconnectNotify(self[], signal)
+
 proc fcQSplitterHandle_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQSplitterHandle](fcQSplitterHandle_vdata(self)[])
   var virtualReturn = inst.metaObject()
   virtualReturn.h
 
-method metacast*(self: VirtualQSplitterHandle, param1: cstring): pointer {.base.} =
-  QSplitterHandlemetacast(self[], param1)
 proc fcQSplitterHandle_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQSplitterHandle](fcQSplitterHandle_vdata(self)[])
   let slotval1 = (param1)
   var virtualReturn = inst.metacast(slotval1)
   virtualReturn
 
-method metacall*(self: VirtualQSplitterHandle, param1: cint, param2: cint, param3: pointer): cint {.base.} =
-  QSplitterHandlemetacall(self[], param1, param2, param3)
 proc fcQSplitterHandle_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQSplitterHandle](fcQSplitterHandle_vdata(self)[])
   let slotval1 = cint(param1)
@@ -2756,234 +2863,168 @@ proc fcQSplitterHandle_method_callback_metacall(self: pointer, param1: cint, par
   var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
-method sizeHint*(self: VirtualQSplitterHandle): gen_qsize_types.QSize {.base.} =
-  QSplitterHandlesizeHint(self[])
 proc fcQSplitterHandle_method_callback_sizeHint(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQSplitterHandle](fcQSplitterHandle_vdata(self)[])
   var virtualReturn = inst.sizeHint()
   virtualReturn.h
 
-method paintEvent*(self: VirtualQSplitterHandle, param1: gen_qevent_types.QPaintEvent): void {.base.} =
-  QSplitterHandlepaintEvent(self[], param1)
 proc fcQSplitterHandle_method_callback_paintEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSplitterHandle](fcQSplitterHandle_vdata(self)[])
   let slotval1 = gen_qevent_types.QPaintEvent(h: param1, owned: false)
   inst.paintEvent(slotval1)
 
-method mouseMoveEvent*(self: VirtualQSplitterHandle, param1: gen_qevent_types.QMouseEvent): void {.base.} =
-  QSplitterHandlemouseMoveEvent(self[], param1)
 proc fcQSplitterHandle_method_callback_mouseMoveEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSplitterHandle](fcQSplitterHandle_vdata(self)[])
   let slotval1 = gen_qevent_types.QMouseEvent(h: param1, owned: false)
   inst.mouseMoveEvent(slotval1)
 
-method mousePressEvent*(self: VirtualQSplitterHandle, param1: gen_qevent_types.QMouseEvent): void {.base.} =
-  QSplitterHandlemousePressEvent(self[], param1)
 proc fcQSplitterHandle_method_callback_mousePressEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSplitterHandle](fcQSplitterHandle_vdata(self)[])
   let slotval1 = gen_qevent_types.QMouseEvent(h: param1, owned: false)
   inst.mousePressEvent(slotval1)
 
-method mouseReleaseEvent*(self: VirtualQSplitterHandle, param1: gen_qevent_types.QMouseEvent): void {.base.} =
-  QSplitterHandlemouseReleaseEvent(self[], param1)
 proc fcQSplitterHandle_method_callback_mouseReleaseEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSplitterHandle](fcQSplitterHandle_vdata(self)[])
   let slotval1 = gen_qevent_types.QMouseEvent(h: param1, owned: false)
   inst.mouseReleaseEvent(slotval1)
 
-method resizeEvent*(self: VirtualQSplitterHandle, param1: gen_qevent_types.QResizeEvent): void {.base.} =
-  QSplitterHandleresizeEvent(self[], param1)
 proc fcQSplitterHandle_method_callback_resizeEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSplitterHandle](fcQSplitterHandle_vdata(self)[])
   let slotval1 = gen_qevent_types.QResizeEvent(h: param1, owned: false)
   inst.resizeEvent(slotval1)
 
-method event*(self: VirtualQSplitterHandle, param1: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QSplitterHandleevent(self[], param1)
 proc fcQSplitterHandle_method_callback_event(self: pointer, param1: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQSplitterHandle](fcQSplitterHandle_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
-method devType*(self: VirtualQSplitterHandle): cint {.base.} =
-  QSplitterHandledevType(self[])
 proc fcQSplitterHandle_method_callback_devType(self: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQSplitterHandle](fcQSplitterHandle_vdata(self)[])
   var virtualReturn = inst.devType()
   virtualReturn
 
-method setVisible*(self: VirtualQSplitterHandle, visible: bool): void {.base.} =
-  QSplitterHandlesetVisible(self[], visible)
 proc fcQSplitterHandle_method_callback_setVisible(self: pointer, visible: bool): void {.cdecl.} =
   let inst = cast[VirtualQSplitterHandle](fcQSplitterHandle_vdata(self)[])
   let slotval1 = visible
   inst.setVisible(slotval1)
 
-method minimumSizeHint*(self: VirtualQSplitterHandle): gen_qsize_types.QSize {.base.} =
-  QSplitterHandleminimumSizeHint(self[])
 proc fcQSplitterHandle_method_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQSplitterHandle](fcQSplitterHandle_vdata(self)[])
   var virtualReturn = inst.minimumSizeHint()
   virtualReturn.h
 
-method heightForWidth*(self: VirtualQSplitterHandle, param1: cint): cint {.base.} =
-  QSplitterHandleheightForWidth(self[], param1)
 proc fcQSplitterHandle_method_callback_heightForWidth(self: pointer, param1: cint): cint {.cdecl.} =
   let inst = cast[VirtualQSplitterHandle](fcQSplitterHandle_vdata(self)[])
   let slotval1 = param1
   var virtualReturn = inst.heightForWidth(slotval1)
   virtualReturn
 
-method hasHeightForWidth*(self: VirtualQSplitterHandle): bool {.base.} =
-  QSplitterHandlehasHeightForWidth(self[])
 proc fcQSplitterHandle_method_callback_hasHeightForWidth(self: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQSplitterHandle](fcQSplitterHandle_vdata(self)[])
   var virtualReturn = inst.hasHeightForWidth()
   virtualReturn
 
-method paintEngine*(self: VirtualQSplitterHandle): gen_qpaintengine_types.QPaintEngine {.base.} =
-  QSplitterHandlepaintEngine(self[])
 proc fcQSplitterHandle_method_callback_paintEngine(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQSplitterHandle](fcQSplitterHandle_vdata(self)[])
   var virtualReturn = inst.paintEngine()
   virtualReturn.h
 
-method mouseDoubleClickEvent*(self: VirtualQSplitterHandle, event: gen_qevent_types.QMouseEvent): void {.base.} =
-  QSplitterHandlemouseDoubleClickEvent(self[], event)
 proc fcQSplitterHandle_method_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSplitterHandle](fcQSplitterHandle_vdata(self)[])
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mouseDoubleClickEvent(slotval1)
 
-method wheelEvent*(self: VirtualQSplitterHandle, event: gen_qevent_types.QWheelEvent): void {.base.} =
-  QSplitterHandlewheelEvent(self[], event)
 proc fcQSplitterHandle_method_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSplitterHandle](fcQSplitterHandle_vdata(self)[])
   let slotval1 = gen_qevent_types.QWheelEvent(h: event, owned: false)
   inst.wheelEvent(slotval1)
 
-method keyPressEvent*(self: VirtualQSplitterHandle, event: gen_qevent_types.QKeyEvent): void {.base.} =
-  QSplitterHandlekeyPressEvent(self[], event)
 proc fcQSplitterHandle_method_callback_keyPressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSplitterHandle](fcQSplitterHandle_vdata(self)[])
   let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   inst.keyPressEvent(slotval1)
 
-method keyReleaseEvent*(self: VirtualQSplitterHandle, event: gen_qevent_types.QKeyEvent): void {.base.} =
-  QSplitterHandlekeyReleaseEvent(self[], event)
 proc fcQSplitterHandle_method_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSplitterHandle](fcQSplitterHandle_vdata(self)[])
   let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   inst.keyReleaseEvent(slotval1)
 
-method focusInEvent*(self: VirtualQSplitterHandle, event: gen_qevent_types.QFocusEvent): void {.base.} =
-  QSplitterHandlefocusInEvent(self[], event)
 proc fcQSplitterHandle_method_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSplitterHandle](fcQSplitterHandle_vdata(self)[])
   let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   inst.focusInEvent(slotval1)
 
-method focusOutEvent*(self: VirtualQSplitterHandle, event: gen_qevent_types.QFocusEvent): void {.base.} =
-  QSplitterHandlefocusOutEvent(self[], event)
 proc fcQSplitterHandle_method_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSplitterHandle](fcQSplitterHandle_vdata(self)[])
   let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   inst.focusOutEvent(slotval1)
 
-method enterEvent*(self: VirtualQSplitterHandle, event: gen_qevent_types.QEnterEvent): void {.base.} =
-  QSplitterHandleenterEvent(self[], event)
 proc fcQSplitterHandle_method_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSplitterHandle](fcQSplitterHandle_vdata(self)[])
   let slotval1 = gen_qevent_types.QEnterEvent(h: event, owned: false)
   inst.enterEvent(slotval1)
 
-method leaveEvent*(self: VirtualQSplitterHandle, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QSplitterHandleleaveEvent(self[], event)
 proc fcQSplitterHandle_method_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSplitterHandle](fcQSplitterHandle_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.leaveEvent(slotval1)
 
-method moveEvent*(self: VirtualQSplitterHandle, event: gen_qevent_types.QMoveEvent): void {.base.} =
-  QSplitterHandlemoveEvent(self[], event)
 proc fcQSplitterHandle_method_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSplitterHandle](fcQSplitterHandle_vdata(self)[])
   let slotval1 = gen_qevent_types.QMoveEvent(h: event, owned: false)
   inst.moveEvent(slotval1)
 
-method closeEvent*(self: VirtualQSplitterHandle, event: gen_qevent_types.QCloseEvent): void {.base.} =
-  QSplitterHandlecloseEvent(self[], event)
 proc fcQSplitterHandle_method_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSplitterHandle](fcQSplitterHandle_vdata(self)[])
   let slotval1 = gen_qevent_types.QCloseEvent(h: event, owned: false)
   inst.closeEvent(slotval1)
 
-method contextMenuEvent*(self: VirtualQSplitterHandle, event: gen_qevent_types.QContextMenuEvent): void {.base.} =
-  QSplitterHandlecontextMenuEvent(self[], event)
 proc fcQSplitterHandle_method_callback_contextMenuEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSplitterHandle](fcQSplitterHandle_vdata(self)[])
   let slotval1 = gen_qevent_types.QContextMenuEvent(h: event, owned: false)
   inst.contextMenuEvent(slotval1)
 
-method tabletEvent*(self: VirtualQSplitterHandle, event: gen_qevent_types.QTabletEvent): void {.base.} =
-  QSplitterHandletabletEvent(self[], event)
 proc fcQSplitterHandle_method_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSplitterHandle](fcQSplitterHandle_vdata(self)[])
   let slotval1 = gen_qevent_types.QTabletEvent(h: event, owned: false)
   inst.tabletEvent(slotval1)
 
-method actionEvent*(self: VirtualQSplitterHandle, event: gen_qevent_types.QActionEvent): void {.base.} =
-  QSplitterHandleactionEvent(self[], event)
 proc fcQSplitterHandle_method_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSplitterHandle](fcQSplitterHandle_vdata(self)[])
   let slotval1 = gen_qevent_types.QActionEvent(h: event, owned: false)
   inst.actionEvent(slotval1)
 
-method dragEnterEvent*(self: VirtualQSplitterHandle, event: gen_qevent_types.QDragEnterEvent): void {.base.} =
-  QSplitterHandledragEnterEvent(self[], event)
 proc fcQSplitterHandle_method_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSplitterHandle](fcQSplitterHandle_vdata(self)[])
   let slotval1 = gen_qevent_types.QDragEnterEvent(h: event, owned: false)
   inst.dragEnterEvent(slotval1)
 
-method dragMoveEvent*(self: VirtualQSplitterHandle, event: gen_qevent_types.QDragMoveEvent): void {.base.} =
-  QSplitterHandledragMoveEvent(self[], event)
 proc fcQSplitterHandle_method_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSplitterHandle](fcQSplitterHandle_vdata(self)[])
   let slotval1 = gen_qevent_types.QDragMoveEvent(h: event, owned: false)
   inst.dragMoveEvent(slotval1)
 
-method dragLeaveEvent*(self: VirtualQSplitterHandle, event: gen_qevent_types.QDragLeaveEvent): void {.base.} =
-  QSplitterHandledragLeaveEvent(self[], event)
 proc fcQSplitterHandle_method_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSplitterHandle](fcQSplitterHandle_vdata(self)[])
   let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event, owned: false)
   inst.dragLeaveEvent(slotval1)
 
-method dropEvent*(self: VirtualQSplitterHandle, event: gen_qevent_types.QDropEvent): void {.base.} =
-  QSplitterHandledropEvent(self[], event)
 proc fcQSplitterHandle_method_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSplitterHandle](fcQSplitterHandle_vdata(self)[])
   let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
   inst.dropEvent(slotval1)
 
-method showEvent*(self: VirtualQSplitterHandle, event: gen_qevent_types.QShowEvent): void {.base.} =
-  QSplitterHandleshowEvent(self[], event)
 proc fcQSplitterHandle_method_callback_showEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSplitterHandle](fcQSplitterHandle_vdata(self)[])
   let slotval1 = gen_qevent_types.QShowEvent(h: event, owned: false)
   inst.showEvent(slotval1)
 
-method hideEvent*(self: VirtualQSplitterHandle, event: gen_qevent_types.QHideEvent): void {.base.} =
-  QSplitterHandlehideEvent(self[], event)
 proc fcQSplitterHandle_method_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSplitterHandle](fcQSplitterHandle_vdata(self)[])
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   inst.hideEvent(slotval1)
 
-method nativeEvent*(self: VirtualQSplitterHandle, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
-  QSplitterHandlenativeEvent(self[], eventType, message, resultVal)
 proc fcQSplitterHandle_method_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
   let inst = cast[VirtualQSplitterHandle](fcQSplitterHandle_vdata(self)[])
   var veventType_bytearray = eventType
@@ -2995,68 +3036,50 @@ proc fcQSplitterHandle_method_callback_nativeEvent(self: pointer, eventType: str
   var virtualReturn = inst.nativeEvent(slotval1, slotval2, slotval3)
   virtualReturn
 
-method changeEvent*(self: VirtualQSplitterHandle, param1: gen_qcoreevent_types.QEvent): void {.base.} =
-  QSplitterHandlechangeEvent(self[], param1)
 proc fcQSplitterHandle_method_callback_changeEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSplitterHandle](fcQSplitterHandle_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
   inst.changeEvent(slotval1)
 
-method metric*(self: VirtualQSplitterHandle, param1: cint): cint {.base.} =
-  QSplitterHandlemetric(self[], param1)
 proc fcQSplitterHandle_method_callback_metric(self: pointer, param1: cint): cint {.cdecl.} =
   let inst = cast[VirtualQSplitterHandle](fcQSplitterHandle_vdata(self)[])
   let slotval1 = cint(param1)
   var virtualReturn = inst.metric(slotval1)
   virtualReturn
 
-method initPainter*(self: VirtualQSplitterHandle, painter: gen_qpainter_types.QPainter): void {.base.} =
-  QSplitterHandleinitPainter(self[], painter)
 proc fcQSplitterHandle_method_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSplitterHandle](fcQSplitterHandle_vdata(self)[])
   let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
   inst.initPainter(slotval1)
 
-method redirected*(self: VirtualQSplitterHandle, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.base.} =
-  QSplitterHandleredirected(self[], offset)
 proc fcQSplitterHandle_method_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQSplitterHandle](fcQSplitterHandle_vdata(self)[])
   let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
   var virtualReturn = inst.redirected(slotval1)
   virtualReturn.h
 
-method sharedPainter*(self: VirtualQSplitterHandle): gen_qpainter_types.QPainter {.base.} =
-  QSplitterHandlesharedPainter(self[])
 proc fcQSplitterHandle_method_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQSplitterHandle](fcQSplitterHandle_vdata(self)[])
   var virtualReturn = inst.sharedPainter()
   virtualReturn.h
 
-method inputMethodEvent*(self: VirtualQSplitterHandle, param1: gen_qevent_types.QInputMethodEvent): void {.base.} =
-  QSplitterHandleinputMethodEvent(self[], param1)
 proc fcQSplitterHandle_method_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSplitterHandle](fcQSplitterHandle_vdata(self)[])
   let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1, owned: false)
   inst.inputMethodEvent(slotval1)
 
-method inputMethodQuery*(self: VirtualQSplitterHandle, param1: cint): gen_qvariant_types.QVariant {.base.} =
-  QSplitterHandleinputMethodQuery(self[], param1)
 proc fcQSplitterHandle_method_callback_inputMethodQuery(self: pointer, param1: cint): pointer {.cdecl.} =
   let inst = cast[VirtualQSplitterHandle](fcQSplitterHandle_vdata(self)[])
   let slotval1 = cint(param1)
   var virtualReturn = inst.inputMethodQuery(slotval1)
   virtualReturn.h
 
-method focusNextPrevChild*(self: VirtualQSplitterHandle, next: bool): bool {.base.} =
-  QSplitterHandlefocusNextPrevChild(self[], next)
 proc fcQSplitterHandle_method_callback_focusNextPrevChild(self: pointer, next: bool): bool {.cdecl.} =
   let inst = cast[VirtualQSplitterHandle](fcQSplitterHandle_vdata(self)[])
   let slotval1 = next
   var virtualReturn = inst.focusNextPrevChild(slotval1)
   virtualReturn
 
-method eventFilter*(self: VirtualQSplitterHandle, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QSplitterHandleeventFilter(self[], watched, event)
 proc fcQSplitterHandle_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQSplitterHandle](fcQSplitterHandle_vdata(self)[])
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
@@ -3064,40 +3087,31 @@ proc fcQSplitterHandle_method_callback_eventFilter(self: pointer, watched: point
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
-method timerEvent*(self: VirtualQSplitterHandle, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
-  QSplitterHandletimerEvent(self[], event)
 proc fcQSplitterHandle_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSplitterHandle](fcQSplitterHandle_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
-method childEvent*(self: VirtualQSplitterHandle, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
-  QSplitterHandlechildEvent(self[], event)
 proc fcQSplitterHandle_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSplitterHandle](fcQSplitterHandle_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
-method customEvent*(self: VirtualQSplitterHandle, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QSplitterHandlecustomEvent(self[], event)
 proc fcQSplitterHandle_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSplitterHandle](fcQSplitterHandle_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
-method connectNotify*(self: VirtualQSplitterHandle, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QSplitterHandleconnectNotify(self[], signal)
 proc fcQSplitterHandle_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSplitterHandle](fcQSplitterHandle_vdata(self)[])
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
-method disconnectNotify*(self: VirtualQSplitterHandle, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QSplitterHandledisconnectNotify(self[], signal)
 proc fcQSplitterHandle_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSplitterHandle](fcQSplitterHandle_vdata(self)[])
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
+
 
 proc moveSplitter*(self: gen_qsplitter_types.QSplitterHandle, p: cint): void =
   fcQSplitterHandle_protectedbase_moveSplitter(self.h, p)

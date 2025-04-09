@@ -147,6 +147,7 @@ proc fcQNetworkProxyFactory_operatorAssign(self: pointer, param1: pointer): void
 proc fcQNetworkProxyFactory_systemProxyForQuery1(query: pointer): struct_miqt_array {.importc: "QNetworkProxyFactory_systemProxyForQuery1".}
 proc fcQNetworkProxyFactory_vdata(self: pointer): ptr pointer {.importc: "QNetworkProxyFactory_vdata".}
 proc fvdata_cQNetworkProxyFactory(self: pointer): pointer {.importc: "vdata_QNetworkProxyFactory".}
+
 type cQNetworkProxyFactoryVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   queryProxy*: proc(self: pointer, query: pointer): struct_miqt_array {.cdecl, raises: [], gcsafe.}
@@ -422,9 +423,12 @@ proc systemProxyForQuery*(_: type gen_qnetworkproxy_types.QNetworkProxyFactory, 
   vx_ret
 
 type QNetworkProxyFactoryqueryProxyProc* = proc(self: QNetworkProxyFactory, query: gen_qnetworkproxy_types.QNetworkProxyQuery): seq[gen_qnetworkproxy_types.QNetworkProxy] {.raises: [], gcsafe.}
+
 type QNetworkProxyFactoryVTable* {.inheritable, pure.} = object
   vtbl: cQNetworkProxyFactoryVTable
   queryProxy*: QNetworkProxyFactoryqueryProxyProc
+
+
 proc fcQNetworkProxyFactory_vtable_callback_queryProxy(self: pointer, query: pointer): struct_miqt_array {.cdecl.} =
   let vtbl = cast[ptr QNetworkProxyFactoryVTable](fcQNetworkProxyFactory_vdata(self)[])
   let self = QNetworkProxyFactory(h: self)
@@ -441,8 +445,10 @@ proc fcQNetworkProxyFactory_vtable_callback_queryProxy(self: pointer, query: poi
 
 type VirtualQNetworkProxyFactory* {.inheritable.} = ref object of QNetworkProxyFactory
   vtbl*: cQNetworkProxyFactoryVTable
+
 method queryProxy*(self: VirtualQNetworkProxyFactory, query: gen_qnetworkproxy_types.QNetworkProxyQuery): seq[gen_qnetworkproxy_types.QNetworkProxy] {.base.} =
-  raiseAssert("missing implementation of QNetworkProxyFactory_virtualbase_queryProxy")
+  raiseAssert("missing implementation of QNetworkProxyFactory.queryProxy")
+
 proc fcQNetworkProxyFactory_method_callback_queryProxy(self: pointer, query: pointer): struct_miqt_array {.cdecl.} =
   let inst = cast[VirtualQNetworkProxyFactory](fcQNetworkProxyFactory_vdata(self)[])
   let slotval1 = gen_qnetworkproxy_types.QNetworkProxyQuery(h: query, owned: false)
@@ -452,6 +458,7 @@ proc fcQNetworkProxyFactory_method_callback_queryProxy(self: pointer, query: poi
     virtualReturn_CArray[i] = virtualReturn[i].h
 
   struct_miqt_array(len: csize_t(len(virtualReturn)), data: if len(virtualReturn) == 0: nil else: addr(virtualReturn_CArray[0]))
+
 
 proc create*(T: type gen_qnetworkproxy_types.QNetworkProxyFactory,
     vtbl: ref QNetworkProxyFactoryVTable = nil): gen_qnetworkproxy_types.QNetworkProxyFactory =

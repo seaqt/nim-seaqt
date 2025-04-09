@@ -44,6 +44,7 @@ proc fcQRunnable_autoDelete(self: pointer): bool {.importc: "QRunnable_autoDelet
 proc fcQRunnable_setAutoDelete(self: pointer, autoDelete: bool): void {.importc: "QRunnable_setAutoDelete".}
 proc fcQRunnable_vdata(self: pointer): ptr pointer {.importc: "QRunnable_vdata".}
 proc fvdata_cQRunnable(self: pointer): pointer {.importc: "vdata_QRunnable".}
+
 type cQRunnableVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   run*: proc(self: pointer): void {.cdecl, raises: [], gcsafe.}
@@ -59,9 +60,12 @@ proc setAutoDelete*(self: gen_qrunnable_types.QRunnable, autoDelete: bool): void
   fcQRunnable_setAutoDelete(self.h, autoDelete)
 
 type QRunnablerunProc* = proc(self: QRunnable): void {.raises: [], gcsafe.}
+
 type QRunnableVTable* {.inheritable, pure.} = object
   vtbl: cQRunnableVTable
   run*: QRunnablerunProc
+
+
 proc fcQRunnable_vtable_callback_run(self: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QRunnableVTable](fcQRunnable_vdata(self)[])
   let self = QRunnable(h: self)
@@ -69,11 +73,14 @@ proc fcQRunnable_vtable_callback_run(self: pointer): void {.cdecl.} =
 
 type VirtualQRunnable* {.inheritable.} = ref object of QRunnable
   vtbl*: cQRunnableVTable
+
 method run*(self: VirtualQRunnable): void {.base.} =
-  raiseAssert("missing implementation of QRunnable_virtualbase_run")
+  raiseAssert("missing implementation of QRunnable.run")
+
 proc fcQRunnable_method_callback_run(self: pointer): void {.cdecl.} =
   let inst = cast[VirtualQRunnable](fcQRunnable_vdata(self)[])
   inst.run()
+
 
 proc create*(T: type gen_qrunnable_types.QRunnable,
     vtbl: ref QRunnableVTable = nil): gen_qrunnable_types.QRunnable =

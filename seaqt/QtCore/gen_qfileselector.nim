@@ -67,6 +67,7 @@ proc fcQFileSelector_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: 
 proc fcQFileSelector_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QFileSelector_tr3".}
 proc fcQFileSelector_vdata(self: pointer): ptr pointer {.importc: "QFileSelector_vdata".}
 proc fvdata_cQFileSelector(self: pointer): pointer {.importc: "vdata_QFileSelector".}
+
 type cQFileSelectorVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -174,6 +175,7 @@ type QFileSelectorchildEventProc* = proc(self: QFileSelector, event: gen_qcoreev
 type QFileSelectorcustomEventProc* = proc(self: QFileSelector, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QFileSelectorconnectNotifyProc* = proc(self: QFileSelector, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QFileSelectordisconnectNotifyProc* = proc(self: QFileSelector, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+
 type QFileSelectorVTable* {.inheritable, pure.} = object
   vtbl: cQFileSelectorVTable
   metaObject*: QFileSelectormetaObjectProc
@@ -186,8 +188,37 @@ type QFileSelectorVTable* {.inheritable, pure.} = object
   customEvent*: QFileSelectorcustomEventProc
   connectNotify*: QFileSelectorconnectNotifyProc
   disconnectNotify*: QFileSelectordisconnectNotifyProc
+
 proc QFileSelectormetaObject*(self: gen_qfileselector_types.QFileSelector): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQFileSelector_virtualbase_metaObject(self.h), owned: false)
+
+proc QFileSelectormetacast*(self: gen_qfileselector_types.QFileSelector, param1: cstring): pointer =
+  fcQFileSelector_virtualbase_metacast(self.h, param1)
+
+proc QFileSelectormetacall*(self: gen_qfileselector_types.QFileSelector, param1: cint, param2: cint, param3: pointer): cint =
+  fcQFileSelector_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+proc QFileSelectorevent*(self: gen_qfileselector_types.QFileSelector, event: gen_qcoreevent_types.QEvent): bool =
+  fcQFileSelector_virtualbase_event(self.h, event.h)
+
+proc QFileSelectoreventFilter*(self: gen_qfileselector_types.QFileSelector, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
+  fcQFileSelector_virtualbase_eventFilter(self.h, watched.h, event.h)
+
+proc QFileSelectortimerEvent*(self: gen_qfileselector_types.QFileSelector, event: gen_qcoreevent_types.QTimerEvent): void =
+  fcQFileSelector_virtualbase_timerEvent(self.h, event.h)
+
+proc QFileSelectorchildEvent*(self: gen_qfileselector_types.QFileSelector, event: gen_qcoreevent_types.QChildEvent): void =
+  fcQFileSelector_virtualbase_childEvent(self.h, event.h)
+
+proc QFileSelectorcustomEvent*(self: gen_qfileselector_types.QFileSelector, event: gen_qcoreevent_types.QEvent): void =
+  fcQFileSelector_virtualbase_customEvent(self.h, event.h)
+
+proc QFileSelectorconnectNotify*(self: gen_qfileselector_types.QFileSelector, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQFileSelector_virtualbase_connectNotify(self.h, signal.h)
+
+proc QFileSelectordisconnectNotify*(self: gen_qfileselector_types.QFileSelector, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQFileSelector_virtualbase_disconnectNotify(self.h, signal.h)
+
 
 proc fcQFileSelector_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QFileSelectorVTable](fcQFileSelector_vdata(self)[])
@@ -198,18 +229,12 @@ proc fcQFileSelector_vtable_callback_metaObject(self: pointer): pointer {.cdecl.
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QFileSelectormetacast*(self: gen_qfileselector_types.QFileSelector, param1: cstring): pointer =
-  fcQFileSelector_virtualbase_metacast(self.h, param1)
-
 proc fcQFileSelector_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QFileSelectorVTable](fcQFileSelector_vdata(self)[])
   let self = QFileSelector(h: self)
   let slotval1 = (param1)
   var virtualReturn = vtbl[].metacast(self, slotval1)
   virtualReturn
-
-proc QFileSelectormetacall*(self: gen_qfileselector_types.QFileSelector, param1: cint, param2: cint, param3: pointer): cint =
-  fcQFileSelector_virtualbase_metacall(self.h, cint(param1), param2, param3)
 
 proc fcQFileSelector_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QFileSelectorVTable](fcQFileSelector_vdata(self)[])
@@ -220,18 +245,12 @@ proc fcQFileSelector_vtable_callback_metacall(self: pointer, param1: cint, param
   var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QFileSelectorevent*(self: gen_qfileselector_types.QFileSelector, event: gen_qcoreevent_types.QEvent): bool =
-  fcQFileSelector_virtualbase_event(self.h, event.h)
-
 proc fcQFileSelector_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QFileSelectorVTable](fcQFileSelector_vdata(self)[])
   let self = QFileSelector(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
-
-proc QFileSelectoreventFilter*(self: gen_qfileselector_types.QFileSelector, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
-  fcQFileSelector_virtualbase_eventFilter(self.h, watched.h, event.h)
 
 proc fcQFileSelector_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QFileSelectorVTable](fcQFileSelector_vdata(self)[])
@@ -241,17 +260,11 @@ proc fcQFileSelector_vtable_callback_eventFilter(self: pointer, watched: pointer
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
-proc QFileSelectortimerEvent*(self: gen_qfileselector_types.QFileSelector, event: gen_qcoreevent_types.QTimerEvent): void =
-  fcQFileSelector_virtualbase_timerEvent(self.h, event.h)
-
 proc fcQFileSelector_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFileSelectorVTable](fcQFileSelector_vdata(self)[])
   let self = QFileSelector(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
-
-proc QFileSelectorchildEvent*(self: gen_qfileselector_types.QFileSelector, event: gen_qcoreevent_types.QChildEvent): void =
-  fcQFileSelector_virtualbase_childEvent(self.h, event.h)
 
 proc fcQFileSelector_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFileSelectorVTable](fcQFileSelector_vdata(self)[])
@@ -259,26 +272,17 @@ proc fcQFileSelector_vtable_callback_childEvent(self: pointer, event: pointer): 
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
-proc QFileSelectorcustomEvent*(self: gen_qfileselector_types.QFileSelector, event: gen_qcoreevent_types.QEvent): void =
-  fcQFileSelector_virtualbase_customEvent(self.h, event.h)
-
 proc fcQFileSelector_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFileSelectorVTable](fcQFileSelector_vdata(self)[])
   let self = QFileSelector(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
-proc QFileSelectorconnectNotify*(self: gen_qfileselector_types.QFileSelector, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQFileSelector_virtualbase_connectNotify(self.h, signal.h)
-
 proc fcQFileSelector_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFileSelectorVTable](fcQFileSelector_vdata(self)[])
   let self = QFileSelector(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
-
-proc QFileSelectordisconnectNotify*(self: gen_qfileselector_types.QFileSelector, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQFileSelector_virtualbase_disconnectNotify(self.h, signal.h)
 
 proc fcQFileSelector_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFileSelectorVTable](fcQFileSelector_vdata(self)[])
@@ -288,23 +292,39 @@ proc fcQFileSelector_vtable_callback_disconnectNotify(self: pointer, signal: poi
 
 type VirtualQFileSelector* {.inheritable.} = ref object of QFileSelector
   vtbl*: cQFileSelectorVTable
+
 method metaObject*(self: VirtualQFileSelector): gen_qobjectdefs_types.QMetaObject {.base.} =
   QFileSelectormetaObject(self[])
+method metacast*(self: VirtualQFileSelector, param1: cstring): pointer {.base.} =
+  QFileSelectormetacast(self[], param1)
+method metacall*(self: VirtualQFileSelector, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QFileSelectormetacall(self[], param1, param2, param3)
+method event*(self: VirtualQFileSelector, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QFileSelectorevent(self[], event)
+method eventFilter*(self: VirtualQFileSelector, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QFileSelectoreventFilter(self[], watched, event)
+method timerEvent*(self: VirtualQFileSelector, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QFileSelectortimerEvent(self[], event)
+method childEvent*(self: VirtualQFileSelector, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QFileSelectorchildEvent(self[], event)
+method customEvent*(self: VirtualQFileSelector, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QFileSelectorcustomEvent(self[], event)
+method connectNotify*(self: VirtualQFileSelector, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QFileSelectorconnectNotify(self[], signal)
+method disconnectNotify*(self: VirtualQFileSelector, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QFileSelectordisconnectNotify(self[], signal)
+
 proc fcQFileSelector_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQFileSelector](fcQFileSelector_vdata(self)[])
   var virtualReturn = inst.metaObject()
   virtualReturn.h
 
-method metacast*(self: VirtualQFileSelector, param1: cstring): pointer {.base.} =
-  QFileSelectormetacast(self[], param1)
 proc fcQFileSelector_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQFileSelector](fcQFileSelector_vdata(self)[])
   let slotval1 = (param1)
   var virtualReturn = inst.metacast(slotval1)
   virtualReturn
 
-method metacall*(self: VirtualQFileSelector, param1: cint, param2: cint, param3: pointer): cint {.base.} =
-  QFileSelectormetacall(self[], param1, param2, param3)
 proc fcQFileSelector_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQFileSelector](fcQFileSelector_vdata(self)[])
   let slotval1 = cint(param1)
@@ -313,16 +333,12 @@ proc fcQFileSelector_method_callback_metacall(self: pointer, param1: cint, param
   var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
-method event*(self: VirtualQFileSelector, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QFileSelectorevent(self[], event)
 proc fcQFileSelector_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQFileSelector](fcQFileSelector_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
-method eventFilter*(self: VirtualQFileSelector, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QFileSelectoreventFilter(self[], watched, event)
 proc fcQFileSelector_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQFileSelector](fcQFileSelector_vdata(self)[])
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
@@ -330,40 +346,31 @@ proc fcQFileSelector_method_callback_eventFilter(self: pointer, watched: pointer
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
-method timerEvent*(self: VirtualQFileSelector, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
-  QFileSelectortimerEvent(self[], event)
 proc fcQFileSelector_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFileSelector](fcQFileSelector_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
-method childEvent*(self: VirtualQFileSelector, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
-  QFileSelectorchildEvent(self[], event)
 proc fcQFileSelector_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFileSelector](fcQFileSelector_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
-method customEvent*(self: VirtualQFileSelector, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QFileSelectorcustomEvent(self[], event)
 proc fcQFileSelector_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFileSelector](fcQFileSelector_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
-method connectNotify*(self: VirtualQFileSelector, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QFileSelectorconnectNotify(self[], signal)
 proc fcQFileSelector_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFileSelector](fcQFileSelector_vdata(self)[])
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
-method disconnectNotify*(self: VirtualQFileSelector, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QFileSelectordisconnectNotify(self[], signal)
 proc fcQFileSelector_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFileSelector](fcQFileSelector_vdata(self)[])
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
+
 
 proc sender*(self: gen_qfileselector_types.QFileSelector): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQFileSelector_protectedbase_sender(self.h), owned: false)

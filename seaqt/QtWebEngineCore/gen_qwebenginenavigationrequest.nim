@@ -128,7 +128,7 @@ proc fcQWebEngineNavigationRequest_slot_callback_actionChanged_release(slot: int
   let nimfunc = cast[ref QWebEngineNavigationRequestactionChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onactionChanged*(self: gen_qwebenginenavigationrequest_types.QWebEngineNavigationRequest, slot: QWebEngineNavigationRequestactionChangedSlot) =
+proc onActionChanged*(self: gen_qwebenginenavigationrequest_types.QWebEngineNavigationRequest, slot: QWebEngineNavigationRequestactionChangedSlot) =
   var tmp = new QWebEngineNavigationRequestactionChangedSlot
   tmp[] = slot
   GC_ref(tmp)

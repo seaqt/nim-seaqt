@@ -85,6 +85,7 @@ proc fcQAudioSource_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "
 proc fcQAudioSource_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QAudioSource_tr3".}
 proc fcQAudioSource_vdata(self: pointer): ptr pointer {.importc: "QAudioSource_vdata".}
 proc fvdata_cQAudioSource(self: pointer): pointer {.importc: "vdata_QAudioSource".}
+
 type cQAudioSourceVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -199,7 +200,7 @@ proc fcQAudioSource_slot_callback_stateChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QAudioSourcestateChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onstateChanged*(self: gen_qaudiosource_types.QAudioSource, slot: QAudioSourcestateChangedSlot) =
+proc onStateChanged*(self: gen_qaudiosource_types.QAudioSource, slot: QAudioSourcestateChangedSlot) =
   var tmp = new QAudioSourcestateChangedSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -227,6 +228,7 @@ type QAudioSourcechildEventProc* = proc(self: QAudioSource, event: gen_qcoreeven
 type QAudioSourcecustomEventProc* = proc(self: QAudioSource, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QAudioSourceconnectNotifyProc* = proc(self: QAudioSource, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QAudioSourcedisconnectNotifyProc* = proc(self: QAudioSource, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+
 type QAudioSourceVTable* {.inheritable, pure.} = object
   vtbl: cQAudioSourceVTable
   metaObject*: QAudioSourcemetaObjectProc
@@ -239,8 +241,37 @@ type QAudioSourceVTable* {.inheritable, pure.} = object
   customEvent*: QAudioSourcecustomEventProc
   connectNotify*: QAudioSourceconnectNotifyProc
   disconnectNotify*: QAudioSourcedisconnectNotifyProc
+
 proc QAudioSourcemetaObject*(self: gen_qaudiosource_types.QAudioSource): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQAudioSource_virtualbase_metaObject(self.h), owned: false)
+
+proc QAudioSourcemetacast*(self: gen_qaudiosource_types.QAudioSource, param1: cstring): pointer =
+  fcQAudioSource_virtualbase_metacast(self.h, param1)
+
+proc QAudioSourcemetacall*(self: gen_qaudiosource_types.QAudioSource, param1: cint, param2: cint, param3: pointer): cint =
+  fcQAudioSource_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+proc QAudioSourceevent*(self: gen_qaudiosource_types.QAudioSource, event: gen_qcoreevent_types.QEvent): bool =
+  fcQAudioSource_virtualbase_event(self.h, event.h)
+
+proc QAudioSourceeventFilter*(self: gen_qaudiosource_types.QAudioSource, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
+  fcQAudioSource_virtualbase_eventFilter(self.h, watched.h, event.h)
+
+proc QAudioSourcetimerEvent*(self: gen_qaudiosource_types.QAudioSource, event: gen_qcoreevent_types.QTimerEvent): void =
+  fcQAudioSource_virtualbase_timerEvent(self.h, event.h)
+
+proc QAudioSourcechildEvent*(self: gen_qaudiosource_types.QAudioSource, event: gen_qcoreevent_types.QChildEvent): void =
+  fcQAudioSource_virtualbase_childEvent(self.h, event.h)
+
+proc QAudioSourcecustomEvent*(self: gen_qaudiosource_types.QAudioSource, event: gen_qcoreevent_types.QEvent): void =
+  fcQAudioSource_virtualbase_customEvent(self.h, event.h)
+
+proc QAudioSourceconnectNotify*(self: gen_qaudiosource_types.QAudioSource, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQAudioSource_virtualbase_connectNotify(self.h, signal.h)
+
+proc QAudioSourcedisconnectNotify*(self: gen_qaudiosource_types.QAudioSource, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQAudioSource_virtualbase_disconnectNotify(self.h, signal.h)
+
 
 proc fcQAudioSource_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QAudioSourceVTable](fcQAudioSource_vdata(self)[])
@@ -251,18 +282,12 @@ proc fcQAudioSource_vtable_callback_metaObject(self: pointer): pointer {.cdecl.}
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QAudioSourcemetacast*(self: gen_qaudiosource_types.QAudioSource, param1: cstring): pointer =
-  fcQAudioSource_virtualbase_metacast(self.h, param1)
-
 proc fcQAudioSource_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QAudioSourceVTable](fcQAudioSource_vdata(self)[])
   let self = QAudioSource(h: self)
   let slotval1 = (param1)
   var virtualReturn = vtbl[].metacast(self, slotval1)
   virtualReturn
-
-proc QAudioSourcemetacall*(self: gen_qaudiosource_types.QAudioSource, param1: cint, param2: cint, param3: pointer): cint =
-  fcQAudioSource_virtualbase_metacall(self.h, cint(param1), param2, param3)
 
 proc fcQAudioSource_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QAudioSourceVTable](fcQAudioSource_vdata(self)[])
@@ -273,18 +298,12 @@ proc fcQAudioSource_vtable_callback_metacall(self: pointer, param1: cint, param2
   var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QAudioSourceevent*(self: gen_qaudiosource_types.QAudioSource, event: gen_qcoreevent_types.QEvent): bool =
-  fcQAudioSource_virtualbase_event(self.h, event.h)
-
 proc fcQAudioSource_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QAudioSourceVTable](fcQAudioSource_vdata(self)[])
   let self = QAudioSource(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
-
-proc QAudioSourceeventFilter*(self: gen_qaudiosource_types.QAudioSource, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
-  fcQAudioSource_virtualbase_eventFilter(self.h, watched.h, event.h)
 
 proc fcQAudioSource_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QAudioSourceVTable](fcQAudioSource_vdata(self)[])
@@ -294,17 +313,11 @@ proc fcQAudioSource_vtable_callback_eventFilter(self: pointer, watched: pointer,
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
-proc QAudioSourcetimerEvent*(self: gen_qaudiosource_types.QAudioSource, event: gen_qcoreevent_types.QTimerEvent): void =
-  fcQAudioSource_virtualbase_timerEvent(self.h, event.h)
-
 proc fcQAudioSource_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAudioSourceVTable](fcQAudioSource_vdata(self)[])
   let self = QAudioSource(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
-
-proc QAudioSourcechildEvent*(self: gen_qaudiosource_types.QAudioSource, event: gen_qcoreevent_types.QChildEvent): void =
-  fcQAudioSource_virtualbase_childEvent(self.h, event.h)
 
 proc fcQAudioSource_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAudioSourceVTable](fcQAudioSource_vdata(self)[])
@@ -312,26 +325,17 @@ proc fcQAudioSource_vtable_callback_childEvent(self: pointer, event: pointer): v
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
-proc QAudioSourcecustomEvent*(self: gen_qaudiosource_types.QAudioSource, event: gen_qcoreevent_types.QEvent): void =
-  fcQAudioSource_virtualbase_customEvent(self.h, event.h)
-
 proc fcQAudioSource_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAudioSourceVTable](fcQAudioSource_vdata(self)[])
   let self = QAudioSource(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
-proc QAudioSourceconnectNotify*(self: gen_qaudiosource_types.QAudioSource, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQAudioSource_virtualbase_connectNotify(self.h, signal.h)
-
 proc fcQAudioSource_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAudioSourceVTable](fcQAudioSource_vdata(self)[])
   let self = QAudioSource(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
-
-proc QAudioSourcedisconnectNotify*(self: gen_qaudiosource_types.QAudioSource, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQAudioSource_virtualbase_disconnectNotify(self.h, signal.h)
 
 proc fcQAudioSource_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAudioSourceVTable](fcQAudioSource_vdata(self)[])
@@ -341,23 +345,39 @@ proc fcQAudioSource_vtable_callback_disconnectNotify(self: pointer, signal: poin
 
 type VirtualQAudioSource* {.inheritable.} = ref object of QAudioSource
   vtbl*: cQAudioSourceVTable
+
 method metaObject*(self: VirtualQAudioSource): gen_qobjectdefs_types.QMetaObject {.base.} =
   QAudioSourcemetaObject(self[])
+method metacast*(self: VirtualQAudioSource, param1: cstring): pointer {.base.} =
+  QAudioSourcemetacast(self[], param1)
+method metacall*(self: VirtualQAudioSource, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QAudioSourcemetacall(self[], param1, param2, param3)
+method event*(self: VirtualQAudioSource, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QAudioSourceevent(self[], event)
+method eventFilter*(self: VirtualQAudioSource, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QAudioSourceeventFilter(self[], watched, event)
+method timerEvent*(self: VirtualQAudioSource, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QAudioSourcetimerEvent(self[], event)
+method childEvent*(self: VirtualQAudioSource, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QAudioSourcechildEvent(self[], event)
+method customEvent*(self: VirtualQAudioSource, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QAudioSourcecustomEvent(self[], event)
+method connectNotify*(self: VirtualQAudioSource, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QAudioSourceconnectNotify(self[], signal)
+method disconnectNotify*(self: VirtualQAudioSource, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QAudioSourcedisconnectNotify(self[], signal)
+
 proc fcQAudioSource_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQAudioSource](fcQAudioSource_vdata(self)[])
   var virtualReturn = inst.metaObject()
   virtualReturn.h
 
-method metacast*(self: VirtualQAudioSource, param1: cstring): pointer {.base.} =
-  QAudioSourcemetacast(self[], param1)
 proc fcQAudioSource_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQAudioSource](fcQAudioSource_vdata(self)[])
   let slotval1 = (param1)
   var virtualReturn = inst.metacast(slotval1)
   virtualReturn
 
-method metacall*(self: VirtualQAudioSource, param1: cint, param2: cint, param3: pointer): cint {.base.} =
-  QAudioSourcemetacall(self[], param1, param2, param3)
 proc fcQAudioSource_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQAudioSource](fcQAudioSource_vdata(self)[])
   let slotval1 = cint(param1)
@@ -366,16 +386,12 @@ proc fcQAudioSource_method_callback_metacall(self: pointer, param1: cint, param2
   var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
-method event*(self: VirtualQAudioSource, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QAudioSourceevent(self[], event)
 proc fcQAudioSource_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQAudioSource](fcQAudioSource_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
-method eventFilter*(self: VirtualQAudioSource, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QAudioSourceeventFilter(self[], watched, event)
 proc fcQAudioSource_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQAudioSource](fcQAudioSource_vdata(self)[])
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
@@ -383,40 +399,31 @@ proc fcQAudioSource_method_callback_eventFilter(self: pointer, watched: pointer,
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
-method timerEvent*(self: VirtualQAudioSource, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
-  QAudioSourcetimerEvent(self[], event)
 proc fcQAudioSource_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQAudioSource](fcQAudioSource_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
-method childEvent*(self: VirtualQAudioSource, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
-  QAudioSourcechildEvent(self[], event)
 proc fcQAudioSource_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQAudioSource](fcQAudioSource_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
-method customEvent*(self: VirtualQAudioSource, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QAudioSourcecustomEvent(self[], event)
 proc fcQAudioSource_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQAudioSource](fcQAudioSource_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
-method connectNotify*(self: VirtualQAudioSource, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QAudioSourceconnectNotify(self[], signal)
 proc fcQAudioSource_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQAudioSource](fcQAudioSource_vdata(self)[])
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
-method disconnectNotify*(self: VirtualQAudioSource, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QAudioSourcedisconnectNotify(self[], signal)
 proc fcQAudioSource_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQAudioSource](fcQAudioSource_vdata(self)[])
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
+
 
 proc sender*(self: gen_qaudiosource_types.QAudioSource): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQAudioSource_protectedbase_sender(self.h), owned: false)

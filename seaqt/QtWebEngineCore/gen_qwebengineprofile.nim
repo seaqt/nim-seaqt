@@ -127,6 +127,7 @@ proc fcQWebEngineProfile_tr2(s: cstring, c: cstring): struct_miqt_string {.impor
 proc fcQWebEngineProfile_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QWebEngineProfile_tr3".}
 proc fcQWebEngineProfile_vdata(self: pointer): ptr pointer {.importc: "QWebEngineProfile_vdata".}
 proc fvdata_cQWebEngineProfile(self: pointer): pointer {.importc: "vdata_QWebEngineProfile".}
+
 type cQWebEngineProfileVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -334,7 +335,7 @@ proc fcQWebEngineProfile_slot_callback_downloadRequested_release(slot: int) {.cd
   let nimfunc = cast[ref QWebEngineProfiledownloadRequestedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc ondownloadRequested*(self: gen_qwebengineprofile_types.QWebEngineProfile, slot: QWebEngineProfiledownloadRequestedSlot) =
+proc onDownloadRequested*(self: gen_qwebengineprofile_types.QWebEngineProfile, slot: QWebEngineProfiledownloadRequestedSlot) =
   var tmp = new QWebEngineProfiledownloadRequestedSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -362,6 +363,7 @@ type QWebEngineProfilechildEventProc* = proc(self: QWebEngineProfile, event: gen
 type QWebEngineProfilecustomEventProc* = proc(self: QWebEngineProfile, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QWebEngineProfileconnectNotifyProc* = proc(self: QWebEngineProfile, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QWebEngineProfiledisconnectNotifyProc* = proc(self: QWebEngineProfile, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+
 type QWebEngineProfileVTable* {.inheritable, pure.} = object
   vtbl: cQWebEngineProfileVTable
   metaObject*: QWebEngineProfilemetaObjectProc
@@ -374,8 +376,37 @@ type QWebEngineProfileVTable* {.inheritable, pure.} = object
   customEvent*: QWebEngineProfilecustomEventProc
   connectNotify*: QWebEngineProfileconnectNotifyProc
   disconnectNotify*: QWebEngineProfiledisconnectNotifyProc
+
 proc QWebEngineProfilemetaObject*(self: gen_qwebengineprofile_types.QWebEngineProfile): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQWebEngineProfile_virtualbase_metaObject(self.h), owned: false)
+
+proc QWebEngineProfilemetacast*(self: gen_qwebengineprofile_types.QWebEngineProfile, param1: cstring): pointer =
+  fcQWebEngineProfile_virtualbase_metacast(self.h, param1)
+
+proc QWebEngineProfilemetacall*(self: gen_qwebengineprofile_types.QWebEngineProfile, param1: cint, param2: cint, param3: pointer): cint =
+  fcQWebEngineProfile_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+proc QWebEngineProfileevent*(self: gen_qwebengineprofile_types.QWebEngineProfile, event: gen_qcoreevent_types.QEvent): bool =
+  fcQWebEngineProfile_virtualbase_event(self.h, event.h)
+
+proc QWebEngineProfileeventFilter*(self: gen_qwebengineprofile_types.QWebEngineProfile, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
+  fcQWebEngineProfile_virtualbase_eventFilter(self.h, watched.h, event.h)
+
+proc QWebEngineProfiletimerEvent*(self: gen_qwebengineprofile_types.QWebEngineProfile, event: gen_qcoreevent_types.QTimerEvent): void =
+  fcQWebEngineProfile_virtualbase_timerEvent(self.h, event.h)
+
+proc QWebEngineProfilechildEvent*(self: gen_qwebengineprofile_types.QWebEngineProfile, event: gen_qcoreevent_types.QChildEvent): void =
+  fcQWebEngineProfile_virtualbase_childEvent(self.h, event.h)
+
+proc QWebEngineProfilecustomEvent*(self: gen_qwebengineprofile_types.QWebEngineProfile, event: gen_qcoreevent_types.QEvent): void =
+  fcQWebEngineProfile_virtualbase_customEvent(self.h, event.h)
+
+proc QWebEngineProfileconnectNotify*(self: gen_qwebengineprofile_types.QWebEngineProfile, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQWebEngineProfile_virtualbase_connectNotify(self.h, signal.h)
+
+proc QWebEngineProfiledisconnectNotify*(self: gen_qwebengineprofile_types.QWebEngineProfile, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQWebEngineProfile_virtualbase_disconnectNotify(self.h, signal.h)
+
 
 proc fcQWebEngineProfile_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QWebEngineProfileVTable](fcQWebEngineProfile_vdata(self)[])
@@ -386,18 +417,12 @@ proc fcQWebEngineProfile_vtable_callback_metaObject(self: pointer): pointer {.cd
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QWebEngineProfilemetacast*(self: gen_qwebengineprofile_types.QWebEngineProfile, param1: cstring): pointer =
-  fcQWebEngineProfile_virtualbase_metacast(self.h, param1)
-
 proc fcQWebEngineProfile_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QWebEngineProfileVTable](fcQWebEngineProfile_vdata(self)[])
   let self = QWebEngineProfile(h: self)
   let slotval1 = (param1)
   var virtualReturn = vtbl[].metacast(self, slotval1)
   virtualReturn
-
-proc QWebEngineProfilemetacall*(self: gen_qwebengineprofile_types.QWebEngineProfile, param1: cint, param2: cint, param3: pointer): cint =
-  fcQWebEngineProfile_virtualbase_metacall(self.h, cint(param1), param2, param3)
 
 proc fcQWebEngineProfile_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QWebEngineProfileVTable](fcQWebEngineProfile_vdata(self)[])
@@ -408,18 +433,12 @@ proc fcQWebEngineProfile_vtable_callback_metacall(self: pointer, param1: cint, p
   var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QWebEngineProfileevent*(self: gen_qwebengineprofile_types.QWebEngineProfile, event: gen_qcoreevent_types.QEvent): bool =
-  fcQWebEngineProfile_virtualbase_event(self.h, event.h)
-
 proc fcQWebEngineProfile_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QWebEngineProfileVTable](fcQWebEngineProfile_vdata(self)[])
   let self = QWebEngineProfile(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
-
-proc QWebEngineProfileeventFilter*(self: gen_qwebengineprofile_types.QWebEngineProfile, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
-  fcQWebEngineProfile_virtualbase_eventFilter(self.h, watched.h, event.h)
 
 proc fcQWebEngineProfile_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QWebEngineProfileVTable](fcQWebEngineProfile_vdata(self)[])
@@ -429,17 +448,11 @@ proc fcQWebEngineProfile_vtable_callback_eventFilter(self: pointer, watched: poi
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
-proc QWebEngineProfiletimerEvent*(self: gen_qwebengineprofile_types.QWebEngineProfile, event: gen_qcoreevent_types.QTimerEvent): void =
-  fcQWebEngineProfile_virtualbase_timerEvent(self.h, event.h)
-
 proc fcQWebEngineProfile_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWebEngineProfileVTable](fcQWebEngineProfile_vdata(self)[])
   let self = QWebEngineProfile(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
-
-proc QWebEngineProfilechildEvent*(self: gen_qwebengineprofile_types.QWebEngineProfile, event: gen_qcoreevent_types.QChildEvent): void =
-  fcQWebEngineProfile_virtualbase_childEvent(self.h, event.h)
 
 proc fcQWebEngineProfile_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWebEngineProfileVTable](fcQWebEngineProfile_vdata(self)[])
@@ -447,26 +460,17 @@ proc fcQWebEngineProfile_vtable_callback_childEvent(self: pointer, event: pointe
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
-proc QWebEngineProfilecustomEvent*(self: gen_qwebengineprofile_types.QWebEngineProfile, event: gen_qcoreevent_types.QEvent): void =
-  fcQWebEngineProfile_virtualbase_customEvent(self.h, event.h)
-
 proc fcQWebEngineProfile_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWebEngineProfileVTable](fcQWebEngineProfile_vdata(self)[])
   let self = QWebEngineProfile(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
-proc QWebEngineProfileconnectNotify*(self: gen_qwebengineprofile_types.QWebEngineProfile, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQWebEngineProfile_virtualbase_connectNotify(self.h, signal.h)
-
 proc fcQWebEngineProfile_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWebEngineProfileVTable](fcQWebEngineProfile_vdata(self)[])
   let self = QWebEngineProfile(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
-
-proc QWebEngineProfiledisconnectNotify*(self: gen_qwebengineprofile_types.QWebEngineProfile, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQWebEngineProfile_virtualbase_disconnectNotify(self.h, signal.h)
 
 proc fcQWebEngineProfile_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWebEngineProfileVTable](fcQWebEngineProfile_vdata(self)[])
@@ -476,23 +480,39 @@ proc fcQWebEngineProfile_vtable_callback_disconnectNotify(self: pointer, signal:
 
 type VirtualQWebEngineProfile* {.inheritable.} = ref object of QWebEngineProfile
   vtbl*: cQWebEngineProfileVTable
+
 method metaObject*(self: VirtualQWebEngineProfile): gen_qobjectdefs_types.QMetaObject {.base.} =
   QWebEngineProfilemetaObject(self[])
+method metacast*(self: VirtualQWebEngineProfile, param1: cstring): pointer {.base.} =
+  QWebEngineProfilemetacast(self[], param1)
+method metacall*(self: VirtualQWebEngineProfile, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QWebEngineProfilemetacall(self[], param1, param2, param3)
+method event*(self: VirtualQWebEngineProfile, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QWebEngineProfileevent(self[], event)
+method eventFilter*(self: VirtualQWebEngineProfile, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QWebEngineProfileeventFilter(self[], watched, event)
+method timerEvent*(self: VirtualQWebEngineProfile, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QWebEngineProfiletimerEvent(self[], event)
+method childEvent*(self: VirtualQWebEngineProfile, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QWebEngineProfilechildEvent(self[], event)
+method customEvent*(self: VirtualQWebEngineProfile, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QWebEngineProfilecustomEvent(self[], event)
+method connectNotify*(self: VirtualQWebEngineProfile, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QWebEngineProfileconnectNotify(self[], signal)
+method disconnectNotify*(self: VirtualQWebEngineProfile, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QWebEngineProfiledisconnectNotify(self[], signal)
+
 proc fcQWebEngineProfile_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQWebEngineProfile](fcQWebEngineProfile_vdata(self)[])
   var virtualReturn = inst.metaObject()
   virtualReturn.h
 
-method metacast*(self: VirtualQWebEngineProfile, param1: cstring): pointer {.base.} =
-  QWebEngineProfilemetacast(self[], param1)
 proc fcQWebEngineProfile_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQWebEngineProfile](fcQWebEngineProfile_vdata(self)[])
   let slotval1 = (param1)
   var virtualReturn = inst.metacast(slotval1)
   virtualReturn
 
-method metacall*(self: VirtualQWebEngineProfile, param1: cint, param2: cint, param3: pointer): cint {.base.} =
-  QWebEngineProfilemetacall(self[], param1, param2, param3)
 proc fcQWebEngineProfile_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQWebEngineProfile](fcQWebEngineProfile_vdata(self)[])
   let slotval1 = cint(param1)
@@ -501,16 +521,12 @@ proc fcQWebEngineProfile_method_callback_metacall(self: pointer, param1: cint, p
   var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
-method event*(self: VirtualQWebEngineProfile, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QWebEngineProfileevent(self[], event)
 proc fcQWebEngineProfile_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQWebEngineProfile](fcQWebEngineProfile_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
-method eventFilter*(self: VirtualQWebEngineProfile, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QWebEngineProfileeventFilter(self[], watched, event)
 proc fcQWebEngineProfile_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQWebEngineProfile](fcQWebEngineProfile_vdata(self)[])
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
@@ -518,40 +534,31 @@ proc fcQWebEngineProfile_method_callback_eventFilter(self: pointer, watched: poi
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
-method timerEvent*(self: VirtualQWebEngineProfile, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
-  QWebEngineProfiletimerEvent(self[], event)
 proc fcQWebEngineProfile_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQWebEngineProfile](fcQWebEngineProfile_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
-method childEvent*(self: VirtualQWebEngineProfile, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
-  QWebEngineProfilechildEvent(self[], event)
 proc fcQWebEngineProfile_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQWebEngineProfile](fcQWebEngineProfile_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
-method customEvent*(self: VirtualQWebEngineProfile, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QWebEngineProfilecustomEvent(self[], event)
 proc fcQWebEngineProfile_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQWebEngineProfile](fcQWebEngineProfile_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
-method connectNotify*(self: VirtualQWebEngineProfile, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QWebEngineProfileconnectNotify(self[], signal)
 proc fcQWebEngineProfile_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQWebEngineProfile](fcQWebEngineProfile_vdata(self)[])
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
-method disconnectNotify*(self: VirtualQWebEngineProfile, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QWebEngineProfiledisconnectNotify(self[], signal)
 proc fcQWebEngineProfile_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQWebEngineProfile](fcQWebEngineProfile_vdata(self)[])
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
+
 
 proc sender*(self: gen_qwebengineprofile_types.QWebEngineProfile): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQWebEngineProfile_protectedbase_sender(self.h), owned: false)

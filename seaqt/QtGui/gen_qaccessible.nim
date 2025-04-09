@@ -205,6 +205,7 @@ proc fcQAccessibleEvent_child(self: pointer): cint {.importc: "QAccessibleEvent_
 proc fcQAccessibleEvent_accessibleInterface(self: pointer): pointer {.importc: "QAccessibleEvent_accessibleInterface".}
 proc fcQAccessibleEvent_vdata(self: pointer): ptr pointer {.importc: "QAccessibleEvent_vdata".}
 proc fvdata_cQAccessibleEvent(self: pointer): pointer {.importc: "vdata_QAccessibleEvent".}
+
 type cQAccessibleEventVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   accessibleInterface*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -214,6 +215,7 @@ proc fcQAccessibleEvent_new2(vtbl: pointer, vdata: csize_t, iface: pointer, typ:
 proc fcQAccessibleStateChangeEvent_changedStates(self: pointer): pointer {.importc: "QAccessibleStateChangeEvent_changedStates".}
 proc fcQAccessibleStateChangeEvent_vdata(self: pointer): ptr pointer {.importc: "QAccessibleStateChangeEvent_vdata".}
 proc fvdata_cQAccessibleStateChangeEvent(self: pointer): pointer {.importc: "vdata_QAccessibleStateChangeEvent".}
+
 type cQAccessibleStateChangeEventVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   accessibleInterface*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -224,6 +226,7 @@ proc fcQAccessibleTextCursorEvent_setCursorPosition(self: pointer, position: cin
 proc fcQAccessibleTextCursorEvent_cursorPosition(self: pointer): cint {.importc: "QAccessibleTextCursorEvent_cursorPosition".}
 proc fcQAccessibleTextCursorEvent_vdata(self: pointer): ptr pointer {.importc: "QAccessibleTextCursorEvent_vdata".}
 proc fvdata_cQAccessibleTextCursorEvent(self: pointer): pointer {.importc: "vdata_QAccessibleTextCursorEvent".}
+
 type cQAccessibleTextCursorEventVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   accessibleInterface*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -235,6 +238,7 @@ proc fcQAccessibleTextSelectionEvent_selectionStart(self: pointer): cint {.impor
 proc fcQAccessibleTextSelectionEvent_selectionEnd(self: pointer): cint {.importc: "QAccessibleTextSelectionEvent_selectionEnd".}
 proc fcQAccessibleTextSelectionEvent_vdata(self: pointer): ptr pointer {.importc: "QAccessibleTextSelectionEvent_vdata".}
 proc fvdata_cQAccessibleTextSelectionEvent(self: pointer): pointer {.importc: "vdata_QAccessibleTextSelectionEvent".}
+
 type cQAccessibleTextSelectionEventVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   accessibleInterface*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -245,6 +249,7 @@ proc fcQAccessibleTextInsertEvent_textInserted(self: pointer): struct_miqt_strin
 proc fcQAccessibleTextInsertEvent_changePosition(self: pointer): cint {.importc: "QAccessibleTextInsertEvent_changePosition".}
 proc fcQAccessibleTextInsertEvent_vdata(self: pointer): ptr pointer {.importc: "QAccessibleTextInsertEvent_vdata".}
 proc fvdata_cQAccessibleTextInsertEvent(self: pointer): pointer {.importc: "vdata_QAccessibleTextInsertEvent".}
+
 type cQAccessibleTextInsertEventVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   accessibleInterface*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -255,6 +260,7 @@ proc fcQAccessibleTextRemoveEvent_textRemoved(self: pointer): struct_miqt_string
 proc fcQAccessibleTextRemoveEvent_changePosition(self: pointer): cint {.importc: "QAccessibleTextRemoveEvent_changePosition".}
 proc fcQAccessibleTextRemoveEvent_vdata(self: pointer): ptr pointer {.importc: "QAccessibleTextRemoveEvent_vdata".}
 proc fvdata_cQAccessibleTextRemoveEvent(self: pointer): pointer {.importc: "vdata_QAccessibleTextRemoveEvent".}
+
 type cQAccessibleTextRemoveEventVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   accessibleInterface*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -266,6 +272,7 @@ proc fcQAccessibleTextUpdateEvent_textInserted(self: pointer): struct_miqt_strin
 proc fcQAccessibleTextUpdateEvent_changePosition(self: pointer): cint {.importc: "QAccessibleTextUpdateEvent_changePosition".}
 proc fcQAccessibleTextUpdateEvent_vdata(self: pointer): ptr pointer {.importc: "QAccessibleTextUpdateEvent_vdata".}
 proc fvdata_cQAccessibleTextUpdateEvent(self: pointer): pointer {.importc: "vdata_QAccessibleTextUpdateEvent".}
+
 type cQAccessibleTextUpdateEventVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   accessibleInterface*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -276,6 +283,7 @@ proc fcQAccessibleValueChangeEvent_setValue(self: pointer, val: pointer): void {
 proc fcQAccessibleValueChangeEvent_value(self: pointer): pointer {.importc: "QAccessibleValueChangeEvent_value".}
 proc fcQAccessibleValueChangeEvent_vdata(self: pointer): ptr pointer {.importc: "QAccessibleValueChangeEvent_vdata".}
 proc fvdata_cQAccessibleValueChangeEvent(self: pointer): pointer {.importc: "vdata_QAccessibleValueChangeEvent".}
+
 type cQAccessibleValueChangeEventVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   accessibleInterface*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -294,6 +302,7 @@ proc fcQAccessibleTableModelChangeEvent_lastRow(self: pointer): cint {.importc: 
 proc fcQAccessibleTableModelChangeEvent_lastColumn(self: pointer): cint {.importc: "QAccessibleTableModelChangeEvent_lastColumn".}
 proc fcQAccessibleTableModelChangeEvent_vdata(self: pointer): ptr pointer {.importc: "QAccessibleTableModelChangeEvent_vdata".}
 proc fvdata_cQAccessibleTableModelChangeEvent(self: pointer): pointer {.importc: "vdata_QAccessibleTableModelChangeEvent".}
+
 type cQAccessibleTableModelChangeEventVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   accessibleInterface*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -809,11 +818,14 @@ proc accessibleInterface*(self: gen_qaccessible_types.QAccessibleEvent): gen_qac
   gen_qaccessible_types.QAccessibleInterface(h: fcQAccessibleEvent_accessibleInterface(self.h), owned: false)
 
 type QAccessibleEventaccessibleInterfaceProc* = proc(self: QAccessibleEvent): gen_qaccessible_types.QAccessibleInterface {.raises: [], gcsafe.}
+
 type QAccessibleEventVTable* {.inheritable, pure.} = object
   vtbl: cQAccessibleEventVTable
   accessibleInterface*: QAccessibleEventaccessibleInterfaceProc
+
 proc QAccessibleEventaccessibleInterface*(self: gen_qaccessible_types.QAccessibleEvent): gen_qaccessible_types.QAccessibleInterface =
   gen_qaccessible_types.QAccessibleInterface(h: fcQAccessibleEvent_virtualbase_accessibleInterface(self.h), owned: false)
+
 
 proc fcQAccessibleEvent_vtable_callback_accessibleInterface(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QAccessibleEventVTable](fcQAccessibleEvent_vdata(self)[])
@@ -826,12 +838,15 @@ proc fcQAccessibleEvent_vtable_callback_accessibleInterface(self: pointer): poin
 
 type VirtualQAccessibleEvent* {.inheritable.} = ref object of QAccessibleEvent
   vtbl*: cQAccessibleEventVTable
+
 method accessibleInterface*(self: VirtualQAccessibleEvent): gen_qaccessible_types.QAccessibleInterface {.base.} =
   QAccessibleEventaccessibleInterface(self[])
+
 proc fcQAccessibleEvent_method_callback_accessibleInterface(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQAccessibleEvent](fcQAccessibleEvent_vdata(self)[])
   var virtualReturn = inst.accessibleInterface()
   virtualReturn.h
+
 
 proc create*(T: type gen_qaccessible_types.QAccessibleEvent,
     obj: gen_qobject_types.QObject, typ: cint,
@@ -887,11 +902,14 @@ proc changedStates*(self: gen_qaccessible_types.QAccessibleStateChangeEvent): ge
   gen_qaccessible_base_types.QAccessibleState(h: fcQAccessibleStateChangeEvent_changedStates(self.h), owned: true)
 
 type QAccessibleStateChangeEventaccessibleInterfaceProc* = proc(self: QAccessibleStateChangeEvent): gen_qaccessible_types.QAccessibleInterface {.raises: [], gcsafe.}
+
 type QAccessibleStateChangeEventVTable* {.inheritable, pure.} = object
   vtbl: cQAccessibleStateChangeEventVTable
   accessibleInterface*: QAccessibleStateChangeEventaccessibleInterfaceProc
+
 proc QAccessibleStateChangeEventaccessibleInterface*(self: gen_qaccessible_types.QAccessibleStateChangeEvent): gen_qaccessible_types.QAccessibleInterface =
   gen_qaccessible_types.QAccessibleInterface(h: fcQAccessibleStateChangeEvent_virtualbase_accessibleInterface(self.h), owned: false)
+
 
 proc fcQAccessibleStateChangeEvent_vtable_callback_accessibleInterface(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QAccessibleStateChangeEventVTable](fcQAccessibleStateChangeEvent_vdata(self)[])
@@ -904,12 +922,15 @@ proc fcQAccessibleStateChangeEvent_vtable_callback_accessibleInterface(self: poi
 
 type VirtualQAccessibleStateChangeEvent* {.inheritable.} = ref object of QAccessibleStateChangeEvent
   vtbl*: cQAccessibleStateChangeEventVTable
+
 method accessibleInterface*(self: VirtualQAccessibleStateChangeEvent): gen_qaccessible_types.QAccessibleInterface {.base.} =
   QAccessibleStateChangeEventaccessibleInterface(self[])
+
 proc fcQAccessibleStateChangeEvent_method_callback_accessibleInterface(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQAccessibleStateChangeEvent](fcQAccessibleStateChangeEvent_vdata(self)[])
   var virtualReturn = inst.accessibleInterface()
   virtualReturn.h
+
 
 proc create*(T: type gen_qaccessible_types.QAccessibleStateChangeEvent,
     obj: gen_qobject_types.QObject, state: gen_qaccessible_base_types.QAccessibleState,
@@ -968,11 +989,14 @@ proc cursorPosition*(self: gen_qaccessible_types.QAccessibleTextCursorEvent): ci
   fcQAccessibleTextCursorEvent_cursorPosition(self.h)
 
 type QAccessibleTextCursorEventaccessibleInterfaceProc* = proc(self: QAccessibleTextCursorEvent): gen_qaccessible_types.QAccessibleInterface {.raises: [], gcsafe.}
+
 type QAccessibleTextCursorEventVTable* {.inheritable, pure.} = object
   vtbl: cQAccessibleTextCursorEventVTable
   accessibleInterface*: QAccessibleTextCursorEventaccessibleInterfaceProc
+
 proc QAccessibleTextCursorEventaccessibleInterface*(self: gen_qaccessible_types.QAccessibleTextCursorEvent): gen_qaccessible_types.QAccessibleInterface =
   gen_qaccessible_types.QAccessibleInterface(h: fcQAccessibleTextCursorEvent_virtualbase_accessibleInterface(self.h), owned: false)
+
 
 proc fcQAccessibleTextCursorEvent_vtable_callback_accessibleInterface(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QAccessibleTextCursorEventVTable](fcQAccessibleTextCursorEvent_vdata(self)[])
@@ -985,12 +1009,15 @@ proc fcQAccessibleTextCursorEvent_vtable_callback_accessibleInterface(self: poin
 
 type VirtualQAccessibleTextCursorEvent* {.inheritable.} = ref object of QAccessibleTextCursorEvent
   vtbl*: cQAccessibleTextCursorEventVTable
+
 method accessibleInterface*(self: VirtualQAccessibleTextCursorEvent): gen_qaccessible_types.QAccessibleInterface {.base.} =
   QAccessibleTextCursorEventaccessibleInterface(self[])
+
 proc fcQAccessibleTextCursorEvent_method_callback_accessibleInterface(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQAccessibleTextCursorEvent](fcQAccessibleTextCursorEvent_vdata(self)[])
   var virtualReturn = inst.accessibleInterface()
   virtualReturn.h
+
 
 proc create*(T: type gen_qaccessible_types.QAccessibleTextCursorEvent,
     obj: gen_qobject_types.QObject, cursorPos: cint,
@@ -1052,11 +1079,14 @@ proc selectionEnd*(self: gen_qaccessible_types.QAccessibleTextSelectionEvent): c
   fcQAccessibleTextSelectionEvent_selectionEnd(self.h)
 
 type QAccessibleTextSelectionEventaccessibleInterfaceProc* = proc(self: QAccessibleTextSelectionEvent): gen_qaccessible_types.QAccessibleInterface {.raises: [], gcsafe.}
+
 type QAccessibleTextSelectionEventVTable* {.inheritable, pure.} = object
   vtbl: cQAccessibleTextSelectionEventVTable
   accessibleInterface*: QAccessibleTextSelectionEventaccessibleInterfaceProc
+
 proc QAccessibleTextSelectionEventaccessibleInterface*(self: gen_qaccessible_types.QAccessibleTextSelectionEvent): gen_qaccessible_types.QAccessibleInterface =
   gen_qaccessible_types.QAccessibleInterface(h: fcQAccessibleTextSelectionEvent_virtualbase_accessibleInterface(self.h), owned: false)
+
 
 proc fcQAccessibleTextSelectionEvent_vtable_callback_accessibleInterface(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QAccessibleTextSelectionEventVTable](fcQAccessibleTextSelectionEvent_vdata(self)[])
@@ -1069,12 +1099,15 @@ proc fcQAccessibleTextSelectionEvent_vtable_callback_accessibleInterface(self: p
 
 type VirtualQAccessibleTextSelectionEvent* {.inheritable.} = ref object of QAccessibleTextSelectionEvent
   vtbl*: cQAccessibleTextSelectionEventVTable
+
 method accessibleInterface*(self: VirtualQAccessibleTextSelectionEvent): gen_qaccessible_types.QAccessibleInterface {.base.} =
   QAccessibleTextSelectionEventaccessibleInterface(self[])
+
 proc fcQAccessibleTextSelectionEvent_method_callback_accessibleInterface(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQAccessibleTextSelectionEvent](fcQAccessibleTextSelectionEvent_vdata(self)[])
   var virtualReturn = inst.accessibleInterface()
   virtualReturn.h
+
 
 proc create*(T: type gen_qaccessible_types.QAccessibleTextSelectionEvent,
     obj: gen_qobject_types.QObject, start: cint, endVal: cint,
@@ -1136,11 +1169,14 @@ proc changePosition*(self: gen_qaccessible_types.QAccessibleTextInsertEvent): ci
   fcQAccessibleTextInsertEvent_changePosition(self.h)
 
 type QAccessibleTextInsertEventaccessibleInterfaceProc* = proc(self: QAccessibleTextInsertEvent): gen_qaccessible_types.QAccessibleInterface {.raises: [], gcsafe.}
+
 type QAccessibleTextInsertEventVTable* {.inheritable, pure.} = object
   vtbl: cQAccessibleTextInsertEventVTable
   accessibleInterface*: QAccessibleTextInsertEventaccessibleInterfaceProc
+
 proc QAccessibleTextInsertEventaccessibleInterface*(self: gen_qaccessible_types.QAccessibleTextInsertEvent): gen_qaccessible_types.QAccessibleInterface =
   gen_qaccessible_types.QAccessibleInterface(h: fcQAccessibleTextInsertEvent_virtualbase_accessibleInterface(self.h), owned: false)
+
 
 proc fcQAccessibleTextInsertEvent_vtable_callback_accessibleInterface(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QAccessibleTextInsertEventVTable](fcQAccessibleTextInsertEvent_vdata(self)[])
@@ -1153,12 +1189,15 @@ proc fcQAccessibleTextInsertEvent_vtable_callback_accessibleInterface(self: poin
 
 type VirtualQAccessibleTextInsertEvent* {.inheritable.} = ref object of QAccessibleTextInsertEvent
   vtbl*: cQAccessibleTextInsertEventVTable
+
 method accessibleInterface*(self: VirtualQAccessibleTextInsertEvent): gen_qaccessible_types.QAccessibleInterface {.base.} =
   QAccessibleTextInsertEventaccessibleInterface(self[])
+
 proc fcQAccessibleTextInsertEvent_method_callback_accessibleInterface(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQAccessibleTextInsertEvent](fcQAccessibleTextInsertEvent_vdata(self)[])
   var virtualReturn = inst.accessibleInterface()
   virtualReturn.h
+
 
 proc create*(T: type gen_qaccessible_types.QAccessibleTextInsertEvent,
     obj: gen_qobject_types.QObject, position: cint, text: openArray[char],
@@ -1220,11 +1259,14 @@ proc changePosition*(self: gen_qaccessible_types.QAccessibleTextRemoveEvent): ci
   fcQAccessibleTextRemoveEvent_changePosition(self.h)
 
 type QAccessibleTextRemoveEventaccessibleInterfaceProc* = proc(self: QAccessibleTextRemoveEvent): gen_qaccessible_types.QAccessibleInterface {.raises: [], gcsafe.}
+
 type QAccessibleTextRemoveEventVTable* {.inheritable, pure.} = object
   vtbl: cQAccessibleTextRemoveEventVTable
   accessibleInterface*: QAccessibleTextRemoveEventaccessibleInterfaceProc
+
 proc QAccessibleTextRemoveEventaccessibleInterface*(self: gen_qaccessible_types.QAccessibleTextRemoveEvent): gen_qaccessible_types.QAccessibleInterface =
   gen_qaccessible_types.QAccessibleInterface(h: fcQAccessibleTextRemoveEvent_virtualbase_accessibleInterface(self.h), owned: false)
+
 
 proc fcQAccessibleTextRemoveEvent_vtable_callback_accessibleInterface(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QAccessibleTextRemoveEventVTable](fcQAccessibleTextRemoveEvent_vdata(self)[])
@@ -1237,12 +1279,15 @@ proc fcQAccessibleTextRemoveEvent_vtable_callback_accessibleInterface(self: poin
 
 type VirtualQAccessibleTextRemoveEvent* {.inheritable.} = ref object of QAccessibleTextRemoveEvent
   vtbl*: cQAccessibleTextRemoveEventVTable
+
 method accessibleInterface*(self: VirtualQAccessibleTextRemoveEvent): gen_qaccessible_types.QAccessibleInterface {.base.} =
   QAccessibleTextRemoveEventaccessibleInterface(self[])
+
 proc fcQAccessibleTextRemoveEvent_method_callback_accessibleInterface(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQAccessibleTextRemoveEvent](fcQAccessibleTextRemoveEvent_vdata(self)[])
   var virtualReturn = inst.accessibleInterface()
   virtualReturn.h
+
 
 proc create*(T: type gen_qaccessible_types.QAccessibleTextRemoveEvent,
     obj: gen_qobject_types.QObject, position: cint, text: openArray[char],
@@ -1310,11 +1355,14 @@ proc changePosition*(self: gen_qaccessible_types.QAccessibleTextUpdateEvent): ci
   fcQAccessibleTextUpdateEvent_changePosition(self.h)
 
 type QAccessibleTextUpdateEventaccessibleInterfaceProc* = proc(self: QAccessibleTextUpdateEvent): gen_qaccessible_types.QAccessibleInterface {.raises: [], gcsafe.}
+
 type QAccessibleTextUpdateEventVTable* {.inheritable, pure.} = object
   vtbl: cQAccessibleTextUpdateEventVTable
   accessibleInterface*: QAccessibleTextUpdateEventaccessibleInterfaceProc
+
 proc QAccessibleTextUpdateEventaccessibleInterface*(self: gen_qaccessible_types.QAccessibleTextUpdateEvent): gen_qaccessible_types.QAccessibleInterface =
   gen_qaccessible_types.QAccessibleInterface(h: fcQAccessibleTextUpdateEvent_virtualbase_accessibleInterface(self.h), owned: false)
+
 
 proc fcQAccessibleTextUpdateEvent_vtable_callback_accessibleInterface(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QAccessibleTextUpdateEventVTable](fcQAccessibleTextUpdateEvent_vdata(self)[])
@@ -1327,12 +1375,15 @@ proc fcQAccessibleTextUpdateEvent_vtable_callback_accessibleInterface(self: poin
 
 type VirtualQAccessibleTextUpdateEvent* {.inheritable.} = ref object of QAccessibleTextUpdateEvent
   vtbl*: cQAccessibleTextUpdateEventVTable
+
 method accessibleInterface*(self: VirtualQAccessibleTextUpdateEvent): gen_qaccessible_types.QAccessibleInterface {.base.} =
   QAccessibleTextUpdateEventaccessibleInterface(self[])
+
 proc fcQAccessibleTextUpdateEvent_method_callback_accessibleInterface(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQAccessibleTextUpdateEvent](fcQAccessibleTextUpdateEvent_vdata(self)[])
   var virtualReturn = inst.accessibleInterface()
   virtualReturn.h
+
 
 proc create*(T: type gen_qaccessible_types.QAccessibleTextUpdateEvent,
     obj: gen_qobject_types.QObject, position: cint, oldText: openArray[char], text: openArray[char],
@@ -1391,11 +1442,14 @@ proc value*(self: gen_qaccessible_types.QAccessibleValueChangeEvent): gen_qvaria
   gen_qvariant_types.QVariant(h: fcQAccessibleValueChangeEvent_value(self.h), owned: true)
 
 type QAccessibleValueChangeEventaccessibleInterfaceProc* = proc(self: QAccessibleValueChangeEvent): gen_qaccessible_types.QAccessibleInterface {.raises: [], gcsafe.}
+
 type QAccessibleValueChangeEventVTable* {.inheritable, pure.} = object
   vtbl: cQAccessibleValueChangeEventVTable
   accessibleInterface*: QAccessibleValueChangeEventaccessibleInterfaceProc
+
 proc QAccessibleValueChangeEventaccessibleInterface*(self: gen_qaccessible_types.QAccessibleValueChangeEvent): gen_qaccessible_types.QAccessibleInterface =
   gen_qaccessible_types.QAccessibleInterface(h: fcQAccessibleValueChangeEvent_virtualbase_accessibleInterface(self.h), owned: false)
+
 
 proc fcQAccessibleValueChangeEvent_vtable_callback_accessibleInterface(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QAccessibleValueChangeEventVTable](fcQAccessibleValueChangeEvent_vdata(self)[])
@@ -1408,12 +1462,15 @@ proc fcQAccessibleValueChangeEvent_vtable_callback_accessibleInterface(self: poi
 
 type VirtualQAccessibleValueChangeEvent* {.inheritable.} = ref object of QAccessibleValueChangeEvent
   vtbl*: cQAccessibleValueChangeEventVTable
+
 method accessibleInterface*(self: VirtualQAccessibleValueChangeEvent): gen_qaccessible_types.QAccessibleInterface {.base.} =
   QAccessibleValueChangeEventaccessibleInterface(self[])
+
 proc fcQAccessibleValueChangeEvent_method_callback_accessibleInterface(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQAccessibleValueChangeEvent](fcQAccessibleValueChangeEvent_vdata(self)[])
   var virtualReturn = inst.accessibleInterface()
   virtualReturn.h
+
 
 proc create*(T: type gen_qaccessible_types.QAccessibleValueChangeEvent,
     obj: gen_qobject_types.QObject, val: gen_qvariant_types.QVariant,
@@ -1496,11 +1553,14 @@ proc lastColumn*(self: gen_qaccessible_types.QAccessibleTableModelChangeEvent): 
   fcQAccessibleTableModelChangeEvent_lastColumn(self.h)
 
 type QAccessibleTableModelChangeEventaccessibleInterfaceProc* = proc(self: QAccessibleTableModelChangeEvent): gen_qaccessible_types.QAccessibleInterface {.raises: [], gcsafe.}
+
 type QAccessibleTableModelChangeEventVTable* {.inheritable, pure.} = object
   vtbl: cQAccessibleTableModelChangeEventVTable
   accessibleInterface*: QAccessibleTableModelChangeEventaccessibleInterfaceProc
+
 proc QAccessibleTableModelChangeEventaccessibleInterface*(self: gen_qaccessible_types.QAccessibleTableModelChangeEvent): gen_qaccessible_types.QAccessibleInterface =
   gen_qaccessible_types.QAccessibleInterface(h: fcQAccessibleTableModelChangeEvent_virtualbase_accessibleInterface(self.h), owned: false)
+
 
 proc fcQAccessibleTableModelChangeEvent_vtable_callback_accessibleInterface(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QAccessibleTableModelChangeEventVTable](fcQAccessibleTableModelChangeEvent_vdata(self)[])
@@ -1513,12 +1573,15 @@ proc fcQAccessibleTableModelChangeEvent_vtable_callback_accessibleInterface(self
 
 type VirtualQAccessibleTableModelChangeEvent* {.inheritable.} = ref object of QAccessibleTableModelChangeEvent
   vtbl*: cQAccessibleTableModelChangeEventVTable
+
 method accessibleInterface*(self: VirtualQAccessibleTableModelChangeEvent): gen_qaccessible_types.QAccessibleInterface {.base.} =
   QAccessibleTableModelChangeEventaccessibleInterface(self[])
+
 proc fcQAccessibleTableModelChangeEvent_method_callback_accessibleInterface(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQAccessibleTableModelChangeEvent](fcQAccessibleTableModelChangeEvent_vdata(self)[])
   var virtualReturn = inst.accessibleInterface()
   virtualReturn.h
+
 
 proc create*(T: type gen_qaccessible_types.QAccessibleTableModelChangeEvent,
     obj: gen_qobject_types.QObject, changeType: cint,

@@ -81,6 +81,7 @@ proc fcQErrorMessage_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: 
 proc fcQErrorMessage_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QErrorMessage_tr3".}
 proc fcQErrorMessage_vdata(self: pointer): ptr pointer {.importc: "QErrorMessage_vdata".}
 proc fvdata_cQErrorMessage(self: pointer): pointer {.importc: "vdata_QErrorMessage".}
+
 type cQErrorMessageVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -298,6 +299,7 @@ type QErrorMessagechildEventProc* = proc(self: QErrorMessage, event: gen_qcoreev
 type QErrorMessagecustomEventProc* = proc(self: QErrorMessage, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QErrorMessageconnectNotifyProc* = proc(self: QErrorMessage, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QErrorMessagedisconnectNotifyProc* = proc(self: QErrorMessage, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+
 type QErrorMessageVTable* {.inheritable, pure.} = object
   vtbl: cQErrorMessageVTable
   metaObject*: QErrorMessagemetaObjectProc
@@ -355,8 +357,172 @@ type QErrorMessageVTable* {.inheritable, pure.} = object
   customEvent*: QErrorMessagecustomEventProc
   connectNotify*: QErrorMessageconnectNotifyProc
   disconnectNotify*: QErrorMessagedisconnectNotifyProc
+
 proc QErrorMessagemetaObject*(self: gen_qerrormessage_types.QErrorMessage): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQErrorMessage_virtualbase_metaObject(self.h), owned: false)
+
+proc QErrorMessagemetacast*(self: gen_qerrormessage_types.QErrorMessage, param1: cstring): pointer =
+  fcQErrorMessage_virtualbase_metacast(self.h, param1)
+
+proc QErrorMessagemetacall*(self: gen_qerrormessage_types.QErrorMessage, param1: cint, param2: cint, param3: pointer): cint =
+  fcQErrorMessage_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+proc QErrorMessagedone*(self: gen_qerrormessage_types.QErrorMessage, param1: cint): void =
+  fcQErrorMessage_virtualbase_done(self.h, param1)
+
+proc QErrorMessagechangeEvent*(self: gen_qerrormessage_types.QErrorMessage, e: gen_qcoreevent_types.QEvent): void =
+  fcQErrorMessage_virtualbase_changeEvent(self.h, e.h)
+
+proc QErrorMessagesetVisible*(self: gen_qerrormessage_types.QErrorMessage, visible: bool): void =
+  fcQErrorMessage_virtualbase_setVisible(self.h, visible)
+
+proc QErrorMessagesizeHint*(self: gen_qerrormessage_types.QErrorMessage): gen_qsize_types.QSize =
+  gen_qsize_types.QSize(h: fcQErrorMessage_virtualbase_sizeHint(self.h), owned: true)
+
+proc QErrorMessageminimumSizeHint*(self: gen_qerrormessage_types.QErrorMessage): gen_qsize_types.QSize =
+  gen_qsize_types.QSize(h: fcQErrorMessage_virtualbase_minimumSizeHint(self.h), owned: true)
+
+proc QErrorMessageopen*(self: gen_qerrormessage_types.QErrorMessage): void =
+  fcQErrorMessage_virtualbase_open(self.h)
+
+proc QErrorMessageexec*(self: gen_qerrormessage_types.QErrorMessage): cint =
+  fcQErrorMessage_virtualbase_exec(self.h)
+
+proc QErrorMessageaccept*(self: gen_qerrormessage_types.QErrorMessage): void =
+  fcQErrorMessage_virtualbase_accept(self.h)
+
+proc QErrorMessagereject*(self: gen_qerrormessage_types.QErrorMessage): void =
+  fcQErrorMessage_virtualbase_reject(self.h)
+
+proc QErrorMessagekeyPressEvent*(self: gen_qerrormessage_types.QErrorMessage, param1: gen_qevent_types.QKeyEvent): void =
+  fcQErrorMessage_virtualbase_keyPressEvent(self.h, param1.h)
+
+proc QErrorMessagecloseEvent*(self: gen_qerrormessage_types.QErrorMessage, param1: gen_qevent_types.QCloseEvent): void =
+  fcQErrorMessage_virtualbase_closeEvent(self.h, param1.h)
+
+proc QErrorMessageshowEvent*(self: gen_qerrormessage_types.QErrorMessage, param1: gen_qevent_types.QShowEvent): void =
+  fcQErrorMessage_virtualbase_showEvent(self.h, param1.h)
+
+proc QErrorMessageresizeEvent*(self: gen_qerrormessage_types.QErrorMessage, param1: gen_qevent_types.QResizeEvent): void =
+  fcQErrorMessage_virtualbase_resizeEvent(self.h, param1.h)
+
+proc QErrorMessagecontextMenuEvent*(self: gen_qerrormessage_types.QErrorMessage, param1: gen_qevent_types.QContextMenuEvent): void =
+  fcQErrorMessage_virtualbase_contextMenuEvent(self.h, param1.h)
+
+proc QErrorMessageeventFilter*(self: gen_qerrormessage_types.QErrorMessage, param1: gen_qobject_types.QObject, param2: gen_qcoreevent_types.QEvent): bool =
+  fcQErrorMessage_virtualbase_eventFilter(self.h, param1.h, param2.h)
+
+proc QErrorMessagedevType*(self: gen_qerrormessage_types.QErrorMessage): cint =
+  fcQErrorMessage_virtualbase_devType(self.h)
+
+proc QErrorMessageheightForWidth*(self: gen_qerrormessage_types.QErrorMessage, param1: cint): cint =
+  fcQErrorMessage_virtualbase_heightForWidth(self.h, param1)
+
+proc QErrorMessagehasHeightForWidth*(self: gen_qerrormessage_types.QErrorMessage): bool =
+  fcQErrorMessage_virtualbase_hasHeightForWidth(self.h)
+
+proc QErrorMessagepaintEngine*(self: gen_qerrormessage_types.QErrorMessage): gen_qpaintengine_types.QPaintEngine =
+  gen_qpaintengine_types.QPaintEngine(h: fcQErrorMessage_virtualbase_paintEngine(self.h), owned: false)
+
+proc QErrorMessageevent*(self: gen_qerrormessage_types.QErrorMessage, event: gen_qcoreevent_types.QEvent): bool =
+  fcQErrorMessage_virtualbase_event(self.h, event.h)
+
+proc QErrorMessagemousePressEvent*(self: gen_qerrormessage_types.QErrorMessage, event: gen_qevent_types.QMouseEvent): void =
+  fcQErrorMessage_virtualbase_mousePressEvent(self.h, event.h)
+
+proc QErrorMessagemouseReleaseEvent*(self: gen_qerrormessage_types.QErrorMessage, event: gen_qevent_types.QMouseEvent): void =
+  fcQErrorMessage_virtualbase_mouseReleaseEvent(self.h, event.h)
+
+proc QErrorMessagemouseDoubleClickEvent*(self: gen_qerrormessage_types.QErrorMessage, event: gen_qevent_types.QMouseEvent): void =
+  fcQErrorMessage_virtualbase_mouseDoubleClickEvent(self.h, event.h)
+
+proc QErrorMessagemouseMoveEvent*(self: gen_qerrormessage_types.QErrorMessage, event: gen_qevent_types.QMouseEvent): void =
+  fcQErrorMessage_virtualbase_mouseMoveEvent(self.h, event.h)
+
+proc QErrorMessagewheelEvent*(self: gen_qerrormessage_types.QErrorMessage, event: gen_qevent_types.QWheelEvent): void =
+  fcQErrorMessage_virtualbase_wheelEvent(self.h, event.h)
+
+proc QErrorMessagekeyReleaseEvent*(self: gen_qerrormessage_types.QErrorMessage, event: gen_qevent_types.QKeyEvent): void =
+  fcQErrorMessage_virtualbase_keyReleaseEvent(self.h, event.h)
+
+proc QErrorMessagefocusInEvent*(self: gen_qerrormessage_types.QErrorMessage, event: gen_qevent_types.QFocusEvent): void =
+  fcQErrorMessage_virtualbase_focusInEvent(self.h, event.h)
+
+proc QErrorMessagefocusOutEvent*(self: gen_qerrormessage_types.QErrorMessage, event: gen_qevent_types.QFocusEvent): void =
+  fcQErrorMessage_virtualbase_focusOutEvent(self.h, event.h)
+
+proc QErrorMessageenterEvent*(self: gen_qerrormessage_types.QErrorMessage, event: gen_qevent_types.QEnterEvent): void =
+  fcQErrorMessage_virtualbase_enterEvent(self.h, event.h)
+
+proc QErrorMessageleaveEvent*(self: gen_qerrormessage_types.QErrorMessage, event: gen_qcoreevent_types.QEvent): void =
+  fcQErrorMessage_virtualbase_leaveEvent(self.h, event.h)
+
+proc QErrorMessagepaintEvent*(self: gen_qerrormessage_types.QErrorMessage, event: gen_qevent_types.QPaintEvent): void =
+  fcQErrorMessage_virtualbase_paintEvent(self.h, event.h)
+
+proc QErrorMessagemoveEvent*(self: gen_qerrormessage_types.QErrorMessage, event: gen_qevent_types.QMoveEvent): void =
+  fcQErrorMessage_virtualbase_moveEvent(self.h, event.h)
+
+proc QErrorMessagetabletEvent*(self: gen_qerrormessage_types.QErrorMessage, event: gen_qevent_types.QTabletEvent): void =
+  fcQErrorMessage_virtualbase_tabletEvent(self.h, event.h)
+
+proc QErrorMessageactionEvent*(self: gen_qerrormessage_types.QErrorMessage, event: gen_qevent_types.QActionEvent): void =
+  fcQErrorMessage_virtualbase_actionEvent(self.h, event.h)
+
+proc QErrorMessagedragEnterEvent*(self: gen_qerrormessage_types.QErrorMessage, event: gen_qevent_types.QDragEnterEvent): void =
+  fcQErrorMessage_virtualbase_dragEnterEvent(self.h, event.h)
+
+proc QErrorMessagedragMoveEvent*(self: gen_qerrormessage_types.QErrorMessage, event: gen_qevent_types.QDragMoveEvent): void =
+  fcQErrorMessage_virtualbase_dragMoveEvent(self.h, event.h)
+
+proc QErrorMessagedragLeaveEvent*(self: gen_qerrormessage_types.QErrorMessage, event: gen_qevent_types.QDragLeaveEvent): void =
+  fcQErrorMessage_virtualbase_dragLeaveEvent(self.h, event.h)
+
+proc QErrorMessagedropEvent*(self: gen_qerrormessage_types.QErrorMessage, event: gen_qevent_types.QDropEvent): void =
+  fcQErrorMessage_virtualbase_dropEvent(self.h, event.h)
+
+proc QErrorMessagehideEvent*(self: gen_qerrormessage_types.QErrorMessage, event: gen_qevent_types.QHideEvent): void =
+  fcQErrorMessage_virtualbase_hideEvent(self.h, event.h)
+
+proc QErrorMessagenativeEvent*(self: gen_qerrormessage_types.QErrorMessage, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool =
+  fcQErrorMessage_virtualbase_nativeEvent(self.h, struct_miqt_string(data: if len(eventType) > 0: addr eventType[0] else: nil, len: csize_t(len(eventType))), message, resultVal)
+
+proc QErrorMessagemetric*(self: gen_qerrormessage_types.QErrorMessage, param1: cint): cint =
+  fcQErrorMessage_virtualbase_metric(self.h, cint(param1))
+
+proc QErrorMessageinitPainter*(self: gen_qerrormessage_types.QErrorMessage, painter: gen_qpainter_types.QPainter): void =
+  fcQErrorMessage_virtualbase_initPainter(self.h, painter.h)
+
+proc QErrorMessageredirected*(self: gen_qerrormessage_types.QErrorMessage, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice =
+  gen_qpaintdevice_types.QPaintDevice(h: fcQErrorMessage_virtualbase_redirected(self.h, offset.h), owned: false)
+
+proc QErrorMessagesharedPainter*(self: gen_qerrormessage_types.QErrorMessage): gen_qpainter_types.QPainter =
+  gen_qpainter_types.QPainter(h: fcQErrorMessage_virtualbase_sharedPainter(self.h), owned: false)
+
+proc QErrorMessageinputMethodEvent*(self: gen_qerrormessage_types.QErrorMessage, param1: gen_qevent_types.QInputMethodEvent): void =
+  fcQErrorMessage_virtualbase_inputMethodEvent(self.h, param1.h)
+
+proc QErrorMessageinputMethodQuery*(self: gen_qerrormessage_types.QErrorMessage, param1: cint): gen_qvariant_types.QVariant =
+  gen_qvariant_types.QVariant(h: fcQErrorMessage_virtualbase_inputMethodQuery(self.h, cint(param1)), owned: true)
+
+proc QErrorMessagefocusNextPrevChild*(self: gen_qerrormessage_types.QErrorMessage, next: bool): bool =
+  fcQErrorMessage_virtualbase_focusNextPrevChild(self.h, next)
+
+proc QErrorMessagetimerEvent*(self: gen_qerrormessage_types.QErrorMessage, event: gen_qcoreevent_types.QTimerEvent): void =
+  fcQErrorMessage_virtualbase_timerEvent(self.h, event.h)
+
+proc QErrorMessagechildEvent*(self: gen_qerrormessage_types.QErrorMessage, event: gen_qcoreevent_types.QChildEvent): void =
+  fcQErrorMessage_virtualbase_childEvent(self.h, event.h)
+
+proc QErrorMessagecustomEvent*(self: gen_qerrormessage_types.QErrorMessage, event: gen_qcoreevent_types.QEvent): void =
+  fcQErrorMessage_virtualbase_customEvent(self.h, event.h)
+
+proc QErrorMessageconnectNotify*(self: gen_qerrormessage_types.QErrorMessage, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQErrorMessage_virtualbase_connectNotify(self.h, signal.h)
+
+proc QErrorMessagedisconnectNotify*(self: gen_qerrormessage_types.QErrorMessage, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQErrorMessage_virtualbase_disconnectNotify(self.h, signal.h)
+
 
 proc fcQErrorMessage_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QErrorMessageVTable](fcQErrorMessage_vdata(self)[])
@@ -367,18 +533,12 @@ proc fcQErrorMessage_vtable_callback_metaObject(self: pointer): pointer {.cdecl.
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QErrorMessagemetacast*(self: gen_qerrormessage_types.QErrorMessage, param1: cstring): pointer =
-  fcQErrorMessage_virtualbase_metacast(self.h, param1)
-
 proc fcQErrorMessage_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QErrorMessageVTable](fcQErrorMessage_vdata(self)[])
   let self = QErrorMessage(h: self)
   let slotval1 = (param1)
   var virtualReturn = vtbl[].metacast(self, slotval1)
   virtualReturn
-
-proc QErrorMessagemetacall*(self: gen_qerrormessage_types.QErrorMessage, param1: cint, param2: cint, param3: pointer): cint =
-  fcQErrorMessage_virtualbase_metacall(self.h, cint(param1), param2, param3)
 
 proc fcQErrorMessage_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QErrorMessageVTable](fcQErrorMessage_vdata(self)[])
@@ -389,17 +549,11 @@ proc fcQErrorMessage_vtable_callback_metacall(self: pointer, param1: cint, param
   var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QErrorMessagedone*(self: gen_qerrormessage_types.QErrorMessage, param1: cint): void =
-  fcQErrorMessage_virtualbase_done(self.h, param1)
-
 proc fcQErrorMessage_vtable_callback_done(self: pointer, param1: cint): void {.cdecl.} =
   let vtbl = cast[ptr QErrorMessageVTable](fcQErrorMessage_vdata(self)[])
   let self = QErrorMessage(h: self)
   let slotval1 = param1
   vtbl[].done(self, slotval1)
-
-proc QErrorMessagechangeEvent*(self: gen_qerrormessage_types.QErrorMessage, e: gen_qcoreevent_types.QEvent): void =
-  fcQErrorMessage_virtualbase_changeEvent(self.h, e.h)
 
 proc fcQErrorMessage_vtable_callback_changeEvent(self: pointer, e: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QErrorMessageVTable](fcQErrorMessage_vdata(self)[])
@@ -407,17 +561,11 @@ proc fcQErrorMessage_vtable_callback_changeEvent(self: pointer, e: pointer): voi
   let slotval1 = gen_qcoreevent_types.QEvent(h: e, owned: false)
   vtbl[].changeEvent(self, slotval1)
 
-proc QErrorMessagesetVisible*(self: gen_qerrormessage_types.QErrorMessage, visible: bool): void =
-  fcQErrorMessage_virtualbase_setVisible(self.h, visible)
-
 proc fcQErrorMessage_vtable_callback_setVisible(self: pointer, visible: bool): void {.cdecl.} =
   let vtbl = cast[ptr QErrorMessageVTable](fcQErrorMessage_vdata(self)[])
   let self = QErrorMessage(h: self)
   let slotval1 = visible
   vtbl[].setVisible(self, slotval1)
-
-proc QErrorMessagesizeHint*(self: gen_qerrormessage_types.QErrorMessage): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQErrorMessage_virtualbase_sizeHint(self.h), owned: true)
 
 proc fcQErrorMessage_vtable_callback_sizeHint(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QErrorMessageVTable](fcQErrorMessage_vdata(self)[])
@@ -428,9 +576,6 @@ proc fcQErrorMessage_vtable_callback_sizeHint(self: pointer): pointer {.cdecl.} 
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QErrorMessageminimumSizeHint*(self: gen_qerrormessage_types.QErrorMessage): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQErrorMessage_virtualbase_minimumSizeHint(self.h), owned: true)
-
 proc fcQErrorMessage_vtable_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QErrorMessageVTable](fcQErrorMessage_vdata(self)[])
   let self = QErrorMessage(h: self)
@@ -440,16 +585,10 @@ proc fcQErrorMessage_vtable_callback_minimumSizeHint(self: pointer): pointer {.c
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QErrorMessageopen*(self: gen_qerrormessage_types.QErrorMessage): void =
-  fcQErrorMessage_virtualbase_open(self.h)
-
 proc fcQErrorMessage_vtable_callback_open(self: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QErrorMessageVTable](fcQErrorMessage_vdata(self)[])
   let self = QErrorMessage(h: self)
   vtbl[].open(self)
-
-proc QErrorMessageexec*(self: gen_qerrormessage_types.QErrorMessage): cint =
-  fcQErrorMessage_virtualbase_exec(self.h)
 
 proc fcQErrorMessage_vtable_callback_exec(self: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QErrorMessageVTable](fcQErrorMessage_vdata(self)[])
@@ -457,24 +596,15 @@ proc fcQErrorMessage_vtable_callback_exec(self: pointer): cint {.cdecl.} =
   var virtualReturn = vtbl[].exec(self)
   virtualReturn
 
-proc QErrorMessageaccept*(self: gen_qerrormessage_types.QErrorMessage): void =
-  fcQErrorMessage_virtualbase_accept(self.h)
-
 proc fcQErrorMessage_vtable_callback_accept(self: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QErrorMessageVTable](fcQErrorMessage_vdata(self)[])
   let self = QErrorMessage(h: self)
   vtbl[].accept(self)
 
-proc QErrorMessagereject*(self: gen_qerrormessage_types.QErrorMessage): void =
-  fcQErrorMessage_virtualbase_reject(self.h)
-
 proc fcQErrorMessage_vtable_callback_reject(self: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QErrorMessageVTable](fcQErrorMessage_vdata(self)[])
   let self = QErrorMessage(h: self)
   vtbl[].reject(self)
-
-proc QErrorMessagekeyPressEvent*(self: gen_qerrormessage_types.QErrorMessage, param1: gen_qevent_types.QKeyEvent): void =
-  fcQErrorMessage_virtualbase_keyPressEvent(self.h, param1.h)
 
 proc fcQErrorMessage_vtable_callback_keyPressEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QErrorMessageVTable](fcQErrorMessage_vdata(self)[])
@@ -482,17 +612,11 @@ proc fcQErrorMessage_vtable_callback_keyPressEvent(self: pointer, param1: pointe
   let slotval1 = gen_qevent_types.QKeyEvent(h: param1, owned: false)
   vtbl[].keyPressEvent(self, slotval1)
 
-proc QErrorMessagecloseEvent*(self: gen_qerrormessage_types.QErrorMessage, param1: gen_qevent_types.QCloseEvent): void =
-  fcQErrorMessage_virtualbase_closeEvent(self.h, param1.h)
-
 proc fcQErrorMessage_vtable_callback_closeEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QErrorMessageVTable](fcQErrorMessage_vdata(self)[])
   let self = QErrorMessage(h: self)
   let slotval1 = gen_qevent_types.QCloseEvent(h: param1, owned: false)
   vtbl[].closeEvent(self, slotval1)
-
-proc QErrorMessageshowEvent*(self: gen_qerrormessage_types.QErrorMessage, param1: gen_qevent_types.QShowEvent): void =
-  fcQErrorMessage_virtualbase_showEvent(self.h, param1.h)
 
 proc fcQErrorMessage_vtable_callback_showEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QErrorMessageVTable](fcQErrorMessage_vdata(self)[])
@@ -500,26 +624,17 @@ proc fcQErrorMessage_vtable_callback_showEvent(self: pointer, param1: pointer): 
   let slotval1 = gen_qevent_types.QShowEvent(h: param1, owned: false)
   vtbl[].showEvent(self, slotval1)
 
-proc QErrorMessageresizeEvent*(self: gen_qerrormessage_types.QErrorMessage, param1: gen_qevent_types.QResizeEvent): void =
-  fcQErrorMessage_virtualbase_resizeEvent(self.h, param1.h)
-
 proc fcQErrorMessage_vtable_callback_resizeEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QErrorMessageVTable](fcQErrorMessage_vdata(self)[])
   let self = QErrorMessage(h: self)
   let slotval1 = gen_qevent_types.QResizeEvent(h: param1, owned: false)
   vtbl[].resizeEvent(self, slotval1)
 
-proc QErrorMessagecontextMenuEvent*(self: gen_qerrormessage_types.QErrorMessage, param1: gen_qevent_types.QContextMenuEvent): void =
-  fcQErrorMessage_virtualbase_contextMenuEvent(self.h, param1.h)
-
 proc fcQErrorMessage_vtable_callback_contextMenuEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QErrorMessageVTable](fcQErrorMessage_vdata(self)[])
   let self = QErrorMessage(h: self)
   let slotval1 = gen_qevent_types.QContextMenuEvent(h: param1, owned: false)
   vtbl[].contextMenuEvent(self, slotval1)
-
-proc QErrorMessageeventFilter*(self: gen_qerrormessage_types.QErrorMessage, param1: gen_qobject_types.QObject, param2: gen_qcoreevent_types.QEvent): bool =
-  fcQErrorMessage_virtualbase_eventFilter(self.h, param1.h, param2.h)
 
 proc fcQErrorMessage_vtable_callback_eventFilter(self: pointer, param1: pointer, param2: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QErrorMessageVTable](fcQErrorMessage_vdata(self)[])
@@ -529,17 +644,11 @@ proc fcQErrorMessage_vtable_callback_eventFilter(self: pointer, param1: pointer,
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
-proc QErrorMessagedevType*(self: gen_qerrormessage_types.QErrorMessage): cint =
-  fcQErrorMessage_virtualbase_devType(self.h)
-
 proc fcQErrorMessage_vtable_callback_devType(self: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QErrorMessageVTable](fcQErrorMessage_vdata(self)[])
   let self = QErrorMessage(h: self)
   var virtualReturn = vtbl[].devType(self)
   virtualReturn
-
-proc QErrorMessageheightForWidth*(self: gen_qerrormessage_types.QErrorMessage, param1: cint): cint =
-  fcQErrorMessage_virtualbase_heightForWidth(self.h, param1)
 
 proc fcQErrorMessage_vtable_callback_heightForWidth(self: pointer, param1: cint): cint {.cdecl.} =
   let vtbl = cast[ptr QErrorMessageVTable](fcQErrorMessage_vdata(self)[])
@@ -548,17 +657,11 @@ proc fcQErrorMessage_vtable_callback_heightForWidth(self: pointer, param1: cint)
   var virtualReturn = vtbl[].heightForWidth(self, slotval1)
   virtualReturn
 
-proc QErrorMessagehasHeightForWidth*(self: gen_qerrormessage_types.QErrorMessage): bool =
-  fcQErrorMessage_virtualbase_hasHeightForWidth(self.h)
-
 proc fcQErrorMessage_vtable_callback_hasHeightForWidth(self: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QErrorMessageVTable](fcQErrorMessage_vdata(self)[])
   let self = QErrorMessage(h: self)
   var virtualReturn = vtbl[].hasHeightForWidth(self)
   virtualReturn
-
-proc QErrorMessagepaintEngine*(self: gen_qerrormessage_types.QErrorMessage): gen_qpaintengine_types.QPaintEngine =
-  gen_qpaintengine_types.QPaintEngine(h: fcQErrorMessage_virtualbase_paintEngine(self.h), owned: false)
 
 proc fcQErrorMessage_vtable_callback_paintEngine(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QErrorMessageVTable](fcQErrorMessage_vdata(self)[])
@@ -569,9 +672,6 @@ proc fcQErrorMessage_vtable_callback_paintEngine(self: pointer): pointer {.cdecl
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QErrorMessageevent*(self: gen_qerrormessage_types.QErrorMessage, event: gen_qcoreevent_types.QEvent): bool =
-  fcQErrorMessage_virtualbase_event(self.h, event.h)
-
 proc fcQErrorMessage_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QErrorMessageVTable](fcQErrorMessage_vdata(self)[])
   let self = QErrorMessage(h: self)
@@ -579,17 +679,11 @@ proc fcQErrorMessage_vtable_callback_event(self: pointer, event: pointer): bool 
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
-proc QErrorMessagemousePressEvent*(self: gen_qerrormessage_types.QErrorMessage, event: gen_qevent_types.QMouseEvent): void =
-  fcQErrorMessage_virtualbase_mousePressEvent(self.h, event.h)
-
 proc fcQErrorMessage_vtable_callback_mousePressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QErrorMessageVTable](fcQErrorMessage_vdata(self)[])
   let self = QErrorMessage(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mousePressEvent(self, slotval1)
-
-proc QErrorMessagemouseReleaseEvent*(self: gen_qerrormessage_types.QErrorMessage, event: gen_qevent_types.QMouseEvent): void =
-  fcQErrorMessage_virtualbase_mouseReleaseEvent(self.h, event.h)
 
 proc fcQErrorMessage_vtable_callback_mouseReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QErrorMessageVTable](fcQErrorMessage_vdata(self)[])
@@ -597,17 +691,11 @@ proc fcQErrorMessage_vtable_callback_mouseReleaseEvent(self: pointer, event: poi
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseReleaseEvent(self, slotval1)
 
-proc QErrorMessagemouseDoubleClickEvent*(self: gen_qerrormessage_types.QErrorMessage, event: gen_qevent_types.QMouseEvent): void =
-  fcQErrorMessage_virtualbase_mouseDoubleClickEvent(self.h, event.h)
-
 proc fcQErrorMessage_vtable_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QErrorMessageVTable](fcQErrorMessage_vdata(self)[])
   let self = QErrorMessage(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseDoubleClickEvent(self, slotval1)
-
-proc QErrorMessagemouseMoveEvent*(self: gen_qerrormessage_types.QErrorMessage, event: gen_qevent_types.QMouseEvent): void =
-  fcQErrorMessage_virtualbase_mouseMoveEvent(self.h, event.h)
 
 proc fcQErrorMessage_vtable_callback_mouseMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QErrorMessageVTable](fcQErrorMessage_vdata(self)[])
@@ -615,17 +703,11 @@ proc fcQErrorMessage_vtable_callback_mouseMoveEvent(self: pointer, event: pointe
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseMoveEvent(self, slotval1)
 
-proc QErrorMessagewheelEvent*(self: gen_qerrormessage_types.QErrorMessage, event: gen_qevent_types.QWheelEvent): void =
-  fcQErrorMessage_virtualbase_wheelEvent(self.h, event.h)
-
 proc fcQErrorMessage_vtable_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QErrorMessageVTable](fcQErrorMessage_vdata(self)[])
   let self = QErrorMessage(h: self)
   let slotval1 = gen_qevent_types.QWheelEvent(h: event, owned: false)
   vtbl[].wheelEvent(self, slotval1)
-
-proc QErrorMessagekeyReleaseEvent*(self: gen_qerrormessage_types.QErrorMessage, event: gen_qevent_types.QKeyEvent): void =
-  fcQErrorMessage_virtualbase_keyReleaseEvent(self.h, event.h)
 
 proc fcQErrorMessage_vtable_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QErrorMessageVTable](fcQErrorMessage_vdata(self)[])
@@ -633,17 +715,11 @@ proc fcQErrorMessage_vtable_callback_keyReleaseEvent(self: pointer, event: point
   let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   vtbl[].keyReleaseEvent(self, slotval1)
 
-proc QErrorMessagefocusInEvent*(self: gen_qerrormessage_types.QErrorMessage, event: gen_qevent_types.QFocusEvent): void =
-  fcQErrorMessage_virtualbase_focusInEvent(self.h, event.h)
-
 proc fcQErrorMessage_vtable_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QErrorMessageVTable](fcQErrorMessage_vdata(self)[])
   let self = QErrorMessage(h: self)
   let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusInEvent(self, slotval1)
-
-proc QErrorMessagefocusOutEvent*(self: gen_qerrormessage_types.QErrorMessage, event: gen_qevent_types.QFocusEvent): void =
-  fcQErrorMessage_virtualbase_focusOutEvent(self.h, event.h)
 
 proc fcQErrorMessage_vtable_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QErrorMessageVTable](fcQErrorMessage_vdata(self)[])
@@ -651,17 +727,11 @@ proc fcQErrorMessage_vtable_callback_focusOutEvent(self: pointer, event: pointer
   let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusOutEvent(self, slotval1)
 
-proc QErrorMessageenterEvent*(self: gen_qerrormessage_types.QErrorMessage, event: gen_qevent_types.QEnterEvent): void =
-  fcQErrorMessage_virtualbase_enterEvent(self.h, event.h)
-
 proc fcQErrorMessage_vtable_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QErrorMessageVTable](fcQErrorMessage_vdata(self)[])
   let self = QErrorMessage(h: self)
   let slotval1 = gen_qevent_types.QEnterEvent(h: event, owned: false)
   vtbl[].enterEvent(self, slotval1)
-
-proc QErrorMessageleaveEvent*(self: gen_qerrormessage_types.QErrorMessage, event: gen_qcoreevent_types.QEvent): void =
-  fcQErrorMessage_virtualbase_leaveEvent(self.h, event.h)
 
 proc fcQErrorMessage_vtable_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QErrorMessageVTable](fcQErrorMessage_vdata(self)[])
@@ -669,17 +739,11 @@ proc fcQErrorMessage_vtable_callback_leaveEvent(self: pointer, event: pointer): 
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].leaveEvent(self, slotval1)
 
-proc QErrorMessagepaintEvent*(self: gen_qerrormessage_types.QErrorMessage, event: gen_qevent_types.QPaintEvent): void =
-  fcQErrorMessage_virtualbase_paintEvent(self.h, event.h)
-
 proc fcQErrorMessage_vtable_callback_paintEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QErrorMessageVTable](fcQErrorMessage_vdata(self)[])
   let self = QErrorMessage(h: self)
   let slotval1 = gen_qevent_types.QPaintEvent(h: event, owned: false)
   vtbl[].paintEvent(self, slotval1)
-
-proc QErrorMessagemoveEvent*(self: gen_qerrormessage_types.QErrorMessage, event: gen_qevent_types.QMoveEvent): void =
-  fcQErrorMessage_virtualbase_moveEvent(self.h, event.h)
 
 proc fcQErrorMessage_vtable_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QErrorMessageVTable](fcQErrorMessage_vdata(self)[])
@@ -687,17 +751,11 @@ proc fcQErrorMessage_vtable_callback_moveEvent(self: pointer, event: pointer): v
   let slotval1 = gen_qevent_types.QMoveEvent(h: event, owned: false)
   vtbl[].moveEvent(self, slotval1)
 
-proc QErrorMessagetabletEvent*(self: gen_qerrormessage_types.QErrorMessage, event: gen_qevent_types.QTabletEvent): void =
-  fcQErrorMessage_virtualbase_tabletEvent(self.h, event.h)
-
 proc fcQErrorMessage_vtable_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QErrorMessageVTable](fcQErrorMessage_vdata(self)[])
   let self = QErrorMessage(h: self)
   let slotval1 = gen_qevent_types.QTabletEvent(h: event, owned: false)
   vtbl[].tabletEvent(self, slotval1)
-
-proc QErrorMessageactionEvent*(self: gen_qerrormessage_types.QErrorMessage, event: gen_qevent_types.QActionEvent): void =
-  fcQErrorMessage_virtualbase_actionEvent(self.h, event.h)
 
 proc fcQErrorMessage_vtable_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QErrorMessageVTable](fcQErrorMessage_vdata(self)[])
@@ -705,17 +763,11 @@ proc fcQErrorMessage_vtable_callback_actionEvent(self: pointer, event: pointer):
   let slotval1 = gen_qevent_types.QActionEvent(h: event, owned: false)
   vtbl[].actionEvent(self, slotval1)
 
-proc QErrorMessagedragEnterEvent*(self: gen_qerrormessage_types.QErrorMessage, event: gen_qevent_types.QDragEnterEvent): void =
-  fcQErrorMessage_virtualbase_dragEnterEvent(self.h, event.h)
-
 proc fcQErrorMessage_vtable_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QErrorMessageVTable](fcQErrorMessage_vdata(self)[])
   let self = QErrorMessage(h: self)
   let slotval1 = gen_qevent_types.QDragEnterEvent(h: event, owned: false)
   vtbl[].dragEnterEvent(self, slotval1)
-
-proc QErrorMessagedragMoveEvent*(self: gen_qerrormessage_types.QErrorMessage, event: gen_qevent_types.QDragMoveEvent): void =
-  fcQErrorMessage_virtualbase_dragMoveEvent(self.h, event.h)
 
 proc fcQErrorMessage_vtable_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QErrorMessageVTable](fcQErrorMessage_vdata(self)[])
@@ -723,17 +775,11 @@ proc fcQErrorMessage_vtable_callback_dragMoveEvent(self: pointer, event: pointer
   let slotval1 = gen_qevent_types.QDragMoveEvent(h: event, owned: false)
   vtbl[].dragMoveEvent(self, slotval1)
 
-proc QErrorMessagedragLeaveEvent*(self: gen_qerrormessage_types.QErrorMessage, event: gen_qevent_types.QDragLeaveEvent): void =
-  fcQErrorMessage_virtualbase_dragLeaveEvent(self.h, event.h)
-
 proc fcQErrorMessage_vtable_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QErrorMessageVTable](fcQErrorMessage_vdata(self)[])
   let self = QErrorMessage(h: self)
   let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event, owned: false)
   vtbl[].dragLeaveEvent(self, slotval1)
-
-proc QErrorMessagedropEvent*(self: gen_qerrormessage_types.QErrorMessage, event: gen_qevent_types.QDropEvent): void =
-  fcQErrorMessage_virtualbase_dropEvent(self.h, event.h)
 
 proc fcQErrorMessage_vtable_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QErrorMessageVTable](fcQErrorMessage_vdata(self)[])
@@ -741,17 +787,11 @@ proc fcQErrorMessage_vtable_callback_dropEvent(self: pointer, event: pointer): v
   let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
   vtbl[].dropEvent(self, slotval1)
 
-proc QErrorMessagehideEvent*(self: gen_qerrormessage_types.QErrorMessage, event: gen_qevent_types.QHideEvent): void =
-  fcQErrorMessage_virtualbase_hideEvent(self.h, event.h)
-
 proc fcQErrorMessage_vtable_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QErrorMessageVTable](fcQErrorMessage_vdata(self)[])
   let self = QErrorMessage(h: self)
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   vtbl[].hideEvent(self, slotval1)
-
-proc QErrorMessagenativeEvent*(self: gen_qerrormessage_types.QErrorMessage, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool =
-  fcQErrorMessage_virtualbase_nativeEvent(self.h, struct_miqt_string(data: if len(eventType) > 0: addr eventType[0] else: nil, len: csize_t(len(eventType))), message, resultVal)
 
 proc fcQErrorMessage_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
   let vtbl = cast[ptr QErrorMessageVTable](fcQErrorMessage_vdata(self)[])
@@ -765,9 +805,6 @@ proc fcQErrorMessage_vtable_callback_nativeEvent(self: pointer, eventType: struc
   var virtualReturn = vtbl[].nativeEvent(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QErrorMessagemetric*(self: gen_qerrormessage_types.QErrorMessage, param1: cint): cint =
-  fcQErrorMessage_virtualbase_metric(self.h, cint(param1))
-
 proc fcQErrorMessage_vtable_callback_metric(self: pointer, param1: cint): cint {.cdecl.} =
   let vtbl = cast[ptr QErrorMessageVTable](fcQErrorMessage_vdata(self)[])
   let self = QErrorMessage(h: self)
@@ -775,17 +812,11 @@ proc fcQErrorMessage_vtable_callback_metric(self: pointer, param1: cint): cint {
   var virtualReturn = vtbl[].metric(self, slotval1)
   virtualReturn
 
-proc QErrorMessageinitPainter*(self: gen_qerrormessage_types.QErrorMessage, painter: gen_qpainter_types.QPainter): void =
-  fcQErrorMessage_virtualbase_initPainter(self.h, painter.h)
-
 proc fcQErrorMessage_vtable_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QErrorMessageVTable](fcQErrorMessage_vdata(self)[])
   let self = QErrorMessage(h: self)
   let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
   vtbl[].initPainter(self, slotval1)
-
-proc QErrorMessageredirected*(self: gen_qerrormessage_types.QErrorMessage, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice =
-  gen_qpaintdevice_types.QPaintDevice(h: fcQErrorMessage_virtualbase_redirected(self.h, offset.h), owned: false)
 
 proc fcQErrorMessage_vtable_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QErrorMessageVTable](fcQErrorMessage_vdata(self)[])
@@ -797,9 +828,6 @@ proc fcQErrorMessage_vtable_callback_redirected(self: pointer, offset: pointer):
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QErrorMessagesharedPainter*(self: gen_qerrormessage_types.QErrorMessage): gen_qpainter_types.QPainter =
-  gen_qpainter_types.QPainter(h: fcQErrorMessage_virtualbase_sharedPainter(self.h), owned: false)
-
 proc fcQErrorMessage_vtable_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QErrorMessageVTable](fcQErrorMessage_vdata(self)[])
   let self = QErrorMessage(h: self)
@@ -809,17 +837,11 @@ proc fcQErrorMessage_vtable_callback_sharedPainter(self: pointer): pointer {.cde
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QErrorMessageinputMethodEvent*(self: gen_qerrormessage_types.QErrorMessage, param1: gen_qevent_types.QInputMethodEvent): void =
-  fcQErrorMessage_virtualbase_inputMethodEvent(self.h, param1.h)
-
 proc fcQErrorMessage_vtable_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QErrorMessageVTable](fcQErrorMessage_vdata(self)[])
   let self = QErrorMessage(h: self)
   let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1, owned: false)
   vtbl[].inputMethodEvent(self, slotval1)
-
-proc QErrorMessageinputMethodQuery*(self: gen_qerrormessage_types.QErrorMessage, param1: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQErrorMessage_virtualbase_inputMethodQuery(self.h, cint(param1)), owned: true)
 
 proc fcQErrorMessage_vtable_callback_inputMethodQuery(self: pointer, param1: cint): pointer {.cdecl.} =
   let vtbl = cast[ptr QErrorMessageVTable](fcQErrorMessage_vdata(self)[])
@@ -831,9 +853,6 @@ proc fcQErrorMessage_vtable_callback_inputMethodQuery(self: pointer, param1: cin
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QErrorMessagefocusNextPrevChild*(self: gen_qerrormessage_types.QErrorMessage, next: bool): bool =
-  fcQErrorMessage_virtualbase_focusNextPrevChild(self.h, next)
-
 proc fcQErrorMessage_vtable_callback_focusNextPrevChild(self: pointer, next: bool): bool {.cdecl.} =
   let vtbl = cast[ptr QErrorMessageVTable](fcQErrorMessage_vdata(self)[])
   let self = QErrorMessage(h: self)
@@ -841,17 +860,11 @@ proc fcQErrorMessage_vtable_callback_focusNextPrevChild(self: pointer, next: boo
   var virtualReturn = vtbl[].focusNextPrevChild(self, slotval1)
   virtualReturn
 
-proc QErrorMessagetimerEvent*(self: gen_qerrormessage_types.QErrorMessage, event: gen_qcoreevent_types.QTimerEvent): void =
-  fcQErrorMessage_virtualbase_timerEvent(self.h, event.h)
-
 proc fcQErrorMessage_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QErrorMessageVTable](fcQErrorMessage_vdata(self)[])
   let self = QErrorMessage(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
-
-proc QErrorMessagechildEvent*(self: gen_qerrormessage_types.QErrorMessage, event: gen_qcoreevent_types.QChildEvent): void =
-  fcQErrorMessage_virtualbase_childEvent(self.h, event.h)
 
 proc fcQErrorMessage_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QErrorMessageVTable](fcQErrorMessage_vdata(self)[])
@@ -859,26 +872,17 @@ proc fcQErrorMessage_vtable_callback_childEvent(self: pointer, event: pointer): 
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
-proc QErrorMessagecustomEvent*(self: gen_qerrormessage_types.QErrorMessage, event: gen_qcoreevent_types.QEvent): void =
-  fcQErrorMessage_virtualbase_customEvent(self.h, event.h)
-
 proc fcQErrorMessage_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QErrorMessageVTable](fcQErrorMessage_vdata(self)[])
   let self = QErrorMessage(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
-proc QErrorMessageconnectNotify*(self: gen_qerrormessage_types.QErrorMessage, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQErrorMessage_virtualbase_connectNotify(self.h, signal.h)
-
 proc fcQErrorMessage_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QErrorMessageVTable](fcQErrorMessage_vdata(self)[])
   let self = QErrorMessage(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
-
-proc QErrorMessagedisconnectNotify*(self: gen_qerrormessage_types.QErrorMessage, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQErrorMessage_virtualbase_disconnectNotify(self.h, signal.h)
 
 proc fcQErrorMessage_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QErrorMessageVTable](fcQErrorMessage_vdata(self)[])
@@ -888,23 +892,129 @@ proc fcQErrorMessage_vtable_callback_disconnectNotify(self: pointer, signal: poi
 
 type VirtualQErrorMessage* {.inheritable.} = ref object of QErrorMessage
   vtbl*: cQErrorMessageVTable
+
 method metaObject*(self: VirtualQErrorMessage): gen_qobjectdefs_types.QMetaObject {.base.} =
   QErrorMessagemetaObject(self[])
+method metacast*(self: VirtualQErrorMessage, param1: cstring): pointer {.base.} =
+  QErrorMessagemetacast(self[], param1)
+method metacall*(self: VirtualQErrorMessage, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QErrorMessagemetacall(self[], param1, param2, param3)
+method done*(self: VirtualQErrorMessage, param1: cint): void {.base.} =
+  QErrorMessagedone(self[], param1)
+method changeEvent*(self: VirtualQErrorMessage, e: gen_qcoreevent_types.QEvent): void {.base.} =
+  QErrorMessagechangeEvent(self[], e)
+method setVisible*(self: VirtualQErrorMessage, visible: bool): void {.base.} =
+  QErrorMessagesetVisible(self[], visible)
+method sizeHint*(self: VirtualQErrorMessage): gen_qsize_types.QSize {.base.} =
+  QErrorMessagesizeHint(self[])
+method minimumSizeHint*(self: VirtualQErrorMessage): gen_qsize_types.QSize {.base.} =
+  QErrorMessageminimumSizeHint(self[])
+method open*(self: VirtualQErrorMessage): void {.base.} =
+  QErrorMessageopen(self[])
+method exec*(self: VirtualQErrorMessage): cint {.base.} =
+  QErrorMessageexec(self[])
+method accept*(self: VirtualQErrorMessage): void {.base.} =
+  QErrorMessageaccept(self[])
+method reject*(self: VirtualQErrorMessage): void {.base.} =
+  QErrorMessagereject(self[])
+method keyPressEvent*(self: VirtualQErrorMessage, param1: gen_qevent_types.QKeyEvent): void {.base.} =
+  QErrorMessagekeyPressEvent(self[], param1)
+method closeEvent*(self: VirtualQErrorMessage, param1: gen_qevent_types.QCloseEvent): void {.base.} =
+  QErrorMessagecloseEvent(self[], param1)
+method showEvent*(self: VirtualQErrorMessage, param1: gen_qevent_types.QShowEvent): void {.base.} =
+  QErrorMessageshowEvent(self[], param1)
+method resizeEvent*(self: VirtualQErrorMessage, param1: gen_qevent_types.QResizeEvent): void {.base.} =
+  QErrorMessageresizeEvent(self[], param1)
+method contextMenuEvent*(self: VirtualQErrorMessage, param1: gen_qevent_types.QContextMenuEvent): void {.base.} =
+  QErrorMessagecontextMenuEvent(self[], param1)
+method eventFilter*(self: VirtualQErrorMessage, param1: gen_qobject_types.QObject, param2: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QErrorMessageeventFilter(self[], param1, param2)
+method devType*(self: VirtualQErrorMessage): cint {.base.} =
+  QErrorMessagedevType(self[])
+method heightForWidth*(self: VirtualQErrorMessage, param1: cint): cint {.base.} =
+  QErrorMessageheightForWidth(self[], param1)
+method hasHeightForWidth*(self: VirtualQErrorMessage): bool {.base.} =
+  QErrorMessagehasHeightForWidth(self[])
+method paintEngine*(self: VirtualQErrorMessage): gen_qpaintengine_types.QPaintEngine {.base.} =
+  QErrorMessagepaintEngine(self[])
+method event*(self: VirtualQErrorMessage, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QErrorMessageevent(self[], event)
+method mousePressEvent*(self: VirtualQErrorMessage, event: gen_qevent_types.QMouseEvent): void {.base.} =
+  QErrorMessagemousePressEvent(self[], event)
+method mouseReleaseEvent*(self: VirtualQErrorMessage, event: gen_qevent_types.QMouseEvent): void {.base.} =
+  QErrorMessagemouseReleaseEvent(self[], event)
+method mouseDoubleClickEvent*(self: VirtualQErrorMessage, event: gen_qevent_types.QMouseEvent): void {.base.} =
+  QErrorMessagemouseDoubleClickEvent(self[], event)
+method mouseMoveEvent*(self: VirtualQErrorMessage, event: gen_qevent_types.QMouseEvent): void {.base.} =
+  QErrorMessagemouseMoveEvent(self[], event)
+method wheelEvent*(self: VirtualQErrorMessage, event: gen_qevent_types.QWheelEvent): void {.base.} =
+  QErrorMessagewheelEvent(self[], event)
+method keyReleaseEvent*(self: VirtualQErrorMessage, event: gen_qevent_types.QKeyEvent): void {.base.} =
+  QErrorMessagekeyReleaseEvent(self[], event)
+method focusInEvent*(self: VirtualQErrorMessage, event: gen_qevent_types.QFocusEvent): void {.base.} =
+  QErrorMessagefocusInEvent(self[], event)
+method focusOutEvent*(self: VirtualQErrorMessage, event: gen_qevent_types.QFocusEvent): void {.base.} =
+  QErrorMessagefocusOutEvent(self[], event)
+method enterEvent*(self: VirtualQErrorMessage, event: gen_qevent_types.QEnterEvent): void {.base.} =
+  QErrorMessageenterEvent(self[], event)
+method leaveEvent*(self: VirtualQErrorMessage, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QErrorMessageleaveEvent(self[], event)
+method paintEvent*(self: VirtualQErrorMessage, event: gen_qevent_types.QPaintEvent): void {.base.} =
+  QErrorMessagepaintEvent(self[], event)
+method moveEvent*(self: VirtualQErrorMessage, event: gen_qevent_types.QMoveEvent): void {.base.} =
+  QErrorMessagemoveEvent(self[], event)
+method tabletEvent*(self: VirtualQErrorMessage, event: gen_qevent_types.QTabletEvent): void {.base.} =
+  QErrorMessagetabletEvent(self[], event)
+method actionEvent*(self: VirtualQErrorMessage, event: gen_qevent_types.QActionEvent): void {.base.} =
+  QErrorMessageactionEvent(self[], event)
+method dragEnterEvent*(self: VirtualQErrorMessage, event: gen_qevent_types.QDragEnterEvent): void {.base.} =
+  QErrorMessagedragEnterEvent(self[], event)
+method dragMoveEvent*(self: VirtualQErrorMessage, event: gen_qevent_types.QDragMoveEvent): void {.base.} =
+  QErrorMessagedragMoveEvent(self[], event)
+method dragLeaveEvent*(self: VirtualQErrorMessage, event: gen_qevent_types.QDragLeaveEvent): void {.base.} =
+  QErrorMessagedragLeaveEvent(self[], event)
+method dropEvent*(self: VirtualQErrorMessage, event: gen_qevent_types.QDropEvent): void {.base.} =
+  QErrorMessagedropEvent(self[], event)
+method hideEvent*(self: VirtualQErrorMessage, event: gen_qevent_types.QHideEvent): void {.base.} =
+  QErrorMessagehideEvent(self[], event)
+method nativeEvent*(self: VirtualQErrorMessage, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
+  QErrorMessagenativeEvent(self[], eventType, message, resultVal)
+method metric*(self: VirtualQErrorMessage, param1: cint): cint {.base.} =
+  QErrorMessagemetric(self[], param1)
+method initPainter*(self: VirtualQErrorMessage, painter: gen_qpainter_types.QPainter): void {.base.} =
+  QErrorMessageinitPainter(self[], painter)
+method redirected*(self: VirtualQErrorMessage, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.base.} =
+  QErrorMessageredirected(self[], offset)
+method sharedPainter*(self: VirtualQErrorMessage): gen_qpainter_types.QPainter {.base.} =
+  QErrorMessagesharedPainter(self[])
+method inputMethodEvent*(self: VirtualQErrorMessage, param1: gen_qevent_types.QInputMethodEvent): void {.base.} =
+  QErrorMessageinputMethodEvent(self[], param1)
+method inputMethodQuery*(self: VirtualQErrorMessage, param1: cint): gen_qvariant_types.QVariant {.base.} =
+  QErrorMessageinputMethodQuery(self[], param1)
+method focusNextPrevChild*(self: VirtualQErrorMessage, next: bool): bool {.base.} =
+  QErrorMessagefocusNextPrevChild(self[], next)
+method timerEvent*(self: VirtualQErrorMessage, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QErrorMessagetimerEvent(self[], event)
+method childEvent*(self: VirtualQErrorMessage, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QErrorMessagechildEvent(self[], event)
+method customEvent*(self: VirtualQErrorMessage, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QErrorMessagecustomEvent(self[], event)
+method connectNotify*(self: VirtualQErrorMessage, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QErrorMessageconnectNotify(self[], signal)
+method disconnectNotify*(self: VirtualQErrorMessage, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QErrorMessagedisconnectNotify(self[], signal)
+
 proc fcQErrorMessage_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQErrorMessage](fcQErrorMessage_vdata(self)[])
   var virtualReturn = inst.metaObject()
   virtualReturn.h
 
-method metacast*(self: VirtualQErrorMessage, param1: cstring): pointer {.base.} =
-  QErrorMessagemetacast(self[], param1)
 proc fcQErrorMessage_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQErrorMessage](fcQErrorMessage_vdata(self)[])
   let slotval1 = (param1)
   var virtualReturn = inst.metacast(slotval1)
   virtualReturn
 
-method metacall*(self: VirtualQErrorMessage, param1: cint, param2: cint, param3: pointer): cint {.base.} =
-  QErrorMessagemetacall(self[], param1, param2, param3)
 proc fcQErrorMessage_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQErrorMessage](fcQErrorMessage_vdata(self)[])
   let slotval1 = cint(param1)
@@ -913,103 +1023,73 @@ proc fcQErrorMessage_method_callback_metacall(self: pointer, param1: cint, param
   var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
-method done*(self: VirtualQErrorMessage, param1: cint): void {.base.} =
-  QErrorMessagedone(self[], param1)
 proc fcQErrorMessage_method_callback_done(self: pointer, param1: cint): void {.cdecl.} =
   let inst = cast[VirtualQErrorMessage](fcQErrorMessage_vdata(self)[])
   let slotval1 = param1
   inst.done(slotval1)
 
-method changeEvent*(self: VirtualQErrorMessage, e: gen_qcoreevent_types.QEvent): void {.base.} =
-  QErrorMessagechangeEvent(self[], e)
 proc fcQErrorMessage_method_callback_changeEvent(self: pointer, e: pointer): void {.cdecl.} =
   let inst = cast[VirtualQErrorMessage](fcQErrorMessage_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QEvent(h: e, owned: false)
   inst.changeEvent(slotval1)
 
-method setVisible*(self: VirtualQErrorMessage, visible: bool): void {.base.} =
-  QErrorMessagesetVisible(self[], visible)
 proc fcQErrorMessage_method_callback_setVisible(self: pointer, visible: bool): void {.cdecl.} =
   let inst = cast[VirtualQErrorMessage](fcQErrorMessage_vdata(self)[])
   let slotval1 = visible
   inst.setVisible(slotval1)
 
-method sizeHint*(self: VirtualQErrorMessage): gen_qsize_types.QSize {.base.} =
-  QErrorMessagesizeHint(self[])
 proc fcQErrorMessage_method_callback_sizeHint(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQErrorMessage](fcQErrorMessage_vdata(self)[])
   var virtualReturn = inst.sizeHint()
   virtualReturn.h
 
-method minimumSizeHint*(self: VirtualQErrorMessage): gen_qsize_types.QSize {.base.} =
-  QErrorMessageminimumSizeHint(self[])
 proc fcQErrorMessage_method_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQErrorMessage](fcQErrorMessage_vdata(self)[])
   var virtualReturn = inst.minimumSizeHint()
   virtualReturn.h
 
-method open*(self: VirtualQErrorMessage): void {.base.} =
-  QErrorMessageopen(self[])
 proc fcQErrorMessage_method_callback_open(self: pointer): void {.cdecl.} =
   let inst = cast[VirtualQErrorMessage](fcQErrorMessage_vdata(self)[])
   inst.open()
 
-method exec*(self: VirtualQErrorMessage): cint {.base.} =
-  QErrorMessageexec(self[])
 proc fcQErrorMessage_method_callback_exec(self: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQErrorMessage](fcQErrorMessage_vdata(self)[])
   var virtualReturn = inst.exec()
   virtualReturn
 
-method accept*(self: VirtualQErrorMessage): void {.base.} =
-  QErrorMessageaccept(self[])
 proc fcQErrorMessage_method_callback_accept(self: pointer): void {.cdecl.} =
   let inst = cast[VirtualQErrorMessage](fcQErrorMessage_vdata(self)[])
   inst.accept()
 
-method reject*(self: VirtualQErrorMessage): void {.base.} =
-  QErrorMessagereject(self[])
 proc fcQErrorMessage_method_callback_reject(self: pointer): void {.cdecl.} =
   let inst = cast[VirtualQErrorMessage](fcQErrorMessage_vdata(self)[])
   inst.reject()
 
-method keyPressEvent*(self: VirtualQErrorMessage, param1: gen_qevent_types.QKeyEvent): void {.base.} =
-  QErrorMessagekeyPressEvent(self[], param1)
 proc fcQErrorMessage_method_callback_keyPressEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQErrorMessage](fcQErrorMessage_vdata(self)[])
   let slotval1 = gen_qevent_types.QKeyEvent(h: param1, owned: false)
   inst.keyPressEvent(slotval1)
 
-method closeEvent*(self: VirtualQErrorMessage, param1: gen_qevent_types.QCloseEvent): void {.base.} =
-  QErrorMessagecloseEvent(self[], param1)
 proc fcQErrorMessage_method_callback_closeEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQErrorMessage](fcQErrorMessage_vdata(self)[])
   let slotval1 = gen_qevent_types.QCloseEvent(h: param1, owned: false)
   inst.closeEvent(slotval1)
 
-method showEvent*(self: VirtualQErrorMessage, param1: gen_qevent_types.QShowEvent): void {.base.} =
-  QErrorMessageshowEvent(self[], param1)
 proc fcQErrorMessage_method_callback_showEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQErrorMessage](fcQErrorMessage_vdata(self)[])
   let slotval1 = gen_qevent_types.QShowEvent(h: param1, owned: false)
   inst.showEvent(slotval1)
 
-method resizeEvent*(self: VirtualQErrorMessage, param1: gen_qevent_types.QResizeEvent): void {.base.} =
-  QErrorMessageresizeEvent(self[], param1)
 proc fcQErrorMessage_method_callback_resizeEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQErrorMessage](fcQErrorMessage_vdata(self)[])
   let slotval1 = gen_qevent_types.QResizeEvent(h: param1, owned: false)
   inst.resizeEvent(slotval1)
 
-method contextMenuEvent*(self: VirtualQErrorMessage, param1: gen_qevent_types.QContextMenuEvent): void {.base.} =
-  QErrorMessagecontextMenuEvent(self[], param1)
 proc fcQErrorMessage_method_callback_contextMenuEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQErrorMessage](fcQErrorMessage_vdata(self)[])
   let slotval1 = gen_qevent_types.QContextMenuEvent(h: param1, owned: false)
   inst.contextMenuEvent(slotval1)
 
-method eventFilter*(self: VirtualQErrorMessage, param1: gen_qobject_types.QObject, param2: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QErrorMessageeventFilter(self[], param1, param2)
 proc fcQErrorMessage_method_callback_eventFilter(self: pointer, param1: pointer, param2: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQErrorMessage](fcQErrorMessage_vdata(self)[])
   let slotval1 = gen_qobject_types.QObject(h: param1, owned: false)
@@ -1017,178 +1097,128 @@ proc fcQErrorMessage_method_callback_eventFilter(self: pointer, param1: pointer,
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
-method devType*(self: VirtualQErrorMessage): cint {.base.} =
-  QErrorMessagedevType(self[])
 proc fcQErrorMessage_method_callback_devType(self: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQErrorMessage](fcQErrorMessage_vdata(self)[])
   var virtualReturn = inst.devType()
   virtualReturn
 
-method heightForWidth*(self: VirtualQErrorMessage, param1: cint): cint {.base.} =
-  QErrorMessageheightForWidth(self[], param1)
 proc fcQErrorMessage_method_callback_heightForWidth(self: pointer, param1: cint): cint {.cdecl.} =
   let inst = cast[VirtualQErrorMessage](fcQErrorMessage_vdata(self)[])
   let slotval1 = param1
   var virtualReturn = inst.heightForWidth(slotval1)
   virtualReturn
 
-method hasHeightForWidth*(self: VirtualQErrorMessage): bool {.base.} =
-  QErrorMessagehasHeightForWidth(self[])
 proc fcQErrorMessage_method_callback_hasHeightForWidth(self: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQErrorMessage](fcQErrorMessage_vdata(self)[])
   var virtualReturn = inst.hasHeightForWidth()
   virtualReturn
 
-method paintEngine*(self: VirtualQErrorMessage): gen_qpaintengine_types.QPaintEngine {.base.} =
-  QErrorMessagepaintEngine(self[])
 proc fcQErrorMessage_method_callback_paintEngine(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQErrorMessage](fcQErrorMessage_vdata(self)[])
   var virtualReturn = inst.paintEngine()
   virtualReturn.h
 
-method event*(self: VirtualQErrorMessage, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QErrorMessageevent(self[], event)
 proc fcQErrorMessage_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQErrorMessage](fcQErrorMessage_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
-method mousePressEvent*(self: VirtualQErrorMessage, event: gen_qevent_types.QMouseEvent): void {.base.} =
-  QErrorMessagemousePressEvent(self[], event)
 proc fcQErrorMessage_method_callback_mousePressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQErrorMessage](fcQErrorMessage_vdata(self)[])
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mousePressEvent(slotval1)
 
-method mouseReleaseEvent*(self: VirtualQErrorMessage, event: gen_qevent_types.QMouseEvent): void {.base.} =
-  QErrorMessagemouseReleaseEvent(self[], event)
 proc fcQErrorMessage_method_callback_mouseReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQErrorMessage](fcQErrorMessage_vdata(self)[])
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mouseReleaseEvent(slotval1)
 
-method mouseDoubleClickEvent*(self: VirtualQErrorMessage, event: gen_qevent_types.QMouseEvent): void {.base.} =
-  QErrorMessagemouseDoubleClickEvent(self[], event)
 proc fcQErrorMessage_method_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQErrorMessage](fcQErrorMessage_vdata(self)[])
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mouseDoubleClickEvent(slotval1)
 
-method mouseMoveEvent*(self: VirtualQErrorMessage, event: gen_qevent_types.QMouseEvent): void {.base.} =
-  QErrorMessagemouseMoveEvent(self[], event)
 proc fcQErrorMessage_method_callback_mouseMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQErrorMessage](fcQErrorMessage_vdata(self)[])
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mouseMoveEvent(slotval1)
 
-method wheelEvent*(self: VirtualQErrorMessage, event: gen_qevent_types.QWheelEvent): void {.base.} =
-  QErrorMessagewheelEvent(self[], event)
 proc fcQErrorMessage_method_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQErrorMessage](fcQErrorMessage_vdata(self)[])
   let slotval1 = gen_qevent_types.QWheelEvent(h: event, owned: false)
   inst.wheelEvent(slotval1)
 
-method keyReleaseEvent*(self: VirtualQErrorMessage, event: gen_qevent_types.QKeyEvent): void {.base.} =
-  QErrorMessagekeyReleaseEvent(self[], event)
 proc fcQErrorMessage_method_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQErrorMessage](fcQErrorMessage_vdata(self)[])
   let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   inst.keyReleaseEvent(slotval1)
 
-method focusInEvent*(self: VirtualQErrorMessage, event: gen_qevent_types.QFocusEvent): void {.base.} =
-  QErrorMessagefocusInEvent(self[], event)
 proc fcQErrorMessage_method_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQErrorMessage](fcQErrorMessage_vdata(self)[])
   let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   inst.focusInEvent(slotval1)
 
-method focusOutEvent*(self: VirtualQErrorMessage, event: gen_qevent_types.QFocusEvent): void {.base.} =
-  QErrorMessagefocusOutEvent(self[], event)
 proc fcQErrorMessage_method_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQErrorMessage](fcQErrorMessage_vdata(self)[])
   let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   inst.focusOutEvent(slotval1)
 
-method enterEvent*(self: VirtualQErrorMessage, event: gen_qevent_types.QEnterEvent): void {.base.} =
-  QErrorMessageenterEvent(self[], event)
 proc fcQErrorMessage_method_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQErrorMessage](fcQErrorMessage_vdata(self)[])
   let slotval1 = gen_qevent_types.QEnterEvent(h: event, owned: false)
   inst.enterEvent(slotval1)
 
-method leaveEvent*(self: VirtualQErrorMessage, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QErrorMessageleaveEvent(self[], event)
 proc fcQErrorMessage_method_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQErrorMessage](fcQErrorMessage_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.leaveEvent(slotval1)
 
-method paintEvent*(self: VirtualQErrorMessage, event: gen_qevent_types.QPaintEvent): void {.base.} =
-  QErrorMessagepaintEvent(self[], event)
 proc fcQErrorMessage_method_callback_paintEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQErrorMessage](fcQErrorMessage_vdata(self)[])
   let slotval1 = gen_qevent_types.QPaintEvent(h: event, owned: false)
   inst.paintEvent(slotval1)
 
-method moveEvent*(self: VirtualQErrorMessage, event: gen_qevent_types.QMoveEvent): void {.base.} =
-  QErrorMessagemoveEvent(self[], event)
 proc fcQErrorMessage_method_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQErrorMessage](fcQErrorMessage_vdata(self)[])
   let slotval1 = gen_qevent_types.QMoveEvent(h: event, owned: false)
   inst.moveEvent(slotval1)
 
-method tabletEvent*(self: VirtualQErrorMessage, event: gen_qevent_types.QTabletEvent): void {.base.} =
-  QErrorMessagetabletEvent(self[], event)
 proc fcQErrorMessage_method_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQErrorMessage](fcQErrorMessage_vdata(self)[])
   let slotval1 = gen_qevent_types.QTabletEvent(h: event, owned: false)
   inst.tabletEvent(slotval1)
 
-method actionEvent*(self: VirtualQErrorMessage, event: gen_qevent_types.QActionEvent): void {.base.} =
-  QErrorMessageactionEvent(self[], event)
 proc fcQErrorMessage_method_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQErrorMessage](fcQErrorMessage_vdata(self)[])
   let slotval1 = gen_qevent_types.QActionEvent(h: event, owned: false)
   inst.actionEvent(slotval1)
 
-method dragEnterEvent*(self: VirtualQErrorMessage, event: gen_qevent_types.QDragEnterEvent): void {.base.} =
-  QErrorMessagedragEnterEvent(self[], event)
 proc fcQErrorMessage_method_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQErrorMessage](fcQErrorMessage_vdata(self)[])
   let slotval1 = gen_qevent_types.QDragEnterEvent(h: event, owned: false)
   inst.dragEnterEvent(slotval1)
 
-method dragMoveEvent*(self: VirtualQErrorMessage, event: gen_qevent_types.QDragMoveEvent): void {.base.} =
-  QErrorMessagedragMoveEvent(self[], event)
 proc fcQErrorMessage_method_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQErrorMessage](fcQErrorMessage_vdata(self)[])
   let slotval1 = gen_qevent_types.QDragMoveEvent(h: event, owned: false)
   inst.dragMoveEvent(slotval1)
 
-method dragLeaveEvent*(self: VirtualQErrorMessage, event: gen_qevent_types.QDragLeaveEvent): void {.base.} =
-  QErrorMessagedragLeaveEvent(self[], event)
 proc fcQErrorMessage_method_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQErrorMessage](fcQErrorMessage_vdata(self)[])
   let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event, owned: false)
   inst.dragLeaveEvent(slotval1)
 
-method dropEvent*(self: VirtualQErrorMessage, event: gen_qevent_types.QDropEvent): void {.base.} =
-  QErrorMessagedropEvent(self[], event)
 proc fcQErrorMessage_method_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQErrorMessage](fcQErrorMessage_vdata(self)[])
   let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
   inst.dropEvent(slotval1)
 
-method hideEvent*(self: VirtualQErrorMessage, event: gen_qevent_types.QHideEvent): void {.base.} =
-  QErrorMessagehideEvent(self[], event)
 proc fcQErrorMessage_method_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQErrorMessage](fcQErrorMessage_vdata(self)[])
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   inst.hideEvent(slotval1)
 
-method nativeEvent*(self: VirtualQErrorMessage, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
-  QErrorMessagenativeEvent(self[], eventType, message, resultVal)
 proc fcQErrorMessage_method_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
   let inst = cast[VirtualQErrorMessage](fcQErrorMessage_vdata(self)[])
   var veventType_bytearray = eventType
@@ -1200,93 +1230,70 @@ proc fcQErrorMessage_method_callback_nativeEvent(self: pointer, eventType: struc
   var virtualReturn = inst.nativeEvent(slotval1, slotval2, slotval3)
   virtualReturn
 
-method metric*(self: VirtualQErrorMessage, param1: cint): cint {.base.} =
-  QErrorMessagemetric(self[], param1)
 proc fcQErrorMessage_method_callback_metric(self: pointer, param1: cint): cint {.cdecl.} =
   let inst = cast[VirtualQErrorMessage](fcQErrorMessage_vdata(self)[])
   let slotval1 = cint(param1)
   var virtualReturn = inst.metric(slotval1)
   virtualReturn
 
-method initPainter*(self: VirtualQErrorMessage, painter: gen_qpainter_types.QPainter): void {.base.} =
-  QErrorMessageinitPainter(self[], painter)
 proc fcQErrorMessage_method_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
   let inst = cast[VirtualQErrorMessage](fcQErrorMessage_vdata(self)[])
   let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
   inst.initPainter(slotval1)
 
-method redirected*(self: VirtualQErrorMessage, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.base.} =
-  QErrorMessageredirected(self[], offset)
 proc fcQErrorMessage_method_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQErrorMessage](fcQErrorMessage_vdata(self)[])
   let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
   var virtualReturn = inst.redirected(slotval1)
   virtualReturn.h
 
-method sharedPainter*(self: VirtualQErrorMessage): gen_qpainter_types.QPainter {.base.} =
-  QErrorMessagesharedPainter(self[])
 proc fcQErrorMessage_method_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQErrorMessage](fcQErrorMessage_vdata(self)[])
   var virtualReturn = inst.sharedPainter()
   virtualReturn.h
 
-method inputMethodEvent*(self: VirtualQErrorMessage, param1: gen_qevent_types.QInputMethodEvent): void {.base.} =
-  QErrorMessageinputMethodEvent(self[], param1)
 proc fcQErrorMessage_method_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQErrorMessage](fcQErrorMessage_vdata(self)[])
   let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1, owned: false)
   inst.inputMethodEvent(slotval1)
 
-method inputMethodQuery*(self: VirtualQErrorMessage, param1: cint): gen_qvariant_types.QVariant {.base.} =
-  QErrorMessageinputMethodQuery(self[], param1)
 proc fcQErrorMessage_method_callback_inputMethodQuery(self: pointer, param1: cint): pointer {.cdecl.} =
   let inst = cast[VirtualQErrorMessage](fcQErrorMessage_vdata(self)[])
   let slotval1 = cint(param1)
   var virtualReturn = inst.inputMethodQuery(slotval1)
   virtualReturn.h
 
-method focusNextPrevChild*(self: VirtualQErrorMessage, next: bool): bool {.base.} =
-  QErrorMessagefocusNextPrevChild(self[], next)
 proc fcQErrorMessage_method_callback_focusNextPrevChild(self: pointer, next: bool): bool {.cdecl.} =
   let inst = cast[VirtualQErrorMessage](fcQErrorMessage_vdata(self)[])
   let slotval1 = next
   var virtualReturn = inst.focusNextPrevChild(slotval1)
   virtualReturn
 
-method timerEvent*(self: VirtualQErrorMessage, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
-  QErrorMessagetimerEvent(self[], event)
 proc fcQErrorMessage_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQErrorMessage](fcQErrorMessage_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
-method childEvent*(self: VirtualQErrorMessage, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
-  QErrorMessagechildEvent(self[], event)
 proc fcQErrorMessage_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQErrorMessage](fcQErrorMessage_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
-method customEvent*(self: VirtualQErrorMessage, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QErrorMessagecustomEvent(self[], event)
 proc fcQErrorMessage_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQErrorMessage](fcQErrorMessage_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
-method connectNotify*(self: VirtualQErrorMessage, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QErrorMessageconnectNotify(self[], signal)
 proc fcQErrorMessage_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQErrorMessage](fcQErrorMessage_vdata(self)[])
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
-method disconnectNotify*(self: VirtualQErrorMessage, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QErrorMessagedisconnectNotify(self[], signal)
 proc fcQErrorMessage_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQErrorMessage](fcQErrorMessage_vdata(self)[])
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
+
 
 proc adjustPosition*(self: gen_qerrormessage_types.QErrorMessage, param1: gen_qwidget_types.QWidget): void =
   fcQErrorMessage_protectedbase_adjustPosition(self.h, param1.h)

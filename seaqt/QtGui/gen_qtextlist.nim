@@ -75,6 +75,7 @@ proc fcQTextList_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QTe
 proc fcQTextList_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QTextList_tr3".}
 proc fcQTextList_vdata(self: pointer): ptr pointer {.importc: "QTextList_vdata".}
 proc fvdata_cQTextList(self: pointer): pointer {.importc: "vdata_QTextList".}
+
 type cQTextListVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -181,6 +182,7 @@ type QTextListchildEventProc* = proc(self: QTextList, event: gen_qcoreevent_type
 type QTextListcustomEventProc* = proc(self: QTextList, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QTextListconnectNotifyProc* = proc(self: QTextList, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QTextListdisconnectNotifyProc* = proc(self: QTextList, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+
 type QTextListVTable* {.inheritable, pure.} = object
   vtbl: cQTextListVTable
   metaObject*: QTextListmetaObjectProc
@@ -196,8 +198,46 @@ type QTextListVTable* {.inheritable, pure.} = object
   customEvent*: QTextListcustomEventProc
   connectNotify*: QTextListconnectNotifyProc
   disconnectNotify*: QTextListdisconnectNotifyProc
+
 proc QTextListmetaObject*(self: gen_qtextlist_types.QTextList): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQTextList_virtualbase_metaObject(self.h), owned: false)
+
+proc QTextListmetacast*(self: gen_qtextlist_types.QTextList, param1: cstring): pointer =
+  fcQTextList_virtualbase_metacast(self.h, param1)
+
+proc QTextListmetacall*(self: gen_qtextlist_types.QTextList, param1: cint, param2: cint, param3: pointer): cint =
+  fcQTextList_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+proc QTextListblockInserted*(self: gen_qtextlist_types.QTextList, blockVal: gen_qtextobject_types.QTextBlock): void =
+  fcQTextList_virtualbase_blockInserted(self.h, blockVal.h)
+
+proc QTextListblockRemoved*(self: gen_qtextlist_types.QTextList, blockVal: gen_qtextobject_types.QTextBlock): void =
+  fcQTextList_virtualbase_blockRemoved(self.h, blockVal.h)
+
+proc QTextListblockFormatChanged*(self: gen_qtextlist_types.QTextList, blockVal: gen_qtextobject_types.QTextBlock): void =
+  fcQTextList_virtualbase_blockFormatChanged(self.h, blockVal.h)
+
+proc QTextListevent*(self: gen_qtextlist_types.QTextList, event: gen_qcoreevent_types.QEvent): bool =
+  fcQTextList_virtualbase_event(self.h, event.h)
+
+proc QTextListeventFilter*(self: gen_qtextlist_types.QTextList, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
+  fcQTextList_virtualbase_eventFilter(self.h, watched.h, event.h)
+
+proc QTextListtimerEvent*(self: gen_qtextlist_types.QTextList, event: gen_qcoreevent_types.QTimerEvent): void =
+  fcQTextList_virtualbase_timerEvent(self.h, event.h)
+
+proc QTextListchildEvent*(self: gen_qtextlist_types.QTextList, event: gen_qcoreevent_types.QChildEvent): void =
+  fcQTextList_virtualbase_childEvent(self.h, event.h)
+
+proc QTextListcustomEvent*(self: gen_qtextlist_types.QTextList, event: gen_qcoreevent_types.QEvent): void =
+  fcQTextList_virtualbase_customEvent(self.h, event.h)
+
+proc QTextListconnectNotify*(self: gen_qtextlist_types.QTextList, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQTextList_virtualbase_connectNotify(self.h, signal.h)
+
+proc QTextListdisconnectNotify*(self: gen_qtextlist_types.QTextList, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQTextList_virtualbase_disconnectNotify(self.h, signal.h)
+
 
 proc fcQTextList_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QTextListVTable](fcQTextList_vdata(self)[])
@@ -208,18 +248,12 @@ proc fcQTextList_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QTextListmetacast*(self: gen_qtextlist_types.QTextList, param1: cstring): pointer =
-  fcQTextList_virtualbase_metacast(self.h, param1)
-
 proc fcQTextList_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QTextListVTable](fcQTextList_vdata(self)[])
   let self = QTextList(h: self)
   let slotval1 = (param1)
   var virtualReturn = vtbl[].metacast(self, slotval1)
   virtualReturn
-
-proc QTextListmetacall*(self: gen_qtextlist_types.QTextList, param1: cint, param2: cint, param3: pointer): cint =
-  fcQTextList_virtualbase_metacall(self.h, cint(param1), param2, param3)
 
 proc fcQTextList_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QTextListVTable](fcQTextList_vdata(self)[])
@@ -230,17 +264,11 @@ proc fcQTextList_vtable_callback_metacall(self: pointer, param1: cint, param2: c
   var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QTextListblockInserted*(self: gen_qtextlist_types.QTextList, blockVal: gen_qtextobject_types.QTextBlock): void =
-  fcQTextList_virtualbase_blockInserted(self.h, blockVal.h)
-
 proc fcQTextList_vtable_callback_blockInserted(self: pointer, blockVal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTextListVTable](fcQTextList_vdata(self)[])
   let self = QTextList(h: self)
   let slotval1 = gen_qtextobject_types.QTextBlock(h: blockVal, owned: false)
   vtbl[].blockInserted(self, slotval1)
-
-proc QTextListblockRemoved*(self: gen_qtextlist_types.QTextList, blockVal: gen_qtextobject_types.QTextBlock): void =
-  fcQTextList_virtualbase_blockRemoved(self.h, blockVal.h)
 
 proc fcQTextList_vtable_callback_blockRemoved(self: pointer, blockVal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTextListVTable](fcQTextList_vdata(self)[])
@@ -248,17 +276,11 @@ proc fcQTextList_vtable_callback_blockRemoved(self: pointer, blockVal: pointer):
   let slotval1 = gen_qtextobject_types.QTextBlock(h: blockVal, owned: false)
   vtbl[].blockRemoved(self, slotval1)
 
-proc QTextListblockFormatChanged*(self: gen_qtextlist_types.QTextList, blockVal: gen_qtextobject_types.QTextBlock): void =
-  fcQTextList_virtualbase_blockFormatChanged(self.h, blockVal.h)
-
 proc fcQTextList_vtable_callback_blockFormatChanged(self: pointer, blockVal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTextListVTable](fcQTextList_vdata(self)[])
   let self = QTextList(h: self)
   let slotval1 = gen_qtextobject_types.QTextBlock(h: blockVal, owned: false)
   vtbl[].blockFormatChanged(self, slotval1)
-
-proc QTextListevent*(self: gen_qtextlist_types.QTextList, event: gen_qcoreevent_types.QEvent): bool =
-  fcQTextList_virtualbase_event(self.h, event.h)
 
 proc fcQTextList_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QTextListVTable](fcQTextList_vdata(self)[])
@@ -266,9 +288,6 @@ proc fcQTextList_vtable_callback_event(self: pointer, event: pointer): bool {.cd
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
-
-proc QTextListeventFilter*(self: gen_qtextlist_types.QTextList, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
-  fcQTextList_virtualbase_eventFilter(self.h, watched.h, event.h)
 
 proc fcQTextList_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QTextListVTable](fcQTextList_vdata(self)[])
@@ -278,17 +297,11 @@ proc fcQTextList_vtable_callback_eventFilter(self: pointer, watched: pointer, ev
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
-proc QTextListtimerEvent*(self: gen_qtextlist_types.QTextList, event: gen_qcoreevent_types.QTimerEvent): void =
-  fcQTextList_virtualbase_timerEvent(self.h, event.h)
-
 proc fcQTextList_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTextListVTable](fcQTextList_vdata(self)[])
   let self = QTextList(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
-
-proc QTextListchildEvent*(self: gen_qtextlist_types.QTextList, event: gen_qcoreevent_types.QChildEvent): void =
-  fcQTextList_virtualbase_childEvent(self.h, event.h)
 
 proc fcQTextList_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTextListVTable](fcQTextList_vdata(self)[])
@@ -296,26 +309,17 @@ proc fcQTextList_vtable_callback_childEvent(self: pointer, event: pointer): void
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
-proc QTextListcustomEvent*(self: gen_qtextlist_types.QTextList, event: gen_qcoreevent_types.QEvent): void =
-  fcQTextList_virtualbase_customEvent(self.h, event.h)
-
 proc fcQTextList_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTextListVTable](fcQTextList_vdata(self)[])
   let self = QTextList(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
-proc QTextListconnectNotify*(self: gen_qtextlist_types.QTextList, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQTextList_virtualbase_connectNotify(self.h, signal.h)
-
 proc fcQTextList_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTextListVTable](fcQTextList_vdata(self)[])
   let self = QTextList(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
-
-proc QTextListdisconnectNotify*(self: gen_qtextlist_types.QTextList, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQTextList_virtualbase_disconnectNotify(self.h, signal.h)
 
 proc fcQTextList_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTextListVTable](fcQTextList_vdata(self)[])
@@ -325,23 +329,45 @@ proc fcQTextList_vtable_callback_disconnectNotify(self: pointer, signal: pointer
 
 type VirtualQTextList* {.inheritable.} = ref object of QTextList
   vtbl*: cQTextListVTable
+
 method metaObject*(self: VirtualQTextList): gen_qobjectdefs_types.QMetaObject {.base.} =
   QTextListmetaObject(self[])
+method metacast*(self: VirtualQTextList, param1: cstring): pointer {.base.} =
+  QTextListmetacast(self[], param1)
+method metacall*(self: VirtualQTextList, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QTextListmetacall(self[], param1, param2, param3)
+method blockInserted*(self: VirtualQTextList, blockVal: gen_qtextobject_types.QTextBlock): void {.base.} =
+  QTextListblockInserted(self[], blockVal)
+method blockRemoved*(self: VirtualQTextList, blockVal: gen_qtextobject_types.QTextBlock): void {.base.} =
+  QTextListblockRemoved(self[], blockVal)
+method blockFormatChanged*(self: VirtualQTextList, blockVal: gen_qtextobject_types.QTextBlock): void {.base.} =
+  QTextListblockFormatChanged(self[], blockVal)
+method event*(self: VirtualQTextList, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QTextListevent(self[], event)
+method eventFilter*(self: VirtualQTextList, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QTextListeventFilter(self[], watched, event)
+method timerEvent*(self: VirtualQTextList, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QTextListtimerEvent(self[], event)
+method childEvent*(self: VirtualQTextList, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QTextListchildEvent(self[], event)
+method customEvent*(self: VirtualQTextList, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QTextListcustomEvent(self[], event)
+method connectNotify*(self: VirtualQTextList, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QTextListconnectNotify(self[], signal)
+method disconnectNotify*(self: VirtualQTextList, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QTextListdisconnectNotify(self[], signal)
+
 proc fcQTextList_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQTextList](fcQTextList_vdata(self)[])
   var virtualReturn = inst.metaObject()
   virtualReturn.h
 
-method metacast*(self: VirtualQTextList, param1: cstring): pointer {.base.} =
-  QTextListmetacast(self[], param1)
 proc fcQTextList_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQTextList](fcQTextList_vdata(self)[])
   let slotval1 = (param1)
   var virtualReturn = inst.metacast(slotval1)
   virtualReturn
 
-method metacall*(self: VirtualQTextList, param1: cint, param2: cint, param3: pointer): cint {.base.} =
-  QTextListmetacall(self[], param1, param2, param3)
 proc fcQTextList_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQTextList](fcQTextList_vdata(self)[])
   let slotval1 = cint(param1)
@@ -350,37 +376,27 @@ proc fcQTextList_method_callback_metacall(self: pointer, param1: cint, param2: c
   var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
-method blockInserted*(self: VirtualQTextList, blockVal: gen_qtextobject_types.QTextBlock): void {.base.} =
-  QTextListblockInserted(self[], blockVal)
 proc fcQTextList_method_callback_blockInserted(self: pointer, blockVal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTextList](fcQTextList_vdata(self)[])
   let slotval1 = gen_qtextobject_types.QTextBlock(h: blockVal, owned: false)
   inst.blockInserted(slotval1)
 
-method blockRemoved*(self: VirtualQTextList, blockVal: gen_qtextobject_types.QTextBlock): void {.base.} =
-  QTextListblockRemoved(self[], blockVal)
 proc fcQTextList_method_callback_blockRemoved(self: pointer, blockVal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTextList](fcQTextList_vdata(self)[])
   let slotval1 = gen_qtextobject_types.QTextBlock(h: blockVal, owned: false)
   inst.blockRemoved(slotval1)
 
-method blockFormatChanged*(self: VirtualQTextList, blockVal: gen_qtextobject_types.QTextBlock): void {.base.} =
-  QTextListblockFormatChanged(self[], blockVal)
 proc fcQTextList_method_callback_blockFormatChanged(self: pointer, blockVal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTextList](fcQTextList_vdata(self)[])
   let slotval1 = gen_qtextobject_types.QTextBlock(h: blockVal, owned: false)
   inst.blockFormatChanged(slotval1)
 
-method event*(self: VirtualQTextList, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QTextListevent(self[], event)
 proc fcQTextList_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQTextList](fcQTextList_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
-method eventFilter*(self: VirtualQTextList, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QTextListeventFilter(self[], watched, event)
 proc fcQTextList_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQTextList](fcQTextList_vdata(self)[])
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
@@ -388,40 +404,31 @@ proc fcQTextList_method_callback_eventFilter(self: pointer, watched: pointer, ev
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
-method timerEvent*(self: VirtualQTextList, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
-  QTextListtimerEvent(self[], event)
 proc fcQTextList_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTextList](fcQTextList_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
-method childEvent*(self: VirtualQTextList, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
-  QTextListchildEvent(self[], event)
 proc fcQTextList_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTextList](fcQTextList_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
-method customEvent*(self: VirtualQTextList, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QTextListcustomEvent(self[], event)
 proc fcQTextList_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTextList](fcQTextList_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
-method connectNotify*(self: VirtualQTextList, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QTextListconnectNotify(self[], signal)
 proc fcQTextList_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTextList](fcQTextList_vdata(self)[])
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
-method disconnectNotify*(self: VirtualQTextList, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QTextListdisconnectNotify(self[], signal)
 proc fcQTextList_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTextList](fcQTextList_vdata(self)[])
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
+
 
 proc blockList*(self: gen_qtextlist_types.QTextList): seq[gen_qtextobject_types.QTextBlock] =
   var v_ma = fcQTextList_protectedbase_blockList(self.h)

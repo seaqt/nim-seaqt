@@ -218,6 +218,7 @@ proc fcQGraphicsView_invalidateScene1(self: pointer, rect: pointer): void {.impo
 proc fcQGraphicsView_invalidateScene2(self: pointer, rect: pointer, layers: cint): void {.importc: "QGraphicsView_invalidateScene2".}
 proc fcQGraphicsView_vdata(self: pointer): ptr pointer {.importc: "QGraphicsView_vdata".}
 proc fvdata_cQGraphicsView(self: pointer): pointer {.importc: "vdata_QGraphicsView".}
+
 type cQGraphicsViewVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -638,7 +639,7 @@ proc fcQGraphicsView_slot_callback_rubberBandChanged_release(slot: int) {.cdecl.
   let nimfunc = cast[ref QGraphicsViewrubberBandChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onrubberBandChanged*(self: gen_qgraphicsview_types.QGraphicsView, slot: QGraphicsViewrubberBandChangedSlot) =
+proc onRubberBandChanged*(self: gen_qgraphicsview_types.QGraphicsView, slot: QGraphicsViewrubberBandChangedSlot) =
   var tmp = new QGraphicsViewrubberBandChangedSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -791,6 +792,7 @@ type QGraphicsViewchildEventProc* = proc(self: QGraphicsView, event: gen_qcoreev
 type QGraphicsViewcustomEventProc* = proc(self: QGraphicsView, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QGraphicsViewconnectNotifyProc* = proc(self: QGraphicsView, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QGraphicsViewdisconnectNotifyProc* = proc(self: QGraphicsView, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+
 type QGraphicsViewVTable* {.inheritable, pure.} = object
   vtbl: cQGraphicsViewVTable
   metaObject*: QGraphicsViewmetaObjectProc
@@ -850,8 +852,178 @@ type QGraphicsViewVTable* {.inheritable, pure.} = object
   customEvent*: QGraphicsViewcustomEventProc
   connectNotify*: QGraphicsViewconnectNotifyProc
   disconnectNotify*: QGraphicsViewdisconnectNotifyProc
+
 proc QGraphicsViewmetaObject*(self: gen_qgraphicsview_types.QGraphicsView): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQGraphicsView_virtualbase_metaObject(self.h), owned: false)
+
+proc QGraphicsViewmetacast*(self: gen_qgraphicsview_types.QGraphicsView, param1: cstring): pointer =
+  fcQGraphicsView_virtualbase_metacast(self.h, param1)
+
+proc QGraphicsViewmetacall*(self: gen_qgraphicsview_types.QGraphicsView, param1: cint, param2: cint, param3: pointer): cint =
+  fcQGraphicsView_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+proc QGraphicsViewsizeHint*(self: gen_qgraphicsview_types.QGraphicsView): gen_qsize_types.QSize =
+  gen_qsize_types.QSize(h: fcQGraphicsView_virtualbase_sizeHint(self.h), owned: true)
+
+proc QGraphicsViewinputMethodQuery*(self: gen_qgraphicsview_types.QGraphicsView, query: cint): gen_qvariant_types.QVariant =
+  gen_qvariant_types.QVariant(h: fcQGraphicsView_virtualbase_inputMethodQuery(self.h, cint(query)), owned: true)
+
+proc QGraphicsViewsetupViewport*(self: gen_qgraphicsview_types.QGraphicsView, widget: gen_qwidget_types.QWidget): void =
+  fcQGraphicsView_virtualbase_setupViewport(self.h, widget.h)
+
+proc QGraphicsViewevent*(self: gen_qgraphicsview_types.QGraphicsView, event: gen_qcoreevent_types.QEvent): bool =
+  fcQGraphicsView_virtualbase_event(self.h, event.h)
+
+proc QGraphicsViewviewportEvent*(self: gen_qgraphicsview_types.QGraphicsView, event: gen_qcoreevent_types.QEvent): bool =
+  fcQGraphicsView_virtualbase_viewportEvent(self.h, event.h)
+
+proc QGraphicsViewcontextMenuEvent*(self: gen_qgraphicsview_types.QGraphicsView, event: gen_qevent_types.QContextMenuEvent): void =
+  fcQGraphicsView_virtualbase_contextMenuEvent(self.h, event.h)
+
+proc QGraphicsViewdragEnterEvent*(self: gen_qgraphicsview_types.QGraphicsView, event: gen_qevent_types.QDragEnterEvent): void =
+  fcQGraphicsView_virtualbase_dragEnterEvent(self.h, event.h)
+
+proc QGraphicsViewdragLeaveEvent*(self: gen_qgraphicsview_types.QGraphicsView, event: gen_qevent_types.QDragLeaveEvent): void =
+  fcQGraphicsView_virtualbase_dragLeaveEvent(self.h, event.h)
+
+proc QGraphicsViewdragMoveEvent*(self: gen_qgraphicsview_types.QGraphicsView, event: gen_qevent_types.QDragMoveEvent): void =
+  fcQGraphicsView_virtualbase_dragMoveEvent(self.h, event.h)
+
+proc QGraphicsViewdropEvent*(self: gen_qgraphicsview_types.QGraphicsView, event: gen_qevent_types.QDropEvent): void =
+  fcQGraphicsView_virtualbase_dropEvent(self.h, event.h)
+
+proc QGraphicsViewfocusInEvent*(self: gen_qgraphicsview_types.QGraphicsView, event: gen_qevent_types.QFocusEvent): void =
+  fcQGraphicsView_virtualbase_focusInEvent(self.h, event.h)
+
+proc QGraphicsViewfocusNextPrevChild*(self: gen_qgraphicsview_types.QGraphicsView, next: bool): bool =
+  fcQGraphicsView_virtualbase_focusNextPrevChild(self.h, next)
+
+proc QGraphicsViewfocusOutEvent*(self: gen_qgraphicsview_types.QGraphicsView, event: gen_qevent_types.QFocusEvent): void =
+  fcQGraphicsView_virtualbase_focusOutEvent(self.h, event.h)
+
+proc QGraphicsViewkeyPressEvent*(self: gen_qgraphicsview_types.QGraphicsView, event: gen_qevent_types.QKeyEvent): void =
+  fcQGraphicsView_virtualbase_keyPressEvent(self.h, event.h)
+
+proc QGraphicsViewkeyReleaseEvent*(self: gen_qgraphicsview_types.QGraphicsView, event: gen_qevent_types.QKeyEvent): void =
+  fcQGraphicsView_virtualbase_keyReleaseEvent(self.h, event.h)
+
+proc QGraphicsViewmouseDoubleClickEvent*(self: gen_qgraphicsview_types.QGraphicsView, event: gen_qevent_types.QMouseEvent): void =
+  fcQGraphicsView_virtualbase_mouseDoubleClickEvent(self.h, event.h)
+
+proc QGraphicsViewmousePressEvent*(self: gen_qgraphicsview_types.QGraphicsView, event: gen_qevent_types.QMouseEvent): void =
+  fcQGraphicsView_virtualbase_mousePressEvent(self.h, event.h)
+
+proc QGraphicsViewmouseMoveEvent*(self: gen_qgraphicsview_types.QGraphicsView, event: gen_qevent_types.QMouseEvent): void =
+  fcQGraphicsView_virtualbase_mouseMoveEvent(self.h, event.h)
+
+proc QGraphicsViewmouseReleaseEvent*(self: gen_qgraphicsview_types.QGraphicsView, event: gen_qevent_types.QMouseEvent): void =
+  fcQGraphicsView_virtualbase_mouseReleaseEvent(self.h, event.h)
+
+proc QGraphicsViewwheelEvent*(self: gen_qgraphicsview_types.QGraphicsView, event: gen_qevent_types.QWheelEvent): void =
+  fcQGraphicsView_virtualbase_wheelEvent(self.h, event.h)
+
+proc QGraphicsViewpaintEvent*(self: gen_qgraphicsview_types.QGraphicsView, event: gen_qevent_types.QPaintEvent): void =
+  fcQGraphicsView_virtualbase_paintEvent(self.h, event.h)
+
+proc QGraphicsViewresizeEvent*(self: gen_qgraphicsview_types.QGraphicsView, event: gen_qevent_types.QResizeEvent): void =
+  fcQGraphicsView_virtualbase_resizeEvent(self.h, event.h)
+
+proc QGraphicsViewscrollContentsBy*(self: gen_qgraphicsview_types.QGraphicsView, dx: cint, dy: cint): void =
+  fcQGraphicsView_virtualbase_scrollContentsBy(self.h, dx, dy)
+
+proc QGraphicsViewshowEvent*(self: gen_qgraphicsview_types.QGraphicsView, event: gen_qevent_types.QShowEvent): void =
+  fcQGraphicsView_virtualbase_showEvent(self.h, event.h)
+
+proc QGraphicsViewinputMethodEvent*(self: gen_qgraphicsview_types.QGraphicsView, event: gen_qevent_types.QInputMethodEvent): void =
+  fcQGraphicsView_virtualbase_inputMethodEvent(self.h, event.h)
+
+proc QGraphicsViewdrawBackground*(self: gen_qgraphicsview_types.QGraphicsView, painter: gen_qpainter_types.QPainter, rect: gen_qrect_types.QRectF): void =
+  fcQGraphicsView_virtualbase_drawBackground(self.h, painter.h, rect.h)
+
+proc QGraphicsViewdrawForeground*(self: gen_qgraphicsview_types.QGraphicsView, painter: gen_qpainter_types.QPainter, rect: gen_qrect_types.QRectF): void =
+  fcQGraphicsView_virtualbase_drawForeground(self.h, painter.h, rect.h)
+
+proc QGraphicsViewminimumSizeHint*(self: gen_qgraphicsview_types.QGraphicsView): gen_qsize_types.QSize =
+  gen_qsize_types.QSize(h: fcQGraphicsView_virtualbase_minimumSizeHint(self.h), owned: true)
+
+proc QGraphicsVieweventFilter*(self: gen_qgraphicsview_types.QGraphicsView, param1: gen_qobject_types.QObject, param2: gen_qcoreevent_types.QEvent): bool =
+  fcQGraphicsView_virtualbase_eventFilter(self.h, param1.h, param2.h)
+
+proc QGraphicsViewviewportSizeHint*(self: gen_qgraphicsview_types.QGraphicsView): gen_qsize_types.QSize =
+  gen_qsize_types.QSize(h: fcQGraphicsView_virtualbase_viewportSizeHint(self.h), owned: true)
+
+proc QGraphicsViewchangeEvent*(self: gen_qgraphicsview_types.QGraphicsView, param1: gen_qcoreevent_types.QEvent): void =
+  fcQGraphicsView_virtualbase_changeEvent(self.h, param1.h)
+
+proc QGraphicsViewinitStyleOption*(self: gen_qgraphicsview_types.QGraphicsView, option: gen_qstyleoption_types.QStyleOptionFrame): void =
+  fcQGraphicsView_virtualbase_initStyleOption(self.h, option.h)
+
+proc QGraphicsViewdevType*(self: gen_qgraphicsview_types.QGraphicsView): cint =
+  fcQGraphicsView_virtualbase_devType(self.h)
+
+proc QGraphicsViewsetVisible*(self: gen_qgraphicsview_types.QGraphicsView, visible: bool): void =
+  fcQGraphicsView_virtualbase_setVisible(self.h, visible)
+
+proc QGraphicsViewheightForWidth*(self: gen_qgraphicsview_types.QGraphicsView, param1: cint): cint =
+  fcQGraphicsView_virtualbase_heightForWidth(self.h, param1)
+
+proc QGraphicsViewhasHeightForWidth*(self: gen_qgraphicsview_types.QGraphicsView): bool =
+  fcQGraphicsView_virtualbase_hasHeightForWidth(self.h)
+
+proc QGraphicsViewpaintEngine*(self: gen_qgraphicsview_types.QGraphicsView): gen_qpaintengine_types.QPaintEngine =
+  gen_qpaintengine_types.QPaintEngine(h: fcQGraphicsView_virtualbase_paintEngine(self.h), owned: false)
+
+proc QGraphicsViewenterEvent*(self: gen_qgraphicsview_types.QGraphicsView, event: gen_qevent_types.QEnterEvent): void =
+  fcQGraphicsView_virtualbase_enterEvent(self.h, event.h)
+
+proc QGraphicsViewleaveEvent*(self: gen_qgraphicsview_types.QGraphicsView, event: gen_qcoreevent_types.QEvent): void =
+  fcQGraphicsView_virtualbase_leaveEvent(self.h, event.h)
+
+proc QGraphicsViewmoveEvent*(self: gen_qgraphicsview_types.QGraphicsView, event: gen_qevent_types.QMoveEvent): void =
+  fcQGraphicsView_virtualbase_moveEvent(self.h, event.h)
+
+proc QGraphicsViewcloseEvent*(self: gen_qgraphicsview_types.QGraphicsView, event: gen_qevent_types.QCloseEvent): void =
+  fcQGraphicsView_virtualbase_closeEvent(self.h, event.h)
+
+proc QGraphicsViewtabletEvent*(self: gen_qgraphicsview_types.QGraphicsView, event: gen_qevent_types.QTabletEvent): void =
+  fcQGraphicsView_virtualbase_tabletEvent(self.h, event.h)
+
+proc QGraphicsViewactionEvent*(self: gen_qgraphicsview_types.QGraphicsView, event: gen_qevent_types.QActionEvent): void =
+  fcQGraphicsView_virtualbase_actionEvent(self.h, event.h)
+
+proc QGraphicsViewhideEvent*(self: gen_qgraphicsview_types.QGraphicsView, event: gen_qevent_types.QHideEvent): void =
+  fcQGraphicsView_virtualbase_hideEvent(self.h, event.h)
+
+proc QGraphicsViewnativeEvent*(self: gen_qgraphicsview_types.QGraphicsView, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool =
+  fcQGraphicsView_virtualbase_nativeEvent(self.h, struct_miqt_string(data: if len(eventType) > 0: addr eventType[0] else: nil, len: csize_t(len(eventType))), message, resultVal)
+
+proc QGraphicsViewmetric*(self: gen_qgraphicsview_types.QGraphicsView, param1: cint): cint =
+  fcQGraphicsView_virtualbase_metric(self.h, cint(param1))
+
+proc QGraphicsViewinitPainter*(self: gen_qgraphicsview_types.QGraphicsView, painter: gen_qpainter_types.QPainter): void =
+  fcQGraphicsView_virtualbase_initPainter(self.h, painter.h)
+
+proc QGraphicsViewredirected*(self: gen_qgraphicsview_types.QGraphicsView, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice =
+  gen_qpaintdevice_types.QPaintDevice(h: fcQGraphicsView_virtualbase_redirected(self.h, offset.h), owned: false)
+
+proc QGraphicsViewsharedPainter*(self: gen_qgraphicsview_types.QGraphicsView): gen_qpainter_types.QPainter =
+  gen_qpainter_types.QPainter(h: fcQGraphicsView_virtualbase_sharedPainter(self.h), owned: false)
+
+proc QGraphicsViewtimerEvent*(self: gen_qgraphicsview_types.QGraphicsView, event: gen_qcoreevent_types.QTimerEvent): void =
+  fcQGraphicsView_virtualbase_timerEvent(self.h, event.h)
+
+proc QGraphicsViewchildEvent*(self: gen_qgraphicsview_types.QGraphicsView, event: gen_qcoreevent_types.QChildEvent): void =
+  fcQGraphicsView_virtualbase_childEvent(self.h, event.h)
+
+proc QGraphicsViewcustomEvent*(self: gen_qgraphicsview_types.QGraphicsView, event: gen_qcoreevent_types.QEvent): void =
+  fcQGraphicsView_virtualbase_customEvent(self.h, event.h)
+
+proc QGraphicsViewconnectNotify*(self: gen_qgraphicsview_types.QGraphicsView, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQGraphicsView_virtualbase_connectNotify(self.h, signal.h)
+
+proc QGraphicsViewdisconnectNotify*(self: gen_qgraphicsview_types.QGraphicsView, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQGraphicsView_virtualbase_disconnectNotify(self.h, signal.h)
+
 
 proc fcQGraphicsView_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QGraphicsViewVTable](fcQGraphicsView_vdata(self)[])
@@ -862,18 +1034,12 @@ proc fcQGraphicsView_vtable_callback_metaObject(self: pointer): pointer {.cdecl.
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QGraphicsViewmetacast*(self: gen_qgraphicsview_types.QGraphicsView, param1: cstring): pointer =
-  fcQGraphicsView_virtualbase_metacast(self.h, param1)
-
 proc fcQGraphicsView_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QGraphicsViewVTable](fcQGraphicsView_vdata(self)[])
   let self = QGraphicsView(h: self)
   let slotval1 = (param1)
   var virtualReturn = vtbl[].metacast(self, slotval1)
   virtualReturn
-
-proc QGraphicsViewmetacall*(self: gen_qgraphicsview_types.QGraphicsView, param1: cint, param2: cint, param3: pointer): cint =
-  fcQGraphicsView_virtualbase_metacall(self.h, cint(param1), param2, param3)
 
 proc fcQGraphicsView_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QGraphicsViewVTable](fcQGraphicsView_vdata(self)[])
@@ -884,9 +1050,6 @@ proc fcQGraphicsView_vtable_callback_metacall(self: pointer, param1: cint, param
   var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QGraphicsViewsizeHint*(self: gen_qgraphicsview_types.QGraphicsView): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQGraphicsView_virtualbase_sizeHint(self.h), owned: true)
-
 proc fcQGraphicsView_vtable_callback_sizeHint(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QGraphicsViewVTable](fcQGraphicsView_vdata(self)[])
   let self = QGraphicsView(h: self)
@@ -895,9 +1058,6 @@ proc fcQGraphicsView_vtable_callback_sizeHint(self: pointer): pointer {.cdecl.} 
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
   virtualReturn_h
-
-proc QGraphicsViewinputMethodQuery*(self: gen_qgraphicsview_types.QGraphicsView, query: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQGraphicsView_virtualbase_inputMethodQuery(self.h, cint(query)), owned: true)
 
 proc fcQGraphicsView_vtable_callback_inputMethodQuery(self: pointer, query: cint): pointer {.cdecl.} =
   let vtbl = cast[ptr QGraphicsViewVTable](fcQGraphicsView_vdata(self)[])
@@ -909,17 +1069,11 @@ proc fcQGraphicsView_vtable_callback_inputMethodQuery(self: pointer, query: cint
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QGraphicsViewsetupViewport*(self: gen_qgraphicsview_types.QGraphicsView, widget: gen_qwidget_types.QWidget): void =
-  fcQGraphicsView_virtualbase_setupViewport(self.h, widget.h)
-
 proc fcQGraphicsView_vtable_callback_setupViewport(self: pointer, widget: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsViewVTable](fcQGraphicsView_vdata(self)[])
   let self = QGraphicsView(h: self)
   let slotval1 = gen_qwidget_types.QWidget(h: widget, owned: false)
   vtbl[].setupViewport(self, slotval1)
-
-proc QGraphicsViewevent*(self: gen_qgraphicsview_types.QGraphicsView, event: gen_qcoreevent_types.QEvent): bool =
-  fcQGraphicsView_virtualbase_event(self.h, event.h)
 
 proc fcQGraphicsView_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QGraphicsViewVTable](fcQGraphicsView_vdata(self)[])
@@ -928,9 +1082,6 @@ proc fcQGraphicsView_vtable_callback_event(self: pointer, event: pointer): bool 
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
-proc QGraphicsViewviewportEvent*(self: gen_qgraphicsview_types.QGraphicsView, event: gen_qcoreevent_types.QEvent): bool =
-  fcQGraphicsView_virtualbase_viewportEvent(self.h, event.h)
-
 proc fcQGraphicsView_vtable_callback_viewportEvent(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QGraphicsViewVTable](fcQGraphicsView_vdata(self)[])
   let self = QGraphicsView(h: self)
@@ -938,17 +1089,11 @@ proc fcQGraphicsView_vtable_callback_viewportEvent(self: pointer, event: pointer
   var virtualReturn = vtbl[].viewportEvent(self, slotval1)
   virtualReturn
 
-proc QGraphicsViewcontextMenuEvent*(self: gen_qgraphicsview_types.QGraphicsView, event: gen_qevent_types.QContextMenuEvent): void =
-  fcQGraphicsView_virtualbase_contextMenuEvent(self.h, event.h)
-
 proc fcQGraphicsView_vtable_callback_contextMenuEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsViewVTable](fcQGraphicsView_vdata(self)[])
   let self = QGraphicsView(h: self)
   let slotval1 = gen_qevent_types.QContextMenuEvent(h: event, owned: false)
   vtbl[].contextMenuEvent(self, slotval1)
-
-proc QGraphicsViewdragEnterEvent*(self: gen_qgraphicsview_types.QGraphicsView, event: gen_qevent_types.QDragEnterEvent): void =
-  fcQGraphicsView_virtualbase_dragEnterEvent(self.h, event.h)
 
 proc fcQGraphicsView_vtable_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsViewVTable](fcQGraphicsView_vdata(self)[])
@@ -956,17 +1101,11 @@ proc fcQGraphicsView_vtable_callback_dragEnterEvent(self: pointer, event: pointe
   let slotval1 = gen_qevent_types.QDragEnterEvent(h: event, owned: false)
   vtbl[].dragEnterEvent(self, slotval1)
 
-proc QGraphicsViewdragLeaveEvent*(self: gen_qgraphicsview_types.QGraphicsView, event: gen_qevent_types.QDragLeaveEvent): void =
-  fcQGraphicsView_virtualbase_dragLeaveEvent(self.h, event.h)
-
 proc fcQGraphicsView_vtable_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsViewVTable](fcQGraphicsView_vdata(self)[])
   let self = QGraphicsView(h: self)
   let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event, owned: false)
   vtbl[].dragLeaveEvent(self, slotval1)
-
-proc QGraphicsViewdragMoveEvent*(self: gen_qgraphicsview_types.QGraphicsView, event: gen_qevent_types.QDragMoveEvent): void =
-  fcQGraphicsView_virtualbase_dragMoveEvent(self.h, event.h)
 
 proc fcQGraphicsView_vtable_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsViewVTable](fcQGraphicsView_vdata(self)[])
@@ -974,26 +1113,17 @@ proc fcQGraphicsView_vtable_callback_dragMoveEvent(self: pointer, event: pointer
   let slotval1 = gen_qevent_types.QDragMoveEvent(h: event, owned: false)
   vtbl[].dragMoveEvent(self, slotval1)
 
-proc QGraphicsViewdropEvent*(self: gen_qgraphicsview_types.QGraphicsView, event: gen_qevent_types.QDropEvent): void =
-  fcQGraphicsView_virtualbase_dropEvent(self.h, event.h)
-
 proc fcQGraphicsView_vtable_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsViewVTable](fcQGraphicsView_vdata(self)[])
   let self = QGraphicsView(h: self)
   let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
   vtbl[].dropEvent(self, slotval1)
 
-proc QGraphicsViewfocusInEvent*(self: gen_qgraphicsview_types.QGraphicsView, event: gen_qevent_types.QFocusEvent): void =
-  fcQGraphicsView_virtualbase_focusInEvent(self.h, event.h)
-
 proc fcQGraphicsView_vtable_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsViewVTable](fcQGraphicsView_vdata(self)[])
   let self = QGraphicsView(h: self)
   let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusInEvent(self, slotval1)
-
-proc QGraphicsViewfocusNextPrevChild*(self: gen_qgraphicsview_types.QGraphicsView, next: bool): bool =
-  fcQGraphicsView_virtualbase_focusNextPrevChild(self.h, next)
 
 proc fcQGraphicsView_vtable_callback_focusNextPrevChild(self: pointer, next: bool): bool {.cdecl.} =
   let vtbl = cast[ptr QGraphicsViewVTable](fcQGraphicsView_vdata(self)[])
@@ -1002,17 +1132,11 @@ proc fcQGraphicsView_vtable_callback_focusNextPrevChild(self: pointer, next: boo
   var virtualReturn = vtbl[].focusNextPrevChild(self, slotval1)
   virtualReturn
 
-proc QGraphicsViewfocusOutEvent*(self: gen_qgraphicsview_types.QGraphicsView, event: gen_qevent_types.QFocusEvent): void =
-  fcQGraphicsView_virtualbase_focusOutEvent(self.h, event.h)
-
 proc fcQGraphicsView_vtable_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsViewVTable](fcQGraphicsView_vdata(self)[])
   let self = QGraphicsView(h: self)
   let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusOutEvent(self, slotval1)
-
-proc QGraphicsViewkeyPressEvent*(self: gen_qgraphicsview_types.QGraphicsView, event: gen_qevent_types.QKeyEvent): void =
-  fcQGraphicsView_virtualbase_keyPressEvent(self.h, event.h)
 
 proc fcQGraphicsView_vtable_callback_keyPressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsViewVTable](fcQGraphicsView_vdata(self)[])
@@ -1020,17 +1144,11 @@ proc fcQGraphicsView_vtable_callback_keyPressEvent(self: pointer, event: pointer
   let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   vtbl[].keyPressEvent(self, slotval1)
 
-proc QGraphicsViewkeyReleaseEvent*(self: gen_qgraphicsview_types.QGraphicsView, event: gen_qevent_types.QKeyEvent): void =
-  fcQGraphicsView_virtualbase_keyReleaseEvent(self.h, event.h)
-
 proc fcQGraphicsView_vtable_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsViewVTable](fcQGraphicsView_vdata(self)[])
   let self = QGraphicsView(h: self)
   let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   vtbl[].keyReleaseEvent(self, slotval1)
-
-proc QGraphicsViewmouseDoubleClickEvent*(self: gen_qgraphicsview_types.QGraphicsView, event: gen_qevent_types.QMouseEvent): void =
-  fcQGraphicsView_virtualbase_mouseDoubleClickEvent(self.h, event.h)
 
 proc fcQGraphicsView_vtable_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsViewVTable](fcQGraphicsView_vdata(self)[])
@@ -1038,17 +1156,11 @@ proc fcQGraphicsView_vtable_callback_mouseDoubleClickEvent(self: pointer, event:
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseDoubleClickEvent(self, slotval1)
 
-proc QGraphicsViewmousePressEvent*(self: gen_qgraphicsview_types.QGraphicsView, event: gen_qevent_types.QMouseEvent): void =
-  fcQGraphicsView_virtualbase_mousePressEvent(self.h, event.h)
-
 proc fcQGraphicsView_vtable_callback_mousePressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsViewVTable](fcQGraphicsView_vdata(self)[])
   let self = QGraphicsView(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mousePressEvent(self, slotval1)
-
-proc QGraphicsViewmouseMoveEvent*(self: gen_qgraphicsview_types.QGraphicsView, event: gen_qevent_types.QMouseEvent): void =
-  fcQGraphicsView_virtualbase_mouseMoveEvent(self.h, event.h)
 
 proc fcQGraphicsView_vtable_callback_mouseMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsViewVTable](fcQGraphicsView_vdata(self)[])
@@ -1056,17 +1168,11 @@ proc fcQGraphicsView_vtable_callback_mouseMoveEvent(self: pointer, event: pointe
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseMoveEvent(self, slotval1)
 
-proc QGraphicsViewmouseReleaseEvent*(self: gen_qgraphicsview_types.QGraphicsView, event: gen_qevent_types.QMouseEvent): void =
-  fcQGraphicsView_virtualbase_mouseReleaseEvent(self.h, event.h)
-
 proc fcQGraphicsView_vtable_callback_mouseReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsViewVTable](fcQGraphicsView_vdata(self)[])
   let self = QGraphicsView(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseReleaseEvent(self, slotval1)
-
-proc QGraphicsViewwheelEvent*(self: gen_qgraphicsview_types.QGraphicsView, event: gen_qevent_types.QWheelEvent): void =
-  fcQGraphicsView_virtualbase_wheelEvent(self.h, event.h)
 
 proc fcQGraphicsView_vtable_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsViewVTable](fcQGraphicsView_vdata(self)[])
@@ -1074,26 +1180,17 @@ proc fcQGraphicsView_vtable_callback_wheelEvent(self: pointer, event: pointer): 
   let slotval1 = gen_qevent_types.QWheelEvent(h: event, owned: false)
   vtbl[].wheelEvent(self, slotval1)
 
-proc QGraphicsViewpaintEvent*(self: gen_qgraphicsview_types.QGraphicsView, event: gen_qevent_types.QPaintEvent): void =
-  fcQGraphicsView_virtualbase_paintEvent(self.h, event.h)
-
 proc fcQGraphicsView_vtable_callback_paintEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsViewVTable](fcQGraphicsView_vdata(self)[])
   let self = QGraphicsView(h: self)
   let slotval1 = gen_qevent_types.QPaintEvent(h: event, owned: false)
   vtbl[].paintEvent(self, slotval1)
 
-proc QGraphicsViewresizeEvent*(self: gen_qgraphicsview_types.QGraphicsView, event: gen_qevent_types.QResizeEvent): void =
-  fcQGraphicsView_virtualbase_resizeEvent(self.h, event.h)
-
 proc fcQGraphicsView_vtable_callback_resizeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsViewVTable](fcQGraphicsView_vdata(self)[])
   let self = QGraphicsView(h: self)
   let slotval1 = gen_qevent_types.QResizeEvent(h: event, owned: false)
   vtbl[].resizeEvent(self, slotval1)
-
-proc QGraphicsViewscrollContentsBy*(self: gen_qgraphicsview_types.QGraphicsView, dx: cint, dy: cint): void =
-  fcQGraphicsView_virtualbase_scrollContentsBy(self.h, dx, dy)
 
 proc fcQGraphicsView_vtable_callback_scrollContentsBy(self: pointer, dx: cint, dy: cint): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsViewVTable](fcQGraphicsView_vdata(self)[])
@@ -1102,26 +1199,17 @@ proc fcQGraphicsView_vtable_callback_scrollContentsBy(self: pointer, dx: cint, d
   let slotval2 = dy
   vtbl[].scrollContentsBy(self, slotval1, slotval2)
 
-proc QGraphicsViewshowEvent*(self: gen_qgraphicsview_types.QGraphicsView, event: gen_qevent_types.QShowEvent): void =
-  fcQGraphicsView_virtualbase_showEvent(self.h, event.h)
-
 proc fcQGraphicsView_vtable_callback_showEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsViewVTable](fcQGraphicsView_vdata(self)[])
   let self = QGraphicsView(h: self)
   let slotval1 = gen_qevent_types.QShowEvent(h: event, owned: false)
   vtbl[].showEvent(self, slotval1)
 
-proc QGraphicsViewinputMethodEvent*(self: gen_qgraphicsview_types.QGraphicsView, event: gen_qevent_types.QInputMethodEvent): void =
-  fcQGraphicsView_virtualbase_inputMethodEvent(self.h, event.h)
-
 proc fcQGraphicsView_vtable_callback_inputMethodEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsViewVTable](fcQGraphicsView_vdata(self)[])
   let self = QGraphicsView(h: self)
   let slotval1 = gen_qevent_types.QInputMethodEvent(h: event, owned: false)
   vtbl[].inputMethodEvent(self, slotval1)
-
-proc QGraphicsViewdrawBackground*(self: gen_qgraphicsview_types.QGraphicsView, painter: gen_qpainter_types.QPainter, rect: gen_qrect_types.QRectF): void =
-  fcQGraphicsView_virtualbase_drawBackground(self.h, painter.h, rect.h)
 
 proc fcQGraphicsView_vtable_callback_drawBackground(self: pointer, painter: pointer, rect: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsViewVTable](fcQGraphicsView_vdata(self)[])
@@ -1130,18 +1218,12 @@ proc fcQGraphicsView_vtable_callback_drawBackground(self: pointer, painter: poin
   let slotval2 = gen_qrect_types.QRectF(h: rect, owned: false)
   vtbl[].drawBackground(self, slotval1, slotval2)
 
-proc QGraphicsViewdrawForeground*(self: gen_qgraphicsview_types.QGraphicsView, painter: gen_qpainter_types.QPainter, rect: gen_qrect_types.QRectF): void =
-  fcQGraphicsView_virtualbase_drawForeground(self.h, painter.h, rect.h)
-
 proc fcQGraphicsView_vtable_callback_drawForeground(self: pointer, painter: pointer, rect: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsViewVTable](fcQGraphicsView_vdata(self)[])
   let self = QGraphicsView(h: self)
   let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
   let slotval2 = gen_qrect_types.QRectF(h: rect, owned: false)
   vtbl[].drawForeground(self, slotval1, slotval2)
-
-proc QGraphicsViewminimumSizeHint*(self: gen_qgraphicsview_types.QGraphicsView): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQGraphicsView_virtualbase_minimumSizeHint(self.h), owned: true)
 
 proc fcQGraphicsView_vtable_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QGraphicsViewVTable](fcQGraphicsView_vdata(self)[])
@@ -1152,9 +1234,6 @@ proc fcQGraphicsView_vtable_callback_minimumSizeHint(self: pointer): pointer {.c
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QGraphicsVieweventFilter*(self: gen_qgraphicsview_types.QGraphicsView, param1: gen_qobject_types.QObject, param2: gen_qcoreevent_types.QEvent): bool =
-  fcQGraphicsView_virtualbase_eventFilter(self.h, param1.h, param2.h)
-
 proc fcQGraphicsView_vtable_callback_eventFilter(self: pointer, param1: pointer, param2: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QGraphicsViewVTable](fcQGraphicsView_vdata(self)[])
   let self = QGraphicsView(h: self)
@@ -1162,9 +1241,6 @@ proc fcQGraphicsView_vtable_callback_eventFilter(self: pointer, param1: pointer,
   let slotval2 = gen_qcoreevent_types.QEvent(h: param2, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
-
-proc QGraphicsViewviewportSizeHint*(self: gen_qgraphicsview_types.QGraphicsView): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQGraphicsView_virtualbase_viewportSizeHint(self.h), owned: true)
 
 proc fcQGraphicsView_vtable_callback_viewportSizeHint(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QGraphicsViewVTable](fcQGraphicsView_vdata(self)[])
@@ -1175,17 +1251,11 @@ proc fcQGraphicsView_vtable_callback_viewportSizeHint(self: pointer): pointer {.
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QGraphicsViewchangeEvent*(self: gen_qgraphicsview_types.QGraphicsView, param1: gen_qcoreevent_types.QEvent): void =
-  fcQGraphicsView_virtualbase_changeEvent(self.h, param1.h)
-
 proc fcQGraphicsView_vtable_callback_changeEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsViewVTable](fcQGraphicsView_vdata(self)[])
   let self = QGraphicsView(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
   vtbl[].changeEvent(self, slotval1)
-
-proc QGraphicsViewinitStyleOption*(self: gen_qgraphicsview_types.QGraphicsView, option: gen_qstyleoption_types.QStyleOptionFrame): void =
-  fcQGraphicsView_virtualbase_initStyleOption(self.h, option.h)
 
 proc fcQGraphicsView_vtable_callback_initStyleOption(self: pointer, option: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsViewVTable](fcQGraphicsView_vdata(self)[])
@@ -1193,26 +1263,17 @@ proc fcQGraphicsView_vtable_callback_initStyleOption(self: pointer, option: poin
   let slotval1 = gen_qstyleoption_types.QStyleOptionFrame(h: option, owned: false)
   vtbl[].initStyleOption(self, slotval1)
 
-proc QGraphicsViewdevType*(self: gen_qgraphicsview_types.QGraphicsView): cint =
-  fcQGraphicsView_virtualbase_devType(self.h)
-
 proc fcQGraphicsView_vtable_callback_devType(self: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QGraphicsViewVTable](fcQGraphicsView_vdata(self)[])
   let self = QGraphicsView(h: self)
   var virtualReturn = vtbl[].devType(self)
   virtualReturn
 
-proc QGraphicsViewsetVisible*(self: gen_qgraphicsview_types.QGraphicsView, visible: bool): void =
-  fcQGraphicsView_virtualbase_setVisible(self.h, visible)
-
 proc fcQGraphicsView_vtable_callback_setVisible(self: pointer, visible: bool): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsViewVTable](fcQGraphicsView_vdata(self)[])
   let self = QGraphicsView(h: self)
   let slotval1 = visible
   vtbl[].setVisible(self, slotval1)
-
-proc QGraphicsViewheightForWidth*(self: gen_qgraphicsview_types.QGraphicsView, param1: cint): cint =
-  fcQGraphicsView_virtualbase_heightForWidth(self.h, param1)
 
 proc fcQGraphicsView_vtable_callback_heightForWidth(self: pointer, param1: cint): cint {.cdecl.} =
   let vtbl = cast[ptr QGraphicsViewVTable](fcQGraphicsView_vdata(self)[])
@@ -1221,17 +1282,11 @@ proc fcQGraphicsView_vtable_callback_heightForWidth(self: pointer, param1: cint)
   var virtualReturn = vtbl[].heightForWidth(self, slotval1)
   virtualReturn
 
-proc QGraphicsViewhasHeightForWidth*(self: gen_qgraphicsview_types.QGraphicsView): bool =
-  fcQGraphicsView_virtualbase_hasHeightForWidth(self.h)
-
 proc fcQGraphicsView_vtable_callback_hasHeightForWidth(self: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QGraphicsViewVTable](fcQGraphicsView_vdata(self)[])
   let self = QGraphicsView(h: self)
   var virtualReturn = vtbl[].hasHeightForWidth(self)
   virtualReturn
-
-proc QGraphicsViewpaintEngine*(self: gen_qgraphicsview_types.QGraphicsView): gen_qpaintengine_types.QPaintEngine =
-  gen_qpaintengine_types.QPaintEngine(h: fcQGraphicsView_virtualbase_paintEngine(self.h), owned: false)
 
 proc fcQGraphicsView_vtable_callback_paintEngine(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QGraphicsViewVTable](fcQGraphicsView_vdata(self)[])
@@ -1242,17 +1297,11 @@ proc fcQGraphicsView_vtable_callback_paintEngine(self: pointer): pointer {.cdecl
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QGraphicsViewenterEvent*(self: gen_qgraphicsview_types.QGraphicsView, event: gen_qevent_types.QEnterEvent): void =
-  fcQGraphicsView_virtualbase_enterEvent(self.h, event.h)
-
 proc fcQGraphicsView_vtable_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsViewVTable](fcQGraphicsView_vdata(self)[])
   let self = QGraphicsView(h: self)
   let slotval1 = gen_qevent_types.QEnterEvent(h: event, owned: false)
   vtbl[].enterEvent(self, slotval1)
-
-proc QGraphicsViewleaveEvent*(self: gen_qgraphicsview_types.QGraphicsView, event: gen_qcoreevent_types.QEvent): void =
-  fcQGraphicsView_virtualbase_leaveEvent(self.h, event.h)
 
 proc fcQGraphicsView_vtable_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsViewVTable](fcQGraphicsView_vdata(self)[])
@@ -1260,17 +1309,11 @@ proc fcQGraphicsView_vtable_callback_leaveEvent(self: pointer, event: pointer): 
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].leaveEvent(self, slotval1)
 
-proc QGraphicsViewmoveEvent*(self: gen_qgraphicsview_types.QGraphicsView, event: gen_qevent_types.QMoveEvent): void =
-  fcQGraphicsView_virtualbase_moveEvent(self.h, event.h)
-
 proc fcQGraphicsView_vtable_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsViewVTable](fcQGraphicsView_vdata(self)[])
   let self = QGraphicsView(h: self)
   let slotval1 = gen_qevent_types.QMoveEvent(h: event, owned: false)
   vtbl[].moveEvent(self, slotval1)
-
-proc QGraphicsViewcloseEvent*(self: gen_qgraphicsview_types.QGraphicsView, event: gen_qevent_types.QCloseEvent): void =
-  fcQGraphicsView_virtualbase_closeEvent(self.h, event.h)
 
 proc fcQGraphicsView_vtable_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsViewVTable](fcQGraphicsView_vdata(self)[])
@@ -1278,17 +1321,11 @@ proc fcQGraphicsView_vtable_callback_closeEvent(self: pointer, event: pointer): 
   let slotval1 = gen_qevent_types.QCloseEvent(h: event, owned: false)
   vtbl[].closeEvent(self, slotval1)
 
-proc QGraphicsViewtabletEvent*(self: gen_qgraphicsview_types.QGraphicsView, event: gen_qevent_types.QTabletEvent): void =
-  fcQGraphicsView_virtualbase_tabletEvent(self.h, event.h)
-
 proc fcQGraphicsView_vtable_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsViewVTable](fcQGraphicsView_vdata(self)[])
   let self = QGraphicsView(h: self)
   let slotval1 = gen_qevent_types.QTabletEvent(h: event, owned: false)
   vtbl[].tabletEvent(self, slotval1)
-
-proc QGraphicsViewactionEvent*(self: gen_qgraphicsview_types.QGraphicsView, event: gen_qevent_types.QActionEvent): void =
-  fcQGraphicsView_virtualbase_actionEvent(self.h, event.h)
 
 proc fcQGraphicsView_vtable_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsViewVTable](fcQGraphicsView_vdata(self)[])
@@ -1296,17 +1333,11 @@ proc fcQGraphicsView_vtable_callback_actionEvent(self: pointer, event: pointer):
   let slotval1 = gen_qevent_types.QActionEvent(h: event, owned: false)
   vtbl[].actionEvent(self, slotval1)
 
-proc QGraphicsViewhideEvent*(self: gen_qgraphicsview_types.QGraphicsView, event: gen_qevent_types.QHideEvent): void =
-  fcQGraphicsView_virtualbase_hideEvent(self.h, event.h)
-
 proc fcQGraphicsView_vtable_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsViewVTable](fcQGraphicsView_vdata(self)[])
   let self = QGraphicsView(h: self)
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   vtbl[].hideEvent(self, slotval1)
-
-proc QGraphicsViewnativeEvent*(self: gen_qgraphicsview_types.QGraphicsView, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool =
-  fcQGraphicsView_virtualbase_nativeEvent(self.h, struct_miqt_string(data: if len(eventType) > 0: addr eventType[0] else: nil, len: csize_t(len(eventType))), message, resultVal)
 
 proc fcQGraphicsView_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
   let vtbl = cast[ptr QGraphicsViewVTable](fcQGraphicsView_vdata(self)[])
@@ -1320,9 +1351,6 @@ proc fcQGraphicsView_vtable_callback_nativeEvent(self: pointer, eventType: struc
   var virtualReturn = vtbl[].nativeEvent(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QGraphicsViewmetric*(self: gen_qgraphicsview_types.QGraphicsView, param1: cint): cint =
-  fcQGraphicsView_virtualbase_metric(self.h, cint(param1))
-
 proc fcQGraphicsView_vtable_callback_metric(self: pointer, param1: cint): cint {.cdecl.} =
   let vtbl = cast[ptr QGraphicsViewVTable](fcQGraphicsView_vdata(self)[])
   let self = QGraphicsView(h: self)
@@ -1330,17 +1358,11 @@ proc fcQGraphicsView_vtable_callback_metric(self: pointer, param1: cint): cint {
   var virtualReturn = vtbl[].metric(self, slotval1)
   virtualReturn
 
-proc QGraphicsViewinitPainter*(self: gen_qgraphicsview_types.QGraphicsView, painter: gen_qpainter_types.QPainter): void =
-  fcQGraphicsView_virtualbase_initPainter(self.h, painter.h)
-
 proc fcQGraphicsView_vtable_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsViewVTable](fcQGraphicsView_vdata(self)[])
   let self = QGraphicsView(h: self)
   let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
   vtbl[].initPainter(self, slotval1)
-
-proc QGraphicsViewredirected*(self: gen_qgraphicsview_types.QGraphicsView, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice =
-  gen_qpaintdevice_types.QPaintDevice(h: fcQGraphicsView_virtualbase_redirected(self.h, offset.h), owned: false)
 
 proc fcQGraphicsView_vtable_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QGraphicsViewVTable](fcQGraphicsView_vdata(self)[])
@@ -1352,9 +1374,6 @@ proc fcQGraphicsView_vtable_callback_redirected(self: pointer, offset: pointer):
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QGraphicsViewsharedPainter*(self: gen_qgraphicsview_types.QGraphicsView): gen_qpainter_types.QPainter =
-  gen_qpainter_types.QPainter(h: fcQGraphicsView_virtualbase_sharedPainter(self.h), owned: false)
-
 proc fcQGraphicsView_vtable_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QGraphicsViewVTable](fcQGraphicsView_vdata(self)[])
   let self = QGraphicsView(h: self)
@@ -1364,17 +1383,11 @@ proc fcQGraphicsView_vtable_callback_sharedPainter(self: pointer): pointer {.cde
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QGraphicsViewtimerEvent*(self: gen_qgraphicsview_types.QGraphicsView, event: gen_qcoreevent_types.QTimerEvent): void =
-  fcQGraphicsView_virtualbase_timerEvent(self.h, event.h)
-
 proc fcQGraphicsView_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsViewVTable](fcQGraphicsView_vdata(self)[])
   let self = QGraphicsView(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
-
-proc QGraphicsViewchildEvent*(self: gen_qgraphicsview_types.QGraphicsView, event: gen_qcoreevent_types.QChildEvent): void =
-  fcQGraphicsView_virtualbase_childEvent(self.h, event.h)
 
 proc fcQGraphicsView_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsViewVTable](fcQGraphicsView_vdata(self)[])
@@ -1382,26 +1395,17 @@ proc fcQGraphicsView_vtable_callback_childEvent(self: pointer, event: pointer): 
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
-proc QGraphicsViewcustomEvent*(self: gen_qgraphicsview_types.QGraphicsView, event: gen_qcoreevent_types.QEvent): void =
-  fcQGraphicsView_virtualbase_customEvent(self.h, event.h)
-
 proc fcQGraphicsView_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsViewVTable](fcQGraphicsView_vdata(self)[])
   let self = QGraphicsView(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
-proc QGraphicsViewconnectNotify*(self: gen_qgraphicsview_types.QGraphicsView, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQGraphicsView_virtualbase_connectNotify(self.h, signal.h)
-
 proc fcQGraphicsView_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsViewVTable](fcQGraphicsView_vdata(self)[])
   let self = QGraphicsView(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
-
-proc QGraphicsViewdisconnectNotify*(self: gen_qgraphicsview_types.QGraphicsView, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQGraphicsView_virtualbase_disconnectNotify(self.h, signal.h)
 
 proc fcQGraphicsView_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsViewVTable](fcQGraphicsView_vdata(self)[])
@@ -1411,23 +1415,133 @@ proc fcQGraphicsView_vtable_callback_disconnectNotify(self: pointer, signal: poi
 
 type VirtualQGraphicsView* {.inheritable.} = ref object of QGraphicsView
   vtbl*: cQGraphicsViewVTable
+
 method metaObject*(self: VirtualQGraphicsView): gen_qobjectdefs_types.QMetaObject {.base.} =
   QGraphicsViewmetaObject(self[])
+method metacast*(self: VirtualQGraphicsView, param1: cstring): pointer {.base.} =
+  QGraphicsViewmetacast(self[], param1)
+method metacall*(self: VirtualQGraphicsView, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QGraphicsViewmetacall(self[], param1, param2, param3)
+method sizeHint*(self: VirtualQGraphicsView): gen_qsize_types.QSize {.base.} =
+  QGraphicsViewsizeHint(self[])
+method inputMethodQuery*(self: VirtualQGraphicsView, query: cint): gen_qvariant_types.QVariant {.base.} =
+  QGraphicsViewinputMethodQuery(self[], query)
+method setupViewport*(self: VirtualQGraphicsView, widget: gen_qwidget_types.QWidget): void {.base.} =
+  QGraphicsViewsetupViewport(self[], widget)
+method event*(self: VirtualQGraphicsView, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QGraphicsViewevent(self[], event)
+method viewportEvent*(self: VirtualQGraphicsView, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QGraphicsViewviewportEvent(self[], event)
+method contextMenuEvent*(self: VirtualQGraphicsView, event: gen_qevent_types.QContextMenuEvent): void {.base.} =
+  QGraphicsViewcontextMenuEvent(self[], event)
+method dragEnterEvent*(self: VirtualQGraphicsView, event: gen_qevent_types.QDragEnterEvent): void {.base.} =
+  QGraphicsViewdragEnterEvent(self[], event)
+method dragLeaveEvent*(self: VirtualQGraphicsView, event: gen_qevent_types.QDragLeaveEvent): void {.base.} =
+  QGraphicsViewdragLeaveEvent(self[], event)
+method dragMoveEvent*(self: VirtualQGraphicsView, event: gen_qevent_types.QDragMoveEvent): void {.base.} =
+  QGraphicsViewdragMoveEvent(self[], event)
+method dropEvent*(self: VirtualQGraphicsView, event: gen_qevent_types.QDropEvent): void {.base.} =
+  QGraphicsViewdropEvent(self[], event)
+method focusInEvent*(self: VirtualQGraphicsView, event: gen_qevent_types.QFocusEvent): void {.base.} =
+  QGraphicsViewfocusInEvent(self[], event)
+method focusNextPrevChild*(self: VirtualQGraphicsView, next: bool): bool {.base.} =
+  QGraphicsViewfocusNextPrevChild(self[], next)
+method focusOutEvent*(self: VirtualQGraphicsView, event: gen_qevent_types.QFocusEvent): void {.base.} =
+  QGraphicsViewfocusOutEvent(self[], event)
+method keyPressEvent*(self: VirtualQGraphicsView, event: gen_qevent_types.QKeyEvent): void {.base.} =
+  QGraphicsViewkeyPressEvent(self[], event)
+method keyReleaseEvent*(self: VirtualQGraphicsView, event: gen_qevent_types.QKeyEvent): void {.base.} =
+  QGraphicsViewkeyReleaseEvent(self[], event)
+method mouseDoubleClickEvent*(self: VirtualQGraphicsView, event: gen_qevent_types.QMouseEvent): void {.base.} =
+  QGraphicsViewmouseDoubleClickEvent(self[], event)
+method mousePressEvent*(self: VirtualQGraphicsView, event: gen_qevent_types.QMouseEvent): void {.base.} =
+  QGraphicsViewmousePressEvent(self[], event)
+method mouseMoveEvent*(self: VirtualQGraphicsView, event: gen_qevent_types.QMouseEvent): void {.base.} =
+  QGraphicsViewmouseMoveEvent(self[], event)
+method mouseReleaseEvent*(self: VirtualQGraphicsView, event: gen_qevent_types.QMouseEvent): void {.base.} =
+  QGraphicsViewmouseReleaseEvent(self[], event)
+method wheelEvent*(self: VirtualQGraphicsView, event: gen_qevent_types.QWheelEvent): void {.base.} =
+  QGraphicsViewwheelEvent(self[], event)
+method paintEvent*(self: VirtualQGraphicsView, event: gen_qevent_types.QPaintEvent): void {.base.} =
+  QGraphicsViewpaintEvent(self[], event)
+method resizeEvent*(self: VirtualQGraphicsView, event: gen_qevent_types.QResizeEvent): void {.base.} =
+  QGraphicsViewresizeEvent(self[], event)
+method scrollContentsBy*(self: VirtualQGraphicsView, dx: cint, dy: cint): void {.base.} =
+  QGraphicsViewscrollContentsBy(self[], dx, dy)
+method showEvent*(self: VirtualQGraphicsView, event: gen_qevent_types.QShowEvent): void {.base.} =
+  QGraphicsViewshowEvent(self[], event)
+method inputMethodEvent*(self: VirtualQGraphicsView, event: gen_qevent_types.QInputMethodEvent): void {.base.} =
+  QGraphicsViewinputMethodEvent(self[], event)
+method drawBackground*(self: VirtualQGraphicsView, painter: gen_qpainter_types.QPainter, rect: gen_qrect_types.QRectF): void {.base.} =
+  QGraphicsViewdrawBackground(self[], painter, rect)
+method drawForeground*(self: VirtualQGraphicsView, painter: gen_qpainter_types.QPainter, rect: gen_qrect_types.QRectF): void {.base.} =
+  QGraphicsViewdrawForeground(self[], painter, rect)
+method minimumSizeHint*(self: VirtualQGraphicsView): gen_qsize_types.QSize {.base.} =
+  QGraphicsViewminimumSizeHint(self[])
+method eventFilter*(self: VirtualQGraphicsView, param1: gen_qobject_types.QObject, param2: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QGraphicsVieweventFilter(self[], param1, param2)
+method viewportSizeHint*(self: VirtualQGraphicsView): gen_qsize_types.QSize {.base.} =
+  QGraphicsViewviewportSizeHint(self[])
+method changeEvent*(self: VirtualQGraphicsView, param1: gen_qcoreevent_types.QEvent): void {.base.} =
+  QGraphicsViewchangeEvent(self[], param1)
+method initStyleOption*(self: VirtualQGraphicsView, option: gen_qstyleoption_types.QStyleOptionFrame): void {.base.} =
+  QGraphicsViewinitStyleOption(self[], option)
+method devType*(self: VirtualQGraphicsView): cint {.base.} =
+  QGraphicsViewdevType(self[])
+method setVisible*(self: VirtualQGraphicsView, visible: bool): void {.base.} =
+  QGraphicsViewsetVisible(self[], visible)
+method heightForWidth*(self: VirtualQGraphicsView, param1: cint): cint {.base.} =
+  QGraphicsViewheightForWidth(self[], param1)
+method hasHeightForWidth*(self: VirtualQGraphicsView): bool {.base.} =
+  QGraphicsViewhasHeightForWidth(self[])
+method paintEngine*(self: VirtualQGraphicsView): gen_qpaintengine_types.QPaintEngine {.base.} =
+  QGraphicsViewpaintEngine(self[])
+method enterEvent*(self: VirtualQGraphicsView, event: gen_qevent_types.QEnterEvent): void {.base.} =
+  QGraphicsViewenterEvent(self[], event)
+method leaveEvent*(self: VirtualQGraphicsView, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QGraphicsViewleaveEvent(self[], event)
+method moveEvent*(self: VirtualQGraphicsView, event: gen_qevent_types.QMoveEvent): void {.base.} =
+  QGraphicsViewmoveEvent(self[], event)
+method closeEvent*(self: VirtualQGraphicsView, event: gen_qevent_types.QCloseEvent): void {.base.} =
+  QGraphicsViewcloseEvent(self[], event)
+method tabletEvent*(self: VirtualQGraphicsView, event: gen_qevent_types.QTabletEvent): void {.base.} =
+  QGraphicsViewtabletEvent(self[], event)
+method actionEvent*(self: VirtualQGraphicsView, event: gen_qevent_types.QActionEvent): void {.base.} =
+  QGraphicsViewactionEvent(self[], event)
+method hideEvent*(self: VirtualQGraphicsView, event: gen_qevent_types.QHideEvent): void {.base.} =
+  QGraphicsViewhideEvent(self[], event)
+method nativeEvent*(self: VirtualQGraphicsView, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
+  QGraphicsViewnativeEvent(self[], eventType, message, resultVal)
+method metric*(self: VirtualQGraphicsView, param1: cint): cint {.base.} =
+  QGraphicsViewmetric(self[], param1)
+method initPainter*(self: VirtualQGraphicsView, painter: gen_qpainter_types.QPainter): void {.base.} =
+  QGraphicsViewinitPainter(self[], painter)
+method redirected*(self: VirtualQGraphicsView, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.base.} =
+  QGraphicsViewredirected(self[], offset)
+method sharedPainter*(self: VirtualQGraphicsView): gen_qpainter_types.QPainter {.base.} =
+  QGraphicsViewsharedPainter(self[])
+method timerEvent*(self: VirtualQGraphicsView, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QGraphicsViewtimerEvent(self[], event)
+method childEvent*(self: VirtualQGraphicsView, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QGraphicsViewchildEvent(self[], event)
+method customEvent*(self: VirtualQGraphicsView, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QGraphicsViewcustomEvent(self[], event)
+method connectNotify*(self: VirtualQGraphicsView, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QGraphicsViewconnectNotify(self[], signal)
+method disconnectNotify*(self: VirtualQGraphicsView, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QGraphicsViewdisconnectNotify(self[], signal)
+
 proc fcQGraphicsView_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsView](fcQGraphicsView_vdata(self)[])
   var virtualReturn = inst.metaObject()
   virtualReturn.h
 
-method metacast*(self: VirtualQGraphicsView, param1: cstring): pointer {.base.} =
-  QGraphicsViewmetacast(self[], param1)
 proc fcQGraphicsView_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsView](fcQGraphicsView_vdata(self)[])
   let slotval1 = (param1)
   var virtualReturn = inst.metacast(slotval1)
   virtualReturn
 
-method metacall*(self: VirtualQGraphicsView, param1: cint, param2: cint, param3: pointer): cint {.base.} =
-  QGraphicsViewmetacall(self[], param1, param2, param3)
 proc fcQGraphicsView_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQGraphicsView](fcQGraphicsView_vdata(self)[])
   let slotval1 = cint(param1)
@@ -1436,211 +1550,153 @@ proc fcQGraphicsView_method_callback_metacall(self: pointer, param1: cint, param
   var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
-method sizeHint*(self: VirtualQGraphicsView): gen_qsize_types.QSize {.base.} =
-  QGraphicsViewsizeHint(self[])
 proc fcQGraphicsView_method_callback_sizeHint(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsView](fcQGraphicsView_vdata(self)[])
   var virtualReturn = inst.sizeHint()
   virtualReturn.h
 
-method inputMethodQuery*(self: VirtualQGraphicsView, query: cint): gen_qvariant_types.QVariant {.base.} =
-  QGraphicsViewinputMethodQuery(self[], query)
 proc fcQGraphicsView_method_callback_inputMethodQuery(self: pointer, query: cint): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsView](fcQGraphicsView_vdata(self)[])
   let slotval1 = cint(query)
   var virtualReturn = inst.inputMethodQuery(slotval1)
   virtualReturn.h
 
-method setupViewport*(self: VirtualQGraphicsView, widget: gen_qwidget_types.QWidget): void {.base.} =
-  QGraphicsViewsetupViewport(self[], widget)
 proc fcQGraphicsView_method_callback_setupViewport(self: pointer, widget: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsView](fcQGraphicsView_vdata(self)[])
   let slotval1 = gen_qwidget_types.QWidget(h: widget, owned: false)
   inst.setupViewport(slotval1)
 
-method event*(self: VirtualQGraphicsView, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QGraphicsViewevent(self[], event)
 proc fcQGraphicsView_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQGraphicsView](fcQGraphicsView_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
-method viewportEvent*(self: VirtualQGraphicsView, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QGraphicsViewviewportEvent(self[], event)
 proc fcQGraphicsView_method_callback_viewportEvent(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQGraphicsView](fcQGraphicsView_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.viewportEvent(slotval1)
   virtualReturn
 
-method contextMenuEvent*(self: VirtualQGraphicsView, event: gen_qevent_types.QContextMenuEvent): void {.base.} =
-  QGraphicsViewcontextMenuEvent(self[], event)
 proc fcQGraphicsView_method_callback_contextMenuEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsView](fcQGraphicsView_vdata(self)[])
   let slotval1 = gen_qevent_types.QContextMenuEvent(h: event, owned: false)
   inst.contextMenuEvent(slotval1)
 
-method dragEnterEvent*(self: VirtualQGraphicsView, event: gen_qevent_types.QDragEnterEvent): void {.base.} =
-  QGraphicsViewdragEnterEvent(self[], event)
 proc fcQGraphicsView_method_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsView](fcQGraphicsView_vdata(self)[])
   let slotval1 = gen_qevent_types.QDragEnterEvent(h: event, owned: false)
   inst.dragEnterEvent(slotval1)
 
-method dragLeaveEvent*(self: VirtualQGraphicsView, event: gen_qevent_types.QDragLeaveEvent): void {.base.} =
-  QGraphicsViewdragLeaveEvent(self[], event)
 proc fcQGraphicsView_method_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsView](fcQGraphicsView_vdata(self)[])
   let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event, owned: false)
   inst.dragLeaveEvent(slotval1)
 
-method dragMoveEvent*(self: VirtualQGraphicsView, event: gen_qevent_types.QDragMoveEvent): void {.base.} =
-  QGraphicsViewdragMoveEvent(self[], event)
 proc fcQGraphicsView_method_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsView](fcQGraphicsView_vdata(self)[])
   let slotval1 = gen_qevent_types.QDragMoveEvent(h: event, owned: false)
   inst.dragMoveEvent(slotval1)
 
-method dropEvent*(self: VirtualQGraphicsView, event: gen_qevent_types.QDropEvent): void {.base.} =
-  QGraphicsViewdropEvent(self[], event)
 proc fcQGraphicsView_method_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsView](fcQGraphicsView_vdata(self)[])
   let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
   inst.dropEvent(slotval1)
 
-method focusInEvent*(self: VirtualQGraphicsView, event: gen_qevent_types.QFocusEvent): void {.base.} =
-  QGraphicsViewfocusInEvent(self[], event)
 proc fcQGraphicsView_method_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsView](fcQGraphicsView_vdata(self)[])
   let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   inst.focusInEvent(slotval1)
 
-method focusNextPrevChild*(self: VirtualQGraphicsView, next: bool): bool {.base.} =
-  QGraphicsViewfocusNextPrevChild(self[], next)
 proc fcQGraphicsView_method_callback_focusNextPrevChild(self: pointer, next: bool): bool {.cdecl.} =
   let inst = cast[VirtualQGraphicsView](fcQGraphicsView_vdata(self)[])
   let slotval1 = next
   var virtualReturn = inst.focusNextPrevChild(slotval1)
   virtualReturn
 
-method focusOutEvent*(self: VirtualQGraphicsView, event: gen_qevent_types.QFocusEvent): void {.base.} =
-  QGraphicsViewfocusOutEvent(self[], event)
 proc fcQGraphicsView_method_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsView](fcQGraphicsView_vdata(self)[])
   let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   inst.focusOutEvent(slotval1)
 
-method keyPressEvent*(self: VirtualQGraphicsView, event: gen_qevent_types.QKeyEvent): void {.base.} =
-  QGraphicsViewkeyPressEvent(self[], event)
 proc fcQGraphicsView_method_callback_keyPressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsView](fcQGraphicsView_vdata(self)[])
   let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   inst.keyPressEvent(slotval1)
 
-method keyReleaseEvent*(self: VirtualQGraphicsView, event: gen_qevent_types.QKeyEvent): void {.base.} =
-  QGraphicsViewkeyReleaseEvent(self[], event)
 proc fcQGraphicsView_method_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsView](fcQGraphicsView_vdata(self)[])
   let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   inst.keyReleaseEvent(slotval1)
 
-method mouseDoubleClickEvent*(self: VirtualQGraphicsView, event: gen_qevent_types.QMouseEvent): void {.base.} =
-  QGraphicsViewmouseDoubleClickEvent(self[], event)
 proc fcQGraphicsView_method_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsView](fcQGraphicsView_vdata(self)[])
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mouseDoubleClickEvent(slotval1)
 
-method mousePressEvent*(self: VirtualQGraphicsView, event: gen_qevent_types.QMouseEvent): void {.base.} =
-  QGraphicsViewmousePressEvent(self[], event)
 proc fcQGraphicsView_method_callback_mousePressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsView](fcQGraphicsView_vdata(self)[])
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mousePressEvent(slotval1)
 
-method mouseMoveEvent*(self: VirtualQGraphicsView, event: gen_qevent_types.QMouseEvent): void {.base.} =
-  QGraphicsViewmouseMoveEvent(self[], event)
 proc fcQGraphicsView_method_callback_mouseMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsView](fcQGraphicsView_vdata(self)[])
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mouseMoveEvent(slotval1)
 
-method mouseReleaseEvent*(self: VirtualQGraphicsView, event: gen_qevent_types.QMouseEvent): void {.base.} =
-  QGraphicsViewmouseReleaseEvent(self[], event)
 proc fcQGraphicsView_method_callback_mouseReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsView](fcQGraphicsView_vdata(self)[])
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mouseReleaseEvent(slotval1)
 
-method wheelEvent*(self: VirtualQGraphicsView, event: gen_qevent_types.QWheelEvent): void {.base.} =
-  QGraphicsViewwheelEvent(self[], event)
 proc fcQGraphicsView_method_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsView](fcQGraphicsView_vdata(self)[])
   let slotval1 = gen_qevent_types.QWheelEvent(h: event, owned: false)
   inst.wheelEvent(slotval1)
 
-method paintEvent*(self: VirtualQGraphicsView, event: gen_qevent_types.QPaintEvent): void {.base.} =
-  QGraphicsViewpaintEvent(self[], event)
 proc fcQGraphicsView_method_callback_paintEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsView](fcQGraphicsView_vdata(self)[])
   let slotval1 = gen_qevent_types.QPaintEvent(h: event, owned: false)
   inst.paintEvent(slotval1)
 
-method resizeEvent*(self: VirtualQGraphicsView, event: gen_qevent_types.QResizeEvent): void {.base.} =
-  QGraphicsViewresizeEvent(self[], event)
 proc fcQGraphicsView_method_callback_resizeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsView](fcQGraphicsView_vdata(self)[])
   let slotval1 = gen_qevent_types.QResizeEvent(h: event, owned: false)
   inst.resizeEvent(slotval1)
 
-method scrollContentsBy*(self: VirtualQGraphicsView, dx: cint, dy: cint): void {.base.} =
-  QGraphicsViewscrollContentsBy(self[], dx, dy)
 proc fcQGraphicsView_method_callback_scrollContentsBy(self: pointer, dx: cint, dy: cint): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsView](fcQGraphicsView_vdata(self)[])
   let slotval1 = dx
   let slotval2 = dy
   inst.scrollContentsBy(slotval1, slotval2)
 
-method showEvent*(self: VirtualQGraphicsView, event: gen_qevent_types.QShowEvent): void {.base.} =
-  QGraphicsViewshowEvent(self[], event)
 proc fcQGraphicsView_method_callback_showEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsView](fcQGraphicsView_vdata(self)[])
   let slotval1 = gen_qevent_types.QShowEvent(h: event, owned: false)
   inst.showEvent(slotval1)
 
-method inputMethodEvent*(self: VirtualQGraphicsView, event: gen_qevent_types.QInputMethodEvent): void {.base.} =
-  QGraphicsViewinputMethodEvent(self[], event)
 proc fcQGraphicsView_method_callback_inputMethodEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsView](fcQGraphicsView_vdata(self)[])
   let slotval1 = gen_qevent_types.QInputMethodEvent(h: event, owned: false)
   inst.inputMethodEvent(slotval1)
 
-method drawBackground*(self: VirtualQGraphicsView, painter: gen_qpainter_types.QPainter, rect: gen_qrect_types.QRectF): void {.base.} =
-  QGraphicsViewdrawBackground(self[], painter, rect)
 proc fcQGraphicsView_method_callback_drawBackground(self: pointer, painter: pointer, rect: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsView](fcQGraphicsView_vdata(self)[])
   let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
   let slotval2 = gen_qrect_types.QRectF(h: rect, owned: false)
   inst.drawBackground(slotval1, slotval2)
 
-method drawForeground*(self: VirtualQGraphicsView, painter: gen_qpainter_types.QPainter, rect: gen_qrect_types.QRectF): void {.base.} =
-  QGraphicsViewdrawForeground(self[], painter, rect)
 proc fcQGraphicsView_method_callback_drawForeground(self: pointer, painter: pointer, rect: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsView](fcQGraphicsView_vdata(self)[])
   let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
   let slotval2 = gen_qrect_types.QRectF(h: rect, owned: false)
   inst.drawForeground(slotval1, slotval2)
 
-method minimumSizeHint*(self: VirtualQGraphicsView): gen_qsize_types.QSize {.base.} =
-  QGraphicsViewminimumSizeHint(self[])
 proc fcQGraphicsView_method_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsView](fcQGraphicsView_vdata(self)[])
   var virtualReturn = inst.minimumSizeHint()
   virtualReturn.h
 
-method eventFilter*(self: VirtualQGraphicsView, param1: gen_qobject_types.QObject, param2: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QGraphicsVieweventFilter(self[], param1, param2)
 proc fcQGraphicsView_method_callback_eventFilter(self: pointer, param1: pointer, param2: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQGraphicsView](fcQGraphicsView_vdata(self)[])
   let slotval1 = gen_qobject_types.QObject(h: param1, owned: false)
@@ -1648,114 +1704,82 @@ proc fcQGraphicsView_method_callback_eventFilter(self: pointer, param1: pointer,
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
-method viewportSizeHint*(self: VirtualQGraphicsView): gen_qsize_types.QSize {.base.} =
-  QGraphicsViewviewportSizeHint(self[])
 proc fcQGraphicsView_method_callback_viewportSizeHint(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsView](fcQGraphicsView_vdata(self)[])
   var virtualReturn = inst.viewportSizeHint()
   virtualReturn.h
 
-method changeEvent*(self: VirtualQGraphicsView, param1: gen_qcoreevent_types.QEvent): void {.base.} =
-  QGraphicsViewchangeEvent(self[], param1)
 proc fcQGraphicsView_method_callback_changeEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsView](fcQGraphicsView_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
   inst.changeEvent(slotval1)
 
-method initStyleOption*(self: VirtualQGraphicsView, option: gen_qstyleoption_types.QStyleOptionFrame): void {.base.} =
-  QGraphicsViewinitStyleOption(self[], option)
 proc fcQGraphicsView_method_callback_initStyleOption(self: pointer, option: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsView](fcQGraphicsView_vdata(self)[])
   let slotval1 = gen_qstyleoption_types.QStyleOptionFrame(h: option, owned: false)
   inst.initStyleOption(slotval1)
 
-method devType*(self: VirtualQGraphicsView): cint {.base.} =
-  QGraphicsViewdevType(self[])
 proc fcQGraphicsView_method_callback_devType(self: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQGraphicsView](fcQGraphicsView_vdata(self)[])
   var virtualReturn = inst.devType()
   virtualReturn
 
-method setVisible*(self: VirtualQGraphicsView, visible: bool): void {.base.} =
-  QGraphicsViewsetVisible(self[], visible)
 proc fcQGraphicsView_method_callback_setVisible(self: pointer, visible: bool): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsView](fcQGraphicsView_vdata(self)[])
   let slotval1 = visible
   inst.setVisible(slotval1)
 
-method heightForWidth*(self: VirtualQGraphicsView, param1: cint): cint {.base.} =
-  QGraphicsViewheightForWidth(self[], param1)
 proc fcQGraphicsView_method_callback_heightForWidth(self: pointer, param1: cint): cint {.cdecl.} =
   let inst = cast[VirtualQGraphicsView](fcQGraphicsView_vdata(self)[])
   let slotval1 = param1
   var virtualReturn = inst.heightForWidth(slotval1)
   virtualReturn
 
-method hasHeightForWidth*(self: VirtualQGraphicsView): bool {.base.} =
-  QGraphicsViewhasHeightForWidth(self[])
 proc fcQGraphicsView_method_callback_hasHeightForWidth(self: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQGraphicsView](fcQGraphicsView_vdata(self)[])
   var virtualReturn = inst.hasHeightForWidth()
   virtualReturn
 
-method paintEngine*(self: VirtualQGraphicsView): gen_qpaintengine_types.QPaintEngine {.base.} =
-  QGraphicsViewpaintEngine(self[])
 proc fcQGraphicsView_method_callback_paintEngine(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsView](fcQGraphicsView_vdata(self)[])
   var virtualReturn = inst.paintEngine()
   virtualReturn.h
 
-method enterEvent*(self: VirtualQGraphicsView, event: gen_qevent_types.QEnterEvent): void {.base.} =
-  QGraphicsViewenterEvent(self[], event)
 proc fcQGraphicsView_method_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsView](fcQGraphicsView_vdata(self)[])
   let slotval1 = gen_qevent_types.QEnterEvent(h: event, owned: false)
   inst.enterEvent(slotval1)
 
-method leaveEvent*(self: VirtualQGraphicsView, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QGraphicsViewleaveEvent(self[], event)
 proc fcQGraphicsView_method_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsView](fcQGraphicsView_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.leaveEvent(slotval1)
 
-method moveEvent*(self: VirtualQGraphicsView, event: gen_qevent_types.QMoveEvent): void {.base.} =
-  QGraphicsViewmoveEvent(self[], event)
 proc fcQGraphicsView_method_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsView](fcQGraphicsView_vdata(self)[])
   let slotval1 = gen_qevent_types.QMoveEvent(h: event, owned: false)
   inst.moveEvent(slotval1)
 
-method closeEvent*(self: VirtualQGraphicsView, event: gen_qevent_types.QCloseEvent): void {.base.} =
-  QGraphicsViewcloseEvent(self[], event)
 proc fcQGraphicsView_method_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsView](fcQGraphicsView_vdata(self)[])
   let slotval1 = gen_qevent_types.QCloseEvent(h: event, owned: false)
   inst.closeEvent(slotval1)
 
-method tabletEvent*(self: VirtualQGraphicsView, event: gen_qevent_types.QTabletEvent): void {.base.} =
-  QGraphicsViewtabletEvent(self[], event)
 proc fcQGraphicsView_method_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsView](fcQGraphicsView_vdata(self)[])
   let slotval1 = gen_qevent_types.QTabletEvent(h: event, owned: false)
   inst.tabletEvent(slotval1)
 
-method actionEvent*(self: VirtualQGraphicsView, event: gen_qevent_types.QActionEvent): void {.base.} =
-  QGraphicsViewactionEvent(self[], event)
 proc fcQGraphicsView_method_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsView](fcQGraphicsView_vdata(self)[])
   let slotval1 = gen_qevent_types.QActionEvent(h: event, owned: false)
   inst.actionEvent(slotval1)
 
-method hideEvent*(self: VirtualQGraphicsView, event: gen_qevent_types.QHideEvent): void {.base.} =
-  QGraphicsViewhideEvent(self[], event)
 proc fcQGraphicsView_method_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsView](fcQGraphicsView_vdata(self)[])
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   inst.hideEvent(slotval1)
 
-method nativeEvent*(self: VirtualQGraphicsView, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
-  QGraphicsViewnativeEvent(self[], eventType, message, resultVal)
 proc fcQGraphicsView_method_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
   let inst = cast[VirtualQGraphicsView](fcQGraphicsView_vdata(self)[])
   var veventType_bytearray = eventType
@@ -1767,70 +1791,53 @@ proc fcQGraphicsView_method_callback_nativeEvent(self: pointer, eventType: struc
   var virtualReturn = inst.nativeEvent(slotval1, slotval2, slotval3)
   virtualReturn
 
-method metric*(self: VirtualQGraphicsView, param1: cint): cint {.base.} =
-  QGraphicsViewmetric(self[], param1)
 proc fcQGraphicsView_method_callback_metric(self: pointer, param1: cint): cint {.cdecl.} =
   let inst = cast[VirtualQGraphicsView](fcQGraphicsView_vdata(self)[])
   let slotval1 = cint(param1)
   var virtualReturn = inst.metric(slotval1)
   virtualReturn
 
-method initPainter*(self: VirtualQGraphicsView, painter: gen_qpainter_types.QPainter): void {.base.} =
-  QGraphicsViewinitPainter(self[], painter)
 proc fcQGraphicsView_method_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsView](fcQGraphicsView_vdata(self)[])
   let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
   inst.initPainter(slotval1)
 
-method redirected*(self: VirtualQGraphicsView, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.base.} =
-  QGraphicsViewredirected(self[], offset)
 proc fcQGraphicsView_method_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsView](fcQGraphicsView_vdata(self)[])
   let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
   var virtualReturn = inst.redirected(slotval1)
   virtualReturn.h
 
-method sharedPainter*(self: VirtualQGraphicsView): gen_qpainter_types.QPainter {.base.} =
-  QGraphicsViewsharedPainter(self[])
 proc fcQGraphicsView_method_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsView](fcQGraphicsView_vdata(self)[])
   var virtualReturn = inst.sharedPainter()
   virtualReturn.h
 
-method timerEvent*(self: VirtualQGraphicsView, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
-  QGraphicsViewtimerEvent(self[], event)
 proc fcQGraphicsView_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsView](fcQGraphicsView_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
-method childEvent*(self: VirtualQGraphicsView, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
-  QGraphicsViewchildEvent(self[], event)
 proc fcQGraphicsView_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsView](fcQGraphicsView_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
-method customEvent*(self: VirtualQGraphicsView, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QGraphicsViewcustomEvent(self[], event)
 proc fcQGraphicsView_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsView](fcQGraphicsView_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
-method connectNotify*(self: VirtualQGraphicsView, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QGraphicsViewconnectNotify(self[], signal)
 proc fcQGraphicsView_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsView](fcQGraphicsView_vdata(self)[])
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
-method disconnectNotify*(self: VirtualQGraphicsView, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QGraphicsViewdisconnectNotify(self[], signal)
 proc fcQGraphicsView_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsView](fcQGraphicsView_vdata(self)[])
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
+
 
 proc setViewportMargins*(self: gen_qgraphicsview_types.QGraphicsView, left: cint, top: cint, right: cint, bottom: cint): void =
   fcQGraphicsView_protectedbase_setViewportMargins(self.h, left, top, right, bottom)

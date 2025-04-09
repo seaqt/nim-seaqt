@@ -94,6 +94,7 @@ proc fcQLocalServer_waitForNewConnection1(self: pointer, msec: cint): bool {.imp
 proc fcQLocalServer_waitForNewConnection2(self: pointer, msec: cint, timedOut: ptr bool): bool {.importc: "QLocalServer_waitForNewConnection2".}
 proc fcQLocalServer_vdata(self: pointer): ptr pointer {.importc: "QLocalServer_vdata".}
 proc fvdata_cQLocalServer(self: pointer): pointer {.importc: "vdata_QLocalServer".}
+
 type cQLocalServerVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -157,7 +158,7 @@ proc fcQLocalServer_slot_callback_newConnection_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QLocalServernewConnectionSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onnewConnection*(self: gen_qlocalserver_types.QLocalServer, slot: QLocalServernewConnectionSlot) =
+proc onNewConnection*(self: gen_qlocalserver_types.QLocalServer, slot: QLocalServernewConnectionSlot) =
   var tmp = new QLocalServernewConnectionSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -260,6 +261,7 @@ type QLocalServerchildEventProc* = proc(self: QLocalServer, event: gen_qcoreeven
 type QLocalServercustomEventProc* = proc(self: QLocalServer, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QLocalServerconnectNotifyProc* = proc(self: QLocalServer, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QLocalServerdisconnectNotifyProc* = proc(self: QLocalServer, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+
 type QLocalServerVTable* {.inheritable, pure.} = object
   vtbl: cQLocalServerVTable
   metaObject*: QLocalServermetaObjectProc
@@ -275,8 +277,46 @@ type QLocalServerVTable* {.inheritable, pure.} = object
   customEvent*: QLocalServercustomEventProc
   connectNotify*: QLocalServerconnectNotifyProc
   disconnectNotify*: QLocalServerdisconnectNotifyProc
+
 proc QLocalServermetaObject*(self: gen_qlocalserver_types.QLocalServer): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQLocalServer_virtualbase_metaObject(self.h), owned: false)
+
+proc QLocalServermetacast*(self: gen_qlocalserver_types.QLocalServer, param1: cstring): pointer =
+  fcQLocalServer_virtualbase_metacast(self.h, param1)
+
+proc QLocalServermetacall*(self: gen_qlocalserver_types.QLocalServer, param1: cint, param2: cint, param3: pointer): cint =
+  fcQLocalServer_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+proc QLocalServerhasPendingConnections*(self: gen_qlocalserver_types.QLocalServer): bool =
+  fcQLocalServer_virtualbase_hasPendingConnections(self.h)
+
+proc QLocalServernextPendingConnection*(self: gen_qlocalserver_types.QLocalServer): gen_qlocalsocket_types.QLocalSocket =
+  gen_qlocalsocket_types.QLocalSocket(h: fcQLocalServer_virtualbase_nextPendingConnection(self.h), owned: false)
+
+proc QLocalServerincomingConnection*(self: gen_qlocalserver_types.QLocalServer, socketDescriptor: uint): void =
+  fcQLocalServer_virtualbase_incomingConnection(self.h, socketDescriptor)
+
+proc QLocalServerevent*(self: gen_qlocalserver_types.QLocalServer, event: gen_qcoreevent_types.QEvent): bool =
+  fcQLocalServer_virtualbase_event(self.h, event.h)
+
+proc QLocalServereventFilter*(self: gen_qlocalserver_types.QLocalServer, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
+  fcQLocalServer_virtualbase_eventFilter(self.h, watched.h, event.h)
+
+proc QLocalServertimerEvent*(self: gen_qlocalserver_types.QLocalServer, event: gen_qcoreevent_types.QTimerEvent): void =
+  fcQLocalServer_virtualbase_timerEvent(self.h, event.h)
+
+proc QLocalServerchildEvent*(self: gen_qlocalserver_types.QLocalServer, event: gen_qcoreevent_types.QChildEvent): void =
+  fcQLocalServer_virtualbase_childEvent(self.h, event.h)
+
+proc QLocalServercustomEvent*(self: gen_qlocalserver_types.QLocalServer, event: gen_qcoreevent_types.QEvent): void =
+  fcQLocalServer_virtualbase_customEvent(self.h, event.h)
+
+proc QLocalServerconnectNotify*(self: gen_qlocalserver_types.QLocalServer, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQLocalServer_virtualbase_connectNotify(self.h, signal.h)
+
+proc QLocalServerdisconnectNotify*(self: gen_qlocalserver_types.QLocalServer, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQLocalServer_virtualbase_disconnectNotify(self.h, signal.h)
+
 
 proc fcQLocalServer_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QLocalServerVTable](fcQLocalServer_vdata(self)[])
@@ -287,18 +327,12 @@ proc fcQLocalServer_vtable_callback_metaObject(self: pointer): pointer {.cdecl.}
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QLocalServermetacast*(self: gen_qlocalserver_types.QLocalServer, param1: cstring): pointer =
-  fcQLocalServer_virtualbase_metacast(self.h, param1)
-
 proc fcQLocalServer_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QLocalServerVTable](fcQLocalServer_vdata(self)[])
   let self = QLocalServer(h: self)
   let slotval1 = (param1)
   var virtualReturn = vtbl[].metacast(self, slotval1)
   virtualReturn
-
-proc QLocalServermetacall*(self: gen_qlocalserver_types.QLocalServer, param1: cint, param2: cint, param3: pointer): cint =
-  fcQLocalServer_virtualbase_metacall(self.h, cint(param1), param2, param3)
 
 proc fcQLocalServer_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QLocalServerVTable](fcQLocalServer_vdata(self)[])
@@ -309,17 +343,11 @@ proc fcQLocalServer_vtable_callback_metacall(self: pointer, param1: cint, param2
   var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QLocalServerhasPendingConnections*(self: gen_qlocalserver_types.QLocalServer): bool =
-  fcQLocalServer_virtualbase_hasPendingConnections(self.h)
-
 proc fcQLocalServer_vtable_callback_hasPendingConnections(self: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QLocalServerVTable](fcQLocalServer_vdata(self)[])
   let self = QLocalServer(h: self)
   var virtualReturn = vtbl[].hasPendingConnections(self)
   virtualReturn
-
-proc QLocalServernextPendingConnection*(self: gen_qlocalserver_types.QLocalServer): gen_qlocalsocket_types.QLocalSocket =
-  gen_qlocalsocket_types.QLocalSocket(h: fcQLocalServer_virtualbase_nextPendingConnection(self.h), owned: false)
 
 proc fcQLocalServer_vtable_callback_nextPendingConnection(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QLocalServerVTable](fcQLocalServer_vdata(self)[])
@@ -330,17 +358,11 @@ proc fcQLocalServer_vtable_callback_nextPendingConnection(self: pointer): pointe
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QLocalServerincomingConnection*(self: gen_qlocalserver_types.QLocalServer, socketDescriptor: uint): void =
-  fcQLocalServer_virtualbase_incomingConnection(self.h, socketDescriptor)
-
 proc fcQLocalServer_vtable_callback_incomingConnection(self: pointer, socketDescriptor: uint): void {.cdecl.} =
   let vtbl = cast[ptr QLocalServerVTable](fcQLocalServer_vdata(self)[])
   let self = QLocalServer(h: self)
   let slotval1 = socketDescriptor
   vtbl[].incomingConnection(self, slotval1)
-
-proc QLocalServerevent*(self: gen_qlocalserver_types.QLocalServer, event: gen_qcoreevent_types.QEvent): bool =
-  fcQLocalServer_virtualbase_event(self.h, event.h)
 
 proc fcQLocalServer_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QLocalServerVTable](fcQLocalServer_vdata(self)[])
@@ -348,9 +370,6 @@ proc fcQLocalServer_vtable_callback_event(self: pointer, event: pointer): bool {
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
-
-proc QLocalServereventFilter*(self: gen_qlocalserver_types.QLocalServer, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
-  fcQLocalServer_virtualbase_eventFilter(self.h, watched.h, event.h)
 
 proc fcQLocalServer_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QLocalServerVTable](fcQLocalServer_vdata(self)[])
@@ -360,17 +379,11 @@ proc fcQLocalServer_vtable_callback_eventFilter(self: pointer, watched: pointer,
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
-proc QLocalServertimerEvent*(self: gen_qlocalserver_types.QLocalServer, event: gen_qcoreevent_types.QTimerEvent): void =
-  fcQLocalServer_virtualbase_timerEvent(self.h, event.h)
-
 proc fcQLocalServer_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QLocalServerVTable](fcQLocalServer_vdata(self)[])
   let self = QLocalServer(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
-
-proc QLocalServerchildEvent*(self: gen_qlocalserver_types.QLocalServer, event: gen_qcoreevent_types.QChildEvent): void =
-  fcQLocalServer_virtualbase_childEvent(self.h, event.h)
 
 proc fcQLocalServer_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QLocalServerVTable](fcQLocalServer_vdata(self)[])
@@ -378,26 +391,17 @@ proc fcQLocalServer_vtable_callback_childEvent(self: pointer, event: pointer): v
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
-proc QLocalServercustomEvent*(self: gen_qlocalserver_types.QLocalServer, event: gen_qcoreevent_types.QEvent): void =
-  fcQLocalServer_virtualbase_customEvent(self.h, event.h)
-
 proc fcQLocalServer_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QLocalServerVTable](fcQLocalServer_vdata(self)[])
   let self = QLocalServer(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
-proc QLocalServerconnectNotify*(self: gen_qlocalserver_types.QLocalServer, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQLocalServer_virtualbase_connectNotify(self.h, signal.h)
-
 proc fcQLocalServer_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QLocalServerVTable](fcQLocalServer_vdata(self)[])
   let self = QLocalServer(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
-
-proc QLocalServerdisconnectNotify*(self: gen_qlocalserver_types.QLocalServer, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQLocalServer_virtualbase_disconnectNotify(self.h, signal.h)
 
 proc fcQLocalServer_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QLocalServerVTable](fcQLocalServer_vdata(self)[])
@@ -407,23 +411,45 @@ proc fcQLocalServer_vtable_callback_disconnectNotify(self: pointer, signal: poin
 
 type VirtualQLocalServer* {.inheritable.} = ref object of QLocalServer
   vtbl*: cQLocalServerVTable
+
 method metaObject*(self: VirtualQLocalServer): gen_qobjectdefs_types.QMetaObject {.base.} =
   QLocalServermetaObject(self[])
+method metacast*(self: VirtualQLocalServer, param1: cstring): pointer {.base.} =
+  QLocalServermetacast(self[], param1)
+method metacall*(self: VirtualQLocalServer, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QLocalServermetacall(self[], param1, param2, param3)
+method hasPendingConnections*(self: VirtualQLocalServer): bool {.base.} =
+  QLocalServerhasPendingConnections(self[])
+method nextPendingConnection*(self: VirtualQLocalServer): gen_qlocalsocket_types.QLocalSocket {.base.} =
+  QLocalServernextPendingConnection(self[])
+method incomingConnection*(self: VirtualQLocalServer, socketDescriptor: uint): void {.base.} =
+  QLocalServerincomingConnection(self[], socketDescriptor)
+method event*(self: VirtualQLocalServer, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QLocalServerevent(self[], event)
+method eventFilter*(self: VirtualQLocalServer, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QLocalServereventFilter(self[], watched, event)
+method timerEvent*(self: VirtualQLocalServer, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QLocalServertimerEvent(self[], event)
+method childEvent*(self: VirtualQLocalServer, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QLocalServerchildEvent(self[], event)
+method customEvent*(self: VirtualQLocalServer, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QLocalServercustomEvent(self[], event)
+method connectNotify*(self: VirtualQLocalServer, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QLocalServerconnectNotify(self[], signal)
+method disconnectNotify*(self: VirtualQLocalServer, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QLocalServerdisconnectNotify(self[], signal)
+
 proc fcQLocalServer_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQLocalServer](fcQLocalServer_vdata(self)[])
   var virtualReturn = inst.metaObject()
   virtualReturn.h
 
-method metacast*(self: VirtualQLocalServer, param1: cstring): pointer {.base.} =
-  QLocalServermetacast(self[], param1)
 proc fcQLocalServer_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQLocalServer](fcQLocalServer_vdata(self)[])
   let slotval1 = (param1)
   var virtualReturn = inst.metacast(slotval1)
   virtualReturn
 
-method metacall*(self: VirtualQLocalServer, param1: cint, param2: cint, param3: pointer): cint {.base.} =
-  QLocalServermetacall(self[], param1, param2, param3)
 proc fcQLocalServer_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQLocalServer](fcQLocalServer_vdata(self)[])
   let slotval1 = cint(param1)
@@ -432,37 +458,27 @@ proc fcQLocalServer_method_callback_metacall(self: pointer, param1: cint, param2
   var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
-method hasPendingConnections*(self: VirtualQLocalServer): bool {.base.} =
-  QLocalServerhasPendingConnections(self[])
 proc fcQLocalServer_method_callback_hasPendingConnections(self: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQLocalServer](fcQLocalServer_vdata(self)[])
   var virtualReturn = inst.hasPendingConnections()
   virtualReturn
 
-method nextPendingConnection*(self: VirtualQLocalServer): gen_qlocalsocket_types.QLocalSocket {.base.} =
-  QLocalServernextPendingConnection(self[])
 proc fcQLocalServer_method_callback_nextPendingConnection(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQLocalServer](fcQLocalServer_vdata(self)[])
   var virtualReturn = inst.nextPendingConnection()
   virtualReturn.h
 
-method incomingConnection*(self: VirtualQLocalServer, socketDescriptor: uint): void {.base.} =
-  QLocalServerincomingConnection(self[], socketDescriptor)
 proc fcQLocalServer_method_callback_incomingConnection(self: pointer, socketDescriptor: uint): void {.cdecl.} =
   let inst = cast[VirtualQLocalServer](fcQLocalServer_vdata(self)[])
   let slotval1 = socketDescriptor
   inst.incomingConnection(slotval1)
 
-method event*(self: VirtualQLocalServer, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QLocalServerevent(self[], event)
 proc fcQLocalServer_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQLocalServer](fcQLocalServer_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
-method eventFilter*(self: VirtualQLocalServer, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QLocalServereventFilter(self[], watched, event)
 proc fcQLocalServer_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQLocalServer](fcQLocalServer_vdata(self)[])
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
@@ -470,40 +486,31 @@ proc fcQLocalServer_method_callback_eventFilter(self: pointer, watched: pointer,
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
-method timerEvent*(self: VirtualQLocalServer, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
-  QLocalServertimerEvent(self[], event)
 proc fcQLocalServer_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQLocalServer](fcQLocalServer_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
-method childEvent*(self: VirtualQLocalServer, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
-  QLocalServerchildEvent(self[], event)
 proc fcQLocalServer_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQLocalServer](fcQLocalServer_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
-method customEvent*(self: VirtualQLocalServer, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QLocalServercustomEvent(self[], event)
 proc fcQLocalServer_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQLocalServer](fcQLocalServer_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
-method connectNotify*(self: VirtualQLocalServer, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QLocalServerconnectNotify(self[], signal)
 proc fcQLocalServer_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQLocalServer](fcQLocalServer_vdata(self)[])
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
-method disconnectNotify*(self: VirtualQLocalServer, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QLocalServerdisconnectNotify(self[], signal)
 proc fcQLocalServer_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQLocalServer](fcQLocalServer_vdata(self)[])
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
+
 
 proc sender*(self: gen_qlocalserver_types.QLocalServer): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQLocalServer_protectedbase_sender(self.h), owned: false)

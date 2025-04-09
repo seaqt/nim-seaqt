@@ -179,6 +179,7 @@ proc fcQMediaPlayer_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.i
 proc fcQMediaPlayer_setSourceDevice2(self: pointer, device: pointer, sourceUrl: pointer): void {.importc: "QMediaPlayer_setSourceDevice2".}
 proc fcQMediaPlayer_vdata(self: pointer): ptr pointer {.importc: "QMediaPlayer_vdata".}
 proc fvdata_cQMediaPlayer(self: pointer): pointer {.importc: "vdata_QMediaPlayer".}
+
 type cQMediaPlayerVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -379,7 +380,7 @@ proc fcQMediaPlayer_slot_callback_sourceChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QMediaPlayersourceChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onsourceChanged*(self: gen_qmediaplayer_types.QMediaPlayer, slot: QMediaPlayersourceChangedSlot) =
+proc onSourceChanged*(self: gen_qmediaplayer_types.QMediaPlayer, slot: QMediaPlayersourceChangedSlot) =
   var tmp = new QMediaPlayersourceChangedSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -399,7 +400,7 @@ proc fcQMediaPlayer_slot_callback_playbackStateChanged_release(slot: int) {.cdec
   let nimfunc = cast[ref QMediaPlayerplaybackStateChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onplaybackStateChanged*(self: gen_qmediaplayer_types.QMediaPlayer, slot: QMediaPlayerplaybackStateChangedSlot) =
+proc onPlaybackStateChanged*(self: gen_qmediaplayer_types.QMediaPlayer, slot: QMediaPlayerplaybackStateChangedSlot) =
   var tmp = new QMediaPlayerplaybackStateChangedSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -419,7 +420,7 @@ proc fcQMediaPlayer_slot_callback_mediaStatusChanged_release(slot: int) {.cdecl.
   let nimfunc = cast[ref QMediaPlayermediaStatusChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onmediaStatusChanged*(self: gen_qmediaplayer_types.QMediaPlayer, slot: QMediaPlayermediaStatusChangedSlot) =
+proc onMediaStatusChanged*(self: gen_qmediaplayer_types.QMediaPlayer, slot: QMediaPlayermediaStatusChangedSlot) =
   var tmp = new QMediaPlayermediaStatusChangedSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -439,7 +440,7 @@ proc fcQMediaPlayer_slot_callback_durationChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QMediaPlayerdurationChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc ondurationChanged*(self: gen_qmediaplayer_types.QMediaPlayer, slot: QMediaPlayerdurationChangedSlot) =
+proc onDurationChanged*(self: gen_qmediaplayer_types.QMediaPlayer, slot: QMediaPlayerdurationChangedSlot) =
   var tmp = new QMediaPlayerdurationChangedSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -459,7 +460,7 @@ proc fcQMediaPlayer_slot_callback_positionChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QMediaPlayerpositionChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onpositionChanged*(self: gen_qmediaplayer_types.QMediaPlayer, slot: QMediaPlayerpositionChangedSlot) =
+proc onPositionChanged*(self: gen_qmediaplayer_types.QMediaPlayer, slot: QMediaPlayerpositionChangedSlot) =
   var tmp = new QMediaPlayerpositionChangedSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -479,7 +480,7 @@ proc fcQMediaPlayer_slot_callback_hasAudioChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QMediaPlayerhasAudioChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onhasAudioChanged*(self: gen_qmediaplayer_types.QMediaPlayer, slot: QMediaPlayerhasAudioChangedSlot) =
+proc onHasAudioChanged*(self: gen_qmediaplayer_types.QMediaPlayer, slot: QMediaPlayerhasAudioChangedSlot) =
   var tmp = new QMediaPlayerhasAudioChangedSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -499,7 +500,7 @@ proc fcQMediaPlayer_slot_callback_hasVideoChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QMediaPlayerhasVideoChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onhasVideoChanged*(self: gen_qmediaplayer_types.QMediaPlayer, slot: QMediaPlayerhasVideoChangedSlot) =
+proc onHasVideoChanged*(self: gen_qmediaplayer_types.QMediaPlayer, slot: QMediaPlayerhasVideoChangedSlot) =
   var tmp = new QMediaPlayerhasVideoChangedSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -519,7 +520,7 @@ proc fcQMediaPlayer_slot_callback_bufferProgressChanged_release(slot: int) {.cde
   let nimfunc = cast[ref QMediaPlayerbufferProgressChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onbufferProgressChanged*(self: gen_qmediaplayer_types.QMediaPlayer, slot: QMediaPlayerbufferProgressChangedSlot) =
+proc onBufferProgressChanged*(self: gen_qmediaplayer_types.QMediaPlayer, slot: QMediaPlayerbufferProgressChangedSlot) =
   var tmp = new QMediaPlayerbufferProgressChangedSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -539,7 +540,7 @@ proc fcQMediaPlayer_slot_callback_seekableChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QMediaPlayerseekableChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onseekableChanged*(self: gen_qmediaplayer_types.QMediaPlayer, slot: QMediaPlayerseekableChangedSlot) =
+proc onSeekableChanged*(self: gen_qmediaplayer_types.QMediaPlayer, slot: QMediaPlayerseekableChangedSlot) =
   var tmp = new QMediaPlayerseekableChangedSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -559,7 +560,7 @@ proc fcQMediaPlayer_slot_callback_playbackRateChanged_release(slot: int) {.cdecl
   let nimfunc = cast[ref QMediaPlayerplaybackRateChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onplaybackRateChanged*(self: gen_qmediaplayer_types.QMediaPlayer, slot: QMediaPlayerplaybackRateChangedSlot) =
+proc onPlaybackRateChanged*(self: gen_qmediaplayer_types.QMediaPlayer, slot: QMediaPlayerplaybackRateChangedSlot) =
   var tmp = new QMediaPlayerplaybackRateChangedSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -577,7 +578,7 @@ proc fcQMediaPlayer_slot_callback_loopsChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QMediaPlayerloopsChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onloopsChanged*(self: gen_qmediaplayer_types.QMediaPlayer, slot: QMediaPlayerloopsChangedSlot) =
+proc onLoopsChanged*(self: gen_qmediaplayer_types.QMediaPlayer, slot: QMediaPlayerloopsChangedSlot) =
   var tmp = new QMediaPlayerloopsChangedSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -595,7 +596,7 @@ proc fcQMediaPlayer_slot_callback_metaDataChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QMediaPlayermetaDataChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onmetaDataChanged*(self: gen_qmediaplayer_types.QMediaPlayer, slot: QMediaPlayermetaDataChangedSlot) =
+proc onMetaDataChanged*(self: gen_qmediaplayer_types.QMediaPlayer, slot: QMediaPlayermetaDataChangedSlot) =
   var tmp = new QMediaPlayermetaDataChangedSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -613,7 +614,7 @@ proc fcQMediaPlayer_slot_callback_videoOutputChanged_release(slot: int) {.cdecl.
   let nimfunc = cast[ref QMediaPlayervideoOutputChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onvideoOutputChanged*(self: gen_qmediaplayer_types.QMediaPlayer, slot: QMediaPlayervideoOutputChangedSlot) =
+proc onVideoOutputChanged*(self: gen_qmediaplayer_types.QMediaPlayer, slot: QMediaPlayervideoOutputChangedSlot) =
   var tmp = new QMediaPlayervideoOutputChangedSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -631,7 +632,7 @@ proc fcQMediaPlayer_slot_callback_audioOutputChanged_release(slot: int) {.cdecl.
   let nimfunc = cast[ref QMediaPlayeraudioOutputChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onaudioOutputChanged*(self: gen_qmediaplayer_types.QMediaPlayer, slot: QMediaPlayeraudioOutputChangedSlot) =
+proc onAudioOutputChanged*(self: gen_qmediaplayer_types.QMediaPlayer, slot: QMediaPlayeraudioOutputChangedSlot) =
   var tmp = new QMediaPlayeraudioOutputChangedSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -649,7 +650,7 @@ proc fcQMediaPlayer_slot_callback_tracksChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QMediaPlayertracksChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc ontracksChanged*(self: gen_qmediaplayer_types.QMediaPlayer, slot: QMediaPlayertracksChangedSlot) =
+proc onTracksChanged*(self: gen_qmediaplayer_types.QMediaPlayer, slot: QMediaPlayertracksChangedSlot) =
   var tmp = new QMediaPlayertracksChangedSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -667,7 +668,7 @@ proc fcQMediaPlayer_slot_callback_activeTracksChanged_release(slot: int) {.cdecl
   let nimfunc = cast[ref QMediaPlayeractiveTracksChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onactiveTracksChanged*(self: gen_qmediaplayer_types.QMediaPlayer, slot: QMediaPlayeractiveTracksChangedSlot) =
+proc onActiveTracksChanged*(self: gen_qmediaplayer_types.QMediaPlayer, slot: QMediaPlayeractiveTracksChangedSlot) =
   var tmp = new QMediaPlayeractiveTracksChangedSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -685,7 +686,7 @@ proc fcQMediaPlayer_slot_callback_errorChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QMediaPlayererrorChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onerrorChanged*(self: gen_qmediaplayer_types.QMediaPlayer, slot: QMediaPlayererrorChangedSlot) =
+proc onErrorChanged*(self: gen_qmediaplayer_types.QMediaPlayer, slot: QMediaPlayererrorChangedSlot) =
   var tmp = new QMediaPlayererrorChangedSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -710,7 +711,7 @@ proc fcQMediaPlayer_slot_callback_errorOccurred_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QMediaPlayererrorOccurredSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onerrorOccurred*(self: gen_qmediaplayer_types.QMediaPlayer, slot: QMediaPlayererrorOccurredSlot) =
+proc onErrorOccurred*(self: gen_qmediaplayer_types.QMediaPlayer, slot: QMediaPlayererrorOccurredSlot) =
   var tmp = new QMediaPlayererrorOccurredSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -741,6 +742,7 @@ type QMediaPlayerchildEventProc* = proc(self: QMediaPlayer, event: gen_qcoreeven
 type QMediaPlayercustomEventProc* = proc(self: QMediaPlayer, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QMediaPlayerconnectNotifyProc* = proc(self: QMediaPlayer, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QMediaPlayerdisconnectNotifyProc* = proc(self: QMediaPlayer, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+
 type QMediaPlayerVTable* {.inheritable, pure.} = object
   vtbl: cQMediaPlayerVTable
   metaObject*: QMediaPlayermetaObjectProc
@@ -753,8 +755,37 @@ type QMediaPlayerVTable* {.inheritable, pure.} = object
   customEvent*: QMediaPlayercustomEventProc
   connectNotify*: QMediaPlayerconnectNotifyProc
   disconnectNotify*: QMediaPlayerdisconnectNotifyProc
+
 proc QMediaPlayermetaObject*(self: gen_qmediaplayer_types.QMediaPlayer): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQMediaPlayer_virtualbase_metaObject(self.h), owned: false)
+
+proc QMediaPlayermetacast*(self: gen_qmediaplayer_types.QMediaPlayer, param1: cstring): pointer =
+  fcQMediaPlayer_virtualbase_metacast(self.h, param1)
+
+proc QMediaPlayermetacall*(self: gen_qmediaplayer_types.QMediaPlayer, param1: cint, param2: cint, param3: pointer): cint =
+  fcQMediaPlayer_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+proc QMediaPlayerevent*(self: gen_qmediaplayer_types.QMediaPlayer, event: gen_qcoreevent_types.QEvent): bool =
+  fcQMediaPlayer_virtualbase_event(self.h, event.h)
+
+proc QMediaPlayereventFilter*(self: gen_qmediaplayer_types.QMediaPlayer, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
+  fcQMediaPlayer_virtualbase_eventFilter(self.h, watched.h, event.h)
+
+proc QMediaPlayertimerEvent*(self: gen_qmediaplayer_types.QMediaPlayer, event: gen_qcoreevent_types.QTimerEvent): void =
+  fcQMediaPlayer_virtualbase_timerEvent(self.h, event.h)
+
+proc QMediaPlayerchildEvent*(self: gen_qmediaplayer_types.QMediaPlayer, event: gen_qcoreevent_types.QChildEvent): void =
+  fcQMediaPlayer_virtualbase_childEvent(self.h, event.h)
+
+proc QMediaPlayercustomEvent*(self: gen_qmediaplayer_types.QMediaPlayer, event: gen_qcoreevent_types.QEvent): void =
+  fcQMediaPlayer_virtualbase_customEvent(self.h, event.h)
+
+proc QMediaPlayerconnectNotify*(self: gen_qmediaplayer_types.QMediaPlayer, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQMediaPlayer_virtualbase_connectNotify(self.h, signal.h)
+
+proc QMediaPlayerdisconnectNotify*(self: gen_qmediaplayer_types.QMediaPlayer, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQMediaPlayer_virtualbase_disconnectNotify(self.h, signal.h)
+
 
 proc fcQMediaPlayer_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QMediaPlayerVTable](fcQMediaPlayer_vdata(self)[])
@@ -765,18 +796,12 @@ proc fcQMediaPlayer_vtable_callback_metaObject(self: pointer): pointer {.cdecl.}
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QMediaPlayermetacast*(self: gen_qmediaplayer_types.QMediaPlayer, param1: cstring): pointer =
-  fcQMediaPlayer_virtualbase_metacast(self.h, param1)
-
 proc fcQMediaPlayer_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QMediaPlayerVTable](fcQMediaPlayer_vdata(self)[])
   let self = QMediaPlayer(h: self)
   let slotval1 = (param1)
   var virtualReturn = vtbl[].metacast(self, slotval1)
   virtualReturn
-
-proc QMediaPlayermetacall*(self: gen_qmediaplayer_types.QMediaPlayer, param1: cint, param2: cint, param3: pointer): cint =
-  fcQMediaPlayer_virtualbase_metacall(self.h, cint(param1), param2, param3)
 
 proc fcQMediaPlayer_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QMediaPlayerVTable](fcQMediaPlayer_vdata(self)[])
@@ -787,18 +812,12 @@ proc fcQMediaPlayer_vtable_callback_metacall(self: pointer, param1: cint, param2
   var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QMediaPlayerevent*(self: gen_qmediaplayer_types.QMediaPlayer, event: gen_qcoreevent_types.QEvent): bool =
-  fcQMediaPlayer_virtualbase_event(self.h, event.h)
-
 proc fcQMediaPlayer_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QMediaPlayerVTable](fcQMediaPlayer_vdata(self)[])
   let self = QMediaPlayer(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
-
-proc QMediaPlayereventFilter*(self: gen_qmediaplayer_types.QMediaPlayer, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
-  fcQMediaPlayer_virtualbase_eventFilter(self.h, watched.h, event.h)
 
 proc fcQMediaPlayer_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QMediaPlayerVTable](fcQMediaPlayer_vdata(self)[])
@@ -808,17 +827,11 @@ proc fcQMediaPlayer_vtable_callback_eventFilter(self: pointer, watched: pointer,
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
-proc QMediaPlayertimerEvent*(self: gen_qmediaplayer_types.QMediaPlayer, event: gen_qcoreevent_types.QTimerEvent): void =
-  fcQMediaPlayer_virtualbase_timerEvent(self.h, event.h)
-
 proc fcQMediaPlayer_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMediaPlayerVTable](fcQMediaPlayer_vdata(self)[])
   let self = QMediaPlayer(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
-
-proc QMediaPlayerchildEvent*(self: gen_qmediaplayer_types.QMediaPlayer, event: gen_qcoreevent_types.QChildEvent): void =
-  fcQMediaPlayer_virtualbase_childEvent(self.h, event.h)
 
 proc fcQMediaPlayer_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMediaPlayerVTable](fcQMediaPlayer_vdata(self)[])
@@ -826,26 +839,17 @@ proc fcQMediaPlayer_vtable_callback_childEvent(self: pointer, event: pointer): v
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
-proc QMediaPlayercustomEvent*(self: gen_qmediaplayer_types.QMediaPlayer, event: gen_qcoreevent_types.QEvent): void =
-  fcQMediaPlayer_virtualbase_customEvent(self.h, event.h)
-
 proc fcQMediaPlayer_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMediaPlayerVTable](fcQMediaPlayer_vdata(self)[])
   let self = QMediaPlayer(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
-proc QMediaPlayerconnectNotify*(self: gen_qmediaplayer_types.QMediaPlayer, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQMediaPlayer_virtualbase_connectNotify(self.h, signal.h)
-
 proc fcQMediaPlayer_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMediaPlayerVTable](fcQMediaPlayer_vdata(self)[])
   let self = QMediaPlayer(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
-
-proc QMediaPlayerdisconnectNotify*(self: gen_qmediaplayer_types.QMediaPlayer, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQMediaPlayer_virtualbase_disconnectNotify(self.h, signal.h)
 
 proc fcQMediaPlayer_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMediaPlayerVTable](fcQMediaPlayer_vdata(self)[])
@@ -855,23 +859,39 @@ proc fcQMediaPlayer_vtable_callback_disconnectNotify(self: pointer, signal: poin
 
 type VirtualQMediaPlayer* {.inheritable.} = ref object of QMediaPlayer
   vtbl*: cQMediaPlayerVTable
+
 method metaObject*(self: VirtualQMediaPlayer): gen_qobjectdefs_types.QMetaObject {.base.} =
   QMediaPlayermetaObject(self[])
+method metacast*(self: VirtualQMediaPlayer, param1: cstring): pointer {.base.} =
+  QMediaPlayermetacast(self[], param1)
+method metacall*(self: VirtualQMediaPlayer, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QMediaPlayermetacall(self[], param1, param2, param3)
+method event*(self: VirtualQMediaPlayer, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QMediaPlayerevent(self[], event)
+method eventFilter*(self: VirtualQMediaPlayer, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QMediaPlayereventFilter(self[], watched, event)
+method timerEvent*(self: VirtualQMediaPlayer, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QMediaPlayertimerEvent(self[], event)
+method childEvent*(self: VirtualQMediaPlayer, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QMediaPlayerchildEvent(self[], event)
+method customEvent*(self: VirtualQMediaPlayer, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QMediaPlayercustomEvent(self[], event)
+method connectNotify*(self: VirtualQMediaPlayer, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QMediaPlayerconnectNotify(self[], signal)
+method disconnectNotify*(self: VirtualQMediaPlayer, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QMediaPlayerdisconnectNotify(self[], signal)
+
 proc fcQMediaPlayer_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQMediaPlayer](fcQMediaPlayer_vdata(self)[])
   var virtualReturn = inst.metaObject()
   virtualReturn.h
 
-method metacast*(self: VirtualQMediaPlayer, param1: cstring): pointer {.base.} =
-  QMediaPlayermetacast(self[], param1)
 proc fcQMediaPlayer_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQMediaPlayer](fcQMediaPlayer_vdata(self)[])
   let slotval1 = (param1)
   var virtualReturn = inst.metacast(slotval1)
   virtualReturn
 
-method metacall*(self: VirtualQMediaPlayer, param1: cint, param2: cint, param3: pointer): cint {.base.} =
-  QMediaPlayermetacall(self[], param1, param2, param3)
 proc fcQMediaPlayer_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQMediaPlayer](fcQMediaPlayer_vdata(self)[])
   let slotval1 = cint(param1)
@@ -880,16 +900,12 @@ proc fcQMediaPlayer_method_callback_metacall(self: pointer, param1: cint, param2
   var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
-method event*(self: VirtualQMediaPlayer, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QMediaPlayerevent(self[], event)
 proc fcQMediaPlayer_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQMediaPlayer](fcQMediaPlayer_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
-method eventFilter*(self: VirtualQMediaPlayer, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QMediaPlayereventFilter(self[], watched, event)
 proc fcQMediaPlayer_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQMediaPlayer](fcQMediaPlayer_vdata(self)[])
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
@@ -897,40 +913,31 @@ proc fcQMediaPlayer_method_callback_eventFilter(self: pointer, watched: pointer,
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
-method timerEvent*(self: VirtualQMediaPlayer, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
-  QMediaPlayertimerEvent(self[], event)
 proc fcQMediaPlayer_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMediaPlayer](fcQMediaPlayer_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
-method childEvent*(self: VirtualQMediaPlayer, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
-  QMediaPlayerchildEvent(self[], event)
 proc fcQMediaPlayer_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMediaPlayer](fcQMediaPlayer_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
-method customEvent*(self: VirtualQMediaPlayer, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QMediaPlayercustomEvent(self[], event)
 proc fcQMediaPlayer_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMediaPlayer](fcQMediaPlayer_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
-method connectNotify*(self: VirtualQMediaPlayer, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QMediaPlayerconnectNotify(self[], signal)
 proc fcQMediaPlayer_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMediaPlayer](fcQMediaPlayer_vdata(self)[])
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
-method disconnectNotify*(self: VirtualQMediaPlayer, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QMediaPlayerdisconnectNotify(self[], signal)
 proc fcQMediaPlayer_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMediaPlayer](fcQMediaPlayer_vdata(self)[])
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
+
 
 proc sender*(self: gen_qmediaplayer_types.QMediaPlayer): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQMediaPlayer_protectedbase_sender(self.h), owned: false)

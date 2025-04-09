@@ -79,6 +79,7 @@ proc fcQLibrary_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QLib
 proc fcQLibrary_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QLibrary_tr3".}
 proc fcQLibrary_vdata(self: pointer): ptr pointer {.importc: "QLibrary_vdata".}
 proc fvdata_cQLibrary(self: pointer): pointer {.importc: "vdata_QLibrary".}
+
 type cQLibraryVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -191,6 +192,7 @@ type QLibrarychildEventProc* = proc(self: QLibrary, event: gen_qcoreevent_types.
 type QLibrarycustomEventProc* = proc(self: QLibrary, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QLibraryconnectNotifyProc* = proc(self: QLibrary, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QLibrarydisconnectNotifyProc* = proc(self: QLibrary, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+
 type QLibraryVTable* {.inheritable, pure.} = object
   vtbl: cQLibraryVTable
   metaObject*: QLibrarymetaObjectProc
@@ -203,8 +205,37 @@ type QLibraryVTable* {.inheritable, pure.} = object
   customEvent*: QLibrarycustomEventProc
   connectNotify*: QLibraryconnectNotifyProc
   disconnectNotify*: QLibrarydisconnectNotifyProc
+
 proc QLibrarymetaObject*(self: gen_qlibrary_types.QLibrary): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQLibrary_virtualbase_metaObject(self.h), owned: false)
+
+proc QLibrarymetacast*(self: gen_qlibrary_types.QLibrary, param1: cstring): pointer =
+  fcQLibrary_virtualbase_metacast(self.h, param1)
+
+proc QLibrarymetacall*(self: gen_qlibrary_types.QLibrary, param1: cint, param2: cint, param3: pointer): cint =
+  fcQLibrary_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+proc QLibraryevent*(self: gen_qlibrary_types.QLibrary, event: gen_qcoreevent_types.QEvent): bool =
+  fcQLibrary_virtualbase_event(self.h, event.h)
+
+proc QLibraryeventFilter*(self: gen_qlibrary_types.QLibrary, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
+  fcQLibrary_virtualbase_eventFilter(self.h, watched.h, event.h)
+
+proc QLibrarytimerEvent*(self: gen_qlibrary_types.QLibrary, event: gen_qcoreevent_types.QTimerEvent): void =
+  fcQLibrary_virtualbase_timerEvent(self.h, event.h)
+
+proc QLibrarychildEvent*(self: gen_qlibrary_types.QLibrary, event: gen_qcoreevent_types.QChildEvent): void =
+  fcQLibrary_virtualbase_childEvent(self.h, event.h)
+
+proc QLibrarycustomEvent*(self: gen_qlibrary_types.QLibrary, event: gen_qcoreevent_types.QEvent): void =
+  fcQLibrary_virtualbase_customEvent(self.h, event.h)
+
+proc QLibraryconnectNotify*(self: gen_qlibrary_types.QLibrary, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQLibrary_virtualbase_connectNotify(self.h, signal.h)
+
+proc QLibrarydisconnectNotify*(self: gen_qlibrary_types.QLibrary, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQLibrary_virtualbase_disconnectNotify(self.h, signal.h)
+
 
 proc fcQLibrary_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QLibraryVTable](fcQLibrary_vdata(self)[])
@@ -215,18 +246,12 @@ proc fcQLibrary_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QLibrarymetacast*(self: gen_qlibrary_types.QLibrary, param1: cstring): pointer =
-  fcQLibrary_virtualbase_metacast(self.h, param1)
-
 proc fcQLibrary_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QLibraryVTable](fcQLibrary_vdata(self)[])
   let self = QLibrary(h: self)
   let slotval1 = (param1)
   var virtualReturn = vtbl[].metacast(self, slotval1)
   virtualReturn
-
-proc QLibrarymetacall*(self: gen_qlibrary_types.QLibrary, param1: cint, param2: cint, param3: pointer): cint =
-  fcQLibrary_virtualbase_metacall(self.h, cint(param1), param2, param3)
 
 proc fcQLibrary_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QLibraryVTable](fcQLibrary_vdata(self)[])
@@ -237,18 +262,12 @@ proc fcQLibrary_vtable_callback_metacall(self: pointer, param1: cint, param2: ci
   var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QLibraryevent*(self: gen_qlibrary_types.QLibrary, event: gen_qcoreevent_types.QEvent): bool =
-  fcQLibrary_virtualbase_event(self.h, event.h)
-
 proc fcQLibrary_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QLibraryVTable](fcQLibrary_vdata(self)[])
   let self = QLibrary(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
-
-proc QLibraryeventFilter*(self: gen_qlibrary_types.QLibrary, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
-  fcQLibrary_virtualbase_eventFilter(self.h, watched.h, event.h)
 
 proc fcQLibrary_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QLibraryVTable](fcQLibrary_vdata(self)[])
@@ -258,17 +277,11 @@ proc fcQLibrary_vtable_callback_eventFilter(self: pointer, watched: pointer, eve
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
-proc QLibrarytimerEvent*(self: gen_qlibrary_types.QLibrary, event: gen_qcoreevent_types.QTimerEvent): void =
-  fcQLibrary_virtualbase_timerEvent(self.h, event.h)
-
 proc fcQLibrary_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QLibraryVTable](fcQLibrary_vdata(self)[])
   let self = QLibrary(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
-
-proc QLibrarychildEvent*(self: gen_qlibrary_types.QLibrary, event: gen_qcoreevent_types.QChildEvent): void =
-  fcQLibrary_virtualbase_childEvent(self.h, event.h)
 
 proc fcQLibrary_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QLibraryVTable](fcQLibrary_vdata(self)[])
@@ -276,26 +289,17 @@ proc fcQLibrary_vtable_callback_childEvent(self: pointer, event: pointer): void 
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
-proc QLibrarycustomEvent*(self: gen_qlibrary_types.QLibrary, event: gen_qcoreevent_types.QEvent): void =
-  fcQLibrary_virtualbase_customEvent(self.h, event.h)
-
 proc fcQLibrary_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QLibraryVTable](fcQLibrary_vdata(self)[])
   let self = QLibrary(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
-proc QLibraryconnectNotify*(self: gen_qlibrary_types.QLibrary, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQLibrary_virtualbase_connectNotify(self.h, signal.h)
-
 proc fcQLibrary_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QLibraryVTable](fcQLibrary_vdata(self)[])
   let self = QLibrary(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
-
-proc QLibrarydisconnectNotify*(self: gen_qlibrary_types.QLibrary, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQLibrary_virtualbase_disconnectNotify(self.h, signal.h)
 
 proc fcQLibrary_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QLibraryVTable](fcQLibrary_vdata(self)[])
@@ -305,23 +309,39 @@ proc fcQLibrary_vtable_callback_disconnectNotify(self: pointer, signal: pointer)
 
 type VirtualQLibrary* {.inheritable.} = ref object of QLibrary
   vtbl*: cQLibraryVTable
+
 method metaObject*(self: VirtualQLibrary): gen_qobjectdefs_types.QMetaObject {.base.} =
   QLibrarymetaObject(self[])
+method metacast*(self: VirtualQLibrary, param1: cstring): pointer {.base.} =
+  QLibrarymetacast(self[], param1)
+method metacall*(self: VirtualQLibrary, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QLibrarymetacall(self[], param1, param2, param3)
+method event*(self: VirtualQLibrary, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QLibraryevent(self[], event)
+method eventFilter*(self: VirtualQLibrary, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QLibraryeventFilter(self[], watched, event)
+method timerEvent*(self: VirtualQLibrary, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QLibrarytimerEvent(self[], event)
+method childEvent*(self: VirtualQLibrary, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QLibrarychildEvent(self[], event)
+method customEvent*(self: VirtualQLibrary, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QLibrarycustomEvent(self[], event)
+method connectNotify*(self: VirtualQLibrary, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QLibraryconnectNotify(self[], signal)
+method disconnectNotify*(self: VirtualQLibrary, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QLibrarydisconnectNotify(self[], signal)
+
 proc fcQLibrary_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQLibrary](fcQLibrary_vdata(self)[])
   var virtualReturn = inst.metaObject()
   virtualReturn.h
 
-method metacast*(self: VirtualQLibrary, param1: cstring): pointer {.base.} =
-  QLibrarymetacast(self[], param1)
 proc fcQLibrary_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQLibrary](fcQLibrary_vdata(self)[])
   let slotval1 = (param1)
   var virtualReturn = inst.metacast(slotval1)
   virtualReturn
 
-method metacall*(self: VirtualQLibrary, param1: cint, param2: cint, param3: pointer): cint {.base.} =
-  QLibrarymetacall(self[], param1, param2, param3)
 proc fcQLibrary_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQLibrary](fcQLibrary_vdata(self)[])
   let slotval1 = cint(param1)
@@ -330,16 +350,12 @@ proc fcQLibrary_method_callback_metacall(self: pointer, param1: cint, param2: ci
   var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
-method event*(self: VirtualQLibrary, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QLibraryevent(self[], event)
 proc fcQLibrary_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQLibrary](fcQLibrary_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
-method eventFilter*(self: VirtualQLibrary, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QLibraryeventFilter(self[], watched, event)
 proc fcQLibrary_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQLibrary](fcQLibrary_vdata(self)[])
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
@@ -347,40 +363,31 @@ proc fcQLibrary_method_callback_eventFilter(self: pointer, watched: pointer, eve
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
-method timerEvent*(self: VirtualQLibrary, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
-  QLibrarytimerEvent(self[], event)
 proc fcQLibrary_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQLibrary](fcQLibrary_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
-method childEvent*(self: VirtualQLibrary, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
-  QLibrarychildEvent(self[], event)
 proc fcQLibrary_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQLibrary](fcQLibrary_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
-method customEvent*(self: VirtualQLibrary, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QLibrarycustomEvent(self[], event)
 proc fcQLibrary_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQLibrary](fcQLibrary_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
-method connectNotify*(self: VirtualQLibrary, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QLibraryconnectNotify(self[], signal)
 proc fcQLibrary_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQLibrary](fcQLibrary_vdata(self)[])
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
-method disconnectNotify*(self: VirtualQLibrary, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QLibrarydisconnectNotify(self[], signal)
 proc fcQLibrary_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQLibrary](fcQLibrary_vdata(self)[])
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
+
 
 proc sender*(self: gen_qlibrary_types.QLibrary): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQLibrary_protectedbase_sender(self.h), owned: false)

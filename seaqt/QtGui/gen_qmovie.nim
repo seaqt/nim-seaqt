@@ -128,6 +128,7 @@ proc fcQMovie_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QMovie
 proc fcQMovie_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QMovie_tr3".}
 proc fcQMovie_vdata(self: pointer): ptr pointer {.importc: "QMovie_vdata".}
 proc fvdata_cQMovie(self: pointer): pointer {.importc: "vdata_QMovie".}
+
 type cQMovieVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -287,7 +288,7 @@ proc fcQMovie_slot_callback_started_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QMoviestartedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onstarted*(self: gen_qmovie_types.QMovie, slot: QMoviestartedSlot) =
+proc onStarted*(self: gen_qmovie_types.QMovie, slot: QMoviestartedSlot) =
   var tmp = new QMoviestartedSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -307,7 +308,7 @@ proc fcQMovie_slot_callback_resized_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QMovieresizedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onresized*(self: gen_qmovie_types.QMovie, slot: QMovieresizedSlot) =
+proc onResized*(self: gen_qmovie_types.QMovie, slot: QMovieresizedSlot) =
   var tmp = new QMovieresizedSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -327,7 +328,7 @@ proc fcQMovie_slot_callback_updated_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QMovieupdatedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onupdated*(self: gen_qmovie_types.QMovie, slot: QMovieupdatedSlot) =
+proc onUpdated*(self: gen_qmovie_types.QMovie, slot: QMovieupdatedSlot) =
   var tmp = new QMovieupdatedSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -347,7 +348,7 @@ proc fcQMovie_slot_callback_stateChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QMoviestateChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onstateChanged*(self: gen_qmovie_types.QMovie, slot: QMoviestateChangedSlot) =
+proc onStateChanged*(self: gen_qmovie_types.QMovie, slot: QMoviestateChangedSlot) =
   var tmp = new QMoviestateChangedSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -367,7 +368,7 @@ proc fcQMovie_slot_callback_error_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QMovieerrorSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onerror*(self: gen_qmovie_types.QMovie, slot: QMovieerrorSlot) =
+proc onError*(self: gen_qmovie_types.QMovie, slot: QMovieerrorSlot) =
   var tmp = new QMovieerrorSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -385,7 +386,7 @@ proc fcQMovie_slot_callback_finished_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QMoviefinishedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onfinished*(self: gen_qmovie_types.QMovie, slot: QMoviefinishedSlot) =
+proc onFinished*(self: gen_qmovie_types.QMovie, slot: QMoviefinishedSlot) =
   var tmp = new QMoviefinishedSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -405,7 +406,7 @@ proc fcQMovie_slot_callback_frameChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QMovieframeChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onframeChanged*(self: gen_qmovie_types.QMovie, slot: QMovieframeChangedSlot) =
+proc onFrameChanged*(self: gen_qmovie_types.QMovie, slot: QMovieframeChangedSlot) =
   var tmp = new QMovieframeChangedSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -448,6 +449,7 @@ type QMoviechildEventProc* = proc(self: QMovie, event: gen_qcoreevent_types.QChi
 type QMoviecustomEventProc* = proc(self: QMovie, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QMovieconnectNotifyProc* = proc(self: QMovie, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QMoviedisconnectNotifyProc* = proc(self: QMovie, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+
 type QMovieVTable* {.inheritable, pure.} = object
   vtbl: cQMovieVTable
   metaObject*: QMoviemetaObjectProc
@@ -460,8 +462,37 @@ type QMovieVTable* {.inheritable, pure.} = object
   customEvent*: QMoviecustomEventProc
   connectNotify*: QMovieconnectNotifyProc
   disconnectNotify*: QMoviedisconnectNotifyProc
+
 proc QMoviemetaObject*(self: gen_qmovie_types.QMovie): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQMovie_virtualbase_metaObject(self.h), owned: false)
+
+proc QMoviemetacast*(self: gen_qmovie_types.QMovie, param1: cstring): pointer =
+  fcQMovie_virtualbase_metacast(self.h, param1)
+
+proc QMoviemetacall*(self: gen_qmovie_types.QMovie, param1: cint, param2: cint, param3: pointer): cint =
+  fcQMovie_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+proc QMovieevent*(self: gen_qmovie_types.QMovie, event: gen_qcoreevent_types.QEvent): bool =
+  fcQMovie_virtualbase_event(self.h, event.h)
+
+proc QMovieeventFilter*(self: gen_qmovie_types.QMovie, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
+  fcQMovie_virtualbase_eventFilter(self.h, watched.h, event.h)
+
+proc QMovietimerEvent*(self: gen_qmovie_types.QMovie, event: gen_qcoreevent_types.QTimerEvent): void =
+  fcQMovie_virtualbase_timerEvent(self.h, event.h)
+
+proc QMoviechildEvent*(self: gen_qmovie_types.QMovie, event: gen_qcoreevent_types.QChildEvent): void =
+  fcQMovie_virtualbase_childEvent(self.h, event.h)
+
+proc QMoviecustomEvent*(self: gen_qmovie_types.QMovie, event: gen_qcoreevent_types.QEvent): void =
+  fcQMovie_virtualbase_customEvent(self.h, event.h)
+
+proc QMovieconnectNotify*(self: gen_qmovie_types.QMovie, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQMovie_virtualbase_connectNotify(self.h, signal.h)
+
+proc QMoviedisconnectNotify*(self: gen_qmovie_types.QMovie, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQMovie_virtualbase_disconnectNotify(self.h, signal.h)
+
 
 proc fcQMovie_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QMovieVTable](fcQMovie_vdata(self)[])
@@ -472,18 +503,12 @@ proc fcQMovie_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QMoviemetacast*(self: gen_qmovie_types.QMovie, param1: cstring): pointer =
-  fcQMovie_virtualbase_metacast(self.h, param1)
-
 proc fcQMovie_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QMovieVTable](fcQMovie_vdata(self)[])
   let self = QMovie(h: self)
   let slotval1 = (param1)
   var virtualReturn = vtbl[].metacast(self, slotval1)
   virtualReturn
-
-proc QMoviemetacall*(self: gen_qmovie_types.QMovie, param1: cint, param2: cint, param3: pointer): cint =
-  fcQMovie_virtualbase_metacall(self.h, cint(param1), param2, param3)
 
 proc fcQMovie_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QMovieVTable](fcQMovie_vdata(self)[])
@@ -494,18 +519,12 @@ proc fcQMovie_vtable_callback_metacall(self: pointer, param1: cint, param2: cint
   var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QMovieevent*(self: gen_qmovie_types.QMovie, event: gen_qcoreevent_types.QEvent): bool =
-  fcQMovie_virtualbase_event(self.h, event.h)
-
 proc fcQMovie_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QMovieVTable](fcQMovie_vdata(self)[])
   let self = QMovie(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
-
-proc QMovieeventFilter*(self: gen_qmovie_types.QMovie, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
-  fcQMovie_virtualbase_eventFilter(self.h, watched.h, event.h)
 
 proc fcQMovie_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QMovieVTable](fcQMovie_vdata(self)[])
@@ -515,17 +534,11 @@ proc fcQMovie_vtable_callback_eventFilter(self: pointer, watched: pointer, event
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
-proc QMovietimerEvent*(self: gen_qmovie_types.QMovie, event: gen_qcoreevent_types.QTimerEvent): void =
-  fcQMovie_virtualbase_timerEvent(self.h, event.h)
-
 proc fcQMovie_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMovieVTable](fcQMovie_vdata(self)[])
   let self = QMovie(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
-
-proc QMoviechildEvent*(self: gen_qmovie_types.QMovie, event: gen_qcoreevent_types.QChildEvent): void =
-  fcQMovie_virtualbase_childEvent(self.h, event.h)
 
 proc fcQMovie_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMovieVTable](fcQMovie_vdata(self)[])
@@ -533,26 +546,17 @@ proc fcQMovie_vtable_callback_childEvent(self: pointer, event: pointer): void {.
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
-proc QMoviecustomEvent*(self: gen_qmovie_types.QMovie, event: gen_qcoreevent_types.QEvent): void =
-  fcQMovie_virtualbase_customEvent(self.h, event.h)
-
 proc fcQMovie_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMovieVTable](fcQMovie_vdata(self)[])
   let self = QMovie(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
-proc QMovieconnectNotify*(self: gen_qmovie_types.QMovie, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQMovie_virtualbase_connectNotify(self.h, signal.h)
-
 proc fcQMovie_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMovieVTable](fcQMovie_vdata(self)[])
   let self = QMovie(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
-
-proc QMoviedisconnectNotify*(self: gen_qmovie_types.QMovie, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQMovie_virtualbase_disconnectNotify(self.h, signal.h)
 
 proc fcQMovie_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMovieVTable](fcQMovie_vdata(self)[])
@@ -562,23 +566,39 @@ proc fcQMovie_vtable_callback_disconnectNotify(self: pointer, signal: pointer): 
 
 type VirtualQMovie* {.inheritable.} = ref object of QMovie
   vtbl*: cQMovieVTable
+
 method metaObject*(self: VirtualQMovie): gen_qobjectdefs_types.QMetaObject {.base.} =
   QMoviemetaObject(self[])
+method metacast*(self: VirtualQMovie, param1: cstring): pointer {.base.} =
+  QMoviemetacast(self[], param1)
+method metacall*(self: VirtualQMovie, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QMoviemetacall(self[], param1, param2, param3)
+method event*(self: VirtualQMovie, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QMovieevent(self[], event)
+method eventFilter*(self: VirtualQMovie, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QMovieeventFilter(self[], watched, event)
+method timerEvent*(self: VirtualQMovie, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QMovietimerEvent(self[], event)
+method childEvent*(self: VirtualQMovie, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QMoviechildEvent(self[], event)
+method customEvent*(self: VirtualQMovie, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QMoviecustomEvent(self[], event)
+method connectNotify*(self: VirtualQMovie, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QMovieconnectNotify(self[], signal)
+method disconnectNotify*(self: VirtualQMovie, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QMoviedisconnectNotify(self[], signal)
+
 proc fcQMovie_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQMovie](fcQMovie_vdata(self)[])
   var virtualReturn = inst.metaObject()
   virtualReturn.h
 
-method metacast*(self: VirtualQMovie, param1: cstring): pointer {.base.} =
-  QMoviemetacast(self[], param1)
 proc fcQMovie_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQMovie](fcQMovie_vdata(self)[])
   let slotval1 = (param1)
   var virtualReturn = inst.metacast(slotval1)
   virtualReturn
 
-method metacall*(self: VirtualQMovie, param1: cint, param2: cint, param3: pointer): cint {.base.} =
-  QMoviemetacall(self[], param1, param2, param3)
 proc fcQMovie_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQMovie](fcQMovie_vdata(self)[])
   let slotval1 = cint(param1)
@@ -587,16 +607,12 @@ proc fcQMovie_method_callback_metacall(self: pointer, param1: cint, param2: cint
   var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
-method event*(self: VirtualQMovie, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QMovieevent(self[], event)
 proc fcQMovie_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQMovie](fcQMovie_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
-method eventFilter*(self: VirtualQMovie, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QMovieeventFilter(self[], watched, event)
 proc fcQMovie_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQMovie](fcQMovie_vdata(self)[])
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
@@ -604,40 +620,31 @@ proc fcQMovie_method_callback_eventFilter(self: pointer, watched: pointer, event
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
-method timerEvent*(self: VirtualQMovie, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
-  QMovietimerEvent(self[], event)
 proc fcQMovie_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMovie](fcQMovie_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
-method childEvent*(self: VirtualQMovie, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
-  QMoviechildEvent(self[], event)
 proc fcQMovie_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMovie](fcQMovie_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
-method customEvent*(self: VirtualQMovie, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QMoviecustomEvent(self[], event)
 proc fcQMovie_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMovie](fcQMovie_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
-method connectNotify*(self: VirtualQMovie, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QMovieconnectNotify(self[], signal)
 proc fcQMovie_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMovie](fcQMovie_vdata(self)[])
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
-method disconnectNotify*(self: VirtualQMovie, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QMoviedisconnectNotify(self[], signal)
 proc fcQMovie_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMovie](fcQMovie_vdata(self)[])
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
+
 
 proc sender*(self: gen_qmovie_types.QMovie): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQMovie_protectedbase_sender(self.h), owned: false)

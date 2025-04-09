@@ -151,7 +151,7 @@ proc fcQWebEngineNotification_slot_callback_closed_release(slot: int) {.cdecl.} 
   let nimfunc = cast[ref QWebEngineNotificationclosedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onclosed*(self: gen_qwebenginenotification_types.QWebEngineNotification, slot: QWebEngineNotificationclosedSlot) =
+proc onClosed*(self: gen_qwebenginenotification_types.QWebEngineNotification, slot: QWebEngineNotificationclosedSlot) =
   var tmp = new QWebEngineNotificationclosedSlot
   tmp[] = slot
   GC_ref(tmp)

@@ -108,6 +108,7 @@ proc fcQFontDialog_getFont4(ok: ptr bool, initial: pointer, parent: pointer, tit
 proc fcQFontDialog_getFont5(ok: ptr bool, initial: pointer, parent: pointer, title: struct_miqt_string, options: cint): pointer {.importc: "QFontDialog_getFont5".}
 proc fcQFontDialog_vdata(self: pointer): ptr pointer {.importc: "QFontDialog_vdata".}
 proc fvdata_cQFontDialog(self: pointer): pointer {.importc: "vdata_QFontDialog".}
+
 type cQFontDialogVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -295,7 +296,7 @@ proc fcQFontDialog_slot_callback_currentFontChanged_release(slot: int) {.cdecl.}
   let nimfunc = cast[ref QFontDialogcurrentFontChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc oncurrentFontChanged*(self: gen_qfontdialog_types.QFontDialog, slot: QFontDialogcurrentFontChangedSlot) =
+proc onCurrentFontChanged*(self: gen_qfontdialog_types.QFontDialog, slot: QFontDialogcurrentFontChangedSlot) =
   var tmp = new QFontDialogcurrentFontChangedSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -315,7 +316,7 @@ proc fcQFontDialog_slot_callback_fontSelected_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QFontDialogfontSelectedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onfontSelected*(self: gen_qfontdialog_types.QFontDialog, slot: QFontDialogfontSelectedSlot) =
+proc onFontSelected*(self: gen_qfontdialog_types.QFontDialog, slot: QFontDialogfontSelectedSlot) =
   var tmp = new QFontDialogfontSelectedSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -403,6 +404,7 @@ type QFontDialogchildEventProc* = proc(self: QFontDialog, event: gen_qcoreevent_
 type QFontDialogcustomEventProc* = proc(self: QFontDialog, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QFontDialogconnectNotifyProc* = proc(self: QFontDialog, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QFontDialogdisconnectNotifyProc* = proc(self: QFontDialog, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+
 type QFontDialogVTable* {.inheritable, pure.} = object
   vtbl: cQFontDialogVTable
   metaObject*: QFontDialogmetaObjectProc
@@ -460,8 +462,172 @@ type QFontDialogVTable* {.inheritable, pure.} = object
   customEvent*: QFontDialogcustomEventProc
   connectNotify*: QFontDialogconnectNotifyProc
   disconnectNotify*: QFontDialogdisconnectNotifyProc
+
 proc QFontDialogmetaObject*(self: gen_qfontdialog_types.QFontDialog): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQFontDialog_virtualbase_metaObject(self.h), owned: false)
+
+proc QFontDialogmetacast*(self: gen_qfontdialog_types.QFontDialog, param1: cstring): pointer =
+  fcQFontDialog_virtualbase_metacast(self.h, param1)
+
+proc QFontDialogmetacall*(self: gen_qfontdialog_types.QFontDialog, param1: cint, param2: cint, param3: pointer): cint =
+  fcQFontDialog_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+proc QFontDialogsetVisible*(self: gen_qfontdialog_types.QFontDialog, visible: bool): void =
+  fcQFontDialog_virtualbase_setVisible(self.h, visible)
+
+proc QFontDialogchangeEvent*(self: gen_qfontdialog_types.QFontDialog, event: gen_qcoreevent_types.QEvent): void =
+  fcQFontDialog_virtualbase_changeEvent(self.h, event.h)
+
+proc QFontDialogdone*(self: gen_qfontdialog_types.QFontDialog, resultVal: cint): void =
+  fcQFontDialog_virtualbase_done(self.h, resultVal)
+
+proc QFontDialogeventFilter*(self: gen_qfontdialog_types.QFontDialog, objectVal: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
+  fcQFontDialog_virtualbase_eventFilter(self.h, objectVal.h, event.h)
+
+proc QFontDialogsizeHint*(self: gen_qfontdialog_types.QFontDialog): gen_qsize_types.QSize =
+  gen_qsize_types.QSize(h: fcQFontDialog_virtualbase_sizeHint(self.h), owned: true)
+
+proc QFontDialogminimumSizeHint*(self: gen_qfontdialog_types.QFontDialog): gen_qsize_types.QSize =
+  gen_qsize_types.QSize(h: fcQFontDialog_virtualbase_minimumSizeHint(self.h), owned: true)
+
+proc QFontDialogopen*(self: gen_qfontdialog_types.QFontDialog): void =
+  fcQFontDialog_virtualbase_open(self.h)
+
+proc QFontDialogexec*(self: gen_qfontdialog_types.QFontDialog): cint =
+  fcQFontDialog_virtualbase_exec(self.h)
+
+proc QFontDialogaccept*(self: gen_qfontdialog_types.QFontDialog): void =
+  fcQFontDialog_virtualbase_accept(self.h)
+
+proc QFontDialogreject*(self: gen_qfontdialog_types.QFontDialog): void =
+  fcQFontDialog_virtualbase_reject(self.h)
+
+proc QFontDialogkeyPressEvent*(self: gen_qfontdialog_types.QFontDialog, param1: gen_qevent_types.QKeyEvent): void =
+  fcQFontDialog_virtualbase_keyPressEvent(self.h, param1.h)
+
+proc QFontDialogcloseEvent*(self: gen_qfontdialog_types.QFontDialog, param1: gen_qevent_types.QCloseEvent): void =
+  fcQFontDialog_virtualbase_closeEvent(self.h, param1.h)
+
+proc QFontDialogshowEvent*(self: gen_qfontdialog_types.QFontDialog, param1: gen_qevent_types.QShowEvent): void =
+  fcQFontDialog_virtualbase_showEvent(self.h, param1.h)
+
+proc QFontDialogresizeEvent*(self: gen_qfontdialog_types.QFontDialog, param1: gen_qevent_types.QResizeEvent): void =
+  fcQFontDialog_virtualbase_resizeEvent(self.h, param1.h)
+
+proc QFontDialogcontextMenuEvent*(self: gen_qfontdialog_types.QFontDialog, param1: gen_qevent_types.QContextMenuEvent): void =
+  fcQFontDialog_virtualbase_contextMenuEvent(self.h, param1.h)
+
+proc QFontDialogdevType*(self: gen_qfontdialog_types.QFontDialog): cint =
+  fcQFontDialog_virtualbase_devType(self.h)
+
+proc QFontDialogheightForWidth*(self: gen_qfontdialog_types.QFontDialog, param1: cint): cint =
+  fcQFontDialog_virtualbase_heightForWidth(self.h, param1)
+
+proc QFontDialoghasHeightForWidth*(self: gen_qfontdialog_types.QFontDialog): bool =
+  fcQFontDialog_virtualbase_hasHeightForWidth(self.h)
+
+proc QFontDialogpaintEngine*(self: gen_qfontdialog_types.QFontDialog): gen_qpaintengine_types.QPaintEngine =
+  gen_qpaintengine_types.QPaintEngine(h: fcQFontDialog_virtualbase_paintEngine(self.h), owned: false)
+
+proc QFontDialogevent*(self: gen_qfontdialog_types.QFontDialog, event: gen_qcoreevent_types.QEvent): bool =
+  fcQFontDialog_virtualbase_event(self.h, event.h)
+
+proc QFontDialogmousePressEvent*(self: gen_qfontdialog_types.QFontDialog, event: gen_qevent_types.QMouseEvent): void =
+  fcQFontDialog_virtualbase_mousePressEvent(self.h, event.h)
+
+proc QFontDialogmouseReleaseEvent*(self: gen_qfontdialog_types.QFontDialog, event: gen_qevent_types.QMouseEvent): void =
+  fcQFontDialog_virtualbase_mouseReleaseEvent(self.h, event.h)
+
+proc QFontDialogmouseDoubleClickEvent*(self: gen_qfontdialog_types.QFontDialog, event: gen_qevent_types.QMouseEvent): void =
+  fcQFontDialog_virtualbase_mouseDoubleClickEvent(self.h, event.h)
+
+proc QFontDialogmouseMoveEvent*(self: gen_qfontdialog_types.QFontDialog, event: gen_qevent_types.QMouseEvent): void =
+  fcQFontDialog_virtualbase_mouseMoveEvent(self.h, event.h)
+
+proc QFontDialogwheelEvent*(self: gen_qfontdialog_types.QFontDialog, event: gen_qevent_types.QWheelEvent): void =
+  fcQFontDialog_virtualbase_wheelEvent(self.h, event.h)
+
+proc QFontDialogkeyReleaseEvent*(self: gen_qfontdialog_types.QFontDialog, event: gen_qevent_types.QKeyEvent): void =
+  fcQFontDialog_virtualbase_keyReleaseEvent(self.h, event.h)
+
+proc QFontDialogfocusInEvent*(self: gen_qfontdialog_types.QFontDialog, event: gen_qevent_types.QFocusEvent): void =
+  fcQFontDialog_virtualbase_focusInEvent(self.h, event.h)
+
+proc QFontDialogfocusOutEvent*(self: gen_qfontdialog_types.QFontDialog, event: gen_qevent_types.QFocusEvent): void =
+  fcQFontDialog_virtualbase_focusOutEvent(self.h, event.h)
+
+proc QFontDialogenterEvent*(self: gen_qfontdialog_types.QFontDialog, event: gen_qevent_types.QEnterEvent): void =
+  fcQFontDialog_virtualbase_enterEvent(self.h, event.h)
+
+proc QFontDialogleaveEvent*(self: gen_qfontdialog_types.QFontDialog, event: gen_qcoreevent_types.QEvent): void =
+  fcQFontDialog_virtualbase_leaveEvent(self.h, event.h)
+
+proc QFontDialogpaintEvent*(self: gen_qfontdialog_types.QFontDialog, event: gen_qevent_types.QPaintEvent): void =
+  fcQFontDialog_virtualbase_paintEvent(self.h, event.h)
+
+proc QFontDialogmoveEvent*(self: gen_qfontdialog_types.QFontDialog, event: gen_qevent_types.QMoveEvent): void =
+  fcQFontDialog_virtualbase_moveEvent(self.h, event.h)
+
+proc QFontDialogtabletEvent*(self: gen_qfontdialog_types.QFontDialog, event: gen_qevent_types.QTabletEvent): void =
+  fcQFontDialog_virtualbase_tabletEvent(self.h, event.h)
+
+proc QFontDialogactionEvent*(self: gen_qfontdialog_types.QFontDialog, event: gen_qevent_types.QActionEvent): void =
+  fcQFontDialog_virtualbase_actionEvent(self.h, event.h)
+
+proc QFontDialogdragEnterEvent*(self: gen_qfontdialog_types.QFontDialog, event: gen_qevent_types.QDragEnterEvent): void =
+  fcQFontDialog_virtualbase_dragEnterEvent(self.h, event.h)
+
+proc QFontDialogdragMoveEvent*(self: gen_qfontdialog_types.QFontDialog, event: gen_qevent_types.QDragMoveEvent): void =
+  fcQFontDialog_virtualbase_dragMoveEvent(self.h, event.h)
+
+proc QFontDialogdragLeaveEvent*(self: gen_qfontdialog_types.QFontDialog, event: gen_qevent_types.QDragLeaveEvent): void =
+  fcQFontDialog_virtualbase_dragLeaveEvent(self.h, event.h)
+
+proc QFontDialogdropEvent*(self: gen_qfontdialog_types.QFontDialog, event: gen_qevent_types.QDropEvent): void =
+  fcQFontDialog_virtualbase_dropEvent(self.h, event.h)
+
+proc QFontDialoghideEvent*(self: gen_qfontdialog_types.QFontDialog, event: gen_qevent_types.QHideEvent): void =
+  fcQFontDialog_virtualbase_hideEvent(self.h, event.h)
+
+proc QFontDialognativeEvent*(self: gen_qfontdialog_types.QFontDialog, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool =
+  fcQFontDialog_virtualbase_nativeEvent(self.h, struct_miqt_string(data: if len(eventType) > 0: addr eventType[0] else: nil, len: csize_t(len(eventType))), message, resultVal)
+
+proc QFontDialogmetric*(self: gen_qfontdialog_types.QFontDialog, param1: cint): cint =
+  fcQFontDialog_virtualbase_metric(self.h, cint(param1))
+
+proc QFontDialoginitPainter*(self: gen_qfontdialog_types.QFontDialog, painter: gen_qpainter_types.QPainter): void =
+  fcQFontDialog_virtualbase_initPainter(self.h, painter.h)
+
+proc QFontDialogredirected*(self: gen_qfontdialog_types.QFontDialog, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice =
+  gen_qpaintdevice_types.QPaintDevice(h: fcQFontDialog_virtualbase_redirected(self.h, offset.h), owned: false)
+
+proc QFontDialogsharedPainter*(self: gen_qfontdialog_types.QFontDialog): gen_qpainter_types.QPainter =
+  gen_qpainter_types.QPainter(h: fcQFontDialog_virtualbase_sharedPainter(self.h), owned: false)
+
+proc QFontDialoginputMethodEvent*(self: gen_qfontdialog_types.QFontDialog, param1: gen_qevent_types.QInputMethodEvent): void =
+  fcQFontDialog_virtualbase_inputMethodEvent(self.h, param1.h)
+
+proc QFontDialoginputMethodQuery*(self: gen_qfontdialog_types.QFontDialog, param1: cint): gen_qvariant_types.QVariant =
+  gen_qvariant_types.QVariant(h: fcQFontDialog_virtualbase_inputMethodQuery(self.h, cint(param1)), owned: true)
+
+proc QFontDialogfocusNextPrevChild*(self: gen_qfontdialog_types.QFontDialog, next: bool): bool =
+  fcQFontDialog_virtualbase_focusNextPrevChild(self.h, next)
+
+proc QFontDialogtimerEvent*(self: gen_qfontdialog_types.QFontDialog, event: gen_qcoreevent_types.QTimerEvent): void =
+  fcQFontDialog_virtualbase_timerEvent(self.h, event.h)
+
+proc QFontDialogchildEvent*(self: gen_qfontdialog_types.QFontDialog, event: gen_qcoreevent_types.QChildEvent): void =
+  fcQFontDialog_virtualbase_childEvent(self.h, event.h)
+
+proc QFontDialogcustomEvent*(self: gen_qfontdialog_types.QFontDialog, event: gen_qcoreevent_types.QEvent): void =
+  fcQFontDialog_virtualbase_customEvent(self.h, event.h)
+
+proc QFontDialogconnectNotify*(self: gen_qfontdialog_types.QFontDialog, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQFontDialog_virtualbase_connectNotify(self.h, signal.h)
+
+proc QFontDialogdisconnectNotify*(self: gen_qfontdialog_types.QFontDialog, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQFontDialog_virtualbase_disconnectNotify(self.h, signal.h)
+
 
 proc fcQFontDialog_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QFontDialogVTable](fcQFontDialog_vdata(self)[])
@@ -472,18 +638,12 @@ proc fcQFontDialog_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} 
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QFontDialogmetacast*(self: gen_qfontdialog_types.QFontDialog, param1: cstring): pointer =
-  fcQFontDialog_virtualbase_metacast(self.h, param1)
-
 proc fcQFontDialog_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QFontDialogVTable](fcQFontDialog_vdata(self)[])
   let self = QFontDialog(h: self)
   let slotval1 = (param1)
   var virtualReturn = vtbl[].metacast(self, slotval1)
   virtualReturn
-
-proc QFontDialogmetacall*(self: gen_qfontdialog_types.QFontDialog, param1: cint, param2: cint, param3: pointer): cint =
-  fcQFontDialog_virtualbase_metacall(self.h, cint(param1), param2, param3)
 
 proc fcQFontDialog_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QFontDialogVTable](fcQFontDialog_vdata(self)[])
@@ -494,17 +654,11 @@ proc fcQFontDialog_vtable_callback_metacall(self: pointer, param1: cint, param2:
   var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QFontDialogsetVisible*(self: gen_qfontdialog_types.QFontDialog, visible: bool): void =
-  fcQFontDialog_virtualbase_setVisible(self.h, visible)
-
 proc fcQFontDialog_vtable_callback_setVisible(self: pointer, visible: bool): void {.cdecl.} =
   let vtbl = cast[ptr QFontDialogVTable](fcQFontDialog_vdata(self)[])
   let self = QFontDialog(h: self)
   let slotval1 = visible
   vtbl[].setVisible(self, slotval1)
-
-proc QFontDialogchangeEvent*(self: gen_qfontdialog_types.QFontDialog, event: gen_qcoreevent_types.QEvent): void =
-  fcQFontDialog_virtualbase_changeEvent(self.h, event.h)
 
 proc fcQFontDialog_vtable_callback_changeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFontDialogVTable](fcQFontDialog_vdata(self)[])
@@ -512,17 +666,11 @@ proc fcQFontDialog_vtable_callback_changeEvent(self: pointer, event: pointer): v
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].changeEvent(self, slotval1)
 
-proc QFontDialogdone*(self: gen_qfontdialog_types.QFontDialog, resultVal: cint): void =
-  fcQFontDialog_virtualbase_done(self.h, resultVal)
-
 proc fcQFontDialog_vtable_callback_done(self: pointer, resultVal: cint): void {.cdecl.} =
   let vtbl = cast[ptr QFontDialogVTable](fcQFontDialog_vdata(self)[])
   let self = QFontDialog(h: self)
   let slotval1 = resultVal
   vtbl[].done(self, slotval1)
-
-proc QFontDialogeventFilter*(self: gen_qfontdialog_types.QFontDialog, objectVal: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
-  fcQFontDialog_virtualbase_eventFilter(self.h, objectVal.h, event.h)
 
 proc fcQFontDialog_vtable_callback_eventFilter(self: pointer, objectVal: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QFontDialogVTable](fcQFontDialog_vdata(self)[])
@@ -531,9 +679,6 @@ proc fcQFontDialog_vtable_callback_eventFilter(self: pointer, objectVal: pointer
   let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
-
-proc QFontDialogsizeHint*(self: gen_qfontdialog_types.QFontDialog): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQFontDialog_virtualbase_sizeHint(self.h), owned: true)
 
 proc fcQFontDialog_vtable_callback_sizeHint(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QFontDialogVTable](fcQFontDialog_vdata(self)[])
@@ -544,9 +689,6 @@ proc fcQFontDialog_vtable_callback_sizeHint(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QFontDialogminimumSizeHint*(self: gen_qfontdialog_types.QFontDialog): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQFontDialog_virtualbase_minimumSizeHint(self.h), owned: true)
-
 proc fcQFontDialog_vtable_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QFontDialogVTable](fcQFontDialog_vdata(self)[])
   let self = QFontDialog(h: self)
@@ -556,16 +698,10 @@ proc fcQFontDialog_vtable_callback_minimumSizeHint(self: pointer): pointer {.cde
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QFontDialogopen*(self: gen_qfontdialog_types.QFontDialog): void =
-  fcQFontDialog_virtualbase_open(self.h)
-
 proc fcQFontDialog_vtable_callback_open(self: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFontDialogVTable](fcQFontDialog_vdata(self)[])
   let self = QFontDialog(h: self)
   vtbl[].open(self)
-
-proc QFontDialogexec*(self: gen_qfontdialog_types.QFontDialog): cint =
-  fcQFontDialog_virtualbase_exec(self.h)
 
 proc fcQFontDialog_vtable_callback_exec(self: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QFontDialogVTable](fcQFontDialog_vdata(self)[])
@@ -573,24 +709,15 @@ proc fcQFontDialog_vtable_callback_exec(self: pointer): cint {.cdecl.} =
   var virtualReturn = vtbl[].exec(self)
   virtualReturn
 
-proc QFontDialogaccept*(self: gen_qfontdialog_types.QFontDialog): void =
-  fcQFontDialog_virtualbase_accept(self.h)
-
 proc fcQFontDialog_vtable_callback_accept(self: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFontDialogVTable](fcQFontDialog_vdata(self)[])
   let self = QFontDialog(h: self)
   vtbl[].accept(self)
 
-proc QFontDialogreject*(self: gen_qfontdialog_types.QFontDialog): void =
-  fcQFontDialog_virtualbase_reject(self.h)
-
 proc fcQFontDialog_vtable_callback_reject(self: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFontDialogVTable](fcQFontDialog_vdata(self)[])
   let self = QFontDialog(h: self)
   vtbl[].reject(self)
-
-proc QFontDialogkeyPressEvent*(self: gen_qfontdialog_types.QFontDialog, param1: gen_qevent_types.QKeyEvent): void =
-  fcQFontDialog_virtualbase_keyPressEvent(self.h, param1.h)
 
 proc fcQFontDialog_vtable_callback_keyPressEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFontDialogVTable](fcQFontDialog_vdata(self)[])
@@ -598,17 +725,11 @@ proc fcQFontDialog_vtable_callback_keyPressEvent(self: pointer, param1: pointer)
   let slotval1 = gen_qevent_types.QKeyEvent(h: param1, owned: false)
   vtbl[].keyPressEvent(self, slotval1)
 
-proc QFontDialogcloseEvent*(self: gen_qfontdialog_types.QFontDialog, param1: gen_qevent_types.QCloseEvent): void =
-  fcQFontDialog_virtualbase_closeEvent(self.h, param1.h)
-
 proc fcQFontDialog_vtable_callback_closeEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFontDialogVTable](fcQFontDialog_vdata(self)[])
   let self = QFontDialog(h: self)
   let slotval1 = gen_qevent_types.QCloseEvent(h: param1, owned: false)
   vtbl[].closeEvent(self, slotval1)
-
-proc QFontDialogshowEvent*(self: gen_qfontdialog_types.QFontDialog, param1: gen_qevent_types.QShowEvent): void =
-  fcQFontDialog_virtualbase_showEvent(self.h, param1.h)
 
 proc fcQFontDialog_vtable_callback_showEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFontDialogVTable](fcQFontDialog_vdata(self)[])
@@ -616,17 +737,11 @@ proc fcQFontDialog_vtable_callback_showEvent(self: pointer, param1: pointer): vo
   let slotval1 = gen_qevent_types.QShowEvent(h: param1, owned: false)
   vtbl[].showEvent(self, slotval1)
 
-proc QFontDialogresizeEvent*(self: gen_qfontdialog_types.QFontDialog, param1: gen_qevent_types.QResizeEvent): void =
-  fcQFontDialog_virtualbase_resizeEvent(self.h, param1.h)
-
 proc fcQFontDialog_vtable_callback_resizeEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFontDialogVTable](fcQFontDialog_vdata(self)[])
   let self = QFontDialog(h: self)
   let slotval1 = gen_qevent_types.QResizeEvent(h: param1, owned: false)
   vtbl[].resizeEvent(self, slotval1)
-
-proc QFontDialogcontextMenuEvent*(self: gen_qfontdialog_types.QFontDialog, param1: gen_qevent_types.QContextMenuEvent): void =
-  fcQFontDialog_virtualbase_contextMenuEvent(self.h, param1.h)
 
 proc fcQFontDialog_vtable_callback_contextMenuEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFontDialogVTable](fcQFontDialog_vdata(self)[])
@@ -634,17 +749,11 @@ proc fcQFontDialog_vtable_callback_contextMenuEvent(self: pointer, param1: point
   let slotval1 = gen_qevent_types.QContextMenuEvent(h: param1, owned: false)
   vtbl[].contextMenuEvent(self, slotval1)
 
-proc QFontDialogdevType*(self: gen_qfontdialog_types.QFontDialog): cint =
-  fcQFontDialog_virtualbase_devType(self.h)
-
 proc fcQFontDialog_vtable_callback_devType(self: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QFontDialogVTable](fcQFontDialog_vdata(self)[])
   let self = QFontDialog(h: self)
   var virtualReturn = vtbl[].devType(self)
   virtualReturn
-
-proc QFontDialogheightForWidth*(self: gen_qfontdialog_types.QFontDialog, param1: cint): cint =
-  fcQFontDialog_virtualbase_heightForWidth(self.h, param1)
 
 proc fcQFontDialog_vtable_callback_heightForWidth(self: pointer, param1: cint): cint {.cdecl.} =
   let vtbl = cast[ptr QFontDialogVTable](fcQFontDialog_vdata(self)[])
@@ -653,17 +762,11 @@ proc fcQFontDialog_vtable_callback_heightForWidth(self: pointer, param1: cint): 
   var virtualReturn = vtbl[].heightForWidth(self, slotval1)
   virtualReturn
 
-proc QFontDialoghasHeightForWidth*(self: gen_qfontdialog_types.QFontDialog): bool =
-  fcQFontDialog_virtualbase_hasHeightForWidth(self.h)
-
 proc fcQFontDialog_vtable_callback_hasHeightForWidth(self: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QFontDialogVTable](fcQFontDialog_vdata(self)[])
   let self = QFontDialog(h: self)
   var virtualReturn = vtbl[].hasHeightForWidth(self)
   virtualReturn
-
-proc QFontDialogpaintEngine*(self: gen_qfontdialog_types.QFontDialog): gen_qpaintengine_types.QPaintEngine =
-  gen_qpaintengine_types.QPaintEngine(h: fcQFontDialog_virtualbase_paintEngine(self.h), owned: false)
 
 proc fcQFontDialog_vtable_callback_paintEngine(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QFontDialogVTable](fcQFontDialog_vdata(self)[])
@@ -674,9 +777,6 @@ proc fcQFontDialog_vtable_callback_paintEngine(self: pointer): pointer {.cdecl.}
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QFontDialogevent*(self: gen_qfontdialog_types.QFontDialog, event: gen_qcoreevent_types.QEvent): bool =
-  fcQFontDialog_virtualbase_event(self.h, event.h)
-
 proc fcQFontDialog_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QFontDialogVTable](fcQFontDialog_vdata(self)[])
   let self = QFontDialog(h: self)
@@ -684,17 +784,11 @@ proc fcQFontDialog_vtable_callback_event(self: pointer, event: pointer): bool {.
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
-proc QFontDialogmousePressEvent*(self: gen_qfontdialog_types.QFontDialog, event: gen_qevent_types.QMouseEvent): void =
-  fcQFontDialog_virtualbase_mousePressEvent(self.h, event.h)
-
 proc fcQFontDialog_vtable_callback_mousePressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFontDialogVTable](fcQFontDialog_vdata(self)[])
   let self = QFontDialog(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mousePressEvent(self, slotval1)
-
-proc QFontDialogmouseReleaseEvent*(self: gen_qfontdialog_types.QFontDialog, event: gen_qevent_types.QMouseEvent): void =
-  fcQFontDialog_virtualbase_mouseReleaseEvent(self.h, event.h)
 
 proc fcQFontDialog_vtable_callback_mouseReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFontDialogVTable](fcQFontDialog_vdata(self)[])
@@ -702,17 +796,11 @@ proc fcQFontDialog_vtable_callback_mouseReleaseEvent(self: pointer, event: point
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseReleaseEvent(self, slotval1)
 
-proc QFontDialogmouseDoubleClickEvent*(self: gen_qfontdialog_types.QFontDialog, event: gen_qevent_types.QMouseEvent): void =
-  fcQFontDialog_virtualbase_mouseDoubleClickEvent(self.h, event.h)
-
 proc fcQFontDialog_vtable_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFontDialogVTable](fcQFontDialog_vdata(self)[])
   let self = QFontDialog(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseDoubleClickEvent(self, slotval1)
-
-proc QFontDialogmouseMoveEvent*(self: gen_qfontdialog_types.QFontDialog, event: gen_qevent_types.QMouseEvent): void =
-  fcQFontDialog_virtualbase_mouseMoveEvent(self.h, event.h)
 
 proc fcQFontDialog_vtable_callback_mouseMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFontDialogVTable](fcQFontDialog_vdata(self)[])
@@ -720,17 +808,11 @@ proc fcQFontDialog_vtable_callback_mouseMoveEvent(self: pointer, event: pointer)
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseMoveEvent(self, slotval1)
 
-proc QFontDialogwheelEvent*(self: gen_qfontdialog_types.QFontDialog, event: gen_qevent_types.QWheelEvent): void =
-  fcQFontDialog_virtualbase_wheelEvent(self.h, event.h)
-
 proc fcQFontDialog_vtable_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFontDialogVTable](fcQFontDialog_vdata(self)[])
   let self = QFontDialog(h: self)
   let slotval1 = gen_qevent_types.QWheelEvent(h: event, owned: false)
   vtbl[].wheelEvent(self, slotval1)
-
-proc QFontDialogkeyReleaseEvent*(self: gen_qfontdialog_types.QFontDialog, event: gen_qevent_types.QKeyEvent): void =
-  fcQFontDialog_virtualbase_keyReleaseEvent(self.h, event.h)
 
 proc fcQFontDialog_vtable_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFontDialogVTable](fcQFontDialog_vdata(self)[])
@@ -738,17 +820,11 @@ proc fcQFontDialog_vtable_callback_keyReleaseEvent(self: pointer, event: pointer
   let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   vtbl[].keyReleaseEvent(self, slotval1)
 
-proc QFontDialogfocusInEvent*(self: gen_qfontdialog_types.QFontDialog, event: gen_qevent_types.QFocusEvent): void =
-  fcQFontDialog_virtualbase_focusInEvent(self.h, event.h)
-
 proc fcQFontDialog_vtable_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFontDialogVTable](fcQFontDialog_vdata(self)[])
   let self = QFontDialog(h: self)
   let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusInEvent(self, slotval1)
-
-proc QFontDialogfocusOutEvent*(self: gen_qfontdialog_types.QFontDialog, event: gen_qevent_types.QFocusEvent): void =
-  fcQFontDialog_virtualbase_focusOutEvent(self.h, event.h)
 
 proc fcQFontDialog_vtable_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFontDialogVTable](fcQFontDialog_vdata(self)[])
@@ -756,17 +832,11 @@ proc fcQFontDialog_vtable_callback_focusOutEvent(self: pointer, event: pointer):
   let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusOutEvent(self, slotval1)
 
-proc QFontDialogenterEvent*(self: gen_qfontdialog_types.QFontDialog, event: gen_qevent_types.QEnterEvent): void =
-  fcQFontDialog_virtualbase_enterEvent(self.h, event.h)
-
 proc fcQFontDialog_vtable_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFontDialogVTable](fcQFontDialog_vdata(self)[])
   let self = QFontDialog(h: self)
   let slotval1 = gen_qevent_types.QEnterEvent(h: event, owned: false)
   vtbl[].enterEvent(self, slotval1)
-
-proc QFontDialogleaveEvent*(self: gen_qfontdialog_types.QFontDialog, event: gen_qcoreevent_types.QEvent): void =
-  fcQFontDialog_virtualbase_leaveEvent(self.h, event.h)
 
 proc fcQFontDialog_vtable_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFontDialogVTable](fcQFontDialog_vdata(self)[])
@@ -774,17 +844,11 @@ proc fcQFontDialog_vtable_callback_leaveEvent(self: pointer, event: pointer): vo
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].leaveEvent(self, slotval1)
 
-proc QFontDialogpaintEvent*(self: gen_qfontdialog_types.QFontDialog, event: gen_qevent_types.QPaintEvent): void =
-  fcQFontDialog_virtualbase_paintEvent(self.h, event.h)
-
 proc fcQFontDialog_vtable_callback_paintEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFontDialogVTable](fcQFontDialog_vdata(self)[])
   let self = QFontDialog(h: self)
   let slotval1 = gen_qevent_types.QPaintEvent(h: event, owned: false)
   vtbl[].paintEvent(self, slotval1)
-
-proc QFontDialogmoveEvent*(self: gen_qfontdialog_types.QFontDialog, event: gen_qevent_types.QMoveEvent): void =
-  fcQFontDialog_virtualbase_moveEvent(self.h, event.h)
 
 proc fcQFontDialog_vtable_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFontDialogVTable](fcQFontDialog_vdata(self)[])
@@ -792,17 +856,11 @@ proc fcQFontDialog_vtable_callback_moveEvent(self: pointer, event: pointer): voi
   let slotval1 = gen_qevent_types.QMoveEvent(h: event, owned: false)
   vtbl[].moveEvent(self, slotval1)
 
-proc QFontDialogtabletEvent*(self: gen_qfontdialog_types.QFontDialog, event: gen_qevent_types.QTabletEvent): void =
-  fcQFontDialog_virtualbase_tabletEvent(self.h, event.h)
-
 proc fcQFontDialog_vtable_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFontDialogVTable](fcQFontDialog_vdata(self)[])
   let self = QFontDialog(h: self)
   let slotval1 = gen_qevent_types.QTabletEvent(h: event, owned: false)
   vtbl[].tabletEvent(self, slotval1)
-
-proc QFontDialogactionEvent*(self: gen_qfontdialog_types.QFontDialog, event: gen_qevent_types.QActionEvent): void =
-  fcQFontDialog_virtualbase_actionEvent(self.h, event.h)
 
 proc fcQFontDialog_vtable_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFontDialogVTable](fcQFontDialog_vdata(self)[])
@@ -810,17 +868,11 @@ proc fcQFontDialog_vtable_callback_actionEvent(self: pointer, event: pointer): v
   let slotval1 = gen_qevent_types.QActionEvent(h: event, owned: false)
   vtbl[].actionEvent(self, slotval1)
 
-proc QFontDialogdragEnterEvent*(self: gen_qfontdialog_types.QFontDialog, event: gen_qevent_types.QDragEnterEvent): void =
-  fcQFontDialog_virtualbase_dragEnterEvent(self.h, event.h)
-
 proc fcQFontDialog_vtable_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFontDialogVTable](fcQFontDialog_vdata(self)[])
   let self = QFontDialog(h: self)
   let slotval1 = gen_qevent_types.QDragEnterEvent(h: event, owned: false)
   vtbl[].dragEnterEvent(self, slotval1)
-
-proc QFontDialogdragMoveEvent*(self: gen_qfontdialog_types.QFontDialog, event: gen_qevent_types.QDragMoveEvent): void =
-  fcQFontDialog_virtualbase_dragMoveEvent(self.h, event.h)
 
 proc fcQFontDialog_vtable_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFontDialogVTable](fcQFontDialog_vdata(self)[])
@@ -828,17 +880,11 @@ proc fcQFontDialog_vtable_callback_dragMoveEvent(self: pointer, event: pointer):
   let slotval1 = gen_qevent_types.QDragMoveEvent(h: event, owned: false)
   vtbl[].dragMoveEvent(self, slotval1)
 
-proc QFontDialogdragLeaveEvent*(self: gen_qfontdialog_types.QFontDialog, event: gen_qevent_types.QDragLeaveEvent): void =
-  fcQFontDialog_virtualbase_dragLeaveEvent(self.h, event.h)
-
 proc fcQFontDialog_vtable_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFontDialogVTable](fcQFontDialog_vdata(self)[])
   let self = QFontDialog(h: self)
   let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event, owned: false)
   vtbl[].dragLeaveEvent(self, slotval1)
-
-proc QFontDialogdropEvent*(self: gen_qfontdialog_types.QFontDialog, event: gen_qevent_types.QDropEvent): void =
-  fcQFontDialog_virtualbase_dropEvent(self.h, event.h)
 
 proc fcQFontDialog_vtable_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFontDialogVTable](fcQFontDialog_vdata(self)[])
@@ -846,17 +892,11 @@ proc fcQFontDialog_vtable_callback_dropEvent(self: pointer, event: pointer): voi
   let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
   vtbl[].dropEvent(self, slotval1)
 
-proc QFontDialoghideEvent*(self: gen_qfontdialog_types.QFontDialog, event: gen_qevent_types.QHideEvent): void =
-  fcQFontDialog_virtualbase_hideEvent(self.h, event.h)
-
 proc fcQFontDialog_vtable_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFontDialogVTable](fcQFontDialog_vdata(self)[])
   let self = QFontDialog(h: self)
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   vtbl[].hideEvent(self, slotval1)
-
-proc QFontDialognativeEvent*(self: gen_qfontdialog_types.QFontDialog, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool =
-  fcQFontDialog_virtualbase_nativeEvent(self.h, struct_miqt_string(data: if len(eventType) > 0: addr eventType[0] else: nil, len: csize_t(len(eventType))), message, resultVal)
 
 proc fcQFontDialog_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
   let vtbl = cast[ptr QFontDialogVTable](fcQFontDialog_vdata(self)[])
@@ -870,9 +910,6 @@ proc fcQFontDialog_vtable_callback_nativeEvent(self: pointer, eventType: struct_
   var virtualReturn = vtbl[].nativeEvent(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QFontDialogmetric*(self: gen_qfontdialog_types.QFontDialog, param1: cint): cint =
-  fcQFontDialog_virtualbase_metric(self.h, cint(param1))
-
 proc fcQFontDialog_vtable_callback_metric(self: pointer, param1: cint): cint {.cdecl.} =
   let vtbl = cast[ptr QFontDialogVTable](fcQFontDialog_vdata(self)[])
   let self = QFontDialog(h: self)
@@ -880,17 +917,11 @@ proc fcQFontDialog_vtable_callback_metric(self: pointer, param1: cint): cint {.c
   var virtualReturn = vtbl[].metric(self, slotval1)
   virtualReturn
 
-proc QFontDialoginitPainter*(self: gen_qfontdialog_types.QFontDialog, painter: gen_qpainter_types.QPainter): void =
-  fcQFontDialog_virtualbase_initPainter(self.h, painter.h)
-
 proc fcQFontDialog_vtable_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFontDialogVTable](fcQFontDialog_vdata(self)[])
   let self = QFontDialog(h: self)
   let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
   vtbl[].initPainter(self, slotval1)
-
-proc QFontDialogredirected*(self: gen_qfontdialog_types.QFontDialog, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice =
-  gen_qpaintdevice_types.QPaintDevice(h: fcQFontDialog_virtualbase_redirected(self.h, offset.h), owned: false)
 
 proc fcQFontDialog_vtable_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QFontDialogVTable](fcQFontDialog_vdata(self)[])
@@ -902,9 +933,6 @@ proc fcQFontDialog_vtable_callback_redirected(self: pointer, offset: pointer): p
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QFontDialogsharedPainter*(self: gen_qfontdialog_types.QFontDialog): gen_qpainter_types.QPainter =
-  gen_qpainter_types.QPainter(h: fcQFontDialog_virtualbase_sharedPainter(self.h), owned: false)
-
 proc fcQFontDialog_vtable_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QFontDialogVTable](fcQFontDialog_vdata(self)[])
   let self = QFontDialog(h: self)
@@ -914,17 +942,11 @@ proc fcQFontDialog_vtable_callback_sharedPainter(self: pointer): pointer {.cdecl
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QFontDialoginputMethodEvent*(self: gen_qfontdialog_types.QFontDialog, param1: gen_qevent_types.QInputMethodEvent): void =
-  fcQFontDialog_virtualbase_inputMethodEvent(self.h, param1.h)
-
 proc fcQFontDialog_vtable_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFontDialogVTable](fcQFontDialog_vdata(self)[])
   let self = QFontDialog(h: self)
   let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1, owned: false)
   vtbl[].inputMethodEvent(self, slotval1)
-
-proc QFontDialoginputMethodQuery*(self: gen_qfontdialog_types.QFontDialog, param1: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQFontDialog_virtualbase_inputMethodQuery(self.h, cint(param1)), owned: true)
 
 proc fcQFontDialog_vtable_callback_inputMethodQuery(self: pointer, param1: cint): pointer {.cdecl.} =
   let vtbl = cast[ptr QFontDialogVTable](fcQFontDialog_vdata(self)[])
@@ -936,9 +958,6 @@ proc fcQFontDialog_vtable_callback_inputMethodQuery(self: pointer, param1: cint)
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QFontDialogfocusNextPrevChild*(self: gen_qfontdialog_types.QFontDialog, next: bool): bool =
-  fcQFontDialog_virtualbase_focusNextPrevChild(self.h, next)
-
 proc fcQFontDialog_vtable_callback_focusNextPrevChild(self: pointer, next: bool): bool {.cdecl.} =
   let vtbl = cast[ptr QFontDialogVTable](fcQFontDialog_vdata(self)[])
   let self = QFontDialog(h: self)
@@ -946,17 +965,11 @@ proc fcQFontDialog_vtable_callback_focusNextPrevChild(self: pointer, next: bool)
   var virtualReturn = vtbl[].focusNextPrevChild(self, slotval1)
   virtualReturn
 
-proc QFontDialogtimerEvent*(self: gen_qfontdialog_types.QFontDialog, event: gen_qcoreevent_types.QTimerEvent): void =
-  fcQFontDialog_virtualbase_timerEvent(self.h, event.h)
-
 proc fcQFontDialog_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFontDialogVTable](fcQFontDialog_vdata(self)[])
   let self = QFontDialog(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
-
-proc QFontDialogchildEvent*(self: gen_qfontdialog_types.QFontDialog, event: gen_qcoreevent_types.QChildEvent): void =
-  fcQFontDialog_virtualbase_childEvent(self.h, event.h)
 
 proc fcQFontDialog_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFontDialogVTable](fcQFontDialog_vdata(self)[])
@@ -964,26 +977,17 @@ proc fcQFontDialog_vtable_callback_childEvent(self: pointer, event: pointer): vo
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
-proc QFontDialogcustomEvent*(self: gen_qfontdialog_types.QFontDialog, event: gen_qcoreevent_types.QEvent): void =
-  fcQFontDialog_virtualbase_customEvent(self.h, event.h)
-
 proc fcQFontDialog_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFontDialogVTable](fcQFontDialog_vdata(self)[])
   let self = QFontDialog(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
-proc QFontDialogconnectNotify*(self: gen_qfontdialog_types.QFontDialog, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQFontDialog_virtualbase_connectNotify(self.h, signal.h)
-
 proc fcQFontDialog_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFontDialogVTable](fcQFontDialog_vdata(self)[])
   let self = QFontDialog(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
-
-proc QFontDialogdisconnectNotify*(self: gen_qfontdialog_types.QFontDialog, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQFontDialog_virtualbase_disconnectNotify(self.h, signal.h)
 
 proc fcQFontDialog_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFontDialogVTable](fcQFontDialog_vdata(self)[])
@@ -993,23 +997,129 @@ proc fcQFontDialog_vtable_callback_disconnectNotify(self: pointer, signal: point
 
 type VirtualQFontDialog* {.inheritable.} = ref object of QFontDialog
   vtbl*: cQFontDialogVTable
+
 method metaObject*(self: VirtualQFontDialog): gen_qobjectdefs_types.QMetaObject {.base.} =
   QFontDialogmetaObject(self[])
+method metacast*(self: VirtualQFontDialog, param1: cstring): pointer {.base.} =
+  QFontDialogmetacast(self[], param1)
+method metacall*(self: VirtualQFontDialog, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QFontDialogmetacall(self[], param1, param2, param3)
+method setVisible*(self: VirtualQFontDialog, visible: bool): void {.base.} =
+  QFontDialogsetVisible(self[], visible)
+method changeEvent*(self: VirtualQFontDialog, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QFontDialogchangeEvent(self[], event)
+method done*(self: VirtualQFontDialog, resultVal: cint): void {.base.} =
+  QFontDialogdone(self[], resultVal)
+method eventFilter*(self: VirtualQFontDialog, objectVal: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QFontDialogeventFilter(self[], objectVal, event)
+method sizeHint*(self: VirtualQFontDialog): gen_qsize_types.QSize {.base.} =
+  QFontDialogsizeHint(self[])
+method minimumSizeHint*(self: VirtualQFontDialog): gen_qsize_types.QSize {.base.} =
+  QFontDialogminimumSizeHint(self[])
+method open*(self: VirtualQFontDialog): void {.base.} =
+  QFontDialogopen(self[])
+method exec*(self: VirtualQFontDialog): cint {.base.} =
+  QFontDialogexec(self[])
+method accept*(self: VirtualQFontDialog): void {.base.} =
+  QFontDialogaccept(self[])
+method reject*(self: VirtualQFontDialog): void {.base.} =
+  QFontDialogreject(self[])
+method keyPressEvent*(self: VirtualQFontDialog, param1: gen_qevent_types.QKeyEvent): void {.base.} =
+  QFontDialogkeyPressEvent(self[], param1)
+method closeEvent*(self: VirtualQFontDialog, param1: gen_qevent_types.QCloseEvent): void {.base.} =
+  QFontDialogcloseEvent(self[], param1)
+method showEvent*(self: VirtualQFontDialog, param1: gen_qevent_types.QShowEvent): void {.base.} =
+  QFontDialogshowEvent(self[], param1)
+method resizeEvent*(self: VirtualQFontDialog, param1: gen_qevent_types.QResizeEvent): void {.base.} =
+  QFontDialogresizeEvent(self[], param1)
+method contextMenuEvent*(self: VirtualQFontDialog, param1: gen_qevent_types.QContextMenuEvent): void {.base.} =
+  QFontDialogcontextMenuEvent(self[], param1)
+method devType*(self: VirtualQFontDialog): cint {.base.} =
+  QFontDialogdevType(self[])
+method heightForWidth*(self: VirtualQFontDialog, param1: cint): cint {.base.} =
+  QFontDialogheightForWidth(self[], param1)
+method hasHeightForWidth*(self: VirtualQFontDialog): bool {.base.} =
+  QFontDialoghasHeightForWidth(self[])
+method paintEngine*(self: VirtualQFontDialog): gen_qpaintengine_types.QPaintEngine {.base.} =
+  QFontDialogpaintEngine(self[])
+method event*(self: VirtualQFontDialog, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QFontDialogevent(self[], event)
+method mousePressEvent*(self: VirtualQFontDialog, event: gen_qevent_types.QMouseEvent): void {.base.} =
+  QFontDialogmousePressEvent(self[], event)
+method mouseReleaseEvent*(self: VirtualQFontDialog, event: gen_qevent_types.QMouseEvent): void {.base.} =
+  QFontDialogmouseReleaseEvent(self[], event)
+method mouseDoubleClickEvent*(self: VirtualQFontDialog, event: gen_qevent_types.QMouseEvent): void {.base.} =
+  QFontDialogmouseDoubleClickEvent(self[], event)
+method mouseMoveEvent*(self: VirtualQFontDialog, event: gen_qevent_types.QMouseEvent): void {.base.} =
+  QFontDialogmouseMoveEvent(self[], event)
+method wheelEvent*(self: VirtualQFontDialog, event: gen_qevent_types.QWheelEvent): void {.base.} =
+  QFontDialogwheelEvent(self[], event)
+method keyReleaseEvent*(self: VirtualQFontDialog, event: gen_qevent_types.QKeyEvent): void {.base.} =
+  QFontDialogkeyReleaseEvent(self[], event)
+method focusInEvent*(self: VirtualQFontDialog, event: gen_qevent_types.QFocusEvent): void {.base.} =
+  QFontDialogfocusInEvent(self[], event)
+method focusOutEvent*(self: VirtualQFontDialog, event: gen_qevent_types.QFocusEvent): void {.base.} =
+  QFontDialogfocusOutEvent(self[], event)
+method enterEvent*(self: VirtualQFontDialog, event: gen_qevent_types.QEnterEvent): void {.base.} =
+  QFontDialogenterEvent(self[], event)
+method leaveEvent*(self: VirtualQFontDialog, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QFontDialogleaveEvent(self[], event)
+method paintEvent*(self: VirtualQFontDialog, event: gen_qevent_types.QPaintEvent): void {.base.} =
+  QFontDialogpaintEvent(self[], event)
+method moveEvent*(self: VirtualQFontDialog, event: gen_qevent_types.QMoveEvent): void {.base.} =
+  QFontDialogmoveEvent(self[], event)
+method tabletEvent*(self: VirtualQFontDialog, event: gen_qevent_types.QTabletEvent): void {.base.} =
+  QFontDialogtabletEvent(self[], event)
+method actionEvent*(self: VirtualQFontDialog, event: gen_qevent_types.QActionEvent): void {.base.} =
+  QFontDialogactionEvent(self[], event)
+method dragEnterEvent*(self: VirtualQFontDialog, event: gen_qevent_types.QDragEnterEvent): void {.base.} =
+  QFontDialogdragEnterEvent(self[], event)
+method dragMoveEvent*(self: VirtualQFontDialog, event: gen_qevent_types.QDragMoveEvent): void {.base.} =
+  QFontDialogdragMoveEvent(self[], event)
+method dragLeaveEvent*(self: VirtualQFontDialog, event: gen_qevent_types.QDragLeaveEvent): void {.base.} =
+  QFontDialogdragLeaveEvent(self[], event)
+method dropEvent*(self: VirtualQFontDialog, event: gen_qevent_types.QDropEvent): void {.base.} =
+  QFontDialogdropEvent(self[], event)
+method hideEvent*(self: VirtualQFontDialog, event: gen_qevent_types.QHideEvent): void {.base.} =
+  QFontDialoghideEvent(self[], event)
+method nativeEvent*(self: VirtualQFontDialog, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
+  QFontDialognativeEvent(self[], eventType, message, resultVal)
+method metric*(self: VirtualQFontDialog, param1: cint): cint {.base.} =
+  QFontDialogmetric(self[], param1)
+method initPainter*(self: VirtualQFontDialog, painter: gen_qpainter_types.QPainter): void {.base.} =
+  QFontDialoginitPainter(self[], painter)
+method redirected*(self: VirtualQFontDialog, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.base.} =
+  QFontDialogredirected(self[], offset)
+method sharedPainter*(self: VirtualQFontDialog): gen_qpainter_types.QPainter {.base.} =
+  QFontDialogsharedPainter(self[])
+method inputMethodEvent*(self: VirtualQFontDialog, param1: gen_qevent_types.QInputMethodEvent): void {.base.} =
+  QFontDialoginputMethodEvent(self[], param1)
+method inputMethodQuery*(self: VirtualQFontDialog, param1: cint): gen_qvariant_types.QVariant {.base.} =
+  QFontDialoginputMethodQuery(self[], param1)
+method focusNextPrevChild*(self: VirtualQFontDialog, next: bool): bool {.base.} =
+  QFontDialogfocusNextPrevChild(self[], next)
+method timerEvent*(self: VirtualQFontDialog, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QFontDialogtimerEvent(self[], event)
+method childEvent*(self: VirtualQFontDialog, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QFontDialogchildEvent(self[], event)
+method customEvent*(self: VirtualQFontDialog, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QFontDialogcustomEvent(self[], event)
+method connectNotify*(self: VirtualQFontDialog, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QFontDialogconnectNotify(self[], signal)
+method disconnectNotify*(self: VirtualQFontDialog, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QFontDialogdisconnectNotify(self[], signal)
+
 proc fcQFontDialog_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQFontDialog](fcQFontDialog_vdata(self)[])
   var virtualReturn = inst.metaObject()
   virtualReturn.h
 
-method metacast*(self: VirtualQFontDialog, param1: cstring): pointer {.base.} =
-  QFontDialogmetacast(self[], param1)
 proc fcQFontDialog_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQFontDialog](fcQFontDialog_vdata(self)[])
   let slotval1 = (param1)
   var virtualReturn = inst.metacast(slotval1)
   virtualReturn
 
-method metacall*(self: VirtualQFontDialog, param1: cint, param2: cint, param3: pointer): cint {.base.} =
-  QFontDialogmetacall(self[], param1, param2, param3)
 proc fcQFontDialog_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQFontDialog](fcQFontDialog_vdata(self)[])
   let slotval1 = cint(param1)
@@ -1018,29 +1128,21 @@ proc fcQFontDialog_method_callback_metacall(self: pointer, param1: cint, param2:
   var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
-method setVisible*(self: VirtualQFontDialog, visible: bool): void {.base.} =
-  QFontDialogsetVisible(self[], visible)
 proc fcQFontDialog_method_callback_setVisible(self: pointer, visible: bool): void {.cdecl.} =
   let inst = cast[VirtualQFontDialog](fcQFontDialog_vdata(self)[])
   let slotval1 = visible
   inst.setVisible(slotval1)
 
-method changeEvent*(self: VirtualQFontDialog, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QFontDialogchangeEvent(self[], event)
 proc fcQFontDialog_method_callback_changeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFontDialog](fcQFontDialog_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.changeEvent(slotval1)
 
-method done*(self: VirtualQFontDialog, resultVal: cint): void {.base.} =
-  QFontDialogdone(self[], resultVal)
 proc fcQFontDialog_method_callback_done(self: pointer, resultVal: cint): void {.cdecl.} =
   let inst = cast[VirtualQFontDialog](fcQFontDialog_vdata(self)[])
   let slotval1 = resultVal
   inst.done(slotval1)
 
-method eventFilter*(self: VirtualQFontDialog, objectVal: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QFontDialogeventFilter(self[], objectVal, event)
 proc fcQFontDialog_method_callback_eventFilter(self: pointer, objectVal: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQFontDialog](fcQFontDialog_vdata(self)[])
   let slotval1 = gen_qobject_types.QObject(h: objectVal, owned: false)
@@ -1048,252 +1150,180 @@ proc fcQFontDialog_method_callback_eventFilter(self: pointer, objectVal: pointer
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
-method sizeHint*(self: VirtualQFontDialog): gen_qsize_types.QSize {.base.} =
-  QFontDialogsizeHint(self[])
 proc fcQFontDialog_method_callback_sizeHint(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQFontDialog](fcQFontDialog_vdata(self)[])
   var virtualReturn = inst.sizeHint()
   virtualReturn.h
 
-method minimumSizeHint*(self: VirtualQFontDialog): gen_qsize_types.QSize {.base.} =
-  QFontDialogminimumSizeHint(self[])
 proc fcQFontDialog_method_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQFontDialog](fcQFontDialog_vdata(self)[])
   var virtualReturn = inst.minimumSizeHint()
   virtualReturn.h
 
-method open*(self: VirtualQFontDialog): void {.base.} =
-  QFontDialogopen(self[])
 proc fcQFontDialog_method_callback_open(self: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFontDialog](fcQFontDialog_vdata(self)[])
   inst.open()
 
-method exec*(self: VirtualQFontDialog): cint {.base.} =
-  QFontDialogexec(self[])
 proc fcQFontDialog_method_callback_exec(self: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQFontDialog](fcQFontDialog_vdata(self)[])
   var virtualReturn = inst.exec()
   virtualReturn
 
-method accept*(self: VirtualQFontDialog): void {.base.} =
-  QFontDialogaccept(self[])
 proc fcQFontDialog_method_callback_accept(self: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFontDialog](fcQFontDialog_vdata(self)[])
   inst.accept()
 
-method reject*(self: VirtualQFontDialog): void {.base.} =
-  QFontDialogreject(self[])
 proc fcQFontDialog_method_callback_reject(self: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFontDialog](fcQFontDialog_vdata(self)[])
   inst.reject()
 
-method keyPressEvent*(self: VirtualQFontDialog, param1: gen_qevent_types.QKeyEvent): void {.base.} =
-  QFontDialogkeyPressEvent(self[], param1)
 proc fcQFontDialog_method_callback_keyPressEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFontDialog](fcQFontDialog_vdata(self)[])
   let slotval1 = gen_qevent_types.QKeyEvent(h: param1, owned: false)
   inst.keyPressEvent(slotval1)
 
-method closeEvent*(self: VirtualQFontDialog, param1: gen_qevent_types.QCloseEvent): void {.base.} =
-  QFontDialogcloseEvent(self[], param1)
 proc fcQFontDialog_method_callback_closeEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFontDialog](fcQFontDialog_vdata(self)[])
   let slotval1 = gen_qevent_types.QCloseEvent(h: param1, owned: false)
   inst.closeEvent(slotval1)
 
-method showEvent*(self: VirtualQFontDialog, param1: gen_qevent_types.QShowEvent): void {.base.} =
-  QFontDialogshowEvent(self[], param1)
 proc fcQFontDialog_method_callback_showEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFontDialog](fcQFontDialog_vdata(self)[])
   let slotval1 = gen_qevent_types.QShowEvent(h: param1, owned: false)
   inst.showEvent(slotval1)
 
-method resizeEvent*(self: VirtualQFontDialog, param1: gen_qevent_types.QResizeEvent): void {.base.} =
-  QFontDialogresizeEvent(self[], param1)
 proc fcQFontDialog_method_callback_resizeEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFontDialog](fcQFontDialog_vdata(self)[])
   let slotval1 = gen_qevent_types.QResizeEvent(h: param1, owned: false)
   inst.resizeEvent(slotval1)
 
-method contextMenuEvent*(self: VirtualQFontDialog, param1: gen_qevent_types.QContextMenuEvent): void {.base.} =
-  QFontDialogcontextMenuEvent(self[], param1)
 proc fcQFontDialog_method_callback_contextMenuEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFontDialog](fcQFontDialog_vdata(self)[])
   let slotval1 = gen_qevent_types.QContextMenuEvent(h: param1, owned: false)
   inst.contextMenuEvent(slotval1)
 
-method devType*(self: VirtualQFontDialog): cint {.base.} =
-  QFontDialogdevType(self[])
 proc fcQFontDialog_method_callback_devType(self: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQFontDialog](fcQFontDialog_vdata(self)[])
   var virtualReturn = inst.devType()
   virtualReturn
 
-method heightForWidth*(self: VirtualQFontDialog, param1: cint): cint {.base.} =
-  QFontDialogheightForWidth(self[], param1)
 proc fcQFontDialog_method_callback_heightForWidth(self: pointer, param1: cint): cint {.cdecl.} =
   let inst = cast[VirtualQFontDialog](fcQFontDialog_vdata(self)[])
   let slotval1 = param1
   var virtualReturn = inst.heightForWidth(slotval1)
   virtualReturn
 
-method hasHeightForWidth*(self: VirtualQFontDialog): bool {.base.} =
-  QFontDialoghasHeightForWidth(self[])
 proc fcQFontDialog_method_callback_hasHeightForWidth(self: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQFontDialog](fcQFontDialog_vdata(self)[])
   var virtualReturn = inst.hasHeightForWidth()
   virtualReturn
 
-method paintEngine*(self: VirtualQFontDialog): gen_qpaintengine_types.QPaintEngine {.base.} =
-  QFontDialogpaintEngine(self[])
 proc fcQFontDialog_method_callback_paintEngine(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQFontDialog](fcQFontDialog_vdata(self)[])
   var virtualReturn = inst.paintEngine()
   virtualReturn.h
 
-method event*(self: VirtualQFontDialog, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QFontDialogevent(self[], event)
 proc fcQFontDialog_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQFontDialog](fcQFontDialog_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
-method mousePressEvent*(self: VirtualQFontDialog, event: gen_qevent_types.QMouseEvent): void {.base.} =
-  QFontDialogmousePressEvent(self[], event)
 proc fcQFontDialog_method_callback_mousePressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFontDialog](fcQFontDialog_vdata(self)[])
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mousePressEvent(slotval1)
 
-method mouseReleaseEvent*(self: VirtualQFontDialog, event: gen_qevent_types.QMouseEvent): void {.base.} =
-  QFontDialogmouseReleaseEvent(self[], event)
 proc fcQFontDialog_method_callback_mouseReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFontDialog](fcQFontDialog_vdata(self)[])
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mouseReleaseEvent(slotval1)
 
-method mouseDoubleClickEvent*(self: VirtualQFontDialog, event: gen_qevent_types.QMouseEvent): void {.base.} =
-  QFontDialogmouseDoubleClickEvent(self[], event)
 proc fcQFontDialog_method_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFontDialog](fcQFontDialog_vdata(self)[])
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mouseDoubleClickEvent(slotval1)
 
-method mouseMoveEvent*(self: VirtualQFontDialog, event: gen_qevent_types.QMouseEvent): void {.base.} =
-  QFontDialogmouseMoveEvent(self[], event)
 proc fcQFontDialog_method_callback_mouseMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFontDialog](fcQFontDialog_vdata(self)[])
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mouseMoveEvent(slotval1)
 
-method wheelEvent*(self: VirtualQFontDialog, event: gen_qevent_types.QWheelEvent): void {.base.} =
-  QFontDialogwheelEvent(self[], event)
 proc fcQFontDialog_method_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFontDialog](fcQFontDialog_vdata(self)[])
   let slotval1 = gen_qevent_types.QWheelEvent(h: event, owned: false)
   inst.wheelEvent(slotval1)
 
-method keyReleaseEvent*(self: VirtualQFontDialog, event: gen_qevent_types.QKeyEvent): void {.base.} =
-  QFontDialogkeyReleaseEvent(self[], event)
 proc fcQFontDialog_method_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFontDialog](fcQFontDialog_vdata(self)[])
   let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   inst.keyReleaseEvent(slotval1)
 
-method focusInEvent*(self: VirtualQFontDialog, event: gen_qevent_types.QFocusEvent): void {.base.} =
-  QFontDialogfocusInEvent(self[], event)
 proc fcQFontDialog_method_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFontDialog](fcQFontDialog_vdata(self)[])
   let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   inst.focusInEvent(slotval1)
 
-method focusOutEvent*(self: VirtualQFontDialog, event: gen_qevent_types.QFocusEvent): void {.base.} =
-  QFontDialogfocusOutEvent(self[], event)
 proc fcQFontDialog_method_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFontDialog](fcQFontDialog_vdata(self)[])
   let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   inst.focusOutEvent(slotval1)
 
-method enterEvent*(self: VirtualQFontDialog, event: gen_qevent_types.QEnterEvent): void {.base.} =
-  QFontDialogenterEvent(self[], event)
 proc fcQFontDialog_method_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFontDialog](fcQFontDialog_vdata(self)[])
   let slotval1 = gen_qevent_types.QEnterEvent(h: event, owned: false)
   inst.enterEvent(slotval1)
 
-method leaveEvent*(self: VirtualQFontDialog, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QFontDialogleaveEvent(self[], event)
 proc fcQFontDialog_method_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFontDialog](fcQFontDialog_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.leaveEvent(slotval1)
 
-method paintEvent*(self: VirtualQFontDialog, event: gen_qevent_types.QPaintEvent): void {.base.} =
-  QFontDialogpaintEvent(self[], event)
 proc fcQFontDialog_method_callback_paintEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFontDialog](fcQFontDialog_vdata(self)[])
   let slotval1 = gen_qevent_types.QPaintEvent(h: event, owned: false)
   inst.paintEvent(slotval1)
 
-method moveEvent*(self: VirtualQFontDialog, event: gen_qevent_types.QMoveEvent): void {.base.} =
-  QFontDialogmoveEvent(self[], event)
 proc fcQFontDialog_method_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFontDialog](fcQFontDialog_vdata(self)[])
   let slotval1 = gen_qevent_types.QMoveEvent(h: event, owned: false)
   inst.moveEvent(slotval1)
 
-method tabletEvent*(self: VirtualQFontDialog, event: gen_qevent_types.QTabletEvent): void {.base.} =
-  QFontDialogtabletEvent(self[], event)
 proc fcQFontDialog_method_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFontDialog](fcQFontDialog_vdata(self)[])
   let slotval1 = gen_qevent_types.QTabletEvent(h: event, owned: false)
   inst.tabletEvent(slotval1)
 
-method actionEvent*(self: VirtualQFontDialog, event: gen_qevent_types.QActionEvent): void {.base.} =
-  QFontDialogactionEvent(self[], event)
 proc fcQFontDialog_method_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFontDialog](fcQFontDialog_vdata(self)[])
   let slotval1 = gen_qevent_types.QActionEvent(h: event, owned: false)
   inst.actionEvent(slotval1)
 
-method dragEnterEvent*(self: VirtualQFontDialog, event: gen_qevent_types.QDragEnterEvent): void {.base.} =
-  QFontDialogdragEnterEvent(self[], event)
 proc fcQFontDialog_method_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFontDialog](fcQFontDialog_vdata(self)[])
   let slotval1 = gen_qevent_types.QDragEnterEvent(h: event, owned: false)
   inst.dragEnterEvent(slotval1)
 
-method dragMoveEvent*(self: VirtualQFontDialog, event: gen_qevent_types.QDragMoveEvent): void {.base.} =
-  QFontDialogdragMoveEvent(self[], event)
 proc fcQFontDialog_method_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFontDialog](fcQFontDialog_vdata(self)[])
   let slotval1 = gen_qevent_types.QDragMoveEvent(h: event, owned: false)
   inst.dragMoveEvent(slotval1)
 
-method dragLeaveEvent*(self: VirtualQFontDialog, event: gen_qevent_types.QDragLeaveEvent): void {.base.} =
-  QFontDialogdragLeaveEvent(self[], event)
 proc fcQFontDialog_method_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFontDialog](fcQFontDialog_vdata(self)[])
   let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event, owned: false)
   inst.dragLeaveEvent(slotval1)
 
-method dropEvent*(self: VirtualQFontDialog, event: gen_qevent_types.QDropEvent): void {.base.} =
-  QFontDialogdropEvent(self[], event)
 proc fcQFontDialog_method_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFontDialog](fcQFontDialog_vdata(self)[])
   let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
   inst.dropEvent(slotval1)
 
-method hideEvent*(self: VirtualQFontDialog, event: gen_qevent_types.QHideEvent): void {.base.} =
-  QFontDialoghideEvent(self[], event)
 proc fcQFontDialog_method_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFontDialog](fcQFontDialog_vdata(self)[])
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   inst.hideEvent(slotval1)
 
-method nativeEvent*(self: VirtualQFontDialog, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
-  QFontDialognativeEvent(self[], eventType, message, resultVal)
 proc fcQFontDialog_method_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
   let inst = cast[VirtualQFontDialog](fcQFontDialog_vdata(self)[])
   var veventType_bytearray = eventType
@@ -1305,93 +1335,70 @@ proc fcQFontDialog_method_callback_nativeEvent(self: pointer, eventType: struct_
   var virtualReturn = inst.nativeEvent(slotval1, slotval2, slotval3)
   virtualReturn
 
-method metric*(self: VirtualQFontDialog, param1: cint): cint {.base.} =
-  QFontDialogmetric(self[], param1)
 proc fcQFontDialog_method_callback_metric(self: pointer, param1: cint): cint {.cdecl.} =
   let inst = cast[VirtualQFontDialog](fcQFontDialog_vdata(self)[])
   let slotval1 = cint(param1)
   var virtualReturn = inst.metric(slotval1)
   virtualReturn
 
-method initPainter*(self: VirtualQFontDialog, painter: gen_qpainter_types.QPainter): void {.base.} =
-  QFontDialoginitPainter(self[], painter)
 proc fcQFontDialog_method_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFontDialog](fcQFontDialog_vdata(self)[])
   let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
   inst.initPainter(slotval1)
 
-method redirected*(self: VirtualQFontDialog, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.base.} =
-  QFontDialogredirected(self[], offset)
 proc fcQFontDialog_method_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQFontDialog](fcQFontDialog_vdata(self)[])
   let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
   var virtualReturn = inst.redirected(slotval1)
   virtualReturn.h
 
-method sharedPainter*(self: VirtualQFontDialog): gen_qpainter_types.QPainter {.base.} =
-  QFontDialogsharedPainter(self[])
 proc fcQFontDialog_method_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQFontDialog](fcQFontDialog_vdata(self)[])
   var virtualReturn = inst.sharedPainter()
   virtualReturn.h
 
-method inputMethodEvent*(self: VirtualQFontDialog, param1: gen_qevent_types.QInputMethodEvent): void {.base.} =
-  QFontDialoginputMethodEvent(self[], param1)
 proc fcQFontDialog_method_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFontDialog](fcQFontDialog_vdata(self)[])
   let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1, owned: false)
   inst.inputMethodEvent(slotval1)
 
-method inputMethodQuery*(self: VirtualQFontDialog, param1: cint): gen_qvariant_types.QVariant {.base.} =
-  QFontDialoginputMethodQuery(self[], param1)
 proc fcQFontDialog_method_callback_inputMethodQuery(self: pointer, param1: cint): pointer {.cdecl.} =
   let inst = cast[VirtualQFontDialog](fcQFontDialog_vdata(self)[])
   let slotval1 = cint(param1)
   var virtualReturn = inst.inputMethodQuery(slotval1)
   virtualReturn.h
 
-method focusNextPrevChild*(self: VirtualQFontDialog, next: bool): bool {.base.} =
-  QFontDialogfocusNextPrevChild(self[], next)
 proc fcQFontDialog_method_callback_focusNextPrevChild(self: pointer, next: bool): bool {.cdecl.} =
   let inst = cast[VirtualQFontDialog](fcQFontDialog_vdata(self)[])
   let slotval1 = next
   var virtualReturn = inst.focusNextPrevChild(slotval1)
   virtualReturn
 
-method timerEvent*(self: VirtualQFontDialog, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
-  QFontDialogtimerEvent(self[], event)
 proc fcQFontDialog_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFontDialog](fcQFontDialog_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
-method childEvent*(self: VirtualQFontDialog, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
-  QFontDialogchildEvent(self[], event)
 proc fcQFontDialog_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFontDialog](fcQFontDialog_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
-method customEvent*(self: VirtualQFontDialog, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QFontDialogcustomEvent(self[], event)
 proc fcQFontDialog_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFontDialog](fcQFontDialog_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
-method connectNotify*(self: VirtualQFontDialog, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QFontDialogconnectNotify(self[], signal)
 proc fcQFontDialog_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFontDialog](fcQFontDialog_vdata(self)[])
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
-method disconnectNotify*(self: VirtualQFontDialog, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QFontDialogdisconnectNotify(self[], signal)
 proc fcQFontDialog_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFontDialog](fcQFontDialog_vdata(self)[])
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
+
 
 proc adjustPosition*(self: gen_qfontdialog_types.QFontDialog, param1: gen_qwidget_types.QWidget): void =
   fcQFontDialog_protectedbase_adjustPosition(self.h, param1.h)

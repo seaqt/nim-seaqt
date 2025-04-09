@@ -103,6 +103,7 @@ proc fcQSystemTrayIcon_showMessage3(self: pointer, title: struct_miqt_string, ms
 proc fcQSystemTrayIcon_showMessage42(self: pointer, title: struct_miqt_string, msg: struct_miqt_string, icon: cint, msecs: cint): void {.importc: "QSystemTrayIcon_showMessage42".}
 proc fcQSystemTrayIcon_vdata(self: pointer): ptr pointer {.importc: "QSystemTrayIcon_vdata".}
 proc fvdata_cQSystemTrayIcon(self: pointer): pointer {.importc: "vdata_QSystemTrayIcon".}
+
 type cQSystemTrayIconVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -212,7 +213,7 @@ proc fcQSystemTrayIcon_slot_callback_activated_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QSystemTrayIconactivatedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onactivated*(self: gen_qsystemtrayicon_types.QSystemTrayIcon, slot: QSystemTrayIconactivatedSlot) =
+proc onActivated*(self: gen_qsystemtrayicon_types.QSystemTrayIcon, slot: QSystemTrayIconactivatedSlot) =
   var tmp = new QSystemTrayIconactivatedSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -230,7 +231,7 @@ proc fcQSystemTrayIcon_slot_callback_messageClicked_release(slot: int) {.cdecl.}
   let nimfunc = cast[ref QSystemTrayIconmessageClickedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onmessageClicked*(self: gen_qsystemtrayicon_types.QSystemTrayIcon, slot: QSystemTrayIconmessageClickedSlot) =
+proc onMessageClicked*(self: gen_qsystemtrayicon_types.QSystemTrayIcon, slot: QSystemTrayIconmessageClickedSlot) =
   var tmp = new QSystemTrayIconmessageClickedSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -267,6 +268,7 @@ type QSystemTrayIconchildEventProc* = proc(self: QSystemTrayIcon, event: gen_qco
 type QSystemTrayIconcustomEventProc* = proc(self: QSystemTrayIcon, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QSystemTrayIconconnectNotifyProc* = proc(self: QSystemTrayIcon, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QSystemTrayIcondisconnectNotifyProc* = proc(self: QSystemTrayIcon, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+
 type QSystemTrayIconVTable* {.inheritable, pure.} = object
   vtbl: cQSystemTrayIconVTable
   metaObject*: QSystemTrayIconmetaObjectProc
@@ -279,8 +281,37 @@ type QSystemTrayIconVTable* {.inheritable, pure.} = object
   customEvent*: QSystemTrayIconcustomEventProc
   connectNotify*: QSystemTrayIconconnectNotifyProc
   disconnectNotify*: QSystemTrayIcondisconnectNotifyProc
+
 proc QSystemTrayIconmetaObject*(self: gen_qsystemtrayicon_types.QSystemTrayIcon): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQSystemTrayIcon_virtualbase_metaObject(self.h), owned: false)
+
+proc QSystemTrayIconmetacast*(self: gen_qsystemtrayicon_types.QSystemTrayIcon, param1: cstring): pointer =
+  fcQSystemTrayIcon_virtualbase_metacast(self.h, param1)
+
+proc QSystemTrayIconmetacall*(self: gen_qsystemtrayicon_types.QSystemTrayIcon, param1: cint, param2: cint, param3: pointer): cint =
+  fcQSystemTrayIcon_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+proc QSystemTrayIconevent*(self: gen_qsystemtrayicon_types.QSystemTrayIcon, event: gen_qcoreevent_types.QEvent): bool =
+  fcQSystemTrayIcon_virtualbase_event(self.h, event.h)
+
+proc QSystemTrayIconeventFilter*(self: gen_qsystemtrayicon_types.QSystemTrayIcon, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
+  fcQSystemTrayIcon_virtualbase_eventFilter(self.h, watched.h, event.h)
+
+proc QSystemTrayIcontimerEvent*(self: gen_qsystemtrayicon_types.QSystemTrayIcon, event: gen_qcoreevent_types.QTimerEvent): void =
+  fcQSystemTrayIcon_virtualbase_timerEvent(self.h, event.h)
+
+proc QSystemTrayIconchildEvent*(self: gen_qsystemtrayicon_types.QSystemTrayIcon, event: gen_qcoreevent_types.QChildEvent): void =
+  fcQSystemTrayIcon_virtualbase_childEvent(self.h, event.h)
+
+proc QSystemTrayIconcustomEvent*(self: gen_qsystemtrayicon_types.QSystemTrayIcon, event: gen_qcoreevent_types.QEvent): void =
+  fcQSystemTrayIcon_virtualbase_customEvent(self.h, event.h)
+
+proc QSystemTrayIconconnectNotify*(self: gen_qsystemtrayicon_types.QSystemTrayIcon, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQSystemTrayIcon_virtualbase_connectNotify(self.h, signal.h)
+
+proc QSystemTrayIcondisconnectNotify*(self: gen_qsystemtrayicon_types.QSystemTrayIcon, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQSystemTrayIcon_virtualbase_disconnectNotify(self.h, signal.h)
+
 
 proc fcQSystemTrayIcon_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QSystemTrayIconVTable](fcQSystemTrayIcon_vdata(self)[])
@@ -291,18 +322,12 @@ proc fcQSystemTrayIcon_vtable_callback_metaObject(self: pointer): pointer {.cdec
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QSystemTrayIconmetacast*(self: gen_qsystemtrayicon_types.QSystemTrayIcon, param1: cstring): pointer =
-  fcQSystemTrayIcon_virtualbase_metacast(self.h, param1)
-
 proc fcQSystemTrayIcon_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QSystemTrayIconVTable](fcQSystemTrayIcon_vdata(self)[])
   let self = QSystemTrayIcon(h: self)
   let slotval1 = (param1)
   var virtualReturn = vtbl[].metacast(self, slotval1)
   virtualReturn
-
-proc QSystemTrayIconmetacall*(self: gen_qsystemtrayicon_types.QSystemTrayIcon, param1: cint, param2: cint, param3: pointer): cint =
-  fcQSystemTrayIcon_virtualbase_metacall(self.h, cint(param1), param2, param3)
 
 proc fcQSystemTrayIcon_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QSystemTrayIconVTable](fcQSystemTrayIcon_vdata(self)[])
@@ -313,18 +338,12 @@ proc fcQSystemTrayIcon_vtable_callback_metacall(self: pointer, param1: cint, par
   var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QSystemTrayIconevent*(self: gen_qsystemtrayicon_types.QSystemTrayIcon, event: gen_qcoreevent_types.QEvent): bool =
-  fcQSystemTrayIcon_virtualbase_event(self.h, event.h)
-
 proc fcQSystemTrayIcon_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QSystemTrayIconVTable](fcQSystemTrayIcon_vdata(self)[])
   let self = QSystemTrayIcon(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
-
-proc QSystemTrayIconeventFilter*(self: gen_qsystemtrayicon_types.QSystemTrayIcon, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
-  fcQSystemTrayIcon_virtualbase_eventFilter(self.h, watched.h, event.h)
 
 proc fcQSystemTrayIcon_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QSystemTrayIconVTable](fcQSystemTrayIcon_vdata(self)[])
@@ -334,17 +353,11 @@ proc fcQSystemTrayIcon_vtable_callback_eventFilter(self: pointer, watched: point
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
-proc QSystemTrayIcontimerEvent*(self: gen_qsystemtrayicon_types.QSystemTrayIcon, event: gen_qcoreevent_types.QTimerEvent): void =
-  fcQSystemTrayIcon_virtualbase_timerEvent(self.h, event.h)
-
 proc fcQSystemTrayIcon_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSystemTrayIconVTable](fcQSystemTrayIcon_vdata(self)[])
   let self = QSystemTrayIcon(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
-
-proc QSystemTrayIconchildEvent*(self: gen_qsystemtrayicon_types.QSystemTrayIcon, event: gen_qcoreevent_types.QChildEvent): void =
-  fcQSystemTrayIcon_virtualbase_childEvent(self.h, event.h)
 
 proc fcQSystemTrayIcon_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSystemTrayIconVTable](fcQSystemTrayIcon_vdata(self)[])
@@ -352,26 +365,17 @@ proc fcQSystemTrayIcon_vtable_callback_childEvent(self: pointer, event: pointer)
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
-proc QSystemTrayIconcustomEvent*(self: gen_qsystemtrayicon_types.QSystemTrayIcon, event: gen_qcoreevent_types.QEvent): void =
-  fcQSystemTrayIcon_virtualbase_customEvent(self.h, event.h)
-
 proc fcQSystemTrayIcon_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSystemTrayIconVTable](fcQSystemTrayIcon_vdata(self)[])
   let self = QSystemTrayIcon(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
-proc QSystemTrayIconconnectNotify*(self: gen_qsystemtrayicon_types.QSystemTrayIcon, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQSystemTrayIcon_virtualbase_connectNotify(self.h, signal.h)
-
 proc fcQSystemTrayIcon_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSystemTrayIconVTable](fcQSystemTrayIcon_vdata(self)[])
   let self = QSystemTrayIcon(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
-
-proc QSystemTrayIcondisconnectNotify*(self: gen_qsystemtrayicon_types.QSystemTrayIcon, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQSystemTrayIcon_virtualbase_disconnectNotify(self.h, signal.h)
 
 proc fcQSystemTrayIcon_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSystemTrayIconVTable](fcQSystemTrayIcon_vdata(self)[])
@@ -381,23 +385,39 @@ proc fcQSystemTrayIcon_vtable_callback_disconnectNotify(self: pointer, signal: p
 
 type VirtualQSystemTrayIcon* {.inheritable.} = ref object of QSystemTrayIcon
   vtbl*: cQSystemTrayIconVTable
+
 method metaObject*(self: VirtualQSystemTrayIcon): gen_qobjectdefs_types.QMetaObject {.base.} =
   QSystemTrayIconmetaObject(self[])
+method metacast*(self: VirtualQSystemTrayIcon, param1: cstring): pointer {.base.} =
+  QSystemTrayIconmetacast(self[], param1)
+method metacall*(self: VirtualQSystemTrayIcon, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QSystemTrayIconmetacall(self[], param1, param2, param3)
+method event*(self: VirtualQSystemTrayIcon, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QSystemTrayIconevent(self[], event)
+method eventFilter*(self: VirtualQSystemTrayIcon, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QSystemTrayIconeventFilter(self[], watched, event)
+method timerEvent*(self: VirtualQSystemTrayIcon, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QSystemTrayIcontimerEvent(self[], event)
+method childEvent*(self: VirtualQSystemTrayIcon, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QSystemTrayIconchildEvent(self[], event)
+method customEvent*(self: VirtualQSystemTrayIcon, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QSystemTrayIconcustomEvent(self[], event)
+method connectNotify*(self: VirtualQSystemTrayIcon, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QSystemTrayIconconnectNotify(self[], signal)
+method disconnectNotify*(self: VirtualQSystemTrayIcon, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QSystemTrayIcondisconnectNotify(self[], signal)
+
 proc fcQSystemTrayIcon_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQSystemTrayIcon](fcQSystemTrayIcon_vdata(self)[])
   var virtualReturn = inst.metaObject()
   virtualReturn.h
 
-method metacast*(self: VirtualQSystemTrayIcon, param1: cstring): pointer {.base.} =
-  QSystemTrayIconmetacast(self[], param1)
 proc fcQSystemTrayIcon_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQSystemTrayIcon](fcQSystemTrayIcon_vdata(self)[])
   let slotval1 = (param1)
   var virtualReturn = inst.metacast(slotval1)
   virtualReturn
 
-method metacall*(self: VirtualQSystemTrayIcon, param1: cint, param2: cint, param3: pointer): cint {.base.} =
-  QSystemTrayIconmetacall(self[], param1, param2, param3)
 proc fcQSystemTrayIcon_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQSystemTrayIcon](fcQSystemTrayIcon_vdata(self)[])
   let slotval1 = cint(param1)
@@ -406,16 +426,12 @@ proc fcQSystemTrayIcon_method_callback_metacall(self: pointer, param1: cint, par
   var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
-method event*(self: VirtualQSystemTrayIcon, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QSystemTrayIconevent(self[], event)
 proc fcQSystemTrayIcon_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQSystemTrayIcon](fcQSystemTrayIcon_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
-method eventFilter*(self: VirtualQSystemTrayIcon, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QSystemTrayIconeventFilter(self[], watched, event)
 proc fcQSystemTrayIcon_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQSystemTrayIcon](fcQSystemTrayIcon_vdata(self)[])
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
@@ -423,40 +439,31 @@ proc fcQSystemTrayIcon_method_callback_eventFilter(self: pointer, watched: point
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
-method timerEvent*(self: VirtualQSystemTrayIcon, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
-  QSystemTrayIcontimerEvent(self[], event)
 proc fcQSystemTrayIcon_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSystemTrayIcon](fcQSystemTrayIcon_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
-method childEvent*(self: VirtualQSystemTrayIcon, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
-  QSystemTrayIconchildEvent(self[], event)
 proc fcQSystemTrayIcon_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSystemTrayIcon](fcQSystemTrayIcon_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
-method customEvent*(self: VirtualQSystemTrayIcon, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QSystemTrayIconcustomEvent(self[], event)
 proc fcQSystemTrayIcon_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSystemTrayIcon](fcQSystemTrayIcon_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
-method connectNotify*(self: VirtualQSystemTrayIcon, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QSystemTrayIconconnectNotify(self[], signal)
 proc fcQSystemTrayIcon_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSystemTrayIcon](fcQSystemTrayIcon_vdata(self)[])
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
-method disconnectNotify*(self: VirtualQSystemTrayIcon, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QSystemTrayIcondisconnectNotify(self[], signal)
 proc fcQSystemTrayIcon_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSystemTrayIcon](fcQSystemTrayIcon_vdata(self)[])
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
+
 
 proc sender*(self: gen_qsystemtrayicon_types.QSystemTrayIcon): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQSystemTrayIcon_protectedbase_sender(self.h), owned: false)

@@ -63,6 +63,7 @@ proc fcQWebEngineUrlRequestInterceptor_tr2(s: cstring, c: cstring): struct_miqt_
 proc fcQWebEngineUrlRequestInterceptor_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QWebEngineUrlRequestInterceptor_tr3".}
 proc fcQWebEngineUrlRequestInterceptor_vdata(self: pointer): ptr pointer {.importc: "QWebEngineUrlRequestInterceptor_vdata".}
 proc fvdata_cQWebEngineUrlRequestInterceptor(self: pointer): pointer {.importc: "vdata_QWebEngineUrlRequestInterceptor".}
+
 type cQWebEngineUrlRequestInterceptorVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -135,6 +136,7 @@ type QWebEngineUrlRequestInterceptorchildEventProc* = proc(self: QWebEngineUrlRe
 type QWebEngineUrlRequestInterceptorcustomEventProc* = proc(self: QWebEngineUrlRequestInterceptor, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QWebEngineUrlRequestInterceptorconnectNotifyProc* = proc(self: QWebEngineUrlRequestInterceptor, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QWebEngineUrlRequestInterceptordisconnectNotifyProc* = proc(self: QWebEngineUrlRequestInterceptor, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+
 type QWebEngineUrlRequestInterceptorVTable* {.inheritable, pure.} = object
   vtbl: cQWebEngineUrlRequestInterceptorVTable
   metaObject*: QWebEngineUrlRequestInterceptormetaObjectProc
@@ -148,8 +150,37 @@ type QWebEngineUrlRequestInterceptorVTable* {.inheritable, pure.} = object
   customEvent*: QWebEngineUrlRequestInterceptorcustomEventProc
   connectNotify*: QWebEngineUrlRequestInterceptorconnectNotifyProc
   disconnectNotify*: QWebEngineUrlRequestInterceptordisconnectNotifyProc
+
 proc QWebEngineUrlRequestInterceptormetaObject*(self: gen_qwebengineurlrequestinterceptor_types.QWebEngineUrlRequestInterceptor): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQWebEngineUrlRequestInterceptor_virtualbase_metaObject(self.h), owned: false)
+
+proc QWebEngineUrlRequestInterceptormetacast*(self: gen_qwebengineurlrequestinterceptor_types.QWebEngineUrlRequestInterceptor, param1: cstring): pointer =
+  fcQWebEngineUrlRequestInterceptor_virtualbase_metacast(self.h, param1)
+
+proc QWebEngineUrlRequestInterceptormetacall*(self: gen_qwebengineurlrequestinterceptor_types.QWebEngineUrlRequestInterceptor, param1: cint, param2: cint, param3: pointer): cint =
+  fcQWebEngineUrlRequestInterceptor_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+proc QWebEngineUrlRequestInterceptorevent*(self: gen_qwebengineurlrequestinterceptor_types.QWebEngineUrlRequestInterceptor, event: gen_qcoreevent_types.QEvent): bool =
+  fcQWebEngineUrlRequestInterceptor_virtualbase_event(self.h, event.h)
+
+proc QWebEngineUrlRequestInterceptoreventFilter*(self: gen_qwebengineurlrequestinterceptor_types.QWebEngineUrlRequestInterceptor, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
+  fcQWebEngineUrlRequestInterceptor_virtualbase_eventFilter(self.h, watched.h, event.h)
+
+proc QWebEngineUrlRequestInterceptortimerEvent*(self: gen_qwebengineurlrequestinterceptor_types.QWebEngineUrlRequestInterceptor, event: gen_qcoreevent_types.QTimerEvent): void =
+  fcQWebEngineUrlRequestInterceptor_virtualbase_timerEvent(self.h, event.h)
+
+proc QWebEngineUrlRequestInterceptorchildEvent*(self: gen_qwebengineurlrequestinterceptor_types.QWebEngineUrlRequestInterceptor, event: gen_qcoreevent_types.QChildEvent): void =
+  fcQWebEngineUrlRequestInterceptor_virtualbase_childEvent(self.h, event.h)
+
+proc QWebEngineUrlRequestInterceptorcustomEvent*(self: gen_qwebengineurlrequestinterceptor_types.QWebEngineUrlRequestInterceptor, event: gen_qcoreevent_types.QEvent): void =
+  fcQWebEngineUrlRequestInterceptor_virtualbase_customEvent(self.h, event.h)
+
+proc QWebEngineUrlRequestInterceptorconnectNotify*(self: gen_qwebengineurlrequestinterceptor_types.QWebEngineUrlRequestInterceptor, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQWebEngineUrlRequestInterceptor_virtualbase_connectNotify(self.h, signal.h)
+
+proc QWebEngineUrlRequestInterceptordisconnectNotify*(self: gen_qwebengineurlrequestinterceptor_types.QWebEngineUrlRequestInterceptor, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQWebEngineUrlRequestInterceptor_virtualbase_disconnectNotify(self.h, signal.h)
+
 
 proc fcQWebEngineUrlRequestInterceptor_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QWebEngineUrlRequestInterceptorVTable](fcQWebEngineUrlRequestInterceptor_vdata(self)[])
@@ -160,18 +191,12 @@ proc fcQWebEngineUrlRequestInterceptor_vtable_callback_metaObject(self: pointer)
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QWebEngineUrlRequestInterceptormetacast*(self: gen_qwebengineurlrequestinterceptor_types.QWebEngineUrlRequestInterceptor, param1: cstring): pointer =
-  fcQWebEngineUrlRequestInterceptor_virtualbase_metacast(self.h, param1)
-
 proc fcQWebEngineUrlRequestInterceptor_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QWebEngineUrlRequestInterceptorVTable](fcQWebEngineUrlRequestInterceptor_vdata(self)[])
   let self = QWebEngineUrlRequestInterceptor(h: self)
   let slotval1 = (param1)
   var virtualReturn = vtbl[].metacast(self, slotval1)
   virtualReturn
-
-proc QWebEngineUrlRequestInterceptormetacall*(self: gen_qwebengineurlrequestinterceptor_types.QWebEngineUrlRequestInterceptor, param1: cint, param2: cint, param3: pointer): cint =
-  fcQWebEngineUrlRequestInterceptor_virtualbase_metacall(self.h, cint(param1), param2, param3)
 
 proc fcQWebEngineUrlRequestInterceptor_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QWebEngineUrlRequestInterceptorVTable](fcQWebEngineUrlRequestInterceptor_vdata(self)[])
@@ -188,18 +213,12 @@ proc fcQWebEngineUrlRequestInterceptor_vtable_callback_interceptRequest(self: po
   let slotval1 = gen_qwebengineurlrequestinfo_types.QWebEngineUrlRequestInfo(h: info, owned: false)
   vtbl[].interceptRequest(self, slotval1)
 
-proc QWebEngineUrlRequestInterceptorevent*(self: gen_qwebengineurlrequestinterceptor_types.QWebEngineUrlRequestInterceptor, event: gen_qcoreevent_types.QEvent): bool =
-  fcQWebEngineUrlRequestInterceptor_virtualbase_event(self.h, event.h)
-
 proc fcQWebEngineUrlRequestInterceptor_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QWebEngineUrlRequestInterceptorVTable](fcQWebEngineUrlRequestInterceptor_vdata(self)[])
   let self = QWebEngineUrlRequestInterceptor(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
-
-proc QWebEngineUrlRequestInterceptoreventFilter*(self: gen_qwebengineurlrequestinterceptor_types.QWebEngineUrlRequestInterceptor, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
-  fcQWebEngineUrlRequestInterceptor_virtualbase_eventFilter(self.h, watched.h, event.h)
 
 proc fcQWebEngineUrlRequestInterceptor_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QWebEngineUrlRequestInterceptorVTable](fcQWebEngineUrlRequestInterceptor_vdata(self)[])
@@ -209,17 +228,11 @@ proc fcQWebEngineUrlRequestInterceptor_vtable_callback_eventFilter(self: pointer
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
-proc QWebEngineUrlRequestInterceptortimerEvent*(self: gen_qwebengineurlrequestinterceptor_types.QWebEngineUrlRequestInterceptor, event: gen_qcoreevent_types.QTimerEvent): void =
-  fcQWebEngineUrlRequestInterceptor_virtualbase_timerEvent(self.h, event.h)
-
 proc fcQWebEngineUrlRequestInterceptor_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWebEngineUrlRequestInterceptorVTable](fcQWebEngineUrlRequestInterceptor_vdata(self)[])
   let self = QWebEngineUrlRequestInterceptor(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
-
-proc QWebEngineUrlRequestInterceptorchildEvent*(self: gen_qwebengineurlrequestinterceptor_types.QWebEngineUrlRequestInterceptor, event: gen_qcoreevent_types.QChildEvent): void =
-  fcQWebEngineUrlRequestInterceptor_virtualbase_childEvent(self.h, event.h)
 
 proc fcQWebEngineUrlRequestInterceptor_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWebEngineUrlRequestInterceptorVTable](fcQWebEngineUrlRequestInterceptor_vdata(self)[])
@@ -227,26 +240,17 @@ proc fcQWebEngineUrlRequestInterceptor_vtable_callback_childEvent(self: pointer,
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
-proc QWebEngineUrlRequestInterceptorcustomEvent*(self: gen_qwebengineurlrequestinterceptor_types.QWebEngineUrlRequestInterceptor, event: gen_qcoreevent_types.QEvent): void =
-  fcQWebEngineUrlRequestInterceptor_virtualbase_customEvent(self.h, event.h)
-
 proc fcQWebEngineUrlRequestInterceptor_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWebEngineUrlRequestInterceptorVTable](fcQWebEngineUrlRequestInterceptor_vdata(self)[])
   let self = QWebEngineUrlRequestInterceptor(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
-proc QWebEngineUrlRequestInterceptorconnectNotify*(self: gen_qwebengineurlrequestinterceptor_types.QWebEngineUrlRequestInterceptor, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQWebEngineUrlRequestInterceptor_virtualbase_connectNotify(self.h, signal.h)
-
 proc fcQWebEngineUrlRequestInterceptor_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWebEngineUrlRequestInterceptorVTable](fcQWebEngineUrlRequestInterceptor_vdata(self)[])
   let self = QWebEngineUrlRequestInterceptor(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
-
-proc QWebEngineUrlRequestInterceptordisconnectNotify*(self: gen_qwebengineurlrequestinterceptor_types.QWebEngineUrlRequestInterceptor, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQWebEngineUrlRequestInterceptor_virtualbase_disconnectNotify(self.h, signal.h)
 
 proc fcQWebEngineUrlRequestInterceptor_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWebEngineUrlRequestInterceptorVTable](fcQWebEngineUrlRequestInterceptor_vdata(self)[])
@@ -256,23 +260,41 @@ proc fcQWebEngineUrlRequestInterceptor_vtable_callback_disconnectNotify(self: po
 
 type VirtualQWebEngineUrlRequestInterceptor* {.inheritable.} = ref object of QWebEngineUrlRequestInterceptor
   vtbl*: cQWebEngineUrlRequestInterceptorVTable
+
 method metaObject*(self: VirtualQWebEngineUrlRequestInterceptor): gen_qobjectdefs_types.QMetaObject {.base.} =
   QWebEngineUrlRequestInterceptormetaObject(self[])
+method metacast*(self: VirtualQWebEngineUrlRequestInterceptor, param1: cstring): pointer {.base.} =
+  QWebEngineUrlRequestInterceptormetacast(self[], param1)
+method metacall*(self: VirtualQWebEngineUrlRequestInterceptor, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QWebEngineUrlRequestInterceptormetacall(self[], param1, param2, param3)
+method interceptRequest*(self: VirtualQWebEngineUrlRequestInterceptor, info: gen_qwebengineurlrequestinfo_types.QWebEngineUrlRequestInfo): void {.base.} =
+  raiseAssert("missing implementation of QWebEngineUrlRequestInterceptor.interceptRequest")
+method event*(self: VirtualQWebEngineUrlRequestInterceptor, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QWebEngineUrlRequestInterceptorevent(self[], event)
+method eventFilter*(self: VirtualQWebEngineUrlRequestInterceptor, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QWebEngineUrlRequestInterceptoreventFilter(self[], watched, event)
+method timerEvent*(self: VirtualQWebEngineUrlRequestInterceptor, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QWebEngineUrlRequestInterceptortimerEvent(self[], event)
+method childEvent*(self: VirtualQWebEngineUrlRequestInterceptor, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QWebEngineUrlRequestInterceptorchildEvent(self[], event)
+method customEvent*(self: VirtualQWebEngineUrlRequestInterceptor, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QWebEngineUrlRequestInterceptorcustomEvent(self[], event)
+method connectNotify*(self: VirtualQWebEngineUrlRequestInterceptor, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QWebEngineUrlRequestInterceptorconnectNotify(self[], signal)
+method disconnectNotify*(self: VirtualQWebEngineUrlRequestInterceptor, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QWebEngineUrlRequestInterceptordisconnectNotify(self[], signal)
+
 proc fcQWebEngineUrlRequestInterceptor_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQWebEngineUrlRequestInterceptor](fcQWebEngineUrlRequestInterceptor_vdata(self)[])
   var virtualReturn = inst.metaObject()
   virtualReturn.h
 
-method metacast*(self: VirtualQWebEngineUrlRequestInterceptor, param1: cstring): pointer {.base.} =
-  QWebEngineUrlRequestInterceptormetacast(self[], param1)
 proc fcQWebEngineUrlRequestInterceptor_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQWebEngineUrlRequestInterceptor](fcQWebEngineUrlRequestInterceptor_vdata(self)[])
   let slotval1 = (param1)
   var virtualReturn = inst.metacast(slotval1)
   virtualReturn
 
-method metacall*(self: VirtualQWebEngineUrlRequestInterceptor, param1: cint, param2: cint, param3: pointer): cint {.base.} =
-  QWebEngineUrlRequestInterceptormetacall(self[], param1, param2, param3)
 proc fcQWebEngineUrlRequestInterceptor_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQWebEngineUrlRequestInterceptor](fcQWebEngineUrlRequestInterceptor_vdata(self)[])
   let slotval1 = cint(param1)
@@ -281,23 +303,17 @@ proc fcQWebEngineUrlRequestInterceptor_method_callback_metacall(self: pointer, p
   var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
-method interceptRequest*(self: VirtualQWebEngineUrlRequestInterceptor, info: gen_qwebengineurlrequestinfo_types.QWebEngineUrlRequestInfo): void {.base.} =
-  raiseAssert("missing implementation of QWebEngineUrlRequestInterceptor_virtualbase_interceptRequest")
 proc fcQWebEngineUrlRequestInterceptor_method_callback_interceptRequest(self: pointer, info: pointer): void {.cdecl.} =
   let inst = cast[VirtualQWebEngineUrlRequestInterceptor](fcQWebEngineUrlRequestInterceptor_vdata(self)[])
   let slotval1 = gen_qwebengineurlrequestinfo_types.QWebEngineUrlRequestInfo(h: info, owned: false)
   inst.interceptRequest(slotval1)
 
-method event*(self: VirtualQWebEngineUrlRequestInterceptor, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QWebEngineUrlRequestInterceptorevent(self[], event)
 proc fcQWebEngineUrlRequestInterceptor_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQWebEngineUrlRequestInterceptor](fcQWebEngineUrlRequestInterceptor_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
-method eventFilter*(self: VirtualQWebEngineUrlRequestInterceptor, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QWebEngineUrlRequestInterceptoreventFilter(self[], watched, event)
 proc fcQWebEngineUrlRequestInterceptor_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQWebEngineUrlRequestInterceptor](fcQWebEngineUrlRequestInterceptor_vdata(self)[])
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
@@ -305,40 +321,31 @@ proc fcQWebEngineUrlRequestInterceptor_method_callback_eventFilter(self: pointer
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
-method timerEvent*(self: VirtualQWebEngineUrlRequestInterceptor, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
-  QWebEngineUrlRequestInterceptortimerEvent(self[], event)
 proc fcQWebEngineUrlRequestInterceptor_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQWebEngineUrlRequestInterceptor](fcQWebEngineUrlRequestInterceptor_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
-method childEvent*(self: VirtualQWebEngineUrlRequestInterceptor, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
-  QWebEngineUrlRequestInterceptorchildEvent(self[], event)
 proc fcQWebEngineUrlRequestInterceptor_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQWebEngineUrlRequestInterceptor](fcQWebEngineUrlRequestInterceptor_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
-method customEvent*(self: VirtualQWebEngineUrlRequestInterceptor, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QWebEngineUrlRequestInterceptorcustomEvent(self[], event)
 proc fcQWebEngineUrlRequestInterceptor_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQWebEngineUrlRequestInterceptor](fcQWebEngineUrlRequestInterceptor_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
-method connectNotify*(self: VirtualQWebEngineUrlRequestInterceptor, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QWebEngineUrlRequestInterceptorconnectNotify(self[], signal)
 proc fcQWebEngineUrlRequestInterceptor_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQWebEngineUrlRequestInterceptor](fcQWebEngineUrlRequestInterceptor_vdata(self)[])
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
-method disconnectNotify*(self: VirtualQWebEngineUrlRequestInterceptor, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QWebEngineUrlRequestInterceptordisconnectNotify(self[], signal)
 proc fcQWebEngineUrlRequestInterceptor_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQWebEngineUrlRequestInterceptor](fcQWebEngineUrlRequestInterceptor_vdata(self)[])
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
+
 
 proc sender*(self: gen_qwebengineurlrequestinterceptor_types.QWebEngineUrlRequestInterceptor): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQWebEngineUrlRequestInterceptor_protectedbase_sender(self.h), owned: false)

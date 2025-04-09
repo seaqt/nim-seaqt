@@ -237,7 +237,7 @@ proc fcQScroller_slot_callback_stateChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QScrollerstateChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onstateChanged*(self: gen_qscroller_types.QScroller, slot: QScrollerstateChangedSlot) =
+proc onStateChanged*(self: gen_qscroller_types.QScroller, slot: QScrollerstateChangedSlot) =
   var tmp = new QScrollerstateChangedSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -257,7 +257,7 @@ proc fcQScroller_slot_callback_scrollerPropertiesChanged_release(slot: int) {.cd
   let nimfunc = cast[ref QScrollerscrollerPropertiesChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onscrollerPropertiesChanged*(self: gen_qscroller_types.QScroller, slot: QScrollerscrollerPropertiesChangedSlot) =
+proc onScrollerPropertiesChanged*(self: gen_qscroller_types.QScroller, slot: QScrollerscrollerPropertiesChangedSlot) =
   var tmp = new QScrollerscrollerPropertiesChangedSlot
   tmp[] = slot
   GC_ref(tmp)

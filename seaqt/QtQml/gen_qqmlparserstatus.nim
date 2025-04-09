@@ -43,6 +43,7 @@ proc fcQQmlParserStatus_classBegin(self: pointer): void {.importc: "QQmlParserSt
 proc fcQQmlParserStatus_componentComplete(self: pointer): void {.importc: "QQmlParserStatus_componentComplete".}
 proc fcQQmlParserStatus_vdata(self: pointer): ptr pointer {.importc: "QQmlParserStatus_vdata".}
 proc fvdata_cQQmlParserStatus(self: pointer): pointer {.importc: "vdata_QQmlParserStatus".}
+
 type cQQmlParserStatusVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   classBegin*: proc(self: pointer): void {.cdecl, raises: [], gcsafe.}
@@ -57,10 +58,13 @@ proc componentComplete*(self: gen_qqmlparserstatus_types.QQmlParserStatus): void
 
 type QQmlParserStatusclassBeginProc* = proc(self: QQmlParserStatus): void {.raises: [], gcsafe.}
 type QQmlParserStatuscomponentCompleteProc* = proc(self: QQmlParserStatus): void {.raises: [], gcsafe.}
+
 type QQmlParserStatusVTable* {.inheritable, pure.} = object
   vtbl: cQQmlParserStatusVTable
   classBegin*: QQmlParserStatusclassBeginProc
   componentComplete*: QQmlParserStatuscomponentCompleteProc
+
+
 proc fcQQmlParserStatus_vtable_callback_classBegin(self: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QQmlParserStatusVTable](fcQQmlParserStatus_vdata(self)[])
   let self = QQmlParserStatus(h: self)
@@ -73,17 +77,20 @@ proc fcQQmlParserStatus_vtable_callback_componentComplete(self: pointer): void {
 
 type VirtualQQmlParserStatus* {.inheritable.} = ref object of QQmlParserStatus
   vtbl*: cQQmlParserStatusVTable
+
 method classBegin*(self: VirtualQQmlParserStatus): void {.base.} =
-  raiseAssert("missing implementation of QQmlParserStatus_virtualbase_classBegin")
+  raiseAssert("missing implementation of QQmlParserStatus.classBegin")
+method componentComplete*(self: VirtualQQmlParserStatus): void {.base.} =
+  raiseAssert("missing implementation of QQmlParserStatus.componentComplete")
+
 proc fcQQmlParserStatus_method_callback_classBegin(self: pointer): void {.cdecl.} =
   let inst = cast[VirtualQQmlParserStatus](fcQQmlParserStatus_vdata(self)[])
   inst.classBegin()
 
-method componentComplete*(self: VirtualQQmlParserStatus): void {.base.} =
-  raiseAssert("missing implementation of QQmlParserStatus_virtualbase_componentComplete")
 proc fcQQmlParserStatus_method_callback_componentComplete(self: pointer): void {.cdecl.} =
   let inst = cast[VirtualQQmlParserStatus](fcQQmlParserStatus_vdata(self)[])
   inst.componentComplete()
+
 
 proc create*(T: type gen_qqmlparserstatus_types.QQmlParserStatus,
     vtbl: ref QQmlParserStatusVTable = nil): gen_qqmlparserstatus_types.QQmlParserStatus =

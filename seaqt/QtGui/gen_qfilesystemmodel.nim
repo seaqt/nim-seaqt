@@ -154,6 +154,7 @@ proc fcQFileSystemModel_myComputer1(self: pointer, role: cint): pointer {.import
 proc fcQFileSystemModel_setOption2(self: pointer, option: cint, on: bool): void {.importc: "QFileSystemModel_setOption2".}
 proc fcQFileSystemModel_vdata(self: pointer): ptr pointer {.importc: "QFileSystemModel_vdata".}
 proc fvdata_cQFileSystemModel(self: pointer): pointer {.importc: "vdata_QFileSystemModel".}
+
 type cQFileSystemModelVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -310,7 +311,7 @@ proc fcQFileSystemModel_slot_callback_rootPathChanged_release(slot: int) {.cdecl
   let nimfunc = cast[ref QFileSystemModelrootPathChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onrootPathChanged*(self: gen_qfilesystemmodel_types.QFileSystemModel, slot: QFileSystemModelrootPathChangedSlot) =
+proc onRootPathChanged*(self: gen_qfilesystemmodel_types.QFileSystemModel, slot: QFileSystemModelrootPathChangedSlot) =
   var tmp = new QFileSystemModelrootPathChangedSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -343,7 +344,7 @@ proc fcQFileSystemModel_slot_callback_fileRenamed_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QFileSystemModelfileRenamedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onfileRenamed*(self: gen_qfilesystemmodel_types.QFileSystemModel, slot: QFileSystemModelfileRenamedSlot) =
+proc onFileRenamed*(self: gen_qfilesystemmodel_types.QFileSystemModel, slot: QFileSystemModelfileRenamedSlot) =
   var tmp = new QFileSystemModelfileRenamedSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -366,7 +367,7 @@ proc fcQFileSystemModel_slot_callback_directoryLoaded_release(slot: int) {.cdecl
   let nimfunc = cast[ref QFileSystemModeldirectoryLoadedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc ondirectoryLoaded*(self: gen_qfilesystemmodel_types.QFileSystemModel, slot: QFileSystemModeldirectoryLoadedSlot) =
+proc onDirectoryLoaded*(self: gen_qfilesystemmodel_types.QFileSystemModel, slot: QFileSystemModeldirectoryLoadedSlot) =
   var tmp = new QFileSystemModeldirectoryLoadedSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -646,6 +647,7 @@ type QFileSystemModelchildEventProc* = proc(self: QFileSystemModel, event: gen_q
 type QFileSystemModelcustomEventProc* = proc(self: QFileSystemModel, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QFileSystemModelconnectNotifyProc* = proc(self: QFileSystemModel, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QFileSystemModeldisconnectNotifyProc* = proc(self: QFileSystemModel, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+
 type QFileSystemModelVTable* {.inheritable, pure.} = object
   vtbl: cQFileSystemModelVTable
   metaObject*: QFileSystemModelmetaObjectProc
@@ -695,192 +697,54 @@ type QFileSystemModelVTable* {.inheritable, pure.} = object
   customEvent*: QFileSystemModelcustomEventProc
   connectNotify*: QFileSystemModelconnectNotifyProc
   disconnectNotify*: QFileSystemModeldisconnectNotifyProc
+
 proc QFileSystemModelmetaObject*(self: gen_qfilesystemmodel_types.QFileSystemModel): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQFileSystemModel_virtualbase_metaObject(self.h), owned: false)
-
-proc fcQFileSystemModel_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
-  let vtbl = cast[ptr QFileSystemModelVTable](fcQFileSystemModel_vdata(self)[])
-  let self = QFileSystemModel(h: self)
-  var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.owned = false # TODO move?
-  let virtualReturn_h = virtualReturn.h
-  virtualReturn.h = nil
-  virtualReturn_h
 
 proc QFileSystemModelmetacast*(self: gen_qfilesystemmodel_types.QFileSystemModel, param1: cstring): pointer =
   fcQFileSystemModel_virtualbase_metacast(self.h, param1)
 
-proc fcQFileSystemModel_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
-  let vtbl = cast[ptr QFileSystemModelVTable](fcQFileSystemModel_vdata(self)[])
-  let self = QFileSystemModel(h: self)
-  let slotval1 = (param1)
-  var virtualReturn = vtbl[].metacast(self, slotval1)
-  virtualReturn
-
 proc QFileSystemModelmetacall*(self: gen_qfilesystemmodel_types.QFileSystemModel, param1: cint, param2: cint, param3: pointer): cint =
   fcQFileSystemModel_virtualbase_metacall(self.h, cint(param1), param2, param3)
-
-proc fcQFileSystemModel_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
-  let vtbl = cast[ptr QFileSystemModelVTable](fcQFileSystemModel_vdata(self)[])
-  let self = QFileSystemModel(h: self)
-  let slotval1 = cint(param1)
-  let slotval2 = param2
-  let slotval3 = param3
-  var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
-  virtualReturn
 
 proc QFileSystemModelindex*(self: gen_qfilesystemmodel_types.QFileSystemModel, row: cint, column: cint, parent: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex =
   gen_qabstractitemmodel_types.QModelIndex(h: fcQFileSystemModel_virtualbase_index(self.h, row, column, parent.h), owned: true)
 
-proc fcQFileSystemModel_vtable_callback_index(self: pointer, row: cint, column: cint, parent: pointer): pointer {.cdecl.} =
-  let vtbl = cast[ptr QFileSystemModelVTable](fcQFileSystemModel_vdata(self)[])
-  let self = QFileSystemModel(h: self)
-  let slotval1 = row
-  let slotval2 = column
-  let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
-  var virtualReturn = vtbl[].index(self, slotval1, slotval2, slotval3)
-  virtualReturn.owned = false # TODO move?
-  let virtualReturn_h = virtualReturn.h
-  virtualReturn.h = nil
-  virtualReturn_h
-
 proc QFileSystemModelparent*(self: gen_qfilesystemmodel_types.QFileSystemModel, child: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex =
   gen_qabstractitemmodel_types.QModelIndex(h: fcQFileSystemModel_virtualbase_parent(self.h, child.h), owned: true)
-
-proc fcQFileSystemModel_vtable_callback_parent(self: pointer, child: pointer): pointer {.cdecl.} =
-  let vtbl = cast[ptr QFileSystemModelVTable](fcQFileSystemModel_vdata(self)[])
-  let self = QFileSystemModel(h: self)
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: child, owned: false)
-  var virtualReturn = vtbl[].parent(self, slotval1)
-  virtualReturn.owned = false # TODO move?
-  let virtualReturn_h = virtualReturn.h
-  virtualReturn.h = nil
-  virtualReturn_h
 
 proc QFileSystemModelsibling*(self: gen_qfilesystemmodel_types.QFileSystemModel, row: cint, column: cint, idx: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex =
   gen_qabstractitemmodel_types.QModelIndex(h: fcQFileSystemModel_virtualbase_sibling(self.h, row, column, idx.h), owned: true)
 
-proc fcQFileSystemModel_vtable_callback_sibling(self: pointer, row: cint, column: cint, idx: pointer): pointer {.cdecl.} =
-  let vtbl = cast[ptr QFileSystemModelVTable](fcQFileSystemModel_vdata(self)[])
-  let self = QFileSystemModel(h: self)
-  let slotval1 = row
-  let slotval2 = column
-  let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: idx, owned: false)
-  var virtualReturn = vtbl[].sibling(self, slotval1, slotval2, slotval3)
-  virtualReturn.owned = false # TODO move?
-  let virtualReturn_h = virtualReturn.h
-  virtualReturn.h = nil
-  virtualReturn_h
-
 proc QFileSystemModelhasChildren*(self: gen_qfilesystemmodel_types.QFileSystemModel, parent: gen_qabstractitemmodel_types.QModelIndex): bool =
   fcQFileSystemModel_virtualbase_hasChildren(self.h, parent.h)
-
-proc fcQFileSystemModel_vtable_callback_hasChildren(self: pointer, parent: pointer): bool {.cdecl.} =
-  let vtbl = cast[ptr QFileSystemModelVTable](fcQFileSystemModel_vdata(self)[])
-  let self = QFileSystemModel(h: self)
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
-  var virtualReturn = vtbl[].hasChildren(self, slotval1)
-  virtualReturn
 
 proc QFileSystemModelcanFetchMore*(self: gen_qfilesystemmodel_types.QFileSystemModel, parent: gen_qabstractitemmodel_types.QModelIndex): bool =
   fcQFileSystemModel_virtualbase_canFetchMore(self.h, parent.h)
 
-proc fcQFileSystemModel_vtable_callback_canFetchMore(self: pointer, parent: pointer): bool {.cdecl.} =
-  let vtbl = cast[ptr QFileSystemModelVTable](fcQFileSystemModel_vdata(self)[])
-  let self = QFileSystemModel(h: self)
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
-  var virtualReturn = vtbl[].canFetchMore(self, slotval1)
-  virtualReturn
-
 proc QFileSystemModelfetchMore*(self: gen_qfilesystemmodel_types.QFileSystemModel, parent: gen_qabstractitemmodel_types.QModelIndex): void =
   fcQFileSystemModel_virtualbase_fetchMore(self.h, parent.h)
-
-proc fcQFileSystemModel_vtable_callback_fetchMore(self: pointer, parent: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QFileSystemModelVTable](fcQFileSystemModel_vdata(self)[])
-  let self = QFileSystemModel(h: self)
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
-  vtbl[].fetchMore(self, slotval1)
 
 proc QFileSystemModelrowCount*(self: gen_qfilesystemmodel_types.QFileSystemModel, parent: gen_qabstractitemmodel_types.QModelIndex): cint =
   fcQFileSystemModel_virtualbase_rowCount(self.h, parent.h)
 
-proc fcQFileSystemModel_vtable_callback_rowCount(self: pointer, parent: pointer): cint {.cdecl.} =
-  let vtbl = cast[ptr QFileSystemModelVTable](fcQFileSystemModel_vdata(self)[])
-  let self = QFileSystemModel(h: self)
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
-  var virtualReturn = vtbl[].rowCount(self, slotval1)
-  virtualReturn
-
 proc QFileSystemModelcolumnCount*(self: gen_qfilesystemmodel_types.QFileSystemModel, parent: gen_qabstractitemmodel_types.QModelIndex): cint =
   fcQFileSystemModel_virtualbase_columnCount(self.h, parent.h)
-
-proc fcQFileSystemModel_vtable_callback_columnCount(self: pointer, parent: pointer): cint {.cdecl.} =
-  let vtbl = cast[ptr QFileSystemModelVTable](fcQFileSystemModel_vdata(self)[])
-  let self = QFileSystemModel(h: self)
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
-  var virtualReturn = vtbl[].columnCount(self, slotval1)
-  virtualReturn
 
 proc QFileSystemModeldata*(self: gen_qfilesystemmodel_types.QFileSystemModel, index: gen_qabstractitemmodel_types.QModelIndex, role: cint): gen_qvariant_types.QVariant =
   gen_qvariant_types.QVariant(h: fcQFileSystemModel_virtualbase_data(self.h, index.h, role), owned: true)
 
-proc fcQFileSystemModel_vtable_callback_data(self: pointer, index: pointer, role: cint): pointer {.cdecl.} =
-  let vtbl = cast[ptr QFileSystemModelVTable](fcQFileSystemModel_vdata(self)[])
-  let self = QFileSystemModel(h: self)
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
-  let slotval2 = role
-  var virtualReturn = vtbl[].data(self, slotval1, slotval2)
-  virtualReturn.owned = false # TODO move?
-  let virtualReturn_h = virtualReturn.h
-  virtualReturn.h = nil
-  virtualReturn_h
-
 proc QFileSystemModelsetData*(self: gen_qfilesystemmodel_types.QFileSystemModel, index: gen_qabstractitemmodel_types.QModelIndex, value: gen_qvariant_types.QVariant, role: cint): bool =
   fcQFileSystemModel_virtualbase_setData(self.h, index.h, value.h, role)
-
-proc fcQFileSystemModel_vtable_callback_setData(self: pointer, index: pointer, value: pointer, role: cint): bool {.cdecl.} =
-  let vtbl = cast[ptr QFileSystemModelVTable](fcQFileSystemModel_vdata(self)[])
-  let self = QFileSystemModel(h: self)
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
-  let slotval2 = gen_qvariant_types.QVariant(h: value, owned: false)
-  let slotval3 = role
-  var virtualReturn = vtbl[].setData(self, slotval1, slotval2, slotval3)
-  virtualReturn
 
 proc QFileSystemModelheaderData*(self: gen_qfilesystemmodel_types.QFileSystemModel, section: cint, orientation: cint, role: cint): gen_qvariant_types.QVariant =
   gen_qvariant_types.QVariant(h: fcQFileSystemModel_virtualbase_headerData(self.h, section, cint(orientation), role), owned: true)
 
-proc fcQFileSystemModel_vtable_callback_headerData(self: pointer, section: cint, orientation: cint, role: cint): pointer {.cdecl.} =
-  let vtbl = cast[ptr QFileSystemModelVTable](fcQFileSystemModel_vdata(self)[])
-  let self = QFileSystemModel(h: self)
-  let slotval1 = section
-  let slotval2 = cint(orientation)
-  let slotval3 = role
-  var virtualReturn = vtbl[].headerData(self, slotval1, slotval2, slotval3)
-  virtualReturn.owned = false # TODO move?
-  let virtualReturn_h = virtualReturn.h
-  virtualReturn.h = nil
-  virtualReturn_h
-
 proc QFileSystemModelflags*(self: gen_qfilesystemmodel_types.QFileSystemModel, index: gen_qabstractitemmodel_types.QModelIndex): cint =
   cint(fcQFileSystemModel_virtualbase_flags(self.h, index.h))
 
-proc fcQFileSystemModel_vtable_callback_flags(self: pointer, index: pointer): cint {.cdecl.} =
-  let vtbl = cast[ptr QFileSystemModelVTable](fcQFileSystemModel_vdata(self)[])
-  let self = QFileSystemModel(h: self)
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
-  var virtualReturn = vtbl[].flags(self, slotval1)
-  cint(virtualReturn)
-
 proc QFileSystemModelsort*(self: gen_qfilesystemmodel_types.QFileSystemModel, column: cint, order: cint): void =
   fcQFileSystemModel_virtualbase_sort(self.h, column, cint(order))
-
-proc fcQFileSystemModel_vtable_callback_sort(self: pointer, column: cint, order: cint): void {.cdecl.} =
-  let vtbl = cast[ptr QFileSystemModelVTable](fcQFileSystemModel_vdata(self)[])
-  let self = QFileSystemModel(h: self)
-  let slotval1 = column
-  let slotval2 = cint(order)
-  vtbl[].sort(self, slotval1, slotval2)
 
 proc QFileSystemModelmimeTypes*(self: gen_qfilesystemmodel_types.QFileSystemModel): seq[string] =
   var v_ma = fcQFileSystemModel_virtualbase_mimeTypes(self.h)
@@ -894,18 +758,6 @@ proc QFileSystemModelmimeTypes*(self: gen_qfilesystemmodel_types.QFileSystemMode
   c_free(v_ma.data)
   vx_ret
 
-proc fcQFileSystemModel_vtable_callback_mimeTypes(self: pointer): struct_miqt_array {.cdecl.} =
-  let vtbl = cast[ptr QFileSystemModelVTable](fcQFileSystemModel_vdata(self)[])
-  let self = QFileSystemModel(h: self)
-  var virtualReturn = vtbl[].mimeTypes(self)
-  var virtualReturn_CArray = cast[ptr UncheckedArray[struct_miqt_string]](if len(virtualReturn) > 0: c_malloc(c_sizet(sizeof(struct_miqt_string) * len(virtualReturn))) else: nil)
-  for i in 0..<len(virtualReturn):
-    var virtualReturn_i_copy = if len(virtualReturn[i]) > 0: c_malloc(csize_t(len(virtualReturn[i]))) else: nil
-    if len(virtualReturn[i]) > 0: copyMem(virtualReturn_i_copy, addr virtualReturn[i][0], csize_t(len(virtualReturn[i])))
-    virtualReturn_CArray[i] = struct_miqt_string(data: virtualReturn_i_copy, len: csize_t(len(virtualReturn[i])))
-
-  struct_miqt_array(len: csize_t(len(virtualReturn)), data: if len(virtualReturn) == 0: nil else: addr(virtualReturn_CArray[0]))
-
 proc QFileSystemModelmimeData*(self: gen_qfilesystemmodel_types.QFileSystemModel, indexes: openArray[gen_qabstractitemmodel_types.QModelIndex]): gen_qmimedata_types.QMimeData =
   var indexes_CArray = newSeq[pointer](len(indexes))
   for i in 0..<len(indexes):
@@ -913,44 +765,11 @@ proc QFileSystemModelmimeData*(self: gen_qfilesystemmodel_types.QFileSystemModel
 
   gen_qmimedata_types.QMimeData(h: fcQFileSystemModel_virtualbase_mimeData(self.h, struct_miqt_array(len: csize_t(len(indexes)), data: if len(indexes) == 0: nil else: addr(indexes_CArray[0]))), owned: false)
 
-proc fcQFileSystemModel_vtable_callback_mimeData(self: pointer, indexes: struct_miqt_array): pointer {.cdecl.} =
-  let vtbl = cast[ptr QFileSystemModelVTable](fcQFileSystemModel_vdata(self)[])
-  let self = QFileSystemModel(h: self)
-  var vindexes_ma = indexes
-  var vindexesx_ret = newSeq[gen_qabstractitemmodel_types.QModelIndex](int(vindexes_ma.len))
-  let vindexes_outCast = cast[ptr UncheckedArray[pointer]](vindexes_ma.data)
-  for i in 0 ..< vindexes_ma.len:
-    vindexesx_ret[i] = gen_qabstractitemmodel_types.QModelIndex(h: vindexes_outCast[i], owned: true)
-  c_free(vindexes_ma.data)
-  let slotval1 = vindexesx_ret
-  var virtualReturn = vtbl[].mimeData(self, slotval1)
-  virtualReturn.owned = false # TODO move?
-  let virtualReturn_h = virtualReturn.h
-  virtualReturn.h = nil
-  virtualReturn_h
-
 proc QFileSystemModeldropMimeData*(self: gen_qfilesystemmodel_types.QFileSystemModel, data: gen_qmimedata_types.QMimeData, action: cint, row: cint, column: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool =
   fcQFileSystemModel_virtualbase_dropMimeData(self.h, data.h, cint(action), row, column, parent.h)
 
-proc fcQFileSystemModel_vtable_callback_dropMimeData(self: pointer, data: pointer, action: cint, row: cint, column: cint, parent: pointer): bool {.cdecl.} =
-  let vtbl = cast[ptr QFileSystemModelVTable](fcQFileSystemModel_vdata(self)[])
-  let self = QFileSystemModel(h: self)
-  let slotval1 = gen_qmimedata_types.QMimeData(h: data, owned: false)
-  let slotval2 = cint(action)
-  let slotval3 = row
-  let slotval4 = column
-  let slotval5 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
-  var virtualReturn = vtbl[].dropMimeData(self, slotval1, slotval2, slotval3, slotval4, slotval5)
-  virtualReturn
-
 proc QFileSystemModelsupportedDropActions*(self: gen_qfilesystemmodel_types.QFileSystemModel): cint =
   cint(fcQFileSystemModel_virtualbase_supportedDropActions(self.h))
-
-proc fcQFileSystemModel_vtable_callback_supportedDropActions(self: pointer): cint {.cdecl.} =
-  let vtbl = cast[ptr QFileSystemModelVTable](fcQFileSystemModel_vdata(self)[])
-  let self = QFileSystemModel(h: self)
-  var virtualReturn = vtbl[].supportedDropActions(self)
-  cint(virtualReturn)
 
 proc QFileSystemModelroleNames*(self: gen_qfilesystemmodel_types.QFileSystemModel): Table[cint,seq[byte]] =
   var v_mm = fcQFileSystemModel_virtualbase_roleNames(self.h)
@@ -969,6 +788,298 @@ proc QFileSystemModelroleNames*(self: gen_qfilesystemmodel_types.QFileSystemMode
   c_free(v_mm.keys)
   c_free(v_mm.values)
   vx_ret
+
+proc QFileSystemModeltimerEvent*(self: gen_qfilesystemmodel_types.QFileSystemModel, event: gen_qcoreevent_types.QTimerEvent): void =
+  fcQFileSystemModel_virtualbase_timerEvent(self.h, event.h)
+
+proc QFileSystemModelevent*(self: gen_qfilesystemmodel_types.QFileSystemModel, event: gen_qcoreevent_types.QEvent): bool =
+  fcQFileSystemModel_virtualbase_event(self.h, event.h)
+
+proc QFileSystemModelsetHeaderData*(self: gen_qfilesystemmodel_types.QFileSystemModel, section: cint, orientation: cint, value: gen_qvariant_types.QVariant, role: cint): bool =
+  fcQFileSystemModel_virtualbase_setHeaderData(self.h, section, cint(orientation), value.h, role)
+
+proc QFileSystemModelitemData*(self: gen_qfilesystemmodel_types.QFileSystemModel, index: gen_qabstractitemmodel_types.QModelIndex): Table[cint,gen_qvariant_types.QVariant] =
+  var v_mm = fcQFileSystemModel_virtualbase_itemData(self.h, index.h)
+  var vx_ret: Table[cint, gen_qvariant_types.QVariant]
+  var v_Keys = cast[ptr UncheckedArray[cint]](v_mm.keys)
+  var v_Values = cast[ptr UncheckedArray[pointer]](v_mm.values)
+  for i in 0..<v_mm.len:
+    var v_entry_Key = v_Keys[i]
+
+    var v_entry_Value = gen_qvariant_types.QVariant(h: v_Values[i], owned: true)
+
+    vx_ret[v_entry_Key] = v_entry_Value
+  c_free(v_mm.keys)
+  c_free(v_mm.values)
+  vx_ret
+
+proc QFileSystemModelsetItemData*(self: gen_qfilesystemmodel_types.QFileSystemModel, index: gen_qabstractitemmodel_types.QModelIndex, roles: Table[cint,gen_qvariant_types.QVariant]): bool =
+  var roles_Keys_CArray = newSeq[cint](len(roles))
+  var roles_Values_CArray = newSeq[pointer](len(roles))
+  var roles_ctr = 0
+  for roles_k in roles.keys():
+    roles_Keys_CArray[roles_ctr] = roles_k
+    roles_ctr += 1
+  roles_ctr = 0
+  for roles_v in roles.values():
+    roles_Values_CArray[roles_ctr] = roles_v.h
+    roles_ctr += 1
+
+  fcQFileSystemModel_virtualbase_setItemData(self.h, index.h, struct_miqt_map(len: csize_t(len(roles)),keys: if len(roles) == 0: nil else: addr(roles_Keys_CArray[0]), values: if len(roles) == 0: nil else: addr(roles_Values_CArray[0]),))
+
+proc QFileSystemModelclearItemData*(self: gen_qfilesystemmodel_types.QFileSystemModel, index: gen_qabstractitemmodel_types.QModelIndex): bool =
+  fcQFileSystemModel_virtualbase_clearItemData(self.h, index.h)
+
+proc QFileSystemModelcanDropMimeData*(self: gen_qfilesystemmodel_types.QFileSystemModel, data: gen_qmimedata_types.QMimeData, action: cint, row: cint, column: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool =
+  fcQFileSystemModel_virtualbase_canDropMimeData(self.h, data.h, cint(action), row, column, parent.h)
+
+proc QFileSystemModelsupportedDragActions*(self: gen_qfilesystemmodel_types.QFileSystemModel): cint =
+  cint(fcQFileSystemModel_virtualbase_supportedDragActions(self.h))
+
+proc QFileSystemModelinsertRows*(self: gen_qfilesystemmodel_types.QFileSystemModel, row: cint, count: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool =
+  fcQFileSystemModel_virtualbase_insertRows(self.h, row, count, parent.h)
+
+proc QFileSystemModelinsertColumns*(self: gen_qfilesystemmodel_types.QFileSystemModel, column: cint, count: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool =
+  fcQFileSystemModel_virtualbase_insertColumns(self.h, column, count, parent.h)
+
+proc QFileSystemModelremoveRows*(self: gen_qfilesystemmodel_types.QFileSystemModel, row: cint, count: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool =
+  fcQFileSystemModel_virtualbase_removeRows(self.h, row, count, parent.h)
+
+proc QFileSystemModelremoveColumns*(self: gen_qfilesystemmodel_types.QFileSystemModel, column: cint, count: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool =
+  fcQFileSystemModel_virtualbase_removeColumns(self.h, column, count, parent.h)
+
+proc QFileSystemModelmoveRows*(self: gen_qfilesystemmodel_types.QFileSystemModel, sourceParent: gen_qabstractitemmodel_types.QModelIndex, sourceRow: cint, count: cint, destinationParent: gen_qabstractitemmodel_types.QModelIndex, destinationChild: cint): bool =
+  fcQFileSystemModel_virtualbase_moveRows(self.h, sourceParent.h, sourceRow, count, destinationParent.h, destinationChild)
+
+proc QFileSystemModelmoveColumns*(self: gen_qfilesystemmodel_types.QFileSystemModel, sourceParent: gen_qabstractitemmodel_types.QModelIndex, sourceColumn: cint, count: cint, destinationParent: gen_qabstractitemmodel_types.QModelIndex, destinationChild: cint): bool =
+  fcQFileSystemModel_virtualbase_moveColumns(self.h, sourceParent.h, sourceColumn, count, destinationParent.h, destinationChild)
+
+proc QFileSystemModelbuddy*(self: gen_qfilesystemmodel_types.QFileSystemModel, index: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex =
+  gen_qabstractitemmodel_types.QModelIndex(h: fcQFileSystemModel_virtualbase_buddy(self.h, index.h), owned: true)
+
+proc QFileSystemModelmatch*(self: gen_qfilesystemmodel_types.QFileSystemModel, start: gen_qabstractitemmodel_types.QModelIndex, role: cint, value: gen_qvariant_types.QVariant, hits: cint, flags: cint): seq[gen_qabstractitemmodel_types.QModelIndex] =
+  var v_ma = fcQFileSystemModel_virtualbase_match(self.h, start.h, role, value.h, hits, cint(flags))
+  var vx_ret = newSeq[gen_qabstractitemmodel_types.QModelIndex](int(v_ma.len))
+  let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
+  for i in 0 ..< v_ma.len:
+    vx_ret[i] = gen_qabstractitemmodel_types.QModelIndex(h: v_outCast[i], owned: true)
+  c_free(v_ma.data)
+  vx_ret
+
+proc QFileSystemModelspan*(self: gen_qfilesystemmodel_types.QFileSystemModel, index: gen_qabstractitemmodel_types.QModelIndex): gen_qsize_types.QSize =
+  gen_qsize_types.QSize(h: fcQFileSystemModel_virtualbase_span(self.h, index.h), owned: true)
+
+proc QFileSystemModelmultiData*(self: gen_qfilesystemmodel_types.QFileSystemModel, index: gen_qabstractitemmodel_types.QModelIndex, roleDataSpan: gen_qabstractitemmodel_types.QModelRoleDataSpan): void =
+  fcQFileSystemModel_virtualbase_multiData(self.h, index.h, roleDataSpan.h)
+
+proc QFileSystemModelsubmit*(self: gen_qfilesystemmodel_types.QFileSystemModel): bool =
+  fcQFileSystemModel_virtualbase_submit(self.h)
+
+proc QFileSystemModelrevert*(self: gen_qfilesystemmodel_types.QFileSystemModel): void =
+  fcQFileSystemModel_virtualbase_revert(self.h)
+
+proc QFileSystemModelresetInternalData*(self: gen_qfilesystemmodel_types.QFileSystemModel): void =
+  fcQFileSystemModel_virtualbase_resetInternalData(self.h)
+
+proc QFileSystemModeleventFilter*(self: gen_qfilesystemmodel_types.QFileSystemModel, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
+  fcQFileSystemModel_virtualbase_eventFilter(self.h, watched.h, event.h)
+
+proc QFileSystemModelchildEvent*(self: gen_qfilesystemmodel_types.QFileSystemModel, event: gen_qcoreevent_types.QChildEvent): void =
+  fcQFileSystemModel_virtualbase_childEvent(self.h, event.h)
+
+proc QFileSystemModelcustomEvent*(self: gen_qfilesystemmodel_types.QFileSystemModel, event: gen_qcoreevent_types.QEvent): void =
+  fcQFileSystemModel_virtualbase_customEvent(self.h, event.h)
+
+proc QFileSystemModelconnectNotify*(self: gen_qfilesystemmodel_types.QFileSystemModel, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQFileSystemModel_virtualbase_connectNotify(self.h, signal.h)
+
+proc QFileSystemModeldisconnectNotify*(self: gen_qfilesystemmodel_types.QFileSystemModel, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQFileSystemModel_virtualbase_disconnectNotify(self.h, signal.h)
+
+
+proc fcQFileSystemModel_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QFileSystemModelVTable](fcQFileSystemModel_vdata(self)[])
+  let self = QFileSystemModel(h: self)
+  var virtualReturn = vtbl[].metaObject(self)
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+proc fcQFileSystemModel_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+  let vtbl = cast[ptr QFileSystemModelVTable](fcQFileSystemModel_vdata(self)[])
+  let self = QFileSystemModel(h: self)
+  let slotval1 = (param1)
+  var virtualReturn = vtbl[].metacast(self, slotval1)
+  virtualReturn
+
+proc fcQFileSystemModel_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QFileSystemModelVTable](fcQFileSystemModel_vdata(self)[])
+  let self = QFileSystemModel(h: self)
+  let slotval1 = cint(param1)
+  let slotval2 = param2
+  let slotval3 = param3
+  var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
+  virtualReturn
+
+proc fcQFileSystemModel_vtable_callback_index(self: pointer, row: cint, column: cint, parent: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QFileSystemModelVTable](fcQFileSystemModel_vdata(self)[])
+  let self = QFileSystemModel(h: self)
+  let slotval1 = row
+  let slotval2 = column
+  let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
+  var virtualReturn = vtbl[].index(self, slotval1, slotval2, slotval3)
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+proc fcQFileSystemModel_vtable_callback_parent(self: pointer, child: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QFileSystemModelVTable](fcQFileSystemModel_vdata(self)[])
+  let self = QFileSystemModel(h: self)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: child, owned: false)
+  var virtualReturn = vtbl[].parent(self, slotval1)
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+proc fcQFileSystemModel_vtable_callback_sibling(self: pointer, row: cint, column: cint, idx: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QFileSystemModelVTable](fcQFileSystemModel_vdata(self)[])
+  let self = QFileSystemModel(h: self)
+  let slotval1 = row
+  let slotval2 = column
+  let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: idx, owned: false)
+  var virtualReturn = vtbl[].sibling(self, slotval1, slotval2, slotval3)
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+proc fcQFileSystemModel_vtable_callback_hasChildren(self: pointer, parent: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QFileSystemModelVTable](fcQFileSystemModel_vdata(self)[])
+  let self = QFileSystemModel(h: self)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
+  var virtualReturn = vtbl[].hasChildren(self, slotval1)
+  virtualReturn
+
+proc fcQFileSystemModel_vtable_callback_canFetchMore(self: pointer, parent: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QFileSystemModelVTable](fcQFileSystemModel_vdata(self)[])
+  let self = QFileSystemModel(h: self)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
+  var virtualReturn = vtbl[].canFetchMore(self, slotval1)
+  virtualReturn
+
+proc fcQFileSystemModel_vtable_callback_fetchMore(self: pointer, parent: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QFileSystemModelVTable](fcQFileSystemModel_vdata(self)[])
+  let self = QFileSystemModel(h: self)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
+  vtbl[].fetchMore(self, slotval1)
+
+proc fcQFileSystemModel_vtable_callback_rowCount(self: pointer, parent: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QFileSystemModelVTable](fcQFileSystemModel_vdata(self)[])
+  let self = QFileSystemModel(h: self)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
+  var virtualReturn = vtbl[].rowCount(self, slotval1)
+  virtualReturn
+
+proc fcQFileSystemModel_vtable_callback_columnCount(self: pointer, parent: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QFileSystemModelVTable](fcQFileSystemModel_vdata(self)[])
+  let self = QFileSystemModel(h: self)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
+  var virtualReturn = vtbl[].columnCount(self, slotval1)
+  virtualReturn
+
+proc fcQFileSystemModel_vtable_callback_data(self: pointer, index: pointer, role: cint): pointer {.cdecl.} =
+  let vtbl = cast[ptr QFileSystemModelVTable](fcQFileSystemModel_vdata(self)[])
+  let self = QFileSystemModel(h: self)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
+  let slotval2 = role
+  var virtualReturn = vtbl[].data(self, slotval1, slotval2)
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+proc fcQFileSystemModel_vtable_callback_setData(self: pointer, index: pointer, value: pointer, role: cint): bool {.cdecl.} =
+  let vtbl = cast[ptr QFileSystemModelVTable](fcQFileSystemModel_vdata(self)[])
+  let self = QFileSystemModel(h: self)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
+  let slotval2 = gen_qvariant_types.QVariant(h: value, owned: false)
+  let slotval3 = role
+  var virtualReturn = vtbl[].setData(self, slotval1, slotval2, slotval3)
+  virtualReturn
+
+proc fcQFileSystemModel_vtable_callback_headerData(self: pointer, section: cint, orientation: cint, role: cint): pointer {.cdecl.} =
+  let vtbl = cast[ptr QFileSystemModelVTable](fcQFileSystemModel_vdata(self)[])
+  let self = QFileSystemModel(h: self)
+  let slotval1 = section
+  let slotval2 = cint(orientation)
+  let slotval3 = role
+  var virtualReturn = vtbl[].headerData(self, slotval1, slotval2, slotval3)
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+proc fcQFileSystemModel_vtable_callback_flags(self: pointer, index: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QFileSystemModelVTable](fcQFileSystemModel_vdata(self)[])
+  let self = QFileSystemModel(h: self)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
+  var virtualReturn = vtbl[].flags(self, slotval1)
+  cint(virtualReturn)
+
+proc fcQFileSystemModel_vtable_callback_sort(self: pointer, column: cint, order: cint): void {.cdecl.} =
+  let vtbl = cast[ptr QFileSystemModelVTable](fcQFileSystemModel_vdata(self)[])
+  let self = QFileSystemModel(h: self)
+  let slotval1 = column
+  let slotval2 = cint(order)
+  vtbl[].sort(self, slotval1, slotval2)
+
+proc fcQFileSystemModel_vtable_callback_mimeTypes(self: pointer): struct_miqt_array {.cdecl.} =
+  let vtbl = cast[ptr QFileSystemModelVTable](fcQFileSystemModel_vdata(self)[])
+  let self = QFileSystemModel(h: self)
+  var virtualReturn = vtbl[].mimeTypes(self)
+  var virtualReturn_CArray = cast[ptr UncheckedArray[struct_miqt_string]](if len(virtualReturn) > 0: c_malloc(c_sizet(sizeof(struct_miqt_string) * len(virtualReturn))) else: nil)
+  for i in 0..<len(virtualReturn):
+    var virtualReturn_i_copy = if len(virtualReturn[i]) > 0: c_malloc(csize_t(len(virtualReturn[i]))) else: nil
+    if len(virtualReturn[i]) > 0: copyMem(virtualReturn_i_copy, addr virtualReturn[i][0], csize_t(len(virtualReturn[i])))
+    virtualReturn_CArray[i] = struct_miqt_string(data: virtualReturn_i_copy, len: csize_t(len(virtualReturn[i])))
+
+  struct_miqt_array(len: csize_t(len(virtualReturn)), data: if len(virtualReturn) == 0: nil else: addr(virtualReturn_CArray[0]))
+
+proc fcQFileSystemModel_vtable_callback_mimeData(self: pointer, indexes: struct_miqt_array): pointer {.cdecl.} =
+  let vtbl = cast[ptr QFileSystemModelVTable](fcQFileSystemModel_vdata(self)[])
+  let self = QFileSystemModel(h: self)
+  var vindexes_ma = indexes
+  var vindexesx_ret = newSeq[gen_qabstractitemmodel_types.QModelIndex](int(vindexes_ma.len))
+  let vindexes_outCast = cast[ptr UncheckedArray[pointer]](vindexes_ma.data)
+  for i in 0 ..< vindexes_ma.len:
+    vindexesx_ret[i] = gen_qabstractitemmodel_types.QModelIndex(h: vindexes_outCast[i], owned: true)
+  c_free(vindexes_ma.data)
+  let slotval1 = vindexesx_ret
+  var virtualReturn = vtbl[].mimeData(self, slotval1)
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+proc fcQFileSystemModel_vtable_callback_dropMimeData(self: pointer, data: pointer, action: cint, row: cint, column: cint, parent: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QFileSystemModelVTable](fcQFileSystemModel_vdata(self)[])
+  let self = QFileSystemModel(h: self)
+  let slotval1 = gen_qmimedata_types.QMimeData(h: data, owned: false)
+  let slotval2 = cint(action)
+  let slotval3 = row
+  let slotval4 = column
+  let slotval5 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
+  var virtualReturn = vtbl[].dropMimeData(self, slotval1, slotval2, slotval3, slotval4, slotval5)
+  virtualReturn
+
+proc fcQFileSystemModel_vtable_callback_supportedDropActions(self: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QFileSystemModelVTable](fcQFileSystemModel_vdata(self)[])
+  let self = QFileSystemModel(h: self)
+  var virtualReturn = vtbl[].supportedDropActions(self)
+  cint(virtualReturn)
 
 proc fcQFileSystemModel_vtable_callback_roleNames(self: pointer): struct_miqt_map {.cdecl.} =
   let vtbl = cast[ptr QFileSystemModelVTable](fcQFileSystemModel_vdata(self)[])
@@ -989,17 +1100,11 @@ proc fcQFileSystemModel_vtable_callback_roleNames(self: pointer): struct_miqt_ma
 
   struct_miqt_map(len: csize_t(len(virtualReturn)),keys: if len(virtualReturn) == 0: nil else: addr(virtualReturn_Keys_CArray[0]), values: if len(virtualReturn) == 0: nil else: addr(virtualReturn_Values_CArray[0]),)
 
-proc QFileSystemModeltimerEvent*(self: gen_qfilesystemmodel_types.QFileSystemModel, event: gen_qcoreevent_types.QTimerEvent): void =
-  fcQFileSystemModel_virtualbase_timerEvent(self.h, event.h)
-
 proc fcQFileSystemModel_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFileSystemModelVTable](fcQFileSystemModel_vdata(self)[])
   let self = QFileSystemModel(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
-
-proc QFileSystemModelevent*(self: gen_qfilesystemmodel_types.QFileSystemModel, event: gen_qcoreevent_types.QEvent): bool =
-  fcQFileSystemModel_virtualbase_event(self.h, event.h)
 
 proc fcQFileSystemModel_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QFileSystemModelVTable](fcQFileSystemModel_vdata(self)[])
@@ -1007,9 +1112,6 @@ proc fcQFileSystemModel_vtable_callback_event(self: pointer, event: pointer): bo
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
-
-proc QFileSystemModelsetHeaderData*(self: gen_qfilesystemmodel_types.QFileSystemModel, section: cint, orientation: cint, value: gen_qvariant_types.QVariant, role: cint): bool =
-  fcQFileSystemModel_virtualbase_setHeaderData(self.h, section, cint(orientation), value.h, role)
 
 proc fcQFileSystemModel_vtable_callback_setHeaderData(self: pointer, section: cint, orientation: cint, value: pointer, role: cint): bool {.cdecl.} =
   let vtbl = cast[ptr QFileSystemModelVTable](fcQFileSystemModel_vdata(self)[])
@@ -1020,21 +1122,6 @@ proc fcQFileSystemModel_vtable_callback_setHeaderData(self: pointer, section: ci
   let slotval4 = role
   var virtualReturn = vtbl[].setHeaderData(self, slotval1, slotval2, slotval3, slotval4)
   virtualReturn
-
-proc QFileSystemModelitemData*(self: gen_qfilesystemmodel_types.QFileSystemModel, index: gen_qabstractitemmodel_types.QModelIndex): Table[cint,gen_qvariant_types.QVariant] =
-  var v_mm = fcQFileSystemModel_virtualbase_itemData(self.h, index.h)
-  var vx_ret: Table[cint, gen_qvariant_types.QVariant]
-  var v_Keys = cast[ptr UncheckedArray[cint]](v_mm.keys)
-  var v_Values = cast[ptr UncheckedArray[pointer]](v_mm.values)
-  for i in 0..<v_mm.len:
-    var v_entry_Key = v_Keys[i]
-
-    var v_entry_Value = gen_qvariant_types.QVariant(h: v_Values[i], owned: true)
-
-    vx_ret[v_entry_Key] = v_entry_Value
-  c_free(v_mm.keys)
-  c_free(v_mm.values)
-  vx_ret
 
 proc fcQFileSystemModel_vtable_callback_itemData(self: pointer, index: pointer): struct_miqt_map {.cdecl.} =
   let vtbl = cast[ptr QFileSystemModelVTable](fcQFileSystemModel_vdata(self)[])
@@ -1057,20 +1144,6 @@ proc fcQFileSystemModel_vtable_callback_itemData(self: pointer, index: pointer):
 
   struct_miqt_map(len: csize_t(len(virtualReturn)),keys: if len(virtualReturn) == 0: nil else: addr(virtualReturn_Keys_CArray[0]), values: if len(virtualReturn) == 0: nil else: addr(virtualReturn_Values_CArray[0]),)
 
-proc QFileSystemModelsetItemData*(self: gen_qfilesystemmodel_types.QFileSystemModel, index: gen_qabstractitemmodel_types.QModelIndex, roles: Table[cint,gen_qvariant_types.QVariant]): bool =
-  var roles_Keys_CArray = newSeq[cint](len(roles))
-  var roles_Values_CArray = newSeq[pointer](len(roles))
-  var roles_ctr = 0
-  for roles_k in roles.keys():
-    roles_Keys_CArray[roles_ctr] = roles_k
-    roles_ctr += 1
-  roles_ctr = 0
-  for roles_v in roles.values():
-    roles_Values_CArray[roles_ctr] = roles_v.h
-    roles_ctr += 1
-
-  fcQFileSystemModel_virtualbase_setItemData(self.h, index.h, struct_miqt_map(len: csize_t(len(roles)),keys: if len(roles) == 0: nil else: addr(roles_Keys_CArray[0]), values: if len(roles) == 0: nil else: addr(roles_Values_CArray[0]),))
-
 proc fcQFileSystemModel_vtable_callback_setItemData(self: pointer, index: pointer, roles: struct_miqt_map): bool {.cdecl.} =
   let vtbl = cast[ptr QFileSystemModelVTable](fcQFileSystemModel_vdata(self)[])
   let self = QFileSystemModel(h: self)
@@ -1091,18 +1164,12 @@ proc fcQFileSystemModel_vtable_callback_setItemData(self: pointer, index: pointe
   var virtualReturn = vtbl[].setItemData(self, slotval1, slotval2)
   virtualReturn
 
-proc QFileSystemModelclearItemData*(self: gen_qfilesystemmodel_types.QFileSystemModel, index: gen_qabstractitemmodel_types.QModelIndex): bool =
-  fcQFileSystemModel_virtualbase_clearItemData(self.h, index.h)
-
 proc fcQFileSystemModel_vtable_callback_clearItemData(self: pointer, index: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QFileSystemModelVTable](fcQFileSystemModel_vdata(self)[])
   let self = QFileSystemModel(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var virtualReturn = vtbl[].clearItemData(self, slotval1)
   virtualReturn
-
-proc QFileSystemModelcanDropMimeData*(self: gen_qfilesystemmodel_types.QFileSystemModel, data: gen_qmimedata_types.QMimeData, action: cint, row: cint, column: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool =
-  fcQFileSystemModel_virtualbase_canDropMimeData(self.h, data.h, cint(action), row, column, parent.h)
 
 proc fcQFileSystemModel_vtable_callback_canDropMimeData(self: pointer, data: pointer, action: cint, row: cint, column: cint, parent: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QFileSystemModelVTable](fcQFileSystemModel_vdata(self)[])
@@ -1115,17 +1182,11 @@ proc fcQFileSystemModel_vtable_callback_canDropMimeData(self: pointer, data: poi
   var virtualReturn = vtbl[].canDropMimeData(self, slotval1, slotval2, slotval3, slotval4, slotval5)
   virtualReturn
 
-proc QFileSystemModelsupportedDragActions*(self: gen_qfilesystemmodel_types.QFileSystemModel): cint =
-  cint(fcQFileSystemModel_virtualbase_supportedDragActions(self.h))
-
 proc fcQFileSystemModel_vtable_callback_supportedDragActions(self: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QFileSystemModelVTable](fcQFileSystemModel_vdata(self)[])
   let self = QFileSystemModel(h: self)
   var virtualReturn = vtbl[].supportedDragActions(self)
   cint(virtualReturn)
-
-proc QFileSystemModelinsertRows*(self: gen_qfilesystemmodel_types.QFileSystemModel, row: cint, count: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool =
-  fcQFileSystemModel_virtualbase_insertRows(self.h, row, count, parent.h)
 
 proc fcQFileSystemModel_vtable_callback_insertRows(self: pointer, row: cint, count: cint, parent: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QFileSystemModelVTable](fcQFileSystemModel_vdata(self)[])
@@ -1136,9 +1197,6 @@ proc fcQFileSystemModel_vtable_callback_insertRows(self: pointer, row: cint, cou
   var virtualReturn = vtbl[].insertRows(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QFileSystemModelinsertColumns*(self: gen_qfilesystemmodel_types.QFileSystemModel, column: cint, count: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool =
-  fcQFileSystemModel_virtualbase_insertColumns(self.h, column, count, parent.h)
-
 proc fcQFileSystemModel_vtable_callback_insertColumns(self: pointer, column: cint, count: cint, parent: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QFileSystemModelVTable](fcQFileSystemModel_vdata(self)[])
   let self = QFileSystemModel(h: self)
@@ -1147,9 +1205,6 @@ proc fcQFileSystemModel_vtable_callback_insertColumns(self: pointer, column: cin
   let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   var virtualReturn = vtbl[].insertColumns(self, slotval1, slotval2, slotval3)
   virtualReturn
-
-proc QFileSystemModelremoveRows*(self: gen_qfilesystemmodel_types.QFileSystemModel, row: cint, count: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool =
-  fcQFileSystemModel_virtualbase_removeRows(self.h, row, count, parent.h)
 
 proc fcQFileSystemModel_vtable_callback_removeRows(self: pointer, row: cint, count: cint, parent: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QFileSystemModelVTable](fcQFileSystemModel_vdata(self)[])
@@ -1160,9 +1215,6 @@ proc fcQFileSystemModel_vtable_callback_removeRows(self: pointer, row: cint, cou
   var virtualReturn = vtbl[].removeRows(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QFileSystemModelremoveColumns*(self: gen_qfilesystemmodel_types.QFileSystemModel, column: cint, count: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool =
-  fcQFileSystemModel_virtualbase_removeColumns(self.h, column, count, parent.h)
-
 proc fcQFileSystemModel_vtable_callback_removeColumns(self: pointer, column: cint, count: cint, parent: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QFileSystemModelVTable](fcQFileSystemModel_vdata(self)[])
   let self = QFileSystemModel(h: self)
@@ -1171,9 +1223,6 @@ proc fcQFileSystemModel_vtable_callback_removeColumns(self: pointer, column: cin
   let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   var virtualReturn = vtbl[].removeColumns(self, slotval1, slotval2, slotval3)
   virtualReturn
-
-proc QFileSystemModelmoveRows*(self: gen_qfilesystemmodel_types.QFileSystemModel, sourceParent: gen_qabstractitemmodel_types.QModelIndex, sourceRow: cint, count: cint, destinationParent: gen_qabstractitemmodel_types.QModelIndex, destinationChild: cint): bool =
-  fcQFileSystemModel_virtualbase_moveRows(self.h, sourceParent.h, sourceRow, count, destinationParent.h, destinationChild)
 
 proc fcQFileSystemModel_vtable_callback_moveRows(self: pointer, sourceParent: pointer, sourceRow: cint, count: cint, destinationParent: pointer, destinationChild: cint): bool {.cdecl.} =
   let vtbl = cast[ptr QFileSystemModelVTable](fcQFileSystemModel_vdata(self)[])
@@ -1186,9 +1235,6 @@ proc fcQFileSystemModel_vtable_callback_moveRows(self: pointer, sourceParent: po
   var virtualReturn = vtbl[].moveRows(self, slotval1, slotval2, slotval3, slotval4, slotval5)
   virtualReturn
 
-proc QFileSystemModelmoveColumns*(self: gen_qfilesystemmodel_types.QFileSystemModel, sourceParent: gen_qabstractitemmodel_types.QModelIndex, sourceColumn: cint, count: cint, destinationParent: gen_qabstractitemmodel_types.QModelIndex, destinationChild: cint): bool =
-  fcQFileSystemModel_virtualbase_moveColumns(self.h, sourceParent.h, sourceColumn, count, destinationParent.h, destinationChild)
-
 proc fcQFileSystemModel_vtable_callback_moveColumns(self: pointer, sourceParent: pointer, sourceColumn: cint, count: cint, destinationParent: pointer, destinationChild: cint): bool {.cdecl.} =
   let vtbl = cast[ptr QFileSystemModelVTable](fcQFileSystemModel_vdata(self)[])
   let self = QFileSystemModel(h: self)
@@ -1200,9 +1246,6 @@ proc fcQFileSystemModel_vtable_callback_moveColumns(self: pointer, sourceParent:
   var virtualReturn = vtbl[].moveColumns(self, slotval1, slotval2, slotval3, slotval4, slotval5)
   virtualReturn
 
-proc QFileSystemModelbuddy*(self: gen_qfilesystemmodel_types.QFileSystemModel, index: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex =
-  gen_qabstractitemmodel_types.QModelIndex(h: fcQFileSystemModel_virtualbase_buddy(self.h, index.h), owned: true)
-
 proc fcQFileSystemModel_vtable_callback_buddy(self: pointer, index: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QFileSystemModelVTable](fcQFileSystemModel_vdata(self)[])
   let self = QFileSystemModel(h: self)
@@ -1212,15 +1255,6 @@ proc fcQFileSystemModel_vtable_callback_buddy(self: pointer, index: pointer): po
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
   virtualReturn_h
-
-proc QFileSystemModelmatch*(self: gen_qfilesystemmodel_types.QFileSystemModel, start: gen_qabstractitemmodel_types.QModelIndex, role: cint, value: gen_qvariant_types.QVariant, hits: cint, flags: cint): seq[gen_qabstractitemmodel_types.QModelIndex] =
-  var v_ma = fcQFileSystemModel_virtualbase_match(self.h, start.h, role, value.h, hits, cint(flags))
-  var vx_ret = newSeq[gen_qabstractitemmodel_types.QModelIndex](int(v_ma.len))
-  let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
-  for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qabstractitemmodel_types.QModelIndex(h: v_outCast[i], owned: true)
-  c_free(v_ma.data)
-  vx_ret
 
 proc fcQFileSystemModel_vtable_callback_match(self: pointer, start: pointer, role: cint, value: pointer, hits: cint, flags: cint): struct_miqt_array {.cdecl.} =
   let vtbl = cast[ptr QFileSystemModelVTable](fcQFileSystemModel_vdata(self)[])
@@ -1240,9 +1274,6 @@ proc fcQFileSystemModel_vtable_callback_match(self: pointer, start: pointer, rol
 
   struct_miqt_array(len: csize_t(len(virtualReturn)), data: if len(virtualReturn) == 0: nil else: addr(virtualReturn_CArray[0]))
 
-proc QFileSystemModelspan*(self: gen_qfilesystemmodel_types.QFileSystemModel, index: gen_qabstractitemmodel_types.QModelIndex): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQFileSystemModel_virtualbase_span(self.h, index.h), owned: true)
-
 proc fcQFileSystemModel_vtable_callback_span(self: pointer, index: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QFileSystemModelVTable](fcQFileSystemModel_vdata(self)[])
   let self = QFileSystemModel(h: self)
@@ -1253,9 +1284,6 @@ proc fcQFileSystemModel_vtable_callback_span(self: pointer, index: pointer): poi
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QFileSystemModelmultiData*(self: gen_qfilesystemmodel_types.QFileSystemModel, index: gen_qabstractitemmodel_types.QModelIndex, roleDataSpan: gen_qabstractitemmodel_types.QModelRoleDataSpan): void =
-  fcQFileSystemModel_virtualbase_multiData(self.h, index.h, roleDataSpan.h)
-
 proc fcQFileSystemModel_vtable_callback_multiData(self: pointer, index: pointer, roleDataSpan: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFileSystemModelVTable](fcQFileSystemModel_vdata(self)[])
   let self = QFileSystemModel(h: self)
@@ -1263,33 +1291,21 @@ proc fcQFileSystemModel_vtable_callback_multiData(self: pointer, index: pointer,
   let slotval2 = gen_qabstractitemmodel_types.QModelRoleDataSpan(h: roleDataSpan, owned: true)
   vtbl[].multiData(self, slotval1, slotval2)
 
-proc QFileSystemModelsubmit*(self: gen_qfilesystemmodel_types.QFileSystemModel): bool =
-  fcQFileSystemModel_virtualbase_submit(self.h)
-
 proc fcQFileSystemModel_vtable_callback_submit(self: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QFileSystemModelVTable](fcQFileSystemModel_vdata(self)[])
   let self = QFileSystemModel(h: self)
   var virtualReturn = vtbl[].submit(self)
   virtualReturn
 
-proc QFileSystemModelrevert*(self: gen_qfilesystemmodel_types.QFileSystemModel): void =
-  fcQFileSystemModel_virtualbase_revert(self.h)
-
 proc fcQFileSystemModel_vtable_callback_revert(self: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFileSystemModelVTable](fcQFileSystemModel_vdata(self)[])
   let self = QFileSystemModel(h: self)
   vtbl[].revert(self)
 
-proc QFileSystemModelresetInternalData*(self: gen_qfilesystemmodel_types.QFileSystemModel): void =
-  fcQFileSystemModel_virtualbase_resetInternalData(self.h)
-
 proc fcQFileSystemModel_vtable_callback_resetInternalData(self: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFileSystemModelVTable](fcQFileSystemModel_vdata(self)[])
   let self = QFileSystemModel(h: self)
   vtbl[].resetInternalData(self)
-
-proc QFileSystemModeleventFilter*(self: gen_qfilesystemmodel_types.QFileSystemModel, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
-  fcQFileSystemModel_virtualbase_eventFilter(self.h, watched.h, event.h)
 
 proc fcQFileSystemModel_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QFileSystemModelVTable](fcQFileSystemModel_vdata(self)[])
@@ -1299,17 +1315,11 @@ proc fcQFileSystemModel_vtable_callback_eventFilter(self: pointer, watched: poin
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
-proc QFileSystemModelchildEvent*(self: gen_qfilesystemmodel_types.QFileSystemModel, event: gen_qcoreevent_types.QChildEvent): void =
-  fcQFileSystemModel_virtualbase_childEvent(self.h, event.h)
-
 proc fcQFileSystemModel_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFileSystemModelVTable](fcQFileSystemModel_vdata(self)[])
   let self = QFileSystemModel(h: self)
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
-
-proc QFileSystemModelcustomEvent*(self: gen_qfilesystemmodel_types.QFileSystemModel, event: gen_qcoreevent_types.QEvent): void =
-  fcQFileSystemModel_virtualbase_customEvent(self.h, event.h)
 
 proc fcQFileSystemModel_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFileSystemModelVTable](fcQFileSystemModel_vdata(self)[])
@@ -1317,17 +1327,11 @@ proc fcQFileSystemModel_vtable_callback_customEvent(self: pointer, event: pointe
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
-proc QFileSystemModelconnectNotify*(self: gen_qfilesystemmodel_types.QFileSystemModel, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQFileSystemModel_virtualbase_connectNotify(self.h, signal.h)
-
 proc fcQFileSystemModel_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFileSystemModelVTable](fcQFileSystemModel_vdata(self)[])
   let self = QFileSystemModel(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
-
-proc QFileSystemModeldisconnectNotify*(self: gen_qfilesystemmodel_types.QFileSystemModel, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQFileSystemModel_virtualbase_disconnectNotify(self.h, signal.h)
 
 proc fcQFileSystemModel_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFileSystemModelVTable](fcQFileSystemModel_vdata(self)[])
@@ -1337,23 +1341,113 @@ proc fcQFileSystemModel_vtable_callback_disconnectNotify(self: pointer, signal: 
 
 type VirtualQFileSystemModel* {.inheritable.} = ref object of QFileSystemModel
   vtbl*: cQFileSystemModelVTable
+
 method metaObject*(self: VirtualQFileSystemModel): gen_qobjectdefs_types.QMetaObject {.base.} =
   QFileSystemModelmetaObject(self[])
+method metacast*(self: VirtualQFileSystemModel, param1: cstring): pointer {.base.} =
+  QFileSystemModelmetacast(self[], param1)
+method metacall*(self: VirtualQFileSystemModel, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QFileSystemModelmetacall(self[], param1, param2, param3)
+method index*(self: VirtualQFileSystemModel, row: cint, column: cint, parent: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex {.base.} =
+  QFileSystemModelindex(self[], row, column, parent)
+method parent*(self: VirtualQFileSystemModel, child: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex {.base.} =
+  QFileSystemModelparent(self[], child)
+method sibling*(self: VirtualQFileSystemModel, row: cint, column: cint, idx: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex {.base.} =
+  QFileSystemModelsibling(self[], row, column, idx)
+method hasChildren*(self: VirtualQFileSystemModel, parent: gen_qabstractitemmodel_types.QModelIndex): bool {.base.} =
+  QFileSystemModelhasChildren(self[], parent)
+method canFetchMore*(self: VirtualQFileSystemModel, parent: gen_qabstractitemmodel_types.QModelIndex): bool {.base.} =
+  QFileSystemModelcanFetchMore(self[], parent)
+method fetchMore*(self: VirtualQFileSystemModel, parent: gen_qabstractitemmodel_types.QModelIndex): void {.base.} =
+  QFileSystemModelfetchMore(self[], parent)
+method rowCount*(self: VirtualQFileSystemModel, parent: gen_qabstractitemmodel_types.QModelIndex): cint {.base.} =
+  QFileSystemModelrowCount(self[], parent)
+method columnCount*(self: VirtualQFileSystemModel, parent: gen_qabstractitemmodel_types.QModelIndex): cint {.base.} =
+  QFileSystemModelcolumnCount(self[], parent)
+method data*(self: VirtualQFileSystemModel, index: gen_qabstractitemmodel_types.QModelIndex, role: cint): gen_qvariant_types.QVariant {.base.} =
+  QFileSystemModeldata(self[], index, role)
+method setData*(self: VirtualQFileSystemModel, index: gen_qabstractitemmodel_types.QModelIndex, value: gen_qvariant_types.QVariant, role: cint): bool {.base.} =
+  QFileSystemModelsetData(self[], index, value, role)
+method headerData*(self: VirtualQFileSystemModel, section: cint, orientation: cint, role: cint): gen_qvariant_types.QVariant {.base.} =
+  QFileSystemModelheaderData(self[], section, orientation, role)
+method flags*(self: VirtualQFileSystemModel, index: gen_qabstractitemmodel_types.QModelIndex): cint {.base.} =
+  QFileSystemModelflags(self[], index)
+method sort*(self: VirtualQFileSystemModel, column: cint, order: cint): void {.base.} =
+  QFileSystemModelsort(self[], column, order)
+method mimeTypes*(self: VirtualQFileSystemModel): seq[string] {.base.} =
+  QFileSystemModelmimeTypes(self[])
+method mimeData*(self: VirtualQFileSystemModel, indexes: openArray[gen_qabstractitemmodel_types.QModelIndex]): gen_qmimedata_types.QMimeData {.base.} =
+  QFileSystemModelmimeData(self[], indexes)
+method dropMimeData*(self: VirtualQFileSystemModel, data: gen_qmimedata_types.QMimeData, action: cint, row: cint, column: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool {.base.} =
+  QFileSystemModeldropMimeData(self[], data, action, row, column, parent)
+method supportedDropActions*(self: VirtualQFileSystemModel): cint {.base.} =
+  QFileSystemModelsupportedDropActions(self[])
+method roleNames*(self: VirtualQFileSystemModel): Table[cint,seq[byte]] {.base.} =
+  QFileSystemModelroleNames(self[])
+method timerEvent*(self: VirtualQFileSystemModel, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QFileSystemModeltimerEvent(self[], event)
+method event*(self: VirtualQFileSystemModel, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QFileSystemModelevent(self[], event)
+method setHeaderData*(self: VirtualQFileSystemModel, section: cint, orientation: cint, value: gen_qvariant_types.QVariant, role: cint): bool {.base.} =
+  QFileSystemModelsetHeaderData(self[], section, orientation, value, role)
+method itemData*(self: VirtualQFileSystemModel, index: gen_qabstractitemmodel_types.QModelIndex): Table[cint,gen_qvariant_types.QVariant] {.base.} =
+  QFileSystemModelitemData(self[], index)
+method setItemData*(self: VirtualQFileSystemModel, index: gen_qabstractitemmodel_types.QModelIndex, roles: Table[cint,gen_qvariant_types.QVariant]): bool {.base.} =
+  QFileSystemModelsetItemData(self[], index, roles)
+method clearItemData*(self: VirtualQFileSystemModel, index: gen_qabstractitemmodel_types.QModelIndex): bool {.base.} =
+  QFileSystemModelclearItemData(self[], index)
+method canDropMimeData*(self: VirtualQFileSystemModel, data: gen_qmimedata_types.QMimeData, action: cint, row: cint, column: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool {.base.} =
+  QFileSystemModelcanDropMimeData(self[], data, action, row, column, parent)
+method supportedDragActions*(self: VirtualQFileSystemModel): cint {.base.} =
+  QFileSystemModelsupportedDragActions(self[])
+method insertRows*(self: VirtualQFileSystemModel, row: cint, count: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool {.base.} =
+  QFileSystemModelinsertRows(self[], row, count, parent)
+method insertColumns*(self: VirtualQFileSystemModel, column: cint, count: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool {.base.} =
+  QFileSystemModelinsertColumns(self[], column, count, parent)
+method removeRows*(self: VirtualQFileSystemModel, row: cint, count: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool {.base.} =
+  QFileSystemModelremoveRows(self[], row, count, parent)
+method removeColumns*(self: VirtualQFileSystemModel, column: cint, count: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool {.base.} =
+  QFileSystemModelremoveColumns(self[], column, count, parent)
+method moveRows*(self: VirtualQFileSystemModel, sourceParent: gen_qabstractitemmodel_types.QModelIndex, sourceRow: cint, count: cint, destinationParent: gen_qabstractitemmodel_types.QModelIndex, destinationChild: cint): bool {.base.} =
+  QFileSystemModelmoveRows(self[], sourceParent, sourceRow, count, destinationParent, destinationChild)
+method moveColumns*(self: VirtualQFileSystemModel, sourceParent: gen_qabstractitemmodel_types.QModelIndex, sourceColumn: cint, count: cint, destinationParent: gen_qabstractitemmodel_types.QModelIndex, destinationChild: cint): bool {.base.} =
+  QFileSystemModelmoveColumns(self[], sourceParent, sourceColumn, count, destinationParent, destinationChild)
+method buddy*(self: VirtualQFileSystemModel, index: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex {.base.} =
+  QFileSystemModelbuddy(self[], index)
+method match*(self: VirtualQFileSystemModel, start: gen_qabstractitemmodel_types.QModelIndex, role: cint, value: gen_qvariant_types.QVariant, hits: cint, flags: cint): seq[gen_qabstractitemmodel_types.QModelIndex] {.base.} =
+  QFileSystemModelmatch(self[], start, role, value, hits, flags)
+method span*(self: VirtualQFileSystemModel, index: gen_qabstractitemmodel_types.QModelIndex): gen_qsize_types.QSize {.base.} =
+  QFileSystemModelspan(self[], index)
+method multiData*(self: VirtualQFileSystemModel, index: gen_qabstractitemmodel_types.QModelIndex, roleDataSpan: gen_qabstractitemmodel_types.QModelRoleDataSpan): void {.base.} =
+  QFileSystemModelmultiData(self[], index, roleDataSpan)
+method submit*(self: VirtualQFileSystemModel): bool {.base.} =
+  QFileSystemModelsubmit(self[])
+method revert*(self: VirtualQFileSystemModel): void {.base.} =
+  QFileSystemModelrevert(self[])
+method resetInternalData*(self: VirtualQFileSystemModel): void {.base.} =
+  QFileSystemModelresetInternalData(self[])
+method eventFilter*(self: VirtualQFileSystemModel, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QFileSystemModeleventFilter(self[], watched, event)
+method childEvent*(self: VirtualQFileSystemModel, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QFileSystemModelchildEvent(self[], event)
+method customEvent*(self: VirtualQFileSystemModel, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QFileSystemModelcustomEvent(self[], event)
+method connectNotify*(self: VirtualQFileSystemModel, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QFileSystemModelconnectNotify(self[], signal)
+method disconnectNotify*(self: VirtualQFileSystemModel, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QFileSystemModeldisconnectNotify(self[], signal)
+
 proc fcQFileSystemModel_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQFileSystemModel](fcQFileSystemModel_vdata(self)[])
   var virtualReturn = inst.metaObject()
   virtualReturn.h
 
-method metacast*(self: VirtualQFileSystemModel, param1: cstring): pointer {.base.} =
-  QFileSystemModelmetacast(self[], param1)
 proc fcQFileSystemModel_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQFileSystemModel](fcQFileSystemModel_vdata(self)[])
   let slotval1 = (param1)
   var virtualReturn = inst.metacast(slotval1)
   virtualReturn
 
-method metacall*(self: VirtualQFileSystemModel, param1: cint, param2: cint, param3: pointer): cint {.base.} =
-  QFileSystemModelmetacall(self[], param1, param2, param3)
 proc fcQFileSystemModel_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQFileSystemModel](fcQFileSystemModel_vdata(self)[])
   let slotval1 = cint(param1)
@@ -1362,8 +1456,6 @@ proc fcQFileSystemModel_method_callback_metacall(self: pointer, param1: cint, pa
   var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
-method index*(self: VirtualQFileSystemModel, row: cint, column: cint, parent: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex {.base.} =
-  QFileSystemModelindex(self[], row, column, parent)
 proc fcQFileSystemModel_method_callback_index(self: pointer, row: cint, column: cint, parent: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQFileSystemModel](fcQFileSystemModel_vdata(self)[])
   let slotval1 = row
@@ -1372,16 +1464,12 @@ proc fcQFileSystemModel_method_callback_index(self: pointer, row: cint, column: 
   var virtualReturn = inst.index(slotval1, slotval2, slotval3)
   virtualReturn.h
 
-method parent*(self: VirtualQFileSystemModel, child: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex {.base.} =
-  QFileSystemModelparent(self[], child)
 proc fcQFileSystemModel_method_callback_parent(self: pointer, child: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQFileSystemModel](fcQFileSystemModel_vdata(self)[])
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: child, owned: false)
   var virtualReturn = inst.parent(slotval1)
   virtualReturn.h
 
-method sibling*(self: VirtualQFileSystemModel, row: cint, column: cint, idx: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex {.base.} =
-  QFileSystemModelsibling(self[], row, column, idx)
 proc fcQFileSystemModel_method_callback_sibling(self: pointer, row: cint, column: cint, idx: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQFileSystemModel](fcQFileSystemModel_vdata(self)[])
   let slotval1 = row
@@ -1390,47 +1478,35 @@ proc fcQFileSystemModel_method_callback_sibling(self: pointer, row: cint, column
   var virtualReturn = inst.sibling(slotval1, slotval2, slotval3)
   virtualReturn.h
 
-method hasChildren*(self: VirtualQFileSystemModel, parent: gen_qabstractitemmodel_types.QModelIndex): bool {.base.} =
-  QFileSystemModelhasChildren(self[], parent)
 proc fcQFileSystemModel_method_callback_hasChildren(self: pointer, parent: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQFileSystemModel](fcQFileSystemModel_vdata(self)[])
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   var virtualReturn = inst.hasChildren(slotval1)
   virtualReturn
 
-method canFetchMore*(self: VirtualQFileSystemModel, parent: gen_qabstractitemmodel_types.QModelIndex): bool {.base.} =
-  QFileSystemModelcanFetchMore(self[], parent)
 proc fcQFileSystemModel_method_callback_canFetchMore(self: pointer, parent: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQFileSystemModel](fcQFileSystemModel_vdata(self)[])
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   var virtualReturn = inst.canFetchMore(slotval1)
   virtualReturn
 
-method fetchMore*(self: VirtualQFileSystemModel, parent: gen_qabstractitemmodel_types.QModelIndex): void {.base.} =
-  QFileSystemModelfetchMore(self[], parent)
 proc fcQFileSystemModel_method_callback_fetchMore(self: pointer, parent: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFileSystemModel](fcQFileSystemModel_vdata(self)[])
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   inst.fetchMore(slotval1)
 
-method rowCount*(self: VirtualQFileSystemModel, parent: gen_qabstractitemmodel_types.QModelIndex): cint {.base.} =
-  QFileSystemModelrowCount(self[], parent)
 proc fcQFileSystemModel_method_callback_rowCount(self: pointer, parent: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQFileSystemModel](fcQFileSystemModel_vdata(self)[])
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   var virtualReturn = inst.rowCount(slotval1)
   virtualReturn
 
-method columnCount*(self: VirtualQFileSystemModel, parent: gen_qabstractitemmodel_types.QModelIndex): cint {.base.} =
-  QFileSystemModelcolumnCount(self[], parent)
 proc fcQFileSystemModel_method_callback_columnCount(self: pointer, parent: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQFileSystemModel](fcQFileSystemModel_vdata(self)[])
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   var virtualReturn = inst.columnCount(slotval1)
   virtualReturn
 
-method data*(self: VirtualQFileSystemModel, index: gen_qabstractitemmodel_types.QModelIndex, role: cint): gen_qvariant_types.QVariant {.base.} =
-  QFileSystemModeldata(self[], index, role)
 proc fcQFileSystemModel_method_callback_data(self: pointer, index: pointer, role: cint): pointer {.cdecl.} =
   let inst = cast[VirtualQFileSystemModel](fcQFileSystemModel_vdata(self)[])
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
@@ -1438,8 +1514,6 @@ proc fcQFileSystemModel_method_callback_data(self: pointer, index: pointer, role
   var virtualReturn = inst.data(slotval1, slotval2)
   virtualReturn.h
 
-method setData*(self: VirtualQFileSystemModel, index: gen_qabstractitemmodel_types.QModelIndex, value: gen_qvariant_types.QVariant, role: cint): bool {.base.} =
-  QFileSystemModelsetData(self[], index, value, role)
 proc fcQFileSystemModel_method_callback_setData(self: pointer, index: pointer, value: pointer, role: cint): bool {.cdecl.} =
   let inst = cast[VirtualQFileSystemModel](fcQFileSystemModel_vdata(self)[])
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
@@ -1448,8 +1522,6 @@ proc fcQFileSystemModel_method_callback_setData(self: pointer, index: pointer, v
   var virtualReturn = inst.setData(slotval1, slotval2, slotval3)
   virtualReturn
 
-method headerData*(self: VirtualQFileSystemModel, section: cint, orientation: cint, role: cint): gen_qvariant_types.QVariant {.base.} =
-  QFileSystemModelheaderData(self[], section, orientation, role)
 proc fcQFileSystemModel_method_callback_headerData(self: pointer, section: cint, orientation: cint, role: cint): pointer {.cdecl.} =
   let inst = cast[VirtualQFileSystemModel](fcQFileSystemModel_vdata(self)[])
   let slotval1 = section
@@ -1458,24 +1530,18 @@ proc fcQFileSystemModel_method_callback_headerData(self: pointer, section: cint,
   var virtualReturn = inst.headerData(slotval1, slotval2, slotval3)
   virtualReturn.h
 
-method flags*(self: VirtualQFileSystemModel, index: gen_qabstractitemmodel_types.QModelIndex): cint {.base.} =
-  QFileSystemModelflags(self[], index)
 proc fcQFileSystemModel_method_callback_flags(self: pointer, index: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQFileSystemModel](fcQFileSystemModel_vdata(self)[])
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var virtualReturn = inst.flags(slotval1)
   cint(virtualReturn)
 
-method sort*(self: VirtualQFileSystemModel, column: cint, order: cint): void {.base.} =
-  QFileSystemModelsort(self[], column, order)
 proc fcQFileSystemModel_method_callback_sort(self: pointer, column: cint, order: cint): void {.cdecl.} =
   let inst = cast[VirtualQFileSystemModel](fcQFileSystemModel_vdata(self)[])
   let slotval1 = column
   let slotval2 = cint(order)
   inst.sort(slotval1, slotval2)
 
-method mimeTypes*(self: VirtualQFileSystemModel): seq[string] {.base.} =
-  QFileSystemModelmimeTypes(self[])
 proc fcQFileSystemModel_method_callback_mimeTypes(self: pointer): struct_miqt_array {.cdecl.} =
   let inst = cast[VirtualQFileSystemModel](fcQFileSystemModel_vdata(self)[])
   var virtualReturn = inst.mimeTypes()
@@ -1485,8 +1551,6 @@ proc fcQFileSystemModel_method_callback_mimeTypes(self: pointer): struct_miqt_ar
 
   struct_miqt_array(len: csize_t(len(virtualReturn)), data: if len(virtualReturn) == 0: nil else: addr(virtualReturn_CArray[0]))
 
-method mimeData*(self: VirtualQFileSystemModel, indexes: openArray[gen_qabstractitemmodel_types.QModelIndex]): gen_qmimedata_types.QMimeData {.base.} =
-  QFileSystemModelmimeData(self[], indexes)
 proc fcQFileSystemModel_method_callback_mimeData(self: pointer, indexes: struct_miqt_array): pointer {.cdecl.} =
   let inst = cast[VirtualQFileSystemModel](fcQFileSystemModel_vdata(self)[])
   var vindexes_ma = indexes
@@ -1499,8 +1563,6 @@ proc fcQFileSystemModel_method_callback_mimeData(self: pointer, indexes: struct_
   var virtualReturn = inst.mimeData(slotval1)
   virtualReturn.h
 
-method dropMimeData*(self: VirtualQFileSystemModel, data: gen_qmimedata_types.QMimeData, action: cint, row: cint, column: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool {.base.} =
-  QFileSystemModeldropMimeData(self[], data, action, row, column, parent)
 proc fcQFileSystemModel_method_callback_dropMimeData(self: pointer, data: pointer, action: cint, row: cint, column: cint, parent: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQFileSystemModel](fcQFileSystemModel_vdata(self)[])
   let slotval1 = gen_qmimedata_types.QMimeData(h: data, owned: false)
@@ -1511,15 +1573,11 @@ proc fcQFileSystemModel_method_callback_dropMimeData(self: pointer, data: pointe
   var virtualReturn = inst.dropMimeData(slotval1, slotval2, slotval3, slotval4, slotval5)
   virtualReturn
 
-method supportedDropActions*(self: VirtualQFileSystemModel): cint {.base.} =
-  QFileSystemModelsupportedDropActions(self[])
 proc fcQFileSystemModel_method_callback_supportedDropActions(self: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQFileSystemModel](fcQFileSystemModel_vdata(self)[])
   var virtualReturn = inst.supportedDropActions()
   cint(virtualReturn)
 
-method roleNames*(self: VirtualQFileSystemModel): Table[cint,seq[byte]] {.base.} =
-  QFileSystemModelroleNames(self[])
 proc fcQFileSystemModel_method_callback_roleNames(self: pointer): struct_miqt_map {.cdecl.} =
   let inst = cast[VirtualQFileSystemModel](fcQFileSystemModel_vdata(self)[])
   var virtualReturn = inst.roleNames()
@@ -1536,23 +1594,17 @@ proc fcQFileSystemModel_method_callback_roleNames(self: pointer): struct_miqt_ma
 
   struct_miqt_map(len: csize_t(len(virtualReturn)),keys: if len(virtualReturn) == 0: nil else: addr(virtualReturn_Keys_CArray[0]), values: if len(virtualReturn) == 0: nil else: addr(virtualReturn_Values_CArray[0]),)
 
-method timerEvent*(self: VirtualQFileSystemModel, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
-  QFileSystemModeltimerEvent(self[], event)
 proc fcQFileSystemModel_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFileSystemModel](fcQFileSystemModel_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
-method event*(self: VirtualQFileSystemModel, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QFileSystemModelevent(self[], event)
 proc fcQFileSystemModel_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQFileSystemModel](fcQFileSystemModel_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
-method setHeaderData*(self: VirtualQFileSystemModel, section: cint, orientation: cint, value: gen_qvariant_types.QVariant, role: cint): bool {.base.} =
-  QFileSystemModelsetHeaderData(self[], section, orientation, value, role)
 proc fcQFileSystemModel_method_callback_setHeaderData(self: pointer, section: cint, orientation: cint, value: pointer, role: cint): bool {.cdecl.} =
   let inst = cast[VirtualQFileSystemModel](fcQFileSystemModel_vdata(self)[])
   let slotval1 = section
@@ -1562,8 +1614,6 @@ proc fcQFileSystemModel_method_callback_setHeaderData(self: pointer, section: ci
   var virtualReturn = inst.setHeaderData(slotval1, slotval2, slotval3, slotval4)
   virtualReturn
 
-method itemData*(self: VirtualQFileSystemModel, index: gen_qabstractitemmodel_types.QModelIndex): Table[cint,gen_qvariant_types.QVariant] {.base.} =
-  QFileSystemModelitemData(self[], index)
 proc fcQFileSystemModel_method_callback_itemData(self: pointer, index: pointer): struct_miqt_map {.cdecl.} =
   let inst = cast[VirtualQFileSystemModel](fcQFileSystemModel_vdata(self)[])
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
@@ -1581,8 +1631,6 @@ proc fcQFileSystemModel_method_callback_itemData(self: pointer, index: pointer):
 
   struct_miqt_map(len: csize_t(len(virtualReturn)),keys: if len(virtualReturn) == 0: nil else: addr(virtualReturn_Keys_CArray[0]), values: if len(virtualReturn) == 0: nil else: addr(virtualReturn_Values_CArray[0]),)
 
-method setItemData*(self: VirtualQFileSystemModel, index: gen_qabstractitemmodel_types.QModelIndex, roles: Table[cint,gen_qvariant_types.QVariant]): bool {.base.} =
-  QFileSystemModelsetItemData(self[], index, roles)
 proc fcQFileSystemModel_method_callback_setItemData(self: pointer, index: pointer, roles: struct_miqt_map): bool {.cdecl.} =
   let inst = cast[VirtualQFileSystemModel](fcQFileSystemModel_vdata(self)[])
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
@@ -1602,16 +1650,12 @@ proc fcQFileSystemModel_method_callback_setItemData(self: pointer, index: pointe
   var virtualReturn = inst.setItemData(slotval1, slotval2)
   virtualReturn
 
-method clearItemData*(self: VirtualQFileSystemModel, index: gen_qabstractitemmodel_types.QModelIndex): bool {.base.} =
-  QFileSystemModelclearItemData(self[], index)
 proc fcQFileSystemModel_method_callback_clearItemData(self: pointer, index: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQFileSystemModel](fcQFileSystemModel_vdata(self)[])
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var virtualReturn = inst.clearItemData(slotval1)
   virtualReturn
 
-method canDropMimeData*(self: VirtualQFileSystemModel, data: gen_qmimedata_types.QMimeData, action: cint, row: cint, column: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool {.base.} =
-  QFileSystemModelcanDropMimeData(self[], data, action, row, column, parent)
 proc fcQFileSystemModel_method_callback_canDropMimeData(self: pointer, data: pointer, action: cint, row: cint, column: cint, parent: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQFileSystemModel](fcQFileSystemModel_vdata(self)[])
   let slotval1 = gen_qmimedata_types.QMimeData(h: data, owned: false)
@@ -1622,15 +1666,11 @@ proc fcQFileSystemModel_method_callback_canDropMimeData(self: pointer, data: poi
   var virtualReturn = inst.canDropMimeData(slotval1, slotval2, slotval3, slotval4, slotval5)
   virtualReturn
 
-method supportedDragActions*(self: VirtualQFileSystemModel): cint {.base.} =
-  QFileSystemModelsupportedDragActions(self[])
 proc fcQFileSystemModel_method_callback_supportedDragActions(self: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQFileSystemModel](fcQFileSystemModel_vdata(self)[])
   var virtualReturn = inst.supportedDragActions()
   cint(virtualReturn)
 
-method insertRows*(self: VirtualQFileSystemModel, row: cint, count: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool {.base.} =
-  QFileSystemModelinsertRows(self[], row, count, parent)
 proc fcQFileSystemModel_method_callback_insertRows(self: pointer, row: cint, count: cint, parent: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQFileSystemModel](fcQFileSystemModel_vdata(self)[])
   let slotval1 = row
@@ -1639,8 +1679,6 @@ proc fcQFileSystemModel_method_callback_insertRows(self: pointer, row: cint, cou
   var virtualReturn = inst.insertRows(slotval1, slotval2, slotval3)
   virtualReturn
 
-method insertColumns*(self: VirtualQFileSystemModel, column: cint, count: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool {.base.} =
-  QFileSystemModelinsertColumns(self[], column, count, parent)
 proc fcQFileSystemModel_method_callback_insertColumns(self: pointer, column: cint, count: cint, parent: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQFileSystemModel](fcQFileSystemModel_vdata(self)[])
   let slotval1 = column
@@ -1649,8 +1687,6 @@ proc fcQFileSystemModel_method_callback_insertColumns(self: pointer, column: cin
   var virtualReturn = inst.insertColumns(slotval1, slotval2, slotval3)
   virtualReturn
 
-method removeRows*(self: VirtualQFileSystemModel, row: cint, count: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool {.base.} =
-  QFileSystemModelremoveRows(self[], row, count, parent)
 proc fcQFileSystemModel_method_callback_removeRows(self: pointer, row: cint, count: cint, parent: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQFileSystemModel](fcQFileSystemModel_vdata(self)[])
   let slotval1 = row
@@ -1659,8 +1695,6 @@ proc fcQFileSystemModel_method_callback_removeRows(self: pointer, row: cint, cou
   var virtualReturn = inst.removeRows(slotval1, slotval2, slotval3)
   virtualReturn
 
-method removeColumns*(self: VirtualQFileSystemModel, column: cint, count: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool {.base.} =
-  QFileSystemModelremoveColumns(self[], column, count, parent)
 proc fcQFileSystemModel_method_callback_removeColumns(self: pointer, column: cint, count: cint, parent: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQFileSystemModel](fcQFileSystemModel_vdata(self)[])
   let slotval1 = column
@@ -1669,8 +1703,6 @@ proc fcQFileSystemModel_method_callback_removeColumns(self: pointer, column: cin
   var virtualReturn = inst.removeColumns(slotval1, slotval2, slotval3)
   virtualReturn
 
-method moveRows*(self: VirtualQFileSystemModel, sourceParent: gen_qabstractitemmodel_types.QModelIndex, sourceRow: cint, count: cint, destinationParent: gen_qabstractitemmodel_types.QModelIndex, destinationChild: cint): bool {.base.} =
-  QFileSystemModelmoveRows(self[], sourceParent, sourceRow, count, destinationParent, destinationChild)
 proc fcQFileSystemModel_method_callback_moveRows(self: pointer, sourceParent: pointer, sourceRow: cint, count: cint, destinationParent: pointer, destinationChild: cint): bool {.cdecl.} =
   let inst = cast[VirtualQFileSystemModel](fcQFileSystemModel_vdata(self)[])
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: sourceParent, owned: false)
@@ -1681,8 +1713,6 @@ proc fcQFileSystemModel_method_callback_moveRows(self: pointer, sourceParent: po
   var virtualReturn = inst.moveRows(slotval1, slotval2, slotval3, slotval4, slotval5)
   virtualReturn
 
-method moveColumns*(self: VirtualQFileSystemModel, sourceParent: gen_qabstractitemmodel_types.QModelIndex, sourceColumn: cint, count: cint, destinationParent: gen_qabstractitemmodel_types.QModelIndex, destinationChild: cint): bool {.base.} =
-  QFileSystemModelmoveColumns(self[], sourceParent, sourceColumn, count, destinationParent, destinationChild)
 proc fcQFileSystemModel_method_callback_moveColumns(self: pointer, sourceParent: pointer, sourceColumn: cint, count: cint, destinationParent: pointer, destinationChild: cint): bool {.cdecl.} =
   let inst = cast[VirtualQFileSystemModel](fcQFileSystemModel_vdata(self)[])
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: sourceParent, owned: false)
@@ -1693,16 +1723,12 @@ proc fcQFileSystemModel_method_callback_moveColumns(self: pointer, sourceParent:
   var virtualReturn = inst.moveColumns(slotval1, slotval2, slotval3, slotval4, slotval5)
   virtualReturn
 
-method buddy*(self: VirtualQFileSystemModel, index: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex {.base.} =
-  QFileSystemModelbuddy(self[], index)
 proc fcQFileSystemModel_method_callback_buddy(self: pointer, index: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQFileSystemModel](fcQFileSystemModel_vdata(self)[])
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var virtualReturn = inst.buddy(slotval1)
   virtualReturn.h
 
-method match*(self: VirtualQFileSystemModel, start: gen_qabstractitemmodel_types.QModelIndex, role: cint, value: gen_qvariant_types.QVariant, hits: cint, flags: cint): seq[gen_qabstractitemmodel_types.QModelIndex] {.base.} =
-  QFileSystemModelmatch(self[], start, role, value, hits, flags)
 proc fcQFileSystemModel_method_callback_match(self: pointer, start: pointer, role: cint, value: pointer, hits: cint, flags: cint): struct_miqt_array {.cdecl.} =
   let inst = cast[VirtualQFileSystemModel](fcQFileSystemModel_vdata(self)[])
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: start, owned: false)
@@ -1717,43 +1743,31 @@ proc fcQFileSystemModel_method_callback_match(self: pointer, start: pointer, rol
 
   struct_miqt_array(len: csize_t(len(virtualReturn)), data: if len(virtualReturn) == 0: nil else: addr(virtualReturn_CArray[0]))
 
-method span*(self: VirtualQFileSystemModel, index: gen_qabstractitemmodel_types.QModelIndex): gen_qsize_types.QSize {.base.} =
-  QFileSystemModelspan(self[], index)
 proc fcQFileSystemModel_method_callback_span(self: pointer, index: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQFileSystemModel](fcQFileSystemModel_vdata(self)[])
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var virtualReturn = inst.span(slotval1)
   virtualReturn.h
 
-method multiData*(self: VirtualQFileSystemModel, index: gen_qabstractitemmodel_types.QModelIndex, roleDataSpan: gen_qabstractitemmodel_types.QModelRoleDataSpan): void {.base.} =
-  QFileSystemModelmultiData(self[], index, roleDataSpan)
 proc fcQFileSystemModel_method_callback_multiData(self: pointer, index: pointer, roleDataSpan: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFileSystemModel](fcQFileSystemModel_vdata(self)[])
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   let slotval2 = gen_qabstractitemmodel_types.QModelRoleDataSpan(h: roleDataSpan, owned: true)
   inst.multiData(slotval1, slotval2)
 
-method submit*(self: VirtualQFileSystemModel): bool {.base.} =
-  QFileSystemModelsubmit(self[])
 proc fcQFileSystemModel_method_callback_submit(self: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQFileSystemModel](fcQFileSystemModel_vdata(self)[])
   var virtualReturn = inst.submit()
   virtualReturn
 
-method revert*(self: VirtualQFileSystemModel): void {.base.} =
-  QFileSystemModelrevert(self[])
 proc fcQFileSystemModel_method_callback_revert(self: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFileSystemModel](fcQFileSystemModel_vdata(self)[])
   inst.revert()
 
-method resetInternalData*(self: VirtualQFileSystemModel): void {.base.} =
-  QFileSystemModelresetInternalData(self[])
 proc fcQFileSystemModel_method_callback_resetInternalData(self: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFileSystemModel](fcQFileSystemModel_vdata(self)[])
   inst.resetInternalData()
 
-method eventFilter*(self: VirtualQFileSystemModel, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QFileSystemModeleventFilter(self[], watched, event)
 proc fcQFileSystemModel_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQFileSystemModel](fcQFileSystemModel_vdata(self)[])
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
@@ -1761,33 +1775,26 @@ proc fcQFileSystemModel_method_callback_eventFilter(self: pointer, watched: poin
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
-method childEvent*(self: VirtualQFileSystemModel, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
-  QFileSystemModelchildEvent(self[], event)
 proc fcQFileSystemModel_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFileSystemModel](fcQFileSystemModel_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
-method customEvent*(self: VirtualQFileSystemModel, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QFileSystemModelcustomEvent(self[], event)
 proc fcQFileSystemModel_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFileSystemModel](fcQFileSystemModel_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
-method connectNotify*(self: VirtualQFileSystemModel, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QFileSystemModelconnectNotify(self[], signal)
 proc fcQFileSystemModel_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFileSystemModel](fcQFileSystemModel_vdata(self)[])
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
-method disconnectNotify*(self: VirtualQFileSystemModel, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QFileSystemModeldisconnectNotify(self[], signal)
 proc fcQFileSystemModel_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFileSystemModel](fcQFileSystemModel_vdata(self)[])
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
+
 
 proc createIndex*(self: gen_qfilesystemmodel_types.QFileSystemModel, row: cint, column: cint): gen_qabstractitemmodel_types.QModelIndex =
   gen_qabstractitemmodel_types.QModelIndex(h: fcQFileSystemModel_protectedbase_createIndex(self.h, row, column), owned: true)

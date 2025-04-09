@@ -92,6 +92,7 @@ proc fcQFile_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc:
 proc fcQFile_open33(self: pointer, fd: cint, ioFlags: cint, handleFlags: cint): bool {.importc: "QFile_open33".}
 proc fcQFile_vdata(self: pointer): ptr pointer {.importc: "QFile_vdata".}
 proc fvdata_cQFile(self: pointer): pointer {.importc: "vdata_QFile".}
+
 type cQFileVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -334,6 +335,7 @@ type QFilechildEventProc* = proc(self: QFile, event: gen_qcoreevent_types.QChild
 type QFilecustomEventProc* = proc(self: QFile, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QFileconnectNotifyProc* = proc(self: QFile, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QFiledisconnectNotifyProc* = proc(self: QFile, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+
 type QFileVTable* {.inheritable, pure.} = object
   vtbl: cQFileVTable
   metaObject*: QFilemetaObjectProc
@@ -367,8 +369,103 @@ type QFileVTable* {.inheritable, pure.} = object
   customEvent*: QFilecustomEventProc
   connectNotify*: QFileconnectNotifyProc
   disconnectNotify*: QFiledisconnectNotifyProc
+
 proc QFilemetaObject*(self: gen_qfile_types.QFile): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQFile_virtualbase_metaObject(self.h), owned: false)
+
+proc QFilemetacast*(self: gen_qfile_types.QFile, param1: cstring): pointer =
+  fcQFile_virtualbase_metacast(self.h, param1)
+
+proc QFilemetacall*(self: gen_qfile_types.QFile, param1: cint, param2: cint, param3: pointer): cint =
+  fcQFile_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+proc QFilefileName*(self: gen_qfile_types.QFile): string =
+  let v_ms = fcQFile_virtualbase_fileName(self.h)
+  let vx_ret = string.fromBytes(v_ms)
+  c_free(v_ms.data)
+  vx_ret
+
+proc QFileopen*(self: gen_qfile_types.QFile, flags: cint): bool =
+  fcQFile_virtualbase_open(self.h, cint(flags))
+
+proc QFilesize*(self: gen_qfile_types.QFile): clonglong =
+  fcQFile_virtualbase_size(self.h)
+
+proc QFileresize*(self: gen_qfile_types.QFile, sz: clonglong): bool =
+  fcQFile_virtualbase_resize(self.h, sz)
+
+proc QFilepermissions*(self: gen_qfile_types.QFile): cint =
+  cint(fcQFile_virtualbase_permissions(self.h))
+
+proc QFilesetPermissions*(self: gen_qfile_types.QFile, permissionSpec: cint): bool =
+  fcQFile_virtualbase_setPermissions(self.h, cint(permissionSpec))
+
+proc QFileclose*(self: gen_qfile_types.QFile): void =
+  fcQFile_virtualbase_close(self.h)
+
+proc QFileisSequential*(self: gen_qfile_types.QFile): bool =
+  fcQFile_virtualbase_isSequential(self.h)
+
+proc QFilepos*(self: gen_qfile_types.QFile): clonglong =
+  fcQFile_virtualbase_pos(self.h)
+
+proc QFileseek*(self: gen_qfile_types.QFile, offset: clonglong): bool =
+  fcQFile_virtualbase_seek(self.h, offset)
+
+proc QFileatEnd*(self: gen_qfile_types.QFile): bool =
+  fcQFile_virtualbase_atEnd(self.h)
+
+proc QFilereadData*(self: gen_qfile_types.QFile, data: cstring, maxlen: clonglong): clonglong =
+  fcQFile_virtualbase_readData(self.h, data, maxlen)
+
+proc QFilewriteData*(self: gen_qfile_types.QFile, data: cstring, len: clonglong): clonglong =
+  fcQFile_virtualbase_writeData(self.h, data, len)
+
+proc QFilereadLineData*(self: gen_qfile_types.QFile, data: cstring, maxlen: clonglong): clonglong =
+  fcQFile_virtualbase_readLineData(self.h, data, maxlen)
+
+proc QFilereset*(self: gen_qfile_types.QFile): bool =
+  fcQFile_virtualbase_reset(self.h)
+
+proc QFilebytesAvailable*(self: gen_qfile_types.QFile): clonglong =
+  fcQFile_virtualbase_bytesAvailable(self.h)
+
+proc QFilebytesToWrite*(self: gen_qfile_types.QFile): clonglong =
+  fcQFile_virtualbase_bytesToWrite(self.h)
+
+proc QFilecanReadLine*(self: gen_qfile_types.QFile): bool =
+  fcQFile_virtualbase_canReadLine(self.h)
+
+proc QFilewaitForReadyRead*(self: gen_qfile_types.QFile, msecs: cint): bool =
+  fcQFile_virtualbase_waitForReadyRead(self.h, msecs)
+
+proc QFilewaitForBytesWritten*(self: gen_qfile_types.QFile, msecs: cint): bool =
+  fcQFile_virtualbase_waitForBytesWritten(self.h, msecs)
+
+proc QFileskipData*(self: gen_qfile_types.QFile, maxSize: clonglong): clonglong =
+  fcQFile_virtualbase_skipData(self.h, maxSize)
+
+proc QFileevent*(self: gen_qfile_types.QFile, event: gen_qcoreevent_types.QEvent): bool =
+  fcQFile_virtualbase_event(self.h, event.h)
+
+proc QFileeventFilter*(self: gen_qfile_types.QFile, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
+  fcQFile_virtualbase_eventFilter(self.h, watched.h, event.h)
+
+proc QFiletimerEvent*(self: gen_qfile_types.QFile, event: gen_qcoreevent_types.QTimerEvent): void =
+  fcQFile_virtualbase_timerEvent(self.h, event.h)
+
+proc QFilechildEvent*(self: gen_qfile_types.QFile, event: gen_qcoreevent_types.QChildEvent): void =
+  fcQFile_virtualbase_childEvent(self.h, event.h)
+
+proc QFilecustomEvent*(self: gen_qfile_types.QFile, event: gen_qcoreevent_types.QEvent): void =
+  fcQFile_virtualbase_customEvent(self.h, event.h)
+
+proc QFileconnectNotify*(self: gen_qfile_types.QFile, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQFile_virtualbase_connectNotify(self.h, signal.h)
+
+proc QFiledisconnectNotify*(self: gen_qfile_types.QFile, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQFile_virtualbase_disconnectNotify(self.h, signal.h)
+
 
 proc fcQFile_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QFileVTable](fcQFile_vdata(self)[])
@@ -379,18 +476,12 @@ proc fcQFile_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QFilemetacast*(self: gen_qfile_types.QFile, param1: cstring): pointer =
-  fcQFile_virtualbase_metacast(self.h, param1)
-
 proc fcQFile_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QFileVTable](fcQFile_vdata(self)[])
   let self = QFile(h: self)
   let slotval1 = (param1)
   var virtualReturn = vtbl[].metacast(self, slotval1)
   virtualReturn
-
-proc QFilemetacall*(self: gen_qfile_types.QFile, param1: cint, param2: cint, param3: pointer): cint =
-  fcQFile_virtualbase_metacall(self.h, cint(param1), param2, param3)
 
 proc fcQFile_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QFileVTable](fcQFile_vdata(self)[])
@@ -401,12 +492,6 @@ proc fcQFile_vtable_callback_metacall(self: pointer, param1: cint, param2: cint,
   var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QFilefileName*(self: gen_qfile_types.QFile): string =
-  let v_ms = fcQFile_virtualbase_fileName(self.h)
-  let vx_ret = string.fromBytes(v_ms)
-  c_free(v_ms.data)
-  vx_ret
-
 proc fcQFile_vtable_callback_fileName(self: pointer): struct_miqt_string {.cdecl.} =
   let vtbl = cast[ptr QFileVTable](fcQFile_vdata(self)[])
   let self = QFile(h: self)
@@ -415,9 +500,6 @@ proc fcQFile_vtable_callback_fileName(self: pointer): struct_miqt_string {.cdecl
   if len(virtualReturn) > 0: copyMem(virtualReturn_copy, addr virtualReturn[0], csize_t(len(virtualReturn)))
   struct_miqt_string(data: virtualReturn_copy, len: csize_t(len(virtualReturn)))
 
-proc QFileopen*(self: gen_qfile_types.QFile, flags: cint): bool =
-  fcQFile_virtualbase_open(self.h, cint(flags))
-
 proc fcQFile_vtable_callback_open(self: pointer, flags: cint): bool {.cdecl.} =
   let vtbl = cast[ptr QFileVTable](fcQFile_vdata(self)[])
   let self = QFile(h: self)
@@ -425,17 +507,11 @@ proc fcQFile_vtable_callback_open(self: pointer, flags: cint): bool {.cdecl.} =
   var virtualReturn = vtbl[].open(self, slotval1)
   virtualReturn
 
-proc QFilesize*(self: gen_qfile_types.QFile): clonglong =
-  fcQFile_virtualbase_size(self.h)
-
 proc fcQFile_vtable_callback_size(self: pointer): clonglong {.cdecl.} =
   let vtbl = cast[ptr QFileVTable](fcQFile_vdata(self)[])
   let self = QFile(h: self)
   var virtualReturn = vtbl[].size(self)
   virtualReturn
-
-proc QFileresize*(self: gen_qfile_types.QFile, sz: clonglong): bool =
-  fcQFile_virtualbase_resize(self.h, sz)
 
 proc fcQFile_vtable_callback_resize(self: pointer, sz: clonglong): bool {.cdecl.} =
   let vtbl = cast[ptr QFileVTable](fcQFile_vdata(self)[])
@@ -444,17 +520,11 @@ proc fcQFile_vtable_callback_resize(self: pointer, sz: clonglong): bool {.cdecl.
   var virtualReturn = vtbl[].resize(self, slotval1)
   virtualReturn
 
-proc QFilepermissions*(self: gen_qfile_types.QFile): cint =
-  cint(fcQFile_virtualbase_permissions(self.h))
-
 proc fcQFile_vtable_callback_permissions(self: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QFileVTable](fcQFile_vdata(self)[])
   let self = QFile(h: self)
   var virtualReturn = vtbl[].permissions(self)
   cint(virtualReturn)
-
-proc QFilesetPermissions*(self: gen_qfile_types.QFile, permissionSpec: cint): bool =
-  fcQFile_virtualbase_setPermissions(self.h, cint(permissionSpec))
 
 proc fcQFile_vtable_callback_setPermissions(self: pointer, permissionSpec: cint): bool {.cdecl.} =
   let vtbl = cast[ptr QFileVTable](fcQFile_vdata(self)[])
@@ -463,16 +533,10 @@ proc fcQFile_vtable_callback_setPermissions(self: pointer, permissionSpec: cint)
   var virtualReturn = vtbl[].setPermissions(self, slotval1)
   virtualReturn
 
-proc QFileclose*(self: gen_qfile_types.QFile): void =
-  fcQFile_virtualbase_close(self.h)
-
 proc fcQFile_vtable_callback_close(self: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFileVTable](fcQFile_vdata(self)[])
   let self = QFile(h: self)
   vtbl[].close(self)
-
-proc QFileisSequential*(self: gen_qfile_types.QFile): bool =
-  fcQFile_virtualbase_isSequential(self.h)
 
 proc fcQFile_vtable_callback_isSequential(self: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QFileVTable](fcQFile_vdata(self)[])
@@ -480,17 +544,11 @@ proc fcQFile_vtable_callback_isSequential(self: pointer): bool {.cdecl.} =
   var virtualReturn = vtbl[].isSequential(self)
   virtualReturn
 
-proc QFilepos*(self: gen_qfile_types.QFile): clonglong =
-  fcQFile_virtualbase_pos(self.h)
-
 proc fcQFile_vtable_callback_pos(self: pointer): clonglong {.cdecl.} =
   let vtbl = cast[ptr QFileVTable](fcQFile_vdata(self)[])
   let self = QFile(h: self)
   var virtualReturn = vtbl[].pos(self)
   virtualReturn
-
-proc QFileseek*(self: gen_qfile_types.QFile, offset: clonglong): bool =
-  fcQFile_virtualbase_seek(self.h, offset)
 
 proc fcQFile_vtable_callback_seek(self: pointer, offset: clonglong): bool {.cdecl.} =
   let vtbl = cast[ptr QFileVTable](fcQFile_vdata(self)[])
@@ -499,17 +557,11 @@ proc fcQFile_vtable_callback_seek(self: pointer, offset: clonglong): bool {.cdec
   var virtualReturn = vtbl[].seek(self, slotval1)
   virtualReturn
 
-proc QFileatEnd*(self: gen_qfile_types.QFile): bool =
-  fcQFile_virtualbase_atEnd(self.h)
-
 proc fcQFile_vtable_callback_atEnd(self: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QFileVTable](fcQFile_vdata(self)[])
   let self = QFile(h: self)
   var virtualReturn = vtbl[].atEnd(self)
   virtualReturn
-
-proc QFilereadData*(self: gen_qfile_types.QFile, data: cstring, maxlen: clonglong): clonglong =
-  fcQFile_virtualbase_readData(self.h, data, maxlen)
 
 proc fcQFile_vtable_callback_readData(self: pointer, data: cstring, maxlen: clonglong): clonglong {.cdecl.} =
   let vtbl = cast[ptr QFileVTable](fcQFile_vdata(self)[])
@@ -519,9 +571,6 @@ proc fcQFile_vtable_callback_readData(self: pointer, data: cstring, maxlen: clon
   var virtualReturn = vtbl[].readData(self, slotval1, slotval2)
   virtualReturn
 
-proc QFilewriteData*(self: gen_qfile_types.QFile, data: cstring, len: clonglong): clonglong =
-  fcQFile_virtualbase_writeData(self.h, data, len)
-
 proc fcQFile_vtable_callback_writeData(self: pointer, data: cstring, len: clonglong): clonglong {.cdecl.} =
   let vtbl = cast[ptr QFileVTable](fcQFile_vdata(self)[])
   let self = QFile(h: self)
@@ -529,9 +578,6 @@ proc fcQFile_vtable_callback_writeData(self: pointer, data: cstring, len: clongl
   let slotval2 = len
   var virtualReturn = vtbl[].writeData(self, slotval1, slotval2)
   virtualReturn
-
-proc QFilereadLineData*(self: gen_qfile_types.QFile, data: cstring, maxlen: clonglong): clonglong =
-  fcQFile_virtualbase_readLineData(self.h, data, maxlen)
 
 proc fcQFile_vtable_callback_readLineData(self: pointer, data: cstring, maxlen: clonglong): clonglong {.cdecl.} =
   let vtbl = cast[ptr QFileVTable](fcQFile_vdata(self)[])
@@ -541,17 +587,11 @@ proc fcQFile_vtable_callback_readLineData(self: pointer, data: cstring, maxlen: 
   var virtualReturn = vtbl[].readLineData(self, slotval1, slotval2)
   virtualReturn
 
-proc QFilereset*(self: gen_qfile_types.QFile): bool =
-  fcQFile_virtualbase_reset(self.h)
-
 proc fcQFile_vtable_callback_reset(self: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QFileVTable](fcQFile_vdata(self)[])
   let self = QFile(h: self)
   var virtualReturn = vtbl[].reset(self)
   virtualReturn
-
-proc QFilebytesAvailable*(self: gen_qfile_types.QFile): clonglong =
-  fcQFile_virtualbase_bytesAvailable(self.h)
 
 proc fcQFile_vtable_callback_bytesAvailable(self: pointer): clonglong {.cdecl.} =
   let vtbl = cast[ptr QFileVTable](fcQFile_vdata(self)[])
@@ -559,26 +599,17 @@ proc fcQFile_vtable_callback_bytesAvailable(self: pointer): clonglong {.cdecl.} 
   var virtualReturn = vtbl[].bytesAvailable(self)
   virtualReturn
 
-proc QFilebytesToWrite*(self: gen_qfile_types.QFile): clonglong =
-  fcQFile_virtualbase_bytesToWrite(self.h)
-
 proc fcQFile_vtable_callback_bytesToWrite(self: pointer): clonglong {.cdecl.} =
   let vtbl = cast[ptr QFileVTable](fcQFile_vdata(self)[])
   let self = QFile(h: self)
   var virtualReturn = vtbl[].bytesToWrite(self)
   virtualReturn
 
-proc QFilecanReadLine*(self: gen_qfile_types.QFile): bool =
-  fcQFile_virtualbase_canReadLine(self.h)
-
 proc fcQFile_vtable_callback_canReadLine(self: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QFileVTable](fcQFile_vdata(self)[])
   let self = QFile(h: self)
   var virtualReturn = vtbl[].canReadLine(self)
   virtualReturn
-
-proc QFilewaitForReadyRead*(self: gen_qfile_types.QFile, msecs: cint): bool =
-  fcQFile_virtualbase_waitForReadyRead(self.h, msecs)
 
 proc fcQFile_vtable_callback_waitForReadyRead(self: pointer, msecs: cint): bool {.cdecl.} =
   let vtbl = cast[ptr QFileVTable](fcQFile_vdata(self)[])
@@ -587,18 +618,12 @@ proc fcQFile_vtable_callback_waitForReadyRead(self: pointer, msecs: cint): bool 
   var virtualReturn = vtbl[].waitForReadyRead(self, slotval1)
   virtualReturn
 
-proc QFilewaitForBytesWritten*(self: gen_qfile_types.QFile, msecs: cint): bool =
-  fcQFile_virtualbase_waitForBytesWritten(self.h, msecs)
-
 proc fcQFile_vtable_callback_waitForBytesWritten(self: pointer, msecs: cint): bool {.cdecl.} =
   let vtbl = cast[ptr QFileVTable](fcQFile_vdata(self)[])
   let self = QFile(h: self)
   let slotval1 = msecs
   var virtualReturn = vtbl[].waitForBytesWritten(self, slotval1)
   virtualReturn
-
-proc QFileskipData*(self: gen_qfile_types.QFile, maxSize: clonglong): clonglong =
-  fcQFile_virtualbase_skipData(self.h, maxSize)
 
 proc fcQFile_vtable_callback_skipData(self: pointer, maxSize: clonglong): clonglong {.cdecl.} =
   let vtbl = cast[ptr QFileVTable](fcQFile_vdata(self)[])
@@ -607,18 +632,12 @@ proc fcQFile_vtable_callback_skipData(self: pointer, maxSize: clonglong): clongl
   var virtualReturn = vtbl[].skipData(self, slotval1)
   virtualReturn
 
-proc QFileevent*(self: gen_qfile_types.QFile, event: gen_qcoreevent_types.QEvent): bool =
-  fcQFile_virtualbase_event(self.h, event.h)
-
 proc fcQFile_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QFileVTable](fcQFile_vdata(self)[])
   let self = QFile(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
-
-proc QFileeventFilter*(self: gen_qfile_types.QFile, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
-  fcQFile_virtualbase_eventFilter(self.h, watched.h, event.h)
 
 proc fcQFile_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QFileVTable](fcQFile_vdata(self)[])
@@ -628,17 +647,11 @@ proc fcQFile_vtable_callback_eventFilter(self: pointer, watched: pointer, event:
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
-proc QFiletimerEvent*(self: gen_qfile_types.QFile, event: gen_qcoreevent_types.QTimerEvent): void =
-  fcQFile_virtualbase_timerEvent(self.h, event.h)
-
 proc fcQFile_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFileVTable](fcQFile_vdata(self)[])
   let self = QFile(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
-
-proc QFilechildEvent*(self: gen_qfile_types.QFile, event: gen_qcoreevent_types.QChildEvent): void =
-  fcQFile_virtualbase_childEvent(self.h, event.h)
 
 proc fcQFile_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFileVTable](fcQFile_vdata(self)[])
@@ -646,26 +659,17 @@ proc fcQFile_vtable_callback_childEvent(self: pointer, event: pointer): void {.c
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
-proc QFilecustomEvent*(self: gen_qfile_types.QFile, event: gen_qcoreevent_types.QEvent): void =
-  fcQFile_virtualbase_customEvent(self.h, event.h)
-
 proc fcQFile_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFileVTable](fcQFile_vdata(self)[])
   let self = QFile(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
-proc QFileconnectNotify*(self: gen_qfile_types.QFile, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQFile_virtualbase_connectNotify(self.h, signal.h)
-
 proc fcQFile_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFileVTable](fcQFile_vdata(self)[])
   let self = QFile(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
-
-proc QFiledisconnectNotify*(self: gen_qfile_types.QFile, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQFile_virtualbase_disconnectNotify(self.h, signal.h)
 
 proc fcQFile_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFileVTable](fcQFile_vdata(self)[])
@@ -675,23 +679,81 @@ proc fcQFile_vtable_callback_disconnectNotify(self: pointer, signal: pointer): v
 
 type VirtualQFile* {.inheritable.} = ref object of QFile
   vtbl*: cQFileVTable
+
 method metaObject*(self: VirtualQFile): gen_qobjectdefs_types.QMetaObject {.base.} =
   QFilemetaObject(self[])
+method metacast*(self: VirtualQFile, param1: cstring): pointer {.base.} =
+  QFilemetacast(self[], param1)
+method metacall*(self: VirtualQFile, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QFilemetacall(self[], param1, param2, param3)
+method fileName*(self: VirtualQFile): string {.base.} =
+  QFilefileName(self[])
+method open*(self: VirtualQFile, flags: cint): bool {.base.} =
+  QFileopen(self[], flags)
+method size*(self: VirtualQFile): clonglong {.base.} =
+  QFilesize(self[])
+method resize*(self: VirtualQFile, sz: clonglong): bool {.base.} =
+  QFileresize(self[], sz)
+method permissions*(self: VirtualQFile): cint {.base.} =
+  QFilepermissions(self[])
+method setPermissions*(self: VirtualQFile, permissionSpec: cint): bool {.base.} =
+  QFilesetPermissions(self[], permissionSpec)
+method close*(self: VirtualQFile): void {.base.} =
+  QFileclose(self[])
+method isSequential*(self: VirtualQFile): bool {.base.} =
+  QFileisSequential(self[])
+method pos*(self: VirtualQFile): clonglong {.base.} =
+  QFilepos(self[])
+method seek*(self: VirtualQFile, offset: clonglong): bool {.base.} =
+  QFileseek(self[], offset)
+method atEnd*(self: VirtualQFile): bool {.base.} =
+  QFileatEnd(self[])
+method readData*(self: VirtualQFile, data: cstring, maxlen: clonglong): clonglong {.base.} =
+  QFilereadData(self[], data, maxlen)
+method writeData*(self: VirtualQFile, data: cstring, len: clonglong): clonglong {.base.} =
+  QFilewriteData(self[], data, len)
+method readLineData*(self: VirtualQFile, data: cstring, maxlen: clonglong): clonglong {.base.} =
+  QFilereadLineData(self[], data, maxlen)
+method reset*(self: VirtualQFile): bool {.base.} =
+  QFilereset(self[])
+method bytesAvailable*(self: VirtualQFile): clonglong {.base.} =
+  QFilebytesAvailable(self[])
+method bytesToWrite*(self: VirtualQFile): clonglong {.base.} =
+  QFilebytesToWrite(self[])
+method canReadLine*(self: VirtualQFile): bool {.base.} =
+  QFilecanReadLine(self[])
+method waitForReadyRead*(self: VirtualQFile, msecs: cint): bool {.base.} =
+  QFilewaitForReadyRead(self[], msecs)
+method waitForBytesWritten*(self: VirtualQFile, msecs: cint): bool {.base.} =
+  QFilewaitForBytesWritten(self[], msecs)
+method skipData*(self: VirtualQFile, maxSize: clonglong): clonglong {.base.} =
+  QFileskipData(self[], maxSize)
+method event*(self: VirtualQFile, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QFileevent(self[], event)
+method eventFilter*(self: VirtualQFile, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QFileeventFilter(self[], watched, event)
+method timerEvent*(self: VirtualQFile, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QFiletimerEvent(self[], event)
+method childEvent*(self: VirtualQFile, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QFilechildEvent(self[], event)
+method customEvent*(self: VirtualQFile, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QFilecustomEvent(self[], event)
+method connectNotify*(self: VirtualQFile, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QFileconnectNotify(self[], signal)
+method disconnectNotify*(self: VirtualQFile, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QFiledisconnectNotify(self[], signal)
+
 proc fcQFile_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQFile](fcQFile_vdata(self)[])
   var virtualReturn = inst.metaObject()
   virtualReturn.h
 
-method metacast*(self: VirtualQFile, param1: cstring): pointer {.base.} =
-  QFilemetacast(self[], param1)
 proc fcQFile_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQFile](fcQFile_vdata(self)[])
   let slotval1 = (param1)
   var virtualReturn = inst.metacast(slotval1)
   virtualReturn
 
-method metacall*(self: VirtualQFile, param1: cint, param2: cint, param3: pointer): cint {.base.} =
-  QFilemetacall(self[], param1, param2, param3)
 proc fcQFile_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQFile](fcQFile_vdata(self)[])
   let slotval1 = cint(param1)
@@ -700,88 +762,64 @@ proc fcQFile_method_callback_metacall(self: pointer, param1: cint, param2: cint,
   var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
-method fileName*(self: VirtualQFile): string {.base.} =
-  QFilefileName(self[])
 proc fcQFile_method_callback_fileName(self: pointer): struct_miqt_string {.cdecl.} =
   let inst = cast[VirtualQFile](fcQFile_vdata(self)[])
   var virtualReturn = inst.fileName()
   struct_miqt_string(data: if len(virtualReturn) > 0: addr virtualReturn[0] else: nil, len: csize_t(len(virtualReturn)))
 
-method open*(self: VirtualQFile, flags: cint): bool {.base.} =
-  QFileopen(self[], flags)
 proc fcQFile_method_callback_open(self: pointer, flags: cint): bool {.cdecl.} =
   let inst = cast[VirtualQFile](fcQFile_vdata(self)[])
   let slotval1 = cint(flags)
   var virtualReturn = inst.open(slotval1)
   virtualReturn
 
-method size*(self: VirtualQFile): clonglong {.base.} =
-  QFilesize(self[])
 proc fcQFile_method_callback_size(self: pointer): clonglong {.cdecl.} =
   let inst = cast[VirtualQFile](fcQFile_vdata(self)[])
   var virtualReturn = inst.size()
   virtualReturn
 
-method resize*(self: VirtualQFile, sz: clonglong): bool {.base.} =
-  QFileresize(self[], sz)
 proc fcQFile_method_callback_resize(self: pointer, sz: clonglong): bool {.cdecl.} =
   let inst = cast[VirtualQFile](fcQFile_vdata(self)[])
   let slotval1 = sz
   var virtualReturn = inst.resize(slotval1)
   virtualReturn
 
-method permissions*(self: VirtualQFile): cint {.base.} =
-  QFilepermissions(self[])
 proc fcQFile_method_callback_permissions(self: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQFile](fcQFile_vdata(self)[])
   var virtualReturn = inst.permissions()
   cint(virtualReturn)
 
-method setPermissions*(self: VirtualQFile, permissionSpec: cint): bool {.base.} =
-  QFilesetPermissions(self[], permissionSpec)
 proc fcQFile_method_callback_setPermissions(self: pointer, permissionSpec: cint): bool {.cdecl.} =
   let inst = cast[VirtualQFile](fcQFile_vdata(self)[])
   let slotval1 = cint(permissionSpec)
   var virtualReturn = inst.setPermissions(slotval1)
   virtualReturn
 
-method close*(self: VirtualQFile): void {.base.} =
-  QFileclose(self[])
 proc fcQFile_method_callback_close(self: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFile](fcQFile_vdata(self)[])
   inst.close()
 
-method isSequential*(self: VirtualQFile): bool {.base.} =
-  QFileisSequential(self[])
 proc fcQFile_method_callback_isSequential(self: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQFile](fcQFile_vdata(self)[])
   var virtualReturn = inst.isSequential()
   virtualReturn
 
-method pos*(self: VirtualQFile): clonglong {.base.} =
-  QFilepos(self[])
 proc fcQFile_method_callback_pos(self: pointer): clonglong {.cdecl.} =
   let inst = cast[VirtualQFile](fcQFile_vdata(self)[])
   var virtualReturn = inst.pos()
   virtualReturn
 
-method seek*(self: VirtualQFile, offset: clonglong): bool {.base.} =
-  QFileseek(self[], offset)
 proc fcQFile_method_callback_seek(self: pointer, offset: clonglong): bool {.cdecl.} =
   let inst = cast[VirtualQFile](fcQFile_vdata(self)[])
   let slotval1 = offset
   var virtualReturn = inst.seek(slotval1)
   virtualReturn
 
-method atEnd*(self: VirtualQFile): bool {.base.} =
-  QFileatEnd(self[])
 proc fcQFile_method_callback_atEnd(self: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQFile](fcQFile_vdata(self)[])
   var virtualReturn = inst.atEnd()
   virtualReturn
 
-method readData*(self: VirtualQFile, data: cstring, maxlen: clonglong): clonglong {.base.} =
-  QFilereadData(self[], data, maxlen)
 proc fcQFile_method_callback_readData(self: pointer, data: cstring, maxlen: clonglong): clonglong {.cdecl.} =
   let inst = cast[VirtualQFile](fcQFile_vdata(self)[])
   let slotval1 = (data)
@@ -789,8 +827,6 @@ proc fcQFile_method_callback_readData(self: pointer, data: cstring, maxlen: clon
   var virtualReturn = inst.readData(slotval1, slotval2)
   virtualReturn
 
-method writeData*(self: VirtualQFile, data: cstring, len: clonglong): clonglong {.base.} =
-  QFilewriteData(self[], data, len)
 proc fcQFile_method_callback_writeData(self: pointer, data: cstring, len: clonglong): clonglong {.cdecl.} =
   let inst = cast[VirtualQFile](fcQFile_vdata(self)[])
   let slotval1 = (data)
@@ -798,8 +834,6 @@ proc fcQFile_method_callback_writeData(self: pointer, data: cstring, len: clongl
   var virtualReturn = inst.writeData(slotval1, slotval2)
   virtualReturn
 
-method readLineData*(self: VirtualQFile, data: cstring, maxlen: clonglong): clonglong {.base.} =
-  QFilereadLineData(self[], data, maxlen)
 proc fcQFile_method_callback_readLineData(self: pointer, data: cstring, maxlen: clonglong): clonglong {.cdecl.} =
   let inst = cast[VirtualQFile](fcQFile_vdata(self)[])
   let slotval1 = (data)
@@ -807,68 +841,50 @@ proc fcQFile_method_callback_readLineData(self: pointer, data: cstring, maxlen: 
   var virtualReturn = inst.readLineData(slotval1, slotval2)
   virtualReturn
 
-method reset*(self: VirtualQFile): bool {.base.} =
-  QFilereset(self[])
 proc fcQFile_method_callback_reset(self: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQFile](fcQFile_vdata(self)[])
   var virtualReturn = inst.reset()
   virtualReturn
 
-method bytesAvailable*(self: VirtualQFile): clonglong {.base.} =
-  QFilebytesAvailable(self[])
 proc fcQFile_method_callback_bytesAvailable(self: pointer): clonglong {.cdecl.} =
   let inst = cast[VirtualQFile](fcQFile_vdata(self)[])
   var virtualReturn = inst.bytesAvailable()
   virtualReturn
 
-method bytesToWrite*(self: VirtualQFile): clonglong {.base.} =
-  QFilebytesToWrite(self[])
 proc fcQFile_method_callback_bytesToWrite(self: pointer): clonglong {.cdecl.} =
   let inst = cast[VirtualQFile](fcQFile_vdata(self)[])
   var virtualReturn = inst.bytesToWrite()
   virtualReturn
 
-method canReadLine*(self: VirtualQFile): bool {.base.} =
-  QFilecanReadLine(self[])
 proc fcQFile_method_callback_canReadLine(self: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQFile](fcQFile_vdata(self)[])
   var virtualReturn = inst.canReadLine()
   virtualReturn
 
-method waitForReadyRead*(self: VirtualQFile, msecs: cint): bool {.base.} =
-  QFilewaitForReadyRead(self[], msecs)
 proc fcQFile_method_callback_waitForReadyRead(self: pointer, msecs: cint): bool {.cdecl.} =
   let inst = cast[VirtualQFile](fcQFile_vdata(self)[])
   let slotval1 = msecs
   var virtualReturn = inst.waitForReadyRead(slotval1)
   virtualReturn
 
-method waitForBytesWritten*(self: VirtualQFile, msecs: cint): bool {.base.} =
-  QFilewaitForBytesWritten(self[], msecs)
 proc fcQFile_method_callback_waitForBytesWritten(self: pointer, msecs: cint): bool {.cdecl.} =
   let inst = cast[VirtualQFile](fcQFile_vdata(self)[])
   let slotval1 = msecs
   var virtualReturn = inst.waitForBytesWritten(slotval1)
   virtualReturn
 
-method skipData*(self: VirtualQFile, maxSize: clonglong): clonglong {.base.} =
-  QFileskipData(self[], maxSize)
 proc fcQFile_method_callback_skipData(self: pointer, maxSize: clonglong): clonglong {.cdecl.} =
   let inst = cast[VirtualQFile](fcQFile_vdata(self)[])
   let slotval1 = maxSize
   var virtualReturn = inst.skipData(slotval1)
   virtualReturn
 
-method event*(self: VirtualQFile, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QFileevent(self[], event)
 proc fcQFile_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQFile](fcQFile_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
-method eventFilter*(self: VirtualQFile, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QFileeventFilter(self[], watched, event)
 proc fcQFile_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQFile](fcQFile_vdata(self)[])
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
@@ -876,40 +892,31 @@ proc fcQFile_method_callback_eventFilter(self: pointer, watched: pointer, event:
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
-method timerEvent*(self: VirtualQFile, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
-  QFiletimerEvent(self[], event)
 proc fcQFile_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFile](fcQFile_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
-method childEvent*(self: VirtualQFile, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
-  QFilechildEvent(self[], event)
 proc fcQFile_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFile](fcQFile_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
-method customEvent*(self: VirtualQFile, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QFilecustomEvent(self[], event)
 proc fcQFile_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFile](fcQFile_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
-method connectNotify*(self: VirtualQFile, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QFileconnectNotify(self[], signal)
 proc fcQFile_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFile](fcQFile_vdata(self)[])
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
-method disconnectNotify*(self: VirtualQFile, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QFiledisconnectNotify(self[], signal)
 proc fcQFile_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFile](fcQFile_vdata(self)[])
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
+
 
 proc setOpenMode*(self: gen_qfile_types.QFile, openMode: cint): void =
   fcQFile_protectedbase_setOpenMode(self.h, cint(openMode))

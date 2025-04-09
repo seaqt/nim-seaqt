@@ -103,6 +103,7 @@ proc fcQThread_exit1(self: pointer, retcode: cint): void {.importc: "QThread_exi
 proc fcQThread_wait1(self: pointer, deadline: pointer): bool {.importc: "QThread_wait1".}
 proc fcQThread_vdata(self: pointer): ptr pointer {.importc: "QThread_vdata".}
 proc fvdata_cQThread(self: pointer): pointer {.importc: "vdata_QThread".}
+
 type cQThreadVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -258,6 +259,7 @@ type QThreadchildEventProc* = proc(self: QThread, event: gen_qcoreevent_types.QC
 type QThreadcustomEventProc* = proc(self: QThread, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QThreadconnectNotifyProc* = proc(self: QThread, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QThreaddisconnectNotifyProc* = proc(self: QThread, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+
 type QThreadVTable* {.inheritable, pure.} = object
   vtbl: cQThreadVTable
   metaObject*: QThreadmetaObjectProc
@@ -271,8 +273,40 @@ type QThreadVTable* {.inheritable, pure.} = object
   customEvent*: QThreadcustomEventProc
   connectNotify*: QThreadconnectNotifyProc
   disconnectNotify*: QThreaddisconnectNotifyProc
+
 proc QThreadmetaObject*(self: gen_qthread_types.QThread): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQThread_virtualbase_metaObject(self.h), owned: false)
+
+proc QThreadmetacast*(self: gen_qthread_types.QThread, param1: cstring): pointer =
+  fcQThread_virtualbase_metacast(self.h, param1)
+
+proc QThreadmetacall*(self: gen_qthread_types.QThread, param1: cint, param2: cint, param3: pointer): cint =
+  fcQThread_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+proc QThreadevent*(self: gen_qthread_types.QThread, event: gen_qcoreevent_types.QEvent): bool =
+  fcQThread_virtualbase_event(self.h, event.h)
+
+proc QThreadrun*(self: gen_qthread_types.QThread): void =
+  fcQThread_virtualbase_run(self.h)
+
+proc QThreadeventFilter*(self: gen_qthread_types.QThread, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
+  fcQThread_virtualbase_eventFilter(self.h, watched.h, event.h)
+
+proc QThreadtimerEvent*(self: gen_qthread_types.QThread, event: gen_qcoreevent_types.QTimerEvent): void =
+  fcQThread_virtualbase_timerEvent(self.h, event.h)
+
+proc QThreadchildEvent*(self: gen_qthread_types.QThread, event: gen_qcoreevent_types.QChildEvent): void =
+  fcQThread_virtualbase_childEvent(self.h, event.h)
+
+proc QThreadcustomEvent*(self: gen_qthread_types.QThread, event: gen_qcoreevent_types.QEvent): void =
+  fcQThread_virtualbase_customEvent(self.h, event.h)
+
+proc QThreadconnectNotify*(self: gen_qthread_types.QThread, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQThread_virtualbase_connectNotify(self.h, signal.h)
+
+proc QThreaddisconnectNotify*(self: gen_qthread_types.QThread, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQThread_virtualbase_disconnectNotify(self.h, signal.h)
+
 
 proc fcQThread_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QThreadVTable](fcQThread_vdata(self)[])
@@ -283,18 +317,12 @@ proc fcQThread_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QThreadmetacast*(self: gen_qthread_types.QThread, param1: cstring): pointer =
-  fcQThread_virtualbase_metacast(self.h, param1)
-
 proc fcQThread_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QThreadVTable](fcQThread_vdata(self)[])
   let self = QThread(h: self)
   let slotval1 = (param1)
   var virtualReturn = vtbl[].metacast(self, slotval1)
   virtualReturn
-
-proc QThreadmetacall*(self: gen_qthread_types.QThread, param1: cint, param2: cint, param3: pointer): cint =
-  fcQThread_virtualbase_metacall(self.h, cint(param1), param2, param3)
 
 proc fcQThread_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QThreadVTable](fcQThread_vdata(self)[])
@@ -305,9 +333,6 @@ proc fcQThread_vtable_callback_metacall(self: pointer, param1: cint, param2: cin
   var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QThreadevent*(self: gen_qthread_types.QThread, event: gen_qcoreevent_types.QEvent): bool =
-  fcQThread_virtualbase_event(self.h, event.h)
-
 proc fcQThread_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QThreadVTable](fcQThread_vdata(self)[])
   let self = QThread(h: self)
@@ -315,16 +340,10 @@ proc fcQThread_vtable_callback_event(self: pointer, event: pointer): bool {.cdec
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
-proc QThreadrun*(self: gen_qthread_types.QThread): void =
-  fcQThread_virtualbase_run(self.h)
-
 proc fcQThread_vtable_callback_run(self: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QThreadVTable](fcQThread_vdata(self)[])
   let self = QThread(h: self)
   vtbl[].run(self)
-
-proc QThreadeventFilter*(self: gen_qthread_types.QThread, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
-  fcQThread_virtualbase_eventFilter(self.h, watched.h, event.h)
 
 proc fcQThread_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QThreadVTable](fcQThread_vdata(self)[])
@@ -334,17 +353,11 @@ proc fcQThread_vtable_callback_eventFilter(self: pointer, watched: pointer, even
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
-proc QThreadtimerEvent*(self: gen_qthread_types.QThread, event: gen_qcoreevent_types.QTimerEvent): void =
-  fcQThread_virtualbase_timerEvent(self.h, event.h)
-
 proc fcQThread_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QThreadVTable](fcQThread_vdata(self)[])
   let self = QThread(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
-
-proc QThreadchildEvent*(self: gen_qthread_types.QThread, event: gen_qcoreevent_types.QChildEvent): void =
-  fcQThread_virtualbase_childEvent(self.h, event.h)
 
 proc fcQThread_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QThreadVTable](fcQThread_vdata(self)[])
@@ -352,26 +365,17 @@ proc fcQThread_vtable_callback_childEvent(self: pointer, event: pointer): void {
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
-proc QThreadcustomEvent*(self: gen_qthread_types.QThread, event: gen_qcoreevent_types.QEvent): void =
-  fcQThread_virtualbase_customEvent(self.h, event.h)
-
 proc fcQThread_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QThreadVTable](fcQThread_vdata(self)[])
   let self = QThread(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
-proc QThreadconnectNotify*(self: gen_qthread_types.QThread, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQThread_virtualbase_connectNotify(self.h, signal.h)
-
 proc fcQThread_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QThreadVTable](fcQThread_vdata(self)[])
   let self = QThread(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
-
-proc QThreaddisconnectNotify*(self: gen_qthread_types.QThread, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQThread_virtualbase_disconnectNotify(self.h, signal.h)
 
 proc fcQThread_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QThreadVTable](fcQThread_vdata(self)[])
@@ -381,23 +385,41 @@ proc fcQThread_vtable_callback_disconnectNotify(self: pointer, signal: pointer):
 
 type VirtualQThread* {.inheritable.} = ref object of QThread
   vtbl*: cQThreadVTable
+
 method metaObject*(self: VirtualQThread): gen_qobjectdefs_types.QMetaObject {.base.} =
   QThreadmetaObject(self[])
+method metacast*(self: VirtualQThread, param1: cstring): pointer {.base.} =
+  QThreadmetacast(self[], param1)
+method metacall*(self: VirtualQThread, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QThreadmetacall(self[], param1, param2, param3)
+method event*(self: VirtualQThread, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QThreadevent(self[], event)
+method run*(self: VirtualQThread): void {.base.} =
+  QThreadrun(self[])
+method eventFilter*(self: VirtualQThread, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QThreadeventFilter(self[], watched, event)
+method timerEvent*(self: VirtualQThread, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QThreadtimerEvent(self[], event)
+method childEvent*(self: VirtualQThread, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QThreadchildEvent(self[], event)
+method customEvent*(self: VirtualQThread, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QThreadcustomEvent(self[], event)
+method connectNotify*(self: VirtualQThread, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QThreadconnectNotify(self[], signal)
+method disconnectNotify*(self: VirtualQThread, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QThreaddisconnectNotify(self[], signal)
+
 proc fcQThread_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQThread](fcQThread_vdata(self)[])
   var virtualReturn = inst.metaObject()
   virtualReturn.h
 
-method metacast*(self: VirtualQThread, param1: cstring): pointer {.base.} =
-  QThreadmetacast(self[], param1)
 proc fcQThread_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQThread](fcQThread_vdata(self)[])
   let slotval1 = (param1)
   var virtualReturn = inst.metacast(slotval1)
   virtualReturn
 
-method metacall*(self: VirtualQThread, param1: cint, param2: cint, param3: pointer): cint {.base.} =
-  QThreadmetacall(self[], param1, param2, param3)
 proc fcQThread_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQThread](fcQThread_vdata(self)[])
   let slotval1 = cint(param1)
@@ -406,22 +428,16 @@ proc fcQThread_method_callback_metacall(self: pointer, param1: cint, param2: cin
   var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
-method event*(self: VirtualQThread, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QThreadevent(self[], event)
 proc fcQThread_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQThread](fcQThread_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
-method run*(self: VirtualQThread): void {.base.} =
-  QThreadrun(self[])
 proc fcQThread_method_callback_run(self: pointer): void {.cdecl.} =
   let inst = cast[VirtualQThread](fcQThread_vdata(self)[])
   inst.run()
 
-method eventFilter*(self: VirtualQThread, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QThreadeventFilter(self[], watched, event)
 proc fcQThread_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQThread](fcQThread_vdata(self)[])
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
@@ -429,40 +445,31 @@ proc fcQThread_method_callback_eventFilter(self: pointer, watched: pointer, even
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
-method timerEvent*(self: VirtualQThread, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
-  QThreadtimerEvent(self[], event)
 proc fcQThread_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQThread](fcQThread_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
-method childEvent*(self: VirtualQThread, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
-  QThreadchildEvent(self[], event)
 proc fcQThread_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQThread](fcQThread_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
-method customEvent*(self: VirtualQThread, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QThreadcustomEvent(self[], event)
 proc fcQThread_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQThread](fcQThread_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
-method connectNotify*(self: VirtualQThread, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QThreadconnectNotify(self[], signal)
 proc fcQThread_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQThread](fcQThread_vdata(self)[])
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
-method disconnectNotify*(self: VirtualQThread, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QThreaddisconnectNotify(self[], signal)
 proc fcQThread_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQThread](fcQThread_vdata(self)[])
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
+
 
 proc exec*(self: gen_qthread_types.QThread): cint =
   fcQThread_protectedbase_exec(self.h)

@@ -54,6 +54,7 @@ proc fcQItemEditorFactory_defaultFactory(): pointer {.importc: "QItemEditorFacto
 proc fcQItemEditorFactory_setDefaultFactory(factory: pointer): void {.importc: "QItemEditorFactory_setDefaultFactory".}
 proc fcQItemEditorFactory_vdata(self: pointer): ptr pointer {.importc: "QItemEditorFactory_vdata".}
 proc fvdata_cQItemEditorFactory(self: pointer): pointer {.importc: "vdata_QItemEditorFactory".}
+
 type cQItemEditorFactoryVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   createEditor*: proc(self: pointer, userType: cint, parent: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -95,12 +96,21 @@ proc setDefaultFactory*(_: type gen_qitemeditorfactory_types.QItemEditorFactory,
 
 type QItemEditorFactorycreateEditorProc* = proc(self: QItemEditorFactory, userType: cint, parent: gen_qwidget_types.QWidget): gen_qwidget_types.QWidget {.raises: [], gcsafe.}
 type QItemEditorFactoryvaluePropertyNameProc* = proc(self: QItemEditorFactory, userType: cint): seq[byte] {.raises: [], gcsafe.}
+
 type QItemEditorFactoryVTable* {.inheritable, pure.} = object
   vtbl: cQItemEditorFactoryVTable
   createEditor*: QItemEditorFactorycreateEditorProc
   valuePropertyName*: QItemEditorFactoryvaluePropertyNameProc
+
 proc QItemEditorFactorycreateEditor*(self: gen_qitemeditorfactory_types.QItemEditorFactory, userType: cint, parent: gen_qwidget_types.QWidget): gen_qwidget_types.QWidget =
   gen_qwidget_types.QWidget(h: fcQItemEditorFactory_virtualbase_createEditor(self.h, userType, parent.h), owned: false)
+
+proc QItemEditorFactoryvaluePropertyName*(self: gen_qitemeditorfactory_types.QItemEditorFactory, userType: cint): seq[byte] =
+  var v_bytearray = fcQItemEditorFactory_virtualbase_valuePropertyName(self.h, userType)
+  var vx_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](v_bytearray.data), 0, int(v_bytearray.len)-1))
+  c_free(v_bytearray.data)
+  vx_ret
+
 
 proc fcQItemEditorFactory_vtable_callback_createEditor(self: pointer, userType: cint, parent: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QItemEditorFactoryVTable](fcQItemEditorFactory_vdata(self)[])
@@ -113,12 +123,6 @@ proc fcQItemEditorFactory_vtable_callback_createEditor(self: pointer, userType: 
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QItemEditorFactoryvaluePropertyName*(self: gen_qitemeditorfactory_types.QItemEditorFactory, userType: cint): seq[byte] =
-  var v_bytearray = fcQItemEditorFactory_virtualbase_valuePropertyName(self.h, userType)
-  var vx_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](v_bytearray.data), 0, int(v_bytearray.len)-1))
-  c_free(v_bytearray.data)
-  vx_ret
-
 proc fcQItemEditorFactory_vtable_callback_valuePropertyName(self: pointer, userType: cint): struct_miqt_string {.cdecl.} =
   let vtbl = cast[ptr QItemEditorFactoryVTable](fcQItemEditorFactory_vdata(self)[])
   let self = QItemEditorFactory(h: self)
@@ -130,8 +134,12 @@ proc fcQItemEditorFactory_vtable_callback_valuePropertyName(self: pointer, userT
 
 type VirtualQItemEditorFactory* {.inheritable.} = ref object of QItemEditorFactory
   vtbl*: cQItemEditorFactoryVTable
+
 method createEditor*(self: VirtualQItemEditorFactory, userType: cint, parent: gen_qwidget_types.QWidget): gen_qwidget_types.QWidget {.base.} =
   QItemEditorFactorycreateEditor(self[], userType, parent)
+method valuePropertyName*(self: VirtualQItemEditorFactory, userType: cint): seq[byte] {.base.} =
+  QItemEditorFactoryvaluePropertyName(self[], userType)
+
 proc fcQItemEditorFactory_method_callback_createEditor(self: pointer, userType: cint, parent: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQItemEditorFactory](fcQItemEditorFactory_vdata(self)[])
   let slotval1 = userType
@@ -139,13 +147,12 @@ proc fcQItemEditorFactory_method_callback_createEditor(self: pointer, userType: 
   var virtualReturn = inst.createEditor(slotval1, slotval2)
   virtualReturn.h
 
-method valuePropertyName*(self: VirtualQItemEditorFactory, userType: cint): seq[byte] {.base.} =
-  QItemEditorFactoryvaluePropertyName(self[], userType)
 proc fcQItemEditorFactory_method_callback_valuePropertyName(self: pointer, userType: cint): struct_miqt_string {.cdecl.} =
   let inst = cast[VirtualQItemEditorFactory](fcQItemEditorFactory_vdata(self)[])
   let slotval1 = userType
   var virtualReturn = inst.valuePropertyName(slotval1)
   struct_miqt_string(data: if len(virtualReturn) > 0: addr virtualReturn[0] else: nil, len: csize_t(len(virtualReturn)))
+
 
 proc create*(T: type gen_qitemeditorfactory_types.QItemEditorFactory,
     vtbl: ref QItemEditorFactoryVTable = nil): gen_qitemeditorfactory_types.QItemEditorFactory =

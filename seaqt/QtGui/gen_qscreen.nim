@@ -275,7 +275,7 @@ proc fcQScreen_slot_callback_geometryChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QScreengeometryChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc ongeometryChanged*(self: gen_qscreen_types.QScreen, slot: QScreengeometryChangedSlot) =
+proc onGeometryChanged*(self: gen_qscreen_types.QScreen, slot: QScreengeometryChangedSlot) =
   var tmp = new QScreengeometryChangedSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -295,7 +295,7 @@ proc fcQScreen_slot_callback_availableGeometryChanged_release(slot: int) {.cdecl
   let nimfunc = cast[ref QScreenavailableGeometryChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onavailableGeometryChanged*(self: gen_qscreen_types.QScreen, slot: QScreenavailableGeometryChangedSlot) =
+proc onAvailableGeometryChanged*(self: gen_qscreen_types.QScreen, slot: QScreenavailableGeometryChangedSlot) =
   var tmp = new QScreenavailableGeometryChangedSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -315,7 +315,7 @@ proc fcQScreen_slot_callback_physicalSizeChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QScreenphysicalSizeChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onphysicalSizeChanged*(self: gen_qscreen_types.QScreen, slot: QScreenphysicalSizeChangedSlot) =
+proc onPhysicalSizeChanged*(self: gen_qscreen_types.QScreen, slot: QScreenphysicalSizeChangedSlot) =
   var tmp = new QScreenphysicalSizeChangedSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -335,7 +335,7 @@ proc fcQScreen_slot_callback_physicalDotsPerInchChanged_release(slot: int) {.cde
   let nimfunc = cast[ref QScreenphysicalDotsPerInchChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onphysicalDotsPerInchChanged*(self: gen_qscreen_types.QScreen, slot: QScreenphysicalDotsPerInchChangedSlot) =
+proc onPhysicalDotsPerInchChanged*(self: gen_qscreen_types.QScreen, slot: QScreenphysicalDotsPerInchChangedSlot) =
   var tmp = new QScreenphysicalDotsPerInchChangedSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -355,7 +355,7 @@ proc fcQScreen_slot_callback_logicalDotsPerInchChanged_release(slot: int) {.cdec
   let nimfunc = cast[ref QScreenlogicalDotsPerInchChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onlogicalDotsPerInchChanged*(self: gen_qscreen_types.QScreen, slot: QScreenlogicalDotsPerInchChangedSlot) =
+proc onLogicalDotsPerInchChanged*(self: gen_qscreen_types.QScreen, slot: QScreenlogicalDotsPerInchChangedSlot) =
   var tmp = new QScreenlogicalDotsPerInchChangedSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -375,7 +375,7 @@ proc fcQScreen_slot_callback_virtualGeometryChanged_release(slot: int) {.cdecl.}
   let nimfunc = cast[ref QScreenvirtualGeometryChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onvirtualGeometryChanged*(self: gen_qscreen_types.QScreen, slot: QScreenvirtualGeometryChangedSlot) =
+proc onVirtualGeometryChanged*(self: gen_qscreen_types.QScreen, slot: QScreenvirtualGeometryChangedSlot) =
   var tmp = new QScreenvirtualGeometryChangedSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -395,7 +395,7 @@ proc fcQScreen_slot_callback_primaryOrientationChanged_release(slot: int) {.cdec
   let nimfunc = cast[ref QScreenprimaryOrientationChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onprimaryOrientationChanged*(self: gen_qscreen_types.QScreen, slot: QScreenprimaryOrientationChangedSlot) =
+proc onPrimaryOrientationChanged*(self: gen_qscreen_types.QScreen, slot: QScreenprimaryOrientationChangedSlot) =
   var tmp = new QScreenprimaryOrientationChangedSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -415,7 +415,7 @@ proc fcQScreen_slot_callback_orientationChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QScreenorientationChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onorientationChanged*(self: gen_qscreen_types.QScreen, slot: QScreenorientationChangedSlot) =
+proc onOrientationChanged*(self: gen_qscreen_types.QScreen, slot: QScreenorientationChangedSlot) =
   var tmp = new QScreenorientationChangedSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -435,7 +435,7 @@ proc fcQScreen_slot_callback_refreshRateChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QScreenrefreshRateChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onrefreshRateChanged*(self: gen_qscreen_types.QScreen, slot: QScreenrefreshRateChangedSlot) =
+proc onRefreshRateChanged*(self: gen_qscreen_types.QScreen, slot: QScreenrefreshRateChangedSlot) =
   var tmp = new QScreenrefreshRateChangedSlot
   tmp[] = slot
   GC_ref(tmp)

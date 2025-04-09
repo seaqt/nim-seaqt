@@ -122,6 +122,7 @@ proc fcQToolBar_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QToo
 proc fcQToolBar_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QToolBar_tr3".}
 proc fcQToolBar_vdata(self: pointer): ptr pointer {.importc: "QToolBar_vdata".}
 proc fvdata_cQToolBar(self: pointer): pointer {.importc: "vdata_QToolBar".}
+
 type cQToolBarVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -342,7 +343,7 @@ proc fcQToolBar_slot_callback_actionTriggered_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QToolBaractionTriggeredSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onactionTriggered*(self: gen_qtoolbar_types.QToolBar, slot: QToolBaractionTriggeredSlot) =
+proc onActionTriggered*(self: gen_qtoolbar_types.QToolBar, slot: QToolBaractionTriggeredSlot) =
   var tmp = new QToolBaractionTriggeredSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -362,7 +363,7 @@ proc fcQToolBar_slot_callback_movableChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QToolBarmovableChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onmovableChanged*(self: gen_qtoolbar_types.QToolBar, slot: QToolBarmovableChangedSlot) =
+proc onMovableChanged*(self: gen_qtoolbar_types.QToolBar, slot: QToolBarmovableChangedSlot) =
   var tmp = new QToolBarmovableChangedSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -382,7 +383,7 @@ proc fcQToolBar_slot_callback_allowedAreasChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QToolBarallowedAreasChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onallowedAreasChanged*(self: gen_qtoolbar_types.QToolBar, slot: QToolBarallowedAreasChangedSlot) =
+proc onAllowedAreasChanged*(self: gen_qtoolbar_types.QToolBar, slot: QToolBarallowedAreasChangedSlot) =
   var tmp = new QToolBarallowedAreasChangedSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -402,7 +403,7 @@ proc fcQToolBar_slot_callback_orientationChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QToolBarorientationChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onorientationChanged*(self: gen_qtoolbar_types.QToolBar, slot: QToolBarorientationChangedSlot) =
+proc onOrientationChanged*(self: gen_qtoolbar_types.QToolBar, slot: QToolBarorientationChangedSlot) =
   var tmp = new QToolBarorientationChangedSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -422,7 +423,7 @@ proc fcQToolBar_slot_callback_iconSizeChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QToolBariconSizeChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc oniconSizeChanged*(self: gen_qtoolbar_types.QToolBar, slot: QToolBariconSizeChangedSlot) =
+proc onIconSizeChanged*(self: gen_qtoolbar_types.QToolBar, slot: QToolBariconSizeChangedSlot) =
   var tmp = new QToolBariconSizeChangedSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -442,7 +443,7 @@ proc fcQToolBar_slot_callback_toolButtonStyleChanged_release(slot: int) {.cdecl.
   let nimfunc = cast[ref QToolBartoolButtonStyleChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc ontoolButtonStyleChanged*(self: gen_qtoolbar_types.QToolBar, slot: QToolBartoolButtonStyleChangedSlot) =
+proc onToolButtonStyleChanged*(self: gen_qtoolbar_types.QToolBar, slot: QToolBartoolButtonStyleChangedSlot) =
   var tmp = new QToolBartoolButtonStyleChangedSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -462,7 +463,7 @@ proc fcQToolBar_slot_callback_topLevelChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QToolBartopLevelChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc ontopLevelChanged*(self: gen_qtoolbar_types.QToolBar, slot: QToolBartopLevelChangedSlot) =
+proc onTopLevelChanged*(self: gen_qtoolbar_types.QToolBar, slot: QToolBartopLevelChangedSlot) =
   var tmp = new QToolBartopLevelChangedSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -482,7 +483,7 @@ proc fcQToolBar_slot_callback_visibilityChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QToolBarvisibilityChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onvisibilityChanged*(self: gen_qtoolbar_types.QToolBar, slot: QToolBarvisibilityChangedSlot) =
+proc onVisibilityChanged*(self: gen_qtoolbar_types.QToolBar, slot: QToolBarvisibilityChangedSlot) =
   var tmp = new QToolBarvisibilityChangedSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -551,6 +552,7 @@ type QToolBarchildEventProc* = proc(self: QToolBar, event: gen_qcoreevent_types.
 type QToolBarcustomEventProc* = proc(self: QToolBar, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QToolBarconnectNotifyProc* = proc(self: QToolBar, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QToolBardisconnectNotifyProc* = proc(self: QToolBar, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+
 type QToolBarVTable* {.inheritable, pure.} = object
   vtbl: cQToolBarVTable
   metaObject*: QToolBarmetaObjectProc
@@ -604,8 +606,160 @@ type QToolBarVTable* {.inheritable, pure.} = object
   customEvent*: QToolBarcustomEventProc
   connectNotify*: QToolBarconnectNotifyProc
   disconnectNotify*: QToolBardisconnectNotifyProc
+
 proc QToolBarmetaObject*(self: gen_qtoolbar_types.QToolBar): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQToolBar_virtualbase_metaObject(self.h), owned: false)
+
+proc QToolBarmetacast*(self: gen_qtoolbar_types.QToolBar, param1: cstring): pointer =
+  fcQToolBar_virtualbase_metacast(self.h, param1)
+
+proc QToolBarmetacall*(self: gen_qtoolbar_types.QToolBar, param1: cint, param2: cint, param3: pointer): cint =
+  fcQToolBar_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+proc QToolBaractionEvent*(self: gen_qtoolbar_types.QToolBar, event: gen_qevent_types.QActionEvent): void =
+  fcQToolBar_virtualbase_actionEvent(self.h, event.h)
+
+proc QToolBarchangeEvent*(self: gen_qtoolbar_types.QToolBar, event: gen_qcoreevent_types.QEvent): void =
+  fcQToolBar_virtualbase_changeEvent(self.h, event.h)
+
+proc QToolBarpaintEvent*(self: gen_qtoolbar_types.QToolBar, event: gen_qevent_types.QPaintEvent): void =
+  fcQToolBar_virtualbase_paintEvent(self.h, event.h)
+
+proc QToolBarevent*(self: gen_qtoolbar_types.QToolBar, event: gen_qcoreevent_types.QEvent): bool =
+  fcQToolBar_virtualbase_event(self.h, event.h)
+
+proc QToolBarinitStyleOption*(self: gen_qtoolbar_types.QToolBar, option: gen_qstyleoption_types.QStyleOptionToolBar): void =
+  fcQToolBar_virtualbase_initStyleOption(self.h, option.h)
+
+proc QToolBardevType*(self: gen_qtoolbar_types.QToolBar): cint =
+  fcQToolBar_virtualbase_devType(self.h)
+
+proc QToolBarsetVisible*(self: gen_qtoolbar_types.QToolBar, visible: bool): void =
+  fcQToolBar_virtualbase_setVisible(self.h, visible)
+
+proc QToolBarsizeHint*(self: gen_qtoolbar_types.QToolBar): gen_qsize_types.QSize =
+  gen_qsize_types.QSize(h: fcQToolBar_virtualbase_sizeHint(self.h), owned: true)
+
+proc QToolBarminimumSizeHint*(self: gen_qtoolbar_types.QToolBar): gen_qsize_types.QSize =
+  gen_qsize_types.QSize(h: fcQToolBar_virtualbase_minimumSizeHint(self.h), owned: true)
+
+proc QToolBarheightForWidth*(self: gen_qtoolbar_types.QToolBar, param1: cint): cint =
+  fcQToolBar_virtualbase_heightForWidth(self.h, param1)
+
+proc QToolBarhasHeightForWidth*(self: gen_qtoolbar_types.QToolBar): bool =
+  fcQToolBar_virtualbase_hasHeightForWidth(self.h)
+
+proc QToolBarpaintEngine*(self: gen_qtoolbar_types.QToolBar): gen_qpaintengine_types.QPaintEngine =
+  gen_qpaintengine_types.QPaintEngine(h: fcQToolBar_virtualbase_paintEngine(self.h), owned: false)
+
+proc QToolBarmousePressEvent*(self: gen_qtoolbar_types.QToolBar, event: gen_qevent_types.QMouseEvent): void =
+  fcQToolBar_virtualbase_mousePressEvent(self.h, event.h)
+
+proc QToolBarmouseReleaseEvent*(self: gen_qtoolbar_types.QToolBar, event: gen_qevent_types.QMouseEvent): void =
+  fcQToolBar_virtualbase_mouseReleaseEvent(self.h, event.h)
+
+proc QToolBarmouseDoubleClickEvent*(self: gen_qtoolbar_types.QToolBar, event: gen_qevent_types.QMouseEvent): void =
+  fcQToolBar_virtualbase_mouseDoubleClickEvent(self.h, event.h)
+
+proc QToolBarmouseMoveEvent*(self: gen_qtoolbar_types.QToolBar, event: gen_qevent_types.QMouseEvent): void =
+  fcQToolBar_virtualbase_mouseMoveEvent(self.h, event.h)
+
+proc QToolBarwheelEvent*(self: gen_qtoolbar_types.QToolBar, event: gen_qevent_types.QWheelEvent): void =
+  fcQToolBar_virtualbase_wheelEvent(self.h, event.h)
+
+proc QToolBarkeyPressEvent*(self: gen_qtoolbar_types.QToolBar, event: gen_qevent_types.QKeyEvent): void =
+  fcQToolBar_virtualbase_keyPressEvent(self.h, event.h)
+
+proc QToolBarkeyReleaseEvent*(self: gen_qtoolbar_types.QToolBar, event: gen_qevent_types.QKeyEvent): void =
+  fcQToolBar_virtualbase_keyReleaseEvent(self.h, event.h)
+
+proc QToolBarfocusInEvent*(self: gen_qtoolbar_types.QToolBar, event: gen_qevent_types.QFocusEvent): void =
+  fcQToolBar_virtualbase_focusInEvent(self.h, event.h)
+
+proc QToolBarfocusOutEvent*(self: gen_qtoolbar_types.QToolBar, event: gen_qevent_types.QFocusEvent): void =
+  fcQToolBar_virtualbase_focusOutEvent(self.h, event.h)
+
+proc QToolBarenterEvent*(self: gen_qtoolbar_types.QToolBar, event: gen_qevent_types.QEnterEvent): void =
+  fcQToolBar_virtualbase_enterEvent(self.h, event.h)
+
+proc QToolBarleaveEvent*(self: gen_qtoolbar_types.QToolBar, event: gen_qcoreevent_types.QEvent): void =
+  fcQToolBar_virtualbase_leaveEvent(self.h, event.h)
+
+proc QToolBarmoveEvent*(self: gen_qtoolbar_types.QToolBar, event: gen_qevent_types.QMoveEvent): void =
+  fcQToolBar_virtualbase_moveEvent(self.h, event.h)
+
+proc QToolBarresizeEvent*(self: gen_qtoolbar_types.QToolBar, event: gen_qevent_types.QResizeEvent): void =
+  fcQToolBar_virtualbase_resizeEvent(self.h, event.h)
+
+proc QToolBarcloseEvent*(self: gen_qtoolbar_types.QToolBar, event: gen_qevent_types.QCloseEvent): void =
+  fcQToolBar_virtualbase_closeEvent(self.h, event.h)
+
+proc QToolBarcontextMenuEvent*(self: gen_qtoolbar_types.QToolBar, event: gen_qevent_types.QContextMenuEvent): void =
+  fcQToolBar_virtualbase_contextMenuEvent(self.h, event.h)
+
+proc QToolBartabletEvent*(self: gen_qtoolbar_types.QToolBar, event: gen_qevent_types.QTabletEvent): void =
+  fcQToolBar_virtualbase_tabletEvent(self.h, event.h)
+
+proc QToolBardragEnterEvent*(self: gen_qtoolbar_types.QToolBar, event: gen_qevent_types.QDragEnterEvent): void =
+  fcQToolBar_virtualbase_dragEnterEvent(self.h, event.h)
+
+proc QToolBardragMoveEvent*(self: gen_qtoolbar_types.QToolBar, event: gen_qevent_types.QDragMoveEvent): void =
+  fcQToolBar_virtualbase_dragMoveEvent(self.h, event.h)
+
+proc QToolBardragLeaveEvent*(self: gen_qtoolbar_types.QToolBar, event: gen_qevent_types.QDragLeaveEvent): void =
+  fcQToolBar_virtualbase_dragLeaveEvent(self.h, event.h)
+
+proc QToolBardropEvent*(self: gen_qtoolbar_types.QToolBar, event: gen_qevent_types.QDropEvent): void =
+  fcQToolBar_virtualbase_dropEvent(self.h, event.h)
+
+proc QToolBarshowEvent*(self: gen_qtoolbar_types.QToolBar, event: gen_qevent_types.QShowEvent): void =
+  fcQToolBar_virtualbase_showEvent(self.h, event.h)
+
+proc QToolBarhideEvent*(self: gen_qtoolbar_types.QToolBar, event: gen_qevent_types.QHideEvent): void =
+  fcQToolBar_virtualbase_hideEvent(self.h, event.h)
+
+proc QToolBarnativeEvent*(self: gen_qtoolbar_types.QToolBar, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool =
+  fcQToolBar_virtualbase_nativeEvent(self.h, struct_miqt_string(data: if len(eventType) > 0: addr eventType[0] else: nil, len: csize_t(len(eventType))), message, resultVal)
+
+proc QToolBarmetric*(self: gen_qtoolbar_types.QToolBar, param1: cint): cint =
+  fcQToolBar_virtualbase_metric(self.h, cint(param1))
+
+proc QToolBarinitPainter*(self: gen_qtoolbar_types.QToolBar, painter: gen_qpainter_types.QPainter): void =
+  fcQToolBar_virtualbase_initPainter(self.h, painter.h)
+
+proc QToolBarredirected*(self: gen_qtoolbar_types.QToolBar, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice =
+  gen_qpaintdevice_types.QPaintDevice(h: fcQToolBar_virtualbase_redirected(self.h, offset.h), owned: false)
+
+proc QToolBarsharedPainter*(self: gen_qtoolbar_types.QToolBar): gen_qpainter_types.QPainter =
+  gen_qpainter_types.QPainter(h: fcQToolBar_virtualbase_sharedPainter(self.h), owned: false)
+
+proc QToolBarinputMethodEvent*(self: gen_qtoolbar_types.QToolBar, param1: gen_qevent_types.QInputMethodEvent): void =
+  fcQToolBar_virtualbase_inputMethodEvent(self.h, param1.h)
+
+proc QToolBarinputMethodQuery*(self: gen_qtoolbar_types.QToolBar, param1: cint): gen_qvariant_types.QVariant =
+  gen_qvariant_types.QVariant(h: fcQToolBar_virtualbase_inputMethodQuery(self.h, cint(param1)), owned: true)
+
+proc QToolBarfocusNextPrevChild*(self: gen_qtoolbar_types.QToolBar, next: bool): bool =
+  fcQToolBar_virtualbase_focusNextPrevChild(self.h, next)
+
+proc QToolBareventFilter*(self: gen_qtoolbar_types.QToolBar, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
+  fcQToolBar_virtualbase_eventFilter(self.h, watched.h, event.h)
+
+proc QToolBartimerEvent*(self: gen_qtoolbar_types.QToolBar, event: gen_qcoreevent_types.QTimerEvent): void =
+  fcQToolBar_virtualbase_timerEvent(self.h, event.h)
+
+proc QToolBarchildEvent*(self: gen_qtoolbar_types.QToolBar, event: gen_qcoreevent_types.QChildEvent): void =
+  fcQToolBar_virtualbase_childEvent(self.h, event.h)
+
+proc QToolBarcustomEvent*(self: gen_qtoolbar_types.QToolBar, event: gen_qcoreevent_types.QEvent): void =
+  fcQToolBar_virtualbase_customEvent(self.h, event.h)
+
+proc QToolBarconnectNotify*(self: gen_qtoolbar_types.QToolBar, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQToolBar_virtualbase_connectNotify(self.h, signal.h)
+
+proc QToolBardisconnectNotify*(self: gen_qtoolbar_types.QToolBar, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQToolBar_virtualbase_disconnectNotify(self.h, signal.h)
+
 
 proc fcQToolBar_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QToolBarVTable](fcQToolBar_vdata(self)[])
@@ -616,18 +770,12 @@ proc fcQToolBar_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QToolBarmetacast*(self: gen_qtoolbar_types.QToolBar, param1: cstring): pointer =
-  fcQToolBar_virtualbase_metacast(self.h, param1)
-
 proc fcQToolBar_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QToolBarVTable](fcQToolBar_vdata(self)[])
   let self = QToolBar(h: self)
   let slotval1 = (param1)
   var virtualReturn = vtbl[].metacast(self, slotval1)
   virtualReturn
-
-proc QToolBarmetacall*(self: gen_qtoolbar_types.QToolBar, param1: cint, param2: cint, param3: pointer): cint =
-  fcQToolBar_virtualbase_metacall(self.h, cint(param1), param2, param3)
 
 proc fcQToolBar_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QToolBarVTable](fcQToolBar_vdata(self)[])
@@ -638,17 +786,11 @@ proc fcQToolBar_vtable_callback_metacall(self: pointer, param1: cint, param2: ci
   var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QToolBaractionEvent*(self: gen_qtoolbar_types.QToolBar, event: gen_qevent_types.QActionEvent): void =
-  fcQToolBar_virtualbase_actionEvent(self.h, event.h)
-
 proc fcQToolBar_vtable_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QToolBarVTable](fcQToolBar_vdata(self)[])
   let self = QToolBar(h: self)
   let slotval1 = gen_qevent_types.QActionEvent(h: event, owned: false)
   vtbl[].actionEvent(self, slotval1)
-
-proc QToolBarchangeEvent*(self: gen_qtoolbar_types.QToolBar, event: gen_qcoreevent_types.QEvent): void =
-  fcQToolBar_virtualbase_changeEvent(self.h, event.h)
 
 proc fcQToolBar_vtable_callback_changeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QToolBarVTable](fcQToolBar_vdata(self)[])
@@ -656,17 +798,11 @@ proc fcQToolBar_vtable_callback_changeEvent(self: pointer, event: pointer): void
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].changeEvent(self, slotval1)
 
-proc QToolBarpaintEvent*(self: gen_qtoolbar_types.QToolBar, event: gen_qevent_types.QPaintEvent): void =
-  fcQToolBar_virtualbase_paintEvent(self.h, event.h)
-
 proc fcQToolBar_vtable_callback_paintEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QToolBarVTable](fcQToolBar_vdata(self)[])
   let self = QToolBar(h: self)
   let slotval1 = gen_qevent_types.QPaintEvent(h: event, owned: false)
   vtbl[].paintEvent(self, slotval1)
-
-proc QToolBarevent*(self: gen_qtoolbar_types.QToolBar, event: gen_qcoreevent_types.QEvent): bool =
-  fcQToolBar_virtualbase_event(self.h, event.h)
 
 proc fcQToolBar_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QToolBarVTable](fcQToolBar_vdata(self)[])
@@ -675,17 +811,11 @@ proc fcQToolBar_vtable_callback_event(self: pointer, event: pointer): bool {.cde
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
-proc QToolBarinitStyleOption*(self: gen_qtoolbar_types.QToolBar, option: gen_qstyleoption_types.QStyleOptionToolBar): void =
-  fcQToolBar_virtualbase_initStyleOption(self.h, option.h)
-
 proc fcQToolBar_vtable_callback_initStyleOption(self: pointer, option: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QToolBarVTable](fcQToolBar_vdata(self)[])
   let self = QToolBar(h: self)
   let slotval1 = gen_qstyleoption_types.QStyleOptionToolBar(h: option, owned: false)
   vtbl[].initStyleOption(self, slotval1)
-
-proc QToolBardevType*(self: gen_qtoolbar_types.QToolBar): cint =
-  fcQToolBar_virtualbase_devType(self.h)
 
 proc fcQToolBar_vtable_callback_devType(self: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QToolBarVTable](fcQToolBar_vdata(self)[])
@@ -693,17 +823,11 @@ proc fcQToolBar_vtable_callback_devType(self: pointer): cint {.cdecl.} =
   var virtualReturn = vtbl[].devType(self)
   virtualReturn
 
-proc QToolBarsetVisible*(self: gen_qtoolbar_types.QToolBar, visible: bool): void =
-  fcQToolBar_virtualbase_setVisible(self.h, visible)
-
 proc fcQToolBar_vtable_callback_setVisible(self: pointer, visible: bool): void {.cdecl.} =
   let vtbl = cast[ptr QToolBarVTable](fcQToolBar_vdata(self)[])
   let self = QToolBar(h: self)
   let slotval1 = visible
   vtbl[].setVisible(self, slotval1)
-
-proc QToolBarsizeHint*(self: gen_qtoolbar_types.QToolBar): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQToolBar_virtualbase_sizeHint(self.h), owned: true)
 
 proc fcQToolBar_vtable_callback_sizeHint(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QToolBarVTable](fcQToolBar_vdata(self)[])
@@ -714,9 +838,6 @@ proc fcQToolBar_vtable_callback_sizeHint(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QToolBarminimumSizeHint*(self: gen_qtoolbar_types.QToolBar): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQToolBar_virtualbase_minimumSizeHint(self.h), owned: true)
-
 proc fcQToolBar_vtable_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QToolBarVTable](fcQToolBar_vdata(self)[])
   let self = QToolBar(h: self)
@@ -726,9 +847,6 @@ proc fcQToolBar_vtable_callback_minimumSizeHint(self: pointer): pointer {.cdecl.
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QToolBarheightForWidth*(self: gen_qtoolbar_types.QToolBar, param1: cint): cint =
-  fcQToolBar_virtualbase_heightForWidth(self.h, param1)
-
 proc fcQToolBar_vtable_callback_heightForWidth(self: pointer, param1: cint): cint {.cdecl.} =
   let vtbl = cast[ptr QToolBarVTable](fcQToolBar_vdata(self)[])
   let self = QToolBar(h: self)
@@ -736,17 +854,11 @@ proc fcQToolBar_vtable_callback_heightForWidth(self: pointer, param1: cint): cin
   var virtualReturn = vtbl[].heightForWidth(self, slotval1)
   virtualReturn
 
-proc QToolBarhasHeightForWidth*(self: gen_qtoolbar_types.QToolBar): bool =
-  fcQToolBar_virtualbase_hasHeightForWidth(self.h)
-
 proc fcQToolBar_vtable_callback_hasHeightForWidth(self: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QToolBarVTable](fcQToolBar_vdata(self)[])
   let self = QToolBar(h: self)
   var virtualReturn = vtbl[].hasHeightForWidth(self)
   virtualReturn
-
-proc QToolBarpaintEngine*(self: gen_qtoolbar_types.QToolBar): gen_qpaintengine_types.QPaintEngine =
-  gen_qpaintengine_types.QPaintEngine(h: fcQToolBar_virtualbase_paintEngine(self.h), owned: false)
 
 proc fcQToolBar_vtable_callback_paintEngine(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QToolBarVTable](fcQToolBar_vdata(self)[])
@@ -757,17 +869,11 @@ proc fcQToolBar_vtable_callback_paintEngine(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QToolBarmousePressEvent*(self: gen_qtoolbar_types.QToolBar, event: gen_qevent_types.QMouseEvent): void =
-  fcQToolBar_virtualbase_mousePressEvent(self.h, event.h)
-
 proc fcQToolBar_vtable_callback_mousePressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QToolBarVTable](fcQToolBar_vdata(self)[])
   let self = QToolBar(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mousePressEvent(self, slotval1)
-
-proc QToolBarmouseReleaseEvent*(self: gen_qtoolbar_types.QToolBar, event: gen_qevent_types.QMouseEvent): void =
-  fcQToolBar_virtualbase_mouseReleaseEvent(self.h, event.h)
 
 proc fcQToolBar_vtable_callback_mouseReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QToolBarVTable](fcQToolBar_vdata(self)[])
@@ -775,17 +881,11 @@ proc fcQToolBar_vtable_callback_mouseReleaseEvent(self: pointer, event: pointer)
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseReleaseEvent(self, slotval1)
 
-proc QToolBarmouseDoubleClickEvent*(self: gen_qtoolbar_types.QToolBar, event: gen_qevent_types.QMouseEvent): void =
-  fcQToolBar_virtualbase_mouseDoubleClickEvent(self.h, event.h)
-
 proc fcQToolBar_vtable_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QToolBarVTable](fcQToolBar_vdata(self)[])
   let self = QToolBar(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseDoubleClickEvent(self, slotval1)
-
-proc QToolBarmouseMoveEvent*(self: gen_qtoolbar_types.QToolBar, event: gen_qevent_types.QMouseEvent): void =
-  fcQToolBar_virtualbase_mouseMoveEvent(self.h, event.h)
 
 proc fcQToolBar_vtable_callback_mouseMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QToolBarVTable](fcQToolBar_vdata(self)[])
@@ -793,17 +893,11 @@ proc fcQToolBar_vtable_callback_mouseMoveEvent(self: pointer, event: pointer): v
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseMoveEvent(self, slotval1)
 
-proc QToolBarwheelEvent*(self: gen_qtoolbar_types.QToolBar, event: gen_qevent_types.QWheelEvent): void =
-  fcQToolBar_virtualbase_wheelEvent(self.h, event.h)
-
 proc fcQToolBar_vtable_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QToolBarVTable](fcQToolBar_vdata(self)[])
   let self = QToolBar(h: self)
   let slotval1 = gen_qevent_types.QWheelEvent(h: event, owned: false)
   vtbl[].wheelEvent(self, slotval1)
-
-proc QToolBarkeyPressEvent*(self: gen_qtoolbar_types.QToolBar, event: gen_qevent_types.QKeyEvent): void =
-  fcQToolBar_virtualbase_keyPressEvent(self.h, event.h)
 
 proc fcQToolBar_vtable_callback_keyPressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QToolBarVTable](fcQToolBar_vdata(self)[])
@@ -811,17 +905,11 @@ proc fcQToolBar_vtable_callback_keyPressEvent(self: pointer, event: pointer): vo
   let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   vtbl[].keyPressEvent(self, slotval1)
 
-proc QToolBarkeyReleaseEvent*(self: gen_qtoolbar_types.QToolBar, event: gen_qevent_types.QKeyEvent): void =
-  fcQToolBar_virtualbase_keyReleaseEvent(self.h, event.h)
-
 proc fcQToolBar_vtable_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QToolBarVTable](fcQToolBar_vdata(self)[])
   let self = QToolBar(h: self)
   let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   vtbl[].keyReleaseEvent(self, slotval1)
-
-proc QToolBarfocusInEvent*(self: gen_qtoolbar_types.QToolBar, event: gen_qevent_types.QFocusEvent): void =
-  fcQToolBar_virtualbase_focusInEvent(self.h, event.h)
 
 proc fcQToolBar_vtable_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QToolBarVTable](fcQToolBar_vdata(self)[])
@@ -829,17 +917,11 @@ proc fcQToolBar_vtable_callback_focusInEvent(self: pointer, event: pointer): voi
   let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusInEvent(self, slotval1)
 
-proc QToolBarfocusOutEvent*(self: gen_qtoolbar_types.QToolBar, event: gen_qevent_types.QFocusEvent): void =
-  fcQToolBar_virtualbase_focusOutEvent(self.h, event.h)
-
 proc fcQToolBar_vtable_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QToolBarVTable](fcQToolBar_vdata(self)[])
   let self = QToolBar(h: self)
   let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusOutEvent(self, slotval1)
-
-proc QToolBarenterEvent*(self: gen_qtoolbar_types.QToolBar, event: gen_qevent_types.QEnterEvent): void =
-  fcQToolBar_virtualbase_enterEvent(self.h, event.h)
 
 proc fcQToolBar_vtable_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QToolBarVTable](fcQToolBar_vdata(self)[])
@@ -847,17 +929,11 @@ proc fcQToolBar_vtable_callback_enterEvent(self: pointer, event: pointer): void 
   let slotval1 = gen_qevent_types.QEnterEvent(h: event, owned: false)
   vtbl[].enterEvent(self, slotval1)
 
-proc QToolBarleaveEvent*(self: gen_qtoolbar_types.QToolBar, event: gen_qcoreevent_types.QEvent): void =
-  fcQToolBar_virtualbase_leaveEvent(self.h, event.h)
-
 proc fcQToolBar_vtable_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QToolBarVTable](fcQToolBar_vdata(self)[])
   let self = QToolBar(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].leaveEvent(self, slotval1)
-
-proc QToolBarmoveEvent*(self: gen_qtoolbar_types.QToolBar, event: gen_qevent_types.QMoveEvent): void =
-  fcQToolBar_virtualbase_moveEvent(self.h, event.h)
 
 proc fcQToolBar_vtable_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QToolBarVTable](fcQToolBar_vdata(self)[])
@@ -865,17 +941,11 @@ proc fcQToolBar_vtable_callback_moveEvent(self: pointer, event: pointer): void {
   let slotval1 = gen_qevent_types.QMoveEvent(h: event, owned: false)
   vtbl[].moveEvent(self, slotval1)
 
-proc QToolBarresizeEvent*(self: gen_qtoolbar_types.QToolBar, event: gen_qevent_types.QResizeEvent): void =
-  fcQToolBar_virtualbase_resizeEvent(self.h, event.h)
-
 proc fcQToolBar_vtable_callback_resizeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QToolBarVTable](fcQToolBar_vdata(self)[])
   let self = QToolBar(h: self)
   let slotval1 = gen_qevent_types.QResizeEvent(h: event, owned: false)
   vtbl[].resizeEvent(self, slotval1)
-
-proc QToolBarcloseEvent*(self: gen_qtoolbar_types.QToolBar, event: gen_qevent_types.QCloseEvent): void =
-  fcQToolBar_virtualbase_closeEvent(self.h, event.h)
 
 proc fcQToolBar_vtable_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QToolBarVTable](fcQToolBar_vdata(self)[])
@@ -883,17 +953,11 @@ proc fcQToolBar_vtable_callback_closeEvent(self: pointer, event: pointer): void 
   let slotval1 = gen_qevent_types.QCloseEvent(h: event, owned: false)
   vtbl[].closeEvent(self, slotval1)
 
-proc QToolBarcontextMenuEvent*(self: gen_qtoolbar_types.QToolBar, event: gen_qevent_types.QContextMenuEvent): void =
-  fcQToolBar_virtualbase_contextMenuEvent(self.h, event.h)
-
 proc fcQToolBar_vtable_callback_contextMenuEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QToolBarVTable](fcQToolBar_vdata(self)[])
   let self = QToolBar(h: self)
   let slotval1 = gen_qevent_types.QContextMenuEvent(h: event, owned: false)
   vtbl[].contextMenuEvent(self, slotval1)
-
-proc QToolBartabletEvent*(self: gen_qtoolbar_types.QToolBar, event: gen_qevent_types.QTabletEvent): void =
-  fcQToolBar_virtualbase_tabletEvent(self.h, event.h)
 
 proc fcQToolBar_vtable_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QToolBarVTable](fcQToolBar_vdata(self)[])
@@ -901,17 +965,11 @@ proc fcQToolBar_vtable_callback_tabletEvent(self: pointer, event: pointer): void
   let slotval1 = gen_qevent_types.QTabletEvent(h: event, owned: false)
   vtbl[].tabletEvent(self, slotval1)
 
-proc QToolBardragEnterEvent*(self: gen_qtoolbar_types.QToolBar, event: gen_qevent_types.QDragEnterEvent): void =
-  fcQToolBar_virtualbase_dragEnterEvent(self.h, event.h)
-
 proc fcQToolBar_vtable_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QToolBarVTable](fcQToolBar_vdata(self)[])
   let self = QToolBar(h: self)
   let slotval1 = gen_qevent_types.QDragEnterEvent(h: event, owned: false)
   vtbl[].dragEnterEvent(self, slotval1)
-
-proc QToolBardragMoveEvent*(self: gen_qtoolbar_types.QToolBar, event: gen_qevent_types.QDragMoveEvent): void =
-  fcQToolBar_virtualbase_dragMoveEvent(self.h, event.h)
 
 proc fcQToolBar_vtable_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QToolBarVTable](fcQToolBar_vdata(self)[])
@@ -919,17 +977,11 @@ proc fcQToolBar_vtable_callback_dragMoveEvent(self: pointer, event: pointer): vo
   let slotval1 = gen_qevent_types.QDragMoveEvent(h: event, owned: false)
   vtbl[].dragMoveEvent(self, slotval1)
 
-proc QToolBardragLeaveEvent*(self: gen_qtoolbar_types.QToolBar, event: gen_qevent_types.QDragLeaveEvent): void =
-  fcQToolBar_virtualbase_dragLeaveEvent(self.h, event.h)
-
 proc fcQToolBar_vtable_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QToolBarVTable](fcQToolBar_vdata(self)[])
   let self = QToolBar(h: self)
   let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event, owned: false)
   vtbl[].dragLeaveEvent(self, slotval1)
-
-proc QToolBardropEvent*(self: gen_qtoolbar_types.QToolBar, event: gen_qevent_types.QDropEvent): void =
-  fcQToolBar_virtualbase_dropEvent(self.h, event.h)
 
 proc fcQToolBar_vtable_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QToolBarVTable](fcQToolBar_vdata(self)[])
@@ -937,26 +989,17 @@ proc fcQToolBar_vtable_callback_dropEvent(self: pointer, event: pointer): void {
   let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
   vtbl[].dropEvent(self, slotval1)
 
-proc QToolBarshowEvent*(self: gen_qtoolbar_types.QToolBar, event: gen_qevent_types.QShowEvent): void =
-  fcQToolBar_virtualbase_showEvent(self.h, event.h)
-
 proc fcQToolBar_vtable_callback_showEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QToolBarVTable](fcQToolBar_vdata(self)[])
   let self = QToolBar(h: self)
   let slotval1 = gen_qevent_types.QShowEvent(h: event, owned: false)
   vtbl[].showEvent(self, slotval1)
 
-proc QToolBarhideEvent*(self: gen_qtoolbar_types.QToolBar, event: gen_qevent_types.QHideEvent): void =
-  fcQToolBar_virtualbase_hideEvent(self.h, event.h)
-
 proc fcQToolBar_vtable_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QToolBarVTable](fcQToolBar_vdata(self)[])
   let self = QToolBar(h: self)
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   vtbl[].hideEvent(self, slotval1)
-
-proc QToolBarnativeEvent*(self: gen_qtoolbar_types.QToolBar, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool =
-  fcQToolBar_virtualbase_nativeEvent(self.h, struct_miqt_string(data: if len(eventType) > 0: addr eventType[0] else: nil, len: csize_t(len(eventType))), message, resultVal)
 
 proc fcQToolBar_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
   let vtbl = cast[ptr QToolBarVTable](fcQToolBar_vdata(self)[])
@@ -970,9 +1013,6 @@ proc fcQToolBar_vtable_callback_nativeEvent(self: pointer, eventType: struct_miq
   var virtualReturn = vtbl[].nativeEvent(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QToolBarmetric*(self: gen_qtoolbar_types.QToolBar, param1: cint): cint =
-  fcQToolBar_virtualbase_metric(self.h, cint(param1))
-
 proc fcQToolBar_vtable_callback_metric(self: pointer, param1: cint): cint {.cdecl.} =
   let vtbl = cast[ptr QToolBarVTable](fcQToolBar_vdata(self)[])
   let self = QToolBar(h: self)
@@ -980,17 +1020,11 @@ proc fcQToolBar_vtable_callback_metric(self: pointer, param1: cint): cint {.cdec
   var virtualReturn = vtbl[].metric(self, slotval1)
   virtualReturn
 
-proc QToolBarinitPainter*(self: gen_qtoolbar_types.QToolBar, painter: gen_qpainter_types.QPainter): void =
-  fcQToolBar_virtualbase_initPainter(self.h, painter.h)
-
 proc fcQToolBar_vtable_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QToolBarVTable](fcQToolBar_vdata(self)[])
   let self = QToolBar(h: self)
   let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
   vtbl[].initPainter(self, slotval1)
-
-proc QToolBarredirected*(self: gen_qtoolbar_types.QToolBar, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice =
-  gen_qpaintdevice_types.QPaintDevice(h: fcQToolBar_virtualbase_redirected(self.h, offset.h), owned: false)
 
 proc fcQToolBar_vtable_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QToolBarVTable](fcQToolBar_vdata(self)[])
@@ -1002,9 +1036,6 @@ proc fcQToolBar_vtable_callback_redirected(self: pointer, offset: pointer): poin
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QToolBarsharedPainter*(self: gen_qtoolbar_types.QToolBar): gen_qpainter_types.QPainter =
-  gen_qpainter_types.QPainter(h: fcQToolBar_virtualbase_sharedPainter(self.h), owned: false)
-
 proc fcQToolBar_vtable_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QToolBarVTable](fcQToolBar_vdata(self)[])
   let self = QToolBar(h: self)
@@ -1014,17 +1045,11 @@ proc fcQToolBar_vtable_callback_sharedPainter(self: pointer): pointer {.cdecl.} 
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QToolBarinputMethodEvent*(self: gen_qtoolbar_types.QToolBar, param1: gen_qevent_types.QInputMethodEvent): void =
-  fcQToolBar_virtualbase_inputMethodEvent(self.h, param1.h)
-
 proc fcQToolBar_vtable_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QToolBarVTable](fcQToolBar_vdata(self)[])
   let self = QToolBar(h: self)
   let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1, owned: false)
   vtbl[].inputMethodEvent(self, slotval1)
-
-proc QToolBarinputMethodQuery*(self: gen_qtoolbar_types.QToolBar, param1: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQToolBar_virtualbase_inputMethodQuery(self.h, cint(param1)), owned: true)
 
 proc fcQToolBar_vtable_callback_inputMethodQuery(self: pointer, param1: cint): pointer {.cdecl.} =
   let vtbl = cast[ptr QToolBarVTable](fcQToolBar_vdata(self)[])
@@ -1036,18 +1061,12 @@ proc fcQToolBar_vtable_callback_inputMethodQuery(self: pointer, param1: cint): p
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QToolBarfocusNextPrevChild*(self: gen_qtoolbar_types.QToolBar, next: bool): bool =
-  fcQToolBar_virtualbase_focusNextPrevChild(self.h, next)
-
 proc fcQToolBar_vtable_callback_focusNextPrevChild(self: pointer, next: bool): bool {.cdecl.} =
   let vtbl = cast[ptr QToolBarVTable](fcQToolBar_vdata(self)[])
   let self = QToolBar(h: self)
   let slotval1 = next
   var virtualReturn = vtbl[].focusNextPrevChild(self, slotval1)
   virtualReturn
-
-proc QToolBareventFilter*(self: gen_qtoolbar_types.QToolBar, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
-  fcQToolBar_virtualbase_eventFilter(self.h, watched.h, event.h)
 
 proc fcQToolBar_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QToolBarVTable](fcQToolBar_vdata(self)[])
@@ -1057,17 +1076,11 @@ proc fcQToolBar_vtable_callback_eventFilter(self: pointer, watched: pointer, eve
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
-proc QToolBartimerEvent*(self: gen_qtoolbar_types.QToolBar, event: gen_qcoreevent_types.QTimerEvent): void =
-  fcQToolBar_virtualbase_timerEvent(self.h, event.h)
-
 proc fcQToolBar_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QToolBarVTable](fcQToolBar_vdata(self)[])
   let self = QToolBar(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
-
-proc QToolBarchildEvent*(self: gen_qtoolbar_types.QToolBar, event: gen_qcoreevent_types.QChildEvent): void =
-  fcQToolBar_virtualbase_childEvent(self.h, event.h)
 
 proc fcQToolBar_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QToolBarVTable](fcQToolBar_vdata(self)[])
@@ -1075,26 +1088,17 @@ proc fcQToolBar_vtable_callback_childEvent(self: pointer, event: pointer): void 
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
-proc QToolBarcustomEvent*(self: gen_qtoolbar_types.QToolBar, event: gen_qcoreevent_types.QEvent): void =
-  fcQToolBar_virtualbase_customEvent(self.h, event.h)
-
 proc fcQToolBar_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QToolBarVTable](fcQToolBar_vdata(self)[])
   let self = QToolBar(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
-proc QToolBarconnectNotify*(self: gen_qtoolbar_types.QToolBar, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQToolBar_virtualbase_connectNotify(self.h, signal.h)
-
 proc fcQToolBar_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QToolBarVTable](fcQToolBar_vdata(self)[])
   let self = QToolBar(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
-
-proc QToolBardisconnectNotify*(self: gen_qtoolbar_types.QToolBar, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQToolBar_virtualbase_disconnectNotify(self.h, signal.h)
 
 proc fcQToolBar_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QToolBarVTable](fcQToolBar_vdata(self)[])
@@ -1104,23 +1108,121 @@ proc fcQToolBar_vtable_callback_disconnectNotify(self: pointer, signal: pointer)
 
 type VirtualQToolBar* {.inheritable.} = ref object of QToolBar
   vtbl*: cQToolBarVTable
+
 method metaObject*(self: VirtualQToolBar): gen_qobjectdefs_types.QMetaObject {.base.} =
   QToolBarmetaObject(self[])
+method metacast*(self: VirtualQToolBar, param1: cstring): pointer {.base.} =
+  QToolBarmetacast(self[], param1)
+method metacall*(self: VirtualQToolBar, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QToolBarmetacall(self[], param1, param2, param3)
+method actionEvent*(self: VirtualQToolBar, event: gen_qevent_types.QActionEvent): void {.base.} =
+  QToolBaractionEvent(self[], event)
+method changeEvent*(self: VirtualQToolBar, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QToolBarchangeEvent(self[], event)
+method paintEvent*(self: VirtualQToolBar, event: gen_qevent_types.QPaintEvent): void {.base.} =
+  QToolBarpaintEvent(self[], event)
+method event*(self: VirtualQToolBar, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QToolBarevent(self[], event)
+method initStyleOption*(self: VirtualQToolBar, option: gen_qstyleoption_types.QStyleOptionToolBar): void {.base.} =
+  QToolBarinitStyleOption(self[], option)
+method devType*(self: VirtualQToolBar): cint {.base.} =
+  QToolBardevType(self[])
+method setVisible*(self: VirtualQToolBar, visible: bool): void {.base.} =
+  QToolBarsetVisible(self[], visible)
+method sizeHint*(self: VirtualQToolBar): gen_qsize_types.QSize {.base.} =
+  QToolBarsizeHint(self[])
+method minimumSizeHint*(self: VirtualQToolBar): gen_qsize_types.QSize {.base.} =
+  QToolBarminimumSizeHint(self[])
+method heightForWidth*(self: VirtualQToolBar, param1: cint): cint {.base.} =
+  QToolBarheightForWidth(self[], param1)
+method hasHeightForWidth*(self: VirtualQToolBar): bool {.base.} =
+  QToolBarhasHeightForWidth(self[])
+method paintEngine*(self: VirtualQToolBar): gen_qpaintengine_types.QPaintEngine {.base.} =
+  QToolBarpaintEngine(self[])
+method mousePressEvent*(self: VirtualQToolBar, event: gen_qevent_types.QMouseEvent): void {.base.} =
+  QToolBarmousePressEvent(self[], event)
+method mouseReleaseEvent*(self: VirtualQToolBar, event: gen_qevent_types.QMouseEvent): void {.base.} =
+  QToolBarmouseReleaseEvent(self[], event)
+method mouseDoubleClickEvent*(self: VirtualQToolBar, event: gen_qevent_types.QMouseEvent): void {.base.} =
+  QToolBarmouseDoubleClickEvent(self[], event)
+method mouseMoveEvent*(self: VirtualQToolBar, event: gen_qevent_types.QMouseEvent): void {.base.} =
+  QToolBarmouseMoveEvent(self[], event)
+method wheelEvent*(self: VirtualQToolBar, event: gen_qevent_types.QWheelEvent): void {.base.} =
+  QToolBarwheelEvent(self[], event)
+method keyPressEvent*(self: VirtualQToolBar, event: gen_qevent_types.QKeyEvent): void {.base.} =
+  QToolBarkeyPressEvent(self[], event)
+method keyReleaseEvent*(self: VirtualQToolBar, event: gen_qevent_types.QKeyEvent): void {.base.} =
+  QToolBarkeyReleaseEvent(self[], event)
+method focusInEvent*(self: VirtualQToolBar, event: gen_qevent_types.QFocusEvent): void {.base.} =
+  QToolBarfocusInEvent(self[], event)
+method focusOutEvent*(self: VirtualQToolBar, event: gen_qevent_types.QFocusEvent): void {.base.} =
+  QToolBarfocusOutEvent(self[], event)
+method enterEvent*(self: VirtualQToolBar, event: gen_qevent_types.QEnterEvent): void {.base.} =
+  QToolBarenterEvent(self[], event)
+method leaveEvent*(self: VirtualQToolBar, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QToolBarleaveEvent(self[], event)
+method moveEvent*(self: VirtualQToolBar, event: gen_qevent_types.QMoveEvent): void {.base.} =
+  QToolBarmoveEvent(self[], event)
+method resizeEvent*(self: VirtualQToolBar, event: gen_qevent_types.QResizeEvent): void {.base.} =
+  QToolBarresizeEvent(self[], event)
+method closeEvent*(self: VirtualQToolBar, event: gen_qevent_types.QCloseEvent): void {.base.} =
+  QToolBarcloseEvent(self[], event)
+method contextMenuEvent*(self: VirtualQToolBar, event: gen_qevent_types.QContextMenuEvent): void {.base.} =
+  QToolBarcontextMenuEvent(self[], event)
+method tabletEvent*(self: VirtualQToolBar, event: gen_qevent_types.QTabletEvent): void {.base.} =
+  QToolBartabletEvent(self[], event)
+method dragEnterEvent*(self: VirtualQToolBar, event: gen_qevent_types.QDragEnterEvent): void {.base.} =
+  QToolBardragEnterEvent(self[], event)
+method dragMoveEvent*(self: VirtualQToolBar, event: gen_qevent_types.QDragMoveEvent): void {.base.} =
+  QToolBardragMoveEvent(self[], event)
+method dragLeaveEvent*(self: VirtualQToolBar, event: gen_qevent_types.QDragLeaveEvent): void {.base.} =
+  QToolBardragLeaveEvent(self[], event)
+method dropEvent*(self: VirtualQToolBar, event: gen_qevent_types.QDropEvent): void {.base.} =
+  QToolBardropEvent(self[], event)
+method showEvent*(self: VirtualQToolBar, event: gen_qevent_types.QShowEvent): void {.base.} =
+  QToolBarshowEvent(self[], event)
+method hideEvent*(self: VirtualQToolBar, event: gen_qevent_types.QHideEvent): void {.base.} =
+  QToolBarhideEvent(self[], event)
+method nativeEvent*(self: VirtualQToolBar, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
+  QToolBarnativeEvent(self[], eventType, message, resultVal)
+method metric*(self: VirtualQToolBar, param1: cint): cint {.base.} =
+  QToolBarmetric(self[], param1)
+method initPainter*(self: VirtualQToolBar, painter: gen_qpainter_types.QPainter): void {.base.} =
+  QToolBarinitPainter(self[], painter)
+method redirected*(self: VirtualQToolBar, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.base.} =
+  QToolBarredirected(self[], offset)
+method sharedPainter*(self: VirtualQToolBar): gen_qpainter_types.QPainter {.base.} =
+  QToolBarsharedPainter(self[])
+method inputMethodEvent*(self: VirtualQToolBar, param1: gen_qevent_types.QInputMethodEvent): void {.base.} =
+  QToolBarinputMethodEvent(self[], param1)
+method inputMethodQuery*(self: VirtualQToolBar, param1: cint): gen_qvariant_types.QVariant {.base.} =
+  QToolBarinputMethodQuery(self[], param1)
+method focusNextPrevChild*(self: VirtualQToolBar, next: bool): bool {.base.} =
+  QToolBarfocusNextPrevChild(self[], next)
+method eventFilter*(self: VirtualQToolBar, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QToolBareventFilter(self[], watched, event)
+method timerEvent*(self: VirtualQToolBar, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QToolBartimerEvent(self[], event)
+method childEvent*(self: VirtualQToolBar, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QToolBarchildEvent(self[], event)
+method customEvent*(self: VirtualQToolBar, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QToolBarcustomEvent(self[], event)
+method connectNotify*(self: VirtualQToolBar, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QToolBarconnectNotify(self[], signal)
+method disconnectNotify*(self: VirtualQToolBar, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QToolBardisconnectNotify(self[], signal)
+
 proc fcQToolBar_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQToolBar](fcQToolBar_vdata(self)[])
   var virtualReturn = inst.metaObject()
   virtualReturn.h
 
-method metacast*(self: VirtualQToolBar, param1: cstring): pointer {.base.} =
-  QToolBarmetacast(self[], param1)
 proc fcQToolBar_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQToolBar](fcQToolBar_vdata(self)[])
   let slotval1 = (param1)
   var virtualReturn = inst.metacast(slotval1)
   virtualReturn
 
-method metacall*(self: VirtualQToolBar, param1: cint, param2: cint, param3: pointer): cint {.base.} =
-  QToolBarmetacall(self[], param1, param2, param3)
 proc fcQToolBar_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQToolBar](fcQToolBar_vdata(self)[])
   let slotval1 = cint(param1)
@@ -1129,248 +1231,178 @@ proc fcQToolBar_method_callback_metacall(self: pointer, param1: cint, param2: ci
   var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
-method actionEvent*(self: VirtualQToolBar, event: gen_qevent_types.QActionEvent): void {.base.} =
-  QToolBaractionEvent(self[], event)
 proc fcQToolBar_method_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQToolBar](fcQToolBar_vdata(self)[])
   let slotval1 = gen_qevent_types.QActionEvent(h: event, owned: false)
   inst.actionEvent(slotval1)
 
-method changeEvent*(self: VirtualQToolBar, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QToolBarchangeEvent(self[], event)
 proc fcQToolBar_method_callback_changeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQToolBar](fcQToolBar_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.changeEvent(slotval1)
 
-method paintEvent*(self: VirtualQToolBar, event: gen_qevent_types.QPaintEvent): void {.base.} =
-  QToolBarpaintEvent(self[], event)
 proc fcQToolBar_method_callback_paintEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQToolBar](fcQToolBar_vdata(self)[])
   let slotval1 = gen_qevent_types.QPaintEvent(h: event, owned: false)
   inst.paintEvent(slotval1)
 
-method event*(self: VirtualQToolBar, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QToolBarevent(self[], event)
 proc fcQToolBar_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQToolBar](fcQToolBar_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
-method initStyleOption*(self: VirtualQToolBar, option: gen_qstyleoption_types.QStyleOptionToolBar): void {.base.} =
-  QToolBarinitStyleOption(self[], option)
 proc fcQToolBar_method_callback_initStyleOption(self: pointer, option: pointer): void {.cdecl.} =
   let inst = cast[VirtualQToolBar](fcQToolBar_vdata(self)[])
   let slotval1 = gen_qstyleoption_types.QStyleOptionToolBar(h: option, owned: false)
   inst.initStyleOption(slotval1)
 
-method devType*(self: VirtualQToolBar): cint {.base.} =
-  QToolBardevType(self[])
 proc fcQToolBar_method_callback_devType(self: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQToolBar](fcQToolBar_vdata(self)[])
   var virtualReturn = inst.devType()
   virtualReturn
 
-method setVisible*(self: VirtualQToolBar, visible: bool): void {.base.} =
-  QToolBarsetVisible(self[], visible)
 proc fcQToolBar_method_callback_setVisible(self: pointer, visible: bool): void {.cdecl.} =
   let inst = cast[VirtualQToolBar](fcQToolBar_vdata(self)[])
   let slotval1 = visible
   inst.setVisible(slotval1)
 
-method sizeHint*(self: VirtualQToolBar): gen_qsize_types.QSize {.base.} =
-  QToolBarsizeHint(self[])
 proc fcQToolBar_method_callback_sizeHint(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQToolBar](fcQToolBar_vdata(self)[])
   var virtualReturn = inst.sizeHint()
   virtualReturn.h
 
-method minimumSizeHint*(self: VirtualQToolBar): gen_qsize_types.QSize {.base.} =
-  QToolBarminimumSizeHint(self[])
 proc fcQToolBar_method_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQToolBar](fcQToolBar_vdata(self)[])
   var virtualReturn = inst.minimumSizeHint()
   virtualReturn.h
 
-method heightForWidth*(self: VirtualQToolBar, param1: cint): cint {.base.} =
-  QToolBarheightForWidth(self[], param1)
 proc fcQToolBar_method_callback_heightForWidth(self: pointer, param1: cint): cint {.cdecl.} =
   let inst = cast[VirtualQToolBar](fcQToolBar_vdata(self)[])
   let slotval1 = param1
   var virtualReturn = inst.heightForWidth(slotval1)
   virtualReturn
 
-method hasHeightForWidth*(self: VirtualQToolBar): bool {.base.} =
-  QToolBarhasHeightForWidth(self[])
 proc fcQToolBar_method_callback_hasHeightForWidth(self: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQToolBar](fcQToolBar_vdata(self)[])
   var virtualReturn = inst.hasHeightForWidth()
   virtualReturn
 
-method paintEngine*(self: VirtualQToolBar): gen_qpaintengine_types.QPaintEngine {.base.} =
-  QToolBarpaintEngine(self[])
 proc fcQToolBar_method_callback_paintEngine(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQToolBar](fcQToolBar_vdata(self)[])
   var virtualReturn = inst.paintEngine()
   virtualReturn.h
 
-method mousePressEvent*(self: VirtualQToolBar, event: gen_qevent_types.QMouseEvent): void {.base.} =
-  QToolBarmousePressEvent(self[], event)
 proc fcQToolBar_method_callback_mousePressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQToolBar](fcQToolBar_vdata(self)[])
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mousePressEvent(slotval1)
 
-method mouseReleaseEvent*(self: VirtualQToolBar, event: gen_qevent_types.QMouseEvent): void {.base.} =
-  QToolBarmouseReleaseEvent(self[], event)
 proc fcQToolBar_method_callback_mouseReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQToolBar](fcQToolBar_vdata(self)[])
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mouseReleaseEvent(slotval1)
 
-method mouseDoubleClickEvent*(self: VirtualQToolBar, event: gen_qevent_types.QMouseEvent): void {.base.} =
-  QToolBarmouseDoubleClickEvent(self[], event)
 proc fcQToolBar_method_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQToolBar](fcQToolBar_vdata(self)[])
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mouseDoubleClickEvent(slotval1)
 
-method mouseMoveEvent*(self: VirtualQToolBar, event: gen_qevent_types.QMouseEvent): void {.base.} =
-  QToolBarmouseMoveEvent(self[], event)
 proc fcQToolBar_method_callback_mouseMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQToolBar](fcQToolBar_vdata(self)[])
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mouseMoveEvent(slotval1)
 
-method wheelEvent*(self: VirtualQToolBar, event: gen_qevent_types.QWheelEvent): void {.base.} =
-  QToolBarwheelEvent(self[], event)
 proc fcQToolBar_method_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQToolBar](fcQToolBar_vdata(self)[])
   let slotval1 = gen_qevent_types.QWheelEvent(h: event, owned: false)
   inst.wheelEvent(slotval1)
 
-method keyPressEvent*(self: VirtualQToolBar, event: gen_qevent_types.QKeyEvent): void {.base.} =
-  QToolBarkeyPressEvent(self[], event)
 proc fcQToolBar_method_callback_keyPressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQToolBar](fcQToolBar_vdata(self)[])
   let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   inst.keyPressEvent(slotval1)
 
-method keyReleaseEvent*(self: VirtualQToolBar, event: gen_qevent_types.QKeyEvent): void {.base.} =
-  QToolBarkeyReleaseEvent(self[], event)
 proc fcQToolBar_method_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQToolBar](fcQToolBar_vdata(self)[])
   let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   inst.keyReleaseEvent(slotval1)
 
-method focusInEvent*(self: VirtualQToolBar, event: gen_qevent_types.QFocusEvent): void {.base.} =
-  QToolBarfocusInEvent(self[], event)
 proc fcQToolBar_method_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQToolBar](fcQToolBar_vdata(self)[])
   let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   inst.focusInEvent(slotval1)
 
-method focusOutEvent*(self: VirtualQToolBar, event: gen_qevent_types.QFocusEvent): void {.base.} =
-  QToolBarfocusOutEvent(self[], event)
 proc fcQToolBar_method_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQToolBar](fcQToolBar_vdata(self)[])
   let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   inst.focusOutEvent(slotval1)
 
-method enterEvent*(self: VirtualQToolBar, event: gen_qevent_types.QEnterEvent): void {.base.} =
-  QToolBarenterEvent(self[], event)
 proc fcQToolBar_method_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQToolBar](fcQToolBar_vdata(self)[])
   let slotval1 = gen_qevent_types.QEnterEvent(h: event, owned: false)
   inst.enterEvent(slotval1)
 
-method leaveEvent*(self: VirtualQToolBar, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QToolBarleaveEvent(self[], event)
 proc fcQToolBar_method_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQToolBar](fcQToolBar_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.leaveEvent(slotval1)
 
-method moveEvent*(self: VirtualQToolBar, event: gen_qevent_types.QMoveEvent): void {.base.} =
-  QToolBarmoveEvent(self[], event)
 proc fcQToolBar_method_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQToolBar](fcQToolBar_vdata(self)[])
   let slotval1 = gen_qevent_types.QMoveEvent(h: event, owned: false)
   inst.moveEvent(slotval1)
 
-method resizeEvent*(self: VirtualQToolBar, event: gen_qevent_types.QResizeEvent): void {.base.} =
-  QToolBarresizeEvent(self[], event)
 proc fcQToolBar_method_callback_resizeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQToolBar](fcQToolBar_vdata(self)[])
   let slotval1 = gen_qevent_types.QResizeEvent(h: event, owned: false)
   inst.resizeEvent(slotval1)
 
-method closeEvent*(self: VirtualQToolBar, event: gen_qevent_types.QCloseEvent): void {.base.} =
-  QToolBarcloseEvent(self[], event)
 proc fcQToolBar_method_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQToolBar](fcQToolBar_vdata(self)[])
   let slotval1 = gen_qevent_types.QCloseEvent(h: event, owned: false)
   inst.closeEvent(slotval1)
 
-method contextMenuEvent*(self: VirtualQToolBar, event: gen_qevent_types.QContextMenuEvent): void {.base.} =
-  QToolBarcontextMenuEvent(self[], event)
 proc fcQToolBar_method_callback_contextMenuEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQToolBar](fcQToolBar_vdata(self)[])
   let slotval1 = gen_qevent_types.QContextMenuEvent(h: event, owned: false)
   inst.contextMenuEvent(slotval1)
 
-method tabletEvent*(self: VirtualQToolBar, event: gen_qevent_types.QTabletEvent): void {.base.} =
-  QToolBartabletEvent(self[], event)
 proc fcQToolBar_method_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQToolBar](fcQToolBar_vdata(self)[])
   let slotval1 = gen_qevent_types.QTabletEvent(h: event, owned: false)
   inst.tabletEvent(slotval1)
 
-method dragEnterEvent*(self: VirtualQToolBar, event: gen_qevent_types.QDragEnterEvent): void {.base.} =
-  QToolBardragEnterEvent(self[], event)
 proc fcQToolBar_method_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQToolBar](fcQToolBar_vdata(self)[])
   let slotval1 = gen_qevent_types.QDragEnterEvent(h: event, owned: false)
   inst.dragEnterEvent(slotval1)
 
-method dragMoveEvent*(self: VirtualQToolBar, event: gen_qevent_types.QDragMoveEvent): void {.base.} =
-  QToolBardragMoveEvent(self[], event)
 proc fcQToolBar_method_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQToolBar](fcQToolBar_vdata(self)[])
   let slotval1 = gen_qevent_types.QDragMoveEvent(h: event, owned: false)
   inst.dragMoveEvent(slotval1)
 
-method dragLeaveEvent*(self: VirtualQToolBar, event: gen_qevent_types.QDragLeaveEvent): void {.base.} =
-  QToolBardragLeaveEvent(self[], event)
 proc fcQToolBar_method_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQToolBar](fcQToolBar_vdata(self)[])
   let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event, owned: false)
   inst.dragLeaveEvent(slotval1)
 
-method dropEvent*(self: VirtualQToolBar, event: gen_qevent_types.QDropEvent): void {.base.} =
-  QToolBardropEvent(self[], event)
 proc fcQToolBar_method_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQToolBar](fcQToolBar_vdata(self)[])
   let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
   inst.dropEvent(slotval1)
 
-method showEvent*(self: VirtualQToolBar, event: gen_qevent_types.QShowEvent): void {.base.} =
-  QToolBarshowEvent(self[], event)
 proc fcQToolBar_method_callback_showEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQToolBar](fcQToolBar_vdata(self)[])
   let slotval1 = gen_qevent_types.QShowEvent(h: event, owned: false)
   inst.showEvent(slotval1)
 
-method hideEvent*(self: VirtualQToolBar, event: gen_qevent_types.QHideEvent): void {.base.} =
-  QToolBarhideEvent(self[], event)
 proc fcQToolBar_method_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQToolBar](fcQToolBar_vdata(self)[])
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   inst.hideEvent(slotval1)
 
-method nativeEvent*(self: VirtualQToolBar, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
-  QToolBarnativeEvent(self[], eventType, message, resultVal)
 proc fcQToolBar_method_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
   let inst = cast[VirtualQToolBar](fcQToolBar_vdata(self)[])
   var veventType_bytearray = eventType
@@ -1382,61 +1414,45 @@ proc fcQToolBar_method_callback_nativeEvent(self: pointer, eventType: struct_miq
   var virtualReturn = inst.nativeEvent(slotval1, slotval2, slotval3)
   virtualReturn
 
-method metric*(self: VirtualQToolBar, param1: cint): cint {.base.} =
-  QToolBarmetric(self[], param1)
 proc fcQToolBar_method_callback_metric(self: pointer, param1: cint): cint {.cdecl.} =
   let inst = cast[VirtualQToolBar](fcQToolBar_vdata(self)[])
   let slotval1 = cint(param1)
   var virtualReturn = inst.metric(slotval1)
   virtualReturn
 
-method initPainter*(self: VirtualQToolBar, painter: gen_qpainter_types.QPainter): void {.base.} =
-  QToolBarinitPainter(self[], painter)
 proc fcQToolBar_method_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
   let inst = cast[VirtualQToolBar](fcQToolBar_vdata(self)[])
   let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
   inst.initPainter(slotval1)
 
-method redirected*(self: VirtualQToolBar, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.base.} =
-  QToolBarredirected(self[], offset)
 proc fcQToolBar_method_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQToolBar](fcQToolBar_vdata(self)[])
   let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
   var virtualReturn = inst.redirected(slotval1)
   virtualReturn.h
 
-method sharedPainter*(self: VirtualQToolBar): gen_qpainter_types.QPainter {.base.} =
-  QToolBarsharedPainter(self[])
 proc fcQToolBar_method_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQToolBar](fcQToolBar_vdata(self)[])
   var virtualReturn = inst.sharedPainter()
   virtualReturn.h
 
-method inputMethodEvent*(self: VirtualQToolBar, param1: gen_qevent_types.QInputMethodEvent): void {.base.} =
-  QToolBarinputMethodEvent(self[], param1)
 proc fcQToolBar_method_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQToolBar](fcQToolBar_vdata(self)[])
   let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1, owned: false)
   inst.inputMethodEvent(slotval1)
 
-method inputMethodQuery*(self: VirtualQToolBar, param1: cint): gen_qvariant_types.QVariant {.base.} =
-  QToolBarinputMethodQuery(self[], param1)
 proc fcQToolBar_method_callback_inputMethodQuery(self: pointer, param1: cint): pointer {.cdecl.} =
   let inst = cast[VirtualQToolBar](fcQToolBar_vdata(self)[])
   let slotval1 = cint(param1)
   var virtualReturn = inst.inputMethodQuery(slotval1)
   virtualReturn.h
 
-method focusNextPrevChild*(self: VirtualQToolBar, next: bool): bool {.base.} =
-  QToolBarfocusNextPrevChild(self[], next)
 proc fcQToolBar_method_callback_focusNextPrevChild(self: pointer, next: bool): bool {.cdecl.} =
   let inst = cast[VirtualQToolBar](fcQToolBar_vdata(self)[])
   let slotval1 = next
   var virtualReturn = inst.focusNextPrevChild(slotval1)
   virtualReturn
 
-method eventFilter*(self: VirtualQToolBar, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QToolBareventFilter(self[], watched, event)
 proc fcQToolBar_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQToolBar](fcQToolBar_vdata(self)[])
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
@@ -1444,40 +1460,31 @@ proc fcQToolBar_method_callback_eventFilter(self: pointer, watched: pointer, eve
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
-method timerEvent*(self: VirtualQToolBar, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
-  QToolBartimerEvent(self[], event)
 proc fcQToolBar_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQToolBar](fcQToolBar_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
-method childEvent*(self: VirtualQToolBar, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
-  QToolBarchildEvent(self[], event)
 proc fcQToolBar_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQToolBar](fcQToolBar_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
-method customEvent*(self: VirtualQToolBar, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QToolBarcustomEvent(self[], event)
 proc fcQToolBar_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQToolBar](fcQToolBar_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
-method connectNotify*(self: VirtualQToolBar, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QToolBarconnectNotify(self[], signal)
 proc fcQToolBar_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQToolBar](fcQToolBar_vdata(self)[])
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
-method disconnectNotify*(self: VirtualQToolBar, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QToolBardisconnectNotify(self[], signal)
 proc fcQToolBar_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQToolBar](fcQToolBar_vdata(self)[])
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
+
 
 proc updateMicroFocus*(self: gen_qtoolbar_types.QToolBar): void =
   fcQToolBar_protectedbase_updateMicroFocus(self.h)

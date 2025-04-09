@@ -173,7 +173,7 @@ proc fcQAbstractEventDispatcher_slot_callback_aboutToBlock_release(slot: int) {.
   let nimfunc = cast[ref QAbstractEventDispatcheraboutToBlockSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onaboutToBlock*(self: gen_qabstracteventdispatcher_types.QAbstractEventDispatcher, slot: QAbstractEventDispatcheraboutToBlockSlot) =
+proc onAboutToBlock*(self: gen_qabstracteventdispatcher_types.QAbstractEventDispatcher, slot: QAbstractEventDispatcheraboutToBlockSlot) =
   var tmp = new QAbstractEventDispatcheraboutToBlockSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -191,7 +191,7 @@ proc fcQAbstractEventDispatcher_slot_callback_awake_release(slot: int) {.cdecl.}
   let nimfunc = cast[ref QAbstractEventDispatcherawakeSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onawake*(self: gen_qabstracteventdispatcher_types.QAbstractEventDispatcher, slot: QAbstractEventDispatcherawakeSlot) =
+proc onAwake*(self: gen_qabstracteventdispatcher_types.QAbstractEventDispatcher, slot: QAbstractEventDispatcherawakeSlot) =
   var tmp = new QAbstractEventDispatcherawakeSlot
   tmp[] = slot
   GC_ref(tmp)

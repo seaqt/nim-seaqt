@@ -68,6 +68,7 @@ proc fcQPropertyAnimation_tr2(s: cstring, c: cstring): struct_miqt_string {.impo
 proc fcQPropertyAnimation_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QPropertyAnimation_tr3".}
 proc fcQPropertyAnimation_vdata(self: pointer): ptr pointer {.importc: "QPropertyAnimation_vdata".}
 proc fvdata_cQPropertyAnimation(self: pointer): pointer {.importc: "vdata_QPropertyAnimation".}
+
 type cQPropertyAnimationVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -170,6 +171,7 @@ type QPropertyAnimationchildEventProc* = proc(self: QPropertyAnimation, event: g
 type QPropertyAnimationcustomEventProc* = proc(self: QPropertyAnimation, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QPropertyAnimationconnectNotifyProc* = proc(self: QPropertyAnimation, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QPropertyAnimationdisconnectNotifyProc* = proc(self: QPropertyAnimation, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+
 type QPropertyAnimationVTable* {.inheritable, pure.} = object
   vtbl: cQPropertyAnimationVTable
   metaObject*: QPropertyAnimationmetaObjectProc
@@ -188,8 +190,55 @@ type QPropertyAnimationVTable* {.inheritable, pure.} = object
   customEvent*: QPropertyAnimationcustomEventProc
   connectNotify*: QPropertyAnimationconnectNotifyProc
   disconnectNotify*: QPropertyAnimationdisconnectNotifyProc
+
 proc QPropertyAnimationmetaObject*(self: gen_qpropertyanimation_types.QPropertyAnimation): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQPropertyAnimation_virtualbase_metaObject(self.h), owned: false)
+
+proc QPropertyAnimationmetacast*(self: gen_qpropertyanimation_types.QPropertyAnimation, param1: cstring): pointer =
+  fcQPropertyAnimation_virtualbase_metacast(self.h, param1)
+
+proc QPropertyAnimationmetacall*(self: gen_qpropertyanimation_types.QPropertyAnimation, param1: cint, param2: cint, param3: pointer): cint =
+  fcQPropertyAnimation_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+proc QPropertyAnimationevent*(self: gen_qpropertyanimation_types.QPropertyAnimation, event: gen_qcoreevent_types.QEvent): bool =
+  fcQPropertyAnimation_virtualbase_event(self.h, event.h)
+
+proc QPropertyAnimationupdateCurrentValue*(self: gen_qpropertyanimation_types.QPropertyAnimation, value: gen_qvariant_types.QVariant): void =
+  fcQPropertyAnimation_virtualbase_updateCurrentValue(self.h, value.h)
+
+proc QPropertyAnimationupdateState*(self: gen_qpropertyanimation_types.QPropertyAnimation, newState: cint, oldState: cint): void =
+  fcQPropertyAnimation_virtualbase_updateState(self.h, cint(newState), cint(oldState))
+
+proc QPropertyAnimationduration*(self: gen_qpropertyanimation_types.QPropertyAnimation): cint =
+  fcQPropertyAnimation_virtualbase_duration(self.h)
+
+proc QPropertyAnimationupdateCurrentTime*(self: gen_qpropertyanimation_types.QPropertyAnimation, param1: cint): void =
+  fcQPropertyAnimation_virtualbase_updateCurrentTime(self.h, param1)
+
+proc QPropertyAnimationinterpolated*(self: gen_qpropertyanimation_types.QPropertyAnimation, fromVal: gen_qvariant_types.QVariant, to: gen_qvariant_types.QVariant, progress: float64): gen_qvariant_types.QVariant =
+  gen_qvariant_types.QVariant(h: fcQPropertyAnimation_virtualbase_interpolated(self.h, fromVal.h, to.h, progress), owned: true)
+
+proc QPropertyAnimationupdateDirection*(self: gen_qpropertyanimation_types.QPropertyAnimation, direction: cint): void =
+  fcQPropertyAnimation_virtualbase_updateDirection(self.h, cint(direction))
+
+proc QPropertyAnimationeventFilter*(self: gen_qpropertyanimation_types.QPropertyAnimation, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
+  fcQPropertyAnimation_virtualbase_eventFilter(self.h, watched.h, event.h)
+
+proc QPropertyAnimationtimerEvent*(self: gen_qpropertyanimation_types.QPropertyAnimation, event: gen_qcoreevent_types.QTimerEvent): void =
+  fcQPropertyAnimation_virtualbase_timerEvent(self.h, event.h)
+
+proc QPropertyAnimationchildEvent*(self: gen_qpropertyanimation_types.QPropertyAnimation, event: gen_qcoreevent_types.QChildEvent): void =
+  fcQPropertyAnimation_virtualbase_childEvent(self.h, event.h)
+
+proc QPropertyAnimationcustomEvent*(self: gen_qpropertyanimation_types.QPropertyAnimation, event: gen_qcoreevent_types.QEvent): void =
+  fcQPropertyAnimation_virtualbase_customEvent(self.h, event.h)
+
+proc QPropertyAnimationconnectNotify*(self: gen_qpropertyanimation_types.QPropertyAnimation, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQPropertyAnimation_virtualbase_connectNotify(self.h, signal.h)
+
+proc QPropertyAnimationdisconnectNotify*(self: gen_qpropertyanimation_types.QPropertyAnimation, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQPropertyAnimation_virtualbase_disconnectNotify(self.h, signal.h)
+
 
 proc fcQPropertyAnimation_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QPropertyAnimationVTable](fcQPropertyAnimation_vdata(self)[])
@@ -200,18 +249,12 @@ proc fcQPropertyAnimation_vtable_callback_metaObject(self: pointer): pointer {.c
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QPropertyAnimationmetacast*(self: gen_qpropertyanimation_types.QPropertyAnimation, param1: cstring): pointer =
-  fcQPropertyAnimation_virtualbase_metacast(self.h, param1)
-
 proc fcQPropertyAnimation_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QPropertyAnimationVTable](fcQPropertyAnimation_vdata(self)[])
   let self = QPropertyAnimation(h: self)
   let slotval1 = (param1)
   var virtualReturn = vtbl[].metacast(self, slotval1)
   virtualReturn
-
-proc QPropertyAnimationmetacall*(self: gen_qpropertyanimation_types.QPropertyAnimation, param1: cint, param2: cint, param3: pointer): cint =
-  fcQPropertyAnimation_virtualbase_metacall(self.h, cint(param1), param2, param3)
 
 proc fcQPropertyAnimation_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QPropertyAnimationVTable](fcQPropertyAnimation_vdata(self)[])
@@ -222,9 +265,6 @@ proc fcQPropertyAnimation_vtable_callback_metacall(self: pointer, param1: cint, 
   var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QPropertyAnimationevent*(self: gen_qpropertyanimation_types.QPropertyAnimation, event: gen_qcoreevent_types.QEvent): bool =
-  fcQPropertyAnimation_virtualbase_event(self.h, event.h)
-
 proc fcQPropertyAnimation_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QPropertyAnimationVTable](fcQPropertyAnimation_vdata(self)[])
   let self = QPropertyAnimation(h: self)
@@ -232,17 +272,11 @@ proc fcQPropertyAnimation_vtable_callback_event(self: pointer, event: pointer): 
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
-proc QPropertyAnimationupdateCurrentValue*(self: gen_qpropertyanimation_types.QPropertyAnimation, value: gen_qvariant_types.QVariant): void =
-  fcQPropertyAnimation_virtualbase_updateCurrentValue(self.h, value.h)
-
 proc fcQPropertyAnimation_vtable_callback_updateCurrentValue(self: pointer, value: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPropertyAnimationVTable](fcQPropertyAnimation_vdata(self)[])
   let self = QPropertyAnimation(h: self)
   let slotval1 = gen_qvariant_types.QVariant(h: value, owned: false)
   vtbl[].updateCurrentValue(self, slotval1)
-
-proc QPropertyAnimationupdateState*(self: gen_qpropertyanimation_types.QPropertyAnimation, newState: cint, oldState: cint): void =
-  fcQPropertyAnimation_virtualbase_updateState(self.h, cint(newState), cint(oldState))
 
 proc fcQPropertyAnimation_vtable_callback_updateState(self: pointer, newState: cint, oldState: cint): void {.cdecl.} =
   let vtbl = cast[ptr QPropertyAnimationVTable](fcQPropertyAnimation_vdata(self)[])
@@ -251,26 +285,17 @@ proc fcQPropertyAnimation_vtable_callback_updateState(self: pointer, newState: c
   let slotval2 = cint(oldState)
   vtbl[].updateState(self, slotval1, slotval2)
 
-proc QPropertyAnimationduration*(self: gen_qpropertyanimation_types.QPropertyAnimation): cint =
-  fcQPropertyAnimation_virtualbase_duration(self.h)
-
 proc fcQPropertyAnimation_vtable_callback_duration(self: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QPropertyAnimationVTable](fcQPropertyAnimation_vdata(self)[])
   let self = QPropertyAnimation(h: self)
   var virtualReturn = vtbl[].duration(self)
   virtualReturn
 
-proc QPropertyAnimationupdateCurrentTime*(self: gen_qpropertyanimation_types.QPropertyAnimation, param1: cint): void =
-  fcQPropertyAnimation_virtualbase_updateCurrentTime(self.h, param1)
-
 proc fcQPropertyAnimation_vtable_callback_updateCurrentTime(self: pointer, param1: cint): void {.cdecl.} =
   let vtbl = cast[ptr QPropertyAnimationVTable](fcQPropertyAnimation_vdata(self)[])
   let self = QPropertyAnimation(h: self)
   let slotval1 = param1
   vtbl[].updateCurrentTime(self, slotval1)
-
-proc QPropertyAnimationinterpolated*(self: gen_qpropertyanimation_types.QPropertyAnimation, fromVal: gen_qvariant_types.QVariant, to: gen_qvariant_types.QVariant, progress: float64): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQPropertyAnimation_virtualbase_interpolated(self.h, fromVal.h, to.h, progress), owned: true)
 
 proc fcQPropertyAnimation_vtable_callback_interpolated(self: pointer, fromVal: pointer, to: pointer, progress: float64): pointer {.cdecl.} =
   let vtbl = cast[ptr QPropertyAnimationVTable](fcQPropertyAnimation_vdata(self)[])
@@ -284,17 +309,11 @@ proc fcQPropertyAnimation_vtable_callback_interpolated(self: pointer, fromVal: p
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QPropertyAnimationupdateDirection*(self: gen_qpropertyanimation_types.QPropertyAnimation, direction: cint): void =
-  fcQPropertyAnimation_virtualbase_updateDirection(self.h, cint(direction))
-
 proc fcQPropertyAnimation_vtable_callback_updateDirection(self: pointer, direction: cint): void {.cdecl.} =
   let vtbl = cast[ptr QPropertyAnimationVTable](fcQPropertyAnimation_vdata(self)[])
   let self = QPropertyAnimation(h: self)
   let slotval1 = cint(direction)
   vtbl[].updateDirection(self, slotval1)
-
-proc QPropertyAnimationeventFilter*(self: gen_qpropertyanimation_types.QPropertyAnimation, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
-  fcQPropertyAnimation_virtualbase_eventFilter(self.h, watched.h, event.h)
 
 proc fcQPropertyAnimation_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QPropertyAnimationVTable](fcQPropertyAnimation_vdata(self)[])
@@ -304,17 +323,11 @@ proc fcQPropertyAnimation_vtable_callback_eventFilter(self: pointer, watched: po
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
-proc QPropertyAnimationtimerEvent*(self: gen_qpropertyanimation_types.QPropertyAnimation, event: gen_qcoreevent_types.QTimerEvent): void =
-  fcQPropertyAnimation_virtualbase_timerEvent(self.h, event.h)
-
 proc fcQPropertyAnimation_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPropertyAnimationVTable](fcQPropertyAnimation_vdata(self)[])
   let self = QPropertyAnimation(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
-
-proc QPropertyAnimationchildEvent*(self: gen_qpropertyanimation_types.QPropertyAnimation, event: gen_qcoreevent_types.QChildEvent): void =
-  fcQPropertyAnimation_virtualbase_childEvent(self.h, event.h)
 
 proc fcQPropertyAnimation_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPropertyAnimationVTable](fcQPropertyAnimation_vdata(self)[])
@@ -322,26 +335,17 @@ proc fcQPropertyAnimation_vtable_callback_childEvent(self: pointer, event: point
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
-proc QPropertyAnimationcustomEvent*(self: gen_qpropertyanimation_types.QPropertyAnimation, event: gen_qcoreevent_types.QEvent): void =
-  fcQPropertyAnimation_virtualbase_customEvent(self.h, event.h)
-
 proc fcQPropertyAnimation_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPropertyAnimationVTable](fcQPropertyAnimation_vdata(self)[])
   let self = QPropertyAnimation(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
-proc QPropertyAnimationconnectNotify*(self: gen_qpropertyanimation_types.QPropertyAnimation, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQPropertyAnimation_virtualbase_connectNotify(self.h, signal.h)
-
 proc fcQPropertyAnimation_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPropertyAnimationVTable](fcQPropertyAnimation_vdata(self)[])
   let self = QPropertyAnimation(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
-
-proc QPropertyAnimationdisconnectNotify*(self: gen_qpropertyanimation_types.QPropertyAnimation, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQPropertyAnimation_virtualbase_disconnectNotify(self.h, signal.h)
 
 proc fcQPropertyAnimation_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPropertyAnimationVTable](fcQPropertyAnimation_vdata(self)[])
@@ -351,23 +355,51 @@ proc fcQPropertyAnimation_vtable_callback_disconnectNotify(self: pointer, signal
 
 type VirtualQPropertyAnimation* {.inheritable.} = ref object of QPropertyAnimation
   vtbl*: cQPropertyAnimationVTable
+
 method metaObject*(self: VirtualQPropertyAnimation): gen_qobjectdefs_types.QMetaObject {.base.} =
   QPropertyAnimationmetaObject(self[])
+method metacast*(self: VirtualQPropertyAnimation, param1: cstring): pointer {.base.} =
+  QPropertyAnimationmetacast(self[], param1)
+method metacall*(self: VirtualQPropertyAnimation, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QPropertyAnimationmetacall(self[], param1, param2, param3)
+method event*(self: VirtualQPropertyAnimation, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QPropertyAnimationevent(self[], event)
+method updateCurrentValue*(self: VirtualQPropertyAnimation, value: gen_qvariant_types.QVariant): void {.base.} =
+  QPropertyAnimationupdateCurrentValue(self[], value)
+method updateState*(self: VirtualQPropertyAnimation, newState: cint, oldState: cint): void {.base.} =
+  QPropertyAnimationupdateState(self[], newState, oldState)
+method duration*(self: VirtualQPropertyAnimation): cint {.base.} =
+  QPropertyAnimationduration(self[])
+method updateCurrentTime*(self: VirtualQPropertyAnimation, param1: cint): void {.base.} =
+  QPropertyAnimationupdateCurrentTime(self[], param1)
+method interpolated*(self: VirtualQPropertyAnimation, fromVal: gen_qvariant_types.QVariant, to: gen_qvariant_types.QVariant, progress: float64): gen_qvariant_types.QVariant {.base.} =
+  QPropertyAnimationinterpolated(self[], fromVal, to, progress)
+method updateDirection*(self: VirtualQPropertyAnimation, direction: cint): void {.base.} =
+  QPropertyAnimationupdateDirection(self[], direction)
+method eventFilter*(self: VirtualQPropertyAnimation, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QPropertyAnimationeventFilter(self[], watched, event)
+method timerEvent*(self: VirtualQPropertyAnimation, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QPropertyAnimationtimerEvent(self[], event)
+method childEvent*(self: VirtualQPropertyAnimation, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QPropertyAnimationchildEvent(self[], event)
+method customEvent*(self: VirtualQPropertyAnimation, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QPropertyAnimationcustomEvent(self[], event)
+method connectNotify*(self: VirtualQPropertyAnimation, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QPropertyAnimationconnectNotify(self[], signal)
+method disconnectNotify*(self: VirtualQPropertyAnimation, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QPropertyAnimationdisconnectNotify(self[], signal)
+
 proc fcQPropertyAnimation_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQPropertyAnimation](fcQPropertyAnimation_vdata(self)[])
   var virtualReturn = inst.metaObject()
   virtualReturn.h
 
-method metacast*(self: VirtualQPropertyAnimation, param1: cstring): pointer {.base.} =
-  QPropertyAnimationmetacast(self[], param1)
 proc fcQPropertyAnimation_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQPropertyAnimation](fcQPropertyAnimation_vdata(self)[])
   let slotval1 = (param1)
   var virtualReturn = inst.metacast(slotval1)
   virtualReturn
 
-method metacall*(self: VirtualQPropertyAnimation, param1: cint, param2: cint, param3: pointer): cint {.base.} =
-  QPropertyAnimationmetacall(self[], param1, param2, param3)
 proc fcQPropertyAnimation_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQPropertyAnimation](fcQPropertyAnimation_vdata(self)[])
   let slotval1 = cint(param1)
@@ -376,45 +408,33 @@ proc fcQPropertyAnimation_method_callback_metacall(self: pointer, param1: cint, 
   var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
-method event*(self: VirtualQPropertyAnimation, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QPropertyAnimationevent(self[], event)
 proc fcQPropertyAnimation_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQPropertyAnimation](fcQPropertyAnimation_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
-method updateCurrentValue*(self: VirtualQPropertyAnimation, value: gen_qvariant_types.QVariant): void {.base.} =
-  QPropertyAnimationupdateCurrentValue(self[], value)
 proc fcQPropertyAnimation_method_callback_updateCurrentValue(self: pointer, value: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPropertyAnimation](fcQPropertyAnimation_vdata(self)[])
   let slotval1 = gen_qvariant_types.QVariant(h: value, owned: false)
   inst.updateCurrentValue(slotval1)
 
-method updateState*(self: VirtualQPropertyAnimation, newState: cint, oldState: cint): void {.base.} =
-  QPropertyAnimationupdateState(self[], newState, oldState)
 proc fcQPropertyAnimation_method_callback_updateState(self: pointer, newState: cint, oldState: cint): void {.cdecl.} =
   let inst = cast[VirtualQPropertyAnimation](fcQPropertyAnimation_vdata(self)[])
   let slotval1 = cint(newState)
   let slotval2 = cint(oldState)
   inst.updateState(slotval1, slotval2)
 
-method duration*(self: VirtualQPropertyAnimation): cint {.base.} =
-  QPropertyAnimationduration(self[])
 proc fcQPropertyAnimation_method_callback_duration(self: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQPropertyAnimation](fcQPropertyAnimation_vdata(self)[])
   var virtualReturn = inst.duration()
   virtualReturn
 
-method updateCurrentTime*(self: VirtualQPropertyAnimation, param1: cint): void {.base.} =
-  QPropertyAnimationupdateCurrentTime(self[], param1)
 proc fcQPropertyAnimation_method_callback_updateCurrentTime(self: pointer, param1: cint): void {.cdecl.} =
   let inst = cast[VirtualQPropertyAnimation](fcQPropertyAnimation_vdata(self)[])
   let slotval1 = param1
   inst.updateCurrentTime(slotval1)
 
-method interpolated*(self: VirtualQPropertyAnimation, fromVal: gen_qvariant_types.QVariant, to: gen_qvariant_types.QVariant, progress: float64): gen_qvariant_types.QVariant {.base.} =
-  QPropertyAnimationinterpolated(self[], fromVal, to, progress)
 proc fcQPropertyAnimation_method_callback_interpolated(self: pointer, fromVal: pointer, to: pointer, progress: float64): pointer {.cdecl.} =
   let inst = cast[VirtualQPropertyAnimation](fcQPropertyAnimation_vdata(self)[])
   let slotval1 = gen_qvariant_types.QVariant(h: fromVal, owned: false)
@@ -423,15 +443,11 @@ proc fcQPropertyAnimation_method_callback_interpolated(self: pointer, fromVal: p
   var virtualReturn = inst.interpolated(slotval1, slotval2, slotval3)
   virtualReturn.h
 
-method updateDirection*(self: VirtualQPropertyAnimation, direction: cint): void {.base.} =
-  QPropertyAnimationupdateDirection(self[], direction)
 proc fcQPropertyAnimation_method_callback_updateDirection(self: pointer, direction: cint): void {.cdecl.} =
   let inst = cast[VirtualQPropertyAnimation](fcQPropertyAnimation_vdata(self)[])
   let slotval1 = cint(direction)
   inst.updateDirection(slotval1)
 
-method eventFilter*(self: VirtualQPropertyAnimation, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QPropertyAnimationeventFilter(self[], watched, event)
 proc fcQPropertyAnimation_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQPropertyAnimation](fcQPropertyAnimation_vdata(self)[])
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
@@ -439,40 +455,31 @@ proc fcQPropertyAnimation_method_callback_eventFilter(self: pointer, watched: po
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
-method timerEvent*(self: VirtualQPropertyAnimation, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
-  QPropertyAnimationtimerEvent(self[], event)
 proc fcQPropertyAnimation_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPropertyAnimation](fcQPropertyAnimation_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
-method childEvent*(self: VirtualQPropertyAnimation, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
-  QPropertyAnimationchildEvent(self[], event)
 proc fcQPropertyAnimation_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPropertyAnimation](fcQPropertyAnimation_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
-method customEvent*(self: VirtualQPropertyAnimation, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QPropertyAnimationcustomEvent(self[], event)
 proc fcQPropertyAnimation_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPropertyAnimation](fcQPropertyAnimation_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
-method connectNotify*(self: VirtualQPropertyAnimation, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QPropertyAnimationconnectNotify(self[], signal)
 proc fcQPropertyAnimation_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPropertyAnimation](fcQPropertyAnimation_vdata(self)[])
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
-method disconnectNotify*(self: VirtualQPropertyAnimation, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QPropertyAnimationdisconnectNotify(self[], signal)
 proc fcQPropertyAnimation_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPropertyAnimation](fcQPropertyAnimation_vdata(self)[])
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
+
 
 proc sender*(self: gen_qpropertyanimation_types.QPropertyAnimation): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQPropertyAnimation_protectedbase_sender(self.h), owned: false)

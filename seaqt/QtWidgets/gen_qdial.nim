@@ -89,6 +89,7 @@ proc fcQDial_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QDial_t
 proc fcQDial_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QDial_tr3".}
 proc fcQDial_vdata(self: pointer): ptr pointer {.importc: "QDial_vdata".}
 proc fvdata_cQDial(self: pointer): pointer {.importc: "vdata_QDial".}
+
 type cQDialVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -316,6 +317,7 @@ type QDialchildEventProc* = proc(self: QDial, event: gen_qcoreevent_types.QChild
 type QDialcustomEventProc* = proc(self: QDial, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QDialconnectNotifyProc* = proc(self: QDial, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QDialdisconnectNotifyProc* = proc(self: QDial, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+
 type QDialVTable* {.inheritable, pure.} = object
   vtbl: cQDialVTable
   metaObject*: QDialmetaObjectProc
@@ -370,8 +372,163 @@ type QDialVTable* {.inheritable, pure.} = object
   customEvent*: QDialcustomEventProc
   connectNotify*: QDialconnectNotifyProc
   disconnectNotify*: QDialdisconnectNotifyProc
+
 proc QDialmetaObject*(self: gen_qdial_types.QDial): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQDial_virtualbase_metaObject(self.h), owned: false)
+
+proc QDialmetacast*(self: gen_qdial_types.QDial, param1: cstring): pointer =
+  fcQDial_virtualbase_metacast(self.h, param1)
+
+proc QDialmetacall*(self: gen_qdial_types.QDial, param1: cint, param2: cint, param3: pointer): cint =
+  fcQDial_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+proc QDialsizeHint*(self: gen_qdial_types.QDial): gen_qsize_types.QSize =
+  gen_qsize_types.QSize(h: fcQDial_virtualbase_sizeHint(self.h), owned: true)
+
+proc QDialminimumSizeHint*(self: gen_qdial_types.QDial): gen_qsize_types.QSize =
+  gen_qsize_types.QSize(h: fcQDial_virtualbase_minimumSizeHint(self.h), owned: true)
+
+proc QDialevent*(self: gen_qdial_types.QDial, e: gen_qcoreevent_types.QEvent): bool =
+  fcQDial_virtualbase_event(self.h, e.h)
+
+proc QDialresizeEvent*(self: gen_qdial_types.QDial, re: gen_qevent_types.QResizeEvent): void =
+  fcQDial_virtualbase_resizeEvent(self.h, re.h)
+
+proc QDialpaintEvent*(self: gen_qdial_types.QDial, pe: gen_qevent_types.QPaintEvent): void =
+  fcQDial_virtualbase_paintEvent(self.h, pe.h)
+
+proc QDialmousePressEvent*(self: gen_qdial_types.QDial, me: gen_qevent_types.QMouseEvent): void =
+  fcQDial_virtualbase_mousePressEvent(self.h, me.h)
+
+proc QDialmouseReleaseEvent*(self: gen_qdial_types.QDial, me: gen_qevent_types.QMouseEvent): void =
+  fcQDial_virtualbase_mouseReleaseEvent(self.h, me.h)
+
+proc QDialmouseMoveEvent*(self: gen_qdial_types.QDial, me: gen_qevent_types.QMouseEvent): void =
+  fcQDial_virtualbase_mouseMoveEvent(self.h, me.h)
+
+proc QDialsliderChange*(self: gen_qdial_types.QDial, change: cint): void =
+  fcQDial_virtualbase_sliderChange(self.h, cint(change))
+
+proc QDialinitStyleOption*(self: gen_qdial_types.QDial, option: gen_qstyleoption_types.QStyleOptionSlider): void =
+  fcQDial_virtualbase_initStyleOption(self.h, option.h)
+
+proc QDialkeyPressEvent*(self: gen_qdial_types.QDial, ev: gen_qevent_types.QKeyEvent): void =
+  fcQDial_virtualbase_keyPressEvent(self.h, ev.h)
+
+proc QDialtimerEvent*(self: gen_qdial_types.QDial, param1: gen_qcoreevent_types.QTimerEvent): void =
+  fcQDial_virtualbase_timerEvent(self.h, param1.h)
+
+proc QDialwheelEvent*(self: gen_qdial_types.QDial, e: gen_qevent_types.QWheelEvent): void =
+  fcQDial_virtualbase_wheelEvent(self.h, e.h)
+
+proc QDialchangeEvent*(self: gen_qdial_types.QDial, e: gen_qcoreevent_types.QEvent): void =
+  fcQDial_virtualbase_changeEvent(self.h, e.h)
+
+proc QDialdevType*(self: gen_qdial_types.QDial): cint =
+  fcQDial_virtualbase_devType(self.h)
+
+proc QDialsetVisible*(self: gen_qdial_types.QDial, visible: bool): void =
+  fcQDial_virtualbase_setVisible(self.h, visible)
+
+proc QDialheightForWidth*(self: gen_qdial_types.QDial, param1: cint): cint =
+  fcQDial_virtualbase_heightForWidth(self.h, param1)
+
+proc QDialhasHeightForWidth*(self: gen_qdial_types.QDial): bool =
+  fcQDial_virtualbase_hasHeightForWidth(self.h)
+
+proc QDialpaintEngine*(self: gen_qdial_types.QDial): gen_qpaintengine_types.QPaintEngine =
+  gen_qpaintengine_types.QPaintEngine(h: fcQDial_virtualbase_paintEngine(self.h), owned: false)
+
+proc QDialmouseDoubleClickEvent*(self: gen_qdial_types.QDial, event: gen_qevent_types.QMouseEvent): void =
+  fcQDial_virtualbase_mouseDoubleClickEvent(self.h, event.h)
+
+proc QDialkeyReleaseEvent*(self: gen_qdial_types.QDial, event: gen_qevent_types.QKeyEvent): void =
+  fcQDial_virtualbase_keyReleaseEvent(self.h, event.h)
+
+proc QDialfocusInEvent*(self: gen_qdial_types.QDial, event: gen_qevent_types.QFocusEvent): void =
+  fcQDial_virtualbase_focusInEvent(self.h, event.h)
+
+proc QDialfocusOutEvent*(self: gen_qdial_types.QDial, event: gen_qevent_types.QFocusEvent): void =
+  fcQDial_virtualbase_focusOutEvent(self.h, event.h)
+
+proc QDialenterEvent*(self: gen_qdial_types.QDial, event: gen_qevent_types.QEnterEvent): void =
+  fcQDial_virtualbase_enterEvent(self.h, event.h)
+
+proc QDialleaveEvent*(self: gen_qdial_types.QDial, event: gen_qcoreevent_types.QEvent): void =
+  fcQDial_virtualbase_leaveEvent(self.h, event.h)
+
+proc QDialmoveEvent*(self: gen_qdial_types.QDial, event: gen_qevent_types.QMoveEvent): void =
+  fcQDial_virtualbase_moveEvent(self.h, event.h)
+
+proc QDialcloseEvent*(self: gen_qdial_types.QDial, event: gen_qevent_types.QCloseEvent): void =
+  fcQDial_virtualbase_closeEvent(self.h, event.h)
+
+proc QDialcontextMenuEvent*(self: gen_qdial_types.QDial, event: gen_qevent_types.QContextMenuEvent): void =
+  fcQDial_virtualbase_contextMenuEvent(self.h, event.h)
+
+proc QDialtabletEvent*(self: gen_qdial_types.QDial, event: gen_qevent_types.QTabletEvent): void =
+  fcQDial_virtualbase_tabletEvent(self.h, event.h)
+
+proc QDialactionEvent*(self: gen_qdial_types.QDial, event: gen_qevent_types.QActionEvent): void =
+  fcQDial_virtualbase_actionEvent(self.h, event.h)
+
+proc QDialdragEnterEvent*(self: gen_qdial_types.QDial, event: gen_qevent_types.QDragEnterEvent): void =
+  fcQDial_virtualbase_dragEnterEvent(self.h, event.h)
+
+proc QDialdragMoveEvent*(self: gen_qdial_types.QDial, event: gen_qevent_types.QDragMoveEvent): void =
+  fcQDial_virtualbase_dragMoveEvent(self.h, event.h)
+
+proc QDialdragLeaveEvent*(self: gen_qdial_types.QDial, event: gen_qevent_types.QDragLeaveEvent): void =
+  fcQDial_virtualbase_dragLeaveEvent(self.h, event.h)
+
+proc QDialdropEvent*(self: gen_qdial_types.QDial, event: gen_qevent_types.QDropEvent): void =
+  fcQDial_virtualbase_dropEvent(self.h, event.h)
+
+proc QDialshowEvent*(self: gen_qdial_types.QDial, event: gen_qevent_types.QShowEvent): void =
+  fcQDial_virtualbase_showEvent(self.h, event.h)
+
+proc QDialhideEvent*(self: gen_qdial_types.QDial, event: gen_qevent_types.QHideEvent): void =
+  fcQDial_virtualbase_hideEvent(self.h, event.h)
+
+proc QDialnativeEvent*(self: gen_qdial_types.QDial, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool =
+  fcQDial_virtualbase_nativeEvent(self.h, struct_miqt_string(data: if len(eventType) > 0: addr eventType[0] else: nil, len: csize_t(len(eventType))), message, resultVal)
+
+proc QDialmetric*(self: gen_qdial_types.QDial, param1: cint): cint =
+  fcQDial_virtualbase_metric(self.h, cint(param1))
+
+proc QDialinitPainter*(self: gen_qdial_types.QDial, painter: gen_qpainter_types.QPainter): void =
+  fcQDial_virtualbase_initPainter(self.h, painter.h)
+
+proc QDialredirected*(self: gen_qdial_types.QDial, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice =
+  gen_qpaintdevice_types.QPaintDevice(h: fcQDial_virtualbase_redirected(self.h, offset.h), owned: false)
+
+proc QDialsharedPainter*(self: gen_qdial_types.QDial): gen_qpainter_types.QPainter =
+  gen_qpainter_types.QPainter(h: fcQDial_virtualbase_sharedPainter(self.h), owned: false)
+
+proc QDialinputMethodEvent*(self: gen_qdial_types.QDial, param1: gen_qevent_types.QInputMethodEvent): void =
+  fcQDial_virtualbase_inputMethodEvent(self.h, param1.h)
+
+proc QDialinputMethodQuery*(self: gen_qdial_types.QDial, param1: cint): gen_qvariant_types.QVariant =
+  gen_qvariant_types.QVariant(h: fcQDial_virtualbase_inputMethodQuery(self.h, cint(param1)), owned: true)
+
+proc QDialfocusNextPrevChild*(self: gen_qdial_types.QDial, next: bool): bool =
+  fcQDial_virtualbase_focusNextPrevChild(self.h, next)
+
+proc QDialeventFilter*(self: gen_qdial_types.QDial, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
+  fcQDial_virtualbase_eventFilter(self.h, watched.h, event.h)
+
+proc QDialchildEvent*(self: gen_qdial_types.QDial, event: gen_qcoreevent_types.QChildEvent): void =
+  fcQDial_virtualbase_childEvent(self.h, event.h)
+
+proc QDialcustomEvent*(self: gen_qdial_types.QDial, event: gen_qcoreevent_types.QEvent): void =
+  fcQDial_virtualbase_customEvent(self.h, event.h)
+
+proc QDialconnectNotify*(self: gen_qdial_types.QDial, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQDial_virtualbase_connectNotify(self.h, signal.h)
+
+proc QDialdisconnectNotify*(self: gen_qdial_types.QDial, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQDial_virtualbase_disconnectNotify(self.h, signal.h)
+
 
 proc fcQDial_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QDialVTable](fcQDial_vdata(self)[])
@@ -382,18 +539,12 @@ proc fcQDial_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QDialmetacast*(self: gen_qdial_types.QDial, param1: cstring): pointer =
-  fcQDial_virtualbase_metacast(self.h, param1)
-
 proc fcQDial_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QDialVTable](fcQDial_vdata(self)[])
   let self = QDial(h: self)
   let slotval1 = (param1)
   var virtualReturn = vtbl[].metacast(self, slotval1)
   virtualReturn
-
-proc QDialmetacall*(self: gen_qdial_types.QDial, param1: cint, param2: cint, param3: pointer): cint =
-  fcQDial_virtualbase_metacall(self.h, cint(param1), param2, param3)
 
 proc fcQDial_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QDialVTable](fcQDial_vdata(self)[])
@@ -404,9 +555,6 @@ proc fcQDial_vtable_callback_metacall(self: pointer, param1: cint, param2: cint,
   var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QDialsizeHint*(self: gen_qdial_types.QDial): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQDial_virtualbase_sizeHint(self.h), owned: true)
-
 proc fcQDial_vtable_callback_sizeHint(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QDialVTable](fcQDial_vdata(self)[])
   let self = QDial(h: self)
@@ -415,9 +563,6 @@ proc fcQDial_vtable_callback_sizeHint(self: pointer): pointer {.cdecl.} =
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
   virtualReturn_h
-
-proc QDialminimumSizeHint*(self: gen_qdial_types.QDial): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQDial_virtualbase_minimumSizeHint(self.h), owned: true)
 
 proc fcQDial_vtable_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QDialVTable](fcQDial_vdata(self)[])
@@ -428,9 +573,6 @@ proc fcQDial_vtable_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QDialevent*(self: gen_qdial_types.QDial, e: gen_qcoreevent_types.QEvent): bool =
-  fcQDial_virtualbase_event(self.h, e.h)
-
 proc fcQDial_vtable_callback_event(self: pointer, e: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QDialVTable](fcQDial_vdata(self)[])
   let self = QDial(h: self)
@@ -438,17 +580,11 @@ proc fcQDial_vtable_callback_event(self: pointer, e: pointer): bool {.cdecl.} =
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
-proc QDialresizeEvent*(self: gen_qdial_types.QDial, re: gen_qevent_types.QResizeEvent): void =
-  fcQDial_virtualbase_resizeEvent(self.h, re.h)
-
 proc fcQDial_vtable_callback_resizeEvent(self: pointer, re: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDialVTable](fcQDial_vdata(self)[])
   let self = QDial(h: self)
   let slotval1 = gen_qevent_types.QResizeEvent(h: re, owned: false)
   vtbl[].resizeEvent(self, slotval1)
-
-proc QDialpaintEvent*(self: gen_qdial_types.QDial, pe: gen_qevent_types.QPaintEvent): void =
-  fcQDial_virtualbase_paintEvent(self.h, pe.h)
 
 proc fcQDial_vtable_callback_paintEvent(self: pointer, pe: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDialVTable](fcQDial_vdata(self)[])
@@ -456,17 +592,11 @@ proc fcQDial_vtable_callback_paintEvent(self: pointer, pe: pointer): void {.cdec
   let slotval1 = gen_qevent_types.QPaintEvent(h: pe, owned: false)
   vtbl[].paintEvent(self, slotval1)
 
-proc QDialmousePressEvent*(self: gen_qdial_types.QDial, me: gen_qevent_types.QMouseEvent): void =
-  fcQDial_virtualbase_mousePressEvent(self.h, me.h)
-
 proc fcQDial_vtable_callback_mousePressEvent(self: pointer, me: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDialVTable](fcQDial_vdata(self)[])
   let self = QDial(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: me, owned: false)
   vtbl[].mousePressEvent(self, slotval1)
-
-proc QDialmouseReleaseEvent*(self: gen_qdial_types.QDial, me: gen_qevent_types.QMouseEvent): void =
-  fcQDial_virtualbase_mouseReleaseEvent(self.h, me.h)
 
 proc fcQDial_vtable_callback_mouseReleaseEvent(self: pointer, me: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDialVTable](fcQDial_vdata(self)[])
@@ -474,17 +604,11 @@ proc fcQDial_vtable_callback_mouseReleaseEvent(self: pointer, me: pointer): void
   let slotval1 = gen_qevent_types.QMouseEvent(h: me, owned: false)
   vtbl[].mouseReleaseEvent(self, slotval1)
 
-proc QDialmouseMoveEvent*(self: gen_qdial_types.QDial, me: gen_qevent_types.QMouseEvent): void =
-  fcQDial_virtualbase_mouseMoveEvent(self.h, me.h)
-
 proc fcQDial_vtable_callback_mouseMoveEvent(self: pointer, me: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDialVTable](fcQDial_vdata(self)[])
   let self = QDial(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: me, owned: false)
   vtbl[].mouseMoveEvent(self, slotval1)
-
-proc QDialsliderChange*(self: gen_qdial_types.QDial, change: cint): void =
-  fcQDial_virtualbase_sliderChange(self.h, cint(change))
 
 proc fcQDial_vtable_callback_sliderChange(self: pointer, change: cint): void {.cdecl.} =
   let vtbl = cast[ptr QDialVTable](fcQDial_vdata(self)[])
@@ -492,17 +616,11 @@ proc fcQDial_vtable_callback_sliderChange(self: pointer, change: cint): void {.c
   let slotval1 = cint(change)
   vtbl[].sliderChange(self, slotval1)
 
-proc QDialinitStyleOption*(self: gen_qdial_types.QDial, option: gen_qstyleoption_types.QStyleOptionSlider): void =
-  fcQDial_virtualbase_initStyleOption(self.h, option.h)
-
 proc fcQDial_vtable_callback_initStyleOption(self: pointer, option: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDialVTable](fcQDial_vdata(self)[])
   let self = QDial(h: self)
   let slotval1 = gen_qstyleoption_types.QStyleOptionSlider(h: option, owned: false)
   vtbl[].initStyleOption(self, slotval1)
-
-proc QDialkeyPressEvent*(self: gen_qdial_types.QDial, ev: gen_qevent_types.QKeyEvent): void =
-  fcQDial_virtualbase_keyPressEvent(self.h, ev.h)
 
 proc fcQDial_vtable_callback_keyPressEvent(self: pointer, ev: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDialVTable](fcQDial_vdata(self)[])
@@ -510,17 +628,11 @@ proc fcQDial_vtable_callback_keyPressEvent(self: pointer, ev: pointer): void {.c
   let slotval1 = gen_qevent_types.QKeyEvent(h: ev, owned: false)
   vtbl[].keyPressEvent(self, slotval1)
 
-proc QDialtimerEvent*(self: gen_qdial_types.QDial, param1: gen_qcoreevent_types.QTimerEvent): void =
-  fcQDial_virtualbase_timerEvent(self.h, param1.h)
-
 proc fcQDial_vtable_callback_timerEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDialVTable](fcQDial_vdata(self)[])
   let self = QDial(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: param1, owned: false)
   vtbl[].timerEvent(self, slotval1)
-
-proc QDialwheelEvent*(self: gen_qdial_types.QDial, e: gen_qevent_types.QWheelEvent): void =
-  fcQDial_virtualbase_wheelEvent(self.h, e.h)
 
 proc fcQDial_vtable_callback_wheelEvent(self: pointer, e: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDialVTable](fcQDial_vdata(self)[])
@@ -528,17 +640,11 @@ proc fcQDial_vtable_callback_wheelEvent(self: pointer, e: pointer): void {.cdecl
   let slotval1 = gen_qevent_types.QWheelEvent(h: e, owned: false)
   vtbl[].wheelEvent(self, slotval1)
 
-proc QDialchangeEvent*(self: gen_qdial_types.QDial, e: gen_qcoreevent_types.QEvent): void =
-  fcQDial_virtualbase_changeEvent(self.h, e.h)
-
 proc fcQDial_vtable_callback_changeEvent(self: pointer, e: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDialVTable](fcQDial_vdata(self)[])
   let self = QDial(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: e, owned: false)
   vtbl[].changeEvent(self, slotval1)
-
-proc QDialdevType*(self: gen_qdial_types.QDial): cint =
-  fcQDial_virtualbase_devType(self.h)
 
 proc fcQDial_vtable_callback_devType(self: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QDialVTable](fcQDial_vdata(self)[])
@@ -546,17 +652,11 @@ proc fcQDial_vtable_callback_devType(self: pointer): cint {.cdecl.} =
   var virtualReturn = vtbl[].devType(self)
   virtualReturn
 
-proc QDialsetVisible*(self: gen_qdial_types.QDial, visible: bool): void =
-  fcQDial_virtualbase_setVisible(self.h, visible)
-
 proc fcQDial_vtable_callback_setVisible(self: pointer, visible: bool): void {.cdecl.} =
   let vtbl = cast[ptr QDialVTable](fcQDial_vdata(self)[])
   let self = QDial(h: self)
   let slotval1 = visible
   vtbl[].setVisible(self, slotval1)
-
-proc QDialheightForWidth*(self: gen_qdial_types.QDial, param1: cint): cint =
-  fcQDial_virtualbase_heightForWidth(self.h, param1)
 
 proc fcQDial_vtable_callback_heightForWidth(self: pointer, param1: cint): cint {.cdecl.} =
   let vtbl = cast[ptr QDialVTable](fcQDial_vdata(self)[])
@@ -565,17 +665,11 @@ proc fcQDial_vtable_callback_heightForWidth(self: pointer, param1: cint): cint {
   var virtualReturn = vtbl[].heightForWidth(self, slotval1)
   virtualReturn
 
-proc QDialhasHeightForWidth*(self: gen_qdial_types.QDial): bool =
-  fcQDial_virtualbase_hasHeightForWidth(self.h)
-
 proc fcQDial_vtable_callback_hasHeightForWidth(self: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QDialVTable](fcQDial_vdata(self)[])
   let self = QDial(h: self)
   var virtualReturn = vtbl[].hasHeightForWidth(self)
   virtualReturn
-
-proc QDialpaintEngine*(self: gen_qdial_types.QDial): gen_qpaintengine_types.QPaintEngine =
-  gen_qpaintengine_types.QPaintEngine(h: fcQDial_virtualbase_paintEngine(self.h), owned: false)
 
 proc fcQDial_vtable_callback_paintEngine(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QDialVTable](fcQDial_vdata(self)[])
@@ -586,17 +680,11 @@ proc fcQDial_vtable_callback_paintEngine(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QDialmouseDoubleClickEvent*(self: gen_qdial_types.QDial, event: gen_qevent_types.QMouseEvent): void =
-  fcQDial_virtualbase_mouseDoubleClickEvent(self.h, event.h)
-
 proc fcQDial_vtable_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDialVTable](fcQDial_vdata(self)[])
   let self = QDial(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseDoubleClickEvent(self, slotval1)
-
-proc QDialkeyReleaseEvent*(self: gen_qdial_types.QDial, event: gen_qevent_types.QKeyEvent): void =
-  fcQDial_virtualbase_keyReleaseEvent(self.h, event.h)
 
 proc fcQDial_vtable_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDialVTable](fcQDial_vdata(self)[])
@@ -604,17 +692,11 @@ proc fcQDial_vtable_callback_keyReleaseEvent(self: pointer, event: pointer): voi
   let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   vtbl[].keyReleaseEvent(self, slotval1)
 
-proc QDialfocusInEvent*(self: gen_qdial_types.QDial, event: gen_qevent_types.QFocusEvent): void =
-  fcQDial_virtualbase_focusInEvent(self.h, event.h)
-
 proc fcQDial_vtable_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDialVTable](fcQDial_vdata(self)[])
   let self = QDial(h: self)
   let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusInEvent(self, slotval1)
-
-proc QDialfocusOutEvent*(self: gen_qdial_types.QDial, event: gen_qevent_types.QFocusEvent): void =
-  fcQDial_virtualbase_focusOutEvent(self.h, event.h)
 
 proc fcQDial_vtable_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDialVTable](fcQDial_vdata(self)[])
@@ -622,17 +704,11 @@ proc fcQDial_vtable_callback_focusOutEvent(self: pointer, event: pointer): void 
   let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusOutEvent(self, slotval1)
 
-proc QDialenterEvent*(self: gen_qdial_types.QDial, event: gen_qevent_types.QEnterEvent): void =
-  fcQDial_virtualbase_enterEvent(self.h, event.h)
-
 proc fcQDial_vtable_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDialVTable](fcQDial_vdata(self)[])
   let self = QDial(h: self)
   let slotval1 = gen_qevent_types.QEnterEvent(h: event, owned: false)
   vtbl[].enterEvent(self, slotval1)
-
-proc QDialleaveEvent*(self: gen_qdial_types.QDial, event: gen_qcoreevent_types.QEvent): void =
-  fcQDial_virtualbase_leaveEvent(self.h, event.h)
 
 proc fcQDial_vtable_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDialVTable](fcQDial_vdata(self)[])
@@ -640,17 +716,11 @@ proc fcQDial_vtable_callback_leaveEvent(self: pointer, event: pointer): void {.c
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].leaveEvent(self, slotval1)
 
-proc QDialmoveEvent*(self: gen_qdial_types.QDial, event: gen_qevent_types.QMoveEvent): void =
-  fcQDial_virtualbase_moveEvent(self.h, event.h)
-
 proc fcQDial_vtable_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDialVTable](fcQDial_vdata(self)[])
   let self = QDial(h: self)
   let slotval1 = gen_qevent_types.QMoveEvent(h: event, owned: false)
   vtbl[].moveEvent(self, slotval1)
-
-proc QDialcloseEvent*(self: gen_qdial_types.QDial, event: gen_qevent_types.QCloseEvent): void =
-  fcQDial_virtualbase_closeEvent(self.h, event.h)
 
 proc fcQDial_vtable_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDialVTable](fcQDial_vdata(self)[])
@@ -658,17 +728,11 @@ proc fcQDial_vtable_callback_closeEvent(self: pointer, event: pointer): void {.c
   let slotval1 = gen_qevent_types.QCloseEvent(h: event, owned: false)
   vtbl[].closeEvent(self, slotval1)
 
-proc QDialcontextMenuEvent*(self: gen_qdial_types.QDial, event: gen_qevent_types.QContextMenuEvent): void =
-  fcQDial_virtualbase_contextMenuEvent(self.h, event.h)
-
 proc fcQDial_vtable_callback_contextMenuEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDialVTable](fcQDial_vdata(self)[])
   let self = QDial(h: self)
   let slotval1 = gen_qevent_types.QContextMenuEvent(h: event, owned: false)
   vtbl[].contextMenuEvent(self, slotval1)
-
-proc QDialtabletEvent*(self: gen_qdial_types.QDial, event: gen_qevent_types.QTabletEvent): void =
-  fcQDial_virtualbase_tabletEvent(self.h, event.h)
 
 proc fcQDial_vtable_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDialVTable](fcQDial_vdata(self)[])
@@ -676,17 +740,11 @@ proc fcQDial_vtable_callback_tabletEvent(self: pointer, event: pointer): void {.
   let slotval1 = gen_qevent_types.QTabletEvent(h: event, owned: false)
   vtbl[].tabletEvent(self, slotval1)
 
-proc QDialactionEvent*(self: gen_qdial_types.QDial, event: gen_qevent_types.QActionEvent): void =
-  fcQDial_virtualbase_actionEvent(self.h, event.h)
-
 proc fcQDial_vtable_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDialVTable](fcQDial_vdata(self)[])
   let self = QDial(h: self)
   let slotval1 = gen_qevent_types.QActionEvent(h: event, owned: false)
   vtbl[].actionEvent(self, slotval1)
-
-proc QDialdragEnterEvent*(self: gen_qdial_types.QDial, event: gen_qevent_types.QDragEnterEvent): void =
-  fcQDial_virtualbase_dragEnterEvent(self.h, event.h)
 
 proc fcQDial_vtable_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDialVTable](fcQDial_vdata(self)[])
@@ -694,17 +752,11 @@ proc fcQDial_vtable_callback_dragEnterEvent(self: pointer, event: pointer): void
   let slotval1 = gen_qevent_types.QDragEnterEvent(h: event, owned: false)
   vtbl[].dragEnterEvent(self, slotval1)
 
-proc QDialdragMoveEvent*(self: gen_qdial_types.QDial, event: gen_qevent_types.QDragMoveEvent): void =
-  fcQDial_virtualbase_dragMoveEvent(self.h, event.h)
-
 proc fcQDial_vtable_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDialVTable](fcQDial_vdata(self)[])
   let self = QDial(h: self)
   let slotval1 = gen_qevent_types.QDragMoveEvent(h: event, owned: false)
   vtbl[].dragMoveEvent(self, slotval1)
-
-proc QDialdragLeaveEvent*(self: gen_qdial_types.QDial, event: gen_qevent_types.QDragLeaveEvent): void =
-  fcQDial_virtualbase_dragLeaveEvent(self.h, event.h)
 
 proc fcQDial_vtable_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDialVTable](fcQDial_vdata(self)[])
@@ -712,17 +764,11 @@ proc fcQDial_vtable_callback_dragLeaveEvent(self: pointer, event: pointer): void
   let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event, owned: false)
   vtbl[].dragLeaveEvent(self, slotval1)
 
-proc QDialdropEvent*(self: gen_qdial_types.QDial, event: gen_qevent_types.QDropEvent): void =
-  fcQDial_virtualbase_dropEvent(self.h, event.h)
-
 proc fcQDial_vtable_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDialVTable](fcQDial_vdata(self)[])
   let self = QDial(h: self)
   let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
   vtbl[].dropEvent(self, slotval1)
-
-proc QDialshowEvent*(self: gen_qdial_types.QDial, event: gen_qevent_types.QShowEvent): void =
-  fcQDial_virtualbase_showEvent(self.h, event.h)
 
 proc fcQDial_vtable_callback_showEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDialVTable](fcQDial_vdata(self)[])
@@ -730,17 +776,11 @@ proc fcQDial_vtable_callback_showEvent(self: pointer, event: pointer): void {.cd
   let slotval1 = gen_qevent_types.QShowEvent(h: event, owned: false)
   vtbl[].showEvent(self, slotval1)
 
-proc QDialhideEvent*(self: gen_qdial_types.QDial, event: gen_qevent_types.QHideEvent): void =
-  fcQDial_virtualbase_hideEvent(self.h, event.h)
-
 proc fcQDial_vtable_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDialVTable](fcQDial_vdata(self)[])
   let self = QDial(h: self)
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   vtbl[].hideEvent(self, slotval1)
-
-proc QDialnativeEvent*(self: gen_qdial_types.QDial, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool =
-  fcQDial_virtualbase_nativeEvent(self.h, struct_miqt_string(data: if len(eventType) > 0: addr eventType[0] else: nil, len: csize_t(len(eventType))), message, resultVal)
 
 proc fcQDial_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
   let vtbl = cast[ptr QDialVTable](fcQDial_vdata(self)[])
@@ -754,9 +794,6 @@ proc fcQDial_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt_s
   var virtualReturn = vtbl[].nativeEvent(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QDialmetric*(self: gen_qdial_types.QDial, param1: cint): cint =
-  fcQDial_virtualbase_metric(self.h, cint(param1))
-
 proc fcQDial_vtable_callback_metric(self: pointer, param1: cint): cint {.cdecl.} =
   let vtbl = cast[ptr QDialVTable](fcQDial_vdata(self)[])
   let self = QDial(h: self)
@@ -764,17 +801,11 @@ proc fcQDial_vtable_callback_metric(self: pointer, param1: cint): cint {.cdecl.}
   var virtualReturn = vtbl[].metric(self, slotval1)
   virtualReturn
 
-proc QDialinitPainter*(self: gen_qdial_types.QDial, painter: gen_qpainter_types.QPainter): void =
-  fcQDial_virtualbase_initPainter(self.h, painter.h)
-
 proc fcQDial_vtable_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDialVTable](fcQDial_vdata(self)[])
   let self = QDial(h: self)
   let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
   vtbl[].initPainter(self, slotval1)
-
-proc QDialredirected*(self: gen_qdial_types.QDial, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice =
-  gen_qpaintdevice_types.QPaintDevice(h: fcQDial_virtualbase_redirected(self.h, offset.h), owned: false)
 
 proc fcQDial_vtable_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QDialVTable](fcQDial_vdata(self)[])
@@ -786,9 +817,6 @@ proc fcQDial_vtable_callback_redirected(self: pointer, offset: pointer): pointer
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QDialsharedPainter*(self: gen_qdial_types.QDial): gen_qpainter_types.QPainter =
-  gen_qpainter_types.QPainter(h: fcQDial_virtualbase_sharedPainter(self.h), owned: false)
-
 proc fcQDial_vtable_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QDialVTable](fcQDial_vdata(self)[])
   let self = QDial(h: self)
@@ -798,17 +826,11 @@ proc fcQDial_vtable_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QDialinputMethodEvent*(self: gen_qdial_types.QDial, param1: gen_qevent_types.QInputMethodEvent): void =
-  fcQDial_virtualbase_inputMethodEvent(self.h, param1.h)
-
 proc fcQDial_vtable_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDialVTable](fcQDial_vdata(self)[])
   let self = QDial(h: self)
   let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1, owned: false)
   vtbl[].inputMethodEvent(self, slotval1)
-
-proc QDialinputMethodQuery*(self: gen_qdial_types.QDial, param1: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQDial_virtualbase_inputMethodQuery(self.h, cint(param1)), owned: true)
 
 proc fcQDial_vtable_callback_inputMethodQuery(self: pointer, param1: cint): pointer {.cdecl.} =
   let vtbl = cast[ptr QDialVTable](fcQDial_vdata(self)[])
@@ -820,18 +842,12 @@ proc fcQDial_vtable_callback_inputMethodQuery(self: pointer, param1: cint): poin
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QDialfocusNextPrevChild*(self: gen_qdial_types.QDial, next: bool): bool =
-  fcQDial_virtualbase_focusNextPrevChild(self.h, next)
-
 proc fcQDial_vtable_callback_focusNextPrevChild(self: pointer, next: bool): bool {.cdecl.} =
   let vtbl = cast[ptr QDialVTable](fcQDial_vdata(self)[])
   let self = QDial(h: self)
   let slotval1 = next
   var virtualReturn = vtbl[].focusNextPrevChild(self, slotval1)
   virtualReturn
-
-proc QDialeventFilter*(self: gen_qdial_types.QDial, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
-  fcQDial_virtualbase_eventFilter(self.h, watched.h, event.h)
 
 proc fcQDial_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QDialVTable](fcQDial_vdata(self)[])
@@ -841,17 +857,11 @@ proc fcQDial_vtable_callback_eventFilter(self: pointer, watched: pointer, event:
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
-proc QDialchildEvent*(self: gen_qdial_types.QDial, event: gen_qcoreevent_types.QChildEvent): void =
-  fcQDial_virtualbase_childEvent(self.h, event.h)
-
 proc fcQDial_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDialVTable](fcQDial_vdata(self)[])
   let self = QDial(h: self)
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
-
-proc QDialcustomEvent*(self: gen_qdial_types.QDial, event: gen_qcoreevent_types.QEvent): void =
-  fcQDial_virtualbase_customEvent(self.h, event.h)
 
 proc fcQDial_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDialVTable](fcQDial_vdata(self)[])
@@ -859,17 +869,11 @@ proc fcQDial_vtable_callback_customEvent(self: pointer, event: pointer): void {.
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
-proc QDialconnectNotify*(self: gen_qdial_types.QDial, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQDial_virtualbase_connectNotify(self.h, signal.h)
-
 proc fcQDial_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDialVTable](fcQDial_vdata(self)[])
   let self = QDial(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
-
-proc QDialdisconnectNotify*(self: gen_qdial_types.QDial, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQDial_virtualbase_disconnectNotify(self.h, signal.h)
 
 proc fcQDial_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDialVTable](fcQDial_vdata(self)[])
@@ -879,23 +883,123 @@ proc fcQDial_vtable_callback_disconnectNotify(self: pointer, signal: pointer): v
 
 type VirtualQDial* {.inheritable.} = ref object of QDial
   vtbl*: cQDialVTable
+
 method metaObject*(self: VirtualQDial): gen_qobjectdefs_types.QMetaObject {.base.} =
   QDialmetaObject(self[])
+method metacast*(self: VirtualQDial, param1: cstring): pointer {.base.} =
+  QDialmetacast(self[], param1)
+method metacall*(self: VirtualQDial, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QDialmetacall(self[], param1, param2, param3)
+method sizeHint*(self: VirtualQDial): gen_qsize_types.QSize {.base.} =
+  QDialsizeHint(self[])
+method minimumSizeHint*(self: VirtualQDial): gen_qsize_types.QSize {.base.} =
+  QDialminimumSizeHint(self[])
+method event*(self: VirtualQDial, e: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QDialevent(self[], e)
+method resizeEvent*(self: VirtualQDial, re: gen_qevent_types.QResizeEvent): void {.base.} =
+  QDialresizeEvent(self[], re)
+method paintEvent*(self: VirtualQDial, pe: gen_qevent_types.QPaintEvent): void {.base.} =
+  QDialpaintEvent(self[], pe)
+method mousePressEvent*(self: VirtualQDial, me: gen_qevent_types.QMouseEvent): void {.base.} =
+  QDialmousePressEvent(self[], me)
+method mouseReleaseEvent*(self: VirtualQDial, me: gen_qevent_types.QMouseEvent): void {.base.} =
+  QDialmouseReleaseEvent(self[], me)
+method mouseMoveEvent*(self: VirtualQDial, me: gen_qevent_types.QMouseEvent): void {.base.} =
+  QDialmouseMoveEvent(self[], me)
+method sliderChange*(self: VirtualQDial, change: cint): void {.base.} =
+  QDialsliderChange(self[], change)
+method initStyleOption*(self: VirtualQDial, option: gen_qstyleoption_types.QStyleOptionSlider): void {.base.} =
+  QDialinitStyleOption(self[], option)
+method keyPressEvent*(self: VirtualQDial, ev: gen_qevent_types.QKeyEvent): void {.base.} =
+  QDialkeyPressEvent(self[], ev)
+method timerEvent*(self: VirtualQDial, param1: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QDialtimerEvent(self[], param1)
+method wheelEvent*(self: VirtualQDial, e: gen_qevent_types.QWheelEvent): void {.base.} =
+  QDialwheelEvent(self[], e)
+method changeEvent*(self: VirtualQDial, e: gen_qcoreevent_types.QEvent): void {.base.} =
+  QDialchangeEvent(self[], e)
+method devType*(self: VirtualQDial): cint {.base.} =
+  QDialdevType(self[])
+method setVisible*(self: VirtualQDial, visible: bool): void {.base.} =
+  QDialsetVisible(self[], visible)
+method heightForWidth*(self: VirtualQDial, param1: cint): cint {.base.} =
+  QDialheightForWidth(self[], param1)
+method hasHeightForWidth*(self: VirtualQDial): bool {.base.} =
+  QDialhasHeightForWidth(self[])
+method paintEngine*(self: VirtualQDial): gen_qpaintengine_types.QPaintEngine {.base.} =
+  QDialpaintEngine(self[])
+method mouseDoubleClickEvent*(self: VirtualQDial, event: gen_qevent_types.QMouseEvent): void {.base.} =
+  QDialmouseDoubleClickEvent(self[], event)
+method keyReleaseEvent*(self: VirtualQDial, event: gen_qevent_types.QKeyEvent): void {.base.} =
+  QDialkeyReleaseEvent(self[], event)
+method focusInEvent*(self: VirtualQDial, event: gen_qevent_types.QFocusEvent): void {.base.} =
+  QDialfocusInEvent(self[], event)
+method focusOutEvent*(self: VirtualQDial, event: gen_qevent_types.QFocusEvent): void {.base.} =
+  QDialfocusOutEvent(self[], event)
+method enterEvent*(self: VirtualQDial, event: gen_qevent_types.QEnterEvent): void {.base.} =
+  QDialenterEvent(self[], event)
+method leaveEvent*(self: VirtualQDial, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QDialleaveEvent(self[], event)
+method moveEvent*(self: VirtualQDial, event: gen_qevent_types.QMoveEvent): void {.base.} =
+  QDialmoveEvent(self[], event)
+method closeEvent*(self: VirtualQDial, event: gen_qevent_types.QCloseEvent): void {.base.} =
+  QDialcloseEvent(self[], event)
+method contextMenuEvent*(self: VirtualQDial, event: gen_qevent_types.QContextMenuEvent): void {.base.} =
+  QDialcontextMenuEvent(self[], event)
+method tabletEvent*(self: VirtualQDial, event: gen_qevent_types.QTabletEvent): void {.base.} =
+  QDialtabletEvent(self[], event)
+method actionEvent*(self: VirtualQDial, event: gen_qevent_types.QActionEvent): void {.base.} =
+  QDialactionEvent(self[], event)
+method dragEnterEvent*(self: VirtualQDial, event: gen_qevent_types.QDragEnterEvent): void {.base.} =
+  QDialdragEnterEvent(self[], event)
+method dragMoveEvent*(self: VirtualQDial, event: gen_qevent_types.QDragMoveEvent): void {.base.} =
+  QDialdragMoveEvent(self[], event)
+method dragLeaveEvent*(self: VirtualQDial, event: gen_qevent_types.QDragLeaveEvent): void {.base.} =
+  QDialdragLeaveEvent(self[], event)
+method dropEvent*(self: VirtualQDial, event: gen_qevent_types.QDropEvent): void {.base.} =
+  QDialdropEvent(self[], event)
+method showEvent*(self: VirtualQDial, event: gen_qevent_types.QShowEvent): void {.base.} =
+  QDialshowEvent(self[], event)
+method hideEvent*(self: VirtualQDial, event: gen_qevent_types.QHideEvent): void {.base.} =
+  QDialhideEvent(self[], event)
+method nativeEvent*(self: VirtualQDial, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
+  QDialnativeEvent(self[], eventType, message, resultVal)
+method metric*(self: VirtualQDial, param1: cint): cint {.base.} =
+  QDialmetric(self[], param1)
+method initPainter*(self: VirtualQDial, painter: gen_qpainter_types.QPainter): void {.base.} =
+  QDialinitPainter(self[], painter)
+method redirected*(self: VirtualQDial, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.base.} =
+  QDialredirected(self[], offset)
+method sharedPainter*(self: VirtualQDial): gen_qpainter_types.QPainter {.base.} =
+  QDialsharedPainter(self[])
+method inputMethodEvent*(self: VirtualQDial, param1: gen_qevent_types.QInputMethodEvent): void {.base.} =
+  QDialinputMethodEvent(self[], param1)
+method inputMethodQuery*(self: VirtualQDial, param1: cint): gen_qvariant_types.QVariant {.base.} =
+  QDialinputMethodQuery(self[], param1)
+method focusNextPrevChild*(self: VirtualQDial, next: bool): bool {.base.} =
+  QDialfocusNextPrevChild(self[], next)
+method eventFilter*(self: VirtualQDial, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QDialeventFilter(self[], watched, event)
+method childEvent*(self: VirtualQDial, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QDialchildEvent(self[], event)
+method customEvent*(self: VirtualQDial, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QDialcustomEvent(self[], event)
+method connectNotify*(self: VirtualQDial, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QDialconnectNotify(self[], signal)
+method disconnectNotify*(self: VirtualQDial, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QDialdisconnectNotify(self[], signal)
+
 proc fcQDial_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQDial](fcQDial_vdata(self)[])
   var virtualReturn = inst.metaObject()
   virtualReturn.h
 
-method metacast*(self: VirtualQDial, param1: cstring): pointer {.base.} =
-  QDialmetacast(self[], param1)
 proc fcQDial_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQDial](fcQDial_vdata(self)[])
   let slotval1 = (param1)
   var virtualReturn = inst.metacast(slotval1)
   virtualReturn
 
-method metacall*(self: VirtualQDial, param1: cint, param2: cint, param3: pointer): cint {.base.} =
-  QDialmetacall(self[], param1, param2, param3)
 proc fcQDial_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQDial](fcQDial_vdata(self)[])
   let slotval1 = cint(param1)
@@ -904,262 +1008,188 @@ proc fcQDial_method_callback_metacall(self: pointer, param1: cint, param2: cint,
   var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
-method sizeHint*(self: VirtualQDial): gen_qsize_types.QSize {.base.} =
-  QDialsizeHint(self[])
 proc fcQDial_method_callback_sizeHint(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQDial](fcQDial_vdata(self)[])
   var virtualReturn = inst.sizeHint()
   virtualReturn.h
 
-method minimumSizeHint*(self: VirtualQDial): gen_qsize_types.QSize {.base.} =
-  QDialminimumSizeHint(self[])
 proc fcQDial_method_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQDial](fcQDial_vdata(self)[])
   var virtualReturn = inst.minimumSizeHint()
   virtualReturn.h
 
-method event*(self: VirtualQDial, e: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QDialevent(self[], e)
 proc fcQDial_method_callback_event(self: pointer, e: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQDial](fcQDial_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QEvent(h: e, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
-method resizeEvent*(self: VirtualQDial, re: gen_qevent_types.QResizeEvent): void {.base.} =
-  QDialresizeEvent(self[], re)
 proc fcQDial_method_callback_resizeEvent(self: pointer, re: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDial](fcQDial_vdata(self)[])
   let slotval1 = gen_qevent_types.QResizeEvent(h: re, owned: false)
   inst.resizeEvent(slotval1)
 
-method paintEvent*(self: VirtualQDial, pe: gen_qevent_types.QPaintEvent): void {.base.} =
-  QDialpaintEvent(self[], pe)
 proc fcQDial_method_callback_paintEvent(self: pointer, pe: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDial](fcQDial_vdata(self)[])
   let slotval1 = gen_qevent_types.QPaintEvent(h: pe, owned: false)
   inst.paintEvent(slotval1)
 
-method mousePressEvent*(self: VirtualQDial, me: gen_qevent_types.QMouseEvent): void {.base.} =
-  QDialmousePressEvent(self[], me)
 proc fcQDial_method_callback_mousePressEvent(self: pointer, me: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDial](fcQDial_vdata(self)[])
   let slotval1 = gen_qevent_types.QMouseEvent(h: me, owned: false)
   inst.mousePressEvent(slotval1)
 
-method mouseReleaseEvent*(self: VirtualQDial, me: gen_qevent_types.QMouseEvent): void {.base.} =
-  QDialmouseReleaseEvent(self[], me)
 proc fcQDial_method_callback_mouseReleaseEvent(self: pointer, me: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDial](fcQDial_vdata(self)[])
   let slotval1 = gen_qevent_types.QMouseEvent(h: me, owned: false)
   inst.mouseReleaseEvent(slotval1)
 
-method mouseMoveEvent*(self: VirtualQDial, me: gen_qevent_types.QMouseEvent): void {.base.} =
-  QDialmouseMoveEvent(self[], me)
 proc fcQDial_method_callback_mouseMoveEvent(self: pointer, me: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDial](fcQDial_vdata(self)[])
   let slotval1 = gen_qevent_types.QMouseEvent(h: me, owned: false)
   inst.mouseMoveEvent(slotval1)
 
-method sliderChange*(self: VirtualQDial, change: cint): void {.base.} =
-  QDialsliderChange(self[], change)
 proc fcQDial_method_callback_sliderChange(self: pointer, change: cint): void {.cdecl.} =
   let inst = cast[VirtualQDial](fcQDial_vdata(self)[])
   let slotval1 = cint(change)
   inst.sliderChange(slotval1)
 
-method initStyleOption*(self: VirtualQDial, option: gen_qstyleoption_types.QStyleOptionSlider): void {.base.} =
-  QDialinitStyleOption(self[], option)
 proc fcQDial_method_callback_initStyleOption(self: pointer, option: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDial](fcQDial_vdata(self)[])
   let slotval1 = gen_qstyleoption_types.QStyleOptionSlider(h: option, owned: false)
   inst.initStyleOption(slotval1)
 
-method keyPressEvent*(self: VirtualQDial, ev: gen_qevent_types.QKeyEvent): void {.base.} =
-  QDialkeyPressEvent(self[], ev)
 proc fcQDial_method_callback_keyPressEvent(self: pointer, ev: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDial](fcQDial_vdata(self)[])
   let slotval1 = gen_qevent_types.QKeyEvent(h: ev, owned: false)
   inst.keyPressEvent(slotval1)
 
-method timerEvent*(self: VirtualQDial, param1: gen_qcoreevent_types.QTimerEvent): void {.base.} =
-  QDialtimerEvent(self[], param1)
 proc fcQDial_method_callback_timerEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDial](fcQDial_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: param1, owned: false)
   inst.timerEvent(slotval1)
 
-method wheelEvent*(self: VirtualQDial, e: gen_qevent_types.QWheelEvent): void {.base.} =
-  QDialwheelEvent(self[], e)
 proc fcQDial_method_callback_wheelEvent(self: pointer, e: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDial](fcQDial_vdata(self)[])
   let slotval1 = gen_qevent_types.QWheelEvent(h: e, owned: false)
   inst.wheelEvent(slotval1)
 
-method changeEvent*(self: VirtualQDial, e: gen_qcoreevent_types.QEvent): void {.base.} =
-  QDialchangeEvent(self[], e)
 proc fcQDial_method_callback_changeEvent(self: pointer, e: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDial](fcQDial_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QEvent(h: e, owned: false)
   inst.changeEvent(slotval1)
 
-method devType*(self: VirtualQDial): cint {.base.} =
-  QDialdevType(self[])
 proc fcQDial_method_callback_devType(self: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQDial](fcQDial_vdata(self)[])
   var virtualReturn = inst.devType()
   virtualReturn
 
-method setVisible*(self: VirtualQDial, visible: bool): void {.base.} =
-  QDialsetVisible(self[], visible)
 proc fcQDial_method_callback_setVisible(self: pointer, visible: bool): void {.cdecl.} =
   let inst = cast[VirtualQDial](fcQDial_vdata(self)[])
   let slotval1 = visible
   inst.setVisible(slotval1)
 
-method heightForWidth*(self: VirtualQDial, param1: cint): cint {.base.} =
-  QDialheightForWidth(self[], param1)
 proc fcQDial_method_callback_heightForWidth(self: pointer, param1: cint): cint {.cdecl.} =
   let inst = cast[VirtualQDial](fcQDial_vdata(self)[])
   let slotval1 = param1
   var virtualReturn = inst.heightForWidth(slotval1)
   virtualReturn
 
-method hasHeightForWidth*(self: VirtualQDial): bool {.base.} =
-  QDialhasHeightForWidth(self[])
 proc fcQDial_method_callback_hasHeightForWidth(self: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQDial](fcQDial_vdata(self)[])
   var virtualReturn = inst.hasHeightForWidth()
   virtualReturn
 
-method paintEngine*(self: VirtualQDial): gen_qpaintengine_types.QPaintEngine {.base.} =
-  QDialpaintEngine(self[])
 proc fcQDial_method_callback_paintEngine(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQDial](fcQDial_vdata(self)[])
   var virtualReturn = inst.paintEngine()
   virtualReturn.h
 
-method mouseDoubleClickEvent*(self: VirtualQDial, event: gen_qevent_types.QMouseEvent): void {.base.} =
-  QDialmouseDoubleClickEvent(self[], event)
 proc fcQDial_method_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDial](fcQDial_vdata(self)[])
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mouseDoubleClickEvent(slotval1)
 
-method keyReleaseEvent*(self: VirtualQDial, event: gen_qevent_types.QKeyEvent): void {.base.} =
-  QDialkeyReleaseEvent(self[], event)
 proc fcQDial_method_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDial](fcQDial_vdata(self)[])
   let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   inst.keyReleaseEvent(slotval1)
 
-method focusInEvent*(self: VirtualQDial, event: gen_qevent_types.QFocusEvent): void {.base.} =
-  QDialfocusInEvent(self[], event)
 proc fcQDial_method_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDial](fcQDial_vdata(self)[])
   let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   inst.focusInEvent(slotval1)
 
-method focusOutEvent*(self: VirtualQDial, event: gen_qevent_types.QFocusEvent): void {.base.} =
-  QDialfocusOutEvent(self[], event)
 proc fcQDial_method_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDial](fcQDial_vdata(self)[])
   let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   inst.focusOutEvent(slotval1)
 
-method enterEvent*(self: VirtualQDial, event: gen_qevent_types.QEnterEvent): void {.base.} =
-  QDialenterEvent(self[], event)
 proc fcQDial_method_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDial](fcQDial_vdata(self)[])
   let slotval1 = gen_qevent_types.QEnterEvent(h: event, owned: false)
   inst.enterEvent(slotval1)
 
-method leaveEvent*(self: VirtualQDial, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QDialleaveEvent(self[], event)
 proc fcQDial_method_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDial](fcQDial_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.leaveEvent(slotval1)
 
-method moveEvent*(self: VirtualQDial, event: gen_qevent_types.QMoveEvent): void {.base.} =
-  QDialmoveEvent(self[], event)
 proc fcQDial_method_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDial](fcQDial_vdata(self)[])
   let slotval1 = gen_qevent_types.QMoveEvent(h: event, owned: false)
   inst.moveEvent(slotval1)
 
-method closeEvent*(self: VirtualQDial, event: gen_qevent_types.QCloseEvent): void {.base.} =
-  QDialcloseEvent(self[], event)
 proc fcQDial_method_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDial](fcQDial_vdata(self)[])
   let slotval1 = gen_qevent_types.QCloseEvent(h: event, owned: false)
   inst.closeEvent(slotval1)
 
-method contextMenuEvent*(self: VirtualQDial, event: gen_qevent_types.QContextMenuEvent): void {.base.} =
-  QDialcontextMenuEvent(self[], event)
 proc fcQDial_method_callback_contextMenuEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDial](fcQDial_vdata(self)[])
   let slotval1 = gen_qevent_types.QContextMenuEvent(h: event, owned: false)
   inst.contextMenuEvent(slotval1)
 
-method tabletEvent*(self: VirtualQDial, event: gen_qevent_types.QTabletEvent): void {.base.} =
-  QDialtabletEvent(self[], event)
 proc fcQDial_method_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDial](fcQDial_vdata(self)[])
   let slotval1 = gen_qevent_types.QTabletEvent(h: event, owned: false)
   inst.tabletEvent(slotval1)
 
-method actionEvent*(self: VirtualQDial, event: gen_qevent_types.QActionEvent): void {.base.} =
-  QDialactionEvent(self[], event)
 proc fcQDial_method_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDial](fcQDial_vdata(self)[])
   let slotval1 = gen_qevent_types.QActionEvent(h: event, owned: false)
   inst.actionEvent(slotval1)
 
-method dragEnterEvent*(self: VirtualQDial, event: gen_qevent_types.QDragEnterEvent): void {.base.} =
-  QDialdragEnterEvent(self[], event)
 proc fcQDial_method_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDial](fcQDial_vdata(self)[])
   let slotval1 = gen_qevent_types.QDragEnterEvent(h: event, owned: false)
   inst.dragEnterEvent(slotval1)
 
-method dragMoveEvent*(self: VirtualQDial, event: gen_qevent_types.QDragMoveEvent): void {.base.} =
-  QDialdragMoveEvent(self[], event)
 proc fcQDial_method_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDial](fcQDial_vdata(self)[])
   let slotval1 = gen_qevent_types.QDragMoveEvent(h: event, owned: false)
   inst.dragMoveEvent(slotval1)
 
-method dragLeaveEvent*(self: VirtualQDial, event: gen_qevent_types.QDragLeaveEvent): void {.base.} =
-  QDialdragLeaveEvent(self[], event)
 proc fcQDial_method_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDial](fcQDial_vdata(self)[])
   let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event, owned: false)
   inst.dragLeaveEvent(slotval1)
 
-method dropEvent*(self: VirtualQDial, event: gen_qevent_types.QDropEvent): void {.base.} =
-  QDialdropEvent(self[], event)
 proc fcQDial_method_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDial](fcQDial_vdata(self)[])
   let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
   inst.dropEvent(slotval1)
 
-method showEvent*(self: VirtualQDial, event: gen_qevent_types.QShowEvent): void {.base.} =
-  QDialshowEvent(self[], event)
 proc fcQDial_method_callback_showEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDial](fcQDial_vdata(self)[])
   let slotval1 = gen_qevent_types.QShowEvent(h: event, owned: false)
   inst.showEvent(slotval1)
 
-method hideEvent*(self: VirtualQDial, event: gen_qevent_types.QHideEvent): void {.base.} =
-  QDialhideEvent(self[], event)
 proc fcQDial_method_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDial](fcQDial_vdata(self)[])
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   inst.hideEvent(slotval1)
 
-method nativeEvent*(self: VirtualQDial, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
-  QDialnativeEvent(self[], eventType, message, resultVal)
 proc fcQDial_method_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
   let inst = cast[VirtualQDial](fcQDial_vdata(self)[])
   var veventType_bytearray = eventType
@@ -1171,61 +1201,45 @@ proc fcQDial_method_callback_nativeEvent(self: pointer, eventType: struct_miqt_s
   var virtualReturn = inst.nativeEvent(slotval1, slotval2, slotval3)
   virtualReturn
 
-method metric*(self: VirtualQDial, param1: cint): cint {.base.} =
-  QDialmetric(self[], param1)
 proc fcQDial_method_callback_metric(self: pointer, param1: cint): cint {.cdecl.} =
   let inst = cast[VirtualQDial](fcQDial_vdata(self)[])
   let slotval1 = cint(param1)
   var virtualReturn = inst.metric(slotval1)
   virtualReturn
 
-method initPainter*(self: VirtualQDial, painter: gen_qpainter_types.QPainter): void {.base.} =
-  QDialinitPainter(self[], painter)
 proc fcQDial_method_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDial](fcQDial_vdata(self)[])
   let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
   inst.initPainter(slotval1)
 
-method redirected*(self: VirtualQDial, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.base.} =
-  QDialredirected(self[], offset)
 proc fcQDial_method_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQDial](fcQDial_vdata(self)[])
   let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
   var virtualReturn = inst.redirected(slotval1)
   virtualReturn.h
 
-method sharedPainter*(self: VirtualQDial): gen_qpainter_types.QPainter {.base.} =
-  QDialsharedPainter(self[])
 proc fcQDial_method_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQDial](fcQDial_vdata(self)[])
   var virtualReturn = inst.sharedPainter()
   virtualReturn.h
 
-method inputMethodEvent*(self: VirtualQDial, param1: gen_qevent_types.QInputMethodEvent): void {.base.} =
-  QDialinputMethodEvent(self[], param1)
 proc fcQDial_method_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDial](fcQDial_vdata(self)[])
   let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1, owned: false)
   inst.inputMethodEvent(slotval1)
 
-method inputMethodQuery*(self: VirtualQDial, param1: cint): gen_qvariant_types.QVariant {.base.} =
-  QDialinputMethodQuery(self[], param1)
 proc fcQDial_method_callback_inputMethodQuery(self: pointer, param1: cint): pointer {.cdecl.} =
   let inst = cast[VirtualQDial](fcQDial_vdata(self)[])
   let slotval1 = cint(param1)
   var virtualReturn = inst.inputMethodQuery(slotval1)
   virtualReturn.h
 
-method focusNextPrevChild*(self: VirtualQDial, next: bool): bool {.base.} =
-  QDialfocusNextPrevChild(self[], next)
 proc fcQDial_method_callback_focusNextPrevChild(self: pointer, next: bool): bool {.cdecl.} =
   let inst = cast[VirtualQDial](fcQDial_vdata(self)[])
   let slotval1 = next
   var virtualReturn = inst.focusNextPrevChild(slotval1)
   virtualReturn
 
-method eventFilter*(self: VirtualQDial, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QDialeventFilter(self[], watched, event)
 proc fcQDial_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQDial](fcQDial_vdata(self)[])
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
@@ -1233,33 +1247,26 @@ proc fcQDial_method_callback_eventFilter(self: pointer, watched: pointer, event:
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
-method childEvent*(self: VirtualQDial, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
-  QDialchildEvent(self[], event)
 proc fcQDial_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDial](fcQDial_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
-method customEvent*(self: VirtualQDial, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QDialcustomEvent(self[], event)
 proc fcQDial_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDial](fcQDial_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
-method connectNotify*(self: VirtualQDial, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QDialconnectNotify(self[], signal)
 proc fcQDial_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDial](fcQDial_vdata(self)[])
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
-method disconnectNotify*(self: VirtualQDial, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QDialdisconnectNotify(self[], signal)
 proc fcQDial_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDial](fcQDial_vdata(self)[])
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
+
 
 proc setRepeatAction*(self: gen_qdial_types.QDial, action: cint): void =
   fcQDial_protectedbase_setRepeatAction(self.h, cint(action))

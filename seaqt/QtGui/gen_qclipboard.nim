@@ -188,7 +188,7 @@ proc fcQClipboard_slot_callback_changed_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QClipboardchangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onchanged*(self: gen_qclipboard_types.QClipboard, slot: QClipboardchangedSlot) =
+proc onChanged*(self: gen_qclipboard_types.QClipboard, slot: QClipboardchangedSlot) =
   var tmp = new QClipboardchangedSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -206,7 +206,7 @@ proc fcQClipboard_slot_callback_selectionChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QClipboardselectionChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onselectionChanged*(self: gen_qclipboard_types.QClipboard, slot: QClipboardselectionChangedSlot) =
+proc onSelectionChanged*(self: gen_qclipboard_types.QClipboard, slot: QClipboardselectionChangedSlot) =
   var tmp = new QClipboardselectionChangedSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -224,7 +224,7 @@ proc fcQClipboard_slot_callback_findBufferChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QClipboardfindBufferChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onfindBufferChanged*(self: gen_qclipboard_types.QClipboard, slot: QClipboardfindBufferChangedSlot) =
+proc onFindBufferChanged*(self: gen_qclipboard_types.QClipboard, slot: QClipboardfindBufferChangedSlot) =
   var tmp = new QClipboardfindBufferChangedSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -242,7 +242,7 @@ proc fcQClipboard_slot_callback_dataChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QClipboarddataChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc ondataChanged*(self: gen_qclipboard_types.QClipboard, slot: QClipboarddataChangedSlot) =
+proc onDataChanged*(self: gen_qclipboard_types.QClipboard, slot: QClipboarddataChangedSlot) =
   var tmp = new QClipboarddataChangedSlot
   tmp[] = slot
   GC_ref(tmp)

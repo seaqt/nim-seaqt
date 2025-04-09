@@ -92,6 +92,7 @@ proc fcQSslServer_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QS
 proc fcQSslServer_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QSslServer_tr3".}
 proc fcQSslServer_vdata(self: pointer): ptr pointer {.importc: "QSslServer_vdata".}
 proc fvdata_cQSslServer(self: pointer): pointer {.importc: "vdata_QSslServer".}
+
 type cQSslServerVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -182,7 +183,7 @@ proc fcQSslServer_slot_callback_sslErrors_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QSslServersslErrorsSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onsslErrors*(self: gen_qsslserver_types.QSslServer, slot: QSslServersslErrorsSlot) =
+proc onSslErrors*(self: gen_qsslserver_types.QSslServer, slot: QSslServersslErrorsSlot) =
   var tmp = new QSslServersslErrorsSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -204,7 +205,7 @@ proc fcQSslServer_slot_callback_peerVerifyError_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QSslServerpeerVerifyErrorSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onpeerVerifyError*(self: gen_qsslserver_types.QSslServer, slot: QSslServerpeerVerifyErrorSlot) =
+proc onPeerVerifyError*(self: gen_qsslserver_types.QSslServer, slot: QSslServerpeerVerifyErrorSlot) =
   var tmp = new QSslServerpeerVerifyErrorSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -226,7 +227,7 @@ proc fcQSslServer_slot_callback_errorOccurred_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QSslServererrorOccurredSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onerrorOccurred*(self: gen_qsslserver_types.QSslServer, slot: QSslServererrorOccurredSlot) =
+proc onErrorOccurred*(self: gen_qsslserver_types.QSslServer, slot: QSslServererrorOccurredSlot) =
   var tmp = new QSslServererrorOccurredSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -248,7 +249,7 @@ proc fcQSslServer_slot_callback_preSharedKeyAuthenticationRequired_release(slot:
   let nimfunc = cast[ref QSslServerpreSharedKeyAuthenticationRequiredSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onpreSharedKeyAuthenticationRequired*(self: gen_qsslserver_types.QSslServer, slot: QSslServerpreSharedKeyAuthenticationRequiredSlot) =
+proc onPreSharedKeyAuthenticationRequired*(self: gen_qsslserver_types.QSslServer, slot: QSslServerpreSharedKeyAuthenticationRequiredSlot) =
   var tmp = new QSslServerpreSharedKeyAuthenticationRequiredSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -277,7 +278,7 @@ proc fcQSslServer_slot_callback_alertSent_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QSslServeralertSentSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onalertSent*(self: gen_qsslserver_types.QSslServer, slot: QSslServeralertSentSlot) =
+proc onAlertSent*(self: gen_qsslserver_types.QSslServer, slot: QSslServeralertSentSlot) =
   var tmp = new QSslServeralertSentSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -306,7 +307,7 @@ proc fcQSslServer_slot_callback_alertReceived_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QSslServeralertReceivedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onalertReceived*(self: gen_qsslserver_types.QSslServer, slot: QSslServeralertReceivedSlot) =
+proc onAlertReceived*(self: gen_qsslserver_types.QSslServer, slot: QSslServeralertReceivedSlot) =
   var tmp = new QSslServeralertReceivedSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -328,7 +329,7 @@ proc fcQSslServer_slot_callback_handshakeInterruptedOnError_release(slot: int) {
   let nimfunc = cast[ref QSslServerhandshakeInterruptedOnErrorSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onhandshakeInterruptedOnError*(self: gen_qsslserver_types.QSslServer, slot: QSslServerhandshakeInterruptedOnErrorSlot) =
+proc onHandshakeInterruptedOnError*(self: gen_qsslserver_types.QSslServer, slot: QSslServerhandshakeInterruptedOnErrorSlot) =
   var tmp = new QSslServerhandshakeInterruptedOnErrorSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -348,7 +349,7 @@ proc fcQSslServer_slot_callback_startedEncryptionHandshake_release(slot: int) {.
   let nimfunc = cast[ref QSslServerstartedEncryptionHandshakeSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onstartedEncryptionHandshake*(self: gen_qsslserver_types.QSslServer, slot: QSslServerstartedEncryptionHandshakeSlot) =
+proc onStartedEncryptionHandshake*(self: gen_qsslserver_types.QSslServer, slot: QSslServerstartedEncryptionHandshakeSlot) =
   var tmp = new QSslServerstartedEncryptionHandshakeSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -379,6 +380,7 @@ type QSslServerchildEventProc* = proc(self: QSslServer, event: gen_qcoreevent_ty
 type QSslServercustomEventProc* = proc(self: QSslServer, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QSslServerconnectNotifyProc* = proc(self: QSslServer, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QSslServerdisconnectNotifyProc* = proc(self: QSslServer, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+
 type QSslServerVTable* {.inheritable, pure.} = object
   vtbl: cQSslServerVTable
   metaObject*: QSslServermetaObjectProc
@@ -394,8 +396,46 @@ type QSslServerVTable* {.inheritable, pure.} = object
   customEvent*: QSslServercustomEventProc
   connectNotify*: QSslServerconnectNotifyProc
   disconnectNotify*: QSslServerdisconnectNotifyProc
+
 proc QSslServermetaObject*(self: gen_qsslserver_types.QSslServer): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQSslServer_virtualbase_metaObject(self.h), owned: false)
+
+proc QSslServermetacast*(self: gen_qsslserver_types.QSslServer, param1: cstring): pointer =
+  fcQSslServer_virtualbase_metacast(self.h, param1)
+
+proc QSslServermetacall*(self: gen_qsslserver_types.QSslServer, param1: cint, param2: cint, param3: pointer): cint =
+  fcQSslServer_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+proc QSslServerincomingConnection*(self: gen_qsslserver_types.QSslServer, socket: uint): void =
+  fcQSslServer_virtualbase_incomingConnection(self.h, socket)
+
+proc QSslServerhasPendingConnections*(self: gen_qsslserver_types.QSslServer): bool =
+  fcQSslServer_virtualbase_hasPendingConnections(self.h)
+
+proc QSslServernextPendingConnection*(self: gen_qsslserver_types.QSslServer): gen_qtcpsocket_types.QTcpSocket =
+  gen_qtcpsocket_types.QTcpSocket(h: fcQSslServer_virtualbase_nextPendingConnection(self.h), owned: false)
+
+proc QSslServerevent*(self: gen_qsslserver_types.QSslServer, event: gen_qcoreevent_types.QEvent): bool =
+  fcQSslServer_virtualbase_event(self.h, event.h)
+
+proc QSslServereventFilter*(self: gen_qsslserver_types.QSslServer, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
+  fcQSslServer_virtualbase_eventFilter(self.h, watched.h, event.h)
+
+proc QSslServertimerEvent*(self: gen_qsslserver_types.QSslServer, event: gen_qcoreevent_types.QTimerEvent): void =
+  fcQSslServer_virtualbase_timerEvent(self.h, event.h)
+
+proc QSslServerchildEvent*(self: gen_qsslserver_types.QSslServer, event: gen_qcoreevent_types.QChildEvent): void =
+  fcQSslServer_virtualbase_childEvent(self.h, event.h)
+
+proc QSslServercustomEvent*(self: gen_qsslserver_types.QSslServer, event: gen_qcoreevent_types.QEvent): void =
+  fcQSslServer_virtualbase_customEvent(self.h, event.h)
+
+proc QSslServerconnectNotify*(self: gen_qsslserver_types.QSslServer, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQSslServer_virtualbase_connectNotify(self.h, signal.h)
+
+proc QSslServerdisconnectNotify*(self: gen_qsslserver_types.QSslServer, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQSslServer_virtualbase_disconnectNotify(self.h, signal.h)
+
 
 proc fcQSslServer_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QSslServerVTable](fcQSslServer_vdata(self)[])
@@ -406,18 +446,12 @@ proc fcQSslServer_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QSslServermetacast*(self: gen_qsslserver_types.QSslServer, param1: cstring): pointer =
-  fcQSslServer_virtualbase_metacast(self.h, param1)
-
 proc fcQSslServer_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QSslServerVTable](fcQSslServer_vdata(self)[])
   let self = QSslServer(h: self)
   let slotval1 = (param1)
   var virtualReturn = vtbl[].metacast(self, slotval1)
   virtualReturn
-
-proc QSslServermetacall*(self: gen_qsslserver_types.QSslServer, param1: cint, param2: cint, param3: pointer): cint =
-  fcQSslServer_virtualbase_metacall(self.h, cint(param1), param2, param3)
 
 proc fcQSslServer_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QSslServerVTable](fcQSslServer_vdata(self)[])
@@ -428,26 +462,17 @@ proc fcQSslServer_vtable_callback_metacall(self: pointer, param1: cint, param2: 
   var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QSslServerincomingConnection*(self: gen_qsslserver_types.QSslServer, socket: uint): void =
-  fcQSslServer_virtualbase_incomingConnection(self.h, socket)
-
 proc fcQSslServer_vtable_callback_incomingConnection(self: pointer, socket: uint): void {.cdecl.} =
   let vtbl = cast[ptr QSslServerVTable](fcQSslServer_vdata(self)[])
   let self = QSslServer(h: self)
   let slotval1 = socket
   vtbl[].incomingConnection(self, slotval1)
 
-proc QSslServerhasPendingConnections*(self: gen_qsslserver_types.QSslServer): bool =
-  fcQSslServer_virtualbase_hasPendingConnections(self.h)
-
 proc fcQSslServer_vtable_callback_hasPendingConnections(self: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QSslServerVTable](fcQSslServer_vdata(self)[])
   let self = QSslServer(h: self)
   var virtualReturn = vtbl[].hasPendingConnections(self)
   virtualReturn
-
-proc QSslServernextPendingConnection*(self: gen_qsslserver_types.QSslServer): gen_qtcpsocket_types.QTcpSocket =
-  gen_qtcpsocket_types.QTcpSocket(h: fcQSslServer_virtualbase_nextPendingConnection(self.h), owned: false)
 
 proc fcQSslServer_vtable_callback_nextPendingConnection(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QSslServerVTable](fcQSslServer_vdata(self)[])
@@ -458,18 +483,12 @@ proc fcQSslServer_vtable_callback_nextPendingConnection(self: pointer): pointer 
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QSslServerevent*(self: gen_qsslserver_types.QSslServer, event: gen_qcoreevent_types.QEvent): bool =
-  fcQSslServer_virtualbase_event(self.h, event.h)
-
 proc fcQSslServer_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QSslServerVTable](fcQSslServer_vdata(self)[])
   let self = QSslServer(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
-
-proc QSslServereventFilter*(self: gen_qsslserver_types.QSslServer, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
-  fcQSslServer_virtualbase_eventFilter(self.h, watched.h, event.h)
 
 proc fcQSslServer_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QSslServerVTable](fcQSslServer_vdata(self)[])
@@ -479,17 +498,11 @@ proc fcQSslServer_vtable_callback_eventFilter(self: pointer, watched: pointer, e
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
-proc QSslServertimerEvent*(self: gen_qsslserver_types.QSslServer, event: gen_qcoreevent_types.QTimerEvent): void =
-  fcQSslServer_virtualbase_timerEvent(self.h, event.h)
-
 proc fcQSslServer_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSslServerVTable](fcQSslServer_vdata(self)[])
   let self = QSslServer(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
-
-proc QSslServerchildEvent*(self: gen_qsslserver_types.QSslServer, event: gen_qcoreevent_types.QChildEvent): void =
-  fcQSslServer_virtualbase_childEvent(self.h, event.h)
 
 proc fcQSslServer_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSslServerVTable](fcQSslServer_vdata(self)[])
@@ -497,26 +510,17 @@ proc fcQSslServer_vtable_callback_childEvent(self: pointer, event: pointer): voi
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
-proc QSslServercustomEvent*(self: gen_qsslserver_types.QSslServer, event: gen_qcoreevent_types.QEvent): void =
-  fcQSslServer_virtualbase_customEvent(self.h, event.h)
-
 proc fcQSslServer_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSslServerVTable](fcQSslServer_vdata(self)[])
   let self = QSslServer(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
-proc QSslServerconnectNotify*(self: gen_qsslserver_types.QSslServer, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQSslServer_virtualbase_connectNotify(self.h, signal.h)
-
 proc fcQSslServer_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSslServerVTable](fcQSslServer_vdata(self)[])
   let self = QSslServer(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
-
-proc QSslServerdisconnectNotify*(self: gen_qsslserver_types.QSslServer, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQSslServer_virtualbase_disconnectNotify(self.h, signal.h)
 
 proc fcQSslServer_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSslServerVTable](fcQSslServer_vdata(self)[])
@@ -526,23 +530,45 @@ proc fcQSslServer_vtable_callback_disconnectNotify(self: pointer, signal: pointe
 
 type VirtualQSslServer* {.inheritable.} = ref object of QSslServer
   vtbl*: cQSslServerVTable
+
 method metaObject*(self: VirtualQSslServer): gen_qobjectdefs_types.QMetaObject {.base.} =
   QSslServermetaObject(self[])
+method metacast*(self: VirtualQSslServer, param1: cstring): pointer {.base.} =
+  QSslServermetacast(self[], param1)
+method metacall*(self: VirtualQSslServer, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QSslServermetacall(self[], param1, param2, param3)
+method incomingConnection*(self: VirtualQSslServer, socket: uint): void {.base.} =
+  QSslServerincomingConnection(self[], socket)
+method hasPendingConnections*(self: VirtualQSslServer): bool {.base.} =
+  QSslServerhasPendingConnections(self[])
+method nextPendingConnection*(self: VirtualQSslServer): gen_qtcpsocket_types.QTcpSocket {.base.} =
+  QSslServernextPendingConnection(self[])
+method event*(self: VirtualQSslServer, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QSslServerevent(self[], event)
+method eventFilter*(self: VirtualQSslServer, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QSslServereventFilter(self[], watched, event)
+method timerEvent*(self: VirtualQSslServer, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QSslServertimerEvent(self[], event)
+method childEvent*(self: VirtualQSslServer, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QSslServerchildEvent(self[], event)
+method customEvent*(self: VirtualQSslServer, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QSslServercustomEvent(self[], event)
+method connectNotify*(self: VirtualQSslServer, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QSslServerconnectNotify(self[], signal)
+method disconnectNotify*(self: VirtualQSslServer, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QSslServerdisconnectNotify(self[], signal)
+
 proc fcQSslServer_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQSslServer](fcQSslServer_vdata(self)[])
   var virtualReturn = inst.metaObject()
   virtualReturn.h
 
-method metacast*(self: VirtualQSslServer, param1: cstring): pointer {.base.} =
-  QSslServermetacast(self[], param1)
 proc fcQSslServer_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQSslServer](fcQSslServer_vdata(self)[])
   let slotval1 = (param1)
   var virtualReturn = inst.metacast(slotval1)
   virtualReturn
 
-method metacall*(self: VirtualQSslServer, param1: cint, param2: cint, param3: pointer): cint {.base.} =
-  QSslServermetacall(self[], param1, param2, param3)
 proc fcQSslServer_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQSslServer](fcQSslServer_vdata(self)[])
   let slotval1 = cint(param1)
@@ -551,37 +577,27 @@ proc fcQSslServer_method_callback_metacall(self: pointer, param1: cint, param2: 
   var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
-method incomingConnection*(self: VirtualQSslServer, socket: uint): void {.base.} =
-  QSslServerincomingConnection(self[], socket)
 proc fcQSslServer_method_callback_incomingConnection(self: pointer, socket: uint): void {.cdecl.} =
   let inst = cast[VirtualQSslServer](fcQSslServer_vdata(self)[])
   let slotval1 = socket
   inst.incomingConnection(slotval1)
 
-method hasPendingConnections*(self: VirtualQSslServer): bool {.base.} =
-  QSslServerhasPendingConnections(self[])
 proc fcQSslServer_method_callback_hasPendingConnections(self: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQSslServer](fcQSslServer_vdata(self)[])
   var virtualReturn = inst.hasPendingConnections()
   virtualReturn
 
-method nextPendingConnection*(self: VirtualQSslServer): gen_qtcpsocket_types.QTcpSocket {.base.} =
-  QSslServernextPendingConnection(self[])
 proc fcQSslServer_method_callback_nextPendingConnection(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQSslServer](fcQSslServer_vdata(self)[])
   var virtualReturn = inst.nextPendingConnection()
   virtualReturn.h
 
-method event*(self: VirtualQSslServer, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QSslServerevent(self[], event)
 proc fcQSslServer_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQSslServer](fcQSslServer_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
-method eventFilter*(self: VirtualQSslServer, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QSslServereventFilter(self[], watched, event)
 proc fcQSslServer_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQSslServer](fcQSslServer_vdata(self)[])
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
@@ -589,40 +605,31 @@ proc fcQSslServer_method_callback_eventFilter(self: pointer, watched: pointer, e
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
-method timerEvent*(self: VirtualQSslServer, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
-  QSslServertimerEvent(self[], event)
 proc fcQSslServer_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSslServer](fcQSslServer_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
-method childEvent*(self: VirtualQSslServer, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
-  QSslServerchildEvent(self[], event)
 proc fcQSslServer_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSslServer](fcQSslServer_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
-method customEvent*(self: VirtualQSslServer, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QSslServercustomEvent(self[], event)
 proc fcQSslServer_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSslServer](fcQSslServer_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
-method connectNotify*(self: VirtualQSslServer, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QSslServerconnectNotify(self[], signal)
 proc fcQSslServer_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSslServer](fcQSslServer_vdata(self)[])
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
-method disconnectNotify*(self: VirtualQSslServer, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QSslServerdisconnectNotify(self[], signal)
 proc fcQSslServer_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSslServer](fcQSslServer_vdata(self)[])
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
+
 
 proc addPendingConnection*(self: gen_qsslserver_types.QSslServer, socket: gen_qtcpsocket_types.QTcpSocket): void =
   fcQSslServer_protectedbase_addPendingConnection(self.h, socket.h)

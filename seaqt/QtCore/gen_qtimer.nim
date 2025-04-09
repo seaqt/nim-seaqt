@@ -72,6 +72,7 @@ proc fcQTimer_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QTimer
 proc fcQTimer_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QTimer_tr3".}
 proc fcQTimer_vdata(self: pointer): ptr pointer {.importc: "QTimer_vdata".}
 proc fvdata_cQTimer(self: pointer): pointer {.importc: "vdata_QTimer".}
+
 type cQTimerVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -175,6 +176,7 @@ type QTimerchildEventProc* = proc(self: QTimer, event: gen_qcoreevent_types.QChi
 type QTimercustomEventProc* = proc(self: QTimer, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QTimerconnectNotifyProc* = proc(self: QTimer, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QTimerdisconnectNotifyProc* = proc(self: QTimer, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+
 type QTimerVTable* {.inheritable, pure.} = object
   vtbl: cQTimerVTable
   metaObject*: QTimermetaObjectProc
@@ -187,8 +189,37 @@ type QTimerVTable* {.inheritable, pure.} = object
   customEvent*: QTimercustomEventProc
   connectNotify*: QTimerconnectNotifyProc
   disconnectNotify*: QTimerdisconnectNotifyProc
+
 proc QTimermetaObject*(self: gen_qtimer_types.QTimer): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQTimer_virtualbase_metaObject(self.h), owned: false)
+
+proc QTimermetacast*(self: gen_qtimer_types.QTimer, param1: cstring): pointer =
+  fcQTimer_virtualbase_metacast(self.h, param1)
+
+proc QTimermetacall*(self: gen_qtimer_types.QTimer, param1: cint, param2: cint, param3: pointer): cint =
+  fcQTimer_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+proc QTimertimerEvent*(self: gen_qtimer_types.QTimer, param1: gen_qcoreevent_types.QTimerEvent): void =
+  fcQTimer_virtualbase_timerEvent(self.h, param1.h)
+
+proc QTimerevent*(self: gen_qtimer_types.QTimer, event: gen_qcoreevent_types.QEvent): bool =
+  fcQTimer_virtualbase_event(self.h, event.h)
+
+proc QTimereventFilter*(self: gen_qtimer_types.QTimer, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
+  fcQTimer_virtualbase_eventFilter(self.h, watched.h, event.h)
+
+proc QTimerchildEvent*(self: gen_qtimer_types.QTimer, event: gen_qcoreevent_types.QChildEvent): void =
+  fcQTimer_virtualbase_childEvent(self.h, event.h)
+
+proc QTimercustomEvent*(self: gen_qtimer_types.QTimer, event: gen_qcoreevent_types.QEvent): void =
+  fcQTimer_virtualbase_customEvent(self.h, event.h)
+
+proc QTimerconnectNotify*(self: gen_qtimer_types.QTimer, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQTimer_virtualbase_connectNotify(self.h, signal.h)
+
+proc QTimerdisconnectNotify*(self: gen_qtimer_types.QTimer, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQTimer_virtualbase_disconnectNotify(self.h, signal.h)
+
 
 proc fcQTimer_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QTimerVTable](fcQTimer_vdata(self)[])
@@ -199,18 +230,12 @@ proc fcQTimer_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QTimermetacast*(self: gen_qtimer_types.QTimer, param1: cstring): pointer =
-  fcQTimer_virtualbase_metacast(self.h, param1)
-
 proc fcQTimer_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QTimerVTable](fcQTimer_vdata(self)[])
   let self = QTimer(h: self)
   let slotval1 = (param1)
   var virtualReturn = vtbl[].metacast(self, slotval1)
   virtualReturn
-
-proc QTimermetacall*(self: gen_qtimer_types.QTimer, param1: cint, param2: cint, param3: pointer): cint =
-  fcQTimer_virtualbase_metacall(self.h, cint(param1), param2, param3)
 
 proc fcQTimer_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QTimerVTable](fcQTimer_vdata(self)[])
@@ -221,17 +246,11 @@ proc fcQTimer_vtable_callback_metacall(self: pointer, param1: cint, param2: cint
   var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QTimertimerEvent*(self: gen_qtimer_types.QTimer, param1: gen_qcoreevent_types.QTimerEvent): void =
-  fcQTimer_virtualbase_timerEvent(self.h, param1.h)
-
 proc fcQTimer_vtable_callback_timerEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTimerVTable](fcQTimer_vdata(self)[])
   let self = QTimer(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: param1, owned: false)
   vtbl[].timerEvent(self, slotval1)
-
-proc QTimerevent*(self: gen_qtimer_types.QTimer, event: gen_qcoreevent_types.QEvent): bool =
-  fcQTimer_virtualbase_event(self.h, event.h)
 
 proc fcQTimer_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QTimerVTable](fcQTimer_vdata(self)[])
@@ -239,9 +258,6 @@ proc fcQTimer_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
-
-proc QTimereventFilter*(self: gen_qtimer_types.QTimer, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
-  fcQTimer_virtualbase_eventFilter(self.h, watched.h, event.h)
 
 proc fcQTimer_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QTimerVTable](fcQTimer_vdata(self)[])
@@ -251,17 +267,11 @@ proc fcQTimer_vtable_callback_eventFilter(self: pointer, watched: pointer, event
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
-proc QTimerchildEvent*(self: gen_qtimer_types.QTimer, event: gen_qcoreevent_types.QChildEvent): void =
-  fcQTimer_virtualbase_childEvent(self.h, event.h)
-
 proc fcQTimer_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTimerVTable](fcQTimer_vdata(self)[])
   let self = QTimer(h: self)
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
-
-proc QTimercustomEvent*(self: gen_qtimer_types.QTimer, event: gen_qcoreevent_types.QEvent): void =
-  fcQTimer_virtualbase_customEvent(self.h, event.h)
 
 proc fcQTimer_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTimerVTable](fcQTimer_vdata(self)[])
@@ -269,17 +279,11 @@ proc fcQTimer_vtable_callback_customEvent(self: pointer, event: pointer): void {
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
-proc QTimerconnectNotify*(self: gen_qtimer_types.QTimer, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQTimer_virtualbase_connectNotify(self.h, signal.h)
-
 proc fcQTimer_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTimerVTable](fcQTimer_vdata(self)[])
   let self = QTimer(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
-
-proc QTimerdisconnectNotify*(self: gen_qtimer_types.QTimer, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQTimer_virtualbase_disconnectNotify(self.h, signal.h)
 
 proc fcQTimer_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTimerVTable](fcQTimer_vdata(self)[])
@@ -289,23 +293,39 @@ proc fcQTimer_vtable_callback_disconnectNotify(self: pointer, signal: pointer): 
 
 type VirtualQTimer* {.inheritable.} = ref object of QTimer
   vtbl*: cQTimerVTable
+
 method metaObject*(self: VirtualQTimer): gen_qobjectdefs_types.QMetaObject {.base.} =
   QTimermetaObject(self[])
+method metacast*(self: VirtualQTimer, param1: cstring): pointer {.base.} =
+  QTimermetacast(self[], param1)
+method metacall*(self: VirtualQTimer, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QTimermetacall(self[], param1, param2, param3)
+method timerEvent*(self: VirtualQTimer, param1: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QTimertimerEvent(self[], param1)
+method event*(self: VirtualQTimer, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QTimerevent(self[], event)
+method eventFilter*(self: VirtualQTimer, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QTimereventFilter(self[], watched, event)
+method childEvent*(self: VirtualQTimer, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QTimerchildEvent(self[], event)
+method customEvent*(self: VirtualQTimer, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QTimercustomEvent(self[], event)
+method connectNotify*(self: VirtualQTimer, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QTimerconnectNotify(self[], signal)
+method disconnectNotify*(self: VirtualQTimer, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QTimerdisconnectNotify(self[], signal)
+
 proc fcQTimer_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQTimer](fcQTimer_vdata(self)[])
   var virtualReturn = inst.metaObject()
   virtualReturn.h
 
-method metacast*(self: VirtualQTimer, param1: cstring): pointer {.base.} =
-  QTimermetacast(self[], param1)
 proc fcQTimer_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQTimer](fcQTimer_vdata(self)[])
   let slotval1 = (param1)
   var virtualReturn = inst.metacast(slotval1)
   virtualReturn
 
-method metacall*(self: VirtualQTimer, param1: cint, param2: cint, param3: pointer): cint {.base.} =
-  QTimermetacall(self[], param1, param2, param3)
 proc fcQTimer_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQTimer](fcQTimer_vdata(self)[])
   let slotval1 = cint(param1)
@@ -314,23 +334,17 @@ proc fcQTimer_method_callback_metacall(self: pointer, param1: cint, param2: cint
   var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
-method timerEvent*(self: VirtualQTimer, param1: gen_qcoreevent_types.QTimerEvent): void {.base.} =
-  QTimertimerEvent(self[], param1)
 proc fcQTimer_method_callback_timerEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTimer](fcQTimer_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: param1, owned: false)
   inst.timerEvent(slotval1)
 
-method event*(self: VirtualQTimer, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QTimerevent(self[], event)
 proc fcQTimer_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQTimer](fcQTimer_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
-method eventFilter*(self: VirtualQTimer, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QTimereventFilter(self[], watched, event)
 proc fcQTimer_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQTimer](fcQTimer_vdata(self)[])
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
@@ -338,33 +352,26 @@ proc fcQTimer_method_callback_eventFilter(self: pointer, watched: pointer, event
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
-method childEvent*(self: VirtualQTimer, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
-  QTimerchildEvent(self[], event)
 proc fcQTimer_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTimer](fcQTimer_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
-method customEvent*(self: VirtualQTimer, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QTimercustomEvent(self[], event)
 proc fcQTimer_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTimer](fcQTimer_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
-method connectNotify*(self: VirtualQTimer, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QTimerconnectNotify(self[], signal)
 proc fcQTimer_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTimer](fcQTimer_vdata(self)[])
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
-method disconnectNotify*(self: VirtualQTimer, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QTimerdisconnectNotify(self[], signal)
 proc fcQTimer_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTimer](fcQTimer_vdata(self)[])
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
+
 
 proc sender*(self: gen_qtimer_types.QTimer): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQTimer_protectedbase_sender(self.h), owned: false)

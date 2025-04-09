@@ -111,7 +111,7 @@ proc fcQQuickItemGrabResult_slot_callback_ready_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QQuickItemGrabResultreadySlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onready*(self: gen_qquickitemgrabresult_types.QQuickItemGrabResult, slot: QQuickItemGrabResultreadySlot) =
+proc onReady*(self: gen_qquickitemgrabresult_types.QQuickItemGrabResult, slot: QQuickItemGrabResultreadySlot) =
   var tmp = new QQuickItemGrabResultreadySlot
   tmp[] = slot
   GC_ref(tmp)

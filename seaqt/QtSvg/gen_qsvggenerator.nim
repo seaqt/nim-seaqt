@@ -76,6 +76,7 @@ proc fcQSvgGenerator_setResolution(self: pointer, dpi: cint): void {.importc: "Q
 proc fcQSvgGenerator_resolution(self: pointer): cint {.importc: "QSvgGenerator_resolution".}
 proc fcQSvgGenerator_vdata(self: pointer): ptr pointer {.importc: "QSvgGenerator_vdata".}
 proc fvdata_cQSvgGenerator(self: pointer): pointer {.importc: "vdata_QSvgGenerator".}
+
 type cQSvgGeneratorVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   paintEngine*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -155,6 +156,7 @@ type QSvgGeneratordevTypeProc* = proc(self: QSvgGenerator): cint {.raises: [], g
 type QSvgGeneratorinitPainterProc* = proc(self: QSvgGenerator, painter: gen_qpainter_types.QPainter): void {.raises: [], gcsafe.}
 type QSvgGeneratorredirectedProc* = proc(self: QSvgGenerator, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.raises: [], gcsafe.}
 type QSvgGeneratorsharedPainterProc* = proc(self: QSvgGenerator): gen_qpainter_types.QPainter {.raises: [], gcsafe.}
+
 type QSvgGeneratorVTable* {.inheritable, pure.} = object
   vtbl: cQSvgGeneratorVTable
   paintEngine*: QSvgGeneratorpaintEngineProc
@@ -163,8 +165,25 @@ type QSvgGeneratorVTable* {.inheritable, pure.} = object
   initPainter*: QSvgGeneratorinitPainterProc
   redirected*: QSvgGeneratorredirectedProc
   sharedPainter*: QSvgGeneratorsharedPainterProc
+
 proc QSvgGeneratorpaintEngine*(self: gen_qsvggenerator_types.QSvgGenerator): gen_qpaintengine_types.QPaintEngine =
   gen_qpaintengine_types.QPaintEngine(h: fcQSvgGenerator_virtualbase_paintEngine(self.h), owned: false)
+
+proc QSvgGeneratormetric*(self: gen_qsvggenerator_types.QSvgGenerator, metric: cint): cint =
+  fcQSvgGenerator_virtualbase_metric(self.h, cint(metric))
+
+proc QSvgGeneratordevType*(self: gen_qsvggenerator_types.QSvgGenerator): cint =
+  fcQSvgGenerator_virtualbase_devType(self.h)
+
+proc QSvgGeneratorinitPainter*(self: gen_qsvggenerator_types.QSvgGenerator, painter: gen_qpainter_types.QPainter): void =
+  fcQSvgGenerator_virtualbase_initPainter(self.h, painter.h)
+
+proc QSvgGeneratorredirected*(self: gen_qsvggenerator_types.QSvgGenerator, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice =
+  gen_qpaintdevice_types.QPaintDevice(h: fcQSvgGenerator_virtualbase_redirected(self.h, offset.h), owned: false)
+
+proc QSvgGeneratorsharedPainter*(self: gen_qsvggenerator_types.QSvgGenerator): gen_qpainter_types.QPainter =
+  gen_qpainter_types.QPainter(h: fcQSvgGenerator_virtualbase_sharedPainter(self.h), owned: false)
+
 
 proc fcQSvgGenerator_vtable_callback_paintEngine(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QSvgGeneratorVTable](fcQSvgGenerator_vdata(self)[])
@@ -175,9 +194,6 @@ proc fcQSvgGenerator_vtable_callback_paintEngine(self: pointer): pointer {.cdecl
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QSvgGeneratormetric*(self: gen_qsvggenerator_types.QSvgGenerator, metric: cint): cint =
-  fcQSvgGenerator_virtualbase_metric(self.h, cint(metric))
-
 proc fcQSvgGenerator_vtable_callback_metric(self: pointer, metric: cint): cint {.cdecl.} =
   let vtbl = cast[ptr QSvgGeneratorVTable](fcQSvgGenerator_vdata(self)[])
   let self = QSvgGenerator(h: self)
@@ -185,26 +201,17 @@ proc fcQSvgGenerator_vtable_callback_metric(self: pointer, metric: cint): cint {
   var virtualReturn = vtbl[].metric(self, slotval1)
   virtualReturn
 
-proc QSvgGeneratordevType*(self: gen_qsvggenerator_types.QSvgGenerator): cint =
-  fcQSvgGenerator_virtualbase_devType(self.h)
-
 proc fcQSvgGenerator_vtable_callback_devType(self: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QSvgGeneratorVTable](fcQSvgGenerator_vdata(self)[])
   let self = QSvgGenerator(h: self)
   var virtualReturn = vtbl[].devType(self)
   virtualReturn
 
-proc QSvgGeneratorinitPainter*(self: gen_qsvggenerator_types.QSvgGenerator, painter: gen_qpainter_types.QPainter): void =
-  fcQSvgGenerator_virtualbase_initPainter(self.h, painter.h)
-
 proc fcQSvgGenerator_vtable_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSvgGeneratorVTable](fcQSvgGenerator_vdata(self)[])
   let self = QSvgGenerator(h: self)
   let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
   vtbl[].initPainter(self, slotval1)
-
-proc QSvgGeneratorredirected*(self: gen_qsvggenerator_types.QSvgGenerator, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice =
-  gen_qpaintdevice_types.QPaintDevice(h: fcQSvgGenerator_virtualbase_redirected(self.h, offset.h), owned: false)
 
 proc fcQSvgGenerator_vtable_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QSvgGeneratorVTable](fcQSvgGenerator_vdata(self)[])
@@ -215,9 +222,6 @@ proc fcQSvgGenerator_vtable_callback_redirected(self: pointer, offset: pointer):
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
   virtualReturn_h
-
-proc QSvgGeneratorsharedPainter*(self: gen_qsvggenerator_types.QSvgGenerator): gen_qpainter_types.QPainter =
-  gen_qpainter_types.QPainter(h: fcQSvgGenerator_virtualbase_sharedPainter(self.h), owned: false)
 
 proc fcQSvgGenerator_vtable_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QSvgGeneratorVTable](fcQSvgGenerator_vdata(self)[])
@@ -230,49 +234,52 @@ proc fcQSvgGenerator_vtable_callback_sharedPainter(self: pointer): pointer {.cde
 
 type VirtualQSvgGenerator* {.inheritable.} = ref object of QSvgGenerator
   vtbl*: cQSvgGeneratorVTable
+
 method paintEngine*(self: VirtualQSvgGenerator): gen_qpaintengine_types.QPaintEngine {.base.} =
   QSvgGeneratorpaintEngine(self[])
+method metric*(self: VirtualQSvgGenerator, metric: cint): cint {.base.} =
+  QSvgGeneratormetric(self[], metric)
+method devType*(self: VirtualQSvgGenerator): cint {.base.} =
+  QSvgGeneratordevType(self[])
+method initPainter*(self: VirtualQSvgGenerator, painter: gen_qpainter_types.QPainter): void {.base.} =
+  QSvgGeneratorinitPainter(self[], painter)
+method redirected*(self: VirtualQSvgGenerator, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.base.} =
+  QSvgGeneratorredirected(self[], offset)
+method sharedPainter*(self: VirtualQSvgGenerator): gen_qpainter_types.QPainter {.base.} =
+  QSvgGeneratorsharedPainter(self[])
+
 proc fcQSvgGenerator_method_callback_paintEngine(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQSvgGenerator](fcQSvgGenerator_vdata(self)[])
   var virtualReturn = inst.paintEngine()
   virtualReturn.h
 
-method metric*(self: VirtualQSvgGenerator, metric: cint): cint {.base.} =
-  QSvgGeneratormetric(self[], metric)
 proc fcQSvgGenerator_method_callback_metric(self: pointer, metric: cint): cint {.cdecl.} =
   let inst = cast[VirtualQSvgGenerator](fcQSvgGenerator_vdata(self)[])
   let slotval1 = cint(metric)
   var virtualReturn = inst.metric(slotval1)
   virtualReturn
 
-method devType*(self: VirtualQSvgGenerator): cint {.base.} =
-  QSvgGeneratordevType(self[])
 proc fcQSvgGenerator_method_callback_devType(self: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQSvgGenerator](fcQSvgGenerator_vdata(self)[])
   var virtualReturn = inst.devType()
   virtualReturn
 
-method initPainter*(self: VirtualQSvgGenerator, painter: gen_qpainter_types.QPainter): void {.base.} =
-  QSvgGeneratorinitPainter(self[], painter)
 proc fcQSvgGenerator_method_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSvgGenerator](fcQSvgGenerator_vdata(self)[])
   let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
   inst.initPainter(slotval1)
 
-method redirected*(self: VirtualQSvgGenerator, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.base.} =
-  QSvgGeneratorredirected(self[], offset)
 proc fcQSvgGenerator_method_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQSvgGenerator](fcQSvgGenerator_vdata(self)[])
   let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
   var virtualReturn = inst.redirected(slotval1)
   virtualReturn.h
 
-method sharedPainter*(self: VirtualQSvgGenerator): gen_qpainter_types.QPainter {.base.} =
-  QSvgGeneratorsharedPainter(self[])
 proc fcQSvgGenerator_method_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQSvgGenerator](fcQSvgGenerator_vdata(self)[])
   var virtualReturn = inst.sharedPainter()
   virtualReturn.h
+
 
 proc create*(T: type gen_qsvggenerator_types.QSvgGenerator,
     vtbl: ref QSvgGeneratorVTable = nil): gen_qsvggenerator_types.QSvgGenerator =

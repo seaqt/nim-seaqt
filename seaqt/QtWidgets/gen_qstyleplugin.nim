@@ -63,6 +63,7 @@ proc fcQStylePlugin_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "
 proc fcQStylePlugin_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QStylePlugin_tr3".}
 proc fcQStylePlugin_vdata(self: pointer): ptr pointer {.importc: "QStylePlugin_vdata".}
 proc fvdata_cQStylePlugin(self: pointer): pointer {.importc: "vdata_QStylePlugin".}
+
 type cQStylePluginVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -135,6 +136,7 @@ type QStylePluginchildEventProc* = proc(self: QStylePlugin, event: gen_qcoreeven
 type QStylePlugincustomEventProc* = proc(self: QStylePlugin, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QStylePluginconnectNotifyProc* = proc(self: QStylePlugin, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QStylePlugindisconnectNotifyProc* = proc(self: QStylePlugin, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+
 type QStylePluginVTable* {.inheritable, pure.} = object
   vtbl: cQStylePluginVTable
   metaObject*: QStylePluginmetaObjectProc
@@ -148,8 +150,37 @@ type QStylePluginVTable* {.inheritable, pure.} = object
   customEvent*: QStylePlugincustomEventProc
   connectNotify*: QStylePluginconnectNotifyProc
   disconnectNotify*: QStylePlugindisconnectNotifyProc
+
 proc QStylePluginmetaObject*(self: gen_qstyleplugin_types.QStylePlugin): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQStylePlugin_virtualbase_metaObject(self.h), owned: false)
+
+proc QStylePluginmetacast*(self: gen_qstyleplugin_types.QStylePlugin, param1: cstring): pointer =
+  fcQStylePlugin_virtualbase_metacast(self.h, param1)
+
+proc QStylePluginmetacall*(self: gen_qstyleplugin_types.QStylePlugin, param1: cint, param2: cint, param3: pointer): cint =
+  fcQStylePlugin_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+proc QStylePluginevent*(self: gen_qstyleplugin_types.QStylePlugin, event: gen_qcoreevent_types.QEvent): bool =
+  fcQStylePlugin_virtualbase_event(self.h, event.h)
+
+proc QStylePlugineventFilter*(self: gen_qstyleplugin_types.QStylePlugin, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
+  fcQStylePlugin_virtualbase_eventFilter(self.h, watched.h, event.h)
+
+proc QStylePlugintimerEvent*(self: gen_qstyleplugin_types.QStylePlugin, event: gen_qcoreevent_types.QTimerEvent): void =
+  fcQStylePlugin_virtualbase_timerEvent(self.h, event.h)
+
+proc QStylePluginchildEvent*(self: gen_qstyleplugin_types.QStylePlugin, event: gen_qcoreevent_types.QChildEvent): void =
+  fcQStylePlugin_virtualbase_childEvent(self.h, event.h)
+
+proc QStylePlugincustomEvent*(self: gen_qstyleplugin_types.QStylePlugin, event: gen_qcoreevent_types.QEvent): void =
+  fcQStylePlugin_virtualbase_customEvent(self.h, event.h)
+
+proc QStylePluginconnectNotify*(self: gen_qstyleplugin_types.QStylePlugin, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQStylePlugin_virtualbase_connectNotify(self.h, signal.h)
+
+proc QStylePlugindisconnectNotify*(self: gen_qstyleplugin_types.QStylePlugin, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQStylePlugin_virtualbase_disconnectNotify(self.h, signal.h)
+
 
 proc fcQStylePlugin_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QStylePluginVTable](fcQStylePlugin_vdata(self)[])
@@ -160,18 +191,12 @@ proc fcQStylePlugin_vtable_callback_metaObject(self: pointer): pointer {.cdecl.}
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QStylePluginmetacast*(self: gen_qstyleplugin_types.QStylePlugin, param1: cstring): pointer =
-  fcQStylePlugin_virtualbase_metacast(self.h, param1)
-
 proc fcQStylePlugin_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QStylePluginVTable](fcQStylePlugin_vdata(self)[])
   let self = QStylePlugin(h: self)
   let slotval1 = (param1)
   var virtualReturn = vtbl[].metacast(self, slotval1)
   virtualReturn
-
-proc QStylePluginmetacall*(self: gen_qstyleplugin_types.QStylePlugin, param1: cint, param2: cint, param3: pointer): cint =
-  fcQStylePlugin_virtualbase_metacall(self.h, cint(param1), param2, param3)
 
 proc fcQStylePlugin_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QStylePluginVTable](fcQStylePlugin_vdata(self)[])
@@ -195,18 +220,12 @@ proc fcQStylePlugin_vtable_callback_createX(self: pointer, key: struct_miqt_stri
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QStylePluginevent*(self: gen_qstyleplugin_types.QStylePlugin, event: gen_qcoreevent_types.QEvent): bool =
-  fcQStylePlugin_virtualbase_event(self.h, event.h)
-
 proc fcQStylePlugin_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QStylePluginVTable](fcQStylePlugin_vdata(self)[])
   let self = QStylePlugin(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
-
-proc QStylePlugineventFilter*(self: gen_qstyleplugin_types.QStylePlugin, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
-  fcQStylePlugin_virtualbase_eventFilter(self.h, watched.h, event.h)
 
 proc fcQStylePlugin_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QStylePluginVTable](fcQStylePlugin_vdata(self)[])
@@ -216,17 +235,11 @@ proc fcQStylePlugin_vtable_callback_eventFilter(self: pointer, watched: pointer,
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
-proc QStylePlugintimerEvent*(self: gen_qstyleplugin_types.QStylePlugin, event: gen_qcoreevent_types.QTimerEvent): void =
-  fcQStylePlugin_virtualbase_timerEvent(self.h, event.h)
-
 proc fcQStylePlugin_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QStylePluginVTable](fcQStylePlugin_vdata(self)[])
   let self = QStylePlugin(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
-
-proc QStylePluginchildEvent*(self: gen_qstyleplugin_types.QStylePlugin, event: gen_qcoreevent_types.QChildEvent): void =
-  fcQStylePlugin_virtualbase_childEvent(self.h, event.h)
 
 proc fcQStylePlugin_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QStylePluginVTable](fcQStylePlugin_vdata(self)[])
@@ -234,26 +247,17 @@ proc fcQStylePlugin_vtable_callback_childEvent(self: pointer, event: pointer): v
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
-proc QStylePlugincustomEvent*(self: gen_qstyleplugin_types.QStylePlugin, event: gen_qcoreevent_types.QEvent): void =
-  fcQStylePlugin_virtualbase_customEvent(self.h, event.h)
-
 proc fcQStylePlugin_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QStylePluginVTable](fcQStylePlugin_vdata(self)[])
   let self = QStylePlugin(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
-proc QStylePluginconnectNotify*(self: gen_qstyleplugin_types.QStylePlugin, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQStylePlugin_virtualbase_connectNotify(self.h, signal.h)
-
 proc fcQStylePlugin_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QStylePluginVTable](fcQStylePlugin_vdata(self)[])
   let self = QStylePlugin(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
-
-proc QStylePlugindisconnectNotify*(self: gen_qstyleplugin_types.QStylePlugin, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQStylePlugin_virtualbase_disconnectNotify(self.h, signal.h)
 
 proc fcQStylePlugin_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QStylePluginVTable](fcQStylePlugin_vdata(self)[])
@@ -263,23 +267,41 @@ proc fcQStylePlugin_vtable_callback_disconnectNotify(self: pointer, signal: poin
 
 type VirtualQStylePlugin* {.inheritable.} = ref object of QStylePlugin
   vtbl*: cQStylePluginVTable
+
 method metaObject*(self: VirtualQStylePlugin): gen_qobjectdefs_types.QMetaObject {.base.} =
   QStylePluginmetaObject(self[])
+method metacast*(self: VirtualQStylePlugin, param1: cstring): pointer {.base.} =
+  QStylePluginmetacast(self[], param1)
+method metacall*(self: VirtualQStylePlugin, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QStylePluginmetacall(self[], param1, param2, param3)
+method createX*(self: VirtualQStylePlugin, key: openArray[char]): gen_qstyle_types.QStyle {.base.} =
+  raiseAssert("missing implementation of QStylePlugin.createX")
+method event*(self: VirtualQStylePlugin, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QStylePluginevent(self[], event)
+method eventFilter*(self: VirtualQStylePlugin, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QStylePlugineventFilter(self[], watched, event)
+method timerEvent*(self: VirtualQStylePlugin, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QStylePlugintimerEvent(self[], event)
+method childEvent*(self: VirtualQStylePlugin, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QStylePluginchildEvent(self[], event)
+method customEvent*(self: VirtualQStylePlugin, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QStylePlugincustomEvent(self[], event)
+method connectNotify*(self: VirtualQStylePlugin, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QStylePluginconnectNotify(self[], signal)
+method disconnectNotify*(self: VirtualQStylePlugin, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QStylePlugindisconnectNotify(self[], signal)
+
 proc fcQStylePlugin_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQStylePlugin](fcQStylePlugin_vdata(self)[])
   var virtualReturn = inst.metaObject()
   virtualReturn.h
 
-method metacast*(self: VirtualQStylePlugin, param1: cstring): pointer {.base.} =
-  QStylePluginmetacast(self[], param1)
 proc fcQStylePlugin_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQStylePlugin](fcQStylePlugin_vdata(self)[])
   let slotval1 = (param1)
   var virtualReturn = inst.metacast(slotval1)
   virtualReturn
 
-method metacall*(self: VirtualQStylePlugin, param1: cint, param2: cint, param3: pointer): cint {.base.} =
-  QStylePluginmetacall(self[], param1, param2, param3)
 proc fcQStylePlugin_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQStylePlugin](fcQStylePlugin_vdata(self)[])
   let slotval1 = cint(param1)
@@ -288,8 +310,6 @@ proc fcQStylePlugin_method_callback_metacall(self: pointer, param1: cint, param2
   var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
-method createX*(self: VirtualQStylePlugin, key: openArray[char]): gen_qstyle_types.QStyle {.base.} =
-  raiseAssert("missing implementation of QStylePlugin_virtualbase_create")
 proc fcQStylePlugin_method_callback_createX(self: pointer, key: struct_miqt_string): pointer {.cdecl.} =
   let inst = cast[VirtualQStylePlugin](fcQStylePlugin_vdata(self)[])
   let vkey_ms = key
@@ -299,16 +319,12 @@ proc fcQStylePlugin_method_callback_createX(self: pointer, key: struct_miqt_stri
   var virtualReturn = inst.createX(slotval1)
   virtualReturn.h
 
-method event*(self: VirtualQStylePlugin, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QStylePluginevent(self[], event)
 proc fcQStylePlugin_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQStylePlugin](fcQStylePlugin_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
-method eventFilter*(self: VirtualQStylePlugin, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QStylePlugineventFilter(self[], watched, event)
 proc fcQStylePlugin_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQStylePlugin](fcQStylePlugin_vdata(self)[])
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
@@ -316,40 +332,31 @@ proc fcQStylePlugin_method_callback_eventFilter(self: pointer, watched: pointer,
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
-method timerEvent*(self: VirtualQStylePlugin, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
-  QStylePlugintimerEvent(self[], event)
 proc fcQStylePlugin_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQStylePlugin](fcQStylePlugin_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
-method childEvent*(self: VirtualQStylePlugin, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
-  QStylePluginchildEvent(self[], event)
 proc fcQStylePlugin_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQStylePlugin](fcQStylePlugin_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
-method customEvent*(self: VirtualQStylePlugin, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QStylePlugincustomEvent(self[], event)
 proc fcQStylePlugin_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQStylePlugin](fcQStylePlugin_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
-method connectNotify*(self: VirtualQStylePlugin, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QStylePluginconnectNotify(self[], signal)
 proc fcQStylePlugin_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQStylePlugin](fcQStylePlugin_vdata(self)[])
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
-method disconnectNotify*(self: VirtualQStylePlugin, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QStylePlugindisconnectNotify(self[], signal)
 proc fcQStylePlugin_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQStylePlugin](fcQStylePlugin_vdata(self)[])
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
+
 
 proc sender*(self: gen_qstyleplugin_types.QStylePlugin): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQStylePlugin_protectedbase_sender(self.h), owned: false)

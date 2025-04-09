@@ -94,6 +94,7 @@ proc fcQUndoGroup_createUndoAction2(self: pointer, parent: pointer, prefix: stru
 proc fcQUndoGroup_createRedoAction2(self: pointer, parent: pointer, prefix: struct_miqt_string): pointer {.importc: "QUndoGroup_createRedoAction2".}
 proc fcQUndoGroup_vdata(self: pointer): ptr pointer {.importc: "QUndoGroup_vdata".}
 proc fvdata_cQUndoGroup(self: pointer): pointer {.importc: "vdata_QUndoGroup".}
+
 type cQUndoGroupVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -207,7 +208,7 @@ proc fcQUndoGroup_slot_callback_activeStackChanged_release(slot: int) {.cdecl.} 
   let nimfunc = cast[ref QUndoGroupactiveStackChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onactiveStackChanged*(self: gen_qundogroup_types.QUndoGroup, slot: QUndoGroupactiveStackChangedSlot) =
+proc onActiveStackChanged*(self: gen_qundogroup_types.QUndoGroup, slot: QUndoGroupactiveStackChangedSlot) =
   var tmp = new QUndoGroupactiveStackChangedSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -227,7 +228,7 @@ proc fcQUndoGroup_slot_callback_indexChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QUndoGroupindexChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onindexChanged*(self: gen_qundogroup_types.QUndoGroup, slot: QUndoGroupindexChangedSlot) =
+proc onIndexChanged*(self: gen_qundogroup_types.QUndoGroup, slot: QUndoGroupindexChangedSlot) =
   var tmp = new QUndoGroupindexChangedSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -247,7 +248,7 @@ proc fcQUndoGroup_slot_callback_cleanChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QUndoGroupcleanChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc oncleanChanged*(self: gen_qundogroup_types.QUndoGroup, slot: QUndoGroupcleanChangedSlot) =
+proc onCleanChanged*(self: gen_qundogroup_types.QUndoGroup, slot: QUndoGroupcleanChangedSlot) =
   var tmp = new QUndoGroupcleanChangedSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -267,7 +268,7 @@ proc fcQUndoGroup_slot_callback_canUndoChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QUndoGroupcanUndoChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc oncanUndoChanged*(self: gen_qundogroup_types.QUndoGroup, slot: QUndoGroupcanUndoChangedSlot) =
+proc onCanUndoChanged*(self: gen_qundogroup_types.QUndoGroup, slot: QUndoGroupcanUndoChangedSlot) =
   var tmp = new QUndoGroupcanUndoChangedSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -287,7 +288,7 @@ proc fcQUndoGroup_slot_callback_canRedoChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QUndoGroupcanRedoChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc oncanRedoChanged*(self: gen_qundogroup_types.QUndoGroup, slot: QUndoGroupcanRedoChangedSlot) =
+proc onCanRedoChanged*(self: gen_qundogroup_types.QUndoGroup, slot: QUndoGroupcanRedoChangedSlot) =
   var tmp = new QUndoGroupcanRedoChangedSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -310,7 +311,7 @@ proc fcQUndoGroup_slot_callback_undoTextChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QUndoGroupundoTextChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onundoTextChanged*(self: gen_qundogroup_types.QUndoGroup, slot: QUndoGroupundoTextChangedSlot) =
+proc onUndoTextChanged*(self: gen_qundogroup_types.QUndoGroup, slot: QUndoGroupundoTextChangedSlot) =
   var tmp = new QUndoGroupundoTextChangedSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -333,7 +334,7 @@ proc fcQUndoGroup_slot_callback_redoTextChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QUndoGroupredoTextChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onredoTextChanged*(self: gen_qundogroup_types.QUndoGroup, slot: QUndoGroupredoTextChangedSlot) =
+proc onRedoTextChanged*(self: gen_qundogroup_types.QUndoGroup, slot: QUndoGroupredoTextChangedSlot) =
   var tmp = new QUndoGroupredoTextChangedSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -367,6 +368,7 @@ type QUndoGroupchildEventProc* = proc(self: QUndoGroup, event: gen_qcoreevent_ty
 type QUndoGroupcustomEventProc* = proc(self: QUndoGroup, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QUndoGroupconnectNotifyProc* = proc(self: QUndoGroup, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QUndoGroupdisconnectNotifyProc* = proc(self: QUndoGroup, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+
 type QUndoGroupVTable* {.inheritable, pure.} = object
   vtbl: cQUndoGroupVTable
   metaObject*: QUndoGroupmetaObjectProc
@@ -379,8 +381,37 @@ type QUndoGroupVTable* {.inheritable, pure.} = object
   customEvent*: QUndoGroupcustomEventProc
   connectNotify*: QUndoGroupconnectNotifyProc
   disconnectNotify*: QUndoGroupdisconnectNotifyProc
+
 proc QUndoGroupmetaObject*(self: gen_qundogroup_types.QUndoGroup): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQUndoGroup_virtualbase_metaObject(self.h), owned: false)
+
+proc QUndoGroupmetacast*(self: gen_qundogroup_types.QUndoGroup, param1: cstring): pointer =
+  fcQUndoGroup_virtualbase_metacast(self.h, param1)
+
+proc QUndoGroupmetacall*(self: gen_qundogroup_types.QUndoGroup, param1: cint, param2: cint, param3: pointer): cint =
+  fcQUndoGroup_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+proc QUndoGroupevent*(self: gen_qundogroup_types.QUndoGroup, event: gen_qcoreevent_types.QEvent): bool =
+  fcQUndoGroup_virtualbase_event(self.h, event.h)
+
+proc QUndoGroupeventFilter*(self: gen_qundogroup_types.QUndoGroup, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
+  fcQUndoGroup_virtualbase_eventFilter(self.h, watched.h, event.h)
+
+proc QUndoGrouptimerEvent*(self: gen_qundogroup_types.QUndoGroup, event: gen_qcoreevent_types.QTimerEvent): void =
+  fcQUndoGroup_virtualbase_timerEvent(self.h, event.h)
+
+proc QUndoGroupchildEvent*(self: gen_qundogroup_types.QUndoGroup, event: gen_qcoreevent_types.QChildEvent): void =
+  fcQUndoGroup_virtualbase_childEvent(self.h, event.h)
+
+proc QUndoGroupcustomEvent*(self: gen_qundogroup_types.QUndoGroup, event: gen_qcoreevent_types.QEvent): void =
+  fcQUndoGroup_virtualbase_customEvent(self.h, event.h)
+
+proc QUndoGroupconnectNotify*(self: gen_qundogroup_types.QUndoGroup, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQUndoGroup_virtualbase_connectNotify(self.h, signal.h)
+
+proc QUndoGroupdisconnectNotify*(self: gen_qundogroup_types.QUndoGroup, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQUndoGroup_virtualbase_disconnectNotify(self.h, signal.h)
+
 
 proc fcQUndoGroup_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QUndoGroupVTable](fcQUndoGroup_vdata(self)[])
@@ -391,18 +422,12 @@ proc fcQUndoGroup_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QUndoGroupmetacast*(self: gen_qundogroup_types.QUndoGroup, param1: cstring): pointer =
-  fcQUndoGroup_virtualbase_metacast(self.h, param1)
-
 proc fcQUndoGroup_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QUndoGroupVTable](fcQUndoGroup_vdata(self)[])
   let self = QUndoGroup(h: self)
   let slotval1 = (param1)
   var virtualReturn = vtbl[].metacast(self, slotval1)
   virtualReturn
-
-proc QUndoGroupmetacall*(self: gen_qundogroup_types.QUndoGroup, param1: cint, param2: cint, param3: pointer): cint =
-  fcQUndoGroup_virtualbase_metacall(self.h, cint(param1), param2, param3)
 
 proc fcQUndoGroup_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QUndoGroupVTable](fcQUndoGroup_vdata(self)[])
@@ -413,18 +438,12 @@ proc fcQUndoGroup_vtable_callback_metacall(self: pointer, param1: cint, param2: 
   var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QUndoGroupevent*(self: gen_qundogroup_types.QUndoGroup, event: gen_qcoreevent_types.QEvent): bool =
-  fcQUndoGroup_virtualbase_event(self.h, event.h)
-
 proc fcQUndoGroup_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QUndoGroupVTable](fcQUndoGroup_vdata(self)[])
   let self = QUndoGroup(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
-
-proc QUndoGroupeventFilter*(self: gen_qundogroup_types.QUndoGroup, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
-  fcQUndoGroup_virtualbase_eventFilter(self.h, watched.h, event.h)
 
 proc fcQUndoGroup_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QUndoGroupVTable](fcQUndoGroup_vdata(self)[])
@@ -434,17 +453,11 @@ proc fcQUndoGroup_vtable_callback_eventFilter(self: pointer, watched: pointer, e
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
-proc QUndoGrouptimerEvent*(self: gen_qundogroup_types.QUndoGroup, event: gen_qcoreevent_types.QTimerEvent): void =
-  fcQUndoGroup_virtualbase_timerEvent(self.h, event.h)
-
 proc fcQUndoGroup_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QUndoGroupVTable](fcQUndoGroup_vdata(self)[])
   let self = QUndoGroup(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
-
-proc QUndoGroupchildEvent*(self: gen_qundogroup_types.QUndoGroup, event: gen_qcoreevent_types.QChildEvent): void =
-  fcQUndoGroup_virtualbase_childEvent(self.h, event.h)
 
 proc fcQUndoGroup_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QUndoGroupVTable](fcQUndoGroup_vdata(self)[])
@@ -452,26 +465,17 @@ proc fcQUndoGroup_vtable_callback_childEvent(self: pointer, event: pointer): voi
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
-proc QUndoGroupcustomEvent*(self: gen_qundogroup_types.QUndoGroup, event: gen_qcoreevent_types.QEvent): void =
-  fcQUndoGroup_virtualbase_customEvent(self.h, event.h)
-
 proc fcQUndoGroup_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QUndoGroupVTable](fcQUndoGroup_vdata(self)[])
   let self = QUndoGroup(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
-proc QUndoGroupconnectNotify*(self: gen_qundogroup_types.QUndoGroup, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQUndoGroup_virtualbase_connectNotify(self.h, signal.h)
-
 proc fcQUndoGroup_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QUndoGroupVTable](fcQUndoGroup_vdata(self)[])
   let self = QUndoGroup(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
-
-proc QUndoGroupdisconnectNotify*(self: gen_qundogroup_types.QUndoGroup, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQUndoGroup_virtualbase_disconnectNotify(self.h, signal.h)
 
 proc fcQUndoGroup_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QUndoGroupVTable](fcQUndoGroup_vdata(self)[])
@@ -481,23 +485,39 @@ proc fcQUndoGroup_vtable_callback_disconnectNotify(self: pointer, signal: pointe
 
 type VirtualQUndoGroup* {.inheritable.} = ref object of QUndoGroup
   vtbl*: cQUndoGroupVTable
+
 method metaObject*(self: VirtualQUndoGroup): gen_qobjectdefs_types.QMetaObject {.base.} =
   QUndoGroupmetaObject(self[])
+method metacast*(self: VirtualQUndoGroup, param1: cstring): pointer {.base.} =
+  QUndoGroupmetacast(self[], param1)
+method metacall*(self: VirtualQUndoGroup, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QUndoGroupmetacall(self[], param1, param2, param3)
+method event*(self: VirtualQUndoGroup, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QUndoGroupevent(self[], event)
+method eventFilter*(self: VirtualQUndoGroup, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QUndoGroupeventFilter(self[], watched, event)
+method timerEvent*(self: VirtualQUndoGroup, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QUndoGrouptimerEvent(self[], event)
+method childEvent*(self: VirtualQUndoGroup, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QUndoGroupchildEvent(self[], event)
+method customEvent*(self: VirtualQUndoGroup, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QUndoGroupcustomEvent(self[], event)
+method connectNotify*(self: VirtualQUndoGroup, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QUndoGroupconnectNotify(self[], signal)
+method disconnectNotify*(self: VirtualQUndoGroup, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QUndoGroupdisconnectNotify(self[], signal)
+
 proc fcQUndoGroup_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQUndoGroup](fcQUndoGroup_vdata(self)[])
   var virtualReturn = inst.metaObject()
   virtualReturn.h
 
-method metacast*(self: VirtualQUndoGroup, param1: cstring): pointer {.base.} =
-  QUndoGroupmetacast(self[], param1)
 proc fcQUndoGroup_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQUndoGroup](fcQUndoGroup_vdata(self)[])
   let slotval1 = (param1)
   var virtualReturn = inst.metacast(slotval1)
   virtualReturn
 
-method metacall*(self: VirtualQUndoGroup, param1: cint, param2: cint, param3: pointer): cint {.base.} =
-  QUndoGroupmetacall(self[], param1, param2, param3)
 proc fcQUndoGroup_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQUndoGroup](fcQUndoGroup_vdata(self)[])
   let slotval1 = cint(param1)
@@ -506,16 +526,12 @@ proc fcQUndoGroup_method_callback_metacall(self: pointer, param1: cint, param2: 
   var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
-method event*(self: VirtualQUndoGroup, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QUndoGroupevent(self[], event)
 proc fcQUndoGroup_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQUndoGroup](fcQUndoGroup_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
-method eventFilter*(self: VirtualQUndoGroup, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QUndoGroupeventFilter(self[], watched, event)
 proc fcQUndoGroup_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQUndoGroup](fcQUndoGroup_vdata(self)[])
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
@@ -523,40 +539,31 @@ proc fcQUndoGroup_method_callback_eventFilter(self: pointer, watched: pointer, e
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
-method timerEvent*(self: VirtualQUndoGroup, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
-  QUndoGrouptimerEvent(self[], event)
 proc fcQUndoGroup_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQUndoGroup](fcQUndoGroup_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
-method childEvent*(self: VirtualQUndoGroup, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
-  QUndoGroupchildEvent(self[], event)
 proc fcQUndoGroup_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQUndoGroup](fcQUndoGroup_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
-method customEvent*(self: VirtualQUndoGroup, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QUndoGroupcustomEvent(self[], event)
 proc fcQUndoGroup_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQUndoGroup](fcQUndoGroup_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
-method connectNotify*(self: VirtualQUndoGroup, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QUndoGroupconnectNotify(self[], signal)
 proc fcQUndoGroup_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQUndoGroup](fcQUndoGroup_vdata(self)[])
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
-method disconnectNotify*(self: VirtualQUndoGroup, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QUndoGroupdisconnectNotify(self[], signal)
 proc fcQUndoGroup_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQUndoGroup](fcQUndoGroup_vdata(self)[])
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
+
 
 proc sender*(self: gen_qundogroup_types.QUndoGroup): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQUndoGroup_protectedbase_sender(self.h), owned: false)

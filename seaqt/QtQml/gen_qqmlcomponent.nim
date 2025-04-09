@@ -113,6 +113,7 @@ proc fcQQmlComponent_create2(self: pointer, param1: pointer, context: pointer): 
 proc fcQQmlComponent_create3(self: pointer, param1: pointer, context: pointer, forContext: pointer): void {.importc: "QQmlComponent_create3".}
 proc fcQQmlComponent_vdata(self: pointer): ptr pointer {.importc: "QQmlComponent_vdata".}
 proc fvdata_cQQmlComponent(self: pointer): pointer {.importc: "vdata_QQmlComponent".}
+
 type cQQmlComponentVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -285,7 +286,7 @@ proc fcQQmlComponent_slot_callback_statusChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QQmlComponentstatusChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onstatusChanged*(self: gen_qqmlcomponent_types.QQmlComponent, slot: QQmlComponentstatusChangedSlot) =
+proc onStatusChanged*(self: gen_qqmlcomponent_types.QQmlComponent, slot: QQmlComponentstatusChangedSlot) =
   var tmp = new QQmlComponentstatusChangedSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -305,7 +306,7 @@ proc fcQQmlComponent_slot_callback_progressChanged_release(slot: int) {.cdecl.} 
   let nimfunc = cast[ref QQmlComponentprogressChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onprogressChanged*(self: gen_qqmlcomponent_types.QQmlComponent, slot: QQmlComponentprogressChangedSlot) =
+proc onProgressChanged*(self: gen_qqmlcomponent_types.QQmlComponent, slot: QQmlComponentprogressChangedSlot) =
   var tmp = new QQmlComponentprogressChangedSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -356,6 +357,7 @@ type QQmlComponentchildEventProc* = proc(self: QQmlComponent, event: gen_qcoreev
 type QQmlComponentcustomEventProc* = proc(self: QQmlComponent, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QQmlComponentconnectNotifyProc* = proc(self: QQmlComponent, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QQmlComponentdisconnectNotifyProc* = proc(self: QQmlComponent, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+
 type QQmlComponentVTable* {.inheritable, pure.} = object
   vtbl: cQQmlComponentVTable
   metaObject*: QQmlComponentmetaObjectProc
@@ -371,8 +373,46 @@ type QQmlComponentVTable* {.inheritable, pure.} = object
   customEvent*: QQmlComponentcustomEventProc
   connectNotify*: QQmlComponentconnectNotifyProc
   disconnectNotify*: QQmlComponentdisconnectNotifyProc
+
 proc QQmlComponentmetaObject*(self: gen_qqmlcomponent_types.QQmlComponent): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQQmlComponent_virtualbase_metaObject(self.h), owned: false)
+
+proc QQmlComponentmetacast*(self: gen_qqmlcomponent_types.QQmlComponent, param1: cstring): pointer =
+  fcQQmlComponent_virtualbase_metacast(self.h, param1)
+
+proc QQmlComponentmetacall*(self: gen_qqmlcomponent_types.QQmlComponent, param1: cint, param2: cint, param3: pointer): cint =
+  fcQQmlComponent_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+proc QQmlComponentcreateX*(self: gen_qqmlcomponent_types.QQmlComponent, context: gen_qqmlcontext_types.QQmlContext): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQQmlComponent_virtualbase_createX(self.h, context.h), owned: false)
+
+proc QQmlComponentbeginCreate*(self: gen_qqmlcomponent_types.QQmlComponent, param1: gen_qqmlcontext_types.QQmlContext): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQQmlComponent_virtualbase_beginCreate(self.h, param1.h), owned: false)
+
+proc QQmlComponentcompleteCreate*(self: gen_qqmlcomponent_types.QQmlComponent): void =
+  fcQQmlComponent_virtualbase_completeCreate(self.h)
+
+proc QQmlComponentevent*(self: gen_qqmlcomponent_types.QQmlComponent, event: gen_qcoreevent_types.QEvent): bool =
+  fcQQmlComponent_virtualbase_event(self.h, event.h)
+
+proc QQmlComponenteventFilter*(self: gen_qqmlcomponent_types.QQmlComponent, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
+  fcQQmlComponent_virtualbase_eventFilter(self.h, watched.h, event.h)
+
+proc QQmlComponenttimerEvent*(self: gen_qqmlcomponent_types.QQmlComponent, event: gen_qcoreevent_types.QTimerEvent): void =
+  fcQQmlComponent_virtualbase_timerEvent(self.h, event.h)
+
+proc QQmlComponentchildEvent*(self: gen_qqmlcomponent_types.QQmlComponent, event: gen_qcoreevent_types.QChildEvent): void =
+  fcQQmlComponent_virtualbase_childEvent(self.h, event.h)
+
+proc QQmlComponentcustomEvent*(self: gen_qqmlcomponent_types.QQmlComponent, event: gen_qcoreevent_types.QEvent): void =
+  fcQQmlComponent_virtualbase_customEvent(self.h, event.h)
+
+proc QQmlComponentconnectNotify*(self: gen_qqmlcomponent_types.QQmlComponent, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQQmlComponent_virtualbase_connectNotify(self.h, signal.h)
+
+proc QQmlComponentdisconnectNotify*(self: gen_qqmlcomponent_types.QQmlComponent, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQQmlComponent_virtualbase_disconnectNotify(self.h, signal.h)
+
 
 proc fcQQmlComponent_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QQmlComponentVTable](fcQQmlComponent_vdata(self)[])
@@ -383,18 +423,12 @@ proc fcQQmlComponent_vtable_callback_metaObject(self: pointer): pointer {.cdecl.
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QQmlComponentmetacast*(self: gen_qqmlcomponent_types.QQmlComponent, param1: cstring): pointer =
-  fcQQmlComponent_virtualbase_metacast(self.h, param1)
-
 proc fcQQmlComponent_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QQmlComponentVTable](fcQQmlComponent_vdata(self)[])
   let self = QQmlComponent(h: self)
   let slotval1 = (param1)
   var virtualReturn = vtbl[].metacast(self, slotval1)
   virtualReturn
-
-proc QQmlComponentmetacall*(self: gen_qqmlcomponent_types.QQmlComponent, param1: cint, param2: cint, param3: pointer): cint =
-  fcQQmlComponent_virtualbase_metacall(self.h, cint(param1), param2, param3)
 
 proc fcQQmlComponent_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QQmlComponentVTable](fcQQmlComponent_vdata(self)[])
@@ -404,9 +438,6 @@ proc fcQQmlComponent_vtable_callback_metacall(self: pointer, param1: cint, param
   let slotval3 = param3
   var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
-
-proc QQmlComponentcreateX*(self: gen_qqmlcomponent_types.QQmlComponent, context: gen_qqmlcontext_types.QQmlContext): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQQmlComponent_virtualbase_createX(self.h, context.h), owned: false)
 
 proc fcQQmlComponent_vtable_callback_createX(self: pointer, context: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QQmlComponentVTable](fcQQmlComponent_vdata(self)[])
@@ -418,9 +449,6 @@ proc fcQQmlComponent_vtable_callback_createX(self: pointer, context: pointer): p
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QQmlComponentbeginCreate*(self: gen_qqmlcomponent_types.QQmlComponent, param1: gen_qqmlcontext_types.QQmlContext): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQQmlComponent_virtualbase_beginCreate(self.h, param1.h), owned: false)
-
 proc fcQQmlComponent_vtable_callback_beginCreate(self: pointer, param1: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QQmlComponentVTable](fcQQmlComponent_vdata(self)[])
   let self = QQmlComponent(h: self)
@@ -431,16 +459,10 @@ proc fcQQmlComponent_vtable_callback_beginCreate(self: pointer, param1: pointer)
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QQmlComponentcompleteCreate*(self: gen_qqmlcomponent_types.QQmlComponent): void =
-  fcQQmlComponent_virtualbase_completeCreate(self.h)
-
 proc fcQQmlComponent_vtable_callback_completeCreate(self: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QQmlComponentVTable](fcQQmlComponent_vdata(self)[])
   let self = QQmlComponent(h: self)
   vtbl[].completeCreate(self)
-
-proc QQmlComponentevent*(self: gen_qqmlcomponent_types.QQmlComponent, event: gen_qcoreevent_types.QEvent): bool =
-  fcQQmlComponent_virtualbase_event(self.h, event.h)
 
 proc fcQQmlComponent_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QQmlComponentVTable](fcQQmlComponent_vdata(self)[])
@@ -448,9 +470,6 @@ proc fcQQmlComponent_vtable_callback_event(self: pointer, event: pointer): bool 
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
-
-proc QQmlComponenteventFilter*(self: gen_qqmlcomponent_types.QQmlComponent, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
-  fcQQmlComponent_virtualbase_eventFilter(self.h, watched.h, event.h)
 
 proc fcQQmlComponent_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QQmlComponentVTable](fcQQmlComponent_vdata(self)[])
@@ -460,17 +479,11 @@ proc fcQQmlComponent_vtable_callback_eventFilter(self: pointer, watched: pointer
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
-proc QQmlComponenttimerEvent*(self: gen_qqmlcomponent_types.QQmlComponent, event: gen_qcoreevent_types.QTimerEvent): void =
-  fcQQmlComponent_virtualbase_timerEvent(self.h, event.h)
-
 proc fcQQmlComponent_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QQmlComponentVTable](fcQQmlComponent_vdata(self)[])
   let self = QQmlComponent(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
-
-proc QQmlComponentchildEvent*(self: gen_qqmlcomponent_types.QQmlComponent, event: gen_qcoreevent_types.QChildEvent): void =
-  fcQQmlComponent_virtualbase_childEvent(self.h, event.h)
 
 proc fcQQmlComponent_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QQmlComponentVTable](fcQQmlComponent_vdata(self)[])
@@ -478,26 +491,17 @@ proc fcQQmlComponent_vtable_callback_childEvent(self: pointer, event: pointer): 
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
-proc QQmlComponentcustomEvent*(self: gen_qqmlcomponent_types.QQmlComponent, event: gen_qcoreevent_types.QEvent): void =
-  fcQQmlComponent_virtualbase_customEvent(self.h, event.h)
-
 proc fcQQmlComponent_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QQmlComponentVTable](fcQQmlComponent_vdata(self)[])
   let self = QQmlComponent(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
-proc QQmlComponentconnectNotify*(self: gen_qqmlcomponent_types.QQmlComponent, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQQmlComponent_virtualbase_connectNotify(self.h, signal.h)
-
 proc fcQQmlComponent_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QQmlComponentVTable](fcQQmlComponent_vdata(self)[])
   let self = QQmlComponent(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
-
-proc QQmlComponentdisconnectNotify*(self: gen_qqmlcomponent_types.QQmlComponent, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQQmlComponent_virtualbase_disconnectNotify(self.h, signal.h)
 
 proc fcQQmlComponent_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QQmlComponentVTable](fcQQmlComponent_vdata(self)[])
@@ -507,23 +511,45 @@ proc fcQQmlComponent_vtable_callback_disconnectNotify(self: pointer, signal: poi
 
 type VirtualQQmlComponent* {.inheritable.} = ref object of QQmlComponent
   vtbl*: cQQmlComponentVTable
+
 method metaObject*(self: VirtualQQmlComponent): gen_qobjectdefs_types.QMetaObject {.base.} =
   QQmlComponentmetaObject(self[])
+method metacast*(self: VirtualQQmlComponent, param1: cstring): pointer {.base.} =
+  QQmlComponentmetacast(self[], param1)
+method metacall*(self: VirtualQQmlComponent, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QQmlComponentmetacall(self[], param1, param2, param3)
+method createX*(self: VirtualQQmlComponent, context: gen_qqmlcontext_types.QQmlContext): gen_qobject_types.QObject {.base.} =
+  QQmlComponentcreateX(self[], context)
+method beginCreate*(self: VirtualQQmlComponent, param1: gen_qqmlcontext_types.QQmlContext): gen_qobject_types.QObject {.base.} =
+  QQmlComponentbeginCreate(self[], param1)
+method completeCreate*(self: VirtualQQmlComponent): void {.base.} =
+  QQmlComponentcompleteCreate(self[])
+method event*(self: VirtualQQmlComponent, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QQmlComponentevent(self[], event)
+method eventFilter*(self: VirtualQQmlComponent, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QQmlComponenteventFilter(self[], watched, event)
+method timerEvent*(self: VirtualQQmlComponent, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QQmlComponenttimerEvent(self[], event)
+method childEvent*(self: VirtualQQmlComponent, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QQmlComponentchildEvent(self[], event)
+method customEvent*(self: VirtualQQmlComponent, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QQmlComponentcustomEvent(self[], event)
+method connectNotify*(self: VirtualQQmlComponent, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QQmlComponentconnectNotify(self[], signal)
+method disconnectNotify*(self: VirtualQQmlComponent, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QQmlComponentdisconnectNotify(self[], signal)
+
 proc fcQQmlComponent_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQQmlComponent](fcQQmlComponent_vdata(self)[])
   var virtualReturn = inst.metaObject()
   virtualReturn.h
 
-method metacast*(self: VirtualQQmlComponent, param1: cstring): pointer {.base.} =
-  QQmlComponentmetacast(self[], param1)
 proc fcQQmlComponent_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQQmlComponent](fcQQmlComponent_vdata(self)[])
   let slotval1 = (param1)
   var virtualReturn = inst.metacast(slotval1)
   virtualReturn
 
-method metacall*(self: VirtualQQmlComponent, param1: cint, param2: cint, param3: pointer): cint {.base.} =
-  QQmlComponentmetacall(self[], param1, param2, param3)
 proc fcQQmlComponent_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQQmlComponent](fcQQmlComponent_vdata(self)[])
   let slotval1 = cint(param1)
@@ -532,38 +558,28 @@ proc fcQQmlComponent_method_callback_metacall(self: pointer, param1: cint, param
   var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
-method createX*(self: VirtualQQmlComponent, context: gen_qqmlcontext_types.QQmlContext): gen_qobject_types.QObject {.base.} =
-  QQmlComponentcreateX(self[], context)
 proc fcQQmlComponent_method_callback_createX(self: pointer, context: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQQmlComponent](fcQQmlComponent_vdata(self)[])
   let slotval1 = gen_qqmlcontext_types.QQmlContext(h: context, owned: false)
   var virtualReturn = inst.createX(slotval1)
   virtualReturn.h
 
-method beginCreate*(self: VirtualQQmlComponent, param1: gen_qqmlcontext_types.QQmlContext): gen_qobject_types.QObject {.base.} =
-  QQmlComponentbeginCreate(self[], param1)
 proc fcQQmlComponent_method_callback_beginCreate(self: pointer, param1: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQQmlComponent](fcQQmlComponent_vdata(self)[])
   let slotval1 = gen_qqmlcontext_types.QQmlContext(h: param1, owned: false)
   var virtualReturn = inst.beginCreate(slotval1)
   virtualReturn.h
 
-method completeCreate*(self: VirtualQQmlComponent): void {.base.} =
-  QQmlComponentcompleteCreate(self[])
 proc fcQQmlComponent_method_callback_completeCreate(self: pointer): void {.cdecl.} =
   let inst = cast[VirtualQQmlComponent](fcQQmlComponent_vdata(self)[])
   inst.completeCreate()
 
-method event*(self: VirtualQQmlComponent, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QQmlComponentevent(self[], event)
 proc fcQQmlComponent_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQQmlComponent](fcQQmlComponent_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
-method eventFilter*(self: VirtualQQmlComponent, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QQmlComponenteventFilter(self[], watched, event)
 proc fcQQmlComponent_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQQmlComponent](fcQQmlComponent_vdata(self)[])
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
@@ -571,40 +587,31 @@ proc fcQQmlComponent_method_callback_eventFilter(self: pointer, watched: pointer
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
-method timerEvent*(self: VirtualQQmlComponent, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
-  QQmlComponenttimerEvent(self[], event)
 proc fcQQmlComponent_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQQmlComponent](fcQQmlComponent_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
-method childEvent*(self: VirtualQQmlComponent, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
-  QQmlComponentchildEvent(self[], event)
 proc fcQQmlComponent_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQQmlComponent](fcQQmlComponent_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
-method customEvent*(self: VirtualQQmlComponent, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QQmlComponentcustomEvent(self[], event)
 proc fcQQmlComponent_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQQmlComponent](fcQQmlComponent_vdata(self)[])
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
-method connectNotify*(self: VirtualQQmlComponent, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QQmlComponentconnectNotify(self[], signal)
 proc fcQQmlComponent_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQQmlComponent](fcQQmlComponent_vdata(self)[])
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
-method disconnectNotify*(self: VirtualQQmlComponent, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QQmlComponentdisconnectNotify(self[], signal)
 proc fcQQmlComponent_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQQmlComponent](fcQQmlComponent_vdata(self)[])
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
+
 
 proc createObject*(self: gen_qqmlcomponent_types.QQmlComponent): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQQmlComponent_protectedbase_createObject2(self.h), owned: false)

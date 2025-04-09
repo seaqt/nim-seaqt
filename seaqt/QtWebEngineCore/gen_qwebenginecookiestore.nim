@@ -121,7 +121,7 @@ proc fcQWebEngineCookieStore_slot_callback_cookieAdded_release(slot: int) {.cdec
   let nimfunc = cast[ref QWebEngineCookieStorecookieAddedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc oncookieAdded*(self: gen_qwebenginecookiestore_types.QWebEngineCookieStore, slot: QWebEngineCookieStorecookieAddedSlot) =
+proc onCookieAdded*(self: gen_qwebenginecookiestore_types.QWebEngineCookieStore, slot: QWebEngineCookieStorecookieAddedSlot) =
   var tmp = new QWebEngineCookieStorecookieAddedSlot
   tmp[] = slot
   GC_ref(tmp)
@@ -141,7 +141,7 @@ proc fcQWebEngineCookieStore_slot_callback_cookieRemoved_release(slot: int) {.cd
   let nimfunc = cast[ref QWebEngineCookieStorecookieRemovedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc oncookieRemoved*(self: gen_qwebenginecookiestore_types.QWebEngineCookieStore, slot: QWebEngineCookieStorecookieRemovedSlot) =
+proc onCookieRemoved*(self: gen_qwebenginecookiestore_types.QWebEngineCookieStore, slot: QWebEngineCookieStorecookieRemovedSlot) =
   var tmp = new QWebEngineCookieStorecookieRemovedSlot
   tmp[] = slot
   GC_ref(tmp)

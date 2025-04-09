@@ -97,7 +97,7 @@ proc fcQSGTextureProvider_slot_callback_textureChanged_release(slot: int) {.cdec
   let nimfunc = cast[ref QSGTextureProvidertextureChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc ontextureChanged*(self: gen_qsgtextureprovider_types.QSGTextureProvider, slot: QSGTextureProvidertextureChangedSlot) =
+proc onTextureChanged*(self: gen_qsgtextureprovider_types.QSGTextureProvider, slot: QSGTextureProvidertextureChangedSlot) =
   var tmp = new QSGTextureProvidertextureChangedSlot
   tmp[] = slot
   GC_ref(tmp)

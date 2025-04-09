@@ -72,6 +72,7 @@ proc fcQSGSimpleTextureNode_setOwnsTexture(self: pointer, owns: bool): void {.im
 proc fcQSGSimpleTextureNode_ownsTexture(self: pointer): bool {.importc: "QSGSimpleTextureNode_ownsTexture".}
 proc fcQSGSimpleTextureNode_vdata(self: pointer): ptr pointer {.importc: "QSGSimpleTextureNode_vdata".}
 proc fvdata_cQSGSimpleTextureNode(self: pointer): pointer {.importc: "vdata_QSGSimpleTextureNode".}
+
 type cQSGSimpleTextureNodeVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   isSubtreeBlocked*: proc(self: pointer): bool {.cdecl, raises: [], gcsafe.}
@@ -124,21 +125,24 @@ proc ownsTexture*(self: gen_qsgsimpletexturenode_types.QSGSimpleTextureNode): bo
 
 type QSGSimpleTextureNodeisSubtreeBlockedProc* = proc(self: QSGSimpleTextureNode): bool {.raises: [], gcsafe.}
 type QSGSimpleTextureNodepreprocessProc* = proc(self: QSGSimpleTextureNode): void {.raises: [], gcsafe.}
+
 type QSGSimpleTextureNodeVTable* {.inheritable, pure.} = object
   vtbl: cQSGSimpleTextureNodeVTable
   isSubtreeBlocked*: QSGSimpleTextureNodeisSubtreeBlockedProc
   preprocess*: QSGSimpleTextureNodepreprocessProc
+
 proc QSGSimpleTextureNodeisSubtreeBlocked*(self: gen_qsgsimpletexturenode_types.QSGSimpleTextureNode): bool =
   fcQSGSimpleTextureNode_virtualbase_isSubtreeBlocked(self.h)
+
+proc QSGSimpleTextureNodepreprocess*(self: gen_qsgsimpletexturenode_types.QSGSimpleTextureNode): void =
+  fcQSGSimpleTextureNode_virtualbase_preprocess(self.h)
+
 
 proc fcQSGSimpleTextureNode_vtable_callback_isSubtreeBlocked(self: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QSGSimpleTextureNodeVTable](fcQSGSimpleTextureNode_vdata(self)[])
   let self = QSGSimpleTextureNode(h: self)
   var virtualReturn = vtbl[].isSubtreeBlocked(self)
   virtualReturn
-
-proc QSGSimpleTextureNodepreprocess*(self: gen_qsgsimpletexturenode_types.QSGSimpleTextureNode): void =
-  fcQSGSimpleTextureNode_virtualbase_preprocess(self.h)
 
 proc fcQSGSimpleTextureNode_vtable_callback_preprocess(self: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSGSimpleTextureNodeVTable](fcQSGSimpleTextureNode_vdata(self)[])
@@ -147,18 +151,21 @@ proc fcQSGSimpleTextureNode_vtable_callback_preprocess(self: pointer): void {.cd
 
 type VirtualQSGSimpleTextureNode* {.inheritable.} = ref object of QSGSimpleTextureNode
   vtbl*: cQSGSimpleTextureNodeVTable
+
 method isSubtreeBlocked*(self: VirtualQSGSimpleTextureNode): bool {.base.} =
   QSGSimpleTextureNodeisSubtreeBlocked(self[])
+method preprocess*(self: VirtualQSGSimpleTextureNode): void {.base.} =
+  QSGSimpleTextureNodepreprocess(self[])
+
 proc fcQSGSimpleTextureNode_method_callback_isSubtreeBlocked(self: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQSGSimpleTextureNode](fcQSGSimpleTextureNode_vdata(self)[])
   var virtualReturn = inst.isSubtreeBlocked()
   virtualReturn
 
-method preprocess*(self: VirtualQSGSimpleTextureNode): void {.base.} =
-  QSGSimpleTextureNodepreprocess(self[])
 proc fcQSGSimpleTextureNode_method_callback_preprocess(self: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSGSimpleTextureNode](fcQSGSimpleTextureNode_vdata(self)[])
   inst.preprocess()
+
 
 proc create*(T: type gen_qsgsimpletexturenode_types.QSGSimpleTextureNode,
     vtbl: ref QSGSimpleTextureNodeVTable = nil): gen_qsgsimpletexturenode_types.QSGSimpleTextureNode =
