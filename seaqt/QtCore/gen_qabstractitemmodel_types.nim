@@ -2,8 +2,9 @@ type QModelRoleData* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt6Core") & " -fPIC"
-{.compile("gen_qabstractitemmodel.cpp", cflags).}
+import ./qtcore_pkg
+
+{.compile("gen_qabstractitemmodel.cpp", QtCoreCFlags).}
 
 proc fcQModelRoleData_delete(self: pointer) {.importc: "QModelRoleData_delete".}
 proc `=destroy`(self: var QModelRoleData) =

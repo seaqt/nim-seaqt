@@ -2,8 +2,9 @@ type QReadWriteLock* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt6Core") & " -fPIC"
-{.compile("gen_qreadwritelock.cpp", cflags).}
+import ./qtcore_pkg
+
+{.compile("gen_qreadwritelock.cpp", QtCoreCFlags).}
 
 proc fcQReadWriteLock_delete(self: pointer) {.importc: "QReadWriteLock_delete".}
 proc `=destroy`(self: var QReadWriteLock) =

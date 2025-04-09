@@ -2,8 +2,9 @@ type QMatrix4x4* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt6Gui") & " -fPIC"
-{.compile("gen_qmatrix4x4.cpp", cflags).}
+import ./qtgui_pkg
+
+{.compile("gen_qmatrix4x4.cpp", QtGuiCFlags).}
 
 proc fcQMatrix4x4_delete(self: pointer) {.importc: "QMatrix4x4_delete".}
 proc `=destroy`(self: var QMatrix4x4) =

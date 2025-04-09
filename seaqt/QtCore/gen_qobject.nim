@@ -1,4 +1,4 @@
-import ./Qt6Core_libs
+import ./qtcore_pkg
 
 {.push raises: [].}
 
@@ -55,18 +55,16 @@ export
   gen_qthread_types,
   gen_qvariant_types
 
-const qtversion = gorge("pkg-config --modversion Qt6Core")
-const cflags = gorge("pkg-config --cflags Qt5Core")
 import std/strutils
 const privateDir = block:
   var flag = ""
-  for path in cflags.split(" "):
+  for path in QtCoreCFlags.split(" "):
     if "QtCore" in path:
-      flag = " " & path & "/" & qtversion & " " & path & "/" & qtversion & "/QtCore"
+      flag = " " & path & "/" & QtCoreBuildVersion & " " & path & "/" & QtCoreBuildVersion & "/QtCore"
       break
   flag
 
-{.compile("../libseaqt-runtime.cpp", cflags & privateDir).}
+{.compile("../libseaqt-runtime.cpp", QtCoreCFlags & privateDir).}
 
 type QObjectconnectRawSlot* = proc(args: pointer)
 

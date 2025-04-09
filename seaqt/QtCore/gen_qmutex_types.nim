@@ -2,8 +2,9 @@ type QBasicMutex* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt6Core") & " -fPIC"
-{.compile("gen_qmutex.cpp", cflags).}
+import ./qtcore_pkg
+
+{.compile("gen_qmutex.cpp", QtCoreCFlags).}
 
 proc fcQBasicMutex_delete(self: pointer) {.importc: "QBasicMutex_delete".}
 proc `=destroy`(self: var QBasicMutex) =

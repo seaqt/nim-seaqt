@@ -2,8 +2,9 @@ type QFactoryInterface* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt6Core") & " -fPIC"
-{.compile("gen_qfactoryinterface.cpp", cflags).}
+import ./qtcore_pkg
+
+{.compile("gen_qfactoryinterface.cpp", QtCoreCFlags).}
 
 proc fcQFactoryInterface_delete(self: pointer) {.importc: "QFactoryInterface_delete".}
 proc `=destroy`(self: var QFactoryInterface) =

@@ -1,4 +1,4 @@
-import ./Qt6WebEngineCore_libs
+import ./qtwebenginecore_pkg
 
 {.push raises: [].}
 
@@ -32,8 +32,8 @@ func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
     else:
       copyMem(addr result[0], v.data, len)
 
-const cflags = gorge("pkg-config --cflags Qt6WebEngineCore") & " -fPIC"
-{.compile("gen_qwebenginepage.cpp", cflags).}
+
+{.compile("gen_qwebenginepage.cpp", QtWebEngineCoreCFlags).}
 
 
 type QWebEnginePageWebActionEnum* = distinct cint

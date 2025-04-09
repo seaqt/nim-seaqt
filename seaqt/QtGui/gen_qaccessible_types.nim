@@ -6,8 +6,9 @@ type QAccessibleTextInterface* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt6Gui") & " -fPIC"
-{.compile("gen_qaccessible.cpp", cflags).}
+import ./qtgui_pkg
+
+{.compile("gen_qaccessible.cpp", QtGuiCFlags).}
 
 proc fcQAccessibleTextInterface_delete(self: pointer) {.importc: "QAccessibleTextInterface_delete".}
 proc `=destroy`(self: var QAccessibleTextInterface) =

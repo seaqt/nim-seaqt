@@ -2,8 +2,9 @@ type QDir* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt6Core") & " -fPIC"
-{.compile("gen_qdir.cpp", cflags).}
+import ./qtcore_pkg
+
+{.compile("gen_qdir.cpp", QtCoreCFlags).}
 
 proc fcQDir_delete(self: pointer) {.importc: "QDir_delete".}
 proc `=destroy`(self: var QDir) =

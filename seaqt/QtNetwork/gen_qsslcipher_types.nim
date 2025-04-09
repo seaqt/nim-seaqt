@@ -2,8 +2,9 @@ type QSslCipher* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt6Network") & " -fPIC"
-{.compile("gen_qsslcipher.cpp", cflags).}
+import ./qtnetwork_pkg
+
+{.compile("gen_qsslcipher.cpp", QtNetworkCFlags).}
 
 proc fcQSslCipher_delete(self: pointer) {.importc: "QSslCipher_delete".}
 proc `=destroy`(self: var QSslCipher) =

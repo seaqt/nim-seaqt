@@ -2,8 +2,9 @@ type QQmlListReference* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt6Qml") & " -fPIC"
-{.compile("gen_qqmllist.cpp", cflags).}
+import ./qtqml_pkg
+
+{.compile("gen_qqmllist.cpp", QtQmlCFlags).}
 
 proc fcQQmlListReference_delete(self: pointer) {.importc: "QQmlListReference_delete".}
 proc `=destroy`(self: var QQmlListReference) =

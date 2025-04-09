@@ -19,7 +19,11 @@ QMetaContainer* QMetaContainer_new() {
 	return new (std::nothrow) QMetaContainer();
 }
 
-QMetaContainer* QMetaContainer_new2(QMetaContainer* param1) {
+QMetaContainer* QMetaContainer_new2(const void* d) {
+	return new (std::nothrow) QMetaContainer(static_cast<const QtMetaContainerPrivate::QMetaContainerInterface*>(d));
+}
+
+QMetaContainer* QMetaContainer_new3(QMetaContainer* param1) {
 	return new (std::nothrow) QMetaContainer(*param1);
 }
 
@@ -128,6 +132,10 @@ void QMetaContainer_delete(QMetaContainer* self) {
 
 QMetaSequence* QMetaSequence_new() {
 	return new (std::nothrow) QMetaSequence();
+}
+
+QMetaSequence* QMetaSequence_new2(const void* d) {
+	return new (std::nothrow) QMetaSequence(static_cast<const QtMetaContainerPrivate::QMetaSequenceInterface*>(d));
 }
 
 void QMetaSequence_virtbase(QMetaSequence* src, QMetaContainer** outptr_QMetaContainer) {
@@ -260,6 +268,10 @@ void QMetaSequence_delete(QMetaSequence* self) {
 
 QMetaAssociation* QMetaAssociation_new() {
 	return new (std::nothrow) QMetaAssociation();
+}
+
+QMetaAssociation* QMetaAssociation_new2(const void* d) {
+	return new (std::nothrow) QMetaAssociation(static_cast<const QtMetaContainerPrivate::QMetaAssociationInterface*>(d));
 }
 
 void QMetaAssociation_virtbase(QMetaAssociation* src, QMetaContainer** outptr_QMetaContainer) {

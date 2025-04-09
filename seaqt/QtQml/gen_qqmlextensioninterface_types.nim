@@ -2,8 +2,9 @@ type QQmlTypesExtensionInterface* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt6Qml") & " -fPIC"
-{.compile("gen_qqmlextensioninterface.cpp", cflags).}
+import ./qtqml_pkg
+
+{.compile("gen_qqmlextensioninterface.cpp", QtQmlCFlags).}
 
 proc fcQQmlTypesExtensionInterface_delete(self: pointer) {.importc: "QQmlTypesExtensionInterface_delete".}
 proc `=destroy`(self: var QQmlTypesExtensionInterface) =

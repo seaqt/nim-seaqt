@@ -1,4 +1,4 @@
-import ./Qt6Gui_libs
+import ./qtgui_pkg
 
 {.push raises: [].}
 
@@ -138,7 +138,7 @@ proc fcQKeySequence_toString(self: pointer): struct_miqt_string {.importc: "QKey
 proc fcQKeySequence_fromString(str: struct_miqt_string): pointer {.importc: "QKeySequence_fromString".}
 proc fcQKeySequence_listFromString(str: struct_miqt_string): struct_miqt_array {.importc: "QKeySequence_listFromString".}
 proc fcQKeySequence_listToString(list: struct_miqt_array): struct_miqt_string {.importc: "QKeySequence_listToString".}
-proc fcQKeySequence_matches(self: pointer, seq: pointer): cint {.importc: "QKeySequence_matches".}
+proc fcQKeySequence_matches(self: pointer, seqVal: pointer): cint {.importc: "QKeySequence_matches".}
 proc fcQKeySequence_mnemonic(text: struct_miqt_string): pointer {.importc: "QKeySequence_mnemonic".}
 proc fcQKeySequence_keyBindings(key: cint): struct_miqt_array {.importc: "QKeySequence_keyBindings".}
 proc fcQKeySequence_ToQVariant(self: pointer): pointer {.importc: "QKeySequence_ToQVariant".}
@@ -205,8 +205,8 @@ proc listToString*(_: type gen_qkeysequence_types.QKeySequence, list: openArray[
   c_free(v_ms.data)
   vx_ret
 
-proc matches*(self: gen_qkeysequence_types.QKeySequence, seq: gen_qkeysequence_types.QKeySequence): cint =
-  cint(fcQKeySequence_matches(self.h, seq.h))
+proc matches*(self: gen_qkeysequence_types.QKeySequence, seqVal: gen_qkeysequence_types.QKeySequence): cint =
+  cint(fcQKeySequence_matches(self.h, seqVal.h))
 
 proc mnemonic*(_: type gen_qkeysequence_types.QKeySequence, text: openArray[char]): gen_qkeysequence_types.QKeySequence =
   gen_qkeysequence_types.QKeySequence(h: fcQKeySequence_mnemonic(struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))), owned: true)

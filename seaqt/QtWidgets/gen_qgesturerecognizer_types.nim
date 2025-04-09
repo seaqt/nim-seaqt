@@ -2,8 +2,9 @@ type QGestureRecognizer* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt6Widgets") & " -fPIC"
-{.compile("gen_qgesturerecognizer.cpp", cflags).}
+import ./qtwidgets_pkg
+
+{.compile("gen_qgesturerecognizer.cpp", QtWidgetsCFlags).}
 
 proc fcQGestureRecognizer_delete(self: pointer) {.importc: "QGestureRecognizer_delete".}
 proc `=destroy`(self: var QGestureRecognizer) =

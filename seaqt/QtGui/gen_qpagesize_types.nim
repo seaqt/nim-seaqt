@@ -2,8 +2,9 @@ type QPageSize* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt6Gui") & " -fPIC"
-{.compile("gen_qpagesize.cpp", cflags).}
+import ./qtgui_pkg
+
+{.compile("gen_qpagesize.cpp", QtGuiCFlags).}
 
 proc fcQPageSize_delete(self: pointer) {.importc: "QPageSize_delete".}
 proc `=destroy`(self: var QPageSize) =

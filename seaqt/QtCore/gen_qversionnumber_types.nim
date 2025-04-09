@@ -2,8 +2,9 @@ type QVersionNumber* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt6Core") & " -fPIC"
-{.compile("gen_qversionnumber.cpp", cflags).}
+import ./qtcore_pkg
+
+{.compile("gen_qversionnumber.cpp", QtCoreCFlags).}
 
 proc fcQVersionNumber_delete(self: pointer) {.importc: "QVersionNumber_delete".}
 proc `=destroy`(self: var QVersionNumber) =

@@ -2,8 +2,9 @@ type QDesktopServices* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt6Gui") & " -fPIC"
-{.compile("gen_qdesktopservices.cpp", cflags).}
+import ./qtgui_pkg
+
+{.compile("gen_qdesktopservices.cpp", QtGuiCFlags).}
 
 proc fcQDesktopServices_delete(self: pointer) {.importc: "QDesktopServices_delete".}
 proc `=destroy`(self: var QDesktopServices) =

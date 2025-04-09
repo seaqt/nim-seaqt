@@ -54,7 +54,8 @@ struct miqt_string QPropertyBindingError_description(const QPropertyBindingError
 void QPropertyBindingError_delete(QPropertyBindingError* self);
 
 QUntypedPropertyBinding* QUntypedPropertyBinding_new();
-QUntypedPropertyBinding* QUntypedPropertyBinding_new2(QUntypedPropertyBinding* other);
+QUntypedPropertyBinding* QUntypedPropertyBinding_new2(QMetaType* metaType, const void* vtable, void* function, QPropertyBindingSourceLocation* location);
+QUntypedPropertyBinding* QUntypedPropertyBinding_new3(QUntypedPropertyBinding* other);
 
 void QUntypedPropertyBinding_operatorAssign(QUntypedPropertyBinding* self, QUntypedPropertyBinding* other);
 bool QUntypedPropertyBinding_isNull(const QUntypedPropertyBinding* self);

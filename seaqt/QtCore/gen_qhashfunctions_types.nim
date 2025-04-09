@@ -2,8 +2,9 @@ type QHashSeed* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt6Core") & " -fPIC"
-{.compile("gen_qhashfunctions.cpp", cflags).}
+import ./qtcore_pkg
+
+{.compile("gen_qhashfunctions.cpp", QtCoreCFlags).}
 
 proc fcQHashSeed_delete(self: pointer) {.importc: "QHashSeed_delete".}
 proc `=destroy`(self: var QHashSeed) =

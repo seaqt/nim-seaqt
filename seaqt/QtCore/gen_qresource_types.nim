@@ -2,8 +2,9 @@ type QResource* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt6Core") & " -fPIC"
-{.compile("gen_qresource.cpp", cflags).}
+import ./qtcore_pkg
+
+{.compile("gen_qresource.cpp", QtCoreCFlags).}
 
 proc fcQResource_delete(self: pointer) {.importc: "QResource_delete".}
 proc `=destroy`(self: var QResource) =

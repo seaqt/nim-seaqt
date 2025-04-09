@@ -2,8 +2,9 @@ type QQuickRenderTarget* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt6Quick") & " -fPIC"
-{.compile("gen_qquickrendertarget.cpp", cflags).}
+import ./qtquick_pkg
+
+{.compile("gen_qquickrendertarget.cpp", QtQuickCFlags).}
 
 proc fcQQuickRenderTarget_delete(self: pointer) {.importc: "QQuickRenderTarget_delete".}
 proc `=destroy`(self: var QQuickRenderTarget) =

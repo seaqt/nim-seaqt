@@ -2,8 +2,9 @@ type QPartialOrdering* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt6Core") & " -fPIC"
-{.compile("gen_qcompare.cpp", cflags).}
+import ./qtcore_pkg
+
+{.compile("gen_qcompare.cpp", QtCoreCFlags).}
 
 proc fcQPartialOrdering_delete(self: pointer) {.importc: "QPartialOrdering_delete".}
 proc `=destroy`(self: var QPartialOrdering) =

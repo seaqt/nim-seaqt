@@ -21,8 +21,9 @@ type QDtlsClientVerifierGeneratorParameters* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt6Network") & " -fPIC"
-{.compile("gen_qdtls.cpp", cflags).}
+import ./qtnetwork_pkg
+
+{.compile("gen_qdtls.cpp", QtNetworkCFlags).}
 
 proc fcQDtlsClientVerifierGeneratorParameters_delete(self: pointer) {.importc: "QDtlsClientVerifier__GeneratorParameters_delete".}
 proc `=destroy`(self: var QDtlsClientVerifierGeneratorParameters) =

@@ -1,4 +1,4 @@
-import ./Qt6Core_libs
+import ./qtcore_pkg
 
 {.push raises: [].}
 
@@ -943,16 +943,16 @@ proc fcQLocale_toString10(self: pointer, dateTime: pointer, format: cint, cal: p
 proc fcQLocale_dateFormat(self: pointer): struct_miqt_string {.importc: "QLocale_dateFormat".}
 proc fcQLocale_timeFormat(self: pointer): struct_miqt_string {.importc: "QLocale_timeFormat".}
 proc fcQLocale_dateTimeFormat(self: pointer): struct_miqt_string {.importc: "QLocale_dateTimeFormat".}
-proc fcQLocale_toDate(self: pointer, string: struct_miqt_string): pointer {.importc: "QLocale_toDate".}
-proc fcQLocale_toTime(self: pointer, string: struct_miqt_string): pointer {.importc: "QLocale_toTime".}
-proc fcQLocale_toDateTime(self: pointer, string: struct_miqt_string): pointer {.importc: "QLocale_toDateTime".}
-proc fcQLocale_toDate2(self: pointer, string: struct_miqt_string, format: struct_miqt_string): pointer {.importc: "QLocale_toDate2".}
-proc fcQLocale_toTime2(self: pointer, string: struct_miqt_string, format: struct_miqt_string): pointer {.importc: "QLocale_toTime2".}
-proc fcQLocale_toDateTime2(self: pointer, string: struct_miqt_string, format: struct_miqt_string): pointer {.importc: "QLocale_toDateTime2".}
-proc fcQLocale_toDate3(self: pointer, string: struct_miqt_string, format: cint, cal: pointer): pointer {.importc: "QLocale_toDate3".}
-proc fcQLocale_toDateTime3(self: pointer, string: struct_miqt_string, format: cint, cal: pointer): pointer {.importc: "QLocale_toDateTime3".}
-proc fcQLocale_toDate4(self: pointer, string: struct_miqt_string, format: struct_miqt_string, cal: pointer): pointer {.importc: "QLocale_toDate4".}
-proc fcQLocale_toDateTime4(self: pointer, string: struct_miqt_string, format: struct_miqt_string, cal: pointer): pointer {.importc: "QLocale_toDateTime4".}
+proc fcQLocale_toDate(self: pointer, stringVal: struct_miqt_string): pointer {.importc: "QLocale_toDate".}
+proc fcQLocale_toTime(self: pointer, stringVal: struct_miqt_string): pointer {.importc: "QLocale_toTime".}
+proc fcQLocale_toDateTime(self: pointer, stringVal: struct_miqt_string): pointer {.importc: "QLocale_toDateTime".}
+proc fcQLocale_toDate2(self: pointer, stringVal: struct_miqt_string, format: struct_miqt_string): pointer {.importc: "QLocale_toDate2".}
+proc fcQLocale_toTime2(self: pointer, stringVal: struct_miqt_string, format: struct_miqt_string): pointer {.importc: "QLocale_toTime2".}
+proc fcQLocale_toDateTime2(self: pointer, stringVal: struct_miqt_string, format: struct_miqt_string): pointer {.importc: "QLocale_toDateTime2".}
+proc fcQLocale_toDate3(self: pointer, stringVal: struct_miqt_string, format: cint, cal: pointer): pointer {.importc: "QLocale_toDate3".}
+proc fcQLocale_toDateTime3(self: pointer, stringVal: struct_miqt_string, format: cint, cal: pointer): pointer {.importc: "QLocale_toDateTime3".}
+proc fcQLocale_toDate4(self: pointer, stringVal: struct_miqt_string, format: struct_miqt_string, cal: pointer): pointer {.importc: "QLocale_toDate4".}
+proc fcQLocale_toDateTime4(self: pointer, stringVal: struct_miqt_string, format: struct_miqt_string, cal: pointer): pointer {.importc: "QLocale_toDateTime4".}
 proc fcQLocale_decimalPoint(self: pointer): struct_miqt_string {.importc: "QLocale_decimalPoint".}
 proc fcQLocale_groupSeparator(self: pointer): struct_miqt_string {.importc: "QLocale_groupSeparator".}
 proc fcQLocale_percent(self: pointer): struct_miqt_string {.importc: "QLocale_percent".}
@@ -1021,9 +1021,9 @@ proc fcQLocale_toString26(self: pointer, dateTime: pointer, format: cint): struc
 proc fcQLocale_dateFormat1(self: pointer, format: cint): struct_miqt_string {.importc: "QLocale_dateFormat1".}
 proc fcQLocale_timeFormat1(self: pointer, format: cint): struct_miqt_string {.importc: "QLocale_timeFormat1".}
 proc fcQLocale_dateTimeFormat1(self: pointer, format: cint): struct_miqt_string {.importc: "QLocale_dateTimeFormat1".}
-proc fcQLocale_toDate22(self: pointer, string: struct_miqt_string, param2: cint): pointer {.importc: "QLocale_toDate22".}
-proc fcQLocale_toTime22(self: pointer, string: struct_miqt_string, param2: cint): pointer {.importc: "QLocale_toTime22".}
-proc fcQLocale_toDateTime22(self: pointer, string: struct_miqt_string, format: cint): pointer {.importc: "QLocale_toDateTime22".}
+proc fcQLocale_toDate22(self: pointer, stringVal: struct_miqt_string, param2: cint): pointer {.importc: "QLocale_toDate22".}
+proc fcQLocale_toTime22(self: pointer, stringVal: struct_miqt_string, param2: cint): pointer {.importc: "QLocale_toTime22".}
+proc fcQLocale_toDateTime22(self: pointer, stringVal: struct_miqt_string, format: cint): pointer {.importc: "QLocale_toDateTime22".}
 proc fcQLocale_monthName2(self: pointer, param1: cint, format: cint): struct_miqt_string {.importc: "QLocale_monthName2".}
 proc fcQLocale_standaloneMonthName2(self: pointer, param1: cint, format: cint): struct_miqt_string {.importc: "QLocale_standaloneMonthName2".}
 proc fcQLocale_dayName2(self: pointer, param1: cint, format: cint): struct_miqt_string {.importc: "QLocale_dayName2".}
@@ -1256,35 +1256,35 @@ proc dateTimeFormat*(self: gen_qlocale_types.QLocale): string =
   c_free(v_ms.data)
   vx_ret
 
-proc toDate*(self: gen_qlocale_types.QLocale, string: openArray[char]): gen_qdatetime_types.QDate =
-  gen_qdatetime_types.QDate(h: fcQLocale_toDate(self.h, struct_miqt_string(data: if len(string) > 0: addr string[0] else: nil, len: csize_t(len(string)))), owned: true)
+proc toDate*(self: gen_qlocale_types.QLocale, stringVal: openArray[char]): gen_qdatetime_types.QDate =
+  gen_qdatetime_types.QDate(h: fcQLocale_toDate(self.h, struct_miqt_string(data: if len(stringVal) > 0: addr stringVal[0] else: nil, len: csize_t(len(stringVal)))), owned: true)
 
-proc toTime*(self: gen_qlocale_types.QLocale, string: openArray[char]): gen_qdatetime_types.QTime =
-  gen_qdatetime_types.QTime(h: fcQLocale_toTime(self.h, struct_miqt_string(data: if len(string) > 0: addr string[0] else: nil, len: csize_t(len(string)))), owned: true)
+proc toTime*(self: gen_qlocale_types.QLocale, stringVal: openArray[char]): gen_qdatetime_types.QTime =
+  gen_qdatetime_types.QTime(h: fcQLocale_toTime(self.h, struct_miqt_string(data: if len(stringVal) > 0: addr stringVal[0] else: nil, len: csize_t(len(stringVal)))), owned: true)
 
-proc toDateTime*(self: gen_qlocale_types.QLocale, string: openArray[char]): gen_qdatetime_types.QDateTime =
-  gen_qdatetime_types.QDateTime(h: fcQLocale_toDateTime(self.h, struct_miqt_string(data: if len(string) > 0: addr string[0] else: nil, len: csize_t(len(string)))), owned: true)
+proc toDateTime*(self: gen_qlocale_types.QLocale, stringVal: openArray[char]): gen_qdatetime_types.QDateTime =
+  gen_qdatetime_types.QDateTime(h: fcQLocale_toDateTime(self.h, struct_miqt_string(data: if len(stringVal) > 0: addr stringVal[0] else: nil, len: csize_t(len(stringVal)))), owned: true)
 
-proc toDate*(self: gen_qlocale_types.QLocale, string: openArray[char], format: openArray[char]): gen_qdatetime_types.QDate =
-  gen_qdatetime_types.QDate(h: fcQLocale_toDate2(self.h, struct_miqt_string(data: if len(string) > 0: addr string[0] else: nil, len: csize_t(len(string))), struct_miqt_string(data: if len(format) > 0: addr format[0] else: nil, len: csize_t(len(format)))), owned: true)
+proc toDate*(self: gen_qlocale_types.QLocale, stringVal: openArray[char], format: openArray[char]): gen_qdatetime_types.QDate =
+  gen_qdatetime_types.QDate(h: fcQLocale_toDate2(self.h, struct_miqt_string(data: if len(stringVal) > 0: addr stringVal[0] else: nil, len: csize_t(len(stringVal))), struct_miqt_string(data: if len(format) > 0: addr format[0] else: nil, len: csize_t(len(format)))), owned: true)
 
-proc toTime*(self: gen_qlocale_types.QLocale, string: openArray[char], format: openArray[char]): gen_qdatetime_types.QTime =
-  gen_qdatetime_types.QTime(h: fcQLocale_toTime2(self.h, struct_miqt_string(data: if len(string) > 0: addr string[0] else: nil, len: csize_t(len(string))), struct_miqt_string(data: if len(format) > 0: addr format[0] else: nil, len: csize_t(len(format)))), owned: true)
+proc toTime*(self: gen_qlocale_types.QLocale, stringVal: openArray[char], format: openArray[char]): gen_qdatetime_types.QTime =
+  gen_qdatetime_types.QTime(h: fcQLocale_toTime2(self.h, struct_miqt_string(data: if len(stringVal) > 0: addr stringVal[0] else: nil, len: csize_t(len(stringVal))), struct_miqt_string(data: if len(format) > 0: addr format[0] else: nil, len: csize_t(len(format)))), owned: true)
 
-proc toDateTime*(self: gen_qlocale_types.QLocale, string: openArray[char], format: openArray[char]): gen_qdatetime_types.QDateTime =
-  gen_qdatetime_types.QDateTime(h: fcQLocale_toDateTime2(self.h, struct_miqt_string(data: if len(string) > 0: addr string[0] else: nil, len: csize_t(len(string))), struct_miqt_string(data: if len(format) > 0: addr format[0] else: nil, len: csize_t(len(format)))), owned: true)
+proc toDateTime*(self: gen_qlocale_types.QLocale, stringVal: openArray[char], format: openArray[char]): gen_qdatetime_types.QDateTime =
+  gen_qdatetime_types.QDateTime(h: fcQLocale_toDateTime2(self.h, struct_miqt_string(data: if len(stringVal) > 0: addr stringVal[0] else: nil, len: csize_t(len(stringVal))), struct_miqt_string(data: if len(format) > 0: addr format[0] else: nil, len: csize_t(len(format)))), owned: true)
 
-proc toDate*(self: gen_qlocale_types.QLocale, string: openArray[char], format: cint, cal: gen_qcalendar_types.QCalendar): gen_qdatetime_types.QDate =
-  gen_qdatetime_types.QDate(h: fcQLocale_toDate3(self.h, struct_miqt_string(data: if len(string) > 0: addr string[0] else: nil, len: csize_t(len(string))), cint(format), cal.h), owned: true)
+proc toDate*(self: gen_qlocale_types.QLocale, stringVal: openArray[char], format: cint, cal: gen_qcalendar_types.QCalendar): gen_qdatetime_types.QDate =
+  gen_qdatetime_types.QDate(h: fcQLocale_toDate3(self.h, struct_miqt_string(data: if len(stringVal) > 0: addr stringVal[0] else: nil, len: csize_t(len(stringVal))), cint(format), cal.h), owned: true)
 
-proc toDateTime*(self: gen_qlocale_types.QLocale, string: openArray[char], format: cint, cal: gen_qcalendar_types.QCalendar): gen_qdatetime_types.QDateTime =
-  gen_qdatetime_types.QDateTime(h: fcQLocale_toDateTime3(self.h, struct_miqt_string(data: if len(string) > 0: addr string[0] else: nil, len: csize_t(len(string))), cint(format), cal.h), owned: true)
+proc toDateTime*(self: gen_qlocale_types.QLocale, stringVal: openArray[char], format: cint, cal: gen_qcalendar_types.QCalendar): gen_qdatetime_types.QDateTime =
+  gen_qdatetime_types.QDateTime(h: fcQLocale_toDateTime3(self.h, struct_miqt_string(data: if len(stringVal) > 0: addr stringVal[0] else: nil, len: csize_t(len(stringVal))), cint(format), cal.h), owned: true)
 
-proc toDate*(self: gen_qlocale_types.QLocale, string: openArray[char], format: openArray[char], cal: gen_qcalendar_types.QCalendar): gen_qdatetime_types.QDate =
-  gen_qdatetime_types.QDate(h: fcQLocale_toDate4(self.h, struct_miqt_string(data: if len(string) > 0: addr string[0] else: nil, len: csize_t(len(string))), struct_miqt_string(data: if len(format) > 0: addr format[0] else: nil, len: csize_t(len(format))), cal.h), owned: true)
+proc toDate*(self: gen_qlocale_types.QLocale, stringVal: openArray[char], format: openArray[char], cal: gen_qcalendar_types.QCalendar): gen_qdatetime_types.QDate =
+  gen_qdatetime_types.QDate(h: fcQLocale_toDate4(self.h, struct_miqt_string(data: if len(stringVal) > 0: addr stringVal[0] else: nil, len: csize_t(len(stringVal))), struct_miqt_string(data: if len(format) > 0: addr format[0] else: nil, len: csize_t(len(format))), cal.h), owned: true)
 
-proc toDateTime*(self: gen_qlocale_types.QLocale, string: openArray[char], format: openArray[char], cal: gen_qcalendar_types.QCalendar): gen_qdatetime_types.QDateTime =
-  gen_qdatetime_types.QDateTime(h: fcQLocale_toDateTime4(self.h, struct_miqt_string(data: if len(string) > 0: addr string[0] else: nil, len: csize_t(len(string))), struct_miqt_string(data: if len(format) > 0: addr format[0] else: nil, len: csize_t(len(format))), cal.h), owned: true)
+proc toDateTime*(self: gen_qlocale_types.QLocale, stringVal: openArray[char], format: openArray[char], cal: gen_qcalendar_types.QCalendar): gen_qdatetime_types.QDateTime =
+  gen_qdatetime_types.QDateTime(h: fcQLocale_toDateTime4(self.h, struct_miqt_string(data: if len(stringVal) > 0: addr stringVal[0] else: nil, len: csize_t(len(stringVal))), struct_miqt_string(data: if len(format) > 0: addr format[0] else: nil, len: csize_t(len(format))), cal.h), owned: true)
 
 proc decimalPoint*(self: gen_qlocale_types.QLocale): string =
   let v_ms = fcQLocale_decimalPoint(self.h)
@@ -1656,14 +1656,14 @@ proc dateTimeFormat*(self: gen_qlocale_types.QLocale, format: cint): string =
   c_free(v_ms.data)
   vx_ret
 
-proc toDate*(self: gen_qlocale_types.QLocale, string: openArray[char], param2: cint): gen_qdatetime_types.QDate =
-  gen_qdatetime_types.QDate(h: fcQLocale_toDate22(self.h, struct_miqt_string(data: if len(string) > 0: addr string[0] else: nil, len: csize_t(len(string))), cint(param2)), owned: true)
+proc toDate*(self: gen_qlocale_types.QLocale, stringVal: openArray[char], param2: cint): gen_qdatetime_types.QDate =
+  gen_qdatetime_types.QDate(h: fcQLocale_toDate22(self.h, struct_miqt_string(data: if len(stringVal) > 0: addr stringVal[0] else: nil, len: csize_t(len(stringVal))), cint(param2)), owned: true)
 
-proc toTime*(self: gen_qlocale_types.QLocale, string: openArray[char], param2: cint): gen_qdatetime_types.QTime =
-  gen_qdatetime_types.QTime(h: fcQLocale_toTime22(self.h, struct_miqt_string(data: if len(string) > 0: addr string[0] else: nil, len: csize_t(len(string))), cint(param2)), owned: true)
+proc toTime*(self: gen_qlocale_types.QLocale, stringVal: openArray[char], param2: cint): gen_qdatetime_types.QTime =
+  gen_qdatetime_types.QTime(h: fcQLocale_toTime22(self.h, struct_miqt_string(data: if len(stringVal) > 0: addr stringVal[0] else: nil, len: csize_t(len(stringVal))), cint(param2)), owned: true)
 
-proc toDateTime*(self: gen_qlocale_types.QLocale, string: openArray[char], format: cint): gen_qdatetime_types.QDateTime =
-  gen_qdatetime_types.QDateTime(h: fcQLocale_toDateTime22(self.h, struct_miqt_string(data: if len(string) > 0: addr string[0] else: nil, len: csize_t(len(string))), cint(format)), owned: true)
+proc toDateTime*(self: gen_qlocale_types.QLocale, stringVal: openArray[char], format: cint): gen_qdatetime_types.QDateTime =
+  gen_qdatetime_types.QDateTime(h: fcQLocale_toDateTime22(self.h, struct_miqt_string(data: if len(stringVal) > 0: addr stringVal[0] else: nil, len: csize_t(len(stringVal))), cint(format)), owned: true)
 
 proc monthName*(self: gen_qlocale_types.QLocale, param1: cint, format: cint): string =
   let v_ms = fcQLocale_monthName2(self.h, param1, cint(format))

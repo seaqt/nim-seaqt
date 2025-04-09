@@ -2,8 +2,9 @@ type QTemporaryDir* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt6Core") & " -fPIC"
-{.compile("gen_qtemporarydir.cpp", cflags).}
+import ./qtcore_pkg
+
+{.compile("gen_qtemporarydir.cpp", QtCoreCFlags).}
 
 proc fcQTemporaryDir_delete(self: pointer) {.importc: "QTemporaryDir_delete".}
 proc `=destroy`(self: var QTemporaryDir) =

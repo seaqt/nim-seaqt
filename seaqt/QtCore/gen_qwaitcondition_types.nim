@@ -2,8 +2,9 @@ type QWaitCondition* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt6Core") & " -fPIC"
-{.compile("gen_qwaitcondition.cpp", cflags).}
+import ./qtcore_pkg
+
+{.compile("gen_qwaitcondition.cpp", QtCoreCFlags).}
 
 proc fcQWaitCondition_delete(self: pointer) {.importc: "QWaitCondition_delete".}
 proc `=destroy`(self: var QWaitCondition) =

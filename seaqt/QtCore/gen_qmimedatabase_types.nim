@@ -2,8 +2,9 @@ type QMimeDatabase* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt6Core") & " -fPIC"
-{.compile("gen_qmimedatabase.cpp", cflags).}
+import ./qtcore_pkg
+
+{.compile("gen_qmimedatabase.cpp", QtCoreCFlags).}
 
 proc fcQMimeDatabase_delete(self: pointer) {.importc: "QMimeDatabase_delete".}
 proc `=destroy`(self: var QMimeDatabase) =

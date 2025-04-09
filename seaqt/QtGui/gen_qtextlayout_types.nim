@@ -2,8 +2,9 @@ type QTextInlineObject* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt6Gui") & " -fPIC"
-{.compile("gen_qtextlayout.cpp", cflags).}
+import ./qtgui_pkg
+
+{.compile("gen_qtextlayout.cpp", QtGuiCFlags).}
 
 proc fcQTextInlineObject_delete(self: pointer) {.importc: "QTextInlineObject_delete".}
 proc `=destroy`(self: var QTextInlineObject) =

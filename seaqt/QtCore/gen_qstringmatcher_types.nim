@@ -2,8 +2,9 @@ type QStringMatcher* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt6Core") & " -fPIC"
-{.compile("gen_qstringmatcher.cpp", cflags).}
+import ./qtcore_pkg
+
+{.compile("gen_qstringmatcher.cpp", QtCoreCFlags).}
 
 proc fcQStringMatcher_delete(self: pointer) {.importc: "QStringMatcher_delete".}
 proc `=destroy`(self: var QStringMatcher) =

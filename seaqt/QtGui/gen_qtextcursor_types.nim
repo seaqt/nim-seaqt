@@ -2,8 +2,9 @@ type QTextCursor* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt6Gui") & " -fPIC"
-{.compile("gen_qtextcursor.cpp", cflags).}
+import ./qtgui_pkg
+
+{.compile("gen_qtextcursor.cpp", QtGuiCFlags).}
 
 proc fcQTextCursor_delete(self: pointer) {.importc: "QTextCursor_delete".}
 proc `=destroy`(self: var QTextCursor) =

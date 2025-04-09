@@ -2,8 +2,9 @@ type QTextBoundaryFinder* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt6Core") & " -fPIC"
-{.compile("gen_qtextboundaryfinder.cpp", cflags).}
+import ./qtcore_pkg
+
+{.compile("gen_qtextboundaryfinder.cpp", QtCoreCFlags).}
 
 proc fcQTextBoundaryFinder_delete(self: pointer) {.importc: "QTextBoundaryFinder_delete".}
 proc `=destroy`(self: var QTextBoundaryFinder) =

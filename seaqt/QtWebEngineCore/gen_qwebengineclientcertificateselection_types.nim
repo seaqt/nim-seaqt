@@ -2,8 +2,9 @@ type QWebEngineClientCertificateSelection* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt6WebEngineCore") & " -fPIC"
-{.compile("gen_qwebengineclientcertificateselection.cpp", cflags).}
+import ./qtwebenginecore_pkg
+
+{.compile("gen_qwebengineclientcertificateselection.cpp", QtWebEngineCoreCFlags).}
 
 proc fcQWebEngineClientCertificateSelection_delete(self: pointer) {.importc: "QWebEngineClientCertificateSelection_delete".}
 proc `=destroy`(self: var QWebEngineClientCertificateSelection) =

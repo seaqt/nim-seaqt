@@ -2,8 +2,9 @@ type QLibraryInfo* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt6Core") & " -fPIC"
-{.compile("gen_qlibraryinfo.cpp", cflags).}
+import ./qtcore_pkg
+
+{.compile("gen_qlibraryinfo.cpp", QtCoreCFlags).}
 
 proc fcQLibraryInfo_delete(self: pointer) {.importc: "QLibraryInfo_delete".}
 proc `=destroy`(self: var QLibraryInfo) =

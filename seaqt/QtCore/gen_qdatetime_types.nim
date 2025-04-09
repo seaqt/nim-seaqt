@@ -2,8 +2,9 @@ type QDate* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt6Core") & " -fPIC"
-{.compile("gen_qdatetime.cpp", cflags).}
+import ./qtcore_pkg
+
+{.compile("gen_qdatetime.cpp", QtCoreCFlags).}
 
 proc fcQDate_delete(self: pointer) {.importc: "QDate_delete".}
 proc `=destroy`(self: var QDate) =

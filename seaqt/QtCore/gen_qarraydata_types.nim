@@ -2,8 +2,9 @@ type QArrayData* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt6Core") & " -fPIC"
-{.compile("gen_qarraydata.cpp", cflags).}
+import ./qtcore_pkg
+
+{.compile("gen_qarraydata.cpp", QtCoreCFlags).}
 
 proc fcQArrayData_delete(self: pointer) {.importc: "QArrayData_delete".}
 proc `=destroy`(self: var QArrayData) =

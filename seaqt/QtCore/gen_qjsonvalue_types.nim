@@ -2,8 +2,9 @@ type QJsonValue* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt6Core") & " -fPIC"
-{.compile("gen_qjsonvalue.cpp", cflags).}
+import ./qtcore_pkg
+
+{.compile("gen_qjsonvalue.cpp", QtCoreCFlags).}
 
 proc fcQJsonValue_delete(self: pointer) {.importc: "QJsonValue_delete".}
 proc `=destroy`(self: var QJsonValue) =

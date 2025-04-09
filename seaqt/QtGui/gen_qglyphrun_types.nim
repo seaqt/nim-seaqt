@@ -2,8 +2,9 @@ type QGlyphRun* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt6Gui") & " -fPIC"
-{.compile("gen_qglyphrun.cpp", cflags).}
+import ./qtgui_pkg
+
+{.compile("gen_qglyphrun.cpp", QtGuiCFlags).}
 
 proc fcQGlyphRun_delete(self: pointer) {.importc: "QGlyphRun_delete".}
 proc `=destroy`(self: var QGlyphRun) =

@@ -1,4 +1,4 @@
-import ./Qt6PrintSupport_libs
+import ./qtprintsupport_pkg
 
 {.push raises: [].}
 

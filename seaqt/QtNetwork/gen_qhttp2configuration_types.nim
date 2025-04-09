@@ -2,8 +2,9 @@ type QHttp2Configuration* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt6Network") & " -fPIC"
-{.compile("gen_qhttp2configuration.cpp", cflags).}
+import ./qtnetwork_pkg
+
+{.compile("gen_qhttp2configuration.cpp", QtNetworkCFlags).}
 
 proc fcQHttp2Configuration_delete(self: pointer) {.importc: "QHttp2Configuration_delete".}
 proc `=destroy`(self: var QHttp2Configuration) =

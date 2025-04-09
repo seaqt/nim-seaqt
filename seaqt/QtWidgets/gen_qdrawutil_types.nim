@@ -2,8 +2,9 @@ type QTileRules* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt6Widgets") & " -fPIC"
-{.compile("gen_qdrawutil.cpp", cflags).}
+import ./qtwidgets_pkg
+
+{.compile("gen_qdrawutil.cpp", QtWidgetsCFlags).}
 
 proc fcQTileRules_delete(self: pointer) {.importc: "QTileRules_delete".}
 proc `=destroy`(self: var QTileRules) =

@@ -1,4 +1,4 @@
-import ./Qt6Gui_libs
+import ./qtgui_pkg
 
 {.push raises: [].}
 
@@ -32,8 +32,8 @@ func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
     else:
       copyMem(addr result[0], v.data, len)
 
-const cflags = gorge("pkg-config --cflags Qt6Gui") & " -fPIC"
-{.compile("gen_qoffscreensurface.cpp", cflags).}
+
+{.compile("gen_qoffscreensurface.cpp", QtGuiCFlags).}
 
 
 import ./gen_qoffscreensurface_types
@@ -63,7 +63,7 @@ proc fcQOffscreenSurface_metacast(self: pointer, param1: cstring): pointer {.imp
 proc fcQOffscreenSurface_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QOffscreenSurface_metacall".}
 proc fcQOffscreenSurface_tr(s: cstring): struct_miqt_string {.importc: "QOffscreenSurface_tr".}
 proc fcQOffscreenSurface_surfaceType(self: pointer): cint {.importc: "QOffscreenSurface_surfaceType".}
-proc fcQOffscreenSurface_create(self: pointer): void {.importc: "QOffscreenSurface_create".}
+proc fcQOffscreenSurface_createX(self: pointer): void {.importc: "QOffscreenSurface_create".}
 proc fcQOffscreenSurface_destroy(self: pointer): void {.importc: "QOffscreenSurface_destroy".}
 proc fcQOffscreenSurface_isValid(self: pointer): bool {.importc: "QOffscreenSurface_isValid".}
 proc fcQOffscreenSurface_setFormat(self: pointer, format: pointer): void {.importc: "QOffscreenSurface_setFormat".}
@@ -134,8 +134,8 @@ proc tr*(_: type gen_qoffscreensurface_types.QOffscreenSurface, s: cstring): str
 proc surfaceType*(self: gen_qoffscreensurface_types.QOffscreenSurface): cint =
   cint(fcQOffscreenSurface_surfaceType(self.h))
 
-proc create*(self: gen_qoffscreensurface_types.QOffscreenSurface): void =
-  fcQOffscreenSurface_create(self.h)
+proc createX*(self: gen_qoffscreensurface_types.QOffscreenSurface): void =
+  fcQOffscreenSurface_createX(self.h)
 
 proc destroy*(self: gen_qoffscreensurface_types.QOffscreenSurface): void =
   fcQOffscreenSurface_destroy(self.h)

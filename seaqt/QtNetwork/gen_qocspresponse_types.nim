@@ -2,8 +2,9 @@ type QOcspResponse* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt6Network") & " -fPIC"
-{.compile("gen_qocspresponse.cpp", cflags).}
+import ./qtnetwork_pkg
+
+{.compile("gen_qocspresponse.cpp", QtNetworkCFlags).}
 
 proc fcQOcspResponse_delete(self: pointer) {.importc: "QOcspResponse_delete".}
 proc `=destroy`(self: var QOcspResponse) =

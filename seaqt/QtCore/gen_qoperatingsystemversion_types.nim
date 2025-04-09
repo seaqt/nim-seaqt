@@ -2,8 +2,9 @@ type QOperatingSystemVersionBase* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt6Core") & " -fPIC"
-{.compile("gen_qoperatingsystemversion.cpp", cflags).}
+import ./qtcore_pkg
+
+{.compile("gen_qoperatingsystemversion.cpp", QtCoreCFlags).}
 
 proc fcQOperatingSystemVersionBase_delete(self: pointer) {.importc: "QOperatingSystemVersionBase_delete".}
 proc `=destroy`(self: var QOperatingSystemVersionBase) =

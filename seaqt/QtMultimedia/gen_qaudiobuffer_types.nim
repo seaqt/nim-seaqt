@@ -2,8 +2,9 @@ type QAudioBuffer* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt6Multimedia") & " -fPIC"
-{.compile("gen_qaudiobuffer.cpp", cflags).}
+import ./qtmultimedia_pkg
+
+{.compile("gen_qaudiobuffer.cpp", QtMultimediaCFlags).}
 
 proc fcQAudioBuffer_delete(self: pointer) {.importc: "QAudioBuffer_delete".}
 proc `=destroy`(self: var QAudioBuffer) =

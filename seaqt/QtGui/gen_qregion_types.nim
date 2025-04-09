@@ -2,8 +2,9 @@ type QRegion* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt6Gui") & " -fPIC"
-{.compile("gen_qregion.cpp", cflags).}
+import ./qtgui_pkg
+
+{.compile("gen_qregion.cpp", QtGuiCFlags).}
 
 proc fcQRegion_delete(self: pointer) {.importc: "QRegion_delete".}
 proc `=destroy`(self: var QRegion) =

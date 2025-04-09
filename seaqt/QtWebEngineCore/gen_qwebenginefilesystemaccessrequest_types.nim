@@ -2,8 +2,9 @@ type QWebEngineFileSystemAccessRequest* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt6WebEngineCore") & " -fPIC"
-{.compile("gen_qwebenginefilesystemaccessrequest.cpp", cflags).}
+import ./qtwebenginecore_pkg
+
+{.compile("gen_qwebenginefilesystemaccessrequest.cpp", QtWebEngineCoreCFlags).}
 
 proc fcQWebEngineFileSystemAccessRequest_delete(self: pointer) {.importc: "QWebEngineFileSystemAccessRequest_delete".}
 proc `=destroy`(self: var QWebEngineFileSystemAccessRequest) =

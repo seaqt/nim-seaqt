@@ -2,8 +2,9 @@ type QJSNumberCoercion* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt6Qml") & " -fPIC"
-{.compile("gen_qjsnumbercoercion.cpp", cflags).}
+import ./qtqml_pkg
+
+{.compile("gen_qjsnumbercoercion.cpp", QtQmlCFlags).}
 
 proc fcQJSNumberCoercion_delete(self: pointer) {.importc: "QJSNumberCoercion_delete".}
 proc `=destroy`(self: var QJSNumberCoercion) =

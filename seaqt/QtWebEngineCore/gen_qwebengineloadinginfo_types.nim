@@ -2,8 +2,9 @@ type QWebEngineLoadingInfo* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt6WebEngineCore") & " -fPIC"
-{.compile("gen_qwebengineloadinginfo.cpp", cflags).}
+import ./qtwebenginecore_pkg
+
+{.compile("gen_qwebengineloadinginfo.cpp", QtWebEngineCoreCFlags).}
 
 proc fcQWebEngineLoadingInfo_delete(self: pointer) {.importc: "QWebEngineLoadingInfo_delete".}
 proc `=destroy`(self: var QWebEngineLoadingInfo) =

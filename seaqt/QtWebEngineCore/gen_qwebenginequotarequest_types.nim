@@ -2,8 +2,9 @@ type QWebEngineQuotaRequest* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt6WebEngineCore") & " -fPIC"
-{.compile("gen_qwebenginequotarequest.cpp", cflags).}
+import ./qtwebenginecore_pkg
+
+{.compile("gen_qwebenginequotarequest.cpp", QtWebEngineCoreCFlags).}
 
 proc fcQWebEngineQuotaRequest_delete(self: pointer) {.importc: "QWebEngineQuotaRequest_delete".}
 proc `=destroy`(self: var QWebEngineQuotaRequest) =

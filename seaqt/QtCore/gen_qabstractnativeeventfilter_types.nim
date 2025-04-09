@@ -2,8 +2,9 @@ type QAbstractNativeEventFilter* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt6Core") & " -fPIC"
-{.compile("gen_qabstractnativeeventfilter.cpp", cflags).}
+import ./qtcore_pkg
+
+{.compile("gen_qabstractnativeeventfilter.cpp", QtCoreCFlags).}
 
 proc fcQAbstractNativeEventFilter_delete(self: pointer) {.importc: "QAbstractNativeEventFilter_delete".}
 proc `=destroy`(self: var QAbstractNativeEventFilter) =

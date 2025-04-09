@@ -2,8 +2,9 @@ type QWebEngineFindTextResult* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt6WebEngineCore") & " -fPIC"
-{.compile("gen_qwebenginefindtextresult.cpp", cflags).}
+import ./qtwebenginecore_pkg
+
+{.compile("gen_qwebenginefindtextresult.cpp", QtWebEngineCoreCFlags).}
 
 proc fcQWebEngineFindTextResult_delete(self: pointer) {.importc: "QWebEngineFindTextResult_delete".}
 proc `=destroy`(self: var QWebEngineFindTextResult) =

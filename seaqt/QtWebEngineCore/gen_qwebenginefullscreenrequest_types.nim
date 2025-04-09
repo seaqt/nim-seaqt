@@ -2,8 +2,9 @@ type QWebEngineFullScreenRequest* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt6WebEngineCore") & " -fPIC"
-{.compile("gen_qwebenginefullscreenrequest.cpp", cflags).}
+import ./qtwebenginecore_pkg
+
+{.compile("gen_qwebenginefullscreenrequest.cpp", QtWebEngineCoreCFlags).}
 
 proc fcQWebEngineFullScreenRequest_delete(self: pointer) {.importc: "QWebEngineFullScreenRequest_delete".}
 proc `=destroy`(self: var QWebEngineFullScreenRequest) =

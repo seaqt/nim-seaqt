@@ -2,8 +2,9 @@ type QContiguousCacheData* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt6Core") & " -fPIC"
-{.compile("gen_qcontiguouscache.cpp", cflags).}
+import ./qtcore_pkg
+
+{.compile("gen_qcontiguouscache.cpp", QtCoreCFlags).}
 
 proc fcQContiguousCacheData_delete(self: pointer) {.importc: "QContiguousCacheData_delete".}
 proc `=destroy`(self: var QContiguousCacheData) =

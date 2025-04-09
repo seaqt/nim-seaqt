@@ -2,8 +2,9 @@ type QSize* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt6Core") & " -fPIC"
-{.compile("gen_qsize.cpp", cflags).}
+import ./qtcore_pkg
+
+{.compile("gen_qsize.cpp", QtCoreCFlags).}
 
 proc fcQSize_delete(self: pointer) {.importc: "QSize_delete".}
 proc `=destroy`(self: var QSize) =

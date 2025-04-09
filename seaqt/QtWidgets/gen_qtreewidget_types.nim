@@ -2,8 +2,9 @@ type QTreeWidgetItem* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt6Widgets") & " -fPIC"
-{.compile("gen_qtreewidget.cpp", cflags).}
+import ./qtwidgets_pkg
+
+{.compile("gen_qtreewidget.cpp", QtWidgetsCFlags).}
 
 proc fcQTreeWidgetItem_delete(self: pointer) {.importc: "QTreeWidgetItem_delete".}
 proc `=destroy`(self: var QTreeWidgetItem) =

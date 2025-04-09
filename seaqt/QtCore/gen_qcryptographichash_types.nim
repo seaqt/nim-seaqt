@@ -2,8 +2,9 @@ type QCryptographicHash* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt6Core") & " -fPIC"
-{.compile("gen_qcryptographichash.cpp", cflags).}
+import ./qtcore_pkg
+
+{.compile("gen_qcryptographichash.cpp", QtCoreCFlags).}
 
 proc fcQCryptographicHash_delete(self: pointer) {.importc: "QCryptographicHash_delete".}
 proc `=destroy`(self: var QCryptographicHash) =

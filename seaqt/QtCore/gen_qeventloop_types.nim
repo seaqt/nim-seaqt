@@ -13,8 +13,9 @@ type QEventLoopLocker* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt6Core") & " -fPIC"
-{.compile("gen_qeventloop.cpp", cflags).}
+import ./qtcore_pkg
+
+{.compile("gen_qeventloop.cpp", QtCoreCFlags).}
 
 proc fcQEventLoopLocker_delete(self: pointer) {.importc: "QEventLoopLocker_delete".}
 proc `=destroy`(self: var QEventLoopLocker) =

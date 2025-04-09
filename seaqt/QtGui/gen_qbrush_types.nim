@@ -2,8 +2,9 @@ type QBrush* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt6Gui") & " -fPIC"
-{.compile("gen_qbrush.cpp", cflags).}
+import ./qtgui_pkg
+
+{.compile("gen_qbrush.cpp", QtGuiCFlags).}
 
 proc fcQBrush_delete(self: pointer) {.importc: "QBrush_delete".}
 proc `=destroy`(self: var QBrush) =

@@ -2,8 +2,9 @@ type QSslDiffieHellmanParameters* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt6Network") & " -fPIC"
-{.compile("gen_qssldiffiehellmanparameters.cpp", cflags).}
+import ./qtnetwork_pkg
+
+{.compile("gen_qssldiffiehellmanparameters.cpp", QtNetworkCFlags).}
 
 proc fcQSslDiffieHellmanParameters_delete(self: pointer) {.importc: "QSslDiffieHellmanParameters_delete".}
 proc `=destroy`(self: var QSslDiffieHellmanParameters) =

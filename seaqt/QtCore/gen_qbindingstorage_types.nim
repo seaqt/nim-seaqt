@@ -2,8 +2,9 @@ type QBindingStatus* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt6Core") & " -fPIC"
-{.compile("gen_qbindingstorage.cpp", cflags).}
+import ./qtcore_pkg
+
+{.compile("gen_qbindingstorage.cpp", QtCoreCFlags).}
 
 proc fcQBindingStatus_delete(self: pointer) {.importc: "QBindingStatus_delete".}
 proc `=destroy`(self: var QBindingStatus) =

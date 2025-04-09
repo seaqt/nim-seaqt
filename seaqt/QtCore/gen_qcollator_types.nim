@@ -2,8 +2,9 @@ type QCollatorSortKey* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt6Core") & " -fPIC"
-{.compile("gen_qcollator.cpp", cflags).}
+import ./qtcore_pkg
+
+{.compile("gen_qcollator.cpp", QtCoreCFlags).}
 
 proc fcQCollatorSortKey_delete(self: pointer) {.importc: "QCollatorSortKey_delete".}
 proc `=destroy`(self: var QCollatorSortKey) =

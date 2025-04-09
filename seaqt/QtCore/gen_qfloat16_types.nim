@@ -2,8 +2,9 @@ type qfloat16* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt6Core") & " -fPIC"
-{.compile("gen_qfloat16.cpp", cflags).}
+import ./qtcore_pkg
+
+{.compile("gen_qfloat16.cpp", QtCoreCFlags).}
 
 proc fcqfloat16_delete(self: pointer) {.importc: "qfloat16_delete".}
 proc `=destroy`(self: var qfloat16) =

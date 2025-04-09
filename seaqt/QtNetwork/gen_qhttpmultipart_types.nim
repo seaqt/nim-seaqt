@@ -2,8 +2,9 @@ type QHttpPart* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt6Network") & " -fPIC"
-{.compile("gen_qhttpmultipart.cpp", cflags).}
+import ./qtnetwork_pkg
+
+{.compile("gen_qhttpmultipart.cpp", QtNetworkCFlags).}
 
 proc fcQHttpPart_delete(self: pointer) {.importc: "QHttpPart_delete".}
 proc `=destroy`(self: var QHttpPart) =

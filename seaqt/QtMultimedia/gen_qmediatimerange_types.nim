@@ -2,8 +2,9 @@ type QMediaTimeRange* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt6Multimedia") & " -fPIC"
-{.compile("gen_qmediatimerange.cpp", cflags).}
+import ./qtmultimedia_pkg
+
+{.compile("gen_qmediatimerange.cpp", QtMultimediaCFlags).}
 
 proc fcQMediaTimeRange_delete(self: pointer) {.importc: "QMediaTimeRange_delete".}
 proc `=destroy`(self: var QMediaTimeRange) =

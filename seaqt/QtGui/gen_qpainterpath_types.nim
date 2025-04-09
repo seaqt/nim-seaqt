@@ -2,8 +2,9 @@ type QPainterPath* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt6Gui") & " -fPIC"
-{.compile("gen_qpainterpath.cpp", cflags).}
+import ./qtgui_pkg
+
+{.compile("gen_qpainterpath.cpp", QtGuiCFlags).}
 
 proc fcQPainterPath_delete(self: pointer) {.importc: "QPainterPath_delete".}
 proc `=destroy`(self: var QPainterPath) =

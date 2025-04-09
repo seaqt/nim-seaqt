@@ -2,8 +2,9 @@ type QCborArray* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt6Core") & " -fPIC"
-{.compile("gen_qcborarray.cpp", cflags).}
+import ./qtcore_pkg
+
+{.compile("gen_qcborarray.cpp", QtCoreCFlags).}
 
 proc fcQCborArray_delete(self: pointer) {.importc: "QCborArray_delete".}
 proc `=destroy`(self: var QCborArray) =

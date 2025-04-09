@@ -2,8 +2,9 @@ type QQmlParserStatus* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt6Qml") & " -fPIC"
-{.compile("gen_qqmlparserstatus.cpp", cflags).}
+import ./qtqml_pkg
+
+{.compile("gen_qqmlparserstatus.cpp", QtQmlCFlags).}
 
 proc fcQQmlParserStatus_delete(self: pointer) {.importc: "QQmlParserStatus_delete".}
 proc `=destroy`(self: var QQmlParserStatus) =

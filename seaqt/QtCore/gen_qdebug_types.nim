@@ -13,8 +13,9 @@ type QDebugStateSaver* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt6Core") & " -fPIC"
-{.compile("gen_qdebug.cpp", cflags).}
+import ./qtcore_pkg
+
+{.compile("gen_qdebug.cpp", QtCoreCFlags).}
 
 proc fcQDebugStateSaver_delete(self: pointer) {.importc: "QDebugStateSaver_delete".}
 proc `=destroy`(self: var QDebugStateSaver) =

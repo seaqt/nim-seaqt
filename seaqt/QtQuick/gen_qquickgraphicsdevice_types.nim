@@ -2,8 +2,9 @@ type QQuickGraphicsDevice* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt6Quick") & " -fPIC"
-{.compile("gen_qquickgraphicsdevice.cpp", cflags).}
+import ./qtquick_pkg
+
+{.compile("gen_qquickgraphicsdevice.cpp", QtQuickCFlags).}
 
 proc fcQQuickGraphicsDevice_delete(self: pointer) {.importc: "QQuickGraphicsDevice_delete".}
 proc `=destroy`(self: var QQuickGraphicsDevice) =

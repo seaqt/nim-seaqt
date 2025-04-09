@@ -2,8 +2,9 @@ type QEasingCurve* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt6Core") & " -fPIC"
-{.compile("gen_qeasingcurve.cpp", cflags).}
+import ./qtcore_pkg
+
+{.compile("gen_qeasingcurve.cpp", QtCoreCFlags).}
 
 proc fcQEasingCurve_delete(self: pointer) {.importc: "QEasingCurve_delete".}
 proc `=destroy`(self: var QEasingCurve) =

@@ -13,8 +13,9 @@ type QFormLayoutTakeRowResult* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt6Widgets") & " -fPIC"
-{.compile("gen_qformlayout.cpp", cflags).}
+import ./qtwidgets_pkg
+
+{.compile("gen_qformlayout.cpp", QtWidgetsCFlags).}
 
 proc fcQFormLayoutTakeRowResult_delete(self: pointer) {.importc: "QFormLayout__TakeRowResult_delete".}
 proc `=destroy`(self: var QFormLayoutTakeRowResult) =

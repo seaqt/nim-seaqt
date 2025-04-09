@@ -2,8 +2,9 @@ type QCursor* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt6Gui") & " -fPIC"
-{.compile("gen_qcursor.cpp", cflags).}
+import ./qtgui_pkg
+
+{.compile("gen_qcursor.cpp", QtGuiCFlags).}
 
 proc fcQCursor_delete(self: pointer) {.importc: "QCursor_delete".}
 proc `=destroy`(self: var QCursor) =

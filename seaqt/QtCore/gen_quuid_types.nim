@@ -2,8 +2,9 @@ type QUuid* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt6Core") & " -fPIC"
-{.compile("gen_quuid.cpp", cflags).}
+import ./qtcore_pkg
+
+{.compile("gen_quuid.cpp", QtCoreCFlags).}
 
 proc fcQUuid_delete(self: pointer) {.importc: "QUuid_delete".}
 proc `=destroy`(self: var QUuid) =

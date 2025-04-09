@@ -2,8 +2,9 @@ type QAuthenticator* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt6Network") & " -fPIC"
-{.compile("gen_qauthenticator.cpp", cflags).}
+import ./qtnetwork_pkg
+
+{.compile("gen_qauthenticator.cpp", QtNetworkCFlags).}
 
 proc fcQAuthenticator_delete(self: pointer) {.importc: "QAuthenticator_delete".}
 proc `=destroy`(self: var QAuthenticator) =

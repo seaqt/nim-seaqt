@@ -2,8 +2,9 @@ type QMimeType* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt6Core") & " -fPIC"
-{.compile("gen_qmimetype.cpp", cflags).}
+import ./qtcore_pkg
+
+{.compile("gen_qmimetype.cpp", QtCoreCFlags).}
 
 proc fcQMimeType_delete(self: pointer) {.importc: "QMimeType_delete".}
 proc `=destroy`(self: var QMimeType) =
