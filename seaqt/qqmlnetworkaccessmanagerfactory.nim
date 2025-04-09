@@ -1,0 +1,2 @@
+import ./QtQml/gen_qqmlnetworkaccessmanagerfactory
+export gen_qqmlnetworkaccessmanagerfactory

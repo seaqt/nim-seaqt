@@ -1,0 +1,2 @@
+import ./QtGui/gen_qiconengineplugin
+export gen_qiconengineplugin

@@ -1,0 +1,2 @@
+import ./QtCore/gen_qabstractanimation
+export gen_qabstractanimation

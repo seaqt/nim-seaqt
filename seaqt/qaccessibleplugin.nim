@@ -1,0 +1,2 @@
+import ./QtGui/gen_qaccessibleplugin
+export gen_qaccessibleplugin

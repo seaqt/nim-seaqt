@@ -1,0 +1,2 @@
+import ./QtGui/gen_qpaintdevicewindow
+export gen_qpaintdevicewindow

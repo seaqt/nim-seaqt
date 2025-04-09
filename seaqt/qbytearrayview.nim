@@ -1,0 +1,2 @@
+import ./QtCore/gen_qbytearrayview
+export gen_qbytearrayview

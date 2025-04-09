@@ -1,0 +1,2 @@
+import ./QtCore/gen_qthreadstorage
+export gen_qthreadstorage

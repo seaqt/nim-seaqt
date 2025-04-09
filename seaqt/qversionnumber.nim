@@ -1,0 +1,2 @@
+import ./QtCore/gen_qversionnumber
+export gen_qversionnumber

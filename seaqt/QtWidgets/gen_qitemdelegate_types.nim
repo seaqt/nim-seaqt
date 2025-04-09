@@ -1,0 +1,4 @@
+import ./gen_qabstractitemdelegate_types
+export gen_qabstractitemdelegate_types
+
+type QItemDelegate* = object of gen_qabstractitemdelegate_types.QAbstractItemDelegate

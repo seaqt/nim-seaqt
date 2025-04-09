@@ -1,0 +1,2 @@
+import ./QtWebEngineWidgets/gen_qwebengineview
+export gen_qwebengineview

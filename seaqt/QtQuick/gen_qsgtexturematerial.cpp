@@ -1,0 +1,186 @@
+#include <QSGMaterial>
+#include <QSGMaterialShader>
+#include <QSGMaterialType>
+#include <QSGOpaqueTextureMaterial>
+#include <QSGTexture>
+#include <QSGTextureMaterial>
+#include <qsgtexturematerial.h>
+#include "gen_qsgtexturematerial.h"
+
+#ifndef SEAQT_ALIGNED_SIZEOF
+#define SEAQT_ALIGNED_SIZEOF 1
+#include <cstddef>
+template<typename T>
+static constexpr std::size_t seaqt_aligned_sizeof() {
+	constexpr auto alignment = sizeof(std::max_align_t);
+	return (sizeof(T) + alignment - 1) & ~(alignment - 1);
+}
+#endif
+
+class VirtualQSGOpaqueTextureMaterial final : public QSGOpaqueTextureMaterial {
+	const QSGOpaqueTextureMaterial_VTable* vtbl;
+public:
+	friend void* QSGOpaqueTextureMaterial_vdata(VirtualQSGOpaqueTextureMaterial* self);
+	friend VirtualQSGOpaqueTextureMaterial* vdata_QSGOpaqueTextureMaterial(void* vdata);
+
+	VirtualQSGOpaqueTextureMaterial(const QSGOpaqueTextureMaterial_VTable* vtbl): QSGOpaqueTextureMaterial(), vtbl(vtbl) {}
+
+	virtual ~VirtualQSGOpaqueTextureMaterial() override { if(vtbl->destructor) vtbl->destructor(this); }
+
+	virtual QSGMaterialType* type() const override {
+		if (vtbl->type == 0) {
+			return QSGOpaqueTextureMaterial::type();
+		}
+
+
+		QSGMaterialType* callback_return_value = vtbl->type(this);
+
+		return callback_return_value;
+	}
+
+	friend QSGMaterialType* QSGOpaqueTextureMaterial_virtualbase_type(const VirtualQSGOpaqueTextureMaterial* self);
+
+	virtual QSGMaterialShader* createShader(QSGRendererInterface::RenderMode renderMode) const override {
+		if (vtbl->createShader == 0) {
+			return QSGOpaqueTextureMaterial::createShader(renderMode);
+		}
+
+		QSGRendererInterface::RenderMode renderMode_ret = renderMode;
+		int sigval1 = static_cast<int>(renderMode_ret);
+
+		QSGMaterialShader* callback_return_value = vtbl->createShader(this, sigval1);
+
+		return callback_return_value;
+	}
+
+	friend QSGMaterialShader* QSGOpaqueTextureMaterial_virtualbase_createShader(const VirtualQSGOpaqueTextureMaterial* self, int renderMode);
+
+	virtual int compare(const QSGMaterial* other) const override {
+		if (vtbl->compare == 0) {
+			return QSGOpaqueTextureMaterial::compare(other);
+		}
+
+		QSGMaterial* sigval1 = (QSGMaterial*) other;
+
+		int callback_return_value = vtbl->compare(this, sigval1);
+
+		return static_cast<int>(callback_return_value);
+	}
+
+	friend int QSGOpaqueTextureMaterial_virtualbase_compare(const VirtualQSGOpaqueTextureMaterial* self, QSGMaterial* other);
+
+};
+
+VirtualQSGOpaqueTextureMaterial* QSGOpaqueTextureMaterial_new(const QSGOpaqueTextureMaterial_VTable* vtbl, size_t vdata) {
+	void* _mem_ = malloc(seaqt_aligned_sizeof<VirtualQSGOpaqueTextureMaterial>());
+	return _mem_ ? new (_mem_)VirtualQSGOpaqueTextureMaterial(vtbl) : nullptr;
+}
+
+void QSGOpaqueTextureMaterial_virtbase(QSGOpaqueTextureMaterial* src, QSGMaterial** outptr_QSGMaterial) {
+	*outptr_QSGMaterial = static_cast<QSGMaterial*>(src);
+}
+
+QSGMaterialType* QSGOpaqueTextureMaterial_type(const QSGOpaqueTextureMaterial* self) {
+	return self->type();
+}
+
+QSGMaterialShader* QSGOpaqueTextureMaterial_createShader(const QSGOpaqueTextureMaterial* self, int renderMode) {
+	return self->createShader(static_cast<QSGRendererInterface::RenderMode>(renderMode));
+}
+
+int QSGOpaqueTextureMaterial_compare(const QSGOpaqueTextureMaterial* self, QSGMaterial* other) {
+	return self->compare(other);
+}
+
+void QSGOpaqueTextureMaterial_setTexture(QSGOpaqueTextureMaterial* self, QSGTexture* texture) {
+	self->setTexture(texture);
+}
+
+QSGTexture* QSGOpaqueTextureMaterial_texture(const QSGOpaqueTextureMaterial* self) {
+	return self->texture();
+}
+
+void QSGOpaqueTextureMaterial_setMipmapFiltering(QSGOpaqueTextureMaterial* self, int filteringType) {
+	self->setMipmapFiltering(static_cast<QSGTexture::Filtering>(filteringType));
+}
+
+int QSGOpaqueTextureMaterial_mipmapFiltering(const QSGOpaqueTextureMaterial* self) {
+	QSGTexture::Filtering _ret = self->mipmapFiltering();
+	return static_cast<int>(_ret);
+}
+
+void QSGOpaqueTextureMaterial_setFiltering(QSGOpaqueTextureMaterial* self, int filteringType) {
+	self->setFiltering(static_cast<QSGTexture::Filtering>(filteringType));
+}
+
+int QSGOpaqueTextureMaterial_filtering(const QSGOpaqueTextureMaterial* self) {
+	QSGTexture::Filtering _ret = self->filtering();
+	return static_cast<int>(_ret);
+}
+
+void QSGOpaqueTextureMaterial_setHorizontalWrapMode(QSGOpaqueTextureMaterial* self, int mode) {
+	self->setHorizontalWrapMode(static_cast<QSGTexture::WrapMode>(mode));
+}
+
+int QSGOpaqueTextureMaterial_horizontalWrapMode(const QSGOpaqueTextureMaterial* self) {
+	QSGTexture::WrapMode _ret = self->horizontalWrapMode();
+	return static_cast<int>(_ret);
+}
+
+void QSGOpaqueTextureMaterial_setVerticalWrapMode(QSGOpaqueTextureMaterial* self, int mode) {
+	self->setVerticalWrapMode(static_cast<QSGTexture::WrapMode>(mode));
+}
+
+int QSGOpaqueTextureMaterial_verticalWrapMode(const QSGOpaqueTextureMaterial* self) {
+	QSGTexture::WrapMode _ret = self->verticalWrapMode();
+	return static_cast<int>(_ret);
+}
+
+void QSGOpaqueTextureMaterial_setAnisotropyLevel(QSGOpaqueTextureMaterial* self, int level) {
+	self->setAnisotropyLevel(static_cast<QSGTexture::AnisotropyLevel>(level));
+}
+
+int QSGOpaqueTextureMaterial_anisotropyLevel(const QSGOpaqueTextureMaterial* self) {
+	QSGTexture::AnisotropyLevel _ret = self->anisotropyLevel();
+	return static_cast<int>(_ret);
+}
+
+QSGMaterialType* QSGOpaqueTextureMaterial_virtualbase_type(const VirtualQSGOpaqueTextureMaterial* self) {
+
+	return self->QSGOpaqueTextureMaterial::type();
+}
+
+QSGMaterialShader* QSGOpaqueTextureMaterial_virtualbase_createShader(const VirtualQSGOpaqueTextureMaterial* self, int renderMode) {
+
+	return self->QSGOpaqueTextureMaterial::createShader(static_cast<QSGRendererInterface::RenderMode>(renderMode));
+}
+
+int QSGOpaqueTextureMaterial_virtualbase_compare(const VirtualQSGOpaqueTextureMaterial* self, QSGMaterial* other) {
+
+	return self->QSGOpaqueTextureMaterial::compare(other);
+}
+
+void* QSGOpaqueTextureMaterial_vdata(VirtualQSGOpaqueTextureMaterial* self) { return reinterpret_cast<void*>(reinterpret_cast<char*>(self) + seaqt_aligned_sizeof<VirtualQSGOpaqueTextureMaterial>()); }
+VirtualQSGOpaqueTextureMaterial* vdata_QSGOpaqueTextureMaterial(void* vdata) { return reinterpret_cast<VirtualQSGOpaqueTextureMaterial*>(reinterpret_cast<char*>(vdata) - seaqt_aligned_sizeof<VirtualQSGOpaqueTextureMaterial>()); }
+
+void QSGOpaqueTextureMaterial_delete(QSGOpaqueTextureMaterial* self) {
+	self->~QSGOpaqueTextureMaterial();
+	free(self);
+}
+
+void QSGTextureMaterial_virtbase(QSGTextureMaterial* src, QSGOpaqueTextureMaterial** outptr_QSGOpaqueTextureMaterial) {
+	*outptr_QSGOpaqueTextureMaterial = static_cast<QSGOpaqueTextureMaterial*>(src);
+}
+
+QSGMaterialType* QSGTextureMaterial_type(const QSGTextureMaterial* self) {
+	return self->type();
+}
+
+QSGMaterialShader* QSGTextureMaterial_createShader(const QSGTextureMaterial* self, int renderMode) {
+	return self->createShader(static_cast<QSGRendererInterface::RenderMode>(renderMode));
+}
+
+void QSGTextureMaterial_delete(QSGTextureMaterial* self) {
+	delete self;
+}
+

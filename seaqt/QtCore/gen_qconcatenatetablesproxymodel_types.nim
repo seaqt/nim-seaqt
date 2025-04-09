@@ -1,0 +1,4 @@
+import ./gen_qabstractitemmodel_types
+export gen_qabstractitemmodel_types
+
+type QConcatenateTablesProxyModel* = object of gen_qabstractitemmodel_types.QAbstractItemModel

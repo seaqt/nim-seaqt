@@ -1,0 +1,2 @@
+import ./QtWidgets/gen_qgraphicsitem
+export gen_qgraphicsitem

@@ -1,0 +1,2 @@
+import ./QtCore/gen_qstringtokenizer
+export gen_qstringtokenizer

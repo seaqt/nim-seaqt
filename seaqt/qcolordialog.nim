@@ -1,0 +1,2 @@
+import ./QtWidgets/gen_qcolordialog
+export gen_qcolordialog
