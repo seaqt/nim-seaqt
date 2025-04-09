@@ -641,7 +641,10 @@ method disconnectNotify*(self: VirtualQGraphicsEffect, signal: gen_qmetaobject_t
 proc fcQGraphicsEffect_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsEffect](fcQGraphicsEffect_vdata(self)[])
   var virtualReturn = inst.metaObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQGraphicsEffect_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsEffect](fcQGraphicsEffect_vdata(self)[])
@@ -661,7 +664,10 @@ proc fcQGraphicsEffect_method_callback_boundingRectFor(self: pointer, sourceRect
   let inst = cast[VirtualQGraphicsEffect](fcQGraphicsEffect_vdata(self)[])
   let slotval1 = gen_qrect_types.QRectF(h: sourceRect, owned: false)
   var virtualReturn = inst.boundingRectFor(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQGraphicsEffect_method_callback_draw(self: pointer, painter: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsEffect](fcQGraphicsEffect_vdata(self)[])
@@ -1135,7 +1141,10 @@ method disconnectNotify*(self: VirtualQGraphicsColorizeEffect, signal: gen_qmeta
 proc fcQGraphicsColorizeEffect_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsColorizeEffect](fcQGraphicsColorizeEffect_vdata(self)[])
   var virtualReturn = inst.metaObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQGraphicsColorizeEffect_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsColorizeEffect](fcQGraphicsColorizeEffect_vdata(self)[])
@@ -1160,7 +1169,10 @@ proc fcQGraphicsColorizeEffect_method_callback_boundingRectFor(self: pointer, so
   let inst = cast[VirtualQGraphicsColorizeEffect](fcQGraphicsColorizeEffect_vdata(self)[])
   let slotval1 = gen_qrect_types.QRectF(h: sourceRect, owned: false)
   var virtualReturn = inst.boundingRectFor(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQGraphicsColorizeEffect_method_callback_sourceChanged(self: pointer, flags: cint): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsColorizeEffect](fcQGraphicsColorizeEffect_vdata(self)[])
@@ -1620,7 +1632,10 @@ method disconnectNotify*(self: VirtualQGraphicsBlurEffect, signal: gen_qmetaobje
 proc fcQGraphicsBlurEffect_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsBlurEffect](fcQGraphicsBlurEffect_vdata(self)[])
   var virtualReturn = inst.metaObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQGraphicsBlurEffect_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsBlurEffect](fcQGraphicsBlurEffect_vdata(self)[])
@@ -1640,7 +1655,10 @@ proc fcQGraphicsBlurEffect_method_callback_boundingRectFor(self: pointer, rect: 
   let inst = cast[VirtualQGraphicsBlurEffect](fcQGraphicsBlurEffect_vdata(self)[])
   let slotval1 = gen_qrect_types.QRectF(h: rect, owned: false)
   var virtualReturn = inst.boundingRectFor(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQGraphicsBlurEffect_method_callback_draw(self: pointer, painter: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsBlurEffect](fcQGraphicsBlurEffect_vdata(self)[])
@@ -2149,7 +2167,10 @@ method disconnectNotify*(self: VirtualQGraphicsDropShadowEffect, signal: gen_qme
 proc fcQGraphicsDropShadowEffect_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsDropShadowEffect](fcQGraphicsDropShadowEffect_vdata(self)[])
   var virtualReturn = inst.metaObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQGraphicsDropShadowEffect_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsDropShadowEffect](fcQGraphicsDropShadowEffect_vdata(self)[])
@@ -2169,7 +2190,10 @@ proc fcQGraphicsDropShadowEffect_method_callback_boundingRectFor(self: pointer, 
   let inst = cast[VirtualQGraphicsDropShadowEffect](fcQGraphicsDropShadowEffect_vdata(self)[])
   let slotval1 = gen_qrect_types.QRectF(h: rect, owned: false)
   var virtualReturn = inst.boundingRectFor(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQGraphicsDropShadowEffect_method_callback_draw(self: pointer, painter: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsDropShadowEffect](fcQGraphicsDropShadowEffect_vdata(self)[])
@@ -2631,7 +2655,10 @@ method disconnectNotify*(self: VirtualQGraphicsOpacityEffect, signal: gen_qmetao
 proc fcQGraphicsOpacityEffect_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsOpacityEffect](fcQGraphicsOpacityEffect_vdata(self)[])
   var virtualReturn = inst.metaObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQGraphicsOpacityEffect_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsOpacityEffect](fcQGraphicsOpacityEffect_vdata(self)[])
@@ -2656,7 +2683,10 @@ proc fcQGraphicsOpacityEffect_method_callback_boundingRectFor(self: pointer, sou
   let inst = cast[VirtualQGraphicsOpacityEffect](fcQGraphicsOpacityEffect_vdata(self)[])
   let slotval1 = gen_qrect_types.QRectF(h: sourceRect, owned: false)
   var virtualReturn = inst.boundingRectFor(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQGraphicsOpacityEffect_method_callback_sourceChanged(self: pointer, flags: cint): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsOpacityEffect](fcQGraphicsOpacityEffect_vdata(self)[])

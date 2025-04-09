@@ -332,7 +332,10 @@ proc fcQGraphicsSceneEvent_method_callback_setAccepted(self: pointer, accepted: 
 proc fcQGraphicsSceneEvent_method_callback_clone(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsSceneEvent](fcQGraphicsSceneEvent_vdata(self)[])
   var virtualReturn = inst.clone()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 
 proc create*(T: type gen_qgraphicssceneevent_types.QGraphicsSceneEvent,
@@ -497,7 +500,10 @@ proc fcQGraphicsSceneMouseEvent_method_callback_setAccepted(self: pointer, accep
 proc fcQGraphicsSceneMouseEvent_method_callback_clone(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsSceneMouseEvent](fcQGraphicsSceneMouseEvent_vdata(self)[])
   var virtualReturn = inst.clone()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 
 proc create*(T: type gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent,
@@ -659,7 +665,10 @@ proc fcQGraphicsSceneWheelEvent_method_callback_setAccepted(self: pointer, accep
 proc fcQGraphicsSceneWheelEvent_method_callback_clone(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsSceneWheelEvent](fcQGraphicsSceneWheelEvent_vdata(self)[])
   var virtualReturn = inst.clone()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 
 proc create*(T: type gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent,
@@ -791,7 +800,10 @@ proc fcQGraphicsSceneContextMenuEvent_method_callback_setAccepted(self: pointer,
 proc fcQGraphicsSceneContextMenuEvent_method_callback_clone(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsSceneContextMenuEvent](fcQGraphicsSceneContextMenuEvent_vdata(self)[])
   var virtualReturn = inst.clone()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 
 proc create*(T: type gen_qgraphicssceneevent_types.QGraphicsSceneContextMenuEvent,
@@ -935,7 +947,10 @@ proc fcQGraphicsSceneHoverEvent_method_callback_setAccepted(self: pointer, accep
 proc fcQGraphicsSceneHoverEvent_method_callback_clone(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsSceneHoverEvent](fcQGraphicsSceneHoverEvent_vdata(self)[])
   var virtualReturn = inst.clone()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 
 proc create*(T: type gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent,
@@ -1049,7 +1064,10 @@ proc fcQGraphicsSceneHelpEvent_method_callback_setAccepted(self: pointer, accept
 proc fcQGraphicsSceneHelpEvent_method_callback_clone(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsSceneHelpEvent](fcQGraphicsSceneHelpEvent_vdata(self)[])
   var virtualReturn = inst.clone()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 
 proc create*(T: type gen_qgraphicssceneevent_types.QGraphicsSceneHelpEvent,
@@ -1214,7 +1232,10 @@ proc fcQGraphicsSceneDragDropEvent_method_callback_setAccepted(self: pointer, ac
 proc fcQGraphicsSceneDragDropEvent_method_callback_clone(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsSceneDragDropEvent](fcQGraphicsSceneDragDropEvent_vdata(self)[])
   var virtualReturn = inst.clone()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 
 proc create*(T: type gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent,
@@ -1328,7 +1349,10 @@ proc fcQGraphicsSceneResizeEvent_method_callback_setAccepted(self: pointer, acce
 proc fcQGraphicsSceneResizeEvent_method_callback_clone(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsSceneResizeEvent](fcQGraphicsSceneResizeEvent_vdata(self)[])
   var virtualReturn = inst.clone()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 
 proc create*(T: type gen_qgraphicssceneevent_types.QGraphicsSceneResizeEvent,
@@ -1419,7 +1443,10 @@ proc fcQGraphicsSceneMoveEvent_method_callback_setAccepted(self: pointer, accept
 proc fcQGraphicsSceneMoveEvent_method_callback_clone(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsSceneMoveEvent](fcQGraphicsSceneMoveEvent_vdata(self)[])
   var virtualReturn = inst.clone()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 
 proc create*(T: type gen_qgraphicssceneevent_types.QGraphicsSceneMoveEvent,

@@ -1505,7 +1505,10 @@ method disconnectNotify*(self: VirtualQComboBox, signal: gen_qmetaobject_types.Q
 proc fcQComboBox_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQComboBox](fcQComboBox_vdata(self)[])
   var virtualReturn = inst.metaObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQComboBox_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQComboBox](fcQComboBox_vdata(self)[])
@@ -1529,12 +1532,18 @@ proc fcQComboBox_method_callback_setModel(self: pointer, model: pointer): void {
 proc fcQComboBox_method_callback_sizeHint(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQComboBox](fcQComboBox_vdata(self)[])
   var virtualReturn = inst.sizeHint()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQComboBox_method_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQComboBox](fcQComboBox_vdata(self)[])
   var virtualReturn = inst.minimumSizeHint()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQComboBox_method_callback_showPopup(self: pointer): void {.cdecl.} =
   let inst = cast[VirtualQComboBox](fcQComboBox_vdata(self)[])
@@ -1554,7 +1563,10 @@ proc fcQComboBox_method_callback_inputMethodQuery(self: pointer, param1: cint): 
   let inst = cast[VirtualQComboBox](fcQComboBox_vdata(self)[])
   let slotval1 = cint(param1)
   var virtualReturn = inst.inputMethodQuery(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQComboBox_method_callback_focusInEvent(self: pointer, e: pointer): void {.cdecl.} =
   let inst = cast[VirtualQComboBox](fcQComboBox_vdata(self)[])
@@ -1655,7 +1667,10 @@ proc fcQComboBox_method_callback_hasHeightForWidth(self: pointer): bool {.cdecl.
 proc fcQComboBox_method_callback_paintEngine(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQComboBox](fcQComboBox_vdata(self)[])
   var virtualReturn = inst.paintEngine()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQComboBox_method_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQComboBox](fcQComboBox_vdata(self)[])
@@ -1743,12 +1758,18 @@ proc fcQComboBox_method_callback_redirected(self: pointer, offset: pointer): poi
   let inst = cast[VirtualQComboBox](fcQComboBox_vdata(self)[])
   let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
   var virtualReturn = inst.redirected(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQComboBox_method_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQComboBox](fcQComboBox_vdata(self)[])
   var virtualReturn = inst.sharedPainter()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQComboBox_method_callback_focusNextPrevChild(self: pointer, next: bool): bool {.cdecl.} =
   let inst = cast[VirtualQComboBox](fcQComboBox_vdata(self)[])

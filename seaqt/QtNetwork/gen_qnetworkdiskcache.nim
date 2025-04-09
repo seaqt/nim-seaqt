@@ -478,7 +478,10 @@ method disconnectNotify*(self: VirtualQNetworkDiskCache, signal: gen_qmetaobject
 proc fcQNetworkDiskCache_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQNetworkDiskCache](fcQNetworkDiskCache_vdata(self)[])
   var virtualReturn = inst.metaObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQNetworkDiskCache_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQNetworkDiskCache](fcQNetworkDiskCache_vdata(self)[])
@@ -503,7 +506,10 @@ proc fcQNetworkDiskCache_method_callback_metaData(self: pointer, url: pointer): 
   let inst = cast[VirtualQNetworkDiskCache](fcQNetworkDiskCache_vdata(self)[])
   let slotval1 = gen_qurl_types.QUrl(h: url, owned: false)
   var virtualReturn = inst.metaData(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQNetworkDiskCache_method_callback_updateMetaData(self: pointer, metaData: pointer): void {.cdecl.} =
   let inst = cast[VirtualQNetworkDiskCache](fcQNetworkDiskCache_vdata(self)[])
@@ -514,7 +520,10 @@ proc fcQNetworkDiskCache_method_callback_data(self: pointer, url: pointer): poin
   let inst = cast[VirtualQNetworkDiskCache](fcQNetworkDiskCache_vdata(self)[])
   let slotval1 = gen_qurl_types.QUrl(h: url, owned: false)
   var virtualReturn = inst.data(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQNetworkDiskCache_method_callback_remove(self: pointer, url: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQNetworkDiskCache](fcQNetworkDiskCache_vdata(self)[])
@@ -526,7 +535,10 @@ proc fcQNetworkDiskCache_method_callback_prepare(self: pointer, metaData: pointe
   let inst = cast[VirtualQNetworkDiskCache](fcQNetworkDiskCache_vdata(self)[])
   let slotval1 = gen_qabstractnetworkcache_types.QNetworkCacheMetaData(h: metaData, owned: false)
   var virtualReturn = inst.prepare(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQNetworkDiskCache_method_callback_insert(self: pointer, device: pointer): void {.cdecl.} =
   let inst = cast[VirtualQNetworkDiskCache](fcQNetworkDiskCache_vdata(self)[])

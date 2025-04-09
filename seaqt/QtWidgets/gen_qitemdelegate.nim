@@ -604,7 +604,10 @@ method disconnectNotify*(self: VirtualQItemDelegate, signal: gen_qmetaobject_typ
 proc fcQItemDelegate_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQItemDelegate](fcQItemDelegate_vdata(self)[])
   var virtualReturn = inst.metaObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQItemDelegate_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQItemDelegate](fcQItemDelegate_vdata(self)[])
@@ -632,7 +635,10 @@ proc fcQItemDelegate_method_callback_sizeHint(self: pointer, option: pointer, in
   let slotval1 = gen_qstyleoption_types.QStyleOptionViewItem(h: option, owned: false)
   let slotval2 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var virtualReturn = inst.sizeHint(slotval1, slotval2)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQItemDelegate_method_callback_createEditor(self: pointer, parent: pointer, option: pointer, index: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQItemDelegate](fcQItemDelegate_vdata(self)[])
@@ -640,7 +646,10 @@ proc fcQItemDelegate_method_callback_createEditor(self: pointer, parent: pointer
   let slotval2 = gen_qstyleoption_types.QStyleOptionViewItem(h: option, owned: false)
   let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var virtualReturn = inst.createEditor(slotval1, slotval2, slotval3)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQItemDelegate_method_callback_setEditorData(self: pointer, editor: pointer, index: pointer): void {.cdecl.} =
   let inst = cast[VirtualQItemDelegate](fcQItemDelegate_vdata(self)[])
@@ -730,7 +739,7 @@ proc fcQItemDelegate_method_callback_helpEvent(self: pointer, event: pointer, vi
 proc fcQItemDelegate_method_callback_paintingRoles(self: pointer): struct_miqt_array {.cdecl.} =
   let inst = cast[VirtualQItemDelegate](fcQItemDelegate_vdata(self)[])
   var virtualReturn = inst.paintingRoles()
-  var virtualReturn_CArray = newSeq[cint](len(virtualReturn))
+  var virtualReturn_CArray = cast[ptr UncheckedArray[cint]](if len(virtualReturn) > 0: c_malloc(c_sizet(sizeof(cint) * len(virtualReturn))) else: nil)
   for i in 0..<len(virtualReturn):
     virtualReturn_CArray[i] = virtualReturn[i]
 

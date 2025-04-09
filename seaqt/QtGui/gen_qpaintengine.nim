@@ -815,7 +815,10 @@ proc fcQPaintEngine_method_callback_drawImage(self: pointer, r: pointer, pm: poi
 proc fcQPaintEngine_method_callback_coordinateOffset(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQPaintEngine](fcQPaintEngine_vdata(self)[])
   var virtualReturn = inst.coordinateOffset()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQPaintEngine_method_callback_typeX(self: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQPaintEngine](fcQPaintEngine_vdata(self)[])
@@ -826,14 +829,20 @@ proc fcQPaintEngine_method_callback_createPixmap(self: pointer, size: pointer): 
   let inst = cast[VirtualQPaintEngine](fcQPaintEngine_vdata(self)[])
   let slotval1 = gen_qsize_types.QSize(h: size, owned: true)
   var virtualReturn = inst.createPixmap(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQPaintEngine_method_callback_createPixmapFromImage(self: pointer, image: pointer, flags: cint): pointer {.cdecl.} =
   let inst = cast[VirtualQPaintEngine](fcQPaintEngine_vdata(self)[])
   let slotval1 = gen_qimage_types.QImage(h: image, owned: true)
   let slotval2 = cint(flags)
   var virtualReturn = inst.createPixmapFromImage(slotval1, slotval2)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 
 proc create*(T: type gen_qpaintengine_types.QPaintEngine,

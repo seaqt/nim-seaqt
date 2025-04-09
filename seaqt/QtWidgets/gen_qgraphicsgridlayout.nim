@@ -433,7 +433,10 @@ proc fcQGraphicsGridLayout_method_callback_itemAtWithIndex(self: pointer, index:
   let inst = cast[VirtualQGraphicsGridLayout](fcQGraphicsGridLayout_vdata(self)[])
   let slotval1 = index
   var virtualReturn = inst.itemAt(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQGraphicsGridLayout_method_callback_removeAt(self: pointer, index: cint): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsGridLayout](fcQGraphicsGridLayout_vdata(self)[])
@@ -454,7 +457,10 @@ proc fcQGraphicsGridLayout_method_callback_sizeHint(self: pointer, which: cint, 
   let slotval1 = cint(which)
   let slotval2 = gen_qsize_types.QSizeF(h: constraint, owned: false)
   var virtualReturn = inst.sizeHint(slotval1, slotval2)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQGraphicsGridLayout_method_callback_getContentsMargins(self: pointer, left: ptr float64, top: ptr float64, right: ptr float64, bottom: ptr float64): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsGridLayout](fcQGraphicsGridLayout_vdata(self)[])

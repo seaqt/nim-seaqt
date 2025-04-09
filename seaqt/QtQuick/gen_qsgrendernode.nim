@@ -270,7 +270,10 @@ proc fcQSGRenderNode_method_callback_flags(self: pointer): cint {.cdecl.} =
 proc fcQSGRenderNode_method_callback_rect(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQSGRenderNode](fcQSGRenderNode_vdata(self)[])
   var virtualReturn = inst.rect()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQSGRenderNode_method_callback_isSubtreeBlocked(self: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQSGRenderNode](fcQSGRenderNode_vdata(self)[])

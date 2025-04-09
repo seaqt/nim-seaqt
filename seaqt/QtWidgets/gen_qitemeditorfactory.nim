@@ -145,13 +145,18 @@ proc fcQItemEditorFactory_method_callback_createEditor(self: pointer, userType: 
   let slotval1 = userType
   let slotval2 = gen_qwidget_types.QWidget(h: parent, owned: false)
   var virtualReturn = inst.createEditor(slotval1, slotval2)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQItemEditorFactory_method_callback_valuePropertyName(self: pointer, userType: cint): struct_miqt_string {.cdecl.} =
   let inst = cast[VirtualQItemEditorFactory](fcQItemEditorFactory_vdata(self)[])
   let slotval1 = userType
   var virtualReturn = inst.valuePropertyName(slotval1)
-  struct_miqt_string(data: if len(virtualReturn) > 0: addr virtualReturn[0] else: nil, len: csize_t(len(virtualReturn)))
+  var virtualReturn_copy = if len(virtualReturn) > 0: c_malloc(csize_t(len(virtualReturn))) else: nil
+  if len(virtualReturn) > 0: copyMem(virtualReturn_copy, addr virtualReturn[0], csize_t(len(virtualReturn)))
+  struct_miqt_string(data: virtualReturn_copy, len: csize_t(len(virtualReturn)))
 
 
 proc create*(T: type gen_qitemeditorfactory_types.QItemEditorFactory,

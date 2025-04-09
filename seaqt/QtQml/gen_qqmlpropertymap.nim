@@ -391,7 +391,10 @@ method disconnectNotify*(self: VirtualQQmlPropertyMap, signal: gen_qmetaobject_t
 proc fcQQmlPropertyMap_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQQmlPropertyMap](fcQQmlPropertyMap_vdata(self)[])
   var virtualReturn = inst.metaObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQQmlPropertyMap_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQQmlPropertyMap](fcQQmlPropertyMap_vdata(self)[])
@@ -415,7 +418,10 @@ proc fcQQmlPropertyMap_method_callback_updateValue(self: pointer, key: struct_mi
   let slotval1 = vkeyx_ret
   let slotval2 = gen_qvariant_types.QVariant(h: input, owned: false)
   var virtualReturn = inst.updateValue(slotval1, slotval2)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQQmlPropertyMap_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQQmlPropertyMap](fcQQmlPropertyMap_vdata(self)[])

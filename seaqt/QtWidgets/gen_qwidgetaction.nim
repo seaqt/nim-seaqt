@@ -324,7 +324,10 @@ method disconnectNotify*(self: VirtualQWidgetAction, signal: gen_qmetaobject_typ
 proc fcQWidgetAction_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQWidgetAction](fcQWidgetAction_vdata(self)[])
   var virtualReturn = inst.metaObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQWidgetAction_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQWidgetAction](fcQWidgetAction_vdata(self)[])
@@ -357,7 +360,10 @@ proc fcQWidgetAction_method_callback_createWidget(self: pointer, parent: pointer
   let inst = cast[VirtualQWidgetAction](fcQWidgetAction_vdata(self)[])
   let slotval1 = gen_qwidget_types.QWidget(h: parent, owned: false)
   var virtualReturn = inst.createWidget(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQWidgetAction_method_callback_deleteWidget(self: pointer, widget: pointer): void {.cdecl.} =
   let inst = cast[VirtualQWidgetAction](fcQWidgetAction_vdata(self)[])

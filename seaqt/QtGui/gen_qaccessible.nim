@@ -845,7 +845,10 @@ method accessibleInterface*(self: VirtualQAccessibleEvent): gen_qaccessible_type
 proc fcQAccessibleEvent_method_callback_accessibleInterface(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQAccessibleEvent](fcQAccessibleEvent_vdata(self)[])
   var virtualReturn = inst.accessibleInterface()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 
 proc create*(T: type gen_qaccessible_types.QAccessibleEvent,
@@ -929,7 +932,10 @@ method accessibleInterface*(self: VirtualQAccessibleStateChangeEvent): gen_qacce
 proc fcQAccessibleStateChangeEvent_method_callback_accessibleInterface(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQAccessibleStateChangeEvent](fcQAccessibleStateChangeEvent_vdata(self)[])
   var virtualReturn = inst.accessibleInterface()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 
 proc create*(T: type gen_qaccessible_types.QAccessibleStateChangeEvent,
@@ -1016,7 +1022,10 @@ method accessibleInterface*(self: VirtualQAccessibleTextCursorEvent): gen_qacces
 proc fcQAccessibleTextCursorEvent_method_callback_accessibleInterface(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQAccessibleTextCursorEvent](fcQAccessibleTextCursorEvent_vdata(self)[])
   var virtualReturn = inst.accessibleInterface()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 
 proc create*(T: type gen_qaccessible_types.QAccessibleTextCursorEvent,
@@ -1106,7 +1115,10 @@ method accessibleInterface*(self: VirtualQAccessibleTextSelectionEvent): gen_qac
 proc fcQAccessibleTextSelectionEvent_method_callback_accessibleInterface(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQAccessibleTextSelectionEvent](fcQAccessibleTextSelectionEvent_vdata(self)[])
   var virtualReturn = inst.accessibleInterface()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 
 proc create*(T: type gen_qaccessible_types.QAccessibleTextSelectionEvent,
@@ -1196,7 +1208,10 @@ method accessibleInterface*(self: VirtualQAccessibleTextInsertEvent): gen_qacces
 proc fcQAccessibleTextInsertEvent_method_callback_accessibleInterface(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQAccessibleTextInsertEvent](fcQAccessibleTextInsertEvent_vdata(self)[])
   var virtualReturn = inst.accessibleInterface()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 
 proc create*(T: type gen_qaccessible_types.QAccessibleTextInsertEvent,
@@ -1286,7 +1301,10 @@ method accessibleInterface*(self: VirtualQAccessibleTextRemoveEvent): gen_qacces
 proc fcQAccessibleTextRemoveEvent_method_callback_accessibleInterface(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQAccessibleTextRemoveEvent](fcQAccessibleTextRemoveEvent_vdata(self)[])
   var virtualReturn = inst.accessibleInterface()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 
 proc create*(T: type gen_qaccessible_types.QAccessibleTextRemoveEvent,
@@ -1382,7 +1400,10 @@ method accessibleInterface*(self: VirtualQAccessibleTextUpdateEvent): gen_qacces
 proc fcQAccessibleTextUpdateEvent_method_callback_accessibleInterface(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQAccessibleTextUpdateEvent](fcQAccessibleTextUpdateEvent_vdata(self)[])
   var virtualReturn = inst.accessibleInterface()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 
 proc create*(T: type gen_qaccessible_types.QAccessibleTextUpdateEvent,
@@ -1469,7 +1490,10 @@ method accessibleInterface*(self: VirtualQAccessibleValueChangeEvent): gen_qacce
 proc fcQAccessibleValueChangeEvent_method_callback_accessibleInterface(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQAccessibleValueChangeEvent](fcQAccessibleValueChangeEvent_vdata(self)[])
   var virtualReturn = inst.accessibleInterface()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 
 proc create*(T: type gen_qaccessible_types.QAccessibleValueChangeEvent,
@@ -1580,7 +1604,10 @@ method accessibleInterface*(self: VirtualQAccessibleTableModelChangeEvent): gen_
 proc fcQAccessibleTableModelChangeEvent_method_callback_accessibleInterface(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQAccessibleTableModelChangeEvent](fcQAccessibleTableModelChangeEvent_vdata(self)[])
   var virtualReturn = inst.accessibleInterface()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 
 proc create*(T: type gen_qaccessible_types.QAccessibleTableModelChangeEvent,

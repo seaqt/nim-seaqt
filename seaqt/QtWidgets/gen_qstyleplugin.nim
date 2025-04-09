@@ -294,7 +294,10 @@ method disconnectNotify*(self: VirtualQStylePlugin, signal: gen_qmetaobject_type
 proc fcQStylePlugin_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQStylePlugin](fcQStylePlugin_vdata(self)[])
   var virtualReturn = inst.metaObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQStylePlugin_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQStylePlugin](fcQStylePlugin_vdata(self)[])
@@ -317,7 +320,10 @@ proc fcQStylePlugin_method_callback_createX(self: pointer, key: struct_miqt_stri
   c_free(vkey_ms.data)
   let slotval1 = vkeyx_ret
   var virtualReturn = inst.createX(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQStylePlugin_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQStylePlugin](fcQStylePlugin_vdata(self)[])

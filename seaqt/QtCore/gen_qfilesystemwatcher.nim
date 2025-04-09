@@ -340,7 +340,10 @@ method disconnectNotify*(self: VirtualQFileSystemWatcher, signal: gen_qmetaobjec
 proc fcQFileSystemWatcher_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQFileSystemWatcher](fcQFileSystemWatcher_vdata(self)[])
   var virtualReturn = inst.metaObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQFileSystemWatcher_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQFileSystemWatcher](fcQFileSystemWatcher_vdata(self)[])

@@ -1110,7 +1110,10 @@ method disconnectNotify*(self: VirtualQStringListModel, signal: gen_qmetaobject_
 proc fcQStringListModel_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQStringListModel](fcQStringListModel_vdata(self)[])
   var virtualReturn = inst.metaObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQStringListModel_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQStringListModel](fcQStringListModel_vdata(self)[])
@@ -1138,14 +1141,20 @@ proc fcQStringListModel_method_callback_sibling(self: pointer, row: cint, column
   let slotval2 = column
   let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: idx, owned: false)
   var virtualReturn = inst.sibling(slotval1, slotval2, slotval3)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQStringListModel_method_callback_data(self: pointer, index: pointer, role: cint): pointer {.cdecl.} =
   let inst = cast[VirtualQStringListModel](fcQStringListModel_vdata(self)[])
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   let slotval2 = role
   var virtualReturn = inst.data(slotval1, slotval2)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQStringListModel_method_callback_setData(self: pointer, index: pointer, value: pointer, role: cint): bool {.cdecl.} =
   let inst = cast[VirtualQStringListModel](fcQStringListModel_vdata(self)[])
@@ -1197,15 +1206,18 @@ proc fcQStringListModel_method_callback_itemData(self: pointer, index: pointer):
   let inst = cast[VirtualQStringListModel](fcQStringListModel_vdata(self)[])
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var virtualReturn = inst.itemData(slotval1)
-  var virtualReturn_Keys_CArray = newSeq[cint](len(virtualReturn))
-  var virtualReturn_Values_CArray = newSeq[pointer](len(virtualReturn))
+  var virtualReturn_Keys_CArray = cast[ptr UncheckedArray[cint]](if len(virtualReturn) > 0: c_malloc(csize_t(sizeof(cint) * len(virtualReturn))) else: nil)
+  var virtualReturn_Values_CArray = cast[ptr UncheckedArray[pointer]](if len(virtualReturn) > 0: c_malloc(csize_t(sizeof(pointer) * len(virtualReturn))) else: nil)
   var virtualReturn_ctr = 0
   for virtualReturn_k in virtualReturn.keys():
     virtualReturn_Keys_CArray[virtualReturn_ctr] = virtualReturn_k
     virtualReturn_ctr += 1
   virtualReturn_ctr = 0
-  for virtualReturn_v in virtualReturn.values():
-    virtualReturn_Values_CArray[virtualReturn_ctr] = virtualReturn_v.h
+  for virtualReturn_v in virtualReturn.mvalues():
+    virtualReturn_v.owned = false # TODO move?
+    let virtualReturn_v_h = virtualReturn_v.h
+    virtualReturn_v.h = nil
+    virtualReturn_Values_CArray[virtualReturn_ctr] = virtualReturn_v_h
     virtualReturn_ctr += 1
 
   struct_miqt_map(len: csize_t(len(virtualReturn)),keys: if len(virtualReturn) == 0: nil else: addr(virtualReturn_Keys_CArray[0]), values: if len(virtualReturn) == 0: nil else: addr(virtualReturn_Values_CArray[0]),)
@@ -1246,7 +1258,10 @@ proc fcQStringListModel_method_callback_index(self: pointer, row: cint, column: 
   let slotval2 = column
   let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   var virtualReturn = inst.index(slotval1, slotval2, slotval3)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQStringListModel_method_callback_dropMimeData(self: pointer, data: pointer, action: cint, row: cint, column: cint, parent: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQStringListModel](fcQStringListModel_vdata(self)[])
@@ -1264,7 +1279,10 @@ proc fcQStringListModel_method_callback_headerData(self: pointer, section: cint,
   let slotval2 = cint(orientation)
   let slotval3 = role
   var virtualReturn = inst.headerData(slotval1, slotval2, slotval3)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQStringListModel_method_callback_setHeaderData(self: pointer, section: cint, orientation: cint, value: pointer, role: cint): bool {.cdecl.} =
   let inst = cast[VirtualQStringListModel](fcQStringListModel_vdata(self)[])
@@ -1278,9 +1296,11 @@ proc fcQStringListModel_method_callback_setHeaderData(self: pointer, section: ci
 proc fcQStringListModel_method_callback_mimeTypes(self: pointer): struct_miqt_array {.cdecl.} =
   let inst = cast[VirtualQStringListModel](fcQStringListModel_vdata(self)[])
   var virtualReturn = inst.mimeTypes()
-  var virtualReturn_CArray = newSeq[struct_miqt_string](len(virtualReturn))
+  var virtualReturn_CArray = cast[ptr UncheckedArray[struct_miqt_string]](if len(virtualReturn) > 0: c_malloc(c_sizet(sizeof(struct_miqt_string) * len(virtualReturn))) else: nil)
   for i in 0..<len(virtualReturn):
-    virtualReturn_CArray[i] = struct_miqt_string(data: if len(virtualReturn[i]) > 0: addr virtualReturn[i][0] else: nil, len: csize_t(len(virtualReturn[i])))
+    var virtualReturn_i_copy = if len(virtualReturn[i]) > 0: c_malloc(csize_t(len(virtualReturn[i]))) else: nil
+    if len(virtualReturn[i]) > 0: copyMem(virtualReturn_i_copy, addr virtualReturn[i][0], csize_t(len(virtualReturn[i])))
+    virtualReturn_CArray[i] = struct_miqt_string(data: virtualReturn_i_copy, len: csize_t(len(virtualReturn[i])))
 
   struct_miqt_array(len: csize_t(len(virtualReturn)), data: if len(virtualReturn) == 0: nil else: addr(virtualReturn_CArray[0]))
 
@@ -1294,7 +1314,10 @@ proc fcQStringListModel_method_callback_mimeData(self: pointer, indexes: struct_
   c_free(vindexes_ma.data)
   let slotval1 = vindexesx_ret
   var virtualReturn = inst.mimeData(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQStringListModel_method_callback_canDropMimeData(self: pointer, data: pointer, action: cint, row: cint, column: cint, parent: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQStringListModel](fcQStringListModel_vdata(self)[])
@@ -1352,7 +1375,10 @@ proc fcQStringListModel_method_callback_buddy(self: pointer, index: pointer): po
   let inst = cast[VirtualQStringListModel](fcQStringListModel_vdata(self)[])
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var virtualReturn = inst.buddy(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQStringListModel_method_callback_match(self: pointer, start: pointer, role: cint, value: pointer, hits: cint, flags: cint): struct_miqt_array {.cdecl.} =
   let inst = cast[VirtualQStringListModel](fcQStringListModel_vdata(self)[])
@@ -1362,9 +1388,12 @@ proc fcQStringListModel_method_callback_match(self: pointer, start: pointer, rol
   let slotval4 = hits
   let slotval5 = cint(flags)
   var virtualReturn = inst.match(slotval1, slotval2, slotval3, slotval4, slotval5)
-  var virtualReturn_CArray = newSeq[pointer](len(virtualReturn))
+  var virtualReturn_CArray = cast[ptr UncheckedArray[pointer]](if len(virtualReturn) > 0: c_malloc(c_sizet(sizeof(pointer) * len(virtualReturn))) else: nil)
   for i in 0..<len(virtualReturn):
-    virtualReturn_CArray[i] = virtualReturn[i].h
+    virtualReturn[i].owned = false # TODO move?
+    let virtualReturn_i_h = virtualReturn[i].h
+    virtualReturn[i].h = nil
+    virtualReturn_CArray[i] = virtualReturn_i_h
 
   struct_miqt_array(len: csize_t(len(virtualReturn)), data: if len(virtualReturn) == 0: nil else: addr(virtualReturn_CArray[0]))
 
@@ -1372,20 +1401,25 @@ proc fcQStringListModel_method_callback_span(self: pointer, index: pointer): poi
   let inst = cast[VirtualQStringListModel](fcQStringListModel_vdata(self)[])
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var virtualReturn = inst.span(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQStringListModel_method_callback_roleNames(self: pointer): struct_miqt_map {.cdecl.} =
   let inst = cast[VirtualQStringListModel](fcQStringListModel_vdata(self)[])
   var virtualReturn = inst.roleNames()
-  var virtualReturn_Keys_CArray = newSeq[cint](len(virtualReturn))
-  var virtualReturn_Values_CArray = newSeq[struct_miqt_string](len(virtualReturn))
+  var virtualReturn_Keys_CArray = cast[ptr UncheckedArray[cint]](if len(virtualReturn) > 0: c_malloc(csize_t(sizeof(cint) * len(virtualReturn))) else: nil)
+  var virtualReturn_Values_CArray = cast[ptr UncheckedArray[struct_miqt_string]](if len(virtualReturn) > 0: c_malloc(csize_t(sizeof(struct_miqt_string) * len(virtualReturn))) else: nil)
   var virtualReturn_ctr = 0
   for virtualReturn_k in virtualReturn.keys():
     virtualReturn_Keys_CArray[virtualReturn_ctr] = virtualReturn_k
     virtualReturn_ctr += 1
   virtualReturn_ctr = 0
-  for virtualReturn_v in virtualReturn.values():
-    virtualReturn_Values_CArray[virtualReturn_ctr] = struct_miqt_string(data: if len(virtualReturn_v) > 0: addr virtualReturn_v[0] else: nil, len: csize_t(len(virtualReturn_v)))
+  for virtualReturn_v in virtualReturn.mvalues():
+    var virtualReturn_v_copy = if len(virtualReturn_v) > 0: c_malloc(csize_t(len(virtualReturn_v))) else: nil
+    if len(virtualReturn_v) > 0: copyMem(virtualReturn_v_copy, addr virtualReturn_v[0], csize_t(len(virtualReturn_v)))
+    virtualReturn_Values_CArray[virtualReturn_ctr] = struct_miqt_string(data: virtualReturn_v_copy, len: csize_t(len(virtualReturn_v)))
     virtualReturn_ctr += 1
 
   struct_miqt_map(len: csize_t(len(virtualReturn)),keys: if len(virtualReturn) == 0: nil else: addr(virtualReturn_Keys_CArray[0]), values: if len(virtualReturn) == 0: nil else: addr(virtualReturn_Values_CArray[0]),)

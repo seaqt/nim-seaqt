@@ -141,7 +141,10 @@ proc fcQTestQTouchEventWidgetSequence_method_callback_stationary(self: pointer, 
   let inst = cast[VirtualQTestQTouchEventWidgetSequence](fcQTestQTouchEventWidgetSequence_vdata(self)[])
   let slotval1 = touchId
   var virtualReturn = inst.stationary(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQTestQTouchEventWidgetSequence_method_callback_commit(self: pointer, processEvents: bool): bool {.cdecl.} =
   let inst = cast[VirtualQTestQTouchEventWidgetSequence](fcQTestQTouchEventWidgetSequence_vdata(self)[])

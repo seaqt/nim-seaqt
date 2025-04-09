@@ -442,7 +442,10 @@ method disconnectNotify*(self: VirtualQLocalServer, signal: gen_qmetaobject_type
 proc fcQLocalServer_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQLocalServer](fcQLocalServer_vdata(self)[])
   var virtualReturn = inst.metaObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQLocalServer_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQLocalServer](fcQLocalServer_vdata(self)[])
@@ -466,7 +469,10 @@ proc fcQLocalServer_method_callback_hasPendingConnections(self: pointer): bool {
 proc fcQLocalServer_method_callback_nextPendingConnection(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQLocalServer](fcQLocalServer_vdata(self)[])
   var virtualReturn = inst.nextPendingConnection()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQLocalServer_method_callback_incomingConnection(self: pointer, socketDescriptor: uint): void {.cdecl.} =
   let inst = cast[VirtualQLocalServer](fcQLocalServer_vdata(self)[])

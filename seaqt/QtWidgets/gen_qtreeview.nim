@@ -2019,7 +2019,10 @@ method disconnectNotify*(self: VirtualQTreeView, signal: gen_qmetaobject_types.Q
 proc fcQTreeView_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQTreeView](fcQTreeView_vdata(self)[])
   var virtualReturn = inst.metaObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQTreeView_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQTreeView](fcQTreeView_vdata(self)[])
@@ -2062,7 +2065,10 @@ proc fcQTreeView_method_callback_visualRect(self: pointer, index: pointer): poin
   let inst = cast[VirtualQTreeView](fcQTreeView_vdata(self)[])
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var virtualReturn = inst.visualRect(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQTreeView_method_callback_scrollTo(self: pointer, index: pointer, hint: cint): void {.cdecl.} =
   let inst = cast[VirtualQTreeView](fcQTreeView_vdata(self)[])
@@ -2074,7 +2080,10 @@ proc fcQTreeView_method_callback_indexAt(self: pointer, p: pointer): pointer {.c
   let inst = cast[VirtualQTreeView](fcQTreeView_vdata(self)[])
   let slotval1 = gen_qpoint_types.QPoint(h: p, owned: false)
   var virtualReturn = inst.indexAt(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQTreeView_method_callback_doItemsLayout(self: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTreeView](fcQTreeView_vdata(self)[])
@@ -2131,7 +2140,10 @@ proc fcQTreeView_method_callback_moveCursor(self: pointer, cursorAction: cint, m
   let slotval1 = cint(cursorAction)
   let slotval2 = cint(modifiers)
   var virtualReturn = inst.moveCursor(slotval1, slotval2)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQTreeView_method_callback_horizontalOffset(self: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQTreeView](fcQTreeView_vdata(self)[])
@@ -2153,14 +2165,20 @@ proc fcQTreeView_method_callback_visualRegionForSelection(self: pointer, selecti
   let inst = cast[VirtualQTreeView](fcQTreeView_vdata(self)[])
   let slotval1 = gen_qitemselectionmodel_types.QItemSelection(h: selection, owned: false)
   var virtualReturn = inst.visualRegionForSelection(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQTreeView_method_callback_selectedIndexes(self: pointer): struct_miqt_array {.cdecl.} =
   let inst = cast[VirtualQTreeView](fcQTreeView_vdata(self)[])
   var virtualReturn = inst.selectedIndexes()
-  var virtualReturn_CArray = newSeq[pointer](len(virtualReturn))
+  var virtualReturn_CArray = cast[ptr UncheckedArray[pointer]](if len(virtualReturn) > 0: c_malloc(c_sizet(sizeof(pointer) * len(virtualReturn))) else: nil)
   for i in 0..<len(virtualReturn):
-    virtualReturn_CArray[i] = virtualReturn[i].h
+    virtualReturn[i].owned = false # TODO move?
+    let virtualReturn_i_h = virtualReturn[i].h
+    virtualReturn[i].h = nil
+    virtualReturn_CArray[i] = virtualReturn_i_h
 
   struct_miqt_array(len: csize_t(len(virtualReturn)), data: if len(virtualReturn) == 0: nil else: addr(virtualReturn_CArray[0]))
 
@@ -2236,7 +2254,10 @@ proc fcQTreeView_method_callback_updateGeometries(self: pointer): void {.cdecl.}
 proc fcQTreeView_method_callback_viewportSizeHint(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQTreeView](fcQTreeView_vdata(self)[])
   var virtualReturn = inst.viewportSizeHint()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQTreeView_method_callback_sizeHintForColumn(self: pointer, column: cint): cint {.cdecl.} =
   let inst = cast[VirtualQTreeView](fcQTreeView_vdata(self)[])
@@ -2277,13 +2298,19 @@ proc fcQTreeView_method_callback_itemDelegateForIndex(self: pointer, index: poin
   let inst = cast[VirtualQTreeView](fcQTreeView_vdata(self)[])
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var virtualReturn = inst.itemDelegateForIndex(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQTreeView_method_callback_inputMethodQuery(self: pointer, query: cint): pointer {.cdecl.} =
   let inst = cast[VirtualQTreeView](fcQTreeView_vdata(self)[])
   let slotval1 = cint(query)
   var virtualReturn = inst.inputMethodQuery(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQTreeView_method_callback_updateEditorData(self: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTreeView](fcQTreeView_vdata(self)[])
@@ -2401,12 +2428,18 @@ proc fcQTreeView_method_callback_eventFilter(self: pointer, objectVal: pointer, 
 proc fcQTreeView_method_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQTreeView](fcQTreeView_vdata(self)[])
   var virtualReturn = inst.minimumSizeHint()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQTreeView_method_callback_sizeHint(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQTreeView](fcQTreeView_vdata(self)[])
   var virtualReturn = inst.sizeHint()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQTreeView_method_callback_setupViewport(self: pointer, viewport: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTreeView](fcQTreeView_vdata(self)[])
@@ -2452,7 +2485,10 @@ proc fcQTreeView_method_callback_hasHeightForWidth(self: pointer): bool {.cdecl.
 proc fcQTreeView_method_callback_paintEngine(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQTreeView](fcQTreeView_vdata(self)[])
   var virtualReturn = inst.paintEngine()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQTreeView_method_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTreeView](fcQTreeView_vdata(self)[])
@@ -2525,12 +2561,18 @@ proc fcQTreeView_method_callback_redirected(self: pointer, offset: pointer): poi
   let inst = cast[VirtualQTreeView](fcQTreeView_vdata(self)[])
   let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
   var virtualReturn = inst.redirected(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQTreeView_method_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQTreeView](fcQTreeView_vdata(self)[])
   var virtualReturn = inst.sharedPainter()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQTreeView_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTreeView](fcQTreeView_vdata(self)[])

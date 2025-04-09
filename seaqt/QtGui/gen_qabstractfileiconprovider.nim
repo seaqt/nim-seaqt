@@ -191,19 +191,27 @@ proc fcQAbstractFileIconProvider_method_callback_icon(self: pointer, param1: cin
   let inst = cast[VirtualQAbstractFileIconProvider](fcQAbstractFileIconProvider_vdata(self)[])
   let slotval1 = cint(param1)
   var virtualReturn = inst.icon(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQAbstractFileIconProvider_method_callback_iconWithQFileInfo(self: pointer, param1: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQAbstractFileIconProvider](fcQAbstractFileIconProvider_vdata(self)[])
   let slotval1 = gen_qfileinfo_types.QFileInfo(h: param1, owned: false)
   var virtualReturn = inst.icon(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQAbstractFileIconProvider_method_callback_typeX(self: pointer, param1: pointer): struct_miqt_string {.cdecl.} =
   let inst = cast[VirtualQAbstractFileIconProvider](fcQAbstractFileIconProvider_vdata(self)[])
   let slotval1 = gen_qfileinfo_types.QFileInfo(h: param1, owned: false)
   var virtualReturn = inst.typeX(slotval1)
-  struct_miqt_string(data: if len(virtualReturn) > 0: addr virtualReturn[0] else: nil, len: csize_t(len(virtualReturn)))
+  var virtualReturn_copy = if len(virtualReturn) > 0: c_malloc(csize_t(len(virtualReturn))) else: nil
+  if len(virtualReturn) > 0: copyMem(virtualReturn_copy, addr virtualReturn[0], csize_t(len(virtualReturn)))
+  struct_miqt_string(data: virtualReturn_copy, len: csize_t(len(virtualReturn)))
 
 proc fcQAbstractFileIconProvider_method_callback_setOptions(self: pointer, options: cint): void {.cdecl.} =
   let inst = cast[VirtualQAbstractFileIconProvider](fcQAbstractFileIconProvider_vdata(self)[])

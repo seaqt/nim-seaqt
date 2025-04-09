@@ -1202,7 +1202,10 @@ method disconnectNotify*(self: VirtualQMdiArea, signal: gen_qmetaobject_types.QM
 proc fcQMdiArea_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQMdiArea](fcQMdiArea_vdata(self)[])
   var virtualReturn = inst.metaObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQMdiArea_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQMdiArea](fcQMdiArea_vdata(self)[])
@@ -1221,12 +1224,18 @@ proc fcQMdiArea_method_callback_metacall(self: pointer, param1: cint, param2: ci
 proc fcQMdiArea_method_callback_sizeHint(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQMdiArea](fcQMdiArea_vdata(self)[])
   var virtualReturn = inst.sizeHint()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQMdiArea_method_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQMdiArea](fcQMdiArea_vdata(self)[])
   var virtualReturn = inst.minimumSizeHint()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQMdiArea_method_callback_setupViewport(self: pointer, viewport: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMdiArea](fcQMdiArea_vdata(self)[])
@@ -1341,7 +1350,10 @@ proc fcQMdiArea_method_callback_keyPressEvent(self: pointer, param1: pointer): v
 proc fcQMdiArea_method_callback_viewportSizeHint(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQMdiArea](fcQMdiArea_vdata(self)[])
   var virtualReturn = inst.viewportSizeHint()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQMdiArea_method_callback_changeEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMdiArea](fcQMdiArea_vdata(self)[])
@@ -1377,7 +1389,10 @@ proc fcQMdiArea_method_callback_hasHeightForWidth(self: pointer): bool {.cdecl.}
 proc fcQMdiArea_method_callback_paintEngine(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQMdiArea](fcQMdiArea_vdata(self)[])
   var virtualReturn = inst.paintEngine()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQMdiArea_method_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMdiArea](fcQMdiArea_vdata(self)[])
@@ -1455,12 +1470,18 @@ proc fcQMdiArea_method_callback_redirected(self: pointer, offset: pointer): poin
   let inst = cast[VirtualQMdiArea](fcQMdiArea_vdata(self)[])
   let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
   var virtualReturn = inst.redirected(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQMdiArea_method_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQMdiArea](fcQMdiArea_vdata(self)[])
   var virtualReturn = inst.sharedPainter()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQMdiArea_method_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMdiArea](fcQMdiArea_vdata(self)[])
@@ -1471,7 +1492,10 @@ proc fcQMdiArea_method_callback_inputMethodQuery(self: pointer, param1: cint): p
   let inst = cast[VirtualQMdiArea](fcQMdiArea_vdata(self)[])
   let slotval1 = cint(param1)
   var virtualReturn = inst.inputMethodQuery(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQMdiArea_method_callback_focusNextPrevChild(self: pointer, next: bool): bool {.cdecl.} =
   let inst = cast[VirtualQMdiArea](fcQMdiArea_vdata(self)[])

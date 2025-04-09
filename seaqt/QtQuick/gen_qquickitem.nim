@@ -644,7 +644,10 @@ method disconnectNotify*(self: VirtualQQuickTransform, signal: gen_qmetaobject_t
 proc fcQQuickTransform_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQQuickTransform](fcQQuickTransform_vdata(self)[])
   var virtualReturn = inst.metaObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQQuickTransform_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQQuickTransform](fcQQuickTransform_vdata(self)[])
@@ -2367,7 +2370,10 @@ method disconnectNotify*(self: VirtualQQuickItem, signal: gen_qmetaobject_types.
 proc fcQQuickItem_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQQuickItem](fcQQuickItem_vdata(self)[])
   var virtualReturn = inst.metaObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQQuickItem_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQQuickItem](fcQQuickItem_vdata(self)[])
@@ -2386,12 +2392,18 @@ proc fcQQuickItem_method_callback_metacall(self: pointer, param1: cint, param2: 
 proc fcQQuickItem_method_callback_boundingRect(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQQuickItem](fcQQuickItem_vdata(self)[])
   var virtualReturn = inst.boundingRect()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQQuickItem_method_callback_clipRect(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQQuickItem](fcQQuickItem_vdata(self)[])
   var virtualReturn = inst.clipRect()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQQuickItem_method_callback_contains(self: pointer, point: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQQuickItem](fcQQuickItem_vdata(self)[])
@@ -2403,7 +2415,10 @@ proc fcQQuickItem_method_callback_inputMethodQuery(self: pointer, query: cint): 
   let inst = cast[VirtualQQuickItem](fcQQuickItem_vdata(self)[])
   let slotval1 = cint(query)
   var virtualReturn = inst.inputMethodQuery(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQQuickItem_method_callback_isTextureProvider(self: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQQuickItem](fcQQuickItem_vdata(self)[])
@@ -2413,7 +2428,10 @@ proc fcQQuickItem_method_callback_isTextureProvider(self: pointer): bool {.cdecl
 proc fcQQuickItem_method_callback_textureProvider(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQQuickItem](fcQQuickItem_vdata(self)[])
   var virtualReturn = inst.textureProvider()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQQuickItem_method_callback_event(self: pointer, param1: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQQuickItem](fcQQuickItem_vdata(self)[])
@@ -2551,7 +2569,10 @@ proc fcQQuickItem_method_callback_updatePaintNode(self: pointer, param1: pointer
   let slotval1 = gen_qsgnode_types.QSGNode(h: param1, owned: false)
   let slotval2 = gen_qquickitem_types.QQuickItemUpdatePaintNodeData(h: param2, owned: false)
   var virtualReturn = inst.updatePaintNode(slotval1, slotval2)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQQuickItem_method_callback_releaseResources(self: pointer): void {.cdecl.} =
   let inst = cast[VirtualQQuickItem](fcQQuickItem_vdata(self)[])

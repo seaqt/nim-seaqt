@@ -294,7 +294,10 @@ method disconnectNotify*(self: VirtualQIconEnginePlugin, signal: gen_qmetaobject
 proc fcQIconEnginePlugin_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQIconEnginePlugin](fcQIconEnginePlugin_vdata(self)[])
   var virtualReturn = inst.metaObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQIconEnginePlugin_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQIconEnginePlugin](fcQIconEnginePlugin_vdata(self)[])
@@ -317,7 +320,10 @@ proc fcQIconEnginePlugin_method_callback_createX(self: pointer, filename: struct
   c_free(vfilename_ms.data)
   let slotval1 = vfilenamex_ret
   var virtualReturn = inst.createX(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQIconEnginePlugin_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQIconEnginePlugin](fcQIconEnginePlugin_vdata(self)[])

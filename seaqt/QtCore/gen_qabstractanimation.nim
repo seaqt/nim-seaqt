@@ -558,7 +558,10 @@ method disconnectNotify*(self: VirtualQAbstractAnimation, signal: gen_qmetaobjec
 proc fcQAbstractAnimation_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQAbstractAnimation](fcQAbstractAnimation_vdata(self)[])
   var virtualReturn = inst.metaObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQAbstractAnimation_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQAbstractAnimation](fcQAbstractAnimation_vdata(self)[])
@@ -1040,7 +1043,10 @@ method disconnectNotify*(self: VirtualQAnimationDriver, signal: gen_qmetaobject_
 proc fcQAnimationDriver_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQAnimationDriver](fcQAnimationDriver_vdata(self)[])
   var virtualReturn = inst.metaObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQAnimationDriver_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQAnimationDriver](fcQAnimationDriver_vdata(self)[])

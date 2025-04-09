@@ -376,7 +376,10 @@ method disconnectNotify*(self: VirtualQTranslator, signal: gen_qmetaobject_types
 proc fcQTranslator_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQTranslator](fcQTranslator_vdata(self)[])
   var virtualReturn = inst.metaObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQTranslator_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQTranslator](fcQTranslator_vdata(self)[])
@@ -399,7 +402,9 @@ proc fcQTranslator_method_callback_translate(self: pointer, context: cstring, so
   let slotval3 = (disambiguation)
   let slotval4 = n
   var virtualReturn = inst.translate(slotval1, slotval2, slotval3, slotval4)
-  struct_miqt_string(data: if len(virtualReturn) > 0: addr virtualReturn[0] else: nil, len: csize_t(len(virtualReturn)))
+  var virtualReturn_copy = if len(virtualReturn) > 0: c_malloc(csize_t(len(virtualReturn))) else: nil
+  if len(virtualReturn) > 0: copyMem(virtualReturn_copy, addr virtualReturn[0], csize_t(len(virtualReturn)))
+  struct_miqt_string(data: virtualReturn_copy, len: csize_t(len(virtualReturn)))
 
 proc fcQTranslator_method_callback_isEmpty(self: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQTranslator](fcQTranslator_vdata(self)[])

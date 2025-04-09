@@ -504,7 +504,10 @@ method disconnectNotify*(self: VirtualQQuickTextureFactory, signal: gen_qmetaobj
 proc fcQQuickTextureFactory_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQQuickTextureFactory](fcQQuickTextureFactory_vdata(self)[])
   var virtualReturn = inst.metaObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQQuickTextureFactory_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQQuickTextureFactory](fcQQuickTextureFactory_vdata(self)[])
@@ -524,12 +527,18 @@ proc fcQQuickTextureFactory_method_callback_createTexture(self: pointer, window:
   let inst = cast[VirtualQQuickTextureFactory](fcQQuickTextureFactory_vdata(self)[])
   let slotval1 = gen_qquickwindow_types.QQuickWindow(h: window, owned: false)
   var virtualReturn = inst.createTexture(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQQuickTextureFactory_method_callback_textureSize(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQQuickTextureFactory](fcQQuickTextureFactory_vdata(self)[])
   var virtualReturn = inst.textureSize()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQQuickTextureFactory_method_callback_textureByteCount(self: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQQuickTextureFactory](fcQQuickTextureFactory_vdata(self)[])
@@ -539,7 +548,10 @@ proc fcQQuickTextureFactory_method_callback_textureByteCount(self: pointer): cin
 proc fcQQuickTextureFactory_method_callback_image(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQQuickTextureFactory](fcQQuickTextureFactory_vdata(self)[])
   var virtualReturn = inst.image()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQQuickTextureFactory_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQQuickTextureFactory](fcQQuickTextureFactory_vdata(self)[])
@@ -912,7 +924,10 @@ method disconnectNotify*(self: VirtualQQuickImageResponse, signal: gen_qmetaobje
 proc fcQQuickImageResponse_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQQuickImageResponse](fcQQuickImageResponse_vdata(self)[])
   var virtualReturn = inst.metaObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQQuickImageResponse_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQQuickImageResponse](fcQQuickImageResponse_vdata(self)[])
@@ -931,12 +946,17 @@ proc fcQQuickImageResponse_method_callback_metacall(self: pointer, param1: cint,
 proc fcQQuickImageResponse_method_callback_textureFactory(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQQuickImageResponse](fcQQuickImageResponse_vdata(self)[])
   var virtualReturn = inst.textureFactory()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQQuickImageResponse_method_callback_errorString(self: pointer): struct_miqt_string {.cdecl.} =
   let inst = cast[VirtualQQuickImageResponse](fcQQuickImageResponse_vdata(self)[])
   var virtualReturn = inst.errorString()
-  struct_miqt_string(data: if len(virtualReturn) > 0: addr virtualReturn[0] else: nil, len: csize_t(len(virtualReturn)))
+  var virtualReturn_copy = if len(virtualReturn) > 0: c_malloc(csize_t(len(virtualReturn))) else: nil
+  if len(virtualReturn) > 0: copyMem(virtualReturn_copy, addr virtualReturn[0], csize_t(len(virtualReturn)))
+  struct_miqt_string(data: virtualReturn_copy, len: csize_t(len(virtualReturn)))
 
 proc fcQQuickImageResponse_method_callback_cancel(self: pointer): void {.cdecl.} =
   let inst = cast[VirtualQQuickImageResponse](fcQQuickImageResponse_vdata(self)[])
@@ -1344,7 +1364,10 @@ method disconnectNotify*(self: VirtualQQuickImageProvider, signal: gen_qmetaobje
 proc fcQQuickImageProvider_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQQuickImageProvider](fcQQuickImageProvider_vdata(self)[])
   var virtualReturn = inst.metaObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQQuickImageProvider_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQQuickImageProvider](fcQQuickImageProvider_vdata(self)[])
@@ -1379,7 +1402,10 @@ proc fcQQuickImageProvider_method_callback_requestImage(self: pointer, id: struc
   let slotval2 = gen_qsize_types.QSize(h: size, owned: false)
   let slotval3 = gen_qsize_types.QSize(h: requestedSize, owned: false)
   var virtualReturn = inst.requestImage(slotval1, slotval2, slotval3)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQQuickImageProvider_method_callback_requestPixmap(self: pointer, id: struct_miqt_string, size: pointer, requestedSize: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQQuickImageProvider](fcQQuickImageProvider_vdata(self)[])
@@ -1390,7 +1416,10 @@ proc fcQQuickImageProvider_method_callback_requestPixmap(self: pointer, id: stru
   let slotval2 = gen_qsize_types.QSize(h: size, owned: false)
   let slotval3 = gen_qsize_types.QSize(h: requestedSize, owned: false)
   var virtualReturn = inst.requestPixmap(slotval1, slotval2, slotval3)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQQuickImageProvider_method_callback_requestTexture(self: pointer, id: struct_miqt_string, size: pointer, requestedSize: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQQuickImageProvider](fcQQuickImageProvider_vdata(self)[])
@@ -1401,7 +1430,10 @@ proc fcQQuickImageProvider_method_callback_requestTexture(self: pointer, id: str
   let slotval2 = gen_qsize_types.QSize(h: size, owned: false)
   let slotval3 = gen_qsize_types.QSize(h: requestedSize, owned: false)
   var virtualReturn = inst.requestTexture(slotval1, slotval2, slotval3)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQQuickImageProvider_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQQuickImageProvider](fcQQuickImageProvider_vdata(self)[])
@@ -1846,12 +1878,18 @@ proc fcQQuickAsyncImageProvider_method_callback_requestImageResponse(self: point
   let slotval1 = vidx_ret
   let slotval2 = gen_qsize_types.QSize(h: requestedSize, owned: false)
   var virtualReturn = inst.requestImageResponse(slotval1, slotval2)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQQuickAsyncImageProvider_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQQuickAsyncImageProvider](fcQQuickAsyncImageProvider_vdata(self)[])
   var virtualReturn = inst.metaObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQQuickAsyncImageProvider_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQQuickAsyncImageProvider](fcQQuickAsyncImageProvider_vdata(self)[])
@@ -1886,7 +1924,10 @@ proc fcQQuickAsyncImageProvider_method_callback_requestImage(self: pointer, id: 
   let slotval2 = gen_qsize_types.QSize(h: size, owned: false)
   let slotval3 = gen_qsize_types.QSize(h: requestedSize, owned: false)
   var virtualReturn = inst.requestImage(slotval1, slotval2, slotval3)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQQuickAsyncImageProvider_method_callback_requestPixmap(self: pointer, id: struct_miqt_string, size: pointer, requestedSize: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQQuickAsyncImageProvider](fcQQuickAsyncImageProvider_vdata(self)[])
@@ -1897,7 +1938,10 @@ proc fcQQuickAsyncImageProvider_method_callback_requestPixmap(self: pointer, id:
   let slotval2 = gen_qsize_types.QSize(h: size, owned: false)
   let slotval3 = gen_qsize_types.QSize(h: requestedSize, owned: false)
   var virtualReturn = inst.requestPixmap(slotval1, slotval2, slotval3)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQQuickAsyncImageProvider_method_callback_requestTexture(self: pointer, id: struct_miqt_string, size: pointer, requestedSize: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQQuickAsyncImageProvider](fcQQuickAsyncImageProvider_vdata(self)[])
@@ -1908,7 +1952,10 @@ proc fcQQuickAsyncImageProvider_method_callback_requestTexture(self: pointer, id
   let slotval2 = gen_qsize_types.QSize(h: size, owned: false)
   let slotval3 = gen_qsize_types.QSize(h: requestedSize, owned: false)
   var virtualReturn = inst.requestTexture(slotval1, slotval2, slotval3)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQQuickAsyncImageProvider_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQQuickAsyncImageProvider](fcQQuickAsyncImageProvider_vdata(self)[])

@@ -318,7 +318,10 @@ method disconnectNotify*(self: VirtualQTimer, signal: gen_qmetaobject_types.QMet
 proc fcQTimer_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQTimer](fcQTimer_vdata(self)[])
   var virtualReturn = inst.metaObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQTimer_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQTimer](fcQTimer_vdata(self)[])

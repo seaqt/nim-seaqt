@@ -911,7 +911,10 @@ method extension*(self: VirtualQGraphicsSvgItem, variant: gen_qvariant_types.QVa
 proc fcQGraphicsSvgItem_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsSvgItem](fcQGraphicsSvgItem_vdata(self)[])
   var virtualReturn = inst.metaObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQGraphicsSvgItem_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsSvgItem](fcQGraphicsSvgItem_vdata(self)[])
@@ -930,7 +933,10 @@ proc fcQGraphicsSvgItem_method_callback_metacall(self: pointer, param1: cint, pa
 proc fcQGraphicsSvgItem_method_callback_boundingRect(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsSvgItem](fcQGraphicsSvgItem_vdata(self)[])
   var virtualReturn = inst.boundingRect()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQGraphicsSvgItem_method_callback_paint(self: pointer, painter: pointer, option: pointer, widget: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsSvgItem](fcQGraphicsSvgItem_vdata(self)[])
@@ -990,7 +996,10 @@ proc fcQGraphicsSvgItem_method_callback_advance(self: pointer, phase: cint): voi
 proc fcQGraphicsSvgItem_method_callback_shape(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsSvgItem](fcQGraphicsSvgItem_vdata(self)[])
   var virtualReturn = inst.shape()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQGraphicsSvgItem_method_callback_contains(self: pointer, point: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQGraphicsSvgItem](fcQGraphicsSvgItem_vdata(self)[])
@@ -1021,7 +1030,10 @@ proc fcQGraphicsSvgItem_method_callback_isObscuredBy(self: pointer, item: pointe
 proc fcQGraphicsSvgItem_method_callback_opaqueArea(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsSvgItem](fcQGraphicsSvgItem_vdata(self)[])
   var virtualReturn = inst.opaqueArea()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQGraphicsSvgItem_method_callback_sceneEventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQGraphicsSvgItem](fcQGraphicsSvgItem_vdata(self)[])
@@ -1130,14 +1142,20 @@ proc fcQGraphicsSvgItem_method_callback_inputMethodQuery(self: pointer, query: c
   let inst = cast[VirtualQGraphicsSvgItem](fcQGraphicsSvgItem_vdata(self)[])
   let slotval1 = cint(query)
   var virtualReturn = inst.inputMethodQuery(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQGraphicsSvgItem_method_callback_itemChange(self: pointer, change: cint, value: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsSvgItem](fcQGraphicsSvgItem_vdata(self)[])
   let slotval1 = cint(change)
   let slotval2 = gen_qvariant_types.QVariant(h: value, owned: false)
   var virtualReturn = inst.itemChange(slotval1, slotval2)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQGraphicsSvgItem_method_callback_supportsExtension(self: pointer, extension: cint): bool {.cdecl.} =
   let inst = cast[VirtualQGraphicsSvgItem](fcQGraphicsSvgItem_vdata(self)[])
@@ -1155,7 +1173,10 @@ proc fcQGraphicsSvgItem_method_callback_extension(self: pointer, variant: pointe
   let inst = cast[VirtualQGraphicsSvgItem](fcQGraphicsSvgItem_vdata(self)[])
   let slotval1 = gen_qvariant_types.QVariant(h: variant, owned: false)
   var virtualReturn = inst.extension(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 
 proc updateMicroFocus*(self: gen_qgraphicssvgitem_types.QGraphicsSvgItem): void =

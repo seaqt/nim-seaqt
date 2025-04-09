@@ -296,7 +296,10 @@ proc fcQGraphicsLayout_method_callback_itemAt(self: pointer, i: cint): pointer {
   let inst = cast[VirtualQGraphicsLayout](fcQGraphicsLayout_vdata(self)[])
   let slotval1 = i
   var virtualReturn = inst.itemAt(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQGraphicsLayout_method_callback_removeAt(self: pointer, index: cint): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsLayout](fcQGraphicsLayout_vdata(self)[])
@@ -318,7 +321,10 @@ proc fcQGraphicsLayout_method_callback_sizeHint(self: pointer, which: cint, cons
   let slotval1 = cint(which)
   let slotval2 = gen_qsize_types.QSizeF(h: constraint, owned: false)
   var virtualReturn = inst.sizeHint(slotval1, slotval2)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 
 proc addChildLayoutItem*(self: gen_qgraphicslayout_types.QGraphicsLayout, layoutItem: gen_qgraphicslayoutitem_types.QGraphicsLayoutItem): void =

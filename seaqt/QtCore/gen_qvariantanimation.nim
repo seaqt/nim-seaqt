@@ -470,7 +470,10 @@ method disconnectNotify*(self: VirtualQVariantAnimation, signal: gen_qmetaobject
 proc fcQVariantAnimation_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQVariantAnimation](fcQVariantAnimation_vdata(self)[])
   var virtualReturn = inst.metaObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQVariantAnimation_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQVariantAnimation](fcQVariantAnimation_vdata(self)[])
@@ -519,7 +522,10 @@ proc fcQVariantAnimation_method_callback_interpolated(self: pointer, fromVal: po
   let slotval2 = gen_qvariant_types.QVariant(h: to, owned: false)
   let slotval3 = progress
   var virtualReturn = inst.interpolated(slotval1, slotval2, slotval3)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQVariantAnimation_method_callback_updateDirection(self: pointer, direction: cint): void {.cdecl.} =
   let inst = cast[VirtualQVariantAnimation](fcQVariantAnimation_vdata(self)[])

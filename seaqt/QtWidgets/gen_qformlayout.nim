@@ -907,7 +907,10 @@ method spacerItem*(self: VirtualQFormLayout): gen_qlayoutitem_types.QSpacerItem 
 proc fcQFormLayout_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQFormLayout](fcQFormLayout_vdata(self)[])
   var virtualReturn = inst.metaObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQFormLayout_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQFormLayout](fcQFormLayout_vdata(self)[])
@@ -942,13 +945,19 @@ proc fcQFormLayout_method_callback_itemAtWithIndex(self: pointer, index: cint): 
   let inst = cast[VirtualQFormLayout](fcQFormLayout_vdata(self)[])
   let slotval1 = index
   var virtualReturn = inst.itemAt(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQFormLayout_method_callback_takeAt(self: pointer, index: cint): pointer {.cdecl.} =
   let inst = cast[VirtualQFormLayout](fcQFormLayout_vdata(self)[])
   let slotval1 = index
   var virtualReturn = inst.takeAt(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQFormLayout_method_callback_setGeometry(self: pointer, rect: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFormLayout](fcQFormLayout_vdata(self)[])
@@ -958,12 +967,18 @@ proc fcQFormLayout_method_callback_setGeometry(self: pointer, rect: pointer): vo
 proc fcQFormLayout_method_callback_minimumSize(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQFormLayout](fcQFormLayout_vdata(self)[])
   var virtualReturn = inst.minimumSize()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQFormLayout_method_callback_sizeHint(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQFormLayout](fcQFormLayout_vdata(self)[])
   var virtualReturn = inst.sizeHint()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQFormLayout_method_callback_invalidate(self: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFormLayout](fcQFormLayout_vdata(self)[])
@@ -993,12 +1008,18 @@ proc fcQFormLayout_method_callback_count(self: pointer): cint {.cdecl.} =
 proc fcQFormLayout_method_callback_geometry(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQFormLayout](fcQFormLayout_vdata(self)[])
   var virtualReturn = inst.geometry()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQFormLayout_method_callback_maximumSize(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQFormLayout](fcQFormLayout_vdata(self)[])
   var virtualReturn = inst.maximumSize()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQFormLayout_method_callback_indexOf(self: pointer, param1: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQFormLayout](fcQFormLayout_vdata(self)[])
@@ -1022,12 +1043,18 @@ proc fcQFormLayout_method_callback_replaceWidget(self: pointer, fromVal: pointer
   let slotval2 = gen_qwidget_types.QWidget(h: to, owned: false)
   let slotval3 = cint(options)
   var virtualReturn = inst.replaceWidget(slotval1, slotval2, slotval3)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQFormLayout_method_callback_layout(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQFormLayout](fcQFormLayout_vdata(self)[])
   var virtualReturn = inst.layout()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQFormLayout_method_callback_childEvent(self: pointer, e: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFormLayout](fcQFormLayout_vdata(self)[])
@@ -1076,12 +1103,18 @@ proc fcQFormLayout_method_callback_minimumHeightForWidth(self: pointer, param1: 
 proc fcQFormLayout_method_callback_widget(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQFormLayout](fcQFormLayout_vdata(self)[])
   var virtualReturn = inst.widget()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQFormLayout_method_callback_spacerItem(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQFormLayout](fcQFormLayout_vdata(self)[])
   var virtualReturn = inst.spacerItem()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 
 proc widgetEvent*(self: gen_qformlayout_types.QFormLayout, param1: gen_qcoreevent_types.QEvent): void =

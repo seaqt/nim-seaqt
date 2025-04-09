@@ -542,7 +542,10 @@ method disconnectNotify*(self: VirtualQQmlComponent, signal: gen_qmetaobject_typ
 proc fcQQmlComponent_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQQmlComponent](fcQQmlComponent_vdata(self)[])
   var virtualReturn = inst.metaObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQQmlComponent_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQQmlComponent](fcQQmlComponent_vdata(self)[])
@@ -562,13 +565,19 @@ proc fcQQmlComponent_method_callback_createX(self: pointer, context: pointer): p
   let inst = cast[VirtualQQmlComponent](fcQQmlComponent_vdata(self)[])
   let slotval1 = gen_qqmlcontext_types.QQmlContext(h: context, owned: false)
   var virtualReturn = inst.createX(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQQmlComponent_method_callback_beginCreate(self: pointer, param1: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQQmlComponent](fcQQmlComponent_vdata(self)[])
   let slotval1 = gen_qqmlcontext_types.QQmlContext(h: param1, owned: false)
   var virtualReturn = inst.beginCreate(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQQmlComponent_method_callback_completeCreate(self: pointer): void {.cdecl.} =
   let inst = cast[VirtualQQmlComponent](fcQQmlComponent_vdata(self)[])

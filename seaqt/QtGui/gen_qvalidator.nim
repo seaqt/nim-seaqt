@@ -526,7 +526,10 @@ method disconnectNotify*(self: VirtualQValidator, signal: gen_qmetaobject_types.
 proc fcQValidator_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQValidator](fcQValidator_vdata(self)[])
   var virtualReturn = inst.metaObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQValidator_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQValidator](fcQValidator_vdata(self)[])
@@ -990,7 +993,10 @@ method disconnectNotify*(self: VirtualQIntValidator, signal: gen_qmetaobject_typ
 proc fcQIntValidator_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQIntValidator](fcQIntValidator_vdata(self)[])
   var virtualReturn = inst.metaObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQIntValidator_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQIntValidator](fcQIntValidator_vdata(self)[])
@@ -1595,7 +1601,10 @@ method disconnectNotify*(self: VirtualQDoubleValidator, signal: gen_qmetaobject_
 proc fcQDoubleValidator_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQDoubleValidator](fcQDoubleValidator_vdata(self)[])
   var virtualReturn = inst.metaObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQDoubleValidator_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQDoubleValidator](fcQDoubleValidator_vdata(self)[])
@@ -2113,7 +2122,10 @@ method disconnectNotify*(self: VirtualQRegularExpressionValidator, signal: gen_q
 proc fcQRegularExpressionValidator_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQRegularExpressionValidator](fcQRegularExpressionValidator_vdata(self)[])
   var virtualReturn = inst.metaObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQRegularExpressionValidator_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQRegularExpressionValidator](fcQRegularExpressionValidator_vdata(self)[])

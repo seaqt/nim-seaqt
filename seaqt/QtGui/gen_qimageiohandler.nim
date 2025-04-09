@@ -456,7 +456,10 @@ proc fcQImageIOHandler_method_callback_option(self: pointer, option: cint): poin
   let inst = cast[VirtualQImageIOHandler](fcQImageIOHandler_vdata(self)[])
   let slotval1 = cint(option)
   var virtualReturn = inst.option(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQImageIOHandler_method_callback_setOption(self: pointer, option: cint, value: pointer): void {.cdecl.} =
   let inst = cast[VirtualQImageIOHandler](fcQImageIOHandler_vdata(self)[])
@@ -504,7 +507,10 @@ proc fcQImageIOHandler_method_callback_currentImageNumber(self: pointer): cint {
 proc fcQImageIOHandler_method_callback_currentImageRect(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQImageIOHandler](fcQImageIOHandler_vdata(self)[])
   var virtualReturn = inst.currentImageRect()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 
 proc create*(T: type gen_qimageiohandler_types.QImageIOHandler,
@@ -788,7 +794,10 @@ method disconnectNotify*(self: VirtualQImageIOPlugin, signal: gen_qmetaobject_ty
 proc fcQImageIOPlugin_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQImageIOPlugin](fcQImageIOPlugin_vdata(self)[])
   var virtualReturn = inst.metaObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQImageIOPlugin_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQImageIOPlugin](fcQImageIOPlugin_vdata(self)[])
@@ -822,7 +831,10 @@ proc fcQImageIOPlugin_method_callback_createX(self: pointer, device: pointer, fo
   c_free(vformat_bytearray.data)
   let slotval2 = vformatx_ret
   var virtualReturn = inst.createX(slotval1, slotval2)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQImageIOPlugin_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQImageIOPlugin](fcQImageIOPlugin_vdata(self)[])

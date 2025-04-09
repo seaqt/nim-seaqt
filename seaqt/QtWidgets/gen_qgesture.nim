@@ -586,7 +586,10 @@ method disconnectNotify*(self: VirtualQGesture, signal: gen_qmetaobject_types.QM
 proc fcQGesture_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGesture](fcQGesture_vdata(self)[])
   var virtualReturn = inst.metaObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQGesture_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQGesture](fcQGesture_vdata(self)[])
@@ -948,7 +951,10 @@ method disconnectNotify*(self: VirtualQPanGesture, signal: gen_qmetaobject_types
 proc fcQPanGesture_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQPanGesture](fcQPanGesture_vdata(self)[])
   var virtualReturn = inst.metaObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQPanGesture_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQPanGesture](fcQPanGesture_vdata(self)[])
@@ -1355,7 +1361,10 @@ method disconnectNotify*(self: VirtualQPinchGesture, signal: gen_qmetaobject_typ
 proc fcQPinchGesture_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQPinchGesture](fcQPinchGesture_vdata(self)[])
   var virtualReturn = inst.metaObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQPinchGesture_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQPinchGesture](fcQPinchGesture_vdata(self)[])
@@ -1708,7 +1717,10 @@ method disconnectNotify*(self: VirtualQSwipeGesture, signal: gen_qmetaobject_typ
 proc fcQSwipeGesture_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQSwipeGesture](fcQSwipeGesture_vdata(self)[])
   var virtualReturn = inst.metaObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQSwipeGesture_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQSwipeGesture](fcQSwipeGesture_vdata(self)[])
@@ -2055,7 +2067,10 @@ method disconnectNotify*(self: VirtualQTapGesture, signal: gen_qmetaobject_types
 proc fcQTapGesture_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQTapGesture](fcQTapGesture_vdata(self)[])
   var virtualReturn = inst.metaObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQTapGesture_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQTapGesture](fcQTapGesture_vdata(self)[])
@@ -2408,7 +2423,10 @@ method disconnectNotify*(self: VirtualQTapAndHoldGesture, signal: gen_qmetaobjec
 proc fcQTapAndHoldGesture_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQTapAndHoldGesture](fcQTapAndHoldGesture_vdata(self)[])
   var virtualReturn = inst.metaObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQTapAndHoldGesture_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQTapAndHoldGesture](fcQTapAndHoldGesture_vdata(self)[])
@@ -2679,7 +2697,10 @@ proc fcQGestureEvent_method_callback_setAccepted(self: pointer, accepted: bool):
 proc fcQGestureEvent_method_callback_clone(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGestureEvent](fcQGestureEvent_vdata(self)[])
   var virtualReturn = inst.clone()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 
 proc create*(T: type gen_qgesture_types.QGestureEvent,

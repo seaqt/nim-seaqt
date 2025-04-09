@@ -625,7 +625,10 @@ method disconnectNotify*(self: VirtualQAbstractTextDocumentLayout, signal: gen_q
 proc fcQAbstractTextDocumentLayout_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQAbstractTextDocumentLayout](fcQAbstractTextDocumentLayout_vdata(self)[])
   var virtualReturn = inst.metaObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQAbstractTextDocumentLayout_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQAbstractTextDocumentLayout](fcQAbstractTextDocumentLayout_vdata(self)[])
@@ -662,19 +665,28 @@ proc fcQAbstractTextDocumentLayout_method_callback_pageCount(self: pointer): cin
 proc fcQAbstractTextDocumentLayout_method_callback_documentSize(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQAbstractTextDocumentLayout](fcQAbstractTextDocumentLayout_vdata(self)[])
   var virtualReturn = inst.documentSize()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQAbstractTextDocumentLayout_method_callback_frameBoundingRect(self: pointer, frame: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQAbstractTextDocumentLayout](fcQAbstractTextDocumentLayout_vdata(self)[])
   let slotval1 = gen_qtextobject_types.QTextFrame(h: frame, owned: false)
   var virtualReturn = inst.frameBoundingRect(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQAbstractTextDocumentLayout_method_callback_blockBoundingRect(self: pointer, blockVal: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQAbstractTextDocumentLayout](fcQAbstractTextDocumentLayout_vdata(self)[])
   let slotval1 = gen_qtextobject_types.QTextBlock(h: blockVal, owned: false)
   var virtualReturn = inst.blockBoundingRect(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQAbstractTextDocumentLayout_method_callback_documentChanged(self: pointer, fromVal: cint, charsRemoved: cint, charsAdded: cint): void {.cdecl.} =
   let inst = cast[VirtualQAbstractTextDocumentLayout](fcQAbstractTextDocumentLayout_vdata(self)[])

@@ -1041,7 +1041,10 @@ method disconnectNotify*(self: VirtualQTextDocument, signal: gen_qmetaobject_typ
 proc fcQTextDocument_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQTextDocument](fcQTextDocument_vdata(self)[])
   var virtualReturn = inst.metaObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQTextDocument_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQTextDocument](fcQTextDocument_vdata(self)[])
@@ -1065,14 +1068,20 @@ proc fcQTextDocument_method_callback_createObject(self: pointer, f: pointer): po
   let inst = cast[VirtualQTextDocument](fcQTextDocument_vdata(self)[])
   let slotval1 = gen_qtextformat_types.QTextFormat(h: f, owned: false)
   var virtualReturn = inst.createObject(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQTextDocument_method_callback_loadResource(self: pointer, typeVal: cint, name: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQTextDocument](fcQTextDocument_vdata(self)[])
   let slotval1 = typeVal
   let slotval2 = gen_qurl_types.QUrl(h: name, owned: false)
   var virtualReturn = inst.loadResource(slotval1, slotval2)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQTextDocument_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQTextDocument](fcQTextDocument_vdata(self)[])

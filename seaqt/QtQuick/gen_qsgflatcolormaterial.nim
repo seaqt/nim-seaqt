@@ -144,13 +144,19 @@ method compare*(self: VirtualQSGFlatColorMaterial, other: gen_qsgmaterial_types.
 proc fcQSGFlatColorMaterial_method_callback_typeX(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQSGFlatColorMaterial](fcQSGFlatColorMaterial_vdata(self)[])
   var virtualReturn = inst.typeX()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQSGFlatColorMaterial_method_callback_createShader(self: pointer, renderMode: cint): pointer {.cdecl.} =
   let inst = cast[VirtualQSGFlatColorMaterial](fcQSGFlatColorMaterial_vdata(self)[])
   let slotval1 = cint(renderMode)
   var virtualReturn = inst.createShader(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQSGFlatColorMaterial_method_callback_compare(self: pointer, other: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQSGFlatColorMaterial](fcQSGFlatColorMaterial_vdata(self)[])

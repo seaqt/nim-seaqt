@@ -132,13 +132,19 @@ proc fcQSGVertexColorMaterial_method_callback_compare(self: pointer, other: poin
 proc fcQSGVertexColorMaterial_method_callback_typeX(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQSGVertexColorMaterial](fcQSGVertexColorMaterial_vdata(self)[])
   var virtualReturn = inst.typeX()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQSGVertexColorMaterial_method_callback_createShader(self: pointer, renderMode: cint): pointer {.cdecl.} =
   let inst = cast[VirtualQSGVertexColorMaterial](fcQSGVertexColorMaterial_vdata(self)[])
   let slotval1 = cint(renderMode)
   var virtualReturn = inst.createShader(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 
 proc create*(T: type gen_qsgvertexcolormaterial_types.QSGVertexColorMaterial,

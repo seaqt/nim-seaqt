@@ -1783,7 +1783,10 @@ method disconnectNotify*(self: VirtualQColumnView, signal: gen_qmetaobject_types
 proc fcQColumnView_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQColumnView](fcQColumnView_vdata(self)[])
   var virtualReturn = inst.metaObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQColumnView_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQColumnView](fcQColumnView_vdata(self)[])
@@ -1803,7 +1806,10 @@ proc fcQColumnView_method_callback_indexAt(self: pointer, point: pointer): point
   let inst = cast[VirtualQColumnView](fcQColumnView_vdata(self)[])
   let slotval1 = gen_qpoint_types.QPoint(h: point, owned: false)
   var virtualReturn = inst.indexAt(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQColumnView_method_callback_scrollTo(self: pointer, index: pointer, hint: cint): void {.cdecl.} =
   let inst = cast[VirtualQColumnView](fcQColumnView_vdata(self)[])
@@ -1814,13 +1820,19 @@ proc fcQColumnView_method_callback_scrollTo(self: pointer, index: pointer, hint:
 proc fcQColumnView_method_callback_sizeHint(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQColumnView](fcQColumnView_vdata(self)[])
   var virtualReturn = inst.sizeHint()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQColumnView_method_callback_visualRect(self: pointer, index: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQColumnView](fcQColumnView_vdata(self)[])
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var virtualReturn = inst.visualRect(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQColumnView_method_callback_setModel(self: pointer, model: pointer): void {.cdecl.} =
   let inst = cast[VirtualQColumnView](fcQColumnView_vdata(self)[])
@@ -1852,7 +1864,10 @@ proc fcQColumnView_method_callback_moveCursor(self: pointer, cursorAction: cint,
   let slotval1 = cint(cursorAction)
   let slotval2 = cint(modifiers)
   var virtualReturn = inst.moveCursor(slotval1, slotval2)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQColumnView_method_callback_resizeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQColumnView](fcQColumnView_vdata(self)[])
@@ -1869,7 +1884,10 @@ proc fcQColumnView_method_callback_visualRegionForSelection(self: pointer, selec
   let inst = cast[VirtualQColumnView](fcQColumnView_vdata(self)[])
   let slotval1 = gen_qitemselectionmodel_types.QItemSelection(h: selection, owned: false)
   var virtualReturn = inst.visualRegionForSelection(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQColumnView_method_callback_horizontalOffset(self: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQColumnView](fcQColumnView_vdata(self)[])
@@ -1904,7 +1922,10 @@ proc fcQColumnView_method_callback_createColumn(self: pointer, rootIndex: pointe
   let inst = cast[VirtualQColumnView](fcQColumnView_vdata(self)[])
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: rootIndex, owned: false)
   var virtualReturn = inst.createColumn(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQColumnView_method_callback_keyboardSearch(self: pointer, search: struct_miqt_string): void {.cdecl.} =
   let inst = cast[VirtualQColumnView](fcQColumnView_vdata(self)[])
@@ -1930,13 +1951,19 @@ proc fcQColumnView_method_callback_itemDelegateForIndex(self: pointer, index: po
   let inst = cast[VirtualQColumnView](fcQColumnView_vdata(self)[])
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var virtualReturn = inst.itemDelegateForIndex(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQColumnView_method_callback_inputMethodQuery(self: pointer, query: cint): pointer {.cdecl.} =
   let inst = cast[VirtualQColumnView](fcQColumnView_vdata(self)[])
   let slotval1 = cint(query)
   var virtualReturn = inst.inputMethodQuery(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQColumnView_method_callback_reset(self: pointer): void {.cdecl.} =
   let inst = cast[VirtualQColumnView](fcQColumnView_vdata(self)[])
@@ -2023,9 +2050,12 @@ proc fcQColumnView_method_callback_editorDestroyed(self: pointer, editor: pointe
 proc fcQColumnView_method_callback_selectedIndexes(self: pointer): struct_miqt_array {.cdecl.} =
   let inst = cast[VirtualQColumnView](fcQColumnView_vdata(self)[])
   var virtualReturn = inst.selectedIndexes()
-  var virtualReturn_CArray = newSeq[pointer](len(virtualReturn))
+  var virtualReturn_CArray = cast[ptr UncheckedArray[pointer]](if len(virtualReturn) > 0: c_malloc(c_sizet(sizeof(pointer) * len(virtualReturn))) else: nil)
   for i in 0..<len(virtualReturn):
-    virtualReturn_CArray[i] = virtualReturn[i].h
+    virtualReturn[i].owned = false # TODO move?
+    let virtualReturn_i_h = virtualReturn[i].h
+    virtualReturn[i].h = nil
+    virtualReturn_CArray[i] = virtualReturn_i_h
 
   struct_miqt_array(len: csize_t(len(virtualReturn)), data: if len(virtualReturn) == 0: nil else: addr(virtualReturn_CArray[0]))
 
@@ -2147,12 +2177,18 @@ proc fcQColumnView_method_callback_eventFilter(self: pointer, objectVal: pointer
 proc fcQColumnView_method_callback_viewportSizeHint(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQColumnView](fcQColumnView_vdata(self)[])
   var virtualReturn = inst.viewportSizeHint()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQColumnView_method_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQColumnView](fcQColumnView_vdata(self)[])
   var virtualReturn = inst.minimumSizeHint()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQColumnView_method_callback_setupViewport(self: pointer, viewport: pointer): void {.cdecl.} =
   let inst = cast[VirtualQColumnView](fcQColumnView_vdata(self)[])
@@ -2208,7 +2244,10 @@ proc fcQColumnView_method_callback_hasHeightForWidth(self: pointer): bool {.cdec
 proc fcQColumnView_method_callback_paintEngine(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQColumnView](fcQColumnView_vdata(self)[])
   var virtualReturn = inst.paintEngine()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQColumnView_method_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQColumnView](fcQColumnView_vdata(self)[])
@@ -2281,12 +2320,18 @@ proc fcQColumnView_method_callback_redirected(self: pointer, offset: pointer): p
   let inst = cast[VirtualQColumnView](fcQColumnView_vdata(self)[])
   let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
   var virtualReturn = inst.redirected(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQColumnView_method_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQColumnView](fcQColumnView_vdata(self)[])
   var virtualReturn = inst.sharedPainter()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQColumnView_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQColumnView](fcQColumnView_vdata(self)[])

@@ -909,7 +909,10 @@ method disconnectNotify*(self: VirtualQQuickFramebufferObject, signal: gen_qmeta
 proc fcQQuickFramebufferObject_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQQuickFramebufferObject](fcQQuickFramebufferObject_vdata(self)[])
   var virtualReturn = inst.metaObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQQuickFramebufferObject_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQQuickFramebufferObject](fcQQuickFramebufferObject_vdata(self)[])
@@ -928,7 +931,10 @@ proc fcQQuickFramebufferObject_method_callback_metacall(self: pointer, param1: c
 proc fcQQuickFramebufferObject_method_callback_createRenderer(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQQuickFramebufferObject](fcQQuickFramebufferObject_vdata(self)[])
   var virtualReturn = inst.createRenderer()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQQuickFramebufferObject_method_callback_isTextureProvider(self: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQQuickFramebufferObject](fcQQuickFramebufferObject_vdata(self)[])
@@ -938,7 +944,10 @@ proc fcQQuickFramebufferObject_method_callback_isTextureProvider(self: pointer):
 proc fcQQuickFramebufferObject_method_callback_textureProvider(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQQuickFramebufferObject](fcQQuickFramebufferObject_vdata(self)[])
   var virtualReturn = inst.textureProvider()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQQuickFramebufferObject_method_callback_releaseResources(self: pointer): void {.cdecl.} =
   let inst = cast[VirtualQQuickFramebufferObject](fcQQuickFramebufferObject_vdata(self)[])
@@ -955,17 +964,26 @@ proc fcQQuickFramebufferObject_method_callback_updatePaintNode(self: pointer, pa
   let slotval1 = gen_qsgnode_types.QSGNode(h: param1, owned: false)
   let slotval2 = gen_qquickitem_types.QQuickItemUpdatePaintNodeData(h: param2, owned: false)
   var virtualReturn = inst.updatePaintNode(slotval1, slotval2)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQQuickFramebufferObject_method_callback_boundingRect(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQQuickFramebufferObject](fcQQuickFramebufferObject_vdata(self)[])
   var virtualReturn = inst.boundingRect()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQQuickFramebufferObject_method_callback_clipRect(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQQuickFramebufferObject](fcQQuickFramebufferObject_vdata(self)[])
   var virtualReturn = inst.clipRect()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQQuickFramebufferObject_method_callback_contains(self: pointer, point: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQQuickFramebufferObject](fcQQuickFramebufferObject_vdata(self)[])
@@ -977,7 +995,10 @@ proc fcQQuickFramebufferObject_method_callback_inputMethodQuery(self: pointer, q
   let inst = cast[VirtualQQuickFramebufferObject](fcQQuickFramebufferObject_vdata(self)[])
   let slotval1 = cint(query)
   var virtualReturn = inst.inputMethodQuery(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQQuickFramebufferObject_method_callback_event(self: pointer, param1: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQQuickFramebufferObject](fcQQuickFramebufferObject_vdata(self)[])

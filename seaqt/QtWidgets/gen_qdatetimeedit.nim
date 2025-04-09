@@ -1658,7 +1658,10 @@ method disconnectNotify*(self: VirtualQDateTimeEdit, signal: gen_qmetaobject_typ
 proc fcQDateTimeEdit_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQDateTimeEdit](fcQDateTimeEdit_vdata(self)[])
   var virtualReturn = inst.metaObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQDateTimeEdit_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQDateTimeEdit](fcQDateTimeEdit_vdata(self)[])
@@ -1677,7 +1680,10 @@ proc fcQDateTimeEdit_method_callback_metacall(self: pointer, param1: cint, param
 proc fcQDateTimeEdit_method_callback_sizeHint(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQDateTimeEdit](fcQDateTimeEdit_vdata(self)[])
   var virtualReturn = inst.sizeHint()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQDateTimeEdit_method_callback_clear(self: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDateTimeEdit](fcQDateTimeEdit_vdata(self)[])
@@ -1740,13 +1746,18 @@ proc fcQDateTimeEdit_method_callback_dateTimeFromText(self: pointer, text: struc
   c_free(vtext_ms.data)
   let slotval1 = vtextx_ret
   var virtualReturn = inst.dateTimeFromText(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQDateTimeEdit_method_callback_textFromDateTime(self: pointer, dt: pointer): struct_miqt_string {.cdecl.} =
   let inst = cast[VirtualQDateTimeEdit](fcQDateTimeEdit_vdata(self)[])
   let slotval1 = gen_qdatetime_types.QDateTime(h: dt, owned: false)
   var virtualReturn = inst.textFromDateTime(slotval1)
-  struct_miqt_string(data: if len(virtualReturn) > 0: addr virtualReturn[0] else: nil, len: csize_t(len(virtualReturn)))
+  var virtualReturn_copy = if len(virtualReturn) > 0: c_malloc(csize_t(len(virtualReturn))) else: nil
+  if len(virtualReturn) > 0: copyMem(virtualReturn_copy, addr virtualReturn[0], csize_t(len(virtualReturn)))
+  struct_miqt_string(data: virtualReturn_copy, len: csize_t(len(virtualReturn)))
 
 proc fcQDateTimeEdit_method_callback_stepEnabled(self: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQDateTimeEdit](fcQDateTimeEdit_vdata(self)[])
@@ -1771,13 +1782,19 @@ proc fcQDateTimeEdit_method_callback_initStyleOption(self: pointer, option: poin
 proc fcQDateTimeEdit_method_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQDateTimeEdit](fcQDateTimeEdit_vdata(self)[])
   var virtualReturn = inst.minimumSizeHint()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQDateTimeEdit_method_callback_inputMethodQuery(self: pointer, param1: cint): pointer {.cdecl.} =
   let inst = cast[VirtualQDateTimeEdit](fcQDateTimeEdit_vdata(self)[])
   let slotval1 = cint(param1)
   var virtualReturn = inst.inputMethodQuery(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQDateTimeEdit_method_callback_resizeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDateTimeEdit](fcQDateTimeEdit_vdata(self)[])
@@ -1858,7 +1875,10 @@ proc fcQDateTimeEdit_method_callback_hasHeightForWidth(self: pointer): bool {.cd
 proc fcQDateTimeEdit_method_callback_paintEngine(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQDateTimeEdit](fcQDateTimeEdit_vdata(self)[])
   var virtualReturn = inst.paintEngine()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQDateTimeEdit_method_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDateTimeEdit](fcQDateTimeEdit_vdata(self)[])
@@ -1936,12 +1956,18 @@ proc fcQDateTimeEdit_method_callback_redirected(self: pointer, offset: pointer):
   let inst = cast[VirtualQDateTimeEdit](fcQDateTimeEdit_vdata(self)[])
   let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
   var virtualReturn = inst.redirected(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQDateTimeEdit_method_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQDateTimeEdit](fcQDateTimeEdit_vdata(self)[])
   var virtualReturn = inst.sharedPainter()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQDateTimeEdit_method_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDateTimeEdit](fcQDateTimeEdit_vdata(self)[])
@@ -4026,7 +4052,10 @@ method disconnectNotify*(self: VirtualQTimeEdit, signal: gen_qmetaobject_types.Q
 proc fcQTimeEdit_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQTimeEdit](fcQTimeEdit_vdata(self)[])
   var virtualReturn = inst.metaObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQTimeEdit_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQTimeEdit](fcQTimeEdit_vdata(self)[])
@@ -4045,7 +4074,10 @@ proc fcQTimeEdit_method_callback_metacall(self: pointer, param1: cint, param2: c
 proc fcQTimeEdit_method_callback_sizeHint(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQTimeEdit](fcQTimeEdit_vdata(self)[])
   var virtualReturn = inst.sizeHint()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQTimeEdit_method_callback_clear(self: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTimeEdit](fcQTimeEdit_vdata(self)[])
@@ -4108,13 +4140,18 @@ proc fcQTimeEdit_method_callback_dateTimeFromText(self: pointer, text: struct_mi
   c_free(vtext_ms.data)
   let slotval1 = vtextx_ret
   var virtualReturn = inst.dateTimeFromText(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQTimeEdit_method_callback_textFromDateTime(self: pointer, dt: pointer): struct_miqt_string {.cdecl.} =
   let inst = cast[VirtualQTimeEdit](fcQTimeEdit_vdata(self)[])
   let slotval1 = gen_qdatetime_types.QDateTime(h: dt, owned: false)
   var virtualReturn = inst.textFromDateTime(slotval1)
-  struct_miqt_string(data: if len(virtualReturn) > 0: addr virtualReturn[0] else: nil, len: csize_t(len(virtualReturn)))
+  var virtualReturn_copy = if len(virtualReturn) > 0: c_malloc(csize_t(len(virtualReturn))) else: nil
+  if len(virtualReturn) > 0: copyMem(virtualReturn_copy, addr virtualReturn[0], csize_t(len(virtualReturn)))
+  struct_miqt_string(data: virtualReturn_copy, len: csize_t(len(virtualReturn)))
 
 proc fcQTimeEdit_method_callback_stepEnabled(self: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQTimeEdit](fcQTimeEdit_vdata(self)[])
@@ -4139,13 +4176,19 @@ proc fcQTimeEdit_method_callback_initStyleOption(self: pointer, option: pointer)
 proc fcQTimeEdit_method_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQTimeEdit](fcQTimeEdit_vdata(self)[])
   var virtualReturn = inst.minimumSizeHint()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQTimeEdit_method_callback_inputMethodQuery(self: pointer, param1: cint): pointer {.cdecl.} =
   let inst = cast[VirtualQTimeEdit](fcQTimeEdit_vdata(self)[])
   let slotval1 = cint(param1)
   var virtualReturn = inst.inputMethodQuery(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQTimeEdit_method_callback_resizeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTimeEdit](fcQTimeEdit_vdata(self)[])
@@ -4226,7 +4269,10 @@ proc fcQTimeEdit_method_callback_hasHeightForWidth(self: pointer): bool {.cdecl.
 proc fcQTimeEdit_method_callback_paintEngine(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQTimeEdit](fcQTimeEdit_vdata(self)[])
   var virtualReturn = inst.paintEngine()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQTimeEdit_method_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTimeEdit](fcQTimeEdit_vdata(self)[])
@@ -4304,12 +4350,18 @@ proc fcQTimeEdit_method_callback_redirected(self: pointer, offset: pointer): poi
   let inst = cast[VirtualQTimeEdit](fcQTimeEdit_vdata(self)[])
   let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
   var virtualReturn = inst.redirected(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQTimeEdit_method_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQTimeEdit](fcQTimeEdit_vdata(self)[])
   var virtualReturn = inst.sharedPainter()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQTimeEdit_method_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTimeEdit](fcQTimeEdit_vdata(self)[])
@@ -5854,7 +5906,10 @@ method disconnectNotify*(self: VirtualQDateEdit, signal: gen_qmetaobject_types.Q
 proc fcQDateEdit_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQDateEdit](fcQDateEdit_vdata(self)[])
   var virtualReturn = inst.metaObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQDateEdit_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQDateEdit](fcQDateEdit_vdata(self)[])
@@ -5873,7 +5928,10 @@ proc fcQDateEdit_method_callback_metacall(self: pointer, param1: cint, param2: c
 proc fcQDateEdit_method_callback_sizeHint(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQDateEdit](fcQDateEdit_vdata(self)[])
   var virtualReturn = inst.sizeHint()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQDateEdit_method_callback_clear(self: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDateEdit](fcQDateEdit_vdata(self)[])
@@ -5936,13 +5994,18 @@ proc fcQDateEdit_method_callback_dateTimeFromText(self: pointer, text: struct_mi
   c_free(vtext_ms.data)
   let slotval1 = vtextx_ret
   var virtualReturn = inst.dateTimeFromText(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQDateEdit_method_callback_textFromDateTime(self: pointer, dt: pointer): struct_miqt_string {.cdecl.} =
   let inst = cast[VirtualQDateEdit](fcQDateEdit_vdata(self)[])
   let slotval1 = gen_qdatetime_types.QDateTime(h: dt, owned: false)
   var virtualReturn = inst.textFromDateTime(slotval1)
-  struct_miqt_string(data: if len(virtualReturn) > 0: addr virtualReturn[0] else: nil, len: csize_t(len(virtualReturn)))
+  var virtualReturn_copy = if len(virtualReturn) > 0: c_malloc(csize_t(len(virtualReturn))) else: nil
+  if len(virtualReturn) > 0: copyMem(virtualReturn_copy, addr virtualReturn[0], csize_t(len(virtualReturn)))
+  struct_miqt_string(data: virtualReturn_copy, len: csize_t(len(virtualReturn)))
 
 proc fcQDateEdit_method_callback_stepEnabled(self: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQDateEdit](fcQDateEdit_vdata(self)[])
@@ -5967,13 +6030,19 @@ proc fcQDateEdit_method_callback_initStyleOption(self: pointer, option: pointer)
 proc fcQDateEdit_method_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQDateEdit](fcQDateEdit_vdata(self)[])
   var virtualReturn = inst.minimumSizeHint()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQDateEdit_method_callback_inputMethodQuery(self: pointer, param1: cint): pointer {.cdecl.} =
   let inst = cast[VirtualQDateEdit](fcQDateEdit_vdata(self)[])
   let slotval1 = cint(param1)
   var virtualReturn = inst.inputMethodQuery(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQDateEdit_method_callback_resizeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDateEdit](fcQDateEdit_vdata(self)[])
@@ -6054,7 +6123,10 @@ proc fcQDateEdit_method_callback_hasHeightForWidth(self: pointer): bool {.cdecl.
 proc fcQDateEdit_method_callback_paintEngine(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQDateEdit](fcQDateEdit_vdata(self)[])
   var virtualReturn = inst.paintEngine()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQDateEdit_method_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDateEdit](fcQDateEdit_vdata(self)[])
@@ -6132,12 +6204,18 @@ proc fcQDateEdit_method_callback_redirected(self: pointer, offset: pointer): poi
   let inst = cast[VirtualQDateEdit](fcQDateEdit_vdata(self)[])
   let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
   var virtualReturn = inst.redirected(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQDateEdit_method_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQDateEdit](fcQDateEdit_vdata(self)[])
   var virtualReturn = inst.sharedPainter()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQDateEdit_method_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDateEdit](fcQDateEdit_vdata(self)[])

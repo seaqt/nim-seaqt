@@ -375,7 +375,10 @@ method disconnectNotify*(self: VirtualQSequentialAnimationGroup, signal: gen_qme
 proc fcQSequentialAnimationGroup_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQSequentialAnimationGroup](fcQSequentialAnimationGroup_vdata(self)[])
   var virtualReturn = inst.metaObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQSequentialAnimationGroup_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQSequentialAnimationGroup](fcQSequentialAnimationGroup_vdata(self)[])

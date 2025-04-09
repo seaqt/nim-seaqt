@@ -420,7 +420,10 @@ proc fcQIconEngine_method_callback_actualSize(self: pointer, size: pointer, mode
   let slotval2 = cint(mode)
   let slotval3 = cint(state)
   var virtualReturn = inst.actualSize(slotval1, slotval2, slotval3)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQIconEngine_method_callback_pixmap(self: pointer, size: pointer, mode: cint, state: cint): pointer {.cdecl.} =
   let inst = cast[VirtualQIconEngine](fcQIconEngine_vdata(self)[])
@@ -428,7 +431,10 @@ proc fcQIconEngine_method_callback_pixmap(self: pointer, size: pointer, mode: ci
   let slotval2 = cint(mode)
   let slotval3 = cint(state)
   var virtualReturn = inst.pixmap(slotval1, slotval2, slotval3)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQIconEngine_method_callback_addPixmap(self: pointer, pixmap: pointer, mode: cint, state: cint): void {.cdecl.} =
   let inst = cast[VirtualQIconEngine](fcQIconEngine_vdata(self)[])
@@ -451,12 +457,17 @@ proc fcQIconEngine_method_callback_addFile(self: pointer, fileName: struct_miqt_
 proc fcQIconEngine_method_callback_key(self: pointer): struct_miqt_string {.cdecl.} =
   let inst = cast[VirtualQIconEngine](fcQIconEngine_vdata(self)[])
   var virtualReturn = inst.key()
-  struct_miqt_string(data: if len(virtualReturn) > 0: addr virtualReturn[0] else: nil, len: csize_t(len(virtualReturn)))
+  var virtualReturn_copy = if len(virtualReturn) > 0: c_malloc(csize_t(len(virtualReturn))) else: nil
+  if len(virtualReturn) > 0: copyMem(virtualReturn_copy, addr virtualReturn[0], csize_t(len(virtualReturn)))
+  struct_miqt_string(data: virtualReturn_copy, len: csize_t(len(virtualReturn)))
 
 proc fcQIconEngine_method_callback_clone(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQIconEngine](fcQIconEngine_vdata(self)[])
   var virtualReturn = inst.clone()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQIconEngine_method_callback_read(self: pointer, inVal: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQIconEngine](fcQIconEngine_vdata(self)[])
@@ -475,16 +486,21 @@ proc fcQIconEngine_method_callback_availableSizes(self: pointer, mode: cint, sta
   let slotval1 = cint(mode)
   let slotval2 = cint(state)
   var virtualReturn = inst.availableSizes(slotval1, slotval2)
-  var virtualReturn_CArray = newSeq[pointer](len(virtualReturn))
+  var virtualReturn_CArray = cast[ptr UncheckedArray[pointer]](if len(virtualReturn) > 0: c_malloc(c_sizet(sizeof(pointer) * len(virtualReturn))) else: nil)
   for i in 0..<len(virtualReturn):
-    virtualReturn_CArray[i] = virtualReturn[i].h
+    virtualReturn[i].owned = false # TODO move?
+    let virtualReturn_i_h = virtualReturn[i].h
+    virtualReturn[i].h = nil
+    virtualReturn_CArray[i] = virtualReturn_i_h
 
   struct_miqt_array(len: csize_t(len(virtualReturn)), data: if len(virtualReturn) == 0: nil else: addr(virtualReturn_CArray[0]))
 
 proc fcQIconEngine_method_callback_iconName(self: pointer): struct_miqt_string {.cdecl.} =
   let inst = cast[VirtualQIconEngine](fcQIconEngine_vdata(self)[])
   var virtualReturn = inst.iconName()
-  struct_miqt_string(data: if len(virtualReturn) > 0: addr virtualReturn[0] else: nil, len: csize_t(len(virtualReturn)))
+  var virtualReturn_copy = if len(virtualReturn) > 0: c_malloc(csize_t(len(virtualReturn))) else: nil
+  if len(virtualReturn) > 0: copyMem(virtualReturn_copy, addr virtualReturn[0], csize_t(len(virtualReturn)))
+  struct_miqt_string(data: virtualReturn_copy, len: csize_t(len(virtualReturn)))
 
 proc fcQIconEngine_method_callback_isNull(self: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQIconEngine](fcQIconEngine_vdata(self)[])
@@ -498,7 +514,10 @@ proc fcQIconEngine_method_callback_scaledPixmap(self: pointer, size: pointer, mo
   let slotval3 = cint(state)
   let slotval4 = scale
   var virtualReturn = inst.scaledPixmap(slotval1, slotval2, slotval3, slotval4)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQIconEngine_method_callback_virtualHook(self: pointer, id: cint, data: pointer): void {.cdecl.} =
   let inst = cast[VirtualQIconEngine](fcQIconEngine_vdata(self)[])

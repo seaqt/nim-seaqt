@@ -373,7 +373,10 @@ method disconnectNotify*(self: VirtualQQmlExtensionPlugin, signal: gen_qmetaobje
 proc fcQQmlExtensionPlugin_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQQmlExtensionPlugin](fcQQmlExtensionPlugin_vdata(self)[])
   var virtualReturn = inst.metaObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQQmlExtensionPlugin_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQQmlExtensionPlugin](fcQQmlExtensionPlugin_vdata(self)[])
@@ -761,7 +764,10 @@ method disconnectNotify*(self: VirtualQQmlEngineExtensionPlugin, signal: gen_qme
 proc fcQQmlEngineExtensionPlugin_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQQmlEngineExtensionPlugin](fcQQmlEngineExtensionPlugin_vdata(self)[])
   var virtualReturn = inst.metaObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQQmlEngineExtensionPlugin_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQQmlEngineExtensionPlugin](fcQQmlEngineExtensionPlugin_vdata(self)[])

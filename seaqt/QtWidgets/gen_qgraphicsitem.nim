@@ -2666,12 +2666,18 @@ proc fcQGraphicsItem_method_callback_advance(self: pointer, phase: cint): void {
 proc fcQGraphicsItem_method_callback_boundingRect(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsItem](fcQGraphicsItem_vdata(self)[])
   var virtualReturn = inst.boundingRect()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQGraphicsItem_method_callback_shape(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsItem](fcQGraphicsItem_vdata(self)[])
   var virtualReturn = inst.shape()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQGraphicsItem_method_callback_contains(self: pointer, point: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQGraphicsItem](fcQGraphicsItem_vdata(self)[])
@@ -2702,7 +2708,10 @@ proc fcQGraphicsItem_method_callback_isObscuredBy(self: pointer, item: pointer):
 proc fcQGraphicsItem_method_callback_opaqueArea(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsItem](fcQGraphicsItem_vdata(self)[])
   var virtualReturn = inst.opaqueArea()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQGraphicsItem_method_callback_paint(self: pointer, painter: pointer, option: pointer, widget: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsItem](fcQGraphicsItem_vdata(self)[])
@@ -2823,14 +2832,20 @@ proc fcQGraphicsItem_method_callback_inputMethodQuery(self: pointer, query: cint
   let inst = cast[VirtualQGraphicsItem](fcQGraphicsItem_vdata(self)[])
   let slotval1 = cint(query)
   var virtualReturn = inst.inputMethodQuery(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQGraphicsItem_method_callback_itemChange(self: pointer, change: cint, value: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsItem](fcQGraphicsItem_vdata(self)[])
   let slotval1 = cint(change)
   let slotval2 = gen_qvariant_types.QVariant(h: value, owned: false)
   var virtualReturn = inst.itemChange(slotval1, slotval2)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQGraphicsItem_method_callback_supportsExtension(self: pointer, extension: cint): bool {.cdecl.} =
   let inst = cast[VirtualQGraphicsItem](fcQGraphicsItem_vdata(self)[])
@@ -2848,7 +2863,10 @@ proc fcQGraphicsItem_method_callback_extension(self: pointer, variant: pointer):
   let inst = cast[VirtualQGraphicsItem](fcQGraphicsItem_vdata(self)[])
   let slotval1 = gen_qvariant_types.QVariant(h: variant, owned: false)
   var virtualReturn = inst.extension(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 
 proc updateMicroFocus*(self: gen_qgraphicsitem_types.QGraphicsItem): void =
@@ -3969,7 +3987,10 @@ method extension*(self: VirtualQGraphicsObject, variant: gen_qvariant_types.QVar
 proc fcQGraphicsObject_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsObject](fcQGraphicsObject_vdata(self)[])
   var virtualReturn = inst.metaObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQGraphicsObject_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsObject](fcQGraphicsObject_vdata(self)[])
@@ -4031,12 +4052,18 @@ proc fcQGraphicsObject_method_callback_advance(self: pointer, phase: cint): void
 proc fcQGraphicsObject_method_callback_boundingRect(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsObject](fcQGraphicsObject_vdata(self)[])
   var virtualReturn = inst.boundingRect()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQGraphicsObject_method_callback_shape(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsObject](fcQGraphicsObject_vdata(self)[])
   var virtualReturn = inst.shape()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQGraphicsObject_method_callback_contains(self: pointer, point: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQGraphicsObject](fcQGraphicsObject_vdata(self)[])
@@ -4067,7 +4094,10 @@ proc fcQGraphicsObject_method_callback_isObscuredBy(self: pointer, item: pointer
 proc fcQGraphicsObject_method_callback_opaqueArea(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsObject](fcQGraphicsObject_vdata(self)[])
   var virtualReturn = inst.opaqueArea()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQGraphicsObject_method_callback_paint(self: pointer, painter: pointer, option: pointer, widget: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsObject](fcQGraphicsObject_vdata(self)[])
@@ -4188,14 +4218,20 @@ proc fcQGraphicsObject_method_callback_inputMethodQuery(self: pointer, query: ci
   let inst = cast[VirtualQGraphicsObject](fcQGraphicsObject_vdata(self)[])
   let slotval1 = cint(query)
   var virtualReturn = inst.inputMethodQuery(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQGraphicsObject_method_callback_itemChange(self: pointer, change: cint, value: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsObject](fcQGraphicsObject_vdata(self)[])
   let slotval1 = cint(change)
   let slotval2 = gen_qvariant_types.QVariant(h: value, owned: false)
   var virtualReturn = inst.itemChange(slotval1, slotval2)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQGraphicsObject_method_callback_supportsExtension(self: pointer, extension: cint): bool {.cdecl.} =
   let inst = cast[VirtualQGraphicsObject](fcQGraphicsObject_vdata(self)[])
@@ -4213,7 +4249,10 @@ proc fcQGraphicsObject_method_callback_extension(self: pointer, variant: pointer
   let inst = cast[VirtualQGraphicsObject](fcQGraphicsObject_vdata(self)[])
   let slotval1 = gen_qvariant_types.QVariant(h: variant, owned: false)
   var virtualReturn = inst.extension(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 
 proc updateMicroFocus*(self: gen_qgraphicsitem_types.QGraphicsObject): void =
@@ -5030,7 +5069,10 @@ proc fcQAbstractGraphicsShapeItem_method_callback_isObscuredBy(self: pointer, it
 proc fcQAbstractGraphicsShapeItem_method_callback_opaqueArea(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQAbstractGraphicsShapeItem](fcQAbstractGraphicsShapeItem_vdata(self)[])
   var virtualReturn = inst.opaqueArea()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQAbstractGraphicsShapeItem_method_callback_advance(self: pointer, phase: cint): void {.cdecl.} =
   let inst = cast[VirtualQAbstractGraphicsShapeItem](fcQAbstractGraphicsShapeItem_vdata(self)[])
@@ -5040,12 +5082,18 @@ proc fcQAbstractGraphicsShapeItem_method_callback_advance(self: pointer, phase: 
 proc fcQAbstractGraphicsShapeItem_method_callback_boundingRect(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQAbstractGraphicsShapeItem](fcQAbstractGraphicsShapeItem_vdata(self)[])
   var virtualReturn = inst.boundingRect()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQAbstractGraphicsShapeItem_method_callback_shape(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQAbstractGraphicsShapeItem](fcQAbstractGraphicsShapeItem_vdata(self)[])
   var virtualReturn = inst.shape()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQAbstractGraphicsShapeItem_method_callback_contains(self: pointer, point: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQAbstractGraphicsShapeItem](fcQAbstractGraphicsShapeItem_vdata(self)[])
@@ -5186,14 +5234,20 @@ proc fcQAbstractGraphicsShapeItem_method_callback_inputMethodQuery(self: pointer
   let inst = cast[VirtualQAbstractGraphicsShapeItem](fcQAbstractGraphicsShapeItem_vdata(self)[])
   let slotval1 = cint(query)
   var virtualReturn = inst.inputMethodQuery(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQAbstractGraphicsShapeItem_method_callback_itemChange(self: pointer, change: cint, value: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQAbstractGraphicsShapeItem](fcQAbstractGraphicsShapeItem_vdata(self)[])
   let slotval1 = cint(change)
   let slotval2 = gen_qvariant_types.QVariant(h: value, owned: false)
   var virtualReturn = inst.itemChange(slotval1, slotval2)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQAbstractGraphicsShapeItem_method_callback_supportsExtension(self: pointer, extension: cint): bool {.cdecl.} =
   let inst = cast[VirtualQAbstractGraphicsShapeItem](fcQAbstractGraphicsShapeItem_vdata(self)[])
@@ -5211,7 +5265,10 @@ proc fcQAbstractGraphicsShapeItem_method_callback_extension(self: pointer, varia
   let inst = cast[VirtualQAbstractGraphicsShapeItem](fcQAbstractGraphicsShapeItem_vdata(self)[])
   let slotval1 = gen_qvariant_types.QVariant(h: variant, owned: false)
   var virtualReturn = inst.extension(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 
 proc updateMicroFocus*(self: gen_qgraphicsitem_types.QAbstractGraphicsShapeItem): void =
@@ -5973,12 +6030,18 @@ method itemChange*(self: VirtualQGraphicsPathItem, change: cint, value: gen_qvar
 proc fcQGraphicsPathItem_method_callback_boundingRect(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsPathItem](fcQGraphicsPathItem_vdata(self)[])
   var virtualReturn = inst.boundingRect()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQGraphicsPathItem_method_callback_shape(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsPathItem](fcQGraphicsPathItem_vdata(self)[])
   var virtualReturn = inst.shape()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQGraphicsPathItem_method_callback_contains(self: pointer, point: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQGraphicsPathItem](fcQGraphicsPathItem_vdata(self)[])
@@ -6002,7 +6065,10 @@ proc fcQGraphicsPathItem_method_callback_isObscuredBy(self: pointer, item: point
 proc fcQGraphicsPathItem_method_callback_opaqueArea(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsPathItem](fcQGraphicsPathItem_vdata(self)[])
   var virtualReturn = inst.opaqueArea()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQGraphicsPathItem_method_callback_typeX(self: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQGraphicsPathItem](fcQGraphicsPathItem_vdata(self)[])
@@ -6025,7 +6091,10 @@ proc fcQGraphicsPathItem_method_callback_extension(self: pointer, variant: point
   let inst = cast[VirtualQGraphicsPathItem](fcQGraphicsPathItem_vdata(self)[])
   let slotval1 = gen_qvariant_types.QVariant(h: variant, owned: false)
   var virtualReturn = inst.extension(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQGraphicsPathItem_method_callback_advance(self: pointer, phase: cint): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsPathItem](fcQGraphicsPathItem_vdata(self)[])
@@ -6153,14 +6222,20 @@ proc fcQGraphicsPathItem_method_callback_inputMethodQuery(self: pointer, query: 
   let inst = cast[VirtualQGraphicsPathItem](fcQGraphicsPathItem_vdata(self)[])
   let slotval1 = cint(query)
   var virtualReturn = inst.inputMethodQuery(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQGraphicsPathItem_method_callback_itemChange(self: pointer, change: cint, value: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsPathItem](fcQGraphicsPathItem_vdata(self)[])
   let slotval1 = cint(change)
   let slotval2 = gen_qvariant_types.QVariant(h: value, owned: false)
   var virtualReturn = inst.itemChange(slotval1, slotval2)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 
 proc updateMicroFocus*(self: gen_qgraphicsitem_types.QGraphicsPathItem): void =
@@ -7103,12 +7178,18 @@ method itemChange*(self: VirtualQGraphicsRectItem, change: cint, value: gen_qvar
 proc fcQGraphicsRectItem_method_callback_boundingRect(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsRectItem](fcQGraphicsRectItem_vdata(self)[])
   var virtualReturn = inst.boundingRect()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQGraphicsRectItem_method_callback_shape(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsRectItem](fcQGraphicsRectItem_vdata(self)[])
   var virtualReturn = inst.shape()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQGraphicsRectItem_method_callback_contains(self: pointer, point: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQGraphicsRectItem](fcQGraphicsRectItem_vdata(self)[])
@@ -7132,7 +7213,10 @@ proc fcQGraphicsRectItem_method_callback_isObscuredBy(self: pointer, item: point
 proc fcQGraphicsRectItem_method_callback_opaqueArea(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsRectItem](fcQGraphicsRectItem_vdata(self)[])
   var virtualReturn = inst.opaqueArea()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQGraphicsRectItem_method_callback_typeX(self: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQGraphicsRectItem](fcQGraphicsRectItem_vdata(self)[])
@@ -7155,7 +7239,10 @@ proc fcQGraphicsRectItem_method_callback_extension(self: pointer, variant: point
   let inst = cast[VirtualQGraphicsRectItem](fcQGraphicsRectItem_vdata(self)[])
   let slotval1 = gen_qvariant_types.QVariant(h: variant, owned: false)
   var virtualReturn = inst.extension(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQGraphicsRectItem_method_callback_advance(self: pointer, phase: cint): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsRectItem](fcQGraphicsRectItem_vdata(self)[])
@@ -7283,14 +7370,20 @@ proc fcQGraphicsRectItem_method_callback_inputMethodQuery(self: pointer, query: 
   let inst = cast[VirtualQGraphicsRectItem](fcQGraphicsRectItem_vdata(self)[])
   let slotval1 = cint(query)
   var virtualReturn = inst.inputMethodQuery(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQGraphicsRectItem_method_callback_itemChange(self: pointer, change: cint, value: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsRectItem](fcQGraphicsRectItem_vdata(self)[])
   let slotval1 = cint(change)
   let slotval2 = gen_qvariant_types.QVariant(h: value, owned: false)
   var virtualReturn = inst.itemChange(slotval1, slotval2)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 
 proc updateMicroFocus*(self: gen_qgraphicsitem_types.QGraphicsRectItem): void =
@@ -8423,12 +8516,18 @@ method itemChange*(self: VirtualQGraphicsEllipseItem, change: cint, value: gen_q
 proc fcQGraphicsEllipseItem_method_callback_boundingRect(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsEllipseItem](fcQGraphicsEllipseItem_vdata(self)[])
   var virtualReturn = inst.boundingRect()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQGraphicsEllipseItem_method_callback_shape(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsEllipseItem](fcQGraphicsEllipseItem_vdata(self)[])
   var virtualReturn = inst.shape()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQGraphicsEllipseItem_method_callback_contains(self: pointer, point: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQGraphicsEllipseItem](fcQGraphicsEllipseItem_vdata(self)[])
@@ -8452,7 +8551,10 @@ proc fcQGraphicsEllipseItem_method_callback_isObscuredBy(self: pointer, item: po
 proc fcQGraphicsEllipseItem_method_callback_opaqueArea(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsEllipseItem](fcQGraphicsEllipseItem_vdata(self)[])
   var virtualReturn = inst.opaqueArea()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQGraphicsEllipseItem_method_callback_typeX(self: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQGraphicsEllipseItem](fcQGraphicsEllipseItem_vdata(self)[])
@@ -8475,7 +8577,10 @@ proc fcQGraphicsEllipseItem_method_callback_extension(self: pointer, variant: po
   let inst = cast[VirtualQGraphicsEllipseItem](fcQGraphicsEllipseItem_vdata(self)[])
   let slotval1 = gen_qvariant_types.QVariant(h: variant, owned: false)
   var virtualReturn = inst.extension(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQGraphicsEllipseItem_method_callback_advance(self: pointer, phase: cint): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsEllipseItem](fcQGraphicsEllipseItem_vdata(self)[])
@@ -8603,14 +8708,20 @@ proc fcQGraphicsEllipseItem_method_callback_inputMethodQuery(self: pointer, quer
   let inst = cast[VirtualQGraphicsEllipseItem](fcQGraphicsEllipseItem_vdata(self)[])
   let slotval1 = cint(query)
   var virtualReturn = inst.inputMethodQuery(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQGraphicsEllipseItem_method_callback_itemChange(self: pointer, change: cint, value: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsEllipseItem](fcQGraphicsEllipseItem_vdata(self)[])
   let slotval1 = cint(change)
   let slotval2 = gen_qvariant_types.QVariant(h: value, owned: false)
   var virtualReturn = inst.itemChange(slotval1, slotval2)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 
 proc updateMicroFocus*(self: gen_qgraphicsitem_types.QGraphicsEllipseItem): void =
@@ -9728,12 +9839,18 @@ method itemChange*(self: VirtualQGraphicsPolygonItem, change: cint, value: gen_q
 proc fcQGraphicsPolygonItem_method_callback_boundingRect(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsPolygonItem](fcQGraphicsPolygonItem_vdata(self)[])
   var virtualReturn = inst.boundingRect()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQGraphicsPolygonItem_method_callback_shape(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsPolygonItem](fcQGraphicsPolygonItem_vdata(self)[])
   var virtualReturn = inst.shape()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQGraphicsPolygonItem_method_callback_contains(self: pointer, point: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQGraphicsPolygonItem](fcQGraphicsPolygonItem_vdata(self)[])
@@ -9757,7 +9874,10 @@ proc fcQGraphicsPolygonItem_method_callback_isObscuredBy(self: pointer, item: po
 proc fcQGraphicsPolygonItem_method_callback_opaqueArea(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsPolygonItem](fcQGraphicsPolygonItem_vdata(self)[])
   var virtualReturn = inst.opaqueArea()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQGraphicsPolygonItem_method_callback_typeX(self: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQGraphicsPolygonItem](fcQGraphicsPolygonItem_vdata(self)[])
@@ -9780,7 +9900,10 @@ proc fcQGraphicsPolygonItem_method_callback_extension(self: pointer, variant: po
   let inst = cast[VirtualQGraphicsPolygonItem](fcQGraphicsPolygonItem_vdata(self)[])
   let slotval1 = gen_qvariant_types.QVariant(h: variant, owned: false)
   var virtualReturn = inst.extension(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQGraphicsPolygonItem_method_callback_advance(self: pointer, phase: cint): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsPolygonItem](fcQGraphicsPolygonItem_vdata(self)[])
@@ -9908,14 +10031,20 @@ proc fcQGraphicsPolygonItem_method_callback_inputMethodQuery(self: pointer, quer
   let inst = cast[VirtualQGraphicsPolygonItem](fcQGraphicsPolygonItem_vdata(self)[])
   let slotval1 = cint(query)
   var virtualReturn = inst.inputMethodQuery(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQGraphicsPolygonItem_method_callback_itemChange(self: pointer, change: cint, value: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsPolygonItem](fcQGraphicsPolygonItem_vdata(self)[])
   let slotval1 = cint(change)
   let slotval2 = gen_qvariant_types.QVariant(h: value, owned: false)
   var virtualReturn = inst.itemChange(slotval1, slotval2)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 
 proc updateMicroFocus*(self: gen_qgraphicsitem_types.QGraphicsPolygonItem): void =
@@ -10686,12 +10815,18 @@ method itemChange*(self: VirtualQGraphicsLineItem, change: cint, value: gen_qvar
 proc fcQGraphicsLineItem_method_callback_boundingRect(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsLineItem](fcQGraphicsLineItem_vdata(self)[])
   var virtualReturn = inst.boundingRect()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQGraphicsLineItem_method_callback_shape(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsLineItem](fcQGraphicsLineItem_vdata(self)[])
   var virtualReturn = inst.shape()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQGraphicsLineItem_method_callback_contains(self: pointer, point: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQGraphicsLineItem](fcQGraphicsLineItem_vdata(self)[])
@@ -10715,7 +10850,10 @@ proc fcQGraphicsLineItem_method_callback_isObscuredBy(self: pointer, item: point
 proc fcQGraphicsLineItem_method_callback_opaqueArea(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsLineItem](fcQGraphicsLineItem_vdata(self)[])
   var virtualReturn = inst.opaqueArea()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQGraphicsLineItem_method_callback_typeX(self: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQGraphicsLineItem](fcQGraphicsLineItem_vdata(self)[])
@@ -10738,7 +10876,10 @@ proc fcQGraphicsLineItem_method_callback_extension(self: pointer, variant: point
   let inst = cast[VirtualQGraphicsLineItem](fcQGraphicsLineItem_vdata(self)[])
   let slotval1 = gen_qvariant_types.QVariant(h: variant, owned: false)
   var virtualReturn = inst.extension(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQGraphicsLineItem_method_callback_advance(self: pointer, phase: cint): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsLineItem](fcQGraphicsLineItem_vdata(self)[])
@@ -10866,14 +11007,20 @@ proc fcQGraphicsLineItem_method_callback_inputMethodQuery(self: pointer, query: 
   let inst = cast[VirtualQGraphicsLineItem](fcQGraphicsLineItem_vdata(self)[])
   let slotval1 = cint(query)
   var virtualReturn = inst.inputMethodQuery(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQGraphicsLineItem_method_callback_itemChange(self: pointer, change: cint, value: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsLineItem](fcQGraphicsLineItem_vdata(self)[])
   let slotval1 = cint(change)
   let slotval2 = gen_qvariant_types.QVariant(h: value, owned: false)
   var virtualReturn = inst.itemChange(slotval1, slotval2)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 
 proc updateMicroFocus*(self: gen_qgraphicsitem_types.QGraphicsLineItem): void =
@@ -12012,12 +12159,18 @@ method itemChange*(self: VirtualQGraphicsPixmapItem, change: cint, value: gen_qv
 proc fcQGraphicsPixmapItem_method_callback_boundingRect(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsPixmapItem](fcQGraphicsPixmapItem_vdata(self)[])
   var virtualReturn = inst.boundingRect()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQGraphicsPixmapItem_method_callback_shape(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsPixmapItem](fcQGraphicsPixmapItem_vdata(self)[])
   var virtualReturn = inst.shape()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQGraphicsPixmapItem_method_callback_contains(self: pointer, point: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQGraphicsPixmapItem](fcQGraphicsPixmapItem_vdata(self)[])
@@ -12041,7 +12194,10 @@ proc fcQGraphicsPixmapItem_method_callback_isObscuredBy(self: pointer, item: poi
 proc fcQGraphicsPixmapItem_method_callback_opaqueArea(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsPixmapItem](fcQGraphicsPixmapItem_vdata(self)[])
   var virtualReturn = inst.opaqueArea()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQGraphicsPixmapItem_method_callback_typeX(self: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQGraphicsPixmapItem](fcQGraphicsPixmapItem_vdata(self)[])
@@ -12064,7 +12220,10 @@ proc fcQGraphicsPixmapItem_method_callback_extension(self: pointer, variant: poi
   let inst = cast[VirtualQGraphicsPixmapItem](fcQGraphicsPixmapItem_vdata(self)[])
   let slotval1 = gen_qvariant_types.QVariant(h: variant, owned: false)
   var virtualReturn = inst.extension(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQGraphicsPixmapItem_method_callback_advance(self: pointer, phase: cint): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsPixmapItem](fcQGraphicsPixmapItem_vdata(self)[])
@@ -12192,14 +12351,20 @@ proc fcQGraphicsPixmapItem_method_callback_inputMethodQuery(self: pointer, query
   let inst = cast[VirtualQGraphicsPixmapItem](fcQGraphicsPixmapItem_vdata(self)[])
   let slotval1 = cint(query)
   var virtualReturn = inst.inputMethodQuery(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQGraphicsPixmapItem_method_callback_itemChange(self: pointer, change: cint, value: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsPixmapItem](fcQGraphicsPixmapItem_vdata(self)[])
   let slotval1 = cint(change)
   let slotval2 = gen_qvariant_types.QVariant(h: value, owned: false)
   var virtualReturn = inst.itemChange(slotval1, slotval2)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 
 proc updateMicroFocus*(self: gen_qgraphicsitem_types.QGraphicsPixmapItem): void =
@@ -13415,7 +13580,10 @@ method itemChange*(self: VirtualQGraphicsTextItem, change: cint, value: gen_qvar
 proc fcQGraphicsTextItem_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsTextItem](fcQGraphicsTextItem_vdata(self)[])
   var virtualReturn = inst.metaObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQGraphicsTextItem_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsTextItem](fcQGraphicsTextItem_vdata(self)[])
@@ -13434,12 +13602,18 @@ proc fcQGraphicsTextItem_method_callback_metacall(self: pointer, param1: cint, p
 proc fcQGraphicsTextItem_method_callback_boundingRect(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsTextItem](fcQGraphicsTextItem_vdata(self)[])
   var virtualReturn = inst.boundingRect()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQGraphicsTextItem_method_callback_shape(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsTextItem](fcQGraphicsTextItem_vdata(self)[])
   var virtualReturn = inst.shape()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQGraphicsTextItem_method_callback_contains(self: pointer, point: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQGraphicsTextItem](fcQGraphicsTextItem_vdata(self)[])
@@ -13463,7 +13637,10 @@ proc fcQGraphicsTextItem_method_callback_isObscuredBy(self: pointer, item: point
 proc fcQGraphicsTextItem_method_callback_opaqueArea(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsTextItem](fcQGraphicsTextItem_vdata(self)[])
   var virtualReturn = inst.opaqueArea()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQGraphicsTextItem_method_callback_typeX(self: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQGraphicsTextItem](fcQGraphicsTextItem_vdata(self)[])
@@ -13565,7 +13742,10 @@ proc fcQGraphicsTextItem_method_callback_inputMethodQuery(self: pointer, query: 
   let inst = cast[VirtualQGraphicsTextItem](fcQGraphicsTextItem_vdata(self)[])
   let slotval1 = cint(query)
   var virtualReturn = inst.inputMethodQuery(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQGraphicsTextItem_method_callback_supportsExtension(self: pointer, extension: cint): bool {.cdecl.} =
   let inst = cast[VirtualQGraphicsTextItem](fcQGraphicsTextItem_vdata(self)[])
@@ -13583,7 +13763,10 @@ proc fcQGraphicsTextItem_method_callback_extension(self: pointer, variant: point
   let inst = cast[VirtualQGraphicsTextItem](fcQGraphicsTextItem_vdata(self)[])
   let slotval1 = gen_qvariant_types.QVariant(h: variant, owned: false)
   var virtualReturn = inst.extension(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQGraphicsTextItem_method_callback_event(self: pointer, ev: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQGraphicsTextItem](fcQGraphicsTextItem_vdata(self)[])
@@ -13659,7 +13842,10 @@ proc fcQGraphicsTextItem_method_callback_itemChange(self: pointer, change: cint,
   let slotval1 = cint(change)
   let slotval2 = gen_qvariant_types.QVariant(h: value, owned: false)
   var virtualReturn = inst.itemChange(slotval1, slotval2)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 
 proc updateMicroFocus*(self: gen_qgraphicsitem_types.QGraphicsTextItem): void =
@@ -14712,12 +14898,18 @@ method itemChange*(self: VirtualQGraphicsSimpleTextItem, change: cint, value: ge
 proc fcQGraphicsSimpleTextItem_method_callback_boundingRect(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsSimpleTextItem](fcQGraphicsSimpleTextItem_vdata(self)[])
   var virtualReturn = inst.boundingRect()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQGraphicsSimpleTextItem_method_callback_shape(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsSimpleTextItem](fcQGraphicsSimpleTextItem_vdata(self)[])
   var virtualReturn = inst.shape()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQGraphicsSimpleTextItem_method_callback_contains(self: pointer, point: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQGraphicsSimpleTextItem](fcQGraphicsSimpleTextItem_vdata(self)[])
@@ -14741,7 +14933,10 @@ proc fcQGraphicsSimpleTextItem_method_callback_isObscuredBy(self: pointer, item:
 proc fcQGraphicsSimpleTextItem_method_callback_opaqueArea(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsSimpleTextItem](fcQGraphicsSimpleTextItem_vdata(self)[])
   var virtualReturn = inst.opaqueArea()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQGraphicsSimpleTextItem_method_callback_typeX(self: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQGraphicsSimpleTextItem](fcQGraphicsSimpleTextItem_vdata(self)[])
@@ -14764,7 +14959,10 @@ proc fcQGraphicsSimpleTextItem_method_callback_extension(self: pointer, variant:
   let inst = cast[VirtualQGraphicsSimpleTextItem](fcQGraphicsSimpleTextItem_vdata(self)[])
   let slotval1 = gen_qvariant_types.QVariant(h: variant, owned: false)
   var virtualReturn = inst.extension(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQGraphicsSimpleTextItem_method_callback_advance(self: pointer, phase: cint): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsSimpleTextItem](fcQGraphicsSimpleTextItem_vdata(self)[])
@@ -14892,14 +15090,20 @@ proc fcQGraphicsSimpleTextItem_method_callback_inputMethodQuery(self: pointer, q
   let inst = cast[VirtualQGraphicsSimpleTextItem](fcQGraphicsSimpleTextItem_vdata(self)[])
   let slotval1 = cint(query)
   var virtualReturn = inst.inputMethodQuery(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQGraphicsSimpleTextItem_method_callback_itemChange(self: pointer, change: cint, value: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsSimpleTextItem](fcQGraphicsSimpleTextItem_vdata(self)[])
   let slotval1 = cint(change)
   let slotval2 = gen_qvariant_types.QVariant(h: value, owned: false)
   var virtualReturn = inst.itemChange(slotval1, slotval2)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 
 proc updateMicroFocus*(self: gen_qgraphicsitem_types.QGraphicsSimpleTextItem): void =
@@ -15833,7 +16037,10 @@ method extension*(self: VirtualQGraphicsItemGroup, variant: gen_qvariant_types.Q
 proc fcQGraphicsItemGroup_method_callback_boundingRect(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsItemGroup](fcQGraphicsItemGroup_vdata(self)[])
   var virtualReturn = inst.boundingRect()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQGraphicsItemGroup_method_callback_paint(self: pointer, painter: pointer, option: pointer, widget: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsItemGroup](fcQGraphicsItemGroup_vdata(self)[])
@@ -15851,7 +16058,10 @@ proc fcQGraphicsItemGroup_method_callback_isObscuredBy(self: pointer, item: poin
 proc fcQGraphicsItemGroup_method_callback_opaqueArea(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsItemGroup](fcQGraphicsItemGroup_vdata(self)[])
   var virtualReturn = inst.opaqueArea()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQGraphicsItemGroup_method_callback_typeX(self: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQGraphicsItemGroup](fcQGraphicsItemGroup_vdata(self)[])
@@ -15866,7 +16076,10 @@ proc fcQGraphicsItemGroup_method_callback_advance(self: pointer, phase: cint): v
 proc fcQGraphicsItemGroup_method_callback_shape(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsItemGroup](fcQGraphicsItemGroup_vdata(self)[])
   var virtualReturn = inst.shape()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQGraphicsItemGroup_method_callback_contains(self: pointer, point: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQGraphicsItemGroup](fcQGraphicsItemGroup_vdata(self)[])
@@ -15995,14 +16208,20 @@ proc fcQGraphicsItemGroup_method_callback_inputMethodQuery(self: pointer, query:
   let inst = cast[VirtualQGraphicsItemGroup](fcQGraphicsItemGroup_vdata(self)[])
   let slotval1 = cint(query)
   var virtualReturn = inst.inputMethodQuery(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQGraphicsItemGroup_method_callback_itemChange(self: pointer, change: cint, value: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsItemGroup](fcQGraphicsItemGroup_vdata(self)[])
   let slotval1 = cint(change)
   let slotval2 = gen_qvariant_types.QVariant(h: value, owned: false)
   var virtualReturn = inst.itemChange(slotval1, slotval2)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQGraphicsItemGroup_method_callback_supportsExtension(self: pointer, extension: cint): bool {.cdecl.} =
   let inst = cast[VirtualQGraphicsItemGroup](fcQGraphicsItemGroup_vdata(self)[])
@@ -16020,7 +16239,10 @@ proc fcQGraphicsItemGroup_method_callback_extension(self: pointer, variant: poin
   let inst = cast[VirtualQGraphicsItemGroup](fcQGraphicsItemGroup_vdata(self)[])
   let slotval1 = gen_qvariant_types.QVariant(h: variant, owned: false)
   var virtualReturn = inst.extension(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 
 proc updateMicroFocus*(self: gen_qgraphicsitem_types.QGraphicsItemGroup): void =

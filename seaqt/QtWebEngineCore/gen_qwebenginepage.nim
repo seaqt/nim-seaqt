@@ -1676,7 +1676,10 @@ method disconnectNotify*(self: VirtualQWebEnginePage, signal: gen_qmetaobject_ty
 proc fcQWebEnginePage_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQWebEnginePage](fcQWebEnginePage_vdata(self)[])
   var virtualReturn = inst.metaObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQWebEnginePage_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQWebEnginePage](fcQWebEnginePage_vdata(self)[])
@@ -1708,7 +1711,10 @@ proc fcQWebEnginePage_method_callback_createWindow(self: pointer, typeVal: cint)
   let inst = cast[VirtualQWebEnginePage](fcQWebEnginePage_vdata(self)[])
   let slotval1 = cint(typeVal)
   var virtualReturn = inst.createWindow(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQWebEnginePage_method_callback_chooseFiles(self: pointer, mode: cint, oldFiles: struct_miqt_array, acceptedMimeTypes: struct_miqt_array): struct_miqt_array {.cdecl.} =
   let inst = cast[VirtualQWebEnginePage](fcQWebEnginePage_vdata(self)[])
@@ -1734,9 +1740,11 @@ proc fcQWebEnginePage_method_callback_chooseFiles(self: pointer, mode: cint, old
   c_free(vacceptedMimeTypes_ma.data)
   let slotval3 = vacceptedMimeTypesx_ret
   var virtualReturn = inst.chooseFiles(slotval1, slotval2, slotval3)
-  var virtualReturn_CArray = newSeq[struct_miqt_string](len(virtualReturn))
+  var virtualReturn_CArray = cast[ptr UncheckedArray[struct_miqt_string]](if len(virtualReturn) > 0: c_malloc(c_sizet(sizeof(struct_miqt_string) * len(virtualReturn))) else: nil)
   for i in 0..<len(virtualReturn):
-    virtualReturn_CArray[i] = struct_miqt_string(data: if len(virtualReturn[i]) > 0: addr virtualReturn[i][0] else: nil, len: csize_t(len(virtualReturn[i])))
+    var virtualReturn_i_copy = if len(virtualReturn[i]) > 0: c_malloc(csize_t(len(virtualReturn[i]))) else: nil
+    if len(virtualReturn[i]) > 0: copyMem(virtualReturn_i_copy, addr virtualReturn[i][0], csize_t(len(virtualReturn[i])))
+    virtualReturn_CArray[i] = struct_miqt_string(data: virtualReturn_i_copy, len: csize_t(len(virtualReturn[i])))
 
   struct_miqt_array(len: csize_t(len(virtualReturn)), data: if len(virtualReturn) == 0: nil else: addr(virtualReturn_CArray[0]))
 

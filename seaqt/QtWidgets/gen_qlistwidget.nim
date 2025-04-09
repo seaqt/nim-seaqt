@@ -686,13 +686,19 @@ method write*(self: VirtualQListWidgetItem, outVal: gen_qdatastream_types.QDataS
 proc fcQListWidgetItem_method_callback_clone(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQListWidgetItem](fcQListWidgetItem_vdata(self)[])
   var virtualReturn = inst.clone()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQListWidgetItem_method_callback_data(self: pointer, role: cint): pointer {.cdecl.} =
   let inst = cast[VirtualQListWidgetItem](fcQListWidgetItem_vdata(self)[])
   let slotval1 = role
   var virtualReturn = inst.data(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQListWidgetItem_method_callback_setData(self: pointer, role: cint, value: pointer): void {.cdecl.} =
   let inst = cast[VirtualQListWidgetItem](fcQListWidgetItem_vdata(self)[])
@@ -2820,7 +2826,10 @@ method disconnectNotify*(self: VirtualQListWidget, signal: gen_qmetaobject_types
 proc fcQListWidget_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQListWidget](fcQListWidget_vdata(self)[])
   var virtualReturn = inst.metaObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQListWidget_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQListWidget](fcQListWidget_vdata(self)[])
@@ -2855,9 +2864,11 @@ proc fcQListWidget_method_callback_event(self: pointer, e: pointer): bool {.cdec
 proc fcQListWidget_method_callback_mimeTypes(self: pointer): struct_miqt_array {.cdecl.} =
   let inst = cast[VirtualQListWidget](fcQListWidget_vdata(self)[])
   var virtualReturn = inst.mimeTypes()
-  var virtualReturn_CArray = newSeq[struct_miqt_string](len(virtualReturn))
+  var virtualReturn_CArray = cast[ptr UncheckedArray[struct_miqt_string]](if len(virtualReturn) > 0: c_malloc(c_sizet(sizeof(struct_miqt_string) * len(virtualReturn))) else: nil)
   for i in 0..<len(virtualReturn):
-    virtualReturn_CArray[i] = struct_miqt_string(data: if len(virtualReturn[i]) > 0: addr virtualReturn[i][0] else: nil, len: csize_t(len(virtualReturn[i])))
+    var virtualReturn_i_copy = if len(virtualReturn[i]) > 0: c_malloc(csize_t(len(virtualReturn[i]))) else: nil
+    if len(virtualReturn[i]) > 0: copyMem(virtualReturn_i_copy, addr virtualReturn[i][0], csize_t(len(virtualReturn[i])))
+    virtualReturn_CArray[i] = struct_miqt_string(data: virtualReturn_i_copy, len: csize_t(len(virtualReturn[i])))
 
   struct_miqt_array(len: csize_t(len(virtualReturn)), data: if len(virtualReturn) == 0: nil else: addr(virtualReturn_CArray[0]))
 
@@ -2871,7 +2882,10 @@ proc fcQListWidget_method_callback_mimeData(self: pointer, items: struct_miqt_ar
   c_free(vitems_ma.data)
   let slotval1 = vitemsx_ret
   var virtualReturn = inst.mimeData(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQListWidget_method_callback_dropMimeData(self: pointer, index: cint, data: pointer, action: cint): bool {.cdecl.} =
   let inst = cast[VirtualQListWidget](fcQListWidget_vdata(self)[])
@@ -2890,7 +2904,10 @@ proc fcQListWidget_method_callback_visualRect(self: pointer, index: pointer): po
   let inst = cast[VirtualQListWidget](fcQListWidget_vdata(self)[])
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var virtualReturn = inst.visualRect(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQListWidget_method_callback_scrollTo(self: pointer, index: pointer, hint: cint): void {.cdecl.} =
   let inst = cast[VirtualQListWidget](fcQListWidget_vdata(self)[])
@@ -2902,7 +2919,10 @@ proc fcQListWidget_method_callback_indexAt(self: pointer, p: pointer): pointer {
   let inst = cast[VirtualQListWidget](fcQListWidget_vdata(self)[])
   let slotval1 = gen_qpoint_types.QPoint(h: p, owned: false)
   var virtualReturn = inst.indexAt(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQListWidget_method_callback_doItemsLayout(self: pointer): void {.cdecl.} =
   let inst = cast[VirtualQListWidget](fcQListWidget_vdata(self)[])
@@ -3015,7 +3035,10 @@ proc fcQListWidget_method_callback_moveCursor(self: pointer, cursorAction: cint,
   let slotval1 = cint(cursorAction)
   let slotval2 = cint(modifiers)
   var virtualReturn = inst.moveCursor(slotval1, slotval2)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQListWidget_method_callback_setSelection(self: pointer, rect: pointer, command: cint): void {.cdecl.} =
   let inst = cast[VirtualQListWidget](fcQListWidget_vdata(self)[])
@@ -3027,14 +3050,20 @@ proc fcQListWidget_method_callback_visualRegionForSelection(self: pointer, selec
   let inst = cast[VirtualQListWidget](fcQListWidget_vdata(self)[])
   let slotval1 = gen_qitemselectionmodel_types.QItemSelection(h: selection, owned: false)
   var virtualReturn = inst.visualRegionForSelection(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQListWidget_method_callback_selectedIndexes(self: pointer): struct_miqt_array {.cdecl.} =
   let inst = cast[VirtualQListWidget](fcQListWidget_vdata(self)[])
   var virtualReturn = inst.selectedIndexes()
-  var virtualReturn_CArray = newSeq[pointer](len(virtualReturn))
+  var virtualReturn_CArray = cast[ptr UncheckedArray[pointer]](if len(virtualReturn) > 0: c_malloc(c_sizet(sizeof(pointer) * len(virtualReturn))) else: nil)
   for i in 0..<len(virtualReturn):
-    virtualReturn_CArray[i] = virtualReturn[i].h
+    virtualReturn[i].owned = false # TODO move?
+    let virtualReturn_i_h = virtualReturn[i].h
+    virtualReturn[i].h = nil
+    virtualReturn_CArray[i] = virtualReturn_i_h
 
   struct_miqt_array(len: csize_t(len(virtualReturn)), data: if len(virtualReturn) == 0: nil else: addr(virtualReturn_CArray[0]))
 
@@ -3063,7 +3092,10 @@ proc fcQListWidget_method_callback_currentChanged(self: pointer, current: pointe
 proc fcQListWidget_method_callback_viewportSizeHint(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQListWidget](fcQListWidget_vdata(self)[])
   var virtualReturn = inst.viewportSizeHint()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQListWidget_method_callback_keyboardSearch(self: pointer, search: struct_miqt_string): void {.cdecl.} =
   let inst = cast[VirtualQListWidget](fcQListWidget_vdata(self)[])
@@ -3089,13 +3121,19 @@ proc fcQListWidget_method_callback_itemDelegateForIndex(self: pointer, index: po
   let inst = cast[VirtualQListWidget](fcQListWidget_vdata(self)[])
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var virtualReturn = inst.itemDelegateForIndex(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQListWidget_method_callback_inputMethodQuery(self: pointer, query: cint): pointer {.cdecl.} =
   let inst = cast[VirtualQListWidget](fcQListWidget_vdata(self)[])
   let slotval1 = cint(query)
   var virtualReturn = inst.inputMethodQuery(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQListWidget_method_callback_selectAll(self: pointer): void {.cdecl.} =
   let inst = cast[VirtualQListWidget](fcQListWidget_vdata(self)[])
@@ -3217,12 +3255,18 @@ proc fcQListWidget_method_callback_eventFilter(self: pointer, objectVal: pointer
 proc fcQListWidget_method_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQListWidget](fcQListWidget_vdata(self)[])
   var virtualReturn = inst.minimumSizeHint()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQListWidget_method_callback_sizeHint(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQListWidget](fcQListWidget_vdata(self)[])
   var virtualReturn = inst.sizeHint()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQListWidget_method_callback_setupViewport(self: pointer, viewport: pointer): void {.cdecl.} =
   let inst = cast[VirtualQListWidget](fcQListWidget_vdata(self)[])
@@ -3268,7 +3312,10 @@ proc fcQListWidget_method_callback_hasHeightForWidth(self: pointer): bool {.cdec
 proc fcQListWidget_method_callback_paintEngine(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQListWidget](fcQListWidget_vdata(self)[])
   var virtualReturn = inst.paintEngine()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQListWidget_method_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQListWidget](fcQListWidget_vdata(self)[])
@@ -3341,12 +3388,18 @@ proc fcQListWidget_method_callback_redirected(self: pointer, offset: pointer): p
   let inst = cast[VirtualQListWidget](fcQListWidget_vdata(self)[])
   let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
   var virtualReturn = inst.redirected(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQListWidget_method_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQListWidget](fcQListWidget_vdata(self)[])
   var virtualReturn = inst.sharedPainter()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQListWidget_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQListWidget](fcQListWidget_vdata(self)[])

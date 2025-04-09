@@ -251,7 +251,10 @@ method sharedPainter*(self: VirtualQSvgGenerator): gen_qpainter_types.QPainter {
 proc fcQSvgGenerator_method_callback_paintEngine(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQSvgGenerator](fcQSvgGenerator_vdata(self)[])
   var virtualReturn = inst.paintEngine()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQSvgGenerator_method_callback_metric(self: pointer, metric: cint): cint {.cdecl.} =
   let inst = cast[VirtualQSvgGenerator](fcQSvgGenerator_vdata(self)[])
@@ -273,12 +276,18 @@ proc fcQSvgGenerator_method_callback_redirected(self: pointer, offset: pointer):
   let inst = cast[VirtualQSvgGenerator](fcQSvgGenerator_vdata(self)[])
   let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
   var virtualReturn = inst.redirected(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQSvgGenerator_method_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQSvgGenerator](fcQSvgGenerator_vdata(self)[])
   var virtualReturn = inst.sharedPainter()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 
 proc create*(T: type gen_qsvggenerator_types.QSvgGenerator,

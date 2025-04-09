@@ -785,7 +785,10 @@ method disconnectNotify*(self: VirtualQQuickView, signal: gen_qmetaobject_types.
 proc fcQQuickView_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQQuickView](fcQQuickView_vdata(self)[])
   var virtualReturn = inst.metaObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQQuickView_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQQuickView](fcQQuickView_vdata(self)[])
@@ -839,12 +842,18 @@ proc fcQQuickView_method_callback_mouseMoveEvent(self: pointer, param1: pointer)
 proc fcQQuickView_method_callback_focusObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQQuickView](fcQQuickView_vdata(self)[])
   var virtualReturn = inst.focusObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQQuickView_method_callback_accessibleRoot(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQQuickView](fcQQuickView_vdata(self)[])
   var virtualReturn = inst.accessibleRoot()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQQuickView_method_callback_exposeEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQQuickView](fcQQuickView_vdata(self)[])
@@ -905,12 +914,18 @@ proc fcQQuickView_method_callback_surfaceType(self: pointer): cint {.cdecl.} =
 proc fcQQuickView_method_callback_format(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQQuickView](fcQQuickView_vdata(self)[])
   var virtualReturn = inst.format()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQQuickView_method_callback_size(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQQuickView](fcQQuickView_vdata(self)[])
   var virtualReturn = inst.size()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQQuickView_method_callback_paintEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQQuickView](fcQQuickView_vdata(self)[])

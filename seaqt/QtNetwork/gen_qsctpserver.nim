@@ -337,7 +337,10 @@ method disconnectNotify*(self: VirtualQSctpServer, signal: gen_qmetaobject_types
 proc fcQSctpServer_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQSctpServer](fcQSctpServer_vdata(self)[])
   var virtualReturn = inst.metaObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQSctpServer_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQSctpServer](fcQSctpServer_vdata(self)[])
@@ -366,7 +369,10 @@ proc fcQSctpServer_method_callback_hasPendingConnections(self: pointer): bool {.
 proc fcQSctpServer_method_callback_nextPendingConnection(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQSctpServer](fcQSctpServer_vdata(self)[])
   var virtualReturn = inst.nextPendingConnection()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQSctpServer_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQSctpServer](fcQSctpServer_vdata(self)[])

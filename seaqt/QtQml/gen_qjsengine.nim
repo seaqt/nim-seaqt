@@ -431,7 +431,10 @@ method disconnectNotify*(self: VirtualQJSEngine, signal: gen_qmetaobject_types.Q
 proc fcQJSEngine_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQJSEngine](fcQJSEngine_vdata(self)[])
   var virtualReturn = inst.metaObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQJSEngine_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQJSEngine](fcQJSEngine_vdata(self)[])

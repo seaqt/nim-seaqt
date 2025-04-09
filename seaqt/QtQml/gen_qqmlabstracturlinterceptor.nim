@@ -95,7 +95,10 @@ proc fcQQmlAbstractUrlInterceptor_method_callback_intercept(self: pointer, path:
   let slotval1 = gen_qurl_types.QUrl(h: path, owned: false)
   let slotval2 = cint(typeVal)
   var virtualReturn = inst.intercept(slotval1, slotval2)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 
 proc create*(T: type gen_qqmlabstracturlinterceptor_types.QQmlAbstractUrlInterceptor,

@@ -750,7 +750,10 @@ method sharedPainter*(self: VirtualQRasterWindow): gen_qpainter_types.QPainter {
 proc fcQRasterWindow_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQRasterWindow](fcQRasterWindow_vdata(self)[])
   var virtualReturn = inst.metaObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQRasterWindow_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQRasterWindow](fcQRasterWindow_vdata(self)[])
@@ -776,7 +779,10 @@ proc fcQRasterWindow_method_callback_redirected(self: pointer, param1: pointer):
   let inst = cast[VirtualQRasterWindow](fcQRasterWindow_vdata(self)[])
   let slotval1 = gen_qpoint_types.QPoint(h: param1, owned: false)
   var virtualReturn = inst.redirected(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQRasterWindow_method_callback_exposeEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQRasterWindow](fcQRasterWindow_vdata(self)[])
@@ -802,22 +808,34 @@ proc fcQRasterWindow_method_callback_surfaceType(self: pointer): cint {.cdecl.} 
 proc fcQRasterWindow_method_callback_format(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQRasterWindow](fcQRasterWindow_vdata(self)[])
   var virtualReturn = inst.format()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQRasterWindow_method_callback_size(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQRasterWindow](fcQRasterWindow_vdata(self)[])
   var virtualReturn = inst.size()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQRasterWindow_method_callback_accessibleRoot(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQRasterWindow](fcQRasterWindow_vdata(self)[])
   var virtualReturn = inst.accessibleRoot()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQRasterWindow_method_callback_focusObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQRasterWindow](fcQRasterWindow_vdata(self)[])
   var virtualReturn = inst.focusObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQRasterWindow_method_callback_resizeEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQRasterWindow](fcQRasterWindow_vdata(self)[])
@@ -955,7 +973,10 @@ proc fcQRasterWindow_method_callback_initPainter(self: pointer, painter: pointer
 proc fcQRasterWindow_method_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQRasterWindow](fcQRasterWindow_vdata(self)[])
   var virtualReturn = inst.sharedPainter()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 
 proc resolveInterface*(self: gen_qrasterwindow_types.QRasterWindow, name: cstring, revision: cint): pointer =

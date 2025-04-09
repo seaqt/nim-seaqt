@@ -948,7 +948,10 @@ method setAccepted*(self: VirtualQInputEvent, accepted: bool): void {.base.} =
 proc fcQInputEvent_method_callback_clone(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQInputEvent](fcQInputEvent_vdata(self)[])
   var virtualReturn = inst.clone()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQInputEvent_method_callback_setTimestamp(self: pointer, timestamp: culonglong): void {.cdecl.} =
   let inst = cast[VirtualQInputEvent](fcQInputEvent_vdata(self)[])
@@ -1177,7 +1180,10 @@ method setAccepted*(self: VirtualQPointerEvent, accepted: bool): void {.base.} =
 proc fcQPointerEvent_method_callback_clone(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQPointerEvent](fcQPointerEvent_vdata(self)[])
   var virtualReturn = inst.clone()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQPointerEvent_method_callback_setTimestamp(self: pointer, timestamp: culonglong): void {.cdecl.} =
   let inst = cast[VirtualQPointerEvent](fcQPointerEvent_vdata(self)[])
@@ -1477,7 +1483,10 @@ method setAccepted*(self: VirtualQEnterEvent, accepted: bool): void {.base.} =
 proc fcQEnterEvent_method_callback_clone(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQEnterEvent](fcQEnterEvent_vdata(self)[])
   var virtualReturn = inst.clone()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQEnterEvent_method_callback_isBeginEvent(self: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQEnterEvent](fcQEnterEvent_vdata(self)[])
@@ -1709,7 +1718,10 @@ method setAccepted*(self: VirtualQMouseEvent, accepted: bool): void {.base.} =
 proc fcQMouseEvent_method_callback_clone(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQMouseEvent](fcQMouseEvent_vdata(self)[])
   var virtualReturn = inst.clone()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQMouseEvent_method_callback_isBeginEvent(self: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQMouseEvent](fcQMouseEvent_vdata(self)[])
@@ -2109,7 +2121,10 @@ method setAccepted*(self: VirtualQHoverEvent, accepted: bool): void {.base.} =
 proc fcQHoverEvent_method_callback_clone(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQHoverEvent](fcQHoverEvent_vdata(self)[])
   var virtualReturn = inst.clone()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQHoverEvent_method_callback_isUpdateEvent(self: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQHoverEvent](fcQHoverEvent_vdata(self)[])
@@ -2462,7 +2477,10 @@ method setAccepted*(self: VirtualQWheelEvent, accepted: bool): void {.base.} =
 proc fcQWheelEvent_method_callback_clone(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQWheelEvent](fcQWheelEvent_vdata(self)[])
   var virtualReturn = inst.clone()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQWheelEvent_method_callback_isBeginEvent(self: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQWheelEvent](fcQWheelEvent_vdata(self)[])
@@ -2745,7 +2763,10 @@ method setAccepted*(self: VirtualQTabletEvent, accepted: bool): void {.base.} =
 proc fcQTabletEvent_method_callback_clone(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQTabletEvent](fcQTabletEvent_vdata(self)[])
   var virtualReturn = inst.clone()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQTabletEvent_method_callback_isBeginEvent(self: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQTabletEvent](fcQTabletEvent_vdata(self)[])
@@ -2940,7 +2961,10 @@ method setAccepted*(self: VirtualQNativeGestureEvent, accepted: bool): void {.ba
 proc fcQNativeGestureEvent_method_callback_clone(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQNativeGestureEvent](fcQNativeGestureEvent_vdata(self)[])
   var virtualReturn = inst.clone()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQNativeGestureEvent_method_callback_isBeginEvent(self: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQNativeGestureEvent](fcQNativeGestureEvent_vdata(self)[])
@@ -3164,7 +3188,10 @@ method setAccepted*(self: VirtualQKeyEvent, accepted: bool): void {.base.} =
 proc fcQKeyEvent_method_callback_clone(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQKeyEvent](fcQKeyEvent_vdata(self)[])
   var virtualReturn = inst.clone()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQKeyEvent_method_callback_setTimestamp(self: pointer, timestamp: culonglong): void {.cdecl.} =
   let inst = cast[VirtualQKeyEvent](fcQKeyEvent_vdata(self)[])
@@ -3465,7 +3492,10 @@ method setAccepted*(self: VirtualQFocusEvent, accepted: bool): void {.base.} =
 proc fcQFocusEvent_method_callback_clone(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQFocusEvent](fcQFocusEvent_vdata(self)[])
   var virtualReturn = inst.clone()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQFocusEvent_method_callback_setAccepted(self: pointer, accepted: bool): void {.cdecl.} =
   let inst = cast[VirtualQFocusEvent](fcQFocusEvent_vdata(self)[])
@@ -3578,7 +3608,10 @@ method setAccepted*(self: VirtualQPaintEvent, accepted: bool): void {.base.} =
 proc fcQPaintEvent_method_callback_clone(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQPaintEvent](fcQPaintEvent_vdata(self)[])
   var virtualReturn = inst.clone()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQPaintEvent_method_callback_setAccepted(self: pointer, accepted: bool): void {.cdecl.} =
   let inst = cast[VirtualQPaintEvent](fcQPaintEvent_vdata(self)[])
@@ -3691,7 +3724,10 @@ method setAccepted*(self: VirtualQMoveEvent, accepted: bool): void {.base.} =
 proc fcQMoveEvent_method_callback_clone(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQMoveEvent](fcQMoveEvent_vdata(self)[])
   var virtualReturn = inst.clone()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQMoveEvent_method_callback_setAccepted(self: pointer, accepted: bool): void {.cdecl.} =
   let inst = cast[VirtualQMoveEvent](fcQMoveEvent_vdata(self)[])
@@ -3778,7 +3814,10 @@ method setAccepted*(self: VirtualQExposeEvent, accepted: bool): void {.base.} =
 proc fcQExposeEvent_method_callback_clone(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQExposeEvent](fcQExposeEvent_vdata(self)[])
   var virtualReturn = inst.clone()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQExposeEvent_method_callback_setAccepted(self: pointer, accepted: bool): void {.cdecl.} =
   let inst = cast[VirtualQExposeEvent](fcQExposeEvent_vdata(self)[])
@@ -3865,7 +3904,10 @@ method setAccepted*(self: VirtualQPlatformSurfaceEvent, accepted: bool): void {.
 proc fcQPlatformSurfaceEvent_method_callback_clone(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQPlatformSurfaceEvent](fcQPlatformSurfaceEvent_vdata(self)[])
   var virtualReturn = inst.clone()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQPlatformSurfaceEvent_method_callback_setAccepted(self: pointer, accepted: bool): void {.cdecl.} =
   let inst = cast[VirtualQPlatformSurfaceEvent](fcQPlatformSurfaceEvent_vdata(self)[])
@@ -3955,7 +3997,10 @@ method setAccepted*(self: VirtualQResizeEvent, accepted: bool): void {.base.} =
 proc fcQResizeEvent_method_callback_clone(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQResizeEvent](fcQResizeEvent_vdata(self)[])
   var virtualReturn = inst.clone()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQResizeEvent_method_callback_setAccepted(self: pointer, accepted: bool): void {.cdecl.} =
   let inst = cast[VirtualQResizeEvent](fcQResizeEvent_vdata(self)[])
@@ -4039,7 +4084,10 @@ method setAccepted*(self: VirtualQCloseEvent, accepted: bool): void {.base.} =
 proc fcQCloseEvent_method_callback_clone(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQCloseEvent](fcQCloseEvent_vdata(self)[])
   var virtualReturn = inst.clone()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQCloseEvent_method_callback_setAccepted(self: pointer, accepted: bool): void {.cdecl.} =
   let inst = cast[VirtualQCloseEvent](fcQCloseEvent_vdata(self)[])
@@ -4121,7 +4169,10 @@ method setAccepted*(self: VirtualQIconDragEvent, accepted: bool): void {.base.} 
 proc fcQIconDragEvent_method_callback_clone(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQIconDragEvent](fcQIconDragEvent_vdata(self)[])
   var virtualReturn = inst.clone()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQIconDragEvent_method_callback_setAccepted(self: pointer, accepted: bool): void {.cdecl.} =
   let inst = cast[VirtualQIconDragEvent](fcQIconDragEvent_vdata(self)[])
@@ -4203,7 +4254,10 @@ method setAccepted*(self: VirtualQShowEvent, accepted: bool): void {.base.} =
 proc fcQShowEvent_method_callback_clone(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQShowEvent](fcQShowEvent_vdata(self)[])
   var virtualReturn = inst.clone()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQShowEvent_method_callback_setAccepted(self: pointer, accepted: bool): void {.cdecl.} =
   let inst = cast[VirtualQShowEvent](fcQShowEvent_vdata(self)[])
@@ -4285,7 +4339,10 @@ method setAccepted*(self: VirtualQHideEvent, accepted: bool): void {.base.} =
 proc fcQHideEvent_method_callback_clone(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQHideEvent](fcQHideEvent_vdata(self)[])
   var virtualReturn = inst.clone()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQHideEvent_method_callback_setAccepted(self: pointer, accepted: bool): void {.cdecl.} =
   let inst = cast[VirtualQHideEvent](fcQHideEvent_vdata(self)[])
@@ -4401,7 +4458,10 @@ method setAccepted*(self: VirtualQContextMenuEvent, accepted: bool): void {.base
 proc fcQContextMenuEvent_method_callback_clone(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQContextMenuEvent](fcQContextMenuEvent_vdata(self)[])
   var virtualReturn = inst.clone()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQContextMenuEvent_method_callback_setTimestamp(self: pointer, timestamp: culonglong): void {.cdecl.} =
   let inst = cast[VirtualQContextMenuEvent](fcQContextMenuEvent_vdata(self)[])
@@ -4579,7 +4639,10 @@ method setAccepted*(self: VirtualQInputMethodEvent, accepted: bool): void {.base
 proc fcQInputMethodEvent_method_callback_clone(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQInputMethodEvent](fcQInputMethodEvent_vdata(self)[])
   var virtualReturn = inst.clone()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQInputMethodEvent_method_callback_setAccepted(self: pointer, accepted: bool): void {.cdecl.} =
   let inst = cast[VirtualQInputMethodEvent](fcQInputMethodEvent_vdata(self)[])
@@ -4701,7 +4764,10 @@ method setAccepted*(self: VirtualQInputMethodQueryEvent, accepted: bool): void {
 proc fcQInputMethodQueryEvent_method_callback_clone(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQInputMethodQueryEvent](fcQInputMethodQueryEvent_vdata(self)[])
   var virtualReturn = inst.clone()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQInputMethodQueryEvent_method_callback_setAccepted(self: pointer, accepted: bool): void {.cdecl.} =
   let inst = cast[VirtualQInputMethodQueryEvent](fcQInputMethodQueryEvent_vdata(self)[])
@@ -4827,7 +4893,10 @@ method setAccepted*(self: VirtualQDropEvent, accepted: bool): void {.base.} =
 proc fcQDropEvent_method_callback_clone(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQDropEvent](fcQDropEvent_vdata(self)[])
   var virtualReturn = inst.clone()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQDropEvent_method_callback_setAccepted(self: pointer, accepted: bool): void {.cdecl.} =
   let inst = cast[VirtualQDropEvent](fcQDropEvent_vdata(self)[])
@@ -4949,7 +5018,10 @@ method setAccepted*(self: VirtualQDragMoveEvent, accepted: bool): void {.base.} 
 proc fcQDragMoveEvent_method_callback_clone(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQDragMoveEvent](fcQDragMoveEvent_vdata(self)[])
   var virtualReturn = inst.clone()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQDragMoveEvent_method_callback_setAccepted(self: pointer, accepted: bool): void {.cdecl.} =
   let inst = cast[VirtualQDragMoveEvent](fcQDragMoveEvent_vdata(self)[])
@@ -5056,7 +5128,10 @@ method setAccepted*(self: VirtualQDragEnterEvent, accepted: bool): void {.base.}
 proc fcQDragEnterEvent_method_callback_clone(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQDragEnterEvent](fcQDragEnterEvent_vdata(self)[])
   var virtualReturn = inst.clone()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQDragEnterEvent_method_callback_setAccepted(self: pointer, accepted: bool): void {.cdecl.} =
   let inst = cast[VirtualQDragEnterEvent](fcQDragEnterEvent_vdata(self)[])
@@ -5140,7 +5215,10 @@ method setAccepted*(self: VirtualQDragLeaveEvent, accepted: bool): void {.base.}
 proc fcQDragLeaveEvent_method_callback_clone(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQDragLeaveEvent](fcQDragLeaveEvent_vdata(self)[])
   var virtualReturn = inst.clone()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQDragLeaveEvent_method_callback_setAccepted(self: pointer, accepted: bool): void {.cdecl.} =
   let inst = cast[VirtualQDragLeaveEvent](fcQDragLeaveEvent_vdata(self)[])
@@ -5240,7 +5318,10 @@ method setAccepted*(self: VirtualQHelpEvent, accepted: bool): void {.base.} =
 proc fcQHelpEvent_method_callback_clone(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQHelpEvent](fcQHelpEvent_vdata(self)[])
   var virtualReturn = inst.clone()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQHelpEvent_method_callback_setAccepted(self: pointer, accepted: bool): void {.cdecl.} =
   let inst = cast[VirtualQHelpEvent](fcQHelpEvent_vdata(self)[])
@@ -5330,7 +5411,10 @@ method setAccepted*(self: VirtualQStatusTipEvent, accepted: bool): void {.base.}
 proc fcQStatusTipEvent_method_callback_clone(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQStatusTipEvent](fcQStatusTipEvent_vdata(self)[])
   var virtualReturn = inst.clone()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQStatusTipEvent_method_callback_setAccepted(self: pointer, accepted: bool): void {.cdecl.} =
   let inst = cast[VirtualQStatusTipEvent](fcQStatusTipEvent_vdata(self)[])
@@ -5420,7 +5504,10 @@ method setAccepted*(self: VirtualQWhatsThisClickedEvent, accepted: bool): void {
 proc fcQWhatsThisClickedEvent_method_callback_clone(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQWhatsThisClickedEvent](fcQWhatsThisClickedEvent_vdata(self)[])
   var virtualReturn = inst.clone()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQWhatsThisClickedEvent_method_callback_setAccepted(self: pointer, accepted: bool): void {.cdecl.} =
   let inst = cast[VirtualQWhatsThisClickedEvent](fcQWhatsThisClickedEvent_vdata(self)[])
@@ -5519,7 +5606,10 @@ method setAccepted*(self: VirtualQFileOpenEvent, accepted: bool): void {.base.} 
 proc fcQFileOpenEvent_method_callback_clone(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQFileOpenEvent](fcQFileOpenEvent_vdata(self)[])
   var virtualReturn = inst.clone()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQFileOpenEvent_method_callback_setAccepted(self: pointer, accepted: bool): void {.cdecl.} =
   let inst = cast[VirtualQFileOpenEvent](fcQFileOpenEvent_vdata(self)[])
@@ -5629,7 +5719,10 @@ method setAccepted*(self: VirtualQToolBarChangeEvent, accepted: bool): void {.ba
 proc fcQToolBarChangeEvent_method_callback_clone(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQToolBarChangeEvent](fcQToolBarChangeEvent_vdata(self)[])
   var virtualReturn = inst.clone()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQToolBarChangeEvent_method_callback_setAccepted(self: pointer, accepted: bool): void {.cdecl.} =
   let inst = cast[VirtualQToolBarChangeEvent](fcQToolBarChangeEvent_vdata(self)[])
@@ -5722,7 +5815,10 @@ method setAccepted*(self: VirtualQShortcutEvent, accepted: bool): void {.base.} 
 proc fcQShortcutEvent_method_callback_clone(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQShortcutEvent](fcQShortcutEvent_vdata(self)[])
   var virtualReturn = inst.clone()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQShortcutEvent_method_callback_setAccepted(self: pointer, accepted: bool): void {.cdecl.} =
   let inst = cast[VirtualQShortcutEvent](fcQShortcutEvent_vdata(self)[])
@@ -5835,7 +5931,10 @@ method setAccepted*(self: VirtualQWindowStateChangeEvent, accepted: bool): void 
 proc fcQWindowStateChangeEvent_method_callback_clone(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQWindowStateChangeEvent](fcQWindowStateChangeEvent_vdata(self)[])
   var virtualReturn = inst.clone()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQWindowStateChangeEvent_method_callback_setAccepted(self: pointer, accepted: bool): void {.cdecl.} =
   let inst = cast[VirtualQWindowStateChangeEvent](fcQWindowStateChangeEvent_vdata(self)[])
@@ -6018,7 +6117,10 @@ method setAccepted*(self: VirtualQTouchEvent, accepted: bool): void {.base.} =
 proc fcQTouchEvent_method_callback_clone(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQTouchEvent](fcQTouchEvent_vdata(self)[])
   var virtualReturn = inst.clone()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQTouchEvent_method_callback_isBeginEvent(self: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQTouchEvent](fcQTouchEvent_vdata(self)[])
@@ -6326,7 +6428,10 @@ method setAccepted*(self: VirtualQScrollPrepareEvent, accepted: bool): void {.ba
 proc fcQScrollPrepareEvent_method_callback_clone(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQScrollPrepareEvent](fcQScrollPrepareEvent_vdata(self)[])
   var virtualReturn = inst.clone()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQScrollPrepareEvent_method_callback_setAccepted(self: pointer, accepted: bool): void {.cdecl.} =
   let inst = cast[VirtualQScrollPrepareEvent](fcQScrollPrepareEvent_vdata(self)[])
@@ -6419,7 +6524,10 @@ method setAccepted*(self: VirtualQScrollEvent, accepted: bool): void {.base.} =
 proc fcQScrollEvent_method_callback_clone(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQScrollEvent](fcQScrollEvent_vdata(self)[])
   var virtualReturn = inst.clone()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQScrollEvent_method_callback_setAccepted(self: pointer, accepted: bool): void {.cdecl.} =
   let inst = cast[VirtualQScrollEvent](fcQScrollEvent_vdata(self)[])
@@ -6509,7 +6617,10 @@ method setAccepted*(self: VirtualQScreenOrientationChangeEvent, accepted: bool):
 proc fcQScreenOrientationChangeEvent_method_callback_clone(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQScreenOrientationChangeEvent](fcQScreenOrientationChangeEvent_vdata(self)[])
   var virtualReturn = inst.clone()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQScreenOrientationChangeEvent_method_callback_setAccepted(self: pointer, accepted: bool): void {.cdecl.} =
   let inst = cast[VirtualQScreenOrientationChangeEvent](fcQScreenOrientationChangeEvent_vdata(self)[])
@@ -6596,7 +6707,10 @@ method setAccepted*(self: VirtualQApplicationStateChangeEvent, accepted: bool): 
 proc fcQApplicationStateChangeEvent_method_callback_clone(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQApplicationStateChangeEvent](fcQApplicationStateChangeEvent_vdata(self)[])
   var virtualReturn = inst.clone()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQApplicationStateChangeEvent_method_callback_setAccepted(self: pointer, accepted: bool): void {.cdecl.} =
   let inst = cast[VirtualQApplicationStateChangeEvent](fcQApplicationStateChangeEvent_vdata(self)[])

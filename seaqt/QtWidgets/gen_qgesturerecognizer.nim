@@ -150,7 +150,10 @@ proc fcQGestureRecognizer_method_callback_createX(self: pointer, target: pointer
   let inst = cast[VirtualQGestureRecognizer](fcQGestureRecognizer_vdata(self)[])
   let slotval1 = gen_qobject_types.QObject(h: target, owned: false)
   var virtualReturn = inst.createX(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQGestureRecognizer_method_callback_recognize(self: pointer, state: pointer, watched: pointer, event: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQGestureRecognizer](fcQGestureRecognizer_vdata(self)[])

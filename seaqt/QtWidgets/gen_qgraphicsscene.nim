@@ -1313,7 +1313,10 @@ method disconnectNotify*(self: VirtualQGraphicsScene, signal: gen_qmetaobject_ty
 proc fcQGraphicsScene_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsScene](fcQGraphicsScene_vdata(self)[])
   var virtualReturn = inst.metaObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQGraphicsScene_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsScene](fcQGraphicsScene_vdata(self)[])
@@ -1333,7 +1336,10 @@ proc fcQGraphicsScene_method_callback_inputMethodQuery(self: pointer, query: cin
   let inst = cast[VirtualQGraphicsScene](fcQGraphicsScene_vdata(self)[])
   let slotval1 = cint(query)
   var virtualReturn = inst.inputMethodQuery(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQGraphicsScene_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQGraphicsScene](fcQGraphicsScene_vdata(self)[])

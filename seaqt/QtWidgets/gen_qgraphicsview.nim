@@ -1534,7 +1534,10 @@ method disconnectNotify*(self: VirtualQGraphicsView, signal: gen_qmetaobject_typ
 proc fcQGraphicsView_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsView](fcQGraphicsView_vdata(self)[])
   var virtualReturn = inst.metaObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQGraphicsView_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsView](fcQGraphicsView_vdata(self)[])
@@ -1553,13 +1556,19 @@ proc fcQGraphicsView_method_callback_metacall(self: pointer, param1: cint, param
 proc fcQGraphicsView_method_callback_sizeHint(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsView](fcQGraphicsView_vdata(self)[])
   var virtualReturn = inst.sizeHint()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQGraphicsView_method_callback_inputMethodQuery(self: pointer, query: cint): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsView](fcQGraphicsView_vdata(self)[])
   let slotval1 = cint(query)
   var virtualReturn = inst.inputMethodQuery(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQGraphicsView_method_callback_setupViewport(self: pointer, widget: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsView](fcQGraphicsView_vdata(self)[])
@@ -1695,7 +1704,10 @@ proc fcQGraphicsView_method_callback_drawForeground(self: pointer, painter: poin
 proc fcQGraphicsView_method_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsView](fcQGraphicsView_vdata(self)[])
   var virtualReturn = inst.minimumSizeHint()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQGraphicsView_method_callback_eventFilter(self: pointer, param1: pointer, param2: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQGraphicsView](fcQGraphicsView_vdata(self)[])
@@ -1707,7 +1719,10 @@ proc fcQGraphicsView_method_callback_eventFilter(self: pointer, param1: pointer,
 proc fcQGraphicsView_method_callback_viewportSizeHint(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsView](fcQGraphicsView_vdata(self)[])
   var virtualReturn = inst.viewportSizeHint()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQGraphicsView_method_callback_changeEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsView](fcQGraphicsView_vdata(self)[])
@@ -1743,7 +1758,10 @@ proc fcQGraphicsView_method_callback_hasHeightForWidth(self: pointer): bool {.cd
 proc fcQGraphicsView_method_callback_paintEngine(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsView](fcQGraphicsView_vdata(self)[])
   var virtualReturn = inst.paintEngine()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQGraphicsView_method_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsView](fcQGraphicsView_vdata(self)[])
@@ -1806,12 +1824,18 @@ proc fcQGraphicsView_method_callback_redirected(self: pointer, offset: pointer):
   let inst = cast[VirtualQGraphicsView](fcQGraphicsView_vdata(self)[])
   let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
   var virtualReturn = inst.redirected(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQGraphicsView_method_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsView](fcQGraphicsView_vdata(self)[])
   var virtualReturn = inst.sharedPainter()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQGraphicsView_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsView](fcQGraphicsView_vdata(self)[])

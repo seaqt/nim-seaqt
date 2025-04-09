@@ -701,7 +701,10 @@ method disconnectNotify*(self: VirtualQNetworkAccessManager, signal: gen_qmetaob
 proc fcQNetworkAccessManager_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQNetworkAccessManager](fcQNetworkAccessManager_vdata(self)[])
   var virtualReturn = inst.metaObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQNetworkAccessManager_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQNetworkAccessManager](fcQNetworkAccessManager_vdata(self)[])
@@ -720,9 +723,11 @@ proc fcQNetworkAccessManager_method_callback_metacall(self: pointer, param1: cin
 proc fcQNetworkAccessManager_method_callback_supportedSchemes(self: pointer): struct_miqt_array {.cdecl.} =
   let inst = cast[VirtualQNetworkAccessManager](fcQNetworkAccessManager_vdata(self)[])
   var virtualReturn = inst.supportedSchemes()
-  var virtualReturn_CArray = newSeq[struct_miqt_string](len(virtualReturn))
+  var virtualReturn_CArray = cast[ptr UncheckedArray[struct_miqt_string]](if len(virtualReturn) > 0: c_malloc(c_sizet(sizeof(struct_miqt_string) * len(virtualReturn))) else: nil)
   for i in 0..<len(virtualReturn):
-    virtualReturn_CArray[i] = struct_miqt_string(data: if len(virtualReturn[i]) > 0: addr virtualReturn[i][0] else: nil, len: csize_t(len(virtualReturn[i])))
+    var virtualReturn_i_copy = if len(virtualReturn[i]) > 0: c_malloc(csize_t(len(virtualReturn[i]))) else: nil
+    if len(virtualReturn[i]) > 0: copyMem(virtualReturn_i_copy, addr virtualReturn[i][0], csize_t(len(virtualReturn[i])))
+    virtualReturn_CArray[i] = struct_miqt_string(data: virtualReturn_i_copy, len: csize_t(len(virtualReturn[i])))
 
   struct_miqt_array(len: csize_t(len(virtualReturn)), data: if len(virtualReturn) == 0: nil else: addr(virtualReturn_CArray[0]))
 
@@ -732,7 +737,10 @@ proc fcQNetworkAccessManager_method_callback_createRequest(self: pointer, op: ci
   let slotval2 = gen_qnetworkrequest_types.QNetworkRequest(h: request, owned: false)
   let slotval3 = gen_qiodevice_types.QIODevice(h: outgoingData, owned: false)
   var virtualReturn = inst.createRequest(slotval1, slotval2, slotval3)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQNetworkAccessManager_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQNetworkAccessManager](fcQNetworkAccessManager_vdata(self)[])

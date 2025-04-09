@@ -545,7 +545,10 @@ method sharedPainter*(self: VirtualQPdfWriter): gen_qpainter_types.QPainter {.ba
 proc fcQPdfWriter_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQPdfWriter](fcQPdfWriter_vdata(self)[])
   var virtualReturn = inst.metaObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQPdfWriter_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQPdfWriter](fcQPdfWriter_vdata(self)[])
@@ -569,7 +572,10 @@ proc fcQPdfWriter_method_callback_newPage(self: pointer): bool {.cdecl.} =
 proc fcQPdfWriter_method_callback_paintEngine(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQPdfWriter](fcQPdfWriter_vdata(self)[])
   var virtualReturn = inst.paintEngine()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQPdfWriter_method_callback_metric(self: pointer, id: cint): cint {.cdecl.} =
   let inst = cast[VirtualQPdfWriter](fcQPdfWriter_vdata(self)[])
@@ -659,12 +665,18 @@ proc fcQPdfWriter_method_callback_redirected(self: pointer, offset: pointer): po
   let inst = cast[VirtualQPdfWriter](fcQPdfWriter_vdata(self)[])
   let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
   var virtualReturn = inst.redirected(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQPdfWriter_method_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQPdfWriter](fcQPdfWriter_vdata(self)[])
   var virtualReturn = inst.sharedPainter()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 
 proc sender*(self: gen_qpdfwriter_types.QPdfWriter): gen_qobject_types.QObject =

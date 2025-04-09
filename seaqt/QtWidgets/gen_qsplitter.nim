@@ -1238,7 +1238,10 @@ method disconnectNotify*(self: VirtualQSplitter, signal: gen_qmetaobject_types.Q
 proc fcQSplitter_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQSplitter](fcQSplitter_vdata(self)[])
   var virtualReturn = inst.metaObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQSplitter_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQSplitter](fcQSplitter_vdata(self)[])
@@ -1257,17 +1260,26 @@ proc fcQSplitter_method_callback_metacall(self: pointer, param1: cint, param2: c
 proc fcQSplitter_method_callback_sizeHint(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQSplitter](fcQSplitter_vdata(self)[])
   var virtualReturn = inst.sizeHint()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQSplitter_method_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQSplitter](fcQSplitter_vdata(self)[])
   var virtualReturn = inst.minimumSizeHint()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQSplitter_method_callback_createHandle(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQSplitter](fcQSplitter_vdata(self)[])
   var virtualReturn = inst.createHandle()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQSplitter_method_callback_childEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSplitter](fcQSplitter_vdata(self)[])
@@ -1324,7 +1336,10 @@ proc fcQSplitter_method_callback_hasHeightForWidth(self: pointer): bool {.cdecl.
 proc fcQSplitter_method_callback_paintEngine(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQSplitter](fcQSplitter_vdata(self)[])
   var virtualReturn = inst.paintEngine()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQSplitter_method_callback_mousePressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSplitter](fcQSplitter_vdata(self)[])
@@ -1462,12 +1477,18 @@ proc fcQSplitter_method_callback_redirected(self: pointer, offset: pointer): poi
   let inst = cast[VirtualQSplitter](fcQSplitter_vdata(self)[])
   let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
   var virtualReturn = inst.redirected(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQSplitter_method_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQSplitter](fcQSplitter_vdata(self)[])
   var virtualReturn = inst.sharedPainter()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQSplitter_method_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSplitter](fcQSplitter_vdata(self)[])
@@ -1478,7 +1499,10 @@ proc fcQSplitter_method_callback_inputMethodQuery(self: pointer, param1: cint): 
   let inst = cast[VirtualQSplitter](fcQSplitter_vdata(self)[])
   let slotval1 = cint(param1)
   var virtualReturn = inst.inputMethodQuery(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQSplitter_method_callback_focusNextPrevChild(self: pointer, next: bool): bool {.cdecl.} =
   let inst = cast[VirtualQSplitter](fcQSplitter_vdata(self)[])
@@ -2847,7 +2871,10 @@ method disconnectNotify*(self: VirtualQSplitterHandle, signal: gen_qmetaobject_t
 proc fcQSplitterHandle_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQSplitterHandle](fcQSplitterHandle_vdata(self)[])
   var virtualReturn = inst.metaObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQSplitterHandle_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQSplitterHandle](fcQSplitterHandle_vdata(self)[])
@@ -2866,7 +2893,10 @@ proc fcQSplitterHandle_method_callback_metacall(self: pointer, param1: cint, par
 proc fcQSplitterHandle_method_callback_sizeHint(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQSplitterHandle](fcQSplitterHandle_vdata(self)[])
   var virtualReturn = inst.sizeHint()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQSplitterHandle_method_callback_paintEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSplitterHandle](fcQSplitterHandle_vdata(self)[])
@@ -2912,7 +2942,10 @@ proc fcQSplitterHandle_method_callback_setVisible(self: pointer, visible: bool):
 proc fcQSplitterHandle_method_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQSplitterHandle](fcQSplitterHandle_vdata(self)[])
   var virtualReturn = inst.minimumSizeHint()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQSplitterHandle_method_callback_heightForWidth(self: pointer, param1: cint): cint {.cdecl.} =
   let inst = cast[VirtualQSplitterHandle](fcQSplitterHandle_vdata(self)[])
@@ -2928,7 +2961,10 @@ proc fcQSplitterHandle_method_callback_hasHeightForWidth(self: pointer): bool {.
 proc fcQSplitterHandle_method_callback_paintEngine(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQSplitterHandle](fcQSplitterHandle_vdata(self)[])
   var virtualReturn = inst.paintEngine()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQSplitterHandle_method_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSplitterHandle](fcQSplitterHandle_vdata(self)[])
@@ -3056,12 +3092,18 @@ proc fcQSplitterHandle_method_callback_redirected(self: pointer, offset: pointer
   let inst = cast[VirtualQSplitterHandle](fcQSplitterHandle_vdata(self)[])
   let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
   var virtualReturn = inst.redirected(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQSplitterHandle_method_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQSplitterHandle](fcQSplitterHandle_vdata(self)[])
   var virtualReturn = inst.sharedPainter()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQSplitterHandle_method_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSplitterHandle](fcQSplitterHandle_vdata(self)[])
@@ -3072,7 +3114,10 @@ proc fcQSplitterHandle_method_callback_inputMethodQuery(self: pointer, param1: c
   let inst = cast[VirtualQSplitterHandle](fcQSplitterHandle_vdata(self)[])
   let slotval1 = cint(param1)
   var virtualReturn = inst.inputMethodQuery(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQSplitterHandle_method_callback_focusNextPrevChild(self: pointer, next: bool): bool {.cdecl.} =
   let inst = cast[VirtualQSplitterHandle](fcQSplitterHandle_vdata(self)[])

@@ -491,7 +491,10 @@ method disconnectNotify*(self: VirtualQSGTexture, signal: gen_qmetaobject_types.
 proc fcQSGTexture_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQSGTexture](fcQSGTexture_vdata(self)[])
   var virtualReturn = inst.metaObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQSGTexture_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQSGTexture](fcQSGTexture_vdata(self)[])
@@ -515,7 +518,10 @@ proc fcQSGTexture_method_callback_comparisonKey(self: pointer): clonglong {.cdec
 proc fcQSGTexture_method_callback_textureSize(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQSGTexture](fcQSGTexture_vdata(self)[])
   var virtualReturn = inst.textureSize()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQSGTexture_method_callback_hasAlphaChannel(self: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQSGTexture](fcQSGTexture_vdata(self)[])
@@ -530,7 +536,10 @@ proc fcQSGTexture_method_callback_hasMipmaps(self: pointer): bool {.cdecl.} =
 proc fcQSGTexture_method_callback_normalizedTextureSubRect(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQSGTexture](fcQSGTexture_vdata(self)[])
   var virtualReturn = inst.normalizedTextureSubRect()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQSGTexture_method_callback_isAtlasTexture(self: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQSGTexture](fcQSGTexture_vdata(self)[])
@@ -929,7 +938,10 @@ method disconnectNotify*(self: VirtualQSGDynamicTexture, signal: gen_qmetaobject
 proc fcQSGDynamicTexture_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQSGDynamicTexture](fcQSGDynamicTexture_vdata(self)[])
   var virtualReturn = inst.metaObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQSGDynamicTexture_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQSGDynamicTexture](fcQSGDynamicTexture_vdata(self)[])
@@ -958,7 +970,10 @@ proc fcQSGDynamicTexture_method_callback_comparisonKey(self: pointer): clonglong
 proc fcQSGDynamicTexture_method_callback_textureSize(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQSGDynamicTexture](fcQSGDynamicTexture_vdata(self)[])
   var virtualReturn = inst.textureSize()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQSGDynamicTexture_method_callback_hasAlphaChannel(self: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQSGDynamicTexture](fcQSGDynamicTexture_vdata(self)[])
@@ -973,7 +988,10 @@ proc fcQSGDynamicTexture_method_callback_hasMipmaps(self: pointer): bool {.cdecl
 proc fcQSGDynamicTexture_method_callback_normalizedTextureSubRect(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQSGDynamicTexture](fcQSGDynamicTexture_vdata(self)[])
   var virtualReturn = inst.normalizedTextureSubRect()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQSGDynamicTexture_method_callback_isAtlasTexture(self: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQSGDynamicTexture](fcQSGDynamicTexture_vdata(self)[])

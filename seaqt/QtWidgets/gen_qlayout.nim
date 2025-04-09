@@ -848,7 +848,10 @@ method spacerItem*(self: VirtualQLayout): gen_qlayoutitem_types.QSpacerItem {.ba
 proc fcQLayout_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQLayout](fcQLayout_vdata(self)[])
   var virtualReturn = inst.metaObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQLayout_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQLayout](fcQLayout_vdata(self)[])
@@ -881,7 +884,10 @@ proc fcQLayout_method_callback_invalidate(self: pointer): void {.cdecl.} =
 proc fcQLayout_method_callback_geometry(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQLayout](fcQLayout_vdata(self)[])
   var virtualReturn = inst.geometry()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQLayout_method_callback_addItem(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQLayout](fcQLayout_vdata(self)[])
@@ -896,12 +902,18 @@ proc fcQLayout_method_callback_expandingDirections(self: pointer): cint {.cdecl.
 proc fcQLayout_method_callback_minimumSize(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQLayout](fcQLayout_vdata(self)[])
   var virtualReturn = inst.minimumSize()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQLayout_method_callback_maximumSize(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQLayout](fcQLayout_vdata(self)[])
   var virtualReturn = inst.maximumSize()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQLayout_method_callback_setGeometry(self: pointer, geometry: pointer): void {.cdecl.} =
   let inst = cast[VirtualQLayout](fcQLayout_vdata(self)[])
@@ -912,13 +924,19 @@ proc fcQLayout_method_callback_itemAt(self: pointer, index: cint): pointer {.cde
   let inst = cast[VirtualQLayout](fcQLayout_vdata(self)[])
   let slotval1 = index
   var virtualReturn = inst.itemAt(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQLayout_method_callback_takeAt(self: pointer, index: cint): pointer {.cdecl.} =
   let inst = cast[VirtualQLayout](fcQLayout_vdata(self)[])
   let slotval1 = index
   var virtualReturn = inst.takeAt(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQLayout_method_callback_indexOf(self: pointer, param1: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQLayout](fcQLayout_vdata(self)[])
@@ -953,12 +971,18 @@ proc fcQLayout_method_callback_replaceWidget(self: pointer, fromVal: pointer, to
   let slotval2 = gen_qwidget_types.QWidget(h: to, owned: false)
   let slotval3 = cint(options)
   var virtualReturn = inst.replaceWidget(slotval1, slotval2, slotval3)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQLayout_method_callback_layout(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQLayout](fcQLayout_vdata(self)[])
   var virtualReturn = inst.layout()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQLayout_method_callback_childEvent(self: pointer, e: pointer): void {.cdecl.} =
   let inst = cast[VirtualQLayout](fcQLayout_vdata(self)[])
@@ -1001,7 +1025,10 @@ proc fcQLayout_method_callback_disconnectNotify(self: pointer, signal: pointer):
 proc fcQLayout_method_callback_sizeHint(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQLayout](fcQLayout_vdata(self)[])
   var virtualReturn = inst.sizeHint()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQLayout_method_callback_hasHeightForWidth(self: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQLayout](fcQLayout_vdata(self)[])
@@ -1023,12 +1050,18 @@ proc fcQLayout_method_callback_minimumHeightForWidth(self: pointer, param1: cint
 proc fcQLayout_method_callback_widget(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQLayout](fcQLayout_vdata(self)[])
   var virtualReturn = inst.widget()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQLayout_method_callback_spacerItem(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQLayout](fcQLayout_vdata(self)[])
   var virtualReturn = inst.spacerItem()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 
 proc widgetEvent*(self: gen_qlayout_types.QLayout, param1: gen_qcoreevent_types.QEvent): void =

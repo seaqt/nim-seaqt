@@ -1406,7 +1406,10 @@ method disconnectNotify*(self: VirtualQTextBrowser, signal: gen_qmetaobject_type
 proc fcQTextBrowser_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQTextBrowser](fcQTextBrowser_vdata(self)[])
   var virtualReturn = inst.metaObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQTextBrowser_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQTextBrowser](fcQTextBrowser_vdata(self)[])
@@ -1427,7 +1430,10 @@ proc fcQTextBrowser_method_callback_loadResource(self: pointer, typeVal: cint, n
   let slotval1 = typeVal
   let slotval2 = gen_qurl_types.QUrl(h: name, owned: false)
   var virtualReturn = inst.loadResource(slotval1, slotval2)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQTextBrowser_method_callback_backward(self: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTextBrowser](fcQTextBrowser_vdata(self)[])
@@ -1497,7 +1503,10 @@ proc fcQTextBrowser_method_callback_inputMethodQuery(self: pointer, property: ci
   let inst = cast[VirtualQTextBrowser](fcQTextBrowser_vdata(self)[])
   let slotval1 = cint(property)
   var virtualReturn = inst.inputMethodQuery(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQTextBrowser_method_callback_timerEvent(self: pointer, e: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTextBrowser](fcQTextBrowser_vdata(self)[])
@@ -1567,7 +1576,10 @@ proc fcQTextBrowser_method_callback_wheelEvent(self: pointer, e: pointer): void 
 proc fcQTextBrowser_method_callback_createMimeDataFromSelection(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQTextBrowser](fcQTextBrowser_vdata(self)[])
   var virtualReturn = inst.createMimeDataFromSelection()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQTextBrowser_method_callback_canInsertFromMimeData(self: pointer, source: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQTextBrowser](fcQTextBrowser_vdata(self)[])
@@ -1599,12 +1611,18 @@ proc fcQTextBrowser_method_callback_doSetTextCursor(self: pointer, cursor: point
 proc fcQTextBrowser_method_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQTextBrowser](fcQTextBrowser_vdata(self)[])
   var virtualReturn = inst.minimumSizeHint()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQTextBrowser_method_callback_sizeHint(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQTextBrowser](fcQTextBrowser_vdata(self)[])
   var virtualReturn = inst.sizeHint()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQTextBrowser_method_callback_setupViewport(self: pointer, viewport: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTextBrowser](fcQTextBrowser_vdata(self)[])
@@ -1627,7 +1645,10 @@ proc fcQTextBrowser_method_callback_viewportEvent(self: pointer, param1: pointer
 proc fcQTextBrowser_method_callback_viewportSizeHint(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQTextBrowser](fcQTextBrowser_vdata(self)[])
   var virtualReturn = inst.viewportSizeHint()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQTextBrowser_method_callback_initStyleOption(self: pointer, option: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTextBrowser](fcQTextBrowser_vdata(self)[])
@@ -1658,7 +1679,10 @@ proc fcQTextBrowser_method_callback_hasHeightForWidth(self: pointer): bool {.cde
 proc fcQTextBrowser_method_callback_paintEngine(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQTextBrowser](fcQTextBrowser_vdata(self)[])
   var virtualReturn = inst.paintEngine()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQTextBrowser_method_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTextBrowser](fcQTextBrowser_vdata(self)[])
@@ -1721,12 +1745,18 @@ proc fcQTextBrowser_method_callback_redirected(self: pointer, offset: pointer): 
   let inst = cast[VirtualQTextBrowser](fcQTextBrowser_vdata(self)[])
   let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
   var virtualReturn = inst.redirected(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQTextBrowser_method_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQTextBrowser](fcQTextBrowser_vdata(self)[])
   var virtualReturn = inst.sharedPainter()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQTextBrowser_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTextBrowser](fcQTextBrowser_vdata(self)[])

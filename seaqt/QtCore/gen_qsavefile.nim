@@ -625,7 +625,10 @@ method disconnectNotify*(self: VirtualQSaveFile, signal: gen_qmetaobject_types.Q
 proc fcQSaveFile_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQSaveFile](fcQSaveFile_vdata(self)[])
   var virtualReturn = inst.metaObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQSaveFile_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQSaveFile](fcQSaveFile_vdata(self)[])
@@ -644,7 +647,9 @@ proc fcQSaveFile_method_callback_metacall(self: pointer, param1: cint, param2: c
 proc fcQSaveFile_method_callback_fileName(self: pointer): struct_miqt_string {.cdecl.} =
   let inst = cast[VirtualQSaveFile](fcQSaveFile_vdata(self)[])
   var virtualReturn = inst.fileName()
-  struct_miqt_string(data: if len(virtualReturn) > 0: addr virtualReturn[0] else: nil, len: csize_t(len(virtualReturn)))
+  var virtualReturn_copy = if len(virtualReturn) > 0: c_malloc(csize_t(len(virtualReturn))) else: nil
+  if len(virtualReturn) > 0: copyMem(virtualReturn_copy, addr virtualReturn[0], csize_t(len(virtualReturn)))
+  struct_miqt_string(data: virtualReturn_copy, len: csize_t(len(virtualReturn)))
 
 proc fcQSaveFile_method_callback_open(self: pointer, flags: cint): bool {.cdecl.} =
   let inst = cast[VirtualQSaveFile](fcQSaveFile_vdata(self)[])

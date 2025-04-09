@@ -1248,7 +1248,10 @@ method disconnectNotify*(self: VirtualQQuickWindow, signal: gen_qmetaobject_type
 proc fcQQuickWindow_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQQuickWindow](fcQQuickWindow_vdata(self)[])
   var virtualReturn = inst.metaObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQQuickWindow_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQQuickWindow](fcQQuickWindow_vdata(self)[])
@@ -1267,12 +1270,18 @@ proc fcQQuickWindow_method_callback_metacall(self: pointer, param1: cint, param2
 proc fcQQuickWindow_method_callback_focusObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQQuickWindow](fcQQuickWindow_vdata(self)[])
   var virtualReturn = inst.focusObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQQuickWindow_method_callback_accessibleRoot(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQQuickWindow](fcQQuickWindow_vdata(self)[])
   var virtualReturn = inst.accessibleRoot()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQQuickWindow_method_callback_exposeEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQQuickWindow](fcQQuickWindow_vdata(self)[])
@@ -1363,12 +1372,18 @@ proc fcQQuickWindow_method_callback_surfaceType(self: pointer): cint {.cdecl.} =
 proc fcQQuickWindow_method_callback_format(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQQuickWindow](fcQQuickWindow_vdata(self)[])
   var virtualReturn = inst.format()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQQuickWindow_method_callback_size(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQQuickWindow](fcQQuickWindow_vdata(self)[])
   var virtualReturn = inst.size()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQQuickWindow_method_callback_paintEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQQuickWindow](fcQQuickWindow_vdata(self)[])

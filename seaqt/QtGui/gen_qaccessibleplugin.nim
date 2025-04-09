@@ -295,7 +295,10 @@ method disconnectNotify*(self: VirtualQAccessiblePlugin, signal: gen_qmetaobject
 proc fcQAccessiblePlugin_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQAccessiblePlugin](fcQAccessiblePlugin_vdata(self)[])
   var virtualReturn = inst.metaObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQAccessiblePlugin_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQAccessiblePlugin](fcQAccessiblePlugin_vdata(self)[])
@@ -319,7 +322,10 @@ proc fcQAccessiblePlugin_method_callback_createX(self: pointer, key: struct_miqt
   let slotval1 = vkeyx_ret
   let slotval2 = gen_qobject_types.QObject(h: objectVal, owned: false)
   var virtualReturn = inst.createX(slotval1, slotval2)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQAccessiblePlugin_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQAccessiblePlugin](fcQAccessiblePlugin_vdata(self)[])

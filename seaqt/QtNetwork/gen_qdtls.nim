@@ -405,7 +405,10 @@ method disconnectNotify*(self: VirtualQDtlsClientVerifier, signal: gen_qmetaobje
 proc fcQDtlsClientVerifier_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQDtlsClientVerifier](fcQDtlsClientVerifier_vdata(self)[])
   var virtualReturn = inst.metaObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQDtlsClientVerifier_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQDtlsClientVerifier](fcQDtlsClientVerifier_vdata(self)[])
@@ -890,7 +893,10 @@ method disconnectNotify*(self: VirtualQDtls, signal: gen_qmetaobject_types.QMeta
 proc fcQDtls_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQDtls](fcQDtls_vdata(self)[])
   var virtualReturn = inst.metaObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQDtls_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQDtls](fcQDtls_vdata(self)[])

@@ -407,7 +407,10 @@ method disconnectNotify*(self: VirtualQGraphicsTransform, signal: gen_qmetaobjec
 proc fcQGraphicsTransform_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsTransform](fcQGraphicsTransform_vdata(self)[])
   var virtualReturn = inst.metaObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQGraphicsTransform_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsTransform](fcQGraphicsTransform_vdata(self)[])
@@ -891,7 +894,10 @@ method disconnectNotify*(self: VirtualQGraphicsScale, signal: gen_qmetaobject_ty
 proc fcQGraphicsScale_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsScale](fcQGraphicsScale_vdata(self)[])
   var virtualReturn = inst.metaObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQGraphicsScale_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsScale](fcQGraphicsScale_vdata(self)[])
@@ -1336,7 +1342,10 @@ method disconnectNotify*(self: VirtualQGraphicsRotation, signal: gen_qmetaobject
 proc fcQGraphicsRotation_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsRotation](fcQGraphicsRotation_vdata(self)[])
   var virtualReturn = inst.metaObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQGraphicsRotation_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsRotation](fcQGraphicsRotation_vdata(self)[])

@@ -453,9 +453,12 @@ proc fcQNetworkProxyFactory_method_callback_queryProxy(self: pointer, query: poi
   let inst = cast[VirtualQNetworkProxyFactory](fcQNetworkProxyFactory_vdata(self)[])
   let slotval1 = gen_qnetworkproxy_types.QNetworkProxyQuery(h: query, owned: false)
   var virtualReturn = inst.queryProxy(slotval1)
-  var virtualReturn_CArray = newSeq[pointer](len(virtualReturn))
+  var virtualReturn_CArray = cast[ptr UncheckedArray[pointer]](if len(virtualReturn) > 0: c_malloc(c_sizet(sizeof(pointer) * len(virtualReturn))) else: nil)
   for i in 0..<len(virtualReturn):
-    virtualReturn_CArray[i] = virtualReturn[i].h
+    virtualReturn[i].owned = false # TODO move?
+    let virtualReturn_i_h = virtualReturn[i].h
+    virtualReturn[i].h = nil
+    virtualReturn_CArray[i] = virtualReturn_i_h
 
   struct_miqt_array(len: csize_t(len(virtualReturn)), data: if len(virtualReturn) == 0: nil else: addr(virtualReturn_CArray[0]))
 

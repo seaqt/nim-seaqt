@@ -237,7 +237,10 @@ proc fcQBitmap_method_callback_devType(self: pointer): cint {.cdecl.} =
 proc fcQBitmap_method_callback_paintEngine(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQBitmap](fcQBitmap_vdata(self)[])
   var virtualReturn = inst.paintEngine()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQBitmap_method_callback_metric(self: pointer, param1: cint): cint {.cdecl.} =
   let inst = cast[VirtualQBitmap](fcQBitmap_vdata(self)[])
@@ -254,12 +257,18 @@ proc fcQBitmap_method_callback_redirected(self: pointer, offset: pointer): point
   let inst = cast[VirtualQBitmap](fcQBitmap_vdata(self)[])
   let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
   var virtualReturn = inst.redirected(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQBitmap_method_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQBitmap](fcQBitmap_vdata(self)[])
   var virtualReturn = inst.sharedPainter()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 
 proc create*(T: type gen_qbitmap_types.QBitmap,

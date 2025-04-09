@@ -369,7 +369,10 @@ proc fcQEvent_method_callback_setAccepted(self: pointer, accepted: bool): void {
 proc fcQEvent_method_callback_clone(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQEvent](fcQEvent_vdata(self)[])
   var virtualReturn = inst.clone()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 
 proc create*(T: type gen_qcoreevent_types.QEvent,
@@ -453,7 +456,10 @@ method setAccepted*(self: VirtualQTimerEvent, accepted: bool): void {.base.} =
 proc fcQTimerEvent_method_callback_clone(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQTimerEvent](fcQTimerEvent_vdata(self)[])
   var virtualReturn = inst.clone()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQTimerEvent_method_callback_setAccepted(self: pointer, accepted: bool): void {.cdecl.} =
   let inst = cast[VirtualQTimerEvent](fcQTimerEvent_vdata(self)[])
@@ -549,7 +555,10 @@ method setAccepted*(self: VirtualQChildEvent, accepted: bool): void {.base.} =
 proc fcQChildEvent_method_callback_clone(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQChildEvent](fcQChildEvent_vdata(self)[])
   var virtualReturn = inst.clone()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQChildEvent_method_callback_setAccepted(self: pointer, accepted: bool): void {.cdecl.} =
   let inst = cast[VirtualQChildEvent](fcQChildEvent_vdata(self)[])
@@ -639,7 +648,10 @@ method setAccepted*(self: VirtualQDynamicPropertyChangeEvent, accepted: bool): v
 proc fcQDynamicPropertyChangeEvent_method_callback_clone(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQDynamicPropertyChangeEvent](fcQDynamicPropertyChangeEvent_vdata(self)[])
   var virtualReturn = inst.clone()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQDynamicPropertyChangeEvent_method_callback_setAccepted(self: pointer, accepted: bool): void {.cdecl.} =
   let inst = cast[VirtualQDynamicPropertyChangeEvent](fcQDynamicPropertyChangeEvent_vdata(self)[])

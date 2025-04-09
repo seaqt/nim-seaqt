@@ -1361,7 +1361,10 @@ method disconnectNotify*(self: VirtualQSpinBox, signal: gen_qmetaobject_types.QM
 proc fcQSpinBox_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQSpinBox](fcQSpinBox_vdata(self)[])
   var virtualReturn = inst.metaObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQSpinBox_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQSpinBox](fcQSpinBox_vdata(self)[])
@@ -1406,7 +1409,9 @@ proc fcQSpinBox_method_callback_textFromValue(self: pointer, val: cint): struct_
   let inst = cast[VirtualQSpinBox](fcQSpinBox_vdata(self)[])
   let slotval1 = val
   var virtualReturn = inst.textFromValue(slotval1)
-  struct_miqt_string(data: if len(virtualReturn) > 0: addr virtualReturn[0] else: nil, len: csize_t(len(virtualReturn)))
+  var virtualReturn_copy = if len(virtualReturn) > 0: c_malloc(csize_t(len(virtualReturn))) else: nil
+  if len(virtualReturn) > 0: copyMem(virtualReturn_copy, addr virtualReturn[0], csize_t(len(virtualReturn)))
+  struct_miqt_string(data: virtualReturn_copy, len: csize_t(len(virtualReturn)))
 
 proc fcQSpinBox_method_callback_fixup(self: pointer, str: struct_miqt_string): void {.cdecl.} =
   let inst = cast[VirtualQSpinBox](fcQSpinBox_vdata(self)[])
@@ -1419,18 +1424,27 @@ proc fcQSpinBox_method_callback_fixup(self: pointer, str: struct_miqt_string): v
 proc fcQSpinBox_method_callback_sizeHint(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQSpinBox](fcQSpinBox_vdata(self)[])
   var virtualReturn = inst.sizeHint()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQSpinBox_method_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQSpinBox](fcQSpinBox_vdata(self)[])
   var virtualReturn = inst.minimumSizeHint()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQSpinBox_method_callback_inputMethodQuery(self: pointer, param1: cint): pointer {.cdecl.} =
   let inst = cast[VirtualQSpinBox](fcQSpinBox_vdata(self)[])
   let slotval1 = cint(param1)
   var virtualReturn = inst.inputMethodQuery(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQSpinBox_method_callback_stepBy(self: pointer, steps: cint): void {.cdecl.} =
   let inst = cast[VirtualQSpinBox](fcQSpinBox_vdata(self)[])
@@ -1555,7 +1569,10 @@ proc fcQSpinBox_method_callback_hasHeightForWidth(self: pointer): bool {.cdecl.}
 proc fcQSpinBox_method_callback_paintEngine(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQSpinBox](fcQSpinBox_vdata(self)[])
   var virtualReturn = inst.paintEngine()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQSpinBox_method_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSpinBox](fcQSpinBox_vdata(self)[])
@@ -1633,12 +1650,18 @@ proc fcQSpinBox_method_callback_redirected(self: pointer, offset: pointer): poin
   let inst = cast[VirtualQSpinBox](fcQSpinBox_vdata(self)[])
   let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
   var virtualReturn = inst.redirected(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQSpinBox_method_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQSpinBox](fcQSpinBox_vdata(self)[])
   var virtualReturn = inst.sharedPainter()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQSpinBox_method_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSpinBox](fcQSpinBox_vdata(self)[])
@@ -3017,7 +3040,10 @@ method disconnectNotify*(self: VirtualQDoubleSpinBox, signal: gen_qmetaobject_ty
 proc fcQDoubleSpinBox_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQDoubleSpinBox](fcQDoubleSpinBox_vdata(self)[])
   var virtualReturn = inst.metaObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQDoubleSpinBox_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQDoubleSpinBox](fcQDoubleSpinBox_vdata(self)[])
@@ -3056,7 +3082,9 @@ proc fcQDoubleSpinBox_method_callback_textFromValue(self: pointer, val: float64)
   let inst = cast[VirtualQDoubleSpinBox](fcQDoubleSpinBox_vdata(self)[])
   let slotval1 = val
   var virtualReturn = inst.textFromValue(slotval1)
-  struct_miqt_string(data: if len(virtualReturn) > 0: addr virtualReturn[0] else: nil, len: csize_t(len(virtualReturn)))
+  var virtualReturn_copy = if len(virtualReturn) > 0: c_malloc(csize_t(len(virtualReturn))) else: nil
+  if len(virtualReturn) > 0: copyMem(virtualReturn_copy, addr virtualReturn[0], csize_t(len(virtualReturn)))
+  struct_miqt_string(data: virtualReturn_copy, len: csize_t(len(virtualReturn)))
 
 proc fcQDoubleSpinBox_method_callback_fixup(self: pointer, str: struct_miqt_string): void {.cdecl.} =
   let inst = cast[VirtualQDoubleSpinBox](fcQDoubleSpinBox_vdata(self)[])
@@ -3069,12 +3097,18 @@ proc fcQDoubleSpinBox_method_callback_fixup(self: pointer, str: struct_miqt_stri
 proc fcQDoubleSpinBox_method_callback_sizeHint(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQDoubleSpinBox](fcQDoubleSpinBox_vdata(self)[])
   var virtualReturn = inst.sizeHint()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQDoubleSpinBox_method_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQDoubleSpinBox](fcQDoubleSpinBox_vdata(self)[])
   var virtualReturn = inst.minimumSizeHint()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQDoubleSpinBox_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQDoubleSpinBox](fcQDoubleSpinBox_vdata(self)[])
@@ -3086,7 +3120,10 @@ proc fcQDoubleSpinBox_method_callback_inputMethodQuery(self: pointer, param1: ci
   let inst = cast[VirtualQDoubleSpinBox](fcQDoubleSpinBox_vdata(self)[])
   let slotval1 = cint(param1)
   var virtualReturn = inst.inputMethodQuery(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQDoubleSpinBox_method_callback_stepBy(self: pointer, steps: cint): void {.cdecl.} =
   let inst = cast[VirtualQDoubleSpinBox](fcQDoubleSpinBox_vdata(self)[])
@@ -3211,7 +3248,10 @@ proc fcQDoubleSpinBox_method_callback_hasHeightForWidth(self: pointer): bool {.c
 proc fcQDoubleSpinBox_method_callback_paintEngine(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQDoubleSpinBox](fcQDoubleSpinBox_vdata(self)[])
   var virtualReturn = inst.paintEngine()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQDoubleSpinBox_method_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDoubleSpinBox](fcQDoubleSpinBox_vdata(self)[])
@@ -3289,12 +3329,18 @@ proc fcQDoubleSpinBox_method_callback_redirected(self: pointer, offset: pointer)
   let inst = cast[VirtualQDoubleSpinBox](fcQDoubleSpinBox_vdata(self)[])
   let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
   var virtualReturn = inst.redirected(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQDoubleSpinBox_method_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQDoubleSpinBox](fcQDoubleSpinBox_vdata(self)[])
   var virtualReturn = inst.sharedPainter()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQDoubleSpinBox_method_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDoubleSpinBox](fcQDoubleSpinBox_vdata(self)[])

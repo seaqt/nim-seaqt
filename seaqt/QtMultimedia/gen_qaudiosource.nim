@@ -370,7 +370,10 @@ method disconnectNotify*(self: VirtualQAudioSource, signal: gen_qmetaobject_type
 proc fcQAudioSource_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQAudioSource](fcQAudioSource_vdata(self)[])
   var virtualReturn = inst.metaObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQAudioSource_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQAudioSource](fcQAudioSource_vdata(self)[])

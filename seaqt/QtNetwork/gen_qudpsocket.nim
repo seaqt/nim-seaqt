@@ -812,7 +812,10 @@ method disconnectNotify*(self: VirtualQUdpSocket, signal: gen_qmetaobject_types.
 proc fcQUdpSocket_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQUdpSocket](fcQUdpSocket_vdata(self)[])
   var virtualReturn = inst.metaObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQUdpSocket_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQUdpSocket](fcQUdpSocket_vdata(self)[])
@@ -893,7 +896,10 @@ proc fcQUdpSocket_method_callback_socketOption(self: pointer, option: cint): poi
   let inst = cast[VirtualQUdpSocket](fcQUdpSocket_vdata(self)[])
   let slotval1 = cint(option)
   var virtualReturn = inst.socketOption(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQUdpSocket_method_callback_close(self: pointer): void {.cdecl.} =
   let inst = cast[VirtualQUdpSocket](fcQUdpSocket_vdata(self)[])
