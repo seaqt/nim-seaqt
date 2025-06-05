@@ -1,0 +1,2 @@
+import ./QtMultimedia/gen_qmediaavailabilitycontrol
+export gen_qmediaavailabilitycontrol

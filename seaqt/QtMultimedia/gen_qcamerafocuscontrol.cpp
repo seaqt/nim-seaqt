@@ -1,0 +1,225 @@
+#include <QCameraFocusControl>
+#include <QCameraFocusZone>
+#include <QList>
+#include <QMediaControl>
+#include <QMetaMethod>
+#include <QMetaObject>
+#include <QObject>
+#include <QPointF>
+#include <QString>
+#include <QByteArray>
+#include <cstring>
+#include <qcamerafocuscontrol.h>
+#include "gen_qcamerafocuscontrol.h"
+
+#ifndef SEAQT_ALIGNED_SIZEOF
+#define SEAQT_ALIGNED_SIZEOF 1
+#include <cstddef>
+template<typename T>
+static constexpr std::size_t seaqt_aligned_sizeof() {
+	constexpr auto alignment = sizeof(std::max_align_t);
+	return (sizeof(T) + alignment - 1) & ~(alignment - 1);
+}
+#endif
+
+void QCameraFocusControl_virtbase(QCameraFocusControl* src, QMediaControl** outptr_QMediaControl) {
+	*outptr_QMediaControl = static_cast<QMediaControl*>(src);
+}
+
+QMetaObject* QCameraFocusControl_metaObject(const QCameraFocusControl* self) {
+	return (QMetaObject*) self->metaObject();
+}
+
+void* QCameraFocusControl_metacast(QCameraFocusControl* self, const char* param1) {
+	return self->qt_metacast(param1);
+}
+
+int QCameraFocusControl_metacall(QCameraFocusControl* self, int param1, int param2, void** param3) {
+	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+}
+
+struct seaqt_string QCameraFocusControl_tr(const char* s) {
+	QString _ret = QCameraFocusControl::tr(s);
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+struct seaqt_string QCameraFocusControl_trUtf8(const char* s) {
+	QString _ret = QCameraFocusControl::trUtf8(s);
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+int QCameraFocusControl_focusMode(const QCameraFocusControl* self) {
+	QCameraFocus::FocusModes _ret = self->focusMode();
+	return static_cast<int>(_ret);
+}
+
+void QCameraFocusControl_setFocusMode(QCameraFocusControl* self, int mode) {
+	self->setFocusMode(static_cast<QCameraFocus::FocusModes>(mode));
+}
+
+bool QCameraFocusControl_isFocusModeSupported(const QCameraFocusControl* self, int mode) {
+	return self->isFocusModeSupported(static_cast<QCameraFocus::FocusModes>(mode));
+}
+
+int QCameraFocusControl_focusPointMode(const QCameraFocusControl* self) {
+	QCameraFocus::FocusPointMode _ret = self->focusPointMode();
+	return static_cast<int>(_ret);
+}
+
+void QCameraFocusControl_setFocusPointMode(QCameraFocusControl* self, int mode) {
+	self->setFocusPointMode(static_cast<QCameraFocus::FocusPointMode>(mode));
+}
+
+bool QCameraFocusControl_isFocusPointModeSupported(const QCameraFocusControl* self, int mode) {
+	return self->isFocusPointModeSupported(static_cast<QCameraFocus::FocusPointMode>(mode));
+}
+
+QPointF* QCameraFocusControl_customFocusPoint(const QCameraFocusControl* self) {
+	return new QPointF(self->customFocusPoint());
+}
+
+void QCameraFocusControl_setCustomFocusPoint(QCameraFocusControl* self, QPointF* point) {
+	self->setCustomFocusPoint(*point);
+}
+
+struct seaqt_array /* of QCameraFocusZone* */  QCameraFocusControl_focusZones(const QCameraFocusControl* self) {
+	QCameraFocusZoneList _ret = self->focusZones();
+	// Convert QList<> from C++ memory to manually-managed C memory
+	QCameraFocusZone** _arr = static_cast<QCameraFocusZone**>(malloc(sizeof(QCameraFocusZone*) * _ret.length()));
+	for (size_t i = 0, e = _ret.length(); i < e; ++i) {
+		_arr[i] = new QCameraFocusZone(_ret[i]);
+	}
+	struct seaqt_array _out;
+	_out.len = _ret.length();
+	_out.data = static_cast<void*>(_arr);
+	return _out;
+}
+
+void QCameraFocusControl_focusModeChanged(QCameraFocusControl* self, int mode) {
+	self->focusModeChanged(static_cast<QCameraFocus::FocusModes>(mode));
+}
+
+void QCameraFocusControl_connect_focusModeChanged(QCameraFocusControl* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, int);
+		void operator()(QCameraFocus::FocusModes mode) {
+			QCameraFocus::FocusModes mode_ret = mode;
+			int sigval1 = static_cast<int>(mode_ret);
+			callback(slot, sigval1);
+		}
+	};
+	QCameraFocusControl::connect(self, static_cast<void (QCameraFocusControl::*)(QCameraFocus::FocusModes)>(&QCameraFocusControl::focusModeChanged), self, local_caller{slot, callback, release});
+}
+
+void QCameraFocusControl_focusPointModeChanged(QCameraFocusControl* self, int mode) {
+	self->focusPointModeChanged(static_cast<QCameraFocus::FocusPointMode>(mode));
+}
+
+void QCameraFocusControl_connect_focusPointModeChanged(QCameraFocusControl* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, int);
+		void operator()(QCameraFocus::FocusPointMode mode) {
+			QCameraFocus::FocusPointMode mode_ret = mode;
+			int sigval1 = static_cast<int>(mode_ret);
+			callback(slot, sigval1);
+		}
+	};
+	QCameraFocusControl::connect(self, static_cast<void (QCameraFocusControl::*)(QCameraFocus::FocusPointMode)>(&QCameraFocusControl::focusPointModeChanged), self, local_caller{slot, callback, release});
+}
+
+void QCameraFocusControl_customFocusPointChanged(QCameraFocusControl* self, QPointF* point) {
+	self->customFocusPointChanged(*point);
+}
+
+void QCameraFocusControl_connect_customFocusPointChanged(QCameraFocusControl* self, intptr_t slot, void (*callback)(intptr_t, QPointF*), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QPointF*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, QPointF*);
+		void operator()(const QPointF& point) {
+			const QPointF& point_ret = point;
+			// Cast returned reference into pointer
+			QPointF* sigval1 = const_cast<QPointF*>(&point_ret);
+			callback(slot, sigval1);
+		}
+	};
+	QCameraFocusControl::connect(self, static_cast<void (QCameraFocusControl::*)(const QPointF&)>(&QCameraFocusControl::customFocusPointChanged), self, local_caller{slot, callback, release});
+}
+
+void QCameraFocusControl_focusZonesChanged(QCameraFocusControl* self) {
+	self->focusZonesChanged();
+}
+
+void QCameraFocusControl_connect_focusZonesChanged(QCameraFocusControl* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	QCameraFocusControl::connect(self, static_cast<void (QCameraFocusControl::*)()>(&QCameraFocusControl::focusZonesChanged), self, local_caller{slot, callback, release});
+}
+
+struct seaqt_string QCameraFocusControl_tr2(const char* s, const char* c) {
+	QString _ret = QCameraFocusControl::tr(s, c);
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+struct seaqt_string QCameraFocusControl_tr3(const char* s, const char* c, int n) {
+	QString _ret = QCameraFocusControl::tr(s, c, static_cast<int>(n));
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+struct seaqt_string QCameraFocusControl_trUtf82(const char* s, const char* c) {
+	QString _ret = QCameraFocusControl::trUtf8(s, c);
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+struct seaqt_string QCameraFocusControl_trUtf83(const char* s, const char* c, int n) {
+	QString _ret = QCameraFocusControl::trUtf8(s, c, static_cast<int>(n));
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+const QMetaObject* QCameraFocusControl_staticMetaObject() { return &QCameraFocusControl::staticMetaObject; }
+void QCameraFocusControl_delete(QCameraFocusControl* self) {
+	delete self;
+}
+

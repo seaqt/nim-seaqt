@@ -1,0 +1,2 @@
+import ./QtWidgets/gen_qkeyeventtransition
+export gen_qkeyeventtransition

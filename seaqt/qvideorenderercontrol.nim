@@ -1,0 +1,2 @@
+import ./QtMultimedia/gen_qvideorenderercontrol
+export gen_qvideorenderercontrol

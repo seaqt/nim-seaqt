@@ -1,0 +1,62 @@
+#pragma once
+#ifndef SEAQT_QTQUICK_GEN_QSGMATERIALRHISHADER_H
+#define SEAQT_QTQUICK_GEN_QSGMATERIALRHISHADER_H
+
+#include <stdbool.h>
+#include <stddef.h>
+#include <stdint.h>
+
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+
+#include "../libseaqt-runtime.h"
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+#ifdef __cplusplus
+class QMatrix4x4;
+class QRect;
+#if defined(WORKAROUND_INNER_CLASS_DEFINITION_QSGMaterialRhiShader__GraphicsPipelineState)
+typedef QSGMaterialRhiShader::GraphicsPipelineState QSGMaterialRhiShader__GraphicsPipelineState;
+#else
+class QSGMaterialRhiShader__GraphicsPipelineState;
+#endif
+#if defined(WORKAROUND_INNER_CLASS_DEFINITION_QSGMaterialRhiShader__RenderState)
+typedef QSGMaterialRhiShader::RenderState QSGMaterialRhiShader__RenderState;
+#else
+class QSGMaterialRhiShader__RenderState;
+#endif
+#else
+typedef struct QMatrix4x4 QMatrix4x4;
+typedef struct QRect QRect;
+typedef struct QSGMaterialRhiShader__GraphicsPipelineState QSGMaterialRhiShader__GraphicsPipelineState;
+typedef struct QSGMaterialRhiShader__RenderState QSGMaterialRhiShader__RenderState;
+#endif
+
+int QSGMaterialRhiShader__RenderState_dirtyStates(const QSGMaterialRhiShader__RenderState* self);
+bool QSGMaterialRhiShader__RenderState_isMatrixDirty(const QSGMaterialRhiShader__RenderState* self);
+bool QSGMaterialRhiShader__RenderState_isOpacityDirty(const QSGMaterialRhiShader__RenderState* self);
+float QSGMaterialRhiShader__RenderState_opacity(const QSGMaterialRhiShader__RenderState* self);
+QMatrix4x4* QSGMaterialRhiShader__RenderState_combinedMatrix(const QSGMaterialRhiShader__RenderState* self);
+QMatrix4x4* QSGMaterialRhiShader__RenderState_modelViewMatrix(const QSGMaterialRhiShader__RenderState* self);
+QMatrix4x4* QSGMaterialRhiShader__RenderState_projectionMatrix(const QSGMaterialRhiShader__RenderState* self);
+QRect* QSGMaterialRhiShader__RenderState_viewportRect(const QSGMaterialRhiShader__RenderState* self);
+QRect* QSGMaterialRhiShader__RenderState_deviceRect(const QSGMaterialRhiShader__RenderState* self);
+float QSGMaterialRhiShader__RenderState_determinant(const QSGMaterialRhiShader__RenderState* self);
+float QSGMaterialRhiShader__RenderState_devicePixelRatio(const QSGMaterialRhiShader__RenderState* self);
+struct seaqt_string QSGMaterialRhiShader__RenderState_uniformData(QSGMaterialRhiShader__RenderState* self);
+
+void QSGMaterialRhiShader__RenderState_delete(QSGMaterialRhiShader__RenderState* self);
+
+QSGMaterialRhiShader__GraphicsPipelineState* QSGMaterialRhiShader__GraphicsPipelineState_new(QSGMaterialRhiShader__GraphicsPipelineState* param1);
+
+void QSGMaterialRhiShader__GraphicsPipelineState_operatorAssign(QSGMaterialRhiShader__GraphicsPipelineState* self, QSGMaterialRhiShader__GraphicsPipelineState* param1);
+
+void QSGMaterialRhiShader__GraphicsPipelineState_delete(QSGMaterialRhiShader__GraphicsPipelineState* self);
+
+#ifdef __cplusplus
+} /* extern C */
+#endif
+
+#endif

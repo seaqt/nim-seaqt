@@ -1,0 +1,2 @@
+import ./QtMultimedia/gen_qmediabindableinterface
+export gen_qmediabindableinterface

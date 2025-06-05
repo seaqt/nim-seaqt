@@ -1,0 +1,2 @@
+import ./QtMultimedia/gen_qimageencodercontrol
+export gen_qimageencodercontrol

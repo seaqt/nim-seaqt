@@ -1,0 +1,49 @@
+#include <QColor>
+#include <QColorTransform>
+#include <QRgba64>
+#include <qcolortransform.h>
+#include "gen_qcolortransform.h"
+
+#ifndef SEAQT_ALIGNED_SIZEOF
+#define SEAQT_ALIGNED_SIZEOF 1
+#include <cstddef>
+template<typename T>
+static constexpr std::size_t seaqt_aligned_sizeof() {
+	constexpr auto alignment = sizeof(std::max_align_t);
+	return (sizeof(T) + alignment - 1) & ~(alignment - 1);
+}
+#endif
+
+QColorTransform* QColorTransform_new() {
+	return new (std::nothrow) QColorTransform();
+}
+
+QColorTransform* QColorTransform_new2(QColorTransform* colorTransform) {
+	return new (std::nothrow) QColorTransform(*colorTransform);
+}
+
+void QColorTransform_operatorAssign(QColorTransform* self, QColorTransform* other) {
+	self->operator=(*other);
+}
+
+void QColorTransform_swap(QColorTransform* self, QColorTransform* other) {
+	self->swap(*other);
+}
+
+unsigned int QColorTransform_map(const QColorTransform* self, unsigned int argb) {
+	QRgb _ret = self->map(static_cast<QRgb>(argb));
+	return static_cast<unsigned int>(_ret);
+}
+
+QRgba64* QColorTransform_mapWithRgba64(const QColorTransform* self, QRgba64* rgba64) {
+	return new QRgba64(self->map(*rgba64));
+}
+
+QColor* QColorTransform_mapWithColor(const QColorTransform* self, QColor* color) {
+	return new QColor(self->map(*color));
+}
+
+void QColorTransform_delete(QColorTransform* self) {
+	delete self;
+}
+

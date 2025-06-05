@@ -1,0 +1,2 @@
+import ./QtWidgets/gen_qgraphicsproxywidget
+export gen_qgraphicsproxywidget

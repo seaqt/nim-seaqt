@@ -1,0 +1,2 @@
+import ./QtMultimedia/gen_qmediaencodersettings
+export gen_qmediaencodersettings

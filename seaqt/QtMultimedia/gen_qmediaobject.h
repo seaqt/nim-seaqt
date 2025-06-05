@@ -1,0 +1,73 @@
+#pragma once
+#ifndef SEAQT_QTMULTIMEDIA_GEN_QMEDIAOBJECT_H
+#define SEAQT_QTMULTIMEDIA_GEN_QMEDIAOBJECT_H
+
+#include <stdbool.h>
+#include <stddef.h>
+#include <stdint.h>
+
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+
+#include "../libseaqt-runtime.h"
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+#ifdef __cplusplus
+class QMediaObject;
+class QMediaService;
+class QMetaMethod;
+class QMetaObject;
+class QObject;
+class QVariant;
+#else
+typedef struct QMediaObject QMediaObject;
+typedef struct QMediaService QMediaService;
+typedef struct QMetaMethod QMetaMethod;
+typedef struct QMetaObject QMetaObject;
+typedef struct QObject QObject;
+typedef struct QVariant QVariant;
+#endif
+
+void QMediaObject_virtbase(QMediaObject* src, QObject** outptr_QObject);
+QMetaObject* QMediaObject_metaObject(const QMediaObject* self);
+void* QMediaObject_metacast(QMediaObject* self, const char* param1);
+int QMediaObject_metacall(QMediaObject* self, int param1, int param2, void** param3);
+struct seaqt_string QMediaObject_tr(const char* s);
+struct seaqt_string QMediaObject_trUtf8(const char* s);
+bool QMediaObject_isAvailable(const QMediaObject* self);
+int QMediaObject_availability(const QMediaObject* self);
+QMediaService* QMediaObject_service(const QMediaObject* self);
+int QMediaObject_notifyInterval(const QMediaObject* self);
+void QMediaObject_setNotifyInterval(QMediaObject* self, int milliSeconds);
+bool QMediaObject_bind(QMediaObject* self, QObject* param1);
+void QMediaObject_unbind(QMediaObject* self, QObject* param1);
+bool QMediaObject_isMetaDataAvailable(const QMediaObject* self);
+QVariant* QMediaObject_metaData(const QMediaObject* self, struct seaqt_string key);
+struct seaqt_array /* of struct seaqt_string */  QMediaObject_availableMetaData(const QMediaObject* self);
+void QMediaObject_notifyIntervalChanged(QMediaObject* self, int milliSeconds);
+void QMediaObject_connect_notifyIntervalChanged(QMediaObject* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t));
+void QMediaObject_metaDataAvailableChanged(QMediaObject* self, bool available);
+void QMediaObject_connect_metaDataAvailableChanged(QMediaObject* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t));
+void QMediaObject_metaDataChanged(QMediaObject* self);
+void QMediaObject_connect_metaDataChanged(QMediaObject* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
+void QMediaObject_metaDataChanged2(QMediaObject* self, struct seaqt_string key, QVariant* value);
+void QMediaObject_connect_metaDataChanged2(QMediaObject* self, intptr_t slot, void (*callback)(intptr_t, struct seaqt_string, QVariant*), void (*release)(intptr_t));
+void QMediaObject_availabilityChanged(QMediaObject* self, bool available);
+void QMediaObject_connect_availabilityChanged(QMediaObject* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t));
+void QMediaObject_availabilityChangedWithAvailability(QMediaObject* self, int availability);
+void QMediaObject_connect_availabilityChangedWithAvailability(QMediaObject* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t));
+struct seaqt_string QMediaObject_tr2(const char* s, const char* c);
+struct seaqt_string QMediaObject_tr3(const char* s, const char* c, int n);
+struct seaqt_string QMediaObject_trUtf82(const char* s, const char* c);
+struct seaqt_string QMediaObject_trUtf83(const char* s, const char* c, int n);
+
+const QMetaObject* QMediaObject_staticMetaObject();
+void QMediaObject_delete(QMediaObject* self);
+
+#ifdef __cplusplus
+} /* extern C */
+#endif
+
+#endif

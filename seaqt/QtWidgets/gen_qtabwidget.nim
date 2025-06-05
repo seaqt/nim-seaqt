@@ -1,0 +1,1892 @@
+import ./qtwidgets_pkg
+
+{.push raises: [].}
+
+from system/ansi_c import c_free
+
+type
+  struct_seaqt_string {.used.} = object
+    len: csize_t
+    data: pointer
+
+  struct_seaqt_array {.used.} = object
+    len: csize_t
+    data: pointer
+
+  struct_seaqt_map {.used.} = object
+    len: csize_t
+    keys: pointer
+    values: pointer
+
+  miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
+  miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
+
+func fromBytes(T: type string, v: struct_seaqt_string): string {.used.} =
+  if v.len > 0:
+    let len = cast[int](v.len)
+    result = newStringUninit(len)
+    when nimvm:
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
+    else:
+      copyMem(addr result[0], v.data, len)
+
+
+{.compile("gen_qtabwidget.cpp", QtWidgetsCFlags).}
+
+
+type QTabWidgetTabPositionEnum* = distinct cint
+template North*(_: type QTabWidgetTabPositionEnum): untyped = 0
+template South*(_: type QTabWidgetTabPositionEnum): untyped = 1
+template West*(_: type QTabWidgetTabPositionEnum): untyped = 2
+template East*(_: type QTabWidgetTabPositionEnum): untyped = 3
+
+
+type QTabWidgetTabShapeEnum* = distinct cint
+template Rounded*(_: type QTabWidgetTabShapeEnum): untyped = 0
+template Triangular*(_: type QTabWidgetTabShapeEnum): untyped = 1
+
+
+import ./gen_qtabwidget_types
+export gen_qtabwidget_types
+
+import
+  ../QtCore/gen_qcoreevent_types,
+  ../QtCore/gen_qmetaobject_types,
+  ../QtCore/gen_qobject_types,
+  ../QtCore/gen_qobjectdefs_types,
+  ../QtCore/gen_qpoint_types,
+  ../QtCore/gen_qsize_types,
+  ../QtCore/gen_qvariant_types,
+  ../QtGui/gen_qevent_types,
+  ../QtGui/gen_qicon_types,
+  ../QtGui/gen_qpaintdevice_types,
+  ../QtGui/gen_qpaintengine_types,
+  ../QtGui/gen_qpainter_types,
+  ./gen_qstyleoption_types,
+  ./gen_qtabbar_types,
+  ./gen_qwidget
+export
+  gen_qcoreevent_types,
+  gen_qmetaobject_types,
+  gen_qobject_types,
+  gen_qobjectdefs_types,
+  gen_qpoint_types,
+  gen_qsize_types,
+  gen_qvariant_types,
+  gen_qevent_types,
+  gen_qicon_types,
+  gen_qpaintdevice_types,
+  gen_qpaintengine_types,
+  gen_qpainter_types,
+  gen_qstyleoption_types,
+  gen_qtabbar_types,
+  gen_qwidget
+
+type cQTabWidget*{.exportc: "QTabWidget", incompleteStruct.} = object
+
+proc fcQTabWidget_metaObject(self: pointer): pointer {.importc: "QTabWidget_metaObject".}
+proc fcQTabWidget_metacast(self: pointer, param1: cstring): pointer {.importc: "QTabWidget_metacast".}
+proc fcQTabWidget_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QTabWidget_metacall".}
+proc fcQTabWidget_tr(s: cstring): struct_seaqt_string {.importc: "QTabWidget_tr".}
+proc fcQTabWidget_trUtf8(s: cstring): struct_seaqt_string {.importc: "QTabWidget_trUtf8".}
+proc fcQTabWidget_addTab(self: pointer, widget: pointer, param2: struct_seaqt_string): cint {.importc: "QTabWidget_addTab".}
+proc fcQTabWidget_addTab2(self: pointer, widget: pointer, icon: pointer, label: struct_seaqt_string): cint {.importc: "QTabWidget_addTab2".}
+proc fcQTabWidget_insertTab(self: pointer, index: cint, widget: pointer, param3: struct_seaqt_string): cint {.importc: "QTabWidget_insertTab".}
+proc fcQTabWidget_insertTab2(self: pointer, index: cint, widget: pointer, icon: pointer, label: struct_seaqt_string): cint {.importc: "QTabWidget_insertTab2".}
+proc fcQTabWidget_removeTab(self: pointer, index: cint): void {.importc: "QTabWidget_removeTab".}
+proc fcQTabWidget_isTabEnabled(self: pointer, index: cint): bool {.importc: "QTabWidget_isTabEnabled".}
+proc fcQTabWidget_setTabEnabled(self: pointer, index: cint, enabled: bool): void {.importc: "QTabWidget_setTabEnabled".}
+proc fcQTabWidget_isTabVisible(self: pointer, index: cint): bool {.importc: "QTabWidget_isTabVisible".}
+proc fcQTabWidget_setTabVisible(self: pointer, index: cint, visible: bool): void {.importc: "QTabWidget_setTabVisible".}
+proc fcQTabWidget_tabText(self: pointer, index: cint): struct_seaqt_string {.importc: "QTabWidget_tabText".}
+proc fcQTabWidget_setTabText(self: pointer, index: cint, text: struct_seaqt_string): void {.importc: "QTabWidget_setTabText".}
+proc fcQTabWidget_tabIcon(self: pointer, index: cint): pointer {.importc: "QTabWidget_tabIcon".}
+proc fcQTabWidget_setTabIcon(self: pointer, index: cint, icon: pointer): void {.importc: "QTabWidget_setTabIcon".}
+proc fcQTabWidget_setTabToolTip(self: pointer, index: cint, tip: struct_seaqt_string): void {.importc: "QTabWidget_setTabToolTip".}
+proc fcQTabWidget_tabToolTip(self: pointer, index: cint): struct_seaqt_string {.importc: "QTabWidget_tabToolTip".}
+proc fcQTabWidget_setTabWhatsThis(self: pointer, index: cint, text: struct_seaqt_string): void {.importc: "QTabWidget_setTabWhatsThis".}
+proc fcQTabWidget_tabWhatsThis(self: pointer, index: cint): struct_seaqt_string {.importc: "QTabWidget_tabWhatsThis".}
+proc fcQTabWidget_currentIndex(self: pointer): cint {.importc: "QTabWidget_currentIndex".}
+proc fcQTabWidget_currentWidget(self: pointer): pointer {.importc: "QTabWidget_currentWidget".}
+proc fcQTabWidget_widget(self: pointer, index: cint): pointer {.importc: "QTabWidget_widget".}
+proc fcQTabWidget_indexOf(self: pointer, widget: pointer): cint {.importc: "QTabWidget_indexOf".}
+proc fcQTabWidget_count(self: pointer): cint {.importc: "QTabWidget_count".}
+proc fcQTabWidget_tabPosition(self: pointer): cint {.importc: "QTabWidget_tabPosition".}
+proc fcQTabWidget_setTabPosition(self: pointer, position: cint): void {.importc: "QTabWidget_setTabPosition".}
+proc fcQTabWidget_tabsClosable(self: pointer): bool {.importc: "QTabWidget_tabsClosable".}
+proc fcQTabWidget_setTabsClosable(self: pointer, closeable: bool): void {.importc: "QTabWidget_setTabsClosable".}
+proc fcQTabWidget_isMovable(self: pointer): bool {.importc: "QTabWidget_isMovable".}
+proc fcQTabWidget_setMovable(self: pointer, movable: bool): void {.importc: "QTabWidget_setMovable".}
+proc fcQTabWidget_tabShape(self: pointer): cint {.importc: "QTabWidget_tabShape".}
+proc fcQTabWidget_setTabShape(self: pointer, s: cint): void {.importc: "QTabWidget_setTabShape".}
+proc fcQTabWidget_sizeHint(self: pointer): pointer {.importc: "QTabWidget_sizeHint".}
+proc fcQTabWidget_minimumSizeHint(self: pointer): pointer {.importc: "QTabWidget_minimumSizeHint".}
+proc fcQTabWidget_heightForWidth(self: pointer, width: cint): cint {.importc: "QTabWidget_heightForWidth".}
+proc fcQTabWidget_hasHeightForWidth(self: pointer): bool {.importc: "QTabWidget_hasHeightForWidth".}
+proc fcQTabWidget_setCornerWidget(self: pointer, w: pointer): void {.importc: "QTabWidget_setCornerWidget".}
+proc fcQTabWidget_cornerWidget(self: pointer): pointer {.importc: "QTabWidget_cornerWidget".}
+proc fcQTabWidget_elideMode(self: pointer): cint {.importc: "QTabWidget_elideMode".}
+proc fcQTabWidget_setElideMode(self: pointer, mode: cint): void {.importc: "QTabWidget_setElideMode".}
+proc fcQTabWidget_iconSize(self: pointer): pointer {.importc: "QTabWidget_iconSize".}
+proc fcQTabWidget_setIconSize(self: pointer, size: pointer): void {.importc: "QTabWidget_setIconSize".}
+proc fcQTabWidget_usesScrollButtons(self: pointer): bool {.importc: "QTabWidget_usesScrollButtons".}
+proc fcQTabWidget_setUsesScrollButtons(self: pointer, useButtons: bool): void {.importc: "QTabWidget_setUsesScrollButtons".}
+proc fcQTabWidget_documentMode(self: pointer): bool {.importc: "QTabWidget_documentMode".}
+proc fcQTabWidget_setDocumentMode(self: pointer, set: bool): void {.importc: "QTabWidget_setDocumentMode".}
+proc fcQTabWidget_tabBarAutoHide(self: pointer): bool {.importc: "QTabWidget_tabBarAutoHide".}
+proc fcQTabWidget_setTabBarAutoHide(self: pointer, enabled: bool): void {.importc: "QTabWidget_setTabBarAutoHide".}
+proc fcQTabWidget_clear(self: pointer): void {.importc: "QTabWidget_clear".}
+proc fcQTabWidget_tabBar(self: pointer): pointer {.importc: "QTabWidget_tabBar".}
+proc fcQTabWidget_setCurrentIndex(self: pointer, index: cint): void {.importc: "QTabWidget_setCurrentIndex".}
+proc fcQTabWidget_setCurrentWidget(self: pointer, widget: pointer): void {.importc: "QTabWidget_setCurrentWidget".}
+proc fcQTabWidget_currentChanged(self: pointer, index: cint): void {.importc: "QTabWidget_currentChanged".}
+proc fcQTabWidget_connect_currentChanged(self: pointer, slot: int, callback: proc (slot: int, index: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QTabWidget_connect_currentChanged".}
+proc fcQTabWidget_tabCloseRequested(self: pointer, index: cint): void {.importc: "QTabWidget_tabCloseRequested".}
+proc fcQTabWidget_connect_tabCloseRequested(self: pointer, slot: int, callback: proc (slot: int, index: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QTabWidget_connect_tabCloseRequested".}
+proc fcQTabWidget_tabBarClicked(self: pointer, index: cint): void {.importc: "QTabWidget_tabBarClicked".}
+proc fcQTabWidget_connect_tabBarClicked(self: pointer, slot: int, callback: proc (slot: int, index: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QTabWidget_connect_tabBarClicked".}
+proc fcQTabWidget_tabBarDoubleClicked(self: pointer, index: cint): void {.importc: "QTabWidget_tabBarDoubleClicked".}
+proc fcQTabWidget_connect_tabBarDoubleClicked(self: pointer, slot: int, callback: proc (slot: int, index: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QTabWidget_connect_tabBarDoubleClicked".}
+proc fcQTabWidget_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QTabWidget_tr2".}
+proc fcQTabWidget_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QTabWidget_tr3".}
+proc fcQTabWidget_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QTabWidget_trUtf82".}
+proc fcQTabWidget_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QTabWidget_trUtf83".}
+proc fcQTabWidget_setCornerWidget2(self: pointer, w: pointer, corner: cint): void {.importc: "QTabWidget_setCornerWidget2".}
+proc fcQTabWidget_cornerWidgetWithCorner(self: pointer, corner: cint): pointer {.importc: "QTabWidget_cornerWidgetWithCorner".}
+proc fcQTabWidget_vdata(self: pointer): ptr pointer {.importc: "QTabWidget_vdata".}
+proc fvdata_cQTabWidget(self: pointer): pointer {.importc: "vdata_QTabWidget".}
+
+type cQTabWidgetVTable {.pure.} = object
+  destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
+  metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  metacast*: proc(self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
+  metacall*: proc(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl, raises: [], gcsafe.}
+  sizeHint*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  minimumSizeHint*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  heightForWidth*: proc(self: pointer, width: cint): cint {.cdecl, raises: [], gcsafe.}
+  hasHeightForWidth*: proc(self: pointer): bool {.cdecl, raises: [], gcsafe.}
+  tabInserted*: proc(self: pointer, index: cint): void {.cdecl, raises: [], gcsafe.}
+  tabRemoved*: proc(self: pointer, index: cint): void {.cdecl, raises: [], gcsafe.}
+  showEvent*: proc(self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
+  resizeEvent*: proc(self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
+  keyPressEvent*: proc(self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
+  paintEvent*: proc(self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
+  changeEvent*: proc(self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
+  event*: proc(self: pointer, param1: pointer): bool {.cdecl, raises: [], gcsafe.}
+  devType*: proc(self: pointer): cint {.cdecl, raises: [], gcsafe.}
+  setVisible*: proc(self: pointer, visible: bool): void {.cdecl, raises: [], gcsafe.}
+  paintEngine*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  mousePressEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  mouseReleaseEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  mouseDoubleClickEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  mouseMoveEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  wheelEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  keyReleaseEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  focusInEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  focusOutEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  enterEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  leaveEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  moveEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  closeEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  contextMenuEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  tabletEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  actionEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  dragEnterEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  dragMoveEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  dragLeaveEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  dropEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  hideEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  nativeEvent*: proc(self: pointer, eventType: struct_seaqt_string, message: pointer, resultVal: ptr clong): bool {.cdecl, raises: [], gcsafe.}
+  metric*: proc(self: pointer, param1: cint): cint {.cdecl, raises: [], gcsafe.}
+  initPainter*: proc(self: pointer, painter: pointer): void {.cdecl, raises: [], gcsafe.}
+  redirected*: proc(self: pointer, offset: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  sharedPainter*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  inputMethodEvent*: proc(self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
+  inputMethodQuery*: proc(self: pointer, param1: cint): pointer {.cdecl, raises: [], gcsafe.}
+  focusNextPrevChild*: proc(self: pointer, next: bool): bool {.cdecl, raises: [], gcsafe.}
+  eventFilter*: proc(self: pointer, watched: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
+  timerEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  childEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  customEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  connectNotify*: proc(self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+  disconnectNotify*: proc(self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+proc fcQTabWidget_virtualbase_metaObject(self: pointer): pointer {.importc: "QTabWidget_virtualbase_metaObject".}
+proc fcQTabWidget_virtualbase_metacast(self: pointer, param1: cstring): pointer {.importc: "QTabWidget_virtualbase_metacast".}
+proc fcQTabWidget_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QTabWidget_virtualbase_metacall".}
+proc fcQTabWidget_virtualbase_sizeHint(self: pointer): pointer {.importc: "QTabWidget_virtualbase_sizeHint".}
+proc fcQTabWidget_virtualbase_minimumSizeHint(self: pointer): pointer {.importc: "QTabWidget_virtualbase_minimumSizeHint".}
+proc fcQTabWidget_virtualbase_heightForWidth(self: pointer, width: cint): cint {.importc: "QTabWidget_virtualbase_heightForWidth".}
+proc fcQTabWidget_virtualbase_hasHeightForWidth(self: pointer): bool {.importc: "QTabWidget_virtualbase_hasHeightForWidth".}
+proc fcQTabWidget_virtualbase_tabInserted(self: pointer, index: cint): void {.importc: "QTabWidget_virtualbase_tabInserted".}
+proc fcQTabWidget_virtualbase_tabRemoved(self: pointer, index: cint): void {.importc: "QTabWidget_virtualbase_tabRemoved".}
+proc fcQTabWidget_virtualbase_showEvent(self: pointer, param1: pointer): void {.importc: "QTabWidget_virtualbase_showEvent".}
+proc fcQTabWidget_virtualbase_resizeEvent(self: pointer, param1: pointer): void {.importc: "QTabWidget_virtualbase_resizeEvent".}
+proc fcQTabWidget_virtualbase_keyPressEvent(self: pointer, param1: pointer): void {.importc: "QTabWidget_virtualbase_keyPressEvent".}
+proc fcQTabWidget_virtualbase_paintEvent(self: pointer, param1: pointer): void {.importc: "QTabWidget_virtualbase_paintEvent".}
+proc fcQTabWidget_virtualbase_changeEvent(self: pointer, param1: pointer): void {.importc: "QTabWidget_virtualbase_changeEvent".}
+proc fcQTabWidget_virtualbase_event(self: pointer, param1: pointer): bool {.importc: "QTabWidget_virtualbase_event".}
+proc fcQTabWidget_virtualbase_devType(self: pointer): cint {.importc: "QTabWidget_virtualbase_devType".}
+proc fcQTabWidget_virtualbase_setVisible(self: pointer, visible: bool): void {.importc: "QTabWidget_virtualbase_setVisible".}
+proc fcQTabWidget_virtualbase_paintEngine(self: pointer): pointer {.importc: "QTabWidget_virtualbase_paintEngine".}
+proc fcQTabWidget_virtualbase_mousePressEvent(self: pointer, event: pointer): void {.importc: "QTabWidget_virtualbase_mousePressEvent".}
+proc fcQTabWidget_virtualbase_mouseReleaseEvent(self: pointer, event: pointer): void {.importc: "QTabWidget_virtualbase_mouseReleaseEvent".}
+proc fcQTabWidget_virtualbase_mouseDoubleClickEvent(self: pointer, event: pointer): void {.importc: "QTabWidget_virtualbase_mouseDoubleClickEvent".}
+proc fcQTabWidget_virtualbase_mouseMoveEvent(self: pointer, event: pointer): void {.importc: "QTabWidget_virtualbase_mouseMoveEvent".}
+proc fcQTabWidget_virtualbase_wheelEvent(self: pointer, event: pointer): void {.importc: "QTabWidget_virtualbase_wheelEvent".}
+proc fcQTabWidget_virtualbase_keyReleaseEvent(self: pointer, event: pointer): void {.importc: "QTabWidget_virtualbase_keyReleaseEvent".}
+proc fcQTabWidget_virtualbase_focusInEvent(self: pointer, event: pointer): void {.importc: "QTabWidget_virtualbase_focusInEvent".}
+proc fcQTabWidget_virtualbase_focusOutEvent(self: pointer, event: pointer): void {.importc: "QTabWidget_virtualbase_focusOutEvent".}
+proc fcQTabWidget_virtualbase_enterEvent(self: pointer, event: pointer): void {.importc: "QTabWidget_virtualbase_enterEvent".}
+proc fcQTabWidget_virtualbase_leaveEvent(self: pointer, event: pointer): void {.importc: "QTabWidget_virtualbase_leaveEvent".}
+proc fcQTabWidget_virtualbase_moveEvent(self: pointer, event: pointer): void {.importc: "QTabWidget_virtualbase_moveEvent".}
+proc fcQTabWidget_virtualbase_closeEvent(self: pointer, event: pointer): void {.importc: "QTabWidget_virtualbase_closeEvent".}
+proc fcQTabWidget_virtualbase_contextMenuEvent(self: pointer, event: pointer): void {.importc: "QTabWidget_virtualbase_contextMenuEvent".}
+proc fcQTabWidget_virtualbase_tabletEvent(self: pointer, event: pointer): void {.importc: "QTabWidget_virtualbase_tabletEvent".}
+proc fcQTabWidget_virtualbase_actionEvent(self: pointer, event: pointer): void {.importc: "QTabWidget_virtualbase_actionEvent".}
+proc fcQTabWidget_virtualbase_dragEnterEvent(self: pointer, event: pointer): void {.importc: "QTabWidget_virtualbase_dragEnterEvent".}
+proc fcQTabWidget_virtualbase_dragMoveEvent(self: pointer, event: pointer): void {.importc: "QTabWidget_virtualbase_dragMoveEvent".}
+proc fcQTabWidget_virtualbase_dragLeaveEvent(self: pointer, event: pointer): void {.importc: "QTabWidget_virtualbase_dragLeaveEvent".}
+proc fcQTabWidget_virtualbase_dropEvent(self: pointer, event: pointer): void {.importc: "QTabWidget_virtualbase_dropEvent".}
+proc fcQTabWidget_virtualbase_hideEvent(self: pointer, event: pointer): void {.importc: "QTabWidget_virtualbase_hideEvent".}
+proc fcQTabWidget_virtualbase_nativeEvent(self: pointer, eventType: struct_seaqt_string, message: pointer, resultVal: ptr clong): bool {.importc: "QTabWidget_virtualbase_nativeEvent".}
+proc fcQTabWidget_virtualbase_metric(self: pointer, param1: cint): cint {.importc: "QTabWidget_virtualbase_metric".}
+proc fcQTabWidget_virtualbase_initPainter(self: pointer, painter: pointer): void {.importc: "QTabWidget_virtualbase_initPainter".}
+proc fcQTabWidget_virtualbase_redirected(self: pointer, offset: pointer): pointer {.importc: "QTabWidget_virtualbase_redirected".}
+proc fcQTabWidget_virtualbase_sharedPainter(self: pointer): pointer {.importc: "QTabWidget_virtualbase_sharedPainter".}
+proc fcQTabWidget_virtualbase_inputMethodEvent(self: pointer, param1: pointer): void {.importc: "QTabWidget_virtualbase_inputMethodEvent".}
+proc fcQTabWidget_virtualbase_inputMethodQuery(self: pointer, param1: cint): pointer {.importc: "QTabWidget_virtualbase_inputMethodQuery".}
+proc fcQTabWidget_virtualbase_focusNextPrevChild(self: pointer, next: bool): bool {.importc: "QTabWidget_virtualbase_focusNextPrevChild".}
+proc fcQTabWidget_virtualbase_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.importc: "QTabWidget_virtualbase_eventFilter".}
+proc fcQTabWidget_virtualbase_timerEvent(self: pointer, event: pointer): void {.importc: "QTabWidget_virtualbase_timerEvent".}
+proc fcQTabWidget_virtualbase_childEvent(self: pointer, event: pointer): void {.importc: "QTabWidget_virtualbase_childEvent".}
+proc fcQTabWidget_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QTabWidget_virtualbase_customEvent".}
+proc fcQTabWidget_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QTabWidget_virtualbase_connectNotify".}
+proc fcQTabWidget_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QTabWidget_virtualbase_disconnectNotify".}
+proc fcQTabWidget_protectedbase_setTabBar(self: pointer, tabBar: pointer): void {.importc: "QTabWidget_protectedbase_setTabBar".}
+proc fcQTabWidget_protectedbase_initStyleOption(self: pointer, option: pointer): void {.importc: "QTabWidget_protectedbase_initStyleOption".}
+proc fcQTabWidget_protectedbase_updateMicroFocus(self: pointer): void {.importc: "QTabWidget_protectedbase_updateMicroFocus".}
+proc fcQTabWidget_protectedbase_create(self: pointer): void {.importc: "QTabWidget_protectedbase_create".}
+proc fcQTabWidget_protectedbase_destroy(self: pointer): void {.importc: "QTabWidget_protectedbase_destroy".}
+proc fcQTabWidget_protectedbase_focusNextChild(self: pointer): bool {.importc: "QTabWidget_protectedbase_focusNextChild".}
+proc fcQTabWidget_protectedbase_focusPreviousChild(self: pointer): bool {.importc: "QTabWidget_protectedbase_focusPreviousChild".}
+proc fcQTabWidget_protectedbase_sender(self: pointer): pointer {.importc: "QTabWidget_protectedbase_sender".}
+proc fcQTabWidget_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QTabWidget_protectedbase_senderSignalIndex".}
+proc fcQTabWidget_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QTabWidget_protectedbase_receivers".}
+proc fcQTabWidget_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QTabWidget_protectedbase_isSignalConnected".}
+proc fcQTabWidget_new(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQTabWidget {.importc: "QTabWidget_new".}
+proc fcQTabWidget_new2(vtbl: pointer, vdata: csize_t): ptr cQTabWidget {.importc: "QTabWidget_new2".}
+proc fcQTabWidget_staticMetaObject(): pointer {.importc: "QTabWidget_staticMetaObject".}
+proc fcQTabWidget_delete(self: pointer) {.importc: "QTabWidget_delete".}
+
+proc metaObject*(self: gen_qtabwidget_types.QTabWidget): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQTabWidget_metaObject(self.h))
+
+proc metacast*(self: gen_qtabwidget_types.QTabWidget, param1: cstring): pointer =
+  fcQTabWidget_metacast(self.h, param1)
+
+proc metacall*(self: gen_qtabwidget_types.QTabWidget, param1: cint, param2: cint, param3: pointer): cint =
+  fcQTabWidget_metacall(self.h, cint(param1), param2, param3)
+
+proc tr*(_: type gen_qtabwidget_types.QTabWidget, s: cstring): string =
+  let v_ms = fcQTabWidget_tr(s)
+  let vx_ret = string.fromBytes(v_ms)
+  c_free(v_ms.data)
+  vx_ret
+
+proc trUtf8*(_: type gen_qtabwidget_types.QTabWidget, s: cstring): string =
+  let v_ms = fcQTabWidget_trUtf8(s)
+  let vx_ret = string.fromBytes(v_ms)
+  c_free(v_ms.data)
+  vx_ret
+
+proc addTab*(self: gen_qtabwidget_types.QTabWidget, widget: gen_qwidget_types.QWidget, param2: openArray[char]): cint =
+  fcQTabWidget_addTab(self.h, widget.h, struct_seaqt_string(data: if len(param2) > 0: addr param2[0] else: nil, len: csize_t(len(param2))))
+
+proc addTab*(self: gen_qtabwidget_types.QTabWidget, widget: gen_qwidget_types.QWidget, icon: gen_qicon_types.QIcon, label: openArray[char]): cint =
+  fcQTabWidget_addTab2(self.h, widget.h, icon.h, struct_seaqt_string(data: if len(label) > 0: addr label[0] else: nil, len: csize_t(len(label))))
+
+proc insertTab*(self: gen_qtabwidget_types.QTabWidget, index: cint, widget: gen_qwidget_types.QWidget, param3: openArray[char]): cint =
+  fcQTabWidget_insertTab(self.h, index, widget.h, struct_seaqt_string(data: if len(param3) > 0: addr param3[0] else: nil, len: csize_t(len(param3))))
+
+proc insertTab*(self: gen_qtabwidget_types.QTabWidget, index: cint, widget: gen_qwidget_types.QWidget, icon: gen_qicon_types.QIcon, label: openArray[char]): cint =
+  fcQTabWidget_insertTab2(self.h, index, widget.h, icon.h, struct_seaqt_string(data: if len(label) > 0: addr label[0] else: nil, len: csize_t(len(label))))
+
+proc removeTab*(self: gen_qtabwidget_types.QTabWidget, index: cint): void =
+  fcQTabWidget_removeTab(self.h, index)
+
+proc isTabEnabled*(self: gen_qtabwidget_types.QTabWidget, index: cint): bool =
+  fcQTabWidget_isTabEnabled(self.h, index)
+
+proc setTabEnabled*(self: gen_qtabwidget_types.QTabWidget, index: cint, enabled: bool): void =
+  fcQTabWidget_setTabEnabled(self.h, index, enabled)
+
+proc isTabVisible*(self: gen_qtabwidget_types.QTabWidget, index: cint): bool =
+  fcQTabWidget_isTabVisible(self.h, index)
+
+proc setTabVisible*(self: gen_qtabwidget_types.QTabWidget, index: cint, visible: bool): void =
+  fcQTabWidget_setTabVisible(self.h, index, visible)
+
+proc tabText*(self: gen_qtabwidget_types.QTabWidget, index: cint): string =
+  let v_ms = fcQTabWidget_tabText(self.h, index)
+  let vx_ret = string.fromBytes(v_ms)
+  c_free(v_ms.data)
+  vx_ret
+
+proc setTabText*(self: gen_qtabwidget_types.QTabWidget, index: cint, text: openArray[char]): void =
+  fcQTabWidget_setTabText(self.h, index, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
+
+proc tabIcon*(self: gen_qtabwidget_types.QTabWidget, index: cint): gen_qicon_types.QIcon =
+  gen_qicon_types.QIcon(h: fcQTabWidget_tabIcon(self.h, index))
+
+proc setTabIcon*(self: gen_qtabwidget_types.QTabWidget, index: cint, icon: gen_qicon_types.QIcon): void =
+  fcQTabWidget_setTabIcon(self.h, index, icon.h)
+
+proc setTabToolTip*(self: gen_qtabwidget_types.QTabWidget, index: cint, tip: openArray[char]): void =
+  fcQTabWidget_setTabToolTip(self.h, index, struct_seaqt_string(data: if len(tip) > 0: addr tip[0] else: nil, len: csize_t(len(tip))))
+
+proc tabToolTip*(self: gen_qtabwidget_types.QTabWidget, index: cint): string =
+  let v_ms = fcQTabWidget_tabToolTip(self.h, index)
+  let vx_ret = string.fromBytes(v_ms)
+  c_free(v_ms.data)
+  vx_ret
+
+proc setTabWhatsThis*(self: gen_qtabwidget_types.QTabWidget, index: cint, text: openArray[char]): void =
+  fcQTabWidget_setTabWhatsThis(self.h, index, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
+
+proc tabWhatsThis*(self: gen_qtabwidget_types.QTabWidget, index: cint): string =
+  let v_ms = fcQTabWidget_tabWhatsThis(self.h, index)
+  let vx_ret = string.fromBytes(v_ms)
+  c_free(v_ms.data)
+  vx_ret
+
+proc currentIndex*(self: gen_qtabwidget_types.QTabWidget): cint =
+  fcQTabWidget_currentIndex(self.h)
+
+proc currentWidget*(self: gen_qtabwidget_types.QTabWidget): gen_qwidget_types.QWidget =
+  gen_qwidget_types.QWidget(h: fcQTabWidget_currentWidget(self.h))
+
+proc widget*(self: gen_qtabwidget_types.QTabWidget, index: cint): gen_qwidget_types.QWidget =
+  gen_qwidget_types.QWidget(h: fcQTabWidget_widget(self.h, index))
+
+proc indexOf*(self: gen_qtabwidget_types.QTabWidget, widget: gen_qwidget_types.QWidget): cint =
+  fcQTabWidget_indexOf(self.h, widget.h)
+
+proc count*(self: gen_qtabwidget_types.QTabWidget): cint =
+  fcQTabWidget_count(self.h)
+
+proc tabPosition*(self: gen_qtabwidget_types.QTabWidget): cint =
+  cint(fcQTabWidget_tabPosition(self.h))
+
+proc setTabPosition*(self: gen_qtabwidget_types.QTabWidget, position: cint): void =
+  fcQTabWidget_setTabPosition(self.h, cint(position))
+
+proc tabsClosable*(self: gen_qtabwidget_types.QTabWidget): bool =
+  fcQTabWidget_tabsClosable(self.h)
+
+proc setTabsClosable*(self: gen_qtabwidget_types.QTabWidget, closeable: bool): void =
+  fcQTabWidget_setTabsClosable(self.h, closeable)
+
+proc isMovable*(self: gen_qtabwidget_types.QTabWidget): bool =
+  fcQTabWidget_isMovable(self.h)
+
+proc setMovable*(self: gen_qtabwidget_types.QTabWidget, movable: bool): void =
+  fcQTabWidget_setMovable(self.h, movable)
+
+proc tabShape*(self: gen_qtabwidget_types.QTabWidget): cint =
+  cint(fcQTabWidget_tabShape(self.h))
+
+proc setTabShape*(self: gen_qtabwidget_types.QTabWidget, s: cint): void =
+  fcQTabWidget_setTabShape(self.h, cint(s))
+
+proc sizeHint*(self: gen_qtabwidget_types.QTabWidget): gen_qsize_types.QSize =
+  gen_qsize_types.QSize(h: fcQTabWidget_sizeHint(self.h))
+
+proc minimumSizeHint*(self: gen_qtabwidget_types.QTabWidget): gen_qsize_types.QSize =
+  gen_qsize_types.QSize(h: fcQTabWidget_minimumSizeHint(self.h))
+
+proc heightForWidth*(self: gen_qtabwidget_types.QTabWidget, width: cint): cint =
+  fcQTabWidget_heightForWidth(self.h, width)
+
+proc hasHeightForWidth*(self: gen_qtabwidget_types.QTabWidget): bool =
+  fcQTabWidget_hasHeightForWidth(self.h)
+
+proc setCornerWidget*(self: gen_qtabwidget_types.QTabWidget, w: gen_qwidget_types.QWidget): void =
+  fcQTabWidget_setCornerWidget(self.h, w.h)
+
+proc cornerWidget*(self: gen_qtabwidget_types.QTabWidget): gen_qwidget_types.QWidget =
+  gen_qwidget_types.QWidget(h: fcQTabWidget_cornerWidget(self.h))
+
+proc elideMode*(self: gen_qtabwidget_types.QTabWidget): cint =
+  cint(fcQTabWidget_elideMode(self.h))
+
+proc setElideMode*(self: gen_qtabwidget_types.QTabWidget, mode: cint): void =
+  fcQTabWidget_setElideMode(self.h, cint(mode))
+
+proc iconSize*(self: gen_qtabwidget_types.QTabWidget): gen_qsize_types.QSize =
+  gen_qsize_types.QSize(h: fcQTabWidget_iconSize(self.h))
+
+proc setIconSize*(self: gen_qtabwidget_types.QTabWidget, size: gen_qsize_types.QSize): void =
+  fcQTabWidget_setIconSize(self.h, size.h)
+
+proc usesScrollButtons*(self: gen_qtabwidget_types.QTabWidget): bool =
+  fcQTabWidget_usesScrollButtons(self.h)
+
+proc setUsesScrollButtons*(self: gen_qtabwidget_types.QTabWidget, useButtons: bool): void =
+  fcQTabWidget_setUsesScrollButtons(self.h, useButtons)
+
+proc documentMode*(self: gen_qtabwidget_types.QTabWidget): bool =
+  fcQTabWidget_documentMode(self.h)
+
+proc setDocumentMode*(self: gen_qtabwidget_types.QTabWidget, set: bool): void =
+  fcQTabWidget_setDocumentMode(self.h, set)
+
+proc tabBarAutoHide*(self: gen_qtabwidget_types.QTabWidget): bool =
+  fcQTabWidget_tabBarAutoHide(self.h)
+
+proc setTabBarAutoHide*(self: gen_qtabwidget_types.QTabWidget, enabled: bool): void =
+  fcQTabWidget_setTabBarAutoHide(self.h, enabled)
+
+proc clear*(self: gen_qtabwidget_types.QTabWidget): void =
+  fcQTabWidget_clear(self.h)
+
+proc tabBar*(self: gen_qtabwidget_types.QTabWidget): gen_qtabbar_types.QTabBar =
+  gen_qtabbar_types.QTabBar(h: fcQTabWidget_tabBar(self.h))
+
+proc setCurrentIndex*(self: gen_qtabwidget_types.QTabWidget, index: cint): void =
+  fcQTabWidget_setCurrentIndex(self.h, index)
+
+proc setCurrentWidget*(self: gen_qtabwidget_types.QTabWidget, widget: gen_qwidget_types.QWidget): void =
+  fcQTabWidget_setCurrentWidget(self.h, widget.h)
+
+proc currentChanged*(self: gen_qtabwidget_types.QTabWidget, index: cint): void =
+  fcQTabWidget_currentChanged(self.h, index)
+
+type QTabWidgetcurrentChangedSlot* = proc(index: cint)
+proc fcQTabWidget_slot_callback_currentChanged(slot: int, index: cint) {.cdecl.} =
+  let nimfunc = cast[ptr QTabWidgetcurrentChangedSlot](cast[pointer](slot))
+  let slotval1 = index
+
+  nimfunc[](slotval1)
+
+proc fcQTabWidget_slot_callback_currentChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QTabWidgetcurrentChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
+proc onCurrentChanged*(self: gen_qtabwidget_types.QTabWidget, slot: QTabWidgetcurrentChangedSlot) =
+  var tmp = new QTabWidgetcurrentChangedSlot
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQTabWidget_connect_currentChanged(self.h, cast[int](addr tmp[]), fcQTabWidget_slot_callback_currentChanged, fcQTabWidget_slot_callback_currentChanged_release)
+
+proc tabCloseRequested*(self: gen_qtabwidget_types.QTabWidget, index: cint): void =
+  fcQTabWidget_tabCloseRequested(self.h, index)
+
+type QTabWidgettabCloseRequestedSlot* = proc(index: cint)
+proc fcQTabWidget_slot_callback_tabCloseRequested(slot: int, index: cint) {.cdecl.} =
+  let nimfunc = cast[ptr QTabWidgettabCloseRequestedSlot](cast[pointer](slot))
+  let slotval1 = index
+
+  nimfunc[](slotval1)
+
+proc fcQTabWidget_slot_callback_tabCloseRequested_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QTabWidgettabCloseRequestedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
+proc onTabCloseRequested*(self: gen_qtabwidget_types.QTabWidget, slot: QTabWidgettabCloseRequestedSlot) =
+  var tmp = new QTabWidgettabCloseRequestedSlot
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQTabWidget_connect_tabCloseRequested(self.h, cast[int](addr tmp[]), fcQTabWidget_slot_callback_tabCloseRequested, fcQTabWidget_slot_callback_tabCloseRequested_release)
+
+proc tabBarClicked*(self: gen_qtabwidget_types.QTabWidget, index: cint): void =
+  fcQTabWidget_tabBarClicked(self.h, index)
+
+type QTabWidgettabBarClickedSlot* = proc(index: cint)
+proc fcQTabWidget_slot_callback_tabBarClicked(slot: int, index: cint) {.cdecl.} =
+  let nimfunc = cast[ptr QTabWidgettabBarClickedSlot](cast[pointer](slot))
+  let slotval1 = index
+
+  nimfunc[](slotval1)
+
+proc fcQTabWidget_slot_callback_tabBarClicked_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QTabWidgettabBarClickedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
+proc onTabBarClicked*(self: gen_qtabwidget_types.QTabWidget, slot: QTabWidgettabBarClickedSlot) =
+  var tmp = new QTabWidgettabBarClickedSlot
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQTabWidget_connect_tabBarClicked(self.h, cast[int](addr tmp[]), fcQTabWidget_slot_callback_tabBarClicked, fcQTabWidget_slot_callback_tabBarClicked_release)
+
+proc tabBarDoubleClicked*(self: gen_qtabwidget_types.QTabWidget, index: cint): void =
+  fcQTabWidget_tabBarDoubleClicked(self.h, index)
+
+type QTabWidgettabBarDoubleClickedSlot* = proc(index: cint)
+proc fcQTabWidget_slot_callback_tabBarDoubleClicked(slot: int, index: cint) {.cdecl.} =
+  let nimfunc = cast[ptr QTabWidgettabBarDoubleClickedSlot](cast[pointer](slot))
+  let slotval1 = index
+
+  nimfunc[](slotval1)
+
+proc fcQTabWidget_slot_callback_tabBarDoubleClicked_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QTabWidgettabBarDoubleClickedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
+proc onTabBarDoubleClicked*(self: gen_qtabwidget_types.QTabWidget, slot: QTabWidgettabBarDoubleClickedSlot) =
+  var tmp = new QTabWidgettabBarDoubleClickedSlot
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQTabWidget_connect_tabBarDoubleClicked(self.h, cast[int](addr tmp[]), fcQTabWidget_slot_callback_tabBarDoubleClicked, fcQTabWidget_slot_callback_tabBarDoubleClicked_release)
+
+proc tr*(_: type gen_qtabwidget_types.QTabWidget, s: cstring, c: cstring): string =
+  let v_ms = fcQTabWidget_tr2(s, c)
+  let vx_ret = string.fromBytes(v_ms)
+  c_free(v_ms.data)
+  vx_ret
+
+proc tr*(_: type gen_qtabwidget_types.QTabWidget, s: cstring, c: cstring, n: cint): string =
+  let v_ms = fcQTabWidget_tr3(s, c, n)
+  let vx_ret = string.fromBytes(v_ms)
+  c_free(v_ms.data)
+  vx_ret
+
+proc trUtf8*(_: type gen_qtabwidget_types.QTabWidget, s: cstring, c: cstring): string =
+  let v_ms = fcQTabWidget_trUtf82(s, c)
+  let vx_ret = string.fromBytes(v_ms)
+  c_free(v_ms.data)
+  vx_ret
+
+proc trUtf8*(_: type gen_qtabwidget_types.QTabWidget, s: cstring, c: cstring, n: cint): string =
+  let v_ms = fcQTabWidget_trUtf83(s, c, n)
+  let vx_ret = string.fromBytes(v_ms)
+  c_free(v_ms.data)
+  vx_ret
+
+proc setCornerWidget*(self: gen_qtabwidget_types.QTabWidget, w: gen_qwidget_types.QWidget, corner: cint): void =
+  fcQTabWidget_setCornerWidget2(self.h, w.h, cint(corner))
+
+proc cornerWidget*(self: gen_qtabwidget_types.QTabWidget, corner: cint): gen_qwidget_types.QWidget =
+  gen_qwidget_types.QWidget(h: fcQTabWidget_cornerWidgetWithCorner(self.h, cint(corner)))
+
+type QTabWidgetmetaObjectProc* = proc(self: QTabWidget): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
+type QTabWidgetmetacastProc* = proc(self: QTabWidget, param1: cstring): pointer {.raises: [], gcsafe.}
+type QTabWidgetmetacallProc* = proc(self: QTabWidget, param1: cint, param2: cint, param3: pointer): cint {.raises: [], gcsafe.}
+type QTabWidgetsizeHintProc* = proc(self: QTabWidget): gen_qsize_types.QSize {.raises: [], gcsafe.}
+type QTabWidgetminimumSizeHintProc* = proc(self: QTabWidget): gen_qsize_types.QSize {.raises: [], gcsafe.}
+type QTabWidgetheightForWidthProc* = proc(self: QTabWidget, width: cint): cint {.raises: [], gcsafe.}
+type QTabWidgethasHeightForWidthProc* = proc(self: QTabWidget): bool {.raises: [], gcsafe.}
+type QTabWidgettabInsertedProc* = proc(self: QTabWidget, index: cint): void {.raises: [], gcsafe.}
+type QTabWidgettabRemovedProc* = proc(self: QTabWidget, index: cint): void {.raises: [], gcsafe.}
+type QTabWidgetshowEventProc* = proc(self: QTabWidget, param1: gen_qevent_types.QShowEvent): void {.raises: [], gcsafe.}
+type QTabWidgetresizeEventProc* = proc(self: QTabWidget, param1: gen_qevent_types.QResizeEvent): void {.raises: [], gcsafe.}
+type QTabWidgetkeyPressEventProc* = proc(self: QTabWidget, param1: gen_qevent_types.QKeyEvent): void {.raises: [], gcsafe.}
+type QTabWidgetpaintEventProc* = proc(self: QTabWidget, param1: gen_qevent_types.QPaintEvent): void {.raises: [], gcsafe.}
+type QTabWidgetchangeEventProc* = proc(self: QTabWidget, param1: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
+type QTabWidgeteventProc* = proc(self: QTabWidget, param1: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
+type QTabWidgetdevTypeProc* = proc(self: QTabWidget): cint {.raises: [], gcsafe.}
+type QTabWidgetsetVisibleProc* = proc(self: QTabWidget, visible: bool): void {.raises: [], gcsafe.}
+type QTabWidgetpaintEngineProc* = proc(self: QTabWidget): gen_qpaintengine_types.QPaintEngine {.raises: [], gcsafe.}
+type QTabWidgetmousePressEventProc* = proc(self: QTabWidget, event: gen_qevent_types.QMouseEvent): void {.raises: [], gcsafe.}
+type QTabWidgetmouseReleaseEventProc* = proc(self: QTabWidget, event: gen_qevent_types.QMouseEvent): void {.raises: [], gcsafe.}
+type QTabWidgetmouseDoubleClickEventProc* = proc(self: QTabWidget, event: gen_qevent_types.QMouseEvent): void {.raises: [], gcsafe.}
+type QTabWidgetmouseMoveEventProc* = proc(self: QTabWidget, event: gen_qevent_types.QMouseEvent): void {.raises: [], gcsafe.}
+type QTabWidgetwheelEventProc* = proc(self: QTabWidget, event: gen_qevent_types.QWheelEvent): void {.raises: [], gcsafe.}
+type QTabWidgetkeyReleaseEventProc* = proc(self: QTabWidget, event: gen_qevent_types.QKeyEvent): void {.raises: [], gcsafe.}
+type QTabWidgetfocusInEventProc* = proc(self: QTabWidget, event: gen_qevent_types.QFocusEvent): void {.raises: [], gcsafe.}
+type QTabWidgetfocusOutEventProc* = proc(self: QTabWidget, event: gen_qevent_types.QFocusEvent): void {.raises: [], gcsafe.}
+type QTabWidgetenterEventProc* = proc(self: QTabWidget, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
+type QTabWidgetleaveEventProc* = proc(self: QTabWidget, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
+type QTabWidgetmoveEventProc* = proc(self: QTabWidget, event: gen_qevent_types.QMoveEvent): void {.raises: [], gcsafe.}
+type QTabWidgetcloseEventProc* = proc(self: QTabWidget, event: gen_qevent_types.QCloseEvent): void {.raises: [], gcsafe.}
+type QTabWidgetcontextMenuEventProc* = proc(self: QTabWidget, event: gen_qevent_types.QContextMenuEvent): void {.raises: [], gcsafe.}
+type QTabWidgettabletEventProc* = proc(self: QTabWidget, event: gen_qevent_types.QTabletEvent): void {.raises: [], gcsafe.}
+type QTabWidgetactionEventProc* = proc(self: QTabWidget, event: gen_qevent_types.QActionEvent): void {.raises: [], gcsafe.}
+type QTabWidgetdragEnterEventProc* = proc(self: QTabWidget, event: gen_qevent_types.QDragEnterEvent): void {.raises: [], gcsafe.}
+type QTabWidgetdragMoveEventProc* = proc(self: QTabWidget, event: gen_qevent_types.QDragMoveEvent): void {.raises: [], gcsafe.}
+type QTabWidgetdragLeaveEventProc* = proc(self: QTabWidget, event: gen_qevent_types.QDragLeaveEvent): void {.raises: [], gcsafe.}
+type QTabWidgetdropEventProc* = proc(self: QTabWidget, event: gen_qevent_types.QDropEvent): void {.raises: [], gcsafe.}
+type QTabWidgethideEventProc* = proc(self: QTabWidget, event: gen_qevent_types.QHideEvent): void {.raises: [], gcsafe.}
+type QTabWidgetnativeEventProc* = proc(self: QTabWidget, eventType: openArray[byte], message: pointer, resultVal: ptr clong): bool {.raises: [], gcsafe.}
+type QTabWidgetmetricProc* = proc(self: QTabWidget, param1: cint): cint {.raises: [], gcsafe.}
+type QTabWidgetinitPainterProc* = proc(self: QTabWidget, painter: gen_qpainter_types.QPainter): void {.raises: [], gcsafe.}
+type QTabWidgetredirectedProc* = proc(self: QTabWidget, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.raises: [], gcsafe.}
+type QTabWidgetsharedPainterProc* = proc(self: QTabWidget): gen_qpainter_types.QPainter {.raises: [], gcsafe.}
+type QTabWidgetinputMethodEventProc* = proc(self: QTabWidget, param1: gen_qevent_types.QInputMethodEvent): void {.raises: [], gcsafe.}
+type QTabWidgetinputMethodQueryProc* = proc(self: QTabWidget, param1: cint): gen_qvariant_types.QVariant {.raises: [], gcsafe.}
+type QTabWidgetfocusNextPrevChildProc* = proc(self: QTabWidget, next: bool): bool {.raises: [], gcsafe.}
+type QTabWidgeteventFilterProc* = proc(self: QTabWidget, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
+type QTabWidgettimerEventProc* = proc(self: QTabWidget, event: gen_qcoreevent_types.QTimerEvent): void {.raises: [], gcsafe.}
+type QTabWidgetchildEventProc* = proc(self: QTabWidget, event: gen_qcoreevent_types.QChildEvent): void {.raises: [], gcsafe.}
+type QTabWidgetcustomEventProc* = proc(self: QTabWidget, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
+type QTabWidgetconnectNotifyProc* = proc(self: QTabWidget, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+type QTabWidgetdisconnectNotifyProc* = proc(self: QTabWidget, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+type QTabWidgetVTable* = object
+  vtbl: cQTabWidgetVTable
+  metaObject*: QTabWidgetmetaObjectProc
+  metacast*: QTabWidgetmetacastProc
+  metacall*: QTabWidgetmetacallProc
+  sizeHint*: QTabWidgetsizeHintProc
+  minimumSizeHint*: QTabWidgetminimumSizeHintProc
+  heightForWidth*: QTabWidgetheightForWidthProc
+  hasHeightForWidth*: QTabWidgethasHeightForWidthProc
+  tabInserted*: QTabWidgettabInsertedProc
+  tabRemoved*: QTabWidgettabRemovedProc
+  showEvent*: QTabWidgetshowEventProc
+  resizeEvent*: QTabWidgetresizeEventProc
+  keyPressEvent*: QTabWidgetkeyPressEventProc
+  paintEvent*: QTabWidgetpaintEventProc
+  changeEvent*: QTabWidgetchangeEventProc
+  event*: QTabWidgeteventProc
+  devType*: QTabWidgetdevTypeProc
+  setVisible*: QTabWidgetsetVisibleProc
+  paintEngine*: QTabWidgetpaintEngineProc
+  mousePressEvent*: QTabWidgetmousePressEventProc
+  mouseReleaseEvent*: QTabWidgetmouseReleaseEventProc
+  mouseDoubleClickEvent*: QTabWidgetmouseDoubleClickEventProc
+  mouseMoveEvent*: QTabWidgetmouseMoveEventProc
+  wheelEvent*: QTabWidgetwheelEventProc
+  keyReleaseEvent*: QTabWidgetkeyReleaseEventProc
+  focusInEvent*: QTabWidgetfocusInEventProc
+  focusOutEvent*: QTabWidgetfocusOutEventProc
+  enterEvent*: QTabWidgetenterEventProc
+  leaveEvent*: QTabWidgetleaveEventProc
+  moveEvent*: QTabWidgetmoveEventProc
+  closeEvent*: QTabWidgetcloseEventProc
+  contextMenuEvent*: QTabWidgetcontextMenuEventProc
+  tabletEvent*: QTabWidgettabletEventProc
+  actionEvent*: QTabWidgetactionEventProc
+  dragEnterEvent*: QTabWidgetdragEnterEventProc
+  dragMoveEvent*: QTabWidgetdragMoveEventProc
+  dragLeaveEvent*: QTabWidgetdragLeaveEventProc
+  dropEvent*: QTabWidgetdropEventProc
+  hideEvent*: QTabWidgethideEventProc
+  nativeEvent*: QTabWidgetnativeEventProc
+  metric*: QTabWidgetmetricProc
+  initPainter*: QTabWidgetinitPainterProc
+  redirected*: QTabWidgetredirectedProc
+  sharedPainter*: QTabWidgetsharedPainterProc
+  inputMethodEvent*: QTabWidgetinputMethodEventProc
+  inputMethodQuery*: QTabWidgetinputMethodQueryProc
+  focusNextPrevChild*: QTabWidgetfocusNextPrevChildProc
+  eventFilter*: QTabWidgeteventFilterProc
+  timerEvent*: QTabWidgettimerEventProc
+  childEvent*: QTabWidgetchildEventProc
+  customEvent*: QTabWidgetcustomEventProc
+  connectNotify*: QTabWidgetconnectNotifyProc
+  disconnectNotify*: QTabWidgetdisconnectNotifyProc
+
+proc QTabWidgetmetaObject*(self: gen_qtabwidget_types.QTabWidget): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQTabWidget_virtualbase_metaObject(self.h))
+
+proc QTabWidgetmetacast*(self: gen_qtabwidget_types.QTabWidget, param1: cstring): pointer =
+  fcQTabWidget_virtualbase_metacast(self.h, param1)
+
+proc QTabWidgetmetacall*(self: gen_qtabwidget_types.QTabWidget, param1: cint, param2: cint, param3: pointer): cint =
+  fcQTabWidget_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+proc QTabWidgetsizeHint*(self: gen_qtabwidget_types.QTabWidget): gen_qsize_types.QSize =
+  gen_qsize_types.QSize(h: fcQTabWidget_virtualbase_sizeHint(self.h))
+
+proc QTabWidgetminimumSizeHint*(self: gen_qtabwidget_types.QTabWidget): gen_qsize_types.QSize =
+  gen_qsize_types.QSize(h: fcQTabWidget_virtualbase_minimumSizeHint(self.h))
+
+proc QTabWidgetheightForWidth*(self: gen_qtabwidget_types.QTabWidget, width: cint): cint =
+  fcQTabWidget_virtualbase_heightForWidth(self.h, width)
+
+proc QTabWidgethasHeightForWidth*(self: gen_qtabwidget_types.QTabWidget): bool =
+  fcQTabWidget_virtualbase_hasHeightForWidth(self.h)
+
+proc QTabWidgettabInserted*(self: gen_qtabwidget_types.QTabWidget, index: cint): void =
+  fcQTabWidget_virtualbase_tabInserted(self.h, index)
+
+proc QTabWidgettabRemoved*(self: gen_qtabwidget_types.QTabWidget, index: cint): void =
+  fcQTabWidget_virtualbase_tabRemoved(self.h, index)
+
+proc QTabWidgetshowEvent*(self: gen_qtabwidget_types.QTabWidget, param1: gen_qevent_types.QShowEvent): void =
+  fcQTabWidget_virtualbase_showEvent(self.h, param1.h)
+
+proc QTabWidgetresizeEvent*(self: gen_qtabwidget_types.QTabWidget, param1: gen_qevent_types.QResizeEvent): void =
+  fcQTabWidget_virtualbase_resizeEvent(self.h, param1.h)
+
+proc QTabWidgetkeyPressEvent*(self: gen_qtabwidget_types.QTabWidget, param1: gen_qevent_types.QKeyEvent): void =
+  fcQTabWidget_virtualbase_keyPressEvent(self.h, param1.h)
+
+proc QTabWidgetpaintEvent*(self: gen_qtabwidget_types.QTabWidget, param1: gen_qevent_types.QPaintEvent): void =
+  fcQTabWidget_virtualbase_paintEvent(self.h, param1.h)
+
+proc QTabWidgetchangeEvent*(self: gen_qtabwidget_types.QTabWidget, param1: gen_qcoreevent_types.QEvent): void =
+  fcQTabWidget_virtualbase_changeEvent(self.h, param1.h)
+
+proc QTabWidgetevent*(self: gen_qtabwidget_types.QTabWidget, param1: gen_qcoreevent_types.QEvent): bool =
+  fcQTabWidget_virtualbase_event(self.h, param1.h)
+
+proc QTabWidgetdevType*(self: gen_qtabwidget_types.QTabWidget): cint =
+  fcQTabWidget_virtualbase_devType(self.h)
+
+proc QTabWidgetsetVisible*(self: gen_qtabwidget_types.QTabWidget, visible: bool): void =
+  fcQTabWidget_virtualbase_setVisible(self.h, visible)
+
+proc QTabWidgetpaintEngine*(self: gen_qtabwidget_types.QTabWidget): gen_qpaintengine_types.QPaintEngine =
+  gen_qpaintengine_types.QPaintEngine(h: fcQTabWidget_virtualbase_paintEngine(self.h))
+
+proc QTabWidgetmousePressEvent*(self: gen_qtabwidget_types.QTabWidget, event: gen_qevent_types.QMouseEvent): void =
+  fcQTabWidget_virtualbase_mousePressEvent(self.h, event.h)
+
+proc QTabWidgetmouseReleaseEvent*(self: gen_qtabwidget_types.QTabWidget, event: gen_qevent_types.QMouseEvent): void =
+  fcQTabWidget_virtualbase_mouseReleaseEvent(self.h, event.h)
+
+proc QTabWidgetmouseDoubleClickEvent*(self: gen_qtabwidget_types.QTabWidget, event: gen_qevent_types.QMouseEvent): void =
+  fcQTabWidget_virtualbase_mouseDoubleClickEvent(self.h, event.h)
+
+proc QTabWidgetmouseMoveEvent*(self: gen_qtabwidget_types.QTabWidget, event: gen_qevent_types.QMouseEvent): void =
+  fcQTabWidget_virtualbase_mouseMoveEvent(self.h, event.h)
+
+proc QTabWidgetwheelEvent*(self: gen_qtabwidget_types.QTabWidget, event: gen_qevent_types.QWheelEvent): void =
+  fcQTabWidget_virtualbase_wheelEvent(self.h, event.h)
+
+proc QTabWidgetkeyReleaseEvent*(self: gen_qtabwidget_types.QTabWidget, event: gen_qevent_types.QKeyEvent): void =
+  fcQTabWidget_virtualbase_keyReleaseEvent(self.h, event.h)
+
+proc QTabWidgetfocusInEvent*(self: gen_qtabwidget_types.QTabWidget, event: gen_qevent_types.QFocusEvent): void =
+  fcQTabWidget_virtualbase_focusInEvent(self.h, event.h)
+
+proc QTabWidgetfocusOutEvent*(self: gen_qtabwidget_types.QTabWidget, event: gen_qevent_types.QFocusEvent): void =
+  fcQTabWidget_virtualbase_focusOutEvent(self.h, event.h)
+
+proc QTabWidgetenterEvent*(self: gen_qtabwidget_types.QTabWidget, event: gen_qcoreevent_types.QEvent): void =
+  fcQTabWidget_virtualbase_enterEvent(self.h, event.h)
+
+proc QTabWidgetleaveEvent*(self: gen_qtabwidget_types.QTabWidget, event: gen_qcoreevent_types.QEvent): void =
+  fcQTabWidget_virtualbase_leaveEvent(self.h, event.h)
+
+proc QTabWidgetmoveEvent*(self: gen_qtabwidget_types.QTabWidget, event: gen_qevent_types.QMoveEvent): void =
+  fcQTabWidget_virtualbase_moveEvent(self.h, event.h)
+
+proc QTabWidgetcloseEvent*(self: gen_qtabwidget_types.QTabWidget, event: gen_qevent_types.QCloseEvent): void =
+  fcQTabWidget_virtualbase_closeEvent(self.h, event.h)
+
+proc QTabWidgetcontextMenuEvent*(self: gen_qtabwidget_types.QTabWidget, event: gen_qevent_types.QContextMenuEvent): void =
+  fcQTabWidget_virtualbase_contextMenuEvent(self.h, event.h)
+
+proc QTabWidgettabletEvent*(self: gen_qtabwidget_types.QTabWidget, event: gen_qevent_types.QTabletEvent): void =
+  fcQTabWidget_virtualbase_tabletEvent(self.h, event.h)
+
+proc QTabWidgetactionEvent*(self: gen_qtabwidget_types.QTabWidget, event: gen_qevent_types.QActionEvent): void =
+  fcQTabWidget_virtualbase_actionEvent(self.h, event.h)
+
+proc QTabWidgetdragEnterEvent*(self: gen_qtabwidget_types.QTabWidget, event: gen_qevent_types.QDragEnterEvent): void =
+  fcQTabWidget_virtualbase_dragEnterEvent(self.h, event.h)
+
+proc QTabWidgetdragMoveEvent*(self: gen_qtabwidget_types.QTabWidget, event: gen_qevent_types.QDragMoveEvent): void =
+  fcQTabWidget_virtualbase_dragMoveEvent(self.h, event.h)
+
+proc QTabWidgetdragLeaveEvent*(self: gen_qtabwidget_types.QTabWidget, event: gen_qevent_types.QDragLeaveEvent): void =
+  fcQTabWidget_virtualbase_dragLeaveEvent(self.h, event.h)
+
+proc QTabWidgetdropEvent*(self: gen_qtabwidget_types.QTabWidget, event: gen_qevent_types.QDropEvent): void =
+  fcQTabWidget_virtualbase_dropEvent(self.h, event.h)
+
+proc QTabWidgethideEvent*(self: gen_qtabwidget_types.QTabWidget, event: gen_qevent_types.QHideEvent): void =
+  fcQTabWidget_virtualbase_hideEvent(self.h, event.h)
+
+proc QTabWidgetnativeEvent*(self: gen_qtabwidget_types.QTabWidget, eventType: openArray[byte], message: pointer, resultVal: ptr clong): bool =
+  fcQTabWidget_virtualbase_nativeEvent(self.h, struct_seaqt_string(data: if len(eventType) > 0: addr eventType[0] else: nil, len: csize_t(len(eventType))), message, resultVal)
+
+proc QTabWidgetmetric*(self: gen_qtabwidget_types.QTabWidget, param1: cint): cint =
+  fcQTabWidget_virtualbase_metric(self.h, cint(param1))
+
+proc QTabWidgetinitPainter*(self: gen_qtabwidget_types.QTabWidget, painter: gen_qpainter_types.QPainter): void =
+  fcQTabWidget_virtualbase_initPainter(self.h, painter.h)
+
+proc QTabWidgetredirected*(self: gen_qtabwidget_types.QTabWidget, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice =
+  gen_qpaintdevice_types.QPaintDevice(h: fcQTabWidget_virtualbase_redirected(self.h, offset.h))
+
+proc QTabWidgetsharedPainter*(self: gen_qtabwidget_types.QTabWidget): gen_qpainter_types.QPainter =
+  gen_qpainter_types.QPainter(h: fcQTabWidget_virtualbase_sharedPainter(self.h))
+
+proc QTabWidgetinputMethodEvent*(self: gen_qtabwidget_types.QTabWidget, param1: gen_qevent_types.QInputMethodEvent): void =
+  fcQTabWidget_virtualbase_inputMethodEvent(self.h, param1.h)
+
+proc QTabWidgetinputMethodQuery*(self: gen_qtabwidget_types.QTabWidget, param1: cint): gen_qvariant_types.QVariant =
+  gen_qvariant_types.QVariant(h: fcQTabWidget_virtualbase_inputMethodQuery(self.h, cint(param1)))
+
+proc QTabWidgetfocusNextPrevChild*(self: gen_qtabwidget_types.QTabWidget, next: bool): bool =
+  fcQTabWidget_virtualbase_focusNextPrevChild(self.h, next)
+
+proc QTabWidgeteventFilter*(self: gen_qtabwidget_types.QTabWidget, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
+  fcQTabWidget_virtualbase_eventFilter(self.h, watched.h, event.h)
+
+proc QTabWidgettimerEvent*(self: gen_qtabwidget_types.QTabWidget, event: gen_qcoreevent_types.QTimerEvent): void =
+  fcQTabWidget_virtualbase_timerEvent(self.h, event.h)
+
+proc QTabWidgetchildEvent*(self: gen_qtabwidget_types.QTabWidget, event: gen_qcoreevent_types.QChildEvent): void =
+  fcQTabWidget_virtualbase_childEvent(self.h, event.h)
+
+proc QTabWidgetcustomEvent*(self: gen_qtabwidget_types.QTabWidget, event: gen_qcoreevent_types.QEvent): void =
+  fcQTabWidget_virtualbase_customEvent(self.h, event.h)
+
+proc QTabWidgetconnectNotify*(self: gen_qtabwidget_types.QTabWidget, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQTabWidget_virtualbase_connectNotify(self.h, signal.h)
+
+proc QTabWidgetdisconnectNotify*(self: gen_qtabwidget_types.QTabWidget, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQTabWidget_virtualbase_disconnectNotify(self.h, signal.h)
+
+
+proc fcQTabWidget_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QTabWidgetVTable](fcQTabWidget_vdata(self)[])
+  let self = QTabWidget(h: self)
+  var virtualReturn = vtbl[].metaObject(self)
+  virtualReturn.h
+
+proc fcQTabWidget_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+  let vtbl = cast[ptr QTabWidgetVTable](fcQTabWidget_vdata(self)[])
+  let self = QTabWidget(h: self)
+  let slotval1 = (param1)
+  var virtualReturn = vtbl[].metacast(self, slotval1)
+  virtualReturn
+
+proc fcQTabWidget_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QTabWidgetVTable](fcQTabWidget_vdata(self)[])
+  let self = QTabWidget(h: self)
+  let slotval1 = cint(param1)
+  let slotval2 = param2
+  let slotval3 = param3
+  var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
+  virtualReturn
+
+proc fcQTabWidget_vtable_callback_sizeHint(self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QTabWidgetVTable](fcQTabWidget_vdata(self)[])
+  let self = QTabWidget(h: self)
+  var virtualReturn = vtbl[].sizeHint(self)
+  virtualReturn.h
+
+proc fcQTabWidget_vtable_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QTabWidgetVTable](fcQTabWidget_vdata(self)[])
+  let self = QTabWidget(h: self)
+  var virtualReturn = vtbl[].minimumSizeHint(self)
+  virtualReturn.h
+
+proc fcQTabWidget_vtable_callback_heightForWidth(self: pointer, width: cint): cint {.cdecl.} =
+  let vtbl = cast[ptr QTabWidgetVTable](fcQTabWidget_vdata(self)[])
+  let self = QTabWidget(h: self)
+  let slotval1 = width
+  var virtualReturn = vtbl[].heightForWidth(self, slotval1)
+  virtualReturn
+
+proc fcQTabWidget_vtable_callback_hasHeightForWidth(self: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QTabWidgetVTable](fcQTabWidget_vdata(self)[])
+  let self = QTabWidget(h: self)
+  var virtualReturn = vtbl[].hasHeightForWidth(self)
+  virtualReturn
+
+proc fcQTabWidget_vtable_callback_tabInserted(self: pointer, index: cint): void {.cdecl.} =
+  let vtbl = cast[ptr QTabWidgetVTable](fcQTabWidget_vdata(self)[])
+  let self = QTabWidget(h: self)
+  let slotval1 = index
+  vtbl[].tabInserted(self, slotval1)
+
+proc fcQTabWidget_vtable_callback_tabRemoved(self: pointer, index: cint): void {.cdecl.} =
+  let vtbl = cast[ptr QTabWidgetVTable](fcQTabWidget_vdata(self)[])
+  let self = QTabWidget(h: self)
+  let slotval1 = index
+  vtbl[].tabRemoved(self, slotval1)
+
+proc fcQTabWidget_vtable_callback_showEvent(self: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QTabWidgetVTable](fcQTabWidget_vdata(self)[])
+  let self = QTabWidget(h: self)
+  let slotval1 = gen_qevent_types.QShowEvent(h: param1)
+  vtbl[].showEvent(self, slotval1)
+
+proc fcQTabWidget_vtable_callback_resizeEvent(self: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QTabWidgetVTable](fcQTabWidget_vdata(self)[])
+  let self = QTabWidget(h: self)
+  let slotval1 = gen_qevent_types.QResizeEvent(h: param1)
+  vtbl[].resizeEvent(self, slotval1)
+
+proc fcQTabWidget_vtable_callback_keyPressEvent(self: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QTabWidgetVTable](fcQTabWidget_vdata(self)[])
+  let self = QTabWidget(h: self)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: param1)
+  vtbl[].keyPressEvent(self, slotval1)
+
+proc fcQTabWidget_vtable_callback_paintEvent(self: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QTabWidgetVTable](fcQTabWidget_vdata(self)[])
+  let self = QTabWidget(h: self)
+  let slotval1 = gen_qevent_types.QPaintEvent(h: param1)
+  vtbl[].paintEvent(self, slotval1)
+
+proc fcQTabWidget_vtable_callback_changeEvent(self: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QTabWidgetVTable](fcQTabWidget_vdata(self)[])
+  let self = QTabWidget(h: self)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: param1)
+  vtbl[].changeEvent(self, slotval1)
+
+proc fcQTabWidget_vtable_callback_event(self: pointer, param1: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QTabWidgetVTable](fcQTabWidget_vdata(self)[])
+  let self = QTabWidget(h: self)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: param1)
+  var virtualReturn = vtbl[].event(self, slotval1)
+  virtualReturn
+
+proc fcQTabWidget_vtable_callback_devType(self: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QTabWidgetVTable](fcQTabWidget_vdata(self)[])
+  let self = QTabWidget(h: self)
+  var virtualReturn = vtbl[].devType(self)
+  virtualReturn
+
+proc fcQTabWidget_vtable_callback_setVisible(self: pointer, visible: bool): void {.cdecl.} =
+  let vtbl = cast[ptr QTabWidgetVTable](fcQTabWidget_vdata(self)[])
+  let self = QTabWidget(h: self)
+  let slotval1 = visible
+  vtbl[].setVisible(self, slotval1)
+
+proc fcQTabWidget_vtable_callback_paintEngine(self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QTabWidgetVTable](fcQTabWidget_vdata(self)[])
+  let self = QTabWidget(h: self)
+  var virtualReturn = vtbl[].paintEngine(self)
+  virtualReturn.h
+
+proc fcQTabWidget_vtable_callback_mousePressEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QTabWidgetVTable](fcQTabWidget_vdata(self)[])
+  let self = QTabWidget(h: self)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  vtbl[].mousePressEvent(self, slotval1)
+
+proc fcQTabWidget_vtable_callback_mouseReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QTabWidgetVTable](fcQTabWidget_vdata(self)[])
+  let self = QTabWidget(h: self)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  vtbl[].mouseReleaseEvent(self, slotval1)
+
+proc fcQTabWidget_vtable_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QTabWidgetVTable](fcQTabWidget_vdata(self)[])
+  let self = QTabWidget(h: self)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  vtbl[].mouseDoubleClickEvent(self, slotval1)
+
+proc fcQTabWidget_vtable_callback_mouseMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QTabWidgetVTable](fcQTabWidget_vdata(self)[])
+  let self = QTabWidget(h: self)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  vtbl[].mouseMoveEvent(self, slotval1)
+
+proc fcQTabWidget_vtable_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QTabWidgetVTable](fcQTabWidget_vdata(self)[])
+  let self = QTabWidget(h: self)
+  let slotval1 = gen_qevent_types.QWheelEvent(h: event)
+  vtbl[].wheelEvent(self, slotval1)
+
+proc fcQTabWidget_vtable_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QTabWidgetVTable](fcQTabWidget_vdata(self)[])
+  let self = QTabWidget(h: self)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  vtbl[].keyReleaseEvent(self, slotval1)
+
+proc fcQTabWidget_vtable_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QTabWidgetVTable](fcQTabWidget_vdata(self)[])
+  let self = QTabWidget(h: self)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  vtbl[].focusInEvent(self, slotval1)
+
+proc fcQTabWidget_vtable_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QTabWidgetVTable](fcQTabWidget_vdata(self)[])
+  let self = QTabWidget(h: self)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  vtbl[].focusOutEvent(self, slotval1)
+
+proc fcQTabWidget_vtable_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QTabWidgetVTable](fcQTabWidget_vdata(self)[])
+  let self = QTabWidget(h: self)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  vtbl[].enterEvent(self, slotval1)
+
+proc fcQTabWidget_vtable_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QTabWidgetVTable](fcQTabWidget_vdata(self)[])
+  let self = QTabWidget(h: self)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  vtbl[].leaveEvent(self, slotval1)
+
+proc fcQTabWidget_vtable_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QTabWidgetVTable](fcQTabWidget_vdata(self)[])
+  let self = QTabWidget(h: self)
+  let slotval1 = gen_qevent_types.QMoveEvent(h: event)
+  vtbl[].moveEvent(self, slotval1)
+
+proc fcQTabWidget_vtable_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QTabWidgetVTable](fcQTabWidget_vdata(self)[])
+  let self = QTabWidget(h: self)
+  let slotval1 = gen_qevent_types.QCloseEvent(h: event)
+  vtbl[].closeEvent(self, slotval1)
+
+proc fcQTabWidget_vtable_callback_contextMenuEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QTabWidgetVTable](fcQTabWidget_vdata(self)[])
+  let self = QTabWidget(h: self)
+  let slotval1 = gen_qevent_types.QContextMenuEvent(h: event)
+  vtbl[].contextMenuEvent(self, slotval1)
+
+proc fcQTabWidget_vtable_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QTabWidgetVTable](fcQTabWidget_vdata(self)[])
+  let self = QTabWidget(h: self)
+  let slotval1 = gen_qevent_types.QTabletEvent(h: event)
+  vtbl[].tabletEvent(self, slotval1)
+
+proc fcQTabWidget_vtable_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QTabWidgetVTable](fcQTabWidget_vdata(self)[])
+  let self = QTabWidget(h: self)
+  let slotval1 = gen_qevent_types.QActionEvent(h: event)
+  vtbl[].actionEvent(self, slotval1)
+
+proc fcQTabWidget_vtable_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QTabWidgetVTable](fcQTabWidget_vdata(self)[])
+  let self = QTabWidget(h: self)
+  let slotval1 = gen_qevent_types.QDragEnterEvent(h: event)
+  vtbl[].dragEnterEvent(self, slotval1)
+
+proc fcQTabWidget_vtable_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QTabWidgetVTable](fcQTabWidget_vdata(self)[])
+  let self = QTabWidget(h: self)
+  let slotval1 = gen_qevent_types.QDragMoveEvent(h: event)
+  vtbl[].dragMoveEvent(self, slotval1)
+
+proc fcQTabWidget_vtable_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QTabWidgetVTable](fcQTabWidget_vdata(self)[])
+  let self = QTabWidget(h: self)
+  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event)
+  vtbl[].dragLeaveEvent(self, slotval1)
+
+proc fcQTabWidget_vtable_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QTabWidgetVTable](fcQTabWidget_vdata(self)[])
+  let self = QTabWidget(h: self)
+  let slotval1 = gen_qevent_types.QDropEvent(h: event)
+  vtbl[].dropEvent(self, slotval1)
+
+proc fcQTabWidget_vtable_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QTabWidgetVTable](fcQTabWidget_vdata(self)[])
+  let self = QTabWidget(h: self)
+  let slotval1 = gen_qevent_types.QHideEvent(h: event)
+  vtbl[].hideEvent(self, slotval1)
+
+proc fcQTabWidget_vtable_callback_nativeEvent(self: pointer, eventType: struct_seaqt_string, message: pointer, resultVal: ptr clong): bool {.cdecl.} =
+  let vtbl = cast[ptr QTabWidgetVTable](fcQTabWidget_vdata(self)[])
+  let self = QTabWidget(h: self)
+  var veventType_bytearray = eventType
+  var veventTypex_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](veventType_bytearray.data), 0, int(veventType_bytearray.len)-1))
+  c_free(veventType_bytearray.data)
+  let slotval1 = veventTypex_ret
+  let slotval2 = message
+  let slotval3 = resultVal
+  var virtualReturn = vtbl[].nativeEvent(self, slotval1, slotval2, slotval3)
+  virtualReturn
+
+proc fcQTabWidget_vtable_callback_metric(self: pointer, param1: cint): cint {.cdecl.} =
+  let vtbl = cast[ptr QTabWidgetVTable](fcQTabWidget_vdata(self)[])
+  let self = QTabWidget(h: self)
+  let slotval1 = cint(param1)
+  var virtualReturn = vtbl[].metric(self, slotval1)
+  virtualReturn
+
+proc fcQTabWidget_vtable_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QTabWidgetVTable](fcQTabWidget_vdata(self)[])
+  let self = QTabWidget(h: self)
+  let slotval1 = gen_qpainter_types.QPainter(h: painter)
+  vtbl[].initPainter(self, slotval1)
+
+proc fcQTabWidget_vtable_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QTabWidgetVTable](fcQTabWidget_vdata(self)[])
+  let self = QTabWidget(h: self)
+  let slotval1 = gen_qpoint_types.QPoint(h: offset)
+  var virtualReturn = vtbl[].redirected(self, slotval1)
+  virtualReturn.h
+
+proc fcQTabWidget_vtable_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QTabWidgetVTable](fcQTabWidget_vdata(self)[])
+  let self = QTabWidget(h: self)
+  var virtualReturn = vtbl[].sharedPainter(self)
+  virtualReturn.h
+
+proc fcQTabWidget_vtable_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QTabWidgetVTable](fcQTabWidget_vdata(self)[])
+  let self = QTabWidget(h: self)
+  let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1)
+  vtbl[].inputMethodEvent(self, slotval1)
+
+proc fcQTabWidget_vtable_callback_inputMethodQuery(self: pointer, param1: cint): pointer {.cdecl.} =
+  let vtbl = cast[ptr QTabWidgetVTable](fcQTabWidget_vdata(self)[])
+  let self = QTabWidget(h: self)
+  let slotval1 = cint(param1)
+  var virtualReturn = vtbl[].inputMethodQuery(self, slotval1)
+  virtualReturn.h
+
+proc fcQTabWidget_vtable_callback_focusNextPrevChild(self: pointer, next: bool): bool {.cdecl.} =
+  let vtbl = cast[ptr QTabWidgetVTable](fcQTabWidget_vdata(self)[])
+  let self = QTabWidget(h: self)
+  let slotval1 = next
+  var virtualReturn = vtbl[].focusNextPrevChild(self, slotval1)
+  virtualReturn
+
+proc fcQTabWidget_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QTabWidgetVTable](fcQTabWidget_vdata(self)[])
+  let self = QTabWidget(h: self)
+  let slotval1 = gen_qobject_types.QObject(h: watched)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
+  virtualReturn
+
+proc fcQTabWidget_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QTabWidgetVTable](fcQTabWidget_vdata(self)[])
+  let self = QTabWidget(h: self)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  vtbl[].timerEvent(self, slotval1)
+
+proc fcQTabWidget_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QTabWidgetVTable](fcQTabWidget_vdata(self)[])
+  let self = QTabWidget(h: self)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  vtbl[].childEvent(self, slotval1)
+
+proc fcQTabWidget_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QTabWidgetVTable](fcQTabWidget_vdata(self)[])
+  let self = QTabWidget(h: self)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  vtbl[].customEvent(self, slotval1)
+
+proc fcQTabWidget_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QTabWidgetVTable](fcQTabWidget_vdata(self)[])
+  let self = QTabWidget(h: self)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  vtbl[].connectNotify(self, slotval1)
+
+proc fcQTabWidget_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QTabWidgetVTable](fcQTabWidget_vdata(self)[])
+  let self = QTabWidget(h: self)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  vtbl[].disconnectNotify(self, slotval1)
+
+type VirtualQTabWidget* {.inheritable.} = ref object of QTabWidget
+  vtbl*: cQTabWidgetVTable
+
+method metaObject*(self: VirtualQTabWidget): gen_qobjectdefs_types.QMetaObject {.base.} =
+  QTabWidgetmetaObject(self[])
+method metacast*(self: VirtualQTabWidget, param1: cstring): pointer {.base.} =
+  QTabWidgetmetacast(self[], param1)
+method metacall*(self: VirtualQTabWidget, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QTabWidgetmetacall(self[], param1, param2, param3)
+method sizeHint*(self: VirtualQTabWidget): gen_qsize_types.QSize {.base.} =
+  QTabWidgetsizeHint(self[])
+method minimumSizeHint*(self: VirtualQTabWidget): gen_qsize_types.QSize {.base.} =
+  QTabWidgetminimumSizeHint(self[])
+method heightForWidth*(self: VirtualQTabWidget, width: cint): cint {.base.} =
+  QTabWidgetheightForWidth(self[], width)
+method hasHeightForWidth*(self: VirtualQTabWidget): bool {.base.} =
+  QTabWidgethasHeightForWidth(self[])
+method tabInserted*(self: VirtualQTabWidget, index: cint): void {.base.} =
+  QTabWidgettabInserted(self[], index)
+method tabRemoved*(self: VirtualQTabWidget, index: cint): void {.base.} =
+  QTabWidgettabRemoved(self[], index)
+method showEvent*(self: VirtualQTabWidget, param1: gen_qevent_types.QShowEvent): void {.base.} =
+  QTabWidgetshowEvent(self[], param1)
+method resizeEvent*(self: VirtualQTabWidget, param1: gen_qevent_types.QResizeEvent): void {.base.} =
+  QTabWidgetresizeEvent(self[], param1)
+method keyPressEvent*(self: VirtualQTabWidget, param1: gen_qevent_types.QKeyEvent): void {.base.} =
+  QTabWidgetkeyPressEvent(self[], param1)
+method paintEvent*(self: VirtualQTabWidget, param1: gen_qevent_types.QPaintEvent): void {.base.} =
+  QTabWidgetpaintEvent(self[], param1)
+method changeEvent*(self: VirtualQTabWidget, param1: gen_qcoreevent_types.QEvent): void {.base.} =
+  QTabWidgetchangeEvent(self[], param1)
+method event*(self: VirtualQTabWidget, param1: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QTabWidgetevent(self[], param1)
+method devType*(self: VirtualQTabWidget): cint {.base.} =
+  QTabWidgetdevType(self[])
+method setVisible*(self: VirtualQTabWidget, visible: bool): void {.base.} =
+  QTabWidgetsetVisible(self[], visible)
+method paintEngine*(self: VirtualQTabWidget): gen_qpaintengine_types.QPaintEngine {.base.} =
+  QTabWidgetpaintEngine(self[])
+method mousePressEvent*(self: VirtualQTabWidget, event: gen_qevent_types.QMouseEvent): void {.base.} =
+  QTabWidgetmousePressEvent(self[], event)
+method mouseReleaseEvent*(self: VirtualQTabWidget, event: gen_qevent_types.QMouseEvent): void {.base.} =
+  QTabWidgetmouseReleaseEvent(self[], event)
+method mouseDoubleClickEvent*(self: VirtualQTabWidget, event: gen_qevent_types.QMouseEvent): void {.base.} =
+  QTabWidgetmouseDoubleClickEvent(self[], event)
+method mouseMoveEvent*(self: VirtualQTabWidget, event: gen_qevent_types.QMouseEvent): void {.base.} =
+  QTabWidgetmouseMoveEvent(self[], event)
+method wheelEvent*(self: VirtualQTabWidget, event: gen_qevent_types.QWheelEvent): void {.base.} =
+  QTabWidgetwheelEvent(self[], event)
+method keyReleaseEvent*(self: VirtualQTabWidget, event: gen_qevent_types.QKeyEvent): void {.base.} =
+  QTabWidgetkeyReleaseEvent(self[], event)
+method focusInEvent*(self: VirtualQTabWidget, event: gen_qevent_types.QFocusEvent): void {.base.} =
+  QTabWidgetfocusInEvent(self[], event)
+method focusOutEvent*(self: VirtualQTabWidget, event: gen_qevent_types.QFocusEvent): void {.base.} =
+  QTabWidgetfocusOutEvent(self[], event)
+method enterEvent*(self: VirtualQTabWidget, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QTabWidgetenterEvent(self[], event)
+method leaveEvent*(self: VirtualQTabWidget, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QTabWidgetleaveEvent(self[], event)
+method moveEvent*(self: VirtualQTabWidget, event: gen_qevent_types.QMoveEvent): void {.base.} =
+  QTabWidgetmoveEvent(self[], event)
+method closeEvent*(self: VirtualQTabWidget, event: gen_qevent_types.QCloseEvent): void {.base.} =
+  QTabWidgetcloseEvent(self[], event)
+method contextMenuEvent*(self: VirtualQTabWidget, event: gen_qevent_types.QContextMenuEvent): void {.base.} =
+  QTabWidgetcontextMenuEvent(self[], event)
+method tabletEvent*(self: VirtualQTabWidget, event: gen_qevent_types.QTabletEvent): void {.base.} =
+  QTabWidgettabletEvent(self[], event)
+method actionEvent*(self: VirtualQTabWidget, event: gen_qevent_types.QActionEvent): void {.base.} =
+  QTabWidgetactionEvent(self[], event)
+method dragEnterEvent*(self: VirtualQTabWidget, event: gen_qevent_types.QDragEnterEvent): void {.base.} =
+  QTabWidgetdragEnterEvent(self[], event)
+method dragMoveEvent*(self: VirtualQTabWidget, event: gen_qevent_types.QDragMoveEvent): void {.base.} =
+  QTabWidgetdragMoveEvent(self[], event)
+method dragLeaveEvent*(self: VirtualQTabWidget, event: gen_qevent_types.QDragLeaveEvent): void {.base.} =
+  QTabWidgetdragLeaveEvent(self[], event)
+method dropEvent*(self: VirtualQTabWidget, event: gen_qevent_types.QDropEvent): void {.base.} =
+  QTabWidgetdropEvent(self[], event)
+method hideEvent*(self: VirtualQTabWidget, event: gen_qevent_types.QHideEvent): void {.base.} =
+  QTabWidgethideEvent(self[], event)
+method nativeEvent*(self: VirtualQTabWidget, eventType: openArray[byte], message: pointer, resultVal: ptr clong): bool {.base.} =
+  QTabWidgetnativeEvent(self[], eventType, message, resultVal)
+method metric*(self: VirtualQTabWidget, param1: cint): cint {.base.} =
+  QTabWidgetmetric(self[], param1)
+method initPainter*(self: VirtualQTabWidget, painter: gen_qpainter_types.QPainter): void {.base.} =
+  QTabWidgetinitPainter(self[], painter)
+method redirected*(self: VirtualQTabWidget, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.base.} =
+  QTabWidgetredirected(self[], offset)
+method sharedPainter*(self: VirtualQTabWidget): gen_qpainter_types.QPainter {.base.} =
+  QTabWidgetsharedPainter(self[])
+method inputMethodEvent*(self: VirtualQTabWidget, param1: gen_qevent_types.QInputMethodEvent): void {.base.} =
+  QTabWidgetinputMethodEvent(self[], param1)
+method inputMethodQuery*(self: VirtualQTabWidget, param1: cint): gen_qvariant_types.QVariant {.base.} =
+  QTabWidgetinputMethodQuery(self[], param1)
+method focusNextPrevChild*(self: VirtualQTabWidget, next: bool): bool {.base.} =
+  QTabWidgetfocusNextPrevChild(self[], next)
+method eventFilter*(self: VirtualQTabWidget, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QTabWidgeteventFilter(self[], watched, event)
+method timerEvent*(self: VirtualQTabWidget, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QTabWidgettimerEvent(self[], event)
+method childEvent*(self: VirtualQTabWidget, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QTabWidgetchildEvent(self[], event)
+method customEvent*(self: VirtualQTabWidget, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QTabWidgetcustomEvent(self[], event)
+method connectNotify*(self: VirtualQTabWidget, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QTabWidgetconnectNotify(self[], signal)
+method disconnectNotify*(self: VirtualQTabWidget, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QTabWidgetdisconnectNotify(self[], signal)
+
+proc fcQTabWidget_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQTabWidget](fcQTabWidget_vdata(self)[])
+  var virtualReturn = inst.metaObject()
+  virtualReturn.h
+
+proc fcQTabWidget_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+  let inst = cast[VirtualQTabWidget](fcQTabWidget_vdata(self)[])
+  let slotval1 = (param1)
+  var virtualReturn = inst.metacast(slotval1)
+  virtualReturn
+
+proc fcQTabWidget_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let inst = cast[VirtualQTabWidget](fcQTabWidget_vdata(self)[])
+  let slotval1 = cint(param1)
+  let slotval2 = param2
+  let slotval3 = param3
+  var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
+  virtualReturn
+
+proc fcQTabWidget_method_callback_sizeHint(self: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQTabWidget](fcQTabWidget_vdata(self)[])
+  var virtualReturn = inst.sizeHint()
+  virtualReturn.h
+
+proc fcQTabWidget_method_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQTabWidget](fcQTabWidget_vdata(self)[])
+  var virtualReturn = inst.minimumSizeHint()
+  virtualReturn.h
+
+proc fcQTabWidget_method_callback_heightForWidth(self: pointer, width: cint): cint {.cdecl.} =
+  let inst = cast[VirtualQTabWidget](fcQTabWidget_vdata(self)[])
+  let slotval1 = width
+  var virtualReturn = inst.heightForWidth(slotval1)
+  virtualReturn
+
+proc fcQTabWidget_method_callback_hasHeightForWidth(self: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQTabWidget](fcQTabWidget_vdata(self)[])
+  var virtualReturn = inst.hasHeightForWidth()
+  virtualReturn
+
+proc fcQTabWidget_method_callback_tabInserted(self: pointer, index: cint): void {.cdecl.} =
+  let inst = cast[VirtualQTabWidget](fcQTabWidget_vdata(self)[])
+  let slotval1 = index
+  inst.tabInserted(slotval1)
+
+proc fcQTabWidget_method_callback_tabRemoved(self: pointer, index: cint): void {.cdecl.} =
+  let inst = cast[VirtualQTabWidget](fcQTabWidget_vdata(self)[])
+  let slotval1 = index
+  inst.tabRemoved(slotval1)
+
+proc fcQTabWidget_method_callback_showEvent(self: pointer, param1: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQTabWidget](fcQTabWidget_vdata(self)[])
+  let slotval1 = gen_qevent_types.QShowEvent(h: param1)
+  inst.showEvent(slotval1)
+
+proc fcQTabWidget_method_callback_resizeEvent(self: pointer, param1: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQTabWidget](fcQTabWidget_vdata(self)[])
+  let slotval1 = gen_qevent_types.QResizeEvent(h: param1)
+  inst.resizeEvent(slotval1)
+
+proc fcQTabWidget_method_callback_keyPressEvent(self: pointer, param1: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQTabWidget](fcQTabWidget_vdata(self)[])
+  let slotval1 = gen_qevent_types.QKeyEvent(h: param1)
+  inst.keyPressEvent(slotval1)
+
+proc fcQTabWidget_method_callback_paintEvent(self: pointer, param1: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQTabWidget](fcQTabWidget_vdata(self)[])
+  let slotval1 = gen_qevent_types.QPaintEvent(h: param1)
+  inst.paintEvent(slotval1)
+
+proc fcQTabWidget_method_callback_changeEvent(self: pointer, param1: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQTabWidget](fcQTabWidget_vdata(self)[])
+  let slotval1 = gen_qcoreevent_types.QEvent(h: param1)
+  inst.changeEvent(slotval1)
+
+proc fcQTabWidget_method_callback_event(self: pointer, param1: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQTabWidget](fcQTabWidget_vdata(self)[])
+  let slotval1 = gen_qcoreevent_types.QEvent(h: param1)
+  var virtualReturn = inst.event(slotval1)
+  virtualReturn
+
+proc fcQTabWidget_method_callback_devType(self: pointer): cint {.cdecl.} =
+  let inst = cast[VirtualQTabWidget](fcQTabWidget_vdata(self)[])
+  var virtualReturn = inst.devType()
+  virtualReturn
+
+proc fcQTabWidget_method_callback_setVisible(self: pointer, visible: bool): void {.cdecl.} =
+  let inst = cast[VirtualQTabWidget](fcQTabWidget_vdata(self)[])
+  let slotval1 = visible
+  inst.setVisible(slotval1)
+
+proc fcQTabWidget_method_callback_paintEngine(self: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQTabWidget](fcQTabWidget_vdata(self)[])
+  var virtualReturn = inst.paintEngine()
+  virtualReturn.h
+
+proc fcQTabWidget_method_callback_mousePressEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQTabWidget](fcQTabWidget_vdata(self)[])
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  inst.mousePressEvent(slotval1)
+
+proc fcQTabWidget_method_callback_mouseReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQTabWidget](fcQTabWidget_vdata(self)[])
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  inst.mouseReleaseEvent(slotval1)
+
+proc fcQTabWidget_method_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQTabWidget](fcQTabWidget_vdata(self)[])
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  inst.mouseDoubleClickEvent(slotval1)
+
+proc fcQTabWidget_method_callback_mouseMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQTabWidget](fcQTabWidget_vdata(self)[])
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  inst.mouseMoveEvent(slotval1)
+
+proc fcQTabWidget_method_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQTabWidget](fcQTabWidget_vdata(self)[])
+  let slotval1 = gen_qevent_types.QWheelEvent(h: event)
+  inst.wheelEvent(slotval1)
+
+proc fcQTabWidget_method_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQTabWidget](fcQTabWidget_vdata(self)[])
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  inst.keyReleaseEvent(slotval1)
+
+proc fcQTabWidget_method_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQTabWidget](fcQTabWidget_vdata(self)[])
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  inst.focusInEvent(slotval1)
+
+proc fcQTabWidget_method_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQTabWidget](fcQTabWidget_vdata(self)[])
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  inst.focusOutEvent(slotval1)
+
+proc fcQTabWidget_method_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQTabWidget](fcQTabWidget_vdata(self)[])
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  inst.enterEvent(slotval1)
+
+proc fcQTabWidget_method_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQTabWidget](fcQTabWidget_vdata(self)[])
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  inst.leaveEvent(slotval1)
+
+proc fcQTabWidget_method_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQTabWidget](fcQTabWidget_vdata(self)[])
+  let slotval1 = gen_qevent_types.QMoveEvent(h: event)
+  inst.moveEvent(slotval1)
+
+proc fcQTabWidget_method_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQTabWidget](fcQTabWidget_vdata(self)[])
+  let slotval1 = gen_qevent_types.QCloseEvent(h: event)
+  inst.closeEvent(slotval1)
+
+proc fcQTabWidget_method_callback_contextMenuEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQTabWidget](fcQTabWidget_vdata(self)[])
+  let slotval1 = gen_qevent_types.QContextMenuEvent(h: event)
+  inst.contextMenuEvent(slotval1)
+
+proc fcQTabWidget_method_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQTabWidget](fcQTabWidget_vdata(self)[])
+  let slotval1 = gen_qevent_types.QTabletEvent(h: event)
+  inst.tabletEvent(slotval1)
+
+proc fcQTabWidget_method_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQTabWidget](fcQTabWidget_vdata(self)[])
+  let slotval1 = gen_qevent_types.QActionEvent(h: event)
+  inst.actionEvent(slotval1)
+
+proc fcQTabWidget_method_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQTabWidget](fcQTabWidget_vdata(self)[])
+  let slotval1 = gen_qevent_types.QDragEnterEvent(h: event)
+  inst.dragEnterEvent(slotval1)
+
+proc fcQTabWidget_method_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQTabWidget](fcQTabWidget_vdata(self)[])
+  let slotval1 = gen_qevent_types.QDragMoveEvent(h: event)
+  inst.dragMoveEvent(slotval1)
+
+proc fcQTabWidget_method_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQTabWidget](fcQTabWidget_vdata(self)[])
+  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event)
+  inst.dragLeaveEvent(slotval1)
+
+proc fcQTabWidget_method_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQTabWidget](fcQTabWidget_vdata(self)[])
+  let slotval1 = gen_qevent_types.QDropEvent(h: event)
+  inst.dropEvent(slotval1)
+
+proc fcQTabWidget_method_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQTabWidget](fcQTabWidget_vdata(self)[])
+  let slotval1 = gen_qevent_types.QHideEvent(h: event)
+  inst.hideEvent(slotval1)
+
+proc fcQTabWidget_method_callback_nativeEvent(self: pointer, eventType: struct_seaqt_string, message: pointer, resultVal: ptr clong): bool {.cdecl.} =
+  let inst = cast[VirtualQTabWidget](fcQTabWidget_vdata(self)[])
+  var veventType_bytearray = eventType
+  var veventTypex_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](veventType_bytearray.data), 0, int(veventType_bytearray.len)-1))
+  c_free(veventType_bytearray.data)
+  let slotval1 = veventTypex_ret
+  let slotval2 = message
+  let slotval3 = resultVal
+  var virtualReturn = inst.nativeEvent(slotval1, slotval2, slotval3)
+  virtualReturn
+
+proc fcQTabWidget_method_callback_metric(self: pointer, param1: cint): cint {.cdecl.} =
+  let inst = cast[VirtualQTabWidget](fcQTabWidget_vdata(self)[])
+  let slotval1 = cint(param1)
+  var virtualReturn = inst.metric(slotval1)
+  virtualReturn
+
+proc fcQTabWidget_method_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQTabWidget](fcQTabWidget_vdata(self)[])
+  let slotval1 = gen_qpainter_types.QPainter(h: painter)
+  inst.initPainter(slotval1)
+
+proc fcQTabWidget_method_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQTabWidget](fcQTabWidget_vdata(self)[])
+  let slotval1 = gen_qpoint_types.QPoint(h: offset)
+  var virtualReturn = inst.redirected(slotval1)
+  virtualReturn.h
+
+proc fcQTabWidget_method_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQTabWidget](fcQTabWidget_vdata(self)[])
+  var virtualReturn = inst.sharedPainter()
+  virtualReturn.h
+
+proc fcQTabWidget_method_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQTabWidget](fcQTabWidget_vdata(self)[])
+  let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1)
+  inst.inputMethodEvent(slotval1)
+
+proc fcQTabWidget_method_callback_inputMethodQuery(self: pointer, param1: cint): pointer {.cdecl.} =
+  let inst = cast[VirtualQTabWidget](fcQTabWidget_vdata(self)[])
+  let slotval1 = cint(param1)
+  var virtualReturn = inst.inputMethodQuery(slotval1)
+  virtualReturn.h
+
+proc fcQTabWidget_method_callback_focusNextPrevChild(self: pointer, next: bool): bool {.cdecl.} =
+  let inst = cast[VirtualQTabWidget](fcQTabWidget_vdata(self)[])
+  let slotval1 = next
+  var virtualReturn = inst.focusNextPrevChild(slotval1)
+  virtualReturn
+
+proc fcQTabWidget_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQTabWidget](fcQTabWidget_vdata(self)[])
+  let slotval1 = gen_qobject_types.QObject(h: watched)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  var virtualReturn = inst.eventFilter(slotval1, slotval2)
+  virtualReturn
+
+proc fcQTabWidget_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQTabWidget](fcQTabWidget_vdata(self)[])
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  inst.timerEvent(slotval1)
+
+proc fcQTabWidget_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQTabWidget](fcQTabWidget_vdata(self)[])
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  inst.childEvent(slotval1)
+
+proc fcQTabWidget_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQTabWidget](fcQTabWidget_vdata(self)[])
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  inst.customEvent(slotval1)
+
+proc fcQTabWidget_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQTabWidget](fcQTabWidget_vdata(self)[])
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  inst.connectNotify(slotval1)
+
+proc fcQTabWidget_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQTabWidget](fcQTabWidget_vdata(self)[])
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  inst.disconnectNotify(slotval1)
+
+
+proc setTabBar*(self: gen_qtabwidget_types.QTabWidget, tabBar: gen_qtabbar_types.QTabBar): void =
+  fcQTabWidget_protectedbase_setTabBar(self.h, tabBar.h)
+
+proc initStyleOption*(self: gen_qtabwidget_types.QTabWidget, option: gen_qstyleoption_types.QStyleOptionTabWidgetFrame): void =
+  fcQTabWidget_protectedbase_initStyleOption(self.h, option.h)
+
+proc updateMicroFocus*(self: gen_qtabwidget_types.QTabWidget): void =
+  fcQTabWidget_protectedbase_updateMicroFocus(self.h)
+
+proc createX*(self: gen_qtabwidget_types.QTabWidget): void =
+  fcQTabWidget_protectedbase_create(self.h)
+
+proc destroy*(self: gen_qtabwidget_types.QTabWidget): void =
+  fcQTabWidget_protectedbase_destroy(self.h)
+
+proc focusNextChild*(self: gen_qtabwidget_types.QTabWidget): bool =
+  fcQTabWidget_protectedbase_focusNextChild(self.h)
+
+proc focusPreviousChild*(self: gen_qtabwidget_types.QTabWidget): bool =
+  fcQTabWidget_protectedbase_focusPreviousChild(self.h)
+
+proc sender*(self: gen_qtabwidget_types.QTabWidget): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQTabWidget_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qtabwidget_types.QTabWidget): cint =
+  fcQTabWidget_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qtabwidget_types.QTabWidget, signal: cstring): cint =
+  fcQTabWidget_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qtabwidget_types.QTabWidget, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQTabWidget_protectedbase_isSignalConnected(self.h, signal.h)
+
+proc create*(T: type gen_qtabwidget_types.QTabWidget,
+    parent: gen_qwidget_types.QWidget,
+    vtbl: ref QTabWidgetVTable = nil): gen_qtabwidget_types.QTabWidget =
+  let vtbl = if vtbl == nil: new QTabWidgetVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QTabWidgetVTable](fcQTabWidget_vdata(self)[])
+    GC_unref(vtbl)
+  if not isNil(vtbl[].metaObject):
+    vtbl[].vtbl.metaObject = fcQTabWidget_vtable_callback_metaObject
+  if not isNil(vtbl[].metacast):
+    vtbl[].vtbl.metacast = fcQTabWidget_vtable_callback_metacast
+  if not isNil(vtbl[].metacall):
+    vtbl[].vtbl.metacall = fcQTabWidget_vtable_callback_metacall
+  if not isNil(vtbl[].sizeHint):
+    vtbl[].vtbl.sizeHint = fcQTabWidget_vtable_callback_sizeHint
+  if not isNil(vtbl[].minimumSizeHint):
+    vtbl[].vtbl.minimumSizeHint = fcQTabWidget_vtable_callback_minimumSizeHint
+  if not isNil(vtbl[].heightForWidth):
+    vtbl[].vtbl.heightForWidth = fcQTabWidget_vtable_callback_heightForWidth
+  if not isNil(vtbl[].hasHeightForWidth):
+    vtbl[].vtbl.hasHeightForWidth = fcQTabWidget_vtable_callback_hasHeightForWidth
+  if not isNil(vtbl[].tabInserted):
+    vtbl[].vtbl.tabInserted = fcQTabWidget_vtable_callback_tabInserted
+  if not isNil(vtbl[].tabRemoved):
+    vtbl[].vtbl.tabRemoved = fcQTabWidget_vtable_callback_tabRemoved
+  if not isNil(vtbl[].showEvent):
+    vtbl[].vtbl.showEvent = fcQTabWidget_vtable_callback_showEvent
+  if not isNil(vtbl[].resizeEvent):
+    vtbl[].vtbl.resizeEvent = fcQTabWidget_vtable_callback_resizeEvent
+  if not isNil(vtbl[].keyPressEvent):
+    vtbl[].vtbl.keyPressEvent = fcQTabWidget_vtable_callback_keyPressEvent
+  if not isNil(vtbl[].paintEvent):
+    vtbl[].vtbl.paintEvent = fcQTabWidget_vtable_callback_paintEvent
+  if not isNil(vtbl[].changeEvent):
+    vtbl[].vtbl.changeEvent = fcQTabWidget_vtable_callback_changeEvent
+  if not isNil(vtbl[].event):
+    vtbl[].vtbl.event = fcQTabWidget_vtable_callback_event
+  if not isNil(vtbl[].devType):
+    vtbl[].vtbl.devType = fcQTabWidget_vtable_callback_devType
+  if not isNil(vtbl[].setVisible):
+    vtbl[].vtbl.setVisible = fcQTabWidget_vtable_callback_setVisible
+  if not isNil(vtbl[].paintEngine):
+    vtbl[].vtbl.paintEngine = fcQTabWidget_vtable_callback_paintEngine
+  if not isNil(vtbl[].mousePressEvent):
+    vtbl[].vtbl.mousePressEvent = fcQTabWidget_vtable_callback_mousePressEvent
+  if not isNil(vtbl[].mouseReleaseEvent):
+    vtbl[].vtbl.mouseReleaseEvent = fcQTabWidget_vtable_callback_mouseReleaseEvent
+  if not isNil(vtbl[].mouseDoubleClickEvent):
+    vtbl[].vtbl.mouseDoubleClickEvent = fcQTabWidget_vtable_callback_mouseDoubleClickEvent
+  if not isNil(vtbl[].mouseMoveEvent):
+    vtbl[].vtbl.mouseMoveEvent = fcQTabWidget_vtable_callback_mouseMoveEvent
+  if not isNil(vtbl[].wheelEvent):
+    vtbl[].vtbl.wheelEvent = fcQTabWidget_vtable_callback_wheelEvent
+  if not isNil(vtbl[].keyReleaseEvent):
+    vtbl[].vtbl.keyReleaseEvent = fcQTabWidget_vtable_callback_keyReleaseEvent
+  if not isNil(vtbl[].focusInEvent):
+    vtbl[].vtbl.focusInEvent = fcQTabWidget_vtable_callback_focusInEvent
+  if not isNil(vtbl[].focusOutEvent):
+    vtbl[].vtbl.focusOutEvent = fcQTabWidget_vtable_callback_focusOutEvent
+  if not isNil(vtbl[].enterEvent):
+    vtbl[].vtbl.enterEvent = fcQTabWidget_vtable_callback_enterEvent
+  if not isNil(vtbl[].leaveEvent):
+    vtbl[].vtbl.leaveEvent = fcQTabWidget_vtable_callback_leaveEvent
+  if not isNil(vtbl[].moveEvent):
+    vtbl[].vtbl.moveEvent = fcQTabWidget_vtable_callback_moveEvent
+  if not isNil(vtbl[].closeEvent):
+    vtbl[].vtbl.closeEvent = fcQTabWidget_vtable_callback_closeEvent
+  if not isNil(vtbl[].contextMenuEvent):
+    vtbl[].vtbl.contextMenuEvent = fcQTabWidget_vtable_callback_contextMenuEvent
+  if not isNil(vtbl[].tabletEvent):
+    vtbl[].vtbl.tabletEvent = fcQTabWidget_vtable_callback_tabletEvent
+  if not isNil(vtbl[].actionEvent):
+    vtbl[].vtbl.actionEvent = fcQTabWidget_vtable_callback_actionEvent
+  if not isNil(vtbl[].dragEnterEvent):
+    vtbl[].vtbl.dragEnterEvent = fcQTabWidget_vtable_callback_dragEnterEvent
+  if not isNil(vtbl[].dragMoveEvent):
+    vtbl[].vtbl.dragMoveEvent = fcQTabWidget_vtable_callback_dragMoveEvent
+  if not isNil(vtbl[].dragLeaveEvent):
+    vtbl[].vtbl.dragLeaveEvent = fcQTabWidget_vtable_callback_dragLeaveEvent
+  if not isNil(vtbl[].dropEvent):
+    vtbl[].vtbl.dropEvent = fcQTabWidget_vtable_callback_dropEvent
+  if not isNil(vtbl[].hideEvent):
+    vtbl[].vtbl.hideEvent = fcQTabWidget_vtable_callback_hideEvent
+  if not isNil(vtbl[].nativeEvent):
+    vtbl[].vtbl.nativeEvent = fcQTabWidget_vtable_callback_nativeEvent
+  if not isNil(vtbl[].metric):
+    vtbl[].vtbl.metric = fcQTabWidget_vtable_callback_metric
+  if not isNil(vtbl[].initPainter):
+    vtbl[].vtbl.initPainter = fcQTabWidget_vtable_callback_initPainter
+  if not isNil(vtbl[].redirected):
+    vtbl[].vtbl.redirected = fcQTabWidget_vtable_callback_redirected
+  if not isNil(vtbl[].sharedPainter):
+    vtbl[].vtbl.sharedPainter = fcQTabWidget_vtable_callback_sharedPainter
+  if not isNil(vtbl[].inputMethodEvent):
+    vtbl[].vtbl.inputMethodEvent = fcQTabWidget_vtable_callback_inputMethodEvent
+  if not isNil(vtbl[].inputMethodQuery):
+    vtbl[].vtbl.inputMethodQuery = fcQTabWidget_vtable_callback_inputMethodQuery
+  if not isNil(vtbl[].focusNextPrevChild):
+    vtbl[].vtbl.focusNextPrevChild = fcQTabWidget_vtable_callback_focusNextPrevChild
+  if not isNil(vtbl[].eventFilter):
+    vtbl[].vtbl.eventFilter = fcQTabWidget_vtable_callback_eventFilter
+  if not isNil(vtbl[].timerEvent):
+    vtbl[].vtbl.timerEvent = fcQTabWidget_vtable_callback_timerEvent
+  if not isNil(vtbl[].childEvent):
+    vtbl[].vtbl.childEvent = fcQTabWidget_vtable_callback_childEvent
+  if not isNil(vtbl[].customEvent):
+    vtbl[].vtbl.customEvent = fcQTabWidget_vtable_callback_customEvent
+  if not isNil(vtbl[].connectNotify):
+    vtbl[].vtbl.connectNotify = fcQTabWidget_vtable_callback_connectNotify
+  if not isNil(vtbl[].disconnectNotify):
+    vtbl[].vtbl.disconnectNotify = fcQTabWidget_vtable_callback_disconnectNotify
+  let tmp = gen_qtabwidget_types.QTabWidget(h: fcQTabWidget_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h))
+  fcQTabWidget_vdata(tmp.h)[] = addr(vtbl[])
+  tmp
+proc create*(T: type gen_qtabwidget_types.QTabWidget,
+    vtbl: ref QTabWidgetVTable = nil): gen_qtabwidget_types.QTabWidget =
+  let vtbl = if vtbl == nil: new QTabWidgetVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QTabWidgetVTable](fcQTabWidget_vdata(self)[])
+    GC_unref(vtbl)
+  if not isNil(vtbl[].metaObject):
+    vtbl[].vtbl.metaObject = fcQTabWidget_vtable_callback_metaObject
+  if not isNil(vtbl[].metacast):
+    vtbl[].vtbl.metacast = fcQTabWidget_vtable_callback_metacast
+  if not isNil(vtbl[].metacall):
+    vtbl[].vtbl.metacall = fcQTabWidget_vtable_callback_metacall
+  if not isNil(vtbl[].sizeHint):
+    vtbl[].vtbl.sizeHint = fcQTabWidget_vtable_callback_sizeHint
+  if not isNil(vtbl[].minimumSizeHint):
+    vtbl[].vtbl.minimumSizeHint = fcQTabWidget_vtable_callback_minimumSizeHint
+  if not isNil(vtbl[].heightForWidth):
+    vtbl[].vtbl.heightForWidth = fcQTabWidget_vtable_callback_heightForWidth
+  if not isNil(vtbl[].hasHeightForWidth):
+    vtbl[].vtbl.hasHeightForWidth = fcQTabWidget_vtable_callback_hasHeightForWidth
+  if not isNil(vtbl[].tabInserted):
+    vtbl[].vtbl.tabInserted = fcQTabWidget_vtable_callback_tabInserted
+  if not isNil(vtbl[].tabRemoved):
+    vtbl[].vtbl.tabRemoved = fcQTabWidget_vtable_callback_tabRemoved
+  if not isNil(vtbl[].showEvent):
+    vtbl[].vtbl.showEvent = fcQTabWidget_vtable_callback_showEvent
+  if not isNil(vtbl[].resizeEvent):
+    vtbl[].vtbl.resizeEvent = fcQTabWidget_vtable_callback_resizeEvent
+  if not isNil(vtbl[].keyPressEvent):
+    vtbl[].vtbl.keyPressEvent = fcQTabWidget_vtable_callback_keyPressEvent
+  if not isNil(vtbl[].paintEvent):
+    vtbl[].vtbl.paintEvent = fcQTabWidget_vtable_callback_paintEvent
+  if not isNil(vtbl[].changeEvent):
+    vtbl[].vtbl.changeEvent = fcQTabWidget_vtable_callback_changeEvent
+  if not isNil(vtbl[].event):
+    vtbl[].vtbl.event = fcQTabWidget_vtable_callback_event
+  if not isNil(vtbl[].devType):
+    vtbl[].vtbl.devType = fcQTabWidget_vtable_callback_devType
+  if not isNil(vtbl[].setVisible):
+    vtbl[].vtbl.setVisible = fcQTabWidget_vtable_callback_setVisible
+  if not isNil(vtbl[].paintEngine):
+    vtbl[].vtbl.paintEngine = fcQTabWidget_vtable_callback_paintEngine
+  if not isNil(vtbl[].mousePressEvent):
+    vtbl[].vtbl.mousePressEvent = fcQTabWidget_vtable_callback_mousePressEvent
+  if not isNil(vtbl[].mouseReleaseEvent):
+    vtbl[].vtbl.mouseReleaseEvent = fcQTabWidget_vtable_callback_mouseReleaseEvent
+  if not isNil(vtbl[].mouseDoubleClickEvent):
+    vtbl[].vtbl.mouseDoubleClickEvent = fcQTabWidget_vtable_callback_mouseDoubleClickEvent
+  if not isNil(vtbl[].mouseMoveEvent):
+    vtbl[].vtbl.mouseMoveEvent = fcQTabWidget_vtable_callback_mouseMoveEvent
+  if not isNil(vtbl[].wheelEvent):
+    vtbl[].vtbl.wheelEvent = fcQTabWidget_vtable_callback_wheelEvent
+  if not isNil(vtbl[].keyReleaseEvent):
+    vtbl[].vtbl.keyReleaseEvent = fcQTabWidget_vtable_callback_keyReleaseEvent
+  if not isNil(vtbl[].focusInEvent):
+    vtbl[].vtbl.focusInEvent = fcQTabWidget_vtable_callback_focusInEvent
+  if not isNil(vtbl[].focusOutEvent):
+    vtbl[].vtbl.focusOutEvent = fcQTabWidget_vtable_callback_focusOutEvent
+  if not isNil(vtbl[].enterEvent):
+    vtbl[].vtbl.enterEvent = fcQTabWidget_vtable_callback_enterEvent
+  if not isNil(vtbl[].leaveEvent):
+    vtbl[].vtbl.leaveEvent = fcQTabWidget_vtable_callback_leaveEvent
+  if not isNil(vtbl[].moveEvent):
+    vtbl[].vtbl.moveEvent = fcQTabWidget_vtable_callback_moveEvent
+  if not isNil(vtbl[].closeEvent):
+    vtbl[].vtbl.closeEvent = fcQTabWidget_vtable_callback_closeEvent
+  if not isNil(vtbl[].contextMenuEvent):
+    vtbl[].vtbl.contextMenuEvent = fcQTabWidget_vtable_callback_contextMenuEvent
+  if not isNil(vtbl[].tabletEvent):
+    vtbl[].vtbl.tabletEvent = fcQTabWidget_vtable_callback_tabletEvent
+  if not isNil(vtbl[].actionEvent):
+    vtbl[].vtbl.actionEvent = fcQTabWidget_vtable_callback_actionEvent
+  if not isNil(vtbl[].dragEnterEvent):
+    vtbl[].vtbl.dragEnterEvent = fcQTabWidget_vtable_callback_dragEnterEvent
+  if not isNil(vtbl[].dragMoveEvent):
+    vtbl[].vtbl.dragMoveEvent = fcQTabWidget_vtable_callback_dragMoveEvent
+  if not isNil(vtbl[].dragLeaveEvent):
+    vtbl[].vtbl.dragLeaveEvent = fcQTabWidget_vtable_callback_dragLeaveEvent
+  if not isNil(vtbl[].dropEvent):
+    vtbl[].vtbl.dropEvent = fcQTabWidget_vtable_callback_dropEvent
+  if not isNil(vtbl[].hideEvent):
+    vtbl[].vtbl.hideEvent = fcQTabWidget_vtable_callback_hideEvent
+  if not isNil(vtbl[].nativeEvent):
+    vtbl[].vtbl.nativeEvent = fcQTabWidget_vtable_callback_nativeEvent
+  if not isNil(vtbl[].metric):
+    vtbl[].vtbl.metric = fcQTabWidget_vtable_callback_metric
+  if not isNil(vtbl[].initPainter):
+    vtbl[].vtbl.initPainter = fcQTabWidget_vtable_callback_initPainter
+  if not isNil(vtbl[].redirected):
+    vtbl[].vtbl.redirected = fcQTabWidget_vtable_callback_redirected
+  if not isNil(vtbl[].sharedPainter):
+    vtbl[].vtbl.sharedPainter = fcQTabWidget_vtable_callback_sharedPainter
+  if not isNil(vtbl[].inputMethodEvent):
+    vtbl[].vtbl.inputMethodEvent = fcQTabWidget_vtable_callback_inputMethodEvent
+  if not isNil(vtbl[].inputMethodQuery):
+    vtbl[].vtbl.inputMethodQuery = fcQTabWidget_vtable_callback_inputMethodQuery
+  if not isNil(vtbl[].focusNextPrevChild):
+    vtbl[].vtbl.focusNextPrevChild = fcQTabWidget_vtable_callback_focusNextPrevChild
+  if not isNil(vtbl[].eventFilter):
+    vtbl[].vtbl.eventFilter = fcQTabWidget_vtable_callback_eventFilter
+  if not isNil(vtbl[].timerEvent):
+    vtbl[].vtbl.timerEvent = fcQTabWidget_vtable_callback_timerEvent
+  if not isNil(vtbl[].childEvent):
+    vtbl[].vtbl.childEvent = fcQTabWidget_vtable_callback_childEvent
+  if not isNil(vtbl[].customEvent):
+    vtbl[].vtbl.customEvent = fcQTabWidget_vtable_callback_customEvent
+  if not isNil(vtbl[].connectNotify):
+    vtbl[].vtbl.connectNotify = fcQTabWidget_vtable_callback_connectNotify
+  if not isNil(vtbl[].disconnectNotify):
+    vtbl[].vtbl.disconnectNotify = fcQTabWidget_vtable_callback_disconnectNotify
+  let tmp = gen_qtabwidget_types.QTabWidget(h: fcQTabWidget_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer))))
+  fcQTabWidget_vdata(tmp.h)[] = addr(vtbl[])
+  tmp
+const cQTabWidget_mvtbl = cQTabWidgetVTable(
+  destructor: proc(self: pointer) {.cdecl.} =
+    let inst = cast[ptr typeof(VirtualQTabWidget()[])](self.fcQTabWidget_vdata()[])
+    inst[].h = nil,
+
+  metaObject: fcQTabWidget_method_callback_metaObject,
+  metacast: fcQTabWidget_method_callback_metacast,
+  metacall: fcQTabWidget_method_callback_metacall,
+  sizeHint: fcQTabWidget_method_callback_sizeHint,
+  minimumSizeHint: fcQTabWidget_method_callback_minimumSizeHint,
+  heightForWidth: fcQTabWidget_method_callback_heightForWidth,
+  hasHeightForWidth: fcQTabWidget_method_callback_hasHeightForWidth,
+  tabInserted: fcQTabWidget_method_callback_tabInserted,
+  tabRemoved: fcQTabWidget_method_callback_tabRemoved,
+  showEvent: fcQTabWidget_method_callback_showEvent,
+  resizeEvent: fcQTabWidget_method_callback_resizeEvent,
+  keyPressEvent: fcQTabWidget_method_callback_keyPressEvent,
+  paintEvent: fcQTabWidget_method_callback_paintEvent,
+  changeEvent: fcQTabWidget_method_callback_changeEvent,
+  event: fcQTabWidget_method_callback_event,
+  devType: fcQTabWidget_method_callback_devType,
+  setVisible: fcQTabWidget_method_callback_setVisible,
+  paintEngine: fcQTabWidget_method_callback_paintEngine,
+  mousePressEvent: fcQTabWidget_method_callback_mousePressEvent,
+  mouseReleaseEvent: fcQTabWidget_method_callback_mouseReleaseEvent,
+  mouseDoubleClickEvent: fcQTabWidget_method_callback_mouseDoubleClickEvent,
+  mouseMoveEvent: fcQTabWidget_method_callback_mouseMoveEvent,
+  wheelEvent: fcQTabWidget_method_callback_wheelEvent,
+  keyReleaseEvent: fcQTabWidget_method_callback_keyReleaseEvent,
+  focusInEvent: fcQTabWidget_method_callback_focusInEvent,
+  focusOutEvent: fcQTabWidget_method_callback_focusOutEvent,
+  enterEvent: fcQTabWidget_method_callback_enterEvent,
+  leaveEvent: fcQTabWidget_method_callback_leaveEvent,
+  moveEvent: fcQTabWidget_method_callback_moveEvent,
+  closeEvent: fcQTabWidget_method_callback_closeEvent,
+  contextMenuEvent: fcQTabWidget_method_callback_contextMenuEvent,
+  tabletEvent: fcQTabWidget_method_callback_tabletEvent,
+  actionEvent: fcQTabWidget_method_callback_actionEvent,
+  dragEnterEvent: fcQTabWidget_method_callback_dragEnterEvent,
+  dragMoveEvent: fcQTabWidget_method_callback_dragMoveEvent,
+  dragLeaveEvent: fcQTabWidget_method_callback_dragLeaveEvent,
+  dropEvent: fcQTabWidget_method_callback_dropEvent,
+  hideEvent: fcQTabWidget_method_callback_hideEvent,
+  nativeEvent: fcQTabWidget_method_callback_nativeEvent,
+  metric: fcQTabWidget_method_callback_metric,
+  initPainter: fcQTabWidget_method_callback_initPainter,
+  redirected: fcQTabWidget_method_callback_redirected,
+  sharedPainter: fcQTabWidget_method_callback_sharedPainter,
+  inputMethodEvent: fcQTabWidget_method_callback_inputMethodEvent,
+  inputMethodQuery: fcQTabWidget_method_callback_inputMethodQuery,
+  focusNextPrevChild: fcQTabWidget_method_callback_focusNextPrevChild,
+  eventFilter: fcQTabWidget_method_callback_eventFilter,
+  timerEvent: fcQTabWidget_method_callback_timerEvent,
+  childEvent: fcQTabWidget_method_callback_childEvent,
+  customEvent: fcQTabWidget_method_callback_customEvent,
+  connectNotify: fcQTabWidget_method_callback_connectNotify,
+  disconnectNotify: fcQTabWidget_method_callback_disconnectNotify,
+)
+proc create*(T: type gen_qtabwidget_types.QTabWidget,
+    parent: gen_qwidget_types.QWidget,
+    inst: VirtualQTabWidget) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQTabWidget_new(addr(cQTabWidget_mvtbl), csize_t(sizeof(pointer)), parent.h)
+  fcQTabWidget_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
+
+proc create*(T: type gen_qtabwidget_types.QTabWidget,
+    inst: VirtualQTabWidget) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQTabWidget_new2(addr(cQTabWidget_mvtbl), csize_t(sizeof(pointer)))
+  fcQTabWidget_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
+
+proc staticMetaObject*(_: type gen_qtabwidget_types.QTabWidget): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQTabWidget_staticMetaObject())
+proc delete*(self: gen_qtabwidget_types.QTabWidget) =
+  fcQTabWidget_delete(self.h)

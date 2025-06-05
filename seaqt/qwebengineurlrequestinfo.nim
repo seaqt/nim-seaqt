@@ -1,0 +1,2 @@
+import ./QtWebEngineCore/gen_qwebengineurlrequestinfo
+export gen_qwebengineurlrequestinfo

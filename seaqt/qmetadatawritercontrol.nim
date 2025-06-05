@@ -1,0 +1,2 @@
+import ./QtMultimedia/gen_qmetadatawritercontrol
+export gen_qmetadatawritercontrol

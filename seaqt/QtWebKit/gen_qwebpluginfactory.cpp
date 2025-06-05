@@ -1,0 +1,549 @@
+#include <QChildEvent>
+#include <QEvent>
+#include <QList>
+#include <QMetaMethod>
+#include <QMetaObject>
+#include <QObject>
+#include <QString>
+#include <QByteArray>
+#include <cstring>
+#include <QTimerEvent>
+#include <QUrl>
+#include <QWebPluginFactory>
+#define WORKAROUND_INNER_CLASS_DEFINITION_QWebPluginFactory__ExtensionOption
+#define WORKAROUND_INNER_CLASS_DEFINITION_QWebPluginFactory__ExtensionReturn
+#define WORKAROUND_INNER_CLASS_DEFINITION_QWebPluginFactory__MimeType
+#define WORKAROUND_INNER_CLASS_DEFINITION_QWebPluginFactory__Plugin
+#include <qwebpluginfactory.h>
+#include "gen_qwebpluginfactory.h"
+
+#ifndef SEAQT_ALIGNED_SIZEOF
+#define SEAQT_ALIGNED_SIZEOF 1
+#include <cstddef>
+template<typename T>
+static constexpr std::size_t seaqt_aligned_sizeof() {
+	constexpr auto alignment = sizeof(std::max_align_t);
+	return (sizeof(T) + alignment - 1) & ~(alignment - 1);
+}
+#endif
+
+class VirtualQWebPluginFactory final : public QWebPluginFactory {
+	const QWebPluginFactory_VTable* vtbl;
+public:
+	friend void* QWebPluginFactory_vdata(VirtualQWebPluginFactory* self);
+	friend VirtualQWebPluginFactory* vdata_QWebPluginFactory(void* vdata);
+
+	VirtualQWebPluginFactory(const QWebPluginFactory_VTable* vtbl): QWebPluginFactory(), vtbl(vtbl) {}
+	VirtualQWebPluginFactory(const QWebPluginFactory_VTable* vtbl, QObject* parent): QWebPluginFactory(parent), vtbl(vtbl) {}
+
+	virtual ~VirtualQWebPluginFactory() override { if(vtbl->destructor) vtbl->destructor(this); }
+
+	void operator delete(void* p) { ::operator delete(p); }
+	virtual const QMetaObject* metaObject() const override {
+		if (vtbl->metaObject == 0) {
+			return QWebPluginFactory::metaObject();
+		}
+
+		QMetaObject* callback_return_value = vtbl->metaObject(this);
+		return callback_return_value;
+	}
+
+	friend QMetaObject* QWebPluginFactory_virtualbase_metaObject(const VirtualQWebPluginFactory* self);
+
+	virtual void* qt_metacast(const char* param1) override {
+		if (vtbl->metacast == 0) {
+			return QWebPluginFactory::qt_metacast(param1);
+		}
+
+		const char* sigval1 = (const char*) param1;
+		void* callback_return_value = vtbl->metacast(this, sigval1);
+		return callback_return_value;
+	}
+
+	friend void* QWebPluginFactory_virtualbase_metacast(VirtualQWebPluginFactory* self, const char* param1);
+
+	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
+		if (vtbl->metacall == 0) {
+			return QWebPluginFactory::qt_metacall(param1, param2, param3);
+		}
+
+		QMetaObject::Call param1_ret = param1;
+		int sigval1 = static_cast<int>(param1_ret);
+		int sigval2 = param2;
+		void** sigval3 = param3;
+		int callback_return_value = vtbl->metacall(this, sigval1, sigval2, sigval3);
+		return static_cast<int>(callback_return_value);
+	}
+
+	friend int QWebPluginFactory_virtualbase_metacall(VirtualQWebPluginFactory* self, int param1, int param2, void** param3);
+
+	virtual QList<QWebPluginFactory::Plugin> plugins() const override {
+		if (vtbl->plugins == 0) {
+			return QList<QWebPluginFactory::Plugin>(); // Pure virtual, there is no base we can call
+		}
+
+		struct seaqt_array /* of QWebPluginFactory__Plugin* */  callback_return_value = vtbl->plugins(this);
+		QList<QWebPluginFactory::Plugin> callback_return_value_QList;
+		callback_return_value_QList.reserve(callback_return_value.len);
+		QWebPluginFactory__Plugin** callback_return_value_arr = static_cast<QWebPluginFactory__Plugin**>(callback_return_value.data);
+		for(size_t i = 0; i < callback_return_value.len; ++i) {
+			callback_return_value_QList.push_back(*(callback_return_value_arr[i]));
+		}
+		free(callback_return_value.data);
+		return callback_return_value_QList;
+	}
+
+	virtual void refreshPlugins() override {
+		if (vtbl->refreshPlugins == 0) {
+			QWebPluginFactory::refreshPlugins();
+			return;
+		}
+
+		vtbl->refreshPlugins(this);
+	}
+
+	friend void QWebPluginFactory_virtualbase_refreshPlugins(VirtualQWebPluginFactory* self);
+
+	virtual QObject* create(const QString& mimeType, const QUrl& param2, const QStringList& argumentNames, const QStringList& argumentValues) const override {
+		if (vtbl->create == 0) {
+			return nullptr; // Pure virtual, there is no base we can call
+		}
+
+		const QString mimeType_ret = mimeType;
+		// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+		QByteArray mimeType_b = mimeType_ret.toUtf8();
+		struct seaqt_string mimeType_ms;
+		mimeType_ms.len = mimeType_b.length();
+		mimeType_ms.data = static_cast<char*>(malloc(mimeType_ms.len));
+		memcpy(mimeType_ms.data, mimeType_b.data(), mimeType_ms.len);
+		struct seaqt_string sigval1 = mimeType_ms;
+		const QUrl& param2_ret = param2;
+		// Cast returned reference into pointer
+		QUrl* sigval2 = const_cast<QUrl*>(&param2_ret);
+		const QStringList& argumentNames_ret = argumentNames;
+		// Convert QList<> from C++ memory to manually-managed C memory
+		struct seaqt_string* argumentNames_arr = static_cast<struct seaqt_string*>(malloc(sizeof(struct seaqt_string) * argumentNames_ret.length()));
+		for (size_t i = 0, e = argumentNames_ret.length(); i < e; ++i) {
+			QString argumentNames_lv_ret = argumentNames_ret[i];
+			// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+			QByteArray argumentNames_lv_b = argumentNames_lv_ret.toUtf8();
+			struct seaqt_string argumentNames_lv_ms;
+			argumentNames_lv_ms.len = argumentNames_lv_b.length();
+			argumentNames_lv_ms.data = static_cast<char*>(malloc(argumentNames_lv_ms.len));
+			memcpy(argumentNames_lv_ms.data, argumentNames_lv_b.data(), argumentNames_lv_ms.len);
+			argumentNames_arr[i] = argumentNames_lv_ms;
+		}
+		struct seaqt_array argumentNames_out;
+		argumentNames_out.len = argumentNames_ret.length();
+		argumentNames_out.data = static_cast<void*>(argumentNames_arr);
+		struct seaqt_array /* of struct seaqt_string */  sigval3 = argumentNames_out;
+		const QStringList& argumentValues_ret = argumentValues;
+		// Convert QList<> from C++ memory to manually-managed C memory
+		struct seaqt_string* argumentValues_arr = static_cast<struct seaqt_string*>(malloc(sizeof(struct seaqt_string) * argumentValues_ret.length()));
+		for (size_t i = 0, e = argumentValues_ret.length(); i < e; ++i) {
+			QString argumentValues_lv_ret = argumentValues_ret[i];
+			// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+			QByteArray argumentValues_lv_b = argumentValues_lv_ret.toUtf8();
+			struct seaqt_string argumentValues_lv_ms;
+			argumentValues_lv_ms.len = argumentValues_lv_b.length();
+			argumentValues_lv_ms.data = static_cast<char*>(malloc(argumentValues_lv_ms.len));
+			memcpy(argumentValues_lv_ms.data, argumentValues_lv_b.data(), argumentValues_lv_ms.len);
+			argumentValues_arr[i] = argumentValues_lv_ms;
+		}
+		struct seaqt_array argumentValues_out;
+		argumentValues_out.len = argumentValues_ret.length();
+		argumentValues_out.data = static_cast<void*>(argumentValues_arr);
+		struct seaqt_array /* of struct seaqt_string */  sigval4 = argumentValues_out;
+		QObject* callback_return_value = vtbl->create(this, sigval1, sigval2, sigval3, sigval4);
+		return callback_return_value;
+	}
+
+	virtual bool extension(QWebPluginFactory::Extension extension, const QWebPluginFactory::ExtensionOption* option, QWebPluginFactory::ExtensionReturn* output) override {
+		if (vtbl->extension == 0) {
+			return QWebPluginFactory::extension(extension, option, output);
+		}
+
+		QWebPluginFactory::Extension extension_ret = extension;
+		int sigval1 = static_cast<int>(extension_ret);
+		QWebPluginFactory__ExtensionOption* sigval2 = (QWebPluginFactory__ExtensionOption*) option;
+		QWebPluginFactory__ExtensionReturn* sigval3 = output;
+		bool callback_return_value = vtbl->extension(this, sigval1, sigval2, sigval3);
+		return callback_return_value;
+	}
+
+	friend bool QWebPluginFactory_virtualbase_extension(VirtualQWebPluginFactory* self, int extension, QWebPluginFactory__ExtensionOption* option, QWebPluginFactory__ExtensionReturn* output);
+
+	virtual bool supportsExtension(QWebPluginFactory::Extension extension) const override {
+		if (vtbl->supportsExtension == 0) {
+			return QWebPluginFactory::supportsExtension(extension);
+		}
+
+		QWebPluginFactory::Extension extension_ret = extension;
+		int sigval1 = static_cast<int>(extension_ret);
+		bool callback_return_value = vtbl->supportsExtension(this, sigval1);
+		return callback_return_value;
+	}
+
+	friend bool QWebPluginFactory_virtualbase_supportsExtension(const VirtualQWebPluginFactory* self, int extension);
+
+	virtual bool event(QEvent* event) override {
+		if (vtbl->event == 0) {
+			return QWebPluginFactory::event(event);
+		}
+
+		QEvent* sigval1 = event;
+		bool callback_return_value = vtbl->event(this, sigval1);
+		return callback_return_value;
+	}
+
+	friend bool QWebPluginFactory_virtualbase_event(VirtualQWebPluginFactory* self, QEvent* event);
+
+	virtual bool eventFilter(QObject* watched, QEvent* event) override {
+		if (vtbl->eventFilter == 0) {
+			return QWebPluginFactory::eventFilter(watched, event);
+		}
+
+		QObject* sigval1 = watched;
+		QEvent* sigval2 = event;
+		bool callback_return_value = vtbl->eventFilter(this, sigval1, sigval2);
+		return callback_return_value;
+	}
+
+	friend bool QWebPluginFactory_virtualbase_eventFilter(VirtualQWebPluginFactory* self, QObject* watched, QEvent* event);
+
+	virtual void timerEvent(QTimerEvent* event) override {
+		if (vtbl->timerEvent == 0) {
+			QWebPluginFactory::timerEvent(event);
+			return;
+		}
+
+		QTimerEvent* sigval1 = event;
+		vtbl->timerEvent(this, sigval1);
+	}
+
+	friend void QWebPluginFactory_virtualbase_timerEvent(VirtualQWebPluginFactory* self, QTimerEvent* event);
+
+	virtual void childEvent(QChildEvent* event) override {
+		if (vtbl->childEvent == 0) {
+			QWebPluginFactory::childEvent(event);
+			return;
+		}
+
+		QChildEvent* sigval1 = event;
+		vtbl->childEvent(this, sigval1);
+	}
+
+	friend void QWebPluginFactory_virtualbase_childEvent(VirtualQWebPluginFactory* self, QChildEvent* event);
+
+	virtual void customEvent(QEvent* event) override {
+		if (vtbl->customEvent == 0) {
+			QWebPluginFactory::customEvent(event);
+			return;
+		}
+
+		QEvent* sigval1 = event;
+		vtbl->customEvent(this, sigval1);
+	}
+
+	friend void QWebPluginFactory_virtualbase_customEvent(VirtualQWebPluginFactory* self, QEvent* event);
+
+	virtual void connectNotify(const QMetaMethod& signal) override {
+		if (vtbl->connectNotify == 0) {
+			QWebPluginFactory::connectNotify(signal);
+			return;
+		}
+
+		const QMetaMethod& signal_ret = signal;
+		// Cast returned reference into pointer
+		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
+		vtbl->connectNotify(this, sigval1);
+	}
+
+	friend void QWebPluginFactory_virtualbase_connectNotify(VirtualQWebPluginFactory* self, QMetaMethod* signal);
+
+	virtual void disconnectNotify(const QMetaMethod& signal) override {
+		if (vtbl->disconnectNotify == 0) {
+			QWebPluginFactory::disconnectNotify(signal);
+			return;
+		}
+
+		const QMetaMethod& signal_ret = signal;
+		// Cast returned reference into pointer
+		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
+		vtbl->disconnectNotify(this, sigval1);
+	}
+
+	friend void QWebPluginFactory_virtualbase_disconnectNotify(VirtualQWebPluginFactory* self, QMetaMethod* signal);
+
+	// Wrappers to allow calling protected methods:
+	friend QObject* QWebPluginFactory_protectedbase_sender(const VirtualQWebPluginFactory* self);
+	friend int QWebPluginFactory_protectedbase_senderSignalIndex(const VirtualQWebPluginFactory* self);
+	friend int QWebPluginFactory_protectedbase_receivers(const VirtualQWebPluginFactory* self, const char* signal);
+	friend bool QWebPluginFactory_protectedbase_isSignalConnected(const VirtualQWebPluginFactory* self, QMetaMethod* signal);
+};
+
+VirtualQWebPluginFactory* QWebPluginFactory_new(const QWebPluginFactory_VTable* vtbl, size_t vdata) {
+	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQWebPluginFactory>() + vdata, std::nothrow);
+	return _mem_ ? new (_mem_)VirtualQWebPluginFactory(vtbl) : nullptr;
+}
+
+VirtualQWebPluginFactory* QWebPluginFactory_new2(const QWebPluginFactory_VTable* vtbl, size_t vdata, QObject* parent) {
+	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQWebPluginFactory>() + vdata, std::nothrow);
+	return _mem_ ? new (_mem_)VirtualQWebPluginFactory(vtbl, parent) : nullptr;
+}
+
+void QWebPluginFactory_virtbase(QWebPluginFactory* src, QObject** outptr_QObject) {
+	*outptr_QObject = static_cast<QObject*>(src);
+}
+
+QMetaObject* QWebPluginFactory_metaObject(const QWebPluginFactory* self) {
+	return (QMetaObject*) self->metaObject();
+}
+
+void* QWebPluginFactory_metacast(QWebPluginFactory* self, const char* param1) {
+	return self->qt_metacast(param1);
+}
+
+int QWebPluginFactory_metacall(QWebPluginFactory* self, int param1, int param2, void** param3) {
+	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+}
+
+struct seaqt_string QWebPluginFactory_tr(const char* s) {
+	QString _ret = QWebPluginFactory::tr(s);
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+struct seaqt_string QWebPluginFactory_trUtf8(const char* s) {
+	QString _ret = QWebPluginFactory::trUtf8(s);
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+struct seaqt_array /* of QWebPluginFactory__Plugin* */  QWebPluginFactory_plugins(const QWebPluginFactory* self) {
+	QList<QWebPluginFactory::Plugin> _ret = self->plugins();
+	// Convert QList<> from C++ memory to manually-managed C memory
+	QWebPluginFactory__Plugin** _arr = static_cast<QWebPluginFactory__Plugin**>(malloc(sizeof(QWebPluginFactory__Plugin*) * _ret.length()));
+	for (size_t i = 0, e = _ret.length(); i < e; ++i) {
+		_arr[i] = new QWebPluginFactory::Plugin(_ret[i]);
+	}
+	struct seaqt_array _out;
+	_out.len = _ret.length();
+	_out.data = static_cast<void*>(_arr);
+	return _out;
+}
+
+void QWebPluginFactory_refreshPlugins(QWebPluginFactory* self) {
+	self->refreshPlugins();
+}
+
+QObject* QWebPluginFactory_create(const QWebPluginFactory* self, struct seaqt_string mimeType, QUrl* param2, struct seaqt_array /* of struct seaqt_string */  argumentNames, struct seaqt_array /* of struct seaqt_string */  argumentValues) {
+	QString mimeType_QString = QString::fromUtf8(mimeType.data, mimeType.len);
+	QStringList argumentNames_QList;
+	argumentNames_QList.reserve(argumentNames.len);
+	struct seaqt_string* argumentNames_arr = static_cast<struct seaqt_string*>(argumentNames.data);
+	for(size_t i = 0; i < argumentNames.len; ++i) {
+		QString argumentNames_arr_i_QString = QString::fromUtf8(argumentNames_arr[i].data, argumentNames_arr[i].len);
+		argumentNames_QList.push_back(argumentNames_arr_i_QString);
+	}
+	QStringList argumentValues_QList;
+	argumentValues_QList.reserve(argumentValues.len);
+	struct seaqt_string* argumentValues_arr = static_cast<struct seaqt_string*>(argumentValues.data);
+	for(size_t i = 0; i < argumentValues.len; ++i) {
+		QString argumentValues_arr_i_QString = QString::fromUtf8(argumentValues_arr[i].data, argumentValues_arr[i].len);
+		argumentValues_QList.push_back(argumentValues_arr_i_QString);
+	}
+	return self->create(mimeType_QString, *param2, argumentNames_QList, argumentValues_QList);
+}
+
+bool QWebPluginFactory_extension(QWebPluginFactory* self, int extension, QWebPluginFactory__ExtensionOption* option, QWebPluginFactory__ExtensionReturn* output) {
+	return self->extension(static_cast<QWebPluginFactory::Extension>(extension), option, output);
+}
+
+bool QWebPluginFactory_supportsExtension(const QWebPluginFactory* self, int extension) {
+	return self->supportsExtension(static_cast<QWebPluginFactory::Extension>(extension));
+}
+
+struct seaqt_string QWebPluginFactory_tr2(const char* s, const char* c) {
+	QString _ret = QWebPluginFactory::tr(s, c);
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+struct seaqt_string QWebPluginFactory_tr3(const char* s, const char* c, int n) {
+	QString _ret = QWebPluginFactory::tr(s, c, static_cast<int>(n));
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+struct seaqt_string QWebPluginFactory_trUtf82(const char* s, const char* c) {
+	QString _ret = QWebPluginFactory::trUtf8(s, c);
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+struct seaqt_string QWebPluginFactory_trUtf83(const char* s, const char* c, int n) {
+	QString _ret = QWebPluginFactory::trUtf8(s, c, static_cast<int>(n));
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+const QMetaObject* QWebPluginFactory_staticMetaObject() { return &QWebPluginFactory::staticMetaObject; }
+void* QWebPluginFactory_vdata(VirtualQWebPluginFactory* self) { return reinterpret_cast<void*>(reinterpret_cast<char*>(self) + seaqt_aligned_sizeof<VirtualQWebPluginFactory>()); }
+VirtualQWebPluginFactory* vdata_QWebPluginFactory(void* vdata) { return reinterpret_cast<VirtualQWebPluginFactory*>(reinterpret_cast<char*>(vdata) - seaqt_aligned_sizeof<VirtualQWebPluginFactory>()); }
+
+QMetaObject* QWebPluginFactory_virtualbase_metaObject(const VirtualQWebPluginFactory* self) {
+
+	return (QMetaObject*) self->QWebPluginFactory::metaObject();
+}
+
+void* QWebPluginFactory_virtualbase_metacast(VirtualQWebPluginFactory* self, const char* param1) {
+
+	return self->QWebPluginFactory::qt_metacast(param1);
+}
+
+int QWebPluginFactory_virtualbase_metacall(VirtualQWebPluginFactory* self, int param1, int param2, void** param3) {
+
+	return self->QWebPluginFactory::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+}
+
+void QWebPluginFactory_virtualbase_refreshPlugins(VirtualQWebPluginFactory* self) {
+
+	self->QWebPluginFactory::refreshPlugins();
+}
+
+bool QWebPluginFactory_virtualbase_extension(VirtualQWebPluginFactory* self, int extension, QWebPluginFactory__ExtensionOption* option, QWebPluginFactory__ExtensionReturn* output) {
+
+	return self->QWebPluginFactory::extension(static_cast<VirtualQWebPluginFactory::Extension>(extension), option, output);
+}
+
+bool QWebPluginFactory_virtualbase_supportsExtension(const VirtualQWebPluginFactory* self, int extension) {
+
+	return self->QWebPluginFactory::supportsExtension(static_cast<VirtualQWebPluginFactory::Extension>(extension));
+}
+
+bool QWebPluginFactory_virtualbase_event(VirtualQWebPluginFactory* self, QEvent* event) {
+
+	return self->QWebPluginFactory::event(event);
+}
+
+bool QWebPluginFactory_virtualbase_eventFilter(VirtualQWebPluginFactory* self, QObject* watched, QEvent* event) {
+
+	return self->QWebPluginFactory::eventFilter(watched, event);
+}
+
+void QWebPluginFactory_virtualbase_timerEvent(VirtualQWebPluginFactory* self, QTimerEvent* event) {
+
+	self->QWebPluginFactory::timerEvent(event);
+}
+
+void QWebPluginFactory_virtualbase_childEvent(VirtualQWebPluginFactory* self, QChildEvent* event) {
+
+	self->QWebPluginFactory::childEvent(event);
+}
+
+void QWebPluginFactory_virtualbase_customEvent(VirtualQWebPluginFactory* self, QEvent* event) {
+
+	self->QWebPluginFactory::customEvent(event);
+}
+
+void QWebPluginFactory_virtualbase_connectNotify(VirtualQWebPluginFactory* self, QMetaMethod* signal) {
+
+	self->QWebPluginFactory::connectNotify(*signal);
+}
+
+void QWebPluginFactory_virtualbase_disconnectNotify(VirtualQWebPluginFactory* self, QMetaMethod* signal) {
+
+	self->QWebPluginFactory::disconnectNotify(*signal);
+}
+
+QObject* QWebPluginFactory_protectedbase_sender(const VirtualQWebPluginFactory* self) {
+	return self->sender();
+}
+
+int QWebPluginFactory_protectedbase_senderSignalIndex(const VirtualQWebPluginFactory* self) {
+	return self->senderSignalIndex();
+}
+
+int QWebPluginFactory_protectedbase_receivers(const VirtualQWebPluginFactory* self, const char* signal) {
+	return self->receivers(signal);
+}
+
+bool QWebPluginFactory_protectedbase_isSignalConnected(const VirtualQWebPluginFactory* self, QMetaMethod* signal) {
+	return self->isSignalConnected(*signal);
+}
+
+void QWebPluginFactory_delete(QWebPluginFactory* self) {
+	delete self;
+}
+
+QWebPluginFactory__MimeType* QWebPluginFactory__MimeType_new(QWebPluginFactory__MimeType* param1) {
+	return new (std::nothrow) QWebPluginFactory__MimeType(*param1);
+}
+
+bool QWebPluginFactory__MimeType_operatorEqual(const QWebPluginFactory__MimeType* self, QWebPluginFactory__MimeType* other) {
+	return (*self == *other);
+}
+
+bool QWebPluginFactory__MimeType_operatorNotEqual(const QWebPluginFactory__MimeType* self, QWebPluginFactory__MimeType* other) {
+	return (*self != *other);
+}
+
+void QWebPluginFactory__MimeType_operatorAssign(QWebPluginFactory__MimeType* self, QWebPluginFactory__MimeType* param1) {
+	self->operator=(*param1);
+}
+
+void QWebPluginFactory__MimeType_delete(QWebPluginFactory__MimeType* self) {
+	delete self;
+}
+
+QWebPluginFactory__Plugin* QWebPluginFactory__Plugin_new(QWebPluginFactory__Plugin* param1) {
+	return new (std::nothrow) QWebPluginFactory__Plugin(*param1);
+}
+
+void QWebPluginFactory__Plugin_operatorAssign(QWebPluginFactory__Plugin* self, QWebPluginFactory__Plugin* param1) {
+	self->operator=(*param1);
+}
+
+void QWebPluginFactory__Plugin_delete(QWebPluginFactory__Plugin* self) {
+	delete self;
+}
+
+void QWebPluginFactory__ExtensionOption_delete(QWebPluginFactory__ExtensionOption* self) {
+	delete self;
+}
+
+void QWebPluginFactory__ExtensionReturn_delete(QWebPluginFactory__ExtensionReturn* self) {
+	delete self;
+}
+
