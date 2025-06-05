@@ -55,11 +55,9 @@ proc fcQPageRanges_lastPage(self: pointer): cint {.importc: "QPageRanges_lastPag
 proc fcQPageRanges_detach(self: pointer): void {.importc: "QPageRanges_detach".}
 proc fcQPageRanges_new(): ptr cQPageRanges {.importc: "QPageRanges_new".}
 proc fcQPageRanges_new2(other: pointer): ptr cQPageRanges {.importc: "QPageRanges_new2".}
-proc fcQPageRanges_delete(self: pointer) {.importc: "QPageRanges_delete".}
 proc fcQPageRangesRange_contains(self: pointer, pageNumber: cint): bool {.importc: "QPageRanges__Range_contains".}
 proc fcQPageRangesRange_new(): ptr cQPageRangesRange {.importc: "QPageRanges__Range_new".}
 proc fcQPageRangesRange_new2(param1: pointer): ptr cQPageRangesRange {.importc: "QPageRanges__Range_new2".}
-proc fcQPageRangesRange_delete(self: pointer) {.importc: "QPageRanges__Range_delete".}
 
 proc operatorAssign*(self: gen_qpageranges_types.QPageRanges, other: gen_qpageranges_types.QPageRanges): void =
   fcQPageRanges_operatorAssign(self.h, other.h)
@@ -78,7 +76,7 @@ proc toRangeList*(self: gen_qpageranges_types.QPageRanges): seq[gen_qpageranges_
   var vx_ret = newSeq[gen_qpageranges_types.QPageRangesRange](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qpageranges_types.QPageRangesRange(h: v_outCast[i])
+    vx_ret[i] = gen_qpageranges_types.QPageRangesRange(h: v_outCast[i], owned: true)
   c_free(v_ma.data)
   vx_ret
 
@@ -92,7 +90,7 @@ proc toString*(self: gen_qpageranges_types.QPageRanges): string =
   vx_ret
 
 proc fromString*(_: type gen_qpageranges_types.QPageRanges, ranges: openArray[char]): gen_qpageranges_types.QPageRanges =
-  gen_qpageranges_types.QPageRanges(h: fcQPageRanges_fromString(struct_seaqt_string(data: if len(ranges) > 0: addr ranges[0] else: nil, len: csize_t(len(ranges)))))
+  gen_qpageranges_types.QPageRanges(h: fcQPageRanges_fromString(struct_seaqt_string(data: if len(ranges) > 0: addr ranges[0] else: nil, len: csize_t(len(ranges)))), owned: true)
 
 proc contains*(self: gen_qpageranges_types.QPageRanges, pageNumber: cint): bool =
   fcQPageRanges_contains(self.h, pageNumber)
@@ -110,23 +108,19 @@ proc detach*(self: gen_qpageranges_types.QPageRanges): void =
   fcQPageRanges_detach(self.h)
 
 proc create*(T: type gen_qpageranges_types.QPageRanges): gen_qpageranges_types.QPageRanges =
-  let tmp = gen_qpageranges_types.QPageRanges(h: fcQPageRanges_new())
+  let tmp = gen_qpageranges_types.QPageRanges(h: fcQPageRanges_new(), owned: true)
   tmp
 proc create*(T: type gen_qpageranges_types.QPageRanges,
     other: gen_qpageranges_types.QPageRanges): gen_qpageranges_types.QPageRanges =
-  let tmp = gen_qpageranges_types.QPageRanges(h: fcQPageRanges_new2(other.h))
+  let tmp = gen_qpageranges_types.QPageRanges(h: fcQPageRanges_new2(other.h), owned: true)
   tmp
-proc delete*(self: gen_qpageranges_types.QPageRanges) =
-  fcQPageRanges_delete(self.h)
 proc contains*(self: gen_qpageranges_types.QPageRangesRange, pageNumber: cint): bool =
   fcQPageRangesRange_contains(self.h, pageNumber)
 
 proc create*(T: type gen_qpageranges_types.QPageRangesRange): gen_qpageranges_types.QPageRangesRange =
-  let tmp = gen_qpageranges_types.QPageRangesRange(h: fcQPageRangesRange_new())
+  let tmp = gen_qpageranges_types.QPageRangesRange(h: fcQPageRangesRange_new(), owned: true)
   tmp
 proc create*(T: type gen_qpageranges_types.QPageRangesRange,
     param1: gen_qpageranges_types.QPageRangesRange): gen_qpageranges_types.QPageRangesRange =
-  let tmp = gen_qpageranges_types.QPageRangesRange(h: fcQPageRangesRange_new2(param1.h))
+  let tmp = gen_qpageranges_types.QPageRangesRange(h: fcQPageRangesRange_new2(param1.h), owned: true)
   tmp
-proc delete*(self: gen_qpageranges_types.QPageRangesRange) =
-  fcQPageRangesRange_delete(self.h)

@@ -1,4 +1,4 @@
-type QMediaTimeRange* {.inheritable, pure.} = object
+type QMediaTimeRange* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -22,7 +22,7 @@ proc delete*(self: sink QMediaTimeRange) =
   wasMoved(self)
   fcQMediaTimeRange_delete(h)
 
-type QMediaTimeRangeInterval* {.inheritable, pure.} = object
+type QMediaTimeRangeInterval* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

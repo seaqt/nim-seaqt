@@ -1,4 +1,4 @@
-type QDnsDomainNameRecord* {.inheritable, pure.} = object
+type QDnsDomainNameRecord* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -22,7 +22,7 @@ proc delete*(self: sink QDnsDomainNameRecord) =
   wasMoved(self)
   fcQDnsDomainNameRecord_delete(h)
 
-type QDnsHostAddressRecord* {.inheritable, pure.} = object
+type QDnsHostAddressRecord* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -42,7 +42,7 @@ proc delete*(self: sink QDnsHostAddressRecord) =
   wasMoved(self)
   fcQDnsHostAddressRecord_delete(h)
 
-type QDnsMailExchangeRecord* {.inheritable, pure.} = object
+type QDnsMailExchangeRecord* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -62,7 +62,7 @@ proc delete*(self: sink QDnsMailExchangeRecord) =
   wasMoved(self)
   fcQDnsMailExchangeRecord_delete(h)
 
-type QDnsServiceRecord* {.inheritable, pure.} = object
+type QDnsServiceRecord* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -82,7 +82,7 @@ proc delete*(self: sink QDnsServiceRecord) =
   wasMoved(self)
   fcQDnsServiceRecord_delete(h)
 
-type QDnsTextRecord* {.inheritable, pure.} = object
+type QDnsTextRecord* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

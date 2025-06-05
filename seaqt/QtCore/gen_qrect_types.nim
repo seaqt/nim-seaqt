@@ -1,4 +1,4 @@
-type QRect* {.inheritable, pure.} = object
+type QRect* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -22,7 +22,7 @@ proc delete*(self: sink QRect) =
   wasMoved(self)
   fcQRect_delete(h)
 
-type QRectF* {.inheritable, pure.} = object
+type QRectF* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

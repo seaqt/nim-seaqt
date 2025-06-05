@@ -1,4 +1,4 @@
-type QMetaMethod* {.inheritable, pure.} = object
+type QMetaMethod* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -22,7 +22,7 @@ proc delete*(self: sink QMetaMethod) =
   wasMoved(self)
   fcQMetaMethod_delete(h)
 
-type QMetaEnum* {.inheritable, pure.} = object
+type QMetaEnum* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -42,7 +42,7 @@ proc delete*(self: sink QMetaEnum) =
   wasMoved(self)
   fcQMetaEnum_delete(h)
 
-type QMetaProperty* {.inheritable, pure.} = object
+type QMetaProperty* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -62,7 +62,7 @@ proc delete*(self: sink QMetaProperty) =
   wasMoved(self)
   fcQMetaProperty_delete(h)
 
-type QMetaClassInfo* {.inheritable, pure.} = object
+type QMetaClassInfo* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

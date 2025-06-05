@@ -113,13 +113,11 @@ proc fcQQmlContext_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQQ
 proc fcQQmlContext_new3(vtbl: pointer, vdata: csize_t, parent: pointer, objParent: pointer): ptr cQQmlContext {.importc: "QQmlContext_new3".}
 proc fcQQmlContext_new4(vtbl: pointer, vdata: csize_t, parent: pointer, objParent: pointer): ptr cQQmlContext {.importc: "QQmlContext_new4".}
 proc fcQQmlContext_staticMetaObject(): pointer {.importc: "QQmlContext_staticMetaObject".}
-proc fcQQmlContext_delete(self: pointer) {.importc: "QQmlContext_delete".}
 proc fcQQmlContextPropertyPair_operatorAssign(self: pointer, param1: pointer): void {.importc: "QQmlContext__PropertyPair_operatorAssign".}
 proc fcQQmlContextPropertyPair_new(param1: pointer): ptr cQQmlContextPropertyPair {.importc: "QQmlContext__PropertyPair_new".}
-proc fcQQmlContextPropertyPair_delete(self: pointer) {.importc: "QQmlContext__PropertyPair_delete".}
 
 proc metaObject*(self: gen_qqmlcontext_types.QQmlContext): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQQmlContext_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQQmlContext_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qqmlcontext_types.QQmlContext, param1: cstring): pointer =
   fcQQmlContext_metacast(self.h, param1)
@@ -137,19 +135,19 @@ proc isValid*(self: gen_qqmlcontext_types.QQmlContext): bool =
   fcQQmlContext_isValid(self.h)
 
 proc engine*(self: gen_qqmlcontext_types.QQmlContext): gen_qqmlengine_types.QQmlEngine =
-  gen_qqmlengine_types.QQmlEngine(h: fcQQmlContext_engine(self.h))
+  gen_qqmlengine_types.QQmlEngine(h: fcQQmlContext_engine(self.h), owned: false)
 
 proc parentContext*(self: gen_qqmlcontext_types.QQmlContext): gen_qqmlcontext_types.QQmlContext =
-  gen_qqmlcontext_types.QQmlContext(h: fcQQmlContext_parentContext(self.h))
+  gen_qqmlcontext_types.QQmlContext(h: fcQQmlContext_parentContext(self.h), owned: false)
 
 proc contextObject*(self: gen_qqmlcontext_types.QQmlContext): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQQmlContext_contextObject(self.h))
+  gen_qobject_types.QObject(h: fcQQmlContext_contextObject(self.h), owned: false)
 
 proc setContextObject*(self: gen_qqmlcontext_types.QQmlContext, contextObject: gen_qobject_types.QObject): void =
   fcQQmlContext_setContextObject(self.h, contextObject.h)
 
 proc contextProperty*(self: gen_qqmlcontext_types.QQmlContext, param1: openArray[char]): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQQmlContext_contextProperty(self.h, struct_seaqt_string(data: if len(param1) > 0: addr param1[0] else: nil, len: csize_t(len(param1)))))
+  gen_qvariant_types.QVariant(h: fcQQmlContext_contextProperty(self.h, struct_seaqt_string(data: if len(param1) > 0: addr param1[0] else: nil, len: csize_t(len(param1)))), owned: true)
 
 proc setContextProperty*(self: gen_qqmlcontext_types.QQmlContext, param1: openArray[char], param2: gen_qobject_types.QObject): void =
   fcQQmlContext_setContextProperty(self.h, struct_seaqt_string(data: if len(param1) > 0: addr param1[0] else: nil, len: csize_t(len(param1))), param2.h)
@@ -171,19 +169,19 @@ proc nameForObject*(self: gen_qqmlcontext_types.QQmlContext, param1: gen_qobject
   vx_ret
 
 proc objectForName*(self: gen_qqmlcontext_types.QQmlContext, param1: openArray[char]): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQQmlContext_objectForName(self.h, struct_seaqt_string(data: if len(param1) > 0: addr param1[0] else: nil, len: csize_t(len(param1)))))
+  gen_qobject_types.QObject(h: fcQQmlContext_objectForName(self.h, struct_seaqt_string(data: if len(param1) > 0: addr param1[0] else: nil, len: csize_t(len(param1)))), owned: false)
 
 proc resolvedUrl*(self: gen_qqmlcontext_types.QQmlContext, param1: gen_qurl_types.QUrl): gen_qurl_types.QUrl =
-  gen_qurl_types.QUrl(h: fcQQmlContext_resolvedUrl(self.h, param1.h))
+  gen_qurl_types.QUrl(h: fcQQmlContext_resolvedUrl(self.h, param1.h), owned: true)
 
 proc setBaseUrl*(self: gen_qqmlcontext_types.QQmlContext, baseUrl: gen_qurl_types.QUrl): void =
   fcQQmlContext_setBaseUrl(self.h, baseUrl.h)
 
 proc baseUrl*(self: gen_qqmlcontext_types.QQmlContext): gen_qurl_types.QUrl =
-  gen_qurl_types.QUrl(h: fcQQmlContext_baseUrl(self.h))
+  gen_qurl_types.QUrl(h: fcQQmlContext_baseUrl(self.h), owned: true)
 
 proc importedScript*(self: gen_qqmlcontext_types.QQmlContext, name: openArray[char]): gen_qjsvalue_types.QJSValue =
-  gen_qjsvalue_types.QJSValue(h: fcQQmlContext_importedScript(self.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name)))))
+  gen_qjsvalue_types.QJSValue(h: fcQQmlContext_importedScript(self.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name)))), owned: true)
 
 proc tr*(_: type gen_qqmlcontext_types.QQmlContext, s: cstring, c: cstring): string =
   let v_ms = fcQQmlContext_tr2(s, c)
@@ -207,7 +205,8 @@ type QQmlContextchildEventProc* = proc(self: QQmlContext, event: gen_qcoreevent_
 type QQmlContextcustomEventProc* = proc(self: QQmlContext, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QQmlContextconnectNotifyProc* = proc(self: QQmlContext, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QQmlContextdisconnectNotifyProc* = proc(self: QQmlContext, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
-type QQmlContextVTable* = object
+
+type QQmlContextVTable* {.inheritable, pure.} = object
   vtbl: cQQmlContextVTable
   metaObject*: QQmlContextmetaObjectProc
   metacast*: QQmlContextmetacastProc
@@ -221,7 +220,7 @@ type QQmlContextVTable* = object
   disconnectNotify*: QQmlContextdisconnectNotifyProc
 
 proc QQmlContextmetaObject*(self: gen_qqmlcontext_types.QQmlContext): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQQmlContext_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQQmlContext_virtualbase_metaObject(self.h), owned: false)
 
 proc QQmlContextmetacast*(self: gen_qqmlcontext_types.QQmlContext, param1: cstring): pointer =
   fcQQmlContext_virtualbase_metacast(self.h, param1)
@@ -255,7 +254,10 @@ proc fcQQmlContext_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} 
   let vtbl = cast[ptr QQmlContextVTable](fcQQmlContext_vdata(self)[])
   let self = QQmlContext(h: self)
   var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQQmlContext_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QQmlContextVTable](fcQQmlContext_vdata(self)[])
@@ -276,46 +278,46 @@ proc fcQQmlContext_vtable_callback_metacall(self: pointer, param1: cint, param2:
 proc fcQQmlContext_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QQmlContextVTable](fcQQmlContext_vdata(self)[])
   let self = QQmlContext(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
 proc fcQQmlContext_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QQmlContextVTable](fcQQmlContext_vdata(self)[])
   let self = QQmlContext(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
 proc fcQQmlContext_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QQmlContextVTable](fcQQmlContext_vdata(self)[])
   let self = QQmlContext(h: self)
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
 proc fcQQmlContext_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QQmlContextVTable](fcQQmlContext_vdata(self)[])
   let self = QQmlContext(h: self)
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
 proc fcQQmlContext_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QQmlContextVTable](fcQQmlContext_vdata(self)[])
   let self = QQmlContext(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
 proc fcQQmlContext_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QQmlContextVTable](fcQQmlContext_vdata(self)[])
   let self = QQmlContext(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
 proc fcQQmlContext_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QQmlContextVTable](fcQQmlContext_vdata(self)[])
   let self = QQmlContext(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
 type VirtualQQmlContext* {.inheritable.} = ref object of QQmlContext
@@ -345,7 +347,10 @@ method disconnectNotify*(self: VirtualQQmlContext, signal: gen_qmetaobject_types
 proc fcQQmlContext_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQQmlContext](fcQQmlContext_vdata(self)[])
   var virtualReturn = inst.metaObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQQmlContext_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQQmlContext](fcQQmlContext_vdata(self)[])
@@ -363,45 +368,45 @@ proc fcQQmlContext_method_callback_metacall(self: pointer, param1: cint, param2:
 
 proc fcQQmlContext_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQQmlContext](fcQQmlContext_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
 proc fcQQmlContext_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQQmlContext](fcQQmlContext_vdata(self)[])
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
 proc fcQQmlContext_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQQmlContext](fcQQmlContext_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
 proc fcQQmlContext_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQQmlContext](fcQQmlContext_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
 proc fcQQmlContext_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQQmlContext](fcQQmlContext_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
 proc fcQQmlContext_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQQmlContext](fcQQmlContext_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
 proc fcQQmlContext_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQQmlContext](fcQQmlContext_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
 
 
 proc sender*(self: gen_qqmlcontext_types.QQmlContext): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQQmlContext_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQQmlContext_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qqmlcontext_types.QQmlContext): cint =
   fcQQmlContext_protectedbase_senderSignalIndex(self.h)
@@ -440,7 +445,7 @@ proc create*(T: type gen_qqmlcontext_types.QQmlContext,
     vtbl[].vtbl.connectNotify = fcQQmlContext_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQQmlContext_vtable_callback_disconnectNotify
-  let tmp = gen_qqmlcontext_types.QQmlContext(h: fcQQmlContext_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h))
+  let tmp = gen_qqmlcontext_types.QQmlContext(h: fcQQmlContext_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h), owned: true)
   fcQQmlContext_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qqmlcontext_types.QQmlContext,
@@ -471,7 +476,7 @@ proc create*(T: type gen_qqmlcontext_types.QQmlContext,
     vtbl[].vtbl.connectNotify = fcQQmlContext_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQQmlContext_vtable_callback_disconnectNotify
-  let tmp = gen_qqmlcontext_types.QQmlContext(h: fcQQmlContext_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h))
+  let tmp = gen_qqmlcontext_types.QQmlContext(h: fcQQmlContext_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h), owned: true)
   fcQQmlContext_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qqmlcontext_types.QQmlContext,
@@ -502,7 +507,7 @@ proc create*(T: type gen_qqmlcontext_types.QQmlContext,
     vtbl[].vtbl.connectNotify = fcQQmlContext_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQQmlContext_vtable_callback_disconnectNotify
-  let tmp = gen_qqmlcontext_types.QQmlContext(h: fcQQmlContext_new3(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h, objParent.h))
+  let tmp = gen_qqmlcontext_types.QQmlContext(h: fcQQmlContext_new3(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h, objParent.h), owned: true)
   fcQQmlContext_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qqmlcontext_types.QQmlContext,
@@ -533,13 +538,14 @@ proc create*(T: type gen_qqmlcontext_types.QQmlContext,
     vtbl[].vtbl.connectNotify = fcQQmlContext_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQQmlContext_vtable_callback_disconnectNotify
-  let tmp = gen_qqmlcontext_types.QQmlContext(h: fcQQmlContext_new4(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h, objParent.h))
+  let tmp = gen_qqmlcontext_types.QQmlContext(h: fcQQmlContext_new4(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h, objParent.h), owned: true)
   fcQQmlContext_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQQmlContext_mvtbl = cQQmlContextVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQQmlContext()[])](self.fcQQmlContext_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   metaObject: fcQQmlContext_method_callback_metaObject,
   metacast: fcQQmlContext_method_callback_metacast,
@@ -586,14 +592,10 @@ proc create*(T: type gen_qqmlcontext_types.QQmlContext,
 
 proc staticMetaObject*(_: type gen_qqmlcontext_types.QQmlContext): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQQmlContext_staticMetaObject())
-proc delete*(self: gen_qqmlcontext_types.QQmlContext) =
-  fcQQmlContext_delete(self.h)
 proc operatorAssign*(self: gen_qqmlcontext_types.QQmlContextPropertyPair, param1: gen_qqmlcontext_types.QQmlContextPropertyPair): void =
   fcQQmlContextPropertyPair_operatorAssign(self.h, param1.h)
 
 proc create*(T: type gen_qqmlcontext_types.QQmlContextPropertyPair,
     param1: gen_qqmlcontext_types.QQmlContextPropertyPair): gen_qqmlcontext_types.QQmlContextPropertyPair =
-  let tmp = gen_qqmlcontext_types.QQmlContextPropertyPair(h: fcQQmlContextPropertyPair_new(param1.h))
+  let tmp = gen_qqmlcontext_types.QQmlContextPropertyPair(h: fcQQmlContextPropertyPair_new(param1.h), owned: true)
   tmp
-proc delete*(self: gen_qqmlcontext_types.QQmlContextPropertyPair) =
-  fcQQmlContextPropertyPair_delete(self.h)

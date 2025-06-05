@@ -1,4 +1,4 @@
-type QBrush* {.inheritable, pure.} = object
+type QBrush* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -22,7 +22,7 @@ proc delete*(self: sink QBrush) =
   wasMoved(self)
   fcQBrush_delete(h)
 
-type QBrushData* {.inheritable, pure.} = object
+type QBrushData* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -42,7 +42,7 @@ proc delete*(self: sink QBrushData) =
   wasMoved(self)
   fcQBrushData_delete(h)
 
-type QGradient* {.inheritable, pure.} = object
+type QGradient* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -86,7 +86,7 @@ proc `=sink`(dest: var QConicalGradient, source: QConicalGradient) =
   dest.h = source.h
   dest.owned = source.owned
 
-type QGradientQGradientData* {.inheritable, pure.} = object
+type QGradientQGradientData* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

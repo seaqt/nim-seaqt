@@ -240,10 +240,9 @@ proc fcQProgressDialog_new4(vtbl: pointer, vdata: csize_t, parent: pointer, flag
 proc fcQProgressDialog_new5(vtbl: pointer, vdata: csize_t, labelText: struct_seaqt_string, cancelButtonText: struct_seaqt_string, minimum: cint, maximum: cint, parent: pointer): ptr cQProgressDialog {.importc: "QProgressDialog_new5".}
 proc fcQProgressDialog_new6(vtbl: pointer, vdata: csize_t, labelText: struct_seaqt_string, cancelButtonText: struct_seaqt_string, minimum: cint, maximum: cint, parent: pointer, flags: cint): ptr cQProgressDialog {.importc: "QProgressDialog_new6".}
 proc fcQProgressDialog_staticMetaObject(): pointer {.importc: "QProgressDialog_staticMetaObject".}
-proc fcQProgressDialog_delete(self: pointer) {.importc: "QProgressDialog_delete".}
 
 proc metaObject*(self: gen_qprogressdialog_types.QProgressDialog): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQProgressDialog_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQProgressDialog_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qprogressdialog_types.QProgressDialog, param1: cstring): pointer =
   fcQProgressDialog_metacast(self.h, param1)
@@ -279,7 +278,7 @@ proc value*(self: gen_qprogressdialog_types.QProgressDialog): cint =
   fcQProgressDialog_value(self.h)
 
 proc sizeHint*(self: gen_qprogressdialog_types.QProgressDialog): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQProgressDialog_sizeHint(self.h))
+  gen_qsize_types.QSize(h: fcQProgressDialog_sizeHint(self.h), owned: true)
 
 proc labelText*(self: gen_qprogressdialog_types.QProgressDialog): string =
   let v_ms = fcQProgressDialog_labelText(self.h)
@@ -414,7 +413,8 @@ type QProgressDialogchildEventProc* = proc(self: QProgressDialog, event: gen_qco
 type QProgressDialogcustomEventProc* = proc(self: QProgressDialog, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QProgressDialogconnectNotifyProc* = proc(self: QProgressDialog, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QProgressDialogdisconnectNotifyProc* = proc(self: QProgressDialog, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
-type QProgressDialogVTable* = object
+
+type QProgressDialogVTable* {.inheritable, pure.} = object
   vtbl: cQProgressDialogVTable
   metaObject*: QProgressDialogmetaObjectProc
   metacast*: QProgressDialogmetacastProc
@@ -473,7 +473,7 @@ type QProgressDialogVTable* = object
   disconnectNotify*: QProgressDialogdisconnectNotifyProc
 
 proc QProgressDialogmetaObject*(self: gen_qprogressdialog_types.QProgressDialog): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQProgressDialog_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQProgressDialog_virtualbase_metaObject(self.h), owned: false)
 
 proc QProgressDialogmetacast*(self: gen_qprogressdialog_types.QProgressDialog, param1: cstring): pointer =
   fcQProgressDialog_virtualbase_metacast(self.h, param1)
@@ -482,7 +482,7 @@ proc QProgressDialogmetacall*(self: gen_qprogressdialog_types.QProgressDialog, p
   fcQProgressDialog_virtualbase_metacall(self.h, cint(param1), param2, param3)
 
 proc QProgressDialogsizeHint*(self: gen_qprogressdialog_types.QProgressDialog): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQProgressDialog_virtualbase_sizeHint(self.h))
+  gen_qsize_types.QSize(h: fcQProgressDialog_virtualbase_sizeHint(self.h), owned: true)
 
 proc QProgressDialogresizeEvent*(self: gen_qprogressdialog_types.QProgressDialog, event: gen_qevent_types.QResizeEvent): void =
   fcQProgressDialog_virtualbase_resizeEvent(self.h, event.h)
@@ -500,7 +500,7 @@ proc QProgressDialogsetVisible*(self: gen_qprogressdialog_types.QProgressDialog,
   fcQProgressDialog_virtualbase_setVisible(self.h, visible)
 
 proc QProgressDialogminimumSizeHint*(self: gen_qprogressdialog_types.QProgressDialog): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQProgressDialog_virtualbase_minimumSizeHint(self.h))
+  gen_qsize_types.QSize(h: fcQProgressDialog_virtualbase_minimumSizeHint(self.h), owned: true)
 
 proc QProgressDialogopen*(self: gen_qprogressdialog_types.QProgressDialog): void =
   fcQProgressDialog_virtualbase_open(self.h)
@@ -536,7 +536,7 @@ proc QProgressDialoghasHeightForWidth*(self: gen_qprogressdialog_types.QProgress
   fcQProgressDialog_virtualbase_hasHeightForWidth(self.h)
 
 proc QProgressDialogpaintEngine*(self: gen_qprogressdialog_types.QProgressDialog): gen_qpaintengine_types.QPaintEngine =
-  gen_qpaintengine_types.QPaintEngine(h: fcQProgressDialog_virtualbase_paintEngine(self.h))
+  gen_qpaintengine_types.QPaintEngine(h: fcQProgressDialog_virtualbase_paintEngine(self.h), owned: false)
 
 proc QProgressDialogevent*(self: gen_qprogressdialog_types.QProgressDialog, event: gen_qcoreevent_types.QEvent): bool =
   fcQProgressDialog_virtualbase_event(self.h, event.h)
@@ -608,16 +608,16 @@ proc QProgressDialoginitPainter*(self: gen_qprogressdialog_types.QProgressDialog
   fcQProgressDialog_virtualbase_initPainter(self.h, painter.h)
 
 proc QProgressDialogredirected*(self: gen_qprogressdialog_types.QProgressDialog, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice =
-  gen_qpaintdevice_types.QPaintDevice(h: fcQProgressDialog_virtualbase_redirected(self.h, offset.h))
+  gen_qpaintdevice_types.QPaintDevice(h: fcQProgressDialog_virtualbase_redirected(self.h, offset.h), owned: false)
 
 proc QProgressDialogsharedPainter*(self: gen_qprogressdialog_types.QProgressDialog): gen_qpainter_types.QPainter =
-  gen_qpainter_types.QPainter(h: fcQProgressDialog_virtualbase_sharedPainter(self.h))
+  gen_qpainter_types.QPainter(h: fcQProgressDialog_virtualbase_sharedPainter(self.h), owned: false)
 
 proc QProgressDialoginputMethodEvent*(self: gen_qprogressdialog_types.QProgressDialog, param1: gen_qevent_types.QInputMethodEvent): void =
   fcQProgressDialog_virtualbase_inputMethodEvent(self.h, param1.h)
 
 proc QProgressDialoginputMethodQuery*(self: gen_qprogressdialog_types.QProgressDialog, param1: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQProgressDialog_virtualbase_inputMethodQuery(self.h, cint(param1)))
+  gen_qvariant_types.QVariant(h: fcQProgressDialog_virtualbase_inputMethodQuery(self.h, cint(param1)), owned: true)
 
 proc QProgressDialogfocusNextPrevChild*(self: gen_qprogressdialog_types.QProgressDialog, next: bool): bool =
   fcQProgressDialog_virtualbase_focusNextPrevChild(self.h, next)
@@ -642,7 +642,10 @@ proc fcQProgressDialog_vtable_callback_metaObject(self: pointer): pointer {.cdec
   let vtbl = cast[ptr QProgressDialogVTable](fcQProgressDialog_vdata(self)[])
   let self = QProgressDialog(h: self)
   var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQProgressDialog_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QProgressDialogVTable](fcQProgressDialog_vdata(self)[])
@@ -664,30 +667,33 @@ proc fcQProgressDialog_vtable_callback_sizeHint(self: pointer): pointer {.cdecl.
   let vtbl = cast[ptr QProgressDialogVTable](fcQProgressDialog_vdata(self)[])
   let self = QProgressDialog(h: self)
   var virtualReturn = vtbl[].sizeHint(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQProgressDialog_vtable_callback_resizeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QProgressDialogVTable](fcQProgressDialog_vdata(self)[])
   let self = QProgressDialog(h: self)
-  let slotval1 = gen_qevent_types.QResizeEvent(h: event)
+  let slotval1 = gen_qevent_types.QResizeEvent(h: event, owned: false)
   vtbl[].resizeEvent(self, slotval1)
 
 proc fcQProgressDialog_vtable_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QProgressDialogVTable](fcQProgressDialog_vdata(self)[])
   let self = QProgressDialog(h: self)
-  let slotval1 = gen_qevent_types.QCloseEvent(h: event)
+  let slotval1 = gen_qevent_types.QCloseEvent(h: event, owned: false)
   vtbl[].closeEvent(self, slotval1)
 
 proc fcQProgressDialog_vtable_callback_changeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QProgressDialogVTable](fcQProgressDialog_vdata(self)[])
   let self = QProgressDialog(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].changeEvent(self, slotval1)
 
 proc fcQProgressDialog_vtable_callback_showEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QProgressDialogVTable](fcQProgressDialog_vdata(self)[])
   let self = QProgressDialog(h: self)
-  let slotval1 = gen_qevent_types.QShowEvent(h: event)
+  let slotval1 = gen_qevent_types.QShowEvent(h: event, owned: false)
   vtbl[].showEvent(self, slotval1)
 
 proc fcQProgressDialog_vtable_callback_setVisible(self: pointer, visible: bool): void {.cdecl.} =
@@ -700,7 +706,10 @@ proc fcQProgressDialog_vtable_callback_minimumSizeHint(self: pointer): pointer {
   let vtbl = cast[ptr QProgressDialogVTable](fcQProgressDialog_vdata(self)[])
   let self = QProgressDialog(h: self)
   var virtualReturn = vtbl[].minimumSizeHint(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQProgressDialog_vtable_callback_open(self: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QProgressDialogVTable](fcQProgressDialog_vdata(self)[])
@@ -732,20 +741,20 @@ proc fcQProgressDialog_vtable_callback_reject(self: pointer): void {.cdecl.} =
 proc fcQProgressDialog_vtable_callback_keyPressEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QProgressDialogVTable](fcQProgressDialog_vdata(self)[])
   let self = QProgressDialog(h: self)
-  let slotval1 = gen_qevent_types.QKeyEvent(h: param1)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: param1, owned: false)
   vtbl[].keyPressEvent(self, slotval1)
 
 proc fcQProgressDialog_vtable_callback_contextMenuEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QProgressDialogVTable](fcQProgressDialog_vdata(self)[])
   let self = QProgressDialog(h: self)
-  let slotval1 = gen_qevent_types.QContextMenuEvent(h: param1)
+  let slotval1 = gen_qevent_types.QContextMenuEvent(h: param1, owned: false)
   vtbl[].contextMenuEvent(self, slotval1)
 
 proc fcQProgressDialog_vtable_callback_eventFilter(self: pointer, param1: pointer, param2: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QProgressDialogVTable](fcQProgressDialog_vdata(self)[])
   let self = QProgressDialog(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: param1)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: param2)
+  let slotval1 = gen_qobject_types.QObject(h: param1, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: param2, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
@@ -772,127 +781,130 @@ proc fcQProgressDialog_vtable_callback_paintEngine(self: pointer): pointer {.cde
   let vtbl = cast[ptr QProgressDialogVTable](fcQProgressDialog_vdata(self)[])
   let self = QProgressDialog(h: self)
   var virtualReturn = vtbl[].paintEngine(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQProgressDialog_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QProgressDialogVTable](fcQProgressDialog_vdata(self)[])
   let self = QProgressDialog(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
 proc fcQProgressDialog_vtable_callback_mousePressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QProgressDialogVTable](fcQProgressDialog_vdata(self)[])
   let self = QProgressDialog(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mousePressEvent(self, slotval1)
 
 proc fcQProgressDialog_vtable_callback_mouseReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QProgressDialogVTable](fcQProgressDialog_vdata(self)[])
   let self = QProgressDialog(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseReleaseEvent(self, slotval1)
 
 proc fcQProgressDialog_vtable_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QProgressDialogVTable](fcQProgressDialog_vdata(self)[])
   let self = QProgressDialog(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseDoubleClickEvent(self, slotval1)
 
 proc fcQProgressDialog_vtable_callback_mouseMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QProgressDialogVTable](fcQProgressDialog_vdata(self)[])
   let self = QProgressDialog(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseMoveEvent(self, slotval1)
 
 proc fcQProgressDialog_vtable_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QProgressDialogVTable](fcQProgressDialog_vdata(self)[])
   let self = QProgressDialog(h: self)
-  let slotval1 = gen_qevent_types.QWheelEvent(h: event)
+  let slotval1 = gen_qevent_types.QWheelEvent(h: event, owned: false)
   vtbl[].wheelEvent(self, slotval1)
 
 proc fcQProgressDialog_vtable_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QProgressDialogVTable](fcQProgressDialog_vdata(self)[])
   let self = QProgressDialog(h: self)
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   vtbl[].keyReleaseEvent(self, slotval1)
 
 proc fcQProgressDialog_vtable_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QProgressDialogVTable](fcQProgressDialog_vdata(self)[])
   let self = QProgressDialog(h: self)
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusInEvent(self, slotval1)
 
 proc fcQProgressDialog_vtable_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QProgressDialogVTable](fcQProgressDialog_vdata(self)[])
   let self = QProgressDialog(h: self)
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusOutEvent(self, slotval1)
 
 proc fcQProgressDialog_vtable_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QProgressDialogVTable](fcQProgressDialog_vdata(self)[])
   let self = QProgressDialog(h: self)
-  let slotval1 = gen_qevent_types.QEnterEvent(h: event)
+  let slotval1 = gen_qevent_types.QEnterEvent(h: event, owned: false)
   vtbl[].enterEvent(self, slotval1)
 
 proc fcQProgressDialog_vtable_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QProgressDialogVTable](fcQProgressDialog_vdata(self)[])
   let self = QProgressDialog(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].leaveEvent(self, slotval1)
 
 proc fcQProgressDialog_vtable_callback_paintEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QProgressDialogVTable](fcQProgressDialog_vdata(self)[])
   let self = QProgressDialog(h: self)
-  let slotval1 = gen_qevent_types.QPaintEvent(h: event)
+  let slotval1 = gen_qevent_types.QPaintEvent(h: event, owned: false)
   vtbl[].paintEvent(self, slotval1)
 
 proc fcQProgressDialog_vtable_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QProgressDialogVTable](fcQProgressDialog_vdata(self)[])
   let self = QProgressDialog(h: self)
-  let slotval1 = gen_qevent_types.QMoveEvent(h: event)
+  let slotval1 = gen_qevent_types.QMoveEvent(h: event, owned: false)
   vtbl[].moveEvent(self, slotval1)
 
 proc fcQProgressDialog_vtable_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QProgressDialogVTable](fcQProgressDialog_vdata(self)[])
   let self = QProgressDialog(h: self)
-  let slotval1 = gen_qevent_types.QTabletEvent(h: event)
+  let slotval1 = gen_qevent_types.QTabletEvent(h: event, owned: false)
   vtbl[].tabletEvent(self, slotval1)
 
 proc fcQProgressDialog_vtable_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QProgressDialogVTable](fcQProgressDialog_vdata(self)[])
   let self = QProgressDialog(h: self)
-  let slotval1 = gen_qevent_types.QActionEvent(h: event)
+  let slotval1 = gen_qevent_types.QActionEvent(h: event, owned: false)
   vtbl[].actionEvent(self, slotval1)
 
 proc fcQProgressDialog_vtable_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QProgressDialogVTable](fcQProgressDialog_vdata(self)[])
   let self = QProgressDialog(h: self)
-  let slotval1 = gen_qevent_types.QDragEnterEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragEnterEvent(h: event, owned: false)
   vtbl[].dragEnterEvent(self, slotval1)
 
 proc fcQProgressDialog_vtable_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QProgressDialogVTable](fcQProgressDialog_vdata(self)[])
   let self = QProgressDialog(h: self)
-  let slotval1 = gen_qevent_types.QDragMoveEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragMoveEvent(h: event, owned: false)
   vtbl[].dragMoveEvent(self, slotval1)
 
 proc fcQProgressDialog_vtable_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QProgressDialogVTable](fcQProgressDialog_vdata(self)[])
   let self = QProgressDialog(h: self)
-  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event, owned: false)
   vtbl[].dragLeaveEvent(self, slotval1)
 
 proc fcQProgressDialog_vtable_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QProgressDialogVTable](fcQProgressDialog_vdata(self)[])
   let self = QProgressDialog(h: self)
-  let slotval1 = gen_qevent_types.QDropEvent(h: event)
+  let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
   vtbl[].dropEvent(self, slotval1)
 
 proc fcQProgressDialog_vtable_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QProgressDialogVTable](fcQProgressDialog_vdata(self)[])
   let self = QProgressDialog(h: self)
-  let slotval1 = gen_qevent_types.QHideEvent(h: event)
+  let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   vtbl[].hideEvent(self, slotval1)
 
 proc fcQProgressDialog_vtable_callback_nativeEvent(self: pointer, eventType: struct_seaqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
@@ -917,26 +929,32 @@ proc fcQProgressDialog_vtable_callback_metric(self: pointer, param1: cint): cint
 proc fcQProgressDialog_vtable_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QProgressDialogVTable](fcQProgressDialog_vdata(self)[])
   let self = QProgressDialog(h: self)
-  let slotval1 = gen_qpainter_types.QPainter(h: painter)
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
   vtbl[].initPainter(self, slotval1)
 
 proc fcQProgressDialog_vtable_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QProgressDialogVTable](fcQProgressDialog_vdata(self)[])
   let self = QProgressDialog(h: self)
-  let slotval1 = gen_qpoint_types.QPoint(h: offset)
+  let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
   var virtualReturn = vtbl[].redirected(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQProgressDialog_vtable_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QProgressDialogVTable](fcQProgressDialog_vdata(self)[])
   let self = QProgressDialog(h: self)
   var virtualReturn = vtbl[].sharedPainter(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQProgressDialog_vtable_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QProgressDialogVTable](fcQProgressDialog_vdata(self)[])
   let self = QProgressDialog(h: self)
-  let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1)
+  let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1, owned: false)
   vtbl[].inputMethodEvent(self, slotval1)
 
 proc fcQProgressDialog_vtable_callback_inputMethodQuery(self: pointer, param1: cint): pointer {.cdecl.} =
@@ -944,7 +962,10 @@ proc fcQProgressDialog_vtable_callback_inputMethodQuery(self: pointer, param1: c
   let self = QProgressDialog(h: self)
   let slotval1 = cint(param1)
   var virtualReturn = vtbl[].inputMethodQuery(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQProgressDialog_vtable_callback_focusNextPrevChild(self: pointer, next: bool): bool {.cdecl.} =
   let vtbl = cast[ptr QProgressDialogVTable](fcQProgressDialog_vdata(self)[])
@@ -956,31 +977,31 @@ proc fcQProgressDialog_vtable_callback_focusNextPrevChild(self: pointer, next: b
 proc fcQProgressDialog_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QProgressDialogVTable](fcQProgressDialog_vdata(self)[])
   let self = QProgressDialog(h: self)
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
 proc fcQProgressDialog_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QProgressDialogVTable](fcQProgressDialog_vdata(self)[])
   let self = QProgressDialog(h: self)
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
 proc fcQProgressDialog_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QProgressDialogVTable](fcQProgressDialog_vdata(self)[])
   let self = QProgressDialog(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
 proc fcQProgressDialog_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QProgressDialogVTable](fcQProgressDialog_vdata(self)[])
   let self = QProgressDialog(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
 proc fcQProgressDialog_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QProgressDialogVTable](fcQProgressDialog_vdata(self)[])
   let self = QProgressDialog(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
 type VirtualQProgressDialog* {.inheritable.} = ref object of QProgressDialog
@@ -1100,7 +1121,10 @@ method disconnectNotify*(self: VirtualQProgressDialog, signal: gen_qmetaobject_t
 proc fcQProgressDialog_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQProgressDialog](fcQProgressDialog_vdata(self)[])
   var virtualReturn = inst.metaObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQProgressDialog_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQProgressDialog](fcQProgressDialog_vdata(self)[])
@@ -1119,26 +1143,29 @@ proc fcQProgressDialog_method_callback_metacall(self: pointer, param1: cint, par
 proc fcQProgressDialog_method_callback_sizeHint(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQProgressDialog](fcQProgressDialog_vdata(self)[])
   var virtualReturn = inst.sizeHint()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQProgressDialog_method_callback_resizeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQProgressDialog](fcQProgressDialog_vdata(self)[])
-  let slotval1 = gen_qevent_types.QResizeEvent(h: event)
+  let slotval1 = gen_qevent_types.QResizeEvent(h: event, owned: false)
   inst.resizeEvent(slotval1)
 
 proc fcQProgressDialog_method_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQProgressDialog](fcQProgressDialog_vdata(self)[])
-  let slotval1 = gen_qevent_types.QCloseEvent(h: event)
+  let slotval1 = gen_qevent_types.QCloseEvent(h: event, owned: false)
   inst.closeEvent(slotval1)
 
 proc fcQProgressDialog_method_callback_changeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQProgressDialog](fcQProgressDialog_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.changeEvent(slotval1)
 
 proc fcQProgressDialog_method_callback_showEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQProgressDialog](fcQProgressDialog_vdata(self)[])
-  let slotval1 = gen_qevent_types.QShowEvent(h: event)
+  let slotval1 = gen_qevent_types.QShowEvent(h: event, owned: false)
   inst.showEvent(slotval1)
 
 proc fcQProgressDialog_method_callback_setVisible(self: pointer, visible: bool): void {.cdecl.} =
@@ -1149,7 +1176,10 @@ proc fcQProgressDialog_method_callback_setVisible(self: pointer, visible: bool):
 proc fcQProgressDialog_method_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQProgressDialog](fcQProgressDialog_vdata(self)[])
   var virtualReturn = inst.minimumSizeHint()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQProgressDialog_method_callback_open(self: pointer): void {.cdecl.} =
   let inst = cast[VirtualQProgressDialog](fcQProgressDialog_vdata(self)[])
@@ -1175,18 +1205,18 @@ proc fcQProgressDialog_method_callback_reject(self: pointer): void {.cdecl.} =
 
 proc fcQProgressDialog_method_callback_keyPressEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQProgressDialog](fcQProgressDialog_vdata(self)[])
-  let slotval1 = gen_qevent_types.QKeyEvent(h: param1)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: param1, owned: false)
   inst.keyPressEvent(slotval1)
 
 proc fcQProgressDialog_method_callback_contextMenuEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQProgressDialog](fcQProgressDialog_vdata(self)[])
-  let slotval1 = gen_qevent_types.QContextMenuEvent(h: param1)
+  let slotval1 = gen_qevent_types.QContextMenuEvent(h: param1, owned: false)
   inst.contextMenuEvent(slotval1)
 
 proc fcQProgressDialog_method_callback_eventFilter(self: pointer, param1: pointer, param2: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQProgressDialog](fcQProgressDialog_vdata(self)[])
-  let slotval1 = gen_qobject_types.QObject(h: param1)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: param2)
+  let slotval1 = gen_qobject_types.QObject(h: param1, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: param2, owned: false)
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
@@ -1209,107 +1239,110 @@ proc fcQProgressDialog_method_callback_hasHeightForWidth(self: pointer): bool {.
 proc fcQProgressDialog_method_callback_paintEngine(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQProgressDialog](fcQProgressDialog_vdata(self)[])
   var virtualReturn = inst.paintEngine()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQProgressDialog_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQProgressDialog](fcQProgressDialog_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
 proc fcQProgressDialog_method_callback_mousePressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQProgressDialog](fcQProgressDialog_vdata(self)[])
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mousePressEvent(slotval1)
 
 proc fcQProgressDialog_method_callback_mouseReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQProgressDialog](fcQProgressDialog_vdata(self)[])
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mouseReleaseEvent(slotval1)
 
 proc fcQProgressDialog_method_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQProgressDialog](fcQProgressDialog_vdata(self)[])
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mouseDoubleClickEvent(slotval1)
 
 proc fcQProgressDialog_method_callback_mouseMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQProgressDialog](fcQProgressDialog_vdata(self)[])
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mouseMoveEvent(slotval1)
 
 proc fcQProgressDialog_method_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQProgressDialog](fcQProgressDialog_vdata(self)[])
-  let slotval1 = gen_qevent_types.QWheelEvent(h: event)
+  let slotval1 = gen_qevent_types.QWheelEvent(h: event, owned: false)
   inst.wheelEvent(slotval1)
 
 proc fcQProgressDialog_method_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQProgressDialog](fcQProgressDialog_vdata(self)[])
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   inst.keyReleaseEvent(slotval1)
 
 proc fcQProgressDialog_method_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQProgressDialog](fcQProgressDialog_vdata(self)[])
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   inst.focusInEvent(slotval1)
 
 proc fcQProgressDialog_method_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQProgressDialog](fcQProgressDialog_vdata(self)[])
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   inst.focusOutEvent(slotval1)
 
 proc fcQProgressDialog_method_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQProgressDialog](fcQProgressDialog_vdata(self)[])
-  let slotval1 = gen_qevent_types.QEnterEvent(h: event)
+  let slotval1 = gen_qevent_types.QEnterEvent(h: event, owned: false)
   inst.enterEvent(slotval1)
 
 proc fcQProgressDialog_method_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQProgressDialog](fcQProgressDialog_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.leaveEvent(slotval1)
 
 proc fcQProgressDialog_method_callback_paintEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQProgressDialog](fcQProgressDialog_vdata(self)[])
-  let slotval1 = gen_qevent_types.QPaintEvent(h: event)
+  let slotval1 = gen_qevent_types.QPaintEvent(h: event, owned: false)
   inst.paintEvent(slotval1)
 
 proc fcQProgressDialog_method_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQProgressDialog](fcQProgressDialog_vdata(self)[])
-  let slotval1 = gen_qevent_types.QMoveEvent(h: event)
+  let slotval1 = gen_qevent_types.QMoveEvent(h: event, owned: false)
   inst.moveEvent(slotval1)
 
 proc fcQProgressDialog_method_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQProgressDialog](fcQProgressDialog_vdata(self)[])
-  let slotval1 = gen_qevent_types.QTabletEvent(h: event)
+  let slotval1 = gen_qevent_types.QTabletEvent(h: event, owned: false)
   inst.tabletEvent(slotval1)
 
 proc fcQProgressDialog_method_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQProgressDialog](fcQProgressDialog_vdata(self)[])
-  let slotval1 = gen_qevent_types.QActionEvent(h: event)
+  let slotval1 = gen_qevent_types.QActionEvent(h: event, owned: false)
   inst.actionEvent(slotval1)
 
 proc fcQProgressDialog_method_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQProgressDialog](fcQProgressDialog_vdata(self)[])
-  let slotval1 = gen_qevent_types.QDragEnterEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragEnterEvent(h: event, owned: false)
   inst.dragEnterEvent(slotval1)
 
 proc fcQProgressDialog_method_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQProgressDialog](fcQProgressDialog_vdata(self)[])
-  let slotval1 = gen_qevent_types.QDragMoveEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragMoveEvent(h: event, owned: false)
   inst.dragMoveEvent(slotval1)
 
 proc fcQProgressDialog_method_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQProgressDialog](fcQProgressDialog_vdata(self)[])
-  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event, owned: false)
   inst.dragLeaveEvent(slotval1)
 
 proc fcQProgressDialog_method_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQProgressDialog](fcQProgressDialog_vdata(self)[])
-  let slotval1 = gen_qevent_types.QDropEvent(h: event)
+  let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
   inst.dropEvent(slotval1)
 
 proc fcQProgressDialog_method_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQProgressDialog](fcQProgressDialog_vdata(self)[])
-  let slotval1 = gen_qevent_types.QHideEvent(h: event)
+  let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   inst.hideEvent(slotval1)
 
 proc fcQProgressDialog_method_callback_nativeEvent(self: pointer, eventType: struct_seaqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
@@ -1331,30 +1364,39 @@ proc fcQProgressDialog_method_callback_metric(self: pointer, param1: cint): cint
 
 proc fcQProgressDialog_method_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
   let inst = cast[VirtualQProgressDialog](fcQProgressDialog_vdata(self)[])
-  let slotval1 = gen_qpainter_types.QPainter(h: painter)
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
   inst.initPainter(slotval1)
 
 proc fcQProgressDialog_method_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQProgressDialog](fcQProgressDialog_vdata(self)[])
-  let slotval1 = gen_qpoint_types.QPoint(h: offset)
+  let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
   var virtualReturn = inst.redirected(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQProgressDialog_method_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQProgressDialog](fcQProgressDialog_vdata(self)[])
   var virtualReturn = inst.sharedPainter()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQProgressDialog_method_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQProgressDialog](fcQProgressDialog_vdata(self)[])
-  let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1)
+  let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1, owned: false)
   inst.inputMethodEvent(slotval1)
 
 proc fcQProgressDialog_method_callback_inputMethodQuery(self: pointer, param1: cint): pointer {.cdecl.} =
   let inst = cast[VirtualQProgressDialog](fcQProgressDialog_vdata(self)[])
   let slotval1 = cint(param1)
   var virtualReturn = inst.inputMethodQuery(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQProgressDialog_method_callback_focusNextPrevChild(self: pointer, next: bool): bool {.cdecl.} =
   let inst = cast[VirtualQProgressDialog](fcQProgressDialog_vdata(self)[])
@@ -1364,27 +1406,27 @@ proc fcQProgressDialog_method_callback_focusNextPrevChild(self: pointer, next: b
 
 proc fcQProgressDialog_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQProgressDialog](fcQProgressDialog_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
 proc fcQProgressDialog_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQProgressDialog](fcQProgressDialog_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
 proc fcQProgressDialog_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQProgressDialog](fcQProgressDialog_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
 proc fcQProgressDialog_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQProgressDialog](fcQProgressDialog_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
 proc fcQProgressDialog_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQProgressDialog](fcQProgressDialog_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
 
 
@@ -1410,7 +1452,7 @@ proc focusPreviousChild*(self: gen_qprogressdialog_types.QProgressDialog): bool 
   fcQProgressDialog_protectedbase_focusPreviousChild(self.h)
 
 proc sender*(self: gen_qprogressdialog_types.QProgressDialog): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQProgressDialog_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQProgressDialog_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qprogressdialog_types.QProgressDialog): cint =
   fcQProgressDialog_protectedbase_senderSignalIndex(self.h)
@@ -1539,7 +1581,7 @@ proc create*(T: type gen_qprogressdialog_types.QProgressDialog,
     vtbl[].vtbl.connectNotify = fcQProgressDialog_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQProgressDialog_vtable_callback_disconnectNotify
-  let tmp = gen_qprogressdialog_types.QProgressDialog(h: fcQProgressDialog_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h))
+  let tmp = gen_qprogressdialog_types.QProgressDialog(h: fcQProgressDialog_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h), owned: true)
   fcQProgressDialog_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qprogressdialog_types.QProgressDialog,
@@ -1659,7 +1701,7 @@ proc create*(T: type gen_qprogressdialog_types.QProgressDialog,
     vtbl[].vtbl.connectNotify = fcQProgressDialog_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQProgressDialog_vtable_callback_disconnectNotify
-  let tmp = gen_qprogressdialog_types.QProgressDialog(h: fcQProgressDialog_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer))))
+  let tmp = gen_qprogressdialog_types.QProgressDialog(h: fcQProgressDialog_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer))), owned: true)
   fcQProgressDialog_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qprogressdialog_types.QProgressDialog,
@@ -1780,7 +1822,7 @@ proc create*(T: type gen_qprogressdialog_types.QProgressDialog,
     vtbl[].vtbl.connectNotify = fcQProgressDialog_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQProgressDialog_vtable_callback_disconnectNotify
-  let tmp = gen_qprogressdialog_types.QProgressDialog(h: fcQProgressDialog_new3(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), struct_seaqt_string(data: if len(labelText) > 0: addr labelText[0] else: nil, len: csize_t(len(labelText))), struct_seaqt_string(data: if len(cancelButtonText) > 0: addr cancelButtonText[0] else: nil, len: csize_t(len(cancelButtonText))), minimum, maximum))
+  let tmp = gen_qprogressdialog_types.QProgressDialog(h: fcQProgressDialog_new3(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), struct_seaqt_string(data: if len(labelText) > 0: addr labelText[0] else: nil, len: csize_t(len(labelText))), struct_seaqt_string(data: if len(cancelButtonText) > 0: addr cancelButtonText[0] else: nil, len: csize_t(len(cancelButtonText))), minimum, maximum), owned: true)
   fcQProgressDialog_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qprogressdialog_types.QProgressDialog,
@@ -1901,7 +1943,7 @@ proc create*(T: type gen_qprogressdialog_types.QProgressDialog,
     vtbl[].vtbl.connectNotify = fcQProgressDialog_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQProgressDialog_vtable_callback_disconnectNotify
-  let tmp = gen_qprogressdialog_types.QProgressDialog(h: fcQProgressDialog_new4(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h, cint(flags)))
+  let tmp = gen_qprogressdialog_types.QProgressDialog(h: fcQProgressDialog_new4(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h, cint(flags)), owned: true)
   fcQProgressDialog_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qprogressdialog_types.QProgressDialog,
@@ -2022,7 +2064,7 @@ proc create*(T: type gen_qprogressdialog_types.QProgressDialog,
     vtbl[].vtbl.connectNotify = fcQProgressDialog_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQProgressDialog_vtable_callback_disconnectNotify
-  let tmp = gen_qprogressdialog_types.QProgressDialog(h: fcQProgressDialog_new5(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), struct_seaqt_string(data: if len(labelText) > 0: addr labelText[0] else: nil, len: csize_t(len(labelText))), struct_seaqt_string(data: if len(cancelButtonText) > 0: addr cancelButtonText[0] else: nil, len: csize_t(len(cancelButtonText))), minimum, maximum, parent.h))
+  let tmp = gen_qprogressdialog_types.QProgressDialog(h: fcQProgressDialog_new5(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), struct_seaqt_string(data: if len(labelText) > 0: addr labelText[0] else: nil, len: csize_t(len(labelText))), struct_seaqt_string(data: if len(cancelButtonText) > 0: addr cancelButtonText[0] else: nil, len: csize_t(len(cancelButtonText))), minimum, maximum, parent.h), owned: true)
   fcQProgressDialog_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qprogressdialog_types.QProgressDialog,
@@ -2143,13 +2185,14 @@ proc create*(T: type gen_qprogressdialog_types.QProgressDialog,
     vtbl[].vtbl.connectNotify = fcQProgressDialog_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQProgressDialog_vtable_callback_disconnectNotify
-  let tmp = gen_qprogressdialog_types.QProgressDialog(h: fcQProgressDialog_new6(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), struct_seaqt_string(data: if len(labelText) > 0: addr labelText[0] else: nil, len: csize_t(len(labelText))), struct_seaqt_string(data: if len(cancelButtonText) > 0: addr cancelButtonText[0] else: nil, len: csize_t(len(cancelButtonText))), minimum, maximum, parent.h, cint(flags)))
+  let tmp = gen_qprogressdialog_types.QProgressDialog(h: fcQProgressDialog_new6(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), struct_seaqt_string(data: if len(labelText) > 0: addr labelText[0] else: nil, len: csize_t(len(labelText))), struct_seaqt_string(data: if len(cancelButtonText) > 0: addr cancelButtonText[0] else: nil, len: csize_t(len(cancelButtonText))), minimum, maximum, parent.h, cint(flags)), owned: true)
   fcQProgressDialog_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQProgressDialog_mvtbl = cQProgressDialogVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQProgressDialog()[])](self.fcQProgressDialog_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   metaObject: fcQProgressDialog_method_callback_metaObject,
   metacast: fcQProgressDialog_method_callback_metacast,
@@ -2256,5 +2299,3 @@ proc create*(T: type gen_qprogressdialog_types.QProgressDialog,
 
 proc staticMetaObject*(_: type gen_qprogressdialog_types.QProgressDialog): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQProgressDialog_staticMetaObject())
-proc delete*(self: gen_qprogressdialog_types.QProgressDialog) =
-  fcQProgressDialog_delete(self.h)

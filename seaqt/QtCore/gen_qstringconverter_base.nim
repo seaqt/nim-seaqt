@@ -72,7 +72,6 @@ proc fcQStringConverterBaseState_clear(self: pointer): void {.importc: "QStringC
 proc fcQStringConverterBaseState_reset(self: pointer): void {.importc: "QStringConverterBase__State_reset".}
 proc fcQStringConverterBaseState_new(): ptr cQStringConverterBaseState {.importc: "QStringConverterBase__State_new".}
 proc fcQStringConverterBaseState_new2(f: cint): ptr cQStringConverterBaseState {.importc: "QStringConverterBase__State_new2".}
-proc fcQStringConverterBaseState_delete(self: pointer) {.importc: "QStringConverterBase__State_delete".}
 
 proc isValid*(self: gen_qstringconverter_base_types.QStringConverter): bool =
   fcQStringConverter_isValid(self.h)
@@ -96,11 +95,9 @@ proc reset*(self: gen_qstringconverter_base_types.QStringConverterBaseState): vo
   fcQStringConverterBaseState_reset(self.h)
 
 proc create*(T: type gen_qstringconverter_base_types.QStringConverterBaseState): gen_qstringconverter_base_types.QStringConverterBaseState =
-  let tmp = gen_qstringconverter_base_types.QStringConverterBaseState(h: fcQStringConverterBaseState_new())
+  let tmp = gen_qstringconverter_base_types.QStringConverterBaseState(h: fcQStringConverterBaseState_new(), owned: true)
   tmp
 proc create*(T: type gen_qstringconverter_base_types.QStringConverterBaseState,
     f: cint): gen_qstringconverter_base_types.QStringConverterBaseState =
-  let tmp = gen_qstringconverter_base_types.QStringConverterBaseState(h: fcQStringConverterBaseState_new2(cint(f)))
+  let tmp = gen_qstringconverter_base_types.QStringConverterBaseState(h: fcQStringConverterBaseState_new2(cint(f)), owned: true)
   tmp
-proc delete*(self: gen_qstringconverter_base_types.QStringConverterBaseState) =
-  fcQStringConverterBaseState_delete(self.h)

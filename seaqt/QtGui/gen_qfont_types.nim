@@ -1,4 +1,4 @@
-type QFont* {.inheritable, pure.} = object
+type QFont* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

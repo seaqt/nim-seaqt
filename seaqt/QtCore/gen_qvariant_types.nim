@@ -1,4 +1,4 @@
-type QVariant* {.inheritable, pure.} = object
+type QVariant* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -22,7 +22,7 @@ proc delete*(self: sink QVariant) =
   wasMoved(self)
   fcQVariant_delete(h)
 
-type QVariantConstPointer* {.inheritable, pure.} = object
+type QVariantConstPointer* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

@@ -1,4 +1,4 @@
-type QCborMap* {.inheritable, pure.} = object
+type QCborMap* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -22,7 +22,7 @@ proc delete*(self: sink QCborMap) =
   wasMoved(self)
   fcQCborMap_delete(h)
 
-type QCborMapIterator* {.inheritable, pure.} = object
+type QCborMapIterator* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -42,7 +42,7 @@ proc delete*(self: sink QCborMapIterator) =
   wasMoved(self)
   fcQCborMapIterator_delete(h)
 
-type QCborMapConstIterator* {.inheritable, pure.} = object
+type QCborMapConstIterator* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

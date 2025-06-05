@@ -1,4 +1,4 @@
-type QOcspResponse* {.inheritable, pure.} = object
+type QOcspResponse* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

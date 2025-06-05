@@ -1,4 +1,4 @@
-type QPropertyBindingSourceLocation* {.inheritable, pure.} = object
+type QPropertyBindingSourceLocation* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -22,7 +22,7 @@ proc delete*(self: sink QPropertyBindingSourceLocation) =
   wasMoved(self)
   fcQPropertyBindingSourceLocation_delete(h)
 
-type QPropertyBindingError* {.inheritable, pure.} = object
+type QPropertyBindingError* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -42,7 +42,7 @@ proc delete*(self: sink QPropertyBindingError) =
   wasMoved(self)
   fcQPropertyBindingError_delete(h)
 
-type QUntypedPropertyBinding* {.inheritable, pure.} = object
+type QUntypedPropertyBinding* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -62,7 +62,7 @@ proc delete*(self: sink QUntypedPropertyBinding) =
   wasMoved(self)
   fcQUntypedPropertyBinding_delete(h)
 
-type QPropertyObserverBase* {.inheritable, pure.} = object
+type QPropertyObserverBase* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -98,7 +98,7 @@ proc `=sink`(dest: var QPropertyNotifier, source: QPropertyNotifier) =
   dest.h = source.h
   dest.owned = source.owned
 
-type QUntypedBindable* {.inheritable, pure.} = object
+type QUntypedBindable* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

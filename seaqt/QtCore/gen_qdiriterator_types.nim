@@ -1,4 +1,4 @@
-type QDirIterator* {.inheritable, pure.} = object
+type QDirIterator* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

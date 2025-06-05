@@ -9,7 +9,7 @@ proc `=sink`(dest: var QDebug, source: QDebug) =
   dest.h = source.h
   dest.owned = source.owned
 
-type QDebugStateSaver* {.inheritable, pure.} = object
+type QDebugStateSaver* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -33,7 +33,7 @@ proc delete*(self: sink QDebugStateSaver) =
   wasMoved(self)
   fcQDebugStateSaver_delete(h)
 
-type QNoDebug* {.inheritable, pure.} = object
+type QNoDebug* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

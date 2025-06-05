@@ -1,4 +1,4 @@
-type QAccessible* {.inheritable, pure.} = object
+type QAccessible* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -22,7 +22,7 @@ proc delete*(self: sink QAccessible) =
   wasMoved(self)
   fcQAccessible_delete(h)
 
-type QAccessibleState* {.inheritable, pure.} = object
+type QAccessibleState* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -42,7 +42,7 @@ proc delete*(self: sink QAccessibleState) =
   wasMoved(self)
   fcQAccessibleState_delete(h)
 
-type QAccessibleActivationObserver* {.inheritable, pure.} = object
+type QAccessibleActivationObserver* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

@@ -49,7 +49,6 @@ type cQRunnableVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   run*: proc(self: pointer): void {.cdecl, raises: [], gcsafe.}
 proc fcQRunnable_new(vtbl: pointer, vdata: csize_t): ptr cQRunnable {.importc: "QRunnable_new".}
-proc fcQRunnable_delete(self: pointer) {.importc: "QRunnable_delete".}
 
 proc run*(self: gen_qrunnable_types.QRunnable): void =
   fcQRunnable_run(self.h)
@@ -61,7 +60,8 @@ proc setAutoDelete*(self: gen_qrunnable_types.QRunnable, autoDelete: bool): void
   fcQRunnable_setAutoDelete(self.h, autoDelete)
 
 type QRunnablerunProc* = proc(self: QRunnable): void {.raises: [], gcsafe.}
-type QRunnableVTable* = object
+
+type QRunnableVTable* {.inheritable, pure.} = object
   vtbl: cQRunnableVTable
   run*: QRunnablerunProc
 
@@ -91,13 +91,14 @@ proc create*(T: type gen_qrunnable_types.QRunnable,
     GC_unref(vtbl)
   if not isNil(vtbl[].run):
     vtbl[].vtbl.run = fcQRunnable_vtable_callback_run
-  let tmp = gen_qrunnable_types.QRunnable(h: fcQRunnable_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))))
+  let tmp = gen_qrunnable_types.QRunnable(h: fcQRunnable_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))), owned: true)
   fcQRunnable_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQRunnable_mvtbl = cQRunnableVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQRunnable()[])](self.fcQRunnable_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   run: fcQRunnable_method_callback_run,
 )
@@ -108,5 +109,3 @@ proc create*(T: type gen_qrunnable_types.QRunnable,
   fcQRunnable_vdata(inst[].h)[] = addr inst[]
   inst[].owned = true
 
-proc delete*(self: gen_qrunnable_types.QRunnable) =
-  fcQRunnable_delete(self.h)

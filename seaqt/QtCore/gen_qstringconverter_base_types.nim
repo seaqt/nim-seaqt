@@ -1,4 +1,4 @@
-type QStringConverterBase* {.inheritable, pure.} = object
+type QStringConverterBase* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -10,7 +10,7 @@ proc `=sink`(dest: var QStringConverter, source: QStringConverter) =
   dest.h = source.h
   dest.owned = source.owned
 
-type QStringConverterBaseState* {.inheritable, pure.} = object
+type QStringConverterBaseState* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

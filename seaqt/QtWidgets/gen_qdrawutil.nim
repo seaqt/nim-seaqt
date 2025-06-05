@@ -59,22 +59,19 @@ proc fcQTileRules_new(horizontalRule: cint, verticalRule: cint): ptr cQTileRules
 proc fcQTileRules_new2(): ptr cQTileRules {.importc: "QTileRules_new2".}
 proc fcQTileRules_new3(param1: pointer): ptr cQTileRules {.importc: "QTileRules_new3".}
 proc fcQTileRules_new4(rule: cint): ptr cQTileRules {.importc: "QTileRules_new4".}
-proc fcQTileRules_delete(self: pointer) {.importc: "QTileRules_delete".}
 
 proc create*(T: type gen_qdrawutil_types.QTileRules,
     horizontalRule: cint, verticalRule: cint): gen_qdrawutil_types.QTileRules =
-  let tmp = gen_qdrawutil_types.QTileRules(h: fcQTileRules_new(cint(horizontalRule), cint(verticalRule)))
+  let tmp = gen_qdrawutil_types.QTileRules(h: fcQTileRules_new(cint(horizontalRule), cint(verticalRule)), owned: true)
   tmp
 proc create*(T: type gen_qdrawutil_types.QTileRules): gen_qdrawutil_types.QTileRules =
-  let tmp = gen_qdrawutil_types.QTileRules(h: fcQTileRules_new2())
+  let tmp = gen_qdrawutil_types.QTileRules(h: fcQTileRules_new2(), owned: true)
   tmp
 proc create*(T: type gen_qdrawutil_types.QTileRules,
     param1: gen_qdrawutil_types.QTileRules): gen_qdrawutil_types.QTileRules =
-  let tmp = gen_qdrawutil_types.QTileRules(h: fcQTileRules_new3(param1.h))
+  let tmp = gen_qdrawutil_types.QTileRules(h: fcQTileRules_new3(param1.h), owned: true)
   tmp
 proc create*(T: type gen_qdrawutil_types.QTileRules,
     rule: cint): gen_qdrawutil_types.QTileRules =
-  let tmp = gen_qdrawutil_types.QTileRules(h: fcQTileRules_new4(cint(rule)))
+  let tmp = gen_qdrawutil_types.QTileRules(h: fcQTileRules_new4(cint(rule)), owned: true)
   tmp
-proc delete*(self: gen_qdrawutil_types.QTileRules) =
-  fcQTileRules_delete(self.h)

@@ -1,4 +1,4 @@
-type QIPv6Address* {.inheritable, pure.} = object
+type QIPv6Address* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -22,7 +22,7 @@ proc delete*(self: sink QIPv6Address) =
   wasMoved(self)
   fcQIPv6Address_delete(h)
 
-type QHostAddress* {.inheritable, pure.} = object
+type QHostAddress* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

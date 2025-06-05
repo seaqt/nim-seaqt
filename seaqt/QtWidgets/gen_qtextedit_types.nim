@@ -9,7 +9,7 @@ proc `=sink`(dest: var QTextEdit, source: QTextEdit) =
   dest.h = source.h
   dest.owned = source.owned
 
-type QTextEditExtraSelection* {.inheritable, pure.} = object
+type QTextEditExtraSelection* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

@@ -1,4 +1,4 @@
-type QSize* {.inheritable, pure.} = object
+type QSize* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -22,7 +22,7 @@ proc delete*(self: sink QSize) =
   wasMoved(self)
   fcQSize_delete(h)
 
-type QSizeF* {.inheritable, pure.} = object
+type QSizeF* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

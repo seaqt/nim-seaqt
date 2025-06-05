@@ -55,7 +55,6 @@ proc fcQQmlScriptString_booleanLiteral(self: pointer, ok: ptr bool): bool {.impo
 proc fcQQmlScriptString_new(): ptr cQQmlScriptString {.importc: "QQmlScriptString_new".}
 proc fcQQmlScriptString_new2(param1: pointer): ptr cQQmlScriptString {.importc: "QQmlScriptString_new2".}
 proc fcQQmlScriptString_staticMetaObject(): pointer {.importc: "QQmlScriptString_staticMetaObject".}
-proc fcQQmlScriptString_delete(self: pointer) {.importc: "QQmlScriptString_delete".}
 
 proc operatorAssign*(self: gen_qqmlscriptstring_types.QQmlScriptString, param1: gen_qqmlscriptstring_types.QQmlScriptString): void =
   fcQQmlScriptString_operatorAssign(self.h, param1.h)
@@ -88,13 +87,11 @@ proc booleanLiteral*(self: gen_qqmlscriptstring_types.QQmlScriptString, ok: ptr 
   fcQQmlScriptString_booleanLiteral(self.h, ok)
 
 proc create*(T: type gen_qqmlscriptstring_types.QQmlScriptString): gen_qqmlscriptstring_types.QQmlScriptString =
-  let tmp = gen_qqmlscriptstring_types.QQmlScriptString(h: fcQQmlScriptString_new())
+  let tmp = gen_qqmlscriptstring_types.QQmlScriptString(h: fcQQmlScriptString_new(), owned: true)
   tmp
 proc create*(T: type gen_qqmlscriptstring_types.QQmlScriptString,
     param1: gen_qqmlscriptstring_types.QQmlScriptString): gen_qqmlscriptstring_types.QQmlScriptString =
-  let tmp = gen_qqmlscriptstring_types.QQmlScriptString(h: fcQQmlScriptString_new2(param1.h))
+  let tmp = gen_qqmlscriptstring_types.QQmlScriptString(h: fcQQmlScriptString_new2(param1.h), owned: true)
   tmp
 proc staticMetaObject*(_: type gen_qqmlscriptstring_types.QQmlScriptString): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQQmlScriptString_staticMetaObject())
-proc delete*(self: gen_qqmlscriptstring_types.QQmlScriptString) =
-  fcQQmlScriptString_delete(self.h)

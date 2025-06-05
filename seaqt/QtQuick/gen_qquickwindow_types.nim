@@ -9,7 +9,7 @@ proc `=sink`(dest: var QQuickWindow, source: QQuickWindow) =
   dest.h = source.h
   dest.owned = source.owned
 
-type QQuickWindowGraphicsStateInfo* {.inheritable, pure.} = object
+type QQuickWindowGraphicsStateInfo* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

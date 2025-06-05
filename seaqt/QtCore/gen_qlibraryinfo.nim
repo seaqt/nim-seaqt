@@ -67,7 +67,6 @@ proc fcQLibraryInfo_version(): pointer {.importc: "QLibraryInfo_version".}
 proc fcQLibraryInfo_path(p: cint): struct_seaqt_string {.importc: "QLibraryInfo_path".}
 proc fcQLibraryInfo_location(location: cint): struct_seaqt_string {.importc: "QLibraryInfo_location".}
 proc fcQLibraryInfo_platformPluginArguments(platformName: struct_seaqt_string): struct_seaqt_array {.importc: "QLibraryInfo_platformPluginArguments".}
-proc fcQLibraryInfo_delete(self: pointer) {.importc: "QLibraryInfo_delete".}
 
 proc build*(_: type gen_qlibraryinfo_types.QLibraryInfo): cstring =
   (fcQLibraryInfo_build())
@@ -76,7 +75,7 @@ proc isDebugBuild*(_: type gen_qlibraryinfo_types.QLibraryInfo): bool =
   fcQLibraryInfo_isDebugBuild()
 
 proc version*(_: type gen_qlibraryinfo_types.QLibraryInfo): gen_qversionnumber_types.QVersionNumber =
-  gen_qversionnumber_types.QVersionNumber(h: fcQLibraryInfo_version())
+  gen_qversionnumber_types.QVersionNumber(h: fcQLibraryInfo_version(), owned: true)
 
 proc path*(_: type gen_qlibraryinfo_types.QLibraryInfo, p: cint): string =
   let v_ms = fcQLibraryInfo_path(cint(p))
@@ -102,5 +101,3 @@ proc platformPluginArguments*(_: type gen_qlibraryinfo_types.QLibraryInfo, platf
   c_free(v_ma.data)
   vx_ret
 
-proc delete*(self: gen_qlibraryinfo_types.QLibraryInfo) =
-  fcQLibraryInfo_delete(self.h)

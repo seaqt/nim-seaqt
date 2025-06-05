@@ -157,10 +157,9 @@ proc fcQDataStream_isDeviceTransactionStarted(self: pointer): bool {.importc: "Q
 proc fcQDataStream_new(): ptr cQDataStream {.importc: "QDataStream_new".}
 proc fcQDataStream_new2(param1: pointer): ptr cQDataStream {.importc: "QDataStream_new2".}
 proc fcQDataStream_new3(param1: struct_seaqt_string): ptr cQDataStream {.importc: "QDataStream_new3".}
-proc fcQDataStream_delete(self: pointer) {.importc: "QDataStream_delete".}
 
 proc device*(self: gen_qdatastream_types.QDataStream): gen_qiodevice_types.QIODevice =
-  gen_qiodevice_types.QIODevice(h: fcQDataStream_device(self.h))
+  gen_qiodevice_types.QIODevice(h: fcQDataStream_device(self.h), owned: false)
 
 proc setDevice*(self: gen_qdatastream_types.QDataStream, device: gen_qiodevice_types.QIODevice): void =
   fcQDataStream_setDevice(self.h, device.h)
@@ -274,7 +273,7 @@ proc operatorShiftLeft*(self: gen_qdatastream_types.QDataStream, str: cstring): 
   fcQDataStream_operatorShiftLeftWithStr(self.h, str)
 
 proc readBytes*(self: gen_qdatastream_types.QDataStream, param1: cstring, len: ptr cuint): gen_qdatastream_types.QDataStream =
-  gen_qdatastream_types.QDataStream(h: fcQDataStream_readBytes(self.h, param1, len))
+  gen_qdatastream_types.QDataStream(h: fcQDataStream_readBytes(self.h, param1, len), owned: false)
 
 proc readRawData*(self: gen_qdatastream_types.QDataStream, param1: cstring, len: cint): cint =
   fcQDataStream_readRawData(self.h, param1, len)
@@ -304,15 +303,13 @@ proc isDeviceTransactionStarted*(self: gen_qdatastream_types.QDataStream): bool 
   fcQDataStream_isDeviceTransactionStarted(self.h)
 
 proc create*(T: type gen_qdatastream_types.QDataStream): gen_qdatastream_types.QDataStream =
-  let tmp = gen_qdatastream_types.QDataStream(h: fcQDataStream_new())
+  let tmp = gen_qdatastream_types.QDataStream(h: fcQDataStream_new(), owned: true)
   tmp
 proc create*(T: type gen_qdatastream_types.QDataStream,
     param1: gen_qiodevice_types.QIODevice): gen_qdatastream_types.QDataStream =
-  let tmp = gen_qdatastream_types.QDataStream(h: fcQDataStream_new2(param1.h))
+  let tmp = gen_qdatastream_types.QDataStream(h: fcQDataStream_new2(param1.h), owned: true)
   tmp
 proc create*(T: type gen_qdatastream_types.QDataStream,
     param1: openArray[byte]): gen_qdatastream_types.QDataStream =
-  let tmp = gen_qdatastream_types.QDataStream(h: fcQDataStream_new3(struct_seaqt_string(data: if len(param1) > 0: addr param1[0] else: nil, len: csize_t(len(param1)))))
+  let tmp = gen_qdatastream_types.QDataStream(h: fcQDataStream_new3(struct_seaqt_string(data: if len(param1) > 0: addr param1[0] else: nil, len: csize_t(len(param1)))), owned: true)
   tmp
-proc delete*(self: gen_qdatastream_types.QDataStream) =
-  fcQDataStream_delete(self.h)

@@ -1,4 +1,4 @@
-type QTextTableCell* {.inheritable, pure.} = object
+type QTextTableCell* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

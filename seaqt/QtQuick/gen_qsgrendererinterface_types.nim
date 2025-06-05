@@ -1,4 +1,4 @@
-type QSGRendererInterface* {.inheritable, pure.} = object
+type QSGRendererInterface* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

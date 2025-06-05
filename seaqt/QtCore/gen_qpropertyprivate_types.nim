@@ -1,4 +1,4 @@
-type QUntypedPropertyData* {.inheritable, pure.} = object
+type QUntypedPropertyData* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -22,7 +22,7 @@ proc delete*(self: sink QUntypedPropertyData) =
   wasMoved(self)
   fcQUntypedPropertyData_delete(h)
 
-type QPropertyProxyBindingData* {.inheritable, pure.} = object
+type QPropertyProxyBindingData* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

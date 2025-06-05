@@ -1,4 +1,4 @@
-type QWaitCondition* {.inheritable, pure.} = object
+type QWaitCondition* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

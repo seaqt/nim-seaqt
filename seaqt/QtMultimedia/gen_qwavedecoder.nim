@@ -143,10 +143,9 @@ proc fcQWaveDecoder_new2(vtbl: pointer, vdata: csize_t, device: pointer, format:
 proc fcQWaveDecoder_new3(vtbl: pointer, vdata: csize_t, device: pointer, parent: pointer): ptr cQWaveDecoder {.importc: "QWaveDecoder_new3".}
 proc fcQWaveDecoder_new4(vtbl: pointer, vdata: csize_t, device: pointer, format: pointer, parent: pointer): ptr cQWaveDecoder {.importc: "QWaveDecoder_new4".}
 proc fcQWaveDecoder_staticMetaObject(): pointer {.importc: "QWaveDecoder_staticMetaObject".}
-proc fcQWaveDecoder_delete(self: pointer) {.importc: "QWaveDecoder_delete".}
 
 proc metaObject*(self: gen_qwavedecoder_types.QWaveDecoder): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQWaveDecoder_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQWaveDecoder_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qwavedecoder_types.QWaveDecoder, param1: cstring): pointer =
   fcQWaveDecoder_metacast(self.h, param1)
@@ -161,10 +160,10 @@ proc tr*(_: type gen_qwavedecoder_types.QWaveDecoder, s: cstring): string =
   vx_ret
 
 proc audioFormat*(self: gen_qwavedecoder_types.QWaveDecoder): gen_qaudioformat_types.QAudioFormat =
-  gen_qaudioformat_types.QAudioFormat(h: fcQWaveDecoder_audioFormat(self.h))
+  gen_qaudioformat_types.QAudioFormat(h: fcQWaveDecoder_audioFormat(self.h), owned: true)
 
 proc getDevice*(self: gen_qwavedecoder_types.QWaveDecoder): gen_qiodevice_types.QIODevice =
-  gen_qiodevice_types.QIODevice(h: fcQWaveDecoder_getDevice(self.h))
+  gen_qiodevice_types.QIODevice(h: fcQWaveDecoder_getDevice(self.h), owned: false)
 
 proc duration*(self: gen_qwavedecoder_types.QWaveDecoder): cint =
   fcQWaveDecoder_duration(self.h)
@@ -266,7 +265,8 @@ type QWaveDecoderchildEventProc* = proc(self: QWaveDecoder, event: gen_qcoreeven
 type QWaveDecodercustomEventProc* = proc(self: QWaveDecoder, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QWaveDecoderconnectNotifyProc* = proc(self: QWaveDecoder, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QWaveDecoderdisconnectNotifyProc* = proc(self: QWaveDecoder, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
-type QWaveDecoderVTable* = object
+
+type QWaveDecoderVTable* {.inheritable, pure.} = object
   vtbl: cQWaveDecoderVTable
   metaObject*: QWaveDecodermetaObjectProc
   metacast*: QWaveDecodermetacastProc
@@ -295,7 +295,7 @@ type QWaveDecoderVTable* = object
   disconnectNotify*: QWaveDecoderdisconnectNotifyProc
 
 proc QWaveDecodermetaObject*(self: gen_qwavedecoder_types.QWaveDecoder): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQWaveDecoder_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQWaveDecoder_virtualbase_metaObject(self.h), owned: false)
 
 proc QWaveDecodermetacast*(self: gen_qwavedecoder_types.QWaveDecoder, param1: cstring): pointer =
   fcQWaveDecoder_virtualbase_metacast(self.h, param1)
@@ -374,7 +374,10 @@ proc fcQWaveDecoder_vtable_callback_metaObject(self: pointer): pointer {.cdecl.}
   let vtbl = cast[ptr QWaveDecoderVTable](fcQWaveDecoder_vdata(self)[])
   let self = QWaveDecoder(h: self)
   var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQWaveDecoder_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QWaveDecoderVTable](fcQWaveDecoder_vdata(self)[])
@@ -491,46 +494,46 @@ proc fcQWaveDecoder_vtable_callback_skipData(self: pointer, maxSize: clonglong):
 proc fcQWaveDecoder_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QWaveDecoderVTable](fcQWaveDecoder_vdata(self)[])
   let self = QWaveDecoder(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
 proc fcQWaveDecoder_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QWaveDecoderVTable](fcQWaveDecoder_vdata(self)[])
   let self = QWaveDecoder(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
 proc fcQWaveDecoder_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWaveDecoderVTable](fcQWaveDecoder_vdata(self)[])
   let self = QWaveDecoder(h: self)
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
 proc fcQWaveDecoder_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWaveDecoderVTable](fcQWaveDecoder_vdata(self)[])
   let self = QWaveDecoder(h: self)
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
 proc fcQWaveDecoder_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWaveDecoderVTable](fcQWaveDecoder_vdata(self)[])
   let self = QWaveDecoder(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
 proc fcQWaveDecoder_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWaveDecoderVTable](fcQWaveDecoder_vdata(self)[])
   let self = QWaveDecoder(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
 proc fcQWaveDecoder_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWaveDecoderVTable](fcQWaveDecoder_vdata(self)[])
   let self = QWaveDecoder(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
 type VirtualQWaveDecoder* {.inheritable.} = ref object of QWaveDecoder
@@ -590,7 +593,10 @@ method disconnectNotify*(self: VirtualQWaveDecoder, signal: gen_qmetaobject_type
 proc fcQWaveDecoder_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQWaveDecoder](fcQWaveDecoder_vdata(self)[])
   var virtualReturn = inst.metaObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQWaveDecoder_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQWaveDecoder](fcQWaveDecoder_vdata(self)[])
@@ -689,40 +695,40 @@ proc fcQWaveDecoder_method_callback_skipData(self: pointer, maxSize: clonglong):
 
 proc fcQWaveDecoder_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQWaveDecoder](fcQWaveDecoder_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
 proc fcQWaveDecoder_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQWaveDecoder](fcQWaveDecoder_vdata(self)[])
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
 proc fcQWaveDecoder_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQWaveDecoder](fcQWaveDecoder_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
 proc fcQWaveDecoder_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQWaveDecoder](fcQWaveDecoder_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
 proc fcQWaveDecoder_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQWaveDecoder](fcQWaveDecoder_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
 proc fcQWaveDecoder_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQWaveDecoder](fcQWaveDecoder_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
 proc fcQWaveDecoder_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQWaveDecoder](fcQWaveDecoder_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
 
 
@@ -733,7 +739,7 @@ proc setErrorString*(self: gen_qwavedecoder_types.QWaveDecoder, errorString: ope
   fcQWaveDecoder_protectedbase_setErrorString(self.h, struct_seaqt_string(data: if len(errorString) > 0: addr errorString[0] else: nil, len: csize_t(len(errorString))))
 
 proc sender*(self: gen_qwavedecoder_types.QWaveDecoder): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQWaveDecoder_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQWaveDecoder_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qwavedecoder_types.QWaveDecoder): cint =
   fcQWaveDecoder_protectedbase_senderSignalIndex(self.h)
@@ -802,7 +808,7 @@ proc create*(T: type gen_qwavedecoder_types.QWaveDecoder,
     vtbl[].vtbl.connectNotify = fcQWaveDecoder_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQWaveDecoder_vtable_callback_disconnectNotify
-  let tmp = gen_qwavedecoder_types.QWaveDecoder(h: fcQWaveDecoder_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), device.h))
+  let tmp = gen_qwavedecoder_types.QWaveDecoder(h: fcQWaveDecoder_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), device.h), owned: true)
   fcQWaveDecoder_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qwavedecoder_types.QWaveDecoder,
@@ -863,7 +869,7 @@ proc create*(T: type gen_qwavedecoder_types.QWaveDecoder,
     vtbl[].vtbl.connectNotify = fcQWaveDecoder_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQWaveDecoder_vtable_callback_disconnectNotify
-  let tmp = gen_qwavedecoder_types.QWaveDecoder(h: fcQWaveDecoder_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), device.h, format.h))
+  let tmp = gen_qwavedecoder_types.QWaveDecoder(h: fcQWaveDecoder_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), device.h, format.h), owned: true)
   fcQWaveDecoder_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qwavedecoder_types.QWaveDecoder,
@@ -924,7 +930,7 @@ proc create*(T: type gen_qwavedecoder_types.QWaveDecoder,
     vtbl[].vtbl.connectNotify = fcQWaveDecoder_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQWaveDecoder_vtable_callback_disconnectNotify
-  let tmp = gen_qwavedecoder_types.QWaveDecoder(h: fcQWaveDecoder_new3(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), device.h, parent.h))
+  let tmp = gen_qwavedecoder_types.QWaveDecoder(h: fcQWaveDecoder_new3(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), device.h, parent.h), owned: true)
   fcQWaveDecoder_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qwavedecoder_types.QWaveDecoder,
@@ -985,13 +991,14 @@ proc create*(T: type gen_qwavedecoder_types.QWaveDecoder,
     vtbl[].vtbl.connectNotify = fcQWaveDecoder_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQWaveDecoder_vtable_callback_disconnectNotify
-  let tmp = gen_qwavedecoder_types.QWaveDecoder(h: fcQWaveDecoder_new4(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), device.h, format.h, parent.h))
+  let tmp = gen_qwavedecoder_types.QWaveDecoder(h: fcQWaveDecoder_new4(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), device.h, format.h, parent.h), owned: true)
   fcQWaveDecoder_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQWaveDecoder_mvtbl = cQWaveDecoderVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQWaveDecoder()[])](self.fcQWaveDecoder_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   metaObject: fcQWaveDecoder_method_callback_metaObject,
   metacast: fcQWaveDecoder_method_callback_metacast,
@@ -1053,5 +1060,3 @@ proc create*(T: type gen_qwavedecoder_types.QWaveDecoder,
 
 proc staticMetaObject*(_: type gen_qwavedecoder_types.QWaveDecoder): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQWaveDecoder_staticMetaObject())
-proc delete*(self: gen_qwavedecoder_types.QWaveDecoder) =
-  fcQWaveDecoder_delete(self.h)
