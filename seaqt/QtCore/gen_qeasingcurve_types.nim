@@ -1,4 +1,4 @@
-type QEasingCurve* {.inheritable, pure.} = object
+type QEasingCurve* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

@@ -214,10 +214,9 @@ proc fcQPageSetupDialog_new2(vtbl: pointer, vdata: csize_t, printer: pointer): p
 proc fcQPageSetupDialog_new3(vtbl: pointer, vdata: csize_t): ptr cQPageSetupDialog {.importc: "QPageSetupDialog_new3".}
 proc fcQPageSetupDialog_new4(vtbl: pointer, vdata: csize_t, printer: pointer, parent: pointer): ptr cQPageSetupDialog {.importc: "QPageSetupDialog_new4".}
 proc fcQPageSetupDialog_staticMetaObject(): pointer {.importc: "QPageSetupDialog_staticMetaObject".}
-proc fcQPageSetupDialog_delete(self: pointer) {.importc: "QPageSetupDialog_delete".}
 
 proc metaObject*(self: gen_qpagesetupdialog_types.QPageSetupDialog): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQPageSetupDialog_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQPageSetupDialog_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qpagesetupdialog_types.QPageSetupDialog, param1: cstring): pointer =
   fcQPageSetupDialog_metacast(self.h, param1)
@@ -244,7 +243,7 @@ proc done*(self: gen_qpagesetupdialog_types.QPageSetupDialog, resultVal: cint): 
   fcQPageSetupDialog_done(self.h, resultVal)
 
 proc printer*(self: gen_qpagesetupdialog_types.QPageSetupDialog): gen_qprinter_types.QPrinter =
-  gen_qprinter_types.QPrinter(h: fcQPageSetupDialog_printer(self.h))
+  gen_qprinter_types.QPrinter(h: fcQPageSetupDialog_printer(self.h), owned: false)
 
 proc tr*(_: type gen_qpagesetupdialog_types.QPageSetupDialog, s: cstring, c: cstring): string =
   let v_ms = fcQPageSetupDialog_tr2(s, c)
@@ -325,7 +324,8 @@ type QPageSetupDialogchildEventProc* = proc(self: QPageSetupDialog, event: gen_q
 type QPageSetupDialogcustomEventProc* = proc(self: QPageSetupDialog, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QPageSetupDialogconnectNotifyProc* = proc(self: QPageSetupDialog, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QPageSetupDialogdisconnectNotifyProc* = proc(self: QPageSetupDialog, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
-type QPageSetupDialogVTable* = object
+
+type QPageSetupDialogVTable* {.inheritable, pure.} = object
   vtbl: cQPageSetupDialogVTable
   metaObject*: QPageSetupDialogmetaObjectProc
   metacast*: QPageSetupDialogmetacastProc
@@ -384,7 +384,7 @@ type QPageSetupDialogVTable* = object
   disconnectNotify*: QPageSetupDialogdisconnectNotifyProc
 
 proc QPageSetupDialogmetaObject*(self: gen_qpagesetupdialog_types.QPageSetupDialog): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQPageSetupDialog_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQPageSetupDialog_virtualbase_metaObject(self.h), owned: false)
 
 proc QPageSetupDialogmetacast*(self: gen_qpagesetupdialog_types.QPageSetupDialog, param1: cstring): pointer =
   fcQPageSetupDialog_virtualbase_metacast(self.h, param1)
@@ -402,10 +402,10 @@ proc QPageSetupDialogsetVisible*(self: gen_qpagesetupdialog_types.QPageSetupDial
   fcQPageSetupDialog_virtualbase_setVisible(self.h, visible)
 
 proc QPageSetupDialogsizeHint*(self: gen_qpagesetupdialog_types.QPageSetupDialog): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQPageSetupDialog_virtualbase_sizeHint(self.h))
+  gen_qsize_types.QSize(h: fcQPageSetupDialog_virtualbase_sizeHint(self.h), owned: true)
 
 proc QPageSetupDialogminimumSizeHint*(self: gen_qpagesetupdialog_types.QPageSetupDialog): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQPageSetupDialog_virtualbase_minimumSizeHint(self.h))
+  gen_qsize_types.QSize(h: fcQPageSetupDialog_virtualbase_minimumSizeHint(self.h), owned: true)
 
 proc QPageSetupDialogopen*(self: gen_qpagesetupdialog_types.QPageSetupDialog): void =
   fcQPageSetupDialog_virtualbase_open(self.h)
@@ -444,7 +444,7 @@ proc QPageSetupDialoghasHeightForWidth*(self: gen_qpagesetupdialog_types.QPageSe
   fcQPageSetupDialog_virtualbase_hasHeightForWidth(self.h)
 
 proc QPageSetupDialogpaintEngine*(self: gen_qpagesetupdialog_types.QPageSetupDialog): gen_qpaintengine_types.QPaintEngine =
-  gen_qpaintengine_types.QPaintEngine(h: fcQPageSetupDialog_virtualbase_paintEngine(self.h))
+  gen_qpaintengine_types.QPaintEngine(h: fcQPageSetupDialog_virtualbase_paintEngine(self.h), owned: false)
 
 proc QPageSetupDialogevent*(self: gen_qpagesetupdialog_types.QPageSetupDialog, event: gen_qcoreevent_types.QEvent): bool =
   fcQPageSetupDialog_virtualbase_event(self.h, event.h)
@@ -519,16 +519,16 @@ proc QPageSetupDialoginitPainter*(self: gen_qpagesetupdialog_types.QPageSetupDia
   fcQPageSetupDialog_virtualbase_initPainter(self.h, painter.h)
 
 proc QPageSetupDialogredirected*(self: gen_qpagesetupdialog_types.QPageSetupDialog, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice =
-  gen_qpaintdevice_types.QPaintDevice(h: fcQPageSetupDialog_virtualbase_redirected(self.h, offset.h))
+  gen_qpaintdevice_types.QPaintDevice(h: fcQPageSetupDialog_virtualbase_redirected(self.h, offset.h), owned: false)
 
 proc QPageSetupDialogsharedPainter*(self: gen_qpagesetupdialog_types.QPageSetupDialog): gen_qpainter_types.QPainter =
-  gen_qpainter_types.QPainter(h: fcQPageSetupDialog_virtualbase_sharedPainter(self.h))
+  gen_qpainter_types.QPainter(h: fcQPageSetupDialog_virtualbase_sharedPainter(self.h), owned: false)
 
 proc QPageSetupDialoginputMethodEvent*(self: gen_qpagesetupdialog_types.QPageSetupDialog, param1: gen_qevent_types.QInputMethodEvent): void =
   fcQPageSetupDialog_virtualbase_inputMethodEvent(self.h, param1.h)
 
 proc QPageSetupDialoginputMethodQuery*(self: gen_qpagesetupdialog_types.QPageSetupDialog, param1: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQPageSetupDialog_virtualbase_inputMethodQuery(self.h, cint(param1)))
+  gen_qvariant_types.QVariant(h: fcQPageSetupDialog_virtualbase_inputMethodQuery(self.h, cint(param1)), owned: true)
 
 proc QPageSetupDialogfocusNextPrevChild*(self: gen_qpagesetupdialog_types.QPageSetupDialog, next: bool): bool =
   fcQPageSetupDialog_virtualbase_focusNextPrevChild(self.h, next)
@@ -553,7 +553,10 @@ proc fcQPageSetupDialog_vtable_callback_metaObject(self: pointer): pointer {.cde
   let vtbl = cast[ptr QPageSetupDialogVTable](fcQPageSetupDialog_vdata(self)[])
   let self = QPageSetupDialog(h: self)
   var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQPageSetupDialog_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QPageSetupDialogVTable](fcQPageSetupDialog_vdata(self)[])
@@ -593,13 +596,19 @@ proc fcQPageSetupDialog_vtable_callback_sizeHint(self: pointer): pointer {.cdecl
   let vtbl = cast[ptr QPageSetupDialogVTable](fcQPageSetupDialog_vdata(self)[])
   let self = QPageSetupDialog(h: self)
   var virtualReturn = vtbl[].sizeHint(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQPageSetupDialog_vtable_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QPageSetupDialogVTable](fcQPageSetupDialog_vdata(self)[])
   let self = QPageSetupDialog(h: self)
   var virtualReturn = vtbl[].minimumSizeHint(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQPageSetupDialog_vtable_callback_open(self: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPageSetupDialogVTable](fcQPageSetupDialog_vdata(self)[])
@@ -619,38 +628,38 @@ proc fcQPageSetupDialog_vtable_callback_reject(self: pointer): void {.cdecl.} =
 proc fcQPageSetupDialog_vtable_callback_keyPressEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPageSetupDialogVTable](fcQPageSetupDialog_vdata(self)[])
   let self = QPageSetupDialog(h: self)
-  let slotval1 = gen_qevent_types.QKeyEvent(h: param1)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: param1, owned: false)
   vtbl[].keyPressEvent(self, slotval1)
 
 proc fcQPageSetupDialog_vtable_callback_closeEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPageSetupDialogVTable](fcQPageSetupDialog_vdata(self)[])
   let self = QPageSetupDialog(h: self)
-  let slotval1 = gen_qevent_types.QCloseEvent(h: param1)
+  let slotval1 = gen_qevent_types.QCloseEvent(h: param1, owned: false)
   vtbl[].closeEvent(self, slotval1)
 
 proc fcQPageSetupDialog_vtable_callback_showEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPageSetupDialogVTable](fcQPageSetupDialog_vdata(self)[])
   let self = QPageSetupDialog(h: self)
-  let slotval1 = gen_qevent_types.QShowEvent(h: param1)
+  let slotval1 = gen_qevent_types.QShowEvent(h: param1, owned: false)
   vtbl[].showEvent(self, slotval1)
 
 proc fcQPageSetupDialog_vtable_callback_resizeEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPageSetupDialogVTable](fcQPageSetupDialog_vdata(self)[])
   let self = QPageSetupDialog(h: self)
-  let slotval1 = gen_qevent_types.QResizeEvent(h: param1)
+  let slotval1 = gen_qevent_types.QResizeEvent(h: param1, owned: false)
   vtbl[].resizeEvent(self, slotval1)
 
 proc fcQPageSetupDialog_vtable_callback_contextMenuEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPageSetupDialogVTable](fcQPageSetupDialog_vdata(self)[])
   let self = QPageSetupDialog(h: self)
-  let slotval1 = gen_qevent_types.QContextMenuEvent(h: param1)
+  let slotval1 = gen_qevent_types.QContextMenuEvent(h: param1, owned: false)
   vtbl[].contextMenuEvent(self, slotval1)
 
 proc fcQPageSetupDialog_vtable_callback_eventFilter(self: pointer, param1: pointer, param2: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QPageSetupDialogVTable](fcQPageSetupDialog_vdata(self)[])
   let self = QPageSetupDialog(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: param1)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: param2)
+  let slotval1 = gen_qobject_types.QObject(h: param1, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: param2, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
@@ -677,127 +686,130 @@ proc fcQPageSetupDialog_vtable_callback_paintEngine(self: pointer): pointer {.cd
   let vtbl = cast[ptr QPageSetupDialogVTable](fcQPageSetupDialog_vdata(self)[])
   let self = QPageSetupDialog(h: self)
   var virtualReturn = vtbl[].paintEngine(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQPageSetupDialog_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QPageSetupDialogVTable](fcQPageSetupDialog_vdata(self)[])
   let self = QPageSetupDialog(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
 proc fcQPageSetupDialog_vtable_callback_mousePressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPageSetupDialogVTable](fcQPageSetupDialog_vdata(self)[])
   let self = QPageSetupDialog(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mousePressEvent(self, slotval1)
 
 proc fcQPageSetupDialog_vtable_callback_mouseReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPageSetupDialogVTable](fcQPageSetupDialog_vdata(self)[])
   let self = QPageSetupDialog(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseReleaseEvent(self, slotval1)
 
 proc fcQPageSetupDialog_vtable_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPageSetupDialogVTable](fcQPageSetupDialog_vdata(self)[])
   let self = QPageSetupDialog(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseDoubleClickEvent(self, slotval1)
 
 proc fcQPageSetupDialog_vtable_callback_mouseMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPageSetupDialogVTable](fcQPageSetupDialog_vdata(self)[])
   let self = QPageSetupDialog(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseMoveEvent(self, slotval1)
 
 proc fcQPageSetupDialog_vtable_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPageSetupDialogVTable](fcQPageSetupDialog_vdata(self)[])
   let self = QPageSetupDialog(h: self)
-  let slotval1 = gen_qevent_types.QWheelEvent(h: event)
+  let slotval1 = gen_qevent_types.QWheelEvent(h: event, owned: false)
   vtbl[].wheelEvent(self, slotval1)
 
 proc fcQPageSetupDialog_vtable_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPageSetupDialogVTable](fcQPageSetupDialog_vdata(self)[])
   let self = QPageSetupDialog(h: self)
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   vtbl[].keyReleaseEvent(self, slotval1)
 
 proc fcQPageSetupDialog_vtable_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPageSetupDialogVTable](fcQPageSetupDialog_vdata(self)[])
   let self = QPageSetupDialog(h: self)
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusInEvent(self, slotval1)
 
 proc fcQPageSetupDialog_vtable_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPageSetupDialogVTable](fcQPageSetupDialog_vdata(self)[])
   let self = QPageSetupDialog(h: self)
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusOutEvent(self, slotval1)
 
 proc fcQPageSetupDialog_vtable_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPageSetupDialogVTable](fcQPageSetupDialog_vdata(self)[])
   let self = QPageSetupDialog(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].enterEvent(self, slotval1)
 
 proc fcQPageSetupDialog_vtable_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPageSetupDialogVTable](fcQPageSetupDialog_vdata(self)[])
   let self = QPageSetupDialog(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].leaveEvent(self, slotval1)
 
 proc fcQPageSetupDialog_vtable_callback_paintEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPageSetupDialogVTable](fcQPageSetupDialog_vdata(self)[])
   let self = QPageSetupDialog(h: self)
-  let slotval1 = gen_qevent_types.QPaintEvent(h: event)
+  let slotval1 = gen_qevent_types.QPaintEvent(h: event, owned: false)
   vtbl[].paintEvent(self, slotval1)
 
 proc fcQPageSetupDialog_vtable_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPageSetupDialogVTable](fcQPageSetupDialog_vdata(self)[])
   let self = QPageSetupDialog(h: self)
-  let slotval1 = gen_qevent_types.QMoveEvent(h: event)
+  let slotval1 = gen_qevent_types.QMoveEvent(h: event, owned: false)
   vtbl[].moveEvent(self, slotval1)
 
 proc fcQPageSetupDialog_vtable_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPageSetupDialogVTable](fcQPageSetupDialog_vdata(self)[])
   let self = QPageSetupDialog(h: self)
-  let slotval1 = gen_qevent_types.QTabletEvent(h: event)
+  let slotval1 = gen_qevent_types.QTabletEvent(h: event, owned: false)
   vtbl[].tabletEvent(self, slotval1)
 
 proc fcQPageSetupDialog_vtable_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPageSetupDialogVTable](fcQPageSetupDialog_vdata(self)[])
   let self = QPageSetupDialog(h: self)
-  let slotval1 = gen_qevent_types.QActionEvent(h: event)
+  let slotval1 = gen_qevent_types.QActionEvent(h: event, owned: false)
   vtbl[].actionEvent(self, slotval1)
 
 proc fcQPageSetupDialog_vtable_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPageSetupDialogVTable](fcQPageSetupDialog_vdata(self)[])
   let self = QPageSetupDialog(h: self)
-  let slotval1 = gen_qevent_types.QDragEnterEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragEnterEvent(h: event, owned: false)
   vtbl[].dragEnterEvent(self, slotval1)
 
 proc fcQPageSetupDialog_vtable_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPageSetupDialogVTable](fcQPageSetupDialog_vdata(self)[])
   let self = QPageSetupDialog(h: self)
-  let slotval1 = gen_qevent_types.QDragMoveEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragMoveEvent(h: event, owned: false)
   vtbl[].dragMoveEvent(self, slotval1)
 
 proc fcQPageSetupDialog_vtable_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPageSetupDialogVTable](fcQPageSetupDialog_vdata(self)[])
   let self = QPageSetupDialog(h: self)
-  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event, owned: false)
   vtbl[].dragLeaveEvent(self, slotval1)
 
 proc fcQPageSetupDialog_vtable_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPageSetupDialogVTable](fcQPageSetupDialog_vdata(self)[])
   let self = QPageSetupDialog(h: self)
-  let slotval1 = gen_qevent_types.QDropEvent(h: event)
+  let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
   vtbl[].dropEvent(self, slotval1)
 
 proc fcQPageSetupDialog_vtable_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPageSetupDialogVTable](fcQPageSetupDialog_vdata(self)[])
   let self = QPageSetupDialog(h: self)
-  let slotval1 = gen_qevent_types.QHideEvent(h: event)
+  let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   vtbl[].hideEvent(self, slotval1)
 
 proc fcQPageSetupDialog_vtable_callback_nativeEvent(self: pointer, eventType: struct_seaqt_string, message: pointer, resultVal: ptr clong): bool {.cdecl.} =
@@ -815,7 +827,7 @@ proc fcQPageSetupDialog_vtable_callback_nativeEvent(self: pointer, eventType: st
 proc fcQPageSetupDialog_vtable_callback_changeEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPageSetupDialogVTable](fcQPageSetupDialog_vdata(self)[])
   let self = QPageSetupDialog(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: param1)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
   vtbl[].changeEvent(self, slotval1)
 
 proc fcQPageSetupDialog_vtable_callback_metric(self: pointer, param1: cint): cint {.cdecl.} =
@@ -828,26 +840,32 @@ proc fcQPageSetupDialog_vtable_callback_metric(self: pointer, param1: cint): cin
 proc fcQPageSetupDialog_vtable_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPageSetupDialogVTable](fcQPageSetupDialog_vdata(self)[])
   let self = QPageSetupDialog(h: self)
-  let slotval1 = gen_qpainter_types.QPainter(h: painter)
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
   vtbl[].initPainter(self, slotval1)
 
 proc fcQPageSetupDialog_vtable_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QPageSetupDialogVTable](fcQPageSetupDialog_vdata(self)[])
   let self = QPageSetupDialog(h: self)
-  let slotval1 = gen_qpoint_types.QPoint(h: offset)
+  let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
   var virtualReturn = vtbl[].redirected(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQPageSetupDialog_vtable_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QPageSetupDialogVTable](fcQPageSetupDialog_vdata(self)[])
   let self = QPageSetupDialog(h: self)
   var virtualReturn = vtbl[].sharedPainter(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQPageSetupDialog_vtable_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPageSetupDialogVTable](fcQPageSetupDialog_vdata(self)[])
   let self = QPageSetupDialog(h: self)
-  let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1)
+  let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1, owned: false)
   vtbl[].inputMethodEvent(self, slotval1)
 
 proc fcQPageSetupDialog_vtable_callback_inputMethodQuery(self: pointer, param1: cint): pointer {.cdecl.} =
@@ -855,7 +873,10 @@ proc fcQPageSetupDialog_vtable_callback_inputMethodQuery(self: pointer, param1: 
   let self = QPageSetupDialog(h: self)
   let slotval1 = cint(param1)
   var virtualReturn = vtbl[].inputMethodQuery(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQPageSetupDialog_vtable_callback_focusNextPrevChild(self: pointer, next: bool): bool {.cdecl.} =
   let vtbl = cast[ptr QPageSetupDialogVTable](fcQPageSetupDialog_vdata(self)[])
@@ -867,31 +888,31 @@ proc fcQPageSetupDialog_vtable_callback_focusNextPrevChild(self: pointer, next: 
 proc fcQPageSetupDialog_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPageSetupDialogVTable](fcQPageSetupDialog_vdata(self)[])
   let self = QPageSetupDialog(h: self)
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
 proc fcQPageSetupDialog_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPageSetupDialogVTable](fcQPageSetupDialog_vdata(self)[])
   let self = QPageSetupDialog(h: self)
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
 proc fcQPageSetupDialog_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPageSetupDialogVTable](fcQPageSetupDialog_vdata(self)[])
   let self = QPageSetupDialog(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
 proc fcQPageSetupDialog_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPageSetupDialogVTable](fcQPageSetupDialog_vdata(self)[])
   let self = QPageSetupDialog(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
 proc fcQPageSetupDialog_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPageSetupDialogVTable](fcQPageSetupDialog_vdata(self)[])
   let self = QPageSetupDialog(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
 type VirtualQPageSetupDialog* {.inheritable.} = ref object of QPageSetupDialog
@@ -1011,7 +1032,10 @@ method disconnectNotify*(self: VirtualQPageSetupDialog, signal: gen_qmetaobject_
 proc fcQPageSetupDialog_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQPageSetupDialog](fcQPageSetupDialog_vdata(self)[])
   var virtualReturn = inst.metaObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQPageSetupDialog_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQPageSetupDialog](fcQPageSetupDialog_vdata(self)[])
@@ -1045,12 +1069,18 @@ proc fcQPageSetupDialog_method_callback_setVisible(self: pointer, visible: bool)
 proc fcQPageSetupDialog_method_callback_sizeHint(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQPageSetupDialog](fcQPageSetupDialog_vdata(self)[])
   var virtualReturn = inst.sizeHint()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQPageSetupDialog_method_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQPageSetupDialog](fcQPageSetupDialog_vdata(self)[])
   var virtualReturn = inst.minimumSizeHint()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQPageSetupDialog_method_callback_open(self: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPageSetupDialog](fcQPageSetupDialog_vdata(self)[])
@@ -1066,33 +1096,33 @@ proc fcQPageSetupDialog_method_callback_reject(self: pointer): void {.cdecl.} =
 
 proc fcQPageSetupDialog_method_callback_keyPressEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPageSetupDialog](fcQPageSetupDialog_vdata(self)[])
-  let slotval1 = gen_qevent_types.QKeyEvent(h: param1)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: param1, owned: false)
   inst.keyPressEvent(slotval1)
 
 proc fcQPageSetupDialog_method_callback_closeEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPageSetupDialog](fcQPageSetupDialog_vdata(self)[])
-  let slotval1 = gen_qevent_types.QCloseEvent(h: param1)
+  let slotval1 = gen_qevent_types.QCloseEvent(h: param1, owned: false)
   inst.closeEvent(slotval1)
 
 proc fcQPageSetupDialog_method_callback_showEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPageSetupDialog](fcQPageSetupDialog_vdata(self)[])
-  let slotval1 = gen_qevent_types.QShowEvent(h: param1)
+  let slotval1 = gen_qevent_types.QShowEvent(h: param1, owned: false)
   inst.showEvent(slotval1)
 
 proc fcQPageSetupDialog_method_callback_resizeEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPageSetupDialog](fcQPageSetupDialog_vdata(self)[])
-  let slotval1 = gen_qevent_types.QResizeEvent(h: param1)
+  let slotval1 = gen_qevent_types.QResizeEvent(h: param1, owned: false)
   inst.resizeEvent(slotval1)
 
 proc fcQPageSetupDialog_method_callback_contextMenuEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPageSetupDialog](fcQPageSetupDialog_vdata(self)[])
-  let slotval1 = gen_qevent_types.QContextMenuEvent(h: param1)
+  let slotval1 = gen_qevent_types.QContextMenuEvent(h: param1, owned: false)
   inst.contextMenuEvent(slotval1)
 
 proc fcQPageSetupDialog_method_callback_eventFilter(self: pointer, param1: pointer, param2: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQPageSetupDialog](fcQPageSetupDialog_vdata(self)[])
-  let slotval1 = gen_qobject_types.QObject(h: param1)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: param2)
+  let slotval1 = gen_qobject_types.QObject(h: param1, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: param2, owned: false)
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
@@ -1115,107 +1145,110 @@ proc fcQPageSetupDialog_method_callback_hasHeightForWidth(self: pointer): bool {
 proc fcQPageSetupDialog_method_callback_paintEngine(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQPageSetupDialog](fcQPageSetupDialog_vdata(self)[])
   var virtualReturn = inst.paintEngine()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQPageSetupDialog_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQPageSetupDialog](fcQPageSetupDialog_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
 proc fcQPageSetupDialog_method_callback_mousePressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPageSetupDialog](fcQPageSetupDialog_vdata(self)[])
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mousePressEvent(slotval1)
 
 proc fcQPageSetupDialog_method_callback_mouseReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPageSetupDialog](fcQPageSetupDialog_vdata(self)[])
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mouseReleaseEvent(slotval1)
 
 proc fcQPageSetupDialog_method_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPageSetupDialog](fcQPageSetupDialog_vdata(self)[])
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mouseDoubleClickEvent(slotval1)
 
 proc fcQPageSetupDialog_method_callback_mouseMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPageSetupDialog](fcQPageSetupDialog_vdata(self)[])
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mouseMoveEvent(slotval1)
 
 proc fcQPageSetupDialog_method_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPageSetupDialog](fcQPageSetupDialog_vdata(self)[])
-  let slotval1 = gen_qevent_types.QWheelEvent(h: event)
+  let slotval1 = gen_qevent_types.QWheelEvent(h: event, owned: false)
   inst.wheelEvent(slotval1)
 
 proc fcQPageSetupDialog_method_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPageSetupDialog](fcQPageSetupDialog_vdata(self)[])
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   inst.keyReleaseEvent(slotval1)
 
 proc fcQPageSetupDialog_method_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPageSetupDialog](fcQPageSetupDialog_vdata(self)[])
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   inst.focusInEvent(slotval1)
 
 proc fcQPageSetupDialog_method_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPageSetupDialog](fcQPageSetupDialog_vdata(self)[])
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   inst.focusOutEvent(slotval1)
 
 proc fcQPageSetupDialog_method_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPageSetupDialog](fcQPageSetupDialog_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.enterEvent(slotval1)
 
 proc fcQPageSetupDialog_method_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPageSetupDialog](fcQPageSetupDialog_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.leaveEvent(slotval1)
 
 proc fcQPageSetupDialog_method_callback_paintEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPageSetupDialog](fcQPageSetupDialog_vdata(self)[])
-  let slotval1 = gen_qevent_types.QPaintEvent(h: event)
+  let slotval1 = gen_qevent_types.QPaintEvent(h: event, owned: false)
   inst.paintEvent(slotval1)
 
 proc fcQPageSetupDialog_method_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPageSetupDialog](fcQPageSetupDialog_vdata(self)[])
-  let slotval1 = gen_qevent_types.QMoveEvent(h: event)
+  let slotval1 = gen_qevent_types.QMoveEvent(h: event, owned: false)
   inst.moveEvent(slotval1)
 
 proc fcQPageSetupDialog_method_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPageSetupDialog](fcQPageSetupDialog_vdata(self)[])
-  let slotval1 = gen_qevent_types.QTabletEvent(h: event)
+  let slotval1 = gen_qevent_types.QTabletEvent(h: event, owned: false)
   inst.tabletEvent(slotval1)
 
 proc fcQPageSetupDialog_method_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPageSetupDialog](fcQPageSetupDialog_vdata(self)[])
-  let slotval1 = gen_qevent_types.QActionEvent(h: event)
+  let slotval1 = gen_qevent_types.QActionEvent(h: event, owned: false)
   inst.actionEvent(slotval1)
 
 proc fcQPageSetupDialog_method_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPageSetupDialog](fcQPageSetupDialog_vdata(self)[])
-  let slotval1 = gen_qevent_types.QDragEnterEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragEnterEvent(h: event, owned: false)
   inst.dragEnterEvent(slotval1)
 
 proc fcQPageSetupDialog_method_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPageSetupDialog](fcQPageSetupDialog_vdata(self)[])
-  let slotval1 = gen_qevent_types.QDragMoveEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragMoveEvent(h: event, owned: false)
   inst.dragMoveEvent(slotval1)
 
 proc fcQPageSetupDialog_method_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPageSetupDialog](fcQPageSetupDialog_vdata(self)[])
-  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event, owned: false)
   inst.dragLeaveEvent(slotval1)
 
 proc fcQPageSetupDialog_method_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPageSetupDialog](fcQPageSetupDialog_vdata(self)[])
-  let slotval1 = gen_qevent_types.QDropEvent(h: event)
+  let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
   inst.dropEvent(slotval1)
 
 proc fcQPageSetupDialog_method_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPageSetupDialog](fcQPageSetupDialog_vdata(self)[])
-  let slotval1 = gen_qevent_types.QHideEvent(h: event)
+  let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   inst.hideEvent(slotval1)
 
 proc fcQPageSetupDialog_method_callback_nativeEvent(self: pointer, eventType: struct_seaqt_string, message: pointer, resultVal: ptr clong): bool {.cdecl.} =
@@ -1231,7 +1264,7 @@ proc fcQPageSetupDialog_method_callback_nativeEvent(self: pointer, eventType: st
 
 proc fcQPageSetupDialog_method_callback_changeEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPageSetupDialog](fcQPageSetupDialog_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: param1)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
   inst.changeEvent(slotval1)
 
 proc fcQPageSetupDialog_method_callback_metric(self: pointer, param1: cint): cint {.cdecl.} =
@@ -1242,30 +1275,39 @@ proc fcQPageSetupDialog_method_callback_metric(self: pointer, param1: cint): cin
 
 proc fcQPageSetupDialog_method_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPageSetupDialog](fcQPageSetupDialog_vdata(self)[])
-  let slotval1 = gen_qpainter_types.QPainter(h: painter)
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
   inst.initPainter(slotval1)
 
 proc fcQPageSetupDialog_method_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQPageSetupDialog](fcQPageSetupDialog_vdata(self)[])
-  let slotval1 = gen_qpoint_types.QPoint(h: offset)
+  let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
   var virtualReturn = inst.redirected(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQPageSetupDialog_method_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQPageSetupDialog](fcQPageSetupDialog_vdata(self)[])
   var virtualReturn = inst.sharedPainter()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQPageSetupDialog_method_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPageSetupDialog](fcQPageSetupDialog_vdata(self)[])
-  let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1)
+  let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1, owned: false)
   inst.inputMethodEvent(slotval1)
 
 proc fcQPageSetupDialog_method_callback_inputMethodQuery(self: pointer, param1: cint): pointer {.cdecl.} =
   let inst = cast[VirtualQPageSetupDialog](fcQPageSetupDialog_vdata(self)[])
   let slotval1 = cint(param1)
   var virtualReturn = inst.inputMethodQuery(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQPageSetupDialog_method_callback_focusNextPrevChild(self: pointer, next: bool): bool {.cdecl.} =
   let inst = cast[VirtualQPageSetupDialog](fcQPageSetupDialog_vdata(self)[])
@@ -1275,27 +1317,27 @@ proc fcQPageSetupDialog_method_callback_focusNextPrevChild(self: pointer, next: 
 
 proc fcQPageSetupDialog_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPageSetupDialog](fcQPageSetupDialog_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
 proc fcQPageSetupDialog_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPageSetupDialog](fcQPageSetupDialog_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
 proc fcQPageSetupDialog_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPageSetupDialog](fcQPageSetupDialog_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
 proc fcQPageSetupDialog_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPageSetupDialog](fcQPageSetupDialog_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
 proc fcQPageSetupDialog_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPageSetupDialog](fcQPageSetupDialog_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
 
 
@@ -1318,7 +1360,7 @@ proc focusPreviousChild*(self: gen_qpagesetupdialog_types.QPageSetupDialog): boo
   fcQPageSetupDialog_protectedbase_focusPreviousChild(self.h)
 
 proc sender*(self: gen_qpagesetupdialog_types.QPageSetupDialog): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQPageSetupDialog_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQPageSetupDialog_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qpagesetupdialog_types.QPageSetupDialog): cint =
   fcQPageSetupDialog_protectedbase_senderSignalIndex(self.h)
@@ -1447,7 +1489,7 @@ proc create*(T: type gen_qpagesetupdialog_types.QPageSetupDialog,
     vtbl[].vtbl.connectNotify = fcQPageSetupDialog_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQPageSetupDialog_vtable_callback_disconnectNotify
-  let tmp = gen_qpagesetupdialog_types.QPageSetupDialog(h: fcQPageSetupDialog_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h))
+  let tmp = gen_qpagesetupdialog_types.QPageSetupDialog(h: fcQPageSetupDialog_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h), owned: true)
   fcQPageSetupDialog_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qpagesetupdialog_types.QPageSetupDialog,
@@ -1568,7 +1610,7 @@ proc create*(T: type gen_qpagesetupdialog_types.QPageSetupDialog,
     vtbl[].vtbl.connectNotify = fcQPageSetupDialog_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQPageSetupDialog_vtable_callback_disconnectNotify
-  let tmp = gen_qpagesetupdialog_types.QPageSetupDialog(h: fcQPageSetupDialog_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), printer.h))
+  let tmp = gen_qpagesetupdialog_types.QPageSetupDialog(h: fcQPageSetupDialog_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), printer.h), owned: true)
   fcQPageSetupDialog_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qpagesetupdialog_types.QPageSetupDialog,
@@ -1688,7 +1730,7 @@ proc create*(T: type gen_qpagesetupdialog_types.QPageSetupDialog,
     vtbl[].vtbl.connectNotify = fcQPageSetupDialog_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQPageSetupDialog_vtable_callback_disconnectNotify
-  let tmp = gen_qpagesetupdialog_types.QPageSetupDialog(h: fcQPageSetupDialog_new3(addr(vtbl[].vtbl), csize_t(sizeof(pointer))))
+  let tmp = gen_qpagesetupdialog_types.QPageSetupDialog(h: fcQPageSetupDialog_new3(addr(vtbl[].vtbl), csize_t(sizeof(pointer))), owned: true)
   fcQPageSetupDialog_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qpagesetupdialog_types.QPageSetupDialog,
@@ -1809,13 +1851,14 @@ proc create*(T: type gen_qpagesetupdialog_types.QPageSetupDialog,
     vtbl[].vtbl.connectNotify = fcQPageSetupDialog_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQPageSetupDialog_vtable_callback_disconnectNotify
-  let tmp = gen_qpagesetupdialog_types.QPageSetupDialog(h: fcQPageSetupDialog_new4(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), printer.h, parent.h))
+  let tmp = gen_qpagesetupdialog_types.QPageSetupDialog(h: fcQPageSetupDialog_new4(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), printer.h, parent.h), owned: true)
   fcQPageSetupDialog_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQPageSetupDialog_mvtbl = cQPageSetupDialogVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQPageSetupDialog()[])](self.fcQPageSetupDialog_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   metaObject: fcQPageSetupDialog_method_callback_metaObject,
   metacast: fcQPageSetupDialog_method_callback_metacast,
@@ -1906,5 +1949,3 @@ proc create*(T: type gen_qpagesetupdialog_types.QPageSetupDialog,
 
 proc staticMetaObject*(_: type gen_qpagesetupdialog_types.QPageSetupDialog): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQPageSetupDialog_staticMetaObject())
-proc delete*(self: gen_qpagesetupdialog_types.QPageSetupDialog) =
-  fcQPageSetupDialog_delete(self.h)

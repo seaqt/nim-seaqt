@@ -105,10 +105,9 @@ proc fcQSound_protectedbase_isSignalConnected(self: pointer, signal: pointer): b
 proc fcQSound_new(vtbl: pointer, vdata: csize_t, filename: struct_seaqt_string): ptr cQSound {.importc: "QSound_new".}
 proc fcQSound_new2(vtbl: pointer, vdata: csize_t, filename: struct_seaqt_string, parent: pointer): ptr cQSound {.importc: "QSound_new2".}
 proc fcQSound_staticMetaObject(): pointer {.importc: "QSound_staticMetaObject".}
-proc fcQSound_delete(self: pointer) {.importc: "QSound_delete".}
 
 proc metaObject*(self: gen_qsound_types.QSound): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQSound_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQSound_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qsound_types.QSound, param1: cstring): pointer =
   fcQSound_metacast(self.h, param1)
@@ -189,7 +188,8 @@ type QSoundchildEventProc* = proc(self: QSound, event: gen_qcoreevent_types.QChi
 type QSoundcustomEventProc* = proc(self: QSound, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QSoundconnectNotifyProc* = proc(self: QSound, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QSounddisconnectNotifyProc* = proc(self: QSound, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
-type QSoundVTable* = object
+
+type QSoundVTable* {.inheritable, pure.} = object
   vtbl: cQSoundVTable
   metaObject*: QSoundmetaObjectProc
   metacast*: QSoundmetacastProc
@@ -203,7 +203,7 @@ type QSoundVTable* = object
   disconnectNotify*: QSounddisconnectNotifyProc
 
 proc QSoundmetaObject*(self: gen_qsound_types.QSound): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQSound_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQSound_virtualbase_metaObject(self.h), owned: false)
 
 proc QSoundmetacast*(self: gen_qsound_types.QSound, param1: cstring): pointer =
   fcQSound_virtualbase_metacast(self.h, param1)
@@ -237,7 +237,10 @@ proc fcQSound_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QSoundVTable](fcQSound_vdata(self)[])
   let self = QSound(h: self)
   var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQSound_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QSoundVTable](fcQSound_vdata(self)[])
@@ -258,46 +261,46 @@ proc fcQSound_vtable_callback_metacall(self: pointer, param1: cint, param2: cint
 proc fcQSound_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QSoundVTable](fcQSound_vdata(self)[])
   let self = QSound(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
 proc fcQSound_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QSoundVTable](fcQSound_vdata(self)[])
   let self = QSound(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
 proc fcQSound_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSoundVTable](fcQSound_vdata(self)[])
   let self = QSound(h: self)
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
 proc fcQSound_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSoundVTable](fcQSound_vdata(self)[])
   let self = QSound(h: self)
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
 proc fcQSound_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSoundVTable](fcQSound_vdata(self)[])
   let self = QSound(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
 proc fcQSound_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSoundVTable](fcQSound_vdata(self)[])
   let self = QSound(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
 proc fcQSound_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSoundVTable](fcQSound_vdata(self)[])
   let self = QSound(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
 type VirtualQSound* {.inheritable.} = ref object of QSound
@@ -327,7 +330,10 @@ method disconnectNotify*(self: VirtualQSound, signal: gen_qmetaobject_types.QMet
 proc fcQSound_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQSound](fcQSound_vdata(self)[])
   var virtualReturn = inst.metaObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQSound_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQSound](fcQSound_vdata(self)[])
@@ -345,45 +351,45 @@ proc fcQSound_method_callback_metacall(self: pointer, param1: cint, param2: cint
 
 proc fcQSound_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQSound](fcQSound_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
 proc fcQSound_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQSound](fcQSound_vdata(self)[])
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
 proc fcQSound_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSound](fcQSound_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
 proc fcQSound_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSound](fcQSound_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
 proc fcQSound_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSound](fcQSound_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
 proc fcQSound_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSound](fcQSound_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
 proc fcQSound_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSound](fcQSound_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
 
 
 proc sender*(self: gen_qsound_types.QSound): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQSound_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQSound_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qsound_types.QSound): cint =
   fcQSound_protectedbase_senderSignalIndex(self.h)
@@ -422,7 +428,7 @@ proc create*(T: type gen_qsound_types.QSound,
     vtbl[].vtbl.connectNotify = fcQSound_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQSound_vtable_callback_disconnectNotify
-  let tmp = gen_qsound_types.QSound(h: fcQSound_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), struct_seaqt_string(data: if len(filename) > 0: addr filename[0] else: nil, len: csize_t(len(filename)))))
+  let tmp = gen_qsound_types.QSound(h: fcQSound_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), struct_seaqt_string(data: if len(filename) > 0: addr filename[0] else: nil, len: csize_t(len(filename)))), owned: true)
   fcQSound_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qsound_types.QSound,
@@ -453,13 +459,14 @@ proc create*(T: type gen_qsound_types.QSound,
     vtbl[].vtbl.connectNotify = fcQSound_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQSound_vtable_callback_disconnectNotify
-  let tmp = gen_qsound_types.QSound(h: fcQSound_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), struct_seaqt_string(data: if len(filename) > 0: addr filename[0] else: nil, len: csize_t(len(filename))), parent.h))
+  let tmp = gen_qsound_types.QSound(h: fcQSound_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), struct_seaqt_string(data: if len(filename) > 0: addr filename[0] else: nil, len: csize_t(len(filename))), parent.h), owned: true)
   fcQSound_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQSound_mvtbl = cQSoundVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQSound()[])](self.fcQSound_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   metaObject: fcQSound_method_callback_metaObject,
   metacast: fcQSound_method_callback_metacast,
@@ -490,5 +497,3 @@ proc create*(T: type gen_qsound_types.QSound,
 
 proc staticMetaObject*(_: type gen_qsound_types.QSound): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQSound_staticMetaObject())
-proc delete*(self: gen_qsound_types.QSound) =
-  fcQSound_delete(self.h)

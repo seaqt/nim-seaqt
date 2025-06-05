@@ -1,4 +1,4 @@
-type QCameraViewfinderSettings* {.inheritable, pure.} = object
+type QCameraViewfinderSettings* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

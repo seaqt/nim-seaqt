@@ -1,4 +1,4 @@
-type QWebSelectData* {.inheritable, pure.} = object
+type QWebSelectData* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -33,7 +33,7 @@ proc `=sink`(dest: var QWebSelectMethod, source: QWebSelectMethod) =
   dest.h = source.h
   dest.owned = source.owned
 
-type QWebNotificationData* {.inheritable, pure.} = object
+type QWebNotificationData* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -85,7 +85,7 @@ proc `=sink`(dest: var QWebSpellChecker, source: QWebSpellChecker) =
   dest.h = source.h
   dest.owned = source.owned
 
-type QWebKitPlatformPlugin* {.inheritable, pure.} = object
+type QWebKitPlatformPlugin* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -105,7 +105,7 @@ proc delete*(self: sink QWebKitPlatformPlugin) =
   wasMoved(self)
   fcQWebKitPlatformPlugin_delete(h)
 
-type QWebSpellCheckerGrammarDetail* {.inheritable, pure.} = object
+type QWebSpellCheckerGrammarDetail* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

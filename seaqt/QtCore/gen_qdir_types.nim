@@ -1,4 +1,4 @@
-type QDir* {.inheritable, pure.} = object
+type QDir* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

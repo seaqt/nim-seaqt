@@ -1,4 +1,4 @@
-type QReadWriteLock* {.inheritable, pure.} = object
+type QReadWriteLock* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -22,7 +22,7 @@ proc delete*(self: sink QReadWriteLock) =
   wasMoved(self)
   fcQReadWriteLock_delete(h)
 
-type QReadLocker* {.inheritable, pure.} = object
+type QReadLocker* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -42,7 +42,7 @@ proc delete*(self: sink QReadLocker) =
   wasMoved(self)
   fcQReadLocker_delete(h)
 
-type QWriteLocker* {.inheritable, pure.} = object
+type QWriteLocker* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

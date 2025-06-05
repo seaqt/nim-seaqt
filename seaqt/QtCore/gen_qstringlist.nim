@@ -69,7 +69,6 @@ proc fcQStringList_new(): ptr cQStringList {.importc: "QStringList_new".}
 proc fcQStringList_new2(i: struct_seaqt_string): ptr cQStringList {.importc: "QStringList_new2".}
 proc fcQStringList_new3(l: struct_seaqt_array): ptr cQStringList {.importc: "QStringList_new3".}
 proc fcQStringList_new4(param1: struct_seaqt_array): ptr cQStringList {.importc: "QStringList_new4".}
-proc fcQStringList_delete(self: pointer) {.importc: "QStringList_delete".}
 
 proc operatorAssign*(self: gen_qstringlist_types.QStringList, other: openArray[string]): void =
   var other_CArray = newSeq[struct_seaqt_string](len(other))
@@ -188,11 +187,11 @@ proc lastIndexOf*(self: gen_qstringlist_types.QStringList, re: gen_qregularexpre
   fcQStringList_lastIndexOf7(self.h, re.h, fromVal)
 
 proc create*(T: type gen_qstringlist_types.QStringList): gen_qstringlist_types.QStringList =
-  let tmp = gen_qstringlist_types.QStringList(h: fcQStringList_new())
+  let tmp = gen_qstringlist_types.QStringList(h: fcQStringList_new(), owned: true)
   tmp
 proc create*(T: type gen_qstringlist_types.QStringList,
     i: openArray[char]): gen_qstringlist_types.QStringList =
-  let tmp = gen_qstringlist_types.QStringList(h: fcQStringList_new2(struct_seaqt_string(data: if len(i) > 0: addr i[0] else: nil, len: csize_t(len(i)))))
+  let tmp = gen_qstringlist_types.QStringList(h: fcQStringList_new2(struct_seaqt_string(data: if len(i) > 0: addr i[0] else: nil, len: csize_t(len(i)))), owned: true)
   tmp
 proc create*(T: type gen_qstringlist_types.QStringList,
     l: openArray[string]): gen_qstringlist_types.QStringList =
@@ -200,7 +199,7 @@ proc create*(T: type gen_qstringlist_types.QStringList,
   for i in 0..<len(l):
     l_CArray[i] = struct_seaqt_string(data: if len(l[i]) > 0: addr l[i][0] else: nil, len: csize_t(len(l[i])))
 
-  let tmp = gen_qstringlist_types.QStringList(h: fcQStringList_new3(struct_seaqt_array(len: csize_t(len(l)), data: if len(l) == 0: nil else: addr(l_CArray[0]))))
+  let tmp = gen_qstringlist_types.QStringList(h: fcQStringList_new3(struct_seaqt_array(len: csize_t(len(l)), data: if len(l) == 0: nil else: addr(l_CArray[0]))), owned: true)
   tmp
 proc create2*(T: type gen_qstringlist_types.QStringList,
     param1: openArray[string]): gen_qstringlist_types.QStringList =
@@ -208,7 +207,5 @@ proc create2*(T: type gen_qstringlist_types.QStringList,
   for i in 0..<len(param1):
     param1_CArray[i] = struct_seaqt_string(data: if len(param1[i]) > 0: addr param1[i][0] else: nil, len: csize_t(len(param1[i])))
 
-  let tmp = gen_qstringlist_types.QStringList(h: fcQStringList_new4(struct_seaqt_array(len: csize_t(len(param1)), data: if len(param1) == 0: nil else: addr(param1_CArray[0]))))
+  let tmp = gen_qstringlist_types.QStringList(h: fcQStringList_new4(struct_seaqt_array(len: csize_t(len(param1)), data: if len(param1) == 0: nil else: addr(param1_CArray[0]))), owned: true)
   tmp
-proc delete*(self: gen_qstringlist_types.QStringList) =
-  fcQStringList_delete(self.h)

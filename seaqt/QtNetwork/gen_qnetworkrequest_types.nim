@@ -1,4 +1,4 @@
-type QNetworkRequest* {.inheritable, pure.} = object
+type QNetworkRequest* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

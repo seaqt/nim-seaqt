@@ -1,4 +1,4 @@
-type QAuthenticator* {.inheritable, pure.} = object
+type QAuthenticator* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

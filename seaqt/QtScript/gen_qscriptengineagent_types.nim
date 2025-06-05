@@ -1,4 +1,4 @@
-type QScriptEngineAgent* {.inheritable, pure.} = object
+type QScriptEngineAgent* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

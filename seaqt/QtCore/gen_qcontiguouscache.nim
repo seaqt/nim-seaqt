@@ -41,13 +41,10 @@ type cQContiguousCacheData*{.exportc: "QContiguousCacheData", incompleteStruct.}
 
 proc fcQContiguousCacheData_allocateData(size: cint, alignment: cint): pointer {.importc: "QContiguousCacheData_allocateData".}
 proc fcQContiguousCacheData_freeData(data: pointer): void {.importc: "QContiguousCacheData_freeData".}
-proc fcQContiguousCacheData_delete(self: pointer) {.importc: "QContiguousCacheData_delete".}
 
 proc allocateData*(_: type gen_qcontiguouscache_types.QContiguousCacheData, size: cint, alignment: cint): gen_qcontiguouscache_types.QContiguousCacheData =
-  gen_qcontiguouscache_types.QContiguousCacheData(h: fcQContiguousCacheData_allocateData(size, alignment))
+  gen_qcontiguouscache_types.QContiguousCacheData(h: fcQContiguousCacheData_allocateData(size, alignment), owned: false)
 
 proc freeData*(_: type gen_qcontiguouscache_types.QContiguousCacheData, data: gen_qcontiguouscache_types.QContiguousCacheData): void =
   fcQContiguousCacheData_freeData(data.h)
 
-proc delete*(self: gen_qcontiguouscache_types.QContiguousCacheData) =
-  fcQContiguousCacheData_delete(self.h)

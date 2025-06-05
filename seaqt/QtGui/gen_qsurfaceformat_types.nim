@@ -1,4 +1,4 @@
-type QSurfaceFormat* {.inheritable, pure.} = object
+type QSurfaceFormat* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

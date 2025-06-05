@@ -1,4 +1,4 @@
-type QMimeDatabase* {.inheritable, pure.} = object
+type QMimeDatabase* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

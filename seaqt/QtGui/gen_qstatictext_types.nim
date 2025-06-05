@@ -1,4 +1,4 @@
-type QStaticText* {.inheritable, pure.} = object
+type QStaticText* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

@@ -1,4 +1,4 @@
-type QTextStream* {.inheritable, pure.} = object
+type QTextStream* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

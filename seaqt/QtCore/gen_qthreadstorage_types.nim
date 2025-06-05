@@ -1,4 +1,4 @@
-type QThreadStorageData* {.inheritable, pure.} = object
+type QThreadStorageData* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

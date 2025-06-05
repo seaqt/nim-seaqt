@@ -1,4 +1,4 @@
-type QAudioFormat* {.inheritable, pure.} = object
+type QAudioFormat* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

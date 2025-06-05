@@ -1,4 +1,4 @@
-type QHttp2Configuration* {.inheritable, pure.} = object
+type QHttp2Configuration* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

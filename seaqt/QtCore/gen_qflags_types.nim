@@ -1,4 +1,4 @@
-type QFlag* {.inheritable, pure.} = object
+type QFlag* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -22,7 +22,7 @@ proc delete*(self: sink QFlag) =
   wasMoved(self)
   fcQFlag_delete(h)
 
-type QIncompatibleFlag* {.inheritable, pure.} = object
+type QIncompatibleFlag* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

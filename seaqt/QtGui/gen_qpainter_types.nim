@@ -1,4 +1,4 @@
-type QPainter* {.inheritable, pure.} = object
+type QPainter* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -22,7 +22,7 @@ proc delete*(self: sink QPainter) =
   wasMoved(self)
   fcQPainter_delete(h)
 
-type QPainterPixmapFragment* {.inheritable, pure.} = object
+type QPainterPixmapFragment* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

@@ -62,7 +62,6 @@ proc fcQElapsedTimer_secsTo(self: pointer, other: pointer): clonglong {.importc:
 proc fcQElapsedTimer_operatorEqual(self: pointer, other: pointer): bool {.importc: "QElapsedTimer_operatorEqual".}
 proc fcQElapsedTimer_operatorNotEqual(self: pointer, other: pointer): bool {.importc: "QElapsedTimer_operatorNotEqual".}
 proc fcQElapsedTimer_new(): ptr cQElapsedTimer {.importc: "QElapsedTimer_new".}
-proc fcQElapsedTimer_delete(self: pointer) {.importc: "QElapsedTimer_delete".}
 
 proc clockType*(_: type gen_qelapsedtimer_types.QElapsedTimer): cint =
   cint(fcQElapsedTimer_clockType())
@@ -107,7 +106,5 @@ proc operatorNotEqual*(self: gen_qelapsedtimer_types.QElapsedTimer, other: gen_q
   fcQElapsedTimer_operatorNotEqual(self.h, other.h)
 
 proc create*(T: type gen_qelapsedtimer_types.QElapsedTimer): gen_qelapsedtimer_types.QElapsedTimer =
-  let tmp = gen_qelapsedtimer_types.QElapsedTimer(h: fcQElapsedTimer_new())
+  let tmp = gen_qelapsedtimer_types.QElapsedTimer(h: fcQElapsedTimer_new(), owned: true)
   tmp
-proc delete*(self: gen_qelapsedtimer_types.QElapsedTimer) =
-  fcQElapsedTimer_delete(self.h)

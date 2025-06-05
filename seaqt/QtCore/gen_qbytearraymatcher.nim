@@ -51,9 +51,7 @@ proc fcQByteArrayMatcher_new(): ptr cQByteArrayMatcher {.importc: "QByteArrayMat
 proc fcQByteArrayMatcher_new2(pattern: struct_seaqt_string): ptr cQByteArrayMatcher {.importc: "QByteArrayMatcher_new2".}
 proc fcQByteArrayMatcher_new3(pattern: cstring, length: cint): ptr cQByteArrayMatcher {.importc: "QByteArrayMatcher_new3".}
 proc fcQByteArrayMatcher_new4(other: pointer): ptr cQByteArrayMatcher {.importc: "QByteArrayMatcher_new4".}
-proc fcQByteArrayMatcher_delete(self: pointer) {.importc: "QByteArrayMatcher_delete".}
 proc fcQStaticByteArrayMatcherBase_protectedbase_indexOfIn(self: pointer, needle: cstring, nlen: cuint, haystack: cstring, hlen: cint, fromVal: cint): cint {.importc: "QStaticByteArrayMatcherBase_protectedbase_indexOfIn".}
-proc fcQStaticByteArrayMatcherBase_delete(self: pointer) {.importc: "QStaticByteArrayMatcherBase_delete".}
 
 proc operatorAssign*(self: gen_qbytearraymatcher_types.QByteArrayMatcher, other: gen_qbytearraymatcher_types.QByteArrayMatcher): void =
   fcQByteArrayMatcher_operatorAssign(self.h, other.h)
@@ -80,24 +78,20 @@ proc indexIn*(self: gen_qbytearraymatcher_types.QByteArrayMatcher, str: cstring,
   fcQByteArrayMatcher_indexIn4(self.h, str, len, fromVal)
 
 proc create*(T: type gen_qbytearraymatcher_types.QByteArrayMatcher): gen_qbytearraymatcher_types.QByteArrayMatcher =
-  let tmp = gen_qbytearraymatcher_types.QByteArrayMatcher(h: fcQByteArrayMatcher_new())
+  let tmp = gen_qbytearraymatcher_types.QByteArrayMatcher(h: fcQByteArrayMatcher_new(), owned: true)
   tmp
 proc create*(T: type gen_qbytearraymatcher_types.QByteArrayMatcher,
     pattern: openArray[byte]): gen_qbytearraymatcher_types.QByteArrayMatcher =
-  let tmp = gen_qbytearraymatcher_types.QByteArrayMatcher(h: fcQByteArrayMatcher_new2(struct_seaqt_string(data: if len(pattern) > 0: addr pattern[0] else: nil, len: csize_t(len(pattern)))))
+  let tmp = gen_qbytearraymatcher_types.QByteArrayMatcher(h: fcQByteArrayMatcher_new2(struct_seaqt_string(data: if len(pattern) > 0: addr pattern[0] else: nil, len: csize_t(len(pattern)))), owned: true)
   tmp
 proc create*(T: type gen_qbytearraymatcher_types.QByteArrayMatcher,
     pattern: cstring, length: cint): gen_qbytearraymatcher_types.QByteArrayMatcher =
-  let tmp = gen_qbytearraymatcher_types.QByteArrayMatcher(h: fcQByteArrayMatcher_new3(pattern, length))
+  let tmp = gen_qbytearraymatcher_types.QByteArrayMatcher(h: fcQByteArrayMatcher_new3(pattern, length), owned: true)
   tmp
 proc create*(T: type gen_qbytearraymatcher_types.QByteArrayMatcher,
     other: gen_qbytearraymatcher_types.QByteArrayMatcher): gen_qbytearraymatcher_types.QByteArrayMatcher =
-  let tmp = gen_qbytearraymatcher_types.QByteArrayMatcher(h: fcQByteArrayMatcher_new4(other.h))
+  let tmp = gen_qbytearraymatcher_types.QByteArrayMatcher(h: fcQByteArrayMatcher_new4(other.h), owned: true)
   tmp
-proc delete*(self: gen_qbytearraymatcher_types.QByteArrayMatcher) =
-  fcQByteArrayMatcher_delete(self.h)
 proc indexOfIn*(self: gen_qbytearraymatcher_types.QStaticByteArrayMatcherBase, needle: cstring, nlen: cuint, haystack: cstring, hlen: cint, fromVal: cint): cint =
   fcQStaticByteArrayMatcherBase_protectedbase_indexOfIn(self.h, needle, nlen, haystack, hlen, fromVal)
 
-proc delete*(self: gen_qbytearraymatcher_types.QStaticByteArrayMatcherBase) =
-  fcQStaticByteArrayMatcherBase_delete(self.h)

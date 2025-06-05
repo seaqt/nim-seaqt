@@ -1,8 +1,8 @@
-type QTextCodec* {.inheritable, pure.} = object
+type QTextCodec* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-type QTextEncoder* {.inheritable, pure.} = object
+type QTextEncoder* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -26,7 +26,7 @@ proc delete*(self: sink QTextEncoder) =
   wasMoved(self)
   fcQTextEncoder_delete(h)
 
-type QTextDecoder* {.inheritable, pure.} = object
+type QTextDecoder* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -46,7 +46,7 @@ proc delete*(self: sink QTextDecoder) =
   wasMoved(self)
   fcQTextDecoder_delete(h)
 
-type QTextCodecConverterState* {.inheritable, pure.} = object
+type QTextCodecConverterState* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

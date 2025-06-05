@@ -1,4 +1,4 @@
-type QSslCipher* {.inheritable, pure.} = object
+type QSslCipher* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

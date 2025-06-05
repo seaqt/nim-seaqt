@@ -53,7 +53,6 @@ proc fcQWebDatabase_origin(self: pointer): pointer {.importc: "QWebDatabase_orig
 proc fcQWebDatabase_removeDatabase(param1: pointer): void {.importc: "QWebDatabase_removeDatabase".}
 proc fcQWebDatabase_removeAllDatabases(): void {.importc: "QWebDatabase_removeAllDatabases".}
 proc fcQWebDatabase_new(other: pointer): ptr cQWebDatabase {.importc: "QWebDatabase_new".}
-proc fcQWebDatabase_delete(self: pointer) {.importc: "QWebDatabase_delete".}
 
 proc operatorAssign*(self: gen_qwebdatabase_types.QWebDatabase, other: gen_qwebdatabase_types.QWebDatabase): void =
   fcQWebDatabase_operatorAssign(self.h, other.h)
@@ -83,7 +82,7 @@ proc fileName*(self: gen_qwebdatabase_types.QWebDatabase): string =
   vx_ret
 
 proc origin*(self: gen_qwebdatabase_types.QWebDatabase): gen_qwebsecurityorigin_types.QWebSecurityOrigin =
-  gen_qwebsecurityorigin_types.QWebSecurityOrigin(h: fcQWebDatabase_origin(self.h))
+  gen_qwebsecurityorigin_types.QWebSecurityOrigin(h: fcQWebDatabase_origin(self.h), owned: true)
 
 proc removeDatabase*(_: type gen_qwebdatabase_types.QWebDatabase, param1: gen_qwebdatabase_types.QWebDatabase): void =
   fcQWebDatabase_removeDatabase(param1.h)
@@ -93,7 +92,5 @@ proc removeAllDatabases*(_: type gen_qwebdatabase_types.QWebDatabase): void =
 
 proc create*(T: type gen_qwebdatabase_types.QWebDatabase,
     other: gen_qwebdatabase_types.QWebDatabase): gen_qwebdatabase_types.QWebDatabase =
-  let tmp = gen_qwebdatabase_types.QWebDatabase(h: fcQWebDatabase_new(other.h))
+  let tmp = gen_qwebdatabase_types.QWebDatabase(h: fcQWebDatabase_new(other.h), owned: true)
   tmp
-proc delete*(self: gen_qwebdatabase_types.QWebDatabase) =
-  fcQWebDatabase_delete(self.h)

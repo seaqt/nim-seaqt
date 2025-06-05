@@ -1,4 +1,4 @@
-type QCalendar* {.inheritable, pure.} = object
+type QCalendar* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -22,7 +22,7 @@ proc delete*(self: sink QCalendar) =
   wasMoved(self)
   fcQCalendar_delete(h)
 
-type QCalendarYearMonthDay* {.inheritable, pure.} = object
+type QCalendarYearMonthDay* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

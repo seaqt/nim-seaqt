@@ -1,4 +1,4 @@
-type QWebEngineScriptCollection* {.inheritable, pure.} = object
+type QWebEngineScriptCollection* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

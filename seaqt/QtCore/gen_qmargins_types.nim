@@ -1,4 +1,4 @@
-type QMargins* {.inheritable, pure.} = object
+type QMargins* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -22,7 +22,7 @@ proc delete*(self: sink QMargins) =
   wasMoved(self)
   fcQMargins_delete(h)
 
-type QMarginsF* {.inheritable, pure.} = object
+type QMarginsF* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

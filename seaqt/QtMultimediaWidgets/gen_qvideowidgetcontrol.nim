@@ -91,10 +91,9 @@ proc fcQVideoWidgetControl_protectedbase_senderSignalIndex(self: pointer): cint 
 proc fcQVideoWidgetControl_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QVideoWidgetControl_protectedbase_receivers".}
 proc fcQVideoWidgetControl_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QVideoWidgetControl_protectedbase_isSignalConnected".}
 proc fcQVideoWidgetControl_staticMetaObject(): pointer {.importc: "QVideoWidgetControl_staticMetaObject".}
-proc fcQVideoWidgetControl_delete(self: pointer) {.importc: "QVideoWidgetControl_delete".}
 
 proc metaObject*(self: gen_qvideowidgetcontrol_types.QVideoWidgetControl): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQVideoWidgetControl_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQVideoWidgetControl_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qvideowidgetcontrol_types.QVideoWidgetControl, param1: cstring): pointer =
   fcQVideoWidgetControl_metacast(self.h, param1)
@@ -115,7 +114,7 @@ proc trUtf8*(_: type gen_qvideowidgetcontrol_types.QVideoWidgetControl, s: cstri
   vx_ret
 
 proc videoWidget*(self: gen_qvideowidgetcontrol_types.QVideoWidgetControl): gen_qwidget_types.QWidget =
-  gen_qwidget_types.QWidget(h: fcQVideoWidgetControl_videoWidget(self.h))
+  gen_qwidget_types.QWidget(h: fcQVideoWidgetControl_videoWidget(self.h), owned: false)
 
 proc aspectRatioMode*(self: gen_qvideowidgetcontrol_types.QVideoWidgetControl): cint =
   cint(fcQVideoWidgetControl_aspectRatioMode(self.h))
@@ -278,7 +277,7 @@ proc trUtf8*(_: type gen_qvideowidgetcontrol_types.QVideoWidgetControl, s: cstri
   vx_ret
 
 proc sender*(self: gen_qvideowidgetcontrol_types.QVideoWidgetControl): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQVideoWidgetControl_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQVideoWidgetControl_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qvideowidgetcontrol_types.QVideoWidgetControl): cint =
   fcQVideoWidgetControl_protectedbase_senderSignalIndex(self.h)
@@ -291,5 +290,3 @@ proc isSignalConnected*(self: gen_qvideowidgetcontrol_types.QVideoWidgetControl,
 
 proc staticMetaObject*(_: type gen_qvideowidgetcontrol_types.QVideoWidgetControl): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQVideoWidgetControl_staticMetaObject())
-proc delete*(self: gen_qvideowidgetcontrol_types.QVideoWidgetControl) =
-  fcQVideoWidgetControl_delete(self.h)

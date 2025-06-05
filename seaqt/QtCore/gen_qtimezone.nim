@@ -106,10 +106,8 @@ proc fcQTimeZone_new4(zoneId: struct_seaqt_string, offsetSeconds: cint, name: st
 proc fcQTimeZone_new5(other: pointer): ptr cQTimeZone {.importc: "QTimeZone_new5".}
 proc fcQTimeZone_new6(zoneId: struct_seaqt_string, offsetSeconds: cint, name: struct_seaqt_string, abbreviation: struct_seaqt_string, country: cint): ptr cQTimeZone {.importc: "QTimeZone_new6".}
 proc fcQTimeZone_new7(zoneId: struct_seaqt_string, offsetSeconds: cint, name: struct_seaqt_string, abbreviation: struct_seaqt_string, country: cint, comment: struct_seaqt_string): ptr cQTimeZone {.importc: "QTimeZone_new7".}
-proc fcQTimeZone_delete(self: pointer) {.importc: "QTimeZone_delete".}
 proc fcQTimeZoneOffsetData_operatorAssign(self: pointer, param1: pointer): void {.importc: "QTimeZone__OffsetData_operatorAssign".}
 proc fcQTimeZoneOffsetData_new(param1: pointer): ptr cQTimeZoneOffsetData {.importc: "QTimeZone__OffsetData_new".}
-proc fcQTimeZoneOffsetData_delete(self: pointer) {.importc: "QTimeZone__OffsetData_delete".}
 
 proc operatorAssign*(self: gen_qtimezone_types.QTimeZone, other: gen_qtimezone_types.QTimeZone): void =
   fcQTimeZone_operatorAssign(self.h, other.h)
@@ -169,23 +167,23 @@ proc isDaylightTime*(self: gen_qtimezone_types.QTimeZone, atDateTime: gen_qdatet
   fcQTimeZone_isDaylightTime(self.h, atDateTime.h)
 
 proc offsetData*(self: gen_qtimezone_types.QTimeZone, forDateTime: gen_qdatetime_types.QDateTime): gen_qtimezone_types.QTimeZoneOffsetData =
-  gen_qtimezone_types.QTimeZoneOffsetData(h: fcQTimeZone_offsetData(self.h, forDateTime.h))
+  gen_qtimezone_types.QTimeZoneOffsetData(h: fcQTimeZone_offsetData(self.h, forDateTime.h), owned: true)
 
 proc hasTransitions*(self: gen_qtimezone_types.QTimeZone): bool =
   fcQTimeZone_hasTransitions(self.h)
 
 proc nextTransition*(self: gen_qtimezone_types.QTimeZone, afterDateTime: gen_qdatetime_types.QDateTime): gen_qtimezone_types.QTimeZoneOffsetData =
-  gen_qtimezone_types.QTimeZoneOffsetData(h: fcQTimeZone_nextTransition(self.h, afterDateTime.h))
+  gen_qtimezone_types.QTimeZoneOffsetData(h: fcQTimeZone_nextTransition(self.h, afterDateTime.h), owned: true)
 
 proc previousTransition*(self: gen_qtimezone_types.QTimeZone, beforeDateTime: gen_qdatetime_types.QDateTime): gen_qtimezone_types.QTimeZoneOffsetData =
-  gen_qtimezone_types.QTimeZoneOffsetData(h: fcQTimeZone_previousTransition(self.h, beforeDateTime.h))
+  gen_qtimezone_types.QTimeZoneOffsetData(h: fcQTimeZone_previousTransition(self.h, beforeDateTime.h), owned: true)
 
 proc transitions*(self: gen_qtimezone_types.QTimeZone, fromDateTime: gen_qdatetime_types.QDateTime, toDateTime: gen_qdatetime_types.QDateTime): seq[gen_qtimezone_types.QTimeZoneOffsetData] =
   var v_ma = fcQTimeZone_transitions(self.h, fromDateTime.h, toDateTime.h)
   var vx_ret = newSeq[gen_qtimezone_types.QTimeZoneOffsetData](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qtimezone_types.QTimeZoneOffsetData(h: v_outCast[i])
+    vx_ret[i] = gen_qtimezone_types.QTimeZoneOffsetData(h: v_outCast[i], owned: true)
   c_free(v_ma.data)
   vx_ret
 
@@ -196,10 +194,10 @@ proc systemTimeZoneId*(_: type gen_qtimezone_types.QTimeZone): seq[byte] =
   vx_ret
 
 proc systemTimeZone*(_: type gen_qtimezone_types.QTimeZone): gen_qtimezone_types.QTimeZone =
-  gen_qtimezone_types.QTimeZone(h: fcQTimeZone_systemTimeZone())
+  gen_qtimezone_types.QTimeZone(h: fcQTimeZone_systemTimeZone(), owned: true)
 
 proc utc*(_: type gen_qtimezone_types.QTimeZone): gen_qtimezone_types.QTimeZone =
-  gen_qtimezone_types.QTimeZone(h: fcQTimeZone_utc())
+  gen_qtimezone_types.QTimeZone(h: fcQTimeZone_utc(), owned: true)
 
 proc isTimeZoneIdAvailable*(_: type gen_qtimezone_types.QTimeZone, ianaId: openArray[byte]): bool =
   fcQTimeZone_isTimeZoneIdAvailable(struct_seaqt_string(data: if len(ianaId) > 0: addr ianaId[0] else: nil, len: csize_t(len(ianaId))))
@@ -307,40 +305,36 @@ proc displayName*(self: gen_qtimezone_types.QTimeZone, timeType: cint, nameType:
   vx_ret
 
 proc create*(T: type gen_qtimezone_types.QTimeZone): gen_qtimezone_types.QTimeZone =
-  let tmp = gen_qtimezone_types.QTimeZone(h: fcQTimeZone_new())
+  let tmp = gen_qtimezone_types.QTimeZone(h: fcQTimeZone_new(), owned: true)
   tmp
 proc create*(T: type gen_qtimezone_types.QTimeZone,
     ianaId: openArray[byte]): gen_qtimezone_types.QTimeZone =
-  let tmp = gen_qtimezone_types.QTimeZone(h: fcQTimeZone_new2(struct_seaqt_string(data: if len(ianaId) > 0: addr ianaId[0] else: nil, len: csize_t(len(ianaId)))))
+  let tmp = gen_qtimezone_types.QTimeZone(h: fcQTimeZone_new2(struct_seaqt_string(data: if len(ianaId) > 0: addr ianaId[0] else: nil, len: csize_t(len(ianaId)))), owned: true)
   tmp
 proc create*(T: type gen_qtimezone_types.QTimeZone,
     offsetSeconds: cint): gen_qtimezone_types.QTimeZone =
-  let tmp = gen_qtimezone_types.QTimeZone(h: fcQTimeZone_new3(offsetSeconds))
+  let tmp = gen_qtimezone_types.QTimeZone(h: fcQTimeZone_new3(offsetSeconds), owned: true)
   tmp
 proc create*(T: type gen_qtimezone_types.QTimeZone,
     zoneId: openArray[byte], offsetSeconds: cint, name: openArray[char], abbreviation: openArray[char]): gen_qtimezone_types.QTimeZone =
-  let tmp = gen_qtimezone_types.QTimeZone(h: fcQTimeZone_new4(struct_seaqt_string(data: if len(zoneId) > 0: addr zoneId[0] else: nil, len: csize_t(len(zoneId))), offsetSeconds, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), struct_seaqt_string(data: if len(abbreviation) > 0: addr abbreviation[0] else: nil, len: csize_t(len(abbreviation)))))
+  let tmp = gen_qtimezone_types.QTimeZone(h: fcQTimeZone_new4(struct_seaqt_string(data: if len(zoneId) > 0: addr zoneId[0] else: nil, len: csize_t(len(zoneId))), offsetSeconds, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), struct_seaqt_string(data: if len(abbreviation) > 0: addr abbreviation[0] else: nil, len: csize_t(len(abbreviation)))), owned: true)
   tmp
 proc create*(T: type gen_qtimezone_types.QTimeZone,
     other: gen_qtimezone_types.QTimeZone): gen_qtimezone_types.QTimeZone =
-  let tmp = gen_qtimezone_types.QTimeZone(h: fcQTimeZone_new5(other.h))
+  let tmp = gen_qtimezone_types.QTimeZone(h: fcQTimeZone_new5(other.h), owned: true)
   tmp
 proc create*(T: type gen_qtimezone_types.QTimeZone,
     zoneId: openArray[byte], offsetSeconds: cint, name: openArray[char], abbreviation: openArray[char], country: cint): gen_qtimezone_types.QTimeZone =
-  let tmp = gen_qtimezone_types.QTimeZone(h: fcQTimeZone_new6(struct_seaqt_string(data: if len(zoneId) > 0: addr zoneId[0] else: nil, len: csize_t(len(zoneId))), offsetSeconds, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), struct_seaqt_string(data: if len(abbreviation) > 0: addr abbreviation[0] else: nil, len: csize_t(len(abbreviation))), cint(country)))
+  let tmp = gen_qtimezone_types.QTimeZone(h: fcQTimeZone_new6(struct_seaqt_string(data: if len(zoneId) > 0: addr zoneId[0] else: nil, len: csize_t(len(zoneId))), offsetSeconds, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), struct_seaqt_string(data: if len(abbreviation) > 0: addr abbreviation[0] else: nil, len: csize_t(len(abbreviation))), cint(country)), owned: true)
   tmp
 proc create*(T: type gen_qtimezone_types.QTimeZone,
     zoneId: openArray[byte], offsetSeconds: cint, name: openArray[char], abbreviation: openArray[char], country: cint, comment: openArray[char]): gen_qtimezone_types.QTimeZone =
-  let tmp = gen_qtimezone_types.QTimeZone(h: fcQTimeZone_new7(struct_seaqt_string(data: if len(zoneId) > 0: addr zoneId[0] else: nil, len: csize_t(len(zoneId))), offsetSeconds, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), struct_seaqt_string(data: if len(abbreviation) > 0: addr abbreviation[0] else: nil, len: csize_t(len(abbreviation))), cint(country), struct_seaqt_string(data: if len(comment) > 0: addr comment[0] else: nil, len: csize_t(len(comment)))))
+  let tmp = gen_qtimezone_types.QTimeZone(h: fcQTimeZone_new7(struct_seaqt_string(data: if len(zoneId) > 0: addr zoneId[0] else: nil, len: csize_t(len(zoneId))), offsetSeconds, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), struct_seaqt_string(data: if len(abbreviation) > 0: addr abbreviation[0] else: nil, len: csize_t(len(abbreviation))), cint(country), struct_seaqt_string(data: if len(comment) > 0: addr comment[0] else: nil, len: csize_t(len(comment)))), owned: true)
   tmp
-proc delete*(self: gen_qtimezone_types.QTimeZone) =
-  fcQTimeZone_delete(self.h)
 proc operatorAssign*(self: gen_qtimezone_types.QTimeZoneOffsetData, param1: gen_qtimezone_types.QTimeZoneOffsetData): void =
   fcQTimeZoneOffsetData_operatorAssign(self.h, param1.h)
 
 proc create*(T: type gen_qtimezone_types.QTimeZoneOffsetData,
     param1: gen_qtimezone_types.QTimeZoneOffsetData): gen_qtimezone_types.QTimeZoneOffsetData =
-  let tmp = gen_qtimezone_types.QTimeZoneOffsetData(h: fcQTimeZoneOffsetData_new(param1.h))
+  let tmp = gen_qtimezone_types.QTimeZoneOffsetData(h: fcQTimeZoneOffsetData_new(param1.h), owned: true)
   tmp
-proc delete*(self: gen_qtimezone_types.QTimeZoneOffsetData) =
-  fcQTimeZoneOffsetData_delete(self.h)

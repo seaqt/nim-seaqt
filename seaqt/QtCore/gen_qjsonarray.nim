@@ -91,7 +91,6 @@ proc fcQJsonArray_popBack(self: pointer): void {.importc: "QJsonArray_popBack".}
 proc fcQJsonArray_empty(self: pointer): bool {.importc: "QJsonArray_empty".}
 proc fcQJsonArray_new(): ptr cQJsonArray {.importc: "QJsonArray_new".}
 proc fcQJsonArray_new2(other: pointer): ptr cQJsonArray {.importc: "QJsonArray_new2".}
-proc fcQJsonArray_delete(self: pointer) {.importc: "QJsonArray_delete".}
 proc fcQJsonArrayiterator_operatorMultiply(self: pointer): pointer {.importc: "QJsonArray__iterator_operatorMultiply".}
 proc fcQJsonArrayiterator_operatorMinusGreater(self: pointer): pointer {.importc: "QJsonArray__iterator_operatorMinusGreater".}
 proc fcQJsonArrayiterator_operatorSubscript(self: pointer, j: cint): pointer {.importc: "QJsonArray__iterator_operatorSubscript".}
@@ -119,7 +118,6 @@ proc fcQJsonArrayiterator_operatorMinusWithQJsonArrayiterator(self: pointer, j: 
 proc fcQJsonArrayiterator_new(): ptr cQJsonArrayiterator {.importc: "QJsonArray__iterator_new".}
 proc fcQJsonArrayiterator_new2(array: pointer, index: cint): ptr cQJsonArrayiterator {.importc: "QJsonArray__iterator_new2".}
 proc fcQJsonArrayiterator_new3(param1: pointer): ptr cQJsonArrayiterator {.importc: "QJsonArray__iterator_new3".}
-proc fcQJsonArrayiterator_delete(self: pointer) {.importc: "QJsonArray__iterator_delete".}
 proc fcQJsonArrayconst_iterator_operatorMultiply(self: pointer): pointer {.importc: "QJsonArray__const_iterator_operatorMultiply".}
 proc fcQJsonArrayconst_iterator_operatorMinusGreater(self: pointer): pointer {.importc: "QJsonArray__const_iterator_operatorMinusGreater".}
 proc fcQJsonArrayconst_iterator_operatorSubscript(self: pointer, j: cint): pointer {.importc: "QJsonArray__const_iterator_operatorSubscript".}
@@ -142,7 +140,6 @@ proc fcQJsonArrayconst_iterator_new(): ptr cQJsonArrayconst_iterator {.importc: 
 proc fcQJsonArrayconst_iterator_new2(array: pointer, index: cint): ptr cQJsonArrayconst_iterator {.importc: "QJsonArray__const_iterator_new2".}
 proc fcQJsonArrayconst_iterator_new3(o: pointer): ptr cQJsonArrayconst_iterator {.importc: "QJsonArray__const_iterator_new3".}
 proc fcQJsonArrayconst_iterator_new4(o: pointer): ptr cQJsonArrayconst_iterator {.importc: "QJsonArray__const_iterator_new4".}
-proc fcQJsonArrayconst_iterator_delete(self: pointer) {.importc: "QJsonArray__const_iterator_delete".}
 
 proc operatorAssign*(self: gen_qjsonarray_types.QJsonArray, other: gen_qjsonarray_types.QJsonArray): void =
   fcQJsonArray_operatorAssign(self.h, other.h)
@@ -152,21 +149,21 @@ proc fromStringList*(_: type gen_qjsonarray_types.QJsonArray, list: openArray[st
   for i in 0..<len(list):
     list_CArray[i] = struct_seaqt_string(data: if len(list[i]) > 0: addr list[i][0] else: nil, len: csize_t(len(list[i])))
 
-  gen_qjsonarray_types.QJsonArray(h: fcQJsonArray_fromStringList(struct_seaqt_array(len: csize_t(len(list)), data: if len(list) == 0: nil else: addr(list_CArray[0]))))
+  gen_qjsonarray_types.QJsonArray(h: fcQJsonArray_fromStringList(struct_seaqt_array(len: csize_t(len(list)), data: if len(list) == 0: nil else: addr(list_CArray[0]))), owned: true)
 
 proc fromVariantList*(_: type gen_qjsonarray_types.QJsonArray, list: openArray[gen_qvariant_types.QVariant]): gen_qjsonarray_types.QJsonArray =
   var list_CArray = newSeq[pointer](len(list))
   for i in 0..<len(list):
     list_CArray[i] = list[i].h
 
-  gen_qjsonarray_types.QJsonArray(h: fcQJsonArray_fromVariantList(struct_seaqt_array(len: csize_t(len(list)), data: if len(list) == 0: nil else: addr(list_CArray[0]))))
+  gen_qjsonarray_types.QJsonArray(h: fcQJsonArray_fromVariantList(struct_seaqt_array(len: csize_t(len(list)), data: if len(list) == 0: nil else: addr(list_CArray[0]))), owned: true)
 
 proc toVariantList*(self: gen_qjsonarray_types.QJsonArray): seq[gen_qvariant_types.QVariant] =
   var v_ma = fcQJsonArray_toVariantList(self.h)
   var vx_ret = newSeq[gen_qvariant_types.QVariant](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qvariant_types.QVariant(h: v_outCast[i])
+    vx_ret[i] = gen_qvariant_types.QVariant(h: v_outCast[i], owned: true)
   c_free(v_ma.data)
   vx_ret
 
@@ -180,13 +177,13 @@ proc isEmpty*(self: gen_qjsonarray_types.QJsonArray): bool =
   fcQJsonArray_isEmpty(self.h)
 
 proc at*(self: gen_qjsonarray_types.QJsonArray, i: cint): gen_qjsonvalue_types.QJsonValue =
-  gen_qjsonvalue_types.QJsonValue(h: fcQJsonArray_at(self.h, i))
+  gen_qjsonvalue_types.QJsonValue(h: fcQJsonArray_at(self.h, i), owned: true)
 
 proc first*(self: gen_qjsonarray_types.QJsonArray): gen_qjsonvalue_types.QJsonValue =
-  gen_qjsonvalue_types.QJsonValue(h: fcQJsonArray_first(self.h))
+  gen_qjsonvalue_types.QJsonValue(h: fcQJsonArray_first(self.h), owned: true)
 
 proc last*(self: gen_qjsonarray_types.QJsonArray): gen_qjsonvalue_types.QJsonValue =
-  gen_qjsonvalue_types.QJsonValue(h: fcQJsonArray_last(self.h))
+  gen_qjsonvalue_types.QJsonValue(h: fcQJsonArray_last(self.h), owned: true)
 
 proc prepend*(self: gen_qjsonarray_types.QJsonArray, value: gen_qjsonvalue_types.QJsonValue): void =
   fcQJsonArray_prepend(self.h, value.h)
@@ -198,7 +195,7 @@ proc removeAt*(self: gen_qjsonarray_types.QJsonArray, i: cint): void =
   fcQJsonArray_removeAt(self.h, i)
 
 proc takeAt*(self: gen_qjsonarray_types.QJsonArray, i: cint): gen_qjsonvalue_types.QJsonValue =
-  gen_qjsonvalue_types.QJsonValue(h: fcQJsonArray_takeAt(self.h, i))
+  gen_qjsonvalue_types.QJsonValue(h: fcQJsonArray_takeAt(self.h, i), owned: true)
 
 proc removeFirst*(self: gen_qjsonarray_types.QJsonArray): void =
   fcQJsonArray_removeFirst(self.h)
@@ -216,10 +213,10 @@ proc contains*(self: gen_qjsonarray_types.QJsonArray, element: gen_qjsonvalue_ty
   fcQJsonArray_contains(self.h, element.h)
 
 proc operatorSubscript*(self: gen_qjsonarray_types.QJsonArray, i: cint): gen_qjsonvalue_types.QJsonValueRef =
-  gen_qjsonvalue_types.QJsonValueRef(h: fcQJsonArray_operatorSubscript(self.h, i))
+  gen_qjsonvalue_types.QJsonValueRef(h: fcQJsonArray_operatorSubscript(self.h, i), owned: true)
 
 proc operatorSubscript2*(self: gen_qjsonarray_types.QJsonArray, i: cint): gen_qjsonvalue_types.QJsonValue =
-  gen_qjsonvalue_types.QJsonValue(h: fcQJsonArray_operatorSubscriptWithInt(self.h, i))
+  gen_qjsonvalue_types.QJsonValue(h: fcQJsonArray_operatorSubscriptWithInt(self.h, i), owned: true)
 
 proc operatorEqual*(self: gen_qjsonarray_types.QJsonArray, other: gen_qjsonarray_types.QJsonArray): bool =
   fcQJsonArray_operatorEqual(self.h, other.h)
@@ -231,43 +228,43 @@ proc swap*(self: gen_qjsonarray_types.QJsonArray, other: gen_qjsonarray_types.QJ
   fcQJsonArray_swap(self.h, other.h)
 
 proc begin*(self: gen_qjsonarray_types.QJsonArray): gen_qjsonarray_types.QJsonArrayiterator =
-  gen_qjsonarray_types.QJsonArrayiterator(h: fcQJsonArray_begin(self.h))
+  gen_qjsonarray_types.QJsonArrayiterator(h: fcQJsonArray_begin(self.h), owned: true)
 
 proc begin2*(self: gen_qjsonarray_types.QJsonArray): gen_qjsonarray_types.QJsonArrayconst_iterator =
-  gen_qjsonarray_types.QJsonArrayconst_iterator(h: fcQJsonArray_begin2(self.h))
+  gen_qjsonarray_types.QJsonArrayconst_iterator(h: fcQJsonArray_begin2(self.h), owned: true)
 
 proc constBegin*(self: gen_qjsonarray_types.QJsonArray): gen_qjsonarray_types.QJsonArrayconst_iterator =
-  gen_qjsonarray_types.QJsonArrayconst_iterator(h: fcQJsonArray_constBegin(self.h))
+  gen_qjsonarray_types.QJsonArrayconst_iterator(h: fcQJsonArray_constBegin(self.h), owned: true)
 
 proc cbegin*(self: gen_qjsonarray_types.QJsonArray): gen_qjsonarray_types.QJsonArrayconst_iterator =
-  gen_qjsonarray_types.QJsonArrayconst_iterator(h: fcQJsonArray_cbegin(self.h))
+  gen_qjsonarray_types.QJsonArrayconst_iterator(h: fcQJsonArray_cbegin(self.h), owned: true)
 
 proc endX*(self: gen_qjsonarray_types.QJsonArray): gen_qjsonarray_types.QJsonArrayiterator =
-  gen_qjsonarray_types.QJsonArrayiterator(h: fcQJsonArray_endX(self.h))
+  gen_qjsonarray_types.QJsonArrayiterator(h: fcQJsonArray_endX(self.h), owned: true)
 
 proc endX2*(self: gen_qjsonarray_types.QJsonArray): gen_qjsonarray_types.QJsonArrayconst_iterator =
-  gen_qjsonarray_types.QJsonArrayconst_iterator(h: fcQJsonArray_end2(self.h))
+  gen_qjsonarray_types.QJsonArrayconst_iterator(h: fcQJsonArray_end2(self.h), owned: true)
 
 proc constEnd*(self: gen_qjsonarray_types.QJsonArray): gen_qjsonarray_types.QJsonArrayconst_iterator =
-  gen_qjsonarray_types.QJsonArrayconst_iterator(h: fcQJsonArray_constEnd(self.h))
+  gen_qjsonarray_types.QJsonArrayconst_iterator(h: fcQJsonArray_constEnd(self.h), owned: true)
 
 proc cend*(self: gen_qjsonarray_types.QJsonArray): gen_qjsonarray_types.QJsonArrayconst_iterator =
-  gen_qjsonarray_types.QJsonArrayconst_iterator(h: fcQJsonArray_cend(self.h))
+  gen_qjsonarray_types.QJsonArrayconst_iterator(h: fcQJsonArray_cend(self.h), owned: true)
 
 proc insert*(self: gen_qjsonarray_types.QJsonArray, before: gen_qjsonarray_types.QJsonArrayiterator, value: gen_qjsonvalue_types.QJsonValue): gen_qjsonarray_types.QJsonArrayiterator =
-  gen_qjsonarray_types.QJsonArrayiterator(h: fcQJsonArray_insert2(self.h, before.h, value.h))
+  gen_qjsonarray_types.QJsonArrayiterator(h: fcQJsonArray_insert2(self.h, before.h, value.h), owned: true)
 
 proc erase*(self: gen_qjsonarray_types.QJsonArray, it: gen_qjsonarray_types.QJsonArrayiterator): gen_qjsonarray_types.QJsonArrayiterator =
-  gen_qjsonarray_types.QJsonArrayiterator(h: fcQJsonArray_erase(self.h, it.h))
+  gen_qjsonarray_types.QJsonArrayiterator(h: fcQJsonArray_erase(self.h, it.h), owned: true)
 
 proc operatorPlus*(self: gen_qjsonarray_types.QJsonArray, v: gen_qjsonvalue_types.QJsonValue): gen_qjsonarray_types.QJsonArray =
-  gen_qjsonarray_types.QJsonArray(h: fcQJsonArray_operatorPlus(self.h, v.h))
+  gen_qjsonarray_types.QJsonArray(h: fcQJsonArray_operatorPlus(self.h, v.h), owned: true)
 
 proc operatorPlusAssign*(self: gen_qjsonarray_types.QJsonArray, v: gen_qjsonvalue_types.QJsonValue): gen_qjsonarray_types.QJsonArray =
-  gen_qjsonarray_types.QJsonArray(h: fcQJsonArray_operatorPlusAssign(self.h, v.h))
+  gen_qjsonarray_types.QJsonArray(h: fcQJsonArray_operatorPlusAssign(self.h, v.h), owned: false)
 
 proc operatorShiftLeft*(self: gen_qjsonarray_types.QJsonArray, v: gen_qjsonvalue_types.QJsonValue): gen_qjsonarray_types.QJsonArray =
-  gen_qjsonarray_types.QJsonArray(h: fcQJsonArray_operatorShiftLeft(self.h, v.h))
+  gen_qjsonarray_types.QJsonArray(h: fcQJsonArray_operatorShiftLeft(self.h, v.h), owned: false)
 
 proc pushBack*(self: gen_qjsonarray_types.QJsonArray, t: gen_qjsonvalue_types.QJsonValue): void =
   fcQJsonArray_pushBack(self.h, t.h)
@@ -285,22 +282,20 @@ proc empty*(self: gen_qjsonarray_types.QJsonArray): bool =
   fcQJsonArray_empty(self.h)
 
 proc create*(T: type gen_qjsonarray_types.QJsonArray): gen_qjsonarray_types.QJsonArray =
-  let tmp = gen_qjsonarray_types.QJsonArray(h: fcQJsonArray_new())
+  let tmp = gen_qjsonarray_types.QJsonArray(h: fcQJsonArray_new(), owned: true)
   tmp
 proc create*(T: type gen_qjsonarray_types.QJsonArray,
     other: gen_qjsonarray_types.QJsonArray): gen_qjsonarray_types.QJsonArray =
-  let tmp = gen_qjsonarray_types.QJsonArray(h: fcQJsonArray_new2(other.h))
+  let tmp = gen_qjsonarray_types.QJsonArray(h: fcQJsonArray_new2(other.h), owned: true)
   tmp
-proc delete*(self: gen_qjsonarray_types.QJsonArray) =
-  fcQJsonArray_delete(self.h)
 proc operatorMultiply*(self: gen_qjsonarray_types.QJsonArrayiterator): gen_qjsonvalue_types.QJsonValueRef =
-  gen_qjsonvalue_types.QJsonValueRef(h: fcQJsonArrayiterator_operatorMultiply(self.h))
+  gen_qjsonvalue_types.QJsonValueRef(h: fcQJsonArrayiterator_operatorMultiply(self.h), owned: true)
 
 proc operatorMinusGreater*(self: gen_qjsonarray_types.QJsonArrayiterator): gen_qjsonvalue_types.QJsonValueRefPtr =
-  gen_qjsonvalue_types.QJsonValueRefPtr(h: fcQJsonArrayiterator_operatorMinusGreater(self.h))
+  gen_qjsonvalue_types.QJsonValueRefPtr(h: fcQJsonArrayiterator_operatorMinusGreater(self.h), owned: true)
 
 proc operatorSubscript*(self: gen_qjsonarray_types.QJsonArrayiterator, j: cint): gen_qjsonvalue_types.QJsonValueRef =
-  gen_qjsonvalue_types.QJsonValueRef(h: fcQJsonArrayiterator_operatorSubscript(self.h, j))
+  gen_qjsonvalue_types.QJsonValueRef(h: fcQJsonArrayiterator_operatorSubscript(self.h, j), owned: true)
 
 proc operatorEqual*(self: gen_qjsonarray_types.QJsonArrayiterator, o: gen_qjsonarray_types.QJsonArrayiterator): bool =
   fcQJsonArrayiterator_operatorEqual(self.h, o.h)
@@ -339,53 +334,51 @@ proc operatorGreaterOrEqual*(self: gen_qjsonarray_types.QJsonArrayiterator, othe
   fcQJsonArrayiterator_operatorGreaterOrEqualWithOther(self.h, other.h)
 
 proc operatorPlusPlus*(self: gen_qjsonarray_types.QJsonArrayiterator): gen_qjsonarray_types.QJsonArrayiterator =
-  gen_qjsonarray_types.QJsonArrayiterator(h: fcQJsonArrayiterator_operatorPlusPlus(self.h))
+  gen_qjsonarray_types.QJsonArrayiterator(h: fcQJsonArrayiterator_operatorPlusPlus(self.h), owned: false)
 
 proc operatorPlusPlus*(self: gen_qjsonarray_types.QJsonArrayiterator, param1: cint): gen_qjsonarray_types.QJsonArrayiterator =
-  gen_qjsonarray_types.QJsonArrayiterator(h: fcQJsonArrayiterator_operatorPlusPlusWithInt(self.h, param1))
+  gen_qjsonarray_types.QJsonArrayiterator(h: fcQJsonArrayiterator_operatorPlusPlusWithInt(self.h, param1), owned: true)
 
 proc operatorMinusMinus*(self: gen_qjsonarray_types.QJsonArrayiterator): gen_qjsonarray_types.QJsonArrayiterator =
-  gen_qjsonarray_types.QJsonArrayiterator(h: fcQJsonArrayiterator_operatorMinusMinus(self.h))
+  gen_qjsonarray_types.QJsonArrayiterator(h: fcQJsonArrayiterator_operatorMinusMinus(self.h), owned: false)
 
 proc operatorMinusMinus*(self: gen_qjsonarray_types.QJsonArrayiterator, param1: cint): gen_qjsonarray_types.QJsonArrayiterator =
-  gen_qjsonarray_types.QJsonArrayiterator(h: fcQJsonArrayiterator_operatorMinusMinusWithInt(self.h, param1))
+  gen_qjsonarray_types.QJsonArrayiterator(h: fcQJsonArrayiterator_operatorMinusMinusWithInt(self.h, param1), owned: true)
 
 proc operatorPlusAssign*(self: gen_qjsonarray_types.QJsonArrayiterator, j: cint): gen_qjsonarray_types.QJsonArrayiterator =
-  gen_qjsonarray_types.QJsonArrayiterator(h: fcQJsonArrayiterator_operatorPlusAssign(self.h, j))
+  gen_qjsonarray_types.QJsonArrayiterator(h: fcQJsonArrayiterator_operatorPlusAssign(self.h, j), owned: false)
 
 proc operatorMinusAssign*(self: gen_qjsonarray_types.QJsonArrayiterator, j: cint): gen_qjsonarray_types.QJsonArrayiterator =
-  gen_qjsonarray_types.QJsonArrayiterator(h: fcQJsonArrayiterator_operatorMinusAssign(self.h, j))
+  gen_qjsonarray_types.QJsonArrayiterator(h: fcQJsonArrayiterator_operatorMinusAssign(self.h, j), owned: false)
 
 proc operatorPlus*(self: gen_qjsonarray_types.QJsonArrayiterator, j: cint): gen_qjsonarray_types.QJsonArrayiterator =
-  gen_qjsonarray_types.QJsonArrayiterator(h: fcQJsonArrayiterator_operatorPlus(self.h, j))
+  gen_qjsonarray_types.QJsonArrayiterator(h: fcQJsonArrayiterator_operatorPlus(self.h, j), owned: true)
 
 proc operatorMinus*(self: gen_qjsonarray_types.QJsonArrayiterator, j: cint): gen_qjsonarray_types.QJsonArrayiterator =
-  gen_qjsonarray_types.QJsonArrayiterator(h: fcQJsonArrayiterator_operatorMinus(self.h, j))
+  gen_qjsonarray_types.QJsonArrayiterator(h: fcQJsonArrayiterator_operatorMinus(self.h, j), owned: true)
 
 proc operatorMinus*(self: gen_qjsonarray_types.QJsonArrayiterator, j: gen_qjsonarray_types.QJsonArrayiterator): cint =
   fcQJsonArrayiterator_operatorMinusWithQJsonArrayiterator(self.h, j.h)
 
 proc create*(T: type gen_qjsonarray_types.QJsonArrayiterator): gen_qjsonarray_types.QJsonArrayiterator =
-  let tmp = gen_qjsonarray_types.QJsonArrayiterator(h: fcQJsonArrayiterator_new())
+  let tmp = gen_qjsonarray_types.QJsonArrayiterator(h: fcQJsonArrayiterator_new(), owned: true)
   tmp
 proc create*(T: type gen_qjsonarray_types.QJsonArrayiterator,
     array: gen_qjsonarray_types.QJsonArray, index: cint): gen_qjsonarray_types.QJsonArrayiterator =
-  let tmp = gen_qjsonarray_types.QJsonArrayiterator(h: fcQJsonArrayiterator_new2(array.h, index))
+  let tmp = gen_qjsonarray_types.QJsonArrayiterator(h: fcQJsonArrayiterator_new2(array.h, index), owned: true)
   tmp
 proc create*(T: type gen_qjsonarray_types.QJsonArrayiterator,
     param1: gen_qjsonarray_types.QJsonArrayiterator): gen_qjsonarray_types.QJsonArrayiterator =
-  let tmp = gen_qjsonarray_types.QJsonArrayiterator(h: fcQJsonArrayiterator_new3(param1.h))
+  let tmp = gen_qjsonarray_types.QJsonArrayiterator(h: fcQJsonArrayiterator_new3(param1.h), owned: true)
   tmp
-proc delete*(self: gen_qjsonarray_types.QJsonArrayiterator) =
-  fcQJsonArrayiterator_delete(self.h)
 proc operatorMultiply*(self: gen_qjsonarray_types.QJsonArrayconst_iterator): gen_qjsonvalue_types.QJsonValue =
-  gen_qjsonvalue_types.QJsonValue(h: fcQJsonArrayconst_iterator_operatorMultiply(self.h))
+  gen_qjsonvalue_types.QJsonValue(h: fcQJsonArrayconst_iterator_operatorMultiply(self.h), owned: true)
 
 proc operatorMinusGreater*(self: gen_qjsonarray_types.QJsonArrayconst_iterator): gen_qjsonvalue_types.QJsonValuePtr =
-  gen_qjsonvalue_types.QJsonValuePtr(h: fcQJsonArrayconst_iterator_operatorMinusGreater(self.h))
+  gen_qjsonvalue_types.QJsonValuePtr(h: fcQJsonArrayconst_iterator_operatorMinusGreater(self.h), owned: true)
 
 proc operatorSubscript*(self: gen_qjsonarray_types.QJsonArrayconst_iterator, j: cint): gen_qjsonvalue_types.QJsonValue =
-  gen_qjsonvalue_types.QJsonValue(h: fcQJsonArrayconst_iterator_operatorSubscript(self.h, j))
+  gen_qjsonvalue_types.QJsonValue(h: fcQJsonArrayconst_iterator_operatorSubscript(self.h, j), owned: true)
 
 proc operatorEqual*(self: gen_qjsonarray_types.QJsonArrayconst_iterator, o: gen_qjsonarray_types.QJsonArrayconst_iterator): bool =
   fcQJsonArrayconst_iterator_operatorEqual(self.h, o.h)
@@ -406,46 +399,44 @@ proc operatorGreaterOrEqual*(self: gen_qjsonarray_types.QJsonArrayconst_iterator
   fcQJsonArrayconst_iterator_operatorGreaterOrEqual(self.h, other.h)
 
 proc operatorPlusPlus*(self: gen_qjsonarray_types.QJsonArrayconst_iterator): gen_qjsonarray_types.QJsonArrayconst_iterator =
-  gen_qjsonarray_types.QJsonArrayconst_iterator(h: fcQJsonArrayconst_iterator_operatorPlusPlus(self.h))
+  gen_qjsonarray_types.QJsonArrayconst_iterator(h: fcQJsonArrayconst_iterator_operatorPlusPlus(self.h), owned: false)
 
 proc operatorPlusPlus*(self: gen_qjsonarray_types.QJsonArrayconst_iterator, param1: cint): gen_qjsonarray_types.QJsonArrayconst_iterator =
-  gen_qjsonarray_types.QJsonArrayconst_iterator(h: fcQJsonArrayconst_iterator_operatorPlusPlusWithInt(self.h, param1))
+  gen_qjsonarray_types.QJsonArrayconst_iterator(h: fcQJsonArrayconst_iterator_operatorPlusPlusWithInt(self.h, param1), owned: true)
 
 proc operatorMinusMinus*(self: gen_qjsonarray_types.QJsonArrayconst_iterator): gen_qjsonarray_types.QJsonArrayconst_iterator =
-  gen_qjsonarray_types.QJsonArrayconst_iterator(h: fcQJsonArrayconst_iterator_operatorMinusMinus(self.h))
+  gen_qjsonarray_types.QJsonArrayconst_iterator(h: fcQJsonArrayconst_iterator_operatorMinusMinus(self.h), owned: false)
 
 proc operatorMinusMinus*(self: gen_qjsonarray_types.QJsonArrayconst_iterator, param1: cint): gen_qjsonarray_types.QJsonArrayconst_iterator =
-  gen_qjsonarray_types.QJsonArrayconst_iterator(h: fcQJsonArrayconst_iterator_operatorMinusMinusWithInt(self.h, param1))
+  gen_qjsonarray_types.QJsonArrayconst_iterator(h: fcQJsonArrayconst_iterator_operatorMinusMinusWithInt(self.h, param1), owned: true)
 
 proc operatorPlusAssign*(self: gen_qjsonarray_types.QJsonArrayconst_iterator, j: cint): gen_qjsonarray_types.QJsonArrayconst_iterator =
-  gen_qjsonarray_types.QJsonArrayconst_iterator(h: fcQJsonArrayconst_iterator_operatorPlusAssign(self.h, j))
+  gen_qjsonarray_types.QJsonArrayconst_iterator(h: fcQJsonArrayconst_iterator_operatorPlusAssign(self.h, j), owned: false)
 
 proc operatorMinusAssign*(self: gen_qjsonarray_types.QJsonArrayconst_iterator, j: cint): gen_qjsonarray_types.QJsonArrayconst_iterator =
-  gen_qjsonarray_types.QJsonArrayconst_iterator(h: fcQJsonArrayconst_iterator_operatorMinusAssign(self.h, j))
+  gen_qjsonarray_types.QJsonArrayconst_iterator(h: fcQJsonArrayconst_iterator_operatorMinusAssign(self.h, j), owned: false)
 
 proc operatorPlus*(self: gen_qjsonarray_types.QJsonArrayconst_iterator, j: cint): gen_qjsonarray_types.QJsonArrayconst_iterator =
-  gen_qjsonarray_types.QJsonArrayconst_iterator(h: fcQJsonArrayconst_iterator_operatorPlus(self.h, j))
+  gen_qjsonarray_types.QJsonArrayconst_iterator(h: fcQJsonArrayconst_iterator_operatorPlus(self.h, j), owned: true)
 
 proc operatorMinus*(self: gen_qjsonarray_types.QJsonArrayconst_iterator, j: cint): gen_qjsonarray_types.QJsonArrayconst_iterator =
-  gen_qjsonarray_types.QJsonArrayconst_iterator(h: fcQJsonArrayconst_iterator_operatorMinus(self.h, j))
+  gen_qjsonarray_types.QJsonArrayconst_iterator(h: fcQJsonArrayconst_iterator_operatorMinus(self.h, j), owned: true)
 
 proc operatorMinus*(self: gen_qjsonarray_types.QJsonArrayconst_iterator, j: gen_qjsonarray_types.QJsonArrayconst_iterator): cint =
   fcQJsonArrayconst_iterator_operatorMinusWithQJsonArrayconstIterator(self.h, j.h)
 
 proc create*(T: type gen_qjsonarray_types.QJsonArrayconst_iterator): gen_qjsonarray_types.QJsonArrayconst_iterator =
-  let tmp = gen_qjsonarray_types.QJsonArrayconst_iterator(h: fcQJsonArrayconst_iterator_new())
+  let tmp = gen_qjsonarray_types.QJsonArrayconst_iterator(h: fcQJsonArrayconst_iterator_new(), owned: true)
   tmp
 proc create*(T: type gen_qjsonarray_types.QJsonArrayconst_iterator,
     array: gen_qjsonarray_types.QJsonArray, index: cint): gen_qjsonarray_types.QJsonArrayconst_iterator =
-  let tmp = gen_qjsonarray_types.QJsonArrayconst_iterator(h: fcQJsonArrayconst_iterator_new2(array.h, index))
+  let tmp = gen_qjsonarray_types.QJsonArrayconst_iterator(h: fcQJsonArrayconst_iterator_new2(array.h, index), owned: true)
   tmp
 proc create*(T: type gen_qjsonarray_types.QJsonArrayconst_iterator,
     o: gen_qjsonarray_types.QJsonArrayconst_iterator): gen_qjsonarray_types.QJsonArrayconst_iterator =
-  let tmp = gen_qjsonarray_types.QJsonArrayconst_iterator(h: fcQJsonArrayconst_iterator_new3(o.h))
+  let tmp = gen_qjsonarray_types.QJsonArrayconst_iterator(h: fcQJsonArrayconst_iterator_new3(o.h), owned: true)
   tmp
 proc create*(T: type gen_qjsonarray_types.QJsonArrayconst_iterator,
     o: gen_qjsonarray_types.QJsonArrayiterator): gen_qjsonarray_types.QJsonArrayconst_iterator =
-  let tmp = gen_qjsonarray_types.QJsonArrayconst_iterator(h: fcQJsonArrayconst_iterator_new4(o.h))
+  let tmp = gen_qjsonarray_types.QJsonArrayconst_iterator(h: fcQJsonArrayconst_iterator_new4(o.h), owned: true)
   tmp
-proc delete*(self: gen_qjsonarray_types.QJsonArrayconst_iterator) =
-  fcQJsonArrayconst_iterator_delete(self.h)

@@ -1,4 +1,4 @@
-type QAudioSystemFactoryInterface* {.inheritable, pure.} = object
+type QAudioSystemFactoryInterface* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

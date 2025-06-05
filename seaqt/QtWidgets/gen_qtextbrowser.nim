@@ -277,10 +277,9 @@ proc fcQTextBrowser_protectedbase_isSignalConnected(self: pointer, signal: point
 proc fcQTextBrowser_new(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQTextBrowser {.importc: "QTextBrowser_new".}
 proc fcQTextBrowser_new2(vtbl: pointer, vdata: csize_t): ptr cQTextBrowser {.importc: "QTextBrowser_new2".}
 proc fcQTextBrowser_staticMetaObject(): pointer {.importc: "QTextBrowser_staticMetaObject".}
-proc fcQTextBrowser_delete(self: pointer) {.importc: "QTextBrowser_delete".}
 
 proc metaObject*(self: gen_qtextbrowser_types.QTextBrowser): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQTextBrowser_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQTextBrowser_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qtextbrowser_types.QTextBrowser, param1: cstring): pointer =
   fcQTextBrowser_metacast(self.h, param1)
@@ -301,7 +300,7 @@ proc trUtf8*(_: type gen_qtextbrowser_types.QTextBrowser, s: cstring): string =
   vx_ret
 
 proc source*(self: gen_qtextbrowser_types.QTextBrowser): gen_qurl_types.QUrl =
-  gen_qurl_types.QUrl(h: fcQTextBrowser_source(self.h))
+  gen_qurl_types.QUrl(h: fcQTextBrowser_source(self.h), owned: true)
 
 proc sourceType*(self: gen_qtextbrowser_types.QTextBrowser): cint =
   cint(fcQTextBrowser_sourceType(self.h))
@@ -326,7 +325,7 @@ proc setSearchPaths*(self: gen_qtextbrowser_types.QTextBrowser, paths: openArray
   fcQTextBrowser_setSearchPaths(self.h, struct_seaqt_array(len: csize_t(len(paths)), data: if len(paths) == 0: nil else: addr(paths_CArray[0])))
 
 proc loadResource*(self: gen_qtextbrowser_types.QTextBrowser, typeVal: cint, name: gen_qurl_types.QUrl): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQTextBrowser_loadResource(self.h, typeVal, name.h))
+  gen_qvariant_types.QVariant(h: fcQTextBrowser_loadResource(self.h, typeVal, name.h), owned: true)
 
 proc isBackwardAvailable*(self: gen_qtextbrowser_types.QTextBrowser): bool =
   fcQTextBrowser_isBackwardAvailable(self.h)
@@ -344,7 +343,7 @@ proc historyTitle*(self: gen_qtextbrowser_types.QTextBrowser, param1: cint): str
   vx_ret
 
 proc historyUrl*(self: gen_qtextbrowser_types.QTextBrowser, param1: cint): gen_qurl_types.QUrl =
-  gen_qurl_types.QUrl(h: fcQTextBrowser_historyUrl(self.h, param1))
+  gen_qurl_types.QUrl(h: fcQTextBrowser_historyUrl(self.h, param1), owned: true)
 
 proc backwardHistoryCount*(self: gen_qtextbrowser_types.QTextBrowser): cint =
   fcQTextBrowser_backwardHistoryCount(self.h)
@@ -446,7 +445,7 @@ proc sourceChanged*(self: gen_qtextbrowser_types.QTextBrowser, param1: gen_qurl_
 type QTextBrowsersourceChangedSlot* = proc(param1: gen_qurl_types.QUrl)
 proc fcQTextBrowser_slot_callback_sourceChanged(slot: int, param1: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QTextBrowsersourceChangedSlot](cast[pointer](slot))
-  let slotval1 = gen_qurl_types.QUrl(h: param1)
+  let slotval1 = gen_qurl_types.QUrl(h: param1, owned: false)
 
   nimfunc[](slotval1)
 
@@ -466,7 +465,7 @@ proc highlighted*(self: gen_qtextbrowser_types.QTextBrowser, param1: gen_qurl_ty
 type QTextBrowserhighlightedSlot* = proc(param1: gen_qurl_types.QUrl)
 proc fcQTextBrowser_slot_callback_highlighted(slot: int, param1: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QTextBrowserhighlightedSlot](cast[pointer](slot))
-  let slotval1 = gen_qurl_types.QUrl(h: param1)
+  let slotval1 = gen_qurl_types.QUrl(h: param1, owned: false)
 
   nimfunc[](slotval1)
 
@@ -509,7 +508,7 @@ proc anchorClicked*(self: gen_qtextbrowser_types.QTextBrowser, param1: gen_qurl_
 type QTextBrowseranchorClickedSlot* = proc(param1: gen_qurl_types.QUrl)
 proc fcQTextBrowser_slot_callback_anchorClicked(slot: int, param1: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QTextBrowseranchorClickedSlot](cast[pointer](slot))
-  let slotval1 = gen_qurl_types.QUrl(h: param1)
+  let slotval1 = gen_qurl_types.QUrl(h: param1, owned: false)
 
   nimfunc[](slotval1)
 
@@ -611,7 +610,8 @@ type QTextBrowserchildEventProc* = proc(self: QTextBrowser, event: gen_qcoreeven
 type QTextBrowsercustomEventProc* = proc(self: QTextBrowser, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QTextBrowserconnectNotifyProc* = proc(self: QTextBrowser, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QTextBrowserdisconnectNotifyProc* = proc(self: QTextBrowser, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
-type QTextBrowserVTable* = object
+
+type QTextBrowserVTable* {.inheritable, pure.} = object
   vtbl: cQTextBrowserVTable
   metaObject*: QTextBrowsermetaObjectProc
   metacast*: QTextBrowsermetacastProc
@@ -679,7 +679,7 @@ type QTextBrowserVTable* = object
   disconnectNotify*: QTextBrowserdisconnectNotifyProc
 
 proc QTextBrowsermetaObject*(self: gen_qtextbrowser_types.QTextBrowser): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQTextBrowser_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQTextBrowser_virtualbase_metaObject(self.h), owned: false)
 
 proc QTextBrowsermetacast*(self: gen_qtextbrowser_types.QTextBrowser, param1: cstring): pointer =
   fcQTextBrowser_virtualbase_metacast(self.h, param1)
@@ -688,7 +688,7 @@ proc QTextBrowsermetacall*(self: gen_qtextbrowser_types.QTextBrowser, param1: ci
   fcQTextBrowser_virtualbase_metacall(self.h, cint(param1), param2, param3)
 
 proc QTextBrowserloadResource*(self: gen_qtextbrowser_types.QTextBrowser, typeVal: cint, name: gen_qurl_types.QUrl): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQTextBrowser_virtualbase_loadResource(self.h, typeVal, name.h))
+  gen_qvariant_types.QVariant(h: fcQTextBrowser_virtualbase_loadResource(self.h, typeVal, name.h), owned: true)
 
 proc QTextBrowsersetSource*(self: gen_qtextbrowser_types.QTextBrowser, name: gen_qurl_types.QUrl): void =
   fcQTextBrowser_virtualbase_setSource(self.h, name.h)
@@ -730,7 +730,7 @@ proc QTextBrowserpaintEvent*(self: gen_qtextbrowser_types.QTextBrowser, e: gen_q
   fcQTextBrowser_virtualbase_paintEvent(self.h, e.h)
 
 proc QTextBrowserinputMethodQuery*(self: gen_qtextbrowser_types.QTextBrowser, property: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQTextBrowser_virtualbase_inputMethodQuery(self.h, cint(property)))
+  gen_qvariant_types.QVariant(h: fcQTextBrowser_virtualbase_inputMethodQuery(self.h, cint(property)), owned: true)
 
 proc QTextBrowsertimerEvent*(self: gen_qtextbrowser_types.QTextBrowser, e: gen_qcoreevent_types.QTimerEvent): void =
   fcQTextBrowser_virtualbase_timerEvent(self.h, e.h)
@@ -772,7 +772,7 @@ proc QTextBrowserwheelEvent*(self: gen_qtextbrowser_types.QTextBrowser, e: gen_q
   fcQTextBrowser_virtualbase_wheelEvent(self.h, e.h)
 
 proc QTextBrowsercreateMimeDataFromSelection*(self: gen_qtextbrowser_types.QTextBrowser): gen_qmimedata_types.QMimeData =
-  gen_qmimedata_types.QMimeData(h: fcQTextBrowser_virtualbase_createMimeDataFromSelection(self.h))
+  gen_qmimedata_types.QMimeData(h: fcQTextBrowser_virtualbase_createMimeDataFromSelection(self.h), owned: false)
 
 proc QTextBrowsercanInsertFromMimeData*(self: gen_qtextbrowser_types.QTextBrowser, source: gen_qmimedata_types.QMimeData): bool =
   fcQTextBrowser_virtualbase_canInsertFromMimeData(self.h, source.h)
@@ -790,10 +790,10 @@ proc QTextBrowserdoSetTextCursor*(self: gen_qtextbrowser_types.QTextBrowser, cur
   fcQTextBrowser_virtualbase_doSetTextCursor(self.h, cursor.h)
 
 proc QTextBrowserminimumSizeHint*(self: gen_qtextbrowser_types.QTextBrowser): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQTextBrowser_virtualbase_minimumSizeHint(self.h))
+  gen_qsize_types.QSize(h: fcQTextBrowser_virtualbase_minimumSizeHint(self.h), owned: true)
 
 proc QTextBrowsersizeHint*(self: gen_qtextbrowser_types.QTextBrowser): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQTextBrowser_virtualbase_sizeHint(self.h))
+  gen_qsize_types.QSize(h: fcQTextBrowser_virtualbase_sizeHint(self.h), owned: true)
 
 proc QTextBrowsersetupViewport*(self: gen_qtextbrowser_types.QTextBrowser, viewport: gen_qwidget_types.QWidget): void =
   fcQTextBrowser_virtualbase_setupViewport(self.h, viewport.h)
@@ -805,7 +805,7 @@ proc QTextBrowserviewportEvent*(self: gen_qtextbrowser_types.QTextBrowser, param
   fcQTextBrowser_virtualbase_viewportEvent(self.h, param1.h)
 
 proc QTextBrowserviewportSizeHint*(self: gen_qtextbrowser_types.QTextBrowser): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQTextBrowser_virtualbase_viewportSizeHint(self.h))
+  gen_qsize_types.QSize(h: fcQTextBrowser_virtualbase_viewportSizeHint(self.h), owned: true)
 
 proc QTextBrowserdevType*(self: gen_qtextbrowser_types.QTextBrowser): cint =
   fcQTextBrowser_virtualbase_devType(self.h)
@@ -820,7 +820,7 @@ proc QTextBrowserhasHeightForWidth*(self: gen_qtextbrowser_types.QTextBrowser): 
   fcQTextBrowser_virtualbase_hasHeightForWidth(self.h)
 
 proc QTextBrowserpaintEngine*(self: gen_qtextbrowser_types.QTextBrowser): gen_qpaintengine_types.QPaintEngine =
-  gen_qpaintengine_types.QPaintEngine(h: fcQTextBrowser_virtualbase_paintEngine(self.h))
+  gen_qpaintengine_types.QPaintEngine(h: fcQTextBrowser_virtualbase_paintEngine(self.h), owned: false)
 
 proc QTextBrowserenterEvent*(self: gen_qtextbrowser_types.QTextBrowser, event: gen_qcoreevent_types.QEvent): void =
   fcQTextBrowser_virtualbase_enterEvent(self.h, event.h)
@@ -853,10 +853,10 @@ proc QTextBrowserinitPainter*(self: gen_qtextbrowser_types.QTextBrowser, painter
   fcQTextBrowser_virtualbase_initPainter(self.h, painter.h)
 
 proc QTextBrowserredirected*(self: gen_qtextbrowser_types.QTextBrowser, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice =
-  gen_qpaintdevice_types.QPaintDevice(h: fcQTextBrowser_virtualbase_redirected(self.h, offset.h))
+  gen_qpaintdevice_types.QPaintDevice(h: fcQTextBrowser_virtualbase_redirected(self.h, offset.h), owned: false)
 
 proc QTextBrowsersharedPainter*(self: gen_qtextbrowser_types.QTextBrowser): gen_qpainter_types.QPainter =
-  gen_qpainter_types.QPainter(h: fcQTextBrowser_virtualbase_sharedPainter(self.h))
+  gen_qpainter_types.QPainter(h: fcQTextBrowser_virtualbase_sharedPainter(self.h), owned: false)
 
 proc QTextBrowserchildEvent*(self: gen_qtextbrowser_types.QTextBrowser, event: gen_qcoreevent_types.QChildEvent): void =
   fcQTextBrowser_virtualbase_childEvent(self.h, event.h)
@@ -875,7 +875,10 @@ proc fcQTextBrowser_vtable_callback_metaObject(self: pointer): pointer {.cdecl.}
   let vtbl = cast[ptr QTextBrowserVTable](fcQTextBrowser_vdata(self)[])
   let self = QTextBrowser(h: self)
   var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQTextBrowser_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QTextBrowserVTable](fcQTextBrowser_vdata(self)[])
@@ -897,14 +900,17 @@ proc fcQTextBrowser_vtable_callback_loadResource(self: pointer, typeVal: cint, n
   let vtbl = cast[ptr QTextBrowserVTable](fcQTextBrowser_vdata(self)[])
   let self = QTextBrowser(h: self)
   let slotval1 = typeVal
-  let slotval2 = gen_qurl_types.QUrl(h: name)
+  let slotval2 = gen_qurl_types.QUrl(h: name, owned: false)
   var virtualReturn = vtbl[].loadResource(self, slotval1, slotval2)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQTextBrowser_vtable_callback_setSource(self: pointer, name: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTextBrowserVTable](fcQTextBrowser_vdata(self)[])
   let self = QTextBrowser(h: self)
-  let slotval1 = gen_qurl_types.QUrl(h: name)
+  let slotval1 = gen_qurl_types.QUrl(h: name, owned: false)
   vtbl[].setSource(self, slotval1)
 
 proc fcQTextBrowser_vtable_callback_backward(self: pointer): void {.cdecl.} =
@@ -930,38 +936,38 @@ proc fcQTextBrowser_vtable_callback_reload(self: pointer): void {.cdecl.} =
 proc fcQTextBrowser_vtable_callback_event(self: pointer, e: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QTextBrowserVTable](fcQTextBrowser_vdata(self)[])
   let self = QTextBrowser(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: e)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: e, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
 proc fcQTextBrowser_vtable_callback_keyPressEvent(self: pointer, ev: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTextBrowserVTable](fcQTextBrowser_vdata(self)[])
   let self = QTextBrowser(h: self)
-  let slotval1 = gen_qevent_types.QKeyEvent(h: ev)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: ev, owned: false)
   vtbl[].keyPressEvent(self, slotval1)
 
 proc fcQTextBrowser_vtable_callback_mouseMoveEvent(self: pointer, ev: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTextBrowserVTable](fcQTextBrowser_vdata(self)[])
   let self = QTextBrowser(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: ev)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: ev, owned: false)
   vtbl[].mouseMoveEvent(self, slotval1)
 
 proc fcQTextBrowser_vtable_callback_mousePressEvent(self: pointer, ev: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTextBrowserVTable](fcQTextBrowser_vdata(self)[])
   let self = QTextBrowser(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: ev)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: ev, owned: false)
   vtbl[].mousePressEvent(self, slotval1)
 
 proc fcQTextBrowser_vtable_callback_mouseReleaseEvent(self: pointer, ev: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTextBrowserVTable](fcQTextBrowser_vdata(self)[])
   let self = QTextBrowser(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: ev)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: ev, owned: false)
   vtbl[].mouseReleaseEvent(self, slotval1)
 
 proc fcQTextBrowser_vtable_callback_focusOutEvent(self: pointer, ev: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTextBrowserVTable](fcQTextBrowser_vdata(self)[])
   let self = QTextBrowser(h: self)
-  let slotval1 = gen_qevent_types.QFocusEvent(h: ev)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: ev, owned: false)
   vtbl[].focusOutEvent(self, slotval1)
 
 proc fcQTextBrowser_vtable_callback_focusNextPrevChild(self: pointer, next: bool): bool {.cdecl.} =
@@ -974,7 +980,7 @@ proc fcQTextBrowser_vtable_callback_focusNextPrevChild(self: pointer, next: bool
 proc fcQTextBrowser_vtable_callback_paintEvent(self: pointer, e: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTextBrowserVTable](fcQTextBrowser_vdata(self)[])
   let self = QTextBrowser(h: self)
-  let slotval1 = gen_qevent_types.QPaintEvent(h: e)
+  let slotval1 = gen_qevent_types.QPaintEvent(h: e, owned: false)
   vtbl[].paintEvent(self, slotval1)
 
 proc fcQTextBrowser_vtable_callback_inputMethodQuery(self: pointer, property: cint): pointer {.cdecl.} =
@@ -982,109 +988,115 @@ proc fcQTextBrowser_vtable_callback_inputMethodQuery(self: pointer, property: ci
   let self = QTextBrowser(h: self)
   let slotval1 = cint(property)
   var virtualReturn = vtbl[].inputMethodQuery(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQTextBrowser_vtable_callback_timerEvent(self: pointer, e: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTextBrowserVTable](fcQTextBrowser_vdata(self)[])
   let self = QTextBrowser(h: self)
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: e)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: e, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
 proc fcQTextBrowser_vtable_callback_keyReleaseEvent(self: pointer, e: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTextBrowserVTable](fcQTextBrowser_vdata(self)[])
   let self = QTextBrowser(h: self)
-  let slotval1 = gen_qevent_types.QKeyEvent(h: e)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: e, owned: false)
   vtbl[].keyReleaseEvent(self, slotval1)
 
 proc fcQTextBrowser_vtable_callback_resizeEvent(self: pointer, e: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTextBrowserVTable](fcQTextBrowser_vdata(self)[])
   let self = QTextBrowser(h: self)
-  let slotval1 = gen_qevent_types.QResizeEvent(h: e)
+  let slotval1 = gen_qevent_types.QResizeEvent(h: e, owned: false)
   vtbl[].resizeEvent(self, slotval1)
 
 proc fcQTextBrowser_vtable_callback_mouseDoubleClickEvent(self: pointer, e: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTextBrowserVTable](fcQTextBrowser_vdata(self)[])
   let self = QTextBrowser(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: e)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: e, owned: false)
   vtbl[].mouseDoubleClickEvent(self, slotval1)
 
 proc fcQTextBrowser_vtable_callback_contextMenuEvent(self: pointer, e: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTextBrowserVTable](fcQTextBrowser_vdata(self)[])
   let self = QTextBrowser(h: self)
-  let slotval1 = gen_qevent_types.QContextMenuEvent(h: e)
+  let slotval1 = gen_qevent_types.QContextMenuEvent(h: e, owned: false)
   vtbl[].contextMenuEvent(self, slotval1)
 
 proc fcQTextBrowser_vtable_callback_dragEnterEvent(self: pointer, e: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTextBrowserVTable](fcQTextBrowser_vdata(self)[])
   let self = QTextBrowser(h: self)
-  let slotval1 = gen_qevent_types.QDragEnterEvent(h: e)
+  let slotval1 = gen_qevent_types.QDragEnterEvent(h: e, owned: false)
   vtbl[].dragEnterEvent(self, slotval1)
 
 proc fcQTextBrowser_vtable_callback_dragLeaveEvent(self: pointer, e: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTextBrowserVTable](fcQTextBrowser_vdata(self)[])
   let self = QTextBrowser(h: self)
-  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: e)
+  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: e, owned: false)
   vtbl[].dragLeaveEvent(self, slotval1)
 
 proc fcQTextBrowser_vtable_callback_dragMoveEvent(self: pointer, e: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTextBrowserVTable](fcQTextBrowser_vdata(self)[])
   let self = QTextBrowser(h: self)
-  let slotval1 = gen_qevent_types.QDragMoveEvent(h: e)
+  let slotval1 = gen_qevent_types.QDragMoveEvent(h: e, owned: false)
   vtbl[].dragMoveEvent(self, slotval1)
 
 proc fcQTextBrowser_vtable_callback_dropEvent(self: pointer, e: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTextBrowserVTable](fcQTextBrowser_vdata(self)[])
   let self = QTextBrowser(h: self)
-  let slotval1 = gen_qevent_types.QDropEvent(h: e)
+  let slotval1 = gen_qevent_types.QDropEvent(h: e, owned: false)
   vtbl[].dropEvent(self, slotval1)
 
 proc fcQTextBrowser_vtable_callback_focusInEvent(self: pointer, e: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTextBrowserVTable](fcQTextBrowser_vdata(self)[])
   let self = QTextBrowser(h: self)
-  let slotval1 = gen_qevent_types.QFocusEvent(h: e)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: e, owned: false)
   vtbl[].focusInEvent(self, slotval1)
 
 proc fcQTextBrowser_vtable_callback_showEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTextBrowserVTable](fcQTextBrowser_vdata(self)[])
   let self = QTextBrowser(h: self)
-  let slotval1 = gen_qevent_types.QShowEvent(h: param1)
+  let slotval1 = gen_qevent_types.QShowEvent(h: param1, owned: false)
   vtbl[].showEvent(self, slotval1)
 
 proc fcQTextBrowser_vtable_callback_changeEvent(self: pointer, e: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTextBrowserVTable](fcQTextBrowser_vdata(self)[])
   let self = QTextBrowser(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: e)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: e, owned: false)
   vtbl[].changeEvent(self, slotval1)
 
 proc fcQTextBrowser_vtable_callback_wheelEvent(self: pointer, e: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTextBrowserVTable](fcQTextBrowser_vdata(self)[])
   let self = QTextBrowser(h: self)
-  let slotval1 = gen_qevent_types.QWheelEvent(h: e)
+  let slotval1 = gen_qevent_types.QWheelEvent(h: e, owned: false)
   vtbl[].wheelEvent(self, slotval1)
 
 proc fcQTextBrowser_vtable_callback_createMimeDataFromSelection(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QTextBrowserVTable](fcQTextBrowser_vdata(self)[])
   let self = QTextBrowser(h: self)
   var virtualReturn = vtbl[].createMimeDataFromSelection(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQTextBrowser_vtable_callback_canInsertFromMimeData(self: pointer, source: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QTextBrowserVTable](fcQTextBrowser_vdata(self)[])
   let self = QTextBrowser(h: self)
-  let slotval1 = gen_qmimedata_types.QMimeData(h: source)
+  let slotval1 = gen_qmimedata_types.QMimeData(h: source, owned: false)
   var virtualReturn = vtbl[].canInsertFromMimeData(self, slotval1)
   virtualReturn
 
 proc fcQTextBrowser_vtable_callback_insertFromMimeData(self: pointer, source: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTextBrowserVTable](fcQTextBrowser_vdata(self)[])
   let self = QTextBrowser(h: self)
-  let slotval1 = gen_qmimedata_types.QMimeData(h: source)
+  let slotval1 = gen_qmimedata_types.QMimeData(h: source, owned: false)
   vtbl[].insertFromMimeData(self, slotval1)
 
 proc fcQTextBrowser_vtable_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTextBrowserVTable](fcQTextBrowser_vdata(self)[])
   let self = QTextBrowser(h: self)
-  let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1)
+  let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1, owned: false)
   vtbl[].inputMethodEvent(self, slotval1)
 
 proc fcQTextBrowser_vtable_callback_scrollContentsBy(self: pointer, dx: cint, dy: cint): void {.cdecl.} =
@@ -1097,39 +1109,45 @@ proc fcQTextBrowser_vtable_callback_scrollContentsBy(self: pointer, dx: cint, dy
 proc fcQTextBrowser_vtable_callback_doSetTextCursor(self: pointer, cursor: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTextBrowserVTable](fcQTextBrowser_vdata(self)[])
   let self = QTextBrowser(h: self)
-  let slotval1 = gen_qtextcursor_types.QTextCursor(h: cursor)
+  let slotval1 = gen_qtextcursor_types.QTextCursor(h: cursor, owned: false)
   vtbl[].doSetTextCursor(self, slotval1)
 
 proc fcQTextBrowser_vtable_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QTextBrowserVTable](fcQTextBrowser_vdata(self)[])
   let self = QTextBrowser(h: self)
   var virtualReturn = vtbl[].minimumSizeHint(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQTextBrowser_vtable_callback_sizeHint(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QTextBrowserVTable](fcQTextBrowser_vdata(self)[])
   let self = QTextBrowser(h: self)
   var virtualReturn = vtbl[].sizeHint(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQTextBrowser_vtable_callback_setupViewport(self: pointer, viewport: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTextBrowserVTable](fcQTextBrowser_vdata(self)[])
   let self = QTextBrowser(h: self)
-  let slotval1 = gen_qwidget_types.QWidget(h: viewport)
+  let slotval1 = gen_qwidget_types.QWidget(h: viewport, owned: false)
   vtbl[].setupViewport(self, slotval1)
 
 proc fcQTextBrowser_vtable_callback_eventFilter(self: pointer, param1: pointer, param2: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QTextBrowserVTable](fcQTextBrowser_vdata(self)[])
   let self = QTextBrowser(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: param1)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: param2)
+  let slotval1 = gen_qobject_types.QObject(h: param1, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: param2, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
 proc fcQTextBrowser_vtable_callback_viewportEvent(self: pointer, param1: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QTextBrowserVTable](fcQTextBrowser_vdata(self)[])
   let self = QTextBrowser(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: param1)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
   var virtualReturn = vtbl[].viewportEvent(self, slotval1)
   virtualReturn
 
@@ -1137,7 +1155,10 @@ proc fcQTextBrowser_vtable_callback_viewportSizeHint(self: pointer): pointer {.c
   let vtbl = cast[ptr QTextBrowserVTable](fcQTextBrowser_vdata(self)[])
   let self = QTextBrowser(h: self)
   var virtualReturn = vtbl[].viewportSizeHint(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQTextBrowser_vtable_callback_devType(self: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QTextBrowserVTable](fcQTextBrowser_vdata(self)[])
@@ -1168,48 +1189,51 @@ proc fcQTextBrowser_vtable_callback_paintEngine(self: pointer): pointer {.cdecl.
   let vtbl = cast[ptr QTextBrowserVTable](fcQTextBrowser_vdata(self)[])
   let self = QTextBrowser(h: self)
   var virtualReturn = vtbl[].paintEngine(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQTextBrowser_vtable_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTextBrowserVTable](fcQTextBrowser_vdata(self)[])
   let self = QTextBrowser(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].enterEvent(self, slotval1)
 
 proc fcQTextBrowser_vtable_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTextBrowserVTable](fcQTextBrowser_vdata(self)[])
   let self = QTextBrowser(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].leaveEvent(self, slotval1)
 
 proc fcQTextBrowser_vtable_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTextBrowserVTable](fcQTextBrowser_vdata(self)[])
   let self = QTextBrowser(h: self)
-  let slotval1 = gen_qevent_types.QMoveEvent(h: event)
+  let slotval1 = gen_qevent_types.QMoveEvent(h: event, owned: false)
   vtbl[].moveEvent(self, slotval1)
 
 proc fcQTextBrowser_vtable_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTextBrowserVTable](fcQTextBrowser_vdata(self)[])
   let self = QTextBrowser(h: self)
-  let slotval1 = gen_qevent_types.QCloseEvent(h: event)
+  let slotval1 = gen_qevent_types.QCloseEvent(h: event, owned: false)
   vtbl[].closeEvent(self, slotval1)
 
 proc fcQTextBrowser_vtable_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTextBrowserVTable](fcQTextBrowser_vdata(self)[])
   let self = QTextBrowser(h: self)
-  let slotval1 = gen_qevent_types.QTabletEvent(h: event)
+  let slotval1 = gen_qevent_types.QTabletEvent(h: event, owned: false)
   vtbl[].tabletEvent(self, slotval1)
 
 proc fcQTextBrowser_vtable_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTextBrowserVTable](fcQTextBrowser_vdata(self)[])
   let self = QTextBrowser(h: self)
-  let slotval1 = gen_qevent_types.QActionEvent(h: event)
+  let slotval1 = gen_qevent_types.QActionEvent(h: event, owned: false)
   vtbl[].actionEvent(self, slotval1)
 
 proc fcQTextBrowser_vtable_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTextBrowserVTable](fcQTextBrowser_vdata(self)[])
   let self = QTextBrowser(h: self)
-  let slotval1 = gen_qevent_types.QHideEvent(h: event)
+  let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   vtbl[].hideEvent(self, slotval1)
 
 proc fcQTextBrowser_vtable_callback_nativeEvent(self: pointer, eventType: struct_seaqt_string, message: pointer, resultVal: ptr clong): bool {.cdecl.} =
@@ -1234,44 +1258,50 @@ proc fcQTextBrowser_vtable_callback_metric(self: pointer, param1: cint): cint {.
 proc fcQTextBrowser_vtable_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTextBrowserVTable](fcQTextBrowser_vdata(self)[])
   let self = QTextBrowser(h: self)
-  let slotval1 = gen_qpainter_types.QPainter(h: painter)
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
   vtbl[].initPainter(self, slotval1)
 
 proc fcQTextBrowser_vtable_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QTextBrowserVTable](fcQTextBrowser_vdata(self)[])
   let self = QTextBrowser(h: self)
-  let slotval1 = gen_qpoint_types.QPoint(h: offset)
+  let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
   var virtualReturn = vtbl[].redirected(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQTextBrowser_vtable_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QTextBrowserVTable](fcQTextBrowser_vdata(self)[])
   let self = QTextBrowser(h: self)
   var virtualReturn = vtbl[].sharedPainter(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQTextBrowser_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTextBrowserVTable](fcQTextBrowser_vdata(self)[])
   let self = QTextBrowser(h: self)
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
 proc fcQTextBrowser_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTextBrowserVTable](fcQTextBrowser_vdata(self)[])
   let self = QTextBrowser(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
 proc fcQTextBrowser_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTextBrowserVTable](fcQTextBrowser_vdata(self)[])
   let self = QTextBrowser(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
 proc fcQTextBrowser_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTextBrowserVTable](fcQTextBrowser_vdata(self)[])
   let self = QTextBrowser(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
 type VirtualQTextBrowser* {.inheritable.} = ref object of QTextBrowser
@@ -1409,7 +1439,10 @@ method disconnectNotify*(self: VirtualQTextBrowser, signal: gen_qmetaobject_type
 proc fcQTextBrowser_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQTextBrowser](fcQTextBrowser_vdata(self)[])
   var virtualReturn = inst.metaObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQTextBrowser_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQTextBrowser](fcQTextBrowser_vdata(self)[])
@@ -1428,13 +1461,16 @@ proc fcQTextBrowser_method_callback_metacall(self: pointer, param1: cint, param2
 proc fcQTextBrowser_method_callback_loadResource(self: pointer, typeVal: cint, name: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQTextBrowser](fcQTextBrowser_vdata(self)[])
   let slotval1 = typeVal
-  let slotval2 = gen_qurl_types.QUrl(h: name)
+  let slotval2 = gen_qurl_types.QUrl(h: name, owned: false)
   var virtualReturn = inst.loadResource(slotval1, slotval2)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQTextBrowser_method_callback_setSource(self: pointer, name: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTextBrowser](fcQTextBrowser_vdata(self)[])
-  let slotval1 = gen_qurl_types.QUrl(h: name)
+  let slotval1 = gen_qurl_types.QUrl(h: name, owned: false)
   inst.setSource(slotval1)
 
 proc fcQTextBrowser_method_callback_backward(self: pointer): void {.cdecl.} =
@@ -1455,33 +1491,33 @@ proc fcQTextBrowser_method_callback_reload(self: pointer): void {.cdecl.} =
 
 proc fcQTextBrowser_method_callback_event(self: pointer, e: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQTextBrowser](fcQTextBrowser_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: e)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: e, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
 proc fcQTextBrowser_method_callback_keyPressEvent(self: pointer, ev: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTextBrowser](fcQTextBrowser_vdata(self)[])
-  let slotval1 = gen_qevent_types.QKeyEvent(h: ev)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: ev, owned: false)
   inst.keyPressEvent(slotval1)
 
 proc fcQTextBrowser_method_callback_mouseMoveEvent(self: pointer, ev: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTextBrowser](fcQTextBrowser_vdata(self)[])
-  let slotval1 = gen_qevent_types.QMouseEvent(h: ev)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: ev, owned: false)
   inst.mouseMoveEvent(slotval1)
 
 proc fcQTextBrowser_method_callback_mousePressEvent(self: pointer, ev: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTextBrowser](fcQTextBrowser_vdata(self)[])
-  let slotval1 = gen_qevent_types.QMouseEvent(h: ev)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: ev, owned: false)
   inst.mousePressEvent(slotval1)
 
 proc fcQTextBrowser_method_callback_mouseReleaseEvent(self: pointer, ev: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTextBrowser](fcQTextBrowser_vdata(self)[])
-  let slotval1 = gen_qevent_types.QMouseEvent(h: ev)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: ev, owned: false)
   inst.mouseReleaseEvent(slotval1)
 
 proc fcQTextBrowser_method_callback_focusOutEvent(self: pointer, ev: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTextBrowser](fcQTextBrowser_vdata(self)[])
-  let slotval1 = gen_qevent_types.QFocusEvent(h: ev)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: ev, owned: false)
   inst.focusOutEvent(slotval1)
 
 proc fcQTextBrowser_method_callback_focusNextPrevChild(self: pointer, next: bool): bool {.cdecl.} =
@@ -1492,99 +1528,105 @@ proc fcQTextBrowser_method_callback_focusNextPrevChild(self: pointer, next: bool
 
 proc fcQTextBrowser_method_callback_paintEvent(self: pointer, e: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTextBrowser](fcQTextBrowser_vdata(self)[])
-  let slotval1 = gen_qevent_types.QPaintEvent(h: e)
+  let slotval1 = gen_qevent_types.QPaintEvent(h: e, owned: false)
   inst.paintEvent(slotval1)
 
 proc fcQTextBrowser_method_callback_inputMethodQuery(self: pointer, property: cint): pointer {.cdecl.} =
   let inst = cast[VirtualQTextBrowser](fcQTextBrowser_vdata(self)[])
   let slotval1 = cint(property)
   var virtualReturn = inst.inputMethodQuery(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQTextBrowser_method_callback_timerEvent(self: pointer, e: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTextBrowser](fcQTextBrowser_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: e)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: e, owned: false)
   inst.timerEvent(slotval1)
 
 proc fcQTextBrowser_method_callback_keyReleaseEvent(self: pointer, e: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTextBrowser](fcQTextBrowser_vdata(self)[])
-  let slotval1 = gen_qevent_types.QKeyEvent(h: e)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: e, owned: false)
   inst.keyReleaseEvent(slotval1)
 
 proc fcQTextBrowser_method_callback_resizeEvent(self: pointer, e: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTextBrowser](fcQTextBrowser_vdata(self)[])
-  let slotval1 = gen_qevent_types.QResizeEvent(h: e)
+  let slotval1 = gen_qevent_types.QResizeEvent(h: e, owned: false)
   inst.resizeEvent(slotval1)
 
 proc fcQTextBrowser_method_callback_mouseDoubleClickEvent(self: pointer, e: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTextBrowser](fcQTextBrowser_vdata(self)[])
-  let slotval1 = gen_qevent_types.QMouseEvent(h: e)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: e, owned: false)
   inst.mouseDoubleClickEvent(slotval1)
 
 proc fcQTextBrowser_method_callback_contextMenuEvent(self: pointer, e: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTextBrowser](fcQTextBrowser_vdata(self)[])
-  let slotval1 = gen_qevent_types.QContextMenuEvent(h: e)
+  let slotval1 = gen_qevent_types.QContextMenuEvent(h: e, owned: false)
   inst.contextMenuEvent(slotval1)
 
 proc fcQTextBrowser_method_callback_dragEnterEvent(self: pointer, e: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTextBrowser](fcQTextBrowser_vdata(self)[])
-  let slotval1 = gen_qevent_types.QDragEnterEvent(h: e)
+  let slotval1 = gen_qevent_types.QDragEnterEvent(h: e, owned: false)
   inst.dragEnterEvent(slotval1)
 
 proc fcQTextBrowser_method_callback_dragLeaveEvent(self: pointer, e: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTextBrowser](fcQTextBrowser_vdata(self)[])
-  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: e)
+  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: e, owned: false)
   inst.dragLeaveEvent(slotval1)
 
 proc fcQTextBrowser_method_callback_dragMoveEvent(self: pointer, e: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTextBrowser](fcQTextBrowser_vdata(self)[])
-  let slotval1 = gen_qevent_types.QDragMoveEvent(h: e)
+  let slotval1 = gen_qevent_types.QDragMoveEvent(h: e, owned: false)
   inst.dragMoveEvent(slotval1)
 
 proc fcQTextBrowser_method_callback_dropEvent(self: pointer, e: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTextBrowser](fcQTextBrowser_vdata(self)[])
-  let slotval1 = gen_qevent_types.QDropEvent(h: e)
+  let slotval1 = gen_qevent_types.QDropEvent(h: e, owned: false)
   inst.dropEvent(slotval1)
 
 proc fcQTextBrowser_method_callback_focusInEvent(self: pointer, e: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTextBrowser](fcQTextBrowser_vdata(self)[])
-  let slotval1 = gen_qevent_types.QFocusEvent(h: e)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: e, owned: false)
   inst.focusInEvent(slotval1)
 
 proc fcQTextBrowser_method_callback_showEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTextBrowser](fcQTextBrowser_vdata(self)[])
-  let slotval1 = gen_qevent_types.QShowEvent(h: param1)
+  let slotval1 = gen_qevent_types.QShowEvent(h: param1, owned: false)
   inst.showEvent(slotval1)
 
 proc fcQTextBrowser_method_callback_changeEvent(self: pointer, e: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTextBrowser](fcQTextBrowser_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: e)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: e, owned: false)
   inst.changeEvent(slotval1)
 
 proc fcQTextBrowser_method_callback_wheelEvent(self: pointer, e: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTextBrowser](fcQTextBrowser_vdata(self)[])
-  let slotval1 = gen_qevent_types.QWheelEvent(h: e)
+  let slotval1 = gen_qevent_types.QWheelEvent(h: e, owned: false)
   inst.wheelEvent(slotval1)
 
 proc fcQTextBrowser_method_callback_createMimeDataFromSelection(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQTextBrowser](fcQTextBrowser_vdata(self)[])
   var virtualReturn = inst.createMimeDataFromSelection()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQTextBrowser_method_callback_canInsertFromMimeData(self: pointer, source: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQTextBrowser](fcQTextBrowser_vdata(self)[])
-  let slotval1 = gen_qmimedata_types.QMimeData(h: source)
+  let slotval1 = gen_qmimedata_types.QMimeData(h: source, owned: false)
   var virtualReturn = inst.canInsertFromMimeData(slotval1)
   virtualReturn
 
 proc fcQTextBrowser_method_callback_insertFromMimeData(self: pointer, source: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTextBrowser](fcQTextBrowser_vdata(self)[])
-  let slotval1 = gen_qmimedata_types.QMimeData(h: source)
+  let slotval1 = gen_qmimedata_types.QMimeData(h: source, owned: false)
   inst.insertFromMimeData(slotval1)
 
 proc fcQTextBrowser_method_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTextBrowser](fcQTextBrowser_vdata(self)[])
-  let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1)
+  let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1, owned: false)
   inst.inputMethodEvent(slotval1)
 
 proc fcQTextBrowser_method_callback_scrollContentsBy(self: pointer, dx: cint, dy: cint): void {.cdecl.} =
@@ -1595,41 +1637,50 @@ proc fcQTextBrowser_method_callback_scrollContentsBy(self: pointer, dx: cint, dy
 
 proc fcQTextBrowser_method_callback_doSetTextCursor(self: pointer, cursor: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTextBrowser](fcQTextBrowser_vdata(self)[])
-  let slotval1 = gen_qtextcursor_types.QTextCursor(h: cursor)
+  let slotval1 = gen_qtextcursor_types.QTextCursor(h: cursor, owned: false)
   inst.doSetTextCursor(slotval1)
 
 proc fcQTextBrowser_method_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQTextBrowser](fcQTextBrowser_vdata(self)[])
   var virtualReturn = inst.minimumSizeHint()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQTextBrowser_method_callback_sizeHint(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQTextBrowser](fcQTextBrowser_vdata(self)[])
   var virtualReturn = inst.sizeHint()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQTextBrowser_method_callback_setupViewport(self: pointer, viewport: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTextBrowser](fcQTextBrowser_vdata(self)[])
-  let slotval1 = gen_qwidget_types.QWidget(h: viewport)
+  let slotval1 = gen_qwidget_types.QWidget(h: viewport, owned: false)
   inst.setupViewport(slotval1)
 
 proc fcQTextBrowser_method_callback_eventFilter(self: pointer, param1: pointer, param2: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQTextBrowser](fcQTextBrowser_vdata(self)[])
-  let slotval1 = gen_qobject_types.QObject(h: param1)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: param2)
+  let slotval1 = gen_qobject_types.QObject(h: param1, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: param2, owned: false)
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
 proc fcQTextBrowser_method_callback_viewportEvent(self: pointer, param1: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQTextBrowser](fcQTextBrowser_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: param1)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
   var virtualReturn = inst.viewportEvent(slotval1)
   virtualReturn
 
 proc fcQTextBrowser_method_callback_viewportSizeHint(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQTextBrowser](fcQTextBrowser_vdata(self)[])
   var virtualReturn = inst.viewportSizeHint()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQTextBrowser_method_callback_devType(self: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQTextBrowser](fcQTextBrowser_vdata(self)[])
@@ -1655,41 +1706,44 @@ proc fcQTextBrowser_method_callback_hasHeightForWidth(self: pointer): bool {.cde
 proc fcQTextBrowser_method_callback_paintEngine(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQTextBrowser](fcQTextBrowser_vdata(self)[])
   var virtualReturn = inst.paintEngine()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQTextBrowser_method_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTextBrowser](fcQTextBrowser_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.enterEvent(slotval1)
 
 proc fcQTextBrowser_method_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTextBrowser](fcQTextBrowser_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.leaveEvent(slotval1)
 
 proc fcQTextBrowser_method_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTextBrowser](fcQTextBrowser_vdata(self)[])
-  let slotval1 = gen_qevent_types.QMoveEvent(h: event)
+  let slotval1 = gen_qevent_types.QMoveEvent(h: event, owned: false)
   inst.moveEvent(slotval1)
 
 proc fcQTextBrowser_method_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTextBrowser](fcQTextBrowser_vdata(self)[])
-  let slotval1 = gen_qevent_types.QCloseEvent(h: event)
+  let slotval1 = gen_qevent_types.QCloseEvent(h: event, owned: false)
   inst.closeEvent(slotval1)
 
 proc fcQTextBrowser_method_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTextBrowser](fcQTextBrowser_vdata(self)[])
-  let slotval1 = gen_qevent_types.QTabletEvent(h: event)
+  let slotval1 = gen_qevent_types.QTabletEvent(h: event, owned: false)
   inst.tabletEvent(slotval1)
 
 proc fcQTextBrowser_method_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTextBrowser](fcQTextBrowser_vdata(self)[])
-  let slotval1 = gen_qevent_types.QActionEvent(h: event)
+  let slotval1 = gen_qevent_types.QActionEvent(h: event, owned: false)
   inst.actionEvent(slotval1)
 
 proc fcQTextBrowser_method_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTextBrowser](fcQTextBrowser_vdata(self)[])
-  let slotval1 = gen_qevent_types.QHideEvent(h: event)
+  let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   inst.hideEvent(slotval1)
 
 proc fcQTextBrowser_method_callback_nativeEvent(self: pointer, eventType: struct_seaqt_string, message: pointer, resultVal: ptr clong): bool {.cdecl.} =
@@ -1711,38 +1765,44 @@ proc fcQTextBrowser_method_callback_metric(self: pointer, param1: cint): cint {.
 
 proc fcQTextBrowser_method_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTextBrowser](fcQTextBrowser_vdata(self)[])
-  let slotval1 = gen_qpainter_types.QPainter(h: painter)
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
   inst.initPainter(slotval1)
 
 proc fcQTextBrowser_method_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQTextBrowser](fcQTextBrowser_vdata(self)[])
-  let slotval1 = gen_qpoint_types.QPoint(h: offset)
+  let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
   var virtualReturn = inst.redirected(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQTextBrowser_method_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQTextBrowser](fcQTextBrowser_vdata(self)[])
   var virtualReturn = inst.sharedPainter()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQTextBrowser_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTextBrowser](fcQTextBrowser_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
 proc fcQTextBrowser_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTextBrowser](fcQTextBrowser_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
 proc fcQTextBrowser_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTextBrowser](fcQTextBrowser_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
 proc fcQTextBrowser_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTextBrowser](fcQTextBrowser_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
 
 
@@ -1759,7 +1819,7 @@ proc setViewportMargins*(self: gen_qtextbrowser_types.QTextBrowser, left: cint, 
   fcQTextBrowser_protectedbase_setViewportMargins(self.h, left, top, right, bottom)
 
 proc viewportMargins*(self: gen_qtextbrowser_types.QTextBrowser): gen_qmargins_types.QMargins =
-  gen_qmargins_types.QMargins(h: fcQTextBrowser_protectedbase_viewportMargins(self.h))
+  gen_qmargins_types.QMargins(h: fcQTextBrowser_protectedbase_viewportMargins(self.h), owned: true)
 
 proc drawFrame*(self: gen_qtextbrowser_types.QTextBrowser, param1: gen_qpainter_types.QPainter): void =
   fcQTextBrowser_protectedbase_drawFrame(self.h, param1.h)
@@ -1783,7 +1843,7 @@ proc focusPreviousChild*(self: gen_qtextbrowser_types.QTextBrowser): bool =
   fcQTextBrowser_protectedbase_focusPreviousChild(self.h)
 
 proc sender*(self: gen_qtextbrowser_types.QTextBrowser): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQTextBrowser_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQTextBrowser_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qtextbrowser_types.QTextBrowser): cint =
   fcQTextBrowser_protectedbase_senderSignalIndex(self.h)
@@ -1930,7 +1990,7 @@ proc create*(T: type gen_qtextbrowser_types.QTextBrowser,
     vtbl[].vtbl.connectNotify = fcQTextBrowser_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQTextBrowser_vtable_callback_disconnectNotify
-  let tmp = gen_qtextbrowser_types.QTextBrowser(h: fcQTextBrowser_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h))
+  let tmp = gen_qtextbrowser_types.QTextBrowser(h: fcQTextBrowser_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h), owned: true)
   fcQTextBrowser_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qtextbrowser_types.QTextBrowser,
@@ -2068,13 +2128,14 @@ proc create*(T: type gen_qtextbrowser_types.QTextBrowser,
     vtbl[].vtbl.connectNotify = fcQTextBrowser_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQTextBrowser_vtable_callback_disconnectNotify
-  let tmp = gen_qtextbrowser_types.QTextBrowser(h: fcQTextBrowser_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer))))
+  let tmp = gen_qtextbrowser_types.QTextBrowser(h: fcQTextBrowser_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer))), owned: true)
   fcQTextBrowser_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQTextBrowser_mvtbl = cQTextBrowserVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQTextBrowser()[])](self.fcQTextBrowser_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   metaObject: fcQTextBrowser_method_callback_metaObject,
   metacast: fcQTextBrowser_method_callback_metacast,
@@ -2158,5 +2219,3 @@ proc create*(T: type gen_qtextbrowser_types.QTextBrowser,
 
 proc staticMetaObject*(_: type gen_qtextbrowser_types.QTextBrowser): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQTextBrowser_staticMetaObject())
-proc delete*(self: gen_qtextbrowser_types.QTextBrowser) =
-  fcQTextBrowser_delete(self.h)

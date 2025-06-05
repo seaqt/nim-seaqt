@@ -9,7 +9,7 @@ proc `=sink`(dest: var QCamera, source: QCamera) =
   dest.h = source.h
   dest.owned = source.owned
 
-type QCameraFrameRateRange* {.inheritable, pure.} = object
+type QCameraFrameRateRange* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

@@ -81,35 +81,34 @@ proc fcQScriptContext_throwError(self: pointer, error: cint, text: struct_seaqt_
 proc fcQScriptContext_throwErrorWithText(self: pointer, text: struct_seaqt_string): pointer {.importc: "QScriptContext_throwErrorWithText".}
 proc fcQScriptContext_backtrace(self: pointer): struct_seaqt_array {.importc: "QScriptContext_backtrace".}
 proc fcQScriptContext_toString(self: pointer): struct_seaqt_string {.importc: "QScriptContext_toString".}
-proc fcQScriptContext_delete(self: pointer) {.importc: "QScriptContext_delete".}
 
 proc parentContext*(self: gen_qscriptcontext_types.QScriptContext): gen_qscriptcontext_types.QScriptContext =
-  gen_qscriptcontext_types.QScriptContext(h: fcQScriptContext_parentContext(self.h))
+  gen_qscriptcontext_types.QScriptContext(h: fcQScriptContext_parentContext(self.h), owned: false)
 
 proc engine*(self: gen_qscriptcontext_types.QScriptContext): gen_qscriptengine_types.QScriptEngine =
-  gen_qscriptengine_types.QScriptEngine(h: fcQScriptContext_engine(self.h))
+  gen_qscriptengine_types.QScriptEngine(h: fcQScriptContext_engine(self.h), owned: false)
 
 proc state*(self: gen_qscriptcontext_types.QScriptContext): cint =
   cint(fcQScriptContext_state(self.h))
 
 proc callee*(self: gen_qscriptcontext_types.QScriptContext): gen_qscriptvalue_types.QScriptValue =
-  gen_qscriptvalue_types.QScriptValue(h: fcQScriptContext_callee(self.h))
+  gen_qscriptvalue_types.QScriptValue(h: fcQScriptContext_callee(self.h), owned: true)
 
 proc argumentCount*(self: gen_qscriptcontext_types.QScriptContext): cint =
   fcQScriptContext_argumentCount(self.h)
 
 proc argument*(self: gen_qscriptcontext_types.QScriptContext, index: cint): gen_qscriptvalue_types.QScriptValue =
-  gen_qscriptvalue_types.QScriptValue(h: fcQScriptContext_argument(self.h, index))
+  gen_qscriptvalue_types.QScriptValue(h: fcQScriptContext_argument(self.h, index), owned: true)
 
 proc argumentsObject*(self: gen_qscriptcontext_types.QScriptContext): gen_qscriptvalue_types.QScriptValue =
-  gen_qscriptvalue_types.QScriptValue(h: fcQScriptContext_argumentsObject(self.h))
+  gen_qscriptvalue_types.QScriptValue(h: fcQScriptContext_argumentsObject(self.h), owned: true)
 
 proc scopeChain*(self: gen_qscriptcontext_types.QScriptContext): seq[gen_qscriptvalue_types.QScriptValue] =
   var v_ma = fcQScriptContext_scopeChain(self.h)
   var vx_ret = newSeq[gen_qscriptvalue_types.QScriptValue](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qscriptvalue_types.QScriptValue(h: v_outCast[i])
+    vx_ret[i] = gen_qscriptvalue_types.QScriptValue(h: v_outCast[i], owned: true)
   c_free(v_ma.data)
   vx_ret
 
@@ -117,22 +116,22 @@ proc pushScope*(self: gen_qscriptcontext_types.QScriptContext, objectVal: gen_qs
   fcQScriptContext_pushScope(self.h, objectVal.h)
 
 proc popScope*(self: gen_qscriptcontext_types.QScriptContext): gen_qscriptvalue_types.QScriptValue =
-  gen_qscriptvalue_types.QScriptValue(h: fcQScriptContext_popScope(self.h))
+  gen_qscriptvalue_types.QScriptValue(h: fcQScriptContext_popScope(self.h), owned: true)
 
 proc returnValue*(self: gen_qscriptcontext_types.QScriptContext): gen_qscriptvalue_types.QScriptValue =
-  gen_qscriptvalue_types.QScriptValue(h: fcQScriptContext_returnValue(self.h))
+  gen_qscriptvalue_types.QScriptValue(h: fcQScriptContext_returnValue(self.h), owned: true)
 
 proc setReturnValue*(self: gen_qscriptcontext_types.QScriptContext, resultVal: gen_qscriptvalue_types.QScriptValue): void =
   fcQScriptContext_setReturnValue(self.h, resultVal.h)
 
 proc activationObject*(self: gen_qscriptcontext_types.QScriptContext): gen_qscriptvalue_types.QScriptValue =
-  gen_qscriptvalue_types.QScriptValue(h: fcQScriptContext_activationObject(self.h))
+  gen_qscriptvalue_types.QScriptValue(h: fcQScriptContext_activationObject(self.h), owned: true)
 
 proc setActivationObject*(self: gen_qscriptcontext_types.QScriptContext, activation: gen_qscriptvalue_types.QScriptValue): void =
   fcQScriptContext_setActivationObject(self.h, activation.h)
 
 proc thisObject*(self: gen_qscriptcontext_types.QScriptContext): gen_qscriptvalue_types.QScriptValue =
-  gen_qscriptvalue_types.QScriptValue(h: fcQScriptContext_thisObject(self.h))
+  gen_qscriptvalue_types.QScriptValue(h: fcQScriptContext_thisObject(self.h), owned: true)
 
 proc setThisObject*(self: gen_qscriptcontext_types.QScriptContext, thisObject: gen_qscriptvalue_types.QScriptValue): void =
   fcQScriptContext_setThisObject(self.h, thisObject.h)
@@ -141,13 +140,13 @@ proc isCalledAsConstructor*(self: gen_qscriptcontext_types.QScriptContext): bool
   fcQScriptContext_isCalledAsConstructor(self.h)
 
 proc throwValue*(self: gen_qscriptcontext_types.QScriptContext, value: gen_qscriptvalue_types.QScriptValue): gen_qscriptvalue_types.QScriptValue =
-  gen_qscriptvalue_types.QScriptValue(h: fcQScriptContext_throwValue(self.h, value.h))
+  gen_qscriptvalue_types.QScriptValue(h: fcQScriptContext_throwValue(self.h, value.h), owned: true)
 
 proc throwError*(self: gen_qscriptcontext_types.QScriptContext, error: cint, text: openArray[char]): gen_qscriptvalue_types.QScriptValue =
-  gen_qscriptvalue_types.QScriptValue(h: fcQScriptContext_throwError(self.h, cint(error), struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))))
+  gen_qscriptvalue_types.QScriptValue(h: fcQScriptContext_throwError(self.h, cint(error), struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))), owned: true)
 
 proc throwError*(self: gen_qscriptcontext_types.QScriptContext, text: openArray[char]): gen_qscriptvalue_types.QScriptValue =
-  gen_qscriptvalue_types.QScriptValue(h: fcQScriptContext_throwErrorWithText(self.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))))
+  gen_qscriptvalue_types.QScriptValue(h: fcQScriptContext_throwErrorWithText(self.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))), owned: true)
 
 proc backtrace*(self: gen_qscriptcontext_types.QScriptContext): seq[string] =
   var v_ma = fcQScriptContext_backtrace(self.h)
@@ -167,5 +166,3 @@ proc toString*(self: gen_qscriptcontext_types.QScriptContext): string =
   c_free(v_ms.data)
   vx_ret
 
-proc delete*(self: gen_qscriptcontext_types.QScriptContext) =
-  fcQScriptContext_delete(self.h)

@@ -58,7 +58,6 @@ proc fcQStringMatcher_new3(uc: pointer, len: cint): ptr cQStringMatcher {.import
 proc fcQStringMatcher_new4(other: pointer): ptr cQStringMatcher {.importc: "QStringMatcher_new4".}
 proc fcQStringMatcher_new5(pattern: struct_seaqt_string, cs: cint): ptr cQStringMatcher {.importc: "QStringMatcher_new5".}
 proc fcQStringMatcher_new6(uc: pointer, len: cint, cs: cint): ptr cQStringMatcher {.importc: "QStringMatcher_new6".}
-proc fcQStringMatcher_delete(self: pointer) {.importc: "QStringMatcher_delete".}
 
 proc operatorAssign*(self: gen_qstringmatcher_types.QStringMatcher, other: gen_qstringmatcher_types.QStringMatcher): void =
   fcQStringMatcher_operatorAssign(self.h, other.h)
@@ -91,27 +90,25 @@ proc indexIn*(self: gen_qstringmatcher_types.QStringMatcher, str: gen_qchar_type
   fcQStringMatcher_indexIn4(self.h, str.h, length, fromVal)
 
 proc create*(T: type gen_qstringmatcher_types.QStringMatcher): gen_qstringmatcher_types.QStringMatcher =
-  let tmp = gen_qstringmatcher_types.QStringMatcher(h: fcQStringMatcher_new())
+  let tmp = gen_qstringmatcher_types.QStringMatcher(h: fcQStringMatcher_new(), owned: true)
   tmp
 proc create*(T: type gen_qstringmatcher_types.QStringMatcher,
     pattern: openArray[char]): gen_qstringmatcher_types.QStringMatcher =
-  let tmp = gen_qstringmatcher_types.QStringMatcher(h: fcQStringMatcher_new2(struct_seaqt_string(data: if len(pattern) > 0: addr pattern[0] else: nil, len: csize_t(len(pattern)))))
+  let tmp = gen_qstringmatcher_types.QStringMatcher(h: fcQStringMatcher_new2(struct_seaqt_string(data: if len(pattern) > 0: addr pattern[0] else: nil, len: csize_t(len(pattern)))), owned: true)
   tmp
 proc create*(T: type gen_qstringmatcher_types.QStringMatcher,
     uc: gen_qchar_types.QChar, len: cint): gen_qstringmatcher_types.QStringMatcher =
-  let tmp = gen_qstringmatcher_types.QStringMatcher(h: fcQStringMatcher_new3(uc.h, len))
+  let tmp = gen_qstringmatcher_types.QStringMatcher(h: fcQStringMatcher_new3(uc.h, len), owned: true)
   tmp
 proc create*(T: type gen_qstringmatcher_types.QStringMatcher,
     other: gen_qstringmatcher_types.QStringMatcher): gen_qstringmatcher_types.QStringMatcher =
-  let tmp = gen_qstringmatcher_types.QStringMatcher(h: fcQStringMatcher_new4(other.h))
+  let tmp = gen_qstringmatcher_types.QStringMatcher(h: fcQStringMatcher_new4(other.h), owned: true)
   tmp
 proc create*(T: type gen_qstringmatcher_types.QStringMatcher,
     pattern: openArray[char], cs: cint): gen_qstringmatcher_types.QStringMatcher =
-  let tmp = gen_qstringmatcher_types.QStringMatcher(h: fcQStringMatcher_new5(struct_seaqt_string(data: if len(pattern) > 0: addr pattern[0] else: nil, len: csize_t(len(pattern))), cint(cs)))
+  let tmp = gen_qstringmatcher_types.QStringMatcher(h: fcQStringMatcher_new5(struct_seaqt_string(data: if len(pattern) > 0: addr pattern[0] else: nil, len: csize_t(len(pattern))), cint(cs)), owned: true)
   tmp
 proc create*(T: type gen_qstringmatcher_types.QStringMatcher,
     uc: gen_qchar_types.QChar, len: cint, cs: cint): gen_qstringmatcher_types.QStringMatcher =
-  let tmp = gen_qstringmatcher_types.QStringMatcher(h: fcQStringMatcher_new6(uc.h, len, cint(cs)))
+  let tmp = gen_qstringmatcher_types.QStringMatcher(h: fcQStringMatcher_new6(uc.h, len, cint(cs)), owned: true)
   tmp
-proc delete*(self: gen_qstringmatcher_types.QStringMatcher) =
-  fcQStringMatcher_delete(self.h)

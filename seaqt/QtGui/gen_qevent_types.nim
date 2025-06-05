@@ -265,7 +265,7 @@ proc `=sink`(dest: var QWindowStateChangeEvent, source: QWindowStateChangeEvent)
   dest.h = source.h
   dest.owned = source.owned
 
-type QPointingDeviceUniqueId* {.inheritable, pure.} = object
+type QPointingDeviceUniqueId* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -329,7 +329,7 @@ proc `=sink`(dest: var QApplicationStateChangeEvent, source: QApplicationStateCh
   dest.h = source.h
   dest.owned = source.owned
 
-type QInputMethodEventAttribute* {.inheritable, pure.} = object
+type QInputMethodEventAttribute* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -349,7 +349,7 @@ proc delete*(self: sink QInputMethodEventAttribute) =
   wasMoved(self)
   fcQInputMethodEventAttribute_delete(h)
 
-type QTouchEventTouchPoint* {.inheritable, pure.} = object
+type QTouchEventTouchPoint* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

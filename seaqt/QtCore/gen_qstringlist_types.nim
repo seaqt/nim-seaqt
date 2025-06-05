@@ -1,4 +1,4 @@
-type QStringList* {.inheritable, pure.} = object
+type QStringList* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

@@ -59,7 +59,6 @@ proc fcQScriptValueIterator_toFront(self: pointer): void {.importc: "QScriptValu
 proc fcQScriptValueIterator_toBack(self: pointer): void {.importc: "QScriptValueIterator_toBack".}
 proc fcQScriptValueIterator_operatorAssign(self: pointer, value: pointer): void {.importc: "QScriptValueIterator_operatorAssign".}
 proc fcQScriptValueIterator_new(value: pointer): ptr cQScriptValueIterator {.importc: "QScriptValueIterator_new".}
-proc fcQScriptValueIterator_delete(self: pointer) {.importc: "QScriptValueIterator_delete".}
 
 proc hasNext*(self: gen_qscriptvalueiterator_types.QScriptValueIterator): bool =
   fcQScriptValueIterator_hasNext(self.h)
@@ -80,10 +79,10 @@ proc name*(self: gen_qscriptvalueiterator_types.QScriptValueIterator): string =
   vx_ret
 
 proc scriptName*(self: gen_qscriptvalueiterator_types.QScriptValueIterator): gen_qscriptstring_types.QScriptString =
-  gen_qscriptstring_types.QScriptString(h: fcQScriptValueIterator_scriptName(self.h))
+  gen_qscriptstring_types.QScriptString(h: fcQScriptValueIterator_scriptName(self.h), owned: true)
 
 proc value*(self: gen_qscriptvalueiterator_types.QScriptValueIterator): gen_qscriptvalue_types.QScriptValue =
-  gen_qscriptvalue_types.QScriptValue(h: fcQScriptValueIterator_value(self.h))
+  gen_qscriptvalue_types.QScriptValue(h: fcQScriptValueIterator_value(self.h), owned: true)
 
 proc setValue*(self: gen_qscriptvalueiterator_types.QScriptValueIterator, value: gen_qscriptvalue_types.QScriptValue): void =
   fcQScriptValueIterator_setValue(self.h, value.h)
@@ -105,7 +104,5 @@ proc operatorAssign*(self: gen_qscriptvalueiterator_types.QScriptValueIterator, 
 
 proc create*(T: type gen_qscriptvalueiterator_types.QScriptValueIterator,
     value: gen_qscriptvalue_types.QScriptValue): gen_qscriptvalueiterator_types.QScriptValueIterator =
-  let tmp = gen_qscriptvalueiterator_types.QScriptValueIterator(h: fcQScriptValueIterator_new(value.h))
+  let tmp = gen_qscriptvalueiterator_types.QScriptValueIterator(h: fcQScriptValueIterator_new(value.h), owned: true)
   tmp
-proc delete*(self: gen_qscriptvalueiterator_types.QScriptValueIterator) =
-  fcQScriptValueIterator_delete(self.h)

@@ -1,4 +1,4 @@
-type QQuaternion* {.inheritable, pure.} = object
+type QQuaternion* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

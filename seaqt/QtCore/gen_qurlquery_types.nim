@@ -1,4 +1,4 @@
-type QUrlQuery* {.inheritable, pure.} = object
+type QUrlQuery* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

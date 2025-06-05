@@ -1,4 +1,4 @@
-type QNetworkCookie* {.inheritable, pure.} = object
+type QNetworkCookie* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
