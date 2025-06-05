@@ -1,0 +1,2 @@
+import ./QtCore/gen_qmetacontainer
+export gen_qmetacontainer

@@ -1,0 +1,2 @@
+import ./QtQuick/gen_qquickitemgrabresult
+export gen_qquickitemgrabresult

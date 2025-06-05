@@ -1,0 +1,64 @@
+#include <QJsonObject>
+#include <QPluginMetaData>
+#define WORKAROUND_INNER_CLASS_DEFINITION_QPluginMetaData__ElfNoteHeader
+#define WORKAROUND_INNER_CLASS_DEFINITION_QPluginMetaData__Header
+#define WORKAROUND_INNER_CLASS_DEFINITION_QPluginMetaData__MagicHeader
+#include <QStaticPlugin>
+#include <qplugin.h>
+#include "gen_qplugin.h"
+
+#ifndef SEAQT_ALIGNED_SIZEOF
+#define SEAQT_ALIGNED_SIZEOF 1
+#include <cstddef>
+template<typename T>
+static constexpr std::size_t seaqt_aligned_sizeof() {
+	constexpr auto alignment = sizeof(std::max_align_t);
+	return (sizeof(T) + alignment - 1) & ~(alignment - 1);
+}
+#endif
+
+unsigned char QPluginMetaData_archRequirements() {
+	quint8 _ret = QPluginMetaData::archRequirements();
+	return static_cast<unsigned char>(_ret);
+}
+
+void QPluginMetaData_delete(QPluginMetaData* self) {
+	delete self;
+}
+
+QJsonObject* QStaticPlugin_metaData(const QStaticPlugin* self) {
+	return new QJsonObject(self->metaData());
+}
+
+void QStaticPlugin_delete(QStaticPlugin* self) {
+	delete self;
+}
+
+QPluginMetaData__Header* QPluginMetaData__Header_new(QPluginMetaData__Header* param1) {
+	return new (std::nothrow) QPluginMetaData__Header(*param1);
+}
+
+void QPluginMetaData__Header_delete(QPluginMetaData__Header* self) {
+	delete self;
+}
+
+QPluginMetaData__MagicHeader* QPluginMetaData__MagicHeader_new() {
+	return new (std::nothrow) QPluginMetaData__MagicHeader();
+}
+
+void QPluginMetaData__MagicHeader_delete(QPluginMetaData__MagicHeader* self) {
+	delete self;
+}
+
+QPluginMetaData__ElfNoteHeader* QPluginMetaData__ElfNoteHeader_new(unsigned int payloadSize) {
+	return new (std::nothrow) QPluginMetaData__ElfNoteHeader(static_cast<quint32>(payloadSize));
+}
+
+QPluginMetaData__ElfNoteHeader* QPluginMetaData__ElfNoteHeader_new2(QPluginMetaData__ElfNoteHeader* param1) {
+	return new (std::nothrow) QPluginMetaData__ElfNoteHeader(*param1);
+}
+
+void QPluginMetaData__ElfNoteHeader_delete(QPluginMetaData__ElfNoteHeader* self) {
+	delete self;
+}
+

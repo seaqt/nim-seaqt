@@ -1,0 +1,2 @@
+import ./QtPdf/gen_qpdfpagenavigator
+export gen_qpdfpagenavigator

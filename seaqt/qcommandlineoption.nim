@@ -1,0 +1,2 @@
+import ./QtCore/gen_qcommandlineoption
+export gen_qcommandlineoption

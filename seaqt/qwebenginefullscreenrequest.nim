@@ -1,0 +1,2 @@
+import ./QtWebEngineCore/gen_qwebenginefullscreenrequest
+export gen_qwebenginefullscreenrequest
