@@ -50,6 +50,9 @@ Bindings for a specific minor version can generally be used with all minor Qt ve
 | 5.15+      | https://github.com/seaqt/nim-seaqt/tree/qt-5.15 |
 | 6.4+       | https://github.com/seaqt/nim-seaqt/tree/qt-6.4  |
 
+### Install nim-seaQt on Linx
+### Install nim-seaQt on Windows
+
 ### Finding Qt
 
 Qt gets located using `pkg-config` - use `PKG_CONFIG_PATH` to point to a specific Qt installation:
