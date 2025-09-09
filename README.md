@@ -50,8 +50,72 @@ Bindings for a specific minor version can generally be used with all minor Qt ve
 | 5.15+      | https://github.com/seaqt/nim-seaqt/tree/qt-5.15 |
 | 6.4+       | https://github.com/seaqt/nim-seaqt/tree/qt-6.4  |
 
-### Install nim-seaQt on Linx
+### Install nim-seaQt on Linux
+This section lists the various dependencies required to compile Qt interfaces on Linux systems, particularly for OpenSUSE (the system I use), but with minimal effort it should be fairly straightforward to understand what to install on other systems as well. You need:
+
+- The Nim compiler: https://nim-lang.org/install.html
+- Nim-seaqt: nimble install https://github.com/seaqt/nim-seaqt.git@#qt-6.4
+- The GCC compiler and GCC-C++ compiler
+- The Qt6 library (usually already present on Linux systems)
+- The following packages:
+
+  - qt6-base-common-devel
+  - qt6-base-devel
+  - qt6-core-private-devel (Fedora: qt-devel-private)
+  - qt6-help-devel (optional)
+  - qt6-help-private-devel (optional)
+
 ### Install nim-seaQt on Windows
+- The Nim compiler: https://nim-lang.org/install.html
+  - you will probably need to add the Nim and Nimble compiler paths to your Windows system PATH (or user PATH) environment variable.
+- Nim-seaqt: nimble install https://github.com/seaqt/nim-seaqt.git@#qt-6.4
+- The best approach seems to be using MSYS2 to handle everything, so first install MSYS2 from: https://www.msys2.org
+- Once installed, you need to install the Qt6 libraries:
+  ```bash
+      pacman -S mingw-w64-x86_64-qt6-base mingw-w64-x86_64-qt6-tools
+      pacman -S mingw-w64-x86_64-pkg-config
+  ```
+- Add the following paths to your system PATH (verify that your installation matches the paths below):
+    - C:\msys64\mingw64\bin
+    - C:\msys64\usr\bin
+- Verify the pkg-config configuration:
+```bash
+      pkg-config --cflags Qt6Widgets
+      pkg-config --libs Qt6Widgets
+```
+- Install the GCC compiler:
+```bash
+      pacman -S mingw-w64-x86_64-gcc
+      pacman -S mingw-w64-x86_64-make
+```
+- Check if everything works correctly and is visible from the system (should respond with version numbers):
+```bash
+      gcc --version
+      g++ --version
+      g++ --version
+      qmake-qt6.exe -v
+```
+The qmake command is very important because it will provide you with the actual Qt version in use, which you'll need later for configuration.
+Note: If your Qt version is different (higher) than 6.4.x, you'll need to create a configure.nims file in your working directory (where your .nim file to compile is located) and add the following:
+- configure.nims :
+```nim
+      switch("cincludes", "C:/msys64/mingw64/include/qt6/QtCore/6.9.1")
+      switch("cincludes", "C:/msys64/mingw64/include/qt6/QtGui/6.9.1") 
+      switch("cincludes", "C:/msys64/mingw64/include/qt6/QtWidgets/6.9.1")
+      switch("cincludes", "C:/msys64/mingw64/include/qt6/QtCore/6.9.1/QtCore")
+      switch("cincludes", "C:/msys64/mingw64/include/qt6/QtGui/6.9.1/QtGui")
+      switch("cincludes", "C:/msys64/mingw64/include/qt6/QtWidgets/6.9.1/QtWidgets")
+```
+replace 6.9.1 with the version you obtained from the qmake command!
+If you want your application to run without showing the Windows console window, you can use either of these two methods:
+- add the following command to configure.nims:
+```nim
+      switch("app", "gui")
+```
+- alternatively, compile using the following method:
+```nim
+      nim c --app: gui yourapp.nim
+```
 
 ### Finding Qt
 
